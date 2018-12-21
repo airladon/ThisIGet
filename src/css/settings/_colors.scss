@@ -1,0 +1,50 @@
+
+// Set the color theme here
+$_color_theme: $_color_theme-standard-dark;
+$_color_palette: map-get($_color_theme, palette);
+
+$icon_navbar-toggler:          map-get(map-get($_color_theme, navbar), 'toggler-icon');
+
+@mixin to_vars($color-map, $prefix) {
+  @each $var, $value in $color-map {
+    @if type-of($value) == "map" {
+      @each $subvar, $subvalue in $value {
+        @if type-of($subvalue) == "map" {
+          @each $subsubvar, $subsubvalue in $subvalue {
+            #{$prefix}-#{$var}-#{$subvar}-#{$subsubvar}: #{$subsubvalue};
+          }
+        }
+
+        @else {
+          #{$prefix}-#{$var}-#{$subvar}: #{$subvalue};
+        }
+      }
+    }
+
+    @else {
+      #{$prefix}-#{$var}: #{$value};
+    }
+  }
+}
+
+@mixin color_vars($color-map) {
+  @include to_vars($color-map, '--colors');
+}
+
+@function convertToColors($theme-map) {
+  $map: ();
+
+  @each $key, $value in $theme-map {
+    $col: palette-color(map-get($value, color), map-get($value, shade));
+    $map: map-merge($map, ($key: $col));
+  }
+
+  @return $map;
+}
+
+$diagram-map: map-get($_color_theme, diagram);
+
+body {
+  @include to_vars(map-get($_color_theme, palette), '--palette');
+  @include to_vars(convertToColors($diagram-map), '--diagram');
+}

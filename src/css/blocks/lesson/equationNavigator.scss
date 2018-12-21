@@ -1,0 +1,182 @@
+
+// ******************************************
+// ******************************************
+// General
+// ******************************************
+// ******************************************
+
+.lesson__eqn_nav__not_touchable {
+  pointer-events: none;
+  cursor: none;
+  color: color('diagram', 'disabled', 'darkest');
+}
+
+.lesson__eqn_nav__not_touchable:hover {
+  color: color('diagram', 'disabled', 'darkest');
+}
+
+:root {
+  --lesson__eqn_nav__font_size: calc(var(--lesson__diagram-font-size) * 0.6);
+}
+
+.lesson__eqn_nav__table {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  color: color('diagram', 'disabled', 'base');
+
+  --lesson__eqn_nav__font_size: 1em;
+}
+
+.lesson__eqn_nav__description {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__eqn_nav__arrow_right {
+  border-top: 1em solid transparent;
+  border-bottom: 1em solid transparent;
+  border-left: 1em solid;
+}
+
+.lesson__eqn_nav__arrow_left {
+  border-top: 1em solid transparent;
+  border-bottom: 1em solid transparent;
+  border-right: 1em solid;
+}
+
+// ******************************************
+// ******************************************
+// Three Line
+// ******************************************
+// ******************************************
+
+.lesson__eqn_nav__3line__prevRow,
+.lesson__eqn_nav__3line__currentRow,
+.lesson__eqn_nav__3line__nextRow {
+  cursor: pointer;
+  vertical-align: middle;
+  height: calc(var(--lesson__eqn_nav__font_size) * 1.7);
+}
+
+.lesson__eqn_nav__3line__currentRow {
+  height: calc(var(--lesson__eqn_nav__font_size) * 1.7);
+}
+
+.lesson__eqn_nav__3line__prev_twoLines,
+.lesson__eqn_nav__3line__next_twoLines {
+  height: calc(var(--lesson__eqn_nav__font_size) * 2.7);
+}
+
+.lesson__eqn_nav__3line__current_twoLines {
+  height: calc(var(--lesson__eqn_nav__font_size) * 3.3);
+}
+
+.lesson__eqn_nav__3line__prevRow__description,
+.lesson__eqn_nav__3line__nextRow__description {
+  font-size: calc(var(--lesson__eqn_nav__font_size) * 0.7);
+  padding-left: calc(var(--lesson__eqn_nav__font_size) * 0.7);
+}
+
+.lesson__eqn_nav__3line__currentRow__description {
+  padding-left: calc(var(--lesson__eqn_nav__font_size) * 0.7);
+}
+
+.lesson__eqn_nav__3line__prevRow__button,
+.lesson__eqn_nav__3line__currentRow__button,
+.lesson__eqn_nav__3line__nextRow__button {
+  text-align: center;
+  font-weight: 100;
+  font-size: calc(var(--lesson__eqn_nav__font_size) * 0.4);
+  padding-right: calc(var(--lesson__eqn_nav__font_size) * 0.4);
+}
+
+.lesson__eqn_nav__3line__prevRow__button:hover,
+.lesson__eqn_nav__3line__currentRow__button:hover,
+.lesson__eqn_nav__3line__nextRow__button:hover {
+  color: color('diagram', 'disabled', 'lighter');
+}
+
+// ******************************************
+// ******************************************
+// Description Only
+// ******************************************
+// ******************************************
+
+// .lesson__eqn_nav__description_only__table {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+//   color: color('diagram', 'disabled', 'base');
+// }
+.lesson__eqn_nav__description_only__currentRow {
+  font-size: calc(var(--lesson__eqn_nav__font_size));
+}
+
+// ******************************************
+// ******************************************
+// One Line
+// ******************************************
+// ******************************************
+
+.lesson__eqn_nav__1line__currentRow {
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: calc(var(--lesson__eqn_nav__font_size));
+}
+
+.lesson__eqn_nav__1line__next__button {
+  padding-left: 1.2em;
+}
+
+.lesson__eqn_nav__1line__prev__button {
+  padding-right: 1.2em;
+}
+
+.lesson__eqn_nav__1line__next__button:hover,
+.lesson__eqn_nav__1line__prev__button:hover {
+  color: color('diagram', 'disabled', 'lighter');
+}
+
+.lesson__eqn_nav__1line__current_twoLines {
+  height: calc(var(--lesson__eqn_nav__font_size) * 3.3);
+}
+
+// ******************************************
+// ******************************************
+// Two Lines
+// ******************************************
+// ******************************************
+
+.lesson__eqn_nav__2lines__nextRow,
+.lesson__eqn_nav__2lines__currentRow {
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: calc(var(--lesson__eqn_nav__font_size));
+  text-align: center;
+}
+
+.lesson__eqn_nav__2lines__next__button {
+  padding-left: 1.2em;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: calc(var(--lesson__eqn_nav__font_size));
+  text-align: center;
+}
+
+.lesson__eqn_nav__2lines__prev__button {
+  padding-right: 1.2em;
+  cursor: pointer;
+  vertical-align: middle;
+  font-size: calc(var(--lesson__eqn_nav__font_size));
+  text-align: center;
+}
+
+.lesson__eqn_nav__2lines__nextRow:hover,
+.lesson__eqn_nav__2lines__next__button:hover,
+.lesson__eqn_nav__2lines__prev__button:hover {
+  color: color('diagram', 'disabled', 'lighter');
+}
+
+.lesson__eqn_nav__2lines__current_twoLines {
+  height: calc(var(--lesson__eqn_nav__font_size) * 3.3);
+}
+
+.lesson__eqn_nav__2lines__nextRow__description {
+  font-size: calc(var(--lesson__eqn_nav__font_size) * 0.7);
+}

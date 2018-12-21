@@ -1,0 +1,62 @@
+// @import '../geometry';
+@import '../../../../LessonsCommon/AngleCircle/style';
+
+$colors: (
+  latin:            color('diagram', 'text-latin'),
+  rotation:         map-get($geometry_colors, rotation),
+  action:           map-get($geometry_colors, action),
+  disabled:         map-get($geometry_colors, disabled),
+  arcLight:         map-get($geometry_colors, arcLight),
+  angleArea:        #2F351A,
+  radialLines:      color('diagram', 'disabled', 'darker'),
+  axes:             color(0, light),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.lesson__important_angles_table {
+  width: 100%;
+  table-layout: fixed;
+  color: map-get($colors, disabled);
+  text-align: center;
+  border-bottom: 1px solid map-get($colors, disabled);
+  border-top: 1px solid map-get($colors, disabled);
+}
+
+.lesson__important_angles_table td {
+  padding-top: calc(var(--lesson__diagram-font-size) * 0.3);
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.3);
+  //   border-left: 1px solid map-get($colors, disabled);
+  //   border-right: 1px solid map-get($colors, disabled);
+}
+
+.lesson__important_angles_table_selected {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__important_angles_unit_selected {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__important_angles_unit_selection {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.4);
+  position: absolute;
+  left: 45%;
+  top: 95%;
+}
+
+.lesson__important_angles_text_hide {
+  width: 0;
+  font-size: 0;
+  height: 0;
+  position: absolute;
+  left: -10000px;
+}
+
+.lesson__important_angles_from_Latin {
+  // color: map-get($colors, disabled);
+  color: color('diagram', 'text-base');
+  font-style: normal;
+}

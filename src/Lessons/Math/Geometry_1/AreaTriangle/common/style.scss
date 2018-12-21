@@ -1,0 +1,73 @@
+@import '../../geometry';
+
+$colors: (
+  square1:             color('diagram', 'warning', 'base'),
+  square2:             color('diagram', 'primary', 'base'),
+  circle:              color('diagram', 'warning', 'base'),
+  reference:           color('diagram', 'disabled', 'base'),
+  line:                color('diagram', 'primary', 'base'),
+  lineLabel:           color('diagram', 'primary', 'darker'),
+  grid:                color('diagram', 'disabled', 'darker'),
+  cross:               color('diagram', 'warning', 'base'),
+  row:                 color('diagram', 'warning', 'base'),
+  unit:                color('diagram', 'warning', 'base'),
+  construction:        map-get($geometry_colors, const1),
+  constructionFill:    map-get($geometry_colors, const1Fill),
+  construction1:       map-get($geometry_colors, const2),
+  construction1Fill:   map-get($geometry_colors, const2Fill),
+  fillLabel:           color(1, 'base'),
+  construction2Fill:   color('diagram', 'primary', 'darkest'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 1;
+}
+
+.lesson__area_intro__area_label {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  color: color('diagram', 'primary', 'base');
+}
+
+.lesson__eqn_nav__table {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+.lesson__eqn_nav__description {
+  width: 35em;
+}
+
+// #id__rectangles_equation_desctription {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+//   color: color('diagram', 'text-base');
+// }
+
+// #id__rectangles_equation_next_desctription,
+// #id__rectangles_equation_prev_desctription {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.35);
+//   padding-top: calc(var(--lesson__diagram-font-size) * 0.4);
+//   padding-bottom: calc(var(--lesson__diagram-font-size) * 0.4);
+//   // padding-left: calc(var(--lesson__diagram-font-size) * 0.4);
+//   padding-right: calc(var(--lesson__diagram-font-size) * 0.4);
+// }
+
+// .lesson__equation_next_prev {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.35);
+//   padding-top: calc(var(--lesson__diagram-font-size) * 0.4);
+//   padding-bottom: calc(var(--lesson__diagram-font-size) * 0.4);
+//   padding-right: calc(var(--lesson__diagram-font-size) * 0.8);
+//   padding-left: calc(var(--lesson__diagram-font-size) * 0.8);
+//   // padding-left: calc(var(--lesson__diagram-font-size) * 0.8);
+// }
+
+// .lesson__equation_nav__touchable:hover {
+//   cursor: pointer;
+// }
+// .lesson__equation_next_prev:hover,
+// #id__rectangles_equation_next_desctription:hover,
+// #id__rectangles_equation_prev_desctription:hover {
+//   cursor: pointer;
+// }

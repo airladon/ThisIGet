@@ -1,0 +1,96 @@
+$path_tile_height: 35px;
+
+.lesson__path_container {
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+}
+
+.lesson__path_left_tiles {
+  display: inline-block;
+  margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+}
+
+.lesson__path_right_tiles {
+  display: inline-block;
+  margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+}
+
+.lesson__path_tile {
+  min-width: $path_tile_height;
+  height: $path_tile_height;
+  border-radius: calc(#{$path_tile_height} / 2);
+  font-size: calc(#{$path_tile_height} * 0.35);
+  display: inline-block;
+  margin-right: 5px;
+  margin-left: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background-color: color('lesson', 'title-background');
+  border: 1px solid color('white', 'lighter');
+}
+
+.lesson__path_tile_right {
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@media screen and (min-width: $tablet) {
+  .lesson__path_left_tiles {
+    display: initial;
+    float: left;
+    margin-left: 10px;
+    margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
+  }
+
+  .lesson__path_right_tiles {
+    display: initial;
+    float: right;
+    margin-right: 10px;
+    margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
+  }
+
+  .lesson__path_container {
+    width: 96%;
+    margin-left: 2%;
+    margin-right: 2%;
+  }
+}
+
+.lesson__path_tile_label_container {
+  width: 100%;
+  height: 100%;
+  display: table;
+}
+
+.lesson__path_tile_label {
+  color: color('grey', 'base');
+  font-weight: 100;
+  display: table-cell;
+  vertical-align: middle;
+  width: 100%;
+  text-align: center;
+}
+
+.lesson__path_tile:hover {
+  background-color: color('white', 'lightest');
+  text-decoration: none;
+}
+
+.lesson__path_tile_disabled {
+  background-color: color('site', 'disabled', 'lighter');
+}
+
+.lesson__path_tile_disabled:hover {
+  background-color: color('site', 'disabled', 'light');
+  text-decoration: none;
+}
+
+.lesson__path_tile_selected {
+  background-color: color('white', 'lightest');
+}
+
+.lesson__path_tile_selected:hover {
+  background-color: color('white', 'lighter');
+  text-decoration: none;
+}

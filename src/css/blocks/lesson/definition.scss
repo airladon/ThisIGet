@@ -1,0 +1,33 @@
+.lesson__definition_container {
+  color: color('diagram', 'disabled');
+  position: absolute;
+  top: 87%;
+  left: 7%;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.45);
+}
+
+.lesson__definition_low {
+  top: 91%;
+  left: 7%;
+}
+
+.lesson__definition_lowest {
+  top: 95%;
+  left: 7%;
+}
+
+.lesson__definition_word {
+  color: color('diagram', 'text-base');
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.15);
+}
+
+.lesson__definition_root {
+  color: color('diagram', 'text-latin');
+  font-family: times new roman, serif;
+  font-style: italic;
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.15);
+}
+
+.lesson__definition_meaning {
+  color: color('diagram', 'text-base');
+}

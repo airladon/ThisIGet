@@ -1,0 +1,173 @@
+// @import '../geometry';
+@import '../AngleCircle/style';
+
+$colors: (
+  quadrant:         darken(color('diagram', 'safe', 'darkest'), 2%),
+  radialLines:      color('diagram', 'disabled', 'darker'),
+  axes:             color(0, light),
+  sine:             color('red', 'base'),
+  cosine:           color('violet', 'base'),
+  quadAngles:       color('blue', 'darker'),
+  arcLight:         color('grey', 'darker'),
+  angleDark:        color('diagram', 'safe', 'dark'),
+  disabled:         color('diagram', 'disabled'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.lessons__equation__text {
+  font-family: Times New Roman, serif;
+  font-style: italic;
+}
+
+.lessons__angle_annotation__text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+.diagram__equation_text,
+.diagram__sine_text,
+.diagram__cosine_text,
+.diagram__sine_line,
+.diagram__cosine_line {
+  color: map-get($colors, sine);
+  font-family: Times New Roman, serif;
+  font-style: italic;
+}
+
+.diagram__theta {
+  color: map-get($geometry_colors, angleText);
+}
+
+.diagram__sine_line,
+.diagram__cosine_line {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+.diagram__cosine_text,
+.diagram__cosine_line {
+  color: map-get($colors, cosine);
+}
+
+.diagram__quad_angles {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+  color: map-get($colors, quadAngles);
+  font-family: Times New Roman, serif;
+  font-style: italic;
+}
+
+#id_diagram_main_angle_theta {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: map-get($geometry_colors, angle);
+  font-family: Times New Roman, serif;
+  font-style: italic;
+}
+
+#id_diagram_units_selector {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+  color: map-get($geometry_colors, disabled);
+}
+
+.lesson__sine_cos_diagram_units_selected {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__sine_cos_diagram_step_selected {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__sine_eqn {
+  color: map-get($colors, disabled);
+  font-family: Times New Roman, serif;
+  // font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-style: italic;
+}
+
+.lesson__sine_eqn_selected {
+  color: map-get($colors, sine);
+}
+
+.lesson__quadrant_selector_table {
+  width: 40%;
+  table-layout: fixed;
+  color: map-get($colors, disabled);
+  text-align: center;
+}
+
+.lesson__quadrant_steps {
+  width: 40%;
+  color: map-get($colors, disabled);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  // margin-top: 5%;
+  // margin-left: 2%;
+}
+
+.lesson__quadrant_steps li {
+  margin-top: 5%;
+}
+
+.lesson__highlight_sin_theta {
+  color: map-get($colors, sine);
+  font-family: Times New Roman, serif;
+  font-size: calc(var(--lesson__diagram-font-size) * 1.1);
+  font-style: italic;
+}
+
+.lesson__math_stye {
+  font-family: Times New Roman, serif;
+  font-style: italic;
+  font-weight: normal;
+}
+
+.lesson__sine_text_hide {
+  width: 0;
+  font-size: 0;
+  height: 0;
+  position: absolute;
+  left: -10000px;
+}
+
+.lesson__sine_paragraph_quad0 {
+  width: 40%;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  margin-left: 6%;
+  color: color('diagram', 'text-base');
+  margin-top: 2%;
+}
+
+#id_angle_text,
+#id_angle_value,
+#id_angle_units,
+#id_angle_equals,
+#id__sine_angle_sine__sine_text,
+#id__sine_angle_sine__sine_equals,
+#id__sine_angle_sine_angle__sine_value {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-weight: normal;
+}
+
+#id_angle_text,
+#id_angle_value,
+#id_angle_units,
+#id_angle_equals {
+  color: map-get($geometry_colors, angle);
+}
+
+#id__sine_angle_sine__sine_text,
+#id__sine_angle_sine__sine_equals,
+#id__sine_angle_sine_angle__sine_value {
+  color: map-get($colors, sine);
+}
+
+#id_angle_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: map-get($colors, angleText);
+  font-weight: normal;
+}
+
+.lesson__sine_simplify_bullets {
+  color: color('diagram', 'text-base');
+}
+
+

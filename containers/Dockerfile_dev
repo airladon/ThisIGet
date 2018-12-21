@@ -1,0 +1,59 @@
+# Development environment for:
+#   - Python/JS Linting
+#   - Python/JS Testing
+#   - JS Building
+#   - Flask debugging
+
+FROM airladon/nodepy:dev
+
+# ## General ##
+WORKDIR /opt/app
+
+RUN npm install file-loader --save-dev
+
+# This is the folder that will be shared with the docker host machine
+RUN mkdir app
+RUN mkdir tests
+RUN mkdir src
+
+# Linting
+ADD .eslintrc.json .
+ADD .eslintignore .
+ADD .flowconfig .
+ADD .stylelintrc .
+ADD .stylelintignore .
+
+# Testing
+ADD jest.config.js .
+
+# Packaging
+ADD containers/dev/webpack.config.js .
+ADD containers/dev/getLessons.js .
+ADD containers/dev/setFilesForBuild.js .
+ADD containers/dev/update_paths.py .
+ADD .babelrc .
+
+# Update path so eslint can be run from anywhere
+ENV PATH="/opt/app/node_modules/.bin:${PATH}"
+
+
+
+# ## Python ##
+
+# Python linting
+ADD .flake8 .
+ADD containers/dev/pytest.ini .
+
+# Environment variable for flask
+ENV FLASK_APP app/my_app.py
+ENV FLASK_DEBUG 1
+
+# Dev server script
+ADD containers/dev/dev-server.sh .
+
+RUN npm install figureone@0.0.17
+
+# Use this is you want to load straight into flask
+# CMD ["flask", "run", "--host=0.0.0.0"]
+
+ENTRYPOINT ["bash"]

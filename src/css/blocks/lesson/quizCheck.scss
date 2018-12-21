@@ -1,0 +1,165 @@
+.lesson__quiz__answer_container {
+  // background-color: rgba(100, 100, 100, 0.7);
+  padding-left: 20px;
+  padding-right: 20px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 80vw;
+}
+
+.lesson__quiz__answer_incorrect {
+  background-color: rgba(100, 0, 0, 0.9);
+}
+
+.lesson__quiz__answer_correct {
+  background-color: rgba(0, 100, 0, 0.9);
+}
+
+.lesson__quiz__answer_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  color: color('white');
+  margin-bottom: 10px;
+}
+
+.lesson__quiz__answer_details_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+  color: color('white');
+  margin-bottom: 10px;
+}
+
+.lesson__quiz__next_steps {
+  margin-top: 15px;
+  // font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+}
+
+.lesson__quiz__button {
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
+  background-color: color('diagram', 'primary');
+  text-align: center;
+  cursor: pointer;
+  // margin-left: auto;
+  // margin-right: auto;
+  // margin-bottom: 10px;
+  margin: 10px;
+  padding: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
+  color: color('white');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+.lesson__quiz__button_fixed_size {
+  width: 150px;
+}
+
+@media screen and (min-width: $tablet) {
+  .lesson__quiz__button {
+    display: inline-block;
+    // margin: 10px;
+  }
+
+  .lesson__quiz__button_fixed_size {
+    width: auto;
+  }
+}
+
+.lesson__quiz__button:hover {
+  // border-radius: 5px;
+  background-color: color('diagram', 'primary', 'light');
+  color: color('white');
+}
+
+.lesson__quiz_input {
+  border: 0;
+  margin: 10px;
+  padding: calc(var(--lesson__diagram-font-size) * 0.2);
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
+  color: color('diagram', 'disabled', 'darker');
+  text-align: center;
+  background-color: color('white', 'base');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  font-weight: 200;
+}
+
+.lesson__quiz_input::placeholder {
+  color: color('diagram', 'disabled', 'lighter');
+  opacity: 1; /* Firefox */
+}
+
+.lesson__quiz_input::-ms-input-placeholder { /* Microsoft Edge */
+  color: color('diagram', 'disabled', 'lighter');
+}
+
+.lesson__quiz_input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: color('diagram', 'disabled', 'lighter');
+}
+
+.lesson__quiz_input:hover {
+  background-color: color('white', 'base');
+}
+
+.lesson__quiz_input_disabled {
+  background-color: color('diagram', 'disabled', 'lighter');
+}
+
+.lesson__quiz_input_disabled:hover {
+  background-color: color('diagram', 'disabled', 'lighter');
+}
+
+// ******************************************************
+// ******************************************************
+// ******************************************************
+// ******************************************************
+// Multiple choice box
+.lesson__quiz_multiple_choice_box_table {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+}
+
+.lesson__quiz_multiple_choice_box_row {
+  cursor: pointer;
+}
+
+.lesson__quiz_multiple_choice_box_row:hover {
+  background-color: color('diagram', 'background', 'darker');
+}
+
+.lesson__quiz_multiple_choice_box_col1 {
+  padding: calc(var(--lesson__diagram-font-size) * 0.1);
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.4);
+  padding-left: calc(var(--lesson__diagram-font-size) * 1);
+}
+
+.lesson__quiz_multiple_choice_box_col2 {
+  padding-right: calc(var(--lesson__diagram-font-size) * 1);
+}
+
+.lesson__quiz_multiple_choice_box_circle {
+  width: calc(var(--lesson__diagram-font-size) * 0.5);
+  height: calc(var(--lesson__diagram-font-size) * 0.5);
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.25);
+  border: calc(var(--lesson__diagram-font-size) * 0.08) solid;
+  color: color('diagram', 'disabled', 'base');
+}
+
+.lesson__quiz_multiple_choice_box_answer {
+  color: color('diagram', 'disabled', 'base');
+}
+
+// .lesson__quiz_multiple_choice_box__selected {
+// }
+
+.lesson__quiz_multiple_choice_box_circle__selected {
+  background-color: color('diagram', 'primary', 'base');
+  color: color('diagram', 'primary', 'base');
+}
+
+.lesson__quiz_multiple_choice_box_answer__selected {
+  color: color('diagram', 'primary', 'base');
+  font-weight: bold;
+}
+
+.lesson__quiz_multiple_choice_box_answer__disable {
+  pointer-events: none;
+}

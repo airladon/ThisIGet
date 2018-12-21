@@ -1,0 +1,58 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button Button class is defined, but not used 1`] = `
+<button
+  className="btn"
+>
+  hello
+</button>
+`;
+
+exports[`Button Button class used without btn 1`] = `
+<button
+  className="btn btn-test-class"
+>
+  hello
+</button>
+`;
+
+exports[`Button Children are used to label button 1`] = `
+<button
+  className="btn"
+>
+  hello
+</button>
+`;
+
+exports[`Button Label is used to name button 1`] = `
+<button
+  className="btn"
+>
+  hello
+</button>
+`;
+
+exports[`Button Label is used when label and children defined 1`] = `
+<button
+  className="btn"
+>
+  button label
+</button>
+`;
+
+exports[`Button No props 1`] = `
+<button
+  className="btn"
+>
+  
+</button>
+`;
+
+exports[`Button href is used 1`] = `
+<a
+  className="btn"
+  href="/#"
+>
+  hello
+</a>
+`;

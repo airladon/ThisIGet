@@ -1,0 +1,58 @@
+.lesson__interactive_element_button__container {
+  position: absolute;
+  left: calc(90% - var(--lesson__goto_button-font-size) * 6);
+  top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__goto_button-font-size) * 1.5);
+}
+
+.lesson__interactive_element_button {
+  background-color: color('diagram', 'background');
+  color: color('lesson', 'text');
+  // font-size: calc(var(--lesson__goto_button-font-size));
+  width: calc(var(--lesson__goto_button-font-size) * 3);
+  height: calc(var(--lesson__goto_button-font-size) * 3);
+  // position: absolute;
+  // left: calc(90% - var(--lesson__goto_button-font-size) * 6);
+  // top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__goto_button-font-size) * 1.5);
+  // border: calc(var(--lesson__goto_button-font-size) * 0.2) solid color('diagram', 'background', 'darker');
+  position: absolute;
+  border: 0;
+  border-radius: calc(var(--lesson__goto_button-font-size) * 1.5);
+  padding: calc(var(--lesson__goto_button-font-size) * 0.25);
+}
+
+.lesson__interactive_element_button:hover {
+  // color: color('diagram', 'background', 'darker');
+  background-color: color('diagram', 'background', 'darker');
+}
+
+// @media screen and (min-width: $small-tablet) {
+//   .lesson__interactive_element_button {
+//     border: 2px solid;
+//   }
+// }
+
+@media (min-aspect-ratio: 3/2) {
+  .lesson__interactive_element_button__container {
+    left: calc(100% - var(--lesson__np_button-width) / 2 - calc(var(--lesson__goto_button-font-size) * 1.5));
+    top: calc(70% - var(--lesson__goto_button-font-size) * 1.5);
+  }
+}
+
+.lesson__interactive_element_button__hide {
+  left: -10000px;
+  top: -10000px;
+  font-size: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}
+
+.lesson__interactive_element_button__disable {
+  pointer-events: none;
+  left: -10000px;
+  top: -10001px;
+  font-size: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}

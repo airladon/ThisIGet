@@ -1,0 +1,132 @@
+// @import '../geometry';
+@import '../../../../LessonsCommon/AngleCircle/style';
+
+$colors: (
+  latin:            color('diagram', 'text-latin'),
+  rotation:         map-get($geometry_colors, rotation),
+  action:           map-get($geometry_colors, action),
+  disabled:         map-get($geometry_colors, disabled),
+  radiusLight:      map-get($geometry_colors, radiusLight),
+  arcLight:         map-get($geometry_colors, arcLight),
+  degrees:          map-get($geometry_colors, degrees),
+  radians:          map-get($geometry_colors, radians),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id_angle_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: map-get($colors, angleText);
+  font-weight: bold;
+}
+
+.lesson__diagram_text ul {
+  color: color('diagram', 'text-base');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.lesson__li_indent {
+  list-style-type: none;
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.8);
+}
+
+.portions_not_selected {
+  color: color('diagram', 'disabled');
+}
+
+.portions_selected {
+  color: color('diagram', 'text-plot');
+}
+
+#id_compare_text {
+  color: map-get($geometry_colors, action);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+}
+
+.arc_length_text {
+  color: map-get($colors, arc);
+}
+
+.radius_text {
+  color: map-get($colors, radius);
+}
+
+.angle_text {
+  color: map-get($colors, angle);
+}
+
+.lesson__common_angles_table {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.55);
+  width: 45%;
+  table-layout: fixed;
+  color: color('diagram', 'text-base');
+  margin-top: 5%;
+  margin-left: 5%;
+}
+
+.lesson__common_angles_table td {
+  height: calc(var(--lesson__diagram-font-size) * 2);
+}
+
+.lesson__common_angles_table td:first-child {
+  width: 55%;
+}
+
+.lesson__common_angles_table td:nth-child(2) {
+  text-align: center;
+}
+
+.lesson__common_angles_table td:nth-child(3) {
+  text-align: center;
+  width: 17%;
+}
+
+.lesson__common_angles_table td:last-child {
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.lesson__common_angles_table tr td:first-child {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+.lesson__common_angles_table tr:first-child td {
+  height: calc(var(--lesson__diagram-font-size) * 0.3);
+  padding: 0;
+  margin: 0;
+}
+
+.equation_element {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+  color: color('diagram', 'action');
+}
+
+.lesson__rad_text {
+  color: color('diagram', 'action');
+}
+
+.lesson__deg_title {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.35);
+  color: map-get($colors, radius);
+  font-style: italic;
+}
+
+.lesson__rad_title {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.35);
+  color: map-get($colors, action);
+  font-style: italic;
+}
+
+#id_360a,
+#id_270a,
+#id_180a,
+#id_120a,
+#id_90a,
+#id_pi,
+#id_2pi {
+  text-decoration: none;
+}

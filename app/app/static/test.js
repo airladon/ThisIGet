@@ -1,0 +1,3 @@
+const remoteTest = {
+  hello: 'there',
+};

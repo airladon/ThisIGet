@@ -1,0 +1,15 @@
+$base_colors: (
+  'blue':                          #1CA4FC,
+  'red':                           #EB261F,
+  'yellow':                        #FAE047,
+  'green':                         #65D643,
+  'cyan':                          #2FE6CF,
+  'brown':                         #D47A2B,
+  'orange':                        #FFA500,
+  'violet':                        #AE19D4,
+  'grey':                          #929292,
+  'white':                         #FFF,
+  'black':                         #000,
+);
+
+$_color-palette_standard: fill_palette($base_colors);

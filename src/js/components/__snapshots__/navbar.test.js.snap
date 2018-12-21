@@ -1,0 +1,61 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Navbar Make "About" item active 1`] = `
+<div>
+  <div>
+    <div
+      className="navbar-container"
+    >
+      <a
+        className="navbar-icon-container"
+        href="/"
+      >
+        <img
+          className="navbar-icon"
+          src="/static/icon-lg.png"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Navbar Make "Introduction" item active 1`] = `
+<div>
+  <div>
+    <div
+      className="navbar-container"
+    >
+      <a
+        className="navbar-icon-container"
+        href="/"
+      >
+        <img
+          className="navbar-icon"
+          src="/static/icon-lg.png"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Navbar No props 1`] = `
+<div>
+  <div>
+    <div
+      className="navbar-container"
+    >
+      <a
+        className="navbar-icon-container"
+        href="/"
+      >
+        <img
+          className="navbar-icon"
+          src="/static/icon-lg.png"
+        />
+      </a>
+    </div>
+  </div>
+</div>
+`;

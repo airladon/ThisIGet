@@ -1,0 +1,13 @@
+@import '../../geometry';
+
+$colors: (
+  // line:             map-get($geometry_colors, lines),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 1;
+}

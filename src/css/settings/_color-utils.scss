@@ -1,0 +1,180 @@
+// Retrieve color and shade from palette
+@function color_from_palette($palette, $color, $shade) {
+  @return map-get(map-get($palette, $color), $shade);
+}
+
+// Add contrasts to a palette and return a new palette with contrasts added
+@function add-contrasts-to-palette($palette, $contrast_map) {
+  $new-palette: ();
+
+  @each $hue, $hue-map in $palette {
+    $map: ();
+    $map: map-merge(
+      $hue-map,
+      (
+        'lowest': color_from_palette($palette, $hue, map-get($contrast_map, 'lowest')),
+        'lower': color_from_palette($palette, $hue, map-get($contrast_map, 'lower')),
+        'low': color_from_palette($palette, $hue, map-get($contrast_map, 'low')),
+        'high': color_from_palette($palette, $hue, map-get($contrast_map, 'high')),
+        'higher': color_from_palette($palette, $hue, map-get($contrast_map, 'higher')),
+        'highest': color_from_palette($palette, $hue, map-get($contrast_map, 'highest')),
+      ),
+    );
+    $new-palette: map-merge($new-palette, ($hue: $map));
+  }
+
+  @return $new-palette;
+}
+
+// Global variables that are needed for below functions:
+//  - $_color_theme:   The map of all colors in a theme
+
+// Get the color and shade from a globally defined palette
+@function palette-color($color, $shade) {
+  $palette: map-get($_color_theme, 'palette');
+
+  @return map-get(map-get($palette, $color), $shade);
+}
+
+// $_color_special_map_names: diagram, lesson, site, navbar;
+
+//
+// Get color function from color_theme
+//  color(1):                       get 'hue1' from root of theme-map
+//  color(1, dark):                 get 'hue1' shade 'dark'
+//  color('diagram', 'text'):         get 'text' default color from diagram
+//  color('diagram', 'text', 'dark'): get 'text' hue with shade 'dark'
+//
+@function color($fromOrName, $nameOrShade: '', $shadeName: '') {
+  $color-map: '';
+  $shadeToGet: '';
+
+  @if map-has-key($_color_theme, $fromOrName) {
+    $color-map: map-get($_color_theme, $fromOrName);
+
+    @if map-has-key($color-map, color) {
+      $shadeToGet: $nameOrShade;
+    }
+
+    @else {
+      $color-map: map-get(map-get($_color_theme, $fromOrName), $nameOrShade);
+      $shadeToGet: $shadeName;
+    }
+  }
+
+  @else {
+    $color-map: map-get($_color_theme, 'hue' + $fromOrName);
+    $shadeToGet: $nameOrShade;
+  }
+
+  $color: map-get($color-map, color);
+  $shade: map-get($color-map, shade);
+
+  @if $shadeToGet != '' {
+    $shade: $shadeToGet;
+  }
+
+  @return palette-color($color, $shade);
+}
+
+// @function color1($fromOrName, $nameOrShade: '', $shadeName: '') {
+//   // If the color is from a sub-map (like diagram, or lesson)
+//   @if index($_color_special_map_names, $fromOrName) {
+//     $color-map: map-get(map-get($_color_theme, $fromOrName), $nameOrShade);
+//     $color: map-get($color-map, color);
+//     $shade: map-get($color-map, shade);
+
+//     @if $shadeName != '' {
+//       $shade: $shadeName;
+//     }
+
+//     @return palette-color($color, $shade);
+//   }
+
+//   // Otherwise it's from the root hue map
+//   $color-map: '';
+//   @if map-has-key($_color_theme, $fromOrName) {
+//     $color-map: map-get($_color_theme, $fromOrName);
+//   }
+//   @else {
+//     $color-map: map-get($_color_theme, 'hue' + $fromOrName);
+//   }
+
+//   // $color-map: map-get($_color_theme, 'hue' + $fromOrName);
+//   $color: map-get($color-map, color);
+//   $shade: map-get($color-map, shade);
+
+//   @if $nameOrShade != '' {
+//     $shade: $nameOrShade;
+//   }
+
+//   @return palette-color($color, $shade);
+// }
+
+// Retrieve hue name from theme-colors
+// @function hue($fromOrName, $name: '') {
+//   $map: ();
+
+//   @if index($_color_special_map_names, $fromOrName) {
+//     $map: map-get(map-get($_color_theme, $fromOrName), $name);
+//   }
+
+//   @else {
+//     $map: map-get($_color_theme, 'hue' + $fromOrName);
+//   }
+
+//   // $map: hue-map($fromOrName, $name);
+//   $col: map-get($map, color);
+
+//   @return $col;
+// }
+
+@function create_colour_map($color, $lightest, $lighter, $light, $dark, $darker, $darkest) {
+  $map: (
+    'base': $color,
+    'lightest': lighten($color, $lightest),
+    'lighter': lighten($color, $lighter),
+    'light': lighten($color, $light),
+    'dark': darken($color, $dark),
+    'darker': darken($color, $darker),
+    'darkest': darken($color, $darkest),
+  );
+
+  @if $color == #000 {
+    $map: (
+      'base': $color,
+      'lightest': lighten($color, 90),
+      'lighter': lighten($color, 80),
+      'light': lighten($color, 60),
+      'dark': lighten($color, 40),
+      'darker': lighten($color, 20),
+      'darkest': lighten($color, 10),
+    );
+  }
+
+  @if $color == #FFF {
+    $map: (
+      'base': $color,
+      'lightest': darken($color, 10),
+      'lighter': darken($color, 20),
+      'light': darken($color, 40),
+      'dark': darken($color, 60),
+      'darker': darken($color, 80),
+      'darkest': darken($color, 90),
+    );
+  }
+
+  @return $map;
+}
+
+@function fill_palette($base_colors) {
+  $palette: ();
+
+  @each $key, $value in $base_colors {
+    $map: ();
+    $map: map-merge($map, ($key: create_colour_map($value, 45%, 20%, 10%, 10%, 20%, 45%)));
+    $palette: map-merge($palette, $map);
+  }
+
+  @return $palette;
+}

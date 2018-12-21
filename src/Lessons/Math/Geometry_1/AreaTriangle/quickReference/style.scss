@@ -1,0 +1,11 @@
+@import '../common/style';
+
+// $colors: (
+//   square1:             color('red', 'base'),
+//   square2:             color('blue', 'base'),
+//   circle:              color('red', 'base'),
+// );
+
+body {
+  @include color_vars($colors);
+}

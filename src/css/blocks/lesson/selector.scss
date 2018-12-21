@@ -1,0 +1,82 @@
+.lesson__selector_container {
+  width: 100%;
+}
+
+.lesson__selector_table_selectable {
+  cursor: pointer;
+}
+
+.lesson__selector_title_not_selected:hover {
+  color: color('diagram', 'disabled', 'base');
+}
+
+.lesson__selector_title_selected {
+  color: color('diagram', 'text-base');
+}
+
+.lesson__selector_title_selected:hover {
+  color: color('diagram', 'text-base');
+}
+
+// *********************** Horizontal ***********************
+.lesson__horizontal_selector_table {
+  margin-left: auto;
+  margin-right: auto;
+  color: color('diagram', 'disabled');
+  text-align: center;
+  // border-bottom: 1px solid color('diagram', 'disabled');
+  // border-top: 1px solid color('diagram', 'disabled');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-weight: bold;
+}
+
+.lesson__horiztonal_selector_table_cell {
+  padding-left: calc(var(--lesson__diagram-font-size));
+  padding-right: calc(var(--lesson__diagram-font-size));
+  padding-top: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding-bottom: 0;
+}
+
+.lesson__horiztonal_selector_table_separator_cell {
+  padding: 0;
+}
+
+.lesson__horizontal_selector_table_subtext {
+  font-weight: normal;
+  padding-top: 0;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.35);
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+.lesson__horizontal_selector_table_subtext_selected {
+  color: color('diagram', 'text-base');
+}
+
+// *********************** Vertical ***********************
+.lesson__vertical_selector_table {
+  color: color('diagram', 'disabled');
+  text-align: left;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-weight: bold;
+}
+
+.lesson__vertical_selector_table_cell {
+  padding-top: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+.lesson__vertical_selector_table_cell_with_subtext {
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.05);
+}
+
+.lesson__vertical_selector_table_subtext {
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-weight: normal;
+  padding-top: 0;
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.6);
+}
+
+.lesson__vertical_selector_table_subtext__hide {
+  font-size: 0;
+  padding-bottom: 0;
+}

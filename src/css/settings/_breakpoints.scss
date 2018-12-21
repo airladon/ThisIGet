@@ -1,0 +1,19 @@
+// widths
+$mobile:            0;
+$small-tablet:    576px;
+$tablet:          768px;
+$desktop:         992px;
+$large-desktop:   1200px;
+$extra-large-desktop:   1200px;
+
+$xs: $mobile;
+$sm: $small-tablet;
+$md: $tablet;
+$lg: $desktop;
+$xl: $large-desktop;
+$xxl: $extra-large-desktop;
+
+$portrait-narrow: 1/100;
+$portrait:        1/2;
+$landscape:       1/1;
+$landscape-wide:  1.5/1;

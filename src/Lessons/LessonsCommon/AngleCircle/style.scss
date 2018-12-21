@@ -1,0 +1,31 @@
+@import '../../geometry';
+
+$colors: (
+  anchor:           map-get($geometry_colors, anchor),
+  radius:           map-get($geometry_colors, reference),
+  reference:        map-get($geometry_colors, reference),
+  angle:            map-get($geometry_colors, angle),
+  angleText:        map-get($geometry_colors, angleText),
+  circle:           map-get($geometry_colors, circle),
+  radialLines:      map-get($geometry_colors, radialLines),
+  arc:              map-get($geometry_colors, arc),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id_angle_text,
+#id_angle_value,
+#id_angle_units,
+#id_angle_equals,
+#id_total_sections_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: color('diagram', 'text-plot');
+}
+
+#id_angle_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: map-get($colors, angleText);
+  // font-weight: bold;
+}

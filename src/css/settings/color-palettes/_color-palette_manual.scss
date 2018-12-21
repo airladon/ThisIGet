@@ -1,0 +1,36 @@
+
+$_color-palette_standard: (
+  blue:                          #5c7fe8,
+  blue-light:                    #a4b6ec,
+  blue-medium:                   #4863b5,
+  blue-dark:                     #293968,
+  //
+  red:                           #ff8079,
+  red-light:                     #ffc9c5,
+  red-medium:                    #cc6661,
+  red-dark:                      #7f403c,
+  //
+  yellow:                        #e8db48,
+  yellow-light:                  #ece490,
+  yellow-medium:                 #b5ab38,
+  yellow-dark:                   #686320,
+  //
+  green:                         #84ff63,
+  green-light:                   #c0ffaf,
+  green-medium:                  #6acc4f,
+  green-dark:                    #427f31,
+  //
+  cyan:                          #56fff5,
+  cyan-light:                    #a2fffa,
+  cyan-medium:                   #45ccc4,
+  cyan-dark:                     #2b7f7a,
+  //
+  white:                         #FFF,
+  black:                         #000,
+  //
+  grey:                          #727F8C,
+  grey-vlight:           lighten(#B0C4D9, 10),
+  grey-light:                    #B0C4D9,
+  grey-medium:                   #2E4359,
+  grey-dark:                     #343A40,
+);

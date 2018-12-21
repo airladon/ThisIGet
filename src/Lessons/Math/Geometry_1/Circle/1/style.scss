@@ -1,0 +1,62 @@
+@import '../../geometry';
+
+$colors: (
+  anchor:           map-get($geometry_colors, anchor),
+  radius:           map-get($geometry_colors, radius),
+  diameter:         map-get($geometry_colors, diameter),
+  reference:        map-get($geometry_colors, reference),
+  latin:            color('diagram', 'text-latin'),
+  circle:           map-get($geometry_colors, circle),
+  rotation:         map-get($geometry_colors, rotation),
+  disabled:         color('diagram', 'disabled'),
+  grid:             color('diagram', 'disabled', 'darker'),
+  axis:             color('diagram', 'disabled'),
+  push:             color('diagram', 'push'),
+  slider:           map-get($geometry_colors, radius),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id_location_text,
+#id_location_equals,
+#id_location_x,
+#id_location_y,
+#id_location_comma {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  color: map-get($colors, anchor);
+}
+
+#id_location_text {
+  // color: map-get($colors, anchor);
+}
+
+.property_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+#id_radius_text,
+#id_radius_equals,
+#id_radius_value {
+  color: map-get($colors, radius);
+}
+
+#id_diameter_text,
+#id_diameter_equals,
+#id_diameter_value {
+  color: map-get($colors, diameter);
+}
+
+#id_circumference_text,
+#id_circumference_equals,
+#id_circumference_value {
+  color: map-get($colors, circle);
+}
+
+#id_radius_text,
+#id_diameter_text,
+#id_circumference_text {
+  font-weight: bold;
+  cursor: pointer;
+}

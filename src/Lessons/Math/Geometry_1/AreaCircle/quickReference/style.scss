@@ -1,0 +1,17 @@
+@import '../common/style';
+
+// $colors: (
+//   line:             darken(map-get($geometry_colors, lines), 30),
+//   intersectingLine: lighten(map-get($geometry_colors, lines), 0),
+// );
+
+// body {
+//   @include color_vars($colors);
+// }
+// .diagram__text {
+//   z-index: 4;
+// }
+
+#id_diagram__text__high {
+  z-index: 3;
+}

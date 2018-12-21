@@ -1,0 +1,14 @@
+
+.navbar__spacer {
+  height: 0;
+  width: 100%;
+  position: relative;
+  background-color: color('lesson', 'title-background');
+}
+
+@media screen and (min-width: $large-desktop) {
+  .navbar__spacer {
+    // height: 56px;
+    width: 100%;
+  }
+}

@@ -1,0 +1,60 @@
+// @import '../geometry';
+@import '../../../../LessonsCommon/SinCosCircle/style';
+
+$colors: (
+  axes:       color('diagram', 'disabled', 'dark'),
+  grid:       color('diagram', 'disabled', 'darker'),
+  bowHandle:        color('blue', 'dark'),
+  bowString:        color('red', 'dark'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id__piOn2MinusTheta,
+#id__piOn2MinusTheta1,
+#id_diagram__complimentary_sine_angle,
+#id_diagram__complimentary_sine_angle1,
+#id_diagram__complimentary_symmetry_cosine_angle,
+#id_diagram__complimentary_symmetry_cosine_angle1, {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+#id_diagram_cosine_line_complimentary_cosine1,
+#id_diagram_sine_line_complimentary_sine1,
+#id_diagram__complimentary_sine_angle1,
+#id__piOn2MinusTheta1 {
+  color: map-get($colors, grid);
+}
+
+#id__piOn2MinusTheta,
+#id__symmetry_piOn2MinusTheta,
+#id__piOn2MinusTheta1 .numerator {
+  line-height: 1.1;
+}
+
+#id__piOn2MinusTheta,
+#id__symmetry_piOn2MinusTheta,
+#id__piOn2MinusTheta1 .denominator {
+  line-height: 1;
+}
+
+#id__symmetry_sine_cosine_eqn_left {
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+#id__symmetry_sine_cosine_eqn_right {
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+#id__symmetry_sine_cosine_eqn_frac {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+#id__symmetry_sine_cosine_eqn_bracket_l,
+#id__symmetry_sine_cosine_eqn_bracket_r {
+  font-size: calc(var(--lesson__diagram-font-size) * 1.9);
+  font-style: normal;
+  font-weight: 100;
+}

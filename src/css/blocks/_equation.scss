@@ -1,0 +1,179 @@
+/*
+
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  */
+.equation {
+  font-style: italic;
+  font-family: Times New Roman, serif;
+
+  /* font-family: times; */
+
+  /* display: table;
+  padding: 0;
+  margin: 0; */
+
+  /* This keeps the equation from changing size */
+  width: -webkit-max-content;
+}
+
+/* .equation_elements{
+  display: table;
+  padding: 0;
+  margin: 0;
+} */
+
+/* .equation_text1 {
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(50%);
+  -ms-transform: translateY(50%);
+  transform: translateY(50%);
+}
+*/
+
+.equation_space {
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+.equation_element {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.05);
+  // padding-right: 5px;
+  text-align: center;
+  margin-right: auto;
+  margin-left: auto;
+  padding-top: 0;
+}
+
+.radical {
+  padding-right: 0;
+  font-size: 100%;
+  font-family: Times New Roman, serif;
+  font-weight: lighter;
+  position: relative;
+  top: -4px;
+  left: 1px;
+}
+
+.square_root .equation_element:not(:first-child) {
+  padding-right: 3;
+  padding-left: 0;
+  border-top: solid 1px;
+}
+
+.equation_text {
+  // float: left;
+  display: table-cell;
+}
+
+/* **************************
+   Fractions
+************************** */
+.fraction {
+  display: table-cell;
+}
+
+.fraction_line {
+  border-top: solid 1px;
+  width: 100%;
+  margin-bottom: calc(var(--lesson__diagram-font-size) * 0.05);
+  display: table;
+}
+
+@media screen and (min-width: $small-tablet) {
+  .fraction_line {
+    border-top: solid calc(var(--lesson__diagram-font-size) * 0.07);
+  }
+}
+
+.numerator {
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.15);
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.01);
+  display: table;
+}
+
+.denominator {
+  margin-left: auto;
+  margin-right: auto;
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.15);
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.01);
+  display: table;
+}
+
+/* **************************
+   Sub and Super Scripts
+************************** */
+
+/* .with_super, .with_sub {
+  padding-right: 0;
+  margin: 0;
+  padding: 0;
+  float: left;
+} */
+
+.superscript_text {
+  display: table-cell;
+  font-size: 50%;
+  // float: left;
+  // position: relative;
+  // top: 0;
+  vertical-align: top;
+  text-align: left;
+  left: 0;
+  // padding-left: 2px;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.superscript {
+  display: table;
+}
+
+.supersub {
+  padding: 0;
+  margin: 0;
+}
+
+.supsub_content {
+  display: table-cell;
+}
+
+.subscript_text {
+  display: table-cell;
+  font-size: 50%;
+  vertical-align: bottom;
+  text-align: left;
+  padding-left: 0;
+  margin-left: 0;
+  // float: left;
+  // position: relative;
+  // top: 0.9em;
+}
+
+.super_sub {
+  display: table-cell;
+  padding-left: 0;
+  margin-left: 0;
+  padding-top: 0;
+  margin-top: 0;
+}
+
+.super_sub_super {
+  display: table-row;
+  padding-left: 0;
+  margin-left: 0;
+}
+
+.super_sub_sub {
+  display: table-row;
+  padding-left: 0;
+  margin-left: 0;
+}

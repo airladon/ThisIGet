@@ -1,0 +1,125 @@
+
+.lesson__popup_box {
+  z-index: 2;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  // transform: translate(-50%, -100%);
+  // background-color: rgba(255, 255, 255, 0.95);
+  background-color: color('diagram', 'background', 'darkest');
+  color: color('diagram', 'disabled', 'darker');
+  opacity: 0.965;
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.4);
+  width: max-content;
+  max-width: calc(var(--lesson__content-width) * 0.8);
+}
+
+@media (min-aspect-ratio: 3/2) {
+  .lesson__popup_box {
+    max-width: calc(var(--lesson__content-width) * 0.5);
+  }
+}
+
+.lesson__popup_box ul {
+  margin: 0;
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+.lesson__popup_box__close {
+  padding: 0;
+  margin-right: calc(var(--lesson__diagram-font-size) * 0.5);
+  // margin-top: calc(var(--lesson__diagram-font-size) * -0.1);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  // width: auto;
+  float: right;
+  font-weight: lighter;
+  width: calc(var(--lesson__diagram-font-size) * 1.1);
+  height: calc(var(--lesson__diagram-font-size) * 1.1);
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.55);
+}
+
+.lesson__popup_box__close:hover {
+  // color: color('diagram', 'disabled', 'base');
+  background-color: color('diagram', 'disabled', 'darker');
+  font-weight: light;
+  cursor: pointer;
+}
+
+.lesson__popup_box__title {
+  color: color('diagram', 'disabled', 'base');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  text-align: center;
+  padding-top: calc(var(--lesson__diagram-font-size) * 0.5);
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.2);
+  width: 100%;
+}
+
+.lesson__popup_box__title_text {
+  display: inline-block;
+  width: auto;
+  color: color('diagram', 'disabled', 'light');
+  height: calc(var(--lesson__diagram-font-size) * 0.8);
+  margin-top: calc(var(--lesson__diagram-font-size) * 0.2);
+}
+
+.lesson__popup_box__title_i {
+  display: inline-block;
+  float: left;
+  margin-left: calc(var(--lesson__diagram-font-size) * 0.5);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  width: calc(var(--lesson__diagram-font-size) * 1.1);
+  height: calc(var(--lesson__diagram-font-size) * 1.1);
+  border: 1px solid;
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.55);
+  font-family: times new roman, serif;
+  font-style: italic;
+}
+
+.lesson__popup_box__text {
+  padding-left: calc(var(--lesson__diagram-font-size) * 1);
+  padding-right: calc(var(--lesson__diagram-font-size) * 1);
+  padding-bottom: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding-top: calc(var(--lesson__diagram-font-size) * 0.2);
+  max-height: calc(var(--lesson__content-height) * 0.4);
+  overflow: scroll;
+  color: color('diagram', 'disabled', 'light');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}
+
+.lesson__popup_hide {
+  left: -10000px;
+  top: -10000px;
+  font-size: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}
+
+// :root {
+//   --lesson__popup_box__width: 8;
+//   --lesson__popup_box__height: 5;
+// }
+
+.lesson__popup_box__diagram {
+  margin-left: auto;
+  margin-right: auto;
+  width: calc(var(--lesson__diagram-font-size) * 1);
+  height: calc(var(--lesson__diagram-font-size) * 1);
+  // background-color: white;
+}
+
+.lesson__popup_box__link {
+  text-align: center;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.4);
+  color: color('diagram', 'disabled', 'dark');
+  padding: calc(var(--lesson__diagram-font-size) * 0.4);
+}
+
+.lesson__popup_box__link a {
+  color: color('diagram', 'disabled', 'dark');
+}
+
+.lesson__popup_box__link a:hover {
+  color: color('diagram', 'disabled', 'base');
+  text-decoration: none;
+}
