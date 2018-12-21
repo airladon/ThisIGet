@@ -26,7 +26,6 @@ Currently supports:
 Docker containers are used for development, testing and deployment. Containers can be built locally that mimic test and production environments.
 
 
-
 # Work flow
 
 An example contribution work flow is:
