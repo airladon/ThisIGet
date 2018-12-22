@@ -226,3 +226,18 @@ export class QROppositeAngles extends PopupBoxCollection {
     this.diagram.animateNextFrame();
   }
 }
+
+
+function attachQuickReference() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Opposite: QROppositeAngles,
+    Interior: QRInteriorAngles,
+    Alternate: QRAlternateAngles,
+    Corresponding: QRCorrespondingAngles,
+  };
+};
+
+attachQuickReference();

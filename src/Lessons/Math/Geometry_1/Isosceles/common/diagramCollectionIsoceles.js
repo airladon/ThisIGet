@@ -95,7 +95,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
           '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.js',
           () => {
             // eslint-disable-next-line
-            const qrArea = new window.quickReference.congruent_triangles.Ssa(this.diagram);
+            const qrArea = new window.quickReference.related_angles.Opposite(this.diagram);
             this.diagram.elements.add('qr', qrArea);
             // qrArea.setFirstTransform();
             // $FlowFixMe

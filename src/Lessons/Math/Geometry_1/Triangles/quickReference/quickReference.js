@@ -58,3 +58,14 @@ export default class QRTriangle extends PopupBoxCollection {
   }
 }
 
+
+function attachQuickReference() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    main: QRTriangle,
+  };
+};
+
+attachQuickReference();

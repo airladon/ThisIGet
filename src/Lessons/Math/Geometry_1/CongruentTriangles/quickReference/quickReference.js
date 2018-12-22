@@ -421,7 +421,7 @@ function attachQuickReference() {
     Aas: QRAas,
     Aaa: QRAaa,
     Ssa: QRSsa,
-    CongruentTriangles: QRCongruentTriangles,
+    main: QRCongruentTriangles,
   };
 };
 
