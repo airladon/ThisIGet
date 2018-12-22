@@ -146,11 +146,15 @@ export class QRSquare extends PopupBoxCollection {
   }
 }
 
-function abc() {
+function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference.area = QRArea;
+  window.quickReference[details.details.uid] = {
+    Area: QRArea,
+    Square: QRSquare,
+    Rect: QRRect,
+  };
 }
 
-abc();
+attachQuickReference();

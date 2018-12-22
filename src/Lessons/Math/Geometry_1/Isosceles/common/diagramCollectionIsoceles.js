@@ -68,19 +68,6 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   _splitLine1: DiagramObjectLine;
   _splitLine2: DiagramObjectLine;
 
-  // addGrid() {
-  //   const lay = this.layout.grid;
-  //   const grid = this.diagram.shapes.grid(
-  //     new Rect(
-  //       -lay.length / 2, -lay.height / 2,
-  //       lay.length, lay.height,
-  //     ),
-  //     lay.spacing, lay.spacing, 2, this.layout.colors.grid,
-  //     new Transform().translate(lay.position),
-  //   );
-  //   this.add('grid', grid);
-  // }
-
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -88,7 +75,6 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.iso.position);
-    // this.addGrid();
     this.diagram.addElements(this, this.layout.addElements);
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
@@ -109,7 +95,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
           '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.js',
           () => {
             // eslint-disable-next-line
-            const qrArea = new window.quickReference.area(this.diagram);
+            const qrArea = new window.quickReference.area_introduction.Square(this.diagram);
             this.diagram.elements.add('qr', qrArea);
             // qrArea.setFirstTransform();
             // $FlowFixMe
