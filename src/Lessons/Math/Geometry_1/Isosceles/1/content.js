@@ -32,6 +32,7 @@ class Content extends LessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([['adjacent_angles', 'Complementary']]);
   }
 
   addSections() {
@@ -63,6 +64,10 @@ class Content extends LessonContent {
         'There are several |types of triangle| commonly found in many applications.',
         'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
       ]),
+      setSteadyState: () => {
+        console.log(this.diagram.elements);
+        qr._adjacent_angles._Complementary.show();
+      },
       // setSteadyState: () => {
       // iso.show();
       // equil.showAll();

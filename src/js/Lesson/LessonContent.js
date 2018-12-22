@@ -1,8 +1,11 @@
 // @flow
 import Fig from 'figureone';
+// import LessonDescription from './lessonDescription';
+import getLessonIndex from '../../Lessons/index';
+import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {
-  Diagram, HTMLObject, Point,
+  Diagram, HTMLObject, Point, Transform,
   DiagramElementPrimative, DiagramElementCollection, EquationLegacy,
 } = Fig;
 
@@ -647,6 +650,60 @@ class LessonContent {
     // if (infoBox instanceof HTMLElement) {
     //   infoBox.classList.toggle('lesson__info_hide');
     // }
+  }
+
+  loadQRs(
+    qrs: Array<[string, string]>,
+  ) {
+    if (this.diagram.elements._qr == null) {
+      this.diagram.addElements(
+        this.diagram.elements,
+        [
+          {
+            name: 'qr',
+            method: 'collection',
+            options: { transform: new Transform('qr').translate(0, 0) },
+          },
+        ],
+      );
+    }
+    qrs.forEach((qr) => {
+      const [uid, qrid] = qr;
+      if (this.diagram.elements._qr[uid] == null) {
+        this.diagram.addElements(this.diagram.elements._qr, [{
+          name: `${uid}`, method: 'collection',
+        }]);
+      }
+      this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
+        name: `${qrid}`, method: 'collection',
+      }]);
+      this.getQR(uid, qrid);
+    });
+  }
+
+  getQR(
+    uid: string, qrid: string,
+  ) {
+    const index = getLessonIndex();
+    let jsLink = '';
+    let cssLink = '';
+    for (let i = 0; i < index.length; i += 1) {
+      if (uid === index[i].uid) {
+        cssLink = `/static/dist/${index[i].link}/quickReference/lesson.css`;
+        jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
+        i = index.length;
+      }
+    }
+    if (cssLink !== '') {
+      loadRemoteCSS(`${uid}CSS`, cssLink, () => {
+        loadRemote(`${uid}Script`, jsLink, () => {
+          const qr = new window.quickReference[uid][qrid](this.diagram);
+          this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
+          qr.hideAll();
+          // qr.show();
+        });
+      });
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this

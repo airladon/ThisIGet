@@ -3,8 +3,8 @@ import * as React from 'react';
 import Fig from 'figureone';
 // import '../../css/style.scss';
 import LessonTile from './lessonTile';
-import LessonDescription from '../../Lessons/lessonDescription';
-import makeLessonTree from '../../Lessons/lessonTree';
+import LessonDescription from '../Lesson/lessonDescription';
+import makeLessonTree from '../Lesson/lessonTree';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;

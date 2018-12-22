@@ -1,5 +1,5 @@
 // @flow
-import getLessonIndex from './index';
+import getLessonIndex from '../../Lessons/index';
 
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list

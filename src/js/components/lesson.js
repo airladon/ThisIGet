@@ -8,7 +8,7 @@ import LessonNavigator from './lessonNavigator';
 import LessonTilePath from './lessonPathTile';
 import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
-import LessonDescription from '../../Lessons/lessonDescription';
+import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 
 type Props = {
