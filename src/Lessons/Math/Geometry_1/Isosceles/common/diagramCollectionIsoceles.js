@@ -82,7 +82,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     console.log(this);  // eslint-disable-line
     console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
     // this.loadJS();
-    this.getQR('related_angles', 'Opposite');
+    // this.getQR('related_angles', 'Opposite');
     this.hasTouchableElements = true;
   }
 

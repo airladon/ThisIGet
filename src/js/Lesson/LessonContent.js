@@ -669,7 +669,7 @@ class LessonContent {
     }
     qrs.forEach((qr) => {
       const [uid, qrid] = qr;
-      if (this.diagram.elements._qr[uid] == null) {
+      if (this.diagram.elements._qr[`_${uid}`] == null) {
         this.diagram.addElements(this.diagram.elements._qr, [{
           name: `${uid}`, method: 'collection',
         }]);

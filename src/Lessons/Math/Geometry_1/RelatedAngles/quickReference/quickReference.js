@@ -238,6 +238,6 @@ function attachQuickReference() {
     Alternate: QRAlternateAngles,
     Corresponding: QRCorrespondingAngles,
   };
-};
+}
 
 attachQuickReference();

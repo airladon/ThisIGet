@@ -144,3 +144,17 @@ export class QRSquare extends PopupBoxCollection {
     this.diagram.animateNextFrame();
   }
 }
+
+
+function attachQuickReference() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Main: QRQuadrangle,
+    Rectangle: QRRectangle,
+    Square: QRSquare,
+  };
+}
+
+attachQuickReference();

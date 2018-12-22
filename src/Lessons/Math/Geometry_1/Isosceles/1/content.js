@@ -32,7 +32,15 @@ class Content extends LessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    this.loadQRs([['adjacent_angles', 'Complementary']]);
+    this.loadQRs([
+      ['triangle_introduction', 'Main'],
+      ['congruent_triangles', 'Sss'],
+      ['congruent_triangles', 'Aas'],
+      ['related_angles', 'Alternate'],
+      ['quadrangles', 'Rectangle'],
+      ['adjacent_angles', 'Complementary'],
+    ]);
+    console.log(this.diagram.elements._qr)
   }
 
   addSections() {
@@ -65,7 +73,6 @@ class Content extends LessonContent {
         'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
       ]),
       setSteadyState: () => {
-        console.log(this.diagram.elements);
         qr._adjacent_angles._Complementary.show();
       },
       // setSteadyState: () => {
@@ -194,7 +201,7 @@ class Content extends LessonContent {
     common = {
       setContent: 'The |Side_Side_Side| triangle congruency test says that if two triangles share the same side lengths, then their |angles| are also |equal|.',
       modifiers: {
-        Side_Side_Side: click(qr._sss.show, [qr._sss], colors.diagram.action),
+        Side_Side_Side: click(qr._congruent_triangles._Sss.show, [qr._congruent_triangles._Sss], colors.diagram.action),
       },
       showOnly: [
         iso, qr,
@@ -308,11 +315,11 @@ class Content extends LessonContent {
       setContent: 'However, if we |only know| a triangle has two |equal_angles|, can we also show it has two equal sides?',
       modifiers: {
         equal_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
-        rectangle: click(qr._rect.show, [qr._rect], colors.construction),
+        rectangle: click(qr._quadrangles._Rectangle.show, [qr._quadrangles._Rectangle], colors.construction),
         right_angles: highlight(colors.angles),
         right_angles_: click(iso.pulseRectRightAngles, [iso], colors.angles),
-        Alternate_Angles: click(qr._alt.show, [qr._alt], colors.diagram.action),
-        Angle_Angle_Side: click(qr._aas.show, [qr._aas], colors.diagram.action),
+        Alternate_Angles: click(qr._related_angles._Alternate.show, [qr._related_angles._Alternate], colors.diagram.action),
+        Angle_Angle_Side: click(qr._congruent_triangles._Aas.show, [qr._congruent_triangles._Aas], colors.diagram.action),
         two_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
         two_sides: click(iso.pulseEqualSides, [iso], colors.equalLength),
         triangles_: click(iso.pulseRectTriangles, [iso], colors.construction),
@@ -470,7 +477,7 @@ class Content extends LessonContent {
       modifiers: {
         _180: clickWord(
           '180º', 'id_important_triangles_sum1',
-          qr._tri.show, [qr._tri], colors.diagram.action,
+          qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action,
         ),
         angles: highlight(colors.angles),
       },
@@ -488,7 +495,7 @@ class Content extends LessonContent {
       modifiers: {
         _180: clickWord(
           '180º', 'id_important_triangles_sum1',
-          qr._tri.show, [qr._tri], colors.diagram.action,
+          qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action,
         ),
         b: highlight(colors.angles),
         a: highlight(colors.angles),
@@ -644,13 +651,13 @@ class Content extends LessonContent {
     common.setContent = 'We know all the angles of a triangle sum to |_180|. Therefore, each angle must be a |third of 180º|, which is |60º|.';
     this.addSection(common, {
       modifiers: {
-        _180: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        _180: click(qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action),
       },
     });
 
     this.addSection(common, {
       modifiers: {
-        _180: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        _180: click(qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action),
       },
       setSteadyState: () => {
         equil._tri._angle1.label.setText('60º');
