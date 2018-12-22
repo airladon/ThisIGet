@@ -3,6 +3,7 @@ import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import { loadRemote, loadRemoteCSS } from '../../../../../js/tools/misc';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import getLessonIndex from '../../../../index';
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
@@ -80,7 +81,8 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addEquationB);
     console.log(this);  // eslint-disable-line
     console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
-    this.loadJS();
+    // this.loadJS();
+    this.getQR('related_angles', 'Opposite');
     this.hasTouchableElements = true;
   }
 
@@ -108,6 +110,29 @@ export default class IsocelesCollection extends CommonDiagramCollection {
         );
       },
     );
+  }
+
+  getQR(uid: string, qrid: string) {
+    const index = getLessonIndex();
+    let jsLink = '';
+    let cssLink = '';
+    for (let i = 0; i < index.length; i += 1) {
+      if (uid === index[i].uid) {
+        cssLink = `/static/dist/${index[i].link}/quickReference/lesson.css`;
+        jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
+        i = index.length;
+      }
+    }
+    if (cssLink !== '') {
+      loadRemoteCSS(`${uid}CSS`, cssLink, () => {
+        loadRemote(`${uid}Script`, jsLink, () => {
+          const qr = new window.quickReference[uid][qrid](this.diagram);
+          this.diagram.elements.add(qrid, qr);
+          this.diagram.elements[`_${qrid}`].hideAll();
+          qr.show();
+        });
+      });
+    }
   }
 
   pulseEqualSides() {
