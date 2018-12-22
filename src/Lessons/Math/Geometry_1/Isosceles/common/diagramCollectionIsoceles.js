@@ -2,23 +2,11 @@
 import Fig from 'figureone';
 import LessonDiagram from './diagram';
 import { loadRemote, loadRemoteCSS } from '../../../../../js/tools/misc';
-// import {
-//   Transform, Rect, // Point,
-// } from '../../../../../js/diagram/tools/g2';
-// import DiagramObjectAngle from '../../../../../js/diagram/DiagramObjects/Angle';
-// import { DiagramObjectLine } from '../../../../../js/diagram/DiagramObjects/Line';
-// import { joinObjects } from '../../../../../js/tools/tools';
-// import {
-//   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
-
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
-// const tools = require('../../../../../dd');
-// import { mathtools } from 'dd';
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  Transform, Rect,
+  Transform,
 } = Fig;
 
 export default class IsocelesCollection extends CommonDiagramCollection {
@@ -81,18 +69,18 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   _splitLine1: DiagramObjectLine;
   _splitLine2: DiagramObjectLine;
 
-  addGrid() {
-    const lay = this.layout.grid;
-    const grid = this.diagram.shapes.grid(
-      new Rect(
-        -lay.length / 2, -lay.height / 2,
-        lay.length, lay.height,
-      ),
-      lay.spacing, lay.spacing, 2, this.layout.colors.grid,
-      new Transform().translate(lay.position),
-    );
-    this.add('grid', grid);
-  }
+  // addGrid() {
+  //   const lay = this.layout.grid;
+  //   const grid = this.diagram.shapes.grid(
+  //     new Rect(
+  //       -lay.length / 2, -lay.height / 2,
+  //       lay.length, lay.height,
+  //     ),
+  //     lay.spacing, lay.spacing, 2, this.layout.colors.grid,
+  //     new Transform().translate(lay.position),
+  //   );
+  //   this.add('grid', grid);
+  // }
 
   constructor(
     diagram: LessonDiagram,
@@ -101,7 +89,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.iso.position);
-    this.addGrid();
+    // this.addGrid();
     this.diagram.addElements(this, this.layout.addElements);
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
@@ -134,20 +122,6 @@ export default class IsocelesCollection extends CommonDiagramCollection {
         );
       },
     );
-
-    // // Get the first script element on the page
-    // const ref = window.document.getElementsByTagName('script')[0];
-
-    // // Create a new script element
-    // const script = window.document.createElement('script');
-
-    // // Set the script element `src`
-    // script.src = '/static/test.js';
-    // script.type = 'text/javascript';
-
-    // // Inject the script into the DOM
-    // ref.parentNode.insertBefore(script, ref);
-    // script.onload = () => {console.log('asdf')};
   }
 
   pulseEqualSides() {
