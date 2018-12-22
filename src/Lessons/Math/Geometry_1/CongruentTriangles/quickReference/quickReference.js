@@ -415,9 +415,13 @@ function attachQuickReference() {
     window.quickReference = {};
   }
   window.quickReference[details.details.uid] = {
-    Area: QRArea,
-    Square: QRSquare,
-    Rect: QRRect,
+    Asa: QRAsa,
+    Sss: QRSss,
+    Sas: QRSas,
+    Aas: QRAas,
+    Aaa: QRAaa,
+    Ssa: QRSsa,
+    CongruentTriangles: QRCongruentTriangles,
   };
 };
 
