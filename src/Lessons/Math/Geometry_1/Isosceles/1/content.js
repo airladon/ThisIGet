@@ -6,12 +6,14 @@ import {
 // import {
 //   click, centerV, highlight, clickWord,
 // } from '../../../../../js/tools/htmlGenerator';
-import LessonDiagram from './diagram';
+// import LessonDiagram from './diagram';
 import Definition from '../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import details from '../details';
+import DiagramCollection from './diagramCollection';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   click, centerV, highlight, clickWord,
@@ -28,7 +30,8 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {

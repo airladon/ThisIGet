@@ -16,23 +16,21 @@ export default class CommonLessonDiagram extends Diagram {
 
   constructor(id: string, layout: Object) {
     const { limits } = layout;
-    super(
-      `${id}`,
-      limits.left,
-      limits.bottom,
-      limits.width,
-      limits.height,
-      layout.colors.diagram.background,
+    super({
+      htmlId: `${id}`,
+      limits,
+      backgroundColor: layout.colors.diagram.background,
       layout,
-    );
+      fontScale: 1.2,
+    });
   }
 
-  createDiagramElements() {
-    this.fontScale = 1.2;
-  }
+  // createDiagramElements() {
+  //   this.fontScale = 1.2;
+  // }
 
-  resize() {
-    this.elements.updateLimits(this.limits);
-    super.resize();
-  }
+  // resize() {
+  //   this.elements.updateLimits(this.limits);
+  //   super.resize();
+  // }
 }

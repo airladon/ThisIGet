@@ -7,7 +7,8 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+// import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 import IsocelesCollection from '../common/diagramCollectionIsoceles';
 import QuickReferenceCollection from '../common/diagramCollectionQuickReference';
@@ -22,7 +23,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   _qr: QuickReferenceCollection;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();

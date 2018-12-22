@@ -604,23 +604,58 @@ function () {
   // addElements: DiagramAddElements;
   // addElementsLow: DiagramAddElements;
   // addElementsHigh: DiagramAddElements;
-  function Diagram() {
-    var containerIdOrWebGLContext = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'DiagramContainer';
-    var limitsOrxMin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2);
-    var yMin = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
-    var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 2;
-    var height = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 2;
-    var backgroundColor = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : [1, 1, 1, 1];
-    var layout = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : {};
-    var vertexShader = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'simple';
-    var fragmentShader = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'simple';
-
+  // layout: Object;
+  function Diagram( // canvas: HTMLCanvasElement,
+  options) // limitsOrxMin: number | Rect = new Rect(-1, -1, 2, 2),
+  // yMin: number = -1,
+  // width: number = 2,
+  // height: number = 2,
+  // backgroundColor: Array<number> = [1, 1, 1, 1],
+  // layout: Object = {},
+  // vertexShader: string = 'simple',
+  // fragmentShader: string = 'simple',
+  {
     _classCallCheck(this, Diagram);
 
-    this.layout = layout;
+    var defaultOptions = {
+      htmlId: 'id_figureone_canvases',
+      limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2),
+      backgroundColor: [1, 1, 1, 1],
+      // layout: {},
+      vertexShader: 'simple',
+      fragmentShader: 'simple',
+      fontScale: 1
+    };
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultOptions, options);
+    var htmlId = optionsToUse.htmlId,
+        backgroundColor = optionsToUse.backgroundColor,
+        limits = optionsToUse.limits,
+        vertexShader = optionsToUse.vertexShader,
+        fragmentShader = optionsToUse.fragmentShader; // if (typeof containerIdOrOptions !== 'string') {
+    //   optionsToUse = joinObjects(
+    //     defaultOptions, containerIdOrOptions,
+    //   );
+    // } else {
+    //   optionsToUse.htmlId = containerIdOrOptions;
+    //   if (typeof limitsOrxMin === 'number') {
+    //     optionsToUse.limits = new Rect(
+    //       limitsOrxMin,
+    //       yMin,
+    //       width,
+    //       height,
+    //     );
+    //   } else {
+    //     optionsToUse.limits = limitsOrxMin;
+    //   }
+    //   optionsToUse.backgroundColor = backgroundColor;
+    //   optionsToUse.layout = layout;
+    //   optionsToUse.vertexShader = vertexShader;
+    //   optionsToUse.fragmentShader = fragmentShader;
+    // }
+    // this.layout = layout;
 
-    if (typeof containerIdOrWebGLContext === 'string') {
-      var container = document.getElementById(containerIdOrWebGLContext);
+    if (typeof htmlId === 'string') {
+      var container = document.getElementById(htmlId);
 
       if (container instanceof HTMLElement) {
         var children = container.children;
@@ -666,10 +701,6 @@ function () {
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
         this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasHigh);
       }
-    }
-
-    if (containerIdOrWebGLContext instanceof _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"]) {
-      this.webglLow = containerIdOrWebGLContext;
     } // if (this.textCanvas instanceof HTMLCanvasElement) {
     //   this.draw2D = new DrawContext2D(this.textCanvas);
     // }
@@ -679,15 +710,13 @@ function () {
       this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_6__["default"](this);
     }
 
-    this.fontScale = 1;
-    var limits;
-
-    if (limitsOrxMin instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"]) {
-      var r = limitsOrxMin;
-      limits = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](r.left, r.bottom, r.width, r.height);
-    } else {
-      limits = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](limitsOrxMin, yMin, width, height);
-    }
+    this.fontScale = optionsToUse.fontScale; // let limits;
+    // if (limitsOrxMin instanceof Rect) {
+    //   const r = limitsOrxMin;
+    //   limits = new Rect(r.left, r.bottom, r.width, r.height);
+    // } else {
+    //   limits = new Rect(limitsOrxMin, yMin, width, height);
+    // }
 
     this.updateLimits(limits);
     this.drawQueued = false;
@@ -889,6 +918,10 @@ function () {
   }, {
     key: "resize",
     value: function resize() {
+      if (this.elements != null) {
+        this.elements.updateLimits(this.limits);
+      }
+
       this.webglLow.resize();
       this.webglHigh.resize();
       this.draw2DLow.resize();
