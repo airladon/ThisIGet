@@ -49,3 +49,16 @@ export default class QRTriangleArea extends PopupBoxCollection {
     this.diagram.animateNextFrame();
   }
 }
+
+console.log('asdfasdfasdf');
+function attachQuickReference() {
+  console.log('asdfasdf');
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Main: QRTriangleArea,
+  };
+};
+
+attachQuickReference();

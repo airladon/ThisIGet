@@ -159,3 +159,16 @@ export class QRExplementaryAngles extends PopupBoxCollection {
     );
   }
 }
+
+function attachQuickReference() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Complementary: QRComplementaryAngles,
+    Supplementary: QRSupplementaryAngles,
+    Explementary: QRExplementaryAngles,
+  };
+};
+
+attachQuickReference();

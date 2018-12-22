@@ -64,7 +64,7 @@ function attachQuickReference() {
     window.quickReference = {};
   }
   window.quickReference[details.details.uid] = {
-    main: QRTriangle,
+    Main: QRTriangle,
   };
 };
 

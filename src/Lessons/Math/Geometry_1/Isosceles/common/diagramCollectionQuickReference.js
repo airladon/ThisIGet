@@ -2,10 +2,10 @@
 import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import QRTriangle from '../../Triangles/quickReference/quickReference';
-import { QRSss, QRAas } from '../../CongruentTriangles/quickReference/quickReference';
-import { QRRectangle } from '../../Quadrangles/quickReference/quickReference';
-import { QRAlternateAngles } from '../../RelatedAngles/quickReference/quickReference';
+// import QRTriangle from '../../Triangles/quickReference/quickReference';
+// import { QRSss, QRAas } from '../../CongruentTriangles/quickReference/quickReference';
+// import { QRRectangle } from '../../Quadrangles/quickReference/quickReference';
+// import { QRAlternateAngles } from '../../RelatedAngles/quickReference/quickReference';
 
 const { Transform } = Fig;
 

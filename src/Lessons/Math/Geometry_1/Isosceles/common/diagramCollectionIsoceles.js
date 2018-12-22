@@ -88,14 +88,15 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   loadJS() {
     loadRemoteCSS(
       'areaCSS',
-      '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.css',
+      '/static/dist/Lessons/Math/Geometry_1/AdjacentAngles/quickReference/lesson.css',
       () => {
         loadRemote(
           'areaScript',
-          '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.js',
+          '/static/dist/Lessons/Math/Geometry_1/AdjacentAngles/quickReference/lesson.js',
           () => {
             // eslint-disable-next-line
-            const qrArea = new window.quickReference.related_angles.Opposite(this.diagram);
+            console.log(window.quickReference)
+            const qrArea = new window.quickReference.adjacent_angles.Complementary(this.diagram);
             this.diagram.elements.add('qr', qrArea);
             // qrArea.setFirstTransform();
             // $FlowFixMe
