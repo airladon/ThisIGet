@@ -410,3 +410,15 @@ export class QRCongruentTriangles extends PopupBoxCollection {
   }
 }
 
+function attachQuickReference() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Area: QRArea,
+    Square: QRSquare,
+    Rect: QRRect,
+  };
+};
+
+attachQuickReference();
