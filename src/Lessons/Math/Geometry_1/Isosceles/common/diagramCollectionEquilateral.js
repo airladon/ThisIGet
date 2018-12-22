@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform, // Rect, Point,
 // } from '../../../../../js/diagram/tools/g2';
@@ -18,7 +18,6 @@ const {
 } = Fig;
 
 export default class EquilateralCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri: {
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -32,7 +31,7 @@ export default class EquilateralCollection extends CommonDiagramCollection {
   isoOrientation: number;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('Iso').rotate(0).translate(0, 0),
   ) {

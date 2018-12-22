@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
@@ -10,7 +10,7 @@ const { Transform, DiagramElementPrimative } = Fig;
 
 export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagramCollection) {
 // export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   _messages: {
     _touching: DiagramElementPrimative;
     _rotation: DiagramElementPrimative;
@@ -19,7 +19,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
   futurePositions: Object;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

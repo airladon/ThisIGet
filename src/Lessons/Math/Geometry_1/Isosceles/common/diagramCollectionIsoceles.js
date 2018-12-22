@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import { loadRemote, loadRemoteCSS } from '../../../../../js/tools/misc';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
@@ -10,7 +10,6 @@ const {
 } = Fig;
 
 export default class IsocelesCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri: {
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -83,7 +82,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   // }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('Iso').rotate(0).translate(0, 0),
   ) {

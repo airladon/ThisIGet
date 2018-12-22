@@ -3,10 +3,11 @@ import Fig from 'figureone';
 import {
   makeSelectorText, SelectorList,
 } from './tools/selector';
+import CommonLessonDiagram from './CommonLessonDiagram';
 
 const { Point, Transform, getMaxTimeFromVelocity } = Fig.tools.g2;
 const {
-  Diagram, DiagramElementCollection, DiagramElement,
+  DiagramElementCollection, DiagramElement,
 } = Fig;
 
 export type TypeUnits = 'deg' | 'rad';
@@ -63,7 +64,7 @@ type TypeFuturePosition = {
 export default class CommonDiagramCollection extends DiagramElementCollection {
   layout: Object;
   colors: Object;
-  +diagram: Diagram;
+  +diagram: CommonLessonDiagram;
   moveToScenario: (
     DiagramElement,
     ?TypeScenario,
@@ -81,7 +82,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
   +calculateFuturePositions: (?TypeScenario) => void;
 
   constructor(
-    diagram: Diagram,
+    diagram: CommonLessonDiagram,
     layout: Object = { colors: {} },
     transform: Transform = new Transform(),
   ) {

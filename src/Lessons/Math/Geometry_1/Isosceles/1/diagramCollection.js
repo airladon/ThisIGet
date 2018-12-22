@@ -13,11 +13,11 @@ import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import IsocelesCollection from '../common/diagramCollectionIsoceles';
 import QuickReferenceCollection from '../common/diagramCollectionQuickReference';
 import EquilateralCollection from '../common/diagramCollectionEquilateral';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
+export default class DiagramCollection extends CommonDiagramCollection {
   _iso: IsocelesCollection;
   _equil: EquilateralCollection;
   _qr: QuickReferenceCollection;
