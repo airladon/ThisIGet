@@ -145,8 +145,7 @@ export class QRSquare extends PopupBoxCollection {
   }
 }
 
-function attachQuickReference() {
-  console.log('From Quadrangles', details.details.uid, window.quickReference[details.details.uid])
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -155,7 +154,7 @@ function attachQuickReference() {
     Rectangle: QRRectangle,
     Square: QRSquare,
   };
+  console.log('From Quadrangles', details.details.uid, window.quickReference[details.details.uid])
 }
-console.log('werqwerqwer');
 
-attachQuickReference();
+attachQuickReference1();

@@ -72,7 +72,7 @@ class Content extends LessonContent {
         'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
       ]),
       setSteadyState: () => {
-        // qr._quadrangles._Rectangle.show();
+        qr._quadrangles._Rectangle.show();
       },
       // setSteadyState: () => {
       // iso.show();

@@ -58,7 +58,7 @@ export default class QRTriangle extends PopupBoxCollection {
   }
 }
 
-
+// console.log('Tri Tri')
 function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
