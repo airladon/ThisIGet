@@ -72,7 +72,7 @@ class Content extends LessonContent {
         'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
       ]),
       setSteadyState: () => {
-        qr._quadrangles._Rectangle.show();
+        // qr._quadrangles._Rectangle.show();
       },
       // setSteadyState: () => {
       // iso.show();
@@ -94,6 +94,13 @@ class Content extends LessonContent {
       setContent: centerV([
         'Triangles are commonly grouped by either their |side lengths| or |angles|.',
       ]),
+      setSteadyState: () => {
+        qr.show();
+        qr._quadrangles.show();
+        // qr._quadrangles.show();
+        qr._quadrangles._Rectangle.show();
+        console.log(qr)
+      },
     });
 
 
