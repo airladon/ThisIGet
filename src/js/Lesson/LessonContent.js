@@ -754,9 +754,19 @@ class LessonContent {
       loadRemoteCSS(`${uid}CSS`, cssLink, () => {
         loadRemote(`${uid}Script`, jsLink, () => {
           Object.keys(window.quickReference[uid]).forEach((qrid) => {
+            const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`]
+            const { isShown } = element;
             const qr = new window.quickReference[uid][qrid](this.diagram);
             this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
-            qr.hideAll();
+            if (isShown) {
+              qr.show();
+              element.hideAll();
+              console.log('showing', uid)
+            } else {
+              qr.hideAll();
+              console.log('hiding', uid)
+            }
+            // console.log(qrid, 'done')
           });
         });
       });
