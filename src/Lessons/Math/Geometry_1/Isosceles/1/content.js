@@ -33,14 +33,13 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      ['triangle_introduction', 'Main'],
-      ['congruent_triangles', 'Sss'],
-      ['congruent_triangles', 'Aas'],
-      ['related_angles', 'Alternate'],
-      ['quadrangles', 'Rectangle'],
-      ['adjacent_angles', 'Complementary'],
+      'triangle_introduction',
+      'congruent_triangles',
+      'related_angles',
+      'quadrangles',
+      'adjacent_angles',
     ]);
-    console.log(this.diagram.elements._qr)
+    console.log(this.diagram.elements._qr);
   }
 
   addSections() {
@@ -101,6 +100,7 @@ class Content extends LessonContent {
     common = {
       setSteadyState: () => {
         iso.setScenario(iTri, layout.iso.scenario.center);
+        console.log(qr)
       },
     };
     this.addSection(common, {
@@ -175,7 +175,7 @@ class Content extends LessonContent {
     this.addSection(common, {
       setContent: 'This line splits the triangle into two.',
       showOnly: [
-        iso, qr,
+        iso, qr, qr._congruent_triangles,
         left, left._line,
         right, right._line,
       ],

@@ -5,6 +5,7 @@ var details = {
   title: 'Area of a Triangle',
   uid: 'area_triangle',
   dependencies: ['area_introduction'],
+  qr: ['Main'],
 };
 
 module.exports = {

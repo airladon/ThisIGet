@@ -5,6 +5,7 @@ var details = {
   title: 'Triangles',
   uid: 'triangle_introduction',
   dependencies: ['related_angles'],
+  qr: ['Main'],
 };
 
 module.exports = {

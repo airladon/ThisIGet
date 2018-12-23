@@ -3,6 +3,7 @@ import Fig from 'figureone';
 // import LessonDescription from './lessonDescription';
 import getLessonIndex from '../../Lessons/index';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
+import PopupBoxCollection from '../../Lessons/LessonsCommon/DiagramCollectionPopup';
 
 const {
   Diagram, HTMLObject, Point, Transform,
@@ -96,6 +97,51 @@ function diagramCanvas(
     DiagramClass,
     id,
   };
+}
+
+class TempCollection extends DiagramElementCollection {
+  constructor(
+    diagram: Diagram,
+    layout: {},
+    transform: Transform,
+  ) {
+    super(transform, diagram.limits);
+  }
+}
+
+class QRLoading extends PopupBoxCollection {
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+    lessonName: string,
+  ) {
+    super(
+      diagram,
+      {},
+      transform,
+      'collection',
+      TempCollection,
+    );
+    this.hasTouchableElements = true;
+
+    this.setTitle(`Loading from ${lessonName}`);
+  }
+
+  show() {
+    this.setDiagramSize(2.5, 1.7);
+    super.show();
+    // const collection = this._collection;
+    // collection.showAll();
+    // collection.showAll();
+    // collection._tri2.showAll();
+    // collection._sideTri2Base.showAll();
+    // collection._sideTri2Height.showAll();
+    // collection._tri2AreaEqn.show();
+    // collection.eqns.tri2AreaEqn.showForm('10');
+    // collection.transform.updateScale(0.7, 0.7);
+    // collection.setPosition(this.layout.position);
+    this.diagram.animateNextFrame();
+  }
 }
 
 class Section {
@@ -653,7 +699,7 @@ class LessonContent {
   }
 
   loadQRs(
-    qrs: Array<[string, string]>,
+    qrs: Array<string>,
   ) {
     if (this.diagram.elements._qr == null) {
       this.diagram.addElements(
@@ -667,22 +713,21 @@ class LessonContent {
         ],
       );
     }
-    qrs.forEach((qr) => {
-      const [uid, qrid] = qr;
+    qrs.forEach((uid) => {
       if (this.diagram.elements._qr[`_${uid}`] == null) {
         this.diagram.addElements(this.diagram.elements._qr, [{
           name: `${uid}`, method: 'collection',
         }]);
       }
-      this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
-        name: `${qrid}`, method: 'collection',
-      }]);
-      this.getQR(uid, qrid);
+      // this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
+      //   name: `${qrid}`, method: 'collection',
+      // }]);
+      this.getQR(uid);
     });
   }
 
   getQR(
-    uid: string, qrid: string,
+    uid: string,
   ) {
     const index = getLessonIndex();
     let jsLink = '';
@@ -691,16 +736,28 @@ class LessonContent {
       if (uid === index[i].uid) {
         cssLink = `/static/dist/${index[i].link}/quickReference/lesson.css`;
         jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
+        if (index[i].qr != null && index[i].qr.length > 0) {
+          index[i].qr.forEach((qrid) => {
+            const loadingQR = new QRLoading(
+              this.diagram,
+              new Transform().translate(0, 0),
+              index[i].title,
+            );
+            loadingQR.hideAll();
+            this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = loadingQR;
+          });
+        }
         i = index.length;
       }
     }
     if (cssLink !== '') {
       loadRemoteCSS(`${uid}CSS`, cssLink, () => {
         loadRemote(`${uid}Script`, jsLink, () => {
-          const qr = new window.quickReference[uid][qrid](this.diagram);
-          this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
-          qr.hideAll();
-          // qr.show();
+          Object.keys(window.quickReference[uid]).forEach((qrid) => {
+            const qr = new window.quickReference[uid][qrid](this.diagram);
+            this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
+            qr.hideAll();
+          });
         });
       });
     }

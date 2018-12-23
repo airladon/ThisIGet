@@ -151,9 +151,9 @@ function attachQuickReference() {
     window.quickReference = {};
   }
   window.quickReference[details.details.uid] = {
-    Area: QRArea,
+    Main: QRArea,
     Square: QRSquare,
-    Rect: QRRect,
+    Rectangle: QRRect,
   };
 }
 

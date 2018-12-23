@@ -5,6 +5,11 @@ var details = {
   title: 'Quadrangles',
   uid: 'quadrangles',
   dependencies: ['congruent_triangles'],
+  qr: [
+    'Main',
+    'Rectangle',
+    'Square',
+  ],
 };
 
 module.exports = {

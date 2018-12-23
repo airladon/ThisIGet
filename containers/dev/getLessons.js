@@ -125,13 +125,13 @@ export default function getLessonIndex() {
       }
       outStr = `${outStr}\n    ],`;
       outStr = `${outStr}\n    ${enabled},`;
-      outStr = `${outStr}\n    {`;
-      if (qr != null) {
-        Object.keys(qr).forEach((key) => {
-          outStr = `${outStr}\n      ${key}: '${qr[key]}',`;
+      outStr = `${outStr}\n    [`;
+      if (qr != null && Array.isArray(qr)) {
+        qr.forEach((page) => {
+          outStr = `${outStr}\n      '${page}',`;
         });
       }
-      outStr = `${outStr}\n    },`;
+      outStr = `${outStr}\n    ],`;
       outStr = `${outStr}\n  ));`;
     }
   });

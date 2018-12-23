@@ -169,6 +169,6 @@ function attachQuickReference() {
     Supplementary: QRSupplementaryAngles,
     Explementary: QRExplementaryAngles,
   };
-};
+}
 
 attachQuickReference();
