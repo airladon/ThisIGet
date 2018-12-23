@@ -24,6 +24,7 @@ function loadRemote(
     }
     script.onload = () => {
       if (callback != null) {
+        console.log('got', url, scriptId)
         callback(scriptId, url);
       }
     };

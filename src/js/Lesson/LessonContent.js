@@ -120,7 +120,7 @@ class QRLoading extends PopupBoxCollection {
       {},
       transform,
       'collection',
-      TempCollection,
+      null, //TempCollection,
     );
     this.hasTouchableElements = true;
 
@@ -741,7 +741,7 @@ class LessonContent {
             const loadingQR = new QRLoading(
               this.diagram,
               new Transform().translate(0, 0),
-              index[i].title,
+              index[i].name,
             );
             loadingQR.hideAll();
             this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = loadingQR;
@@ -753,21 +753,21 @@ class LessonContent {
     if (cssLink !== '') {
       loadRemoteCSS(`${uid}CSS`, cssLink, () => {
         loadRemote(`${uid}Script`, jsLink, () => {
+          console.log('1', uid, window.quickReference[uid])
           Object.keys(window.quickReference[uid]).forEach((qrid) => {
-            const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`]
+            const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`];
             const { isShown } = element;
             const qr = new window.quickReference[uid][qrid](this.diagram);
             this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
             if (isShown) {
               qr.show();
               element.hideAll();
-              console.log('showing', uid)
             } else {
               qr.hideAll();
-              console.log('hiding', uid)
             }
             // console.log(qrid, 'done')
           });
+          console.log('2', uid)
         });
       });
     }

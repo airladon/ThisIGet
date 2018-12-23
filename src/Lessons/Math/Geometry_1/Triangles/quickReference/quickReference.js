@@ -66,6 +66,7 @@ function attachQuickReference() {
   window.quickReference[details.details.uid] = {
     Main: QRTriangle,
   };
+  console.log('From Triangles', details.details.uid, window.quickReference[details.details.uid])
 }
 
 attachQuickReference();
