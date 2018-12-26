@@ -17,7 +17,7 @@ const cssColorNames = [
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function commonLessonLayout() {
+export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
 

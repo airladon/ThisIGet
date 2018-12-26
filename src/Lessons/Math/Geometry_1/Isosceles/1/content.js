@@ -3,12 +3,8 @@ import Fig from 'figureone';
 import {
   LessonContent,
 } from '../../../../../js/Lesson/LessonContent';
-// import {
-//   click, centerV, highlight, clickWord,
-// } from '../../../../../js/tools/htmlGenerator';
-// import LessonDiagram from './diagram';
 import Definition from '../../../../LessonsCommon/tools/definition';
-import lessonLayout from './layout';
+import lessonLayout from '../common/layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import details from '../details';
@@ -97,9 +93,7 @@ class Content extends LessonContent {
       setSteadyState: () => {
         qr.show();
         qr._quadrangles.show();
-        // qr._quadrangles.show();
-        qr._quadrangles._Rectangle.show();
-        console.log(qr)
+        qr._quadrangles._Main.show();
       },
     });
 

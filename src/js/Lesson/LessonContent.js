@@ -738,11 +738,6 @@ class LessonContent {
         jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
         if (index[i].qr != null && index[i].qr.length > 0) {
           index[i].qr.forEach((qrid) => {
-            // const loadingQR = new QRLoading(
-            //   this.diagram,
-            //   new Transform().translate(0, 0),
-            //   index[i].name,
-            // );
             const loadingQR = this.diagram.shapes.collection();
             loadingQR.hideAll();
             this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = loadingQR;
@@ -754,7 +749,6 @@ class LessonContent {
     if (cssLink !== '') {
       loadRemoteCSS(`${uid}CSS`, cssLink, () => {
         loadRemote(`${uid}Script`, jsLink, () => {
-          console.log('1', uid, window.quickReference[uid])
           Object.keys(window.quickReference[uid]).forEach((qrid) => {
             const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`];
             const { isShown } = element;
@@ -767,9 +761,7 @@ class LessonContent {
             } else {
               qr.hideAll();
             }
-            // console.log(qrid, 'done')
           });
-          console.log('2', uid)
         });
       });
     }
