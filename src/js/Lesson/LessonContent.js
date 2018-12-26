@@ -759,7 +759,7 @@ class LessonContent {
             const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`];
             const { isShown } = element;
             const qr = new window.quickReference[uid][qrid](this.diagram);
-            this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = qr;
+            this.diagram.elements._qr[`_${uid}`].add(qrid, qr);
             if (isShown) {
               qr.show();
               qr.showAll();
