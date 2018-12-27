@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import makeTriangle from '../../../../LessonsCommon/tools/triangle';
 import type { TypeTriangle } from '../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // type TypeCorner = {
 //   _angle: TypeAngle;
 //   _line: DiagramElementPrimative;
@@ -16,7 +16,6 @@ const { Transform, normAngle } = Fig.tools.g2;
 const { DiagramElementPrimative, DiagramObjectLine } = Fig;
 
 export default class SSSCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   // _corner1: TypeCorner;
   // _corner2: TypeCorner;
   _line1: DiagramObjectLine;
@@ -230,7 +229,7 @@ export default class SSSCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

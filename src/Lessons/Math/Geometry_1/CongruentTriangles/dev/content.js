@@ -1,11 +1,12 @@
 // @flow
 import Fig from 'figureone';
 import { LessonContent } from '../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
 import lessonLayout from '../quickReference/layout';
 import details from '../details';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
 const { click, centerH } = Fig.tools.html;
 
@@ -19,7 +20,9 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    // this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {

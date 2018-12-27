@@ -767,6 +767,26 @@ class LessonContent {
     }
   }
 
+  showQR(uid: string, qrid: string) {
+    let uidToUse = uid;
+    if (!uid.startsWith('_')) {
+      uidToUse = `_${uid}`;
+    }
+
+    let qridToUse = qrid;
+    if (!qrid.startsWith('_')) {
+      qridToUse = `_${qrid}`;
+    }
+
+    if (this.diagram.elements._qr) {
+      if (this.diagram.elements._qr[uidToUse]) {
+        if (this.diagram.elements._qr[uidToUse][qridToUse]) {
+          this.diagram.elements._qr[uidToUse][qridToUse].show();
+        }
+      }
+    }
+  }
+
   // eslint-disable-next-line class-methods-use-this
   addInfoBox() {
     const container = document.createElement('div');

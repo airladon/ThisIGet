@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform, Point,
 // } from '../../../../../js/diagram/tools/g2';
@@ -19,7 +19,6 @@ const { Transform, Point, DiagramElementPrimative } = Fig;
 const { removeRandElement, rand } = Fig.tools.math;
 
 export default class CustomTriangleCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _triangle: {
     _point1: DiagramElementPrimative;
     _point2: DiagramElementPrimative;
@@ -57,7 +56,7 @@ export default class CustomTriangleCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

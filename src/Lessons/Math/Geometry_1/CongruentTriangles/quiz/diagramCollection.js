@@ -2,13 +2,14 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+// import LessonDiagram from './diagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTriangles';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import type {
   TypeTriangle, TypeTriangleAngle, TypeTriangleLabel, TypeTrianglePoints,
 } from '../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform, Point } = Fig;
 const {
@@ -24,7 +25,7 @@ export default class DiagramCollection extends CommonQuizMixin(CommonDiagramColl
   hint: 'checkDimensions' | 'incorrect';
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform('1 DiagramCollection'),
   ) {
     const layout = lessonLayout();

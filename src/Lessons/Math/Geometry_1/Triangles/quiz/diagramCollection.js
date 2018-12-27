@@ -6,9 +6,7 @@ import Fig from 'figureone';
 // } from '../../../../../js/diagram/tools/mathtools';
 import lessonLayout from './layout';
 
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import TriangleCollection from '../common/diagramCollectionTriangle';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
@@ -23,7 +21,7 @@ export default class DiagramCollection extends CommonQuizMixin(CommonDiagramColl
   angleToFind: number;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform('1 DiagramCollection'),
   ) {
     const layout = lessonLayout();

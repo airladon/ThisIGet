@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
 // } from '../../../../../js/diagram/tools/g2';
@@ -12,12 +12,11 @@ import { QRSupplementaryAngles } from '../../AdjacentAngles/quickReference/quick
 const { Transform } = Fig;
 
 export default class QuickReferenceCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _supplementary: QRSupplementaryAngles;
   _alternateAngles: QRAlternateAngles;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('QR Collection').scale(1, 1).translate(0, 0),
   ) {

@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform, Point,
 // } from '../../../../../js/diagram/tools/g2';
@@ -26,7 +26,6 @@ const {
 const { removeRandElement, rand } = Fig.tools.math;
 
 export default class TotalAngleTriangleCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _angleA: TypeAngle;
@@ -191,7 +190,7 @@ export default class TotalAngleTriangleCollection extends CommonDiagramCollectio
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

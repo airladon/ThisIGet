@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import QRTriangle from '../../Triangles/quickReference/quickReference';
 import { QRAsa, QRSss, QRAas } from '../quickReference/quickReference';
@@ -8,7 +8,6 @@ import { QRAsa, QRSss, QRAas } from '../quickReference/quickReference';
 const { Transform } = Fig;
 
 export default class QuickReferenceCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri: QRTriangle;
   _asa: QRAsa;
   _sss: QRSss;
@@ -16,7 +15,7 @@ export default class QuickReferenceCollection extends CommonDiagramCollection {
   // _alternateAngles: QRAlternateAngles;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('QR Collection').scale(1, 1).translate(0, 0),
   ) {

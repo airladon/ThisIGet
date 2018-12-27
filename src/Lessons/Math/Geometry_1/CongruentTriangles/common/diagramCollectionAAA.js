@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import makeTriangle from '../../../../LessonsCommon/tools/triangle';
 import type {
@@ -23,7 +23,6 @@ type TypeCorner = {
 } & DiagramElementCollection;
 
 export default class AAACollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _corner1: TypeCorner;
   _corner2: TypeCorner;
   _corner3: TypeCorner;
@@ -171,7 +170,7 @@ export default class AAACollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

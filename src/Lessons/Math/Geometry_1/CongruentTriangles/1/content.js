@@ -3,12 +3,12 @@ import Fig from 'figureone';
 import {
   LessonContent,
 } from '../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
-// import Definition from '../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import details from '../details';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
 const { Point } = Fig;
 const {
@@ -25,7 +25,15 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      'triangle_introduction',
+      // 'congruent_triangles',
+      // 'related_angles',
+      // 'quadrangles',
+      // 'adjacent_angles',
+    ]);
   }
 
   addSections() {
@@ -49,17 +57,27 @@ class Content extends LessonContent {
         </p>
       `),
     });
-
+    // const test = () => {
+    //   // // qr._triangle_introduction._Main.show();
+    //   // const q = qr._triangle_introduction._Main.temp.bind(qr._triangle_introduction._Main);
+    //   // q();
+    //   this.showQR('_triangle_introduction', '_Main');
+    // }
     common = {
       setContent: `
         <p>
-          For two triangles to be the same size and shape, and therefore |congruent|, the corresponding |side_lengths| and |angles| and of each triangle must be the same as the other.
+          For two triangles to be the same size and shape, and therefore |congruent|, the corresponding |side_lengths| and |angles| and of each triangle must be the same as the other |triangles12|.
         </p>
       `,
       setEnterState: () => {},
       modifiers: {
         side_lengths: click(tri.showLineLabels, [tri, null], colors.lineLabels),
         angles: click(tri.showAngleLabels, [tri, null], colors.angleLabels),
+        triangles12: clickWord(
+          'triangle\'s', 'id_triangles_angles11',
+          // test, [this], colors.diagram.action,
+          this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action,
+        ),
       },
       setInfo: [
         '<ul>',
@@ -76,6 +94,7 @@ class Content extends LessonContent {
         tri._tri1._line,
         tri._tri2,
         tri._tri2._line,
+        qr, qr._triangle_introduction,
       ],
     };
     this.addSection(common, {
@@ -83,6 +102,7 @@ class Content extends LessonContent {
         const lay = layout.triangles.congruent;
         const { scenario } = lay.tri1;
         tri.setTriangleScenarios(lay.points, lay.points, scenario, scenario);
+        console.log(qr)
       },
     });
     this.addSection(common, {
@@ -99,6 +119,9 @@ class Content extends LessonContent {
         tri.setFuturePositions();
         tri._tri1.showAll();
         tri._tri2.showAll();
+        qr.show();
+        qr._triangle_introduction.show();
+        qr._triangle_introduction._Main.show();
       },
     });
 
@@ -679,7 +702,7 @@ class Content extends LessonContent {
         sas.setCornerScenarios('ASAStart');
       },
       showOnly: [
-        sas, qr,
+        sas, qr, qr._triangle_introduction,
       ],
       show: [
         sas._corner1, sas._corner2,
@@ -772,9 +795,15 @@ class Content extends LessonContent {
     common.modifiers = {
       triangles: clickWord(
         'triangle\'s', 'id_triangles_angles',
-        qr._tri.show, [qr._tri], colors.diagram.action,
+        qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action,
       ),
     };
+    common.setSteadyState = () => 
+      {
+        // qr._triangle_introduction._Main.show();
+        const a = qr._triangle_introduction._Main.show.bind(qr._triangle_introduction._Main);
+        a();
+      }
     common.setInfo = [
       '<ul>',
       '<li>Touch the |triangles| text to show a reference tile explaining the concept and a link to the lesson.</li>',

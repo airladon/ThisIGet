@@ -1,8 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import { makeAngle } from '../../../../LessonsCommon/tools/angle';
 import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
 
@@ -23,7 +22,6 @@ type TypeCorner = {
 } & DiagramElementCollection;
 
 export default class SASCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _corner1: TypeCorner;
   _corner2: TypeCorner;
   _corner3: TypeCorner;
@@ -258,7 +256,7 @@ export default class SASCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

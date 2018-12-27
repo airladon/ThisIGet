@@ -1,15 +1,13 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-// import TriangleCollection from '../common/diagramCollectionTriangle';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTriangles';
 
 const { Transform, DiagramElementPrimative } = Fig;
 const { html } = Fig.tools;
-export default class DiagramCollection extends CommonLessonDiagramCollection {
+export default class DiagramCollection extends CommonDiagramCollection {
   _triangle: TotalAngleTriangleCollection;
   _label: DiagramElementPrimative;
   label: HTMLElement;
@@ -28,7 +26,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform('1 DiagramCollection'),
   ) {
     const layout = lessonLayout();

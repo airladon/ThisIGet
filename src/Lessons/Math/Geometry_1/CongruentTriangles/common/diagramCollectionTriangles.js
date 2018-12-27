@@ -1,12 +1,12 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import type { TypeScenario } from '../../../../LessonsCommon/DiagramCollection';
 import makeTriangle from '../../../../LessonsCommon/tools/triangle';
 import type {
   TypeTriangle, TypeTriangleAngle, TypeTriangleLabel,
 } from '../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, Point, normAngle,
@@ -19,7 +19,6 @@ const { DiagramObjectLine } = Fig;
 
 
 export default class TriangleCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _tri1: TypeTriangleAngle & TypeTriangle & TypeTriangleLabel;
@@ -111,7 +110,7 @@ export default class TriangleCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {

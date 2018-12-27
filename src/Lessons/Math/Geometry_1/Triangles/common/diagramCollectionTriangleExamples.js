@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
 // } from '../../../../../js/diagram/tools/g2';
@@ -12,7 +12,6 @@ import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection
 
 const { Transform, DiagramElementPrimative } = Fig;
 export default class TriangleExamplesCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri1: DiagramElementPrimative;
   _tri2: DiagramElementPrimative;
   _tri3: DiagramElementPrimative;
@@ -30,7 +29,7 @@ export default class TriangleExamplesCollection extends CommonDiagramCollection 
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {
