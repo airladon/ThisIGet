@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import {
   addTriRectEquation, addBorderEquation,
@@ -17,7 +17,7 @@ type TypeTri = {
 };
 
 export default class CircleAreaCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   // _selector: DiagramElementPrimative;
   _circle: DiagramElementPrimative;
   _circleFill: DiagramElementPrimative;
@@ -339,7 +339,7 @@ export default class CircleAreaCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {
