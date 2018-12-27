@@ -30,9 +30,6 @@ class Content extends LessonContent {
     this.loadQRs([
       'triangle_introduction',
       'congruent_triangles',
-      // 'related_angles',
-      // 'quadrangles',
-      // 'adjacent_angles',
     ]);
   }
 

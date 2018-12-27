@@ -312,8 +312,8 @@ class CircleCollection extends DiagramElementCollection {
     }]);
   }
 
-  constructor(diagram: Diagram, transform: Transform = new Transform()) {
-    super(transform, diagram.limits);
+  constructor(diagram: Diagram) {
+    super(new Transform().translate(layout.position), diagram.limits);
     this.diagram = diagram;
 
     const { shapes } = diagram;

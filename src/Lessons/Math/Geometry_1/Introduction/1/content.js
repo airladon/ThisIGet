@@ -3,12 +3,12 @@ import Fig from 'figureone';
 import {
   LessonContent,
 } from '../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
-// import { easeinout } from '../../../../js/diagram/tools/mathtools';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import lessonLayout from './layout';
 import details from '../details';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
 const {
   actionWord, onClickId,
@@ -26,7 +26,12 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId);
+    this.diagram = new CommonLessonDiagram({
+      htmlId,
+      vertexShader: 'withTexture',
+      fragmentShader: 'withTexture',
+    }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {

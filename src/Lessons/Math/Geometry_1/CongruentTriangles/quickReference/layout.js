@@ -51,13 +51,5 @@ export default function lessonLayout() {
       scenario: { position: new Point(1.4, -0.2), rotation: 0, scale: (0.9, 0.9) },
     },
   };
-  // layout.triangles.congruentRot = {
-  //   tri1: {
-  //     scenario: { position: new Point(-1.05, 0.4), rotation: 0 },
-  //   },
-  //   tri2: {
-  //     scenario: { position: new Point(1.05, 0.4), rotation: Math.PI },
-  //   },
-  // };
   return layout;
 }
