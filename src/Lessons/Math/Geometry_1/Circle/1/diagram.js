@@ -3,30 +3,26 @@ import Fig from 'figureone';
 import CircleCollection from './diagramCollectionCircle';
 import type { CircleCollectionType } from './diagramCollectionCircle';
 import lessonLayout from './layout';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Point, minAngleDiff, Transform } = Fig.tools.g2;
-const { Diagram } = Fig;
 const layout = lessonLayout();
 const { colors } = layout;
 const backgroundColor = colors.diagram.background;
 
 // $FlowFixMe
-class LessonDiagram extends Diagram {
+class LessonDiagram extends CommonLessonDiagram {
   elements: CircleCollectionType;
 
   constructor(id: string) {
     const { limits } = lessonLayout();
-    super(
-      `${id}`,
-      limits.left,
-      limits.bottom,
-      limits.width,
-      limits.height,
+    super({
+      htmlId: `${id}`,
+      limits,
       backgroundColor,
-      layout,
-      'withTexture',
-      'withTexture',
-    );
+      vertexShader: 'withTexture',
+      fragmentShader: 'withTexture',
+    }, lessonLayout());
   }
 
   createDiagramElements() {

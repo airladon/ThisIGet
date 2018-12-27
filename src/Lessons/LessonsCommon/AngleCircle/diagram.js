@@ -1,9 +1,10 @@
 // @flow
 import Fig from 'figureone';
 import type { circleType } from './AngleCircle';
+import CommonLessonDiagram from '../CommonLessonDiagram';
 
 const {
-  Diagram, DiagramElementCollection,
+  DiagramElementCollection,
 } = Fig;
 const {
   Point, minAngleDiff, Transform,
@@ -15,7 +16,7 @@ type typeElements = {
   _circle: circleType;
 } & DiagramElementCollection ;
 
-class AngleCircleDiagram extends Diagram {
+class AngleCircleDiagram extends CommonLessonDiagram {
   elements: typeElements;
   CircleCollection: typeElements;
 
@@ -23,14 +24,10 @@ class AngleCircleDiagram extends Diagram {
     const { limits } = lessonLayout;
     layout = lessonLayout;
     CircleCollectionClass = CircleCollection;
-    super(
-      `${id}`,
-      limits.left,
-      limits.bottom,
-      limits.width,
-      limits.height,
-      layout.colors.diagram.background,
-    );
+    super({
+      htmlId: `${id}`,
+      limits,
+    }, lessonLayout);
   }
 
   createDiagramElements() {

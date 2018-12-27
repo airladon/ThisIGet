@@ -2,9 +2,11 @@
 import Fig from 'figureone';
 // import type { TypeRotationDirection } from '../../../js/diagram/tools/g2';
 import type { TypeRotationDirection } from 'figureone';
+import CommonLessonDiagram from '../CommonLessonDiagram';
+import CommonDiagramCollection from '../DiagramCollection';
 
 const {
-  Diagram, DiagramElementPrimative, DiagramElementCollection, DiagramFont,
+  DiagramElementPrimative, DiagramElementCollection, DiagramFont,
 } = Fig;
 const {
   Point, Transform, minAngleDiff, normAngle, polarToRect,
@@ -68,10 +70,10 @@ export type angleCircleType = {
   _circle: circleType;
   _angleText: angleTextType;
   +varState: varStateType;
-  diagram: Diagram;
+  diagram: CommonLessonDiagram;
 };
 
-class AngleCircle extends DiagramElementCollection {
+class AngleCircle extends CommonDiagramCollection {
   layout: Object;
   colors: Object;
   shapes: Object;
@@ -88,7 +90,7 @@ class AngleCircle extends DiagramElementCollection {
     max: number,
   } | null;
 
-  diagram: Diagram;
+  diagram: CommonLessonDiagram;
 
 
   makeLine(
@@ -377,8 +379,12 @@ class AngleCircle extends DiagramElementCollection {
     return circle;
   }
 
-  constructor(layout: Object, diagram: Diagram, transform: Transform = new Transform()) {
-    super(transform, diagram.limits);
+  constructor(
+    layout: Object,
+    diagram: CommonLessonDiagram,
+    transform: Transform = new Transform(),
+  ) {
+    super(diagram, layout, transform);
     this.diagram = diagram;
     this.varState = {
       radialLines: 4,

@@ -3,9 +3,11 @@ import Fig from 'figureone';
 import type { TypeRotationDirection } from 'figureone';
 import lessonLayout from './layout';
 import textureMap from '../../../../LessonsCommon/images/textureMaps/circles.png';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const {
-  Diagram, DiagramElementCollection, DiagramElementPrimative,
+  DiagramElementCollection, DiagramElementPrimative,
 } = Fig;
 const {
   Point, Transform, minAngleDiff, normAngle, Rect,
@@ -471,7 +473,7 @@ export type CircleCollectionType = {
   _straightCircumference: StraightCircumferenceType;
  } & DiagramElementCollection;
 
-class CircleCollection extends DiagramElementCollection {
+class CircleCollection extends CommonDiagramCollection {
   _circle: circleCollectionType;
   _ball: DiagramElementPrimative;
   _wheel: DiagramElementPrimative;
@@ -494,10 +496,10 @@ class CircleCollection extends DiagramElementCollection {
   };
 
   numSections: Array<number>;
-  diagram: Diagram;
+  diagram: CommonLessonDiagram;
 
-  constructor(diagram: Diagram, transform: Transform = new Transform()) {
-    super(transform, diagram.limits);
+  constructor(diagram: CommonLessonDiagram, transform: Transform = new Transform()) {
+    super(diagram, layout, transform);
     this.diagram = diagram;
     this.varState = {
       shapeTurn: 0,
