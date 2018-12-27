@@ -40,7 +40,7 @@ class Content extends LessonContent {
     const sas = diag._sas;
     const sss = diag._sss;
     const ssa = diag._ssa;
-    const qr = diag._qr;
+    // const qr = diag._qr;
     let common = {};
     this.addSection({
       title: 'Introduction',

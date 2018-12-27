@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import {
   makeAnglesClose, checkElementsForParallel,
@@ -16,7 +16,6 @@ const { DiagramElementCollection, DiagramObjectLine } = Fig;
 export default class ParallelCollection extends CommonDiagramCollection {
   layout: Object;
   colors: Object;
-  diagram: LessonDiagram;
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _line3: DiagramObjectLine;
@@ -71,7 +70,7 @@ export default class ParallelCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

@@ -1,13 +1,11 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import { makeAngle } from '../../../../LessonsCommon/tools/angle';
 import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform, Point, randomPoint } = Fig.tools.g2;
 const { DiagramElementPrimative, DiagramElementCollection } = Fig;
@@ -171,7 +169,7 @@ export default class DiagramCollection extends CommonQuizMixin(CommonDiagramColl
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform('1 DiagramCollection'),
   ) {
     const layout = lessonLayout();

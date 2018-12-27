@@ -749,6 +749,12 @@ function () {
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["isTouchDevice"])();
     this.animateNextFrame();
+
+    if (optionsToUse.elements) {
+      // eslint-disable-next-line new-cap
+      this.elements = new optionsToUse.elements(this);
+      this.elements.diagramLimits = this.limits;
+    }
   }
 
   _createClass(Diagram, [{

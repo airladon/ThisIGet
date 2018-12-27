@@ -1,7 +1,6 @@
 // @flow
 import Fig from 'figureone';
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
@@ -10,7 +9,7 @@ const { Transform, Point, DiagramElementCollection } = Fig;
 const { rand, removeRandElement, roundNum } = Fig.tools.math;
 
 export default class QuizAngle1Collection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   _lines: ThreeLinesCollection;
   futurePositions: Object;
   angleToFind: number;
@@ -27,7 +26,7 @@ export default class QuizAngle1Collection extends CommonQuizMixin(CommonDiagramC
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

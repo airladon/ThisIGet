@@ -3,9 +3,9 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 
 import { addSelectorHTML } from '../../../../LessonsCommon/tools/selector';
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-
+// // eslint-disable-next-line import/no-cycle
+// import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import OppositeCollection from '../common/diagramCollectionOpposite';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
@@ -32,7 +32,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();

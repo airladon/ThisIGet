@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import type { TypeDiagramOptions } from 'figureone';
 import Lesson from '../../js/Lesson/Lesson';
+import CommonDiagramCollection from './DiagramCollection';
 
 const { Diagram, Rect } = Fig;
 const { joinObjects } = Fig.tools.misc;
@@ -14,6 +15,7 @@ export type TypeCommonLessonDiagram = {
 export default class CommonLessonDiagram extends Diagram {
   layout: Object;
   lesson: Lesson;
+  elements: CommonDiagramCollection;
 
   constructor(diagramOptions: TypeDiagramOptions, layout: {
     limits?: Rect,
