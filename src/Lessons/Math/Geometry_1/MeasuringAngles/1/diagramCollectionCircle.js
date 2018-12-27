@@ -4,9 +4,10 @@ import AngleCircle from '../../../../LessonsCommon/AngleCircle/AngleCircle';
 import type { circleType, varStateType }
   from '../../../../LessonsCommon/AngleCircle/AngleCircle';
 import lessonLayout from './layout';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  Diagram, DiagramElementPrimative, DiagramElementCollection,
+  DiagramElementPrimative, DiagramElementCollection,
   Point, Transform, EquationLegacy, EquationForm,
 } = Fig;
 
@@ -302,7 +303,10 @@ class CircleCollection extends AngleCircle {
     this._circle.add('radiusToArc', this.makeRadiusToArc());
   }
 
-  constructor(diagram: Diagram, transform: Transform = new Transform()) {
+  constructor(
+    diagram: CommonLessonDiagram,
+    transform: Transform = new Transform(),
+  ) {
     super(lessonLayout(), diagram, transform);
     this.diagram = diagram;
     this.varState = {
