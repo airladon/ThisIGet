@@ -15,6 +15,7 @@ export type TypeCommonLessonDiagram = {
 export default class CommonLessonDiagram extends Diagram {
   layout: Object;
   lesson: Lesson;
+  // $FlowFixMe
   elements: CommonDiagramCollection;
 
   constructor(diagramOptions: TypeDiagramOptions, layout: {

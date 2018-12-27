@@ -3,12 +3,13 @@ import Fig from 'figureone';
 import {
   LessonContent, initializeItemSelector,
 } from '../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
 // import HTMLEquation from '../../../../js/diagram/DiagramElements/Equation/HTMLEquation';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import lessonLayout from './layout';
-// import details from '../details';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollectionCircle';
+
 
 const {
   clickWord, onClickId, centerV,
@@ -39,7 +40,8 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {

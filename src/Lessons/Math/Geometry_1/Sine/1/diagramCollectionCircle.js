@@ -6,9 +6,9 @@ import type {
   SinCosVarStateType, SinCosCircleAngleAnnotationType,
 } from '../../../../LessonsCommon/SinCosCircle/SinCosCircle';
 import lessonLayout from './layout';
-
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 const {
-  Diagram, Transform, Point, Rect, DiagramElementCollection,
+  Transform, Point, Rect, DiagramElementCollection,
   DiagramElementPrimative, EquationForm,
 } = Fig;
 type bowType = {
@@ -339,8 +339,8 @@ class SineCollection extends SinCosCircle {
     this._circle.add('cosineSymmetry', this.makeCosineSymmetry());
   }
 
-  constructor(diagram: Diagram, transform: Transform = new Transform()) {
-    super(lessonLayout(), diagram, transform);
+  constructor(diagram: CommonLessonDiagram, transform: Transform = new Transform()) {
+    super(diagram, lessonLayout(), transform);
     this.addToCircle();
     // this.add('cosineEqn', this.makeCosineEquation());
 

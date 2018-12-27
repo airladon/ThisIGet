@@ -2,9 +2,10 @@
 import Fig from 'figureone';
 import AngleCircle from '../AngleCircle/AngleCircle';
 import type { circleType, varStateType, angleAnnotationType } from '../AngleCircle/AngleCircle';
+import CommonLessonDiagram from '../CommonLessonDiagram';
 
 const {
-  Diagram, DiagramElementPrimative, DiagramElementCollection,
+  DiagramElementPrimative, DiagramElementCollection,
   Transform, Point, DiagramFont, EquationForm,
 } = Fig;
 const { polarToRect } = Fig.tools.g2;
@@ -663,8 +664,8 @@ export class SinCosCircle extends AngleCircle {
     this.diagram.animateNextFrame();
   }
 
-  constructor(layout: Object, diagram: Diagram, transform: Transform = new Transform()) {
-    super(layout, diagram, transform);
+  constructor(layout: Object, diagram: CommonLessonDiagram, transform: Transform = new Transform()) {
+    super(diagram, layout, transform);
     this.diagram = diagram;
     this.varState = {
       radialLines: 4,
