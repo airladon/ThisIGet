@@ -1,17 +1,13 @@
 // @flow
 import Fig from 'figureone';
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
 export default class CommonLessonDiagramCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
-
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform(),
   ) {

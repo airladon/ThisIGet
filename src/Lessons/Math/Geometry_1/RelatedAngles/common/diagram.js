@@ -15,15 +15,10 @@ export default class CommonLessonDiagram extends Diagram {
 
   constructor(id: string, layout: Object) {
     const { limits } = layout;
-    super(
-      `${id}`,
-      limits.left,
-      limits.bottom,
-      limits.width,
-      limits.height,
-      layout.colors.diagram.background,
-      layout,
-    );
+    super({
+      htmlId: `${id}`,
+      limits,
+    }, layout);
   }
 
   createDiagramElements() {
