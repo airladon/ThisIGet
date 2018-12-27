@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import { makeAngle } from '../../../../LessonsCommon/tools/angle';
 import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
@@ -18,7 +18,6 @@ const {
 } = Fig;
 
 export default class RectCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   abEqn: TypeABEquation;
   adEqn: TypeADEquation;
   bcEqn: TypeBCEquation;
@@ -307,7 +306,7 @@ export default class RectCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

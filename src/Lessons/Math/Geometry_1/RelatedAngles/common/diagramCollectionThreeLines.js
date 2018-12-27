@@ -8,6 +8,7 @@ import type {
 } from './tools';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import { showAngles } from '../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, Point, Diagram, DiagramObjectLine, EquationLegacy,
@@ -17,7 +18,6 @@ const {
 export default class ThreeLinesCollection extends CommonDiagramCollection {
   layout: Object;
   colors: Object;
-  diagram: Diagram;
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _line3: DiagramObjectLine;
@@ -128,7 +128,7 @@ export default class ThreeLinesCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: Diagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().scale(1, 1).rotate(0).translate(0, 0),
   ) {

@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 // import { makeLine } from '../../../../LessonsCommon/tools/line';
@@ -12,7 +12,6 @@ const {
 } = Fig;
 
 export default class SquareCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _square: {
     _rightAngle1: TypeAngle;
     _rightAngle2: TypeAngle;
@@ -93,7 +92,7 @@ export default class SquareCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

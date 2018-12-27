@@ -1,6 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+// import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const {
@@ -9,7 +10,6 @@ const {
 // import { makeLine } from '../../../../LessonsCommon/tools/line';
 
 export default class QuadCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _quad1: DiagramElementPrimative;
   _quad2: DiagramElementPrimative;
   _quad3: DiagramElementPrimative;
@@ -63,7 +63,7 @@ export default class QuadCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

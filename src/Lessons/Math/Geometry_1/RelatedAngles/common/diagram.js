@@ -1,15 +1,14 @@
 // @flow
 import Fig from 'figureone';
 import Lesson from '../../../../../js/Lesson/Lesson';
-
-const { Diagram } = Fig;
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 export type LessonDiagramType = {
   layout: Object;
   lesson: Lesson;
 } & Diagram;
 
-export default class CommonLessonDiagram extends Diagram {
+export default class RelatedCommonLessonDiagram extends CommonLessonDiagram {
   layout: Object;
   lesson: Lesson;
 

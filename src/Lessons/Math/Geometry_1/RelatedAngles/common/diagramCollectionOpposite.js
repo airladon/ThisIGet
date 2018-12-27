@@ -6,9 +6,10 @@ import type { TypeLabeledAngle, TypeSupplementaryAngle } from './tools';
 import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import { showAngles } from '../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  Diagram, Transform, DiagramElementCollection, DiagramObjectLine,
+  Transform, DiagramElementCollection, DiagramObjectLine,
   EquationLegacy,
 } = Fig;
 const { minAngleDiff } = Fig.tools.g2;
@@ -16,7 +17,6 @@ const { minAngleDiff } = Fig.tools.g2;
 export default class OppositeCollection extends CommonDiagramCollection {
   layout: Object;
   colors: Object;
-  diagram: Diagram;
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _angleA: TypeLabeledAngle;
@@ -170,7 +170,7 @@ export default class OppositeCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: Diagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
