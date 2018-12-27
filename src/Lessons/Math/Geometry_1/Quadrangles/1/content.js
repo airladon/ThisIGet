@@ -27,6 +27,12 @@ class Content extends LessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new LessonDiagram(htmlId, layout);
+    this.loadQRs([
+      'triangle_introduction',
+      'congruent_triangles',
+      'adjacent_angles',
+      'related_angles',
+    ]);
   }
 
   addSections() {
@@ -34,12 +40,12 @@ class Content extends LessonContent {
     const quad = diag._quad;
     const rect = diag._rect;
     const square = diag._square;
-    const qr = diag._qr;
+    // const qr = diag._qr;
     let common = {};
 
 
     let mods = {
-      add_up_to_180: clickWord('add up to 180º', 'add_up_to_180', qr._tri.show, [qr._tri], colors.diagram.action),
+      add_up_to_180: clickWord('add up to 180º', 'add_up_to_180', this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action),
       a: highlight(colors.angles),
       b: highlight(colors.angles),
     };
@@ -56,7 +62,7 @@ class Content extends LessonContent {
 
 
     mods = {
-      Complementary: click(qr._comp.show, [qr._comp], colors.diagram.action),
+      Complementary: click(this.showQR, [this, 'adjacent_angles', 'Complementary'], colors.diagram.action),
       a: highlight(colors.angles),
       d: highlight(colors.angles),
     };
@@ -87,7 +93,7 @@ class Content extends LessonContent {
     common = {
       setContent: '',
       showOnly: [
-        quad, quad._quad1, quad._quad2, quad._quad3, qr,
+        quad, quad._quad1, quad._quad2, quad._quad3,
       ],
       show: [],
       hide: [],
@@ -115,7 +121,7 @@ class Content extends LessonContent {
         'Similar to a |triangle|, all the angles in a quadrangle are related to each other and will |always add up to the same angle|.',
       ],
       modifiers: {
-        triangle: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        triangle: click(this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action),
       },
       setInfo: [
         '<ul>',
@@ -134,7 +140,7 @@ class Content extends LessonContent {
     `;
     this.addSection(common);
 
-    common.showOnly = [qr];
+    common.showOnly = [];
     common.show = [quad];
     this.addSection(common);
 
@@ -149,7 +155,7 @@ class Content extends LessonContent {
         As each |triangle|, has a total angle of 180º, the total angle of a quadrangle must be two times that, or |360º|.
       </p>`,
       modifiers: {
-        triangle: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        triangle: click(this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action),
       },
       setInfo: infoList([
         'Touch |triangle| to see more details on the triangle lesson.',
@@ -186,7 +192,7 @@ class Content extends LessonContent {
         // rect.resetColors();
       },
       showOnly: [
-        qr, rect, rect._rect,
+        rect, rect._rect,
         rect._rect._lineA, rect._rect._lineA._line,
         rect._rect._lineB, rect._rect._lineB._line,
         rect._rect._lineC, rect._rect._lineC._line,
@@ -283,7 +289,7 @@ class Content extends LessonContent {
     });
 
     common.modifiers = {
-      interior_angles: click(qr._interior.show, [qr._interior], colors.diagram.action),
+      interior_angles: click(this.showQR, [this, 'related_angles', 'Interior'], colors.diagram.action),
     };
 
     common.setContent = `<p>
@@ -291,7 +297,7 @@ class Content extends LessonContent {
     </p>`;
     this.addSection(common, {
       modifiers: {
-        interior_angles: click(qr._interior.show, [qr._interior], colors.diagram.action),
+        interior_angles: click(this.showQR, [this, 'related_angles', 'Interior'], colors.diagram.action),
         line: click(rect.pulseLine, [rect, 'B'], colors.lines),
         two_lines: click(rect.pulseLine, [rect, ['A', 'C']], colors.lines),
       },
@@ -369,7 +375,7 @@ class Content extends LessonContent {
     });
 
     common.showOnly = [
-      qr, rect, rect._rect,
+      rect, rect._rect,
       rect._rect._lineA, rect._rect._lineA._line,
       rect._rect._lineB, rect._rect._lineB._line,
       rect._rect._lineC, rect._rect._lineC._line,
@@ -383,7 +389,7 @@ class Content extends LessonContent {
     </p>`;
     this.addSection(common);
     common.showOnly = [
-      qr, rect, rect._rect, rect._rect._lineE, rect._rect._lineE._line,
+      rect, rect._rect, rect._rect._lineE, rect._rect._lineE._line,
       rect._rect._lineA, rect._rect._lineA._line,
       rect._rect._lineB, rect._rect._lineB._line,
       rect._rect._lineC, rect._rect._lineC._line,
@@ -405,7 +411,7 @@ class Content extends LessonContent {
       d: highlight(colors.angles),
       _90ma: highlightWord('90º - a', colors.angles),
       third_angle: click(rect.pulseRightAngles, [rect], colors.angles),
-      _180: clickWord('180º', 'id__lesson__rectangle_180', qr._tri.show, [qr._tri], colors.diagram.action),
+      _180: clickWord('180º', 'id__lesson__rectangle_180', this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action),
     };
 
     this.addSection(common);
@@ -716,7 +722,7 @@ class Content extends LessonContent {
       When two triangles have |two_angles_and_side_between| them the same, then they are |congruent|.
     </p>`;
     common.modifiers = {
-      congruent: click(qr._asa.show, [qr._asa], colors.diagram.action),
+      congruent: click(this.showQR, [this, 'congruent_triangles', 'Asa'], colors.diagram.action),
       two_angles_and_side_between: click(rect.toggleASAColors, [rect], colors.diagram.action),
     };
     this.addSection(common, {
@@ -760,7 +766,7 @@ class Content extends LessonContent {
     this.addSection(common);
 
     common.showOnly = [
-      qr, rect, rect._rect,
+      rect, rect._rect,
     ];
     common.show = [
       rect._rect._rightAngle1,
@@ -812,7 +818,7 @@ class Content extends LessonContent {
       modifiers: {},
       setEnterState: () => {},
       showOnly: [
-        qr, square, square._square,
+        square, square._square,
       ],
       show: [
         square._square._rightAngle1, square._square._rightAngle2,

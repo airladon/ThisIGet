@@ -59,7 +59,7 @@ export default function makeEquationLabel(
   function setText(text: string) {
     const form = eqn.getCurrentForm();
     if (form != null) {
-      const key = Object.keys(form.elements.elements)[0]; // $FlowFixMe
+      const key = Object.keys(form.elements)[0]; // $FlowFixMe
       const textObject = form.elements[key].drawingObject;
       if (textObject != null) {
         textObject.setText(text);

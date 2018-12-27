@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../common/diagram';
+import ParallelCommonLessonDiagram from '../common/diagram';
 
 // eslint-disable-next-line import/no-cycle
 import DiagramCollection from './diagramCollection';
 
 const { Transform } = Fig;
 
-class LessonDiagram extends CommonLessonDiagram {
+class LessonDiagram extends ParallelCommonLessonDiagram {
   elements: DiagramCollection;
 
   createDiagramElements() {
