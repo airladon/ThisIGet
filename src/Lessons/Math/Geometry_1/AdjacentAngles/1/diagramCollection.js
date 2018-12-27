@@ -1,12 +1,10 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
 import AdjacentCollection from '../common/diagramCollectionAdjacent';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 import type { TypeUnits } from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform } = Fig;
 
@@ -15,7 +13,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   units: TypeUnits;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();

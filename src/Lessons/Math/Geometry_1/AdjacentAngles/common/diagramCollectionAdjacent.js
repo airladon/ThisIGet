@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import type { TypeScenario } from '../../../../LessonsCommon/DiagramCollection';
 // import { makeLine } from '../../../../LessonsCommon/tools/line';
@@ -17,8 +17,7 @@ type TypeAdjacentAngle = 'adjacent' | 'supplementary' | 'complementary' | 'exple
 type TypeEquationForm = 'add' | 'a' | 'b';
 
 
-export default class AdjacentCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
+export default class AdjacentCollection extends CommonDiagramCollection { 
   _lines: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
@@ -209,7 +208,7 @@ export default class AdjacentCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('adjacent angles collection').scale(1, 1).rotate(0).translate(0, 0),
   ) {
