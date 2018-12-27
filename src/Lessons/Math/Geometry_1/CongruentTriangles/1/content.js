@@ -92,6 +92,7 @@ class Content extends LessonContent {
       setEnterState: () => {
         const lay = layout.triangles.congruent;
         const { scenario } = lay.tri1;
+        tri.setTriangleScenarios(lay.points, lay.points, scenario, scenario);
         // qr.hideAll();
       },
     });
