@@ -1,28 +1,16 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import { loadRemote, loadRemoteCSS } from '../../../../../js/tools/misc';
-// import {
-//   Transform, Rect, // Point,
-// } from '../../../../../js/diagram/tools/g2';
-// import DiagramObjectAngle from '../../../../../js/diagram/DiagramObjects/Angle';
-// import { DiagramObjectLine } from '../../../../../js/diagram/DiagramObjects/Line';
-// import { joinObjects } from '../../../../../js/tools/tools';
-// import {
-//   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
-
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import getLessonIndex from '../../../../index';
 
-// const tools = require('../../../../../dd');
-// import { mathtools } from 'dd';
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  Transform, Rect,
+  Transform,
 } = Fig;
 
 export default class IsocelesCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri: {
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
@@ -81,33 +69,20 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   _splitLine1: DiagramObjectLine;
   _splitLine2: DiagramObjectLine;
 
-  addGrid() {
-    const lay = this.layout.grid;
-    const grid = this.diagram.shapes.grid(
-      new Rect(
-        -lay.length / 2, -lay.height / 2,
-        lay.length, lay.height,
-      ),
-      lay.spacing, lay.spacing, 2, this.layout.colors.grid,
-      new Transform().translate(lay.position),
-    );
-    this.add('grid', grid);
-  }
-
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform('Iso').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.iso.position);
-    this.addGrid();
     this.diagram.addElements(this, this.layout.addElements);
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
     console.log(this);  // eslint-disable-line
     console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
-    this.loadJS();
+    // this.loadJS();
+    // this.getQR('related_angles', 'Opposite');
     this.hasTouchableElements = true;
   }
 
@@ -115,14 +90,15 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   loadJS() {
     loadRemoteCSS(
       'areaCSS',
-      '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.css',
+      '/static/dist/Lessons/Math/Geometry_1/AdjacentAngles/quickReference/lesson.css',
       () => {
         loadRemote(
           'areaScript',
-          '/static/dist/Lessons/Math/Geometry_1/Area/quickReference/lesson.js',
+          '/static/dist/Lessons/Math/Geometry_1/AdjacentAngles/quickReference/lesson.js',
           () => {
             // eslint-disable-next-line
-            const qrArea = new window.quickReference.area(this.diagram);
+            console.log(window.quickReference)
+            const qrArea = new window.quickReference.adjacent_angles.Complementary(this.diagram);
             this.diagram.elements.add('qr', qrArea);
             // qrArea.setFirstTransform();
             // $FlowFixMe
@@ -134,20 +110,30 @@ export default class IsocelesCollection extends CommonDiagramCollection {
         );
       },
     );
+  }
 
-    // // Get the first script element on the page
-    // const ref = window.document.getElementsByTagName('script')[0];
-
-    // // Create a new script element
-    // const script = window.document.createElement('script');
-
-    // // Set the script element `src`
-    // script.src = '/static/test.js';
-    // script.type = 'text/javascript';
-
-    // // Inject the script into the DOM
-    // ref.parentNode.insertBefore(script, ref);
-    // script.onload = () => {console.log('asdf')};
+  getQR(uid: string, qrid: string) {
+    const index = getLessonIndex();
+    let jsLink = '';
+    let cssLink = '';
+    for (let i = 0; i < index.length; i += 1) {
+      if (uid === index[i].uid) {
+        cssLink = `/static/dist/${index[i].link}/quickReference/lesson.css`;
+        jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
+        i = index.length;
+      }
+    }
+    if (cssLink !== '') {
+      loadRemoteCSS(`${uid}CSS`, cssLink, () => {
+        loadRemote(`${uid}Script`, jsLink, () => {
+          const qr = new window.quickReference[uid][qrid](this.diagram);
+          this.diagram.elements.add(qrid, qr);
+          // $FlowFixMe
+          this.diagram.elements[`_${qrid}`].hideAll();
+          qr.show();
+        });
+      });
+    }
   }
 
   pulseEqualSides() {

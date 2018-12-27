@@ -3,15 +3,13 @@ import Fig from 'figureone';
 import {
   LessonContent,
 } from '../../../../../js/Lesson/LessonContent';
-// import {
-//   click, centerV, highlight, clickWord,
-// } from '../../../../../js/tools/htmlGenerator';
-import LessonDiagram from './diagram';
 import Definition from '../../../../LessonsCommon/tools/definition';
-import lessonLayout from './layout';
+import lessonLayout from '../common/layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
 import details from '../details';
+import DiagramCollection from './diagramCollection';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   click, centerV, highlight, clickWord,
@@ -28,13 +26,20 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      'triangle_introduction',
+      'congruent_triangles',
+      'related_angles',
+      'quadrangles',
+      'adjacent_angles',
+    ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
     const iso = diag._iso;
-    const qr = diag._qr;
     const iTri = iso._tri;
     const left = iso._left;
     const right = iso._right;
@@ -60,6 +65,9 @@ class Content extends LessonContent {
         'There are several |types of triangle| commonly found in many applications.',
         'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
       ]),
+      setSteadyState: () => {
+        // qr._quadrangles._Rectangle.show();
+      },
       // setSteadyState: () => {
       // iso.show();
       // equil.showAll();
@@ -80,6 +88,11 @@ class Content extends LessonContent {
       setContent: centerV([
         'Triangles are commonly grouped by either their |side lengths| or |angles|.',
       ]),
+      setSteadyState: () => {
+        // qr.show();
+        // qr._quadrangles.show();
+        // qr._quadrangles._Main.show();
+      },
     });
 
 
@@ -160,14 +173,12 @@ class Content extends LessonContent {
     this.addSection(common, {
       setContent: 'This line splits the triangle into two.',
       showOnly: [
-        iso, qr,
+        iso,
         left, left._line,
         right, right._line,
       ],
       show: [
         left._side31, right._side23, left._side23,
-        // left._side12, left._side31, left._side23,
-        // right._side12, right._side23,
       ],
       transitionFromPrev: (done) => {
         iso.moveToScenario(left, layout.iso.left.scenario.left, 1, done);
@@ -186,10 +197,10 @@ class Content extends LessonContent {
     common = {
       setContent: 'The |Side_Side_Side| triangle congruency test says that if two triangles share the same side lengths, then their |angles| are also |equal|.',
       modifiers: {
-        Side_Side_Side: click(qr._sss.show, [qr._sss], colors.diagram.action),
+        Side_Side_Side: click(this.showQR, [this, 'congruent_triangles', 'Sss'], colors.diagram.action),
       },
       showOnly: [
-        iso, qr,
+        iso,
         left, left._line,
         right, right._line,
       ],
@@ -232,7 +243,7 @@ class Content extends LessonContent {
         c: highlight(colors.angles),
         C_: highlight(colors.lines),
       },
-      showOnly: [iso, qr],
+      showOnly: [iso],
       show: [left, right],
       setSteadyState: () => {
         iso.setScenario(left, layout.iso.left.scenario.left);
@@ -241,7 +252,7 @@ class Content extends LessonContent {
     };
     this.addSection(common);
     common.showOnly = [
-      iso, qr,
+      iso,
       left, left._line,
       right, right._line,
     ];
@@ -266,7 +277,7 @@ class Content extends LessonContent {
         iso._split.showAll();
       },
     });
-    common.showOnly = [iso, iTri, iTri._line, qr];
+    common.showOnly = [iso, iTri, iTri._line];
     common.show = [
       iTri._angle1, iTri._angle2,
       iTri._side12, iTri._side23, iTri._side31,
@@ -285,7 +296,7 @@ class Content extends LessonContent {
       },
     });
 
-    common.showOnly = [iso, iTri, iTri._line, qr];
+    common.showOnly = [iso, iTri, iTri._line];
     common.show = [
       iTri._angle1, iTri._angle2,
       iTri._side12, iTri._side23, iTri._side31,
@@ -300,11 +311,11 @@ class Content extends LessonContent {
       setContent: 'However, if we |only know| a triangle has two |equal_angles|, can we also show it has two equal sides?',
       modifiers: {
         equal_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
-        rectangle: click(qr._rect.show, [qr._rect], colors.construction),
+        rectangle: click(this.showQR, [this, 'quadrangles', 'Rectangle'], colors.construction),
         right_angles: highlight(colors.angles),
         right_angles_: click(iso.pulseRectRightAngles, [iso], colors.angles),
-        Alternate_Angles: click(qr._alt.show, [qr._alt], colors.diagram.action),
-        Angle_Angle_Side: click(qr._aas.show, [qr._aas], colors.diagram.action),
+        Alternate_Angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.diagram.action),
+        Angle_Angle_Side: click(this.showQR, [this, '_congruent_triangles', '_Aas'], colors.diagram.action),
         two_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
         two_sides: click(iso.pulseEqualSides, [iso], colors.equalLength),
         triangles_: click(iso.pulseRectTriangles, [iso], colors.construction),
@@ -336,10 +347,7 @@ class Content extends LessonContent {
     // });
 
     common.setContent = 'Start by drawing a |rectangle| around the triangle.';
-    // common.modifiers = {
-    //   rectangle: click(qr._rect.show, [qr._rect], colors.construction),
-    // };
-    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2, qr];
+    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2];
     this.addSection(common);
     common.show = [
       iTri._angle1, iTri._angle2,
@@ -387,7 +395,7 @@ class Content extends LessonContent {
 
     common.setContent = 'Let\'s |simplify| the diagram to consider just the two outside triangles.';
     this.addSection(common);
-    common.showOnly = [iso, rec, rec._tri1, rec._tri2, qr];
+    common.showOnly = [iso, rec, rec._tri1, rec._tri2];
     common.show = [
       rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
       rec._tri1._angle2, rec._tri2._angle2,
@@ -418,7 +426,7 @@ class Content extends LessonContent {
 
     common.setContent = 'Let\'s show the |original triangle|, and remove the rectangle.';
     this.addSection(common);
-    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2, qr];
+    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2];
     common.show = [
       iTri._angle1, iTri._angle2, iTri._side23, iTri._side31,
       rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
@@ -462,7 +470,8 @@ class Content extends LessonContent {
       modifiers: {
         _180: clickWord(
           '180º', 'id_important_triangles_sum1',
-          qr._tri.show, [qr._tri], colors.diagram.action,
+          this.showQR, [this, '_triangle_introduction', '_Main'],
+          colors.diagram.action,
         ),
         angles: highlight(colors.angles),
       },
@@ -480,13 +489,13 @@ class Content extends LessonContent {
       modifiers: {
         _180: clickWord(
           '180º', 'id_important_triangles_sum1',
-          qr._tri.show, [qr._tri], colors.diagram.action,
+          this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action,
         ),
         b: highlight(colors.angles),
         a: highlight(colors.angles),
         rearrange: click(iso._eqnANav.clickNext, [iso._eqnANav], colors.diagram.action),
       },
-      showOnly: [iso, iTri, iTri._line, qr],
+      showOnly: [iso, iTri, iTri._line],
       show: [
         iTri._angle1, iTri._angle2, iTri._angle3,
         iTri._side23, iTri._side31,
@@ -528,7 +537,7 @@ class Content extends LessonContent {
         a: highlight(colors.angles),
         rearrange: click(iso._eqnANav.clickNext, [iso._eqnBNav], colors.diagram.action),
       },
-      showOnly: [iso, iTri, iTri._line, qr],
+      showOnly: [iso, iTri, iTri._line],
       show: [
         iTri._angle1, iTri._angle2, iTri._angle3,
         iTri._side23, iTri._side31,
@@ -565,7 +574,7 @@ class Content extends LessonContent {
     // ***************************************************************
     common = {
       setContent: '',
-      showOnly: [equil, equil._tri, qr],
+      showOnly: [equil, equil._tri],
       show: [
         equil._tri._line,
         equil._tri._side12, equil._tri._side23, equil._tri._side31,
@@ -636,13 +645,13 @@ class Content extends LessonContent {
     common.setContent = 'We know all the angles of a triangle sum to |_180|. Therefore, each angle must be a |third of 180º|, which is |60º|.';
     this.addSection(common, {
       modifiers: {
-        _180: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        _180: click(this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action),
       },
     });
 
     this.addSection(common, {
       modifiers: {
-        _180: click(qr._tri.show, [qr._tri], colors.diagram.action),
+        _180: click(this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action),
       },
       setSteadyState: () => {
         equil._tri._angle1.label.setText('60º');
@@ -654,12 +663,12 @@ class Content extends LessonContent {
       },
     });
 
-  // ***************************************************************
-  // ***************************************************************
-  // ***************************************************************
-  // ***************************************************************
-  // ***************************************************************
-  // ***************************************************************
+  // // ***************************************************************
+  // // ***************************************************************
+  // // ***************************************************************
+  // // ***************************************************************
+  // // ***************************************************************
+  // // ***************************************************************
   }
 }
 

@@ -128,6 +128,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
         loadRemote(`${uid}Script`, jsLink, () => {
           const qr = new window.quickReference[uid][qrid](this.diagram);
           this.diagram.elements.add(qrid, qr);
+          // $FlowFixMe
           this.diagram.elements[`_${qrid}`].hideAll();
           qr.show();
         });

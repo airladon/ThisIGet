@@ -2,17 +2,16 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-// import ParallelCollection from '../common/diagramCollectionParallel';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
+export default class DiagramCollection extends CommonDiagramCollection {
   // _parallel: ParallelCollection;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
