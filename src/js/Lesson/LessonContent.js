@@ -781,6 +781,8 @@ class LessonContent {
     if (this.diagram.elements._qr) {
       if (this.diagram.elements._qr[uidToUse]) {
         if (this.diagram.elements._qr[uidToUse][qridToUse]) {
+          this.diagram.elements._qr.show();
+          this.diagram.elements._qr[uidToUse].show();
           this.diagram.elements._qr[uidToUse][qridToUse].show();
         }
       }

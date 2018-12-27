@@ -4,7 +4,7 @@ import lessonLayout from './layout';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 import CommonLessonDiagramCollection from '../common/diagramCollection';
-import QuickReferenceCollection from '../common/diagramCollectionQuickReference';
+// import QuickReferenceCollection from '../common/diagramCollectionQuickReference';
 import TriangleCollection from '../common/diagramCollectionTriangles';
 import AAACollection from '../common/diagramCollectionAAA';
 import SASCollection from '../common/diagramCollectionSAS';
@@ -16,7 +16,7 @@ const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonLessonDiagramCollection {
   _triangle: TriangleCollection;
-  _qr: QuickReferenceCollection;
+  // _qr: QuickReferenceCollection;
   _aaa: AAACollection;
   _sas: SASCollection;
   _sss: SSSCollection;
@@ -35,8 +35,8 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     this.add('sas', new SASCollection(diagram, this.layout));
     this.add('sss', new SSSCollection(diagram, this.layout));
     this.add('ssa', new SSACollection(diagram, this.layout));
-    this.add('qr', new QuickReferenceCollection(diagram, this.layout));
-    this._qr.hideAll();
+    // this.add('qr', new QuickReferenceCollection(diagram, this.layout));
+    // this._qr.hideAll();
     this.hasTouchableElements = true;
   }
 }

@@ -423,7 +423,6 @@ function attachQuickReference() {
     Ssa: QRSsa,
     Main: QRCongruentTriangles,
   };
-  console.log('From Congruent', details.details.uid, window.quickReference[details.details.uid])
 }
 
 attachQuickReference();

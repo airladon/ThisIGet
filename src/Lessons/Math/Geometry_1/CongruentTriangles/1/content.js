@@ -29,7 +29,7 @@ class Content extends LessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'triangle_introduction',
-      // 'congruent_triangles',
+      'congruent_triangles',
       // 'related_angles',
       // 'quadrangles',
       // 'adjacent_angles',
@@ -45,7 +45,6 @@ class Content extends LessonContent {
     const ssa = diag._ssa;
     const qr = diag._qr;
     let common = {};
-
     this.addSection({
       title: 'Introduction',
       setContent: centerV(`
@@ -57,12 +56,6 @@ class Content extends LessonContent {
         </p>
       `),
     });
-    // const test = () => {
-    //   // // qr._triangle_introduction._Main.show();
-    //   // const q = qr._triangle_introduction._Main.temp.bind(qr._triangle_introduction._Main);
-    //   // q();
-    //   this.showQR('_triangle_introduction', '_Main');
-    // }
     common = {
       setContent: `
         <p>
@@ -75,8 +68,7 @@ class Content extends LessonContent {
         angles: click(tri.showAngleLabels, [tri, null], colors.angleLabels),
         triangles12: clickWord(
           'triangle\'s', 'id_triangles_angles11',
-          // test, [this], colors.diagram.action,
-          this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action,
+          this.showQR, [this, 'congruent_triangles', 'Aas'], colors.diagram.action,
         ),
       },
       setInfo: [
@@ -94,15 +86,13 @@ class Content extends LessonContent {
         tri._tri1._line,
         tri._tri2,
         tri._tri2._line,
-        qr, qr._triangle_introduction,
       ],
     };
     this.addSection(common, {
       setEnterState: () => {
         const lay = layout.triangles.congruent;
         const { scenario } = lay.tri1;
-        tri.setTriangleScenarios(lay.points, lay.points, scenario, scenario);
-        console.log(qr)
+        // qr.hideAll();
       },
     });
     this.addSection(common, {
@@ -119,9 +109,9 @@ class Content extends LessonContent {
         tri.setFuturePositions();
         tri._tri1.showAll();
         tri._tri2.showAll();
-        qr.show();
-        qr._triangle_introduction.show();
-        qr._triangle_introduction._Main.show();
+        // qr.show();
+        // qr._triangle_introduction.show();
+        // qr._triangle_introduction._Main.show();
       },
     });
 
@@ -702,7 +692,7 @@ class Content extends LessonContent {
         sas.setCornerScenarios('ASAStart');
       },
       showOnly: [
-        sas, qr, qr._triangle_introduction,
+        sas,
       ],
       show: [
         sas._corner1, sas._corner2,
@@ -795,15 +785,9 @@ class Content extends LessonContent {
     common.modifiers = {
       triangles: clickWord(
         'triangle\'s', 'id_triangles_angles',
-        qr._triangle_introduction._Main.show, [qr._triangle_introduction._Main], colors.diagram.action,
+        this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action,
       ),
     };
-    common.setSteadyState = () => 
-      {
-        // qr._triangle_introduction._Main.show();
-        const a = qr._triangle_introduction._Main.show.bind(qr._triangle_introduction._Main);
-        a();
-      }
     common.setInfo = [
       '<ul>',
       '<li>Touch the |triangles| text to show a reference tile explaining the concept and a link to the lesson.</li>',
@@ -869,7 +853,7 @@ class Content extends LessonContent {
         sas.setCornerScenarios('AASStart');
       },
       showOnly: [
-        sas, qr,
+        sas,
       ],
       show: [
         sas._corner1, sas._corner2,
@@ -891,7 +875,7 @@ class Content extends LessonContent {
       </p>
       `;
     common.modifiers = {
-      triangles: click(qr._tri.show, [qr._tri], colors.diagram.action),
+      triangles: click(this.showQR, [this, 'triangle_introduction', 'Main'], colors.diagram.action),
     };
     common.setInfo = [
       '<ul>',
@@ -911,7 +895,10 @@ class Content extends LessonContent {
       </p>
     `;
     common.modifiers = {
-      Angle_Side_Angle: clickWord('Angle Side Angle', 'id_angle_side_angle', qr._asa.show, [qr._asa], colors.line),
+      Angle_Side_Angle: clickWord(
+        'Angle Side Angle', 'id_angle_side_angle',
+        this.showQR, [this, 'congruent_triangles', 'Asa'], colors.line,
+      ),
     };
     common.setInfo = [
       '<ul>',

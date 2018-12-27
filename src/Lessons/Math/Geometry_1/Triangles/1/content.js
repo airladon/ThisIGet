@@ -29,6 +29,13 @@ class Content extends LessonContent {
     // this.overlayDiagram = new OverlayLessonDiagram(htmlId, layout);
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      // 'triangle_introduction',
+      // 'congruent_triangles',
+      // 'related_angles',
+      // 'quadrangles',
+      // 'adjacent_angles',
+    ]);
   }
 
   addSections() {
