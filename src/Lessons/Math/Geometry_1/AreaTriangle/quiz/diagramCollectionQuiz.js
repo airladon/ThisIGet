@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import SameAreaCollection from '../common/diagramCollectionSameArea';
 
@@ -10,7 +10,7 @@ const { rand, round, range } = Fig.tools.math;
 
 export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCollection) {
 // export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
 
   answers: Array<Array<number>>;
   answer: number;
@@ -46,7 +46,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCol
   // }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

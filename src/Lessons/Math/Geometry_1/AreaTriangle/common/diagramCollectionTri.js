@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import {
   addTriRectEquation, addTri2AreaEquation, addTri3AreaEquation,
@@ -16,7 +16,6 @@ const {
 } = Fig;
 
 export default class TriangleAreaCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _grid: DiagramElementPrimative;
   _rect: DiagramElementPrimative;
   _rectSplit: DiagramElementPrimative;
@@ -271,7 +270,7 @@ export default class TriangleAreaCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

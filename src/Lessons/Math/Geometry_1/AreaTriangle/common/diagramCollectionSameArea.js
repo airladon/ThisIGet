@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const {
@@ -20,7 +20,6 @@ const increaseBorderSize = (element: DiagramElementPrimative, multiplier: number
 };
 
 export default class SameAreaCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _tri: DiagramElementPrimative;
   _grid: DiagramElementPrimative;
   _topPad: DiagramElementPrimative;
@@ -306,7 +305,7 @@ export default class SameAreaCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

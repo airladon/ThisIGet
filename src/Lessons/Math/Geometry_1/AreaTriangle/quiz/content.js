@@ -3,7 +3,9 @@ import Fig from 'figureone';
 import {
   LessonContent,
 } from '../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+
 import lessonLayout from './layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';
@@ -21,7 +23,8 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {
