@@ -19,7 +19,7 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
   }
 

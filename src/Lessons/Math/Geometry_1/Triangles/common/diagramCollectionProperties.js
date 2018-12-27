@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
 // } from '../../../../../js/diagram/tools/g2';
@@ -20,7 +20,6 @@ import type {
 const { Transform, DiagramElementPrimative, DiagramObjectLine } = Fig;
 
 export default class TrianglePropertiesCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
   _triangle: {
     _dimension12: DiagramObjectLine;
     _dimension23: DiagramObjectLine;
@@ -91,7 +90,7 @@ export default class TrianglePropertiesCollection extends CommonDiagramCollectio
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

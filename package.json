@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/airladon/itiget#readme",
   "dependencies": {
-    "figureone": "0.0.17",
+    "figureone": "0.0.18",
     "react": "^16.6.3",
     "react-dom": "^16.6.3"
   },
