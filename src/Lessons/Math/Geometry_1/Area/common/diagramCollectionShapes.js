@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
 // } from '../../../../../js/diagram/tools/g2';
@@ -12,7 +12,7 @@ import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection
 const { Transform, DiagramElementPrimative } = Fig;
 
 export default class ShapesCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   _square1: DiagramElementPrimative;
   _square2: DiagramElementPrimative;
   _circle: DiagramElementPrimative;
@@ -49,7 +49,7 @@ export default class ShapesCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

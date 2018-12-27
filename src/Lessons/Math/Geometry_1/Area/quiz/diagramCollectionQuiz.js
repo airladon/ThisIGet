@@ -1,7 +1,6 @@
 // @flow
 import Fig from 'figureone';
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import type { TypeEquationLabel } from '../../../../LessonsCommon/tools/equationLabel';
@@ -14,7 +13,7 @@ const {
   rand, range, round,
 } = Fig.tools.math;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   _grid: DiagramElementPrimative;
   _rect: {
     _bottom: {
@@ -120,7 +119,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

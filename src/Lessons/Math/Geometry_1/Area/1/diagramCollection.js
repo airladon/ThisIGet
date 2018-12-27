@@ -1,10 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 import ShapesCollection from '../common/diagramCollectionShapes';
 import MeasureCollection from '../common/diagramCollectionMeasure';
@@ -20,7 +17,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   _rect: RectAreaCollection;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();

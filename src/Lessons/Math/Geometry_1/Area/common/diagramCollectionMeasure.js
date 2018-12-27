@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const {
@@ -15,7 +15,7 @@ const {
 const { generateUniqueId } = Fig.tools.misc;
 
 export default class MeasureCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   _angle: {
     _line: DiagramElementPrimative;
     _minorTicks: DiagramElementPrimative;
@@ -424,7 +424,7 @@ export default class MeasureCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {

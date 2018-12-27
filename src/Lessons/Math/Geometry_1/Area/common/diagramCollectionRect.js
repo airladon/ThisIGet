@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import LessonDiagram from './diagram';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import {
   addRectEqn, addSimpleRectEquation, addNumSquaresRectEquation,
@@ -26,7 +26,7 @@ const {
 } = Fig;
 
 export default class RectAreaCollection extends CommonDiagramCollection {
-  diagram: LessonDiagram;
+  diagram: CommonLessonDiagram;
   rowIndex: number;
   _grid: DiagramElementPrimative;
   _gridSquare: DiagramElementPrimative;
@@ -169,7 +169,7 @@ export default class RectAreaCollection extends CommonDiagramCollection {
   }
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {
