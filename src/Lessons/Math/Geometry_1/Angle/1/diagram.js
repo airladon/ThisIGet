@@ -3,8 +3,9 @@ import Fig from 'figureone';
 import ShapesCollection from './diagramCollectionShapes';
 import CircleCollection from './diagramCollectionCircle';
 import lessonLayout from './layout';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
-const { DiagramElementCollection, Diagram } = Fig;
+const { DiagramElementCollection } = Fig;
 const {
   Point, Transform, minAngleDiff,
 } = Fig.tools.g2;
@@ -18,20 +19,17 @@ type typeElements = {
 } & DiagramElementCollection ;
 
 // $FlowFixMe
-class LessonDiagram extends Diagram {
+class LessonDiagram extends CommonLessonDiagram {
   elements: typeElements;
 
   constructor(id: string) {
     const { limits } = lessonLayout();
     // console.log(limits);
-    super(
-      `${id}`,
-      limits.left,
-      limits.bottom,
-      limits.width,
-      limits.height,
+    super({
+      htmlId: `${id}`,
+      limits,
       backgroundColor,
-    );
+    }, lessonLayout());
   }
 
   createDiagramElements() {

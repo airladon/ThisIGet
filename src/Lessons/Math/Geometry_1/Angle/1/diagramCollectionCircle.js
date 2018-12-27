@@ -1,13 +1,11 @@
 // @flow
 import Fig from 'figureone';
 import type { TypeRotationDirection } from 'figureone';
-// import * as tools from '../../../../js/diagram/tools/mathtools';
 import lessonLayout from './layout';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
-
-const {
-  DiagramElementCollection, Diagram, DiagramElementPrimative,
-} = Fig;
+const { DiagramElementPrimative } = Fig;
 const {
   Point, Transform, minAngleDiff, normAngle,
 } = Fig.tools.g2;
@@ -122,7 +120,7 @@ function makeArrow(shapes: Object) {
   );
 }
 
-class CircleCollection extends DiagramElementCollection {
+class CircleCollection extends CommonDiagramCollection {
   _anchor: DiagramElementPrimative;
   _arrow: DiagramElementPrimative;
   _arc: DiagramElementPrimative;
@@ -132,13 +130,12 @@ class CircleCollection extends DiagramElementCollection {
   _reference: DiagramElementPrimative;
   _cornerRef: DiagramElementPrimative;
   _cornerRad: DiagramElementPrimative;
-  diagram: Diagram;
+  diagram: CommonLessonDiagram;
   layout: Object;
   colors: Object;
 
-  constructor(diagram: Diagram, transform: Transform = new Transform()) {
-    super(transform, diagram.limits);
-    this.diagram = diagram;
+  constructor(diagram: CommonLessonDiagram, transform: Transform = new Transform()) {
+    super(diagram, layout, transform);
     this.colors = colors;
     this.layout = layout;
 

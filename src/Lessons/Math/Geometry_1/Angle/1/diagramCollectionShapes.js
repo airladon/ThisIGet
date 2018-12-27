@@ -1,10 +1,11 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const {
   Point, Transform, DiagramElementPrimative, DiagramElementCollection,
-  Diagram,
 } = Fig;
 
 const layout = lessonLayout();
@@ -112,14 +113,17 @@ function makePent(shapes: Object, location: Point) {
   return pent;
 }
 
-class ShapesCollection extends DiagramElementCollection {
+class ShapesCollection extends CommonDiagramCollection {
   _square: typeShape;
   _triangle: typeShape;
   _pent: typeShape;
-  diagram: Diagram;
 
-  constructor(diagram: Diagram, locations: Object, transform: Transform = new Transform()) {
-    super(transform, diagram.limits);
+  constructor(
+    diagram: CommonLessonDiagram,
+    locations: Object,
+    transform: Transform = new Transform(),
+  ) {
+    super(diagram, layout, transform);
     this.diagram = diagram;
     const { shapes } = diagram;
 
