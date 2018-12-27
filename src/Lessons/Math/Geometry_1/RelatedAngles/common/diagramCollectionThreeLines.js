@@ -11,7 +11,7 @@ import { showAngles } from '../../../../LessonsCommon/tools/angle';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  Transform, Point, Diagram, DiagramObjectLine, EquationLegacy,
+  Transform, Point, DiagramObjectLine, EquationLegacy,
   DiagramElementCollection,
 } = Fig;
 

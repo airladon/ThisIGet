@@ -7,7 +7,6 @@ import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection
 const { Transform } = Fig;
 
 export default class CommonLessonDiagramCollection extends CommonDiagramCollection {
-
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,

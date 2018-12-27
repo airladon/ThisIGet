@@ -3,7 +3,6 @@ import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 import type { TypeScenario } from '../../../../LessonsCommon/DiagramCollection';
-// import { makeLine } from '../../../../LessonsCommon/tools/line';
 import { makeAngle, showAngles } from '../../../../LessonsCommon/tools/angle';
 import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
 
@@ -16,8 +15,7 @@ const { rand } = Fig.tools.math;
 type TypeAdjacentAngle = 'adjacent' | 'supplementary' | 'complementary' | 'explementary';
 type TypeEquationForm = 'add' | 'a' | 'b';
 
-
-export default class AdjacentCollection extends CommonDiagramCollection { 
+export default class AdjacentCollection extends CommonDiagramCollection {
   _lines: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;

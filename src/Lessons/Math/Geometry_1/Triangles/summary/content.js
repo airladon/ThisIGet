@@ -13,6 +13,7 @@ import imgLinkGrey from '../tile-grey.png';
 import details from '../details';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+
 const { click, highlight } = Fig.tools.html;
 
 const layout = lessonLayout();

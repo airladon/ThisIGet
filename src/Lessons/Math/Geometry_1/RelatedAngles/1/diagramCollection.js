@@ -6,6 +6,7 @@ import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 import type { TypeUnits } from '../../../../LessonsCommon/DiagramCollection';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonLessonDiagramCollection {

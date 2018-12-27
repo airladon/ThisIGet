@@ -1,10 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-// import * as html from '../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../details';
-
 import QuadCollection from '../common/diagramCollectionQuad';
 import RectCollection from '../common/diagramCollectionRect';
 import SquareCollection from '../common/diagramCollectionSquare';
@@ -154,7 +152,6 @@ function attachQuickReference1() {
     Rectangle: QRRectangle,
     Square: QRSquare,
   };
-  console.log('From Quadrangles', details.details.uid, window.quickReference[details.details.uid])
 }
 
 attachQuickReference1();

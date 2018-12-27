@@ -7,6 +7,7 @@ import type {
 } from '../../../../LessonsCommon/SinCosCircle/SinCosCircle';
 import lessonLayout from './layout';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+
 const {
   Transform, Point, Rect, DiagramElementCollection,
   DiagramElementPrimative, EquationForm,

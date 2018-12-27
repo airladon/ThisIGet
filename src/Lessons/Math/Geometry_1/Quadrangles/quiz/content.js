@@ -3,7 +3,7 @@ import {
   LessonContent, interactiveItem,
 } from '../../../../../js/Lesson/LessonContent';
 import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram'
+import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 import lessonLayout from './layout';
 import imgLink from '../tile.png';
 import imgLinkGrey from '../tile-grey.png';

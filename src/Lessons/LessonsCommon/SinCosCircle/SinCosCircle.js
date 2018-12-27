@@ -664,7 +664,11 @@ export class SinCosCircle extends AngleCircle {
     this.diagram.animateNextFrame();
   }
 
-  constructor(layout: Object, diagram: CommonLessonDiagram, transform: Transform = new Transform()) {
+  constructor(
+    layout: Object,
+    diagram: CommonLessonDiagram,
+    transform: Transform = new Transform(),
+  ) {
     super(diagram, layout, transform);
     this.diagram = diagram;
     this.varState = {
