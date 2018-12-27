@@ -59,17 +59,13 @@ class Content extends LessonContent {
     common = {
       setContent: `
         <p>
-          For two triangles to be the same size and shape, and therefore |congruent|, the corresponding |side_lengths| and |angles| and of each triangle must be the same as the other |triangles12|.
+          For two triangles to be the same size and shape, and therefore |congruent|, the corresponding |side_lengths| and |angles| and of each triangle must be the same as the other.
         </p>
       `,
       setEnterState: () => {},
       modifiers: {
         side_lengths: click(tri.showLineLabels, [tri, null], colors.lineLabels),
         angles: click(tri.showAngleLabels, [tri, null], colors.angleLabels),
-        triangles12: clickWord(
-          'triangle\'s', 'id_triangles_angles11',
-          this.showQR, [this, 'congruent_triangles', 'Aas'], colors.diagram.action,
-        ),
       },
       setInfo: [
         '<ul>',
@@ -93,7 +89,6 @@ class Content extends LessonContent {
         const lay = layout.triangles.congruent;
         const { scenario } = lay.tri1;
         tri.setTriangleScenarios(lay.points, lay.points, scenario, scenario);
-        // qr.hideAll();
       },
     });
     this.addSection(common, {
@@ -110,9 +105,6 @@ class Content extends LessonContent {
         tri.setFuturePositions();
         tri._tri1.showAll();
         tri._tri2.showAll();
-        // qr.show();
-        // qr._triangle_introduction.show();
-        // qr._triangle_introduction._Main.show();
       },
     });
 
@@ -966,7 +958,7 @@ class Content extends LessonContent {
         ssa.setFuturePositions();
       },
       showOnly: [
-        ssa, qr,
+        ssa,
       ],
       show: [
         ssa._line1, ssa._line2, ssa._lineCorner, ssa._angle,
