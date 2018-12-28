@@ -7,7 +7,7 @@ import getLessonIndex from '../../../../index';
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  Transform,
+  Transform, DiagramElementCollection,
 } = Fig;
 
 export default class IsocelesCollection extends CommonDiagramCollection {
@@ -18,7 +18,8 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     _side12: DiagramObjectLine;
     _side23: DiagramObjectLine;
     _side31: DiagramObjectLine;
-  };
+    _line: DiagramElementPrimative;
+  } & DiagramElementCollection;
 
   _rect: {
     _tri1: {
@@ -29,7 +30,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
       _side31: DiagramObjectLine;
       _line: DiagramElementPrimative;
       _closeLine: DiagramObjectLine;
-    };
+    } & DiagramElementCollection;
 
     _tri2: {
       _angle1: DiagramObjectAngle;
@@ -39,8 +40,8 @@ export default class IsocelesCollection extends CommonDiagramCollection {
       _side31: DiagramObjectLine;
       _line: DiagramElementPrimative;
       _closeLine: DiagramObjectLine;
-    };
-  };
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
 
   _left: {
     _line: DiagramElementPrimative;
@@ -50,7 +51,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     _side12: DiagramObjectLine;
     _side23: DiagramObjectLine;
     _side31: DiagramObjectLine;
-  };
+  } & DiagramElementCollection;
 
   _right: {
     _line: DiagramElementPrimative;
@@ -60,7 +61,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     _side12: DiagramObjectLine;
     _side23: DiagramObjectLine;
     _side31: DiagramObjectLine;
-  }
+  } & DiagramElementCollection;
 
   _split: DiagramObjectLine;
   _topPoint: DiagramElementPrimative;

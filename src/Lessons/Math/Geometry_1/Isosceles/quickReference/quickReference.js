@@ -44,16 +44,22 @@ export default class QRIsosceles extends PopupBoxCollection {
       ),
     };
     this.setTitle('Isosceles Triangle');
-    this.setDescription('An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.', modifiers);
+    this.setDescription(`
+      <p>
+      An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.,
+      </p>
+      <p>
+      All triangles with two equal sides will have two equal angles, and all triangles with two equal angles will have two equal sides.
+      </p>
+    `, modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSize(2.5, 1.6);
     super.show();
     const collection = this._collection;
     collection.show();
-    console.log(collection)
     const iso = collection;
     const iTri = this._collection._tri;
     iso.show();
@@ -63,8 +69,8 @@ export default class QRIsosceles extends PopupBoxCollection {
     iTri._side31.showAll();
     iTri._angle1.showAll();
     iTri._angle2.showAll();
-    collection.transform.updateScale(0.7, 0.7);
-    // collection.setPosition(this.layout.position);
+    collection.transform.updateScale(0.6, 0.6);
+    collection.setPosition(this.layout.position);
     this.diagram.animateNextFrame();
   }
 }
