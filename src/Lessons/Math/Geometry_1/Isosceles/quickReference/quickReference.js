@@ -46,7 +46,7 @@ export default class QRIsosceles extends PopupBoxCollection {
     this.setTitle('Isosceles Triangle');
     this.setDescription(`
       <p>
-      An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.,
+      An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.
       </p>
       <p>
       All triangles with two equal sides will have two equal angles, and all triangles with two equal angles will have two equal sides.
