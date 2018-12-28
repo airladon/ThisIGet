@@ -74,3 +74,15 @@ export default class QRIsosceles extends PopupBoxCollection {
     this.diagram.animateNextFrame();
   }
 }
+
+function attachQuickReference1() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Main: QRIsosceles,
+  };
+}
+
+attachQuickReference1();
+
