@@ -12163,7 +12163,7 @@ function () {
       }
 
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _PolyLine__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
+      return new _PolyLine__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes, this.equation, this, this.isTouchDevice, this.animateNextFrame, optionsToUse);
     } // lineNew(
     //   position: Point,
     //   length: number,
@@ -13744,20 +13744,21 @@ var LineLabel =
 function (_EquationLabel) {
   _inherits(LineLabel, _EquationLabel);
 
-  function LineLabel(equation, labelText, color, offset) // number where 0 is end1, and 1 is end2
-  {
+  function LineLabel(equation, labelText, color, offset) {
     var _this;
 
     var location = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'top';
     var subLocation = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'left';
     var orientation = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'horizontal';
     var linePosition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.5;
+    var scale = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0.7;
 
     _classCallCheck(this, LineLabel);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(LineLabel).call(this, equation, {
       label: labelText,
-      color: color
+      color: color,
+      scale: scale
     }));
     _this.offset = offset;
     _this.location = location;
@@ -14019,13 +14020,14 @@ function (_DiagramElementCollec) {
       location: 'top',
       subLocation: 'left',
       orientation: 'horizontal',
-      linePosition: 0.5
+      linePosition: 0.5,
+      textScale: 0.7
     };
 
     if (optionsToUse.label) {
       var labelOptions = Object.assign({}, defaultLabelOptions, optionsToUse.label);
 
-      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition);
+      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.textScale);
     }
 
     return _this2;
@@ -14212,13 +14214,13 @@ function (_DiagramElementCollec) {
     }
   }, {
     key: "addLabel",
-    value: function addLabel(labelText, offset) // number where 0 is end1, and 1 is end2
-    {
+    value: function addLabel(labelText, offset) {
       var location = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'top';
       var subLocation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
       var orientation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'horizontal';
       var linePosition = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
-      this.label = new LineLabel(this.equation, labelText, this.color, offset, location, subLocation, orientation, linePosition);
+      var textScale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
+      this.label = new LineLabel(this.equation, labelText, this.color, offset, location, subLocation, orientation, linePosition, textScale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn.collection);
@@ -14546,6 +14548,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 /* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14568,15 +14573,69 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
+
+
+function makeArray(possibleArray, count) {
+  if (Array.isArray(possibleArray)) {
+    if (count === possibleArray.length) {
+      return possibleArray;
+    }
+
+    var _outArray = [];
+
+    for (var i = 0; i < count; i += 1) {
+      _outArray.push(possibleArray[i % possibleArray.length]);
+    }
+
+    return _outArray;
+  }
+
+  var outArray = [];
+
+  for (var _i = 0; _i < count; _i += 1) {
+    outArray.push(possibleArray);
+  }
+
+  return outArray;
+}
+
+function makeColorArray(possibleArray, count) {
+  if (Array.isArray(possibleArray[0])) {
+    if (count === possibleArray.length) {
+      // $FlowFixMe
+      return possibleArray;
+    }
+
+    var _outArray2 = [];
+
+    for (var i = 0; i < count; i += 1) {
+      // $FlowFixMe
+      _outArray2.push(possibleArray[i % possibleArray.length].slice());
+    }
+
+    return _outArray2;
+  }
+
+  var outArray = [];
+
+  for (var _i2 = 0; _i2 < count; _i2 += 1) {
+    outArray.push(possibleArray.slice());
+  } // $FlowFixMe
+
+
+  return outArray;
+}
+
 var DiagramObjectPolyLine =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
   _inherits(DiagramObjectPolyLine, _DiagramElementCollec);
 
-  function DiagramObjectPolyLine(shapes, equation, isTouchDevice, animateNextFrame) {
+  function DiagramObjectPolyLine(shapes, equation, objects, isTouchDevice, animateNextFrame) {
     var _this;
 
-    var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+    var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : {};
 
     _classCallCheck(this, DiagramObjectPolyLine);
 
@@ -14588,15 +14647,27 @@ function (_DiagramElementCollec) {
       showLine: true,
       borderToPoint: 'never',
       width: 0.01,
-      sideLabel: {
-        text: 'a',
-        offset: 0.1,
-        location: 'outside',
-        subLocation: 'top',
-        orientation: 'horizontal',
-        linePosition: 0.5
-      }
+      sideLabel: null
     };
+    var defaultSideLabelOptions = {
+      text: 'a',
+      lineOffset: 0,
+      labelOffset: 0.1,
+      location: 'outside',
+      subLocation: 'top',
+      orientation: 'horizontal',
+      linePosition: 0.5,
+      showLine: false,
+      width: 0.01,
+      color: options.color == null ? [0, 1, 0, 1] : options.color,
+      textScale: 0.7
+    };
+
+    if (options.sideLabel) {
+      // $FlowFixMe
+      defaultOptions.sideLabel = defaultSideLabelOptions;
+    }
+
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
 
@@ -14604,6 +14675,7 @@ function (_DiagramElementCollec) {
 
     _this.shapes = shapes;
     _this.equation = equation;
+    _this.objects = objects;
     _this.largerTouchBorder = optionsToUse.largerTouchBorder;
     _this.isTouchDevice = isTouchDevice;
     _this.animateNextFrame = animateNextFrame;
@@ -14621,6 +14693,65 @@ function (_DiagramElementCollec) {
       });
 
       _this.add('line', line);
+    }
+
+    if (optionsToUse.sideLabel) {
+      var sideLabel = optionsToUse.sideLabel;
+      var pCount = optionsToUse.points.length - 1;
+
+      if (optionsToUse.close) {
+        pCount += 1;
+      }
+
+      var textArray = makeArray(sideLabel.text, pCount);
+      var lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
+      var labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
+      var locationArray = makeArray(sideLabel.location, pCount);
+      var subLocationArray = makeArray(sideLabel.subLocation, pCount);
+      var orientationArray = makeArray(sideLabel.orientation, pCount);
+      var linePositionArray = makeArray(sideLabel.linePosition, pCount);
+      var colorArray = makeColorArray(sideLabel.color, pCount);
+      var showLineArray = makeArray(sideLabel.showLine, pCount);
+      var widthArray = makeArray(sideLabel.width, pCount);
+      var arrowsArray = makeArray(sideLabel.arrows, pCount);
+      var textScaleArray = makeArray(sideLabel.textScale, pCount);
+
+      for (var i = 0; i < pCount; i += 1) {
+        var j = i + 1;
+
+        if (i === pCount - 1 && optionsToUse.close) {
+          j = 0;
+        }
+
+        var name = "side".concat(i).concat(j);
+        var text = textArray[i] == null ? '' : textArray[i];
+
+        var label = _this.objects.line({
+          p1: optionsToUse.points[i],
+          p2: optionsToUse.points[j],
+          showLine: showLineArray[i],
+          color: colorArray[i],
+          width: widthArray[i],
+          arrows: arrowsArray[i],
+          offset: lineOffsetArray[i],
+          label: {
+            text: text,
+            offset: labelOffsetArray[i],
+            location: locationArray[i],
+            subLocation: subLocationArray[i],
+            orientation: orientationArray[i],
+            linePosition: linePositionArray[i],
+            textScale: textScaleArray[i]
+          }
+        });
+
+        if (textArray[i] === null) {
+          label.showRealLength = true;
+          label.updateLabel();
+        }
+
+        _this.add(name, label);
+      }
     }
 
     return _this;

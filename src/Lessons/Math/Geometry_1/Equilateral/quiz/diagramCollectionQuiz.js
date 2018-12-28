@@ -36,7 +36,12 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
       sideLabel: {
         text: null,
         location: 'outside',
-        color: [[1,0,0,1], [0, 1,0,1]],
+        color: [[1, 0, 0, 1], [0, 1, 0, 1]],
+        textScale: 0.5,
+        lineOffset: 0.25,
+        showLine: true,
+        arrows: true,
+        width: 0.015,
       },
     }));
     // this.add('input', this.makeEntryBox('a1', '?', 3));
