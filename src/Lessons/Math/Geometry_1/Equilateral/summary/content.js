@@ -35,7 +35,7 @@ class Content extends LessonContent {
     const equil = diag._equil;
 
     this.addSection({
-      title: 'Isosceles',
+      title: 'Equilateral',
       setContent: [
         'An |Equilateral| triangle has |three_equal_sides| and |three_equal_angles|. Any triangle with equal angles will have equal sides and vise vesa.',
         `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html('id_lesson__eqiuilateral_definition')}`,

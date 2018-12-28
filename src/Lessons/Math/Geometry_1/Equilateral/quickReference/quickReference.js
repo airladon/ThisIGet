@@ -30,7 +30,7 @@ export default class QREquilateral extends PopupBoxCollection {
       three_equal_sides: click(
         this._collection.pulseSides,
         [this._collection],
-        this.layout.colors.equalLength,
+        this.layout.colors.lines,
       ),
       three_equal_angles: click(
         this._collection.pulseAngles,
@@ -38,7 +38,7 @@ export default class QREquilateral extends PopupBoxCollection {
         this.layout.colors.angles,
       ),
     };
-    this.setTitle('Isosceles Triangle');
+    this.setTitle('Equilateral Triangle');
     this.setDescription(`
       <p>
       An |Equilateral| triangle has |three_equal_sides| and |three_equal_angles|.
