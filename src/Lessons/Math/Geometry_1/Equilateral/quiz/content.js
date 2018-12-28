@@ -29,12 +29,16 @@ class Content extends LessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
 
     this.addSection({
       title: 'Enter_title_here',
       setContent: ['Enter_content_here'],
+      show: [quiz],
+      setSteadyState: () => {
+        console.log(quiz)
+      },
     });
     this.addSection({
       title: 'Enter_title_here',

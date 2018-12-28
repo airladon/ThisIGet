@@ -749,12 +749,6 @@ function () {
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["isTouchDevice"])();
     this.animateNextFrame();
-
-    if (optionsToUse.elements) {
-      // eslint-disable-next-line new-cap
-      this.elements = new optionsToUse.elements(this);
-      this.elements.diagramLimits = this.limits;
-    }
   }
 
   _createClass(Diagram, [{
@@ -12081,7 +12075,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
 /* harmony import */ var _Line__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Line */ "./src/js/diagram/DiagramObjects/Line.js");
 /* harmony import */ var _Angle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
+/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -12093,6 +12088,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
  // import {
 //   DiagramElementCollection,
 // } from '../Element';
+
 
 
 
@@ -12157,7 +12153,17 @@ function () {
 
       // const optionsToUse = Object.assign({}, ...options);
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _EquationLabel__WEBPACK_IMPORTED_MODULE_8__["default"](this.equation, optionsToUse);
+      return new _EquationLabel__WEBPACK_IMPORTED_MODULE_9__["default"](this.equation, optionsToUse);
+    }
+  }, {
+    key: "polyLine",
+    value: function polyLine() {
+      for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        options[_key4] = arguments[_key4];
+      }
+
+      var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
+      return new _PolyLine__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
     } // lineNew(
     //   position: Point,
     //   length: number,
@@ -14519,6 +14525,109 @@ function (_DiagramElementCollec) {
 // }
 // export type TypeMovableLine = MovableLine;
 
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramObjects/PolyLine.js":
+/*!***************************************************!*\
+  !*** ./src/js/diagram/DiagramObjects/PolyLine.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramObjectPolyLine; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import Diagram from '../Diagram';
+
+
+
+
+
+
+
+var DiagramObjectPolyLine =
+/*#__PURE__*/
+function (_DiagramElementCollec) {
+  _inherits(DiagramObjectPolyLine, _DiagramElementCollec);
+
+  function DiagramObjectPolyLine(shapes, equation, isTouchDevice, animateNextFrame) {
+    var _this;
+
+    var options = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : {};
+
+    _classCallCheck(this, DiagramObjectPolyLine);
+
+    var defaultOptions = {
+      position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      color: [0, 1, 0, 1],
+      points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 1)],
+      close: false,
+      showLine: true,
+      borderToPoint: 'never',
+      width: 0.01,
+      sideLabel: {
+        text: 'a',
+        offset: 0.1,
+        location: 'outside',
+        subLocation: 'top',
+        orientation: 'horizontal',
+        linePosition: 0.5
+      }
+    };
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
+
+    _this.setColor(optionsToUse.color);
+
+    _this.shapes = shapes;
+    _this.equation = equation;
+    _this.largerTouchBorder = optionsToUse.largerTouchBorder;
+    _this.isTouchDevice = isTouchDevice;
+    _this.animateNextFrame = animateNextFrame;
+    _this.position = optionsToUse.position;
+
+    _this.transform.updateTranslation(_this.position);
+
+    if (optionsToUse.showLine) {
+      var line = _this.shapes.polyLine({
+        points: optionsToUse.points,
+        color: optionsToUse.color,
+        close: optionsToUse.close,
+        borderToPoint: optionsToUse.borderToPoint,
+        width: optionsToUse.width
+      });
+
+      _this.add('line', line);
+    }
+
+    return _this;
+  }
+
+  return DiagramObjectPolyLine;
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]);
 
 
 
