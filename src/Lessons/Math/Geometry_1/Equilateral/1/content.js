@@ -12,7 +12,7 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  click, centerV,
+  click, centerV, clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -29,21 +29,13 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
+      'isosceles_triangles',
       'triangle_introduction',
-      'congruent_triangles',
-      'related_angles',
-      'quadrangles',
-      'adjacent_angles',
     ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
-    // const iso = diag._iso;
-    // const iTri = iso._tri;
-    // const left = iso._left;
-    // const right = iso._right;
-    // const rec = iso._rect;
     const equil = diag._equil;
 
     let common = {
@@ -94,6 +86,7 @@ class Content extends LessonContent {
       setContent: 'As |any| two sides are equal, an |equilateral| triangle is a special case of an |isosceles| triangle.',
       modifiers: {
         any: click(equil.toggleIsoOrientation, [equil, null, false], colors.equalLength),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles', 'Main'], colors.diagram.action),
       },
     });
 
@@ -138,13 +131,23 @@ class Content extends LessonContent {
     common.setContent = 'We know all the angles of a triangle sum to |_180|. Therefore, each angle must be a |third of 180º|, which is |60º|.';
     this.addSection(common, {
       modifiers: {
-        _180: click(this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action),
+        _180: clickWord(
+          '180º',
+          'id_equilateral_180',
+          this.showQR, [this, '_triangle_introduction', '_Main'],
+          colors.diagram.action,
+        ),
       },
     });
 
     this.addSection(common, {
       modifiers: {
-        _180: click(this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action),
+        _180: clickWord(
+          '180º',
+          'id_equilateral_180',
+          this.showQR, [this, '_triangle_introduction', '_Main'],
+          colors.diagram.action,
+        ),
       },
       setSteadyState: () => {
         equil._tri._angle1.label.setText('60º');

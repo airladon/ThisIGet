@@ -187,6 +187,7 @@ export default function getLessonIndex() {
     ],
     true,
     [
+      'Main',
     ],
   ));
   lessonIndex.push(new LessonDescription(

@@ -33,10 +33,10 @@ export default class EquilateralCollection extends CommonDiagramCollection {
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
-    transform: Transform = new Transform('Iso').rotate(0).translate(0, 0),
+    transform: Transform = new Transform('Equil').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);
-    this.setPosition(this.layout.iso.position);
+    this.setPosition(this.layout.equil.position);
     this.diagram.addElements(this, this.layout.addEquilateralElements);
     this.hasTouchableElements = true;
     this.isoOrientation = 1;

@@ -1,8 +1,8 @@
 @import '../../geometry';
 
 $colors: (
-  lines:             map-get($geometry_colors, lines),
-  angles:            color('diagram', 'construction8'),
+  equilLines:        map-get($geometry_colors, lines),
+  equilAngles:       color('diagram', 'construction8'),
   equalLength:       color('diagram', 'construction9'),
   points:            color('diagram', 'construction9'),
   height:            color('diagram', 'construction8'),
