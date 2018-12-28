@@ -11713,14 +11713,15 @@ function (_DiagramElementCollec) {
     value: function addLabel() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
       var defaultLabelOptions = {
-        text: '',
+        text: null,
         radius: 0.4,
         curvePosition: 0.5,
         showRealAngle: false,
         realAngleDecimals: 0,
         orientation: 'horizontal',
         autoHide: -1,
-        textScale: 0.7
+        textScale: 0.7,
+        color: this.color
       };
 
       if (this.curve) {
@@ -11729,7 +11730,13 @@ function (_DiagramElementCollec) {
 
 
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultLabelOptions, options);
-      this.label = new AngleLabel(this.equation, optionsToUse.text, this.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.realAngleDecimals, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
+
+      if (optionsToUse.text === null) {
+        optionsToUse.text = '';
+        optionsToUse.showRealAngle = true;
+      }
+
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.realAngleDecimals, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn.collection);
@@ -14550,14 +14557,11 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramObjectPolyLine; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
-/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -14573,11 +14577,14 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // import Diagram from '../Diagram';
+ // import {
+//   roundNum,
+// } from '../../tools/math';
 
 
-
-
-
+ // import EquationLabel from './EquationLabel';
+// import type { TypeLabelEquationOptions } from './EquationLabel';
+// import { Equation } from '../DiagramElements/Equation/GLEquation';
 
 
 
@@ -14661,7 +14668,15 @@ function (_DiagramElementCollec) {
       subLocation: 'top',
       orientation: 'horizontal',
       linePosition: 0.5,
-      textScale: 0.7
+      scale: 0.7
+    };
+    var defaultAngleOptions = {
+      color: options.color == null ? [0, 1, 0, 1] : options.color,
+      curve: {},
+      autoRightAngle: true
+    };
+    var defaultAngleLabelOptions = {
+      text: null
     };
 
     if (options.side != null) {
@@ -14672,17 +14687,27 @@ function (_DiagramElementCollec) {
       }
     }
 
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
+    if (options.angle != null) {
+      defaultOptions.angle = defaultAngleOptions; // $FlowFixMe
+
+      if (options.angle.label != null) {
+        defaultOptions.angle.label = defaultAngleLabelOptions;
+      }
+    }
+
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
 
     if (Array.isArray(options.side)) {
       optionsToUse.side = options.side.map(function (side) {
-        return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions.side, side);
+        return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions.side, side);
       });
-    } // console.log(optionsToUse)
-    // console.log(optionsToUse.side[0].label)
-    // console.log(optionsToUse.side[1].label)
-    // console.log(optionsToUse.side[2].label)
+    }
 
+    if (Array.isArray(options.angle)) {
+      optionsToUse.angle = options.angle.map(function (angle) {
+        return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions.angle, angle);
+      });
+    }
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
 
@@ -14696,7 +14721,8 @@ function (_DiagramElementCollec) {
     _this.animateNextFrame = animateNextFrame;
     _this.position = optionsToUse.position;
 
-    _this.transform.updateTranslation(_this.position);
+    _this.transform.updateTranslation(_this.position); // Add Line
+
 
     if (optionsToUse.showLine) {
       var line = _this.shapes.polyLine({
@@ -14708,7 +14734,8 @@ function (_DiagramElementCollec) {
       });
 
       _this.add('line', line);
-    }
+    } // Add Sides
+
 
     if (optionsToUse.side) {
       var side = optionsToUse.side;
@@ -14728,127 +14755,65 @@ function (_DiagramElementCollec) {
         }
 
         var name = "side".concat(i).concat(j);
-        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, {
+        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
           p1: optionsToUse.points[i],
           p2: optionsToUse.points[j]
-        }, sideArray[i]); // if (sideOptions.label) {
-        //   if (sideOptions.label.text === null) {
-        //     sideOptions.label.text = '';
-        //     sideOptions.label.showRealLength = true;
-        //   }
-        // }
+        }, sideArray[i]);
 
         var sideLine = _this.objects.line(sideOptions);
 
         _this.add(name, sideLine);
       }
-    } // if (optionsToUse.sideLabel) {
-    //   const { sideLabel } = optionsToUse;
-    //   let pCount = optionsToUse.points.length - 1;
-    //   if (optionsToUse.close) {
-    //     pCount += 1;
-    //   }
-    //   const textArray = makeArray(sideLabel.text, pCount);
-    //   const lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
-    //   const labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
-    //   const locationArray = makeArray(sideLabel.location, pCount);
-    //   const subLocationArray = makeArray(sideLabel.subLocation, pCount);
-    //   const orientationArray = makeArray(sideLabel.orientation, pCount);
-    //   const linePositionArray = makeArray(sideLabel.linePosition, pCount);
-    //   const colorArray = makeColorArray(sideLabel.color, pCount);
-    //   const showLineArray = makeArray(sideLabel.showLine, pCount);
-    //   const widthArray = makeArray(sideLabel.width, pCount);
-    //   const arrowsArray = makeArray(sideLabel.arrows, pCount);
-    //   const textScaleArray = makeArray(sideLabel.textScale, pCount);
-    //   for (let i = 0; i < pCount; i += 1) {
-    //     let j = i + 1;
-    //     if (i === pCount - 1 && optionsToUse.close) {
-    //       j = 0;
-    //     }
-    //     const name = `side${i}${j}`;
-    //     const text = textArray[i] == null ? '' : textArray[i];
-    //     const label = this.objects.line({
-    //       p1: optionsToUse.points[i],
-    //       p2: optionsToUse.points[j],
-    //       showLine: showLineArray[i],
-    //       color: colorArray[i],
-    //       width: widthArray[i],
-    //       arrows: arrowsArray[i],
-    //       offset: lineOffsetArray[i],
-    //       label: {
-    //         text,
-    //         offset: labelOffsetArray[i],
-    //         location: locationArray[i],
-    //         subLocation: subLocationArray[i],
-    //         orientation: orientationArray[i],
-    //         linePosition: linePositionArray[i],
-    //         textScale: textScaleArray[i],
-    //       },
-    //     });
-    //     if (textArray[i] === null) {
-    //       label.showRealLength = true;
-    //       label.updateLabel();
-    //     }
-    //     this.add(name, label);
-    //   }
-    // }
-    // if (optionsToUse.angleLabel) {
-    //   const { angleLabel } = optionsToUse;
-    //   let pCount = optionsToUse.points.length;
-    //   if (optionsToUse.close === false) {
-    //     pCount -= 2;
-    //   }
-    //   const textArray = makeArray(sideLabel.text, pCount);
-    //   const lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
-    //   const labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
-    //   const locationArray = makeArray(sideLabel.location, pCount);
-    //   const subLocationArray = makeArray(sideLabel.subLocation, pCount);
-    //   const orientationArray = makeArray(sideLabel.orientation, pCount);
-    //   const linePositionArray = makeArray(sideLabel.linePosition, pCount);
-    //   const colorArray = makeColorArray(sideLabel.color, pCount);
-    //   const showLineArray = makeArray(sideLabel.showLine, pCount);
-    //   const widthArray = makeArray(sideLabel.width, pCount);
-    //   const arrowsArray = makeArray(sideLabel.arrows, pCount);
-    //   const textScaleArray = makeArray(sideLabel.textScale, pCount);
-    //   for (let i = 0; i < pCount; i += 1) {
-    //     let j = i + 1;
-    //     if (i === pCount - 1 && optionsToUse.close) {
-    //       j = 0;
-    //     }
-    //     const name = `side${i}${j}`;
-    //     const text = textArray[i] == null ? '' : textArray[i];
-    //     const label = this.objects.line({
-    //       p1: optionsToUse.points[i],
-    //       p2: optionsToUse.points[j],
-    //       showLine: showLineArray[i],
-    //       color: colorArray[i],
-    //       width: widthArray[i],
-    //       arrows: arrowsArray[i],
-    //       offset: lineOffsetArray[i],
-    //       label: {
-    //         text,
-    //         offset: labelOffsetArray[i],
-    //         location: locationArray[i],
-    //         subLocation: subLocationArray[i],
-    //         orientation: orientationArray[i],
-    //         linePosition: linePositionArray[i],
-    //         textScale: textScaleArray[i],
-    //       },
-    //     });
-    //     if (textArray[i] === null) {
-    //       label.showRealLength = true;
-    //       label.updateLabel();
-    //     }
-    //     this.add(name, label);
-    //   }
-    // }
+    } // Add Angles
 
+
+    if (optionsToUse.angle) {
+      var angle = optionsToUse.angle;
+      var _pCount = optionsToUse.points.length;
+
+      if (optionsToUse.close === false) {
+        _pCount -= 2;
+      }
+
+      var angleArray = makeArray(angle, _pCount);
+      var firstIndex = 0;
+
+      if (optionsToUse.close === false) {
+        firstIndex = 1;
+      }
+
+      for (var _i2 = firstIndex; _i2 < _pCount + firstIndex; _i2 += 1) {
+        var _j = _i2 + 1;
+
+        var k = _i2 - 1;
+
+        if (_i2 === _pCount - 1 && optionsToUse.close) {
+          _j = 0;
+        }
+
+        if (_i2 === 0 && optionsToUse.close) {
+          k = _pCount - 1;
+        }
+
+        var _name = "angle".concat(_i2);
+
+        var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          p1: optionsToUse.points[k],
+          p2: optionsToUse.points[_i2],
+          p3: optionsToUse.points[_j]
+        }, angleArray[_i2]);
+
+        var angleAnnotation = _this.objects.angle(angleOptions);
+
+        _this.add(_name, angleAnnotation);
+      }
+    }
 
     return _this;
   }
 
   return DiagramObjectPolyLine;
-}(_Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);
 
 
 
