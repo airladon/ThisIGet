@@ -68,6 +68,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
 
   _splitLine1: DiagramObjectLine;
   _splitLine2: DiagramObjectLine;
+  oppositeAngles: boolean;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -79,6 +80,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
+    this.oppositeAngles = true;
     console.log(this);  // eslint-disable-line
     console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
     // this.loadJS();
@@ -149,6 +151,22 @@ export default class IsocelesCollection extends CommonDiagramCollection {
   pulseEqualAngles() {
     this._tri._angle1.pulseScaleNow(1, 1.5);
     this._tri._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseOpposites() {
+    if (this.oppositeAngles) {
+      this._tri._angle2.pulseScaleNow(1, 1.5);
+      if (this._tri._side31._label != null) {
+        this._tri._side31._label.pulseScaleNow(1, 2);
+      }
+    } else {
+      this._tri._angle1.pulseScaleNow(1, 1.5);
+      if (this._tri._side23._label != null) {
+        this._tri._side23._label.pulseScaleNow(1, 2);
+      }
+    }
+    this.oppositeAngles = !this.oppositeAngles;
     this.diagram.animateNextFrame();
   }
 

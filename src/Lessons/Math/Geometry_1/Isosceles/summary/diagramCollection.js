@@ -1,14 +1,15 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
-// eslint-disable-next-line import/no-cycle
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import IsocelesCollection from '../common/diagramCollectionIsoceles';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
-  // _parallel: ParallelCollection;
+  _iso: IsocelesCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -17,6 +18,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    // this.add('parallel', new ParallelCollection(diagram, this.layout));
+    this.add('iso', new IsocelesCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

@@ -4,12 +4,12 @@ import lessonLayout from './layout';
 // import * as html from '../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../details';
-import IsocelesCollection from '../common/diagramCollectionIsoceles';
+import EquilateralCollection from '../common/diagramCollectionEquilateral';
 
 const { Transform } = Fig;
 
 export default class QR_TODO extends PopupBoxCollection {
-  _collection: IsocelesCollection;
+  _collection: EquilateralCollection;
 
   constructor(
     diagram: Object,
@@ -21,7 +21,7 @@ export default class QR_TODO extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      IsocelesCollection,
+      EquilateralCollection,
     );
     this.hasTouchableElements = true;
 
