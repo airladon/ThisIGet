@@ -135,6 +135,7 @@ export default function getLessonIndex() {
     'equilateral_triangles',
     [
       '1',
+      'dev',
       'quiz',
       'summary',
     ],

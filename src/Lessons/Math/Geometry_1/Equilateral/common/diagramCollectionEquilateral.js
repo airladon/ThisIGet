@@ -15,6 +15,7 @@ import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection
 
 const {
   Transform, DiagramObjectAngle, DiagramObjectLine, DiagramElementPrimative,
+  DiagramElementCollection,
 } = Fig;
 
 export default class EquilateralCollection extends CommonDiagramCollection {
@@ -26,7 +27,8 @@ export default class EquilateralCollection extends CommonDiagramCollection {
     _side23: DiagramObjectLine;
     _side31: DiagramObjectLine;
     _isoLines: DiagramElementPrimative;
-  };
+    _line: DiagramElementPrimative;
+  } & DiagramElementCollection;
 
   isoOrientation: number;
 

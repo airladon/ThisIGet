@@ -7,8 +7,9 @@ import details from '../details';
 import EquilateralCollection from '../common/diagramCollectionEquilateral';
 
 const { Transform } = Fig;
+const { click } = Fig.tools.html;
 
-export default class QR_TODO extends PopupBoxCollection {
+export default class QREquilateral extends PopupBoxCollection {
   _collection: EquilateralCollection;
 
   constructor(
@@ -25,20 +26,60 @@ export default class QR_TODO extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
-
-    this.setTitle('TODO');
-    this.setDescription('TODO', modifiers);
+    const modifiers = {
+      three_equal_sides: click(
+        this._collection.pulseSides,
+        [this._collection],
+        this.layout.colors.equalLength,
+      ),
+      three_equal_angles: click(
+        this._collection.pulseAngles,
+        [this._collection],
+        this.layout.colors.angles,
+      ),
+    };
+    this.setTitle('Isosceles Triangle');
+    this.setDescription(`
+      <p>
+      An |Equilateral| triangle has |three_equal_sides| and |three_equal_angles|.
+      </p>
+      <p>
+      All triangles with three equal sides will have three equal angles, and all triangles with three equal angles will have three equal sides.
+      </p>
+    `, modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSize(2.5, 1.4);
     super.show();
     const collection = this._collection;
-    collection.showAll();
-    collection.transform.updateScale(0.7, 0.7);
-    // collection.setPosition(this.layout.position);
+    collection.show();
+    const iso = collection;
+    const iTri = this._collection._tri;
+    iso.show();
+    iTri.show();
+    iTri._line.show();
+    iTri._side23.showAll();
+    iTri._side31.showAll();
+    iTri._side12.showAll();
+    iTri._angle1.showAll();
+    iTri._angle2.showAll();
+    iTri._angle3.showAll();
+    collection.transform.updateScale(0.6, 0.6);
+    collection.setPosition(this.layout.position);
     this.diagram.animateNextFrame();
   }
 }
+
+function attachQuickReference1() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  window.quickReference[details.details.uid] = {
+    Main: QREquilateral,
+  };
+}
+
+attachQuickReference1();
+
