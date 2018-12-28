@@ -7,8 +7,9 @@ import details from '../details';
 import IsocelesCollection from '../common/diagramCollectionIsoceles';
 
 const { Transform } = Fig;
+const { click } = Fig.tools.html;
 
-export default class QR_TODO extends PopupBoxCollection {
+export default class QRIsosceles extends PopupBoxCollection {
   _collection: IsocelesCollection;
 
   constructor(
@@ -25,10 +26,25 @@ export default class QR_TODO extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
-
-    this.setTitle('TODO');
-    this.setDescription('TODO', modifiers);
+    const modifiers = {
+      two_equal_sides: click(
+        this._collection.pulseEqualSides,
+        [this._collection],
+        this.layout.colors.equalLength,
+      ),
+      two_equal_angles: click(
+        this._collection.pulseEqualAngles,
+        [this._collection],
+        this.layout.colors.angles,
+      ),
+      opposite: click(
+        this._collection.pulseOpposites,
+        [this._collection],
+        this.layout.colors.diagram.action,
+      ),
+    };
+    this.setTitle('Isosceles Triangle');
+    this.setDescription('An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -36,7 +52,17 @@ export default class QR_TODO extends PopupBoxCollection {
     this.setDiagramSize(2.5, 1.3);
     super.show();
     const collection = this._collection;
-    collection.showAll();
+    collection.show();
+    console.log(collection)
+    const iso = collection;
+    const iTri = this._collection._tri;
+    iso.show();
+    iTri.show();
+    iTri._line.show();
+    iTri._side23.showAll();
+    iTri._side31.showAll();
+    iTri._angle1.showAll();
+    iTri._angle2.showAll();
     collection.transform.updateScale(0.7, 0.7);
     // collection.setPosition(this.layout.position);
     this.diagram.animateNextFrame();

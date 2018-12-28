@@ -12,7 +12,7 @@ import DiagramCollection from './diagramCollection';
 import Definition from '../../../../LessonsCommon/tools/definition';
 
 const {
-  click, centerV, highlight,
+  click, centerV,
 } = Fig.tools.html;
 
 const layout = lessonLayout();

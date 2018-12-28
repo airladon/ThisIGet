@@ -178,6 +178,7 @@ export default function getLessonIndex() {
     'isosceles_triangles',
     [
       '1',
+      'dev',
       'quiz',
       'summary',
     ],
