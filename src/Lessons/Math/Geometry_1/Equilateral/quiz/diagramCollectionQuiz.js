@@ -33,15 +33,18 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
     this.add('poly', this.diagram.objects.polyLine({
       close: true,
       color: this.layout.colors.diagram.action,
-      sideLabel: {
-        text: null,
-        location: 'outside',
-        color: [[1, 0, 0, 1], [0, 1, 0, 1]],
-        textScale: 0.5,
-        lineOffset: 0.25,
+      side: {
+        color: [1, 0, 0, 1],
+        offset: 0.25,
         showLine: true,
         arrows: true,
         width: 0.015,
+        label: {
+          text: null,
+          location: 'outside',
+          scale: 0.5,
+          color: [0, 1, 0, 1],
+        },
       },
     }));
     // this.add('input', this.makeEntryBox('a1', '?', 3));

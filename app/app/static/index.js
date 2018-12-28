@@ -13975,8 +13975,8 @@ function (_DiagramElementCollec) {
     _this2._arrow2 = null; // Label related properties
 
     _this2.label = null;
-    _this2.showRealLength = false;
     _this2._label = null;
+    _this2.showRealLength = false;
 
     _this2.setLength(_this2.length);
 
@@ -14015,19 +14015,25 @@ function (_DiagramElementCollec) {
     }
 
     var defaultLabelOptions = {
-      text: '',
+      text: null,
       offset: 0,
       location: 'top',
       subLocation: 'left',
       orientation: 'horizontal',
       linePosition: 0.5,
-      textScale: 0.7
+      scale: 0.7,
+      color: optionsToUse.color
     };
 
     if (optionsToUse.label) {
       var labelOptions = Object.assign({}, defaultLabelOptions, optionsToUse.label);
 
-      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.textScale);
+      if (labelOptions.text === null) {
+        labelOptions.text = '';
+        _this2.showRealLength = true;
+      }
+
+      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color);
     }
 
     return _this2;
@@ -14219,8 +14225,9 @@ function (_DiagramElementCollec) {
       var subLocation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
       var orientation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'horizontal';
       var linePosition = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
-      var textScale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
-      this.label = new LineLabel(this.equation, labelText, this.color, offset, location, subLocation, orientation, linePosition, textScale);
+      var scale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
+      var color = arguments.length > 7 ? arguments[7] : undefined;
+      this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn.collection);
@@ -14598,34 +14605,27 @@ function makeArray(possibleArray, count) {
   }
 
   return outArray;
-}
+} // function makeColorArray(
+//   possibleArray: Array<Array<number> | number>,
+//   count: number,
+// ): Array<Array<number>> {
+//   if (Array.isArray(possibleArray[0])) {
+//     if (count === possibleArray.length) {                   // $FlowFixMe
+//       return possibleArray;
+//     }
+//     const outArray = [];
+//     for (let i = 0; i < count; i += 1) {                    // $FlowFixMe
+//       outArray.push(possibleArray[i % possibleArray.length].slice());
+//     }
+//     return outArray;
+//   }
+//   const outArray = [];
+//   for (let i = 0; i < count; i += 1) {
+//     outArray.push(possibleArray.slice());
+//   }                                                         // $FlowFixMe
+//   return outArray;
+// }
 
-function makeColorArray(possibleArray, count) {
-  if (Array.isArray(possibleArray[0])) {
-    if (count === possibleArray.length) {
-      // $FlowFixMe
-      return possibleArray;
-    }
-
-    var _outArray2 = [];
-
-    for (var i = 0; i < count; i += 1) {
-      // $FlowFixMe
-      _outArray2.push(possibleArray[i % possibleArray.length].slice());
-    }
-
-    return _outArray2;
-  }
-
-  var outArray = [];
-
-  for (var _i2 = 0; _i2 < count; _i2 += 1) {
-    outArray.push(possibleArray.slice());
-  } // $FlowFixMe
-
-
-  return outArray;
-}
 
 var DiagramObjectPolyLine =
 /*#__PURE__*/
@@ -14646,29 +14646,44 @@ function (_DiagramElementCollec) {
       close: false,
       showLine: true,
       borderToPoint: 'never',
+      width: 0.01
+    };
+    var defaultSideOptions = {
+      showLine: false,
+      offset: 0,
       width: 0.01,
-      sideLabel: null
+      color: options.color == null ? [0, 1, 0, 1] : options.color
     };
     var defaultSideLabelOptions = {
-      text: 'a',
-      lineOffset: 0,
-      labelOffset: 0.1,
+      offset: 0.1,
+      text: null,
       location: 'outside',
       subLocation: 'top',
       orientation: 'horizontal',
       linePosition: 0.5,
-      showLine: false,
-      width: 0.01,
-      color: options.color == null ? [0, 1, 0, 1] : options.color,
       textScale: 0.7
     };
 
-    if (options.sideLabel) {
-      // $FlowFixMe
-      defaultOptions.sideLabel = defaultSideLabelOptions;
+    if (options.side != null) {
+      defaultOptions.side = defaultSideOptions; // $FlowFixMe
+
+      if (options.side.label != null) {
+        defaultOptions.side.label = defaultSideLabelOptions;
+      }
     }
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
+
+    if (Array.isArray(options.side)) {
+      optionsToUse.side = options.side.map(function (side) {
+        return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions.side, side);
+      });
+    } // console.log(optionsToUse)
+    // console.log(optionsToUse.side[0].label)
+    // console.log(optionsToUse.side[1].label)
+    // console.log(optionsToUse.side[2].label)
+
+
     _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
 
     _this.setColor(optionsToUse.color);
@@ -14695,26 +14710,15 @@ function (_DiagramElementCollec) {
       _this.add('line', line);
     }
 
-    if (optionsToUse.sideLabel) {
-      var sideLabel = optionsToUse.sideLabel;
+    if (optionsToUse.side) {
+      var side = optionsToUse.side;
       var pCount = optionsToUse.points.length - 1;
 
       if (optionsToUse.close) {
         pCount += 1;
       }
 
-      var textArray = makeArray(sideLabel.text, pCount);
-      var lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
-      var labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
-      var locationArray = makeArray(sideLabel.location, pCount);
-      var subLocationArray = makeArray(sideLabel.subLocation, pCount);
-      var orientationArray = makeArray(sideLabel.orientation, pCount);
-      var linePositionArray = makeArray(sideLabel.linePosition, pCount);
-      var colorArray = makeColorArray(sideLabel.color, pCount);
-      var showLineArray = makeArray(sideLabel.showLine, pCount);
-      var widthArray = makeArray(sideLabel.width, pCount);
-      var arrowsArray = makeArray(sideLabel.arrows, pCount);
-      var textScaleArray = makeArray(sideLabel.textScale, pCount);
+      var sideArray = makeArray(side, pCount);
 
       for (var i = 0; i < pCount; i += 1) {
         var j = i + 1;
@@ -14724,35 +14728,121 @@ function (_DiagramElementCollec) {
         }
 
         var name = "side".concat(i).concat(j);
-        var text = textArray[i] == null ? '' : textArray[i];
-
-        var label = _this.objects.line({
+        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, {
           p1: optionsToUse.points[i],
-          p2: optionsToUse.points[j],
-          showLine: showLineArray[i],
-          color: colorArray[i],
-          width: widthArray[i],
-          arrows: arrowsArray[i],
-          offset: lineOffsetArray[i],
-          label: {
-            text: text,
-            offset: labelOffsetArray[i],
-            location: locationArray[i],
-            subLocation: subLocationArray[i],
-            orientation: orientationArray[i],
-            linePosition: linePositionArray[i],
-            textScale: textScaleArray[i]
-          }
-        });
+          p2: optionsToUse.points[j]
+        }, sideArray[i]); // if (sideOptions.label) {
+        //   if (sideOptions.label.text === null) {
+        //     sideOptions.label.text = '';
+        //     sideOptions.label.showRealLength = true;
+        //   }
+        // }
 
-        if (textArray[i] === null) {
-          label.showRealLength = true;
-          label.updateLabel();
-        }
+        var sideLine = _this.objects.line(sideOptions);
 
-        _this.add(name, label);
+        _this.add(name, sideLine);
       }
-    }
+    } // if (optionsToUse.sideLabel) {
+    //   const { sideLabel } = optionsToUse;
+    //   let pCount = optionsToUse.points.length - 1;
+    //   if (optionsToUse.close) {
+    //     pCount += 1;
+    //   }
+    //   const textArray = makeArray(sideLabel.text, pCount);
+    //   const lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
+    //   const labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
+    //   const locationArray = makeArray(sideLabel.location, pCount);
+    //   const subLocationArray = makeArray(sideLabel.subLocation, pCount);
+    //   const orientationArray = makeArray(sideLabel.orientation, pCount);
+    //   const linePositionArray = makeArray(sideLabel.linePosition, pCount);
+    //   const colorArray = makeColorArray(sideLabel.color, pCount);
+    //   const showLineArray = makeArray(sideLabel.showLine, pCount);
+    //   const widthArray = makeArray(sideLabel.width, pCount);
+    //   const arrowsArray = makeArray(sideLabel.arrows, pCount);
+    //   const textScaleArray = makeArray(sideLabel.textScale, pCount);
+    //   for (let i = 0; i < pCount; i += 1) {
+    //     let j = i + 1;
+    //     if (i === pCount - 1 && optionsToUse.close) {
+    //       j = 0;
+    //     }
+    //     const name = `side${i}${j}`;
+    //     const text = textArray[i] == null ? '' : textArray[i];
+    //     const label = this.objects.line({
+    //       p1: optionsToUse.points[i],
+    //       p2: optionsToUse.points[j],
+    //       showLine: showLineArray[i],
+    //       color: colorArray[i],
+    //       width: widthArray[i],
+    //       arrows: arrowsArray[i],
+    //       offset: lineOffsetArray[i],
+    //       label: {
+    //         text,
+    //         offset: labelOffsetArray[i],
+    //         location: locationArray[i],
+    //         subLocation: subLocationArray[i],
+    //         orientation: orientationArray[i],
+    //         linePosition: linePositionArray[i],
+    //         textScale: textScaleArray[i],
+    //       },
+    //     });
+    //     if (textArray[i] === null) {
+    //       label.showRealLength = true;
+    //       label.updateLabel();
+    //     }
+    //     this.add(name, label);
+    //   }
+    // }
+    // if (optionsToUse.angleLabel) {
+    //   const { angleLabel } = optionsToUse;
+    //   let pCount = optionsToUse.points.length;
+    //   if (optionsToUse.close === false) {
+    //     pCount -= 2;
+    //   }
+    //   const textArray = makeArray(sideLabel.text, pCount);
+    //   const lineOffsetArray = makeArray(sideLabel.lineOffset, pCount);
+    //   const labelOffsetArray = makeArray(sideLabel.labelOffset, pCount);
+    //   const locationArray = makeArray(sideLabel.location, pCount);
+    //   const subLocationArray = makeArray(sideLabel.subLocation, pCount);
+    //   const orientationArray = makeArray(sideLabel.orientation, pCount);
+    //   const linePositionArray = makeArray(sideLabel.linePosition, pCount);
+    //   const colorArray = makeColorArray(sideLabel.color, pCount);
+    //   const showLineArray = makeArray(sideLabel.showLine, pCount);
+    //   const widthArray = makeArray(sideLabel.width, pCount);
+    //   const arrowsArray = makeArray(sideLabel.arrows, pCount);
+    //   const textScaleArray = makeArray(sideLabel.textScale, pCount);
+    //   for (let i = 0; i < pCount; i += 1) {
+    //     let j = i + 1;
+    //     if (i === pCount - 1 && optionsToUse.close) {
+    //       j = 0;
+    //     }
+    //     const name = `side${i}${j}`;
+    //     const text = textArray[i] == null ? '' : textArray[i];
+    //     const label = this.objects.line({
+    //       p1: optionsToUse.points[i],
+    //       p2: optionsToUse.points[j],
+    //       showLine: showLineArray[i],
+    //       color: colorArray[i],
+    //       width: widthArray[i],
+    //       arrows: arrowsArray[i],
+    //       offset: lineOffsetArray[i],
+    //       label: {
+    //         text,
+    //         offset: labelOffsetArray[i],
+    //         location: locationArray[i],
+    //         subLocation: subLocationArray[i],
+    //         orientation: orientationArray[i],
+    //         linePosition: linePositionArray[i],
+    //         textScale: textScaleArray[i],
+    //       },
+    //     });
+    //     if (textArray[i] === null) {
+    //       label.showRealLength = true;
+    //       label.updateLabel();
+    //     }
+    //     this.add(name, label);
+    //   }
+    // }
+
 
     return _this;
   }
