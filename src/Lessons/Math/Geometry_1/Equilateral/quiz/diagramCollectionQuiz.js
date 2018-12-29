@@ -45,23 +45,38 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
           scale: 0.5,
           color: [0, 1, 0, 1],
         },
+        mods: {
+          isMovable: true,
+          isTouchable: true,
+        },
       },
       angle: {
         label: {
           text: null,
-          radius: 0.1,
+          radius: 0.25,
           textScale: 0.5,
           color: [1, 0, 1, 1],
         },
         curve: {
-          radius: 0.1,
+          radius: 0.3,
+          sides: 50,
+        },
+        mods: {
+          isMovable: true,
+          isTouchable: true,
         },
       },
       pad: {
         color: [1, 0.5, 0.5, 1],
-        radius: 0.08,
+        radius: 0.2,
+        isMovable: true,
       },
     }));
+    this._poly.hasTouchableElements = true;
+    // this._poly._pad0.isTouchable = true;
+    // this._poly._pad0.isMovable = true;
+    // this._poly._pad0.move.limitToDiagram = true;
+    // this._poly._pad0.setFirstTransform();
     this._poly.updatePoints([new Point(1, 0), new Point(-1, -1), new Point(0, 1)]);
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);

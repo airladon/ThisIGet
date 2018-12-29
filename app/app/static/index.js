@@ -11549,7 +11549,8 @@ function (_DiagramElementCollec) {
       // if p1, p2 and p3 are defined, position, angle and
       p2: null,
       // rotation will be overridden
-      p3: null
+      p3: null,
+      mods: {}
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     _this2 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectAngle).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Line').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
@@ -11660,6 +11661,10 @@ function (_DiagramElementCollec) {
     }
 
     _this2.update();
+
+    if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
+      _this2.setProperties(optionsToUse.mods);
+    }
 
     return _this2;
   }
@@ -13893,7 +13898,8 @@ function (_DiagramElementCollec) {
       showLine: true,
       largerTouchBorder: true,
       offset: 0,
-      dashStyle: null
+      dashStyle: null,
+      mods: {}
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var dashStyle = optionsToUse.dashStyle;
@@ -14041,6 +14047,10 @@ function (_DiagramElementCollec) {
       }
 
       _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color);
+    }
+
+    if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
+      _this2.setProperties(optionsToUse.mods);
     }
 
     return _this2;
@@ -14686,7 +14696,8 @@ function (_DiagramElementCollec) {
       sides: 20,
       radius: 0.1,
       color: options.color == null ? [0, 1, 0, 1] : options.color,
-      fill: true
+      fill: true,
+      isMovable: false
     };
 
     if (options.side != null) {
@@ -14746,7 +14757,7 @@ function (_DiagramElementCollec) {
       var pCount = optionsToUse.points.length;
       var padArray = makeArray(pad, pCount);
 
-      for (var i = 0; i < pCount; i += 1) {
+      var _loop = function _loop(i) {
         var name = "pad".concat(i);
         var padOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
           transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(optionsToUse.points[i])
@@ -14754,7 +14765,29 @@ function (_DiagramElementCollec) {
 
         var padShape = _this.shapes.polygon(padOptions);
 
+        if (padArray[i].isMovable) {
+          padShape.isMovable = true;
+          padShape.isTouchable = true;
+          padShape.move.limitToDiagram = true;
+          padShape.setMoveBoundaryToDiagram();
+
+          padShape.setTransformCallback = function (transform) {
+            var index = parseInt(padShape.name.slice(3), 10);
+            var translation = transform.t();
+
+            if (translation != null) {
+              _this.points[index] = translation._dup();
+
+              _this.updatePoints(_this.points);
+            }
+          };
+        }
+
         _this.add(name, padShape);
+      };
+
+      for (var i = 0; i < pCount; i += 1) {
+        _loop(i);
       }
     } // Add Line
 
@@ -14783,23 +14816,22 @@ function (_DiagramElementCollec) {
 
       var sideArray = makeArray(side, _pCount);
 
-      for (var _i2 = 0; _i2 < _pCount; _i2 += 1) {
-        var j = _i2 + 1;
+      for (var i = 0; i < _pCount; i += 1) {
+        var j = i + 1;
 
-        if (_i2 === _pCount - 1 && optionsToUse.close) {
+        if (i === _pCount - 1 && optionsToUse.close) {
           j = 0;
         }
 
-        var _name = "side".concat(_i2).concat(j);
-
+        var name = "side".concat(i).concat(j);
         var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[_i2],
+          p1: optionsToUse.points[i],
           p2: optionsToUse.points[j]
-        }, sideArray[_i2]);
+        }, sideArray[i]);
 
         var sideLine = _this.objects.line(sideOptions);
 
-        _this.add(_name, sideLine);
+        _this.add(name, sideLine);
       }
     } // Add Angles
 
@@ -14819,30 +14851,30 @@ function (_DiagramElementCollec) {
         firstIndex = 1;
       }
 
-      for (var _i3 = firstIndex; _i3 < _pCount2 + firstIndex; _i3 += 1) {
-        var _j = _i3 + 1;
+      for (var _i2 = firstIndex; _i2 < _pCount2 + firstIndex; _i2 += 1) {
+        var _j = _i2 + 1;
 
-        var k = _i3 - 1;
+        var k = _i2 - 1;
 
-        if (_i3 === _pCount2 - 1 && optionsToUse.close) {
+        if (_i2 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        if (_i3 === 0 && optionsToUse.close) {
+        if (_i2 === 0 && optionsToUse.close) {
           k = _pCount2 - 1;
         }
 
-        var _name2 = "angle".concat(_i3);
+        var _name = "angle".concat(_i2);
 
         var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
           p1: optionsToUse.points[k],
-          p2: optionsToUse.points[_i3],
+          p2: optionsToUse.points[_i2],
           p3: optionsToUse.points[_j]
-        }, angleArray[_i3]);
+        }, angleArray[_i2]);
 
         var angleAnnotation = _this.objects.angle(angleOptions);
 
-        _this.add(_name2, angleAnnotation);
+        _this.add(_name, angleAnnotation);
       }
     }
 
@@ -14864,7 +14896,8 @@ function (_DiagramElementCollec) {
           var name = "pad".concat(i);
 
           if (this.elements[name]) {
-            this.elements[name].setPosition(newPoints[i]);
+            // if (this.elements[name].isMovable === false) {
+            this.elements[name].transform.updateTranslation(newPoints[i]); // }
           }
         }
       }
@@ -14876,17 +14909,17 @@ function (_DiagramElementCollec) {
           pCount += 1;
         }
 
-        for (var _i4 = 0; _i4 < pCount; _i4 += 1) {
-          var j = _i4 + 1;
+        for (var _i3 = 0; _i3 < pCount; _i3 += 1) {
+          var j = _i3 + 1;
 
-          if (_i4 === pCount - 1 && this.close) {
+          if (_i3 === pCount - 1 && this.close) {
             j = 0;
           }
 
-          var _name3 = "side".concat(_i4).concat(j);
+          var _name2 = "side".concat(_i3).concat(j);
 
-          if (this.elements[_name3] != null) {
-            this.elements[_name3].setEndPoints(newPoints[_i4], newPoints[j]);
+          if (this.elements[_name2] != null) {
+            this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
           }
         }
       }
@@ -14904,30 +14937,32 @@ function (_DiagramElementCollec) {
           firstIndex = 1;
         }
 
-        for (var _i5 = firstIndex; _i5 < pCount + firstIndex; _i5 += 1) {
-          var _j2 = _i5 + 1;
+        for (var _i4 = firstIndex; _i4 < pCount + firstIndex; _i4 += 1) {
+          var _j2 = _i4 + 1;
 
-          var k = _i5 - 1;
+          var k = _i4 - 1;
 
-          if (_i5 === pCount - 1 && this.close) {
+          if (_i4 === pCount - 1 && this.close) {
             _j2 = 0;
           }
 
-          if (_i5 === 0 && this.close) {
+          if (_i4 === 0 && this.close) {
             k = pCount - 1;
           }
 
-          var _name4 = "angle".concat(_i5);
+          var _name3 = "angle".concat(_i4);
 
-          if (this.elements[_name4] != null) {
-            this.elements[_name4].setAngle({
+          if (this.elements[_name3] != null) {
+            this.elements[_name3].setAngle({
               p1: newPoints[k],
-              p2: newPoints[_i5],
+              p2: newPoints[_i4],
               p3: newPoints[_j2]
             });
           }
         }
       }
+
+      this.points = newPoints;
     }
   }]);
 
@@ -15262,7 +15297,8 @@ function () {
         transform: null,
         point: null,
         textureLocation: '',
-        textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1)
+        textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
+        mods: {}
       };
 
       for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -15289,11 +15325,19 @@ function () {
         direction = -1;
       }
 
+      var element;
+
       if (o.fill) {
-        return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, o.sides, o.radius, o.rotation, o.sidesToDraw, o.color, transform, this.limits, o.textureLocation, o.textureCoords);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, o.sides, o.radius, o.rotation, o.sidesToDraw, o.color, transform, this.limits, o.textureLocation, o.textureCoords);
+      } else {
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, o.sides, o.radius, o.width, o.rotation, direction, o.sidesToDraw, o.color, transform, this.limits);
       }
 
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, o.sides, o.radius, o.width, o.rotation, direction, o.sidesToDraw, o.color, transform, this.limits);
+      if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
+        element.setProperties(optionsToUse.mods);
+      }
+
+      return element;
     }
   }, {
     key: "polygonLine",
