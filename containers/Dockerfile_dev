@@ -51,7 +51,7 @@ ENV FLASK_DEBUG 1
 # Dev server script
 ADD containers/dev/dev-server.sh .
 
-RUN npm install figureone@0.0.18
+RUN npm install figureone@0.0.19
 
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]

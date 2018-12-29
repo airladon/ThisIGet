@@ -70,6 +70,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
         color: [1, 0.5, 0.5, 1],
         radius: 0.2,
         isMovable: true,
+        touchRadius: 0.4,
       },
     }));
     this._poly.hasTouchableElements = true;

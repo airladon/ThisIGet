@@ -14590,15 +14590,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
-// import Diagram from '../Diagram';
- // import {
-//   roundNum,
-// } from '../../tools/math';
 
 
- // import EquationLabel from './EquationLabel';
-// import type { TypeLabelEquationOptions } from './EquationLabel';
-// import { Equation } from '../DiagramElements/Equation/GLEquation';
 
 
 
@@ -14723,12 +14716,14 @@ function (_DiagramElementCollec) {
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
 
     if (Array.isArray(options.side)) {
+      // $FlowFixMe
       optionsToUse.side = options.side.map(function (side) {
         return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions.side, side);
       });
     }
 
     if (Array.isArray(options.angle)) {
+      // $FlowFixMe
       optionsToUse.angle = options.angle.map(function (angle) {
         return Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions.angle, angle);
       });
@@ -14781,6 +14776,11 @@ function (_DiagramElementCollec) {
               _this.updatePoints(_this.points);
             }
           };
+
+          if (padArray[i].touchRadius != null) {
+            var multiplier = padArray[i].touchRadius / padArray[i].radius;
+            padShape.increaseBorderSize(multiplier);
+          }
         }
 
         _this.add(name, padShape);
@@ -21090,6 +21090,34 @@ function (_DiagramElement) {
     key: "getRelativeVertexSpaceBoundingRect",
     value: function getRelativeVertexSpaceBoundingRect() {
       return this.drawingObject.getRelativeVertexSpaceBoundingRect();
+    }
+  }, {
+    key: "increaseBorderSize",
+    value: function increaseBorderSize() {
+      var xMultiplierOrPoint = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var yMultiplier = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var xMulToUse;
+      var yMulToUse;
+
+      if (xMultiplierOrPoint instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+        xMulToUse = xMultiplierOrPoint.x;
+        yMulToUse = xMultiplierOrPoint.y;
+      } else {
+        xMulToUse = xMultiplierOrPoint;
+
+        if (yMultiplier == null) {
+          yMulToUse = xMulToUse;
+        } else {
+          yMulToUse = yMultiplier;
+        }
+      }
+
+      if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        for (var i = 0; i < this.drawingObject.border[0].length; i += 1) {
+          this.drawingObject.border[0][i].x *= xMulToUse;
+          this.drawingObject.border[0][i].y *= yMulToUse;
+        }
+      }
     }
   }]);
 
