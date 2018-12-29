@@ -14566,6 +14566,10 @@ function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterat
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -14721,8 +14725,9 @@ function (_DiagramElementCollec) {
     _this.animateNextFrame = animateNextFrame;
     _this.position = optionsToUse.position;
 
-    _this.transform.updateTranslation(_this.position); // Add Line
+    _this.transform.updateTranslation(_this.position);
 
+    _this.close = optionsToUse.close; // Add Line
 
     if (optionsToUse.showLine) {
       var line = _this.shapes.polyLine({
@@ -14734,8 +14739,9 @@ function (_DiagramElementCollec) {
       });
 
       _this.add('line', line);
-    } // Add Sides
+    }
 
+    _this.points = optionsToUse.points; // Add Sides
 
     if (optionsToUse.side) {
       var side = optionsToUse.side;
@@ -14811,6 +14817,71 @@ function (_DiagramElementCollec) {
 
     return _this;
   }
+
+  _createClass(DiagramObjectPolyLine, [{
+    key: "updatePoints",
+    value: function updatePoints(newPoints) {
+      if (this._line != null) {
+        this._line.drawingObject.change(newPoints);
+      }
+
+      var pCount = this.points.length - 1;
+
+      if (this.close) {
+        pCount += 1;
+      }
+
+      for (var i = 0; i < pCount; i += 1) {
+        var j = i + 1;
+
+        if (i === pCount - 1 && this.close) {
+          j = 0;
+        }
+
+        var name = "side".concat(i).concat(j);
+
+        if (this.elements[name] != null) {
+          this.elements[name].setEndPoints(newPoints[i], newPoints[j]);
+        }
+      }
+
+      pCount = this.points.length;
+
+      if (this.close === false) {
+        pCount -= 2;
+      }
+
+      var firstIndex = 0;
+
+      if (this.close === false) {
+        firstIndex = 1;
+      }
+
+      for (var _i3 = firstIndex; _i3 < pCount + firstIndex; _i3 += 1) {
+        var _j2 = _i3 + 1;
+
+        var k = _i3 - 1;
+
+        if (_i3 === pCount - 1 && this.close) {
+          _j2 = 0;
+        }
+
+        if (_i3 === 0 && this.close) {
+          k = pCount - 1;
+        }
+
+        var _name2 = "angle".concat(_i3);
+
+        if (this.elements[_name2] != null) {
+          this.elements[_name2].setAngle({
+            p1: newPoints[k],
+            p2: newPoints[_i3],
+            p3: newPoints[_j2]
+          });
+        }
+      }
+    }
+  }]);
 
   return DiagramObjectPolyLine;
 }(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);

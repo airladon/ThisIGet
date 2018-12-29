@@ -6,7 +6,7 @@ import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
 
-const { Transform, DiagramElementPrimative } = Fig;
+const { Transform, DiagramElementPrimative, Point } = Fig;
 
 export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagramCollection) {
 // export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
@@ -58,6 +58,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
         },
       },
     }));
+    this._poly.updatePoints([new Point(-1, -1), new Point(1, 0), new Point(0, 1)]);
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
     this.hasTouchableElements = true;
