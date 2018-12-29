@@ -14682,6 +14682,12 @@ function (_DiagramElementCollec) {
     var defaultAngleLabelOptions = {
       text: null
     };
+    var defaultPadOptions = {
+      sides: 20,
+      radius: 0.1,
+      color: options.color == null ? [0, 1, 0, 1] : options.color,
+      fill: true
+    };
 
     if (options.side != null) {
       defaultOptions.side = defaultSideOptions; // $FlowFixMe
@@ -14697,6 +14703,10 @@ function (_DiagramElementCollec) {
       if (options.angle.label != null) {
         defaultOptions.angle.label = defaultAngleLabelOptions;
       }
+    }
+
+    if (options.pad != null) {
+      defaultOptions.pad = defaultPadOptions;
     }
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
@@ -14727,7 +14737,27 @@ function (_DiagramElementCollec) {
 
     _this.transform.updateTranslation(_this.position);
 
-    _this.close = optionsToUse.close; // Add Line
+    _this.close = optionsToUse.close;
+    _this.options = optionsToUse;
+    _this.points = optionsToUse.points; // Add Pads
+
+    if (optionsToUse.pad) {
+      var pad = optionsToUse.pad;
+      var pCount = optionsToUse.points.length;
+      var padArray = makeArray(pad, pCount);
+
+      for (var i = 0; i < pCount; i += 1) {
+        var name = "pad".concat(i);
+        var padOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(optionsToUse.points[i])
+        }, padArray[i]);
+
+        var padShape = _this.shapes.polygon(padOptions);
+
+        _this.add(name, padShape);
+      }
+    } // Add Line
+
 
     if (optionsToUse.showLine) {
       var line = _this.shapes.polyLine({
@@ -14739,79 +14769,80 @@ function (_DiagramElementCollec) {
       });
 
       _this.add('line', line);
-    }
+    } // Add Sides
 
-    _this.points = optionsToUse.points; // Add Sides
 
     if (optionsToUse.side) {
       var side = optionsToUse.side;
-      var pCount = optionsToUse.points.length - 1;
+
+      var _pCount = optionsToUse.points.length - 1;
 
       if (optionsToUse.close) {
-        pCount += 1;
+        _pCount += 1;
       }
 
-      var sideArray = makeArray(side, pCount);
+      var sideArray = makeArray(side, _pCount);
 
-      for (var i = 0; i < pCount; i += 1) {
-        var j = i + 1;
+      for (var _i2 = 0; _i2 < _pCount; _i2 += 1) {
+        var j = _i2 + 1;
 
-        if (i === pCount - 1 && optionsToUse.close) {
+        if (_i2 === _pCount - 1 && optionsToUse.close) {
           j = 0;
         }
 
-        var name = "side".concat(i).concat(j);
+        var _name = "side".concat(_i2).concat(j);
+
         var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[i],
+          p1: optionsToUse.points[_i2],
           p2: optionsToUse.points[j]
-        }, sideArray[i]);
+        }, sideArray[_i2]);
 
         var sideLine = _this.objects.line(sideOptions);
 
-        _this.add(name, sideLine);
+        _this.add(_name, sideLine);
       }
     } // Add Angles
 
 
     if (optionsToUse.angle) {
       var angle = optionsToUse.angle;
-      var _pCount = optionsToUse.points.length;
+      var _pCount2 = optionsToUse.points.length;
 
       if (optionsToUse.close === false) {
-        _pCount -= 2;
+        _pCount2 -= 2;
       }
 
-      var angleArray = makeArray(angle, _pCount);
+      var angleArray = makeArray(angle, _pCount2);
       var firstIndex = 0;
 
       if (optionsToUse.close === false) {
         firstIndex = 1;
       }
 
-      for (var _i2 = firstIndex; _i2 < _pCount + firstIndex; _i2 += 1) {
-        var _j = _i2 + 1;
+      for (var _i3 = firstIndex; _i3 < _pCount2 + firstIndex; _i3 += 1) {
+        var _j = _i3 + 1;
 
-        var k = _i2 - 1;
+        var k = _i3 - 1;
 
-        if (_i2 === _pCount - 1 && optionsToUse.close) {
+        if (_i3 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        if (_i2 === 0 && optionsToUse.close) {
-          k = _pCount - 1;
+        if (_i3 === 0 && optionsToUse.close) {
+          k = _pCount2 - 1;
         }
 
-        var _name = "angle".concat(_i2);
+        var _name2 = "angle".concat(_i3);
 
         var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
           p1: optionsToUse.points[k],
-          p2: optionsToUse.points[_i2],
+          p2: optionsToUse.points[_i3],
           p3: optionsToUse.points[_j]
-        }, angleArray[_i2]);
+        }, angleArray[_i3]);
 
         var angleAnnotation = _this.objects.angle(angleOptions);
 
-        _this.add(_name, angleAnnotation);
+        _this.add(_name2, angleAnnotation);
       }
     }
 
@@ -14823,61 +14854,78 @@ function (_DiagramElementCollec) {
     value: function updatePoints(newPoints) {
       if (this._line != null) {
         this._line.drawingObject.change(newPoints);
-      }
+      } // Add Pads
 
-      var pCount = this.points.length - 1;
 
-      if (this.close) {
-        pCount += 1;
-      }
+      var pCount = this.points.length;
 
-      for (var i = 0; i < pCount; i += 1) {
-        var j = i + 1;
+      if (this.options.pad) {
+        for (var i = 0; i < pCount; i += 1) {
+          var name = "pad".concat(i);
 
-        if (i === pCount - 1 && this.close) {
-          j = 0;
-        }
-
-        var name = "side".concat(i).concat(j);
-
-        if (this.elements[name] != null) {
-          this.elements[name].setEndPoints(newPoints[i], newPoints[j]);
+          if (this.elements[name]) {
+            this.elements[name].setPosition(newPoints[i]);
+          }
         }
       }
 
-      pCount = this.points.length;
+      if (this.options.side != null) {
+        pCount = this.points.length - 1;
 
-      if (this.close === false) {
-        pCount -= 2;
-      }
-
-      var firstIndex = 0;
-
-      if (this.close === false) {
-        firstIndex = 1;
-      }
-
-      for (var _i3 = firstIndex; _i3 < pCount + firstIndex; _i3 += 1) {
-        var _j2 = _i3 + 1;
-
-        var k = _i3 - 1;
-
-        if (_i3 === pCount - 1 && this.close) {
-          _j2 = 0;
+        if (this.close) {
+          pCount += 1;
         }
 
-        if (_i3 === 0 && this.close) {
-          k = pCount - 1;
+        for (var _i4 = 0; _i4 < pCount; _i4 += 1) {
+          var j = _i4 + 1;
+
+          if (_i4 === pCount - 1 && this.close) {
+            j = 0;
+          }
+
+          var _name3 = "side".concat(_i4).concat(j);
+
+          if (this.elements[_name3] != null) {
+            this.elements[_name3].setEndPoints(newPoints[_i4], newPoints[j]);
+          }
+        }
+      }
+
+      if (this.options.angle != null) {
+        pCount = this.points.length;
+
+        if (this.close === false) {
+          pCount -= 2;
         }
 
-        var _name2 = "angle".concat(_i3);
+        var firstIndex = 0;
 
-        if (this.elements[_name2] != null) {
-          this.elements[_name2].setAngle({
-            p1: newPoints[k],
-            p2: newPoints[_i3],
-            p3: newPoints[_j2]
-          });
+        if (this.close === false) {
+          firstIndex = 1;
+        }
+
+        for (var _i5 = firstIndex; _i5 < pCount + firstIndex; _i5 += 1) {
+          var _j2 = _i5 + 1;
+
+          var k = _i5 - 1;
+
+          if (_i5 === pCount - 1 && this.close) {
+            _j2 = 0;
+          }
+
+          if (_i5 === 0 && this.close) {
+            k = pCount - 1;
+          }
+
+          var _name4 = "angle".concat(_i5);
+
+          if (this.elements[_name4] != null) {
+            this.elements[_name4].setAngle({
+              p1: newPoints[k],
+              p2: newPoints[_i5],
+              p3: newPoints[_j2]
+            });
+          }
         }
       }
     }
