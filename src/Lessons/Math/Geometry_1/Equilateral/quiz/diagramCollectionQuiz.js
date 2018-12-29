@@ -51,6 +51,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
           text: null,
           radius: 0.1,
           textScale: 0.5,
+          color: [1, 0, 1, 1],
         },
         curve: {
           radius: 0.1,
