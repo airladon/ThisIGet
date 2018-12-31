@@ -749,6 +749,12 @@ function () {
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["isTouchDevice"])();
     this.animateNextFrame();
+
+    if (optionsToUse.elements) {
+      // eslint-disable-next-line new-cap
+      this.elements = new optionsToUse.elements(this);
+      this.elements.diagramLimits = this.limits;
+    }
   }
 
   _createClass(Diagram, [{
@@ -11838,7 +11844,8 @@ function (_DiagramElementCollec) {
         width: defaultArrowDimension,
         height: defaultArrowDimension,
         radius: defaultArrowRadius,
-        autoHide: true
+        autoHide: true,
+        curveOverlap: 0.7
       };
       var optionsToUse = {};
 
@@ -11882,11 +11889,23 @@ function (_DiagramElementCollec) {
               element.show();
 
               if (i === 0) {
+                var delta = 0;
+
+                if (this.curve) {
+                  delta = primaryCurveAngle % (2 * Math.PI / this.curve.sides);
+                }
+
                 element.angleToDraw = primaryCurveAngle;
-                element.transform.updateRotation(rotation);
+                element.transform.updateRotation(rotation + delta / 2);
               } else {
+                var _delta = 0;
+
+                if (this.curve) {
+                  _delta = angle % (2 * Math.PI / this.curve.sides);
+                }
+
                 element.angleToDraw = angle;
-                element.transform.updateRotation(0);
+                element.transform.updateRotation(_delta / 2);
               }
             } else {
               element.hide();
@@ -11907,25 +11926,35 @@ function (_DiagramElementCollec) {
       var arrow2Hide = false;
       var rotationForArrow1 = 0;
       var curveAngle = this.angle;
-      var arrow2LengthModifier = 0.5;
+      var trueCurveAngle = this.angle; // const arrow2LengthModifier = 0.5;
+      // const arrowLengthMod = 0.9;
 
-      if (arrow1) {
-        curveAngle -= arrow1.height / arrow1.radius;
+      var arrow1Angle = 0;
+      var arrow2Angle = 0;
+
+      if (arrow1 && this.arrow1) {
+        arrow1Angle = arrow1.height / arrow1.radius * (1 - this.arrow1.curveOverlap);
+        curveAngle -= arrow1Angle;
+        trueCurveAngle -= arrow1.height / arrow1.radius;
       }
 
-      if (arrow2) {
-        curveAngle -= arrow2.height / arrow2.radius;
+      if (arrow2 && this.arrow2) {
+        arrow2Angle = arrow2.height / arrow2.radius * (1 - this.arrow2.curveOverlap);
+        curveAngle -= arrow2Angle;
+        trueCurveAngle -= arrow2.height / arrow2.radius;
       }
 
-      if (curveAngle < 0) {
+      if (trueCurveAngle < 0) {
         if (arrow1 && arrow1.autoHide) {
           arrow1Hide = true;
-          curveAngle += arrow1.height / arrow1.radius;
+          trueCurveAngle += arrow1.height / arrow1.radius;
+          curveAngle += arrow1Angle;
         }
 
         if (arrow2 && arrow2.autoHide) {
           arrow2Hide = true;
-          curveAngle += arrow2.height / arrow2.radius;
+          trueCurveAngle += arrow2.height / arrow2.radius;
+          curveAngle += arrow2Angle;
         }
       }
 
@@ -11941,7 +11970,7 @@ function (_DiagramElementCollec) {
 
           _arrow1.transform.updateRotation(Math.PI / 2 + arrowLengthAngle);
 
-          rotationForArrow1 = arrowLengthAngle;
+          rotationForArrow1 = arrow1Angle;
         }
       }
 
@@ -11953,11 +11982,10 @@ function (_DiagramElementCollec) {
 
           _arrow2.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(arrow2.radius, this.angle));
 
-          var _arrowLengthAngle = arrow2.height / arrow2.radius * arrow2LengthModifier;
+          var _arrowLengthAngle = arrow2.height / arrow2.radius;
 
-          _arrow2.transform.updateRotation(this.angle + Math.PI / 2 - _arrowLengthAngle / arrow2LengthModifier);
+          _arrow2.transform.updateRotation(this.angle + Math.PI / 2 - _arrowLengthAngle); // curveAngle += arrowLengthAngle * (1 - arrow2LengthModifier);
 
-          curveAngle += _arrowLengthAngle * (1 - arrow2LengthModifier);
         }
       }
 
@@ -11991,11 +12019,11 @@ function (_DiagramElementCollec) {
             _curveRight.hide();
           }
 
-          if (_arrow1 != null) {
+          if (_arrow1 != null && arrow1Hide === false) {
             _arrow1.show();
           }
 
-          if (_arrow2 != null) {
+          if (_arrow2 != null && arrow2Hide === false) {
             _arrow2.show();
           } // _curve.show();
 

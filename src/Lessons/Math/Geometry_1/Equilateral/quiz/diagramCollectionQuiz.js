@@ -35,9 +35,9 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
       color: this.layout.colors.diagram.action,
       side: {
         color: [1, 0, 0, 1],
-        offset: 0.25,
-        showLine: true,
-        arrows: true,
+        // offset: 0.25,
+        // showLine: true,
+        // arrows: true,
         width: 0.015,
         label: {
           text: null,
@@ -56,10 +56,18 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
           radius: 0.25,
           textScale: 0.5,
           color: [1, 0, 1, 1],
+          realAngleDecimals: 2,
+        },
+        arrows: {
+          curveOverlap: 0.3,
+          autoHide: true,
         },
         curve: {
           radius: 0.3,
           sides: 50,
+          num: 2,
+          step: 0.05,
+          width: 0.02,
         },
         mods: {
           isMovable: true,
