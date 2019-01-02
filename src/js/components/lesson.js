@@ -459,7 +459,10 @@ export default class LessonComponent extends React.Component
             list={[
               {
                 label: '123',
-                link: '',
+                aveStars: 3,
+                numReviews: 100,
+                description: 'This is a description',
+                link: '/static/dist/Lessons/Math/Geometry_1/Isosceles/quiz',
                 active: false,
               },
               {

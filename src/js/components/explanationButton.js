@@ -11,6 +11,9 @@ type Props = {
   xAlign?: 'left' | 'right' | 'center';
   list?: Array<{
     label: string;
+    aveStars?: number;
+    numReviews?: number;
+    description?: string;
     link: Function | string;
     active?: boolean;
   }>;
@@ -108,14 +111,22 @@ export default class ExplanationButton extends React.Component
       if (listItem.active) {
         activeClass = ' explanation_button_list_item_active';
       }
-      let link = <div onClick={listItem.link}>
+      // let link = <div onClick={listItem.link}>
+      //   {listItem.label}
+      //   </div>;
+      // if (typeof listItem.link === 'string') {
+      //   link = <a href={listItem.link}>
+      //     {listItem.label}
+      //   </a>;
+      // }
+      const link = <div>
         {listItem.label}
-        </div>;
-      if (typeof listItem.link === 'string') {
-        link = <a href={listItem.link}>
-          {listItem.label}
-        </a>;
-      }
+        <a
+          href={listItem.link}
+          className="explanation_button_list_link">
+            <span></span>
+        </a>
+      </div>;
 
       listContent.push(
         <div className={`explanation_button_list_item${activeClass}`}

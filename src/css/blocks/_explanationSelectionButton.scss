@@ -111,6 +111,7 @@
   color: color('grey', 'base');
   background-color: white;
   white-space: nowrap;
+  position: relative;
 }
 
 .explanation_button_list_item,
@@ -141,4 +142,13 @@
 
 .explanation_button_list_item a:hover {
   color: color('white', 'base');
+}
+
+.explanation_button_list_link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
