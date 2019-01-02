@@ -1,15 +1,11 @@
 .explanation_button_container {
-  // margin-left: 501px;
   width: 100%;
   height: 100%;
   display: table;
   border-radius: 0.3em;
-  // position: relative;
 }
 
 .explanation_button_button_container {
-  // background-color: red;
-  // color: black;
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   padding-left: 0.9em;
@@ -24,6 +20,8 @@
 .explanation_button_label {
   display: inline-block;
   pointer-events: none;
+  font-weight: 100;
+  color: #929292;
 }
 
 .explanation_button_arrow {
@@ -35,6 +33,7 @@
   transform: translate(0, -0.2em);
   -webkit-transform: translate(0, -0.2em);
   pointer-events: none;
+  color: #929292;
 }
 
 .explanation_button_arrow_down {
