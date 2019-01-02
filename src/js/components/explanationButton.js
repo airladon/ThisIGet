@@ -111,22 +111,31 @@ export default class ExplanationButton extends React.Component
       if (listItem.active) {
         activeClass = ' explanation_button_list_item_active';
       }
-      // let link = <div onClick={listItem.link}>
-      //   {listItem.label}
-      //   </div>;
+      let linkRedirect = listItem.link;
+      if (typeof listItem.link === 'string') {
+        linkRedirect = () => {
+          window.location = listItem.link;
+        };
+      }
+      const link = <div onClick={linkRedirect}>
+        {listItem.label}
+        </div>;
       // if (typeof listItem.link === 'string') {
+
       //   link = <a href={listItem.link}>
-      //     {listItem.label}
+      //     <div className="explanation_button_list_item_container">
+      //       {listItem.label}
+      //     </div>
       //   </a>;
       // }
-      const link = <div>
-        {listItem.label}
-        <a
-          href={listItem.link}
-          className="explanation_button_list_link">
-            <span></span>
-        </a>
-      </div>;
+      // console.log(listItem.link)
+      // const link = <a
+      //     href={listItem.link}
+      //     className="explanation_button_list_link">
+      //       <div className="explanation_button_list_item_container">
+      //         {listItem.label}
+      //       </div>
+      //   </a>;
 
       listContent.push(
         <div className={`explanation_button_list_item${activeClass}`}

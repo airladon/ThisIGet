@@ -462,7 +462,7 @@ export default class LessonComponent extends React.Component
                 aveStars: 3,
                 numReviews: 100,
                 description: 'This is a description',
-                link: '/static/dist/Lessons/Math/Geometry_1/Isosceles/quiz',
+                link: '/Lessons/Math/Geometry_1/Isosceles/quiz',
                 active: false,
               },
               {
