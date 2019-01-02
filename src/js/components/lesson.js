@@ -475,7 +475,6 @@ export default class LessonComponent extends React.Component
             ]}/>
         </div>,
       );
-      
       if (summary !== -1) {
         this.key += 1;
         let selected = '';

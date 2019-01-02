@@ -52,26 +52,30 @@ export default class ExplanationButton extends React.Component
 
   toggle() {
     this.itemList.classList.toggle('explanation_button_list_hide');
-    const rect = this.buttonElement.parentElement.parentElement.getBoundingClientRect();
-    const listRect = this.itemList.getBoundingClientRect();
-    console.log(rect, this.buttonElement.parentElement.parentElement, this.buttonElement.parentElement.parentElement.getBoundingClientRect())
-    if (!this.itemList.classList.contains('explanation_button_list_hide')) {
-      if (this.direction === 'down') {
-        this.itemList.style.top = `${rect.height}px`;
-      } else {
-        this.itemList.style.top = `${-listRect.height}px`;
+    const parent = this.buttonElement.parentElement;
+    if (parent != null) {
+      const parentsParent = parent.parentElement;
+      if (parentsParent != null) {
+        const rect = parentsParent.getBoundingClientRect();
+        const listRect = this.itemList.getBoundingClientRect();
+        if (!this.itemList.classList.contains('explanation_button_list_hide')) {
+          if (this.direction === 'down') {
+            this.itemList.style.top = `${rect.height}px`;
+          } else {
+            this.itemList.style.top = `${-listRect.height}px`;
+          }
+          if (this.xAlign === 'left') {
+            this.itemList.style.left = '0px';
+          } else if (this.xAlign === 'right') {
+            this.itemList.style.left = `${rect.width - listRect.width}px`;
+          } else if (this.xAlign === 'center') {
+            this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
+          }
+        } else {
+          this.itemList.style.left = '';
+          this.itemList.style.top = '';
+        }
       }
-      if (this.xAlign === 'left') {
-        this.itemList.style.left = '0px';
-      } else if (this.xAlign === 'right') {
-        this.itemList.style.left = `${rect.width - listRect.width}px`;
-      } else if (this.xAlign === 'center') {
-        this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
-      }
-      console.log(this.itemList.style.left)
-    } else {
-      this.itemList.style.left = '';
-      this.itemList.style.top = '';
     }
   }
 
