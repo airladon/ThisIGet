@@ -455,7 +455,7 @@ export default class LessonComponent extends React.Component
             id="id__lesson__test_explanation_button"
             label={'test'}
             direction="down"
-            xAlign="right"
+            xAlign="left"
             list={[
               {
                 label: '123',

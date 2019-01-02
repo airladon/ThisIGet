@@ -30,6 +30,10 @@ $path_tile_height: 35px;
   background-color: color('lesson', 'title-background');
   border: 1px solid color('white', 'lighter');
   position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .lesson__path_tile_right {
@@ -77,6 +81,7 @@ $path_tile_height: 35px;
 .lesson__path_tile:hover {
   background-color: color('white', 'lightest');
   text-decoration: none;
+  cursor: pointer;
 }
 
 .lesson__path_tile_disabled {
