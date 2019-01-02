@@ -57,27 +57,24 @@ export default class ExplanationButton extends React.Component
     this.itemList.classList.toggle('explanation_button_list_hide');
     const parent = this.buttonElement.parentElement;
     if (parent != null) {
-      const parentsParent = parent.parentElement;
-      if (parentsParent != null) {
-        const rect = parentsParent.getBoundingClientRect();
-        const listRect = this.itemList.getBoundingClientRect();
-        if (!this.itemList.classList.contains('explanation_button_list_hide')) {
-          if (this.direction === 'down') {
-            this.itemList.style.top = `${rect.height}px`;
-          } else {
-            this.itemList.style.top = `${-listRect.height}px`;
-          }
-          if (this.xAlign === 'left') {
-            this.itemList.style.left = '0px';
-          } else if (this.xAlign === 'right') {
-            this.itemList.style.left = `${rect.width - listRect.width}px`;
-          } else if (this.xAlign === 'center') {
-            this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
-          }
+      const rect = parent.getBoundingClientRect();
+      const listRect = this.itemList.getBoundingClientRect();
+      if (!this.itemList.classList.contains('explanation_button_list_hide')) {
+        if (this.direction === 'down') {
+          this.itemList.style.top = `${rect.height}px`;
         } else {
-          this.itemList.style.left = '';
-          this.itemList.style.top = '';
+          this.itemList.style.top = `${-listRect.height}px`;
         }
+        if (this.xAlign === 'left') {
+          this.itemList.style.left = '0px';
+        } else if (this.xAlign === 'right') {
+          this.itemList.style.left = `${rect.width - listRect.width}px`;
+        } else if (this.xAlign === 'center') {
+          this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
+        }
+      } else {
+        this.itemList.style.left = '';
+        this.itemList.style.top = '';
       }
     }
   }
@@ -120,22 +117,6 @@ export default class ExplanationButton extends React.Component
       const link = <div onClick={linkRedirect}>
         {listItem.label}
         </div>;
-      // if (typeof listItem.link === 'string') {
-
-      //   link = <a href={listItem.link}>
-      //     <div className="explanation_button_list_item_container">
-      //       {listItem.label}
-      //     </div>
-      //   </a>;
-      // }
-      // console.log(listItem.link)
-      // const link = <a
-      //     href={listItem.link}
-      //     className="explanation_button_list_link">
-      //       <div className="explanation_button_list_item_container">
-      //         {listItem.label}
-      //       </div>
-      //   </a>;
 
       listContent.push(
         <div className={`explanation_button_list_item${activeClass}`}
