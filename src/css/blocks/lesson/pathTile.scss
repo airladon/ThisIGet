@@ -18,8 +18,9 @@ $path_tile_height: 35px;
 
 .lesson__path_tile {
   min-width: $path_tile_height;
+  width: 100px;
   height: $path_tile_height;
-  border-radius: calc(#{$path_tile_height} / 2);
+  border-radius: 1em;
   font-size: calc(#{$path_tile_height} * 0.35);
   display: inline-block;
   margin-right: 5px;
@@ -28,6 +29,7 @@ $path_tile_height: 35px;
   padding-right: 10px;
   background-color: color('lesson', 'title-background');
   border: 1px solid color('white', 'lighter');
+  position: relative;
 }
 
 .lesson__path_tile_right {

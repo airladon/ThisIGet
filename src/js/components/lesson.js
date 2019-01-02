@@ -10,6 +10,7 @@ import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
+import ExplanationButton from './explanationButton';
 
 type Props = {
   lesson: Lesson;
@@ -438,6 +439,43 @@ export default class LessonComponent extends React.Component
       const quiz = paths.indexOf('quiz');
       const summary = paths.indexOf('summary');
       const currentLocation = getCurrentLesson();
+      // output.push(
+      //   <LessonTilePath
+      //     id='this_is_a_test'
+      //     link=''
+      //     key={this.key}
+      //     label='test'
+      //     state=''
+      //     right={true}/>,
+      // );
+      this.key += 1;
+      output.push(
+        <div className="lesson__path_tile" key={this.key}>
+          <ExplanationButton
+            id="id__lesson__test_explanation_button"
+            label={'test'}
+            direction="down"
+            xAlign="right"
+            list={[
+              {
+                label: '123',
+                link: '',
+                active: false,
+              },
+              {
+                label: '2',
+                link: '',
+                active: false,
+              },
+              {
+                label: '3',
+                link: '',
+                active: false,
+              },
+            ]}/>
+        </div>,
+      );
+      
       if (summary !== -1) {
         this.key += 1;
         let selected = '';
