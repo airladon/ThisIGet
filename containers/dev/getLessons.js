@@ -44,11 +44,22 @@ function getAllLessons(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
-      lessons.push(lessonPath);
+      if (lessonPath.includes('test1') || lessonPath.includes('test2')  || lessonPath.includes('test3') ) {
+        lessons.push(lessonPath);
+      }
     }
   });
   return lessons;
 }
+
+function getAllExplanations(explanationsPath) {
+  const explanations = [];
+  walkSync(explanationsPath, 'explanation.js', (explanationPath) => {
+    explanations.push(explanationPath);
+  });
+  return explanations;
+}
+
 
 function entryPoints(buildMode) {
   const points = {
@@ -84,13 +95,8 @@ export default function getLessonIndex() {
     let dependencies = [];
     let uid = '';
     let enabled = true;
-    let qr = {};
-    const lessonPaths = getAllPaths(
-      lessonPath,
-      ['lesson.js'],
-      ['lesson-dev.js'],
-      buildMode,
-    );
+    // let qr = {};
+
     if (fs.existsSync(detailsPath)) {
       // const detailsPath = `./${lessonPath}/details.js`;
       // eslint-disable-next-line global-require, import/no-dynamic-require
@@ -99,7 +105,7 @@ export default function getLessonIndex() {
       ({ dependencies } = details.details);
       ({ uid } = details.details);
       ({ enabled } = details.details);
-      ({ qr } = details.details);
+      // ({ qr } = details.details);
       if (enabled != null && enabled === false) {
         enabled = false;
       } else {
@@ -111,12 +117,61 @@ export default function getLessonIndex() {
       outStr = `${outStr}\n    '${title}',`;
       outStr = `${outStr}\n    '${shortPath}',`;
       outStr = `${outStr}\n    '${uid}',`;
-      outStr = `${outStr}\n    [`;
-      lessonPaths.forEach((lesson) => {
-        const shortP = lesson.path.replace(`${lessonPath}/`, '');
-        outStr = `${outStr}\n      '${shortP}',`;
+      outStr = `${outStr}\n    {`;
+      const explanationPaths = getAllExplanations(lessonPath);
+      explanationPaths.forEach((explanationPath) => {
+        let explanationUid = '';
+        let explanationTitle = '';
+        let explanationDescription = '';
+        let explanationOnPath = false;
+        let explanationQR = {};
+        const explanationFileName = `./${explanationPath}/explanation.js`;
+        if (fs.existsSync(explanationFileName)) {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
+          const explanation = require(explanationFileName);
+
+          if (explanation.details.title != null) {
+            explanationTitle = explanation.details.title;
+          }
+          if (explanation.details.uid != null) {
+            explanationUid = explanation.details.uid;
+          }
+          if (explanation.details.description != null) {
+            explanationDescription = explanation.details.description;
+          }
+          if (explanation.details.onPath != null) {
+            explanationOnPath = explanation.details.onPath;
+          }
+          if (explanation.details.qr != null) {
+            explanationQR = explanation.details.qr;
+          }
+        }
+        const lessonPaths = getAllPaths(
+          explanationPath,
+          ['lesson.js'],
+          ['lesson-dev.js'],
+          buildMode,
+        );
+        outStr = `${outStr}\n      ${explanationUid}: [`;
+        outStr = `${outStr}\n        '${explanationTitle}',`;
+        outStr = `${outStr}\n        '${explanationDescription}',`;
+        outStr = `${outStr}\n        ${explanationOnPath},`;
+        outStr = `${outStr}\n        [`;
+        lessonPaths.forEach((lesson) => {
+          const shortP = lesson.path.replace(`${lessonPath}/`, '');
+          outStr = `${outStr}\n          '${shortP}',`;
+        });
+        outStr = `${outStr}\n        ],`;
+        outStr = `${outStr}\n        [`;
+        if (explanationQR != null && Array.isArray(explanationQR)) {
+          explanationQR.forEach((page) => {
+            outStr = `${outStr}\n          '${page}',`;
+          });
+        }
+        outStr = `${outStr}\n        ],`;
+        outStr = `${outStr}\n      ],`;
       });
-      outStr = `${outStr}\n    ],`;
+      outStr = `${outStr}\n    },`;
       outStr = `${outStr}\n    [`;
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
@@ -125,13 +180,6 @@ export default function getLessonIndex() {
       }
       outStr = `${outStr}\n    ],`;
       outStr = `${outStr}\n    ${enabled},`;
-      outStr = `${outStr}\n    [`;
-      if (qr != null && Array.isArray(qr)) {
-        qr.forEach((page) => {
-          outStr = `${outStr}\n      '${page}',`;
-        });
-      }
-      outStr = `${outStr}\n    ],`;
       outStr = `${outStr}\n  ));`;
     }
   });
