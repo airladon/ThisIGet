@@ -1,6 +1,6 @@
 $radius: 0.6em;
 
-.explanation_button_container {
+.dropdown_button_container {
   width: 100%;
   height: 100%;
   display: table;
@@ -9,11 +9,11 @@ $radius: 0.6em;
   border: 1px solid color('white', 'lighter');
 }
 
-.explanation_button_container:hover {
+.dropdown_button_container:hover {
   background-color: color('white', 'lightest');
 }
 
-.explanation_button_label_container {
+.dropdown_button_label_container {
   padding-top: 0.3em;
   padding-bottom: 0.3em;
   padding-left: 0.9em;
@@ -25,14 +25,14 @@ $radius: 0.6em;
   vertical-align: middle;
 }
 
-.explanation_button_label {
+.dropdown_button_label {
   display: inline-block;
   pointer-events: none;
   font-weight: 100;
   color: #929292;
 }
 
-.explanation_button_arrow {
+.dropdown_button_arrow {
   display: inline-block;
   border-left: 0.3em solid transparent;
   border-right: 0.3em solid transparent;
@@ -44,7 +44,7 @@ $radius: 0.6em;
   color: #929292;
 }
 
-.explanation_button_arrow_down {
+.dropdown_button_arrow_down {
   border-left: 0.3em solid transparent;
   border-right: 0.3em solid transparent;
   border-top: 0.3em solid;
@@ -53,7 +53,7 @@ $radius: 0.6em;
   -webkit-transform: translate(0, -0.2em);
 }
 
-.explanation_button_arrow_up {
+.dropdown_button_arrow_up {
   border-left: 0.3em solid transparent;
   border-right: 0.3em solid transparent;
   border-bottom: 0.3em solid;
@@ -62,7 +62,7 @@ $radius: 0.6em;
   -webkit-transform: translate(0, -0.2em);
 }
 
-.explanation_button_arrow_right {
+.dropdown_button_arrow_right {
   border-left: 0.3em solid;
   border-right: 0;
   border-bottom: 0.3em solid transparent;
@@ -72,7 +72,7 @@ $radius: 0.6em;
   -webkit-transform: translate(0.2em, 0);
 }
 
-.explanation_button_arrow_left {
+.dropdown_button_arrow_left {
   border-left: 0;
   border-right: 0.3em solid;
   border-bottom: 0.3em solid transparent;
@@ -82,7 +82,7 @@ $radius: 0.6em;
   -webkit-transform: none;
 }
 
-.explanation_button_list {
+.dropdown_button_list {
   position: absolute;
   z-index: 1;
   background-color: white;
@@ -92,12 +92,12 @@ $radius: 0.6em;
   overflow: hidden;
 }
 
-.explanation_button_list_hide {
+.dropdown_button_list_hide {
   left: -10000px;
   top: -10000px;
 }
 
-.explanation_button_list_item {
+.dropdown_button_list_item {
   color: color('grey', 'base');
   background-color: white;
   white-space: nowrap;
@@ -106,32 +106,32 @@ $radius: 0.6em;
   padding: 0.2em 1.2em 0.2em 1.2em;
 }
 
-.explanation_button_list_item:hover {
+.dropdown_button_list_item:hover {
   background-color: color('white', 'lighter');
   cursor: pointer;
 }
 
-.explanation_button_list_item_active {
+.dropdown_button_list_item_active {
   color: color('white', 'base');
   background-color: color('blue', 'light');
 }
 
-.explanation_button_list_item_active:hover {
+.dropdown_button_list_item_active:hover {
   background-color: color('blue', 'base');
 }
 
-.explanation_button_list_item_disabled {
+.dropdown_button_list_item_disabled {
   color: color('grey', 'lighter');
   background-color: white;
 }
 
-.explanation_button_list_item_disabled:hover {
+.dropdown_button_list_item_disabled:hover {
   color: color('grey', 'lighter');
   background-color: white;
   cursor: default;
 }
 
-.explanation_button_list_item_separator {
+.dropdown_button_list_item_separator {
   color: color('grey', 'base');
   background-color: color('white', 'lightest');
   font-size: 0.75em;
@@ -139,7 +139,7 @@ $radius: 0.6em;
   padding-bottom: 5px;
 }
 
-.explanation_button_list_item_separator:hover {
+.dropdown_button_list_item_separator:hover {
   color: color('grey', 'base');
   background-color: color('white', 'lightest');
   cursor: default;

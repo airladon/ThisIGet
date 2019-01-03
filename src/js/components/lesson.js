@@ -374,22 +374,25 @@ export default class LessonComponent extends React.Component
   }
 
   updateGoToButtonListHighlight() {
-    const activeItems = document.getElementsByClassName('explanation_button_list_item_active');
-    [].forEach.call(activeItems, item => item.classList.remove('explanation_button_list_item_active'));
-    const listItems = document.getElementById('id__lesson__goto_button_list');
-    const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
-    const titleIndeces = this.lesson.content.sections.map((section, index) => {
-      if (section.title) {
-        return index;
-      }
-      return -1;
-    }).filter(index => index !== -1);
-    const listIndex = titleIndeces.indexOf(activeSection);
+    const button = document.getElementById('id__lesson__button-goto_container');
+    if (button != null) {
+      const activeItems = button.getElementsByClassName('dropdown_button_list_item_active');
+      [].forEach.call(activeItems, item => item.classList.remove('dropdown_button_list_item_active'));
+      const listItems = document.getElementById('id__lesson__goto_button_list');
+      const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
+      const titleIndeces = this.lesson.content.sections.map((section, index) => {
+        if (section.title) {
+          return index;
+        }
+        return -1;
+      }).filter(index => index !== -1);
+      const listIndex = titleIndeces.indexOf(activeSection);
 
-    if (listItems) {
-      const { children } = listItems;
-      if (children.length > 0) {
-        children[listIndex].classList.add('explanation_button_list_item_active');
+      if (listItems) {
+        const { children } = listItems;
+        if (children.length > 0) {
+          children[listIndex].classList.add('dropdown_button_list_item_active');
+        }
       }
     }
   }

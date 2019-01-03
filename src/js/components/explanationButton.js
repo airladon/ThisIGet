@@ -50,7 +50,7 @@ export default class ExplanationButton extends React.Component
   }
 
   close() {
-    this.itemList.classList.add('explanation_button_list_hide');
+    this.itemList.classList.add('dropdown_button_list_hide');
     this.itemList.style.left = '';
     this.itemList.style.top = '';
   }
@@ -58,7 +58,7 @@ export default class ExplanationButton extends React.Component
   toggle() {
     const rect = this.buttonElement.getBoundingClientRect();
     const listRect = this.itemList.getBoundingClientRect();
-    if (this.itemList.classList.contains('explanation_button_list_hide')) {
+    if (this.itemList.classList.contains('dropdown_button_list_hide')) {
       if (this.direction === 'down') {
         this.itemList.style.top = `${rect.height}px`;
       } else {
@@ -71,11 +71,11 @@ export default class ExplanationButton extends React.Component
       } else if (this.xAlign === 'center') {
         this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
       }
-      this.itemList.classList.remove('explanation_button_list_hide');
+      this.itemList.classList.remove('dropdown_button_list_hide');
     } else {
       this.itemList.style.left = '';
       this.itemList.style.top = '';
-      this.itemList.classList.add('explanation_button_list_hide');
+      this.itemList.classList.add('dropdown_button_list_hide');
     }
   }
 
@@ -99,22 +99,22 @@ export default class ExplanationButton extends React.Component
     const label = props.label || '';
     this.xAlign = props.xAlign || 'left';
     this.direction = props.direction || 'down';
-    let arrowDirectionClass = ' explanation_button_arrow_down';
+    let arrowDirectionClass = ' dropdown_button_arrow_down';
     if (this.direction === 'up') {
-      arrowDirectionClass = ' explanation_button_arrow_up';
+      arrowDirectionClass = ' dropdown_button_arrow_up';
     }
-    this.id = props.id || generateUniqueId('id__explanation_button');
+    this.id = props.id || generateUniqueId('id__dropdown_button');
     const listContent = [];
     props.list.forEach((listItem, index) => {
       let classes = '';
       if (listItem.active) {
-        classes = `${classes} explanation_button_list_item_active`;
+        classes = `${classes} dropdown_button_list_item_active`;
       }
       if (listItem.separator) {
-        classes = `${classes} explanation_button_list_item_separator`;
+        classes = `${classes} dropdown_button_list_item_separator`;
       }
       if (listItem.link == null) {
-        classes = `${classes} explanation_button_list_item_disabled`;
+        classes = `${classes} dropdown_button_list_item_disabled`;
       }
 
       let item;
@@ -139,7 +139,7 @@ export default class ExplanationButton extends React.Component
       }
       if (item != null) {
         listContent.push(
-          <div className={`explanation_button_list_item${classes}`}
+          <div className={`dropdown_button_list_item${classes}`}
                key={index}>
             {item}
           </div>,
@@ -147,17 +147,17 @@ export default class ExplanationButton extends React.Component
       }
     });
 
-    return <div className='explanation_button_container'
+    return <div className='dropdown_button_container'
       id={`${this.id}`}>
-      <div className="explanation_button_label_container"
+      <div className="dropdown_button_label_container"
            id={`${this.id}_label`}>
-        <div className="explanation_button_label">
+        <div className="dropdown_button_label">
           {label}
         </div>
-        <div className={`explanation_button_arrow${arrowDirectionClass}`}>
+        <div className={`dropdown_button_arrow${arrowDirectionClass}`}>
         </div>
       </div>
-      <div className="explanation_button_list explanation_button_list_hide"
+      <div className="dropdown_button_list dropdown_button_list_hide"
            id={`${this.id}_list`}>
         {listContent}
       </div>
