@@ -18,6 +18,7 @@
 
 .explanation_button__label_rating_value {
   overflow: hidden;
+  font-size: 0.8em;
 }
 
 .explanation_button__label_rating_value::before {
@@ -25,7 +26,8 @@
 }
 
 .explanation_button__label_rating_value_0 {
-  width: 0;
+  width: 1%;
+  color: rgba(1, 0, 0, 0);
 }
 
 .explanation_button__label_rating_value_0p5 {
@@ -66,4 +68,9 @@
 
 .explanation_button__label_rating_value_5 {
   width: 100%;
+}
+
+.explanation_button__label_num_reviews {
+  font-size: 0.6em;
+  text-align: left;
 }
