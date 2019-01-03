@@ -4,28 +4,43 @@
 
 .explanation_button__listItem {
   // display: table;
+  width: 100%;
+  table-layout: fixed;
 }
 
-.explanation_button__label_text {
-  display: inline-block;
-  width: 80%;
+.explanation_button__label {
+  vertical-align: middle;
   text-align: left;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
 }
 
-.explanation_button__label_text_description {
+.explanation_button__label_title {
+}
+
+.explanation_button__label_description {
   font-size: 0.6em;
 }
 
-.explanation_button__label_rating {
-  display: inline-block;
+.explanation_button__rating {
+  vertical-align: middle;
+  width: 4em;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
 }
 
-.explanation_button__label_rating_value {
+.explanation_button__rating_value {
   font-size: 0.8em;
   text-align: center;
 }
 
-.explanation_button__label_num_reviews {
+.explanation_button__rating_num_reviews {
   font-size: 0.6em;
   text-align: center;
 }

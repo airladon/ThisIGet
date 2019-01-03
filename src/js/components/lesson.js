@@ -488,7 +488,8 @@ export default class LessonComponent extends React.Component
                 active: false,
               },
               {
-                label: 'Isosceles Proof',
+                label: 'Isosceles Proof lets see how long this goes and goes',
+                description: 'Isosceles Proof lets see how long this goes and goes and goes and Isosceles Proof lets see how long this goes and goes',
                 rating: 0.5,
                 link: '',
                 numReviews: 2,

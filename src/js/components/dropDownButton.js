@@ -98,7 +98,7 @@ export default class DropDownButton extends React.Component
   }
 
   // eslint-disable-next-line class-methods-use-this
-  renderListLabel(listItem: TypeListItem): string | React.Element<'div'> {
+  renderListLabel(listItem: TypeListItem): string | React.Element<'div'> | React.Element<'table'> {
     return listItem.label;
   }
 
