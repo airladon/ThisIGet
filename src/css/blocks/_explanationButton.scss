@@ -8,8 +8,62 @@
 
 .explanation_button__label_text {
   display: inline-block;
+  width: 80%;
+  text-align: left;
 }
 
 .explanation_button__label_rating {
   display: inline-block;
+}
+
+.explanation_button__label_rating_value {
+  overflow: hidden;
+}
+
+.explanation_button__label_rating_value::before {
+  content: '\2605 \2605 \2605 \2605 \2605';
+}
+
+.explanation_button__label_rating_value_0 {
+  width: 0;
+}
+
+.explanation_button__label_rating_value_0p5 {
+  width: 10%;
+}
+
+.explanation_button__label_rating_value_1 {
+  width: 20%;
+}
+
+.explanation_button__label_rating_value_1p5 {
+  width: 30%;
+}
+
+.explanation_button__label_rating_value_2 {
+  width: 40%;
+}
+
+.explanation_button__label_rating_value_2p5 {
+  width: 50%;
+}
+
+.explanation_button__label_rating_value_3 {
+  width: 60%;
+}
+
+.explanation_button__label_rating_value_3p5 {
+  width: 70%;
+}
+
+.explanation_button__label_rating_value_4 {
+  width: 80%;
+}
+
+.explanation_button__label_rating_value_4p5 {
+  width: 90%;
+}
+
+.explanation_button__label_rating_value_5 {
+  width: 100%;
 }

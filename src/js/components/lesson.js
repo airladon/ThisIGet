@@ -482,16 +482,19 @@ export default class LessonComponent extends React.Component
               },
               {
                 label: '3',
+                rating: 1,
                 link: '',
                 active: false,
               },
               {
                 label: '4',
+                rating: 1.5,
                 link: '',
                 active: false,
               },
               {
                 label: '5',
+                rating: 0.5,
                 link: '',
                 active: false,
               },
