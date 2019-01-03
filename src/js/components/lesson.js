@@ -458,6 +458,10 @@ export default class LessonComponent extends React.Component
             xAlign="left"
             list={[
               {
+                label: 'On Path',
+                separator: true,
+              },
+              {
                 label: '123',
                 aveStars: 3,
                 numReviews: 100,
@@ -467,11 +471,24 @@ export default class LessonComponent extends React.Component
               },
               {
                 label: '2',
+                active: false,
+              },
+              {
+                label: 'Off Path',
+                separator: true,
+              },
+              {
+                label: '3',
                 link: '',
                 active: false,
               },
               {
-                label: '3',
+                label: '4',
+                link: '',
+                active: false,
+              },
+              {
+                label: '5',
                 link: '',
                 active: false,
               },

@@ -83,32 +83,16 @@ $radius: 0.6em;
 }
 
 .explanation_button_list {
-  // width: 0;
-  // height: 0;
-  // font-size: 0;
   position: absolute;
-  // left: -10000px;
-  // top: 10000px;
   z-index: 1;
   background-color: white;
-  // padding: 0;\
-  // width: auto;
-  // height: auto;
-  // font-size: 14px;
   border-radius: $radius;
-  padding-top: $radius;
-  padding-bottom: $radius;
+  // padding-top: $radius;
+  // padding-bottom: $radius;
   border: 1px solid #ccc;
+  cursor: default;
+  overflow: hidden;
 }
-
-// .explanation_button_list_show {
-//   width: auto;
-//   height: auto;
-//   font-size: 14px;
-//   border-radius: 5px;
-//   padding-top: 5px;
-//   padding-bottom: 5px;
-// }
 
 .explanation_button_list_hide {
   left: -10000px;
@@ -120,19 +104,13 @@ $radius: 0.6em;
   background-color: white;
   white-space: nowrap;
   position: relative;
-}
-
-.explanation_button_list_item,
-.explanation_button_list_item a,
-.explanation_button_list_item:visited {
-  color: color('grey', 'base');
   display: block;
-  text-decoration: none;
   padding: 0.2em 1.2em 0.2em 1.2em;
 }
 
 .explanation_button_list_item:hover {
   background-color: color('white', 'lighter');
+  cursor: pointer;
 }
 
 .explanation_button_list_item_active {
@@ -144,23 +122,27 @@ $radius: 0.6em;
   background-color: color('blue', 'base');
 }
 
-.explanation_button_list_item_active a {
-  color: color('white', 'base');
+.explanation_button_list_item_disabled {
+  color: color('grey', 'lighter');
+  background-color: white;
 }
 
-.explanation_button_list_item a:hover {
-  color: color('white', 'base');
+.explanation_button_list_item_disabled:hover {
+  color: color('grey', 'lighter');
+  background-color: white;
+  cursor: default;
 }
 
-// .explanation_button_list_link {
-//   position: absolute;
-//   width: 100%;
-//   height: 100%;
-//   top: 0;
-//   left: 0;
-//   z-index: 10;
-// }
+.explanation_button_list_item_separator {
+  color: color('grey', 'base');
+  background-color: color('white', 'lightest');
+  font-size: 0.75em;
+  padding-top: 0.75em;
+  padding-bottom: 5px;
+}
 
-// .explanation_button_list_item_container {
-//   position: relative;
-// }
+.explanation_button_list_item_separator:hover {
+  color: color('grey', 'base');
+  background-color: color('white', 'lightest');
+  cursor: default;
+}

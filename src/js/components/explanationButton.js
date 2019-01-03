@@ -14,8 +14,9 @@ type Props = {
     aveStars?: number;
     numReviews?: number;
     description?: string;
-    link: Function | string;
+    link?: Function | string;
     active?: boolean;
+    separator?: boolean;
   }>;
 };
 
@@ -105,26 +106,39 @@ export default class ExplanationButton extends React.Component
     this.id = props.id || generateUniqueId('id__explanation_button');
     const listContent = [];
     props.list.forEach((listItem, index) => {
-      let activeClass = '';
+      let classes = '';
       if (listItem.active) {
-        activeClass = ' explanation_button_list_item_active';
+        classes = `${classes} explanation_button_list_item_active`;
       }
-      let linkRedirect = listItem.link;
-      if (typeof listItem.link === 'string') {
-        linkRedirect = () => {
-          window.location = listItem.link;
-        };
+      if (listItem.separator) {
+        classes = `${classes} explanation_button_list_item_separator`;
       }
-      const link = <div onClick={linkRedirect}>
-        {listItem.label}
-        </div>;
+      if (listItem.link == null) {
+        classes = `${classes} explanation_button_list_item_disabled`;
+      }
 
-      listContent.push(
-        <div className={`explanation_button_list_item${activeClass}`}
-             key={index}>
-          {link}
-        </div>,
-      );
+      let item;
+      if (listItem.link != null) {
+        let linkRedirect = listItem.link;
+        if (typeof listItem.link === 'string') {
+          linkRedirect = () => {
+            window.location = listItem.link;
+          };
+        }
+        item = <div onClick={linkRedirect}>
+          {listItem.label}
+          </div>;
+      } else {
+        item = <div>{listItem.label}</div>;
+      }
+      if (item != null) {
+        listContent.push(
+          <div className={`explanation_button_list_item${classes}`}
+               key={index}>
+            {item}
+          </div>,
+        );
+      }
     });
 
     return <div className='explanation_button_container'
