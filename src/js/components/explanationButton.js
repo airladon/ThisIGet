@@ -23,7 +23,8 @@ export default class ExplanationButton extends React.Component
                                     <Props> {
   id: string;
   buttonElement: HTMLElement;
-  bodyElement: HTMLElement;
+  labelElement: HTMLElement;
+  // bodyElement: HTMLElement;
   itemList: HTMLElement;
   xAlign: 'left' | 'right' | 'center';
   direction: 'up' | 'down';
@@ -36,7 +37,7 @@ export default class ExplanationButton extends React.Component
     if (event.target instanceof HTMLElement) {
       const parent = event.target.parentElement;
       if (parent instanceof HTMLElement) {
-        if (event.target !== this.buttonElement) {
+        if (event.target !== this.labelElement) {
           this.close();
           if (event.target instanceof HTMLElement
             && parent.parentElement === this.itemList) {
@@ -54,38 +55,38 @@ export default class ExplanationButton extends React.Component
   }
 
   toggle() {
-    this.itemList.classList.toggle('explanation_button_list_hide');
-    const parent = this.buttonElement.parentElement;
-    if (parent != null) {
-      const rect = parent.getBoundingClientRect();
-      const listRect = this.itemList.getBoundingClientRect();
-      if (!this.itemList.classList.contains('explanation_button_list_hide')) {
-        if (this.direction === 'down') {
-          this.itemList.style.top = `${rect.height}px`;
-        } else {
-          this.itemList.style.top = `${-listRect.height}px`;
-        }
-        if (this.xAlign === 'left') {
-          this.itemList.style.left = '0px';
-        } else if (this.xAlign === 'right') {
-          this.itemList.style.left = `${rect.width - listRect.width}px`;
-        } else if (this.xAlign === 'center') {
-          this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
-        }
+    const rect = this.buttonElement.getBoundingClientRect();
+    const listRect = this.itemList.getBoundingClientRect();
+    if (this.itemList.classList.contains('explanation_button_list_hide')) {
+      if (this.direction === 'down') {
+        this.itemList.style.top = `${rect.height}px`;
       } else {
-        this.itemList.style.left = '';
-        this.itemList.style.top = '';
+        this.itemList.style.top = `${-listRect.height}px`;
       }
+      if (this.xAlign === 'left') {
+        this.itemList.style.left = '0px';
+      } else if (this.xAlign === 'right') {
+        this.itemList.style.left = `${rect.width - listRect.width}px`;
+      } else if (this.xAlign === 'center') {
+        this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
+      }
+      this.itemList.classList.remove('explanation_button_list_hide');
+    } else {
+      this.itemList.style.left = '';
+      this.itemList.style.top = '';
+      this.itemList.classList.add('explanation_button_list_hide');
     }
   }
 
   componentDidMount() {
     const button = document.getElementById(this.id);
+    const label = document.getElementById(`${this.id}_label`);
     const { body } = document;
     const itemList = document.getElementById(`${this.id}_list`);
-    if (button != null && body != null && itemList != null) {
+    if (button != null && body != null && itemList != null && label != null) {
       this.buttonElement = button;
-      this.bodyElement = body;
+      this.labelElement = label;
+      // this.bodyElement = body;
       this.itemList = itemList;
       button.addEventListener('mousedown', this.toggle.bind(this));
       body.addEventListener('mousedown', this.offButtonEvent.bind(this), true);
@@ -126,9 +127,10 @@ export default class ExplanationButton extends React.Component
       );
     });
 
-    return <div className='explanation_button_container'>
-      <div className="explanation_button_button_container"
-           id={this.id}>
+    return <div className='explanation_button_container'
+      id={`${this.id}`}>
+      <div className="explanation_button_label_container"
+           id={`${this.id}_label`}>
         <div className="explanation_button_label">
           {label}
         </div>
