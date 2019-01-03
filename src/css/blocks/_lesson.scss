@@ -248,6 +248,17 @@ $title_bar_space_low: 90px;
   background-color: color('diagram', 'background', 'darker');
 }
 
+#id__lesson__goto_button {
+  color: color('lesson', 'text');
+  background-color: color('diagram', 'background');
+  border: 0;
+}
+
+#id__lesson__goto_button:hover {
+  background-color: color('diagram', 'background', 'darker');
+  cursor: pointer;
+}
+
 // .lesson__button-goto {
 //   position: absolute;
 //   border: 0;

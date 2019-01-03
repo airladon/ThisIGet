@@ -348,7 +348,7 @@ export default class LessonComponent extends React.Component
     return <div
       className="lesson__button-goto_container"
       id="id__lesson__button-goto_container">
-      <DropDownButton
+      <ExplanationButton
       id="id__lesson__goto_button"
       label={`${this.state.page + 1} / ${this.state.numPages}`}
       direction="up"
@@ -374,8 +374,8 @@ export default class LessonComponent extends React.Component
   }
 
   updateGoToButtonListHighlight() {
-    const activeItems = document.getElementsByClassName('drop_down_button_list_item_active');
-    [].forEach.call(activeItems, item => item.classList.remove('drop_down_button_list_item_active'));
+    const activeItems = document.getElementsByClassName('explanation_button_list_item_active');
+    [].forEach.call(activeItems, item => item.classList.remove('explanation_button_list_item_active'));
     const listItems = document.getElementById('id__lesson__goto_button_list');
     const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
     const titleIndeces = this.lesson.content.sections.map((section, index) => {
@@ -389,7 +389,7 @@ export default class LessonComponent extends React.Component
     if (listItems) {
       const { children } = listItems;
       if (children.length > 0) {
-        children[listIndex].classList.add('drop_down_button_list_item_active');
+        children[listIndex].classList.add('explanation_button_list_item_active');
       }
     }
   }

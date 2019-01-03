@@ -125,7 +125,13 @@ export default class ExplanationButton extends React.Component
             window.location = listItem.link;
           };
         }
-        item = <div onClick={linkRedirect}>
+        const closeThenRedirect = () => {
+          this.close();
+          if (linkRedirect != null && typeof linkRedirect === 'function') {
+            linkRedirect();
+          }
+        };
+        item = <div onClick={closeThenRedirect}>
           {listItem.label}
           </div>;
       } else {
