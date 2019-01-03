@@ -4,20 +4,22 @@ import * as React from 'react';
 
 const { generateUniqueId } = Fig.tools.misc;
 
+export type TypeListItem = {
+  label: string;
+  rating?: number;
+  numReviews?: number;
+  description?: string;
+  link?: Function | string;
+  active?: boolean;
+  separator?: boolean;
+};
+
 type Props = {
   label?: string;
   id?: string;
   direction?: 'up' | 'down';
   xAlign?: 'left' | 'right' | 'center';
-  list?: Array<{
-    label: string;
-    aveStars?: number;
-    numReviews?: number;
-    description?: string;
-    link?: Function | string;
-    active?: boolean;
-    separator?: boolean;
-  }>;
+  list?: Array<TypeListItem>;
 };
 
 export default class DropDownButton extends React.Component
@@ -95,6 +97,11 @@ export default class DropDownButton extends React.Component
     window.addEventListener('resize', this.close.bind(this));
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  renderListLabel(listItem: TypeListItem): string | React.Element<'div'> {
+    return listItem.label;
+  }
+
   render() {
     const props = Object.assign({}, this.props);
     const label = props.label || '';
@@ -133,10 +140,10 @@ export default class DropDownButton extends React.Component
           }
         };
         item = <div onClick={closeThenRedirect}>
-          {listItem.label}
+          {this.renderListLabel(listItem)}
           </div>;
       } else {
-        item = <div>{listItem.label}</div>;
+        item = <div>{this.renderListLabel(listItem)}</div>;
       }
       if (item != null) {
         listContent.push(

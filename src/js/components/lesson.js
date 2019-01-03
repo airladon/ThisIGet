@@ -10,6 +10,7 @@ import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
+import ExplanationButton from './explanationButton';
 
 type Props = {
   lesson: Lesson;
@@ -453,7 +454,7 @@ export default class LessonComponent extends React.Component
       this.key += 1;
       output.push(
         <div className="lesson__path_tile" key={this.key}>
-          <DropDownButton
+          <ExplanationButton
             id="id__lesson__test_explanation_button"
             label={'test'}
             direction="down"
@@ -465,7 +466,7 @@ export default class LessonComponent extends React.Component
               },
               {
                 label: '123',
-                aveStars: 3,
+                rating: 3,
                 numReviews: 100,
                 description: 'This is a description',
                 link: '/Lessons/Math/Geometry_1/Isosceles/quiz',
