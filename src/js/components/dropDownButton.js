@@ -11,8 +11,12 @@ type Props = {
   xAlign?: 'left' | 'right' | 'center';
   list?: Array<{
     label: string;
-    link: Function | string;
+    aveStars?: number;
+    numReviews?: number;
+    description?: string;
+    link?: Function | string;
     active?: boolean;
+    separator?: boolean;
   }>;
 };
 
@@ -20,7 +24,8 @@ export default class DropDownButton extends React.Component
                                     <Props> {
   id: string;
   buttonElement: HTMLElement;
-  bodyElement: HTMLElement;
+  labelElement: HTMLElement;
+  // bodyElement: HTMLElement;
   itemList: HTMLElement;
   xAlign: 'left' | 'right' | 'center';
   direction: 'up' | 'down';
@@ -33,7 +38,7 @@ export default class DropDownButton extends React.Component
     if (event.target instanceof HTMLElement) {
       const parent = event.target.parentElement;
       if (parent instanceof HTMLElement) {
-        if (event.target !== this.buttonElement) {
+        if (event.target !== this.labelElement) {
           this.close();
           if (event.target instanceof HTMLElement
             && parent.parentElement === this.itemList) {
@@ -45,16 +50,15 @@ export default class DropDownButton extends React.Component
   }
 
   close() {
-    this.itemList.classList.add('drop_down_button_list_hide');
+    this.itemList.classList.add('dropdown_button_list_hide');
     this.itemList.style.left = '';
     this.itemList.style.top = '';
   }
 
   toggle() {
-    this.itemList.classList.toggle('drop_down_button_list_hide');
     const rect = this.buttonElement.getBoundingClientRect();
     const listRect = this.itemList.getBoundingClientRect();
-    if (!this.itemList.classList.contains('drop_down_button_list_hide')) {
+    if (this.itemList.classList.contains('dropdown_button_list_hide')) {
       if (this.direction === 'down') {
         this.itemList.style.top = `${rect.height}px`;
       } else {
@@ -67,23 +71,28 @@ export default class DropDownButton extends React.Component
       } else if (this.xAlign === 'center') {
         this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
       }
+      this.itemList.classList.remove('dropdown_button_list_hide');
     } else {
       this.itemList.style.left = '';
       this.itemList.style.top = '';
+      this.itemList.classList.add('dropdown_button_list_hide');
     }
   }
 
   componentDidMount() {
     const button = document.getElementById(this.id);
+    const label = document.getElementById(`${this.id}_label`);
     const { body } = document;
     const itemList = document.getElementById(`${this.id}_list`);
-    if (button != null && body != null && itemList != null) {
+    if (button != null && body != null && itemList != null && label != null) {
       this.buttonElement = button;
-      this.bodyElement = body;
+      this.labelElement = label;
+      // this.bodyElement = body;
       this.itemList = itemList;
       button.addEventListener('mousedown', this.toggle.bind(this));
       body.addEventListener('mousedown', this.offButtonEvent.bind(this), true);
     }
+    window.addEventListener('resize', this.close.bind(this));
   }
 
   render() {
@@ -91,44 +100,65 @@ export default class DropDownButton extends React.Component
     const label = props.label || '';
     this.xAlign = props.xAlign || 'left';
     this.direction = props.direction || 'down';
-    let arrowDirectionClass = ' drop_down_button_arrow_down';
+    let arrowDirectionClass = ' dropdown_button_arrow_down';
     if (this.direction === 'up') {
-      arrowDirectionClass = ' drop_down_button_arrow_up';
+      arrowDirectionClass = ' dropdown_button_arrow_up';
     }
-    this.id = props.id || generateUniqueId('id__drop_down_button');
+    this.id = props.id || generateUniqueId('id__dropdown_button');
     const listContent = [];
     props.list.forEach((listItem, index) => {
-      let activeClass = '';
+      let classes = '';
       if (listItem.active) {
-        activeClass = ' drop_down_button_list_item_active';
+        classes = `${classes} dropdown_button_list_item_active`;
       }
-      let link = <div onClick={listItem.link}>
-        {listItem.label}
-        </div>;
-      if (typeof listItem.link === 'string') {
-        link = <a href={listItem.link}>
-          {listItem.label}
-        </a>;
+      if (listItem.separator) {
+        classes = `${classes} dropdown_button_list_item_separator`;
+      }
+      if (listItem.link == null) {
+        classes = `${classes} dropdown_button_list_item_disabled`;
       }
 
-      listContent.push(
-        <div className={`drop_down_button_list_item${activeClass}`}
-             key={index}>
-          {link}
-        </div>,
-      );
+      let item;
+      if (listItem.link != null) {
+        let linkRedirect = listItem.link;
+        if (typeof listItem.link === 'string') {
+          linkRedirect = () => {
+            window.location = listItem.link;
+          };
+        }
+        const closeThenRedirect = () => {
+          this.close();
+          if (linkRedirect != null && typeof linkRedirect === 'function') {
+            linkRedirect();
+          }
+        };
+        item = <div onClick={closeThenRedirect}>
+          {listItem.label}
+          </div>;
+      } else {
+        item = <div>{listItem.label}</div>;
+      }
+      if (item != null) {
+        listContent.push(
+          <div className={`dropdown_button_list_item${classes}`}
+               key={index}>
+            {item}
+          </div>,
+        );
+      }
     });
 
-    return <div className='drop_down_button_container'>
-      <div className="drop_down_button_button_container"
-           id={this.id}>
-        <div className="drop_down_button_label">
+    return <div className='dropdown_button_container'
+      id={`${this.id}`}>
+      <div className="dropdown_button_label_container"
+           id={`${this.id}_label`}>
+        <div className="dropdown_button_label">
           {label}
         </div>
-        <div className={`drop_down_button_arrow${arrowDirectionClass}`}>
+        <div className={`dropdown_button_arrow${arrowDirectionClass}`}>
         </div>
       </div>
-      <div className="drop_down_button_list drop_down_button_list_hide"
+      <div className="dropdown_button_list dropdown_button_list_hide"
            id={`${this.id}_list`}>
         {listContent}
       </div>

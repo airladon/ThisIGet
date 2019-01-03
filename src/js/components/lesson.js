@@ -10,7 +10,6 @@ import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
-import ExplanationButton from './explanationButton';
 
 type Props = {
   lesson: Lesson;
@@ -348,7 +347,7 @@ export default class LessonComponent extends React.Component
     return <div
       className="lesson__button-goto_container"
       id="id__lesson__button-goto_container">
-      <ExplanationButton
+      <DropDownButton
       id="id__lesson__goto_button"
       label={`${this.state.page + 1} / ${this.state.numPages}`}
       direction="up"
@@ -454,7 +453,7 @@ export default class LessonComponent extends React.Component
       this.key += 1;
       output.push(
         <div className="lesson__path_tile" key={this.key}>
-          <ExplanationButton
+          <DropDownButton
             id="id__lesson__test_explanation_button"
             label={'test'}
             direction="down"
