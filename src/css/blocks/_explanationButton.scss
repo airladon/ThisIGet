@@ -3,13 +3,17 @@
 }
 
 .explanation_button__label {
-
+  // display: table;
 }
 
 .explanation_button__label_text {
   display: inline-block;
   width: 80%;
   text-align: left;
+}
+
+.explanation_button__label_text_description {
+  font-size: 0.6em;
 }
 
 .explanation_button__label_rating {

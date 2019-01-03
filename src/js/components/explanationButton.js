@@ -1,11 +1,8 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import DropDownButton from './dropDownButton';
 import type { TypeListItem } from './dropDownButton';
-
-const { round } = Fig.tools.math;
-// const { generateUniqueId } = Fig.tools.misc;
 
 export default class ExplanationButton extends DropDownButton {
   // eslint-disable-next-line class-methods-use-this
@@ -14,9 +11,9 @@ export default class ExplanationButton extends DropDownButton {
       return listItem.label;
     }
     let ratingCss = 'explanation_button__label_rating_value_0';
-    let numReviews = '';
+    let numReviews = listItem.numReviews || 0;
     const prefix = 'explanation_button__label_rating_value_';
-    if (listItem.numReviews != null && listItem.numReviews > 0) {
+    if (numReviews > 0) {
       const rating = Math.round((listItem.rating || 0) * 2) / 2;
       if (rating === 0.5) { ratingCss = `${prefix}0p5`; }
       if (rating === 1) { ratingCss = `${prefix}1`; }
@@ -28,12 +25,25 @@ export default class ExplanationButton extends DropDownButton {
       if (rating === 4) { ratingCss = `${prefix}4`; }
       if (rating === 4.5) { ratingCss = `${prefix}4p5`; }
       if (rating === 5) { ratingCss = `${prefix}5`; }
-      numReviews = listItem.numReviews;
+      numReviews = (numReviews).toLocaleString('en');
     }
     const classes = `explanation_button__label_rating_value ${ratingCss}`;
+    let label = '';
+    let description = ' ';
+    if (listItem.label != null) {
+      ({ label } = listItem);
+    }
+    if (listItem.description != null) {
+      ({ description } = listItem);
+    }
     return <div className="explanation_button__label">
       <div className="explanation_button__label_text">
-        {listItem.label}
+        <div className="explanation_button__label_text_title">
+          {label}
+        </div>
+        <div className="explanation_button__label_text_description">
+          {description}
+        </div>
       </div>
       <div className="explanation_button__label_rating">
         <div className={classes}/>
