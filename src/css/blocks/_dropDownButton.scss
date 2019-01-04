@@ -1,4 +1,5 @@
 $radius: 0.6em;
+$button_size: 0.4em;
 
 .dropdown_button_container {
   width: 100%;
@@ -43,9 +44,9 @@ $radius: 0.6em;
 
 .dropdown_button_arrow {
   display: inline-block;
-  border-left: 0.3em solid transparent;
-  border-right: 0.3em solid transparent;
-  border-bottom: 0.3em solid;
+  border-left: $button_size solid transparent;
+  border-right: $button_size solid transparent;
+  border-bottom: $button_size solid;
   margin-left: 0.6em;
   transform: translate(0, -0.2em);
   -webkit-transform: translate(0, -0.2em);
@@ -54,41 +55,45 @@ $radius: 0.6em;
 }
 
 .dropdown_button_arrow_down {
-  border-left: 0.3em solid transparent;
-  border-right: 0.3em solid transparent;
-  border-top: 0.3em solid;
+  border-left: $button_size solid transparent;
+  border-right: $button_size solid transparent;
+  border-top: $button_size solid;
   border-bottom: 0;
-  transform: translate(0, -0.2em);
-  -webkit-transform: translate(0, -0.2em);
+  vertical-align: middle;
+  transform: translate(0, -0.05em);
+  -webkit-transform: translate(0, -0.05em);
 }
 
 .dropdown_button_arrow_up {
-  border-left: 0.3em solid transparent;
-  border-right: 0.3em solid transparent;
-  border-bottom: 0.3em solid;
+  border-left: $button_size solid transparent;
+  border-right: $button_size solid transparent;
+  border-bottom: $button_size solid;
   border-top: 0;
-  transform: translate(0, -0.2em);
-  -webkit-transform: translate(0, -0.2em);
+  vertical-align: middle;
+  transform: translate(0, -0.05em);
+  -webkit-transform: translate(0, -0.05em);
 }
 
 .dropdown_button_arrow_right {
-  border-left: 0.3em solid;
+  border-left: $button_size solid;
   border-right: 0;
-  border-bottom: 0.3em solid transparent;
-  border-top: 0.3em solid transparent;
+  border-bottom: $button_size solid transparent;
+  border-top: $button_size solid transparent;
   padding-right: 0.3em;
-  transform: translate(0.2em, 0);
-  -webkit-transform: translate(0.2em, 0);
+  vertical-align: middle;
+  transform: translate(0.2em, -0.05em);
+  -webkit-transform: translate(0.2em, -0.05em);
 }
 
 .dropdown_button_arrow_left {
   border-left: 0;
-  border-right: 0.3em solid;
-  border-bottom: 0.3em solid transparent;
-  border-top: 0.3em solid transparent;
+  border-right: $button_size solid;
+  border-bottom: $button_size solid transparent;
+  border-top: $button_size solid transparent;
   padding-right: 0.3em;
-  transform: none;
-  -webkit-transform: none;
+  vertical-align: middle;
+  transform: translate(0, -0.05em);
+  -webkit-transform: translate(0, -0.05em);
 }
 
 .dropdown_button_list {

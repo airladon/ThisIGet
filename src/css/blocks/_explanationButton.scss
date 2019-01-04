@@ -1,12 +1,5 @@
-#id__lesson__explanation_button_explanation_list,
-#id__lesson__explanation_button_quiz_list,
-#id__lesson__explanation_button_dev_list,
-#id__lesson__explanation_button_summary_list {
-  width: 300px;
-}
-
 .explanation_button__listItem {
-  width: 100%;
+  width: 300px;
   table-layout: fixed;
   margin-top: 0.1em;
   margin-bottom: 0.1em;
@@ -21,9 +14,6 @@
   white-space: -o-pre-wrap;   /* Opera 7 */
   word-wrap: break-word;      /* IE */
 }
-
-// .explanation_button__label_title {
-// }
 
 .explanation_button__label_description {
   font-size: 0.8em;
