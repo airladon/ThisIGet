@@ -742,11 +742,11 @@ class LessonContent {
         versionUids = [versionUid];
       }
       versionUids.forEach((vUid) => {
-        const version = lesson[vUid];
+        const version = lesson.versions[vUid];
         cssLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.css`;
         jsLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.js`;
         if (version.qr != null && version.qr.length > 0) {
-          this.diagram.elements._qr[`_${uid}`][`_${vUid}`] = this.diagram.shapes.collection();
+          this.diagram.elements._qr[`_${uid}`].add(vUid, this.diagram.shapes.collection());
           version.qr.forEach((qrid) => {
             const loadingQR = this.diagram.shapes.collection();
             loadingQR.hideAll();
@@ -756,10 +756,10 @@ class LessonContent {
         if (cssLink !== '') {
           loadRemoteCSS(`${uid}${vUid}CSS`, cssLink, () => {
             loadRemote(`${uid}${vUid}Script`, jsLink, () => {
-              Object.keys(window.quickReference[uid]).forEach((qrid) => {
+              Object.keys(window.quickReference[uid][vUid]).forEach((qrid) => {
                 const element = this.diagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
                 const { isShown } = element;
-                const qr = new window.quickReference[uid][qrid](this.diagram);
+                const qr = new window.quickReference[uid][vUid][qrid](this.diagram);
                 this.diagram.elements._qr[`_${uid}`][`_${vUid}`].add(qrid, qr);
                 if (isShown) {
                   qr.show();
@@ -777,12 +777,18 @@ class LessonContent {
   }
 
   showQR(
-    uid: string,
+    combinedUid: string,
     qrid: string,
   ) {
+    const [uid, vid] = combinedUid.split('/');
+
     let uidToUse = uid;
     if (!uid.startsWith('_')) {
       uidToUse = `_${uid}`;
+    }
+    let vidToUse = vid;
+    if (!vid.startsWith('_')) {
+      vidToUse = `_${vid}`;
     }
 
     let qridToUse = qrid;
@@ -792,10 +798,13 @@ class LessonContent {
 
     if (this.diagram.elements._qr) {
       if (this.diagram.elements._qr[uidToUse]) {
-        if (this.diagram.elements._qr[uidToUse][qridToUse]) {
-          this.diagram.elements._qr.show();
-          this.diagram.elements._qr[uidToUse].show();
-          this.diagram.elements._qr[uidToUse][qridToUse].show();
+        if (this.diagram.elements._qr[uidToUse][vidToUse]) {
+          if (this.diagram.elements._qr[uidToUse][vidToUse][qridToUse]) {
+            this.diagram.elements._qr.show();
+            this.diagram.elements._qr[uidToUse].show();
+            this.diagram.elements._qr[uidToUse][vidToUse].show();
+            this.diagram.elements._qr[uidToUse][vidToUse][qridToUse].show();
+          }
         }
       }
     }

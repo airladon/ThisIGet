@@ -147,15 +147,14 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       if (version == null) {
         version = versions[Object.keys(versions)[0]];
       }
-      const { paths } = version;
-      // const subPath = version.path;
+      const { topics } = version;
       const versionPath = `${lesson.path}/${version.path}`;
-      if (paths.indexOf('summary') > -1) {
+      if (topics.indexOf('summary') > -1) {
         link = `${versionPath}/summary`;
-      } else if (paths.indexOf('explanation') > -1) {
+      } else if (topics.indexOf('explanation') > -1) {
         link = `${versionPath}/explanation`;
       } else {
-        link = `${versionPath}/${paths[0]}`;
+        link = `${versionPath}/${topics[0]}`;
       }
     }
     // Object.entries(index).forEach((uid, lessonDescription) => {

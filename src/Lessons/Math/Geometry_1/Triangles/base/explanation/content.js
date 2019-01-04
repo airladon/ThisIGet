@@ -26,15 +26,11 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    // this.overlayDiagram = new OverlayLessonDiagram(htmlId, layout);
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      // 'triangle_introduction',
-      // 'congruent_triangles',
-      // 'related_angles',
-      // 'quadrangles',
-      // 'adjacent_angles',
+      'related_angles/base',
+      'adjacent_angles/base',
     ]);
   }
 
@@ -44,8 +40,6 @@ class Content extends LessonContent {
     const custom = diag._custom;
     const properties = diag._properties;
     const totalAngle = diag._totalAngle;
-    const qr = diag._qr;
-    // const qr = this.diagram.elements;
     let common = {};
 
     this.addSection({
@@ -59,9 +53,6 @@ class Content extends LessonContent {
         </p>
         ${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html('id_lesson__related_angles_definition')}
       `,
-      // showOnly: [
-      //   diag,
-      // ],
       show: [
         examples,
       ],
@@ -186,12 +177,9 @@ class Content extends LessonContent {
         </p>
       `),
       modifiers: {
-        alternate_angles: click(qr._alternateAngles.show, [qr._alternateAngles], colors.line),
-        supplementary_angles: click(qr._supplementary.show, [qr._supplementary], colors.line),
+        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.line),
       },
-      showOnly: [
-        qr,
-      ],
     });
 
     common = {
@@ -325,11 +313,10 @@ class Content extends LessonContent {
         </p>
       `,
       modifiers: {
-        alternate_angles: click(qr._alternateAngles.show, [qr._alternateAngles], colors.line),
+        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
         a: highlight(colors.angleA),
       },
       showOnly: [
-        qr,
         totalAngle,
       ],
       show: [
@@ -356,7 +343,7 @@ class Content extends LessonContent {
     this.addSection(common, greyLines);
     this.addSection(common, greyLines, {
       modifiers: {
-        alternate_angles: click(qr._alternateAngles.show, [qr._alternateAngles], colors.line),
+        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
         a: click(totalAngle.pulseAlternateA, [totalAngle], colors.angleA),
       },
       show: [
@@ -375,7 +362,7 @@ class Content extends LessonContent {
         </p>
       `,
       modifiers: {
-        alternate_angle: click(qr._alternateAngles.show, [qr._alternateAngles], colors.line),
+        alternate_angle: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
         b: highlight(colors.angleB),
       },
       setEnterState: () => {
@@ -386,7 +373,6 @@ class Content extends LessonContent {
         totalAngle._triangle._line.setColor(colors.diagram.disabled);
       },
       showOnly: [
-        qr,
         totalAngle,
       ],
       show: [
@@ -404,7 +390,7 @@ class Content extends LessonContent {
     this.addSection(common, {
     });
     common.modifiers = {
-      alternate_angle: click(qr._alternateAngles.show, [qr._alternateAngles], colors.line),
+      alternate_angle: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
       b: click(totalAngle.pulseAlternateB, [totalAngle], colors.angleB),
     };
 
@@ -427,7 +413,6 @@ class Content extends LessonContent {
         totalAngle._triangle._line.setColor(colors.diagram.disabled);
       },
       showOnly: [
-        qr,
         totalAngle,
         totalAngle._eqn,
       ],
@@ -453,7 +438,7 @@ class Content extends LessonContent {
         </p>
       `,
       modifiers: {
-        supplementary_angles: click(qr._supplementary.show, [qr._supplementary], colors.line),
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.line),
         b: highlight(colors.angleB),
         a: highlight(colors.angleA),
         c: highlight(colors.angleC),
@@ -516,7 +501,6 @@ class Content extends LessonContent {
         </p>
       `,
       showOnly: [
-        qr,
         totalAngle,
       ],
       show: [

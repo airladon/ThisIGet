@@ -30,10 +30,10 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'triangle_introduction',
-      'congruent_triangles',
-      'adjacent_angles',
-      'related_angles',
+      'triangle_introduction/base',
+      'congruent_triangles/base',
+      'adjacent_angles/base',
+      'related_angles/base',
     ]);
   }
 

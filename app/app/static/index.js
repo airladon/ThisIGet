@@ -11845,7 +11845,7 @@ function (_DiagramElementCollec) {
         height: defaultArrowDimension,
         radius: defaultArrowRadius,
         autoHide: true,
-        curveOverlap: 0.7
+        curveOverlap: 0.3
       };
       var optionsToUse = {};
 
@@ -19183,6 +19183,7 @@ function () {
 
     this.setTransformCallback = function () {};
 
+    this.beforeDrawCallback = null;
     this.lastDrawTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
@@ -20973,6 +20974,10 @@ function (_DiagramElement) {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
+      if (this.beforeDrawCallback) {
+        this.beforeDrawCallback(this);
+      }
+
       if (this.isShown) {
         this.setNextTransform(now);
         this.setNextColor(now); // set next color can end up hiding an element when disolving out
@@ -21240,6 +21245,10 @@ function (_DiagramElement2) {
     value: function draw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+
+      if (this.beforeDrawCallback) {
+        this.beforeDrawCallback(this);
+      }
 
       if (this.isShown) {
         this.setNextTransform(now);

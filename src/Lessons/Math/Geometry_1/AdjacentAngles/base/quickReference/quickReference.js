@@ -4,6 +4,7 @@ import lessonLayout from './layout';
 import AdjacentCollection from '../common/diagramCollectionAdjacent';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import version from '../version';
 
 const { Transform, Point } = Fig;
 const { html } = Fig.tools;
@@ -164,7 +165,10 @@ function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference[details.details.uid] = {
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
     Complementary: QRComplementaryAngles,
     Supplementary: QRSupplementaryAngles,
     Explementary: QRExplementaryAngles,
