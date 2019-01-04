@@ -721,9 +721,6 @@ class LessonContent {
           name: `${uid}`, method: 'collection',
         }]);
       }
-      // this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
-      //   name: `${qrid}`, method: 'collection',
-      // }]);
       this.getQR(uid, versionUid);
     });
   }
@@ -780,7 +777,11 @@ class LessonContent {
     combinedUid: string,
     qrid: string,
   ) {
-    const [uid, vid] = combinedUid.split('/');
+    // eslint-disable-next-line prefer-const
+    let [uid, vid] = combinedUid.split('/');
+    if (vid == null) {
+      vid = 'base';
+    }
 
     let uidToUse = uid;
     if (!uid.startsWith('_')) {

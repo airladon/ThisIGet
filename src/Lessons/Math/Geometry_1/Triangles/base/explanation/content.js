@@ -29,7 +29,7 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'related_angles/base',
+      'related_angles',
       'adjacent_angles/base',
     ]);
   }
@@ -177,7 +177,7 @@ class Content extends LessonContent {
         </p>
       `),
       modifiers: {
-        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
+        alternate_angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.line),
         supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.line),
       },
     });
