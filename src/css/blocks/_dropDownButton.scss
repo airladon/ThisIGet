@@ -7,10 +7,20 @@ $radius: 0.6em;
   border-radius: $radius;
   background-color: color('lesson', 'title-background');
   border: 1px solid color('white', 'lighter');
+  color: #929292;
 }
 
 .dropdown_button_container:hover {
   background-color: color('white', 'lightest');
+}
+
+.dropdown_button_selected {
+  background: color('site', 'safe', 'base');
+  color: white;
+}
+
+.dropdown_button_selected:hover {
+  background: color('site', 'safe', 'light');
 }
 
 .dropdown_button_label_container {
@@ -29,7 +39,6 @@ $radius: 0.6em;
   display: inline-block;
   pointer-events: none;
   font-weight: 100;
-  color: #929292;
 }
 
 .dropdown_button_arrow {
@@ -41,7 +50,7 @@ $radius: 0.6em;
   transform: translate(0, -0.2em);
   -webkit-transform: translate(0, -0.2em);
   pointer-events: none;
-  color: #929292;
+  // color: #929292;
 }
 
 .dropdown_button_arrow_down {
@@ -107,17 +116,17 @@ $radius: 0.6em;
 }
 
 .dropdown_button_list_item:hover {
-  background-color: color('white', 'lighter');
+  background-color: color('white', 'lightest');
   cursor: pointer;
 }
 
 .dropdown_button_list_item_active {
   color: color('white', 'base');
-  background-color: color('blue', 'light');
+  background: color('site', 'safe', 'base');
 }
 
 .dropdown_button_list_item_active:hover {
-  background-color: color('blue', 'base');
+  background: color('site', 'safe', 'base');
 }
 
 .dropdown_button_list_item_disabled {

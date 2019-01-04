@@ -575,12 +575,9 @@ export default class LessonComponent extends React.Component
     const { lessonDescription } = this;
     const topics = {};
     const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
-    console.log(currentExplanation, currentTopic)
-    console.log(lessonDescription)
     if (lessonDescription != null) {
       Object.keys(lessonDescription.explanations).forEach((eUID) => {
         const explanation = lessonDescription.explanations[eUID];
-        console.log(explanation)
         explanation.topics.forEach((topic) => {
           if (!(topic in topics)) {
             topics[topic] = {};
@@ -590,10 +587,9 @@ export default class LessonComponent extends React.Component
             && currentTopic === topic) {
             active = true;
           }
-          console.log(currentExplanation, explanation.path, currentTopic, topic, active)
           topics[topic][eUID] = {
             label: explanation.title,
-            link: `${lessonDescription.path}/${explanation.path}/topic`,
+            link: `${lessonDescription.path}/${explanation.path}/${topic}`,
             rating: Math.floor(Math.random() * 6),
             numReviews: Math.floor(Math.random() * 10000),
             description: explanation.description,
@@ -617,19 +613,23 @@ export default class LessonComponent extends React.Component
         topicNames.push(topicName);
       }
     });
-    console.log(topics, topicNames)
+    const currentTopic = window.location.href.split('/').slice(-1)[0];
+
     topicNames.forEach((name) => {
       if (topics[name] != null) {
         const topic = topics[name];
-        console.log(topic)
+        let selected = false;
+        if (currentTopic === name) {
+          selected = true;
+        }
         let eUIDs = Object.keys(topic);
         eUIDs = eUIDs.sort((aKey, bKey) => {
           const a = topic[aKey];
           const b = topic[bKey];
-          if (a.rating > b.rating) { return 1; }
-          if (a.rating < b.rating) { return -1; }
-          if (a.numReviews > b.numReviews) { return 1; }
-          if (a.numReviews < b.numReviews) { return -1; }
+          if (a.rating < b.rating) { return 1; }
+          if (a.rating > b.rating) { return -1; }
+          if (a.numReviews < b.numReviews) { return 1; }
+          if (a.numReviews > b.numReviews) { return -1; }
           const labelA = a.label.toUpperCase();
           const labelB = b.label.toUpperCase();
           if (labelA > labelB) { return 1; }
@@ -648,6 +648,7 @@ export default class LessonComponent extends React.Component
               label={name}
               direction="down"
               xAlign="left"
+              selected={selected}
               list={listItems}/>
           </div>,
         );
