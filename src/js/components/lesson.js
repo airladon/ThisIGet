@@ -699,9 +699,9 @@ export default class LessonComponent extends React.Component
           <div className="lesson__path_mid_tiles">
             {this.addTopics()}
           </div>
-          { /*<div className="lesson__path_right_tiles">
+          { /* <div className="lesson__path_right_tiles">
             {this.addQuizSummary()}
-          </div>*/ }
+          </div> */ }
         </div>
         <LessonTitle
           imgLink={`/${this.lesson.content.iconLinkGrey}`}
