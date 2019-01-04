@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import { loadRemote, loadRemoteCSS } from '../../../../../../js/tools/misc';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import getLessonIndex from '../../../../index';
+import getLessonIndex from '../../../../../index';
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
