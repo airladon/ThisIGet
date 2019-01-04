@@ -28,8 +28,8 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'triangle_introduction/simple',
-      'congruent_triangles/simple',
+      'triangle_introduction',
+      'congruent_triangles',
     ]);
   }
 

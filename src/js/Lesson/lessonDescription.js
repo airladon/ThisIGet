@@ -3,6 +3,25 @@ import Fig from 'figureone';
 
 const { Point } = Fig;
 
+export type TypeLessonDescription = {
+  name: string;
+  path: string;
+  imgLink: string;
+  location: Point;
+  id: string;
+  uid: string;
+  dependencies: Array<string>;
+  enabled: boolean;
+  qr: Array<string>;
+  explanations: Array<{
+    title: string;
+    description: string;
+    onPath: boolean;
+    topics: Array<string>;
+    qr: Array<string>;
+  }>;
+};
+
 export default class LessonDescription {
   name: string;
   path: string;
