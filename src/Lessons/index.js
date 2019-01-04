@@ -5,6 +5,7 @@ export default function getLessonIndex() {
     test1: new LessonDescription({
       name: 'Congruent Triangles',
       path: '/Lessons/Math/Geometry_1/test1',
+      uid: 'test1',
       explanations: {
         euclid: {
           title: 'Euclid',
@@ -56,6 +57,7 @@ export default function getLessonIndex() {
     test2: new LessonDescription({
       name: 'Congruent Triangles 2',
       path: '/Lessons/Math/Geometry_1/test2',
+      uid: 'test2',
       explanations: {
         simple: {
           title: 'Simple Official',
@@ -87,6 +89,7 @@ export default function getLessonIndex() {
     chord: new LessonDescription({
       name: 'Chord',
       path: '/Lessons/Math/Trigonometry_1/test3',
+      uid: 'chord',
       explanations: {
       },
       dependencies: [

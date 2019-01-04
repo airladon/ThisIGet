@@ -31,18 +31,17 @@ export default function makeLessonTree() {
   const lessonLearningPaths = splitIndexIntoLearningPaths(lessonIndex);
   const lessonTrees = {};
   Object.keys(lessonLearningPaths).forEach((learningPath) => {
-    const topicIndex = lessonLearningPaths[learningPath].lessons;
+    const { lessons } = lessonLearningPaths[learningPath];
     const lessonTree = [];
     const remainingUIDs = {};
     let existingUIDs = {};
     const allUIDs = [];
-    topicIndex.forEach((lesson) => {
+    lessons.forEach((lesson) => {
       remainingUIDs[lesson.uid] = lesson;
       allUIDs.push(lesson.uid);
     });
-
     let index = 0;
-    const max = topicIndex.length;
+    const max = lessons.length;
     while (Object.keys(remainingUIDs).length > 0 && index < max) {
       const lessonTreeNode = [];
       const newExisting = {};
@@ -71,6 +70,5 @@ export default function makeLessonTree() {
       path: lessonLearningPaths[learningPath].path,
     };
   });
-
   return lessonTrees;
 }

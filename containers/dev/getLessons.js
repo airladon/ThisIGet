@@ -115,7 +115,7 @@ export default function getLessonIndex() {
       outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
       outStr = `${outStr}\n      name: '${title}',`;
       outStr = `${outStr}\n      path: '${shortPath}',`;
-      // outStr = `${outStr}\n      uid: '${uid}',`;
+      outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      explanations: {`;
       const explanationPaths = getAllExplanations(lessonPath);
       explanationPaths.forEach((explanationPath) => {
