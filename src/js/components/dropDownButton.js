@@ -61,6 +61,7 @@ export default class DropDownButton extends React.Component
   toggle() {
     const rect = this.buttonElement.getBoundingClientRect();
     const listRect = this.itemList.getBoundingClientRect();
+    // $FlowFixMe
     const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
     let left = 0;
     if (this.itemList.classList.contains('dropdown_button_list_hide')) {
@@ -70,21 +71,16 @@ export default class DropDownButton extends React.Component
         this.itemList.style.top = `${-listRect.height}px`;
       }
       if (this.xAlign === 'left') {
-        // this.itemList.style.left = '0px';
         left = 0;
       } else if (this.xAlign === 'right') {
-        // this.itemList.style.left = `${rect.width - listRect.width}px`;
         left = rect.width - listRect.width;
       } else if (this.xAlign === 'center') {
-        // this.itemList.style.left = `${rect.width / 2 - listRect.width / 2}px`;
         left = rect.width / 2 - listRect.width / 2;
       }
-      console.log(left, rect, listRect, windowWidth)
       if ((rect.left + left + listRect.width) > windowWidth) {
         const delta = (rect.left + left + listRect.width) - windowWidth;
         left -= delta + 5;
       }
-      console.log(left)
       this.itemList.style.left = `${left}px`;
       this.itemList.classList.remove('dropdown_button_list_hide');
     } else {
