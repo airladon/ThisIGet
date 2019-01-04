@@ -31,13 +31,7 @@ type State = {
 
 function getLessonDescription(uid: string) {
   const lessons = getLessonIndex();
-  for (let i = 0; i < lessons.length; i += 1) {
-    const lessonDescription = lessons[i];
-    if (lessonDescription.uid === uid) {
-      return lessonDescription;
-    }
-  }
-  return null;
+  return lessons[uid];
 }
 
 function getCurrentLesson() {
@@ -577,42 +571,120 @@ export default class LessonComponent extends React.Component
     return '';
   }
 
-  addLessonPaths() {
-    const output = [];
+  getTopics() {
     const { lessonDescription } = this;
-    const currentLocation = getCurrentLesson();
-    if (lessonDescription != null && lessonDescription.paths.length > 1) {
-      let paths = lessonDescription.paths.slice();
-      paths = paths.sort((a, b) => {
-        const upperA = a.toUpperCase();
-        const upperB = b.toUpperCase();
-        if (upperA < upperB) {
-          return -1;
-        }
-        if (upperA > upperB) {
-          return 1;
-        }
-        return 0;
-      });
-      paths.forEach((path) => {
-        if (path.toLowerCase() !== 'quiz' && path.toLowerCase() !== 'summary') {
-          this.key += 1;
-          let selected = '';
-          if (path === currentLocation) {
-            selected = 'selected';
+    const topics = {};
+    const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    console.log(lessonDescription)
+    if (lessonDescription != null) {
+      Object.keys(lessonDescription.explanations).forEach((eUID) => {
+        const explanation = lessonDescription.explanations[eUID];
+        explanation.topics.forEach((topic) => {
+          if (!(topic in topics)) {
+            topics[topic] = {};
           }
-          output.push(
-            <LessonTilePath
-              id={`id_lesson__tile_path_${path}`}
-              link={`${lessonDescription.path}/${path}`}
-              key={this.key}
-              label={path}
-              state={selected}
-              />,
-          );
-        }
+          let active = false;
+          if (currentExplanation === explanation.path
+            && currentTopic === topic) {
+            active = true;
+          }
+          topics[topic][eUID] = {
+            label: explanation.title,
+            link: `${lessonDescription.path}/${explanation.path}/topic`,
+            rating: Math.floor(Math.random() * 6),
+            numReviews: Math.floor(Math.random() * 10000),
+            description: explanation.description,
+            active,
+          };
+        });
       });
     }
+    return topics;
+  }
+
+  addTopics() {
+    const output = [];
+    const topics = this.getTopics();
+    const topicNames = [
+      'summary', 'explanation', 'implications', 'history',
+      'references', 'quiz',
+    ];
+    Object.keys(topics).forEach((topicName) => {
+      if (topicNames.indexOf(topicName) === -1) {
+        topicNames.push(topicName);
+      }
+    });
+    console.log(topics, topicNames)
+    topicNames.forEach((name) => {
+      if (topics[name] != null) {
+        const topic = topics[name];
+        console.log(topic)
+        let eUIDs = Object.keys(topic);
+        eUIDs = eUIDs.sort((aKey, bKey) => {
+          const a = topic[aKey];
+          const b = topic[bKey];
+          if (a.rating > b.rating) { return 1; }
+          if (a.rating < b.rating) { return -1; }
+          if (a.numReviews > b.numReviews) { return 1; }
+          if (a.numReviews < b.numReviews) { return -1; }
+          const labelA = a.label.toUpperCase();
+          const labelB = b.label.toUpperCase();
+          if (labelA > labelB) { return 1; }
+          if (labelA < labelB) { return -1; }
+          return 0;
+        });
+        const listItems = [];
+        eUIDs.forEach((eUID) => {
+          listItems.push(topic[eUID]);
+        });
+        this.key += 1;
+        output.push(
+          <div className="lesson__path_tile" key={this.key}>
+            <ExplanationButton
+              id={`id__lesson__explanation_button_${name}`}
+              label={name}
+              direction="down"
+              xAlign="left"
+              list={listItems}/>
+          </div>,
+        );
+      }
+    });
+    // const { lessonDescription } = this;
+    // const currentLocation = getCurrentLesson();
+    // // Get all topics from various explanations
+    // if (lessonDescription != null && lessonDescription.paths.length > 1) {
+    //   let paths = lessonDescription.paths.slice();
+    //   paths = paths.sort((a, b) => {
+    //     const upperA = a.toUpperCase();
+    //     const upperB = b.toUpperCase();
+    //     if (upperA < upperB) {
+    //       return -1;
+    //     }
+    //     if (upperA > upperB) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+    //   paths.forEach((path) => {
+    //     if (path.toLowerCase() !== 'quiz' && path.toLowerCase() !== 'summary') {
+    //       this.key += 1;
+    //       let selected = '';
+    //       if (path === currentLocation) {
+    //         selected = 'selected';
+    //       }
+    //       output.push(
+    //         <LessonTilePath
+    //           id={`id_lesson__tile_path_${path}`}
+    //           link={`${lessonDescription.path}/${path}`}
+    //           key={this.key}
+    //           label={path}
+    //           state={selected}
+    //           />,
+    //       );
+    //     }
+    //   });
+    // }
     return output;
   }
 
@@ -621,11 +693,11 @@ export default class LessonComponent extends React.Component
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <div className="lesson__path_container">
           <div className="lesson__path_left_tiles">
-            {this.addLessonPaths()}
+            {this.addTopics()}
           </div>
-          <div className="lesson__path_right_tiles">
+          { /*<div className="lesson__path_right_tiles">
             {this.addQuizSummary()}
-          </div>
+          </div>*/ }
         </div>
         <LessonTitle
           imgLink={`/${this.lesson.content.iconLinkGrey}`}
