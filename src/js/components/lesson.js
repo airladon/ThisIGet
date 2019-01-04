@@ -5,7 +5,7 @@ import * as React from 'react';
 import Lesson from '../Lesson/Lesson';
 import Button from './button';
 import LessonNavigator from './lessonNavigator';
-import LessonTilePath from './lessonPathTile';
+// import LessonTilePath from './lessonPathTile';
 import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
@@ -34,10 +34,10 @@ function getLessonDescription(uid: string) {
   return lessons[uid];
 }
 
-function getCurrentLesson() {
-  const currentLocation = window.location.href;
-  return currentLocation.split('/').pop();
-}
+// function getCurrentLesson() {
+//   const currentLocation = window.location.href;
+//   return currentLocation.split('/').pop();
+// }
 
 export default class LessonComponent extends React.Component
                                     <Props, State> {
@@ -343,11 +343,11 @@ export default class LessonComponent extends React.Component
       className="lesson__button-goto_container"
       id="id__lesson__button-goto_container">
       <DropDownButton
-      id="id__lesson__goto_button"
-      label={`${this.state.page + 1} / ${this.state.numPages}`}
-      direction="up"
-      xAlign="right"
-      list={this.state.listOfSections}/>
+        id="id__lesson__goto_button"
+        label={`${this.state.page + 1} / ${this.state.numPages}`}
+        direction="up"
+        xAlign="right"
+        list={this.state.listOfSections}/>
     </div>;
   }
 

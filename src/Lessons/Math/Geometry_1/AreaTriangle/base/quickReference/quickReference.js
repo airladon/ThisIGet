@@ -4,7 +4,7 @@ import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
-
+import version from '../version';
 import TriangleAreaCollection from '../common/diagramCollectionTri';
 
 const { Transform } = Fig;
@@ -54,7 +54,10 @@ function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference[details.details.uid] = {
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
     Main: QRTriangleArea,
   };
 }

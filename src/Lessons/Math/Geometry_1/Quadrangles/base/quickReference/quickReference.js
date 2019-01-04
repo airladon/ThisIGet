@@ -3,6 +3,7 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import version from '../version';
 import QuadCollection from '../common/diagramCollectionQuad';
 import RectCollection from '../common/diagramCollectionRect';
 import SquareCollection from '../common/diagramCollectionSquare';
@@ -147,7 +148,10 @@ function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference[details.details.uid] = {
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
     Main: QRQuadrangle,
     Rectangle: QRRectangle,
     Square: QRSquare,

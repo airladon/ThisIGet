@@ -4,6 +4,7 @@ import lessonLayout from './layout';
 import TriangleCollection from '../common/diagramCollectionTriangles';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import version from '../version';
 
 const { Transform } = Fig;
 const { html } = Fig.tools;
@@ -414,7 +415,10 @@ function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference[details.details.uid] = {
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
     Asa: QRAsa,
     Sss: QRSss,
     Sas: QRSas,

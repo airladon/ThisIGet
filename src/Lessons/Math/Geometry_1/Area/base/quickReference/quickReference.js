@@ -4,6 +4,7 @@ import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import version from '../version';
 
 import MeasureCollection from '../common/diagramCollectionMeasure';
 import RectAreaCollection from '../common/diagramCollectionRect';
@@ -150,7 +151,10 @@ function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  window.quickReference[details.details.uid] = {
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
     Main: QRArea,
     Square: QRSquare,
     Rectangle: QRRect,
