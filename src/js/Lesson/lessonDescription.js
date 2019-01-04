@@ -13,7 +13,7 @@ export type TypeLessonDescription = {
   dependencies: Array<string>;
   enabled: boolean;
   qr: Array<string>;
-  explanations: {[euid: string]: {
+  versions: {[vuid: string]: {
     title: string;
     description: string;
     onPath: boolean;
@@ -30,8 +30,7 @@ export default class LessonDescription {
   id: string;
   uid: string;
   dependencies: Array<string>;
-  // explanations: Array<string>;
-  explanations: {[euid: string]: {
+  versions: {[vuid: string]: {
     title: string;
     description: string;
     onPath: boolean;
@@ -48,7 +47,7 @@ export default class LessonDescription {
       name: string,
       path: string,
       uid: string,
-      explanations: {[name: string]: {
+      versions: {[name: string]: {
         title: string,
         description: string,
         onPath: boolean,
@@ -71,13 +70,13 @@ export default class LessonDescription {
     }
     this.dependencies = lesson.dependencies;
     this.uid = lesson.uid;
-    this.explanations = {};
-    Object.keys(lesson.explanations).forEach((key) => {
-      const explanation = lesson.explanations[key];
+    this.versions = {};
+    Object.keys(lesson.versions).forEach((key) => {
+      const version = lesson.versions[key];
       const {
         title, description, onPath, topics, qr, path,
-      } = explanation;
-      this.explanations[key] = {
+      } = version;
+      this.versions[key] = {
         title, description, onPath, topics, qr, path,
       };
     });

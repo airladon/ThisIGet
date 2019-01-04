@@ -116,7 +116,7 @@ export default function getLessonIndex() {
       outStr = `${outStr}\n      name: '${title}',`;
       outStr = `${outStr}\n      path: '${shortPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
-      outStr = `${outStr}\n      explanations: {`;
+      outStr = `${outStr}\n      versions: {`;
       const versionPaths = getAllVersions(lessonPath);
       versionPaths.forEach((versionPath) => {
         let versionUid = '';

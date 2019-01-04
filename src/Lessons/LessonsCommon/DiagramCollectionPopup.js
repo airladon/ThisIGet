@@ -129,35 +129,58 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getLinkFromString(linkOrLessonID: string, explanationId: string) {
+  getLinkFromString(linkOrLessonID: string, versionId: string) {
     if (linkOrLessonID.startsWith('/')) {
       return linkOrLessonID;
     }
     const index = getLessonIndex();
     let link = '';
-    Object.entries(index).forEach((uid, lessonDescription) => {
-      if (uid === linkOrLessonID) {
-        const { explanations } = lessonDescription;
-        let explanation;
-        if (explanationsId !== '') {
-          if (explanations[explanationsId] != null)
-            explanation = explanations[explanationsId];
-        }
-        if (explanation == null) {
-          explanation = explanations[Object.keys(explanations)[0]];
-        }
-        const { paths } = explanation;
-        const subPath = explanation.path;
-        const explanationPath = `${lessonDescription.path}/${explanation.path}`;
-        if (paths.indexOf('summary') > -1) {
-          link = `${explanationPath}/summary`;
-        } else if (paths.indexOf('explanation') > -1) {
-          link = `${explanationPath}/explanation`;
-        } else {
-          link = `${explanationPath}/${paths[0]}`;
+    const lesson = index[linkOrLessonID];
+    if (lesson != null) {
+      const { versions } = lesson;
+      let version;
+      if (versionId !== '') {
+        if (versions[versionId] != null) {
+          version = versions[versionId];
         }
       }
-    });
+      if (version == null) {
+        version = versions[Object.keys(versions)[0]];
+      }
+      const { paths } = version;
+      // const subPath = version.path;
+      const versionPath = `${lesson.path}/${version.path}`;
+      if (paths.indexOf('summary') > -1) {
+        link = `${versionPath}/summary`;
+      } else if (paths.indexOf('explanation') > -1) {
+        link = `${versionPath}/explanation`;
+      } else {
+        link = `${versionPath}/${paths[0]}`;
+      }
+    }
+    // Object.entries(index).forEach((uid, lessonDescription) => {
+    //   if (uid === linkOrLessonID) {
+    //     const { versions } = lessonDescription;
+    //     let version;
+    //     if (versionId !== '') {
+    //       if (versions[versionId] != null)
+    //         version = versions[versionId];
+    //     }
+    //     if (version == null) {
+    //       version = versions[Object.keys(versions)[0]];
+    //     }
+    //     const { paths } = version;
+    //     const subPath = version.path;
+    //     const explanationPath = `${lessonDescription.path}/${version.path}`;
+    //     if (paths.indexOf('summary') > -1) {
+    //       link = `${explanationPath}/summary`;
+    //     } else if (paths.indexOf('explanation') > -1) {
+    //       link = `${explanationPath}/explanation`;
+    //     } else {
+    //       link = `${explanationPath}/${paths[0]}`;
+    //     }
+    //   }
+    // });
     return link;
   }
 

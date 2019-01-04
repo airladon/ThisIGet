@@ -98,7 +98,7 @@ $button_size: 0.4em;
 
 .dropdown_button_list {
   position: absolute;
-  z-index: 1;
+  z-index: 10;
   background-color: white;
   border-radius: $radius;
   border: 1px solid #ccc;

@@ -715,7 +715,7 @@ class LessonContent {
     }
     // const index = getLessonIndex();
     qrs.forEach((combinedUid) => {
-      const [uid, explanationUid] = combinedUid.split('/');
+      const [uid, versionUid] = combinedUid.split('/');
       if (this.diagram.elements._qr[`_${uid}`] == null) {
         this.diagram.addElements(this.diagram.elements._qr, [{
           name: `${uid}`, method: 'collection',
@@ -724,43 +724,43 @@ class LessonContent {
       // this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
       //   name: `${qrid}`, method: 'collection',
       // }]);
-      this.getQR(uid, explanationUid);
+      this.getQR(uid, versionUid);
     });
   }
 
   getQR(
     uid: string,
-    explanationUid: string = '',
+    versionUid: string = '',
   ) {
     const index = getLessonIndex();
     let jsLink = '';
     let cssLink = '';
     const lesson = index[uid];
     if (lesson != null) {
-      let explanationUids = Object.keys(lesson.explanations);
-      if (explanationUid != null && explanationUid !== '') {
-        explanationUids = [explanationUid];
+      let versionUids = Object.keys(lesson.versions);
+      if (versionUid != null && versionUid !== '') {
+        versionUids = [versionUid];
       }
-      explanationUids.forEach((eUid) => {
-        const explanation = lesson[eUid];
-        cssLink = `/static/dist/${lesson.path}/${explanation.path}/quickReference/lesson.css`;
-        jsLink = `/static/dist/${lesson.path}/${explanation.path}/quickReference/lesson.js`;
-        if (explanation.qr != null && explanation.qr.length > 0) {
-          this.diagram.elements._qr[`_${uid}`][`_${eUid}`] = this.diagram.shapes.collection();
-          explanation.qr.forEach((qrid) => {
+      versionUids.forEach((vUid) => {
+        const version = lesson[vUid];
+        cssLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.css`;
+        jsLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.js`;
+        if (version.qr != null && version.qr.length > 0) {
+          this.diagram.elements._qr[`_${uid}`][`_${vUid}`] = this.diagram.shapes.collection();
+          version.qr.forEach((qrid) => {
             const loadingQR = this.diagram.shapes.collection();
             loadingQR.hideAll();
-            this.diagram.elements._qr[`_${uid}`][`_${eUid}`][`_${qrid}`] = loadingQR;
+            this.diagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`] = loadingQR;
           });
         }
         if (cssLink !== '') {
-          loadRemoteCSS(`${uid}${eUid}CSS`, cssLink, () => {
-            loadRemote(`${uid}${eUid}Script`, jsLink, () => {
+          loadRemoteCSS(`${uid}${vUid}CSS`, cssLink, () => {
+            loadRemote(`${uid}${vUid}Script`, jsLink, () => {
               Object.keys(window.quickReference[uid]).forEach((qrid) => {
-                const element = this.diagram.elements._qr[`_${uid}`][`_${eUid}`][`_${qrid}`];
+                const element = this.diagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
                 const { isShown } = element;
                 const qr = new window.quickReference[uid][qrid](this.diagram);
-                this.diagram.elements._qr[`_${uid}`][`_${eUid}`].add(qrid, qr);
+                this.diagram.elements._qr[`_${uid}`][`_${vUid}`].add(qrid, qr);
                 if (isShown) {
                   qr.show();
                   qr.showAll();

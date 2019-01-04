@@ -428,132 +428,132 @@ export default class LessonComponent extends React.Component
     </div>;
   }
 
-  addQuizSummary() {
-    const output = [];
-    const { lessonDescription } = this;
-    if (lessonDescription != null) {
-      const paths = lessonDescription.paths.slice();
-      const quiz = paths.indexOf('quiz');
-      const summary = paths.indexOf('summary');
-      const currentLocation = getCurrentLesson();
-      // output.push(
-      //   <LessonTilePath
-      //     id='this_is_a_test'
-      //     link=''
-      //     key={this.key}
-      //     label='test'
-      //     state=''
-      //     right={true}/>,
-      // );
-      this.key += 1;
-      output.push(
-        <div className="lesson__path_tile" key={this.key}>
-          <ExplanationButton
-            id="id__lesson__test_explanation_button"
-            label={'test'}
-            direction="down"
-            xAlign="left"
-            list={[
-              {
-                label: 'On Path',
-                separator: true,
-              },
-              {
-                label: 'Traditional',
-                rating: 3,
-                numReviews: 100,
-                description: 'This is a description',
-                link: '/Lessons/Math/Geometry_1/Isosceles/quiz',
-                active: true,
-              },
-              {
-                label: 'Advanced',
-                active: false,
-              },
-              {
-                label: 'Off Path',
-                separator: true,
-              },
-              {
-                label: 'Triangle Only',
-                rating: 0,
-                link: '',
-                numReviews: 50,
-                active: false,
-              },
-              {
-                label: 'Isosceles Proof lets see how long this goes and goes',
-                description: 'Isosceles Proof lets see how long this goes and goes and goes and Isosceles Proof lets see how long this goes and goes',
-                rating: 0.5,
-                link: '',
-                numReviews: 2,
-                active: false,
-              },
-              {
-                label: 'Euclid',
-                rating: 1,
-                link: '',
-                numReviews: 13292,
-                active: false,
-              },
-              {
-                label: 'Inuitive',
-                rating: 1.5,
-                link: '',
-                numReviews: 12,
-                active: false,
-              },
-              {
-                label: '7',
-                rating: 3.5,
-                link: '',
-                numReviews: 4,
-                active: false,
-              },
-              {
-                label: '8',
-                rating: 4.5,
-                link: '',
-                active: false,
-              },
-            ]}/>
-        </div>,
-      );
-      if (summary !== -1) {
-        this.key += 1;
-        let selected = '';
-        if (currentLocation.toLowerCase() === 'summary') {
-          selected = 'selected';
-        }
-        output.push(
-          <LessonTilePath
-            id='id_lesson__tile_path_summary'
-            link={`${lessonDescription.path}/summary`}
-            key={this.key}
-            label='Summary'
-            state={selected}
-            right={true}/>,
-        );
-      }
-      if (quiz !== -1) {
-        this.key += 1;
-        let selected = '';
-        if (currentLocation.toLowerCase() === 'quiz') {
-          selected = 'selected';
-        }
-        output.push(
-          <LessonTilePath
-            id='id_lesson__tile_path_quiz'
-            link={`${lessonDescription.path}/quiz`}
-            key={this.key}
-            label='Quiz'
-            state={selected}
-            />,
-        );
-      }
-    }
-    return output;
-  }
+  // addQuizSummary() {
+  //   const output = [];
+  //   const { lessonDescription } = this;
+  //   if (lessonDescription != null) {
+  //     const paths = lessonDescription.paths.slice();
+  //     const quiz = paths.indexOf('quiz');
+  //     const summary = paths.indexOf('summary');
+  //     const currentLocation = getCurrentLesson();
+  //     // output.push(
+  //     //   <LessonTilePath
+  //     //     id='this_is_a_test'
+  //     //     link=''
+  //     //     key={this.key}
+  //     //     label='test'
+  //     //     state=''
+  //     //     right={true}/>,
+  //     // );
+  //     this.key += 1;
+  //     output.push(
+  //       <div className="lesson__path_tile" key={this.key}>
+  //         <ExplanationButton
+  //           id="id__lesson__test_explanation_button"
+  //           label={'test'}
+  //           direction="down"
+  //           xAlign="left"
+  //           list={[
+  //             {
+  //               label: 'On Path',
+  //               separator: true,
+  //             },
+  //             {
+  //               label: 'Traditional',
+  //               rating: 3,
+  //               numReviews: 100,
+  //               description: 'This is a description',
+  //               link: '/Lessons/Math/Geometry_1/Isosceles/quiz',
+  //               active: true,
+  //             },
+  //             {
+  //               label: 'Advanced',
+  //               active: false,
+  //             },
+  //             {
+  //               label: 'Off Path',
+  //               separator: true,
+  //             },
+  //             {
+  //               label: 'Triangle Only',
+  //               rating: 0,
+  //               link: '',
+  //               numReviews: 50,
+  //               active: false,
+  //             },
+  //             {
+  //               label: 'Isosceles Proof lets see how long this goes and goes',
+  //               description: 'Isosceles Proof lets see how long this goes and goes and goes and Isosceles Proof lets see how long this goes and goes',
+  //               rating: 0.5,
+  //               link: '',
+  //               numReviews: 2,
+  //               active: false,
+  //             },
+  //             {
+  //               label: 'Euclid',
+  //               rating: 1,
+  //               link: '',
+  //               numReviews: 13292,
+  //               active: false,
+  //             },
+  //             {
+  //               label: 'Inuitive',
+  //               rating: 1.5,
+  //               link: '',
+  //               numReviews: 12,
+  //               active: false,
+  //             },
+  //             {
+  //               label: '7',
+  //               rating: 3.5,
+  //               link: '',
+  //               numReviews: 4,
+  //               active: false,
+  //             },
+  //             {
+  //               label: '8',
+  //               rating: 4.5,
+  //               link: '',
+  //               active: false,
+  //             },
+  //           ]}/>
+  //       </div>,
+  //     );
+  //     if (summary !== -1) {
+  //       this.key += 1;
+  //       let selected = '';
+  //       if (currentLocation.toLowerCase() === 'summary') {
+  //         selected = 'selected';
+  //       }
+  //       output.push(
+  //         <LessonTilePath
+  //           id='id_lesson__tile_path_summary'
+  //           link={`${lessonDescription.path}/summary`}
+  //           key={this.key}
+  //           label='Summary'
+  //           state={selected}
+  //           right={true}/>,
+  //       );
+  //     }
+  //     if (quiz !== -1) {
+  //       this.key += 1;
+  //       let selected = '';
+  //       if (currentLocation.toLowerCase() === 'quiz') {
+  //         selected = 'selected';
+  //       }
+  //       output.push(
+  //         <LessonTilePath
+  //           id='id_lesson__tile_path_quiz'
+  //           link={`${lessonDescription.path}/quiz`}
+  //           key={this.key}
+  //           label='Quiz'
+  //           state={selected}
+  //           />,
+  //       );
+  //     }
+  //   }
+  //   return output;
+  // }
 
   calcTitleHeight() {
     const { lessonDescription } = this;
@@ -576,23 +576,23 @@ export default class LessonComponent extends React.Component
     const topics = {};
     const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
     if (lessonDescription != null) {
-      Object.keys(lessonDescription.explanations).forEach((eUID) => {
-        const explanation = lessonDescription.explanations[eUID];
-        explanation.topics.forEach((topic) => {
+      Object.keys(lessonDescription.versions).forEach((vUID) => {
+        const version = lessonDescription.versions[vUID];
+        version.topics.forEach((topic) => {
           if (!(topic in topics)) {
             topics[topic] = {};
           }
           let active = false;
-          if (currentExplanation === explanation.path
+          if (currentExplanation === version.path
             && currentTopic === topic) {
             active = true;
           }
-          topics[topic][eUID] = {
-            label: explanation.title,
-            link: `${lessonDescription.path}/${explanation.path}/${topic}`,
+          topics[topic][vUID] = {
+            label: version.title,
+            link: `${lessonDescription.path}/${version.path}/${topic}`,
             rating: Math.floor(Math.random() * 6),
             numReviews: Math.floor(Math.random() * 10000),
-            description: explanation.description,
+            description: version.description,
             active,
           };
         });
@@ -622,8 +622,8 @@ export default class LessonComponent extends React.Component
         if (currentTopic === name) {
           selected = true;
         }
-        let eUIDs = Object.keys(topic);
-        eUIDs = eUIDs.sort((aKey, bKey) => {
+        let vUIDs = Object.keys(topic);
+        vUIDs = vUIDs.sort((aKey, bKey) => {
           const a = topic[aKey];
           const b = topic[bKey];
           if (a.rating < b.rating) { return 1; }
@@ -637,8 +637,8 @@ export default class LessonComponent extends React.Component
           return 0;
         });
         const listItems = [];
-        eUIDs.forEach((eUID) => {
-          listItems.push(topic[eUID]);
+        vUIDs.forEach((vUID) => {
+          listItems.push(topic[vUID]);
         });
         this.key += 1;
         output.push(
