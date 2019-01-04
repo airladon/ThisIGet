@@ -2,9 +2,9 @@
 import Fig from 'figureone';
 import type { TypeRotationDirection } from 'figureone';
 import lessonLayout from './layout';
-import textureMap from '../../../../LessonsCommon/images/textureMaps/circles.png';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   DiagramElementCollection, DiagramElementPrimative,

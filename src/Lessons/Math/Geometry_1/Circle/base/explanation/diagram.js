@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import CircleCollection from './diagramCollectionCircle';
 import type { CircleCollectionType } from './diagramCollectionCircle';
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Point, minAngleDiff, Transform } = Fig.tools.g2;
 const layout = lessonLayout();

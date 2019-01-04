@@ -2,14 +2,14 @@
 import Fig from 'figureone';
 import {
   LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/LessonContent';
 import LessonDiagram from './diagram';
 // import { Transform, Point } from '../../../../js/diagram/tools/g2';
 // import { easeinout } from '../../../../js/diagram/tools/mathtools';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
 import lessonLayout from './layout';
-import details from '../details';
+import details from '../../details';
 
 const {
   actionWord, onClickId, highlightWord, centerV,

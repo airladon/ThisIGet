@@ -44,7 +44,11 @@ function getAllLessons(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
-      if (lessonPath.includes('test1') || lessonPath.includes('test2') || lessonPath.includes('test3')) {
+      if (lessonPath.includes('test1')
+        || lessonPath.includes('test2')
+        || lessonPath.includes('Introduction')
+        || lessonPath.includes('Circle')
+        || lessonPath.includes('test3')) {
         lessons.push(lessonPath);
       }
     }

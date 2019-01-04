@@ -2,12 +2,12 @@
 import Fig from 'figureone';
 import {
   LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
+} from '../../../../../../js/Lesson/LessonContent';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
 import lessonLayout from './layout';
-import details from '../details';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
 const {

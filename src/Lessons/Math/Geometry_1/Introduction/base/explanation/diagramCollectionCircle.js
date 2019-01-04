@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import textureMap from '../../../../LessonsCommon/images/textureMaps/circles.png';
+import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
 
 import lessonLayout from './layout';
 

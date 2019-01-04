@@ -1,4 +1,4 @@
-@import '../../geometry';
+@import '../../../geometry';
 
 $colors: (
   circle:       map-get($geometry_colors, circle),
