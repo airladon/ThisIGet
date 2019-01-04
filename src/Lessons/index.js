@@ -3,7 +3,7 @@ import LessonDescription from '../js/Lesson/lessonDescription';
 export default function getLessonIndex() {
   const lessonIndex = {
     test1: new LessonDescription({
-      title: 'Congruent Triangles',
+      name: 'Congruent Triangles',
       path: '/Lessons/Math/Geometry_1/test1',
       explanations: {
         euclid: {
@@ -54,7 +54,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     test2: new LessonDescription({
-      title: 'Congruent Triangles 2',
+      name: 'Congruent Triangles 2',
       path: '/Lessons/Math/Geometry_1/test2',
       explanations: {
         simple: {
@@ -85,7 +85,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     chord: new LessonDescription({
-      title: 'Chord',
+      name: 'Chord',
       path: '/Lessons/Math/Trigonometry_1/test3',
       explanations: {
       },

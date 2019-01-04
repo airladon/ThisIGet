@@ -9,28 +9,20 @@ function splitIndexIntoLearningPaths(
   pathDepth: number = 3,
 ) {
   const learningPaths = {};
-  Object.values(lessonIndex).forEach((lesson) => {
-    let learningPath = lesson.path;
-    let lessonName = lesson.path;
-    for (let i = 0; i < pathDepth; i += 1) {
-      lessonName = lessonName.replace(/\/[^/]*/, '');
-    }
-    const topicPath = lesson.path.replace(lessonName, '');
-    learningPath = topicPath;
-    for (let i = 0; i < pathDepth - 1; i += 1) {
-      learningPath = learningPath.replace(/\/[^/]*/, '');
-    }
-    learningPath = learningPath.slice(1);
-    if (!(learningPath in learningPaths)) {
-      learningPaths[learningPath] = {
-        path: topicPath,
+  Object.keys(lessonIndex).forEach((key) => {
+    const lesson = lessonIndex[key];
+    const fullPath = lesson.path.split('/');
+    const name = fullPath[pathDepth];
+    const path = fullPath.slice(0, pathDepth + 1).join('/');
+    if (!(name in learningPaths)) {
+      learningPaths[name] = {
+        path,
         lessons: [],
-        name: learningPath.replace(/_/, ' '),
+        name: name.replace(/_/, ' '),
       };
     }
-    learningPaths[learningPath].lessons.push(lesson);
+    learningPaths[name].lessons.push(lesson);
   });
-
   return learningPaths;
 }
 

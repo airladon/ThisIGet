@@ -113,7 +113,7 @@ export default function getLessonIndex() {
     }
     if (title !== '') {
       outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
-      outStr = `${outStr}\n      title: '${title}',`;
+      outStr = `${outStr}\n      name: '${title}',`;
       outStr = `${outStr}\n      path: '${shortPath}',`;
       // outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      explanations: {`;

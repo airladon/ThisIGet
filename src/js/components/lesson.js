@@ -534,7 +534,7 @@ export default class LessonComponent extends React.Component
         output.push(
           <LessonTilePath
             id='id_lesson__tile_path_summary'
-            link={`${lessonDescription.link}/summary`}
+            link={`${lessonDescription.path}/summary`}
             key={this.key}
             label='Summary'
             state={selected}
@@ -550,7 +550,7 @@ export default class LessonComponent extends React.Component
         output.push(
           <LessonTilePath
             id='id_lesson__tile_path_quiz'
-            link={`${lessonDescription.link}/quiz`}
+            link={`${lessonDescription.path}/quiz`}
             key={this.key}
             label='Quiz'
             state={selected}
@@ -565,7 +565,8 @@ export default class LessonComponent extends React.Component
     const { lessonDescription } = this;
     let count = 0;
     if (lessonDescription != null) {
-      count = lessonDescription.paths.length;
+      // count = lessonDescription.paths.length;
+      count = 9;
     }
     if (count === 1) {
       return ' lesson__title_bar_force_low';
@@ -603,7 +604,7 @@ export default class LessonComponent extends React.Component
           output.push(
             <LessonTilePath
               id={`id_lesson__tile_path_${path}`}
-              link={`${lessonDescription.link}/${path}`}
+              link={`${lessonDescription.path}/${path}`}
               key={this.key}
               label={path}
               state={selected}
@@ -658,7 +659,7 @@ export default class LessonComponent extends React.Component
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}
-          topic={'Geometry_1'}
+          learningPath={'Geometry_1'}
           ref={(lessonNavigator) => { this.lessonNavigator = lessonNavigator; }}
         />
       <div className='lesson__white_spacer'/>
