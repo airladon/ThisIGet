@@ -695,19 +695,16 @@ export default class LessonComponent extends React.Component
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
-        <div className="lesson__path_container">
-          <div className="lesson__path_mid_tiles">
-            {this.addTopics()}
-          </div>
-          { /* <div className="lesson__path_right_tiles">
-            {this.addQuizSummary()}
-          </div> */ }
-        </div>
         <LessonTitle
           imgLink={`/${this.lesson.content.iconLinkGrey}`}
           key='1'
           label={this.lesson.content.title}
           />
+        <div className="lesson__path_container">
+          <div className="lesson__path_mid_tiles">
+            {this.addTopics()}
+          </div>
+        </div>
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">

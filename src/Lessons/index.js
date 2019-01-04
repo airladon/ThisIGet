@@ -67,7 +67,10 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
+            'history',
+            'implications',
             'quiz',
+            'references',
             'summary',
           ],
           qr: [
