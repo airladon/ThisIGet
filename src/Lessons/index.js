@@ -1,98 +1,98 @@
 import LessonDescription from '../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
-  const lessonIndex = [];
-
-  lessonIndex.push(new LessonDescription(
-    'Congruent Triangles',
-    '/Lessons/Math/Geometry_1/test1',
-    'test1',
-    {
-      euclid: [
-        'Euclid',
-        'The way Euclid did it',
-        false,
-        [
-          'euclid/dev',
-          'euclid/explanation',
-          'euclid/quiz',
-          'euclid/summary',
-        ],
-        [
-          'Asa',
-          'Sss',
-          'Sas',
-          'Aas',
-          'Aaa',
-          'Ssa',
-          'Main',
-        ],
+  const lessonIndex = {
+    test1: new LessonDescription({
+      title: 'Congruent Triangles',
+      path: '/Lessons/Math/Geometry_1/test1',
+      explanations: {
+        euclid: {
+          title: 'Euclid',
+          description: 'The way Euclid did it',
+          path: 'euclid',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Asa',
+            'Sss',
+            'Sas',
+            'Aas',
+            'Aaa',
+            'Ssa',
+            'Main',
+          ],
+        },
+        simple: {
+          title: 'Simple Official',
+          description: 'Official version',
+          path: 'simple',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Asa',
+            'Sss',
+            'Sas',
+            'Aas',
+            'Aaa',
+            'Ssa',
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
       ],
-      simple: [
-        'Simple Official',
-        'Official version',
-        false,
-        [
-          'simple/dev',
-          'simple/explanation',
-          'simple/quiz',
-          'simple/summary',
-        ],
-        [
-          'Asa',
-          'Sss',
-          'Sas',
-          'Aas',
-          'Aaa',
-          'Ssa',
-          'Main',
-        ],
+      enabled: true,
+    }),
+    test2: new LessonDescription({
+      title: 'Congruent Triangles 2',
+      path: '/Lessons/Math/Geometry_1/test2',
+      explanations: {
+        simple: {
+          title: 'Simple Official',
+          description: 'Official version',
+          path: 'simple',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Asa',
+            'Sss',
+            'Sas',
+            'Aas',
+            'Aaa',
+            'Ssa',
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'test1',
       ],
-    },
-    [
-    ],
-    true,
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Congruent Triangles 2',
-    '/Lessons/Math/Geometry_1/test2',
-    'test2',
-    {
-      simple: [
-        'Simple Official',
-        'Official version',
-        false,
-        [
-          'simple/dev',
-          'simple/explanation',
-          'simple/quiz',
-          'simple/summary',
-        ],
-        [
-          'Asa',
-          'Sss',
-          'Sas',
-          'Aas',
-          'Aaa',
-          'Ssa',
-          'Main',
-        ],
+      enabled: true,
+    }),
+    chord: new LessonDescription({
+      title: 'Chord',
+      path: '/Lessons/Math/Trigonometry_1/test3',
+      explanations: {
+      },
+      dependencies: [
       ],
-    },
-    [
-      'test1',
-    ],
-    true,
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Chord',
-    '/Lessons/Math/Trigonometry_1/test3',
-    'chord',
-    {
-    },
-    [
-    ],
-    false,
-  ));
+      enabled: false,
+    }),
+  };
   return lessonIndex;
 }

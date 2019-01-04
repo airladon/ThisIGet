@@ -713,7 +713,9 @@ class LessonContent {
         ],
       );
     }
-    qrs.forEach((uid) => {
+    // const index = getLessonIndex();
+    qrs.forEach((combinedUid) => {
+      const [uid, explanationUid] = combinedUid.split('/');
       if (this.diagram.elements._qr[`_${uid}`] == null) {
         this.diagram.addElements(this.diagram.elements._qr, [{
           name: `${uid}`, method: 'collection',
@@ -722,52 +724,62 @@ class LessonContent {
       // this.diagram.addElements(this.diagram.elements._qr[`_${uid}`], [{
       //   name: `${qrid}`, method: 'collection',
       // }]);
-      this.getQR(uid);
+      this.getQR(uid, explanationUid);
     });
   }
 
   getQR(
     uid: string,
+    explanationUid: string = '',
   ) {
     const index = getLessonIndex();
     let jsLink = '';
     let cssLink = '';
-    for (let i = 0; i < index.length; i += 1) {
-      if (uid === index[i].uid) {
-        cssLink = `/static/dist/${index[i].link}/quickReference/lesson.css`;
-        jsLink = `/static/dist/${index[i].link}/quickReference/lesson.js`;
-        if (index[i].qr != null && index[i].qr.length > 0) {
-          index[i].qr.forEach((qrid) => {
+    const lesson = index[uid];
+    if (lesson != null) {
+      let explanationUids = Object.keys(lesson.explanations);
+      if (explanationUid != null && explanationUid !== '') {
+        explanationUids = [explanationUid];
+      }
+      explanationUids.forEach((eUid) => {
+        const explanation = lesson[eUid];
+        cssLink = `/static/dist/${lesson.path}/${explanation.path}/quickReference/lesson.css`;
+        jsLink = `/static/dist/${lesson.path}/${explanation.path}/quickReference/lesson.js`;
+        if (explanation.qr != null && explanation.qr.length > 0) {
+          this.diagram.elements._qr[`_${uid}`][`_${eUid}`] = this.diagram.shapes.collection();
+          explanation.qr.forEach((qrid) => {
             const loadingQR = this.diagram.shapes.collection();
             loadingQR.hideAll();
-            this.diagram.elements._qr[`_${uid}`][`_${qrid}`] = loadingQR;
+            this.diagram.elements._qr[`_${uid}`][`_${eUid}`][`_${qrid}`] = loadingQR;
           });
         }
-        i = index.length;
-      }
-    }
-    if (cssLink !== '') {
-      loadRemoteCSS(`${uid}CSS`, cssLink, () => {
-        loadRemote(`${uid}Script`, jsLink, () => {
-          Object.keys(window.quickReference[uid]).forEach((qrid) => {
-            const element = this.diagram.elements._qr[`_${uid}`][`_${qrid}`];
-            const { isShown } = element;
-            const qr = new window.quickReference[uid][qrid](this.diagram);
-            this.diagram.elements._qr[`_${uid}`].add(qrid, qr);
-            if (isShown) {
-              qr.show();
-              qr.showAll();
-              element.hideAll();
-            } else {
-              qr.hideAll();
-            }
+        if (cssLink !== '') {
+          loadRemoteCSS(`${uid}${eUid}CSS`, cssLink, () => {
+            loadRemote(`${uid}${eUid}Script`, jsLink, () => {
+              Object.keys(window.quickReference[uid]).forEach((qrid) => {
+                const element = this.diagram.elements._qr[`_${uid}`][`_${eUid}`][`_${qrid}`];
+                const { isShown } = element;
+                const qr = new window.quickReference[uid][qrid](this.diagram);
+                this.diagram.elements._qr[`_${uid}`][`_${eUid}`].add(qrid, qr);
+                if (isShown) {
+                  qr.show();
+                  qr.showAll();
+                  element.hideAll();
+                } else {
+                  qr.hideAll();
+                }
+              });
+            });
           });
-        });
+        }
       });
     }
   }
 
-  showQR(uid: string, qrid: string) {
+  showQR(
+    uid: string,
+    qrid: string,
+  ) {
     let uidToUse = uid;
     if (!uid.startsWith('_')) {
       uidToUse = `_${uid}`;

@@ -129,24 +129,42 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getLinkFromString(linkOrLessonID: string) {
+  getLinkFromString(linkOrLessonID: string, explanationId: string) {
     if (linkOrLessonID.startsWith('/')) {
       return linkOrLessonID;
     }
     const index = getLessonIndex();
     let link = '';
-    index.forEach((lessonDescription) => {
-      if (lessonDescription.uid === linkOrLessonID) {
-        link = `${lessonDescription.link}/${lessonDescription.paths[0]}`;
+    Object.entries(index).forEach((uid, lessonDescription) => {
+      if (uid === linkOrLessonID) {
+        const { explanations } = lessonDescription;
+        let explanation;
+        if (explanationsId !== '') {
+          if (explanations[explanationsId] != null)
+            explanation = explanations[explanationsId];
+        }
+        if (explanation == null) {
+          explanation = explanations[Object.keys(explanations)[0]];
+        }
+        const { paths } = explanation;
+        const subPath = explanation.path;
+        const explanationPath = `${lessonDescription.path}/${explanation.path}`;
+        if (paths.indexOf('summary') > -1) {
+          link = `${explanationPath}/summary`;
+        } else if (paths.indexOf('explanation') > -1) {
+          link = `${explanationPath}/explanation`;
+        } else {
+          link = `${explanationPath}/${paths[0]}`;
+        }
       }
     });
     return link;
   }
 
-  setLink(linkOrLessonID: string) {
+  setLink(linkOrLessonID: string, explanationId: string = '') {
     const a = document.createElement('a');
     a.classList.add('interactive_word');
-    const link = this.getLinkFromString(linkOrLessonID);
+    const link = this.getLinkFromString(linkOrLessonID, explanationId);
     if (link) {
       a.href = link;
       a.innerHTML = 'Go to lesson to see why';

@@ -86,8 +86,7 @@ function makeLessonIndex(buildMode) {
 `import LessonDescription from '../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
-  const lessonIndex = [];
-`;
+  const lessonIndex = {`;
   lessons.forEach((lessonPath) => {
     const shortPath = lessonPath.replace(/src/, '');
     const detailsPath = `./${lessonPath}/details.js`;
@@ -113,16 +112,17 @@ export default function getLessonIndex() {
       }
     }
     if (title !== '') {
-      outStr = `${outStr}\n  lessonIndex.push(new LessonDescription(`;
-      outStr = `${outStr}\n    '${title}',`;
-      outStr = `${outStr}\n    '${shortPath}',`;
-      outStr = `${outStr}\n    '${uid}',`;
-      outStr = `${outStr}\n    {`;
+      outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
+      outStr = `${outStr}\n      title: '${title}',`;
+      outStr = `${outStr}\n      path: '${shortPath}',`;
+      // outStr = `${outStr}\n      uid: '${uid}',`;
+      outStr = `${outStr}\n      explanations: {`;
       const explanationPaths = getAllExplanations(lessonPath);
       explanationPaths.forEach((explanationPath) => {
         let explanationUid = '';
         let explanationTitle = '';
         let explanationDescription = '';
+        let explanationSubPath = explanationPath.replace(/.*\//, '');
         let explanationOnPath = false;
         let explanationQR = {};
         const explanationFileName = `./${explanationPath}/explanation.js`;
@@ -152,37 +152,41 @@ export default function getLessonIndex() {
           ['lesson-dev.js'],
           buildMode,
         );
-        outStr = `${outStr}\n      ${explanationUid}: [`;
-        outStr = `${outStr}\n        '${explanationTitle}',`;
-        outStr = `${outStr}\n        '${explanationDescription}',`;
-        outStr = `${outStr}\n        ${explanationOnPath},`;
-        outStr = `${outStr}\n        [`;
+        outStr = `${outStr}\n        ${explanationUid}: {`;
+        outStr = `${outStr}\n          title: '${explanationTitle}',`;
+        outStr = `${outStr}\n          description: '${explanationDescription}',`;
+        // outStr = `${outStr}\n          uid: '${explanationUid}',`;
+        outStr = `${outStr}\n          path: '${explanationSubPath}',`;
+        outStr = `${outStr}\n          onPath: ${explanationOnPath},`;
+        outStr = `${outStr}\n          topics: [`;
         lessonPaths.forEach((lesson) => {
-          const shortP = lesson.path.replace(`${lessonPath}/`, '');
-          outStr = `${outStr}\n          '${shortP}',`;
+          const shortP = lesson.path.replace(`${lessonPath}/${explanationSubPath}/`, '');
+          outStr = `${outStr}\n            '${shortP}',`;
         });
-        outStr = `${outStr}\n        ],`;
-        outStr = `${outStr}\n        [`;
+        outStr = `${outStr}\n          ],`;
+        outStr = `${outStr}\n          qr: [`;
         if (explanationQR != null && Array.isArray(explanationQR)) {
           explanationQR.forEach((page) => {
-            outStr = `${outStr}\n          '${page}',`;
+            outStr = `${outStr}\n            '${page}',`;
           });
         }
-        outStr = `${outStr}\n        ],`;
-        outStr = `${outStr}\n      ],`;
+        outStr = `${outStr}\n          ],`;
+        outStr = `${outStr}\n        },`;
       });
-      outStr = `${outStr}\n    },`;
-      outStr = `${outStr}\n    [`;
+      outStr = `${outStr}\n      },`;
+      outStr = `${outStr}\n      dependencies: [`;
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
-          outStr = `${outStr}\n      '${dependency}',`;
+          outStr = `${outStr}\n        '${dependency}',`;
         });
       }
-      outStr = `${outStr}\n    ],`;
-      outStr = `${outStr}\n    ${enabled},`;
-      outStr = `${outStr}\n  ));`;
+      outStr = `${outStr}\n      ],`;
+      outStr = `${outStr}\n      enabled: ${enabled},`;
+      outStr = `${outStr}\n    }),`;
     }
+    // outStr = `${outStr}\n  };`;
   });
+  outStr = `${outStr}\n  };`;
   outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   if (outStr !== '') {
     fs.writeFile('./src/Lessons/index.js', outStr, (err) => {

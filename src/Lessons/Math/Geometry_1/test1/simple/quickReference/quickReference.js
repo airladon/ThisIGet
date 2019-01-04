@@ -4,6 +4,7 @@ import lessonLayout from './layout';
 import TriangleCollection from '../common/diagramCollectionTriangles';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import explanation from '../explanation';
 
 const { Transform } = Fig;
 const { html } = Fig.tools;

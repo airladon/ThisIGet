@@ -237,7 +237,7 @@ export default class LessonNavigator extends React.Component
     }
     return <LessonTile
               id={lesson.id}
-              link={`${lesson.link}/1`}
+              link={`${lesson.link}/simple/explanation`}
               imgLink={lesson.imgLink}
               key={this.key}
               label={lesson.name}
