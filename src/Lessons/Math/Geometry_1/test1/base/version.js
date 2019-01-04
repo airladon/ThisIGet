@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Simple Official',
-  description: 'Official version',
-  uid: 'simple',
+  title: 'Base',
+  description: 'First explanation of Topic.',
+  uid: 'base',
   qr: [
     'Asa',
     'Sss',

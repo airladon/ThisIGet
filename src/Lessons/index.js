@@ -7,10 +7,10 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/test1',
       uid: 'test1',
       versions: {
-        euclid: {
-          title: 'Euclid',
-          description: 'The way Euclid did it',
-          path: 'euclid',
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
           onPath: false,
           topics: [
             'dev',
@@ -28,10 +28,10 @@ export default function getLessonIndex() {
             'Main',
           ],
         },
-        simple: {
-          title: 'Simple Official',
-          description: 'Official version',
-          path: 'simple',
+        euclid: {
+          title: 'Euclid',
+          description: 'The way Euclid did it',
+          path: 'euclid',
           onPath: false,
           topics: [
             'dev',
@@ -59,10 +59,10 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/test2',
       uid: 'test2',
       versions: {
-        simple: {
-          title: 'Simple Official',
-          description: 'Official version',
-          path: 'simple',
+        base: {
+          title: 'Base',
+          description: 'First explanation of topic.',
+          path: 'base',
           onPath: false,
           topics: [
             'dev',
