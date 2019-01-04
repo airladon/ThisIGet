@@ -44,7 +44,7 @@ function getAllLessons(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
-      if (lessonPath.includes('test1') || lessonPath.includes('test2')  || lessonPath.includes('test3') ) {
+      if (lessonPath.includes('test1') || lessonPath.includes('test2') || lessonPath.includes('test3')) {
         lessons.push(lessonPath);
       }
     }
@@ -52,12 +52,12 @@ function getAllLessons(lessonsPath) {
   return lessons;
 }
 
-function getAllExplanations(explanationsPath) {
-  const explanations = [];
-  walkSync(explanationsPath, 'explanation.js', (explanationPath) => {
-    explanations.push(explanationPath);
+function getAllVersions(versionsPath) {
+  const versions = [];
+  walkSync(versionsPath, 'version.js', (versionPath) => {
+    versions.push(versionPath);
   });
-  return explanations;
+  return versions;
 }
 
 
@@ -117,56 +117,56 @@ export default function getLessonIndex() {
       outStr = `${outStr}\n      path: '${shortPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      explanations: {`;
-      const explanationPaths = getAllExplanations(lessonPath);
-      explanationPaths.forEach((explanationPath) => {
-        let explanationUid = '';
-        let explanationTitle = '';
-        let explanationDescription = '';
-        let explanationSubPath = explanationPath.replace(/.*\//, '');
-        let explanationOnPath = false;
-        let explanationQR = {};
-        const explanationFileName = `./${explanationPath}/explanation.js`;
-        if (fs.existsSync(explanationFileName)) {
+      const versionPaths = getAllVersions(lessonPath);
+      versionPaths.forEach((versionPath) => {
+        let versionUid = '';
+        let versionTitle = '';
+        let versionDescription = '';
+        const versionSubPath = versionPath.replace(/.*\//, '');
+        let versionOnPath = false;
+        let versionQR = {};
+        const versionFileName = `./${versionPath}/version.js`;
+        if (fs.existsSync(versionFileName)) {
           // eslint-disable-next-line global-require, import/no-dynamic-require
-          const explanation = require(explanationFileName);
+          const version = require(versionFileName);
 
-          if (explanation.details.title != null) {
-            explanationTitle = explanation.details.title;
+          if (version.details.title != null) {
+            versionTitle = version.details.title;
           }
-          if (explanation.details.uid != null) {
-            explanationUid = explanation.details.uid;
+          if (version.details.uid != null) {
+            versionUid = version.details.uid;
           }
-          if (explanation.details.description != null) {
-            explanationDescription = explanation.details.description;
+          if (version.details.description != null) {
+            versionDescription = version.details.description;
           }
-          if (explanation.details.onPath != null) {
-            explanationOnPath = explanation.details.onPath;
+          if (version.details.onPath != null) {
+            versionOnPath = version.details.onPath;
           }
-          if (explanation.details.qr != null) {
-            explanationQR = explanation.details.qr;
+          if (version.details.qr != null) {
+            versionQR = version.details.qr;
           }
         }
         const lessonPaths = getAllPaths(
-          explanationPath,
+          versionPath,
           ['lesson.js'],
           ['lesson-dev.js'],
           buildMode,
         );
-        outStr = `${outStr}\n        ${explanationUid}: {`;
-        outStr = `${outStr}\n          title: '${explanationTitle}',`;
-        outStr = `${outStr}\n          description: '${explanationDescription}',`;
+        outStr = `${outStr}\n        ${versionUid}: {`;
+        outStr = `${outStr}\n          title: '${versionTitle}',`;
+        outStr = `${outStr}\n          description: '${versionDescription}',`;
         // outStr = `${outStr}\n          uid: '${explanationUid}',`;
-        outStr = `${outStr}\n          path: '${explanationSubPath}',`;
-        outStr = `${outStr}\n          onPath: ${explanationOnPath},`;
+        outStr = `${outStr}\n          path: '${versionSubPath}',`;
+        outStr = `${outStr}\n          onPath: ${versionOnPath},`;
         outStr = `${outStr}\n          topics: [`;
         lessonPaths.forEach((lesson) => {
-          const shortP = lesson.path.replace(`${lessonPath}/${explanationSubPath}/`, '');
+          const shortP = lesson.path.replace(`${lessonPath}/${versionSubPath}/`, '');
           outStr = `${outStr}\n            '${shortP}',`;
         });
         outStr = `${outStr}\n          ],`;
         outStr = `${outStr}\n          qr: [`;
-        if (explanationQR != null && Array.isArray(explanationQR)) {
-          explanationQR.forEach((page) => {
+        if (versionQR != null && Array.isArray(versionQR)) {
+          versionQR.forEach((page) => {
             outStr = `${outStr}\n            '${page}',`;
           });
         }
