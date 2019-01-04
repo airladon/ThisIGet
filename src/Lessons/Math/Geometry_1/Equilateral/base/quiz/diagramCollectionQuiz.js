@@ -90,7 +90,6 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
     this.hasTouchableElements = true;
-    console.log(this)
   }
 
   tryAgain() {

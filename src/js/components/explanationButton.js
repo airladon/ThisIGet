@@ -1,12 +1,30 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import DropDownButton from './dropDownButton';
-import type { TypeListItem } from './dropDownButton';
+import DropDownButtonBase from './dropDownButtonBase';
 
-export default class ExplanationButton extends DropDownButton {
+export type TypeExplanationButtonListItem = {
+  label: string;
+  rating?: number;
+  numReviews?: number;
+  description?: string;
+  link?: Function | string;
+  active?: boolean;
+  separator?: boolean;
+};
+
+type Props = {
+  label?: string;
+  id?: string;
+  direction?: 'up' | 'down';
+  xAlign?: 'left' | 'right' | 'center';
+  list?: Array<TypeExplanationButtonListItem>;
+  selected?: boolean;
+};
+
+export default class ExplanationButton extends React.Component <Props> {
   // eslint-disable-next-line class-methods-use-this
-  renderListLabel(listItem: TypeListItem) {
+  renderListLabel(listItem: TypeExplanationButtonListItem) {
     if (listItem.separator === true) {
       return listItem.label;
     }
@@ -49,5 +67,25 @@ export default class ExplanationButton extends DropDownButton {
       </tr>
       </tbody>
     </table>;
+  }
+
+  render() {
+    const props = Object.assign({}, this.props);
+    const listItems = [];
+    props.list.forEach((listElement) => {
+      listItems.push({
+        label: this.renderListLabel(listElement),
+        link: listElement.link,
+        active: listElement.active,
+      });
+    });
+    return <DropDownButtonBase
+      label={props.label}
+      id={props.id}
+      direction={props.direction}
+      xAlign={props.xAlign}
+      list={listItems}
+      selected={props.selected}
+    />;
   }
 }

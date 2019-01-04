@@ -36,9 +36,6 @@ class Content extends LessonContent {
       title: 'Enter_title_here',
       setContent: ['Enter_content_here'],
       show: [quiz],
-      setSteadyState: () => {
-        console.log(quiz)
-      },
     });
     this.addSection({
       title: 'Enter_title_here',

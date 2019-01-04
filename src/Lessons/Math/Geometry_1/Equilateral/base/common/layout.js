@@ -6,7 +6,7 @@ import Fig from 'figureone';
 // import getCssColors from '../../../../../../js/tools/getCssColors';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Point, Transform, Line } = Fig.tools.g2;
+const { Point, Transform } = Fig.tools.g2;
 
 const cssColorNames = [
   'equilLines',

@@ -24,7 +24,7 @@ type State = {
   page: number,
   listOfSections: Array<{
     label: string;
-    link: Function | string;
+    link?: Function | string;
     active?: boolean;
   }>;
 };
@@ -427,133 +427,6 @@ export default class LessonComponent extends React.Component
       </div>
     </div>;
   }
-
-  // addQuizSummary() {
-  //   const output = [];
-  //   const { lessonDescription } = this;
-  //   if (lessonDescription != null) {
-  //     const paths = lessonDescription.paths.slice();
-  //     const quiz = paths.indexOf('quiz');
-  //     const summary = paths.indexOf('summary');
-  //     const currentLocation = getCurrentLesson();
-  //     // output.push(
-  //     //   <LessonTilePath
-  //     //     id='this_is_a_test'
-  //     //     link=''
-  //     //     key={this.key}
-  //     //     label='test'
-  //     //     state=''
-  //     //     right={true}/>,
-  //     // );
-  //     this.key += 1;
-  //     output.push(
-  //       <div className="lesson__path_tile" key={this.key}>
-  //         <ExplanationButton
-  //           id="id__lesson__test_explanation_button"
-  //           label={'test'}
-  //           direction="down"
-  //           xAlign="left"
-  //           list={[
-  //             {
-  //               label: 'On Path',
-  //               separator: true,
-  //             },
-  //             {
-  //               label: 'Traditional',
-  //               rating: 3,
-  //               numReviews: 100,
-  //               description: 'This is a description',
-  //               link: '/Lessons/Math/Geometry_1/Isosceles/quiz',
-  //               active: true,
-  //             },
-  //             {
-  //               label: 'Advanced',
-  //               active: false,
-  //             },
-  //             {
-  //               label: 'Off Path',
-  //               separator: true,
-  //             },
-  //             {
-  //               label: 'Triangle Only',
-  //               rating: 0,
-  //               link: '',
-  //               numReviews: 50,
-  //               active: false,
-  //             },
-  //             {
-  //               label: 'Isosceles Proof lets see how long this goes and goes',
-  //               description: 'Isosceles Proof lets see how long this goes and goes and goes and Isosceles Proof lets see how long this goes and goes',
-  //               rating: 0.5,
-  //               link: '',
-  //               numReviews: 2,
-  //               active: false,
-  //             },
-  //             {
-  //               label: 'Euclid',
-  //               rating: 1,
-  //               link: '',
-  //               numReviews: 13292,
-  //               active: false,
-  //             },
-  //             {
-  //               label: 'Inuitive',
-  //               rating: 1.5,
-  //               link: '',
-  //               numReviews: 12,
-  //               active: false,
-  //             },
-  //             {
-  //               label: '7',
-  //               rating: 3.5,
-  //               link: '',
-  //               numReviews: 4,
-  //               active: false,
-  //             },
-  //             {
-  //               label: '8',
-  //               rating: 4.5,
-  //               link: '',
-  //               active: false,
-  //             },
-  //           ]}/>
-  //       </div>,
-  //     );
-  //     if (summary !== -1) {
-  //       this.key += 1;
-  //       let selected = '';
-  //       if (currentLocation.toLowerCase() === 'summary') {
-  //         selected = 'selected';
-  //       }
-  //       output.push(
-  //         <LessonTilePath
-  //           id='id_lesson__tile_path_summary'
-  //           link={`${lessonDescription.path}/summary`}
-  //           key={this.key}
-  //           label='Summary'
-  //           state={selected}
-  //           right={true}/>,
-  //       );
-  //     }
-  //     if (quiz !== -1) {
-  //       this.key += 1;
-  //       let selected = '';
-  //       if (currentLocation.toLowerCase() === 'quiz') {
-  //         selected = 'selected';
-  //       }
-  //       output.push(
-  //         <LessonTilePath
-  //           id='id_lesson__tile_path_quiz'
-  //           link={`${lessonDescription.path}/quiz`}
-  //           key={this.key}
-  //           label='Quiz'
-  //           state={selected}
-  //           />,
-  //       );
-  //     }
-  //   }
-  //   return output;
-  // }
 
   calcTitleHeight() {
     const { lessonDescription } = this;
