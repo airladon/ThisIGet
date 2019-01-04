@@ -16,9 +16,14 @@ $path_tile_height: 35px;
   margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
 }
 
+.lesson__path_mid_tiles {
+  display: inline-block;
+  margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+}
+
 .lesson__path_tile {
   min-width: $path_tile_height;
-  width: 100px;
+  width: 110px;
   height: $path_tile_height;
   border-radius: 1em;
   font-size: calc(#{$path_tile_height} * 0.35);

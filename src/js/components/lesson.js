@@ -645,7 +645,7 @@ export default class LessonComponent extends React.Component
           <div className="lesson__path_tile" key={this.key}>
             <ExplanationButton
               id={`id__lesson__explanation_button_${name}`}
-              label={name}
+              label={name.charAt(0).toUpperCase() + name.slice(1)}
               direction="down"
               xAlign="left"
               selected={selected}
@@ -696,7 +696,7 @@ export default class LessonComponent extends React.Component
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <div className="lesson__path_container">
-          <div className="lesson__path_left_tiles">
+          <div className="lesson__path_mid_tiles">
             {this.addTopics()}
           </div>
           { /*<div className="lesson__path_right_tiles">
