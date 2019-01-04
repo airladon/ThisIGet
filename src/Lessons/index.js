@@ -7,6 +7,22 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/AdjacentAngles',
       uid: 'adjacent_angles',
       versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'summary',
+          ],
+          qr: [
+            'Complementary',
+            'Supplementary',
+            'Explementary',
+          ],
+        },
       },
       dependencies: [
         'important_angles',
