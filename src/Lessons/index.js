@@ -573,16 +573,6 @@ export default function getLessonIndex() {
       ],
       enabled: false,
     }),
-    chord: new LessonDescription({
-      name: 'Chord',
-      path: '/Lessons/Math/Trigonometry_1/test3',
-      uid: 'chord',
-      versions: {
-      },
-      dependencies: [
-      ],
-      enabled: false,
-    }),
   };
   return lessonIndex;
 }
