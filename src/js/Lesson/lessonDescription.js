@@ -37,6 +37,7 @@ export default class LessonDescription {
     onPath: boolean;
     topics: Array<string>;
     qr: Array<string>;
+    path: string,
   }};
 
   enabled: boolean;
@@ -53,6 +54,7 @@ export default class LessonDescription {
         onPath: boolean,
         topics: Array<string>,
         qr: Array<string>,
+        path: string,
       }},
       dependencies: Array<string>,
       enabled: boolean;
@@ -73,10 +75,10 @@ export default class LessonDescription {
     Object.keys(lesson.explanations).forEach((key) => {
       const explanation = lesson.explanations[key];
       const {
-        title, description, onPath, topics, qr,
+        title, description, onPath, topics, qr, path,
       } = explanation;
       this.explanations[key] = {
-        title, description, onPath, topics, qr,
+        title, description, onPath, topics, qr, path,
       };
     });
     this.enabled = lesson.enabled;

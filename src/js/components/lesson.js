@@ -575,10 +575,12 @@ export default class LessonComponent extends React.Component
     const { lessonDescription } = this;
     const topics = {};
     const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    console.log(currentExplanation, currentTopic)
     console.log(lessonDescription)
     if (lessonDescription != null) {
       Object.keys(lessonDescription.explanations).forEach((eUID) => {
         const explanation = lessonDescription.explanations[eUID];
+        console.log(explanation)
         explanation.topics.forEach((topic) => {
           if (!(topic in topics)) {
             topics[topic] = {};
@@ -588,6 +590,7 @@ export default class LessonComponent extends React.Component
             && currentTopic === topic) {
             active = true;
           }
+          console.log(currentExplanation, explanation.path, currentTopic, topic, active)
           topics[topic][eUID] = {
             label: explanation.title,
             link: `${lessonDescription.path}/${explanation.path}/topic`,
