@@ -4,8 +4,8 @@ import lessonLayout from './layout';
 import OppositeCollection from '../common/diagramCollectionOpposite';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
-import type { TypeUnits } from '../../../../LessonsCommon/DiagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform } = Fig;
 

@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import SameAreaCollection from '../common/diagramCollectionSameArea';
 
 const { Transform, Point } = Fig;

@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 // import {
 //   Transform,
-// } from '../../../../../js/diagram/tools/g2';
+// } from '../../../../../../js/diagram/tools/g2';
 import lessonLayout from './layout';
 
 // eslint-disable-next-line import/no-cycle
@@ -14,7 +14,7 @@ import TrianglePropertiesCollection from '../common/diagramCollectionProperties'
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 import QuickReferenceCollection from '../common/diagramCollectionQuickReference';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform } = Fig;
 

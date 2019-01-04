@@ -3,8 +3,8 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import OppositeCollection from '../common/diagramCollectionOpposite';
-import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
-import details from '../details';
+import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import details from '../../details';
 
 const { Transform } = Fig;
 const { html } = Fig.tools;

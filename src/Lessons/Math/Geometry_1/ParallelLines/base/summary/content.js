@@ -2,14 +2,14 @@
 import Fig from 'figureone';
 import {
   LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/LessonContent';
 import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import Definition from '../../../../LessonsCommon/tools/definition';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
-import details from '../details';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
+import details from '../../details';
 
 const { click } = Fig.tools.html;
 const layout = lessonLayout();

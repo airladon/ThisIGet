@@ -2,14 +2,14 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 
-import { addSelectorHTML } from '../../../../LessonsCommon/tools/selector';
+import { addSelectorHTML } from '../../../../../LessonsCommon/tools/selector';
 // // eslint-disable-next-line import/no-cycle
 // import LessonDiagram from './diagram';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import OppositeCollection from '../common/diagramCollectionOpposite';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
-import type { TypeUnits } from '../../../../LessonsCommon/DiagramCollection';
+import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform, DiagramElementPrimative } = Fig;
 

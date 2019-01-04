@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform, Point, randomPoint } = Fig.tools.g2;
 const { DiagramElementPrimative, DiagramElementCollection } = Fig;

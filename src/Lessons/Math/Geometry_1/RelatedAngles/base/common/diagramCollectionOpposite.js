@@ -3,10 +3,10 @@ import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
 import { makeLabeledAngle, makeSupplementaryAngle } from './tools';
 import type { TypeLabeledAngle, TypeSupplementaryAngle } from './tools';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import { showAngles } from '../../../../LessonsCommon/tools/angle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import { showAngles } from '../../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, DiagramElementCollection, DiagramObjectLine,

@@ -2,9 +2,9 @@
 import Fig from 'figureone';
 // import {
 //   Point, Line, Transform,
-// } from '../../../../../js/diagram/tools/g2';
-// import getCssColors from '../../../../../js/tools/getCssColors';
-import baseLayout from '../../../../LessonsCommon/layout';
+// } from '../../../../../../js/diagram/tools/g2';
+// import getCssColors from '../../../../../../js/tools/getCssColors';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
 const { Point, Transform, Line } = Fig.tools.g2;
 

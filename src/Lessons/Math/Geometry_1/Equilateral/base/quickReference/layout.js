@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import './style.scss';
 import commonLessonLayout from '../common/layout';
-// import { Point } from '../../../../../js/diagram/tools/g2';
+// import { Point } from '../../../../../../js/diagram/tools/g2';
 
 const { Point } = Fig;
 

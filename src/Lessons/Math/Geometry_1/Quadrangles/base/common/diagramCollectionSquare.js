@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
-// import { makeLine } from '../../../../LessonsCommon/tools/line';
-import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+// import { makeLine } from '../../../../../LessonsCommon/tools/line';
+import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
 
 const {
   Transform, DiagramElementCollection, DiagramObjectLine,

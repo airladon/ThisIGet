@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 

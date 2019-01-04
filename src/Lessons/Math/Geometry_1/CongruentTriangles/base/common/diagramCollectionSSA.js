@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, polarToRect, normAngle, Point, minAngleDiff,

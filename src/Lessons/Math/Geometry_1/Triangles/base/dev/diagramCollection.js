@@ -2,10 +2,10 @@
 import Fig from 'figureone';
 // import {
 //   Transform,
-// } from '../../../../../js/diagram/tools/g2';
+// } from '../../../../../../js/diagram/tools/g2';
 import lessonLayout from '../quickReference/layout';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import * as qr from '../quickReference/quickReference';
 
 const { Transform } = Fig;

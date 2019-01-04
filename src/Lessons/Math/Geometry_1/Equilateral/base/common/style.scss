@@ -1,4 +1,4 @@
-@import '../../geometry';
+@import '../../../geometry';
 
 $colors: (
   equilLines:        map-get($geometry_colors, lines),

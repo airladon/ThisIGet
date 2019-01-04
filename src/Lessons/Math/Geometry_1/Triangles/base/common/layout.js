@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
-// import { Rect, Point } from '../../../../../js/diagram/tools/g2';
-// import getCssColors from '../../../../../js/tools/getCssColors';
-import baseLayout from '../../../../LessonsCommon/layout';
+// import { Rect, Point } from '../../../../../../js/diagram/tools/g2';
+// import getCssColors from '../../../../../../js/tools/getCssColors';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
 const { Rect, Point } = Fig;
 

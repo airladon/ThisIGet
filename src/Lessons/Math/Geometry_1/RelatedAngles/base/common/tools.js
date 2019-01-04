@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
 
 const {
   Transform, Point, DiagramElementPrimative, Diagram,

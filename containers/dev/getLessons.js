@@ -44,16 +44,16 @@ function getAllLessons(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
-      if (lessonPath.includes('test1')
-        || lessonPath.includes('test2')
-        || lessonPath.includes('Introduction')
-        || lessonPath.includes('MeasuringAngles')
-        || lessonPath.includes('ImportantAngles')
-        || lessonPath.includes('Angle')
-        || lessonPath.includes('Circle')
-        || lessonPath.includes('test3')) {
-        lessons.push(lessonPath);
-      }
+      // if (lessonPath.includes('test1')
+      //   || lessonPath.includes('test2')
+      //   || lessonPath.includes('Introduction')
+      //   || lessonPath.includes('MeasuringAngles')
+      //   || lessonPath.includes('ImportantAngles')
+      //   || lessonPath.includes('Angle')
+      //   || lessonPath.includes('Circle')
+      //   || lessonPath.includes('test3')) {
+      lessons.push(lessonPath);
+      // }
     }
   });
   return lessons;

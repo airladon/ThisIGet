@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import makeTriangle from '../../../../LessonsCommon/tools/triangle';
-import type { TypeTriangle } from '../../../../LessonsCommon/tools/triangle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import makeTriangle from '../../../../../LessonsCommon/tools/triangle';
+import type { TypeTriangle } from '../../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // type TypeCorner = {
 //   _angle: TypeAngle;
 //   _line: DiagramElementPrimative;

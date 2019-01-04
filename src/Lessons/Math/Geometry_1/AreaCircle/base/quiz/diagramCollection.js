@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 // eslint-disable-next-line import/no-cycle
 import QuizCollection from './diagramCollectionQuiz';

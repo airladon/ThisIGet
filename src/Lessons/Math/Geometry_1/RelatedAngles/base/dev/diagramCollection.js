@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from '../quickReference/layout';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import * as qr from '../quickReference/quickReference';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform } = Fig;
 

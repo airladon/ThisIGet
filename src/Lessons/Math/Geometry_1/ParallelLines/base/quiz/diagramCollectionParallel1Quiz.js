@@ -1,14 +1,14 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import {
   checkElementsForParallel, checkValuesForParallel, makeAnglesClose,
   randomizeParallelLine,
 } from '../common/tools';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   Transform, DiagramElementPrimative, DiagramElementCollection,

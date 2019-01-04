@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
-// } from '../../../../../js/diagram/tools/g2';
+// } from '../../../../../../js/diagram/tools/g2';
 // import {
 //   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+// } from '../../../../../../js/diagram/Element';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform, DiagramElementPrimative } = Fig;
 

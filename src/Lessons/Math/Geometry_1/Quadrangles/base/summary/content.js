@@ -1,17 +1,17 @@
 // @flow
 import {
   LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/LessonContent';
 // import {
 //   click, highlight, clickWord,
-// } from '../../../../../js/tools/htmlGenerator';
-import Definition from '../../../../LessonsCommon/tools/definition';
+// } from '../../../../../../js/tools/htmlGenerator';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
-import details from '../details';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
+import details from '../../details';
 import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const layout = lessonLayout();
 // const { colors } = layout;

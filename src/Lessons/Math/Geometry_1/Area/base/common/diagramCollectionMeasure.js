@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   DiagramElementCollection, DiagramElementPrimative, DiagramObjectLine,

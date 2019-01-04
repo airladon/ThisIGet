@@ -2,13 +2,13 @@
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
 import { makeLabeledAngle } from './tools';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
 import type {
   TypeIndexAngle, TypeSupplementaryAngle,
 } from './tools';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import { showAngles } from '../../../../LessonsCommon/tools/angle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import { showAngles } from '../../../../../LessonsCommon/tools/angle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, Point, DiagramObjectLine, EquationLegacy,

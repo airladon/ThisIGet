@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
-import details from '../details';
+import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import details from '../../details';
 
 import CircleAreaCollection from '../common/diagramCollectionCircleArea';
 

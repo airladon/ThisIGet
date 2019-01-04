@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import type { TypeEquationLabel } from '../../../../LessonsCommon/tools/equationLabel';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import type { TypeEquationLabel } from '../../../../../LessonsCommon/tools/equationLabel';
 
 const {
   Transform, Point, DiagramElementCollection, DiagramElementPrimative,

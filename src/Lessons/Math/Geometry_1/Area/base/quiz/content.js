@@ -2,16 +2,16 @@
 import Fig from 'figureone';
 import {
   LessonContent, interactiveItem,
-} from '../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/LessonContent';
 // import {
 //   toHTML,
-// } from '../../../../../js/tools/htmlGenerator';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+// } from '../../../../../../js/tools/htmlGenerator';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 import lessonLayout from './layout';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
-import details from '../details';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
+import details from '../../details';
 
 const { toHTML } = Fig.tools.html;
 

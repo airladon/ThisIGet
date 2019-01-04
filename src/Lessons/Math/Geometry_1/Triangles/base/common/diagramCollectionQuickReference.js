@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
-// } from '../../../../../js/diagram/tools/g2';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+// } from '../../../../../../js/diagram/tools/g2';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 // import AlternateAnglesQR from '../../RelatedAngles/quickReference/alternateAngles';
 import { QRAlternateAngles } from '../../RelatedAngles/quickReference/quickReference';
 import { QRSupplementaryAngles } from '../../AdjacentAngles/quickReference/quickReference';

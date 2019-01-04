@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
-import { LessonContent } from '../../../../../js/Lesson/LessonContent';
+import { LessonContent } from '../../../../../../js/Lesson/LessonContent';
 import lessonLayout from '../quickReference/layout';
-import details from '../details';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import details from '../../details';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
 const { click, centerH } = Fig.tools.html;

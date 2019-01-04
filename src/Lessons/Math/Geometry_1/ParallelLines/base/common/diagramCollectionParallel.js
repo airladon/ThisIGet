@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import {
   makeAnglesClose, checkElementsForParallel,
 } from './tools';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   Transform, normAngleTo90, Point,

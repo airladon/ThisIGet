@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 import QuadCollection from '../common/diagramCollectionQuad';
 import RectCollection from '../common/diagramCollectionRect';

@@ -1,11 +1,11 @@
 // @flow
 import Fig from 'figureone';
-// import { Transform } from '../../../../../js/diagram/tools/g2';
+// import { Transform } from '../../../../../../js/diagram/tools/g2';
 import lessonLayout from './layout';
-// import * as html from '../../../../../js/tools/htmlGenerator';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
-import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
-import details from '../details';
+import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import details from '../../details';
 
 const { Transform } = Fig;
 const { html } = Fig.tools;

@@ -1,17 +1,17 @@
 // @flow
 import Fig from 'figureone';
-// import { Transform, threePointAngle } from '../../../../../js/diagram/tools/g2';
+// import { Transform, threePointAngle } from '../../../../../../js/diagram/tools/g2';
 // import {
 //   removeRandElement, roundNum,
-// } from '../../../../../js/diagram/tools/mathtools';
+// } from '../../../../../../js/diagram/tools/mathtools';
 import lessonLayout from './layout';
 
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import TriangleCollection from '../common/diagramCollectionTriangle';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-// import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+// import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 
 const { Transform, threePointAngle } = Fig.tools.g2;
 const { removeRandElement, roundNum } = Fig.tools.math;

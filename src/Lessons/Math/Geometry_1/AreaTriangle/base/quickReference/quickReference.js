@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-// import * as html from '../../../../../js/tools/htmlGenerator';
-import PopupBoxCollection from '../../../../LessonsCommon/DiagramCollectionPopup';
-import details from '../details';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
+import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import details from '../../details';
 
 import TriangleAreaCollection from '../common/diagramCollectionTri';
 

@@ -1,19 +1,19 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform, Point,
-// } from '../../../../../js/diagram/tools/g2';
+// } from '../../../../../../js/diagram/tools/g2';
 // import {
 //   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
+// } from '../../../../../../js/diagram/Element';
 // import {
 //   removeRandElement, rand,
-// } from '../../../../../js/diagram/tools/mathtools';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+// } from '../../../../../../js/diagram/tools/mathtools';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
-import makeTriangle from '../../../../LessonsCommon/tools/triangle';
-import type { TypeTriangle, TypeTriangleAngle } from '../../../../LessonsCommon/tools/triangle';
+import makeTriangle from '../../../../../LessonsCommon/tools/triangle';
+import type { TypeTriangle, TypeTriangleAngle } from '../../../../../LessonsCommon/tools/triangle';
 
 const { Transform, Point, DiagramElementPrimative } = Fig;
 const { removeRandElement, rand } = Fig.tools.math;

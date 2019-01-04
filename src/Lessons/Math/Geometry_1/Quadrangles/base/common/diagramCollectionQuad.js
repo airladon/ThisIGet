@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
 // import LessonDiagram from './diagram';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   Transform, DiagramElementPrimative, DiagramObjectLine,
 } = Fig;
-// import { makeLine } from '../../../../LessonsCommon/tools/line';
+// import { makeLine } from '../../../../../LessonsCommon/tools/line';
 
 export default class QuadCollection extends CommonDiagramCollection {
   _quad1: DiagramElementPrimative;

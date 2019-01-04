@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import TotalAngleTriangleCollection from '../common/diagramCollectionTriangles';
 
 const { Transform, DiagramElementPrimative } = Fig;

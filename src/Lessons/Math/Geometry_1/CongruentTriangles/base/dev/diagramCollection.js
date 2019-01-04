@@ -3,9 +3,9 @@ import Fig from 'figureone';
 import lessonLayout from '../quickReference/layout';
 // eslint-disable-next-line import/no-cycle
 // import LessonDiagram from './diagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import * as qr from '../quickReference/quickReference';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { Transform } = Fig;
 

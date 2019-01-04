@@ -1,21 +1,21 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform,
-// } from '../../../../../js/diagram/tools/g2';
+// } from '../../../../../../js/diagram/tools/g2';
 // import {
 //   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
+// } from '../../../../../../js/diagram/Element';
 
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
-// import type { TypeLine } from '../../../../../js/diagram/DiagramObjects/Line';
+// import type { TypeLine } from '../../../../../../js/diagram/DiagramObjects/Line';
 
-import makeTriangle from '../../../../LessonsCommon/tools/triangle';
+import makeTriangle from '../../../../../LessonsCommon/tools/triangle';
 import type {
   TypeTriangle, TypeTriangleAngle,
-} from '../../../../LessonsCommon/tools/triangle';
+} from '../../../../../LessonsCommon/tools/triangle';
 
 const { Transform, DiagramElementPrimative, DiagramObjectLine } = Fig;
 

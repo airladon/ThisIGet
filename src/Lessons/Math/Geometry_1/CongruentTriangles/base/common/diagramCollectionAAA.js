@@ -1,14 +1,14 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import makeTriangle from '../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import makeTriangle from '../../../../../LessonsCommon/tools/triangle';
 import type {
   TypeTriangle, TypeTriangleAngle, TypeTriangleLabel,
-} from '../../../../LessonsCommon/tools/triangle';
-// import { makeLine } from '../../../../LessonsCommon/tools/line';
-import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+} from '../../../../../LessonsCommon/tools/triangle';
+// import { makeLine } from '../../../../../LessonsCommon/tools/line';
+import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
 
 const {
   Transform, Point, DiagramElementCollection, DiagramElementPrimative,

@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-// import { Transform } from '../../../../../js/diagram/tools/g2';
+// import { Transform } from '../../../../../../js/diagram/tools/g2';
 import lessonLayout from './layout';
 
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 // import TriangleCollection from '../common/diagramCollectionTriangle';
 import CommonLessonDiagramCollection from '../common/diagramCollection';

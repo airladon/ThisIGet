@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform, DiagramElementPrimative, Point } = Fig;
 

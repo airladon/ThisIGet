@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform, Point, DiagramElementCollection } = Fig;
 const { rand, removeRandElement, roundNum } = Fig.tools.math;

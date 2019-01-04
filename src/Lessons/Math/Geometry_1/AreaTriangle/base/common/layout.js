@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import baseLayout from '../../../../LessonsCommon/layout';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
 const { Point, Line, Transform } = Fig;
 const cssColorNames = [

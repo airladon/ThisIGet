@@ -1,17 +1,17 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // import {
 //   Transform, // Rect, Point,
-// } from '../../../../../js/diagram/tools/g2';
-// import DiagramObjectAngle from '../../../../../js/diagram/DiagramObjects/Angle';
-// import { DiagramObjectLine } from '../../../../../js/diagram/DiagramObjects/Line';
-// import { joinObjects } from '../../../../../js/tools/tools';
+// } from '../../../../../../js/diagram/tools/g2';
+// import DiagramObjectAngle from '../../../../../../js/diagram/DiagramObjects/Angle';
+// import { DiagramObjectLine } from '../../../../../../js/diagram/DiagramObjects/Line';
+// import { joinObjects } from '../../../../../../js/tools/tools';
 // import {
 //   DiagramElementPrimative,
-// } from '../../../../../js/diagram/Element';
+// } from '../../../../../../js/diagram/Element';
 
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
   Transform, DiagramObjectAngle, DiagramObjectLine, DiagramElementPrimative,

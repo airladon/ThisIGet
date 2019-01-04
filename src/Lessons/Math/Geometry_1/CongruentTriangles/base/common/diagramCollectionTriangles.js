@@ -1,21 +1,21 @@
 // @flow
 import Fig from 'figureone';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
-import type { TypeScenario } from '../../../../LessonsCommon/DiagramCollection';
-import makeTriangle from '../../../../LessonsCommon/tools/triangle';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import type { TypeScenario } from '../../../../../LessonsCommon/DiagramCollection';
+import makeTriangle from '../../../../../LessonsCommon/tools/triangle';
 import type {
   TypeTriangle, TypeTriangleAngle, TypeTriangleLabel,
-} from '../../../../LessonsCommon/tools/triangle';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+} from '../../../../../LessonsCommon/tools/triangle';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   Transform, Point, normAngle,
 } = Fig.tools.g2;
 const { removeRandElement, rand } = Fig.tools.math;
 const { DiagramObjectLine } = Fig;
-// import { makeLine } from '../../../../LessonsCommon/tools/line';
-// import { makeAngle } from '../../../../LessonsCommon/tools/angle';
-// import type { TypeAngle } from '../../../../LessonsCommon/tools/angle';
+// import { makeLine } from '../../../../../LessonsCommon/tools/line';
+// import { makeAngle } from '../../../../../LessonsCommon/tools/angle';
+// import type { TypeAngle } from '../../../../../LessonsCommon/tools/angle';
 
 
 export default class TriangleCollection extends CommonDiagramCollection {

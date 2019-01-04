@@ -2,12 +2,12 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
 
 // eslint-disable-next-line import/no-cycle
 import QuizAngle1Collection from './diagramCollectionAngles1Quiz';
-import type { TypeUnits } from '../../../../LessonsCommon/DiagramCollection';
+import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
