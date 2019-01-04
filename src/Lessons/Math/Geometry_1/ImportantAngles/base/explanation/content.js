@@ -2,13 +2,13 @@
 import Fig from 'figureone';
 import {
   LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/LessonContent';
 import LessonDiagram from './diagram';
 // import HTMLEquation from '../../../../js/diagram/DiagramElements/Equation/HTMLEquation';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
 import lessonLayout from './layout';
-import details from '../details';
+import details from '../../details';
 
 const {
   clickWord, onClickId, click, highlight,

@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import CircleCollection from './diagramCollectionCircle';
 import type { TypeCircleCollectionExtended } from './diagramCollectionCircle';
 import lessonLayout from './layout';
-import AngleCircleDiagram from '../../../../LessonsCommon/AngleCircle/diagram';
+import AngleCircleDiagram from '../../../../../LessonsCommon/AngleCircle/diagram';
 
 const { DiagramElementCollection } = Fig;
 

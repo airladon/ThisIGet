@@ -47,6 +47,9 @@ function getAllLessons(lessonsPath) {
       if (lessonPath.includes('test1')
         || lessonPath.includes('test2')
         || lessonPath.includes('Introduction')
+        || lessonPath.includes('MeasuringAngles')
+        || lessonPath.includes('ImportantAngles')
+        || lessonPath.includes('Angle')
         || lessonPath.includes('Circle')
         || lessonPath.includes('test3')) {
         lessons.push(lessonPath);

@@ -2,8 +2,8 @@
 import Fig from 'figureone';
 import type { TypeRotationDirection } from 'figureone';
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { DiagramElementPrimative } = Fig;
 const {

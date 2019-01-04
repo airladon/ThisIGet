@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import angleCircleLayout from '../../../../LessonsCommon/AngleCircle/layout';
+import angleCircleLayout from '../../../../../LessonsCommon/AngleCircle/layout';
 
 const { Point } = Fig;
 const cssColorNames = [

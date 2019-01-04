@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
-import AngleCircle from '../../../../LessonsCommon/AngleCircle/AngleCircle';
+import AngleCircle from '../../../../../LessonsCommon/AngleCircle/AngleCircle';
 import type { circleType, varStateType }
-  from '../../../../LessonsCommon/AngleCircle/AngleCircle';
+  from '../../../../../LessonsCommon/AngleCircle/AngleCircle';
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
   DiagramElementPrimative, DiagramElementCollection,

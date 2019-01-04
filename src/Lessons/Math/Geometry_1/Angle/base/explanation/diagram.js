@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import ShapesCollection from './diagramCollectionShapes';
 import CircleCollection from './diagramCollectionCircle';
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { DiagramElementCollection } = Fig;
 const {
