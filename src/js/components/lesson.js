@@ -493,7 +493,8 @@ export default class LessonComponent extends React.Component
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
         const onPathCount = Object.values(topic).filter(ver => ver.onPath).length;
-        const offPathCount = topicNames.length - onPathCount;
+        // $FlowFixMe - onPath is there and boolean
+        const offPathCount = Object.values(topic).filter(ver => !ver.onPath).length;
         let selected = false;
         if (currentTopic === name) {
           selected = true;
