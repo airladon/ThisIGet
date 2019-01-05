@@ -130,7 +130,7 @@ export default function getLessonIndex() {
         let versionTitle = '';
         let versionDescription = '';
         const versionSubPath = versionPath.replace(/.*\//, '');
-        let versionOnPath = false;
+        let versionOnPath = true;
         let versionQR = {};
         const versionFileName = `./${versionPath}/version.js`;
         if (fs.existsSync(versionFileName)) {

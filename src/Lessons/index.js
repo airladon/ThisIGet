@@ -11,7 +11,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -38,7 +38,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
           ],
@@ -60,7 +60,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -88,7 +88,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -113,7 +113,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -139,7 +139,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
           ],
@@ -161,7 +161,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -189,11 +189,67 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/Equilateral',
       uid: 'equilateral_triangles',
       versions: {
+        complete: {
+          title: 'Complete',
+          description: 'Complete derivation.',
+          path: 'Complete',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        euclid: {
+          title: 'Euclid',
+          description: 'The way Euclid did it.',
+          path: 'Euclid',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        justangles: {
+          title: 'Just Angles',
+          description: 'Shows angles derivation only.',
+          path: 'Simple',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        trionly: {
+          title: 'Tri Only',
+          description: 'Triangle derivation only.',
+          path: 'TriOnly',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
         base: {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -218,7 +274,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
           ],
@@ -240,7 +296,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
           ],
@@ -261,7 +317,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -287,7 +343,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
           ],
@@ -309,7 +365,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'explanation',
             'quiz',
@@ -333,7 +389,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -361,7 +417,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',
@@ -435,7 +491,7 @@ export default function getLessonIndex() {
           title: 'Base',
           description: 'First explanation of Topic.',
           path: 'base',
-          onPath: false,
+          onPath: true,
           topics: [
             'dev',
             'explanation',

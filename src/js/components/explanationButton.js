@@ -77,6 +77,7 @@ export default class ExplanationButton extends React.Component <Props> {
         label: this.renderListLabel(listElement),
         link: listElement.link,
         active: listElement.active,
+        separator: listElement.separator == null ? false : listElement.separator,
       });
     });
     return <DropDownButtonBase

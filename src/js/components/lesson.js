@@ -467,6 +467,7 @@ export default class LessonComponent extends React.Component
             numReviews: Math.floor(Math.random() * 10000),
             description: version.description,
             active,
+            onPath: version.onPath,
           };
         });
       });
@@ -487,10 +488,12 @@ export default class LessonComponent extends React.Component
       }
     });
     const currentTopic = window.location.href.split('/').slice(-1)[0];
-
     topicNames.forEach((name) => {
       if (topics[name] != null) {
         const topic = topics[name];
+        // $FlowFixMe - onPath is there and boolean
+        const onPathCount = Object.values(topic).filter(ver => ver.onPath).length;
+        const offPathCount = topicNames.length - onPathCount;
         let selected = false;
         if (currentTopic === name) {
           selected = true;
@@ -509,11 +512,25 @@ export default class LessonComponent extends React.Component
           if (labelA < labelB) { return -1; }
           return 0;
         });
+        vUIDs = vUIDs.sort((aKey, bKey) => {
+          const a = topic[aKey];
+          const b = topic[bKey];
+          if (a.onPath === true && b.onPath === false) { return -1; }
+          if (a.onPath === false && b.onPath === true) { return 1; }
+          return 0;
+        });
         const listItems = [];
         vUIDs.forEach((vUID) => {
           listItems.push(topic[vUID]);
         });
         this.key += 1;
+        if (offPathCount > 0 && onPathCount > 0 && name !== 'quiz') {
+          listItems.splice(onPathCount, 0, {
+            label: 'Lesson Portions',
+            separator: true,
+          });
+        }
+
         output.push(
           <div className="lesson__path_tile" key={this.key}>
             <ExplanationButton
