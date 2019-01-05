@@ -524,9 +524,9 @@ export default class LessonComponent extends React.Component
           listItems.push(topic[vUID]);
         });
         this.key += 1;
-        if (offPathCount > 0 && onPathCount > 0 && name !== 'quiz') {
+        if (offPathCount > 0 && name !== 'quiz') {
           listItems.splice(onPathCount, 0, {
-            label: 'Lesson Portions',
+            label: 'Portion of Lesson',
             separator: true,
           });
         }

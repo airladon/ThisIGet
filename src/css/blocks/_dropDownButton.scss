@@ -151,6 +151,8 @@ $button_size: 0.4em;
   font-size: 0.75em;
   padding-top: 0.75em;
   padding-bottom: 5px;
+  border-bottom: 1px solid color('white', 'base');
+  border-top: 1px solid color('white', 'base');
 }
 
 .dropdown_button_list_item_separator:hover {
