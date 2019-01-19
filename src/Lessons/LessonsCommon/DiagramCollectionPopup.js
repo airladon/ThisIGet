@@ -129,24 +129,64 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  getLinkFromString(linkOrLessonID: string) {
+  getLinkFromString(linkOrLessonID: string, versionId: string) {
     if (linkOrLessonID.startsWith('/')) {
       return linkOrLessonID;
     }
     const index = getLessonIndex();
     let link = '';
-    index.forEach((lessonDescription) => {
-      if (lessonDescription.uid === linkOrLessonID) {
-        link = `${lessonDescription.link}/${lessonDescription.paths[0]}`;
+    const lesson = index[linkOrLessonID];
+    if (lesson != null) {
+      const { versions } = lesson;
+      let version;
+      if (versionId !== '') {
+        if (versions[versionId] != null) {
+          version = versions[versionId];
+        }
       }
-    });
+      if (version == null) {
+        version = versions[Object.keys(versions)[0]];
+      }
+      const { topics } = version;
+      const versionPath = `${lesson.path}/${version.path}`;
+      if (topics.indexOf('summary') > -1) {
+        link = `${versionPath}/summary`;
+      } else if (topics.indexOf('explanation') > -1) {
+        link = `${versionPath}/explanation`;
+      } else {
+        link = `${versionPath}/${topics[0]}`;
+      }
+    }
+    // Object.entries(index).forEach((uid, lessonDescription) => {
+    //   if (uid === linkOrLessonID) {
+    //     const { versions } = lessonDescription;
+    //     let version;
+    //     if (versionId !== '') {
+    //       if (versions[versionId] != null)
+    //         version = versions[versionId];
+    //     }
+    //     if (version == null) {
+    //       version = versions[Object.keys(versions)[0]];
+    //     }
+    //     const { paths } = version;
+    //     const subPath = version.path;
+    //     const explanationPath = `${lessonDescription.path}/${version.path}`;
+    //     if (paths.indexOf('summary') > -1) {
+    //       link = `${explanationPath}/summary`;
+    //     } else if (paths.indexOf('explanation') > -1) {
+    //       link = `${explanationPath}/explanation`;
+    //     } else {
+    //       link = `${explanationPath}/${paths[0]}`;
+    //     }
+    //   }
+    // });
     return link;
   }
 
-  setLink(linkOrLessonID: string) {
+  setLink(linkOrLessonID: string, explanationId: string = '') {
     const a = document.createElement('a');
     a.classList.add('interactive_word');
-    const link = this.getLinkFromString(linkOrLessonID);
+    const link = this.getLinkFromString(linkOrLessonID, explanationId);
     if (link) {
       a.href = link;
       a.innerHTML = 'Go to lesson to see why';

@@ -5,11 +5,12 @@ import * as React from 'react';
 import Lesson from '../Lesson/Lesson';
 import Button from './button';
 import LessonNavigator from './lessonNavigator';
-import LessonTilePath from './lessonPathTile';
+// import LessonTilePath from './lessonPathTile';
 import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
+import ExplanationButton from './explanationButton';
 
 type Props = {
   lesson: Lesson;
@@ -23,26 +24,20 @@ type State = {
   page: number,
   listOfSections: Array<{
     label: string;
-    link: Function | string;
+    link?: Function | string;
     active?: boolean;
   }>;
 };
 
 function getLessonDescription(uid: string) {
   const lessons = getLessonIndex();
-  for (let i = 0; i < lessons.length; i += 1) {
-    const lessonDescription = lessons[i];
-    if (lessonDescription.uid === uid) {
-      return lessonDescription;
-    }
-  }
-  return null;
+  return lessons[uid];
 }
 
-function getCurrentLesson() {
-  const currentLocation = window.location.href;
-  return currentLocation.split('/').pop();
-}
+// function getCurrentLesson() {
+//   const currentLocation = window.location.href;
+//   return currentLocation.split('/').pop();
+// }
 
 export default class LessonComponent extends React.Component
                                     <Props, State> {
@@ -348,11 +343,11 @@ export default class LessonComponent extends React.Component
       className="lesson__button-goto_container"
       id="id__lesson__button-goto_container">
       <DropDownButton
-      id="id__lesson__goto_button"
-      label={`${this.state.page + 1} / ${this.state.numPages}`}
-      direction="up"
-      xAlign="right"
-      list={this.state.listOfSections}/>
+        id="id__lesson__goto_button"
+        label={`${this.state.page + 1} / ${this.state.numPages}`}
+        direction="up"
+        xAlign="right"
+        list={this.state.listOfSections}/>
     </div>;
   }
 
@@ -373,22 +368,25 @@ export default class LessonComponent extends React.Component
   }
 
   updateGoToButtonListHighlight() {
-    const activeItems = document.getElementsByClassName('drop_down_button_list_item_active');
-    [].forEach.call(activeItems, item => item.classList.remove('drop_down_button_list_item_active'));
-    const listItems = document.getElementById('id__lesson__goto_button_list');
-    const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
-    const titleIndeces = this.lesson.content.sections.map((section, index) => {
-      if (section.title) {
-        return index;
-      }
-      return -1;
-    }).filter(index => index !== -1);
-    const listIndex = titleIndeces.indexOf(activeSection);
+    const button = document.getElementById('id__lesson__button-goto_container');
+    if (button != null) {
+      const activeItems = button.getElementsByClassName('dropdown_button_list_item_active');
+      [].forEach.call(activeItems, item => item.classList.remove('dropdown_button_list_item_active'));
+      const listItems = document.getElementById('id__lesson__goto_button_list');
+      const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
+      const titleIndeces = this.lesson.content.sections.map((section, index) => {
+        if (section.title) {
+          return index;
+        }
+        return -1;
+      }).filter(index => index !== -1);
+      const listIndex = titleIndeces.indexOf(activeSection);
 
-    if (listItems) {
-      const { children } = listItems;
-      if (children.length > 0) {
-        children[listIndex].classList.add('drop_down_button_list_item_active');
+      if (listItems) {
+        const { children } = listItems;
+        if (children.length > 0) {
+          children[listIndex].classList.add('dropdown_button_list_item_active');
+        }
       }
     }
   }
@@ -430,55 +428,12 @@ export default class LessonComponent extends React.Component
     </div>;
   }
 
-  addQuizSummary() {
-    const output = [];
-    const { lessonDescription } = this;
-    if (lessonDescription != null) {
-      const paths = lessonDescription.paths.slice();
-      const quiz = paths.indexOf('quiz');
-      const summary = paths.indexOf('summary');
-      const currentLocation = getCurrentLesson();
-      if (summary !== -1) {
-        this.key += 1;
-        let selected = '';
-        if (currentLocation.toLowerCase() === 'summary') {
-          selected = 'selected';
-        }
-        output.push(
-          <LessonTilePath
-            id='id_lesson__tile_path_summary'
-            link={`${lessonDescription.link}/summary`}
-            key={this.key}
-            label='Summary'
-            state={selected}
-            right={true}/>,
-        );
-      }
-      if (quiz !== -1) {
-        this.key += 1;
-        let selected = '';
-        if (currentLocation.toLowerCase() === 'quiz') {
-          selected = 'selected';
-        }
-        output.push(
-          <LessonTilePath
-            id='id_lesson__tile_path_quiz'
-            link={`${lessonDescription.link}/quiz`}
-            key={this.key}
-            label='Quiz'
-            state={selected}
-            />,
-        );
-      }
-    }
-    return output;
-  }
-
   calcTitleHeight() {
     const { lessonDescription } = this;
     let count = 0;
     if (lessonDescription != null) {
-      count = lessonDescription.paths.length;
+      // count = lessonDescription.paths.length;
+      count = 9;
     }
     if (count === 1) {
       return ' lesson__title_bar_force_low';
@@ -489,61 +444,158 @@ export default class LessonComponent extends React.Component
     return '';
   }
 
-  addLessonPaths() {
-    const output = [];
+  getTopics() {
     const { lessonDescription } = this;
-    const currentLocation = getCurrentLesson();
-    if (lessonDescription != null && lessonDescription.paths.length > 1) {
-      let paths = lessonDescription.paths.slice();
-      paths = paths.sort((a, b) => {
-        const upperA = a.toUpperCase();
-        const upperB = b.toUpperCase();
-        if (upperA < upperB) {
-          return -1;
-        }
-        if (upperA > upperB) {
-          return 1;
-        }
-        return 0;
-      });
-      paths.forEach((path) => {
-        if (path.toLowerCase() !== 'quiz' && path.toLowerCase() !== 'summary') {
-          this.key += 1;
-          let selected = '';
-          if (path === currentLocation) {
-            selected = 'selected';
+    const topics = {};
+    const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    if (lessonDescription != null) {
+      Object.keys(lessonDescription.versions).forEach((vUID) => {
+        const version = lessonDescription.versions[vUID];
+        version.topics.forEach((topic) => {
+          if (!(topic in topics)) {
+            topics[topic] = {};
           }
-          output.push(
-            <LessonTilePath
-              id={`id_lesson__tile_path_${path}`}
-              link={`${lessonDescription.link}/${path}`}
-              key={this.key}
-              label={path}
-              state={selected}
-              />,
-          );
-        }
+          let active = false;
+          if (currentExplanation === version.path
+            && currentTopic === topic) {
+            active = true;
+          }
+          topics[topic][vUID] = {
+            label: version.title,
+            link: `${lessonDescription.path}/${version.path}/${topic}`,
+            rating: Math.floor(Math.random() * 6),
+            numReviews: Math.floor(Math.random() * 10000),
+            description: version.description,
+            active,
+            onPath: version.onPath,
+          };
+        });
       });
     }
+    return topics;
+  }
+
+  addTopics() {
+    const output = [];
+    const topics = this.getTopics();
+    const topicNames = [
+      'summary', 'explanation', 'implications', 'history',
+      'references', 'quiz',
+    ];
+    Object.keys(topics).forEach((topicName) => {
+      if (topicNames.indexOf(topicName) === -1) {
+        topicNames.push(topicName);
+      }
+    });
+    const currentTopic = window.location.href.split('/').slice(-1)[0];
+    topicNames.forEach((name) => {
+      if (topics[name] != null) {
+        const topic = topics[name];
+        // $FlowFixMe - onPath is there and boolean
+        const onPathCount = Object.values(topic).filter(ver => ver.onPath).length;
+        // $FlowFixMe - onPath is there and boolean
+        const offPathCount = Object.values(topic).filter(ver => !ver.onPath).length;
+        let selected = false;
+        if (currentTopic === name) {
+          selected = true;
+        }
+        let vUIDs = Object.keys(topic);
+        vUIDs = vUIDs.sort((aKey, bKey) => {
+          const a = topic[aKey];
+          const b = topic[bKey];
+          if (a.rating < b.rating) { return 1; }
+          if (a.rating > b.rating) { return -1; }
+          if (a.numReviews < b.numReviews) { return 1; }
+          if (a.numReviews > b.numReviews) { return -1; }
+          const labelA = a.label.toUpperCase();
+          const labelB = b.label.toUpperCase();
+          if (labelA > labelB) { return 1; }
+          if (labelA < labelB) { return -1; }
+          return 0;
+        });
+        vUIDs = vUIDs.sort((aKey, bKey) => {
+          const a = topic[aKey];
+          const b = topic[bKey];
+          if (a.onPath === true && b.onPath === false) { return -1; }
+          if (a.onPath === false && b.onPath === true) { return 1; }
+          return 0;
+        });
+        const listItems = [];
+        vUIDs.forEach((vUID) => {
+          listItems.push(topic[vUID]);
+        });
+        this.key += 1;
+        if (offPathCount > 0 && name !== 'quiz') {
+          listItems.splice(onPathCount, 0, {
+            label: 'Portion of Lesson',
+            separator: true,
+          });
+        }
+
+        output.push(
+          <div className="lesson__path_tile" key={this.key}>
+            <ExplanationButton
+              id={`id__lesson__explanation_button_${name}`}
+              label={name.charAt(0).toUpperCase() + name.slice(1)}
+              direction="down"
+              xAlign="left"
+              selected={selected}
+              list={listItems}/>
+          </div>,
+        );
+      }
+    });
+    // const { lessonDescription } = this;
+    // const currentLocation = getCurrentLesson();
+    // // Get all topics from various explanations
+    // if (lessonDescription != null && lessonDescription.paths.length > 1) {
+    //   let paths = lessonDescription.paths.slice();
+    //   paths = paths.sort((a, b) => {
+    //     const upperA = a.toUpperCase();
+    //     const upperB = b.toUpperCase();
+    //     if (upperA < upperB) {
+    //       return -1;
+    //     }
+    //     if (upperA > upperB) {
+    //       return 1;
+    //     }
+    //     return 0;
+    //   });
+    //   paths.forEach((path) => {
+    //     if (path.toLowerCase() !== 'quiz' && path.toLowerCase() !== 'summary') {
+    //       this.key += 1;
+    //       let selected = '';
+    //       if (path === currentLocation) {
+    //         selected = 'selected';
+    //       }
+    //       output.push(
+    //         <LessonTilePath
+    //           id={`id_lesson__tile_path_${path}`}
+    //           link={`${lessonDescription.path}/${path}`}
+    //           key={this.key}
+    //           label={path}
+    //           state={selected}
+    //           />,
+    //       );
+    //     }
+    //   });
+    // }
     return output;
   }
 
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
-        <div className="lesson__path_container">
-          <div className="lesson__path_left_tiles">
-            {this.addLessonPaths()}
-          </div>
-          <div className="lesson__path_right_tiles">
-            {this.addQuizSummary()}
-          </div>
-        </div>
         <LessonTitle
           imgLink={`/${this.lesson.content.iconLinkGrey}`}
           key='1'
           label={this.lesson.content.title}
           />
+        <div className="lesson__path_container">
+          <div className="lesson__path_mid_tiles">
+            {this.addTopics()}
+          </div>
+        </div>
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">
@@ -571,7 +623,7 @@ export default class LessonComponent extends React.Component
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}
-          topic={'Geometry_1'}
+          learningPath={'Geometry_1'}
           ref={(lessonNavigator) => { this.lessonNavigator = lessonNavigator; }}
         />
       <div className='lesson__white_spacer'/>

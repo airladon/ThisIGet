@@ -1,0 +1,24 @@
+@import '../../../geometry';
+
+$colors: (
+  // latin:             color('diagram', 'text-latin'),
+  lines:             map-get($geometry_colors, lines),
+  angles:            map-get($geometry_colors, angleLabels),
+  construction:      map-get($geometry_colors, const),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id_diagram__gl__low {
+  z-index: 1;
+}
+
+.lesson__eqn_nav__description {
+  width: 35em;
+}
+
+.lesson__eqn_nav__table {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+}

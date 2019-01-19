@@ -44,11 +44,29 @@ function getAllLessons(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
+      // if (lessonPath.includes('test1')
+      //   || lessonPath.includes('test2')
+      //   || lessonPath.includes('Introduction')
+      //   || lessonPath.includes('MeasuringAngles')
+      //   || lessonPath.includes('ImportantAngles')
+      //   || lessonPath.includes('Angle')
+      //   || lessonPath.includes('Circle')
+      //   || lessonPath.includes('test3')) {
       lessons.push(lessonPath);
+      // }
     }
   });
   return lessons;
 }
+
+function getAllVersions(versionsPath) {
+  const versions = [];
+  walkSync(versionsPath, 'version.js', (versionPath) => {
+    versions.push(versionPath);
+  });
+  return versions;
+}
+
 
 function entryPoints(buildMode) {
   const points = {
@@ -75,8 +93,7 @@ function makeLessonIndex(buildMode) {
 `import LessonDescription from '../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
-  const lessonIndex = [];
-`;
+  const lessonIndex = {`;
   lessons.forEach((lessonPath) => {
     const shortPath = lessonPath.replace(/src/, '');
     const detailsPath = `./${lessonPath}/details.js`;
@@ -84,13 +101,8 @@ export default function getLessonIndex() {
     let dependencies = [];
     let uid = '';
     let enabled = true;
-    let qr = {};
-    const lessonPaths = getAllPaths(
-      lessonPath,
-      ['lesson.js'],
-      ['lesson-dev.js'],
-      buildMode,
-    );
+    // let qr = {};
+
     if (fs.existsSync(detailsPath)) {
       // const detailsPath = `./${lessonPath}/details.js`;
       // eslint-disable-next-line global-require, import/no-dynamic-require
@@ -99,7 +111,7 @@ export default function getLessonIndex() {
       ({ dependencies } = details.details);
       ({ uid } = details.details);
       ({ enabled } = details.details);
-      ({ qr } = details.details);
+      // ({ qr } = details.details);
       if (enabled != null && enabled === false) {
         enabled = false;
       } else {
@@ -107,34 +119,81 @@ export default function getLessonIndex() {
       }
     }
     if (title !== '') {
-      outStr = `${outStr}\n  lessonIndex.push(new LessonDescription(`;
-      outStr = `${outStr}\n    '${title}',`;
-      outStr = `${outStr}\n    '${shortPath}',`;
-      outStr = `${outStr}\n    '${uid}',`;
-      outStr = `${outStr}\n    [`;
-      lessonPaths.forEach((lesson) => {
-        const shortP = lesson.path.replace(`${lessonPath}/`, '');
-        outStr = `${outStr}\n      '${shortP}',`;
+      outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
+      outStr = `${outStr}\n      name: '${title}',`;
+      outStr = `${outStr}\n      path: '${shortPath}',`;
+      outStr = `${outStr}\n      uid: '${uid}',`;
+      outStr = `${outStr}\n      versions: {`;
+      const versionPaths = getAllVersions(lessonPath);
+      versionPaths.forEach((versionPath) => {
+        let versionUid = '';
+        let versionTitle = '';
+        let versionDescription = '';
+        const versionSubPath = versionPath.replace(/.*\//, '');
+        let versionOnPath = true;
+        let versionQR = {};
+        const versionFileName = `./${versionPath}/version.js`;
+        if (fs.existsSync(versionFileName)) {
+          // eslint-disable-next-line global-require, import/no-dynamic-require
+          const version = require(versionFileName);
+
+          if (version.details.title != null) {
+            versionTitle = version.details.title;
+          }
+          if (version.details.uid != null) {
+            versionUid = version.details.uid;
+          }
+          if (version.details.description != null) {
+            versionDescription = version.details.description;
+          }
+          if (version.details.onPath != null) {
+            versionOnPath = version.details.onPath;
+          }
+          if (version.details.qr != null) {
+            versionQR = version.details.qr;
+          }
+        }
+        const lessonPaths = getAllPaths(
+          versionPath,
+          ['lesson.js'],
+          ['lesson-dev.js'],
+          buildMode,
+        );
+        outStr = `${outStr}\n        ${versionUid}: {`;
+        outStr = `${outStr}\n          title: '${versionTitle}',`;
+        outStr = `${outStr}\n          description: '${versionDescription}',`;
+        // outStr = `${outStr}\n          uid: '${explanationUid}',`;
+        outStr = `${outStr}\n          path: '${versionSubPath}',`;
+        outStr = `${outStr}\n          onPath: ${versionOnPath},`;
+        outStr = `${outStr}\n          topics: [`;
+        lessonPaths.forEach((lesson) => {
+          const shortP = lesson.path.replace(`${lessonPath}/${versionSubPath}/`, '');
+          outStr = `${outStr}\n            '${shortP}',`;
+        });
+        outStr = `${outStr}\n          ],`;
+        outStr = `${outStr}\n          qr: [`;
+        if (versionQR != null && Array.isArray(versionQR)) {
+          versionQR.forEach((page) => {
+            outStr = `${outStr}\n            '${page}',`;
+          });
+        }
+        outStr = `${outStr}\n          ],`;
+        outStr = `${outStr}\n        },`;
       });
-      outStr = `${outStr}\n    ],`;
-      outStr = `${outStr}\n    [`;
+      outStr = `${outStr}\n      },`;
+      outStr = `${outStr}\n      dependencies: [`;
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
-          outStr = `${outStr}\n      '${dependency}',`;
+          outStr = `${outStr}\n        '${dependency}',`;
         });
       }
-      outStr = `${outStr}\n    ],`;
-      outStr = `${outStr}\n    ${enabled},`;
-      outStr = `${outStr}\n    [`;
-      if (qr != null && Array.isArray(qr)) {
-        qr.forEach((page) => {
-          outStr = `${outStr}\n      '${page}',`;
-        });
-      }
-      outStr = `${outStr}\n    ],`;
-      outStr = `${outStr}\n  ));`;
+      outStr = `${outStr}\n      ],`;
+      outStr = `${outStr}\n      enabled: ${enabled},`;
+      outStr = `${outStr}\n    }),`;
     }
+    // outStr = `${outStr}\n  };`;
   });
+  outStr = `${outStr}\n  };`;
   outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   if (outStr !== '') {
     fs.writeFile('./src/Lessons/index.js', outStr, (err) => {

@@ -6,28 +6,39 @@ $path_tile_height: 35px;
   display: block;
 }
 
-.lesson__path_left_tiles {
-  display: inline-block;
-  margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
-}
+// .lesson__path_left_tiles {
+//   display: inline-block;
+//   margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+// }
 
-.lesson__path_right_tiles {
+// .lesson__path_right_tiles {
+//   display: inline-block;
+//   margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+// }
+
+.lesson__path_mid_tiles {
   display: inline-block;
-  margin-top: calc(#{$title_bar_space_high} / 3 * 2.1 - #{$path_tile_height} / 2);
+  margin-bottom: 0.8em;
 }
 
 .lesson__path_tile {
   min-width: $path_tile_height;
+  width: 110px;
   height: $path_tile_height;
-  border-radius: calc(#{$path_tile_height} / 2);
+  border-radius: 1em;
   font-size: calc(#{$path_tile_height} * 0.35);
   display: inline-block;
   margin-right: 5px;
   margin-left: 5px;
-  padding-left: 10px;
-  padding-right: 10px;
-  background-color: color('lesson', 'title-background');
-  border: 1px solid color('white', 'lighter');
+  // padding-left: 10px;
+  // padding-right: 10px;
+  // background-color: color('lesson', 'title-background');
+  // border: 1px solid color('white', 'lighter');
+  position: relative;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .lesson__path_tile_right {
@@ -36,19 +47,19 @@ $path_tile_height: 35px;
 }
 
 @media screen and (min-width: $tablet) {
-  .lesson__path_left_tiles {
-    display: initial;
-    float: left;
-    margin-left: 10px;
-    margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
-  }
+  // .lesson__path_left_tiles {
+  //   display: initial;
+  //   float: left;
+  //   margin-left: 10px;
+  //   margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
+  // }
 
-  .lesson__path_right_tiles {
-    display: initial;
-    float: right;
-    margin-right: 10px;
-    margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
-  }
+  // .lesson__path_right_tiles {
+  //   display: initial;
+  //   float: right;
+  //   margin-right: 10px;
+  //   margin-top: calc(#{$title_bar_space_low} / 2 - #{$path_tile_height} / 2);
+  // }
 
   .lesson__path_container {
     width: 96%;
@@ -75,6 +86,7 @@ $path_tile_height: 35px;
 .lesson__path_tile:hover {
   background-color: color('white', 'lightest');
   text-decoration: none;
+  cursor: pointer;
 }
 
 .lesson__path_tile_disabled {

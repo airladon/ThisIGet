@@ -10,7 +10,7 @@ const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
 
 type Props = {
-  topic: string;
+  learningPath: string;
   selected?: ?string;
 };
 
@@ -28,16 +28,16 @@ export default class LessonNavigator extends React.Component
   tileHeight: number;
   tileVSpace: number;
   tileHSpace: number;
-  topic: string;
-  topicPath: string;
-  topicName: string;
+  learningPath: string;
+  learningPathPath: string;
+  learningPathName: string;
 
   constructor(props: Props) {
     super(props);
     this.lessonTrees = makeLessonTree();
-    this.lessonIndex = this.lessonTrees[props.topic].tree;
-    this.topicPath = this.lessonTrees[props.topic].path;
-    this.topicName = this.lessonTrees[props.topic].name;
+    this.lessonIndex = this.lessonTrees[props.learningPath].tree;
+    this.learningPathPath = this.lessonTrees[props.learningPath].path;
+    this.learningPathName = this.lessonTrees[props.learningPath].name;
     this.getVariables();
     this.layoutLessonTiles();
     this.key = 0;
@@ -46,7 +46,7 @@ export default class LessonNavigator extends React.Component
     if (this.selected !== '') {
       this.asTitle = true;
     }
-    this.topic = props.topic;
+    this.learningPath = props.learningPath;
   }
 
   getVariables() {
@@ -237,7 +237,7 @@ export default class LessonNavigator extends React.Component
     }
     return <LessonTile
               id={lesson.id}
-              link={`${lesson.link}/1`}
+              link={`${lesson.path}/base/explanation`}
               imgLink={lesson.imgLink}
               key={this.key}
               label={lesson.name}
@@ -270,9 +270,9 @@ export default class LessonNavigator extends React.Component
 
   scrollToSelected() {
     const navScroll = document
-      .getElementById(`id_navigator__scroll_container_${this.topic}`);
+      .getElementById(`id_navigator__scroll_container_${this.learningPath}`);
     const navigatorContainer = document
-      .getElementById(`id_navigator__container_${this.topic}`);
+      .getElementById(`id_navigator__container_${this.learningPath}`);
     if (navScroll != null && navigatorContainer != null) {
       const navRect = navigatorContainer.getBoundingClientRect();
       const xMargin = Math.min(
@@ -297,9 +297,9 @@ export default class LessonNavigator extends React.Component
   // eslint-disable-next-line class-methods-use-this
   centerLessons() {
     const navigatorContainer = document
-      .getElementById(`id_navigator__container_${this.topic}`);
+      .getElementById(`id_navigator__container_${this.learningPath}`);
     const lessonsContainer =
-      document.getElementById(`id_navigator__lessons_positions_container_${this.topic}`);
+      document.getElementById(`id_navigator__lessons_positions_container_${this.learningPath}`);
     if (lessonsContainer != null && navigatorContainer != null) {
       const navRect = navigatorContainer.getBoundingClientRect();
       const navHeight = navRect.height;
@@ -352,19 +352,19 @@ export default class LessonNavigator extends React.Component
                 {'Learning path'}
         </div>
         <div className="navigator__topic_title_container">
-          <img src={`/static/dist/${this.topicPath}/topic.png`}
+          <img src={`/static/dist/${this.learningPathPath}/topic.png`}
                className="navigator__topic_title_img"/>
           <div className='navigator__topic_title'>
             <div className='navigator__topic_title_text'>
-              {this.topicName}
+              {this.learningPathName}
             </div>
           </div>
         </div>
-        <div id={`id_navigator__container_${this.topic}`} className={classStr}>
+        <div id={`id_navigator__container_${this.learningPath}`} className={classStr}>
         <div className="navigator__left_side" />
         <div className="navigator__right_side" />
-        <div id={`id_navigator__scroll_container_${this.topic}`} className="navigator__scroll_container">
-          <div id={`id_navigator__lessons_positions_container_${this.topic}`} className="navigator__lessons_positions_container">
+        <div id={`id_navigator__scroll_container_${this.learningPath}`} className="navigator__scroll_container">
+          <div id={`id_navigator__lessons_positions_container_${this.learningPath}`} className="navigator__lessons_positions_container">
               {this.lessons()}
           </div>
         </div>

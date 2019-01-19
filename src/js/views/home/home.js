@@ -18,9 +18,9 @@ const homePage = () => {
         <div className="navbar__spacer"/>
         <HomeBanner/>
         <div className='lesson__white_spacer'/>
-        <LessonNavigator topic={'Geometry_1'}/>
+        <LessonNavigator learningPath={'Geometry_1'}/>
         <div className='lesson__white_spacer'/>
-        <LessonNavigator topic={'Trigonometry_1'}/>
+        <LessonNavigator learningPath={'Trigonometry_1'}/>
         <div className='lesson__white_spacer'/>
         <Footer/>
       </div>,

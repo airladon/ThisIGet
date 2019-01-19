@@ -1,495 +1,626 @@
 import LessonDescription from '../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
-  const lessonIndex = [];
-
-  lessonIndex.push(new LessonDescription(
-    'Adjacent Angles',
-    '/Lessons/Math/Geometry_1/AdjacentAngles',
-    'adjacent_angles',
-    [
-      '1',
-      'dev',
-      'summary',
-    ],
-    [
-      'important_angles',
-    ],
-    true,
-    [
-      'Complementary',
-      'Supplementary',
-      'Explementary',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Angles',
-    '/Lessons/Math/Geometry_1/Angle',
-    'angles',
-    [
-      '1',
-    ],
-    [
-      'circles',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Area and Rectangles',
-    '/Lessons/Math/Geometry_1/Area',
-    'area_introduction',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'quadrangles',
-    ],
-    true,
-    [
-      'Main',
-      'Square',
-      'Rectangle',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Area of a Circle',
-    '/Lessons/Math/Geometry_1/AreaCircle',
-    'area_circle',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'area_triangle',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Area of a Triangle',
-    '/Lessons/Math/Geometry_1/AreaTriangle',
-    'area_triangle',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'area_introduction',
-    ],
-    true,
-    [
-      'Main',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Circles',
-    '/Lessons/Math/Geometry_1/Circle',
-    'circles',
-    [
-      '1',
-    ],
-    [
-      'why_study_shapes',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Congruent Triangles',
-    '/Lessons/Math/Geometry_1/CongruentTriangles',
-    'congruent_triangles',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'triangle_introduction',
-    ],
-    true,
-    [
-      'Asa',
-      'Sss',
-      'Sas',
-      'Aas',
-      'Aaa',
-      'Ssa',
-      'Main',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Equilateral Triangle',
-    '/Lessons/Math/Geometry_1/Equilateral',
-    'equilateral_triangles',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'isosceles_triangles',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Important Angles',
-    '/Lessons/Math/Geometry_1/ImportantAngles',
-    'important_angles',
-    [
-      '1',
-    ],
-    [
-      'measuring_angles',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Why Study Shapes?',
-    '/Lessons/Math/Geometry_1/Introduction',
-    'why_study_shapes',
-    [
-      '1',
-    ],
-    [
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Isosceles Triangle',
-    '/Lessons/Math/Geometry_1/Isosceles',
-    'isosceles_triangles',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'quadrangles',
-    ],
-    true,
-    [
-      'Main',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Measuring Angles',
-    '/Lessons/Math/Geometry_1/MeasuringAngles',
-    'measuring_angles',
-    [
-      '1',
-    ],
-    [
-      'angles',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Parallel Lines',
-    '/Lessons/Math/Geometry_1/ParallelLines',
-    'parallel_lines',
-    [
-      '1',
-      'quiz',
-      'summary',
-    ],
-    [
-      'adjacent_angles',
-    ],
-    true,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Quadrangles',
-    '/Lessons/Math/Geometry_1/Quadrangles',
-    'quadrangles',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'congruent_triangles',
-    ],
-    true,
-    [
-      'Main',
-      'Rectangle',
-      'Square',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Related Angles',
-    '/Lessons/Math/Geometry_1/RelatedAngles',
-    'related_angles',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'parallel_lines',
-    ],
-    true,
-    [
-      'Opposite',
-      'Interior',
-      'Alternate',
-      'Corresponding',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Calculating Pi',
-    '/Lessons/Math/Geometry_1/ToDo/Calculating Pi',
-    'calculating_pi',
-    [
-      '1',
-    ],
-    [
-      'right_angle_triangles',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Pythagorean Theorm',
-    '/Lessons/Math/Geometry_1/ToDo/Pythagoras',
-    'pythagoras',
-    [
-      '1',
-    ],
-    [
-      'right_angle_triangles',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Right Angle Triangles',
-    '/Lessons/Math/Geometry_1/ToDo/RightAngleTriangles',
-    'right_angle_triangles',
-    [
-      '1',
-    ],
-    [
-      'important_triangles',
-      'area_triangle',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Similar Triangles',
-    '/Lessons/Math/Geometry_1/ToDo/SimilarTriangles',
-    'similar_triangles',
-    [
-      '1',
-    ],
-    [
-      'congruent_triangles',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Triangles',
-    '/Lessons/Math/Geometry_1/Triangles',
-    'triangle_introduction',
-    [
-      '1',
-      'dev',
-      'quiz',
-      'summary',
-    ],
-    [
-      'related_angles',
-    ],
-    true,
-    [
-      'Main',
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Chord',
-    '/Lessons/Math/Trigonometry_1/Chord',
-    'chord',
-    [
-      '1',
-    ],
-    [
-      'sine_introduction',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Cosecant',
-    '/Lessons/Math/Trigonometry_1/Cosecant',
-    'cosecant_introduction',
-    [
-      '1',
-    ],
-    [
-      'secant_introduction',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Cosine',
-    '/Lessons/Math/Trigonometry_1/Cosine',
-    'consine_introduction',
-    [
-      '1',
-    ],
-    [
-      'sine_introduction',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Cotangent',
-    '/Lessons/Math/Trigonometry_1/Cotangent',
-    'cotangent_introduction',
-    [
-      '1',
-    ],
-    [
-      'pythagorean_identity',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Law of Cosines',
-    '/Lessons/Math/Trigonometry_1/Law of Cosines',
-    'law_of_cosines',
-    [
-      '1',
-    ],
-    [
-      'law_of_sines',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Law of Sines',
-    '/Lessons/Math/Trigonometry_1/Law of Sines',
-    'law_of_sines',
-    [
-      '1',
-    ],
-    [
-      'pythagorean_identity',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Pythagorean Identity',
-    '/Lessons/Math/Trigonometry_1/Pythagoras',
-    'pythagorean_identity',
-    [
-      '1',
-    ],
-    [
-      'tangent_introduction',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Secant',
-    '/Lessons/Math/Trigonometry_1/Secant',
-    'secant_introduction',
-    [
-      '1',
-    ],
-    [
-      'pythagorean_identity',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Sine',
-    '/Lessons/Math/Trigonometry_1/Sine',
-    'sine_introduction',
-    [
-      '1',
-    ],
-    [
-      'unit_circle',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Tangent',
-    '/Lessons/Math/Trigonometry_1/Tangent',
-    'tangent_introduction',
-    [
-      '1',
-    ],
-    [
-      'chord',
-    ],
-    false,
-    [
-    ],
-  ));
-  lessonIndex.push(new LessonDescription(
-    'Unit Circle',
-    '/Lessons/Math/Trigonometry_1/UnitCircle',
-    'unit_circle',
-    [
-      '1',
-    ],
-    [
-      'quadrangles',
-    ],
-    false,
-    [
-    ],
-  ));
+  const lessonIndex = {
+    adjacent_angles: new LessonDescription({
+      name: 'Adjacent Angles',
+      path: '/Lessons/Math/Geometry_1/AdjacentAngles',
+      uid: 'adjacent_angles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'summary',
+          ],
+          qr: [
+            'Complementary',
+            'Supplementary',
+            'Explementary',
+          ],
+        },
+      },
+      dependencies: [
+        'important_angles',
+      ],
+      enabled: true,
+    }),
+    angles: new LessonDescription({
+      name: 'Angles',
+      path: '/Lessons/Math/Geometry_1/Angle',
+      uid: 'angles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'circles',
+      ],
+      enabled: true,
+    }),
+    area_introduction: new LessonDescription({
+      name: 'Area and Rectangles',
+      path: '/Lessons/Math/Geometry_1/Area',
+      uid: 'area_introduction',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+            'Square',
+            'Rectangle',
+          ],
+        },
+      },
+      dependencies: [
+        'quadrangles',
+      ],
+      enabled: true,
+    }),
+    area_circle: new LessonDescription({
+      name: 'Area of a Circle',
+      path: '/Lessons/Math/Geometry_1/AreaCircle',
+      uid: 'area_circle',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'area_triangle',
+      ],
+      enabled: true,
+    }),
+    area_triangle: new LessonDescription({
+      name: 'Area of a Triangle',
+      path: '/Lessons/Math/Geometry_1/AreaTriangle',
+      uid: 'area_triangle',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'area_introduction',
+      ],
+      enabled: true,
+    }),
+    circles: new LessonDescription({
+      name: 'Circles',
+      path: '/Lessons/Math/Geometry_1/Circle',
+      uid: 'circles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'why_study_shapes',
+      ],
+      enabled: true,
+    }),
+    congruent_triangles: new LessonDescription({
+      name: 'Congruent Triangles',
+      path: '/Lessons/Math/Geometry_1/CongruentTriangles',
+      uid: 'congruent_triangles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Asa',
+            'Sss',
+            'Sas',
+            'Aas',
+            'Aaa',
+            'Ssa',
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'triangle_introduction',
+      ],
+      enabled: true,
+    }),
+    equilateral_triangles: new LessonDescription({
+      name: 'Equilateral Triangle',
+      path: '/Lessons/Math/Geometry_1/Equilateral',
+      uid: 'equilateral_triangles',
+      versions: {
+        justangles: {
+          title: 'Just Angles',
+          description: 'Shows angles derivation only.',
+          path: 'AngleOnly',
+          onPath: false,
+          topics: [
+            'explanation',
+            'quiz',
+          ],
+          qr: [
+          ],
+        },
+        complete: {
+          title: 'Complete',
+          description: 'Complete derivation.',
+          path: 'Complete',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+        euclid: {
+          title: 'Euclid',
+          description: 'The way Euclid did it.',
+          path: 'Euclid',
+          onPath: true,
+          topics: [
+            'explanation',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        trionly: {
+          title: 'Tri Only',
+          description: 'Triangle derivation only.',
+          path: 'TriOnly',
+          onPath: false,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+          ],
+          qr: [
+          ],
+        },
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'isosceles_triangles',
+      ],
+      enabled: true,
+    }),
+    important_angles: new LessonDescription({
+      name: 'Important Angles',
+      path: '/Lessons/Math/Geometry_1/ImportantAngles',
+      uid: 'important_angles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'measuring_angles',
+      ],
+      enabled: true,
+    }),
+    why_study_shapes: new LessonDescription({
+      name: 'Why Study Shapes?',
+      path: '/Lessons/Math/Geometry_1/Introduction',
+      uid: 'why_study_shapes',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+      ],
+      enabled: true,
+    }),
+    isosceles_triangles: new LessonDescription({
+      name: 'Isosceles Triangle',
+      path: '/Lessons/Math/Geometry_1/Isosceles',
+      uid: 'isosceles_triangles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'quadrangles',
+      ],
+      enabled: true,
+    }),
+    measuring_angles: new LessonDescription({
+      name: 'Measuring Angles',
+      path: '/Lessons/Math/Geometry_1/MeasuringAngles',
+      uid: 'measuring_angles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'angles',
+      ],
+      enabled: true,
+    }),
+    parallel_lines: new LessonDescription({
+      name: 'Parallel Lines',
+      path: '/Lessons/Math/Geometry_1/ParallelLines',
+      uid: 'parallel_lines',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'adjacent_angles',
+      ],
+      enabled: true,
+    }),
+    quadrangles: new LessonDescription({
+      name: 'Quadrangles',
+      path: '/Lessons/Math/Geometry_1/Quadrangles',
+      uid: 'quadrangles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+            'Rectangle',
+            'Square',
+          ],
+        },
+      },
+      dependencies: [
+        'congruent_triangles',
+      ],
+      enabled: true,
+    }),
+    related_angles: new LessonDescription({
+      name: 'Related Angles',
+      path: '/Lessons/Math/Geometry_1/RelatedAngles',
+      uid: 'related_angles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Opposite',
+            'Interior',
+            'Alternate',
+            'Corresponding',
+          ],
+        },
+      },
+      dependencies: [
+        'parallel_lines',
+      ],
+      enabled: true,
+    }),
+    calculating_pi: new LessonDescription({
+      name: 'Calculating Pi',
+      path: '/Lessons/Math/Geometry_1/ToDo/Calculating Pi',
+      uid: 'calculating_pi',
+      versions: {
+      },
+      dependencies: [
+        'right_angle_triangles',
+      ],
+      enabled: false,
+    }),
+    pythagoras: new LessonDescription({
+      name: 'Pythagorean Theorm',
+      path: '/Lessons/Math/Geometry_1/ToDo/Pythagoras',
+      uid: 'pythagoras',
+      versions: {
+      },
+      dependencies: [
+        'right_angle_triangles',
+      ],
+      enabled: false,
+    }),
+    right_angle_triangles: new LessonDescription({
+      name: 'Right Angle Triangles',
+      path: '/Lessons/Math/Geometry_1/ToDo/RightAngleTriangles',
+      uid: 'right_angle_triangles',
+      versions: {
+      },
+      dependencies: [
+        'important_triangles',
+        'area_triangle',
+      ],
+      enabled: false,
+    }),
+    similar_triangles: new LessonDescription({
+      name: 'Similar Triangles',
+      path: '/Lessons/Math/Geometry_1/ToDo/SimilarTriangles',
+      uid: 'similar_triangles',
+      versions: {
+      },
+      dependencies: [
+        'congruent_triangles',
+      ],
+      enabled: false,
+    }),
+    triangle_introduction: new LessonDescription({
+      name: 'Triangles',
+      path: '/Lessons/Math/Geometry_1/Triangles',
+      uid: 'triangle_introduction',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'related_angles',
+      ],
+      enabled: true,
+    }),
+    chord: new LessonDescription({
+      name: 'Chord',
+      path: '/Lessons/Math/Trigonometry_1/Chord',
+      uid: 'chord',
+      versions: {
+      },
+      dependencies: [
+        'sine_introduction',
+      ],
+      enabled: false,
+    }),
+    cosecant_introduction: new LessonDescription({
+      name: 'Cosecant',
+      path: '/Lessons/Math/Trigonometry_1/Cosecant',
+      uid: 'cosecant_introduction',
+      versions: {
+      },
+      dependencies: [
+        'secant_introduction',
+      ],
+      enabled: false,
+    }),
+    consine_introduction: new LessonDescription({
+      name: 'Cosine',
+      path: '/Lessons/Math/Trigonometry_1/Cosine',
+      uid: 'consine_introduction',
+      versions: {
+      },
+      dependencies: [
+        'sine_introduction',
+      ],
+      enabled: false,
+    }),
+    cotangent_introduction: new LessonDescription({
+      name: 'Cotangent',
+      path: '/Lessons/Math/Trigonometry_1/Cotangent',
+      uid: 'cotangent_introduction',
+      versions: {
+      },
+      dependencies: [
+        'pythagorean_identity',
+      ],
+      enabled: false,
+    }),
+    law_of_cosines: new LessonDescription({
+      name: 'Law of Cosines',
+      path: '/Lessons/Math/Trigonometry_1/Law of Cosines',
+      uid: 'law_of_cosines',
+      versions: {
+      },
+      dependencies: [
+        'law_of_sines',
+      ],
+      enabled: false,
+    }),
+    law_of_sines: new LessonDescription({
+      name: 'Law of Sines',
+      path: '/Lessons/Math/Trigonometry_1/Law of Sines',
+      uid: 'law_of_sines',
+      versions: {
+      },
+      dependencies: [
+        'pythagorean_identity',
+      ],
+      enabled: false,
+    }),
+    pythagorean_identity: new LessonDescription({
+      name: 'Pythagorean Identity',
+      path: '/Lessons/Math/Trigonometry_1/Pythagoras',
+      uid: 'pythagorean_identity',
+      versions: {
+      },
+      dependencies: [
+        'tangent_introduction',
+      ],
+      enabled: false,
+    }),
+    secant_introduction: new LessonDescription({
+      name: 'Secant',
+      path: '/Lessons/Math/Trigonometry_1/Secant',
+      uid: 'secant_introduction',
+      versions: {
+      },
+      dependencies: [
+        'pythagorean_identity',
+      ],
+      enabled: false,
+    }),
+    sine_introduction: new LessonDescription({
+      name: 'Sine',
+      path: '/Lessons/Math/Trigonometry_1/Sine',
+      uid: 'sine_introduction',
+      versions: {
+      },
+      dependencies: [
+        'unit_circle',
+      ],
+      enabled: false,
+    }),
+    tangent_introduction: new LessonDescription({
+      name: 'Tangent',
+      path: '/Lessons/Math/Trigonometry_1/Tangent',
+      uid: 'tangent_introduction',
+      versions: {
+      },
+      dependencies: [
+        'chord',
+      ],
+      enabled: false,
+    }),
+    unit_circle: new LessonDescription({
+      name: 'Unit Circle',
+      path: '/Lessons/Math/Trigonometry_1/UnitCircle',
+      uid: 'unit_circle',
+      versions: {
+      },
+      dependencies: [
+        'quadrangles',
+      ],
+      enabled: false,
+    }),
+  };
   return lessonIndex;
 }
