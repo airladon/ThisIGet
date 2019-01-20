@@ -9,18 +9,15 @@ FROM airladon/nodepy
 # ## General ##
 WORKDIR /opt/app
 
-# Install npm packages
-ADD containers/dev/package.json .
-ADD containers/dev/package-lock.json .
 
+# Install npm packages
+ADD package.json .
+ADD package-lock.json .
 RUN npm install
 
-RUN npm install file-loader --save-dev
 
 # Install Python packages
-ADD containers/shared/requirements_prod.txt requirements_prod.txt
-ADD containers/dev/requirements.txt requirements_dev.txt
-RUN cat requirements_dev.txt requirements_prod.txt > requirements.txt
+ADD requirements.txt .
 RUN pip install --no-cache-dir -q -r requirements.txt
 
 
