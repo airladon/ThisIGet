@@ -2,22 +2,29 @@
 
 ItIGet web app.
 
-Docker containers are used for development, testing and deployment. Containers can be built locally that mimic test and production environments.
+# Minimal effort contribution
+1. Install docker
+2. `git clone https://github.com/airladon/itiget/`
+3. Navigate to project directory
+4. `./startenv dev`
+  * This will start a docker container with a dev environment. In this environment linting, type checking and tests can be run.
 
-Local envirnoment is used for local editor linting.
+Docker containers are used for development, testing and deployment. Containers can be built locally that mimic test, build and production environments.
+
+Node and Python packages can also be installed in the local environment to ensure the IDE linting is at the same version as that used in the project build.
 
 # Setup local environment
-## Clone the Repository
+### Clone the Repository
 * `git clone https://github.com/airladon/itiget/`
 
-## Install Node Packages
+### Install Node Packages
 * `npm install`
 Local node packages are used mostly by the editor for linting and type checking.
 
 They can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see below).
 
-## Install Python and Packages (if not already installed locally)
-### Install PyEnv and Python 3.6.6
+### Install Python and Packages (if not already installed locally)
+#### Install PyEnv and Python 3.7.1
 * `brew install pyenv`
 * `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
 * `pyenv install 3.7.1`
@@ -27,17 +34,27 @@ They can also be used to run lint and type checks from the command line, it is r
 `sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
 
 
-### Install PipEnv (if not already installed locally)
+#### Install PipEnv (if not already installed locally)
 * `brew install pipenv`
 
-### Setup virtual environment and install packages
+#### Setup virtual environment and install packages
 * `pipenv --python 3.7.1`
 * `pipenv shell`
 * `pipenv install -d`
 
-If update requirements.txt, then:
-* `rm Pipfile*`
-* `pipenv install -r requirements.txt`
+#### Update packages
+To see which packages are out of date:
+`pipenv update --outdated`
+
+To update all packages:
+`pipenv update`
+`pipenv update -d`
+
+To update single package:
+`pipenv update <pkg>`
+
+Lock the pipfile
+`pipenv lock`
 
 
 # Work flow
