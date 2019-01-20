@@ -20,7 +20,7 @@ They can also be used to run lint and type checks from the command line, it is r
 ### Install PyEnv and Python 3.6.6
 * `brew install pyenv`
 * `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
-* `pyenv install 3.6.6`
+* `pyenv install 3.7.1`
 
 >> If pyenv install doesn't work because of zlib failure, do this:
 `xcode-select --install`
@@ -31,8 +31,12 @@ They can also be used to run lint and type checks from the command line, it is r
 * `brew install pipenv`
 
 ### Setup virtual environment and install packages
-* `pipenv --python 3.6.`
+* `pipenv --python 3.7.1`
 * `pipenv shell`
+* `pipenv install`
+
+If update requirements.txt, then:
+* `rm Pipfile*`
 * `pipenv install -r requirements.txt`
 
 
