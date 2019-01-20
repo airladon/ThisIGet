@@ -13,9 +13,28 @@ Local envirnoment is used for local editor linting.
 ## Install Node Packages
 * `npm install`
 Local node packages are used mostly by the editor for linting and type checking.
-While they can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see below).
 
-## Install Python and Packages
+They can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see below).
+
+## Install Python and Packages (if not already installed locally)
+### Install PyEnv and Python 3.6.6
+* `brew install pyenv`
+* `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
+* `pyenv install 3.6.6`
+
+>> If pyenv install doesn't work because of zlib failure, do this:
+`xcode-select --install`
+`sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
+
+
+### Install PipEnv (if not already installed locally)
+* `brew install pipenv`
+
+### Setup virtual environment and install packages
+* `pipenv --python 3.6.`
+* `pipenv shell`
+* `pipenv install -r requirements.txt`
+
 
 # Work flow
 

@@ -5,4 +5,5 @@ exclude =
     __pycache__,
     venv,
     node_modules,
+    containers,
 max-complexity = 10
