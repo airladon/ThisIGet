@@ -33,7 +33,7 @@ They can also be used to run lint and type checks from the command line, it is r
 ### Setup virtual environment and install packages
 * `pipenv --python 3.7.1`
 * `pipenv shell`
-* `pipenv install`
+* `pipenv install -d`
 
 If update requirements.txt, then:
 * `rm Pipfile*`
