@@ -98,6 +98,27 @@ docker_run() {
   fi
 }
 
+docker_run_cmd() {
+  echo "${bold}${cyan}" $1 "Starting${reset}"
+  docker run -it --rm \
+    -v $HOST_PATH/app:/opt/app/app \
+    -v $HOST_PATH/tests:/opt/app/tests \
+    -v $HOST_PATH/src:/opt/app/src \
+    --name devbuild \
+    devbuild \
+    $2
+
+  if [ $? != 0 ];
+    then
+    echo "${bold}${cyan}" $1 "${bold}${red}Failed${reset}"
+    echo
+    FAIL=1
+    else
+    echo "${bold}${cyan}" $1 "${bold}${green}Succeeded${reset}"
+    echo
+  fi
+}
+
 # Check current build status and exit if in failure state
 check_status() {
   if [ $FAIL != 0 ];
@@ -117,16 +138,17 @@ FAIL=0
 
 # Lint and type check
 echo "${bold}${cyan}============ Linting and Type Checking =============${reset}"
+docker_run_cmd "Python Linting" "/opt/app/start.sh flake8"
+check_status "Linting and Type Checking"
 docker_run "JS Linting" npm run lint
 docker_run "CSS and SCSS Linting" npm run css
 docker_run "Flow" npm run flow
-docker_run "Python Linting" pipenv run flake8
 check_status "Linting and Type Checking"
 
 # Test
 echo "${bold}${cyan}===================== Testing ======================${reset}"
 docker_run "JS Testing" npm run jest
-docker_run "Python Testing" pytest
+docker_run_cmd "Python Testing" "/opt/app/start.sh pytest"
 check_status "Tests"
 if [ $IN_TRAVIS ];
   then
