@@ -67,24 +67,39 @@ Start in the project directory.
 ### Install Node Packages
 Local node packages are used mostly by the editor for linting and type checking.
 
-They can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see below).
+They can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see first section on containerized development environment).
 
-To install packages, package.json and package-lock.json files are included, so just run: 
+To install packages, `package.json` and `package-lock.json` files are included, so just run: 
 
 `npm install`
 
-#### Update Node Packages
-To update node packages, update the version numbers in the package.json file.
+#### How to Update Node Packages for the project
+* Create branch
+* Update the version numbers in the package.json file
+* `rm -rf node_modules`
+* `npm install`
+* Run dev container and confirm all lint and type checks, and tests pass
+* Do a test build to local
+* If all passes, commit and pull request
 
 
 ### Install Python and Packages
 #### Install PyEnv and Python 3.7.1 (if not already installed on local machine)
-* `brew install pyenv`
-* `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
-* `pyenv install 3.7.1`
+* Install pyenv
+  * `brew install pyenv`
+* Add pyenv to shell rc file
+  * `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
+* Run shell rc file to take effect
+  * `source ~/.zshrc`
+* Install python version of interest
+  * `pyenv install 3.7.1`
+* Set python version as default if wanted (but not needed)
+* `pyenv global 3.7.1 3.6.6 2.7.14 system`
 
 >> If pyenv install doesn't work because of zlib failure, do this:
 `xcode-select --install`
+
+>> If it still doesn't work, then do this
 `sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
 
 
@@ -108,6 +123,23 @@ Update version numbers in Pipfile
 
 If Pipfile.lock is out of date, then use this to bring it up to date.
 `pipenv lock`
+
+#### Update python version
+Change python version number in
+* containers/Dockerfile_dev
+* containers/Dockerfile_stage
+* containers/Dockerfile_prod
+* Pipfile
+
+Locally install the required version of python
+`pyenv install 3.7.2`
+
+Recreate the virtual environment in project folder
+`pipenv --python 3.7.2`
+
+Lock the Pipfile with new python version requirement
+`pipenv lock`
+
 
 # Building and Deploy to Test Site
 * `./build.sh dev` - Lint, test and build app where:
