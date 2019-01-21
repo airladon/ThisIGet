@@ -120,7 +120,7 @@ echo "${bold}${cyan}============ Linting and Type Checking =============${reset}
 docker_run "JS Linting" npm run lint
 docker_run "CSS and SCSS Linting" npm run css
 docker_run "Flow" npm run flow
-docker_run "Python Linting" flake8
+docker_run "Python Linting" pipenv run flake8
 check_status "Linting and Type Checking"
 
 # Test
