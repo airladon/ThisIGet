@@ -2,14 +2,15 @@
 
 ItIGet web app.
 
-# Minimal effort contribution
-### Install docker
+# Containerized Development Environment Setup
 
-### Clone the repository
-`git clone https://github.com/airladon/itiget/`
-
-### Start dev environment
+### Setup
+* Install Docker
+* `git clone https://github.com/airladon/itiget/`
 * Navigate to project directory
+
+
+### Start interactive dev environment
 * `./startenv dev`
 
 This will start a docker container with a development environment that can be used to run:
@@ -28,6 +29,7 @@ When in the docker container the following commands can be run:
 * `webpack` to build dev bundle of javascript
 * `webpack --env.mode=prod` to build production bundle of javascript
 
+
 ### Run a local dev server of web app
 `./startenv dev-server`
 
@@ -35,22 +37,31 @@ Runs a docker container that builds a dev version of website, and serves it loca
 
 Go to address in browser `http://localhost:5003` to access local site.
 
+
 ### Run a local prod server of web app
 `./startenv`
 
 
-# Setup local environment
-### Clone the Repository
-* `git clone https://github.com/airladon/itiget/`
+# Local Development Environment
+Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
+
+Start in the project directory.
 
 ### Install Node Packages
-* `npm install`
 Local node packages are used mostly by the editor for linting and type checking.
 
 They can also be used to run lint and type checks from the command line, it is recommended to use the docker containers for this (see below).
 
-### Install Python and Packages (if not already installed locally)
-#### Install PyEnv and Python 3.7.1
+To install packages, package.json and package-lock.json files are included, so just run: 
+
+`npm install`
+
+#### Update Node Packages
+To update node packages, update the version numbers in the package.json file.
+
+
+### Install Python and Packages
+#### Install PyEnv and Python 3.7.1 (if not already installed on local machine)
 * `brew install pyenv`
 * `echo -e 'if command -v pyenv 1>/dev/null 2>&1; then\n  eval "$(pyenv init -)"\nfi' >> ~/.zshrc`
 * `pyenv install 3.7.1`
@@ -60,7 +71,7 @@ They can also be used to run lint and type checks from the command line, it is r
 `sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
 
 
-#### Install PipEnv (if not already installed locally)
+#### Install PipEnv (if not already installed on local machine)
 * `brew install pipenv`
 
 #### Setup virtual environment and install packages
@@ -69,6 +80,8 @@ They can also be used to run lint and type checks from the command line, it is r
 * `pipenv install -d`
 
 #### Update packages
+This is only if python packages need to be updated. This will update both production and dev packages.
+
 To see which packages are out of date:
 `pipenv update --outdated`
 
