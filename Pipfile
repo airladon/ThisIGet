@@ -4,30 +4,14 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-atomicwrites = "==1.1.5"
-attrs = "==18.1.0"
 flake8 = "==3.6.0"
-mccabe = "==0.6.1"
-more-itertools = "==4.3.0"
-pluggy = "==0.7.1"
-py = "==1.5.4"
-pycodestyle = "==2.4.0"
-pyflakes = "==2.0.0"
-pytest = "==3.7.1"
-six = "==1.11.0"
-webassets = "==0.12.1"
+pytest = "==4.1.1"
 
 [packages]
-click = "==6.7"
 gunicorn = "==19.9.0"
-itsdangerous = "==0.24"
 Flask-Assets = "==0.12"
 Flask = "==1.0.2"
-Jinja2 = "==2.10"
-MarkupSafe = "==1.0"
-Werkzeug = "==0.14.1"
 Flask-WTF = "==0.14.2"
-WTForms = "==2.2.1"
 
 [requires]
 python_version = "3.7.1"

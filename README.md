@@ -36,13 +36,8 @@ Runs a docker container that builds a dev version of website, and serves it loca
 Go to address in browser `http://localhost:5003` to access local site.
 
 ### Run a local prod server of web app
-`./starte
+`./startenv`
 
-
-
-Docker containers are used for development, testing and deployment. Containers can be built locally that mimic test, build and production environments.
-
-Node and Python packages can also be installed in the local environment to ensure the IDE linting is at the same version as that used in the project build.
 
 # Setup local environment
 ### Clone the Repository
@@ -77,13 +72,11 @@ They can also be used to run lint and type checks from the command line, it is r
 To see which packages are out of date:
 `pipenv update --outdated`
 
-To update all packages:
-`pipenv update -d`
+Update version numbers in Pipfile
 
-To update single package:
-`pipenv update <pkg>`
+`pipenv install -d`
 
-Lock the pipfile
+If Pipfile.lock is out of date, then use this to bring it up to date.
 `pipenv lock`
 
 
