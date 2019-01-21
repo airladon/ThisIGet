@@ -28,21 +28,38 @@ When in the docker container the following commands can be run:
 * `jest` to test javascript source
 * `webpack` to build dev bundle of javascript
 * `webpack --env.mode=prod` to build production bundle of javascript
-
+* `flask run --host=0.0.0.0` to run app and access it through a browser at `localhost:5002`.
 
 ### Run a local dev server of web app
 `./startenv dev-server`
 
-Runs a docker container that builds a dev version of website, and serves it locally with flask in debug mode. Webpack will watch javascript files for changes and rebuild when needed so website can simply be refreshed.
+Automatic environment that hosts app at `localhost:5003`
+  * Automatically rebuilds and rehosts app each time a source file is changed
+  * Browser cache might need to be cleared each time
+    * Safari: CMD+OPT+e, then CMD+r
+    * Chrome: Hold click the refresh icon and select `Empty Cache and Reload` (only works in developer mode)
+  * Uses localally built react js files
 
-Go to address in browser `http://localhost:5003` to access local site.
 
+### Run a local Stage server of web app
+`./startenv stage`
 
-### Run a local prod server of web app
-`./startenv`
+Automatic environment that runs flask and hosts app at `localhost:5001`
+  * Container has no npm packages installed, and only the python packages needed for production.
+  * Can see flask requests and responses
+  * Uses development versions of react from CDN
+  * Should run `./build.sh stage` locally, or `webpack --env.mod=stage` in the dev container first
+
+### Run a local Production server of web app
+`./startenv prod`
+Automatic environment that runs nginx and hosts app at `localhost:5000`
+  * Container has no npm packages installed, and only the python packages needed for production.  
+  * Uses minified production versions of react from CDN
+  * Should run `./build.sh prod` locally, or `webpack --env.mod=prod` in the dev container first to build the needed js files.
 
 
 # Local Development Environment
+
 Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
 
 Start in the project directory.
@@ -91,6 +108,26 @@ Update version numbers in Pipfile
 
 If Pipfile.lock is out of date, then use this to bring it up to date.
 `pipenv lock`
+
+# Building and Deploy to Test Site
+* `./build.sh dev` - Lint, test and build app where:
+  * JS is not minified
+  * Reac is in development mode
+* `./build.sh stage` - Lint, test and build app where:
+  * JS is minified
+  * JS source maps are included
+  * React is in production mode
+* `./build.sh prod` - Lint, test and build app where:
+  * JS is minified
+  * JS source maps are not included
+  * React is in production mode
+  * This same script is run in CI and deployment
+* `./build.sh prod deploy test` - Lint, test, build and deploy app where:
+  * JS is minified
+  * JS source maps are not included
+  * React is in production mode
+  * This same script is run in CI and deployment
+  * Deploys website to test site.
 
 
 # Work flow
