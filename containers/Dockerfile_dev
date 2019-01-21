@@ -69,7 +69,8 @@ RUN npm install figureone@0.0.20
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
-# ENTRYPOINT ["bash"]
-# ENTRYPOINT pipenv shell && /bin/bash
 ADD containers/dev/start.sh .
-ENTRYPOINT ["./start.sh"]
+ENTRYPOINT ["bash"]
+# ENTRYPOINT pipenv shell && /bin/bash
+
+# ENTRYPOINT ["./start.sh"]
