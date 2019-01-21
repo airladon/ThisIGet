@@ -15,7 +15,7 @@ RUN pip3 install pipenv
 ADD Pipfile .
 ADD Pipfile.lock .
 
-RUN set -ex && pipenv install --deploy --system
+RUN pipenv install --deploy --system
 
 ADD containers/prod/Procfile .
 ADD containers/prod/runtime.txt .

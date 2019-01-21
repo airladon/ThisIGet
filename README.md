@@ -3,11 +3,42 @@
 ItIGet web app.
 
 # Minimal effort contribution
-1. Install docker
-2. `git clone https://github.com/airladon/itiget/`
-3. Navigate to project directory
-4. `./startenv dev`
-  * This will start a docker container with a dev environment. In this environment linting, type checking and tests can be run.
+### Install docker
+
+### Clone the repository
+`git clone https://github.com/airladon/itiget/`
+
+### Start dev environment
+* Navigate to project directory
+* `./startenv dev`
+
+This will start a docker container with a development environment that can be used to run:
+* Lint checks for python, javascript and css
+* Type checks for javascript
+* Tests for python and javascript
+* Javascript bundling with webpack
+
+When in the docker container the following commands can be run:
+* `npm run lint` to lint javascript source
+* `npm run css` to lint css and scss source
+* `flake8` to lint python source
+* `flow` to type check javascript source
+* `pytest` to test python source
+* `jest` to test javascript source
+* `webpack` to build dev bundle of javascript
+* `webpack --env.mode=prod` to build production bundle of javascript
+
+### Run a local dev server of web app
+`./startenv dev-server`
+
+Runs a docker container that builds a dev version of website, and serves it locally with flask in debug mode. Webpack will watch javascript files for changes and rebuild when needed so website can simply be refreshed.
+
+Go to address in browser `http://localhost:5003` to access local site.
+
+### Run a local prod server of web app
+`./starte
+
+
 
 Docker containers are used for development, testing and deployment. Containers can be built locally that mimic test, build and production environments.
 
@@ -47,7 +78,6 @@ To see which packages are out of date:
 `pipenv update --outdated`
 
 To update all packages:
-`pipenv update`
 `pipenv update -d`
 
 To update single package:
