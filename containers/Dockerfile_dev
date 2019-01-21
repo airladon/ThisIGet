@@ -72,5 +72,4 @@ RUN npm install figureone@0.0.20
 ADD containers/dev/start.sh .
 ENTRYPOINT ["bash"]
 # ENTRYPOINT pipenv shell && /bin/bash
-
 # ENTRYPOINT ["./start.sh"]
