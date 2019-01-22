@@ -27,7 +27,7 @@ class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     lesson_name = db.Column(db.String(128), index=True, unique=True)
     lesson_uid = db.Column(db.String(128), index=True, unique=True)
-    category = db.Column(db.Integer, db.ForeignKey('cateory.id'))
+    category = db.Column(db.Integer, db.ForeignKey('category.id'))
     dependencies = db.Column(db.String(1024), index=True)
     path = db.Column(db.String(128))
     ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
