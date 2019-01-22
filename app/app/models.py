@@ -19,6 +19,9 @@ class Category(db.Model):
     category = db.Column(db.String(64), index=True, unique=True)
     path = db.Column(db.String(128))
 
+    def __repr__(self):
+        return '<Category {}>'.format(self.category)
+
 
 class Lesson(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -41,7 +44,7 @@ class Rating(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Rating {}>'.format(self.body)
+        return '<Rating {}>'.format(self.rating)
 
 
 class Comment(db.Model):
@@ -50,4 +53,4 @@ class Comment(db.Model):
     comment = db.Column(db.String(2048))
 
     def __repr__(self):
-        return '<Comment {}>'.format(self.body)
+        return '<Comment {}>'.format(self.comment)
