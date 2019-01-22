@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "63e16b155903d902476d475595f308fcbaa363288c8c4d5b34ee4e2ceb732492"
+            "sha256": "bd7329fc9de390763ab0c134dccdfdff55755afa5bded239e63c563208a96d45"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -29,6 +29,14 @@
         ]
     },
     "default": {
+        "bcrypt": {
+            "hashes": [],
+            "version": "==3.1.6"
+        },
+        "cffi": {
+            "hashes": [],
+            "version": "==1.11.5"
+        },
         "click": {
             "hashes": [],
             "version": "==7.0"
@@ -64,6 +72,14 @@
         "markupsafe": {
             "hashes": [],
             "version": "==1.1.0"
+        },
+        "pycparser": {
+            "hashes": [],
+            "version": "==2.19"
+        },
+        "six": {
+            "hashes": [],
+            "version": "==1.12.0"
         },
         "sqlalchemy": {
             "hashes": [],
