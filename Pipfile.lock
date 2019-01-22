@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "bd7329fc9de390763ab0c134dccdfdff55755afa5bded239e63c563208a96d45"
+            "sha256": "99da73c46ba5888ebdb588b8e850eccf2f9ca3463e0de23badd7fbfaaf332f9e"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -48,6 +48,10 @@
         "flask-assets": {
             "hashes": [],
             "version": "==0.12"
+        },
+        "flask-login": {
+            "hashes": [],
+            "version": "==0.4.1"
         },
         "flask-sqlalchemy": {
             "hashes": [],
