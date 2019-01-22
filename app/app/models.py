@@ -9,13 +9,21 @@ class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    # salt = db.Column(db.String(128))
     password_hash = db.Column(db.String(128))
     ratings = db.relationship('Rating', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
+    # See https://github.com/pyca/bcrypt/ for more information on bcrypt
+    # and recommendation for pre-hashing password to make it a consistent
+    # length.
+    # See https://blogs.dropbox.com/
+    #   tech/2016/09/how-dropbox-securely-stores-your-passwords/
+    # for their recommendation on how to store passwords
+    # See https://www.compose.com/articles/
+    #   you-may-get-pwned-at-least-protect-passwords-with-bcrypt/
+    # for explanation on bcrypt hash and how it also stores the salt
     def set_password(self, password):
         self.password_hash = bcrypt.hashpw(
             self.prep_password(password),
