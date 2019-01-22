@@ -11,24 +11,39 @@ ItIGet web app.
 
 
 ### Start interactive dev environment
+A docker container can be used to do lint and type checking, and tests. To start the container
 * `./startenv dev`
 
-This will start a docker container with a development environment that can be used to run:
-* Lint checks for python, javascript and css
-* Type checks for javascript
-* Tests for python and javascript
-* Javascript bundling with webpack
+This will bring up a prompt which is a python virtual environment, within a bash shell session within the container.
 
-When in the docker container the following commands can be run:
-* `npm run lint` to lint javascript source
-* `npm run css` to lint css and scss source
-* `flake8` to lint python source
-* `flow` to type check javascript source
-* `pytest` to test python source
-* `jest` to test javascript source
-* `webpack` to build dev bundle of javascript
-* `webpack --env.mode=prod` to build production bundle of javascript
-* `flask run --host=0.0.0.0` to run app and access it through a browser at `localhost:5002`.
+From here you can:
+* Perform type and linting checks:
+  * Javascript:
+    * `flow`
+    * `npm run lint`
+  * CSS:
+    * `npm run css`
+  * Python:
+    * `flake8`
+
+* Perform unit testing:
+  * Javascript:
+    * `jest`
+  * Python:
+    * `pytest`
+
+* Package Javascript files:
+  * `npm run webpack -- --env.mode=dev` or `webpack`
+    * similar to `./build.sh dev` below
+  * `npm run webpack -- --env.mode=stage`
+    * similar to `./build.sh stage` below
+  * `npm run webpack -- --env.mode=prod` or `npm run build`
+    * similar to `./build.sh prod` below
+
+* Run flask:
+  * `flask run --host=0.0.0.0`
+    * Can be accessed through a browser at `localhost:5002`
+    * You would only do this for deep debugging purposes, generally running the `dev-server` container (below) is sufficent.
 
 ### Run a local dev server of web app
 `./startenv dev-server`
@@ -144,7 +159,7 @@ Lock the Pipfile with new python version requirement
 # Building and Deploy to Test Site
 * `./build.sh dev` - Lint, test and build app where:
   * JS is not minified
-  * Reac is in development mode
+  * React is in development mode
 * `./build.sh stage` - Lint, test and build app where:
   * JS is minified
   * JS source maps are included
@@ -164,84 +179,27 @@ Lock the Pipfile with new python version requirement
 
 # Work flow
 
-An example contribution work flow is:
+An example contribution work flow to lesson content (just javascript and scss/css) is:
 * `git clone https://github.com/airladon/itiget/`
-
 * Create branch
-
-* Use local environments for development:
-  * `./start_env.sh dev`
-    * Interactive dev environment to do manual type and lint checking, testing, building and manually running flask app
-    * To run app, use `flask run --host=0.0.0.0` and access it through a browser at `localhost:5002`.
-
-  * `./start_env.sh dev-server`
-    * Automatic environment that hosts app at `localhost:5003`
-    * Automatically rebuilds and rehosts app each time a source file is changed
-    * Browser cache might need to be cleared each time
-      * Safari: CMD+OPT+e, then CMD+r
-      * Chrome: Hold click the refresh icon and select `Empty Cache and Reload` (only works in developer mode)
-
-  * `./start_env.sh stage`
-    * Automatic environment that runs flask and hosts app at `localhost:5001`
-    * Container has no npm packages installed, and only the python packages needed for production.
-
-  * `./start_env.sh prod`
-    * Automatic environment that runs nginx and hosts app at `localhost:5000`
-    * Container has no npm packages installed, and only the python packages needed for production.  
-
-* Contribute to source code
-  * Javascript, HTML and CSS are in itiget/src
-  * Python is in itiget/app
-  * Most app source contributions should also include test contributions
-
-* In interactive dev environment (`./start_env.sh dev`):
-  * Perform type and linting checks:
-    * Javascript:
-      * `flow`
-      * `npm run lint`
-    * CSS:
-      * `npm run css`
-    * Python:
-      * `flake8`
-
-  * Perform unit testing:
-    * Javascript:
-      * `jest`
-    * Python:
-      * `pytest`
-
-  * Package Javascript:
-    * `npm run webpack -- --env.mode=dev` or `webpack`
-      * similar to `./build.sh dev` below
-    * `npm run webpack -- --env.mode=stage`
-      * similar to `./build.sh stage` below
-    * `npm run webpack -- --env.mode=prod` or `npm run build`
-      * similar to `./build.sh prod` below
-
-* All type and lint checking, testing and building can also be tested at once using the `build.sh` script. This is the same script as is used in Travis CI
-  * In a terminal window: 
-    * `./build.sh dev` - Lint, test and build app where:
-      * JS is not minified
-      * Reac is in development mode
-    * `./build.sh stage` - Lint, test and build app where:
-      * JS is minified
-      * JS source maps are included
-      * React is in production mode
-    * `./build.sh prod` - Lint, test and build app where:
-      * JS is minified
-      * JS source maps are not included
-      * React is in production mode
-      * This same script is run in CI and deployment
-
-* If all is passing, then create pull request to merge into branch `release-candidate`
-* Once merged, the new app will be hosted on a dev website
-* If all is ok, create pull request to merge `release-candidate` into `master`
-* Once merged in master, the new app will be deployed to the production site
-
-# Setting up sublime
-
+* Host local dev-server 
+  `./start_env.sh dev-server`
+* In another shell window start interactive dev container
+  `./start_env.sh dev`
+* Modify lesson content
+* Observe result on dev-server `localhost:5003`
+* Check javascript and css changes conform to linting, type checking and tests. In the dev container run:
+  * `flow`
+  * `npm run lint`
+  * `npm run css`
+  * `jest`
+* If all looks good, try a test build
+  * `./build.sh prod deploy test`
+* If the test site looks good, create a pull request.
 
 # Setting up port forwarding:
+If you want to access your local dev server from a device on your LAN, then you need to setup poot forwarding.
+
 forward port external 4000 to local 5000
 `echo "
 rdr pass inet proto tcp from any to any port 4000 -> 127.0.0.1 port 5003
@@ -252,17 +210,3 @@ To stop port forwarding:
 
 To see all current rules:
 `sudo pfctl -s nat`
-
-
-
-# How to run a production build locally:
-Start dev container and run production webpack script
- `./start_env.sh dev`
- `webpack --env.mode=prod`
- 
-Exit container
-
-Start production container
- `./start_env.sh prod`
-
-Can be accessed from localhost:5000/ in the browser
