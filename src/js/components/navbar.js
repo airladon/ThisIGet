@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import Button from './button';
 // import '../../css/style.scss';
 // import DropDownButton from './dropDownButton';
 
@@ -23,10 +24,11 @@ export default class Navbar extends React.Component
           <img className="navbar-icon"
                src="/static/icon-lg.png"/>
         </a>
-        {/*
-        <div className="navbar-text navbar-left">
-          Login
+        
+        <div className="navbar-text navbar-left login_button">
+          <a href="/login">Login</a>
         </div>
+        {/*
         <div className="navbar-text navbar-left">
           Plus
         </div>

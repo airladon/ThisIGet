@@ -11,6 +11,7 @@
 
 from flask import render_template
 from app import app
+from app.forms import LoginForm
 
 
 @app.route('/')
@@ -74,3 +75,9 @@ def apple_touch_icon():
 @app.route('/lessons/chapter1')
 def chapter1():
     return "Chapter 1 Content"
+
+
+@app.route('/login')
+def login():
+    form = LoginForm()
+    return render_template('login.html', title='Sign In', form=form)
