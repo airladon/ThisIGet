@@ -6,12 +6,73 @@ import Button from './button';
 // import DropDownButton from './dropDownButton';
 
 type Props = {
-  active?: string
+  active?: string;
 };
 
+type State = {
+  loginLink: string;
+  loginText: string;
+};
 
 export default class Navbar extends React.Component
-                                    <Props> {
+                                    <Props, State> {
+  state: State;
+
+  constructor(props: Props) {
+    super(props);
+    this.state = {
+      // isLoggedIn: false,
+      loginText: 'Login',
+      loginLink: '/login',
+    };
+
+    // const request = new XMLHttpRequest();
+
+    // Open a new connection, using the GET request on the URL endpoint
+    // request.open('GET', '/isloggedin', true);
+
+    fetch('/isloggedin')
+    .then(data => data.json())
+    .then(res => this.setLogin(res))
+    // .then(response => this.setLogin(response));
+    // request.onload = function onload() {
+    //   if (this.response === '0') {
+    //     this.setState({
+    //       loginText: 'Login',
+    //       loginLink: '/login',
+    //     });
+    //   } else {
+    //     this.setState({
+    //       loginText: 'Logout',
+    //       loginLink: '/logout',
+    //     });
+    //   }
+    // };
+
+    // request.send();
+  }
+
+  componentDidMount() {
+    fetch('/isloggedin')
+    .then(data => data.json())
+    .then(res => this.setLogin(res))
+  }
+
+  setLogin(login: string) {
+    console.log('response', login)
+    if (login === 'true') {
+      this.setState({
+        loginText: 'Logout',
+        loginLink: '/logout',
+      });
+    } else {
+      this.setState({
+        loginText: 'Login',
+        loginLink: '/login',
+      });
+    }
+  }
+
   render() {
     const props = Object.assign({}, this.props);
     delete props.active;
@@ -24,9 +85,8 @@ export default class Navbar extends React.Component
           <img className="navbar-icon"
                src="/static/icon-lg.png"/>
         </a>
-        
         <div className="navbar-text navbar-left login_button">
-          <a href="/login">Login</a>
+          <a href={this.state.loginLink}>{this.state.loginText}</a>
         </div>
         {/*
         <div className="navbar-text navbar-left">
