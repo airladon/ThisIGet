@@ -1,9 +1,8 @@
 // @flow
 
 import * as React from 'react';
-import Button from './button';
-// import '../../css/style.scss';
-// import DropDownButton from './dropDownButton';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+
 
 type Props = {
   active?: string;
@@ -26,42 +25,23 @@ export default class Navbar extends React.Component
       loginLink: '/login',
     };
 
-    // const request = new XMLHttpRequest();
+    const handleVisibilityChange = () => {
+      console.log('got focus')
+      this.checkIsLoggedIn();
+    }
+    window.addEventListener('focus', handleVisibilityChange);
 
-    // Open a new connection, using the GET request on the URL endpoint
-    // request.open('GET', '/isloggedin', true);
-
-    fetch('/isloggedin', { credentials: 'same-origin' })
-    .then(data => data.json())
-    .then(res => this.setLogin(res))
-    // .then(response => this.setLogin(response));
-    // request.onload = function onload() {
-    //   if (this.response === '0') {
-    //     this.setState({
-    //       loginText: 'Login',
-    //       loginLink: '/login',
-    //     });
-    //   } else {
-    //     this.setState({
-    //       loginText: 'Logout',
-    //       loginLink: '/logout',
-    //     });
-    //   }
-    // };
-
-    // request.send();
+    this.checkIsLoggedIn();
   }
 
-  // componentDidMount() {
-  //   fetch('/isloggedin')
-  //   .then(data => data.json())
-  //   .then(res => this.setLogin(res))
-  // }
+  checkIsLoggedIn(){
+    fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
+      .then(data => data.json())
+      .then(res => this.setLogin(res));
+  }
 
-  setLogin(login: string) {
-    console.log('response 1', login)
-    if (login === true) {
-      console.log('got here')
+  setLogin(login: number) {
+    if (login === 1) {
       this.setState({
         loginText: 'Logout',
         loginLink: '/logout',

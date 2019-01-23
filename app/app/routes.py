@@ -50,9 +50,9 @@ def about():
 
 @app.route('/isloggedin')
 def is_logged_in():
-    result = "false"
+    result = "0"
     if current_user.is_authenticated:
-        result = "true"
+        result = "1"
     # print('This is error output', file=sys.stderr)
     print(f'Will respond: {result, current_user}', file=sys.stdout)
     return result
