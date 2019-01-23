@@ -83,11 +83,9 @@ class LoginForm extends React.Component<props, State> {
                 </div>
               </div>
             </div>
-            <div className="login_spacer"/>
-            <h3>
+            <div className="login_title">
               Sign in to ItIGet
-            </h3>
-            <div className="login_spacer"/>
+            </div>
             <p>
               <label>
                 <span className="login_label_text">Username or Email:</span>
@@ -105,6 +103,10 @@ class LoginForm extends React.Component<props, State> {
             </p>
           </form>
           {this.renderLoginFailed()}
+          <div>
+            <Button href="/" className="login_button login_button_create">Create Accout</Button>
+            <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
+          </div>
         </div>
       </div>
     );

@@ -14,6 +14,16 @@ label {
 
 input {
   border-radius: 5px;
+  height: 2em;
+  border: 1px solid lightgray;
+}
+
+body {
+  background-color: lightgray;
+}
+
+.login_form p {
+  margin-bottom: 1px;
 }
 
 .login_spacer {
@@ -24,10 +34,19 @@ input {
   width: 100px;
   height: 100px;
   border-radius: 50px;
+  // -webkit-box-shadow: none;
+  // -moz-box-shadow: none;
+  // box-shadow: none;
 }
 
 .home__banner_logo_text {
   font-size: 20px;
+}
+
+.login_title {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-size: 1.2em;
 }
 
 .login_form {
@@ -42,15 +61,44 @@ input {
   // display: table-cell;
   // vertical-align: middle;
   text-align: center;
-  min-width: 250px;
+  min-width: 300px;
 }
 
 .login_submit {
   margin-left: auto;
   margin-right: auto;
+  margin-top: 20px;
+  margin-bottom: 40px;
+  background-color: color('site', 'safe');
+  color: white;
+  font-size: 0.9em;
+  border: 0;
+  // height: 1.2em;
+}
+
+.login_submit:hover {
+  background-color: color('site', 'safe', 'light');
 }
 
 .login_label_text {
   font-size: 0.8em;
   color: grey;
 }
+
+.login_button {
+  font-size: 0.7em;
+  width: 125px;
+}
+
+.login_failed {
+  position: absolute;
+}
+
+.login_button_create {
+  margin-right: 50px;
+}
+
+// .login_button_forgot {
+//   float: right;
+// }
+
