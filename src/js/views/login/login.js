@@ -16,13 +16,14 @@ import './login.scss';
 type State = {
   username: string;
   password: string;
+  loginFailed: boolean;
 };
 
 class LoginForm extends React.Component<props, State> {
   state: State;
   constructor(props) {
     super(props);
-    this.state = { username: '', password: '' };
+    this.state = { username: '', password: '', loginFailed: false };
 
     this.handleUsernameChange = this.handleUsernameChange.bind(this);
     this.handlePasswordChange = this.handlePasswordChange.bind(this);
@@ -49,7 +50,13 @@ class LoginForm extends React.Component<props, State> {
       credentials: 'same-origin',
       redirect: 'follow',
     }).then((response) => {
-      window.location.replace(response.url);
+      console.log(window.location.href, response, response.url)
+      if (window.location.href !== response.url) {
+        window.location.replace(response.url)
+      } else {
+      //   this.setState({loginFailed: true});
+        console.log('failed')
+      }
     });
   }
 
