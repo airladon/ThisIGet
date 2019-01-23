@@ -26,7 +26,6 @@ export default class Navbar extends React.Component
     };
 
     const handleVisibilityChange = () => {
-      console.log('got focus')
       this.checkIsLoggedIn();
     }
     window.addEventListener('focus', handleVisibilityChange);
