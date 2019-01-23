@@ -40,6 +40,7 @@ class LoginForm extends React.Component<props, State> {
 
   handleSubmit(event) {
     // alert(`A name was submitted: ${this.state.username} ${this.state.password}`);
+    console.log('submitting')
     event.preventDefault();
     const data = new FormData();
     data.append('username', this.state.username);
@@ -62,8 +63,7 @@ class LoginForm extends React.Component<props, State> {
     if (this.state.loginFailed) {
       return <div className="login_failed">
         <p>
-          Login Failed<br/>
-          Username or Password incorrect
+          Login Failed: Username or Password incorrect.
         </p>
       </div>;
     }
@@ -89,20 +89,31 @@ class LoginForm extends React.Component<props, State> {
             <p>
               <label>
                 <span className="login_label_text">Username or Email:</span>
-                <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+                <input
+                  type="text"
+                  value={this.state.username}
+                  onChange={this.handleUsernameChange}
+                  autoComplete="username"
+                />
               </label>
             </p>
             <p>
               <label>
                 <span className="login_label_text">Password:</span>
-                <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+                <input
+                  type="password"
+                  value={this.state.password}
+                  onChange={this.handlePasswordChange}
+                  autoComplete="current-password"/>
               </label>
             </p>
             <p>
-              <input type="submit" value="Sign in" className="login_submit" />
+              <div className="login_signin_box">
+                {this.renderLoginFailed()}
+                <input type="submit" value="Sign in" className="login_submit" />
+              </div>
             </p>
           </form>
-          {this.renderLoginFailed()}
           <div>
             <Button href="/" className="login_button login_button_create">Create Accout</Button>
             <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>

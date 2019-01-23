@@ -88,12 +88,13 @@ $_color_theme-standard-dark: (
   ),
   'site': (
     'primary':          (color: 'blue',   shade: 'base'),
+    'warning':          (color: 'red',    shade: 'base'),
     'secondary':        (color: 'blue',   shade: 'light'),
     'text':             (color: 'grey',   shade: 'darker'),
-    'background':       (color: 'grey',  shade: 'darker'),
+    'background':       (color: 'grey',   shade: 'darker'),
     'disabled':         (color: 'grey',   shade: 'base'),
     'safe':             (color: 'green',  shade: 'base'),
-    'menus':            (color: 'grey',  shade: 'darker'),
+    'menus':            (color: 'grey',   shade: 'darker'),
   ),
   'navbar': (
     'text':             (color: 'grey',   shade: 'light'),

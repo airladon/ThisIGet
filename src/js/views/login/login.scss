@@ -67,7 +67,7 @@ body {
 .login_submit {
   margin-left: auto;
   margin-right: auto;
-  margin-top: 20px;
+  margin-top: 22px;
   margin-bottom: 40px;
   background-color: color('site', 'safe');
   color: white;
@@ -90,15 +90,19 @@ body {
   width: 125px;
 }
 
+.login_signin_box {
+  position: relative;
+  padding: 1px;
+}
+
 .login_failed {
   position: absolute;
+  width: 100%;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
 }
 
 .login_button_create {
   margin-right: 50px;
 }
-
-// .login_button_forgot {
-//   float: right;
-// }
-
