@@ -1,40 +1,11 @@
 {% extends "base.html" %}
 
 {% block head %}
-    <link rel="stylesheet" href="/static/login.css">
+  <link rel="stylesheet" type="text/css" href="/static/dist/login.css">
 {% endblock %}
-
 {% block content %}
-    <div class="login_page">
-        <h1>It I Get</h1>
-        <h3>Sign in</h3>
-        <form action="" method="post" novalidate>
-            {{ form.hidden_tag() }}
-            <p>
-                {{ form.username.label }}
-                {{ form.username(size=32) }}<br>
-                {% for error in form.username.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>
-                {{ form.password.label }}
-                {{ form.password(size=32) }}<br>
-                {% for error in form.password.errors %}
-                    <span style="color: red;">[{{ error }}]</span>
-                {% endfor %}
-            </p>
-            <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
-            <p>{{ form.submit() }}</p>
-            {% with messages = get_flashed_messages() %}
-                {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                    <li>{{ message }}</li>
-                    {% endfor %}
-                </ul>
-                {% endif %}
-            {% endwith %}
-        </form>
-    </div>
+  <div id="login_page"></div>
+{% endblock %}
+{% block tail %}
+  <script type="text/javascript" src="/static/dist/login.js"></script>
 {% endblock %}

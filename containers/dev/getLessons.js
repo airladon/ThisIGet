@@ -71,7 +71,9 @@ function getAllVersions(versionsPath) {
 function entryPoints(buildMode) {
   const points = {
     main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
+    login: './src/js/views/login/login',
   };
+
   const lessons = getAllPaths(
     './src/Lessons',
     ['lesson.js', 'quickReference.js'],
