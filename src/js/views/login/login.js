@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './login.scss';
 
-// import Button from '../../components/button';
+import Button from '../../components/button';
 
 // // import '../../../css/style.scss';
 // import Navbar from '../../components/navbar';
@@ -75,23 +75,33 @@ class LoginForm extends React.Component<props, State> {
       <div className="login_form">
         <div className="login_centering_cell">
           <form onSubmit={this.handleSubmit} id="login_form">
-            <h1>
-              Sign in
-            </h1>
+            <div className="login_spacer"/>
+            <div className="home__banner_logo">
+              <div className="home__banner_logo_text_container">
+                <div className="home__banner_logo_text">
+                  get it
+                </div>
+              </div>
+            </div>
+            <div className="login_spacer"/>
+            <h3>
+              Sign in to ItIGet
+            </h3>
+            <div className="login_spacer"/>
             <p>
               <label>
-                Name:
+                <span className="login_label_text">Username or Email:</span>
                 <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
               </label>
             </p>
             <p>
               <label>
-                Password:
+                <span className="login_label_text">Password:</span>
                 <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
               </label>
             </p>
             <p>
-              <input type="submit" value="Submit" />
+              <input type="submit" value="Sign in" className="login_submit" />
             </p>
           </form>
           {this.renderLoginFailed()}
