@@ -35,8 +35,14 @@ export default class Navbar extends React.Component
 
   checkIsLoggedIn(){
     fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
-      .then(data => data.json())
-      .then(res => this.setLogin(res));
+      .then((resonse) => {
+        if (!resonse.ok) {
+          throw Error(resonse.statusText)
+        }
+        return resonse.json()
+      })
+      .then(res => this.setLogin(res))
+      .catch(error => {});
   }
 
   setLogin(login: number) {
