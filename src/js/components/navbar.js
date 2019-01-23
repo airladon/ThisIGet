@@ -31,7 +31,7 @@ export default class Navbar extends React.Component
     // Open a new connection, using the GET request on the URL endpoint
     // request.open('GET', '/isloggedin', true);
 
-    fetch('/isloggedin')
+    fetch('/isloggedin', { credentials: 'same-origin' })
     .then(data => data.json())
     .then(res => this.setLogin(res))
     // .then(response => this.setLogin(response));
@@ -52,15 +52,16 @@ export default class Navbar extends React.Component
     // request.send();
   }
 
-  componentDidMount() {
-    fetch('/isloggedin')
-    .then(data => data.json())
-    .then(res => this.setLogin(res))
-  }
+  // componentDidMount() {
+  //   fetch('/isloggedin')
+  //   .then(data => data.json())
+  //   .then(res => this.setLogin(res))
+  // }
 
   setLogin(login: string) {
-    console.log('response', login)
-    if (login === 'true') {
+    console.log('response 1', login)
+    if (login === true) {
+      console.log('got here')
       this.setState({
         loginText: 'Logout',
         loginLink: '/logout',

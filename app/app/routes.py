@@ -14,6 +14,8 @@ from app import app
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user
 from app.models import User
+import sys
+# import pdb
 
 
 @app.route('/')
@@ -51,6 +53,8 @@ def is_logged_in():
     result = "false"
     if current_user.is_authenticated:
         result = "true"
+    # print('This is error output', file=sys.stderr)
+    print(f'Will respond: {result, current_user}', file=sys.stdout)
     return result
 
 
@@ -104,6 +108,7 @@ def login():
             flash('Invalid username or password')
             return redirect('/login')
         login_user(user, remember=form.remember_me.data)
+        print(f'user logged in: {current_user.username}', file=sys.stdout)
         return redirect('/')
     return render_template('login.html', title='Sign In', form=form)
 
