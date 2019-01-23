@@ -50,14 +50,24 @@ class LoginForm extends React.Component<props, State> {
       credentials: 'same-origin',
       redirect: 'follow',
     }).then((response) => {
-      console.log(window.location.href, response, response.url)
       if (window.location.href !== response.url) {
-        window.location.replace(response.url)
+        window.location.replace(response.url);
       } else {
-      //   this.setState({loginFailed: true});
-        console.log('failed')
+        this.setState({ loginFailed: true });
       }
     });
+  }
+
+  renderLoginFailed() {
+    if (this.state.loginFailed) {
+      return <div className="login_failed">
+        <p>
+          Login Failed<br/>
+          Username or Password incorrect
+        </p>
+      </div>;
+    }
+    return <div></div>;
   }
 
   render() {
@@ -84,6 +94,7 @@ class LoginForm extends React.Component<props, State> {
               <input type="submit" value="Submit" />
             </p>
           </form>
+          {this.renderLoginFailed()}
         </div>
       </div>
     );
