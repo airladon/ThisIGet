@@ -1,0 +1,13 @@
+@import '../../../css/style';
+
+.login_form {
+  text-align: center;
+  height: 100%;
+  width: 250px;
+  display: table;
+}
+
+.login_centering_cell {
+  display: table-cell;
+  vertical-align: middle;
+}

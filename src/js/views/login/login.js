@@ -2,6 +2,8 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import './login.scss';
+
 // import Button from '../../components/button';
 
 // // import '../../../css/style.scss';
@@ -12,7 +14,6 @@ import ReactDOM from 'react-dom';
 // import NavbarSpacer from '../../components/navbarSpacer';
 // import Footer from '../../components/footer';
 class LoginForm extends React.Component {
-  
   constructor(props) {
     super(props);
     this.state = { username: '', password: '' };
@@ -37,17 +38,30 @@ class LoginForm extends React.Component {
 
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          Name:
-          <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
-        </label>
-        <label>
-          Password:
-          <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
-        </label>
-        <input type="submit" value="Submit" />
-      </form>
+      <div className="login_form">
+        <div className="login_centering_cell">
+          <form onSubmit={this.handleSubmit}>
+            <h1>
+              Sign in
+            </h1>
+            <p>
+              <label>
+                Name:
+                <input type="text" value={this.state.username} onChange={this.handleUsernameChange} />
+              </label>
+            </p>
+            <p>
+              <label>
+                Password:
+                <input type="password" value={this.state.password} onChange={this.handlePasswordChange} />
+              </label>
+            </p>
+            <p>
+              <input type="submit" value="Submit" />
+            </p>
+          </form>
+        </div>
+      </div>
     );
   }
 }
