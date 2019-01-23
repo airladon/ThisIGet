@@ -9,7 +9,7 @@
 #     return render_template('index.html')
 
 
-from flask import render_template, flash, redirect
+from flask import render_template, flash, redirect, request
 from app import app
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user
@@ -91,6 +91,36 @@ def chapter1():
     return "Chapter 1 Content"
 
 
+@app.route('/loginuser', methods=['POST'])
+def loginuser():
+    # form = request.form()
+    # print(f'form: {form}', file=sys.stdout)
+    form = LoginForm()
+    user = User.query.filter_by(username=form.username.data).first()
+    print(f'user: {user}, {user.check_password(form.password.data)}')
+    if user is None or not user.check_password(form.password.data):
+        print('login failed')
+        return redirect('/login')
+    print('login succeeded')
+    # login_user(user, remember=form.remember_me.data)
+    login_user(user, True)
+    return redirect('/')
+
+    # print(f'user: {user} {form.username.data}', file=sys.stdout)
+    # print(f'validate: {form.validate_on_submit()}')
+    # if form.validate_on_submit():
+    #     user = User.query.filter_by(username=form.username.data).first()
+    #     print(f'user: {user}')
+    #     if user is None or not user.check_password(form.password.data):
+    #         print('Invalid username or password')
+    #         return redirect('/login')
+    #     login_user(user, remember=form.remember_me.data)
+    #     print(f'user logged in: {current_user.username}', file=sys.stdout)
+    #     return redirect('/')
+    # return render_template('login.html', title='Sign In', form=form)
+    # return ''
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     # form = LoginForm()
@@ -101,16 +131,16 @@ def login():
     # return render_template('login.html', title='Sign In', form=form)
     if current_user.is_authenticated:
         return redirect('/')
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.query.filter_by(username=form.username.data).first()
-        if user is None or not user.check_password(form.password.data):
-            flash('Invalid username or password')
-            return redirect('/login')
-        login_user(user, remember=form.remember_me.data)
-        print(f'user logged in: {current_user.username}', file=sys.stdout)
-        return redirect('/')
-    return render_template('login.html', title='Sign In', form=form)
+    # form = LoginForm()
+    # if form.validate_on_submit():
+    #     user = User.query.filter_by(username=form.username.data).first()
+    #     if user is None or not user.check_password(form.password.data):
+    #         flash('Invalid username or password')
+    #         return redirect('/login')
+    #     login_user(user, remember=form.remember_me.data)
+    #     print(f'user logged in: {current_user.username}', file=sys.stdout)
+    #     return redirect('/')
+    return render_template('login.html')
 
 
 @app.route('/logout')

@@ -13,7 +13,13 @@ import './login.scss';
 // import { LessonContent } from '../../Lesson/LessonContent';
 // import NavbarSpacer from '../../components/navbarSpacer';
 // import Footer from '../../components/footer';
-class LoginForm extends React.Component {
+type State = {
+  username: string;
+  password: string;
+};
+
+class LoginForm extends React.Component<props, State> {
+  state: State;
   constructor(props) {
     super(props);
     this.state = { username: '', password: '' };
@@ -32,15 +38,26 @@ class LoginForm extends React.Component {
   }
 
   handleSubmit(event) {
-    alert(`A name was submitted: ${this.state.username} ${this.state.password}`);
+    // alert(`A name was submitted: ${this.state.username} ${this.state.password}`);
     event.preventDefault();
+    const data = new FormData();
+    data.append('username', this.state.username);
+    data.append('password', this.state.password);
+    fetch('/loginuser', {
+      body: data,
+      method: 'post',
+      credentials: 'same-origin',
+      redirect: 'follow',
+    }).then((response) => {
+      window.location.replace(response.url);
+    });
   }
 
   render() {
     return (
       <div className="login_form">
         <div className="login_centering_cell">
-          <form onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} id="login_form">
             <h1>
               Sign in
             </h1>
