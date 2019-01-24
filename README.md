@@ -230,8 +230,7 @@ CREATE TABLE new_user(
  email TEXT,
  password_hash TEXT);
 
-INSERT INTO new_user
-SELECT id, username, email, password_hash FROM user
+INSERT INTO new_user SELECT id, username, email, password_hash FROM user
 
 DROP TABLE IF EXISTS user
 

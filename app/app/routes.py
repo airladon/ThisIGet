@@ -95,12 +95,8 @@ def chapter1():
 def loginuser():
     form = LoginForm()
     user = User.query.filter_by(username=form.username.data).first()
-    # print(f'user: {user}, {user.check_password(form.password.data)}')
     if user is None or not user.check_password(form.password.data):
-        print('login failed')
         return redirect('/login')
-    print('login succeeded')
-    # login_user(user, remember=form.remember_me.data)
     login_user(user, True)
     return redirect('/')
 

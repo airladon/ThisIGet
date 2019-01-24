@@ -4,7 +4,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './login.scss';
 
-import Button from '../../components/button';
+// import Button from '../../components/button';
 import InputFormSubmit from '../../components/inputFormSubmit';
 import InputFormField from '../../components/inputFormField';
 import LoginTitle from '../../components/loginTitle';
@@ -35,12 +35,15 @@ class LoginForm extends React.Component<Props, State> {
     const emailElement = document.getElementById('input_field__email');
     const passwordElement = document.getElementById('input_field__password');
     const repeatPasswordElement = document.getElementById('input_field__repeat_password');
-    if (usernameElement && passwordElement && emailElement && repeatPasswordElement) {
-      console.log(passwordElement.value, repeatPasswordElement.value)
+    if (usernameElement instanceof HTMLInputElement
+      && passwordElement instanceof HTMLInputElement
+      && emailElement instanceof HTMLInputElement
+      && repeatPasswordElement instanceof HTMLInputElement) {
       if (passwordElement.value !== repeatPasswordElement) {
         this.setState({ passwordFailed: 'Passwords do not match' });
         return;
       }
+      
       data.append('username', usernameElement.value);
       data.append('email', emailElement.value);
       data.append('password', passwordElement.value);
