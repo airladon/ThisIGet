@@ -8,17 +8,9 @@ label {
   width: 250px;
 }
 
-label {
-  text-align: left;
-}
-
-input {
-  border-radius: 5px;
-  height: 2em;
-  border: 1px solid lightgray;
-  margin-left: auto;
-  margin-right: auto;
-}
+// label {
+//   text-align: left;
+// }
 
 body {
   background-color: lightgray;
@@ -35,113 +27,25 @@ body {
   margin-bottom: 10px;
 }
 
-// .login_form p {
-//   margin-bottom: 1px;
-// }
-
-// .login_title_spacer {
-//   height: 30px;
-// }
-
-// .login_title__logo {
-//   width: 100px;
-//   height: 100px;
-//   border-radius: 50px;
-// }
-
-// .login_title__logo_text {
-//   font-size: 20px;
-// }
-
-// .login_title {
-//   margin-top: 15px;
-//   margin-bottom: 25px;
-//   font-size: 1.2em;
-// }
-
-// .login_form {
-//   text-align: center;
-//   width: 100vw;
-// }
-
-// .login_centering_cell {
-//   text-align: center;
-//   min-width: 300px;
-// }
-
-// .login_submit {
-//   margin-left: auto;
-//   margin-right: auto;
-//   margin-top: 22px;
-//   margin-bottom: 40px;
-//   background-color: color('site', 'safe');
-//   color: white;
-//   font-size: 0.9em;
-//   border: 0;
-// }
-
-// .login_submit:hover {
-//   background-color: color('site', 'safe', 'light');
-// }
-
-// .login_label_text {
-//   font-size: 0.8em;
-//   color: grey;
-// }
-
-// .login_button {
-//   font-size: 0.7em;
-//   width: 125px;
-// }
-
-.input_form__link {
-  font-size: 0.7em;
-  width: 125px;
+.input_form__field_label label {
+  margin-bottom: 0;
+  margin-bottom: 3px;
+  font-size: 0.8em;
+  color: grey;
+  text-align: left;
 }
 
-.input_form__footer {
-  height: 20px;
-}
-// .login_signin_box {
-//   position: relative;
-//   padding: 1px;
-// }
-
-// .login_failed {
-//   position: absolute;
-//   // width: 100%;
-//   text-align: center;
-//   font-size: 0.7em;
-//   color: color('site', 'warning', 'light');
-// }
-
-.input_form__link_create {
-  margin-right: 50px;
+.input_form__field_entry {
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 5px;
+  height: 2em;
+  border: 1px solid lightgray;
 }
 
 .input_form__submit_container {
   position: relative;
   padding: 1px;
-}
-
-.input_form__submit_failed {
-  position: absolute;
-  text-align: center;
-  font-size: 0.7em;
-  color: color('site', 'warning', 'light');
-  top: -20px;
-}
-
-.input_form__submit_container_small {
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
-}
-
-.input_form__entry_field {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .input_form__submit_button {
@@ -160,16 +64,33 @@ body {
   background-color: color('site', 'safe', 'light');
 }
 
+.input_form__link {
+  font-size: 0.7em;
+  width: 125px;
+}
+
+.input_form__footer {
+  height: 20px;
+}
+
+.input_form__submit_failed {
+  position: absolute;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
+  top: -20px;
+}
+
+.input_form__submit_container_small {
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
+
 .input_form__centering_cell {
   text-align: center;
   min-width: 300px;
-}
-
-.input_form__label_text label {
-  margin-bottom: 0;
-  margin-bottom: 3px;
-  font-size: 0.8em;
-  color: grey;
 }
 
 .input_form__title__logo {
@@ -187,4 +108,8 @@ body {
   margin-top: 15px;
   margin-bottom: 25px;
   font-size: 1.2em;
+}
+
+.login_form__link_create {
+  margin-right: 50px;
 }

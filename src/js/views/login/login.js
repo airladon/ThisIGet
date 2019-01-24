@@ -55,8 +55,8 @@ class LoginForm extends React.Component {
       <div>
         <div className="input_form__footer"/>
         <div className="input_form__centering_cell">
-          <Button href="/create" className="input_form__link input_form__link_create">Create Accout</Button>
-          <Button href="/reset" className="input_form__link input_form__link_forgot">Forgot Password</Button>
+          <Button href="/create" className="input_form__link login_form__link_create">Create Accout</Button>
+          <Button href="/reset" className="input_form__link login_form__link_forgot">Forgot Password</Button>
         </div>
       </div>
     );
