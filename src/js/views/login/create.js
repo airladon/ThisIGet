@@ -76,27 +76,27 @@ class LoginForm extends React.Component<Props, State> {
               <InputFormField
                 label="Email:"
                 onError=""
-                autoComplete="email"
+                autoComplete="username"
                 type="text"
                 id="input_field__email"
               />
               <InputFormField
                 label="Password:"
-                onError={this.state.passwordFailed}
-                autoComplete="password"
+                onError=""
+                autoComplete="new-password"
                 type="password"
                 id="input_field__password"
               />
               <InputFormField
                 label="Repeat Password:"
-                onError=""
-                autoComplete="password"
+                onError={this.state.passwordFailed}
+                autoComplete="new-password"
                 type="password"
                 id="input_field__repeat_password"
               />
               <InputFormSubmit
                 label="Create Account"
-                onError={this.state.loginFailed}
+                onError=""
               />
             </form>
           </div>

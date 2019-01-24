@@ -67,7 +67,7 @@ class LoginForm extends React.Component<Props, State> {
               <InputFormField
                 label="Password:"
                 onError=""
-                autoComplete="password"
+                autoComplete="current-password"
                 type="password"
                 id="input_field__password"
               />
