@@ -56,6 +56,7 @@ class LoginForm extends React.Component<Props, State> {
     // data.append('password', this.state.password);
       data.append('username', usernameElement.value);
       data.append('password', passwordElement.value);
+      console.log(usernameElement, passwordElement)
       fetch('/loginuser', {
         body: data,
         method: 'post',
@@ -65,6 +66,7 @@ class LoginForm extends React.Component<Props, State> {
         if (window.location.href !== response.url) {
           window.location.replace(response.url);
         } else {
+          console.log('fail')
           this.setState({ loginFailed: true });
         }
       });

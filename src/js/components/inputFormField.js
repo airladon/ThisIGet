@@ -9,6 +9,7 @@ type Props = {
   onError: Function,
   autoComplete: string,
   type: string,
+  id: string,
 };
 
 type State = {
@@ -29,18 +30,19 @@ export default class InputFormField extends React.Component<Props, State> {
 
   render() {
     const props = Object.assign({}, this.props);
-    return <label>
+    return <div><label>
       <span className="login_label_text">{props.label}</span>
       <input
         type={props.type}
         onChange={this.handleFormChange.bind(this)}
         autoComplete={props.autoComplete}
         value={this.state.value}
+        id={props.id}
       />
       <div className="login_failed">
         {props.onError()}
       </div>
-    </label>;
+    </label></div>;
   }
 
   // makeEntries(fields: Array<TypeField>) {
