@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "99da73c46ba5888ebdb588b8e850eccf2f9ca3463e0de23badd7fbfaaf332f9e"
+            "sha256": "f77c2a95bd51114d7e1695e61117fec50146204f27694be330a678221a98cd6e"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -33,6 +33,10 @@
             "hashes": [],
             "version": "==3.1.6"
         },
+        "blinker": {
+            "hashes": [],
+            "version": "==1.4"
+        },
         "cffi": {
             "hashes": [],
             "version": "==1.11.5"
@@ -52,6 +56,10 @@
         "flask-login": {
             "hashes": [],
             "version": "==0.4.1"
+        },
+        "flask-mail": {
+            "hashes": [],
+            "version": "==0.9.1"
         },
         "flask-sqlalchemy": {
             "hashes": [],
@@ -121,7 +129,7 @@
         },
         "configparser": {
             "hashes": [],
-            "version": "==3.5.0"
+            "version": "==3.5.1"
         },
         "enum34": {
             "hashes": [],
