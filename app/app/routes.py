@@ -101,13 +101,21 @@ def loginuser():
     return redirect('/')
 
 
-@app.route('/login')
+@app.route('/login', methods=['GET', 'POST'])
 def login():
     css = '/static/dist/login.css'
     js = '/static/dist/login.js'
     if (current_user.is_authenticated):
         return redirect('/', css=css, js=js)
     form = LoginForm()
+    if form.validate_on_submit():
+        # flash('Login requested for user {}, remember_me={}'.format(
+        #     form.username.data, form.remember_me.data))
+        user = User.query.filter_by(username=form.username.data).first()
+        if user is None or not user.check_password(form.password.data):
+            return redirect('/login')
+        login_user(user, True)
+        return redirect('/')
     return render_template('login.html', form=form, css=css, js=js)
 
 

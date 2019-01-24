@@ -6,11 +6,17 @@
             {{ form.username.label }}
         </div>
         {{ form.username(size=32, class_="input_form__field_entry") }}
+        {% for error in form.username.errors %}
+            <span class="input_form__error_message">[{{ error }}]</span>
+        {% endfor %}
     </div>
     <div class="input_form__field">
         <div class="input_form__field_label">
             {{ form.password.label }}
         </div>
         {{ form.password(size=256, class_="input_form__field_entry") }}
+        {% for error in form.password.errors %}
+            <span class="input_form__error_message">[{{ error }}]</span>
+        {% endfor %}
     </div>
 {% endblock %}
