@@ -1,0 +1,109 @@
+@import '../../../css/style';
+@import '../home/banner.scss';
+
+$width: 250px;
+
+// ///////////////////////////////////////////////////////
+// Form and Title
+.input_form p {
+  margin-bottom: 1px;
+  text-align: center;
+  width: 100vw;
+}
+
+.input_form__centering_cell {
+  text-align: center;
+  min-width: 300px;
+}
+
+.input_form__title__logo {
+  width: 100px;
+  height: 100px;
+  border-radius: 50px;
+  margin-top: 20px;
+}
+
+.input_form__title__logo_text {
+  font-size: 20px;
+}
+
+.input_form__title__text {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  font-size: 1.2em;
+}
+
+// ///////////////////////////////////////////////////////
+// Form Fields (labels and entry)
+.input_form__field {
+  position: relative;
+  margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: $width;
+  text-align: left;
+}
+
+.input_form__field_label label {
+  margin-bottom: 0;
+  margin-bottom: 3px;
+  font-size: 0.8em;
+  color: grey;
+}
+
+.input_form__field_entry {
+  border-radius: 5px;
+  height: 2em;
+  border: 1px solid lightgray;
+  width: $width;
+}
+
+.input_form__submit_container {
+  position: relative;
+  padding: 1px;
+}
+
+// ///////////////////////////////////////////////////////
+// Submit button
+.input_form__submit_button {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 15px;
+  background-color: color('site', 'safe');
+  color: white;
+  font-size: 0.9em;
+  border: 0;
+  height: 2.3em;
+  width: $width;
+  border-radius: 5px;
+}
+
+.input_form__submit_button:hover {
+  background-color: color('site', 'safe', 'light');
+}
+
+// ///////////////////////////////////////////////////////
+// Footer
+#input_form__footer {
+  text-align: center;
+  width: $width;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 25px;
+}
+
+// ///////////////////////////////////////////////////////
+// Extras
+.input_form__link {
+  font-size: 0.7em;
+  width: 125px;
+}
+
+.input_form__submit_failed {
+  position: absolute;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
+  top: -20px;
+}
