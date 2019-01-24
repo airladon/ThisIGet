@@ -59,13 +59,21 @@ $width: 250px;
   width: $width;
 }
 
+.input_form__field_error_message {
+  position: absolute;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
+  top: 56px;
+}
+
+// ///////////////////////////////////////////////////////
+// Submit button
 .input_form__submit_container {
   position: relative;
   padding: 1px;
 }
 
-// ///////////////////////////////////////////////////////
-// Submit button
 .input_form__submit_button {
   margin-left: auto;
   margin-right: auto;
@@ -83,6 +91,15 @@ $width: 250px;
   background-color: color('site', 'safe', 'light');
 }
 
+.input_form__submit_error_message {
+  position: absolute;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
+  top: 0;
+  width: $width;
+}
+
 // ///////////////////////////////////////////////////////
 // Footer
 #input_form__footer {
@@ -98,14 +115,6 @@ $width: 250px;
 .input_form__link {
   font-size: 0.7em;
   width: 125px;
-}
-
-.input_form__error_message {
-  position: absolute;
-  text-align: center;
-  font-size: 0.7em;
-  color: color('site', 'warning', 'light');
-  top: 56px;
 }
 
 // .input_form__submit_failed {

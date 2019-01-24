@@ -19,7 +19,17 @@
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 {% block formfields %}{% endblock %}
-                <div class="input_form__submit_container">{{ form.submit(class_="input_form__submit_button") }}</div>
+                
+                <div class="input_form__submit_container">
+                  {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                        {% for message in messages %}
+                          <span class="input_form__submit_error_message">{{ message }}</span>
+                        {% endfor %}
+                    {% endif %}
+                  {% endwith %}
+                  {{ form.submit(class_="input_form__submit_button") }}
+                </div>
             </form>
         </div>
     </div>
