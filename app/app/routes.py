@@ -103,12 +103,22 @@ def loginuser():
 
 @app.route('/login')
 def login():
-    if current_user.is_authenticated:
-        return redirect('/')
-    return render_template(
-        'login.html',
-        css='/static/dist/login.css',
-        js='/static/dist/login.js')
+    css = '/static/dist/login.css'
+    js = '/static/dist/login.js'
+    if (current_user.is_authenticated):
+        return redirect('/', css=css, js=js)
+    form = LoginForm()
+    return render_template('login.html', form=form, css=css, js=js)
+
+
+# @app.route('/loginDeprecated')
+# def login():
+#     if current_user.is_authenticated:
+#         return redirect('/')
+#     return render_template(
+#         'login.html',
+#         css='/static/dist/login.css',
+#         js='/static/dist/login.js')
 
 
 @app.route('/create')

@@ -4,6 +4,36 @@
   <link rel="stylesheet" type="text/css" href={{ css }}>
 {% endblock %}
 {% block content %}
+    <div class="login_form">
+        <div class="input_form__centering_cell">
+            <div class="home__banner_logo input_form__title__logo">
+              <div class="home__banner_logo_text_container">
+                <div class="home__banner_logo_text input_form__title__logo_text">
+                  get it
+                </div>
+              </div>
+            </div>
+            <div class="input_form__title__text">
+              Sign in to ItIGet
+            </div>
+            <form action="" method="post" novalidate>
+                {{ form.hidden_tag() }}
+                <div class="input_form__field">
+                    <div class="input_form__label_text">
+                        {{ form.username.label }}
+                    </div>
+                    {{ form.username(size=32, class_="input_form__entry_field") }}
+                </div>
+                <div class="input_form__field">
+                    <div class="input_form__label_text">
+                        {{ form.password.label }}
+                    </div>
+                    {{ form.password(size=256, class_="input_form__entry_field") }}
+                </div>
+                <div class="input_form__submit_container">{{ form.submit(class_="input_form__submit_button") }}</div>
+            </form>
+        </div>
+    </div>
   <div id="login_page"></div>
 {% endblock %}
 {% block tail %}
