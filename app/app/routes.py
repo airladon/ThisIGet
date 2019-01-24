@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for
 from app import app
-from app.forms import LoginForm
+from app.forms import LoginForm, CreateAccountForm
 from flask_login import current_user, login_user, logout_user
 from app.models import User
 import sys
@@ -103,10 +103,10 @@ def loginuser():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    if (current_user.is_authenticated):
+        return redirect(url_for('home'))
     css = '/static/dist/login.css'
     js = '/static/dist/login.js'
-    if (current_user.is_authenticated):
-        return redirect(url_for('home'), css=css, js=js)
     form = LoginForm()
     if form.validate_on_submit():
         # flash('Login requested for user {}, remember_me={}'.format(
@@ -130,14 +130,14 @@ def login():
 #         js='/static/dist/login.js')
 
 
-@app.route('/create')
+@app.route('/createAccount')
 def create():
     if current_user.is_authenticated:
-        return redirect('/')
-    return render_template(
-        'login.html',
-        css='/static/dist/create.css',
-        js='/static/dist/create.js')
+        return redirect(url_for('home'))
+    css = '/static/dist/createAccount.css'
+    js = '/static/dist/createAccount.js'
+    form = CreateAccountForm()
+    return render_template('createAccount.html', form=form, css=css, js=js)
 
 
 @app.route('/reset')
