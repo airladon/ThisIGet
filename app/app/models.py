@@ -12,6 +12,9 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.String(128))
+    signed_up_on = db.Column(db.DateTime)
+    confirmed = db.Column(db.Boolean, default=False)
+    confirmed_on = db.Column(db.DateTime)
     ratings = db.relationship('Rating', backref='user', lazy='dynamic')
 
     def __repr__(self):

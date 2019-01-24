@@ -210,3 +210,25 @@ To stop port forwarding:
 
 To see all current rules:
 `sudo pfctl -s nat`
+
+
+# Update Table
+
+### Simple, adding or changing columns
+* Go to project directory
+* `export FLASK_APP=app/my_app.py`
+* `flask db migrate`
+* `flask db upgrade`
+
+### Removing columns
+SQLite doesn't allow dropping of columns with ALTER TABLE. Either recreate table, or copy table
+
+e.g. removing salt from username table:
+CREATE TABLE new_username(
+ id INTEGER PRIMARY KEY,
+ username TEXT,
+ email TEXT,
+ first_name TEXT,
+ last_name TEXT, 
+ age INTEGER, 
+ height INTEGER
