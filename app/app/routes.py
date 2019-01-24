@@ -9,7 +9,7 @@
 #     return render_template('index.html')
 
 
-from flask import render_template, flash, redirect, request
+from flask import render_template, flash, redirect, url_for
 from app import app
 from app.forms import LoginForm
 from flask_login import current_user, login_user, logout_user
@@ -106,16 +106,16 @@ def login():
     css = '/static/dist/login.css'
     js = '/static/dist/login.js'
     if (current_user.is_authenticated):
-        return redirect('/', css=css, js=js)
+        return redirect(url_for('home'), css=css, js=js)
     form = LoginForm()
     if form.validate_on_submit():
         # flash('Login requested for user {}, remember_me={}'.format(
         #     form.username.data, form.remember_me.data))
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            return redirect('/login')
+            return redirect(url_for('login'))
         login_user(user, True)
-        return redirect('/')
+        return redirect(url_for('home'))
     return render_template('login.html', form=form, css=css, js=js)
 
 
