@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './login.scss';
 
 import Button from '../../components/button';
-import LoginTitle from '../../components/loginTitle';
+import LoginFormBase from '../../components/loginFormBase';
 
 // // import '../../../css/style.scss';
 // import Navbar from '../../components/navbar';
@@ -93,6 +93,28 @@ class LoginForm extends React.Component<Props, State> {
   render() {
     return (
       <div>
+        <LoginFormBase
+          title="Create Account"
+          onSubmit={this.handleSubmit}
+          submit="Create Account"
+          fields={[
+            {
+              label: 'Username or Email:',
+              type: 'text',
+              onChange: this.handleUsernameChange,
+              onError: '',
+              autoComplete: 'username',
+            },
+            {
+              label: 'Password:',
+              type: 'password',
+              onChange: this.handlePasswordChange,
+              onError: this.renderLoginFailed(),
+              autoComplete: 'current-password',
+            },
+          ]}
+        />
+        { /*
         <div className="login_form">
           <div className="login_centering_cell">
             <LoginTitle title="Create Account in to ItIGet"/>
@@ -127,7 +149,8 @@ class LoginForm extends React.Component<Props, State> {
             </form>
           </div>
         </div>
-        <div>
+      */ }
+        <div className="login_centering_cell">
           <Button href="/" className="login_button login_button_create">Create Accout</Button>
           <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
         </div>

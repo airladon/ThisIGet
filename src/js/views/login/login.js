@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './login.scss';
 
 import Button from '../../components/button';
-import LoginTitle from '../../components/loginTitle';
+import LoginFormBase from '../../components/loginFormBase';
 
 // // import '../../../css/style.scss';
 // import Navbar from '../../components/navbar';
@@ -75,44 +75,86 @@ class LoginForm extends React.Component<Props, State> {
     return <div></div>;
   }
 
+  // <LoginManagement
+  //       title={Sign in to ItIGet}
+  //       onSubmit=this.handleSubmit
+  //       fields={[
+  //         {
+  //           lable: 'Username or Email:',
+  //           type: 'text',
+  //           value: this.state.username,
+  //           onChange: this.handleUsernameChange,
+  //           autoComplete: 'username',
+  //           onError: 'Login Failed: Username or Password incorrect',
+  //         }
+  //       ]}
+  //       submit="Sign in"
+  //       />
   render() {
     return (
-      <div className="login_form">
-        <div className="login_centering_cell">
-        <LoginTitle title="Sign in to ItIGet"/>
-          <form onSubmit={this.handleSubmit} id="login_form">
-            <p>
-              <label>
-                <span className="login_label_text">Username or Email:</span>
-                <input
-                  type="text"
-                  value={this.state.username}
-                  onChange={this.handleUsernameChange}
-                  autoComplete="username"
-                />
-              </label>
-            </p>
-            <p>
-              <label>
-                <span className="login_label_text">Password:</span>
-                <input
-                  type="password"
-                  value={this.state.password}
-                  onChange={this.handlePasswordChange}
-                  autoComplete="current-password"/>
-              </label>
-            </p>
-            <p>
-              <div className="login_signin_box">
-                {this.renderLoginFailed()}
-                <input type="submit" value="Sign in" className="login_submit" />
-              </div>
-            </p>
-          </form>
-          <div>
-            <Button href="/" className="login_button login_button_create">Create Accout</Button>
-            <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
+      <div>
+        <LoginFormBase
+          title="Sign in to ItIGet"
+          onSubmit={this.handleSubmit}
+          submit="Sign In"
+          fields={[
+            {
+              label: 'Username or Email:',
+              type: 'text',
+              onChange: this.handleUsernameChange,
+              onError: '',
+              autoComplete: 'username',
+              value: this.state.username,
+            },
+            {
+              label: 'Password:',
+              type: 'password',
+              onChange: this.handlePasswordChange,
+              onError: this.renderLoginFailed(),
+              autoComplete: 'current-password',
+              value: this.state.password,
+            },
+          ]}
+        />
+        { /*
+        <div className="login_form">
+          <div className="login_centering_cell">
+            <LoginTitle title="Create Account in to ItIGet"/>
+            <form onSubmit={this.handleSubmit} id="login_form">
+              <p>
+                <label>
+                  <span className="login_label_text">Username or Email:</span>
+                  <input
+                    type="text"
+                    value={this.state.username}
+                    onChange={this.handleUsernameChange}
+                    autoComplete="username"
+                  />
+                </label>
+              </p>
+              <p>
+                <label>
+                  <span className="login_label_text">Password:</span>
+                  <input
+                    type="password"
+                    value={this.state.password}
+                    onChange={this.handlePasswordChange}
+                    autoComplete="current-password"/>
+                </label>
+              </p>
+              <p>
+                <div className="login_signin_box">
+                  {this.renderLoginFailed()}
+                  <input type="submit" value="Sign in" className="login_submit" />
+                </div>
+              </p>
+            </form>
           </div>
+        </div>
+      */ }
+        <div className="login_centering_cell">
+          <Button href="/" className="login_button login_button_create">Create Accout</Button>
+          <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
         </div>
       </div>
     );
