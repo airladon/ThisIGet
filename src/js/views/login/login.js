@@ -75,13 +75,9 @@ class LoginForm extends React.Component<Props, State> {
 
   renderLoginFailed() {
     if (this.state.loginFailed) {
-      return <div className="login_failed">
-        <p>
-          Login Failed: Username or Password incorrect.
-        </p>
-      </div>;
+      return 'Login Failed: Username or Password incorrect.';
     }
-    return <div></div>;
+    return '';
   }
 
   // <LoginManagement
@@ -115,7 +111,7 @@ class LoginForm extends React.Component<Props, State> {
               />
               <InputFormField
                 label="Password:"
-                onError={() => {}}
+                onError={this.renderLoginFailed.bind(this)}
                 autoComplete="password"
                 type="password"
                 id="input_field__password"
