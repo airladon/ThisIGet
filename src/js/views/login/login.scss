@@ -1,20 +1,7 @@
 @import '../../../css/style';
 @import '../home/banner.scss';
 
-input,
-select,
-label {
-  display: block;
-  width: 250px;
-}
-
-// label {
-//   text-align: left;
-// }
-
-body {
-  background-color: lightgray;
-}
+$width: 250px;
 
 .input_form p {
   margin-bottom: 1px;
@@ -25,6 +12,11 @@ body {
 .input_form__field {
   position: relative;
   margin-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  display: block;
+  width: $width;
+  text-align: left;
 }
 
 .input_form__field_label label {
@@ -32,15 +24,13 @@ body {
   margin-bottom: 3px;
   font-size: 0.8em;
   color: grey;
-  text-align: left;
 }
 
 .input_form__field_entry {
-  margin-left: auto;
-  margin-right: auto;
   border-radius: 5px;
   height: 2em;
   border: 1px solid lightgray;
+  width: $width;
 }
 
 .input_form__submit_container {
@@ -52,12 +42,13 @@ body {
   margin-left: auto;
   margin-right: auto;
   margin-top: 15px;
-  // margin-bottom: 40px;
   background-color: color('site', 'safe');
   color: white;
   font-size: 0.9em;
   border: 0;
   height: 2.3em;
+  width: $width;
+  border-radius: 5px;
 }
 
 .input_form__submit_button:hover {
@@ -79,13 +70,6 @@ body {
   font-size: 0.7em;
   color: color('site', 'warning', 'light');
   top: -20px;
-}
-
-.input_form__submit_container_small {
-  width: 250px;
-  margin-left: auto;
-  margin-right: auto;
-  position: relative;
 }
 
 .input_form__centering_cell {
