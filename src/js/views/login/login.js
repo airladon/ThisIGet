@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 import './login.scss';
 
 import Button from '../../components/button';
-import LoginFormBase from '../../components/loginFormBase';
+import InputFormSubmit from '../../components/inputFormSubmit';
 import InputFormField from '../../components/inputFormField';
 import LoginTitle from '../../components/loginTitle';
 // // import '../../../css/style.scss';
@@ -20,7 +20,7 @@ type Props = {};
 type State = {
   // username: string;
   // password: string;
-  loginFailed: boolean;
+  loginFailed: string;
 };
 
 class LoginForm extends React.Component<Props, State> {
@@ -31,20 +31,10 @@ class LoginForm extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { username: '', password: '', loginFailed: false };
-
-    // this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    // this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.state = { loginFailed: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  // handleUsernameChange(event) {
-  //   this.setState({ username: event.target.value });
-  // }
-
-  // handlePasswordChange(event) {
-  //   this.setState({ password: event.target.value });
-  // }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -52,11 +42,8 @@ class LoginForm extends React.Component<Props, State> {
     const usernameElement = document.getElementById('input_field__username');
     const passwordElement = document.getElementById('input_field__password');
     if (usernameElement && passwordElement) {
-      // data.append('username', this.state.username);
-    // data.append('password', this.state.password);
       data.append('username', usernameElement.value);
       data.append('password', passwordElement.value);
-      console.log(usernameElement, passwordElement)
       fetch('/loginuser', {
         body: data,
         method: 'post',
@@ -66,35 +53,12 @@ class LoginForm extends React.Component<Props, State> {
         if (window.location.href !== response.url) {
           window.location.replace(response.url);
         } else {
-          console.log('fail')
-          this.setState({ loginFailed: true });
+          this.setState({ loginFailed: 'Login Failed: Username or Password incorrect.' });
         }
       });
     }
   }
 
-  renderLoginFailed() {
-    if (this.state.loginFailed) {
-      return 'Login Failed: Username or Password incorrect.';
-    }
-    return '';
-  }
-
-  // <LoginManagement
-  //       title={Sign in to ItIGet}
-  //       onSubmit=this.handleSubmit
-  //       fields={[
-  //         {
-  //           lable: 'Username or Email:',
-  //           type: 'text',
-  //           value: this.state.username,
-  //           onChange: this.handleUsernameChange,
-  //           autoComplete: 'username',
-  //           onError: 'Login Failed: Username or Password incorrect',
-  //         }
-  //       ]}
-  //       submit="Sign in"
-  //       />
   render() {
     return (
       <div>
@@ -104,89 +68,35 @@ class LoginForm extends React.Component<Props, State> {
             <form onSubmit={this.handleSubmit} id="login_form">
               <InputFormField
                 label="Username or Email:"
-                onError={() => {}}
+                onError=""
                 autoComplete="username"
                 type="text"
                 id="input_field__username"
               />
               <InputFormField
                 label="Password:"
-                onError={this.renderLoginFailed.bind(this)}
+                onError=""
                 autoComplete="password"
                 type="password"
                 id="input_field__password"
               />
+              <InputFormSubmit
+                label="Sign in"
+                onError={this.state.loginFailed}
+              />
+              { /*}
               <div>
                 <div className="login_signin_box">
                   <input type="submit" value="Sign in" className="login_submit" />
                 </div>
               </div>
+            */ }
             </form>
           </div>
         </div>
-        { /*
-        <LoginFormBase
-          title="Sign in to ItIGet"
-          onSubmit={this.handleSubmit}
-          submit="Sign In"
-          formValues={this.state}
-          fields={[
-            {
-              label: 'Username or Email:',
-              type: 'text',
-              onError: '',
-              autoComplete: 'username',
-              stateName: 'username',
-            },
-            {
-              label: 'Password:',
-              type: 'password',
-              // onError: this.renderLoginFailed(),
-              onError: this.renderLoginFailed,
-              autoComplete: 'current-password',
-              stateName: 'password',
-            },
-          ]}
-        />
-        
-        <div className="login_form">
-          <div className="login_centering_cell">
-            <LoginTitle title="Create Account in to ItIGet"/>
-            <form onSubmit={this.handleSubmit} id="login_form">
-              <p>
-                <label>
-                  <span className="login_label_text">Username or Email:</span>
-                  <input
-                    type="text"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                    autoComplete="username"
-                  />
-                </label>
-              </p>
-              <p>
-                <label>
-                  <span className="login_label_text">Password:</span>
-                  <input
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                    autoComplete="current-password"/>
-                </label>
-              </p>
-              <p>
-                <div className="login_signin_box">
-                  {this.renderLoginFailed()}
-                  <input type="submit" value="Sign in" className="login_submit" />
-                </div>
-              </p>
-            </form>
-          </div>
-        </div>
-      */ }
         <div className="login_centering_cell">
-          <Button href="/" className="login_button login_button_create">Create Accout</Button>
-          <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
+          <Button href="/create" className="login_button login_button_create">Create Accout</Button>
+          <Button href="/reset" className="login_button login_button_forgot">Forgot Password</Button>
         </div>
       </div>
     );

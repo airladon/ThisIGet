@@ -101,3 +101,23 @@ body {
 .login_button_create {
   margin-right: 50px;
 }
+
+.input_form__submit_container {
+  position: relative;
+  padding: 1px;
+}
+
+.input_form__submit_failed {
+  position: absolute;
+  text-align: center;
+  font-size: 0.7em;
+  color: color('site', 'warning', 'light');
+  top: -20px;
+}
+
+.input_form__submit_container_small {
+  width: 250px;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+}
