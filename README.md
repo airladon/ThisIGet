@@ -224,11 +224,16 @@ To see all current rules:
 SQLite doesn't allow dropping of columns with ALTER TABLE. Either recreate table, or copy table
 
 e.g. removing salt from username table:
-CREATE TABLE new_username(
+CREATE TABLE new_user(
  id INTEGER PRIMARY KEY,
  username TEXT,
  email TEXT,
- first_name TEXT,
- last_name TEXT, 
- age INTEGER, 
- height INTEGER
+ password_hash TEXT);
+
+INSERT INTO new_user
+SELECT id, username, email, password_hash FROM user
+
+DROP TABLE IF EXISTS user
+
+ALTER TABLE new_user RENAME TO user
+
