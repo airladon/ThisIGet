@@ -109,6 +109,26 @@ def loginuser():
 def login():
     if current_user.is_authenticated:
         return redirect('/')
+    return render_template(
+        'login.html',
+        css='/static/dist/login.css',
+        js='/static/dist/login.js')
+
+
+@app.route('/create')
+def create():
+    if current_user.is_authenticated:
+        return redirect('/')
+    return render_template(
+        'login.html',
+        css='/static/dist/create.css',
+        js='/static/dist/create.js')
+
+
+@app.route('/reset')
+def reset():
+    if current_user.is_authenticated:
+        return redirect('/')
     return render_template('login.html')
 
 

@@ -72,6 +72,8 @@ function entryPoints(buildMode) {
   const points = {
     main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
     login: './src/js/views/login/login',
+    create: './src/js/views/login/create',
+    reset: './src/js/views/login/reset',
   };
 
   const lessons = getAllPaths(
