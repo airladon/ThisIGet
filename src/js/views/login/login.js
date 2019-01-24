@@ -8,18 +8,9 @@ import Button from '../../components/button';
 import InputFormSubmit from '../../components/inputFormSubmit';
 import InputFormField from '../../components/inputFormField';
 import LoginTitle from '../../components/loginTitle';
-// // import '../../../css/style.scss';
-// import Navbar from '../../components/navbar';
-// import LessonComponent from '../../components/lesson';
-// import Lesson from '../../Lesson/Lesson';
-// import { LessonContent } from '../../Lesson/LessonContent';
-// import NavbarSpacer from '../../components/navbarSpacer';
-// import Footer from '../../components/footer';
 type Props = {};
 
 type State = {
-  // username: string;
-  // password: string;
   loginFailed: string;
 };
 
@@ -84,13 +75,6 @@ class LoginForm extends React.Component<Props, State> {
                 label="Sign in"
                 onError={this.state.loginFailed}
               />
-              { /*}
-              <div>
-                <div className="login_signin_box">
-                  <input type="submit" value="Sign in" className="login_submit" />
-                </div>
-              </div>
-            */ }
             </form>
           </div>
         </div>

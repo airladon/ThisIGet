@@ -5,21 +5,14 @@ import ReactDOM from 'react-dom';
 import './login.scss';
 
 import Button from '../../components/button';
-import LoginFormBase from '../../components/loginFormBase';
+import InputFormSubmit from '../../components/inputFormSubmit';
+import InputFormField from '../../components/inputFormField';
+import LoginTitle from '../../components/loginTitle';
 
-// // import '../../../css/style.scss';
-// import Navbar from '../../components/navbar';
-// import LessonComponent from '../../components/lesson';
-// import Lesson from '../../Lesson/Lesson';
-// import { LessonContent } from '../../Lesson/LessonContent';
-// import NavbarSpacer from '../../components/navbarSpacer';
-// import Footer from '../../components/footer';
 type Props = {};
 
 type State = {
-  username: string;
-  password: string;
-  loginFailed: boolean;
+  passwordFailed: string;
 };
 
 class LoginForm extends React.Component<Props, State> {
@@ -30,129 +23,83 @@ class LoginForm extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
-    this.state = { username: '', password: '', loginFailed: false };
-
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    this.state = { passwordFailed: '' };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleUsernameChange(event) {
-    this.setState({ username: event.target.value });
-  }
-
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
-  }
 
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData();
-    data.append('username', this.state.username);
-    data.append('password', this.state.password);
-    fetch('/loginuser', {
-      body: data,
-      method: 'post',
-      credentials: 'same-origin',
-      redirect: 'follow',
-    }).then((response) => {
-      if (window.location.href !== response.url) {
-        window.location.replace(response.url);
-      } else {
-        this.setState({ loginFailed: true });
+    const usernameElement = document.getElementById('input_field__username');
+    const emailElement = document.getElementById('input_field__email');
+    const passwordElement = document.getElementById('input_field__password');
+    const repeatPasswordElement = document.getElementById('input_field__repeat_password');
+    if (usernameElement && passwordElement && emailElement && repeatPasswordElement) {
+      console.log(passwordElement.value, repeatPasswordElement.value)
+      if (passwordElement.value !== repeatPasswordElement) {
+        this.setState({ passwordFailed: 'Passwords do not match' });
+        return;
       }
-    });
-  }
-
-  renderLoginFailed() {
-    if (this.state.loginFailed) {
-      return <div className="login_failed">
-        <p>
-          Login Failed: Username or Password incorrect.
-        </p>
-      </div>;
+      data.append('username', usernameElement.value);
+      data.append('email', emailElement.value);
+      data.append('password', passwordElement.value);
+      fetch('/createuser', {
+        body: data,
+        method: 'post',
+        credentials: 'same-origin',
+        redirect: 'follow',
+      }).then((response) => {
+        if (window.location.href !== response.url) {
+          window.location.replace(response.url);
+        } else {
+          this.setState({ createFailed: 'Account creation failed.' });
+        }
+      });
     }
-    return <div></div>;
   }
 
-  // <LoginManagement
-  //       title={Sign in to ItIGet}
-  //       onSubmit=this.handleSubmit
-  //       fields={[
-  //         {
-  //           lable: 'Username or Email:',
-  //           type: 'text',
-  //           value: this.state.username,
-  //           onChange: this.handleUsernameChange,
-  //           autoComplete: 'username',
-  //           onError: 'Login Failed: Username or Password incorrect',
-  //         }
-  //       ]}
-  //       submit="Sign in"
-  //       />
   render() {
     return (
       <div>
-        <LoginFormBase
-          title="Create Account"
-          onSubmit={this.handleSubmit}
-          submit="Create Account"
-          fields={[
-            {
-              label: 'Username or Email:',
-              type: 'text',
-              onChange: this.handleUsernameChange,
-              onError: '',
-              autoComplete: 'username',
-            },
-            {
-              label: 'Password:',
-              type: 'password',
-              onChange: this.handlePasswordChange,
-              onError: this.renderLoginFailed(),
-              autoComplete: 'current-password',
-            },
-          ]}
-        />
-        { /*
         <div className="login_form">
           <div className="login_centering_cell">
-            <LoginTitle title="Create Account in to ItIGet"/>
+          <LoginTitle title="Sign in to ItIGet"/>
             <form onSubmit={this.handleSubmit} id="login_form">
-              <p>
-                <label>
-                  <span className="login_label_text">Username or Email:</span>
-                  <input
-                    type="text"
-                    value={this.state.username}
-                    onChange={this.handleUsernameChange}
-                    autoComplete="username"
-                  />
-                </label>
-              </p>
-              <p>
-                <label>
-                  <span className="login_label_text">Password:</span>
-                  <input
-                    type="password"
-                    value={this.state.password}
-                    onChange={this.handlePasswordChange}
-                    autoComplete="current-password"/>
-                </label>
-              </p>
-              <p>
-                <div className="login_signin_box">
-                  {this.renderLoginFailed()}
-                  <input type="submit" value="Sign in" className="login_submit" />
-                </div>
-              </p>
+              <InputFormField
+                label="Username:"
+                onError=""
+                autoComplete="username"
+                type="text"
+                id="input_field__username"
+              />
+              <InputFormField
+                label="Email:"
+                onError=""
+                autoComplete="email"
+                type="text"
+                id="input_field__email"
+              />
+              <InputFormField
+                label="Password:"
+                onError={this.state.passwordFailed}
+                autoComplete="password"
+                type="password"
+                id="input_field__password"
+              />
+              <InputFormField
+                label="Repeat Password:"
+                onError=""
+                autoComplete="password"
+                type="password"
+                id="input_field__repeat_password"
+              />
+              <InputFormSubmit
+                label="Create Account"
+                onError={this.state.loginFailed}
+              />
             </form>
           </div>
-        </div>
-      */ }
-        <div className="login_centering_cell">
-          <Button href="/" className="login_button login_button_create">Create Accout</Button>
-          <Button href="/" className="login_button login_button_forgot">Forgot Password</Button>
         </div>
       </div>
     );
