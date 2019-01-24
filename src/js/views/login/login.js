@@ -5,28 +5,10 @@ import ReactDOM from 'react-dom';
 import './login.scss';
 
 import Button from '../../components/button';
-// import InputFormSubmit from '../../components/inputFormSubmit';
-// import InputFormField from '../../components/inputFormField';
-// import LoginTitle from '../../components/loginTitle';
-// type Props = {};
 
-// type State = {
-//   loginFailed: string;
-// };
+type Props = {};
 
-class LoginForm extends React.Component {
-  // state: State;
-  // handleUsernameChange: Function;
-  // handlePasswordChange: Function;
-  // handleSubmit: Function;
-
-  // constructor(props: Props) {
-  //   super(props);
-  //   this.state = { loginFailed: '' };
-  //   this.handleSubmit = this.handleSubmit.bind(this);
-  // }
-
-
+class LoginFormFooter extends React.Component<Props> {
   // handleSubmit(event) {
   //   event.preventDefault();
   //   const data = new FormData();
@@ -53,23 +35,20 @@ class LoginForm extends React.Component {
   render() {
     return (
       <div>
-        <div className="input_form__footer"/>
-        <div className="input_form__centering_cell">
-          <Button href="/create" className="input_form__link login_form__link_create">Create Accout</Button>
-          <Button href="/reset" className="input_form__link login_form__link_forgot">Forgot Password</Button>
-        </div>
+        <Button href="/create" className="input_form__link login_form__link_create">Create Accout</Button>
+        <Button href="/reset" className="input_form__link login_form__link_forgot">Forgot Password</Button>
       </div>
     );
   }
 }
 
 const renderlogin = () => {
-  const loginId: HTMLElement | null = document.getElementById('login_page');
+  const loginId: HTMLElement | null = document.getElementById('input_form__footer');
 
   if (loginId instanceof HTMLElement) {
     ReactDOM.render(
       <div>
-      <LoginForm/>
+      <LoginFormFooter/>
       </div>,
       loginId,
     );
