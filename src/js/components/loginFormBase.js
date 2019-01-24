@@ -7,10 +7,10 @@ import LoginTitle from './loginTitle';
 type TypeField = {
   label: string,
   type: string,
-  onChange: Function,
+  // onChange: Function,
   onError: string,
   autoComplete: string,
-  value: string,
+  // value: string,
   stateName: string,
 };
 
@@ -19,6 +19,7 @@ type Props = {
   onSubmit: Function,
   fields: Array<TypeField>,
   submit: string,
+  formValues: {[name: string]: string},
 };
 
 type State = {
@@ -31,11 +32,16 @@ export default class LoginFormBase extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.key = 0;
-    this.state.fields = {};
-    // this.props.fields.forEach((field) => {
-    //   this.state.fields[field.stateName] = '';
-    // })
-    
+    const newState = {};
+    this.props.fields.forEach((field) => {
+      newState[field.stateName] = '';
+    });
+    this.state = { fields: newState };
+  }
+
+  handleFormChange(event) {
+    this.props.formValues[event.target.id] = event.target.value;
+    this.setState({ [event.target.id]: event.target.value });
   }
 
   makeEntries(fields: Array<TypeField>) {
@@ -47,9 +53,10 @@ export default class LoginFormBase extends React.Component<Props, State> {
             <span className="login_label_text">{field.label}</span>
             <input
               type={field.type}
-              onChange={field.onChange}
+              onChange={this.handleFormChange.bind(this)}
               autoComplete={field.autoComplete}
-              value={field.value}
+              value={this.state.fields[field.stateName]}
+              id={field.stateName}
             />
             <div className="login_failed">
               {field.onError}

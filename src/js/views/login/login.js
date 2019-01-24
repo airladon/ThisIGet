@@ -6,7 +6,8 @@ import './login.scss';
 
 import Button from '../../components/button';
 import LoginFormBase from '../../components/loginFormBase';
-
+import InputFormField from '../../components/inputFormField';
+import LoginTitle from '../../components/loginTitle';
 // // import '../../../css/style.scss';
 // import Navbar from '../../components/navbar';
 // import LessonComponent from '../../components/lesson';
@@ -17,8 +18,8 @@ import LoginFormBase from '../../components/loginFormBase';
 type Props = {};
 
 type State = {
-  username: string;
-  password: string;
+  // username: string;
+  // password: string;
   loginFailed: boolean;
 };
 
@@ -32,36 +33,42 @@ class LoginForm extends React.Component<Props, State> {
     super(props);
     this.state = { username: '', password: '', loginFailed: false };
 
-    this.handleUsernameChange = this.handleUsernameChange.bind(this);
-    this.handlePasswordChange = this.handlePasswordChange.bind(this);
+    // this.handleUsernameChange = this.handleUsernameChange.bind(this);
+    // this.handlePasswordChange = this.handlePasswordChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  handleUsernameChange(event) {
-    this.setState({ username: event.target.value });
-  }
+  // handleUsernameChange(event) {
+  //   this.setState({ username: event.target.value });
+  // }
 
-  handlePasswordChange(event) {
-    this.setState({ password: event.target.value });
-  }
+  // handlePasswordChange(event) {
+  //   this.setState({ password: event.target.value });
+  // }
 
   handleSubmit(event) {
     event.preventDefault();
     const data = new FormData();
-    data.append('username', this.state.username);
-    data.append('password', this.state.password);
-    fetch('/loginuser', {
-      body: data,
-      method: 'post',
-      credentials: 'same-origin',
-      redirect: 'follow',
-    }).then((response) => {
-      if (window.location.href !== response.url) {
-        window.location.replace(response.url);
-      } else {
-        this.setState({ loginFailed: true });
-      }
-    });
+    const usernameElement = document.getElementById('input_field__username');
+    const passwordElement = document.getElementById('input_field__password');
+    if (usernameElement && passwordElement) {
+      // data.append('username', this.state.username);
+    // data.append('password', this.state.password);
+      data.append('username', usernameElement.value);
+      data.append('password', passwordElement.value);
+      fetch('/loginuser', {
+        body: data,
+        method: 'post',
+        credentials: 'same-origin',
+        redirect: 'follow',
+      }).then((response) => {
+        if (window.location.href !== response.url) {
+          window.location.replace(response.url);
+        } else {
+          this.setState({ loginFailed: true });
+        }
+      });
+    }
   }
 
   renderLoginFailed() {
@@ -93,30 +100,57 @@ class LoginForm extends React.Component<Props, State> {
   render() {
     return (
       <div>
+        <div className="login_form">
+          <div className="login_centering_cell">
+          <LoginTitle title="Sign in to ItIGet"/>
+            <form onSubmit={this.handleSubmit} id="login_form">
+              <InputFormField
+                label="Username or Email:"
+                onError={() => {}}
+                autoComplete="username"
+                type="text"
+                id="input_field__username"
+              />
+              <InputFormField
+                label="Password:"
+                onError={() => {}}
+                autoComplete="password"
+                type="password"
+                id="input_field__password"
+              />
+              <div>
+                <div className="login_signin_box">
+                  <input type="submit" value="Sign in" className="login_submit" />
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        { /*
         <LoginFormBase
           title="Sign in to ItIGet"
           onSubmit={this.handleSubmit}
           submit="Sign In"
+          formValues={this.state}
           fields={[
             {
               label: 'Username or Email:',
               type: 'text',
-              onChange: this.handleUsernameChange,
               onError: '',
               autoComplete: 'username',
-              value: this.state.username,
+              stateName: 'username',
             },
             {
               label: 'Password:',
               type: 'password',
-              onChange: this.handlePasswordChange,
-              onError: this.renderLoginFailed(),
+              // onError: this.renderLoginFailed(),
+              onError: this.renderLoginFailed,
               autoComplete: 'current-password',
-              value: this.state.password,
+              stateName: 'password',
             },
           ]}
         />
-        { /*
+        
         <div className="login_form">
           <div className="login_centering_cell">
             <LoginTitle title="Create Account in to ItIGet"/>
