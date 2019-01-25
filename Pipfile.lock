@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "f77c2a95bd51114d7e1695e61117fec50146204f27694be330a678221a98cd6e"
+            "sha256": "11851e53678a586c1ec4760c559fa929d8a3643ae89b9708aa185bfa45b9e576"
         },
         "host-environment-markers": {
             "implementation_name": "cpython",
@@ -88,6 +88,10 @@
         "pycparser": {
             "hashes": [],
             "version": "==2.19"
+        },
+        "pyjwt": {
+            "hashes": [],
+            "version": "==1.7.1"
         },
         "six": {
             "hashes": [],
