@@ -11,9 +11,10 @@
 
 from flask import render_template, flash, redirect, url_for
 from app import app, db
-from app.forms import LoginForm, CreateAccountForm
+from app.forms import LoginForm, CreateAccountForm, ResetPasswordForm
 from flask_login import current_user, login_user, logout_user
 from app.models import User
+from app.email import send_password_reset_email, send_password_reset_email_test
 import sys
 # import pdb
 
@@ -147,12 +148,22 @@ def create():
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
-@app.route('/reset')
-def reset():
-    if current_user.is_authenticated:
-        return redirect('/')
-    return render_template('login.html')
-
+@app.route('/reset_password_request', methods=['GET', 'POST'])
+def reset_password():
+    # css = '/static/dist/resetPasswordRequest.css'
+    # js = '/static/dist/resetPasswordRequest.js'
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('index'))
+    # form = ResetPasswordForm()
+    # if form.validate_on_submit():
+    #     user = User.query.filter_by(email=form.email.data).first()
+    #     if user:
+    #         send_password_reset_email(user)
+    #     flash('Check your email for the instructions to reset your password')
+    #     return redirect(url_for('login'))
+    # return render_template('resetPasswordRequest.html', form=form, css=css, js=js)
+    send_password_reset_email_test(User.query.filter_by(email='test@gmail.com').first())
+    render_template('home.html')
 
 @app.route('/logout')
 def logout():

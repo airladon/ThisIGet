@@ -73,6 +73,7 @@ function entryPoints(buildMode) {
     main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
     login: './src/js/views/login/login',
     createAccount: './src/js/views/createAccount/createAccount',
+    resetPasswordRequest: './src/js/views/resetPasswordRequest/resetPasswordRequest',
     reset: './src/js/views/login/reset',
   };
 

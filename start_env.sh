@@ -59,6 +59,7 @@ if [ $1 = 'prod' ];
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     --env PORT=$CONTAINTER_PORT \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     devenv-$1
 else
   docker run -it --rm \
@@ -78,6 +79,7 @@ else
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     devenv-$1 $CMD

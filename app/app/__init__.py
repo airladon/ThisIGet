@@ -7,6 +7,14 @@ from flask_mail import Mail
 
 app = Flask(__name__)
 app.config.from_object(Config)
+app.config.update({
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 465,
+    "MAIL_USE_TLS": False,
+    "MAIL_USE_SSL": True,
+    "MAIL_USERNAME": 'noreply@thisiget.com',
+    "MAIL_PASSWORD": 'qL2FC4pnvekA0s5gRHf3'
+})
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)

@@ -5,6 +5,9 @@ import bcrypt
 import hashlib
 import base64
 from flask_login import UserMixin
+from time import time
+import jwt
+from app import app
 
 
 class User(UserMixin, db.Model):
@@ -42,6 +45,20 @@ class User(UserMixin, db.Model):
     def prep_password(self, password):
         return base64.b64encode(
             hashlib.sha512(password.encode('utf-8')).digest())
+
+    def get_reset_password_token(self, expires_in=600):
+        return jwt.encode(
+            {'reset_password': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_reset_password_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['reset_password']
+        except:
+            return
+        return User.query.get(id)
 
 
 @login.user_loader
