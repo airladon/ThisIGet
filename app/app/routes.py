@@ -148,7 +148,7 @@ def create():
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
-@app.route('/reset_password_request', methods=['GET', 'POST'])
+@app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password():
     css = '/static/dist/resetPasswordRequest.css'
     js = '/static/dist/resetPasswordRequest.js'
@@ -159,11 +159,10 @@ def reset_password():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Check your email to reset your password')
-        return redirect(url_for('login'))
+        flash('Email sent! Check it to reset password.')
+        return redirect(url_for('reset_password'))
     return render_template('resetPasswordRequest.html', form=form, css=css, js=js)
-    # send_password_reset_email_test(User.query.filter_by(email='test@gmail.com').first())
-    # render_template('home.html')
+
 
 @app.route('/logout')
 def logout():
