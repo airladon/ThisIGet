@@ -42,4 +42,4 @@ class CreateAccountForm(FlaskForm):
 
 class ResetPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Create Account')
+    submit = SubmitField('Reset Password')

@@ -1,4 +1,4 @@
 // // @flow
 
-import './resetPassword.scss';
+import './resetPasswordRequest.scss';
 
