@@ -108,6 +108,23 @@ $width: 250px;
   background-color: color('site', 'safe', 'light');
 }
 
+.input_form__submit_ok_message_container {
+  text-align: left;
+  font-size: 0.9em;
+  color: color('site', 'text');
+  bottom: -20px;
+  width: $width;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.input_form__submit_ok_message_text {
+  margin-bottom: 10px;
+  display: block;
+}
+
 .input_form__submit_error_message {
   position: absolute;
   text-align: center;

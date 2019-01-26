@@ -114,7 +114,7 @@ def login():
         #     form.username.data, form.remember_me.data))
         user = User.query.filter_by(username=form.username.data).first()
         if user is None or not user.check_password(form.password.data):
-            flash('Username or password is incorrect')
+            flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
         login_user(user, True)
         return redirect(url_for('home'))
@@ -143,7 +143,7 @@ def create():
         user.set_password(form.password.data)
         db.session.add(user)
         db.session.commit()
-        flash('You are now a registered user!')
+        flash('You are now a registered user!', 'ok')
         return redirect(url_for('login'))
     return render_template('createAccount.html', form=form, css=css, js=js)
 
@@ -159,9 +159,12 @@ def reset_password():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash('Email sent! Check it to reset password.')
+        flash(f'An email has been sent to {form.email.data}.', 'ok')
+        flash(f'Click the link inside it to reset your password.', 'ok')
         return redirect(url_for('reset_password'))
-    return render_template('resetPasswordRequest.html', form=form, css=css, js=js)
+    return render_template(
+        'resetPasswordRequest.html', form=form, css=css, js=js,
+    )
 
 
 @app.route('/logout')

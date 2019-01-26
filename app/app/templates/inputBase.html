@@ -21,7 +21,7 @@
                 {% block formfields %}{% endblock %}
                 
                 <div class="input_form__submit_container">
-                  {% with messages = get_flashed_messages() %}
+                  {% with messages = get_flashed_messages(category_filter=["error"]) %}
                     {% if messages %}
                         {% for message in messages %}
                           <span class="input_form__submit_error_message">{{ message }}</span>
@@ -29,6 +29,15 @@
                     {% endif %}
                   {% endwith %}
                   {{ form.submit(class_="input_form__submit_button") }}
+                  <div class="input_form__submit_ok_message_container">
+                    {% with messages = get_flashed_messages(category_filter=["ok"]) %}
+                      {% if messages %}
+                        {% for message in messages %}
+                          <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                        {% endfor %}
+                      {% endif %}
+                    {% endwith %}
+                  </div>
                 </div>
             </form>
         </div>
