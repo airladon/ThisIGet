@@ -17,6 +17,7 @@ from flask_login import current_user, login_user, logout_user
 from app.models import User
 from app.email import send_password_reset_email
 import sys
+import datetime
 # import pdb
 
 
@@ -147,16 +148,22 @@ def create():
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
+        user.signed_up_on = datetime.datetime.now()
         db.session.add(user)
         db.session.commit()
         flash('You are now a registered user!', 'ok')
-        return redirect(f'{url_for(login)}/{user.username}')
+        return redirect(f'login/{user.username}')
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
 def confirm_account(token):
     user = User.verify_reset_password_token(token)
+    if not user:
+        return redirect(url_for('index'))
+    user.confirmed = True
+    user.confirmed_on = datetime.datetime.now()
+    return redirect(f'login/{user.username}')
 
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
