@@ -74,7 +74,7 @@ function entryPoints(buildMode) {
     login: './src/js/views/login/login',
     createAccount: './src/js/views/createAccount/createAccount',
     resetPasswordRequest: './src/js/views/resetPasswordRequest/resetPasswordRequest',
-    reset: './src/js/views/login/reset',
+    resetPassword: './src/js/views/resetPassword/resetPassword',
   };
 
   const lessons = getAllPaths(
