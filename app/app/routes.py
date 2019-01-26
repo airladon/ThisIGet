@@ -104,12 +104,16 @@ def loginuser():
 
 
 @app.route('/login', methods=['GET', 'POST'])
-def login():
+@app.route('/login/<username>', methods=['GET', 'POST'])
+def login(username=''):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
     css = '/static/dist/login.css'
     js = '/static/dist/login.js'
     form = LoginForm()
+    if username:
+        user = User.query.filter_by(username=username).first()
+        form = LoginForm(obj=user)
     if form.validate_on_submit():
         # flash('Login requested for user {}, remember_me={}'.format(
         #     form.username.data, form.remember_me.data))
@@ -119,7 +123,8 @@ def login():
             return redirect(url_for('login'))
         login_user(user, True)
         return redirect(url_for('home'))
-    return render_template('login.html', form=form, css=css, js=js)
+    return render_template(
+        'login.html', form=form, css=css, js=js)
 
 
 # @app.route('/loginDeprecated')
@@ -145,13 +150,14 @@ def create():
         db.session.add(user)
         db.session.commit()
         flash('You are now a registered user!', 'ok')
-        return redirect(url_for('login'))
+        return redirect(f'{url_for(login)}/{user.username}')
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
 def confirm_account(token):
     user = User.verify_reset_password_token(token)
+
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password_request():
@@ -186,7 +192,8 @@ def reset_password(token):
         user.set_password(form.password.data)
         db.session.commit()
         flash('Your password has been reset.', 'ok')
-        return redirect(url_for('login'))
+        flash('You can now login with your new password.', 'ok')
+        return redirect(f'login/{user.username}')
     return render_template('resetPassword.html', form=form, css=css, js=js)
 
 
