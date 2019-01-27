@@ -24,6 +24,16 @@ $width: 250px;
   -webkit-box-shadow: 0 5px 7px #333;
   -moz-box-shadow: 0 5px 7px #333;
   box-shadow: 0 5px 7px #333;
+  position: relative;
+}
+
+.input_form__title__logo_link {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1;
 }
 
 .input_form__title__logo_text_container {
@@ -81,6 +91,7 @@ $width: 250px;
   font-size: 0.7em;
   color: color('site', 'warning', 'light');
   top: 56px;
+  left: 0;
 }
 
 // ///////////////////////////////////////////////////////
@@ -105,6 +116,23 @@ $width: 250px;
 
 .input_form__submit_button:hover {
   background-color: color('site', 'safe', 'light');
+}
+
+.input_form__submit_ok_message_container {
+  text-align: left;
+  font-size: 0.9em;
+  color: color('site', 'text');
+  bottom: -20px;
+  width: $width;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 20px;
+}
+
+.input_form__submit_ok_message_text {
+  margin-bottom: 10px;
+  display: block;
 }
 
 .input_form__submit_error_message {

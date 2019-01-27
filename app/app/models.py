@@ -60,6 +60,20 @@ class User(UserMixin, db.Model):
             return
         return User.query.get(id)
 
+    def get_account_confirmation_token(self, expires_in=600):
+        return jwt.encode(
+            {'account_confirmation': self.id, 'exp': time() + expires_in},
+            app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
+
+    @staticmethod
+    def verify_account_confirmation_token(token):
+        try:
+            id = jwt.decode(token, app.config['SECRET_KEY'],
+                            algorithms=['HS256'])['account_confirmation']
+        except:
+            return
+        return User.query.get(id)
+
 
 @login.user_loader
 def load_user(id):

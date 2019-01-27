@@ -40,6 +40,27 @@ class CreateAccountForm(FlaskForm):
             raise ValidationError('Password must be at least 8 characters')
 
 
-class ResetPasswordForm(FlaskForm):
+class ResetPasswordRequestForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired(), Email()])
-    submit = SubmitField('Create Account')
+    submit = SubmitField('Reset Password')
+
+
+class ResetPasswordForm(FlaskForm):
+    password = PasswordField(
+        'Password: ',
+        validators=[DataRequired()]
+    )
+    repeat_password = PasswordField(
+        'Repeat Password: ',
+        validators=[DataRequired(), EqualTo('password')]
+    )
+
+    submit = SubmitField('Reset Password')
+
+    def validate_password(self, password):
+        if len(password.data) < 8:
+            raise ValidationError('Password must be at least 8 characters')
+
+
+class ConfirmAccountMessageForm(FlaskForm):
+    submit = SubmitField('Resend Confirmation Email')

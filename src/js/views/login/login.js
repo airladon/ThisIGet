@@ -36,7 +36,7 @@ class LoginFormFooter extends React.Component<Props> {
     return (
       <div>
         <Button href="/createAccount" className="input_form__link login_form__link_create">Create Accout</Button>
-        <Button href="/reset" className="input_form__link login_form__link_forgot">Forgot Password</Button>
+        <Button href="/resetPasswordRequest" className="input_form__link login_form__link_forgot">Forgot Password</Button>
       </div>
     );
   }
