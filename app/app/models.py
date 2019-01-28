@@ -19,6 +19,7 @@ class User(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
     ratings = db.relationship('Rating', backref='user', lazy='dynamic')
+    last_login = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

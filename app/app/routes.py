@@ -117,8 +117,6 @@ def login(username=''):
         user = User.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        # flash('Login requested for user {}, remember_me={}'.format(
-        #     form.username.data, form.remember_me.data))
         user = User.query.filter(
             (User.username == form.username_or_email.data) |
             (User.email == form.username_or_email.data)
@@ -128,6 +126,8 @@ def login(username=''):
             return redirect(url_for('login'))
         if user.confirmed:
             login_user(user, True)
+            user.last_login = datetime.datetime.now()
+            db.session.commit()
             return redirect(url_for('home'))
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
