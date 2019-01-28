@@ -18,6 +18,7 @@ from app.models import User
 from app.email import send_password_reset_email, send_confirm_account_email
 import sys
 import datetime
+# from flask_sqlalchemy import or_
 # import pdb
 
 
@@ -118,7 +119,10 @@ def login(username=''):
     if form.validate_on_submit():
         # flash('Login requested for user {}, remember_me={}'.format(
         #     form.username.data, form.remember_me.data))
-        user = User.query.filter_by(username=form.username.data).first()
+        user = User.query.filter(
+            (User.username == form.username.data) |
+            (User.email == form.username.data)
+        ).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -129,16 +133,6 @@ def login(username=''):
             return redirect(f'confirmAccountEmailSent/{user.username}')
     return render_template(
         'login.html', form=form, css=css, js=js)
-
-
-# @app.route('/loginDeprecated')
-# def login():
-#     if current_user.is_authenticated:
-#         return redirect('/')
-#     return render_template(
-#         'login.html',
-#         css='/static/dist/login.css',
-#         js='/static/dist/login.js')
 
 
 @app.route('/createAccount', methods=['GET', 'POST'])
