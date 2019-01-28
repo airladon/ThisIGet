@@ -17,6 +17,15 @@
             <div class="input_form__title__text">
               {% block formTitle %}{% endblock %}
             </div>
+            <div class="input_form__submit_ok_message_container">
+              {% with messages = get_flashed_messages(category_filter=["before"]) %}
+                {% if messages %}
+                  {% for message in messages %}
+                    <span class="input_form__submit_ok_message_text">{{ message }}</span>
+                  {% endfor %}
+                {% endif %}
+              {% endwith %}
+            </div>
             <form action="" method="post" novalidate>
                 {{ form.hidden_tag() }}
                 {% block formfields %}{% endblock %}

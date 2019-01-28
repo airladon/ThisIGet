@@ -122,8 +122,11 @@ def login(username=''):
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
-        login_user(user, True)
-        return redirect(url_for('home'))
+        if user.confirmed:
+            login_user(user, True)
+            return redirect(url_for('home'))
+        else:
+            return redirect(f'confirmAccountEmailSent/{user.username}')
     return render_template(
         'login.html', form=form, css=css, js=js)
 
@@ -163,16 +166,17 @@ def confirm_account_message(username):
     css = '/static/dist/confirmAccountMessage.css'
     js = '/static/dist/confirmAccountMessage.js'
     form = ConfirmAccountMessageForm()
+    user = User.query.filter_by(username=username).first()
+    if user is None:
+            flash('User does not exist', 'error')
+            return redirect(url_for('create'))
     if form.validate_on_submit():
-        user = User.query.filter_by(username=username).first()
-        if user:
-            send_confirm_account_email(user)
-            return redirect()
+        send_confirm_account_email(user)
+        redirect(f'confirmAccountEmailSent/{user.username}')
+    flash('You need to confirm your email address before you account becomes active.', 'before')
+    flash(f'An email has been sent to {user.email}. Click the link inside it to confirm your email and finish account registration.', 'before')
 
-    flash('You need to confirm you email address before you account becomes active.', 'ok')
-    flash(f'An email will be sent to {user.email}. Click the link inside it to confirm your email and finish account registration.', 'ok')
-
-    render_template('confirmAccountMessage.html', form=form, js=js, css=css)
+    return render_template('confirmAccountMessage.html', form=form, js=js, css=css)
 
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
@@ -180,10 +184,14 @@ def confirm_account(token):
     user = User.verify_account_confirmation_token(token)
     if not user:
         return redirect(url_for('index'))
+    if user.confirmed:
+        flash('Account has already been confirmed. You can now log in.', 'before')
+        return redirect(f'login/{user.username}')
     user.confirmed = True
     user.confirmed_on = datetime.datetime.now()
-    flash('Thankyou for confirming your email', 'ok')
-    flash('You can now login to your account.', 'ok')
+    db.session.commit()
+    flash('Thankyou for confirming your email', 'before')
+    flash('You can now login to your account.', 'before')
     return redirect(f'login/{user.username}')
 
 
