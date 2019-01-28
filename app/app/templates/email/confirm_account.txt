@@ -1,0 +1,11 @@
+Dear {{ user.username }},
+
+To verfiy your email and finish the registration of your new account click the following link:
+
+{{ url_for('confirm_account', token=token, _external=True) }}
+
+If you have not requested an account simply ignore this message.
+
+Sincerely,
+
+The ThisIGet Team

@@ -8,3 +8,4 @@ app/app/static/dist
 node_modules/
 reports
 src/figureone
+.pytest_cache/
