@@ -3,6 +3,7 @@ from app import mail
 from flask import render_template
 from app import app
 
+
 def send_email(subject, sender, recipients, text_body, html_body):
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
@@ -30,6 +31,7 @@ def send_confirm_account_email(user):
                                          user=user, token=token),
                html_body=render_template('email/confirm_account.html',
                                          user=user, token=token))
+
 # def send_password_reset_email_test(user):
 #     token = user.get_reset_password_token()
 #     send_email('ThisIGet Account Password Reset',
