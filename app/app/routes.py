@@ -120,8 +120,8 @@ def login(username=''):
         # flash('Login requested for user {}, remember_me={}'.format(
         #     form.username.data, form.remember_me.data))
         user = User.query.filter(
-            (User.username == form.username.data) |
-            (User.email == form.username.data)
+            (User.username == form.username_or_email.data) |
+            (User.email == form.username_or_email.data)
         ).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')

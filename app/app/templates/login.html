@@ -7,10 +7,10 @@
 {% block formfields %}
     <div class="input_form__field">
         <div class="input_form__field_label">
-            {{ form.username.label }}
+            {{ form.username_or_email.label }}
         </div>
-        {{ form.username(size=32, class_="input_form__field_entry") }}
-        {% for error in form.username.errors %}
+        {{ form.username_or_email(size=64, class_="input_form__field_entry") }}
+        {% for error in form.username_or_email.errors %}
             <span class="input_form__field_error_message">{{ error }}</span>
         {% endfor %}
     </div>
