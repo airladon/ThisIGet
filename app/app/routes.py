@@ -173,7 +173,7 @@ def confirm_account_message(username):
     if form.validate_on_submit():
         send_confirm_account_email(user)
         redirect(f'confirmAccountEmailSent/{user.username}')
-    flash('You need to confirm your email address before you account becomes active.', 'before')
+    flash('You need to confirm your email address before your account becomes active.', 'before')
     flash(f'An email has been sent to {user.email}. Click the link inside it to confirm your email and finish account registration.', 'before')
 
     return render_template('confirmAccountMessage.html', form=form, js=js, css=css)
@@ -181,9 +181,17 @@ def confirm_account_message(username):
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
 def confirm_account(token):
-    user = User.verify_account_confirmation_token(token)
-    if not user:
+    result = User.verify_account_confirmation_token(token)
+    print(result)
+    if result['status'] == 'fail':
         return redirect(url_for('index'))
+    user = result['user']
+    if result['status'] == 'expired':
+        flash('Email verification time elapsed.', 'after')
+        flash('You have 30 minutes to verify your account after the email has been sent.', 'after')
+        flash('Just now, another email has been sent.', 'after')
+        send_confirm_account_email(user)
+        return redirect(f'confirmAccountEmailSent/{user.username}')
     if user.confirmed:
         flash('Account has already been confirmed. You can now log in.', 'before')
         return redirect(f'login/{user.username}')
@@ -206,8 +214,8 @@ def reset_password_request():
         user = User.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
-        flash(f'An email has been sent to {form.email.data}.', 'ok')
-        flash(f'Click the link inside it to reset your password.', 'ok')
+        flash(f'An email has been sent to {form.email.data}.', 'after')
+        flash(f'Click the link inside it to reset your password.', 'after')
         return redirect(url_for('reset_password_request'))
     return render_template(
         'resetPasswordRequest.html', form=form, css=css, js=js,
@@ -227,8 +235,8 @@ def reset_password(token):
     if form.validate_on_submit():
         user.set_password(form.password.data)
         db.session.commit()
-        flash('Your password has been reset.', 'ok')
-        flash('You can now login with your new password.', 'ok')
+        flash('Your password has been reset.', 'after')
+        flash('You can now login with your new password.', 'after')
         return redirect(f'login/{user.username}')
     return render_template('resetPassword.html', form=form, css=css, js=js)
 

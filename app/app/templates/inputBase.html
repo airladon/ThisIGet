@@ -40,7 +40,7 @@
                   {% endwith %}
                   {{ form.submit(class_="input_form__submit_button") }}
                   <div class="input_form__submit_ok_message_container">
-                    {% with messages = get_flashed_messages(category_filter=["ok"]) %}
+                    {% with messages = get_flashed_messages(category_filter=["after"]) %}
                       {% if messages %}
                         {% for message in messages %}
                           <span class="input_form__submit_ok_message_text">{{ message }}</span>

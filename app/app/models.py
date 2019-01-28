@@ -46,7 +46,7 @@ class User(UserMixin, db.Model):
         return base64.b64encode(
             hashlib.sha512(password.encode('utf-8')).digest())
 
-    def get_reset_password_token(self, expires_in=600):
+    def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(
             {'reset_password': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
@@ -56,11 +56,11 @@ class User(UserMixin, db.Model):
         try:
             id = jwt.decode(token, app.config['SECRET_KEY'],
                             algorithms=['HS256'])['reset_password']
-        except:
+        except Exception:
             return
         return User.query.get(id)
 
-    def get_account_confirmation_token(self, expires_in=600):
+    def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
             {'account_confirmation': self.id, 'exp': time() + expires_in},
             app.config['SECRET_KEY'], algorithm='HS256').decode('utf-8')
@@ -70,9 +70,26 @@ class User(UserMixin, db.Model):
         try:
             id = jwt.decode(token, app.config['SECRET_KEY'],
                             algorithms=['HS256'])['account_confirmation']
-        except:
-            return
-        return User.query.get(id)
+        except jwt.ExpiredSignatureError:
+            id = jwt.decode(
+                token,
+                app.config['SECRET_KEY'],
+                algorithms=['HS256'],
+                options={'verify_exp': False}
+            )['account_confirmation']
+            print(f'expired but id is: {id}')
+            return {
+                'status': 'expired',
+                'user': User.query.get(id),
+            }
+        except Exception:
+            return {
+                'status': 'fail'
+            }
+        return {
+            'status': 'ok',
+            'user': User.query.get(id),
+        }
 
 
 @login.user_loader
