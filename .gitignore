@@ -9,3 +9,4 @@ node_modules/
 reports
 src/figureone
 .pytest_cache/
+env/
