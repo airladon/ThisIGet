@@ -81,6 +81,7 @@ else
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
+    --net thisigetnet \
     -p $HOST_PORT:$CONTAINTER_PORT \
     devenv-$1 $CMD
 fi
