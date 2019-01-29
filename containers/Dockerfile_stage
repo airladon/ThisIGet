@@ -13,13 +13,8 @@ WORKDIR /opt/app
 RUN mkdir app
 RUN mkdir tests
 
-RUN pip3 install pipenv
-
-ADD Pipfile .
-ADD Pipfile.lock .
-
-RUN pipenv install --deploy --system
-
+ADD requirements.txt .
+RUN pip install --no-cache-dir -q -r requirements.txt
 
 
 

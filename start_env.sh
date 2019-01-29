@@ -35,7 +35,6 @@ if [ $1 = "dev" ];
 then
   HOST_PORT=5002
   CONTAINTER_PORT=5000
-  CMD=/opt/app/start.sh
 fi
 
 if [ $1 = 'dev-server' ];
@@ -43,7 +42,7 @@ if [ $1 = 'dev-server' ];
   HOST_PORT=5003
   CONTAINTER_PORT=5000
   DOCKERFILE="Dockerfile_dev"
-  CMD="/opt/app/start.sh /opt/app/dev-server.sh"
+  CMD=/opt/app/dev-server.sh
 fi
 
 cp containers/$DOCKERFILE Dockerfile

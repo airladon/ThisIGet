@@ -7,4 +7,6 @@ exclude =
     node_modules,
     containers,
     update_paths.py,
+    env
+    migrations
 max-complexity = 10

@@ -10,12 +10,9 @@ FROM python:3.7.2-slim
 WORKDIR /opt/app
 
 
-RUN pip3 install pipenv
+ADD requirements.txt .
+RUN pip install --no-cache-dir -q -r requirements.txt
 
-ADD Pipfile .
-ADD Pipfile.lock .
-
-RUN pipenv install --deploy --system
 
 ADD containers/prod/Procfile .
 ADD containers/prod/runtime.txt .

@@ -117,16 +117,16 @@ To install packages, `package.json` and `package-lock.json` files are included, 
 >> If it still doesn't work, then do this
 `sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
 
-
-#### Install PipEnv (if not already installed on local machine)
+#### PipEnv
+##### Install PipEnv (if not already installed on local machine)
 * `brew install pipenv`
 
-#### Setup virtual environment and install packages
+##### Setup virtual environment and install packages
 * `pipenv --python 3.7.1`
 * `pipenv shell`
 * `pipenv install -d`
 
-#### Update packages
+##### Update packages
 This is only if python packages need to be updated. This will update both production and dev packages.
 
 To see which packages are out of date:
@@ -138,6 +138,13 @@ Update version numbers in Pipfile
 
 If Pipfile.lock is out of date, then use this to bring it up to date.
 `pipenv lock`
+
+#### Virtual env
+`python3 -m venv env`
+`source env/bin/activate`
+`pip install -r requirements.txt`
+Start sublime after starting the virtual environment
+
 
 #### Update python version
 Change python version number in

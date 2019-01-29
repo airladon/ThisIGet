@@ -16,11 +16,8 @@ ADD package-lock.json .
 RUN npm install
 
 # Install Python packages
-RUN pip3 install pipenv
-ADD Pipfile .
-ADD Pipfile.lock .
-RUN pipenv install --dev
-# ONBUILD RUN set -ex && pipenv install -d --system
+ADD requirements.txt .
+RUN pip install --no-cache-dir -q -r requirements.txt
 
 
 # This is the folder that will be shared with the docker host machine
@@ -71,5 +68,3 @@ RUN npm install figureone@0.0.20
 
 ADD containers/dev/start.sh .
 ENTRYPOINT ["bash"]
-# ENTRYPOINT pipenv shell && /bin/bash
-# ENTRYPOINT ["./start.sh"]
