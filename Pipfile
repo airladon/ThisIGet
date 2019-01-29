@@ -18,6 +18,7 @@ bcrypt = "==3.1.6"
 Flask-Login = "==0.4.1"
 Flask-Mail = "==0.9.1"
 PyJWT = "==1.7.1"
+psycopg2 = "==2.7.7"
 
 [requires]
 python_version = "3.7.2"
