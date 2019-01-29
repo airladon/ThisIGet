@@ -14,7 +14,7 @@ class Config(object):
     MAIL_PORT = 465
     MAIL_USE_TLS = False
     MAIL_USE_SSL = True
-    MAIL_SERVER = os.environ['MAIL_SERVER']
-    MAIL_USERNAME = os.environ['MAIL_USERNAME']
-    MAIL_PASSWORD = os.environ['MAIL_PASSWORD']
-    MAIL_SENDER = os.environ['MAIL_SENDER']
+    MAIL_SERVER = os.environ.get('MAIL_SERVER') or 'smtp.gmail.com'
+    MAIL_USERNAME = os.environ.get('MAIL_USERNAME') or 'noreply@thisiget.com'
+    MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD')
+    MAIL_SENDER = os.environ.get('MAIL_SENDER') or 'noreply@thisiget.com'
