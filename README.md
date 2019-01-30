@@ -76,9 +76,30 @@ Automatic environment that runs nginx and hosts app at `localhost:5000`
 # Local Development Environment
 
 ### Local database
-`psql`
-`CREATE DATABASE thisiget_local`
+Create local database
 
+`psql postgres`
+
+```
+DROP DATABASE thisiget_local;
+CREATE DATABASE thisiget_local;
+CREATE ROLE tig WITH LOGIN PASSWORD 'asdfasdf';
+\c thisiget_local
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tig;
+```
+
+ALTER ROLE tig CREATEDB;
+DROP ROLE tig;
+
+Exit psql
+
+`flask db upgrade`
+
+
+```
+DROP DATABASE thisiget_local;
+DELETE from users where id>0;
+```
 
 ### Environment variables
 Required
@@ -93,6 +114,7 @@ export MAIL_SERVER=smtp.gmail.com
 export MAIL_USERNAME=noreply@thisiget.com
 export MAIL_SENDER=noreply@thisiget.com
 
+export DATABASE_URL=postgresql://host.docker.internal/thisiget_local
 
 Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
 
