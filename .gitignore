@@ -1,6 +1,5 @@
 __pycache__
 Dockerfile
-requirements.txt
 .webassets-cache/
 build_flask_gen/
 app/app/static/build

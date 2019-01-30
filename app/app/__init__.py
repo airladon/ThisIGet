@@ -4,7 +4,6 @@ from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
-import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -27,4 +26,3 @@ login = LoginManager(app)
 mail = Mail(app)
 
 from app import routes, models  # noqa
-from app import initdb
