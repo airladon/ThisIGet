@@ -27,22 +27,22 @@ export default class Navbar extends React.Component
 
     const handleVisibilityChange = () => {
       this.checkIsLoggedIn();
-    }
+    };
     window.addEventListener('focus', handleVisibilityChange);
 
     this.checkIsLoggedIn();
   }
 
-  checkIsLoggedIn(){
+  checkIsLoggedIn() {
     fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
       .then((resonse) => {
         if (!resonse.ok) {
-          throw Error(resonse.statusText)
+          throw Error(resonse.statusText);
         }
-        return resonse.json()
+        return resonse.json();
       })
       .then(res => this.setLogin(res))
-      .catch(error => {});
+      .catch(() => {});
   }
 
   setLogin(login: number) {

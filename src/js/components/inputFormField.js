@@ -22,6 +22,7 @@ export default class InputFormField extends React.Component<Props, State> {
     this.state = { value: '' };
   }
 
+  // $FlowFixMe
   handleFormChange(event) {
     this.setState({ value: event.target.value });
   }

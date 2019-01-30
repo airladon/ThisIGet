@@ -8,7 +8,6 @@ from flask_login import UserMixin
 from time import time
 import jwt
 from app import app
-import pdb
 
 
 class Users(UserMixin, db.Model):
@@ -38,7 +37,6 @@ class Users(UserMixin, db.Model):
         a = bcrypt.hashpw(
             self.prep_password(password),
             bcrypt.gensalt(14))
-        print(f'asdfasdf {a}')
         self.password_hash = a
 
     def check_password(self, password):
@@ -85,7 +83,6 @@ class Users(UserMixin, db.Model):
                 algorithms=['HS256'],
                 options={'verify_exp': False}
             )['account_confirmation']
-            print(f'expired but id is: {id}')
             return {
                 'status': 'expired',
                 'user': Users.query.get(id),

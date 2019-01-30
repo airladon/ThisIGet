@@ -284,3 +284,15 @@ DROP TABLE IF EXISTS user
 
 ALTER TABLE new_user RENAME TO user
 
+
+Python development:
+----------------------
+Database:                   DATABASE_URL
+  SQLite3                   os.path.join(basedir, 'app.db')
+  Postgres local            postgresql://tig@host.docker.internal/thisiget_local
+  Postgres-dev on heroku    
+  Postgres on heroku
+
+Email:                      
+  local
+  noreply@thisiget
