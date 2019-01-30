@@ -75,11 +75,16 @@ Automatic environment that runs nginx and hosts app at `localhost:5000`
 
 # Local Development Environment
 
+### Local database
+`psql`
+`CREATE DATABASE thisiget_local`
+
+
 ### Environment variables
 Required
 export MAIL_PASSWORD=
 export SECRET_KEY=
-export DATABASE_URL=
+export DATABASE_URL="postgresql://localhost/thisiget_local"
 
 Optional
 export HEROKU_TOKEN=`heroku auth:token`
