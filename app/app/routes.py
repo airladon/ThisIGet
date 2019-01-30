@@ -14,7 +14,7 @@ from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
-from app.models import User
+from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
 import sys
 import datetime
@@ -98,7 +98,7 @@ def chapter1():
 @app.route('/loginuser', methods=['POST'])
 def loginuser():
     form = LoginForm()
-    user = User.query.filter_by(username=form.username.data).first()
+    user = Users.query.filter_by(username=form.username.data).first()
     if user is None or not user.check_password(form.password.data):
         return redirect('/login')
     login_user(user, True)
@@ -114,12 +114,12 @@ def login(username=''):
     js = '/static/dist/login.js'
     form = LoginForm()
     if username:
-        user = User.query.filter_by(username=username).first()
+        user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        user = User.query.filter(
-            (User.username == form.username_or_email.data) |
-            (User.email == form.username_or_email.data)
+        user = Users.query.filter(
+            (Users.username == form.username_or_email.data) |
+            (Users.email == form.username_or_email.data)
         ).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
@@ -143,7 +143,7 @@ def create():
     js = '/static/dist/createAccount.js'
     form = CreateAccountForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = Users(username=form.username.data, email=form.email.data)
         user.set_password(form.password.data)
         user.signed_up_on = datetime.datetime.now()
         db.session.add(user)
@@ -160,7 +160,7 @@ def confirm_account_message(username):
     css = '/static/dist/confirmAccountMessage.css'
     js = '/static/dist/confirmAccountMessage.js'
     form = ConfirmAccountMessageForm()
-    user = User.query.filter_by(username=username).first()
+    user = Users.query.filter_by(username=username).first()
     if user is None:
             flash('User does not exist', 'error')
             return redirect(url_for('create'))
@@ -175,7 +175,7 @@ def confirm_account_message(username):
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
 def confirm_account(token):
-    result = User.verify_account_confirmation_token(token)
+    result = Users.verify_account_confirmation_token(token)
     print(result)
     if result['status'] == 'fail':
         return redirect(url_for('index'))
@@ -205,7 +205,7 @@ def reset_password_request():
         return redirect(url_for('index'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Users.query.filter_by(email=form.email.data).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')
@@ -222,7 +222,7 @@ def reset_password(token):
     js = '/static/dist/resetPassword.js'
     if current_user.is_authenticated:
         return redirect(url_for('index'))
-    user = User.verify_reset_password_token(token)
+    user = Users.verify_reset_password_token(token)
     if not user:
         return redirect(url_for('index'))
     form = ResetPasswordForm()

@@ -82,6 +82,7 @@ Automatic environment that runs nginx and hosts app at `localhost:5000`
 
 ### Environment variables
 Required
+export FLASK_APP=app/my_app.py
 export MAIL_PASSWORD=
 export SECRET_KEY=
 export DATABASE_URL="postgresql://localhost/thisiget_local"
@@ -91,7 +92,6 @@ export HEROKU_TOKEN=`heroku auth:token`
 export MAIL_SERVER=smtp.gmail.com
 export MAIL_USERNAME=noreply@thisiget.com
 export MAIL_SENDER=noreply@thisiget.com
-
 
 
 Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.

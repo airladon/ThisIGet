@@ -1,8 +1,8 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from wtforms.validators import Length
-from app.models import User
+# from wtforms.validators import Length
+from app.models import Users
 
 
 class LoginForm(FlaskForm):
@@ -26,12 +26,12 @@ class CreateAccountForm(FlaskForm):
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        user = Users.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Username already exists.')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = Users.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError('Email address already in use.')
 

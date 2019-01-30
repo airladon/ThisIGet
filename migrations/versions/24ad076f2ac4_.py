@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: c0cdab774892
+Revision ID: 24ad076f2ac4
 Revises: 
-Create Date: 2019-01-24 07:23:05.032485
+Create Date: 2019-01-30 11:39:48.284678
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'c0cdab774892'
+revision = '24ad076f2ac4'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -25,18 +25,19 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_category_category'), 'category', ['category'], unique=True)
-    op.create_table('user',
+    op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=64), nullable=True),
     sa.Column('email', sa.String(length=120), nullable=True),
-    sa.Column('password_hash', sa.String(length=128), nullable=True),
+    sa.Column('password_hash', sa.Binary(), nullable=True),
     sa.Column('signed_up_on', sa.DateTime(), nullable=True),
     sa.Column('confirmed', sa.Boolean(), nullable=True),
     sa.Column('confirmed_on', sa.DateTime(), nullable=True),
+    sa.Column('last_login', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_user_email'), 'user', ['email'], unique=True)
-    op.create_index(op.f('ix_user_username'), 'user', ['username'], unique=True)
+    op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
+    op.create_index(op.f('ix_users_username'), 'users', ['username'], unique=True)
     op.create_table('lesson',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('lesson_name', sa.String(length=128), nullable=True),
@@ -57,7 +58,7 @@ def upgrade():
     sa.Column('rating', sa.Integer(), nullable=True),
     sa.Column('timestamp', sa.DateTime(), nullable=True),
     sa.ForeignKeyConstraint(['lesson_id'], ['lesson.id'], ),
-    sa.ForeignKeyConstraint(['user_id'], ['user.id'], ),
+    sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_rating_timestamp'), 'rating', ['timestamp'], unique=False)
@@ -80,9 +81,9 @@ def downgrade():
     op.drop_index(op.f('ix_lesson_lesson_name'), table_name='lesson')
     op.drop_index(op.f('ix_lesson_dependencies'), table_name='lesson')
     op.drop_table('lesson')
-    op.drop_index(op.f('ix_user_username'), table_name='user')
-    op.drop_index(op.f('ix_user_email'), table_name='user')
-    op.drop_table('user')
+    op.drop_index(op.f('ix_users_username'), table_name='users')
+    op.drop_index(op.f('ix_users_email'), table_name='users')
+    op.drop_table('users')
     op.drop_index(op.f('ix_category_category'), table_name='category')
     op.drop_table('category')
     # ### end Alembic commands ###

@@ -8,13 +8,14 @@ from flask_login import UserMixin
 from time import time
 import jwt
 from app import app
+import pdb
 
 
-class User(UserMixin, db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
     email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.Binary(128))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
@@ -34,14 +35,20 @@ class User(UserMixin, db.Model):
     #   you-may-get-pwned-at-least-protect-passwords-with-bcrypt/
     # for explanation on bcrypt hash and how it also stores the salt
     def set_password(self, password):
-        self.password_hash = bcrypt.hashpw(
+        a = bcrypt.hashpw(
             self.prep_password(password),
             bcrypt.gensalt(14))
+        print(f'asdfasdf {a}')
+        self.password_hash = a
 
     def check_password(self, password):
+        password_hash = self.password_hash
+        # pdb.set_trace()
+        # if password_hash.startswith('\\x'):
+        #     password_hash = bytearray.fromhex(password_hash[2:]).decode()
         return bcrypt.checkpw(
             self.prep_password(password),
-            self.password_hash)
+            password_hash)
 
     def prep_password(self, password):
         return base64.b64encode(
@@ -59,7 +66,7 @@ class User(UserMixin, db.Model):
                             algorithms=['HS256'])['reset_password']
         except Exception:
             return
-        return User.query.get(id)
+        return Users.query.get(id)
 
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
@@ -81,7 +88,7 @@ class User(UserMixin, db.Model):
             print(f'expired but id is: {id}')
             return {
                 'status': 'expired',
-                'user': User.query.get(id),
+                'user': Users.query.get(id),
             }
         except Exception:
             return {
@@ -89,13 +96,13 @@ class User(UserMixin, db.Model):
             }
         return {
             'status': 'ok',
-            'user': User.query.get(id),
+            'user': Users.query.get(id),
         }
 
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return Users.query.get(int(id))
 
 
 class Category(db.Model):
@@ -122,7 +129,7 @@ class Lesson(db.Model):
 
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
     rating = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
