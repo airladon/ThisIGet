@@ -18,7 +18,6 @@ from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
-# import pdb
 
 
 @app.route('/')
@@ -180,8 +179,11 @@ def confirm_account_message(username):
 def confirm_account(token):
     result = Users.verify_account_confirmation_token(token)
     if result['status'] == 'fail':
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     user = result['user']
+    if user is None:
+        flash('''User doesn't exist''')
+        return redirect(url_for('home'))
     if result['status'] == 'expired':
         flash('Email verification time elapsed.', 'after')
         flash('''You have 30 minutes to verify your account after the email
@@ -208,7 +210,7 @@ def reset_password_request():
     css = '/static/dist/resetPasswordRequest.css'
     js = '/static/dist/resetPasswordRequest.js'
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
         user = Users.query.filter_by(email=form.email.data).first()
@@ -227,10 +229,10 @@ def reset_password(token):
     css = '/static/dist/resetPassword.css'
     js = '/static/dist/resetPassword.js'
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
     if not user:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
