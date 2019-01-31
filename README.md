@@ -296,3 +296,19 @@ Database:                   DATABASE_URL
 Email:                      
   local
   noreply@thisiget
+
+Data from local to heroku db
+
+Get database link
+`heroku addons`
+
+Push up data
+`heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest`
+
+Log into db and check tables, data
+`heroku pg:psql --app=itgetitest`
+`\dt`
+`SELECT * FROM users;`
+
+Get data from heroku db
+`heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`

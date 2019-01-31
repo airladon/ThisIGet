@@ -48,12 +48,14 @@ fi
 cp containers/$DOCKERFILE Dockerfile
 
 GUNICORN_PORT=4000
-docker build --build-arg mail_pass=$MAIL_PASSWORD -t devenv-$1 .
+docker build \
+  --build-arg mail_password=$MAIL_PASSWORD \
+  --build-arg database_url=$DATABASE_URL \
+  -t devenv-$1 .
 
 rm Dockerfile
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
-
 if [ $1 = 'prod' ];
   then
   docker run -it --rm \
@@ -79,7 +81,6 @@ else
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
-    --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     devenv-$1 $CMD

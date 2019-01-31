@@ -27,5 +27,10 @@ ENV FLASK_APP app/my_app.py
 RUN useradd -m myuser
 USER myuser
 
+ARG mail_password
+ARG database_url
+ENV MAIL_PASSWORD=$mail_password
+ENV DATABASE_URL=$database_url
+
 
 ENTRYPOINT ["flask", "run", "--host=0.0.0.0"]

@@ -29,8 +29,10 @@ RUN chown myuser app/app.db
 RUN chmod 666 app/app.db
 USER myuser
 
-ARG mail_pass
-ENV MAIL_PASSWORD=$mail_pass
+ARG mail_password
+ARG database_url
+ENV MAIL_PASSWORD=$mail_password
+ENV DATABASE_URL=$database_url
 
 
 
