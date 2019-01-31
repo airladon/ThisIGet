@@ -162,7 +162,6 @@ check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
 check_env_exists $DEPLOY HEROKU_TOKEN "This is needed to deploy to Heroku."
 check_status "Checking environment variables"
 
-exit 1
 # Build docker image
 echo "${bold}${cyan}================= Building Image ===================${reset}"
 cp containers/Dockerfile_dev Dockerfile
@@ -196,7 +195,8 @@ check_status "Building"
 # Deploy to:
 #   Production if branch is master
 #   Dev if branch is release-candidate
-if [ DEPLOY = "deploy" ];
+echo $2
+if [ $2 = "deploy" ];
   then
   APP_NAME=''
   TITLE_STRING=''
