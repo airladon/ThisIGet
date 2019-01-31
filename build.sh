@@ -149,7 +149,7 @@ check_env_exists() {
       echo "${bold}${red}$2 environment variable not set${reset}"
       FAIL=1
     else 
-      echo "${bold}${yellow}Warning: $2 environment variable not set${reset}"
+      echo "${bold}${yellow}Warning: $2 environment variable not set. $3${reset}"
     fi
   fi
 }
@@ -157,11 +157,12 @@ check_env_exists() {
 FAIL=0
 
 echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
-check_env_exists $DEPLOY MAIL_PASSWORD
-check_env_exists $DEPLOY DATABASE_URL
-check_env_exists $DEPLOY HEROKU_TOKEN
+check_env_exists $DEPLOY MAIL_PASSWORD "Emails will not be sent by app."
+check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
+check_env_exists $DEPLOY HEROKU_TOKEN "This is needed to deploy to Heroku."
 check_status "Checking environment variables"
 
+exit 1
 # Build docker image
 echo "${bold}${cyan}================= Building Image ===================${reset}"
 cp containers/Dockerfile_dev Dockerfile

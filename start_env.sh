@@ -1,7 +1,17 @@
+# Setup colors and text formatting
+red=`tput setaf 1`
+green=`tput setaf 2`
+cyan=`tput setaf 6`
+yellow=`tput setaf 3`
+bold=`tput bold`
+reset=`tput sgr0`
+
+# Default values of variables
 DOCKERFILE='Dockerfile_prod'
 HOST_PORT=5000
 CMD=''
 PROJECT_PATH=`pwd`
+FAIL=0
 
 stop_dev_server() {
   SERVER_RUNNING=`docker ps --format {{.Names}} \
@@ -12,6 +22,32 @@ stop_dev_server() {
     docker stop devenv-dev-server
   fi
 }
+
+# Check environment variables
+# $1: Deploy variable - can be "deploy" or "no_deploy"
+# $2: ENV name
+check_env_exists() {
+  if [ -z ${!1} ];
+  then
+    echo "${bold}${yellow}Warning: $1 environment variable not set. $2${reset}"
+  fi
+}
+
+# Check current build status and exit if in failure state
+check_status() {
+  if [ $FAIL != 0 ];
+    then
+    echo "${bold}${red}Build failed at${bold}${cyan}" $1 "${reset}"
+    exit 1    
+  fi
+}
+
+echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
+check_env_exists MAIL_PASSWORD "Emails will not be sent by app."
+check_env_exists DATABASE_URL "Database will default to local SQLite3."
+check_status "Checking environment variables"
+
+
 
 if [ $1 ];
 then
@@ -45,6 +81,7 @@ if [ $1 = 'dev-server' ];
   CMD=/opt/app/dev-server.sh
 fi
 
+echo "${bold}${cyan}================= Building container ===================${reset}"
 cp containers/$DOCKERFILE Dockerfile
 
 GUNICORN_PORT=4000
@@ -56,6 +93,7 @@ docker build \
 rm Dockerfile
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
+echo "${bold}${cyan}================= Starting container ===================${reset}"
 if [ $1 = 'prod' ];
   then
   docker run -it --rm \
