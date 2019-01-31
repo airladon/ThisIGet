@@ -37,35 +37,43 @@ export default class Navbar extends React.Component
   }
 
   checkIsLoggedIn() {
+    // console.log('checking1')
     fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
-      .then((resonse) => {
-        if (!resonse.ok) {
-          throw Error(resonse.statusText);
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
         }
-        return resonse.json();
+        // console.log(response, response.json());
+        return response.json();
       })
-      .then(res => this.setLogin(res))
+      .then(data => this.setLogin(data.username))
       .catch(() => {});
   }
 
   checkLoggedInFromPage() {
     if (document.getElementById('logged_in')) {
-      this.setLogin(1);
+      this.setLogin(null);
+      this.checkIsLoggedIn();
     } else {
-      this.setLogin(0);
+      this.setLogin('');
     }
   }
 
-  setLogin(login: number) {
-    if (login === 1) {
+  setLogin(username: string | null) {
+    if (username === '') {
       this.setState({
-        loginText: 'Logout',
+        loginText: 'Login',
+        loginLink: '/login',
+      });
+    } else if (username !== null) {
+      this.setState({
+        loginText: `Logout ${username}`,
         loginLink: '/logout',
       });
     } else {
       this.setState({
-        loginText: 'Login',
-        loginLink: '/login',
+        loginText: 'Logout',
+        loginLink: '/logout',
       });
     }
   }

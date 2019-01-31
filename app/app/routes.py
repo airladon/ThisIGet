@@ -9,7 +9,7 @@
 #     return render_template('index.html')
 
 
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, jsonify
 from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
@@ -22,10 +22,7 @@ import datetime
 
 @app.route('/')
 def home():
-    return render_template(
-        'home.html',
-        logged_in=current_user.is_authenticated
-    )
+    return render_template('home.html')
 
 
 # @app.route('/introduction')
@@ -55,11 +52,12 @@ def home():
 
 @app.route('/isloggedin')
 def is_logged_in():
-    result = "0"
+    result = ""
     if current_user.is_authenticated:
-        result = "1"
+        result = current_user.username
+    print(result)
     # print('This is error output', file=sys.stderr)
-    return result
+    return jsonify({'username': result})
 
 
 @app.route('/Lessons/', defaults={'path': ''})
@@ -72,7 +70,6 @@ def get_lesson(path):
         'lesson.html',
         css=css,
         js=js,
-        logged_in=current_user.is_authenticated
     )
 
 # @app.route('/Lessons/<subject>/<lesson_id>')

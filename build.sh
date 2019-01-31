@@ -161,6 +161,7 @@ check_env_exists $DEPLOY MAIL_PASSWORD "Emails will not be sent by app."
 check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
 check_env_exists $DEPLOY HEROKU_TOKEN "This is needed to deploy to Heroku."
 check_status "Checking environment variables"
+echo "Environment variable checking complete"
 
 # Build docker image
 echo "${bold}${cyan}================= Building Image ===================${reset}"
