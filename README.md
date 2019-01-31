@@ -312,3 +312,9 @@ Log into db and check tables, data
 
 Get data from heroku db
 `heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
+
+
+export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: //'`
+export HEROKU_TOKEN=`heroku auth:token`
+export MAIL_PASSWORD=
+
