@@ -48,9 +48,11 @@ fi
 cp containers/$DOCKERFILE Dockerfile
 
 GUNICORN_PORT=4000
-docker build -t devenv-$1 .
+docker build --build-arg mail_pass=$MAIL_PASSWORD -t devenv-$1 .
 
 rm Dockerfile
+
+# --env-file=$PROJECT_PATH/containers/env.txt \
 
 if [ $1 = 'prod' ];
   then
@@ -58,7 +60,6 @@ if [ $1 = 'prod' ];
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     --env PORT=$CONTAINTER_PORT \
-    --env-file=$PROJECT_PATH/containers/env.txt \
     devenv-$1
 else
   docker run -it --rm \

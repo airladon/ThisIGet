@@ -199,7 +199,7 @@ if [ $2 ];
 
       cp containers/Dockerfile_prod ./Dockerfile
       echo "${bold}${cyan}Building deployment image${reset}"
-      docker build -t registry.heroku.com/$APP_NAME/web .
+      docker build -t --build-arg mail_pass=$MAIL_PASSWORD registry.heroku.com/$APP_NAME/web .
       echo "${bold}${cyan}Pushing deployment image${reset}"
       docker push registry.heroku.com/$APP_NAME/web
       if [ $IN_TRAVIS ];
