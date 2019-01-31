@@ -61,9 +61,12 @@ then
   MODE=stage
 fi
 
-if [ $2 = "deploy" ];
+if [ $2 ];
 then
-  DEPLOY=deploy
+  if [ $2 = "deploy" ];
+  then
+    DEPLOY=deploy
+  fi
 fi
 
 # From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
@@ -136,11 +139,10 @@ check_status() {
 }
 
 # Check environment variables
-# $1: Deploy variable
+# $1: Deploy variable - can be "deploy" or "no_deploy"
 # $2: ENV name
-# $3: ENV value
 check_env_exists() {
-  if [ -z "$3" ];
+  if [ -z ${!2} ];
   then
     if [ $1 = "deploy" ];
     then
@@ -155,11 +157,10 @@ check_env_exists() {
 FAIL=0
 
 echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
-check_env_exists DEPLOY MAIL_PASSWORD $MAIL_PASSWORD
-check_env_exists DEPLOY DATABASE_URL $DATABASE_URL
-check_env_exists DEPLOY HEROKU_TOKEN $HEROKU_TOKEN
+check_env_exists $DEPLOY MAIL_PASSWORD
+check_env_exists $DEPLOY DATABASE_URL
+check_env_exists $DEPLOY HEROKU_TOKEN
 check_status "Checking environment variables"
-exit 1
 
 # Build docker image
 echo "${bold}${cyan}================= Building Image ===================${reset}"
