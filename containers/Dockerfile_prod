@@ -24,6 +24,9 @@ ADD app/. .
 
 
 RUN useradd -m myuser
+RUN chown myuser app
+RUN chown myuser app/app.db
+RUN chmod 666 app/app.db
 USER myuser
 
 

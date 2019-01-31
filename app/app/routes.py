@@ -16,7 +16,6 @@ from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
 from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
-import sys
 import datetime
 # from flask_sqlalchemy import or_
 # import pdb
