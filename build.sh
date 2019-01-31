@@ -9,6 +9,7 @@
 # NB: Deploying will only work if on branch master or release-candidate
 
 MODE=prod
+DEPLOY=no_deploy
 HOST_PATH=`pwd`
 HEROKU_APP_NAME=itgeti              # Production app name on Heroku
 HEROKU_DEV_APP_NAME=itgetidev       # Dev app name on Heroku
@@ -21,6 +22,7 @@ TRAVIS_DEBUG_BRANCH=travis          # Branch for fast travis debug
 red=`tput setaf 1`
 green=`tput setaf 2`
 cyan=`tput setaf 6`
+yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
@@ -57,6 +59,11 @@ fi
 if [ $1 = "stage" ];
 then
   MODE=stage
+fi
+
+if [ $2 = "deploy" ];
+then
+  DEPLOY=deploy
 fi
 
 # From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
@@ -128,13 +135,37 @@ check_status() {
   fi
 }
 
+# Check environment variables
+# $1: Deploy variable
+# $2: ENV name
+# $3: ENV value
+check_env_exists() {
+  if [ -z "$3" ];
+  then
+    if [ $1 = "deploy" ];
+    then
+      echo "${bold}${red}$2 environment variable not set${reset}"
+      FAIL=1
+    else 
+      echo "${bold}${yellow}Warning: $2 environment variable not set${reset}"
+    fi
+  fi
+}
+
+FAIL=0
+
+echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
+check_env_exists DEPLOY MAIL_PASSWORD $MAIL_PASSWORD
+check_env_exists DEPLOY DATABASE_URL $DATABASE_URL
+check_env_exists DEPLOY HEROKU_TOKEN $HEROKU_TOKEN
+check_status "Checking environment variables"
+exit 1
+
 # Build docker image
 echo "${bold}${cyan}================= Building Image ===================${reset}"
 cp containers/Dockerfile_dev Dockerfile
 docker build -t devbuild .
 rm Dockerfile
-
-FAIL=0
 
 # Lint and type check
 echo "${bold}${cyan}============ Linting and Type Checking =============${reset}"
@@ -163,61 +194,58 @@ check_status "Building"
 # Deploy to:
 #   Production if branch is master
 #   Dev if branch is release-candidate
-if [ $2 ];
+if [ DEPLOY = "deploy" ];
   then
-  if [ $2 = "deploy" ];
+  APP_NAME=''
+  TITLE_STRING=''
+  if [ $BRANCH = $DEPLOY_PROD_BRANCH ];
     then
-    APP_NAME=''
-    TITLE_STRING=''
-    if [ $BRANCH = $DEPLOY_PROD_BRANCH ];
+    APP_NAME=$HEROKU_APP_NAME
+    TITLE_STRING='============= Deploying to Production =============='
+  fi
+  if [ $BRANCH = $DEPLOY_DEV_BRANCH ];
+    then
+    APP_NAME=$HEROKU_DEV_APP_NAME
+    TITLE_STRING='================= Deploying to Dev ================='
+  fi
+  if [ $BRANCH = $TRAVIS_DEBUG_BRANCH ];
+    then
+    APP_NAME=$HEROKU_TEST_APP_NAME
+    TITLE_STRING='================= Deploying to Test ================='
+  fi
+  if [ $3 ];
+    then
+    if [ $3 = "test" ];
       then
-      APP_NAME=$HEROKU_APP_NAME
-      TITLE_STRING='============= Deploying to Production =============='
-    fi
-    if [ $BRANCH = $DEPLOY_DEV_BRANCH ];
-      then
-      APP_NAME=$HEROKU_DEV_APP_NAME
-      TITLE_STRING='================= Deploying to Dev ================='
-    fi
-    if [ $BRANCH = $TRAVIS_DEBUG_BRANCH ];
-      then
-      APP_NAME=$HEROKU_TEST_APP_NAME
+      APP_NAME=$HEROKU_TEST_APP_NAME;
       TITLE_STRING='================= Deploying to Test ================='
     fi
-    if [ $3 ];
-      then
-      if [ $3 = "test" ];
-        then
-        APP_NAME=$HEROKU_TEST_APP_NAME;
-        TITLE_STRING='================= Deploying to Test ================='
-      fi
-    fi
-    if [ $APP_NAME ];
-      then
-      echo "${bold}${cyan}" $TITLE_STRING "${reset}"
-      docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
+  fi
+  if [ $APP_NAME ];
+    then
+    echo "${bold}${cyan}" $TITLE_STRING "${reset}"
+    docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
 
-      cp containers/Dockerfile_prod ./Dockerfile
-      echo "${bold}${cyan}Building deployment image${reset}"
-      docker build \
-        --build-arg mail_password=$MAIL_PASSWORD \
-        --build-arg database_url=$DATABASE_URL \
-        -t registry.heroku.com/$APP_NAME/web .
-      echo "${bold}${cyan}Pushing deployment image${reset}"
-      docker push registry.heroku.com/$APP_NAME/web
-      if [ $IN_TRAVIS ];
-        then
-          /usr/local/bin/heroku container:release web --app $APP_NAME
-        else
-          heroku container:release web --app $APP_NAME
-      fi
-      if [ $? != 0 ];
-        then
-        echo "${bold}${cyan}" Deployment "${bold}${red}Failed${reset}"
-        exit 1
-        else
-        echo "${bold}${cyan}" Deployment "${bold}${green}Succeeded${reset}"
-      fi
+    cp containers/Dockerfile_prod ./Dockerfile
+    echo "${bold}${cyan}Building deployment image${reset}"
+    docker build \
+      --build-arg mail_password=$MAIL_PASSWORD \
+      --build-arg database_url=$DATABASE_URL \
+      -t registry.heroku.com/$APP_NAME/web .
+    echo "${bold}${cyan}Pushing deployment image${reset}"
+    docker push registry.heroku.com/$APP_NAME/web
+    if [ $IN_TRAVIS ];
+      then
+        /usr/local/bin/heroku container:release web --app $APP_NAME
+      else
+        heroku container:release web --app $APP_NAME
+    fi
+    if [ $? != 0 ];
+      then
+      echo "${bold}${cyan}" Deployment "${bold}${red}Failed${reset}"
+      exit 1
+      else
+      echo "${bold}${cyan}" Deployment "${bold}${green}Succeeded${reset}"
     fi
   fi
 fi
