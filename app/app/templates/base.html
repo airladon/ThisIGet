@@ -10,14 +10,15 @@
 
     <link rel="stylesheet" href="/static/vendors/bootstrap-reboot.min.css">
 
-    <!-- React PROD -->
-    <script crossorigin src="https://unpkg.com/react@16.6.3/umd/react.production.min.js"></script>
-    <script crossorigin src="https://unpkg.com/react-dom@16.6.3/umd/react-dom.production.min.js"></script>
-    <script src="/static/figureone.min.js"></script>
+    <script src="/static/index.js"></script>
   </head>
 
 <body>
+  {% if logged_in %}
+    <div id="logged_in"></div>
+  {% endif %}
   {% block content %}{% endblock %}
+  }
 <script type="text/javascript" src="/static/dist/vendors.js"></script>
 <script type="text/javascript" src="/static/dist/tools.js"></script>
 <script type="text/javascript" src="/static/dist/commonlessons.js"></script>

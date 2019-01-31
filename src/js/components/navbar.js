@@ -24,13 +24,16 @@ export default class Navbar extends React.Component
       loginText: 'Login',
       loginLink: '/login',
     };
+  }
 
+  componentDidMount() {
     const handleVisibilityChange = () => {
       this.checkIsLoggedIn();
     };
     window.addEventListener('focus', handleVisibilityChange);
 
-    this.checkIsLoggedIn();
+    // this.checkIsLoggedIn();
+    this.checkLoggedInFromPage();
   }
 
   checkIsLoggedIn() {
@@ -43,6 +46,14 @@ export default class Navbar extends React.Component
       })
       .then(res => this.setLogin(res))
       .catch(() => {});
+  }
+
+  checkLoggedInFromPage() {
+    if (document.getElementById('logged_in')) {
+      this.setLogin(1);
+    } else {
+      this.setLogin(0);
+    }
   }
 
   setLogin(login: number) {

@@ -17,6 +17,9 @@
   </head>
 
 <body>
+  {% if logged_in %}
+    <div id="logged_in"></div>
+  {% endif %}
   {% block content %}{% endblock %}
 <script type="text/javascript" src="/static/dist/vendors.js"></script>
 <script type="text/javascript" src="/static/dist/tools.js"></script>

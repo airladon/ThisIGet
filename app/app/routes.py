@@ -22,27 +22,30 @@ import datetime
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    return render_template(
+        'home.html',
+        logged_in=current_user.is_authenticated
+    )
 
 
-@app.route('/introduction')
-def introduction():
-    return render_template('introduction.html')
+# @app.route('/introduction')
+# def introduction():
+#     return render_template('introduction.html')
 
 
-@app.route('/single')
-def single_page_lesson():
-    return render_template('singlepagelesson.html')
+# @app.route('/single')
+# def single_page_lesson():
+#     return render_template('singlepagelesson.html')
 
 
-@app.route('/multi')
-def multi_page_lesson():
-    return render_template('multipagelesson.html')
+# @app.route('/multi')
+# def multi_page_lesson():
+#     return render_template('multipagelesson.html')
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+# @app.route('/about')
+# def about():
+#     return render_template('about.html')
 
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
@@ -65,7 +68,12 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
-    return render_template('lesson.html', css=css, js=js)
+    return render_template(
+        'lesson.html',
+        css=css,
+        js=js,
+        logged_in=current_user.is_authenticated
+    )
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
