@@ -15,7 +15,7 @@ The environment variable `DATABASE_URL` defines which database option to use.
 
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
 * `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database
-* export DATABASE_URL=`heroku config --app=<app_name> | grep DATABASE_URL | sed 's/DATABASE_URL: //'\` for a heroku database tied to an app.
+* export DATABASE_URL=`heroku config --app=<app_name> | grep DATABASE_URL | sed 's/DATABASE_URL: //'` for a heroku database tied to an app.
 
 #### Email
 The environment variables `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME` control where to send emails from (emails are used for example in resetting passwords, or creating accounts).
