@@ -120,7 +120,7 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             (Users.username == form.username_or_email.data)
-            | (Users.email == form.username_or_email.data) # noqa
+            | (Users.encrypted_email == Users.encrypt_email(form.username_or_email).data) # noqa
         ).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
@@ -144,7 +144,8 @@ def create():
     js = '/static/dist/createAccount.js'
     form = CreateAccountForm()
     if form.validate_on_submit():
-        user = Users(username=form.username.data, email=form.email.data)
+        user = Users(username=form.username.data)
+        user.set_email(form.email.data)
         user.set_password(form.password.data)
         user.signed_up_on = datetime.datetime.now()
         db.session.add(user)
@@ -170,7 +171,7 @@ def confirm_account_message(username):
         redirect(f'confirmAccountEmailSent/{user.username}')
     flash('''You need to confirm your email address before your
         account becomes active.''', 'before')
-    flash(f''''An email has been sent to {user.email}.
+    flash(f''''An email has been sent to {user.get_email()}.
         Click the link inside it to confirm your email and
         finish account registration.''', 'before')
 
@@ -217,7 +218,7 @@ def reset_password_request():
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = Users.query.filter_by(email=form.email.data).first()
+        user = Users.query.filter_by(encrypted_email=Users.encrypt_email(form.email.data)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')

@@ -27,9 +27,10 @@ def send_password_reset_email(user):
         print('No mail sent to user.email')
         return
     token = user.get_reset_password_token()
+    email = user.get_email()
     send_email('ThisIGet Account Password Reset',
                sender=app.config['MAIL_SENDER'],
-               recipients=[user.email],
+               recipients=[email],
                text_body=render_template('email/reset_password.txt',
                                          user=user, token=token),
                html_body=render_template('email/reset_password.html',
@@ -42,9 +43,10 @@ def send_confirm_account_email(user):
         print('No mail sent to user.email')
         return
     token = user.get_account_confirmation_token()
+    email = user.get_email()
     send_email('ThisIGet Account Email Confirmation',
                sender=app.config['MAIL_SENDER'],
-               recipients=[user.email],
+               recipients=[email],
                text_body=render_template('email/confirm_account.txt',
                                          user=user, token=token),
                html_body=render_template('email/confirm_account.html',

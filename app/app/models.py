@@ -8,12 +8,19 @@ from flask_login import UserMixin
 from time import time
 import jwt
 from app import app
+import os
+from Crypto.Cipher import AES
+
+
+def prep_password(self, password):
+        return base64.b64encode(
+            hashlib.sha512(password.encode('utf-8')).digest())
 
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
+    encrypted_email = db.Column(db.String(120), index=True, unique=True)
     password_hash = db.Column(db.Binary(128))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
@@ -23,6 +30,36 @@ class Users(UserMixin, db.Model):
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
+
+    def set_email(self, email):
+        self.encrypted_email = self.encrypt_email(email)
+
+    def get_email(self):
+        return self.decrypt_email(self.encrypted_email)
+
+    @staticmethod
+    def encrypt_email(email):
+        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
+        key = key_string.encode('cp437')
+
+        cipher = AES.new(key, AES.MODE_EAX)
+        nonce = cipher.nonce
+        ciphertext, tag = cipher.encrypt_and_digest(email.encode('utf-8'))
+        encypted_email = tag + nonce + ciphertext
+        return encypted_email
+
+    @staticmethod
+    def decrypt_email(encrypted_email):
+        tag = encrypted_email[0:16]
+        nonce = encrypted_email[16:32]
+        ciphertext = encrypted_email[32:]
+
+        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
+        key = key_string.encode('cp437')
+
+        cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+        email = cipher.decrypt(ciphertext).decode('utf-8')
+        return email
 
     # See https://github.com/pyca/bcrypt/ for more information on bcrypt
     # and recommendation for pre-hashing password to make it a consistent
@@ -35,7 +72,7 @@ class Users(UserMixin, db.Model):
     # for explanation on bcrypt hash and how it also stores the salt
     def set_password(self, password):
         a = bcrypt.hashpw(
-            self.prep_password(password),
+            prep_password(password),
             bcrypt.gensalt(14))
         self.password_hash = a
 
@@ -48,9 +85,9 @@ class Users(UserMixin, db.Model):
             self.prep_password(password),
             password_hash)
 
-    def prep_password(self, password):
-        return base64.b64encode(
-            hashlib.sha512(password.encode('utf-8')).digest())
+    # def prep_password(self, password):
+    #     return base64.b64encode(
+    #         hashlib.sha512(password.encode('utf-8')).digest())
 
     def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(
