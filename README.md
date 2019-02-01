@@ -26,6 +26,11 @@ If they are not set, then app will not try to send emails.
 
 This is only needed for running locally.
 
+#### Flask
+If you want to run flask or flask database migrations locally and not in a container, then you need the flask environment variable:
+
+`FLASK_APP=app/my_app.py`
+
 #### Heroku deployment
 If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
 
@@ -98,48 +103,88 @@ Automatic environment that runs nginx and hosts app at `localhost:5000`
 
 # Local Development Environment
 
-### Local database
-Create local database
+### Database management
 
+This is best done locally outside of a container. You will need to have:
+
+* Started python virtual environment (`source env/bin/activate`)
+* Installed all python packages (`pip install -r requirements.txt`)
+* Setup the flask environment variable (`export FLASK_APP=app/my_app.py`)
+* Installed Heroku CLI if you want to manage a heroku database
+* Installed postgres.app locally if you want to manage a local postgres database
+
+#### Initialize migration management
+If you need to initialize a migration
+
+`flask db init`
+
+This will create a `migrations` directory in the project root.
+
+This only needs to be done once, or after the migrations directory has been removed as you wanted to start afresh.
+
+#### Migrate app changes to database
+`flask db migrate -m "migration message"`
+
+#### Select the database you want to upgrade
+
+For SQLite3 local database use `unset DATABASE_URL`
+
+For postgres local use: `export DATABASE_URL=postgresql://localhost/thisiget_local"`
+
+For Heroku postgres database use: export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+
+You can only use the Heroku database if you have the Heroku CLI installed and logged in.
+
+#### Upgrade the database to a new migration
+`Flask db upgrade`
+
+#### Check the database
+
+For Sqlite3, use a database viewing app like `DB Browser for SQLite` and load `app/app/app.db` file.
+
+For postgres local:
+* `psql`
+* `\c <DATABASE_NAME>` to select database of interest
+* `\dt` to show tables
+* `SELECT * FROM users` to show all user records
+
+For Heroku Postgres:
+* `heroku pg:psql --app=itgeti`
+* Won't need to select database, so can go straight to looking at tables
+
+#### Push local database to Heroku
+Push up data from local database to Heroku.
+
+First get the heroku database name using:
+`heroku addons --app=<HEROKU_APP_NAME>`
+
+Local database would only exist if postgres.app is installed and server running.
+
+Push local DB data up to Heroku.
+
+`heroku pg:push postgresql://localhost/<LOCAL_DB_NAME> <HEROKU_DB_NAME> --app=<HEROKU_APP_NAME>`
+
+e.g.
+`heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest`
+
+
+#### Pull Heroku DB data to local
+`heroku pg:pull <HEROKU_DB_NAME> <LOCAL_DB_NAME> --app <HEROKU_APP_NAME>`
+`heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
+
+
+#### Local database manual manipulation
 `psql postgres`
 
 ```
 DROP DATABASE thisiget_local;
 CREATE DATABASE thisiget_local;
-CREATE ROLE tig WITH LOGIN PASSWORD 'asdfasdf';
 \c thisiget_local
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO tig;
 ```
 
-ALTER ROLE tig CREATEDB;
-DROP ROLE tig;
+### Python Packages
 
-Exit psql
-
-`flask db upgrade`
-
-
-```
-DROP DATABASE thisiget_local;
-DELETE from users where id>0;
-```
-
-### Environment variables
-Required
-export FLASK_APP=app/my_app.py
-export MAIL_PASSWORD=
-export SECRET_KEY=
-export DATABASE_URL="postgresql://localhost/thisiget_local"
-
-Optional
-export HEROKU_TOKEN=`heroku auth:token`
-export MAIL_SERVER=smtp.gmail.com
-export MAIL_USERNAME=noreply@thisiget.com
-export MAIL_SENDER=noreply@thisiget.com
-
-export DATABASE_URL=postgresql://host.docker.internal/thisiget_local
-
-Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
+Setting up local node and python packages can be useful for editors that use them for showing lint and type errors, and for flask database migrations. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
 
 Start in the project directory.
 
