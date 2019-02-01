@@ -9,7 +9,7 @@ ItIGet web app.
 * `git clone https://github.com/airladon/itiget/`
 * Navigate to project directory
 
-### Setup local environment variables
+### Setup local environment variables for app emails, database
 #### Database
 The environment variable `DATABASE_URL` defines which database option to use.
 
@@ -22,14 +22,12 @@ This is only needed for running locally.
 #### Email
 The environment variables `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME` control where to send emails from (emails are used for example in resetting passwords, or creating accounts).
 
-If `MAIL_PASSWORD` is not set, then app will not try to send emails.
-
-If `MAIL_SERVER`, `MAIL_SENDER` or `MAIL_USERNAME` fields are not set, then defaults will be used, and email sending attemp will be made if `MAIL_PASSWORD` is defined.
+If they are not set, then app will not try to send emails.
 
 This is only needed for running locally.
 
 #### Heroku deployment
-If deployting the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
+If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
 
 export HEROKU_TOKEN=`heroku auth:token`
 
