@@ -9,8 +9,16 @@ ItIGet web app.
 * `git clone https://github.com/airladon/itiget/`
 * Navigate to project directory
 
-### Setup local environment variables for app emails, database, flask and heroku deployment
-#### Database
+### Setup local environment variables
+
+Local environment variables are used for
+* Sending emails (like password reset emails) from the app
+* Defining which database to connect to
+* Running flask database migrations
+* Running flask locally (though recommended to use a container to run flask normally)
+* Deployment to Heroku for test site 
+
+#### `DATABASE_URL`
 The environment variable `DATABASE_URL` defines which database option to use.
 
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
@@ -20,19 +28,19 @@ The environment variable `DATABASE_URL` defines which database option to use.
 
 This is only needed for running locally.
 
-#### Email
+#### `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME`
 The environment variables `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME` control where to send emails from (emails are used for example in resetting passwords, or creating accounts).
 
 If they are not set, then app will not try to send emails.
 
 This is only needed for running locally.
 
-#### Flask
+#### `FLASK_APP`
 If you want to run flask or flask database migrations locally and not in a container, then you need the flask environment variable:
 
 `FLASK_APP=app/my_app.py`
 
-#### Heroku deployment
+#### `HEROKU_TOKEN`
 If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
 
 ```export HEROKU_TOKEN=`heroku auth:token` ```
