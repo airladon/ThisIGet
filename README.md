@@ -15,7 +15,7 @@ The environment variable `DATABASE_URL` defines which database option to use.
 
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
 * `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database
-* ```export DATABASE_URL=\`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'\` ```
+* ```export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'` ```
 
 
 This is only needed for running locally.
@@ -35,7 +35,7 @@ If you want to run flask or flask database migrations locally and not in a conta
 #### Heroku deployment
 If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
 
-export HEROKU_TOKEN=`heroku auth:token`
+```export HEROKU_TOKEN=`heroku auth:token` ```
 
 This is only needed if deploying a build from the local machine.
 
