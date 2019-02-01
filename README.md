@@ -2,7 +2,7 @@
 
 ItIGet web app.
 
-# Containerized Development Environment Setup
+# Development Environment Setup
 
 ## Setup
 * Install Docker
@@ -47,7 +47,7 @@ If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable nee
 
 This is only needed if deploying a build from the local machine.
 
-## Start interactive dev environment container
+## Interactive Dev Environment container
 A docker container can be used to do lint and type checking, and tests. To start the container
 * `./startenv dev`
 
@@ -82,7 +82,7 @@ From here you can:
     * Can be accessed through a browser at `localhost:5002`
     * You would only do this for deep debugging purposes, generally running the `dev-server` container (below) is sufficent.
 
-### Run a local dev server of web app
+## Dev-Server Container
 `./startenv dev-server`
 
 Automatic environment that hosts app at `localhost:5003`
@@ -93,7 +93,7 @@ Automatic environment that hosts app at `localhost:5003`
   * Uses localally built react js files
 
 
-### Run a local Stage server of web app
+## Stage Container
 `./startenv stage`
 
 Automatic environment that runs flask and hosts app at `localhost:5001`
@@ -102,13 +102,14 @@ Automatic environment that runs flask and hosts app at `localhost:5001`
   * Uses development versions of react from CDN
   * Should run `./build.sh stage` locally, or `webpack --env.mod=stage` in the dev container first
 
-### Run a local Production server of web app
+## Production Container
 `./startenv prod`
 Automatic environment that runs nginx and hosts app at `localhost:5000`
   * Container has no npm packages installed, and only the python packages needed for production.  
   * Uses minified production versions of react from CDN
   * Should run `./build.sh prod` locally, or `webpack --env.mod=prod` in the dev container first to build the needed js files.
 
+## Build
 
 # Local Development Environment
 
