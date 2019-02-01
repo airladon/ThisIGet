@@ -55,7 +55,6 @@ def is_logged_in():
     result = ""
     if current_user.is_authenticated:
         result = current_user.username
-    print(result)
     # print('This is error output', file=sys.stderr)
     return jsonify({'username': result})
 

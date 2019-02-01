@@ -42,11 +42,11 @@ check_status() {
   fi
 }
 
-echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
+echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
 check_env_exists MAIL_PASSWORD "Emails will not be sent by app."
 check_env_exists DATABASE_URL "Database will default to local SQLite3."
 check_status "Checking environment variables"
-
+echo "Environment variable checking complete"
 
 
 if [ $1 ];
