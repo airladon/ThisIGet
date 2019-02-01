@@ -10,6 +10,7 @@
 
 MODE=prod
 DEPLOY=no_deploy
+RUN_TESTS=yes
 HOST_PATH=`pwd`
 HEROKU_APP_NAME=itgeti              # Production app name on Heroku
 HEROKU_DEV_APP_NAME=itgetidev       # Dev app name on Heroku
@@ -66,6 +67,14 @@ then
   if [ $2 = "deploy" ];
   then
     DEPLOY=deploy
+  fi
+fi
+
+if [ $4 ];
+then
+  if [ $4 = "skip-tests" ];
+  then
+    RUN_TESTS=no
   fi
 fi
 
@@ -157,41 +166,44 @@ check_env_exists() {
 FAIL=0
 
 echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
-check_env_exists $DEPLOY MAIL_PASSWORD "Emails will not be sent by app."
-check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
+# check_env_exists $DEPLOY MAIL_PASSWORD "Emails will not be sent by app."
+# check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
 check_env_exists $DEPLOY HEROKU_TOKEN "This is needed to deploy to Heroku."
 check_status "Checking environment variables"
 echo "Environment variable checking complete"
 
-# Build docker image
-echo "${bold}${cyan}================= Building Image ===================${reset}"
-cp containers/Dockerfile_dev Dockerfile
-docker build -t devbuild .
-rm Dockerfile
+if [ $RUN_TESTS = "yes" ];
+then
+  # Build docker image
+  echo "${bold}${cyan}================= Building Image ===================${reset}"
+  cp containers/Dockerfile_dev Dockerfile
+  docker build -t devbuild .
+  rm Dockerfile
 
-# Lint and type check
-echo "${bold}${cyan}============ Linting and Type Checking =============${reset}"
-docker_run_cmd "Python Linting" "/opt/app/start.sh flake8"
-check_status "Linting and Type Checking"
-docker_run "JS Linting" npm run lint
-docker_run "CSS and SCSS Linting" npm run css
-docker_run "Flow" npm run flow
-check_status "Linting and Type Checking"
+  # Lint and type check
+  echo "${bold}${cyan}============ Linting and Type Checking =============${reset}"
+  docker_run_cmd "Python Linting" "/opt/app/start.sh flake8"
+  check_status "Linting and Type Checking"
+  docker_run "JS Linting" npm run lint
+  docker_run "CSS and SCSS Linting" npm run css
+  docker_run "Flow" npm run flow
+  check_status "Linting and Type Checking"
 
-# Test
-echo "${bold}${cyan}===================== Testing ======================${reset}"
-docker_run "JS Testing" npm run jest
-docker_run_cmd "Python Testing" "/opt/app/start.sh pytest"
-check_status "Tests"
-if [ $IN_TRAVIS ];
-  then
-  sudo rm -rf tests/__pycache__
+  # Test
+  echo "${bold}${cyan}===================== Testing ======================${reset}"
+  docker_run "JS Testing" npm run jest
+  docker_run_cmd "Python Testing" "/opt/app/start.sh pytest"
+  check_status "Tests"
+  if [ $IN_TRAVIS ];
+    then
+    sudo rm -rf tests/__pycache__
+  fi
+
+  # Package
+  echo "${bold}${cyan}==================== Packaging =====================${reset}"
+  docker_run "Packaging" npm run webpack -- --env.mode=$MODE
+  check_status "Building"
 fi
-
-# Package
-echo "${bold}${cyan}==================== Packaging =====================${reset}"
-docker_run "Packaging" npm run webpack -- --env.mode=$MODE
-check_status "Building"
 
 # Deploy to:
 #   Production if branch is master
@@ -228,13 +240,9 @@ if [ $2 = "deploy" ];
     then
     echo "${bold}${cyan}" $TITLE_STRING "${reset}"
     docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
-
     cp containers/Dockerfile_prod ./Dockerfile
     echo "${bold}${cyan}Building deployment image${reset}"
-    docker build \
-      --build-arg mail_password=$MAIL_PASSWORD \
-      --build-arg database_url=$DATABASE_URL \
-      -t registry.heroku.com/$APP_NAME/web .
+    docker build -t registry.heroku.com/$APP_NAME/web .
     echo "${bold}${cyan}Pushing deployment image${reset}"
     docker push registry.heroku.com/$APP_NAME/web
     if [ $IN_TRAVIS ];

@@ -15,7 +15,9 @@ The environment variable `DATABASE_URL` defines which database option to use.
 
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
 * `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database
-* export DATABASE_URL=`heroku config --app=<app_name> | grep DATABASE_URL | sed 's/DATABASE_URL: //'` for a heroku database tied to an app.
+* export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+
+This is only needed for running locally.
 
 #### Email
 The environment variables `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME` control where to send emails from (emails are used for example in resetting passwords, or creating accounts).
@@ -24,11 +26,14 @@ If `MAIL_PASSWORD` is not set, then app will not try to send emails.
 
 If `MAIL_SERVER`, `MAIL_SENDER` or `MAIL_USERNAME` fields are not set, then defaults will be used, and email sending attemp will be made if `MAIL_PASSWORD` is defined.
 
+This is only needed for running locally.
+
 #### Heroku deployment
 If deployting the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
 
 export HEROKU_TOKEN=`heroku auth:token`
 
+This is only needed if deploying a build from the local machine.
 
 ### Start interactive dev environment
 A docker container can be used to do lint and type checking, and tests. To start the container

@@ -66,10 +66,10 @@ RUN npm install figureone@0.0.20
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
-ARG mail_password
-ARG database_url
-ENV MAIL_PASSWORD=$mail_password
-ENV DATABASE_URL=$database_url
+# ARG mail_password
+# ARG database_url
+# ENV MAIL_PASSWORD=$mail_password
+# ENV DATABASE_URL=$database_url
 
 ADD containers/dev/start.sh .
 ENTRYPOINT ["bash"]

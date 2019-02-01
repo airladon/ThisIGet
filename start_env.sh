@@ -43,7 +43,10 @@ check_status() {
 }
 
 echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
+check_env_exists MAIL_SERVER "Emails will not be sent by app."
+check_env_exists MAIL_USERNAME "Emails will not be sent by app."
 check_env_exists MAIL_PASSWORD "Emails will not be sent by app."
+check_env_exists MAIL_SENDER "Emails will not be sent by app."
 check_env_exists DATABASE_URL "Database will default to local SQLite3."
 check_status "Checking environment variables"
 echo "Environment variable checking complete"
@@ -85,10 +88,7 @@ echo "${bold}${cyan}================= Building container ===================${re
 cp containers/$DOCKERFILE Dockerfile
 
 GUNICORN_PORT=4000
-docker build \
-  --build-arg mail_password=$MAIL_PASSWORD \
-  --build-arg database_url=$DATABASE_URL \
-  -t devenv-$1 .
+docker build -t devenv-$1 .
 
 rm Dockerfile
 
@@ -100,6 +100,7 @@ if [ $1 = 'prod' ];
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     --env PORT=$CONTAINTER_PORT \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     devenv-$1
 else
   docker run -it --rm \
@@ -119,6 +120,7 @@ else
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
+    --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     devenv-$1 $CMD
