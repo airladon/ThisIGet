@@ -4,12 +4,12 @@ ItIGet web app.
 
 # Containerized Development Environment Setup
 
-### Setup
+## Setup
 * Install Docker
 * `git clone https://github.com/airladon/itiget/`
 * Navigate to project directory
 
-### Setup local environment variables
+## Setup local environment variables
 
 Local environment variables are used for
 * Sending emails (like password reset emails) from the app
@@ -47,7 +47,7 @@ If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable nee
 
 This is only needed if deploying a build from the local machine.
 
-### Start interactive dev environment
+## Start interactive dev environment container
 A docker container can be used to do lint and type checking, and tests. To start the container
 * `./startenv dev`
 
