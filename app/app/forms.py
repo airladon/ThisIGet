@@ -34,7 +34,7 @@ class CreateAccountForm(FlaskForm):
             raise ValidationError('Username already exists.')
 
     def validate_email(self, email):
-        user = Users.query.filter_by(encrypted_email=Users.encrypt_email(email.data)).first()
+        user = Users.query.filter_by(email_hash=Users.hash_email(email.data)).first()
         if user is not None:
             raise ValidationError('Email address already in use.')
 

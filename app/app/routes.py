@@ -120,7 +120,7 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             (Users.username == form.username_or_email.data)
-            | (Users.encrypted_email == Users.encrypt_email(form.username_or_email).data) # noqa
+            | (Users.email_hash == Users.hash_email(form.username_or_email.data)) # noqa
         ).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
@@ -218,7 +218,7 @@ def reset_password_request():
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = Users.query.filter_by(encrypted_email=Users.encrypt_email(form.email.data)).first()
+        user = Users.query.filter_by(email_hash=Users.hash_email(form.email.data)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')

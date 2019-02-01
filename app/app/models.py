@@ -10,9 +10,10 @@ import jwt
 from app import app
 import os
 from Crypto.Cipher import AES
+import pdb
 
 
-def prep_password(self, password):
+def prep_password(password):
         return base64.b64encode(
             hashlib.sha512(password.encode('utf-8')).digest())
 
@@ -20,7 +21,8 @@ def prep_password(self, password):
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
-    encrypted_email = db.Column(db.String(120), index=True, unique=True)
+    encrypted_email = db.Column(db.Binary(256))
+    email_hash = db.Column(db.Binary(128))
     password_hash = db.Column(db.Binary(128))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
@@ -33,9 +35,16 @@ class Users(UserMixin, db.Model):
 
     def set_email(self, email):
         self.encrypted_email = self.encrypt_email(email)
+        self.email_hash = self.hash_email(email)
 
     def get_email(self):
         return self.decrypt_email(self.encrypted_email)
+
+    @staticmethod
+    def hash_email(email):
+        pepper_string = os.environ.get('PEPPER') or b'$2b$10$BnJqVgOFqLemn6hfp6CAPO'.decode('cp437')
+        pepper = pepper_string.encode('cp437')
+        return bcrypt.hashpw(prep_password(email), pepper)
 
     @staticmethod
     def encrypt_email(email):
@@ -82,7 +91,7 @@ class Users(UserMixin, db.Model):
         # if password_hash.startswith('\\x'):
         #     password_hash = bytearray.fromhex(password_hash[2:]).decode()
         return bcrypt.checkpw(
-            self.prep_password(password),
+            prep_password(password),
             password_hash)
 
     # def prep_password(self, password):

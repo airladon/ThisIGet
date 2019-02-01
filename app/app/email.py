@@ -13,6 +13,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 
 def can_send_email():
+
     if os.environ.get('MAIL_PASSWORD') == '' \
        or os.environ.get('MAIL_USERNAME') == '' \
        or os.environ.get('MAIL_SERVER') == '' \
@@ -22,7 +23,7 @@ def can_send_email():
 
 
 def send_password_reset_email(user):
-    if can_send_email():
+    if not can_send_email():
         print('MAIL_PASSWORD environment variable not set')
         print('No mail sent to user.email')
         return
@@ -38,12 +39,13 @@ def send_password_reset_email(user):
 
 
 def send_confirm_account_email(user):
-    if can_send_email():
+    if not can_send_email():
         print('MAIL_PASSWORD environment variable not set')
         print('No mail sent to user.email')
         return
     token = user.get_account_confirmation_token()
     email = user.get_email()
+    print(email)
     send_email('ThisIGet Account Email Confirmation',
                sender=app.config['MAIL_SENDER'],
                recipients=[email],
