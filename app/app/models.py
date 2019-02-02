@@ -46,10 +46,18 @@ class Users(UserMixin, db.Model):
         pepper = pepper_string.encode('cp437')
         return bcrypt.hashpw(prep_password(email), pepper).decode('utf-8')
 
-    @staticmethod
-    def encrypt_email(email):
-        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
-        key = key_string.encode('cp437')
+    def get_key(self):
+        key_hex_string = os.environ.get('AES_KEY') or 'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
+        byte_array=[]
+        for i in range(0, len(key_hex_string), 2):
+            byte_array.append( int (key_hex_string[i:i+2], 16 ) )
+
+        key = bytes(byte_array)
+        return key
+
+    def encrypt_email(self, email):
+        # key_string = os.environ.get('AES_KEY') or 'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
+        key = self.get_key()
 
         cipher = AES.new(key, AES.MODE_EAX)
         nonce = cipher.nonce
@@ -59,16 +67,16 @@ class Users(UserMixin, db.Model):
         return encypted_email
         # return 'encrypted_email'
 
-    @staticmethod
-    def decrypt_email(encrypted_email_in_utf16):
+    def decrypt_email(self, encrypted_email_in_utf16):
         # pdb.get_trace()
         encrypted_email = encrypted_email_in_utf16
         tag = encrypted_email[0:16]
         nonce = encrypted_email[16:32]
         ciphertext = encrypted_email[32:]
 
-        key_string = os.environ.get('AES_KEY') or b'2P\xe9\xad\xa5m3\xa8\x8b\xc2\xd9\x0c\xf8\x8ba\xfa\x13\xbf^h\xa8\xe5\xa8\x1f\xc6\xfe\xeb\x8d\x8eM\xbf\x12'
-        key = key_string.encode('cp437')
+        # key_string = os.environ.get('AES_KEY') or b'2P\xe9\xad\xa5m3\xa8\x8b\xc2\xd9\x0c\xf8\x8ba\xfa\x13\xbf^h\xa8\xe5\xa8\x1f\xc6\xfe\xeb\x8d\x8eM\xbf\x12'
+        # key = key_string.encode('cp437')
+        key = self.get_key()
 
         cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
         email = cipher.decrypt(ciphertext).decode('utf-8')
