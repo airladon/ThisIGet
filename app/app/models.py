@@ -67,7 +67,7 @@ class Users(UserMixin, db.Model):
         nonce = encrypted_email[16:32]
         ciphertext = encrypted_email[32:]
 
-        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
+        key_string = os.environ.get('AES_KEY') or b'2P\xe9\xad\xa5m3\xa8\x8b\xc2\xd9\x0c\xf8\x8ba\xfa\x13\xbf^h\xa8\xe5\xa8\x1f\xc6\xfe\xeb\x8d\x8eM\xbf\x12'
         key = key_string.encode('cp437')
 
         cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
