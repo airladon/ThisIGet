@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 611356a5f5c0
+Revision ID: 9075f140dc07
 Revises: 
-Create Date: 2019-02-01 10:14:33.584641
+Create Date: 2019-02-01 15:29:25.881213
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '611356a5f5c0'
+revision = '9075f140dc07'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -28,15 +28,15 @@ def upgrade():
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
     sa.Column('username', sa.String(length=64), nullable=True),
-    sa.Column('encrypted_email', sa.String(length=120), nullable=True),
-    sa.Column('password_hash', sa.Binary(), nullable=True),
+    sa.Column('encrypted_email', sa.String(length=256), nullable=True),
+    sa.Column('email_hash', sa.String(length=128), nullable=True),
+    sa.Column('password_hash', sa.String(length=128), nullable=True),
     sa.Column('signed_up_on', sa.DateTime(), nullable=True),
     sa.Column('confirmed', sa.Boolean(), nullable=True),
     sa.Column('confirmed_on', sa.DateTime(), nullable=True),
     sa.Column('last_login', sa.DateTime(), nullable=True),
     sa.PrimaryKeyConstraint('id')
     )
-    op.create_index(op.f('ix_users_encrypted_email'), 'users', ['encrypted_email'], unique=True)
     op.create_index(op.f('ix_users_username'), 'users', ['username'], unique=True)
     op.create_table('lesson',
     sa.Column('id', sa.Integer(), nullable=False),
@@ -82,7 +82,6 @@ def downgrade():
     op.drop_index(op.f('ix_lesson_dependencies'), table_name='lesson')
     op.drop_table('lesson')
     op.drop_index(op.f('ix_users_username'), table_name='users')
-    op.drop_index(op.f('ix_users_encrypted_email'), table_name='users')
     op.drop_table('users')
     op.drop_index(op.f('ix_category_category'), table_name='category')
     op.drop_table('category')

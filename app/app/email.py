@@ -3,6 +3,7 @@ from app import mail
 from flask import render_template
 from app import app
 import os
+import pdb
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
@@ -14,10 +15,10 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 def can_send_email():
 
-    if os.environ.get('MAIL_PASSWORD') == '' \
-       or os.environ.get('MAIL_USERNAME') == '' \
-       or os.environ.get('MAIL_SERVER') == '' \
-       or os.environ.get('MAIL_SENDER') == '':
+    if os.environ.get('MAIL_PASSWORD') is None \
+       or os.environ.get('MAIL_USERNAME') is None \
+       or os.environ.get('MAIL_SERVER') is None \
+       or os.environ.get('MAIL_SENDER') is None:
         return False
     return True
 

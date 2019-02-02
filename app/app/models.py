@@ -21,9 +21,9 @@ def prep_password(password):
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(64), index=True, unique=True)
-    encrypted_email = db.Column(db.Binary(256))
-    email_hash = db.Column(db.Binary(128))
-    password_hash = db.Column(db.Binary(128))
+    encrypted_email = db.Column(db.String(256))
+    email_hash = db.Column(db.String(128))
+    password_hash = db.Column(db.String(128))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
@@ -44,31 +44,35 @@ class Users(UserMixin, db.Model):
     def hash_email(email):
         pepper_string = os.environ.get('PEPPER') or b'$2b$10$BnJqVgOFqLemn6hfp6CAPO'.decode('cp437')
         pepper = pepper_string.encode('cp437')
-        return bcrypt.hashpw(prep_password(email), pepper)
+        return bcrypt.hashpw(prep_password(email), pepper).decode('utf-8')
 
     @staticmethod
     def encrypt_email(email):
-        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
-        key = key_string.encode('cp437')
+        # key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
+        # key = key_string.encode('cp437')
 
-        cipher = AES.new(key, AES.MODE_EAX)
-        nonce = cipher.nonce
-        ciphertext, tag = cipher.encrypt_and_digest(email.encode('utf-8'))
-        encypted_email = tag + nonce + ciphertext
-        return encypted_email
+        # cipher = AES.new(key, AES.MODE_EAX)
+        # nonce = cipher.nonce
+        # ciphertext, tag = cipher.encrypt_and_digest(email.encode('utf-8'))
+        # encypted_email = tag + nonce + ciphertext
+        # return encypted_email
+        return 'encrypted_email'
 
     @staticmethod
-    def decrypt_email(encrypted_email):
-        tag = encrypted_email[0:16]
-        nonce = encrypted_email[16:32]
-        ciphertext = encrypted_email[32:]
+    def decrypt_email(encrypted_email_in_utf16):
+        # pdb.get_trace()
+        # encrypted_email = encrypted_email_in_utf16.encode('utf-16')
+        # tag = encrypted_email[0:16]
+        # nonce = encrypted_email[16:32]
+        # ciphertext = encrypted_email[32:]
 
-        key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
-        key = key_string.encode('cp437')
+        # key_string = os.environ.get('AES_KEY') or '╘oaí²∞7▒·oDºB@`\x02÷C<\x02╞£╨`\nä\x01<∞VΩM'
+        # key = key_string.encode('cp437')
 
-        cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
-        email = cipher.decrypt(ciphertext).decode('utf-8')
-        return email
+        # cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
+        # email = cipher.decrypt(ciphertext).decode('utf-8')
+        # return email
+        return 'airladon@gmail.com'
 
     # See https://github.com/pyca/bcrypt/ for more information on bcrypt
     # and recommendation for pre-hashing password to make it a consistent
@@ -82,11 +86,11 @@ class Users(UserMixin, db.Model):
     def set_password(self, password):
         a = bcrypt.hashpw(
             prep_password(password),
-            bcrypt.gensalt(14))
-        self.password_hash = a
+            bcrypt.gensalt(10))
+        self.password_hash = a.decode('utf-8')
 
     def check_password(self, password):
-        password_hash = self.password_hash
+        password_hash = self.password_hash.encode('utf-8')
         # pdb.set_trace()
         # if password_hash.startswith('\\x'):
         #     password_hash = bytearray.fromhex(password_hash[2:]).decode()

@@ -22,7 +22,8 @@ Local environment variables are used for
 The environment variable `DATABASE_URL` defines which database option to use.
 
 * `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
-* `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database
+* `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database accessed from inside a container
+* `export DATABASE_URL=postgresql://postgres@localhost/<local_db_name>` a local postgres database accessed from outside a container
 * ```export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'` ```
 
 
@@ -390,3 +391,5 @@ Log into db and check tables, data
 
 Get data from heroku db
 `heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
+
+DELETE from users where id>0;
