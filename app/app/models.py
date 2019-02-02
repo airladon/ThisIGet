@@ -67,9 +67,8 @@ class Users(UserMixin, db.Model):
         return encypted_email
         # return 'encrypted_email'
 
-    def decrypt_email(self, encrypted_email_in_utf16):
+    def decrypt_email(self, encrypted_email):
         # pdb.get_trace()
-        encrypted_email = encrypted_email_in_utf16
         tag = encrypted_email[0:16]
         nonce = encrypted_email[16:32]
         ciphertext = encrypted_email[32:]
