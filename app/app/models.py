@@ -10,7 +10,7 @@ import jwt
 from app import app
 # import os
 # from Crypto.Cipher import AES
-from app.tools import encrypt, decrypt, hash_str, check_hash
+from app.tools import encrypt, decrypt, hash_str, check_hash, hash_str_with_pepper
 
 # Encryption is AES 256 using EAX mode which allows for stream encoding.
 # Stream encoding means encoded output length will be proportional to plain
@@ -62,7 +62,7 @@ class Users(UserMixin, db.Model):
 
     def set_email(self, email):
         self.email = encrypt(email, min_length_for_padding=320)
-        self.email_hash = hash_str(email)
+        self.email_hash = hash_str_with_pepper(email)
 
     def get_email(self):
         return decrypt(self.email)

@@ -90,6 +90,20 @@ def hash_str(plain_text, iterations=12):
     return hashed.decode('utf-8')
 
 
+def get_pepper():
+    return os.environ.get('PEPPER') or \
+        '$2b$12$PG2p9.4Qb.cuz9wUqow.EO'
+
+
+def hash_str_with_pepper(plain_text, pepper=get_pepper(), iterations=12):
+    pepper_bytes = pepper
+    if type(pepper) == str:
+        pepper_bytes = hex_str_to_bytes(pepper)
+    pt = prep_plain_text_for_hashing(plain_text)
+    hashed = bcrypt.hashpw(pt, pepper)
+    return hashed.decode('utf-8')
+
+
 def check_hash(plain_text, hash_to_compare):
     pt = prep_plain_text_for_hashing(plain_text)
     return bcrypt.checkpw(pt, hash_to_compare.encode('utf-8'))
