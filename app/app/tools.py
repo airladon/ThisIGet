@@ -3,6 +3,8 @@ from Crypto.Cipher import AES
 import hashlib
 import bcrypt
 import os
+from Crypto.Random import get_random_bytes
+import binascii
 
 
 def bytes_to_b64_str(bytes_to_convert):
@@ -28,6 +30,19 @@ def bytes_to_hex_str(bytes_to_convert):
     for i in range(0, len(bytes_to_convert)):
         hex_str += '{:02x}'.format(bytes_to_convert[i])
     return hex_str
+
+
+def generate_aes_key():
+    key = get_random_bytes(32)
+    key_hex_string = binascii.hexlify(key).decode('ascii')
+    return key_hex_string
+
+
+def generate_pepper(iterations=12):
+    print(int(iterations))
+    pepper = bcrypt.gensalt(int(iterations))
+    pepper_hex_string = binascii.hexlify(pepper).decode('ascii')
+    return pepper_hex_string
 
 
 def get_aes_key():

@@ -1,11 +1,9 @@
-import bcrypt
-import binascii
 import sys
+sys.path.insert(0, './app/app')
+from tools import generate_pepper    # noqa
 
 iterations = 12
 if len(sys.argv) > 1:
     iterations = sys.argv[1]
 
-pepper = bcrypt.gensalt(iterations)
-pepper_hex_string = binascii.hexlify(pepper).decode('ascii')
-print(pepper_hex_string)
+print(generate_pepper(iterations))
