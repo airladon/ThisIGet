@@ -36,6 +36,10 @@ from app.tools import encrypt, decrypt, hash_str, check_hash
 #   - This is then stored in the database as utf-8, which will be a full 472
 #     bytes
 
+# Size of password:
+#   - Password hash is 60 bytes + tag (16) + nonce (16) = 92 bytes = 736 bits
+#   - 124 b64 chars = 744 bits = 93 bytes
+#   - Therefore saved string will be 124 chars
 # Size of hash: bcrypt output will always be 60 b64 chars.
 
 # Username size will be limited to 32 characters
@@ -46,7 +50,7 @@ class Users(UserMixin, db.Model):
     username = db.Column(db.String(32), index=True, unique=True)
     email = db.Column(db.String(472))
     email_hash = db.Column(db.String(60))
-    password_hash = db.Column(db.String(60))
+    password = db.Column(db.String(124))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
@@ -57,19 +61,17 @@ class Users(UserMixin, db.Model):
         return '<User {}>'.format(self.username)
 
     def set_email(self, email):
-        print(len(encrypt(email)))
-        print(len(hash_str(email)))
-        self.email = encrypt(email)
+        self.email = encrypt(email, min_length_for_padding=320)
         self.email_hash = hash_str(email)
 
     def get_email(self):
         return decrypt(self.email)
 
     def set_password(self, password):
-        self.password_hash = hash_str(password)
+        self.password = encrypt(hash_str(password))
 
     def check_password(self, password):
-        return check_hash(password, self.password_hash)
+        return check_hash(password, decrypt(self.password))
 
     def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(

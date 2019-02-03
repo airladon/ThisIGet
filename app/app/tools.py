@@ -40,7 +40,7 @@ def get_aes_key_bytes():
 
 
 def encrypt(plain_text, key=get_aes_key_bytes(),
-            min_length_for_padding=320, padding_char=' '):
+            min_length_for_padding=0, padding_char=' '):
     # Convert key to bytes type if not already
     key_bytes = key
     if type(key) == str:
