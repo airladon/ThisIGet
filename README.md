@@ -48,6 +48,13 @@ If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable nee
 
 This is only needed if deploying a build from the local machine.
 
+#### `AES_KEY`
+Only needed if in production - hex key that is used for encryption
+
+#### `PEPPER`
+Only needed if in production - hex pepper that is used to hash emails
+
+
 ## Interactive Dev Environment container
 A docker container can be used to do lint and type checking, and tests. To start the container
 * `./startenv dev`
