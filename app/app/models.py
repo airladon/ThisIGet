@@ -10,7 +10,37 @@ import jwt
 from app import app
 import os
 from Crypto.Cipher import AES
-import pdb
+from tools import bytes_to_b64_str, b64_str_to_bytes
+from tools import hex_str_to_bytes, bytes_to_hex_str
+from tools import encrypt, decrypt
+
+# Encryption is AES 256 using EAX mode which allows for stream encoding.
+# Stream encoding means encoded output length will be proportional to plain
+# text length. Therefore, for encrypting emails, pad emails to hide their
+# length.
+#
+# Encryption uses a nonce (once only number) so when checking if an email
+# exists in a database, cannot encrypt the email to check and compare it to
+# existing encrypted emails - as all have different nonce values.
+#
+# Therefore, email hash (for quick lookup) and encrypted email is used.
+#
+# Size of Encrypted Email storage in database:
+#   - Emails may have 64 + 1 + 255 characters = 320 characters
+#   - Therefore, emails are padded to 320 characters
+#   - Encrypted bytes includes encryped email (320 bytes) + tag (16 bytes)
+#     + nonce (16 bytes) = 352 bytes
+#   - Encoding in Base64: 352 * 8 bits / 6 bits = 469.333 b64 characters
+#     - 352 bytes = 2816 bits
+#     - 469 b64 chars = 2814 bits, so need 470 b64 chars to cover 352 bytes.
+#     - But then it won't split evenly into 8 bits, so need another 2 b64 chars
+#     - Therefore total is 472 b64 chars
+#   - This is then stored in the database as utf-8, which will be a full 472
+#     bytes
+
+# Size of hash: bcrypt output will always be 60 b64 chars.
+
+# Username size will be limited to 32 characters
 
 
 def prep_password(password):
@@ -18,12 +48,29 @@ def prep_password(password):
             hashlib.sha512(password.encode('utf-8')).digest())
 
 
+def bytes_to_str(bytes_to_convert):
+    # return base64.b64encode(bytes_to_convert).decode('ascii')
+    return base64.b64encode(bytes_to_convert).decode('utf-8')
+
+
+def str_to_bytes(str_to_convert):
+    # return base64.b64decode(b64_ascii.encode('ascii'))
+    return base64.b64decode(str_to_convert.encode('utf-8'))
+
+
+def hex_str_to_bytes(hex_str):
+    byte_array = []
+    for i in range(0, len(hex_str), 2):
+        byte_array.append(int(hex_str[i:i + 2], 16))
+    return bytes(byte_array)
+
+
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    encrypted_email = db.Column(db.LargeBinary(256))
-    email_hash = db.Column(db.String(128))
-    password_hash = db.Column(db.String(128))
+    username = db.Column(db.String(32), index=True, unique=True)
+    encrypted_email = db.Column(db.String(472))
+    email_hash = db.Column(db.String(60))
+    password_hash = db.Column(db.String(60))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
