@@ -21,6 +21,7 @@ import datetime
 from app.tools import hash_str_with_pepper
 # import pdb
 
+
 @app.route('/')
 def home():
     return render_template('home.html')
@@ -119,12 +120,12 @@ def login(username=''):
         user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        user = Users.query.filter_by(username=form.username_or_email.data).first()
+        user = Users.query.filter_by(
+            username=form.username_or_email.data).first()
         if user is None:
             user = Users.query.filter_by(
-                email_hash=hash_str_with_pepper(form.username_or_email.data)).first()
-        # if user is None:
-        #     pdb.set_trace()
+                email_hash=hash_str_with_pepper(
+                    form.username_or_email.data)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -221,7 +222,8 @@ def reset_password_request():
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = Users.query.filter_by(email_hash=hash_str_with_pepper(form.email.data)).first()
+        user = Users.query.filter_by(
+            email_hash=hash_str_with_pepper(form.email.data)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')

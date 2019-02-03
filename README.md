@@ -156,6 +156,54 @@ You can only use the Heroku database if you have the Heroku CLI installed and lo
 #### Upgrade the database to a new migration
 `Flask db upgrade`
 
+
+#### Start from scratch - Local SQL
+```
+rm app/app.db
+rm -rf migrations
+unset DATABASE_URL
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+#### Start from scratch - Local Postgres
+Assume database is called `thisiget_local`
+
+```
+psql -c 'drop database thisiget_local'
+psql -c 'create database thisiget_local'
+rm -rf migrations
+export DATABASE_URL=postgresql://postgres@localhost/thisiget_local
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+#### Start from scratch - Heroku
+Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
+```
+heroku pg:reset --app=itgetitest
+export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+flask db upgrade
+```
+
+Can check with
+`heroku pg:psql --app=itgetitest -c 'select * from users'`
+
+#### Upload local database to Heroku
+Assume database is called `thisiget_local`
+```
+heroku pg:reset --app=itgetitest
+heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest
+```
+
+Can check with
+`heroku pg:psql --app=itgetitest -c 'select * from users'`
+
+> Note: If `AES_KEY` or `PEPPER` is different on the local environment compared to the Heroku environment, and data in the database was generated locally with the different environment variables, then app on Heroku won't be able to read the locally generated entries.
+
+
 #### Check the database
 
 For Sqlite3, use a database viewing app like `DB Browser for SQLite` and load `app/app/app.db` file.

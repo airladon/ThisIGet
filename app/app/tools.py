@@ -39,7 +39,6 @@ def generate_aes_key():
 
 
 def generate_pepper(iterations=12):
-    print(int(iterations))
     pepper = bcrypt.gensalt(int(iterations))
     pepper_hex_string = binascii.hexlify(pepper).decode('ascii')
     return pepper_hex_string
