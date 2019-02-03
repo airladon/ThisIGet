@@ -10,7 +10,8 @@ import jwt
 from app import app
 # import os
 # from Crypto.Cipher import AES
-from app.tools import encrypt, decrypt, hash_str, check_hash, hash_str_with_pepper
+from app.tools import encrypt, decrypt, hash_str, check_hash
+from app.tools import hash_str_with_pepper
 
 # Encryption is AES 256 using EAX mode which allows for stream encoding.
 # Stream encoding means encoded output length will be proportional to plain
