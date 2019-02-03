@@ -41,28 +41,6 @@ from app.tools import encrypt, decrypt, hash_str, check_hash
 # Username size will be limited to 32 characters
 
 
-# def prep_password(password):
-#         return base64.b64encode(
-#             hashlib.sha512(password.encode('utf-8')).digest())
-
-
-# def bytes_to_str(bytes_to_convert):
-#     # return base64.b64encode(bytes_to_convert).decode('ascii')
-#     return base64.b64encode(bytes_to_convert).decode('utf-8')
-
-
-# def str_to_bytes(str_to_convert):
-#     # return base64.b64decode(b64_ascii.encode('ascii'))
-#     return base64.b64decode(str_to_convert.encode('utf-8'))
-
-
-# def hex_str_to_bytes(hex_str):
-#     byte_array = []
-#     for i in range(0, len(hex_str), 2):
-#         byte_array.append(int(hex_str[i:i + 2], 16))
-#     return bytes(byte_array)
-
-
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True, unique=True)
@@ -87,77 +65,11 @@ class Users(UserMixin, db.Model):
     def get_email(self):
         return decrypt(self.email)
 
-    # @staticmethod
-    # def hash_email(email):
-    #     pepper_string = os.environ.get('PEPPER') or b'$2b$10$BnJqVgOFqLemn6hfp6CAPO'.decode('cp437')
-    #     pepper = pepper_string.encode('cp437')
-    #     return bcrypt.hashpw(prep_password(email), pepper).decode('utf-8')
-
-    # def get_key(self):
-    #     key_hex_string = os.environ.get('AES_KEY') or 'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
-    #     byte_array=[]
-    #     for i in range(0, len(key_hex_string), 2):
-    #         byte_array.append( int (key_hex_string[i:i+2], 16 ) )
-
-    #     key = bytes(byte_array)
-    #     return key
-
-    # def encrypt_email(self, email):
-    #     # key_string = os.environ.get('AES_KEY') or 'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
-    #     key = self.get_key()
-
-    #     cipher = AES.new(key, AES.MODE_EAX)
-    #     nonce = cipher.nonce
-    #     ciphertext, tag = cipher.encrypt_and_digest(email.encode('utf-8'))
-    #     encypted_email = tag + nonce + ciphertext
-    #     # pdb.set_trace()
-    #     return encypted_email
-    #     # return 'encrypted_email'
-
-    # def decrypt_email(self, encrypted_email):
-    #     # pdb.get_trace()
-    #     tag = encrypted_email[0:16]
-    #     nonce = encrypted_email[16:32]
-    #     ciphertext = encrypted_email[32:]
-
-    #     # key_string = os.environ.get('AES_KEY') or b'2P\xe9\xad\xa5m3\xa8\x8b\xc2\xd9\x0c\xf8\x8ba\xfa\x13\xbf^h\xa8\xe5\xa8\x1f\xc6\xfe\xeb\x8d\x8eM\xbf\x12'
-    #     # key = key_string.encode('cp437')
-    #     key = self.get_key()
-
-    #     cipher = AES.new(key, AES.MODE_EAX, nonce=nonce)
-    #     email = cipher.decrypt(ciphertext).decode('utf-8')
-    #     return email
-    #     # return 'airladon@gmail.com'
-
-    # See https://github.com/pyca/bcrypt/ for more information on bcrypt
-    # and recommendation for pre-hashing password to make it a consistent
-    # length.
-    # See https://blogs.dropbox.com/
-    #   tech/2016/09/how-dropbox-securely-stores-your-passwords/
-    # for their recommendation on how to store passwords
-    # See https://www.compose.com/articles/
-    #   you-may-get-pwned-at-least-protect-passwords-with-bcrypt/
-    # for explanation on bcrypt hash and how it also stores the salt
     def set_password(self, password):
-        # a = bcrypt.hashpw(
-        #     prep_password(password),
-        #     bcrypt.gensalt(10))
-        # self.password_hash = a.decode('utf-8')
         self.password_hash = hash_str(password)
 
     def check_password(self, password):
         return check_hash(password, self.password_hash)
-        # password_hash = self.password_hash.encode('utf-8')
-        # pdb.set_trace()
-        # if password_hash.startswith('\\x'):
-        #     password_hash = bytearray.fromhex(password_hash[2:]).decode()
-        # return bcrypt.checkpw(
-        #     prep_password(password),
-        #     password_hash)
-
-    # def prep_password(self, password):
-    #     return base64.b64encode(
-    #         hashlib.sha512(password.encode('utf-8')).digest())
 
     def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(

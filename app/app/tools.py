@@ -73,6 +73,17 @@ def prep_plain_text_for_hashing(plain_text):
     return normalized_length_b64
 
 
+# See https://github.com/pyca/bcrypt/ for more information on bcrypt
+# and recommendation for pre-hashing password to make it a consistent
+# length.
+# See https://blogs.dropbox.com/
+#   tech/2016/09/how-dropbox-securely-stores-your-passwords/
+# for their recommendation on how to store passwords
+# See https://www.compose.com/articles/
+#   you-may-get-pwned-at-least-protect-passwords-with-bcrypt/
+# for explanation on bcrypt hash and how it also stores the salt
+
+
 def hash_str(plain_text, iterations=12):
     pt = prep_plain_text_for_hashing(plain_text)
     hashed = bcrypt.hashpw(pt, bcrypt.gensalt(iterations))
