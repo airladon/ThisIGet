@@ -18,7 +18,8 @@ from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
-import pdb
+from app.tools import hash_str
+
 
 @app.route('/')
 def home():
@@ -118,10 +119,10 @@ def login(username=''):
         user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        user = Users.query.filter(
-            (Users.username == form.username_or_email.data)
-            | (Users.email_hash == Users.hash_email(form.username_or_email.data)) # noqa
-        ).first()
+        user = Users.query.filter_by(username=form.username_or_email.data).first()
+        if user is None:
+            user = Users.query.filter_by(
+                email_hash=hash_str(form.username_or_email.data)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -218,7 +219,7 @@ def reset_password_request():
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = Users.query.filter_by(email_hash=Users.hash_email(form.email.data)).first()
+        user = Users.query.filter_by(email_hash=hash_str(form.email.data)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')

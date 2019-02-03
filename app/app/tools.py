@@ -30,23 +30,30 @@ def bytes_to_hex_str(bytes_to_convert):
     return hex_str
 
 
-def encrypt(plain_text, key, min_length_for_padding=320, padding_char=' '):
+def get_aes_key():
+    return os.environ.get('AES_KEY') or \
+        'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
+
+
+def get_aes_key_bytes():
+    return hex_str_to_bytes(get_aes_key())
+
+
+def encrypt(plain_text, key=get_aes_key_bytes(),
+            min_length_for_padding=320, padding_char=' '):
     # Convert key to bytes type if not already
     key_bytes = key
     if type(key) == str:
         key_bytes = hex_str_to_bytes(key)
     cipher = AES.new(key_bytes, AES.MODE_EAX)
     nonce = cipher.nonce
-    plain_text_to_use = plain_text
-    if len(plain_text) < min_length_for_padding:
-        plain_text_to_use += ' ' * (min_length_for_padding - len(plain_text))
-    ciphertext, tag = cipher.encrypt_and_digest(plain_text_to_use.encode('utf-8'))
-    print(ciphertext)
-    encypted_email = tag + nonce + ciphertext
-    return bytes_to_b64_str(encypted_email)
+    padded = plain_text + ' ' * (min_length_for_padding - len(plain_text))
+    ciphertext, tag = cipher.encrypt_and_digest(padded.encode('utf-8'))
+    encypted_payload = tag + nonce + ciphertext
+    return bytes_to_b64_str(encypted_payload)
 
 
-def decrypt(encrypted_str, key, padding_char=' '):
+def decrypt(encrypted_str, key=get_aes_key_bytes(), padding_char=' '):
     # Convert key to bytes type if not already
     key_bytes = key
     if type(key) == str:
@@ -66,10 +73,10 @@ def prep_plain_text_for_hashing(plain_text):
     return normalized_length_b64
 
 
-def hash(plain_text, iterations=12):
+def hash_str(plain_text, iterations=12):
     pt = prep_plain_text_for_hashing(plain_text)
-    h = bcrypt.hashpw(pt, bcrypt.gensalt(iterations))
-    return h.decode('utf-8')
+    hashed = bcrypt.hashpw(pt, bcrypt.gensalt(iterations))
+    return hashed.decode('utf-8')
 
 
 def check_hash(plain_text, hash_to_compare):
@@ -77,19 +84,10 @@ def check_hash(plain_text, hash_to_compare):
     return bcrypt.checkpw(pt, hash_to_compare.encode('utf-8'))
 
 
-def get_aes_key():
-    return key_hex_string = os.environ.get('AES_KEY') or \
-        'c0f04ab9d3b1939589072cd6ca0bf40539d8bf0a8b823adb09ccc855eee48b40'
-
-
-def get_aes_key_bytes():
-    return hex_str_to_bytes(get_key)
-
-
-key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
-len(encrypt('1', key_str))
-len(encrypt('12', key_str))
-len(encrypt('123', key_str))
-len(encrypt('1234', key_str))
-len(encrypt('12345', key_str))
-len(encrypt('123456', key_str))
+# key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
+# len(encrypt('1', key_str))
+# len(encrypt('12', key_str))
+# len(encrypt('123', key_str))
+# len(encrypt('1234', key_str))
+# len(encrypt('12345', key_str))
+# len(encrypt('123456', key_str))

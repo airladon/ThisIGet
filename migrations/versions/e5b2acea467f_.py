@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: eaf100343e9d
+Revision ID: e5b2acea467f
 Revises: 
-Create Date: 2019-02-01 16:11:17.763330
+Create Date: 2019-02-02 20:50:41.669563
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = 'eaf100343e9d'
+revision = 'e5b2acea467f'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -27,10 +27,10 @@ def upgrade():
     op.create_index(op.f('ix_category_category'), 'category', ['category'], unique=True)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=64), nullable=True),
-    sa.Column('encrypted_email', sa.LargeBinary(length=256), nullable=True),
-    sa.Column('email_hash', sa.String(length=128), nullable=True),
-    sa.Column('password_hash', sa.String(length=128), nullable=True),
+    sa.Column('username', sa.String(length=32), nullable=True),
+    sa.Column('email', sa.String(length=472), nullable=True),
+    sa.Column('email_hash', sa.String(length=60), nullable=True),
+    sa.Column('password_hash', sa.String(length=60), nullable=True),
     sa.Column('signed_up_on', sa.DateTime(), nullable=True),
     sa.Column('confirmed', sa.Boolean(), nullable=True),
     sa.Column('confirmed_on', sa.DateTime(), nullable=True),
