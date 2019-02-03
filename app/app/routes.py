@@ -19,7 +19,7 @@ from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
 from app.tools import hash_str_with_pepper
-import pdb
+# import pdb
 
 @app.route('/')
 def home():
@@ -123,8 +123,8 @@ def login(username=''):
         if user is None:
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(form.username_or_email.data)).first()
-        if user is None:
-            pdb.set_trace()
+        # if user is None:
+        #     pdb.set_trace()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))

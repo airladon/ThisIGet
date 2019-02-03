@@ -92,7 +92,7 @@ def hash_str(plain_text, iterations=12):
 
 def get_pepper():
     return os.environ.get('PEPPER') or \
-        '$2b$12$PG2p9.4Qb.cuz9wUqow.EO'
+        '24326224313224715476454673646b776f6e4b47425a36313032584f2e'
 
 
 def hash_str_with_pepper(plain_text, pepper=get_pepper(), iterations=12):
@@ -100,7 +100,7 @@ def hash_str_with_pepper(plain_text, pepper=get_pepper(), iterations=12):
     if type(pepper) == str:
         pepper_bytes = hex_str_to_bytes(pepper)
     pt = prep_plain_text_for_hashing(plain_text)
-    hashed = bcrypt.hashpw(pt, pepper)
+    hashed = bcrypt.hashpw(pt, pepper_bytes)
     return hashed.decode('utf-8')
 
 
