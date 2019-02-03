@@ -109,13 +109,24 @@ def get_pepper():
         '24326224313224715476454673646b776f6e4b47425a36313032584f2e'
 
 
-def hash_str_with_pepper(plain_text, pepper=get_pepper(), iterations=12):
+# Peppered hash will only return the hash (last 31 bytes) and not the pepper
+# as the pepper should be kept secret
+def hash_str_with_pepper(plain_text, pepper=get_pepper()):
     pepper_bytes = pepper
     if type(pepper) == str:
         pepper_bytes = hex_str_to_bytes(pepper)
     pt = prep_plain_text_for_hashing(plain_text)
     hashed = bcrypt.hashpw(pt, pepper_bytes)
-    return hashed.decode('utf-8')
+    return hashed.decode('utf-8')[29:]
+
+
+def check_peppered_hash(plain_text, hash_to_compare, pepper=get_pepper()):
+    pepper_bytes = pepper
+    if type(pepper) == str:
+        pepper_bytes = hex_str_to_bytes(pepper)
+    pt = prep_plain_text_for_hashing(plain_text)
+    full_hash = pepper_bytes + hash_to_compare.encode('utf-8')
+    return bcrypt.checkpw(pt, full_hash)
 
 
 def check_hash(plain_text, hash_to_compare):

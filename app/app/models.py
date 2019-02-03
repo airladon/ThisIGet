@@ -43,6 +43,8 @@ from app.tools import hash_str_with_pepper
 #   - Therefore saved string will be 124 chars
 # Size of hash: bcrypt output will always be 60 b64 chars.
 
+# Size of email hash will be 60-29 = 31 as don't want to store the pepper
+
 # Username size will be limited to 32 characters
 
 
@@ -50,7 +52,7 @@ class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), index=True, unique=True)
     email = db.Column(db.String(472))
-    email_hash = db.Column(db.String(60))
+    email_hash = db.Column(db.String(31))
     password = db.Column(db.String(124))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
