@@ -451,10 +451,13 @@ DELETE from users where id>0;
 
 
 # Deploy to new Heroku App
+
+### Heroku Config variables
 Or get variables from an existing app:
 ```
 ./tools/get_config_vars.sh <EXISTING_APP_NAME>
 ```
+Copy and paste all the lines that start with `export` to make the local environment variables.
 
 Or if no existing app, then set these as new:
 ```
@@ -476,3 +479,22 @@ Upload the config variables
 ./tools/set_config_vars.sh <NEW_APP_NAME>
 ```
 
+### Hook up a database
+#### New database:
+```
+heroku addons:create heroku-postgresql:hobby-dev --app=<NEW_APP_NAME>
+```
+Then initialize the database (assuming flask migrations is already setup)
+```
+export DATABASE_URL=`heroku config --app=<NEW_APP_NAME> | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+flask db upgrade
+```
+
+Attach to existing database:
+heroku addons:
+```
+heroku addons:attach <EXISTING_APP>::DATABASE --app=<NEW_APP_NAME>
+```
+
+### Build and Deploy
+./build.sh prod deploy <NEW_APP_NAME>
