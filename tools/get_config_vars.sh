@@ -33,5 +33,7 @@ heroku config --app=thisiget | \
   sed '1d' | \
   sed 's/ //g' | \
   sed 's/:/="/' | \
+  sed '/^DATABASE_URL/d' | \
+  sed '/^OLD/d' | \
   sed 's/^/export /' | \
   sed 's/$/"/'

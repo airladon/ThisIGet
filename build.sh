@@ -67,6 +67,7 @@ then
   if [ $2 = "deploy" ];
   then
     DEPLOY=deploy
+
   fi
 fi
 
@@ -210,7 +211,7 @@ fi
 #   Dev if branch is release-candidate
 echo $2
 if [ $2 = "deploy" ];
-  then
+then
   APP_NAME=''
   TITLE_STRING=''
   if [ $BRANCH = $DEPLOY_PROD_BRANCH ];
@@ -238,6 +239,40 @@ if [ $2 = "deploy" ];
   fi
   if [ $APP_NAME ];
     then
+    # first check the heroku app has the required config vars already set
+    echo "${bold}${cyan}==== Checking Heroku Config Vars Exist ${reset} ====="
+    EXPECTED_CONFIG_VARS[0]=MAIL_SERVER
+    EXPECTED_CONFIG_VARS[1]=SECRET_KEY
+    EXPECTED_CONFIG_VARS[2]=MAIL_USERNAME
+    EXPECTED_CONFIG_VARS[3]=MAIL_SENDER
+    EXPECTED_CONFIG_VARS[4]=AES_KEY
+    EXPECTED_CONFIG_VARS[5]=PEPPER1
+
+    HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
+
+    check_var() {
+      VALUE=`echo $1 | sed 's/ /\'$'\n/g' | sed -n "/^${2}/p"`
+      if [ -z $VALUE ];
+      then
+        echo "Checking $2 - ${yellow}${bold}Fail - does not exist on Heroku.${reset}"
+        FAIL=1
+        NO_VAR=1
+      fi
+    }
+
+    EXPECTED_CONFIG_VARS_ARRAY=(${EXPECTED_CONFIG_VARS})
+    for VAR in ${EXPECTED_CONFIG_VARS[@]}; do
+      # echo "Checking " $VAR
+      NO_VAR=0
+      check_var "$HEROKU_CONFIG_VARS" $VAR
+      if [ NO_VAR == 0 ];
+      then
+        echo "Checking $VAR - ${green}OK${reset}"
+      fi
+    done
+
+    check_status "Config Vars Check"
+
     echo "${bold}${cyan}" $TITLE_STRING "${reset}"
     docker login --username=_ --password=$HEROKU_TOKEN registry.heroku.com
     cp containers/Dockerfile_prod ./Dockerfile
