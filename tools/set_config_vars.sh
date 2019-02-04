@@ -18,7 +18,6 @@ then
   exit 1
 fi
 
-
 # Check app exists
 RESULT=`heroku apps | grep ^$1$ | wc -l | sed 's/ //g'`
 if [ $RESULT != 1 ];
@@ -66,7 +65,7 @@ set_env() {
       echo No changes as Heroku config var value is same as local environment variable.
     fi
   fi
-  sleep 0.5
+  sleep 0.2s
 }
 
 set_env $1 "$CONFIG_VARS" MAIL_SERVER
@@ -77,8 +76,32 @@ set_env $1 "$CONFIG_VARS" MAIL_SENDER
 set_env $1 "$CONFIG_VARS" AES_KEY
 set_env $1 "$CONFIG_VARS" PEPPER
 
-echo
-echo $CHANGES
+if [ -z $CHANGES ];
+then
+  exit 1
+fi
 
-echo
-heroku config:set $CHANGES --app=$1
+if [ $1 == thisiget ] || [ $1 == thisiget-beta ];
+then
+  echo
+  echo "${bold}${yellow}================================================${reset}"
+  echo "${bold}${yellow}WARNING${reset}"
+  echo "${bold}${yellow}================================================${reset}"
+  echo "${yellow}About to change the production app ${bold}$1${reset}."
+  echo
+  echo "Existing hash and encrypted database entries might not be readable if database hasn't been updated to these changes"
+  echo
+  
+  while true; do
+    read -p "${yellow}If you are sure you want to change, then type the app name ${bold}$1${reset}${yellow}. If not, type ${bold}c${reset}${yellow} or ${bold}n${reset}${yellow} to cancel: ${reset}" ync
+    case $ync in
+      # [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
+      # [Yy]* ) heroku config:set $CHANGES --app=$1; break;;
+      $1 ) heroku config:set $CHANGES --app=$1; break;;
+      [Nn]* ) echo Cancelled; echo; exit 1;;
+      [Cc]* ) echo Cancelled; echo; exit 1;;
+      * ) echo "Please type ${bold}n${reset}, ${bold}c${reset} or ${bold}$1${reset}";;
+    esac
+  done
+fi
+
