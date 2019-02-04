@@ -29,7 +29,11 @@ then
   exit 1
 fi
 
-heroku config --app=thisiget | \
+echo
+heroku config --app=$1 | sed '1d' | sed '/^DATABASE_URL/d'
+echo
+
+heroku config --app=$1 | \
   sed '1d' | \
   sed 's/ //g' | \
   sed 's/:/="/' | \
@@ -37,3 +41,4 @@ heroku config --app=thisiget | \
   sed '/^OLD/d' | \
   sed 's/^/export /' | \
   sed 's/$/"/'
+echo
