@@ -1,3 +1,0 @@
-pipenv shell
-$1
-
