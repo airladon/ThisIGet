@@ -12,9 +12,10 @@ MODE=prod
 DEPLOY=no_deploy
 RUN_TESTS=yes
 HOST_PATH=`pwd`
-HEROKU_APP_NAME=itgeti              # Production app name on Heroku
-HEROKU_DEV_APP_NAME=itgetidev       # Dev app name on Heroku
-HEROKU_TEST_APP_NAME=itgetitest     # Dev app name on Heroku
+HEROKU_APP_NAME=thisiget            # Production app name on Heroku
+HEROKU_BETA_APP_NAME=thisiget-beta  # Testing with production database
+HEROKU_TEST_APP_NAME=thisiget-test  # Automated web app testing
+HEROKU_DEV_APP_NAME=thisiget-dev    # For developer testing
 DEPLOY_PROD_BRANCH=master           # Branch to test and deploy to prod
 DEPLOY_DEV_BRANCH=release-candidate # Branch to test and deploy to dev
 TRAVIS_DEBUG_BRANCH=travis          # Branch for fast travis debug
@@ -106,9 +107,10 @@ then
     esac
   else
     case $3 in
+      prod) APP_NAME=$HEROKU_APP_NAME;;
+      beta) APP_NAME=$HEROKU_BETA_APP_NAME;;
       test) APP_NAME=$HEROKU_TEST_APP_NAME;;
       dev) APP_NAME=$HEROKU_DEV_APP_NAME;;
-      prod) APP_NAME=$HEROKU_APP_NAME;;
       *) APP_NAME=$3;;
     esac
   fi  
@@ -136,6 +138,7 @@ then
     EXPECTED_CONFIG_VARS[3]=MAIL_SENDER
     EXPECTED_CONFIG_VARS[4]=AES_KEY
     EXPECTED_CONFIG_VARS[5]=PEPPER
+    EXPECTED_CONFIG_VARS[6]=DATABASE_URL
 
     HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
 

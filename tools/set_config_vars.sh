@@ -8,6 +8,8 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
+FLASK_APP="my_app.py"
+
 # Check number of arguments
 if [ -z $1 ];
 then
@@ -45,24 +47,36 @@ set_env() {
     echo "${bold}${yellow}Warning: ${red}$3 ${yellow}environment variable not set.${reset}"
     FAIL=1
   else
-    VALUE=`echo $2 | sed 's/ /\'$'\n/g' | sed -n "/^${3}/p" | sed 's/^.*=//'`
-    if [ $VALUE != ${!3} ];
+    if [ -z "$2" ];
     then
-      echo "${yellow}Changing value on Heroku${reset}"
-      echo "  from: $VALUE"
-      echo "  to:   ${!3}"
-      while true; do
-        read -p "${yellow}Are you sure you want to change?${reset} (y/n/c): " ync
-        case $ync in
-          # [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
-          [Yy]* ) CHANGES="$CHANGES $3=${!3}"; CHANGES="$CHANGES OLD_$3=$VALUE"; break;;
-          [Nn]* ) echo No changes to $3.; break;;
-          [Cc]* ) echo Cancelled; exit 1;;
-          * ) echo "Please answer yes or no.";;
-        esac
-      done
+      echo "${yellow}Adding: ${!3}${reset}"
+      CHANGES="$CHANGES $3=${!3}";
     else
-      echo No changes as Heroku config var value is same as local environment variable.
+      VALUE=`echo $2 | sed 's/ /\'$'\n/g' | sed -n "/^${3}/p" | sed 's/^.*=//'`
+      if [ -z $VALUE ];
+      then
+        echo "${yellow}Adding $3: ${!3}${reset}"
+        CHANGES="$CHANGES $3=${!3}";
+      else
+        if [ $VALUE != ${!3} ];
+        then
+          echo "${yellow}Changing value on Heroku${reset}"
+          echo "  from: $VALUE"
+          echo "  to:   ${!3}"
+          while true; do
+            read -p "${yellow}Are you sure you want to change?${reset} (y/n/c): " ync
+            case $ync in
+              # [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
+              [Yy]* ) CHANGES="$CHANGES $3=${!3}"; CHANGES="$CHANGES OLD_$3=$VALUE"; break;;
+              [Nn]* ) echo No changes to $3.; break;;
+              [Cc]* ) echo Cancelled; exit 1;;
+              * ) echo "Please answer yes or no.";;
+            esac
+          done
+        else
+          echo No changes as Heroku config var value is same as local environment variable.
+        fi
+      fi
     fi
   fi
   sleep 0.2s
@@ -75,8 +89,10 @@ set_env $1 "$CONFIG_VARS" MAIL_PASSWORD
 set_env $1 "$CONFIG_VARS" MAIL_SENDER
 set_env $1 "$CONFIG_VARS" AES_KEY
 set_env $1 "$CONFIG_VARS" PEPPER
+set_env $1 "$CONFIG_VARS" FLASK_APP
+echo
 
-if [ -z $CHANGES ];
+if [ -z "$CHANGES" ];
 then
   exit 1
 fi
@@ -103,5 +119,7 @@ then
       * ) echo "Please type ${bold}n${reset}, ${bold}c${reset} or ${bold}$1${reset}";;
     esac
   done
+else
+  heroku config:set $CHANGES --app=$1
 fi
-
+echo

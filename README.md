@@ -448,3 +448,31 @@ Get data from heroku db
 `heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
 
 DELETE from users where id>0;
+
+
+# Deploy to new Heroku App
+Or get variables from an existing app:
+```
+./tools/get_config_vars.sh <EXISTING_APP_NAME>
+```
+
+Or if no existing app, then set these as new:
+```
+export MAIL_PASSWORD=
+export MAIL_USERNAME=
+export MAIL_SERVER=
+export MAIL_SENDER=
+```
+
+Make new encryption keys if needed - do not update these if the new app is being tied to the same database as EXISTING_APP_NAME
+```
+export AES_KEY=`python tools/generate_aes_key.py`
+export SECRET_KEY=`python tools/generate_secret_key.py` 
+export PEPPER=`python tools/generate_pepper.py`
+```
+
+Upload the config variables
+```
+./tools/set_config_vars.sh <NEW_APP_NAME>
+```
+
