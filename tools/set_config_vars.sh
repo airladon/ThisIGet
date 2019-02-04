@@ -29,37 +29,56 @@ then
   exit 1
 fi
 
+# Get Config Vars:
+CONFIG_VARS=`heroku config --app=$1 | sed "1d" | sed 's/ //g' | sed 's/:/=/g'`
+
 # Check environment variables exist
+CHANGES=""
 set_env() {
-  if [ -z ${!2} ];
+  # echo $1
+  # echo $2
+  # echo $3
+  echo
+  echo "${bold}${cyan}$3${reset}"
+  sleep 0.2s
+  if [ -z ${!3} ];
   then
-    echo "${bold}${yellow}Warning: $2 environment variable not set.{reset}"
+    echo "${bold}${yellow}Warning: ${red}$3 ${yellow}environment variable not set.${reset}"
     FAIL=1
   else
-    VALUE=`heroku config:get $2 --app=$1`
-    if [ $VALUE != ${!2} ];
+    VALUE=`echo $2 | sed 's/ /\'$'\n/g' | sed -n "/^${3}/p" | sed 's/^.*=//'`
+    if [ $VALUE != ${!3} ];
     then
-      echo Changing value of $2 from $VALUE to ${!2}
+      echo "${yellow}Changing value on Heroku${reset}"
+      echo "  from: $VALUE"
+      echo "  to:   ${!3}"
       while true; do
-        read -p "Are you sure you want to overwrite?" ync
+        read -p "${yellow}Are you sure you want to change?${reset} (y/n/c): " ync
         case $ync in
-          [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
-          [Nn]* ) echo No changes to $2.; break;;
+          # [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
+          [Yy]* ) CHANGES="$CHANGES $3=${!3}"; break;;
+          [Nn]* ) echo No changes to $3.; break;;
           [Cc]* ) echo Cancelled; exit 1;;
           * ) echo "Please answer yes or no.";;
         esac
       done
     else
-      echo No changes to $2 as it is the same as local.
+      echo No changes as Heroku config var value is same as local environment variable.
     fi
-    
   fi
+  sleep 0.5
 }
 
-set_env $1 MAIL_SERVER
-set_env $1 SECRET_KEY
-set_env $1 MAIL_USERNAME
-set_env $1 MAIL_PASSWORD
-set_env $1 MAIL_SENDER
-set_env $1 AES_KEY
-set_env $1 PEPPER
+set_env $1 "$CONFIG_VARS" MAIL_SERVER
+set_env $1 "$CONFIG_VARS" SECRET_KEY
+set_env $1 "$CONFIG_VARS" MAIL_USERNAME
+set_env $1 "$CONFIG_VARS" MAIL_PASSWORD
+set_env $1 "$CONFIG_VARS" MAIL_SENDER
+set_env $1 "$CONFIG_VARS" AES_KEY
+set_env $1 "$CONFIG_VARS" PEPPER
+
+echo
+echo $CHANGES
+
+echo
+heroku config:set $CHANGES --app=$1
