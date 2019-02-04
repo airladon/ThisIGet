@@ -55,7 +55,7 @@ set_env() {
         read -p "${yellow}Are you sure you want to change?${reset} (y/n/c): " ync
         case $ync in
           # [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
-          [Yy]* ) CHANGES="$CHANGES $3=${!3}"; break;;
+          [Yy]* ) CHANGES="$CHANGES $3=${!3}"; CHANGES="$CHANGES OLD_$3=$VALUE"; break;;
           [Nn]* ) echo No changes to $3.; break;;
           [Cc]* ) echo Cancelled; exit 1;;
           * ) echo "Please answer yes or no.";;
