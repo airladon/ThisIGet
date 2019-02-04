@@ -8,87 +8,58 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
-
-export SECRET_KEY=`python tools/generate_secret_key.py`
-exit 1
-
-
 # Check number of arguments
-if [ -z $1 ] || [ -z $2 ];
+if [ -z $1 ];
 then
   echo ''
   echo 'usage:'
-  echo '      set_config_vars WHICH_VARS APP_NAME '
-  echo ''
-  echo 'where WHICH_VARS can be:'
-  echo '  - existing: use existing environment variables'
-  echo '  - new: generate new config vars and save as local environment variables'
-  echo '  - unset: unset existing local config var environment variables'
-  echo ''
-  exit 1
-fi
-
-# Check argument one is correct
-if [ $1 != new ] && [ $1 != unset ] && [ $1 != existing ];
-then
-  echo ''
-  echo "'$1' is not a valid first argument. Must be 'new', 'existing' or 'unset'"
+  echo '      set_config_vars HEROKU_APP_NAME '
   echo ''
   exit 1
 fi
 
 
 # Check app exists
-RESULT=`heroku apps | grep ^$2$ | wc -l | sed 's/ //g'`
+RESULT=`heroku apps | grep ^$1$ | wc -l | sed 's/ //g'`
 if [ $RESULT != 1 ];
 then
   echo ''
-  echo "Heroku app '$2' doesn't exist"
+  echo "Heroku app '$1' doesn't exist"
   echo ''
   exit 1
 fi
 
-# Check Mail environment variables exist
-check_env_exists() {
-  if [ -z ${!1} ];
+# Check environment variables exist
+set_env() {
+  if [ -z ${!2} ];
   then
-    echo "${bold}${yellow}Warning: $1 environment variable not set. $2${reset}"
+    echo "${bold}${yellow}Warning: $2 environment variable not set.{reset}"
     FAIL=1
+  else
+    VALUE=`heroku config:get $2 --app=$1`
+    if [ $VALUE != ${!2} ];
+    then
+      echo Changing value of $2 from $VALUE to ${!2}
+      while true; do
+        read -p "Are you sure you want to overwrite?" ync
+        case $ync in
+          [Yy]* ) heroku config:set $2=${!2} --app=$1; break;;
+          [Nn]* ) echo No changes to $2.; break;;
+          [Cc]* ) echo Cancelled; exit 1;;
+          * ) echo "Please answer yes or no.";;
+        esac
+      done
+    else
+      echo No changes to $2 as it is the same as local.
+    fi
+    
   fi
 }
 
-check_env_exists MAIL_SERVER
-check_env_exists MAIL_USERNAME
-check_env_exists MAIL_PASSWORD
-check_env_exists MAIL_SENDER
-FAIL=0
-
-if [ $1 == 'existing' ];
-then
-  check_env_exists AES_KEY
-  check_env_exists SECRET_KEY
-  check_env_exists PEPPER
-  if [ $FAIL == 1 ];
-  then
-    exit 1
-  fi
-fi
-
-if [ $1 == 'new' ];
-then
-  export AES_KEY=`python tools/generate_aes_key.py`
-fi
-
-
-# if [ $1 == 'new' ];
-# then
-#   export SECRET_KEY=`python tools/generate_secret_key`
-#   heroku config:set SECRET_KEY=$SECRET_KEY --app=$2
-# fi
-
-# if [ $1 == 'reset' ];
-# then
-#   unset SECRET_KEY
-# fi
-
-
+set_env $1 MAIL_SERVER
+set_env $1 SECRET_KEY
+set_env $1 MAIL_USERNAME
+set_env $1 MAIL_PASSWORD
+set_env $1 MAIL_SENDER
+set_env $1 AES_KEY
+set_env $1 PEPPER
