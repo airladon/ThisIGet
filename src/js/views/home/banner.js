@@ -10,7 +10,7 @@ export default class HomeBanner extends React.Component
       <div className="home__banner_logo">
         <div className="home__banner_logo_text_container">
           <div className="home__banner_logo_text">
-            get it
+            this i get
           </div>
         </div>
       </div>
