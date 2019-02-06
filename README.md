@@ -2,15 +2,60 @@
 
 ItIGet web app.
 
-# Containerized Development Environment Setup
+# Development Environment Setup
 
-### Setup
+## Setup
 * Install Docker
 * `git clone https://github.com/airladon/itiget/`
 * Navigate to project directory
 
+## Setup local environment variables
 
-### Start interactive dev environment
+Local environment variables are used for
+* Sending emails (like password reset emails) from the app
+* Defining which database to connect to
+* Running flask database migrations
+* Running flask locally (though recommended to use a container to run flask normally)
+* Deployment to Heroku for test site 
+
+#### `DATABASE_URL`
+The environment variable `DATABASE_URL` defines which database option to use.
+
+* `unset DATABASE_URL` or DATABASE_URL not defined: local SQLite3 instance
+* `export DATABASE_URL=postgresql://postgres@host.docker.internal/<local_db_name>` a local postgres database accessed from inside a container
+* `export DATABASE_URL=postgresql://postgres@localhost/<local_db_name>` a local postgres database accessed from outside a container
+* ```export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'` ```
+
+
+This is only needed for running locally.
+
+#### `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME`
+The environment variables `MAIL_PASSWORD`, `MAIL_SERVER`, `MAIL_SENDER` and `MAIL_USERNAME` control where to send emails from (emails are used for example in resetting passwords, or creating accounts).
+
+If they are not set, then app will not try to send emails.
+
+This is only needed for running locally.
+
+#### `FLASK_APP`
+If you want to run flask or flask database migrations locally and not in a container, then you need the flask environment variable:
+
+`FLASK_APP=app/my_app.py`
+
+#### `HEROKU_TOKEN`
+If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
+
+```export HEROKU_TOKEN=`heroku auth:token` ```
+
+This is only needed if deploying a build from the local machine.
+
+#### `AES_KEY`
+Only needed if in production - hex key that is used for encryption
+
+#### `PEPPER`
+Only needed if in production - hex pepper that is used to hash emails
+
+
+## Interactive Dev Environment container
 A docker container can be used to do lint and type checking, and tests. To start the container
 * `./startenv dev`
 
@@ -45,7 +90,7 @@ From here you can:
     * Can be accessed through a browser at `localhost:5002`
     * You would only do this for deep debugging purposes, generally running the `dev-server` container (below) is sufficent.
 
-### Run a local dev server of web app
+## Dev-Server Container
 `./startenv dev-server`
 
 Automatic environment that hosts app at `localhost:5003`
@@ -56,7 +101,7 @@ Automatic environment that hosts app at `localhost:5003`
   * Uses localally built react js files
 
 
-### Run a local Stage server of web app
+## Stage Container
 `./startenv stage`
 
 Automatic environment that runs flask and hosts app at `localhost:5001`
@@ -65,17 +110,147 @@ Automatic environment that runs flask and hosts app at `localhost:5001`
   * Uses development versions of react from CDN
   * Should run `./build.sh stage` locally, or `webpack --env.mod=stage` in the dev container first
 
-### Run a local Production server of web app
+## Production Container
 `./startenv prod`
 Automatic environment that runs nginx and hosts app at `localhost:5000`
   * Container has no npm packages installed, and only the python packages needed for production.  
   * Uses minified production versions of react from CDN
   * Should run `./build.sh prod` locally, or `webpack --env.mod=prod` in the dev container first to build the needed js files.
 
+## Build
 
 # Local Development Environment
 
-Setting up local node and python packages can be useful for editors that use them for showing lint and type errors. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
+### Database management
+
+This is best done locally outside of a container. You will need to have:
+
+* Started python virtual environment (`source env/bin/activate`)
+* Installed all python packages (`pip install -r requirements.txt`)
+* Setup the flask environment variable (`export FLASK_APP=app/my_app.py`)
+* Installed Heroku CLI if you want to manage a heroku database
+* Installed postgres.app locally if you want to manage a local postgres database
+
+#### Initialize migration management
+If you need to initialize a migration
+
+`flask db init`
+
+This will create a `migrations` directory in the project root.
+
+This only needs to be done once, or after the migrations directory has been removed as you wanted to start afresh.
+
+#### Migrate app changes to database
+`flask db migrate -m "migration message"`
+
+#### Select the database you want to upgrade
+
+For SQLite3 local database use `unset DATABASE_URL`
+
+For postgres local use: `export DATABASE_URL=postgresql://localhost/thisiget_local"`
+
+For Heroku postgres database use: export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+
+You can only use the Heroku database if you have the Heroku CLI installed and logged in.
+
+#### Upgrade the database to a new migration
+`Flask db upgrade`
+
+
+#### Start from scratch - Local SQL
+```
+rm app/app.db
+rm -rf migrations
+unset DATABASE_URL
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+#### Start from scratch - Local Postgres
+Assume database is called `thisiget_local`
+
+```
+psql -c 'drop database thisiget_local'
+psql -c 'create database thisiget_local'
+rm -rf migrations
+export DATABASE_URL=postgresql://postgres@localhost/thisiget_local
+flask db init
+flask db migrate
+flask db upgrade
+```
+
+#### Start from scratch - Heroku
+Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
+```
+heroku pg:reset --app=itgetitest
+export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+flask db upgrade
+```
+
+Can check with
+`heroku pg:psql --app=itgetitest -c 'select * from users'`
+
+#### Upload local database to Heroku
+Assume database is called `thisiget_local`
+```
+heroku pg:reset --app=itgetitest
+heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest
+```
+
+Can check with
+`heroku pg:psql --app=itgetitest -c 'select * from users'`
+
+> Note: If `AES_KEY` or `PEPPER` is different on the local environment compared to the Heroku environment, and data in the database was generated locally with the different environment variables, then app on Heroku won't be able to read the locally generated entries.
+
+
+#### Check the database
+
+For Sqlite3, use a database viewing app like `DB Browser for SQLite` and load `app/app/app.db` file.
+
+For postgres local:
+* `psql`
+* `\c <DATABASE_NAME>` to select database of interest
+* `\dt` to show tables
+* `SELECT * FROM users` to show all user records
+
+For Heroku Postgres:
+* `heroku pg:psql --app=itgeti`
+* Won't need to select database, so can go straight to looking at tables
+
+#### Push local database to Heroku
+Push up data from local database to Heroku.
+
+First get the heroku database name using:
+`heroku addons --app=<HEROKU_APP_NAME>`
+
+Local database would only exist if postgres.app is installed and server running.
+
+Push local DB data up to Heroku.
+
+`heroku pg:push postgresql://localhost/<LOCAL_DB_NAME> <HEROKU_DB_NAME> --app=<HEROKU_APP_NAME>`
+
+e.g.
+`heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest`
+
+
+#### Pull Heroku DB data to local
+`heroku pg:pull <HEROKU_DB_NAME> <LOCAL_DB_NAME> --app <HEROKU_APP_NAME>`
+`heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
+
+
+#### Local database manual manipulation
+`psql postgres`
+
+```
+DROP DATABASE thisiget_local;
+CREATE DATABASE thisiget_local;
+\c thisiget_local
+```
+
+### Python Packages
+
+Setting up local node and python packages can be useful for editors that use them for showing lint and type errors, and for flask database migrations. They can also be used to run the same commands as in the containerized development environment, but using the container is potentially cleaner and completely independent of the local system's global packages.
 
 Start in the project directory.
 
@@ -117,16 +292,16 @@ To install packages, `package.json` and `package-lock.json` files are included, 
 >> If it still doesn't work, then do this
 `sudo installer -pkg /Library/Developer/CommandLineTools/Packages/macOS_SDK_headers_for_macOS_10.14.pkg -target /`
 
-
-#### Install PipEnv (if not already installed on local machine)
+#### PipEnv
+##### Install PipEnv (if not already installed on local machine)
 * `brew install pipenv`
 
-#### Setup virtual environment and install packages
+##### Setup virtual environment and install packages
 * `pipenv --python 3.7.1`
 * `pipenv shell`
 * `pipenv install -d`
 
-#### Update packages
+##### Update packages
 This is only if python packages need to be updated. This will update both production and dev packages.
 
 To see which packages are out of date:
@@ -138,6 +313,13 @@ Update version numbers in Pipfile
 
 If Pipfile.lock is out of date, then use this to bring it up to date.
 `pipenv lock`
+
+#### Virtual env
+`python3 -m venv env`
+`source env/bin/activate`
+`pip install -r requirements.txt`
+Start sublime after starting the virtual environment
+
 
 #### Update python version
 Change python version number in
@@ -236,3 +418,83 @@ DROP TABLE IF EXISTS user
 
 ALTER TABLE new_user RENAME TO user
 
+
+Python development:
+----------------------
+Database:                   DATABASE_URL
+  SQLite3                   os.path.join(basedir, 'app.db')
+  Postgres local            postgresql://tig@host.docker.internal/thisiget_local
+  Postgres-dev on heroku    
+  Postgres on heroku
+
+Email:                      
+  local
+  noreply@thisiget
+
+Data from local to heroku db
+
+Get database link
+`heroku addons`
+
+Push up data
+`heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest`
+
+Log into db and check tables, data
+`heroku pg:psql --app=itgetitest`
+`\dt`
+`SELECT * FROM users;`
+
+Get data from heroku db
+`heroku pg:pull postgresql-lively-27815 from_heroku --app itgetitest`
+
+DELETE from users where id>0;
+
+
+# Deploy to new Heroku App
+
+### Heroku Config variables
+Or get variables from an existing app:
+```
+./tools/get_config_vars.sh <EXISTING_APP_NAME>
+```
+Copy and paste all the lines that start with `export` to make the local environment variables.
+
+Or if no existing app, then set these as new:
+```
+export MAIL_PASSWORD=
+export MAIL_USERNAME=
+export MAIL_SERVER=
+export MAIL_SENDER=
+```
+
+Make new encryption keys if needed - do not update these if the new app is being tied to the same database as EXISTING_APP_NAME
+```
+export AES_KEY=`python tools/generate_aes_key.py`
+export SECRET_KEY=`python tools/generate_secret_key.py` 
+export PEPPER=`python tools/generate_pepper.py`
+```
+
+Upload the config variables
+```
+./tools/set_config_vars.sh <NEW_APP_NAME>
+```
+
+### Hook up a database
+#### New database:
+```
+heroku addons:create heroku-postgresql:hobby-dev --app=<NEW_APP_NAME>
+```
+Then initialize the database (assuming flask migrations is already setup)
+```
+export DATABASE_URL=`heroku config --app=<NEW_APP_NAME> | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+flask db upgrade
+```
+
+Attach to existing database:
+heroku addons:
+```
+heroku addons:attach <EXISTING_APP>::DATABASE --app=<NEW_APP_NAME>
+```
+
+### Build and Deploy
+./build.sh prod deploy <NEW_APP_NAME>

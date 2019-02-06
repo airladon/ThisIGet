@@ -9,42 +9,61 @@
 #     return render_template('index.html')
 
 
-from flask import render_template, flash, redirect, url_for
+from flask import render_template, flash, redirect, url_for, jsonify, session
+from flask import make_response
 from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
-from app.models import User
+from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
-import sys
 import datetime
 # from flask_sqlalchemy import or_
+from app.tools import hash_str_with_pepper
 # import pdb
+
+# project/decorators.py
+from functools import wraps
+
+def check_confirmed(func):
+    @wraps(func)
+    def decorated_function(*args, **kwargs):
+        if current_user.confirmed is False:
+            flash('Please confirm your account!', 'warning')
+            return redirect(f'confirmAccountEmailSent/{user.username}')
+        return func(*args, **kwargs)
+
+    return decorated_function
 
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    res = make_response(render_template('home.html'))
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.username)
+    else:
+        res.set_cookie('username', '')
+    return res
 
 
-@app.route('/introduction')
-def introduction():
-    return render_template('introduction.html')
+# @app.route('/introduction')
+# def introduction():
+#     return render_template('introduction.html')
 
 
-@app.route('/single')
-def single_page_lesson():
-    return render_template('singlepagelesson.html')
+# @app.route('/single')
+# def single_page_lesson():
+#     return render_template('singlepagelesson.html')
 
 
-@app.route('/multi')
-def multi_page_lesson():
-    return render_template('multipagelesson.html')
+# @app.route('/multi')
+# def multi_page_lesson():
+#     return render_template('multipagelesson.html')
 
 
-@app.route('/about')
-def about():
-    return render_template('about.html')
+# @app.route('/about')
+# def about():
+#     return render_template('about.html')
 
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
@@ -54,12 +73,11 @@ def about():
 
 @app.route('/isloggedin')
 def is_logged_in():
-    result = "0"
+    result = ""
     if current_user.is_authenticated:
-        result = "1"
+        result = current_user.username
     # print('This is error output', file=sys.stderr)
-    print(f'Will respond: {result, current_user}', file=sys.stdout)
-    return result
+    return jsonify({'username': result})
 
 
 @app.route('/Lessons/', defaults={'path': ''})
@@ -68,7 +86,11 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
-    return render_template('lesson.html', css=css, js=js)
+    return render_template(
+        'lesson.html',
+        css=css,
+        js=js,
+    )
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
@@ -98,7 +120,7 @@ def chapter1():
 @app.route('/loginuser', methods=['POST'])
 def loginuser():
     form = LoginForm()
-    user = User.query.filter_by(username=form.username.data).first()
+    user = Users.query.filter_by(username=form.username.data).first()
     if user is None or not user.check_password(form.password.data):
         return redirect('/login')
     login_user(user, True)
@@ -114,13 +136,15 @@ def login(username=''):
     js = '/static/dist/login.js'
     form = LoginForm()
     if username:
-        user = User.query.filter_by(username=username).first()
+        user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        user = User.query.filter(
-            (User.username == form.username_or_email.data) |
-            (User.email == form.username_or_email.data)
-        ).first()
+        user = Users.query.filter_by(
+            username=form.username_or_email.data).first()
+        if user is None:
+            user = Users.query.filter_by(
+                email_hash=hash_str_with_pepper(
+                    form.username_or_email.data)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -128,6 +152,7 @@ def login(username=''):
             login_user(user, True)
             user.last_login = datetime.datetime.now()
             db.session.commit()
+            # session['username'] = user.username
             return redirect(url_for('home'))
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
@@ -143,7 +168,8 @@ def create():
     js = '/static/dist/createAccount.js'
     form = CreateAccountForm()
     if form.validate_on_submit():
-        user = User(username=form.username.data, email=form.email.data)
+        user = Users(username=form.username.data)
+        user.set_email(form.email.data)
         user.set_password(form.password.data)
         user.signed_up_on = datetime.datetime.now()
         db.session.add(user)
@@ -160,34 +186,45 @@ def confirm_account_message(username):
     css = '/static/dist/confirmAccountMessage.css'
     js = '/static/dist/confirmAccountMessage.js'
     form = ConfirmAccountMessageForm()
-    user = User.query.filter_by(username=username).first()
+    user = Users.query.filter_by(username=username).first()
     if user is None:
             flash('User does not exist', 'error')
             return redirect(url_for('create'))
     if form.validate_on_submit():
         send_confirm_account_email(user)
         redirect(f'confirmAccountEmailSent/{user.username}')
-    flash('You need to confirm your email address before your account becomes active.', 'before')
-    flash(f'An email has been sent to {user.email}. Click the link inside it to confirm your email and finish account registration.', 'before')
+    flash('''You need to confirm your email address before your
+        account becomes active.''', 'before')
+    flash(f''''An email has been sent to {user.get_email()}.
+        Click the link inside it to confirm your email and
+        finish account registration.''', 'before')
 
-    return render_template('confirmAccountMessage.html', form=form, js=js, css=css)
+    return render_template(
+        'confirmAccountMessage.html', form=form, js=js, css=css
+    )
 
 
 @app.route('/confirmAccount/<token>', methods=['GET', 'POST'])
 def confirm_account(token):
-    result = User.verify_account_confirmation_token(token)
-    print(result)
+    result = Users.verify_account_confirmation_token(token)
     if result['status'] == 'fail':
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     user = result['user']
+    if user is None:
+        flash('''User doesn't exist''')
+        return redirect(url_for('home'))
     if result['status'] == 'expired':
         flash('Email verification time elapsed.', 'after')
-        flash('You have 30 minutes to verify your account after the email has been sent.', 'after')
+        flash('''You have 30 minutes to verify your account after the email
+            has been sent.''', 'after')
         flash('Just now, another email has been sent.', 'after')
         send_confirm_account_email(user)
         return redirect(f'confirmAccountEmailSent/{user.username}')
     if user.confirmed:
-        flash('Account has already been confirmed. You can now log in.', 'before')
+        flash(
+            'Account has already been confirmed. You can now log in.',
+            'before'
+        )
         return redirect(f'login/{user.username}')
     user.confirmed = True
     user.confirmed_on = datetime.datetime.now()
@@ -202,10 +239,11 @@ def reset_password_request():
     css = '/static/dist/resetPasswordRequest.css'
     js = '/static/dist/resetPasswordRequest.js'
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = Users.query.filter_by(
+            email_hash=hash_str_with_pepper(form.email.data)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')
@@ -221,10 +259,10 @@ def reset_password(token):
     css = '/static/dist/resetPassword.css'
     js = '/static/dist/resetPassword.js'
     if current_user.is_authenticated:
-        return redirect(url_for('index'))
-    user = User.verify_reset_password_token(token)
+        return redirect(url_for('home'))
+    user = Users.verify_reset_password_token(token)
     if not user:
-        return redirect(url_for('index'))
+        return redirect(url_for('home'))
     form = ResetPasswordForm()
     if form.validate_on_submit():
         user.set_password(form.password.data)
@@ -238,4 +276,5 @@ def reset_password(token):
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect('/')
+    session.pop('username', None)
+    return redirect(url_for('home'))

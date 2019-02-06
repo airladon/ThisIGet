@@ -1,20 +1,59 @@
 from app import db
 from app import login
 from datetime import datetime
-import bcrypt
-import hashlib
-import base64
+# import bcrypt
+# import hashlib
+# import base64
 from flask_login import UserMixin
 from time import time
 import jwt
 from app import app
+# import os
+# from Crypto.Cipher import AES
+from app.tools import encrypt, decrypt, hash_str, check_hash
+from app.tools import hash_str_with_pepper
+
+# Encryption is AES 256 using EAX mode which allows for stream encoding.
+# Stream encoding means encoded output length will be proportional to plain
+# text length. Therefore, for encrypting emails, pad emails to hide their
+# length.
+#
+# Encryption uses a nonce (once only number) so when checking if an email
+# exists in a database, cannot encrypt the email to check and compare it to
+# existing encrypted emails - as all have different nonce values.
+#
+# Therefore, email hash (for quick lookup) and encrypted email is used.
+#
+# Size of Encrypted Email storage in database:
+#   - Emails may have 64 + 1 + 255 characters = 320 characters
+#   - Therefore, emails are padded to 320 characters
+#   - Encrypted bytes includes encryped email (320 bytes) + tag (16 bytes)
+#     + nonce (16 bytes) = 352 bytes
+#   - Encoding in Base64: 352 * 8 bits / 6 bits = 469.333 b64 characters
+#     - 352 bytes = 2816 bits
+#     - 469 b64 chars = 2814 bits, so need 470 b64 chars to cover 352 bytes.
+#     - But then it won't split evenly into 8 bits, so need another 2 b64 chars
+#     - Therefore total is 472 b64 chars
+#   - This is then stored in the database as utf-8, which will be a full 472
+#     bytes
+
+# Size of password:
+#   - Password hash is 60 bytes + tag (16) + nonce (16) = 92 bytes = 736 bits
+#   - 124 b64 chars = 744 bits = 93 bytes
+#   - Therefore saved string will be 124 chars
+# Size of hash: bcrypt output will always be 60 b64 chars.
+
+# Size of email hash will be 60-29 = 31 as don't want to store the pepper
+
+# Username size will be limited to 32 characters
 
 
-class User(UserMixin, db.Model):
+class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
+    username = db.Column(db.String(32), index=True, unique=True)
+    email = db.Column(db.String(472))
+    email_hash = db.Column(db.String(31))
+    password = db.Column(db.String(124))
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
@@ -24,28 +63,18 @@ class User(UserMixin, db.Model):
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
-    # See https://github.com/pyca/bcrypt/ for more information on bcrypt
-    # and recommendation for pre-hashing password to make it a consistent
-    # length.
-    # See https://blogs.dropbox.com/
-    #   tech/2016/09/how-dropbox-securely-stores-your-passwords/
-    # for their recommendation on how to store passwords
-    # See https://www.compose.com/articles/
-    #   you-may-get-pwned-at-least-protect-passwords-with-bcrypt/
-    # for explanation on bcrypt hash and how it also stores the salt
+    def set_email(self, email):
+        self.email = encrypt(email, min_length_for_padding=320)
+        self.email_hash = hash_str_with_pepper(email)
+
+    def get_email(self):
+        return decrypt(self.email)
+
     def set_password(self, password):
-        self.password_hash = bcrypt.hashpw(
-            self.prep_password(password),
-            bcrypt.gensalt(14))
+        self.password = encrypt(hash_str(password))
 
     def check_password(self, password):
-        return bcrypt.checkpw(
-            self.prep_password(password),
-            self.password_hash)
-
-    def prep_password(self, password):
-        return base64.b64encode(
-            hashlib.sha512(password.encode('utf-8')).digest())
+        return check_hash(password, decrypt(self.password))
 
     def get_reset_password_token(self, expires_in=1800):
         return jwt.encode(
@@ -59,7 +88,7 @@ class User(UserMixin, db.Model):
                             algorithms=['HS256'])['reset_password']
         except Exception:
             return
-        return User.query.get(id)
+        return Users.query.get(id)
 
     def get_account_confirmation_token(self, expires_in=1800):
         return jwt.encode(
@@ -78,10 +107,9 @@ class User(UserMixin, db.Model):
                 algorithms=['HS256'],
                 options={'verify_exp': False}
             )['account_confirmation']
-            print(f'expired but id is: {id}')
             return {
                 'status': 'expired',
-                'user': User.query.get(id),
+                'user': Users.query.get(id),
             }
         except Exception:
             return {
@@ -89,13 +117,13 @@ class User(UserMixin, db.Model):
             }
         return {
             'status': 'ok',
-            'user': User.query.get(id),
+            'user': Users.query.get(id),
         }
 
 
 @login.user_loader
 def load_user(id):
-    return User.query.get(int(id))
+    return Users.query.get(int(id))
 
 
 class Category(db.Model):
@@ -122,7 +150,7 @@ class Lesson(db.Model):
 
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
     rating = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)

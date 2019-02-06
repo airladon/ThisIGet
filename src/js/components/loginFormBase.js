@@ -39,6 +39,7 @@ export default class LoginFormBase extends React.Component<Props, State> {
     this.state = { fields: newState };
   }
 
+  // $FlowFixMe
   handleFormChange(event) {
     this.props.formValues[event.target.id] = event.target.value;
     this.setState({ [event.target.id]: event.target.value });

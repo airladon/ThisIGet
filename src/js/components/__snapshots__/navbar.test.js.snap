@@ -15,6 +15,15 @@ exports[`Navbar Make "About" item active 1`] = `
           src="/static/icon-lg.png"
         />
       </a>
+      <div
+        className="navbar-text navbar-left login_button"
+      >
+        <a
+          href="/login"
+        >
+          Login
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -35,6 +44,15 @@ exports[`Navbar Make "Introduction" item active 1`] = `
           src="/static/icon-lg.png"
         />
       </a>
+      <div
+        className="navbar-text navbar-left login_button"
+      >
+        <a
+          href="/login"
+        >
+          Login
+        </a>
+      </div>
     </div>
   </div>
 </div>
@@ -55,6 +73,15 @@ exports[`Navbar No props 1`] = `
           src="/static/icon-lg.png"
         />
       </a>
+      <div
+        className="navbar-text navbar-left login_button"
+      >
+        <a
+          href="/login"
+        >
+          Login
+        </a>
+      </div>
     </div>
   </div>
 </div>

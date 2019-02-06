@@ -10,12 +10,9 @@ FROM python:3.7.2-slim
 WORKDIR /opt/app
 
 
-RUN pip3 install pipenv
+ADD requirements.txt .
+RUN pip install --no-cache-dir -q -r requirements.txt
 
-ADD Pipfile .
-ADD Pipfile.lock .
-
-RUN pipenv install --deploy --system
 
 ADD containers/prod/Procfile .
 ADD containers/prod/runtime.txt .
@@ -27,9 +24,15 @@ ADD app/. .
 
 
 RUN useradd -m myuser
+RUN chown myuser app
+RUN chown myuser app/app.db
+RUN chmod 666 app/app.db
 USER myuser
 
-
+# ARG mail_password
+# ARG database_url
+# ENV MAIL_PASSWORD=$mail_password
+# ENV DATABASE_URL=$database_url
 
 
 

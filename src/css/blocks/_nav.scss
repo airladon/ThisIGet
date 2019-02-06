@@ -30,6 +30,16 @@
   position: relative;
 }
 
+.navbar-text a {
+  color: color('navbar', 'text');
+  text-decoration: none;
+}
+
+.navbar-text a:hover {
+  color: color('navbar', 'text', 'lightest');
+  text-decoration: none;
+}
+
 .navbar-input {
   display: inline-block;
   color: color('navbar', 'text-input');

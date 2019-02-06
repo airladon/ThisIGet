@@ -1,12 +1,16 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
-from wtforms.validators import Length
-from app.models import User
+# from wtforms.validators import Length
+from app.models import Users
+from app.tools import hash_str_with_pepper
 
 
 class LoginForm(FlaskForm):
-    username_or_email = StringField('Username or Email: ', validators=[DataRequired()])
+    username_or_email = StringField(
+        'Username or Email: ',
+        validators=[DataRequired()]
+    )
     password = PasswordField('Password: ', validators=[DataRequired()])
     # remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
@@ -26,12 +30,15 @@ class CreateAccountForm(FlaskForm):
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):
-        user = User.query.filter_by(username=username.data).first()
+        if len(username.data) > 32:
+            raise ValidationError('Username max length is 32 characters')
+        user = Users.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Username already exists.')
 
     def validate_email(self, email):
-        user = User.query.filter_by(email=email.data).first()
+        user = Users.query.filter_by(
+            email_hash=hash_str_with_pepper(email.data)).first()
         if user is not None:
             raise ValidationError('Email address already in use.')
 

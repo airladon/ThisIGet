@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 
 type Props = {
@@ -24,37 +24,67 @@ export default class Navbar extends React.Component
       loginText: 'Login',
       loginLink: '/login',
     };
+  }
 
+  componentDidMount() {
     const handleVisibilityChange = () => {
       this.checkIsLoggedIn();
-    }
+    };
     window.addEventListener('focus', handleVisibilityChange);
-
     this.checkIsLoggedIn();
+    // this.checkIsLoggedIn();
+    // this.checkLoggedInFromPage();
   }
 
-  checkIsLoggedIn(){
-    fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
-      .then((resonse) => {
-        if (!resonse.ok) {
-          throw Error(resonse.statusText)
-        }
-        return resonse.json()
-      })
-      .then(res => this.setLogin(res))
-      .catch(error => {});
+  checkIsLoggedIn() {
+    // // console.log('checking1')
+    // fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw Error(response.statusText);
+    //     }
+    //     // console.log(response, response.json());
+    //     return response.json();
+    //   })
+    //   .then(data => this.setLogin(data.username))
+    //   .catch(() => {});
+    // console.log(document.cookie)
+    const { cookie } = document;
+    if (cookie != null) {
+      // $FlowFixMe
+      const username = cookie.match(/username=[^;]*;/);
+      if (username != null) {
+        this.setLogin(username[0]
+          .split('=')[1]
+          .slice(0, -1));
+      }
+    }
   }
 
-  setLogin(login: number) {
-    if (login === 1) {
+  // checkLoggedInFromPage() {
+  //   if (document.getElementById('logged_in')) {
+  //     this.setLogin(null);
+  //     this.checkIsLoggedIn();
+  //   } else {
+  //     this.setLogin('');
+  //   }
+  // }
+
+  setLogin(username: string | null) {
+    if (username === '') {
       this.setState({
-        loginText: 'Logout',
+        loginText: 'Login',
+        loginLink: '/login',
+      });
+    } else if (username !== null) {
+      this.setState({
+        loginText: `Logout ${username}`,
         loginLink: '/logout',
       });
     } else {
       this.setState({
-        loginText: 'Login',
-        loginLink: '/login',
+        loginText: 'Logout',
+        loginLink: '/logout',
       });
     }
   }

@@ -40,6 +40,8 @@ $width: 250px;
   display: table;
   width: 100%;
   height: 100%;
+  background-image: $main-logo;
+  background-size: cover;
 }
 
 .input_form__title__logo_text {

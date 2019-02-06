@@ -16,7 +16,7 @@ export default class LoginTitle extends React.Component<Props> {
         <div className="home__banner_logo login_title__logo">
           <div className="home__banner_logo_text_container">
             <div className="home__banner_logo_text login_title__logo_text">
-              get it
+              this i get
             </div>
           </div>
         </div>
