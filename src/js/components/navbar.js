@@ -31,33 +31,39 @@ export default class Navbar extends React.Component
       this.checkIsLoggedIn();
     };
     window.addEventListener('focus', handleVisibilityChange);
-
+    this.checkIsLoggedIn();
     // this.checkIsLoggedIn();
-    this.checkLoggedInFromPage();
+    // this.checkLoggedInFromPage();
   }
 
   checkIsLoggedIn() {
-    // console.log('checking1')
-    fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        // console.log(response, response.json());
-        return response.json();
-      })
-      .then(data => this.setLogin(data.username))
-      .catch(() => {});
+    // // console.log('checking1')
+    // fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
+    //   .then((response) => {
+    //     if (!response.ok) {
+    //       throw Error(response.statusText);
+    //     }
+    //     // console.log(response, response.json());
+    //     return response.json();
+    //   })
+    //   .then(data => this.setLogin(data.username))
+    //   .catch(() => {});
+    // console.log(document.cookie)
+    const username = document.cookie
+                      .match(/username=[^;]*;/)[0]
+                      .split('=')[1]
+                      .slice(0, -1)
+    this.setLogin(username)
   }
 
-  checkLoggedInFromPage() {
-    if (document.getElementById('logged_in')) {
-      this.setLogin(null);
-      this.checkIsLoggedIn();
-    } else {
-      this.setLogin('');
-    }
-  }
+  // checkLoggedInFromPage() {
+  //   if (document.getElementById('logged_in')) {
+  //     this.setLogin(null);
+  //     this.checkIsLoggedIn();
+  //   } else {
+  //     this.setLogin('');
+  //   }
+  // }
 
   setLogin(username: string | null) {
     if (username === '') {

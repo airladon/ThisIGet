@@ -9,7 +9,8 @@
 #     return render_template('index.html')
 
 
-from flask import render_template, flash, redirect, url_for, jsonify
+from flask import render_template, flash, redirect, url_for, jsonify, session
+from flask import make_response
 from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
@@ -24,7 +25,12 @@ from app.tools import hash_str_with_pepper
 
 @app.route('/')
 def home():
-    return render_template('home.html')
+    res = make_response(render_template('home.html'))
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.username)
+    else:
+        res.set_cookie('username', '')
+    return res
 
 
 # @app.route('/introduction')
@@ -133,6 +139,7 @@ def login(username=''):
             login_user(user, True)
             user.last_login = datetime.datetime.now()
             db.session.commit()
+            # session['username'] = user.username
             return redirect(url_for('home'))
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
@@ -256,4 +263,5 @@ def reset_password(token):
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect('/')
+    session.pop('username', None)
+    return redirect(url_for('home'))
