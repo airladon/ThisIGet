@@ -11,6 +11,7 @@ import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 import ExplanationButton from './explanationButton';
+import Rating from './rating';
 
 type Props = {
   lesson: Lesson;
@@ -596,6 +597,7 @@ export default class LessonComponent extends React.Component
             {this.addTopics()}
           </div>
         </div>
+        <Rating/>
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">
@@ -619,7 +621,6 @@ export default class LessonComponent extends React.Component
               {this.addInteractiveElementButton()}
         </div>
       </div>
-
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}
