@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 
 type Props = {
@@ -49,11 +49,16 @@ export default class Navbar extends React.Component
     //   .then(data => this.setLogin(data.username))
     //   .catch(() => {});
     // console.log(document.cookie)
-    const username = document.cookie
-                      .match(/username=[^;]*;/)[0]
-                      .split('=')[1]
-                      .slice(0, -1)
-    this.setLogin(username)
+    const { cookie } = document;
+    if (cookie != null) {
+      // $FlowFixMe
+      const username = cookie.match(/username=[^;]*;/);
+      if (username != null) {
+        this.setLogin(username[0]
+          .split('=')[1]
+          .slice(0, -1));
+      }
+    }
   }
 
   // checkLoggedInFromPage() {
