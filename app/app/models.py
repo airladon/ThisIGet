@@ -168,7 +168,7 @@ class Versions(db.Model):
 
 class Topics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True, unique=True)
+    name = db.Column(db.String(128), index=True)
     lesson = db.Column(db.Integer, db.ForeignKey('lessons.id'))
     version = db.Column(db.Integer, db.ForeignKey('versions.id'))
     ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')

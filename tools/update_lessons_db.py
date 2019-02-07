@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, './app/')
 from app import app  # noqa
-from app.models import db, Users, Versions, Lessons, Category
+from app.models import db, Users, Versions, Lessons, Category, Topics
 import pathlib
 import re
 import json
@@ -116,6 +116,15 @@ for key, value in index.items():
         if version.onPath != bool(version_info['onPath']):
             version.onPath = bool(version_info['onPath'])
 
+        # Update or Create Topics
+        # print(version_info['topics'])
+        for topic_name in version_info['topics']:
+            topic = Topics.query.filter_by(
+                lesson=lesson.id, version=version.id, name=topic_name).first()
+            if topic is None:
+                topic = Topics(
+                    lesson=lesson.id, version=version.id, name=topic_name)
+                db.session.add(topic)
 
 db.session.commit()
 # print(value['name'], value['uid'])
