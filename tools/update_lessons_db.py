@@ -73,6 +73,7 @@ def index_loader(file):
     modified_str = re.sub(", *]", "]", modified_str)
     return json.loads(modified_str)
 
+
 index = index_loader(pathlib.Path('./src/Lessons/index.js'))
 
 for key, value in index.items():
@@ -103,7 +104,8 @@ for key, value in index.items():
 
     # Update or Create Topic Versions
     for version_name, version_info in value['versions'].items():
-        version = Versions.query.filter_by(lesson_id=lesson.id, uid=version_name).first()
+        version = Versions.query.filter_by(
+            lesson_id=lesson.id, uid=version_name).first()
         if version is None:
             version = Versions(lesson_id=lesson.id, uid=version_name)
             db.session.add(version)
