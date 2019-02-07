@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(0, './app/')
 from app import app  # noqa
-from app.models import db, Users, Versions, Lessons
+from app.models import db, Users, Versions, Lessons, Category
 import pathlib
 import re
 import json
@@ -76,6 +76,15 @@ def index_loader(file):
 index = index_loader(pathlib.Path('./src/Lessons/index.js'))
 
 for key, value in index.items():
+    # Update or create category row
+    category_name = value['path'].split('/')[3]
+    category = Category.query.filter_by(category=category_name).first()
+    if category is None:
+        category_path = '/'.join(value['path'].split('/')[0:3])
+        category = Category(category=category_name, path=category_path)
+        db.session.add(category)
+
+    # Update or Create lesson row
     lesson = Lessons.query.filter_by(uid=value['uid']).first()
     if lesson is None:
         lesson = Lessons(uid=value['uid'])
@@ -86,5 +95,27 @@ for key, value in index.items():
         lesson.path = value['path']
     if lesson.enabled != bool(value['enabled']):
         lesson.enabled = bool(value['enabled'])
+    dependencies = ','.join(value['dependencies'])
+    if lesson.dependencies != dependencies:
+        lesson.dependencies = dependencies
+    if (lesson.category) != category.id:
+        lesson.category = category.id
+
+    # Update or Create Topic Versions
+    for version_name, version_info in value['versions'].items():
+        version = Versions.query.filter_by(lesson_id=lesson.id, uid=version_name).first()
+        if version is None:
+            version = Versions(lesson_id=lesson.id, uid=version_name)
+            db.session.add(version)
+        if version.title != version_info['title']:
+            version.title = version_info['title']
+        if version.description != version_info['description']:
+            version.description = version_info['description']
+        if version.path != version_info['path']:
+            version.path = version_info['path']
+        if version.onPath != bool(version_info['onPath']):
+            version.onPath = bool(version_info['onPath'])
+
+
 db.session.commit()
-    # print(value['name'], value['uid'])
+# print(value['name'], value['uid'])
