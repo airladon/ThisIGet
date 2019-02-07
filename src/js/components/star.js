@@ -7,8 +7,11 @@ type Props={
   link: string;
 };
 
-export default class Star extends React.Component <Props> {
+export default class Star extends React.Component
+                                    <Props> {
   postRating() {
+    console.log('asdf')
+    console.log(this.props)
     fetchPolyfill(this.props.link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -34,7 +37,7 @@ export default class Star extends React.Component <Props> {
       {/*<a href={this.props.link}
         className="rating__stars_link"
       />*/}
-      <div className="rating__stars_link" onClick={this.postRating()}/>
+      <div className="rating__stars_link" onClick={this.postRating}/>
     </div>;
   }
 }

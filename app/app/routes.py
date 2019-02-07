@@ -284,12 +284,16 @@ def logout():
 @check_confirmed
 @app.route('/rating/<topic_uid>/<rating>')
 def rating(topic_uid, rating):
+    result = 0
     if current_user.is_authenticated:
         lesson = Lesson.query.filter_by(lesson_uid=topic_uid).first()
-        console.log('got here')
+        print('got here')
         if (lesson):
             rating = Rating(
                 user=current_user, lesson=lesson,
                 rating=rating, timestamp=datetime.datetime.now)
             db.session.add(rating)
             db.session.commit()
+            result = 1
+    return jsonify({'result': result})
+

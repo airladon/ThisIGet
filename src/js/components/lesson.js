@@ -597,7 +597,7 @@ export default class LessonComponent extends React.Component
             {this.addTopics()}
           </div>
         </div>
-        <Rating topicName="Explanation" rating={2} topicUID="uid2"/>
+        <Rating topicName="Explanation" rating={2} topicUid="uid2"/>
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">
