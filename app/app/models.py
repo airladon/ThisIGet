@@ -139,7 +139,7 @@ class Lessons(db.Model):
     enabled = db.Column(db.Boolean, index=True)
     path = db.Column(db.String(128))
     versions = db.relationship('Versions', backref='lesson', lazy='dynamic')
-    # ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
+    topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
         return '<Lessons {}>'.format(self.name)
@@ -155,7 +155,7 @@ class Versions(db.Model):
     onPath = db.Column(db.Boolean, index=True)
     # topics = db.Column(db.String(512), index=True)
     qr = db.Column(db.String(1024), index=True)
-    # ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
+    ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
         return '<Versions {}>'.format(self.title)
@@ -180,7 +180,7 @@ class Ratings(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Rating {}>'.format(self.rating)
+        return '<Rating {} {} {} {}>'.format(self.topic.lesson, self.topic.version, self.topic.name, self.rating, self.rating)
 
 
 class Comment(db.Model):

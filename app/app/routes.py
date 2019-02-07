@@ -289,7 +289,6 @@ def logout():
 def rating(lesson_uid, topic, version_uid, rating_value):
     result = 'done'
     if current_user.is_authenticated:
-        print(lesson_uid, topic, version_uid, rating_value)
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
             return jsonify({'result': 'fail - lesson does not exist'})
@@ -298,13 +297,13 @@ def rating(lesson_uid, topic, version_uid, rating_value):
         if version is None:
             return jsonify({'result': 'fail - version does not exist'})
         topic = Topics.query.filter_by(
-            lesson_id=lesson.id, version_id=version.id, name=topic).first()
+            lesson=lesson, version=version, name=topic).first()
         if topic is None:
             return jsonify({'result': 'fail - topic does not exist'})
-        print(current_user.id, topic.id)
-        rating = Ratings.query.filter_by(topic_id=topic.id, user_id=current_user.id).first()
+        rating = Ratings.query.filter_by(
+            topic=topic, user=current_user).first()
         if rating is None:
-            rating = Ratings(user_id=current_user.id, topic_id=topic.id)
+            rating = Ratings(user=current_user, topic=topic)
             db.session.add(rating)
         if rating.rating != rating_value:
             rating.rating = rating_value
