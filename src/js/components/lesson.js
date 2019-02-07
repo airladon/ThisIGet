@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import '../../css/style.scss';
 import Lesson from '../Lesson/Lesson';
 import Button from './button';
@@ -12,6 +13,7 @@ import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 import ExplanationButton from './explanationButton';
 import Rating from './rating';
+
 
 type Props = {
   lesson: Lesson;
@@ -29,6 +31,7 @@ type State = {
     link?: Function | string;
     active?: boolean;
   }>;
+  userRating: number;
 };
 
 function getLessonDescription(uid: string) {
@@ -63,6 +66,7 @@ export default class LessonComponent extends React.Component
       numPages: 0,
       page: 0,
       listOfSections: [],
+      userRating: 0,
     };
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
@@ -75,6 +79,54 @@ export default class LessonComponent extends React.Component
     this.componentUpdateCallback = null;
     this.centerLessonFlag = false;
     this.showNavigator = false;
+    this.getRating(this.topic);
+  }
+
+  getRating(topic: string) {
+    const lessonUid = this.lessonDetails.details.uid;
+    const versionUid = this.versionDetails.details.uid;
+    const link = `/rating/${lessonUid}/${topic}/${versionUid}`;
+    fetchPolyfill(link, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'ok') {
+          // console.log(data)
+          if (data.userRating
+            && data.userRating !== 'not rated'
+            && data.userRating !== 'not logged in'
+          ) {
+            // this.setUserRating(data.userRating);
+            this.setState({ userRating: data.userRating });
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
+  setUserRating(rating: number) {
+    const lessonUid = this.lessonDetails.details.uid;
+    const versionUid = this.versionDetails.details.uid;
+    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}`;
+    fetchPolyfill(link, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'ok') {
+          this.setState({ userRating: rating });
+        } else {
+          console.log('failed to set rating:', data.message);
+        }
+      })
+      .catch(() => {});
   }
 
   componentDidUpdate() {
@@ -611,9 +663,10 @@ export default class LessonComponent extends React.Component
         </div>
         <Rating
           topic={this.topic}
-          rating={2}
+          rating={this.state.userRating}
           versionId={this.versionDetails.details.uid}
           lessonId={this.lessonDetails.details.uid}
+          ratingCallback={this.setUserRating.bind(this)}
         />
       </div>
       <div className="lesson__widescreen_backdrop">

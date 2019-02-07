@@ -22,7 +22,7 @@ from app.tools import hash_str_with_pepper
 from app.models import Users
 from app.models import Ratings
 from app.models import Lessons, Versions, Topics
-
+from functools import reduce
 import pdb
 
 # project/decorators.py
@@ -285,21 +285,21 @@ def logout():
 
 
 @check_confirmed
-@app.route('/rating/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
-def rating(lesson_uid, topic, version_uid, rating_value):
-    result = 'done'
+@app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
+def rate(lesson_uid, topic, version_uid, rating_value):
+    status = 'ok'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
-            return jsonify({'result': 'fail - lesson does not exist'})
+            return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
         version = Versions.query.filter_by(
             lesson_id=lesson.id, uid=version_uid).first()
         if version is None:
-            return jsonify({'result': 'fail - version does not exist'})
+            return jsonify({'status': 'fail', 'message': 'version does not exist'})
         topic = Topics.query.filter_by(
             lesson=lesson, version=version, name=topic).first()
         if topic is None:
-            return jsonify({'result': 'fail - topic does not exist'})
+            return jsonify({'status': 'fail', 'message': 'topic does not exist'})
         rating = Ratings.query.filter_by(
             topic=topic, user=current_user).first()
         if rating is None:
@@ -309,4 +309,51 @@ def rating(lesson_uid, topic, version_uid, rating_value):
             rating.rating = rating_value
             rating.timestamp = datetime.datetime.now()
         db.session.commit()
-    return jsonify({'result': result})
+    return jsonify({'status': 'ok'})
+
+
+@check_confirmed
+@app.route('/rating/<lesson_uid>/<topic>/<version_uid>')
+def get_rating(lesson_uid, topic, version_uid):
+    num_ratings = 0
+    ave_rating = 0
+    user_rating_value = 'not logged in'
+
+    lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+    if lesson is None:
+        return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
+    version = Versions.query.filter_by(
+        lesson_id=lesson.id, uid=version_uid).first()
+    if version is None:
+        return jsonify({'status': 'fail', 'message': 'version does not exist'})
+    topic = Topics.query.filter_by(
+        lesson=lesson, version=version, name=topic).first()
+    if topic is None:
+        return jsonify({'status': 'fail', 'message': 'topic does not exist'})
+
+    ratings = Ratings.query.filter_by(topic=topic).all()
+    print(ratings)
+    if ratings is None:
+        ratings = []
+    num_ratings = len(ratings)
+    sum_ratings = 0
+    for r in ratings:
+        sum_ratings += r.rating
+    ave_rating = 0
+    print(sum_ratings)
+    # pdb.set_trace()
+    if num_ratings > 0:
+        ave_rating = sum_ratings / num_ratings
+
+    if current_user.is_authenticated:
+        user_rating = Ratings.query.filter_by(user=current_user, topic=topic).first()
+        if user_rating is None:
+            user_rating_value = 'not rated'
+        else:
+            user_rating_value = user_rating.rating
+    return jsonify({
+        'status': 'ok',
+        'message': '',
+        'userRating': user_rating_value,
+        'numRatings': num_ratings,
+        'aveRating': ave_rating})

@@ -13,7 +13,6 @@ import Footer from '../../components/footer';
 const renderLesson = (content: LessonContent, lessonDetails: Object, versionDetails: Object) => {
   const lessonId: HTMLElement | null = document.getElementById('single-page-lesson');
   const lesson = new Lesson(content);
-  console.log(versionDetails)
   if (lessonId instanceof HTMLElement) {
     ReactDOM.render(
       <div>

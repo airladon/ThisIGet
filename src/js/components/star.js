@@ -1,22 +1,28 @@
 // @flow
 import * as React from 'react';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 type Props={
   isFull: boolean;
-  link: string;
+  num: number;
+  callback: Function;
 };
 
 export default class Star extends React.Component
                                     <Props> {
-  postRating() {
-    fetchPolyfill(this.props.link, { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-      })
-      .catch(() => {});
+  // postRating() {
+  //   this.props.callback()
+  //   fetchPolyfill(this.props.link, { credentials: 'same-origin' })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw Error(response.statusText);
+  //       }
+  //     })
+  //     .catch(() => {});
+  // }
+
+  setRating() {
+    this.props.callback(this.props.num);
   }
 
   star() {
@@ -32,7 +38,7 @@ export default class Star extends React.Component
   render() {
     return <div className="rating__stars_star">
       {this.star()}
-      <div className="rating__stars_link" onClick={this.postRating.bind(this)}/>
+      <div className="rating__stars_link" onClick={this.setRating.bind(this)}/>
     </div>;
   }
 }
