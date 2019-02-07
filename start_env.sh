@@ -107,6 +107,7 @@ else
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \
+    -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
     -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \

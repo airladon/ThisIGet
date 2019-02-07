@@ -16,6 +16,7 @@ import Rating from './rating';
 type Props = {
   lesson: Lesson;
   lessonDetails: Object;
+  versionDetails: Object;
   section?: number;
 };
 
@@ -52,6 +53,8 @@ export default class LessonComponent extends React.Component
   lessonNavigator: ?LessonNavigator;
   showNavigator: boolean;
   lessonDescription: null | LessonDescription;
+  versionDetails: Object;
+  topic: string;
 
   constructor(props: Props) {
     super(props);
@@ -64,7 +67,9 @@ export default class LessonComponent extends React.Component
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
-    console.log(this)
+    this.versionDetails = props.versionDetails;
+    const [topic] = window.location.pathname.split('/').slice(-1);
+    this.topic = topic;
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
@@ -605,9 +610,10 @@ export default class LessonComponent extends React.Component
           </div>
         </div>
         <Rating
-          topicName={this.getTopic()}
+          topic={this.topic}
           rating={2}
-          topicUid="uid2"
+          versionId={this.versionDetails.details.uid}
+          lessonId={this.lessonDetails.details.uid}
         />
       </div>
       <div className="lesson__widescreen_backdrop">

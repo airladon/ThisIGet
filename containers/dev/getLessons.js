@@ -94,7 +94,6 @@ function entryPoints(buildMode) {
 
 function makeLessonIndex(buildMode) {
   const lessons = getAllLessons('./src/Lessons');
-  console.log(lessons)
   // const lessonDescriptions = [];
   let outStr =
 `import LessonDescription from '../js/Lesson/lessonDescription';

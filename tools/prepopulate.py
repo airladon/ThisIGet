@@ -5,7 +5,7 @@ from app import app  # noqa
 from app.models import db, Users  # noqa
 
 
-def addUser(username, password, email):
+def addUser(username, email, password):
     user = Users.query.filter_by(username=username).first()
     if user is None:
         user = Users(username=username)

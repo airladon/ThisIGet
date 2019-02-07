@@ -10,10 +10,10 @@ import { LessonContent } from '../../Lesson/LessonContent';
 import NavbarSpacer from '../../components/navbarSpacer';
 import Footer from '../../components/footer';
 
-const renderLesson = (content: LessonContent, lessonDetails: Object) => {
+const renderLesson = (content: LessonContent, lessonDetails: Object, versionDetails: Object) => {
   const lessonId: HTMLElement | null = document.getElementById('single-page-lesson');
   const lesson = new Lesson(content);
-
+  console.log(versionDetails)
   if (lessonId instanceof HTMLElement) {
     ReactDOM.render(
       <div>
@@ -22,7 +22,11 @@ const renderLesson = (content: LessonContent, lessonDetails: Object) => {
         <div>
           <div>
             <div>
-              <LessonComponent lesson={lesson} lessonDetails={lessonDetails}/>
+              <LessonComponent
+                lesson={lesson}
+                lessonDetails={lessonDetails}
+                versionDetails={versionDetails}
+              />
             </div>
           </div>
         </div>

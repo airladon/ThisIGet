@@ -15,12 +15,15 @@ from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
-from app.models import Users, Ratings, Lessons
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
 from app.tools import hash_str_with_pepper
-# import pdb
+from app.models import Users
+from app.models import Ratings
+from app.models import Lessons, Versions, Topics
+
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -282,19 +285,29 @@ def logout():
 
 
 @check_confirmed
-@app.route('/rating/<topic_uid>/<rating>')
-def rating(topic_uid, rating):
-    result = 0
-    print('here here')
-    # if current_user.is_authenticated:
-    #     lesson = Lessons.query.filter_by(lesson_uid=topic_uid).first()
-    #     print('got here', lesson)
-    #     if (lesson):
-    #         rating = Ratings(
-    #             user_id=current_user.id, lesson_id=lesson.id,
-    #             rating=int(rating), timestamp=datetime.datetime.now())
-    #         db.session.add(rating)
-    #         db.session.commit()
-    #         result = 1
+@app.route('/rating/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
+def rating(lesson_uid, topic, version_uid, rating_value):
+    result = 'done'
+    if current_user.is_authenticated:
+        print(lesson_uid, topic, version_uid, rating_value)
+        lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+        if lesson is None:
+            return jsonify({'result': 'fail - lesson does not exist'})
+        version = Versions.query.filter_by(
+            lesson_id=lesson.id, uid=version_uid).first()
+        if version is None:
+            return jsonify({'result': 'fail - version does not exist'})
+        topic = Topics.query.filter_by(
+            lesson_id=lesson.id, version_id=version.id, name=topic).first()
+        if topic is None:
+            return jsonify({'result': 'fail - topic does not exist'})
+        print(current_user.id, topic.id)
+        rating = Ratings.query.filter_by(topic_id=topic.id, user_id=current_user.id).first()
+        if rating is None:
+            rating = Ratings(user_id=current_user.id, topic_id=topic.id)
+            db.session.add(rating)
+        if rating.rating != rating_value:
+            rating.rating = rating_value
+            rating.timestamp = datetime.datetime.now()
+        db.session.commit()
     return jsonify({'result': result})
-

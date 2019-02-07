@@ -121,10 +121,10 @@ for key, value in index.items():            # noqa
         # print(version_info['topics'])
         for topic_name in version_info['topics']:
             topic = Topics.query.filter_by(
-                lesson=lesson.id, version=version.id, name=topic_name).first()
+                lesson_id=lesson.id, version_id=version.id, name=topic_name).first()
             if topic is None:
                 topic = Topics(
-                    lesson=lesson.id, version=version.id, name=topic_name)
+                    lesson_id=lesson.id, version_id=version.id, name=topic_name)
                 db.session.add(topic)
 
 db.session.commit()

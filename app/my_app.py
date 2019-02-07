@@ -14,8 +14,8 @@ def make_shell_context():
     return {
         'db': db,
         'Users': Users,
-        'Rating': Ratings,
+        'Ratings': Ratings,
         'Categories': Categories,
         'Comment': Comment,
-        'Lesson': Lessons,
+        'Lessons': Lessons,
     }

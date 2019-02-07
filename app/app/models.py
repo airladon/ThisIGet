@@ -121,11 +121,6 @@ class Users(UserMixin, db.Model):
         }
 
 
-@login.user_loader
-def load_user(id):
-    return Users.query.get(int(id))
-
-
 class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(64), index=True, unique=True)
@@ -147,7 +142,7 @@ class Lessons(db.Model):
     # ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lessons {}>'.format(self.lesson_name)
+        return '<Lessons {}>'.format(self.name)
 
 
 class Versions(db.Model):
@@ -163,18 +158,18 @@ class Versions(db.Model):
     # ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lesson {}>'.format(self.lesson_name)
+        return '<Versions {}>'.format(self.title)
 
 
 class Topics(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True)
-    lesson = db.Column(db.Integer, db.ForeignKey('lessons.id'))
-    version = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
     ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lessons {}>'.format(self.lesson_name)
+        return '<Topics {}>'.format(self.name)
 
 
 class Ratings(db.Model):
@@ -195,3 +190,8 @@ class Comment(db.Model):
 
     def __repr__(self):
         return '<Comment {}>'.format(self.comment)
+
+
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))
