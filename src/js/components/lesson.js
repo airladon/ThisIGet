@@ -64,6 +64,7 @@ export default class LessonComponent extends React.Component
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
+    console.log(this)
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
@@ -584,6 +585,12 @@ export default class LessonComponent extends React.Component
     return output;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  getTopic() {
+    const topicName = window.location.href.split('/').slice(-1)[0];
+    return topicName.charAt(0).toUpperCase() + topicName.slice(1);
+  }
+
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
@@ -597,7 +604,11 @@ export default class LessonComponent extends React.Component
             {this.addTopics()}
           </div>
         </div>
-        <Rating topicName="Explanation" rating={2} topicUid="uid2"/>
+        <Rating
+          topicName={this.getTopic()}
+          rating={2}
+          topicUid="uid2"
+        />
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">
