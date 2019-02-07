@@ -14,4 +14,31 @@
 .rating__stars {
   display: inline-block;
   color: color('grey', 'lighter');
+  position: relative;
+}
+
+.rating__stars_table {
+  display: table;
+}
+
+.rating__stars_star {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 1em;
+  height: 1em;
+}
+
+.rating__stars_full {
+  background-image: $star-full;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.rating__stars_empty {
+  background-image: $star-empty;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
 }
