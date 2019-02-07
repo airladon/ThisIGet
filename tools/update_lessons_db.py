@@ -7,7 +7,7 @@ import re
 import json
 
 user = Users.query.filter_by(username='airladon').first()
-print(user.username)
+# print(user.username)
 
 def json_loader(file):
     f = open(file.as_posix())
@@ -22,7 +22,7 @@ def json_loader(file):
     modified_str = re.sub(", *} *$", "}", modified_str)
     modified_str = re.sub(", *}", "}", modified_str)
     modified_str = re.sub(", *]", "]", modified_str)
-    print(modified_str)
+    # print(modified_str)
     return json.loads(modified_str)
 
 
@@ -36,11 +36,17 @@ def iter_path(path):
         else:
             if x.name == 'details.js':
                 details = json_loader(x)
-                print(details)
-            if x.name == 'version.js':
-                details = json_loader(x)
-                print(details)
+                lesson = Lesson(lesson_name=details['title'], lesson_uid=details['uid'])
+                print(lesson)
+                db.session.add(lesson)
+                # print(details)
+
+            # if x.name == 'version.js':
+            #     details = json_loader(x)
+            #     print(details)
+Lesson.query.delete()
 iter_path('./src/Lessons')
+db.session.commit()
 
 
 # p = pathlib.Path('./src/Lessons')
