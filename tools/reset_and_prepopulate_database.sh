@@ -53,20 +53,20 @@ then
   echo "${bold}${cyan}==== Resetting Database =====${reset} "
   psql -c "drop database $DATABASE_NAME"
   psql -c "create database $DATABASE_NAME"
+
+  echo
+  echo "${bold}${cyan}==== Removing Migrations =====${reset} "
+  rm -rf migrations
+  echo done
+
+  echo
+  echo "${bold}${cyan}==== Flask db init =====${reset} "
+  flask db init
+
+  echo
+  echo "${bold}${cyan}==== Flask db migrate =====${reset} "
+  flask db migrate
 fi
-echo
-echo "${bold}${cyan}==== Removing Migrations =====${reset} "
-rm -rf migrations
-echo done
-
-echo
-echo "${bold}${cyan}==== Flask db init =====${reset} "
-flask db init
-
-echo
-echo "${bold}${cyan}==== Flask db migrate =====${reset} "
-flask db migrate
-
 echo
 echo "${bold}${cyan}==== Flask db upgrade =====${reset} "
 flask db upgrade
