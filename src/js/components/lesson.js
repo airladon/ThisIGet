@@ -123,7 +123,7 @@ export default class LessonComponent extends React.Component
         if (data.status === 'ok') {
           this.setState({ userRating: rating });
         } else {
-          console.log('failed to set rating:', data.message);
+          // console.log('failed to set rating:', data.message);
         }
       })
       .catch(() => {});

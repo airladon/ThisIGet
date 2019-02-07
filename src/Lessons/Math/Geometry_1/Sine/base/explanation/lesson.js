@@ -5,5 +5,5 @@ import Content from './content';
 import './style.scss';
 // import details from '../details';
 
-renderLesson(new Content(), {});
+renderLesson(new Content(), {}, {});
 
