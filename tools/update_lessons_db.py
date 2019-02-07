@@ -9,7 +9,21 @@ import json
 user = Users.query.filter_by(username='airladon').first()
 print(user.username)
 
-def jsonLoader(file_name):
+def json_loader(file):
+    f = open(file.as_posix())
+    details_str = f.read()
+    start = re.search(r'\nvar details *=', details_str)
+    stop = re.search(r'\n};', details_str)
+    details_str = details_str[start.span()[1]:stop.span()[0] + 2]
+    modified_str = re.sub("'", '"', details_str)
+    modified_str = re.sub(r"([^' ]*):", r'"\1":', modified_str)
+    modified_str = re.sub("\n", "", modified_str)
+    modified_str = re.sub("([^'])false([^'])", r'\1"false"\2', modified_str)
+    modified_str = re.sub(", *} *$", "}", modified_str)
+    modified_str = re.sub(", *}", "}", modified_str)
+    modified_str = re.sub(", *]", "]", modified_str)
+    print(modified_str)
+    return json.loads(modified_str)
 
 
 keep_out = ['boilerplate', 'LessonsCommon']
@@ -21,14 +35,11 @@ def iter_path(path):
             iter_path('./' + x.as_posix())
         else:
             if x.name == 'details.js':
-                f = open(x.as_posix())
-                details = f.read()
-                start = re.search(r'\nvar details *=', details)
-                stop = re.search(r'\n};', details)
-                print(details[start.span()[1]:stop.span()[0] + 2])
-                print(x.as_posix())
+                details = json_loader(x)
+                print(details)
             if x.name == 'version.js':
-                print(x.as_posix())
+                details = json_loader(x)
+                print(details)
 iter_path('./src/Lessons')
 
 
