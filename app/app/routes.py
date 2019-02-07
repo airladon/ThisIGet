@@ -15,12 +15,12 @@ from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
-from app.models import Users, Rating, Lesson
+from app.models import Users, Ratings, Lessons
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
 from app.tools import hash_str_with_pepper
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -286,15 +286,15 @@ def logout():
 def rating(topic_uid, rating):
     result = 0
     print('here here')
-    if current_user.is_authenticated:
-        lesson = Lesson.query.filter_by(lesson_uid=topic_uid).first()
-        print('got here', lesson)
-        if (lesson):
-            rating = Rating(
-                user_id=current_user.id, lesson_id=lesson.id,
-                rating=int(rating), timestamp=datetime.datetime.now())
-            db.session.add(rating)
-            db.session.commit()
-            result = 1
+    # if current_user.is_authenticated:
+    #     lesson = Lessons.query.filter_by(lesson_uid=topic_uid).first()
+    #     print('got here', lesson)
+    #     if (lesson):
+    #         rating = Ratings(
+    #             user_id=current_user.id, lesson_id=lesson.id,
+    #             rating=int(rating), timestamp=datetime.datetime.now())
+    #         db.session.add(rating)
+    #         db.session.commit()
+    #         result = 1
     return jsonify({'result': result})
 

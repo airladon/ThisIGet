@@ -1,5 +1,5 @@
 from app import app  # noqa
-from app.models import db, Users, Rating, Category, Comment, Lesson
+from app.models import db, Users, Ratings, Category, Comment, Lessons
 
 # from app.util import assets  # noqa
 
@@ -14,8 +14,8 @@ def make_shell_context():
     return {
         'db': db,
         'Users': Users,
-        'Rating': Rating,
+        'Rating': Ratings,
         'Category': Category,
         'Comment': Comment,
-        'Lesson': Lesson,
+        'Lesson': Lessons,
     }
