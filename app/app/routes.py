@@ -20,7 +20,7 @@ from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from flask_sqlalchemy import or_
 from app.tools import hash_str_with_pepper
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -285,13 +285,14 @@ def logout():
 @app.route('/rating/<topic_uid>/<rating>')
 def rating(topic_uid, rating):
     result = 0
+    print('here here')
     if current_user.is_authenticated:
         lesson = Lesson.query.filter_by(lesson_uid=topic_uid).first()
-        print('got here')
+        print('got here', lesson)
         if (lesson):
             rating = Rating(
-                user=current_user, lesson=lesson,
-                rating=rating, timestamp=datetime.datetime.now)
+                user_id=current_user.id, lesson_id=lesson.id,
+                rating=int(rating), timestamp=datetime.datetime.now())
             db.session.add(rating)
             db.session.commit()
             result = 1

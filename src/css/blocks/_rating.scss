@@ -30,6 +30,10 @@
   position: relative;
 }
 
+.rating__stars_star:hover {
+  cursor: pointer;
+}
+
 .rating__stars_full {
   background-image: $star-full;
   background-size: cover;
