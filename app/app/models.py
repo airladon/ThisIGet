@@ -126,7 +126,7 @@ def load_user(id):
     return Users.query.get(int(id))
 
 
-class Category(db.Model):
+class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(64), index=True, unique=True)
     path = db.Column(db.String(128))
@@ -139,7 +139,7 @@ class Lessons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     name = db.Column(db.String(128), index=True, unique=True)
     uid = db.Column(db.String(128), index=True, unique=True)
-    category = db.Column(db.Integer, db.ForeignKey('category.id'))
+    category = db.Column(db.Integer, db.ForeignKey('categories.id'))
     dependencies = db.Column(db.String(1024), index=True)
     enabled = db.Column(db.Boolean, index=True)
     path = db.Column(db.String(128))

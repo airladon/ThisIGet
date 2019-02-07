@@ -1,11 +1,10 @@
-import sys
-sys.path.insert(0, './app/')
-from app import app  # noqa
-from app.models import db, Users, Versions, Lessons, Category, Topics
 import pathlib
 import re
 import json
-import pdb
+import sys
+sys.path.insert(0, './app/')
+from app import app  # noqa
+from app.models import db, Versions, Lessons, Categories, Topics  # noqa
 
 # user = Users.query.filter_by(username='airladon').first()
 # print(user.username)
@@ -76,13 +75,13 @@ def index_loader(file):
 
 index = index_loader(pathlib.Path('./src/Lessons/index.js'))
 
-for key, value in index.items():
+for key, value in index.items():            # noqa
     # Update or create category row
     category_name = value['path'].split('/')[3]
-    category = Category.query.filter_by(category=category_name).first()
+    category = Categories.query.filter_by(category=category_name).first()
     if category is None:
         category_path = '/'.join(value['path'].split('/')[0:3])
-        category = Category(category=category_name, path=category_path)
+        category = Categories(category=category_name, path=category_path)
         db.session.add(category)
 
     # Update or Create lesson row
