@@ -52,11 +52,16 @@ export default class Navbar extends React.Component
     const { cookie } = document;
     if (cookie != null) {
       // $FlowFixMe
-      const username = cookie.match(/username=[^;]*;/);
+      let username = cookie.match(/username=[^;]*/);
+      // console.log(username)
       if (username != null) {
-        this.setLogin(username[0]
-          .split('=')[1]
-          .slice(0, -1));
+        
+        username = username[0].trim();
+        if (username.slice(-1).charAt(0) === ';') {
+          username = username.slice(0, -1);
+        }
+
+        this.setLogin(username.split('=')[1]);
       }
     }
   }
