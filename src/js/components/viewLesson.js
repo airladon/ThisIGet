@@ -30,6 +30,7 @@ export default class ViewLesson extends React.Component
         lesson={this.lesson}
         lessonDetails={this.props.lessonDetails}
         versionDetails={this.props.versionDetails}
+        isLoggedIn={this.props.isLoggedIn}
       />
     </div>;
   }

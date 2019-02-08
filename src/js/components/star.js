@@ -6,6 +6,7 @@ type Props={
   isFull: boolean;
   num: number;
   callback: Function;
+  isLoggedIn: boolean;
 };
 
 export default class Star extends React.Component
@@ -36,9 +37,18 @@ export default class Star extends React.Component
   }
 
   render() {
+    let link = <div></div>;
+    if (this.props.isLoggedIn) {
+      link = <div
+        className="rating__stars_link rating__stars_star_active"
+        onClick={this.setRating.bind(this)}
+      />;
+    }
+
     return <div className="rating__stars_star">
       {this.star()}
-      <div className="rating__stars_link" onClick={this.setRating.bind(this)}/>
+      { /* <div className="rating__stars_link" onClick={this.setRating.bind(this)}/> */ }
+      {link}
     </div>;
   }
 }

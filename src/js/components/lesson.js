@@ -20,6 +20,7 @@ type Props = {
   lessonDetails: Object;
   versionDetails: Object;
   section?: number;
+  isLoggedIn: boolean;
 };
 
 type State = {
@@ -673,9 +674,8 @@ export default class LessonComponent extends React.Component
         <Rating
           topic={this.topic}
           rating={this.state.userRating}
-          versionId={this.versionDetails.details.uid}
-          lessonId={this.lessonDetails.details.uid}
           ratingCallback={this.setUserRating.bind(this)}
+          isLoggedIn={this.props.isLoggedIn}
         />
       </div>
       <div className="lesson__widescreen_backdrop">
