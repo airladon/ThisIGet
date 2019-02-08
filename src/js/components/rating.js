@@ -16,16 +16,16 @@ export default class Rating extends React.Component
     const stars = [];
     let num = 5;
     // const link = `/rate/${this.props.lessonId}/${this.props.topic}/${this.props.versionId}`;
-    for (let i = 0; i < 5 - this.props.rating; i += 1) {
-      stars.push(<Star isFull={false}
+    for (let i = 0; i < this.props.rating; i += 1) {
+      stars.push(<Star isFull={true}
         key={num}
         callback={this.props.ratingCallback}
         num={num}
       />);
       num -= 1;
     }
-    for (let i = 0; i < this.props.rating; i += 1) {
-      stars.push(<Star isFull={true}
+    for (let i = this.props.rating; i < 5; i += 1) {
+      stars.push(<Star isFull={false}
         num={num}
         key={num}
         callback={this.props.ratingCallback}
