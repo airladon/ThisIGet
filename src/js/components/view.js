@@ -1,5 +1,9 @@
 // @flow
 
+// This is a React Higher order component pattern where a component can be
+// wrapped by another component that will look after login state and send
+// through the state information as props to the wrapped component.
+
 import * as React from 'react';
 import NavbarSpacer from './navbarSpacer';
 import Navbar from './navbar';
