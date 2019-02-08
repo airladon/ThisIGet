@@ -4,7 +4,10 @@ import * as React from 'react';
 import LessonNavigator from './lessonNavigator';
 import HomeBanner from './homeBanner';
 
-type Props = {};
+type Props = {
+  isLoggedIn: boolean;
+  username: string;
+};
 
 export default class ViewHome extends React.Component<Props> {
   render() {

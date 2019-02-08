@@ -10,11 +10,13 @@ import Navbar from './navbar';
 import Footer from './footer';
 
 type Props = {
+  [propName: string]: Object;
 };
 
 type WrappedComponentProps = {
   username: string;
   isLoggedIn: boolean;
+  [propName: string]: Object;
 };
 
 type State = {
