@@ -136,8 +136,8 @@ def loginuser():
 def login(username=''):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/login.css'
-    js = '/static/dist/login.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = LoginForm()
     if username:
         user = Users.query.filter_by(username=username).first()
@@ -168,8 +168,8 @@ def login(username=''):
 def create():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    css = '/static/dist/createAccount.css'
-    js = '/static/dist/createAccount.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users(username=form.username.data)
@@ -187,8 +187,8 @@ def create():
 def confirm_account_message(username):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/confirmAccountMessage.css'
-    js = '/static/dist/confirmAccountMessage.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(username=username).first()
     if user is None:
@@ -240,8 +240,8 @@ def confirm_account(token):
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password_request():
-    css = '/static/dist/resetPasswordRequest.css'
-    js = '/static/dist/resetPasswordRequest.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
@@ -260,8 +260,8 @@ def reset_password_request():
 
 @app.route('/resetPassword/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    css = '/static/dist/resetPassword.css'
-    js = '/static/dist/resetPassword.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
