@@ -18,6 +18,10 @@ talisman = Talisman(
             SELF,
             'https://unpkg.com/',
         ],
+        'style-src': [
+            SELF,
+            "'unsafe-inline'",
+        ],
     },)
 
 db = SQLAlchemy(app)
@@ -26,3 +30,5 @@ login = LoginManager(app)
 mail = Mail(app)
 
 from app import routes, models  # noqa
+
+# "'unsafe-inline'",

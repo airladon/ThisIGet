@@ -17,11 +17,31 @@ fi
 DATABASE_NAME=thisiget_local
 if [ $1 ];
 then
+  if [ $1 == 'help' ] || [ $1 == '--help' ];
+  then
+    echo
+    echo 'Usage:'
+    echo '      reset_and_prepopulate_database.sh <DB_NAME> <init_flask>'
+    echo
+    echo 'Where DB_NAME is name of database at URL defined in environment variable DATABASE_URL.'
+    echo 'Use "init_flask" if you want to remove migrations and reinitialize flask db'
+    echo
+    exit 1   
+  fi
   DATABASE_NAME=$1
 fi
 
-echo $DATABASE_URL
-echo "postgresql://postgres@localhost/$DATABASE_NAME"
+INITIALIZE_FLASK_DB=0
+if [ $2 ];
+then
+  if [ $2 == 'init_flask' ];
+  then
+    INITIALIZE_FLASK_DB=1
+  fi
+fi
+
+# echo $DATABASE_URL
+# echo "postgresql://postgres@localhost/$DATABASE_NAME"
 REMOTE=1
 if [ $DATABASE_URL = "postgresql://postgres@localhost/$DATABASE_NAME" ];
 then
@@ -54,18 +74,21 @@ then
   psql -c "drop database $DATABASE_NAME"
   psql -c "create database $DATABASE_NAME"
 
-  echo
-  echo "${bold}${cyan}==== Removing Migrations =====${reset} "
-  rm -rf migrations
-  echo done
+  if [ $INITIALIZE_FLASK_DB == 1 ];
+  then
+    echo
+    echo "${bold}${cyan}==== Removing Migrations =====${reset} "
+    rm -rf migrations
+    echo done
 
-  echo
-  echo "${bold}${cyan}==== Flask db init =====${reset} "
-  flask db init
+    echo
+    echo "${bold}${cyan}==== Flask db init =====${reset} "
+    flask db init
 
-  echo
-  echo "${bold}${cyan}==== Flask db migrate =====${reset} "
-  flask db migrate
+    echo
+    echo "${bold}${cyan}==== Flask db migrate =====${reset} "
+    flask db migrate
+  fi
 fi
 echo
 echo "${bold}${cyan}==== Flask db upgrade =====${reset} "

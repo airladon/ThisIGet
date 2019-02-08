@@ -6,91 +6,110 @@ import * as React from 'react';
 
 type Props = {
   active?: string;
+  isLoggedIn: boolean;
+  username: string;
 };
 
-type State = {
-  loginLink: string;
-  loginText: string;
-};
+// type State = {
+//   loginLink: string;
+//   loginText: string;
+// };
 
 export default class Navbar extends React.Component
-                                    <Props, State> {
-  state: State;
+                                    <Props> {
+  // state: State;
 
-  constructor(props: Props) {
-    super(props);
-    this.state = {
-      // isLoggedIn: false,
-      loginText: 'Login',
-      loginLink: '/login',
-    };
-  }
+  // constructor(props: Props) {
+  //   super(props);
+  //   this.state = {
+  //     // isLoggedIn: false,
+  //     loginText: 'Login',
+  //     loginLink: '/login',
+  //   };
+  // }
 
-  componentDidMount() {
-    const handleVisibilityChange = () => {
-      this.checkIsLoggedIn();
-    };
-    window.addEventListener('focus', handleVisibilityChange);
-    this.checkIsLoggedIn();
-    // this.checkIsLoggedIn();
-    // this.checkLoggedInFromPage();
-  }
-
-  checkIsLoggedIn() {
-    // // console.log('checking1')
-    // fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
-    //   .then((response) => {
-    //     if (!response.ok) {
-    //       throw Error(response.statusText);
-    //     }
-    //     // console.log(response, response.json());
-    //     return response.json();
-    //   })
-    //   .then(data => this.setLogin(data.username))
-    //   .catch(() => {});
-    // console.log(document.cookie)
-    const { cookie } = document;
-    if (cookie != null) {
-      // $FlowFixMe
-      let username = cookie.match(/username=[^;]*/);
-      // console.log(username)
-      if (username != null) {
-        username = username[0].trim();
-        if (username.slice(-1).charAt(0) === ';') {
-          username = username.slice(0, -1);
-        }
-
-        this.setLogin(username.split('=')[1]);
-      }
-    }
-  }
-
-  // checkLoggedInFromPage() {
-  //   if (document.getElementById('logged_in')) {
-  //     this.setLogin(null);
+  // componentDidMount() {
+  //   const handleVisibilityChange = () => {
   //     this.checkIsLoggedIn();
-  //   } else {
-  //     this.setLogin('');
+  //   };
+  //   window.addEventListener('focus', handleVisibilityChange);
+  //   this.checkIsLoggedIn();
+  //   // this.checkIsLoggedIn();
+  //   // this.checkLoggedInFromPage();
+  // }
+
+  // checkIsLoggedIn() {
+  //   // // console.log('checking1')
+  //   // fetchPolyfill('/isloggedin', { credentials: 'same-origin' })
+  //   //   .then((response) => {
+  //   //     if (!response.ok) {
+  //   //       throw Error(response.statusText);
+  //   //     }
+  //   //     // console.log(response, response.json());
+  //   //     return response.json();
+  //   //   })
+  //   //   .then(data => this.setLogin(data.username))
+  //   //   .catch(() => {});
+  //   // console.log(document.cookie)
+  //   const { cookie } = document;
+  //   if (cookie != null) {
+  //     // $FlowFixMe
+  //     let username = cookie.match(/username=[^;]*/);
+  //     // console.log(username)
+  //     if (username != null) {
+  //       username = username[0].trim();
+  //       if (username.slice(-1).charAt(0) === ';') {
+  //         username = username.slice(0, -1);
+  //       }
+
+  //       this.setLogin(username.split('=')[1]);
+  //     }
   //   }
   // }
 
-  setLogin(username: string | null) {
-    if (username === '') {
-      this.setState({
-        loginText: 'Login',
-        loginLink: '/login',
-      });
-    } else if (username !== null) {
-      this.setState({
-        loginText: `Logout ${username}`,
-        loginLink: '/logout',
-      });
-    } else {
-      this.setState({
-        loginText: 'Logout',
-        loginLink: '/logout',
-      });
+  // // checkLoggedInFromPage() {
+  // //   if (document.getElementById('logged_in')) {
+  // //     this.setLogin(null);
+  // //     this.checkIsLoggedIn();
+  // //   } else {
+  // //     this.setLogin('');
+  // //   }
+  // // }
+
+  // setLogin(username: string | null) {
+  //   if (username === '') {
+  //     this.setState({
+  //       loginText: 'Login',
+  //       loginLink: '/login',
+  //     });
+  //   } else if (username !== null) {
+  //     this.setState({
+  //       loginText: `Logout ${username}`,
+  //       loginLink: '/logout',
+  //     });
+  //   } else {
+  //     this.setState({
+  //       loginText: 'Logout',
+  //       loginLink: '/logout',
+  //     });
+  //   }
+  // }
+
+  getLoginLink() {
+    if (this.props.isLoggedIn) {
+      return '/logout';
     }
+    return '/login';
+  }
+
+  getLoginLabel() {
+    if (this.props.isLoggedIn) {
+      if (this.props.username !== '') {
+        return `Logged in as ${this.props.username}`;
+      }
+      return 'Logout';
+    }
+    return 'Login';
   }
 
   render() {
@@ -106,7 +125,7 @@ export default class Navbar extends React.Component
                src="/static/icon-lg.png"/>
         </a>
         <div className="navbar-text navbar-left login_button">
-          <a href={this.state.loginLink}>{this.state.loginText}</a>
+          <a href={this.getLoginLink()}>{this.getLoginLabel()}</a>
         </div>
         {/*
         <div className="navbar-text navbar-left">
