@@ -55,7 +55,6 @@ export default class Navbar extends React.Component
       let username = cookie.match(/username=[^;]*/);
       // console.log(username)
       if (username != null) {
-        
         username = username[0].trim();
         if (username.slice(-1).charAt(0) === ';') {
           username = username.slice(0, -1);
