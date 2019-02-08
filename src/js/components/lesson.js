@@ -95,7 +95,6 @@ export default class LessonComponent extends React.Component
       })
       .then((data) => {
         if (data.status === 'ok') {
-          // console.log(data)
           if (data.userRating
             && data.userRating !== 'not rated'
             && data.userRating !== 'not logged in'
@@ -109,6 +108,16 @@ export default class LessonComponent extends React.Component
   }
 
   setUserRating(rating: number) {
+    const { cookie } = document;
+    if (cookie != null) {
+      const username = cookie.match(/username=[^;]*;/);
+      // console.log(username)
+      if (username != null) {
+        if (username[0].split('=')[1].slice(0, -1) === '') {
+          return;
+        }
+      }
+    }
     const lessonUid = this.lessonDetails.details.uid;
     const versionUid = this.versionDetails.details.uid;
     const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}`;
@@ -120,7 +129,8 @@ export default class LessonComponent extends React.Component
         return response.json();
       })
       .then((data) => {
-        if (data.status === 'ok') {
+        console.log(data)
+        if (data.status === 'done') {
           this.setState({ userRating: rating });
         } else {
           // console.log('failed to set rating:', data.message);

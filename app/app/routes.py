@@ -287,7 +287,7 @@ def logout():
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic, version_uid, rating_value):
-    status = 'ok'
+    status = 'not logged in'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
@@ -309,7 +309,8 @@ def rate(lesson_uid, topic, version_uid, rating_value):
             rating.rating = rating_value
             rating.timestamp = datetime.datetime.now()
         db.session.commit()
-    return jsonify({'status': 'ok'})
+        status = 'done'
+    return jsonify({'status': status})
 
 
 @check_confirmed
@@ -332,7 +333,6 @@ def get_rating(lesson_uid, topic, version_uid):
         return jsonify({'status': 'fail', 'message': 'topic does not exist'})
 
     ratings = Ratings.query.filter_by(topic=topic).all()
-    print(ratings)
     if ratings is None:
         ratings = []
     num_ratings = len(ratings)
@@ -340,8 +340,6 @@ def get_rating(lesson_uid, topic, version_uid):
     for r in ratings:
         sum_ratings += r.rating
     ave_rating = 0
-    print(sum_ratings)
-    # pdb.set_trace()
     if num_ratings > 0:
         ave_rating = sum_ratings / num_ratings
 

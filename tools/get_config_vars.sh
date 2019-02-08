@@ -30,14 +30,14 @@ then
 fi
 
 echo
-heroku config --app=$1 | sed '1d' | sed '/^DATABASE_URL/d'
+heroku config --app=$1 | sed '1d' | sed '/^FLASK_APP/d'
 echo
 
 heroku config --app=$1 | \
   sed '1d' | \
   sed 's/ //g' | \
   sed 's/:/="/' | \
-  sed '/^DATABASE_URL/d' | \
+  sed '/^FLASK_APP/d' | \
   sed '/^OLD/d' | \
   sed 's/^/export /' | \
   sed 's/$/"/'
