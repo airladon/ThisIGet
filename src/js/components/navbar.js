@@ -96,10 +96,11 @@ export default class Navbar extends React.Component
   // }
 
   getLoginLink() {
+    const next = `?next=${window.location.pathname}`;
     if (this.props.isLoggedIn) {
-      return '/logout';
+      return `/logout${next}`;
     }
-    return '/login';
+    return `/login${next}`;
   }
 
   getLoginLabel() {

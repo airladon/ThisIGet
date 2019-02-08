@@ -91,11 +91,12 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
-    return render_template(
-        'lesson.html',
-        css=css,
-        js=js,
-    )
+    res = make_response(render_template('lesson.html', css=css, js=js))
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.username)
+    else:
+        res.set_cookie('username', '')
+    return res
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
@@ -160,7 +161,6 @@ def login(username=''):
             # session['username'] = user.username
             # return redirect(url_for('home'))
             next_page = request.args.get('next')
-            print(next_page)
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('home')
             return redirect(next_page)
@@ -287,7 +287,11 @@ def reset_password(token):
 def logout():
     logout_user()
     session.pop('username', None)
-    return redirect(url_for('home'))
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('home')
+    return redirect(next_page)
+    # return redirect(url_for('home'))
 
 
 @check_confirmed
