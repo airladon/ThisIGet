@@ -10,7 +10,7 @@
 
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
-from flask import make_response
+from flask import make_response, request
 from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
@@ -23,7 +23,8 @@ from app.models import Users
 from app.models import Ratings
 from app.models import Lessons, Versions, Topics
 from functools import reduce
-import pdb
+from werkzeug.urls import url_parse
+# import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -157,7 +158,12 @@ def login(username=''):
             user.last_login = datetime.datetime.now()
             db.session.commit()
             # session['username'] = user.username
-            return redirect(url_for('home'))
+            # return redirect(url_for('home'))
+            next_page = request.args.get('next')
+            print(next_page)
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('home')
+            return redirect(next_page)
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
     return render_template(

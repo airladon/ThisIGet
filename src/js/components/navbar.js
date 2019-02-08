@@ -124,7 +124,7 @@ export default class Navbar extends React.Component
           <img className="navbar-icon"
                src="/static/icon-lg.png"/>
         </a>
-        <div className="navbar-text navbar-left login_button">
+        <div className="navbar-text navbar-right login_button">
           <a href={this.getLoginLink()}>{this.getLoginLabel()}</a>
         </div>
         {/*

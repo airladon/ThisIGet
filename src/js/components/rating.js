@@ -40,13 +40,16 @@ export default class Rating extends React.Component
     if (this.props.isLoggedIn) {
       return `Did this ${topic} help you understand?`;
     }
-    return `Login to rate ${topic}`;
+    const link = `/login?next=${window.location.pathname}`;
+    return <div>
+      <a href={link}>Login</a> to rate {topic}:
+    </div>;
   }
 
   render() {
     return <div className="rating__container">
       <div className="rating__label">
-        {this.getRatingLabel()}:
+        {this.getRatingLabel()}
       </div>
       <div className="rating__stars">
         <div className="rating__stars_table">

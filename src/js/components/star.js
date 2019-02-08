@@ -47,7 +47,6 @@ export default class Star extends React.Component
 
     return <div className="rating__stars_star">
       {this.star()}
-      { /* <div className="rating__stars_link" onClick={this.setRating.bind(this)}/> */ }
       {link}
     </div>;
   }
