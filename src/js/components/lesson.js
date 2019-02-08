@@ -129,7 +129,6 @@ export default class LessonComponent extends React.Component
         return response.json();
       })
       .then((data) => {
-        console.log(data)
         if (data.status === 'done') {
           this.setState({ userRating: rating });
         } else {

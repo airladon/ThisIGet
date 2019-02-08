@@ -39,7 +39,9 @@ This is only needed for running locally.
 #### `FLASK_APP`
 If you want to run flask or flask database migrations locally and not in a container, then you need the flask environment variable:
 
-`FLASK_APP=app/my_app.py`
+```
+export FLASK_APP=app/my_app.py
+```
 
 #### `HEROKU_TOKEN`
 If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
@@ -184,8 +186,9 @@ flask db upgrade
 Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
 ```
 heroku pg:reset --app=itgetitest
-export DATABASE_URL=`heroku config --app=itgetitest | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
-flask db upgrade
+tools/get_config_vars.sh itgetitest
+tools/reset_and_prepopulate_database.sh
+tools/get_config_vars.sh local
 ```
 
 Can check with
