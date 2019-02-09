@@ -48,6 +48,7 @@ def home():
         res.set_cookie('username', current_user.username)
     else:
         res.set_cookie('username', '')
+    res.set_cookie('page', '0')
     return res
 
 
@@ -91,11 +92,16 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
+    lesson_page = request.args.get('page')
+    print('page: ', lesson_page)
+    if not lesson_page:
+        lesson_page = '0'
     res = make_response(render_template('lesson.html', css=css, js=js))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
     else:
         res.set_cookie('username', '')
+    res.set_cookie('page', lesson_page)
     return res
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
@@ -160,9 +166,13 @@ def login(username=''):
             db.session.commit()
             # session['username'] = user.username
             # return redirect(url_for('home'))
+            lesson_page = request.args.get('page')
+            if lesson_page is None:
+                lesson_page = '0'
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('home')
+            next_page = next_page + '?page=' + lesson_page
             return redirect(next_page)
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
@@ -287,9 +297,13 @@ def reset_password(token):
 def logout():
     logout_user()
     session.pop('username', None)
+    lesson_page = request.args.get('page')
+    if lesson_page is None:
+        lesson_page = '0'
     next_page = request.args.get('next')
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('home')
+    next_page = next_page + '?page=' + lesson_page
     return redirect(next_page)
     # return redirect(url_for('home'))
 

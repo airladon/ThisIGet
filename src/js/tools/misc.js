@@ -57,6 +57,46 @@ function loadRemoteCSS(
   }
 }
 
+function getCookie(key: string) {
+  const { cookie } = document;
+  if (cookie != null) {
+    const re = RegExp(`${key}=[^;]*`);
+    // $FlowFixMe
+    let keyValue = cookie.match(re);
+    // console.log(username)
+    if (keyValue != null) {
+      keyValue = keyValue[0].trim();
+      if (keyValue.slice(-1).charAt(0) === ';') {
+        keyValue = keyValue.slice(0, -1);
+      }
+
+      return keyValue.split('=')[1];
+    }
+  }
+  return '';
+}
+
+function logInOut(inOrOut: string) {
+  let page = getCookie('page');
+  if (page === '') {
+    page = '0';
+  }
+  let logText = '/logout';
+  if (inOrOut === 'in') {
+    logText = '/login';
+  }
+  const next = `?next=${window.location.pathname}&page=${page}`;
+  window.location = `${logText}${next}`;
+}
+function login() {
+  logInOut('in');
+}
+
+function logout() {
+  logInOut('out');
+}
+
 export {
-  classify, loadRemote, loadRemoteCSS,
+  classify, loadRemote, loadRemoteCSS, getCookie, login, logout,
 };
+

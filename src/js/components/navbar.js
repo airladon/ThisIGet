@@ -1,6 +1,8 @@
 // @flow
 
 import * as React from 'react';
+import { login, logout } from '../tools/misc';
+
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 
@@ -95,13 +97,25 @@ export default class Navbar extends React.Component
   //   }
   // }
 
-  getLoginLink() {
-    const next = `?next=${window.location.pathname}`;
+  loginout() {
     if (this.props.isLoggedIn) {
-      return `/logout${next}`;
+      login();
+    } else {
+      logout();
     }
-    return `/login${next}`;
   }
+
+  // getLoginLink() {
+  //   let page = getCookie('page');
+  //   if (page === '') {
+  //     page = '0';
+  //   }
+  //   const next = `?next=${window.location.pathname}&page=${page}`;
+  //   if (this.props.isLoggedIn) {
+  //     return `/logout${next}`;
+  //   }
+  //   return `/login${next}`;
+  // }
 
   getLoginLabel() {
     if (this.props.isLoggedIn) {
@@ -126,7 +140,10 @@ export default class Navbar extends React.Component
                src="/static/icon-lg.png"/>
         </a>
         <div className="navbar-text navbar-right login_button">
-          <a href={this.getLoginLink()}>{this.getLoginLabel()}</a>
+          {/*<a href={this.getLoginLink()}>{this.getLoginLabel()}</a>*/}
+          <div onClick={this.loginout.bind(this)}>
+            {this.getLoginLabel()}
+          </div>
         </div>
         {/*
         <div className="navbar-text navbar-left">

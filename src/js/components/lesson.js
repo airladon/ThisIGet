@@ -155,6 +155,8 @@ export default class LessonComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
+      document.cookie = `page=${page + 1}; path=/`;
+      console.log(document.cookie)
     } else if (callback) {
       callback();
     }
@@ -245,6 +247,17 @@ export default class LessonComponent extends React.Component
     this.orientationChange();
     this.centerLessonFlag = !this.centerLessonFlag;
     this.centerLesson();
+
+    const { cookie } = document;
+    let page = cookie.match(/page=[^;]*/);
+    if (page != null) {
+      page = page[0].trim();
+      if (page.slice(-1).charAt(0) === ';') {
+        page = page.slice(0, -1);
+      }
+      // this.setState({ page: parseInt(page, 10) });
+      this.lesson.goToSection(parseInt(page.split('=')[1], 10) - 1);
+    }
   }
 
   // showHideNavigator() {
