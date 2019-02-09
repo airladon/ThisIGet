@@ -93,15 +93,15 @@ def get_lesson(path):
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
     lesson_page = request.args.get('page')
-    print('page: ', lesson_page)
-    if not lesson_page:
-        lesson_page = '0'
     res = make_response(render_template('lesson.html', css=css, js=js))
+    if lesson_page:
+        res.set_cookie('page', lesson_page)
+        return redirect(request.path)
+
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
     else:
         res.set_cookie('username', '')
-    res.set_cookie('page', lesson_page)
     return res
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
