@@ -76,27 +76,27 @@ function getCookie(key: string) {
   return '';
 }
 
-function logInOut(inOrOut: string) {
+function logInOut(isLoggedIn: boolean) {
   let page = getCookie('page');
   if (page === '') {
     page = '0';
   }
   let logText = '/logout';
-  if (inOrOut === 'in') {
+  if (isLoggedIn === false) {
     logText = '/login';
   }
   const next = `?next=${window.location.pathname}&page=${page}`;
   window.location = `${logText}${next}`;
 }
 function login() {
-  logInOut('in');
+  logInOut(false);
 }
 
 function logout() {
-  logInOut('out');
+  logInOut(true);
 }
 
 export {
-  classify, loadRemote, loadRemoteCSS, getCookie, login, logout,
+  classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
 };
 

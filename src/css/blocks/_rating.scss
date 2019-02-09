@@ -55,3 +55,11 @@
   left: 0;
   top: 0;
 }
+
+.rating__login {
+  color: color('site', 'primary');
+}
+
+.rating__login:hover {
+  cursor: pointer;
+}

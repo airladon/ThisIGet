@@ -99,9 +99,9 @@ export default class Navbar extends React.Component
 
   loginout() {
     if (this.props.isLoggedIn) {
-      login();
-    } else {
       logout();
+    } else {
+      login();
     }
   }
 
@@ -127,6 +127,7 @@ export default class Navbar extends React.Component
     return 'Login';
   }
 
+
   render() {
     const props = Object.assign({}, this.props);
     delete props.active;
@@ -140,8 +141,7 @@ export default class Navbar extends React.Component
                src="/static/icon-lg.png"/>
         </a>
         <div className="navbar-text navbar-right login_button">
-          {/*<a href={this.getLoginLink()}>{this.getLoginLabel()}</a>*/}
-          <div onClick={this.loginout.bind(this)}>
+          <div onClick={this.loginout.bind(this)} className="navbar_login">
             {this.getLoginLabel()}
           </div>
         </div>

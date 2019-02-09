@@ -13,6 +13,7 @@ import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 import ExplanationButton from './explanationButton';
 import Rating from './rating';
+import { getCookie } from '../tools/misc';
 
 
 type Props = {
@@ -59,6 +60,7 @@ export default class LessonComponent extends React.Component
   lessonDescription: null | LessonDescription;
   versionDetails: Object;
   topic: string;
+  firstPage: number;
 
   constructor(props: Props) {
     super(props);
@@ -69,6 +71,7 @@ export default class LessonComponent extends React.Component
       listOfSections: [],
       userRating: 0,
     };
+    this.firstPage = getCookie('page') - 1;
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
@@ -156,7 +159,6 @@ export default class LessonComponent extends React.Component
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
       document.cookie = `page=${page + 1}; path=/`;
-      console.log(document.cookie)
     } else if (callback) {
       callback();
     }
@@ -248,15 +250,15 @@ export default class LessonComponent extends React.Component
     this.centerLessonFlag = !this.centerLessonFlag;
     this.centerLesson();
 
-    const { cookie } = document;
-    let page = cookie.match(/page=[^;]*/);
-    if (page != null) {
-      page = page[0].trim();
-      if (page.slice(-1).charAt(0) === ';') {
-        page = page.slice(0, -1);
-      }
+    // const { cookie } = document;
+    // let page = cookie.match(/page=[^;]*/);
+    if (this.firstPage != null) {
+      // page = page[0].trim();
+      // if (page.slice(-1).charAt(0) === ';') {
+      //   page = page.slice(0, -1);
+      // }
       // this.setState({ page: parseInt(page, 10) });
-      this.lesson.goToSection(parseInt(page.split('=')[1], 10) - 1);
+      this.lesson.goToSection(this.firstPage);
     }
   }
 

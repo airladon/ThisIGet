@@ -1,7 +1,8 @@
 // @flow
 import * as React from 'react';
 import Star from './star';
-import { getCookie } from '../tools/misc';
+// import { getCookie } from '../tools/misc';
+import { login } from '../tools/misc';
 
 type Props = {
   topic: string,
@@ -38,17 +39,18 @@ export default class Rating extends React.Component
 
   getRatingLabel() {
     const topic = this.props.topic.charAt(0).toUpperCase() + this.props.topic.slice(1);
-    let page = getCookie('page');
-    if (page === '') {
-      page = '0';
-    }
+    // let page = getCookie('page');
+    // if (page === '') {
+    //   page = '0';
+    // }
 
     if (this.props.isLoggedIn) {
       return `Did this ${topic} help you understand?`;
     }
-    const link = `/login?next=${window.location.pathname}&page=${page}`;
+    // const link = `/login?next=${window.location.pathname}&page=${page}`;
+    // <a href={link}>Login</a> to rate {topic}:
     return <div>
-      <a href={link}>Login</a> to rate {topic}:
+      <span className="rating__login" onClick={login}>Login</span> to rate {topic}:
     </div>;
   }
 
