@@ -12,12 +12,17 @@ type Props = {
 
 export default class LessonTilePath extends React.Component
                                     <Props> {
+  goTo() {
+    document.cookie = 'page=0; path=/';
+    window.location.pathname = this.props.link || '/';
+  }
+
   render() {
     const props = Object.assign({}, this.props);
     const label = props.label || '';
     const id = props.id || '';
 
-    const link = props.link || '/';
+    // const link = props.link || '/';
     let classText = 'lesson__path_tile';
     if (props.state === 'disabled') {
       classText = `${classText} lesson__path_tile_disabled`;
@@ -25,8 +30,8 @@ export default class LessonTilePath extends React.Component
     if (props.state === 'selected') {
       classText = `${classText} lesson__path_tile_selected`;
     }
-    return <a
-        href={link}
+    return <div
+        onClick={this.goTo.bind(this)}
         id={id}
         className={classText}>
           <div className="lesson__path_tile_label_container">
@@ -34,6 +39,6 @@ export default class LessonTilePath extends React.Component
               {label}
             </div>
           </div>
-        </a>;
+        </div>;
   }
 }

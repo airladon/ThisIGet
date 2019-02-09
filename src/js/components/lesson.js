@@ -13,7 +13,7 @@ import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 import ExplanationButton from './explanationButton';
 import Rating from './rating';
-import { getCookie } from '../tools/misc';
+import { getCookie, createCookie } from '../tools/misc';
 
 
 type Props = {
@@ -158,7 +158,8 @@ export default class LessonComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
-      document.cookie = `page=${page + 1}; path=/`;
+      // document.cookie = `page=${page + 1}; path=/`;
+      createCookie('page', `${page + 1}`, 30, window.location.pathname);
     } else if (callback) {
       callback();
     }

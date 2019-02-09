@@ -97,7 +97,9 @@ def get_lesson(path):
     res = make_response(render_template('lesson.html', css=css, js=js))
     if lesson_page:
         res = make_response(redirect(request.path))
-        res.set_cookie('page', lesson_page)
+        res.set_cookie(
+            key='page', value=lesson_page,
+            path=request.path, max_age=30 * 60)
         return res
 
     if current_user.is_authenticated:

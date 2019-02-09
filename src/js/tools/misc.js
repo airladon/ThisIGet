@@ -76,6 +76,21 @@ function getCookie(key: string) {
   return '';
 }
 
+function createCookie(
+  name: string,
+  value: string | number,
+  minutes: number = '',
+  path: string = '/',
+) {
+  let expires = '';
+  if (minutes) {
+    const date = new Date();
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
+    expires = `; expires=${date.toUTCString()}`;
+  }
+  document.cookie = `${name}=${value}${expires}; path=${path}`;
+}
+
 function logInOut(isLoggedIn: boolean) {
   // let page = getCookie('page');
   // if (page === '') {
@@ -98,5 +113,6 @@ function logout() {
 
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
+  createCookie,
 };
 
