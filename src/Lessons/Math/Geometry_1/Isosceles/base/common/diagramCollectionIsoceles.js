@@ -82,8 +82,8 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
     this.oppositeAngles = true;
-    console.log(this);  // eslint-disable-line
-    console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
+    // console.log(this);  // eslint-disable-line
+    // console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
     // this.loadJS();
     // this.getQR('related_angles', 'Opposite');
     this.hasTouchableElements = true;
@@ -100,7 +100,7 @@ export default class IsocelesCollection extends CommonDiagramCollection {
           '/static/dist/Lessons/Math/Geometry_1/AdjacentAngles/quickReference/lesson.js',
           () => {
             // eslint-disable-next-line
-            console.log(window.quickReference)
+            // console.log(window.quickReference)
             const qrArea = new window.quickReference.adjacent_angles.Complementary(this.diagram);
             this.diagram.elements.add('qr', qrArea);
             // qrArea.setFirstTransform();
