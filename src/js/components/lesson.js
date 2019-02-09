@@ -71,7 +71,7 @@ export default class LessonComponent extends React.Component
       listOfSections: [],
       userRating: 0,
     };
-    this.firstPage = getCookie('page') - 1;
+    this.firstPage = parseInt(getCookie('page'), 10) - 1;
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);

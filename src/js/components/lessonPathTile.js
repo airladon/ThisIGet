@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+// import createCookie from '../tools/misc';
 // import '../../css/style.scss';
 
 type Props = {
@@ -13,7 +14,8 @@ type Props = {
 export default class LessonTilePath extends React.Component
                                     <Props> {
   goTo() {
-    document.cookie = 'page=0; path=/';
+    // document.cookie = 'page=0; path=/';
+    // createCookie('page', 1, 30, path)
     window.location.pathname = this.props.link || '/';
   }
 

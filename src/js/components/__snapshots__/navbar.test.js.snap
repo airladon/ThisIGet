@@ -16,13 +16,14 @@ exports[`Navbar Make "About" item active 1`] = `
         />
       </a>
       <div
-        className="navbar-text navbar-left login_button"
+        className="navbar-text navbar-right login_button"
       >
-        <a
-          href="/login"
+        <div
+          className="navbar_login"
+          onClick={[Function]}
         >
           Login
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -45,13 +46,14 @@ exports[`Navbar Make "Introduction" item active 1`] = `
         />
       </a>
       <div
-        className="navbar-text navbar-left login_button"
+        className="navbar-text navbar-right login_button"
       >
-        <a
-          href="/login"
+        <div
+          className="navbar_login"
+          onClick={[Function]}
         >
           Login
-        </a>
+        </div>
       </div>
     </div>
   </div>
@@ -74,13 +76,14 @@ exports[`Navbar No props 1`] = `
         />
       </a>
       <div
-        className="navbar-text navbar-left login_button"
+        className="navbar-text navbar-right login_button"
       >
-        <a
-          href="/login"
+        <div
+          className="navbar_login"
+          onClick={[Function]}
         >
           Login
-        </a>
+        </div>
       </div>
     </div>
   </div>

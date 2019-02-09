@@ -79,7 +79,7 @@ function getCookie(key: string) {
 function createCookie(
   name: string,
   value: string | number,
-  minutes: number = '',
+  minutes: number = 0,
   path: string = '/',
 ) {
   let expires = '';
