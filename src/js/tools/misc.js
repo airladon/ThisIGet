@@ -77,15 +77,15 @@ function getCookie(key: string) {
 }
 
 function logInOut(isLoggedIn: boolean) {
-  let page = getCookie('page');
-  if (page === '') {
-    page = '0';
-  }
+  // let page = getCookie('page');
+  // if (page === '') {
+  //   page = '0';
+  // }
   let logText = '/logout';
   if (isLoggedIn === false) {
     logText = '/login';
   }
-  const next = `?next=${window.location.pathname}&page=${page}`;
+  const next = `?next=${window.location.pathname}`;
   window.location = `${logText}${next}`;
 }
 function login() {
