@@ -14,3 +14,12 @@
   color: #BBB;
   font-size: 12px;
 }
+
+.footer_email {
+  color: color('grey', 'light');
+}
+
+.footer_email:hover {
+  color: color('grey', 'lighter');
+  text-decoration: none;
+}
