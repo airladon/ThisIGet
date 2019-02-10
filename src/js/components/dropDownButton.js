@@ -4,13 +4,13 @@ import * as React from 'react';
 import DropDownButtonBase from './dropDownButtonBase';
 
 export type TypeDropDownListItem = {
-  label: string;
+  label: string | React.Element<'div'>;
   link?: Function | string;
   active?: boolean;
 };
 
 type Props = {
-  label?: string;
+  label?: string | React.Element<'div'>;
   id?: string;
   direction?: 'up' | 'down';
   xAlign?: 'left' | 'right' | 'center';
