@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { login, logout } from '../tools/misc';
-
+import DropDownButton from './dropDownButton'
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 
@@ -127,6 +127,29 @@ export default class Navbar extends React.Component
     return 'Login';
   }
 
+  getLoginButton() {
+    if (this.props.isLoggedIn) {
+      return  <div className="navbar-button navbar-right navbar_login">
+        <DropDownButton
+          label={this.getLoginLabel()}
+          id="id_navbar_loginout"
+          direction='down'
+          xAlign='right'
+          list={[{
+            label: `Logout`,
+            link: this.loginout.bind(this),
+            active: false,
+          }]}
+          selected={false}
+        />
+      </div>;
+    }
+    return <div className="navbar-text navbar-right login_button">
+        <div onClick={this.loginout.bind(this)} className="navbar_login">
+          {this.getLoginLabel()}
+        </div>
+      </div>;
+  }
 
   render() {
     const props = Object.assign({}, this.props);
@@ -140,11 +163,28 @@ export default class Navbar extends React.Component
           <img className="navbar-icon"
                src="/static/icon-lg.png"/>
         </a>
+        {this.getLoginButton()}
+        { /*
         <div className="navbar-text navbar-right login_button">
           <div onClick={this.loginout.bind(this)} className="navbar_login">
             {this.getLoginLabel()}
           </div>
         </div>
+        <div className="navbar-button navbar-right navbar_login">
+          <DropDownButton
+            label={this.getLoginLabel()}
+            id="id_navbar_loginout"
+            direction='down'
+            xAlign='right'
+            list={[{
+              label: 'logout',
+              link: this.loginout.bind(this),
+              active: false,
+            }]}
+            selected={false}
+          />
+        </div>
+        */ }
         {/*
         <div className="navbar-text navbar-left">
           Plus

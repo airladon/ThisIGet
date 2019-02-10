@@ -1,0 +1,26 @@
+$radius: 3px;
+$fontSize: 14px;
+
+.navbar_login {
+  position: relative;
+}
+
+.navbar_login .dropdown_button_container {
+  width: auto;
+  background-color: color('navbar', 'background');
+  border: 1px solid color('navbar', 'background');
+  border-radius: $radius;
+  font-size: $fontSize;
+  color: color('navbar', 'text');
+}
+
+.navbar_login .dropdown_button_container:hover {
+  // border: 1px solid color('white', 'light');
+  background-color: darken(color('navbar', 'background'), 5);
+}
+
+.navbar_login .dropdown_button_list {
+  border-radius: $radius;
+  font-weight: 100;
+  font-size: $fontSize;
+}

@@ -40,6 +40,10 @@
   text-decoration: none;
 }
 
+.navbar-button {
+  display: inline-block;
+}
+
 .navbar-input {
   display: inline-block;
   color: color('navbar', 'text-input');
