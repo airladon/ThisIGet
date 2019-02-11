@@ -4,7 +4,7 @@ import sys
 basedir = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, './app/')
 from app import app  # noqa
-from app.models import db, Users  # noqa
+from app.models import db, Users, Ratings  # noqa
 
 
 def remove_account(username):
@@ -12,6 +12,14 @@ def remove_account(username):
     if user is not None:
         db.session.delete(user)
         db.session.commit()
+
+
+def create_user(username):
+    user = Users(username=username)
+    user.set_email(f'{username}@thisiget.com')
+    user.set_password('12345678')
+    user.confirmed = True
+    db.session.add(user)
 
 
 @pytest.fixture(scope="module")
@@ -26,16 +34,20 @@ def client(request):
     # def teardown():
     #     ctx.pop()
 
-    remove_account('test_User_01')
-    remove_account('unconfirmed_user_01')
-    remove_account('new_test_user_01')
-    remove_account('new_test_user_02')
+    # remove_account('test_User_01')
+    # remove_account('unconfirmed_user_01')
+    # remove_account('new_test_user_01')
+    # remove_account('new_test_user_02')
+    Users.query.delete()
+    Ratings.query.delete()
 
-    test_user = Users(username='test_User_01')
-    test_user.set_email('test_user_01@thisiget.com')
-    test_user.set_password('12345678')
-    test_user.confirmed = True
-    db.session.add(test_user)
+    # test_user = Users(username='test_User_01')
+    # test_user.set_email('test_user_01@thisiget.com')
+    # test_user.set_password('12345678')
+    # test_user.confirmed = True
+    create_user('test_User_01')
+    create_user('test_User_02')
+    # db.session.add(test_user)
 
     unconfirmed_user = Users(username='unconfirmed_user_01')
     unconfirmed_user.set_email('unconfirmed_user_01@thisiget.com')
@@ -48,9 +60,11 @@ def client(request):
     yield client
 
     def fin():
-        remove_account('test_User_01')
-        remove_account('unconfirmed_user_01')
-        remove_account('new_test_user_01')
-        remove_account('new_test_user_02')
+        Users.query.delete()
+        # remove_account('test_User_01')
+        # remove_account('unconfirmed_user_01')
+        # remove_account('new_test_user_01')
+        # remove_account('new_test_user_02')
+        Ratings.query.delete()
     request.addfinalizer(fin)
     # db.session.delete(test_user)

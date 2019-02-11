@@ -379,7 +379,8 @@ def get_rating(lesson_uid, topic, version_uid):
         ave_rating = sum_ratings / num_ratings
 
     if current_user.is_authenticated:
-        user_rating = Ratings.query.filter_by(user=current_user, topic=topic).first()
+        user_rating = Ratings.query.filter_by(
+            user=current_user, topic=topic).first()
         if user_rating is None:
             user_rating_value = 'not rated'
         else:
