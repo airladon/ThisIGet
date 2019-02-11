@@ -12,6 +12,7 @@ from app.models import db, Users  # noqa
 @pytest.fixture
 def client():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app_test.db')
+    app.config['WTF_CSRF_ENABLED'] = False
     ctx = app.app_context()
     ctx.push()
 
@@ -31,25 +32,46 @@ def test_root_page_cookie(client):
     assert result.headers['Set-Cookie'] == 'username=; Path=/'
 
 
-def login(client, username, password):
-    return client.post('/login', data=dict(
-        username_or_email=username,
-        password=password
-    ), follow_redirects=True)
+# def login(client, username, password):
+#     return client.post('/login', data=dict(
+#         username_or_email=username,
+#         password=password
+#     ), follow_redirects=True)
 
 
-def test_login(client):
-    # result = client.get('/login')
+def test_correct_login_before_redirect(client):
     assert client.get('/login').status_code == 200
-    pdb.set_trace()
+
+    res = client.post('/login', data=dict(
+        username_or_email=os.environ.get('TEST_USERNAME'),
+        password=os.environ.get('TEST_PASSWORD'),
+        submit=True), follow_redirects=False)
+    assert res.status_code == 302
+    assert res.headers['Location'] == 'https://localhost/'
+
+
+def test_correct_login_after_redirect(client):
+    assert client.get('/login').status_code == 200
+
     res = client.post('/login', data=dict(
         username_or_email=os.environ.get('TEST_USERNAME'),
         password=os.environ.get('TEST_PASSWORD'),
         submit=True), follow_redirects=True)
+    assert res.status_code == 200
+    assert 'username=airladon' in res.headers['Set-Cookie']
+    assert 'Path=/' in res.headers['Set-Cookie']
+    assert 'id="home"' in str(res.data)
 
-    # res = login(client, 'airladon', 'asdfasdf')
-    # result = client.get('/')
-    # pdb.set_trace()
+
+def test_incorrect_username_login_before_redirect(client):
+    assert client.get('/login').status_code == 200
+
+    res = client.post('/login', data=dict(
+        username_or_email='non_user',
+        password=os.environ.get('TEST_PASSWORD'),
+        submit=True), follow_redirects=False)
+    assert res.status_code == 302
+    assert res.headers['Location'] == 'https://localhost/login'
 
 # @pytest.fixture
 # def client():
