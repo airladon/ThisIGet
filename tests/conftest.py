@@ -7,8 +7,8 @@ from app import app  # noqa
 from app.models import db, Users  # noqa
 
 
-@pytest.fixture
-def client():
+@pytest.fixture(scope="module")
+def client(request):
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'app_test.db')
     app.config['WTF_CSRF_ENABLED'] = False
@@ -20,14 +20,27 @@ def client():
 
     # request.addfinalizer(teardown)
     # return app
-
-    # test_user = Users(username='test_user_01')
-    # test_user.set_email('test_user_01@thisiget.com')
-    # test_user.set_password('12345678')
-    # db.session.add(test_user)
+    test_user = Users.query.filter_by(username='test_User_01').first()
+    # pdb.set_trace()
+    if test_user is not None:
+        db.session.delete(test_user)
+        db.session.commit()
+    test_user = Users(username='test_User_01')
+    test_user.set_email('test_user_01@thisiget.com')
+    test_user.set_password('12345678')
+    test_user.confirmed = True
+    db.session.add(test_user)
+    db.session.commit()
 
     client = app.test_client()
 
     yield client
 
+    def fin():
+        test_user = Users.query.filter_by(username='test_User_01').first()
+        if test_user is not None:
+            db.session.delete(test_user)
+            db.session.commit()
+
+    request.addfinalizer(fin)
     # db.session.delete(test_user)

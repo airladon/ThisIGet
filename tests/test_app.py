@@ -27,12 +27,6 @@ from app.models import db, Users  # noqa
 
 #     yield client
 
-
-def test_root_page_cookie(client):
-    result = client.get('/')
-    assert result.headers['Set-Cookie'] == 'username=; Path=/'
-
-
 def login(client, username='valid', password='valid', follow_redirects=True):
     if username == 'valid':
         username = os.environ.get('TEST_USERNAME') or 'test_User_01'
@@ -44,11 +38,19 @@ def login(client, username='valid', password='valid', follow_redirects=True):
     ), follow_redirects=follow_redirects)
 
 
+def logout(client):
+    return client.get('/logout')
+
+def test_root_page_cookie(client):
+    result = client.get('/')
+    assert result.headers['Set-Cookie'] == 'username=; Path=/'
+
+
 def test_correct_login_after_redirect(client):
     # assert client.get('/login').status_code == 200
     res = login(client)
     assert res.status_code == 200
-    assert 'username=airladon' in res.headers['Set-Cookie']
+    assert 'username=test_User_01' in res.headers['Set-Cookie']
     assert 'Path=/' in res.headers['Set-Cookie']
     assert 'id="home"' in str(res.data)
 
@@ -63,18 +65,4 @@ def test_login(client, username, password, location):
     res = login(client, username, password, follow_redirects=False)
     assert res.status_code == 302
     assert res.headers['Location'] == location
-
-# @pytest.fixture
-# def client():
-#     db, app.app.config['DATABASE'] = tempfile.mkstemp()
-#     # app.app.config['TESTING'] = True
-#     client = app.app.test_client()
-
-#     with flaskr.app.app_context():
-#         flaskr.init_db()
-
-#     yield client
-
-#     os.close(db_fd)
-#     os.unlink(flaskr.app.config['DATABASE'])
-
+    res = logout(client)
