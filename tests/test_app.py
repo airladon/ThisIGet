@@ -64,13 +64,15 @@ login_path = 'https://localhost/login'
 @pytest.mark.parametrize("username,password,location", [
     # Valid cases
     ('test_User_01', '12345678', home_path),
-    ('test_user_01', '12345678', home_path),  # lowercase user
-    ('TEST_USER_01', '12345678', home_path),  # lowercase user
-    # ('test_user_01@thisiget.com', '12345678', )
+    ('test_user_01', '12345678', home_path),  # Different case username
+    ('TEST_USER_01', '12345678', home_path),  # Different case username
+    ('test_user_01@thisiget.com', '12345678', home_path),
+    ('test_user_01@THISIGET.com', '12345678', home_path),
     # Invalid cases
     ('invalid', '12345678', login_path),      # invalid user
     ('test_User_01', 'invalid', login_path),  # invalide pass
     ('invalid', 'invalid', login_path),       # invalid user and pass
+    ('test_User_01@thisiget.com', '12345678', login_path),
 ])
 def test_login(client, username, password, location):
     res = login(client, username, password, follow_redirects=False)

@@ -24,6 +24,7 @@ from app.models import Ratings
 from app.models import Lessons, Versions, Topics
 from functools import reduce
 from werkzeug.urls import url_parse
+from app.tools import format_email
 import pdb
 
 # project/decorators.py
@@ -158,13 +159,11 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username.ilike(form.username_or_email.data)).first()
-        # user = Users.query.filter_by(
-        #     username=form.username_or_email.data).first()
-        # print(user)
         if user is None:
+            formatted_email = format_email(form.username_or_email.data)
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(
-                    form.username_or_email.data)).first()
+                    formatted_email)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -270,8 +269,9 @@ def reset_password_request():
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
+        formatted_email = format_email(form.email.data)
         user = Users.query.filter_by(
-            email_hash=hash_str_with_pepper(form.email.data)).first()
+            email_hash=hash_str_with_pepper(formatted_email)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')
