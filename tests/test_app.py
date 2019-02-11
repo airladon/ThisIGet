@@ -1,5 +1,6 @@
 import pytest  # noqa: F401
 import os
+from flask import url_for
 basedir = os.path.abspath(os.path.dirname(__file__))
 # import tempfile
 import pdb
@@ -41,6 +42,7 @@ def login(client, username='valid', password='valid', follow_redirects=True):
 def logout(client):
     return client.get('/logout')
 
+
 def test_root_page_cookie(client):
     result = client.get('/')
     assert result.headers['Set-Cookie'] == 'username=; Path=/'
@@ -55,11 +57,20 @@ def test_correct_login_after_redirect(client):
     assert 'id="home"' in str(res.data)
 
 
+home_path = 'https://localhost/'
+login_path = 'https://localhost/login'
+
+
 @pytest.mark.parametrize("username,password,location", [
-    ('valid', 'valid', 'https://localhost/'),
-    ('invalid', 'valid', 'https://localhost/login'),
-    ('valid', 'invalid', 'https://localhost/login'),
-    ('invalid', 'invalid', 'https://localhost/login'),
+    # Valid cases
+    ('test_User_01', '12345678', home_path),
+    # ('test_user_01', '12345678', 'https://localhost/'),  # lowercase user
+    # ('TEST_USER_01', '12345678', 'https://localhost/'),  # lowercase user
+    # ('test_user_01@thisiget.com', '12345678', )
+    # Invalid cases
+    ('invalid', '12345678', login_path),      # invalid user
+    ('test_User_01', 'invalid', login_path),  # invalide pass
+    ('invalid', 'invalid', login_path),       # invalid user and pass
 ])
 def test_login(client, username, password, location):
     res = login(client, username, password, follow_redirects=False)
