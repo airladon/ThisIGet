@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 import { login, logout } from '../tools/misc';
-import DropDownButton from './dropDownButton'
+import DropDownButton from './dropDownButton';
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 

@@ -29,7 +29,7 @@ type State = {
   numPages: number,
   page: number,
   listOfSections: Array<{
-    label: string;
+    label: string | React.Element<'div'>;
     link?: Function | string;
     active?: boolean;
   }>;
