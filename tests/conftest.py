@@ -12,6 +12,7 @@ def client(request):
     app.config['SQLALCHEMY_DATABASE_URI'] = \
         'sqlite:///' + os.path.join(basedir, 'app_test.db')
     app.config['WTF_CSRF_ENABLED'] = False
+    app.config['MAIL_USERNAME'] = ''
     # ctx = app.app_context()
     # ctx.push()
 
@@ -50,6 +51,11 @@ def client(request):
             username='unconfirmed_user_01').first()
         if unconfirmed_user is not None:
             db.session.delete(unconfirmed_user)
+            db.session.commit()
+        new_user = Users.query.filter_by(
+            username='new_test_user_01').first()
+        if new_user is not None:
+            db.session.delete(new_user)
             db.session.commit()
     request.addfinalizer(fin)
     # db.session.delete(test_user)
