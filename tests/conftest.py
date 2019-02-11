@@ -30,6 +30,11 @@ def client(request):
     test_user.set_password('12345678')
     test_user.confirmed = True
     db.session.add(test_user)
+
+    unconfirmed_user = Users(username='unconfirmed_user_01')
+    unconfirmed_user.set_email('unconfirmed_user_01@thisiget.com')
+    unconfirmed_user.set_password('12345678')
+    db.session.add(unconfirmed_user)
     db.session.commit()
 
     client = app.test_client()
@@ -41,6 +46,10 @@ def client(request):
         if test_user is not None:
             db.session.delete(test_user)
             db.session.commit()
-
+        unconfirmed_user = Users.query.filter_by(
+            username='unconfirmed_user_01').first()
+        if unconfirmed_user is not None:
+            db.session.delete(unconfirmed_user)
+            db.session.commit()
     request.addfinalizer(fin)
     # db.session.delete(test_user)
