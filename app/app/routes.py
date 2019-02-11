@@ -24,7 +24,7 @@ from app.models import Ratings
 from app.models import Lessons, Versions, Topics
 from functools import reduce
 from werkzeug.urls import url_parse
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -151,12 +151,14 @@ def login(username=''):
     css = '/static/dist/input.css'
     js = '/static/dist/input.js'
     form = LoginForm()
+    print(form.data, form.validate_on_submit())
     if username:
         user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
         user = Users.query.filter_by(
             username=form.username_or_email.data).first()
+        print(user)
         if user is None:
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(

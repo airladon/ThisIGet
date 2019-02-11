@@ -12,7 +12,17 @@ from app.models import db, Users  # noqa
 @pytest.fixture
 def client():
     app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'app_test.db')
+    ctx = app.app_context()
+    ctx.push()
+
+    # def teardown():
+    #     ctx.pop()
+
+    # request.addfinalizer(teardown)
+    # return app
+
     client = app.test_client()
+
     yield client
 
 
@@ -23,14 +33,24 @@ def test_root_page_cookie(client):
 
 def login(client, username, password):
     return client.post('/login', data=dict(
-        username=username,
+        username_or_email=username,
         password=password
     ), follow_redirects=True)
 
 
 def test_login(client):
-    result = login(client, 'airladon', 'asdfasdf')
+    # result = client.get('/login')
+    assert client.get('/login').status_code == 200
     pdb.set_trace()
+    res = client.post('/login', data=dict(
+        username_or_email=os.environ.get('TEST_USERNAME'),
+        password=os.environ.get('TEST_PASSWORD'),
+        submit=True), follow_redirects=True)
+
+    # res = login(client, 'airladon', 'asdfasdf')
+    # result = client.get('/')
+    # pdb.set_trace()
+
 # @pytest.fixture
 # def client():
 #     db, app.app.config['DATABASE'] = tempfile.mkstemp()
