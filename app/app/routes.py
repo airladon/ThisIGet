@@ -17,7 +17,7 @@ from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
-# from flask_sqlalchemy import or_
+from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users
 from app.models import Ratings
@@ -156,9 +156,11 @@ def login(username=''):
         user = Users.query.filter_by(username=username).first()
         form = LoginForm(obj=user)
     if form.validate_on_submit():
-        user = Users.query.filter_by(
-            username=form.username_or_email.data).first()
-        print(user)
+        user = Users.query.filter(
+            Users.username.ilike(form.username_or_email.data)).first()
+        # user = Users.query.filter_by(
+        #     username=form.username_or_email.data).first()
+        # print(user)
         if user is None:
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(
