@@ -152,10 +152,10 @@ def login(username=''):
     css = '/static/dist/input.css'
     js = '/static/dist/input.js'
     form = LoginForm()
-    print(form.data, form.validate_on_submit())
     if username:
-        user = Users.query.filter_by(username=username).first()
-        form = LoginForm(obj=user)
+        # user = Users.query.filter_by(username=username).first()
+        # form = LoginForm(obj=user)
+        form.username_or_email.data = username
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username.ilike(form.username_or_email.data)).first()

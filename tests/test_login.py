@@ -28,12 +28,23 @@ from app.models import db, Users  # noqa
 
 #     yield client
 
-def login(client, username='valid', password='valid', follow_redirects=True):
+def login(
+        client,
+        username='valid',
+        password='valid',
+        follow_redirects=True,
+        next_page=None,
+        prepopulate=False):
     if username == 'valid':
         username = os.environ.get('TEST_USERNAME') or 'test_User_01'
     if password == 'valid':
         password = os.environ.get('TEST_PASSWORD') or '12345678'
-    return client.post('/login', data=dict(
+    login_path = '/login'
+    if prepopulate:
+        login_path = f'{login_path}/{username}'
+    if next_page is not None:
+        login_path = f'{login_path}?next={next_page}'
+    return client.post(login_path, data=dict(
         username_or_email=username,
         password=password
     ), follow_redirects=follow_redirects)
@@ -55,6 +66,7 @@ def test_correct_login_after_redirect(client):
     assert 'username=test_User_01' in res.headers['Set-Cookie']
     assert 'Path=/' in res.headers['Set-Cookie']
     assert 'id="home"' in str(res.data)
+    logout(client)
 
 
 home_path = 'https://localhost/'
@@ -86,4 +98,16 @@ def test_login(client, username, password, location):
     res = login(client, username, password, follow_redirects=False)
     assert res.status_code == 302
     assert res.headers['Location'] == location
-    res = logout(client)
+    logout(client)
+
+
+def test_login_page_forwarding(client):
+    path = '/Lessons/Math/Geometry_1/Circle/base/explanation'
+    res = login(client, follow_redirects=False, next_page=path)
+    assert res.headers['Location'] == f'https://localhost{path}'
+    logout(client)
+
+
+def test_login_username_prepopulation(client):
+    res = client.get('/login/test_username')
+    assert 'value="test_username"' in str(res.data)
