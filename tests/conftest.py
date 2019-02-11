@@ -37,20 +37,10 @@ def client(request):
     # def teardown():
     #     ctx.pop()
 
-    # remove_account('test_User_01')
-    # remove_account('unconfirmed_user_01')
-    # remove_account('new_test_user_01')
-    # remove_account('new_test_user_02')
     Users.query.delete()
     Ratings.query.delete()
-
-    # test_user = Users(username='test_User_01')
-    # test_user.set_email('test_user_01@thisiget.com')
-    # test_user.set_password('12345678')
-    # test_user.confirmed = True
     create_user('test_User_01', 'test_user_01@thisiget.com')
     create_user('test_user_02')
-    # db.session.add(test_user)
 
     unconfirmed_user = Users(username='unconfirmed_user_01')
     unconfirmed_user.set_email('unconfirmed_user_01@thisiget.com')
@@ -64,10 +54,5 @@ def client(request):
 
     def fin():
         Users.query.delete()
-        # remove_account('test_User_01')
-        # remove_account('unconfirmed_user_01')
-        # remove_account('new_test_user_01')
-        # remove_account('new_test_user_02')
         Ratings.query.delete()
     request.addfinalizer(fin)
-    # db.session.delete(test_user)
