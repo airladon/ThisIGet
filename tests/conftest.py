@@ -14,9 +14,12 @@ def remove_account(username):
         db.session.commit()
 
 
-def create_user(username):
+def create_user(username, email=''):
     user = Users(username=username)
-    user.set_email(f'{username}@thisiget.com')
+    if email == '':
+        user.set_email(f'{username}@thisiget.com')
+    else:
+        user.set_email(email)
     user.set_password('12345678')
     user.confirmed = True
     db.session.add(user)
@@ -45,8 +48,8 @@ def client(request):
     # test_user.set_email('test_user_01@thisiget.com')
     # test_user.set_password('12345678')
     # test_user.confirmed = True
-    create_user('test_User_01')
-    create_user('test_User_02')
+    create_user('test_User_01', 'test_user_01@thisiget.com')
+    create_user('test_user_02')
     # db.session.add(test_user)
 
     unconfirmed_user = Users(username='unconfirmed_user_01')

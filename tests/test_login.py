@@ -1,5 +1,6 @@
 import pytest  # noqa: F401
 import os
+import pdb
 
 
 def login(
@@ -26,6 +27,13 @@ def login(
 
 def logout(client):
     return client.get('/logout')
+
+
+@pytest.fixture(autouse=True)
+def run_around_tests(client):
+    logout(client)
+    yield
+    logout(client)
 
 
 def test_root_page_cookie(client):
@@ -69,7 +77,9 @@ unconfirmed_path = \
     ('unconfirmed_user_01@thisiget.com', '12345678', unconfirmed_path),
 ])
 def test_login(client, username, password, location):
+    # logout(client)
     res = login(client, username, password, follow_redirects=False)
+    # pdb.set_trace()
     assert res.status_code == 302
     assert res.headers['Location'] == location
     logout(client)
