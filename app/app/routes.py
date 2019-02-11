@@ -323,15 +323,18 @@ def rate(lesson_uid, topic, version_uid, rating_value):
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
-            return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
+            return jsonify(
+                {'status': 'fail', 'message': 'lesson does not exist'})
         version = Versions.query.filter_by(
             lesson_id=lesson.id, uid=version_uid).first()
         if version is None:
-            return jsonify({'status': 'fail', 'message': 'version does not exist'})
+            return jsonify(
+                {'status': 'fail', 'message': 'version does not exist'})
         topic = Topics.query.filter_by(
             lesson=lesson, version=version, name=topic).first()
         if topic is None:
-            return jsonify({'status': 'fail', 'message': 'topic does not exist'})
+            return jsonify(
+                {'status': 'fail', 'message': 'topic does not exist'})
         rating = Ratings.query.filter_by(
             topic=topic, user=current_user).first()
         if rating is None:
