@@ -7,10 +7,13 @@ sys.path.insert(0, './app/')
 from app import app
 from app.models import db, Users  # noqa
 
+new_user = 'new_test_user_01'
+new_email = 'new_test_user_01@thisiget.com'
+
 
 def create_account(
         client,
-        username='new_test_user_01',
+        username=new_user,
         email='new_test_user_01@thisiget.com',
         password='12345678',
         repeat_password='12345678',
@@ -22,7 +25,7 @@ def create_account(
         repeat_password=repeat_password), follow_redirects=follow_redirects)
 
 
-def remove_account(client, username='new_test_user_01'):
+def remove_account(client, username=new_user):
     user = Users.query.filter_by(username=username).first()
     if user is not None:
         db.session.delete(user)
@@ -30,7 +33,7 @@ def remove_account(client, username='new_test_user_01'):
 
 
 def test_create_new_user(client):
-    username = 'new_test_user_01'
+    username = new_user
     remove_account(client, username=username)
     user = Users.query.filter_by(username='new_test_user_01').first()
     assert user is None
@@ -42,63 +45,31 @@ def test_create_new_user(client):
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
 
-    # assert result.headers['Set-Cookie'] == 'username=; Path=/'
 
-
-# def test_correct_login_after_redirect(client):
-#     # assert client.get('/login').status_code == 200
-#     res = login(client)
-#     assert res.status_code == 200
-#     assert 'username=test_User_01' in res.headers['Set-Cookie']
-#     assert 'Path=/' in res.headers['Set-Cookie']
-#     assert 'id="home"' in str(res.data)
-#     logout(client)
-
-
-# home_path = 'https://localhost/'
-# login_path = 'https://localhost/login'
-# unconfirmed_path = \
-#     'https://localhost/confirmAccountEmailSent/unconfirmed_user_01'
-
-new_user = 'new_test_user_01'
-new_email = 'new_test_user_01@thisiget.com'
-
-
-@pytest.mark.parametrize("exists,username,email,password,repeat_password", [
-    # Password fails
-    (False, new_user, new_email, '12345678', '1234567')
-])
+@pytest.mark.parametrize(
+    "exists,username,email,password,repeat_password, error", [
+        # Password fails
+        (False, new_user, new_email, '12345678', '1234567',
+            'Field must be equal to password.'),
+        (False, new_user, new_email, '1234567', '1234567',
+            'Password must be at least 8 characters'),
+        # Username fails
+        (False, 'this_is_a_really_really_long_username', new_email,
+            '12345678', '12345678', 'Username max length is 32 characters'),
+        (True, new_user, new_email, '12345678', '12345678',
+            'Username already exist'),
+        (True, 'new_test_user_02', 'new_test_user_01@thisiget.com',
+            '12345678', '12345678', 'Email address already in use'),
+        (True, 'new_test_user_02', 'new_test_user_01@THISiget.com',
+            '12345678', '12345678', 'Email address already in use'),
+    ])
 def test_create_account_fail(
-        client, exists, username, email, password, repeat_password):
+        client, exists, username, email, password, repeat_password, error):
     remove_account(client)
     if exists:
         create_account(client)
     res = create_account(
         client=client, username=username, email=email,
         password=password, repeat_password=repeat_password)
-    assert 
-
-# @pytest.mark.parametrize("username,password,location", [
-#     # Valid cases
-#     ('test_User_01', '12345678', home_path),
-#     ('test_user_01', '12345678', home_path),  # Different case username
-#     ('TEST_USER_01', '12345678', home_path),  # Different case username
-#     ('test_user_01@thisiget.com', '12345678', home_path),  # Diff domain case
-#     ('test_user_01@THISIGET.com', '12345678', home_path),  # Diff domain case
-#     #
-#     # Invalid cases
-#     ('invalid', '12345678', login_path),                    # invalid user
-#     ('test_User_01', 'invalid', login_path),                # invalid pass
-#     ('test_user_01@thisiget.com', 'invalid', login_path),   # invalid pass
-#     ('invalid', 'invalid', login_path),                     # invalid both
-#     ('test_User_01@thisiget.com', '12345678', login_path),  # Diff user case
-#     #
-#     # Unconfirmed user
-#     ('unconfirmed_user_01', '12345678', unconfirmed_path),
-#     ('unconfirmed_user_01@thisiget.com', '12345678', unconfirmed_path),
-# ])
-# def test_login(client, username, password, location):
-#     res = login(client, username, password, follow_redirects=False)
-#     assert res.status_code == 302
-#     assert res.headers['Location'] == location
-#     logout(client)
+    # pdb.set_trace()
+    assert error in str(res.data)

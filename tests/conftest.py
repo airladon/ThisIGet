@@ -7,6 +7,13 @@ from app import app  # noqa
 from app.models import db, Users  # noqa
 
 
+def remove_account(username):
+    user = Users.query.filter_by(username=username).first()
+    if user is not None:
+        db.session.delete(user)
+        db.session.commit()
+
+
 @pytest.fixture(scope="module")
 def client(request):
     app.config['SQLALCHEMY_DATABASE_URI'] = \
@@ -19,13 +26,11 @@ def client(request):
     # def teardown():
     #     ctx.pop()
 
-    # request.addfinalizer(teardown)
-    # return app
-    test_user = Users.query.filter_by(username='test_User_01').first()
-    # pdb.set_trace()
-    if test_user is not None:
-        db.session.delete(test_user)
-        db.session.commit()
+    remove_account('test_User_01')
+    remove_account('unconfirmed_user_01')
+    remove_account('new_test_user_01')
+    remove_account('new_test_user_02')
+
     test_user = Users(username='test_User_01')
     test_user.set_email('test_user_01@thisiget.com')
     test_user.set_password('12345678')
@@ -43,19 +48,9 @@ def client(request):
     yield client
 
     def fin():
-        test_user = Users.query.filter_by(username='test_User_01').first()
-        if test_user is not None:
-            db.session.delete(test_user)
-            db.session.commit()
-        unconfirmed_user = Users.query.filter_by(
-            username='unconfirmed_user_01').first()
-        if unconfirmed_user is not None:
-            db.session.delete(unconfirmed_user)
-            db.session.commit()
-        new_user = Users.query.filter_by(
-            username='new_test_user_01').first()
-        if new_user is not None:
-            db.session.delete(new_user)
-            db.session.commit()
+        remove_account('test_User_01')
+        remove_account('unconfirmed_user_01')
+        remove_account('new_test_user_01')
+        remove_account('new_test_user_02')
     request.addfinalizer(fin)
     # db.session.delete(test_user)
