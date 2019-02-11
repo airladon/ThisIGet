@@ -24,3 +24,11 @@
         {% endfor %}
     </div>
 {% endblock %}
+
+{% block afterForm %}
+    <div>
+        <a href="/createAccount" class="input_form__link login_form__link_create">Create Accout</a>
+        <a href="/resetPasswordRequest" class="input_form__link login_form__link_forgot">Forgot Password</a>
+    </div>
+{% endblock %}
+

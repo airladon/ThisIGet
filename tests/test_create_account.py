@@ -58,10 +58,13 @@ def test_create_new_user(client):
             '12345678', '12345678', 'Username max length is 32 characters'),
         (True, new_user, new_email, '12345678', '12345678',
             'Username already exist'),
+        # Email fails
         (True, 'new_test_user_02', 'new_test_user_01@thisiget.com',
             '12345678', '12345678', 'Email address already in use'),
         (True, 'new_test_user_02', 'new_test_user_01@THISiget.com',
             '12345678', '12345678', 'Email address already in use'),
+        (False, new_user, 'invalid_email',
+            '12345678', '12345678', 'Invalid email address'),
     ])
 def test_create_account_fail(
         client, exists, username, email, password, repeat_password, error):
