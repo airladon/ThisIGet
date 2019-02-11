@@ -22,7 +22,7 @@ def create_account(
         repeat_password=repeat_password), follow_redirects=follow_redirects)
 
 
-def remove_account(client, username):
+def remove_account(client, username='new_test_user_01'):
     user = Users.query.filter_by(username=username).first()
     if user is not None:
         db.session.delete(user)
@@ -60,6 +60,23 @@ def test_create_new_user(client):
 # unconfirmed_path = \
 #     'https://localhost/confirmAccountEmailSent/unconfirmed_user_01'
 
+new_user = 'new_test_user_01'
+new_email = 'new_test_user_01@thisiget.com'
+
+
+@pytest.mark.parametrize("exists,username,email,password,repeat_password", [
+    # Password fails
+    (False, new_user, new_email, '12345678', '1234567')
+])
+def test_create_account_fail(
+        client, exists, username, email, password, repeat_password):
+    remove_account(client)
+    if exists:
+        create_account(client)
+    res = create_account(
+        client=client, username=username, email=email,
+        password=password, repeat_password=repeat_password)
+    assert 
 
 # @pytest.mark.parametrize("username,password,location", [
 #     # Valid cases
