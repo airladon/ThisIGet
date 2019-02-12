@@ -68,7 +68,7 @@ describe('Visual Regressions', () => {
 });
 
 describe('Login Flows', () => {
-  test.only('Login Page', async () => {
+  test('Login Page', async () => {
     jest.setTimeout(10000);
     // Home page, not logged in
     await page.goto(sitePath);
