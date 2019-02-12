@@ -47,7 +47,6 @@ ADD .babelrc .
 ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 
 
-
 # ## Python ##
 
 # Python linting

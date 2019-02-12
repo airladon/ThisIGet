@@ -144,6 +144,7 @@ else
     -v $PROJECT_PATH/.babelrc:/opt/app/.babelrc \
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
+    -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
