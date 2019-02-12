@@ -1,4 +1,4 @@
-FROM node:8-slim
+FROM airladon/pynode:python3.7.2-node10.15.0-npm6.6.0
 
 # See https://crbug.com/795759
 RUN apt-get update && apt-get install -yq libgconf-2-4
@@ -36,8 +36,8 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
 
 
 WORKDIR /home/pptruser
-ADD tests/browser ./browser
-RUN chown -R pptruser:pptruser /home/pptruser/browser
+# ADD tests/browser ./browser
+# RUN chown -R pptruser:pptruser /home/pptruser/browser
 
 
 # Run everything after as non-privileged user.
