@@ -42,14 +42,17 @@ check_status() {
   fi
 }
 
-echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
-check_env_exists MAIL_SERVER "Emails will not be sent by app."
-check_env_exists MAIL_USERNAME "Emails will not be sent by app."
-check_env_exists MAIL_PASSWORD "Emails will not be sent by app."
-check_env_exists MAIL_SENDER "Emails will not be sent by app."
-check_env_exists DATABASE_URL "Database will default to local SQLite3."
-check_status "Checking environment variables"
-echo "Environment variable checking complete"
+if [ $1 != pupp ];
+then
+  echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
+  check_env_exists MAIL_SERVER "Emails will not be sent by app."
+  check_env_exists MAIL_USERNAME "Emails will not be sent by app."
+  check_env_exists MAIL_PASSWORD "Emails will not be sent by app."
+  check_env_exists MAIL_SENDER "Emails will not be sent by app."
+  check_env_exists DATABASE_URL "Database will default to local SQLite3."
+  check_status "Checking environment variables"
+  echo "Environment variable checking complete"
+fi
 
 
 if [ $1 ];
@@ -76,8 +79,14 @@ then
   CONTAINTER_PORT=5000
 fi
 
+if [ $1 = "pupp" ];
+then
+  DOCKERFILE="Dockerfile_puppeteer"
+  CONTAINTER_PORT=5000
+fi
+
 if [ $1 = 'dev-server' ];
-  then
+then
   HOST_PORT=5003
   CONTAINTER_PORT=5000
   DOCKERFILE="Dockerfile_dev"
@@ -95,13 +104,22 @@ rm Dockerfile
 # --env-file=$PROJECT_PATH/containers/env.txt \
 echo "${bold}${cyan}================= Starting container ===================${reset}"
 if [ $1 = 'prod' ];
-  then
+then
   docker run -it --rm \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     --env PORT=$CONTAINTER_PORT \
     --env-file=$PROJECT_PATH/containers/env.txt \
     devenv-$1
+elif [ $1 = 'pupp' ];
+then
+  docker run -it --rm \
+    --name devenv-$1 \
+    -p $HOST_PORT:$CONTAINTER_PORT \
+    --env PORT=$CONTAINTER_PORT \
+    -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
+    devenv-$1 \
+    bash
 else
   docker run -it --rm \
     -v $PROJECT_PATH/tests:/opt/app/tests \

@@ -168,7 +168,6 @@ def login(username=''):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
         if user.confirmed:
-            logout_user()
             login_user(user, True)
             user.last_login = datetime.datetime.now()
             db.session.commit()
