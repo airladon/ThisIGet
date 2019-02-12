@@ -8,19 +8,27 @@ const testMode = process.env.TEST_MODE || 'test';
 
 
 describe('Home Page', () => {
-  beforeAll(async () => {
-    await page.goto(sitePath);
-    await page.setViewport({ width: 500, height: 1500 });
-  });
+  // beforeAll(async () => {
+  //   await page.goto(sitePath);
+  //   await page.setViewport({ width: 500, height: 1500 });
+  // });
   it('Should be titled "This I Get"', async () => {
     // if (testMode === 'prod') { return; }
     // await console.log(page.title())
     // const text = await page.evaluate(() => document.body.textContent);
+    await page.goto(sitePath);
+    await page.setViewport({ width: 500, height: 1500 });
     await expect(page.title()).resolves.toMatch('This I Get');
   });
   it('Should have no visutal regression', async () => {
+    await page.goto(sitePath);
+    await page.setViewport({ width: 500, height: 1500 });
     const image = await page.screenshot({ path: 'main.png' });
     expect(image).toMatchImageSnapshot();
+  });
+
+  it('Should be able to log in', async () => {
+
   });
 });
 
