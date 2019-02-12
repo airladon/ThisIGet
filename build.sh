@@ -142,7 +142,7 @@ then
 
     HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
     echo $HEROKU_CONFIG_VARS
-    
+
     check_var() {
       VALUE=`echo $1 | sed 's/ /\'$'\n/g' | sed -n "/^${2}/p"`
       if [ -z $VALUE ];
@@ -228,14 +228,14 @@ docker_run_cmd() {
 # $1: Deploy variable - can be "deploy" or "no_deploy"
 # $2: ENV name
 check_env_exists() {
-  if [ -z ${!2} ];
+  if [ -z $3 ];
   then
     if [ $1 = "deploy" ];
     then
       echo "${bold}${red}$2 environment variable not set${reset}"
       FAIL=1
     else 
-      echo "${bold}${yellow}Warning: $2 environment variable not set. $3${reset}"
+      echo "${bold}${yellow}Warning: $2 environment variable not set. $4${reset}"
     fi
   fi
 }
@@ -246,7 +246,7 @@ echo
 echo "${bold}${cyan}========== Checking Environment Variables ===========${reset}"
 # check_env_exists $DEPLOY MAIL_PASSWORD "Emails will not be sent by app."
 # check_env_exists $DEPLOY DATABASE_URL "Database will default to local SQLite3."
-check_env_exists $DEPLOY HEROKU_TOKEN "This is needed to deploy to Heroku."
+check_env_exists $DEPLOY HEROKU_TOKEN $HEROKU_TOKEN "This is needed to deploy to Heroku."
 check_status "Checking environment variables"
 echo "${green}OK${reset}"
 echo
