@@ -118,8 +118,8 @@ then
     -p $HOST_PORT:$CONTAINTER_PORT \
     --env PORT=$CONTAINTER_PORT \
     -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
-    -v $PROJECT_PATH/jest.config.js:/home/pptruser/jest.config.js \
-    -v $PROJECT_PATH/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
+    -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
+    -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
     devenv-$1 \
     bash
 else
