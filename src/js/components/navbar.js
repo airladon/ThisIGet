@@ -148,7 +148,11 @@ export default class Navbar extends React.Component
       </div>;
     }
     return <div className="navbar-text navbar-right login_button">
-        <div onClick={this.loginout.bind(this)} className="navbar_login">
+        <div
+          onClick={this.loginout.bind(this)}
+          className="navbar_login"
+          id="id_navbar_loginout"
+        >
           {this.getLoginLabel()}
         </div>
       </div>;

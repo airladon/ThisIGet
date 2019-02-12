@@ -28,7 +28,15 @@ describe('Home Page', () => {
   });
 
   it('Should be able to log in', async () => {
-
+    await page.goto(sitePath);
+    await page.setViewport({ width: 500, height: 500 });
+    const [response] = await Promise.all([
+      page.waitForNavigation(),
+      page.click('#id_navbar_loginout'),
+    ]);
+    expect(response.status()).toBe(200);
+    const image = await page.screenshot();
+    expect(image).toMatchImageSnapshot();
   });
 });
 
