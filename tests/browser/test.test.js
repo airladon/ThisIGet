@@ -1,13 +1,25 @@
+import 'babel-polyfill';
+import { toMatchImageSnapshot } from 'jest-image-snapshot';
+
+expect.extend({ toMatchImageSnapshot });
 
 describe('Google', () => {
   beforeAll(async () => {
-    await page.goto('https://google.com');
+    await page.goto('https://thisiget.com');
   });
 
   it('should be titled "Google"', async () => {
-    await expect(page.title()).resolves.toMatch('Google');
+    // await console.log(page.title())
+    const text = await page.evaluate(() => document.body.textContent);
+    console.log(text)
+    // await expect(page.title()).resolves.toMatch('Google');
+  });
+  it('should not have visual regressions', async () => {
+    const image = await page.screenshot({ path: 'main.png' });
+    expect(image).toMatchImageSnapshot();
   });
 });
+
 
 // const puppeteer = require('puppeteer');
 
@@ -18,4 +30,4 @@ describe('Google', () => {
 //   await page.screenshot({ path: 'google1.png' });
 
 //   await browser.close();
-// })();
+// })()

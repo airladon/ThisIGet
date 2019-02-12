@@ -120,6 +120,7 @@ then
     -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
     -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
     -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
+    -v $PROJECT_PATH/.babelrc:/home/pptruser/.babelrc \
     devenv-$1 \
     bash
 else
