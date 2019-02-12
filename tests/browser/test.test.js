@@ -69,25 +69,70 @@ describe('Visual Regressions', () => {
 
 describe('Login Flows', () => {
   test.only('Login Page', async () => {
+    jest.setTimeout(10000);
+    // Home page, not logged in
     await page.goto(sitePath);
     await page.setViewport({ width: 500, height: 800 });
+
+    // Click on login
     let [response] = await Promise.all([
       page.waitForNavigation(),
       page.click('#id_navbar_loginout'),
     ]);
     expect(response.status()).toBe(200);
 
+    // Fill in login form and submit
     await page.type('#username_or_email', username);
     await page.type('#password', password);
-    await page.screenshot({ path: 'tests/test1.png' });
+    let image = await page.screenshot();
+    expect(image).toMatchImageSnapshot();
     [response] = await Promise.all([
       page.waitForNavigation(),
       page.click('#submit'),
     ]);
     expect(response.status()).toBe(200);
-    const cookies = await page.cookies();
-    console.log(cookies)
-    await page.screenshot({ path: 'tests/test2.png' });
+
+    // Should go back to home page logged in
+    // Cookies should show username that is logged in
+    image = await page.screenshot();
+    expect(image).toMatchImageSnapshot();
+    let cookies = await page.cookies();
+    for (let i = 0; i < cookies.length; i += 1) {
+      const cookie = cookies[i];
+      if (cookie.name === 'username') {
+        expect(cookie.value).toBe(username);
+        break;
+      }
+    }
+
+    // Click on Logout
+    await Promise.all([
+      page.waitForSelector('#id_navbar_loginout_list'),
+      page.click('#id_navbar_loginout'),
+    ]);
+    // expect(response.status()).toBe(200);
+    image = await page.screenshot();
+    expect(image).toMatchImageSnapshot();
+    [response] = await Promise.all([
+      page.waitForNavigation(),
+      page.click('#id_navbar_loginout_list'),
+    ]);
+    expect(response.status()).toBe(200);
+    image = await page.screenshot();
+    expect(image).toMatchImageSnapshot();
+    cookies = await page.cookies();
+    for (let i = 0; i < cookies.length; i += 1) {
+      const cookie = cookies[i];
+      if (cookie.name === 'username') {
+        expect(cookie.value).toBe('');
+        break;
+      }
+    }
+    // cookies.forEach(cookie) {
+    //   if(cookie.name === 'username') {
+    //     expect(cookie.value).toBe(username)
+    //   }
+    // }
     // const image = await page.screenshot();
     // expect(image).toMatchImageSnapshot();
   });
