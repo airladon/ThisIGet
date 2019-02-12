@@ -11,7 +11,6 @@ describe('Google', () => {
   it('should be titled "Google"', async () => {
     // await console.log(page.title())
     const text = await page.evaluate(() => document.body.textContent);
-    console.log(text)
     // await expect(page.title()).resolves.toMatch('Google');
   });
   it('should not have visual regressions', async () => {
