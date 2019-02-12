@@ -19,6 +19,6 @@ def addUser(username, email, password):
 
 
 addUser('airladon', 'airladon@gmail.com', 'asdfasdf')
-addUser('test_user1', 'test_user1@thisiget.com', 'asdfasdf')
-addUser('test_user2', 'test_user1@thisiget.com', 'asdfasdf')
-addUser('test_user3', 'test_user1@thisiget.com', 'asdfasdf')
+addUser('test_user01', 'test_user01@thisiget.com', 'asdfasdf')
+addUser('test_user02', 'test_user02@thisiget.com', 'asdfasdf')
+addUser('test_user03', 'test_user03@thisiget.com', 'asdfasdf')

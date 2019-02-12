@@ -3,9 +3,10 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 expect.extend({ toMatchImageSnapshot });
 
-const sitePath = process.env.WEBSITE_ADDRESS || 'http://host.docker.internal:5003';
-const testMode = process.env.TEST_MODE || 'test';
-
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
+// const testMode = process.env.TIG_MODE || 'test';
+const username = process.env.TIG_USERNAME || 'test_user01';
+const password = process.env.TIG_PASSWORD || 'asdfasdf';
 
 describe('Visual Regressions', () => {
   // beforeAll(async () => {
@@ -67,14 +68,26 @@ describe('Visual Regressions', () => {
 });
 
 describe('Login Flows', () => {
-  test('Login Page', async () => {
+  test.only('Login Page', async () => {
     await page.goto(sitePath);
     await page.setViewport({ width: 500, height: 800 });
-    const [response] = await Promise.all([
+    let [response] = await Promise.all([
       page.waitForNavigation(),
       page.click('#id_navbar_loginout'),
     ]);
     expect(response.status()).toBe(200);
+
+    await page.type('#username_or_email', username);
+    await page.type('#password', password);
+    await page.screenshot({ path: 'tests/test1.png' });
+    [response] = await Promise.all([
+      page.waitForNavigation(),
+      page.click('#submit'),
+    ]);
+    expect(response.status()).toBe(200);
+    const cookies = await page.cookies();
+    console.log(cookies)
+    await page.screenshot({ path: 'tests/test2.png' });
     // const image = await page.screenshot();
     // expect(image).toMatchImageSnapshot();
   });
