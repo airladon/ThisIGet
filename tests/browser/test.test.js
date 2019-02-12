@@ -3,7 +3,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 expect.extend({ toMatchImageSnapshot });
 
-const sitePath = process.env.WEBSITE_ADDRESS || 'http://localhost:5003';
+const sitePath = process.env.WEBSITE_ADDRESS || 'http://host.docker.internal:5003';
 
 describe('Google', () => {
   beforeAll(async () => {
