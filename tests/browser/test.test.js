@@ -12,7 +12,7 @@ describe('Home Page', () => {
     await page.goto(sitePath);
   });
   it('Should be titled "This I Get"', async () => {
-    if (testMode === 'prod') { return; }
+    // if (testMode === 'prod') { return; }
     // await console.log(page.title())
     // const text = await page.evaluate(() => document.body.textContent);
     await expect(page.title()).resolves.toMatch('This I Get');
