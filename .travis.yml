@@ -9,10 +9,10 @@ branches:
     - release-candidate
     - travis
 
-language: python
+# language: python
 
-python:
-  - 3.6.5
+# python:
+#   - 3.6.5
 
 before_script:
   # this install.sh script requires sudo
