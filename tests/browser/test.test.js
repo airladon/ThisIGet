@@ -4,17 +4,19 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 expect.extend({ toMatchImageSnapshot });
 
 const sitePath = process.env.WEBSITE_ADDRESS || 'http://host.docker.internal:5003';
+const testMode = process.env.TEST_MODE || 'test';
 
 describe('Google', () => {
   beforeAll(async () => {
     await page.goto(sitePath);
   });
-  it('should be titled "Google"', async () => {
+  it('Should be titled "This I Get"', async () => {
+    if (testMode === 'prod') { return; }
     // await console.log(page.title())
-    const text = await page.evaluate(() => document.body.textContent);
-    // await expect(page.title()).resolves.toMatch('Google');
+    // const text = await page.evaluate(() => document.body.textContent);
+    await expect(page.title()).resolves.toMatch('This I Get');
   });
-  it('should not have visual regressions', async () => {
+  it('Main Page regression', async () => {
     const image = await page.screenshot({ path: 'main.png' });
     expect(image).toMatchImageSnapshot();
   });
