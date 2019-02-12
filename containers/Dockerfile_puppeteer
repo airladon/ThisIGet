@@ -34,14 +34,26 @@ RUN groupadd -r pptruser && useradd -r -g pptruser -G audio,video pptruser \
     && chown -R pptruser:pptruser /home/pptruser \
     && chown -R pptruser:pptruser /node_modules
 
-
 WORKDIR /home/pptruser
-# ADD tests/browser ./browser
-# RUN chown -R pptruser:pptruser /home/pptruser/browser
+
+RUN chown root:root /node_modules/puppeteer/.local-chromium/linux-624492/chrome-linux/chrome_sandbox
+RUN chmod 4755 /node_modules/puppeteer/.local-chromium/linux-624492/chrome-linux/chrome_sandbox
+
+# copy sandbox executable to a shared location
+RUN cp -p /node_modules/puppeteer/.local-chromium/linux-624492/chrome-linux/chrome_sandbox /usr/local/sbin/chrome-devel-sandbox
+
+# export CHROME_DEVEL_SANDBOX env variable
+ENV CHROME_DEVEL_SANDBOX=/usr/local/sbin/chrome-devel-sandbox
 
 
 # Run everything after as non-privileged user.
 USER pptruser
+
+ADD containers/pupp/package.json .
+RUN npm install
+
+# Update path so eslint can be run from anywhere
+ENV PATH="/home/pptruser/node_modules/.bin:${PATH}"
 
 
 ENTRYPOINT ["dumb-init", "--"]

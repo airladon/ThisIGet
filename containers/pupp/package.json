@@ -1,0 +1,28 @@
+{
+  "name": "itiget",
+  "version": "0.1.0",
+  "description": "itiget webapp.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "jest": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airladon/itiget.git"
+  },
+  "author": "airladon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/airladon/itiget/issues"
+  },
+  "homepage": "https://github.com/airladon/itiget#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "jest-puppeteer": "^3.9.0"
+  }
+}
