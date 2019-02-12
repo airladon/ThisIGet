@@ -228,7 +228,7 @@ docker_run_cmd() {
 # $1: Deploy variable - can be "deploy" or "no_deploy"
 # $2: ENV name
 check_env_exists() {
-  if [ -z $3 ];
+  if [ !$3 ];
   then
     if [ $1 = "deploy" ];
     then
