@@ -3,11 +3,12 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 expect.extend({ toMatchImageSnapshot });
 
+const sitePath = process.env.WEBSITE_ADDRESS || 'http://localhost:5003';
+
 describe('Google', () => {
   beforeAll(async () => {
-    await page.goto('https://thisiget.com');
+    await page.goto(sitePath);
   });
-
   it('should be titled "Google"', async () => {
     // await console.log(page.title())
     const text = await page.evaluate(() => document.body.textContent);
