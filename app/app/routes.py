@@ -17,15 +17,15 @@ from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
-from sqlalchemy import func
+# from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users
 from app.models import Ratings
 from app.models import Lessons, Versions, Topics
-from functools import reduce
+# from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps

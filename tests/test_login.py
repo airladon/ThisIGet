@@ -1,6 +1,5 @@
 import pytest  # noqa: F401
 import os
-import pdb
 
 
 def login(

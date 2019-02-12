@@ -1,6 +1,6 @@
 import pytest  # noqa: F401
 import sys
-import pdb
+# import pdb
 sys.path.insert(0, './app/')
 from app.models import db, Users, Ratings  # noqa E402
 

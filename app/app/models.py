@@ -181,7 +181,9 @@ class Ratings(db.Model):
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Rating {} {} {} {}>'.format(self.topic.lesson, self.topic.version, self.topic.name, self.rating, self.rating)
+        return '<Rating {} {} {} {}>'.format(
+            self.topic.lesson, self.topic.version, self.topic.name,
+            self.rating, self.rating)
 
 
 class Comment(db.Model):

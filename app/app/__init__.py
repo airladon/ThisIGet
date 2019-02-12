@@ -30,5 +30,3 @@ login = LoginManager(app)
 mail = Mail(app)
 
 from app import routes, models  # noqa
-
-# "'unsafe-inline'",

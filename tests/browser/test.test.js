@@ -6,7 +6,8 @@ expect.extend({ toMatchImageSnapshot });
 const sitePath = process.env.WEBSITE_ADDRESS || 'http://host.docker.internal:5003';
 const testMode = process.env.TEST_MODE || 'test';
 
-describe('Google', () => {
+
+describe('Home Page', () => {
   beforeAll(async () => {
     await page.goto(sitePath);
   });
@@ -16,7 +17,7 @@ describe('Google', () => {
     // const text = await page.evaluate(() => document.body.textContent);
     await expect(page.title()).resolves.toMatch('This I Get');
   });
-  it('Main Page regression', async () => {
+  it('Should have no visutal regression', async () => {
     const image = await page.screenshot({ path: 'main.png' });
     expect(image).toMatchImageSnapshot();
   });
