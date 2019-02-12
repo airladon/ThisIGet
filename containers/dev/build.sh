@@ -163,5 +163,10 @@ then
   echo
 fi
 
+echo
+echo "${bold}${cyan}==================== Packaging =====================${reset}"
+run_cmd "Packaging" "npm run webpack -- --env.mode=$MODE"
+check_status "Building"
+
 
 
