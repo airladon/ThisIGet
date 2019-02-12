@@ -217,10 +217,20 @@ flask db upgrade
 #### Start from scratch - Heroku
 Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
 ```
-heroku pg:reset --app=itgetitest
-tools/get_config_vars.sh itgetitest
+heroku pg:reset --app=thisiget-dev
+tools/get_config_vars.sh thisiget-dev
+```
+paste in the environment variable exports
+```
 tools/reset_and_prepopulate_database.sh
-tools/get_config_vars.sh local
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
 ```
 
 Can check with
