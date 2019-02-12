@@ -1,5 +1,21 @@
 #!/bin/bash
 
+# build.sh                           Test and build dev version
+# build.sh dev                       Test and build dev version
+# build.sh stage                     Test and build stage version
+# build.sh prod                      Test and build prod version
+# build.sh deploy                    Deploy prod build to thisiget-dev
+# build.sh deploy dev                Deploy prod build to thisiget-dev
+# build.sh deploy test               Deploy prod build to thisiget-test
+# build.sh deploy beta               Deploy prod build to thisiget-beta
+# build.sh deploy thisiget           Deploy prod build to thisiget
+# build.sh deploy APP_NAME           Deploy prod build to APP_NAME
+
+# build.sh dev skip-tests         Test and build dev version skipping tests
+# build.sh stage skip-tests       Test and build stage version skipping tests
+# build.sh prod skip-tests        Test and build prod version skipping tests
+
+
 # Setup colors and text formatting
 red=`tput setaf 1`
 green=`tput setaf 2`
@@ -11,7 +27,7 @@ normal="\\033[2m"
 
 MODE=prod
 DEPLOY=no_deploy
-TESTS=run_tests
+TESTS=run
 HEROKU_APP_NAME=thisiget            # Production app name on Heroku
 HEROKU_BETA_APP_NAME=thisiget-beta  # Testing with production database
 HEROKU_TEST_APP_NAME=thisiget-test  # Automated web app testing
@@ -20,17 +36,31 @@ HEROKU_DEV_APP_NAME=thisiget-dev    # For developer testing
 # DEPLOY_BETA_BRANCH=release-candidate # Branch to test and deploy to dev
 # TRAVIS_DEBUG_BRANCH=travis          # Branch for fast travis debug
 # BRANCH=test
-APP_NAME=''
+APP_NAME="$HEROKU_DEV_APP_NAME"
 FAIL=0
 
 # Check current build status and exit if in failure state
-check_status() {
-  if [ "$FAIL" != 0 ] | [ $? != 0 ];
+check_fail() {
+  if [ $FAIL = 1 ];
   then
     echo
     echo "${bold}${red}Build failed at${bold}${cyan}" $1 "${reset}"
     echo
-    exit 1    
+    exit 1
+  else
+    echo "${bold}${green}OK${reset}"
+  fi
+}
+
+check_status() {
+  if [ $? != 0 ];
+  then
+    echo
+    echo "${bold}${red}Build failed at${bold}${cyan}" $1 "${reset}"
+    echo
+    exit 1
+  else
+    echo "${bold}${green}OK${reset}"
   fi
 }
 
@@ -38,32 +68,27 @@ check_status() {
 case "$1" in
   dev) MODE=dev;;
   stage) MODE=stage;;
+  prod) MODE=prod;;
+  deploy) MODE=prod; DEPLOY=deploy;;
+  *) MODE=dev;;
 esac
 
 if [ "$2" ];
 then
-  if [ "$2" = "deploy" ];
-  then
-    DEPLOY=deploy
-  fi
+  case "$2" in
+    dev) APP_NAME=$HEROKU_DEV_APP_NAME;;
+    test) APP_NAME=$HEROKU_TEST_APP_NAME;;
+    beta) APP_NAME=$HEROKU_BETA_APP_NAME;;
+    thisiget) APP_NAME=$HEROKU_APP_NAME;;
+    *) APP_NAME="$2";;
+  esac
 fi
 
 if [ "$3" ];
 then
-  case $3 in
-    prod) APP_NAME=$HEROKU_APP_NAME;;
-    beta) APP_NAME=$HEROKU_BETA_APP_NAME;;
-    test) APP_NAME=$HEROKU_TEST_APP_NAME;;
-    dev) APP_NAME=$HEROKU_DEV_APP_NAME;;
-    *) APP_NAME=$3;;
-  esac
-fi
-
-if [ "$4" ];
-then
-  if [ "$4" = "skip-tests" ];
+  if [ "$3" = "skip-tests" ];
   then
-    TESTS=SKIP_TESTS
+    TESTS=skip
   fi
 fi
 
@@ -73,12 +98,15 @@ then
   if [ $APP_NAME ];
   then
     # Check heroku token exists
-    if [ !"$HEROKU_TOEKN" ];
+    echo $HEROKU_API_KEY
+    echo
+    echo "${bold}${cyan}==== Checking ${reset}${cyan}HEROKU_API_KEY${bold} Exists locally =====${reset} "
+    if [ -z $HEROKU_API_KEY ];
     then
-      echo "HEROKU_TOKEN does not exist"
+      echo "${red}${bold}HEROKU_API_KEY ${reset}${red}environment variable not defined${reset}"
       FAIL=1
     fi
-    check_status "Heroku token"
+    check_fail "Heroku api key check"
 
     # Check app exists
     echo
@@ -90,8 +118,7 @@ then
       echo "${red}Heroku app ${bold}$APP_NAME${reset}${red} doesn't exist or is not associated with this account."
       FAIL=1
     fi
-    check_status "Heroku App Check"
-    echo "${green}OK${reset}"
+    check_fail "Heroku App Check"
 
     # Check the heroku app has the required config vars already set
     echo
@@ -123,7 +150,7 @@ then
       check_var "$HEROKU_CONFIG_VARS" $VAR
     done
 
-    check_status "Heroku Config Variables Check"
+    check_fail "Heroku Config Variables Check"
   fi
 fi
 
@@ -135,17 +162,10 @@ python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); 
 run_cmd() {
   echo "${bold}${cyan}Starting $1 ${reset}"
   eval $2
-  if [ $? != 0 ];
-    then
-    echo "${bold}${red}$1 Failed${reset}"
-    echo
-    FAIL=1
-    else
-    echo "${bold}${green}OK${reset}"
-    echo
-  fi
+  check_status $1
 }
-if [ "$TESTS" = run_tests ];
+
+if [ "$TESTS" = run ];
 then
   echo
   echo "${bold}${cyan}============ Linting and Type Checking =============${reset}"
@@ -153,20 +173,35 @@ then
   run_cmd "CSS and SCSS Linting" "npm run css"
   run_cmd "JS Linting" "npm run lint"
   run_cmd "Flow" "npm run flow"
-  check_status "Linting and type checking"
 
   echo
   echo "${bold}${cyan}===================== Testing ======================${reset}"
   run_cmd "JS Testing" "npm run jest"
   run_cmd "Python Testing" "/opt/app/start.sh pytest"
-  check_status "Tests"
   echo
 fi
 
 echo
 echo "${bold}${cyan}==================== Packaging =====================${reset}"
 run_cmd "Packaging" "npm run webpack -- --env.mode=$MODE"
-check_status "Building"
 
 
+if [ "$DEPLOY" = "deploy" ];
+then
+  echo "${bold}${cyan}Login to Docker${reset}"
+  docker login --username=_ --password=$HEROKU_API_KEY registry.heroku.com
+  check_status "Docker Login"
 
+  echo "${bold}${cyan}Building deployment image${reset}"
+  cp containers/Dockerfile_prod ./Dockerfile
+  docker build -t registry.heroku.com/$APP_NAME/web .
+  check_status "Building deployment image"
+
+  echo "${bold}${cyan}Pushing deployment image${reset}"
+  docker push registry.heroku.com/$APP_NAME/web
+  check_status "Pushing deployment to Heroku"
+
+  echo "${bold}${cyan}Releasing Container${reset}"
+  heroku container:release web --app $APP_NAME
+  check_status "Releasing container"
+fi

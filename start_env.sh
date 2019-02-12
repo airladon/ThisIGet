@@ -133,6 +133,7 @@ else
     -v $PROJECT_PATH/src:/opt/app/src \
     -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
+    -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
@@ -146,6 +147,7 @@ else
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
+    -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \

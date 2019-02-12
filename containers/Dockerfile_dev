@@ -9,6 +9,24 @@ FROM airladon/pynode:python3.7.2-node10.15.0-npm6.6.0
 # ## General ##
 WORKDIR /opt/app
 
+# Docker
+RUN apt-get update && \
+	   apt-get -y install apt-transport-https \
+     ca-certificates \
+     curl \
+     gnupg2 \
+     software-properties-common && \
+ 		 curl -fsSL https://download.docker.com/linux/$(. /etc/os-release; echo "$ID")/gpg > /tmp/dkey; apt-key add /tmp/dkey && \
+	 	 add-apt-repository \
+   	 "deb [arch=amd64] https://download.docker.com/linux/$(. /etc/os-release; echo "$ID") \
+   	 $(lsb_release -cs) \
+   	 stable" && \
+ 		 apt-get update && \
+ 		 apt-get -y install docker-ce
+
+# Heroku
+RUN curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
+
 
 # Install npm packages
 ADD package.json .
@@ -53,8 +71,6 @@ ENV PATH="/opt/app/node_modules/.bin:${PATH}"
 ADD .flake8 .
 ADD containers/dev/pytest.ini .
 
-# Heroku
-RUN curl https://cli-assets.heroku.com/install-ubuntu.sh | sh
 
 # Environment variable for flask
 ENV FLASK_APP app/my_app.py
