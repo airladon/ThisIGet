@@ -44,6 +44,7 @@ check_status() {
 
 if [ $1 != pupp ];
 then
+  echo
   echo "${bold}${cyan}============ Checking Environment Variables ============${reset}"
   check_env_exists MAIL_SERVER "Emails will not be sent by app."
   check_env_exists MAIL_USERNAME "Emails will not be sent by app."
@@ -93,6 +94,7 @@ then
   CMD=/opt/app/dev-server.sh
 fi
 
+echo
 echo "${bold}${cyan}================= Building container ===================${reset}"
 cp containers/$DOCKERFILE Dockerfile
 
@@ -102,6 +104,7 @@ docker build -t devenv-$1 .
 rm Dockerfile
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
+echo
 echo "${bold}${cyan}================= Starting container ===================${reset}"
 if [ $1 = 'prod' ];
 then

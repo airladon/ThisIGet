@@ -141,7 +141,7 @@ then
     EXPECTED_CONFIG_VARS[6]=DATABASE_URL
 
     HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
-
+    echo $HEROKU_CONFIG_VARS
     check_var() {
       VALUE=`echo $1 | sed 's/ /\'$'\n/g' | sed -n "/^${2}/p"`
       if [ -z $VALUE ];
@@ -151,7 +151,6 @@ then
       else
         echo "$2 - ${green}OK${reset}"
       fi
-
     }
 
     EXPECTED_CONFIG_VARS_ARRAY=(${EXPECTED_CONFIG_VARS})
