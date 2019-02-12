@@ -142,6 +142,7 @@ then
 
     HEROKU_CONFIG_VARS=`heroku config --app=$APP_NAME | sed '1d' | sed 's/:.*$//' | tr " " "\n"`
     echo $HEROKU_CONFIG_VARS
+    
     check_var() {
       VALUE=`echo $1 | sed 's/ /\'$'\n/g' | sed -n "/^${2}/p"`
       if [ -z $VALUE ];
@@ -153,10 +154,10 @@ then
       fi
     }
 
-    EXPECTED_CONFIG_VARS_ARRAY=(${EXPECTED_CONFIG_VARS})
-    for VAR in ${EXPECTED_CONFIG_VARS[@]}; do
-      check_var "$HEROKU_CONFIG_VARS" $VAR
-    done
+    # EXPECTED_CONFIG_VARS_ARRAY=(${EXPECTED_CONFIG_VARS})
+    # for VAR in ${EXPECTED_CONFIG_VARS[@]}; do
+    #   check_var "$HEROKU_CONFIG_VARS" $VAR
+    # done
 
     check_status "Heroku Config Variables Check"
   fi

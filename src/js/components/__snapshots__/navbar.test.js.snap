@@ -20,6 +20,7 @@ exports[`Navbar Make "About" item active 1`] = `
       >
         <div
           className="navbar_login"
+          id="id_navbar_loginout"
           onClick={[Function]}
         >
           Login
@@ -50,6 +51,7 @@ exports[`Navbar Make "Introduction" item active 1`] = `
       >
         <div
           className="navbar_login"
+          id="id_navbar_loginout"
           onClick={[Function]}
         >
           Login
@@ -80,6 +82,7 @@ exports[`Navbar No props 1`] = `
       >
         <div
           className="navbar_login"
+          id="id_navbar_loginout"
           onClick={[Function]}
         >
           Login
