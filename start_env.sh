@@ -141,8 +141,10 @@ else
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
+    -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
+    -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
@@ -159,8 +161,6 @@ else
     -v $PROJECT_PATH/.flowconfig:/opt/app/.flowconfig \
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
-    -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
-    -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
