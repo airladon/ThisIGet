@@ -14,5 +14,5 @@ before_script:
 
 script:
   - export HEROKU_API_KEY=$HEROKU_TOKEN
-  - ./start_pipeline.sh
+  - ./start_env.sh deploy_pipeline
 

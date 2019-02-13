@@ -64,34 +64,42 @@ fi
 if [ $1 = "prod" ];
 then
   HOST_PORT=5000
-  CONTAINTER_PORT=4000
+  CONTAINER_PORT=4000
   stop_dev_server
 fi
 
 if [ $1 = "stage" ];
 then
   HOST_PORT=5001
-  CONTAINTER_PORT=5000
+  CONTAINER_PORT=5000
 fi
 
 if [ $1 = "dev" ];
 then
   HOST_PORT=5002
-  CONTAINTER_PORT=5000
+  CONTAINER_PORT=5000
 fi
 
 if [ $1 = "pupp" ];
 then
   DOCKERFILE="Dockerfile_puppeteer"
-  CONTAINTER_PORT=5000
+  CONTAINER_PORT=5000
 fi
 
 if [ $1 = 'dev-server' ];
 then
   HOST_PORT=5003
-  CONTAINTER_PORT=5000
+  CONTAINER_PORT=5000
   DOCKERFILE="Dockerfile_dev"
   CMD=/opt/app/dev-server.sh
+fi
+
+if [ $1 = 'deploy_pipeline' ];
+then
+  HOST_PORT=5002
+  CONTAINER_PORT=5000
+  CMD="/opt/app/deploy_pipeline.sh"
+  DOCKERFILE="Dockerfile_dev"
 fi
 
 echo
@@ -110,16 +118,16 @@ if [ $1 = 'prod' ];
 then
   docker run -it --rm \
     --name devenv-$1 \
-    -p $HOST_PORT:$CONTAINTER_PORT \
-    --env PORT=$CONTAINTER_PORT \
+    -p $HOST_PORT:$CONTAINER_PORT \
+    --env PORT=$CONTAINER_PORT \
     --env-file=$PROJECT_PATH/containers/env.txt \
     devenv-$1
 elif [ $1 = 'pupp' ];
 then
   docker run -it --rm \
     --name devenv-$1 \
-    -p $HOST_PORT:$CONTAINTER_PORT \
-    --env PORT=$CONTAINTER_PORT \
+    -p $HOST_PORT:$CONTAINER_PORT \
+    --env PORT=$CONTAINER_PORT \
     -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
     -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
     -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
@@ -155,8 +163,8 @@ else
     -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
-    -e=HOST_PATH=$PROJECT_PATH \
+    -e HOST_PATH=$PROJECT_PATH \
     --name devenv-$1 \
-    -p $HOST_PORT:$CONTAINTER_PORT \
+    -p $HOST_PORT:$CONTAINER_PORT \
     devenv-$1 $CMD
 fi

@@ -34,23 +34,23 @@ ENV FLASK_DEBUG 1
 # Add Files that are needed and rarely change - all these files will be mapped
 # directly to the volume if using start_env.sh and so will be overwritten, but
 # in the pipeline, these are used.
-ADD containers/dev/browser_test.sh .
-ADD containers/dev/build.sh .
-ADD containers/dev/dev-server.sh .
-ADD containers/dev/getLessons.js .
-ADD containers/dev/pytest.ini .
-ADD containers/dev/setFilesForBuild.js .
-ADD containers/dev/update_paths.py .
-ADD containers/dev/webpack.config.js .
-ADD .babelrc .
-ADD .eslintignore .
-ADD .eslintrc.json .
-ADD .flake8 .
-ADD .flowconfig .
-ADD .stylelintignore .
-ADD .stylelintrc .
-ADD deploy_pipeline.sh .
-ADD jest.config.js .
+# ADD containers/dev/browser_test.sh .
+# ADD containers/dev/build.sh .
+# ADD containers/dev/dev-server.sh .
+# ADD containers/dev/getLessons.js .
+# ADD containers/dev/pytest.ini .
+# ADD containers/dev/setFilesForBuild.js .
+# ADD containers/dev/update_paths.py .
+# ADD containers/dev/webpack.config.js .
+# ADD .babelrc .
+# ADD .eslintignore .
+# ADD .eslintrc.json .
+# ADD .flake8 .
+# ADD .flowconfig .
+# ADD .stylelintignore .
+# ADD .stylelintrc .
+# ADD deploy_pipeline.sh .
+# ADD jest.config.js .
 
 RUN npm install figureone@0.0.20
 
