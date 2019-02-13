@@ -71,11 +71,12 @@ function getAllVersions(versionsPath) {
 function entryPoints(buildMode) {
   const points = {
     main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
-    login: './src/js/views/login/login',
-    createAccount: './src/js/views/createAccount/createAccount',
-    resetPasswordRequest: './src/js/views/resetPasswordRequest/resetPasswordRequest',
-    resetPassword: './src/js/views/resetPassword/resetPassword',
-    confirmAccountMessage: './src/js/views/confirmAccountMessage/confirmAccountMessage',
+    input: './src/js/views/input/input',
+    // login: './src/js/views/login/login',
+    // createAccount: './src/js/views/createAccount/createAccount',
+    // resetPasswordRequest: './src/js/views/resetPasswordRequest/resetPasswordRequest',
+    // resetPassword: './src/js/views/resetPassword/resetPassword',
+    // confirmAccountMessage: './src/js/views/confirmAccountMessage/confirmAccountMessage',
   };
 
   const lessons = getAllPaths(
@@ -212,5 +213,5 @@ export default function getLessonIndex() {
 }
 
 module.exports = {
-  entryPoints, makeLessonIndex,
+  entryPoints, makeLessonIndex, getAllLessons,
 };

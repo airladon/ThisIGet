@@ -134,6 +134,14 @@ def check_hash(plain_text, hash_to_compare):
     return bcrypt.checkpw(pt, hash_to_compare.encode('utf-8'))
 
 
+def format_email(email):
+    split_email = email.split('@')
+    if len(split_email) != 2:
+        return email
+    domain = split_email[1].lower()
+    user = split_email[0]
+    return f'{user}@{domain}'
+
 # key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
 # len(encrypt('1', key_str))
 # len(encrypt('12', key_str))

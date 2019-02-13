@@ -6,7 +6,12 @@ export default class Footer extends React.Component
   render() {
     return <div className="footer__container">
       <div className="footer_contact">
-        feedback@getit.org
+        <a
+          href="mailto:feedback@thisiget.com?Subject=Feedback"
+          className="footer_email"
+          >
+          feedback@thisiget.com
+        </a>
       </div>
     </div>;
   }

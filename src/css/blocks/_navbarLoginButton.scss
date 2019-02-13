@@ -1,0 +1,40 @@
+$radius: 4px;
+$fontSize: 14px;
+
+.navbar_login {
+  position: relative;
+}
+
+.navbar_login .dropdown_button_container {
+  width: auto;
+  // width: 200px;
+  background-color: color('navbar', 'background');
+  border: 1px solid color('navbar', 'background');
+  border-radius: $radius;
+  font-size: $fontSize;
+  color: color('navbar', 'text');
+}
+
+.navbar_login .dropdown_button_label_container {
+  width: auto;
+}
+
+.navbar_login .dropdown_button_container:hover {
+  // border: 1px solid color('white', 'light');
+  background-color: darken(color('navbar', 'background'), 3);
+}
+
+.navbar_login .dropdown_button_list {
+  border-radius: $radius;
+  font-weight: 100;
+  font-size: $fontSize;
+}
+
+.navbar_login__loggedin_label_username {
+  // font-weight: 400;
+  color: lighten(color('navbar', 'text'), 20);
+}
+
+#id_navbar_loginout {
+  width: auto;
+}

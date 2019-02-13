@@ -3,6 +3,9 @@
 <html lang="en">
   <head>
     <!-- Required meta tags -->
+    <title>
+      {% block title %} {% endblock %}
+    </title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     
@@ -19,7 +22,6 @@
     <div id="logged_in" style="font-size:0">{{ current_user.name }}</div>
   {% endif %} -->
   {% block content %}{% endblock %}
-  }
 <script type="text/javascript" src="/static/dist/vendors.js"></script>
 <script type="text/javascript" src="/static/dist/tools.js"></script>
 <script type="text/javascript" src="/static/dist/commonlessons.js"></script>

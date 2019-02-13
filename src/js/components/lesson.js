@@ -1,6 +1,7 @@
 // @flow
 
 import * as React from 'react';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import '../../css/style.scss';
 import Lesson from '../Lesson/Lesson';
 import Button from './button';
@@ -11,11 +12,16 @@ import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
 import ExplanationButton from './explanationButton';
+import Rating from './rating';
+import { getCookie, createCookie } from '../tools/misc';
+
 
 type Props = {
   lesson: Lesson;
   lessonDetails: Object;
+  versionDetails: Object;
   section?: number;
+  isLoggedIn: boolean;
 };
 
 type State = {
@@ -23,10 +29,11 @@ type State = {
   numPages: number,
   page: number,
   listOfSections: Array<{
-    label: string;
+    label: string | React.Element<'div'>;
     link?: Function | string;
     active?: boolean;
   }>;
+  userRating: number;
 };
 
 function getLessonDescription(uid: string) {
@@ -51,6 +58,9 @@ export default class LessonComponent extends React.Component
   lessonNavigator: ?LessonNavigator;
   showNavigator: boolean;
   lessonDescription: null | LessonDescription;
+  versionDetails: Object;
+  topic: string;
+  firstPage: number;
 
   constructor(props: Props) {
     super(props);
@@ -59,15 +69,77 @@ export default class LessonComponent extends React.Component
       numPages: 0,
       page: 0,
       listOfSections: [],
+      userRating: 0,
     };
+    this.firstPage = parseInt(getCookie('page'), 10) - 1;
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
+    this.versionDetails = props.versionDetails;
+    const [topic] = window.location.pathname.split('/').slice(-1);
+    this.topic = topic;
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
     this.centerLessonFlag = false;
     this.showNavigator = false;
+    this.getRating(this.topic);
+  }
+
+  getRating(topic: string) {
+    const lessonUid = this.lessonDetails.details.uid;
+    const versionUid = this.versionDetails.details.uid;
+    const link = `/rating/${lessonUid}/${topic}/${versionUid}`;
+    fetchPolyfill(link, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'ok') {
+          if (data.userRating
+            && data.userRating !== 'not rated'
+            && data.userRating !== 'not logged in'
+          ) {
+            // this.setUserRating(data.userRating);
+            this.setState({ userRating: data.userRating });
+          }
+        }
+      })
+      .catch(() => {});
+  }
+
+  setUserRating(rating: number) {
+    const { cookie } = document;
+    if (cookie != null) {
+      const username = cookie.match(/username=[^;]*;/);
+      // console.log(username)
+      if (username != null) {
+        if (username[0].split('=')[1].slice(0, -1) === '') {
+          return;
+        }
+      }
+    }
+    const lessonUid = this.lessonDetails.details.uid;
+    const versionUid = this.versionDetails.details.uid;
+    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}`;
+    fetchPolyfill(link, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'done') {
+          this.setState({ userRating: rating });
+        } else {
+          // console.log('failed to set rating:', data.message);
+        }
+      })
+      .catch(() => {});
   }
 
   componentDidUpdate() {
@@ -86,6 +158,8 @@ export default class LessonComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
+      // document.cookie = `page=${page + 1}; path=/`;
+      createCookie('page', `${page + 1}`, 30, window.location.pathname);
     } else if (callback) {
       callback();
     }
@@ -176,6 +250,17 @@ export default class LessonComponent extends React.Component
     this.orientationChange();
     this.centerLessonFlag = !this.centerLessonFlag;
     this.centerLesson();
+
+    // const { cookie } = document;
+    // let page = cookie.match(/page=[^;]*/);
+    if (this.firstPage != null) {
+      // page = page[0].trim();
+      // if (page.slice(-1).charAt(0) === ';') {
+      //   page = page.slice(0, -1);
+      // }
+      // this.setState({ page: parseInt(page, 10) });
+      this.lesson.goToSection(this.firstPage);
+    }
   }
 
   // showHideNavigator() {
@@ -583,6 +668,12 @@ export default class LessonComponent extends React.Component
     return output;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  getTopic() {
+    const topicName = window.location.href.split('/').slice(-1)[0];
+    return topicName.charAt(0).toUpperCase() + topicName.slice(1);
+  }
+
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
@@ -596,6 +687,12 @@ export default class LessonComponent extends React.Component
             {this.addTopics()}
           </div>
         </div>
+        <Rating
+          topic={this.topic}
+          rating={this.state.userRating}
+          ratingCallback={this.setUserRating.bind(this)}
+          isLoggedIn={this.props.isLoggedIn}
+        />
       </div>
       <div className="lesson__widescreen_backdrop">
         <div id="lesson__container_name" className="lesson__container">
@@ -619,7 +716,6 @@ export default class LessonComponent extends React.Component
               {this.addInteractiveElementButton()}
         </div>
       </div>
-
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}

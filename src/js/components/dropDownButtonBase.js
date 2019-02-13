@@ -5,7 +5,7 @@ import * as React from 'react';
 const { generateUniqueId } = Fig.tools.misc;
 
 type Props = {
-  label?: string;
+  label?: string | React.Element<'div'>;
   id?: string;
   direction?: 'up' | 'down';
   xAlign?: 'left' | 'right' | 'center';

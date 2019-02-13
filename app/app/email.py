@@ -2,7 +2,6 @@ from flask_mail import Message
 from app import mail
 from flask import render_template
 from app import app
-import os
 
 
 def send_email(subject, sender, recipients, text_body, html_body):
@@ -13,18 +12,17 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 
 def can_send_email():
-
-    if os.environ.get('MAIL_PASSWORD') is None \
-       or os.environ.get('MAIL_USERNAME') is None \
-       or os.environ.get('MAIL_SERVER') is None \
-       or os.environ.get('MAIL_SENDER') is None:
+    if app.config['MAIL_PASSWORD'] == '' \
+       or app.config['MAIL_USERNAME'] == '' \
+       or app.config['MAIL_SERVER'] == '' \
+       or app.config['MAIL_SENDER'] == '':
         return False
     return True
 
 
 def send_password_reset_email(user):
     if not can_send_email():
-        print('MAIL_PASSWORD environment variable not set')
+        print('MAIL environment variable(s) not set')
         print('No mail sent to user.email')
         return
     token = user.get_reset_password_token()
@@ -40,7 +38,7 @@ def send_password_reset_email(user):
 
 def send_confirm_account_email(user):
     if not can_send_email():
-        print('MAIL_PASSWORD environment variable not set')
+        print('MAIL environment variable(s) not set')
         print('No mail sent to user.email')
         return
     token = user.get_account_confirmation_token()

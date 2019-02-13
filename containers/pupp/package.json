@@ -1,0 +1,40 @@
+{
+  "name": "itiget",
+  "version": "0.1.0",
+  "description": "itiget webapp.",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "jest": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/airladon/itiget.git"
+  },
+  "author": "airladon",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/airladon/itiget/issues"
+  },
+  "homepage": "https://github.com/airladon/itiget#readme",
+  "dependencies": {
+  },
+  "devDependencies": {
+    "jest": "^24.1.0",
+    "jest-puppeteer": "^3.9.0",
+    "jest-image-snapshot": "^2.8.1",
+    "@babel/core": "^7.1.6",
+    "@babel/polyfill": "^7.0.0",
+    "@babel/preset-env": "^7.1.6",
+    "@babel/preset-flow": "^7.0.0",
+    "@babel/preset-react": "^7.0.0",
+    "autoprefixer": "^9.3.1",
+    "babel-core": "^7.0.0-bridge.0",
+    "babel-eslint": "^10.0.1",
+    "babel-jest": "^23.6.0",
+    "babel-loader": "^8.0.4",
+    "babel-polyfill": "^6.26.0"
+  }
+}

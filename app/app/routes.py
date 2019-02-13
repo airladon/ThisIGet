@@ -10,27 +10,33 @@
 
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
-from flask import make_response
+from flask import make_response, request
 from app import app, db
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
-from app.models import Users
 from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
-# from flask_sqlalchemy import or_
+# from sqlalchemy import func
 from app.tools import hash_str_with_pepper
+from app.models import Users
+from app.models import Ratings
+from app.models import Lessons, Versions, Topics
+# from functools import reduce
+from werkzeug.urls import url_parse
+from app.tools import format_email
 # import pdb
 
 # project/decorators.py
 from functools import wraps
+
 
 def check_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
         if current_user.confirmed is False:
             flash('Please confirm your account!', 'warning')
-            return redirect(f'confirmAccountEmailSent/{user.username}')
+            return redirect(f'confirmAccountEmailSent/{current_user.username}')
         return func(*args, **kwargs)
 
     return decorated_function
@@ -43,6 +49,7 @@ def home():
         res.set_cookie('username', current_user.username)
     else:
         res.set_cookie('username', '')
+    res.set_cookie('page', '0')
     return res
 
 
@@ -86,11 +93,21 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
-    return render_template(
-        'lesson.html',
-        css=css,
-        js=js,
-    )
+    lesson_page = request.args.get('page')
+    print('page', lesson_page)
+    res = make_response(render_template('lesson.html', css=css, js=js))
+    if lesson_page:
+        res = make_response(redirect(request.path))
+        res.set_cookie(
+            key='page', value=lesson_page,
+            path=request.path, max_age=30 * 60)
+        return res
+
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.username)
+    else:
+        res.set_cookie('username', '')
+    return res
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
@@ -132,19 +149,21 @@ def loginuser():
 def login(username=''):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/login.css'
-    js = '/static/dist/login.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = LoginForm()
     if username:
-        user = Users.query.filter_by(username=username).first()
-        form = LoginForm(obj=user)
+        # user = Users.query.filter_by(username=username).first()
+        # form = LoginForm(obj=user)
+        form.username_or_email.data = username
     if form.validate_on_submit():
-        user = Users.query.filter_by(
-            username=form.username_or_email.data).first()
+        user = Users.query.filter(
+            Users.username.ilike(form.username_or_email.data)).first()
         if user is None:
+            formatted_email = format_email(form.username_or_email.data)
             user = Users.query.filter_by(
                 email_hash=hash_str_with_pepper(
-                    form.username_or_email.data)).first()
+                    formatted_email)).first()
         if user is None or not user.check_password(form.password.data):
             flash('Username or password is incorrect', 'error')
             return redirect(url_for('login'))
@@ -153,7 +172,15 @@ def login(username=''):
             user.last_login = datetime.datetime.now()
             db.session.commit()
             # session['username'] = user.username
-            return redirect(url_for('home'))
+            # return redirect(url_for('home'))
+            # lesson_page = request.args.get('page')
+            # if lesson_page is None:
+            #     lesson_page = '0'
+            next_page = request.args.get('next')
+            if not next_page or url_parse(next_page).netloc != '':
+                next_page = url_for('home')
+            next_page = next_page
+            return redirect(next_page)
         else:
             return redirect(f'confirmAccountEmailSent/{user.username}')
     return render_template(
@@ -164,8 +191,8 @@ def login(username=''):
 def create():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    css = '/static/dist/createAccount.css'
-    js = '/static/dist/createAccount.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users(username=form.username.data)
@@ -183,8 +210,8 @@ def create():
 def confirm_account_message(username):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/confirmAccountMessage.css'
-    js = '/static/dist/confirmAccountMessage.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(username=username).first()
     if user is None:
@@ -236,14 +263,15 @@ def confirm_account(token):
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password_request():
-    css = '/static/dist/resetPasswordRequest.css'
-    js = '/static/dist/resetPasswordRequest.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
     if form.validate_on_submit():
+        formatted_email = format_email(form.email.data)
         user = Users.query.filter_by(
-            email_hash=hash_str_with_pepper(form.email.data)).first()
+            email_hash=hash_str_with_pepper(formatted_email)).first()
         if user:
             send_password_reset_email(user)
         flash(f'An email has been sent to {form.email.data}.', 'after')
@@ -256,8 +284,8 @@ def reset_password_request():
 
 @app.route('/resetPassword/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    css = '/static/dist/resetPassword.css'
-    js = '/static/dist/resetPassword.js'
+    css = '/static/dist/input.css'
+    js = '/static/dist/input.js'
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
@@ -277,4 +305,89 @@ def reset_password(token):
 def logout():
     logout_user()
     session.pop('username', None)
-    return redirect(url_for('home'))
+    # lesson_page = request.args.get('page')
+    # if lesson_page is None:
+    #     lesson_page = '0'
+    next_page = request.args.get('next')
+    if not next_page or url_parse(next_page).netloc != '':
+        next_page = url_for('home')
+    next_page = next_page
+    return redirect(next_page)
+    # return redirect(url_for('home'))
+
+
+@check_confirmed
+@app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
+def rate(lesson_uid, topic, version_uid, rating_value):
+    status = 'not logged in'
+    if current_user.is_authenticated:
+        lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+        if lesson is None:
+            return jsonify(
+                {'status': 'fail', 'message': 'lesson does not exist'})
+        version = Versions.query.filter_by(
+            lesson_id=lesson.id, uid=version_uid).first()
+        if version is None:
+            return jsonify(
+                {'status': 'fail', 'message': 'version does not exist'})
+        topic = Topics.query.filter_by(
+            lesson=lesson, version=version, name=topic).first()
+        if topic is None:
+            return jsonify(
+                {'status': 'fail', 'message': 'topic does not exist'})
+        rating = Ratings.query.filter_by(
+            topic=topic, user=current_user).first()
+        if rating is None:
+            rating = Ratings(user=current_user, topic=topic)
+            db.session.add(rating)
+        if rating.rating != rating_value:
+            rating.rating = rating_value
+            rating.timestamp = datetime.datetime.now()
+        db.session.commit()
+        status = 'done'
+    return jsonify({'status': status})
+
+
+@check_confirmed
+@app.route('/rating/<lesson_uid>/<topic>/<version_uid>')
+def get_rating(lesson_uid, topic, version_uid):
+    num_ratings = 0
+    ave_rating = 0
+    user_rating_value = 'not logged in'
+
+    lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+    if lesson is None:
+        return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
+    version = Versions.query.filter_by(
+        lesson_id=lesson.id, uid=version_uid).first()
+    if version is None:
+        return jsonify({'status': 'fail', 'message': 'version does not exist'})
+    topic = Topics.query.filter_by(
+        lesson=lesson, version=version, name=topic).first()
+    if topic is None:
+        return jsonify({'status': 'fail', 'message': 'topic does not exist'})
+
+    ratings = Ratings.query.filter_by(topic=topic).all()
+    if ratings is None:
+        ratings = []
+    num_ratings = len(ratings)
+    sum_ratings = 0
+    for r in ratings:
+        sum_ratings += r.rating
+    ave_rating = 0
+    if num_ratings > 0:
+        ave_rating = sum_ratings / num_ratings
+
+    if current_user.is_authenticated:
+        user_rating = Ratings.query.filter_by(
+            user=current_user, topic=topic).first()
+        if user_rating is None:
+            user_rating_value = 'not rated'
+        else:
+            user_rating_value = user_rating.rating
+    return jsonify({
+        'status': 'ok',
+        'message': '',
+        'userRating': user_rating_value,
+        'numRatings': num_ratings,
+        'aveRating': ave_rating})

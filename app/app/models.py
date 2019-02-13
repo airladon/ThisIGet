@@ -11,7 +11,7 @@ from app import app
 # import os
 # from Crypto.Cipher import AES
 from app.tools import encrypt, decrypt, hash_str, check_hash
-from app.tools import hash_str_with_pepper
+from app.tools import hash_str_with_pepper, format_email
 
 # Encryption is AES 256 using EAX mode which allows for stream encoding.
 # Stream encoding means encoded output length will be proportional to plain
@@ -57,15 +57,16 @@ class Users(UserMixin, db.Model):
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
-    ratings = db.relationship('Rating', backref='user', lazy='dynamic')
+    ratings = db.relationship('Ratings', backref='user', lazy='dynamic')
     last_login = db.Column(db.DateTime)
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
 
     def set_email(self, email):
-        self.email = encrypt(email, min_length_for_padding=320)
-        self.email_hash = hash_str_with_pepper(email)
+        formatted_email = format_email(email)
+        self.email = encrypt(formatted_email, min_length_for_padding=320)
+        self.email_hash = hash_str_with_pepper(formatted_email)
 
     def get_email(self):
         return decrypt(self.email)
@@ -121,12 +122,7 @@ class Users(UserMixin, db.Model):
         }
 
 
-@login.user_loader
-def load_user(id):
-    return Users.query.get(int(id))
-
-
-class Category(db.Model):
+class Categories(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     category = db.Column(db.String(64), index=True, unique=True)
     path = db.Column(db.String(128))
@@ -135,34 +131,70 @@ class Category(db.Model):
         return '<Category {}>'.format(self.category)
 
 
-class Lesson(db.Model):
+class Lessons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    lesson_name = db.Column(db.String(128), index=True, unique=True)
-    lesson_uid = db.Column(db.String(128), index=True, unique=True)
-    category = db.Column(db.Integer, db.ForeignKey('category.id'))
+    name = db.Column(db.String(128), index=True, unique=True)
+    uid = db.Column(db.String(128), index=True, unique=True)
+    category = db.Column(db.Integer, db.ForeignKey('categories.id'))
     dependencies = db.Column(db.String(1024), index=True)
+    enabled = db.Column(db.Boolean, index=True)
     path = db.Column(db.String(128))
-    ratings = db.relationship('Rating', backref='lesson', lazy='dynamic')
+    versions = db.relationship('Versions', backref='lesson', lazy='dynamic')
+    topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lesson {}>'.format(self.lesson_name)
+        return '<Lessons {}>'.format(self.name)
 
 
-class Rating(db.Model):
+class Versions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    uid = db.Column(db.String(128), index=True)
+    title = db.Column(db.String(128), index=True)
+    description = db.Column(db.String(256), index=True)
+    path = db.Column(db.String(128), index=True)
+    onPath = db.Column(db.Boolean, index=True)
+    # topics = db.Column(db.String(512), index=True)
+    qr = db.Column(db.String(1024), index=True)
+    ratings = db.relationship('Topics', backref='version', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Versions {}>'.format(self.title)
+
+
+class Topics(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Topics {}>'.format(self.name)
+
+
+class Ratings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    lesson_id = db.Column(db.Integer, db.ForeignKey('lesson.id'))
-    rating = db.Column(db.Integer)
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    rating = db.Column(db.Integer, index=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
-        return '<Rating {}>'.format(self.rating)
+        return '<Rating {} {} {} {}>'.format(
+            self.topic.lesson, self.topic.version, self.topic.name,
+            self.rating, self.rating)
 
 
 class Comment(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    rating_id = db.Column(db.Integer, db.ForeignKey('rating.id'))
+    rating_id = db.Column(db.Integer, db.ForeignKey('ratings.id'))
     comment = db.Column(db.String(2048))
 
     def __repr__(self):
         return '<Comment {}>'.format(self.comment)
+
+
+@login.user_loader
+def load_user(id):
+    return Users.query.get(int(id))

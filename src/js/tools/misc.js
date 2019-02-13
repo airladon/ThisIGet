@@ -57,6 +57,62 @@ function loadRemoteCSS(
   }
 }
 
+function getCookie(key: string) {
+  const { cookie } = document;
+  if (cookie != null) {
+    const re = RegExp(`${key}=[^;]*`);
+    // $FlowFixMe
+    let keyValue = cookie.match(re);
+    // console.log(username)
+    if (keyValue != null) {
+      keyValue = keyValue[0].trim();
+      if (keyValue.slice(-1).charAt(0) === ';') {
+        keyValue = keyValue.slice(0, -1);
+      }
+
+      return keyValue.split('=')[1];
+    }
+  }
+  return '';
+}
+
+function createCookie(
+  name: string,
+  value: string | number,
+  minutes: number = 0,
+  path: string = '/',
+) {
+  let expires = '';
+  if (minutes) {
+    const date = new Date();
+    date.setTime(date.getTime() + (minutes * 60 * 1000));
+    expires = `; expires=${date.toUTCString()}`;
+  }
+  document.cookie = `${name}=${value}${expires}; path=${path}`;
+}
+
+function logInOut(isLoggedIn: boolean) {
+  // let page = getCookie('page');
+  // if (page === '') {
+  //   page = '0';
+  // }
+  let logText = '/logout';
+  if (isLoggedIn === false) {
+    logText = '/login';
+  }
+  const next = `?next=${window.location.pathname}`;
+  window.location = `${logText}${next}`;
+}
+function login() {
+  logInOut(false);
+}
+
+function logout() {
+  logInOut(true);
+}
+
 export {
-  classify, loadRemote, loadRemoteCSS,
+  classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
+  createCookie,
 };
+

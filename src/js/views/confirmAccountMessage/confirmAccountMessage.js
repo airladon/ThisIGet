@@ -1,1 +1,0 @@
-import './confirmAccountMessage.scss';
