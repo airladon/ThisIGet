@@ -17,7 +17,7 @@ python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); 
 
 
 echo
-echo "${bold}${cyan}================= Building container ===================${reset}"
+echo "${bold}${cyan}============================= Building container ===============================${reset}"
 cp containers/Dockerfile_dev Dockerfile
 
 docker build -t devenv-builder .
@@ -25,7 +25,7 @@ docker build -t devenv-builder .
 rm Dockerfile
 
 echo
-echo "${bold}${cyan}================= Starting container ===================${reset}"
+echo "${bold}${cyan}===== Starting container to lint, test, build and deploy to thisiget-test =====${reset}"
 docker run -it --rm \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
@@ -51,4 +51,17 @@ docker run -it --rm \
     --name devenv-builder \
     --entrypoint "/opt/app/build.sh" \
     devenv-builder \
-    deploy dev
+    deploy test
+
+echo
+echo "${bold}${cyan}================== Starting Browser Tests for thisiget-test ===================${reset}"
+
+docker run -it --rm \
+    -v $PROJECT_PATH/tests/browser:/home/pptruser/tests \
+    -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
+    -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
+    -v $PROJECT_PATH/.babelrc:/home/pptruser/.babelrc \
+    --e TIG_ADDRESS='https://thisiget-test' \
+    --name devenv-browser-test \
+    --entrypoint "jest" \
+    airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
