@@ -10,9 +10,9 @@ ItIGet web app.
 * Navigate to project directory (all following steps are done from the project directory unless otherwise said)
 
 ## Install local Python and Node packages
-Installing local packages for python and node can be used by editors for lint and type hints, as well as allows flask database management.
+Local packages for python and node can be used by editors for lint and type hints, as well as allows flask database management.
 
-In addition, python is required for some scripts in the tools folder.
+In addition, python is required for some scripts in the `tools` folder.
 
 ### Install Python and Packages
 #### Install PyEnv and Python 3.7.1 (if not already installed on local machine)
@@ -92,10 +92,10 @@ If you want to run flask or flask database migrations locally and not in a conta
 export FLASK_APP=app/my_app.py
 ```
 
-#### `HEROKU_TOKEN`
-If deploying the app to HEROKU, then the `HEROKU_TOKEN` environment variable needs to be set. The variable can be set by using:
+#### `HEROKU_API_KEY`
+If deploying the app to HEROKU, then the `HEROKU_API_KEY` environment variable needs to be set. The variable can be set by using:
 
-```export HEROKU_TOKEN=`heroku auth:token` ```
+```export HEROKU_API_KEY=`heroku auth:token` ```
 
 This is only needed if deploying a build from the local machine.
 
@@ -407,6 +407,64 @@ Remove existing virtual environment
 Setup new virtual environment
 
 
+
+# Deploy to new Heroku App
+## Create an App
+```
+heroku create <NEW_APP_NAME>
+```
+
+## Setup Heroku Config variables
+#### Using existing app config variables
+```
+./tools/get_config_vars.sh <EXISTING_APP_NAME>
+```
+Copy and paste all the lines that start with `export` to make the local environment variables.
+```
+./tools/set_config_vars.sh <NEW_APP_NAME>
+```
+
+#### Use new app config variables
+Set mail config variables.
+```
+export MAIL_PASSWORD=
+export MAIL_USERNAME=
+export MAIL_SERVER=
+export MAIL_SENDER=
+```
+
+Make new encryption keys if needed - do not update these if the new app is being tied to the same database as EXISTING_APP_NAME
+```
+export AES_KEY=`python tools/generate_aes_key.py`
+export SECRET_KEY=`python tools/generate_secret_key.py` 
+export PEPPER=`python tools/generate_pepper.py`
+```
+
+Upload the config variables
+```
+./tools/set_config_vars.sh <NEW_APP_NAME>
+```
+
+## Hook up a database
+#### New database:
+```
+heroku addons:create heroku-postgresql:hobby-dev --app=<NEW_APP_NAME>
+```
+Then initialize the database (assuming flask migrations is already setup)
+```
+export DATABASE_URL=`heroku config --app=<NEW_APP_NAME> | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
+flask db upgrade
+tools/reset_and_prepopulate_database.sh
+```
+
+#### Existing database:
+Attach to existing database:
+heroku addons:
+```
+heroku addons:attach <EXISTING_APP>::DATABASE --app=<NEW_APP_NAME>
+```
+
+
 # Work flow - To be changed
 
 An example contribution work flow to lesson content (just javascript and scss/css) is:
@@ -427,7 +485,6 @@ An example contribution work flow to lesson content (just javascript and scss/cs
   * `./build.sh prod deploy test`
 * If the test site looks good, create a pull request.
 
-
 # Useful notes
 ### Removing columns in SQLite
 SQLite doesn't allow dropping of columns with ALTER TABLE. Either recreate table, or copy table
@@ -447,52 +504,4 @@ ALTER TABLE new_user RENAME TO user
 
 ### Removing rows in database
 DELETE from users where id>0;
-
-
-# TBD
-## Deploy to new Heroku App
-
-### Heroku Config variables
-Or get variables from an existing app:
-```
-./tools/get_config_vars.sh <EXISTING_APP_NAME>
-```
-Copy and paste all the lines that start with `export` to make the local environment variables.
-
-Or if no existing app, then set these as new:
-```
-export MAIL_PASSWORD=
-export MAIL_USERNAME=
-export MAIL_SERVER=
-export MAIL_SENDER=
-```
-
-Make new encryption keys if needed - do not update these if the new app is being tied to the same database as EXISTING_APP_NAME
-```
-export AES_KEY=`python tools/generate_aes_key.py`
-export SECRET_KEY=`python tools/generate_secret_key.py` 
-export PEPPER=`python tools/generate_pepper.py`
-```
-
-Upload the config variables
-```
-./tools/set_config_vars.sh <NEW_APP_NAME>
-```
-
-### Hook up a database
-#### New database:
-```
-heroku addons:create heroku-postgresql:hobby-dev --app=<NEW_APP_NAME>
-```
-Then initialize the database (assuming flask migrations is already setup)
-```
-export DATABASE_URL=`heroku config --app=<NEW_APP_NAME> | grep DATABASE_URL | sed 's/DATABASE_URL: *//'`
-flask db upgrade
-```
-
-Attach to existing database:
-heroku addons:
-```
-heroku addons:attach <EXISTING_APP>::DATABASE --app=<NEW_APP_NAME>
-```
 
