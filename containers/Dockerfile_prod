@@ -29,11 +29,5 @@ RUN chown myuser app/app.db
 RUN chmod 666 app/app.db
 USER myuser
 
-# ARG mail_password
-# ARG database_url
-# ENV MAIL_PASSWORD=$mail_password
-# ENV DATABASE_URL=$database_url
-
-
 
 CMD gunicorn --bind 0.0.0.0:$PORT wsgi

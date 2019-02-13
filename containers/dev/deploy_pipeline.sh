@@ -27,10 +27,10 @@ title() {
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
 
-# From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
-# where Travis errors out if too much information goes on stdout and some
-# npm package is blocking stdout.
-python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
+# # From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
+# # where Travis errors out if too much information goes on stdout and some
+# # npm package is blocking stdout.
+# python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
 
 
 ###########################################################################

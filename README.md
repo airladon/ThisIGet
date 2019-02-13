@@ -90,66 +90,94 @@ Only needed if in production - hex pepper that is used to hash emails
 
 
 ## Interactive Dev Environment container
-A docker container can be used to do lint and type checking, and tests. To start the container
+A docker container can be used to do lint and type checking, and tests, building, and deployments. To start the container
+
 * `./startenv dev`
 
-This will bring up a prompt which is a python virtual environment, within a bash shell session within the container.
+This will bring up a bash prompt.
 
-From here you can:
-* Perform type and linting checks:
-  * Javascript:
-    * `flow`
-    * `npm run lint`
-  * CSS:
-    * `npm run css`
-  * Python:
-    * `flake8`
+From here you can perform:
+* Type and linting checks:
+  * `flow` for Javascript type checking
+  * `npm run lint` for Javascript linting
+  * `npm run css` for CSS/SCSS linting
+  * `flake8` for python linting
 
-* Perform unit testing:
-  * Javascript:
-    * `jest`
-  * Python:
-    * `pytest`
+* Testing:
+  * `jest` for Javascript unit tests
+  * `pytest` for Python unit tests
+  * `./browser_test.sh local` for localhost browser tests
+  * `./browser_test.sh dev` for heroku dev site browser teststests
+  * `./browser_test.sh test` for heroku test site browser tests
+  * `./browser_test.sh beta` for heroku beta site browser tests
+  * `./browser_test.sh prod` for production site browser tests
 
-* Package Javascript files:
-  * `npm run webpack -- --env.mode=dev` or `webpack`
-    * similar to `./build.sh dev` below
-  * `npm run webpack -- --env.mode=stage`
-    * similar to `./build.sh stage` below
-  * `npm run webpack -- --env.mode=prod` or `npm run build`
-    * similar to `./build.sh prod` below
+* Build and Deploy:
+  * `build.sh` Test and build dev version
+  * `build.sh dev` Test and build dev version
+  * `build.sh stage` Test and build stage version
+  * `build.sh prod` Test and build prod version
+  * `build.sh deploy` Deploy prod build to heroku dev site
+  * `build.sh deploy dev` Deploy prod build to heroku dev site
+  * `build.sh deploy APP_NAME` Deploy prod build to APP_NAME
+  * `build.sh deploy APP_NAME skip-tests` deploy APP_NAME skipping tests
+  * `build.sh deploy APP_NAME skip-tests skip-build` deploy APP_NAME skipping test and build steps
+
+>> `build.sh` can also be used to deploy to heroku test, beta and prod sites,
+>> but this should normally be done using the pipeline deployment (below)
+>> * `build.sh deploy test` Deploy prod build to heroku test site
+>> * `build.sh deploy beta` Deploy prod build to heroku beta site
+>> * `build.sh deploy thisiget` Deploy prod build to thisiget
+
+* Pipeline deploy
+  * `deploy_pipline.sh`
+    * Lint and type check
+    * Unit tests
+    * Production build and package (webpack) of javascript
+    * Deploy to heroku test site (test site database)
+    * Run test site browser tests
+    * Deploy to beta test site (production database)
+    * Run beta site browser tests
+    * Deploy to production site
+    * Run production site browser tests
+    * Roll back production site if error occurs in final browser tests
 
 * Run flask:
   * `flask run --host=0.0.0.0`
     * Can be accessed through a browser at `localhost:5002`
-    * You would only do this for deep debugging purposes, generally running the `dev-server` container (below) is sufficent.
+    * You would only do this for some debugging purposes, generally running the `dev-server` container (below) is sufficent.
+
+Note, to do any deployments the HEROKU_API_KEY associated with the accounts to deploy to needs to be set as an environment variable.
 
 ## Dev-Server Container
 `./startenv dev-server`
 
-Automatic environment that hosts app at `localhost:5003`
-  * Automatically rebuilds and rehosts app each time a source file is changed
-  * Browser cache might need to be cleared each time
-    * Safari: CMD+OPT+e, then CMD+r
-    * Chrome: Hold click the refresh icon and select `Empty Cache and Reload` (only works in developer mode)
-  * Uses localally built react js files
-
+* Dev container (same as interactive dev container) with node, python and all development libraries installed.
+* Files mounted as volumnes to local file system
+* Local compiled version of React
+* Runs Flask automatically at `localhost:5003`
+  - Can see flask requests and responses
 
 ## Stage Container
 `./startenv stage`
 
-Automatic environment that runs flask and hosts app at `localhost:5001`
-  * Container has no npm packages installed, and only the python packages needed for production.
-  * Can see flask requests and responses
-  * Uses development versions of react from CDN
-  * Should run `./build.sh stage` locally, or `webpack --env.mod=stage` in the dev container first
+* **Python base container (same as prod)**
+* **Only python packages needed for production**
+* Files mounted as volumes to local file system
+* **Development version of React from CDN**
+* Runs Flask automatically at `localhost:5001`
+   - Can see flask requests and responses
 
 ## Production Container
 `./startenv prod`
-Automatic environment that runs nginx and hosts app at `localhost:5000`
-  * Container has no npm packages installed, and only the python packages needed for production.  
-  * Uses minified production versions of react from CDN
-  * Should run `./build.sh prod` locally, or `webpack --env.mod=prod` in the dev container first to build the needed js files.
+
+* Python base container (same as prod)
+* Only python packages needed for production
+* **All files copied into container - no mounted volumes**
+* **Production (minified) version of React from CDN**
+* **nginx automatically at `localhost:5000`**
+   - Cannot see flask requests and responses
+
 
 ## Build
 
