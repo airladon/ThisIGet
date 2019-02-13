@@ -124,7 +124,7 @@ sleep 5s
 check_status
 
 title "Browser Tests: thisiget"
-docker_run_browser_test 'https://thisiget.com'
+docker_run_browser_test 'https://www.thisiget.com'
 if [ $? != 0 ];
 then
     docker run -it --rm \
@@ -135,15 +135,16 @@ then
         devenv-builder \
         rollback $CURRENT_VERSION
 
-    NEW_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
-    echo "${red}${bold}Production deployment failed${reset}"
-    if [ "$NEW_VERSION" = "$CURRENT_VERSION" ];
-    then
-        echo "${red}${bold}Rolled back to $CURRENT_VERSION${reset}"
-        echo
-    else
-        echo "${red}${bold}Rollback to $CURRENT_VERSION failed${reset}"
-        echo
+    # NEW_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
+    # echo "${red}${bold}Production deployment failed${reset}"
+    # if [ "$NEW_VERSION" = "$CURRENT_VERSION" ];
+    # then
+    echo "${red}${bold}Rolled back to $CURRENT_VERSION${reset}"
+    echo
+    # else
+    #     echo "${red}${bold}Rollback to $CURRENT_VERSION failed${reset}"
+    #     echo
+    # fi
     exit 1
 fi
 
