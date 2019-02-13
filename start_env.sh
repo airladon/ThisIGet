@@ -127,28 +127,35 @@ then
     devenv-$1 \
     bash
 else
+  # docker volume create browser-tests
+  # docker run 
   docker run -it --rm \
+    -v $PROJECT_PATH/containers:/opt/app/containers \
+    -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
+    -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
+    -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
+    -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
+    -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
+    -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
+    -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \
     -v $PROJECT_PATH/migrations:/opt/app/migrations \
     -v $PROJECT_PATH/reports:/opt/app/reports \
-    -v $PROJECT_PATH/containers:/opt/app/containers \
-    -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
-    -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
-    -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
-    -v $PROJECT_PATH/containers/dev/lessons.js:/opt/app/lessons.js \
-    -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
+    -v $PROJECT_PATH/.babelrc:/opt/app/.babelrc \
+    -v $PROJECT_PATH/.eslintignore:/opt/app/.eslintignore \
     -v $PROJECT_PATH/.eslintrc.json:/opt/app/.eslintrc.json \
     -v $PROJECT_PATH/.flake8:/opt/app/.flake8 \
     -v $PROJECT_PATH/.flowconfig:/opt/app/.flowconfig \
-    -v $PROJECT_PATH/.babelrc:/opt/app/.babelrc \
-    -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
+    -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
-    -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
-    -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
+    -v $PROJECT_PATH/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
+    -v $PROJECT_PATH/jest.config.js:/opt/app/jest.config.js \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
+    -e=HOST_PATH=$PROJECT_PATH \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINTER_PORT \
     devenv-$1 $CMD

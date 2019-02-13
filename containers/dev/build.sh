@@ -186,7 +186,7 @@ then
   echo
   echo "${bold}${cyan}===================== Testing ======================${reset}"
   run_cmd "JS Testing" "npm run jest"
-  run_cmd "Python Testing" "/opt/app/start.sh pytest"
+  run_cmd "Python Testing" "pytest"
   echo
 fi
 

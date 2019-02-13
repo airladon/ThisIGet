@@ -1,7 +1,7 @@
 {
-  "name": "itiget",
+  "name": "thisiget",
   "version": "0.1.0",
-  "description": "itiget webapp.",
+  "description": "thisiget webapp.",
   "main": "index.js",
   "directories": {
     "test": "tests"
@@ -17,14 +17,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/airladon/itiget.git"
+    "url": "git+https://github.com/airladon/thisiget.git"
   },
   "author": "airladon",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/airladon/itiget/issues"
+    "url": "https://github.com/airladon/thisiget/issues"
   },
-  "homepage": "https://github.com/airladon/itiget#readme",
+  "homepage": "https://github.com/airladon/thisiget#readme",
   "dependencies": {
     "figureone": "0.0.20",
     "react": "^16.6.3",

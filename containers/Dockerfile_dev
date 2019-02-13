@@ -18,57 +18,43 @@ RUN npm install
 ADD requirements.txt .
 RUN pip install --no-cache-dir -q -r requirements.txt
 
-
 # This is the folder that will be shared with the docker host machine
-RUN mkdir app
-RUN mkdir tests
-RUN mkdir src
-
-
-# Linting
-ADD .eslintrc.json .
-ADD .eslintignore .
-ADD .flowconfig .
-ADD .stylelintrc .
-ADD .stylelintignore .
-
-# Testing
-ADD jest.config.js .
-
-# Packaging
-ADD containers/dev/webpack.config.js .
-ADD containers/dev/getLessons.js .
-ADD containers/dev/setFilesForBuild.js .
-ADD containers/dev/update_paths.py .
-ADD .babelrc .
+# RUN mkdir app
+# RUN mkdir tests
+# RUN mkdir src
 
 # Update path so eslint can be run from anywhere
 ENV PATH="/opt/app/node_modules/.bin:${PATH}"
-
-
-# ## Python ##
-
-# Python linting
-ADD .flake8 .
-ADD containers/dev/pytest.ini .
 
 
 # Environment variable for flask
 ENV FLASK_APP app/my_app.py
 ENV FLASK_DEBUG 1
 
-# Dev server script
+# Add Files that are needed and rarely change - all these files will be mapped
+# directly to the volume if using start_env.sh and so will be overwritten, but
+# in the pipeline, these are used.
+ADD containers/dev/browser_test.sh .
+ADD containers/dev/build.sh .
 ADD containers/dev/dev-server.sh .
+ADD containers/dev/getLessons.js .
+ADD containers/dev/pytest.ini .
+ADD containers/dev/setFilesForBuild.js .
+ADD containers/dev/update_paths.py .
+ADD containers/dev/webpack.config.js .
+ADD .babelrc .
+ADD .eslintignore .
+ADD .eslintrc.json .
+ADD .flake8 .
+ADD .flowconfig .
+ADD .stylelintignore .
+ADD .stylelintrc .
+ADD deploy_pipeline.sh .
+ADD jest.config.js .
 
 RUN npm install figureone@0.0.20
 
 # Use this is you want to load straight into flask
 # CMD ["flask", "run", "--host=0.0.0.0"]
 
-# ARG mail_password
-# ARG database_url
-# ENV MAIL_PASSWORD=$mail_password
-# ENV DATABASE_URL=$database_url
-
-ADD containers/dev/start.sh .
 ENTRYPOINT ["bash"]
