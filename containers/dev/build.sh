@@ -28,6 +28,7 @@ normal="\\033[2m"
 MODE=prod
 DEPLOY=no_deploy
 TESTS=run
+BUILD=run
 HEROKU_APP_NAME=thisiget            # Production app name on Heroku
 HEROKU_BETA_APP_NAME=thisiget-beta  # Testing with production database
 HEROKU_TEST_APP_NAME=thisiget-test  # Automated web app testing
@@ -89,6 +90,14 @@ then
   if [ "$3" = "skip-tests" ];
   then
     TESTS=skip
+  fi
+fi
+
+if [ "$4" ];
+then
+  if [ "$4" = "skip-build" ];
+  then
+    BUILD=skip
   fi
 fi
 
@@ -181,9 +190,12 @@ then
   echo
 fi
 
-echo
-echo "${bold}${cyan}==================== Packaging =====================${reset}"
-run_cmd "Packaging" "npm run webpack -- --env.mode=$MODE"
+if [ "$BUILD" = run ];
+then
+  echo
+  echo "${bold}${cyan}==================== Packaging =====================${reset}"
+  run_cmd "Packaging" "npm run webpack -- --env.mode=$MODE"
+fi
 
 
 if [ "$DEPLOY" = "deploy" ];
