@@ -64,8 +64,6 @@ docker_run_browser_test() {
         --name devenv-browser-test \
         --entrypoint "jest" \
         airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer
-
-    check_status
 }
 
 title() {
@@ -102,7 +100,7 @@ check_status
 
 title "Browser Tests: thisiget-test"
 docker_run_browser_test 'https://thisiget-test.herokuapp.com'
-
+check_status
 
 ###########################################################################
 title "Deploy to thisiget-beta"
@@ -114,7 +112,7 @@ check_status
 
 title "Browser Tests: thisiget-beta"
 docker_run_browser_test 'https://thisiget-beta.herokuapp.com'
-
+check_status
 
 ###########################################################################
 CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
