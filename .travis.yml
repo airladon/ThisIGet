@@ -23,5 +23,5 @@ script:
     else echo $TRAVIS_PULL_REQUEST_BRANCH; fi)
   - export IN_TRAVIS=1
   - export HEROKU_API_KEY=$HEROKU_TOKEN
-  - ./build.sh prod deploy
+  - ./travis_build.sh
 
