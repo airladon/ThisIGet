@@ -407,7 +407,7 @@ Remove existing virtual environment
 Setup new virtual environment
 
 
-# Work flow
+# Work flow - To be changed
 
 An example contribution work flow to lesson content (just javascript and scss/css) is:
 * `git clone https://github.com/airladon/itiget/`
@@ -428,7 +428,7 @@ An example contribution work flow to lesson content (just javascript and scss/cs
 * If the test site looks good, create a pull request.
 
 
-## Useful notes
+# Useful notes
 ### Removing columns in SQLite
 SQLite doesn't allow dropping of columns with ALTER TABLE. Either recreate table, or copy table
 
@@ -449,7 +449,8 @@ ALTER TABLE new_user RENAME TO user
 DELETE from users where id>0;
 
 
-# Deploy to new Heroku App
+# TBD
+## Deploy to new Heroku App
 
 ### Heroku Config variables
 Or get variables from an existing app:
