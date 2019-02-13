@@ -10,6 +10,12 @@ reset=`tput sgr0`
 
 PROJECT_PATH=`pwd`
 
+# From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
+# where Travis errors out if too much information goes on stdout and some
+# npm package is blocking stdout.
+python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
+
+
 echo
 echo "${bold}${cyan}================= Building container ===================${reset}"
 cp containers/Dockerfile_dev Dockerfile
