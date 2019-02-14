@@ -1,6 +1,6 @@
 import pytest  # noqa: F401
 import sys
-# import pdb
+import pdb
 sys.path.insert(0, './app/')
 from app.models import db, Users, Ratings  # noqa E402
 
@@ -88,8 +88,13 @@ def test_set_rating_wrong_input(client):
 
 
 def test_get_rating(client):
-    Ratings.query.delete()
-    login(client)
+    # Check default values
+    res = client.get(f'/rating/{lesson1}').get_json()
+    assert res['status'] == 'ok'
+    assert res['userRating'] == 'not rated'
+    assert res['numRatings'] == 0
+    assert res['aveRating'] == 0
+    assert res['numHighRatings'] == 0
 
     # Create the rating
     res = client.get(f'/rate/{lesson1}/5').get_json()
@@ -97,7 +102,6 @@ def test_get_rating(client):
 
     res = client.get(f'/rating/{lesson1}').get_json()
     assert res['status'] == 'ok'
-    # pdb.set_trace()
     assert res['userRating'] == 5
     assert res['numRatings'] == 1
     assert res['aveRating'] == 5
