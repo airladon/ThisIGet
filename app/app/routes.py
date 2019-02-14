@@ -325,28 +325,29 @@ def isInt(s):
 
 
 @check_confirmed
-@app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
-def rate(lesson_uid, topic, version_uid, rating_value):
+@app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
+def rate(lesson_uid, topic_name, version_uid, rating_value):
     status = 'not logged in'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
             return jsonify(
                 {'status': 'fail', 'message': 'lesson does not exist'})
-        version = Versions.query.filter_by(
-            lesson_id=lesson.id, uid=version_uid).first()
-        if version is None:
-            return jsonify(
-                {'status': 'fail', 'message': 'version does not exist'})
         topic = Topics.query.filter_by(
-            lesson=lesson, version=version, name=topic).first()
+            lesson=lesson, name=topic_name).first()
         if topic is None:
             return jsonify(
                 {'status': 'fail', 'message': 'topic does not exist'})
+        version = Versions.query.filter_by(
+            topic_id=topic.id, uid=version_uid).first()
+        if version is None:
+            return jsonify(
+                {'status': 'fail', 'message': 'version does not exist'})
+
         user_rating = Ratings.query.filter_by(
-            topic=topic, user=current_user).first()
+            version=version, user=current_user).first()
         if user_rating is None:
-            user_rating = Ratings(user=current_user, topic=topic)
+            user_rating = Ratings(user=current_user, version=version)
             db.session.add(user_rating)
         if rating_value not in ['1', '2', '3', '4', '5']:
             return jsonify(
@@ -354,8 +355,9 @@ def rate(lesson_uid, topic, version_uid, rating_value):
         if user_rating.rating != rating_value:
             user_rating.rating = rating_value
 
-        generic_rating = AllRatings(user=current_user, topic=topic)
+        generic_rating = AllRatings(user=current_user, version=version)
         generic_rating.timestamp = datetime.datetime.now()
+        generic_rating.rating = rating_value
 
         page = request.args.get('page')
         pages = request.args.get('pages')
@@ -372,8 +374,8 @@ def rate(lesson_uid, topic, version_uid, rating_value):
 
 
 @check_confirmed
-@app.route('/rating/<lesson_uid>/<topic>/<version_uid>')
-def get_rating(lesson_uid, topic, version_uid):
+@app.route('/rating/<lesson_uid>/<topic_name>/<version_uid>')
+def get_rating(lesson_uid, topic_name, version_uid):
     num_ratings = 0
     ave_rating = 0
     num_high_ratings = 0
@@ -382,16 +384,16 @@ def get_rating(lesson_uid, topic, version_uid):
     lesson = Lessons.query.filter_by(uid=lesson_uid).first()
     if lesson is None:
         return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
-    version = Versions.query.filter_by(
-        lesson_id=lesson.id, uid=version_uid).first()
-    if version is None:
-        return jsonify({'status': 'fail', 'message': 'version does not exist'})
     topic = Topics.query.filter_by(
-        lesson=lesson, version=version, name=topic).first()
+        lesson=lesson, name=topic_name).first()
     if topic is None:
         return jsonify({'status': 'fail', 'message': 'topic does not exist'})
+    version = Versions.query.filter_by(
+        topic_id=topic.id, uid=version_uid).first()
+    if version is None:
+        return jsonify({'status': 'fail', 'message': 'version does not exist'})
 
-    ratings = Ratings.query.filter_by(topic=topic).all()
+    ratings = Ratings.query.filter_by(version=version).all()
     if ratings is None:
         ratings = []
     num_ratings = len(ratings)
@@ -407,7 +409,7 @@ def get_rating(lesson_uid, topic, version_uid):
 
     if current_user.is_authenticated:
         user_rating = Ratings.query.filter_by(
-            user=current_user, topic=topic).first()
+            user=current_user, version=version).first()
         if user_rating is None:
             user_rating_value = 'not rated'
         else:
