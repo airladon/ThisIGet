@@ -178,12 +178,19 @@ class Ratings(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     rating = db.Column(db.Integer, index=True)
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
             self.topic.lesson, self.topic.version, self.topic.name,
             self.rating, self.rating)
+
+
+class AllRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    page = db.Column(db.Integer)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 
 class Comment(db.Model):
