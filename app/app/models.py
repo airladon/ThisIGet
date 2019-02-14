@@ -172,7 +172,8 @@ class Versions(db.Model):
     # topics = db.Column(db.String(512), index=True)
     qr = db.Column(db.String(1024), index=True)
     ratings = db.relationship('Ratings', backref='version', lazy='dynamic')
-    all_ratings = db.relationship('AllRatings', backref='version', lazy='dynamic')
+    all_ratings = db.relationship(
+        'AllRatings', backref='version', lazy='dynamic')
     # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
