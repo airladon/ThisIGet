@@ -340,6 +340,9 @@ def rate(lesson_uid, topic, version_uid, rating_value):
         if rating is None:
             rating = Ratings(user=current_user, topic=topic)
             db.session.add(rating)
+        if rating_value not in ['1', '2', '3', '4', '5']:
+            return jsonify(
+                {'status': 'fail', 'message': 'invalid rating'})
         if rating.rating != rating_value:
             rating.rating = rating_value
             rating.timestamp = datetime.datetime.now()

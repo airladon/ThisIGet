@@ -74,6 +74,18 @@ def test_set_rating_wrong_input(client):
     assert res['status'] == 'fail'
     assert res['message'] == 'version does not exist'
 
+    res = client.get(f'/rate/{lesson1}/6)').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid rating'
+
+    res = client.get(f'/rate/{lesson1}/0)').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid rating'
+
+    res = client.get(f'/rate/{lesson1}/a)').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid rating'
+
 
 def test_get_rating(client):
     Ratings.query.delete()
