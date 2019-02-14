@@ -20,7 +20,7 @@ import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users
-from app.models import Ratings
+from app.models import Ratings, AllRatings
 from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
@@ -316,6 +316,14 @@ def logout():
     # return redirect(url_for('home'))
 
 
+def isInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic, version_uid, rating_value):
@@ -335,17 +343,29 @@ def rate(lesson_uid, topic, version_uid, rating_value):
         if topic is None:
             return jsonify(
                 {'status': 'fail', 'message': 'topic does not exist'})
-        rating = Ratings.query.filter_by(
+        user_rating = Ratings.query.filter_by(
             topic=topic, user=current_user).first()
-        if rating is None:
-            rating = Ratings(user=current_user, topic=topic)
-            db.session.add(rating)
+        if user_rating is None:
+            user_rating = Ratings(user=current_user, topic=topic)
+            db.session.add(user_rating)
         if rating_value not in ['1', '2', '3', '4', '5']:
             return jsonify(
                 {'status': 'fail', 'message': 'invalid rating'})
-        if rating.rating != rating_value:
-            rating.rating = rating_value
-            rating.timestamp = datetime.datetime.now()
+        if user_rating.rating != rating_value:
+            user_rating.rating = rating_value
+
+        generic_rating = AllRatings(user=current_user, topic=topic)
+        generic_rating.timestamp = datetime.datetime.now()
+
+        page = request.args.get('page')
+        pages = request.args.get('pages')
+        if page is not None and pages is not None \
+           and isInt(page) and isInt(pages) \
+           and int(page) < int(pages):
+            generic_rating.page = page
+            generic_rating.pages = pages
+
+        db.session.add(generic_rating)
         db.session.commit()
         status = 'done'
     return jsonify({'status': status})
@@ -356,6 +376,7 @@ def rate(lesson_uid, topic, version_uid, rating_value):
 def get_rating(lesson_uid, topic, version_uid):
     num_ratings = 0
     ave_rating = 0
+    num_high_ratings = 0
     user_rating_value = 'not logged in'
 
     lesson = Lessons.query.filter_by(uid=lesson_uid).first()
@@ -375,8 +396,11 @@ def get_rating(lesson_uid, topic, version_uid):
         ratings = []
     num_ratings = len(ratings)
     sum_ratings = 0
+    num_high_ratings = 0
     for r in ratings:
         sum_ratings += r.rating
+        if r >= 4:
+            num_high_ratings += 1
     ave_rating = 0
     if num_ratings > 0:
         ave_rating = sum_ratings / num_ratings
@@ -393,4 +417,5 @@ def get_rating(lesson_uid, topic, version_uid):
         'message': '',
         'userRating': user_rating_value,
         'numRatings': num_ratings,
-        'aveRating': ave_rating})
+        'aveRating': ave_rating,
+        'numHighRatings': num_high_ratings})

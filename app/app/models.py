@@ -58,6 +58,7 @@ class Users(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
     ratings = db.relationship('Ratings', backref='user', lazy='dynamic')
+    ratings = db.relationship('AllRatings', backref='user', lazy='dynamic')
     last_login = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -168,6 +169,7 @@ class Topics(db.Model):
     lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
     version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
     ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
+    ratings = db.relationship('AllRatings', backref='topic', lazy='dynamic')
 
     def __repr__(self):
         return '<Topics {}>'.format(self.name)
@@ -190,6 +192,7 @@ class AllRatings(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
     topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     page = db.Column(db.Integer)
+    pages = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
 

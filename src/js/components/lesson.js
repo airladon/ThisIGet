@@ -124,7 +124,9 @@ export default class LessonComponent extends React.Component
     }
     const lessonUid = this.lessonDetails.details.uid;
     const versionUid = this.versionDetails.details.uid;
-    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}`;
+    const { page } = this.state;
+    const  = (this.state.page + 1) / 
+    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}?page=${this.state.page + 1};pages=${this.state.numPages}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
