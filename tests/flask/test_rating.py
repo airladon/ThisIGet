@@ -45,14 +45,14 @@ def test_set_rating(client):
     # Check the rating is 4
     rating = Ratings.query.filter_by(user_id=user_id).first()
     assert rating.rating == 4
-    time = rating.timestamp
+    # time = rating.timestamp
 
     # Overwrite the rating to 3
     res = client.get(f'/rate/{lesson1}/3').get_json()
     assert res['status'] == 'done'
     rating = Ratings.query.filter_by(user_id=user_id).first()
     assert rating.rating == 3
-    assert rating.timestamp > time
+    # assert rating.timestamp > time
 
 
 def test_set_rating_not_logged_in(client):
@@ -101,6 +101,7 @@ def test_get_rating(client):
     assert res['userRating'] == 5
     assert res['numRatings'] == 1
     assert res['aveRating'] == 5
+    assert res['numHighRatings'] == 1
 
     # Create a second rating for a different lesson
     logout(client)
@@ -113,3 +114,4 @@ def test_get_rating(client):
     assert res['userRating'] == 3
     assert res['numRatings'] == 2
     assert res['aveRating'] == 4
+    assert res['numHighRatings'] == 1

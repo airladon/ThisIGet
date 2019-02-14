@@ -50,18 +50,18 @@ def addRating(lesson_uid, topic_name, version_uid, rating_value, username):
 
 addUser('airladon', 'airladon@gmail.com', 'asdfasdf')
 for i in range(10):
-    username = f'test_user{i:03}'
+    username = f'test_user_{i:03}'
     email = f'{username}@thisiget.com'
-    password = 'asdfasdf'
+    password = '12345678'
     addUser(username, email, password)
 
-addRating('equilateral_triangles', 'explanation', 'base', 1, 'test_user000')
-addRating('equilateral_triangles', 'explanation', 'base', 2, 'test_user001')
-addRating('equilateral_triangles', 'explanation', 'base', 3, 'test_user002')
-addRating('equilateral_triangles', 'explanation', 'base', 4, 'test_user003')
-addRating('equilateral_triangles', 'explanation', 'base', 5, 'test_user004')
-addRating('equilateral_triangles', 'explanation', 'base', 1, 'test_user005')
-addRating('equilateral_triangles', 'explanation', 'base', 2, 'test_user006')
-addRating('equilateral_triangles', 'explanation', 'base', 3, 'test_user007')
-addRating('equilateral_triangles', 'explanation', 'base', 4, 'test_user008')
-addRating('equilateral_triangles', 'explanation', 'base', 5, 'test_user009')
+addRating('equilateral_triangles', 'explanation', 'base', 1, 'test_user_000')
+addRating('equilateral_triangles', 'explanation', 'base', 2, 'test_user_001')
+addRating('equilateral_triangles', 'explanation', 'base', 3, 'test_user_002')
+addRating('equilateral_triangles', 'explanation', 'base', 4, 'test_user_003')
+addRating('equilateral_triangles', 'explanation', 'base', 5, 'test_user_004')
+addRating('equilateral_triangles', 'explanation', 'base', 1, 'test_user_005')
+addRating('equilateral_triangles', 'explanation', 'base', 2, 'test_user_006')
+addRating('equilateral_triangles', 'explanation', 'base', 3, 'test_user_007')
+addRating('equilateral_triangles', 'explanation', 'base', 4, 'test_user_008')
+addRating('equilateral_triangles', 'explanation', 'base', 5, 'test_user_009')

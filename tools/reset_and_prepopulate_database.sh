@@ -8,27 +8,28 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
-if [ -z $DATABASE_URL ];
-then
-  echo DATABASE_URL not set
-  exit 1
-fi
+# if [ -z $DATABASE_URL ];
+# then
+#   echo DATABASE_URL not set
+#   exit 1
+# fi
 
-DATABASE_NAME=thisiget_local
+# DATABASE_NAME=thisiget_local
+APP_OR_DB_NAME=''
 if [ $1 ];
 then
   if [ $1 == 'help' ] || [ $1 == '--help' ];
   then
     echo
     echo 'Usage:'
-    echo '      reset_and_prepopulate_database.sh <DB_NAME> <init_flask>'
+    echo '      reset_and_prepopulate_database.sh [APP_NAME|DATABASE_NAME] [init_flask]'
     echo
-    echo 'Where DB_NAME is name of database at URL defined in environment variable DATABASE_URL.'
+    echo 'Resets and prepopulates database at DATABASE_URL. If DATABASE_URL is undefined, then will reset and prepopulate local SQLite db.'
     echo 'Use "init_flask" if you want to remove migrations and reinitialize flask db'
     echo
     exit 1   
   fi
-  DATABASE_NAME=$1
+  # DATABASE_NAME=$1
 fi
 
 INITIALIZE_FLASK_DB=0
@@ -40,22 +41,41 @@ then
   fi
 fi
 
-# echo $DATABASE_URL
-# echo "postgresql://postgres@localhost/$DATABASE_NAME"
-REMOTE=1
-if [ $DATABASE_URL = "postgresql://postgres@localhost/$DATABASE_NAME" ];
+if [ $1 ];
 then
-  REMOTE=0
+  if [ $1 == 'init_flask' ];
+  then
+    INITIALIZE_FLASK_DB=1
+  else
+    APP_OR_DB_NAME=$1
+  fi
 fi
-if [ $DATABASE_URL = "postgresql://postgres@host.docker.internal/$DATABASE_NAME" ];
+
+REMOTE=0
+LOCALHOST=`echo $DATABASE_URL | grep localhost`
+LOCALDOCKER=`echo $DATABASE_URL | grep docker.internal`
+if [ -z $LOCALHOST ] && [ -z $LOCALDOCKER ] && [ $DATABASE_URL ];
 then
-  REMOTE=0
+  REMOTE=1
+fi
+
+if [ $LOCALHOST ] || [ $LOCALDOCKER ];
+then
+  if [ -z APP_OR_DB_NAME ];
+  then
+    echo "Cannot overwrite a local postgress database without a database name"
+    exit 1
+  fi
 fi
 
 if [ $REMOTE == 1 ];
 then
+  if [ -z APP_OR_DB_NAME ];
+  then
+    echo "Cannot overwrite a remote database without an app name"
+    exit 1
+  fi
   echo "${yellow}About to overwrite remote database ${reset}"
-  echo "You need to have already reset the database"
   while true; do
     read -p "${yellow}Are you sure you want to continue?${reset} (y/n/c): " ync
     case $ync in
@@ -64,32 +84,46 @@ then
       [Cc]* ) echo Cancelled; exit 1;;
       * ) echo "Please answer yes or no.";;
     esac
-  done
+  done  
 fi
 
-if [ $REMOTE == 0 ];
+if [ $INITIALIZE_FLASK_DB == 1 ];
 then
   echo
-  echo "${bold}${cyan}==== Resetting Database =====${reset} "
+  echo "${bold}${cyan}==== Removing Migrations =====${reset} "
+  rm -rf migrations
+  echo done
+
+  echo
+  echo "${bold}${cyan}==== Flask db init =====${reset} "
+  flask db init
+
+  echo
+  echo "${bold}${cyan}==== Flask db migrate =====${reset} "
+  flask db migrate
+fi
+
+if [ -z $DATABASE_URL ];
+then
+  echo
+  echo "${bold}${cyan}==== Resetting SQLite Database =====${reset} "
+  rm app/app/app.db
+fi
+
+if [ $LOCALHOST ] || [ $LOCALDOCKER ];
+then
+  echo
+  echo "${bold}${cyan}==== Resetting Database $APP_OR_DB_NAME =====${reset} "
   psql -c "drop database $DATABASE_NAME"
   psql -c "create database $DATABASE_NAME"
-
-  if [ $INITIALIZE_FLASK_DB == 1 ];
-  then
-    echo
-    echo "${bold}${cyan}==== Removing Migrations =====${reset} "
-    rm -rf migrations
-    echo done
-
-    echo
-    echo "${bold}${cyan}==== Flask db init =====${reset} "
-    flask db init
-
-    echo
-    echo "${bold}${cyan}==== Flask db migrate =====${reset} "
-    flask db migrate
-  fi
 fi
+
+if [ $REMOTE == 1 ];
+then 
+  echo "${bold}${cyan}==== Resetting Database for $APP_OR_DB_NAME =====${reset} "
+  heroku pg:reset -a $APP_OR_DB_NAME
+fi
+
 echo
 echo "${bold}${cyan}==== Flask db upgrade =====${reset} "
 flask db upgrade

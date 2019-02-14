@@ -25,7 +25,7 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -159,6 +159,7 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username.ilike(form.username_or_email.data)).first()
+        # pdb.set_trace()
         if user is None:
             formatted_email = format_email(form.username_or_email.data)
             user = Users.query.filter_by(
@@ -401,7 +402,7 @@ def get_rating(lesson_uid, topic_name, version_uid):
     num_high_ratings = 0
     for r in ratings:
         sum_ratings += r.rating
-        if r >= 4:
+        if r.rating >= 4:
             num_high_ratings += 1
     ave_rating = 0
     if num_ratings > 0:
