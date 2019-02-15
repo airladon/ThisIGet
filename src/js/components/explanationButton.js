@@ -1,12 +1,15 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import * as React from 'react';
 import DropDownButtonBase from './dropDownButtonBase';
+
+const { round } = Fig.tools.math;
 
 export type TypeExplanationButtonListItem = {
   label: string;
   rating?: number;
   numReviews?: number;
+  numHighRatings?: number;
   description?: string;
   link?: Function | string;
   active?: boolean;
@@ -29,16 +32,23 @@ export default class ExplanationButton extends React.Component <Props> {
       return listItem.label;
     }
     let numReviews = listItem.numReviews || 0;
-    let rating = '';
+    let rating = listItem.rating || 0;
+    let numHighRatings = listItem.numHighRatings || 0;
+    let highRatingsSubText = '4 or higher';
     if (numReviews > 0) {
-      rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
-      if (rating === '') {
-        rating = '-';
-      }
-      numReviews = (numReviews).toLocaleString('en');
+      // rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
+      // if (rating === '') {
+      //   rating = '-';
+      // }
+      rating = (rating).toLocaleString('en');
+      numReviews = `${(numReviews).toLocaleString('en')} reviews`;
+      numHighRatings = `${round(parseInt(numHighRatings, 10) / parseInt(numReviews, 10) * 100, 0)}%`;
     }
     if (numReviews === 0) {
       numReviews = '';
+      rating = '';
+      numHighRatings = '';
+      highRatingsSubText = '';
     }
     let label = '';
     let description = '';
@@ -65,6 +75,14 @@ export default class ExplanationButton extends React.Component <Props> {
           </div>
           <div className="explanation_button__rating_num_reviews">
             {numReviews}
+          </div>
+        </td>
+        <td className="explanation_button__rating">
+          <div className="explanation_button__rating_value">
+            {numHighRatings}
+          </div>
+          <div className="explanation_button__rating_num_reviews">
+            {highRatingsSubText}
           </div>
         </td>
       </tr>

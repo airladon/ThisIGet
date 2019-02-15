@@ -599,6 +599,7 @@ export default class LessonComponent extends React.Component
             link,
             rating: rating.aveRating,
             numReviews: rating.numRatings,
+            numHighRatings: rating.numHighRatings,
             description,
             active,
             onPath,

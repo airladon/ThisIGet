@@ -406,7 +406,7 @@ def get_rating(lesson_uid, topic_name, version_uid):
             num_high_ratings += 1
     ave_rating = 0
     if num_ratings > 0:
-        ave_rating = sum_ratings / num_ratings
+        ave_rating = round(sum_ratings / num_ratings, 1)
 
     if current_user.is_authenticated:
         user_rating = Ratings.query.filter_by(
