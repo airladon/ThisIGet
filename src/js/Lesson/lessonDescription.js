@@ -1,5 +1,6 @@
 // @flow
 import Fig from 'figureone';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 const { Point } = Fig;
 
@@ -20,6 +21,21 @@ export type TypeLessonDescription = {
     topics: Array<string>;
     qr: Array<string>;
   }};
+  topics: {
+    [versionName: string]: {
+      title: string;
+      description: string;
+      onPath: boolean;
+      qr: Array<string>;
+      path: string,
+      aveRating: number;
+      numRatings: number;
+      numHighRatings: number;
+    };
+  };
+  numVersions: number;
+  callbackCount: number;
+  getRatings: (Function) => {};
 };
 
 export default class LessonDescription {
@@ -38,6 +54,22 @@ export default class LessonDescription {
     qr: Array<string>;
     path: string,
   }};
+
+  topics: {
+    [versionName: string]: {
+      title: string;
+      description: string;
+      onPath: boolean;
+      qr: Array<string>;
+      path: string;
+      aveRating: number;
+      numRatings: number;
+      numHighRatings: number;
+    };
+  };
+
+  numVersions: number;
+  callbackCount: number;
 
   enabled: boolean;
   qr: Array<string>;
@@ -70,7 +102,7 @@ export default class LessonDescription {
     }
     this.dependencies = lesson.dependencies;
     this.uid = lesson.uid;
-    this.versions = {};
+    this.versions = {};       // Deprecate
     Object.keys(lesson.versions).forEach((key) => {
       const version = lesson.versions[key];
       const {
@@ -81,6 +113,69 @@ export default class LessonDescription {
       };
     });
     this.enabled = lesson.enabled;
+
+    this.topics = {};
+    this.numVersions = 0;
+    this.callbackCount = 0;
+    Object.keys(lesson.versions).forEach((versionName) => {
+      const version = lesson.versions[versionName];
+      const {
+        title, description, onPath, topics, qr, path,
+      } = version;
+      topics.forEach((topicName) => {
+        if (this.topics[topicName] == null) {
+          this.topics[topicName] = {};
+        }
+        this.topics[topicName][versionName] = {
+          title,
+          description,
+          onPath,
+          qr,
+          path,
+          aveRating: 0,
+          numRatings: 0,
+          numHighRatings: 0,
+        };
+        this.numVersions += 1;
+      });
+    });
+  }
+
+  waitThenCallback(callback: Function) {
+    this.callbackCount += 1;
+    if (this.callbackCount === this.numVersions) {
+      callback();
+    }
+  }
+
+  getRatings(callback: Function) {
+    this.callbackCount = 0;
+    Object.keys(this.topics).forEach((topicName) => {
+      const topic = this.topics[topicName];
+      Object.keys(topic).forEach((versionUID) => {
+        const version = topic[versionUID];
+        const link = `/rating/${this.uid}/${topicName}/${versionUID}`;
+        fetchPolyfill(link, { credentials: 'same-origin' })
+          .then((response) => {
+            if (!response.ok) {
+              this.waitThenCallback(callback);
+              throw Error(response.statusText);
+            }
+            return response.json();
+          })
+          .then((data) => {
+            if (data.status === 'ok') {
+              version.aveRating = data.aveRating;
+              version.numRatings = data.numRatings;
+              version.numHighRatings = data.numHighRatings;
+            }
+            this.waitThenCallback(callback);
+          })
+          .catch(() => {
+            this.waitThenCallback(callback);
+          });
+      });
+    });
   }
 }
 

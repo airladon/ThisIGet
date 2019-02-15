@@ -34,6 +34,15 @@ type State = {
     active?: boolean;
   }>;
   userRating: number;
+  ratings: {
+    [topicName: string]: {
+      [versionName: string]: {
+        aveRating: number,
+        numRatings: number,
+        numHighRatings: number,
+      },
+    }
+  },
 };
 
 function getLessonDescription(uid: string) {
@@ -64,17 +73,20 @@ export default class LessonComponent extends React.Component
 
   constructor(props: Props) {
     super(props);
+    
+    this.firstPage = parseInt(getCookie('page'), 10) - 1;
+    this.lesson = props.lesson;
+    this.lessonDetails = props.lessonDetails;
+    this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
+    console.log(this.lessonDescription);
     this.state = {
       htmlText: '',
       numPages: 0,
       page: 0,
       listOfSections: [],
       userRating: 0,
+      ratings: this.fillRatings(),
     };
-    this.firstPage = parseInt(getCookie('page'), 10) - 1;
-    this.lesson = props.lesson;
-    this.lessonDetails = props.lessonDetails;
-    this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
     this.versionDetails = props.versionDetails;
     const [topic] = window.location.pathname.split('/').slice(-1);
     this.topic = topic;
@@ -84,6 +96,35 @@ export default class LessonComponent extends React.Component
     this.centerLessonFlag = false;
     this.showNavigator = false;
     this.getRating(this.topic);
+    // this.getRatings();
+    this.lessonDescription.getRatings(this.gotRatings.bind(this));
+  }
+
+  fillRatings() {
+    const { lessonDescription } = this;
+    if (lessonDescription != null) {
+      const ratings = {};
+      Object.keys(lessonDescription.topics).forEach((topicName) => {
+        const topic = lessonDescription.topics[topicName];
+        if (!(topicName in ratings)) {
+          ratings[topicName] = {};
+        }
+        Object.keys(topic).forEach((versionUID) => {
+          const version = topic[versionUID];
+          ratings[topicName][versionUID] = {
+            aveRating: version.aveRating,
+            numRatings: version.numRatings,
+            numHighRatings: version.numHighRatings,
+          };
+        });
+      });
+      return ratings;
+    }
+    return {};
+  }
+
+  gotRatings() {
+    this.setState( {ratings: this.fillRatings() });
   }
 
   getRating(topic: string) {
@@ -111,11 +152,68 @@ export default class LessonComponent extends React.Component
       .catch(() => {});
   }
 
+  // getRatings() {
+  //   const { lessonDescription } = this;
+  //   // const topics = {};
+  //   // const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+
+  //   const ratingsState = {};
+  //   if (lessonDescription != null) {
+  //     Object.keys(lessonDescription.topics).forEach((topicName) => {
+  //       if (!(topicName in ratingsState)) {
+  //         ratingsState[topic_name] = {};
+  //       }
+  //       Object.keys(lessonDescription.topics[topic_name]).forEach((versionName) => {
+  //         ratingsState[topicName][versionName] = {};
+  //       });
+  //     });
+  //     Object.keys(lessonDescription.versions).forEach((vUID) => {
+  //       const version = lessonDescription.versions[vUID];
+  //       version.topics.forEach((topic) => {
+  //         if (!(topic in topics)) {
+  //           topics[topic] = {};
+  //         }
+  //         let rating;
+  //         fetchPolyfill(`/rating/${lessonDescription.uid}/${topic}/${vUID}`, { credentials: 'same-origin' })
+  //         .then((response) => {
+  //           if (!response.ok) {
+  //             throw Error(response.statusText);
+  //           }
+  //           return response.json();
+  //         })
+  //         .then((data) => {
+  //           rating = data
+  //           console.log(data)
+  //         })
+  //         .catch(() => {});
+  //         console.log(topic, rating)
+  //         if (rating == null) {
+  //           const num = Math.floor(Math.random() * 10000)
+  //           rating = {
+  //             aveRating: Math.floor(Math.random() * 6),
+  //             numRatings: num,
+  //             numHighRatings: Math.floor(num * Math.random()),
+  //           };
+  //         }
+  //         topics[topic][vUID] = {
+  //           label: version.title,
+  //           link: `${lessonDescription.path}/${version.path}/${topic}`,
+  //           rating: rating.aveRating,
+  //           numReviews: rating.numRatings,
+  //           description: version.description,
+  //           active,
+  //           onPath: version.onPath,
+  //         };
+  //       });
+  //     });
+  //   }
+  //   return topics;
+  // }
+
   setUserRating(rating: number) {
     const { cookie } = document;
     if (cookie != null) {
       const username = cookie.match(/username=[^;]*;/);
-      // console.log(username)
       if (username != null) {
         if (username[0].split('=')[1].slice(0, -1) === '') {
           return;
@@ -125,7 +223,6 @@ export default class LessonComponent extends React.Component
     const lessonUid = this.lessonDetails.details.uid;
     const versionUid = this.versionDetails.details.uid;
     const { page } = this.state;
-    const  = (this.state.page + 1) / 
     const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}?page=${this.state.page + 1};pages=${this.state.numPages}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
@@ -532,29 +629,37 @@ export default class LessonComponent extends React.Component
   }
 
   getTopics() {
-    const { lessonDescription } = this;
     const topics = {};
     const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    const { lessonDescription } = this;
     if (lessonDescription != null) {
-      Object.keys(lessonDescription.versions).forEach((vUID) => {
-        const version = lessonDescription.versions[vUID];
-        version.topics.forEach((topic) => {
-          if (!(topic in topics)) {
-            topics[topic] = {};
+      Object.keys(this.state.ratings).forEach((topicName) => {
+        const topic = this.state.ratings[topicName];
+        Object.keys(topic).forEach((versionUID) => {
+          const version = lessonDescription.topics[topicName][versionUID];
+          const label = version.title;
+          const link = `${lessonDescription.path}/${version.path}/${topicName}`;
+          const { description } = version;
+          const { onPath } = version;
+
+          if (!(topicName in topics)) {
+            topics[topicName] = {};
           }
           let active = false;
           if (currentExplanation === version.path
             && currentTopic === topic) {
             active = true;
           }
-          topics[topic][vUID] = {
-            label: version.title,
-            link: `${lessonDescription.path}/${version.path}/${topic}`,
-            rating: Math.floor(Math.random() * 6),
-            numReviews: Math.floor(Math.random() * 10000),
-            description: version.description,
+
+          const rating = this.state.ratings[topicName][versionUID];
+          topics[topicName][versionUID] = {
+            label,
+            link,
+            rating: rating.aveRating,
+            numReviews: rating.numRatings,
+            description,
             active,
-            onPath: version.onPath,
+            onPath,
           };
         });
       });
@@ -565,6 +670,7 @@ export default class LessonComponent extends React.Component
   addTopics() {
     const output = [];
     const topics = this.getTopics();
+    console.log(topics)
     const topicNames = [
       'summary', 'explanation', 'implications', 'history',
       'references', 'quiz',
