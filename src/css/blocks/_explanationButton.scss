@@ -48,3 +48,28 @@
 // .topic_button_listItem_title .topic_button__rating {
 //   width: 5em;
 // }
+
+// .topic_button__single_item {
+//   width: 100%;
+//   height: 100%;
+//   display: table;
+//   border-radius: $radius;
+//   background-color: color('lesson', 'title-background');
+//   border: 1px solid color('white', 'lighter');
+//   color: #929292;
+// }
+
+.topic_button__single_item_label {
+  vertical-align: middle;
+  display: table-cell;
+  text-decoration: none;
+  color: #929292;
+}
+
+.topic_button__single_item_label:hover {
+  text-decoration: none;
+}
+
+.dropdown_button_selected .topic_button__single_item_label {
+  color: white;
+}
