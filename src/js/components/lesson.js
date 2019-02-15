@@ -588,8 +588,9 @@ export default class LessonComponent extends React.Component
             topics[topicName] = {};
           }
           let active = false;
+          // console.log(currentExplanation, version, topic)
           if (currentExplanation === version.path
-            && currentTopic === topic) {
+            && currentTopic === topicName) {
             active = true;
           }
 

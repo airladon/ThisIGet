@@ -110,7 +110,10 @@ export default class ExplanationButton extends React.Component <Props> {
         </td>
         <td className="explanation_button__rating">
           <div className="explanation_button__rating_value">
-            {'\u2605\u2605\u2605'}
+            {'\u2605\u2605\u2605\u2605'}
+          </div>
+          <div className="explanation_button__rating_num_reviews">
+            {'or more'}
           </div>
         </td>
       </tr>
