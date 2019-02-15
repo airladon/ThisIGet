@@ -248,7 +248,11 @@ export default function makeTriangle(
     linePosition: number = 0.5,     // number where 0 is end1, and 1 is end2
   ) {
     const dimension = triangle.addSideDimension(index1, index2, labelColor, 0, false);
-    dimension.addLabel(labelText, offset, location, subLocation, orientation, linePosition);
+    dimension.addLabel(
+      labelText, offset, location,
+      subLocation, orientation, linePosition, 0.5, 0.7, labelColor,
+    );
+    dimension._label.setColor(labelColor);
   };
 
   triangle.updateDimensions = () => {

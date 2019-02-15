@@ -41,6 +41,7 @@ export default class TriangleCollection extends CommonDiagramCollection {
     triangle.addAngle(1, a.radius, a.lineWidth, a.sides, aColor, 'a');
     triangle.addAngle(2, a.radius, a.lineWidth, a.sides, aColor, 'b');
     triangle.addAngle(3, a.radius, a.lineWidth, a.sides, aColor, 'c');
+    // const lColor = [0, 1, 0, 1]
     triangle.addSideLabel(2, 3, lColor, 'A', 0.05, 'outside', '', 'horizontal');
     triangle.addSideLabel(3, 1, lColor, 'B', 0.05, 'outside', '', 'horizontal');
     triangle.addSideLabel(1, 2, lColor, 'C', 0.05, 'outside', '', 'horizontal');

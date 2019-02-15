@@ -14271,7 +14271,7 @@ function (_DiagramElementCollec) {
       var orientation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'horizontal';
       var linePosition = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
       var scale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
-      var color = arguments.length > 7 ? arguments[7] : undefined;
+      var color = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : this.color;
       this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale);
 
       if (this.label != null) {
@@ -19183,7 +19183,6 @@ function () {
 
     this.setTransformCallback = function () {};
 
-    this.beforeDrawCallback = null;
     this.lastDrawTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
@@ -20974,10 +20973,6 @@ function (_DiagramElement) {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (this.beforeDrawCallback) {
-        this.beforeDrawCallback(this);
-      }
-
       if (this.isShown) {
         this.setNextTransform(now);
         this.setNextColor(now); // set next color can end up hiding an element when disolving out
@@ -21245,10 +21240,6 @@ function (_DiagramElement2) {
     value: function draw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-
-      if (this.beforeDrawCallback) {
-        this.beforeDrawCallback(this);
-      }
 
       if (this.isShown) {
         this.setNextTransform(now);

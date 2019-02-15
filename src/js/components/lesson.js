@@ -74,6 +74,9 @@ export default class LessonComponent extends React.Component
   constructor(props: Props) {
     super(props);
     this.firstPage = parseInt(getCookie('page'), 10) - 1;
+    if (this.firstPage === -1) {
+      this.firstPage = 0;
+    }
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
@@ -124,6 +127,7 @@ export default class LessonComponent extends React.Component
   }
 
   gotRatings() {
+    // console.log('got ratings')
     this.setState({ ratings: this.fillRatings() });
   }
 
@@ -182,18 +186,23 @@ export default class LessonComponent extends React.Component
       .catch(() => {});
   }
 
+  // componentWillUpdate() {
+  //   console.log('component will update')
+  // }
+
   componentDidUpdate() {
+    // console.log('componentDidUpdate', this.componentUpdateCallback)
     if (this.componentUpdateCallback) {
       const callback = this.componentUpdateCallback;
       this.componentUpdateCallback = null;
       callback();
+    } else {
+      this.lesson.setOnclicks();
     }
   }
 
   refreshText(htmlText: string, page: number, callback: ?() => void = null) {
-    // this.setState({
-    //   listOfSections: this.addListOfSections(),
-    // });
+    // console.log('refreshText')
     this.updateGoToButtonListHighlight();
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
@@ -203,7 +212,6 @@ export default class LessonComponent extends React.Component
     } else if (callback) {
       callback();
     }
-
     const nextButton = document.getElementById('lesson__button-next');
     if (nextButton) {
       if (this.lesson.currentSectionIndex ===
@@ -232,6 +240,7 @@ export default class LessonComponent extends React.Component
   }
 
   componentDidMount() {
+    // console.log('Component Did Mount')
     // Instantiate diagram now that the canvas elements have been
     // created.
     this.lesson.initialize();
@@ -239,8 +248,14 @@ export default class LessonComponent extends React.Component
       listOfSections: this.addListOfSections(),
       numPages: this.lesson.content.sections.length,
     });
-    this.lesson.goToSection(0);
 
+    if (this.firstPage != null) {
+      this.lesson.goToSection(this.firstPage);
+    } else {
+      this.lesson.goToSection(0);
+    }
+    // console.log('9', document.getElementById('id_shapes').classList.length)
+    // console.log('asdf', document.getElementById('id_shapes').classList.length)
     const nextButton = document.getElementById('lesson__button-next');
     if (nextButton instanceof HTMLElement) {
       nextButton.onclick = this.goToNext.bind(this);
@@ -291,16 +306,9 @@ export default class LessonComponent extends React.Component
     this.centerLessonFlag = !this.centerLessonFlag;
     this.centerLesson();
 
-    // const { cookie } = document;
-    // let page = cookie.match(/page=[^;]*/);
-    if (this.firstPage != null) {
-      // page = page[0].trim();
-      // if (page.slice(-1).charAt(0) === ';') {
-      //   page = page.slice(0, -1);
-      // }
-      // this.setState({ page: parseInt(page, 10) });
-      this.lesson.goToSection(this.firstPage);
-    }
+    // if (this.firstPage != null) {
+    //   this.lesson.goToSection(this.firstPage);
+    // }
   }
 
   // showHideNavigator() {

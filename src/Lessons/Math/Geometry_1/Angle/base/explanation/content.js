@@ -11,8 +11,7 @@ import lessonLayout from './layout';
 import details from '../../details';
 
 const {
-  actionWord, onClickId,
-  highlightWord, centerVH, centerV,
+  click, highlightWord, centerVH, centerV,
 } = Fig.tools.html;
 const { Transform } = Fig;
 const layout = lessonLayout();
@@ -43,10 +42,14 @@ class Content extends LessonContent {
           The |_sharpness| of the corner is a property that can describe a shape.
         </p>`,
       modifiers: {
-        _shapes: actionWord('shapes', 'id_shapes', colors.lines),
-        _corners: actionWord('corners', 'id_corners', colors.corners),
-        _more_sharp: actionWord('more sharp', 'id_more_sharp', colors.moreSharp),
-        _less_sharp: actionWord('less sharp', 'id_less_sharp', colors.lessSharp),
+        // _shapes: actionWord('shapes', 'id_shapes', colors.lines),
+        _shapes: click(shapes.pulseShapes, [shapes], colors.lines),
+        _corners: click(shapes.toggleCorners, [shapes], colors.corners),
+        _more_sharp: click(shapes.toggleMoreSharpCorners, [shapes], colors.moreSharp),
+        _less_sharp: click(shapes.toggleLessSharpCorners, [shapes], colors.lessSharp),
+        // _corners: actionWord('corners', 'id_corners', colors.corners),
+        // _more_sharp: actionWord('more sharp', 'id_more_sharp', colors.moreSharp),
+        // _less_sharp: actionWord('less sharp', 'id_less_sharp', colors.lessSharp),
         _sharpness: highlightWord('sharpness', 'english'),
       },
       hideOnly: [
@@ -59,12 +62,14 @@ class Content extends LessonContent {
         shapes._pent._moreSharpCorners,
         shapes._pent._lessSharpCorners,
       ],
-      setSteadyState: () => {
-        onClickId('id_shapes', shapes.pulseShapes, [shapes]);
-        onClickId('id_corners', shapes.toggleCorners, [shapes]);
-        onClickId('id_more_sharp', shapes.toggleMoreSharpCorners, [shapes]);
-        onClickId('id_less_sharp', shapes.toggleLessSharpCorners, [shapes]);
-      },
+      // setSteadyState: () => {
+      //   console.log('Here ');
+
+      //   onClickId('id_shapes', shapes.pulseShapes, [shapes]);
+      //   onClickId('id_corners', shapes.toggleCorners, [shapes]);
+      //   onClickId('id_more_sharp', shapes.toggleMoreSharpCorners, [shapes]);
+      //   onClickId('id_less_sharp', shapes.toggleLessSharpCorners, [shapes]);
+      // },
     });
 
     this.addSection({
@@ -90,7 +95,8 @@ class Content extends LessonContent {
         </p>
         `,
       modifiers: {
-        _lines: actionWord('lines', 'id_reference_lines', colors.reference),
+        _lines: click(circle.pulseLines, [circle], colors.reference),
+        // _lines: actionWord('lines', 'id_reference_lines', colors.reference),
       },
       showOnly: () => {
         this.diagram.elements.showOnly([
@@ -105,7 +111,7 @@ class Content extends LessonContent {
         circle._reference.transform.updateTranslation(1, 0);
         circle._reference.transform.updateRotation(Math.PI / 2);
 
-        onClickId('id_reference_lines', circle.pulseLines, [circle]);
+        // onClickId('id_reference_lines', circle.pulseLines, [circle]);
       },
       transitionFromAny: (done) => {
         circle._fakeRadius.animateTo(new Transform()
@@ -138,9 +144,12 @@ class Content extends LessonContent {
         </p>
         `,
       modifiers: {
-        _anchor: actionWord('anchor', 'id_anchor', colors.anchor),
-        _pushing: actionWord('pushing', 'id_push', colors.arrow),
-        _corner: actionWord('corner', 'id_corner', colors.corners),
+        _anchor: click(circle.pulseAnchor, [circle], colors.anchor),
+        _pushing: click(circle.pushRadius, [circle], colors.arrow),
+        _corner: click(circle.toggleCorners, [circle], colors.corners),
+        // _anchor: actionWord('anchor', 'id_anchor', colors.anchor),
+        // _pushing: actionWord('pushing', 'id_push', colors.arrow),
+        // _corner: actionWord('corner', 'id_corner', colors.corners),
       },
       showOnly: [
         circle,
@@ -154,9 +163,9 @@ class Content extends LessonContent {
         circle._reference.transform.updateRotation(0);
         circle._reference.transform.updateTranslation(0, 0);
         circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_anchor', circle.pulseAnchor, [circle]);
-        onClickId('id_push', circle.pushRadius, [circle]);
-        onClickId('id_corner', circle.toggleCorners, [circle]);
+        // onClickId('id_anchor', circle.pulseAnchor, [circle]);
+        // onClickId('id_push', circle.pushRadius, [circle]);
+        // onClickId('id_corner', circle.toggleCorners, [circle]);
         circle._arrow.show();
         circle.pulseArrow();
       },
@@ -184,6 +193,8 @@ class Content extends LessonContent {
       },
     });
 
+    const smallRotation = [circle, Math.PI / 7, 0, 1, () => {}];
+    const largeRotation = [circle, 5 * Math.PI / 6, 0, 1, () => {}];
     this.addSection({
       setContent: () => `
         <p>
@@ -194,10 +205,10 @@ class Content extends LessonContent {
         </p>
         `,
       modifiers: {
-        _small_rotation: actionWord('Small rotation', 'id_small_rotation', colors.moreSharp),
-        _large_rotation: actionWord('Large rotation', 'id_large_rotation', colors.lessSharp),
-        _sharp_corner: actionWord('sharp corner', 'id_sharp_corner', colors.moreSharp),
-        _less_sharp_corner: actionWord('less sharp corner', 'id_less_sharp_corner', colors.lessSharp),
+        _Small_rotation: click(circle.rotateTo, smallRotation, colors.moreSharp),
+        _Large_rotation: click(circle.rotateTo, largeRotation, colors.lessSharp),
+        _sharp_corner: click(circle.rotateTo, smallRotation, colors.moreSharp),
+        _less_sharp_corner: click(circle.rotateTo, largeRotation, colors.lessSharp),
       },
       showOnly: [
         circle,
@@ -206,13 +217,13 @@ class Content extends LessonContent {
         circle._anchor,
       ],
       setSteadyState: () => {
-        const smallRotation = [circle, Math.PI / 7, 0, 1, () => {}];
-        const largeRotation = [circle, 5 * Math.PI / 6, 0, 1, () => {}];
+        // const smallRotation = [circle, Math.PI / 7, 0, 1, () => {}];
+        // const largeRotation = [circle, 5 * Math.PI / 6, 0, 1, () => {}];
         circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_small_rotation', circle.rotateTo, smallRotation);
-        onClickId('id_large_rotation', circle.rotateTo, largeRotation);
-        onClickId('id_sharp_corner', circle.rotateTo, smallRotation);
-        onClickId('id_less_sharp_corner', circle.rotateTo, largeRotation);
+        // onClickId('id_small_rotation', circle.rotateTo, smallRotation);
+        // onClickId('id_large_rotation', circle.rotateTo, largeRotation);
+        // onClickId('id_sharp_corner', circle.rotateTo, smallRotation);
+        // onClickId('id_less_sharp_corner', circle.rotateTo, largeRotation);
         circle._reference.transform.updateTranslation(0, 0);
         circle._reference.transform.updateRotation(0);
         circle._radius.transform.updateTranslation(0, 0);
@@ -239,8 +250,10 @@ class Content extends LessonContent {
         </p>
         `,
       modifiers: {
-        _amount: actionWord('amount', 'id_amount', colors.angleText),
-        _rotation: actionWord('rotation', 'id_push', colors.arrow),
+        _amount: click(circle.pulseAngle, [circle], colors.angleText),
+        _rotation: click(circle.pushRadius, [circle], colors.arrow),
+        // _amount: actionWord('amount', 'id_amount', colors.angleText),
+        // _rotation: actionWord('rotation', 'id_push', colors.arrow),
       },
       showOnly: [
         circle,
@@ -253,10 +266,10 @@ class Content extends LessonContent {
         circle._reference.transform.updateTranslation(0, 0);
         circle._reference.transform.updateRotation(0);
         circle._radius.transform.updateTranslation(0, 0);
-        onClickId('id_push', circle.pushRadius, [circle]);
-        onClickId('id_amount', circle.pulseAngle, [circle]);
-        onClickId('id_angle', circle.pulseAngle, [circle]);
-        onClickId('id_corner', circle.toggleCorners, [circle]);
+        // onClickId('id_push', circle.pushRadius, [circle]);
+        // onClickId('id_amount', circle.pulseAngle, [circle]);
+        // onClickId('id_angle', circle.pulseAngle, [circle]);
+        // onClickId('id_corner', circle.toggleCorners, [circle]);
         if (circle._radius.transform.r() < 0.2) {
           circle._radius.transform.updateRotation(Math.PI / 6);
         }
@@ -296,9 +309,12 @@ class Content extends LessonContent {
         </p>
         `,
       modifiers: {
-        _angle: actionWord('angle', 'id_angle', colors.angleText),
-        _smaller_angle: actionWord('small angle', 'id_small_rotation', colors.moreSharp),
-        _larger_angle: actionWord('large angle', 'id_large_rotation', colors.lessSharp),
+        _angle: click(circle.pulseAngle, [circle], colors.angleText),
+        _smaller_angle: click(circle.rotateToRandomSmall, [circle, 1, () => {}], colors.moreSharp),
+        _larger_angle: click(circle.rotateToRandomLarge, [circle, 1, () => {}], colors.lessSharp),
+        // _angle: actionWord('angle', 'id_angle', colors.angleText),
+        // _smaller_angle: actionWord('small angle', 'id_small_rotation', colors.moreSharp),
+        // _larger_angle: actionWord('large angle', 'id_large_rotation', colors.lessSharp),
       },
       showOnly: [
         circle,
@@ -312,10 +328,10 @@ class Content extends LessonContent {
         circle._radius.transform.updateTranslation(0, 0);
         const bindArray = [circle, 1, () => {}];
         circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_small_rotation', circle.rotateToRandomSmall, bindArray);
-        onClickId('id_large_rotation', circle.rotateToRandomLarge, bindArray);
+        // onClickId('id_small_rotation', circle.rotateToRandomSmall, bindArray);
+        // onClickId('id_large_rotation', circle.rotateToRandomLarge, bindArray);
 
-        onClickId('id_angle', circle.pulseAngle, [circle]);
+        // onClickId('id_angle', circle.pulseAngle, [circle]);
         if (circle._radius.transform.r() < 0.2) {
           circle._radius.transform.updateRotation(Math.PI / 6);
         }

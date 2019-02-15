@@ -39,8 +39,35 @@ function hideInteractiveHighlightButton() {
 //    - saveState                   Guaranteed
 //    - setLeaveState               Guaranteed
 
+
+// Flow of when a page is first loaded
+// Rect Component finishes mounting
+//    gotoSection
+//    transitionToAny
+//    finishTransitionToAny
+//    setLeaveStateAndMoveToNextSection
+//    setLeaveState
+//    refresh -> lesson.refreshText called with setState callback
+//               callback is then called on lesson.component update complete
+//
+//  When lesson.component is finished updating
+//    setState
+//       setEnterState
+//    transitionFromAny
+//    finishTransitionFromAny
+//    refresh -> lesson.refreshText called with componentUpdateComplete
+//
+//  When lesson.component is finished updating
+//    componentUpdateComplete
+//      setOnclicks
+//      setSteadyState
+//      setInfoButton
+//      setInteractiveElements
+//
+//  Then ratings will be received asynchronously causing another react
+//  component state update, meaning the onclicks need to be set again.
+
 class Lesson {
-  // ContentClass: Object;
   content: LessonContent;
 
   currentSectionIndex: number;
@@ -52,14 +79,11 @@ class Lesson {
   comingFrom: 'next' | 'prev' | 'goto' | '' ;
   goingTo: 'next' | 'prev' | 'goto' | '' ;
   refresh: (string, number, ?() => void) => void;
-  // refreshPageOnly: (number) => void;
-  // blank: () => void;
   goToSectionIndex: number;
   firstPageShown: boolean;
 
   constructor(content: Object) {
     this.content = content;
-    // this.content = new Content(this.diagram);
     this.diagram = null;
     this.overlayDiagram = null;
     this.currentSectionIndex = 0;
@@ -67,8 +91,6 @@ class Lesson {
     this.state = {};
     this.inTransition = false;
     this.refresh = function () {}; // eslint-disable-line func-names
-    // this.refreshPageOnly = function () {}; // eslint-disable-line func-names
-    // this.blank = () => {};
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.goToSectionIndex = 0;
@@ -144,6 +166,7 @@ class Lesson {
   }
 
   goToSection(sectionId: number | string) {
+    // console.log('goToSection')
     let sectionIndex = 0;
     if (typeof sectionId === 'number') {
       sectionIndex = sectionId;
@@ -205,10 +228,12 @@ class Lesson {
   }
 
   finishTransToAny() {
+    // console.log('finishTransToAny')
     this.setLeaveStateAndMoveToNextSection();
   }
 
   setLeaveStateAndMoveToNextSection() {
+    // console.log('setLeaveStateAndMoveToNextSection')
     hideInfoButton();
     hideInteractiveHighlightButton();
 
@@ -233,6 +258,7 @@ class Lesson {
   }
 
   setState() {
+    // console.log('setState')
     const { diagram } = this;
     const section = this.content.sections[this.currentSectionIndex];
     if (diagram) {
@@ -266,6 +292,7 @@ class Lesson {
   }
 
   finishTransitionFromAny() {
+    // console.log('finishTransitionFromAny')
     this.refresh(
       this.getContentHtml(),
       this.currentSectionIndex,
@@ -273,9 +300,17 @@ class Lesson {
     );
   }
 
-  componentUpdateComplete() {
+  setOnclicks() {
+    // console.log('setting conclicks')
     const section = this.content.sections[this.currentSectionIndex];
     section.setOnClicks();
+  }
+
+  componentUpdateComplete() {
+    // console.log('componentUpdateComplete');
+    this.setOnclicks();
+    const section = this.content.sections[this.currentSectionIndex];
+    // section.setOnClicks();
     section.setSteadyState(this.state);
     this.firstPageShown = false;
     section.setInfoButton();
