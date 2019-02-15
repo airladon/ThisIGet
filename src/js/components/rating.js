@@ -45,7 +45,7 @@ export default class Rating extends React.Component
     // }
 
     if (this.props.isLoggedIn) {
-      return `Did this ${topic} help your understanding?`;
+      return `Is this ${topic} helpful?`;
     }
     // const link = `/login?next=${window.location.pathname}&page=${page}`;
     // <a href={link}>Login</a> to rate {topic}:
