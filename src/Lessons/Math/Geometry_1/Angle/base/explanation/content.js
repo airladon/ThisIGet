@@ -198,15 +198,15 @@ class Content extends LessonContent {
     this.addSection({
       setContent: () => `
         <p>
-          |_small_rotation| results in a |_sharp_corner|.
+          |Small_rotation| results in a |_sharp_corner|.
         </p>
         <p>
-          |_large_rotation| results in a |_less_sharp_corner|.
+          |Large_rotation| results in a |_less_sharp_corner|.
         </p>
         `,
       modifiers: {
-        _Small_rotation: click(circle.rotateTo, smallRotation, colors.moreSharp),
-        _Large_rotation: click(circle.rotateTo, largeRotation, colors.lessSharp),
+        Small_rotation: click(circle.rotateTo, smallRotation, colors.moreSharp),
+        Large_rotation: click(circle.rotateTo, largeRotation, colors.lessSharp),
         _sharp_corner: click(circle.rotateTo, smallRotation, colors.moreSharp),
         _less_sharp_corner: click(circle.rotateTo, largeRotation, colors.lessSharp),
       },
