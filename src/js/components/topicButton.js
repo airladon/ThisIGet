@@ -34,8 +34,6 @@ export default class TopicButton extends React.Component <Props> {
     let numReviews = listItem.numReviews || 0;
     let rating = listItem.rating || 0;
     let numHighRatings = listItem.numHighRatings || 0;
-    let highRatingsSubText = '4 or higher';
-    highRatingsSubText = '';
     if (numReviews > 0) {
       // rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
       // if (rating === '') {
@@ -49,7 +47,7 @@ export default class TopicButton extends React.Component <Props> {
       numReviews = '';
       rating = '';
       numHighRatings = '';
-      highRatingsSubText = '';
+      // highRatingsSubText = '';
     }
     let label = '';
     let description = '';
@@ -74,16 +72,15 @@ export default class TopicButton extends React.Component <Props> {
           <div className="topic_button__rating_value">
             {rating}
           </div>
-          <div className="topic_button__rating_num_reviews">
-            {numReviews}
-          </div>
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
             {numHighRatings}
           </div>
-          <div className="topic_button__rating_num_reviews">
-            {highRatingsSubText}
+        </td>
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_value">
+            {numReviews}
           </div>
         </td>
       </tr>
@@ -102,11 +99,11 @@ export default class TopicButton extends React.Component <Props> {
           </div>
         </td>
         <td className="topic_button__rating">
-          <div className="topic_button__rating_value">
-            Score
+          <div className="topic_button__rating_num_reviews">
+            Ave
           </div>
           <div className="topic_button__rating_num_reviews">
-            Reviews
+            Rating
           </div>
         </td>
         <td className="topic_button__rating">
@@ -117,6 +114,14 @@ export default class TopicButton extends React.Component <Props> {
             {'or more'}
           </div>
         </td>
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_num_reviews">
+            Num
+          </div>
+          <div className="topic_button__rating_num_reviews">
+            Ratings
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>;
@@ -124,11 +129,16 @@ export default class TopicButton extends React.Component <Props> {
 
   render() {
     const props = Object.assign({}, this.props);
-    const listItems = [{
-      label: this.renderTitle(),
-      // link: null,
-      // separator: true,
-    }];
+    const listItems = [];
+    let addTitle = false;
+    props.list.forEach((listElement) => {
+      if (listElement.numReviews != null && listElement.numReviews > 0) {
+        addTitle = true;
+      }
+    });
+    if (addTitle) {
+      listItems.push({ label: this.renderTitle() });
+    }
     props.list.forEach((listElement) => {
       listItems.push({
         label: this.renderListLabel(listElement),
