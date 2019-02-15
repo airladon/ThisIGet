@@ -123,10 +123,7 @@ export default class LessonDescription {
         title, description, onPath, topics, qr, path,
       } = version;
       topics.forEach((topicName) => {
-        if (this.topics[topicName] == null) {
-          this.topics[topicName] = {};
-        }
-        this.topics[topicName][versionName] = {
+        const v = {
           title,
           description,
           onPath,
@@ -136,6 +133,11 @@ export default class LessonDescription {
           numRatings: 0,
           numHighRatings: 0,
         };
+
+        if (this.topics[topicName] == null) {   // $FlowFixMe
+          this.topics[topicName] = {};
+        }
+        this.topics[topicName][versionName] = v;
         this.numVersions += 1;
       });
     });
@@ -163,7 +165,13 @@ export default class LessonDescription {
             }
             return response.json();
           })
-          .then((data) => {
+          .then((data: {
+            status: 'ok' | 'fail',
+            message?: string,
+            aveRating?: number,
+            numRatings?: number,
+            numHighRatings: number,
+          }) => {
             if (data.status === 'ok') {
               version.aveRating = data.aveRating;
               version.numRatings = data.numRatings;

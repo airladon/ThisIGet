@@ -35,7 +35,7 @@ export default class TopicButton extends React.Component <Props> {
     let rating = listItem.rating || 0;
     let numHighRatings = listItem.numHighRatings || 0;
     let highRatingsSubText = '4 or higher';
-    highRatingsSubText = ''
+    highRatingsSubText = '';
     if (numReviews > 0) {
       // rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
       // if (rating === '') {
@@ -91,6 +91,7 @@ export default class TopicButton extends React.Component <Props> {
     </table>;
   }
 
+  // eslint-disable-next-line class-methods-use-this
   renderTitle() {
     return <table className="topic_button__listItem topic_button_listItem_title">
       <tbody>

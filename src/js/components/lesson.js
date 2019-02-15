@@ -77,7 +77,6 @@ export default class LessonComponent extends React.Component
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
     this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
-    console.log(this.lessonDescription);
     this.state = {
       htmlText: '',
       numPages: 0,
@@ -125,7 +124,7 @@ export default class LessonComponent extends React.Component
   }
 
   gotRatings() {
-    this.setState( {ratings: this.fillRatings() });
+    this.setState({ ratings: this.fillRatings() });
   }
 
   getRating(topic: string) {
