@@ -92,6 +92,8 @@ then
     esac
   done
 
+  echo
+  echo "${cyan}${bold}==== Checking local environment variables match remote ====${reset}"
   # Check heroku config vars are the same as local
   RESULT=`heroku config --app=$1`
   REMOTE_PEPPER=`echo $RESULT | sed -n 's/.*PEPPER: \([^ ]*\).*/\1/p'`
@@ -123,7 +125,7 @@ then
     echo
     exit 1
   fi
-  exit 1
+  echo "${green}Ok${reset}"
 fi
 
 if [ $INITIALIZE_FLASK_DB == 1 ];
@@ -158,7 +160,8 @@ then
 fi
 
 if [ $REMOTE == 1 ];
-then 
+then
+  echo
   echo "${bold}${cyan}==== Resetting Database for $APP_OR_DB_NAME =====${reset} "
   heroku pg:reset -a $APP_OR_DB_NAME
 fi
