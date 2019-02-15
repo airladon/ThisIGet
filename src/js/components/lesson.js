@@ -11,7 +11,7 @@ import LessonTitle from './lessonTitle';
 import getLessonIndex from '../../Lessons/index';
 import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
-import ExplanationButton from './explanationButton';
+import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie, createCookie } from '../tools/misc';
 
@@ -670,8 +670,8 @@ export default class LessonComponent extends React.Component
 
         output.push(
           <div className="lesson__path_tile" key={this.key}>
-            <ExplanationButton
-              id={`id__lesson__explanation_button_${name}`}
+            <TopicButton
+              id={`id__lesson__topic_button_${name}`}
               label={name.charAt(0).toUpperCase() + name.slice(1)}
               direction="down"
               xAlign="left"

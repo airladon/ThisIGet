@@ -1,11 +1,11 @@
-.explanation_button__listItem {
+.topic_button__listItem {
   width: 300px;
   table-layout: fixed;
   margin-top: 0.1em;
   margin-bottom: 0.1em;
 }
 
-.explanation_button__label {
+.topic_button__label {
   vertical-align: middle;
   text-align: left;
   white-space: pre-wrap;      /* CSS3 */
@@ -15,12 +15,12 @@
   word-wrap: break-word;      /* IE */
 }
 
-.explanation_button__label_description {
+.topic_button__label_description {
   font-size: 0.8em;
   // opacity: 0.6;
 }
 
-.explanation_button__rating {
+.topic_button__rating {
   vertical-align: middle;
   width: 4em;
   white-space: pre-wrap;      /* CSS3 */
@@ -31,20 +31,20 @@
   width: 3.5em;
 }
 
-.explanation_button__rating_value {
+.topic_button__rating_value {
   font-size: 0.8em;
   text-align: center;
 }
 
-.explanation_button__rating_num_reviews {
+.topic_button__rating_num_reviews {
   font-size: 0.6em;
   text-align: center;
 }
 
-// .explanation_button_listItem_title {
+// .topic_button_listItem_title {
 //   margin-left: 0.5em;
 // }
 
-// .explanation_button_listItem_title .explanation_button__rating {
+// .topic_button_listItem_title .topic_button__rating {
 //   width: 5em;
 // }

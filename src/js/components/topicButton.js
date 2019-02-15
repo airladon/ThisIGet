@@ -5,7 +5,7 @@ import DropDownButtonBase from './dropDownButtonBase';
 
 const { round } = Fig.tools.math;
 
-export type TypeExplanationButtonListItem = {
+export type TypeTopicButtonListItem = {
   label: string;
   rating?: number;
   numReviews?: number;
@@ -21,13 +21,13 @@ type Props = {
   id?: string;
   direction?: 'up' | 'down';
   xAlign?: 'left' | 'right' | 'center';
-  list?: Array<TypeExplanationButtonListItem>;
+  list?: Array<TypeTopicButtonListItem>;
   selected?: boolean;
 };
 
-export default class ExplanationButton extends React.Component <Props> {
+export default class TopicButton extends React.Component <Props> {
   // eslint-disable-next-line class-methods-use-this
-  renderListLabel(listItem: TypeExplanationButtonListItem) {
+  renderListLabel(listItem: TypeTopicButtonListItem) {
     if (listItem.separator === true) {
       return listItem.label;
     }
@@ -59,30 +59,30 @@ export default class ExplanationButton extends React.Component <Props> {
     if (listItem.description != null) {
       ({ description } = listItem);
     }
-    return <table className="explanation_button__listItem">
+    return <table className="topic_button__listItem">
       <tbody>
       <tr>
-        <td className="explanation_button__label">
-          <div className="explanation_button__label_title">
+        <td className="topic_button__label">
+          <div className="topic_button__label_title">
             {label}
           </div>
-          <div className="explanation_button__label_description">
+          <div className="topic_button__label_description">
             {description}
           </div>
         </td>
-        <td className="explanation_button__rating">
-          <div className="explanation_button__rating_value">
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_value">
             {rating}
           </div>
-          <div className="explanation_button__rating_num_reviews">
+          <div className="topic_button__rating_num_reviews">
             {numReviews}
           </div>
         </td>
-        <td className="explanation_button__rating">
-          <div className="explanation_button__rating_value">
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_value">
             {numHighRatings}
           </div>
-          <div className="explanation_button__rating_num_reviews">
+          <div className="topic_button__rating_num_reviews">
             {highRatingsSubText}
           </div>
         </td>
@@ -92,27 +92,27 @@ export default class ExplanationButton extends React.Component <Props> {
   }
 
   renderTitle() {
-    return <table className="explanation_button__listItem explanation_button_listItem_title">
+    return <table className="topic_button__listItem topic_button_listItem_title">
       <tbody>
       <tr>
-        <td className="explanation_button__label">
-          <div className="explanation_button__label_title">
+        <td className="topic_button__label">
+          <div className="topic_button__label_title">
             Version
           </div>
         </td>
-        <td className="explanation_button__rating">
-          <div className="explanation_button__rating_value">
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_value">
             Score
           </div>
-          <div className="explanation_button__rating_num_reviews">
+          <div className="topic_button__rating_num_reviews">
             Reviews
           </div>
         </td>
-        <td className="explanation_button__rating">
-          <div className="explanation_button__rating_value">
+        <td className="topic_button__rating">
+          <div className="topic_button__rating_value">
             {'\u2605\u2605\u2605\u2605'}
           </div>
-          <div className="explanation_button__rating_num_reviews">
+          <div className="topic_button__rating_num_reviews">
             {'or more'}
           </div>
         </td>
