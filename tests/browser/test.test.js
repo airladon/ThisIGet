@@ -5,8 +5,8 @@ expect.extend({ toMatchImageSnapshot });
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 // const testMode = process.env.TIG_MODE || 'test';
-const username = process.env.TIG_USERNAME || 'test_user01';
-const password = process.env.TIG_PASSWORD || 'asdfasdf';
+const username = process.env.TIG_USERNAME || 'test_user_001';
+const password = process.env.TIG_PASSWORD || '12345678';
 
 function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));

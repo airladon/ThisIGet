@@ -7,6 +7,7 @@
 # browser_test.sh beta               https://thisiget-beta.herokuapp.com
 # browser_test.sh prod               https://thisiget.com
 # browser_test.sh <SITE>             SITE
+# browser_test.sh <SITE> -u          SITE updating jest snap shots
 
 # Setup colors and text formatting
 red=`tput setaf 1`
@@ -38,8 +39,9 @@ docker_run_browser_test() {
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
-        --entrypoint "jest" \
-        airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer
+        --entrypoint "/home/pptruser/node_modules/.bin/jest" \
+        airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
+        $2
 }
 
 title() {
