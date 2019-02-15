@@ -28,6 +28,7 @@
   white-space: -pre-wrap;     /* Opera <7 */
   white-space: -o-pre-wrap;   /* Opera 7 */
   word-wrap: break-word;      /* IE */
+  width: 3.5em;
 }
 
 .explanation_button__rating_value {
@@ -39,3 +40,11 @@
   font-size: 0.6em;
   text-align: center;
 }
+
+// .explanation_button_listItem_title {
+//   margin-left: 0.5em;
+// }
+
+// .explanation_button_listItem_title .explanation_button__rating {
+//   width: 5em;
+// }

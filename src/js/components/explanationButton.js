@@ -35,13 +35,14 @@ export default class ExplanationButton extends React.Component <Props> {
     let rating = listItem.rating || 0;
     let numHighRatings = listItem.numHighRatings || 0;
     let highRatingsSubText = '4 or higher';
+    highRatingsSubText = ''
     if (numReviews > 0) {
       // rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
       // if (rating === '') {
       //   rating = '-';
       // }
       rating = (rating).toLocaleString('en');
-      numReviews = `${(numReviews).toLocaleString('en')} reviews`;
+      numReviews = `${(numReviews).toLocaleString('en')}`;
       numHighRatings = `${round(parseInt(numHighRatings, 10) / parseInt(numReviews, 10) * 100, 0)}%`;
     }
     if (numReviews === 0) {
@@ -90,9 +91,40 @@ export default class ExplanationButton extends React.Component <Props> {
     </table>;
   }
 
+  renderTitle() {
+    return <table className="explanation_button__listItem explanation_button_listItem_title">
+      <tbody>
+      <tr>
+        <td className="explanation_button__label">
+          <div className="explanation_button__label_title">
+            Version
+          </div>
+        </td>
+        <td className="explanation_button__rating">
+          <div className="explanation_button__rating_value">
+            Score
+          </div>
+          <div className="explanation_button__rating_num_reviews">
+            Reviews
+          </div>
+        </td>
+        <td className="explanation_button__rating">
+          <div className="explanation_button__rating_value">
+            {'\u2605\u2605\u2605'}
+          </div>
+        </td>
+      </tr>
+      </tbody>
+    </table>;
+  }
+
   render() {
     const props = Object.assign({}, this.props);
-    const listItems = [];
+    const listItems = [{
+      label: this.renderTitle(),
+      link: null,
+      // separator: true,
+    }];
     props.list.forEach((listElement) => {
       listItems.push({
         label: this.renderListLabel(listElement),
