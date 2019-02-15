@@ -8,11 +8,14 @@ yellow=`tput setaf 3`
 bold=`tput bold`
 reset=`tput sgr0`
 
-# if [ -z $DATABASE_URL ];
-# then
-#   echo DATABASE_URL not set
-#   exit 1
-# fi
+if [ -z $DATABASE_URL ] && [ $1 ];
+then
+  echo
+  echo "${red}${bold}DATABASE_URL not set${reset}"
+  echo DATABASE_URL needs to be set if trying to reset a postgress database
+  echo
+  exit 1
+fi
 
 # DATABASE_NAME=thisiget_local
 APP_OR_DB_NAME=''
