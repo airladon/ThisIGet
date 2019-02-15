@@ -17,6 +17,8 @@ then
   exit 1
 fi
 
+
+
 # DATABASE_NAME=thisiget_local
 APP_OR_DB_NAME=''
 if [ $1 ];
@@ -78,7 +80,8 @@ then
     echo "Cannot overwrite a remote database without an app name"
     exit 1
   fi
-  echo "${yellow}About to overwrite remote database ${reset}"
+  echo
+  echo "${yellow}${bold}About to overwrite remote database ${reset}"
   while true; do
     read -p "${yellow}Are you sure you want to continue?${reset} (y/n/c): " ync
     case $ync in
@@ -87,7 +90,40 @@ then
       [Cc]* ) echo Cancelled; exit 1;;
       * ) echo "Please answer yes or no.";;
     esac
-  done  
+  done
+
+  # Check heroku config vars are the same as local
+  RESULT=`heroku config --app=$1`
+  REMOTE_PEPPER=`echo $RESULT | sed -n 's/.*PEPPER: \([^ ]*\).*/\1/p'`
+  REMOTE_AES=`echo $RESULT | sed -n 's/.*AES_KEY: \([^ ]*\).*/\1/p'`
+  FAIL=0
+  if [ -z $AES_KEY ];
+  then
+    echo
+    echo "${red}Local AES_KEY not defined. Remote and local AES_KEY needs to be the same.${reset}"
+  elif [ $REMOTE_AES != $AES_KEY ];
+  then
+    echo
+    echo "${red}Remote and local AES_KEY are differen. They need to be the same.${reset}"
+    FAIL=1
+  fi
+  if [ -z $PEPPER ];
+  then
+    echo
+    echo "${red}Local PEPPER not defined. Remote and local PEPPER needs to be the same.${reset}"
+    FAIL=1
+  elif [ $REMOTE_PEPPER != $PEPPER ];
+  then
+    echo
+    echo "${red}Remote and local PEPPER are different. They need to be the same${reset}."
+    FAIL=1
+  fi
+  if [ $FAIL = 1 ];
+  then
+    echo
+    exit 1
+  fi
+  exit 1
 fi
 
 if [ $INITIALIZE_FLASK_DB == 1 ];
