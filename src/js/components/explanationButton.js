@@ -29,13 +29,16 @@ export default class ExplanationButton extends React.Component <Props> {
       return listItem.label;
     }
     let numReviews = listItem.numReviews || 0;
-    let rating = 0;
+    let rating = '';
     if (numReviews > 0) {
       rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
       if (rating === '') {
         rating = '-';
       }
       numReviews = (numReviews).toLocaleString('en');
+    }
+    if (numReviews === 0) {
+      numReviews = '';
     }
     let label = '';
     let description = '';
