@@ -55,18 +55,19 @@ export default class LessonDescription {
     path: string,
   }};
 
-  topics: {
-    [versionName: string]: {
-      title: string;
-      description: string;
-      onPath: boolean;
-      qr: Array<string>;
-      path: string;
-      aveRating: number;
-      numRatings: number;
-      numHighRatings: number;
-    };
-  };
+  topics: Object;
+  // topics: {
+  //   [versionName: string]: {
+  //     title: string;
+  //     description: string;
+  //     onPath: boolean;
+  //     qr: Array<string>;
+  //     path: string;
+  //     aveRating: number;
+  //     numRatings: number;
+  //     numHighRatings: number;
+  //   };
+  // };
 
   numVersions: number;
   callbackCount: number;

@@ -126,7 +126,7 @@ export default class TopicButton extends React.Component <Props> {
     const props = Object.assign({}, this.props);
     const listItems = [{
       label: this.renderTitle(),
-      link: null,
+      // link: null,
       // separator: true,
     }];
     props.list.forEach((listElement) => {

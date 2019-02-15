@@ -668,23 +668,20 @@ export default class LessonComponent extends React.Component
         }
 
         if (listItems.length === 1) {
-          let single_item_class = 'dropdown_button_container';
+          let singleItemClass = 'dropdown_button_container';
           if (selected) {
-            single_item_class = `${single_item_class} dropdown_button_selected`
+            singleItemClass = `${singleItemClass} dropdown_button_selected`;
           }
           output.push(
             <div className="lesson__path_tile" key={this.key}>
-              <div className={single_item_class}>
-                {/*<div className="topic_button__single_item_label">
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
-                </div>*/}
-                <a href={listItems[0].link}
+              <div className={singleItemClass}>
+                <a href={listItems[0].link || '/'}
                   className = "topic_button__single_item_label">
                   {name.charAt(0).toUpperCase() + name.slice(1)}
                 </a>
               </div>
-            </div>
-            )
+            </div>,
+          );
         } else {
           output.push(
             <div className="lesson__path_tile" key={this.key}>
