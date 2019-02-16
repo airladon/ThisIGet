@@ -295,6 +295,21 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
+        modern: {
+          title: 'Straight Forward',
+          description: 'Updated with latest Figureone.',
+          path: 'lesson_modern',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
       },
       dependencies: [
       ],

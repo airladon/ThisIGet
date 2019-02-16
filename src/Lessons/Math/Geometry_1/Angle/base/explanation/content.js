@@ -42,14 +42,10 @@ class Content extends LessonContent {
           The |_sharpness| of the corner is a property that can describe a shape.
         </p>`,
       modifiers: {
-        // _shapes: actionWord('shapes', 'id_shapes', colors.lines),
         _shapes: click(shapes.pulseShapes, [shapes], colors.lines),
         _corners: click(shapes.toggleCorners, [shapes], colors.corners),
         _more_sharp: click(shapes.toggleMoreSharpCorners, [shapes], colors.moreSharp),
         _less_sharp: click(shapes.toggleLessSharpCorners, [shapes], colors.lessSharp),
-        // _corners: actionWord('corners', 'id_corners', colors.corners),
-        // _more_sharp: actionWord('more sharp', 'id_more_sharp', colors.moreSharp),
-        // _less_sharp: actionWord('less sharp', 'id_less_sharp', colors.lessSharp),
         _sharpness: highlightWord('sharpness', 'english'),
       },
       hideOnly: [
@@ -62,14 +58,6 @@ class Content extends LessonContent {
         shapes._pent._moreSharpCorners,
         shapes._pent._lessSharpCorners,
       ],
-      // setSteadyState: () => {
-      //   console.log('Here ');
-
-      //   onClickId('id_shapes', shapes.pulseShapes, [shapes]);
-      //   onClickId('id_corners', shapes.toggleCorners, [shapes]);
-      //   onClickId('id_more_sharp', shapes.toggleMoreSharpCorners, [shapes]);
-      //   onClickId('id_less_sharp', shapes.toggleLessSharpCorners, [shapes]);
-      // },
     });
 
     this.addSection({
@@ -217,13 +205,7 @@ class Content extends LessonContent {
         circle._anchor,
       ],
       setSteadyState: () => {
-        // const smallRotation = [circle, Math.PI / 7, 0, 1, () => {}];
-        // const largeRotation = [circle, 5 * Math.PI / 6, 0, 1, () => {}];
         circle._anchor.color = circle.colors.anchor.slice();
-        // onClickId('id_small_rotation', circle.rotateTo, smallRotation);
-        // onClickId('id_large_rotation', circle.rotateTo, largeRotation);
-        // onClickId('id_sharp_corner', circle.rotateTo, smallRotation);
-        // onClickId('id_less_sharp_corner', circle.rotateTo, largeRotation);
         circle._reference.transform.updateTranslation(0, 0);
         circle._reference.transform.updateRotation(0);
         circle._radius.transform.updateTranslation(0, 0);
@@ -312,9 +294,6 @@ class Content extends LessonContent {
         _angle: click(circle.pulseAngle, [circle], colors.angleText),
         _smaller_angle: click(circle.rotateToRandomSmall, [circle, 1, () => {}], colors.moreSharp),
         _larger_angle: click(circle.rotateToRandomLarge, [circle, 1, () => {}], colors.lessSharp),
-        // _angle: actionWord('angle', 'id_angle', colors.angleText),
-        // _smaller_angle: actionWord('small angle', 'id_small_rotation', colors.moreSharp),
-        // _larger_angle: actionWord('large angle', 'id_large_rotation', colors.lessSharp),
       },
       showOnly: [
         circle,
@@ -326,12 +305,7 @@ class Content extends LessonContent {
         circle._reference.transform.updateTranslation(0, 0);
         circle._reference.transform.updateRotation(0);
         circle._radius.transform.updateTranslation(0, 0);
-        const bindArray = [circle, 1, () => {}];
         circle._anchor.color = circle.colors.anchor.slice();
-        // onClickId('id_small_rotation', circle.rotateToRandomSmall, bindArray);
-        // onClickId('id_large_rotation', circle.rotateToRandomLarge, bindArray);
-
-        // onClickId('id_angle', circle.pulseAngle, [circle]);
         if (circle._radius.transform.r() < 0.2) {
           circle._radius.transform.updateRotation(Math.PI / 6);
         }
