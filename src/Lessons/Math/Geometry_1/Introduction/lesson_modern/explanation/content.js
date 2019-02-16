@@ -31,7 +31,11 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram = new CommonLessonDiagram({
+      htmlId,
+      vertexShader: 'withTexture',
+      fragmentShader: 'withTexture',
+    }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     // this.loadQRs([
     //   'qr_names_here',
@@ -92,7 +96,7 @@ class Content extends LessonContent {
       setSteadyState: () => {
         console.log(circ)
       },
-      show: [circ],
+      show: [diag],
     });
   }
 }

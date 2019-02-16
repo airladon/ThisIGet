@@ -23,14 +23,14 @@ export default function lessonLayout() {
   // General
   // const linewidth = 0.03;
   const wheelSize = 1;
-  const wheelPoints = 400;
+  const wheelPoints = 4;
   const textureFile = `/static/dist/${textureMap}`;
 
   const image = {
     fill: true,
     sides: wheelPoints,
     radius: wheelSize,
-    // color: [1,1,0,1],
+    color: [1,1,0,1],
     point: new Point(0, 0),
     textureLocation: textureFile,
     transform: new Transform('image').translate(0, 0),
@@ -46,7 +46,14 @@ export default function lessonLayout() {
     //   method: 'polygon',
     //   options: [image, wheel],
     // },
-    ['', 'wheel', 'polygon', [image, wheel]],
+    ['', 'wheel', 'shapes/polygon', [image, wheel]],
+    // ['', 'c', 'polygon', {
+    //   fill: true,
+    //   radius: 1,
+    //   point: new Point(-1, 0),
+    //   color: [0, 0.5, 0, 1],
+    //   sides: 12,
+    // }],
   ];
   return layout;
 }
