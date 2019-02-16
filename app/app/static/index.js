@@ -776,7 +776,7 @@ function () {
         draw2D = this.draw2DHigh;
       }
 
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits);
+      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.animateNextFrame.bind(this));
     }
   }, {
     key: "getEquations",
@@ -9965,7 +9965,13 @@ function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSid
 function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, color, transformOrLocation, diagramLimits) {
   var textureLocation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
   var textureCoords = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Rect"](0, 0, 1, 1);
+  var onLoad = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : null;
   var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolygonFilled__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, numSides, radius, rotation, new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"](0, 0), numSidesToDraw, textureLocation, textureCoords);
+
+  if (textureLocation) {
+    vertexLineCorners.onLoad = onLoad;
+  }
+
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
@@ -15061,13 +15067,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DiagramPrimatives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits) {
+  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
     this.webgl = webgl;
     this.draw2D = draw2D;
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
+    this.animateNextFrame = animateNextFrame;
   }
 
   _createClass(DiagramPrimatives, [{
@@ -15326,6 +15333,7 @@ function () {
         point: null,
         textureLocation: '',
         textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
+        onLoad: this.animateNextFrame,
         mods: {}
       };
 
@@ -15356,7 +15364,7 @@ function () {
       var element;
 
       if (o.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, o.sides, o.radius, o.rotation, o.sidesToDraw, o.color, transform, this.limits, o.textureLocation, o.textureCoords);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, o.sides, o.radius, o.rotation, o.sidesToDraw, o.color, transform, this.limits, o.textureLocation, o.textureCoords, o.onLoad);
       } else {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, o.sides, o.radius, o.width, o.rotation, direction, o.sidesToDraw, o.color, transform, this.limits);
       }
@@ -15729,6 +15737,7 @@ function () {
     this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.border = [[]];
     this.holeBorder = [[]];
+    this.onLoad = null;
   }
 
   _createClass(DrawingObject, [{
@@ -17928,6 +17937,10 @@ function (_DrawingObject) {
             _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_WRAP_T, _this2.gl.CLAMP_TO_EDGE);
 
             _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_MIN_FILTER, _this2.gl.LINEAR);
+          }
+
+          if (_this2.onLoad != null) {
+            _this2.onLoad();
           }
         });
       } // this.buffer = createBuffer(this.gl, this.vertices);
