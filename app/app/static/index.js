@@ -15332,7 +15332,9 @@ function () {
         transform: null,
         point: null,
         textureLocation: '',
+        // If including a texture, make sure to use
         textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
+        // correct shader in diagram
         onLoad: this.animateNextFrame,
         mods: {}
       };
@@ -15730,6 +15732,8 @@ function () {
   // numPoints: number;           // Number of primative vertices
   // Border vertices
   // Border of any holes inside of main border
+  // Only used for drawing objects with asynchronous
+  //                            loading (like textures)
   function DrawingObject() {
     _classCallCheck(this, DrawingObject);
 
@@ -19121,7 +19125,9 @@ function checkCallback(callback) {
   }
 
   return callbackToUse;
-} // A diagram is composed of multiple diagram elements.
+}
+
+// A diagram is composed of multiple diagram elements.
 //
 // A diagram element can either be a:
 //  - Primative: a basic element that has the webGL vertices, color
@@ -19155,8 +19161,6 @@ function checkCallback(callback) {
 // the element's current transform used for drawing itself and any children
 // elements it has.
 //
-
-
 var DiagramElement =
 /*#__PURE__*/
 function () {
@@ -19245,6 +19249,7 @@ function () {
       element: null,
       limitLine: null
     };
+    this.scenarios = {};
     this.pulse = {
       time: 1,
       frequency: 0.5,
@@ -19693,6 +19698,76 @@ function () {
     key: "setColor",
     value: function setColor(color) {
       this.color = color.slice();
+    }
+  }, {
+    key: "getScenarioTarget",
+    value: function getScenarioTarget(scenarioName) {
+      var target = this.transform._dup();
+
+      if (scenarioName in this.scenarios) {
+        var scenario = this.scenarios[scenarioName];
+
+        if (scenario.position != null) {
+          target.updateTranslation(scenario.position);
+        }
+
+        if (scenario.rotation != null) {
+          target.updateRotation(scenario.rotation);
+        }
+
+        if (scenario.scale != null) {
+          if (scenario.scale instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+            target.updateScale(scenario.scale);
+          } else {
+            target.updateScale(scenario.scale, scenario.scale);
+          }
+        }
+      }
+
+      return target;
+    }
+  }, {
+    key: "setScenario",
+    value: function setScenario(scenarioName) {
+      var target = this.getScenarioTarget(scenarioName);
+      this.setTransform(target._dup());
+    }
+  }, {
+    key: "getTimeToMoveToScenario",
+    value: function getTimeToMoveToScenario(scenarioName) {
+      var rotDirection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var target = this.getScenarioTarget(scenarioName);
+      var velocity = this.transform.constant(0);
+      velocity.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / 2, 1 / 2));
+      velocity.updateRotation(2 * Math.PI / 6);
+      velocity.updateScale(1, 1);
+      var time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform._dup(), target, velocity, rotDirection);
+      return time;
+    }
+  }, {
+    key: "moveToScenario",
+    value: function moveToScenario(scenarioName) {
+      var animationTimeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      this.stop();
+      var target = this.getScenarioTarget(scenarioName);
+      var time = 1;
+      var estimatedTime = this.getTimeToMoveToScenario(scenarioName, rotDirection);
+
+      if (animationTimeOrVelocity == null) {
+        time = estimatedTime;
+      } else {
+        time = animationTimeOrVelocity;
+      }
+
+      if (time > 0 && estimatedTime !== 0) {
+        this.animateTo(target, time, 0, rotDirection, callback);
+      } else if (callback != null) {
+        callback();
+      }
+
+      return time;
     } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity
 

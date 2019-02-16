@@ -89,13 +89,16 @@ class Content extends LessonContent {
       ]),
     });
     this.addSection(common, {
-      setContent: centerV([
+      setContent: [
         'For example, a |wheel| is a physical thing.',
         'It is made of different materials, has mass, size, location and smell.',
-      ]),
-      setSteadyState: () => {
-        console.log(circ)
+      ],
+      setEnterState: () => {
+        circ._wheel.setScenario('left');
       },
+      // setSteadyState: () => {
+      //   console.log(circ)
+      // },
       show: [diag],
     });
   }

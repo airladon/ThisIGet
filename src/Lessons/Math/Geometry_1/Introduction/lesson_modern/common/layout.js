@@ -22,38 +22,41 @@ export default function lessonLayout() {
 
   // General
   // const linewidth = 0.03;
-  const wheelSize = 1;
-  const wheelPoints = 4;
+  const wheelSize = 0.8;
+  const wheelPoints = 50;
   const textureFile = `/static/dist/${textureMap}`;
 
-  const image = {
+  const filledCircle = {
     fill: true,
     sides: wheelPoints,
     radius: wheelSize,
-    color: [1,1,0,1],
-    point: new Point(0, 0),
+    color: [1, 1, 0, 1],
+    transform: new Transform('filledCircle').translate(0, 0),
     textureLocation: textureFile,
-    transform: new Transform('image').translate(0, 0),
   };
 
   const wheel = {
-    textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
+    geometry: {
+      name: 'wheel',
+      method: 'polygon',
+      options: [filledCircle, {
+        textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
+      }],
+    },
+    scenarios: {
+      center: { position: new Point(0, -0.4) },
+      left: { position: new Point(-1, -0.4) },
+    },
   };
 
+  // const wheel = ['', 'wheel', 'polygon', [filledCircle, {
+  //   textureLocation: textureFile,
+  //   textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
+  // }]];
+
   layout.addElements = [
-    // {
-    //   name: 'wheel',
-    //   method: 'polygon',
-    //   options: [image, wheel],
-    // },
-    ['', 'wheel', 'shapes/polygon', [image, wheel]],
-    // ['', 'c', 'polygon', {
-    //   fill: true,
-    //   radius: 1,
-    //   point: new Point(-1, 0),
-    //   color: [0, 0.5, 0, 1],
-    //   sides: 12,
-    // }],
+    // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
+    wheel.geometry,
   ];
   return layout;
 }
