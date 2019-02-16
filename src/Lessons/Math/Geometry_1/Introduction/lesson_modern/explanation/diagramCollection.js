@@ -9,7 +9,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
-  _collection: CommonCollection;
+  _circles: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,7 +18,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.add('circles', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 }

@@ -15,6 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   // click,
   centerVH,
+  centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -38,8 +39,8 @@ class Content extends LessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const collection = diag._collection;
+    const diag = this.diagram.elements;
+    const circ = diag._circles;
 
     const common = {
       setContent: '',
@@ -62,11 +63,36 @@ class Content extends LessonContent {
     };
 
     this.addSection(common, {
-      title: '',
+      title: 'Introduction',
       setContent: centerVH([
         '|Mathematics is a powerful tool.|',
         'We use it to understand and |predict| the world around us.',
       ]),
+    });
+
+    this.addSection(common, {
+      setContent: centerV([
+        'Mathematics describes an object or phenomenon in a more |simple|, and more |general| way.',
+        'Describing something more |simply|, makes it easier to study and understand.',
+        'Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
+      ]),
+    });
+
+    this.addSection(common, {
+      setContent: centerV([
+        'A large area of mathematics is the study of |shapes|.',
+        '|Shapes| are simple generalizations of |objects| and the |paths| they travel.',
+      ]),
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'For example, a |wheel| is a physical thing.',
+        'It is made of different materials, has mass, size, location and smell.',
+      ]),
+      setSteadyState: () => {
+        console.log(circ)
+      },
+      show: [circ],
     });
   }
 }
