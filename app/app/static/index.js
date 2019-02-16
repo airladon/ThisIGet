@@ -24834,8 +24834,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 
 
-function centerV() {
-  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+function convertTextArrayToParagraphs(text) {
   var textToUse = '';
 
   if (Array.isArray(text)) {
@@ -24844,17 +24843,25 @@ function centerV() {
     textToUse = text;
   }
 
+  return textToUse;
+}
+
+function centerV() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var textToUse = convertTextArrayToParagraphs(text);
   return "<div style=\"display: table; height: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(text, "</div></div>");
+  var textToUse = convertTextArrayToParagraphs(text);
+  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  return "<div style=\"text-align:center;\">\n        ".concat(text, "</div>");
+  var textToUse = convertTextArrayToParagraphs(text);
+  return "<div style=\"text-align:center;\">\n        ".concat(textToUse, "</div>");
 }
 
 function itemSelector() {

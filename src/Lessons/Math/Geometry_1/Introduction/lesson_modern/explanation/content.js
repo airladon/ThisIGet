@@ -14,7 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   // click,
-  centerV,
+  centerVH,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -63,8 +63,9 @@ class Content extends LessonContent {
 
     this.addSection(common, {
       title: '',
-      setContent: centerV([
-        '',
+      setContent: centerVH([
+        '|Mathematics is a powerful tool.|',
+        'We use it to understand and |predict| the world around us.',
       ]),
     });
   }
