@@ -16,16 +16,30 @@ export default class CommonCollection extends CommonDiagramCollection {
   _wheel: DiagramElementPrimative;
 
   appearCircleAndMoveWheel(done: () => {}) {
+    this._circle.stop(true, true);
+    this._wheel.stop(true, true);
+
     this._circle.hide();
     this._circle.setScenario('center');
     this._wheel.setScenario('center');
 
-    const move = () => {
-      this._circle.moveToScenario('right', null, done);
-      this._wheel.moveToScenario('left');
+    const move = (cancelled: boolean) => {
+      if (!cancelled) {
+        this._circle.moveToScenario('right', null, done);
+        this._wheel.moveToScenario('left');
+      } else {
+        this._circle.setScenario('right');
+        this._circle.setScenario('left');
+        done();
+      }
     };
-    this._circle.disolveWithDelay(0, 1, 'in', move, true);
+
+    this._circle.disolveIn(1, move);
     this.diagram.animateNextFrame();
+
+    // this._circle.disolveIn(1)
+    //   .then.moveToScenario('right')
+    //   .then.disolveOut(1)
   }
 
   constructor(
