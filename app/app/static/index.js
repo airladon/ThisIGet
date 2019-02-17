@@ -19184,6 +19184,7 @@ function () {
   function DiagramElement() {
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
     _classCallCheck(this, DiagramElement);
 
@@ -19206,6 +19207,7 @@ function () {
       parentCount: 0,
       elementCount: 0
     };
+    this.parent = parent;
     this.drawPriority = 1;
     this.noRotationFromParent = false;
     this.animate = {
@@ -19749,7 +19751,8 @@ function () {
     value: function moveToScenario(scenarioName) {
       var animationTimeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var delay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var rotDirection = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
       this.stop();
       var target = this.getScenarioTarget(scenarioName);
       var time = 1;
@@ -19762,7 +19765,7 @@ function () {
       }
 
       if (time > 0 && estimatedTime !== 0) {
-        this.animateTo(target, time, 0, rotDirection, callback);
+        this.animateTransformToWithDelay(target, delay, time, rotDirection, callback, true);
       } else if (callback != null) {
         callback();
       }
@@ -20825,6 +20828,12 @@ function () {
     key: "show",
     value: function show() {
       this.isShown = true;
+
+      if (this.parent != null) {
+        if (!this.parent.isShown) {
+          this.parent.show();
+        }
+      }
     }
   }, {
     key: "showAll",
@@ -20912,10 +20921,11 @@ function (_DiagramElement) {
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
     var diagramLimits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var parent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
     _classCallCheck(this, DiagramElementPrimative);
 
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits));
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
     _this3.color = color.slice();
     _this3.pointsToDraw = -1;
@@ -20976,7 +20986,7 @@ function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative, 'parent');
 
       if (transform != null) {
         primative.transform = transform._dup();
@@ -21254,10 +21264,11 @@ function (_DiagramElement2) {
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
+    var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits));
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
     _this5.elements = {};
     _this5.drawOrder = [];
     _this5.touchInBoundingRect = false;
@@ -21274,7 +21285,7 @@ function (_DiagramElement2) {
       var doNotDuplicate = this.drawOrder.map(function (e) {
         return "_".concat(e);
       });
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder'].concat(_toConsumableArray(doNotDuplicate)));
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var name = this.drawOrder[i];
@@ -21312,6 +21323,8 @@ function (_DiagramElement2) {
     key: "add",
     value: function add(name, diagramElement) {
       var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+      // eslint-disable-next-line no-param-reassign
+      diagramElement.parent = this;
       this.elements[name] = diagramElement;
       this.elements[name].name = name; // $FlowFixMe
 

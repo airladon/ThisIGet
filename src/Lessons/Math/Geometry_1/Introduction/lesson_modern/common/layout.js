@@ -11,13 +11,14 @@ const {
 } = Fig.tools.g2;
 
 const cssColorNames = [
-  // 'lines',
+  'circle',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
   const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  layout.colors = colors;
   layout.position = new Point(0, 0);
 
   // General
@@ -35,6 +36,27 @@ export default function lessonLayout() {
     textureLocation: textureFile,
   };
 
+  const circle = {
+    geometry: {
+      name: 'circle',
+      method: 'polygon',
+      options: {
+        fill: false,
+        radius: wheelSize,
+        width: 0.03,
+        sides: wheelPoints,
+        color: colors.circle,
+        transform: new Transform('Circle').translate(0, 0),
+      },
+      mods: {
+        scenarios: {
+          center: { position: new Point(0, -0.4) },
+          right: { position: new Point(1, -0.4) },
+        },
+      },
+    },
+  };
+
   const wheel = {
     geometry: {
       name: 'wheel',
@@ -42,10 +64,12 @@ export default function lessonLayout() {
       options: [filledCircle, {
         textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
       }],
-    },
-    scenarios: {
-      center: { position: new Point(0, -0.4) },
-      left: { position: new Point(-1, -0.4) },
+      mods: {
+        scenarios: {
+          center: { position: new Point(0, -0.4) },
+          left: { position: new Point(-1, -0.4) },
+        },
+      },
     },
   };
 
@@ -57,6 +81,7 @@ export default function lessonLayout() {
   layout.addElements = [
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     wheel.geometry,
+    circle.geometry,
   ];
   return layout;
 }

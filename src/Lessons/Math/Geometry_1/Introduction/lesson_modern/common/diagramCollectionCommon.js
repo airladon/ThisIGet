@@ -5,12 +5,29 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 // import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimative,
+  // DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
   Transform,
 } = Fig;
 // const textureFile = `/static/dist/${textureMap}`;
 export default class CommonCollection extends CommonDiagramCollection {
+  _circle: DiagramElementPrimative;
+  _wheel: DiagramElementPrimative;
+
+  appearCircleAndMoveWheel(done: () => {}) {
+    this._circle.hide();
+    this._circle.setScenario('center');
+    this._wheel.setScenario('center');
+
+    const move = () => {
+      this._circle.moveToScenario('right', null, done);
+      this._wheel.moveToScenario('left');
+    };
+    this._circle.disolveWithDelay(0, 1, 'in', move, true);
+    this.diagram.animateNextFrame();
+  }
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,

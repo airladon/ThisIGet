@@ -13,7 +13,7 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerVH,
   centerV,
   // highlight,
@@ -21,7 +21,7 @@ const {
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends LessonContent {
   setTitle() {
@@ -94,12 +94,27 @@ class Content extends LessonContent {
         'It is made of different materials, has mass, size, location and smell.',
       ],
       setEnterState: () => {
-        circ._wheel.setScenario('left');
+        circ._wheel.setScenario('center');
       },
-      // setSteadyState: () => {
-      //   console.log(circ)
-      // },
-      show: [diag],
+      show: [circ._wheel],
+    });
+    this.addSection(common, {
+      setContent: [
+        'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
+      ],
+      modifiers: {
+        shape: click(circ.appearCircleAndMoveWheel, [circ, () => {}], colors.circle)
+      },
+      setEnterState: () => {
+        circ._wheel.setScenario('center');
+        circ._circle.setScenario('center');
+      },
+      transitionFromAny: (done) => {
+        // circ._wheel.moveToScenario('left');
+        // circ._circle.moveToScenario('right', null, done);
+        circ.appearCircleAndMoveWheel(done);
+      },
+      show: [circ._wheel, circ._circle],
     });
   }
 }
