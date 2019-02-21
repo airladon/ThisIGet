@@ -203,6 +203,2179 @@ var FigureOne = {
 
 /***/ }),
 
+/***/ "./src/js/diagram/Animation/Animation.js":
+/*!***********************************************!*\
+  !*** ./src/js/diagram/Animation/Animation.js ***!
+  \***********************************************/
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PositionAnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PositionAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PositionAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PositionAnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ColorAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["DissolveInAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["dissolveIn"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["DissolveOutAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["dissolveOut"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/TransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+
+/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_3__["TriggerStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_3__["trigger"]; });
+
+/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_4__["CustomAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_4__["custom"]; });
+
+/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_5__["ParallelAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_5__["inParallel"]; });
+
+/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_6__["SerialAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_6__["inSerial"]; });
+
+/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_7__["DelayStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_7__["delay"]; });
+
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_8__["default"]; });
+
+/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_9__["default"]; });
+
+/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationBuilder.js":
+/*!******************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationBuilder.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationBuilder; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+// import * as tools from '../../tools/math';
+
+// import PositionAnimationStep from './AnimationStep/ElementAnimationStep/PositionAnimationStep';
+// import SerialAnimationStep from './AnimationStep/SerialAnimationStep';
+
+
+
+var AnimationBuilder =
+/*#__PURE__*/
+function (_animation$SerialAnim) {
+  _inherits(AnimationBuilder, _animation$SerialAnim);
+
+  function AnimationBuilder() {
+    var _this;
+
+    var elementOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, AnimationBuilder);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.element = elementOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AnimationBuilder).call(this, options));
+    _this.element = options.element;
+    return _possibleConstructorReturn(_this, _assertThisInitialized(_assertThisInitialized(_this)));
+  }
+
+  _createClass(AnimationBuilder, [{
+    key: "custom",
+    value: function custom() {
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
+      }
+
+      this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"], optionsIn));
+      return this;
+    }
+  }, {
+    key: "moveTo",
+    value: function moveTo(optionsIn) {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+        var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, optionsIn);
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PositionAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "move",
+    value: function move(optionsIn) {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+        var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, optionsIn);
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PositionAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "colorTo",
+    value: function colorTo() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "dissolveOut",
+    value: function dissolveOut() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+        args[_key4 - 1] = arguments[_key4];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveOut"](options));
+      return this;
+    }
+  }, {
+    key: "dissolveIn",
+    value: function dissolveIn() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+        args[_key5 - 1] = arguments[_key5];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveIn"](options));
+      return this;
+    }
+  }, {
+    key: "delay",
+    value: function delay() {
+      var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+        args[_key6 - 1] = arguments[_key6];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
+      return this;
+    }
+  }, {
+    key: "trigger",
+    value: function trigger() {
+      var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+        optionsIn[_key7 - 1] = arguments[_key7];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inParallel",
+    value: function inParallel() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+        optionsIn[_key8 - 1] = arguments[_key8];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inSerial",
+    value: function inSerial() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+        optionsIn[_key9 - 1] = arguments[_key9];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      this.steps = [];
+      this.state = 'idle';
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var newBuilder = new AnimationBuilder();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newBuilder, ['element']);
+      newBuilder.element = this.element;
+      return newBuilder;
+    }
+  }]);
+
+  return AnimationBuilder;
+}(_Animation__WEBPACK_IMPORTED_MODULE_1__["SerialAnimationStep"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationManager.js":
+/*!******************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationManager.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationManager; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import * as tools from '../../tools/math';
+ // import type { TypeSerialAnimationStepInputOptions } from './AnimationStep/SerialAnimationStep';
+// import type {
+//   TypePositionAnimationStepInputOptions, TypeParallelAnimationStepInputOptions,
+//   TypeDelayStepInputOptions, TypeTriggerStepInputOptions,
+//   TypeColorAnimationStepInputOptions, TypeCustomAnimationStepInputOptions,
+// } from './Animation';
+
+
+
+
+var AnimationManager =
+/*#__PURE__*/
+function () {
+  function AnimationManager() {
+    var elementOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, AnimationManager);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.element = elementOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
+    }
+
+    this.element = options.element;
+    this.animations = [];
+    return this;
+  }
+
+  _createClass(AnimationManager, [{
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      var animationsToRemove = [];
+      var remaining = -1;
+      this.animations.forEach(function (animation, index) {
+        if (animation.state === 'waitingToStart' || animation.state === 'animating') {
+          var stepRemaining = animation.nextFrame(now);
+
+          if (remaining === -1) {
+            remaining = stepRemaining;
+          }
+
+          if (stepRemaining < remaining) {
+            remaining = stepRemaining;
+          }
+        }
+
+        if (animation.state === 'finished' && animation.removeOnFinish) {
+          animationsToRemove.push(index);
+        }
+      });
+
+      for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
+        this.animations.splice(animationsToRemove[i], 1);
+      }
+
+      return remaining;
+    } // Cancel all primary animations with the name
+    // animations will be cleaned up on next frame
+
+  }, {
+    key: "cancel",
+    value: function cancel(name) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
+
+        if (animation.name === name) {
+          animation.cancel(force);
+        }
+      }
+    }
+  }, {
+    key: "cancelAll",
+    value: function cancelAll() {
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      for (var i = 0; i < this.animations.length; i += 1) {
+        this.animations[i].cancel(force);
+      }
+    } // Cancel all primary animations with the name
+    // animations will be cleaned up on next frame
+
+  }, {
+    key: "start",
+    value: function start(name) {
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
+
+        if (animation.name === name) {
+          animation.start();
+        }
+      }
+    }
+  }, {
+    key: "new",
+    value: function _new(nameOrStep) {
+      if (typeof nameOrStep === 'string' || nameOrStep == null) {
+        var options = {};
+
+        if (this.element != null) {
+          options.element = this.element;
+        }
+
+        if (nameOrStep != null) {
+          options.name = nameOrStep;
+        }
+
+        var animation = new _Animation__WEBPACK_IMPORTED_MODULE_1__["AnimationBuilder"](options);
+        this.animations.push(animation);
+        return animation;
+      }
+
+      if (nameOrStep != null) {
+        this.animations.push(nameOrStep);
+      }
+
+      return nameOrStep;
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var newManager = new AnimationManager();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newManager, ['element']);
+      newManager.element = this.element;
+      return newManager;
+    }
+  }]);
+
+  return AnimationManager;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep.js":
+/*!***************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationStep; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import {
+//   Transform, Point,
+//   Rotation, getDeltaAngle, getMaxTimeFromVelocity,
+// } from '../tools/g2';
+// import * as tools from '../tools/math';
+// import type { pathOptionsType } from '../tools/g2';
+// eslint-disable-next-line import/no-cycle
+// import { DiagramElement } from './Element';
+
+
+var AnimationStep =
+/*#__PURE__*/
+function () {
+  // animations: Array<AnimationStep>;
+  function AnimationStep() {
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, AnimationStep);
+
+    var defaultOptions = {
+      onFinish: null,
+      completeOnCancel: null,
+      removeOnFinish: true,
+      name: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["generateRandomString"])()
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
+    this.onFinish = options.onFinish;
+    this.completeOnCancel = options.completeOnCancel;
+    this.startTime = -1;
+    this.state = 'idle';
+    this.name = options.name; // This is only for it this step is a primary path in an Animation Manager
+
+    this.removeOnFinish = options.removeOnFinish; // Each animation frame will typically calculate a percent complete,
+    // which is based on the duration, and from the percent complete calculate
+    // the position of the current animation.
+    // However, if you want to start an animation not from 0 percent, then this
+    // value can be used. When startTimeOffset != 0, then the first frame
+    // will be calculated at this.progression(startTimeOffset). The animation
+    // will still go to 1, but will be reduced in duration by startTimeOffset.
+    // When progressions aren't linear, then this time is non-trival.
+
+    this.startTimeOffset = 0;
+    return this;
+  } // returns remaining time if this step completes
+  // Return of 0 means this step is still going
+
+
+  _createClass(AnimationStep, [{
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      if (this.startTime === -1) {
+        this.startTime = now - this.startTimeOffset;
+      }
+
+      var remainingTime = 0;
+      var deltaTime = now - this.startTime;
+
+      if (deltaTime > this.duration) {
+        remainingTime = deltaTime - this.duration;
+        deltaTime = this.duration;
+      }
+
+      this.setFrame(deltaTime);
+
+      if (remainingTime > 0) {
+        this.finish();
+      }
+
+      return remainingTime;
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {}
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      this.state = 'waitingToStart';
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "start",
+    value: function start() {
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.startTime = startTime;
+      this.state = 'animating';
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "finish",
+    value: function finish() {
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      // this.startTime = -2;
+      this.state = 'finished'; // this.onFinish(false);
+    }
+  }, {
+    key: "cancel",
+    value: function cancel() {
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.finish(true, force);
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new AnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }, {
+    key: "whenFinished",
+    value: function whenFinished(callback) {
+      this.onFinish = callback;
+      return this;
+    }
+  }, {
+    key: "ifCanceledThenComplete",
+    value: function ifCanceledThenComplete() {
+      this.completeOnCancel = true;
+      return this;
+    }
+  }, {
+    key: "ifCanceledThenStop",
+    value: function ifCanceledThenStop() {
+      this.completeOnCancel = false;
+      return this;
+    }
+  }]);
+
+  return AnimationStep;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/CustomStep.js":
+/*!**************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/CustomStep.js ***!
+  \**************************************************************/
+/*! exports provided: CustomAnimationStep, custom */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return CustomAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return custom; });
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var CustomAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(CustomAnimationStep, _AnimationStep);
+
+  function CustomAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, CustomAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomAnimationStep).call(this, AnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      callback: null,
+      startPercent: 0,
+      progression: 'linear'
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+
+    if (options.progression === 'linear') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    } else if (options.progression === 'easein') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+    } else if (options.progression === 'easeout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+    } else if (options.progression === 'easeinout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
+    } else {
+      _this.progression = options.progression;
+    }
+
+    _this.callback = options.callback;
+    _this.startPercent = options.startPercent;
+
+    if (typeof _this.progression === 'function') {
+      _this.startTimeOffset = _this.progression(options.startPercent, true) * options.duration;
+    }
+
+    _this.duration = options.duration;
+    return _this;
+  }
+
+  _createClass(CustomAnimationStep, [{
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+
+      if (this.callback != null) {
+        this.callback(percentComplete);
+      }
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var _this2 = this;
+
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle') {
+        return;
+      }
+
+      _get(_getPrototypeOf(CustomAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var setToEnd = function setToEnd() {
+        if (_this2.callback != null) {
+          _this2.callback(1);
+        }
+      };
+
+      if (cancelled && force === 'complete') {
+        setToEnd();
+      }
+
+      if (cancelled && force == null && this.completeOnCancel === true) {
+        setToEnd();
+      }
+
+      if (cancelled === false) {
+        setToEnd();
+      }
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new CustomAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }]);
+
+  return CustomAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+function custom() {
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    optionsIn[_key2] = arguments[_key2];
+  }
+
+  return _construct(CustomAnimationStep, optionsIn);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/DelayStep.js":
+/*!*************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/DelayStep.js ***!
+  \*************************************************************/
+/*! exports provided: DelayStep, delay */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return DelayStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return delay; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+// Animations get started from a parent, but finish themselves
+var DelayStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(DelayStep, _AnimationStep);
+
+  function DelayStep() {
+    var _this;
+
+    var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DelayStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 0
+    };
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (typeof numOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: numOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, numOrOptionsIn].concat(args));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DelayStep).call(this, options));
+    _this.duration = options.duration;
+    return _this;
+  }
+
+  _createClass(DelayStep, [{
+    key: "_dup",
+    value: function _dup() {
+      var dup = new DelayStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, dup);
+      return dup;
+    }
+  }]);
+
+  return DelayStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function delay() {
+  var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(DelayStep, [numOrOptionsIn].concat(args));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js":
+/*!************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ElementAnimationStep; });
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ // import { DiagramElement } from '../../Element';
+
+
+
+
+var ElementAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(ElementAnimationStep, _AnimationStep);
+
+  function ElementAnimationStep() {
+    var _this;
+
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ElementAnimationStep);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ElementAnimationStep).call(this, optionsIn));
+    var defaultProgression = 'easeinout';
+
+    if (optionsIn.type === 'color' || optionsIn.type === 'custom') {
+      defaultProgression = 'linear';
+    }
+
+    var defaultOptions = {
+      element: null,
+      type: 'custom',
+      progression: defaultProgression,
+      duration: 0
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, optionsIn);
+    _this.element = options.element;
+    _this.type = options.type;
+    _this.onFinish = options.onFinish;
+    _this.duration = options.duration;
+
+    if (options.progression === 'linear') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    } else if (options.progression === 'easein') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+    } else if (options.progression === 'easeout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+    } else if (options.progression === 'easeinout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
+    } else {
+      _this.progression = options.progression;
+    }
+
+    return _this;
+  }
+
+  _createClass(ElementAnimationStep, [{
+    key: "_dup",
+    value: function _dup() {
+      var step = new ElementAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return ElementAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js ***!
+  \*******************************************************************************************/
+/*! exports provided: ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return ColorAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return DissolveInAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return dissolveIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return DissolveOutAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return dissolveOut; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import {
+//   Transform, Point, getMaxTimeFromVelocity,
+// } from '../../../../tools/g2';
+
+
+
+var addColors = function addColors(color1, color2) {
+  return color1.map(function (c, index) {
+    return Math.min(c + color2[index], 1);
+  });
+};
+
+var subtractColors = function subtractColors(color1, color2) {
+  return color1.map(function (c, index) {
+    return c - color2[index];
+  });
+};
+
+var ColorAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(ColorAnimationStep, _ElementAnimationStep);
+
+  function ColorAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, ColorAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn, [{
+      type: 'color'
+    }]));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      dissolve: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.color = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.color, ['start', 'delta', 'target', 'dissolve']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(ColorAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var element = this.element;
+
+      if (element != null) {
+        _get(_getPrototypeOf(ColorAnimationStep.prototype), "start", this).call(this, startTime);
+
+        if (this.color.start == null) {
+          this.color.start = element.color.slice();
+        }
+
+        if (this.color.delta == null && this.color.target == null) {
+          this.color.target = this.color.start.slice();
+        } else if (this.color.delta != null) {
+          this.color.target = addColors(this.color.start, this.color.delta);
+        }
+
+        this.color.whenComplete = this.color.target.slice();
+
+        if (this.color.dissolve === 'out') {
+          this.color.target[3] = 0.001;
+        }
+
+        if (this.color.dissolve === 'in') {
+          this.color.start[3] = 0.001;
+          element.setColor(this.color.start);
+          element.showAll();
+        }
+
+        this.color.delta = subtractColors(this.color.target, this.color.start);
+      } else {
+        this.duration = 0;
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var _this2 = this;
+
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+      var next = this.color.start.map(function (c, index) {
+        var newColor = c + _this2.color.delta[index] * p;
+
+        if (newColor > 1) {
+          newColor = 1;
+        }
+
+        if (newColor < 0) {
+          newColor = 0;
+        }
+
+        return newColor;
+      });
+
+      if (this.element != null) {
+        this.element.setColor(next);
+      }
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var _this3 = this;
+
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle') {
+        return;
+      }
+
+      _get(_getPrototypeOf(ColorAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var setToEnd = function setToEnd() {
+        var element = _this3.element;
+
+        if (element != null) {
+          element.setColor(_this3.color.whenComplete);
+
+          if (_this3.color.dissolve === 'out') {
+            element.hide();
+          }
+        }
+      };
+
+      if (cancelled && force === 'complete') {
+        setToEnd();
+      }
+
+      if (cancelled && force == null && this.completeOnCancel === true) {
+        setToEnd();
+      }
+
+      if (cancelled === false) {
+        setToEnd();
+      }
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new ColorAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return ColorAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var DissolveInAnimationStep =
+/*#__PURE__*/
+function (_ColorAnimationStep) {
+  _inherits(DissolveInAnimationStep, _ColorAnimationStep);
+
+  function DissolveInAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveInAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'in',
+      completeOnCancel: true
+    };
+
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveInAnimationStep).call(this, options));
+  }
+
+  return DissolveInAnimationStep;
+}(ColorAnimationStep);
+function dissolveIn() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    args[_key3 - 1] = arguments[_key3];
+  }
+
+  return _construct(DissolveInAnimationStep, [timeOrOptionsIn].concat(args));
+}
+var DissolveOutAnimationStep =
+/*#__PURE__*/
+function (_ColorAnimationStep2) {
+  _inherits(DissolveOutAnimationStep, _ColorAnimationStep2);
+
+  function DissolveOutAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveOutAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'out',
+      completeOnCancel: true
+    };
+
+    for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveOutAnimationStep).call(this, options));
+  }
+
+  return DissolveOutAnimationStep;
+}(ColorAnimationStep);
+function dissolveOut() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+    args[_key5 - 1] = arguments[_key5];
+  }
+
+  return _construct(DissolveOutAnimationStep, [timeOrOptionsIn].concat(args));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js":
+/*!**********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PositionAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var PositionAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(PositionAnimationStep, _ElementAnimationStep);
+
+  function PositionAnimationStep() {
+    var _this;
+
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, PositionAnimationStep);
+
+    var ElementAnimationStepOptionsIn = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, optionsIn, {
+      type: 'position'
+    });
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PositionAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      translationStyle: 'linear',
+      translationOptions: {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: ''
+      },
+      velocity: null
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultPositionOptions, optionsIn); // $FlowFixMe
+
+    _this.position = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(PositionAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(PositionAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.position.start === null) {
+        if (this.element != null) {
+          this.position.start = this.element.getPosition();
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.position.delta == null && this.position.target != null) {
+        var delta = this.position.target.sub(this.position.start);
+        this.position.delta = delta;
+      } else if (this.position.delta != null) {
+        this.position.target = this.position.start.add(this.position.delta);
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      if (this.position.velocity != null) {
+        var velocity = this.position.velocity;
+
+        if (typeof velocity === 'number') {
+          velocity = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](velocity, velocity);
+        }
+
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.position.start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.position.target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(velocity));
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      // const start = phase.startTransform._dup();
+      // const delta = phase.deltaTransform._dup();
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete; // let next = delta._dup().constant(p);
+      // next = start.add(delta.mul(next));
+
+      var next = this.position.start.toDelta(this.position.delta, p, this.position.translationStyle, this.position.translationOptions);
+
+      if (this.element != null) {
+        this.element.setPosition(next);
+      }
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var _this2 = this;
+
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle') {
+        return;
+      }
+
+      _get(_getPrototypeOf(PositionAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var setToEnd = function setToEnd() {
+        if (_this2.element != null) {
+          _this2.element.setPosition(_this2.position.target);
+        }
+      };
+
+      if (cancelled && force === 'complete') {
+        setToEnd();
+      }
+
+      if (cancelled && force == null && this.completeOnCancel === true) {
+        setToEnd();
+      }
+
+      if (cancelled === false) {
+        setToEnd();
+      }
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new PositionAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return PositionAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js":
+/*!***********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TransformAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+// A transform animation unit manages a transform animation on an element.
+//
+// The start transform can either be defined initially, or null. Null means
+// the start transform is whatever the current element transform is when the
+// unit is started with start().
+//
+// The transform target is defined with either the target or delta properties.
+// Target is used to predefine the target.
+// Delta is used to calculate the target when the unit is started with start()
+//
+var TransformAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(TransformAnimationStep, _ElementAnimationStep);
+
+  function TransformAnimationStep() {
+    var _this;
+
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, TransformAnimationStep);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TransformAnimationStep).call(this, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, optionsIn, {
+      type: 'transform'
+    })));
+    var defaultTransformOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      translationStyle: 'linear',
+      rotDirection: 0,
+      translationOptions: {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: ''
+      },
+      velocity: null
+    };
+    var options = defaultTransformOptions;
+
+    if (optionsIn.transform != null) {
+      options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultTransformOptions, optionsIn.transform);
+    } // $FlowFixMe
+
+
+    _this.transform = {};
+    _this.transform.rotDirection = options.rotDirection;
+    _this.transform.start = options.start;
+    _this.transform.target = options.target;
+    _this.transform.delta = options.delta;
+    _this.transform.translationStyle = options.translationStyle;
+    _this.transform.translationOptions = options.translationOptions;
+    _this.transform.velocity = options.velocity;
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(TransformAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var _this2 = this;
+
+      _get(_getPrototypeOf(TransformAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.transform.start === null) {
+        if (this.element != null) {
+          this.transform.start = this.element.transform._dup();
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.transform.delta == null && this.transform.target != null) {
+        var delta = this.transform.target.sub(this.transform.start);
+        delta.order.forEach(function (deltaStep, index) {
+          var startStep = _this2.transform.start.order[index];
+          var targetStep = _this2.transform.target.order[index];
+
+          if (deltaStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && startStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && targetStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
+            var rotDiff = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(startStep.r, targetStep.r, _this2.transform.rotDirection); // eslint-disable-next-line no-param-reassign
+
+            deltaStep.r = rotDiff;
+          }
+        });
+        this.transform.delta = delta;
+      } else if (this.transform.delta != null) {
+        this.transform.target = this.transform.start.add(this.transform.delta);
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      if (this.transform.velocity != null) {
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform.start, this.transform.target, this.transform.velocity, this.transform.rotDirection);
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      // const start = phase.startTransform._dup();
+      // const delta = phase.deltaTransform._dup();
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete; // let next = delta._dup().constant(p);
+      // next = start.add(delta.mul(next));
+
+      var next = this.transform.start.toDelta(this.transform.delta, p, this.transform.translationStyle, this.transform.translationOptions);
+
+      if (this.element != null) {
+        this.element.setTransform(next);
+      }
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var _this3 = this;
+
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle') {
+        return;
+      }
+
+      _get(_getPrototypeOf(TransformAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var setToEnd = function setToEnd() {
+        if (_this3.element != null) {
+          _this3.element.setTransform(_this3.transform.target);
+        }
+      };
+
+      if (cancelled && force === 'complete') {
+        setToEnd();
+      }
+
+      if (cancelled && force == null && this.completeOnCancel === true) {
+        setToEnd();
+      }
+
+      if (cancelled === false) {
+        setToEnd();
+      }
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new TransformAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return TransformAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js ***!
+  \*************************************************************************/
+/*! exports provided: ParallelAnimationStep, inParallel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return ParallelAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return inParallel; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+// Animations get started from a parent, but finish themselves
+var ParallelAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(ParallelAnimationStep, _AnimationStep);
+
+  function ParallelAnimationStep() {
+    var _this;
+
+    var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ParallelAnimationStep);
+
+    var defaultOptions = {
+      steps: []
+    };
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (Array.isArray(stepsOrOptionsIn)) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.steps = stepsOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, stepsOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ParallelAnimationStep).call(this, options));
+    _this.steps = [];
+
+    if (!Array.isArray(options.steps) && options.steps != null) {
+      _this.steps = [options.steps];
+    } else if (options.steps != null) {
+      _this.steps = options.steps;
+    }
+
+    return _this;
+  }
+
+  _createClass(ParallelAnimationStep, [{
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      var remaining = -1;
+      this.steps.forEach(function (step) {
+        var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
+
+        if (remaining === -1) {
+          remaining = stepRemaining;
+        }
+
+        if (stepRemaining < remaining) {
+          remaining = stepRemaining;
+        }
+      });
+
+      if (remaining > 0) {
+        this.finish();
+      }
+
+      return remaining;
+    }
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "startWaiting", this).call(this);
+
+      this.steps.forEach(function (step) {
+        step.startWaiting();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start(startTime) {
+      this.startWaiting();
+
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "start", this).call(this, startTime);
+
+      this.steps.forEach(function (step) {
+        step.start(startTime);
+      });
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle' || this.state === 'finished') {
+        return;
+      }
+
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var forceToUse = null;
+
+      if (this.completeOnCancel === true) {
+        forceToUse = 'complete';
+      }
+
+      if (this.completeOnCancel === false) {
+        forceToUse = 'noComplete';
+      }
+
+      if (force != null) {
+        forceToUse = force;
+      }
+
+      this.steps.forEach(function (step) {
+        if (step.state !== 'idle' && step.state !== 'finished') {
+          step.finish(cancelled, forceToUse);
+        }
+      });
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new ParallelAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }]);
+
+  return ParallelAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function inParallel() {
+  var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(ParallelAnimationStep, [stepsOrOptionsIn].concat(optionsIn));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js ***!
+  \***********************************************************************/
+/*! exports provided: SerialAnimationStep, inSerial */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return SerialAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return inSerial; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+var SerialAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(SerialAnimationStep, _AnimationStep);
+
+  function SerialAnimationStep() {
+    var _this;
+
+    var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, SerialAnimationStep);
+
+    var defaultOptions = {
+      steps: []
+    };
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (Array.isArray(stepsOrOptionsIn)) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.steps = stepsOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, stepsOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SerialAnimationStep).call(this, options));
+    _this.index = 0;
+    _this.steps = [];
+
+    if (!Array.isArray(options.steps) && options.steps != null) {
+      _this.steps = [options.steps];
+    } else if (options.steps != null) {
+      _this.steps = options.steps;
+    }
+
+    return _this;
+  } // constructor(optionsIn: TypeSerialAnimationStepInputOptions = {}) {
+  //   super(optionsIn);
+  //   this.index = 0;
+  //   const defaultOptions = {};
+  //   const options = joinObjects({}, defaultOptions, optionsIn);
+  //   this.steps = [];
+  //   if (!Array.isArray(options.steps) && options.steps != null) {
+  //     this.steps = [options.steps];
+  //   } else if (options.steps != null) {
+  //     this.steps = options.steps;
+  //   }
+  //   return this;
+  // }
+
+
+  _createClass(SerialAnimationStep, [{
+    key: "then",
+    value: function then(step) {
+      this.steps.push(step);
+      return this;
+    }
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      _get(_getPrototypeOf(SerialAnimationStep.prototype), "startWaiting", this).call(this);
+
+      this.steps.forEach(function (step) {
+        step.startWaiting();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start(startTime) {
+      this.startWaiting();
+
+      _get(_getPrototypeOf(SerialAnimationStep.prototype), "start", this).call(this, startTime);
+
+      this.index = 0;
+
+      if (this.steps.length > 0) {
+        this.steps[0].start(startTime);
+      }
+    }
+  }, {
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      var remaining = this.steps[this.index].nextFrame(now);
+
+      if (remaining > 0) {
+        if (this.index === this.steps.length - 1) {
+          this.finish();
+          return remaining;
+        }
+
+        this.index += 1;
+        this.steps[this.index].start(now - remaining);
+        return this.nextFrame(now);
+      }
+
+      return 0;
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle' || this.state === 'finished') {
+        return;
+      }
+
+      _get(_getPrototypeOf(SerialAnimationStep.prototype), "finish", this).call(this, cancelled, force);
+
+      var forceToUse = null;
+
+      if (this.completeOnCancel === true) {
+        forceToUse = 'complete';
+      }
+
+      if (this.completeOnCancel === false) {
+        forceToUse = 'noComplete';
+      }
+
+      if (force != null) {
+        forceToUse = force;
+      }
+
+      this.steps.forEach(function (step) {
+        if (step.state !== 'idle' && step.state !== 'finished') {
+          step.finish(cancelled, forceToUse);
+        }
+      });
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new SerialAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }]);
+
+  return SerialAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function inSerial() {
+  var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(SerialAnimationStep, [stepsOrOptionsIn].concat(optionsIn));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js":
+/*!***************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/TriggerStep.js ***!
+  \***************************************************************/
+/*! exports provided: TriggerStep, trigger */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return TriggerStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TriggerStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(TriggerStep, _AnimationStep);
+
+  function TriggerStep() {
+    var _this;
+
+    var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, TriggerStep);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (typeof triggerOrOptionsIn === 'function') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.trigger = triggerOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, triggerOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
+    _this.trigger = options.trigger;
+    _this.duration = 0;
+    return _this;
+  }
+
+  _createClass(TriggerStep, [{
+    key: "setFrame",
+    value: function setFrame() {
+      if (this.trigger != null) {
+        this.trigger(this.startTime);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new TriggerStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      return step;
+    }
+  }]);
+
+  return TriggerStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+function trigger() {
+  var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(TriggerStep, [triggerOrOptionsIn].concat(optionsIn));
+}
+
+/***/ }),
+
 /***/ "./src/js/diagram/AnimationPhase.js":
 /*!******************************************!*\
   !*** ./src/js/diagram/AnimationPhase.js ***!
@@ -227,7 +2400,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 // eslint-disable-next-line import/no-cycle
- // Planned Animation
+ // import { joinObjects } from '../tools/tools';
+// Planned Animation
 
 var AnimationPhase =
 /*#__PURE__*/
@@ -19074,7 +21248,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -19089,8 +21264,6 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
@@ -19099,11 +21272,18 @@ function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.
 
 function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -19273,19 +21453,19 @@ function () {
       animation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"]() // current animation phase
 
       },
       colorAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"]() // current animation phase
 
       },
       customAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](function () {}) // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}) // current animation phase
 
       },
       isBeingMoved: false,
@@ -19300,7 +21480,8 @@ function () {
         startTime: -1
       }
     };
-    this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0); // this.presetTransforms = {};
+    this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this); // this.presetTransforms = {};
   }
 
   _createClass(DiagramElement, [{
@@ -19697,6 +21878,69 @@ function () {
       }
     }
   }, {
+    key: "moveTo",
+    value: function moveTo(optionsIn) {
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])({}, optionsIn, {
+        element: this
+      });
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
+    }
+  }, {
+    key: "dissolveIn",
+    value: function dissolveIn() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this
+      };
+      var options;
+
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
+    }
+  }, {
+    key: "dissolveOut",
+    value: function dissolveOut() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this
+      };
+      var options;
+
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
+    }
+  }, {
+    key: "animationBuilder",
+    value: function animationBuilder() {
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
+      }
+
+      return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [this].concat(optionsIn));
+    }
+  }, {
     key: "setColor",
     value: function setColor(color) {
       this.color = color.slice();
@@ -19751,8 +21995,7 @@ function () {
     value: function moveToScenario(scenarioName) {
       var animationTimeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var delay = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var rotDirection = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
+      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
       this.stop();
       var target = this.getScenarioTarget(scenarioName);
       var time = 1;
@@ -19765,7 +22008,7 @@ function () {
       }
 
       if (time > 0 && estimatedTime !== 0) {
-        this.animateTransformToWithDelay(target, delay, time, rotDirection, callback, true);
+        this.animateTo(target, time, 0, rotDirection, callback);
       } else if (callback != null) {
         callback();
       }
@@ -19978,7 +22221,7 @@ function () {
         for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
           var phase = plan[i];
 
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"]) {
+          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
             phase.finish(cancelled, forceSetToEnd);
           } else {
             phase.finish(this, cancelled, forceSetToEnd);
@@ -19991,7 +22234,7 @@ function () {
         if (plan.length > 0) {
           var _phase = plan.slice(-1)[0];
 
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"]) {
+          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
             _phase.finish(cancelled, forceSetToEnd);
           } else {
             _phase.finish(this, cancelled, forceSetToEnd);
@@ -20107,12 +22350,12 @@ function () {
           delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseDelay);
       }
 
       if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseMove);
       }
 
@@ -20175,12 +22418,12 @@ function () {
           delayDisolve = 'in';
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
+        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
         phases.push(phaseColor);
       }
 
@@ -20259,12 +22502,12 @@ function () {
       }
 
       if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
+        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
         phases.push(phaseCustom);
       }
 
@@ -20986,7 +23229,7 @@ function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative, 'parent');
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative, ['parent']);
 
       if (transform != null) {
         primative.transform = transform._dup();
@@ -21072,6 +23315,7 @@ function (_DiagramElement) {
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (this.isShown) {
+        this.animations.nextFrame(now);
         this.setNextTransform(now);
         this.setNextColor(now); // set next color can end up hiding an element when disolving out
 
@@ -21343,6 +23587,7 @@ function (_DiagramElement2) {
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (this.isShown) {
+        this.animations.nextFrame(now);
         this.setNextTransform(now);
         this.setNextColor(now); // set next color can end up hiding an element when disolving out
 
@@ -23014,6 +25259,14 @@ function () {
         angle: Math.atan2(this.y, this.x)
       };
     }
+  }, {
+    key: "toDelta",
+    value: function toDelta(delta, percent, translationStyle, // eslint-disable-next-line no-use-before-define
+    translationOptions) {
+      // eslint-disable-next-line no-use-before-define
+      var pathPoint = translationPath(translationStyle, this._dup(), delta, percent, translationOptions);
+      return pathPoint;
+    }
   }], [{
     key: "isLeft",
     value: function isLeft(p0, p1, p2) {
@@ -23023,6 +25276,73 @@ function () {
 
   return Point;
 }();
+
+function linearPath(start, delta, percent) {
+  return start.add(delta.x * percent, delta.y * percent);
+}
+
+function curvedPath(start, delta, percent, options) {
+  var o = options;
+  var angle = Math.atan2(delta.y, delta.x);
+  var midPoint = start.add(new Point(delta.x * o.offset, delta.y * o.offset));
+  var dist = delta.toPolar().mag * o.magnitude;
+  var controlPoint = options.controlPoint;
+
+  if (controlPoint == null) {
+    var direction = options.direction;
+    var xDelta = Math.cos(angle + o.rot * Math.PI / 2);
+    var yDelta = Math.sin(angle + o.rot * Math.PI / 2);
+
+    if (direction === 'up') {
+      if (yDelta < 0) {
+        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'down') {
+      if (yDelta > 0) {
+        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'left') {
+      if (xDelta > 0) {
+        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'right') {
+      if (xDelta < 0) {
+        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    }
+
+    controlPoint = new Point(midPoint.x + dist * xDelta, midPoint.y + dist * yDelta);
+  }
+
+  var p0 = start;
+  var p1 = controlPoint;
+  var p2 = start.add(delta);
+  var t = percent;
+
+  var bx = _quadraticBezier(p0.x, p1.x, p2.x, t);
+
+  var by = _quadraticBezier(p0.y, p1.y, p2.y, t);
+
+  return new Point(bx, by);
+}
+
+function translationPath() {
+  var pathType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'linear';
+  var start = arguments.length > 1 ? arguments[1] : undefined;
+  var delta = arguments.length > 2 ? arguments[2] : undefined;
+  var percent = arguments.length > 3 ? arguments[3] : undefined;
+  var options = arguments.length > 4 ? arguments[4] : undefined;
+
+  if (pathType === 'linear') {
+    return linearPath(start, delta, percent);
+  }
+
+  if (pathType === 'curved') {
+    return curvedPath(start, delta, percent, options);
+  }
+
+  return new Point(0, 0);
+}
 
 function point(x, y) {
   return new Point(x, y);
@@ -23710,73 +26030,6 @@ function (_Point2) {
 
   return Scale;
 }(Point);
-
-function linearPath(start, delta, percent) {
-  return start.add(delta.x * percent, delta.y * percent);
-}
-
-function curvedPath(start, delta, percent, options) {
-  var o = options;
-  var angle = Math.atan2(delta.y, delta.x);
-  var midPoint = start.add(new Point(delta.x * o.offset, delta.y * o.offset));
-  var dist = delta.toPolar().mag * o.magnitude;
-  var controlPoint = options.controlPoint;
-
-  if (controlPoint == null) {
-    var direction = options.direction;
-    var xDelta = Math.cos(angle + o.rot * Math.PI / 2);
-    var yDelta = Math.sin(angle + o.rot * Math.PI / 2);
-
-    if (direction === 'up') {
-      if (yDelta < 0) {
-        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'down') {
-      if (yDelta > 0) {
-        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'left') {
-      if (xDelta > 0) {
-        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'right') {
-      if (xDelta < 0) {
-        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    }
-
-    controlPoint = new Point(midPoint.x + dist * xDelta, midPoint.y + dist * yDelta);
-  }
-
-  var p0 = start;
-  var p1 = controlPoint;
-  var p2 = start.add(delta);
-  var t = percent;
-
-  var bx = _quadraticBezier(p0.x, p1.x, p2.x, t);
-
-  var by = _quadraticBezier(p0.y, p1.y, p2.y, t);
-
-  return new Point(bx, by);
-}
-
-function translationPath() {
-  var pathType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'linear';
-  var start = arguments.length > 1 ? arguments[1] : undefined;
-  var delta = arguments.length > 2 ? arguments[2] : undefined;
-  var percent = arguments.length > 3 ? arguments[3] : undefined;
-  var options = arguments.length > 4 ? arguments[4] : undefined;
-
-  if (pathType === 'linear') {
-    return linearPath(start, delta, percent);
-  }
-
-  if (pathType === 'curved') {
-    return curvedPath(start, delta, percent, options);
-  }
-
-  return new Point(0, 0);
-}
 
 var TransformLimit =
 /*#__PURE__*/
@@ -24567,7 +26820,8 @@ function randomPoint(withinRect) {
   return new Point(randPoint.x, randPoint.y);
 }
 
-function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform, rotDirection) {
+function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform) {
+  var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
   var deltaTransform = stopTransform.sub(startTransform);
   var time = 0;
   deltaTransform.order.forEach(function (delta, index) {
@@ -25754,7 +28008,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS */
+/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25775,6 +28029,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUIDs", function() { return cleanUIDs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadRemote", function() { return loadRemote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadRemoteCSS", function() { return loadRemoteCSS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteKeys", function() { return deleteKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyKeysFromTo", function() { return copyKeysFromTo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateRandomString", function() { return generateRandomString; });
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26144,6 +28401,28 @@ var cleanUIDs = function cleanUIDs(objectToClean) {
     }
   }
 };
+
+function deleteKeys(obj, keys) {
+  keys.forEach(function (key) {
+    if (obj[key] !== undefined) {
+      // eslint-disable-next-line no-param-reassign
+      delete obj[key];
+    }
+  });
+}
+
+function copyKeysFromTo(source, destination, keys) {
+  keys.forEach(function (key) {
+    if (source[key] !== undefined) {
+      // eslint-disable-next-line no-param-reassign
+      destination[key] = source[key];
+    }
+  });
+}
+
+function generateRandomString() {
+  return (Math.random() * 1e18).toString(36);
+}
 
 
 
