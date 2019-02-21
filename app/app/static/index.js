@@ -375,6 +375,42 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
+    key: "moveToTransform",
+    value: function moveToTransform() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["TransformAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "moveToScenario",
+    value: function moveToScenario() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(options.element.moveToScenario(options));
+      }
+
+      return this;
+    }
+  }, {
     key: "move",
     value: function move(optionsIn) {
       if (this.element != null) {
@@ -395,8 +431,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-          optionsIn[_key3] = arguments[_key3];
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -414,8 +450,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
-        args[_key4 - 1] = arguments[_key4];
+      for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+        args[_key6 - 1] = arguments[_key6];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -438,8 +474,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-        args[_key5 - 1] = arguments[_key5];
+      for (var _len7 = arguments.length, args = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+        args[_key7 - 1] = arguments[_key7];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -458,8 +494,8 @@ function (_animation$SerialAnim) {
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-        args[_key6 - 1] = arguments[_key6];
+      for (var _len8 = arguments.length, args = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+        args[_key8 - 1] = arguments[_key8];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -470,8 +506,8 @@ function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-        optionsIn[_key7 - 1] = arguments[_key7];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+        optionsIn[_key9 - 1] = arguments[_key9];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
@@ -482,8 +518,8 @@ function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
-        optionsIn[_key8 - 1] = arguments[_key8];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
+        optionsIn[_key10 - 1] = arguments[_key10];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -494,8 +530,8 @@ function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
-        optionsIn[_key9 - 1] = arguments[_key9];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+        optionsIn[_key11 - 1] = arguments[_key11];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -1581,8 +1617,11 @@ function (_ElementAnimationStep) {
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultPositionOptions, optionsIn); // $FlowFixMe
 
-    _this.position = {};
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity']);
+    _this.position = {
+      translationOptions: {}
+    };
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.position.translationOptions);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -1751,13 +1790,19 @@ function (_ElementAnimationStep) {
   function TransformAnimationStep() {
     var _this;
 
-    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-
     _classCallCheck(this, TransformAnimationStep);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(TransformAnimationStep).call(this, Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, optionsIn, {
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'transform'
-    })));
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TransformAnimationStep).call(this, _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'transform'
+    }].concat(optionsIn))));
     var defaultTransformOptions = {
       start: null,
       target: null,
@@ -1773,21 +1818,13 @@ function (_ElementAnimationStep) {
       },
       velocity: null
     };
-    var options = defaultTransformOptions;
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
 
-    if (optionsIn.transform != null) {
-      options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultTransformOptions, optionsIn.transform);
-    } // $FlowFixMe
-
-
-    _this.transform = {};
-    _this.transform.rotDirection = options.rotDirection;
-    _this.transform.start = options.start;
-    _this.transform.target = options.target;
-    _this.transform.delta = options.delta;
-    _this.transform.translationStyle = options.translationStyle;
-    _this.transform.translationOptions = options.translationOptions;
-    _this.transform.velocity = options.velocity;
+    _this.transform = {
+      translationOptions: {}
+    };
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -21901,6 +21938,18 @@ function () {
       return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
     }
   }, {
+    key: "moveToTransform",
+    value: function moveToTransform() {
+      for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+        optionsIn[_key] = arguments[_key];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+        element: this
+      }].concat(optionsIn));
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+    }
+  }, {
     key: "dissolveIn",
     value: function dissolveIn() {
       var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
@@ -21909,8 +21958,8 @@ function () {
       };
       var options;
 
-      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        args[_key - 1] = arguments[_key];
+      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+        args[_key2 - 1] = arguments[_key2];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -21932,8 +21981,8 @@ function () {
       };
       var options;
 
-      for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
-        args[_key2 - 1] = arguments[_key2];
+      for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        args[_key3 - 1] = arguments[_key3];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -21949,12 +21998,64 @@ function () {
   }, {
     key: "animationBuilder",
     value: function animationBuilder() {
-      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        optionsIn[_key3] = arguments[_key3];
+      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        optionsIn[_key4] = arguments[_key4];
       }
 
       return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [this].concat(optionsIn));
     }
+  }, {
+    key: "moveToScenario",
+    value: function moveToScenario() {
+      var defaultOptions = {
+        element: this
+      };
+
+      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        optionsIn[_key5] = arguments[_key5];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.target != null && options.target in options.element.scenarios) {
+        var target = options.element.getScenarioTarget(options.target);
+        options.target = target;
+      }
+
+      if (options.start != null && options.start in options.element.scenarios) {
+        var start = options.element.getScenarioTarget(options.start);
+        options.start = start;
+      }
+
+      if (options.delta != null && options.delta in options.element.scenarios) {
+        var delta = options.element.getScenarioTarget(options.delta);
+        options.delta = delta;
+      }
+
+      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+    } // moveToScenario_old(
+    //   scenarioName: string,
+    //   animationTimeOrVelocity: ?number = null,    // null uses velocity
+    //   callback: ?() => void = null,
+    //   rotDirection: -1 | 1 | 0 | 2 = 0,
+    // ) {
+    //   this.stop();
+    //   const target = this.getScenarioTarget(scenarioName);
+    //   let time = 1;
+    //   const estimatedTime = this.getTimeToMoveToScenario(scenarioName, rotDirection);
+    //   if (animationTimeOrVelocity == null) {
+    //     time = estimatedTime;
+    //   } else {
+    //     time = animationTimeOrVelocity;
+    //   }
+    //   if (time > 0 && estimatedTime !== 0) {
+    //     this.animateTo(target, time, 0, rotDirection, callback);
+    //   } else if (callback != null) {
+    //     callback();
+    //   }
+    //   return time;
+    // }
+
   }, {
     key: "setColor",
     value: function setColor(color) {
@@ -22003,31 +22104,6 @@ function () {
       velocity.updateRotation(2 * Math.PI / 6);
       velocity.updateScale(1, 1);
       var time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform._dup(), target, velocity, rotDirection);
-      return time;
-    }
-  }, {
-    key: "moveToScenario",
-    value: function moveToScenario(scenarioName) {
-      var animationTimeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      this.stop();
-      var target = this.getScenarioTarget(scenarioName);
-      var time = 1;
-      var estimatedTime = this.getTimeToMoveToScenario(scenarioName, rotDirection);
-
-      if (animationTimeOrVelocity == null) {
-        time = estimatedTime;
-      } else {
-        time = animationTimeOrVelocity;
-      }
-
-      if (time > 0 && estimatedTime !== 0) {
-        this.animateTo(target, time, 0, rotDirection, callback);
-      } else if (callback != null) {
-        callback();
-      }
-
       return time;
     } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity

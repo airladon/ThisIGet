@@ -25,12 +25,12 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this._circle.animations.new()
       .dissolveIn(1)
-      .moveTo({ target: new Point(2, 0), duration: 1 })
+      .moveToScenario({ target: 'right', duration: 1.5 })
       .start();
 
     this._wheel.animations.new()
       .delay(1)
-      .moveTo({ target: new Point(-2, 0), duration: 1 })
+      .moveToScenario({ target: 'left', duration: 2 })
       .start();
 
     // this._circle.disolveIn(1, move);
