@@ -43,7 +43,7 @@ export default function lessonLayout() {
       options: {
         fill: false,
         radius: wheelSize,
-        width: 0.03,
+        width: 0.05,
         sides: wheelPoints,
         color: colors.circle,
         transform: new Transform('Circle').translate(0, 0),

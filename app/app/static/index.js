@@ -578,6 +578,7 @@ function () {
 
     this.element = options.element;
     this.animations = [];
+    this.state = 'idle';
     return this;
   }
 
@@ -586,7 +587,10 @@ function () {
     value: function nextFrame(now) {
       var animationsToRemove = [];
       var remaining = -1;
+      var isAnimating = false;
       this.animations.forEach(function (animation, index) {
+        var animationIsAnimating = false;
+
         if (animation.state === 'waitingToStart' || animation.state === 'animating') {
           var stepRemaining = animation.nextFrame(now);
 
@@ -597,12 +601,25 @@ function () {
           if (stepRemaining < remaining) {
             remaining = stepRemaining;
           }
+
+          animationIsAnimating = true;
         }
 
         if (animation.state === 'finished' && animation.removeOnFinish) {
+          animationIsAnimating = false;
           animationsToRemove.push(index);
         }
+
+        if (animationIsAnimating) {
+          isAnimating = true;
+        }
       });
+
+      if (isAnimating) {
+        this.state = 'animating';
+      } else {
+        this.state = 'idle';
+      }
 
       for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
         this.animations.splice(animationsToRemove[i], 1);
@@ -729,11 +746,13 @@ function () {
       onFinish: null,
       completeOnCancel: null,
       removeOnFinish: true,
-      name: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["generateRandomString"])()
+      name: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["generateRandomString"])(),
+      duration: 0
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
     this.onFinish = options.onFinish;
     this.completeOnCancel = options.completeOnCancel;
+    this.duration = options.duration;
     this.startTime = -1;
     this.state = 'idle';
     this.name = options.name; // This is only for it this step is a primary path in an Animation Manager
@@ -1044,8 +1063,6 @@ function (_AnimationStep) {
   _inherits(DelayStep, _AnimationStep);
 
   function DelayStep() {
-    var _this;
-
     var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
     _classCallCheck(this, DelayStep);
@@ -1067,9 +1084,7 @@ function (_AnimationStep) {
       options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, numOrOptionsIn].concat(args));
     }
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DelayStep).call(this, options));
-    _this.duration = options.duration;
-    return _this;
+    return _possibleConstructorReturn(this, _getPrototypeOf(DelayStep).call(this, options)); // this.duration = options.duration;
   }
 
   _createClass(DelayStep, [{
@@ -23381,7 +23396,7 @@ function (_DiagramElement) {
   }, {
     key: "isMoving",
     value: function isMoving() {
-      if (this.state.isAnimating || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.state.isAnimatingColor || this.state.isAnimatingCustom) {
+      if (this.state.isAnimating || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.state.isAnimatingColor || this.state.isAnimatingCustom || this.animations.state === 'animating') {
         return true;
       }
 
