@@ -81,8 +81,27 @@ export default class IsocelesCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.diagram.addElements(this, this.layout.addEquationA);
     this.diagram.addElements(this, this.layout.addEquationB);
+    this.diagram.addElements(this, [{
+      path: '',
+      name: 'eqnC',
+      method: 'equation/addNavigator',
+      options: {
+        elements: {
+          a: 'a',
+          b: 'b',
+          c: 'c',
+          d: 'd',
+        },
+        forms: {
+          '0': ['b'],
+          '1': ['b', 'c'],
+          '2': ['a', 'b'],
+        },
+        formSeries: ['0', '1', '2'],
+      },
+    }]);
     this.oppositeAngles = true;
-    // console.log(this);  // eslint-disable-line
+    console.log(this);
     // console.log('here', Fig.tools.math.round(6.392234, 2)); // eslint-disable-line
     // this.loadJS();
     // this.getQR('related_angles', 'Opposite');
