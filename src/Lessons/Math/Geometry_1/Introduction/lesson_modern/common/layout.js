@@ -50,7 +50,7 @@ export default function lessonLayout() {
       },
       mods: {
         scenarios: {
-          center: { position: new Point(0, -0.4) },
+          left: { position: new Point(-1, -0.4) },
           right: { position: new Point(1, -0.4) },
         },
       },

@@ -94,7 +94,7 @@ class Content extends LessonContent {
         'It is made of different materials, has mass, size, location and smell.',
       ],
       setEnterState: () => {
-        circ._wheel.setScenario('center');
+        circ._wheel.setScenario('left');
       },
       show: [circ._wheel],
     });
@@ -103,10 +103,10 @@ class Content extends LessonContent {
         'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
       ],
       modifiers: {
-        shape: click(circ.appearCircleAndMoveWheel, [circ, () => {}], colors.circle)
+        shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
       },
       setEnterState: () => {
-        circ._wheel.setScenario('center');
+        circ._wheel.setScenario('left');
         circ._circle.setScenario('center');
       },
       transitionFromAny: (done) => {

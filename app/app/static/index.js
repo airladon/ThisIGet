@@ -207,7 +207,7 @@ var FigureOne = {
 /*!***********************************************!*\
   !*** ./src/js/diagram/Animation/Animation.js ***!
   \***********************************************/
-/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep */
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -235,39 +235,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_5__["TriggerStep"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_5__["trigger"]; });
+/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__["TriggerStep"]; });
 
-/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_6__["CustomAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__["trigger"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_6__["custom"]; });
+/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__["CustomAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_7__["ParallelAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__["custom"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_7__["inParallel"]; });
+/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__["ParallelAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_8__["SerialAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__["inParallel"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_8__["inSerial"]; });
+/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__["SerialAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_9__["DelayStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__["inSerial"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_9__["delay"]; });
+/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__["DelayStep"]; });
 
-/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_10__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__["delay"]; });
 
-/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_11__["default"]; });
 
-/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+
+/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+
 
 
 
@@ -370,8 +374,8 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
-    key: "rotateTo",
-    value: function rotateTo() {
+    key: "rotation",
+    value: function rotation() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -388,8 +392,8 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
-    key: "moveToPosition",
-    value: function moveToPosition() {
+    key: "position",
+    value: function position() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -406,8 +410,8 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
-    key: "scaleTo",
-    value: function scaleTo() {
+    key: "scale",
+    value: function scale() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -422,15 +426,16 @@ function (_animation$SerialAnim) {
       }
 
       return this;
-    }
+    } // moveTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+    // positionTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+
   }, {
-    key: "moveTo",
-    value: function moveTo() {
-      return this.moveToPosition.apply(this, arguments);
-    }
-  }, {
-    key: "moveToTransform",
-    value: function moveToTransform() {
+    key: "transform",
+    value: function transform() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -447,8 +452,8 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
-    key: "moveToScenario",
-    value: function moveToScenario() {
+    key: "scenario",
+    value: function scenario() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -459,14 +464,14 @@ function (_animation$SerialAnim) {
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-        this.then(options.element.moveToScenario(options));
+        this.then(options.element.anim.scenario(options));
       }
 
       return this;
     }
   }, {
-    key: "colorTo",
-    value: function colorTo() {
+    key: "color",
+    value: function color() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -576,6 +581,16 @@ function (_animation$SerialAnim) {
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+        optionsIn[_key15] = arguments[_key15];
+      }
+
+      this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["PulseAnimationStep"], optionsIn));
       return this;
     }
   }, {
@@ -1835,6 +1850,121 @@ function (_ElementAnimationStep) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PulseAnimationStep; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var PulseAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(PulseAnimationStep, _ElementAnimationStep);
+
+  function PulseAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, PulseAnimationStep);
+
+    // const ElementAnimationStepOptionsIn =
+    //   joinObjects({}, { type: 'pulse' }, ...optionsIn);
+    // super(ElementAnimationStepOptionsIn);
+    var defaultOptions = {
+      scale: 1.5,
+      numLines: 1,
+      type: 'pulse',
+      duration: 1,
+      frequency: 0
+    };
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PulseAnimationStep).call(this, options));
+    _this.scale = options.scale;
+    _this.numLines = options.numLines;
+    _this.duration = options.duration;
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(PulseAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(PulseAnimationStep.prototype), "start", this).call(this, startTime);
+
+      var element = this.element;
+
+      if (element != null) {
+        if (this.numLines === 1) {
+          element.pulseScaleNow(this.duration, this.scale, this.frequency);
+        } else {
+          element.pulseThickNow(this.duration, this.scale, this.numLines);
+        }
+      }
+    } // setFrame(deltaTime: number) {
+    // }
+
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element != null) {
+        this.element.stopPulsing(true);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new PulseAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return PulseAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
+/***/ }),
+
 /***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js":
 /*!**********************************************************************************************!*\
   !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js ***!
@@ -2682,20 +2812,24 @@ function (_AnimationStep) {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
-      var remaining = this.steps[this.index].nextFrame(now); // console.log('serial', now, this.index, remaining)
+      var remaining = -1;
 
-      if (remaining > 0) {
-        if (this.index === this.steps.length - 1) {
-          this.finish();
-          return remaining;
+      if (this.index <= this.steps.length - 1) {
+        remaining = this.steps[this.index].nextFrame(now); // console.log('serial', now, this.index, remaining)
+
+        if (remaining > 0) {
+          if (this.index === this.steps.length - 1) {
+            this.finish();
+            return remaining;
+          }
+
+          this.index += 1;
+          this.steps[this.index].start(now - remaining);
+          return this.nextFrame(now);
         }
-
-        this.index += 1;
-        this.steps[this.index].start(now - remaining);
-        return this.nextFrame(now);
       }
 
-      return 0;
+      return remaining;
     }
   }, {
     key: "finish",
@@ -2805,7 +2939,9 @@ function (_AnimationStep) {
 
     _classCallCheck(this, TriggerStep);
 
-    var defaultOptions = {};
+    var defaultOptions = {
+      payload: null
+    };
     var options;
 
     for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
@@ -2821,6 +2957,7 @@ function (_AnimationStep) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
     _this.trigger = options.trigger;
+    _this.payload = options.payload;
     _this.duration = 0;
     return _this;
   }
@@ -2829,7 +2966,7 @@ function (_AnimationStep) {
     key: "setFrame",
     value: function setFrame() {
       if (this.trigger != null) {
-        this.trigger(this.startTime);
+        this.trigger(this.payload);
       }
     }
   }, {
@@ -6984,7 +7121,7 @@ function (_Elements) {
       };
 
       elements.forEach(function (e) {
-        e.animations.addTo('Equation Color').colorTo({
+        e.animations.addTo('Equation Color').color({
           dissolve: dissolve,
           onFinish: onFinish,
           duration: time,
@@ -7235,7 +7372,7 @@ function (_Elements) {
         if (element != null) {
           if (color != null) {
             element.addTo('Equation Color') // .delay(cumTime)
-            .colorTo({
+            .color({
               target: color,
               duration: moveTimeToUse,
               delay: cumTime
@@ -21867,7 +22004,10 @@ function () {
   // this is in vertex space
   // Current animation/movement state of element
   // Pulse animation state
+  // Rename to animate in future
   function DiagramElement() {
+    var _this = this;
+
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
     var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -21895,7 +22035,138 @@ function () {
     };
     this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false;
+    this.noRotationFromParent = false; // Rename to animate in future
+
+    this.anim = {
+      rotation: function rotation() {
+        for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+          optionsIn[_key] = arguments[_key];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
+      },
+      scale: function scale() {
+        for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          optionsIn[_key2] = arguments[_key2];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
+      },
+      position: function position() {
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
+      },
+      transform: function transform() {
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+      },
+      pulse: function pulse() {
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
+        }
+
+        return _construct(animation.PulseAnimationStep, optionsIn);
+      },
+      // eslint-disable-next-line max-len
+      dissolveIn: function dissolveIn() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+          args[_key6 - 1] = arguments[_key6];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      dissolveOut: function dissolveOut() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len7 = arguments.length, args = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
+          args[_key7 - 1] = arguments[_key7];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      builder: function builder() {
+        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          optionsIn[_key8] = arguments[_key8];
+        }
+
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
+      },
+      // eslint-disable-next-line max-len
+      scenario: function scenario() {
+        var defaultOptions = {
+          element: _this
+        };
+
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+        if (options.target != null && options.target in options.element.scenarios) {
+          var target = options.element.getScenarioTarget(options.target);
+          options.target = target;
+        }
+
+        if (options.start != null && options.start in options.element.scenarios) {
+          var start = options.element.getScenarioTarget(options.start);
+          options.start = start;
+        }
+
+        if (options.delta != null && options.delta in options.element.scenarios) {
+          var delta = options.element.getScenarioTarget(options.delta);
+          options.delta = delta;
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+      }
+    };
     this.animate = {
       color: {
         plan: [],
@@ -22193,7 +22464,8 @@ function () {
       if (this.setTransformCallback) {
         this.setTransformCallback(this.transform);
       }
-    } // Set the next transform (and velocity if moving freely) for the next
+    } // Deprecate
+    // Set the next transform (and velocity if moving freely) for the next
     // animation frame.
     //
     // If animating, this transform will be the next frame determined by
@@ -22283,7 +22555,8 @@ function () {
 
         this.setTransform(next.transform);
       }
-    }
+    } // Deprecate
+
   }, {
     key: "setNextCustomAnimation",
     value: function setNextCustomAnimation(now) {
@@ -22350,7 +22623,8 @@ function () {
       //   console.log("6", this.state.isAnimatingCustom)
       // }
 
-    }
+    } // Deprecate
+
   }, {
     key: "setNextColor",
     value: function setNextColor(now) {
@@ -22405,145 +22679,83 @@ function () {
         //   console.log(now, this.color[3])
         // }
       }
-    }
-  }, {
-    key: "rotateTo",
-    value: function rotateTo() {
-      for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
-        optionsIn[_key] = arguments[_key];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
-        element: this
-      }].concat(optionsIn));
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
-    }
-  }, {
-    key: "scaleTo",
-    value: function scaleTo() {
-      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        optionsIn[_key2] = arguments[_key2];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
-        element: this
-      }].concat(optionsIn));
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
-    }
-  }, {
-    key: "moveTo",
-    value: function moveTo() {
-      return this.moveToPosition.apply(this, arguments);
-    }
-  }, {
-    key: "moveToPosition",
-    value: function moveToPosition() {
-      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        optionsIn[_key3] = arguments[_key3];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
-        element: this
-      }].concat(optionsIn));
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
-    }
-  }, {
-    key: "moveToTransform",
-    value: function moveToTransform() {
-      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        optionsIn[_key4] = arguments[_key4];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
-        element: this
-      }].concat(optionsIn));
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
-    }
-  }, {
-    key: "dissolveIn",
-    value: function dissolveIn() {
-      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var defaultOptions = {
-        element: this
-      };
-      var options;
-
-      for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-        args[_key5 - 1] = arguments[_key5];
-      }
-
-      if (typeof timeOrOptionsIn === 'number') {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
-          duration: timeOrOptionsIn
-        }].concat(args));
-      } else {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
-      }
-
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
-    }
-  }, {
-    key: "dissolveOut",
-    value: function dissolveOut() {
-      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
-      var defaultOptions = {
-        element: this
-      };
-      var options;
-
-      for (var _len6 = arguments.length, args = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
-        args[_key6 - 1] = arguments[_key6];
-      }
-
-      if (typeof timeOrOptionsIn === 'number') {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
-          duration: timeOrOptionsIn
-        }].concat(args));
-      } else {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
-      }
-
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
-    }
-  }, {
-    key: "animationBuilder",
-    value: function animationBuilder() {
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
-      }
-
-      return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [this].concat(optionsIn));
-    }
-  }, {
-    key: "moveToScenario",
-    value: function moveToScenario() {
-      var defaultOptions = {
-        element: this
-      };
-
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
-      }
-
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-
-      if (options.target != null && options.target in options.element.scenarios) {
-        var target = options.element.getScenarioTarget(options.target);
-        options.target = target;
-      }
-
-      if (options.start != null && options.start in options.element.scenarios) {
-        var start = options.element.getScenarioTarget(options.start);
-        options.start = start;
-      }
-
-      if (options.delta != null && options.delta in options.element.scenarios) {
-        var delta = options.element.getScenarioTarget(options.delta);
-        options.delta = delta;
-      }
-
-      return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
-    } // moveToScenario_old(
+    } // ///////////////// Deprecate Start
+    // rotateTo(...optionsIn: Array<TypeRotationAnimationStepInputOptions>) {
+    //   const options = joinObjects({}, { element: this }, ...optionsIn);
+    //   return new animations.RotationAnimationStep(options);
+    // }
+    // scaleTo(...optionsIn: Array<TypeScaleAnimationStepInputOptions>) {
+    //   const options = joinObjects({}, { element: this }, ...optionsIn);
+    //   return new animations.ScaleAnimationStep(options);
+    // }
+    // moveTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+    // moveToPosition(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   const options = joinObjects({}, { element: this }, ...optionsIn);
+    //   return new animations.PositionAnimationStep(options);
+    // }
+    // moveToTransform(...optionsIn: Array<TypeTransformAnimationStepInputOptions>) {
+    //   const options = joinObjects({}, { element: this }, ...optionsIn);
+    //   return new animations.TransformAnimationStep(options);
+    // }
+    // dissolveIn(
+    //   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
+    //   ...args: Array<TypeColorAnimationStepInputOptions>
+    // ) {
+    //   const defaultOptions = { element: this };
+    //   let options;
+    //   if (typeof timeOrOptionsIn === 'number') {
+    //     options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
+    //   } else {
+    //     options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
+    //   }
+    //   return new animations.DissolveInAnimationStep(options);
+    // }
+    // dissolveOut(
+    //   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
+    //   ...args: Array<TypeColorAnimationStepInputOptions>
+    // ) {
+    //   const defaultOptions = { element: this };
+    //   let options;
+    //   if (typeof timeOrOptionsIn === 'number') {
+    //     options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
+    //   } else {
+    //     options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
+    //   }
+    //   return new animations.DissolveOutAnimationStep(options);
+    // }
+    // animationBuilder(...optionsIn: Array<TypeAnimationBuilderInputOptions>) {
+    //   return new animations.AnimationBuilder(this, ...optionsIn);
+    // }
+    // Deprecate
+    // moveToScenario(
+    //   ...optionsIn: Array<TypeTransformAnimationStepInputOptions & { scenario: string }>
+    // ) {
+    //   const defaultOptions = { element: this };
+    //   const options = joinObjects({}, defaultOptions, ...optionsIn);
+    //   if (options.target != null
+    //     && options.target in options.element.scenarios
+    //   ) {
+    //     const target = options.element.getScenarioTarget(options.target);
+    //     options.target = target;
+    //   }
+    //   if (options.start != null
+    //     && options.start in options.element.scenarios
+    //   ) {
+    //     const start = options.element.getScenarioTarget(options.start);
+    //     options.start = start;
+    //   }
+    //   if (options.delta != null
+    //     && options.delta in options.element.scenarios
+    //   ) {
+    //     const delta = options.element.getScenarioTarget(options.delta);
+    //     options.delta = delta;
+    //   }
+    //   return new animations.TransformAnimationStep(options);
+    // }
+    // //////////// Deprecate End
+    // moveToScenario_old(
     //   scenarioName: string,
     //   animationTimeOrVelocity: ?number = null,    // null uses velocity
     //   callback: ?() => void = null,
@@ -22680,12 +22892,12 @@ function () {
   }, {
     key: "updateLastDrawTransform",
     value: function updateLastDrawTransform() {
-      var _this = this;
+      var _this2 = this;
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
       this.transform.order.forEach(function (t, index) {
-        _this.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
+        _this2.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
     }
@@ -22976,7 +23188,7 @@ function () {
   }, {
     key: "animateColorToWithDelay",
     value: function animateColorToWithDelay(color, delay) {
-      var _this2 = this;
+      var _this3 = this;
 
       var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
       var disolve = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
@@ -23001,7 +23213,7 @@ function () {
       if (time === 0) {
         delayCallback = function delayCallback(cancelled) {
           if (!cancelled && finishOnCancel) {
-            _this2.setColor(color);
+            _this3.setColor(color);
           }
 
           callbackToUse(cancelled);
@@ -23795,7 +24007,7 @@ function (_DiagramElement) {
   _inherits(DiagramElementPrimative, _DiagramElement);
 
   function DiagramElementPrimative(drawingObject) {
-    var _this3;
+    var _this4;
 
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
@@ -23804,15 +24016,15 @@ function (_DiagramElement) {
 
     _classCallCheck(this, DiagramElementPrimative);
 
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
-    _this3.drawingObject = drawingObject;
-    _this3.color = color.slice();
-    _this3.pointsToDraw = -1;
-    _this3.angleToDraw = -1;
-    _this3.lengthToDraw = -1;
-    _this3.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
+    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
+    _this4.drawingObject = drawingObject;
+    _this4.color = color.slice();
+    _this4.pointsToDraw = -1;
+    _this4.angleToDraw = -1;
+    _this4.lengthToDraw = -1;
+    _this4.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
 
-    return _this3;
+    return _this4;
   }
 
   _createClass(DiagramElementPrimative, [{
@@ -23945,7 +24157,7 @@ function (_DiagramElement) {
   }, {
     key: "draw",
     value: function draw() {
-      var _this4 = this;
+      var _this5 = this;
 
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -23995,7 +24207,7 @@ function (_DiagramElement) {
         }
 
         pulseTransforms.forEach(function (t) {
-          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), _this4.color, pointCount);
+          _this5.drawingObject.drawWithTransformMatrix(t.matrix(), _this5.color, pointCount);
         });
       }
     }
@@ -24143,7 +24355,7 @@ function (_DiagramElement2) {
 
   // biasTransform: Array<number>;
   function DiagramElementCollection() {
-    var _this5;
+    var _this6;
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
@@ -24151,12 +24363,12 @@ function (_DiagramElement2) {
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
-    _this5.elements = {};
-    _this5.drawOrder = [];
-    _this5.touchInBoundingRect = false;
-    _this5.eqns = {};
-    return _this5;
+    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
+    _this6.elements = {};
+    _this6.drawOrder = [];
+    _this6.touchInBoundingRect = false;
+    _this6.eqns = {};
+    return _this6;
   }
 
   _createClass(DiagramElementCollection, [{
@@ -24561,11 +24773,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this6 = this;
+      var _this7 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this6.elements[a];
-        var elemB = _this6.elements[b];
+        var elemA = _this7.elements[a];
+        var elemB = _this7.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -24597,7 +24809,7 @@ function (_DiagramElement2) {
         if (element.name in elementTransforms) {
           if (element.isShown) {
             if (!elementTransforms[element.name].isEqualTo(element.transform)) {
-              element.animations.new().delay(delay).moveToTransform({
+              element.animations.new().delay(delay).transform({
                 target: elementTransforms[element.name],
                 duration: time,
                 rotDirection: rotDirection,
