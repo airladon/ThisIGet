@@ -650,6 +650,7 @@ class LessonContent {
   toggleInfo: (?boolean) => void;
   animationEnd: string;
   next: () => void;
+  prev: () => void;
   // questions
 
   constructor(htmlId: string = 'lesson_diagram') {
@@ -659,6 +660,7 @@ class LessonContent {
     this.iconLinkGrey = '/';
     this.setTitle();
     this.next = () => {};
+    this.prev = () => {};
 
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {
@@ -672,6 +674,12 @@ class LessonContent {
     this.addSections();
     this.addInfoBox();
     this.addStar();
+    this.setupNextPrev();
+  }
+
+  setupNextPrev() {
+    this.next = () => { this.diagram.lesson.nextSection(); };
+    this.prev = () => { this.diagram.lesson.prevSection(); };
   }
 
   // eslint-disable-next-line class-methods-use-this

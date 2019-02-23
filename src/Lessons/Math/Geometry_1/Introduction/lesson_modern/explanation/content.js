@@ -37,7 +37,6 @@ class Content extends LessonContent {
       fragmentShader: 'withTexture',
     }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    this.next = () => { this.diagram.lesson.nextSection(); };
     // this.loadQRs([
     //   'qr_names_here',
     // ]);
@@ -104,21 +103,15 @@ class Content extends LessonContent {
       'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
     ];
     this.addSection(common, {
-      modifiers: {
-        shape: click(this.next, [this], colors.circle),
-      },
-      setEnterState: () => {
-        circ._wheel.setScenario('left');
-      },
+      modifiers: { shape: click(this.next, [this], colors.circle) },
+      setEnterState: () => { circ._wheel.setScenario('left'); },
       show: [circ._wheel],
     });
     this.addSection(common, {
       modifiers: {
         shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
       },
-      transitionFromAny: (done) => {
-        circ.appearCircleAndMoveWheel(done);
-      },
+      transitionFromAny: (done) => { circ.appearCircleAndMoveWheel(done); },
       show: [circ._wheel, circ._circle],
     });
   }
