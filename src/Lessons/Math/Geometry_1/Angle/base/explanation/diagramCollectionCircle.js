@@ -110,7 +110,7 @@ function makeCorner(shapes: Object, pointOrTransform: Point | Transform) {
 }
 
 function makeArrow(shapes: Object) {
-  return shapes.arrow(
+  return shapes.arrowLegacy(
     layout.arrow.width, layout.arrow.legWidth, layout.arrow.height,
     layout.arrow.legHeight, colors.arrow,
     new Transform().rotate(0).translate(

@@ -4102,6 +4102,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       collection: shapes.collection.bind(shapes),
       polyLine: shapes.polyLine.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
+      arrow: shapes.arrow.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -14697,7 +14698,7 @@ function (_DiagramElementCollec) {
         r = Math.PI / 2 * 3;
       }
 
-      var a = this.shapes.arrow(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(0).translate(0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
+      var a = this.shapes.arrowLegacy(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(0).translate(0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
 
       this["arrow".concat(index)] = arrowOptions;
       this.add("arrow".concat(index), a);
@@ -16973,7 +16974,7 @@ function (_DiagramElementCollec) {
         r = Math.PI / 2 * 3;
       }
 
-      var a = this.shapes.arrow(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
+      var a = this.shapes.arrowLegacy(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
 
       this["arrow".concat(index)] = {
         height: height
@@ -18015,6 +18016,40 @@ function () {
       return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(o.location.x, o.location.y), [1, 0, 0, 1], this.limits);
     }
   }, {
+    key: "arrow",
+    value: function arrow() {
+      var defaultOptions = {
+        width: 1,
+        legWidth: 1,
+        height: 1,
+        legHeight: 1,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        tip: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        rotation: 0
+      };
+
+      for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+        optionsIn[_key4] = arguments[_key4];
+      }
+
+      var o = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [defaultOptions].concat(optionsIn));
+      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, o.width, o.legWidth, o.height, o.legHeight, o.tip, o.rotation, o.color, o.transform, this.limits);
+    }
+  }, {
+    key: "arrowLegacy",
+    value: function arrowLegacy() {
+      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
+      var legWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
+      var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
+      var legHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.5;
+      var color = arguments.length > 4 ? arguments[4] : undefined;
+      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      var tip = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+      var rotation = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
+      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
+    }
+  }, {
     key: "text",
     value: function text(textInput, location, color) {
       var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
@@ -18074,19 +18109,6 @@ function () {
       var inside = document.createElement('div');
       inside.innerHTML = textInput;
       return this.htmlElement(inside, id, classes, location, alignV, alignH);
-    }
-  }, {
-    key: "arrow",
-    value: function arrow() {
-      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var legWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
-      var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var legHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.5;
-      var color = arguments.length > 4 ? arguments[4] : undefined;
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var tip = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var rotation = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
     }
   }, {
     key: "lines",
@@ -18174,8 +18196,8 @@ function () {
         mods: {}
       };
 
-      for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        options[_key4] = arguments[_key4];
+      for (var _len5 = arguments.length, options = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        options[_key5] = arguments[_key5];
       }
 
       var optionsToUse = Object.assign.apply(Object, [{}, defaultOptions].concat(options));
@@ -18261,8 +18283,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len5 = arguments.length, moreOptions = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-          moreOptions[_key5 - 1] = arguments[_key5];
+        for (var _len6 = arguments.length, moreOptions = new Array(_len6 > 1 ? _len6 - 1 : 0), _key6 = 1; _key6 < _len6; _key6++) {
+          moreOptions[_key6 - 1] = arguments[_key6];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));

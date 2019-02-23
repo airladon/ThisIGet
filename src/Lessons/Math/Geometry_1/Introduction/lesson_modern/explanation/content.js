@@ -16,7 +16,7 @@ const {
   click,
   centerVH,
   centerV,
-  highlight,
+  // highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -121,9 +121,14 @@ class Content extends LessonContent {
       '|Properties| can be discovered that describe the shape.',
     ];
     this.addSection(common, {
-      // modifiers: { shape: click(circ.animateCustom, [circ], colors.circle) },
-      setEnterState: () => { circ._circle.setScenario('right'); },
-      show: [circ._circle],
+      modifiers: { shape: click(circ.growDimensions, [circ, null], colors.circle) },
+      setEnterState: () => {
+        circ._circle.setScenario('right');
+        circ._circumference.setScenario('right');
+        circ._diameter.setScenario('right');
+        circ.circumferenceAtAngle(2);
+      },
+      show: [circ._circle, circ._circumference, circ._diameter],
     });
     // this.addSection(common, {
     //   modifiers: {

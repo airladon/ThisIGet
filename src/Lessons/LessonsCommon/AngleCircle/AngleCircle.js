@@ -193,7 +193,7 @@ class AngleCircle extends CommonDiagramCollection {
     const angle = this.shapes.collection(new Transform().translate(0, 0));
     const arc = this.makeArc(this.layout.angle.radius, this.layout.angle.lineWidth);
     arc.color = this.colors.angle.slice();
-    const arrow = this.shapes.arrow(
+    const arrow = this.shapes.arrowLegacy(
       this.layout.angle.arrow.width, 0, this.layout.angle.arrow.height, 0,
       this.colors.angle, new Transform().rotate(0).translate(0, 0),
     );

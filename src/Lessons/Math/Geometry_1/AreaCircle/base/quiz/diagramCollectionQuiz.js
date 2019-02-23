@@ -62,7 +62,7 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
     const circumference = this.diagram.shapes.collection(new Transform()
       .translate(0, 0));
     const line = this.diagram.shapes.polygon(lay.line);
-    const arrow = this.diagram.shapes.arrow(
+    const arrow = this.diagram.shapes.arrowLegacy(
       lay.arrow.width,
       0,
       lay.arrow.height,

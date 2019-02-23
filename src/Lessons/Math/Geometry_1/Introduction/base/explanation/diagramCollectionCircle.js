@@ -106,11 +106,11 @@ function makeDiameterDimension(shapes: Object) {
     colors.dimensions,
     new Transform().scale(1, 1).rotate(0).translate(0, 0),
   );
-  const arrow1 = shapes.arrow(
+  const arrow1 = shapes.arrowLegacy(
     arrowWidth, 0, arrowHeight, 0,
     colors.dimensions, new Transform().rotate(-Math.PI / 2).translate(diameter / 2, 0),
   );
-  const arrow2 = shapes.arrow(
+  const arrow2 = shapes.arrowLegacy(
     arrowWidth, 0, arrowHeight, 0,
     colors.dimensions, new Transform().rotate(Math.PI / 2).translate(-diameter / 2, 0),
   );
@@ -174,11 +174,11 @@ function makeCircumferenceDimension(shapes: Object) {
     color: colors.dimensions,
     transform: new Transform().rotate(0).translate(0, 0),
   });
-  const arrow1 = shapes.arrow(
+  const arrow1 = shapes.arrowLegacy(
     arrowWidth, 0, arrowHeight, 0,
     colors.dimensions, new Transform().rotate(0).translate(0, 0),
   );
-  const arrow2 = shapes.arrow(
+  const arrow2 = shapes.arrowLegacy(
     arrowWidth, 0, arrowHeight, 0,
     colors.dimensions, new Transform().rotate(0).translate(0, 0),
   );
