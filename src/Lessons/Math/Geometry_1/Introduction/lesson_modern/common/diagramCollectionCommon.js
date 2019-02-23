@@ -27,7 +27,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       .dissolveIn(1)
       .pulse({ scale: 2, duration: 2 })
       .scenario({ target: 'right', duration: 1.5 })
-      .pulse({ scale: 2, duration: 2 })
+      .pulse({ scale: 1.1, duration: 2, numLines: 5 })
       .whenFinished(done)
       .start();
 
