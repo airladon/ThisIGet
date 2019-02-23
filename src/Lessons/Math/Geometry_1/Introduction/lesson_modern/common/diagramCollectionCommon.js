@@ -21,6 +21,8 @@ export default class CommonCollection extends CommonDiagramCollection {
       _arrow: DiagramElementPrimative;
     } & DiagramElementCollection;
     _diameter: DiagramObjectLine;
+    _d: DiagramElementPrimative;
+    _c: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   appearCircleAndMoveWheel(done: ?() => {}) {
@@ -74,13 +76,29 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   growDiameter(done: ?() => void = null) {
+    this._properties._diameter.showAll();
+    // this._properties._c.showAll();
     this._properties._diameter.grow(0.2, 1, true, done);
     this.diagram.animateNextFrame();
   }
 
   growDimensions(done: ?() => void = null) {
-    this.growCircumference(done);
-    this.growDiameter();
+    this._properties._diameter.hide();
+    this._properties._c.hide();
+    this._properties._d.hide();
+    this._properties.animations.new()
+      .trigger(this.growCircumference.bind(this, null))
+      .delay(1)
+      .then(this._properties._c.anim.dissolveIn(1))
+      // .trigger(() => { this._properties._c.show(); })
+      .trigger(this.growDiameter.bind(this, null))
+      .delay(1)
+      .then(this._properties._d.anim.dissolveIn(1))
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+    // this.growCircumference(done);
+    // this.growDiameter();
   }
 
   constructor(

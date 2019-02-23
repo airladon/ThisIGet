@@ -69,10 +69,10 @@ export default function lessonLayout() {
   };
 
   layout.textC = {
-    name: 'c',
+    name: 'd',
     method: 'text',
     options: {
-      text: 'c',
+      text: 'd',
       offset: new Point(0, 0.15),
       color: colors.dimension,
     },
@@ -80,10 +80,10 @@ export default function lessonLayout() {
   };
 
   layout.textD = {
-    name: 'd',
+    name: 'c',
     method: 'text',
     options: {
-      text: 'd',
+      text: 'c',
       offset: new Point(0, +wheelSize * 1.2 + 0.15),
       color: colors.dimension,
     },

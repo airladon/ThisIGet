@@ -2,7 +2,7 @@
 
 $colors: (
   circle:               color('red'),
-  dimension:            color('green'),
+  dimension:            color('green', 'darker'),
   // lines:             map-get($geometry_colors, lines),
   // angles:            color('diagram', 'construction8'),
 );
