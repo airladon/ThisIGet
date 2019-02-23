@@ -124,11 +124,13 @@ class Content extends LessonContent {
       modifiers: { shape: click(circ.growDimensions, [circ, null], colors.circle) },
       setEnterState: () => {
         circ._circle.setScenario('right');
-        circ._circumference.setScenario('right');
-        circ._diameter.setScenario('right');
-        circ.circumferenceAtAngle(2);
+        circ._properties.setScenario('right');
+        // circ._diameter.setScenario('right');
+        // circ._c.setScenario('right');
+        circ.circumferenceAtAngle(Math.PI * 2);
+        console.log(circ)
       },
-      show: [circ._circle, circ._circumference, circ._diameter],
+      show: [circ._circle, circ._properties],
     });
     // this.addSection(common, {
     //   modifiers: {

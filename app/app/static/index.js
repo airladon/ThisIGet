@@ -4103,6 +4103,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       polyLine: shapes.polyLine.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
+      text: shapes.txt.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -6088,7 +6089,7 @@ function (_DiagramElementCollec) {
         }
 
         var p = _this2.shapes.txt(options.text, {
-          location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+          position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
           font: fontToUse
         });
 
@@ -17986,9 +17987,10 @@ function () {
 
   }, {
     key: "txt",
-    value: function txt(text) {
+    value: function txt(textOrOptions) {
       var defaultOptions = {
-        location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        text: '',
+        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         font: null,
         family: 'Times New Roman',
         style: 'italic',
@@ -17996,24 +17998,36 @@ function () {
         weight: '200',
         hAlign: 'center',
         vAlign: 'middle',
+        offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        // vertex space offset
         color: [1, 0, 0, 1]
       };
+      var options;
 
-      for (var _len3 = arguments.length, options = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-        options[_key3 - 1] = arguments[_key3];
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+        optionsIn[_key3 - 1] = arguments[_key3];
       }
 
-      var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [defaultOptions].concat(options));
-      var o = optionsToUse;
+      if (typeof textOrOptions === 'string') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          text: textOrOptions
+        }].concat(optionsIn));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions, textOrOptions].concat(optionsIn));
+      } // const optionsToUse = joinObjects(defaultOptions, ...options);
+
+
+      var o = options;
+      var text = o.text;
       var fontToUse = o.font;
 
       if (fontToUse === null) {
         fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), text, fontToUse);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](o.offset, text, fontToUse);
       var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["TextObject"](this.draw2D, [dT]);
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(o.location.x, o.location.y), [1, 0, 0, 1], this.limits);
+      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(o.position.x, o.position.y), [1, 0, 0, 1], this.limits);
     }
   }, {
     key: "arrow",

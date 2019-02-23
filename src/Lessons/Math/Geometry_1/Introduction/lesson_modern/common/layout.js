@@ -68,6 +68,28 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
+  layout.textC = {
+    name: 'c',
+    method: 'text',
+    options: {
+      text: 'c',
+      offset: new Point(0, 0.15),
+      color: colors.dimension,
+    },
+    mods: { scenarios },
+  };
+
+  layout.textD = {
+    name: 'd',
+    method: 'text',
+    options: {
+      text: 'd',
+      offset: new Point(0, +wheelSize * 1.2 + 0.15),
+      color: colors.dimension,
+    },
+    mods: { scenarios },
+  };
+
   layout.diameter = {
     name: 'diameter',
     method: 'line',
@@ -91,7 +113,7 @@ export default function lessonLayout() {
     name: 'circumference',
     method: 'collection',
     options: {
-      transform: new Transform('Circumference').rotate(-Math.PI / 2).translate(0, 0),
+      transform: new Transform('Circumference').rotate(Math.PI / 2).translate(0, 0),
     },
     addElements: [
       {
@@ -103,6 +125,7 @@ export default function lessonLayout() {
           width: layout.circumferenceLineWidth,
           sides: 300,
           color: colors.dimension,
+          clockwise: true,
           transform: new Transform('Circle').scale(1, 1).translate(0, 0),
         },
       },
@@ -122,6 +145,20 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
+  layout.properties = {
+    name: 'properties',
+    method: 'collection',
+    options: {
+      transform: new Transform('Properties').translate(0, 0),
+    },
+    addElements: [
+      layout.circumference,
+      layout.textC,
+      layout.diameter,
+      layout.textD,
+    ],
+    mods: { scenarios },
+  };
   // const wheel = ['', 'wheel', 'polygon', [filledCircle, {
   //   textureLocation: textureFile,
   //   textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
@@ -131,8 +168,9 @@ export default function lessonLayout() {
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.wheel,
     layout.circle,
-    layout.circumference,
-    layout.diameter,
+    layout.properties,
+    // layout.diameter,
+    // layout.textC
   ];
   return layout;
 }

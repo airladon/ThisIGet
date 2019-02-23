@@ -15,11 +15,13 @@ const {
 export default class CommonCollection extends CommonDiagramCollection {
   _circle: DiagramElementPrimative;
   _wheel: DiagramElementPrimative;
-  _circumference: {
-    _line: DiagramElementPrimative;
-    _arrow: DiagramElementPrimative;
+  _properties: {
+    _circumference: {
+      _line: DiagramElementPrimative;
+      _arrow: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _diameter: DiagramObjectLine;
   } & DiagramElementCollection;
-  _diameter: DiagramObjectLine;
 
   appearCircleAndMoveWheel(done: ?() => {}) {
     this._circle.animations.cancelAll();
@@ -45,17 +47,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     const arrowHeightAngle = height / radius;
 
     if (angle < 0.05) {
-      this._circumference._arrow.hide();
-      this._circumference._line.angleToDraw = angle;
+      this._properties._circumference._arrow.hide();
+      this._properties._circumference._line.angleToDraw = angle;
     } else {
-      this._circumference._arrow.show();
-      this._circumference._line.angleToDraw = angle - arrowHeightAngle / 2;
-      this._circumference._arrow.setPosition(new Point(
-        radius * Math.cos(angle),
-        radius * Math.sin(angle),
+      this._properties._circumference._arrow.show();
+      this._properties._circumference._line.angleToDraw = angle - arrowHeightAngle / 2;
+      this._properties._circumference._arrow.setPosition(new Point(
+        radius * Math.cos(-angle),
+        radius * Math.sin(-angle),
       ));
 
-      this._circumference._arrow.setRotation(angle - arrowHeightAngle);
+      this._properties._circumference._arrow.setRotation(-angle + arrowHeightAngle + Math.PI);
     }
   }
 
@@ -63,8 +65,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     const grow = (percent: number) => {
       this.circumferenceAtAngle(percent * Math.PI * 2);
     };
-    this._circumference.animations.cancelAll();
-    this._circumference.animations.new('Circumference Growth')
+    this._properties._circumference.animations.cancelAll();
+    this._properties._circumference.animations.new('Circumference Growth')
       .custom({ callback: grow, duration: 1 })
       .whenFinished(done)
       .start();
@@ -72,7 +74,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   growDiameter(done: ?() => void = null) {
-    this._diameter.grow(0.2, 1, true, done);
+    this._properties._diameter.grow(0.2, 1, true, done);
     this.diagram.animateNextFrame();
   }
 
