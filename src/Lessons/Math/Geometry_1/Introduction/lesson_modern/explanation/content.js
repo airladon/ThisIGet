@@ -102,6 +102,7 @@ class Content extends LessonContent {
     common.setContent = [
       'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
     ];
+    // this.next = () => { this.diagram.lesson.nextSection(); };
     this.addSection(common, {
       modifiers: { shape: click(this.next, [this], colors.circle) },
       setEnterState: () => { circ._wheel.setScenario('left'); },

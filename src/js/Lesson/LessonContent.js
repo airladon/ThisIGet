@@ -659,8 +659,6 @@ class LessonContent {
     this.iconLink = '/';
     this.iconLinkGrey = '/';
     this.setTitle();
-    this.next = () => {};
-    this.prev = () => {};
 
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {
@@ -670,16 +668,12 @@ class LessonContent {
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
+    this.next = () => { this.diagram.lesson.nextSection(); };
+    this.prev = () => { this.diagram.lesson.nextSection(); };
     this.setElementContent();
     this.addSections();
     this.addInfoBox();
     this.addStar();
-    this.setupNextPrev();
-  }
-
-  setupNextPrev() {
-    this.next = () => { this.diagram.lesson.nextSection(); };
-    this.prev = () => { this.diagram.lesson.prevSection(); };
   }
 
   // eslint-disable-next-line class-methods-use-this
