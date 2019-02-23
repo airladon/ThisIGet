@@ -603,7 +603,11 @@ function (_animation$SerialAnim) {
     value: function reset() {
       this.steps = [];
       this.state = 'idle';
-    }
+    } // whenFinished(callback: (boolean) => void) {
+    //   super.whenFinished(callback);
+    //   return this;
+    // }
+
   }, {
     key: "_dup",
     value: function _dup() {
@@ -795,6 +799,7 @@ function () {
           if (animation.name === name) {
             if (animation.state !== 'animating') {
               animation.start();
+              this.state = 'animating';
             }
           }
         }
@@ -808,6 +813,7 @@ function () {
 
         if (animation.state !== 'animating') {
           animation.start();
+          this.state = 'animating';
         }
       }
     }
@@ -17358,7 +17364,13 @@ function (_DiagramElementCollec) {
         }
       };
 
-      this.animateCustomTo(func, time, 0, done);
+      this.animations.new('Line Length').custom({
+        callback: func,
+        duration: time
+      }).whenFinished(done).start(); // this.animations.start();
+
+      this.animateNextFrame(); // console.log(this)
+      // this.animateCustomTo(func, time, 0, done);
     }
   }, {
     key: "grow",
@@ -22451,11 +22463,15 @@ function () {
   }, {
     key: "setScale",
     value: function setScale(scaleOrX) {
-      var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var scale = scaleOrX;
 
       if (typeof scaleOrX === 'number') {
-        scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, y);
+        if (y == null) {
+          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, scaleOrX);
+        } else {
+          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, y);
+        }
       }
 
       var currentTransform = this.transform._dup();
@@ -24405,7 +24421,7 @@ function (_DiagramElement2) {
         return false;
       }
 
-      if (this.state.isAnimating || this.state.isAnimatingCustom || this.state.isAnimatingColor || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing) {
+      if (this.state.isAnimating || this.state.isAnimatingCustom || this.state.isAnimatingColor || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
         return true;
       }
 

@@ -102,7 +102,6 @@ class Content extends LessonContent {
     common.setContent = [
       'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
     ];
-    // this.next = () => { this.diagram.lesson.nextSection(); };
     this.addSection(common, {
       modifiers: { shape: click(this.next, [this], colors.circle) },
       setEnterState: () => { circ._wheel.setScenario('left'); },
@@ -115,6 +114,24 @@ class Content extends LessonContent {
       transitionFromAny: (done) => { circ.appearCircleAndMoveWheel(done); },
       show: [circ._wheel, circ._circle],
     });
+
+
+    common.setContent = [
+      'The |shape| can then be studied.',
+      '|Properties| can be discovered that describe the shape.',
+    ];
+    this.addSection(common, {
+      // modifiers: { shape: click(circ.animateCustom, [circ], colors.circle) },
+      setEnterState: () => { circ._circle.setScenario('right'); },
+      show: [circ._circle],
+    });
+    // this.addSection(common, {
+    //   modifiers: {
+    //     shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
+    //   },
+    //   transitionFromAny: (done) => { circ.appearCircleAndMoveWheel(done); },
+    //   show: [circ._wheel, circ._circle],
+    // });
   }
 }
 

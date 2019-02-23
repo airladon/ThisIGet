@@ -46,7 +46,7 @@ export default function lessonLayout() {
         width: 0.05,
         sides: wheelPoints,
         color: colors.circle,
-        transform: new Transform('Circle').translate(0, 0),
+        transform: new Transform('Circle').scale(1, 1).translate(0, 0),
       },
       mods: {
         scenarios: {

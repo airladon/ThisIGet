@@ -30,11 +30,6 @@ export default class CommonCollection extends CommonDiagramCollection {
       .whenFinished(done)
       .start();
 
-    // this._wheel.animations.new()
-    //   .delay(1)
-    //   .scenario({ target: 'left', duration: 1.5 })
-    //   .start();
-
     this.diagram.animateNextFrame();
   }
 
