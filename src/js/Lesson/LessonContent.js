@@ -649,6 +649,7 @@ class LessonContent {
   iconLinkGrey: string;
   toggleInfo: (?boolean) => void;
   animationEnd: string;
+  next: () => void;
   // questions
 
   constructor(htmlId: string = 'lesson_diagram') {
@@ -657,6 +658,7 @@ class LessonContent {
     this.iconLink = '/';
     this.iconLinkGrey = '/';
     this.setTitle();
+    this.next = () => {};
 
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {

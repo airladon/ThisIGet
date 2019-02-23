@@ -16,7 +16,7 @@ const {
   click,
   centerVH,
   centerV,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -37,6 +37,7 @@ class Content extends LessonContent {
       fragmentShader: 'withTexture',
     }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.next = () => { this.diagram.lesson.nextSection(); };
     // this.loadQRs([
     //   'qr_names_here',
     // ]);
@@ -47,7 +48,7 @@ class Content extends LessonContent {
     const circ = diag._circles;
 
     const common = {
-      setContent: '',
+      setContent: [],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -98,20 +99,24 @@ class Content extends LessonContent {
       },
       show: [circ._wheel],
     });
+
+    common.setContent = [
+      'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
+    ];
     this.addSection(common, {
-      setContent: [
-        'In mathematics, a |shape| can be used to describe the wheel in a more simple, general way.',
-      ],
       modifiers: {
-        shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
+        shape: click(this.next, [this], colors.circle),
       },
       setEnterState: () => {
         circ._wheel.setScenario('left');
-        circ._circle.setScenario('center');
+      },
+      show: [circ._wheel],
+    });
+    this.addSection(common, {
+      modifiers: {
+        shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
       },
       transitionFromAny: (done) => {
-        // circ._wheel.moveToScenario('left');
-        // circ._circle.moveToScenario('right', null, done);
         circ.appearCircleAndMoveWheel(done);
       },
       show: [circ._wheel, circ._circle],
