@@ -586,11 +586,16 @@ function (_animation$SerialAnim) {
   }, {
     key: "pulse",
     value: function pulse() {
+      var defaultOptions = {
+        element: this.element
+      };
+
       for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
         optionsIn[_key15] = arguments[_key15];
       }
 
-      this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["PulseAnimationStep"], optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PulseAnimationStep"](options));
       return this;
     }
   }, {
@@ -1917,6 +1922,7 @@ function (_ElementAnimationStep) {
     _this.scale = options.scale;
     _this.numLines = options.numLines;
     _this.duration = options.duration;
+    _this.frequency = options.frequency;
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -22083,7 +22089,10 @@ function () {
           optionsIn[_key5] = arguments[_key5];
         }
 
-        return _construct(animation.PulseAnimationStep, optionsIn);
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
