@@ -84,7 +84,7 @@ export default function lessonLayout() {
     method: 'text',
     options: {
       text: 'c',
-      offset: new Point(0, +wheelSize * 1.2 + 0.15),
+      offset: new Point(0, wheelSize * 1.2 + 0.15),
       color: colors.dimension,
     },
     mods: { scenarios },

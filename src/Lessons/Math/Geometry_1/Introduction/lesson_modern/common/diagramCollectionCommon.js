@@ -83,6 +83,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   growDimensions(done: ?() => void = null) {
+    this._properties.animations.cancelAll()
     this._properties._diameter.hide();
     this._properties._c.hide();
     this._properties._d.hide();
