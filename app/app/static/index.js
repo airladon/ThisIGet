@@ -1001,17 +1001,30 @@ function () {
         return;
       }
 
+      var oldState = this.state;
       this.state = 'finished';
 
       if (cancelled && force === 'complete') {
+        if (oldState === 'waitingToStart') {
+          this.start();
+        }
+
         this.setToEnd();
       }
 
       if (cancelled && force == null && this.completeOnCancel === true) {
+        if (oldState === 'waitingToStart') {
+          this.start();
+        }
+
         this.setToEnd();
       }
 
       if (cancelled === false) {
+        if (oldState === 'waitingToStart') {
+          this.start();
+        }
+
         this.setToEnd();
       }
 

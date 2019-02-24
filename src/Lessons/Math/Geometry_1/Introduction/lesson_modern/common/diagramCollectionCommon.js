@@ -83,18 +83,20 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   growDimensions(done: ?() => void = null) {
-    this._properties.animations.cancelAll()
+    this._properties.animations.cancelAll('complete');
     this._properties._diameter.hide();
     this._properties._c.hide();
     this._properties._d.hide();
     this._properties.animations.new()
       .trigger(this.growCircumference.bind(this, null))
       .delay(1)
+      // .dissolveIn({ element: this._properties._c, duration: 1 })
       .then(this._properties._c.anim.dissolveIn(1))
       // .trigger(() => { this._properties._c.show(); })
       .trigger(this.growDiameter.bind(this, null))
       .delay(1)
       .then(this._properties._d.anim.dissolveIn(1))
+      // .dissolveIn({ element: this._properties._d, duration: 1 })
       .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
