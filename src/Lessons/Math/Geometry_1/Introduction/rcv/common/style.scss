@@ -1,0 +1,19 @@
+@import '../../../geometry';
+
+$colors: (
+  graph:                color('grey', 'light'),
+  candidate1:           color('yellow'),
+  candidate2:           color('green'),
+  candidate3:           color('violet'),
+  candidate4:           color('blue', 'light'),
+  // lines:             map-get($geometry_colors, lines),
+  // angles:            color('diagram', 'construction8'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 1;
+}

@@ -2965,7 +2965,8 @@ function (_AnimationStep) {
     _classCallCheck(this, TriggerStep);
 
     var defaultOptions = {
-      payload: null
+      payload: null,
+      duration: 0
     };
     var options;
 
@@ -2983,7 +2984,7 @@ function (_AnimationStep) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
     _this.trigger = options.trigger;
     _this.payload = options.payload;
-    _this.duration = 0;
+    _this.duration = options.duration;
     return _this;
   }
 
