@@ -243,26 +243,35 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.candidateOrder.forEach((name, index) => {
       lastX[name] = this.layout.plotStart.x + index
                     * this.layout.barSeparation + this.layout.barWidth / 2;
-      // lastY[name] = this.layout.plotStart.y;
+      lastY[name] = this.layout.plotStart.y;
     });
     this.rounds.forEach((round, roundIndex) => {
       round.order.forEach((name) => {
         const deltaElement = this[`_${roundIndex}delta${name}`]
         const totalElement = this[`_${roundIndex}total${name}`]
-        // const position = new Point(lastX[name], lastY[name]);
-        
-        totalElement.scenarios.end = { position: new Point(lastX[name], this.layout.plotStart.y) };
-        deltaElement.scenarios.end = { position: new Point(lastX[name], totalElement.length + this.layout.barVerticalSeparation) };
-        // lastY[name] += deltaElement.length + this.layout.barVerticalSeparation;
-        // deltaElement.scenarios.end = { position };
-
+        totalElement.scenarios.end = {
+          position: new Point(lastX[name], this.layout.plotStart.y),
+        };
+        totalElement.scenarios.remove = {
+          position: new Point(
+            lastX[name] + this.layout.barSeparation,
+            this.layout.plotStart.y,
+          ),
+        };
+        deltaElement.scenarios.end = {
+          position: new Point(
+            lastX[name],
+            lastY[name] + this.layout.barVerticalSeparation,
+          ),
+        };
+        lastY[name] += deltaElement.length;
       });
     });
   }
 
   addStartScenarios() {
     this.rounds.forEach((round, roundIndex) => {
-      const lastX = this.layout.plotStart.x + (round.order.length + 1) * this.layout.barSeparation + this.layout.barWidth / 2;
+      const lastX = this.layout.plotStart.x + (round.order.length + 2) * this.layout.barSeparation + this.layout.barWidth / 2;
       let lastY = this.layout.plotStart.y;
       round.order.forEach((name) => {
         const element = this[`_${roundIndex}delta${name}`];

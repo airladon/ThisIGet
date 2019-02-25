@@ -30,7 +30,7 @@ export default function lessonLayout() {
   layout.plotStart = plotStart;
   layout.barWidth = barWidth;
   layout.barSeparation = 0.5;
-  layout.barVerticalSeparation = 0.005;
+  layout.barVerticalSeparation = 0;
   // const candidateWidth = 0.2;
   // const step = 0.4;
 
