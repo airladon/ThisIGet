@@ -24,9 +24,9 @@ export default function lessonLayout() {
   const plotWidth = 2.5;
   const lineWidth = 0.015;
   const plotHeight = 2.5;
-  const plotStart = new Point (-2, -1.7);
-  const candidateWidth = 0.2;
-  const step = 0.4;
+  // const plotStart = new Point (-2, -1.7);
+  // const candidateWidth = 0.2;
+  // const step = 0.4;
 
   layout.zero = {
     name: 'zeroLine',
@@ -40,8 +40,8 @@ export default function lessonLayout() {
         text: '0',
         location: 'end1',
         offset: 0.1,
-      }
-    }
+      },
+    },
   };
 
   layout.halfLine = {
@@ -56,8 +56,8 @@ export default function lessonLayout() {
         text: '50',
         location: 'end1',
         offset: 0.1,
-      }
-    }
+      },
+    },
   };
 
   layout.fullLine = {
@@ -72,86 +72,86 @@ export default function lessonLayout() {
         text: '100',
         location: 'end1',
         offset: 0.1,
-      }
-    }
+      },
+    },
   };
 
-  layout.candidate1 = {
-    name: 'candidate1',
-    method: 'line',
-    options: {
-      color: colors.candidate1,
-      length: 1,
-      width: candidateWidth,
-      angle: Math.PI / 2,
-      position: plotStart.add(step, 0),
-      vertexSpaceStart: 'start',
-      label: {
-        text: '35',
-        color: [0, 0, 0, 1],
-      },
-    }
-  }
+  // layout.candidate1 = {
+  //   name: 'candidate1',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.candidate1,
+  //     length: 1,
+  //     width: candidateWidth,
+  //     angle: Math.PI / 2,
+  //     position: plotStart.add(step, 0),
+  //     vertexSpaceStart: 'start',
+  //     label: {
+  //       text: '35',
+  //       color: [0, 0, 0, 1],
+  //     },
+  //   }
+  // }
 
-  layout.candidate2 = {
-    name: 'candidate2',
-    method: 'line',
-    options: {
-      color: colors.candidate2,
-      length: 1,
-      width: candidateWidth,
-      angle: Math.PI / 2,
-      position: plotStart.add(step * 2, 0),
-      vertexSpaceStart: 'start',
-      label: {
-        text: '35',
-        color: [0, 0, 0, 1],
-      },
-    },
-  },
+  // layout.candidate2 = {
+  //   name: 'candidate2',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.candidate2,
+  //     length: 1,
+  //     width: candidateWidth,
+  //     angle: Math.PI / 2,
+  //     position: plotStart.add(step * 2, 0),
+  //     vertexSpaceStart: 'start',
+  //     label: {
+  //       text: '35',
+  //       color: [0, 0, 0, 1],
+  //     },
+  //   },
+  // },
 
-  layout.candidate3 = {
-    name: 'candidate3',
-    method: 'line',
-    options: {
-      color: colors.candidate3,
-      length: 1,
-      width: candidateWidth,
-      angle: Math.PI / 2,
-      position: plotStart.add(step * 3, 0),
-      vertexSpaceStart: 'start',
-      label: {
-        text: '35',
-        color: [0, 0, 0, 1],
-      },
-    },
-  },
+  // layout.candidate3 = {
+  //   name: 'candidate3',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.candidate3,
+  //     length: 1,
+  //     width: candidateWidth,
+  //     angle: Math.PI / 2,
+  //     position: plotStart.add(step * 3, 0),
+  //     vertexSpaceStart: 'start',
+  //     label: {
+  //       text: '35',
+  //       color: [0, 0, 0, 1],
+  //     },
+  //   },
+  // },
 
-  layout.candidate4 = {
-    name: 'candidate4',
-    method: 'line',
-    options: {
-      color: colors.candidate4,
-      length: 1,
-      width: candidateWidth,
-      angle: Math.PI / 2,
-      position: plotStart.add(step * 4, 0),
-      vertexSpaceStart: 'start',
-      label: {
-        text: '35',
-        color: [0, 0, 0, 1],
-      },
-    },
-  },
+  // layout.candidate4 = {
+  //   name: 'candidate4',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.candidate4,
+  //     length: 1,
+  //     width: candidateWidth,
+  //     angle: Math.PI / 2,
+  //     position: plotStart.add(step * 4, 0),
+  //     vertexSpaceStart: 'start',
+  //     label: {
+  //       text: '35',
+  //       color: [0, 0, 0, 1],
+  //     },
+  //   },
+  // },
 
   layout.addElements = [
     layout.zero,
     layout.halfLine,
     layout.fullLine,
-    layout.candidate1,
-    layout.candidate2,
-    layout.candidate3,
-    layout.candidate4,
+    // layout.candidate1,
+    // layout.candidate2,
+    // layout.candidate3,
+    // layout.candidate4,
   ];
 
   return layout;

@@ -2,10 +2,10 @@
 
 $colors: (
   graph:                color('grey', 'light'),
-  candidate1:           color('yellow'),
-  candidate2:           color('green'),
-  candidate3:           color('violet'),
-  candidate4:           color('blue', 'light'),
+  spring:           color('yellow'),
+  winter:           color('green'),
+  autumn:           color('violet'),
+  summer:           color('blue', 'light'),
   // lines:             map-get($geometry_colors, lines),
   // angles:            color('diagram', 'construction8'),
 );

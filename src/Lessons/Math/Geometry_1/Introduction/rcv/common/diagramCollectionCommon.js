@@ -8,12 +8,11 @@ const {
   // DiagramElementCollection,
   Transform,
 } = Fig;
-const {
-  randElements,
-} = Fig.tools.math;
+// const {
+//   randElements,
+// } = Fig.tools.math;
 
-const candidates = ['spring', 'winter', 'summer', 'autumn'];
-const overallResults = [
+const results = [
   // randElements(4, ['summer', 'spring', 'autumn', 'winter']),
   ['spring', 'winter', 'summer', 'autumn'],
   ['autumn', 'summer', 'spring', 'winter'],
@@ -80,144 +79,113 @@ function summarizeData(data: Array<Array<string>>) {
   Object.keys(summary).forEach((key) => {
     summaryArray.push({ name: key, count: summary[key] });
   });
-  return summaryArray.sort((a, b) => b.count - a.count);
+  return summaryArray.sort((a, b) => a.count - b.count);
 }
 
-function mergeData(candidateToMerge:string, data: Array<Array<string>>) {
+function removeFromArray(value: string, fromArray: Array<string>) {
+  const copyArray = fromArray.slice();
+  for (let i = 0; i < copyArray.length; i += 1) {
+    if (copyArray[i] === value) {
+      copyArray.splice(i, 1);
+    }
+  }
+  return copyArray;
+}
+
+function mergeData(candidateToMerge: string, data: Array<Array<string>>): Array<Array<string>> {
   const mergedData = [];
   data.forEach((d) => {
-    if (d[0] === candidateToMerge) {
-      mergedData.push()
+    const newD = removeFromArray(candidateToMerge, d);
+    mergedData.push(newD);
+  });
+  return mergedData;
+}
+
+type TypeSummary = Array<{
+  name: string;
+  count: number;
+}>;
+
+type TypeData = Array<Array<string>>;
+
+function calcRounds(
+  dataIn?: TypeData,
+  summaryIn?: TypeSummary,
+  rounds: Array<Object> = [],
+) {
+  let summary = summaryIn;
+  let data = dataIn;
+  if (summaryIn != null && dataIn != null) {
+    const threashold = Math.floor(dataIn.length / 2) + 1;
+    const highestCount = summaryIn.slice(-1)[0].count;
+    if (highestCount > threashold) {
+      return rounds;
     }
-  })
-}
-
-function processResults(rawData: Array<Array<string>>) {
-  const summary = summarizeData(rawData);
-  console.log(summary);
-}
-
-class ResultsNew {
-  rawData: Array<Array<string>>;
-  candidateNames: Array<string>;
-  constructor(raw: Array<Array<string>>, candidateNames: Array<string>) {
-    this.rawData = raw;
-    this.candidateNames = candidateNames;
+  } else if (dataIn != null) {
+    data = dataIn;
+    summary = summarizeData(data);
+    // eslint-disable-next-line
+    rounds = [{ summary, data }];
   }
 
+  if (data != null && summary != null) {
+    const newData = mergeData(summary[0].name, data);
+    const newSummary = summarizeData(newData);
+    const newRound = { summary: newSummary, data: newData };
+    return calcRounds(newData, newSummary, [...rounds, newRound]);
+  }
+  return rounds;
 }
 
-class Results {
-  rawData: Array<Array<string>>;
-  candidateNames: Array<string>;
-  results: { count: number, preferences: Array<Array<string>>};
-  sortedResults: Array<{ count: number, preferences: Array<Array<string>>}>;
-
-  constructor(raw: Array<Array<string>>, candidateNames: Array<string>) {
-    this.rawData = raw;
-    this.candidateNames = candidateNames;
-    this.results = this.countRound();
-    this.sortedCount();
-  }
-
-  countRound() {
-    const countDict = {};
-    this.candidateNames.forEach((name) => {
-      countDict[name] = {
-        count: 0,
-        preferences: [],
-        name,
-      };
-    });
-
-    this.rawData.forEach((result) => {
-      countDict[result[0]].count += 1;
-      countDict[result[0]].preferences.push(result.slice(1));
-    });
-    return countDict;
-  }
-
-  sortedCount() {
-    // convert to array to sort
-    const countArray: Array<{
-      count: number,
-      preferences: Array<Array<string>>,
-      name: string,
-    }> = [];
-    Object.values(this.results).forEach((value) => {
-      countArray.push(value);
-    });
-
-    this.sortedResults = countArray.sort((a, b) => b.count - a.count);
-  }
+function getRounds() {
+  return calcRounds(results);
 }
+
 
 export default class CommonCollection extends CommonDiagramCollection {
+  rounds: Array<Object>;
+  candidateOrder: Array<string>;
 
-  // countRound(results: Array<Array<string>>) {
-  //   const count = {
-  //     summer: {
-  //       count: 0,
-  //       preferences: [],
-  //     },
-  //     winter: {
-  //       count: 0,
-  //       preferences: [],
-  //     },
-  //     spring: {
-  //       count: 0,
-  //       preferences: [],
-  //     },
-  //     autumn: {
-  //       count: 0,
-  //       preferences: [],
-  //     },
-  //   }
-  //   results.forEach((result) => {
-  //     count[result[0]].count += 1;
-  //     count[result[0]].preferences.push(result.slice(1));
-  //   });
-  //   console.log(count)
-  //   return count;
-  // }
-  // eslint-disable-next-line class-methods-use-this
-  calcRounds(data: Array<Array<string>>, candidateNames: Array<string>) {
-    const rounds = [];
-    let round = new Results(data, candidateNames);
-    const names = candidateNames.slice();
-    rounds.push(round);
-    console.log(rounds);
-    let index = 0;
-    while (index < candidateNames.length) {
-      // console.log(round[0].count, Math.floor(data.length / 2) + 1)
-      // console.log(round[0].count < Math.floor(data.length / 2) + 1)
-      // console.log(round.slice(-1)[0].preferences)
-      const lowest = round.sortedResults.slice(-1)[0];
-      console.log(lowest)
-      // const names = candidateNames.slice();
-      for (let i = 0; i < names.length; i += 1) {
-        if (names[i] === lowest.name) {
-          names.splice(i, 1);
-        }
-      }
-      console.log(names)
-      const newRound = (new Results(round.sortedResults.slice(-1)[0].preferences, names));
-      Object.keys(newRound.results).forEach((candidate) => {
-        newRound.results[candidate].count += round.results[candidate].count;
-        newRound.results[candidate].preferences = [
-          ...round.results[candidate].preferences,
-          ...newRound.results[candidate].preferences,
-        ];
+  addBars() {
+    const plotHeight = this.layout.plotHeight;
+    const numResults = this.rounds[0].data.length;
+    const scaleFactor = plotHeight / numresults;
+    const endY = {}
+    this.order.forEach((name) => {
+      endY[name] = 0;
+    });
+    this.rounds.forEach((round, index) => {
+      let startY = 0;
+      let startX = round.summary.length * 0.4;
+      this.candidateOrder.forEach((name) => {
+        const startPosition = new Point(x, y);
+        const endPosition = new Point(x, y);
       });
-      newRound.sortedCount();
-      round = newRound;
-      rounds.push(round);
-      console.log(round)
-      // console.log(round);
-      index += 1;
-    }
-    // console.log(round.sortCount());
-    // console.log(rounds)
+      round.summary.forEach((candidate) => {
+        const height = round.summary[]
+        startPositions[candidate.name].push()
+        const lineOptions = {
+          color: this.layout.colors[candidate.name],
+          length: candidate.count * scaleFactor,
+          width: 0.2,
+          angle: Math.PI / 2,
+          vertexSpaceStart: 'start',
+          label: {
+            text: `${candidate.count}`,
+            color: [0, 0, 0, 1],
+          }
+        }
+        const line = this.diagram.objects.line(lineOptions);
+        line.scenarios = {
+          start: { position: new Point(startX, startY) },
+          end: { position: new Point(endX, endY) },
+        };
+      })
+      const bar = this.diagram.objects.line({
+        color: this.layout.colors[]
+      })
+      this.add()
+    });
   }
 
   constructor(
@@ -229,15 +197,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
-    // this.calcRounds(overallResults, candidates);
-    processResults(overallResults);
-    // const round1 = new Results(overallResults, ['summer', 'winter', 'spring', 'autumn']);
-    // console.log(round1.count);
-    // console.log(round1.getLowest());
-    // const round1 = this.countRound(overallResults);
-    // const round2 = this.countRound(round1);
-    // console.log(overalResults)
-    // console.log(overalResults)
-    // this.countRound()
+    this.rounds = getRounds();
+    this.candidateOrder = [
+      ...this.rounds.map(d => d.summary[0].name),
+      this.rounds.slice(-1)[0].summary.slice(-1)[0].name,
+    ].reverse();
+    console.log(this.rounds)
+    console.log(this.candidateOrder)
+    this.addBars();
   }
 }
