@@ -67,21 +67,61 @@ const results = [
   ['spring', 'autumn', 'summer', 'winter'],
 ];
 
-function summarizeData(data: Array<Array<string>>) {
-  const summary = {};
-  data.forEach((d) => {
-    if (!(d[0] in summary)) {
-      summary[d[0]] = 0;
+function getHighest(summaryData: { [name: string]: number }) {
+  let highest = '';
+  Object.keys(summaryData).forEach((name) => {
+    if (highest === '') {
+      highest = name;
     }
-    summary[d[0]] += 1;
+    if (summaryData[name] > highest) {
+      highest = summaryData[name];
+    }
   });
-  const summaryArray = [];
-  Object.keys(summary).forEach((key) => {
-    summaryArray.push({ name: key, count: summary[key] });
+  return highest;
+}
+function getLowest(summaryData: { [name: string]: number }) {
+  let highest = '';
+  Object.keys(summaryData).forEach((name) => {
+    if (highest === '') {
+      highest = name;
+    }
+    if (summaryData[name] < highest) {
+      highest = summaryData[name];
+    }
   });
-  return summaryArray.sort((a, b) => a.count - b.count);
+  return highest;
 }
 
+function getCount(data: Array<Array<string>>) {
+  const count = {};
+  data.forEach((d) => {
+    if (!(d[0] in count)) {
+      count[d[0]] = 0;
+    }
+    count[d[0]] += 1;
+  });
+  // const summaryArray = [];
+  // Object.keys(summary).forEach((key) => {
+  //   summaryArray.push({ name: key, count: summary[key] });
+  // });
+  // return summaryArray.sort((a, b) => a.count - b.count);
+  return count;
+}
+
+function getOrder(count: { [name: string]: number }) {
+  const countArray = [];
+  Object.keys(count).forEach((key) => {
+    countArray.push({ name: key, count: count[key] });
+  });
+  const sortedCountArray = countArray.sort((a, b) => a.count - b.count);
+  return sortedCountArray.map(c => c.name);
+}
+
+
+// round: {
+//   count: { summer: 10, autum: 20 ,...}
+//   order: [summer, autum, ]
+// }
 function removeFromArray(value: string, fromArray: Array<string>) {
   const copyArray = fromArray.slice();
   for (let i = 0; i < copyArray.length; i += 1) {
@@ -101,38 +141,39 @@ function mergeData(candidateToMerge: string, data: Array<Array<string>>): Array<
   return mergedData;
 }
 
-type TypeSummary = Array<{
-  name: string;
-  count: number;
-}>;
-
+type TypeCount = { [name: string]: number };
+type TypeOrder = Array<string>;
 type TypeData = Array<Array<string>>;
 
 function calcRounds(
   dataIn?: TypeData,
-  summaryIn?: TypeSummary,
+  countIn?: TypeCount,
+  orderIn?: TypeOrder,
   rounds: Array<Object> = [],
 ) {
-  let summary = summaryIn;
+  let count = countIn;
   let data = dataIn;
-  if (summaryIn != null && dataIn != null) {
+  let order = orderIn;
+  if (countIn != null && dataIn != null && orderIn != null) {
     const threashold = Math.floor(dataIn.length / 2) + 1;
-    const highestCount = summaryIn.slice(-1)[0].count;
+    const highestCount = countIn[orderIn.slice(-1)[0]];
     if (highestCount > threashold) {
       return rounds;
     }
   } else if (dataIn != null) {
     data = dataIn;
-    summary = summarizeData(data);
+    count = getCount(data);
+    order = getOrder(count);
     // eslint-disable-next-line
-    rounds = [{ summary, data }];
+    rounds = [{ count, order, data }];
   }
 
-  if (data != null && summary != null) {
-    const newData = mergeData(summary[0].name, data);
-    const newSummary = summarizeData(newData);
-    const newRound = { summary: newSummary, data: newData };
-    return calcRounds(newData, newSummary, [...rounds, newRound]);
+  if (data != null && count != null && order != null) {
+    const newData = mergeData(order[0], data);
+    const newCount = getCount(newData);
+    const newOrder = getOrder(newCount);
+    const newRound = { count: newCount, order: newOrder, data: newData };
+    return calcRounds(newData, newCount, newOrder, [...rounds, newRound]);
   }
   return rounds;
 }
@@ -154,37 +195,39 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.order.forEach((name) => {
       endY[name] = 0;
     });
-    this.rounds.forEach((round, index) => {
+    this.rounds.forEach((round, roundIndex) => {
       let startY = 0;
       let startX = round.summary.length * 0.4;
-      this.candidateOrder.forEach((name) => {
-        const startPosition = new Point(x, y);
-        const endPosition = new Point(x, y);
-      });
-      round.summary.forEach((candidate) => {
-        const height = round.summary[]
-        startPositions[candidate.name].push()
+      // this.candidateOrder.forEach((name) => {
+      //   const startPosition = new Point(x, y);
+      //   const endPosition = new Point(x, y);
+      // });
+      round.order.forEach((name, orderIndex) => {
+        const height = round.count[name] * scaleFactor;
+        const startPosition = new Point(startX, startY);
+        startY += height;
+        const endPosition = new Point(orderIndex * 0.4, endY[name])
+        endY[name] += height;
+
         const lineOptions = {
-          color: this.layout.colors[candidate.name],
-          length: candidate.count * scaleFactor,
+          color: this.layout.colors[name],
+          length: height,
           width: 0.2,
           angle: Math.PI / 2,
           vertexSpaceStart: 'start',
           label: {
-            text: `${candidate.count}`,
+            text: `${round.count[name]}`,
             color: [0, 0, 0, 1],
-          }
-        }
+          },
+        },
         const line = this.diagram.objects.line(lineOptions);
         line.scenarios = {
-          start: { position: new Point(startX, startY) },
-          end: { position: new Point(endX, endY) },
+          start: { position: startPosition },
+          end: { position: endPosition },
         };
-      })
-      const bar = this.diagram.objects.line({
-        color: this.layout.colors[]
-      })
-      this.add()
+        this.add()
+      });
+      
     });
   }
 
@@ -199,11 +242,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this.rounds = getRounds();
     this.candidateOrder = [
-      ...this.rounds.map(d => d.summary[0].name),
-      this.rounds.slice(-1)[0].summary.slice(-1)[0].name,
+      ...this.rounds.map(d => d.order[0]),
+      this.rounds.slice(-1)[0].order.slice(-1)[0],
     ].reverse();
     console.log(this.rounds)
     console.log(this.candidateOrder)
-    this.addBars();
+    // this.addBars();
   }
 }

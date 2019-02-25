@@ -24,7 +24,7 @@ export default function lessonLayout() {
   const plotWidth = 2.5;
   const lineWidth = 0.015;
   const plotHeight = 2.5;
-  // const plotStart = new Point (-2, -1.7);
+  const plotStart = new Point (-2, -1.7);
   // const candidateWidth = 0.2;
   // const step = 0.4;
 
