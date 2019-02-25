@@ -63,11 +63,12 @@ class Content extends LessonContent {
       setContent: 'Round 1',
       setSteadyState: () => {
         rcv.rounds[0].order.forEach((name) => {
-          const element = rcv[`_0${name}`];
+          const element = rcv[`_0total${name}`];
           element.setScenario('end');
           element.showAll();
         });
       },
+      show: axis,
     });
 
     for (let roundIndex = 1; roundIndex < rcv.rounds.length; roundIndex += 1) {
@@ -77,94 +78,115 @@ class Content extends LessonContent {
       const thisRoundDeltaElements = [];
       const thisRoundTotalElements = [];
 
-      lastRound.order((name) => {
+      lastRound.order.forEach((name) => {
         const element = rcv[`_${roundIndex - 1}total${name}`];
         lastRoundTotalElements.push(element);
       });
 
-      round.order((name) => {
+      round.order.forEach((name) => {
         const totalElement = rcv[`_${roundIndex}total${name}`];
-        const deltaElement = rcv[`_${roundIndex}${name}`];
+        const deltaElement = rcv[`_${roundIndex}delta${name}`];
         thisRoundDeltaElements.push(deltaElement);
         thisRoundTotalElements.push(totalElement);
       });
 
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
-        show: [...axis, ...]
-      })
+        show: [...axis, ...lastRoundTotalElements, ...thisRoundDeltaElements],
+        setSteadyState: () => {
+          thisRoundDeltaElements.forEach((element) => {
+            element.setScenario('start');
+          });
+          lastRoundTotalElements.forEach((element) => {
+            element.setScenario('end');
+          });
+        },
+      });
+
+      this.addSection(common, {
+        setContent: `Round ${roundIndex + 1}`,
+        show: [...axis, ...thisRoundTotalElements, ...thisRoundDeltaElements],
+        setSteadyState: () => {
+          thisRoundDeltaElements.forEach((element) => {
+            element.setScenario('end');
+          });
+          thisRoundTotalElements.forEach((element) => {
+            element.setScenario('end');
+          });
+        },
+      });
     }
-    rcv.rounds.forEach((round, roundIndex) => {
-      if (roundIndex > 0) {
-        const elementsToShow = [];
-        const thisRoundElements = [];
-        const lastRoundCandidates = rcv.rounds[roundIndex - 1].order;
-        const lastRoundElements = [];
-        const remainingCandidates = round.order;
-        for (let i = 0; i <= roundIndex; i += 1) {
-          const candidatesInRound = rcv.rounds[i].order;
-          for (let j = 0; j < candidatesInRound.length; j += 1) {
-            const name = candidatesInRound[j];
-            if (remainingCandidates.indexOf(name) > -1) {
-              const element = rcv[`_${i}${name}`];
-              elementsToShow.push(element);
-              if (i === roundIndex) {
-                thisRoundElements.push(element);
-              }
-            }
-          }
-        }
-        // this.addSection(common, {
-        //   setContent: `Round ${roundIndex + 1}`,
-        //   show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
-        //   setEnterState: () => {
-        //     elementsToShow.forEach((element) => {
-        //       element.setScenario('end');
-        //     });
-        //   },
-        //   setSteadyState: () => {
-        //     elementsToShow.forEach((element) => {
-        //       if (element.name.charAt(0) === roundIndex.toString()) {
-        //         element.setScenario('start');
-        //       }
-        //     });
-        //   },
-        // });
-        this.addSection(common, {
-          setContent: `Round ${roundIndex + 1}`,
-          show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
-          transitionFromPrev: (done) => {
-            let callbackToUse = done;
-            thisRoundElements.forEach((element) => {
-              if (element.length > 0) {
-                element.animations.cancelAll();
-                element.animations.new()
-                  .scenario({
-                    target: 'end',
-                    duration: 1.5,
-                    translationStyle: 'curved',
-                    translationOptions: {
-                      rot: 1,
-                      magnitude: 1,
-                      offset: 0,
-                      controlPoint: null,
-                      direction: 'up',
-                    },
-                  })
-                  .whenFinished(callbackToUse)
-                  .start();
-                callbackToUse = null;
-              }
-            });
-          },
-          setSteadyState: () => {
-            elementsToShow.forEach((element) => {
-              element.setScenario('end');
-            });
-          },
-        });
-      }
-    });
+    // rcv.rounds.forEach((round, roundIndex) => {
+    //   if (roundIndex > 0) {
+    //     const elementsToShow = [];
+    //     const thisRoundElements = [];
+    //     const lastRoundCandidates = rcv.rounds[roundIndex - 1].order;
+    //     const lastRoundElements = [];
+    //     const remainingCandidates = round.order;
+    //     for (let i = 0; i <= roundIndex; i += 1) {
+    //       const candidatesInRound = rcv.rounds[i].order;
+    //       for (let j = 0; j < candidatesInRound.length; j += 1) {
+    //         const name = candidatesInRound[j];
+    //         if (remainingCandidates.indexOf(name) > -1) {
+    //           const element = rcv[`_${i}${name}`];
+    //           elementsToShow.push(element);
+    //           if (i === roundIndex) {
+    //             thisRoundElements.push(element);
+    //           }
+    //         }
+    //       }
+    //     }
+    //     // this.addSection(common, {
+    //     //   setContent: `Round ${roundIndex + 1}`,
+    //     //   show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
+    //     //   setEnterState: () => {
+    //     //     elementsToShow.forEach((element) => {
+    //     //       element.setScenario('end');
+    //     //     });
+    //     //   },
+    //     //   setSteadyState: () => {
+    //     //     elementsToShow.forEach((element) => {
+    //     //       if (element.name.charAt(0) === roundIndex.toString()) {
+    //     //         element.setScenario('start');
+    //     //       }
+    //     //     });
+    //     //   },
+    //     // });
+    //     this.addSection(common, {
+    //       setContent: `Round ${roundIndex + 1}`,
+    //       show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
+    //       transitionFromPrev: (done) => {
+    //         let callbackToUse = done;
+    //         thisRoundElements.forEach((element) => {
+    //           if (element.length > 0) {
+    //             element.animations.cancelAll();
+    //             element.animations.new()
+    //               .scenario({
+    //                 target: 'end',
+    //                 duration: 1.5,
+    //                 translationStyle: 'curved',
+    //                 translationOptions: {
+    //                   rot: 1,
+    //                   magnitude: 1,
+    //                   offset: 0,
+    //                   controlPoint: null,
+    //                   direction: 'up',
+    //                 },
+    //               })
+    //               .whenFinished(callbackToUse)
+    //               .start();
+    //             callbackToUse = null;
+    //           }
+    //         });
+    //       },
+    //       setSteadyState: () => {
+    //         elementsToShow.forEach((element) => {
+    //           element.setScenario('end');
+    //         });
+    //       },
+    //     });
+    //   }
+    // });
   }
 }
 
