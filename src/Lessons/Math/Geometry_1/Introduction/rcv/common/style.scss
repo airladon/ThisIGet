@@ -2,8 +2,8 @@
 
 $colors: (
   graph:                color('grey', 'light'),
-  spring:           color('yellow'),
-  winter:           color('green'),
+  spring:           color('yellow', 'darker'),
+  winter:           color('green', 'darker'),
   autumn:           color('violet'),
   summer:           color('blue', 'light'),
   // lines:             map-get($geometry_colors, lines),

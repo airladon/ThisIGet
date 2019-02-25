@@ -6,7 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
-  Transform,
+  Transform, Point,
 } = Fig;
 // const {
 //   randElements,
@@ -186,27 +186,40 @@ function getRounds() {
 export default class CommonCollection extends CommonDiagramCollection {
   rounds: Array<Object>;
   candidateOrder: Array<string>;
+  // [name: string]: DiagramObjectLine;
 
   makeBars() {
     const lineOptions = {
-      width: 0.2,
+      width: this.layout.barWidth,
       angle: Math.PI / 2,
       vertexSpaceStart: 'start',
       label: {
-        color: [0, 0, 0, 1],
+        color: [1, 1, 1, 1],
+        scale: 0.5,
       },
     };
     const { plotHeight } = this.layout;
     const numResults = this.rounds[0].data.length;
     const scaleFactor = plotHeight / numResults;
     this.rounds.forEach((round, roundIndex) => {
+      let lastRound;
+      if (roundIndex > 0) {
+        lastRound = this.rounds[roundIndex - 1];
+      }
       round.order.forEach((name) => {
-        const count = round.count[name];
+        let count = round.count[name];
+        if (lastRound != null) {
+          count -= lastRound.count[name];
+        }
+        let countText = '';
+        if (count > 0) {
+          countText = `${count}`;
+        }
         const line = this.diagram.objects.line({
           color: this.layout.colors[name],
-          length: count * scaleFactor,
+          length: count * scaleFactor - this.layout.barVerticalSeparation,
           label: {
-            text: `${count}`,
+            text: countText,
           },
         }, lineOptions);
         this.add(`${roundIndex}${name}`, line);
@@ -214,65 +227,36 @@ export default class CommonCollection extends CommonDiagramCollection {
     });
   }
 
-  addStartScenarios() {
+  addEndScenarios() {
     const lastY = {};
     const lastX = {};
-    this.order.forEach((name, index) => {
-      lastX[name] = index * 0.4;
-      lastY[name] = 0; 
+    this.candidateOrder.forEach((name, index) => {
+      lastX[name] = this.layout.plotStart.x + index
+                    * this.layout.barSeparation + this.layout.barWidth / 2;
+      lastY[name] = this.layout.plotStart.y;
     });
     this.rounds.forEach((round, roundIndex) => {
       round.order.forEach((name) => {
         const element = this[`_${roundIndex}${name}`]
         const position = new Point(lastX[name], lastY[name]);
-          
-        lastY +=
-      })
-    }
+        lastY[name] += element.length + this.layout.barVerticalSeparation;
+        element.scenarios.end = { position };
+      });
+    });
   }
-  // addScenarios() {
-  //   const plotHeight = this.layout.plotHeight;
-  //   const numResults = this.rounds[0].data.length;
-  //   const scaleFactor = plotHeight / numresults;
-  //   const endY = {}
-  //   this.order.forEach((name) => {
-  //     endY[name] = 0;
-  //   });
-  //   this.rounds.forEach((round, roundIndex) => {
-  //     let startY = 0;
-  //     let startX = round.summary.length * 0.4;
-  //     // this.candidateOrder.forEach((name) => {
-  //     //   const startPosition = new Point(x, y);
-  //     //   const endPosition = new Point(x, y);
-  //     // });
-  //     round.order.forEach((name, orderIndex) => {
-  //       const height = round.count[name] * scaleFactor;
-  //       const startPosition = new Point(startX, startY);
-  //       startY += height;
-  //       const endPosition = new Point(orderIndex * 0.4, endY[name])
-  //       endY[name] += height;
 
-  //       const lineOptions = {
-  //         color: this.layout.colors[name],
-  //         length: height,
-  //         width: 0.2,
-  //         angle: Math.PI / 2,
-  //         vertexSpaceStart: 'start',
-  //         label: {
-  //           text: `${round.count[name]}`,
-  //           color: [0, 0, 0, 1],
-  //         },
-  //       },
-  //       const line = this.diagram.objects.line(lineOptions);
-  //       line.scenarios = {
-  //         start: { position: startPosition },
-  //         end: { position: endPosition },
-  //       };
-  //       this.add()
-  //     });
-      
-  //   });
-  // }
+  addStartScenarios() {
+    this.rounds.forEach((round, roundIndex) => {
+      const lastX = this.layout.plotStart.x + round.order.length * this.layout.barSeparation + this.layout.barWidth / 2;
+      let lastY = this.layout.plotStart.y;
+      round.order.forEach((name) => {
+        const element = this[`_${roundIndex}${name}`]
+        const position = new Point(lastX, lastY);
+        lastY += element.length;
+        element.scenarios.start = { position };
+      });
+    });
+  }
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -291,6 +275,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     console.log(this.rounds)
     console.log(this.candidateOrder)
     this.makeBars();
+    this.addStartScenarios();
+    this.addEndScenarios();
     console.log(this);
     // this.addBars();
   }

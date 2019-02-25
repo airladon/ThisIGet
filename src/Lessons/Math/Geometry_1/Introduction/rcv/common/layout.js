@@ -22,9 +22,15 @@ export default function lessonLayout() {
   layout.colors = colors;
 
   const plotWidth = 2.5;
-  const lineWidth = 0.015;
+  const axisWidth = 0.015;
+  const barWidth = 0.3;
   const plotHeight = 2.5;
   const plotStart = new Point(-2, -1.7);
+  layout.plotHeight = plotHeight;
+  layout.plotStart = plotStart;
+  layout.barWidth = barWidth;
+  layout.barSeparation = 0.4;
+  layout.barVerticalSeparation = 0.005;
   // const candidateWidth = 0.2;
   // const step = 0.4;
 
@@ -35,7 +41,7 @@ export default function lessonLayout() {
       color: colors.graph,
       length: plotWidth,
       position: plotStart,
-      width: lineWidth,
+      width: axisWidth,
       label: {
         text: '0',
         location: 'end1',
@@ -51,7 +57,7 @@ export default function lessonLayout() {
       color: colors.graph,
       length: plotWidth,
       position: plotStart.add(0, plotHeight / 2),
-      width: lineWidth,
+      width: axisWidth,
       label: {
         text: '50',
         location: 'end1',
@@ -67,7 +73,7 @@ export default function lessonLayout() {
       color: colors.graph,
       length: plotWidth,
       position: plotStart.add(0, plotHeight),
-      width: lineWidth,
+      width: axisWidth,
       label: {
         text: '100',
         location: 'end1',

@@ -32,9 +32,6 @@ class Content extends LessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
   }
 
   addSections() {
@@ -61,12 +58,61 @@ class Content extends LessonContent {
       setLeaveState: () => {},
     };
 
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        'Count of rank 1 votes',
-      ]),
-      show: [rcv],
+    rcv.rounds.forEach((round, roundIndex) => {
+      const elementsToShow = [];
+      const thisRoundElements = [];
+      const remainingCandidates = round.order;
+      for (let i = 0; i <= roundIndex; i += 1) {
+        const candidatesInRound = rcv.rounds[i].order;
+        for (let j = 0; j < candidatesInRound.length; j += 1) {
+          const name = candidatesInRound[j];
+          if (remainingCandidates.indexOf(name) > -1) {
+            const element = rcv[`_${i}${name}`];
+            elementsToShow.push(element);
+            if (i === roundIndex) {
+              thisRoundElements.push(element);
+            }
+          }
+        }
+      }
+      if (roundIndex > 0) {
+        this.addSection(common, {
+          setContent: `Round ${roundIndex + 1}`,
+          show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
+          setSteadyState: () => {
+            elementsToShow.forEach((element) => {
+              // element.showAll();
+              if (element.name.charAt(0) === roundIndex.toString()) {
+                element.setScenario('start');
+              }
+            });
+          },
+        });
+      }
+
+      this.addSection(common, {
+        setContent: `Round ${roundIndex + 1}`,
+        show: [...elementsToShow, rcv._zeroLine, rcv._halfLine, rcv._fullLine],
+        transitionFromPrev: (done) => {
+          let callbackToUse = done;
+          thisRoundElements.forEach((element) => {
+            if (element.length > 0) {
+              element.animations.cancelAll();
+              element.animations.new()
+                .scenario({ scenario: 'end', duration: 1 })
+                .whenFinished(callbackToUse)
+                .start();
+              callbackToUse = null;
+            }
+          });
+        },
+        setSteadyState: () => {
+          elementsToShow.forEach((element) => {
+            // element.showAll();
+            element.setScenario('end');
+          });
+        },
+      });
     });
   }
 }
