@@ -41,14 +41,8 @@ class Content extends LessonContent {
     const common = {
       setContent: '',
       modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
       infoModifiers: {},
       interactiveElements: [
-        // interactiveItem(quiz._check),
       ],
       setEnterState: () => {},
       showOnly: [],
@@ -102,43 +96,27 @@ class Content extends LessonContent {
           });
         },
         transitionFromPrev: (done) => {
-          const lastRoundElementToRemove = lastRoundTotalElements[0];
-          // const targetColor = lastRoundElementToRemove.color;
-          // targetColor[3] /= 2;
           lastRoundTotalElements[0].animations.new()
             .scenario({ target: 'remove', duration: 1 })
-            // .inParallel([
-            //   lastRoundTotalElements[0]._line.anim.dissolveOut(1),
-            //   lastRoundTotalElements[0]._label.anim.dissolveOut(1),
-            // ])
-            // .color({ target: targetColor, duration: 1 })
-            // .dissolveOut({ duration: 2 })
             .whenFinished(done)
             .start();
 
           thisRoundDeltaElements.forEach((element) => {
             element.show();
             element._line.animations.new()
-              .dissolveIn({ duration: 2, delay: 1.5 })
+              .dissolveIn({ duration: 2, delay: 1.1 })
               .start();
             element._label.animations.new()
-              .dissolveIn({ duration: 2, delay: 1.5 })
+              .dissolveIn({ duration: 2, delay: 1.1 })
               .start();
           });
         },
         setSteadyState: () => {
-          // lastRoundTotalElements[0].setScenario('remove');
           thisRoundDeltaElements.forEach((element) => {
             element.showAll();
           });
           lastRoundTotalElements[0].setScenario('remove');
         },
-        // setLeaveState: () => {
-        //   const lastRoundElementToRemove = lastRoundTotalElements[0];
-        //   const targetColor = lastRoundElementToRemove.color;
-        //   targetColor[3] = 1;
-        //   lastRoundElementToRemove._line.setColor(targetColor);
-        // },
       });
 
       this.addSection(common, {

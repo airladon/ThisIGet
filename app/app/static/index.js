@@ -207,7 +207,7 @@ var FigureOne = {
 /*!***********************************************!*\
   !*** ./src/js/diagram/Animation/Animation.js ***!
   \***********************************************/
-/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep */
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -218,59 +218,63 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ColorAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["DissolveInAnimationStep"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/OpacityAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["DissolveInAnimationStep"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["dissolveIn"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["dissolveIn"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["DissolveOutAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["DissolveOutAnimationStep"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["dissolveOut"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["dissolveOut"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/TransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OpacityAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["OpacityAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/RotationAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RotationAnimationStep", function() { return _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/TransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_3__["default"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/RotationAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RotationAnimationStep", function() { return _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_4__["default"]; });
 
-/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
 
-/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__["TriggerStep"]; });
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_6__["default"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_6__["trigger"]; });
+/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__["TriggerStep"]; });
 
-/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__["CustomAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__["trigger"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_7__["custom"]; });
+/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__["CustomAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__["ParallelAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__["custom"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_8__["inParallel"]; });
+/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__["ParallelAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__["SerialAnimationStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__["inParallel"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_9__["inSerial"]; });
+/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__["SerialAnimationStep"]; });
 
-/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__["DelayStep"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__["inSerial"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_10__["delay"]; });
+/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__["DelayStep"]; });
 
-/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_11__["default"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__["delay"]; });
 
-/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_12__["default"]; });
 
-/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+
+/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+
 
 
 
@@ -1697,6 +1701,260 @@ function (_ColorAnimationStep2) {
 
   return DissolveOutAnimationStep;
 }(ColorAnimationStep);
+function dissolveOut() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+    args[_key5 - 1] = arguments[_key5];
+  }
+
+  return _construct(DissolveOutAnimationStep, [timeOrOptionsIn].concat(args));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js":
+/*!*********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js ***!
+  \*********************************************************************************************/
+/*! exports provided: OpacityAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpacityAnimationStep", function() { return OpacityAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return DissolveInAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return dissolveIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return DissolveOutAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return dissolveOut; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import {
+//   Transform, Point, getMaxTimeFromVelocity,
+// } from '../../../../tools/g2';
+
+
+var OpacityAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(OpacityAnimationStep, _ElementAnimationStep);
+
+  function OpacityAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, OpacityAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn, [{
+      type: 'color'
+    }]));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(OpacityAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      dissolve: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.opacity = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.opacity, ['start', 'delta', 'target', 'dissolve']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(OpacityAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var element = this.element;
+
+      if (element != null) {
+        _get(_getPrototypeOf(OpacityAnimationStep.prototype), "start", this).call(this, startTime);
+
+        if (this.opacity.start == null) {
+          // eslint-disable-next-line prefer-destructuring
+          this.opacity.start = element.color[3];
+        }
+
+        if (this.opacity.delta == null && this.opacity.target == null) {
+          this.opacity.target = this.opacity.start;
+        } else if (this.opacity.delta != null) {
+          this.opacity.target = this.opacity.start + this.opacity.delta;
+        }
+
+        this.opacity.whenComplete = this.opacity.target;
+
+        if (this.opacity.dissolve === 'out') {
+          this.opacity.target = 0.001;
+        }
+
+        if (this.opacity.dissolve === 'in') {
+          this.opacity.start = 0.001;
+          element.setOpacity(this.opacity.start);
+          element.showAll();
+        }
+
+        this.opacity.delta = this.opacity.target - this.opacity.start;
+      } else {
+        this.duration = 0;
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+      var next = this.opacity.start + this.opacity.delta * p;
+
+      if (next > 1) {
+        next = 1;
+      }
+
+      if (next < 0) {
+        next = 0;
+      }
+
+      if (this.element != null) {
+        this.element.setOpacity(next);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      var element = this.element;
+
+      if (element != null) {
+        // console.log(this.name, this.color.whenComplete)
+        element.setOpacity(this.opacity.whenComplete);
+
+        if (this.opacity.dissolve === 'out') {
+          element.hide();
+        }
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new OpacityAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return OpacityAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var DissolveInAnimationStep =
+/*#__PURE__*/
+function (_OpacityAnimationStep) {
+  _inherits(DissolveInAnimationStep, _OpacityAnimationStep);
+
+  function DissolveInAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveInAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'in',
+      completeOnCancel: true
+    };
+
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveInAnimationStep).call(this, options));
+  }
+
+  return DissolveInAnimationStep;
+}(OpacityAnimationStep);
+function dissolveIn() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    args[_key3 - 1] = arguments[_key3];
+  }
+
+  return _construct(DissolveInAnimationStep, [timeOrOptionsIn].concat(args));
+}
+var DissolveOutAnimationStep =
+/*#__PURE__*/
+function (_OpacityAnimationStep2) {
+  _inherits(DissolveOutAnimationStep, _OpacityAnimationStep2);
+
+  function DissolveOutAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveOutAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'out',
+      completeOnCancel: true
+    };
+
+    for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveOutAnimationStep).call(this, options));
+  }
+
+  return DissolveOutAnimationStep;
+}(OpacityAnimationStep);
 function dissolveOut() {
   var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
@@ -22869,6 +23127,11 @@ function () {
       this.color = color.slice();
     }
   }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      this.color[3] = opacity;
+    }
+  }, {
     key: "getScenarioTarget",
     value: function getScenarioTarget(scenarioName) {
       var target = this.transform._dup();
@@ -24187,6 +24450,22 @@ function (_DiagramElement) {
       }
     }
   }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      this.color[3] = opacity;
+
+      if (this instanceof DiagramElementPrimative) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+          this.drawingObject.setColor(this.color);
+        }
+
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+          // $FlowFixMe
+          this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_8__["colorArrayToRGBA"])([].concat(_toConsumableArray(this.color.slice(0, 2)), [opacity]));
+        }
+      }
+    }
+  }, {
     key: "show",
     value: function show() {
       _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
@@ -24831,6 +25110,16 @@ function (_DiagramElement2) {
       }
 
       this.color = color.slice();
+    }
+  }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setOpacity(opacity);
+      }
+
+      this.color[3] = opacity;
     }
   }, {
     key: "getElementTransforms",
