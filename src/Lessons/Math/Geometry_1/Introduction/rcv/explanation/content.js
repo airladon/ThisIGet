@@ -98,6 +98,7 @@ class Content extends LessonContent {
         transitionFromPrev: (done) => {
           lastRoundTotalElements[0].animations.new()
             .scenario({ target: 'remove', duration: 1 })
+            .opacity({ target: 0.5, duration: 1 })
             .whenFinished(done)
             .start();
 
@@ -116,6 +117,10 @@ class Content extends LessonContent {
             element.showAll();
           });
           lastRoundTotalElements[0].setScenario('remove');
+          lastRoundTotalElements[0].setOpacity(0.5);
+        },
+        setLeaveState: () => {
+          lastRoundTotalElements[0].setOpacity(1);
         },
       });
 
@@ -130,6 +135,7 @@ class Content extends LessonContent {
             element.setScenario('end');
           });
           lastRoundTotalElements[0].setScenario('remove');
+          lastRoundTotalElements[0].setOpacity(0.5);
         },
         transitionFromPrev: (done) => {
           let callbackToUse = done;
@@ -138,6 +144,7 @@ class Content extends LessonContent {
               .scenario({
                 target: 'end',
                 duration: 1,
+                delay: 1,
                 translationStyle: 'curved',
                 translationOptions: {
                   rot: 1,
@@ -163,6 +170,9 @@ class Content extends LessonContent {
             element.setScenario('end');
           });
           lastRoundTotalElements[0].hide();
+        },
+        setLeaveState: () => {
+          lastRoundTotalElements[0].setOpacity(1);
         },
       });
 
