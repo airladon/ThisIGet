@@ -207,22 +207,32 @@ export default class CommonCollection extends CommonDiagramCollection {
         lastRound = this.rounds[roundIndex - 1];
       }
       round.order.forEach((name) => {
-        let count = round.count[name];
+        const count = round.count[name];
+        let deltaCount = count;
         if (lastRound != null) {
-          count -= lastRound.count[name];
+          deltaCount -= lastRound.count[name];
         }
         let countText = '';
-        if (count > 0) {
-          countText = `${count}`;
+        if (deltaCount > 0) {
+          countText = `${deltaCount}`;
         }
-        const line = this.diagram.objects.line({
+        const lineDelta = this.diagram.objects.line({
           color: this.layout.colors[name],
-          length: count * scaleFactor - this.layout.barVerticalSeparation,
+          length: deltaCount * scaleFactor - this.layout.barVerticalSeparation,
           label: {
             text: countText,
           },
         }, lineOptions);
-        this.add(`${roundIndex}${name}`, line);
+        this.add(`${roundIndex}${name}`, lineDelta);
+
+        const lineTotal = this.diagram.objects.line({
+          color: this.layout.colors[name],
+          length: count * scaleFactor - this.layout.barVerticalSeparation,
+          label: {
+            text: `${count}`,
+          },
+        }, lineOptions);
+        this.add(`${roundIndex}total${name}`, lineTotal);
       });
     });
   }

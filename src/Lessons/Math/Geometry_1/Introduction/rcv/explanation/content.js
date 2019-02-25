@@ -58,6 +58,7 @@ class Content extends LessonContent {
       setLeaveState: () => {},
     };
 
+    const axis = [rcv._zeroLine, rcv._halfLine, rcv._fullLine];
     this.addSection({
       setContent: 'Round 1',
       setSteadyState: () => {
@@ -67,13 +68,38 @@ class Content extends LessonContent {
           element.showAll();
         });
       },
-      show: [rcv._zeroLine, rcv._halfLine, rcv._fullLine],
     });
 
+    for (let roundIndex = 1; roundIndex < rcv.rounds.length; roundIndex += 1) {
+      const round = rcv.rounds[roundIndex];
+      const lastRound = rcv.rounds[roundIndex - 1];
+      const lastRoundTotalElements = [];
+      const thisRoundDeltaElements = [];
+      const thisRoundTotalElements = [];
+
+      lastRound.order((name) => {
+        const element = rcv[`_${roundIndex - 1}total${name}`];
+        lastRoundTotalElements.push(element);
+      });
+
+      round.order((name) => {
+        const totalElement = rcv[`_${roundIndex}total${name}`];
+        const deltaElement = rcv[`_${roundIndex}${name}`];
+        thisRoundDeltaElements.push(deltaElement);
+        thisRoundTotalElements.push(totalElement);
+      });
+
+      this.addSection(common, {
+        setContent: `Round ${roundIndex + 1}`,
+        show: [...axis, ...]
+      })
+    }
     rcv.rounds.forEach((round, roundIndex) => {
       if (roundIndex > 0) {
         const elementsToShow = [];
         const thisRoundElements = [];
+        const lastRoundCandidates = rcv.rounds[roundIndex - 1].order;
+        const lastRoundElements = [];
         const remainingCandidates = round.order;
         for (let i = 0; i <= roundIndex; i += 1) {
           const candidatesInRound = rcv.rounds[i].order;
