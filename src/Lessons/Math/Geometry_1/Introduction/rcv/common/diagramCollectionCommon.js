@@ -247,10 +247,10 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   addStartScenarios() {
     this.rounds.forEach((round, roundIndex) => {
-      const lastX = this.layout.plotStart.x + round.order.length * this.layout.barSeparation + this.layout.barWidth / 2;
+      const lastX = this.layout.plotStart.x + (round.order.length + 1) * this.layout.barSeparation + this.layout.barWidth / 2;
       let lastY = this.layout.plotStart.y;
       round.order.forEach((name) => {
-        const element = this[`_${roundIndex}${name}`]
+        const element = this[`_${roundIndex}${name}`];
         const position = new Point(lastX, lastY);
         lastY += element.length;
         element.scenarios.start = { position };

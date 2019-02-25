@@ -23,13 +23,13 @@ export default function lessonLayout() {
 
   const plotWidth = 2.5;
   const axisWidth = 0.015;
-  const barWidth = 0.3;
+  const barWidth = 0.4;
   const plotHeight = 2.5;
   const plotStart = new Point(-2, -1.7);
   layout.plotHeight = plotHeight;
   layout.plotStart = plotStart;
   layout.barWidth = barWidth;
-  layout.barSeparation = 0.4;
+  layout.barSeparation = 0.5;
   layout.barVerticalSeparation = 0.005;
   // const candidateWidth = 0.2;
   // const step = 0.4;
