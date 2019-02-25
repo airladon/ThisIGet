@@ -187,49 +187,92 @@ export default class CommonCollection extends CommonDiagramCollection {
   rounds: Array<Object>;
   candidateOrder: Array<string>;
 
-  addBars() {
-    const plotHeight = this.layout.plotHeight;
+  makeBars() {
+    const lineOptions = {
+      width: 0.2,
+      angle: Math.PI / 2,
+      vertexSpaceStart: 'start',
+      label: {
+        color: [0, 0, 0, 1],
+      },
+    };
+    const { plotHeight } = this.layout;
     const numResults = this.rounds[0].data.length;
-    const scaleFactor = plotHeight / numresults;
-    const endY = {}
-    this.order.forEach((name) => {
-      endY[name] = 0;
-    });
+    const scaleFactor = plotHeight / numResults;
     this.rounds.forEach((round, roundIndex) => {
-      let startY = 0;
-      let startX = round.summary.length * 0.4;
-      // this.candidateOrder.forEach((name) => {
-      //   const startPosition = new Point(x, y);
-      //   const endPosition = new Point(x, y);
-      // });
-      round.order.forEach((name, orderIndex) => {
-        const height = round.count[name] * scaleFactor;
-        const startPosition = new Point(startX, startY);
-        startY += height;
-        const endPosition = new Point(orderIndex * 0.4, endY[name])
-        endY[name] += height;
-
-        const lineOptions = {
+      round.order.forEach((name) => {
+        const count = round.count[name];
+        const line = this.diagram.objects.line({
           color: this.layout.colors[name],
-          length: height,
-          width: 0.2,
-          angle: Math.PI / 2,
-          vertexSpaceStart: 'start',
+          length: count * scaleFactor,
           label: {
-            text: `${round.count[name]}`,
-            color: [0, 0, 0, 1],
+            text: `${count}`,
           },
-        },
-        const line = this.diagram.objects.line(lineOptions);
-        line.scenarios = {
-          start: { position: startPosition },
-          end: { position: endPosition },
-        };
-        this.add()
+        }, lineOptions);
+        this.add(`${roundIndex}${name}`, line);
       });
-      
     });
   }
+
+  addStartScenarios() {
+    const lastY = {};
+    const lastX = {};
+    this.order.forEach((name, index) => {
+      lastX[name] = index * 0.4;
+      lastY[name] = 0; 
+    });
+    this.rounds.forEach((round, roundIndex) => {
+      round.order.forEach((name) => {
+        const element = this[`_${roundIndex}${name}`]
+        const position = new Point(lastX[name], lastY[name]);
+          
+        lastY +=
+      })
+    }
+  }
+  // addScenarios() {
+  //   const plotHeight = this.layout.plotHeight;
+  //   const numResults = this.rounds[0].data.length;
+  //   const scaleFactor = plotHeight / numresults;
+  //   const endY = {}
+  //   this.order.forEach((name) => {
+  //     endY[name] = 0;
+  //   });
+  //   this.rounds.forEach((round, roundIndex) => {
+  //     let startY = 0;
+  //     let startX = round.summary.length * 0.4;
+  //     // this.candidateOrder.forEach((name) => {
+  //     //   const startPosition = new Point(x, y);
+  //     //   const endPosition = new Point(x, y);
+  //     // });
+  //     round.order.forEach((name, orderIndex) => {
+  //       const height = round.count[name] * scaleFactor;
+  //       const startPosition = new Point(startX, startY);
+  //       startY += height;
+  //       const endPosition = new Point(orderIndex * 0.4, endY[name])
+  //       endY[name] += height;
+
+  //       const lineOptions = {
+  //         color: this.layout.colors[name],
+  //         length: height,
+  //         width: 0.2,
+  //         angle: Math.PI / 2,
+  //         vertexSpaceStart: 'start',
+  //         label: {
+  //           text: `${round.count[name]}`,
+  //           color: [0, 0, 0, 1],
+  //         },
+  //       },
+  //       const line = this.diagram.objects.line(lineOptions);
+  //       line.scenarios = {
+  //         start: { position: startPosition },
+  //         end: { position: endPosition },
+  //       };
+  //       this.add()
+  //     });
+      
+  //   });
+  // }
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -247,6 +290,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     ].reverse();
     console.log(this.rounds)
     console.log(this.candidateOrder)
+    this.makeBars();
+    console.log(this);
     // this.addBars();
   }
 }

@@ -10,10 +10,10 @@ const {
 
 const cssColorNames = [
   'graph',
-  'candidate1',
-  'candidate2',
-  'candidate3',
-  'candidate4',
+  'summer',
+  'spring',
+  'winter',
+  'autumn',
 ];
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
@@ -24,7 +24,7 @@ export default function lessonLayout() {
   const plotWidth = 2.5;
   const lineWidth = 0.015;
   const plotHeight = 2.5;
-  const plotStart = new Point (-2, -1.7);
+  const plotStart = new Point(-2, -1.7);
   // const candidateWidth = 0.2;
   // const step = 0.4;
 
