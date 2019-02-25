@@ -216,9 +216,13 @@ export default class CommonCollection extends CommonDiagramCollection {
         if (deltaCount > 0) {
           countText = `${deltaCount}`;
         }
+        let deltaLength = deltaCount * scaleFactor - this.layout.barVerticalSeparation;
+        if (deltaLength < 0) {
+          deltaLength = 0;
+        }
         const lineDelta = this.diagram.objects.line({
           color: this.layout.colors[name],
-          length: deltaCount * scaleFactor - this.layout.barVerticalSeparation,
+          length: deltaLength,
           label: {
             text: countText,
           },
@@ -261,7 +265,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         deltaElement.scenarios.end = {
           position: new Point(
             lastX[name],
-            lastY[name] + this.layout.barVerticalSeparation,
+            this.layout.plotStart.y + totalElement.length - deltaElement.length,
           ),
         };
         lastY[name] += deltaElement.length;
@@ -276,7 +280,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       round.order.forEach((name) => {
         const element = this[`_${roundIndex}delta${name}`];
         const position = new Point(lastX, lastY);
-        lastY += element.length;
+        lastY += element.length + this.layout.barVerticalSeparation;
         element.scenarios.start = { position };
       });
     });
