@@ -84,6 +84,7 @@ class Content extends LessonContent {
         thisRoundTotalElements.push(totalElement);
       });
 
+      // Move candidate to remove and show preference votes
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
         show: [...axis, ...lastRoundTotalElements],
@@ -124,6 +125,7 @@ class Content extends LessonContent {
         },
       });
 
+      // Move preferences onto remaining candidates
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
         show: [...axis, ...lastRoundTotalElements, ...thisRoundDeltaElements],
@@ -138,13 +140,14 @@ class Content extends LessonContent {
           lastRoundTotalElements[0].setOpacity(0.5);
         },
         transitionFromPrev: (done) => {
-          let callbackToUse = done;
-          thisRoundDeltaElements.forEach((element) => {
+          // let callbackToUse = done;
+          let delay = 1;
+          thisRoundDeltaElements.reverse().forEach((element) => {
             element.animations.new()
               .scenario({
                 target: 'end',
                 duration: 1,
-                delay: 1,
+                delay,
                 translationStyle: 'curved',
                 translationOptions: {
                   rot: 1,
@@ -154,12 +157,17 @@ class Content extends LessonContent {
                   direction: 'up',
                 },
               })
-              .whenFinished(callbackToUse)
+              // .whenFinished(callbackToUse)
               .start();
-            callbackToUse = null;
+            delay += 1;
+            // callbackToUse = null;
           });
           lastRoundTotalElements[0].animations.new()
             .dissolveOut({ duration: 1 })
+            .start();
+          rcv.animations.new()
+            .delay(delay)
+            .whenFinished(done)
             .start();
         },
         setSteadyState: () => {
@@ -176,12 +184,63 @@ class Content extends LessonContent {
         },
       });
 
+      // Join remaining candidates votes and preferences into just votes
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
-        show: [...axis, ...thisRoundTotalElements],
+        show: [
+          ...axis, ...thisRoundTotalElements,
+          ...lastRoundTotalElements, ...thisRoundDeltaElements,
+        ],
         setEnterState: () => {
+          thisRoundDeltaElements.forEach((element) => {
+            element.setScenario('end');
+          });
+          lastRoundTotalElements.forEach((element) => {
+            element.setScenario('end');
+          });
+          lastRoundTotalElements[0].hide();
           thisRoundTotalElements.forEach((element) => {
             element.setScenario('end');
+            element.hide();
+          });
+        },
+        transitionFromPrev: (done) => {
+          lastRoundTotalElements[0].hide();
+          thisRoundDeltaElements.forEach((element) => {
+            element._label.animations.new()
+              .dissolveOut({ duration: 1 })
+              .start();
+          });
+          lastRoundTotalElements.forEach((element, index) => {
+            if (index > 0) {
+              element._label.animations.new()
+                .dissolveOut({ duration: 1 })
+                .start();
+            }
+          });
+          thisRoundTotalElements.forEach((element, index) => {
+            element._line.animations.new()
+              .dissolveIn({ duration: 1 })
+              .start();
+            const delay = 1;
+            element._label.animations.new()
+              .dissolveIn({ duration: 1, delay })
+              .start();
+          });
+          rcv.animations.new()
+            .delay(2)
+            .whenFinished(done)
+            .start();
+        },
+        setSteadyState: () => {
+          thisRoundDeltaElements.forEach((element) => {
+            element.hide();
+          });
+          lastRoundTotalElements.forEach((element) => {
+            element.hide();
+          });
+          thisRoundTotalElements.forEach((element) => {
+            element.show();
           });
         },
       });

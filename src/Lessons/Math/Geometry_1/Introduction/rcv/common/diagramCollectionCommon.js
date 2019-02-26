@@ -26,15 +26,15 @@ const results = [
   ['winter', 'spring', 'summer', 'autumn'],
   ['spring', 'summer', 'autumn', 'winter'],
   ['spring', 'autumn', 'winter', 'summer'],
-  ['autumn', 'winter', 'summer', 'spring'],
+  ['autumn', 'spring', 'summer', 'winter'],
   ['spring', 'autumn', 'summer', 'winter'],
   ['winter', 'summer', 'spring', 'autumn'],
   ['autumn', 'winter', 'summer', 'spring'],
   ['summer', 'winter', 'spring', 'autumn'],
   ['winter', 'summer', 'spring', 'autumn'],
-  ['autumn', 'winter', 'summer', 'spring'],
+  ['winter', 'autumn', 'summer', 'spring'],
   ['summer', 'winter', 'spring', 'autumn'],
-  ['winter', 'spring', 'summer', 'autumn'],
+  ['summer', 'spring', 'winter', 'autumn'],
   ['spring', 'summer', 'autumn', 'winter'],
   ['spring', 'autumn', 'winter', 'summer'],
   ['autumn', 'winter', 'summer', 'spring'],
@@ -49,11 +49,10 @@ const results = [
   ['winter', 'spring', 'summer', 'autumn'],
   ['summer', 'spring', 'autumn', 'winter'],
   ['spring', 'summer', 'winter', 'autumn'],
-  ['spring', 'winter', 'autumn', 'summer'],
   ['winter', 'spring', 'summer', 'autumn'],
-  ['spring', 'summer', 'autumn', 'winter'],
   ['spring', 'autumn', 'winter', 'summer'],
   ['autumn', 'winter', 'summer', 'spring'],
+  ['summer', 'autumn', 'winter', 'spring'],
   ['spring', 'autumn', 'summer', 'winter'],
   ['spring', 'summer', 'autumn', 'winter'],
   ['winter', 'spring', 'summer', 'autumn'],
@@ -157,7 +156,7 @@ function calcRounds(
   if (countIn != null && dataIn != null && orderIn != null) {
     const threashold = Math.floor(dataIn.length / 2) + 1;
     const highestCount = countIn[orderIn.slice(-1)[0]];
-    if (highestCount > threashold) {
+    if (highestCount >= threashold) {
       return rounds;
     }
   } else if (dataIn != null) {
@@ -187,6 +186,18 @@ export default class CommonCollection extends CommonDiagramCollection {
   rounds: Array<Object>;
   candidateOrder: Array<string>;
   // [name: string]: DiagramObjectLine;
+
+  updateAxes() {
+    const numVotes = this.rounds[0].data.length;
+    const threashold = Math.floor(numVotes / 2) + 1;
+    this._halfLine.label.setText(`${threashold}`);
+    this._fullLine.label.setText(`${numVotes}`);
+    this._halfLine.setPosition(new Point(
+      this.layout.plotStart.x,
+      this.layout.plotStart.y + threashold / numVotes * this.layout.plotHeight,
+    ));
+    // console.log(this)
+  }
 
   makeBars() {
     const lineOptions = {
@@ -296,15 +307,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
     this.rounds = getRounds();
-    this.candidateOrder = [
-      ...this.rounds.map(d => d.order[0]),
-      this.rounds.slice(-1)[0].order.slice(-1)[0],
-    ].reverse();
+    // this.candidateOrder = [
+    //   ...this.rounds.map(d => d.order[0]),
+    //   this.rounds.slice(-1)[0].order.slice(-1)[0],
+    // ].reverse();
+    this.candidateOrder = this.rounds[0].order.slice().reverse();
     console.log(this.rounds)
     console.log(this.candidateOrder)
     this.makeBars();
     this.addStartScenarios();
     this.addEndScenarios();
+    this.updateAxes();
     console.log(this);
     // this.addBars();
   }
