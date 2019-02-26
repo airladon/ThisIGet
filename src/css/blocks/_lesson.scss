@@ -574,6 +574,42 @@ $title_bar_space_low: 90px;
   font-size: 0;
 }
 
+.lesson__diagram_text_fade_in {
+  // opacity: 1;
+  -webkit-animation: fadein 0.5s linear;
+  -moz-animation: fadein 0.5s linear;
+  animation: fadein 0.5s linear;
+  -o-animation: fadein 0.5s linear;
+}
+
+@-webkit-keyframes fadein {
+  0% { -webkit-opacity: 0; }
+  100% { -webkit-opacity: 1; }
+}
+
+@keyframes fadein {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+.lesson__diagram_text_fade_out {
+  opacity: 0;
+  -webkit-animation: fadeout 0.5s linear;
+  -moz-animation: fadeout 0.5s linear;
+  animation: fadeout 0.5s linear;
+  -o-animation: fadeout 0.5s linear;
+}
+
+@-webkit-keyframes fadeout {
+  0% { -webkit-opacity: 1; }
+  100% { -webkit-opacity: 0; }
+}
+
+@keyframes fadeout {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
 @import './lesson/selector';
 @import './lesson/definition';
 @import './lesson/quizCheck';

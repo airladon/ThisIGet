@@ -426,7 +426,7 @@ export default class LessonComponent extends React.Component
 
   renderContent(content: string) {
     this.key += 1;
-    return <div key={this.key} className='lesson__diagram_text'
+    return <div key={this.key} className='lesson__diagram_text' id='id_lesson__diagram_text'
       dangerouslySetInnerHTML={ {
         __html: content.slice(0, content.length - 1),
       } }
