@@ -133,7 +133,7 @@ class Content extends LessonContent {
     this.addSection(common, {
       modifiers: {
         shape: click(circ.pulseCircle, [circ], colors.circle),
-        Properties: click(circ.growDimensions, [circ, null], colors.dimension),
+        Properties: click(circ.growDimensions, [circ, null, 4], colors.dimension),
       },
       transitionFromAny: (done) => {
         circ.growDimensions();
@@ -208,15 +208,15 @@ class Content extends LessonContent {
         all: click(circ.toggleProperties, [circ], colors.diagram.action),
       },
       setEnterState: () => {
-        circ._clock.setScenario('moreLeft');
-        circ._ball.setScenario('center');
-        circ._earth.setScenario('moreRight');
+        circ._wheel.setScenario('moreLeft');
+        circ._clock.setScenario('center');
+        circ._ball.setScenario('moreRight');
         circ._properties.setScenario('moreRight');
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
         circ._properties._eqn.setScenario('bottom');
       },
-      show: [circ._clock, circ._earth, circ._ball, circ._properties],
+      show: [circ._clock, circ._wheel, circ._ball, circ._properties],
     });
   }
 }

@@ -44,7 +44,7 @@ export default function lessonLayout() {
   const filledCircle = {
     fill: true,
     sides: wheelPoints,
-    radius: wheelSize,
+    radius: wheelSize - circleLineWidth,
     color: [1, 1, 0, 1],
     transform: new Transform('filledCircle').translate(0, 0),
     textureLocation: textureFile,
@@ -64,7 +64,7 @@ export default function lessonLayout() {
     method: 'polygon',
     options: {
       fill: false,
-      radius: wheelSize,
+      radius: wheelSize - circleLineWidth / 2,
       width: circleLineWidth,
       sides: wheelPoints,
       color: colors.circle,
@@ -82,10 +82,19 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
+  // layout.smallerWheel = {
+  //   name: 'wheel',
+  //   method: 'polygon',
+  //   options: [filledCircle, {
+  //     textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
+  //   }],
+  //   mods: { scenarios },
+  // };
+
   layout.clock = {
     name: 'clock',
     method: 'polygon',
-    options: [filledCircleSmaller, {
+    options: [filledCircle, {
       textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333),
     }],
     mods: { scenarios },
@@ -94,7 +103,7 @@ export default function lessonLayout() {
   layout.ball = {
     name: 'ball',
     method: 'polygon',
-    options: [filledCircleSmaller, {
+    options: [filledCircle, {
       textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333),
     }],
     mods: { scenarios },
@@ -137,7 +146,7 @@ export default function lessonLayout() {
     name: 'diameter',
     method: 'line',
     options: {
-      length: wheelSize * 2 - 0.1,
+      length: wheelSize * 2 - circleLineWidth * 2.7,
       vertexSpaceStart: 'center',
       width: 0.015,
       color: colors.dimension,
