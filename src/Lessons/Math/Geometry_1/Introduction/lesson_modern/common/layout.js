@@ -30,10 +30,14 @@ export default function lessonLayout() {
   const left = new Point(-1, -0.4);
   const center = new Point(0, -0.4);
   const right = new Point(1, -0.4);
+  const moreLeft = new Point(-2, -0.4);
+  const moreRight = new Point(2, -0.4);
   const scenarios = {
+    moreLeft: { position: moreLeft },
     left: { position: left },
     center: { position: center },
     right: { position: right },
+    moreRight: { position: moreRight },
   };
 
   const filledCircle = {
@@ -64,6 +68,33 @@ export default function lessonLayout() {
     method: 'polygon',
     options: [filledCircle, {
       textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
+    }],
+    mods: { scenarios },
+  };
+
+  layout.clock = {
+    name: 'clock',
+    method: 'polygon',
+    options: [filledCircle, {
+      textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333),
+    }],
+    mods: { scenarios },
+  };
+
+  layout.ball = {
+    name: 'ball',
+    method: 'polygon',
+    options: [filledCircle, {
+      textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333),
+    }],
+    mods: { scenarios },
+  };
+
+  layout.earth = {
+    name: 'earth',
+    method: 'polygon',
+    options: [filledCircle, {
+      textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333),
     }],
     mods: { scenarios },
   };
@@ -169,7 +200,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         left: { position: new Point(-2.2, 0) },
-        bottom: { position: new Point(0, -1) },
+        bottom: { position: new Point(0, -1.3) },
       },
     },
   };
@@ -193,6 +224,9 @@ export default function lessonLayout() {
   layout.addElements = [
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.wheel,
+    layout.earth,
+    layout.ball,
+    layout.clock,
     layout.circle,
     layout.properties,
     // layout.circumferenceEquation,

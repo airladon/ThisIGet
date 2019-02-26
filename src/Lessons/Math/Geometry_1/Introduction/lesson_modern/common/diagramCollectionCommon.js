@@ -30,6 +30,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & Equation;
   } & DiagramElementCollection;
 
+  propertiesPosition: number;
+
   appearCircleAndMoveWheel(done: ?() => {}) {
     this._circle.animations.cancelAll();
     this._wheel.animations.cancelAll();
@@ -68,25 +70,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
   }
 
-  growCircumference(done: ?() => void = null) {
+  growCircumference(done: ?() => void = null, time: number = 1) {
     const grow = (percent: number) => {
       this.circumferenceAtAngle(percent * Math.PI * 2);
     };
     this._properties._circumference.animations.cancelAll();
     this._properties._circumference.animations.new('Circumference Growth')
-      .custom({ callback: grow, duration: 1 })
+      .custom({ callback: grow, duration: time })
       .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
   }
 
-  growDiameter(done: ?() => void = null) {
+  growDiameter(done: ?() => void = null, time: number = 1) {
     this._properties._diameter.showAll();
-    this._properties._diameter.grow(0.2, 1, true, done);
+    this._properties._diameter.grow(0.2, time, true, done);
     this.diagram.animateNextFrame();
   }
 
-  growDimensions(done: ?() => void = null) {
+  growDimensions(done: ?() => void = null, time: number = 4) {
     this._properties.animations.cancelAll('complete');
     const c = this._properties._c;
     const d = this._properties._d;
@@ -95,10 +97,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     c.hide();
     d.hide();
     this._properties.animations.new()
-      .trigger({ callback: this.growCircumference.bind(this, null), duration: 1 })
-      .dissolveIn({ element: c, duration: 1 })
-      .trigger({ callback: this.growDiameter.bind(this, null), duration: 1 })
-      .then(d.anim.dissolveIn(1))
+      .trigger({ callback: this.growCircumference.bind(this, null, time / 4), duration: time / 4 })
+      .dissolveIn({ element: c, duration: time / 4 })
+      .trigger({ callback: this.growDiameter.bind(this, null, time / 4), duration: time / 4 })
+      .then(d.anim.dissolveIn(time / 4))
       .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
@@ -131,9 +133,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     eqn.hideAll();
     eqn._c.setDiagramPositionToElement(prop._c);
-    eqn._c.show();
     eqn._d.setDiagramPositionToElement(prop._d);
-    eqn._d.show();
 
     eqn.animations.new()
       .inParallel([
@@ -148,6 +148,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  toggleProperties() {
+    let goToScenario = 'moreLeft';
+    if (this.propertiesPosition === 0) {
+      goToScenario = 'center';
+    } else if (this.propertiesPosition === 1) {
+      goToScenario = 'moreRight';
+    }
+    this.propertiesPosition = (this.propertiesPosition + 1) % 3;
+    this._properties.setScenario(goToScenario);
+    this.growDimensions(null, 2);
+    this.diagram.animateNextFrame();
+  }
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -155,6 +168,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
+    this.propertiesPosition = 2;
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
   }

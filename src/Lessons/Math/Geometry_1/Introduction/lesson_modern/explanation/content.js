@@ -184,12 +184,13 @@ class Content extends LessonContent {
     });
 
     common.setContent = [
-      'The |properties| and |relationships| can then be applied to all other objects that have the same shape, no matter their location, size or material.',
+      'The |properties| and |relationships| can then be applied to |all| other objects that have the same shape, no matter their location, size or material.',
     ];
     this.addSection(common, {
       modifiers: {
         relationships: click(circ.pulseEquation, [circ], colors.dimension),
-        properties: click(circ.pulseProperties, [circ], colors.dimension),
+        properties: click(circ.pulseProperties, [circ], colors.diagram.dimension),
+        all: click(this.next, [this], colors.action),
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
@@ -199,6 +200,23 @@ class Content extends LessonContent {
         circ._properties._eqn.setScenario('left');
       },
       show: [circ._circle, circ._properties],
+    });
+    this.addSection(common, {
+      modifiers: {
+        relationships: click(circ.pulseEquation, [circ], colors.dimension),
+        properties: click(circ.pulseProperties, [circ], colors.dimension),
+        all: click(circ.toggleProperties, [circ], colors.diagram.action),
+      },
+      setEnterState: () => {
+        circ._clock.setScenario('moreLeft');
+        circ._ball.setScenario('center');
+        circ._earth.setScenario('moreRight');
+        circ._properties.setScenario('moreRight');
+        circ.circumferenceAtAngle(Math.PI * 2);
+        circ._properties._eqn.showForm('base');
+        circ._properties._eqn.setScenario('bottom');
+      },
+      show: [circ._clock, circ._earth, circ._ball, circ._properties],
     });
   }
 }
