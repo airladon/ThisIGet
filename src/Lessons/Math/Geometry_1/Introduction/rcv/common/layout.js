@@ -22,15 +22,15 @@ export default function lessonLayout() {
   const colors = Fig.tools.color.getCSSColors(cssColorNames);
   layout.colors = colors;
 
-  const plotWidth = 2.5;
+  const plotWidth = 5;
   const axisWidth = 0.015;
-  const barWidth = 0.4;
+  const barWidth = 0.6;
   const plotHeight = 2.5;
-  const plotStart = new Point(-2, -1.7);
+  const plotStart = new Point(-2.5, -1.7);
   layout.plotHeight = plotHeight;
   layout.plotStart = plotStart;
   layout.barWidth = barWidth;
-  layout.barSeparation = 0.5;
+  layout.barSeparation = 0.7;
   layout.barVerticalSeparation = 0.005;
   // const candidateWidth = 0.2;
   // const step = 0.4;
