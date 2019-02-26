@@ -83,6 +83,7 @@ class Content extends LessonContent {
     });
 
     this.addSection(common, {
+      title: 'What are shapes?',
       setContent: centerV([
         'A large area of mathematics is the study of |shapes|.',
         '|Shapes| are simple generalizations of |objects| and the |paths| they travel.',
@@ -121,6 +122,7 @@ class Content extends LessonContent {
       '|Properties| can be discovered that describe the shape.',
     ];
     this.addSection(common, {
+      title: 'Properties',
       modifiers: {
         shape: click(circ.pulseCircle, [circ], colors.circle),
         Properties: click(this.next, [this], colors.dimension),
@@ -187,6 +189,7 @@ class Content extends LessonContent {
       'The |properties| and |relationships| can then be applied to |all| other objects that have the same shape, no matter their location, size or material.',
     ];
     this.addSection(common, {
+      title: 'Implications',
       modifiers: {
         relationships: click(circ.pulseEquation, [circ], colors.dimension),
         properties: click(circ.pulseProperties, [circ], colors.dimension),
@@ -243,8 +246,10 @@ class Content extends LessonContent {
       ]),
     });
     this.addSection({
+      title: 'Conclusion',
       setContent: centerV([
-        'So studying shapes gives us |powerful tools| we can use to help us |better understand| the world we live in.',
+        'So |why| study shapes?',
+        'Because doing so gives us |powerful tools| we can use to help us |better understand| the world we live in.',
       ]),
     });
   }

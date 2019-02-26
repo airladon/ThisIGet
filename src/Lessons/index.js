@@ -284,9 +284,9 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/Introduction',
       uid: 'why_study_shapes',
       versions: {
-        base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
+        legacy: {
+          title: 'Legacy',
+          description: 'Deprecated.',
           path: 'base',
           onPath: true,
           topics: [
@@ -295,19 +295,15 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
-        modern: {
-          title: 'Straight Forward',
-          description: 'Updated with latest Figureone.',
+        base: {
+          title: 'Base',
+          description: 'Base Explanation.',
           path: 'lesson_modern',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
-            'quiz',
-            'summary',
           ],
           qr: [
-            'Main',
           ],
         },
         RCV: {
