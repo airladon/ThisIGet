@@ -196,7 +196,26 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.layout.plotStart.x,
       this.layout.plotStart.y + threashold / numVotes * this.layout.plotHeight,
     ));
-    // console.log(this)
+  }
+
+  makeCandidateNames() {
+    this.candidateOrder.forEach((name, index) => {
+      const baseLocation = new Point(
+        this.layout.plotStart.x + index * this.layout.barSeparation
+          + this.layout.barWidth / 2,
+        this.layout.plotStart.y - 0.1,
+      );
+      const txt = this.diagram.shapes.txt({
+        text: name,
+        size: 0.1,
+        color: this.layout.colors.text,
+        style: 'normal',
+        family: 'Helvetica',
+        position: baseLocation,
+      });
+      txt.scenarios.base = { position: baseLocation };
+      this.add(`${name}`, txt);
+    });
   }
 
   makeBars() {
@@ -264,13 +283,24 @@ export default class CommonCollection extends CommonDiagramCollection {
       round.order.forEach((name) => {
         const deltaElement = this[`_${roundIndex}delta${name}`]
         const totalElement = this[`_${roundIndex}total${name}`]
+        const nameElement =  this[`_${name}`];
         totalElement.scenarios.end = {
           position: new Point(lastX[name], this.layout.plotStart.y),
         };
         totalElement.scenarios.remove = {
           position: new Point(
-            lastX[name] + this.layout.barSeparation,
+            this.layout.plotStart.x
+              + (round.order.length) * this.layout.barSeparation
+              + this.layout.barWidth / 2,
             this.layout.plotStart.y,
+          ),
+        };
+        nameElement.scenarios.remove = {
+          position: new Point(
+            this.layout.plotStart.x
+              + (round.order.length) * this.layout.barSeparation
+              + this.layout.barWidth / 2,
+            nameElement.scenarios.base.position.y,
           ),
         };
         deltaElement.scenarios.end = {
@@ -286,7 +316,9 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   addStartScenarios() {
     this.rounds.forEach((round, roundIndex) => {
-      const lastX = this.layout.plotStart.x + (round.order.length + 2) * this.layout.barSeparation + this.layout.barWidth / 2;
+      const lastX = this.layout.plotStart.x 
+        + (round.order.length + 2) * this.layout.barSeparation
+        + this.layout.barWidth / 2;
       let lastY = this.layout.plotStart.y;
       round.order.forEach((name) => {
         const element = this[`_${roundIndex}delta${name}`];
@@ -315,9 +347,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     console.log(this.rounds)
     console.log(this.candidateOrder)
     this.makeBars();
+    this.makeCandidateNames();
     this.addStartScenarios();
     this.addEndScenarios();
     this.updateAxes();
+    
     console.log(this);
     // this.addBars();
   }

@@ -14,6 +14,7 @@ const cssColorNames = [
   'spring',
   'winter',
   'autumn',
+  'text',
 ];
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {

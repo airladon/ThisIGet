@@ -12,13 +12,14 @@ import details from '../../details';
 import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const {
-  // click,
-  centerV,
-  // highlight,
-  // clickWord,
-} = Fig.tools.html;
+// const {
+//   // click,
+//   centerV,
+//   // highlight,
+//   // clickWord,
+// } = Fig.tools.html;
 
+const { Point } = Fig;
 const layout = lessonLayout();
 // const { colors } = layout;
 
@@ -60,6 +61,9 @@ class Content extends LessonContent {
           const element = rcv[`_0total${name}`];
           element.setScenario('end');
           element.showAll();
+          const nameElement = rcv[`_${name}`];
+          nameElement.showAll();
+          nameElement.setScenario('base');
         });
       },
       show: axis,
@@ -71,10 +75,13 @@ class Content extends LessonContent {
       const lastRoundTotalElements = [];
       const thisRoundDeltaElements = [];
       const thisRoundTotalElements = [];
+      const lastRoundNameElements = [];
 
       lastRound.order.forEach((name) => {
         const element = rcv[`_${roundIndex - 1}total${name}`];
+        const nameElement = rcv[`_${name}`];
         lastRoundTotalElements.push(element);
+        lastRoundNameElements.push(nameElement);
       });
 
       round.order.forEach((name) => {
@@ -83,11 +90,12 @@ class Content extends LessonContent {
         thisRoundDeltaElements.push(deltaElement);
         thisRoundTotalElements.push(totalElement);
       });
+      console.log(lastRoundNameElements)
 
       // Move candidate to remove and show preference votes
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
-        show: [...axis, ...lastRoundTotalElements],
+        show: [...axis, ...lastRoundTotalElements, ...lastRoundNameElements],
         setEnterState: () => {
           thisRoundDeltaElements.forEach((element) => {
             element.setScenario('start');
@@ -95,12 +103,19 @@ class Content extends LessonContent {
           lastRoundTotalElements.forEach((element) => {
             element.setScenario('end');
           });
+          lastRoundNameElements.forEach((element) => {
+            element.setScenario('base');
+          });
         },
         transitionFromPrev: (done) => {
           lastRoundTotalElements[0].animations.new()
             .scenario({ target: 'remove', duration: 1 })
             .opacity({ target: 0.5, duration: 1 })
             .whenFinished(done)
+            .start();
+
+          lastRoundNameElements[0].animations.new()
+            .scenario({ target: 'remove', duration: 1 })
             .start();
 
           thisRoundDeltaElements.forEach((element) => {
@@ -119,6 +134,7 @@ class Content extends LessonContent {
           });
           lastRoundTotalElements[0].setScenario('remove');
           lastRoundTotalElements[0].setOpacity(0.5);
+          lastRoundNameElements[0].setScenario('remove');
         },
         setLeaveState: () => {
           lastRoundTotalElements[0].setOpacity(1);
@@ -128,7 +144,10 @@ class Content extends LessonContent {
       // Move preferences onto remaining candidates
       this.addSection(common, {
         setContent: `Round ${roundIndex + 1}`,
-        show: [...axis, ...lastRoundTotalElements, ...thisRoundDeltaElements],
+        show: [
+          ...axis, ...lastRoundTotalElements,
+          ...thisRoundDeltaElements, ...lastRoundNameElements,
+        ],
         setEnterState: () => {
           thisRoundDeltaElements.forEach((element) => {
             element.setScenario('start');
@@ -136,6 +155,10 @@ class Content extends LessonContent {
           lastRoundTotalElements.forEach((element) => {
             element.setScenario('end');
           });
+          lastRoundNameElements.forEach((element) => {
+            element.setScenario('base');
+          });
+          lastRoundNameElements[0].setScenario('remove');
           lastRoundTotalElements[0].setScenario('remove');
           lastRoundTotalElements[0].setOpacity(0.5);
         },
@@ -165,6 +188,9 @@ class Content extends LessonContent {
           lastRoundTotalElements[0].animations.new()
             .dissolveOut({ duration: 1 })
             .start();
+          lastRoundNameElements[0].animations.new()
+            .dissolveOut({ duration: 1 })
+            .start();
           rcv.animations.new()
             .delay(delay)
             .whenFinished(done)
@@ -178,6 +204,7 @@ class Content extends LessonContent {
             element.setScenario('end');
           });
           lastRoundTotalElements[0].hide();
+          lastRoundNameElements[0].hide();
         },
         setLeaveState: () => {
           lastRoundTotalElements[0].setOpacity(1);
@@ -190,6 +217,7 @@ class Content extends LessonContent {
         show: [
           ...axis, ...thisRoundTotalElements,
           ...lastRoundTotalElements, ...thisRoundDeltaElements,
+          ...lastRoundNameElements,
         ],
         setEnterState: () => {
           thisRoundDeltaElements.forEach((element) => {
@@ -199,6 +227,10 @@ class Content extends LessonContent {
             element.setScenario('end');
           });
           lastRoundTotalElements[0].hide();
+          lastRoundNameElements.forEach((element) => {
+            element.setScenario('base');
+          });
+          lastRoundNameElements[0].hide();
           thisRoundTotalElements.forEach((element) => {
             element.setScenario('end');
             element.hide();
@@ -206,6 +238,7 @@ class Content extends LessonContent {
         },
         transitionFromPrev: (done) => {
           lastRoundTotalElements[0].hide();
+          lastRoundNameElements[0].hide();
           thisRoundDeltaElements.forEach((element) => {
             element._label.animations.new()
               .dissolveOut({ duration: 1 })
@@ -242,6 +275,7 @@ class Content extends LessonContent {
           thisRoundTotalElements.forEach((element) => {
             element.show();
           });
+          lastRoundNameElements[0].hide();
         },
       });
     }
