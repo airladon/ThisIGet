@@ -8,11 +8,74 @@ const {
   // DiagramElementCollection,
   Transform, Point,
 } = Fig;
-// const {
-//   randElements,
-// } = Fig.tools.math;
+const {
+  randElements, randInt,
+} = Fig.tools.math;
 
-const results = [
+
+const results = (() => {
+  const out = [];
+  for (let i = 0; i < 100; i += 1) {
+    out.push(randElements(4, ['summer', 'spring', 'autumn', 'winter']));
+  }
+  console.log(out)
+  return out;
+})();
+
+const results2 = [
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['spring', 'summer', 'winter', 'autumn'],
+  ['winter', 'spring', 'summer', 'autumn'],
+  ['winter', 'summer', 'spring', 'autumn'],
+  ['winter', 'summer', 'spring', 'autumn'],
+  ['autumn', 'summer', 'winter', 'spring'],
+  ['autumn', 'winter', 'summer', 'spring'],
+  ['spring', 'autumn', 'winter', 'summer'],
+  ['summer', 'autumn', 'winter', 'spring'],
+  ['winter', 'spring', 'summer', 'autumn'],
+  ['summer', 'winter', 'autumn', 'spring'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['spring', 'autumn', 'summer', 'winter'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['summer', 'spring', 'winter', 'autumn'],
+  ['autumn', 'summer', 'spring', 'winter'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['autumn', 'spring', 'winter', 'summer'],
+  ['autumn', 'winter', 'summer', 'spring'],
+  ['autumn', 'winter', 'summer', 'spring'],
+  ['summer', 'winter', 'autumn', 'spring'],
+  ['winter', 'summer', 'autumn', 'spring'],
+  ['spring', 'winter', 'autumn', 'summer'],
+  ['winter', 'spring', 'autumn', 'summer'],
+  ['autumn', 'summer', 'spring', 'winter'],
+  ['spring', 'autumn', 'winter', 'summer'],
+  ['spring', 'autumn', 'winter', 'summer'],
+  ['summer', 'winter', 'autumn', 'spring'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['autumn', 'spring', 'winter', 'summer'],
+  ['spring', 'summer', 'autumn', 'winter'],
+  ['spring', 'autumn', 'winter', 'summer'],
+  ['autumn', 'winter', 'spring', 'summer'],
+  ['winter', 'spring', 'autumn', 'summer'],
+  ['winter', 'summer', 'spring', 'autumn'],
+  ['autumn', 'winter', 'summer', 'spring'],
+  ['spring', 'autumn', 'summer', 'winter'],
+  ['autumn', 'summer', 'winter', 'spring'],
+  ['spring', 'summer', 'autumn', 'winter'],
+  ['winter', 'summer', 'spring', 'autumn'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['spring', 'winter', 'summer', 'autumn'],
+  ['spring', 'autumn', 'summer', 'winter'],
+  ['autumn', 'winter', 'spring', 'summer'],
+  ['summer', 'winter', 'autumn', 'spring'],
+  ['autumn', 'summer', 'winter', 'spring'],
+  ['spring', 'winter', 'summer', 'autumn'],
+  ['autumn', 'winter', 'summer', 'spring'],
+  ['summer', 'spring', 'autumn', 'winter'],
+  ['winter', 'spring', 'summer', 'autumn'],
+];
+
+const oldresults = [
   // randElements(4, ['summer', 'spring', 'autumn', 'winter']),
   ['spring', 'winter', 'summer', 'autumn'],
   ['autumn', 'summer', 'spring', 'winter'],
@@ -290,7 +353,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         totalElement.scenarios.remove = {
           position: new Point(
             this.layout.plotStart.x
-              + (round.order.length) * this.layout.barSeparation
+              + (round.order.length + 0.5) * this.layout.barSeparation
               + this.layout.barWidth / 2,
             this.layout.plotStart.y,
           ),
@@ -298,7 +361,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         nameElement.scenarios.remove = {
           position: new Point(
             this.layout.plotStart.x
-              + (round.order.length) * this.layout.barSeparation
+              + (round.order.length + 0.5) * this.layout.barSeparation
               + this.layout.barWidth / 2,
             nameElement.scenarios.base.position.y,
           ),
@@ -317,8 +380,8 @@ export default class CommonCollection extends CommonDiagramCollection {
   addStartScenarios() {
     this.rounds.forEach((round, roundIndex) => {
       const lastX = this.layout.plotStart.x 
-        + (round.order.length + 2) * this.layout.barSeparation
-        + this.layout.barWidth / 2;
+        + (round.order.length + 2.5) * this.layout.barSeparation
+        + this.layout.barWidth / 2.5;
       let lastY = this.layout.plotStart.y;
       round.order.forEach((name) => {
         const element = this[`_${roundIndex}delta${name}`];

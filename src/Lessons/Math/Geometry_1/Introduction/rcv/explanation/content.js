@@ -169,12 +169,12 @@ class Content extends LessonContent {
             element.animations.new()
               .scenario({
                 target: 'end',
-                duration: 1,
+                duration: 1.5,
                 delay,
                 translationStyle: 'curved',
                 translationOptions: {
                   rot: 1,
-                  magnitude: 1,
+                  magnitude: 0.8,
                   offset: 0,
                   controlPoint: null,
                   direction: 'up',
@@ -182,9 +182,10 @@ class Content extends LessonContent {
               })
               // .whenFinished(callbackToUse)
               .start();
-            delay += 1;
+            delay += 1.5;
             // callbackToUse = null;
           });
+          thisRoundDeltaElements.reverse();
           lastRoundTotalElements[0].animations.new()
             .dissolveOut({ duration: 1 })
             .start();
