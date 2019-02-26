@@ -77,31 +77,31 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   growDiameter(done: ?() => void = null) {
     this._properties._diameter.showAll();
-    // this._properties._c.showAll();
     this._properties._diameter.grow(0.2, 1, true, done);
     this.diagram.animateNextFrame();
   }
 
   growDimensions(done: ?() => void = null) {
     this._properties.animations.cancelAll('complete');
-    this._properties._diameter.hide();
-    this._properties._c.hide();
-    this._properties._d.hide();
+    const c = this._properties._c;
+    const d = this._properties._d;
+    const diameter = this._properties._diameter;
+    diameter.hide();
+    c.hide();
+    d.hide();
     this._properties.animations.new()
-      .trigger(this.growCircumference.bind(this, null))
-      .delay(1)
-      // .dissolveIn({ element: this._properties._c, duration: 1 })
-      .then(this._properties._c.anim.dissolveIn(1))
-      // .trigger(() => { this._properties._c.show(); })
-      .trigger(this.growDiameter.bind(this, null))
-      .delay(1)
-      .then(this._properties._d.anim.dissolveIn(1))
-      // .dissolveIn({ element: this._properties._d, duration: 1 })
+      .trigger({ callback: this.growCircumference.bind(this, null), duration: 1 })
+      .dissolveIn({ element: c, duration: 1 })
+      .trigger({ callback: this.growDiameter.bind(this, null), duration: 1 })
+      .then(d.anim.dissolveIn(1))
       .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
-    // this.growCircumference(done);
-    // this.growDiameter();
+  }
+
+  pulseCircle() {
+    this._circle.pulseThickNow(1, 1.1, 5);
+    this.diagram.animateNextFrame();
   }
 
   constructor(

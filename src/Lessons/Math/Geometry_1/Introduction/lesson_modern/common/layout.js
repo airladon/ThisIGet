@@ -96,7 +96,7 @@ export default function lessonLayout() {
     options: {
       length: wheelSize * 2 - 0.1,
       vertexSpaceStart: 'center',
-      width: 0.025,
+      width: 0.015,
       color: colors.dimension,
       arrows: {
         width: 0.1,
@@ -107,7 +107,7 @@ export default function lessonLayout() {
   };
 
   layout.circumferenceRadius = wheelSize * 1.2;
-  layout.circumferenceLineWidth = 0.025;
+  layout.circumferenceLineWidth = 0.015;
   layout.circumferenceArrowDimension = 0.1;
   layout.circumference = {
     name: 'circumference',

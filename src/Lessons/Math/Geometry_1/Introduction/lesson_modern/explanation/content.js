@@ -16,7 +16,7 @@ const {
   click,
   centerVH,
   centerV,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -121,24 +121,34 @@ class Content extends LessonContent {
       '|Properties| can be discovered that describe the shape.',
     ];
     this.addSection(common, {
-      modifiers: { shape: click(circ.growDimensions, [circ, null], colors.circle) },
+      modifiers: {
+        shape: click(circ.pulseCircle, [circ], colors.circle),
+        Properties: click(this.next, [this], colors.dimension),
+      },
+      setEnterState: () => {
+        circ._circle.setScenario('right');
+        // circ._properties.setScenario('right');
+        // circ.circumferenceAtAngle(Math.PI * 2);
+      },
+      show: [circ._circle],
+    });
+    this.addSection(common, {
+      modifiers: {
+        shape: click(circ.pulseCircle, [circ], colors.circle),
+        Properties: click(circ.growDimensions, [circ, null], colors.dimension),
+      },
+      transitionFromAny: (done) => {
+        circ.growDimensions();
+        done();
+      },
       setEnterState: () => {
         circ._circle.setScenario('right');
         circ._properties.setScenario('right');
-        // circ._diameter.setScenario('right');
-        // circ._c.setScenario('right');
         circ.circumferenceAtAngle(Math.PI * 2);
-        console.log(circ)
+        // console.log(circ, colors)
       },
       show: [circ._circle, circ._properties],
     });
-    // this.addSection(common, {
-    //   modifiers: {
-    //     shape: click(circ.appearCircleAndMoveWheel, [circ, null], colors.circle),
-    //   },
-    //   transitionFromAny: (done) => { circ.appearCircleAndMoveWheel(done); },
-    //   show: [circ._wheel, circ._circle],
-    // });
   }
 }
 

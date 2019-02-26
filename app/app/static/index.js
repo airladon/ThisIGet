@@ -3252,13 +3252,13 @@ function (_AnimationStep) {
 
     if (typeof triggerOrOptionsIn === 'function') {
       options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-      options.trigger = triggerOrOptionsIn;
+      options.callback = triggerOrOptionsIn;
     } else {
       options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, triggerOrOptionsIn].concat(optionsIn));
     }
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
-    _this.trigger = options.trigger;
+    _this.callback = options.callback;
     _this.payload = options.payload;
     _this.duration = options.duration;
     return _this;
@@ -3267,8 +3267,9 @@ function (_AnimationStep) {
   _createClass(TriggerStep, [{
     key: "setFrame",
     value: function setFrame() {
-      if (this.trigger != null) {
-        this.trigger(this.payload);
+      if (this.callback != null) {
+        this.callback(this.payload);
+        this.callback = null;
       }
     }
   }, {
