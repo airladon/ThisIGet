@@ -68,26 +68,28 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
-  layout.textC = {
+  layout.textD = {
     name: 'd',
     method: 'text',
     options: {
       text: 'd',
-      offset: new Point(0, 0.15),
+      vAlign: 'baseline',
+      hAlign: 'left',
+      position: new Point(-0.05, 0.1),
       color: colors.dimension,
     },
-    mods: { scenarios },
   };
 
-  layout.textD = {
+  layout.textC = {
     name: 'c',
     method: 'text',
     options: {
       text: 'c',
-      offset: new Point(0, wheelSize * 1.2 + 0.15),
+      vAlign: 'baseline',
+      hAlign: 'left',
+      position: new Point(-0.05, wheelSize * 1.2 + 0.1),
       color: colors.dimension,
     },
-    mods: { scenarios },
   };
 
   layout.diameter = {
@@ -145,23 +147,8 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
-  layout.properties = {
-    name: 'properties',
-    method: 'collection',
-    options: {
-      transform: new Transform('Properties').translate(0, 0),
-    },
-    addElements: [
-      layout.circumference,
-      layout.textC,
-      layout.diameter,
-      layout.textD,
-    ],
-    mods: { scenarios },
-  };
-
   layout.circumferenceEquation = {
-    name: 'circumferenceEqn',
+    name: 'eqn',
     method: 'addEquation',
     options: {
       color: layout.colors.dimension,
@@ -178,12 +165,26 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        left: { position: new Point(-1, -0.4) },
-        lowerLeft: { position: new Point(-2, -1.5) },
-        lowerCenter: { position: new Point(0, -1.5) },
-        lowerRight: { position: new Point(2, -1.5) },
+        left: { position: new Point(-2.2, 0) },
+        bottom: { position: new Point(0, -1) },
       },
     },
+  };
+
+  layout.properties = {
+    name: 'properties',
+    method: 'collection',
+    options: {
+      transform: new Transform('Properties').translate(0, 0),
+    },
+    addElements: [
+      layout.circumference,
+      layout.textC,
+      layout.diameter,
+      layout.textD,
+      layout.circumferenceEquation,
+    ],
+    mods: { scenarios },
   };
 
   layout.addElements = [
@@ -191,7 +192,7 @@ export default function lessonLayout() {
     layout.wheel,
     layout.circle,
     layout.properties,
-    layout.circumferenceEquation,
+    // layout.circumferenceEquation,
     // layout.diameter,
     // layout.textC
   ];

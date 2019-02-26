@@ -143,10 +143,41 @@ class Content extends LessonContent {
         circ._circle.setScenario('right');
         circ._properties.setScenario('right');
         circ.circumferenceAtAngle(Math.PI * 2);
-        circ._circumferenceEqn.showForm('base');
-        circ._circumferenceEqn.setScenario('left');
       },
-      show: [circ._circle, circ._properties, circ._circumferenceEqn],
+      show: [circ._circle, circ._properties],
+      hide: [circ._properties._eqn],
+    });
+
+    common.setContent = [
+      '|Relationships| between |properties| can be found.',
+    ];
+    this.addSection(common, {
+      modifiers: {
+        Relationships: click(this.next, [this], colors.dimension),
+        properties: click(circ.pulseProperties, [circ], colors.dimension),
+      },
+      setEnterState: () => {
+        circ._circle.setScenario('right');
+        circ._properties.setScenario('right');
+        circ.circumferenceAtAngle(Math.PI * 2);
+      },
+      show: [circ._circle, circ._properties],
+      hide: [circ._properties._eqn],
+    });
+    this.addSection(common, {
+      modifiers: {
+        Relationships: click(circ.makeEqnFromProperties, [circ], colors.dimension),
+        properties: click(circ.pulseProperties, [circ], colors.dimension),
+      },
+      setEnterState: () => {
+        circ._circle.setScenario('right');
+        circ._properties.setScenario('right');
+        circ.circumferenceAtAngle(Math.PI * 2);
+        circ._properties._eqn.showForm('base');
+        circ._properties._eqn.setScenario('left');
+        console.log(circ)
+      },
+      show: [circ._circle, circ._properties],
     });
   }
 }

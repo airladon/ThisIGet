@@ -6,10 +6,9 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative,
-  // DiagramObjectAngle, 
   DiagramElementCollection,
   DiagramObjectLine,
-  Transform, Point,
+  Transform, Point, Equation,
 } = Fig;
 // const textureFile = `/static/dist/${textureMap}`;
 export default class CommonCollection extends CommonDiagramCollection {
@@ -23,6 +22,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     _diameter: DiagramObjectLine;
     _d: DiagramElementPrimative;
     _c: DiagramElementPrimative;
+    _eqn: {
+      _c: DiagramElementPrimative;
+      _d: DiagramElementPrimative;
+      _equals: DiagramElementPrimative;
+      _pi: DiagramElementPrimative;
+    } & Equation;
   } & DiagramElementCollection;
 
   appearCircleAndMoveWheel(done: ?() => {}) {
@@ -101,6 +106,39 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseCircle() {
     this._circle.pulseThickNow(1, 1.1, 5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseProperties() {
+    this._properties._c.pulseScaleNow(1, 1.7);
+    this._properties._d.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
+  makeEqnFromProperties() {
+    const prop = this._properties;
+    const eqn = prop._eqn;
+    eqn.showForm('base');
+
+    const cPosition = eqn._c.getPosition();
+    const dPosition = eqn._d.getPosition();
+    eqn.hideAll();
+    eqn._c.setDiagramPositionToElement(prop._c);
+    eqn._c.show();
+    eqn._d.setDiagramPositionToElement(prop._d);
+    eqn._d.show();
+
+    eqn.stop(true, true);
+    eqn._c.animations.new()
+      .inParallel([
+        eqn._c.anim.position({ target: cPosition, duration: 1.5 }),
+        eqn._d.anim.position({ target: dPosition, duration: 1.5 }),
+      ])
+      .inParallel([
+        eqn._equals.anim.dissolveIn(1),
+        eqn._pi.anim.dissolveIn(1),
+      ])
+      .start();
     this.diagram.animateNextFrame();
   }
 
