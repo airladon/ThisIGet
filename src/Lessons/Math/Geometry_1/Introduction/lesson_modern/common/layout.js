@@ -32,6 +32,7 @@ export default function lessonLayout() {
   const right = new Point(1, -0.4);
   const moreLeft = new Point(-2, -0.4);
   const moreRight = new Point(2, -0.4);
+  const circleLineWidth = 0.05;
   const scenarios = {
     moreLeft: { position: moreLeft },
     left: { position: left },
@@ -49,13 +50,22 @@ export default function lessonLayout() {
     textureLocation: textureFile,
   };
 
+  const filledCircleSmaller = {
+    fill: true,
+    sides: wheelPoints,
+    radius: wheelSize - circleLineWidth,
+    color: [1, 1, 0, 1],
+    transform: new Transform('filledCircle').translate(0, 0),
+    textureLocation: textureFile,
+  };
+
   layout.circle = {
     name: 'circle',
     method: 'polygon',
     options: {
       fill: false,
       radius: wheelSize,
-      width: 0.05,
+      width: circleLineWidth,
       sides: wheelPoints,
       color: colors.circle,
       transform: new Transform('Circle').scale(1, 1).translate(0, 0),
@@ -75,7 +85,7 @@ export default function lessonLayout() {
   layout.clock = {
     name: 'clock',
     method: 'polygon',
-    options: [filledCircle, {
+    options: [filledCircleSmaller, {
       textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333),
     }],
     mods: { scenarios },
@@ -84,7 +94,7 @@ export default function lessonLayout() {
   layout.ball = {
     name: 'ball',
     method: 'polygon',
-    options: [filledCircle, {
+    options: [filledCircleSmaller, {
       textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333),
     }],
     mods: { scenarios },
@@ -93,7 +103,7 @@ export default function lessonLayout() {
   layout.earth = {
     name: 'earth',
     method: 'polygon',
-    options: [filledCircle, {
+    options: [filledCircleSmaller, {
       textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333),
     }],
     mods: { scenarios },
