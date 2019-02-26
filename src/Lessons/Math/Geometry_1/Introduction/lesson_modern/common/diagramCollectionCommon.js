@@ -22,6 +22,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _diameter: DiagramObjectLine;
     _d: DiagramElementPrimative;
     _c: DiagramElementPrimative;
+    _darkCircle: DiagramElementPrimative;
     _eqn: {
       _c: DiagramElementPrimative;
       _d: DiagramElementPrimative;
@@ -92,14 +93,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._properties.animations.cancelAll('complete');
     const c = this._properties._c;
     const d = this._properties._d;
+    const darkCircle = this._properties._darkCircle;
     const diameter = this._properties._diameter;
     diameter.hide();
     c.hide();
     d.hide();
+    darkCircle.hide();
     this._properties.animations.new()
       .trigger({ callback: this.growCircumference.bind(this, null, time / 4), duration: time / 4 })
       .dissolveIn({ element: c, duration: time / 4 })
-      .trigger({ callback: this.growDiameter.bind(this, null, time / 4), duration: time / 4 })
+      .trigger(this.growDiameter.bind(this, null, time / 4))
+      .dissolveIn({ element: darkCircle, duration: time / 4 })
       .then(d.anim.dissolveIn(time / 4))
       .whenFinished(done)
       .start();
@@ -134,6 +138,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     eqn.hideAll();
     eqn._c.setDiagramPositionToElement(prop._c);
     eqn._d.setDiagramPositionToElement(prop._d);
+    eqn._c.show();
+    eqn._d.show();
 
     eqn.animations.new()
       .inParallel([

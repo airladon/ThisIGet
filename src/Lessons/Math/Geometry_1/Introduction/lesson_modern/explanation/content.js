@@ -189,8 +189,8 @@ class Content extends LessonContent {
     this.addSection(common, {
       modifiers: {
         relationships: click(circ.pulseEquation, [circ], colors.dimension),
-        properties: click(circ.pulseProperties, [circ], colors.diagram.dimension),
-        all: click(this.next, [this], colors.action),
+        properties: click(circ.pulseProperties, [circ], colors.dimension),
+        all: click(this.next, [this], colors.diagram.action),
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
@@ -215,6 +215,8 @@ class Content extends LessonContent {
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
         circ._properties._eqn.setScenario('bottom');
+        // circ.toggleProperties();
+        console.log(circ)
       },
       show: [circ._clock, circ._wheel, circ._ball, circ._properties],
     });

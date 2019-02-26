@@ -10,6 +10,8 @@ const {
   // Line,
 } = Fig.tools.g2;
 
+// const { joinObjects } = Fig.tools.misc;
+
 const cssColorNames = [
   'circle',
   'dimension',
@@ -44,16 +46,7 @@ export default function lessonLayout() {
   const filledCircle = {
     fill: true,
     sides: wheelPoints,
-    radius: wheelSize - circleLineWidth,
-    color: [1, 1, 0, 1],
-    transform: new Transform('filledCircle').translate(0, 0),
-    textureLocation: textureFile,
-  };
-
-  const filledCircleSmaller = {
-    fill: true,
-    sides: wheelPoints,
-    radius: wheelSize - circleLineWidth,
+    radius: wheelSize,
     color: [1, 1, 0, 1],
     transform: new Transform('filledCircle').translate(0, 0),
     textureLocation: textureFile,
@@ -64,12 +57,22 @@ export default function lessonLayout() {
     method: 'polygon',
     options: {
       fill: false,
-      radius: wheelSize - circleLineWidth / 2,
+      radius: wheelSize + circleLineWidth,
       width: circleLineWidth,
       sides: wheelPoints,
       color: colors.circle,
       transform: new Transform('Circle').scale(1, 1).translate(0, 0),
     },
+    mods: { scenarios },
+  };
+
+  layout.darkCircle = {
+    name: 'darkCircle',
+    method: 'polygon',
+    options: [filledCircle, {
+      color: [0, 0, 0, 0.7],
+      textureLocation: '',
+    }],
     mods: { scenarios },
   };
 
@@ -81,15 +84,6 @@ export default function lessonLayout() {
     }],
     mods: { scenarios },
   };
-
-  // layout.smallerWheel = {
-  //   name: 'wheel',
-  //   method: 'polygon',
-  //   options: [filledCircle, {
-  //     textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
-  //   }],
-  //   mods: { scenarios },
-  // };
 
   layout.clock = {
     name: 'clock',
@@ -112,7 +106,7 @@ export default function lessonLayout() {
   layout.earth = {
     name: 'earth',
     method: 'polygon',
-    options: [filledCircleSmaller, {
+    options: [filledCircle, {
       textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333),
     }],
     mods: { scenarios },
@@ -146,7 +140,7 @@ export default function lessonLayout() {
     name: 'diameter',
     method: 'line',
     options: {
-      length: wheelSize * 2 - circleLineWidth * 2.7,
+      length: wheelSize * 1.97,
       vertexSpaceStart: 'center',
       width: 0.015,
       color: colors.dimension,
@@ -231,6 +225,7 @@ export default function lessonLayout() {
       transform: new Transform('Properties').translate(0, 0),
     },
     addElements: [
+      layout.darkCircle,
       layout.circumference,
       layout.textC,
       layout.diameter,
@@ -248,9 +243,6 @@ export default function lessonLayout() {
     layout.clock,
     layout.circle,
     layout.properties,
-    // layout.circumferenceEquation,
-    // layout.diameter,
-    // layout.textC
   ];
   return layout;
 }
