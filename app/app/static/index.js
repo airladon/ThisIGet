@@ -4485,26 +4485,30 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       }
 
       if (methodPath.slice(-1)[0].startsWith('add')) {
-        method(collectionPath, nameToUse, optionsToUse);
-      } else {
-        var element;
-
-        if (Array.isArray(optionsToUse)) {
-          element = method.apply(void 0, _toConsumableArray(optionsToUse));
-        } else {
-          element = method(optionsToUse);
-        }
-
-        if (element == null) {
-          return;
-        }
+        var element = method(collectionPath, nameToUse, optionsToUse);
 
         if (elementModsToUse != null && elementModsToUse !== {}) {
           element.setProperties(elementModsToUse);
         }
+      } else {
+        var _element;
+
+        if (Array.isArray(optionsToUse)) {
+          _element = method.apply(void 0, _toConsumableArray(optionsToUse));
+        } else {
+          _element = method(optionsToUse);
+        }
+
+        if (_element == null) {
+          return;
+        }
+
+        if (elementModsToUse != null && elementModsToUse !== {}) {
+          _element.setProperties(elementModsToUse);
+        }
 
         if (collectionPath instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"]) {
-          collectionPath.add(nameToUse, element);
+          collectionPath.add(nameToUse, _element);
         }
       }
 

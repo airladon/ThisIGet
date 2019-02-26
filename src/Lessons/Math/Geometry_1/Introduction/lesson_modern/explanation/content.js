@@ -72,20 +72,6 @@ class Content extends LessonContent {
         '|Mathematics is a powerful tool.|',
         'We use it to understand and |predict| the world around us.',
       ]),
-      // transitionToNext: (done) => {
-      //   const element = document.getElementById('id_lesson__diagram_text');
-      //   element.classList.add('lesson__diagram_text_fade_out');
-      //   diag.animations.new()
-      //     .delay(0.3)
-      //     .whenFinished(done)
-      //     .start();
-      // },
-    });
-    this.addSection(common, {
-      setContent: centerVH([
-        '|Mathematics is a powerful tool.|',
-        'We use it to understand and |predict| the world around us.',
-      ]),
     });
 
     this.addSection(common, {
@@ -94,11 +80,6 @@ class Content extends LessonContent {
         'Describing something more |simply|, makes it easier to study and understand.',
         'Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
       ]),
-      // transitionFromPrev: (done) => {
-      //   const element = document.getElementById('id_lesson__diagram_text');
-      //   element.classList.add('lesson__diagram_text_fade_in');
-      //   done();
-      // },
     });
 
     this.addSection(common, {
@@ -146,8 +127,6 @@ class Content extends LessonContent {
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
-        // circ._properties.setScenario('right');
-        // circ.circumferenceAtAngle(Math.PI * 2);
       },
       show: [circ._circle],
     });
@@ -164,9 +143,10 @@ class Content extends LessonContent {
         circ._circle.setScenario('right');
         circ._properties.setScenario('right');
         circ.circumferenceAtAngle(Math.PI * 2);
-        // console.log(circ, colors)
+        circ._circumferenceEqn.showForm('base');
+        circ._circumferenceEqn.setScenario('left');
       },
-      show: [circ._circle, circ._properties],
+      show: [circ._circle, circ._properties, circ._circumferenceEqn],
     });
   }
 }

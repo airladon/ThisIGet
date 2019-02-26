@@ -159,16 +159,39 @@ export default function lessonLayout() {
     ],
     mods: { scenarios },
   };
-  // const wheel = ['', 'wheel', 'polygon', [filledCircle, {
-  //   textureLocation: textureFile,
-  //   textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
-  // }]];
+
+  layout.circumferenceEquation = {
+    name: 'circumferenceEqn',
+    method: 'addEquation',
+    options: {
+      color: layout.colors.dimension,
+      scale: 1,
+      elements: {
+        c: 'c',
+        'pi': 'π',
+        'd': 'd',
+        'equals': ' = ',
+      },
+      forms: {
+        'base': ['c', 'equals', 'pi', 'space', 'd'],
+      },
+    },
+    mods: {
+      scenarios: {
+        left: { position: new Point(-1, -0.4) },
+        lowerLeft: { position: new Point(-2, -1.5) },
+        lowerCenter: { position: new Point(0, -1.5) },
+        lowerRight: { position: new Point(2, -1.5) },
+      },
+    },
+  };
 
   layout.addElements = [
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.wheel,
     layout.circle,
     layout.properties,
+    layout.circumferenceEquation,
     // layout.diameter,
     // layout.textC
   ];
