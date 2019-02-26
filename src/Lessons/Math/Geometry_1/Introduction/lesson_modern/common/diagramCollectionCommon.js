@@ -115,21 +115,27 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseEquation() {
+    this._properties._eqn.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
   makeEqnFromProperties() {
     const prop = this._properties;
     const eqn = prop._eqn;
+    eqn.animations.cancelAll('complete');
     eqn.showForm('base');
 
     const cPosition = eqn._c.getPosition();
     const dPosition = eqn._d.getPosition();
+
     eqn.hideAll();
     eqn._c.setDiagramPositionToElement(prop._c);
     eqn._c.show();
     eqn._d.setDiagramPositionToElement(prop._d);
     eqn._d.show();
 
-    eqn.stop(true, true);
-    eqn._c.animations.new()
+    eqn.animations.new()
       .inParallel([
         eqn._c.anim.position({ target: cPosition, duration: 1.5 }),
         eqn._d.anim.position({ target: dPosition, duration: 1.5 }),

@@ -153,6 +153,9 @@ export default function lessonLayout() {
     options: {
       color: layout.colors.dimension,
       scale: 1,
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
       elements: {
         c: 'c',
         'pi': 'π',

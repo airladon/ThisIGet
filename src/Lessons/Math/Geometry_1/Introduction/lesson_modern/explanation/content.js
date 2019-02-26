@@ -169,13 +169,34 @@ class Content extends LessonContent {
         Relationships: click(circ.makeEqnFromProperties, [circ], colors.dimension),
         properties: click(circ.pulseProperties, [circ], colors.dimension),
       },
+      transitionFromPrev: (done) => {
+        circ.makeEqnFromProperties();
+        done();
+      },
       setEnterState: () => {
         circ._circle.setScenario('right');
         circ._properties.setScenario('right');
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
         circ._properties._eqn.setScenario('left');
-        console.log(circ)
+      },
+      show: [circ._circle, circ._properties],
+    });
+
+    common.setContent = [
+      'The |properties| and |relationships| can then be applied to all other objects that have the same shape, no matter their location, size or material.',
+    ];
+    this.addSection(common, {
+      modifiers: {
+        relationships: click(circ.pulseEquation, [circ], colors.dimension),
+        properties: click(circ.pulseProperties, [circ], colors.dimension),
+      },
+      setEnterState: () => {
+        circ._circle.setScenario('right');
+        circ._properties.setScenario('right');
+        circ.circumferenceAtAngle(Math.PI * 2);
+        circ._properties._eqn.showForm('base');
+        circ._properties._eqn.setScenario('left');
       },
       show: [circ._circle, circ._properties],
     });
