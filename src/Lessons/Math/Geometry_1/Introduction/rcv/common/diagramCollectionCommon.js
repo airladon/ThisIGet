@@ -18,7 +18,7 @@ const results = (() => {
   for (let i = 0; i < 100; i += 1) {
     out.push(randElements(4, ['summer', 'spring', 'autumn', 'winter']));
   }
-  console.log(out)
+  // console.log(out)
   return out;
 })();
 
@@ -198,7 +198,9 @@ function mergeData(candidateToMerge: string, data: Array<Array<string>>): Array<
   const mergedData = [];
   data.forEach((d) => {
     const newD = removeFromArray(candidateToMerge, d);
-    mergedData.push(newD);
+    if (newD.length > 0) {
+      mergedData.push(newD);
+    }
   });
   return mergedData;
 }
@@ -407,15 +409,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     //   this.rounds.slice(-1)[0].order.slice(-1)[0],
     // ].reverse();
     this.candidateOrder = this.rounds[0].order.slice().reverse();
-    console.log(this.rounds)
-    console.log(this.candidateOrder)
+    // console.log(this.rounds)
+    // console.log(this.candidateOrder)
     this.makeBars();
     this.makeCandidateNames();
     this.addStartScenarios();
     this.addEndScenarios();
     this.updateAxes();
     
-    console.log(this);
+    // console.log(this);
     // this.addBars();
   }
 }

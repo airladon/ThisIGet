@@ -12,12 +12,12 @@ import details from '../../details';
 import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-// const {
-//   // click,
-//   centerV,
-//   // highlight,
-//   // clickWord,
-// } = Fig.tools.html;
+const {
+  // click,
+  centerVH,
+  // highlight,
+  // clickWord,
+} = Fig.tools.html;
 
 const { Point } = Fig;
 const layout = lessonLayout();
@@ -53,9 +53,18 @@ class Content extends LessonContent {
       setLeaveState: () => {},
     };
 
+    this.addSection({
+      setContent: centerVH(['|Rank Choice Voting|', 'Counting Process']),
+    });
+    this.addSection({
+      setContent: centerVH([
+        `Total votes: ${rcv.rounds[0].data.length}`,
+        `Votes needed to win: ${Math.floor(rcv.rounds[0].data.length / 2) + 1}`,
+      ]),
+    });
     const axis = [rcv._zeroLine, rcv._halfLine, rcv._fullLine];
     this.addSection({
-      setContent: 'Round 1',
+      setContent: 'Count Round 1',
       setSteadyState: () => {
         rcv.rounds[0].order.forEach((name) => {
           const element = rcv[`_0total${name}`];
@@ -90,11 +99,11 @@ class Content extends LessonContent {
         thisRoundDeltaElements.push(deltaElement);
         thisRoundTotalElements.push(totalElement);
       });
-      console.log(lastRoundNameElements)
+      // console.log(lastRoundNameElements)
 
       // Move candidate to remove and show preference votes
       this.addSection(common, {
-        setContent: `Round ${roundIndex + 1}`,
+        setContent: `Count Round ${roundIndex + 1}`,
         show: [...axis, ...lastRoundTotalElements, ...lastRoundNameElements],
         setEnterState: () => {
           thisRoundDeltaElements.forEach((element) => {
@@ -143,7 +152,7 @@ class Content extends LessonContent {
 
       // Move preferences onto remaining candidates
       this.addSection(common, {
-        setContent: `Round ${roundIndex + 1}`,
+        setContent: `Count Round ${roundIndex + 1}`,
         show: [
           ...axis, ...lastRoundTotalElements,
           ...thisRoundDeltaElements, ...lastRoundNameElements,
@@ -214,7 +223,7 @@ class Content extends LessonContent {
 
       // Join remaining candidates votes and preferences into just votes
       this.addSection(common, {
-        setContent: `Round ${roundIndex + 1}`,
+        setContent: `Count Round ${roundIndex + 1}`,
         show: [
           ...axis, ...thisRoundTotalElements,
           ...lastRoundTotalElements, ...thisRoundDeltaElements,
