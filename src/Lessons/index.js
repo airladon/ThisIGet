@@ -312,10 +312,7 @@ export default function getLessonIndex() {
           path: 'rcv',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
-            'quiz',
-            'summary',
           ],
           qr: [
           ],

@@ -214,7 +214,7 @@ class Content extends LessonContent {
         circ._wheel.setScenario('moreLeft');
         circ._clock.setScenario('center');
         circ._ball.setScenario('moreRight');
-        circ._properties.setScenario('moreRight');
+        circ._properties.setScenario('moreLeft');
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
         circ._properties._eqn.setScenario('bottom');

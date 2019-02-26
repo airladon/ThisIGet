@@ -174,7 +174,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
-    this.propertiesPosition = 2;
+    this.propertiesPosition = 0;
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
   }
