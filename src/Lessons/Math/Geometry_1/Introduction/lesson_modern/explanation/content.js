@@ -215,10 +215,37 @@ class Content extends LessonContent {
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
         circ._properties._eqn.setScenario('bottom');
-        // circ.toggleProperties();
-        console.log(circ)
       },
       show: [circ._clock, circ._wheel, circ._ball, circ._properties],
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'The |relationships between properties| allows some properties to be |calculated| from others.',
+        'This is very powerful, as it is sometimes |impossible| to measure all the properties of an object.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: ['|Over 2000 years ago|, using the knowledge of |shapes| allowed people to estimate the |size of our planet| to within 15% of the size we know today.'],
+      setEnterState: () => {
+        circ._earth.setScenario('center');
+        circ._properties.setScenario('center');
+        circ.circumferenceAtAngle(Math.PI * 2);
+      },
+      show: [circ._earth],
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'The mathematics of shapes also helps us understand phenomenon we can\'t see like |sound|, |gravity|, |electricity|, |radio waves| and |magnetism|.',
+        'It is the basis for most engineering and science disciplines.',
+      ]),
+    });
+    this.addSection({
+      setContent: centerV([
+        'So studying shapes gives us |powerful tools| we can use to help us |better understand| the world we live in.',
+      ]),
     });
   }
 }
