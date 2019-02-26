@@ -13,16 +13,15 @@ const {
 } = Fig.tools.math;
 
 
-const results = (() => {
+const resultscalc = (() => {
   const out = [];
   for (let i = 0; i < 100; i += 1) {
-    out.push(randElements(4, ['summer', 'spring', 'autumn', 'winter']));
+    out.push(randElements(randInt(1, 5), ['summer', 'spring', 'autumn', 'winter']));
   }
-  // console.log(out)
   return out;
 })();
 
-const results2 = [
+const results = [
   ['summer', 'spring', 'autumn', 'winter'],
   ['spring', 'summer', 'winter', 'autumn'],
   ['winter', 'spring', 'summer', 'autumn'],
@@ -404,10 +403,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
     this.rounds = getRounds();
-    // this.candidateOrder = [
-    //   ...this.rounds.map(d => d.order[0]),
-    //   this.rounds.slice(-1)[0].order.slice(-1)[0],
-    // ].reverse();
     this.candidateOrder = this.rounds[0].order.slice().reverse();
     // console.log(this.rounds)
     // console.log(this.candidateOrder)

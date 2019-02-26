@@ -56,6 +56,7 @@ class Content extends LessonContent {
     this.addSection({
       setContent: centerVH(['|Rank Choice Voting|', 'Counting Process']),
     });
+
     this.addSection({
       setContent: centerVH([
         `Total votes: ${rcv.rounds[0].data.length}`,
