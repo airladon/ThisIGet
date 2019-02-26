@@ -275,6 +275,17 @@ class Lesson {
       if (this.comingFrom === 'next') {
         section.transitionFromNext(this.finishTransFromNextOrPrev.bind(this));
       } else if (this.comingFrom === 'prev') {
+        if (section.fadeInFromPrev) {
+          const lastSection = this.content.sections[this.currentSectionIndex - 1];
+          const thisContent = section.getContent(false);
+          const lastContent = lastSection.getContent(false);
+          if (thisContent !== lastContent) {
+            const element = document.getElementById('id_lesson__diagram_text');
+            if (element != null) {
+              element.classList.add('lesson__diagram_text_fade_in');
+            }
+          }
+        }
         section.transitionFromPrev(this.finishTransFromNextOrPrev.bind(this));
       } else {
         section.transitionFromAny(this.finishTransitionFromAny.bind(this));

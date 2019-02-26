@@ -576,10 +576,10 @@ $title_bar_space_low: 90px;
 
 .lesson__diagram_text_fade_in {
   // opacity: 1;
-  -webkit-animation: fadein 0.5s linear;
-  -moz-animation: fadein 0.5s linear;
-  animation: fadein 0.5s linear;
-  -o-animation: fadein 0.5s linear;
+  -webkit-animation: fadein 0.3s linear;
+  -moz-animation: fadein 0.3s linear;
+  animation: fadein 0.3s linear;
+  -o-animation: fadein 0.3s linear;
 }
 
 @-webkit-keyframes fadein {
@@ -594,10 +594,10 @@ $title_bar_space_low: 90px;
 
 .lesson__diagram_text_fade_out {
   opacity: 0;
-  -webkit-animation: fadeout 0.5s linear;
-  -moz-animation: fadeout 0.5s linear;
-  animation: fadeout 0.5s linear;
-  -o-animation: fadeout 0.5s linear;
+  -webkit-animation: fadeout 0.3s linear;
+  -moz-animation: fadeout 0.3s linear;
+  animation: fadeout 0.3s linear;
+  -o-animation: fadeout 0.3s linear;
 }
 
 @-webkit-keyframes fadeout {

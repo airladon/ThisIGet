@@ -171,11 +171,12 @@ class Section {
     fromGoto: boolean;
   };
 
+  fadeInFromPrev: boolean;
+
   interactiveElementsOnly: TypeInteractiveElements;
   interactiveElements: TypeInteractiveElements;
   interactiveElementsRemove: Array<TypeInteractiveElement>;
   interactiveElementList: TypeInteractiveElements;
-
   currentInteractiveItem: number;
 
   constructor(diagram: Diagram) {
@@ -186,6 +187,7 @@ class Section {
     this.showOnly = [];
     this.blank = [];
     this.infoElements = [];
+    this.fadeInFromPrev = true;
     this.blankTransition = {
       toNext: false,
       toPrev: false,
@@ -364,7 +366,7 @@ class Section {
     return null;
   }
 
-  getContent(): string {
+  getContent(modify: boolean = true): string {
     if (typeof this.modifiers === 'function') {
       this.modifiers = this.modifiers();
     }
@@ -391,7 +393,9 @@ class Section {
       htmlText = `${htmlText}${element}`;
     });
     // htmlText += '\n';
-    htmlText = applyModifiers(htmlText, this.modifiers);
+    if (modify) {
+      htmlText = applyModifiers(htmlText, this.modifiers);
+    }
     // Object.keys(this.modifiers).forEach((key) => {
     //   const mod = this.modifiers[key];
     //   htmlText = modifyText(htmlText, key, mod);
