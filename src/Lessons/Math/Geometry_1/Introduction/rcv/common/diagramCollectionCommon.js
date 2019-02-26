@@ -13,15 +13,15 @@ const {
 } = Fig.tools.math;
 
 
-const resultscalc = (() => {
+const results = (() => {
   const out = [];
-  for (let i = 0; i < 100; i += 1) {
-    out.push(randElements(randInt(1, 5), ['summer', 'spring', 'autumn', 'winter']));
+  for (let i = 0; i < 20; i += 1) {
+    out.push(randElements(randInt(3, 5), ['summer', 'spring', 'autumn', 'winter']));
   }
   return out;
 })();
 
-const results = [
+const resultsout = [
   ['summer', 'spring', 'autumn', 'winter'],
   ['spring', 'summer', 'winter', 'autumn'],
   ['winter', 'spring', 'summer', 'autumn'],
