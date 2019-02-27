@@ -144,7 +144,7 @@ class Content extends LessonContent {
         circ.circumferenceAtAngle(Math.PI * 2);
       },
       show: [circ._circle, circ._properties],
-      hide: [circ._properties._eqn],
+      hide: [circ._properties._eqn, circ._properties._darkCircle],
     });
 
     common.setContent = [
