@@ -1,15 +1,15 @@
 // @flow
 import Fig from 'figureone';
 
-import lessonLayout from '../common/layout';
+import lessonLayout from './layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonCollection from '../common/diagramCollectionCommon';
+import CircleCollection from './diagramCollectionCircle';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
-  _circles: CommonCollection;
+  _circle: CircleCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,7 +18,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('circles', new CommonCollection(diagram, this.layout));
+    this.add('circle', new CircleCollection(diagram));
     this.hasTouchableElements = true;
   }
 }

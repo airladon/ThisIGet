@@ -2,10 +2,9 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'Base Explanation.',
-  uid: 'base',
-  qr: [],
+  title: 'Legacy',
+  description: 'Deprecated.',
+  uid: 'legacy',
 };
 
 module.exports = {

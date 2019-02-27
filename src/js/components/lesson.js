@@ -73,7 +73,8 @@ export default class LessonComponent extends React.Component
 
   constructor(props: Props) {
     super(props);
-    this.firstPage = parseInt(getCookie('page'), 10) - 1;
+    this.firstPage = parseInt(getCookie('page'), 10) - 1 || 0;
+    console.log(this.firstPage)
     if (this.firstPage === -1) {
       this.firstPage = 0;
     }
