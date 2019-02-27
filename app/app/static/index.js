@@ -4006,6 +4006,11 @@ function () {
     key: "initialize",
     value: function initialize() {
       // this.setSpaceTransforms();
+      this.setFirstTransform();
+    }
+  }, {
+    key: "setFirstTransform",
+    value: function setFirstTransform() {
       this.elements.setFirstTransform(this.diagramToGLSpaceTransform);
     }
   }, {

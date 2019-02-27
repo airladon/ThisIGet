@@ -136,6 +136,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     const dPosition = eqn._d.getPosition();
 
     eqn.hideAll();
+    // need to set first diagram transform again here as
+    // setDiagramPositionToElement uses the lastDrawTransformMatrix
+    // which has not necessarily been updated for the lastest scenario change
+    this.diagram.setFirstTransform();
     eqn._c.setDiagramPositionToElement(prop._c);
     eqn._d.setDiagramPositionToElement(prop._d);
     eqn._c.show();

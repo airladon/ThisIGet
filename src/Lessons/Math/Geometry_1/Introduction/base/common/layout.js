@@ -76,41 +76,15 @@ export default function lessonLayout() {
     mods: { scenarios },
   };
 
-  layout.wheel = {
-    name: 'wheel',
-    method: 'polygon',
-    options: [filledCircle, {
-      textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333),
-    }],
-    mods: { scenarios },
-  };
-
-  layout.clock = {
-    name: 'clock',
-    method: 'polygon',
-    options: [filledCircle, {
-      textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333),
-    }],
-    mods: { scenarios },
-  };
-
-  layout.ball = {
-    name: 'ball',
-    method: 'polygon',
-    options: [filledCircle, {
-      textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333),
-    }],
-    mods: { scenarios },
-  };
-
-  layout.earth = {
-    name: 'earth',
-    method: 'polygon',
-    options: [filledCircle, {
-      textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333),
-    }],
-    mods: { scenarios },
-  };
+  const mods = { scenarios };
+  const wheelTex = { textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333) };
+  const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
+  const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
+  const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
+  layout.wheel = ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods];
+  layout.clock = ['', 'clock', 'polygon', [filledCircle, clockTex], mods];
+  layout.ball = ['', 'ball', 'polygon', [filledCircle, ballTex], mods];
+  layout.earth = ['', 'earth', 'polygon', [filledCircle, earthTex], mods];
 
   layout.textD = {
     name: 'd',
