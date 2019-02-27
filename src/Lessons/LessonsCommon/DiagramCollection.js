@@ -23,7 +23,7 @@ export type TypeAddElementObject = {
   addElements?: Array<TypeAddElementObject>
 };
 
-
+// deprecate
 function getTarget(
   element: DiagramElement,
   scenario: TypeScenario,
@@ -93,6 +93,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     this.futurePositions = [];
   }
 
+  // deprecate
   legacyGetTimeToMoveToScenario(
     element: DiagramElement,
     scenario: TypeScenario = null,
@@ -107,6 +108,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return time;
   }
 
+  // deprecate
   legacySetScenario(
     element: DiagramElement,
     scenario: TypeScenario = null,
@@ -116,6 +118,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     element.setTransform(target._dup());
   }
 
+  // deprecate
   moveToScenario(
     element: DiagramElement,
     scenario: TypeScenario = null,
@@ -242,6 +245,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     });
   }
 
+  // deprecate
   getMethod(method: string) {
     const methods = {
       polyLine: this.diagram.shapes.polyLine.bind(this.diagram.shapes),
@@ -254,6 +258,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return method;
   }
 
+  // deprecate
   addLayout(
     rootCollection: DiagramElementCollection = this,
     layout: { addElements?: TypeAddElementObject } = this.layout,
