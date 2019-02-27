@@ -306,17 +306,6 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
-        RCV: {
-          title: 'RCV',
-          description: 'Ranked Choice Voting Example.',
-          path: 'rcv',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
       },
       dependencies: [
       ],

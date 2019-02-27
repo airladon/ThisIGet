@@ -51,7 +51,7 @@ class Content extends LessonContent {
         equil._tri._angle1, equil._tri._angle2, equil._tri._angle3,
       ],
       setSteadyState: () => {
-        equil.setScenario(equil._tri, layout.equil.scenario.center);
+        equil.legacySetScenario(equil._tri, layout.equil.scenario.center);
       },
     });
   }

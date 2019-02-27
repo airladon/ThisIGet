@@ -51,7 +51,7 @@ class Content extends LessonContent {
     const mostSides = layout.polygonSides[2];
 
     common.setSteadyState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.center);
+      circ.legacySetScenario(circ, layout.collection.scenarios.center);
     };
     common.showOnly = [circ];
     this.addSection(common, {
@@ -148,7 +148,7 @@ class Content extends LessonContent {
         circ.moveToScenario(circ, layout.collection.scenarios.left, null, done);
       },
       setSteadyState: () => {
-        circ.setScenario(circ, layout.collection.scenarios.left);
+        circ.legacySetScenario(circ, layout.collection.scenarios.left);
         circ._tri0._fill.show();
         circ.eqns.triRectEqn.showForm('0');
       },
@@ -162,10 +162,10 @@ class Content extends LessonContent {
     common.setLeaveState = () => {};
     common.show = [...show, circ._tri0._fill];
     common.setEnterState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
     };
     common.setSteadyState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
     };
     common.setContent = `The |area| of |all triangles| is then |${leastSides} | times the area of |one triangle|.`;
     this.addEqnStep(circ.eqns.triRectEqn, '0', '0', common);
@@ -187,7 +187,7 @@ class Content extends LessonContent {
     ];
     common.setContent = `Similarly, the outside |border| of |all triangles| is |${leastSides}| |base| lengths.`;
     common.setSteadyState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
       circ.eqns.borderEqn.showForm('0', '0');
     };
     this.addEqnStep(circ.eqns.triRectEqn, ['1', '0'], ['1', '0'], common);
@@ -228,7 +228,7 @@ class Content extends LessonContent {
       'Touch |border| in the equation to highlight the triangle base.',
     ];
     common.setSteadyState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
     };
     show = [
       circ._backgroundCircle, circ._lines0, circ._poly0,
@@ -272,7 +272,7 @@ class Content extends LessonContent {
     common.setContent = `Examine |${leastSides}_|, |${midSides}_| and |${mostSides}_| triangles to see how the approximations change.`;
     common.show = [...show, circ._fill0, circ._border0];
     common.setEnterState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
       // circ._selector.selector.select(leastSides.toString());
       circ.rotateArea(leastSides, 0);
     };
@@ -291,7 +291,7 @@ class Content extends LessonContent {
     ];
     common.show = [...show];
     common.setEnterState = () => {
-      circ.setScenario(circ, layout.collection.scenarios.left);
+      circ.legacySetScenario(circ, layout.collection.scenarios.left);
       // circ._selector.selector.select(mostSides.toString());
       circ.rotateArea(leastSides, 0);
     };
@@ -359,8 +359,8 @@ class Content extends LessonContent {
       },
       setSteadyState: () => {
         circ.eqns.triRectEqn.showForm('14');
-        circ.setScenario(circ, layout.collection.scenarios.left);
-        circ.setScenario(circ._radius, { rotation: 0 });
+        circ.legacySetScenario(circ, layout.collection.scenarios.left);
+        circ.legacySetScenario(circ._radius, { rotation: 0 });
       },
       setLeaveState: () => {
         circ._radius.transform.updateRotation(layout.circle.radiusLine.angle);

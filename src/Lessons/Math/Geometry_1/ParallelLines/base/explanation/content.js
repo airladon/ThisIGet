@@ -72,8 +72,8 @@ class Content extends LessonContent {
       ],
       transitionFromAny: (done) => {
         let time = Math.max(
-          diag.getTimeToMoveToScenario(parallel._line1),
-          diag.getTimeToMoveToScenario(parallel._line2),
+          diag.legacyGetTimeToMoveToScenario(parallel._line1),
+          diag.legacyGetTimeToMoveToScenario(parallel._line2),
         );
         time = time > 2 ? 2 : time;
         diag.moveToScenario(parallel._line1, '', time);

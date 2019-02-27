@@ -57,9 +57,9 @@ class Content extends LessonContent {
         examples,
       ],
       setSteadyState: () => {
-        examples.setScenario(examples._tri1, layout.examples.tri1.position);
-        examples.setScenario(examples._tri2, layout.examples.tri2.position);
-        examples.setScenario(examples._tri3, layout.examples.tri3.position);
+        examples.legacySetScenario(examples._tri1, layout.examples.tri1.position);
+        examples.legacySetScenario(examples._tri2, layout.examples.tri2.position);
+        examples.legacySetScenario(examples._tri3, layout.examples.tri3.position);
       },
     });
 

@@ -87,7 +87,7 @@ export default class SASCollection extends CommonDiagramCollection {
         const {
           angle, scenario, side1, side2,
         } = this.layout.corner[scenarioName][`c${index + 1}`];
-        this.setScenario(c, scenario);
+        this.legacySetScenario(c, scenario);
         this.updateCorner(c, angle, side1, side2);
         points.push(scenario.position);
       }

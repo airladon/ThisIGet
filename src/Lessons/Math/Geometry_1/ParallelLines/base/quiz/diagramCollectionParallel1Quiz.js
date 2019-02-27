@@ -140,8 +140,8 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
 
   setFuturePositions() {
     const fp = this.futurePositions;
-    this.setScenario(this._line1, fp.line1);
-    this.setScenario(this._line2, fp.line2);
+    this.legacySetScenario(this._line1, fp.line1);
+    this.legacySetScenario(this._line2, fp.line2);
   }
 
   moveToFuturePositions(time: number, done: () => void = () => {}) {

@@ -60,7 +60,7 @@ class Content extends LessonContent {
         tri.moveToScenario(tri._tri2, layout.tri3Scenario, 1, done, 0);
       },
       setSteadyState: () => {
-        tri.setScenario(tri._tri2, layout.tri3Scenario);
+        tri.legacySetScenario(tri._tri2, layout.tri3Scenario);
         tri._sideTri3Base.showAll();
         tri._sideTri3Height.showAll();
         tri.eqns.tri3AreaEqn.showForm('10');

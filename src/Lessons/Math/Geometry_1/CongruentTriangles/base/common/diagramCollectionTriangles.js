@@ -55,7 +55,7 @@ export default class TriangleCollection extends CommonDiagramCollection {
   ) {
     // console.log(element, points, scenario)
     element.updatePoints(...points);
-    this.setScenario(element, scenario);
+    this.legacySetScenario(element, scenario);
     this.diagram.animateNextFrame();
   }
 

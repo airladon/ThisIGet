@@ -97,7 +97,7 @@ class Content extends LessonContent {
 
     common = {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
       },
     };
     this.addSection(common, {
@@ -120,7 +120,7 @@ class Content extends LessonContent {
       showOnly: [iso, iTri, iTri._line],
       show: [iTri._side12, iTri._side23, iTri._side31],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
       },
     });
 
@@ -134,7 +134,7 @@ class Content extends LessonContent {
       showOnly: [iso, iTri, iTri._line],
       show: [iTri._side12, iTri._side23, iTri._side31],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
       },
     };
     this.addSection(common);
@@ -146,7 +146,7 @@ class Content extends LessonContent {
     this.addSection(common, {
       show: [iTri._side12, iTri._side23, iTri._side31, iso._split],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
         iso.growSplit();
       },
     });
@@ -159,9 +159,9 @@ class Content extends LessonContent {
       ],
       show: [iTri._side12, iTri._side23, iTri._side31, iso._split],
       setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.center);
-        iso.setScenario(right, layout.iso.right.scenario.center);
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(left, layout.iso.left.scenario.center);
+        iso.legacySetScenario(right, layout.iso.right.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
       },
     };
     this.addSection(common);
@@ -184,8 +184,8 @@ class Content extends LessonContent {
         iso.moveToScenario(right, layout.iso.right.scenario.right, 1);
       },
       setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
+        iso.legacySetScenario(left, layout.iso.left.scenario.left);
+        iso.legacySetScenario(right, layout.iso.right.scenario.right);
         right._side12.showAll();
         left._side12.showAll();
         right._side31.showAll();
@@ -208,8 +208,8 @@ class Content extends LessonContent {
         right._side12, right._side23, right._side31,
       ],
       setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
+        iso.legacySetScenario(left, layout.iso.left.scenario.left);
+        iso.legacySetScenario(right, layout.iso.right.scenario.right);
       },
     };
     this.addSection(common);
@@ -230,8 +230,8 @@ class Content extends LessonContent {
         done();
       },
       setSteadState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
+        iso.legacySetScenario(left, layout.iso.left.scenario.left);
+        iso.legacySetScenario(right, layout.iso.right.scenario.right);
       },
     });
 
@@ -245,8 +245,8 @@ class Content extends LessonContent {
       showOnly: [iso],
       show: [left, right],
       setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
+        iso.legacySetScenario(left, layout.iso.left.scenario.left);
+        iso.legacySetScenario(right, layout.iso.right.scenario.right);
       },
     };
     this.addSection(common);
@@ -267,8 +267,8 @@ class Content extends LessonContent {
         iso.moveToScenario(right, layout.iso.right.scenario.center, 1);
       },
       setSteadyState: () => {
-        iso.setScenario(iso._left, layout.iso.left.scenario.center);
-        iso.setScenario(iso._right, layout.iso.right.scenario.center);
+        iso.legacySetScenario(iso._left, layout.iso.left.scenario.center);
+        iso.legacySetScenario(iso._right, layout.iso.right.scenario.center);
         iTri.show();
         iTri._line.show();
         iso._left._line.hide();
@@ -282,9 +282,9 @@ class Content extends LessonContent {
       iTri._side12, iTri._side23, iTri._side31,
     ];
     common.setSteadyState = () => {
-      iso.setScenario(left, layout.iso.left.scenario.center);
-      iso.setScenario(right, layout.iso.right.scenario.center);
-      iso.setScenario(iTri, layout.iso.scenario.center);
+      iso.legacySetScenario(left, layout.iso.left.scenario.center);
+      iso.legacySetScenario(right, layout.iso.right.scenario.center);
+      iso.legacySetScenario(iTri, layout.iso.scenario.center);
     };
     this.addSection(common);
     this.addSection(common, {
@@ -301,9 +301,9 @@ class Content extends LessonContent {
       iTri._side12, iTri._side23, iTri._side31,
     ];
     common.setSteadyState = () => {
-      iso.setScenario(left, layout.iso.left.scenario.center);
-      iso.setScenario(right, layout.iso.right.scenario.center);
-      iso.setScenario(iTri, layout.iso.scenario.center);
+      iso.legacySetScenario(left, layout.iso.left.scenario.center);
+      iso.legacySetScenario(right, layout.iso.right.scenario.center);
+      iso.legacySetScenario(iTri, layout.iso.scenario.center);
     };
 
     common = {
@@ -325,7 +325,7 @@ class Content extends LessonContent {
       showOnly: [iso, iTri, iTri._line],
       show: [iTri._angle1, iTri._angle2],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
+        iso.legacySetScenario(iTri, layout.iso.scenario.center);
       },
     };
     this.addSection(common, {
@@ -459,7 +459,7 @@ class Content extends LessonContent {
     });
 
     common.setSteadyState = () => {
-      iso.setScenario(iTri, layout.iso.scenario.bottom);
+      iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
     };
     this.addSection(common, {
       title: 'Angle Relationships',
@@ -500,7 +500,7 @@ class Content extends LessonContent {
         iTri._side23, iTri._side31,
       ],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
       },
     };
     this.addSection(common, {
@@ -508,7 +508,7 @@ class Content extends LessonContent {
     });
     this.addSection(common, {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
         iso.pulseAngle3();
         iso._eqnANav.showForm('0');
         iso._eqnAEqn.isTouchable = false;
@@ -517,14 +517,14 @@ class Content extends LessonContent {
     common.setContent = 'We can now |rearrange| for either |a| or |b|. We will start by rearranging for |b|.';
     this.addSection(common, {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
         iso._eqnANav.showForm('0');
         iso._eqnAEqn.isTouchable = true;
       },
     });
     this.addSection(common, {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
         iso._eqnANav.showForm('5');
       },
     });
@@ -542,18 +542,18 @@ class Content extends LessonContent {
         iTri._side23, iTri._side31,
       ],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
       },
     };
     this.addSection(common, {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
         iso._eqnBNav.showForm('0');
       },
     });
     this.addSection(common, {
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
+        iso.legacySetScenario(iTri, layout.iso.scenario.bottom);
         iso._eqnBNav.showForm('9');
       },
     });

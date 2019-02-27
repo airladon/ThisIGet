@@ -132,7 +132,7 @@ export default class AAACollection extends CommonDiagramCollection {
     const points = [];
     [this._corner1, this._corner2, this._corner3].forEach((c, index) => {
       const { angle, scenario, limitLine } = this.layout.corner[scenarioName][`c${index + 1}`];
-      this.setScenario(c, scenario);
+      this.legacySetScenario(c, scenario);
       this.updateCornerAngle(c, angle);
       points.push(scenario.position);
       // eslint-disable-next-line no-param-reassign

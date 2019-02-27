@@ -72,12 +72,12 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     ?(() => void),
     ?(-1 | 1 | 0 | 2)) => number;
 
-  getTimeToMoveToScenario: (
+  legacyGetTimeToMoveToScenario: (
     DiagramElement,
     ?TypeScenario,
     ?(-1 | 1 | 0 | 2)) => number;
 
-  setScenario: (DiagramElement, ?TypeScenario) => void;
+  legacySetScenario: (DiagramElement, ?TypeScenario) => void;
   futurePositions: Array<TypeFuturePosition>;
   +calculateFuturePositions: (?TypeScenario) => void;
 
@@ -93,7 +93,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     this.futurePositions = [];
   }
 
-  getTimeToMoveToScenario(
+  legacyGetTimeToMoveToScenario(
     element: DiagramElement,
     scenario: TypeScenario = null,
     rotDirection: -1 | 1 | 0 | 2 = 0,
@@ -107,7 +107,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     return time;
   }
 
-  setScenario(
+  legacySetScenario(
     element: DiagramElement,
     scenario: TypeScenario = null,
   ) {
@@ -126,7 +126,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     element.stop();
     const target = getTarget(element, scenario, this.layout);
     let time = 1;
-    const estimatedTime = this.getTimeToMoveToScenario(element, scenario, rotDirection);
+    const estimatedTime = this.legacyGetTimeToMoveToScenario(element, scenario, rotDirection);
     if (animationTimeOrVelocity == null) {
       time = estimatedTime;
     } else {
@@ -190,7 +190,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
   setFuturePositions() {
     this.futurePositions.forEach((futurePosition) => {
       const { element, scenario } = futurePosition;
-      this.setScenario(element, scenario);
+      this.legacySetScenario(element, scenario);
     });
   }
 
@@ -206,7 +206,7 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     ) {
       this.futurePositions.forEach((futurePosition) => {
         const { element, scenario } = futurePosition;
-        const thisTime = this.getTimeToMoveToScenario(element, scenario, rotDirection);
+        const thisTime = this.legacyGetTimeToMoveToScenario(element, scenario, rotDirection);
         maxTime = Math.max(maxTime, thisTime);
       });
     } else {

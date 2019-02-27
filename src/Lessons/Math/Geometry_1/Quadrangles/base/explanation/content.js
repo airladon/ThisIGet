@@ -212,7 +212,7 @@ class Content extends LessonContent {
         rect.moveToScenario(rect._rect, layout.rect.scenarios.start, 1, done);
       },
       setSteadyState: () => {
-        rect.setScenario(rect._rect, layout.rect.scenarios.start);
+        rect.legacySetScenario(rect._rect, layout.rect.scenarios.start);
       },
       setLeaveState: () => {
         rect.resetColors();
@@ -229,7 +229,7 @@ class Content extends LessonContent {
       setEnterState: () => {
         rect.resetColors();
         if (this.comingFrom === 'prev') {
-          rect.setScenario(rect._rect, layout.rect.scenarios.start);
+          rect.legacySetScenario(rect._rect, layout.rect.scenarios.start);
         }
       },
     });
@@ -430,7 +430,7 @@ class Content extends LessonContent {
     ];
     common.setSteadyState = () => {
       rect._rect._angleB.showForm('0');
-      rect.setScenario(rect._rect, layout.rect.scenarios.start);
+      rect.legacySetScenario(rect._rect, layout.rect.scenarios.start);
     };
     this.addSection(common);
 
@@ -475,7 +475,7 @@ class Content extends LessonContent {
         // rect._navAB.showAll();
         rect._rect._angleB.showForm('0');
         rect._navAB.showForm('0');
-        rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+        rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
         // rect._navAB.updateButtons();
       },
     });
@@ -492,7 +492,7 @@ class Content extends LessonContent {
         // rect._navAB.showAll();
         rect._rect._angleB.showForm('1');
         rect._navAB.showForm('6');
-        rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+        rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
         // rect._navAB.updateButtons();
         rect.pulseAngleB();
       },
@@ -505,7 +505,7 @@ class Content extends LessonContent {
     </p>`;
     common.setSteadyState = () => {
       rect._rect._angleB.showForm('1');
-      rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+      rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
     };
     this.addSection(common);
 
@@ -535,7 +535,7 @@ class Content extends LessonContent {
       rect._rect._angleB.showForm('1');
       rect._rect._angleC.showForm('0');
       rect._rect._angleD.showForm('0');
-      rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+      rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
     };
     this.addSection(common);
 
@@ -608,7 +608,7 @@ class Content extends LessonContent {
       rect._rect._angleB.showForm('1');
       rect._rect._angleC.showForm('0');
       rect._rect._angleD.showForm('1');
-      rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+      rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
     };
     this.addSection(common);
 
@@ -639,7 +639,7 @@ class Content extends LessonContent {
         rect._rect._angleB.showForm('1');
         rect._rect._angleC.showForm('0');
         rect._rect._angleD.showForm('1');
-        rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+        rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
         rect._navBC.showForm('0');
         // rect._navBC.showAll();
         // rect.bcEqn.showForm('0');
@@ -660,7 +660,7 @@ class Content extends LessonContent {
         rect._rect._angleB.showForm('1');
         rect._rect._angleC.showForm('1');
         rect._rect._angleD.showForm('1');
-        rect.setScenario(rect._rect, layout.rect.scenarios.analysis);
+        rect.legacySetScenario(rect._rect, layout.rect.scenarios.analysis);
         rect._navBC.showForm('0');
         // rect._navBC.showAll();
         // rect.bcEqn.showForm('11');
@@ -678,7 +678,7 @@ class Content extends LessonContent {
       rect._rect._angleB.showForm('1');
       rect._rect._angleC.showForm('1');
       rect._rect._angleD.showForm('1');
-      rect.setScenario(rect._rect, layout.rect.scenarios.start);
+      rect.legacySetScenario(rect._rect, layout.rect.scenarios.start);
     };
     common.transitionFromAny = (done) => {
       rect.moveToScenario(rect._rect, layout.rect.scenarios.start, 1, done);
@@ -830,7 +830,7 @@ class Content extends LessonContent {
       ],
       hide: [],
       setSteadyState: () => {
-        rect.setScenario(square._square, layout.square.scenarios.start);
+        rect.legacySetScenario(square._square, layout.square.scenarios.start);
       },
       setLeaveState: () => {
         rect.resetColors();

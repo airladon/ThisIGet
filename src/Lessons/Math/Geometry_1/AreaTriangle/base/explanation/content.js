@@ -55,7 +55,7 @@ class Content extends LessonContent {
     // common.show = [tri];
     common.showOnly = [tri];
     common.setEnterState = () => {
-      tri.setScenario(tri._tri2, layout.tri2Scenario);
+      tri.legacySetScenario(tri._tri2, layout.tri2Scenario);
     };
     this.addSection(common, {
       title: 'Introduction',
@@ -263,7 +263,7 @@ class Content extends LessonContent {
         tri.moveToScenario(tri._tri2, layout.tri3Scenario, 1, done, 0);
       },
       setSteadyState: () => {
-        tri.setScenario(tri._tri2, layout.tri3Scenario);
+        tri.legacySetScenario(tri._tri2, layout.tri3Scenario);
       },
     });
 

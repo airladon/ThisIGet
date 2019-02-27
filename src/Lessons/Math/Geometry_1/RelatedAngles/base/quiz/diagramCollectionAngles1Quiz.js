@@ -150,7 +150,7 @@ export default class QuizAngle1Collection extends CommonQuizMixin(CommonDiagramC
   }
 
   setFuturePositions() {
-    const set = this.diagram.elements.setScenario.bind(this);
+    const set = this.diagram.elements.legacySetScenario.bind(this);
     const fp = this.futurePositions;
     set(this._lines._line1, fp.line1);
     set(this._lines._line2, fp.line2);

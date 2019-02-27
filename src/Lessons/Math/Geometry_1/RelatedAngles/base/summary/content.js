@@ -90,8 +90,8 @@ class Content extends LessonContent {
       ],
       transitionFromAny: (done) => {
         let time = Math.max(
-          diag.getTimeToMoveToScenario(opp._line1, 'opposite'),
-          diag.getTimeToMoveToScenario(opp._line2, 'opposite'),
+          diag.legacyGetTimeToMoveToScenario(opp._line1, 'opposite'),
+          diag.legacyGetTimeToMoveToScenario(opp._line2, 'opposite'),
         );
         time = time > 2 ? 2 : time;
         diag.moveToScenario(opp._line1, 'opposite', time);
@@ -168,9 +168,9 @@ class Content extends LessonContent {
       ],
       transitionFromAny: (done) => {
         let time = Math.max(
-          diag.getTimeToMoveToScenario(threeLines._line1, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line2, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line3, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line1, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line2, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line3, 'corresponding'),
         );
         time = time > 2 ? 2 : time;
         diag.moveToScenario(threeLines._line1, 'corresponding', time);
@@ -247,9 +247,9 @@ class Content extends LessonContent {
       ],
       transitionFromAny: (done) => {
         let time = Math.max(
-          diag.getTimeToMoveToScenario(threeLines._line1, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line2, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line3, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line1, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line2, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line3, 'corresponding'),
         );
         time = time > 2 ? 2 : time;
         diag.moveToScenario(threeLines._line1, 'corresponding', time);
@@ -328,10 +328,10 @@ class Content extends LessonContent {
       ],
       transitionFromAny: (done) => {
         let time = Math.max(
-          diag.getTimeToMoveToScenario(threeLines._line1, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line2, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines._line3, 'corresponding'),
-          diag.getTimeToMoveToScenario(threeLines),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line1, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line2, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines._line3, 'corresponding'),
+          diag.legacyGetTimeToMoveToScenario(threeLines),
         );
         time = time > 2 ? 2 : time;
         diag.moveToScenario(threeLines);

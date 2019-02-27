@@ -42,7 +42,7 @@ export default class QR_TODO extends PopupBoxCollection {
     collection._radius.showAll();
     collection.eqns.triRectEqn.showForm('14');
     collection.eqns.triRectEqn.getCurrentForm().arrange(1.5, 'center', 'middle');
-    collection.setScenario(collection._radius, { rotation: 0 });
+    collection.legacySetScenario(collection._radius, { rotation: 0 });
     collection.transform.updateScale(0.5, 0.5);
     collection.setPosition(this.layout.position);
     this.diagram.animateNextFrame();

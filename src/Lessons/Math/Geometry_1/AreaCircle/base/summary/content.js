@@ -45,8 +45,8 @@ class Content extends LessonContent {
       show: [circ._circle, circ._radius],
       setSteadyState: () => {
         circ.eqns.triRectEqn.showForm('14');
-        circ.setScenario(circ, layout.collection.scenarios.left);
-        circ.setScenario(circ._radius, { rotation: 0 });
+        circ.legacySetScenario(circ, layout.collection.scenarios.left);
+        circ.legacySetScenario(circ._radius, { rotation: 0 });
       },
     });
   }
