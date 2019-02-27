@@ -31,7 +31,9 @@ check_status() {
   fi
 }
 
+# --entrypoint "/home/pptruser/node_modules/.bin/jest" \
 docker_run_browser_test() {
+    echo $2 $3 $4
     docker run -it --rm \
         -v $HOST_PATH/tests/browser:/home/pptruser/tests \
         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
@@ -39,9 +41,9 @@ docker_run_browser_test() {
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
-        --entrypoint "/home/pptruser/node_modules/.bin/jest" \
+        --entrypoint "npm" \
         airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
-        $2
+        "run" "jest" "--" $2 $3 $4
 }
 
 title() {
@@ -62,5 +64,5 @@ then
 fi
 
 title "Running tests on $TIG_ADDRESS"
-docker_run_browser_test "$TIG_ADDRESS"
+docker_run_browser_test "$TIG_ADDRESS" $2 $3 $4
 
