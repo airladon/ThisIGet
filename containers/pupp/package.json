@@ -7,7 +7,8 @@
     "test": "tests"
   },
   "scripts": {
-    "jest": "jest"
+    "jest": "jest",
+    "update": "jest -u"
   },
   "repository": {
     "type": "git",

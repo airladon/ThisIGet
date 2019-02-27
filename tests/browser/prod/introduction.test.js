@@ -211,7 +211,7 @@ describe('Introduction Base Lesson', () => {
     //     resolve();
     //   });
     // });
-    await sleep(3000);
+    await sleep(4000);
 
     const image = await page.screenshot({ path: 'page8.png' });
     expect(image).toMatchImageSnapshot();
