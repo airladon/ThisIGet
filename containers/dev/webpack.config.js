@@ -247,7 +247,7 @@ module.exports = (env) => {
       // SplitChunks docs at https://gist.github.com/sokra/1522d586b8e5c0f5072d7565c2bee693
       splitChunks: {
         chunks: 'all',
-        minSize: 30000,
+        minSize: 3000,
         cacheGroups: {
           default: {
             minChunks: 2000,
@@ -265,7 +265,7 @@ module.exports = (env) => {
           commonlessons: {
             minSize: 10,
             minChunks: 2,
-            priority: -10,
+            priority: 0,
             reuseExistingChunk: true,
             test: /Lessons\/LessonsCommon/,
             name: 'commonlessons',
