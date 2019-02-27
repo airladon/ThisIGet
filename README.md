@@ -55,7 +55,8 @@ Local environment variables are used for
 * Defining which database to connect to
 * Running flask database migrations
 * Running flask locally (though recommended to use a container to run flask normally)
-* Deployment to Heroku for test site 
+* Deployment to Heroku for test site
+* Disabling some security features
 
 #### `DATABASE_URL`
 The environment variable `DATABASE_URL` defines which database option to use.
@@ -113,6 +114,11 @@ Only needed if writing to or reading from a production database used by an app w
 
 #### `SECRET_KEY`
 Only needed if debugging a flask session from an app with a custom SECRET_KEY.
+
+#### `LOCAL_PRODUCTION`
+If there is an environment variable called `LOCAL_PRODUCTION` and its value is `DISABLE_SECURITY`, then flask Talisman will not be run.
+
+This is useful for running stage and production environments locally, where you cannot connect with a https connection.
 
 ## Docker Containers
 All lint and type checking, testing, building and deployment can be done using docker containers that can be used on any system that has docker installed. This makes development easy to start on any platform.

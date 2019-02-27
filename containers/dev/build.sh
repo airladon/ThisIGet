@@ -81,6 +81,8 @@ then
     test) APP_NAME=$HEROKU_TEST_APP_NAME;;
     beta) APP_NAME=$HEROKU_BETA_APP_NAME;;
     thisiget) APP_NAME=$HEROKU_APP_NAME;;
+    skip-tests) TESTS="skip";;
+    skip-build) BUILD="skip";;
     *) APP_NAME="$2";;
   esac
 fi
@@ -89,7 +91,11 @@ if [ "$3" ];
 then
   if [ "$3" = "skip-tests" ];
   then
-    TESTS=skip
+    TESTS="skip"
+  fi
+  if [ "$3" = "skip-build" ];
+  then
+    BUILD="skip"
   fi
 fi
 
