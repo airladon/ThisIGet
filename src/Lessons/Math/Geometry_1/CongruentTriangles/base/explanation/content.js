@@ -541,7 +541,12 @@ class Content extends LessonContent {
       left: highlight(colors.diagram.action),
       right: highlight(colors.diagram.action),
     };
-    this.addSection(common);
+    this.addSection(common, {
+      setLeaveState: () => {
+        sss._line2.setTransformCallback = null;
+        sss._line3.setTransformCallback = null;
+      },
+    });
     common.show = [...common.show, sss._circ2, sss._circ3];
     this.addSection(common);
 
