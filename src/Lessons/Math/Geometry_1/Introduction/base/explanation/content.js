@@ -36,11 +36,7 @@ class Content extends LessonContent {
       vertexShader: 'withTexture',
       fragmentShader: 'withTexture',
     }, layout);
-    this.diagram.elements = new DiagramCollection(this.diagram);
-    this.diagram.elements.setFirstTransform(this.diagram.diagramToGLSpaceTransform);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.diagram.setElementsToCollection(new DiagramCollection(this.diagram));
   }
 
   addSections() {
@@ -177,7 +173,7 @@ class Content extends LessonContent {
         circ._properties.setScenario('right');
         circ.circumferenceAtAngle(Math.PI * 2);
         circ._properties._eqn.showForm('base');
-        circ._properties._eqn.setScenario('left');        
+        circ._properties._eqn.setScenario('left');
       },
       transitionFromPrev: (done) => {
         circ.makeEqnFromProperties();

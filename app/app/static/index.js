@@ -4275,6 +4275,12 @@ function () {
       this.elements.add(name, diagramElement);
     }
   }, {
+    key: "setElementsToCollection",
+    value: function setElementsToCollection(collection) {
+      this.elements = collection;
+      this.setFirstTransform();
+    }
+  }, {
     key: "clearContext",
     value: function clearContext() {
       // const bc = this.backgroundColor;
