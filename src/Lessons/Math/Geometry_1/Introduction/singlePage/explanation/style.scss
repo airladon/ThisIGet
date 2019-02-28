@@ -17,21 +17,8 @@ body {
   color: color('grey', 'darker');
 }
 
-#wss_collection_1 {
-  width: 600px;
-  height: 300px;
-  background-color: #AFA;
-}
-
 #id_figure1 {
-  width: 900px;
-  height: 300px;
-  background-color: #FAA;
-}
-
-#wss_collection_2 {
-  float: right;
-  width: 300px;
-  height: 300px;
-  background-color: #AFA;
+  width: 100%;
+  height: 200px;
+  // background-color: color('white', 'lightest');
 }
