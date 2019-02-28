@@ -9,11 +9,13 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 
 class Content extends LessonContentSinglePage {
-  setContent() {
+  setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
+  }
 
+  setContent() {
     this.sections = [
       <div key={0}>
       <p>

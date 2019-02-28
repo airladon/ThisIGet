@@ -22,6 +22,7 @@ class LessonContentSinglePage {
     this.iconLink = '/';
     this.iconLinkGrey = '/';
     this.type = 'singlePage';
+    this.setTitle();
   }
 
   initialize() {
