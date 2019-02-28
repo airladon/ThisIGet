@@ -1,6 +1,6 @@
 // @flow
 // import Fig from 'figureone';
-import * as React from 'react';
+// import * as React from 'react';
 
 class SimpleLessonContent {
   title: string;
