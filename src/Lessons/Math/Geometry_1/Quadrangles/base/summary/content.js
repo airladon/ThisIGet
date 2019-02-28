@@ -1,7 +1,7 @@
 // @flow
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 // import {
 //   click, highlight, clickWord,
 // } from '../../../../../../js/tools/htmlGenerator';
@@ -16,7 +16,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;

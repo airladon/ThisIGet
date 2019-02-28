@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import LessonDiagram from './diagram';
 // import HTMLEquation from '../../../../js/diagram/DiagramElements/Equation/HTMLEquation';
 import imgLink from '../../tile.png';
@@ -28,7 +28,7 @@ const unit = (deg: string, rad: string, angleType: string, num: number = 1) => `
 const _piOn2 = '<sup>&pi;</sup>&frasl;<sub>2</sub>';
 // const _piOn2 = '<sup>1</sup>&frasl;<sub>2</sub>';
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;

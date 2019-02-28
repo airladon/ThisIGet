@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent, infoList,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent, infoList,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import Definition from '../../../../../LessonsCommon/tools/definition';
@@ -18,7 +18,7 @@ const {
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;

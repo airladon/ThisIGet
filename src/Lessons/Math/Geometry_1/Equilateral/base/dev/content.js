@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import { LessonContent } from '../../../../../../js/Lesson/LessonContent';
+import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from '../quickReference/layout';
 import details from '../../details';
 import imgLink from '../../tile.png';
@@ -11,7 +11,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const { click, centerH } = Fig.tools.html;
 const layout = lessonLayout();
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;

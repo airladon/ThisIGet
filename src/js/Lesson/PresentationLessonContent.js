@@ -641,7 +641,7 @@ const whichAnimationEvent = () => {
   return '';
 };
 
-class LessonContent {
+class PresentationLessonContent {
   title: string;
   sections: Array<Section>;
   diagram: Object;
@@ -1109,6 +1109,6 @@ class LessonContent {
 }
 
 export {
-  Section, LessonContent, diagramCanvas, initializeItemSelector,
+  Section, PresentationLessonContent, diagramCanvas, initializeItemSelector,
   applyModifiers, interactiveItem, infoList,
 };

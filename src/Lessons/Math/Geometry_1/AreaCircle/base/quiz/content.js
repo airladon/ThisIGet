@@ -1,8 +1,8 @@
 // @flow
 import {
-  LessonContent,
+  PresentationLessonContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 import lessonLayout from './layout';
@@ -13,7 +13,7 @@ import details from '../../details';
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;

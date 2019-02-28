@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import { LessonContent } from './LessonContent';
+import { PresentationLessonContent } from './PresentationLessonContent';
 // import Diagram from '../diagram/Diagram';
 
 const { Diagram } = Fig;
@@ -68,7 +68,7 @@ function hideInteractiveHighlightButton() {
 //  component state update, meaning the onclicks need to be set again.
 
 class PresentationLesson {
-  content: LessonContent;
+  content: PresentationLessonContent;
 
   currentSectionIndex: number;
   diagram: Diagram | null;

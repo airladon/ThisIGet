@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent, initializeItemSelector,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent, initializeItemSelector,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 // import HTMLEquation from '../../../../js/diagram/DiagramElements/Equation/HTMLEquation';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -31,7 +31,7 @@ const { colors } = layout;
 // const _piOn2 = '<sup>&pi;</sup>&frasl;<sub>2</sub>';
 // const _piOn2 = '<sup>1</sup>&frasl;<sub>2</sub>';
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     // this.title = details.details.title;
     this.title = 'Sine';

@@ -29,7 +29,7 @@ test('Lesson', () => {
 //       .mockReturnValueOnce({ angle: 2 })
 //       .mockReturnValueOnce({ angle: 3 });
 
-//     class Content extends LessonContent {
+//     class Content extends PresentationLessonContent {
 //       setTitle() {
 //         this.title = 'Lesson Title';
 //       }
