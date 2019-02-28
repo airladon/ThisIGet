@@ -22782,7 +22782,7 @@ function () {
 
         if (element.offsetWidth > element.offsetHeight) {
           var scale = element.offsetWidth / container.offsetWidth;
-          this.setScale(scale, scale * container.offsetHeight / container.offsetWidth);
+          this.setScale(scale, scale * container.offsetWidth / container.offsetHeight);
         } else {
           var _scale = element.offsetHeight / container.offsetHeight;
 
