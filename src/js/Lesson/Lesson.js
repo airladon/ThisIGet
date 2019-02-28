@@ -95,7 +95,7 @@ class Lesson {
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.goToSectionIndex = 0;
-    this.type = 'presentation'
+    this.type = 'presentation';
   }
 
   getContentHtml(): string {
