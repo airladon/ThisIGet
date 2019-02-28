@@ -306,10 +306,21 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
+        simple: {
+          title: 'Simple Text',
+          description: 'Simple Layout.',
+          path: 'simple',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
         single_page: {
           title: 'Sinlge Page',
           description: 'Single Page Explanation.',
-          path: 'simple',
+          path: 'singlePage',
           onPath: true,
           topics: [
             'explanation',

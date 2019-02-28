@@ -8,9 +8,11 @@
 
 class SimpleLesson {
   content: Object;
+  type: 'simple' | 'singlePageLesson' | 'presentationLesson';
 
   constructor(content: Object) {
     this.content = content;
+    this.type = 'simple';
   }
 
   initialize() {

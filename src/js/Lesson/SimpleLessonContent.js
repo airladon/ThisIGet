@@ -7,20 +7,20 @@ class SimpleLessonContent {
   sections: Array<Object>;
   iconLink: string;
   iconLinkGrey: string;
-  type: 'presentation' | 'simple';
   htmlId: string;
+  key: number;
 
   constructor(htmlId: string = 'lesson__content') {
     this.htmlId = htmlId;
     this.sections = [];
     this.iconLink = '/';
     this.iconLinkGrey = '/';
-    this.type = 'simple';
     this.setTitle();
+    this.key = 0;
   }
 
   initialize() {
-    this.setContent(this.htmlId);
+    this.setContent();
   }
 
   setTitle() {
@@ -28,7 +28,7 @@ class SimpleLessonContent {
   }
 
   // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  setContent(htmlId: string) {
+  setContent() {
   }
 }
 

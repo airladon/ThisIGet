@@ -17,6 +17,7 @@ import Rating from './rating';
 import { getCookie } from '../tools/misc';
 import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
+import SinglePageLessonComponent from './singlePageLesson';
 
 type Props = {
   lesson: Object;
@@ -336,6 +337,11 @@ export default class LessonComponent extends React.Component
   renderLesson() {
     if (this.lesson.type === 'presentation') {
       return <PresentationLessonComponent
+        lesson={this.lesson}
+      />;
+    }
+    if (this.lesson.type === 'singlePageLesson') {
+      return <SinglePageLessonComponent
         lesson={this.lesson}
       />;
     }

@@ -1,0 +1,25 @@
+.single_page_lesson__container {
+  padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+  background-color: color('white', 'lightest');
+  color: color('grey', 'darkest');
+}
+
+.single_page_lesson__header1 {
+  padding-top: 0.6em;
+  padding-bottom: 0.2em;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+
+.single_page_lesson__container .single_page_lesson__header1:first-child {
+  padding-top: 0;
+}
+
+.single_page_lesson__header2 {
+  padding-top: 0.6em;
+  padding-bottom: 0.2em;
+  font-size: 1.2em;
+  font-weight: 700;
+}
