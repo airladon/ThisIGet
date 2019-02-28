@@ -39,7 +39,7 @@ class Content extends SinglePageLessonContent {
     fig2.tieToHTMLElement = 'wss_collection_2';
     const eqn1 = this.diagram.equation.addEquation(
       this.diagram.elements,
-      'eqn',
+      'eqn1',
       {
         color: [0, 0, 0.4, 1],
         scale: 1,
@@ -59,6 +59,30 @@ class Content extends SinglePageLessonContent {
       },
     );
     eqn1.tieToHTMLElement = 'wss_collection_1';
+    const eqn2 = this.diagram.equation.addEquation(
+      this.diagram.elements,
+      'eqn2',
+      {
+        color: [0, 0, 0.4, 1],
+        scale: 1,
+        defaultFormAlignment: {
+          alignH: 'center',
+          alignV: 'middle',
+        },
+        elements: {
+          c: 'mmmmmmmmmmmmmm',
+          // pi: 'π',
+          // 'd': 'd',
+          // 'equals': ' = ',
+        },
+        forms: {
+          // 'base': ['c', 'equals', 'pi', 'space', 'd'],
+          nase: ['c'],
+        },
+      },
+    );
+    eqn2.tieToHTMLElement = 'wss_collection_2';
+    eqn2.tieToHTMLElementScale = '14em';
     // const eqn2 = eqn1._dup();
     // eqn2.tieToHTMLElement = 'wss_collection_2';
     this.diagram.elements.add('fig1', fig1);

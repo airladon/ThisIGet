@@ -22647,7 +22647,8 @@ function () {
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
-    this.tieToHTMLElement = null; // this.presetTransforms = {};
+    this.tieToHTMLElement = null;
+    this.tieToHTMLElementScale = ''; // this.presetTransforms = {};
   }
 
   _createClass(DiagramElement, [{
@@ -22779,14 +22780,24 @@ function () {
         var height = topLeft.y - bottomRight.y;
         var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
         this.setPosition(center);
+        var scaleString = this.tieToHTMLElementScale.trim().toLowerCase();
 
-        if (element.offsetWidth > element.offsetHeight) {
-          var scale = element.offsetWidth / container.offsetWidth;
-          this.setScale(scale, scale * container.offsetWidth / container.offsetHeight);
+        if (scaleString.endsWith('em')) {
+          var scale = parseInt(scaleString, 10);
+          var em = parseFloat(getComputedStyle(element).fontSize);
+          this.setScale(scale * em / container.offsetWidth, scale * em / container.offsetHeight);
+        } else if (scaleString.endsWith('px')) {
+          var _scale = parseInt(scaleString, 10);
+
+          this.setScale(_scale / container.offsetWidth, _scale / container.offsetHeight);
+        } else if (element.offsetWidth > element.offsetHeight) {
+          var _scale2 = element.offsetWidth / container.offsetWidth;
+
+          this.setScale(_scale2, _scale2 * container.offsetWidth / container.offsetHeight);
         } else {
-          var _scale = element.offsetHeight / container.offsetHeight;
+          var _scale3 = element.offsetHeight / container.offsetHeight;
 
-          this.setScale(_scale * container.offsetHeight / container.offsetWidth, _scale);
+          this.setScale(_scale3 * container.offsetHeight / container.offsetWidth, _scale3);
         } // this.setScale(
         //   element.offsetWidth / container.offsetWidth,
         //   element.offsetHeight / container.offsetHeight,
