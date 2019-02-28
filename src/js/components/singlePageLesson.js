@@ -39,6 +39,10 @@ export default class SinglePageLessonComponent extends React.Component
     this.lesson.initialize();
   }
 
+  componentDidMount() {
+    this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
+  }
+
   renderContent() {
     const content = this.lesson.content.sections[0];
     const output = [];
@@ -66,6 +70,19 @@ export default class SinglePageLessonComponent extends React.Component
   render() {
     return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
       {this.renderContent()}
+      <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
+        <canvas id="id_diagram__text__low" className='diagram__text'>
+        </canvas>
+        <canvas id="id_diagram__gl__low" className='diagram__gl'>
+        </canvas>
+        <div id="id_diagram__html" className='diagram__html'>
+          {/*this.renderContent(this.state.htmlText)*/}
+        </div>
+        <canvas id="id_diagram__text__high" className='diagram__text'>
+        </canvas>
+        <canvas id="id_diagram__gl__high" className='diagram__gl'>
+        </canvas>
+      </div>
     </div>;
   }
 }

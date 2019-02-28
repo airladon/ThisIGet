@@ -5,9 +5,12 @@ import SimpleLessonContent from './SimpleLessonContent';
 
 class SinglePageLessonContent extends SimpleLessonContent {
   sections: Array<Object>;
+  diagram: Object;
+  diagramHtmlId: string;
 
   constructor(htmlId: string = 'lesson__content') {
     super(htmlId);
+    this.diagramHtmlId = `${htmlId}_diagram`;
     // this.type = 'singlePageLesson';
     // this.htmlId = htmlId;
     // this.sections = [];
@@ -19,7 +22,6 @@ class SinglePageLessonContent extends SimpleLessonContent {
 
   initialize() {
     this.sections.push(this.getContent());
-    console.log(this.sections)
   }
 
   // setTitle() {

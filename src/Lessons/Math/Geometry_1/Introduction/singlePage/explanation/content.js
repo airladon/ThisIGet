@@ -1,10 +1,13 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import * as React from 'react';
 import SinglePageLessonContent from '../../../../../../js/Lesson/SinglePageLessonContent';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+// import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+
+const { Diagram } = Fig;
 
 class Content extends SinglePageLessonContent {
   setTitle() {
@@ -13,9 +16,25 @@ class Content extends SinglePageLessonContent {
     this.iconLinkGrey = imgLinkGrey;
   }
 
+  setDiagram(htmlId: string = '') {
+    console.log(htmlId)
+    this.diagram = new Diagram({
+      htmlId,
+      vertexShader: 'withTexture',
+      fragmentShader: 'withTexture',
+    });
+    this.diagram.elements.add('test', this.diagram.shapes.polygon({
+      radius: 1,
+      // fill: true,
+      color: [1, 0, 0, 1],
+    }));
+    this.diagram.animateNextFrame();
+    // this.diagram.setElementsToCollection(new DiagramCollection(this.diagram));
+  }
+
   // Array of strings, html or jsx
   // eslint-disable-next-line class-methods-use-this
-  getContent() {    
+  getContent() {
     const content = [
       '# Shapes',
       'Shapes are |amazing|',

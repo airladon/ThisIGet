@@ -2,8 +2,9 @@
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
-  background-color: color('white', 'lightest');
+  // background-color: color('white', 'lightest');
   color: color('grey', 'darkest');
+  position: relative;
 }
 
 .single_page_lesson__header1 {
@@ -22,4 +23,12 @@
   padding-bottom: 0.2em;
   font-size: 1.2em;
   font-weight: 700;
+}
+
+.single_page_lesson__diagram_container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
 }
