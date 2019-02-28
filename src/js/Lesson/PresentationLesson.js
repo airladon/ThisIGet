@@ -1,6 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { PresentationLessonContent } from './PresentationLessonContent';
+import SimpleLesson from './SimpleLesson';
 // import Diagram from '../diagram/Diagram';
 
 const { Diagram } = Fig;
@@ -67,7 +68,7 @@ function hideInteractiveHighlightButton() {
 //  Then ratings will be received asynchronously causing another react
 //  component state update, meaning the onclicks need to be set again.
 
-class PresentationLesson {
+class PresentationLesson extends SimpleLesson {
   content: PresentationLessonContent;
 
   currentSectionIndex: number;
@@ -84,7 +85,8 @@ class PresentationLesson {
   type: string;
 
   constructor(content: Object) {
-    this.content = content;
+    super(content);
+    // this.content = content;
     this.diagram = null;
     this.overlayDiagram = null;
     this.currentSectionIndex = 0;
@@ -392,7 +394,8 @@ class PresentationLesson {
 
   initialize() {
     this.closeDiagram();
-    this.content.initialize();
+    super.initialize();
+    // this.content.initialize();
     this.diagram = this.content.diagram;
     this.overlayDiagram = this.content.overlayDiagram;
     this.diagram.lesson = this;

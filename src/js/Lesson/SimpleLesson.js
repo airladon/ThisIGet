@@ -1,12 +1,13 @@
 // @flow
 // import Fig from 'figureone';
-import SimpleLessonContent from './SimpleLessonContent';
+// import SimpleLessonContent from './SimpleLessonContent';
+// import { PresentationLessonContent } from './PresentationLessonContent';
 // import Diagram from '../diagram/Diagram';
 
 // const { Diagram } = Fig;
 
 class SimpleLesson {
-  content: SimpleLessonContent;
+  content: Object;
 
   constructor(content: Object) {
     this.content = content;
