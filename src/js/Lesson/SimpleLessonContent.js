@@ -7,17 +7,15 @@ import * as React from 'react';
 
 const { applyModifiers } = Fig.tools.html;
 
-class LessonContentSinglePage {
+class SimpleLessonContent {
   title: string;
   sections: Array<React.Element<'div'>>;
   diagramHtmlId: string;
   iconLink: string;
   iconLinkGrey: string;
   type: string;
-  // animationEnd: string;
-  // questions
 
-  constructor(htmlId: string = 'lesson_container') {
+  constructor() {
     this.sections = [];
     this.iconLink = '/';
     this.iconLinkGrey = '/';
@@ -39,5 +37,5 @@ class LessonContentSinglePage {
 }
 
 export {
-  LessonContentSinglePage, applyModifiers,
+  SimpleLessonContent, applyModifiers,
 };
