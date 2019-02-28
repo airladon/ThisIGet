@@ -37,8 +37,33 @@ class Content extends SinglePageLessonContent {
       transform: new Transform().scale(1, 1).translate(0, 0),
     });
     fig2.tieToHTMLElement = 'wss_collection_2';
+    const eqn1 = this.diagram.equation.addEquation(
+      this.diagram.elements,
+      'eqn',
+      {
+        color: [0, 0, 0.4, 1],
+        scale: 1,
+        defaultFormAlignment: {
+          alignH: 'center',
+          alignV: 'middle',
+        },
+        elements: {
+          c: 'c',
+          pi: 'π',
+          'd': 'd',
+          'equals': ' = ',
+        },
+        forms: {
+          'base': ['c', 'equals', 'pi', 'space', 'd'],
+        },
+      },
+    );
+    eqn1.tieToHTMLElement = 'wss_collection_1';
+    // const eqn2 = eqn1._dup();
+    // eqn2.tieToHTMLElement = 'wss_collection_2';
     this.diagram.elements.add('fig1', fig1);
     this.diagram.elements.add('fig2', fig2);
+    // this.diagram.elements.add('eqn2', eqn2);
     // this.diagram.elements.add('test', this.diagram.shapes.polygon({
     //   radius: 1,
     //   // fill: true,

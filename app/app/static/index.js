@@ -25128,6 +25128,8 @@ function (_DiagramElement2) {
   }, {
     key: "updateHTMLElementTie",
     value: function updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, pixelSpaceToDiagramSpaceTransform, container);
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container);
