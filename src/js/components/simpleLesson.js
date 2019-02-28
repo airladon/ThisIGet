@@ -1,22 +1,21 @@
 // @flow
 
 import * as React from 'react';
-import LessonSinglePage from '../Lesson/LessonSinglePage';
+import SimpleLesson from '../Lesson/SimpleLesson';
 
 type Props = {
-  lesson: LessonSinglePage;
+  lesson: SimpleLesson;
 };
 
-export default class LessonSinglePageComponent extends React.Component
+export default class SimpleLessonComponent extends React.Component
                                     <Props> {
-  lesson: LessonSinglePage;
+  lesson: SimpleLesson;
   key: number;
 
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
     this.key = 0;
-    console.log(this.lesson)
   }
 
   componentDidMount() {

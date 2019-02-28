@@ -15,8 +15,8 @@ import LessonDescription from '../Lesson/lessonDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie } from '../tools/misc';
-import LessonMultiPageComponent from './lessonMultiPage';
-import LessonSinglePageComponent from './lessonSinglePage';
+import PresentationLessonComponent from './presentationLesson';
+import SimpleLessonComponent from './simpleLesson';
 
 type Props = {
   lesson: Object;
@@ -335,11 +335,11 @@ export default class LessonComponent extends React.Component
 
   renderLesson() {
     if (this.lesson.type === 'presentation') {
-      return <LessonMultiPageComponent
+      return <PresentationLessonComponent
         lesson={this.lesson}
       />;
     }
-    return <LessonSinglePageComponent
+    return <SimpleLessonComponent
       lesson={this.lesson}
     />;
   }

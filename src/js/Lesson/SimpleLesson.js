@@ -5,7 +5,7 @@ import { LessonContentSinglePage } from './LessonContentSinglePage';
 
 // const { Diagram } = Fig;
 
-class LessonSinglePage {
+class SimpleLesson {
   content: LessonContentSinglePage;
 
   constructor(content: Object) {
@@ -17,4 +17,4 @@ class LessonSinglePage {
   }
 }
 
-export default LessonSinglePage;
+export default SimpleLesson;

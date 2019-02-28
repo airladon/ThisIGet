@@ -23,7 +23,7 @@ type State = {
 };
 
 
-export default class LessonMultiPageComponent extends React.Component
+export default class PresentationLessonComponent extends React.Component
                                     <Props, State> {
   lesson: PresentationLesson;
   key: number;
