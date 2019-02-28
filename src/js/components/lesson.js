@@ -3,7 +3,7 @@
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import '../../css/style.scss';
-import Lesson from '../Lesson/Lesson';
+// import Lesson from '../Lesson/Lesson';
 
 // import Button from './button';
 import LessonNavigator from './lessonNavigator';
@@ -19,7 +19,7 @@ import LessonMultiPageComponent from './lessonMultiPage';
 import LessonSinglePageComponent from './lessonSinglePage';
 
 type Props = {
-  lesson: Lesson;
+  lesson: Object;
   lessonDetails: Object;
   versionDetails: Object;
   isLoggedIn: boolean;
@@ -45,7 +45,7 @@ function getLessonDescription(uid: string) {
 
 export default class LessonComponent extends React.Component
                                     <Props, State> {
-  lesson: Lesson;
+  lesson: Object;
   lessonDetails: Object;
   key: number;
   state: State;

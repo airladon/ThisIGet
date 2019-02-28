@@ -1,15 +1,15 @@
 // @flow
-import Diagram from '../../../../../js/diagram/Diagram';
-import Lesson from '../../../../../js/Lesson/Lesson';
+// import Diagram from '../../../../../js/diagram/Diagram';
+// import PrsentationLesson from '../../../../../js/Lesson/PrsentationLesson';
 
 export type LessonDiagramType = {
   layout: Object;
-  lesson: Lesson;
+  lesson: Object;
 } & Diagram;
 
 export default class CommonLessonDiagram extends Diagram {
   layout: Object;
-  lesson: Lesson;
+  lesson: Object;
 
   constructor(id: string, layout: Object) {
     const { limits } = layout;

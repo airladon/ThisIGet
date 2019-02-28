@@ -1,14 +1,14 @@
 // @flow
 
 import * as React from 'react';
-import Lesson from '../Lesson/Lesson';
+import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
 import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
 
 
 type Props = {
-  lesson: Lesson;
+  lesson: PresentationLesson;
 };
 
 type State = {
@@ -25,7 +25,7 @@ type State = {
 
 export default class LessonMultiPageComponent extends React.Component
                                     <Props, State> {
-  lesson: Lesson;
+  lesson: PresentationLesson;
   key: number;
   state: State;
   componentUpdateCallback: ?() => void;

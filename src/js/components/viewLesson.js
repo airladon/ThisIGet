@@ -3,7 +3,7 @@
 import * as React from 'react';
 import LessonComponent from './lesson';
 // import { LessonContent } from '../Lesson/LessonContent';
-import Lesson from '../Lesson/Lesson';
+// import Lesson from '../Lesson/Lesson';
 
 type Props = {
   lesson: Object,
@@ -15,7 +15,7 @@ type Props = {
 
 export default class ViewLesson extends React.Component
                                     <Props> {
-  lesson: Lesson;
+  lesson: Object;
 
   // constructor(props: Props) {
   //   super(props);

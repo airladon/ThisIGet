@@ -67,7 +67,7 @@ function hideInteractiveHighlightButton() {
 //  Then ratings will be received asynchronously causing another react
 //  component state update, meaning the onclicks need to be set again.
 
-class Lesson {
+class PresentationLesson {
   content: LessonContent;
 
   currentSectionIndex: number;
@@ -399,4 +399,4 @@ class Lesson {
   }
 }
 
-export default Lesson;
+export default PresentationLesson;
