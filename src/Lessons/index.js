@@ -306,6 +306,17 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
+        single_page: {
+          title: 'Sinlge Page',
+          description: 'Single Page Explanation.',
+          path: 'simple',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
       },
       dependencies: [
       ],

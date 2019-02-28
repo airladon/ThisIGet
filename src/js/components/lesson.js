@@ -4,6 +4,7 @@ import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import '../../css/style.scss';
 import Lesson from '../Lesson/Lesson';
+
 // import Button from './button';
 import LessonNavigator from './lessonNavigator';
 // import LessonTilePath from './lessonPathTile';
@@ -15,6 +16,7 @@ import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie } from '../tools/misc';
 import LessonMultiPageComponent from './lessonMultiPage';
+import LessonSinglePageComponent from './lessonSinglePage';
 
 type Props = {
   lesson: Lesson;
@@ -331,6 +333,17 @@ export default class LessonComponent extends React.Component
     return topicName.charAt(0).toUpperCase() + topicName.slice(1);
   }
 
+  renderLesson() {
+    if (this.lesson.type === 'presentation') {
+      return <LessonMultiPageComponent
+        lesson={this.lesson}
+      />;
+    }
+    return <LessonSinglePageComponent
+      lesson={this.lesson}
+    />;
+  }
+
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
@@ -351,9 +364,7 @@ export default class LessonComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
         />
       </div>
-      <LessonMultiPageComponent
-        lesson={this.lesson}
-      />
+      {this.renderLesson()}
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}

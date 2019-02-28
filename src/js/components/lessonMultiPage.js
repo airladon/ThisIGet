@@ -1,27 +1,14 @@
 // @flow
 
 import * as React from 'react';
-// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-// import '../../css/style.scss';
 import Lesson from '../Lesson/Lesson';
 import Button from './button';
-// import LessonNavigator from './lessonNavigator';
-// import LessonTilePath from './lessonPathTile';
-// import LessonTitle from './lessonTitle';
-// import getLessonIndex from '../../Lessons/index';
-// import LessonDescription from '../Lesson/lessonDescription';
 import DropDownButton from './dropDownButton';
-// import TopicButton from './topicButton';
-// import Rating from './rating';
 import { getCookie, createCookie } from '../tools/misc';
 
 
 type Props = {
   lesson: Lesson;
-  // lessonDetails: Object;
-  // versionDetails: Object;
-  // section?: number;
-  // isLoggedIn: boolean;
 };
 
 type State = {
@@ -35,29 +22,14 @@ type State = {
   }>;
 };
 
-// function getLessonDescription(uid: string) {
-//   const lessons = getLessonIndex();
-//   return lessons[uid];
-// }
-
-// function getCurrentLesson() {
-//   const currentLocation = window.location.href;
-//   return currentLocation.split('/').pop();
-// }
 
 export default class LessonMultiPageComponent extends React.Component
                                     <Props, State> {
   lesson: Lesson;
-  // lessonDetails: Object;
   key: number;
   state: State;
-  // diagrams: Object;
   componentUpdateCallback: ?() => void;
   centerLessonFlag: boolean;
-  // lessonNavigator: ?LessonNavigator;
-  // showNavigator: boolean;
-  // lessonDescription: null | LessonDescription;
-  // versionDetails: Object;
   topic: string;
   firstPage: number;
 
@@ -68,26 +40,19 @@ export default class LessonMultiPageComponent extends React.Component
       this.firstPage = 0;
     }
     this.lesson = props.lesson;
-    // this.lessonDetails = props.lessonDetails;
-    // this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
     this.state = {
       htmlText: '',
       numPages: 0,
       page: 0,
       listOfSections: [],
     };
-    // this.versionDetails = props.versionDetails;
-    // const [topic] = window.location.pathname.split('/').slice(-1);
-    // this.topic = topic;
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
     this.centerLessonFlag = false;
-    // this.showNavigator = false;
   }
 
   componentDidUpdate() {
-    // console.log('componentDidUpdate', this.componentUpdateCallback)
     if (this.componentUpdateCallback) {
       const callback = this.componentUpdateCallback;
       this.componentUpdateCallback = null;
@@ -98,12 +63,10 @@ export default class LessonMultiPageComponent extends React.Component
   }
 
   refreshText(htmlText: string, page: number, callback: ?() => void = null) {
-    // console.log('refreshText')
     this.updateGoToButtonListHighlight();
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
-      // document.cookie = `page=${page + 1}; path=/`;
       createCookie('page', `${page + 1}`, 30, window.location.pathname);
     } else if (callback) {
       callback();

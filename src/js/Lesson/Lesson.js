@@ -81,6 +81,7 @@ class Lesson {
   refresh: (string, number, ?() => void) => void;
   goToSectionIndex: number;
   firstPageShown: boolean;
+  type: string;
 
   constructor(content: Object) {
     this.content = content;
@@ -94,6 +95,7 @@ class Lesson {
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.goToSectionIndex = 0;
+    this.type = 'presentation'
   }
 
   getContentHtml(): string {
