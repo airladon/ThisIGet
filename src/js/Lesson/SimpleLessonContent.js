@@ -1,41 +1,35 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
-// const {
-//   Transform,
-// } = Fig;
-
-const { applyModifiers } = Fig.tools.html;
 
 class SimpleLessonContent {
   title: string;
-  sections: Array<React.Element<'div'>>;
-  diagramHtmlId: string;
+  sections: Array<Object>;
   iconLink: string;
   iconLinkGrey: string;
-  type: string;
+  type: 'presentation' | 'simple';
+  htmlId: string;
 
-  constructor() {
+  constructor(htmlId: string = 'lesson__content') {
+    this.htmlId = htmlId;
     this.sections = [];
     this.iconLink = '/';
     this.iconLinkGrey = '/';
-    this.type = 'singlePage';
+    this.type = 'simple';
     this.setTitle();
   }
 
   initialize() {
-    this.setContent();
+    this.setContent(this.htmlId);
   }
 
   setTitle() {
     this.title = '';
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  setContent() {
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  setContent(htmlId: string) {
   }
 }
 
-export {
-  SimpleLessonContent, applyModifiers,
-};
+export default SimpleLessonContent;

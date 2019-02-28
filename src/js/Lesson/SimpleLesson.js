@@ -1,6 +1,6 @@
 // @flow
 // import Fig from 'figureone';
-import { SimpleLessonContent } from './SimpleLessonContent';
+import SimpleLessonContent from './SimpleLessonContent';
 // import Diagram from '../diagram/Diagram';
 
 // const { Diagram } = Fig;

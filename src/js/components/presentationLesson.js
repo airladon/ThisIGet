@@ -291,7 +291,7 @@ export default class PresentationLessonComponent extends React.Component
 
   render() {
     return <div>
-      <div className="lesson__widescreen_backdrop">
+      <div className="lesson__widescreen_backdrop" id={this.lesson.content.htmlId}>
         <div id="lesson__container_name" className="lesson__container">
               {this.addPrevButton()}
               <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram">

@@ -3,6 +3,7 @@ import Fig from 'figureone';
 // import LessonDescription from './lessonDescription';
 import getLessonIndex from '../../Lessons/index';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
+import SimpleLessonContent from './SimpleLessonContent';
 // import PopupBoxCollection from '../../Lessons/LessonsCommon/DiagramCollectionPopup';
 
 const {
@@ -64,24 +65,6 @@ function infoList(listItems: Array<string>) {
   return out.join(' ');
 }
 
-// function contentParagraphs(listItems: Array<string> | string) {
-//   const out = [];
-//   if (Array.isArray(listItems)) {
-//     listItems.forEach((item) => {
-//       if (item.charAt(0) !== '<') {
-//         out.push(`<p>${item}</p>`);
-//       } else {
-//         out.push(item);
-//       }
-//     });
-//   } else if (listItems.charAt(0) !== '<') {
-//     out.push(`<p>${listItems}</p>`);
-//   } else {
-//     out.push(listItems);
-//   }
-//   return out.join(' ');
-// }
-
 function diagramCanvas(
   id: string,
   DiagramClass: Object,
@@ -98,51 +81,6 @@ function diagramCanvas(
     id,
   };
 }
-
-// class TempCollection extends DiagramElementCollection {
-//   constructor(
-//     diagram: Diagram,
-//     layout: {},
-//     transform: Transform,
-//   ) {
-//     super(transform, diagram.limits);
-//   }
-// }
-
-// class QRLoading extends PopupBoxCollection {
-//   constructor(
-//     diagram: Object,
-//     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-//     lessonName: string,
-//   ) {
-//     super(
-//       diagram,
-//       {},
-//       transform,
-//       'collection',
-//       null, //TempCollection,
-//     );
-//     this.hasTouchableElements = true;
-
-//     this.setTitle(`Loading from ${lessonName}`);
-//   }
-
-//   show() {
-//     this.setDiagramSize(2.5, 1.7);
-//     super.show();
-//     // const collection = this._collection;
-//     // collection.showAll();
-//     // collection.showAll();
-//     // collection._tri2.showAll();
-//     // collection._sideTri2Base.showAll();
-//     // collection._sideTri2Height.showAll();
-//     // collection._tri2AreaEqn.show();
-//     // collection.eqns.tri2AreaEqn.showForm('10');
-//     // collection.transform.updateScale(0.7, 0.7);
-//     // collection.setPosition(this.layout.position);
-//     this.diagram.animateNextFrame();
-//   }
-// }
 
 class Section {
   title: string;
@@ -641,7 +579,7 @@ const whichAnimationEvent = () => {
   return '';
 };
 
-class PresentationLessonContent {
+class PresentationLessonContent extends SimpleLessonContent {
   title: string;
   sections: Array<Section>;
   diagram: Object;
@@ -649,20 +587,21 @@ class PresentationLessonContent {
   diagramHtmlId: string;
   goingTo: 'next' | 'prev' | 'goto';
   comingFrom: 'next' | 'prev' | 'goto';
-  iconLink: string;
-  iconLinkGrey: string;
+  // iconLink: string;
+  // iconLinkGrey: string;
   toggleInfo: (?boolean) => void;
   animationEnd: string;
   next: () => void;
   prev: () => void;
   // questions
 
-  constructor(htmlId: string = 'lesson_diagram') {
-    this.diagramHtmlId = htmlId;
-    this.sections = [];
-    this.iconLink = '/';
-    this.iconLinkGrey = '/';
-    this.setTitle();
+  constructor(htmlId: string = 'lesson__content') {
+    super(htmlId);
+    this.diagramHtmlId = `${htmlId}_diagram`;
+    // this.sections = [];
+    // this.iconLink = '/';
+    // this.iconLinkGrey = '/';
+    // this.setTitle();
 
     this.animationEnd = whichAnimationEvent();
     if (window.quickReference == null) {

@@ -1,9 +1,7 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import {
-  SimpleLessonContent,
-} from '../../../../../../js/Lesson/SimpleLessonContent';
+import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -15,9 +13,9 @@ class Content extends SimpleLessonContent {
     this.iconLinkGrey = imgLinkGrey;
   }
 
-  setContent() {
+  setContent(htmlId: string) {
     this.sections = [
-      <div key={0}>
+      <div key={0} id={htmlId}>
       <p>
         {
           'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.'
