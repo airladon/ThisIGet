@@ -7,6 +7,10 @@ type Props = {
   lesson: SimpleLesson;
 };
 
+type State = {
+  content: Array<string | React.Element<'div'>>,
+};
+
 const { applyModifiers } = Fig.tools.html;
 
 const applyMDModifiers = (inputText: string) => {
@@ -23,7 +27,7 @@ const applyMDModifiers = (inputText: string) => {
 };
 
 export default class SinglePageLessonComponent extends React.Component
-                                    <Props> {
+                                    <Props, State> {
   lesson: SimpleLesson;
   key: number;
 
@@ -31,23 +35,32 @@ export default class SinglePageLessonComponent extends React.Component
     super(props);
     this.lesson = props.lesson;
     this.key = 10;
+    this.state = {
+      content: [],
+    };
   }
 
-  componentWillMount() {
-    // Instantiate diagram now that the canvas elements have been
-    // created.
-    this.lesson.initialize();
-  }
+  // componentWillMount() {
+  //   // Instantiate diagram now that the canvas elements have been
+  //   // created.
+  // }
 
   componentDidMount() {
-    this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
+    this.lesson.initialize();
+    // this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
+    // this.lesson.content.diagram.resize();
+    this.setState({
+      content: this.lesson.content.sections[0],
+    });
+  }
+
+  componentDidUpdate() {
     this.lesson.content.diagram.resize();
   }
 
   renderContent() {
-    const content = this.lesson.content.sections[0];
     const output = [];
-    content.forEach((element) => {
+    this.state.content.forEach((element) => {
       if (typeof element === 'string' && element.charAt(0) === '<') {
         output.push(<div key={this.key}
           dangerouslySetInnerHTML={ {

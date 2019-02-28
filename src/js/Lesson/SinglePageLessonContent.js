@@ -21,7 +21,18 @@ class SinglePageLessonContent extends SimpleLessonContent {
   }
 
   initialize() {
+    this.setDiagram(this.diagramHtmlId);
+    this.diagram.resize();
+    this.setElementContent();
     this.sections.push(this.getContent());
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setElementContent() {
+  }
+
+  // eslint-disable-next-line class-methods-use-this, no-unused-vars
+  setDiagram(diagramHtmlId: string) {
   }
 
   // setTitle() {

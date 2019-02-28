@@ -22370,6 +22370,18 @@ function () {
   // Current animation/movement state of element
   // Pulse animation state
   // Rename to animate in future
+  // Can be:
+  //  1em: diagram units will be scaled so 0.2 diagram units (default
+  //       font size) looks like 1em of the element font size in pixels
+  //  100px: diagram units will be scaled so that the max diagram limit
+  //         with be the pixel count
+  //  stretch: diagram units be stretched so diagram limits extend to
+  //           element dimensions independently in x and y
+  //  max: -1 to 1 diagram units will be scaled to max dimension of element
+  //  fit: diagram units will be scaled so that diagram limits aspect ratio
+  //       fits within the element aspect ratio
+  //  '': defaults to fit
+  // keeping aspect ratio.
   function DiagramElement() {
     var _this = this;
 
@@ -22648,7 +22660,7 @@ function () {
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
     this.tieToHTMLElement = null;
-    this.tieToHTMLElementScale = ''; // this.presetTransforms = {};
+    this.tieToHTMLElementScale = 'fit'; // this.presetTransforms = {};
   }
 
   _createClass(DiagramElement, [{
@@ -22772,37 +22784,81 @@ function () {
       }
 
       if (element != null) {
-        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](element.offsetLeft, element.offsetTop);
-        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](element.offsetWidth, element.offsetHeight));
+        var elementRect = element.getBoundingClientRect();
+        var containerRect = container.getBoundingClientRect();
+        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](elementRect.left - containerRect.left, elementRect.top - containerRect.top);
+        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](elementRect.width, elementRect.height));
         var topLeft = topLeftPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
         var bottomRight = bottomRightPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
         var width = bottomRight.x - topLeft.x;
         var height = topLeft.y - bottomRight.y;
-        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
-        this.setPosition(center);
+        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2)); // this.setDiagramPosition(new Point(
+        //   center.x + this.diagramLimits.left + this.diagramLimits.width / 2,
+        //   center.y + this.diagramLimits.bottom + this.diagramLimits.height / 2,
+        // ));
+        // this.setPosition(center);
+
+        var containerAspectRatio = container.offsetWidth / container.offsetHeight;
+        var diagramAspectRatio = this.diagramLimits.width / this.diagramLimits.height;
+        var elementAspectRatio = element.offsetWidth / element.offsetHeight;
         var scaleString = this.tieToHTMLElementScale.trim().toLowerCase();
+        var scaleX = 1;
+        var scaleY = 1;
 
         if (scaleString.endsWith('em')) {
-          var scale = parseInt(scaleString, 10);
-          var em = parseFloat(getComputedStyle(element).fontSize);
-          this.setScale(scale * em / container.offsetWidth, scale * em / container.offsetHeight);
+          var scale = parseFloat(scaleString);
+          var em = parseFloat(getComputedStyle(element).fontSize); // 0.2 is default font size in diagram units
+
+          var defaultFontScale = this.diagramLimits.width / 0.2;
+          scaleX = scale * em * defaultFontScale / container.offsetWidth;
+          scaleY = scale * em * defaultFontScale / diagramAspectRatio / container.offsetHeight;
         } else if (scaleString.endsWith('px')) {
-          var _scale = parseInt(scaleString, 10);
+          var maxPixels = parseFloat(scaleString);
 
-          this.setScale(_scale / container.offsetWidth, _scale / container.offsetHeight);
-        } else if (element.offsetWidth > element.offsetHeight) {
-          var _scale2 = element.offsetWidth / container.offsetWidth;
+          if (this.diagramLimits.width > this.diagramLimits.height) {
+            var _scale = maxPixels / container.offsetWidth;
 
-          this.setScale(_scale2, _scale2 * container.offsetWidth / container.offsetHeight);
+            scaleX = _scale;
+            scaleY = _scale * containerAspectRatio / diagramAspectRatio;
+          } else {
+            var _scale2 = maxPixels / container.offsetHeight;
+
+            scaleX = _scale2 / containerAspectRatio * diagramAspectRatio;
+            scaleY = _scale2;
+          } // this.setScale(
+          //   scale / container.offsetWidth,
+          //   scale / container.offsetHeight,
+          // );
+
+        } else if (scaleString === 'stretch') {
+          scaleX = element.offsetWidth / container.offsetWidth;
+          scaleY = element.offsetHeight / container.offsetHeight;
+        } else if (scaleString === 'max') {
+          if (element.offsetWidth > element.offsetHeight) {
+            var _scale3 = element.offsetWidth / container.offsetWidth;
+
+            scaleX = _scale3;
+            scaleY = _scale3 * containerAspectRatio / diagramAspectRatio;
+          } else {
+            var _scale4 = element.offsetHeight / container.offsetHeight;
+
+            scaleX = _scale4 / containerAspectRatio * diagramAspectRatio;
+            scaleY = _scale4;
+          }
+        } else if (elementAspectRatio < diagramAspectRatio) {
+          var _scale5 = element.offsetWidth / container.offsetWidth;
+
+          scaleX = _scale5;
+          scaleY = _scale5 * containerAspectRatio / diagramAspectRatio;
         } else {
-          var _scale3 = element.offsetHeight / container.offsetHeight;
+          var _scale6 = element.offsetHeight / container.offsetHeight;
 
-          this.setScale(_scale3 * container.offsetHeight / container.offsetWidth, _scale3);
-        } // this.setScale(
-        //   element.offsetWidth / container.offsetWidth,
-        //   element.offsetHeight / container.offsetHeight,
-        // );
+          scaleX = _scale6 / containerAspectRatio * diagramAspectRatio;
+          scaleY = _scale6;
+        }
 
+        this.setScale(scaleX, scaleY);
+        this.setPosition(center.x - scaleX * (this.diagramLimits.left + this.diagramLimits.width / 2), center.y - scaleY * (this.diagramLimits.bottom + this.diagramLimits.height / 2));
       }
     } // Calculate the next transform due to a progressing animation
 

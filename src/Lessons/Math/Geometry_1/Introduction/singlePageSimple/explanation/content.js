@@ -5,37 +5,9 @@ import SinglePageLessonContent from '../../../../../../js/Lesson/SinglePageLesso
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import lessonLayout from './layout';
-import Collection from './collection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+// import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const {
-  Transform, Diagram, Rect, DiagramElement,
-} = Fig;
-const {
-  generateUniqueId,
-} = Fig.tools.misc;
-
-const layout = lessonLayout();
-// const { colors } = layout;
-
-function makeFig(
-  id: string = `id_figure__${generateUniqueId()}`,
-  elements: DiagramElement | Array<DiagramElement>,
-  scale: string = 'fit',
-) {
-  let elementsToUse;
-  if (Array.isArray(elements)) {
-    elementsToUse = elements;
-  } else {
-    elementsToUse = [elements];
-  }
-  elementsToUse.forEach((element) => {
-    element.tieToHTMLElement = id;
-    element.tieToHTMLElementScale = scale;
-  });
-  return `<div id="${id}"></div>`;
-}
+const { Diagram, Transform, Rect } = Fig;
 
 class Content extends SinglePageLessonContent {
   setTitle() {
@@ -45,35 +17,95 @@ class Content extends SinglePageLessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new CommonLessonDiagram({
+    this.diagram = new Diagram({
       htmlId,
-      vertexShader: 'withTexture',
-      fragmentShader: 'withTexture',
-    }, layout);
-    this.diagram.elements.add(
-      'circles',
-      new Collection(
-        this.diagram,
-        layout,
-        new Transform('circles').scale(1, 1).translate(0, 0),
-      ),
+      limits: new Rect(-1, -1, 2, 2),
+    });
+    const fig1 = this.diagram.shapes.polygon({
+      radius: 1,
+      color: [1, 0, 0, 1],
+      sides: 8,
+      transform: new Transform().scale(1, 1).translate(0, 0),
+    });
+    fig1.tieToHTMLElement = 'wss_collection_1';
+    fig1.tieToHTMLElementScale = 'fit';
+    const fig2 = this.diagram.shapes.polygon({
+      radius: 1,
+      // fill: true,
+      color: [1, 0, 0, 1],
+      sides: 6,
+      transform: new Transform().scale(1, 1).translate(0, 0),
+    });
+    fig2.tieToHTMLElement = 'wss_collection_2';
+    fig2.tieToHTMLElementScale = 'max';
+    const eqn1 = this.diagram.equation.addEquation(
+      this.diagram.elements,
+      'eqn1',
+      {
+        color: [0, 0, 0.4, 1],
+        scale: 1,
+        defaultFormAlignment: {
+          alignH: 'center',
+          alignV: 'middle',
+        },
+        elements: {
+          c: 'c',
+          pi: 'π',
+          'd': 'd',
+          'equals': ' = ',
+        },
+        forms: {
+          'base': ['c', 'equals', 'pi', 'space', 'd'],
+        },
+      },
     );
+    eqn1.tieToHTMLElement = 'wss_collection_1';
+    const eqn2 = this.diagram.equation.addEquation(
+      this.diagram.elements,
+      'eqn2',
+      {
+        color: [0, 0, 0.4, 1],
+        scale: 1,
+        defaultFormAlignment: {
+          alignH: 'center',
+          alignV: 'middle',
+        },
+        elements: {
+          c: 'hello this is a test',
+          // pi: 'π',
+          // 'd': 'd',
+          // 'equals': ' = ',
+        },
+        forms: {
+          // 'base': ['c', 'equals', 'pi', 'space', 'd'],
+          nase: ['c'],
+        },
+      },
+    );
+    eqn2.tieToHTMLElement = 'wss_collection_2';
+    eqn2.tieToHTMLElementScale = '1em';
+    // const eqn2 = eqn1._dup();
+    // eqn2.tieToHTMLElement = 'wss_collection_2';
+    this.diagram.elements.add('fig1', fig1);
+    this.diagram.elements.add('fig2', fig2);
+    // this.diagram.elements.add('eqn2', eqn2);
+    // this.diagram.elements.add('test', this.diagram.shapes.polygon({
+    //   radius: 1,
+    //   // fill: true,
+    //   color: [1, 0, 0, 1],
+    //   transform: new Transform().scale(1, 1).translate(0, 0),
+    // }));
+    // this.diagram.elements._test.tieToHTMLElement = 'wss_collection_1';
+    this.diagram.animateNextFrame();
+    // this.diagram.setElementsToCollection(new DiagramCollection(this.diagram));
   }
 
   // Array of strings, html or jsx
   // eslint-disable-next-line class-methods-use-this
   getContent() {
-    const diag = this.diagram.elements;
-    console.log(diag)
-
     const content = [
       '# Shapes',
-      '|Mathematics is a powerful tool| that we use to |understand| and |predict| the world around us.',
-      'Mathematics describes an object or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
-      'The process of describing something in a more general way is |abstraction|.',
-      'A large area of mathematics is the study of |shapes|. Shapes are simple abstractions of |objects| and the |paths| they travel.',
-      'For example, a |wheel| is a physical thing. It is made of different materials, has mass, size, location and smell. However, these details are ',
-      makeFig('id_figure1', diag._circles._wheel),
+      'Shapes are |amazing|',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Shapes are |amazing|',
       'Shapes are |amazing|',

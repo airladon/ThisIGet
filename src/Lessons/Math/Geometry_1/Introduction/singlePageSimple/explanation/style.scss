@@ -1,14 +1,5 @@
 @import '../../../geometry';
 
-$colors: (
-  circle:               color('red', 'dark'),
-  dimension:            color('blue', 'dark'),
-);
-
-body {
-  @include color_vars($colors);
-}
-
 .simple_lesson__container {
   padding: 20px;
   margin-left: 20px;
@@ -21,12 +12,6 @@ body {
   width: 600px;
   height: 300px;
   background-color: #AFA;
-}
-
-#id_figure1 {
-  width: 900px;
-  height: 300px;
-  background-color: #FAA;
 }
 
 #wss_collection_2 {
