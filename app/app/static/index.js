@@ -4033,6 +4033,11 @@ function () {
       this.setSpaceTransforms();
       this.sizeHtmlText();
       this.elements.resizeHtmlObject();
+
+      if (this.elements != null) {
+        this.elements.updateHTMLElementTie(this.pixelToDiagramSpaceTransform, this.canvasLow);
+      }
+
       this.animateNextFrame();
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
@@ -22641,7 +22646,8 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this); // this.presetTransforms = {};
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
+    this.tieToHTMLElement = null; // this.presetTransforms = {};
   }
 
   _createClass(DiagramElement, [{
@@ -22752,7 +22758,42 @@ function () {
     //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
     //   return vertex.transformBy(transform.matrix());
     // }
-    // Calculate the next transform due to a progressing animation
+
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container) {
+      var element;
+
+      if (typeof this.tieToHTMLElement === 'string') {
+        element = document.getElementById(this.tieToHTMLElement);
+      } else if (this.tieToHTMLElement instanceof HTMLElement) {
+        element = this.tieToHTMLElement;
+      }
+
+      if (element != null) {
+        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](element.offsetLeft, element.offsetTop);
+        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](element.offsetWidth, element.offsetHeight));
+        var topLeft = topLeftPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
+        var bottomRight = bottomRightPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
+        var width = bottomRight.x - topLeft.x;
+        var height = topLeft.y - bottomRight.y;
+        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+        this.setPosition(center);
+
+        if (element.offsetWidth > element.offsetHeight) {
+          var scale = element.offsetWidth / container.offsetWidth;
+          this.setScale(scale, scale * container.offsetHeight / container.offsetWidth);
+        } else {
+          var _scale = element.offsetHeight / container.offsetHeight;
+
+          this.setScale(_scale * container.offsetHeight / container.offsetWidth, _scale);
+        } // this.setScale(
+        //   element.offsetWidth / container.offsetWidth,
+        //   element.offsetHeight / container.offsetHeight,
+        // );
+
+      }
+    } // Calculate the next transform due to a progressing animation
 
   }, {
     key: "calcNextAnimationTransform",
@@ -25083,6 +25124,14 @@ function (_DiagramElement2) {
       }
 
       this.diagramLimits = limits;
+    }
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container);
+      }
     } // Returns an array of touched elements.
     // In a collection, elements defined later in the collection.order
     // array are on top of earlier elements. The touched array

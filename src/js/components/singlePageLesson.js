@@ -41,6 +41,7 @@ export default class SinglePageLessonComponent extends React.Component
 
   componentDidMount() {
     this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
+    this.lesson.content.diagram.resize();
   }
 
   renderContent() {
