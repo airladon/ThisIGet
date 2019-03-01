@@ -3794,6 +3794,18 @@ function () {
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
         this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasHigh);
       }
+    }
+
+    if (optionsToUse.gestureCanvas != null) {
+      var gestureCanvas = document.getElementById(optionsToUse.gestureCanvas);
+
+      if (gestureCanvas != null) {
+        this.gestureCanvas = gestureCanvas;
+      }
+    }
+
+    if (this.gestureCanvas == null) {
+      this.gestureCanvas = this.htmlCanvas;
     } // if (this.textCanvas instanceof HTMLCanvasElement) {
     //   this.draw2D = new DrawContext2D(this.textCanvas);
     // }
@@ -25569,12 +25581,12 @@ function () {
   _createClass(Gesture, [{
     key: "addEvent",
     value: function addEvent(event, method, flag) {
-      this.diagram.htmlCanvas.addEventListener(event, method.bind(this), flag);
+      this.diagram.gestureCanvas.addEventListener(event, method.bind(this), flag);
     }
   }, {
     key: "removeEvent",
     value: function removeEvent(event, method, flag) {
-      this.diagram.htmlCanvas.removeEventListener(event, method.bind(this), flag);
+      this.diagram.gestureCanvas.removeEventListener(event, method.bind(this), flag);
     }
   }, {
     key: "startHandler",

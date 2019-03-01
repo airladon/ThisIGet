@@ -57,6 +57,7 @@ class Content extends SinglePageLessonContent {
       htmlId,
       vertexShader: 'withTexture',
       fragmentShader: 'withTexture',
+      gestureCanvas: 'lesson__content',
     }, layout);
     // this.diagram.elements.add(
     //   'circles',
