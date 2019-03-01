@@ -2,7 +2,7 @@
 
 $colors: (
   circle:               color('red', 'dark'),
-  dimension:            color('blue', 'dark'),
+  dimensions:            color('blue', 'dark'),
 );
 
 body {
@@ -20,12 +20,16 @@ body {
 #id_figure1 {
   width: 100%;
   height: 200px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   // background-color: color('white', 'lightest');
 }
 
 #id_figure2 {
   width: 100%;
   height: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   // background-color: color('white', 'lightest');
 }
 

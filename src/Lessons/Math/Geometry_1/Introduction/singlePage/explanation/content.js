@@ -51,6 +51,7 @@ class Content extends SinglePageLessonContent {
   // eslint-disable-next-line class-methods-use-this
   setContent() {
     const diag = this.diagram.elements;
+    const dim2 = diag._fig2._dimensions;
     console.log(diag)
 
     // Set figure one initial conditions
@@ -61,13 +62,18 @@ class Content extends SinglePageLessonContent {
     diag._fig1.hasTouchableElements = true;
     diag._fig1._wheel.move.type = 'rotation';
 
+    diag._fig2._dimensions._eqn.setScenario('left');
     // diag.circumferenceAtAngle(diag._fig2._dimensions._circumference, Math.PI * 2);
     // diag.growCircumference(diag._fig2._dimensions._circumference, 1);
     diag.growDimensions(diag._fig2._dimensions, 4);
+    diag.makeEqnFromProperties(diag._fig2._dimensions);
     diag.appearCircleAndMoveWheel();
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
+      _Properties: click(diag.pulseProperties, [diag, dim2], colors.dimensions),
+      _analyzed: click(diag.growDimensions, [diag, dim2, 4, null], colors.dimensions),
+      _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
     };
     this.content = [
       '# Shapes',
@@ -76,7 +82,7 @@ class Content extends SinglePageLessonContent {
       'A large area of mathematics is the study of |shapes|. Shapes are simple abstractions of |objects| and the |paths| they travel.',
       'For example, a |wheel| is a physical thing. It is made of different materials, has mass, size, location and smell. A wheel can be abstracted into a |shape| by removing a lot of these details, but keeping the outline.',
       makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2)),
-      'A shape can then be analyzed. Properties or characteristics of the shape can be determined, and relationships between the properties found.',
+      'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be determined, and |_relationships| between the properties found.',
       makeFig('id_figure2', diag._fig2, 'fit', new Rect(-2, -1.3, 4, 2.6)),
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Shapes are |amazing|',

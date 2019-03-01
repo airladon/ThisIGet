@@ -14,7 +14,7 @@ const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
   'circle',
-  'dimension',
+  'dimensions',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -68,10 +68,10 @@ export default function lessonLayout() {
     textureLocation: textureFile,
   });
 
-  // const wheel = joinObjects({}, filledCircle, wheelTex, {
-  //   transform: new Transform('circle').scale(1,1).translate(scenarios.left.position),
-  // });
 
+  // ////////////////////////////////////////////////////////////////////////
+  // Figure 1
+  // ////////////////////////////////////////////////////////////////////////
   layout.fig1 = {
     name: 'fig1',
     method: 'collection',
@@ -92,11 +92,14 @@ export default function lessonLayout() {
     ],
   };
 
+  // ////////////////////////////////////////////////////////////////////////
+  // Figure 2
+  // ////////////////////////////////////////////////////////////////////////
   const diameter = {
     length: radius * 2 - lineWidth * 2,
     width: dimensionWidth,
     vertexSpaceStart: 'center',
-    color: colors.dimension,
+    color: colors.dimensions,
     arrows: {
       width: dimensionWidth * 8,
       height: dimensionWidth * 8,
@@ -113,7 +116,7 @@ export default function lessonLayout() {
   const text = {
     vAlign: 'baseline',
     hAlign: 'left',
-    color: colors.dimension,
+    color: colors.dimensions,
   };
 
   const textD = {
@@ -144,7 +147,7 @@ export default function lessonLayout() {
           radius: layout.circumferenceRadius,
           width: layout.circumferenceLineWidth,
           sides: 300,
-          color: colors.dimension,
+          color: colors.dimensions,
           clockwise: true,
           transform: new Transform('Circle').scale(1, 1).translate(0, 0),
         },
@@ -157,13 +160,39 @@ export default function lessonLayout() {
           legWidth: 0,
           height: layout.circumferenceArrowDimension,
           legHeight: 0,
-          color: colors.dimension,
+          color: colors.dimensions,
           tip: new Point(0, 0),
         },
       },
     ],
   };
 
+  const equation = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: layout.colors.dimensions,
+      scale: 1,
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
+      elements: {
+        c: 'c',
+        'pi': 'π',
+        'd': 'd',
+        'equals': ' = ',
+      },
+      forms: {
+        'base': ['c', 'equals', 'pi', 'space', 'd'],
+      },
+    },
+    mods: {
+      scenarios: {
+        left: { position: new Point(-radius * 1.8, 0) },
+        bottom: { position: new Point(0, -radius * 1.3) },
+      },
+    },
+  };
 
   layout.fig2 = {
     name: 'fig2',
@@ -184,6 +213,7 @@ export default function lessonLayout() {
             method: 'polygon',
             options: [darkCircle, { color: [0, 0, 0, 0] }],
           },
+          equation,
           {
             name: 'diameter',
             method: 'line',
@@ -249,7 +279,7 @@ export default function lessonLayout() {
   //     vAlign: 'baseline',
   //     hAlign: 'left',
   //     position: new Point(-0.05, 0.1),
-  //     color: colors.dimension,
+  //     color: colors.dimensions,
   //   },
   // };
 
@@ -261,7 +291,7 @@ export default function lessonLayout() {
   //     vAlign: 'baseline',
   //     hAlign: 'left',
   //     position: new Point(-0.05, wheelSize * 1.2 + 0.1),
-  //     color: colors.dimension,
+  //     color: colors.dimensions,
   //   },
   // };
 
@@ -272,7 +302,7 @@ export default function lessonLayout() {
   //     length: wheelSize * 1.97,
   //     vertexSpaceStart: 'center',
   //     width: 0.015,
-  //     color: colors.dimension,
+  //     color: colors.dimensions,
   //     arrows: {
   //       width: 0.1,
   //       height: 0.1,
@@ -299,7 +329,7 @@ export default function lessonLayout() {
   //         radius: layout.circumferenceRadius,
   //         width: layout.circumferenceLineWidth,
   //         sides: 300,
-  //         color: colors.dimension,
+  //         color: colors.dimensions,
   //         clockwise: true,
   //         transform: new Transform('Circle').scale(1, 1).translate(0, 0),
   //       },
@@ -312,7 +342,7 @@ export default function lessonLayout() {
   //         legWidth: 0,
   //         height: layout.circumferenceArrowDimension,
   //         legHeight: 0,
-  //         color: colors.dimension,
+  //         color: colors.dimensions,
   //         tip: new Point(0, 0),
   //       },
   //     },
@@ -324,7 +354,7 @@ export default function lessonLayout() {
   //   name: 'eqn',
   //   method: 'addEquation',
   //   options: {
-  //     color: layout.colors.dimension,
+  //     color: layout.colors.dimensions,
   //     scale: 1,
   //     defaultFormAlignment: {
   //       alignH: 'center',

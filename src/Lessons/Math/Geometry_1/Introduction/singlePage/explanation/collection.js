@@ -23,6 +23,12 @@ type TypeDimensions = {
   _c: DiagramElementPrimative,
   _d: DiagramElementPrimative,
   _darkCircle: DiagramElementPrimative,
+  _eqn: {
+    _c: DiagramElementPrimative;
+    _d: DiagramElementPrimative;
+    _equals: DiagramElementPrimative;
+    _pi: DiagramElementPrimative;
+  } & Equation;
 } & DiagramElementCollection;
 
 // const textureFile = `/static/dist/${textureMap}`;
@@ -142,48 +148,48 @@ export default class Collection extends CommonDiagramCollection {
   //   this.diagram.animateNextFrame();
   // }
 
-  // pulseProperties() {
-  //   this._properties._c.pulseScaleNow(1, 1.7);
-  //   this._properties._d.pulseScaleNow(1, 1.7);
-  //   this.diagram.animateNextFrame();
-  // }
+  pulseProperties(dimensions: TypeDimensions) {
+    dimensions._c.pulseScaleNow(1, 1.7);
+    dimensions._d.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
 
   // pulseEquation() {
   //   this._properties._eqn.pulseScaleNow(1, 1.7);
   //   this.diagram.animateNextFrame();
   // }
 
-  // makeEqnFromProperties() {
-  //   const prop = this._properties;
-  //   const eqn = prop._eqn;
-  //   eqn.animations.cancelAll('complete');
-  //   eqn.showForm('base');
+  makeEqnFromProperties(dimensions: TypeDimensions) {
+    const prop = dimensions;
+    const eqn = prop._eqn;
+    eqn.animations.cancelAll('complete');
+    eqn.showForm('base');
 
-  //   const cPosition = eqn._c.getPosition();
-  //   const dPosition = eqn._d.getPosition();
+    const cPosition = eqn._c.getPosition();
+    const dPosition = eqn._d.getPosition();
 
-  //   eqn.hideAll();
-  //   // need to set first diagram transform again here as
-  //   // setDiagramPositionToElement uses the lastDrawTransformMatrix
-  //   // which has not necessarily been updated for the lastest scenario change
-  //   this.diagram.setFirstTransform();
-  //   eqn._c.setDiagramPositionToElement(prop._c);
-  //   eqn._d.setDiagramPositionToElement(prop._d);
-  //   eqn._c.show();
-  //   eqn._d.show();
+    eqn.hideAll();
+    // need to set first diagram transform again here as
+    // setDiagramPositionToElement uses the lastDrawTransformMatrix
+    // which has not necessarily been updated for the lastest scenario change
+    this.diagram.setFirstTransform();
+    eqn._c.setDiagramPositionToElement(prop._c);
+    eqn._d.setDiagramPositionToElement(prop._d);
+    eqn._c.show();
+    eqn._d.show();
 
-  //   eqn.animations.new()
-  //     .inParallel([
-  //       eqn._c.anim.position({ target: cPosition, duration: 1.5 }),
-  //       eqn._d.anim.position({ target: dPosition, duration: 1.5 }),
-  //     ])
-  //     .inParallel([
-  //       eqn._equals.anim.dissolveIn(1),
-  //       eqn._pi.anim.dissolveIn(1),
-  //     ])
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
+    eqn.animations.new()
+      .inParallel([
+        eqn._c.anim.position({ target: cPosition, duration: 1.5 }),
+        eqn._d.anim.position({ target: dPosition, duration: 1.5 }),
+      ])
+      .inParallel([
+        eqn._equals.anim.dissolveIn(1),
+        eqn._pi.anim.dissolveIn(1),
+      ])
+      .start();
+    this.diagram.animateNextFrame();
+  }
 
   // toggleProperties() {
   //   let goToScenario = 'moreLeft';
