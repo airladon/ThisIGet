@@ -82,7 +82,7 @@ class PresentationLesson extends SimpleLesson {
   refresh: (string, number, ?() => void) => void;
   goToSectionIndex: number;
   firstPageShown: boolean;
-  type: string;
+  // type: string;
 
   constructor(content: Object) {
     super(content);

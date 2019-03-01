@@ -49,9 +49,9 @@ export default function lessonLayout() {
     transform: new Transform('collection').scale(1,1).translate(0, 0),
   };
   const wheelTex = { textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333) };
-  const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
-  const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
-  const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
+  // const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
+  // const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
+  // const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
 
   const circle = {
     sides,

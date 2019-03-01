@@ -27,8 +27,8 @@ class Content extends SinglePageLessonContent {
       sides: 8,
       transform: new Transform().scale(1, 1).translate(0, 0),
     });
-    fig1.tieToHTMLElement = 'wss_collection_1';
-    fig1.tieToHTMLElementScale = 'fit';
+    fig1.tieToHTML.element = 'wss_collection_1';
+    fig1.tieToHTML.scale = 'fit';
     const fig2 = this.diagram.shapes.polygon({
       radius: 1,
       // fill: true,
@@ -36,8 +36,8 @@ class Content extends SinglePageLessonContent {
       sides: 6,
       transform: new Transform().scale(1, 1).translate(0, 0),
     });
-    fig2.tieToHTMLElement = 'wss_collection_2';
-    fig2.tieToHTMLElementScale = 'max';
+    fig2.tieToHTML.element = 'wss_collection_2';
+    fig2.tieToHTML.scale = 'max';
     const eqn1 = this.diagram.equation.addEquation(
       this.diagram.elements,
       'eqn1',
@@ -59,7 +59,7 @@ class Content extends SinglePageLessonContent {
         },
       },
     );
-    eqn1.tieToHTMLElement = 'wss_collection_1';
+    eqn1.tieToHTML.element = 'wss_collection_1';
     const eqn2 = this.diagram.equation.addEquation(
       this.diagram.elements,
       'eqn2',
@@ -82,8 +82,8 @@ class Content extends SinglePageLessonContent {
         },
       },
     );
-    eqn2.tieToHTMLElement = 'wss_collection_2';
-    eqn2.tieToHTMLElementScale = '1em';
+    eqn2.tieToHTML.element = 'wss_collection_2';
+    eqn2.tieToHTML.scale = '1em';
     // const eqn2 = eqn1._dup();
     // eqn2.tieToHTMLElement = 'wss_collection_2';
     this.diagram.elements.add('fig1', fig1);
@@ -102,8 +102,8 @@ class Content extends SinglePageLessonContent {
 
   // Array of strings, html or jsx
   // eslint-disable-next-line class-methods-use-this
-  getContent() {
-    const content = [
+  setContent() {
+    this.content = [
       '# Shapes',
       'Shapes are |amazing|',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
@@ -122,7 +122,6 @@ class Content extends SinglePageLessonContent {
       <div key={this.key += 1}>{'hello there'}</div>,
       '<div>how are you</div>',
     ];
-    return content;
   }
 }
 

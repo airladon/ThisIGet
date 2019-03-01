@@ -8,7 +8,7 @@
 
 class SimpleLesson {
   content: Object;
-  type: 'simple' | 'singlePageLesson' | 'presentationLesson';
+  type: 'simple' | 'singlePage' | 'presentation';
 
   constructor(content: Object) {
     this.content = content;

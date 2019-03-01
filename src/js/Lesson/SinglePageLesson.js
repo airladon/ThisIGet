@@ -12,7 +12,7 @@ class SinglePageLesson extends SimpleLesson {
 
   constructor(content: Object) {
     super(content);
-    this.type = 'singlePageLesson';
+    this.type = 'singlePage';
     this.diagram = null;
     // this.content = content;
   }

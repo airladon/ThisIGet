@@ -8,7 +8,8 @@ const {
   DiagramElementPrimative,
   DiagramElementCollection,
   DiagramObjectLine,
-  Transform, Point, Equation,
+  Transform, Equation,
+  // Point,
 } = Fig;
 // const textureFile = `/static/dist/${textureMap}`;
 export default class Collection extends CommonDiagramCollection {
@@ -37,7 +38,6 @@ export default class Collection extends CommonDiagramCollection {
   propertiesPosition: number;
 
   appearCircleAndMoveWheel() {
-    console.log('appear animation');
     this._fig1._circle.animations.cancelAll();
     this._fig1._wheel.animations.cancelAll();
 
