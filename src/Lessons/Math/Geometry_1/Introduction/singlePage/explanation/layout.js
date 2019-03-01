@@ -30,6 +30,7 @@ export default function lessonLayout() {
   const sides = 50;
   const textureFile = `/static/dist/${textureMap}`;
   const lineWidth = 0.05;
+  const dimensionWidth = 0.015;
 
   const left = new Point(-4, 0);
   const centerLeft = new Point(-1, 0);
@@ -90,6 +91,120 @@ export default function lessonLayout() {
       },
     ],
   };
+
+  const diameter = {
+    length: radius * 2 - lineWidth * 2,
+    width: dimensionWidth,
+    vertexSpaceStart: 'center',
+    color: colors.dimension,
+    arrows: {
+      width: dimensionWidth * 8,
+      height: dimensionWidth * 8,
+    },
+  };
+
+  const darkCircle = {
+    options: [filledCircle, {
+      color: [0, 0, 0, 0.7],
+      textureLocation: '',
+    }],
+  };
+
+  const text = {
+    vAlign: 'baseline',
+    hAlign: 'left',
+    color: colors.dimension,
+  };
+
+  const textD = {
+    text: 'd',
+    position: new Point(-0.05, 0.1),
+  };
+
+  const textC = {
+    text: 'c',
+    position: new Point(-0.05, radius * 1.2 + 0.1),
+  };
+
+  layout.circumferenceRadius = radius * 1.2;
+  layout.circumferenceLineWidth = dimensionWidth;
+  layout.circumferenceArrowDimension = dimensionWidth * 8;
+  const circumference = {
+    name: 'circumference',
+    method: 'collection',
+    options: {
+      transform: new Transform('Circumference').rotate(Math.PI / 2).translate(0, 0),
+    },
+    addElements: [
+      {
+        name: 'line',
+        method: 'polygon',
+        options: {
+          fill: false,
+          radius: layout.circumferenceRadius,
+          width: layout.circumferenceLineWidth,
+          sides: 300,
+          color: colors.dimension,
+          clockwise: true,
+          transform: new Transform('Circle').scale(1, 1).translate(0, 0),
+        },
+      },
+      {
+        name: 'arrow',
+        method: 'arrow',
+        options: {
+          width: layout.circumferenceArrowDimension,
+          legWidth: 0,
+          height: layout.circumferenceArrowDimension,
+          legHeight: 0,
+          color: colors.dimension,
+          tip: new Point(0, 0),
+        },
+      },
+    ],
+  };
+
+
+  layout.fig2 = {
+    name: 'fig2',
+    method: 'collection',
+    options: collection,
+    addElements: [
+      {
+        name: 'circle',
+        method: 'polygon',
+        options: [circle],
+      },
+      {
+        name: 'dimensions',
+        method: 'collection',
+        addElements: [
+          {
+            name: 'darkCircle',
+            method: 'polygon',
+            options: [darkCircle, { color: [0, 0, 0, 0] }],
+          },
+          {
+            name: 'diameter',
+            method: 'line',
+            options: [diameter],
+          },
+          {
+            name: 'd',
+            method: 'text',
+            options: [text, textD],
+          },
+          {
+            name: 'c',
+            method: 'text',
+            options: [text, textC],
+          },
+          circumference,
+        ],
+      },
+    ],
+  };
+
 
   // const fig1 = ['', 'fig1', 'collection', [collection], mods, [
   //   ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods],
@@ -252,6 +367,7 @@ export default function lessonLayout() {
   layout.addElements = [
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.fig1,
+    layout.fig2,
     // layout.wheel,
     // layout.earth,
     // layout.ball,

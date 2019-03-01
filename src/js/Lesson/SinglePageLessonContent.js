@@ -1,7 +1,15 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from './SimpleLessonContent';
+
+
+const {
+  Rect, DiagramElement,
+} = Fig;
+const {
+  generateUniqueId,
+} = Fig.tools.misc;
 
 class SinglePageLessonContent extends SimpleLessonContent {
   // $FlowFixMe
@@ -46,4 +54,29 @@ class SinglePageLessonContent extends SimpleLessonContent {
   // }
 }
 
-export default SinglePageLessonContent;
+function makeFig(
+  id: string = `id_figure__${generateUniqueId()}`,
+  elements: DiagramElement | Array<DiagramElement>,
+  scale: string = 'fit',
+  limits: Rect | null = null,
+) {
+  let elementsToUse;
+  if (Array.isArray(elements)) {
+    elementsToUse = elements;
+  } else {
+    elementsToUse = [elements];
+  }
+  elementsToUse.forEach((element) => {
+    // eslint-disable-next-line no-param-reassign
+    element.tieToHTML.element = id;
+    // eslint-disable-next-line no-param-reassign
+    element.tieToHTML.scale = scale;
+    if (limits != null) {
+      // eslint-disable-next-line no-param-reassign
+      element.tieToHTML.window = limits;
+    }
+  });
+  return `<div id="${id}"></div>`;
+}
+
+export { SinglePageLessonContent, makeFig };

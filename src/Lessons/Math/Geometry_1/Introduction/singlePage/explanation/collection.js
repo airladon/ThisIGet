@@ -9,8 +9,22 @@ const {
   DiagramElementCollection,
   DiagramObjectLine,
   Transform, Equation,
-  // Point,
+  Point,
 } = Fig;
+
+type TypeCircumference = {
+  _line: DiagramElementPrimative,
+  _arrow: DiagramElementPrimative,
+} & DiagramElementCollection;
+
+type TypeDimensions = {
+  _circumference: TypeCircumference,
+  _diameter: DiagramObjectLine,
+  _c: DiagramElementPrimative,
+  _d: DiagramElementPrimative,
+  _darkCircle: DiagramElementPrimative,
+} & DiagramElementCollection;
+
 // const textureFile = `/static/dist/${textureMap}`;
 export default class Collection extends CommonDiagramCollection {
   _fig1: {
@@ -54,64 +68,74 @@ export default class Collection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  // circumferenceAtAngle(angle: number) {
-  //   const radius = this.layout.circumferenceRadius - this.layout.circumferenceLineWidth / 2;
-  //   const height = this.layout.circumferenceArrowDimension;
-  //   const arrowHeightAngle = height / radius;
+  circumferenceAtAngle(
+    circumference: TypeCircumference,
+    angle: number,
+  ) {
+    const radius = this.layout.circumferenceRadius - this.layout.circumferenceLineWidth / 2;
+    const height = this.layout.circumferenceArrowDimension;
+    const arrowHeightAngle = height / radius;
 
-  //   if (angle < 0.05) {
-  //     this._properties._circumference._arrow.hide();
-  //     this._properties._circumference._line.angleToDraw = angle;
-  //   } else {
-  //     this._properties._circumference._arrow.show();
-  //     this._properties._circumference._line.angleToDraw = angle - arrowHeightAngle / 2;
-  //     this._properties._circumference._arrow.setPosition(new Point(
-  //       radius * Math.cos(-angle),
-  //       radius * Math.sin(-angle),
-  //     ));
+    if (angle < 0.05) {
+      circumference._arrow.hide();
+      circumference._line.angleToDraw = angle;
+    } else {
+      circumference._arrow.show();
+      circumference._line.angleToDraw = angle - arrowHeightAngle / 2;
+      circumference._arrow.setPosition(new Point(
+        radius * Math.cos(-angle),
+        radius * Math.sin(-angle),
+      ));
 
-  //     this._properties._circumference._arrow.setRotation(-angle + arrowHeightAngle + Math.PI);
-  //   }
-  // }
+      circumference._arrow.setRotation(-angle + arrowHeightAngle + Math.PI);
+    }
+  }
 
-  // growCircumference(done: ?() => void = null, time: number = 1) {
-  //   const grow = (percent: number) => {
-  //     this.circumferenceAtAngle(percent * Math.PI * 2);
-  //   };
-  //   this._properties._circumference.animations.cancelAll();
-  //   this._properties._circumference.animations.new('Circumference Growth')
-  //     .custom({ callback: grow, duration: time })
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
+  growCircumference(circumference: TypeCircumference, time: number = 1) {
+    const grow = (percent: number) => {
+      this.circumferenceAtAngle(circumference, percent * Math.PI * 2);
+    };
+    circumference.animations.cancelAll();
+    circumference.animations.new('Circumference Growth')
+      .custom({ callback: grow, duration: time })
+      .start();
+    this.diagram.animateNextFrame();
+  }
 
-  // growDiameter(done: ?() => void = null, time: number = 1) {
-  //   this._properties._diameter.showAll();
-  //   this._properties._diameter.grow(0.2, time, true, done);
-  //   this.diagram.animateNextFrame();
-  // }
+  growDiameter(diameter: DiagramObjectLine, time: number = 1) {
+    diameter.showAll();
+    diameter.grow(0.2, time, true);
+    this.diagram.animateNextFrame();
+  }
 
-  // growDimensions(done: ?() => void = null, time: number = 4) {
-  //   this._properties.animations.cancelAll('complete');
-  //   const c = this._properties._c;
-  //   const d = this._properties._d;
-  //   const darkCircle = this._properties._darkCircle;
-  //   const diameter = this._properties._diameter;
-  //   diameter.hide();
-  //   c.hide();
-  //   d.hide();
-  //   darkCircle.hide();
-  //   this._properties.animations.new()
-  //     .trigger({ callback: this.growCircumference.bind(this, null, time / 4), duration: time / 4 })
-  //     .dissolveIn({ element: c, duration: time / 4 })
-  //     .trigger(this.growDiameter.bind(this, null, time / 4))
-  //     .dissolveIn({ element: darkCircle, duration: time / 4 })
-  //     .then(d.anim.dissolveIn(time / 4))
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
+  growDimensions(
+    dimensions: TypeDimensions,
+    time: number = 4,
+    done: (cancelled: boolean) => void,
+  ) {
+    dimensions.animations.cancelAll('complete');
+    const c = dimensions._c;
+    const d = dimensions._d;
+    const darkCircle = dimensions._darkCircle;
+    const diameter = dimensions._diameter;
+    const circumference = dimensions._circumference;
+    diameter.hide();
+    c.hide();
+    d.hide();
+    darkCircle.hide();
+    dimensions.animations.new()
+      .trigger({
+        callback: this.growCircumference.bind(this, circumference, time / 4),
+        duration: time / 4,
+      })
+      .dissolveIn({ element: c, duration: time / 4 })
+      .trigger(this.growDiameter.bind(this, diameter, time / 4))
+      .dissolveIn({ element: darkCircle, duration: time / 4 })
+      .then(d.anim.dissolveIn(time / 4))
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
 
   // pulseCircle() {
   //   this._circle.pulseThickNow(1, 1.1, 5);

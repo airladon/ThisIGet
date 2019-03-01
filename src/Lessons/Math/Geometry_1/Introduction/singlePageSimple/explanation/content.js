@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SinglePageLessonContent from '../../../../../../js/Lesson/SinglePageLessonContent';
+import { SinglePageLessonContent } from '../../../../../../js/Lesson/SinglePageLessonContent';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';

@@ -21128,7 +21128,7 @@ function (_DrawingObject) {
         var texture = this.gl.createTexture();
         this.gl.bindTexture(this.gl.TEXTURE_2D, texture); // Fill the texture with a 1x1 blue pixel.
 
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
         var image = new Image();
         image.src = this.textureLocation;
         image.addEventListener('load', function () {

@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import SimpleLesson from './SimpleLesson';
-import SinglePageLessonContent from './SinglePageLessonContent';
+import { SinglePageLessonContent } from './SinglePageLessonContent';
 // import { PresentationLessonContent } from './PresentationLessonContent';
 
 const { Diagram } = Fig;
