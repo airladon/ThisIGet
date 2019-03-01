@@ -4168,14 +4168,17 @@ function () {
       var currentPixelPoint = this.clientToPixel(currentClientPoint);
       var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
       var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      var currentVertexSpacePoint = element.getDiagramPositionInVertexSpace(currentDiagramPoint);
+      var previousVertexSpacePoint = element.getDiagramPositionInVertexSpace(previousDiagramPoint);
       var delta = currentDiagramPoint.sub(previousDiagramPoint);
+      var elementSpaceDelta = currentVertexSpacePoint.sub(previousVertexSpacePoint); // console.log(delta, elementSpaceDelta)
 
       var currentTransform = element.transform._dup();
 
       var currentTranslation = currentTransform.t();
 
       if (currentTranslation != null) {
-        var newTranslation = currentTranslation.add(delta);
+        var newTranslation = currentTranslation.add(elementSpaceDelta);
         currentTransform.updateTranslation(newTranslation);
         element.moved(currentTransform);
       }
@@ -24341,6 +24344,35 @@ function () {
       // return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
+    key: "getDiagramPositionInVertexSpace",
+    value: function getDiagramPositionInVertexSpace(diagramPosition) {
+      var glSpace = {
+        x: {
+          bottomLeft: -1,
+          width: 2
+        },
+        y: {
+          bottomLeft: -1,
+          height: 2
+        }
+      };
+      var diagramSpace = {
+        x: {
+          bottomLeft: this.diagramLimits.left,
+          width: this.diagramLimits.width
+        },
+        y: {
+          bottomLeft: this.diagramLimits.bottom,
+          height: this.diagramLimits.height
+        }
+      };
+      var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
+      var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(2));
+      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix()));
+      return newLocation;
+    }
+  }, {
     key: "setDiagramPosition",
     value: function setDiagramPosition(diagramPosition) {
       var glSpace = {
@@ -25633,7 +25665,11 @@ function () {
   }, {
     key: "mouseDownHandler",
     value: function mouseDownHandler(event) {
-      this.startHandler(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event.clientX, event.clientY));
+      var disableEvent = this.startHandler(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event.clientX, event.clientY));
+
+      if (disableEvent) {
+        event.preventDefault();
+      }
     }
   }, {
     key: "touchMoveHandler",
