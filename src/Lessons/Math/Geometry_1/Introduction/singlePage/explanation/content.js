@@ -86,6 +86,7 @@ class Content extends SinglePageLessonContent {
     diag._fig1._wheel.isMovable = true;
     diag._fig1._wheel.isTouchable = true;
     diag._fig1.hasTouchableElements = true;
+    diag._fig1._wheel.move.type = 'rotation';
     diag.appearCircleAndMoveWheel()
 
     this.modifiers = {

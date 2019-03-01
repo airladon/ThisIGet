@@ -4129,19 +4129,30 @@ function () {
   }, {
     key: "rotateElement",
     value: function rotateElement(element, previousClientPoint, currentClientPoint) {
-      var center = element.getDiagramPosition();
+      var centerDiagramSpace = element.getDiagramPosition();
 
-      if (center == null) {
-        center = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+      if (centerDiagramSpace == null) {
+        centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
       }
 
+      var center = centerDiagramSpace.transformBy(this.diagramToPixelSpaceTransform.matrix());
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
-      var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentAngle = Math.atan2(currentDiagramPoint.y - center.y, currentDiagramPoint.x - center.x);
-      var previousAngle = Math.atan2(previousDiagramPoint.y - center.y, previousDiagramPoint.x - center.x);
-      var diffAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["minAngleDiff"])(previousAngle, currentAngle);
+      var currentPixelPoint = this.clientToPixel(currentClientPoint); // const previousDiagramPoint =
+      //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentDiagramPoint =
+      //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentAngle = Math.atan2(
+      //   currentDiagramPoint.y - center.y,
+      //   currentDiagramPoint.x - center.x,
+      // );
+      // const previousAngle = Math.atan2(
+      //   previousDiagramPoint.y - center.y,
+      //   previousDiagramPoint.x - center.x,
+      // );
+
+      var currentAngle = Math.atan2(currentPixelPoint.y - center.y, currentPixelPoint.x - center.x);
+      var previousAngle = Math.atan2(previousPixelPoint.y - center.y, previousPixelPoint.x - center.x);
+      var diffAngle = -Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["minAngleDiff"])(previousAngle, currentAngle);
 
       var transform = element.transform._dup();
 
@@ -4168,9 +4179,12 @@ function () {
       var currentPixelPoint = this.clientToPixel(currentClientPoint);
       var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
       var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentVertexSpacePoint = element.getDiagramPositionInVertexSpace(currentDiagramPoint);
-      var previousVertexSpacePoint = element.getDiagramPositionInVertexSpace(previousDiagramPoint);
-      var delta = currentDiagramPoint.sub(previousDiagramPoint);
+      var m = element.diagramSpaceToVertexSpaceTransformMatrix(); // const currentVertexSpacePoint = element.getDiagramPositionInVertexSpace(currentDiagramPoint);
+      // const previousVertexSpacePoint = element.getDiagramPositionInVertexSpace(previousDiagramPoint)
+
+      var currentVertexSpacePoint = currentDiagramPoint.transformBy(m);
+      var previousVertexSpacePoint = previousDiagramPoint.transformBy(m); // const delta = currentDiagramPoint.sub(previousDiagramPoint);
+
       var elementSpaceDelta = currentVertexSpacePoint.sub(previousVertexSpacePoint); // console.log(delta, elementSpaceDelta)
 
       var currentTransform = element.transform._dup();
@@ -4188,12 +4202,17 @@ function () {
     value: function scaleElement(element, previousClientPoint, currentClientPoint) {
       var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
-      var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var center = element.getDiagramPosition();
-      var previousMag = previousDiagramPoint.sub(center).distance();
-      var currentMag = currentDiagramPoint.sub(center).distance();
+      var currentPixelPoint = this.clientToPixel(currentClientPoint); // const previousDiagramPoint =
+      //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentDiagramPoint =
+      //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const center = element.getDiagramPosition();
+      // const previousMag = previousDiagramPoint.sub(center).distance();
+      // const currentMag = currentDiagramPoint.sub(center).distance();
+
+      var center = element.getDiagramPosition().transformBy(this.diagramToPixelSpaceTransform.matrix());
+      var previousMag = previousPixelPoint.sub(center).distance();
+      var currentMag = currentPixelPoint.sub(center).distance();
       var currentScale = element.transform.s();
 
       if (currentScale != null) {
@@ -24346,31 +24365,33 @@ function () {
   }, {
     key: "getDiagramPositionInVertexSpace",
     value: function getDiagramPositionInVertexSpace(diagramPosition) {
-      var glSpace = {
-        x: {
-          bottomLeft: -1,
-          width: 2
-        },
-        y: {
-          bottomLeft: -1,
-          height: 2
-        }
-      };
-      var diagramSpace = {
-        x: {
-          bottomLeft: this.diagramLimits.left,
-          width: this.diagramLimits.width
-        },
-        y: {
-          bottomLeft: this.diagramLimits.bottom,
-          height: this.diagramLimits.height
-        }
-      };
-      var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
-      var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
-      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(2));
-      var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix()));
-      return newLocation;
+      // const glSpace = {
+      //   x: { bottomLeft: -1, width: 2 },
+      //   y: { bottomLeft: -1, height: 2 },
+      // };
+      // const diagramSpace = {
+      //   x: {
+      //     bottomLeft: this.diagramLimits.left,
+      //     width: this.diagramLimits.width,
+      //   },
+      //   y: {
+      //     bottomLeft: this.diagramLimits.bottom,
+      //     height: this.diagramLimits.height,
+      //   },
+      // };
+      // const diagramToGLSpace = spaceToSpaceTransform(diagramSpace, glSpace);
+      // const glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
+      // const t = new Transform(this.lastDrawTransform.order.slice(2));
+      // const newLocation = glLocation.transformBy(m2.inverse(t.matrix()));
+      // console.log(newLocation, diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix()));
+      return diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix());
+    }
+  }, {
+    key: "diagramSpaceToVertexSpaceTransformMatrix",
+    value: function diagramSpaceToVertexSpaceTransformMatrix() {
+      // Diagram transform will always be two
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.lastDrawElementTransformPosition.elementCount, this.lastDrawTransform.order.length - 2));
+      return _tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix());
     }
   }, {
     key: "setDiagramPosition",

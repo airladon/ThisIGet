@@ -59,7 +59,7 @@ export default function lessonLayout() {
     fill: false,
     width: lineWidth,
     color: colors.circle,
-    transform: new Transform('circle').scale(1,1).translate(0, 0),
+    transform: new Transform('circle').scale(1,1).rotate(0).translate(0, 0),
   };
 
   const filledCircle = joinObjects({}, circle, {
