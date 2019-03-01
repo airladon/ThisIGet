@@ -11,9 +11,9 @@ type State = {
   content: Array<string | React.Element<'div'>>,
 };
 
-const { applyModifiers } = Fig.tools.html;
+const { applyModifiers, setOnClicks } = Fig.tools.html;
 
-const applyMDModifiers = (inputText: string) => {
+const applyMDModifiers = (inputText: string, modifiers: Object) => {
   let outputText = '';
 
   if (inputText.trim().startsWith('##')) {
@@ -21,7 +21,7 @@ const applyMDModifiers = (inputText: string) => {
   } else if (inputText.trim().startsWith('#')) {
     outputText = `<div class="single_page_lesson__header1">${inputText.slice(1)}</div>`;
   } else {
-    outputText = `<p class="single_page_lesson__text">${applyModifiers(inputText, {})}</p>`;
+    outputText = `<p class="single_page_lesson__text">${applyModifiers(inputText, modifiers)}</p>`;
   }
   return outputText;
 };
@@ -56,6 +56,7 @@ export default class SinglePageLessonComponent extends React.Component
 
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
+    setOnClicks(this.lesson.content.modifiers);
   }
 
   renderContent() {
@@ -70,7 +71,7 @@ export default class SinglePageLessonComponent extends React.Component
       } else if (typeof element === 'string') {
         output.push(<div key={this.key}
           dangerouslySetInnerHTML={ {
-            __html: applyMDModifiers(element),
+            __html: applyMDModifiers(element, this.lesson.content.modifiers),
           } }>
         </div>);
       } else {
@@ -83,7 +84,6 @@ export default class SinglePageLessonComponent extends React.Component
 
   render() {
     return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
-      {this.renderContent()}
       <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
         <canvas id="id_diagram__text__low" className='diagram__text'>
         </canvas>
@@ -96,6 +96,9 @@ export default class SinglePageLessonComponent extends React.Component
         </canvas>
         <canvas id="id_diagram__gl__high" className='diagram__gl'>
         </canvas>
+      </div>
+      <div className="single_page_lesson__text_container">
+        {this.renderContent()}
       </div>
     </div>;
   }

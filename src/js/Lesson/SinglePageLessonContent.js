@@ -1,30 +1,32 @@
 // @flow
 // import Fig from 'figureone';
-// import * as React from 'react';
+import * as React from 'react';
 import SimpleLessonContent from './SimpleLessonContent';
 
 class SinglePageLessonContent extends SimpleLessonContent {
-  sections: Array<Object>;
+  // $FlowFixMe
+  sections: Array<Array<string | React.Element<'div'>>>;
   diagram: Object;
   diagramHtmlId: string;
+  content: Array<string | React.Element<'div'>>
+  modifiers: Object;
 
   constructor(htmlId: string = 'lesson__content') {
     super(htmlId);
     this.diagramHtmlId = `${htmlId}_diagram`;
-    // this.type = 'singlePageLesson';
-    // this.htmlId = htmlId;
-    // this.sections = [];
-    // this.iconLink = '/';
-    // this.iconLinkGrey = '/';
-    // this.type = 'simple';
-    // this.setTitle();
+    this.content = [];
+    this.modifiers = {};
   }
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
     this.diagram.resize();
     this.setElementContent();
-    this.sections.push(this.getContent());
+    this.setContent();
+    if (typeof this.content === 'string') {
+      this.content = [this.content];
+    }
+    this.sections.push(this.content);
   }
 
   // eslint-disable-next-line class-methods-use-this
