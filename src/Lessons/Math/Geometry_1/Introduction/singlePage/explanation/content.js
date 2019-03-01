@@ -60,6 +60,7 @@ class Content extends SinglePageLessonContent {
   }
 
   setDiagram(htmlId: string = '') {
+    console.log(htmlId)
     this.diagram = new CommonLessonDiagram({
       htmlId,
       vertexShader: 'withTexture',

@@ -4179,9 +4179,7 @@ function () {
       var currentPixelPoint = this.clientToPixel(currentClientPoint);
       var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
       var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var m = element.diagramSpaceToVertexSpaceTransformMatrix(); // const currentVertexSpacePoint = element.getDiagramPositionInVertexSpace(currentDiagramPoint);
-      // const previousVertexSpacePoint = element.getDiagramPositionInVertexSpace(previousDiagramPoint)
-
+      var m = element.diagramSpaceToVertexSpaceTransformMatrix();
       var currentVertexSpacePoint = currentDiagramPoint.transformBy(m);
       var previousVertexSpacePoint = previousDiagramPoint.transformBy(m); // const delta = currentDiagramPoint.sub(previousDiagramPoint);
 
@@ -22861,7 +22859,7 @@ function () {
         var scaleX = 1;
         var scaleY = 1;
         var diagramToWindowScaleX = diagram.width / dWindow.width;
-        var diagramToWindowScaleY = diagram.height / dWindow.height;
+        var diagramToWindowScaleY = diagram.height / dWindow.height; // Window has no scaling impact on em, it only has impact on translation
 
         if (scaleString.endsWith('em')) {
           var scale = parseFloat(scaleString);
@@ -22870,7 +22868,8 @@ function () {
           var defaultFontScale = diagram.width / 0.2;
           scaleX = scale * em * defaultFontScale / canvas.width;
           scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
-        }
+        } // Scale the maximum dimension of the window to the pixel value
+
 
         if (scaleString.endsWith('px')) {
           var maxPixels = parseFloat(scaleString);
@@ -22886,12 +22885,15 @@ function () {
             scaleX = _scale2 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
             scaleY = _scale2 * diagramToWindowScaleY;
           }
-        }
+        } // Scale the window x to tie x, and window y to tie y
+
 
         if (scaleString === 'stretch') {
           scaleX = tie.width / canvas.width * diagramToWindowScaleX;
           scaleY = tie.height / canvas.height * diagramToWindowScaleY;
-        }
+        } // Scale so window either fits within the tie element, or fits only
+        // within the max dimension of the tie element
+
 
         if (scaleString === 'max' || scaleString === 'fit') {
           var fitHeightScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.height / canvas.height / cAspectRatio * dAspectRatio * diagramToWindowScaleY, tie.height / canvas.height * diagramToWindowScaleY);
@@ -22904,28 +22906,10 @@ function () {
             scaleX = fitHeightScale.x;
             scaleY = fitHeightScale.y;
           }
-        } // if (scaleString === 'max') {
-        //   if (tAspectRatio > wAspectRatio) {
-        //     const scale = tie.width / canvas.width;
-        //     scaleX = scale * diagramToWindowScaleX;
-        //     scaleY = scale * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
-        //   } else {
-        //     const scale = tie.height / canvas.height;
-        //     scaleX = scale / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
-        //     scaleY = scale * diagramToWindowScaleY;
-        //   }
-        // } else if (tAspectRatio < wAspectRatio) {
-        //   const scale = tie.width / canvas.width;
-        //   scaleX = scale * diagramToWindowScaleX;
-        //   scaleY = scale * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
-        // } else {
-        //   const scale = tie.height / canvas.height;
-        //   scaleX = scale / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
-        //   scaleY = scale * diagramToWindowScaleY;
-        // }
+        }
 
+        this.setScale(scaleX, scaleY); // Offset the element relative to the tie
 
-        this.setScale(scaleX, scaleY);
         this.setPosition(center.x - scaleX * (this.tieToHTML.window.left + this.tieToHTML.window.width / 2), center.y - scaleY * (this.tieToHTML.window.bottom + this.tieToHTML.window.height / 2));
       }
     } // Calculate the next transform due to a progressing animation
@@ -24394,25 +24378,6 @@ function () {
   }, {
     key: "getDiagramPositionInVertexSpace",
     value: function getDiagramPositionInVertexSpace(diagramPosition) {
-      // const glSpace = {
-      //   x: { bottomLeft: -1, width: 2 },
-      //   y: { bottomLeft: -1, height: 2 },
-      // };
-      // const diagramSpace = {
-      //   x: {
-      //     bottomLeft: this.diagramLimits.left,
-      //     width: this.diagramLimits.width,
-      //   },
-      //   y: {
-      //     bottomLeft: this.diagramLimits.bottom,
-      //     height: this.diagramLimits.height,
-      //   },
-      // };
-      // const diagramToGLSpace = spaceToSpaceTransform(diagramSpace, glSpace);
-      // const glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
-      // const t = new Transform(this.lastDrawTransform.order.slice(2));
-      // const newLocation = glLocation.transformBy(m2.inverse(t.matrix()));
-      // console.log(newLocation, diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix()));
       return diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix());
     }
   }, {

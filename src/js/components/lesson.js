@@ -340,7 +340,7 @@ export default class LessonComponent extends React.Component
         lesson={this.lesson}
       />;
     }
-    if (this.lesson.type === 'singlePageLesson') {
+    if (this.lesson.type === 'singlePage') {
       return <SinglePageLessonComponent
         lesson={this.lesson}
       />;
