@@ -22697,7 +22697,8 @@ function () {
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
     this.tieToHTMLElement = null;
-    this.tieToHTMLElementScale = 'fit'; // this.presetTransforms = {};
+    this.tieToHTMLElementScale = 'fit';
+    this.tieToHTMLElementScaleLimits = this.diagramLimits; // this.presetTransforms = {};
   }
 
   _createClass(DiagramElement, [{
@@ -22843,6 +22844,10 @@ function () {
         var scaleString = this.tieToHTMLElementScale.trim().toLowerCase();
         var scaleX = 1;
         var scaleY = 1;
+        var scaleLimitsX = this.diagramLimits.width / this.tieToHTMLElementScaleLimits.width;
+        var scaleLimitsY = this.diagramLimits.height / this.tieToHTMLElementScaleLimits.height;
+        var scaleLimits = Math.min(scaleLimitsX, scaleLimitsY);
+        var scaleLimitsAspectRatio = this.tieToHTMLElementScaleLimits.width / this.tieToHTMLElementScaleLimits.height;
 
         if (scaleString.endsWith('em')) {
           var scale = parseFloat(scaleString);
@@ -22884,20 +22889,20 @@ function () {
             scaleX = _scale4 / containerAspectRatio * diagramAspectRatio;
             scaleY = _scale4;
           }
-        } else if (elementAspectRatio < diagramAspectRatio) {
+        } else if (elementAspectRatio < scaleLimitsAspectRatio) {
           var _scale5 = element.offsetWidth / container.offsetWidth;
 
-          scaleX = _scale5;
-          scaleY = _scale5 * containerAspectRatio / diagramAspectRatio;
+          scaleX = _scale5 * scaleLimitsX;
+          scaleY = _scale5 * containerAspectRatio / diagramAspectRatio * scaleLimitsX;
         } else {
           var _scale6 = element.offsetHeight / container.offsetHeight;
 
-          scaleX = _scale6 / containerAspectRatio * diagramAspectRatio;
-          scaleY = _scale6;
+          scaleX = _scale6 / containerAspectRatio * diagramAspectRatio * scaleLimitsY;
+          scaleY = _scale6 * scaleLimitsY;
         }
 
         this.setScale(scaleX, scaleY);
-        this.setPosition(center.x - scaleX * (this.diagramLimits.left + this.diagramLimits.width / 2), center.y - scaleY * (this.diagramLimits.bottom + this.diagramLimits.height / 2));
+        this.setPosition(center.x - scaleX * (this.tieToHTMLElementScaleLimits.left + this.tieToHTMLElementScaleLimits.width / 2), center.y - scaleY * (this.tieToHTMLElementScaleLimits.bottom + this.tieToHTMLElementScaleLimits.height / 2));
       }
     } // Calculate the next transform due to a progressing animation
 

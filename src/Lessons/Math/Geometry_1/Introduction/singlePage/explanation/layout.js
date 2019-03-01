@@ -32,16 +32,16 @@ export default function lessonLayout() {
   const lineWidth = 0.05;
 
   const left = new Point(-4, 0);
-  const centerLeft = new Point(-2, 0);
+  const centerLeft = new Point(-1, 0);
   const center = new Point(0, 0);
-  const centerRight = new Point(2, 0);
+  const centerRight = new Point(1, 0);
   const right = new Point(-4, 0);
   const scenarios = {
-    moreLeft: { position: left },
-    left: { position: centerLeft },
+    left: { position: left },
+    centerLeft: { position: centerLeft },
     center: { position: center },
-    right: { position: centerRight },
-    moreRight: { position: right },
+    centerRight: { position: centerRight },
+    right: { position: right },
   };
   const mods = { scenarios };
 

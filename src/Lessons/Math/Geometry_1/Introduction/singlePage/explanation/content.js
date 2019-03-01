@@ -31,6 +31,7 @@ function makeFig(
   id: string = `id_figure__${generateUniqueId()}`,
   elements: DiagramElement | Array<DiagramElement>,
   scale: string = 'fit',
+  limits: Rect | null = null,
 ) {
   let elementsToUse;
   if (Array.isArray(elements)) {
@@ -41,6 +42,9 @@ function makeFig(
   elementsToUse.forEach((element) => {
     element.tieToHTMLElement = id;
     element.tieToHTMLElementScale = scale;
+    if (limits != null) {
+      element.tieToHTMLElementScaleLimits = limits;
+    }
   });
   return `<div id="${id}"></div>`;
 }
@@ -81,13 +85,13 @@ class Content extends SinglePageLessonContent {
     console.log(diag)
 
     // Set figure one initial conditions
-    diag._fig1._wheel.setScenario('left');
-    diag._fig1._circle.setScenario('right');
+    diag._fig1._wheel.setScenario('centerLeft');
+    diag._fig1._circle.setScenario('centerRight');
     diag._fig1._wheel.isMovable = true;
     diag._fig1._wheel.isTouchable = true;
     diag._fig1.hasTouchableElements = true;
     diag._fig1._wheel.move.type = 'rotation';
-    diag.appearCircleAndMoveWheel()
+    diag.appearCircleAndMoveWheel();
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
@@ -98,7 +102,7 @@ class Content extends SinglePageLessonContent {
       'Mathematics describes an object or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios. The process of describing something in a more general way is |abstraction|.',
       'A large area of mathematics is the study of |shapes|. Shapes are simple abstractions of |objects| and the |paths| they travel.',
       'For example, a |wheel| is a physical thing. It is made of different materials, has mass, size, location and smell. A wheel can be abstracted into a |shape| by removing a lot of these details, but keeping the outline.',
-      makeFig('id_figure1', diag._fig1),
+      makeFig('id_figure1', diag._fig1, 'max', new Rect(-2, -1, 4, 2)),
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Shapes are |amazing|',
       'Shapes are |amazing|',

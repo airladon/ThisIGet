@@ -42,13 +42,13 @@ export default class Collection extends CommonDiagramCollection {
     this._fig1._wheel.animations.cancelAll();
 
     this._fig1._circle.hide();
-    this._fig1._circle.setScenario('left');
-    this._fig1._wheel.setScenario('left');
+    this._fig1._circle.setScenario('centerLeft');
+    this._fig1._wheel.setScenario('centerLeft');
 
     this._fig1._circle.animations.new()
       .dissolveIn(0.3)
       .pulse({ scale: 1.02, duration: 1, numLines: 5 })
-      .scenario({ target: 'right', duration: 1.5 })
+      .scenario({ target: 'centerRight', duration: 1.5 })
       .start();
 
     this.diagram.animateNextFrame();
