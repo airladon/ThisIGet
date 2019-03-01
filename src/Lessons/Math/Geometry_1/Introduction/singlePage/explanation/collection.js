@@ -67,7 +67,7 @@ export default class Collection extends CommonDiagramCollection {
 
     this._fig1._circle.animations.new()
       .dissolveIn(0.3)
-      .pulse({ scale: 1.02, duration: 1, numLines: 5 })
+      .pulse({ scale: 1.06, duration: 1, numLines: 5 })
       .scenario({ target: 'centerRight', duration: 1.5 })
       .start();
 
@@ -154,10 +154,10 @@ export default class Collection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  // pulseEquation() {
-  //   this._properties._eqn.pulseScaleNow(1, 1.7);
-  //   this.diagram.animateNextFrame();
-  // }
+  pulseEquation(dimensions: TypeDimensions) {
+    dimensions._eqn.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
 
   makeEqnFromProperties(dimensions: TypeDimensions) {
     const prop = dimensions;

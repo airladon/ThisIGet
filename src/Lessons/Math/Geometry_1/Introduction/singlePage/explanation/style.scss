@@ -30,7 +30,18 @@ body {
   height: 250px;
   margin-top: 20px;
   margin-bottom: 20px;
+}
+
+#id_figure3 {
+  width: 100%;
+  height: 250px;
+  margin-top: 20px;
+  margin-bottom: 20px;
   // background-color: color('white', 'lightest');
+}
+
+.diagram__text {
+  z-index: 1;
 }
 
 // .single_page_lesson__text_container {

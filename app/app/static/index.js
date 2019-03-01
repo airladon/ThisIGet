@@ -4479,10 +4479,11 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       var pathToUse;
       var optionsToUse;
       var elementModsToUse;
-      var addElementsToUse; // Extract the parameters from the layout object
+      var addElementsToUse;
+      var firstScenario; // Extract the parameters from the layout object
 
       if (Array.isArray(elementDefinition)) {
-        var _elementDefinition = _slicedToArray(elementDefinition, 6);
+        var _elementDefinition = _slicedToArray(elementDefinition, 7);
 
         pathToUse = _elementDefinition[0];
         nameToUse = _elementDefinition[1];
@@ -4490,6 +4491,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         optionsToUse = _elementDefinition[3];
         elementModsToUse = _elementDefinition[4];
         addElementsToUse = _elementDefinition[5];
+        firstScenario = _elementDefinition[6];
       } else {
         nameToUse = elementDefinition.name;
         pathToUse = elementDefinition.path;
@@ -4497,6 +4499,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         addElementsToUse = elementDefinition[addElementsKey];
         methodPathToUse = elementDefinition.method;
         elementModsToUse = elementDefinition.mods;
+        firstScenario = elementDefinition.scenario;
       }
 
       var collectionPath;
@@ -4538,6 +4541,10 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         if (elementModsToUse != null && elementModsToUse !== {}) {
           element.setProperties(elementModsToUse);
         }
+
+        if (firstScenario != null && firstScenario in element.scenarios) {
+          element.setScenario(firstScenario);
+        }
       } else {
         var _element;
 
@@ -4557,6 +4564,10 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
 
         if (collectionPath instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"]) {
           collectionPath.add(nameToUse, _element);
+        }
+
+        if (firstScenario != null && firstScenario in _element.scenarios) {
+          _element.setScenario(firstScenario);
         }
       }
 

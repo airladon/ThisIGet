@@ -10,7 +10,7 @@ const {
   // Line,
 } = Fig.tools.g2;
 
-const { joinObjects } = Fig.tools.misc;
+const { joinObjects, duplicateFromTo } = Fig.tools.misc;
 
 const cssColorNames = [
   'circle',
@@ -32,11 +32,11 @@ export default function lessonLayout() {
   const lineWidth = 0.05;
   const dimensionWidth = 0.015;
 
-  const left = new Point(-4, 0);
+  const left = new Point(-2.3, 0);
   const centerLeft = new Point(-1, 0);
   const center = new Point(0, 0);
   const centerRight = new Point(1, 0);
-  const right = new Point(-4, 0);
+  const right = new Point(2.3, 0);
   const scenarios = {
     left: { position: left },
     centerLeft: { position: centerLeft },
@@ -50,9 +50,9 @@ export default function lessonLayout() {
     transform: new Transform('collection').scale(1,1).translate(0, 0),
   };
   const wheelTex = { textureCoords: new Rect(0.3333, 0.3333, 0.3333, 0.3333) };
-  // const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
-  // const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
-  // const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
+  const clockTex = { textureCoords: new Rect(0, 0.3333, 0.3333, 0.3333) };
+  const ballTex = { textureCoords: new Rect(0.3333, 0.6666, 0.3333, 0.3333) };
+  const earthTex = { textureCoords: new Rect(0, 0.6666, 0.3333, 0.3333) };
 
   const circle = {
     sides,
@@ -106,12 +106,11 @@ export default function lessonLayout() {
     },
   };
 
-  const darkCircle = {
-    options: [filledCircle, {
-      color: [0, 0, 0, 0.7],
-      textureLocation: '',
-    }],
-  };
+  const darkCircle = joinObjects({}, filledCircle, {
+    color: [0, 0, 0, 0],
+    textureLocation: '',
+  });
+
 
   const text = {
     vAlign: 'baseline',
@@ -189,9 +188,39 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         left: { position: new Point(-radius * 1.8, 0) },
-        bottom: { position: new Point(0, -radius * 1.3) },
+        bottom: { position: new Point(0, -radius * 1.5) },
       },
     },
+  };
+
+  const dimensions = {
+    name: 'dimensions',
+    method: 'collection',
+    mods,
+    addElements: [
+      {
+        name: 'darkCircle',
+        method: 'polygon',
+        options: [darkCircle],
+      },
+      equation,
+      {
+        name: 'diameter',
+        method: 'line',
+        options: [diameter],
+      },
+      {
+        name: 'd',
+        method: 'text',
+        options: [text, textD],
+      },
+      {
+        name: 'c',
+        method: 'text',
+        options: [text, textC],
+      },
+      circumference,
+    ],
   };
 
   layout.fig2 = {
@@ -204,37 +233,45 @@ export default function lessonLayout() {
         method: 'polygon',
         options: [circle],
       },
-      {
-        name: 'dimensions',
-        method: 'collection',
-        addElements: [
-          {
-            name: 'darkCircle',
-            method: 'polygon',
-            options: [darkCircle, { color: [0, 0, 0, 0] }],
-          },
-          equation,
-          {
-            name: 'diameter',
-            method: 'line',
-            options: [diameter],
-          },
-          {
-            name: 'd',
-            method: 'text',
-            options: [text, textD],
-          },
-          {
-            name: 'c',
-            method: 'text',
-            options: [text, textC],
-          },
-          circumference,
-        ],
-      },
+      dimensions,
     ],
   };
 
+  // ////////////////////////////////////////////////////////////////////////
+  // Figure 3
+  // ////////////////////////////////////////////////////////////////////////
+  const dimensions2 = {};
+  duplicateFromTo(dimensions, dimensions2);
+  dimensions2.addElements[0].options[0].color = [1, 1, 1, 0.3];
+  layout.fig3 = {
+    name: 'fig3',
+    method: 'collection',
+    options: collection,
+    addElements: [
+      {
+        name: 'wheel',
+        method: 'polygon',
+        options: [filledCircle, wheelTex],
+        mods,
+        scenario: 'left',
+      },
+      {
+        name: 'clock',
+        method: 'polygon',
+        options: [filledCircle, clockTex],
+        mods,
+        scenario: 'center',
+      },
+      {
+        name: 'ball',
+        method: 'polygon',
+        options: [filledCircle, ballTex],
+        mods,
+        scenario: 'right',
+      },
+      dimensions2,
+    ],
+  };
 
   // const fig1 = ['', 'fig1', 'collection', [collection], mods, [
   //   ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods],
@@ -398,6 +435,7 @@ export default function lessonLayout() {
     // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.fig1,
     layout.fig2,
+    layout.fig3,
     // layout.wheel,
     // layout.earth,
     // layout.ball,
