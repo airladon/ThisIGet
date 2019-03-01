@@ -84,7 +84,8 @@ class Content extends SinglePageLessonContent {
     diag._fig1._circle.setScenario('right');
     diag._fig1._wheel.isMovable = true;
     diag._fig1._wheel.isTouchable = true;
-    diag._fig1.hasToucableElements = true;
+    diag._fig1.hasTouchableElements = true;
+    diag.appearCircleAndMoveWheel()
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
