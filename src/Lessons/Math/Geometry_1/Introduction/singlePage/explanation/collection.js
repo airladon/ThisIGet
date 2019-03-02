@@ -117,7 +117,7 @@ export default class Collection extends CommonDiagramCollection {
   growDimensions(
     dimensions: TypeDimensions,
     time: number = 4,
-    done: (cancelled: boolean) => void,
+    done: (cancelled: boolean) => void = () => {},
   ) {
     dimensions.animations.cancelAll('complete');
     const c = dimensions._c;
@@ -191,18 +191,19 @@ export default class Collection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  // toggleProperties() {
-  //   let goToScenario = 'moreLeft';
-  //   if (this.propertiesPosition === 0) {
-  //     goToScenario = 'center';
-  //   } else if (this.propertiesPosition === 1) {
-  //     goToScenario = 'moreRight';
-  //   }
-  //   this.propertiesPosition = (this.propertiesPosition + 1) % 3;
-  //   this._properties.setScenario(goToScenario);
-  //   this.growDimensions(null, 2);
-  //   this.diagram.animateNextFrame();
-  // }
+  toggleProperties(dimensions: TypeDimensions) {
+    let goToScenario = 'left';
+    if (this.propertiesPosition === 0) {
+      goToScenario = 'right';
+    }
+    // } else if (this.propertiesPosition === 1) {
+    //   goToScenario = 'moreRight';
+    // }
+    this.propertiesPosition = (this.propertiesPosition + 1) % 2;
+    dimensions.setScenario(goToScenario);
+    this.growDimensions(dimensions, 2);
+    this.diagram.animateNextFrame();
+  }
 
   constructor(
     diagram: CommonLessonDiagram,

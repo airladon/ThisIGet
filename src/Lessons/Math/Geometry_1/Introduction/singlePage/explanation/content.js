@@ -63,17 +63,17 @@ class Content extends SinglePageLessonContent {
     diag._fig1.hasTouchableElements = true;
     diag._fig1._wheel.move.type = 'rotation';
 
-    diag._fig2._dimensions._eqn.setScenario('left');
-
-    diag._fig3._dimensions._eqn.setScenario('bottom');
-    // diag.circumferenceAtAngle(diag._fig2._dimensions._circumference, Math.PI * 2);
-    // diag.growCircumference(diag._fig2._dimensions._circumference, 1);
-    // diag.growDimensions(diag._fig2._dimensions, 4);
-    // diag.makeEqnFromProperties(diag._fig2._dimensions);
+    // Figure 2
     diag.circumferenceAtAngle(dim2._circumference, Math.PI * 2);
+    dim2._eqn.setScenario('left');
+
+    // figure 3
     diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
-    dim3.setScenario('centerLeft');
-    // diag.appearCircleAndMoveWheel();
+    dim3.setScenario('left');
+    dim3._eqn.setScenario('bottom');
+
+    // diag._fig1.hide()
+    // diag._fig2.hide()
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
@@ -81,6 +81,7 @@ class Content extends SinglePageLessonContent {
       _analyzed: click(diag.growDimensions, [diag, dim2, 4, null], colors.dimensions),
       _found: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
+      _other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
     };
     this.content = [
       '# Shapes',
@@ -92,15 +93,19 @@ class Content extends SinglePageLessonContent {
 
       'For example, a |wheel| is a physical thing. It is made of different materials, has mass, size, location and smell. A wheel can be abstracted into a |shape| by removing a lot of these details, but keeping the outline.',
 
-      makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2)),
+      // makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2)),
+      // makeFig('id_figure1', [], 'fit', new Rect(-2, -1, 4, 2)),
 
       'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be determined, and |_relationships| between the properties |_found|.',
 
-      makeFig('id_figure2', diag._fig2, 'fit', new Rect(-2, -1.3, 4, 2.6)),
+      // makeFig('id_figure2', diag._fig2, 'fit', new Rect(-2, -1.3, 4, 2.6)),
+      '<div id="id_figure1"></div>',
+      '<div id="id_figure2"></div>',
+      '<div id="id_figure3"></div>',
 
-      'The properties and relationships can then be applied to all other objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
+      'The properties and relationships can then be applied to all |_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 
-      makeFig('id_figure3', diag._fig3, 'fit', new Rect(-4, -1.3, 8, 2.6)),
+      // makeFig('id_figure3', diag._fig3, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
       'Relationships between properties can be used to calculate one property from another.',
       'Shapes are |amazing|',
       'Shapes are |amazing|',

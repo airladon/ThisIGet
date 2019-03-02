@@ -32,11 +32,11 @@ export default function lessonLayout() {
   const lineWidth = 0.05;
   const dimensionWidth = 0.015;
 
-  const left = new Point(-2.3, 0);
+  const left = new Point(-1.3, 0);
   const centerLeft = new Point(-1, 0);
   const center = new Point(0, 0);
   const centerRight = new Point(1, 0);
-  const right = new Point(2.3, 0);
+  const right = new Point(1.3, 0);
   const scenarios = {
     left: { position: left },
     centerLeft: { position: centerLeft },
@@ -196,6 +196,9 @@ export default function lessonLayout() {
   const dimensions = {
     name: 'dimensions',
     method: 'collection',
+    options: {
+      transform: new Transform().translate(0, 0),
+    },
     mods,
     addElements: [
       {
@@ -242,25 +245,25 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////////////////
   const dimensions2 = {};
   duplicateFromTo(dimensions, dimensions2);
-  dimensions2.addElements[0].options[0].color = [1, 1, 1, 0.3];
+  dimensions2.addElements[0].options[0].color = [0.9, 0.9, 0.9, 0.3];
   layout.fig3 = {
     name: 'fig3',
     method: 'collection',
     options: collection,
     addElements: [
-      {
-        name: 'wheel',
-        method: 'polygon',
-        options: [filledCircle, wheelTex],
-        mods,
-        scenario: 'left',
-      },
+      // {
+      //   name: 'wheel',
+      //   method: 'polygon',
+      //   options: [filledCircle, wheelTex],
+      //   mods,
+      //   scenario: 'left',
+      // },
       {
         name: 'clock',
         method: 'polygon',
         options: [filledCircle, clockTex],
         mods,
-        scenario: 'center',
+        scenario: 'left',
       },
       {
         name: 'ball',

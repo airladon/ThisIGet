@@ -4034,6 +4034,8 @@ function () {
   }, {
     key: "resize",
     value: function resize() {
+      console.log('****************************************** resizing');
+
       if (this.elements != null) {
         this.elements.updateLimits(this.limits);
       }
@@ -4339,7 +4341,16 @@ function () {
     key: "draw",
     value: function draw(now) {
       this.drawQueued = false;
-      this.clearContext(); // This transform converts standard gl clip space, to diagram clip space
+      this.clearContext();
+
+      if (this.globalAnimation.previousNow == null) {
+        this.globalAnimation.previousNow = now;
+      }
+
+      var t = new Date().getTime();
+      console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart);
+      this.globalAnimation.diagramDrawStart = t; // console.log(now - this.globalAnimation.previousNow) 
+      // This transform converts standard gl clip space, to diagram clip space
       // defined in limits.
       // const normWidth = 2 / this.limits.width;
       // const normHeight = 2 / this.limits.height;
@@ -4352,6 +4363,7 @@ function () {
       // const t1 = performance.now();
 
       this.elements.draw(this.diagramToGLSpaceTransform, now);
+      console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
 
       if (this.elements.isMoving()) {
         this.animateNextFrame();
@@ -22299,8 +22311,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -22334,6 +22347,7 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -22483,7 +22497,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -22493,7 +22507,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
       },
       position: function position() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -22503,7 +22517,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -22513,7 +22527,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -22523,7 +22537,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -22533,7 +22547,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
@@ -22543,7 +22557,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -22565,7 +22579,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -22587,7 +22601,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -22595,7 +22609,7 @@ function () {
           optionsIn[_key10] = arguments[_key10];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
       scenario: function scenario() {
@@ -22624,7 +22638,7 @@ function () {
           options.delta = delta;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       }
     };
     this.animate = {
@@ -22690,19 +22704,19 @@ function () {
       animation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"]() // current animation phase
 
       },
       colorAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"]() // current animation phase
 
       },
       customAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}) // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}) // current animation phase
 
       },
       isBeingMoved: false,
@@ -22718,7 +22732,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -23597,7 +23611,7 @@ function () {
         for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
           var phase = plan[i];
 
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
+          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
             phase.finish(cancelled, forceSetToEnd);
           } else {
             phase.finish(this, cancelled, forceSetToEnd);
@@ -23610,7 +23624,7 @@ function () {
         if (plan.length > 0) {
           var _phase = plan.slice(-1)[0];
 
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
+          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
             _phase.finish(cancelled, forceSetToEnd);
           } else {
             _phase.finish(this, cancelled, forceSetToEnd);
@@ -23730,12 +23744,12 @@ function () {
           delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseDelay);
       }
 
       if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseMove);
       }
 
@@ -23799,12 +23813,12 @@ function () {
           delayDisolve = 'in';
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
+        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
         phases.push(phaseColor);
       }
 
@@ -23888,12 +23902,12 @@ function () {
       }
 
       if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
+        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
         phases.push(phaseCustom);
       }
 
@@ -25029,6 +25043,18 @@ function (_DiagramElement2) {
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       // console.log('draw collection', now, this.name)
+      if (this.name === 'fig3') {
+        var ga = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_9__["default"]();
+        var deltaTime = new Date().getTime() - ga.diagramDrawStart; // console.log(this.name, deltaTime)
+      }
+
+      if (this.name === 'circumference') {
+        var _ga = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_9__["default"]();
+
+        var _deltaTime2 = new Date().getTime() - _ga.diagramDrawStart; // console.log(this.name, deltaTime)
+
+      }
+
       if (this.isShown) {
         this.animations.nextFrame(now); // Deprecate
 

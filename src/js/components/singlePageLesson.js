@@ -57,6 +57,7 @@ export default class SinglePageLessonComponent extends React.Component
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
     setOnClicks(this.lesson.content.modifiers);
+    console.log('updating')
   }
 
   renderContent() {
