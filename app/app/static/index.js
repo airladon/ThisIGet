@@ -4034,8 +4034,6 @@ function () {
   }, {
     key: "resize",
     value: function resize() {
-      console.log('****************************************** resizing');
-
       if (this.elements != null) {
         this.elements.updateLimits(this.limits);
       }
@@ -4340,16 +4338,15 @@ function () {
   }, {
     key: "draw",
     value: function draw(now) {
-      this.drawQueued = false;
-      this.clearContext();
-
       if (this.globalAnimation.previousNow == null) {
         this.globalAnimation.previousNow = now;
       }
 
       var t = new Date().getTime();
       console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart);
-      this.globalAnimation.diagramDrawStart = t; // console.log(now - this.globalAnimation.previousNow) 
+      this.globalAnimation.diagramDrawStart = t;
+      this.drawQueued = false;
+      this.clearContext(); // console.log(now - this.globalAnimation.previousNow) 
       // This transform converts standard gl clip space, to diagram clip space
       // defined in limits.
       // const normWidth = 2 / this.limits.width;
@@ -4363,13 +4360,14 @@ function () {
       // const t1 = performance.now();
 
       this.elements.draw(this.diagramToGLSpaceTransform, now);
-      console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
 
       if (this.elements.isMoving()) {
         this.animateNextFrame();
       } // console.log(performance.now() - t1)
       // console.log(Date.now() - measure)
 
+
+      console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
     }
   }, {
     key: "animateNextFrame",

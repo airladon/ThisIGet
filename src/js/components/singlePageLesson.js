@@ -57,30 +57,51 @@ export default class SinglePageLessonComponent extends React.Component
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
     setOnClicks(this.lesson.content.modifiers);
-    console.log('updating')
   }
 
+  // renderContent() {
+  //   const output = [];
+  //   this.state.content.forEach((element) => {
+  //     if (typeof element === 'string' && element.charAt(0) === '<') {
+  //       output.push(<div key={this.key}
+  //         dangerouslySetInnerHTML={ {
+  //           __html: element.slice(0, element.length - 1),
+  //         } }>
+  //         </div>);
+  //     } else if (typeof element === 'string') {
+  //       output.push(<div key={this.key}
+  //         dangerouslySetInnerHTML={ {
+  //           __html: applyMDModifiers(element, this.lesson.content.modifiers),
+  //         } }>
+  //       </div>);
+  //     } else {
+  //       output.push(element);
+  //     }
+  //     this.key += 1;
+  //   });
+  //   return output;
+  // }
+
   renderContent() {
-    const output = [];
+    let output = '';
     this.state.content.forEach((element) => {
       if (typeof element === 'string' && element.charAt(0) === '<') {
-        output.push(<div key={this.key}
-          dangerouslySetInnerHTML={ {
-            __html: element.slice(0, element.length - 1),
-          } }>
-          </div>);
+        output += element.slice();
+        // output.push(<div key={this.key}
+        //   dangerouslySetInnerHTML={ {
+        //     __html: element.slice(0, element.length - 1),
+        //   } }>
+        //   </div>);
       } else if (typeof element === 'string') {
-        output.push(<div key={this.key}
-          dangerouslySetInnerHTML={ {
-            __html: applyMDModifiers(element, this.lesson.content.modifiers),
-          } }>
-        </div>);
-      } else {
-        output.push(element);
+        output += applyMDModifiers(element, this.lesson.content.modifiers);
+        // output.push(<div key={this.key}
+        //   dangerouslySetInnerHTML={ {
+        //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
+        //   } }>
+        // </div>);
       }
-      this.key += 1;
     });
-    return output;
+    return <div dangerouslySetInnerHTML={{__html: output}}></div>;
   }
 
   render() {
