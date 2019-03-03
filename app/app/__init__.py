@@ -20,6 +20,7 @@ if not os.environ.get('LOCAL_PRODUCTION') \
             'script-src': [
                 SELF,
                 'https://unpkg.com/',
+                "'unsafe-inline'",          # this needs to be removed later
             ],
             'style-src': [
                 SELF,

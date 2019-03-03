@@ -12,13 +12,11 @@ const renderLesson = (lesson: Object, lessonDetails: Object, versionDetails: Obj
 
   if (lessonId instanceof HTMLElement) {
     ReactDOM.render(
-      <div>
-        <LessonView
-          lesson={lesson}
-          lessonDetails={lessonDetails}
-          versionDetails={versionDetails}
-        />
-      </div>,
+      <LessonView
+        lesson={lesson}
+        lessonDetails={lessonDetails}
+        versionDetails={versionDetails}
+      />,
       lessonId,
     );
   }

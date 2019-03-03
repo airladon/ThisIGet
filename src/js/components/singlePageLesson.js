@@ -11,6 +11,8 @@ type State = {
   content: Array<string | React.Element<'div'>>,
 };
 
+let updates = 0;
+
 const { applyModifiers, setOnClicks } = Fig.tools.html;
 
 const applyMDModifiers = (inputText: string, modifiers: Object) => {
@@ -40,6 +42,13 @@ export default class SinglePageLessonComponent extends React.Component
     };
   }
 
+  // shouldComponentUpdate() {
+  //   // if (updates > 5) {
+  //   //   return false;
+  //   // }
+  //   // updates += 1
+  //   return true;
+  // }
   // componentWillMount() {
   //   // Instantiate diagram now that the canvas elements have been
   //   // created.
@@ -101,7 +110,10 @@ export default class SinglePageLessonComponent extends React.Component
         // </div>);
       }
     });
-    return <div dangerouslySetInnerHTML={{__html: output}}></div>;
+    return <div
+      className="single_page_lesson__text_container"
+      dangerouslySetInnerHTML={ {__html: output} }>
+    </div>;
   }
 
   render() {

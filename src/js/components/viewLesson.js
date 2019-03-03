@@ -25,13 +25,11 @@ export default class ViewLesson extends React.Component
   render() {
     const props = Object.assign({}, this.props);
     delete props.active;
-    return <div>
-      <LessonComponent
+    return <LessonComponent
         lesson={this.props.lesson}
         lessonDetails={this.props.lessonDetails}
         versionDetails={this.props.versionDetails}
         isLoggedIn={this.props.isLoggedIn}
-      />
-    </div>;
+      />;
   }
 }
