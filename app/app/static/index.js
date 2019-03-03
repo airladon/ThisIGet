@@ -4045,12 +4045,15 @@ function () {
       this.setSpaceTransforms();
       this.sizeHtmlText();
       this.elements.resizeHtmlObject();
-
+      this.updateHTMLElementTie();
+      this.animateNextFrame();
+    }
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie() {
       if (this.elements != null) {
         this.elements.updateHTMLElementTie(this.pixelToDiagramSpaceTransform, this.canvasLow);
       }
-
-      this.animateNextFrame();
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
     // and dragged, then when they are released, for them to move freely before

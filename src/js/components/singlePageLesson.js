@@ -61,6 +61,16 @@ export default class SinglePageLessonComponent extends React.Component
     this.setState({
       content: this.lesson.content.sections[0],
     });
+    window.addEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll.bind(this));
+  }
+
+  handleScroll() {
+    this.lesson.content.diagram.updateHTMLElementTie();
+    this.lesson.content.diagram.animateNextFrame();
   }
 
   componentDidUpdate() {
