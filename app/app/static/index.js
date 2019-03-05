@@ -3784,10 +3784,16 @@ function () {
 
         }
 
-        this.backgroundColor = backgroundColor;
-        var shaders = Object(_webgl_shaders__WEBPACK_IMPORTED_MODULE_1__["default"])(vertexShader, fragmentShader);
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, shaders.vertexSource, shaders.fragmentSource, shaders.varNames, this.backgroundColor);
-        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, shaders.vertexSource, shaders.fragmentSource, shaders.varNames, this.backgroundColor);
+        this.backgroundColor = backgroundColor; // const shaders = getShaders(vertexShader, fragmentShader);
+
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, // shaders.vertexSource,
+        // shaders.fragmentSource,
+        // shaders.varNames,
+        this.backgroundColor);
+        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, // shaders.vertexSource,
+        // shaders.fragmentSource,
+        // shaders.varNames,
+        this.backgroundColor);
         this.webglLow = webglLow;
         this.webglHigh = webglHigh; // const draw2D = this.textCanvas.getContext('2d');
 
@@ -3881,7 +3887,7 @@ function () {
         draw2D = this.draw2DHigh;
       }
 
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.animateNextFrame.bind(this));
+      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.diagramToPixelSpaceScale, this.diagramToGLSpaceTransform.m(), this.animateNextFrame.bind(this));
     }
   }, {
     key: "getEquations",
@@ -4013,6 +4019,12 @@ function () {
       this.pixelToGLSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(pixelSpace, glSpace);
       this.glToPixelSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(glSpace, pixelSpace);
       this.diagramToCSSPercentSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, percentSpace);
+      this.diagramToGLSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(diagramSpace, glSpace);
+      this.glToDiagramSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(glSpace, diagramSpace);
+      this.diagramToPixelSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(diagramSpace, pixelSpace);
+      this.pixelToDiagramSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(pixelSpace, diagramSpace);
+      this.pixelToGLSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(pixelSpace, glSpace);
+      this.glToPixelSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(glSpace, pixelSpace);
     }
   }, {
     key: "initialize",
@@ -4454,6 +4466,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       text: shapes.txt.bind(shapes),
+      textNew: shapes.textNew.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -13271,6 +13284,57 @@ function RectangleFilled(webgl, topLeft, width, height, cornerRadius, cornerSide
 
 /***/ }),
 
+/***/ "./src/js/diagram/DiagramElements/Text.js":
+/*!************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Text.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexText */ "./src/js/diagram/DrawingObjects/VertexObject/VertexText.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+// import VertexPolygon from '../DrawingObjects/VertexObject/VertexPolygon';
+ // import VertexPolygonLine from '../DrawingObjects/VertexObject/VertexPolygonLine';
+
+
+
+
+
+
+function Text(webgl, diagramLimits, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, optionsIn) {
+  var defaultOptions = {
+    position: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0),
+    color: [1, 0, 0, 1]
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, optionsIn);
+
+  if (options.transform == null) {
+    options.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('Text').translate(0, 0);
+  }
+
+  if (options.position != null) {
+    options.transform.updateTranslation(options.position);
+  }
+
+  var vertexText = new _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, options); // let transform = new Transform();
+  // if (transformOrLocation instanceof Point) {
+  //   transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
+  // } else {
+  //   transform = transformOrLocation._dup();
+  // }
+
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexText, options.transform, options.color, diagramLimits);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Text);
+
+/***/ }),
+
 /***/ "./src/js/diagram/DiagramEquation/DiagramEquation.js":
 /*!***********************************************************!*\
   !*** ./src/js/diagram/DiagramEquation/DiagramEquation.js ***!
@@ -18237,8 +18301,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
 /* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
 /* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -18266,10 +18331,11 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+
 var DiagramPrimatives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, animateNextFrame) {
+  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
     this.webgl = webgl;
@@ -18277,6 +18343,8 @@ function () {
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
+    this.diagramToPixelSpaceScale = diagramToPixelSpaceScale;
+    this.diagramToGLSpaceTransformMatrix = diagramToGLSpaceTransformMatrix;
   }
 
   _createClass(DiagramPrimatives, [{
@@ -18351,6 +18419,11 @@ function () {
     // }
 
   }, {
+    key: "textNew",
+    value: function textNew(options) {
+      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, this.limits, this.diagramToPixelSpaceScale, this.diagramToGLSpaceTransformMatrix, options);
+    }
+  }, {
     key: "txt",
     value: function txt(textOrOptions) {
       var defaultOptions = {
@@ -18387,11 +18460,11 @@ function () {
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](o.offset, text, fontToUse);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["TextObject"](this.draw2D, [dT]);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramText"](o.offset, text, fontToUse);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["TextObject"](this.draw2D, [dT]);
       return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(o.position.x, o.position.y), o.color, this.limits);
     }
   }, {
@@ -18432,14 +18505,14 @@ function () {
     key: "text",
     value: function text(textInput, location, color) {
       var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
 
       if (fontInput !== null) {
         font = fontInput;
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["TextObject"](this.draw2D, [dT]);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["TextObject"](this.draw2D, [dT]);
       return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), color, this.limits);
     }
   }, {
@@ -18470,7 +18543,7 @@ function () {
       element.style.position = 'absolute';
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_19__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_20__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
       var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
@@ -21105,11 +21178,17 @@ function (_DrawingObject) {
   // webgl instance for a html canvas
   // primitive tyle (e.g. TRIANGLE_STRIP)
   // Vertex buffer
+  // textureBuffer: WebGLBuffer;
   // Primative vertices of shape
   // Number of primative vertices
   // Border vertices
+  // textureLocation: string | Object;
+  // texturePoints: Array<number>;
   function VertexObject(webgl) {
     var _this;
+
+    var vertexShader = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'simple';
+    var fragmentShader = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'simple';
 
     _classCallCheck(this, VertexObject);
 
@@ -21119,13 +21198,42 @@ function (_DrawingObject) {
     _this.webgl = webgl;
     _this.glPrimative = webgl.gl.TRIANGLES;
     _this.points = [];
-    _this.z = 0;
-    _this.textureLocation = '';
-    _this.texturePoints = [];
+    _this.z = 0; // this.textureLocation = '';
+    // this.texturePoints = [];
+
+    _this.texture = null;
+    _this.programIndex = webgl.getProgram(vertexShader, fragmentShader);
     return _this;
   }
 
   _createClass(VertexObject, [{
+    key: "addTextureToBuffer",
+    value: function addTextureToBuffer(texture, //: WebGLTextureBuffer
+    image) // image data
+    {
+      console.log(image);
+      this.gl.activeTexture(this.gl.TEXTURE0 + this.texture.index);
+      this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+      this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
+      this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
+
+      function isPowerOf2(value) {
+        // eslint-disable-next-line no-bitwise
+        return (value & value - 1) === 0;
+      } // Check if the image is a power of 2 in both dimensions.
+
+
+      if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+        // Yes, it's a power of 2. Generate mips.
+        this.gl.generateMipmap(this.gl.TEXTURE_2D);
+      } else {
+        // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+      }
+    }
+  }, {
     key: "setupBuffer",
     value: function setupBuffer() {
       var _this2 = this;
@@ -21136,55 +21244,56 @@ function (_DrawingObject) {
         this.numPoints = this.points.length / 2.0;
       } else {
         this.numPoints = numPoints;
-      }
-
-      if (this.texturePoints.length === 0 && this.textureLocation) {
-        this.createTextureMap();
-      }
-
-      if (this.textureLocation) {
-        this.textureBuffer = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.textureBuffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.texturePoints), this.gl.STATIC_DRAW); // Create a texture.
-
-        var texture = this.gl.createTexture();
-        this.gl.bindTexture(this.gl.TEXTURE_2D, texture); // Fill the texture with a 1x1 blue pixel.
-
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
-        var image = new Image();
-        image.src = this.textureLocation;
-        image.addEventListener('load', function () {
-          // Now that the image has loaded make copy it to the texture.
-          _this2.gl.bindTexture(_this2.gl.TEXTURE_2D, texture);
-
-          _this2.gl.pixelStorei(_this2.gl.UNPACK_FLIP_Y_WEBGL, 1);
-
-          _this2.gl.texImage2D(_this2.gl.TEXTURE_2D, 0, _this2.gl.RGBA, _this2.gl.RGBA, _this2.gl.UNSIGNED_BYTE, image);
-
-          function isPowerOf2(value) {
-            // eslint-disable-next-line no-bitwise
-            return (value & value - 1) === 0;
-          } // Check if the image is a power of 2 in both dimensions.
+      } // if (this.texture && this.texture.points == null) {
+      //   this.texture.points = [];
+      //   this.createTextureMap();
+      // }
 
 
-          if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-            // Yes, it's a power of 2. Generate mips.
-            _this2.gl.generateMipmap(_this2.gl.TEXTURE_2D);
+      var texture = this.texture;
+
+      if (texture != null) {
+        if (texture.points == null) {
+          texture.points = [];
+        }
+
+        if (texture.points.length === 0) {
+          this.createTextureMap();
+        }
+
+        texture.buffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texture.points), this.gl.STATIC_DRAW);
+
+        if (texture.id in this.webgl.textures) {
+          texture.index = this.webgl.textures[texture.id].index;
+        } else {
+          var glTexture = this.gl.createTexture();
+          texture.index = this.webgl.addTexture(texture.id, glTexture);
+          this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+          this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
+
+          if (texture.src) {
+            // const texture = this.gl.createTexture();
+            // this.webgl.addTexture(this.texture.id, texture);
+            // this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+            // Fill the texture with a 1x1 blue pixel.
+            this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
+            var image = new Image();
+            image.src = texture.src;
+            image.addEventListener('load', function () {
+              // Now that the image has loaded make copy it to the texture.
+              _this2.addTextureToBuffer(glTexture, image);
+
+              if (_this2.onLoad != null) {
+                _this2.onLoad();
+              }
+            });
           } else {
-            // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_WRAP_S, _this2.gl.CLAMP_TO_EDGE);
-
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_WRAP_T, _this2.gl.CLAMP_TO_EDGE);
-
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_MIN_FILTER, _this2.gl.LINEAR);
+            this.addTextureToBuffer(glTexture, texture.image);
           }
-
-          if (_this2.onLoad != null) {
-            _this2.onLoad();
-          }
-        });
-      } // this.buffer = createBuffer(this.gl, this.vertices);
-
+        }
+      }
 
       this.buffer = this.gl.createBuffer();
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
@@ -21194,10 +21303,12 @@ function (_DrawingObject) {
     key: "resetBuffer",
     value: function resetBuffer() {
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var texture = this.texture;
 
-      if (this.textureLocation) {
+      if (texture) {
+        this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
         this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-        this.gl.deleteTexture(this.textureBuffer);
+        this.gl.deleteTexture(texture.buffer);
       } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
 
@@ -21278,15 +21389,15 @@ function (_DrawingObject) {
       var glHeight = yMaxGL - yMinGL;
       var texWidth = xMaxTex - xMinTex;
       var texHeight = yMaxTex - yMinTex;
-      this.texturePoints = [];
+      this.texture.points = [];
 
       for (var i = 0; i < this.points.length; i += 2) {
         var x = this.points[i];
         var y = this.points[i + 1];
         var texNormX = (x - xMinGL) / glWidth;
         var texNormY = (y - yMinGL) / glHeight;
-        this.texturePoints.push(texNormX * texWidth + xMinTex);
-        this.texturePoints.push(texNormY * texHeight + yMinTex);
+        this.texture.points.push(texNormX * texWidth + xMinTex);
+        this.texture.points.push(texNormY * texHeight + yMinTex);
       }
     }
   }, {
@@ -21311,19 +21422,22 @@ function (_DrawingObject) {
 
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
-      // Turn on the attribute
 
-      this.gl.enableVertexAttribArray(this.webgl.locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
+      var locations = this.webgl.useProgram(this.programIndex); // Turn on the attribute
+
+      this.gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 
-      this.gl.vertexAttribPointer(this.webgl.locations.a_position, size, type, normalize, stride, offset);
-      this.gl.uniformMatrix3fv(this.webgl.locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
+      this.gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
+      this.gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
 
-      this.gl.uniform1f(this.webgl.locations.u_z, this.z);
-      this.gl.uniform4f(this.webgl.locations.u_color, color[0], color[1], color[2], color[3]); // Translate
+      this.gl.uniform1f(locations.u_z, this.z);
+      this.gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
 
-      if (this.textureLocation) {
+      var texture = this.texture;
+
+      if (texture != null) {
         // Textures
         // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         var texSize = 2; // 2 components per iteration
@@ -21337,21 +21451,22 @@ function (_DrawingObject) {
 
         var texOffset = 0; // start at the beginning of the buffer
 
-        this.gl.enableVertexAttribArray(this.webgl.locations.a_texcoord);
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.textureBuffer);
-        this.gl.vertexAttribPointer(this.webgl.locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
+        this.gl.enableVertexAttribArray(locations.a_texcoord);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
+        this.gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
       }
 
-      if (this.textureLocation) {
-        this.gl.uniform1i(this.webgl.locations.u_use_texture, 1);
+      if (texture) {
+        this.gl.uniform1i(locations.u_use_texture, 1);
+        this.gl.uniform1i(locations.u_texture, texture.index);
       } else {
-        this.gl.uniform1i(this.webgl.locations.u_use_texture, 0);
+        this.gl.uniform1i(locations.u_use_texture, 0);
       }
 
       this.gl.drawArrays(this.glPrimative, offset, count);
 
-      if (this.textureLocation) {
-        this.gl.disableVertexAttribArray(this.webgl.locations.a_texcoord);
+      if (texture) {
+        this.gl.disableVertexAttribArray(locations.a_texcoord);
       }
     }
   }, {
@@ -21775,7 +21890,12 @@ function (_VertexObject) {
 
     _classCallCheck(this, PolygonFilled);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
+    if (textureLocation !== '') {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl, 'withTexture', 'withTexture'));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
+    }
+
     _this.glPrimative = webgl.gl.TRIANGLE_FAN; // Check potential errors in constructor input
 
     var sides = numSides;
@@ -21819,13 +21939,17 @@ function (_VertexObject) {
       _this.border[0].push(center._dup());
     }
 
-    _this.textureLocation = textureLocation;
+    if (textureLocation) {
+      _this.texture = {};
+      _this.texture.src = textureLocation;
+      _this.texture.id = 'texture_image';
 
-    _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+      _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+    }
 
     _this.setupBuffer();
 
-    return _this;
+    return _possibleConstructorReturn(_this);
   }
 
   _createClass(PolygonFilled, [{
@@ -22286,6 +22410,238 @@ function (_VertexObject) {
 }(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
 
 
+
+/***/ }),
+
+/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexText.js":
+/*!******************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexText.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+
+
+var VertexText =
+/*#__PURE__*/
+function (_VertexObject) {
+  _inherits(VertexText, _VertexObject);
+
+  // WebGL primitive used
+  // radius from center to outside of polygon
+  // center point
+  // angle between adjacent verteces to center lines
+  function VertexText(webgl, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, textOptions) {
+    var _this;
+
+    _classCallCheck(this, VertexText);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'withTexture'));
+    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    _this.diagramToPixelSpaceScale = diagramToPixelSpaceScale;
+    _this.diagramToGLSpaceTransformMatrix = diagramToGLSpaceTransformMatrix;
+    var defaultTextOptions = {
+      text: 'DEFAULT_TEXT',
+      size: 20,
+      // pixels
+      family: 'Helvetica',
+      style: 'normal',
+      weight: 400,
+      alignH: 'center',
+      alignV: 'alphabetic'
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultTextOptions, textOptions);
+    _this.size = options.size;
+    _this.text = options.text;
+    _this.family = options.family;
+    _this.alignH = options.alignH;
+    _this.alignV = options.alignV;
+    _this.style = options.style;
+    _this.weight = options.weight;
+    _this.canvas = document.createElement('canvas');
+    _this.canvas.id = 'asdf';
+    _this.ctx = _this.canvas.getContext('2d'); // const center = new Point(0, 0);
+
+    _this.texture = {};
+    _this.texture.id = 'texture_text'; // const width = options.size * options.text.length * 0.7;
+    // const height = options.size * 1.5;
+    // this.texture.image = this.makeTextCanvas(options, width, height);
+    // const data = this.ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+    // console.log(data);
+    // let aspectRatio = width / height;
+    // console.log(width, height)
+    // this.points = [
+    //   -1, -1 / aspectRatio,
+    //   -1, 1 / aspectRatio,
+    //   1, 1 / aspectRatio,
+    //   1, -1 / aspectRatio,
+    // ];
+    // this.createTextureMap(-1, 1, -1 / aspectRatio, 1 / aspectRatio);
+    // this.setupBuffer();
+
+    _this.drawTextIntoBuffer();
+
+    return _this;
+  }
+
+  _createClass(VertexText, [{
+    key: "drawTextIntoBuffer",
+    value: function drawTextIntoBuffer() {
+      var _this2 = this;
+
+      // Font is in diagram space units.
+      // Font size relative to M width will vary by font family so start by
+      // assuming: M width = font size, and then measure it, and find a scaling
+      // correction factor to apply
+      var d2pScale = this.diagramToPixelSpaceScale; // const width = this.text.length * this.size * d2pScale.x;
+      // const height = this.size * Math.abs(d2pScale.y) * 1.15;
+
+      var pixelFontSize = 10;
+
+      if (typeof this.size === 'string' && this.size.endsWith('px')) {
+        pixelFontSize = parseInt(this.size, 10);
+      } else {
+        if (typeof this.size === 'string') {
+          this.size = parseFloat(this.size);
+        }
+
+        pixelFontSize = Object(_tools_math__WEBPACK_IMPORTED_MODULE_4__["round"])(this.size * Math.abs(d2pScale.y), 0);
+      }
+
+      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family); // +1 pixel for each side so total width is 2 pixels larger
+
+      var totalWidth = this.ctx.measureText(this.text).width + 2;
+      this.canvas.width = totalWidth;
+      this.canvas.height = pixelFontSize * 1.15;
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // this.ctx.restore();
+
+      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
+      this.ctx.textAlign = 'left';
+      this.ctx.textBaseline = 'alphabetic';
+      this.ctx.fillStyle = 'black';
+      var startX = 1;
+      var baselineHeightFromBottom = 0.25;
+      var startY = this.canvas.height * (1 - baselineHeightFromBottom);
+      this.ctx.fillText(this.text, startX, startY); // const aspectRatio = this.canvas.width / this.canvas.height;
+
+      var diagramWidth = this.canvas.width / d2pScale.x;
+      var diagramHeight = this.canvas.height / Math.abs(d2pScale.y);
+      var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, diagramHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramWidth, diagramHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramWidth, 0)];
+
+      if (this.alignH === 'center') {
+        points.forEach(function (point) {
+          point.x -= diagramWidth / 2;
+        });
+      }
+
+      if (this.alignH === 'right') {
+        points.forEach(function (point) {
+          point.x -= diagramWidth;
+        });
+      }
+
+      if (this.alignV === 'baseline') {
+        points.forEach(function (point) {
+          point.y -= diagramHeight * baselineHeightFromBottom;
+        });
+      }
+
+      if (this.alignV === 'top') {
+        points.forEach(function (point) {
+          point.y -= diagramHeight;
+        });
+      }
+
+      this.points = [];
+      points.forEach(function (point) {
+        _this2.points.push(point.x);
+
+        _this2.points.push(point.y);
+      }); // this.points = [
+      //   0, 0,
+      //   0, diagramHeight,
+      //   diagramWidth, diagramHeight,
+      //   diagramWidth, 0,
+      // ];
+
+      console.log("points", points);
+      var glBottomLeft = points[0].transformBy(this.diagramToGLSpaceTransformMatrix);
+      var glTopRight = points[2].transformBy(this.diagramToGLSpaceTransformMatrix);
+      this.createTextureMap(glBottomLeft.x, glTopRight.x, glBottomLeft.y, glTopRight.y);
+      console.log(this.texture);
+      var texture = this.texture;
+
+      if (texture != null) {
+        texture.image = this.ctx.canvas;
+        console.log(texture.image);
+
+        if (texture.buffer) {
+          console.log('resetting buffer');
+          this.resetBuffer();
+        } else {
+          console.log('setting up buffer');
+          this.setupBuffer();
+        }
+      }
+    } // // Puts text in center of canvas.
+    // makeTextCanvas(
+    //   options: TypeTextOptions,
+    //   width: number,
+    //   height: number,
+    // ) {
+    //   this.ctx.canvas.width = width;
+    //   this.ctx.canvas.height = height;
+    //   this.ctx.font = `${options.style} ${options.weight} ${options.size}px ${options.family}`;
+    //   this.ctx.textAlign = options.alignH;
+    //   this.ctx.textBaseline = options.alignV;
+    //   this.ctx.fillStyle = 'black';
+    //   this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
+    //   let startX = 0;
+    //   if (options.alignH === 'center') {
+    //     startX = width / 2;
+    //   } else if (options.alignH === 'right') {
+    //     startX = width;
+    //   }
+    //   let startY = height / 2;
+    //   this.ctx.fillText(options.text, startX, startY);
+    //   return this.ctx.canvas;
+    // }
+
+  }]);
+
+  return VertexText;
+}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (VertexText);
 
 /***/ }),
 
@@ -25905,11 +26261,14 @@ var getShaders = function getShaders() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shaders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shaders */ "./src/js/diagram/webgl/shaders.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 function createProgram(gl, vertexShader, fragmentShader) {
   var program = gl.createProgram();
@@ -26006,17 +26365,70 @@ function autoResize(event) {// let contRect = document.getElementById('container
 var WebGLInstance =
 /*#__PURE__*/
 function () {
-  function WebGLInstance(canvas, vertexSource, fragmentSource, shaderLocations, backgroundColor) {
+  _createClass(WebGLInstance, [{
+    key: "addTexture",
+    // locations: Object;
+    value: function addTexture(id, texture) {
+      var nextIndex = Object.keys(this.textures).length;
+      this.textures[id] = {
+        texture: texture,
+        index: nextIndex
+      };
+      return nextIndex;
+    }
+  }, {
+    key: "getProgram",
+    value: function getProgram(vertexShader, fragmentShader) {
+      this.programs.forEach(function (program) {
+        if (program.vertexShader === vertexShader && program.fragmentShader === fragmentShader) {
+          return program.program;
+        }
+      });
+      var shaders = Object(_shaders__WEBPACK_IMPORTED_MODULE_0__["default"])(vertexShader, fragmentShader);
+      var newProgram = createProgramFromScripts(this.gl, shaders.vertexSource, shaders.fragmentSource);
+      var programDetails = {
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        program: newProgram,
+        locations: getGLLocations(this.gl, newProgram, shaders.varNames)
+      };
+      this.programs.push(programDetails);
+      return this.programs.length - 1;
+    }
+  }, {
+    key: "useProgram",
+    value: function useProgram(programIndex) {
+      var program = this.programs[programIndex];
+
+      if (this.lastUsedProgram !== program) {
+        this.gl.useProgram(program.program);
+        this.lastUsedProgram = program.program;
+      }
+
+      return program.locations;
+    }
+  }]);
+
+  function WebGLInstance(canvas, // vertexSource: string,
+  // fragmentSource: string,
+  backgroundColor) {
     _classCallCheck(this, WebGLInstance);
 
     var gl = canvas.getContext('webgl', {
       antialias: true
     });
+    this.programs = [];
+    this.lastUsedProgram = null;
+    this.textures = {};
 
     if (gl instanceof WebGLRenderingContext) {
-      this.gl = gl;
-      this.program = createProgramFromScripts(this.gl, vertexSource, fragmentSource);
-      this.locations = getGLLocations(this.gl, this.program, shaderLocations); // Prep canvas
+      this.gl = gl; // this.program = createProgramFromScripts(
+      //   this.gl,
+      //   vertexSource,
+      //   fragmentSource,
+      // );
+      // this.locations = getGLLocations(this.gl, this.program, shaderLocations);
+      // Prep canvas
       // resizeCanvasToDisplaySize(this.gl.canvas);
 
       this.resize(); // Tell WebGL how to convert from clip space to pixels
@@ -26031,8 +26443,8 @@ function () {
       this.gl.clear(this.gl.COLOR_BUFFER_BIT);
       this.gl.disable(this.gl.DEPTH_TEST);
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.enable(gl.BLEND);
-      this.gl.useProgram(this.program); // window.addEventListener('resize', autoResize.bind(this, event));
+      gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
+      // window.addEventListener('resize', autoResize.bind(this, event));
     }
   }
 
@@ -26356,7 +26768,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26391,6 +26803,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMoveTime", function() { return getMoveTime; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parsePoint", function() { return parsePoint; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipAngle", function() { return clipAngle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spaceToSpaceScale", function() { return spaceToSpaceScale; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -28278,6 +28691,12 @@ function spaceToSpaceTransform(s1, s2) {
   var yScale = s2.y.height / s1.y.height;
   var t = new Transform(name).scale(xScale, yScale).translate(s2.x.bottomLeft - s1.x.bottomLeft * xScale, s2.y.bottomLeft - s1.y.bottomLeft * yScale);
   return t;
+}
+
+function spaceToSpaceScale(s1, s2) {
+  var xScale = s2.x.width / s1.x.width;
+  var yScale = s2.y.height / s1.y.height;
+  return new Point(xScale, yScale);
 }
 
 function comparePoints(p, currentMin, currentMax, firstPoint) {
