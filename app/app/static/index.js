@@ -5435,7 +5435,7 @@ function () {
         // content.lastDrawTransform = content.transform._dup();
 
         var r = content.getRelativeVertexSpaceBoundingRect();
-        console.log(r, content.drawingObject.border); // content.lastDrawTransform = t;
+        console.log(r, content.drawingObject.border, content.name); // content.lastDrawTransform = t;
 
         this.location = location._dup();
         this.scale = scale;
@@ -6503,7 +6503,8 @@ function (_DiagramElementCollec) {
           size: fontToUse.size,
           alignV: fontToUse.alignV,
           alignH: fontToUse.alignH,
-          color: fontToUse.color
+          color: fontToUse.color,
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('equation element').scale(1, 1).translate(0, 0)
         }, {
           color: options.color
         }); // if (options.color != null) {
@@ -22612,14 +22613,12 @@ function (_VertexObject) {
       this.height = height;
       this.calcAscentDescent();
       this.points = [];
-      this.border = [[]];
       points.forEach(function (point) {
         _this2.points.push(point.x);
 
         _this2.points.push(point.y);
-
-        _this2.border[0].push(point);
       });
+      this.border = [[new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, -this.descent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, this.ascent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, this.ascent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, -this.descent)]];
       var texture = this.texture;
 
       if (texture != null) {
@@ -22719,9 +22718,9 @@ function (_VertexObject) {
       this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
       this.ctx.textAlign = 'left';
       this.ctx.textBaseline = 'alphabetic';
-      this.ctx.fillStyle = 'white';
-      this.ctx.fillStyle = 'rgba(200,200,200,255)'; // debug only
+      this.ctx.fillStyle = 'white'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
 
+      this.ctx.fillStyle = 'red';
       var startX = pixelFontSize * hBuffer / 2;
       var baselineHeightFromBottom = 0.25;
       var startY = this.canvas.height * (1 - baselineHeightFromBottom);

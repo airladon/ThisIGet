@@ -203,14 +203,15 @@ export default function lessonLayout() {
         alignH: 'center',
       },
       elements: {
-        c: 'c',
+        c: 'g',
         'pi': 'π',
         'd': 'd',
         'equals': ' = ',
+        '_2': '2',
         v: { symbol: 'vinculum' },
       },
       forms: {
-        'base': [{ frac: ['c', 'd', 'v'] }, 'equals', 'pi', 'space'],
+        'base': [{ frac: ['c', 'd', 'v'] }, 'equals', { sup: ['pi', '_2'] }, 'space'],
       },
     },
     mods: {
