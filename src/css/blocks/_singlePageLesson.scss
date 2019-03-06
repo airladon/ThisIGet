@@ -4,7 +4,7 @@
   margin-right: 20px;
   background-color: color('white', 'lightest');
   color: color('grey', 'darkest');
-  // position: relative;
+  position: relative;
 }
 
 .single_page_lesson__header1 {
@@ -26,11 +26,12 @@
 }
 
 .single_page_lesson__diagram_container {
-  position: fixed;
+  position: absolute;
   width: 100%;
   height: 100%;
   // width: 500px;
   // height: 2000px;
+
   left: 0;
   top: 0;
 }
@@ -45,4 +46,9 @@
 
 .single_page_lesson__text_container {
   position: static;
+}
+
+.single_page_lesson__container .lesson__diagram {
+  max-width: none;
+  max-height: none;
 }

@@ -3644,24 +3644,23 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _webgl_shaders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./webgl/shaders */ "./src/js/diagram/webgl/shaders.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // import getShaders from './webgl/shaders';
 
 
 
@@ -3698,6 +3697,19 @@ function () {
   // addElementsLow: DiagramAddElements;
   // addElementsHigh: DiagramAddElements;
   // layout: Object;
+  // glToDiagramSpaceTransform: Transform;
+  // diagramToGLSpaceTransform: Transform;
+  // pixelToDiagramSpaceTransform: Transform;
+  // diagramToPixelSpaceTransform: Transform;
+  // pixelToGLSpaceTransform: Transform;
+  // glToPixelSpaceTransform: Transform;
+  // diagramToCSSPercentSpaceTransform: Transform;
+  // glToDiagramSpaceScale: Point;
+  // diagramToGLSpaceScale: Point;
+  // pixelToDiagramSpaceScale: Point;
+  // diagramToPixelSpaceScale: Point;
+  // glToPixelSpaceScale: Point;
+  // pixelToGLSpaceScale: Point;
   function Diagram( // canvas: HTMLCanvasElement,
   options) // limitsOrxMin: number | Rect = new Rect(-1, -1, 2, 2),
   // yMin: number = -1,
@@ -3712,19 +3724,17 @@ function () {
 
     var defaultOptions = {
       htmlId: 'id_figureone_canvases',
-      limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2),
+      limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
       // layout: {},
-      vertexShader: 'simple',
-      fragmentShader: 'simple',
+      // vertexShader: 'simple',
+      // fragmentShader: 'simple',
       fontScale: 1
     };
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultOptions, options);
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
-        limits = optionsToUse.limits,
-        vertexShader = optionsToUse.vertexShader,
-        fragmentShader = optionsToUse.fragmentShader; // if (typeof containerIdOrOptions !== 'string') {
+        limits = optionsToUse.limits; // if (typeof containerIdOrOptions !== 'string') {
     //   optionsToUse = joinObjects(
     //     defaultOptions, containerIdOrOptions,
     //   );
@@ -3797,8 +3807,8 @@ function () {
         this.webglLow = webglLow;
         this.webglHigh = webglHigh; // const draw2D = this.textCanvas.getContext('2d');
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
-        this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasHigh);
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
+        this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasHigh);
       }
     }
 
@@ -3818,7 +3828,7 @@ function () {
 
 
     if (this instanceof Diagram) {
-      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_6__["default"](this);
+      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_5__["default"](this);
     }
 
     this.fontScale = optionsToUse.fontScale; // let limits;
@@ -3836,7 +3846,7 @@ function () {
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
-    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_5__["default"]();
+    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]();
     this.shapesLow = this.getShapes(false);
     this.shapesHigh = this.getShapes(true);
     this.shapes = this.shapesLow;
@@ -3858,7 +3868,7 @@ function () {
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
-    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["isTouchDevice"])();
+    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
     this.animateNextFrame();
 
     if (optionsToUse.elements) {
@@ -3873,7 +3883,7 @@ function () {
     value: function addElements(rootCollection, layout) {
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
     }
   }, {
     key: "getShapes",
@@ -3887,7 +3897,7 @@ function () {
         draw2D = this.draw2DHigh;
       }
 
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.diagramToPixelSpaceScale, this.diagramToGLSpaceTransform.m(), this.animateNextFrame.bind(this));
+      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this));
     }
   }, {
     key: "getEquations",
@@ -3899,7 +3909,7 @@ function () {
         shapes = this.shapesHigh;
       }
 
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, this.animateNextFrame.bind(this));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this));
     }
   }, {
     key: "getObjects",
@@ -3913,7 +3923,7 @@ function () {
         equation = this.equationHigh;
       }
 
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this));
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this));
     } // getAddElements(high: boolean = false) {
     //   let shapes = this.shapesLow;
     //   let objects = this.objectsLow;
@@ -4012,19 +4022,15 @@ function () {
           height: -1
         }
       };
-      this.diagramToGLSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, glSpace, 'Diagram');
-      this.glToDiagramSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(glSpace, diagramSpace);
-      this.pixelToDiagramSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(pixelSpace, diagramSpace);
-      this.diagramToPixelSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, pixelSpace);
-      this.pixelToGLSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(pixelSpace, glSpace);
-      this.glToPixelSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(glSpace, pixelSpace);
-      this.diagramToCSSPercentSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, percentSpace);
-      this.diagramToGLSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(diagramSpace, glSpace);
-      this.glToDiagramSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(glSpace, diagramSpace);
-      this.diagramToPixelSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(diagramSpace, pixelSpace);
-      this.pixelToDiagramSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(pixelSpace, diagramSpace);
-      this.pixelToGLSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(pixelSpace, glSpace);
-      this.glToPixelSpaceScale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceScale"])(glSpace, pixelSpace);
+      this.spaceTransforms = {
+        diagramToGL: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, glSpace, 'Diagram'),
+        glToDiagram: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(glSpace, diagramSpace),
+        pixelToDiagram: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(pixelSpace, diagramSpace),
+        diagramToPixel: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, pixelSpace),
+        pixelToGL: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(pixelSpace, glSpace),
+        glToPixel: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(glSpace, pixelSpace),
+        diagramToCSSPercent: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, percentSpace)
+      };
     }
   }, {
     key: "initialize",
@@ -4035,7 +4041,7 @@ function () {
   }, {
     key: "setFirstTransform",
     value: function setFirstTransform() {
-      this.elements.setFirstTransform(this.diagramToGLSpaceTransform);
+      this.elements.setFirstTransform(this.spaceTransforms.diagramToGL);
     }
   }, {
     key: "updateLimits",
@@ -4047,7 +4053,7 @@ function () {
     key: "resize",
     value: function resize() {
       if (this.elements != null) {
-        this.elements.updateLimits(this.limits);
+        this.elements.updateLimits(this.limits, this.spaceTransforms);
       }
 
       this.webglLow.resize();
@@ -4058,13 +4064,17 @@ function () {
       this.sizeHtmlText();
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
+      this.elements.resize();
       this.animateNextFrame();
     }
   }, {
     key: "updateHTMLElementTie",
     value: function updateHTMLElementTie() {
       if (this.elements != null) {
-        this.elements.updateHTMLElementTie(this.pixelToDiagramSpaceTransform, this.canvasLow);
+        this.elements.updateHTMLElementTie( // this.pixelToDiagramSpaceTransform,
+        // this.diagramToPixelSpaceScale,
+        // this.diagramToGLSpaceTransform.m(),
+        this.canvasLow);
       }
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
@@ -4081,7 +4091,7 @@ function () {
 
       var pixelPoint = this.clientToPixel(clientPoint); // console.log(pixelPoint)
 
-      var glPoint = pixelPoint.transformBy(this.pixelToGLSpaceTransform.matrix()); // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
+      var glPoint = pixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
       // const clipPoint = this.clientToClip(clientPoint);
       // Get all the diagram elements that were touched at this point (element
       // must have isTouchable = true to be considered)
@@ -4147,10 +4157,10 @@ function () {
       var centerDiagramSpace = element.getDiagramPosition();
 
       if (centerDiagramSpace == null) {
-        centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+        centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
       }
 
-      var center = centerDiagramSpace.transformBy(this.diagramToPixelSpaceTransform.matrix());
+      var center = centerDiagramSpace.transformBy(this.spaceTransforms.diagramToPixel.matrix());
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
       var currentPixelPoint = this.clientToPixel(currentClientPoint); // const previousDiagramPoint =
       //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
@@ -4167,7 +4177,7 @@ function () {
 
       var currentAngle = Math.atan2(currentPixelPoint.y - center.y, currentPixelPoint.x - center.x);
       var previousAngle = Math.atan2(previousPixelPoint.y - center.y, previousPixelPoint.x - center.x);
-      var diffAngle = -Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["minAngleDiff"])(previousAngle, currentAngle);
+      var diffAngle = -Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["minAngleDiff"])(previousAngle, currentAngle);
 
       var transform = element.transform._dup();
 
@@ -4192,8 +4202,8 @@ function () {
     value: function translateElement(element, previousClientPoint, currentClientPoint) {
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
       var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      var previousDiagramPoint = previousPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+      var currentDiagramPoint = currentPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
       var m = element.diagramSpaceToVertexSpaceTransformMatrix();
       var currentVertexSpacePoint = currentDiagramPoint.transformBy(m);
       var previousVertexSpacePoint = previousDiagramPoint.transformBy(m); // const delta = currentDiagramPoint.sub(previousDiagramPoint);
@@ -4223,7 +4233,7 @@ function () {
       // const previousMag = previousDiagramPoint.sub(center).distance();
       // const currentMag = currentDiagramPoint.sub(center).distance();
 
-      var center = element.getDiagramPosition().transformBy(this.diagramToPixelSpaceTransform.matrix());
+      var center = element.getDiagramPosition().transformBy(this.spaceTransforms.diagramToPixel.matrix());
       var previousMag = previousPixelPoint.sub(center).distance();
       var currentMag = currentPixelPoint.sub(center).distance();
       var currentScale = element.transform.s();
@@ -4266,7 +4276,7 @@ function () {
 
       var previousPixelPoint = this.clientToPixel(previousClientPoint); // const currentPixelPoint = this.clientToPixel(currentClientPoint);
 
-      var previousGLPoint = previousPixelPoint.transformBy(this.pixelToGLSpaceTransform.matrix()); // Go through each element being moved, get the current translation
+      var previousGLPoint = previousPixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // Go through each element being moved, get the current translation
 
       for (var i = 0; i < this.beingMovedElements.length; i += 1) {
         var element = this.beingMovedElements[i];
@@ -4318,7 +4328,7 @@ function () {
     key: "createDiagramElements",
     value: function createDiagramElements() {
       // $FlowFixMe
-      this.elements = new _Element__WEBPACK_IMPORTED_MODULE_4__["DiagramElementCollection"]();
+      this.elements = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]();
       this.elements.diagramLimits = this.limits;
     }
   }, {
@@ -4373,7 +4383,7 @@ function () {
       //   );
       // const t1 = performance.now();
 
-      this.elements.draw(this.diagramToGLSpaceTransform, now);
+      this.elements.draw(this.spaceTransforms.diagramToGL, now);
 
       if (this.elements.isMoving()) {
         this.animateNextFrame();
@@ -4399,7 +4409,7 @@ function () {
     key: "clientToPixel",
     value: function clientToPixel(clientLocation) {
       var canvas = this.canvasLow.getBoundingClientRect();
-      return new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](clientLocation.x - canvas.left, clientLocation.y - canvas.top);
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](clientLocation.x - canvas.left, clientLocation.y - canvas.top);
     }
   }]);
 
@@ -13306,7 +13316,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Text(webgl, diagramLimits, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, optionsIn) {
+function Text(webgl, diagramLimits, optionsIn) {
   var defaultOptions = {
     position: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0),
     color: [1, 0, 0, 1]
@@ -13321,7 +13331,7 @@ function Text(webgl, diagramLimits, diagramToPixelSpaceScale, diagramToGLSpaceTr
     options.transform.updateTranslation(options.position);
   }
 
-  var vertexText = new _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, options); // let transform = new Transform();
+  var vertexText = new _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, options); // let transform = new Transform();
   // if (transformOrLocation instanceof Point) {
   //   transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
   // } else {
@@ -18335,7 +18345,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DiagramPrimatives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, animateNextFrame) {
+  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, spaceTransforms, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
     this.webgl = webgl;
@@ -18343,8 +18353,7 @@ function () {
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
-    this.diagramToPixelSpaceScale = diagramToPixelSpaceScale;
-    this.diagramToGLSpaceTransformMatrix = diagramToGLSpaceTransformMatrix;
+    this.spaceTransforms = spaceTransforms;
   }
 
   _createClass(DiagramPrimatives, [{
@@ -18421,7 +18430,7 @@ function () {
   }, {
     key: "textNew",
     value: function textNew(options) {
-      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, this.limits, this.diagramToPixelSpaceScale, this.diagramToGLSpaceTransformMatrix, options);
+      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, this.limits, options);
     }
   }, {
     key: "txt",
@@ -19051,6 +19060,7 @@ function () {
     this.border = [[]];
     this.holeBorder = [[]];
     this.onLoad = null;
+    this.type = 'drawingObject';
   }
 
   _createClass(DrawingObject, [{
@@ -21182,8 +21192,6 @@ function (_DrawingObject) {
   // Primative vertices of shape
   // Number of primative vertices
   // Border vertices
-  // textureLocation: string | Object;
-  // texturePoints: Array<number>;
   function VertexObject(webgl) {
     var _this;
 
@@ -21203,34 +21211,37 @@ function (_DrawingObject) {
 
     _this.texture = null;
     _this.programIndex = webgl.getProgram(vertexShader, fragmentShader);
+    _this.type = 'vertexPrimative';
     return _this;
   }
 
   _createClass(VertexObject, [{
     key: "addTextureToBuffer",
-    value: function addTextureToBuffer(texture, //: WebGLTextureBuffer
-    image) // image data
+    value: function addTextureToBuffer(glTexture, image) // image data
     {
-      console.log(image);
-      this.gl.activeTexture(this.gl.TEXTURE0 + this.texture.index);
-      this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
-      this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
-      this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image);
-
       function isPowerOf2(value) {
         // eslint-disable-next-line no-bitwise
         return (value & value - 1) === 0;
-      } // Check if the image is a power of 2 in both dimensions.
+      }
 
+      var texture = this.texture;
 
-      if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-        // Yes, it's a power of 2. Generate mips.
-        this.gl.generateMipmap(this.gl.TEXTURE_2D);
-      } else {
-        // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-        this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+      if (texture != null) {
+        var index = this.webgl.textures[texture.id].index;
+        this.gl.activeTexture(this.gl.TEXTURE0 + index);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
+        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
+
+        if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+          // Yes, it's a power of 2. Generate mips.
+          this.gl.generateMipmap(this.gl.TEXTURE_2D);
+        } else {
+          // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        }
       }
     }
   }, {
@@ -21265,32 +21276,30 @@ function (_DrawingObject) {
         this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
         this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texture.points), this.gl.STATIC_DRAW);
 
-        if (texture.id in this.webgl.textures) {
-          texture.index = this.webgl.textures[texture.id].index;
-        } else {
+        if (!(texture.id in this.webgl.textures) || texture.id in this.webgl.textures && this.webgl.textures[texture.id].glTexture == null) {
           var glTexture = this.gl.createTexture();
-          texture.index = this.webgl.addTexture(texture.id, glTexture);
-          this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+          this.webgl.addTexture(texture.id, glTexture, texture.type);
+          this.gl.activeTexture(this.gl.TEXTURE0 + this.webgl.textures[texture.id].index);
           this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
+          var src = texture.src;
 
-          if (texture.src) {
-            // const texture = this.gl.createTexture();
-            // this.webgl.addTexture(this.texture.id, texture);
-            // this.gl.bindTexture(this.gl.TEXTURE_2D, texture);
+          if (src) {
             // Fill the texture with a 1x1 blue pixel.
             this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
             var image = new Image();
-            image.src = texture.src;
+            image.src = src;
             image.addEventListener('load', function () {
               // Now that the image has loaded make copy it to the texture.
-              _this2.addTextureToBuffer(glTexture, image);
+              texture.data = image;
+
+              _this2.addTextureToBuffer(glTexture, texture.data);
 
               if (_this2.onLoad != null) {
                 _this2.onLoad();
               }
             });
-          } else {
-            this.addTextureToBuffer(glTexture, texture.image);
+          } else if (texture.data != null) {
+            this.addTextureToBuffer(glTexture, texture.data);
           }
         }
       }
@@ -21306,9 +21315,16 @@ function (_DrawingObject) {
       var texture = this.texture;
 
       if (texture) {
-        this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-        this.gl.deleteTexture(texture.buffer);
+        // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+        // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+        if (this.webgl.textures[texture.id].glTexture != null) {
+          this.gl.deleteTexture(this.webgl.textures[texture.id].glTexture);
+          this.webgl.textures[texture.id].glTexture = null;
+        }
+
+        this.gl.deleteBuffer(texture.buffer); // texture.glTexture = null;
+
+        texture.buffer = null;
       } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
 
@@ -21373,7 +21389,17 @@ function (_DrawingObject) {
     key: "getPointCountForLength",
     value: function getPointCountForLength(drawLength) {
       return this.numPoints;
-    }
+    } // A texture map is a texture coords point that lines up with the texture
+    // vertex point. So, if the vertex shape is rectangular, centered at the
+    // origin and wants to incorporate the entire texture, then the map would
+    // be:
+    // vertex space            texture space
+    // this.points         this.texture.points
+    //    -1,  -1,                  0,  0
+    //    -1,   1,                  0,  1
+    //     1,   1,                  1,  1
+    //     1,  -1,                  1,  0
+
   }, {
     key: "createTextureMap",
     value: function createTextureMap() {
@@ -21389,15 +21415,19 @@ function (_DrawingObject) {
       var glHeight = yMaxGL - yMinGL;
       var texWidth = xMaxTex - xMinTex;
       var texHeight = yMaxTex - yMinTex;
-      this.texture.points = [];
+      var texture = this.texture;
 
-      for (var i = 0; i < this.points.length; i += 2) {
-        var x = this.points[i];
-        var y = this.points[i + 1];
-        var texNormX = (x - xMinGL) / glWidth;
-        var texNormY = (y - yMinGL) / glHeight;
-        this.texture.points.push(texNormX * texWidth + xMinTex);
-        this.texture.points.push(texNormY * texHeight + yMinTex);
+      if (texture != null) {
+        texture.points = [];
+
+        for (var i = 0; i < this.points.length; i += 2) {
+          var x = this.points[i];
+          var y = this.points[i + 1];
+          var texNormX = (x - xMinGL) / glWidth;
+          var texNormY = (y - yMinGL) / glHeight;
+          texture.points.push(texNormX * texWidth + xMinTex);
+          texture.points.push(texNormY * texHeight + yMinTex);
+        }
       }
     }
   }, {
@@ -21423,7 +21453,16 @@ function (_DrawingObject) {
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
 
-      var locations = this.webgl.useProgram(this.programIndex); // Turn on the attribute
+      var locations = this.webgl.useProgram(this.programIndex);
+
+      if (this.texture && this.webgl.textures[this.texture.id].type === 'canvasText') {
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
+        this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
+      } else {
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+      } // Turn on the attribute
+
 
       this.gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 
@@ -21458,7 +21497,8 @@ function (_DrawingObject) {
 
       if (texture) {
         this.gl.uniform1i(locations.u_use_texture, 1);
-        this.gl.uniform1i(locations.u_texture, texture.index);
+        var index = this.webgl.textures[texture.id].index;
+        this.gl.uniform1i(locations.u_texture, index);
       } else {
         this.gl.uniform1i(locations.u_use_texture, 0);
       }
@@ -21940,9 +21980,12 @@ function (_VertexObject) {
     }
 
     if (textureLocation) {
-      _this.texture = {};
-      _this.texture.src = textureLocation;
-      _this.texture.id = 'texture_image';
+      _this.texture = {
+        id: textureLocation,
+        src: textureLocation,
+        type: 'image',
+        points: []
+      };
 
       _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
     }
@@ -22427,6 +22470,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../tools/m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22451,6 +22495,7 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+
 var VertexText =
 /*#__PURE__*/
 function (_VertexObject) {
@@ -22460,24 +22505,23 @@ function (_VertexObject) {
   // radius from center to outside of polygon
   // center point
   // angle between adjacent verteces to center lines
-  function VertexText(webgl, diagramToPixelSpaceScale, diagramToGLSpaceTransformMatrix, textOptions) {
+  function VertexText(webgl, textOptions) {
     var _this;
 
     _classCallCheck(this, VertexText);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'withTexture'));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'text'));
     _this.glPrimative = webgl.gl.TRIANGLE_FAN;
-    _this.diagramToPixelSpaceScale = diagramToPixelSpaceScale;
-    _this.diagramToGLSpaceTransformMatrix = diagramToGLSpaceTransformMatrix;
     var defaultTextOptions = {
       text: 'DEFAULT_TEXT',
-      size: 20,
-      // pixels
+      size: '20px',
+      // Text in pixels, or in vertex space units.
       family: 'Helvetica',
       style: 'normal',
       weight: 400,
       alignH: 'center',
-      alignV: 'alphabetic'
+      alignV: 'alphabetic',
+      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["generateUniqueId"])('vertexText')
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultTextOptions, textOptions);
     _this.size = options.size;
@@ -22489,153 +22533,166 @@ function (_VertexObject) {
     _this.weight = options.weight;
     _this.canvas = document.createElement('canvas');
     _this.canvas.id = 'asdf';
-    _this.ctx = _this.canvas.getContext('2d'); // const center = new Point(0, 0);
-
-    _this.texture = {};
-    _this.texture.id = 'texture_text'; // const width = options.size * options.text.length * 0.7;
-    // const height = options.size * 1.5;
-    // this.texture.image = this.makeTextCanvas(options, width, height);
-    // const data = this.ctx.getImageData(0, 0, canvas.width, canvas.height).data;
-    // console.log(data);
-    // let aspectRatio = width / height;
-    // console.log(width, height)
-    // this.points = [
-    //   -1, -1 / aspectRatio,
-    //   -1, 1 / aspectRatio,
-    //   1, 1 / aspectRatio,
-    //   1, -1 / aspectRatio,
-    // ];
-    // this.createTextureMap(-1, 1, -1 / aspectRatio, 1 / aspectRatio);
-    // this.setupBuffer();
+    _this.ctx = _this.canvas.getContext('2d');
+    _this.texture = {
+      id: options.id,
+      points: [],
+      type: 'canvasText'
+    };
+    _this.type = 'vertexText';
 
     _this.drawTextIntoBuffer();
 
     return _this;
-  }
+  } // Text is positioned such that the text baseline will be at
+  // vertex space y = 0.
+  // The border will then cover the ascent and descent of the text.
+
 
   _createClass(VertexText, [{
-    key: "drawTextIntoBuffer",
-    value: function drawTextIntoBuffer() {
+    key: "resizeText",
+    value: function resizeText() {
       var _this2 = this;
 
-      // Font is in diagram space units.
-      // Font size relative to M width will vary by font family so start by
-      // assuming: M width = font size, and then measure it, and find a scaling
-      // correction factor to apply
-      var d2pScale = this.diagramToPixelSpaceScale; // const width = this.text.length * this.size * d2pScale.x;
-      // const height = this.size * Math.abs(d2pScale.y) * 1.15;
+      var pixelToVertexSpaceScale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
+      var width = this.canvas.width * pixelToVertexSpaceScale.x;
+      var height = this.canvas.height * pixelToVertexSpaceScale.y;
+      var start = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
 
-      var pixelFontSize = 10;
+      if (this.alignH === 'center') {
+        start.x = -width / 2;
+      } else if (this.alignH === 'right') {
+        start.x = -width;
+      }
+
+      if (this.alignV === 'baseline') {
+        start.y = -height * 0.25;
+      } else if (this.alignV === 'top') {
+        start.y = -height;
+      } else if (this.alignV === 'middle') {
+        start.y = -height / 2;
+      }
+
+      var points = [start, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, start.y + height), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, start.y + height), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, start.y)];
+      this.width = width;
+      this.height = height;
+      this.calcAscentDescent();
+      this.points = []; // this.border = [[]];
+
+      points.forEach(function (point) {
+        _this2.points.push(point.x);
+
+        _this2.points.push(point.y); // this.border[0].push(point);
+
+      });
+      var texture = this.texture;
+
+      if (texture != null) {
+        texture.points = [0, 0, 0, 1, 1, 1, 1, 0];
+        texture.data = this.ctx.canvas;
+
+        if (texture.buffer) {
+          this.resetBuffer();
+        } else {
+          this.setupBuffer();
+        }
+      }
+    }
+  }, {
+    key: "calcAscentDescent",
+    value: function calcAscentDescent() {
+      // const aWidth = this.ctx.measureText('a').width;
+      // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+      var ascent = 0.75;
+      var descent = 0;
+      var lowAscentRe = /[,.]/g;
+      var midAscentRe = /[acemnorsuvwxz*gyq:><;p=]/g;
+      var midDecentRe = /[;,$]/g;
+      var maxDescentRe = /[gjyqp@Q(){}[\]|]/g;
+      var lowAscentMatches = this.text.match(lowAscentRe);
+
+      if (Array.isArray(lowAscentMatches)) {
+        if (lowAscentMatches.length === this.text.length) {
+          ascent = 0.1;
+        }
+      }
+
+      var midAscentMatches = this.text.match(midAscentRe);
+
+      if (Array.isArray(midAscentMatches)) {
+        if (midAscentMatches.length === this.text.length) {
+          ascent = 0.5;
+        }
+      }
+
+      var midDescentMatches = this.text.match(midDecentRe);
+
+      if (Array.isArray(midDescentMatches)) {
+        if (midDescentMatches.length > 0) {
+          descent = 0.1;
+        }
+      }
+
+      var maxDescentMatches = this.text.match(maxDescentRe);
+
+      if (Array.isArray(maxDescentMatches)) {
+        if (maxDescentMatches.length > 0) {
+          descent = 0.25;
+        }
+      }
+
+      this.ascent = ascent * this.height;
+      this.descent = descent * this.height;
+    } // If font size is defined in pixels, then the size will always be the size
+    // in pixels independent of how the diagram window or scaling changes
+    // If the font size is defined in vertex space units, then the font size
+    // will always be scaled to look like the vertex space size, but a new canvas
+    // will be drawn each time to minimize aliasing.
+
+  }, {
+    key: "drawTextIntoBuffer",
+    value: function drawTextIntoBuffer() {
+      var pixelToVertexSpaceScale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
+      var pixelFontSize = 20;
 
       if (typeof this.size === 'string' && this.size.endsWith('px')) {
         pixelFontSize = parseInt(this.size, 10);
       } else {
+        var diagramFontSize;
+
         if (typeof this.size === 'string') {
-          this.size = parseFloat(this.size);
+          diagramFontSize = parseFloat(this.size);
+        } else {
+          diagramFontSize = this.size;
         }
 
-        pixelFontSize = Object(_tools_math__WEBPACK_IMPORTED_MODULE_4__["round"])(this.size * Math.abs(d2pScale.y), 0);
+        pixelFontSize = Object(_tools_math__WEBPACK_IMPORTED_MODULE_4__["round"])(diagramFontSize / pixelToVertexSpaceScale.x, 0);
       }
 
-      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family); // +1 pixel for each side so total width is 2 pixels larger
+      if (pixelFontSize < 1) {
+        pixelFontSize = 1;
+      }
 
-      var totalWidth = this.ctx.measureText(this.text).width + 2;
-      this.canvas.width = totalWidth;
-      this.canvas.height = pixelFontSize * 1.15;
-      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // this.ctx.restore();
+      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
+      var hBuffer = 0.3;
+      var width = this.ctx.measureText(this.text).width + pixelFontSize * hBuffer;
+      var height = pixelFontSize * 1.15;
+      this.canvas.width = Math.max(width, 1);
+      this.canvas.height = Math.max(height, 1);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // need to reset font after a canvas resize
 
       this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
       this.ctx.textAlign = 'left';
       this.ctx.textBaseline = 'alphabetic';
-      this.ctx.fillStyle = 'black';
-      var startX = 1;
+      this.ctx.fillStyle = 'white';
+      this.ctx.fillStyle = 'red'; // debug only
+
+      var startX = pixelFontSize * hBuffer / 2;
       var baselineHeightFromBottom = 0.25;
       var startY = this.canvas.height * (1 - baselineHeightFromBottom);
-      this.ctx.fillText(this.text, startX, startY); // const aspectRatio = this.canvas.width / this.canvas.height;
-
-      var diagramWidth = this.canvas.width / d2pScale.x;
-      var diagramHeight = this.canvas.height / Math.abs(d2pScale.y);
-      var points = [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, diagramHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramWidth, diagramHeight), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramWidth, 0)];
-
-      if (this.alignH === 'center') {
-        points.forEach(function (point) {
-          point.x -= diagramWidth / 2;
-        });
-      }
-
-      if (this.alignH === 'right') {
-        points.forEach(function (point) {
-          point.x -= diagramWidth;
-        });
-      }
-
-      if (this.alignV === 'baseline') {
-        points.forEach(function (point) {
-          point.y -= diagramHeight * baselineHeightFromBottom;
-        });
-      }
-
-      if (this.alignV === 'top') {
-        points.forEach(function (point) {
-          point.y -= diagramHeight;
-        });
-      }
-
-      this.points = [];
-      points.forEach(function (point) {
-        _this2.points.push(point.x);
-
-        _this2.points.push(point.y);
-      }); // this.points = [
-      //   0, 0,
-      //   0, diagramHeight,
-      //   diagramWidth, diagramHeight,
-      //   diagramWidth, 0,
-      // ];
-
-      console.log("points", points);
-      var glBottomLeft = points[0].transformBy(this.diagramToGLSpaceTransformMatrix);
-      var glTopRight = points[2].transformBy(this.diagramToGLSpaceTransformMatrix);
-      this.createTextureMap(glBottomLeft.x, glTopRight.x, glBottomLeft.y, glTopRight.y);
-      console.log(this.texture);
-      var texture = this.texture;
-
-      if (texture != null) {
-        texture.image = this.ctx.canvas;
-        console.log(texture.image);
-
-        if (texture.buffer) {
-          console.log('resetting buffer');
-          this.resetBuffer();
-        } else {
-          console.log('setting up buffer');
-          this.setupBuffer();
-        }
-      }
-    } // // Puts text in center of canvas.
-    // makeTextCanvas(
-    //   options: TypeTextOptions,
-    //   width: number,
-    //   height: number,
-    // ) {
-    //   this.ctx.canvas.width = width;
-    //   this.ctx.canvas.height = height;
-    //   this.ctx.font = `${options.style} ${options.weight} ${options.size}px ${options.family}`;
-    //   this.ctx.textAlign = options.alignH;
-    //   this.ctx.textBaseline = options.alignV;
-    //   this.ctx.fillStyle = 'black';
-    //   this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
-    //   let startX = 0;
-    //   if (options.alignH === 'center') {
-    //     startX = width / 2;
-    //   } else if (options.alignH === 'right') {
-    //     startX = width;
-    //   }
-    //   let startY = height / 2;
-    //   this.ctx.fillText(options.text, startX, startY);
-    //   return this.ctx.canvas;
-    // }
-
+      this.ctx.fillText(this.text, startX, startY);
+      this.resizeText(pixelToVertexSpaceScale);
+    }
   }]);
 
   return VertexText;
@@ -23208,7 +23265,7 @@ function () {
 
   }, {
     key: "updateHTMLElementTie",
-    value: function updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, diagramCanvas) {
+    value: function updateHTMLElementTie(diagramCanvas) {
       // First get the HTML element
       var tieToElement;
 
@@ -23229,8 +23286,9 @@ function () {
         var wAspectRatio = dWindow.width / dWindow.height;
         var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.left - canvas.left, tie.top - canvas.top);
         var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.width, tie.height));
-        var topLeft = topLeftPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
-        var bottomRight = bottomRightPixels.transformBy(pixelSpaceToDiagramSpaceTransform.m());
+        var pixelToDiagram = this.diagramTransforms.pixelToDiagram;
+        var topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
+        var bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
         var width = bottomRight.x - topLeft.x;
         var height = topLeft.y - bottomRight.y;
         var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
@@ -23290,8 +23348,13 @@ function () {
         this.setScale(scaleX, scaleY); // Offset the element relative to the tie
 
         this.setPosition(center.x - scaleX * (this.tieToHTML.window.left + this.tieToHTML.window.width / 2), center.y - scaleY * (this.tieToHTML.window.bottom + this.tieToHTML.window.height / 2));
+        this.setFirstTransform(this.getParentLastDrawTransform());
       }
-    } // Calculate the next transform due to a progressing animation
+    } // eslint-disable-next-line no-unused-vars, class-methods-use-this
+
+  }, {
+    key: "setFirstTransform",
+    value: function setFirstTransform(parentTransform) {} // Calculate the next transform due to a progressing animation
 
   }, {
     key: "calcNextAnimationTransform",
@@ -24633,8 +24696,9 @@ function () {
     }
   }, {
     key: "updateLimits",
-    value: function updateLimits(limits) {
+    value: function updateLimits(limits, transforms) {
       this.diagramLimits = limits;
+      this.diagramTransforms = transforms;
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -24755,6 +24819,21 @@ function () {
       // return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
+    key: "getPixelToVertexSpaceScale",
+    value: function getPixelToVertexSpaceScale() {
+      var pixelToDiagram = this.diagramTransforms.pixelToDiagram.matrix();
+      var diagramToVertex = this.diagramSpaceToVertexSpaceTransformMatrix();
+      var scaleX = pixelToDiagram[0] * diagramToVertex[0];
+      var scaleY = pixelToDiagram[4] * diagramToVertex[4];
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleX, scaleY);
+    }
+  }, {
+    key: "getVertexToPixelSpaceScale",
+    value: function getVertexToPixelSpaceScale() {
+      var pixelToVertexSpaceScale = this.getPixelToVertexSpaceScale();
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / pixelToVertexSpaceScale.x, 1 / pixelToVertexSpaceScale.y);
+    }
+  }, {
     key: "getDiagramPositionInVertexSpace",
     value: function getDiagramPositionInVertexSpace(diagramPosition) {
       return diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix());
@@ -24765,6 +24844,12 @@ function () {
       // Diagram transform will always be two
       var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.lastDrawElementTransformPosition.elementCount, this.lastDrawTransform.order.length - 2));
       return _tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix());
+    }
+  }, {
+    key: "vertexToDiagramSpaceTransformMatrix",
+    value: function vertexToDiagramSpaceTransformMatrix() {
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(0, this.lastDrawTransform.order.length - 2));
+      return t.matrix();
     }
   }, {
     key: "setDiagramPosition",
@@ -25027,6 +25112,17 @@ function (_DiagramElement) {
       }
 
       return primative;
+    } // use this for any gl canvas resize events
+
+  }, {
+    key: "resize",
+    value: function resize() {
+      // If gl canvas is resized, webgl text will need to be updated.
+      if (this.drawingObject.type === 'vertexText') {
+        var pixelToVertexScale = this.getPixelToVertexSpaceScale(); // $FlowFixMe
+
+        this.drawingObject.drawTextIntoBuffer(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](pixelToVertexScale.x, Math.abs(pixelToVertexScale.y)));
+      }
     }
   }, {
     key: "setColor",
@@ -25563,6 +25659,14 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "resize",
+    value: function resize() {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.resize();
+      }
+    }
+  }, {
     key: "setFirstTransform",
     value: function setFirstTransform() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
@@ -25637,22 +25741,31 @@ function (_DiagramElement2) {
     }
   }, {
     key: "updateLimits",
-    value: function updateLimits(limits) {
+    value: function updateLimits(limits, transforms) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.updateLimits(limits);
+        element.updateLimits(limits, transforms);
       }
 
       this.diagramLimits = limits;
+      this.diagramTransforms = transforms;
     }
   }, {
     key: "updateHTMLElementTie",
-    value: function updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container) {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, pixelSpaceToDiagramSpaceTransform, container);
+    value: function updateHTMLElementTie( // pixelSpaceToDiagramSpaceTransform: Transform,
+    // diagramToPixelSpaceScale: Point,
+    container) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, // pixelSpaceToDiagramSpaceTransform,
+      // diagramToPixelSpaceScale,
+      // diagramToGLSpaceTransformMatrix,
+      container);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.updateHTMLElementTie(pixelSpaceToDiagramSpaceTransform, container);
+        element.updateHTMLElementTie( // pixelSpaceToDiagramSpaceTransform,
+        // diagramToPixelSpaceScale,
+        // diagramToGLSpaceTransformMatrix,
+        container);
       }
     } // Returns an array of touched elements.
     // In a collection, elements defined later in the collection.order
@@ -26226,6 +26339,10 @@ var fragment = {
   withTexture: {
     source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform int u_use_texture;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'if ( u_use_texture == 1) {' + 'gl_FragColor = texture2D(u_texture, v_texcoord);' + '} else {' + 'gl_FragColor = u_color;' + '}' + '}',
     varNames: ['u_color', 'u_use_texture', 'u_texture']
+  },
+  text: {
+    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'gl_FragColor = texture2D(u_texture, v_texcoord) * u_color;' + '}',
+    varNames: ['u_color', 'u_texture']
   }
 };
 
@@ -26368,11 +26485,12 @@ function () {
   _createClass(WebGLInstance, [{
     key: "addTexture",
     // locations: Object;
-    value: function addTexture(id, texture) {
+    value: function addTexture(id, glTexture, type) {
       var nextIndex = Object.keys(this.textures).length;
       this.textures[id] = {
-        texture: texture,
-        index: nextIndex
+        glTexture: glTexture,
+        index: nextIndex,
+        type: type
       };
       return nextIndex;
     }
