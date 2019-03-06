@@ -6393,7 +6393,7 @@ function (_DiagramElementCollec) {
         family: 'Times New Roman',
         style: 'normal',
         size: 0.2,
-        weight: 200,
+        weight: 700,
         alignH: 'left',
         alignV: 'baseline',
         color: color
@@ -6402,7 +6402,7 @@ function (_DiagramElementCollec) {
         family: 'Times New Roman',
         style: 'italic',
         size: 0.2,
-        weight: '200',
+        weight: 700,
         alignH: 'left',
         alignV: 'baseline',
         color: color
@@ -21483,10 +21483,20 @@ function (_DrawingObject) {
       var locations = this.webgl.useProgram(this.programIndex);
 
       if (this.texture && this.webgl.textures[this.texture.id].type === 'canvasText') {
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 1);
-        this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
-      } else {
+        // console.log('canvasText', this.webgl.textures[this.texture.id].glTexture)
+        console.log('not canvasText', this.texture.src); // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+        // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
+
         this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+      } else {
+        if (this.texture) {
+          console.log('not canvasText', this.texture.src);
+        } else {
+          console.log('not canvasText');
+        }
+
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
         this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
       } // Turn on the attribute
 
@@ -22717,10 +22727,11 @@ function (_VertexObject) {
 
       this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
       this.ctx.textAlign = 'left';
-      this.ctx.textBaseline = 'alphabetic';
-      this.ctx.fillStyle = 'white'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
+      this.ctx.textBaseline = 'alphabetic'; // this.ctx.fillStyle = 'white';
 
-      this.ctx.fillStyle = 'red';
+      this.ctx.fillStyle = 'black'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
+      // this.ctx.fillStyle = 'blue';
+
       var startX = pixelFontSize * hBuffer / 2;
       var baselineHeightFromBottom = 0.25;
       var startY = this.canvas.height * (1 - baselineHeightFromBottom);
@@ -26375,7 +26386,12 @@ var fragment = {
     varNames: ['u_color', 'u_use_texture', 'u_texture']
   },
   text: {
-    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'gl_FragColor = texture2D(u_texture, v_texcoord) * u_color;' + '}',
+    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'float a = texture2D(u_texture, v_texcoord).a;' // + 'if ( a < 0.2 ) {'
+    //   + 'a = a / 1.2;'
+    // + '}'
+    // + 'gl_FragColor = vec4(u_color.rgb, min(a * 1.2, 1.0) * u_color.a);'
+    // + '}'
+    + 'gl_FragColor = a * u_color;' + '}',
     varNames: ['u_color', 'u_texture']
   }
 };
