@@ -5434,7 +5434,8 @@ function () {
         // const t = content.lastDrawTransform._dup();
         // content.lastDrawTransform = content.transform._dup();
 
-        var r = content.getRelativeVertexSpaceBoundingRect(); // content.lastDrawTransform = t;
+        var r = content.getRelativeVertexSpaceBoundingRect();
+        console.log(r, content.drawingObject.border); // content.lastDrawTransform = t;
 
         this.location = location._dup();
         this.scale = scale;
@@ -6388,8 +6389,24 @@ function (_DiagramElementCollec) {
 
     var defaultOptions = {
       color: color,
-      fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
-      fontText: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'left', 'alphabetic', color),
+      fontMath: {
+        family: 'Times New Roman',
+        style: 'normal',
+        size: 0.2,
+        weight: 200,
+        alignH: 'left',
+        alignV: 'baseline',
+        color: color
+      },
+      fontText: {
+        family: 'Times New Roman',
+        style: 'italic',
+        size: 0.2,
+        weight: '200',
+        alignH: 'left',
+        alignV: 'baseline',
+        color: color
+      },
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       scale: 0.7,
       defaultFormAlignment: {
@@ -6456,6 +6473,7 @@ function (_DiagramElementCollec) {
         //  1. color
         //  2. font
         //  3. style
+        //  4. fontMath or fontText based on actual text
         var fontToUse = _this2.eqn.fontMath;
 
         if (options.text.match(/[A-Z,a-z]/)) {
@@ -6476,16 +6494,24 @@ function (_DiagramElementCollec) {
           fontToUse = options.font;
         }
 
-        var p = _this2.shapes.txt(options.text, {
+        var p = _this2.shapes.textNew({
+          text: options.text,
           position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          font: fontToUse
-        });
+          family: fontToUse.family,
+          style: fontToUse.style,
+          weight: fontToUse.weight,
+          size: fontToUse.size,
+          alignV: fontToUse.alignV,
+          alignH: fontToUse.alignH,
+          color: fontToUse.color
+        }, {
+          color: options.color
+        }); // if (options.color != null) {
+        //   p.setColor(options.color);
+        // } else {
+        //   p.setColor(RGBToArray(p.drawingObject.text[0].font.color));
+        // }
 
-        if (options.color != null) {
-          p.setColor(options.color);
-        } else {
-          p.setColor(Object(_tools_color__WEBPACK_IMPORTED_MODULE_2__["RGBToArray"])(p.drawingObject.text[0].font.color));
-        }
 
         return p;
       }; // Helper function to add symbol element
@@ -21497,7 +21523,8 @@ function (_DrawingObject) {
 
       if (texture) {
         this.gl.uniform1i(locations.u_use_texture, 1);
-        var index = this.webgl.textures[texture.id].index;
+        var index = this.webgl.textures[texture.id].index; // console.log(texture.id, index, this.webgl.textures)
+
         this.gl.uniform1i(locations.u_texture, index);
       } else {
         this.gl.uniform1i(locations.u_use_texture, 0);
@@ -22470,7 +22497,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_m2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../tools/m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -22493,9 +22519,17 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 
 
 
+ // import { identity } from '../../../tools/m2';
 
-
-
+// type TypeTextOptions = {
+//   text: string;
+//   size: number;
+//   family: string;
+//   weight: number;
+//   style: 'normal' | 'italic',
+//   alignH: 'left' | 'center' | 'right',
+//   alignV: 'top' | 'bottom' | 'middle' | 'baseline',
+// };
 var VertexText =
 /*#__PURE__*/
 function (_VertexObject) {
@@ -22532,7 +22566,7 @@ function (_VertexObject) {
     _this.style = options.style;
     _this.weight = options.weight;
     _this.canvas = document.createElement('canvas');
-    _this.canvas.id = 'asdf';
+    _this.canvas.id = options.id;
     _this.ctx = _this.canvas.getContext('2d');
     _this.texture = {
       id: options.id,
@@ -22577,13 +22611,14 @@ function (_VertexObject) {
       this.width = width;
       this.height = height;
       this.calcAscentDescent();
-      this.points = []; // this.border = [[]];
-
+      this.points = [];
+      this.border = [[]];
       points.forEach(function (point) {
         _this2.points.push(point.x);
 
-        _this2.points.push(point.y); // this.border[0].push(point);
+        _this2.points.push(point.y);
 
+        _this2.border[0].push(point);
       });
       var texture = this.texture;
 
@@ -22685,7 +22720,7 @@ function (_VertexObject) {
       this.ctx.textAlign = 'left';
       this.ctx.textBaseline = 'alphabetic';
       this.ctx.fillStyle = 'white';
-      this.ctx.fillStyle = 'red'; // debug only
+      this.ctx.fillStyle = 'rgba(200,200,200,255)'; // debug only
 
       var startX = pixelFontSize * hBuffer / 2;
       var baselineHeightFromBottom = 0.25;
@@ -26486,13 +26521,24 @@ function () {
     key: "addTexture",
     // locations: Object;
     value: function addTexture(id, glTexture, type) {
-      var nextIndex = Object.keys(this.textures).length;
+      if (this.textures[id] && this.textures[id].glTexture != null) {
+        return this.textures[id].index;
+      }
+
+      var index = 0;
+
+      if (this.textures[id]) {
+        index = this.textures[id].index;
+      } else {
+        index = Object.keys(this.textures).length;
+      }
+
       this.textures[id] = {
         glTexture: glTexture,
-        index: nextIndex,
+        index: index,
         type: type
       };
-      return nextIndex;
+      return index;
     }
   }, {
     key: "getProgram",

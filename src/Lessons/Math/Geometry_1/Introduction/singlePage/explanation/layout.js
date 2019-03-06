@@ -166,7 +166,7 @@ export default function lessonLayout() {
     ],
   };
 
-  const equation = {
+  const equationOld = {
     name: 'eqn',
     method: 'addEquation',
     options: {
@@ -183,6 +183,34 @@ export default function lessonLayout() {
       },
       forms: {
         'base': ['c', 'equals', 'pi', 'space', 'd'],
+      },
+    },
+    mods: {
+      scenarios: {
+        left: { position: new Point(-radius * 1.8, 0) },
+        bottom: { position: new Point(0, -radius * 1.5) },
+      },
+    },
+  };
+
+  const equation = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: layout.colors.dimensions,
+      scale: 1,
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
+      elements: {
+        c: 'c',
+        'pi': 'π',
+        'd': 'd',
+        'equals': ' = ',
+        v: { symbol: 'vinculum' },
+      },
+      forms: {
+        'base': [{ frac: ['c', 'd', 'v'] }, 'equals', 'pi', 'space'],
       },
     },
     mods: {

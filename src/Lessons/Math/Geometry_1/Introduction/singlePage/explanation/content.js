@@ -66,11 +66,13 @@ class Content extends SinglePageLessonContent {
     // Figure 2
     diag.circumferenceAtAngle(dim2._circumference, Math.PI * 2);
     dim2._eqn.setScenario('left');
+    dim2._eqn.showForm('0');
 
     // figure 3
     diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
     dim3.setScenario('left');
     dim3._eqn.setScenario('bottom');
+    dim3._eqn.showForm('0');
 
     // diag._fig1.hide()
     // diag._fig2.hide()
