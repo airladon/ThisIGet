@@ -76,6 +76,13 @@ export default class SinglePageLessonComponent extends React.Component
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
     setOnClicks(this.lesson.content.modifiers);
+    console.log(this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm())
+    this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
+      1,
+      'left',
+      'baseline',
+    );
+    this.lesson.content.diagram.elements._fig3._dimensions._eqn.showForm('0');
   }
 
   // renderContent() {
