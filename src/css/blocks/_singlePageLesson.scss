@@ -36,8 +36,19 @@
   top: 0;
 }
 
+#id_diagram__text__high {
+  width: 10px;
+  height: 10px;
+}
+
+#id_diagram__text__low {
+  width: 10px;
+  height: 10px;
+}
+
 .single_page_lesson__container .diagram__html {
   pointer-events: none;
+  touch-action: auto;
 }
 
 .single_page_lesson__container .highlight_word {

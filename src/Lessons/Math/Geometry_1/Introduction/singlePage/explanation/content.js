@@ -53,6 +53,11 @@ class Content extends SinglePageLessonContent {
     const diag = this.diagram.elements;
     const dim2 = diag._fig2._dimensions;
     const dim3 = diag._fig3._dimensions;
+    // const dim4 = diag._fig4._dimensions;
+    // const dim5 = diag._fig5._dimensions;
+    // const dim6 = diag._fig6._dimensions;
+    // const dim7 = diag._fig7._dimensions;
+    // const dim8 = diag._fig8._dimensions;
     console.log(diag)
 
     // Set figure one initial conditions
@@ -74,8 +79,41 @@ class Content extends SinglePageLessonContent {
     dim3._eqn.setScenario('bottom');
     dim3._eqn.showForm('0');
 
+    // // figure 4
+    // diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
+    // dim4.setScenario('left');
+    // dim4._eqn.setScenario('bottom');
+    // dim4._eqn.showForm('0');
+
+    // // figure 4
+    // diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
+    // dim5.setScenario('left');
+    // dim5._eqn.setScenario('bottom');
+    // dim5._eqn.showForm('0');
+    // // figure 4
+    // diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
+    // dim6.setScenario('left');
+    // dim6._eqn.setScenario('bottom');
+    // dim6._eqn.showForm('0');
+    // // figure 4
+    // diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
+    // dim7.setScenario('left');
+    // dim7._eqn.setScenario('bottom');
+    // dim7._eqn.showForm('0');
+    // // figure 4
+    // diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
+    // dim8.setScenario('left');
+    // dim8._eqn.setScenario('bottom');
+    // dim8._eqn.showForm('0');
+
     // diag._fig1.hide()
     // diag._fig2.hide()
+    // diag._fig4.hide()
+    // diag._fig5.hide()
+    // diag._fig6.hide()
+    // diag._fig7.hide()
+    // diag._fig8.hide()
+
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
@@ -105,6 +143,12 @@ class Content extends SinglePageLessonContent {
       'The properties and relationships can then be applied to all |_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 
       makeFig('id_figure3_asdf', diag._fig3, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      // makeFig('id_figure4_asdf', diag._fig4, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      // makeFig('id_figure5_asdf', diag._fig5, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      // makeFig('id_figure6_asdf', diag._fig6, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      // makeFig('id_figure7_asdf', diag._fig7, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      // makeFig('id_figure8_asdf', diag._fig8, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+
       'Relationships between properties can be used to calculate one property from another.',
       'Shapes are |amazing|',
       'Shapes are |amazing|',
@@ -129,6 +173,13 @@ class Content extends SinglePageLessonContent {
       'Shapes are |amazing|',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Shapes are |amazing|',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam varius ipsum eget euismod vestibulum. Sed sit amet sollicitudin lacus. Fusce varius nisl non elementum dictum. Nulla tellus leo, aliquam eget facilisis vitae, pulvinar at magna. Praesent dignissim feugiat cursus. Maecenas convallis ac dolor nec luctus. Vestibulum sollicitudin ante eu nisl finibus, ut posuere tortor sagittis. Donec quam lectus, tristique at quam in, semper volutpat sapien. Mauris eu est mollis magna bibendum volutpat. Integer lacinia convallis euismod. Duis consectetur libero purus, vel molestie dui condimentum semper. In pretium enim accumsan neque egestas, non ultricies massa ultrices.',
       'Shapes are |amazing|',
       <div key={this.key += 1}>{'hello there'}</div>,

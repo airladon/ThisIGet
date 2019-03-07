@@ -4350,16 +4350,16 @@ function () {
       this.webglLow.gl.clearColor(0, 0, 0, 0);
       this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
       this.webglHigh.gl.clearColor(0, 0, 0, 0);
-      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
-      var t = new Date().getTime();
+      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT); // const t = new Date().getTime();
+
       this.elements.clear(); // if (this.draw2DLow) {
       //   this.draw2DLow.ctx.clearRect(
       //     0, 0, this.draw2DLow.ctx.canvas.width,
       //     this.draw2DLow.ctx.canvas.height,
       //   );
       // }
-
-      console.log('clear time', new Date().getTime() - t); // if (this.draw2DHigh) {
+      // console.log('clear time', new Date().getTime() - t);
+      // if (this.draw2DHigh) {
       //   this.draw2DHigh.ctx.clearRect(
       //     0, 0, this.draw2DHigh.ctx.canvas.width,
       //     this.draw2DHigh.ctx.canvas.height,
@@ -18974,6 +18974,7 @@ function () {
 
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
+    this.lastColor = [0, 0, 0, 0];
     /* $FlowFixMe */
 
     var bsr = this.ctx.webkitBackingStorePixelRatio
@@ -19660,12 +19661,18 @@ function (_DrawingObject) {
       // like to pixel space.
       // When zoomed: 1 pixel = 1 GL unit.
       // Zoom in so limits betcome 0 to 2:
+      // console.log(this.drawContext2D.canvas.offsetWidth, this.drawContext2D.canvas.width, this.drawContext2D.canvas.width / this.drawContext2D.ratio)
 
-      var sx = this.drawContext2D.canvas.offsetWidth / 2 / scalingFactor;
-      var sy = this.drawContext2D.canvas.offsetHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
+      var _this$drawContext2D = this.drawContext2D,
+          canvas = _this$drawContext2D.canvas,
+          ratio = _this$drawContext2D.ratio;
+      var canvasWidth = canvas.width / ratio;
+      var canvasHeight = canvas.height / ratio;
+      var sx = canvasWidth / 2 / scalingFactor;
+      var sy = canvasHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
 
-      var tx = this.drawContext2D.canvas.offsetWidth / 2;
-      var ty = this.drawContext2D.canvas.offsetHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
+      var tx = canvasWidth / 2;
+      var ty = canvasHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
       // pixel space
       //   - Scale by the scaling factor
       //   - Flip the y translation
@@ -19676,7 +19683,8 @@ function (_DrawingObject) {
       // and apply it to the drawing context.
 
       var totalT = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"]([sx, 0, tx, 0, sy, ty, 0, 0, 1], t);
-      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]);
+      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]); // console.log('f')
+
       this.lastDrawTransform = totalT.slice(); // Fill in all the text
 
       this.text.forEach(function (diagramText) {
@@ -19686,14 +19694,7 @@ function (_DrawingObject) {
           ctx.fillStyle = diagramText.font.color;
         } else {
           ctx.fillStyle = parentColor;
-        } // const w = ctx.measureText(diagramText.text).width;
-        // this.lastDraw.push({
-        //   width: w * 2,
-        //   height: w * 2,
-        //   x: diagramText.location.x * scalingFactor - w,
-        //   y: diagramText.location.y * -scalingFactor - w,
-        // });
-
+        }
 
         _this2.recordLastDraw(ctx, diagramText, scalingFactor, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
 
@@ -25741,9 +25742,11 @@ function (_DiagramElement2) {
   }, {
     key: "resizeHtmlObject",
     value: function resizeHtmlObject() {
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.resizeHtmlObject();
+      if (this.isShown) {
+        for (var i = 0; i < this.drawOrder.length; i += 1) {
+          var element = this.elements[this.drawOrder[i]];
+          element.resizeHtmlObject();
+        }
       }
     }
   }, {
@@ -25757,9 +25760,11 @@ function (_DiagramElement2) {
   }, {
     key: "clear",
     value: function clear() {
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.clear();
+      if (this.isShown) {
+        for (var i = 0; i < this.drawOrder.length; i += 1) {
+          var element = this.elements[this.drawOrder[i]];
+          element.clear();
+        }
       }
     }
   }, {
