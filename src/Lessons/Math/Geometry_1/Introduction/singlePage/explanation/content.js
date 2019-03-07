@@ -143,6 +143,7 @@ class Content extends SinglePageLessonContent {
       'The properties and relationships can then be applied to all |_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 
       makeFig('id_figure3_asdf', diag._fig3, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
+      makeFig('id_figure3a_asdf', [], 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
       makeFig('id_figure4_asdf', diag._fig4, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
       makeFig('id_figure5_asdf', diag._fig5, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),
       makeFig('id_figure6_asdf', diag._fig6, 'fit', new Rect(-2.3, -1.5, 4.6, 3)),

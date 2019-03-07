@@ -94,6 +94,24 @@ export default class SinglePageLessonComponent extends React.Component
       d.setScale(10, -80)
       c.setScale(10, 80)
     });
+
+    const d = this.lesson.content.diagram;
+    d.draw(0);
+    const c = document.getElementById('id_figure3a_asdf');
+    c.width = c.clientWidth * 2;
+    c.height = c.clientHeight * 2;
+    const ctx = c.getContext('2d');
+    console.log(ctx)
+    console.log(d.webglLow.gl.canvas)
+    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, 979, 7616, 0, 0, 979, 7616);
+    ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
+    // d._fig2.hide();
+    // d._fig3.hide();
+    // d._fig4.hide();
+    // d._fig5.hide();
+    // d._fig6.hide();
+    // d._fig7.hide();
+    // d._fig8.hide();
     // const canvas2 = document.getElementById('id_figure2_asdf');
     // console.log(canvas2)
     // const draw2D2 = new DrawContext2D(canvas2)
