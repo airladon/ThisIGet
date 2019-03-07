@@ -226,7 +226,7 @@ export default function lessonLayout() {
     name: 'dimensions',
     method: 'collection',
     options: {
-      transform: new Transform().translate(0, 0),
+      transform: new Transform().scale(1,1).translate(0, 0),
     },
     mods,
     addElements: [
@@ -320,11 +320,11 @@ export default function lessonLayout() {
     ],
   };
 
-  // layout.fig4 = joinObjects({}, layout.fig3, { name: 'fig4' });
-  // layout.fig5 = joinObjects({}, layout.fig3, { name: 'fig5' });
-  // layout.fig6 = joinObjects({}, layout.fig3, { name: 'fig6' });
-  // layout.fig7 = joinObjects({}, layout.fig3, { name: 'fig7' });
-  // layout.fig8 = joinObjects({}, layout.fig3, { name: 'fig8' });
+  layout.fig4 = joinObjects({}, layout.fig3, { name: 'fig4' });
+  layout.fig5 = joinObjects({}, layout.fig3, { name: 'fig5' });
+  layout.fig6 = joinObjects({}, layout.fig3, { name: 'fig6' });
+  layout.fig7 = joinObjects({}, layout.fig3, { name: 'fig7' });
+  layout.fig8 = joinObjects({}, layout.fig3, { name: 'fig8' });
 
   // const fig1 = ['', 'fig1', 'collection', [collection], mods, [
   //   ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods],
@@ -489,11 +489,11 @@ export default function lessonLayout() {
     layout.fig1,
     layout.fig2,
     layout.fig3,
-    // layout.fig4,
-    // layout.fig5,
-    // layout.fig6,
-    // layout.fig7,
-    // layout.fig8,
+    layout.fig4,
+    layout.fig5,
+    layout.fig6,
+    layout.fig7,
+    layout.fig8,
     // layout.wheel,
     // layout.earth,
     // layout.ball,

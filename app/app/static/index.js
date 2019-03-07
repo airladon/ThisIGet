@@ -3697,6 +3697,7 @@ function () {
   // addElementsLow: DiagramAddElements;
   // addElementsHigh: DiagramAddElements;
   // layout: Object;
+  // draw2DFigures: Object;
   // glToDiagramSpaceTransform: Transform;
   // diagramToGLSpaceTransform: Transform;
   // pixelToDiagramSpaceTransform: Transform;
@@ -3810,7 +3811,16 @@ function () {
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
         this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasHigh);
       }
-    }
+    } // for (let i = 0; i < canvas2Ds.length; i += 1) {
+    //   const canvas = canvas2Ds[i];
+    //   console.log(i, canvas)
+    //   if (canvas instanceof HTMLCanvasElement) {
+    //     const draw2D = new DrawContext2D(canvas);
+    //     const { id } = canvas;
+    //     this.draw2DFigures[id] = draw2D;
+    //   }
+    // }
+
 
     if (optionsToUse.gestureCanvas != null) {
       var gestureCanvas = document.getElementById(optionsToUse.gestureCanvas);
@@ -3876,7 +3886,21 @@ function () {
       this.elements = new optionsToUse.elements(this);
       this.elements.diagramLimits = this.limits;
     }
-  }
+  } // getFigureCanvases() {
+  //   const canvas2Ds = document.getElementsByClassName('single_page_lesson__figure');
+  //   console.log(canvas2Ds, canvas2Ds.length)
+  //   this.draw2DFigures = {};
+  //   // var list= document.getElementsByClassName("events");
+  //   [].forEach.call(canvas2Ds, (canvas) => {
+  //     console.log(canvas)
+  //     if (canvas instanceof HTMLCanvasElement) {
+  //       const draw2D = new DrawContext2D(canvas);
+  //       const { id } = canvas;
+  //       this.draw2DFigures[id] = draw2D;
+  //     }
+  //   });
+  // }
+
 
   _createClass(Diagram, [{
     key: "addElements",
@@ -3897,7 +3921,8 @@ function () {
         draw2D = this.draw2DHigh;
       }
 
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this));
+      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
+      this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this));
     }
   }, {
     key: "getEquations",
@@ -4350,16 +4375,16 @@ function () {
       this.webglLow.gl.clearColor(0, 0, 0, 0);
       this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
       this.webglHigh.gl.clearColor(0, 0, 0, 0);
-      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT); // const t = new Date().getTime();
-
+      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
+      var t = new Date().getTime();
       this.elements.clear(); // if (this.draw2DLow) {
       //   this.draw2DLow.ctx.clearRect(
       //     0, 0, this.draw2DLow.ctx.canvas.width,
       //     this.draw2DLow.ctx.canvas.height,
       //   );
       // }
-      // console.log('clear time', new Date().getTime() - t);
-      // if (this.draw2DHigh) {
+
+      console.log('clear time', new Date().getTime() - t); // if (this.draw2DHigh) {
       //   this.draw2DHigh.ctx.clearRect(
       //     0, 0, this.draw2DHigh.ctx.canvas.width,
       //     this.draw2DHigh.ctx.canvas.height,
@@ -18351,7 +18376,8 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DiagramPrimatives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits, spaceTransforms, animateNextFrame) {
+  function DiagramPrimatives(webgl, draw2D, // draw2DFigures: Object,
+  htmlCanvas, limits, spaceTransforms, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
     this.webgl = webgl;
@@ -18359,7 +18385,7 @@ function () {
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
-    this.spaceTransforms = spaceTransforms;
+    this.spaceTransforms = spaceTransforms; // this.draw2DFigures = draw2DFigures;
   }
 
   _createClass(DiagramPrimatives, [{
@@ -18453,7 +18479,8 @@ function () {
         vAlign: 'middle',
         offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         // vertex space offset
-        color: [1, 0, 0, 1]
+        color: [1, 0, 0, 1] // draw2D: this.draw2D,
+
       };
       var options;
 
@@ -18467,7 +18494,12 @@ function () {
         }].concat(optionsIn));
       } else {
         options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions, textOrOptions].concat(optionsIn));
-      } // const optionsToUse = joinObjects(defaultOptions, ...options);
+      } // if (typeof options.draw2D === 'string') {
+      //   if (options.draw2D in this.draw2DFigures) {
+      //     options.draw2D = this.draw2DFigures[options.draw2D];
+      //   }
+      // }
+      // const optionsToUse = joinObjects(defaultOptions, ...options);
 
 
       var o = options;
@@ -18974,7 +19006,6 @@ function () {
 
     this.canvas = canvas;
     this.ctx = this.canvas.getContext('2d');
-    this.lastColor = [0, 0, 0, 0];
     /* $FlowFixMe */
 
     var bsr = this.ctx.webkitBackingStorePixelRatio
@@ -19537,6 +19568,7 @@ function (_DrawingObject) {
     _this.scalingFactor = 1;
     _this.lastDraw = [];
     _this.lastDrawTransform = [];
+    _this.glRect = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2);
 
     if (text.length > 0) {
       var minSize = _this.text[0].font.size;
@@ -19661,18 +19693,12 @@ function (_DrawingObject) {
       // like to pixel space.
       // When zoomed: 1 pixel = 1 GL unit.
       // Zoom in so limits betcome 0 to 2:
-      // console.log(this.drawContext2D.canvas.offsetWidth, this.drawContext2D.canvas.width, this.drawContext2D.canvas.width / this.drawContext2D.ratio)
 
-      var _this$drawContext2D = this.drawContext2D,
-          canvas = _this$drawContext2D.canvas,
-          ratio = _this$drawContext2D.ratio;
-      var canvasWidth = canvas.width / ratio;
-      var canvasHeight = canvas.height / ratio;
-      var sx = canvasWidth / 2 / scalingFactor;
-      var sy = canvasHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
+      var sx = this.drawContext2D.canvas.offsetWidth / 2 / scalingFactor;
+      var sy = this.drawContext2D.canvas.offsetHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
 
-      var tx = canvasWidth / 2;
-      var ty = canvasHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
+      var tx = this.drawContext2D.canvas.offsetWidth / 2;
+      var ty = this.drawContext2D.canvas.offsetHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
       // pixel space
       //   - Scale by the scaling factor
       //   - Flip the y translation
@@ -19683,8 +19709,7 @@ function (_DrawingObject) {
       // and apply it to the drawing context.
 
       var totalT = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"]([sx, 0, tx, 0, sy, ty, 0, 0, 1], t);
-      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]); // console.log('f')
-
+      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]);
       this.lastDrawTransform = totalT.slice(); // Fill in all the text
 
       this.text.forEach(function (diagramText) {
@@ -19694,7 +19719,14 @@ function (_DrawingObject) {
           ctx.fillStyle = diagramText.font.color;
         } else {
           ctx.fillStyle = parentColor;
-        }
+        } // const w = ctx.measureText(diagramText.text).width;
+        // this.lastDraw.push({
+        //   width: w * 2,
+        //   height: w * 2,
+        //   x: diagramText.location.x * scalingFactor - w,
+        //   y: diagramText.location.y * -scalingFactor - w,
+        // });
+
 
         _this2.recordLastDraw(ctx, diagramText, scalingFactor, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
 
@@ -22801,8 +22833,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -22846,6 +22879,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import GlobalAnimation from './webgl/GlobalAnimation';
+
 
  // eslint-disable-next-line import/no-cycle
 
@@ -22986,7 +23020,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -22996,7 +23030,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
       },
       position: function position() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -23006,7 +23040,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -23016,7 +23050,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -23026,7 +23060,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -23036,7 +23070,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
@@ -23046,7 +23080,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -23068,7 +23102,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -23090,7 +23124,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -23098,7 +23132,7 @@ function () {
           optionsIn[_key10] = arguments[_key10];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
       scenario: function scenario() {
@@ -23127,7 +23161,7 @@ function () {
           options.delta = delta;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       }
     };
     this.animate = {
@@ -23193,19 +23227,19 @@ function () {
       animation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"]() // current animation phase
 
       },
       colorAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"]() // current animation phase
 
       },
       customAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}) // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}) // current animation phase
 
       },
       isBeingMoved: false,
@@ -23221,7 +23255,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -24110,7 +24144,7 @@ function () {
         for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
           var phase = plan[i];
 
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
+          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
             phase.finish(cancelled, forceSetToEnd);
           } else {
             phase.finish(this, cancelled, forceSetToEnd);
@@ -24123,7 +24157,7 @@ function () {
         if (plan.length > 0) {
           var _phase = plan.slice(-1)[0];
 
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"]) {
+          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
             _phase.finish(cancelled, forceSetToEnd);
           } else {
             _phase.finish(this, cancelled, forceSetToEnd);
@@ -24243,12 +24277,12 @@ function () {
           delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseDelay);
       }
 
       if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseMove);
       }
 
@@ -24312,12 +24346,12 @@ function () {
           delayDisolve = 'in';
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
+        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
         phases.push(phaseColor);
       }
 
@@ -24401,12 +24435,12 @@ function () {
       }
 
       if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
+        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
         phases.push(phaseCustom);
       }
 
@@ -25173,6 +25207,13 @@ function (_DiagramElement) {
       return false;
     }
   }, {
+    key: "updateContext",
+    value: function updateContext(context) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        this.drawingObject.drawContext2D = context;
+      }
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -25742,11 +25783,9 @@ function (_DiagramElement2) {
   }, {
     key: "resizeHtmlObject",
     value: function resizeHtmlObject() {
-      if (this.isShown) {
-        for (var i = 0; i < this.drawOrder.length; i += 1) {
-          var element = this.elements[this.drawOrder[i]];
-          element.resizeHtmlObject();
-        }
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.resizeHtmlObject();
       }
     }
   }, {
@@ -25760,11 +25799,9 @@ function (_DiagramElement2) {
   }, {
     key: "clear",
     value: function clear() {
-      if (this.isShown) {
-        for (var i = 0; i < this.drawOrder.length; i += 1) {
-          var element = this.elements[this.drawOrder[i]];
-          element.clear();
-        }
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.clear();
       }
     }
   }, {
@@ -26160,6 +26197,14 @@ function (_DiagramElement2) {
       if (movable) {
         this.hasTouchableElements = true;
         this.isMovable = true;
+      }
+    }
+  }, {
+    key: "updateContext",
+    value: function updateContext(context) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.updateContext(context);
       }
     }
   }]);

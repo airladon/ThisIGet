@@ -13,6 +13,8 @@ type State = {
 
 let updates = 0;
 
+const { DrawContext2D } = Fig;
+
 const { applyModifiers, setOnClicks } = Fig.tools.html;
 
 const applyMDModifiers = (inputText: string, modifiers: Object) => {
@@ -76,6 +78,41 @@ export default class SinglePageLessonComponent extends React.Component
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
     setOnClicks(this.lesson.content.modifiers);
+    console.log(this.lesson.content.diagram);
+
+    const figs = [2, 3, 4, 5, 6, 7, 8];
+    figs.forEach((f) => {
+      const canvas = document.getElementById(`id_figure${f}_asdf`);
+      // console.log(canvas)
+      const draw2D = new DrawContext2D(canvas)
+      // console.log(draw2D2)
+
+      const dim = this.lesson.content.diagram.elements[`_fig${f}`]._dimensions;
+      const d = dim._d;
+      const c = dim._c;
+      dim.updateContext(draw2D);
+      d.setScale(10, -80)
+      c.setScale(10, 80)
+    });
+    // const canvas2 = document.getElementById('id_figure2_asdf');
+    // console.log(canvas2)
+    // const draw2D2 = new DrawContext2D(canvas2)
+    // console.log(draw2D2)
+
+    // const dim2 = this.lesson.content.diagram.elements._fig2._dimensions;
+    // const d = this.lesson.content.diagram.elements._fig2._dimensions._d;
+    // const c = this.lesson.content.diagram.elements._fig2._dimensions._c;
+    // dim2.updateContext(draw2D);
+    // d.setScale(10, -80)
+    // c.setScale(10, 80)
+
+
+    // const dim4 = this.lesson.content.diagram.elements._fig4._dimensions;
+    // const d4 = this.lesson.content.diagram.elements._fig4._dimensions._d;
+    // const c4 = this.lesson.content.diagram.elements._fig4._dimensions._c;
+    // dim4.updateContext(draw2D);
+    // d4.setScale(10, -80)
+    // c4.setScale(10, 80)
     // console.log(this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm())
     // this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
     //   1,

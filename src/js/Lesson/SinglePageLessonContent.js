@@ -76,7 +76,7 @@ function makeFig(
       element.tieToHTML.window = limits;
     }
   });
-  return `<div id="${id}"></div>`;
+  return `<canvas id="${id}" class="single_page_lesson__figure"></canvas>`;
 }
 
 export { SinglePageLessonContent, makeFig };
