@@ -4351,14 +4351,20 @@ function () {
       this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
       this.webglHigh.gl.clearColor(0, 0, 0, 0);
       this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
+      var t = new Date().getTime();
+      this.elements.clear(); // if (this.draw2DLow) {
+      //   this.draw2DLow.ctx.clearRect(
+      //     0, 0, this.draw2DLow.ctx.canvas.width,
+      //     this.draw2DLow.ctx.canvas.height,
+      //   );
+      // }
 
-      if (this.draw2DLow) {
-        this.draw2DLow.ctx.clearRect(0, 0, this.draw2DLow.ctx.canvas.width, this.draw2DLow.ctx.canvas.height);
-      }
-
-      if (this.draw2DHigh) {
-        this.draw2DHigh.ctx.clearRect(0, 0, this.draw2DHigh.ctx.canvas.width, this.draw2DHigh.ctx.canvas.height);
-      }
+      console.log('clear time', new Date().getTime() - t); // if (this.draw2DHigh) {
+      //   this.draw2DHigh.ctx.clearRect(
+      //     0, 0, this.draw2DHigh.ctx.canvas.width,
+      //     this.draw2DHigh.ctx.canvas.height,
+      //   );
+      // }
     }
   }, {
     key: "draw",
@@ -4366,9 +4372,9 @@ function () {
       // if (this.globalAnimation.previousNow == null) {
       //   this.globalAnimation.previousNow = now
       // }
-      // const t = new Date().getTime();
-      // console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart)
-      // this.globalAnimation.diagramDrawStart = t;
+      var t = new Date().getTime();
+      console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart);
+      this.globalAnimation.diagramDrawStart = t;
       this.drawQueued = false;
       this.clearContext(); // console.log(now - this.globalAnimation.previousNow)
       // This transform converts standard gl clip space, to diagram clip space
@@ -4389,8 +4395,9 @@ function () {
         this.animateNextFrame();
       } // console.log(performance.now() - t1)
       // console.log(Date.now() - measure)
-      // console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
 
+
+      console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
     }
   }, {
     key: "animateNextFrame",
@@ -4476,7 +4483,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       text: shapes.txt.bind(shapes),
-      textNew: shapes.textNew.bind(shapes),
+      textGL: shapes.textGL.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -5434,8 +5441,7 @@ function () {
         // const t = content.lastDrawTransform._dup();
         // content.lastDrawTransform = content.transform._dup();
 
-        var r = content.getRelativeVertexSpaceBoundingRect();
-        console.log(r, content.drawingObject.border, content.name); // content.lastDrawTransform = t;
+        var r = content.getRelativeVertexSpaceBoundingRect(); // content.lastDrawTransform = t;
 
         this.location = location._dup();
         this.scale = scale;
@@ -6389,24 +6395,8 @@ function (_DiagramElementCollec) {
 
     var defaultOptions = {
       color: color,
-      fontMath: {
-        family: 'Times New Roman',
-        style: 'normal',
-        size: 0.2,
-        weight: 700,
-        alignH: 'left',
-        alignV: 'baseline',
-        color: color
-      },
-      fontText: {
-        family: 'Times New Roman',
-        style: 'italic',
-        size: 0.2,
-        weight: 700,
-        alignH: 'left',
-        alignV: 'baseline',
-        color: color
-      },
+      fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
+      fontText: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'left', 'alphabetic', color),
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       scale: 0.7,
       defaultFormAlignment: {
@@ -6473,7 +6463,6 @@ function (_DiagramElementCollec) {
         //  1. color
         //  2. font
         //  3. style
-        //  4. fontMath or fontText based on actual text
         var fontToUse = _this2.eqn.fontMath;
 
         if (options.text.match(/[A-Z,a-z]/)) {
@@ -6494,19 +6483,9 @@ function (_DiagramElementCollec) {
           fontToUse = options.font;
         }
 
-        var p = _this2.shapes.textNew({
-          text: options.text,
+        var p = _this2.shapes.txt(options.text, {
           position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-          family: fontToUse.family,
-          style: fontToUse.style,
-          weight: fontToUse.weight,
-          size: fontToUse.size,
-          alignV: fontToUse.alignV,
-          alignH: fontToUse.alignH,
-          color: fontToUse.color,
-          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('equation element').scale(1, 1).translate(0, 0)
-        }, {
-          color: options.color
+          font: fontToUse
         }); // if (options.color != null) {
         //   p.setColor(options.color);
         // } else {
@@ -18455,8 +18434,8 @@ function () {
     // }
 
   }, {
-    key: "textNew",
-    value: function textNew(options) {
+    key: "textGL",
+    value: function textGL(options) {
       return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, this.limits, options);
     }
   }, {
@@ -19555,6 +19534,8 @@ function (_DrawingObject) {
     _this.drawContext2D = drawContext2D;
     _this.text = text;
     _this.scalingFactor = 1;
+    _this.lastDraw = [];
+    _this.lastDrawTransform = [];
 
     if (text.length > 0) {
       var minSize = _this.text[0].font.size;
@@ -19664,6 +19645,8 @@ function (_DrawingObject) {
   }, {
     key: "drawWithTransformMatrix",
     value: function drawWithTransformMatrix(transformMatrix) {
+      var _this2 = this;
+
       var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [1, 1, 1, 1];
       var ctx = this.drawContext2D.ctx; // Arbitrary scaling factor used to ensure font size is >> 1 pixel
       // const scalingFactor = this.drawContext2D.canvas.offsetHeight /
@@ -19693,7 +19676,8 @@ function (_DrawingObject) {
       // and apply it to the drawing context.
 
       var totalT = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"]([sx, 0, tx, 0, sy, ty, 0, 0, 1], t);
-      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]); // Fill in all the text
+      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]);
+      this.lastDrawTransform = totalT.slice(); // Fill in all the text
 
       this.text.forEach(function (diagramText) {
         diagramText.font.set(ctx, scalingFactor);
@@ -19702,31 +19686,87 @@ function (_DrawingObject) {
           ctx.fillStyle = diagramText.font.color;
         } else {
           ctx.fillStyle = parentColor;
-        }
+        } // const w = ctx.measureText(diagramText.text).width;
+        // this.lastDraw.push({
+        //   width: w * 2,
+        //   height: w * 2,
+        //   x: diagramText.location.x * scalingFactor - w,
+        //   y: diagramText.location.y * -scalingFactor - w,
+        // });
+
+
+        _this2.recordLastDraw(ctx, diagramText, scalingFactor, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
 
         ctx.fillText(diagramText.text, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
       });
       ctx.restore();
     }
   }, {
+    key: "recordLastDraw",
+    value: function recordLastDraw(ctx, diagramText, scalingFactor, x, y) {
+      var width = ctx.measureText(diagramText.text).width * 1.2;
+      var height = diagramText.font.size * scalingFactor * 1.2;
+      var bottom = y + height * 0.1;
+      var left = x - width * 0.1;
+
+      if (diagramText.font.alignV === 'baseline') {
+        bottom = y + height * 0.2;
+      } else if (diagramText.font.alignV === 'top') {
+        bottom = y + height;
+      } else if (diagramText.font.alignV === 'middle') {
+        bottom = y + height / 2;
+      }
+
+      if (diagramText.font.alignH === 'center') {
+        left -= width / 2;
+      } else if (diagramText.font.alignH === 'right') {
+        left -= width;
+      }
+
+      this.lastDraw.push({
+        width: width,
+        height: -height,
+        x: left,
+        y: bottom
+      }); // console.log(this.lastDraw)
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      var lastDraw = this.lastDraw;
+
+      if (lastDraw.length > 0) {
+        var ctx = this.drawContext2D.ctx;
+        var t = this.lastDrawTransform;
+        ctx.save();
+        ctx.transform(t[0], t[3], t[1], t[4], t[2], t[5]);
+        lastDraw.forEach(function (draw) {
+          ctx.clearRect(draw.x, draw.y, draw.width, draw.height);
+        });
+        ctx.restore();
+      }
+
+      this.lastDraw = [];
+    }
+  }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries(lastDrawTransformMatrix) {
-      var _this2 = this;
+      var _this3 = this;
 
       var glBoundaries = [];
       this.text.forEach(function (t) {
-        glBoundaries.push(_this2.getGLBoundaryOfText(t, lastDrawTransformMatrix));
+        glBoundaries.push(_this3.getGLBoundaryOfText(t, lastDrawTransformMatrix));
       });
       return glBoundaries;
     }
   }, {
     key: "setBorder",
     value: function setBorder() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.border = [];
       this.text.forEach(function (t) {
-        _this3.border.push(_this3.getBoundaryOfText(t));
+        _this4.border.push(_this4.getBoundaryOfText(t));
       }); // return glBoundaries;
     } // This method is used instead of the actual ctx.measureText because
     // Firefox and Chrome don't yet support it's advanced features.
@@ -21483,20 +21523,12 @@ function (_DrawingObject) {
       var locations = this.webgl.useProgram(this.programIndex);
 
       if (this.texture && this.webgl.textures[this.texture.id].type === 'canvasText') {
-        // console.log('canvasText', this.webgl.textures[this.texture.id].glTexture)
-        console.log('not canvasText', this.texture.src); // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+        // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
         // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
-
         this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
         this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
       } else {
-        if (this.texture) {
-          console.log('not canvasText', this.texture.src);
-        } else {
-          console.log('not canvasText');
-        }
-
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, false);
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
         this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
       } // Turn on the attribute
 
@@ -22729,7 +22761,7 @@ function (_VertexObject) {
       this.ctx.textAlign = 'left';
       this.ctx.textBaseline = 'alphabetic'; // this.ctx.fillStyle = 'white';
 
-      this.ctx.fillStyle = 'black'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
+      this.ctx.fillStyle = 'white'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
       // this.ctx.fillStyle = 'blue';
 
       var startX = pixelFontSize * hBuffer / 2;
@@ -23811,7 +23843,11 @@ function () {
     //   }
     //   return time;
     // }
+    // Used only to clear 2D context
 
+  }, {
+    key: "clear",
+    value: function clear() {}
   }, {
     key: "setColor",
     value: function setColor(color) {
@@ -25157,6 +25193,13 @@ function (_DiagramElement) {
       }
 
       return primative;
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        this.drawingObject.clear();
+      }
     } // use this for any gl canvas resize events
 
   }, {
@@ -25709,6 +25752,14 @@ function (_DiagramElement2) {
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.resize();
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.clear();
       }
     }
   }, {
@@ -26386,12 +26437,14 @@ var fragment = {
     varNames: ['u_color', 'u_use_texture', 'u_texture']
   },
   text: {
-    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'float a = texture2D(u_texture, v_texcoord).a;' // + 'if ( a < 0.2 ) {'
+    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' // + 'float a = texture2D(u_texture, v_texcoord).a;'
+    // + 'if ( a < 0.2 ) {'
     //   + 'a = a / 1.2;'
     // + '}'
     // + 'gl_FragColor = vec4(u_color.rgb, min(a * 1.2, 1.0) * u_color.a);'
     // + '}'
-    + 'gl_FragColor = a * u_color;' + '}',
+    // + 'gl_FragColor = a * u_color;'
+    + 'vec4 c = texture2D(u_texture, v_texcoord);' + 'gl_FragColor = vec4(c.a * u_color.rgb, c.a * u_color.a);' + '}',
     varNames: ['u_color', 'u_texture']
   }
 };

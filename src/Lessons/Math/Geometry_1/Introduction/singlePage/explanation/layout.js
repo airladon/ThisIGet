@@ -166,7 +166,7 @@ export default function lessonLayout() {
     ],
   };
 
-  const equationOld = {
+  const equation = {
     name: 'eqn',
     method: 'addEquation',
     options: {
@@ -193,34 +193,34 @@ export default function lessonLayout() {
     },
   };
 
-  const equation = {
-    name: 'eqn',
-    method: 'addEquation',
-    options: {
-      color: layout.colors.dimensions,
-      scale: 1,
-      defaultFormAlignment: {
-        alignH: 'center',
-      },
-      elements: {
-        c: 'g',
-        'pi': 'π',
-        'd': 'd',
-        'equals': ' = ',
-        '_2': '2',
-        v: { symbol: 'vinculum' },
-      },
-      forms: {
-        'base': [{ frac: ['c', 'd', 'v'] }, 'equals', { sup: ['pi', '_2'] }, 'space'],
-      },
-    },
-    mods: {
-      scenarios: {
-        left: { position: new Point(-radius * 1.8, 0) },
-        bottom: { position: new Point(0, -radius * 1.5) },
-      },
-    },
-  };
+  // const equation = {
+  //   name: 'eqn',
+  //   method: 'addEquation',
+  //   options: {
+  //     color: layout.colors.dimensions,
+  //     scale: 1,
+  //     defaultFormAlignment: {
+  //       alignH: 'center',
+  //     },
+  //     elements: {
+  //       c: 'g',
+  //       'pi': 'π',
+  //       'd': 'd',
+  //       'equals': ' = ',
+  //       '_2': '2',
+  //       v: { symbol: 'vinculum' },
+  //     },
+  //     forms: {
+  //       'base': [{ frac: ['c', 'd', 'v'] }, 'equals', { sup: ['pi', '_2'] }, 'space'],
+  //     },
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       left: { position: new Point(-radius * 1.8, 0) },
+  //       bottom: { position: new Point(0, -radius * 1.5) },
+  //     },
+  //   },
+  // };
 
   const dimensions = {
     name: 'dimensions',
@@ -248,19 +248,24 @@ export default function lessonLayout() {
       },
       {
         name: 'c',
-        method: 'textNew',
-        options: {
-          size: 0.2,
-          text: 'Hello there',
-          family: 'Times New Roman',
-          alignH: 'center',
-          alignV: 'bottom',
-          weight: 300,
-          style: 'italic',
-          color: [1, 0, 0, 1],
-          transform: new Transform().scale(1, 1).translate(0, 0),
-        },
+        method: 'text',
+        options: [text, textC],
       },
+      // {
+      //   name: 'c',
+      //   method: 'text',
+      //   options: {
+      //     size: 0.2,
+      //     text: 'Hello there',
+      //     family: 'Times New Roman',
+      //     alignH: 'center',
+      //     alignV: 'bottom',
+      //     weight: 300,
+      //     style: 'italic',
+      //     color: [1, 0, 0, 1],
+      //     transform: new Transform().scale(1, 1).translate(0, 0),
+      //   },
+      // },
       circumference,
     ],
   };
