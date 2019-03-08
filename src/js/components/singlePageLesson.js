@@ -120,16 +120,19 @@ export default class SinglePageLessonComponent extends React.Component
     const fig3 = d.elements._fig3;
     console.log(fig1)
     console.log(fig3)
-    const oldPos = fig3.getPosition();
-    const oldScale = fig3.getScale();
-    fig3.setPosition(new Point(0, 0));
+    const oldPos = fig1.getPosition();
+    const oldScale = fig1.getScale();
+    fig1.setPosition(new Point(0, 0));
     // fig3.setScale(new Point(1, 1));
-    fig1.hide()
-    fig2.hide()
-    d.renderToCanvas(document.getElementById('id_figure3a_asdf'), new Rect(-4, -2.5, 8, 5), 0, 500, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height-500);
     fig1.show()
+    fig2.hide()
+    fig3.hide()
+    // d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 0, d.webglLow.gl.canvas.width, 1000, 400, 200);
+    d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 1000, 1125, 1800, 200, 100);
+    fig1.hide()
     fig2.show()
-    fig3.setPosition(oldPos);
+    fig3.show()
+    fig1.setPosition(oldPos);
     // fig3.setScale(oldScale);
     // d._fig2.hide();
     // d._fig3.hide();

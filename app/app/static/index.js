@@ -4099,7 +4099,7 @@ function () {
     }
   }, {
     key: "renderToCanvas",
-    value: function renderToCanvas(canvas, diagramWindow, x, y, width, height) {
+    value: function renderToCanvas(canvas, diagramWindow, sx, sy, swidth, sheight, canvasWidth, canvasHeight) {
       var glSpace = {
         x: {
           bottomLeft: -1,
@@ -4123,9 +4123,12 @@ function () {
       var windowToGL = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(windowSpace, glSpace);
       this.draw(-1, windowToGL);
       var ctx = canvas.getContext('2d');
+      canvas.width = canvasWidth;
+      canvas.height = canvasHeight;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.webglLow.gl.canvas, x, y, width, height, 0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.draw2DLow.canvas, x, y, width, height, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this.webglLow.gl.canvas, sx, sy, swidth, sheight, 0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this.draw2DLow.canvas, sx, sy, swidth, sheight, 0, 0, canvas.width * 2, canvas.height * 2);
+      console.log(canvas.width, canvas.height);
     }
   }, {
     key: "resize",

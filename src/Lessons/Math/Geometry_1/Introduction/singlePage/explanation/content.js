@@ -113,7 +113,7 @@ class Content extends SinglePageLessonContent {
     // diag._fig6.hide()
     // diag._fig7.hide()
     // diag._fig8.hide()
-
+    // diag._fig1.hide()
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
