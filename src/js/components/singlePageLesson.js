@@ -128,7 +128,18 @@ export default class SinglePageLessonComponent extends React.Component
     fig2.hide()
     fig3.hide()
     // d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 0, d.webglLow.gl.canvas.width, 1000, 400, 200);
-    d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 1000, 1125, 1800, 200, 100);
+    const elementCanvas = document.getElementById('id_figure1_asdf')
+    const glCanvas = d.webglLow.gl.canvas;
+    const width = elementCanvas.clientWidth * 3;
+    const height = elementCanvas.clientHeight * 3;
+    console.log(glCanvas.height, height)
+    d.renderToCanvas(document.getElementById('id_figure1_asdf'),
+      new Rect(-5, -1, 10, 2),
+      glCanvas.width / 2 - width / 2,
+      glCanvas.height / 2 - height / 2,
+      width, height,
+      width, height,
+    );
     fig1.hide()
     fig2.show()
     fig3.show()
