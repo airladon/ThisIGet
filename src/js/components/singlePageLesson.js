@@ -81,19 +81,19 @@ export default class SinglePageLessonComponent extends React.Component
     console.log(this.lesson.content.diagram);
 
     const figs = [2, 3, 4, 5, 6, 7, 8];
-    figs.forEach((f) => {
-      const canvas = document.getElementById(`id_figure${f}_asdf`);
-      // console.log(canvas)
-      const draw2D = new DrawContext2D(canvas)
-      // console.log(draw2D2)
+    // figs.forEach((f) => {
+    //   const canvas = document.getElementById(`id_figure${f}_asdf`);
+    //   // console.log(canvas)
+    //   const draw2D = new DrawContext2D(canvas)
+    //   // console.log(draw2D2)
 
-      const dim = this.lesson.content.diagram.elements[`_fig${f}`]._dimensions;
-      const d = dim._d;
-      const c = dim._c;
-      dim.updateContext(draw2D);
-      d.setScale(10, -80)
-      c.setScale(10, 80)
-    });
+    //   const dim = this.lesson.content.diagram.elements[`_fig${f}`]._dimensions;
+    //   const d = dim._d;
+    //   const c = dim._c;
+    //   dim.updateContext(draw2D);
+    //   d.setScale(10, -80)
+    //   c.setScale(10, 80)
+    // });
 
     const d = this.lesson.content.diagram;
     d.draw(0);
@@ -103,8 +103,18 @@ export default class SinglePageLessonComponent extends React.Component
     const ctx = c.getContext('2d');
     console.log(ctx)
     console.log(d.webglLow.gl.canvas)
-    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, 979, 7616, 0, 0, 979, 7616);
+    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, 979, 7616, 0, 0, 979 * 2, 7616 * 2);
     ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
+
+    document.addEventListener(
+      'scroll',
+      () => {
+        // console.log(window.pageYOffset)
+        d.scrolled = true;
+        d.animateNextFrame(false);
+      },
+      false,
+    );
     // d._fig2.hide();
     // d._fig3.hide();
     // d._fig4.hide();

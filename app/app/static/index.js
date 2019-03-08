@@ -3689,6 +3689,26 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // It is then transformed by the element colleciton
 // It is then transformed by the diagram
 // it is then transformed into GL Space
+//
+// Diagram elements can also be rendered to an image in a HTML 2D canvas
+// element. To do so, pass in:
+//    - Diagram Element (primative or collection) to render
+//    - HTML element (which is a 2D canvas)
+//    - Window of diagram to render
+//    - Window scaling (how does the window fit within the HTML Element)
+//      - fit: diagram units will be scaled so that diagram window limits
+//             aspect ratio fits within the element aspect ratio
+//      - 1em: diagram units will be scaled so 0.2 diagram units (default font
+//             size) looks like 1em of the html element font size in pixels
+//      - 10px: diagram units will be scaled so that the max diagram window
+//              limit will be the pixel count
+//      - strech: diagram units will be scaled so that the diagram window
+//                limits will be stretched to fit the html element width
+//                and height
+// Then the process is:
+//    - html element size in pixels and aspect ratio found
+//    - html element size in gl coordinates found
+//    - 
 var Diagram =
 /*#__PURE__*/
 function () {
@@ -3732,6 +3752,8 @@ function () {
       // fragmentShader: 'simple',
       fontScale: 1
     };
+    this.scrolled = false;
+    this.oldScrollY = 0;
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
@@ -3851,6 +3873,7 @@ function () {
 
     this.updateLimits(limits);
     this.drawQueued = false;
+    this.lastDrawTime = 0;
     this.inTransition = false; // console.log(this.limits)
 
     this.beingMovedElements = [];
@@ -4073,6 +4096,15 @@ function () {
     value: function updateLimits(limits) {
       this.limits = limits._dup();
       this.setSpaceTransforms();
+    }
+  }, {
+    key: "renderToCanvas",
+    value: function renderToCanvas(canvas) {
+      this.draw(-1);
+      var ctx = canvas.getContext('2d');
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.drawImage(this.webglLow.gl.canvas, 0, 0);
+      ctx.drawImage(this.draw2DLow.canvas, 0, 0);
     }
   }, {
     key: "resize",
@@ -4375,16 +4407,16 @@ function () {
       this.webglLow.gl.clearColor(0, 0, 0, 0);
       this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
       this.webglHigh.gl.clearColor(0, 0, 0, 0);
-      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
-      var t = new Date().getTime();
-      this.elements.clear(); // if (this.draw2DLow) {
+      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT); // const t = new Date().getTime();
+
+      this.elements.clear(); // console.log('clear time', new Date().getTime() - t);
+      // if (this.draw2DLow) {
       //   this.draw2DLow.ctx.clearRect(
       //     0, 0, this.draw2DLow.ctx.canvas.width,
       //     this.draw2DLow.ctx.canvas.height,
       //   );
       // }
-
-      console.log('clear time', new Date().getTime() - t); // if (this.draw2DHigh) {
+      // if (this.draw2DHigh) {
       //   this.draw2DHigh.ctx.clearRect(
       //     0, 0, this.draw2DHigh.ctx.canvas.width,
       //     this.draw2DHigh.ctx.canvas.height,
@@ -4394,12 +4426,65 @@ function () {
   }, {
     key: "draw",
     value: function draw(now) {
-      // if (this.globalAnimation.previousNow == null) {
+      if (now === -1) {
+        now = this.lastDrawTime;
+      } else {
+        this.lastDrawTime = now;
+      } // if (this.globalAnimation.previousNow == null) {
       //   this.globalAnimation.previousNow = now
       // }
-      var t = new Date().getTime();
-      console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart);
-      this.globalAnimation.diagramDrawStart = t;
+      // console.log(this.scrolled)
+      // if (this.webglLow.gl.canvas.style.display === 'none') {
+      //   this.webglLow.gl.canvas.style.display = 'block';
+      //   this.draw2DLow.canvas.style.display = 'block';
+      //   this.resize();
+      //   console.log('unhide')
+      // }
+
+
+      if (this.scrolled) {
+        if (Math.abs(window.pageYOffset - this.oldScrollY) > this.webglLow.gl.canvas.clientHeight / 8) {
+          var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+          var newTop = window.pageYOffset + viewPortHeight / 2 - this.webglLow.gl.canvas.clientHeight / 2; // console.log('viewport', viewPortHeight)
+          // console.log('gl canvas height', this.webglLow.gl.canvas.clientHeight)
+          // console.log('old scroll', this.oldScrollY)
+          // console.log('gl canvas position', this.webglLow.gl.canvas.getBoundingClientRect().top)
+          // console.log('pageY Offset', window.pageYOffset)
+          // console.log(newTop), window.pageYOffset, viewPortHeight, this.webglLow.gl.canvas.clientHeight)
+
+          if (newTop < 0) {
+            newTop = 0;
+          }
+
+          var oldTop = this.webglLow.gl.canvas.style.top;
+          this.newTop = "".concat(newTop, "px"); // this.webglLow.gl.canvas.style.opacity = '0';
+          // this.draw2DLow.canvas.style.opacity = '0';
+          // this.clearContext();
+
+          this.webglLow.gl.canvas.style.top = "".concat(newTop, "px");
+          this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
+          this.resize(); // this.webglLow.gl.canvas.style.top = oldTop;
+          // this.draw2DLow.canvas.style.top = oldTop;
+          // this.webglLow.gl.canvas.style.opacity = '1';
+
+          this.oldScrollY = window.pageYOffset;
+          this.drawQueued = true;
+          this.changeTop = 1;
+          console.log('hide4');
+        } // this.resize();
+        // console.log(this.webgl)
+
+
+        this.scrolled = false;
+      }
+
+      if (this.drawQueued === false) {
+        return;
+      } // const t = new Date().getTime();
+      // console.log('time since last draw:', t - this.globalAnimation.diagramDrawStart)
+      // this.globalAnimation.diagramDrawStart = t;
+
+
       this.drawQueued = false;
       this.clearContext(); // console.log(now - this.globalAnimation.previousNow)
       // This transform converts standard gl clip space, to diagram clip space
@@ -4418,17 +4503,30 @@ function () {
 
       if (this.elements.isMoving()) {
         this.animateNextFrame();
-      } // console.log(performance.now() - t1)
-      // console.log(Date.now() - measure)
+      }
 
+      if (this.changeTop > 1) {
+        this.changeTop -= 1;
+      } else if (this.changeTop === 1) {
+        // this.webglLow.gl.canvas.style.opacity = '1';
+        // this.draw2DLow.canvas.style.opacity = '1';
+        // this.webglLow.gl.canvas.style.top = `${this.newTop}px`;
+        // this.draw2DLow.canvas.style.top = `${this.newTop}px`;
+        console.log('show4');
+        this.changeTop = 0;
+      } // console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
 
-      console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
     }
   }, {
     key: "animateNextFrame",
     value: function animateNextFrame() {
+      var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
       if (!this.drawQueued) {
-        this.drawQueued = true;
+        if (draw) {
+          this.drawQueued = true;
+        }
+
         this.globalAnimation.queueNextFrame(this.draw.bind(this));
       }
     }
