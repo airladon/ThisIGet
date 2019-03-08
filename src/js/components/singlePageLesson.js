@@ -120,30 +120,54 @@ export default class SinglePageLessonComponent extends React.Component
     const fig3 = d.elements._fig3;
     console.log(fig1)
     console.log(fig3)
-    const oldPos = fig1.getPosition();
-    const oldScale = fig1.getScale();
-    fig1.setPosition(new Point(0, 0));
-    // fig3.setScale(new Point(1, 1));
-    fig1.show()
-    fig2.hide()
-    fig3.hide()
-    // d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 0, d.webglLow.gl.canvas.width, 1000, 400, 200);
-    const elementCanvas = document.getElementById('id_figure1_asdf')
-    const glCanvas = d.webglLow.gl.canvas;
-    const width = elementCanvas.clientWidth * 3;
-    const height = elementCanvas.clientHeight * 3;
-    console.log(glCanvas.height, height)
-    d.renderToCanvas(document.getElementById('id_figure1_asdf'),
-      new Rect(-5, -1, 10, 2),
-      glCanvas.width / 2 - width / 2,
-      glCanvas.height / 2 - height / 2,
-      width, height,
-      width, height,
-    );
-    fig1.hide()
+    let oldPos = fig1.getPosition();
+    // // const oldScale = fig1.getScale();
+    // fig1.setPosition(new Point(0, 0));
+    // // fig3.setScale(new Point(1, 1));
+    // fig1.show()
+    // fig2.hide()
+    // fig3.hide()
+    // // d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 0, d.webglLow.gl.canvas.width, 1000, 400, 200);
+    // // const elementCanvas = document.getElementById('id_figure1_asdf')
+    // // const glCanvas = d.webglLow.gl.canvas;
+    // // const width = elementCanvas.clientWidth * 3;
+    // // const height = elementCanvas.clientHeight * 3;
+    // // console.log(glCanvas.height, height)
+    // // d.renderToCanvas(document.getElementById('id_figure1_asdf'),
+    // //   new Rect(-5, -1, 10, 2),
+    // //   glCanvas.width / 2 - width / 2,
+    // //   glCanvas.height / 2 - height / 2,
+    // //   width, height,
+    // //   width, height,
+    // // );
+    // d.renderToCanvas(document.getElementById('id_figure1_asdf'));
+    // fig1.hide()
+    // fig1.setPosition(oldPos);
+    
+    fig1.hide();
+    fig2.hide();
+    fig3.hide();
+
+    d.drawQueued = true;
     fig2.show()
-    fig3.show()
+    oldPos = fig2.getPosition();
+    fig2.setPosition(0, 0);
+    d.renderToCanvas(document.getElementById('id_figure2_asdf'));
+    fig2.hide()
+    fig2.setPosition(oldPos);
+
+    d.drawQueued = true;
+    fig1.show()
+    oldPos = fig1.getPosition();
+    fig1.setPosition(0, 0);
+    d.renderToCanvas(document.getElementById('id_figure1_asdf'));
+    fig1.hide()
     fig1.setPosition(oldPos);
+    
+    // fig2.show()
+    fig3.show()
+    
+    d.draw(-1);
     // fig3.setScale(oldScale);
     // d._fig2.hide();
     // d._fig3.hide();

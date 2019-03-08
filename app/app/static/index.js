@@ -4099,36 +4099,58 @@ function () {
     }
   }, {
     key: "renderToCanvas",
-    value: function renderToCanvas(canvas, diagramWindow, sx, sy, swidth, sheight, canvasWidth, canvasHeight) {
-      var glSpace = {
-        x: {
-          bottomLeft: -1,
-          width: 2
-        },
-        y: {
-          bottomLeft: -1,
-          height: 2
-        }
-      };
-      var windowSpace = {
-        x: {
-          bottomLeft: diagramWindow.left,
-          width: diagramWindow.width
-        },
-        y: {
-          bottomLeft: diagramWindow.bottom,
-          height: diagramWindow.height
-        }
-      };
-      var windowToGL = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(windowSpace, glSpace);
-      this.draw(-1, windowToGL);
-      var ctx = canvas.getContext('2d');
-      canvas.width = canvasWidth;
-      canvas.height = canvasHeight;
+    value: function renderToCanvas(canvas) // diagramWindow: Rect,
+    // sx,
+    // sy,
+    // swidth,
+    // sheight,
+    // canvasWidth,
+    // canvasHeight,
+    {
+      // const glSpace = {
+      //   x: { bottomLeft: -1, width: 2 },
+      //   y: { bottomLeft: -1, height: 2 },
+      // };
+      // const windowSpace = {
+      //   x: { bottomLeft: diagramWindow.left, width: diagramWindow.width },
+      //   y: { bottomLeft: diagramWindow.bottom, height: diagramWindow.height },
+      // };
+      // const windowToGL = spaceToSpaceTransform(windowSpace, glSpace);
+      this.draw(-1); // const elementCanvas = document.getElementById('id_figure1_asdf')
+      // const glCanvas = d.webglLow.gl.canvas;
+      // const width = elementCanvas.clientWidth * 3;
+      // const height = elementCanvas.clientHeight * 3;
+      // console.log(glCanvas.height, height)
+      // d.renderToCanvas(document.getElementById('id_figure1_asdf'),
+      //   new Rect(-5, -1, 10, 2),
+      //   glCanvas.width / 2 - width / 2,
+      //   glCanvas.height / 2 - height / 2,
+      //   width, height,
+      //   width, height,
+      // );
+
+      var draw2D = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](canvas); // const ctx = canvas.getContext('2d');
+
+      var ctx = draw2D.ctx;
+      var glWidth = this.webglLow.gl.canvas.width;
+      var glHeight = this.webglLow.gl.canvas.height;
+      var canvasWidth = canvas.clientWidth / this.webglLow.gl.canvas.clientWidth * glWidth;
+      var canvasHeight = canvas.clientHeight / this.webglLow.gl.canvas.clientHeight * glHeight;
+      var sx = glWidth / 2 - canvasWidth / 2;
+      var sy = glHeight / 2 - canvasHeight / 2;
+      var swidth = canvasWidth;
+      var sheight = canvasHeight; // canvas.width = canvasWidth;
+      // canvas.height = canvasHeight;
+
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.webglLow.gl.canvas, sx, sy, swidth, sheight, 0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.draw2DLow.canvas, sx, sy, swidth, sheight, 0, 0, canvas.width * 2, canvas.height * 2);
+      ctx.drawImage(this.webglLow.gl.canvas, sx, sy, swidth, sheight, 0, 0, canvas.clientWidth, canvas.clientHeight);
+      ctx.drawImage(this.draw2DLow.canvas, sx, sy, swidth, sheight, 0, 0, canvas.clientWidth, canvas.clientHeight);
       console.log(canvas.width, canvas.height);
+      console.log(canvas.clientWidth, canvas.clientHeight);
+      console.log(this.webglLow.gl.canvas.width, this.webglLow.gl.canvas.height);
+      console.log(this.webglLow.gl.canvas.clientWidth, this.webglLow.gl.canvas.clientHeight);
+      console.log(canvasWidth, canvasHeight);
+      console.log(sx, sy);
     }
   }, {
     key: "resize",
