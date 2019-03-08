@@ -96,15 +96,15 @@ export default class SinglePageLessonComponent extends React.Component
     // });
 
     const d = this.lesson.content.diagram;
-    d.draw(0);
+    d.draw(-1);
     const c = document.getElementById('id_figure3a_asdf');
     c.width = c.clientWidth * 2;
     c.height = c.clientHeight * 2;
     const ctx = c.getContext('2d');
     console.log(ctx)
     console.log(d.webglLow.gl.canvas)
-    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, 979, 7616, 0, 0, 979 * 2, 7616 * 2);
-    ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
+    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
+    // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
 
     document.addEventListener(
       'scroll',
@@ -115,6 +115,7 @@ export default class SinglePageLessonComponent extends React.Component
       },
       false,
     );
+    // d.renderToCanvas(document.getElementById('id_figure3a_asdf'), 0, 0, 1000, 3000);
     // d._fig2.hide();
     // d._fig3.hide();
     // d._fig4.hide();
