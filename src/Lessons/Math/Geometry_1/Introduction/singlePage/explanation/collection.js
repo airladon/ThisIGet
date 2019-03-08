@@ -58,6 +58,7 @@ export default class Collection extends CommonDiagramCollection {
   propertiesPosition: number;
 
   appearCircleAndMoveWheel() {
+    console.log(this._fig1.isShown)
     this._fig1._circle.animations.cancelAll();
     this._fig1._wheel.animations.cancelAll();
 
@@ -70,7 +71,6 @@ export default class Collection extends CommonDiagramCollection {
       .pulse({ scale: 1.06, duration: 1, numLines: 5 })
       .scenario({ target: 'centerRight', duration: 1.5 })
       .start();
-
     this.diagram.animateNextFrame();
   }
 
