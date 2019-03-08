@@ -13,7 +13,7 @@ type State = {
 
 let updates = 0;
 
-const { DrawContext2D } = Fig;
+const { DrawContext2D, Point, Rect } = Fig;
 
 const { applyModifiers, setOnClicks } = Fig.tools.html;
 
@@ -96,14 +96,14 @@ export default class SinglePageLessonComponent extends React.Component
     // });
 
     const d = this.lesson.content.diagram;
-    d.draw(-1);
+    // d.draw(-1);
     const c = document.getElementById('id_figure3a_asdf');
     c.width = c.clientWidth * 2;
     c.height = c.clientHeight * 2;
     const ctx = c.getContext('2d');
     console.log(ctx)
     console.log(d.webglLow.gl.canvas)
-    ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
+    // ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
     // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
 
     document.addEventListener(
@@ -115,7 +115,22 @@ export default class SinglePageLessonComponent extends React.Component
       },
       false,
     );
-    // d.renderToCanvas(document.getElementById('id_figure3a_asdf'), 0, 0, 1000, 3000);
+    const fig1 = d.elements._fig1;
+    const fig2 = d.elements._fig2;
+    const fig3 = d.elements._fig3;
+    console.log(fig1)
+    console.log(fig3)
+    const oldPos = fig3.getPosition();
+    const oldScale = fig3.getScale();
+    fig3.setPosition(new Point(0, 0));
+    // fig3.setScale(new Point(1, 1));
+    fig1.hide()
+    fig2.hide()
+    d.renderToCanvas(document.getElementById('id_figure3a_asdf'), new Rect(-4, -2.5, 8, 5), 0, 500, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height-500);
+    fig1.show()
+    fig2.show()
+    fig3.setPosition(oldPos);
+    // fig3.setScale(oldScale);
     // d._fig2.hide();
     // d._fig3.hide();
     // d._fig4.hide();

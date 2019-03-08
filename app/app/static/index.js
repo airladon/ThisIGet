@@ -4099,8 +4099,29 @@ function () {
     }
   }, {
     key: "renderToCanvas",
-    value: function renderToCanvas(canvas, x, y, width, height) {
-      this.draw(-1);
+    value: function renderToCanvas(canvas, diagramWindow, x, y, width, height) {
+      var glSpace = {
+        x: {
+          bottomLeft: -1,
+          width: 2
+        },
+        y: {
+          bottomLeft: -1,
+          height: 2
+        }
+      };
+      var windowSpace = {
+        x: {
+          bottomLeft: diagramWindow.left,
+          width: diagramWindow.width
+        },
+        y: {
+          bottomLeft: diagramWindow.bottom,
+          height: diagramWindow.height
+        }
+      };
+      var windowToGL = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(windowSpace, glSpace);
+      this.draw(-1, windowToGL);
       var ctx = canvas.getContext('2d');
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(this.webglLow.gl.canvas, x, y, width, height, 0, 0, canvas.width, canvas.height);
@@ -4426,6 +4447,8 @@ function () {
   }, {
     key: "draw",
     value: function draw(now) {
+      var diagramTransform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.spaceTransforms.diagramToGL;
+
       if (now === -1) {
         now = this.lastDrawTime;
       } else {
@@ -4469,8 +4492,7 @@ function () {
 
           this.oldScrollY = window.pageYOffset;
           this.drawQueued = true;
-          this.changeTop = 1;
-          console.log('hide4');
+          this.changeTop = 1; // console.log('hide4')
         } // this.resize();
         // console.log(this.webgl)
 
@@ -4499,7 +4521,7 @@ function () {
       //   );
       // const t1 = performance.now();
 
-      this.elements.draw(this.spaceTransforms.diagramToGL, now);
+      this.elements.draw(diagramTransform, now);
 
       if (this.elements.isMoving()) {
         this.animateNextFrame();
@@ -4512,7 +4534,7 @@ function () {
         // this.draw2DLow.canvas.style.opacity = '1';
         // this.webglLow.gl.canvas.style.top = `${this.newTop}px`;
         // this.draw2DLow.canvas.style.top = `${this.newTop}px`;
-        console.log('show4');
+        // console.log('show4')
         this.changeTop = 0;
       } // console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
 
