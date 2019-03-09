@@ -111,7 +111,12 @@ export default class SinglePageLessonComponent extends React.Component
       () => {
         // console.log(window.pageYOffset)
         d.scrolled = true;
+        // if (d.scrollingFast === false) {
+        //   d.renderAllElementsToTiedCanvases();
+        //   d.animateNextFrame(true);
+        // } else {
         d.animateNextFrame(false);
+        // }
       },
       false,
     );
