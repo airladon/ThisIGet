@@ -3922,7 +3922,7 @@ function () {
     this.sizeHtmlText();
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
-    this.animateNextFrame();
+    this.animateNextFrame(true, 'first frame');
 
     if (optionsToUse.elements) {
       // eslint-disable-next-line new-cap
@@ -3965,7 +3965,7 @@ function () {
       }
 
       return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
-      this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this));
+      this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
     key: "getEquations",
@@ -3977,7 +3977,7 @@ function () {
         shapes = this.shapesHigh;
       }
 
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
   }, {
     key: "getObjects",
@@ -3991,7 +3991,7 @@ function () {
         equation = this.equationHigh;
       }
 
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this));
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
     } // getAddElements(high: boolean = false) {
     //   let shapes = this.shapesLow;
     //   let objects = this.objectsLow;
@@ -4137,6 +4137,9 @@ function () {
 
       if (needClear) {
         this.drawQueued = true;
+        this.startTime = new Date().getTime();
+        console.log('clearing', this.webglLow.gl.canvas.style.top);
+        this.fromWhere = 'clear after render';
         this.draw(-1);
       }
     } // Renders all tied elements in the top level of diagram.elements.
@@ -4167,7 +4170,9 @@ function () {
       this.renderToCanvas(elementToRender.tieToHTML.element);
       elementToRender.isRenderedAsImage = true; // reset its position
 
-      elementToRender.setPosition(oldPosition); // elementToRender.hide();
+      elementToRender.setPosition(oldPosition); // this.fromWhere = 'reset Position';
+      // this.draw(-1);
+      // elementToRender.hide();
       // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
@@ -4194,6 +4199,7 @@ function () {
       }
 
       this.drawQueued = true;
+      this.fromWhere = 'RenderToCanvas';
       this.draw(-1);
 
       var _ref = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](htmlCanvas),
@@ -4220,6 +4226,7 @@ function () {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
       ctx.drawImage(this.draw2DLow.canvas, textStartOfCanvas.x, textStartOfCanvas.y, textWidthOfCanvas, textHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
+      this.clearContext();
     }
   }, {
     key: "resize",
@@ -4237,7 +4244,7 @@ function () {
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
       this.elements.resize();
-      this.animateNextFrame();
+      this.animateNextFrame(true, 'resize');
     }
   }, {
     key: "updateHTMLElementTie",
@@ -4294,7 +4301,7 @@ function () {
       }
 
       if (this.beingMovedElements.length > 0) {
-        this.animateNextFrame();
+        this.animateNextFrame(true, 'touch down handler');
       }
 
       if (this.beingTouchedElements.length > 0) {
@@ -4484,7 +4491,7 @@ function () {
         }
       }
 
-      this.animateNextFrame();
+      this.animateNextFrame(true, 'touch move handler');
       return true;
     }
   }, {
@@ -4541,6 +4548,9 @@ function () {
   }, {
     key: "draw",
     value: function draw(now) {
+      console.log('draw', this.fromWhere, now, this.scrolled, this.drawQueued, new Date().getTime() - this.startTime, this.webglLow.gl.canvas.style.top);
+      this.fromWhere = '';
+
       if (now === -1) {
         now = this.lastDrawTime;
       } else {
@@ -4549,12 +4559,13 @@ function () {
 
       if (this.scrolled === true) {
         this.scrolled = false;
-        this.renderAllElementsToTiedCanvases();
-
-        if (Math.abs(window.pageYOffset - this.oldScrollY) > this.webglLow.gl.canvas.clientHeight / 4) {
-          this.centerDrawingLens();
-          this.oldScrollY = window.pageYOffset;
-        }
+        this.renderAllElementsToTiedCanvases(); // if (Math.abs(window.pageYOffset - this.oldScrollY)
+        //     > this.webglLow.gl.canvas.clientHeight / 4) {
+        //   if (this.scrollingFast === true) {
+        //     this.centerDrawingLens();
+        //     this.oldScrollY = window.pageYOffset;
+        //   }
+        // }
 
         this.scrollingFast = true;
 
@@ -4574,7 +4585,7 @@ function () {
       this.elements.draw(this.spaceTransforms.diagramToGL, now);
 
       if (this.elements.isMoving()) {
-        this.animateNextFrame();
+        this.animateNextFrame(true, 'is moving');
       }
     }
   }, {
@@ -4583,8 +4594,8 @@ function () {
       var fromTimeOut = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
 
       if (fromTimeOut) {
-        console.log('Timeout'); // console.log(this.scrollTimeoutId)
-
+        // console.log('Timeout')
+        // console.log(this.scrollTimeoutId)
         this.scrollingFast = false;
       }
 
@@ -4598,6 +4609,7 @@ function () {
       var newTopInPx = "".concat(newTop, "px");
 
       if (this.webglLow.gl.canvas.style.top !== newTopInPx) {
+        console.log('centering', new Date().getTime() - this.startTime);
         this.webglLow.gl.canvas.style.top = "".concat(newTop, "px");
         this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
         this.resize();
@@ -4607,6 +4619,8 @@ function () {
     key: "animateNextFrame",
     value: function animateNextFrame() {
       var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      var fromWhere = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      this.fromWhere = fromWhere;
 
       if (!this.drawQueued) {
         if (draw) {
@@ -26938,8 +26952,6 @@ function () {
   }, {
     key: "getProgram",
     value: function getProgram(vertexShader, fragmentShader) {
-      console.log(vertexShader, fragmentShader, this.programs);
-
       for (var i = 0; i < this.programs.length; i += 1) {
         var program = this.programs[i];
 

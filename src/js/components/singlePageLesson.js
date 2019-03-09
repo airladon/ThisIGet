@@ -115,7 +115,7 @@ export default class SinglePageLessonComponent extends React.Component
         //   d.renderAllElementsToTiedCanvases();
         //   d.animateNextFrame(true);
         // } else {
-        d.animateNextFrame(false);
+        d.animateNextFrame(false, 'scroll event');
         // }
       },
       false,
