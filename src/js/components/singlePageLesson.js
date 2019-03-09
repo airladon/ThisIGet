@@ -146,13 +146,16 @@ export default class SinglePageLessonComponent extends React.Component
     
     // fig1.hide();
     // fig2.hide();
-    d.renderElementToTiedCanvas('fig1');
-    d.renderElementToTiedCanvas('fig2');
-    d.renderElementToTiedCanvas('fig4');
-    d.renderElementToTiedCanvas('fig5');
-    d.renderElementToTiedCanvas('fig6');
-    d.renderElementToTiedCanvas('fig7');
-    d.renderElementToTiedCanvas('fig8');
+
+    d.renderAllElementsToTiedCanvases();
+    // d.renderElementToTiedCanvas('fig1');
+    // d.renderElementToTiedCanvas('fig2');
+    // d.renderElementToTiedCanvas('fig4');
+    // d.renderElementToTiedCanvas('fig5');
+    // d.renderElementToTiedCanvas('fig6');
+    // d.renderElementToTiedCanvas('fig7');
+    // d.renderElementToTiedCanvas('fig8');
+    
     // fig1.hide()
     // fig2.hide()
     // fig3.hide();

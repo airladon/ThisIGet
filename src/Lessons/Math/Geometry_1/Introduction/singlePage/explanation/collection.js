@@ -58,7 +58,6 @@ export default class Collection extends CommonDiagramCollection {
   propertiesPosition: number;
 
   appearCircleAndMoveWheel() {
-    console.log(this._fig1.isShown)
     this._fig1._circle.animations.cancelAll();
     this._fig1._wheel.animations.cancelAll();
 

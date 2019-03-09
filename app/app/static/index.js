@@ -706,6 +706,21 @@ function () {
   }
 
   _createClass(AnimationManager, [{
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      if (this.state === 'animating') {
+        return true;
+      }
+
+      var isAnimating = false;
+      this.animations.forEach(function (animation) {
+        if (animation.state === 'waitingToStart' || animation.state === 'animating') {
+          isAnimating = true;
+        }
+      });
+      return isAnimating;
+    }
+  }, {
     key: "nextFrame",
     value: function nextFrame(now) {
       // console.log('animation manager', now)
@@ -747,7 +762,12 @@ function () {
 
       for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
         this.animations.splice(animationsToRemove[i], 1);
-      }
+      } // if (initialState !== 'animating' && this.state === 'animating') {
+      //   if (this.element != null) {
+      //     this.element.unrender();
+      //   }
+      // }
+
 
       return remaining;
     }
@@ -4096,23 +4116,39 @@ function () {
     value: function updateLimits(limits) {
       this.limits = limits._dup();
       this.setSpaceTransforms();
+    }
+  }, {
+    key: "renderAllElementsToTiedCanvases",
+    value: function renderAllElementsToTiedCanvases() {
+      var _this = this;
+
+      Object.keys(this.elements.elements).forEach(function (name) {
+        var element = _this.elements.elements[name];
+
+        if (element.isShown && element.isRenderedAsImage === false && element.tieToHTML.element != null) {
+          element.isRenderedAsImage = true;
+
+          _this.renderElementToTiedCanvas(name);
+        }
+      });
+      this.drawQueued = true;
+      this.draw(-1);
     } // Renders all tied elements in the top level of diagram.elements.
 
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
-      var _this = this;
+      var _this2 = this;
 
       // record visibility of top level elements
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this.elements.elements[name];
+        var element = _this2.elements.elements[name];
         currentVisibility[name] = element.isShown;
-      });
-      console.log(currentVisibility); // Hide all elements
+      }); // Hide all elements
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        _this.elements.elements[name].hide();
+        _this2.elements.elements[name].hide();
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
@@ -4120,16 +4156,18 @@ function () {
 
       var oldPosition = elementToRender.getPosition();
       elementToRender.setPosition(0, 0);
-      this.renderToCanvas(elementToRender.tieToHTML.element); // reset its position
+      elementToRender.isRenderedAsImage = false;
+      elementToRender.stop(true, true);
+      this.renderToCanvas(elementToRender.tieToHTML.element);
+      elementToRender.isRenderedAsImage = true; // reset its position
 
-      elementToRender.setPosition(oldPosition);
-      elementToRender.hide(); // show all elements that were shown previously (except element that was just rendered)
+      elementToRender.setPosition(oldPosition); // elementToRender.hide();
+      // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
-        var element = _this.elements.elements[name];
+        var element = _this2.elements.elements[name];
 
-        if (name !== elementName && currentVisibility[name] === true) {
-          console.log('showing', name);
+        if (currentVisibility[name] === true) {
           element.show();
         } else {
           element.hide();
@@ -4516,6 +4554,9 @@ function () {
 
 
       if (this.scrolled) {
+        this.scrolled = false;
+        this.renderAllElementsToTiedCanvases();
+
         if (Math.abs(window.pageYOffset - this.oldScrollY) > this.webglLow.gl.canvas.clientHeight / 8) {
           var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
           var newTop = window.pageYOffset + viewPortHeight / 2 - this.webglLow.gl.canvas.clientHeight / 2; // console.log('viewport', viewPortHeight)
@@ -4541,13 +4582,10 @@ function () {
           // this.webglLow.gl.canvas.style.opacity = '1';
 
           this.oldScrollY = window.pageYOffset;
-          this.drawQueued = true;
-          this.changeTop = 1; // console.log('hide4')
-        } // this.resize();
-        // console.log(this.webgl)
+          this.drawQueued = true; // console.log('hide4')
+        } // console.log(this.webgl)
+        // this.scrolled = false;
 
-
-        this.scrolled = false;
       }
 
       if (this.drawQueued === false) {
@@ -4576,18 +4614,6 @@ function () {
       if (this.elements.isMoving()) {
         this.animateNextFrame();
       }
-
-      if (this.changeTop > 1) {
-        this.changeTop -= 1;
-      } else if (this.changeTop === 1) {
-        // this.webglLow.gl.canvas.style.opacity = '1';
-        // this.draw2DLow.canvas.style.opacity = '1';
-        // this.webglLow.gl.canvas.style.top = `${this.newTop}px`;
-        // this.draw2DLow.canvas.style.top = `${this.newTop}px`;
-        // console.log('show4')
-        this.changeTop = 0;
-      } // console.log('draw end', new Date().getTime() - this.globalAnimation.diagramDrawStart);
-
     }
   }, {
     key: "animateNextFrame",
@@ -23430,7 +23456,9 @@ function () {
       element: null,
       scale: 'fit',
       window: this.diagramLimits
-    }; // this.tieToHTMLElement = null;
+    };
+    this.isRenderedAsImage = false;
+    this.unrenderNextDraw = false; // this.tieToHTMLElement = null;
     // this.tieToHTMLElementScale = 'fit';
     // this.tieToHTMLElementScaleLimits = this.diagramLimits;
     // this.presetTransforms = {};
@@ -24053,6 +24081,15 @@ function () {
   }, {
     key: "clear",
     value: function clear() {}
+  }, {
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      if (this.animations.willStartAnimating()) {
+        return true;
+      }
+
+      return false;
+    }
   }, {
     key: "setColor",
     value: function setColor(color) {
@@ -24754,6 +24791,7 @@ function () {
       this.state.movement.previousTransform = this.transform._dup();
       this.state.movement.previousTime = Date.now() / 1000;
       this.state.isBeingMoved = true;
+      this.unrender();
     }
   }, {
     key: "moved",
@@ -24944,6 +24982,7 @@ function () {
     value: function pulseNow() {
       this.state.isPulsing = true;
       this.state.pulse.startTime = -1;
+      this.unrender();
     }
   }, {
     key: "stopPulsing",
@@ -25241,6 +25280,34 @@ function () {
       }
     }
   }, {
+    key: "clearRender",
+    value: function clearRender() {
+      var tieToElement;
+
+      if (typeof this.tieToHTML.element === 'string') {
+        tieToElement = document.getElementById(this.tieToHTML.element);
+      } else if (this.tieToHTML.element instanceof HTMLElement) {
+        tieToElement = this.tieToHTML.element;
+      }
+
+      if (tieToElement instanceof HTMLCanvasElement) {
+        var ctx = tieToElement.getContext('2d');
+        ctx.clearRect(0, 0, tieToElement.width, tieToElement.height);
+      }
+    }
+  }, {
+    key: "unrender",
+    value: function unrender() {
+      if (this.isRenderedAsImage) {
+        this.unrenderNextDraw = true;
+        this.isRenderedAsImage = false;
+      }
+
+      if (this.parent != null) {
+        this.parent.unrender();
+      }
+    }
+  }, {
     key: "showAll",
     value: function showAll() {
       this.show();
@@ -25518,6 +25585,14 @@ function (_DiagramElement) {
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
       if (this.isShown) {
+        if (this.isRenderedAsImage === true) {
+          if (this.willStartAnimating()) {
+            this.unrender();
+          } else {
+            return;
+          }
+        }
+
         this.animations.nextFrame(now); // Deprecate
 
         this.setNextTransform(now); // Deprecate
@@ -25564,6 +25639,11 @@ function (_DiagramElement) {
         pulseTransforms.forEach(function (t) {
           _this5.drawingObject.drawWithTransformMatrix(t.matrix(), _this5.color, pointCount);
         });
+
+        if (this.unrenderNextDraw) {
+          this.clearRender();
+          this.unrenderNextDraw = false;
+        }
       }
     }
   }, {
@@ -25787,6 +25867,19 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "willStartAnimating", this).call(this);
+
+      for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
+        if (this.elements[this.drawOrder[i]].willStartAnimating()) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
     key: "draw",
     value: function draw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
@@ -25804,6 +25897,14 @@ function (_DiagramElement2) {
       //   // console.log(this.name, deltaTime)
       // }
       if (this.isShown) {
+        if (this.isRenderedAsImage === true) {
+          if (this.willStartAnimating()) {
+            this.unrender();
+          } else {
+            return;
+          }
+        }
+
         this.animations.nextFrame(now); // Deprecate
 
         this.setNextTransform(now); // Deprecate
@@ -25832,6 +25933,11 @@ function (_DiagramElement2) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
             this.elements[this.drawOrder[i]].draw(pulseTransforms[k], now);
           }
+        }
+
+        if (this.unrenderNextDraw) {
+          this.clearRender();
+          this.unrenderNextDraw = false;
         }
       }
     }
@@ -26844,11 +26950,16 @@ function () {
   }, {
     key: "getProgram",
     value: function getProgram(vertexShader, fragmentShader) {
-      this.programs.forEach(function (program) {
+      console.log(vertexShader, fragmentShader, this.programs);
+
+      for (var i = 0; i < this.programs.length; i += 1) {
+        var program = this.programs[i];
+
         if (program.vertexShader === vertexShader && program.fragmentShader === fragmentShader) {
-          return program.program;
+          return i;
         }
-      });
+      }
+
       var shaders = Object(_shaders__WEBPACK_IMPORTED_MODULE_0__["default"])(vertexShader, fragmentShader);
       var newProgram = createProgramFromScripts(this.gl, shaders.vertexSource, shaders.fragmentSource);
       var programDetails = {
