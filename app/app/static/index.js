@@ -3728,77 +3728,27 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // Then the process is:
 //    - html element size in pixels and aspect ratio found
 //    - html element size in gl coordinates found
-//    - 
 var Diagram =
 /*#__PURE__*/
 function () {
   // gestureElement: HTMLElement;
-  // addElements: DiagramAddElements;
-  // addElementsLow: DiagramAddElements;
-  // addElementsHigh: DiagramAddElements;
   // layout: Object;
-  // draw2DFigures: Object;
-  // glToDiagramSpaceTransform: Transform;
-  // diagramToGLSpaceTransform: Transform;
-  // pixelToDiagramSpaceTransform: Transform;
-  // diagramToPixelSpaceTransform: Transform;
-  // pixelToGLSpaceTransform: Transform;
-  // glToPixelSpaceTransform: Transform;
-  // diagramToCSSPercentSpaceTransform: Transform;
-  // glToDiagramSpaceScale: Point;
-  // diagramToGLSpaceScale: Point;
-  // pixelToDiagramSpaceScale: Point;
-  // diagramToPixelSpaceScale: Point;
-  // glToPixelSpaceScale: Point;
-  // pixelToGLSpaceScale: Point;
-  function Diagram( // canvas: HTMLCanvasElement,
-  options) // limitsOrxMin: number | Rect = new Rect(-1, -1, 2, 2),
-  // yMin: number = -1,
-  // width: number = 2,
-  // height: number = 2,
-  // backgroundColor: Array<number> = [1, 1, 1, 1],
-  // layout: Object = {},
-  // vertexShader: string = 'simple',
-  // fragmentShader: string = 'simple',
-  {
+  // oldScrollY: number;
+  function Diagram(options) {
     _classCallCheck(this, Diagram);
 
     var defaultOptions = {
       htmlId: 'id_figureone_canvases',
       limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
-      // layout: {},
-      // vertexShader: 'simple',
-      // fragmentShader: 'simple',
       fontScale: 1
     };
-    this.scrolled = false;
-    this.oldScrollY = 0;
+    this.scrolled = false; // this.oldScrollY = 0;
+
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
-        limits = optionsToUse.limits; // if (typeof containerIdOrOptions !== 'string') {
-    //   optionsToUse = joinObjects(
-    //     defaultOptions, containerIdOrOptions,
-    //   );
-    // } else {
-    //   optionsToUse.htmlId = containerIdOrOptions;
-    //   if (typeof limitsOrxMin === 'number') {
-    //     optionsToUse.limits = new Rect(
-    //       limitsOrxMin,
-    //       yMin,
-    //       width,
-    //       height,
-    //     );
-    //   } else {
-    //     optionsToUse.limits = limitsOrxMin;
-    //   }
-    //   optionsToUse.backgroundColor = backgroundColor;
-    //   optionsToUse.layout = layout;
-    //   optionsToUse.vertexShader = vertexShader;
-    //   optionsToUse.fragmentShader = fragmentShader;
-    // }
-    // this.layout = layout;
+        limits = optionsToUse.limits; // this.layout = layout;
 
     if (typeof htmlId === 'string') {
       var container = document.getElementById(htmlId);
@@ -3853,16 +3803,7 @@ function () {
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
         this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasHigh);
       }
-    } // for (let i = 0; i < canvas2Ds.length; i += 1) {
-    //   const canvas = canvas2Ds[i];
-    //   console.log(i, canvas)
-    //   if (canvas instanceof HTMLCanvasElement) {
-    //     const draw2D = new DrawContext2D(canvas);
-    //     const { id } = canvas;
-    //     this.draw2DFigures[id] = draw2D;
-    //   }
-    // }
-
+    }
 
     if (optionsToUse.gestureCanvas != null) {
       var gestureCanvas = document.getElementById(optionsToUse.gestureCanvas);
@@ -3874,28 +3815,17 @@ function () {
 
     if (this.gestureCanvas == null) {
       this.gestureCanvas = this.htmlCanvas;
-    } // if (this.textCanvas instanceof HTMLCanvasElement) {
-    //   this.draw2D = new DrawContext2D(this.textCanvas);
-    // }
-
+    }
 
     if (this instanceof Diagram) {
       this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_5__["default"](this);
     }
 
-    this.fontScale = optionsToUse.fontScale; // let limits;
-    // if (limitsOrxMin instanceof Rect) {
-    //   const r = limitsOrxMin;
-    //   limits = new Rect(r.left, r.bottom, r.width, r.height);
-    // } else {
-    //   limits = new Rect(limitsOrxMin, yMin, width, height);
-    // }
-
+    this.fontScale = optionsToUse.fontScale;
     this.updateLimits(limits);
     this.drawQueued = false;
     this.lastDrawTime = 0;
-    this.inTransition = false; // console.log(this.limits)
-
+    this.inTransition = false;
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
@@ -3908,10 +3838,7 @@ function () {
     this.equation = this.equationLow;
     this.objectsLow = this.getObjects(false);
     this.objectsHigh = this.getObjects(true);
-    this.objects = this.objectsLow; // this.addElementsLow = this.getAddElements(false);
-    // this.addElementsHigh = this.getAddElements(true);
-    // this.addElements = this.getAddElements();
-
+    this.objects = this.objectsLow;
     this.createDiagramElements();
 
     if (this.elements.name === '') {
@@ -3930,24 +3857,28 @@ function () {
       this.elements.diagramLimits = this.limits;
     }
 
-    this.waitForFrame = 0;
-  } // getFigureCanvases() {
-  //   const canvas2Ds = document.getElementsByClassName('single_page_lesson__figure');
-  //   console.log(canvas2Ds, canvas2Ds.length)
-  //   this.draw2DFigures = {};
-  //   // var list= document.getElementsByClassName("events");
-  //   [].forEach.call(canvas2Ds, (canvas) => {
-  //     console.log(canvas)
-  //     if (canvas instanceof HTMLCanvasElement) {
-  //       const draw2D = new DrawContext2D(canvas);
-  //       const { id } = canvas;
-  //       this.draw2DFigures[id] = draw2D;
-  //     }
-  //   });
-  // }
-
+    this.waitForFrames = 0;
+    this.scrollingFast = false;
+    this.scrollTimeoutId = null;
+  }
 
   _createClass(Diagram, [{
+    key: "scrollEvent",
+    value: function scrollEvent() {
+      this.scrolled = true;
+      this.animateNextFrame(false, 'scroll event');
+    }
+  }, {
+    key: "enableScrolling",
+    value: function enableScrolling() {
+      document.addEventListener('scroll', this.scrollEvent.bind(this), false);
+    }
+  }, {
+    key: "disableScrolling",
+    value: function disableScrolling() {
+      document.removeEventListener('scroll', this.scrollEvent.bind(this), false);
+    }
+  }, {
     key: "addElements",
     value: function addElements(rootCollection, layout) {
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
@@ -3994,22 +3925,7 @@ function () {
       }
 
       return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
-    } // getAddElements(high: boolean = false) {
-    //   let shapes = this.shapesLow;
-    //   let objects = this.objectsLow;
-    //   let equation = this.equationLow;
-    //   if (high) {
-    //     shapes = this.shapesHigh;
-    //     objects = this.objectsHigh;
-    //     equation = this.equationHigh;
-    //   }
-    //   return new DiagramAddElements(
-    //     shapes,
-    //     objects,
-    //     equation,
-    //   );
-    // }
-
+    }
   }, {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
@@ -4033,21 +3949,7 @@ function () {
       this.gesture.destroy();
       this.webglLow.gl.getExtension('WEBGL_lose_context').loseContext();
       this.webglHigh.gl.getExtension('WEBGL_lose_context').loseContext();
-    } // setGLDiagramSpaceTransforms() {
-    //   const glSpace = {
-    //     x: { bottomLeft: -1, width: 2 },
-    //     y: { bottomLeft: -1, height: 2 },
-    //   };
-    //   const diagramSpace = {
-    //     x: { bottomLeft: this.limits.left, width: this.limits.width },
-    //     y: { bottomLeft: this.limits.bottom, height: this.limits.height },
-    //   };
-    //   this.diagramToGLSpaceTransformMatrix =
-    //     spaceToSpaceTransformMatrix(glSpace, diagramSpace);
-    //   this.glToDiagramSpaceTransformMatrix =
-    //     spaceToSpaceTransformMatrix(diagramSpace, glSpace);
-    // }
-
+    }
   }, {
     key: "setSpaceTransforms",
     value: function setSpaceTransforms() {
@@ -4118,7 +4020,8 @@ function () {
     value: function updateLimits(limits) {
       this.limits = limits._dup();
       this.setSpaceTransforms();
-    }
+    } // Renders all tied elements in the first level of diagram elements
+
   }, {
     key: "renderAllElementsToTiedCanvases",
     value: function renderAllElementsToTiedCanvases() {
@@ -4139,19 +4042,15 @@ function () {
 
       if (needClear) {
         this.drawQueued = true;
-        this.startTime = new Date().getTime();
-        console.log('clearing', this.webglLow.gl.canvas.style.top);
-        this.fromWhere = 'clear after render';
         this.draw(-1);
       }
-    } // Renders all tied elements in the top level of diagram.elements.
-
+    }
   }, {
     key: "renderElementToTiedCanvas",
     value: function renderElementToTiedCanvas(elementName) {
       var _this2 = this;
 
-      // record visibility of top level elements
+      // record visibility of top level elements in diagram
       var currentVisibility = {};
       Object.keys(this.elements.elements).forEach(function (name) {
         var element = _this2.elements.elements[name];
@@ -4163,19 +4062,18 @@ function () {
       }); // Show the element to render
 
       var elementToRender = this.elements.elements[elementName];
-      elementToRender.show(); // Move it to the origin and render
+      elementToRender.show(); // Move it to the origin to render
 
       var oldPosition = elementToRender.getPosition();
-      elementToRender.setPosition(0, 0);
+      elementToRender.setPosition(0, 0); // Stop animations and render
+
       elementToRender.isRenderedAsImage = false;
       elementToRender.stop(true, true);
       this.renderToCanvas(elementToRender.tieToHTML.element);
-      elementToRender.isRenderedAsImage = true; // reset its position
+      elementToRender.isRenderedAsImage = true; // reset position
 
       elementToRender.setPosition(oldPosition); // this.draw(-1);
-      // this.webglLow.gl.canvas.style.visibility = 'visible';
       // this.fromWhere = 'reset Position';
-      // this.draw(-1);
       // elementToRender.hide();
       // show all elements that were shown previously (except element that was just rendered)
 
@@ -4188,7 +4086,8 @@ function () {
           element.hide();
         }
       });
-    }
+    } // This method will render the gl and 2d contexts to a canvas
+
   }, {
     key: "renderToCanvas",
     value: function renderToCanvas(htmlCanvasElementOrId) {
@@ -4202,8 +4101,8 @@ function () {
         return;
       }
 
-      this.drawQueued = true;
-      this.fromWhere = 'RenderToCanvas';
+      this.drawQueued = true; // this.fromWhere = 'RenderToCanvas';
+
       this.draw(-1);
 
       var _ref = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](htmlCanvas),
@@ -4231,7 +4130,8 @@ function () {
       ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
       ctx.drawImage(this.draw2DLow.canvas, textStartOfCanvas.x, textStartOfCanvas.y, textWidthOfCanvas, textHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
       this.clearContext();
-    }
+    } // resize should only be called if the viewport size has changed.
+
   }, {
     key: "resize",
     value: function resize() {
@@ -4254,10 +4154,7 @@ function () {
     key: "updateHTMLElementTie",
     value: function updateHTMLElementTie() {
       if (this.elements != null) {
-        this.elements.updateHTMLElementTie( // this.pixelToDiagramSpaceTransform,
-        // this.diagramToPixelSpaceScale,
-        // this.diagramToGLSpaceTransform.m(),
-        this.canvasLow);
+        this.elements.updateHTMLElementTie(this.canvasLow);
       }
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
@@ -4533,29 +4430,41 @@ function () {
       this.webglHigh.gl.clearColor(0, 0, 0, 0);
       this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
       this.elements.clear();
-    }
+    } // scroll() {
+    //   if (this.scrollingFast === false) {
+    //     this.webglLow.gl.canvas.style.top = '-10000px';
+    //     this.renderAllElementsToTiedCanvases();
+    //     this.scrollingFast = true;
+    //     if (this.scrollTimeoutId) {
+    //       clearTimeout(this.scrollTimeoutId);
+    //       this.scrollTimeoutId = null;
+    //     }
+    //     this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
+    //   }
+    // }
+
   }, {
     key: "draw",
-    value: function draw(now) {
-      this.fromWhere = '';
+    value: function draw(nowIn) {
+      var now = nowIn;
 
-      if (now === -1) {
+      if (nowIn === -1) {
         now = this.lastDrawTime;
-      } else {
-        // console.log((now - this.lastDrawTime) * 1000);
-        this.lastDrawTime = now;
-      }
+      } // console.log((now - this.lastDrawTime) * 1000);
+
+
+      this.lastDrawTime = now;
 
       if (this.scrolled === true) {
         this.scrolled = false;
 
         if (this.webglLow.gl.canvas.style.top !== '-10000px') {
           this.webglLow.gl.canvas.style.top = '-10000px';
-          this.waitForFrame = 1;
+          this.waitForFrames = 1;
         }
 
-        if (this.waitForFrame > 0) {
-          this.waitForFrame -= 1;
+        if (this.waitForFrames > 0) {
+          this.waitForFrames -= 1;
         } else {
           this.renderAllElementsToTiedCanvases();
         }
@@ -4564,10 +4473,12 @@ function () {
 
         if (this.scrollTimeoutId) {
           clearTimeout(this.scrollTimeoutId);
+          this.scrollTimeoutId = null;
         }
 
         this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
-      }
+      } // If only a scroll event called draw, then quit before drawing
+
 
       if (this.drawQueued === false) {
         return;
@@ -4600,10 +4511,9 @@ function () {
       var newTopInPx = "".concat(newTop, "px");
 
       if (this.webglLow.gl.canvas.style.top !== newTopInPx) {
-        console.log('centering', new Date().getTime() - this.startTime);
         this.webglLow.gl.canvas.style.top = "".concat(newTop, "px");
         this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
-        this.resize();
+        this.updateHTMLElementTie();
       }
     }
   }, {
@@ -4611,8 +4521,8 @@ function () {
     value: function animateNextFrame() {
       var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var fromWhere = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      this.fromWhere = fromWhere;
 
+      // this.fromWhere = fromWhere;
       if (!this.drawQueued) {
         if (draw) {
           this.drawQueued = true;

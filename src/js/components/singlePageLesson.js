@@ -105,21 +105,21 @@ export default class SinglePageLessonComponent extends React.Component
     // console.log(d.webglLow.gl.canvas)
     // ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
     // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
-
-    document.addEventListener(
-      'scroll',
-      () => {
-        // console.log(window.pageYOffset)
-        d.scrolled = true;
-        // if (d.scrollingFast === false) {
-        //   d.renderAllElementsToTiedCanvases();
-        //   d.animateNextFrame(true);
-        // } else {
-        d.animateNextFrame(false, 'scroll event');
-        // }
-      },
-      false,
-    );
+    d.enableScrolling();
+    // document.addEventListener(
+    //   'scroll',
+    //   () => {
+    //     // console.log(window.pageYOffset)
+    //     d.scrolled = true;
+    //     // if (d.scrollingFast === false) {
+    //     //   d.renderAllElementsToTiedCanvases();
+    //     //   d.animateNextFrame(true);
+    //     // } else {
+    //     d.animateNextFrame(false, 'scroll event');
+    //     // }
+    //   },
+    //   false,
+    // );
     // const fig1 = d.elements._fig1;
     // const fig2 = d.elements._fig2;
     // const fig3 = d.elements._fig3;
