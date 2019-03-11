@@ -3929,6 +3929,8 @@ function () {
       this.elements = new optionsToUse.elements(this);
       this.elements.diagramLimits = this.limits;
     }
+
+    this.waitForFrame = 0;
   } // getFigureCanvases() {
   //   const canvas2Ds = document.getElementsByClassName('single_page_lesson__figure');
   //   console.log(canvas2Ds, canvas2Ds.length)
@@ -4170,7 +4172,9 @@ function () {
       this.renderToCanvas(elementToRender.tieToHTML.element);
       elementToRender.isRenderedAsImage = true; // reset its position
 
-      elementToRender.setPosition(oldPosition); // this.fromWhere = 'reset Position';
+      elementToRender.setPosition(oldPosition); // this.draw(-1);
+      // this.webglLow.gl.canvas.style.visibility = 'visible';
+      // this.fromWhere = 'reset Position';
       // this.draw(-1);
       // elementToRender.hide();
       // show all elements that were shown previously (except element that was just rendered)
@@ -4548,24 +4552,40 @@ function () {
   }, {
     key: "draw",
     value: function draw(now) {
-      console.log('draw', this.fromWhere, now, this.scrolled, this.drawQueued, new Date().getTime() - this.startTime, this.webglLow.gl.canvas.style.top);
+      // console.log('draw1', this.fromWhere, now, this.scrolled, this.drawQueued, new Date().getTime() - this.startTime, this.webglLow.gl.canvas.style.top)
       this.fromWhere = '';
 
       if (now === -1) {
         now = this.lastDrawTime;
       } else {
+        console.log((now - this.lastDrawTime) * 1000);
         this.lastDrawTime = now;
       }
 
       if (this.scrolled === true) {
-        this.scrolled = false;
-        this.renderAllElementsToTiedCanvases(); // if (Math.abs(window.pageYOffset - this.oldScrollY)
+        this.scrolled = false; // if (this.webglLow.gl.canvas.style.visibility !== 'hidden') {
+        //   this.webglLow.gl.canvas.style.visibility = 'hidden';
+        //   this.waitForFrame = 1;
+        // }
+
+        if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+          this.webglLow.gl.canvas.style.top = '-10000px';
+          this.waitForFrame = 1;
+        }
+
+        if (this.waitForFrame > 0) {
+          this.waitForFrame -= 1;
+        } else {
+          this.renderAllElementsToTiedCanvases();
+        } // this.webglLow.gl.canvas.style.top = '-10000px';
+        // if (Math.abs(window.pageYOffset - this.oldScrollY)
         //     > this.webglLow.gl.canvas.clientHeight / 4) {
         //   if (this.scrollingFast === true) {
         //     this.centerDrawingLens();
         //     this.oldScrollY = window.pageYOffset;
         //   }
         // }
+
 
         this.scrollingFast = true;
 
@@ -4613,7 +4633,8 @@ function () {
         this.webglLow.gl.canvas.style.top = "".concat(newTop, "px");
         this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
         this.resize();
-      }
+      } // this.webglLow.gl.canvas.style.visibility = 'visible';
+
     }
   }, {
     key: "animateNextFrame",
@@ -21731,15 +21752,17 @@ function (_DrawingObject) {
   }, {
     key: "draw",
     value: function draw(translation, rotation, scale, count, color) {
+      var webGLInstance = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : this.webgl;
       var transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["identity"]();
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["translate"](transformation, translation.x, translation.y);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["rotate"](transformation, rotation);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["scale"](transformation, scale.x, scale.y);
-      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count);
+      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count, webGLInstance);
     }
   }, {
     key: "drawWithTransformMatrix",
     value: function drawWithTransformMatrix(transformMatrix, color, count) {
+      var webglInstance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.webgl;
       var size = 2; // 2 components per iteration
 
       var type = this.gl.FLOAT; // the data is 32bit floats
@@ -21751,9 +21774,9 @@ function (_DrawingObject) {
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
 
-      var locations = this.webgl.useProgram(this.programIndex);
+      var locations = webglInstance.useProgram(this.programIndex);
 
-      if (this.texture && this.webgl.textures[this.texture.id].type === 'canvasText') {
+      if (this.texture && webglInstance.textures[this.texture.id].type === 'canvasText') {
         // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
         // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
         this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
@@ -21797,7 +21820,7 @@ function (_DrawingObject) {
 
       if (texture) {
         this.gl.uniform1i(locations.u_use_texture, 1);
-        var index = this.webgl.textures[texture.id].index; // console.log(texture.id, index, this.webgl.textures)
+        var index = webglInstance.textures[texture.id].index; // console.log(texture.id, index, webglInstance.textures)
 
         this.gl.uniform1i(locations.u_texture, index);
       } else {
@@ -23033,7 +23056,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
@@ -23077,6 +23101,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import GlobalAnimation from './webgl/GlobalAnimation';
+
 
 
  // eslint-disable-next-line import/no-cycle
@@ -23425,19 +23450,19 @@ function () {
       animation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"]() // current animation phase
 
       },
       colorAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"]() // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"]() // current animation phase
 
       },
       customAnimation: {
         currentPhaseIndex: 0,
         // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}) // current animation phase
+        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](function () {}) // current animation phase
 
       },
       isBeingMoved: false,
@@ -24353,7 +24378,7 @@ function () {
         for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
           var phase = plan[i];
 
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
+          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"]) {
             phase.finish(cancelled, forceSetToEnd);
           } else {
             phase.finish(this, cancelled, forceSetToEnd);
@@ -24366,7 +24391,7 @@ function () {
         if (plan.length > 0) {
           var _phase = plan.slice(-1)[0];
 
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"]) {
+          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"]) {
             _phase.finish(cancelled, forceSetToEnd);
           } else {
             _phase.finish(this, cancelled, forceSetToEnd);
@@ -24486,12 +24511,12 @@ function () {
           delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseDelay);
       }
 
       if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
+        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
         phases.push(phaseMove);
       }
 
@@ -24555,12 +24580,12 @@ function () {
           delayDisolve = 'in';
         }
 
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
+        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
         phases.push(phaseColor);
       }
 
@@ -24644,12 +24669,12 @@ function () {
       }
 
       if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
+        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
         phases.push(phaseDelay);
       }
 
       if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_11__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
+        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
         phases.push(phaseCustom);
       }
 
@@ -25674,6 +25699,34 @@ function (_DiagramElement) {
       }
 
       return false;
+    }
+  }, {
+    key: "setupWebGLBuffers",
+    value: function setupWebGLBuffers(newWebgl) {
+      var drawingObject = this.drawingObject;
+
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        var oldWebgl = drawingObject.webgl;
+        drawingObject.webgl = newWebgl;
+        drawingObject.gl = newWebgl.gl;
+        drawingObject.setupBuffer();
+        drawingObject.webgl = oldWebgl;
+        drawingObject.gl = oldWebgl.gl;
+      }
+    }
+  }, {
+    key: "changeWebGLInstance",
+    value: function changeWebGLInstance(newWebgl) {
+      var oldWebgl;
+      var drawingObject = this.drawingObject;
+
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        oldWebgl = drawingObject.webgl;
+        drawingObject.webgl = newWebgl;
+        drawingObject.gl = newWebgl.gl;
+      }
+
+      return oldWebgl;
     } // // Update the translation move boundary for the element's transform.
     // // This will limit the first translation part of the transform to only
     // // translations within the max/min limit.
@@ -26497,6 +26550,26 @@ function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]];
         element.updateContext(context);
       }
+    }
+  }, {
+    key: "setupWebGLBuffers",
+    value: function setupWebGLBuffers(newWebgl) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setupWebGLBuffers(newWebgl);
+      }
+    }
+  }, {
+    key: "changeWebGLInstance",
+    value: function changeWebGLInstance(newWebgl) {
+      var oldInstance;
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        oldInstance = element.changeWebGLInstance(newWebgl);
+      }
+
+      return oldInstance;
     }
   }]);
 
