@@ -4552,8 +4552,10 @@ function () {
         this.renderAllElementsToTiedCanvases();
 
         if (Math.abs(window.pageYOffset - this.oldScrollY) > this.webglLow.gl.canvas.clientHeight / 4) {
-          this.centerDrawingLens();
-          this.oldScrollY = window.pageYOffset;
+          if (this.scrollingFast === true) {
+            this.centerDrawingLens();
+            this.oldScrollY = window.pageYOffset;
+          }
         }
 
         this.scrollingFast = true;
