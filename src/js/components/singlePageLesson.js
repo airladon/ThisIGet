@@ -13,7 +13,7 @@ type State = {
 
 let updates = 0;
 
-const { DrawContext2D, Point, Rect } = Fig;
+const { DrawContext2D, Point, Rect, WebGLInstance } = Fig;
 
 const { applyModifiers, setOnClicks } = Fig.tools.html;
 
@@ -105,7 +105,9 @@ export default class SinglePageLessonComponent extends React.Component
     // console.log(d.webglLow.gl.canvas)
     // ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
     // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
-
+    console.log('setup')
+    d.elements.setupWebGLBuffers(d.webGLHidden);
+    console.log(d.webGLHidden)
     document.addEventListener(
       'scroll',
       () => {
@@ -283,6 +285,8 @@ export default class SinglePageLessonComponent extends React.Component
         <canvas id="id_diagram__text__low" className='diagram__text'>
         </canvas>
         <canvas id="id_diagram__gl__low" className='diagram__gl'>
+        </canvas>
+        <canvas id="id_diagram__gl__hidden" className='diagram__gl'>
         </canvas>
         <div id="id_diagram__html" className='diagram__html'>
         </div>
