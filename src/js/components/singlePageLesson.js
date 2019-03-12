@@ -154,6 +154,7 @@ export default class SinglePageLessonComponent extends React.Component
 
     d.renderAllElementsToTiedCanvases();
     const loadingElements = d.elements.getLoadingElements();
+    console.log(loadingElements)
     for (let i = 0; i < loadingElements.length; i += 1) {
       const element = loadingElements[i];
       if (element.drawingObject.state === 'loading') {

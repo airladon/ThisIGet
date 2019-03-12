@@ -21493,20 +21493,31 @@ function (_DrawingObject) {
             var image = new Image();
             image.src = src;
             this.state = 'loading';
+            this.webgl.textures[texture.id].state = 'loading';
+            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
             image.addEventListener('load', function () {
               // Now that the image has loaded make copy it to the texture.
               texture.data = image;
 
-              _this2.addTextureToBuffer(glTexture, texture.data);
+              _this2.addTextureToBuffer(glTexture, texture.data); // if (this.onLoad != null) {
 
-              if (_this2.onLoad != null) {
-                _this2.onLoad();
-              }
+
+              _this2.webgl.onLoad(texture.id); // this.onLoad();
+              // }
+
 
               _this2.state = 'loaded';
+              _this2.webgl.textures[texture.id].state = 'loaded';
             });
           } else if (texture.data != null) {
             this.addTextureToBuffer(glTexture, texture.data);
+          }
+        } else if (texture.id in this.webgl.textures) {
+          if (this.webgl.textures[texture.id].state === 'loading') {
+            this.state = 'loading';
+            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
+          } else {
+            this.state = 'loaded';
           }
         }
       }
@@ -21514,6 +21525,13 @@ function (_DrawingObject) {
       this.buffer = this.gl.createBuffer();
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
       this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.points), this.gl.STATIC_DRAW);
+    }
+  }, {
+    key: "executeOnLoad",
+    value: function executeOnLoad() {
+      if (this.onLoad != null) {
+        this.onLoad();
+      }
     }
   }, {
     key: "resetBuffer",
@@ -26931,9 +26949,19 @@ function () {
       this.textures[id] = {
         glTexture: glTexture,
         index: index,
-        type: type
+        type: type,
+        state: 'loaded',
+        onLoad: []
       };
       return index;
+    }
+  }, {
+    key: "onLoad",
+    value: function onLoad(textureId) {
+      this.textures[textureId].onLoad.forEach(function (f) {
+        return f();
+      });
+      this.textures[textureId].onLoad = [];
     }
   }, {
     key: "getProgram",
