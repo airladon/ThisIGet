@@ -3742,6 +3742,7 @@ function () {
   // gestureElement: HTMLElement;
   // layout: Object;
   // oldScrollY: number;
+  // used for drawing debug only
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -4142,9 +4143,18 @@ function () {
     value: function resize() {
       if (this.elements != null) {
         this.elements.updateLimits(this.limits, this.spaceTransforms);
-      }
+      } // if (this.count == null) {
+      //   this.count = 0;
+      // } else {
+      //   this.count += 1
+      // }
+      // console.log('resize')
+      // if (this.count > 2) {
+      //   console.log('unrender')
+      //   this.elements.unrenderAll();
+      // }
 
-      this.elements.unrenderAll();
+
       this.webglLow.resize();
       this.webglHigh.resize();
       this.draw2DLow.resize();
@@ -4450,6 +4460,13 @@ function () {
     // }
 
   }, {
+    key: "drawNow",
+    value: function drawNow() {
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.drawQueued = true;
+      this.draw(time);
+    }
+  }, {
     key: "draw",
     value: function draw(nowIn) {
       var now = nowIn;
@@ -4509,7 +4526,12 @@ function () {
         this.scrollingFast = false;
       }
 
-      var viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      var viewPortHeight = window.innerHeight || 0;
+
+      if (document.documentElement != null) {
+        viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      }
+
       var newTop = window.pageYOffset + viewPortHeight / 2 - this.webglLow.gl.canvas.clientHeight / 2;
 
       if (newTop < 0) {
@@ -4531,8 +4553,8 @@ function () {
     value: function animateNextFrame() {
       var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var fromWhere = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      this.fromWhere = fromWhere;
 
-      // this.fromWhere = fromWhere;
       if (!this.drawQueued) {
         if (draw) {
           this.drawQueued = true;
@@ -6620,12 +6642,13 @@ function (_DiagramElementCollec) {
         var p = _this2.shapes.txt(options.text, {
           position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
           font: fontToUse
-        }); // if (options.color != null) {
-        //   p.setColor(options.color);
-        // } else {
-        //   p.setColor(RGBToArray(p.drawingObject.text[0].font.color));
-        // }
+        });
 
+        if (options.color != null) {
+          p.setColor(options.color);
+        } else {
+          p.setColor(Object(_tools_color__WEBPACK_IMPORTED_MODULE_2__["RGBToArray"])(p.drawingObject.text[0].font.color));
+        }
 
         return p;
       }; // Helper function to add symbol element
@@ -19677,8 +19700,7 @@ function (_DrawingObject) {
     _this.text = text;
     _this.scalingFactor = 1;
     _this.lastDraw = [];
-    _this.lastDrawTransform = [];
-    _this.glRect = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2);
+    _this.lastDrawTransform = []; // this.glRect = new Rect(-1, -1, 2, 2);
 
     if (text.length > 0) {
       var minSize = _this.text[0].font.size;
@@ -24018,6 +24040,7 @@ function () {
     //   return time;
     // }
     // Used only to clear 2D context
+    // eslint-disable-next-line class-methods-use-this
 
   }, {
     key: "clear",
@@ -26513,7 +26536,6 @@ function (_DiagramElement2) {
   }, {
     key: "unrenderAll",
     value: function unrenderAll() {
-      var elems = [];
       this.unrender();
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -26525,8 +26547,6 @@ function (_DiagramElement2) {
           element.unrenderAll();
         }
       }
-
-      return elems;
     }
   }]);
 
