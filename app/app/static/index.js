@@ -3849,6 +3849,7 @@ function () {
     this.waitForFrames = 0;
     this.scrollingFast = false;
     this.scrollTimeoutId = null;
+    this.oldScroll = window.pageYOffset;
   }
 
   _createClass(Diagram, [{
@@ -4447,25 +4448,27 @@ function () {
       if (this.scrolled === true) {
         this.scrolled = false;
 
-        if (this.webglLow.gl.canvas.style.top !== '-10000px') {
-          this.webglLow.gl.canvas.style.top = '-10000px';
-          this.waitForFrames = 1;
+        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 10) {
+          if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+            this.webglLow.gl.canvas.style.top = '-10000px';
+            this.waitForFrames = 1;
+          }
+
+          if (this.waitForFrames > 0) {
+            this.waitForFrames -= 1;
+          } else {
+            this.renderAllElementsToTiedCanvases();
+          }
+
+          this.scrollingFast = true;
+
+          if (this.scrollTimeoutId) {
+            clearTimeout(this.scrollTimeoutId);
+            this.scrollTimeoutId = null;
+          }
+
+          this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
         }
-
-        if (this.waitForFrames > 0) {
-          this.waitForFrames -= 1;
-        } else {
-          this.renderAllElementsToTiedCanvases();
-        }
-
-        this.scrollingFast = true;
-
-        if (this.scrollTimeoutId) {
-          clearTimeout(this.scrollTimeoutId);
-          this.scrollTimeoutId = null;
-        }
-
-        this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
       } // If only a scroll event called draw, then quit before drawing
 
 
@@ -4504,6 +4507,8 @@ function () {
         this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
         this.updateHTMLElementTie();
       }
+
+      this.oldScroll = window.pageYOffset;
     }
   }, {
     key: "animateNextFrame",
@@ -25799,7 +25804,11 @@ function (_DiagramElement2) {
   }, {
     key: "willStartAnimating",
     value: function willStartAnimating() {
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "willStartAnimating", this).call(this);
+      var result = _get(_getPrototypeOf(DiagramElementCollection.prototype), "willStartAnimating", this).call(this);
+
+      if (result) {
+        return true;
+      }
 
       for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
         if (this.elements[this.drawOrder[i]].willStartAnimating()) {
@@ -25828,6 +25837,8 @@ function (_DiagramElement2) {
       // }
       if (this.isShown) {
         if (this.isRenderedAsImage === true) {
+          // if (this.willStartAnimating()) {
+          //   console.log(this.name, this.willStartAnimating())
           if (this.willStartAnimating()) {
             this.unrender();
           } else {

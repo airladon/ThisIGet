@@ -11,9 +11,9 @@ type State = {
   content: Array<string | React.Element<'div'>>,
 };
 
-let updates = 0;
+// let updates = 0;
 
-const { DrawContext2D, Point, Rect } = Fig;
+// const { DrawContext2D, Point, Rect } = Fig;
 
 const { applyModifiers, setOnClicks } = Fig.tools.html;
 
@@ -63,6 +63,7 @@ export default class SinglePageLessonComponent extends React.Component
     this.setState({
       content: this.lesson.content.sections[0],
     });
+    this.lesson.content.diagram.enableScrolling();
     // window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
@@ -105,7 +106,6 @@ export default class SinglePageLessonComponent extends React.Component
     // console.log(d.webglLow.gl.canvas)
     // ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
     // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
-    d.enableScrolling();
     // document.addEventListener(
     //   'scroll',
     //   () => {
@@ -154,15 +154,15 @@ export default class SinglePageLessonComponent extends React.Component
 
     d.renderAllElementsToTiedCanvases();
     const loadingElements = d.elements.getLoadingElements();
-    loadingElements.forEach((element) => {
+    for (let i = 0; i < loadingElements.length; i += 1) {
+      const element = loadingElements[i];
       if (element.drawingObject.state === 'loading') {
         element.drawingObject.onLoad = () => {
           element.unrender();
           d.renderAllElementsToTiedCanvases();
-          console.log('loaded');
         };
       }
-    });
+    }
 
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
@@ -171,7 +171,7 @@ export default class SinglePageLessonComponent extends React.Component
     // d.renderElementToTiedCanvas('fig6');
     // d.renderElementToTiedCanvas('fig7');
     // d.renderElementToTiedCanvas('fig8');
-    
+
     // fig1.hide()
     // fig2.hide()
     // fig3.hide();
@@ -191,12 +191,12 @@ export default class SinglePageLessonComponent extends React.Component
     // d.renderToCanvas(document.getElementById('id_figure1_asdf'));
     // fig1.hide()
     // fig1.setPosition(oldPos);
-    
+
     // fig2.show()
     // fig3.show()
-    
+
     d.draw(-1);
-    console.log(d.elements)
+    // console.log(d.elements)
     // fig3.setScale(oldScale);
     // d._fig2.hide();
     // d._fig3.hide();

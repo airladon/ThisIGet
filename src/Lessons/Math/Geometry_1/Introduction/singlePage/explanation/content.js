@@ -58,7 +58,7 @@ class Content extends SinglePageLessonContent {
     const dim6 = diag._fig6._dimensions;
     const dim7 = diag._fig7._dimensions;
     const dim8 = diag._fig8._dimensions;
-    console.log(diag)
+    // console.log(diag)
 
     // Set figure one initial conditions
     diag._fig1._wheel.setScenario('centerLeft');
