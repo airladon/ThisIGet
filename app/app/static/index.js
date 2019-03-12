@@ -4025,11 +4025,12 @@ function () {
     value: function renderAllElementsToTiedCanvases() {
       var _this = this;
 
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
         var element = _this.elements.elements[name];
 
-        if (element.isShown && element.isRenderedAsImage === false && element.tieToHTML.element != null) {
+        if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
           element.isRenderedAsImage = true;
 
           _this.renderElementToTiedCanvas(name);
@@ -4128,7 +4129,13 @@ function () {
       ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
       ctx.drawImage(this.draw2DLow.canvas, textStartOfCanvas.x, textStartOfCanvas.y, textWidthOfCanvas, textHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
       this.clearContext();
-    } // resize should only be called if the viewport size has changed.
+    } // unrenderAll() {
+    //   for (let i = 0; i < this.elements.elements.length; i += 1) {
+    //     const element = this.elements.elements[i];
+    //     element.unrender();
+    //   }
+    // }
+    // resize should only be called if the viewport size has changed.
 
   }, {
     key: "resize",
@@ -4137,6 +4144,7 @@ function () {
         this.elements.updateLimits(this.limits, this.spaceTransforms);
       }
 
+      this.elements.unrenderAll();
       this.webglLow.resize();
       this.webglHigh.resize();
       this.draw2DLow.resize();
@@ -4146,7 +4154,7 @@ function () {
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
       this.elements.resize();
-      this.animateNextFrame(true, 'resize');
+      this.animateNextFrame(true, 'resize'); // this.renderAllElementsToTiedCanvases(true);
     }
   }, {
     key: "updateHTMLElementTie",
@@ -19877,7 +19885,7 @@ function (_DrawingObject) {
         ctx.save();
         ctx.transform(t[0], t[3], t[1], t[4], t[2], t[5]);
         lastDraw.forEach(function (draw) {
-          ctx.clearRect(draw.x, draw.y, draw.width, draw.height);
+          ctx.clearRect(draw.x, draw.y, draw.width * 1.1, draw.height * 1.1);
         });
         ctx.restore();
       }
@@ -26497,6 +26505,24 @@ function (_DiagramElement2) {
           }
         } else {
           elems = [].concat(_toConsumableArray(elems), _toConsumableArray(element.getLoadingElements()));
+        }
+      }
+
+      return elems;
+    }
+  }, {
+    key: "unrenderAll",
+    value: function unrenderAll() {
+      var elems = [];
+      this.unrender();
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimative) {
+          element.unrender();
+        } else {
+          element.unrenderAll();
         }
       }
 
