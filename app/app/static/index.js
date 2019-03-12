@@ -3781,25 +3781,14 @@ function () {
 
           if (child.classList.contains('diagram__html')) {
             this.htmlCanvas = child;
-          } // if (child.classList.contains('diagram__gesture')) {
-          //   this.gestureElement = child;
-          // }
-
+          }
         }
 
-        this.backgroundColor = backgroundColor; // const shaders = getShaders(vertexShader, fragmentShader);
-
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, // shaders.vertexSource,
-        // shaders.fragmentSource,
-        // shaders.varNames,
-        this.backgroundColor);
-        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, // shaders.vertexSource,
-        // shaders.fragmentSource,
-        // shaders.varNames,
-        this.backgroundColor);
+        this.backgroundColor = backgroundColor;
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
+        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, this.backgroundColor);
         this.webglLow = webglLow;
-        this.webglHigh = webglHigh; // const draw2D = this.textCanvas.getContext('2d');
-
+        this.webglHigh = webglHigh;
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
         this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasHigh);
       }
@@ -19198,6 +19187,7 @@ function () {
     this.holeBorder = [[]];
     this.onLoad = null;
     this.type = 'drawingObject';
+    this.state = 'loading';
   }
 
   _createClass(DrawingObject, [{
@@ -19690,6 +19680,7 @@ function (_DrawingObject) {
 
     _this.setBorder();
 
+    _this.state = 'loaded';
     return _this;
   }
 
@@ -21449,6 +21440,7 @@ function (_DrawingObject) {
       var _this2 = this;
 
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.state = 'loaded';
 
       if (numPoints === 0) {
         this.numPoints = this.points.length / 2.0;
@@ -21487,6 +21479,7 @@ function (_DrawingObject) {
             this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
             var image = new Image();
             image.src = src;
+            this.state = 'loading';
             image.addEventListener('load', function () {
               // Now that the image has loaded make copy it to the texture.
               texture.data = image;
@@ -21496,6 +21489,8 @@ function (_DrawingObject) {
               if (_this2.onLoad != null) {
                 _this2.onLoad();
               }
+
+              _this2.state = 'loaded';
             });
           } else if (texture.data != null) {
             this.addTextureToBuffer(glTexture, texture.data);
@@ -26450,6 +26445,25 @@ function (_DiagramElement2) {
       }
 
       return oldInstance;
+    }
+  }, {
+    key: "getLoadingElements",
+    value: function getLoadingElements() {
+      var elems = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimative) {
+          if (element.drawingObject.state === 'loading') {
+            elems.push(element);
+          }
+        } else {
+          elems = [].concat(_toConsumableArray(elems), _toConsumableArray(element.getLoadingElements()));
+        }
+      }
+
+      return elems;
     }
   }]);
 

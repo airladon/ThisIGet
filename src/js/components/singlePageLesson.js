@@ -153,6 +153,17 @@ export default class SinglePageLessonComponent extends React.Component
     // fig2.hide();
 
     d.renderAllElementsToTiedCanvases();
+    const loadingElements = d.elements.getLoadingElements();
+    loadingElements.forEach((element) => {
+      if (element.drawingObject.state === 'loading') {
+        element.drawingObject.onLoad = () => {
+          element.unrender();
+          d.renderAllElementsToTiedCanvases();
+          console.log('loaded');
+        };
+      }
+    });
+
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
     // d.renderElementToTiedCanvas('fig4');
