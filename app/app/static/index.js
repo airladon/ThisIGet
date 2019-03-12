@@ -3293,6 +3293,14 @@ function (_AnimationStep) {
       }
     }
   }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.callback != null) {
+        this.callback(this.payload);
+        this.callback = null;
+      }
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       var step = new TriggerStep();
@@ -4448,7 +4456,7 @@ function () {
       if (this.scrolled === true) {
         this.scrolled = false;
 
-        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 10) {
+        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 4) {
           if (this.webglLow.gl.canvas.style.top !== '-10000px') {
             this.webglLow.gl.canvas.style.top = '-10000px';
             this.waitForFrames = 1;
