@@ -79,7 +79,10 @@ export default class SinglePageLessonComponent extends React.Component
   componentDidUpdate() {
     this.lesson.content.diagram.resize();
     setOnClicks(this.lesson.content.modifiers);
-    console.log(this.lesson.content.diagram);
+    // console.log(this.lesson.content.diagram);
+    // window.addEventListener("orientationchange", () => {
+    //   this.lesson.content.diagram.renderAllElementsToTiedCanvases(true);
+    // });
 
     // const figs = [2, 3, 4, 5, 6, 7, 8];
     // figs.forEach((f) => {
@@ -97,6 +100,8 @@ export default class SinglePageLessonComponent extends React.Component
     // });
 
     const d = this.lesson.content.diagram;
+    console.log(d);
+    d.animateNextFrame();
     // d.draw(-1);
     // const c = document.getElementById('id_figure3a_asdf');
     // c.width = c.clientWidth * 2;
@@ -154,12 +159,20 @@ export default class SinglePageLessonComponent extends React.Component
 
     // d.renderAllElementsToTiedCanvases();
     // const loadingElements = d.elements.getLoadingElements();
+    // let num = loadingElements.length;
+    // const counter = () => {
+    //   num -= 1;
+    //   if (num === 0) {
+    //     d.renderAllElementsToTiedCanvases(true);
+    //   }
+    // };
     // for (let i = 0; i < loadingElements.length; i += 1) {
     //   const element = loadingElements[i];
     //   if (element.drawingObject.state === 'loading') {
     //     element.drawingObject.onLoad = () => {
-    //       element.unrender();
-    //       d.renderAllElementsToTiedCanvases();
+    //       // console.log('asdf')
+    //       // d.renderAllElementsToTiedCanvases();
+    //       counter();
     //     };
     //   }
     // }

@@ -3864,8 +3864,14 @@ function () {
   _createClass(Diagram, [{
     key: "scrollEvent",
     value: function scrollEvent() {
-      this.scrolled = true;
-      this.animateNextFrame(false, 'scroll event');
+      this.scrolled = true; // const scaleX = this.spaceTransforms.pixelToDiagram.m()[0];
+      // const scaleY = this.spaceTransforms.pixelToDiagram.m()[4];
+      // console.log(scaleX, scaleY)
+      // const t = new Date().getTime();
+      // this.updateHTMLElementTie();
+      // console.log(new Date().getTime() - t)
+
+      this.animateNextFrame(true); // this.animateNextFrame(false, 'scroll event');
     }
   }, {
     key: "enableScrolling",
@@ -4127,8 +4133,14 @@ function () {
       var textHeightOfCanvas = canvas.clientHeight / text.clientHeight * text.height;
       var textStartOfCanvas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](text.width / 2 - textWidthOfCanvas / 2, text.height / 2 - textHeightOfCanvas / 2);
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
-      ctx.drawImage(this.draw2DLow.canvas, textStartOfCanvas.x, textStartOfCanvas.y, textWidthOfCanvas, textHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
+      ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight); // ctx.drawImage(
+      //   this.draw2DLow.canvas,
+      //   textStartOfCanvas.x, textStartOfCanvas.y,
+      //   textWidthOfCanvas, textHeightOfCanvas,
+      //   0, 0,
+      //   canvas.clientWidth, canvas.clientHeight,
+      // );
+
       this.clearContext();
     } // unrenderAll() {
     //   for (let i = 0; i < this.elements.elements.length; i += 1) {
@@ -4164,7 +4176,9 @@ function () {
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
       this.elements.resize();
-      this.animateNextFrame(true, 'resize'); // this.renderAllElementsToTiedCanvases(true);
+      this.animateNextFrame(true, 'resize'); // this.centerDrawingLens();
+      // this.elements.unrenderAll();
+      // this.renderAllElementsToTiedCanvases(true);
     }
   }, {
     key: "updateHTMLElementTie",
@@ -4479,29 +4493,31 @@ function () {
       this.lastDrawTime = now;
 
       if (this.scrolled === true) {
-        this.scrolled = false;
+        this.scrolled = false; // if (Math.abs(window.pageYOffset - this.oldScroll)
+        //     > this.webglLow.gl.canvas.clientHeight / 8
+        // ) {
+        //   if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+        //     this.webglLow.gl.canvas.style.top = '-10000px';
+        //     this.waitForFrames = 1;
+        //   }
+        //   if (this.waitForFrames > 0) {
+        //     this.waitForFrames -= 1;
+        //   } else {
+        //     this.renderAllElementsToTiedCanvases();
+        //   }
+        //   this.scrollingFast = true;
+        //   if (this.scrollTimeoutId) {
+        //     clearTimeout(this.scrollTimeoutId);
+        //     this.scrollTimeoutId = null;
+        //   }
+        //   this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
+        // }
 
         if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 8) {
-          if (this.webglLow.gl.canvas.style.top !== '-10000px') {
-            this.webglLow.gl.canvas.style.top = '-10000px';
-            this.waitForFrames = 1;
-          }
-
-          if (this.waitForFrames > 0) {
-            this.waitForFrames -= 1;
-          } else {
-            this.renderAllElementsToTiedCanvases();
-          }
-
-          this.scrollingFast = true;
-
-          if (this.scrollTimeoutId) {
-            clearTimeout(this.scrollTimeoutId);
-            this.scrollTimeoutId = null;
-          }
-
-          this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
+          this.centerDrawingLens();
         }
+
+        this.updateHTMLElementTie();
       } // If only a scroll event called draw, then quit before drawing
 
 
@@ -4521,6 +4537,7 @@ function () {
     key: "centerDrawingLens",
     value: function centerDrawingLens() {
       var fromTimeOut = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      console.log('centering');
 
       if (fromTimeOut) {
         this.scrollingFast = false;
