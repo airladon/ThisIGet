@@ -4124,19 +4124,29 @@ function () {
       var textStartOfCanvas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](text.width / 2 - textWidthOfCanvas / 2, text.height / 2 - textHeightOfCanvas / 2); // ctx.clearRect(0, 0, canvas.width, canvas.height);
       // console.log(htmlCanvas)
 
-      var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl")); // console.log(`${htmlCanvasElementOrId}_webgl`)
-      // console.log(w)
+      var offscreenCanvas = document.getElementById('hidden_offscreen');
+      console.log(htmlCanvas.clientWidth, htmlCanvas.clientHeight);
+      var ctx = offscreenCanvas.getContext('2d');
+      offscreenCanvas.width = glWidthOfCanvas;
+      offscreenCanvas.height = glHeightOfCanvas;
+      ctx.scale(glWidthOfCanvas / offscreenCanvas.clientWidth, glHeightOfCanvas / offscreenCanvas.clientHeight);
+      offscreenCanvas.getContext('2d').drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, offscreenCanvas.clientWidth, offscreenCanvas.clientHeight);
+      var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
 
       if (w) {
-        w.src = this.webglLow.gl.canvas.toDataURL();
+        // w.src = this.webglLow.gl.canvas.toDataURL();
+        w.src = offscreenCanvas.toDataURL();
+        w.style.visibility = 'visible';
       }
 
-      var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d")); // console.log(`${htmlCanvasElementOrId}_2d`)
-      // console.log(d)
-
-      if (d) {
-        d.src = this.draw2DLow.canvas.toDataURL();
-      } // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
+      offscreenCanvas.getContext('2d').clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height); // const d = document.getElementById(`${htmlCanvasElementOrId}_2d`);
+      // // console.log(`${htmlCanvasElementOrId}_2d`)
+      // // console.log(d)
+      // if (d) {
+      //   d.src = this.draw2DLow.canvas.toDataURL();
+      //   d.style.visibility = 'visible';
+      // }
+      // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
       // ctx.drawImage(
       //   this.webglLow.gl.canvas,
       //   glStartOfCanavas.x, glStartOfCanavas.y,
@@ -4152,15 +4162,16 @@ function () {
       //   canvas.clientWidth, canvas.clientHeight,
       // );
 
-
       this.clearContext();
-    } // unrenderAll() {
-    //   for (let i = 0; i < this.elements.elements.length; i += 1) {
-    //     const element = this.elements.elements[i];
-    //     element.unrender();
-    //   }
-    // }
-    // resize should only be called if the viewport size has changed.
+    }
+  }, {
+    key: "unrenderAll",
+    value: function unrenderAll() {
+      for (var i = 0; i < this.elements.elements.length; i += 1) {
+        var element = this.elements.elements[i];
+        element.unrender();
+      }
+    } // resize should only be called if the viewport size has changed.
 
   }, {
     key: "resize",
@@ -4188,7 +4199,8 @@ function () {
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
       this.elements.resize();
-      this.animateNextFrame(true, 'resize'); // this.renderAllElementsToTiedCanvases(true);
+      this.animateNextFrame(true, 'resize');
+      this.unrenderAll(); // this.renderAllElementsToTiedCanvases(true);
     }
   }, {
     key: "updateHTMLElementTie",
@@ -25278,9 +25290,16 @@ function () {
         tieToElement = this.tieToHTML.element;
       }
 
-      if (tieToElement instanceof HTMLCanvasElement) {
-        var ctx = tieToElement.getContext('2d');
-        ctx.clearRect(0, 0, tieToElement.width, tieToElement.height);
+      if (tieToElement) {
+        // const ctx = tieToElement.getContext('2d');
+        // ctx.clearRect(0, 0, tieToElement.width, tieToElement.height);
+        var w = document.getElementById("".concat(this.tieToHTML.element, "_webgl")); // console.log(w)
+        // w.src = '';
+
+        w.style.visibility = 'hidden';
+        var d = document.getElementById("".concat(this.tieToHTML.element, "_2d")); // d.src = '';
+
+        w.style.visibility = 'hidden';
       }
     }
   }, {

@@ -78,3 +78,11 @@
   left: 0;
   top: 0;
 }
+
+#hidden_offscreen {
+  top: -10000px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
