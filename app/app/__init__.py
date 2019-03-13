@@ -16,7 +16,11 @@ if not os.environ.get('LOCAL_PRODUCTION') \
         app,
         content_security_policy={
             'default-src': SELF,
-            'img-src': '*',
+            'img-src': [
+                SELF,
+                # "'unsafe-inline'",
+                "data:",
+            ],
             'script-src': [
                 SELF,
                 'https://unpkg.com/',

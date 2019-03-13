@@ -4095,18 +4095,14 @@ function () {
 
       if (typeof htmlCanvasElementOrId === 'string') {
         htmlCanvas = document.getElementById(htmlCanvasElementOrId);
-      }
+      } // if (!(htmlCanvas instanceof HTMLImageElement)) {
+      //   return;
+      // }
 
-      if (!(htmlCanvas instanceof HTMLCanvasElement)) {
-        return;
-      }
 
       this.drawQueued = true; // this.fromWhere = 'RenderToCanvas';
 
-      this.draw(-1);
-
-      var _ref = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](htmlCanvas),
-          ctx = _ref.ctx;
+      this.draw(-1); // const { ctx } = new DrawContext2D(htmlCanvas);
 
       var getCanvasDimensions = function getCanvasDimensions(c) {
         return {
@@ -4125,10 +4121,38 @@ function () {
       var glStartOfCanavas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](gl.width / 2 - glWidthOfCanvas / 2, gl.height / 2 - glHeightOfCanvas / 2);
       var textWidthOfCanvas = canvas.clientWidth / text.clientWidth * text.width;
       var textHeightOfCanvas = canvas.clientHeight / text.clientHeight * text.height;
-      var textStartOfCanvas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](text.width / 2 - textWidthOfCanvas / 2, text.height / 2 - textHeightOfCanvas / 2);
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      ctx.drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
-      ctx.drawImage(this.draw2DLow.canvas, textStartOfCanvas.x, textStartOfCanvas.y, textWidthOfCanvas, textHeightOfCanvas, 0, 0, canvas.clientWidth, canvas.clientHeight);
+      var textStartOfCanvas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](text.width / 2 - textWidthOfCanvas / 2, text.height / 2 - textHeightOfCanvas / 2); // ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // console.log(htmlCanvas)
+
+      var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl")); // console.log(`${htmlCanvasElementOrId}_webgl`)
+      // console.log(w)
+
+      if (w) {
+        w.src = this.webglLow.gl.canvas.toDataURL();
+      }
+
+      var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d")); // console.log(`${htmlCanvasElementOrId}_2d`)
+      // console.log(d)
+
+      if (d) {
+        d.src = this.draw2DLow.canvas.toDataURL();
+      } // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
+      // ctx.drawImage(
+      //   this.webglLow.gl.canvas,
+      //   glStartOfCanavas.x, glStartOfCanavas.y,
+      //   glWidthOfCanvas, glHeightOfCanvas,
+      //   0, 0,
+      //   canvas.clientWidth, canvas.clientHeight,
+      // );
+      // ctx.drawImage(
+      //   this.draw2DLow.canvas,
+      //   textStartOfCanvas.x, textStartOfCanvas.y,
+      //   textWidthOfCanvas, textHeightOfCanvas,
+      //   0, 0,
+      //   canvas.clientWidth, canvas.clientHeight,
+      // );
+
+
       this.clearContext();
     } // unrenderAll() {
     //   for (let i = 0; i < this.elements.elements.length; i += 1) {
