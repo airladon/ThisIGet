@@ -4065,14 +4065,17 @@ function () {
       elementToRender.show(); // Move it to the origin to render
 
       var oldPosition = elementToRender.getPosition();
-      elementToRender.setPosition(0, 0); // Stop animations and render
+      var oldScale = elementToRender.getScale();
+      elementToRender.setPosition(0, 0); // elementToRender.updateHTMLElementTieScale(this.canvasLow);
+      // Stop animations and render
 
       elementToRender.isRenderedAsImage = false;
       elementToRender.stop(true, true);
       this.renderToCanvas(elementToRender.tieToHTML.element);
       elementToRender.isRenderedAsImage = true; // reset position
 
-      elementToRender.setPosition(oldPosition); // this.draw(-1);
+      elementToRender.setPosition(oldPosition);
+      elementToRender.setScale(oldScale); // this.draw(-1);
       // this.fromWhere = 'reset Position';
       // elementToRender.hide();
       // show all elements that were shown previously (except element that was just rendered)
@@ -4123,30 +4126,39 @@ function () {
       var textHeightOfCanvas = canvas.clientHeight / text.clientHeight * text.height;
       var textStartOfCanvas = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](text.width / 2 - textWidthOfCanvas / 2, text.height / 2 - textHeightOfCanvas / 2); // ctx.clearRect(0, 0, canvas.width, canvas.height);
       // console.log(htmlCanvas)
+      // const offscreenCanvas = document.getElementById('hidden_offscreen');
+      // console.log(htmlCanvas.clientWidth, htmlCanvas.clientHeight)
+      // const ctx = offscreenCanvas.getContext('2d');
+      // offscreenCanvas.width = glWidthOfCanvas;
+      // offscreenCanvas.height = glHeightOfCanvas;
+      // ctx.scale(glWidthOfCanvas / offscreenCanvas.clientWidth, glHeightOfCanvas / offscreenCanvas.clientHeight);
+      // offscreenCanvas.getContext('2d').drawImage(
+      //   this.webglLow.gl.canvas,
+      //   glStartOfCanavas.x, glStartOfCanavas.y,
+      //   glWidthOfCanvas, glHeightOfCanvas,
+      //   0, 0,
+      //   offscreenCanvas.clientWidth, offscreenCanvas.clientHeight,
+      // );
 
-      var offscreenCanvas = document.getElementById('hidden_offscreen');
-      console.log(htmlCanvas.clientWidth, htmlCanvas.clientHeight);
-      var ctx = offscreenCanvas.getContext('2d');
-      offscreenCanvas.width = glWidthOfCanvas;
-      offscreenCanvas.height = glHeightOfCanvas;
-      ctx.scale(glWidthOfCanvas / offscreenCanvas.clientWidth, glHeightOfCanvas / offscreenCanvas.clientHeight);
-      offscreenCanvas.getContext('2d').drawImage(this.webglLow.gl.canvas, glStartOfCanavas.x, glStartOfCanavas.y, glWidthOfCanvas, glHeightOfCanvas, 0, 0, offscreenCanvas.clientWidth, offscreenCanvas.clientHeight);
       var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
 
       if (w) {
-        // w.src = this.webglLow.gl.canvas.toDataURL();
-        w.src = offscreenCanvas.toDataURL();
-        w.style.visibility = 'visible';
-      }
+        w.src = this.webglLow.gl.canvas.toDataURL(); // w.src = offscreenCanvas.toDataURL();
 
-      offscreenCanvas.getContext('2d').clearRect(0, 0, offscreenCanvas.width, offscreenCanvas.height); // const d = document.getElementById(`${htmlCanvasElementOrId}_2d`);
-      // // console.log(`${htmlCanvasElementOrId}_2d`)
-      // // console.log(d)
-      // if (d) {
-      //   d.src = this.draw2DLow.canvas.toDataURL();
-      //   d.style.visibility = 'visible';
-      // }
-      // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
+        w.style.visibility = 'visible';
+        w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")"); // w.style.marginLeft = `${1 - (glStartOfCanvas.x / glWidthOfCanvas)}%`;
+      } // offscreenCanvas.width = 1;
+      // offscreenCanvas.height = 1;
+
+
+      var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d")); // console.log(`${htmlCanvasElementOrId}_2d`)
+      // console.log(d)
+
+      if (d) {
+        d.src = this.draw2DLow.canvas.toDataURL();
+        d.style.visibility = 'visible';
+        d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")");
+      } // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
       // ctx.drawImage(
       //   this.webglLow.gl.canvas,
       //   glStartOfCanavas.x, glStartOfCanavas.y,
@@ -4161,6 +4173,7 @@ function () {
       //   0, 0,
       //   canvas.clientWidth, canvas.clientHeight,
       // );
+
 
       this.clearContext();
     }
@@ -23573,9 +23586,8 @@ function () {
     // }
 
   }, {
-    key: "updateHTMLElementTie",
-    value: function updateHTMLElementTie(diagramCanvas) {
-      // First get the HTML element
+    key: "updateHTMLElementTieScale",
+    value: function updateHTMLElementTieScale(diagramCanvas) {
       var tieToElement;
 
       if (typeof this.tieToHTML.element === 'string') {
@@ -23630,6 +23642,91 @@ function () {
 
             scaleX = _scale2 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
             scaleY = _scale2 * diagramToWindowScaleY;
+          }
+        } // Scale the window x to tie x, and window y to tie y
+
+
+        if (scaleString === 'stretch') {
+          scaleX = tie.width / canvas.width * diagramToWindowScaleX;
+          scaleY = tie.height / canvas.height * diagramToWindowScaleY;
+        } // Scale so window either fits within the tie element, or fits only
+        // within the max dimension of the tie element
+
+
+        if (scaleString === 'max' || scaleString === 'fit') {
+          var fitHeightScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / cAspectRatio * dAspectRatio * diagramToWindowScaleY, diagramToWindowScaleY);
+          var fitWidthScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramToWindowScaleX, cAspectRatio / dAspectRatio * diagramToWindowScaleX);
+
+          if (scaleString === 'max' && tAspectRatio > wAspectRatio || scaleString === 'fit' && tAspectRatio < wAspectRatio) {
+            scaleX = fitWidthScale.x;
+            scaleY = fitWidthScale.y;
+          } else {
+            scaleX = fitHeightScale.x;
+            scaleY = fitHeightScale.y;
+          }
+        }
+
+        this.setScale(scaleX, scaleY);
+      }
+    }
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(diagramCanvas) {
+      // First get the HTML element
+      var tieToElement;
+
+      if (typeof this.tieToHTML.element === 'string') {
+        tieToElement = document.getElementById(this.tieToHTML.element);
+      } else if (this.tieToHTML.element instanceof HTMLElement) {
+        tieToElement = this.tieToHTML.element;
+      }
+
+      if (tieToElement != null) {
+        var tie = tieToElement.getBoundingClientRect();
+        var canvas = diagramCanvas.getBoundingClientRect();
+        var diagram = this.diagramLimits;
+        var dWindow = this.tieToHTML.window;
+        var cAspectRatio = canvas.width / canvas.height;
+        var dAspectRatio = diagram.width / diagram.height;
+        var tAspectRatio = tie.width / tie.height;
+        var wAspectRatio = dWindow.width / dWindow.height;
+        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.left - canvas.left, tie.top - canvas.top);
+        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.width, tie.height));
+        var pixelToDiagram = this.diagramTransforms.pixelToDiagram;
+        var topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
+        var bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
+        var width = bottomRight.x - topLeft.x;
+        var height = topLeft.y - bottomRight.y;
+        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+        var scaleString = this.tieToHTML.scale.trim().toLowerCase();
+        var scaleX = 1;
+        var scaleY = 1;
+        var diagramToWindowScaleX = diagram.width / dWindow.width;
+        var diagramToWindowScaleY = diagram.height / dWindow.height; // Window has no scaling impact on em, it only has impact on translation
+
+        if (scaleString.endsWith('em')) {
+          var scale = parseFloat(scaleString);
+          var em = parseFloat(getComputedStyle(tieToElement).fontSize); // 0.2 is default font size in diagram units
+
+          var defaultFontScale = diagram.width / 0.2;
+          scaleX = scale * em * defaultFontScale / canvas.width;
+          scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
+        } // Scale the maximum dimension of the window to the pixel value
+
+
+        if (scaleString.endsWith('px')) {
+          var maxPixels = parseFloat(scaleString);
+
+          if (wAspectRatio > 1) {
+            var _scale3 = maxPixels / canvas.width;
+
+            scaleX = _scale3 * diagramToWindowScaleX;
+            scaleY = _scale3 * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
+          } else {
+            var _scale4 = maxPixels / canvas.height;
+
+            scaleX = _scale4 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
+            scaleY = _scale4 * diagramToWindowScaleY;
           }
         } // Scale the window x to tie x, and window y to tie y
 
@@ -26222,7 +26319,14 @@ function (_DiagramElement2) {
         // diagramToGLSpaceTransformMatrix,
         container);
       }
-    } // Returns an array of touched elements.
+    } // updateHTMLElementTieScale() {
+    //   super.updateHTMLElementTieScale();
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     element.updateHTMLElementTieScale();
+    //   }
+    // }
+    // Returns an array of touched elements.
     // In a collection, elements defined later in the collection.order
     // array are on top of earlier elements. The touched array
     // is sorted to have elements on top first, where the collection containing
