@@ -4481,7 +4481,7 @@ function () {
       if (this.scrolled === true) {
         this.scrolled = false;
 
-        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 4) {
+        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 8) {
           if (this.webglLow.gl.canvas.style.top !== '-10000px') {
             this.webglLow.gl.canvas.style.top = '-10000px';
             this.waitForFrames = 1;
