@@ -163,6 +163,7 @@ export default class SinglePageLessonComponent extends React.Component
         };
       }
     }
+    d.animateNextFrame();
 
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
@@ -195,7 +196,7 @@ export default class SinglePageLessonComponent extends React.Component
     // fig2.show()
     // fig3.show()
 
-    d.draw(-1);
+    // d.draw(-1);
     // console.log(d.elements)
     // fig3.setScale(oldScale);
     // d._fig2.hide();

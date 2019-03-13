@@ -289,7 +289,7 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////////////////
   const dimensions2 = {};
   duplicateFromTo(dimensions, dimensions2);
-  dimensions2.addElements[0].options[0].color = [0.9, 0.9, 0.9, 0.3];
+  dimensions2.addElements[0].options[0].color = [0.9, 0.9, 0.9, 0.2];
   layout.fig3 = {
     name: 'fig3',
     method: 'collection',

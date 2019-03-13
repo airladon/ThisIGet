@@ -3859,6 +3859,7 @@ function () {
     this.scrollingFast = false;
     this.scrollTimeoutId = null;
     this.oldScroll = window.pageYOffset;
+    this.drawAnimationFrames = 0;
   }
 
   _createClass(Diagram, [{
@@ -4180,9 +4181,11 @@ function () {
   }, {
     key: "unrenderAll",
     value: function unrenderAll() {
-      for (var i = 0; i < this.elements.elements.length; i += 1) {
-        var element = this.elements.elements[i];
+      // console.log('unrender all', Object.keys(this.elements.drawOrder).length)
+      for (var i = 0; i < this.elements.drawOrder.length; i += 1) {
+        var element = this.elements.elements[this.elements.drawOrder[i]];
         element.unrender();
+        console.log('unrendering', element.name);
       }
     } // resize should only be called if the viewport size has changed.
 
@@ -4212,8 +4215,15 @@ function () {
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();
       this.elements.resize();
+
+      if (this.oldWidth !== this.canvasLow.clientWidth) {
+        // this.unrenderAll();
+        this.renderAllElementsToTiedCanvases(true);
+        this.oldWidth = this.canvasLow.clientWidth;
+      }
+
       this.animateNextFrame(true, 'resize');
-      this.unrenderAll(); // this.renderAllElementsToTiedCanvases(true);
+      this.drawAnimationFrames = 2; // this.renderAllElementsToTiedCanvases(true);
     }
   }, {
     key: "updateHTMLElementTie",
@@ -4564,6 +4574,11 @@ function () {
 
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
+      }
+
+      if (this.drawAnimationFrames > 0) {
+        this.drawAnimationFrames -= 1;
+        this.animateNextFrame(true, 'queued frames');
       }
     }
   }, {
@@ -25396,7 +25411,7 @@ function () {
         w.style.visibility = 'hidden';
         var d = document.getElementById("".concat(this.tieToHTML.element, "_2d")); // d.src = '';
 
-        w.style.visibility = 'hidden';
+        d.style.visibility = 'hidden';
       }
     }
   }, {
