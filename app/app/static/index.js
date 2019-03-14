@@ -3739,7 +3739,14 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var Diagram =
 /*#__PURE__*/
 function () {
+  // canvasHigh: HTMLCanvasElement;
+  // textCanvasHigh: HTMLCanvasElement;
+  // draw2DHigh: DrawContext2D;
+  // webglHigh: WebGLInstance;
   // gestureElement: HTMLElement;
+  // shapesHigh: Object;
+  // equationHigh: Object;
+  // objectsHigh: DiagramObjects;
   // layout: Object;
   // oldScrollY: number;
   // used for drawing debug only
@@ -3763,29 +3770,26 @@ function () {
       var container = document.getElementById(htmlId);
 
       if (container instanceof HTMLElement) {
+        this.container = container;
         var children = container.children;
 
         for (var i = 0; i < children.length; i += 1) {
           var child = children[i];
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl')) {
-            if (child.id === 'id_diagram__gl__low') {
-              this.canvasLow = child;
-            }
-
-            if (child.id === 'id_diagram__gl__high') {
-              this.canvasHigh = child;
-            }
+            // if (child.id === 'id_diagram__gl__low') {
+            this.canvasLow = child; // }
+            // if (child.id === 'id_diagram__gl__high') {
+            //   this.canvasHigh = child;
+            // }
           }
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text')) {
-            if (child.id === 'id_diagram__text__low') {
-              this.textCanvasLow = child;
-            }
-
-            if (child.id === 'id_diagram__text__high') {
-              this.textCanvasHigh = child;
-            }
+            // if (child.id === 'id_diagram__text__low') {
+            this.textCanvasLow = child; // }
+            // if (child.id === 'id_diagram__text__high') {
+            //   this.textCanvasHigh = child;
+            // }
           }
 
           if (child.classList.contains('diagram__html')) {
@@ -3794,12 +3798,14 @@ function () {
         }
 
         this.backgroundColor = backgroundColor;
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
-        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, this.backgroundColor);
-        this.webglLow = webglLow;
-        this.webglHigh = webglHigh;
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
-        this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasHigh);
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor); // const webglHigh = new WebGLInstance(
+        //   this.canvasHigh,
+        //   this.backgroundColor,
+        // );
+
+        this.webglLow = webglLow; // this.webglHigh = webglHigh;
+
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow); // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
       }
     }
 
@@ -3828,14 +3834,14 @@ function () {
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
     this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]();
-    this.shapesLow = this.getShapes(false);
-    this.shapesHigh = this.getShapes(true);
+    this.shapesLow = this.getShapes(false); // this.shapesHigh = this.getShapes(true);
+
     this.shapes = this.shapesLow;
-    this.equationLow = this.getEquations(false);
-    this.equationHigh = this.getEquations(true);
+    this.equationLow = this.getEquations(false); // this.equationHigh = this.getEquations(true);
+
     this.equation = this.equationLow;
-    this.objectsLow = this.getObjects(false);
-    this.objectsHigh = this.getObjects(true);
+    this.objectsLow = this.getObjects(false); // this.objectsHigh = this.getObjects(true);
+
     this.objects = this.objectsLow;
     this.createDiagramElements();
 
@@ -3890,12 +3896,10 @@ function () {
     value: function getShapes() {
       var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var webgl = this.webglLow;
-      var draw2D = this.draw2DLow;
-
-      if (high) {
-        webgl = this.webglHigh;
-        draw2D = this.draw2DHigh;
-      }
+      var draw2D = this.draw2DLow; // if (high) {
+      //   webgl = this.webglHigh;
+      //   draw2D = this.draw2DHigh;
+      // }
 
       return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
@@ -3904,11 +3908,9 @@ function () {
     key: "getEquations",
     value: function getEquations() {
       var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var shapes = this.shapesLow;
-
-      if (high) {
-        shapes = this.shapesHigh;
-      }
+      var shapes = this.shapesLow; // if (high) {
+      //   shapes = this.shapesHigh;
+      // }
 
       return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
@@ -3917,12 +3919,10 @@ function () {
     value: function getObjects() {
       var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var shapes = this.shapesLow;
-      var equation = this.equationLow;
-
-      if (high) {
-        shapes = this.shapesHigh;
-        equation = this.equationHigh;
-      }
+      var equation = this.equationLow; // if (high) {
+      //   shapes = this.shapesHigh;
+      //   equation = this.equationHigh;
+      // }
 
       return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
     }
@@ -3947,8 +3947,7 @@ function () {
     key: "destroy",
     value: function destroy() {
       this.gesture.destroy();
-      this.webglLow.gl.getExtension('WEBGL_lose_context').loseContext();
-      this.webglHigh.gl.getExtension('WEBGL_lose_context').loseContext();
+      this.webglLow.gl.getExtension('WEBGL_lose_context').loseContext(); // this.webglHigh.gl.getExtension('WEBGL_lose_context').loseContext();
     }
   }, {
     key: "setSpaceTransforms",
@@ -4206,10 +4205,10 @@ function () {
       // }
 
 
-      this.webglLow.resize();
-      this.webglHigh.resize();
-      this.draw2DLow.resize();
-      this.draw2DHigh.resize();
+      this.webglLow.resize(); // this.webglHigh.resize();
+
+      this.draw2DLow.resize(); // this.draw2DHigh.resize();
+
       this.setSpaceTransforms();
       this.sizeHtmlText();
       this.elements.resizeHtmlObject();
@@ -4501,9 +4500,9 @@ function () {
     key: "clearContext",
     value: function clearContext() {
       this.webglLow.gl.clearColor(0, 0, 0, 0);
-      this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
-      this.webglHigh.gl.clearColor(0, 0, 0, 0);
-      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
+      this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT); // this.webglHigh.gl.clearColor(0, 0, 0, 0);
+      // this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
+
       this.elements.clear();
     } // scroll() {
     //   if (this.scrollingFast === false) {

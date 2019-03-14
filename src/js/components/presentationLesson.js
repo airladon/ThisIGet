@@ -302,15 +302,21 @@ export default class PresentationLessonComponent extends React.Component
                 <div id="id_diagram__html" className='diagram__html'>
                   {this.renderContent(this.state.htmlText)}
                 </div>
-                <canvas id="id_diagram__text__high" className='diagram__text'>
-                </canvas>
-                <canvas id="id_diagram__gl__high" className='diagram__gl'>
-                </canvas>
               </div>
               {this.addGoToButton()}
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
+              {
+              <div id="id_qr_diagram" className="diagram__container lesson__diagram">
+                <canvas id="id_qr_diagram__text" className='diagram__text'>
+                </canvas>
+                <canvas id="id_qr_diagram__gl" className='diagram__gl'>
+                </canvas>
+                <div id="id_diagram__html" className='diagram__html'>
+                </div>
+              </div>
+              }
         </div>
       </div>
     </div>;

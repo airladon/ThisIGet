@@ -56,12 +56,16 @@
   z-index: 1;
 }
 
-#id_diagram__text__high {
-  pointer-events: none;
-  z-index: 2;
+#id_qr_diagram {
+  z-index: -1;
 }
 
-#id_diagram__gl__high {
-  pointer-events: none;
-  z-index: 2;
-}
+// #id_diagram__text__high {
+//   pointer-events: none;
+//   z-index: 2;
+// }
+
+// #id_diagram__gl__high {
+//   pointer-events: none;
+//   z-index: 2;
+// }

@@ -583,6 +583,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   title: string;
   sections: Array<Section>;
   diagram: Object;
+  qrDiagram: Object;
   overlayDiagram: Object;
   diagramHtmlId: string;
   goingTo: 'next' | 'prev' | 'goto';
@@ -598,6 +599,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   constructor(htmlId: string = 'lesson__content') {
     super(htmlId);
     this.diagramHtmlId = `${htmlId}_diagram`;
+    // this.qrDiagram = null;
     // this.sections = [];
     // this.iconLink = '/';
     // this.iconLinkGrey = '/';
@@ -648,9 +650,15 @@ class PresentationLessonContent extends SimpleLessonContent {
   loadQRs(
     qrs: Array<string>,
   ) {
-    if (this.diagram.elements._qr == null) {
-      this.diagram.addElements(
-        this.diagram.elements,
+    if (this.qrDiagram == null) {
+      this.qrDiagram = new Diagram({
+        htmlId: 'id_qr_diagram',
+        limits: this.diagram.limits,
+      });
+    }
+    if (this.qrDiagram.elements._qr == null) {
+      this.qrDiagram.addElements(
+        this.qrDiagram.elements,
         [
           {
             name: 'qr',
@@ -663,8 +671,8 @@ class PresentationLessonContent extends SimpleLessonContent {
     // const index = getLessonIndex();
     qrs.forEach((combinedUid) => {
       const [uid, versionUid] = combinedUid.split('/');
-      if (this.diagram.elements._qr[`_${uid}`] == null) {
-        this.diagram.addElements(this.diagram.elements._qr, [{
+      if (this.qrDiagram.elements._qr[`_${uid}`] == null) {
+        this.qrDiagram.addElements(this.qrDiagram.elements._qr, [{
           name: `${uid}`, method: 'collection',
         }]);
       }
@@ -690,21 +698,21 @@ class PresentationLessonContent extends SimpleLessonContent {
         cssLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.css`;
         jsLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.js`;
         if (version.qr != null && version.qr.length > 0) {
-          this.diagram.elements._qr[`_${uid}`].add(vUid, this.diagram.shapes.collection());
+          this.qrDiagram.elements._qr[`_${uid}`].add(vUid, this.qrDiagram.shapes.collection());
           version.qr.forEach((qrid) => {
-            const loadingQR = this.diagram.shapes.collection();
+            const loadingQR = this.qrDiagram.shapes.collection();
             loadingQR.hideAll();
-            this.diagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`] = loadingQR;
+            this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`] = loadingQR;
           });
         }
         if (cssLink !== '') {
           loadRemoteCSS(`${uid}${vUid}CSS`, cssLink, () => {
             loadRemote(`${uid}${vUid}Script`, jsLink, () => {
               Object.keys(window.quickReference[uid][vUid]).forEach((qrid) => {
-                const element = this.diagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
+                const element = this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
                 const { isShown } = element;
-                const qr = new window.quickReference[uid][vUid][qrid](this.diagram);
-                this.diagram.elements._qr[`_${uid}`][`_${vUid}`].add(qrid, qr);
+                const qr = new window.quickReference[uid][vUid][qrid](this.qrDiagram);
+                this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`].add(qrid, qr);
                 if (isShown) {
                   qr.show();
                   qr.showAll();
@@ -724,6 +732,8 @@ class PresentationLessonContent extends SimpleLessonContent {
     combinedUid: string,
     qrid: string,
   ) {
+    this.qrDiagram.container.style.zIndex = '10';
+
     // eslint-disable-next-line prefer-const
     let [uid, vid] = combinedUid.split('/');
     if (vid == null) {
@@ -744,14 +754,14 @@ class PresentationLessonContent extends SimpleLessonContent {
       qridToUse = `_${qrid}`;
     }
 
-    if (this.diagram.elements._qr) {
-      if (this.diagram.elements._qr[uidToUse]) {
-        if (this.diagram.elements._qr[uidToUse][vidToUse]) {
-          if (this.diagram.elements._qr[uidToUse][vidToUse][qridToUse]) {
-            this.diagram.elements._qr.show();
-            this.diagram.elements._qr[uidToUse].show();
-            this.diagram.elements._qr[uidToUse][vidToUse].show();
-            this.diagram.elements._qr[uidToUse][vidToUse][qridToUse].show();
+    if (this.qrDiagram.elements._qr) {
+      if (this.qrDiagram.elements._qr[uidToUse]) {
+        if (this.qrDiagram.elements._qr[uidToUse][vidToUse]) {
+          if (this.qrDiagram.elements._qr[uidToUse][vidToUse][qridToUse]) {
+            this.qrDiagram.elements._qr.show();
+            this.qrDiagram.elements._qr[uidToUse].show();
+            this.qrDiagram.elements._qr[uidToUse][vidToUse].show();
+            this.qrDiagram.elements._qr[uidToUse][vidToUse][qridToUse].show();
           }
         }
       }
