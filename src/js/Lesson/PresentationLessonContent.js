@@ -661,23 +661,50 @@ class PresentationLessonContent extends SimpleLessonContent {
     //     }
     //   }
     // }
+    const next = document.getElementById('lesson__button-next');
+    if (next) {
+      next.classList.add('lesson__button-next-disabled');
+    }
+    const prev = document.getElementById('lesson__button-previous');
+    if (prev) {
+      prev.classList.add('lesson__button-prev-disabled');
+    }
+    const gotoButton =
+      document.getElementById('id__lesson__button-goto_container');
+    if (gotoButton) {
+      gotoButton.classList.add('lesson__button-goto_container-disabled');
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
     this.qrDiagram.container.style.zIndex = '-1';
-    const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    if (interactiveButton instanceof HTMLElement) {
-      interactiveButton.classList.remove('lesson__interactive_element_button__disable');
+    // const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
+    // if (interactiveButton instanceof HTMLElement) {
+    //   interactiveButton.classList.remove('lesson__interactive_element_button__disable');
+    // }
+    // const actionElements = document.getElementsByClassName('action_word_enabled');
+    // if (actionElements) {
+    //   for (let i = 0; i < actionElements.length; i += 1) {
+    //     const element = actionElements[i];
+    //     if (!element.classList.contains('lesson__popup_box__action_word')) {
+    //       element.classList.remove('lesson__action_word_disabled_by_popup');
+    //     }
+    //   }
+    // }
+
+    const next = document.getElementById('lesson__button-next');
+    if (next) {
+      next.classList.remove('lesson__button-next-disabled');
     }
-    const actionElements = document.getElementsByClassName('action_word_enabled');
-    if (actionElements) {
-      for (let i = 0; i < actionElements.length; i += 1) {
-        const element = actionElements[i];
-        if (!element.classList.contains('lesson__popup_box__action_word')) {
-          element.classList.remove('lesson__action_word_disabled_by_popup');
-        }
-      }
+    const prev = document.getElementById('lesson__button-previous');
+    if (prev) {
+      prev.classList.remove('lesson__button-prev-disabled');
+    }
+    const gotoButton =
+      document.getElementById('id__lesson__button-goto_container');
+    if (gotoButton) {
+      gotoButton.classList.remove('lesson__button-goto_container-disabled');
     }
   }
 
