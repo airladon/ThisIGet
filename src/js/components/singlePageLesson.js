@@ -39,6 +39,7 @@ export default class SinglePageLessonComponent extends React.Component
     super(props);
     this.lesson = props.lesson;
     this.key = 10;
+    this.contentChange = false;
     this.state = {
       content: [],
     };
@@ -60,6 +61,7 @@ export default class SinglePageLessonComponent extends React.Component
     this.lesson.initialize();
     // this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
     // this.lesson.content.diagram.resize();
+    this.contentChange = true;
     this.setState({
       content: this.lesson.content.sections[0],
     });
@@ -77,7 +79,7 @@ export default class SinglePageLessonComponent extends React.Component
   // }
 
   componentDidUpdate() {
-    this.lesson.content.diagram.resize();
+    
     setOnClicks(this.lesson.content.modifiers);
     console.log(this.lesson.content.diagram);
 
@@ -152,16 +154,20 @@ export default class SinglePageLessonComponent extends React.Component
     // fig1.hide();
     // fig2.hide();
 
-    d.renderAllElementsToTiedCanvases();
-    const loadingElements = d.elements.getLoadingElements();
-    for (let i = 0; i < loadingElements.length; i += 1) {
-      const element = loadingElements[i];
-      if (element.drawingObject.state === 'loading') {
-        element.drawingObject.onLoad = () => {
-          element.unrender();
-          d.renderAllElementsToTiedCanvases();
-        };
+    if (this.contentChange) {
+      this.lesson.content.diagram.resize();
+      d.renderAllElementsToTiedCanvases();
+      const loadingElements = d.elements.getLoadingElements();
+      for (let i = 0; i < loadingElements.length; i += 1) {
+        const element = loadingElements[i];
+        if (element.drawingObject.state === 'loading') {
+          element.drawingObject.onLoad = () => {
+            element.unrender();
+            d.renderAllElementsToTiedCanvases();
+          };
+        }
       }
+      this.contentChange = false;
     }
     d.animateNextFrame();
 

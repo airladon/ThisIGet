@@ -91,7 +91,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     container.appendChild(linkElement);
 
 
-    const element = this.diagram.shapesHigh.htmlElement(
+    const element = this.diagram.shapes.htmlElement(
       container,
       `id_lesson__popup_box__${this.id}`,
       'lesson__popup_box',
@@ -113,16 +113,16 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   ) {
     super(diagram, layout, transform);
     if (Collection) {
-      this.diagram.shapes = this.diagram.shapesHigh;
-      this.diagram.equation = this.diagram.equationHigh;
-      this.diagram.objects = this.diagram.objectsHigh;
+      // this.diagram.shapes = this.diagram.shapesHigh;
+      // this.diagram.equation = this.diagram.equationHigh;
+      // this.diagram.objects = this.diagram.objectsHigh;
       this.add(collectionName, new Collection(
         diagram, layout,
         new Transform(id).scale(1, 1).rotate(0).translate(0, 0),
       ));
-      this.diagram.shapes = this.diagram.shapesLow;
-      this.diagram.equation = this.diagram.equationLow;
-      this.diagram.objects = this.diagram.objectsLow;
+      // this.diagram.shapes = this.diagram.shapesLow;
+      // this.diagram.equation = this.diagram.equationLow;
+      // this.diagram.objects = this.diagram.objectsLow;
     }
     this.add('box', this.makeBox(id));
     this.interactiveButtonMethod = null;
@@ -157,29 +157,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         link = `${versionPath}/${topics[0]}`;
       }
     }
-    // Object.entries(index).forEach((uid, lessonDescription) => {
-    //   if (uid === linkOrLessonID) {
-    //     const { versions } = lessonDescription;
-    //     let version;
-    //     if (versionId !== '') {
-    //       if (versions[versionId] != null)
-    //         version = versions[versionId];
-    //     }
-    //     if (version == null) {
-    //       version = versions[Object.keys(versions)[0]];
-    //     }
-    //     const { paths } = version;
-    //     const subPath = version.path;
-    //     const explanationPath = `${lessonDescription.path}/${version.path}`;
-    //     if (paths.indexOf('summary') > -1) {
-    //       link = `${explanationPath}/summary`;
-    //     } else if (paths.indexOf('explanation') > -1) {
-    //       link = `${explanationPath}/explanation`;
-    //     } else {
-    //       link = `${explanationPath}/${paths[0]}`;
-    //     }
-    //   }
-    // });
     return link;
   }
 
@@ -230,7 +207,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       this.diagram.limits.top - height,
     );
     const cssSpace = diagramSpace
-      .transformBy(this.diagram.diagramToCSSPercentSpaceTransform.matrix());
+      .transformBy(this.diagram.spaceTransforms.diagramToCSSPercent.matrix());
 
     this.spaceForDiagramElement.style.width
       = `calc(var(--lesson__content-width) * ${cssSpace.x})`;

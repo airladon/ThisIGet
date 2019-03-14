@@ -4144,7 +4144,7 @@ function () {
       var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
 
       if (w) {
-        w.src = this.webglLow.gl.canvas.toDataURL(); // w.src = offscreenCanvas.toDataURL();
+        w.src = this.webglLow.gl.canvas.toDataURL('image/png', 0.5); // w.src = offscreenCanvas.toDataURL();
 
         w.style.visibility = 'visible';
         w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")"); // w.style.marginLeft = `${1 - (glStartOfCanvas.x / glWidthOfCanvas)}%`;
@@ -4156,7 +4156,7 @@ function () {
       // console.log(d)
 
       if (d) {
-        d.src = this.draw2DLow.canvas.toDataURL();
+        d.src = this.draw2DLow.canvas.toDataURL('image/png', 0.5);
         d.style.visibility = 'visible';
         d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")");
       } // htmlCanvas2 = docuemnt.getElementById(`${htmlCanvasElementOrId}2D`);
