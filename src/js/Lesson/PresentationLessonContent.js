@@ -436,12 +436,12 @@ class Section {
         if (element.id != null) {
           this.interactiveElementList.push({
             element: element.id,
-            location: 'topleft',
+            location: 'topright',
           });
         } else {
           this.interactiveElementList.push({
             element,
-            location: 'topleft',
+            location: 'topright',
           });
         }
       }
