@@ -252,6 +252,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   hideAll() {
     super.hideAll();
+    this.diagram.container.style.zIndex = '-1';
     const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
     if (interactiveButton instanceof HTMLElement) {
       interactiveButton.classList.remove('lesson__interactive_element_button__disable');
