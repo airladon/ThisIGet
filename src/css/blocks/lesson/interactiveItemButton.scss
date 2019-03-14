@@ -49,10 +49,11 @@
 
 .lesson__interactive_element_button__disable {
   pointer-events: none;
-  left: -10000px;
-  top: -10001px;
-  font-size: 0;
-  border: 0;
-  height: 0;
-  width: 0;
+  // left: -10000px;
+  // top: -10001px;
+  // font-size: 0;
+  // border: 0;
+  // height: 0;
+  // width: 0;
+  opacity: 0.5;
 }

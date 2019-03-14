@@ -674,6 +674,11 @@ class PresentationLessonContent extends SimpleLessonContent {
     if (gotoButton) {
       gotoButton.classList.add('lesson__button-goto_container-disabled');
     }
+    const interactive =
+      document.getElementById('id_lesson__interactive_element_button');
+    if (interactive) {
+      interactive.classList.add('lesson__interactive_element_button__disable');
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -705,6 +710,11 @@ class PresentationLessonContent extends SimpleLessonContent {
       document.getElementById('id__lesson__button-goto_container');
     if (gotoButton) {
       gotoButton.classList.remove('lesson__button-goto_container-disabled');
+    }
+    const interactive =
+      document.getElementById('id_lesson__interactive_element_button');
+    if (interactive) {
+      interactive.classList.remove('lesson__interactive_element_button__disable');
     }
   }
 
