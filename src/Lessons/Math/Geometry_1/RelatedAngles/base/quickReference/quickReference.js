@@ -19,20 +19,11 @@ function showThreeLines(
   threeLines.transform.updateRotation(0);
   threeLines.calculateFuturePositions('corresponding');
   threeLines.setFuturePositions();
-  threeLines.setPosition(0, 0.3);
+  threeLines.setPosition(0, 0.1);
   threeLines.show();
   threeLines._line1.showAll();
-  // threeLines._line1._end1.show();
-  // threeLines._line1._end2.show();
-  // threeLines._line1._mid.show();
   threeLines._line2.showAll();
-  // threeLines._line2._end1.show();
-  // threeLines._line2._end2.show();
-  // threeLines._line2._mid.show();
   threeLines._line3.showAll();
-  // threeLines._line3._end1.show();
-  // threeLines._line3._end2.show();
-  // threeLines._line3._mid.show();
 
   toggleFunction();
   threeLines._line1.setColor(color);
@@ -102,14 +93,13 @@ export class QRAlternateAngles extends PopupBoxCollection {
         [this._threeLines, null], this.layout.colors.angleA,
       ),
     };
-
     this.setTitle('Alternate Angles');
     this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.55);
+    this.setDiagramSize(2.5, 1.75);
     super.show();
     showThreeLines(
       this._threeLines,
