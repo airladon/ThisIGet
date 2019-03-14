@@ -225,47 +225,44 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   show() {
     super.show();
-    // this.toggle(true);
-    // console.log(this.diagram.elements.elements)
-    // Object.keys(this.diagram.elements.elements).forEach((key) => {
-    //   const element = this.diagram.elements.elements[key];
-    //   if (element.name !== this.name) {
-    //     console.log(element.name)
+    // const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
+    // if (interactiveButton instanceof HTMLElement) {
+    //   interactiveButton.classList.add('lesson__interactive_element_button__disable');
+    // }
+    // const actionElements = document.getElementsByClassName('action_word_enabled');
+    // if (actionElements) {
+    //   for (let i = 0; i < actionElements.length; i += 1) {
+    //     const element = actionElements[i];
+    //     if (!element.classList.contains('lesson__popup_box__action_word')) {
+    //       element.classList.add('lesson__action_word_disabled_by_popup');
+    //     }
     //   }
-    // })
-    const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    if (interactiveButton instanceof HTMLElement) {
-      interactiveButton.classList.add('lesson__interactive_element_button__disable');
-    }
-    const actionElements = document.getElementsByClassName('action_word_enabled');
-    if (actionElements) {
-      for (let i = 0; i < actionElements.length; i += 1) {
-        const element = actionElements[i];
-        if (!element.classList.contains('lesson__popup_box__action_word')) {
-          element.classList.add('lesson__action_word_disabled_by_popup');
-        }
-      }
-    }
-
+    // }
     this._box.show();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  prepareToHideAll() {
+  }
+
   hideAll() {
+    // this.prepareToHideQR();
+    this.prepareToHideAll();
     super.hideAll();
     this.diagram.container.style.zIndex = '-1';
-    const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    if (interactiveButton instanceof HTMLElement) {
-      interactiveButton.classList.remove('lesson__interactive_element_button__disable');
-    }
-    const actionElements = document.getElementsByClassName('action_word_enabled');
-    if (actionElements) {
-      for (let i = 0; i < actionElements.length; i += 1) {
-        const element = actionElements[i];
-        if (!element.classList.contains('lesson__popup_box__action_word')) {
-          element.classList.remove('lesson__action_word_disabled_by_popup');
-        }
-      }
-    }
+    // const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
+    // if (interactiveButton instanceof HTMLElement) {
+    //   interactiveButton.classList.remove('lesson__interactive_element_button__disable');
+    // }
+    // const actionElements = document.getElementsByClassName('action_word_enabled');
+    // if (actionElements) {
+    //   for (let i = 0; i < actionElements.length; i += 1) {
+    //     const element = actionElements[i];
+    //     if (!element.classList.contains('lesson__popup_box__action_word')) {
+    //       element.classList.remove('lesson__action_word_disabled_by_popup');
+    //     }
+    //   }
+    // }
     this.diagram.animateNextFrame();
   }
 }
