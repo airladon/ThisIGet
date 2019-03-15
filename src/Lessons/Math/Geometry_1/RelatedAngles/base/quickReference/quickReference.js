@@ -20,7 +20,7 @@ function showThreeLines(
   threeLines.transform.updateRotation(0);
   threeLines.calculateFuturePositions('corresponding');
   threeLines.setFuturePositions();
-  threeLines.setPosition(-1.4, 0);
+  threeLines.setPosition(-2, 0);
   threeLines.show();
   threeLines._line1.showAll();
   threeLines._line2.showAll();

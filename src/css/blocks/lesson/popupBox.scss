@@ -6,17 +6,17 @@
   left: 50%;
   // transform: translate(-50%, -100%);
   // background-color: rgba(255, 255, 255, 0.95);
-  background-color: color('diagram', 'background', 'darkest');
+  background-color: color('diagram', 'background', 'darker');
   color: color('diagram', 'disabled', 'darker');
   opacity: 0.965;
   border-radius: calc(var(--lesson__diagram-font-size) * 0.4);
-  width: max-content;
-  max-width: calc(var(--lesson__content-width) * 0.8);
+  // width: max-content;
+  // max-width: calc(var(--lesson__content-width) * 0.8);
 }
 
 @media (min-aspect-ratio: 3/2) {
   .lesson__popup_box {
-    max-width: calc(var(--lesson__content-width) * 0.5);
+    // max-width: calc(var(--lesson__content-width) * 0.5);
   }
 }
 
