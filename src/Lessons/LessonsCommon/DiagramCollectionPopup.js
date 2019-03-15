@@ -215,7 +215,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     element: DiagramElement,
     scale: number = 1,
     // scale: number,
-    // position: Point,
+    position: Point,
   ) {
     const diagram = this.diagram.limits;
     // let scaleX = 1;
@@ -232,6 +232,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     elementScale.x = diagramToWindowScaleX * scale;
     elementScale.y = diagramToWindowScaleY * scale;
     element.setScale(elementScale);
+
+    element.setPosition(new Point(
+      diagramToWindowScaleX * position.x,
+      diagramToWindowScaleY * position.y,
+    ));
   }
 
   setDiagramSpace(
