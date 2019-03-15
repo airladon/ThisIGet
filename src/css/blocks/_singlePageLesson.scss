@@ -119,5 +119,6 @@
 }
 
 #single_page_lesson__qr__overlay .lesson__popup_box__text {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  // font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  font-size: 1em;
 }
