@@ -1,5 +1,5 @@
-$qrWidth: 0.8;
-$qrHeight: 0.8;
+$qrWidth: 0.9;
+$qrHeight: 0.9;
 
 :root {
   --lesson__qr_width: calc(var(--lesson__content-width) * #{$qrWidth});
