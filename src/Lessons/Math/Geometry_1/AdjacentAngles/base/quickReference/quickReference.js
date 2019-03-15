@@ -66,7 +66,7 @@ export class QRComplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2, 1.2);
+    this.setDiagramSize(2, 1.5);
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('com_add');
@@ -106,7 +106,7 @@ export class QRSupplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2, 1.2);
+    this.setDiagramSize(2, 1.5);
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('sup_add');
@@ -146,7 +146,7 @@ export class QRExplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSize(2.5, 2);
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('exp_add');
