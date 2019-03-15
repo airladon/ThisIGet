@@ -1,0 +1,9 @@
+#presentation_lesson__qr__overlay {
+  z-index: -1;
+  position: absolute;
+  width: var(--lesson__qr_width);
+  height: var(--lesson__qr_height);
+  top: calc(var(--lesson__qr_height) * (1 - #{$qrHeight}) / 2);
+  left: calc(var(--lesson__qr_width) * (1 - #{$qrWidth}) / 2);
+  pointer-events: auto;
+}

@@ -648,7 +648,11 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
-    this.qrDiagram.container.style.zIndex = '10';
+    // this.qrDiagram.container.style.zIndex = '10';
+    const overlay = document.getElementById('presentation_lesson__qr__overlay');
+    if (overlay != null) {
+      overlay.style.zIndex = '10';
+    }
     const next = document.getElementById('lesson__button-next');
     if (next) {
       next.classList.add('lesson__button-next-disabled');
@@ -671,7 +675,10 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
-    this.qrDiagram.container.style.zIndex = '-1';
+    const overlay = document.getElementById('presentation_lesson__qr__overlay');
+    if (overlay != null) {
+      overlay.style.zIndex = '-1';
+    }
     const next = document.getElementById('lesson__button-next');
     if (next) {
       next.classList.remove('lesson__button-next-disabled');

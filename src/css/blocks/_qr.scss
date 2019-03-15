@@ -1,3 +1,17 @@
+$qrWidth: 0.8;
+$qrHeight: 0.8;
+
+:root {
+  --lesson__qr_width: calc(var(--lesson__content-width) * #{$qrWidth});
+  --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight});
+  --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2);
+}
+
+.lesson__qr__overlay .lesson__popup_box__content {
+  height: calc(var(--lesson__qr_height) * 0.8);
+  overflow: scroll;
+}
+
 .lesson__qr_container {
   width: var(--lesson__qr_width);
   height: var(--lesson__qr_height);
@@ -31,3 +45,15 @@
   top: 0;
   left: 0;
 }
+
+.lesson__qr__overlay .lesson__popup_box__text {
+  font-size: calc(var(--lesson__diagram-font-size) * 1);
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr__overlay .lesson__popup_box__text_container {
+  display: table;
+  overflow: scroll;
+}
+

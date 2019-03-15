@@ -308,9 +308,9 @@ export default class PresentationLessonComponent extends React.Component
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
               {
-              <div id="single_page_lesson__qr__overlay">
-                <div id="single_page_lesson__qr__container">
-                  <div id="lesson__qr__diagram__singlePage" className="diagram__container lesson__diagram">
+              <div id="presentation_lesson__qr__overlay" className="lesson__qr__overlay">
+                <div id="lesson__qr__container">
+                  <div id="id_qr_diagram" className="diagram__container lesson__diagram">
                     <canvas id="id_qr_diagram__text" className='diagram__text'>
                     </canvas>
                     <canvas id="id_qr_diagram__gl" className='diagram__gl'>
