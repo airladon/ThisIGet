@@ -95,12 +95,12 @@ export class QRAlternateAngles extends PopupBoxCollection {
       ),
     };
     this.setTitle('Alternate Angles');
-    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|. asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf ', modifiers);
+    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace(0.5, 0.55);
+    this.setDiagramSpace(0.5, 0.75, 'left');
     this.scaleToQrWindow(
       this._threeLines,
       0.9,
