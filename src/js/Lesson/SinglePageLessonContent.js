@@ -55,11 +55,19 @@ class SinglePageLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
+    const overlay = document.getElementById('single_page_lesson__qr_overlay');
+    if (overlay != null) {
+      overlay.style.zIndex = '10';
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
-    this.qrDiagram.container.style.zIndex = '-1';
+    // this.qrDiagram.container.style.zIndex = '-1';
+    const overlay = document.getElementById('single_page_lesson__qr_overlay');
+    if (overlay != null) {
+      overlay.style.zIndex = '-1';
+    }
   }
 }
 

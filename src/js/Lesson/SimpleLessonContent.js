@@ -140,7 +140,7 @@ class SimpleLessonContent {
     qrid: string,
   ) {
     this.prepareToShowQR();
-    this.qrDiagram.container.style.zIndex = '10';
+    // this.qrDiagram.container.style.zIndex = '10';
 
     // eslint-disable-next-line prefer-const
     let [uid, vid] = combinedUid.split('/');
