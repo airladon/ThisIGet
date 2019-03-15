@@ -1,0 +1,33 @@
+.lesson__qr_container {
+  width: var(--lesson__qr_width);
+  height: var(--lesson__qr_height);
+  top: var(--lesson__qr_top);
+}
+
+.lesson__qr__overlay #id_qr_diagram {
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__overlay .diagram__html {
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__overlay .diagram__gl {
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__overlay .diagram__text {
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__overlay .lesson__popup_box {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+}
