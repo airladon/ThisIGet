@@ -70,6 +70,7 @@ class SimpleLessonContent {
       }
       this.getQR(uid, versionUid);
     });
+    this.qrDiagram.setFirstTransform();
   }
 
   // eslint-disable-next-line class-methods-use-this

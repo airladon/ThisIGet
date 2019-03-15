@@ -4,7 +4,8 @@ import CommonDiagramCollection from './DiagramCollection';
 import getLessonIndex from '../index';
 
 const {
-  Transform, Point, DiagramElementPrimative,
+  Transform, Point, DiagramElementPrimative, Scale, Rect, DiagramElement,
+  Translation,
 } = Fig;
 const { html } = Fig.tools;
 const { generateUniqueId } = Fig.tools.misc;
@@ -172,47 +173,73 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     // this.linkElement.innerHTML = `<a href=${link}>Go to lesson</a>`;
   }
 
-  getDiagramSpacePosition(reference: 'topLeft' | 'center') {
-    const matrix = this.diagram.pixelToDiagramSpaceTransform.matrix();
+  // getDiagramSpacePosition(reference: 'topLeft' | 'center') {
+  //   const matrix = this.diagram.pixelToDiagramSpaceTransform.matrix();
 
-    const dBound = this.spaceForDiagramElement.getBoundingClientRect();
-    const cBound = this.diagram.htmlCanvas.getBoundingClientRect();
-    const pixelTopLeft = new Point(
-      dBound.left - cBound.left,
-      dBound.top - cBound.top,
-    );
-    const pixelBottomRight = new Point(
-      dBound.right - cBound.left,
-      dBound.bottom - cBound.top,
-    );
+  //   const dBound = this.spaceForDiagramElement.getBoundingClientRect();
+  //   const cBound = this.diagram.htmlCanvas.getBoundingClientRect();
+  //   const pixelTopLeft = new Point(
+  //     dBound.left - cBound.left,
+  //     dBound.top - cBound.top,
+  //   );
+  //   const pixelBottomRight = new Point(
+  //     dBound.right - cBound.left,
+  //     dBound.bottom - cBound.top,
+  //   );
 
-    const topLeft = pixelTopLeft.transformBy(matrix);
-    const bottomRight = pixelBottomRight.transformBy(matrix);
+  //   const topLeft = pixelTopLeft.transformBy(matrix);
+  //   const bottomRight = pixelBottomRight.transformBy(matrix);
 
-    if (reference === 'topLeft') {
-      return topLeft;
+  //   if (reference === 'topLeft') {
+  //     return topLeft;
+  //   }
+
+  //   const width = bottomRight.x - topLeft.x;
+  //   const height = topLeft.y - bottomRight.y;
+  //   return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
+  // }
+
+  normalizeLimits(
+    showWindow: Rect,
+    scale: number,
+    // scale: number,
+    // position: Point,
+    element: DiagramElement,
+  ) {
+    const diagram = this.diagram.limits;
+    // let scaleX = 1;
+    // let scaleY = 1;
+    const diagramToWindowScaleX = diagram.width / showWindow.width;
+    const diagramToWindowScaleY = diagram.height / showWindow.height;
+    const elementTransform = element.transform;
+    let elementScale = elementTransform.s();
+    if (elementScale == null) {
+      elementTransform.order = [new Scale(1, 1), ...elementTransform.order];
+      elementTransform.calcMatrix();
+      elementScale = new Scale(1, 1);
     }
-
-    const width = bottomRight.x - topLeft.x;
-    const height = topLeft.y - bottomRight.y;
-    return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
+    elementScale.x = diagramToWindowScaleX * scale;
+    elementScale.y = diagramToWindowScaleY * scale;
+    element.setScale(elementScale);
   }
 
-  setDiagramSize(width: number, height: number) {
+  setDiagramSpace(width: number, height: number) {
     // As css 0, 0 is in top left and we are converting a relative dimension,
     // not absolute, then first make a point of the relavent dimension relative
     // to the top left of the diagram
-    const diagramSpace = new Point(
-      this.diagram.limits.left + width,
-      this.diagram.limits.top - height,
-    );
-    const cssSpace = diagramSpace
-      .transformBy(this.diagram.spaceTransforms.diagramToCSSPercent.matrix());
-
+    // const diagramSpace = new Point(
+    //   this.diagram.limits.left + width,
+    //   this.diagram.limits.top - height,
+    // );
+    // const cssSpace = diagramSpace
+    //   .transformBy(this.diagram.spaceTransforms.diagramToCSSPercent.matrix());
+    //   console.log(this.diagram.spaceTransforms.diagramToCSSPercent)
+    //   console.log(this.diagram.spaceTransforms.diagramToPixel)
+    //   console.log(this.diagram.limits)
     this.spaceForDiagramElement.style.width
-      = `calc(var(--lesson__content-width) * ${cssSpace.x})`;
+      = `calc(var(--lesson__qr_width) * ${width})`;
     this.spaceForDiagramElement.style.height
-      = `calc(var(--lesson__content-height) * ${cssSpace.y})`;
+      = `calc(var(--lesson__qr_height) * ${height})`;
   }
 
   showAll() {

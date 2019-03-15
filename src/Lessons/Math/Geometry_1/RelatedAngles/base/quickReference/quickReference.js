@@ -7,7 +7,7 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import details from '../../details';
 import version from '../version';
 
-const { Transform } = Fig;
+const { Transform} = Fig;
 const { html } = Fig.tools;
 
 function showThreeLines(
@@ -15,11 +15,12 @@ function showThreeLines(
   toggleFunction: Function,
   color: Array<number>,
 ) {
-  threeLines.transform.updateScale(0.6, 0.6);
+  // const s = threeLines.getScale();
+  // threeLines.transform.updateScale(s.x * 0.9, s.y * 0.9);
   threeLines.transform.updateRotation(0);
   threeLines.calculateFuturePositions('corresponding');
   threeLines.setFuturePositions();
-  threeLines.setPosition(0, 0.1);
+  threeLines.setPosition(0, 0.2);
   threeLines.show();
   threeLines._line1.showAll();
   threeLines._line2.showAll();
@@ -60,7 +61,7 @@ export class QRCorrespondingAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.55);
+    this.setDiagramSpace(1, 0.7);
     super.show();
     showThreeLines(
       this._threeLines,
@@ -99,7 +100,12 @@ export class QRAlternateAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.75);
+    this.setDiagramSpace(1, 0.65);
+    this.normalizeLimits(
+      this.layout.limits,
+      0.9,
+      this._threeLines,
+    );
     super.show();
     showThreeLines(
       this._threeLines,
