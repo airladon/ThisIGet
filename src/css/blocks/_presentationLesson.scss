@@ -7,3 +7,11 @@
   left: calc(var(--lesson__qr_width) * (1 - #{$qrWidth}) / 2);
   pointer-events: auto;
 }
+
+#presentation_lesson__qr__overlay .lesson__popup_box__title_text {
+  font-size: calc(var(--lesson__diagram-font-size) * 1);
+}
+
+#presentation_lesson__qr__overlay .lesson__popup_box__link {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+}

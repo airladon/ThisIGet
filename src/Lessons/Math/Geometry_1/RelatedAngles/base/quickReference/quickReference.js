@@ -107,7 +107,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
       this._threeLines.alternateToggleAngles.bind(this._threeLines),
       this.layout.colors.line,
     );
-    this.scaleToQrWindow(
+    this.transformToQRWindow(
       this._threeLines,
       0.9,
       new Point(-1.5, 0),

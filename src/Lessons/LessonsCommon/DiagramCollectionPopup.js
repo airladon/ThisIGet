@@ -210,11 +210,9 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   //   return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
   // }
 
-  scaleToQrWindow(
-    // showWindow: Rect,
+  transformToQRWindow(
     element: DiagramElement,
     scale: number = 1,
-    // scale: number,
     position: Point,
   ) {
     const diagram = this.diagram.limits;
