@@ -39,10 +39,10 @@
   margin-left: 0;
 }
 
-#id_diagram__text__high {
-  width: 10px;
-  height: 10px;
-}
+// #id_diagram__text__high {
+//   width: 10px;
+//   height: 10px;
+// }
 
 #id_diagram__text__low {
   width: 100%;
@@ -85,5 +85,27 @@
   position: absolute;
   width: 100px;
   height: 100px;
+}
+
+#id_qr_diagram {
+  position: fixed;
+  top: 10%;
+  left: 5%;
+  width: 100%;
+  height: 100%;
+}
+
+#id_qr_diagram .diagram__html {
+  pointer-events: auto;
+}
+
+#id_qr_diagram .diagram__gl {
+  width: var(--lesson__content-width);
+  height: var(--lesson__content-height);
+}
+
+#id_qr_diagram .diagram__text {
+  width: var(--lesson__content-width);
+  height: var(--lesson__content-height);
 }
 

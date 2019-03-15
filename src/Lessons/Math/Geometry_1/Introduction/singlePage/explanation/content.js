@@ -45,6 +45,10 @@ class Content extends SinglePageLessonContent {
       layout,
       new Transform('circles').scale(1, 1).translate(0, 0),
     ));
+    this.loadQRs([
+      'related_angles',
+      // 'adjacent_angles/base',
+    ]);
   }
 
   // Array of strings, html or jsx
@@ -122,6 +126,7 @@ class Content extends SinglePageLessonContent {
       _found: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
+      _test: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.dimensions),
     };
     this.content = [
       '# Shapes',
@@ -136,7 +141,7 @@ class Content extends SinglePageLessonContent {
       makeFig('id_figure1_asdf', diag._fig1, 'fit', new Rect(-2, -1, 4, 2)),
       // makeFig('id_figure1', [], 'fit', new Rect(-2, -1, 4, 2)),
 
-      'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be determined, and |_relationships| between the properties |_found|.',
+      'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be determined, and |_relationships| between the properties |_found|. |_test|',
 
       makeFig('id_figure2_asdf', diag._fig2, 'fit', new Rect(-2, -1.3, 4, 2.6)),
 

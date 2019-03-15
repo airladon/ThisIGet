@@ -291,7 +291,7 @@ export default class SinglePageLessonComponent extends React.Component
     });
     return <div
       className="single_page_lesson__text_container"
-      dangerouslySetInnerHTML={ {__html: output} }>
+      dangerouslySetInnerHTML={ { __html: output } }>
     </div>;
   }
 
