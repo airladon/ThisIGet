@@ -73,18 +73,29 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.setTitle(title);
     titleElement.appendChild(titleText);
 
+    const content = document.createElement('div');
+    content.classList.add('lesson__popup_box__content');
+    container.appendChild(content);
+
     const spaceForDiagram = document.createElement('div');
     spaceForDiagram.classList.add('lesson__popup_box__diagram');
     spaceForDiagram.id = (`id_lesson__popup_box__diagram__${id}`);
     this.spaceForDiagramElement = spaceForDiagram;
-    container.appendChild(spaceForDiagram);
+    content.appendChild(spaceForDiagram);
 
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('lesson__popup_box__text_container');
+    textContainer.id = `id_lesson__popup_box__text_container_${this.id}`;
+    // const textSubContainer = document.createElement('div');
+    // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
+    // textContainer.appendChild(textSubContainer);
+    content.appendChild(textContainer);
     const descriptionElement = document.createElement('div');
     descriptionElement.classList.add('lesson__popup_box__text');
     descriptionElement.id = `id_lesson__popup_box__text__${id}`;
     this.descriptionElement = descriptionElement;
     this.setDescription(description);
-    container.appendChild(descriptionElement);
+    textContainer.appendChild(descriptionElement);
 
     const linkElement = document.createElement('div');
     linkElement.classList.add('lesson__popup_box__link');
@@ -199,18 +210,18 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   //   return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
   // }
 
-  normalizeLimits(
-    showWindow: Rect,
-    scale: number,
+  scaleToQrWindow(
+    // showWindow: Rect,
+    element: DiagramElement,
+    scale: number = 1,
     // scale: number,
     // position: Point,
-    element: DiagramElement,
   ) {
     const diagram = this.diagram.limits;
     // let scaleX = 1;
     // let scaleY = 1;
-    const diagramToWindowScaleX = diagram.width / showWindow.width;
-    const diagramToWindowScaleY = diagram.height / showWindow.height;
+    const diagramToWindowScaleX = diagram.width / this.layout.limits.width;
+    const diagramToWindowScaleY = diagram.height / this.layout.limits.height;
     const elementTransform = element.transform;
     let elementScale = elementTransform.s();
     if (elementScale == null) {
@@ -223,7 +234,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     element.setScale(elementScale);
   }
 
-  setDiagramSpace(width: number, height: number) {
+  setDiagramSpace(
+    widthPercentage: number,
+    heightPercentage: number,
+    float: ?'left' | 'right' = null,
+  ) {
     // As css 0, 0 is in top left and we are converting a relative dimension,
     // not absolute, then first make a point of the relavent dimension relative
     // to the top left of the diagram
@@ -237,9 +252,22 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     //   console.log(this.diagram.spaceTransforms.diagramToPixel)
     //   console.log(this.diagram.limits)
     this.spaceForDiagramElement.style.width
-      = `calc(var(--lesson__qr_width) * ${width})`;
+      = `calc(var(--lesson__qr_width) * ${widthPercentage})`;
     this.spaceForDiagramElement.style.height
-      = `calc(var(--lesson__qr_height) * ${height})`;
+      = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+    if (float != null) {
+      this.spaceForDiagramElement.style.float = float;
+      const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+      if (textContainer != null) {
+        textContainer.style.height = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+      }
+    } else {
+      const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+      if (textContainer != null) {
+        textContainer.style.height = `calc(var(--lesson__qr_height) * ${1 - heightPercentage - 0.25})`;
+        textContainer.style.display = 'block';
+      }
+    }
   }
 
   showAll() {

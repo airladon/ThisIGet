@@ -20,7 +20,7 @@ function showThreeLines(
   threeLines.transform.updateRotation(0);
   threeLines.calculateFuturePositions('corresponding');
   threeLines.setFuturePositions();
-  threeLines.setPosition(0, 0.2);
+  threeLines.setPosition(-1.4, 0);
   threeLines.show();
   threeLines._line1.showAll();
   threeLines._line2.showAll();
@@ -95,16 +95,15 @@ export class QRAlternateAngles extends PopupBoxCollection {
       ),
     };
     this.setTitle('Alternate Angles');
-    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|.', modifiers);
+    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|. asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf asdfl;kl asd;asdjkfl; kljadsfkljas ;l alsk;dflk;asdf lja; asdf ', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace(1, 0.65);
-    this.normalizeLimits(
-      this.layout.limits,
-      0.9,
+    this.setDiagramSpace(0.5, 0.55);
+    this.scaleToQrWindow(
       this._threeLines,
+      0.9,
     );
     super.show();
     showThreeLines(

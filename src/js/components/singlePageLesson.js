@@ -287,8 +287,6 @@ export default class SinglePageLessonComponent extends React.Component
       <div className="single_page_lesson__text_container">
         {this.renderContent()}
       </div>
-      <div className="lesson__qr_container">
-      </div>
       <div id="single_page_lesson__qr_overlay">
         <div id="single_page_lesson__qr_container">
           <div id="id_qr_diagram" className="diagram__container lesson__diagram">
