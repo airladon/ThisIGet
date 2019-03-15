@@ -11,6 +11,15 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const { click, centerH } = Fig.tools.html;
 const layout = lessonLayout();
 
+const uid = 'related_angles';
+const vid = 'base';
+const qrids = [
+  'Alternate',
+  'Interior',
+  'Opposite',
+  'Corrseponding',
+];
+
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
@@ -21,27 +30,42 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      `${uid}/${vid}`,
+    ]);
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-
+    // const diag = this.qrDiagram.elements._qr['_related_angles']['_base'];
     this.addSection({
       title: 'QR Test',
       setContent: () => {
         let out = '<p>Quick Reference Popups</p><p></p>';
-        Object.keys(diag.elements).forEach((key) => {
-          out = `${out}<p style="margin-top:0%">|${key}|</p>`;
-        });
-        return centerH(out);
-      },
-      modifiers: () => {
-        const out = {};
-        Object.keys(diag.elements).forEach((key) => {
-          out[key] = click(diag.elements[`${key}`].show, [diag.elements[`${key}`]]);
+        qrids.forEach((qrid) => {
+          out += `<p>|${qrid}|</p>`;
         });
         return out;
       },
+      modifiers: () => {
+        const out = {};
+        qrids.forEach((qrid) => {
+          out[qrid] = click(this.showQR, [this, uid, qrid]);
+        });
+        return out;
+      },
+      // setContent: [
+      //   '<p>Quick Reference Popups</p><p></p>',
+      //   '<p>|Alternate|</p>',
+      //   '<p>|Interior|</p>',
+      //   '<p>|Opposite|</p>',
+      //   '<p>|Corresponding|</p>',
+      // ],
+      // modifiers: {
+      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
+      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
+      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
+      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
+      // },
     });
   }
 }

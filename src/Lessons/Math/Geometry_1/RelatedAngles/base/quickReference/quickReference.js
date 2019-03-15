@@ -105,6 +105,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
       this._threeLines,
       0.9,
     );
+
     super.show();
     showThreeLines(
       this._threeLines,

@@ -648,19 +648,7 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
-    // const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    // if (interactiveButton instanceof HTMLElement) {
-    //   interactiveButton.classList.add('lesson__interactive_element_button__disable');
-    // }
-    // const actionElements = document.getElementsByClassName('action_word_enabled');
-    // if (actionElements) {
-    //   for (let i = 0; i < actionElements.length; i += 1) {
-    //     const element = actionElements[i];
-    //     if (!element.classList.contains('lesson__popup_box__action_word')) {
-    //       element.classList.add('lesson__action_word_disabled_by_popup');
-    //     }
-    //   }
-    // }
+    this.qrDiagram.container.style.zIndex = '10';
     const next = document.getElementById('lesson__button-next');
     if (next) {
       next.classList.add('lesson__button-next-disabled');
@@ -684,20 +672,6 @@ class PresentationLessonContent extends SimpleLessonContent {
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
     this.qrDiagram.container.style.zIndex = '-1';
-    // const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    // if (interactiveButton instanceof HTMLElement) {
-    //   interactiveButton.classList.remove('lesson__interactive_element_button__disable');
-    // }
-    // const actionElements = document.getElementsByClassName('action_word_enabled');
-    // if (actionElements) {
-    //   for (let i = 0; i < actionElements.length; i += 1) {
-    //     const element = actionElements[i];
-    //     if (!element.classList.contains('lesson__popup_box__action_word')) {
-    //       element.classList.remove('lesson__action_word_disabled_by_popup');
-    //     }
-    //   }
-    // }
-
     const next = document.getElementById('lesson__button-next');
     if (next) {
       next.classList.remove('lesson__button-next-disabled');
