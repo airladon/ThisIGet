@@ -52,6 +52,15 @@ class SinglePageLessonContent extends SimpleLessonContent {
   // // eslint-disable-next-line class-methods-use-this, no-unused-vars
   // setContent() {
   // }
+
+  // eslint-disable-next-line class-methods-use-this
+  prepareToShowQR() {
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  prepareToHideQR() {
+    this.qrDiagram.container.style.zIndex = '-1';
+  }
 }
 
 function makeFig(

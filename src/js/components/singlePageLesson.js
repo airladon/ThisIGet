@@ -247,28 +247,6 @@ export default class SinglePageLessonComponent extends React.Component
     // this.lesson.content.diagram.elements._fig3._dimensions._eqn.showForm('0');
   }
 
-  // renderContent() {
-  //   const output = [];
-  //   this.state.content.forEach((element) => {
-  //     if (typeof element === 'string' && element.charAt(0) === '<') {
-  //       output.push(<div key={this.key}
-  //         dangerouslySetInnerHTML={ {
-  //           __html: element.slice(0, element.length - 1),
-  //         } }>
-  //         </div>);
-  //     } else if (typeof element === 'string') {
-  //       output.push(<div key={this.key}
-  //         dangerouslySetInnerHTML={ {
-  //           __html: applyMDModifiers(element, this.lesson.content.modifiers),
-  //         } }>
-  //       </div>);
-  //     } else {
-  //       output.push(element);
-  //     }
-  //     this.key += 1;
-  //   });
-  //   return output;
-  // }
 
   renderContent() {
     let output = '';
