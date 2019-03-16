@@ -102,7 +102,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
   show() {
     this.setDiagramSpace({
       location: 'auto',
-      ySize: 0.8,
+      ySize: 0.7,
       xSize: 0.5,
     });
     super.show();

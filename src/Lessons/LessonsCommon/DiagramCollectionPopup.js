@@ -312,7 +312,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         if (rootElement != null && lessonContent != null) {
           rootElement.style.setProperty(
             '--lesson__popup_font_size',
-            `${fontSize}px`,
+            `${fontSize * 0.8}px`,
           );
         }
       } else if (rootElement != null) {

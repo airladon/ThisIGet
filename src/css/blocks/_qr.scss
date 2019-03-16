@@ -1,5 +1,5 @@
-$qrWidth: 0.9;
-$qrHeight: 0.9;
+$qrWidth: 0.8;
+$qrHeight: 0.8;
 
 // @media (max-aspect-ratio: 1) and (max-width: 600px) {
 :root {
@@ -11,6 +11,14 @@ $qrHeight: 0.9;
 @media (max-width: 600px) {
   :root {
     --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 1.5);
+    --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 1.5);
+  }
+}
+
+@media (max-width: 400px) {
+  :root {
+    --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 2);
+    --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 2);
   }
 }
 

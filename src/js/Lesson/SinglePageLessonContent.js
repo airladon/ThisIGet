@@ -3,7 +3,6 @@ import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from './SimpleLessonContent';
 
-
 const {
   Rect, DiagramElement,
 } = Fig;
