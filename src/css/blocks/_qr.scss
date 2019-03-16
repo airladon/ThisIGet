@@ -8,19 +8,19 @@ $qrHeight: 0.8;
   --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight});
 }
 
-@media (max-width: 600px) {
-  :root {
-    --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 1.5);
-    --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 1.5);
-  }
-}
+// @media (max-width: 600px) {
+//   :root {
+//     --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 1.5);
+//     --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 1.5);
+//   }
+// }
 
-@media (max-width: 400px) {
-  :root {
-    --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 2);
-    --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 2);
-  }
-}
+// @media (max-width: 400px) {
+//   :root {
+//     --lesson__qr_height: calc(var(--lesson__content-height) * #{$qrHeight} * 2);
+//     --lesson__qr_top: calc(50vh - var(--lesson__content-height) * #{$qrHeight} / 2 * 2);
+//   }
+// }
 
 .lesson__qr__overlay .lesson__popup_box__content {
   height: calc(var(--lesson__qr_height) * 0.8);

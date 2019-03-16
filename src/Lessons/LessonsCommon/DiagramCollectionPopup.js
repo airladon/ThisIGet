@@ -305,6 +305,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     if (lessonType === 'singlePage') {
       const rootElement = document.documentElement;
       const lessonContent = document.getElementById('lesson__content');
+      // let 
+      // if (rootElement != null) {
+
+      // }
       if (overlay.clientWidth < 600) {
         const fontSize = parseFloat(window
           .getComputedStyle(lessonContent, null)
@@ -313,6 +317,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
           rootElement.style.setProperty(
             '--lesson__popup_font_size',
             `${fontSize * 0.8}px`,
+          );
+          rootElement.style.setProperty(
+            '--lesson__qr_height',
+            `500px`,
           );
         }
       } else if (rootElement != null) {
