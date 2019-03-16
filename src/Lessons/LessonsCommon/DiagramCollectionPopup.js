@@ -343,13 +343,25 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     }
 
     // set size of font
-    if (lessonType === 'singlePage' && overlay.clientWidth < 600) {
+    if (lessonType === 'singlePage') {
       const root = document.documentElement;
       const lessonContent = document.getElementById('lesson__content');
-      const fontSize = parseFloat(window
-        .getComputedStyle(lessonContent, null)
-        .getPropertyValue('font-size'));
-      if (root != null && lessonContent != null) {
+      if (overlay.clientWidth < 600) {
+        const fontSize = parseFloat(window
+          .getComputedStyle(lessonContent, null)
+          .getPropertyValue('font-size'));
+        // fontSize = Math.min(25, fontSize);
+        if (root != null && lessonContent != null) {
+          root.style.setProperty(
+            '--lesson__popup_font_size',
+            `${fontSize}px`,
+          );
+        }
+      } else if (root != null) {
+        let fontSize = parseFloat(root.style.getPropertyValue(
+          '--lesson__diagram-font-size',
+        ));
+        fontSize = Math.min(25, fontSize);
         root.style.setProperty(
           '--lesson__popup_font_size',
           `${fontSize}px`,
