@@ -8,7 +8,7 @@ const {
   DiagramElementCollection,
 } = Fig;
 const { html } = Fig.tools;
-const { generateUniqueId } = Fig.tools.misc;
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
 export default class PopupBoxCollection extends CommonDiagramCollection {
   id: string;
@@ -250,11 +250,23 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   // size is width for 'left' or 'right', an height for 'up' or 'down'
   // For auto, size is 0.5
   setDiagramSpace(
+    optionsIn: {
+      location?: 'left' | 'right' | 'up' | 'down' | 'auto',
+      xSize?: number,
+      ySize?: number,
+    },
     // widthPercentage: number,
     // heightPercentage: number,
-    location: 'left' | 'right' | 'up' | 'down' | 'auto' = 'auto',
-    size: number = 0.5,
+    // location: 'left' | 'right' | 'up' | 'down' | 'auto' = 'auto',
+    // size: number = 0.5,
   ) {
+    const defaultOptions = {
+      location: 'auto',
+      xSize: 0.5,
+      ySize: 0.5,
+    };
+    const options = joinObjects({}, defaultOptions, optionsIn);
+
     let overlayAR = 1;
     let overlay = document.getElementById('presentation_lesson__qr__overlay');
 
@@ -272,10 +284,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     overlayAR = overlay.clientWidth / overlay.clientHeight;
 
     // determine the location to use
-    let locationToUse = location;
-    if (location === 'auto') {
+    let locationToUse = options.location;
+    if (options.location === 'auto') {
       if (
-        overlay.clientWidth > 400
+        overlay.clientWidth > 600
         || overlayAR > 1
         || lessonType === 'presentation'
       ) {
@@ -292,23 +304,21 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     let ySizeT;
     if (locationToUse === 'up' || locationToUse === 'down') {
       xSizeD = 1;
-      ySizeD = size;
+      ySizeD = options.ySize;
       xSizeT = 1;
-      ySizeT = 1 - size;
+      ySizeT = 1 - options.ySize;
       this.spaceForDiagramElement.style.float = 'none';
     } else {
-      xSizeD = size;
+      xSizeD = options.xSize;
       ySizeD = 1;
-      xSizeT = 1 - size;
+      xSizeT = 1 - options.xSize;
       ySizeT = 1;
       this.spaceForDiagramElement.style.float = locationToUse;
     }
-    console.log(xSizeD, ySizeD, xSizeT, ySizeT)
 
     // Arrange diagram and text content accordinly
     const textElement = document.getElementById(`id_lesson__popup_box__text_container__${this.id}`);
     const diagramElement = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
-    console.log(textElement, diagramElement)
     if (textElement != null && diagramElement != null) {
       const parent = textElement.parentElement;
       if (parent != null) {

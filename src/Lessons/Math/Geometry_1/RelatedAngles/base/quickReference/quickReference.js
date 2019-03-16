@@ -100,7 +100,11 @@ export class QRAlternateAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace('up');
+    this.setDiagramSpace({
+      location: 'auto',
+      ySize: 0.8,
+      xSize: 0.5,
+    });
     super.show();
     showThreeLines(
       this._threeLines,
@@ -109,7 +113,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
     );
     this.transformToQRWindow(
       this._threeLines,
-      new Rect(-1.5, -1, 3, 2),
+      new Rect(-1.5, -1.5, 3, 3),
     );
   }
 }
