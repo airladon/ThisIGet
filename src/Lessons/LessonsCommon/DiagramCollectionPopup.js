@@ -255,10 +255,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       xSize?: number,
       ySize?: number,
     },
-    // widthPercentage: number,
-    // heightPercentage: number,
-    // location: 'left' | 'right' | 'up' | 'down' | 'auto' = 'auto',
-    // size: number = 0.5,
   ) {
     const defaultOptions = {
       location: 'auto',
@@ -291,7 +287,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         || overlayAR > 1
         || lessonType === 'presentation'
       ) {
-        locationToUse = 'right';
+        locationToUse = 'left';
       } else {
         locationToUse = 'up';
       }
@@ -345,41 +341,21 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       textElement.style.height
         = `calc(var(--lesson__qr_height) * ${ySizeT * 0.7})`;
     }
-    // // let lessonType = 'presentation';
-    // // let overlay = document.getElementById('presentation_lesson__qr__overlay');
-    // // if (overlay == null) {
-    // //   lessonType = 'singlePage';
-    // //   overlay = document.getElementById('single_page_lesson__qr__overlay');
-    // // }
-    // // const overlayAR = overlay.clientWidth / overlay.clientHeight;
-    // // const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-    // // const qrHeight = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
 
-    // // if (float === 'auto') {
-    // //   if (lessonType === 'presentation') {
-    // //     if (widthPercentage <= 0.5) {
-    // //       textContainer.style.height = qrHeight;
-    // //       this.spaceForDiagramElement.style.float = 'left';
-    // //     }
-    // //   }
-    // // }
-    // this.spaceForDiagramElement.style.width
-    //   = `calc(var(--lesson__qr_width) * ${widthPercentage})`;
-    // this.spaceForDiagramElement.style.height
-    //   = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
-    // if (float != null) {
-    //   this.spaceForDiagramElement.style.float = float;
-    //   const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-    //   if (textContainer != null) {
-    //     textContainer.style.height = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
-    //   }
-    // } else {
-    //   const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-    //   if (textContainer != null) {
-    //     textContainer.style.height = `calc(var(--lesson__qr_height) * ${1 - heightPercentage - 0.25})`;
-    //     textContainer.style.display = 'block';
-    //   }
-    // }
+    // set size of font
+    if (lessonType === 'singlePage' && overlay.clientWidth < 600) {
+      const root = document.documentElement;
+      const lessonContent = document.getElementById('lesson__content');
+      const fontSize = parseFloat(window
+        .getComputedStyle(lessonContent, null)
+        .getPropertyValue('font-size'));
+      if (root != null && lessonContent != null) {
+        root.style.setProperty(
+          '--lesson__popup_font_size',
+          `${fontSize}px`,
+        );
+      }
+    }
   }
 
   showAll() {
