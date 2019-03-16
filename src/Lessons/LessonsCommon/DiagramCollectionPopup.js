@@ -23,6 +23,9 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   linkElement: HTMLElement;
   interactiveButtonMethod: Function | null;
 
+  lastElement: HTMLElement;
+  lastWindow: Rect;
+
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
     this.titleElement.innerHTML = modifiedText;
@@ -181,61 +184,17 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       a.innerHTML = 'Go to lesson to see why';
       this.linkElement.appendChild(a);
     }
-    // this.linkElement.innerHTML = `<a href=${link}>Go to lesson</a>`;
   }
 
-  // getDiagramSpacePosition(reference: 'topLeft' | 'center') {
-  //   const matrix = this.diagram.pixelToDiagramSpaceTransform.matrix();
-
-  //   const dBound = this.spaceForDiagramElement.getBoundingClientRect();
-  //   const cBound = this.diagram.htmlCanvas.getBoundingClientRect();
-  //   const pixelTopLeft = new Point(
-  //     dBound.left - cBound.left,
-  //     dBound.top - cBound.top,
-  //   );
-  //   const pixelBottomRight = new Point(
-  //     dBound.right - cBound.left,
-  //     dBound.bottom - cBound.top,
-  //   );
-
-  //   const topLeft = pixelTopLeft.transformBy(matrix);
-  //   const bottomRight = pixelBottomRight.transformBy(matrix);
-
-  //   if (reference === 'topLeft') {
-  //     return topLeft;
-  //   }
-
-  //   const width = bottomRight.x - topLeft.x;
-  //   const height = topLeft.y - bottomRight.y;
-  //   return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
-  // }
+  resize() {
+    super.resize();
+    this.hideAll();
+  }
 
   transformToQRWindow(
     element: DiagramElementCollection | DiagramElementPrimative,
     lensWindow: Rect,
-    // scale: number = 1,
-    // position: Point,
   ) {
-    // const diagram = this.diagram.limits;
-    // // let scaleX = 1;
-    // // let scaleY = 1;
-    // const diagramToWindowScaleX = diagram.width / this.layout.limits.width;
-    // const diagramToWindowScaleY = diagram.height / this.layout.limits.height;
-    // const elementTransform = element.transform;
-    // let elementScale = elementTransform.s();
-    // if (elementScale == null) {
-    //   elementTransform.order = [new Scale(1, 1), ...elementTransform.order];
-    //   elementTransform.calcMatrix();
-    //   elementScale = new Scale(1, 1);
-    // }
-    // elementScale.x = diagramToWindowScaleX * scale;
-    // elementScale.y = diagramToWindowScaleY * scale;
-    // element.setScale(elementScale);
-
-    // element.setPosition(new Point(
-    //   diagramToWindowScaleX * position.x,
-    //   diagramToWindowScaleY * position.y,
-    // ));
     const diagramContainer = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
     element.tieToHTML = {
       element: diagramContainer,
@@ -335,34 +294,33 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       diagramElement.style.width
         = `calc(var(--lesson__qr_width) * ${xSizeD})`;
       diagramElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.7})`;
+        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.8})`;
       textElement.style.width
         = `calc(var(--lesson__qr_width) * ${xSizeT})`;
       textElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.7})`;
+        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.8})`;
     }
 
     // set size of font
     if (lessonType === 'singlePage') {
-      const root = document.documentElement;
+      const rootElement = document.documentElement;
       const lessonContent = document.getElementById('lesson__content');
       if (overlay.clientWidth < 600) {
         const fontSize = parseFloat(window
           .getComputedStyle(lessonContent, null)
           .getPropertyValue('font-size'));
-        // fontSize = Math.min(25, fontSize);
-        if (root != null && lessonContent != null) {
-          root.style.setProperty(
+        if (rootElement != null && lessonContent != null) {
+          rootElement.style.setProperty(
             '--lesson__popup_font_size',
             `${fontSize}px`,
           );
         }
-      } else if (root != null) {
-        let fontSize = parseFloat(root.style.getPropertyValue(
+      } else if (rootElement != null) {
+        let fontSize = parseFloat(rootElement.style.getPropertyValue(
           '--lesson__diagram-font-size',
         ));
         fontSize = Math.min(25, fontSize);
-        root.style.setProperty(
+        rootElement.style.setProperty(
           '--lesson__popup_font_size',
           `${fontSize}px`,
         );
