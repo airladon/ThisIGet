@@ -7,7 +7,7 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import details from '../../details';
 import version from '../version';
 
-const { Transform, Point } = Fig;
+const { Transform, Point, Rect } = Fig;
 const { html } = Fig.tools;
 
 function showThreeLines(
@@ -109,8 +109,9 @@ export class QRAlternateAngles extends PopupBoxCollection {
     );
     this.transformToQRWindow(
       this._threeLines,
-      0.9,
-      new Point(-1.5, 0),
+      new Rect(-1.5, -1, 3, 2),
+      // 0.9,
+      // new Point(-1.5, 0),
     );
   }
 }

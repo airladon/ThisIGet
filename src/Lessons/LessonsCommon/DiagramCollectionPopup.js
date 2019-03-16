@@ -212,48 +212,64 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   transformToQRWindow(
     element: DiagramElement,
-    scale: number = 1,
-    position: Point,
+    lensWindow: Rect,
+    // scale: number = 1,
+    // position: Point,
   ) {
-    const diagram = this.diagram.limits;
-    // let scaleX = 1;
-    // let scaleY = 1;
-    const diagramToWindowScaleX = diagram.width / this.layout.limits.width;
-    const diagramToWindowScaleY = diagram.height / this.layout.limits.height;
-    const elementTransform = element.transform;
-    let elementScale = elementTransform.s();
-    if (elementScale == null) {
-      elementTransform.order = [new Scale(1, 1), ...elementTransform.order];
-      elementTransform.calcMatrix();
-      elementScale = new Scale(1, 1);
-    }
-    elementScale.x = diagramToWindowScaleX * scale;
-    elementScale.y = diagramToWindowScaleY * scale;
-    element.setScale(elementScale);
+    // const diagram = this.diagram.limits;
+    // // let scaleX = 1;
+    // // let scaleY = 1;
+    // const diagramToWindowScaleX = diagram.width / this.layout.limits.width;
+    // const diagramToWindowScaleY = diagram.height / this.layout.limits.height;
+    // const elementTransform = element.transform;
+    // let elementScale = elementTransform.s();
+    // if (elementScale == null) {
+    //   elementTransform.order = [new Scale(1, 1), ...elementTransform.order];
+    //   elementTransform.calcMatrix();
+    //   elementScale = new Scale(1, 1);
+    // }
+    // elementScale.x = diagramToWindowScaleX * scale;
+    // elementScale.y = diagramToWindowScaleY * scale;
+    // element.setScale(elementScale);
 
-    element.setPosition(new Point(
-      diagramToWindowScaleX * position.x,
-      diagramToWindowScaleY * position.y,
-    ));
+    // element.setPosition(new Point(
+    //   diagramToWindowScaleX * position.x,
+    //   diagramToWindowScaleY * position.y,
+    // ));
+    const diagramContainer = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    element.tieToHTML = {
+      element: diagramContainer,
+      window: lensWindow,
+      scale: 'fit',
+    };
+    element.diagramTransforms = this.diagram.spaceTransforms;
+    console.log(element)
+    element.updateHTMLElementTie(this.diagram.canvasLow);
   }
 
   setDiagramSpace(
     widthPercentage: number,
     heightPercentage: number,
-    float: ?'left' | 'right' = null,
+    float: ?'left' | 'right' | 'auto' = 'auto',
   ) {
-    // As css 0, 0 is in top left and we are converting a relative dimension,
-    // not absolute, then first make a point of the relavent dimension relative
-    // to the top left of the diagram
-    // const diagramSpace = new Point(
-    //   this.diagram.limits.left + width,
-    //   this.diagram.limits.top - height,
-    // );
-    // const cssSpace = diagramSpace
-    //   .transformBy(this.diagram.spaceTransforms.diagramToCSSPercent.matrix());
-    //   console.log(this.diagram.spaceTransforms.diagramToCSSPercent)
-    //   console.log(this.diagram.spaceTransforms.diagramToPixel)
-    //   console.log(this.diagram.limits)
+    // let lessonType = 'presentation';
+    // let overlay = document.getElementById('presentation_lesson__qr__overlay');
+    // if (overlay == null) {
+    //   lessonType = 'singlePage';
+    //   overlay = document.getElementById('single_page_lesson__qr__overlay');
+    // }
+    // const overlayAR = overlay.clientWidth / overlay.clientHeight;
+    // const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+    // const qrHeight = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+
+    // if (float === 'auto') {
+    //   if (lessonType === 'presentation') {
+    //     if (widthPercentage <= 0.5) {
+    //       textContainer.style.height = qrHeight;
+    //       this.spaceForDiagramElement.style.float = 'left';
+    //     }
+    //   }
+    // }
     this.spaceForDiagramElement.style.width
       = `calc(var(--lesson__qr_width) * ${widthPercentage})`;
     this.spaceForDiagramElement.style.height
