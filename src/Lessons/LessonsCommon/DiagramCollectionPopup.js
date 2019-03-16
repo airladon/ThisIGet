@@ -301,39 +301,100 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         = `calc(var(--lesson__qr_height) * ${ySizeT * 0.8})`;
     }
 
-    // set size of font
+    // set size of font and window
     if (lessonType === 'singlePage') {
-      const rootElement = document.documentElement;
-      const lessonContent = document.getElementById('lesson__content');
-      // let 
-      // if (rootElement != null) {
-
-      // }
-      if (overlay.clientWidth < 600) {
-        const fontSize = parseFloat(window
-          .getComputedStyle(lessonContent, null)
-          .getPropertyValue('font-size'));
-        if (rootElement != null && lessonContent != null) {
-          rootElement.style.setProperty(
-            '--lesson__popup_font_size',
-            `${fontSize * 0.8}px`,
-          );
-          rootElement.style.setProperty(
-            '--lesson__qr_height',
-            `500px`,
-          );
-        }
-      } else if (rootElement != null) {
-        let fontSize = parseFloat(rootElement.style.getPropertyValue(
-          '--lesson__diagram-font-size',
-        ));
-        fontSize = Math.min(25, fontSize);
-        rootElement.style.setProperty(
-          '--lesson__popup_font_size',
-          `${fontSize}px`,
-        );
-      }
+      this.setSinglePageSize();
+    } else {
+      this.setPresentationPageSize();
     }
+    // const rootElement = document.documentElement;
+    // const lessonContent = document.getElementById('lesson__content');
+    // if (lessonContent == null || rootElement == null) {
+    //   return;
+    // }
+    // const contentFontSize = parseFloat(window
+    //   .getComputedStyle(lessonContent, null)
+    //   .getPropertyValue('font-size'));
+    // const diagramFontSize = parseFloat(
+    //   rootElement.style.getPropertyValue('--lesson__diagram-font-size'),
+    // );
+    // const contentWidth = parseFloat(rootElement.style.getPropertyValue('--lesson__content-width'));
+    // const contentHeight = parseFloat(rootElement.style.getPropertyValue('--lesson__content-height'));
+    // const qrWidth = contentWidth;
+    // let qrHeight = contentHeight;
+    // let fontSize = diagramFontSize;
+    // let multiplier = 0.7;
+
+    // if (lessonType === 'singlePage') {
+    //   fontSize = contentFontSize * 0.8;
+    //   multiplier = 0.9;
+    //   if (overlay.clientWidth < 600) {
+    //     qrHeight = contentHeight * 1.5;
+    //   } else if (overlay.clientWidth < 500) {
+    //     qrHeight = contentHeight * 2.0;
+    //   } else {
+    //     fontSize = Math.min(contentFontSize * 0.8, 25);
+    //   }
+    // }
+    // // console.log(rootElement.style.getPropertyValue('--lesson__content-height'))
+    // // console.log(qrWidth, multiplier, qrHeight, fontSize)
+    // rootElement.style.setProperty('--lesson__qr_height', `${qrHeight * multiplier}px`);
+    // rootElement.style.setProperty('--lesson__qr_width', `${qrWidth * multiplier}px`);
+    // rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
+  }
+
+  setPresentationPageSize() {
+    const overlay = document.getElementById('id_diagram__html');
+    const lessonContent = document.getElementById('lesson__content');
+    if (overlay == null || lessonContent == null) {
+      return;
+    }
+    const fontSize = parseFloat(window
+      .getComputedStyle(lessonContent, null)
+      .getPropertyValue('font-size'));
+    const width = overlay.clientWidth;
+    const height = overlay.clientHeight;
+    const qrWidth = width * 0.7;
+    const qrHeight = height * 0.7;
+    let qrFontSize = fontSize;
+    // if (width < 400) {
+
+    // } else if (width < 600) {
+
+    // } else {
+
+    // }
+    this.setRootElement(qrWidth, qrHeight, qrFontSize);
+  }
+  setSinglePageSize() {
+    const overlay = document.getElementById('single_page_lesson__qr__overlay');
+    const lessonContent = document.getElementById('lesson__content');
+    if (overlay == null || lessonContent == null) {
+      return;
+    }
+    const fontSize = parseFloat(window
+      .getComputedStyle(lessonContent, null)
+      .getPropertyValue('font-size'));
+    const width = overlay.clientWidth;
+    const height = overlay.clientHeight;
+    const qrWidth = width * 0.9;
+    const qrHeight = qrWidth;
+    let qrFontSize = fontSize;
+    // if (width < 400) {
+
+    // } else if (width < 600) {
+
+    // } else {
+
+    // }
+    this.setRootElement(qrWidth, qrHeight, qrFontSize);
+  }
+
+  setRootElement(width: number, height: number, fontSize: number) {
+    const rootElement = document.documentElement;
+    rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
+    rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
+    rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
   }
 
   showAll() {
