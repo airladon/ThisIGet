@@ -4,8 +4,8 @@ import CommonDiagramCollection from './DiagramCollection';
 import getLessonIndex from '../index';
 
 const {
-  Transform, Point, DiagramElementPrimative, Scale, Rect, DiagramElement,
-  Translation,
+  Transform, Point, DiagramElementPrimative, Rect,
+  DiagramElementCollection,
 } = Fig;
 const { html } = Fig.tools;
 const { generateUniqueId } = Fig.tools.misc;
@@ -85,7 +85,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
     const textContainer = document.createElement('div');
     textContainer.classList.add('lesson__popup_box__text_container');
-    textContainer.id = `id_lesson__popup_box__text_container_${this.id}`;
+    textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
     // const textSubContainer = document.createElement('div');
     // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
     // textContainer.appendChild(textSubContainer);
@@ -211,7 +211,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   // }
 
   transformToQRWindow(
-    element: DiagramElement,
+    element: DiagramElementCollection | DiagramElementPrimative,
     lensWindow: Rect,
     // scale: number = 1,
     // position: Point,
@@ -243,50 +243,133 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       scale: 'fit',
     };
     element.diagramTransforms = this.diagram.spaceTransforms;
-    console.log(element)
+    // console.log(element)
     element.updateHTMLElementTie(this.diagram.canvasLow);
   }
 
+  // size is width for 'left' or 'right', an height for 'up' or 'down'
+  // For auto, size is 0.5
   setDiagramSpace(
-    widthPercentage: number,
-    heightPercentage: number,
-    float: ?'left' | 'right' | 'auto' = 'auto',
+    // widthPercentage: number,
+    // heightPercentage: number,
+    location: 'left' | 'right' | 'up' | 'down' | 'auto' = 'auto',
+    size: number = 0.5,
   ) {
-    // let lessonType = 'presentation';
-    // let overlay = document.getElementById('presentation_lesson__qr__overlay');
-    // if (overlay == null) {
-    //   lessonType = 'singlePage';
-    //   overlay = document.getElementById('single_page_lesson__qr__overlay');
-    // }
-    // const overlayAR = overlay.clientWidth / overlay.clientHeight;
-    // const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-    // const qrHeight = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+    let overlayAR = 1;
+    let overlay = document.getElementById('presentation_lesson__qr__overlay');
 
-    // if (float === 'auto') {
-    //   if (lessonType === 'presentation') {
-    //     if (widthPercentage <= 0.5) {
-    //       textContainer.style.height = qrHeight;
-    //       this.spaceForDiagramElement.style.float = 'left';
-    //     }
-    //   }
-    // }
-    this.spaceForDiagramElement.style.width
-      = `calc(var(--lesson__qr_width) * ${widthPercentage})`;
-    this.spaceForDiagramElement.style.height
-      = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
-    if (float != null) {
-      this.spaceForDiagramElement.style.float = float;
-      const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-      if (textContainer != null) {
-        textContainer.style.height = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
-      }
-    } else {
-      const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
-      if (textContainer != null) {
-        textContainer.style.height = `calc(var(--lesson__qr_height) * ${1 - heightPercentage - 0.25})`;
-        textContainer.style.display = 'block';
+    // deterimine the lesson type
+    let lessonType = 'presentation';
+    if (overlay == null) {
+      lessonType = 'singlePage';
+      overlay = document.getElementById('single_page_lesson__qr__overlay');
+    }
+    if (overlay == null) {
+      return;
+    }
+
+    // Overlay aspect ratio
+    overlayAR = overlay.clientWidth / overlay.clientHeight;
+
+    // determine the location to use
+    let locationToUse = location;
+    if (location === 'auto') {
+      if (
+        overlay.clientWidth > 400
+        || overlayAR > 1
+        || lessonType === 'presentation'
+      ) {
+        locationToUse = 'right';
+      } else {
+        locationToUse = 'up';
       }
     }
+
+    // determine diagram size to use
+    let xSizeD;
+    let ySizeD;
+    let xSizeT;
+    let ySizeT;
+    if (locationToUse === 'up' || locationToUse === 'down') {
+      xSizeD = 1;
+      ySizeD = size;
+      xSizeT = 1;
+      ySizeT = 1 - size;
+      this.spaceForDiagramElement.style.float = 'none';
+    } else {
+      xSizeD = size;
+      ySizeD = 1;
+      xSizeT = 1 - size;
+      ySizeT = 1;
+      this.spaceForDiagramElement.style.float = locationToUse;
+    }
+    console.log(xSizeD, ySizeD, xSizeT, ySizeT)
+
+    // Arrange diagram and text content accordinly
+    const textElement = document.getElementById(`id_lesson__popup_box__text_container__${this.id}`);
+    const diagramElement = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    console.log(textElement, diagramElement)
+    if (textElement != null && diagramElement != null) {
+      const parent = textElement.parentElement;
+      if (parent != null) {
+        parent.removeChild(textElement);
+        parent.removeChild(diagramElement);
+        if (locationToUse === 'down') {
+          parent.appendChild(textElement);
+          parent.appendChild(diagramElement);
+        } else {
+          parent.appendChild(diagramElement);
+          parent.appendChild(textElement);
+        }
+      }
+    }
+
+    // set size of diagram and text element
+    if (textElement != null && diagramElement != null) {
+      diagramElement.style.width
+        = `calc(var(--lesson__qr_width) * ${xSizeD})`;
+      diagramElement.style.height
+        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.7})`;
+      textElement.style.width
+        = `calc(var(--lesson__qr_width) * ${xSizeT})`;
+      textElement.style.height
+        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.7})`;
+    }
+    // // let lessonType = 'presentation';
+    // // let overlay = document.getElementById('presentation_lesson__qr__overlay');
+    // // if (overlay == null) {
+    // //   lessonType = 'singlePage';
+    // //   overlay = document.getElementById('single_page_lesson__qr__overlay');
+    // // }
+    // // const overlayAR = overlay.clientWidth / overlay.clientHeight;
+    // // const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+    // // const qrHeight = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+
+    // // if (float === 'auto') {
+    // //   if (lessonType === 'presentation') {
+    // //     if (widthPercentage <= 0.5) {
+    // //       textContainer.style.height = qrHeight;
+    // //       this.spaceForDiagramElement.style.float = 'left';
+    // //     }
+    // //   }
+    // // }
+    // this.spaceForDiagramElement.style.width
+    //   = `calc(var(--lesson__qr_width) * ${widthPercentage})`;
+    // this.spaceForDiagramElement.style.height
+    //   = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+    // if (float != null) {
+    //   this.spaceForDiagramElement.style.float = float;
+    //   const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+    //   if (textContainer != null) {
+    //     textContainer.style.height = `calc(var(--lesson__qr_height) * ${heightPercentage})`;
+    //   }
+    // } else {
+    //   const textContainer = document.getElementById(`id_lesson__popup_box__text_container_${this.id}`);
+    //   if (textContainer != null) {
+    //     textContainer.style.height = `calc(var(--lesson__qr_height) * ${1 - heightPercentage - 0.25})`;
+    //     textContainer.style.display = 'block';
+    //   }
+    // }
   }
 
   showAll() {
