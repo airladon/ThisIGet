@@ -235,6 +235,13 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       return;
     }
 
+    // set size of font and window
+    if (lessonType === 'singlePage') {
+      this.setSinglePageSize();
+    } else {
+      this.setPresentationPageSize();
+    }
+    
     // Overlay aspect ratio
     overlayAR = overlay.clientWidth / overlay.clientHeight;
 
@@ -301,12 +308,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         = `calc(var(--lesson__qr_height) * ${ySizeT * 0.8})`;
     }
 
-    // set size of font and window
-    if (lessonType === 'singlePage') {
-      this.setSinglePageSize();
-    } else {
-      this.setPresentationPageSize();
-    }
+    
     // const rootElement = document.documentElement;
     // const lessonContent = document.getElementById('lesson__content');
     // if (lessonContent == null || rootElement == null) {
