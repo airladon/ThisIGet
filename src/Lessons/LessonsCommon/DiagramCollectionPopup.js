@@ -241,7 +241,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     } else {
       this.setPresentationPageSize();
     }
-    
+
     // Overlay aspect ratio
     overlayAR = overlay.clientWidth / overlay.clientHeight;
 
@@ -358,7 +358,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     const height = overlay.clientHeight;
     const qrWidth = width * 0.7;
     const qrHeight = height * 0.7;
-    let qrFontSize = fontSize;
+    const qrFontSize = fontSize;
     // if (width < 400) {
 
     // } else if (width < 600) {
@@ -368,6 +368,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     // }
     this.setRootElement(qrWidth, qrHeight, qrFontSize);
   }
+
+
   setSinglePageSize() {
     const overlay = document.getElementById('single_page_lesson__qr__overlay');
     const lessonContent = document.getElementById('lesson__content');
@@ -379,16 +381,12 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       .getPropertyValue('font-size'));
     const width = overlay.clientWidth;
     const height = overlay.clientHeight;
-    const qrWidth = width * 0.9;
-    const qrHeight = qrWidth;
-    let qrFontSize = fontSize;
-    // if (width < 400) {
-
-    // } else if (width < 600) {
-
-    // } else {
-
-    // }
+    const qrWidth = Math.min(800, width * 0.9);
+    let qrHeight = qrWidth * 2 / 3;
+    const qrFontSize = Math.max(fontSize, qrWidth / 35);
+    if (width < 600) {
+      qrHeight = Math.min(height * 0.8, qrHeight * 2);
+    }
     this.setRootElement(qrWidth, qrHeight, qrFontSize);
   }
 
