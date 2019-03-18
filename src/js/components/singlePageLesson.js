@@ -79,80 +79,9 @@ export default class SinglePageLessonComponent extends React.Component
   // }
 
   componentDidUpdate() {
-    
     setOnClicks(this.lesson.content.modifiers);
     console.log(this.lesson.content.diagram);
-
-    // const figs = [2, 3, 4, 5, 6, 7, 8];
-    // figs.forEach((f) => {
-    //   const canvas = document.getElementById(`id_figure${f}_asdf`);
-    //   // console.log(canvas)
-    //   const draw2D = new DrawContext2D(canvas)
-    //   // console.log(draw2D2)
-
-    //   const dim = this.lesson.content.diagram.elements[`_fig${f}`]._dimensions;
-    //   const d = dim._d;
-    //   const c = dim._c;
-    //   dim.updateContext(draw2D);
-    //   d.setScale(10, -80)
-    //   c.setScale(10, 80)
-    // });
-
     const d = this.lesson.content.diagram;
-    // d.draw(-1);
-    // const c = document.getElementById('id_figure3a_asdf');
-    // c.width = c.clientWidth * 2;
-    // c.height = c.clientHeight * 2;
-    // const ctx = c.getContext('2d');
-    // console.log(ctx)
-    // console.log(d.webglLow.gl.canvas)
-    // ctx.drawImage(d.webglLow.gl.canvas, 0, 0, d.webglLow.gl.canvas.width, d.webglLow.gl.canvas.height, 0, 0, c.width, c.height);
-    // ctx.drawImage(document.getElementById(`id_figure2_asdf`), 0, 400);
-    // document.addEventListener(
-    //   'scroll',
-    //   () => {
-    //     // console.log(window.pageYOffset)
-    //     d.scrolled = true;
-    //     // if (d.scrollingFast === false) {
-    //     //   d.renderAllElementsToTiedCanvases();
-    //     //   d.animateNextFrame(true);
-    //     // } else {
-    //     d.animateNextFrame(false, 'scroll event');
-    //     // }
-    //   },
-    //   false,
-    // );
-    // const fig1 = d.elements._fig1;
-    // const fig2 = d.elements._fig2;
-    // const fig3 = d.elements._fig3;
-    // console.log(fig1)
-    // console.log(fig3)
-    // let oldPos = fig1.getPosition();
-    // // const oldScale = fig1.getScale();
-    // fig1.setPosition(new Point(0, 0));
-    // // fig3.setScale(new Point(1, 1));
-    // fig1.show()
-    // fig2.hide()
-    // fig3.hide()
-    // // d.renderToCanvas(document.getElementById('id_figure1_asdf'), new Rect(-2.5, -1.25, 5, 2.5), 0, 0, d.webglLow.gl.canvas.width, 1000, 400, 200);
-    // // const elementCanvas = document.getElementById('id_figure1_asdf')
-    // // const glCanvas = d.webglLow.gl.canvas;
-    // // const width = elementCanvas.clientWidth * 3;
-    // // const height = elementCanvas.clientHeight * 3;
-    // // console.log(glCanvas.height, height)
-    // // d.renderToCanvas(document.getElementById('id_figure1_asdf'),
-    // //   new Rect(-5, -1, 10, 2),
-    // //   glCanvas.width / 2 - width / 2,
-    // //   glCanvas.height / 2 - height / 2,
-    // //   width, height,
-    // //   width, height,
-    // // );
-    // d.renderToCanvas(document.getElementById('id_figure1_asdf'));
-    // fig1.hide()
-    // fig1.setPosition(oldPos);
-    
-    // fig1.hide();
-    // fig2.hide();
 
     if (this.contentChange) {
       this.lesson.content.diagram.resize();
@@ -170,7 +99,6 @@ export default class SinglePageLessonComponent extends React.Component
       this.contentChange = false;
     }
     d.animateNextFrame();
-
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
     // d.renderElementToTiedCanvas('fig4');
@@ -249,6 +177,7 @@ export default class SinglePageLessonComponent extends React.Component
 
 
   renderContent() {
+    console.log('render content')
     let output = '';
     this.state.content.forEach((element) => {
       if (typeof element === 'string' && element.charAt(0) === '<') {

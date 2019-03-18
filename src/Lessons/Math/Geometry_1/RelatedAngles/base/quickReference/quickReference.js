@@ -115,6 +115,12 @@ export class QRAlternateAngles extends PopupBoxCollection {
       this._threeLines,
       new Rect(-1.5, -1.5, 3, 3),
     );
+    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
+    console.log(this.diagram.canvasLow.width)
+    console.log(this.diagram.canvasLow.clientWidth)
+    console.log(this._threeLines.tieToHTML.element.clientWidth)
+    // console.log(this._threeLines.getPosition())
+    // console.log(this._threeLines.getScale())
   }
 }
 

@@ -27,7 +27,7 @@ class SinglePageLessonContent extends SimpleLessonContent {
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
-    this.diagram.resize();
+    // this.diagram.resize();
     this.setElementContent();
     this.setContent();
     if (typeof this.content === 'string') {

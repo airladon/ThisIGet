@@ -201,7 +201,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       window: lensWindow,
       scale: 'fit',
     };
-    element.diagramTransforms = this.diagram.spaceTransforms;
+    // element.diagramTransforms = this.diagram.spaceTransforms;
     // console.log(element)
     element.updateHTMLElementTie(this.diagram.canvasLow);
   }
@@ -241,6 +241,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     } else {
       this.setPresentationPageSize();
     }
+    this.diagram.webglLow.resize();
+    this.diagram.draw2DLow.resize();
+    this.diagram.setSpaceTransforms();
+    this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    // this.diagram.setFirstTransform();
 
     // Overlay aspect ratio
     overlayAR = overlay.clientWidth / overlay.clientHeight;
@@ -390,6 +395,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.setRootElement(qrWidth, qrHeight, qrFontSize);
   }
 
+  // eslint-disable-next-line class-methods-use-this
   setRootElement(width: number, height: number, fontSize: number) {
     const rootElement = document.documentElement;
     rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
