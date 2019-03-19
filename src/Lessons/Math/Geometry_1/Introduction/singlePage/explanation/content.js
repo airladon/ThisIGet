@@ -46,7 +46,7 @@ class Content extends SinglePageLessonContent {
       new Transform('circles').scale(1, 1).translate(0, 0),
     ));
     this.loadQRs([
-      'related_angles',
+      'triangle_introduction',
       // 'adjacent_angles/base',
     ]);
   }
@@ -126,7 +126,7 @@ class Content extends SinglePageLessonContent {
       _found: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
-      _test: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.dimensions),
+      _test: click(this.showQR, [this, 'triangle_introduction', 'Main'], colors.dimensions),
     };
     this.content = [
       '# Shapes',

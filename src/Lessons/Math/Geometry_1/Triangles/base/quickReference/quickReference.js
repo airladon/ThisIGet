@@ -8,7 +8,7 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import details from '../../details';
 import version from '../version';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 const { html } = Fig.tools;
 
 export default class QRTriangle extends PopupBoxCollection {
@@ -41,7 +41,11 @@ export default class QRTriangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSpace({
+      location: 'auto',
+      ySize: 0.7,
+      xSize: 0.5,
+    });
     super.show();
     const tri = this._tri;
     tri.showAll();
@@ -55,6 +59,10 @@ export default class QRTriangle extends PopupBoxCollection {
     tri._angleB.hide();
     tri._triangle.hasTouchableElements = true;
     tri._triangle.autoShowAngles = true;
+    this.transformToQRWindow(
+      this._tri,
+      new Rect(-1.5, -1.5, 3, 3),
+    );
     this.diagram.animateNextFrame();
   }
 }

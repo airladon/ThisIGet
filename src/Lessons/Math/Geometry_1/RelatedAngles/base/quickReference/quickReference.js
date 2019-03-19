@@ -76,7 +76,7 @@ export class QRCorrespondingAngles extends PopupBoxCollection {
       this._threeLines,
       new Rect(-1.5, -1.5, 3, 3),
     );
-    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
+    // this._threeLines.updateHTMLElementTie(this.diagram.canvasLow);
   }
 }
 
@@ -124,7 +124,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
       this._threeLines,
       new Rect(-1.5, -1.5, 3, 3),
     );
-    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
+    // this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
     // console.log(this.diagram.canvasLow.width)
     // console.log(this.diagram.canvasLow.clientWidth)
     // console.log(this._threeLines.tieToHTML.element.clientWidth)
@@ -182,7 +182,7 @@ export class QRInteriorAngles extends PopupBoxCollection {
       this._threeLines,
       new Rect(-1.5, -1.5, 3, 3),
     );
-    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
+    // this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
   }
 }
 
@@ -257,7 +257,7 @@ export class QROppositeAngles extends PopupBoxCollection {
       this._opposite,
       new Rect(-1.5, -1.5, 3, 3),
     );
-    this._opposite.updateHTMLElementTie(this.diagram.canvasLow)
+    // this._opposite.updateHTMLElementTie(this.diagram.canvasLow)
     this.diagram.animateNextFrame();
   }
 }
