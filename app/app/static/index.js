@@ -4191,9 +4191,10 @@ function () {
   }, {
     key: "resize",
     value: function resize() {
-      if (this.elements != null) {
-        this.elements.updateLimits(this.limits, this.spaceTransforms);
-      } // if (this.count == null) {
+      // if (this.elements != null) {
+      //   this.elements.updateLimits(this.limits, this.spaceTransforms);
+      // }
+      // if (this.count == null) {
       //   this.count = 0;
       // } else {
       //   this.count += 1
@@ -4203,13 +4204,16 @@ function () {
       //   console.log('unrender')
       //   this.elements.unrenderAll();
       // }
-
-
       this.webglLow.resize(); // this.webglHigh.resize();
 
       this.draw2DLow.resize(); // this.draw2DHigh.resize();
 
       this.setSpaceTransforms();
+
+      if (this.elements != null) {
+        this.elements.updateLimits(this.limits, this.spaceTransforms);
+      }
+
       this.sizeHtmlText();
       this.elements.resizeHtmlObject();
       this.updateHTMLElementTie();

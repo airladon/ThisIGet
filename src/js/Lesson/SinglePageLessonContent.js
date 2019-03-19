@@ -54,6 +54,7 @@ class SinglePageLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
+    console.log('preparing to show QR')
     const overlay = document.getElementById('single_page_lesson__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '10';

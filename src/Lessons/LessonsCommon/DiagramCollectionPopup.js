@@ -25,6 +25,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   lastElement: HTMLElement;
   lastWindow: Rect;
+  internalResize: boolean;
 
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
@@ -127,6 +128,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     id: string = generateUniqueId(),
   ) {
     super(diagram, layout, transform);
+    this.internalResize = false;
     if (Collection) {
       // this.diagram.shapes = this.diagram.shapesHigh;
       // this.diagram.equation = this.diagram.equationHigh;
@@ -188,7 +190,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   resize() {
     super.resize();
-    this.hideAll();
+    if (this.internalResize === false) {
+      super.hideAll();
+      this.diagram.animateNextFrame();
+    }
   }
 
   transformToQRWindow(
@@ -241,10 +246,13 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     } else {
       this.setPresentationPageSize();
     }
-    this.diagram.webglLow.resize();
-    this.diagram.draw2DLow.resize();
-    this.diagram.setSpaceTransforms();
-    this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    // this.diagram.webglLow.resize();
+    // this.diagram.draw2DLow.resize();
+    // this.diagram.setSpaceTransforms();
+    // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    this.internalResize = true;
+    this.diagram.resize();
+    this.internalResize = false;
     // this.diagram.setFirstTransform();
 
     // Overlay aspect ratio

@@ -80,7 +80,6 @@ export default class SinglePageLessonComponent extends React.Component
 
   componentDidUpdate() {
     setOnClicks(this.lesson.content.modifiers);
-    console.log(this.lesson.content.diagram);
     const d = this.lesson.content.diagram;
 
     if (this.contentChange) {
@@ -177,7 +176,6 @@ export default class SinglePageLessonComponent extends React.Component
 
 
   renderContent() {
-    console.log('render content')
     let output = '';
     this.state.content.forEach((element) => {
       if (typeof element === 'string' && element.charAt(0) === '<') {
