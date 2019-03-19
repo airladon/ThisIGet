@@ -106,7 +106,8 @@
   position: relative;
   width: var(--lesson__qr_width);
   height: var(--lesson__qr_height);
-  top: var(--lesson__qr_top);
+  top: calc(50% - var(--lesson__qr_height) / 2);
+  // left: calc(50% - var(--lesson__qr_width) / 2);
   pointer-events: none;
   margin-left: auto;
   margin-right: auto;

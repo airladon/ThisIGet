@@ -23612,10 +23612,100 @@ function () {
     //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
     //   return vertex.transformBy(transform.matrix());
     // }
+    // updateHTMLElementTieScale(
+    //   diagramCanvas: HTMLElement,
+    // ) {
+    //   let tieToElement;
+    //   if (typeof this.tieToHTML.element === 'string') {
+    //     tieToElement = document.getElementById(this.tieToHTML.element);
+    //   } else if (this.tieToHTML.element instanceof HTMLElement) {
+    //     tieToElement = this.tieToHTML.element;
+    //   }
+    //   if (tieToElement != null) {
+    //     const tie = tieToElement.getBoundingClientRect();
+    //     const canvas = diagramCanvas.getBoundingClientRect();
+    //     const diagram = this.diagramLimits;
+    //     const dWindow = this.tieToHTML.window;
+    //     const cAspectRatio = canvas.width / canvas.height;
+    //     const dAspectRatio = diagram.width / diagram.height;
+    //     const tAspectRatio = tie.width / tie.height;
+    //     const wAspectRatio = dWindow.width / dWindow.height;
+    //     const topLeftPixels = new Point(
+    //       tie.left - canvas.left,
+    //       tie.top - canvas.top,
+    //     );
+    //     const bottomRightPixels = topLeftPixels.add(new Point(
+    //       tie.width, tie.height,
+    //     ));
+    //     const { pixelToDiagram } = this.diagramTransforms;
+    //     const topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
+    //     const bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
+    //     const width = bottomRight.x - topLeft.x;
+    //     const height = topLeft.y - bottomRight.y;
+    //     const center = topLeft.add(new Point(width / 2, -height / 2));
+    //     const scaleString = this.tieToHTML.scale.trim().toLowerCase();
+    //     let scaleX = 1;
+    //     let scaleY = 1;
+    //     const diagramToWindowScaleX = diagram.width / dWindow.width;
+    //     const diagramToWindowScaleY = diagram.height / dWindow.height;
+    //     // Window has no scaling impact on em, it only has impact on translation
+    //     if (scaleString.endsWith('em')) {
+    //       const scale = parseFloat(scaleString);
+    //       const em = parseFloat(getComputedStyle(tieToElement).fontSize);
+    //       // 0.2 is default font size in diagram units
+    //       const defaultFontScale = diagram.width / 0.2;
+    //       scaleX = scale * em * defaultFontScale / canvas.width;
+    //       scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
+    //     }
+    //     // Scale the maximum dimension of the window to the pixel value
+    //     if (scaleString.endsWith('px')) {
+    //       const maxPixels = parseFloat(scaleString);
+    //       if (wAspectRatio > 1) {
+    //         const scale = maxPixels / canvas.width;
+    //         scaleX = scale * diagramToWindowScaleX;
+    //         scaleY = scale * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
+    //       } else {
+    //         const scale = maxPixels / canvas.height;
+    //         scaleX = scale / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
+    //         scaleY = scale * diagramToWindowScaleY;
+    //       }
+    //     }
+    //     // Scale the window x to tie x, and window y to tie y
+    //     if (scaleString === 'stretch') {
+    //       scaleX = tie.width / canvas.width * diagramToWindowScaleX;
+    //       scaleY = tie.height / canvas.height * diagramToWindowScaleY;
+    //     }
+    //     // Scale so window either fits within the tie element, or fits only
+    //     // within the max dimension of the tie element
+    //     if (scaleString === 'max' || scaleString === 'fit') {
+    //       const fitHeightScale = new Point(
+    //         1 / cAspectRatio * dAspectRatio * diagramToWindowScaleY,
+    //         diagramToWindowScaleY,
+    //       );
+    //       const fitWidthScale = new Point(
+    //         diagramToWindowScaleX,
+    //         cAspectRatio / dAspectRatio * diagramToWindowScaleX,
+    //       );
+    //       if (
+    //         (scaleString === 'max' && tAspectRatio > wAspectRatio)
+    //         || (scaleString === 'fit' && tAspectRatio < wAspectRatio)
+    //       ) {
+    //         scaleX = fitWidthScale.x;
+    //         scaleY = fitWidthScale.y;
+    //       } else {
+    //         scaleX = fitHeightScale.x;
+    //         scaleY = fitHeightScale.y;
+    //       }
+    //     }
+    //     this.setScale(scaleX, scaleY);
+    //     return { center, scaleX, scaleY };
+    //   }
+    // }
 
   }, {
-    key: "updateHTMLElementTieScale",
-    value: function updateHTMLElementTieScale(diagramCanvas) {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(diagramCanvas) {
+      // First get the HTML element
       var tieToElement;
 
       if (typeof this.tieToHTML.element === 'string') {
@@ -23670,91 +23760,6 @@ function () {
 
             scaleX = _scale2 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
             scaleY = _scale2 * diagramToWindowScaleY;
-          }
-        } // Scale the window x to tie x, and window y to tie y
-
-
-        if (scaleString === 'stretch') {
-          scaleX = tie.width / canvas.width * diagramToWindowScaleX;
-          scaleY = tie.height / canvas.height * diagramToWindowScaleY;
-        } // Scale so window either fits within the tie element, or fits only
-        // within the max dimension of the tie element
-
-
-        if (scaleString === 'max' || scaleString === 'fit') {
-          var fitHeightScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / cAspectRatio * dAspectRatio * diagramToWindowScaleY, diagramToWindowScaleY);
-          var fitWidthScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](diagramToWindowScaleX, cAspectRatio / dAspectRatio * diagramToWindowScaleX);
-
-          if (scaleString === 'max' && tAspectRatio > wAspectRatio || scaleString === 'fit' && tAspectRatio < wAspectRatio) {
-            scaleX = fitWidthScale.x;
-            scaleY = fitWidthScale.y;
-          } else {
-            scaleX = fitHeightScale.x;
-            scaleY = fitHeightScale.y;
-          }
-        }
-
-        this.setScale(scaleX, scaleY);
-      }
-    }
-  }, {
-    key: "updateHTMLElementTie",
-    value: function updateHTMLElementTie(diagramCanvas) {
-      // First get the HTML element
-      var tieToElement;
-
-      if (typeof this.tieToHTML.element === 'string') {
-        tieToElement = document.getElementById(this.tieToHTML.element);
-      } else if (this.tieToHTML.element instanceof HTMLElement) {
-        tieToElement = this.tieToHTML.element;
-      }
-
-      if (tieToElement != null) {
-        var tie = tieToElement.getBoundingClientRect();
-        var canvas = diagramCanvas.getBoundingClientRect();
-        var diagram = this.diagramLimits;
-        var dWindow = this.tieToHTML.window;
-        var cAspectRatio = canvas.width / canvas.height;
-        var dAspectRatio = diagram.width / diagram.height;
-        var tAspectRatio = tie.width / tie.height;
-        var wAspectRatio = dWindow.width / dWindow.height;
-        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.left - canvas.left, tie.top - canvas.top);
-        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.width, tie.height));
-        var pixelToDiagram = this.diagramTransforms.pixelToDiagram;
-        var topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
-        var bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
-        var width = bottomRight.x - topLeft.x;
-        var height = topLeft.y - bottomRight.y;
-        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
-        var scaleString = this.tieToHTML.scale.trim().toLowerCase();
-        var scaleX = 1;
-        var scaleY = 1;
-        var diagramToWindowScaleX = diagram.width / dWindow.width;
-        var diagramToWindowScaleY = diagram.height / dWindow.height; // Window has no scaling impact on em, it only has impact on translation
-
-        if (scaleString.endsWith('em')) {
-          var scale = parseFloat(scaleString);
-          var em = parseFloat(getComputedStyle(tieToElement).fontSize); // 0.2 is default font size in diagram units
-
-          var defaultFontScale = diagram.width / 0.2;
-          scaleX = scale * em * defaultFontScale / canvas.width;
-          scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
-        } // Scale the maximum dimension of the window to the pixel value
-
-
-        if (scaleString.endsWith('px')) {
-          var maxPixels = parseFloat(scaleString);
-
-          if (wAspectRatio > 1) {
-            var _scale3 = maxPixels / canvas.width;
-
-            scaleX = _scale3 * diagramToWindowScaleX;
-            scaleY = _scale3 * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
-          } else {
-            var _scale4 = maxPixels / canvas.height;
-
-            scaleX = _scale4 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
-            scaleY = _scale4 * diagramToWindowScaleY;
           }
         } // Scale the window x to tie x, and window y to tie y
 
