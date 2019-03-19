@@ -59,10 +59,6 @@ export default class Collection extends CommonDiagramCollection {
 
   appearCircleAndMoveWheel() {
     this.stop(true, true);
-    // this.animations.cancelAll('complete');
-    // this._fig1._circle.animations.cancelAll();
-    // this._fig1._wheel.animations.cancelAll();
-
     this._fig1._circle.hide();
     this._fig1._circle.setScenario('centerLeft');
     this._fig1._wheel.setScenario('centerLeft');
@@ -85,10 +81,10 @@ export default class Collection extends CommonDiagramCollection {
 
     if (angle < 0.05) {
       circumference._arrow.hide();
-      circumference._line.angleToDraw = angle;
+      circumference._line.setAngleToDraw(angle);
     } else {
       circumference._arrow.show();
-      circumference._line.angleToDraw = angle - arrowHeightAngle / 2;
+      circumference._line.setAngleToDraw(angle - arrowHeightAngle / 2);
       circumference._arrow.setPosition(new Point(
         radius * Math.cos(-angle),
         radius * Math.sin(-angle),
@@ -121,8 +117,6 @@ export default class Collection extends CommonDiagramCollection {
     done: (cancelled: boolean) => void = () => {},
   ) {
     this.stop(true, true);
-    // this.animations.cancelAll('complete');
-    // dimensions.animations.cancelAll('complete');
     const c = dimensions._c;
     const d = dimensions._d;
     const darkCircle = dimensions._darkCircle;
@@ -146,14 +140,8 @@ export default class Collection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  // pulseCircle() {
-  //   this._circle.pulseThickNow(1, 1.1, 5);
-  //   this.diagram.animateNextFrame();
-  // }
-
   pulseProperties(dimensions: TypeDimensions) {
     this.stop(true, true);
-    // this.animations.cancelAll('complete');
     dimensions._c.pulseScaleNow(1, 1.7);
     dimensions._d.pulseScaleNow(1, 1.7);
     this.diagram.animateNextFrame();
@@ -161,7 +149,6 @@ export default class Collection extends CommonDiagramCollection {
 
   pulseEquation(dimensions: TypeDimensions) {
     this.stop(true, true);
-    // this.animations.cancelAll('complete');
     dimensions._eqn.pulseScaleNow(1, 1.7);
     this.diagram.animateNextFrame();
   }
@@ -170,8 +157,6 @@ export default class Collection extends CommonDiagramCollection {
     const prop = dimensions;
     const eqn = prop._eqn;
     this.stop(true, true);
-    // eqn.animations.cancelAll('complete');
-    // this.animations.cancelAll('complete');
     eqn.showForm('base');
 
     const cPosition = eqn._c.getPosition();
@@ -205,9 +190,6 @@ export default class Collection extends CommonDiagramCollection {
     if (this.propertiesPosition === 0) {
       goToScenario = 'right';
     }
-    // } else if (this.propertiesPosition === 1) {
-    //   goToScenario = 'moreRight';
-    // }
     this.propertiesPosition = (this.propertiesPosition + 1) % 2;
     dimensions.setScenario(goToScenario);
     this.growDimensions(dimensions, 2);
@@ -222,8 +204,6 @@ export default class Collection extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.propertiesPosition = 0;
-    // const circles = this.diagram.shapes.collection(new Transform('circles').scale(1, 1).translate(0, 0));
-    // this.diagram.elements.add('circles', circles);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
   }

@@ -25532,6 +25532,12 @@ function (_DiagramElement) {
   }
 
   _createClass(DiagramElementPrimative, [{
+    key: "setAngleToDraw",
+    value: function setAngleToDraw() {
+      var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.angleToDraw = intputAngle;
+    }
+  }, {
     key: "isBeingTouched",
     value: function isBeingTouched(glLocation) {
       if (!this.isTouchable) {

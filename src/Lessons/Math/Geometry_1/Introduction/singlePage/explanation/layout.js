@@ -193,34 +193,6 @@ export default function lessonLayout() {
     },
   };
 
-  // const equation = {
-  //   name: 'eqn',
-  //   method: 'addEquation',
-  //   options: {
-  //     color: layout.colors.dimensions,
-  //     scale: 1,
-  //     defaultFormAlignment: {
-  //       alignH: 'center',
-  //     },
-  //     elements: {
-  //       c: 'g',
-  //       'pi': 'π',
-  //       'd': 'd',
-  //       'equals': ' = ',
-  //       '_2': '2',
-  //       v: { symbol: 'vinculum' },
-  //     },
-  //     forms: {
-  //       'base': [{ frac: ['c', 'd', 'v'] }, 'equals', { sup: ['pi', '_2'] }, 'space'],
-  //     },
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       left: { position: new Point(-radius * 1.8, 0) },
-  //       bottom: { position: new Point(0, -radius * 1.5) },
-  //     },
-  //   },
-  // };
 
   const dimensions = {
     name: 'dimensions',
@@ -251,21 +223,6 @@ export default function lessonLayout() {
         method: 'text',
         options: [text, textC],
       },
-      // {
-      //   name: 'c',
-      //   method: 'text',
-      //   options: {
-      //     size: 0.2,
-      //     text: 'Hello there',
-      //     family: 'Times New Roman',
-      //     alignH: 'center',
-      //     alignV: 'bottom',
-      //     weight: 300,
-      //     style: 'italic',
-      //     color: [1, 0, 0, 1],
-      //     transform: new Transform().scale(1, 1).translate(0, 0),
-      //   },
-      // },
       circumference,
     ],
   };
@@ -295,13 +252,6 @@ export default function lessonLayout() {
     method: 'collection',
     options: collection,
     addElements: [
-      // {
-      //   name: 'wheel',
-      //   method: 'polygon',
-      //   options: [filledCircle, wheelTex],
-      //   mods,
-      //   scenario: 'left',
-      // },
       {
         name: 'clock',
         method: 'polygon',
@@ -320,11 +270,32 @@ export default function lessonLayout() {
     ],
   };
 
-  layout.fig4 = joinObjects({}, layout.fig3, { name: 'fig4' });
-  layout.fig5 = joinObjects({}, layout.fig3, { name: 'fig5' });
-  layout.fig6 = joinObjects({}, layout.fig3, { name: 'fig6' });
-  layout.fig7 = joinObjects({}, layout.fig3, { name: 'fig7' });
-  layout.fig8 = joinObjects({}, layout.fig3, { name: 'fig8' });
+  // ////////////////////////////////////////////////////////////////////////
+  // Figure 3
+  // ////////////////////////////////////////////////////////////////////////
+  duplicateFromTo(dimensions, dimensions2);
+  // dimensions2.addElements[0].options[0].color = [0.9, 0.9, 0.9, 0.2];
+  layout.fig4 = {
+    name: 'fig4',
+    method: 'collection',
+    options: collection,
+    addElements: [
+      {
+        name: 'earth',
+        method: 'polygon',
+        options: [filledCircle, earthTex],
+        mods,
+        scenario: 'center',
+      },
+      // dimensions2,
+    ],
+  };
+
+  layout.fig4 = joinObjects({}, layout.fig4, { name: 'fig4' });
+  // layout.fig5 = joinObjects({}, layout.fig3, { name: 'fig5' });
+  // layout.fig6 = joinObjects({}, layout.fig3, { name: 'fig6' });
+  // layout.fig7 = joinObjects({}, layout.fig3, { name: 'fig7' });
+  // layout.fig8 = joinObjects({}, layout.fig3, { name: 'fig8' });
 
   // const fig1 = ['', 'fig1', 'collection', [collection], mods, [
   //   ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods],
@@ -490,10 +461,10 @@ export default function lessonLayout() {
     layout.fig2,
     layout.fig3,
     layout.fig4,
-    layout.fig5,
-    layout.fig6,
-    layout.fig7,
-    layout.fig8,
+    // layout.fig5,
+    // layout.fig6,
+    // layout.fig7,
+    // layout.fig8,
     // layout.wheel,
     // layout.earth,
     // layout.ball,
