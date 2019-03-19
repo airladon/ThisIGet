@@ -90,6 +90,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     const textContainer = document.createElement('div');
     textContainer.classList.add('lesson__popup_box__text_container');
     textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
+
+    const centeringTextContainer = document.createElement('div');
+    centeringTextContainer.classList.add('lesson__popup_box__centering_text_container');
+    centeringTextContainer.id = `id_lesson__popup_box__centering_text_container__${this.id}`;
+    textContainer.appendChild(centeringTextContainer);
     // const textSubContainer = document.createElement('div');
     // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
     // textContainer.appendChild(textSubContainer);
@@ -99,7 +104,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     descriptionElement.id = `id_lesson__popup_box__text__${id}`;
     this.descriptionElement = descriptionElement;
     this.setDescription(description);
-    textContainer.appendChild(descriptionElement);
+    centeringTextContainer.appendChild(descriptionElement);
 
     const linkElement = document.createElement('div');
     linkElement.classList.add('lesson__popup_box__link');
@@ -330,11 +335,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       diagramElement.style.width
         = `calc(var(--lesson__qr_width) * ${xSizeD})`;
       diagramElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.8})`;
+        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.75})`;
       textElement.style.width
         = `calc(var(--lesson__qr_width) * ${xSizeT})`;
       textElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.8})`;
+        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.75})`;
     }
 
     
