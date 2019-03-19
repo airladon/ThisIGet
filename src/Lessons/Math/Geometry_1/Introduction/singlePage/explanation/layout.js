@@ -68,6 +68,23 @@ export default function lessonLayout() {
     textureLocation: textureFile,
   });
 
+  const activator = (width, height) => ({
+    name: 'activator',
+    method: 'polyLine',
+    options: {
+      points: [
+        new Point(-width / 2, -height / 2),
+        new Point(-width / 2, height / 2),
+        new Point(width / 2, height / 2),
+        new Point(width / 2, -height / 2),
+      ],
+      color: [0, 0, 0, 0],
+    },
+    mods: {
+      isTouchable: true,
+    },
+  });
+
 
   // ////////////////////////////////////////////////////////////////////////
   // Figure 1
@@ -77,11 +94,18 @@ export default function lessonLayout() {
     method: 'collection',
     options: collection,
     addElements: [
+      activator(4, 2),
       {
         name: 'wheel',
         method: 'polygon',
         options: [filledCircle, wheelTex],
-        mods,
+        mods: joinObjects({}, mods, {
+          isTouchable: true,
+          isMovable: true,
+          move: {
+            type: 'rotation',
+          },
+        }),
       },
       {
         name: 'circle',
@@ -90,6 +114,7 @@ export default function lessonLayout() {
         mods,
       },
     ],
+    mods: { hasTouchableElements: true },
   };
 
   // ////////////////////////////////////////////////////////////////////////
@@ -232,6 +257,7 @@ export default function lessonLayout() {
     method: 'collection',
     options: collection,
     addElements: [
+      activator(4.5, 2.6),
       {
         name: 'circle',
         method: 'polygon',
@@ -239,6 +265,7 @@ export default function lessonLayout() {
       },
       dimensions,
     ],
+    mods: { hasTouchableElements: true },
   };
 
   // ////////////////////////////////////////////////////////////////////////
@@ -252,6 +279,7 @@ export default function lessonLayout() {
     method: 'collection',
     options: collection,
     addElements: [
+      activator(5, 3),
       {
         name: 'clock',
         method: 'polygon',
@@ -268,6 +296,7 @@ export default function lessonLayout() {
       },
       dimensions2,
     ],
+    mods: { hasTouchableElements: true },
   };
 
   // ////////////////////////////////////////////////////////////////////////

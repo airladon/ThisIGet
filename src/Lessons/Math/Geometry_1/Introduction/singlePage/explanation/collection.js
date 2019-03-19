@@ -115,8 +115,11 @@ export default class Collection extends CommonDiagramCollection {
     dimensions: TypeDimensions,
     time: number = 4,
     done: (cancelled: boolean) => void = () => {},
+    stop: boolean = true,
   ) {
-    this.stop(true, true);
+    if (stop) {
+      this.stop(true, true);
+    }
     const c = dimensions._c;
     const d = dimensions._d;
     const darkCircle = dimensions._darkCircle;
@@ -153,7 +156,10 @@ export default class Collection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  makeEqnFromProperties(dimensions: TypeDimensions) {
+  makeEqnFromProperties(dimensions: TypeDimensions, stop: boolean = true) {
+    if (stop) {
+      this.stop(true, true);
+    }
     const prop = dimensions;
     const eqn = prop._eqn;
     this.stop(true, true);
@@ -181,6 +187,26 @@ export default class Collection extends CommonDiagramCollection {
         eqn._equals.anim.dissolveIn(1),
         eqn._pi.anim.dissolveIn(1),
       ])
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  makeDimensions(dimensions: TypeDimensions) {
+    this.stop(true, true);
+    const prop = dimensions;
+    const eqn = prop._eqn;
+    eqn.hideAll();
+    dimensions.animations.new()
+      .trigger({
+        callback: this.growDimensions.bind(
+          this, dimensions, 4, () => {}, false,
+        ),
+        duration: 4,
+      })
+      .trigger({
+        callback: this.makeEqnFromProperties.bind(this, dimensions, false),
+        duration: 2.5,
+      })
       .start();
     this.diagram.animateNextFrame();
   }

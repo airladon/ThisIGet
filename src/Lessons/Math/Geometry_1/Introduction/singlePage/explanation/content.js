@@ -61,21 +61,23 @@ class Content extends SinglePageLessonContent {
     // Set figure one initial conditions
     diag._fig1._wheel.setScenario('centerLeft');
     diag._fig1._circle.setScenario('centerRight');
-    diag._fig1._wheel.isMovable = true;
-    diag._fig1._wheel.isTouchable = true;
-    diag._fig1.hasTouchableElements = true;
-    diag._fig1._wheel.move.type = 'rotation';
+    // diag._fig1._wheel.isMovable = true;
+    // diag._fig1._wheel.isTouchable = true;
+    // diag._fig1._wheel.move.type = 'rotation';
+    diag._fig1._activator.onClick = diag.appearCircleAndMoveWheel.bind(diag);
 
     // Figure 2
     diag.circumferenceAtAngle(dim2._circumference, Math.PI * 2);
     dim2._eqn.setScenario('left');
     dim2._eqn.showForm('0');
+    diag._fig2._activator.onClick = diag.makeDimensions.bind(diag, dim2);
 
     // figure 3
     diag.circumferenceAtAngle(dim3._circumference, Math.PI * 2);
     dim3.setScenario('left');
     dim3._eqn.setScenario('bottom');
     dim3._eqn.showForm('0');
+    diag._fig3._activator.onClick = diag.toggleProperties.bind(diag, dim3);
 
     // figure 4
     diag._fig4.setScenario('center');
