@@ -7,7 +7,7 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import details from '../../details';
 import version from '../version';
 
-const { Transform, Point, Rect } = Fig;
+const { Transform, Rect } = Fig;
 const { html } = Fig.tools;
 
 function showThreeLines(
