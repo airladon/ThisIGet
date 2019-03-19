@@ -188,19 +188,23 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     }
   }
 
-  resize() {
-    super.resize();
+  resize(diagramHTMLElement: ?HTMLElement = null) {
+    super.resize(diagramHTMLElement);
+    // console.log(this.internalResize, this.isShown)
+    if (this.internalResize === true) {
+      return;
+    }
     if (this.isShown) {
-      if (this.internalResize === false) {
-      //     console.log('hiding')
-      //     console.trace()
-        this.hideAll();
-        this.diagram.animateNextFrame();
-      }
+      this.hideAll();
     } else {
       super.hideAll();
-      this.diagram.animateNextFrame();
     }
+    // // if ((this.internalResize === false && this.isShown) || this.internalResize === true) {
+    // //   this.hideAll();
+    // // } else {
+    // //   super.hideAll();
+    // // }
+    this.diagram.animateNextFrame();
   }
 
   transformToQRWindow(
@@ -257,12 +261,14 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     // this.diagram.draw2DLow.resize();
     // this.diagram.setSpaceTransforms();
     // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
-    this.internalResize = true;
+    // this.internalResize = true;
     // console.log('1')
     // console.trace()
-    this.diagram.resize();
+    this.tieToHTML.updateOnResize = false;
+    this.diagram.resize(true);
+    this.tieToHTML.updateOnResize = true;
     // console.log('2')
-    this.internalResize = false;
+    // this.internalResize = false;
     // this.diagram.setFirstTransform();
 
     // Overlay aspect ratio

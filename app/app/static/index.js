@@ -3849,7 +3849,7 @@ function () {
       this.elements.name = 'diagramRoot';
     }
 
-    window.addEventListener('resize', this.resize.bind(this));
+    window.addEventListener('resize', this.resize.bind(this, false));
     this.sizeHtmlText();
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
@@ -4191,6 +4191,7 @@ function () {
   }, {
     key: "resize",
     value: function resize() {
+      var skipHTMLTie = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       // if (this.elements != null) {
       //   this.elements.updateLimits(this.limits, this.spaceTransforms);
       // }
@@ -4214,10 +4215,14 @@ function () {
         this.elements.updateLimits(this.limits, this.spaceTransforms);
       }
 
-      this.sizeHtmlText();
-      this.elements.resizeHtmlObject();
-      this.updateHTMLElementTie();
-      this.elements.resize();
+      this.sizeHtmlText(); // this.elements.resizeHtmlObject();
+      // this.updateHTMLElementTie();
+
+      if (skipHTMLTie) {
+        this.elements.resize();
+      } else {
+        this.elements.resize(this.canvasLow);
+      }
 
       if (this.oldWidth !== this.canvasLow.clientWidth) {
         // this.unrenderAll();
@@ -23489,7 +23494,8 @@ function () {
     this.tieToHTML = {
       element: null,
       scale: 'fit',
-      window: this.diagramLimits
+      window: this.diagramLimits,
+      updateOnResize: true
     };
     this.isRenderedAsImage = false;
     this.unrenderNextDraw = false; // this.tieToHTMLElement = null;
@@ -25143,6 +25149,16 @@ function () {
     value: function updateLimits(limits, transforms) {
       this.diagramLimits = limits;
       this.diagramTransforms = transforms;
+    }
+  }, {
+    key: "resize",
+    value: function resize() {
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.resizeHtmlObject();
+
+      if (diagramHTMLElement && this.tieToHTML.updateOnResize) {
+        this.updateHTMLElementTie(diagramHTMLElement);
+      }
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -25605,12 +25621,15 @@ function (_DiagramElement) {
       if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
         this.drawingObject.clear();
       }
-    } // use this for any gl canvas resize events
-
+    }
   }, {
     key: "resize",
     value: function resize() {
-      // If gl canvas is resized, webgl text will need to be updated.
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _get(_getPrototypeOf(DiagramElementPrimative.prototype), "resize", this).call(this, diagramHTMLElement); // If gl canvas is resized, webgl text will need to be updated.
+
+
       if (this.drawingObject.type === 'vertexText') {
         var pixelToVertexScale = this.getPixelToVertexSpaceScale(); // $FlowFixMe
 
@@ -26227,9 +26246,13 @@ function (_DiagramElement2) {
   }, {
     key: "resize",
     value: function resize() {
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "resize", this).call(this, diagramHTMLElement);
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.resize();
+        element.resize(diagramHTMLElement);
       }
     }
   }, {
