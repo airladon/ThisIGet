@@ -341,42 +341,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       textElement.style.height
         = `calc(var(--lesson__qr_height) * ${ySizeT * 0.75})`;
     }
-
-    
-    // const rootElement = document.documentElement;
-    // const lessonContent = document.getElementById('lesson__content');
-    // if (lessonContent == null || rootElement == null) {
-    //   return;
-    // }
-    // const contentFontSize = parseFloat(window
-    //   .getComputedStyle(lessonContent, null)
-    //   .getPropertyValue('font-size'));
-    // const diagramFontSize = parseFloat(
-    //   rootElement.style.getPropertyValue('--lesson__diagram-font-size'),
-    // );
-    // const contentWidth = parseFloat(rootElement.style.getPropertyValue('--lesson__content-width'));
-    // const contentHeight = parseFloat(rootElement.style.getPropertyValue('--lesson__content-height'));
-    // const qrWidth = contentWidth;
-    // let qrHeight = contentHeight;
-    // let fontSize = diagramFontSize;
-    // let multiplier = 0.7;
-
-    // if (lessonType === 'singlePage') {
-    //   fontSize = contentFontSize * 0.8;
-    //   multiplier = 0.9;
-    //   if (overlay.clientWidth < 600) {
-    //     qrHeight = contentHeight * 1.5;
-    //   } else if (overlay.clientWidth < 500) {
-    //     qrHeight = contentHeight * 2.0;
-    //   } else {
-    //     fontSize = Math.min(contentFontSize * 0.8, 25);
-    //   }
-    // }
-    // // console.log(rootElement.style.getPropertyValue('--lesson__content-height'))
-    // // console.log(qrWidth, multiplier, qrHeight, fontSize)
-    // rootElement.style.setProperty('--lesson__qr_height', `${qrHeight * multiplier}px`);
-    // rootElement.style.setProperty('--lesson__qr_width', `${qrWidth * multiplier}px`);
-    // rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
   }
 
   setPresentationPageSize() {

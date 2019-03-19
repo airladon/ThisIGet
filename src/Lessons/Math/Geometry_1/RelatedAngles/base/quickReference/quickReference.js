@@ -61,13 +61,22 @@ export class QRCorrespondingAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace(1, 0.7);
+    this.setDiagramSpace({
+      location: 'auto',
+      ySize: 0.7,
+      xSize: 0.5,
+    });
     super.show();
     showThreeLines(
       this._threeLines,
       this._threeLines.correspondingToggleAngles.bind(this._threeLines),
       this.layout.colors.line,
     );
+    this.transformToQRWindow(
+      this._threeLines,
+      new Rect(-1.5, -1.5, 3, 3),
+    );
+    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
   }
 }
 
@@ -95,7 +104,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
       ),
     };
     this.setTitle('Alternate Angles');
-    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|. intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel', modifiers);
+    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|. intersecting line crossing two lines.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -157,7 +166,11 @@ export class QRInteriorAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.55);
+    this.setDiagramSpace({
+      location: 'auto',
+      ySize: 0.7,
+      xSize: 0.5,
+    });
     super.show();
     this._threeLines.setUnits('deg');
     showThreeLines(
@@ -165,6 +178,11 @@ export class QRInteriorAngles extends PopupBoxCollection {
       this._threeLines.interiorToggleAngles.bind(this._threeLines, false),
       this.layout.colors.line,
     );
+    this.transformToQRWindow(
+      this._threeLines,
+      new Rect(-1.5, -1.5, 3, 3),
+    );
+    this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
   }
 }
 
@@ -198,7 +216,11 @@ export class QROppositeAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.55);
+    this.setDiagramSpace({
+      location: 'auto',
+      ySize: 0.7,
+      xSize: 0.5,
+    });
     super.show();
     const opp = this._opposite;
     opp.transform.updateScale(0.7, 0.7);
@@ -231,6 +253,11 @@ export class QROppositeAngles extends PopupBoxCollection {
     opp._angleA.showForm('a');
     opp._angleC.showForm('a');
     // opp.toggleOppositeAngles();
+    this.transformToQRWindow(
+      this._opposite,
+      new Rect(-1.5, -1.5, 3, 3),
+    );
+    this._opposite.updateHTMLElementTie(this.diagram.canvasLow)
     this.diagram.animateNextFrame();
   }
 }

@@ -109,6 +109,7 @@ class SimpleLessonContent {
                 const element = this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
                 const { isShown } = element;
                 const qr = new window.quickReference[uid][vUid][qrid](this.qrDiagram);
+                console.log(qr)
                 // console.log(qr)
                 qr.prepareToHideAll = this.prepareToHideQR.bind(this);
                 qr.prepareToShow = this.prepareToShowQR.bind(this);

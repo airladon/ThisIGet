@@ -17,7 +17,7 @@ const qrids = [
   'Alternate',
   'Interior',
   'Opposite',
-  'Corrseponding',
+  'Corresponding',
 ];
 
 class Content extends PresentationLessonContent {
