@@ -317,7 +317,7 @@ class AngleCircle extends CommonDiagramCollection {
     };
 
     collection.init = () => {
-      collection.setFirstTransform(this.diagram.diagramToGLSpaceTransform);
+      collection.setFirstTransform(this.diagram.spaceTransforms.diagramToGL);
       collection.layout();
     };
     return collection;

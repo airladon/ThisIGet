@@ -25125,7 +25125,8 @@ function () {
     }
   }, {
     key: "updateLimits",
-    value: function updateLimits(limits, transforms) {
+    value: function updateLimits(limits) {
+      var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;
       this.diagramLimits = limits;
       this.diagramTransforms = transforms;
     }
@@ -26319,7 +26320,9 @@ function (_DiagramElement2) {
     }
   }, {
     key: "updateLimits",
-    value: function updateLimits(limits, transforms) {
+    value: function updateLimits(limits) {
+      var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.updateLimits(limits, transforms);

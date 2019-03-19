@@ -430,7 +430,7 @@ export function makeSelectorText(
       disabledColor,
       font,
     );
-    text.setFirstTransform(diagram.diagramToGLSpaceTransform);
+    text.setFirstTransform(diagram.spaceTransforms.diagramToGL);
     text.isTouchable = true;
     text.onClick = selectorHandlerText.bind(this, selectorItem.id);
     const bounds = text.getRelativeDiagramBoundingRect();
@@ -445,7 +445,7 @@ export function makeSelectorText(
         disabledColor,
         font,
       );
-      sep.setFirstTransform(diagram.diagramToGLSpaceTransform);
+      sep.setFirstTransform(diagram.spaceTransforms.diagramToGL);
       const sepBounds = sep.getRelativeDiagramBoundingRect();
       width += sepBounds.width;
       widthRecord.push(sepBounds.width);
@@ -515,7 +515,7 @@ export function makeVerticalSelectorText(
       disabledColor,
       font,
     );
-    text.setFirstTransform(diagram.diagramToGLSpaceTransform);
+    text.setFirstTransform(diagram.spaceTransforms.diagramToGL);
     text.isTouchable = true;
     text.onClick = selectorHandlerText.bind(this, selectorItem.id);
     const bounds = text.getRelativeDiagramBoundingRect();

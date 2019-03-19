@@ -163,7 +163,7 @@ export default class TriangleCollection extends CommonDiagramCollection {
         this._tri2.setTriangleCollectionScaleTo(new Point(1, 1));
         shown.forEach((e) => { e.showAll(); });
       };
-      shown.forEach((e) => { e.hide(); });
+      shown.forEach((e) => { e.hideAll(); });
       this.moveToFuturePositions(1, done);
     }
     this.diagram.animateNextFrame();

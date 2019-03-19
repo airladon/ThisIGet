@@ -37,7 +37,7 @@ class LessonDiagram extends CommonLessonDiagram {
   resize() {
     const { limits } = layout;
     this.limits = limits;
-    this.elements.updateLimits(limits);
+    // this.elements.updateLimits(limits);
     super.resize();
   }
 

@@ -7,7 +7,7 @@ import details from '../../details';
 import version from '../version';
 import TriangleAreaCollection from '../common/diagramCollectionTri';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 
 export default class QRTriangleArea extends PopupBoxCollection {
   _collection: TriangleAreaCollection;
@@ -34,7 +34,7 @@ export default class QRTriangleArea extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     // collection.showAll();
@@ -44,8 +44,9 @@ export default class QRTriangleArea extends PopupBoxCollection {
     collection._sideTri2Height.showAll();
     collection._tri2AreaEqn.show();
     collection.eqns.tri2AreaEqn.showForm('10');
-    collection.transform.updateScale(0.7, 0.7);
+    // collection.transform.updateScale(0.7, 0.7);
     // collection.setPosition(this.layout.position);
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }

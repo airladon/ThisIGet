@@ -66,11 +66,7 @@ export class QRComplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({
-      location: 'auto',
-      ySize: 0.7,
-      xSize: 0.5,
-    });
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('com_add');
@@ -82,10 +78,7 @@ export class QRComplementaryAngles extends PopupBoxCollection {
       this.layout.colors.angleB,
       this.layout.complementary.linesPosition,
     );
-    this.transformToQRWindow(
-      this._adjacent,
-      new Rect(-1.5, -1.5, 3, 3),
-    );
+    this.transformToQRWindow(this._adjacent, new Rect(-1.5, -1.5, 3, 3));
     // this._adjacent.updateHTMLElementTie(this.diagram.canvasLow)
   }
 }
@@ -115,7 +108,7 @@ export class QRSupplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2, 1.5);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('sup_add');
@@ -127,6 +120,7 @@ export class QRSupplementaryAngles extends PopupBoxCollection {
       this.layout.colors.angleB,
       this.layout.supplementary.linesPosition,
     );
+    this.transformToQRWindow(this._adjacent, new Rect(-1.5, -1.5, 3, 3));
   }
 }
 
@@ -155,7 +149,7 @@ export class QRExplementaryAngles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 2);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     this._adjacent._eqn.show();
     this._adjacent.eqn.showForm('exp_add');
@@ -167,6 +161,7 @@ export class QRExplementaryAngles extends PopupBoxCollection {
       this.layout.colors.angleB,
       this.layout.explementary.linesPosition,
     );
+    this.transformToQRWindow(this._adjacent, new Rect(-1.5, -1.5, 3, 3));
   }
 }
 

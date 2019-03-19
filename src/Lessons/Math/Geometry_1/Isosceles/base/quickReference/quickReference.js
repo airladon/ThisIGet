@@ -70,10 +70,9 @@ export default class QRIsosceles extends PopupBoxCollection {
     iTri._side31.showAll();
     iTri._angle1.showAll();
     iTri._angle2.showAll();
-    console.log(iTri)
     // collection.transform.updateScale(0.6, 0.6);
     collection.setPosition(this.layout.position);
-    this.transformToQRWindow(collection, new Rect(-1.6, -1.2, 3.2, 2.4));
+    this.transformToQRWindow(iTri, new Rect(-1.6, -0.9, 3.2, 2.4));
     this.diagram.animateNextFrame();
   }
 }

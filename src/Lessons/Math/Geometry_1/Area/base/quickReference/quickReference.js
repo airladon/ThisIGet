@@ -9,7 +9,7 @@ import version from '../version';
 import MeasureCollection from '../common/diagramCollectionMeasure';
 import RectAreaCollection from '../common/diagramCollectionRect';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 
 export class QRArea extends PopupBoxCollection {
   _collection: MeasureCollection;
@@ -43,7 +43,7 @@ export class QRArea extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.4);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -54,8 +54,8 @@ export class QRArea extends PopupBoxCollection {
     collection._circleLabelMeters.show();
     collection._triangleA.show();
     collection._triLabelMeters.show();
-    collection.transform.updateScale(0.5, 0.5);
-    collection.setPosition(this.layout.areaPosition);
+    // collection.transform.updateScale(0.5, 0.5);
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -89,7 +89,7 @@ export class QRRect extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.5);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -97,8 +97,9 @@ export class QRRect extends PopupBoxCollection {
     collection._sideWidth.showAll();
     collection._sideHeight.showAll();
     collection.eqns.squareRectEqn.showForm('0');
-    collection.transform.updateScale(0.7, 0.7);
-    collection.setPosition(this.layout.rectPosition);
+    // collection.transform.updateScale(0.7, 0.7);
+    // collection.setPosition(this.layout.rectPosition);
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 3.6, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -133,7 +134,7 @@ export class QRSquare extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.5);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -141,8 +142,9 @@ export class QRSquare extends PopupBoxCollection {
     collection._sideSquareA.showAll();
     collection._sideSquareB.showAll();
     collection.eqns.squareRectEqn.showForm('1');
-    collection.transform.updateScale(0.7, 0.7);
-    collection.setPosition(this.layout.squarePosition);
+    // collection.transform.updateScale(0.7, 0.7);
+    // collection.setPosition(this.layout.squarePosition);
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.4, 3, 2.4));
     this.diagram.animateNextFrame();
   }
 }

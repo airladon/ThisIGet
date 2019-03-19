@@ -137,6 +137,7 @@ class ShapesCollection extends CommonDiagramCollection {
     this.add('pent', pent);
   }
 
+  // $FlowFixMe
   resize(locations: Object) {
     this._square.transform.updateTranslation(
       locations.square.center.x,

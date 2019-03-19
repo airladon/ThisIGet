@@ -6,7 +6,7 @@ import details from '../../details';
 
 import CircleAreaCollection from '../common/diagramCollectionCircleArea';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 const { html } = Fig.tools;
 
 export default class QR_TODO extends PopupBoxCollection {
@@ -34,7 +34,7 @@ export default class QR_TODO extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -43,8 +43,9 @@ export default class QR_TODO extends PopupBoxCollection {
     collection.eqns.triRectEqn.showForm('14');
     collection.eqns.triRectEqn.getCurrentForm().arrange(1.5, 'center', 'middle');
     collection.legacySetScenario(collection._radius, { rotation: 0 });
-    collection.transform.updateScale(0.5, 0.5);
-    collection.setPosition(this.layout.position);
+    // collection.transform.updateScale(0.5, 0.5);
+    // collection.setPosition(this.layout.position);
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.4, 3, 2.4));
     this.diagram.animateNextFrame();
   }
 }

@@ -394,9 +394,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   // eslint-disable-next-line class-methods-use-this
   setRootElement(width: number, height: number, fontSize: number) {
     const rootElement = document.documentElement;
-    rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
-    rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
-    rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
+    if (rootElement != null) {
+      rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
+      rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
+      rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
+    }
   }
 
   showAll() {

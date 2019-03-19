@@ -161,6 +161,7 @@ class CircleCollection extends CommonDiagramCollection {
     this.isMovable = true;
   }
 
+  // $FlowFixMe
   resize(locations: Object) {
     this.transform.updateTranslation(
       locations.circle.center.x,

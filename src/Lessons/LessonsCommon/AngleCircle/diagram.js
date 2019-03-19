@@ -62,9 +62,9 @@ class AngleCircleDiagram extends CommonLessonDiagram {
       const currentPixelPoint = this.clientToPixel(currentClientPoint);
 
       const previousDiagramPoint =
-        previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+        previousPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
       const currentDiagramPoint =
-        currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+        currentPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
       const currentAngle = Math.atan2(
         currentDiagramPoint.y - center.y,
         currentDiagramPoint.x - center.x,
