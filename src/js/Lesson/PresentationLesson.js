@@ -73,7 +73,7 @@ class PresentationLesson extends SimpleLesson {
 
   currentSectionIndex: number;
   diagram: Diagram | null;
-  overlayDiagram: Diagram | null;
+  // overlayDiagram: Diagram | null;
   state: Object;
   inTransition: boolean;
   transitionCancelled: boolean;
@@ -88,7 +88,7 @@ class PresentationLesson extends SimpleLesson {
     super(content);
     // this.content = content;
     this.diagram = null;
-    this.overlayDiagram = null;
+    // this.overlayDiagram = null;
     this.currentSectionIndex = 0;
     this.firstPageShown = true;
     this.state = {};
@@ -283,9 +283,9 @@ class PresentationLesson extends SimpleLesson {
     if (diagram) {
       section.setEnterState(this.state);
       section.currentInteractiveItem = -1;
-      if (this.overlayDiagram) {
-        this.overlayDiagram.elements.hideAll();
-      }
+      // if (this.overlayDiagram) {
+      //   this.overlayDiagram.elements.hideAll();
+      // }
       section.setVisible();
       this.renderDiagrams();
       if (this.transitionCancelled) {
@@ -397,7 +397,7 @@ class PresentationLesson extends SimpleLesson {
     super.initialize();
     // this.content.initialize();
     this.diagram = this.content.diagram;
-    this.overlayDiagram = this.content.overlayDiagram;
+    // this.overlayDiagram = this.content.overlayDiagram;
     this.diagram.lesson = this;
   }
 }

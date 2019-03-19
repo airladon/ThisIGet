@@ -34,6 +34,7 @@ export default class SinglePageLessonComponent extends React.Component
                                     <Props, State> {
   lesson: SimpleLesson;
   key: number;
+  contentChange: boolean;
 
   constructor(props: Props) {
     super(props);

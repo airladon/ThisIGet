@@ -42,7 +42,6 @@ class SimpleLessonContent {
   loadQRs(
     qrs: Array<string>,
   ) {
-    console.log('loading')
     if (this.qrDiagram == null) {
       this.qrDiagram = new Diagram({
         htmlId: 'id_qr_diagram',

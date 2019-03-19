@@ -8,7 +8,7 @@ import QuadCollection from '../common/diagramCollectionQuad';
 import RectCollection from '../common/diagramCollectionRect';
 import SquareCollection from '../common/diagramCollectionSquare';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 
 export class QRQuadrangle extends PopupBoxCollection {
   _quad: QuadCollection;
@@ -35,15 +35,16 @@ export class QRQuadrangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const quad = this._quad;
     quad.show();
     quad._quad1.show();
     quad._quad2.show();
     quad._quad3.show();
-    quad.transform.updateScale(0.6, 0.6);
+    // quad.transform.updateScale(0.6, 0.6);
     quad.setPosition(this.layout.quadPosition);
+    this.transformToQRWindow(quad, new Rect(-1.6, -1.2, 3.2, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -73,7 +74,7 @@ export class QRRectangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -90,8 +91,9 @@ export class QRRectangle extends PopupBoxCollection {
     collection._rect._rightAngle2.showAll();
     collection._rect._rightAngle3.showAll();
     collection._rect._rightAngle4.showAll();
-    collection.transform.updateScale(0.7, 0.7);
+    // collection.transform.updateScale(0.7, 0.7);
     collection.setPosition(this.layout.rectPosition);
+    this.transformToQRWindow(collection, new Rect(-1.7, -1.2, 3.4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -121,7 +123,7 @@ export class QRSquare extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -138,8 +140,9 @@ export class QRSquare extends PopupBoxCollection {
     collection._square._rightAngle2.showAll();
     collection._square._rightAngle3.showAll();
     collection._square._rightAngle4.showAll();
-    collection.transform.updateScale(0.7, 0.7);
+    // collection.transform.updateScale(0.7, 0.7);
     collection.setPosition(this.layout.squarePosition);
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.4, 3, 2.4));
     this.diagram.animateNextFrame();
   }
 }

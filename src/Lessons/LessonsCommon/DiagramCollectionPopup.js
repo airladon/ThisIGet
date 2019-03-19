@@ -218,21 +218,23 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     lensWindow: Rect,
   ) {
     const diagramContainer = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
-    element.tieToHTML = {
-      element: diagramContainer,
-      window: lensWindow,
-      scale: 'fit',
-    };
-    // element.diagramTransforms = this.diagram.spaceTransforms;
-    // console.log(element)
-    element.updateHTMLElementTie(this.diagram.canvasLow);
+    if (diagramContainer != null) {
+      // eslint-disable-next-line no-param-reassign
+      element.tieToHTML = {
+        element: diagramContainer.id,
+        window: lensWindow,
+        scale: 'fit',
+        updateOnResize: true,
+      };
+      element.updateHTMLElementTie(this.diagram.canvasLow);
+    }
   }
 
   // size is width for 'left' or 'right', an height for 'up' or 'down'
   // For auto, size is 0.5
   setDiagramSpace(
     optionsIn: {
-      location?: 'left' | 'right' | 'up' | 'down' | 'auto',
+      location?: 'left' | 'right' | 'top' | 'bottom' | 'auto',
       xSize?: number,
       ySize?: number,
     },
@@ -290,7 +292,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       ) {
         locationToUse = 'left';
       } else {
-        locationToUse = 'up';
+        locationToUse = 'top';
       }
     }
 
@@ -299,7 +301,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     let ySizeD;
     let xSizeT;
     let ySizeT;
-    if (locationToUse === 'up' || locationToUse === 'down') {
+    if (locationToUse === 'top' || locationToUse === 'bottom') {
       xSizeD = 1;
       ySizeD = options.ySize;
       xSizeT = 1;
@@ -321,7 +323,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       if (parent != null) {
         parent.removeChild(textElement);
         parent.removeChild(diagramElement);
-        if (locationToUse === 'down') {
+        if (locationToUse === 'bottom') {
           parent.appendChild(textElement);
           parent.appendChild(diagramElement);
         } else {

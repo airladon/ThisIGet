@@ -7,7 +7,7 @@ import details from '../../details';
 import version from '../version';
 import IsocelesCollection from '../common/diagramCollectionIsoceles';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
 const { click } = Fig.tools.html;
 
 export default class QRIsosceles extends PopupBoxCollection {
@@ -57,7 +57,7 @@ export default class QRIsosceles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.6);
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -70,8 +70,10 @@ export default class QRIsosceles extends PopupBoxCollection {
     iTri._side31.showAll();
     iTri._angle1.showAll();
     iTri._angle2.showAll();
-    collection.transform.updateScale(0.6, 0.6);
+    console.log(iTri)
+    // collection.transform.updateScale(0.6, 0.6);
     collection.setPosition(this.layout.position);
+    this.transformToQRWindow(collection, new Rect(-1.6, -1.2, 3.2, 2.4));
     this.diagram.animateNextFrame();
   }
 }
