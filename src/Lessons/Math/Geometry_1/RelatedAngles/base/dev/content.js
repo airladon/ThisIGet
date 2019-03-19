@@ -5,7 +5,6 @@ import lessonLayout from '../quickReference/layout';
 import details from '../../details';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
-// import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const { click } = Fig.tools.html;
@@ -35,7 +34,6 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.qrDiagram.elements._qr['_related_angles']['_base'];
     this.addSection({
       title: 'QR Test',
       setContent: () => {
@@ -52,19 +50,6 @@ class Content extends PresentationLessonContent {
         });
         return out;
       },
-      // setContent: [
-      //   '<p>Quick Reference Popups</p><p></p>',
-      //   '<p>|Alternate|</p>',
-      //   '<p>|Interior|</p>',
-      //   '<p>|Opposite|</p>',
-      //   '<p>|Corresponding|</p>',
-      // ],
-      // modifiers: {
-      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
-      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
-      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
-      //   Alternate: click(this.showQR, [this, 'related_angles', 'Alternate']),
-      // },
     });
   }
 }
