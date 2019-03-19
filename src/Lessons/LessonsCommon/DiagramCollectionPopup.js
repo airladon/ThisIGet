@@ -37,6 +37,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setDescription(description: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(description, modifiers);
     this.descriptionElement.innerHTML = modifiedText;
+    // console.log(modifiers)
     html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
     this.modifiers = modifiers;
   }

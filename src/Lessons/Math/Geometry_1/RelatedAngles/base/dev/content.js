@@ -5,10 +5,10 @@ import lessonLayout from '../quickReference/layout';
 import details from '../../details';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
-import DiagramCollection from './diagramCollection';
+// import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const { click, centerH } = Fig.tools.html;
+const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
 const uid = 'related_angles';
@@ -29,7 +29,6 @@ class Content extends PresentationLessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
-    this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       `${uid}/${vid}`,
     ]);
