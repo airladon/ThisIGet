@@ -65,7 +65,6 @@ class SinglePageLessonContent extends SimpleLessonContent {
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
     // this.qrDiagram.container.style.zIndex = '-1';
-    console.trace()
     const overlay = document.getElementById('single_page_lesson__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '-1';

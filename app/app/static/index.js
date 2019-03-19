@@ -26849,9 +26849,8 @@ function () {
         }
 
         this.previousPoint = point;
-      }
+      } // event.preventDefault();
 
-      event.preventDefault();
     }
   }, {
     key: "touchStartHandler",
