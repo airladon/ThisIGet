@@ -32,13 +32,13 @@
   padding: 0;
   margin-right: calc(var(--lesson__popup_font_size) * 0.5);
   // margin-top: calc(var(--lesson__popup_font_size) * -0.1);
-  font-size: calc(var(--lesson__popup_font_size) * 0.7);
+  font-size: calc(var(--lesson__popup_font_size) * 1);
   // width: auto;
   float: right;
   font-weight: lighter;
-  width: calc(var(--lesson__popup_font_size) * 1.1);
-  height: calc(var(--lesson__popup_font_size) * 1.1);
-  border-radius: calc(var(--lesson__popup_font_size) * 0.55);
+  width: calc(var(--lesson__popup_font_size) * 1.4);
+  height: calc(var(--lesson__popup_font_size) * 1.4);
+  border-radius: calc(var(--lesson__popup_font_size) * 0.7);
 }
 
 .lesson__popup_box__close:hover {
@@ -70,11 +70,11 @@
   display: inline-block;
   float: left;
   margin-left: calc(var(--lesson__popup_font_size) * 0.5);
-  font-size: calc(var(--lesson__popup_font_size) * 0.7);
-  width: calc(var(--lesson__popup_font_size) * 1.1);
-  height: calc(var(--lesson__popup_font_size) * 1.1);
+  font-size: calc(var(--lesson__popup_font_size) * 0.85);
+  width: calc(var(--lesson__popup_font_size) * 1.4);
+  height: calc(var(--lesson__popup_font_size) * 1.4);
   border: 1px solid;
-  border-radius: calc(var(--lesson__popup_font_size) * 0.55);
+  border-radius: calc(var(--lesson__popup_font_size) * 0.7);
   font-family: times new roman, serif;
   font-style: italic;
 }
