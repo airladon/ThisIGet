@@ -190,7 +190,14 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   resize() {
     super.resize();
-    if (this.internalResize === false) {
+    if (this.isShown) {
+      if (this.internalResize === false) {
+      //     console.log('hiding')
+      //     console.trace()
+        this.hideAll();
+        this.diagram.animateNextFrame();
+      }
+    } else {
       super.hideAll();
       this.diagram.animateNextFrame();
     }
@@ -251,7 +258,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     // this.diagram.setSpaceTransforms();
     // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
     this.internalResize = true;
+    // console.log('1')
+    // console.trace()
     this.diagram.resize();
+    // console.log('2')
     this.internalResize = false;
     // this.diagram.setFirstTransform();
 
@@ -426,6 +436,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideAll() {
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  prepareToShow() {
   }
 
   hideAll() {

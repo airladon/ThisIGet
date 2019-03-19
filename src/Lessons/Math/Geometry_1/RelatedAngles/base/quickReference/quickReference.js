@@ -95,7 +95,7 @@ export class QRAlternateAngles extends PopupBoxCollection {
       ),
     };
     this.setTitle('Alternate Angles');
-    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|.', modifiers);
+    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|. intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel intersecting line crossing two lines. When the two lines are parallel', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -116,11 +116,11 @@ export class QRAlternateAngles extends PopupBoxCollection {
       new Rect(-1.5, -1.5, 3, 3),
     );
     this._threeLines.updateHTMLElementTie(this.diagram.canvasLow)
-    console.log(this.diagram.canvasLow.width)
-    console.log(this.diagram.canvasLow.clientWidth)
-    console.log(this._threeLines.tieToHTML.element.clientWidth)
-    console.log(this._threeLines.isShown)
-    console.log(this.diagram.elements)
+    // console.log(this.diagram.canvasLow.width)
+    // console.log(this.diagram.canvasLow.clientWidth)
+    // console.log(this._threeLines.tieToHTML.element.clientWidth)
+    // console.log(this._threeLines.isShown)
+    // console.log(this.diagram.elements)
     // console.log(this._threeLines.getPosition())
     // console.log(this._threeLines.getScale())
   }
