@@ -84,7 +84,7 @@ export default function lessonLayout() {
   layout.circleRing = makeCircle('circleRing', 'right');
 
   layout.addObjectsElements = [
-    activator({ width: 6, height: 2, position: new Point(0, -0.4)}),
+    activator({ width: 6, height: 2, position: new Point(0, -0.4) }),
     layout.moon,
     layout.wheel,
     layout.ball,

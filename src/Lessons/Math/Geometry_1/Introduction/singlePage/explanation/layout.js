@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
+import { activator } from '../../../../../../js/tools/misc';
 
 const {
   Point,
@@ -66,23 +67,6 @@ export default function lessonLayout() {
   const filledCircle = joinObjects({}, circle, {
     fill: true,
     textureLocation: textureFile,
-  });
-
-  const activator = (width, height) => ({
-    name: 'activator',
-    method: 'polyLine',
-    options: {
-      points: [
-        new Point(-width / 2, -height / 2),
-        new Point(-width / 2, height / 2),
-        new Point(width / 2, height / 2),
-        new Point(width / 2, -height / 2),
-      ],
-      color: [0, 0, 0, 0],
-    },
-    mods: {
-      isTouchable: true,
-    },
   });
 
 
@@ -321,185 +305,11 @@ export default function lessonLayout() {
   };
 
   layout.fig4 = joinObjects({}, layout.fig4, { name: 'fig4' });
-  // layout.fig5 = joinObjects({}, layout.fig3, { name: 'fig5' });
-  // layout.fig6 = joinObjects({}, layout.fig3, { name: 'fig6' });
-  // layout.fig7 = joinObjects({}, layout.fig3, { name: 'fig7' });
-  // layout.fig8 = joinObjects({}, layout.fig3, { name: 'fig8' });
-
-  // const fig1 = ['', 'fig1', 'collection', [collection], mods, [
-  //   ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods],
-  //   ['', 'circle', 'polygon', [circle], mods],
-  // ]];
-
-  // layout.circle = {
-  //   name: 'circle',
-  //   method: 'polygon',
-  //   options: {
-  //     fill: false,
-  //     radius: wheelSize + circleLineWidth,
-  //     width: circleLineWidth,
-  //     sides: wheelPoints,
-  //     color: colors.circle,
-  //     transform: new Transform('Circle').scale(1, 1).translate(0, 0),
-  //   },
-  //   mods: { scenarios },
-  // };
-
-  // layout.darkCircle = {
-  //   name: 'darkCircle',
-  //   method: 'polygon',
-  //   options: [filledCircle, {
-  //     color: [0, 0, 0, 0.7],
-  //     textureLocation: '',
-  //   }],
-  //   mods: { scenarios },
-  // };
-
-  // const mods = { scenarios };
-  // layout.wheel = ['', 'wheel', 'polygon', [filledCircle, wheelTex], mods];
-  // layout.clock = ['', 'clock', 'polygon', [filledCircle, clockTex], mods];
-  // layout.ball = ['', 'ball', 'polygon', [filledCircle, ballTex], mods];
-  // layout.earth = ['', 'earth', 'polygon', [filledCircle, earthTex], mods];
-
-  // layout.textD = {
-  //   name: 'd',
-  //   method: 'text',
-  //   options: {
-  //     text: 'd',
-  //     vAlign: 'baseline',
-  //     hAlign: 'left',
-  //     position: new Point(-0.05, 0.1),
-  //     color: colors.dimensions,
-  //   },
-  // };
-
-  // layout.textC = {
-  //   name: 'c',
-  //   method: 'text',
-  //   options: {
-  //     text: 'c',
-  //     vAlign: 'baseline',
-  //     hAlign: 'left',
-  //     position: new Point(-0.05, wheelSize * 1.2 + 0.1),
-  //     color: colors.dimensions,
-  //   },
-  // };
-
-  // layout.diameter = {
-  //   name: 'diameter',
-  //   method: 'line',
-  //   options: {
-  //     length: wheelSize * 1.97,
-  //     vertexSpaceStart: 'center',
-  //     width: 0.015,
-  //     color: colors.dimensions,
-  //     arrows: {
-  //       width: 0.1,
-  //       height: 0.1,
-  //     },
-  //   },
-  //   mods: { scenarios },
-  // };
-
-  // layout.circumferenceRadius = wheelSize * 1.2;
-  // layout.circumferenceLineWidth = 0.015;
-  // layout.circumferenceArrowDimension = 0.1;
-  // layout.circumference = {
-  //   name: 'circumference',
-  //   method: 'collection',
-  //   options: {
-  //     transform: new Transform('Circumference').rotate(Math.PI / 2).translate(0, 0),
-  //   },
-  //   addElements: [
-  //     {
-  //       name: 'line',
-  //       method: 'polygon',
-  //       options: {
-  //         fill: false,
-  //         radius: layout.circumferenceRadius,
-  //         width: layout.circumferenceLineWidth,
-  //         sides: 300,
-  //         color: colors.dimensions,
-  //         clockwise: true,
-  //         transform: new Transform('Circle').scale(1, 1).translate(0, 0),
-  //       },
-  //     },
-  //     {
-  //       name: 'arrow',
-  //       method: 'arrow',
-  //       options: {
-  //         width: layout.circumferenceArrowDimension,
-  //         legWidth: 0,
-  //         height: layout.circumferenceArrowDimension,
-  //         legHeight: 0,
-  //         color: colors.dimensions,
-  //         tip: new Point(0, 0),
-  //       },
-  //     },
-  //   ],
-  //   mods: { scenarios },
-  // };
-
-  // layout.circumferenceEquation = {
-  //   name: 'eqn',
-  //   method: 'addEquation',
-  //   options: {
-  //     color: layout.colors.dimensions,
-  //     scale: 1,
-  //     defaultFormAlignment: {
-  //       alignH: 'center',
-  //     },
-  //     elements: {
-  //       c: 'c',
-  //       'pi': 'π',
-  //       'd': 'd',
-  //       'equals': ' = ',
-  //     },
-  //     forms: {
-  //       'base': ['c', 'equals', 'pi', 'space', 'd'],
-  //     },
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       left: { position: new Point(-2.2, 0) },
-  //       bottom: { position: new Point(0, -1.3) },
-  //     },
-  //   },
-  // };
-
-  // layout.properties = {
-  //   name: 'properties',
-  //   method: 'collection',
-  //   options: {
-  //     transform: new Transform('Properties').translate(0, 0),
-  //   },
-  //   addElements: [
-  //     layout.darkCircle,
-  //     layout.circumference,
-  //     layout.textC,
-  //     layout.diameter,
-  //     layout.textD,
-  //     layout.circumferenceEquation,
-  //   ],
-  //   mods: { scenarios },
-  // };
-
   layout.addElements = [
-    // ['', 'wheel', 'shapes/polygon', [filledCircle, wheel]],
     layout.fig1,
     layout.fig2,
     layout.fig3,
     layout.fig4,
-    // layout.fig5,
-    // layout.fig6,
-    // layout.fig7,
-    // layout.fig8,
-    // layout.wheel,
-    // layout.earth,
-    // layout.ball,
-    // layout.clock,
-    // layout.circle,
-    // layout.properties,
   ];
   return layout;
 }
