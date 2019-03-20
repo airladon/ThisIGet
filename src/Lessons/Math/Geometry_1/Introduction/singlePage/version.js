@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Sinlge Page',
-  description: 'Single Page Explanation.',
-  uid: 'single_page',
+  title: 'Initial - Single Page',
+  description: 'Single page form - interactive.',
+  uid: 'initial_single_page',
   qr: [],
 };
 

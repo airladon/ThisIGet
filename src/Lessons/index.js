@@ -285,8 +285,8 @@ export default function getLessonIndex() {
       uid: 'why_study_shapes',
       versions: {
         base: {
-          title: 'Base',
-          description: 'Base Explanation.',
+          title: 'Initial',
+          description: 'Introduction to shapes.',
           path: 'base',
           onPath: true,
           topics: [
@@ -307,8 +307,8 @@ export default function getLessonIndex() {
           ],
         },
         single_page: {
-          title: 'Sinlge Page',
-          description: 'Single Page Explanation.',
+          title: 'Single page',
+          description: 'Introduction to shapes.',
           path: 'singlePage',
           onPath: true,
           topics: [

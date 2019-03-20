@@ -118,7 +118,7 @@ class Content extends SinglePageLessonContent {
 
       'For instance, over |2000| years ago, the understanding of shapes allowed people to calculate the |size of our planet| to within 15% of the actual value.',
 
-      makeFig('id_figure4', diag._fig4, 'fit', new Rect(-2.5, -1.5, 5, 3)),
+      makeFig('id_figure4', diag._fig4, 'fit', new Rect(-1, -1, 2, 2)),
 
       'The mathematics of shapes also helps us understand phenonmena we can\'t see like |sound|, |gravity|, |electricty|, |radio waves| and |magnetism|. It is the basis for, and used to develop most engineering and science disciplines.',
 

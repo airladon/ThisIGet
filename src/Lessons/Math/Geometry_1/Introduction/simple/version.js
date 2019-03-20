@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Simple Text',
-  description: 'Simple Layout.',
-  uid: 'simple',
+  title: 'Simple',
+  description: 'Not interactive.',
+  uid: 'initial_not_interactive',
   qr: [],
 };
 

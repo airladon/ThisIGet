@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'Base Explanation.',
+  title: 'Initial',
+  description: 'Introduction to shapes.',
   uid: 'base',
   qr: [],
 };
