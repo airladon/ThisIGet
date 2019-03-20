@@ -27,6 +27,9 @@ export default function lessonLayout() {
   layout.colors = colors;
   layout.position = new Point(0, 0);
 
+  // ///////////////////////////////////////////////////////////////
+  // Shapes
+  // ///////////////////////////////////////////////////////////////
   const radius = 1;
   const sides = 50;
   const textureFile = `/static/dist/${textureMap}`;
@@ -94,6 +97,64 @@ export default function lessonLayout() {
     layout.circleBall,
     layout.circleMoon,
     layout.circleRing,
+  ];
+
+  // ///////////////////////////////////////////////////////////////
+  // Interactive Circle
+  // ///////////////////////////////////////////////////////////////
+  const width = 0.05;
+  layout.circ = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      sides: 400,
+      radius,
+      width,
+      color: colors.circle,
+      transform: new Transform('Circle').scale(1, 1).translate(0, 0),
+    },
+  };
+
+  layout.radius = {
+    name: 'radius',
+    method: 'line',
+    options: {
+      length: radius,
+      width,
+      color: colors.radius,
+      vertexSpaceStart: 'left',
+      move: {
+        type: 'rotation',
+      },
+    },
+    // mods: {
+      // isTouchable: true,
+      // isMovable: true,
+      // move: {
+      //   type: 'rotation',
+      // },
+      // hasTouchableElements: true,
+    // },
+  };
+
+  layout.anchor = {
+    name: 'anchor',
+    method: 'polygon',
+    options: {
+      sides: 20,
+      radius: 0.05,
+      fill: true,
+      color: colors.center,
+    },
+  };
+
+  layout.circleScenarios = {
+    'center': { position: new Point(0, -0.4) },
+  };
+  layout.addCircleElements = [
+    layout.circ,
+    layout.radius,
+    layout.anchor,
   ];
 
   return layout;

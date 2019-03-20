@@ -41,6 +41,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     // const collection = diag._collection;
     const objects = diag._objects;
+    const circ = diag._circle;
     console.log(diag)
 
     const common = {
@@ -76,7 +77,30 @@ class Content extends PresentationLessonContent {
       modifiers: {
         shape: click(objects.objectToCircle, [objects], colors.circle),
       },
-      show: [objects._moon, objects._wheel, objects._ring, objects._ball, objects._circle, objects._activator],
+      show: [
+        objects._moon, objects._wheel, objects._ring, objects._ball,
+        objects._circle, objects._activator,
+      ],
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'If you were naming this shape today, you might name it after a |familiar object|.',
+        'For example, you might call it a |moon| shape or a |ring|.',
+        'However, this shape has been studied for thousands of years, and therefore it already has a common name.',
+      ]),
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'In ancient |Greek|, this shape was named |krikos|, which was their word for |ring|.',
+        'Similarly, |Latin| also used the word for |ring|, with |circulus|.',
+        'Today, our name comes from the Latin root, and it is |circle|.',
+      ]),
+    });
+    this.addSection(common, {
+      setContent: [
+        'We can create a circle by anchoring a line at one end, and tracing the other end while pushing it around a full rotation.',
+      ],
+      show: [circ],
     });
   }
 }

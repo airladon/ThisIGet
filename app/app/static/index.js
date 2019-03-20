@@ -17199,6 +17199,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 /* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -17218,6 +17219,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // import Diagram from '../Diagram';
+
 
 
 
@@ -17562,6 +17564,18 @@ function (_DiagramElementCollec) {
       }
 
       _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color);
+    }
+
+    var defaultMoveOptions = {
+      type: 'rotation',
+      middleLengthPercent: 0.22,
+      translationbounds: _this2.diagramLimits
+    };
+
+    if (optionsToUse.move) {
+      var moveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defaultMoveOptions, optionsToUse.move);
+
+      _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationbounds);
     }
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {

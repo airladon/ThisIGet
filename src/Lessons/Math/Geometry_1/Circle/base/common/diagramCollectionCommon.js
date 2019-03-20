@@ -4,13 +4,15 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementPrimative,
+  // DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
   Transform,
 } = Fig;
 
 export default class CommonCollectionObjects extends CommonDiagramCollection {
   objectIndex: number;
+  _activator: DiagramElementPrimative;
 
   constructor(
     diagram: CommonLessonDiagram,
