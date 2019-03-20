@@ -99,6 +99,7 @@ export default class SinglePageLessonComponent extends React.Component
       this.contentChange = false;
     }
     d.animateNextFrame();
+    this.lesson.content.diagram.updateHTMLElementTie();
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
     // d.renderElementToTiedCanvas('fig4');
