@@ -304,9 +304,11 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
           ],
           qr: [
+            'Abstraction',
           ],
         },
         initial_not_interactive: {

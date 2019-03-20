@@ -12,7 +12,7 @@ const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
 const { uid } = details.details;
-const vid = 'base';
+const vid = version.details.uid;
 const qrids = version.details.qr;
 
 class Content extends PresentationLessonContent {
@@ -24,6 +24,7 @@ class Content extends PresentationLessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    console.log(uid, vid)
     this.loadQRs([
       `${uid}/${vid}`,
     ]);

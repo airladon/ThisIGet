@@ -34,8 +34,16 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.modifiers = modifiers;
   }
 
-  setDescription(description: string, modifiers: Object = {}) {
-    const modifiedText = html.applyModifiers(description, modifiers);
+  setDescription(description: Array<string> | string, modifiers: Object = {}) {
+    let text = '';
+    if (typeof description === 'string') {
+      text = description;
+    } else {
+      description.forEach((paragraph) => {
+        text += `<p>${paragraph}</p>`;
+      });
+    }
+    const modifiedText = html.applyModifiers(text, modifiers);
     this.descriptionElement.innerHTML = modifiedText;
     // console.log(modifiers)
     html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
@@ -129,7 +137,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     diagram: Object,
     layout: Object,
     transform: Transform = new Transform(),
-    collectionName: string,
+    collectionName: string = '',
     Collection: Function | null = null,
     id: string = generateUniqueId(),
   ) {

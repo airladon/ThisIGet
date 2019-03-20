@@ -5,7 +5,7 @@ var details = {
   title: 'Initial',
   description: 'Presentation form - interactive.',
   uid: 'base',
-  qr: [],
+  qr: ['Abstraction'],
 };
 
 module.exports = {
