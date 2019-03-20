@@ -4236,6 +4236,7 @@ function () {
       // must have isTouchable = true to be considered)
 
       this.beingTouchedElements = this.elements.getTouched(glPoint);
+      console.log(clientPoint, glPoint, this.beingTouchedElements);
 
       if (this.moveTopElementOnly) {
         if (this.beingTouchedElements.length > 0) {
@@ -23681,7 +23682,6 @@ function () {
   }, {
     key: "updateHTMLElementTie",
     value: function updateHTMLElementTie(diagramCanvas) {
-      // First get the HTML element
       var tieToElement;
 
       if (typeof this.tieToHTML.element === 'string') {
@@ -25549,6 +25549,7 @@ function (_DiagramElement) {
 
       for (var i = 0; i < boundaries.length; i += 1) {
         var boundary = boundaries[i];
+        console.log(boundary);
 
         if (glLocation.isInPolygon(boundary)) {
           var isTouched = true;
@@ -26342,6 +26343,8 @@ function (_DiagramElement2) {
     value: function updateHTMLElementTie( // pixelSpaceToDiagramSpaceTransform: Transform,
     // diagramToPixelSpaceScale: Point,
     container) {
+      console.log('collection', this.name);
+
       _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, // pixelSpaceToDiagramSpaceTransform,
       // diagramToPixelSpaceScale,
       // diagramToGLSpaceTransformMatrix,

@@ -97,9 +97,15 @@ export default class SinglePageLessonComponent extends React.Component
         }
       }
       this.contentChange = false;
+      // this.lesson.content.diagram.resize();
     }
-    d.animateNextFrame();
+    console.log(this.lesson.content.diagram.elements)
+    console.log('1')
     this.lesson.content.diagram.updateHTMLElementTie();
+    console.log('2')
+    d.animateNextFrame();
+    // this.lesson.content.diagram.updateHTMLElementTie();
+
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
     // d.renderElementToTiedCanvas('fig4');
