@@ -1,23 +1,20 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
-  // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
-import lessonLayout from '../common/layout';
+import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const {
-  // click,
-  centerV,
-  // highlight,
-  // clickWord,
-} = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -32,17 +29,18 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
   }
 
   addSections() {
     // const diag = this.diagram.elements;
-    // const collection = diag._collection;
+    // const quiz = diag._quiz;
 
-    const common = {
-      setContent: '',
+    this.addSection({
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      ],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -59,13 +57,6 @@ class Content extends PresentationLessonContent {
       hide: [],
       setSteadyState: () => {},
       setLeaveState: () => {},
-    };
-
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
-      ]),
     });
   }
 }

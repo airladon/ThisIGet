@@ -136,9 +136,23 @@ export default function getLessonIndex() {
       uid: 'circles',
       versions: {
         base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
+          title: 'Initial',
+          description: 'Presentation form - interactive.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'Legacy explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'explanation',
