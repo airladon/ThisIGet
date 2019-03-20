@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
+import { activator } from '../../../../../../js/tools/misc';
 
 const {
   Point,
@@ -83,6 +84,7 @@ export default function lessonLayout() {
   layout.circleRing = makeCircle('circleRing', 'right');
 
   layout.addObjectsElements = [
+    activator({ width: 6, height: 2, position: new Point(0, -0.4)}),
     layout.moon,
     layout.wheel,
     layout.ball,

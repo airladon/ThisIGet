@@ -76,7 +76,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         shape: click(objects.objectToCircle, [objects], colors.circle),
       },
-      show: [objects._moon, objects._wheel, objects._ring, objects._ball, objects._circle],
+      show: [objects._moon, objects._wheel, objects._ring, objects._ball, objects._circle, objects._activator],
     });
   }
 }
