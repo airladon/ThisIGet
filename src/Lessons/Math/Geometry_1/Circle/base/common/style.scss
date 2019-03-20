@@ -1,14 +1,12 @@
 @import '../../../geometry';
 
 $colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
+  circle:               color('red', 'dark'),
+  radius:               color('blue', 'dark'),
+  diameter:             color('green', 'dark'),
+  center:               color('yellow'),
 );
 
 body {
   @include color_vars($colors);
-}
-
-.diagram__text {
-  z-index: 0;
 }

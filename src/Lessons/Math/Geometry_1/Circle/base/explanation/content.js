@@ -13,14 +13,14 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -38,8 +38,10 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
+    const diag = this.diagram.elements;
     // const collection = diag._collection;
+    const objects = diag._objects;
+    console.log(diag)
 
     const common = {
       setContent: '',
@@ -62,10 +64,19 @@ class Content extends PresentationLessonContent {
     };
 
     this.addSection(common, {
-      title: '',
+      title: 'Introduction',
       setContent: centerV([
-        '',
+        'The first shape we will explore is the one you see everytime you look at the |moon|, a |wheel|, a |ball|, or a |ring.',
       ]),
+    });
+    this.addSection(common, {
+      setContent: [
+        'Their size, mass and material is all very different, but they have a common |shape|.',
+      ],
+      modifiers: {
+        shape: click(objects.objectToCircle, [objects], colors.circle),
+      },
+      show: [objects._moon, objects._wheel, objects._ring, objects._ball, objects._circle],
     });
   }
 }

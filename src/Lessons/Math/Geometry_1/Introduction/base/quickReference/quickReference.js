@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
@@ -10,7 +10,6 @@ import version from '../version';
 // const { Transform } = Fig;
 
 export default class QRAbstraction extends PopupBoxCollection {
-
   constructor(
     diagram: Object,
     // transform: Transform = new Transform().scale(1, 1).translate(0, 0),

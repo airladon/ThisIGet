@@ -3,13 +3,13 @@ import Fig from 'figureone';
 
 import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonCollection from '../common/diagramCollectionCommon';
+import CommonCollectionObjects from '../common/diagramCollectionCommon';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
-  _collection: CommonCollection;
+  _objects: CommonCollectionObjects;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,7 +18,8 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('collection', new CommonCollection(diagram, this.layout));
+    // this.diagram.addElements(this, this.layout.addObjectsElements);
+    this.add('objects', new CommonCollectionObjects(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 }
