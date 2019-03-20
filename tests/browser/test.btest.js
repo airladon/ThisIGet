@@ -8,9 +8,9 @@ const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 const username = process.env.TIG_USERNAME || 'test_user_001';
 const password = process.env.TIG_PASSWORD || '12345678';
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// function sleep(ms) {
+//   return new Promise(resolve => setTimeout(resolve, ms));
+// }
 
 describe('Visual Regressions', () => {
   // beforeAll(async () => {
@@ -57,22 +57,22 @@ describe('Visual Regressions', () => {
     expect(image).toMatchImageSnapshot();
   });
 
-  test('Angles Lesson Page 1', async () => {
-    const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
-    await page.goto(anglesPath);
-    await page.setViewport({ width: 600, height: 800 });
-    const image = await page.screenshot({ path: 'anglesPage1.png' });
-    expect(image).toMatchImageSnapshot();
-  });
-  test('Angles Lesson Page 6', async () => {
-    const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
-    await page.goto(`${anglesPath}?page=6`);
-    await page.setViewport({ width: 600, height: 800 });
-    const image = await page.screenshot({ path: 'anglesPage6.png' });
-    expect(image).toMatchImageSnapshot();
-  });
+  // test('Angles Lesson Page 1', async () => {
+  //   const anglesPath =
+  //     `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
+  //   await page.goto(anglesPath);
+  //   await page.setViewport({ width: 600, height: 800 });
+  //   const image = await page.screenshot({ path: 'anglesPage1.png' });
+  //   expect(image).toMatchImageSnapshot();
+  // });
+  // test('Angles Lesson Page 6', async () => {
+  //   const anglesPath =
+  //     `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
+  //   await page.goto(`${anglesPath}?page=6`);
+  //   await page.setViewport({ width: 600, height: 800 });
+  //   const image = await page.screenshot({ path: 'anglesPage6.png' });
+  //   expect(image).toMatchImageSnapshot();
+  // });
 });
 
 describe('Login Flows', () => {

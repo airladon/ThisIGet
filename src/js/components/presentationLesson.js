@@ -127,13 +127,13 @@ export default class PresentationLessonComponent extends React.Component
       infoButton.onclick = this.lesson.content.toggleInfo.bind(this.lesson.content);
     }
 
-    window.addEventListener('resize', this.centerLesson.bind(this));
-    window.addEventListener('orientationchange', this.orientationChange.bind(this));
+    // window.addEventListener('resize', this.centerLesson.bind(this));
+    // window.addEventListener('orientationchange', this.orientationChange.bind(this));
 
     // uncomment this if the lesson should be centered on going to it
-    this.orientationChange();
-    this.centerLessonFlag = !this.centerLessonFlag;
-    this.centerLesson();
+    // this.orientationChange();
+    // this.centerLessonFlag = !this.centerLessonFlag;
+    // this.centerLesson();
   }
 
   orientationChange() {

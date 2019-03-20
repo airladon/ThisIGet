@@ -36,6 +36,7 @@ docker_run_browser_test() {
     echo $2 $3 $4
     docker run -it --rm \
         -v $HOST_PATH/tests/browser:/home/pptruser/tests \
+        -v $HOST_PATH/src:/home/pptruser/src \
         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \

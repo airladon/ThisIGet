@@ -286,7 +286,7 @@ export default function getLessonIndex() {
       versions: {
         base: {
           title: 'Initial',
-          description: 'Introduction to shapes.',
+          description: 'Presentation form - interactive.',
           path: 'base',
           onPath: true,
           topics: [
@@ -295,9 +295,9 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
-        simple: {
-          title: 'Simple Text',
-          description: 'Simple Layout.',
+        initial_not_interactive: {
+          title: 'Simple',
+          description: 'Not interactive.',
           path: 'simple',
           onPath: true,
           topics: [
@@ -306,21 +306,10 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
-        single_page: {
-          title: 'Single page',
-          description: 'Introduction to shapes.',
+        initial_single_page: {
+          title: 'Initial - Single Page',
+          description: 'Single page form - interactive.',
           path: 'singlePage',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
-        single_page_simpl: {
-          title: 'Sinlge Page Example',
-          description: 'Single Page Explanation.',
-          path: 'singlePageSimple',
           onPath: true,
           topics: [
             'explanation',
