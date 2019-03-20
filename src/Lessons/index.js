@@ -295,17 +295,6 @@ export default function getLessonIndex() {
           qr: [
           ],
         },
-        legacy: {
-          title: 'Legacy',
-          description: 'Deprecated.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
         simple: {
           title: 'Simple Text',
           description: 'Simple Layout.',

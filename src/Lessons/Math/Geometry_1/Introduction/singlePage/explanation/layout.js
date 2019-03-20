@@ -78,7 +78,7 @@ export default function lessonLayout() {
         new Point(width / 2, height / 2),
         new Point(width / 2, -height / 2),
       ],
-      color: [0, 0, 1, 1],
+      color: [0, 0, 0, 0],
     },
     mods: {
       isTouchable: true,

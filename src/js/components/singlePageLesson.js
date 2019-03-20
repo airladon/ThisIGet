@@ -93,16 +93,18 @@ export default class SinglePageLessonComponent extends React.Component
           element.drawingObject.onLoad = () => {
             element.unrender();
             d.renderAllElementsToTiedCanvases();
+            this.lesson.content.diagram.setFirstTransform();
           };
         }
       }
       this.contentChange = false;
       // this.lesson.content.diagram.resize();
     }
-    console.log(this.lesson.content.diagram.elements)
-    console.log('1')
+    // console.log(this.lesson.content.diagram.elements)
+    // console.log('1')
+    this.lesson.content.diagram.setFirstTransform();
     this.lesson.content.diagram.updateHTMLElementTie();
-    console.log('2')
+    // console.log('2')
     d.animateNextFrame();
     // this.lesson.content.diagram.updateHTMLElementTie();
 
