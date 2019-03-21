@@ -100,7 +100,10 @@ class Content extends PresentationLessonContent {
       setContent: [
         'We can create a circle by anchoring a line at one end, and tracing the other end while pushing it around a full rotation.',
       ],
-      show: [circ],
+      show: [circ._radius, circ._arc, circ._anchor],
+      setSteadyState: () => {
+        circ._radius.setRotation(0.001);
+      },
     });
   }
 }

@@ -115,7 +115,7 @@ export default function lessonLayout() {
     },
   };
 
-  layout.arc = joinObjects({}, layout.circ);
+  layout.arc = joinObjects({}, layout.circ, { name: 'arc' });
 
   layout.radius = {
     name: 'radius',
@@ -132,7 +132,7 @@ export default function lessonLayout() {
   };
 
   layout.diameter = {
-    name: 'radius',
+    name: 'diameter',
     method: 'line',
     options: {
       length: radius * 2,
@@ -159,10 +159,12 @@ export default function lessonLayout() {
   layout.circleScenarios = {
     'center': { position: new Point(0, -0.4) },
   };
+
   layout.addCircleElements = [
     layout.circ,
     layout.arc,
     layout.radius,
+    layout.diameter,
     layout.anchor,
   ];
 

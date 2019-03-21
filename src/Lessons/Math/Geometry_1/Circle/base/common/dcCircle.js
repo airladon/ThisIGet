@@ -33,15 +33,17 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   }
 
   updateArc() {
-    let r = this._radius.getRotation();
-    while (r > Math.PI * 2) {
-      r -= Math.PI * 2;
+    if (this._arc.isShown) {
+      let r = this._radius.getRotation();
+      while (r > Math.PI * 2) {
+        r -= Math.PI * 2;
+      }
+      while (r < 0) {
+        r += Math.PI * 2;
+      }
+      this._arc.setAngleToDraw(r);
+      this.diagram.animateNextFrame();
     }
-    while (r < 0) {
-      r += Math.PI * 2;
-    }
-    this._arc.angleToDraw = r;
-    this.diagram.animateNextFrame();
   }
 
   pulseAnchor() {
