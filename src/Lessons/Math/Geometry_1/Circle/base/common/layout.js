@@ -266,8 +266,8 @@ export default function lessonLayout() {
       hasTouchableElements: true,
     },
     addElements: [
-      layout.circumference,
       layout.circleLine,
+      layout.circumference,
       layout.arc,
       layout.radius,
       layout.diameter,
@@ -276,6 +276,12 @@ export default function lessonLayout() {
   };
 
   layout.addCircleElements = [
+    activator({
+      width: 6,
+      height: radius * 3,
+      position: new Point(0, 0),
+      color: [0, 1, 0, 1]
+    }),
     layout.grid,
     layout.circ,
     layout.locationText,

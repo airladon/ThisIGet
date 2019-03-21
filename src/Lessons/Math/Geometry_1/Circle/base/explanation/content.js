@@ -136,10 +136,19 @@ class Content extends PresentationLessonContent {
         length: click(circ.straightenCircumference, [circ], colors.circle),
       },
       show: [
-        // circle._line,
-        circle._circumference],
+        circle._line,
+        circle._circumference,
+        circ._activator,
+      ],
       setEnterState: () => {
-        circ.straighten(0.9);
+        circ.straighten(0);
+        circ.straightening = false;
+        circle._line.setColor(colors.grid);
+        circ._activator.onClick = circ.straightenCircumference.bind(circ);
+      },
+      setLeaveState: () => {
+        circle._line.setColor(colors.circle);
+        circ._activator.onClick = null;
       },
     });
     this.addSection(common, {
