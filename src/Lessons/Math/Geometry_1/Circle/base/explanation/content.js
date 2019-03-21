@@ -209,11 +209,12 @@ class Content extends PresentationLessonContent {
         circ._circle.setScenario('center');
         circ.setCircleMoveLimits();
         circ.updateCircleLocation();
-        circ._locationText.setScenario('summary');
+        circ._locationText.setScenario('topRight');
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;
         circ._circle.isTouchable = false;
+        circ._circle._line.isTouchable = false;
       },
     });
     this.addSection(common, {

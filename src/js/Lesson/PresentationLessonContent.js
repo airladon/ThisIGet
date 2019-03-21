@@ -805,7 +805,7 @@ class PresentationLessonContent extends SimpleLessonContent {
             .getVertexSpaceDiagramPosition(element.interactiveLocation);
         }
         cssPosition = diagramPosition
-          .transformBy(this.diagram.diagramToPixelSpaceTransform.matrix());
+          .transformBy(this.diagram.spaceTransforms.diagramToPixel.matrix());
       } else {
         let html = element;
         if (typeof element === 'string') {

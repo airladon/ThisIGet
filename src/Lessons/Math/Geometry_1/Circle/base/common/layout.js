@@ -131,6 +131,9 @@ export default function lessonLayout() {
         type: 'rotation',
       },
     },
+    mods: {
+      interactiveLocation: new Point(radius * 0.8, 0),
+    },
   };
 
   layout.diameter = {
@@ -144,6 +147,9 @@ export default function lessonLayout() {
       move: {
         type: 'rotation',
       },
+    },
+    mods: {
+      interactiveLocation: new Point(radius * 0.8, 0),
     },
   };
 
@@ -177,7 +183,7 @@ export default function lessonLayout() {
       showGrid: true,
       color: colors.grid,
       gridColor: colors.grid,
-      location: new Point(-2.2, -1.4),
+      location: new Point(-2.2, -1.3),
       decimalPlaces: 0,
       lineWidth: 0.01,
     },
@@ -205,7 +211,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: new Point(1.05, 1.5) },
+        topRight: { position: new Point(1.05, 1.5) },
         summary: { position: new Point(-2.05, 1.2) },
       },
     },
@@ -312,6 +318,7 @@ export default function lessonLayout() {
       move: {
         type: 'scale',
       },
+      interactiveLocation: new Point(radius, 0),
     },
   });
 
