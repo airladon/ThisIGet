@@ -4688,6 +4688,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       arrow: shapes.arrow.bind(shapes),
       text: shapes.txt.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
+      axes: shapes.axes.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -19064,6 +19065,135 @@ function () {
   }, {
     key: "axes",
     value: function axes() {
+      var defaultOptions = {
+        width: 1,
+        height: 1,
+        limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+        yAxisLocation: 0,
+        xAxisLocation: 0,
+        stepX: 0.1,
+        stepY: 0.1,
+        fontSize: 0.13,
+        showGrid: true,
+        color: [1, 1, 1, 0],
+        gridColor: [1, 1, 1, 0],
+        location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](),
+        decimalPlaces: 1,
+        lineWidth: 0.01
+      };
+
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var width = options.width,
+          lineWidth = options.lineWidth,
+          limits = options.limits,
+          color = options.color,
+          stepX = options.stepX,
+          decimalPlaces = options.decimalPlaces,
+          yAxisLocation = options.yAxisLocation,
+          xAxisLocation = options.xAxisLocation,
+          fontSize = options.fontSize,
+          height = options.height,
+          stepY = options.stepY,
+          location = options.location,
+          showGrid = options.showGrid,
+          gridColor = options.gridColor;
+      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      xProps.minorTicks.mode = 'off';
+      xProps.minorGrid.mode = 'off';
+      xProps.majorGrid.mode = 'off';
+      xProps.length = width;
+      xProps.width = lineWidth;
+      xProps.limits = {
+        min: limits.left,
+        max: limits.right
+      };
+      xProps.color = color.slice();
+      xProps.title = '';
+      xProps.majorTicks.start = limits.left;
+      xProps.majorTicks.step = stepX;
+      xProps.majorTicks.length = lineWidth * 5;
+      xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
+      xProps.majorTicks.width = lineWidth * 2;
+      xProps.majorTicks.labelMode = 'off';
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+        return v.toFixed(decimalPlaces);
+      }).map(function (v) {
+        if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
+          return "".concat(v, "     ");
+        }
+
+        return v;
+      }); // xProps.majorTicks.labels[xProps.majorTicks.labels / 2] = '   0';
+
+      xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
+      xProps.majorTicks.labelsHAlign = 'center';
+      xProps.majorTicks.labelsVAlign = 'top';
+      xProps.majorTicks.fontColor = color.slice();
+      xProps.majorTicks.fontSize = fontSize;
+      xProps.majorTicks.fontWeight = '400';
+      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
+      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      yProps.minorTicks.mode = 'off';
+      yProps.minorGrid.mode = 'off';
+      yProps.majorGrid.mode = 'off';
+      yProps.length = height;
+      yProps.width = xProps.width;
+      yProps.limits = {
+        min: limits.bottom,
+        max: limits.top
+      };
+      yProps.color = xProps.color;
+      yProps.title = '';
+      yProps.rotation = Math.PI / 2;
+      yProps.majorTicks.step = stepY;
+      yProps.majorTicks.start = limits.bottom;
+      yProps.majorTicks.length = xProps.majorTicks.length;
+      yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
+      yProps.majorTicks.width = xProps.majorTicks.width;
+      yProps.majorTicks.labelMode = 'off';
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+        return v.toFixed(decimalPlaces);
+      }).map(function (v) {
+        if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
+          return '';
+        }
+
+        return v;
+      }); // yProps.majorTicks.labels[3] = '';
+
+      yProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](yProps.majorTicks.offset - fontSize * 0.2, 0);
+      yProps.majorTicks.labelsHAlign = 'right';
+      yProps.majorTicks.labelsVAlign = 'middle';
+      yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
+      yProps.majorTicks.fontSize = fontSize;
+      yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
+      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
+      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+
+      if (location instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+        transform = transform.translate(location.x, location.y);
+      } else {
+        transform = location._dup();
+      }
+
+      var xy = this.collection(transform);
+
+      if (showGrid) {
+        var gridLines = this.grid(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8), 1, gridColor, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0));
+        xy.add('grid', gridLines);
+      }
+
+      xy.add('y', yAxis);
+      xy.add('x', xAxis);
+      return xy;
+    }
+  }, {
+    key: "axesLegacy",
+    value: function axesLegacy() {
       var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var limits = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);

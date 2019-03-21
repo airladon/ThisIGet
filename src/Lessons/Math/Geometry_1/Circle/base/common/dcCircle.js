@@ -46,6 +46,20 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
   }
 
+  setCircleMoveLimits() {
+    const { width, height, location } = this.layout.grid.options;
+    const { radius } = this.layout.circ.options;
+
+    this._circle.move.maxTransform.updateTranslation(
+      location.x + width - radius,
+      location.y + height - radius,
+    );
+    this._circle.move.minTransform.updateTranslation(
+      location.x + radius,
+      location.y + radius,
+    );
+  }
+
   pushRadius(toAngle: ?number) {
     const r = this._radius.getRotation();
     let target = r + 1;

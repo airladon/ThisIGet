@@ -124,14 +124,32 @@ class Content extends PresentationLessonContent {
         'However, as language has changed considerably in that time, these property names are |less intuitive|, and often just have to be |remembered|.',
       ]),
     });
+
+    common.setContent = [
+      'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
+    ];
     this.addSection(common, {
-      setContent: [
-        'The |center_point| is at the middle of the circle and is used to describe the circle\'s location.',
-      ],
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
+        location: click(this.next, [this], colors.center),
       },
       show: [circ._circle, circ._anchor],
+    });
+    this.addSection(common, {
+      modifiers: {
+        center_point: click(circ.pulseAnchor, [circ], colors.center),
+        // location: click(this.next, [this], colors.center),
+      },
+      show: [circ._circle, circ._anchor, circ._grid],
+      setEnterState: () => {
+        circ._circle.isMovable = true;
+        circ._circle.isTouchable = true;
+        circ.setCircleMoveLimits();
+      },
+      setLeaveState: () => {
+        circ._circle.isMovable = false;
+        circ._circle.isTouchable = false;
+      },
     });
   }
 }

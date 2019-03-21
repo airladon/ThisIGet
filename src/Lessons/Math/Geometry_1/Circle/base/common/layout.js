@@ -18,6 +18,7 @@ const cssColorNames = [
   'radius',
   'diameter',
   'center',
+  'grid',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -160,12 +161,35 @@ export default function lessonLayout() {
     'center': { position: new Point(0, -0.4) },
   };
 
+  layout.grid = {
+    name: 'grid',
+    method: 'axes',
+    options: {
+      width: 4.5,
+      height: 2.7,
+      limits: new Rect(0, 0, 10, 6),
+      yAxisLocation: 0,
+      xAxisLocation: 0,
+      stepX: 1,
+      stepY: 1,
+      fontSize: 0.1,
+      showGrid: true,
+      color: colors.grid,
+      gridColor: colors.grid,
+      location: new Point(-2.2, -1.4),
+      decimalPlaces: 0,
+      lineWidth: 0.01,
+    },
+  };
+
   layout.addCircleElements = [
+    layout.grid,
     layout.circ,
     layout.arc,
     layout.radius,
     layout.diameter,
     layout.anchor,
+
   ];
 
   return layout;
