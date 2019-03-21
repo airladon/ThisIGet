@@ -11,6 +11,8 @@ const {
   Transform,
 } = Fig;
 
+const { spaceToSpaceTransform } = Fig.tools.g2; 
+
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   _anchor: DiagramElementPrimative;
   _circle: DiagramElementPrimative;
@@ -46,6 +48,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
   }
 
+  updateCircleLocation() {
+    if (this._locationText.isShown) {
+      const l = this.getCircleLocation().round(1);
+      this._locationText.drawingObject.setText(`Location:  x: ${l.x}  y: ${l.y}`);
+    }
+  }
+
   setCircleMoveLimits() {
     const { width, height, location } = this.layout.grid.options;
     const { radius } = this.layout.circ.options;
@@ -58,6 +67,24 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       location.x + radius,
       location.y + radius,
     );
+  }
+
+  getCircleLocation() {
+    const {
+      width, height, location, limits,
+    } = this.layout.grid.options;
+    const p = this._circle.getPosition();
+    const gridSpace = {
+      x: { bottomLeft: limits.left, width: limits.width },
+      y: { bottomLeft: limits.bottom, height: limits.height },
+    };
+    const diagramSpace = {
+      x: { bottomLeft: location.x, width: location.x + width },
+      y: { bottomLeft: location.y, height: location.y + height },
+    };
+
+    const diagramToGrid = spaceToSpaceTransform(diagramSpace, gridSpace);
+    return p.transformBy(diagramToGrid.matrix());
   }
 
   pushRadius(toAngle: ?number) {

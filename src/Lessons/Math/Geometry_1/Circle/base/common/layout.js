@@ -182,6 +182,24 @@ export default function lessonLayout() {
     },
   };
 
+  layout.locationText = {
+    name: 'locationText',
+    method: 'text',
+    options: {
+      text: 'Location: ',
+      color: colors.center,
+      size: 0.12,
+      family: 'helvetica',
+      hAlign: 'left',
+    },
+    mods: {
+      scenarios: {
+        center: { position: new Point(1.05, 1.5) },
+      },
+    },
+    scenario: 'center',
+  };
+
   layout.addCircleElements = [
     layout.grid,
     layout.circ,
@@ -189,6 +207,7 @@ export default function lessonLayout() {
     layout.radius,
     layout.diameter,
     layout.anchor,
+    layout.locationText,
 
   ];
 

@@ -140,11 +140,12 @@ class Content extends PresentationLessonContent {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
         // location: click(this.next, [this], colors.center),
       },
-      show: [circ._circle, circ._anchor, circ._grid],
+      show: [circ._circle, circ._anchor, circ._grid, circ._locationText],
       setEnterState: () => {
         circ._circle.isMovable = true;
         circ._circle.isTouchable = true;
         circ.setCircleMoveLimits();
+        circ.updateCircleLocation();
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;
