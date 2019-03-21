@@ -68,7 +68,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Introduction',
       setContent: centerV([
-        'The first shape we will explore is the one you see everytime you look at the |moon|, a |wheel|, a |ball|, or a |ring.',
+        'The first shape we will explore is the one you see everytime you look at the |moon|, a |wheel|, a |ball|, or a |ring|.',
       ]),
     });
     this.addSection(common, {
@@ -141,6 +141,7 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {
         circ._activator.onClick = circ.pulseCircle.bind(circ);
+        circ._circle.setScenario('center');
       },
       setLeaveState: () => {
         circ._activator.onClick = null;
@@ -162,10 +163,12 @@ class Content extends PresentationLessonContent {
         circ._activator,
       ],
       setEnterState: () => {
+        circ.containToGrid = false;
         circ.straighten(0);
         circ.straightening = false;
         circle._line.setColor(colors.grid);
         circ._activator.onClick = circ.straightenCircumference.bind(circ);
+        circ._circle.setScenario('center');
       },
       setLeaveState: () => {
         circle._line.setColor(colors.circle);
@@ -197,6 +200,8 @@ class Content extends PresentationLessonContent {
       fadeInFromPrev: false,
       show: [circle._line, circle._anchor, circ._grid, circ._locationText],
       setEnterState: () => {
+        circ.containToGrid = true;
+        circ.straighten(0);
         circ._circle.isMovable = true;
         circ._circle.isTouchable = true;
         circ._circle.hasTouchableElements = true;
@@ -260,7 +265,7 @@ class Content extends PresentationLessonContent {
       ]),
     });
     this.addSection(common, {
-      setContent: ['Experiment with changing the circle\'s size to see how it\'s properties change.'],
+      setContent: ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.'],
       show: [
         circle, circ._grid,
         circ._locationText, circ._circumferenceText,
@@ -268,6 +273,7 @@ class Content extends PresentationLessonContent {
       ],
       hide: [circle._arc],
       setEnterState: () => {
+        circ.containToGrid = true;
         circ.straighten(0);
         circ.straightening = false;
         circle.setScenario('center');
@@ -286,6 +292,12 @@ class Content extends PresentationLessonContent {
         circle._scale.isTouchable = false;
         circle._line.setColor(colors.circle);
       },
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'Once properties are defined, the |relationship| between them can be investigated.',
+        'However, to do this, first we need to understand |angle| which is another fundamental property of most shapes.',
+      ]),
     });
   }
 }

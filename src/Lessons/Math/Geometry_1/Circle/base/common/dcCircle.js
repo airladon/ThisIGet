@@ -17,6 +17,7 @@ const { round } = Fig.tools.math;
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   percentStraight: number;
   straightening: boolean;
+  containToGrid: boolean;
   _locationText: DiagramElementPrimative;
   _circumferenceText: DiagramElementPrimative;
   _diameterText: DiagramElementPrimative;
@@ -57,6 +58,9 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._circle._translate.move.element = this._circle;
     this._circumferenceText.onClick = this.straightenCircumference.bind(this);
     this._locationText.onClick = this.pulseAnchor.bind(this);
+    this._radiusText.onClick = this.pulseRadius.bind(this);
+    this._diameterText.onClick = this.pulseDiameter.bind(this);
+    this.containToGrid = false;
   }
 
   updateArc() {
@@ -72,10 +76,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       this.diagram.animateNextFrame();
     }
   }
-
-  // updateScale() {
-
-  // }
 
   updateCircleLocation() {
     if (this._locationText.isShown) {
@@ -250,17 +250,18 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
 
   widthOfCircumference() {
     const percent = this.percentStraight;
+    const scale = this._circle.getScale();
     const radius = this.layout.radius.options.length;
+
     let arcWidth = radius;
     if (percent > 0.5) {
       arcWidth = Math.sin(percent * Math.PI) * radius;
     }
-    const scale = this._circle.transform.s();
     if (scale) {
       const width = (percent * radius * Math.PI + arcWidth) * scale.x;
       return width * 2;
     }
-    return radius * 2;
+    return radius * 2 * scale.x;
   }
 
   bend(percent: number) {
@@ -285,7 +286,16 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   // };
 
   setCircleMoveLimits(minWidth: number = 0) {
-    const { width, height, location } = this.layout.grid.options;
+    let width;
+    let height;
+    let location;
+    if (this.containToGrid) {
+      ({ width, height, location } = this.layout.grid.options);
+    } else {
+      ({ width } = this.diagram.limits);
+      ({ height } = this.diagram.limits);
+      location = new Point(this.diagram.limits.left, this.diagram.limits.bottom);
+    }
     const { radius } = this.layout.circleLine.options;
     const scale = this._circle.getScale().x;
     this._circle.move.maxTransform.updateTranslation(
