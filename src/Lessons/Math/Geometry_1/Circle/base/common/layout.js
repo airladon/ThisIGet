@@ -115,6 +115,8 @@ export default function lessonLayout() {
     },
   };
 
+  layout.arc = joinObjects({}, layout.circ);
+
   layout.radius = {
     name: 'radius',
     method: 'line',
@@ -127,14 +129,20 @@ export default function lessonLayout() {
         type: 'rotation',
       },
     },
-    // mods: {
-      // isTouchable: true,
-      // isMovable: true,
-      // move: {
-      //   type: 'rotation',
-      // },
-      // hasTouchableElements: true,
-    // },
+  };
+
+  layout.diameter = {
+    name: 'radius',
+    method: 'line',
+    options: {
+      length: radius * 2,
+      width,
+      color: colors.diameter,
+      vertexSpaceStart: 'center',
+      move: {
+        type: 'rotation',
+      },
+    },
   };
 
   layout.anchor = {
@@ -153,6 +161,7 @@ export default function lessonLayout() {
   };
   layout.addCircleElements = [
     layout.circ,
+    layout.arc,
     layout.radius,
     layout.anchor,
   ];
