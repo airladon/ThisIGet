@@ -268,23 +268,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.straighten(1 - percent);
   }
 
-  // updateBoundaries(minWidth: number = 0) {
-  //   const circle = this._circle;
-  //   const s = circle.getScale();
-  //   const percent = s.x;
-  //   circle.move.minTransform.updateTranslation(
-  //     layout.grid.position.x
-  //       + Math.max(layout.circle.radius * percent, minWidth),
-  //     layout.grid.position.y + layout.circle.radius * percent,
-  //   );
-  //   circle.move.maxTransform.updateTranslation(
-  //     layout.grid.position.x + layout.grid.width
-  //       - Math.max(layout.circle.radius * percent, minWidth),
-  //     layout.grid.position.y + layout.grid.height
-  //       - layout.circle.radius * percent,
-  //   );
-  // };
-
   setCircleMoveLimits(minWidth: number = 0) {
     let width;
     let height;

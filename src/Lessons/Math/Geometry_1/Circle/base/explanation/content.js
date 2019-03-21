@@ -39,14 +39,12 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    // const collection = diag._collection;
     const objects = diag._objects;
     const circ = diag._circle;
     const circle = circ._circle;
-    console.log(diag)
 
     const common = {
-      setContent: '',
+      setContent: [],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -128,6 +126,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Circumference',
       setContent: [
         'Every shape has a |perimeter|, which is the shape\'s boundary or outline. The |length| of the perimeter is a |property| used to describe the shape\'s size.',
         `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__perimeter_definition', 'lesson__definition_lowest')}`,
@@ -176,6 +175,7 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      title: 'Center',
       setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
         `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition', 'lesson__definition_lowest')}`,
@@ -217,6 +217,7 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      title: 'Radius',
       setContent: [
         'The |radius| describes the circle\'s size and is |any| line between the |center| and |edge|. The radius is half the circle width.',
         `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition', 'lesson__definition_lowest')}`,
@@ -233,6 +234,7 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      title: 'Diameter',
       setContent: [
         'The |diameter| describes the circle\'s full width and is |any| line that runs between two points on the circle\'s |edge| and the |center|.',
         `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition', 'lesson__definition_lowest')}`,
@@ -258,6 +260,7 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      title: 'Summary',
       setContent: centerV([
         'So if we were discovering the circle today, we might call it a |ring|, with properties |middle|, |wheel spoke|, |width|, and |carry around|.',
         'This would make it easier for people learning about it today.',
