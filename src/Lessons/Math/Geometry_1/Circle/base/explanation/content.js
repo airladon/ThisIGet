@@ -109,6 +109,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._radius, circle._arc, circle._anchor],
       setSteadyState: () => {
+        circ._circle.setScenario('center');
         circle._radius.setRotation(0.001);
       },
     });
@@ -135,11 +136,14 @@ class Content extends PresentationLessonContent {
         location: click(this.next, [this], colors.center),
       },
       show: [circle._line, circle._anchor],
+      setEnterState: () => {
+        circ._circle.setScenario('center');
+      },
     });
     this.addSection(common, {
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
-        // location: click(this.next, [this], colors.center),
+        location: click(circ.pulseLocation, [circ], colors.center),
       },
       show: [circle._line, circle._anchor, circ._grid, circ._locationText],
       setEnterState: () => {
@@ -147,6 +151,7 @@ class Content extends PresentationLessonContent {
         circ._circle.isTouchable = true;
         circ._circle.hasTouchableElements = true;
         circ._circle._line.isTouchable = true;
+        circ._circle.setScenario('center');
         circ.setCircleMoveLimits();
         circ.updateCircleLocation();
       },

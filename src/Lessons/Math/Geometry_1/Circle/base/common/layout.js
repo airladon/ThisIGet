@@ -206,6 +206,11 @@ export default function lessonLayout() {
     options: {
       transform: new Transform().scale(1, 1).translate(0, 0),
     },
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0) },
+      },
+    },
     addElements: [
       layout.circleLine,
       layout.arc,

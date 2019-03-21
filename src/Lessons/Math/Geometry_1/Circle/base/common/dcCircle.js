@@ -124,4 +124,9 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._circle._line.pulseThickNow(1, 1.04, 5);
     this.diagram.animateNextFrame();
   }
+
+  pulseLocation() {
+    this._locationText.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
 }
