@@ -167,15 +167,47 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'The |radius| describes the circle\'s size and is any line between the |center| and |edge|.',
-        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition')}`,
+        'The |radius| describes the circle\'s size and is |any| line between the |center| and |edge|. The radius is half the circle width.',
+        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition', 'lesson__definition_lowest')}`,
       ],
       modifiers: {
         radius: click(circ.pulseRadius, [circ], colors.radius),
         center: click(circ.pulseAnchor, [circ], colors.center),
         edge: click(circ.pulseCircle, [circ], colors.circle),
+        any: click(circ.pushRadiusRandom, [circ], colors.radius),
       },
       show: [circle._line, circle._anchor, circle._radius],
+      setEnterState: () => {
+        circ._circle.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'The |diameter| describes the circle\'s full width and is |any| line that runs between two points on the circle\'s |edge| and the |center|.',
+        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition', 'lesson__definition_lowest')}`,
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.radius),
+        center: click(circ.pulseAnchor, [circ], colors.center),
+        edge: click(circ.pulseCircle, [circ], colors.circle),
+        any: click(circ.pushDiameterRandom, [circ], colors.radius),
+      },
+      show: [circle._line, circle._anchor, circle._diameter],
+      setEnterState: () => {
+        circ._circle.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'Diameter is often used when measuring a circle, as it is often easier to measure. In comparison, radius is mostly used when working with circle\'s in an analysis and is most often found in relationships between properties.',
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.radius),
+        center: click(circ.pulseAnchor, [circ], colors.center),
+        edge: click(circ.pulseCircle, [circ], colors.circle),
+        any: click(circ.pushDiameterRandom, [circ], colors.radius),
+      },
+      show: [circle._line, circle._anchor, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },

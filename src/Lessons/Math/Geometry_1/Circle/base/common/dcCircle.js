@@ -92,6 +92,11 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     return p.transformBy(diagramToGrid.matrix());
   }
 
+  pushRadiusRandom() {
+    const r = Math.random() * Math.PI + Math.PI / 2;
+    this.pushRadius(this._circle._radius.getRotation() + r);
+  }
+
   pushRadius(toAngle: ?number) {
     const r = this._circle._radius.getRotation();
     let target = r + 1;
@@ -100,6 +105,24 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
     this.stop(true, false);
     this._circle._radius.animations.new()
+      .rotation({ target, duration: 1, direction: 1 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pushDiameterRandom() {
+    const r = Math.random() * Math.PI / 2 + Math.PI / 4;
+    this.pushDiameter(this._circle._diameter.getRotation() + r);
+  }
+
+  pushDiameter(toAngle: ?number) {
+    const r = this._circle._diameter.getRotation();
+    let target = r + 1;
+    if (toAngle != null) {
+      target = toAngle;
+    }
+    this.stop(true, false);
+    this._circle._diameter.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();
     this.diagram.animateNextFrame();
@@ -124,11 +147,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._circle._line.pulseThickNow(1, 1.04, 5);
     this.diagram.animateNextFrame();
   }
-
-  // pulseLocation() {
-  //   this._locationText.pulseScaleNow(1, 1.2);
-  //   this.diagram.animateNextFrame();
-  // }
 
   pushCircle() {
     let t = this._circle.transform.t();

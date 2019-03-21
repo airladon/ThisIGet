@@ -210,6 +210,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: new Point(0, 0) },
       },
+      hasTouchableElements: true,
     },
     addElements: [
       layout.circleLine,
