@@ -31,7 +31,7 @@ export default function lessonLayout() {
   // ///////////////////////////////////////////////////////////////
   // Shapes
   // ///////////////////////////////////////////////////////////////
-  const radius = 1;
+  let radius = 1;
   const sides = 50;
   const textureFile = `/static/dist/${textureMap}`;
   const lineWidth = 0.08;
@@ -104,6 +104,7 @@ export default function lessonLayout() {
   // Interactive Circle
   // ///////////////////////////////////////////////////////////////
   const width = 0.05;
+  radius = 0.9
   layout.circleLine = {
     name: 'line',
     method: 'polygon',
@@ -200,6 +201,58 @@ export default function lessonLayout() {
     scenario: 'center',
   };
 
+  layout.circumferenceLeftLine = {
+    name: 'leftLine',
+    method: 'line',
+    options: {
+      length: radius * Math.PI,
+      width,
+      color: colors.circle,
+      vertexSpaceStart: 'end',
+      position: new Point(0, -radius + width / 2),
+    },
+  };
+  layout.circumferenceRightLine = joinObjects(
+    {}, layout.circumferenceLeftLine,
+    { name: 'rightLine', options: { vertexSpaceStart: 'start' } },
+  );
+
+  layout.circumferenceLeftArc = {
+    name: 'leftArc',
+    method: 'polygon',
+    options: {
+      radius,
+      width,
+      sides: 400,
+      sidesToDraw: 200,
+      clockwise: true,
+      color: colors.circle,
+      rotation: Math.PI / 2,
+      transform: new Transform().translate(0, 0),
+    },
+  };
+  layout.circumferenceRightArc = joinObjects(
+    {}, layout.circumferenceLeftArc,
+    { 
+      name: 'rightArc',
+      options: { rotation: -Math.PI / 2, clockwise: false }
+    },
+  );
+
+  layout.circumference = {
+    name: 'circumference',
+    method: 'collection',
+    options: {
+      transform: new Transform().scale(1, 1).translate(0, 0),
+    },
+    addElements: [
+      layout.circumferenceLeftLine,
+      layout.circumferenceRightLine,
+      layout.circumferenceLeftArc,
+      layout.circumferenceRightArc,
+    ],
+  };
+
   layout.circ = {
     name: 'circle',
     method: 'collection',
@@ -213,6 +266,7 @@ export default function lessonLayout() {
       hasTouchableElements: true,
     },
     addElements: [
+      layout.circumference,
       layout.circleLine,
       layout.arc,
       layout.radius,
@@ -225,7 +279,6 @@ export default function lessonLayout() {
     layout.grid,
     layout.circ,
     layout.locationText,
-
   ];
 
   return layout;

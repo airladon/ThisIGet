@@ -129,6 +129,21 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
+        'A property that almost all shapes have is its perimeter |length|. The perimeter is the outline or boundary of the shape.',
+        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__center_definition', 'lesson__definition_lowest')}`,
+      ],
+      modifiers: {
+        length: click(circ.straightenCircumference, [circ], colors.circle),
+      },
+      show: [
+        // circle._line,
+        circle._circumference],
+      setEnterState: () => {
+        circ.straighten(0.9);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
         `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition')}`,
       ],
@@ -201,12 +216,6 @@ class Content extends PresentationLessonContent {
       setContent: [
         'Diameter is often used when measuring a circle, as it is often easier to measure. In comparison, radius is mostly used when working with circle\'s in an analysis and is most often found in relationships between properties.',
       ],
-      modifiers: {
-        diameter: click(circ.pulseDiameter, [circ], colors.radius),
-        center: click(circ.pulseAnchor, [circ], colors.center),
-        edge: click(circ.pulseCircle, [circ], colors.circle),
-        any: click(circ.pushDiameterRandom, [circ], colors.radius),
-      },
       show: [circle._line, circle._anchor, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');

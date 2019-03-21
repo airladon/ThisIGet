@@ -4739,6 +4739,10 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         addElementsToUse = _elementDefinition[5];
         firstScenario = _elementDefinition[6];
       } else {
+        if (elementDefinition == null) {
+          throw Error("Add elements index ".concat(index, " does not exist in layout"));
+        }
+
         nameToUse = elementDefinition.name;
         pathToUse = elementDefinition.path;
         optionsToUse = elementDefinition.options;
