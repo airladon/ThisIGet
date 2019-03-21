@@ -12,11 +12,15 @@ const {
 } = Fig;
 
 const { spaceToSpaceTransform } = Fig.tools.g2;
+const { round } = Fig.tools.math;
 
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   percentStraight: number;
   straightening: boolean;
   _locationText: DiagramElementPrimative;
+  _circumferenceText: DiagramElementPrimative;
+  _diameterText: DiagramElementPrimative;
+  _radiusText: DiagramElementPrimative;
   _grid: DiagramElementPrimative;
   _circle: {
     _anchor: DiagramElementPrimative;
@@ -24,6 +28,8 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     _arc: DiagramElementPrimative;
     _diameter: DiagramObjectLine;
     _radius: DiagramObjectLine;
+    _scale: DiagramElementPrimative;
+    _translate: DiagramElementPrimative;
     _circumference: {
       _leftArc: DiagramElementPrimative;
       _rightArc: DiagramElementPrimative;
@@ -47,6 +53,10 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._circle.setTransformCallback = this.updateCircleLocation.bind(this);
     this.percentStraight = 0;
     this.straightening = true;
+    this._circle._scale.move.element = this._circle;
+    this._circle._translate.move.element = this._circle;
+    this._circumferenceText.onClick = this.straightenCircumference.bind(this);
+    this._locationText.onClick = this.pulseAnchor.bind(this);
   }
 
   updateArc() {
@@ -63,11 +73,48 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
   }
 
+  // updateScale() {
+
+  // }
+
   updateCircleLocation() {
     if (this._locationText.isShown) {
       const l = this.getCircleLocation().round(1);
       this._locationText.drawingObject.setText(`Location:  x: ${l.x.toFixed(1)}  y: ${l.y.toFixed(1)}`);
     }
+
+    const { radius } = this.layout.circleLine.options;
+    const gridLimits = this.layout.grid.options.limits;
+    const gridWidth = this.layout.grid.options.width;
+    const gridSpaceScale = gridLimits.width / gridWidth;
+    // console.log(gridLimits.width)
+    const scaledRadius = radius * this._circle.getScale().x * gridSpaceScale;
+
+    if (this._circumferenceText.isShown) {
+      const circumference = round(scaledRadius * 2 * Math.PI, 1);
+      this._circumferenceText.drawingObject.setText(
+        `Circumference: ${circumference.toFixed(1)}`,
+      );
+    }
+
+    if (this._diameterText.isShown) {
+      this._diameterText.drawingObject.setText(
+        `Diameter: ${round(scaledRadius * 2, 1).toFixed(1)}`,
+      );
+    }
+
+    if (this._radiusText.isShown) {
+      this._radiusText.drawingObject.setText(
+        `Radius: ${round(scaledRadius, 1).toFixed(1)}`,
+      );
+    }
+
+    const width = this.widthOfCircumference();
+    this.setCircleMoveLimits(width);
+
+    this._circle.setTransformCallback = null;
+    this._circle.setTransform(this._circle.transform);
+    this._circle.setTransformCallback = this.updateCircleLocation.bind(this);
   }
 
   getCircleLocation() {
@@ -211,9 +258,9 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     const scale = this._circle.transform.s();
     if (scale) {
       const width = (percent * radius * Math.PI + arcWidth) * scale.x;
-      return width;
+      return width * 2;
     }
-    return radius;
+    return radius * 2;
   }
 
   bend(percent: number) {

@@ -204,6 +204,7 @@ class Content extends PresentationLessonContent {
         circ._circle.setScenario('center');
         circ.setCircleMoveLimits();
         circ.updateCircleLocation();
+        circ._locationText.setScenario('summary');
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;
@@ -257,6 +258,34 @@ class Content extends PresentationLessonContent {
         'This would make it easier for people learning about it today.',
         'However, as it was first studied a long time ago in different languages, it is called a |circle|, with properties |center|, |radius|, |diameter| and |circumference|.',
       ]),
+    });
+    this.addSection(common, {
+      setContent: ['Experiment with changing the circle\'s size to see how it\'s properties change.'],
+      show: [
+        circle, circ._grid,
+        circ._locationText, circ._circumferenceText,
+        circ._diameterText, circ._radiusText,
+      ],
+      hide: [circle._arc],
+      setEnterState: () => {
+        circ.straighten(0);
+        circ.straightening = false;
+        circle.setScenario('center');
+        circle._radius.setRotation(0.5);
+        circle._diameter.setRotation(-0.5);
+        circle.setScale(0.5);
+        circle.move.maxTransform.updateScale(0.78, 0.78);
+        circle.move.minTransform.updateScale(0.3, 0.3);
+        circle._scale.isTouchable = true;
+        circ._locationText.setScenario('summary');
+        circ._circumferenceText.setScenario('summary');
+        circle._line.setColor(colors.grid);
+      },
+      setLeaveState: () => {
+        circle.setScale(1);
+        circle._scale.isTouchable = false;
+        circle._line.setColor(colors.circle);
+      },
     });
   }
 }

@@ -104,7 +104,7 @@ export default function lessonLayout() {
   // Interactive Circle
   // ///////////////////////////////////////////////////////////////
   const width = 0.05;
-  radius = 0.9
+  radius = 0.9;
   layout.circleLine = {
     name: 'line',
     method: 'polygon',
@@ -183,23 +183,69 @@ export default function lessonLayout() {
     },
   };
 
-  layout.locationText = {
-    name: 'locationText',
+  layout.text = {
     method: 'text',
     options: {
-      text: 'Location: ',
-      color: colors.center,
       size: 0.12,
       family: 'helvetica',
       hAlign: 'left',
+      style: 'normal',
+      weight: 500,
+    },
+    mods: {
+      isTouchable: true,
+    },
+    scenario: 'summary',
+  };
+
+  layout.locationText = joinObjects({}, layout.text, {
+    name: 'locationText',
+    options: {
+      color: colors.center,
     },
     mods: {
       scenarios: {
         center: { position: new Point(1.05, 1.5) },
+        summary: { position: new Point(-2.05, 1.2) },
       },
     },
-    scenario: 'center',
-  };
+  });
+
+  layout.circumferenceText = joinObjects({}, layout.text, {
+    name: 'circumferenceText',
+    options: {
+      color: colors.circle,
+    },
+    mods: {
+      scenarios: {
+        summary: { position: new Point(-2.05, 1) },
+      },
+    },
+  });
+
+  layout.radiusText = joinObjects({}, layout.text, {
+    name: 'radiusText',
+    options: {
+      color: colors.radius,
+    },
+    mods: {
+      scenarios: {
+        summary: { position: new Point(-2.05, 0.8) },
+      },
+    },
+  });
+  layout.diameterText = joinObjects({}, layout.text, {
+    name: 'diameterText',
+    options: {
+      color: colors.diameter,
+    },
+    mods: {
+      scenarios: {
+        summary: { position: new Point(-2.05, 0.6) },
+      },
+    },
+  });
+
 
   layout.circumferenceLeftLine = {
     name: 'leftLine',
@@ -233,9 +279,9 @@ export default function lessonLayout() {
   };
   layout.circumferenceRightArc = joinObjects(
     {}, layout.circumferenceLeftArc,
-    { 
+    {
       name: 'rightArc',
-      options: { rotation: -Math.PI / 2, clockwise: false }
+      options: { rotation: -Math.PI / 2, clockwise: false },
     },
   );
 
@@ -253,6 +299,35 @@ export default function lessonLayout() {
     ],
   };
 
+  layout.scalingCircle = joinObjects({}, layout.circleLine, {
+    name: 'scale',
+    options: {
+      fill: true,
+      color: [0, 0, 1, 0],
+      radius: radius * 1.2,
+    },
+    mods: {
+      isTouchable: true,
+      isMovable: true,
+      move: {
+        type: 'scale',
+      },
+    },
+  });
+
+  layout.translatingCircle = joinObjects({}, layout.circleLine, {
+    name: 'translate',
+    options: {
+      fill: true,
+      color: [0, 1, 0, 0],
+      radius: radius * 0.4,
+    },
+    mods: {
+      isTouchable: true,
+      isMovable: true,
+    },
+  });
+
   layout.circ = {
     name: 'circle',
     method: 'collection',
@@ -266,12 +341,14 @@ export default function lessonLayout() {
       hasTouchableElements: true,
     },
     addElements: [
+      layout.scalingCircle,
       layout.circleLine,
       layout.circumference,
       layout.arc,
       layout.radius,
       layout.diameter,
       layout.anchor,
+      layout.translatingCircle,
     ],
   };
 
@@ -285,6 +362,9 @@ export default function lessonLayout() {
     layout.grid,
     layout.circ,
     layout.locationText,
+    layout.circumferenceText,
+    layout.radiusText,
+    layout.diameterText,
   ];
 
   return layout;
