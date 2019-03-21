@@ -280,7 +280,7 @@ export default function lessonLayout() {
       width: 6,
       height: radius * 3,
       position: new Point(0, 0),
-      color: [0, 1, 0, 1]
+      color: [0, 1, 0, 0],
     }),
     layout.grid,
     layout.circ,

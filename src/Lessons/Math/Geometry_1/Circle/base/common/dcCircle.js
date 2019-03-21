@@ -252,7 +252,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   }
 
   straightenCircumference() {
-    // const currentPercent = this.percentStraight;
     this._circle._circumference.stop(true, false);
     if (this.straightening || this.percentStraight === 1) {
       this.straightening = false;
@@ -273,17 +272,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
         })
         .start();
     }
-    // if (!this.straightening || this.percentStraight === 0) {
-    //   this.animateCustomToWithDelay(
-    //     0, this.straighten.bind(this), 5, currentPercent, null, false,
-    //   );
-    //   this.varState.straightening = true;
-    // } else {
-    //   this.animateCustomToWithDelay(
-    //     0, this.bend.bind(this), 5, 1 - currentPercent, null, false,
-    //   );
-    //   this.varState.straightening = false;
-    // }
     this.diagram.animateNextFrame();
   }
 }

@@ -129,11 +129,32 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'A property that almost all shapes have is its perimeter |length|. The perimeter is the outline or boundary of the shape.',
-        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__center_definition', 'lesson__definition_lowest')}`,
+        'Every shape has a |perimeter|, which is the shape\'s boundary or outline. The |length| of the perimeter is a |property| used to describe the shape\'s size.',
+        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__perimeter_definition', 'lesson__definition_lowest')}`,
       ],
       modifiers: {
-        length: click(circ.straightenCircumference, [circ], colors.circle),
+        perimeter: click(circ.pulseCircle, [circ], colors.circle),
+      },
+      show: [
+        circle._line,
+        circ._activator,
+      ],
+      setEnterState: () => {
+        circ._activator.onClick = circ.pulseCircle.bind(circ);
+      },
+      setLeaveState: () => {
+        circ._activator.onClick = null;
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'A circle\'s perimeter has the special name |circumference|. The length of the circumference is most easily seen when |straightened| out.',
+        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition', 'lesson__definition_lowest')}`,
+      ],
+      modifiers: {
+        straightened: click(circ.straightenCircumference, [circ], colors.circle),
+        // circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
       show: [
         circle._line,
@@ -154,7 +175,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition')}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition', 'lesson__definition_lowest')}`,
       ],
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
@@ -223,12 +244,19 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'Diameter is often used when measuring a circle, as it is often easier to measure. In comparison, radius is mostly used when working with circle\'s in an analysis and is most often found in relationships between properties.',
+        '|Diameter| is often used when measuring a circle, as it can be easier to measure. In comparison, |radius| is often used when using a circle\'s properties in more complex problems, as it can make the math simpler.',
       ],
       show: [circle._line, circle._anchor, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'So if we were discovering the circle today, we might call it a |ring|, with properties |middle|, |wheel spoke|, |width|, and |carry around|.',
+        'This would make it easier for people learning about it today.',
+        'However, as it was first studied a long time ago in different languages, it is called a |circle|, with properties |center|, |radius|, |diameter| and |circumference|.',
+      ]),
     });
   }
 }
