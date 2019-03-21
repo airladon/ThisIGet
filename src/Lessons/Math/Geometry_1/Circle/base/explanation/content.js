@@ -296,6 +296,14 @@ class Content extends PresentationLessonContent {
         circle._scale.isTouchable = false;
         circle._line.setColor(colors.circle);
       },
+      setInfo: [
+        'Drag circle |edge| to make larger or smaller',
+        'Drag circle |center| to move',
+        'Drag |radius| to rotate it',
+        'Drag |diameter| to rotate it',
+        'Press on |Circumference| text to straigten',
+        'Press on other measurements text to hightlight',
+      ],
     });
     this.addSection(common, {
       setContent: centerV([
