@@ -8,7 +8,7 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   // DiagramObjectAngle,
-  Transform,
+  Transform, Point,
 } = Fig;
 
 const { spaceToSpaceTransform } = Fig.tools.g2;
@@ -125,8 +125,29 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseLocation() {
-    this._locationText.pulseScaleNow(1, 1.2);
+  // pulseLocation() {
+  //   this._locationText.pulseScaleNow(1, 1.2);
+  //   this.diagram.animateNextFrame();
+  // }
+
+  pushCircle() {
+    let t = this._circle.transform.t();
+    if (t === null || t === undefined) {
+      t = new Point(0.001, 0.001);
+    }
+    if (t.x === 0) {
+      t.x = 0.001;
+    }
+    if (t.y === 0) {
+      t.y = 0.001;
+    }
+
+    this._circle.state.movement.velocity.updateTranslation(
+      Math.random() * 10 * t.x / Math.abs(t.x) * -1,
+      Math.random() * 10 * t.y / Math.abs(t.y) * -1,
+    );
+
+    this._circle.startMovingFreely();
     this.diagram.animateNextFrame();
   }
 }

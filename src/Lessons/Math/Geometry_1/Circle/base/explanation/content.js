@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -127,10 +127,11 @@ class Content extends PresentationLessonContent {
       ]),
     });
 
-    common.setContent = [
-      'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
-    ];
     this.addSection(common, {
+      setContent: [
+        'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
+        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition')}`,
+      ],
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
         location: click(this.next, [this], colors.center),
@@ -141,10 +142,14 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      setContent: [
+        'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
+      ],
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
-        location: click(circ.pulseLocation, [circ], colors.center),
+        location: click(circ.pushCircle, [circ], colors.center),
       },
+      fadeInFromPrev: false,
       show: [circle._line, circle._anchor, circ._grid, circ._locationText],
       setEnterState: () => {
         circ._circle.isMovable = true;
@@ -158,6 +163,21 @@ class Content extends PresentationLessonContent {
       setLeaveState: () => {
         circ._circle.isMovable = false;
         circ._circle.isTouchable = false;
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'The |radius| describes the circle\'s size and is any line between the |center| and |edge|.',
+        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition')}`,
+      ],
+      modifiers: {
+        radius: click(circ.pulseRadius, [circ], colors.radius),
+        center: click(circ.pulseAnchor, [circ], colors.center),
+        edge: click(circ.pulseCircle, [circ], colors.circle),
+      },
+      show: [circle._line, circle._anchor, circle._radius],
+      setEnterState: () => {
+        circ._circle.setScenario('center');
       },
     });
   }
