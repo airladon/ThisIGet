@@ -367,15 +367,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     const height = overlay.clientHeight;
     const qrWidth = width * 0.7;
     const qrHeight = height * 0.7;
-    const qrFontSize = fontSize;
-    // if (width < 400) {
-
-    // } else if (width < 600) {
-
-    // } else {
-
-    // }
-    this.setRootElement(qrWidth, qrHeight, qrFontSize);
+    this.setRootElement(qrWidth, qrHeight);
   }
 
 
@@ -400,12 +392,14 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   // eslint-disable-next-line class-methods-use-this
-  setRootElement(width: number, height: number, fontSize: number) {
+  setRootElement(width: number, height: number, fontSize: ?number) {
     const rootElement = document.documentElement;
     if (rootElement != null) {
       rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
       rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
-      rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
+      if (fontSize != null) {
+        rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
+      }
     }
   }
 

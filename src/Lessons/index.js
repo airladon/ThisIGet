@@ -147,6 +147,7 @@ export default function getLessonIndex() {
             'summary',
           ],
           qr: [
+            'Diameter',
           ],
         },
         legacy: {

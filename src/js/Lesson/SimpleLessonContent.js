@@ -47,7 +47,7 @@ class SimpleLessonContent {
         htmlId: 'id_qr_diagram',
         limits: this.diagram.limits,
       });
-    }
+    }    
     if (this.qrDiagram.elements._qr == null) {
       this.qrDiagram.addElements(
         this.qrDiagram.elements,
@@ -70,6 +70,7 @@ class SimpleLessonContent {
       }
       this.getQR(uid, versionUid);
     });
+    // this.qrDiagram.elements.hasTouchableElements = true;
     this.qrDiagram.setFirstTransform();
   }
 

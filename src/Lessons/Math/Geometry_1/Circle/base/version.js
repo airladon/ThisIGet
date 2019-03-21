@@ -6,7 +6,11 @@ var details = {
   description: 'Presentation form - interactive.',
   uid: 'base',
   qr: [
-    // 'Main',
+    'Diameter',
+    'Radius',
+    'Circumference',
+    'Center',
+    'Circle',
   ],
 };
 

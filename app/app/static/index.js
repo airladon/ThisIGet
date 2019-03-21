@@ -25542,6 +25542,21 @@ function () {
       }
     }
   }, {
+    key: "makeTouchable",
+    value: function makeTouchable() {
+      var makeThisElementTouchable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (makeThisElementTouchable) {
+        this.isTouchable = true;
+      } else {
+        this.hasTouchableElements = true;
+      }
+
+      if (this.parent != null) {
+        this.parent.makeTouchable(false);
+      }
+    }
+  }, {
     key: "clearRender",
     value: function clearRender() {
       var tieToElement;
