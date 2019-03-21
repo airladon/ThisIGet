@@ -98,8 +98,14 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'We can create a circle by anchoring a line at one end, and tracing the other end while pushing it around a full rotation.',
+        'We can create a circle by |anchoring| a |line| at one end, and tracing the other end while |pushing| it around a |full| rotation.',
       ],
+      modifiers: {
+        anchoring: click(circ.pulseAnchor, [circ], colors.center),
+        line: click(circ.pulseRadius, [circ], colors.radius),
+        pushing: click(circ.pushRadius, [circ, null], colors.circle),
+        full: click(circ.pushRadius, [circ, Math.PI * 1.999], colors.circle),
+      },
       show: [circ._radius, circ._arc, circ._anchor],
       setSteadyState: () => {
         circ._radius.setRotation(0.001);

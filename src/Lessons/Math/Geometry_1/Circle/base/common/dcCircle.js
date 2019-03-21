@@ -46,8 +46,21 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     }
   }
 
+  pushRadius(toAngle: ?number) {
+    const r = this._radius.getRotation();
+    let target = r + 1;
+    if (toAngle != null) {
+      target = toAngle;
+    }
+    this.stop(true, false);
+    this._radius.animations.new()
+      .rotation({ target, duration: 1, direction: 1 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   pulseAnchor() {
-    this._anchor.pulseScaleNow(1, 1.5);
+    this._anchor.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
