@@ -9,7 +9,6 @@ var details = {
     'Diameter',
     'Radius',
     'Circumference',
-    'Center',
     'Circle',
   ],
 };

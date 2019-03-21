@@ -148,6 +148,10 @@ export default function getLessonIndex() {
           ],
           qr: [
             'Diameter',
+            'Radius',
+            'Circumference',
+            'Center',
+            'Circle',
           ],
         },
         legacy: {
