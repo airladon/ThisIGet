@@ -98,18 +98,40 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'We can create a circle by |anchoring| a |line| at one end, and tracing the other end while |pushing| it around a |full| rotation.',
+        'We can create a circle by |anchoring| a |line| at one end, and |pushing| its other end. If we trace the free end around a full rotation, we get a |circle|.',
       ],
       modifiers: {
         anchoring: click(circ.pulseAnchor, [circ], colors.center),
         line: click(circ.pulseRadius, [circ], colors.radius),
         pushing: click(circ.pushRadius, [circ, null], colors.circle),
-        full: click(circ.pushRadius, [circ, Math.PI * 1.999], colors.circle),
+        circle: click(circ.pushRadius, [circ, Math.PI * 1.999], colors.circle),
       },
       show: [circ._radius, circ._arc, circ._anchor],
       setSteadyState: () => {
         circ._radius.setRotation(0.001);
       },
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'We\'ve now identified a shape, named it and know how to create it.',
+        'Next we need to be able to describe it, by identifying some of its |properties|.',
+      ]),
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'Similar to the word |circle|, when properties were first studied they were given names that used words from every day language.',
+        'Many property names we use today come from their |historical roots|.',
+        'However, as language has changed considerably in that time, these property names are |less intuitive|, and often just have to be |remembered|.',
+      ]),
+    });
+    this.addSection(common, {
+      setContent: [
+        'The |center_point| is at the middle of the circle and is used to describe the circle\'s location.',
+      ],
+      modifiers: {
+        center_point: click(circ.pulseAnchor, [circ], colors.center),
+      },
+      show: [circ._circle, circ._anchor],
     });
   }
 }
