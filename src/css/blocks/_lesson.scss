@@ -192,10 +192,20 @@ $title_bar_space_low: 90px;
 
 #lesson__button-previous {
   left: 0;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
 }
 
 #lesson__button-next {
   right: 0;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
 }
 
 .lesson__button-next-enabled {
@@ -263,6 +273,11 @@ $title_bar_space_low: 90px;
   background-color: color('diagram', 'background');
   border: 0;
   color: color('lesson', 'button', 'light');
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
 }
 
 #id__lesson__goto_button:hover {

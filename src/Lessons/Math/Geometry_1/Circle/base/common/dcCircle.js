@@ -4,6 +4,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
+  DiagramElement,
   DiagramElementPrimative,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -24,7 +25,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   _radiusText: DiagramElementPrimative;
   _grid: DiagramElementPrimative;
   _circle: {
-    _anchor: DiagramElementPrimative;
+    _center: DiagramElementPrimative;
     _line: DiagramElementPrimative;
     _arc: DiagramElementPrimative;
     _diameter: DiagramObjectLine;
@@ -57,7 +58,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._circle._scale.move.element = this._circle;
     this._circle._translate.move.element = this._circle;
     this._circumferenceText.onClick = this.straightenCircumference.bind(this);
-    this._locationText.onClick = this.pulseAnchor.bind(this);
+    this._locationText.onClick = this.pulseCenter.bind(this);
     this._radiusText.onClick = this.pulseRadius.bind(this);
     this._diameterText.onClick = this.pulseDiameter.bind(this);
     this.containToGrid = false;
@@ -76,6 +77,29 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       this.diagram.animateNextFrame();
     }
   }
+
+  // showOnlyAndPulse(element: DiagramElement) {
+  //   this.stop(true, true);
+  //   this._circle._radius.hide();
+  //   this._circle._diameter.hide();
+  //   this._circle._center.hide();
+
+  //   if (element === this._circle._center) {
+  //     element.show();
+  //     this.pulseCenter();
+  //   } else if (element === this._circle._radius) {
+  //     element.showAll();
+  //     this._circle._center.show();
+  //     this.pulseRadius();
+  //   } else if (element === this._circle._diameter) {
+  //     element.showAll();
+  //     this._circle._center.show();
+  //     this.pulseDiameter();
+  //   } else if (element === this._circle._line) {
+  //     element.show();
+  //     this.pulseCircle();
+  //   }
+  // }
 
   updateCircleLocation() {
     if (this._locationText.isShown) {
@@ -171,8 +195,8 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseAnchor() {
-    this._circle._anchor.pulseScaleNow(1, 2);
+  pulseCenter() {
+    this._circle._center.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 

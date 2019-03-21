@@ -100,12 +100,12 @@ class Content extends PresentationLessonContent {
         'We can create a circle by |anchoring| a |line| at one end, and |pushing| its other end. If we trace the free end around a full rotation, we get a |circle|.',
       ],
       modifiers: {
-        anchoring: click(circ.pulseAnchor, [circ], colors.center),
+        anchoring: click(circ.pulseCenter, [circ], colors.center),
         line: click(circ.pulseRadius, [circ], colors.radius),
         pushing: click(circ.pushRadius, [circ, null], colors.circle),
         circle: click(circ.pushRadius, [circ, Math.PI * 1.999], colors.circle),
       },
-      show: [circle._radius, circle._arc, circle._anchor],
+      show: [circle._radius, circle._arc, circle._center],
       setSteadyState: () => {
         circ._circle.setScenario('center');
         circle._radius.setRotation(0.001);
@@ -129,7 +129,7 @@ class Content extends PresentationLessonContent {
       title: 'Circumference',
       setContent: [
         'Every shape has a |perimeter|, which is the shape\'s boundary or outline. The |length| of the perimeter is a |property| used to describe the shape\'s size.',
-        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__perimeter_definition', 'lesson__definition_lowest')}`,
+        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__perimeter_definition')}`,
       ],
       modifiers: {
         perimeter: click(circ.pulseCircle, [circ], colors.circle),
@@ -150,7 +150,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'A circle\'s perimeter has the special name |circumference|. The length of the circumference is most easily seen when |straightened| out.',
-        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition', 'lesson__definition_lowest')}`,
+        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition')}`,
       ],
       modifiers: {
         straightened: click(circ.straightenCircumference, [circ], colors.circle),
@@ -178,13 +178,13 @@ class Content extends PresentationLessonContent {
       title: 'Center',
       setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition', 'lesson__definition_lowest')}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition')}`,
       ],
       modifiers: {
-        center_point: click(circ.pulseAnchor, [circ], colors.center),
+        center_point: click(circ.pulseCenter, [circ], colors.center),
         location: click(this.next, [this], colors.center),
       },
-      show: [circle._line, circle._anchor],
+      show: [circle._line, circle._center],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },
@@ -194,11 +194,11 @@ class Content extends PresentationLessonContent {
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
       ],
       modifiers: {
-        center_point: click(circ.pulseAnchor, [circ], colors.center),
+        center_point: click(circ.pulseCenter, [circ], colors.center),
         location: click(circ.pushCircle, [circ], colors.center),
       },
       fadeInFromPrev: false,
-      show: [circle._line, circle._anchor, circ._grid, circ._locationText],
+      show: [circle._line, circle._center, circ._grid, circ._locationText],
       setEnterState: () => {
         circ.containToGrid = true;
         circ.straighten(0);
@@ -221,15 +221,15 @@ class Content extends PresentationLessonContent {
       title: 'Radius',
       setContent: [
         'The |radius| describes the circle\'s size and is |any| line between the |center| and |edge|. The radius is half the circle width.',
-        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition', 'lesson__definition_lowest')}`,
+        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition')}`,
       ],
       modifiers: {
         radius: click(circ.pulseRadius, [circ], colors.radius),
-        center: click(circ.pulseAnchor, [circ], colors.center),
+        center: click(circ.pulseCenter, [circ], colors.center),
         edge: click(circ.pulseCircle, [circ], colors.circle),
         any: click(circ.pushRadiusRandom, [circ], colors.radius),
       },
-      show: [circle._line, circle._anchor, circle._radius],
+      show: [circle._line, circle._center, circle._radius],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },
@@ -238,15 +238,15 @@ class Content extends PresentationLessonContent {
       title: 'Diameter',
       setContent: [
         'The |diameter| describes the circle\'s full width and is |any| line that runs between two points on the circle\'s |edge| and the |center|.',
-        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition', 'lesson__definition_lowest')}`,
+        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition')}`,
       ],
       modifiers: {
         diameter: click(circ.pulseDiameter, [circ], colors.radius),
-        center: click(circ.pulseAnchor, [circ], colors.center),
+        center: click(circ.pulseCenter, [circ], colors.center),
         edge: click(circ.pulseCircle, [circ], colors.circle),
         any: click(circ.pushDiameterRandom, [circ], colors.radius),
       },
-      show: [circle._line, circle._anchor, circle._diameter],
+      show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },
@@ -255,7 +255,7 @@ class Content extends PresentationLessonContent {
       setContent: [
         '|Diameter| is often used when measuring a circle, as it can be easier to measure. In comparison, |radius| is often used when using a circle\'s properties in more complex problems, as it can make the math simpler.',
       ],
-      show: [circle._line, circle._anchor, circle._diameter],
+      show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');
       },

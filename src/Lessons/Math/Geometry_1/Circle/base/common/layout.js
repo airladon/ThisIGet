@@ -153,8 +153,8 @@ export default function lessonLayout() {
     },
   };
 
-  layout.anchor = {
-    name: 'anchor',
+  layout.center = {
+    name: 'center',
     method: 'polygon',
     options: {
       sides: 20,
@@ -344,6 +344,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, 0) },
+        centerHigh: { position: new Point(0, 0.3) },
       },
       hasTouchableElements: true,
     },
@@ -354,7 +355,7 @@ export default function lessonLayout() {
       layout.arc,
       layout.radius,
       layout.diameter,
-      layout.anchor,
+      layout.center,
       layout.translatingCircle,
     ],
   };
