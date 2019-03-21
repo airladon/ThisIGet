@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     // const collection = diag._collection;
     const objects = diag._objects;
     const circ = diag._circle;
+    const circle = circ._circle;
     console.log(diag)
 
     const common = {
@@ -106,9 +107,9 @@ class Content extends PresentationLessonContent {
         pushing: click(circ.pushRadius, [circ, null], colors.circle),
         circle: click(circ.pushRadius, [circ, Math.PI * 1.999], colors.circle),
       },
-      show: [circ._radius, circ._arc, circ._anchor],
+      show: [circle._radius, circle._arc, circle._anchor],
       setSteadyState: () => {
-        circ._radius.setRotation(0.001);
+        circle._radius.setRotation(0.001);
       },
     });
     this.addSection(common, {
@@ -133,17 +134,19 @@ class Content extends PresentationLessonContent {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
         location: click(this.next, [this], colors.center),
       },
-      show: [circ._circle, circ._anchor],
+      show: [circle._line, circle._anchor],
     });
     this.addSection(common, {
       modifiers: {
         center_point: click(circ.pulseAnchor, [circ], colors.center),
         // location: click(this.next, [this], colors.center),
       },
-      show: [circ._circle, circ._anchor, circ._grid, circ._locationText],
+      show: [circle._line, circle._anchor, circ._grid, circ._locationText],
       setEnterState: () => {
         circ._circle.isMovable = true;
         circ._circle.isTouchable = true;
+        circ._circle.hasTouchableElements = true;
+        circ._circle._line.isTouchable = true;
         circ.setCircleMoveLimits();
         circ.updateCircleLocation();
       },

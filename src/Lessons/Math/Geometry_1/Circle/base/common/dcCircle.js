@@ -6,19 +6,23 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   DiagramElementPrimative,
   DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementCollection,
   // DiagramObjectAngle,
   Transform,
 } = Fig;
 
-const { spaceToSpaceTransform } = Fig.tools.g2; 
+const { spaceToSpaceTransform } = Fig.tools.g2;
 
 export default class CommonCollectionCircle extends CommonDiagramCollection {
-  _anchor: DiagramElementPrimative;
-  _circle: DiagramElementPrimative;
-  _arc: DiagramElementPrimative;
-  _diameter: DiagramObjectLine;
-  _radius: DiagramObjectLine;
+  _locationText: DiagramElementPrimative;
+  _grid: DiagramElementPrimative;
+  _circle: {
+    _anchor: DiagramElementPrimative;
+    _line: DiagramElementPrimative;
+    _arc: DiagramElementPrimative;
+    _diameter: DiagramObjectLine;
+    _radius: DiagramObjectLine;
+  } & DiagramElementCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -31,19 +35,20 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this.scenarios = layout.circleScenarios;
     this.setScenario('center');
-    this._radius.setTransformCallback = this.updateArc.bind(this);
+    this._circle._radius.setTransformCallback = this.updateArc.bind(this);
+    this._circle.setTransformCallback = this.updateCircleLocation.bind(this);
   }
 
   updateArc() {
-    if (this._arc.isShown) {
-      let r = this._radius.getRotation();
+    if (this._circle._arc.isShown) {
+      let r = this._circle._radius.getRotation();
       while (r > Math.PI * 2) {
         r -= Math.PI * 2;
       }
       while (r < 0) {
         r += Math.PI * 2;
       }
-      this._arc.setAngleToDraw(r);
+      this._circle._arc.setAngleToDraw(r);
       this.diagram.animateNextFrame();
     }
   }
@@ -51,13 +56,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   updateCircleLocation() {
     if (this._locationText.isShown) {
       const l = this.getCircleLocation().round(1);
-      this._locationText.drawingObject.setText(`Location:  x: ${l.x}  y: ${l.y}`);
+      this._locationText.drawingObject.setText(`Location:  x: ${l.x.toFixed(1)}  y: ${l.y.toFixed(1)}`);
     }
   }
 
   setCircleMoveLimits() {
     const { width, height, location } = this.layout.grid.options;
-    const { radius } = this.layout.circ.options;
+    const { radius } = this.layout.circleLine.options;
 
     this._circle.move.maxTransform.updateTranslation(
       location.x + width - radius,
@@ -79,8 +84,8 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       y: { bottomLeft: limits.bottom, height: limits.height },
     };
     const diagramSpace = {
-      x: { bottomLeft: location.x, width: location.x + width },
-      y: { bottomLeft: location.y, height: location.y + height },
+      x: { bottomLeft: location.x, width },
+      y: { bottomLeft: location.y, height },
     };
 
     const diagramToGrid = spaceToSpaceTransform(diagramSpace, gridSpace);
@@ -88,35 +93,35 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   }
 
   pushRadius(toAngle: ?number) {
-    const r = this._radius.getRotation();
+    const r = this._circle._radius.getRotation();
     let target = r + 1;
     if (toAngle != null) {
       target = toAngle;
     }
     this.stop(true, false);
-    this._radius.animations.new()
+    this._circle._radius.animations.new()
       .rotation({ target, duration: 1, direction: 1 })
       .start();
     this.diagram.animateNextFrame();
   }
 
   pulseAnchor() {
-    this._anchor.pulseScaleNow(1, 2);
+    this._circle._anchor.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 
   pulseRadius() {
-    this._radius.pulseWidth();
+    this._circle._radius.pulseWidth();
     this.diagram.animateNextFrame();
   }
 
   pulseDiameter() {
-    this._diameter.pulseWidth();
+    this._circle._diameter.pulseWidth();
     this.diagram.animateNextFrame();
   }
 
   pulseCircle() {
-    this._circle.pulseThickNow(1, 1.04, 5);
+    this._circle._line.pulseThickNow(1, 1.04, 5);
     this.diagram.animateNextFrame();
   }
 }

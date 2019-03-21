@@ -104,8 +104,8 @@ export default function lessonLayout() {
   // Interactive Circle
   // ///////////////////////////////////////////////////////////////
   const width = 0.05;
-  layout.circ = {
-    name: 'circle',
+  layout.circleLine = {
+    name: 'line',
     method: 'polygon',
     options: {
       sides: 400,
@@ -116,7 +116,7 @@ export default function lessonLayout() {
     },
   };
 
-  layout.arc = joinObjects({}, layout.circ, { name: 'arc' });
+  layout.arc = joinObjects({}, layout.circleLine, { name: 'arc' });
 
   layout.radius = {
     name: 'radius',
@@ -200,13 +200,24 @@ export default function lessonLayout() {
     scenario: 'center',
   };
 
+  layout.circ = {
+    name: 'circle',
+    method: 'collection',
+    options: {
+      transform: new Transform().scale(1, 1).translate(0, 0),
+    },
+    addElements: [
+      layout.circleLine,
+      layout.arc,
+      layout.radius,
+      layout.diameter,
+      layout.anchor,
+    ],
+  };
+
   layout.addCircleElements = [
     layout.grid,
     layout.circ,
-    layout.arc,
-    layout.radius,
-    layout.diameter,
-    layout.anchor,
     layout.locationText,
 
   ];
