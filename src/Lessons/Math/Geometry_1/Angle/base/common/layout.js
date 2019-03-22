@@ -109,6 +109,18 @@ export default function lessonLayout() {
     scenario: 'center',
   };
 
+  const corner = (index, color, p1, p2, p3) => ({
+    name: `corner${index}`,
+    method: 'polyLineCorners',
+    options: {
+      points: [p1, p2, p3],
+      color,
+      width: width * 3,
+      cornerLength,
+      close: false,
+    },
+  });
+
   layout.shape3 = {
     name: 'shape3',
     method: 'collection',
@@ -127,10 +139,20 @@ export default function lessonLayout() {
       },
       {
         name: 'moreSharpCorners',
-        method: 'polyLineCorners',
-        options: {
-          points: pent, color: colors.moreSharp, width: width * 3, cornerLength,
-        },
+        method: 'collection',
+        addElements: [
+          corner(1, colors.moreSharp, pent[4], pent[0], pent[1]),
+          corner(2, colors.moreSharp, pent[0], pent[1], pent[2]),
+          corner(3, colors.moreSharp, pent[2], pent[3], pent[4]),
+        ],
+      },
+      {
+        name: 'lessSharpCorners',
+        method: 'collection',
+        addElements: [
+          corner(1, colors.lessSharp, pent[1], pent[2], pent[3]),
+          corner(2, colors.lessSharp, pent[3], pent[4], pent[0]),
+        ],
       },
     ],
     mods: { scenarios },
