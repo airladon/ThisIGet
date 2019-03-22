@@ -7,7 +7,7 @@ import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectio
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform, DiagramElementPrimative } = Fig;
-
+const { removeRandElement, rand } = Fig.tools.math;
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
@@ -31,11 +31,25 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     );
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
+    this.diagram.addElements(this, this.layout.addQuizElements);
     this.hasTouchableElements = true;
+    this._circle1.onClick = this.selectAnswer.bind(this, 1);
+    this._circle2.onClick = this.selectAnswer.bind(this, 2);
+    this._circle3.onClick = this.selectAnswer.bind(this, 3);
+    this._circle4.onClick = this.selectAnswer.bind(this, 4);
+    this._circle1.makeTouchable();
+    this._circle2.makeTouchable();
+    this._circle3.makeTouchable();
+    this._circle4.makeTouchable();
+  }
+
+  selectAnswer(answer: number) {
+    this.selectedAnswer = answer;
+    this.checkAnswer();
   }
 
   tryAgain() {
-    super.tryAgain();
+    super.tryAgain(false);
     // this._input.enable();
     // this._input.setValue('');
   }
@@ -43,15 +57,36 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   newProblem() {
     super.newProblem();
-    // this.calculateFuturePositions();
-    // this.moveToFuturePositions(1, this.updateAngles.bind(this));
-    // this._input.enable();
-    // this._input.setValue('');
+    const possibleCircles = [1, 2, 3, 4];
+    const possibleProperties = ['diameter', 'radius', 'center', 'circumference'];
+    for (let i = 0; i < 4; i += 1) {
+      const circle = removeRandElement(possibleCircles);
+      const property = removeRandElement(possibleProperties);
+      const element = this[`_circle${circle}`];
+      element.hideAll();
+      element._fill.show();
+      const p = element[`_${property}`];
+      p.showAll();
+      p.setRotation(rand(Math.PI * 2));
+      if (i === 0) {
+        this.answer = circle;
+        this._answer.drawingObject.setText(property);
+      }
+      const scale = rand(0.6, 1.1);
+      element.setScale(scale);
+    }
     this.diagram.animateNextFrame();
+    this.selectedAnswer = 0;
   }
 
   showAnswer() {
     super.showAnswer();
+    for (let i = 1; i < 5; i += 1) {
+      if (this.answer !== i) {
+        const element = this[`_circle${i}`];
+        element._cover.show();
+      }
+    }
     // this._input.setValue(this.answer);
     // this._input.disable();
     this.diagram.animateNextFrame();
@@ -62,7 +97,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // if (this._input.getValue() === this.answer.toString()) {
     //   return 'correct';
     // }
-    if (this.answer === true) {
+    if (this.answer === this.selectedAnswer) {
       return 'correct';
     }
     return 'incorrect';

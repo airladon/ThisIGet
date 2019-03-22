@@ -150,7 +150,6 @@ export default function getLessonIndex() {
             'Diameter',
             'Radius',
             'Circumference',
-            'Center',
             'Circle',
           ],
         },

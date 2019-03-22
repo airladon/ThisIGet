@@ -18902,10 +18902,12 @@ function () {
       var o = optionsToUse;
       var transform = o.transform;
 
-      if (transform == null && o.point != null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').translate(o.point);
-      } else if (transform == null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon');
+      if (transform == null) {
+        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').scale(1, 1).rotate(0).translate(0, 0);
+      }
+
+      if (o.point != null) {
+        transform.updateTranslation(o.point);
       }
 
       if (o.sidesToDraw == null) {
@@ -18971,13 +18973,11 @@ function () {
   }, {
     key: "collection",
     value: function collection() {
-      var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]()
-      };
-      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('collection').scale(1, 1).rotate(0).translate(0, 0);
 
       if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-        transform = transform.translate(transformOrPointOrOptions.x, transformOrPointOrOptions.y);
+        transform.updateTranslation(transformOrPointOrOptions);
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
@@ -18987,12 +18987,12 @@ function () {
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
 
-        if (optionsToUse.position != null) {
-          transform = transform.translate(optionsToUse.position.x, optionsToUse.position.y);
-        }
-
         if (optionsToUse.transform != null) {
           transform = optionsToUse.transform;
+        }
+
+        if (optionsToUse.position != null) {
+          transform.updateTranslation(optionsToUse.position);
         }
       }
 

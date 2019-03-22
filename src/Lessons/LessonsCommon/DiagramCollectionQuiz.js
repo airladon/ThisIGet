@@ -20,9 +20,11 @@ const CommonQuizMixin = superclass => class extends superclass {
   answer: any;
   answerIndex: number;
 
-  tryAgain() {
+  tryAgain(showCheck: boolean = true) {
     this._messages.hideAll();
-    this._check.show();
+    if (showCheck) {
+      this._check.show();
+    }
     this.hasTouchableElements = true;
     if (this._intput != null) {
       this._input.enable();

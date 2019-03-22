@@ -8,7 +8,6 @@ const {
   Point,
   Rect,
   Transform,
-  Line,
 } = Fig.tools.g2;
 
 const { joinObjects } = Fig.tools.misc;
@@ -19,6 +18,8 @@ const cssColorNames = [
   'diameter',
   'center',
   'grid',
+  'circleFill',
+  'property',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */

@@ -34,12 +34,13 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    console.log(quiz);
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      // setContent: ['Press the diagram that shows a |diameter|.'],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -50,11 +51,16 @@ class Content extends PresentationLessonContent {
       interactiveElements: [
         // interactiveItem(quiz._check),
       ],
-      setEnterState: () => {},
+
       showOnly: [],
-      show: [],
+      show: [
+        quiz._circle1, quiz._circle2, quiz._circle3, quiz._circle4,
+        quiz._question, quiz._answer,
+      ],
       hide: [],
-      setSteadyState: () => {},
+      setSteadyState: () => {
+        quiz.newProblem();
+      },
       setLeaveState: () => {},
     });
   }

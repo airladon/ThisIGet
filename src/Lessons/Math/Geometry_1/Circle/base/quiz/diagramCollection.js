@@ -17,7 +17,6 @@ export default class DiagramCollection extends CommonDiagramCollection {
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
-
     this.add('quiz', new QuizCollection(diagram, this.layout));
   }
 }
