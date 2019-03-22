@@ -153,17 +153,6 @@ export default function getLessonIndex() {
             'Circle',
           ],
         },
-        legacy: {
-          title: 'Legacy',
-          description: 'Legacy explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
       },
       dependencies: [
         'why_study_shapes',
