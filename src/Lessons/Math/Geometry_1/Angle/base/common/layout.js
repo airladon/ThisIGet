@@ -187,7 +187,7 @@ export default function lessonLayout() {
   // //////////////////////////////////////////////////
   const length = 1.5;
   const lineWidth = 0.03;
-  const angleRadius = 0.3;
+  const angleRadius = 0.5;
   layout.arrowLocation = length * 0.9;
   layout.angle = {
     name: 'angle',
@@ -237,6 +237,7 @@ export default function lessonLayout() {
             vertical: { position: new Point(-0.5, 0), rotation: Math.PI / 2 },
             start: { position: new Point(0, 0), rotation: 0 },
           },
+          interactiveLocation: new Point(length * 0.8, 0),
         },
       },
       {

@@ -96,6 +96,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseFill() {
+    this._angle._fill.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseShapeElement(what: 'lines' | 'corners' | 'moreSharp' | 'lessSharp') {
     const shapes = this._shapes;
     shapes.hideAll();
@@ -127,7 +132,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  rotateLine(amount: 'small' | 'large') {
+  rotateLine(amount: 'small' | 'large' | '' = '') {
     const r = this._angle._line1.getRotation('0to360');
     const delta = Math.max(Math.random() * Math.PI / 5, Math.PI / 8);
     let target = 0;
@@ -143,6 +148,13 @@ export default class CommonCollection extends CommonDiagramCollection {
         target = 3 * Math.PI / 4 + delta;
       } else {
         target = 3 * Math.PI / 4 - delta;
+      }
+    }
+    if (amount === '') {
+      if (r < Math.PI / 2) {
+        target = r + delta * 3;
+      } else {
+        target = r - delta * 3;
       }
     }
     // console.log(r, delta * 180 / Math.PI, target * 180 / Math.PI)

@@ -198,10 +198,63 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         angle._line1.setRotation(1);
       },
-      // setLeaveState: () => {
-      //   angle._arrow.setColor(colors.arrow);
-      // },
       show: [angle._line1, angle._line2, angle._anchor],
+    });
+
+    const common = {
+      setEnterState: () => {
+        const r = angle._line1.getRotation();
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._line1.setRotation(r);
+        angle._line1.isTouchable = true;
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      transitionFromNext: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        angle._line1.setRotation(1);
+      },
+      show: [angle._line1, angle._line2, angle._fill],
+    };
+
+    this.addSection(common, {
+      setContent: [
+        'So the |amount| of |rotation| determines the sharpness of the corner.',
+      ],
+      modifiers: {
+        amount: click(diag.pulseFill, [diag], colors.angles),
+        rotation: click(diag.rotateLine, [diag, ''], colors.moreSharp),
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'What |name| do we use for corner sharpness?',
+        'The |Latin| word for |corner| is |angulus|.',
+        'Our word for |corner sharpness| comes from this Latin root, and is |angle|.',
+      ]),
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'So, a |larger| |angle| is a less sharp corner, and a |smaller| |_angle| is a more sharp corner.',
+      ],
+      modifiers: {
+        smaller: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
+        larger: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
+        angle: click(diag.pulseFill, [diag], colors.angles),
+        _angle: click(diag.pulseFill, [diag], colors.angles),
+      },
     });
 
     // this.addSection({
