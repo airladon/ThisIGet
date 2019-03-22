@@ -86,7 +86,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'Start with two |lines|.',
+        'To |create| a corner, start with two |lines|.',
       ],
       modifiers: {
         lines: click(diag.pulseLines, [diag], colors.lines),
@@ -94,6 +94,7 @@ class Content extends PresentationLessonContent {
       setEnterState: () => {
         angle._line1.setScenario('offScreen');
         angle._line2.setScenario('offScreen');
+        angle._line1.isTouchable = false;
       },
       transitionFromPrev: (done) => {
         angle._line1.animations.new()
@@ -122,6 +123,7 @@ class Content extends PresentationLessonContent {
       setEnterState: () => {
         angle._line1.setScenario('vertical');
         angle._line2.setScenario('vertical');
+        angle._line1.isTouchable = false;
       },
       transitionFromPrev: (done) => {
         angle._line1.animations.new()
@@ -153,6 +155,7 @@ class Content extends PresentationLessonContent {
         angle._line1.setScenario('start');
         angle._line2.setScenario('start');
         angle._arrow.setColor(colors.arrow);
+        angle._line1.isTouchable = true;
       },
       setSteadyState: () => {
         diag.updateAngle();
@@ -161,11 +164,44 @@ class Content extends PresentationLessonContent {
       setLeaveState: () => {
         angle._arrow.setColor(colors.arrow);
       },
-      // setSteadyState: () => {
-      //   angle._line1.setScenario('start');
-      //   angle._line2.setScenario('start');
-      // },
       show: [angle._line1, angle._line2, angle._anchor, angle._arrow],
+    });
+
+    this.addSection({
+      setContent: [
+        '|Small_rotation| creates a |sharper corner|.',
+        '|Larger_rotation| creates a |less sharp corner|.',
+      ],
+      modifiers: {
+        Small_rotation: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
+        Larger_rotation: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
+      },
+      setEnterState: () => {
+        const r = angle._line1.getRotation();
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._line1.setRotation(r);
+        angle._line1.isTouchable = true;
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      transitionFromNext: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        angle._line1.setRotation(1);
+      },
+      // setLeaveState: () => {
+      //   angle._arrow.setColor(colors.arrow);
+      // },
+      show: [angle._line1, angle._line2, angle._anchor],
     });
 
     // this.addSection({

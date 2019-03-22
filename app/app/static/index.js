@@ -25411,12 +25411,16 @@ function () {
     }
   }, {
     key: "getRotation",
-    value: function getRotation() {
+    value: function getRotation(normalize) {
       var r = this.transform.r();
       var rotation = 0;
 
       if (r != null) {
         rotation = r;
+      }
+
+      if (normalize !== '') {
+        rotation = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(r, normalize);
       }
 
       return rotation;

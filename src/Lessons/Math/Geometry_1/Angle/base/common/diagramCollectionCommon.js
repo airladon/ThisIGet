@@ -78,8 +78,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   push() {
-    let r = this._angle._line1.getRotation();
-    r = clipAngle(r, '0to360');
+    const r = this._angle._line1.getRotation('0to360');
     this._angle._line1.stop(true, false);
     this._angle._line1.animations.new()
       .rotation({ target: r + 1, duration: 1 })
@@ -125,6 +124,32 @@ export default class CommonCollection extends CommonDiagramCollection {
       shapes._shape1._lessSharpCorners.pulseScaleNow(1, 1.1);
       shapes._shape3._lessSharpCorners.pulseScaleNow(1, 1.1);
     }
+    this.diagram.animateNextFrame();
+  }
+
+  rotateLine(amount: 'small' | 'large') {
+    const r = this._angle._line1.getRotation('0to360');
+    const delta = Math.max(Math.random() * Math.PI / 5, Math.PI / 8);
+    let target = 0;
+    if (amount === 'small') {
+      if (r < Math.PI / 4) {
+        target = Math.PI / 4 + delta;
+      } else {
+        target = Math.PI / 4 - delta;
+      }
+    }
+    if (amount === 'large') {
+      if (r < 3 * Math.PI / 4) {
+        target = 3 * Math.PI / 4 + delta;
+      } else {
+        target = 3 * Math.PI / 4 - delta;
+      }
+    }
+    // console.log(r, delta * 180 / Math.PI, target * 180 / Math.PI)
+    this._angle._line1.stop(true, false);
+    this._angle._line1.animations.new()
+      .rotation({ target, duration: 1 })
+      .start();
     this.diagram.animateNextFrame();
   }
 
