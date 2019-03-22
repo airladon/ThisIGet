@@ -46,6 +46,7 @@ export default function getLessonIndex() {
             'summary',
           ],
           qr: [
+            'Main',
           ],
         },
         legacy: {

@@ -39,7 +39,7 @@ export default class QRAngle extends PopupBoxCollection {
       Angle: click(diag.pulseFill, [diag], colors.angles),
       lines: click(diag.pulseLines, [diag], colors.lines),
     };
-    this.setTitle('');
+    this.setTitle('Angle');
     this.setDescription([
       '|Angle| is the corner formed by two lines.',
       'A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
@@ -52,13 +52,15 @@ export default class QRAngle extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
-    collection._angle._line1.show();
-    collection._angle._line2.show();
-    collection._angle._fill.show();
-    collection._angle._line1.setRotation(1);
-    colleciton._angle._line1.move.maxTransform.updateRotation(Math.PI * 0.9)
-    colleciton._angle._line1.move.minTransform.updateRotation(Math.PI * 0.1)
-    this.transformToQRWindow(collection, new Rect(-2, -1.6, 4, 3.2));
+    const angle = collection._angle;
+    angle._line1.showAll();
+    angle._line2.showAll();
+    angle._fill.show();
+    angle._line1.setRotation(1);
+    angle._line1.move.maxTransform.updateRotation(Math.PI * 0.95);
+    angle._line1.move.minTransform.updateRotation(Math.PI * 0.05);
+    angle._line1.makeTouchable();
+    this.transformToQRWindow(collection, new Rect(-2, -0.8, 4, 2));
     this.diagram.animateNextFrame();
   }
 }

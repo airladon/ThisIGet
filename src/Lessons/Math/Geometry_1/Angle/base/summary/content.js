@@ -36,9 +36,9 @@ class Content extends PresentationLessonContent {
     const angle = diag._angle;
 
     this.addSection({
-      title: '',
+      title: 'Angle',
       setContent: [
-        '|Angle| is the corner formed by two lines.',
+        '|Angle| is the corner formed by two |lines|.',
         'A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
         `${new Definition('Angle', 'Latin', ['angulus', 'corner']).html('id_lesson__angle_definition')}`,
       ],
@@ -53,6 +53,7 @@ class Content extends PresentationLessonContent {
         angle._line2.setScenario('start');
         angle._line1.setRotation(1);
         angle._line1.isTouchable = true;
+        angle.setScale(0.8);
       },
       show: [angle._line1, angle._line2, angle._fill],
     });

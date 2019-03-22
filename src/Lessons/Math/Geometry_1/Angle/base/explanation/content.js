@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const angle = diag._angle;
 
     this.addSection({
+      title: 'Corners',
       setContent: [
         'Many |shapes| have |corners|.',
         'Some corners are |more_sharp|, while others are |less_sharp|.',
@@ -218,6 +219,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Angle',
       setContent: centerV([
         'What |name| do we use for corner sharpness?',
         'The |Latin| word for |corner| is |angulus|.',
