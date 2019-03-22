@@ -12,3 +12,8 @@ $colors: (
 body {
   @include color_vars($colors);
 }
+
+.content_angles_bottom {
+  margin-top: 35%;
+}
+

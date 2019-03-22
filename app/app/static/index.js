@@ -19057,11 +19057,12 @@ function () {
         }
 
         if (optionsToUse.position != null) {
-          transform.updateTranslation(optionsToUse.position);
+          transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
         }
       }
 
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"](transform, this.limits);
+      return element;
     }
   }, {
     key: "repeatPattern",
@@ -30190,7 +30191,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30212,6 +30213,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyModifiers", function() { return applyModifiers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOnClicks", function() { return setOnClicks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 
 
@@ -30225,6 +30227,13 @@ function convertTextArrayToParagraphs(text) {
   }
 
   return textToUse;
+}
+
+function withClass() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var classText = arguments.length > 1 ? arguments[1] : undefined;
+  var textToUse = convertTextArrayToParagraphs(text);
+  return "<div class=\"".concat(classText, "\">").concat(textToUse, "</div>");
 }
 
 function centerV() {

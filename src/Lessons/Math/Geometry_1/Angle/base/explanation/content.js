@@ -13,14 +13,15 @@ import CommonCollection from '../common/diagramCollectionCommon';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
+  withClass,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -40,35 +41,54 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const shapes = diag._shapes;
+    const angle = diag._angle;
     console.log(diag);
 
-    const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+    // const common = {
+    //   setContent: '',
+    //   modifiers: {},
+    //   // setInfo: `
+    //   //     <ul>
+    //   //       <li></li>
+    //   //     </ul>
+    //   // `,
+    //   infoModifiers: {},
+    //   interactiveElements: [
+    //     // interactiveItem(quiz._check),
+    //   ],
+    //   setEnterState: () => {},
+    //   showOnly: [],
+    //   show: [],
+    //   hide: [],
+    //   setSteadyState: () => {},
+    //   setLeaveState: () => {},
+    // };
+    console.log(withClass('The sharpness of a corner is a property that can describe a shape . ', 'content_angles_bottom'));
+    this.addSection({
+      setContent: [
+        'Many |shapes| have |corners|.',
+        'Some corners are |more_sharp|, while others are |less_sharp|.',
+        withClass(['The sharpness of a corner is a property that can describe a shape.'], 'content_angles_bottom'),
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
-
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
-      ]),
-      show: [ shapes ],
+      modifiers: {
+        shapes: click(diag.pulseShapeElement, [diag, 'lines'], colors.lines),
+        corners: click(diag.pulseShapeElement, [diag, 'corners'], colors.lines),
+        more_sharp: click(diag.pulseShapeElement, [diag, 'moreSharp'], colors.moreSharp),
+        less_sharp: click(diag.pulseShapeElement, [diag, 'lessSharp'], colors.lessSharp),
+      },
+      show: [shapes._shape1._line, shapes._shape2._line, shapes._shape3._line],
+      // setSteadyState: () => {
+      //   shapes.setScenario('center');
+      //   console.log(shapes)
+      // },
     });
+    // this.addSection(common, {
+    //   title: '',
+    //   setContent: centerV([
+    //     '',
+    //   ]),
+    //   show: [shapes, angle],
+    // });
   }
 }
 

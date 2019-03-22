@@ -27,7 +27,7 @@ export default function lessonLayout() {
   const width = 0.02;
   const scenarios = {
     left: { position: new Point(-1.5, 0) },
-    center: { position: new Point(0, 0) },
+    center: { position: new Point(0, -0.2) },
     right: { position: new Point(1.5, 0) },
   };
 
@@ -39,10 +39,17 @@ export default function lessonLayout() {
     [d, d],
     [-d, d],
   ];
+
+  const t = d * 1.3;
+  const angles = [
+    210 * Math.PI / 180,
+    90 * Math.PI / 180,
+    -30 * Math.PI / 180,
+  ];
   const tri = [
-    [-d, -d],
-    [0, d],
-    [d, -d],
+    [t * Math.cos(angles[0]), t * Math.sin(angles[0])],
+    [t * Math.cos(angles[1]), t * Math.sin(angles[1])],
+    [t * Math.cos(angles[2]), t * Math.sin(angles[2])],
   ];
 
   const pent = [
@@ -167,10 +174,69 @@ export default function lessonLayout() {
       layout.shape2,
       layout.shape3,
     ],
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0 ) },
+      },
+    },
+    scenario: 'center',
   };
+
+  // //////////////////////////////////////////////////
+  // Angle
+  // //////////////////////////////////////////////////
+  const length = 1.5;
+  const lineWidth = 0.03;
+  const angleRadius = 0.3;
+  layout.angle = {
+    name: 'angle',
+    method: 'collection',
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0) },
+      },
+    },
+    scenario: 'center',
+    addElements: [
+      {
+        name: 'fill',
+        method: 'polygon',
+        options: {
+          radius: angleRadius,
+          fill: true,
+          color: colors.angles,
+          sides: 200,
+        },
+      },
+      {
+        name: 'line1',
+        method: 'line',
+        options: {
+          length,
+          width: lineWidth,
+          color: colors.lines,
+          move: {
+            type: 'rotation',
+            middleLengthPercent: 0,
+          },
+        },
+      },
+      {
+        name: 'line2',
+        method: 'line',
+        options: {
+          length,
+          width: lineWidth,
+          color: colors.lines,
+        },
+      },
+    ],
+  };
+
 
   layout.addElements = [
     layout.shapes,
+    layout.angle,
   ];
   return layout;
 }
