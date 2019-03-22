@@ -15,7 +15,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   _angle: {
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
-    _fill: DiagramElementPrimative
+    _fill: DiagramElementPrimative;
+    _arrow: DiagramElementPrimative;
+    _anchor: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   _shapes: {
@@ -55,7 +57,44 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   updateAngle() {
     const r = this._angle._line1.getRotation();
-    this._angle._fill.setAngleToDraw(clipAngle(r + 0.05, '0to360'));
+    const rotation = clipAngle(r, '0to360');
+    const extraRotation = clipAngle(r + 0.05, '0to360');
+    this._angle._fill.setAngleToDraw(extraRotation);
+    if (this._angle._arrow.isShown) {
+      const angleToDisappear = 0.35;
+      if (rotation > angleToDisappear) {
+        this._angle._arrow.color[3] = 0;
+        this._angle._arrow.color[3] = 1;
+        this._angle._arrow.hide();
+      } else {
+        this._angle._arrow.color[3] = (angleToDisappear - rotation) / angleToDisappear;
+        this._angle._arrow.transform.updateRotation(rotation);
+        const x = this.layout.arrowLocation;
+        this._angle._arrow.transform.updateTranslation(
+          x * Math.cos(rotation), x * Math.sin(rotation),
+        );
+      }
+    }
+  }
+
+  push() {
+    let r = this._angle._line1.getRotation();
+    r = clipAngle(r, '0to360');
+    this._angle._line1.stop(true, false);
+    this._angle._line1.animations.new()
+      .rotation({ target: r + 1, duration: 1 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseArrow() {
+    this._angle._arrow.pulseScaleNow(0, 1.2, 0.7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAnchor() {
+    this._angle._anchor.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
   }
 
   pulseShapeElement(what: 'lines' | 'corners' | 'moreSharp' | 'lessSharp') {
@@ -86,7 +125,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       shapes._shape1._lessSharpCorners.pulseScaleNow(1, 1.1);
       shapes._shape3._lessSharpCorners.pulseScaleNow(1, 1.1);
     }
+    this.diagram.animateNextFrame();
+  }
 
+  pulseLines() {
+    this._angle._line1.pulseWidth();
+    this._angle._line2.pulseWidth();
     this.diagram.animateNextFrame();
   }
 }

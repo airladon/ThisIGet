@@ -188,16 +188,27 @@ export default function lessonLayout() {
   const length = 1.5;
   const lineWidth = 0.03;
   const angleRadius = 0.3;
+  layout.arrowLocation = length * 0.9;
   layout.angle = {
     name: 'angle',
     method: 'collection',
     mods: {
       scenarios: {
-        center: { position: new Point(0, 0) },
+        center: { position: new Point(0, -0.5) },
       },
     },
     scenario: 'center',
     addElements: [
+      {
+        name: 'anchor',
+        method: 'polygon',
+        options: {
+          radius: 0.1,
+          fill: true,
+          sides: 40,
+          color: colors.center,
+        },
+      },
       {
         name: 'fill',
         method: 'polygon',
@@ -220,6 +231,13 @@ export default function lessonLayout() {
             middleLengthPercent: 0,
           },
         },
+        mods: {
+          scenarios: {
+            offScreen: { position: new Point(-5, 0), rotation: 0 },
+            vertical: { position: new Point(-0.5, 0), rotation: Math.PI / 2 },
+            start: { position: new Point(0, 0), rotation: 0 },
+          },
+        },
       },
       {
         name: 'line2',
@@ -228,6 +246,26 @@ export default function lessonLayout() {
           length,
           width: lineWidth,
           color: colors.lines,
+        },
+        mods: {
+          scenarios: {
+            offScreen: { position: new Point(5, 0), rotation: Math.PI },
+            vertical: { position: new Point(0.5, 0), rotation: Math.PI / 2 },
+            start: { position: new Point(0, 0), rotation: 0 },
+          },
+        },
+      },
+      {
+        name: 'arrow',
+        method: 'arrow',
+        options: {
+          width: 0.1,
+          legWidth: 0.05,
+          height: 0.1,
+          legHeight: 0.05,
+          color: colors.arrow,
+          tip: [0, 0],
+          // position: [layout.arrowLocation, -lineWidth / 2],
         },
       },
     ],

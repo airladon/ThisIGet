@@ -63,12 +63,11 @@ class Content extends PresentationLessonContent {
     //   setSteadyState: () => {},
     //   setLeaveState: () => {},
     // };
-    console.log(withClass('The sharpness of a corner is a property that can describe a shape . ', 'content_angles_bottom'));
     this.addSection({
       setContent: [
         'Many |shapes| have |corners|.',
         'Some corners are |more_sharp|, while others are |less_sharp|.',
-        withClass(['The sharpness of a corner is a property that can describe a shape.'], 'content_angles_bottom'),
+        withClass(['The |sharpness| of a corner is a property that can describe a shape.'], 'content_angles_bottom'),
       ],
       modifiers: {
         shapes: click(diag.pulseShapeElement, [diag, 'lines'], colors.lines),
@@ -77,11 +76,105 @@ class Content extends PresentationLessonContent {
         less_sharp: click(diag.pulseShapeElement, [diag, 'lessSharp'], colors.lessSharp),
       },
       show: [shapes._shape1._line, shapes._shape2._line, shapes._shape3._line],
-      // setSteadyState: () => {
-      //   shapes.setScenario('center');
-      //   console.log(shapes)
-      // },
     });
+
+    this.addSection({
+      setContent: centerV([
+        'Instead of simply calling a corner more or less |sharp|, it is useful to |define| it better and ultimately be able to |measure| it.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Start with two |lines|.',
+      ],
+      modifiers: {
+        lines: click(diag.pulseLines, [diag], colors.lines),
+      },
+      setEnterState: () => {
+        angle._line1.setScenario('offScreen');
+        angle._line2.setScenario('offScreen');
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .scenario({ target: 'vertical', duration: 1 })
+          .whenFinished(done)
+          .start();
+        angle._line2.animations.new()
+          .scenario({ target: 'vertical', duration: 1 })
+          .start();
+      },
+      setSteadyState: () => {
+        angle._line1.setScenario('vertical');
+        angle._line2.setScenario('vertical');
+      },
+      show: [angle._line1, angle._line2],
+    });
+
+    this.addSection({
+      setContent: [
+        'Place them on top of each other, and |anchor| one end.',
+      ],
+      modifiers: {
+        // lines: click(diag.pulseLines, [diag], colors.lines),
+        anchor: click(diag.pulseAnchor, [diag], colors.center),
+      },
+      setEnterState: () => {
+        angle._line1.setScenario('vertical');
+        angle._line2.setScenario('vertical');
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .scenario({ target: 'start', duration: 1 })
+          .whenFinished(done)
+          .start();
+        angle._line2.animations.new()
+          .scenario({ target: 'start', duration: 1 })
+          .start();
+      },
+      setSteadyState: () => {
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._anchor.show();
+        diag.pulseAnchor();
+      },
+      show: [angle._line1, angle._line2],
+    });
+
+    this.addSection({
+      setContent: [
+        'Rotate one line by |pushing| the free end, and a |corner| is formed.',
+      ],
+      modifiers: {
+        lines: click(diag.pulseLines, [diag], colors.lines),
+        pushing: click(diag.push, [diag], colors.arrow),
+      },
+      setEnterState: () => {
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._arrow.setColor(colors.arrow);
+      },
+      setSteadyState: () => {
+        diag.updateAngle();
+        diag.pulseArrow();
+      },
+      setLeaveState: () => {
+        angle._arrow.setColor(colors.arrow);
+      },
+      // setSteadyState: () => {
+      //   angle._line1.setScenario('start');
+      //   angle._line2.setScenario('start');
+      // },
+      show: [angle._line1, angle._line2, angle._anchor, angle._arrow],
+    });
+
+    // this.addSection({
+    //   setContent: centerV([
+    //     'The common name we use for |corner sharpness| is |angle|.',
+    //     'The word comes from the |Latin| word for |corner|, which is |angulus|.',
+    //   ]),
+    // });
+
     // this.addSection(common, {
     //   title: '',
     //   setContent: centerV([
