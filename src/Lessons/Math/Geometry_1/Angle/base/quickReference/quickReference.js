@@ -8,13 +8,13 @@ import version from '../version';
 import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
+const {
+  click,
 //   highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QRAngle extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -31,12 +31,19 @@ export default class QRBoilerplate extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
+    const diag = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      smaller: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
+      larger: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
+      Angle: click(diag.pulseFill, [diag], colors.angles),
+      lines: click(diag.pulseLines, [diag], colors.lines),
+    };
     this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    this.setDescription([
+      '|Angle| is the corner formed by two lines.',
+      'A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -45,11 +52,13 @@ export default class QRBoilerplate extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
-    // const iso = collection;
-    // iso.show();
-    collection.transform.updateScale(0.6, 0.6);
-    collection.setPosition(this.layout.position);
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    collection._angle._line1.show();
+    collection._angle._line2.show();
+    collection._angle._fill.show();
+    collection._angle._line1.setRotation(1);
+    colleciton._angle._line1.move.maxTransform.updateRotation(Math.PI * 0.9)
+    colleciton._angle._line1.move.minTransform.updateRotation(Math.PI * 0.1)
+    this.transformToQRWindow(collection, new Rect(-2, -1.6, 4, 3.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -62,7 +71,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
+    Main: QRAngle,
     // QR2: QRBoilerplate2,
   };
 }

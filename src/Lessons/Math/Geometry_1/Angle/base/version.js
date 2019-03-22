@@ -6,7 +6,7 @@ var details = {
   description: 'Explanation_of_version_here.',
   uid: 'base',
   qr: [
-    // 'Main',
+    'Main',
   ],
 };
 

@@ -42,27 +42,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const shapes = diag._shapes;
     const angle = diag._angle;
-    console.log(diag);
 
-    // const common = {
-    //   setContent: '',
-    //   modifiers: {},
-    //   // setInfo: `
-    //   //     <ul>
-    //   //       <li></li>
-    //   //     </ul>
-    //   // `,
-    //   infoModifiers: {},
-    //   interactiveElements: [
-    //     // interactiveItem(quiz._check),
-    //   ],
-    //   setEnterState: () => {},
-    //   showOnly: [],
-    //   show: [],
-    //   hide: [],
-    //   setSteadyState: () => {},
-    //   setLeaveState: () => {},
-    // };
     this.addSection({
       setContent: [
         'Many |shapes| have |corners|.',
