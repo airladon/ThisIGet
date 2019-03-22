@@ -1,23 +1,22 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
-import lessonLayout from '../common/layout';
+import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import CommonCollection from '../common/diagramCollectionCommon';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
-const {
-  // click,
-  centerV,
-  // highlight,
-  // clickWord,
-} = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -31,19 +30,16 @@ class Content extends PresentationLessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
-    this.diagram.elements = new CommonCollection(this.diagram, layout);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const shapes = diag._shapes;
-    console.log(diag);
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
-    const common = {
-      setContent: '',
+    this.addSection({
+      title: '',
+      setContent: ['Question'],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -60,14 +56,6 @@ class Content extends PresentationLessonContent {
       hide: [],
       setSteadyState: () => {},
       setLeaveState: () => {},
-    };
-
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
-      ]),
-      show: [ shapes ],
     });
   }
 }

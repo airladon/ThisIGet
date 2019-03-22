@@ -37,11 +37,11 @@ function makeSquare(shapes: Object, location: Point) {
   ];
 
   const lines = shapes.polyLineLegacy(vertices, true, lineWidth, lineColor);
-  const corners = shapes.polyLineCorners(
+  const corners = shapes.polyLineCornersLegacy(
     vertices, true, cornerLength,
     cornerWidth, cornerColor,
   );
-  const lessSharp = shapes.polyLineCorners(
+  const lessSharp = shapes.polyLineCornersLegacy(
     vertices, true, cornerLength,
     cornerWidth, lessSharpColor,
   );
@@ -61,12 +61,12 @@ function makeTriangle(shapes: Object, location: Point) {
     new Point(0, radius).rotate(4 * Math.PI / 3),
   ];
   const lines = shapes.polyLineLegacy(vertices, true, lineWidth, lineColor);
-  const corners = shapes.polyLineCorners(
+  const corners = shapes.polyLineCornersLegacy(
     vertices, true, cornerLength,
     cornerWidth, cornerColor,
   );
 
-  const moreSharp = shapes.polyLineCorners(
+  const moreSharp = shapes.polyLineCornersLegacy(
     vertices, true, cornerLength,
     cornerWidth, moreSharpColor,
   );
@@ -80,12 +80,12 @@ function makeTriangle(shapes: Object, location: Point) {
 
 function makePent(shapes: Object, location: Point) {
   function makeCorner(v, color) {
-    return shapes.polyLineCorners(v, false, cornerLength, cornerWidth, color);
+    return shapes.polyLineCornersLegacy(v, false, cornerLength, cornerWidth, color);
   }
   const vertices = layout.pent.vertices.slice();
 
   const lines = shapes.polyLineLegacy(vertices, true, lineWidth, lineColor);
-  const corners = shapes.polyLineCorners(
+  const corners = shapes.polyLineCornersLegacy(
     vertices, true, cornerLength,
     cornerWidth, cornerColor,
   );

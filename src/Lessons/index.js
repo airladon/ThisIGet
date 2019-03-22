@@ -35,9 +35,23 @@ export default function getLessonIndex() {
       uid: 'angles',
       versions: {
         base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
+          title: 'Initial',
+          description: 'Explanation_of_version_here.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+        legacy: {
+          title: 'legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'explanation',

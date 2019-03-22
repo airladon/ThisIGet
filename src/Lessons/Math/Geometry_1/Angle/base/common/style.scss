@@ -1,0 +1,14 @@
+@import '../../../geometry';
+
+$colors: (
+  lines:              color('blue'),
+  angles:             color('green'),
+  moreSharp:          color('red'),
+  lessSharp:          color('green'),
+  center:             color('yellow'),
+  arrow:              color('red'),
+);
+
+body {
+  @include color_vars($colors);
+}
