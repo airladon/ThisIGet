@@ -9,10 +9,11 @@ const {
 } = Fig.tools.g2;
 
 const cssColorNames = [
-  'lines', 'angles', 'arc', 'marks',
+  'lines', 'angles', 'arc', 'marks', 'radianLines',
 ];
 
 const { joinObjects } = Fig.tools.misc;
+const { round } = Fig.tools.math;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
@@ -93,6 +94,33 @@ export default function lessonLayout() {
       marks(36),
     ],
   };
+
+  const radianLine = (rotation: number, sides: number = 49) => ({
+    name: `line${round(rotation, 0)}`,
+    method: 'polygon',
+    options: {
+      width,
+      radius: radius + width,
+      sides: 314,
+      sidesToDraw: sides,
+      rotation: rotation + 1 / 314,
+      color: colors.radianLines,
+    },
+  });
+  layout.radianLines = {
+    name: 'radianLines',
+    method: 'collection',
+    addElements: [
+      radianLine(0),
+      radianLine(1),
+      radianLine(2),
+      radianLine(3),
+      radianLine(4),
+      radianLine(5),
+      radianLine(6, 13),
+    ],
+  };
+
   layout.circle = {
     name: 'circle',
     method: 'collection',
@@ -102,6 +130,7 @@ export default function lessonLayout() {
       layout.line2,
       layout.line1,
       layout.degrees,
+      layout.radianLines,
     ],
   };
 
