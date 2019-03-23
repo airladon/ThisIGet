@@ -13,14 +13,14 @@ import CommonCollection from '../common/diagramCollectionCommon';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -64,12 +64,15 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: '',
       setContent: centerV([
-        '',
+        '|tester|',
       ]),
+      modifiers: {
+        tester: click(diag.bendRadius, [diag], colors.radius),
+      },
       setSteadyState: () => {
         circle._line1.setRotation(1);
         diag.updateAngle();
-        diag.straighten(0);
+        diag.bend(0.5);
       },
       show: [circle],
     });

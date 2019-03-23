@@ -40,27 +40,35 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._arc.setAngleToDraw(r + 0.01);
   }
 
-  straighten(percent: number) {
+  bend(percent: number) {
     const line = this._circle._bendLine._line;
     const arc = this._circle._bendLine._arc;
-    // const 0 = 0;
     const { radius } = this.layout;
 
-    line.setLength(percent * radius);
-    console.log(percent*radius)
+    line.setLength((1 - percent) * radius);
     arc.transform.updateTranslation(
-      percent * radius,
+      (1 - percent) * radius,
       0,
     );
-    arc.angleToDraw = (1 - percent);
-    // if (arc.angleToDraw === Math.PI) {
-    //   arc.angleToDraw = -1;
-    // }
+    arc.angleToDraw = (percent);
+  }
 
-    // this.percentStraight = percent;
-
-    // const width = this.widthOfCircumference();
-    // this.setCircleMoveLimits(width);
-    // this._circle.setTransform(this._circle.transform);
+  bendRadius() {
+    const line1 = this._circle._line1;
+    const bendLine = this._circle._bendLine;
+    const { radius } = this.layout;
+    
+    bendLine.stop(true, false);
+    this.bend(0);
+    bendLine.setPosition(line1.getPosition());
+    bendLine.setRotation(line1.getRotation(''));
+    const target = bendLine.transform._dup();
+    target.updateRotation(Math.PI / 2);
+    target.updateTranslation(radius, 0);
+    bendLine.animations.new()
+      .transform({ target, duration: 1 })
+      .custom({ callback: this.bend.bind(this), duration: 1 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 }

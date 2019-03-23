@@ -141,8 +141,8 @@ export default function lessonLayout() {
         options: {
           width,
           radius,
-          sides: 314,
-          sidesToDraw: 50,
+          sides: 314 * 4,
+          sidesToDraw: 50 * 4,
           rotation: 3 * Math.PI / 2,
           center: [0, radius - width / 2],
           color: colors.angles,
