@@ -41,6 +41,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
+  angleIndex: number;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -53,6 +55,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this._angle._line1.makeTouchable();
     this._angle._line1.setTransformCallback = this.updateAngle.bind(this);
+    this.angleIndex = 0;
   }
 
   updateAngle() {
@@ -168,6 +171,43 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseLines() {
     this._angle._line1.pulseWidth();
     this._angle._line2.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleAngle(angleIndex: number | null) {
+    const indeces = ['a', 'b', 'c', 'd', 'e'];
+    if (angleIndex == null) {
+      this.angleIndex = (this.angleIndex + 1) % 5;
+    } else {
+      this.angleIndex = angleIndex;
+    }
+    for (let i = 0; i < 5; i += 1) {
+      // $FlowFixMe
+      const angleElement = this._example[`_angle${indeces[i]}`];
+      if (i === this.angleIndex) {
+        angleElement.showAll();
+        angleElement.pulseScaleNow(1, 1.3);
+      } else {
+        angleElement.stop(true, true);
+        angleElement.hide();
+      }
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngleLine() {
+    const indeces = ['a', 'b', 'c', 'd', 'e'];
+    // $FlowFixMe
+    const angleElement = this._example[`_angle${indeces[this.angleIndex]}`];
+    angleElement._curve.pulseThickNow(1, 1.08, 7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngleLabel() {
+    const indeces = ['a', 'b', 'c', 'd', 'e'];
+    // $FlowFixMe
+    const angleElement = this._example[`_angle${indeces[this.angleIndex]}`];
+    angleElement._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 }

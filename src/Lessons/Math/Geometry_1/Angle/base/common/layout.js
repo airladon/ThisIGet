@@ -272,10 +272,64 @@ export default function lessonLayout() {
     ],
   };
 
+  // //////////////////////////////////////////////////
+  // Example
+  // //////////////////////////////////////////////////
+  const points = pent;
+
+  const shape = {
+    name: 'shape',
+    method: 'polyLine',
+    options: {
+      points,
+      width,
+      color: colors.lines,
+    },
+  };
+
+  const angle = (index, p1, p2, p3, r = 0.2) => ({
+    name: `angle${index}`,
+    method: 'angle',
+    options: {
+      p1,
+      p2,
+      p3,
+      curve: {
+        width: width * 0.6,
+        radius: r,
+      },
+      label: {
+        text: index,
+        textScale: 0.5,
+        radius: r - 0.04,
+      },
+      color: colors.angles,
+    },
+  });
+
+  layout.example = {
+    name: 'example',
+    method: 'collection',
+    addElements: [
+      shape,
+      angle('a', pent[1], pent[0], pent[4]),
+      angle('b', pent[2], pent[1], pent[0]),
+      angle('c', pent[3], pent[2], pent[1], 0.11),
+      angle('d', pent[4], pent[3], pent[2]),
+      angle('e', pent[0], pent[4], pent[3]),
+    ],
+    mods: {
+      scenarios: {
+        main: { position: new Point(0, -0.5), scale: new Point(2.3, 2.3) },
+      },
+    },
+    scenario: 'main',
+  };
 
   layout.addElements = [
     layout.shapes,
     layout.angle,
+    layout.example,
   ];
   return layout;
 }

@@ -15072,14 +15072,14 @@ function (_DiagramElementCollec) {
     // this.radius = optionsToUse.radius;
 
     if (optionsToUse.p1 != null && optionsToUse.p2 != null && optionsToUse.p3 != null) {
-      var _this2$calculateFromP = _this2.calculateFromP1P2P3(optionsToUse.p1, optionsToUse.p2, optionsToUse.p3),
+      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3)),
           position = _this2$calculateFromP.position,
           rotation = _this2$calculateFromP.rotation,
           angle = _this2$calculateFromP.angle;
 
       _this2.angle = angle;
       _this2.rotation = rotation;
-      _this2.position = position;
+      _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
     }
 
     _this2.transform.updateTranslation(_this2.position);
@@ -15187,14 +15187,14 @@ function (_DiagramElementCollec) {
       }
 
       if (options.p1 != null && options.p2 != null && options.p3 != null) {
-        var _this$calculateFromP = this.calculateFromP1P2P3(options.p1, options.p2, options.p3),
+        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p3)),
             position = _this$calculateFromP.position,
             rotation = _this$calculateFromP.rotation,
             angle = _this$calculateFromP.angle;
 
         this.angle = angle;
         this.rotation = rotation;
-        this.position = position;
+        this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
       this.update();
@@ -25435,7 +25435,8 @@ function () {
     }
   }, {
     key: "getRotation",
-    value: function getRotation(normalize) {
+    value: function getRotation() {
+      var normalize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       var r = this.transform.r();
       var rotation = 0;
 
@@ -27843,7 +27844,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27873,6 +27874,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDeltaAngle", function() { return getDeltaAngle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normAngleTo90", function() { return normAngleTo90; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threePointAngle", function() { return threePointAngle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threePointAngleMin", function() { return threePointAngleMin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randomPoint", function() { return randomPoint; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMaxTimeFromVelocity", function() { return getMaxTimeFromVelocity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMoveTime", function() { return getMoveTime; });
@@ -29851,13 +29853,29 @@ function getBoundingRect(pointArrays) {
     firstPoint = false;
   });
   return new Rect(result.min.x, result.min.y, result.max.x - result.min.x, result.max.y - result.min.y);
-}
+} // Finds the min angle between three points
 
-function threePointAngle(p2, p1, p3) {
+
+function threePointAngleMin(p2, p1, p3) {
   var p12 = distance(p1, p2);
   var p13 = distance(p1, p3);
   var p23 = distance(p2, p3);
   return Math.acos((Math.pow(p12, 2) + Math.pow(p13, 2) - Math.pow(p23, 2)) / (2 * p12 * p13));
+} // Finds the angle between three points for p12 to p13
+
+
+function threePointAngle(p2, p1, p3) {
+  var r12 = p2.sub(p1);
+  var r13 = p3.sub(p1); // const p12 = distance(p1, p2);
+  // const p13 = distance(p1, p3);
+  // const p23 = distance(p2, p3);
+  // const minAngle = Math.acos((p12 ** 2 + p13 ** 2 - p23 ** 2) / (2 * p12 * p13));
+
+  var angle12 = r12.toPolar().angle;
+  var angle13 = r13.toPolar().angle;
+  angle13 -= angle12;
+  angle12 = 0;
+  return clipAngle(angle13, '0to360');
 }
 
 function randomPoint(withinRect) {

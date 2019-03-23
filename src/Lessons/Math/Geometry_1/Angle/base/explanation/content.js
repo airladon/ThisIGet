@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const shapes = diag._shapes;
     const angle = diag._angle;
+    const example = diag._example;
 
     this.addSection({
       title: 'Corners',
@@ -236,6 +237,21 @@ class Content extends PresentationLessonContent {
         larger: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
         angle: click(diag.pulseFill, [diag], colors.angles),
         _angle: click(diag.pulseFill, [diag], colors.angles),
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Angles are often |marked| in a shape with a |line| and |label|.',
+      ],
+      modifiers: {
+        marked: click(diag.toggleAngle, [diag, null], colors.angles),
+        line: click(diag.pulseAngleLine, [diag], colors.angles),
+        label: click(diag.pulseAngleLabel, [diag], colors.angles),
+      },
+      show: [example],
+      setSteadyState: () => {
+        diag.toggleAngle(0);
       },
     });
 
