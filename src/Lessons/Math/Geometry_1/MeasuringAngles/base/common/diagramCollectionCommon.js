@@ -15,6 +15,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line2: DiagramObjectLine;
     _angle: DiagramObjectAngle;
     _arc: DiagramElementPrimative;
+    _bendLine: {
+      _line: DiagramObjectLine;
+      _arc: DiagramElementPrimative;
+    } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   constructor(
@@ -34,5 +38,29 @@ export default class CommonCollection extends CommonDiagramCollection {
     const r = this._circle._line1.getRotation('0to360');
     this._circle._angle.setAngle({ angle: r });
     this._circle._arc.setAngleToDraw(r + 0.01);
+  }
+
+  straighten(percent: number) {
+    const line = this._circle._bendLine._line;
+    const arc = this._circle._bendLine._arc;
+    // const 0 = 0;
+    const { radius } = this.layout;
+
+    line.setLength(percent * radius);
+    console.log(percent*radius)
+    arc.transform.updateTranslation(
+      percent * radius,
+      0,
+    );
+    arc.angleToDraw = (1 - percent);
+    // if (arc.angleToDraw === Math.PI) {
+    //   arc.angleToDraw = -1;
+    // }
+
+    // this.percentStraight = percent;
+
+    // const width = this.widthOfCircumference();
+    // this.setCircleMoveLimits(width);
+    // this._circle.setTransform(this._circle.transform);
   }
 }

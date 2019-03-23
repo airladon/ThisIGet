@@ -18967,8 +18967,8 @@ function () {
       //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
       // }
 
-      if (options.point != null) {
-        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.point);
+      if (options.position != null) {
+        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
         options.transform.updateTranslation(point);
       }
 

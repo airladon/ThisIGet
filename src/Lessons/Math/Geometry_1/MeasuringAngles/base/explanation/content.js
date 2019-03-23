@@ -69,8 +69,9 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         circle._line1.setRotation(1);
         diag.updateAngle();
+        diag.straighten(0);
       },
-      show: [ circle ],
+      show: [circle],
     });
   }
 }

@@ -22,6 +22,7 @@ export default function lessonLayout() {
   const { colors } = layout;
   layout.position = new Point(0, 0);
   const radius = 1.4;
+  layout.radius = radius;
   const width = 0.03;
 
   layout.line1 = {
@@ -121,6 +122,35 @@ export default function lessonLayout() {
     ],
   };
 
+  layout.bendLine = {
+    name: 'bendLine',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'line',
+        method: 'line',
+        options: {
+          length: radius,
+          color: colors.angles,
+          width,
+        },
+      },
+      {
+        name: 'arc',
+        method: 'polygon',
+        options: {
+          width,
+          radius,
+          sides: 314,
+          sidesToDraw: 50,
+          rotation: 3 * Math.PI / 2,
+          center: [0, radius - width / 2],
+          color: colors.angles,
+        },
+      },
+    ],
+  };
+
   layout.circle = {
     name: 'circle',
     method: 'collection',
@@ -131,6 +161,7 @@ export default function lessonLayout() {
       layout.line1,
       layout.degrees,
       layout.radianLines,
+      layout.bendLine,
     ],
   };
 
