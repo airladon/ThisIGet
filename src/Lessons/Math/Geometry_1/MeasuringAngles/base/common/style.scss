@@ -1,0 +1,19 @@
+@import '../../../geometry';
+
+$colors: (
+  // lines:             map-get($geometry_colors, lines),
+  // angles:            color('diagram', 'construction8'),
+  lines:              color('blue'),
+  angles:             color('green'),
+  arc:                color('red'),
+  marks:              color('grey', 'dark'),
+  // arrow:              color('red'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}

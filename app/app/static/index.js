@@ -4690,6 +4690,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       text: shapes.txt.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
       axes: shapes.axes.bind(shapes),
+      radialLines: shapes.radialLines.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -19027,6 +19028,29 @@ function () {
   }, {
     key: "radialLines",
     value: function radialLines() {
+      var defaultOptions = {
+        innerRadius: 0,
+        outerRadius: 1,
+        width: 0.05,
+        dAngle: Math.PI / 4,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
+      };
+
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.color, options.transform, this.limits);
+    }
+  }, {
+    key: "radialLinesLegacy",
+    value: function radialLinesLegacy() {
       var innerRadius = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var outerRadius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.05;
@@ -19046,8 +19070,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len7 = arguments.length, moreOptions = new Array(_len7 > 1 ? _len7 - 1 : 0), _key7 = 1; _key7 < _len7; _key7++) {
-          moreOptions[_key7 - 1] = arguments[_key7];
+        for (var _len8 = arguments.length, moreOptions = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+          moreOptions[_key8 - 1] = arguments[_key8];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -19152,8 +19176,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -25419,7 +25443,7 @@ function () {
         rotation = r;
       }
 
-      if (normalize !== '') {
+      if (normalize !== '' && r != null) {
         rotation = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(r, normalize);
       }
 

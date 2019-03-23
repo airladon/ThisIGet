@@ -42,22 +42,10 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
-            'quiz',
             'summary',
           ],
           qr: [
             'Main',
-          ],
-        },
-        legacy: {
-          title: 'legacy',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
           ],
         },
       },
@@ -378,9 +366,24 @@ export default function getLessonIndex() {
       uid: 'measuring_angles',
       versions: {
         base: {
+          title: 'Initial',
+          description: 'Presentation form - interactive.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+        base_legacy: {
           title: 'Base',
           description: 'First explanation of Topic.',
-          path: 'base',
+          path: 'legacy',
           onPath: true,
           topics: [
             'explanation',
