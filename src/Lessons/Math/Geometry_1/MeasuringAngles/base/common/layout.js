@@ -24,6 +24,7 @@ export default function lessonLayout() {
   const radius = 1.4;
   layout.radius = radius;
   const width = 0.03;
+  layout.width = width;
 
   layout.line1 = {
     name: 'line1',
@@ -140,11 +141,11 @@ export default function lessonLayout() {
         method: 'polygon',
         options: {
           width,
-          radius,
+          radius: radius + width,
           sides: 314 * 4,
           sidesToDraw: 50 * 4,
           rotation: 3 * Math.PI / 2,
-          center: [0, radius - width / 2],
+          center: [0, radius + width - width / 2],
           color: colors.angles,
         },
       },

@@ -56,15 +56,15 @@ export default class CommonCollection extends CommonDiagramCollection {
   bendRadius() {
     const line1 = this._circle._line1;
     const bendLine = this._circle._bendLine;
-    const { radius } = this.layout;
-    
+    const { radius, width } = this.layout;
+
     bendLine.stop(true, false);
     this.bend(0);
     bendLine.setPosition(line1.getPosition());
     bendLine.setRotation(line1.getRotation(''));
     const target = bendLine.transform._dup();
     target.updateRotation(Math.PI / 2);
-    target.updateTranslation(radius, 0);
+    target.updateTranslation(radius + width / 2, 0);
     bendLine.animations.new()
       .transform({ target, duration: 1 })
       .custom({ callback: this.bend.bind(this), duration: 1 })
