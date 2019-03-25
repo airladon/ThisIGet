@@ -702,6 +702,7 @@ function () {
     this.element = options.element;
     this.animations = [];
     this.state = 'idle';
+    this.options = {};
     return this;
   }
 
@@ -2077,6 +2078,17 @@ function (_ElementAnimationStep) {
       },
       velocity: null
     };
+
+    if (_this.element && _this.element.animations.options.tranlsation) {
+      var translationOptions = _this.element.animations.options.tranlsation;
+
+      if (translationOptions.style != null) {
+        defaultPositionOptions.style = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultPositionOptions.translationOptions, translationOptions);
+    }
+
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.position = {
@@ -2696,6 +2708,17 @@ function (_ElementAnimationStep) {
       velocity: null,
       clipRotationTo: null
     };
+
+    if (_this.element && _this.element.animations.options.translation) {
+      var translationOptions = _this.element.animations.options.translation;
+
+      if (translationOptions.style != null) {
+        defaultTransformOptions.translationStyle = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultTransformOptions.translationOptions, translationOptions);
+    }
+
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.transform = {
@@ -4683,7 +4706,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
   var getMethod = function getMethod(method) {
     var methods = {
       collection: shapes.collection.bind(shapes),
-      polyLine: shapes.polyLine.bind(shapes),
+      polyLine: objects.polyLine.bind(objects),
       polyLineCorners: shapes.polyLineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
@@ -6754,8 +6777,8 @@ function (_DiagramElementCollec) {
           }
 
           if (diagramElem != null) {
-            if (elem.elementOptions != null) {
-              diagramElem.setProperties(elem.elementOptions);
+            if (elem.mods != null) {
+              diagramElem.setProperties(elem.mods);
             }
 
             _this2.add(key, diagramElem);
@@ -7038,23 +7061,23 @@ function (_DiagramElementCollec) {
 
         if (diagramElement) {
           var color;
-          var elementOptions;
+          var mods;
 
           if (Array.isArray(elementMods[elementName])) {
             var _elementMods$elementN = _slicedToArray(elementMods[elementName], 2);
 
             color = _elementMods$elementN[0];
-            elementOptions = _elementMods$elementN[1];
+            mods = _elementMods$elementN[1];
           } else {
             var _elementMods$elementN2 = elementMods[elementName];
             color = _elementMods$elementN2.color;
-            elementOptions = _elementMods$elementN2.elementOptions;
+            mods = _elementMods$elementN2.mods;
           }
 
           form[subForm].elementMods[elementName] = {
             element: diagramElement,
             color: color,
-            elementOptions: elementOptions
+            mods: mods
           };
         }
       });
@@ -7982,12 +8005,13 @@ function (_Elements) {
       }
 
       Object.keys(this.elementMods).forEach(function (elementName) {
-        var mods = _this4.elementMods[elementName];
-        var element = mods.element,
-            color = mods.color,
-            style = mods.style,
-            direction = mods.direction,
-            mag = mods.mag;
+        var elementMods = _this4.elementMods[elementName];
+        var element = elementMods.element,
+            color = elementMods.color,
+            style = elementMods.style,
+            direction = elementMods.direction,
+            mag = elementMods.mag,
+            mods = elementMods.mods;
 
         if (element != null) {
           if (color != null) {
@@ -8000,15 +8024,20 @@ function (_Elements) {
           }
 
           if (style != null) {
-            element.animate.transform.translation.style = style;
+            // element.animate.transform.translation.style = style;
+            element.animations.options.translation.style = style;
           }
 
           if (direction != null) {
-            element.animate.transform.translation.options.direction = direction;
+            element.animations.options.translation.direction = direction; // element.animate.transform.translation.options.direction = direction;
           }
 
           if (mag != null) {
-            element.animate.transform.translation.options.magnitude = mag;
+            element.animations.options.translation.magnitude = mag; // element.animate.transform.translation.options.magnitude = mag;
+          }
+
+          if (mods != null) {
+            element.setProperties(mods);
           }
         }
       });
@@ -15008,15 +15037,30 @@ function (_DiagramElementCollec) {
     // Pulic Angle methods
     // eslint-disable-next-line class-methods-use-this
     value: function calculateFromP1P2P3(p1, p2, p3) {
+      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+
       var position = p2._dup();
 
-      var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
-      var rotation = L21.angle();
       var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngle"])(p1, p2, p3);
+
+      if (direction === 1) {
+        var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+
+        var _rotation = L21.angle();
+
+        return {
+          position: position,
+          rotation: _rotation,
+          angle: angle
+        };
+      }
+
+      var L23 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+      var rotation = L23.angle();
       return {
         position: position,
         rotation: rotation,
-        angle: angle
+        angle: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(Math.PI * 2 - angle, '0to360')
       };
     }
   }]);
@@ -15035,6 +15079,7 @@ function (_DiagramElementCollec) {
       // radius: 0.1,
       color: [0, 1, 0, 1],
       // clockwise: false,
+      direction: 1,
       autoRightAngle: false,
       rightAngleRange: 0.001,
       curve: null,
@@ -15065,6 +15110,7 @@ function (_DiagramElementCollec) {
 
     _this2.position = optionsToUse.position;
     _this2.rotation = optionsToUse.rotation;
+    _this2.direction = optionsToUse.direction;
     _this2.angle = optionsToUse.angle;
     _this2.lastLabelRotationOffset = 0;
     _this2.autoRightAngle = optionsToUse.autoRightAngle;
@@ -15072,7 +15118,7 @@ function (_DiagramElementCollec) {
     // this.radius = optionsToUse.radius;
 
     if (optionsToUse.p1 != null && optionsToUse.p2 != null && optionsToUse.p3 != null) {
-      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3)),
+      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3), _this2.direction),
           position = _this2$calculateFromP.position,
           rotation = _this2$calculateFromP.rotation,
           angle = _this2$calculateFromP.angle;
@@ -15186,8 +15232,12 @@ function (_DiagramElementCollec) {
         this.angle = options.angle;
       }
 
-      if (options.p1 != null && options.p2 != null && options.p3 != null) {
-        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p3)),
+      var p1 = options.p1,
+          p2 = options.p2,
+          p3 = options.p3;
+
+      if (p1 != null && p2 != null && p3 != null) {
+        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p3), this.direction),
             position = _this$calculateFromP.position,
             rotation = _this$calculateFromP.rotation,
             angle = _this$calculateFromP.angle;
@@ -29861,7 +29911,8 @@ function threePointAngleMin(p2, p1, p3) {
   var p13 = distance(p1, p3);
   var p23 = distance(p2, p3);
   return Math.acos((Math.pow(p12, 2) + Math.pow(p13, 2) - Math.pow(p23, 2)) / (2 * p12 * p13));
-} // Finds the angle between three points for p12 to p13
+} // Finds the angle between three points for p12 to p13 in the positive
+// angle direction
 
 
 function threePointAngle(p2, p1, p3) {

@@ -67,7 +67,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: square, color: colors.lines, width },
+        options: {
+          points: square, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -95,7 +97,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: tri, color: colors.lines, width },
+        options: {
+          points: tri, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -135,7 +139,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: pent, color: colors.lines, width },
+        options: {
+          points: pent, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -283,6 +289,7 @@ export default function lessonLayout() {
     options: {
       points,
       width,
+      close: true,
       color: colors.lines,
     },
   };
