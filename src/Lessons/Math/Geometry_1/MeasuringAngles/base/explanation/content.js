@@ -61,7 +61,7 @@ class Content extends PresentationLessonContent {
         'An |angle| is the amount of |rotation| between two lines.',
       ],
       modifiers: {
-        rotation: click(diag.pushLine, [diag, null, 0], colors.lines),
+        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
         angle: click(diag.pulseAngle, [diag], colors.angles),
       },
       show: [
@@ -77,10 +77,10 @@ class Content extends PresentationLessonContent {
         'An |angle| in a shape can be as small as |no_rotation|, and as large as a |full_rotation|.',
       ],
       modifiers: {
-        rotation: click(diag.pushLine, [diag, null, 0], colors.lines),
+        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
         angle: click(diag.pulseAngle, [diag], colors.angles),
-        no_rotation: click(diag.pushLine, [diag, 0, -1], colors.lines),
-        full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1], colors.lines),
+        no_rotation: click(diag.pushLine, [diag, 0, -1, 2], colors.lines),
+        full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 2], colors.lines),
       },
       show: [
         circle._line1, circle._line2, circle._angle,
@@ -125,10 +125,43 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line1, circle._line2, circle._angle, circle._marks12,
       ],
-      // setSteadyState: () => {
-      //   // circle._line1.setScenario('start');
-      //   diag.updateAngle();
-      // },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'The |angle| would then be how many portions are covered.',
+      ],
+      modifiers: { angle: click(diag.pulseAngle, [diag], colors.angles) },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._marks12,
+        circle._angleText,
+      ],
+      setSteadyState: () => {
+        // diag.updateAngle();
+        diag.setAngleMarks(12);
+        circle._angleText.setScenario('bottomRight');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|_12| portions is just an example. It could also be |_20|, |_50| or |_100|.',
+      ],
+      modifiers: {
+        _12: click(diag.setAngleMarks, [diag, 12], colors.angles),
+        _20: click(diag.setAngleMarks, [diag, 20], colors.angles),
+        _50: click(diag.setAngleMarks, [diag, 50], colors.angles),
+        _100: click(diag.setAngleMarks, [diag, 100], colors.angles),
+      },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._marks12,
+        circle._angleText,
+      ],
+      setSteadyState: () => {
+        // diag.updateAngle();
+        diag.setAngleMarks(12);
+        circle._angleText.setScenario('bottomRight');
+      },
     });
 
     // this.addSection(common, {

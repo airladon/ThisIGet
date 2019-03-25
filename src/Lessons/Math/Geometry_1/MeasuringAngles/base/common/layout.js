@@ -90,6 +90,8 @@ export default function lessonLayout() {
     },
   });
   layout.marks12 = marks(12);
+  layout.marks20 = marks(20);
+  layout.marks50 = marks(50);
   layout.marks100 = marks(100);
   layout.radians = joinObjects(marks(Math.PI * 2), { name: 'radians' });
   layout.degrees = {
@@ -156,24 +158,68 @@ export default function lessonLayout() {
     ],
   };
 
+  layout.angleText = {
+    name: 'angleText',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'label',
+        method: 'text',
+        options: {
+          text: 'Angle:',
+          color: colors.angles,
+          // style: 'normal',
+          weight: 700,
+          family: 'Helvetica',
+          position: [-0.1, 0],
+          hAlign: 'right',
+          size: 0.17,
+        },
+        mods: {
+          interactiveLocation: new Point(-0.05, 0.06),
+        },
+      },
+      {
+        name: 'value',
+        method: 'text',
+        options: {
+          color: colors.lines,
+          weight: 500,
+          family: 'Helvetica',
+          hAlign: 'left',
+          size: 0.17,
+        },
+      },
+    ],
+    mods: {
+      scenarios: {
+        topLeft: { position: new Point(-1.7, 1.5) },
+        bottomRight: { position: new Point(1.7, -1.3) },
+      },
+    },
+  };
+
   layout.circle = {
     name: 'circle',
     method: 'collection',
     addElements: [
       layout.marks12,
+      layout.marks20,
+      layout.marks50,
       layout.marks100,
       layout.degrees,
+      layout.radians,
       layout.radianLines,
       layout.angle,
       layout.arc,
       layout.line2,
       layout.line1,
-      
+      layout.angleText,
       layout.bendLine,
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, -0.5) },
+        'center': { position: new Point(0, -0.3) },
       },
     },
     scenario: 'center',

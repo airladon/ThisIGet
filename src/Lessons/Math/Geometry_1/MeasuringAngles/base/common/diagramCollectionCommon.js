@@ -9,7 +9,7 @@ const {
   Transform,
 } = Fig;
 
-const { rand } = Fig.tools.math;
+const { rand, round } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _circle: {
@@ -23,6 +23,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
+  marks: number;
+  decimals: number;
+  units: string;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -34,12 +38,49 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
+    this.decimals = 1;
+    this.marks = 12;
+    this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
+    this._circle._angleText._label.makeTouchable();
   }
 
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
     this._circle._angle.setAngle({ angle: r });
     this._circle._arc.setAngleToDraw(r + 0.01);
+    if (this._circle._angleText.isShown) {
+      const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)} ${this.units}`;
+      this._circle._angleText._value.drawingObject.setText(text);
+    }
+  }
+
+  setAngleTextProperties(marks: number, decimals: number, units: string) {
+    this.marks = marks;
+    this.decimals = decimals;
+    this.units = units;
+  }
+
+  setAngleMarks(
+    marks: 12 | 20 | 50 | 100 | 'degrees' | 'radians' = 'degrees',
+  ) {
+    this._circle._marks12.hide();
+    this._circle._marks20.hide();
+    this._circle._marks50.hide();
+    this._circle._marks100.hide();
+    this._circle._degrees.hide();
+    this._circle._radians.hide();
+    if (marks === 'degrees') {
+      this.setAngleTextProperties(360, 0, 'º');
+      this._circle._degrees.showAll();
+    } else if (marks === 'radians') {
+      this.setAngleTextProperties(Math.PI * 2, 1, 'radians');
+      this._circle._radians.showAll();
+    } else {
+      this.setAngleTextProperties(marks, 1, 'portions');
+      this._circle[`_marks${marks}`].showAll();
+    }
+    this.updateAngle();
+    this.diagram.animateNextFrame();
   }
 
   bend(percent: number) {
@@ -74,14 +115,18 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pushLine(toAngle: ?number = null, direction: number = 0, duration: number = 2) {
+  pushLine(
+    toAngle: ?number = null,
+    direction: number = 0,
+    duration: number = 2,
+  ) {
     let r = toAngle;
     if (toAngle == null) {
       r = rand(Math.PI / 2) + Math.PI / 2 + this._circle._line1.getRotation('0to360');
     }
     this._circle._line1.stop(true, false);
     this._circle._line1.animations.new()
-      .rotation({ target: r, duration: 2, direction })
+      .rotation({ target: r, duration, direction })
       .start();
     this.diagram.animateNextFrame();
   }
