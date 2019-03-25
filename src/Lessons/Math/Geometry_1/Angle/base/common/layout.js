@@ -296,6 +296,7 @@ export default function lessonLayout() {
     options: {
       points,
       width,
+      close: true,
       color: colors.lines,
       close: true,
       angle: {

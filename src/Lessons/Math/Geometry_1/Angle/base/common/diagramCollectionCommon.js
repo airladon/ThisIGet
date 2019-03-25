@@ -107,9 +107,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseShapeElement(what: 'lines' | 'corners' | 'moreSharp' | 'lessSharp') {
     const shapes = this._shapes;
     shapes.hideAll();
-    shapes._shape1._line.show();
-    shapes._shape2._line.show();
-    shapes._shape3._line.show();
+    shapes._shape1._line.showAll();
+    shapes._shape2._line.showAll();
+    shapes._shape3._line.showAll();
     if (what === 'lines') {
       shapes._shape1._line.pulseThickNow(1, 1.05, 5);
       shapes._shape2._line.pulseThickNow(1, 1.05, 5);

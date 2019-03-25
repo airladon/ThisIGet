@@ -14,7 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
-  centerV,
+  centerVH, centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -43,41 +43,174 @@ class Content extends PresentationLessonContent {
     const equation = diag._equation;
 
     const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      transitionFromAny: (done) => {
+        diag.setLineRotation();
+        done();
+      },
     };
 
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '|tester|',
+    this.addSection({
+      title: 'Introduction',
+      setContent: centerVH([
+        'How do we |measure| angle?',
+        'How do we quantify how large or small an angle is?',
       ]),
-      modifiers: {
-        tester: click(diag.bendRadius, [diag], colors.radius),
-      },
-      setSteadyState: () => {
-        circle._line1.setRotation(1);
-        diag.updateAngle();
-        diag.bend(0.5);
-        equation.showForm('arc');
-      },
-      show: [circle, equation],
     });
+
+    this.addSection(common, {
+      setContent: [
+        'An |angle| is the amount of |rotation| between two lines.',
+      ],
+      modifiers: {
+        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
+        angle: click(diag.pulseAngle, [diag], colors.angles),
+      },
+      show: [
+        circle._line1, circle._line2, circle._angle,
+      ],
+      // setSteadyState: () => {
+      //   // circle._line1.setScenario('start');
+      //   // diag.updateAngle();
+      // },
+    });
+    this.addSection(common, {
+      setContent: [
+        'An |angle| in a shape can be as small as |no_rotation|, and as large as a |full_rotation|.',
+      ],
+      modifiers: {
+        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
+        angle: click(diag.pulseAngle, [diag], colors.angles),
+        no_rotation: click(diag.pushLine, [diag, 0, -1, 2], colors.lines),
+        full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 2], colors.lines),
+      },
+      show: [
+        circle._line1, circle._line2, circle._angle,
+      ],
+      // setSteadyState: () => {
+      //   circle._line1.setScenario('start');
+      //   diag.updateAngle();
+      // },
+    });
+    this.addSection(common, {
+      setContent: [
+        'Therefore, one way to measure angle is to split the full rotation up into |equal portions|.',
+      ],
+      show: [
+        circle._line1, circle._line2, circle._angle,
+      ],
+      // setSteadyState: () => {
+      //   circle._line1.setScenario('start');
+      //   diag.updateAngle();
+      // },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'For example, it could be |_12| equal portions like a clock.',
+      ],
+      modifiers: { _12: click(this.next, [this], colors.marks) },
+      show: [
+        circle._line1, circle._line2, circle._angle,
+      ],
+      // setSteadyState: () => {
+      //   circle._line1.setScenario('start');
+      //   diag.updateAngle();
+      // },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'For example, it could be |_12| equal portions like a clock.',
+      ],
+      modifiers: { _12: click(diag.pulseMarks, [diag, 12], colors.marks) },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._marks12,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'The |angle| would then be how many portions are covered.',
+      ],
+      modifiers: { angle: click(diag.pulseAngle, [diag], colors.angles) },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._marks12,
+        circle._angleText,
+      ],
+      setSteadyState: () => {
+        // diag.updateAngle();
+        diag.setAngleMarks(12);
+        circle._angleText.setScenario('bottomRight');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|_12| portions is just an example. It could also be |_20|, |_50| or |_100|.',
+      ],
+      modifiers: {
+        _12: click(diag.setAngleMarks, [diag, 12], colors.angles),
+        _20: click(diag.setAngleMarks, [diag, 20], colors.angles),
+        _50: click(diag.setAngleMarks, [diag, 50], colors.angles),
+        _100: click(diag.setAngleMarks, [diag, 100], colors.angles),
+      },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._marks12,
+        circle._angleText,
+      ],
+      setSteadyState: () => {
+        diag.setAngleMarks(12);
+        circle._angleText.setScenario('bottomRight');
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So how many portions should we use?',
+        'There are two common practices. The first is dividing into |360| portions',
+        'Each portion is usually called a degree and is represented by the symbol |º|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'The word |degree| comes from the Latin words |de| (meaning |down|) and |gradus| (meaning |step|).',
+        'So 360 degrees (360º) is the same as saying there are 360 smaller steps or pieces.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        '|Why choose 360?|',
+        'If you were defining it today, you could choose anything!',
+        'But angle is a concept people have worked on and understood for thousands of years.',
+        'For instance, Babylonians divided the circle into 360 pieces |over 3000 years ago|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So, |why did they| choose 360?',
+        'Its not known, ',
+        '',
+      ]),
+    });
+
+    // this.addSection(common, {
+    //   title: '',
+    //   setContent: centerV([
+    //     '|tester|',
+    //   ]),
+    //   modifiers: {
+    //     tester: click(diag.bendRadius, [diag], colors.radius),
+    //   },
+    //   setSteadyState: () => {
+    //     circle._line1.setRotation(1);
+    //     diag.updateAngle();
+    //     diag.bend(0.5);
+    //   },
+    //   show: [circle],
+    // });
   }
 }
 
