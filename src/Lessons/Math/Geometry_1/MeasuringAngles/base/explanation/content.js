@@ -15,8 +15,10 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   centerVH, centerV,
-  // highlight,
+  highlightWord,
+  actionWord,
   // clickWord,
+  onClickId,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -191,11 +193,56 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV([
         'So, |why did they| choose 360?',
-        'Its not known, ',
-        '',
+        'It\'s not known, but one reason might be |360 is an easy number to work with| when you don\'t have a calculator.',
+        '360 has a lot of numbers that can divide into it without a remainder:',
+        '<ul style="list-style-type:none;"><li>|_factors|</li></ul>',
       ]),
+      modifiers: {
+        _factors: highlightWord('1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360', 'lesson__diagram_text_small'),
+      },
     });
-
+    this.addSection(common, {
+      setContent: () => `
+          <p>This means it's easy to work with fractions of a circle.</p>
+          <ul style="margin-top:15%;margin-left:15%">
+                <li>${String.fromCharCode(190)} circle =   |_270deg|</li>
+                <li>${String.fromCharCode(8532)} circle = |_240deg|</li>
+                <li>${String.fromCharCode(189)} circle = |_180deg|</li>
+                <li>${String.fromCharCode(8531)} circle = |_120deg|</li>
+                <li>${String.fromCharCode(188)} circle = |_90deg|</li>
+                <li>${String.fromCharCode(8533)} circle = |_72deg|</li>
+                <li>${String.fromCharCode(8537)} circle = |_60deg|</li>
+          </ul>
+        `,
+      modifiers: {
+        _270deg: actionWord('270&deg;', 'id_270', colors.diagram.text.keyword),
+        _240deg: actionWord('240&deg;', 'id_240', colors.diagram.text.keyword),
+        _180deg: actionWord('180&deg;', 'id_180', colors.diagram.text.keyword),
+        _120deg: actionWord('120&deg;', 'id_120', colors.diagram.text.keyword),
+        _90deg: actionWord('90&deg;', 'id_90', colors.diagram.text.keyword),
+        _72deg: actionWord('72&deg;', 'id_72', colors.diagram.text.keyword),
+        _60deg: actionWord('60&deg;', 'id_60', colors.diagram.text.keyword),
+      },
+      show: [
+        circle._line1, circle._line2, circle._angle, circle._degrees,
+        circle._angleText,
+      ],
+      setSteadyState: () => {
+        diag.setAngleMarks('degrees');
+        circle._angleText.setScenario('bottomLeft');
+        circle.setScenario('right');
+        const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1];
+        // onClickId('id_angle', diag.pulseAngle, [diag]);
+        // onClickId('id_angle_text', diag.pulseAngle, [diag]);
+        onClickId('id_270', diag.pushLine, bindArray(270));
+        onClickId('id_240', diag.pushLine, bindArray(240));
+        onClickId('id_180', diag.pushLine, bindArray(180));
+        onClickId('id_120', diag.pushLine, bindArray(120));
+        onClickId('id_90', diag.pushLine, bindArray(90));
+        onClickId('id_72', diag.pushLine, bindArray(72));
+        onClickId('id_60', diag.pushLine, bindArray(60));
+      },
+    });
     // this.addSection(common, {
     //   title: '',
     //   setContent: centerV([

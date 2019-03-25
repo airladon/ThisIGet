@@ -195,6 +195,7 @@ export default function lessonLayout() {
       scenarios: {
         topLeft: { position: new Point(-1.7, 1.5) },
         bottomRight: { position: new Point(1.7, -1.3) },
+        bottomLeft: { position: new Point(-1.7, -1.3) },
       },
     },
   };
@@ -220,6 +221,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         'center': { position: new Point(0, -0.3) },
+        'right': { position: new Point(1, -0.3) },
       },
     },
     scenario: 'center',

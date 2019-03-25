@@ -72,7 +72,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.marks = 12;
     this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
     this._circle._angleText._label.makeTouchable();
-
   }
 
   updateAngle() {
