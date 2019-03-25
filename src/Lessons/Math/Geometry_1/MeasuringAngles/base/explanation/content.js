@@ -150,7 +150,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         // diag.updateAngle();
         diag.setAngleMarks(12);
-        circle._angleText.setScenario('bottomRight');
+        circle._angleText.setScenario('bottom');
       },
     });
 
@@ -170,7 +170,7 @@ class Content extends PresentationLessonContent {
       ],
       setSteadyState: () => {
         diag.setAngleMarks(12);
-        circle._angleText.setScenario('bottomRight');
+        circle._angleText.setScenario('bottom');
       },
     });
 
@@ -246,7 +246,7 @@ class Content extends PresentationLessonContent {
       ],
       setSteadyState: () => {
         diag.setAngleMarks('degrees');
-        circle._angleText.setScenario('bottomLeft');
+        circle._angleText.setScenario('bottomSlightRight');
         circle.setScenario('right');
         const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1];
         // onClickId('id_270', diag.pushLine, bindArray(270));
@@ -277,13 +277,13 @@ class Content extends PresentationLessonContent {
         circle._line1, circle._line2,
         // circle._angle,
         circle._degrees,
-        circle._angleText,
+        // circle._angleText,
         circle._arc,
       ],
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.setAngleMarks('degrees');
-        circle._angleText.setScenario('bottomLeft');
+        // circle._angleText.setScenario('bottomLeft');
       },
     });
 
@@ -299,13 +299,13 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line1, circle._line2,
         circle._degrees,
-        circle._angleText,
+        // circle._angleText,
         circle._arc,
       ],
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.setAngleMarks('degrees');
-        circle._angleText.setScenario('bottomLeft');
+        // circle._angleText.setScenario('bottomLeft');
       },
     });
 
@@ -323,7 +323,7 @@ class Content extends PresentationLessonContent {
       'To do this, we find the angle where the |arc_length| and |radius_length| are |equal|.',
     ];
     common.setSteadyState = () => {
-      circle.setScenario('right');
+      circle.setScenario('center');
       diag.updateAngle();
     };
 
@@ -334,7 +334,7 @@ class Content extends PresentationLessonContent {
         equal: click(this.next, [this], colors.radianLines),
       },
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.updateAngle();
       },
     });
@@ -350,11 +350,7 @@ class Content extends PresentationLessonContent {
         diag.bendRadius(done);
       },
       setSteadyState: () => {
-        circle.setScenario('right');
-        // circle._bendLine.showAll();
-        // circle._bendLine.setRotation(Math.PI / 2);
-        // circle._bendLine.setPosition((Math.PI / 2);
-        // diag.bend(1);
+        circle.setScenario('center');
         diag.updateAngle();
       },
     });
@@ -367,7 +363,7 @@ class Content extends PresentationLessonContent {
         radian: click(diag.pushLine, [diag, 1, 0, 1], colors.angles),
       },
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         circle._radianLines._line0.showAll();
         diag.bend(1);
         diag.updateAngle();
@@ -384,7 +380,7 @@ class Content extends PresentationLessonContent {
         circle._radianLines._line0,
       ],
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.updateAngle();
       },
     });
@@ -420,7 +416,7 @@ class Content extends PresentationLessonContent {
       //   circle._angleText,
       // ],
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.setAngleMarks('radians');
         circle._angleText.setScenario('bottomLeft');
         // diag.updateAngle();

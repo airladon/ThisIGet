@@ -21,7 +21,7 @@ export default function lessonLayout() {
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
   layout.position = new Point(0, 0);
-  const radius = 1.3;
+  const radius = 1.2;
   layout.radius = radius;
   const width = 0.03;
   layout.width = width;
@@ -173,7 +173,7 @@ export default function lessonLayout() {
           family: 'Helvetica',
           position: [-0.1, 0],
           hAlign: 'right',
-          size: 0.17,
+          size: 0.14,
         },
         mods: {
           interactiveLocation: new Point(-0.05, 0.06),
@@ -187,7 +187,7 @@ export default function lessonLayout() {
           weight: 500,
           family: 'Helvetica',
           hAlign: 'left',
-          size: 0.17,
+          size: 0.14,
         },
       },
     ],
@@ -195,7 +195,9 @@ export default function lessonLayout() {
       scenarios: {
         topLeft: { position: new Point(-1.7, 1.5) },
         bottomRight: { position: new Point(1.7, -1.3) },
-        bottomLeft: { position: new Point(-1.5, -1.3) },
+        bottomLeft: { position: new Point(-1.2, -1.2) },
+        bottom: { position: new Point(-0.2, -1.5) },
+        bottomSlightRight: { position: new Point(0.1, -1.5) },
       },
     },
   };
