@@ -430,6 +430,62 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    this.addSection({
+      setContent: centerV([
+        'Saying there are |3.14| radians in half a circle is a |rough approximation|.',
+        'Actually, the digits after the 3 go on forever.',
+        'A more accurate |approximation| is |3.141593...|',
+        'An even more accurate |approximation| is |3.14159265359...|',
+      ]),
+    });
+
+    this.addSection({
+      title: 'Why Use Radians?',
+      setContent: centerV([
+        '|So why use radians?|',
+        'At first glance, dividing a circle into |6.283185...| portions isn\'t as convenient as dividing it into |360|.',
+        'A radian is a big portion, and there are plenty of applications that will require a |fraction of a radian|.',
+      ]),
+    });
+    this.addSection({
+      setContent: centerV([
+        'For example, if you want to use the angle of a |quarter circle|, instead of a simple calculation in degrees:',
+        `<p style="text-align: center">|360 ${String.fromCharCode(247)} 4 = 90|</p>`,
+        'you might need to use a calculator for radians:',
+        `<p style="text-align: center">|6.283185... ${String.fromCharCode(247)} 4 = 1.570796...|</p>`,
+      ]),
+    });
+    this.addSection({
+      setContent: centerV([
+        'In addition, a circle cannot be divided |evenly| in radians without a remainder.',
+        '|6| radians go into a circle, but we are left with |0.283185... radians remaining|.',
+      ]),
+    });
+    this.addSection({
+      setContent: centerV([
+        'But radians relate |angle|, |radius| and |arc length|.',
+        'This means you can calculate one property from the other two.',
+        'Thus, you only need to |measure the two easiest properties|, to have all three.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Lets see the relationship by looking at some examples:',
+      ],
+      show: [
+        circle._arc, circle._radianLines, circle._angle,
+        circle._line1, circle._line2, circle._angleText,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.updateAngle();
+        diag.setAngleMarks('radians');
+        circle._angleText.setScenario('bottom');
+        circle._radians.hide();
+      },
+    });
+
     // this.addSection(common, {
     //   title: '',
     //   setContent: centerV([
