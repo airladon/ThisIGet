@@ -17,9 +17,22 @@ export default class CommonCollection extends CommonDiagramCollection {
     _line2: DiagramObjectLine;
     _angle: DiagramObjectAngle;
     _arc: DiagramElementPrimative;
+    _marks12: DiagramElementPrimative;
+    _marks20: DiagramElementPrimative;
+    _marks50: DiagramElementPrimative;
+    _marks100: DiagramElementPrimative;
+    _radians: DiagramElementPrimative;
+    _degrees: {
+      _marks36: DiagramElementPrimative;
+      _marks360: DiagramElementPrimative;
+    } & DiagramElementCollection;
     _bendLine: {
       _line: DiagramObjectLine;
       _arc: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _angleText: {
+      _label: DiagramElementPrimative;
+      _value: DiagramElementPrimative;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
