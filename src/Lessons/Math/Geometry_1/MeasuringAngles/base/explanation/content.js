@@ -40,6 +40,7 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const circle = diag._circle;
+    const equation = diag._equation;
 
     const common = {
       setContent: '',
@@ -73,8 +74,9 @@ class Content extends PresentationLessonContent {
         circle._line1.setRotation(1);
         diag.updateAngle();
         diag.bend(0.5);
+        equation.showForm('arc');
       },
-      show: [circle],
+      show: [circle, equation],
     });
   }
 }

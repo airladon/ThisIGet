@@ -32,6 +32,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
+    this._equation._arc.onClick = () => {
+      this._equation.goToForm('arc', 2);
+      this.diagram.animateNextFrame();
+    };
+    this._equation._radius.onClick = () => {
+      this._equation.goToForm('radius', 2);
+      this.diagram.animateNextFrame();
+    };
+    this._equation._arc.makeTouchable();
+    this._equation._radius.makeTouchable();
   }
 
   updateAngle() {

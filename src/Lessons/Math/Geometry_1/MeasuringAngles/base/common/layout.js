@@ -166,8 +166,64 @@ export default function lessonLayout() {
     ],
   };
 
+  // ///////////////////////////////////////////////////////
+  // Equation
+  // ///////////////////////////////////////////////////////
+  layout.equation = {
+    name: 'equation',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        arc: {
+          text: 'arc length',
+          color: colors.arc,
+          elementOptions: {
+            isTouchable: true,
+          },
+        },
+        radius: {
+          text: 'radius',
+          color: colors.lines,
+          elementOptions: {
+            isTouchable: true,
+          },
+        },
+        _2p: {
+          text: '2π',
+          elementOptions: {
+            animations: {
+              options: {
+                translation: {
+                  style: 'curved',
+                  magnitude: 0.6,
+                  direction: 'down',
+                },
+              },
+            },
+          },
+        },
+        x: ` ${String.fromCharCode(215)} `,
+        equals: ' = ',
+        v: { symbol: 'vinculum' },
+      },
+      forms: {
+        'arc': ['arc', 'equals', '_2p', 'x', 'radius'],
+        'radius': [{ frac: ['arc', '_2p', 'v'] }, 'equals', 'radius'],
+      },
+      formSeries: ['arc', 'radius'],
+    },
+    mods: {
+      scenarios: {
+        lowerLeft: { position: new Point(-1, -1) },
+      },
+    },
+    scenario: 'lowerLeft',
+  };
   layout.addElements = [
     layout.circle,
+    layout.equation,
   ];
   return layout;
 }

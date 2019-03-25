@@ -59,6 +59,13 @@ export default function lessonLayout() {
     [0.5, 0.5],
     [-0.2, 0.4],
   ];
+  const pent1 = [
+    [-0.2, 0.4],
+    [0.5, 0.5],
+    [0.3, 0.1],
+    [0.5, -0.2],
+    [-0.5, -0.5],
+  ];
 
   layout.shape1 = {
     name: 'shape1',
@@ -67,7 +74,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: square, color: colors.lines, width },
+        options: {
+          points: square, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -95,7 +104,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: tri, color: colors.lines, width },
+        options: {
+          points: tri, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -135,7 +146,9 @@ export default function lessonLayout() {
       {
         name: 'line',
         method: 'polyLine',
-        options: { points: pent, color: colors.lines, width },
+        options: {
+          points: pent, color: colors.lines, width, close: true,
+        },
       },
       {
         name: 'corners',
@@ -284,6 +297,15 @@ export default function lessonLayout() {
       points,
       width,
       color: colors.lines,
+      close: true,
+      angle: {
+        label: {
+          text: null,
+        },
+        curve: {
+          radius: 0.1,
+        },
+      },
     },
   };
 

@@ -702,6 +702,7 @@ function () {
     this.element = options.element;
     this.animations = [];
     this.state = 'idle';
+    this.options = {};
     return this;
   }
 
@@ -2077,6 +2078,17 @@ function (_ElementAnimationStep) {
       },
       velocity: null
     };
+
+    if (_this.element && _this.element.animations.options.tranlsation) {
+      var translationOptions = _this.element.animations.options.tranlsation;
+
+      if (translationOptions.style != null) {
+        defaultPositionOptions.style = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultPositionOptions.translationOptions, translationOptions);
+    }
+
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.position = {
@@ -2696,6 +2708,17 @@ function (_ElementAnimationStep) {
       velocity: null,
       clipRotationTo: null
     };
+
+    if (_this.element && _this.element.animations.options.translation) {
+      var translationOptions = _this.element.animations.options.translation;
+
+      if (translationOptions.style != null) {
+        defaultTransformOptions.translationStyle = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultTransformOptions.translationOptions, translationOptions);
+    }
+
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.transform = {
@@ -4683,7 +4706,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
   var getMethod = function getMethod(method) {
     var methods = {
       collection: shapes.collection.bind(shapes),
-      polyLine: shapes.polyLine.bind(shapes),
+      polyLine: objects.polyLine.bind(objects),
       polyLineCorners: shapes.polyLineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
@@ -8000,15 +8023,16 @@ function (_Elements) {
           }
 
           if (style != null) {
-            element.animate.transform.translation.style = style;
+            // element.animate.transform.translation.style = style;
+            element.animations.options.translation.style = style;
           }
 
           if (direction != null) {
-            element.animate.transform.translation.options.direction = direction;
+            element.animations.options.translation.direction = direction; // element.animate.transform.translation.options.direction = direction;
           }
 
           if (mag != null) {
-            element.animate.transform.translation.options.magnitude = mag;
+            element.animations.options.translation.magnitude = mag; // element.animate.transform.translation.options.magnitude = mag;
           }
         }
       });
