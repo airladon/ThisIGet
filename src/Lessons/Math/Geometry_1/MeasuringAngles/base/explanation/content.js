@@ -14,7 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
-  centerVH,
+  centerVH, centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -158,10 +158,41 @@ class Content extends PresentationLessonContent {
         circle._angleText,
       ],
       setSteadyState: () => {
-        // diag.updateAngle();
         diag.setAngleMarks(12);
         circle._angleText.setScenario('bottomRight');
       },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So how many portions should we use?',
+        'There are two common practices. The first is dividing into |360| portions',
+        'Each portion is usually called a degree and is represented by the symbol |º|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'The word |degree| comes from the Latin words |de| (meaning |down|) and |gradus| (meaning |step|).',
+        'So 360 degrees (360º) is the same as saying there are 360 smaller steps or pieces.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        '|Why choose 360?|',
+        'If you were defining it today, you could choose anything!',
+        'But angle is a concept people have worked on and understood for thousands of years.',
+        'For instance, Babylonians divided the circle into 360 pieces |over 3000 years ago|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So, |why did they| choose 360?',
+        'Its not known, '
+        '',
+      ]),
     });
 
     // this.addSection(common, {
