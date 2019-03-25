@@ -76,8 +76,12 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
-    this._circle._angle.setAngle({ angle: r });
-    this._circle._arc.setAngleToDraw(r + 0.01);
+    if (this._circle._angle.isShown) {
+      this._circle._angle.setAngle({ angle: r });
+    }
+    if (this._circle._arc.isShown) {
+      this._circle._arc.setAngleToDraw(r + 0.01);
+    }
     if (this._circle._angleText.isShown) {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)} ${this.units}`;
       this._circle._angleText._value.drawingObject.setText(text);
@@ -126,11 +130,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     arc.angleToDraw = (percent);
   }
 
-  bendRadius() {
+  bendRadius(finished: ?() => void = null) {
     const line1 = this._circle._line1;
     const bendLine = this._circle._bendLine;
     const { radius, width } = this.layout;
-
+    bendLine.showAll();
     bendLine.stop(true, false);
     this.bend(0);
     bendLine.setPosition(line1.getPosition());
@@ -141,6 +145,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     bendLine.animations.new()
       .transform({ target, duration: 1 })
       .custom({ callback: this.bend.bind(this), duration: 1 })
+      .whenFinished(finished)
       .start();
     this.diagram.animateNextFrame();
   }
@@ -166,6 +171,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseRadius() {
+    this._circle._line1.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseArc() {
+    this._circle._arc.pulseThickNow(1, 1.03, 5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseMarks(id: number) {
     const element = this._circle[`_marks${id}`];
     element.pulseScaleNow(1, 1.1);
@@ -178,7 +193,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (target == null) {
       const currentRotation = this._circle._line1.getRotation('0to360');
       if (currentRotation < 0.5) {
-        target = 1;
+        target = 1.3;
         direction = 1;
       } else if (currentRotation > Math.PI * 1.75) {
         target = Math.PI * 2 - 1;
@@ -192,5 +207,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       this._circle._line1.setRotation(target);
     }
+  }
+
+  showCircle() {
+    this._circle._line1.stop(true, false);
+    this._circle._line1.setRotation(0);
+    this.pushLine(Math.PI * 1.999, 1, 2);
   }
 }

@@ -21,7 +21,7 @@ export default function lessonLayout() {
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
   layout.position = new Point(0, 0);
-  const radius = 1.4;
+  const radius = 1.3;
   layout.radius = radius;
   const width = 0.03;
   layout.width = width;
@@ -41,7 +41,7 @@ export default function lessonLayout() {
     mods: {
       interactiveLocation: new Point(radius * 0.8, 0),
       scenarios: {
-        start: { rotation: 1 },
+        start: { rotation: 1.3 },
       },
     },
     scenario: 'start',
@@ -99,7 +99,7 @@ export default function lessonLayout() {
     method: 'collection',
     addElements: [
       marks(360, radius * 1.05),
-      marks(36),
+      marks(36, radius * 1.025),
     ],
   };
 
@@ -125,7 +125,7 @@ export default function lessonLayout() {
       radianLine(3),
       radianLine(4),
       radianLine(5),
-      radianLine(6, 13),
+      // radianLine(6, 13),
     ],
   };
 
@@ -138,7 +138,7 @@ export default function lessonLayout() {
         method: 'line',
         options: {
           length: radius,
-          color: colors.angles,
+          color: colors.radianLines,
           width,
         },
       },
@@ -152,7 +152,7 @@ export default function lessonLayout() {
           sidesToDraw: 50 * 4,
           rotation: 3 * Math.PI / 2,
           center: [0, radius + width - width / 2],
-          color: colors.angles,
+          color: colors.radianLines,
         },
       },
     ],
@@ -195,7 +195,7 @@ export default function lessonLayout() {
       scenarios: {
         topLeft: { position: new Point(-1.7, 1.5) },
         bottomRight: { position: new Point(1.7, -1.3) },
-        bottomLeft: { position: new Point(-1.7, -1.3) },
+        bottomLeft: { position: new Point(-1.5, -1.3) },
       },
     },
   };

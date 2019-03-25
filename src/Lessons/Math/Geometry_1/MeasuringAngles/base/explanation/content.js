@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -20,6 +20,8 @@ const {
   clickWord,
   onClickId,
 } = Fig.tools.html;
+
+const { rand } = Fig.tools.math;
 
 const layout = lessonLayout();
 const { colors } = layout;
@@ -45,9 +47,15 @@ class Content extends PresentationLessonContent {
     const equation = diag._equation;
 
     const common = {
+      setContent: [],
+      show: [],
+      modifiers: {},
       transitionFromAny: (done) => {
         diag.setLineRotation();
         done();
+      },
+      setSteadyState: () => {
+        circle.setScenario('center');
       },
     };
 
@@ -169,7 +177,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV([
         'So how many portions should we use?',
-        'There are two common practices. The first is dividing into |360| portions',
+        'There are two common practices. The first is dividing into |360| portions.',
         'Each portion is usually called a degree and is represented by the symbol |º|.',
       ]),
     });
@@ -177,7 +185,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV([
         'The word |degree| comes from the Latin words |de| (meaning |down|) and |gradus| (meaning |step|).',
-        'So 360 degrees (360º) is the same as saying there are 360 smaller steps or pieces.',
+        'So 360 degrees (360º) is the same as saying there are 360 |smaller steps| or pieces.',
       ]),
     });
 
@@ -186,7 +194,7 @@ class Content extends PresentationLessonContent {
         '|Why choose 360?|',
         'If you were defining it today, you could choose anything!',
         'But angle is a concept people have worked on and understood for thousands of years.',
-        'For instance, Babylonians divided the circle into 360 pieces |over 3000 years ago|.',
+        'For instance, Babylonians used 360 |over 3000 years ago|.',
       ]),
     });
 
@@ -208,7 +216,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: () => `
-          <p>This means it's easy to work with fractions of a full rotation.</p>
+          <p>This means it's easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.</p>
           <table class="in_lesson__fraction_table">
             <tr>
               <th> Fraction </th>
@@ -225,19 +233,12 @@ class Content extends PresentationLessonContent {
         `,
       modifiers: {
         _270deg: rowClick(270),
-        _240deg: rowClick(270),
+        _240deg: rowClick(240),
         _180deg: rowClick(180),
         _120deg: rowClick(120),
         _90deg: rowClick(90),
         _72deg: rowClick(72),
         _60deg: rowClick(60),
-        // _270deg: clickWord('270&deg;', 'id_270', diag.pushLine, [diag, 270 / 180 * Math.PI, 0, 1], colors.diagram.text.keyword),
-        // _240deg: actionWord('240&deg;', 'id_240', colors.diagram.text.keyword),
-        // _180deg: actionWord('180&deg;', 'id_180', colors.diagram.text.keyword),
-        // _120deg: actionWord('120&deg;', 'id_120', colors.diagram.text.keyword),
-        // _90deg: actionWord('90&deg;', 'id_90', colors.diagram.text.keyword),
-        // _72deg: actionWord('72&deg;', 'id_72', colors.diagram.text.keyword),
-        // _60deg: actionWord('60&deg;', 'id_60', colors.diagram.text.keyword),
       },
       show: [
         circle._line1, circle._line2, circle._angle, circle._degrees,
@@ -257,6 +258,175 @@ class Content extends PresentationLessonContent {
         onClickId('id_60', diag.pushLine, bindArray(60));
       },
     });
+
+    this.addSection({
+      title: 'Radians',
+      setContent: centerV([
+        'The second common way to measure angle is by relating it to the |properties of a circle|.',
+      ]),
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|Angles and circles are closely related|. A circle can be created by rotating a line to |_360|.',
+      ],
+      modifiers: {
+        _360: clickWord('360º', 'id_360', diag.showCircle, [diag], colors.arc),
+      },
+      show: [
+        circle._line1, circle._line2,
+        // circle._angle,
+        circle._degrees,
+        circle._angleText,
+        circle._arc,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.setAngleMarks('degrees');
+        circle._angleText.setScenario('bottomLeft');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'If however, the angle is |less| than 360º, then only a part of the circle is created. This part is called an |arc|.',
+        `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html('id_lesson__isosceles_definition')}`,
+      ],
+      modifiers: {
+        less: click(diag.pushLine, [diag, null, 0, 1], colors.arc),
+        arc: click(diag.pulseArc, [diag], colors.arc),
+      },
+      show: [
+        circle._line1, circle._line2,
+        circle._degrees,
+        circle._angleText,
+        circle._arc,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.setAngleMarks('degrees');
+        circle._angleText.setScenario('bottomLeft');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: centerV([
+        'Now, instead of measuring angle by dividing a full rotation into 360 equal pieces, we can relate it to the |radius| of a circle and |arc length|.',
+      ]),
+    });
+
+    common.show = [
+      circle._line1, circle._line2, circle._arc,
+      // circle._angleText,
+    ];
+    common.setContent = [
+      'To do this, we find the angle where the |arc_length| and |radius_length| are |equal|.',
+    ];
+    common.setSteadyState = () => {
+      circle.setScenario('right');
+      diag.updateAngle();
+    };
+
+    this.addSection(common, {
+      modifiers: {
+        arc_length: click(diag.pulseArc, [diag], colors.arc),
+        radius_length: click(diag.pulseRadius, [diag], colors.lines),
+        equal: click(this.next, [this], colors.radianLines),
+      },
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.updateAngle();
+      },
+    });
+
+    common.modifiers = {
+      arc_length: click(diag.pulseArc, [diag], colors.arc),
+      radius_length: click(diag.pulseRadius, [diag], colors.lines),
+      equal: click(diag.bendRadius, [diag, null], colors.radianLines),
+    };
+    this.addSection(common, {
+      transitionFromAny: (done) => {
+        circle._bendLine.showAll();
+        diag.bendRadius(done);
+      },
+      setSteadyState: () => {
+        circle.setScenario('right');
+        // circle._bendLine.showAll();
+        // circle._bendLine.setRotation(Math.PI / 2);
+        // circle._bendLine.setPosition((Math.PI / 2);
+        // diag.bend(1);
+        diag.updateAngle();
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'This angle is called a |radian|, whose name comes from |radius|.',
+      ],
+      modifiers: {
+        radian: click(diag.pushLine, [diag, 1, 0, 1], colors.angles),
+      },
+      setSteadyState: () => {
+        circle.setScenario('right');
+        circle._radianLines._line0.showAll();
+        diag.bend(1);
+        diag.updateAngle();
+      },
+    });
+
+    common.modifiers = {};
+    common.setContent = ['We then use a |radian| as our portions to measure angle.'];
+    common.setSteadyState();
+    this.addSection(common, {
+      show: [
+        circle._line1, circle._line2,
+        circle._arc,
+        circle._radianLines._line0,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.updateAngle();
+      },
+    });
+
+    this.addSection(common, {
+      show: [
+        circle._line1, circle._line2,
+        circle._arc,
+        circle._radianLines,
+      ],
+    });
+
+    this.addSection(common, {
+      show: [
+        circle._line1, circle._line2,
+        // circle._arc,
+        circle._radianLines, circle._radians,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'We call this angle a |radian|, and compare all angles to it.',
+      ],
+      // modifiers: {
+      //   arc_length: click(diag.pulseArc, [diag], colors.arc),
+      //   radius_length: click(diag.pulseRadius, [diag], colors.lines),
+      //   equal: click(diag.bendRadius, [diag], colors.radianLines),
+      // },
+      // show: [
+      //   circle._line1, circle._line2, circle._arc,
+      //   // circle._radianLines,
+      //   circle._angleText,
+      // ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.setAngleMarks('radians');
+        circle._angleText.setScenario('bottomLeft');
+        // diag.updateAngle();
+      },
+    });
+
     // this.addSection(common, {
     //   title: '',
     //   setContent: centerV([
