@@ -355,13 +355,16 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    common.modifiers = {
+      radian: click(diag.goToOneRadian, [diag], colors.angles),
+    };
     this.addSection(common, {
       setContent: [
         'This angle is called a |radian|, whose name comes from |radius|.',
       ],
-      modifiers: {
-        radian: click(diag.pushLine, [diag, 1, 0, 1], colors.angles),
-      },
+      show: [
+        circle._line1, circle._line2, circle._arc, circle._angle,
+      ],
       setSteadyState: () => {
         circle.setScenario('center');
         circle._radianLines._line0.showAll();
@@ -370,12 +373,11 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    common.modifiers = {};
     common.setContent = ['We then use a |radian| as our portions to measure angle.'];
     common.setSteadyState();
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2,
+        circle._line1, circle._line2, circle._angle,
         circle._arc,
         circle._radianLines._line0,
       ],
@@ -387,39 +389,44 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       show: [
-        circle._line1, circle._line2,
+        circle._line1, circle._line2, circle._angle,
         circle._arc,
         circle._radianLines,
+        circle._angleText,
       ],
-    });
-
-    this.addSection(common, {
-      show: [
-        circle._line1, circle._line2,
-        // circle._arc,
-        circle._radianLines, circle._radians,
-      ],
-    });
-
-    this.addSection(common, {
-      setContent: [
-        'We call this angle a |radian|, and compare all angles to it.',
-      ],
-      // modifiers: {
-      //   arc_length: click(diag.pulseArc, [diag], colors.arc),
-      //   radius_length: click(diag.pulseRadius, [diag], colors.lines),
-      //   equal: click(diag.bendRadius, [diag], colors.radianLines),
-      // },
-      // show: [
-      //   circle._line1, circle._line2, circle._arc,
-      //   // circle._radianLines,
-      //   circle._angleText,
-      // ],
       setSteadyState: () => {
         circle.setScenario('center');
+        diag.updateAngle();
         diag.setAngleMarks('radians');
-        circle._angleText.setScenario('bottomLeft');
-        // diag.updateAngle();
+        circle._angleText.setScenario('bottom');
+        circle._radians.hide();
+      },
+    });
+
+
+    common.show = [
+      circle._arc, circle._angle, circle._line1, circle._line2,
+      circle._angleText, circle._radianLines,
+    ];
+    common.setSteadyState = () => {
+      circle.setScenario('center');
+      diag.updateAngle();
+      diag.setAngleMarks('radians');
+      circle._angleText.setScenario('bottom');
+      circle._radians.hide();
+    };
+    this.addSection(common, {
+      setContent: [
+        'Fractions of a circle are in radians are not as easy as degrees.',
+      ],
+    });
+    this.addSection(common, {
+      setContent: [
+        'A |half_circle| has an angle of approximately |3.14 radians|, while a |full_circle| is approximately |6.28 radians|.',
+      ],
+      modifiers: {
+        full_circle: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1.5], colors.angles),
+        half_circle: click(diag.pushLine, [diag, Math.PI, 0, 1.5], colors.angles),
       },
     });
 

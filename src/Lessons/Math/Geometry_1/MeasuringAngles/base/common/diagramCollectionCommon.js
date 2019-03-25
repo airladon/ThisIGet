@@ -107,7 +107,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.setAngleTextProperties(360, 0, 'º');
       this._circle._degrees.showAll();
     } else if (marks === 'radians') {
-      this.setAngleTextProperties(Math.PI * 2, 1, 'radians');
+      this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
       this._circle._radians.showAll();
     } else {
       this.setAngleTextProperties(marks, 1, 'portions');
@@ -150,12 +150,30 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  goToOneRadian() {
+    const r = this._circle._line1.getRotation();
+    if (r === 1) {
+      this._circle._angle.pulseScaleNow(1, 1.3);
+    } else {
+      this.pushLine(1, 0, 1);
+    }
+    this.diagram.animateNextFrame();
+  }
+
   pushLine(
     toAngle: ?number = null,
     direction: number = 0,
     duration: number = 2,
   ) {
     let r = toAngle;
+    if (toAngle != null
+      && round(toAngle, 5) === round(this._circle._line1.getRotation(), 5)
+      && this._circle._angle.isShown === true) {
+      this._circle._line1.stop(true, false);
+      this._circle._angle.pulseScaleNow(1, 1.3);
+      this.diagram.animateNextFrame();
+      return;
+    }
     if (toAngle == null) {
       r = rand(Math.PI / 2) + Math.PI / 2 + this._circle._line1.getRotation('0to360');
     }
