@@ -40,7 +40,11 @@ export default function lessonLayout() {
     },
     mods: {
       interactiveLocation: new Point(radius * 0.8, 0),
+      scenarios: {
+        start: { rotation: 1 },
+      },
     },
+    scenario: 'start',
   };
   layout.line2 = {
     name: 'line2',
@@ -156,14 +160,23 @@ export default function lessonLayout() {
     name: 'circle',
     method: 'collection',
     addElements: [
+      layout.marks12,
+      layout.marks100,
+      layout.degrees,
+      layout.radianLines,
       layout.angle,
       layout.arc,
       layout.line2,
       layout.line1,
-      layout.degrees,
-      layout.radianLines,
+      
       layout.bendLine,
     ],
+    mods: {
+      scenarios: {
+        'center': { position: new Point(0, -0.5) },
+      },
+    },
+    scenario: 'center',
   };
 
   layout.addElements = [

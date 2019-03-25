@@ -9,6 +9,8 @@ const {
   Transform,
 } = Fig;
 
+const { rand } = Fig.tools.math;
+
 export default class CommonCollection extends CommonDiagramCollection {
   _circle: {
     _line1: DiagramObjectLine;
@@ -70,5 +72,50 @@ export default class CommonCollection extends CommonDiagramCollection {
       .custom({ callback: this.bend.bind(this), duration: 1 })
       .start();
     this.diagram.animateNextFrame();
+  }
+
+  pushLine(toAngle: ?number = null, direction: number = 0, duration: number = 2) {
+    let r = toAngle;
+    if (toAngle == null) {
+      r = rand(Math.PI / 2) + Math.PI / 2 + this._circle._line1.getRotation('0to360');
+    }
+    this._circle._line1.stop(true, false);
+    this._circle._line1.animations.new()
+      .rotation({ target: r, duration: 2, direction })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngle() {
+    this._circle._angle.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseMarks(id: number) {
+    const element = this._circle[`_marks${id}`];
+    element.pulseScaleNow(1, 1.1);
+    this.diagram.animateNextFrame();
+  }
+
+  setLineRotation(r: ?number = null, animate: boolean = true) {
+    let target = r;
+    let direction = 0;
+    if (target == null) {
+      const currentRotation = this._circle._line1.getRotation('0to360');
+      if (currentRotation < 0.5) {
+        target = 1;
+        direction = 1;
+      } else if (currentRotation > Math.PI * 1.75) {
+        target = Math.PI * 2 - 1;
+        direction = -1;
+      } else {
+        return;
+      }
+    }
+    if (animate) {
+      this.pushLine(target, direction);
+    } else {
+      this._circle._line1.setRotation(target);
+    }
   }
 }
