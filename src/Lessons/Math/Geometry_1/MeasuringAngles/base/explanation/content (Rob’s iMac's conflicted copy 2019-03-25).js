@@ -225,7 +225,7 @@ class Content extends PresentationLessonContent {
         `,
       modifiers: {
         _270deg: rowClick(270),
-        _240deg: rowClick(270),
+        _240deg: rowClick(240),
         _180deg: rowClick(180),
         _120deg: rowClick(120),
         _90deg: rowClick(90),
