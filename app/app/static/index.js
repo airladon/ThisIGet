@@ -8942,23 +8942,26 @@ function () {
       var contSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var comSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var comScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var includeInSizeCalc = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
       var content;
       var comment;
       var symbol;
       var contentSpace;
       var commentSpace;
       var scale;
+      var includeInSize;
 
-      if (!(commentString == null && sym == null && contSpace == null && comSpace == null && comScale == null)) {
+      if (!(commentString == null && sym == null && contSpace == null && comSpace == null && comScale == null && includeInSizeCalc == null)) {
         content = optionsOrContent;
         comment = commentString;
         symbol = sym;
         contentSpace = contSpace;
         commentSpace = comSpace;
         scale = comScale;
+        includeInSize = includeInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 6);
+        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 7);
 
         content = _optionsOrContent9[0];
         comment = _optionsOrContent9[1];
@@ -8966,6 +8969,7 @@ function () {
         contentSpace = _optionsOrContent9[3];
         commentSpace = _optionsOrContent9[4];
         scale = _optionsOrContent9[5];
+        includeInSize = _optionsOrContent9[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -8973,6 +8977,7 @@ function () {
         contentSpace = optionsOrContent.contentSpace;
         commentSpace = optionsOrContent.commentSpace;
         scale = optionsOrContent.scale;
+        includeInSize = optionsOrContent.includeInSize;
       }
 
       var contentSpaceToUse = 0.03;
@@ -8993,20 +8998,27 @@ function () {
         scaleToUse = scale;
       }
 
-      return [content, comment, symbol, contentSpaceToUse, commentSpaceToUse, scaleToUse];
+      var includeInSizeToUse = true;
+
+      if (includeInSize != null) {
+        includeInSizeToUse = includeInSize;
+      }
+
+      return [content, comment, symbol, contentSpaceToUse, commentSpaceToUse, scaleToUse, includeInSizeToUse];
     } // $FlowFixMe
 
   }, {
     key: "bottomComment",
     value: function bottomComment() {
       var _this$processComment = this.processComment.apply(this, arguments),
-          _this$processComment2 = _slicedToArray(_this$processComment, 6),
+          _this$processComment2 = _slicedToArray(_this$processComment, 7),
           content = _this$processComment2[0],
           comment = _this$processComment2[1],
           symbol = _this$processComment2[2],
           contentSpaceToUse = _this$processComment2[3],
           commentSpaceToUse = _this$processComment2[4],
-          scaleToUse = _this$processComment2[5];
+          scaleToUse = _this$processComment2[5],
+          includeInSize = _this$processComment2[6];
 
       var contentToUse;
 
@@ -9030,7 +9042,9 @@ function () {
           relativeToContent: ['center', 'bottom'],
           relativeToAnnotation: ['center', 'top'],
           scale: scaleToUse
-        })]
+        })],
+        // $FlowFixMe
+        includeAnnotationInSize: includeInSize
       });
     } // $FlowFixMe
 
@@ -9038,13 +9052,14 @@ function () {
     key: "topComment",
     value: function topComment() {
       var _this$processComment3 = this.processComment.apply(this, arguments),
-          _this$processComment4 = _slicedToArray(_this$processComment3, 6),
+          _this$processComment4 = _slicedToArray(_this$processComment3, 7),
           content = _this$processComment4[0],
           comment = _this$processComment4[1],
           symbol = _this$processComment4[2],
           contentSpaceToUse = _this$processComment4[3],
           commentSpaceToUse = _this$processComment4[4],
-          scaleToUse = _this$processComment4[5];
+          scaleToUse = _this$processComment4[5],
+          includeInSize = _this$processComment4[6];
 
       var contentToUse;
 
@@ -9068,7 +9083,9 @@ function () {
           relativeToContent: ['center', 'top'],
           relativeToAnnotation: ['center', 'bottom'],
           scale: scaleToUse
-        })]
+        })],
+        // $FlowFixMe
+        includeAnnotationInSize: includeInSize
       });
     } // eslint-disable-next-line class-methods-use-this
 

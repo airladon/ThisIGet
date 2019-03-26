@@ -553,7 +553,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'At an angle of |_3_radians|:',
+        'Simplifying:',
       ],
       transitionFromPrev: (done) => {
         equation.showForm('3rad');
@@ -564,6 +564,23 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         setup();
         equation.showForm('3rad1');
+        diag.setLineRotation(3, false);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Simplifying:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('3rad1');
+        equation.setCurrentForm('3rad1');
+        equation.animateToForm('general', 2, 0, done);
+        diag.setLineRotation(3, true);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('general');
         diag.setLineRotation(3, false);
       },
     });
