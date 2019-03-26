@@ -34,13 +34,24 @@ export default class CommonCollection extends CommonDiagramCollection {
       _label: DiagramElementPrimative;
       _value: DiagramElementPrimative;
     } & DiagramElementCollection;
+    _radianLines: {
+      _line0: DiagramElementPrimative;
+      _line1: DiagramElementPrimative;
+      _line2: DiagramElementPrimative;
+      _line3: DiagramElementPrimative;
+      _line4: DiagramElementPrimative;
+      _line5: DiagramElementPrimative;
+    } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   _equation: {
     _arc: DiagramElementPrimative;
     _radius: DiagramElementPrimative;
     __arc: DiagramElementPrimative;
-    __radius: DiagramElementPrimative;
+    _angle: DiagramElementPrimative;
+    _radiusLength1: DiagramElementPrimative;
+    _radiusLengths2: DiagramElementPrimative;
+    _radiusLengths3: DiagramElementPrimative;
   } & DiagramEquation;
 
   marks: number;
@@ -74,12 +85,33 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._equation._arc.onClick = this.pulseArc.bind(this);
     this._equation._radius.makeTouchable();
     this._equation._radius.onClick = this.pulseRadius.bind(this);
+    this._equation._angle.makeTouchable();
+    this._equation._angle.onClick = this.pulseAngle.bind(this);
+
     this._equation.__1.makeTouchable();
     this._equation.__1.onClick = this.pushLine.bind(this, 1, 0, 1, null);
     this._equation.__2.makeTouchable();
-    this._equation.__2.onClick = this.pushLine.bind(this, 1, 0, 1, null);
+    this._equation.__2.onClick = this.pushLine.bind(this, 2, 0, 1, null);
     this._equation.__3.makeTouchable();
     this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
+    this._equation._radiusLength1.makeTouchable();
+    this._equation._radiusLength1.onClick = () => {
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
+      this.diagram.animateNextFrame();
+    };
+    this._equation._radiusLengths2.makeTouchable();
+    this._equation._radiusLengths2.onClick = () => {
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
+      this.diagram.animateNextFrame();
+    };
+    this._equation._radiusLengths3.makeTouchable();
+    this._equation._radiusLengths3.onClick = () => {
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line2.pulseThickNow(1, 1.03, 5);
+      this.diagram.animateNextFrame();
+    };
 
     this.decimals = 1;
     this.marks = 12;

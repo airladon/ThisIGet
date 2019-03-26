@@ -512,6 +512,9 @@ class Content extends PresentationLessonContent {
       setContent: [
         'At an angle of |_1_radian|:',
       ],
+      setEnterState: () => {
+        equation.setScenario('top');
+      },
       transitionFromPrev: (done) => {
         equation.showForm('1rad');
         diag.setLineRotation(1, true, done);
@@ -553,7 +556,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'Simplifying:',
+        'So we can generalize:',
       ],
       transitionFromPrev: (done) => {
         equation.showForm('3rad');
@@ -570,8 +573,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'Simplifying:',
+        'So we can generalize:',
       ],
+      // show: [
+      //   circle._arc, circle._angle,
+      //   circle._line1, circle._line2, circle._angleText,
+      //   circle._radians,
+      // ],
       transitionFromPrev: (done) => {
         equation.showForm('3rad1');
         equation.setCurrentForm('3rad1');
@@ -582,6 +590,7 @@ class Content extends PresentationLessonContent {
         setup();
         equation.showForm('general');
         diag.setLineRotation(3, false);
+        // circle._radians.show();
       },
     });
 

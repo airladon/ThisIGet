@@ -249,23 +249,30 @@ export default function lessonLayout() {
         _arc: {
           text: 'arc length',
           color: colors.arc,
-          elementOptions: {
-            isTouchable: true,
-          },
+          // elementOptions: {
+          //   isTouchable: true,
+          // },
         },
-        radiusLength: {
+        radiusLength1: {
           text: 'radius length',
           color: colors.lines,
-          elementOptions: {
-            isTouchable: true,
-          },
+          // elementOptions: {
+          //   isTouchable: true,
+          // },
         },
-        radiusLengths: {
+        radiusLengths2: {
           text: 'radius lengths',
           color: colors.lines,
-          elementOptions: {
-            isTouchable: true,
-          },
+          // elementOptions: {
+          //   isTouchable: true,
+          // },
+        },
+        radiusLengths3: {
+          text: 'radius lengths',
+          color: colors.lines,
+          // elementOptions: {
+          //   isTouchable: true,
+          // },
         },
         radius: {
           text: 'radius',
@@ -319,9 +326,9 @@ export default function lessonLayout() {
       forms: {
         'arc': ['_arc', 'equals', '_2p', 'x', '_radius'],
         'radius': [{ frac: ['_arc', '_2p', 'v'] }, 'equals', '_radius'],
-        '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength'],
-        '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths'],
-        '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths'],
+        '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength1'],
+        '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths2'],
+        '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths3'],
         '3rad1': ['arc', 'equals', {
           topComment: {
             content: '_3',
@@ -330,7 +337,7 @@ export default function lessonLayout() {
             contentSpace: 0.04,
             includeInSize: false,
           },
-        }, '   ', { topComment: ['radiusLengths', 'radius', 'largeBrace'] }],
+        }, '   ', { topComment: ['radiusLengths3', 'radius', 'largeBrace'] }],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],
       },
       formSeries: ['arc', 'radius'],
