@@ -70,6 +70,11 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._radiusText.onClick = this.pulseRadius.bind(this);
     this._diameterText.onClick = this.pulseDiameter.bind(this);
     this.containToGrid = false;
+
+    this._dEquation._radius.makeTouchable();
+    this._dEquation._radius.onClick = this.pulseRadius.bind(this);
+    this._dEquation._diameter.makeTouchable();
+    this._dEquation._diameter.onClick = this.pulseDiameter.bind(this);
   }
 
   updateArc() {
@@ -254,35 +259,35 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  diameterEquationSimplify() {
-    const eqn = this._dEquation;
-    eqn.showForm('diameter');
-    eqn._d.show();
-    eqn._r.show();
-    eqn._d.setPosition(eqn._diameter.getPosition());
-    eqn._r.setPosition(eqn._radius.getPosition());
-    eqn.stop(true, true);
-    eqn.animateToForm('d');
-    this.diagram.animateNextFrame();
-  }
+  // diameterEquationSimplify() {
+  //   const eqn = this._dEquation;
+  //   eqn.showForm('diameter');
+  //   eqn._d.show();
+  //   eqn._r.show();
+  //   eqn._d.setPosition(eqn._diameter.getPosition());
+  //   eqn._r.setPosition(eqn._radius.getPosition());
+  //   eqn.stop(true, true);
+  //   eqn.animateToForm('d');
+  //   this.diagram.animateNextFrame();
+  // }
 
-  diameterEquationOriginal() {
-    const eqn = this._dEquation;
-    eqn.showForm('d');
-    eqn.stop(true, true);
-    eqn.animateToForm('diameter');
-    this.diagram.animateNextFrame();
-  }
+  // diameterEquationOriginal() {
+  //   const eqn = this._dEquation;
+  //   eqn.showForm('d');
+  //   eqn.stop(true, true);
+  //   eqn.animateToForm('diameter');
+  //   this.diagram.animateNextFrame();
+  // }
 
-  diameterEquationToggle() {
-    const eqn = this._dEquation;
-    const form = eqn.getCurrentForm().name;
-    if (form === 'diameter') {
-      this.diameterEquationSimplify();
-    } else {
-      this.diameterEquationOriginal();
-    }
-  }
+  // diameterEquationToggle() {
+  //   const eqn = this._dEquation;
+  //   const form = eqn.getCurrentForm().name;
+  //   if (form === 'diameter') {
+  //     this.diameterEquationSimplify();
+  //   } else {
+  //     this.diameterEquationOriginal();
+  //   }
+  // }
 
   straighten(percent: number) {
     const rightLine = this._circle._circumference._rightLine;
@@ -405,13 +410,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
           .start();
         this._circle._diameter.stop(true, false);
         this._circle._diameter.animations.new()
-          .rotation({ target: -0.5, duration: 1 })
+          .rotation({ target: 0, duration: 1 })
           .start();
       } else {
         this._circle._radius.stop(true, false);
         this._circle._diameter.stop(true, false);
         this._circle._radius.setRotation(0.5);
-        this._circle._diameter.setRotation(-0.5);
+        this._circle._diameter.setRotation(0);
         if (whenFinished != null) {
           whenFinished();
         }

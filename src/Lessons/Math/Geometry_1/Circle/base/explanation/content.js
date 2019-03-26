@@ -354,7 +354,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'Or written as an |equation|:',
+        'Or written as an equation:',
       ],
       modifiers: {
         equation: click(circ.diameterEquationToggle, [circ], colors.diagram.action),

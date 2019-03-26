@@ -372,18 +372,15 @@ export default function lessonLayout() {
         d: { text: 'd', color: colors.diameter },
         radius: { text: 'radius', color: colors.radius },
         r: { text: 'r', color: colors.radius },
-        // _1: '1',
+        x: `  ${String.fromCharCode(215)}  `,
         _2: '2 ',
         equals: '  =  ',
         v: { symbol: 'vinculum' },
       },
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
       forms: {
-        diameter: ['diameter', 'equals', '_2', 'radius'],
-        d: ['d', 'equals', '_2', 'r'],
-        radius: ['radius', 'equals', { frac: ['_1', '_2', 'v', 0.5] }, 'diameter'],
+        diameter: ['diameter', 'equals', '_2', 'x', 'radius'],
       },
-      formSeries: ['diameter', 'd'],
     },
     mods: {
       scenarios: {
