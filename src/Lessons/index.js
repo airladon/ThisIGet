@@ -194,6 +194,43 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    measuring_angles_degrees: new LessonDescription({
+      name: 'Angles in Degrees',
+      path: '/Lessons/Math/Geometry_1/Degrees',
+      uid: 'measuring_angles_degrees',
+      versions: {
+        base: {
+          title: 'Initial',
+          description: 'Presentation form - interactive.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+        base_legacy: {
+          title: 'Base',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'angles',
+      ],
+      enabled: true,
+    }),
     equilateral_triangles: new LessonDescription({
       name: 'Equilateral Triangle',
       path: '/Lessons/Math/Geometry_1/Equilateral',
@@ -285,7 +322,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'measuring_angles',
+        'measuring_angles_degrees',
       ],
       enabled: true,
     }),
@@ -360,43 +397,6 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    measuring_angles: new LessonDescription({
-      name: 'Measuring Angles',
-      path: '/Lessons/Math/Geometry_1/MeasuringAngles',
-      uid: 'measuring_angles',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
-        },
-        base_legacy: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
-      },
-      dependencies: [
-        'angles',
-      ],
-      enabled: true,
-    }),
     parallel_lines: new LessonDescription({
       name: 'Parallel Lines',
       path: '/Lessons/Math/Geometry_1/ParallelLines',
@@ -446,6 +446,32 @@ export default function getLessonIndex() {
       },
       dependencies: [
         'congruent_triangles',
+      ],
+      enabled: true,
+    }),
+    measuring_angles_radians: new LessonDescription({
+      name: 'Radians and Pi',
+      path: '/Lessons/Math/Geometry_1/Radians',
+      uid: 'measuring_angles_radians',
+      versions: {
+        base: {
+          title: 'Initial',
+          description: 'Presentation form - interactive.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'measuring_angles_degrees',
       ],
       enabled: true,
     }),

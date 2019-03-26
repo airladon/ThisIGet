@@ -89,10 +89,7 @@ export default function lessonLayout() {
       dAngle: Math.PI * 2 / numMarks,
     },
   });
-  layout.marks12 = marks(12);
-  layout.marks20 = marks(20);
-  layout.marks50 = marks(50);
-  layout.marks100 = marks(100);
+
   layout.radians = joinObjects(marks(Math.PI * 2), { name: 'radians' });
   layout.degrees = {
     name: 'degrees',
@@ -206,10 +203,6 @@ export default function lessonLayout() {
     name: 'circle',
     method: 'collection',
     addElements: [
-      layout.marks12,
-      layout.marks20,
-      layout.marks50,
-      layout.marks100,
       layout.degrees,
       layout.radians,
       layout.radianLines,

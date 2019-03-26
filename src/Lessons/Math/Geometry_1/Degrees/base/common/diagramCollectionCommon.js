@@ -21,38 +21,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     _marks20: DiagramElementPrimative;
     _marks50: DiagramElementPrimative;
     _marks100: DiagramElementPrimative;
-    _radians: DiagramElementPrimative;
     _degrees: {
       _marks36: DiagramElementPrimative;
       _marks360: DiagramElementPrimative;
-    } & DiagramElementCollection;
-    _bendLine: {
-      _line: DiagramObjectLine;
-      _arc: DiagramElementPrimative;
     } & DiagramElementCollection;
     _angleText: {
       _label: DiagramElementPrimative;
       _value: DiagramElementPrimative;
     } & DiagramElementCollection;
-    _radianLines: {
-      _line0: DiagramElementPrimative;
-      _line1: DiagramElementPrimative;
-      _line2: DiagramElementPrimative;
-      _line3: DiagramElementPrimative;
-      _line4: DiagramElementPrimative;
-      _line5: DiagramElementPrimative;
-    } & DiagramElementCollection;
   } & DiagramElementCollection;
-
-  _equation: {
-    _arc: DiagramElementPrimative;
-    _radius: DiagramElementPrimative;
-    __arc: DiagramElementPrimative;
-    _angle: DiagramElementPrimative;
-    _radiusLength1: DiagramElementPrimative;
-    _radiusLengths2: DiagramElementPrimative;
-    _radiusLengths3: DiagramElementPrimative;
-  } & DiagramEquation;
 
   marks: number;
   decimals: number;
@@ -69,54 +46,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
-
-    this._equation.__arc.onClick = () => {
-      this._equation.goToForm('arc', 2);
-      this.diagram.animateNextFrame();
-    };
-    this._equation.__radius.onClick = () => {
-      this._equation.goToForm('radius', 2);
-      this.diagram.animateNextFrame();
-    };
-    this._equation.__angle.onClick = () => {
-      this._equation.goToForm('angle', 2);
-      this.diagram.animateNextFrame();
-    };
-    this._equation.__arc.makeTouchable();
-    this._equation.__radius.makeTouchable();
-    this._equation.__angle.makeTouchable();
-
-    this._equation._arc.makeTouchable();
-    this._equation._arc.onClick = this.pulseArc.bind(this);
-    this._equation._radius.makeTouchable();
-    this._equation._radius.onClick = this.pulseRadius.bind(this);
-    this._equation._angle.makeTouchable();
-    this._equation._angle.onClick = this.pulseAngle.bind(this);
-
-    this._equation.__1.makeTouchable();
-    this._equation.__1.onClick = this.pushLine.bind(this, 1, 0, 1, null);
-    this._equation.__2.makeTouchable();
-    this._equation.__2.onClick = this.pushLine.bind(this, 2, 0, 1, null);
-    this._equation.__3.makeTouchable();
-    this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
-    this._equation._radiusLength1.makeTouchable();
-    this._equation._radiusLength1.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
-      this.diagram.animateNextFrame();
-    };
-    this._equation._radiusLengths2.makeTouchable();
-    this._equation._radiusLengths2.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
-      this.diagram.animateNextFrame();
-    };
-    this._equation._radiusLengths3.makeTouchable();
-    this._equation._radiusLengths3.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line2.pulseThickNow(1, 1.03, 5);
-      this.diagram.animateNextFrame();
-    };
 
     this.decimals = 1;
     this.marks = 12;
@@ -152,61 +81,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._marks50.hide();
     this._circle._marks100.hide();
     this._circle._degrees.hide();
-    this._circle._radians.hide();
     if (marks === 'degrees') {
       this.setAngleTextProperties(360, 0, 'º');
       this._circle._degrees.showAll();
     } else if (marks === 'radians') {
       this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
-      this._circle._radians.showAll();
     } else {
       this.setAngleTextProperties(marks, 1, 'portions');
       this._circle[`_marks${marks}`].showAll();
     }
     this.updateAngle();
-    this.diagram.animateNextFrame();
-  }
-
-  bend(percent: number) {
-    const line = this._circle._bendLine._line;
-    const arc = this._circle._bendLine._arc;
-    const { radius } = this.layout;
-
-    line.setLength((1 - percent) * radius);
-    arc.transform.updateTranslation(
-      (1 - percent) * radius,
-      0,
-    );
-    arc.angleToDraw = (percent);
-  }
-
-  bendRadius(finished: ?() => void = null) {
-    const line1 = this._circle._line1;
-    const bendLine = this._circle._bendLine;
-    const { radius, width } = this.layout;
-    bendLine.showAll();
-    bendLine.stop(true, false);
-    this.bend(0);
-    bendLine.setPosition(line1.getPosition());
-    bendLine.setRotation(line1.getRotation(''));
-    const target = bendLine.transform._dup();
-    target.updateRotation(Math.PI / 2);
-    target.updateTranslation(radius + width / 2, 0);
-    bendLine.animations.new()
-      .transform({ target, duration: 1 })
-      .custom({ callback: this.bend.bind(this), duration: 1 })
-      .whenFinished(finished)
-      .start();
-    this.diagram.animateNextFrame();
-  }
-
-  goToOneRadian() {
-    const r = this._circle._line1.getRotation();
-    if (r === 1) {
-      this._circle._angle.pulseScaleNow(1, 1.3);
-    } else {
-      this.pushLine(1, 0, 1);
-    }
     this.diagram.animateNextFrame();
   }
 
@@ -218,7 +102,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   ) {
     let r = toAngle;
     if (toAngle != null
-      && round(toAngle, 5) === round(this._circle._line1.getRotation(), 5)
+      && round(toAngle, 5) === round(this._circle._line1.getRotation('0to360'), 5)
       && this._circle._angle.isShown === true) {
       this._circle._line1.stop(true, false);
       this._circle._angle.pulseScaleNow(1, 1.3);
@@ -279,6 +163,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         if (whenFinished != null) {
           whenFinished();
         }
+        this.updateAngle();
         return;
       }
     }
@@ -290,11 +175,6 @@ export default class CommonCollection extends CommonDiagramCollection {
         whenFinished();
       }
     }
-  }
-
-  cycleEquation() {
-    this._equation.nextForm(2, 0);
-    this.diagram.animateNextFrame();
   }
 
   showCircle() {
