@@ -488,8 +488,8 @@ class Content extends PresentationLessonContent {
     common = {
       modifiers: {
         _1_radian: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
-        _2_radians: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
-        _3_radians: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
+        _2_radians: click(diag.pushLine, [diag, 2, 0, 1, null], colors.angles),
+        _3_radians: click(diag.pushLine, [diag, 3, 0, 1, null], colors.angles),
       },
       show: [
         circle._arc, circle._radianLines, circle._angle,
@@ -513,6 +513,7 @@ class Content extends PresentationLessonContent {
         'At an angle of |_1_radian|:',
       ],
       transitionFromPrev: (done) => {
+        equation.showForm('1rad');
         diag.setLineRotation(1, true, done);
       },
       setSteadyState: () => {
@@ -526,6 +527,7 @@ class Content extends PresentationLessonContent {
         'At an angle of |_2_radians|:',
       ],
       transitionFromPrev: (done) => {
+        equation.showForm('2rad');
         diag.setLineRotation(2, true, done);
       },
       setSteadyState: () => {
@@ -539,11 +541,29 @@ class Content extends PresentationLessonContent {
         'At an angle of |_3_radians|:',
       ],
       transitionFromPrev: (done) => {
+        equation.showForm('3rad');
         diag.setLineRotation(3, true, done);
       },
       setSteadyState: () => {
         setup();
         equation.showForm('3rad');
+        diag.setLineRotation(3, false);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_3_radians|:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('3rad');
+        equation.setCurrentForm('3rad');
+        equation.animateToForm('3rad1', 2, 0, done);
+        diag.setLineRotation(3, true);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('3rad1');
         diag.setLineRotation(3, false);
       },
     });

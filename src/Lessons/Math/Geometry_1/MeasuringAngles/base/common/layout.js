@@ -267,6 +267,7 @@ export default function lessonLayout() {
             isTouchable: true,
           },
         },
+        angle: { text: 'angle', color: colors.angles },
         _2p: {
           text: '2π',
           elementOptions: {
@@ -285,10 +286,11 @@ export default function lessonLayout() {
         lengths: 'lengths',
         _1: { text: '1', color: colors.angles },
         _2: { text: '2', color: colors.angles },
-        _3: { text: '3', color: colors.angles },
+        _3: { text: ' 3 ', color: colors.angles },
         x: ` ${String.fromCharCode(215)} `,
         equals: '  =  ',
         v: { symbol: 'vinculum' },
+        brace: { symbol: 'brace', side: 'top' },
       },
       defaultFormAlignment: {
         fixTo: 'equals',    // Points can also be defined as objects
@@ -301,7 +303,9 @@ export default function lessonLayout() {
         '1rad': ['arc', 'equals', '_1',  '   ', 'radius', '   ', 'length'],
         '2rad': ['arc', 'equals', '_2',  '   ', 'radius', '   ', 'lengths'],
         '3rad': ['arc', 'equals', '_3', '   ', 'radius', '   ', 'lengths'],
-        '3rad1': ['arc', 'equals', '_3', '   ', 'radius', '   ', 'lengths'],
+        '3rad1': ['arc', 'equals', {
+          topComment: ['_3', 'angle', 'brace'],
+        }, '   ', 'radius', '   ', 'lengths'],
       },
       formSeries: ['arc', 'radius'],
     },

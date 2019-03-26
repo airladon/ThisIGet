@@ -239,7 +239,9 @@ export default class CommonCollection extends CommonDiagramCollection {
         target = Math.PI * 2 - 1;
         direction = -1;
       } else {
-        whenFinished();
+        if (whenFinished != null) {
+          whenFinished();
+        }
         return;
       }
     }
