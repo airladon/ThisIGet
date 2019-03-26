@@ -306,10 +306,60 @@ class Content extends PresentationLessonContent {
       ],
     });
     this.addSection(common, {
+      title: 'Relationships between Properties',
       setContent: centerV([
         'Once properties are defined, the |relationship| between them can be investigated.',
-        'However, to do this, first we need to understand |angle| which is another fundamental property of most shapes.',
+        // 'However, to do this, first we need to understand |angle| which is another fundamental property of most shapes.',
       ]),
+    });
+    this.addSection(common, {
+      setContent: [
+        'We start with |diameter| and |radius|.',
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        radius: click(circ.pulseRadius, [circ], colors.radius),
+      },
+      setEnterState: () => {
+        circle._radius.setRotation(0.5);
+        circle._diameter.setRotation(-0.5);
+      },
+      show: [
+        circle._line, circle._radius, circle._center, circle._diameter,
+      ],
+    });
+    this.addSection(common, {
+      setContent: [
+        'As |radius| is |half| the width of the circle, and |diameter| is the |full| width, it follows that |diameter is twice the radius|.',
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        radius: click(circ.pulseRadius, [circ], colors.radius),
+        half: click(circ.growRadius, [circ], colors.radius),
+        full: click(circ.growDiameter, [circ], colors.diameter),
+      },
+      show: [
+        circle._line, circle._radius, circle._center, circle._diameter,
+      ],
+    });
+    this.addSection(common, {
+      setContent: [
+        'Or written as an equation: |test|',
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        radius: click(circ.pulseRadius, [circ], colors.radius),
+        half: click(circ.growRadius, [circ], colors.radius),
+        full: click(circ.growDiameter, [circ], colors.diameter),
+        test: click(circ.diameterEquationToggle, [circ]),
+      },
+      show: [
+        circle._line, circle._radius, circle._center, circle._diameter,
+      ],
+      setSteadyState: () => {
+        circ._dEquation.showForm('diameter');
+        circ._dEquation.setScenario('centerTop');
+      },
     });
   }
 }

@@ -205,6 +205,16 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  growRadius() {
+    this._circle._radius.grow(0, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  growDiameter() {
+    this._circle._diameter.grow(0, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseDiameter() {
     this._circle._diameter.pulseWidth();
     this.diagram.animateNextFrame();
@@ -234,6 +244,35 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
 
     this._circle.startMovingFreely();
     this.diagram.animateNextFrame();
+  }
+
+  diameterEquationSimplify() {
+    const eqn = this._dEquation;
+    eqn.showForm('diameter');
+    eqn._d.show();
+    eqn._r.show();
+    eqn._d.setPosition(eqn._diameter.getPosition());
+    eqn._r.setPosition(eqn._radius.getPosition());
+    eqn.animateToForm('d');
+    this.diagram.animateNextFrame();
+  }
+
+  diameterEquationOriginal() {
+    const eqn = this._dEquation;
+    // if (eqn.getCurrentForm().name !== 'diameter') {
+    eqn.animateToForm('diameter');
+    // }
+    this.diagram.animateNextFrame();
+  }
+
+  diameterEquationToggle() {
+    const eqn = this._dEquation;
+    const form = eqn.getCurrentForm().name;
+    if (form === 'diameter') {
+      this.diameterEquationSimplify();
+    } else {
+      this.diameterEquationOriginal();
+    }
   }
 
   straighten(percent: number) {

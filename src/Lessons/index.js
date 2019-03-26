@@ -195,7 +195,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     measuring_angles_degrees: new LessonDescription({
-      name: 'Angles in Degrees',
+      name: 'Degrees',
       path: '/Lessons/Math/Geometry_1/Degrees',
       uid: 'measuring_angles_degrees',
       versions: {
@@ -450,7 +450,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     measuring_angles_radians: new LessonDescription({
-      name: 'Radians and Pi',
+      name: 'Radians',
       path: '/Lessons/Math/Geometry_1/Radians',
       uid: 'measuring_angles_radians',
       versions: {

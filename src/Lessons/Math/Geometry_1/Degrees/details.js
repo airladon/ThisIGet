@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Angles in Degrees',
+  title: 'Degrees',
   uid: 'measuring_angles_degrees',
   dependencies: ['angles'],
 };
