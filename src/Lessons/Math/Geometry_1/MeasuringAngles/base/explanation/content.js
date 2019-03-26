@@ -16,6 +16,7 @@ const {
   click,
   centerVH, centerV,
   highlightWord,
+  highlight,
   actionWord,
   clickWord,
   onClickId,
@@ -560,7 +561,6 @@ class Content extends PresentationLessonContent {
       ],
       transitionFromPrev: (done) => {
         equation.showForm('3rad');
-        equation.setCurrentForm('3rad');
         equation.animateToForm('3rad1', 2, 0, done);
         diag.setLineRotation(3, true);
       },
@@ -575,14 +575,8 @@ class Content extends PresentationLessonContent {
       setContent: [
         'So we can generalize:',
       ],
-      // show: [
-      //   circle._arc, circle._angle,
-      //   circle._line1, circle._line2, circle._angleText,
-      //   circle._radians,
-      // ],
       transitionFromPrev: (done) => {
         equation.showForm('3rad1');
-        equation.setCurrentForm('3rad1');
         equation.animateToForm('general', 2, 0, done);
         diag.setLineRotation(3, true);
       },
@@ -590,10 +584,35 @@ class Content extends PresentationLessonContent {
         setup();
         equation.showForm('general');
         diag.setLineRotation(3, false);
-        // circle._radians.show();
       },
     });
 
+    this.addSection({
+      setContent: [
+        'This relationship only holds when |angle| is in |radians|, and can be used to calculate |any| of the properties.',
+      ],
+      modifiers: {
+        angle: highlight(colors.angles),
+        any: click(diag.cycleEquation, [diag], colors.lines),
+      },
+      blankTransition: { fromPrev: true },
+      transitionFromPrev: (done) => {
+        equation.showForm('general');
+        equation.animateToForm('general', 2, 0, done);
+        diag.setLineRotation(3, true);
+        equation.animations.new()
+          .scenario({ target: 'center', duration: 2 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        equation.setScenario('center');
+        equation.showForm('arc');
+      },
+    });
+
+    this.addSection(common, {
+    })
     // this.addSection(common, {
     //   title: '',
     //   setContent: centerV([

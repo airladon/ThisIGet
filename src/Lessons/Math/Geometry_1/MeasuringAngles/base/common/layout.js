@@ -232,6 +232,17 @@ export default function lessonLayout() {
   // ///////////////////////////////////////////////////////
   // Equation
   // ///////////////////////////////////////////////////////
+  const mods = (direction, mag) => ({
+    animations: {
+      options: {
+        translation: {
+          style: 'curved',
+          magnitude: mag,
+          direction: direction,
+        },
+      },
+    },
+  });
   layout.equation = {
     name: 'equation',
     method: 'addEquation',
@@ -239,56 +250,15 @@ export default function lessonLayout() {
       color: colors.diagram.text.base,
       scale: 1,
       elements: {
-        arc: {
-          text: 'arc length',
-          color: colors.arc,
-          elementOptions: {
-            isTouchable: true,
-          },
-        },
-        _arc: {
-          text: 'arc length',
-          color: colors.arc,
-          // elementOptions: {
-          //   isTouchable: true,
-          // },
-        },
-        radiusLength1: {
-          text: 'radius length',
-          color: colors.lines,
-          // elementOptions: {
-          //   isTouchable: true,
-          // },
-        },
-        radiusLengths2: {
-          text: 'radius lengths',
-          color: colors.lines,
-          // elementOptions: {
-          //   isTouchable: true,
-          // },
-        },
-        radiusLengths3: {
-          text: 'radius lengths',
-          color: colors.lines,
-          // elementOptions: {
-          //   isTouchable: true,
-          // },
-        },
-        radius: {
-          text: 'radius',
-          color: colors.lines,
-          elementOptions: {
-            isTouchable: true,
-          },
-        },
-        _radius: {
-          text: 'radius',
-          color: colors.lines,
-          elementOptions: {
-            isTouchable: true,
-          },
-        },
+        arc: { text: 'arc length', color: colors.arc },
+        _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4)},
+        radius: { text: 'radius', color: colors.lines },
+        _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
         angle: { text: 'angle', color: colors.angles },
+        _angle: { text: 'angle', color: colors.angles, mods: mods('down', 0.4) },
+        radiusLength1: { text: 'radius length', color: colors.radianLines },
+        radiusLengths2: { text: 'radius lengths', color: colors.radianLines },
+        radiusLengths3: { text: 'radius lengths', color: colors.radianLines },
         _2p: {
           text: '2π',
           elementOptions: {
@@ -303,10 +273,8 @@ export default function lessonLayout() {
             },
           },
         },
-        // length: 'length',
-        // lengths: 'lengths',
-        _1: { text: '1', color: colors.angles },
-        _2: { text: '2', color: colors.angles },
+        _1: { text: ' 1 ', color: colors.angles },
+        _2: { text: ' 2 ', color: colors.angles },
         _3: { text: ' 3 ', color: colors.angles },
         x: `  ${String.fromCharCode(215)}  `,
         equals: '  =  ',
@@ -324,28 +292,40 @@ export default function lessonLayout() {
         alignV: 'top',
       },
       forms: {
-        'arc': ['_arc', 'equals', '_2p', 'x', '_radius'],
-        'radius': [{ frac: ['_arc', '_2p', 'v'] }, 'equals', '_radius'],
+        'arc': ['_arc', 'equals', '_angle', 'x', '_radius'],
+        // 'radius': [{ frac: ['_arc', '_angle', 'v'] }, 'equals', '_radius'],
+        // 'angle': [{ frac: ['_arc', '_radius', 'v'] }, 'equals', '_angle'],
+        'radius': ['_radius', 'equals', { frac: ['_arc', '_angle', 'v'] }],
+        'angle': ['_angle', 'equals', { frac: ['_arc', '_radius', 'v'] }],
         '1rad': ['arc', 'equals', '_1',  '   ', 'radiusLength1'],
         '2rad': ['arc', 'equals', '_2',  '   ', 'radiusLengths2'],
         '3rad': ['arc', 'equals', '_3', '   ', 'radiusLengths3'],
-        '3rad1': ['arc', 'equals', {
-          topComment: {
-            content: '_3',
-            comment: 'angle',
-            symbol: 'smallBrace',
-            contentSpace: 0.04,
-            includeInSize: false,
+        '3rad1': [
+          'arc',
+          'equals',
+          {
+            topComment: {
+              content: '_3',
+              comment: 'angle',
+              symbol: 'smallBrace',
+              contentSpace: 0.04,
+              includeInSize: false,
+            },
           },
-        }, '   ', { topComment: ['radiusLengths3', 'radius', 'largeBrace'] }],
+          '   ',
+          {
+            topComment: ['radiusLengths3', 'radius', 'largeBrace'],
+          },
+        ],
         'general': ['arc', 'equals', 'angle', 'x', 'radius'],
       },
-      formSeries: ['arc', 'radius'],
+      formSeries: ['arc', 'radius', 'angle'],
     },
     mods: {
       scenarios: {
         lowerLeft: { position: new Point(-1, -1) },
         top: { position: new Point(0, 1.3) },
+        center: { position: new Point(0 ,0) },
       },
     },
     scenario: 'lowerLeft',

@@ -78,8 +78,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._equation.goToForm('radius', 2);
       this.diagram.animateNextFrame();
     };
+    this._equation.__angle.onClick = () => {
+      this._equation.goToForm('angle', 2);
+      this.diagram.animateNextFrame();
+    };
     this._equation.__arc.makeTouchable();
     this._equation.__radius.makeTouchable();
+    this._equation.__angle.makeTouchable();
 
     this._equation._arc.makeTouchable();
     this._equation._arc.onClick = this.pulseArc.bind(this);
@@ -285,6 +290,11 @@ export default class CommonCollection extends CommonDiagramCollection {
         whenFinished();
       }
     }
+  }
+
+  cycleEquation() {
+    this._equation.nextForm(2, 0);
+    this.diagram.animateNextFrame();
   }
 
   showCircle() {
