@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  DiagramElementCollection,
+  DiagramElementCollection, DiagramEquation,
   Transform,
 } = Fig;
 
@@ -39,7 +39,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   _equation: {
     _arc: DiagramElementPrimative;
     _radius: DiagramElementPrimative;
-  } & DiagramElementCollection;
+    __arc: DiagramElementPrimative;
+    __radius: DiagramElementPrimative;
+  } & DiagramEquation;
 
   marks: number;
   decimals: number;
@@ -57,16 +59,27 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
 
-    this._equation._arc.onClick = () => {
+    this._equation.__arc.onClick = () => {
       this._equation.goToForm('arc', 2);
       this.diagram.animateNextFrame();
     };
-    this._equation._radius.onClick = () => {
+    this._equation.__radius.onClick = () => {
       this._equation.goToForm('radius', 2);
       this.diagram.animateNextFrame();
     };
+    this._equation.__arc.makeTouchable();
+    this._equation.__radius.makeTouchable();
+
     this._equation._arc.makeTouchable();
+    this._equation._arc.onClick = this.pulseArc.bind(this);
     this._equation._radius.makeTouchable();
+    this._equation._radius.onClick = this.pulseRadius.bind(this);
+    this._equation.__1.makeTouchable();
+    this._equation.__1.onClick = this.pushLine.bind(this, 1, 0, 1, null);
+    this._equation.__2.makeTouchable();
+    this._equation.__2.onClick = this.pushLine.bind(this, 1, 0, 1, null);
+    this._equation.__3.makeTouchable();
+    this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
 
     this.decimals = 1;
     this.marks = 12;
@@ -164,6 +177,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     toAngle: ?number = null,
     direction: number = 0,
     duration: number = 2,
+    whenFinished: ?() => void = null,
   ) {
     let r = toAngle;
     if (toAngle != null
@@ -180,6 +194,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._line1.stop(true, false);
     this._circle._line1.animations.new()
       .rotation({ target: r, duration, direction })
+      .whenFinished(whenFinished)
       .start();
     this.diagram.animateNextFrame();
   }
@@ -205,7 +220,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  setLineRotation(r: ?number = null, animate: boolean = true) {
+  setLineRotation(
+    r: ?number = null,
+    animate: boolean = true,
+    whenFinished: ?() => void = null,
+  ) {
     let target = r;
     let direction = 0;
     if (target == null) {
@@ -221,9 +240,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
     }
     if (animate) {
-      this.pushLine(target, direction);
+      this.pushLine(target, direction, 2, whenFinished);
     } else {
       this._circle._line1.setRotation(target);
+      if (whenFinished != null) {
+        whenFinished();
+      }
     }
   }
 

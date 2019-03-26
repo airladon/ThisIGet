@@ -246,7 +246,21 @@ export default function lessonLayout() {
             isTouchable: true,
           },
         },
+        _arc: {
+          text: 'arc length',
+          color: colors.arc,
+          elementOptions: {
+            isTouchable: true,
+          },
+        },
         radius: {
+          text: 'radius',
+          color: colors.lines,
+          elementOptions: {
+            isTouchable: true,
+          },
+        },
+        _radius: {
           text: 'radius',
           color: colors.lines,
           elementOptions: {
@@ -267,19 +281,34 @@ export default function lessonLayout() {
             },
           },
         },
+        length: 'length',
+        lengths: 'lengths',
+        _1: { text: '1', color: colors.angles },
+        _2: { text: '2', color: colors.angles },
+        _3: { text: '3', color: colors.angles },
         x: ` ${String.fromCharCode(215)} `,
-        equals: ' = ',
+        equals: '  =  ',
         v: { symbol: 'vinculum' },
       },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'right',
+        alignV: 'top',
+      },
       forms: {
-        'arc': ['arc', 'equals', '_2p', 'x', 'radius'],
-        'radius': [{ frac: ['arc', '_2p', 'v'] }, 'equals', 'radius'],
+        'arc': ['_arc', 'equals', '_2p', 'x', '_radius'],
+        'radius': [{ frac: ['_arc', '_2p', 'v'] }, 'equals', '_radius'],
+        '1rad': ['arc', 'equals', '_1',  '   ', 'radius', '   ', 'length'],
+        '2rad': ['arc', 'equals', '_2',  '   ', 'radius', '   ', 'lengths'],
+        '3rad': ['arc', 'equals', '_3', '   ', 'radius', '   ', 'lengths'],
+        '3rad1': ['arc', 'equals', '_3', '   ', 'radius', '   ', 'lengths'],
       },
       formSeries: ['arc', 'radius'],
     },
     mods: {
       scenarios: {
         lowerLeft: { position: new Point(-1, -1) },
+        top: { position: new Point(0, 1.3) },
       },
     },
     scenario: 'lowerLeft',

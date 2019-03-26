@@ -46,13 +46,12 @@ class Content extends PresentationLessonContent {
     const circle = diag._circle;
     const equation = diag._equation;
 
-    const common = {
+    let common = {
       setContent: [],
       show: [],
       modifiers: {},
       transitionFromAny: (done) => {
-        diag.setLineRotation();
-        done();
+        diag.setLineRotation(null, true, done);
       },
       setSteadyState: () => {
         circle.setScenario('center');
@@ -72,7 +71,7 @@ class Content extends PresentationLessonContent {
         'An |angle| is the amount of |rotation| between two lines.',
       ],
       modifiers: {
-        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
+        rotation: click(diag.pushLine, [diag, null, 0, 1, null], colors.lines),
         angle: click(diag.pulseAngle, [diag], colors.angles),
       },
       show: [
@@ -88,10 +87,10 @@ class Content extends PresentationLessonContent {
         'An |angle| in a shape can be as small as |no_rotation|, and as large as a |full_rotation|.',
       ],
       modifiers: {
-        rotation: click(diag.pushLine, [diag, null, 0, 1], colors.lines),
+        rotation: click(diag.pushLine, [diag, null, 0, 1, null], colors.lines),
         angle: click(diag.pulseAngle, [diag], colors.angles),
-        no_rotation: click(diag.pushLine, [diag, 0, -1, 2], colors.lines),
-        full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 2], colors.lines),
+        no_rotation: click(diag.pushLine, [diag, 0, -1, 2, null], colors.lines),
+        full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 2, null], colors.lines),
       },
       show: [
         circle._line1, circle._line2, circle._angle,
@@ -212,7 +211,7 @@ class Content extends PresentationLessonContent {
 
     const row = (portion: string, angle: number) => `<tr><td>${portion}</td><td>|_${angle}deg|</td></tr>`;
 
-    const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1], colors.diagram.text.keyword);
+    const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1, null], colors.diagram.text.keyword);
 
     this.addSection(common, {
       setContent: () => `
@@ -248,7 +247,7 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('degrees');
         circle._angleText.setScenario('bottomSlightRight');
         circle.setScenario('right');
-        const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1];
+        const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1, null];
         // onClickId('id_270', diag.pushLine, bindArray(270));
         onClickId('id_240', diag.pushLine, bindArray(240));
         onClickId('id_180', diag.pushLine, bindArray(180));
@@ -293,7 +292,7 @@ class Content extends PresentationLessonContent {
         `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html('id_lesson__isosceles_definition')}`,
       ],
       modifiers: {
-        less: click(diag.pushLine, [diag, null, 0, 1], colors.arc),
+        less: click(diag.pushLine, [diag, null, 0, 1 , null], colors.arc),
         arc: click(diag.pulseArc, [diag], colors.arc),
       },
       show: [
@@ -425,8 +424,8 @@ class Content extends PresentationLessonContent {
         'A |half_circle| has an angle of approximately |3.14 radians|, while a |full_circle| is approximately |6.28 radians|.',
       ],
       modifiers: {
-        full_circle: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1.5], colors.angles),
-        half_circle: click(diag.pushLine, [diag, Math.PI, 0, 1.5], colors.angles),
+        full_circle: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1.5, null], colors.angles),
+        half_circle: click(diag.pushLine, [diag, Math.PI, 0, 1.5, null], colors.angles),
       },
     });
 
@@ -471,18 +470,78 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'Lets see the relationship by looking at some examples:',
+        'Lets see the relationship by looking at some examples.',
       ],
       show: [
         circle._arc, circle._radianLines, circle._angle,
         circle._line1, circle._line2, circle._angleText,
       ],
       setSteadyState: () => {
-        circle.setScenario('right');
+        circle.setScenario('center');
         diag.updateAngle();
         diag.setAngleMarks('radians');
         circle._angleText.setScenario('bottom');
         circle._radians.hide();
+      },
+    });
+
+    common = {
+      modifiers: {
+        _1_radian: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
+        _2_radians: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
+        _3_radians: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
+      },
+      show: [
+        circle._arc, circle._radianLines, circle._angle,
+        circle._line1, circle._line2, circle._angleText,
+        // equation,
+      ],
+    };
+    const setup = () => {
+      circle.setScenario('center');
+      diag.updateAngle();
+      diag.setAngleMarks('radians');
+      circle._angleText.setScenario('bottom');
+      circle._radians.hide();
+      equation.setScenario('top');
+    };
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_1_radian|:',
+      ],
+      transitionFromPrev: (done) => {
+        diag.setLineRotation(1, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('1rad');
+        diag.setLineRotation(1, false);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_2_radians|:',
+      ],
+      transitionFromPrev: (done) => {
+        diag.setLineRotation(2, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('2rad');
+        diag.setLineRotation(2, false);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_3_radians|:',
+      ],
+      transitionFromPrev: (done) => {
+        diag.setLineRotation(3, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('3rad');
+        diag.setLineRotation(3, false);
       },
     });
 

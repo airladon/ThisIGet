@@ -6755,7 +6755,7 @@ function (_DiagramElementCollec) {
         var elem = elems[key];
 
         if (typeof elem === 'string') {
-          if (!key.startsWith('space')) {
+          if (!(key.startsWith('space') && key.startsWith(' '))) {
             _this2.add(key, makeTextElem({
               text: elem
             }));
@@ -6777,8 +6777,8 @@ function (_DiagramElementCollec) {
           }
 
           if (diagramElem != null) {
-            if (elem.elementOptions != null) {
-              diagramElem.setProperties(elem.elementOptions);
+            if (elem.mods != null) {
+              diagramElem.setProperties(elem.mods);
             }
 
             _this2.add(key, diagramElem);
@@ -7061,23 +7061,23 @@ function (_DiagramElementCollec) {
 
         if (diagramElement) {
           var color;
-          var elementOptions;
+          var mods;
 
           if (Array.isArray(elementMods[elementName])) {
             var _elementMods$elementN = _slicedToArray(elementMods[elementName], 2);
 
             color = _elementMods$elementN[0];
-            elementOptions = _elementMods$elementN[1];
+            mods = _elementMods$elementN[1];
           } else {
             var _elementMods$elementN2 = elementMods[elementName];
             color = _elementMods$elementN2.color;
-            elementOptions = _elementMods$elementN2.elementOptions;
+            mods = _elementMods$elementN2.mods;
           }
 
           form[subForm].elementMods[elementName] = {
             element: diagramElement,
             color: color,
-            elementOptions: elementOptions
+            mods: mods
           };
         }
       });
@@ -7596,6 +7596,10 @@ function (_Elements) {
           if (c.startsWith('space')) {
             var spaceNum = parseFloat(c.replace(/space[_]*/, '')) || 0.03;
             elements.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["BlankElement"](spaceNum)));
+          } else if (c.startsWith(' ')) {
+            var _spaceNum = c.length * 0.03;
+
+            elements.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["BlankElement"](_spaceNum)));
           } else {
             var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_4__["getDiagramElement"])(_this2.elements, c);
 
@@ -8005,12 +8009,13 @@ function (_Elements) {
       }
 
       Object.keys(this.elementMods).forEach(function (elementName) {
-        var mods = _this4.elementMods[elementName];
-        var element = mods.element,
-            color = mods.color,
-            style = mods.style,
-            direction = mods.direction,
-            mag = mods.mag;
+        var elementMods = _this4.elementMods[elementName];
+        var element = elementMods.element,
+            color = elementMods.color,
+            style = elementMods.style,
+            direction = elementMods.direction,
+            mag = elementMods.mag,
+            mods = elementMods.mods;
 
         if (element != null) {
           if (color != null) {
@@ -8033,6 +8038,10 @@ function (_Elements) {
 
           if (mag != null) {
             element.animations.options.translation.magnitude = mag; // element.animate.transform.translation.options.magnitude = mag;
+          }
+
+          if (mods != null) {
+            element.setProperties(mods);
           }
         }
       });
@@ -8186,6 +8195,12 @@ function () {
       if (content.startsWith('space')) {
         var spaceNum = parseFloat(content.replace(/space[_]*/, '')) || 0.03;
         return new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["BlankElement"](spaceNum));
+      }
+
+      if (content.startsWith(' ')) {
+        var _spaceNum = content.length * 0.03;
+
+        return new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["BlankElement"](_spaceNum));
       }
 
       var diagramElement = getDiagramElement(this.elements, content);
@@ -15032,15 +15047,30 @@ function (_DiagramElementCollec) {
     // Pulic Angle methods
     // eslint-disable-next-line class-methods-use-this
     value: function calculateFromP1P2P3(p1, p2, p3) {
+      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+
       var position = p2._dup();
 
-      var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
-      var rotation = L21.angle();
       var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngle"])(p1, p2, p3);
+
+      if (direction === 1) {
+        var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+
+        var _rotation = L21.angle();
+
+        return {
+          position: position,
+          rotation: _rotation,
+          angle: angle
+        };
+      }
+
+      var L23 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+      var rotation = L23.angle();
       return {
         position: position,
         rotation: rotation,
-        angle: angle
+        angle: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(Math.PI * 2 - angle, '0to360')
       };
     }
   }]);
@@ -15059,6 +15089,7 @@ function (_DiagramElementCollec) {
       // radius: 0.1,
       color: [0, 1, 0, 1],
       // clockwise: false,
+      direction: 1,
       autoRightAngle: false,
       rightAngleRange: 0.001,
       curve: null,
@@ -15089,6 +15120,7 @@ function (_DiagramElementCollec) {
 
     _this2.position = optionsToUse.position;
     _this2.rotation = optionsToUse.rotation;
+    _this2.direction = optionsToUse.direction;
     _this2.angle = optionsToUse.angle;
     _this2.lastLabelRotationOffset = 0;
     _this2.autoRightAngle = optionsToUse.autoRightAngle;
@@ -15096,7 +15128,7 @@ function (_DiagramElementCollec) {
     // this.radius = optionsToUse.radius;
 
     if (optionsToUse.p1 != null && optionsToUse.p2 != null && optionsToUse.p3 != null) {
-      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3)),
+      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3), _this2.direction),
           position = _this2$calculateFromP.position,
           rotation = _this2$calculateFromP.rotation,
           angle = _this2$calculateFromP.angle;
@@ -15210,8 +15242,12 @@ function (_DiagramElementCollec) {
         this.angle = options.angle;
       }
 
-      if (options.p1 != null && options.p2 != null && options.p3 != null) {
-        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.p3)),
+      var p1 = options.p1,
+          p2 = options.p2,
+          p3 = options.p3;
+
+      if (p1 != null && p2 != null && p3 != null) {
+        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p3), this.direction),
             position = _this$calculateFromP.position,
             rotation = _this$calculateFromP.rotation,
             angle = _this$calculateFromP.angle;
@@ -29885,7 +29921,8 @@ function threePointAngleMin(p2, p1, p3) {
   var p13 = distance(p1, p3);
   var p23 = distance(p2, p3);
   return Math.acos((Math.pow(p12, 2) + Math.pow(p13, 2) - Math.pow(p23, 2)) / (2 * p12 * p13));
-} // Finds the angle between three points for p12 to p13
+} // Finds the angle between three points for p12 to p13 in the positive
+// angle direction
 
 
 function threePointAngle(p2, p1, p3) {
