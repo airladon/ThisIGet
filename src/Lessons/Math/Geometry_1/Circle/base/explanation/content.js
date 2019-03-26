@@ -268,6 +268,10 @@ class Content extends PresentationLessonContent {
         'However, as it was first studied a long time ago in different languages, it is called a |circle|, with properties |center|, |radius|, |diameter| and |circumference|.',
       ]),
     });
+
+    common.transitionFromPrev = (done) => {
+      circ.setDiameterAndRadiusRotation(true, done);
+    };
     this.addSection(common, {
       setContent: ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.'],
       show: [
@@ -290,6 +294,9 @@ class Content extends PresentationLessonContent {
         circ._locationText.setScenario('summary');
         circ._circumferenceText.setScenario('summary');
         circle._line.setColor(colors.grid);
+      },
+      setSteadyState: () => {
+        circ.setDiameterAndRadiusRotation();
       },
       setLeaveState: () => {
         circle.setScale(1);
@@ -324,6 +331,9 @@ class Content extends PresentationLessonContent {
         circle._radius.setRotation(0.5);
         circle._diameter.setRotation(-0.5);
       },
+      setSteadyState: () => {
+        circ.setDiameterAndRadiusRotation();
+      },
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
       ],
@@ -344,14 +354,10 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'Or written as an equation: |test|',
+        'Or written as an |equation|:',
       ],
       modifiers: {
-        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
-        radius: click(circ.pulseRadius, [circ], colors.radius),
-        half: click(circ.growRadius, [circ], colors.radius),
-        full: click(circ.growDiameter, [circ], colors.diameter),
-        test: click(circ.diameterEquationToggle, [circ]),
+        equation: click(circ.diameterEquationToggle, [circ], colors.diagram.action),
       },
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
@@ -359,6 +365,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         circ._dEquation.showForm('diameter');
         circ._dEquation.setScenario('centerTop');
+        circ.setDiameterAndRadiusRotation();
       },
     });
   }

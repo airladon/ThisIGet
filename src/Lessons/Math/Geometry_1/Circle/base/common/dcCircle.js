@@ -8,6 +8,7 @@ const {
   DiagramElementPrimative,
   DiagramObjectLine,
   DiagramElementCollection,
+  DiagramEquation,
   // DiagramObjectAngle,
   Transform, Point,
 } = Fig;
@@ -39,6 +40,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       _rightLine: DiagramObjectLine;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
+
+  _dEquation: {
+    _diameter: DiagramElementPrimative;
+    _equals: DiagramElementPrimative;
+    __2: DiagramElementPrimative;
+    _radius: DiagramElementPrimative;
+  } & DiagramEquation;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -253,15 +261,16 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     eqn._r.show();
     eqn._d.setPosition(eqn._diameter.getPosition());
     eqn._r.setPosition(eqn._radius.getPosition());
+    eqn.stop(true, true);
     eqn.animateToForm('d');
     this.diagram.animateNextFrame();
   }
 
   diameterEquationOriginal() {
     const eqn = this._dEquation;
-    // if (eqn.getCurrentForm().name !== 'diameter') {
+    eqn.showForm('d');
+    eqn.stop(true, true);
     eqn.animateToForm('diameter');
-    // }
     this.diagram.animateNextFrame();
   }
 
@@ -374,6 +383,41 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
           startPercent: this.percentStraight,
         })
         .start();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  setDiameterAndRadiusRotation(
+    animate: boolean = false,
+    whenFinished: ?() => void = null,
+  ) {
+    const r = this._circle._radius.getRotation('0to360');
+    const d = this._circle._diameter.getRotation('0to360');
+    if (
+      (r < 0.1 || r > Math.PI * 1.9)
+      && (d < 0.1 || d > Math.PI * 1.9)
+    ) {
+      if (animate) {
+        this._circle._radius.stop(true, false);
+        this._circle._radius.animations.new()
+          .rotation({ target: 0.5, duration: 1 })
+          .whenFinished(whenFinished)
+          .start();
+        this._circle._diameter.stop(true, false);
+        this._circle._diameter.animations.new()
+          .rotation({ target: -0.5, duration: 1 })
+          .start();
+      } else {
+        this._circle._radius.stop(true, false);
+        this._circle._diameter.stop(true, false);
+        this._circle._radius.setRotation(0.5);
+        this._circle._diameter.setRotation(-0.5);
+        if (whenFinished != null) {
+          whenFinished();
+        }
+      }
+    } else if (whenFinished != null) {
+      whenFinished();
     }
     this.diagram.animateNextFrame();
   }
