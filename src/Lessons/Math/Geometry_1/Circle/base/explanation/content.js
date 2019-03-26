@@ -15,6 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   centerV,
+  style,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -262,7 +263,6 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
-      title: 'Summary',
       setContent: centerV([
         'So if we were discovering the circle today, we might call it a |ring|, with properties |middle|, |wheel spoke|, |width|, and |carry around|.',
         'This would make it easier for people learning about it today.',
@@ -273,53 +273,11 @@ class Content extends PresentationLessonContent {
     common.transitionFromPrev = (done) => {
       circ.setDiameterAndRadiusRotation(true, done);
     };
+
     this.addSection(common, {
-      setContent: ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.'],
-      show: [
-        circle, circ._grid,
-        circ._locationText, circ._circumferenceText,
-        circ._diameterText, circ._radiusText,
-      ],
-      hide: [circle._arc],
-      setEnterState: () => {
-        circ.containToGrid = true;
-        circ.straighten(0);
-        circ.straightening = false;
-        circle.setScenario('center');
-        circle._radius.setRotation(0.5);
-        circle._diameter.setRotation(-0.5);
-        circle.setScale(0.5);
-        circle.move.maxTransform.updateScale(0.78, 0.78);
-        circle.move.minTransform.updateScale(0.3, 0.3);
-        circle._scale.isTouchable = true;
-        circ._locationText.setScenario('summary');
-        circ._circumferenceText.setScenario('summary');
-        circ._radiusText.setScenario('summary');
-        circle._line.setColor(colors.grid);
-      },
-      setSteadyState: () => {
-        circ.setDiameterAndRadiusRotation();
-        circ.updateCircleLocation();
-      },
-      setLeaveState: () => {
-        circle.setScale(1);
-        circle._scale.isTouchable = false;
-        circle._line.setColor(colors.circle);
-      },
-      setInfo: [
-        'Drag circle |edge| to make larger or smaller',
-        'Drag circle |center| to move',
-        'Drag |radius| to rotate it',
-        'Drag |diameter| to rotate it',
-        'Press on |Circumference| text to straigten',
-        'Press on other measurements text to hightlight',
-      ],
-    });
-    this.addSection(common, {
-      title: 'Relationships between Properties',
+      title: 'Relationships',
       setContent: centerV([
         'Once properties are defined, the |relationship| between them can be investigated.',
-        // 'However, to do this, first we need to understand |angle| which is another fundamental property of most shapes.',
       ]),
     });
     this.addSection(common, {
@@ -407,6 +365,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Pi',
       setContent: centerV([
         'A better approximation is to say the circumference is |3.14| times the diameter.',
         'But actually, the digits after the 3 go on |forever|.',
@@ -417,9 +376,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: centerV([
-        'Instead of writing out |3.14159265359...| every time, the Greek letter |π| is used.',
-        'The pronounciation of |π| is |pi|.',
-        '|π| is used whenever the exact ratio between diameter and circumference is needed.',
+        'Instead of writing out |3.14159265359...| every time, the Greek letter |π|, pronounced |pi|, is used.',
+        'Whenever the exact ratio between diameter and circumference is needed, |π| can be used.',
       ]),
     });
 
@@ -437,8 +395,86 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         circ._cEquation.showForm('diameter');
         circ._cEquation.setScenario('centerTop');
-        circ.setDiameterAndRadiusRotation();
       },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'We now have two relationships:',
+        style({ top: 30 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
+      ],
+      // modifiers: {
+      //   diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+      //   cicumference: click(circ.pulseCircle, [circ], colors.circle),
+      // },
+      // show: [
+      //   circle._line, circle._center, circle._diameter,
+      // ],
+      setEnterState: () => {
+        circ._cEquation._circumference.isTouchable = false;
+        circ._cEquation._diameter.isTouchable = false;
+        circ._dEquation._diameter.isTouchable = false;
+        circ._dEquation._radius.isTouchable = false;
+      },
+      setSteadyState: () => {
+        circ._dEquation.showForm('diameter');
+        circ._dEquation.setScenario('centerTop');
+        circ._cEquation.showForm('diameter');
+        circ._cEquation.setScenario('centerMid');
+        // circ._allEquationNav.setScenario('bottom');
+        circ._allEquationEqn.showForm('4');
+        circ._allEquationEqn.setPosition(0, -1);
+      },
+      setLeaverState: () => {
+        circ._cEquation._circumference.isTouchable = true;
+        circ._cEquation._diameter.isTouchable = true;
+        circ._dEquation._diameter.isTouchable = true;
+        circ._dEquation._radius.isTouchable = true;
+      },
+    });
+
+    this.addSection(common, {
+      title: 'Experiment',
+      setContent: ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.'],
+      show: [
+        circle, circ._grid,
+        circ._locationText, circ._circumferenceText,
+        circ._diameterText, circ._radiusText,
+      ],
+      hide: [circle._arc],
+      setEnterState: () => {
+        circ.containToGrid = true;
+        circ.straighten(0);
+        circ.straightening = false;
+        circle.setScenario('center');
+        circle._radius.setRotation(0.5);
+        circle._diameter.setRotation(-0.5);
+        circle.setScale(0.5);
+        circle.move.maxTransform.updateScale(0.78, 0.78);
+        circle.move.minTransform.updateScale(0.3, 0.3);
+        circle._scale.isTouchable = true;
+        circ._locationText.setScenario('summary');
+        circ._circumferenceText.setScenario('summary');
+        circ._radiusText.setScenario('summary');
+        circle._line.setColor(colors.grid);
+      },
+      setSteadyState: () => {
+        circ.setDiameterAndRadiusRotation();
+        circ.updateCircleLocation();
+      },
+      setLeaveState: () => {
+        circle.setScale(1);
+        circle._scale.isTouchable = false;
+        circle._line.setColor(colors.circle);
+      },
+      setInfo: [
+        'Drag circle |edge| to make larger or smaller',
+        'Drag circle |center| to move',
+        'Drag |radius| to rotate it',
+        'Drag |diameter| to rotate it',
+        'Press on |Circumference| text to straigten',
+        'Press on other measurements text to hightlight',
+      ],
     });
   }
 }

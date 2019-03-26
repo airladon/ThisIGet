@@ -450,6 +450,89 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         centerTop: { position: new Point(0.2, 1.4) },
+        centerMid: { position: new Point(0.2, 1) },
+      },
+    },
+  };
+
+  layout.allEquation = {
+    name: 'allEquation',
+    method: 'addNavigator',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1.3,
+      elements: {
+        diameter: { text: 'diameter', color: colors.diameter },
+        radius: { text: 'radius', color: colors.radius },
+        circumference: { text: 'circumference', color: colors.circle },
+        x: `  ${String.fromCharCode(215)}  `,
+        _x: `  ${String.fromCharCode(215)}  `,
+        pi: 'π ',
+        _2: '2 ',
+        equals: '  =  ',
+        v: { symbol: 'vinculum' },
+        brace: { symbol: 'brace', side: 'top', numLines: 3 },
+      },
+      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      forms: {
+        '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
+        '1': ['circumference', 'equals', 'pi', 'diameter'],
+        '2': ['circumference', 'equals', 'pi', {
+          topComment: ['diameter', ['_2', 'radius'], 'brace'],
+        }],
+        '3': {
+          content: ['circumference', 'equals', 'pi', '_2', 'radius'],
+          elementMods: {
+            '_2': {
+              mods: {
+                animations: {
+                  options: {
+                    translation: {
+                      style: 'linear',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+        '4': {
+          content: ['circumference', 'equals', '_2', 'pi', 'radius'],
+          elementMods: {
+            '_2': {
+              mods: {
+                animations: {
+                  options: {
+                    translation: {
+                      style: 'curved',
+                      magnitude: 1,
+                      direction: 'up',
+                    },
+                  },
+                },
+              },
+            },
+            'pi': {
+              mods: {
+                animations: {
+                  options: {
+                    translation: {
+                      style: 'curved',
+                      magnitude: 1,
+                      direction: 'down',
+                    },
+                  },
+                },
+              },
+            },
+          },
+        },
+      },
+      formSeries: ['0', '1', '2', '3', '4'],
+    },
+    mods: {
+      scenarios: {
+        bottom: { position: new Point(0.2, -2) },
       },
     },
   };
@@ -465,6 +548,7 @@ export default function lessonLayout() {
     layout.circ,
     layout.diameterEquation,
     layout.circumferenceEquation,
+    layout.allEquation,
     layout.locationText,
     layout.circumferenceText,
     layout.radiusText,

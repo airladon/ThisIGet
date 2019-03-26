@@ -30322,7 +30322,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30345,6 +30345,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOnClicks", function() { return setOnClicks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 
 
@@ -30365,6 +30366,53 @@ function withClass() {
   var classText = arguments.length > 1 ? arguments[1] : undefined;
   var textToUse = convertTextArrayToParagraphs(text);
   return "<div class=\"".concat(classText, "\">").concat(textToUse, "</div>");
+}
+
+function style() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var marginLeft = '';
+  var marginRight = '';
+  var marginTop = '';
+  var size = '';
+  var className = '';
+
+  if (typeof options === 'number') {
+    marginTop = "margin-top:".concat(options, "%");
+  } else {
+    if (options.left != null) {
+      marginLeft = "margin-left:".concat(options.left, "%;");
+    }
+
+    if (options.right != null) {
+      marginRight = "margin-right:".concat(options.right, "%;");
+    }
+
+    if (options.top != null) {
+      marginTop = "margin-top:".concat(options.top, "%;");
+    }
+
+    if (options.size != null) {
+      size = "font-size:".concat(options.size, "em");
+    }
+
+    if (options.className) {
+      className = "class=\"".concat(options.className, "\"");
+    }
+  }
+
+  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(size, "\"").concat(className, ">");
+  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size, "\"").concat(className, ">");
+  var textToUse;
+
+  if (Array.isArray(text)) {
+    textToUse = text.join("</p>".concat(p));
+  } else {
+    textToUse = text;
+  }
+
+  textToUse = "".concat(pFirst).concat(textToUse, "</p>");
+  return textToUse;
 }
 
 function centerV() {

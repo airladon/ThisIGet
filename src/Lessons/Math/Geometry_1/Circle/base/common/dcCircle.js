@@ -59,7 +59,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     _line0: DiagramObjectLine;
     _line1: DiagramObjectLine;
     _line2: DiagramObjectLine;
-  } & DiagramCollection;
+  } & DiagramElementCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
