@@ -403,13 +403,6 @@ class Content extends PresentationLessonContent {
         'We now have two relationships:',
         style({ top: 30 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
       ],
-      // modifiers: {
-      //   diameter: click(circ.pulseDiameter, [circ], colors.diameter),
-      //   cicumference: click(circ.pulseCircle, [circ], colors.circle),
-      // },
-      // show: [
-      //   circle._line, circle._center, circle._diameter,
-      // ],
       setEnterState: () => {
         circ._cEquation._circumference.isTouchable = false;
         circ._cEquation._diameter.isTouchable = false;
@@ -449,7 +442,7 @@ class Content extends PresentationLessonContent {
         circle.setScenario('center');
         circle._radius.setRotation(0.5);
         circle._diameter.setRotation(-0.5);
-        circle.setScale(0.5);
+        circle.setScale(0.7);
         circle.move.maxTransform.updateScale(0.78, 0.78);
         circle.move.minTransform.updateScale(0.3, 0.3);
         circle._scale.isTouchable = true;

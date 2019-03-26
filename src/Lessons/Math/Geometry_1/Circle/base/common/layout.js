@@ -382,6 +382,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: new Point(0, 0) },
         centerHigh: { position: new Point(0, 0.3) },
+        right: { position: new Point(1.3, 0) },
       },
       hasTouchableElements: true,
     },
@@ -417,11 +418,13 @@ export default function lessonLayout() {
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
       forms: {
         diameter: ['diameter', 'equals', '_2', 'x', 'radius'],
+        short: ['diameter', 'equals', '_2', 'radius'],
       },
     },
     mods: {
       scenarios: {
         centerTop: { position: new Point(0.2, 1.5) },
+        left: { position: new Point(-1, 0.5), scale: 0.8 },
       },
     },
   };
@@ -437,20 +440,51 @@ export default function lessonLayout() {
         radius: { text: 'radius', color: colors.radius },
         circumference: { text: 'circumference', color: colors.circle },
         x: `  ${String.fromCharCode(215)}  `,
-        pi: 'π',
+        pi: 'π ',
         _2: '2 ',
         equals: '  =  ',
       },
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
       forms: {
         diameter: ['circumference', 'equals', 'pi', 'x', 'diameter'],
-        radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
+        short: ['circumference', 'equals', 'pi', 'diameter'],
       },
     },
     mods: {
       scenarios: {
         centerTop: { position: new Point(0.2, 1.4) },
         centerMid: { position: new Point(0.2, 1) },
+        left: { position: new Point(-1, 0), scale: 0.8 },
+      },
+    },
+  };
+
+  layout.radiusEquation = {
+    name: 'rEquation',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1.3,
+      elements: {
+        diameter: { text: 'diameter', color: colors.diameter },
+        radius: { text: 'radius', color: colors.radius },
+        circumference: { text: 'circumference', color: colors.circle },
+        x: `  ${String.fromCharCode(215)}  `,
+        pi: 'π ',
+        _2: '2 ',
+        equals: '  =  ',
+      },
+      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      forms: {
+        radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
+        short: ['circumference', 'equals', 'pi', 'diameter'],
+      },
+    },
+    mods: {
+      scenarios: {
+        centerTop: { position: new Point(0.2, 1.4) },
+        centerMid: { position: new Point(0.2, 1) },
+        left: { position: new Point(-1, -0.5), scale: 0.8 },
       },
     },
   };
@@ -548,6 +582,7 @@ export default function lessonLayout() {
     layout.circ,
     layout.diameterEquation,
     layout.circumferenceEquation,
+    layout.radiusEquation,
     layout.allEquation,
     layout.locationText,
     layout.circumferenceText,

@@ -55,6 +55,14 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     _circumference: DiagramElementPrimative;
   } & DiagramEquation;
 
+  _rEquation: {
+    _radius: DiagramElementPrimative;
+    _equals: DiagramElementPrimative;
+    _pi: DiagramElementPrimative;
+    __2: DiagramElementPrimative;
+    _circumference: DiagramElementPrimative;
+  } & DiagramEquation;
+
   _diameterLines: {
     _line0: DiagramObjectLine;
     _line1: DiagramObjectLine;
@@ -93,6 +101,11 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._cEquation._circumference.onClick = this.pulseCircle.bind(this);
     this._cEquation._diameter.makeTouchable();
     this._cEquation._diameter.onClick = this.pulseDiameter.bind(this);
+
+    this._rEquation._circumference.makeTouchable();
+    this._rEquation._circumference.onClick = this.pulseCircle.bind(this);
+    this._rEquation._radius.makeTouchable();
+    this._rEquation._radius.onClick = this.pulseRadius.bind(this);
   }
 
   updateArc() {
@@ -108,29 +121,6 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       this.diagram.animateNextFrame();
     }
   }
-
-  // showOnlyAndPulse(element: DiagramElement) {
-  //   this.stop(true, true);
-  //   this._circle._radius.hide();
-  //   this._circle._diameter.hide();
-  //   this._circle._center.hide();
-
-  //   if (element === this._circle._center) {
-  //     element.show();
-  //     this.pulseCenter();
-  //   } else if (element === this._circle._radius) {
-  //     element.showAll();
-  //     this._circle._center.show();
-  //     this.pulseRadius();
-  //   } else if (element === this._circle._diameter) {
-  //     element.showAll();
-  //     this._circle._center.show();
-  //     this.pulseDiameter();
-  //   } else if (element === this._circle._line) {
-  //     element.show();
-  //     this.pulseCircle();
-  //   }
-  // }
 
   updateCircleLocation() {
     if (this._locationText.isShown) {

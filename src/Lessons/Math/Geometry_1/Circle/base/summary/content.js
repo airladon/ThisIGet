@@ -78,6 +78,34 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {},
       setLeaveState: () => {},
     });
+
+    this.addSection({
+      title: 'Circle',
+      setContent: [
+        'The |circumference|, |radius|, |diameter| are related and can be calculated from each other.',
+      ],
+      modifiers: {
+        center: click(circ.pulseCenter, [circ], colors.center),
+        radius: click(circ.pulseRadius, [circ], colors.radius),
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        circumference: click(circ.pulseCircle, [circ], colors.circle),
+      },
+      setEnterState: () => {
+        circle.setScenario('right');
+        circle._radius.setRotation(0.5);
+        circle._diameter.setRotation(-0.5);
+      },
+      show: [circle._line, circle._center, circle._radius, circle._diameter],
+      setSteadyState: () => {
+        circ._dEquation.showForm('diameter');
+        circ._dEquation.setScenario('left');
+        circ._cEquation.showForm('diameter');
+        circ._cEquation.setScenario('left');
+        circ._rEquation.showForm('radius');
+        circ._rEquation.setScenario('left');
+      },
+      setLeaveState: () => {},
+    });
   }
 }
 
