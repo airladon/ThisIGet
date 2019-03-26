@@ -151,6 +151,18 @@ export default function lessonLayout() {
     },
     mods: {
       interactiveLocation: new Point(radius * 0.8, 0),
+      scenarios: {
+        diameterLines: {
+          position: new Point(-Math.PI * radius + radius, -radius * 1.1),
+          scale: new Point(0.98, 1),
+          rotation: 0,
+        },
+        center: {
+          position: new Point(0, 0),
+          scale: new Point(1, 1),
+          rotation: 0,
+        },
+      },
     },
   };
 
@@ -306,6 +318,30 @@ export default function lessonLayout() {
     ],
   };
 
+  const diameterLine = index => ({
+    name: `line${index}`,
+    method: 'line',
+    options: {
+      length: radius * 1.98,
+      width,
+      color: colors.diameter,
+      // vertexSpaceStart: 'start',
+      position: new Point(index * radius * 2, 0),
+    },
+  });
+  layout.diameterLines = {
+    name: 'diameterLines',
+    method: 'collection',
+    options: {
+      position: [-radius * Math.PI, -radius * 1.1],
+    },
+    addElements: [
+      diameterLine(0),
+      diameterLine(1),
+      diameterLine(2),
+    ],
+  };
+
   layout.scalingCircle = joinObjects({}, layout.circleLine, {
     name: 'scale',
     options: {
@@ -403,6 +439,7 @@ export default function lessonLayout() {
     layout.circumferenceText,
     layout.radiusText,
     layout.diameterText,
+    layout.diameterLines,
   ];
 
   return layout;

@@ -17672,6 +17672,13 @@ function (_DiagramElementCollec) {
   _createClass(DiagramObjectLine, [{
     key: "pulseWidth",
     value: function pulseWidth() {
+      var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        line: 3,
+        label: 1.5,
+        arrow: 2
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])(defaultOptions, optionsIn);
       var line = this._line;
 
       if (line != null) {
@@ -17690,24 +17697,24 @@ function (_DiagramElementCollec) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
-        line.pulseScaleNow(1, 3);
+        line.pulseScaleNow(1, options.line);
       }
 
       var arrow1 = this._arrow1;
       var arrow2 = this._arrow2;
 
       if (arrow1 != null) {
-        arrow1.pulseScaleNow(1, 2);
+        arrow1.pulseScaleNow(1, options.arrow);
       }
 
       if (arrow2 != null) {
-        arrow2.pulseScaleNow(1, 2);
+        arrow2.pulseScaleNow(1, options.arrow);
       }
 
       var label = this._label;
 
       if (label != null) {
-        label.pulseScaleNow(1, 1.5);
+        label.pulseScaleNow(1, options.label);
       }
 
       this.animateNextFrame();

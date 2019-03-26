@@ -48,6 +48,12 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     _radius: DiagramElementPrimative;
   } & DiagramEquation;
 
+  _diameterLines: {
+    _line0: DiagramObjectLine;
+    _line1: DiagramObjectLine;
+    _line2: DiagramObjectLine;
+  } & DiagramCollection;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -65,7 +71,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.straightening = true;
     this._circle._scale.move.element = this._circle;
     this._circle._translate.move.element = this._circle;
-    this._circumferenceText.onClick = this.straightenCircumference.bind(this);
+    this._circumferenceText.onClick = this.straightenCircumference.bind(this, 4);
     this._locationText.onClick = this.pulseCenter.bind(this);
     this._radiusText.onClick = this.pulseRadius.bind(this);
     this._diameterText.onClick = this.pulseDiameter.bind(this);
@@ -238,6 +244,14 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseBendLine() {
+    this._circle._circumference._rightLine.pulseWidth({ line: 2.3 });
+    this._circle._circumference._rightArc.pulseThickNow(1, 1.04, 5);
+    this._circle._circumference._leftLine.pulseWidth({ line: 2.3 });
+    this._circle._circumference._leftArc.pulseThickNow(1, 1.04, 5);
+    this.diagram.animateNextFrame();
+  }
+
   pushCircle() {
     let t = this._circle.transform.t();
     if (t === null || t === undefined) {
@@ -368,14 +382,14 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     );
   }
 
-  straightenCircumference() {
+  straightenCircumference(duration: number = 4) {
     this._circle._circumference.stop(true, false);
     if (this.straightening || this.percentStraight === 1) {
       this.straightening = false;
       this._circle._circumference.animations.new()
         .custom({
           callback: this.bend.bind(this),
-          duration: 4,
+          duration,
           startPercent: 1 - this.percentStraight,
         })
         .start();
@@ -384,7 +398,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       this._circle._circumference.animations.new()
         .custom({
           callback: this.straighten.bind(this),
-          duration: 4,
+          duration,
           startPercent: this.percentStraight,
         })
         .start();
@@ -424,6 +438,32 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     } else if (whenFinished != null) {
       whenFinished();
     }
+    this.diagram.animateNextFrame();
+  }
+
+  diameterToCicumferenceComparison() {
+    this.stop(true, true);
+    this._diameterLines.hideAll();
+    // this._circle.stop(true, false);
+    this.straighten(0);
+    this.straightening = false;
+    this.diameterLinesAppear();
+    this.straightenCircumference(2);
+  }
+
+  diameterLinesAppear() {
+    const lines = this._diameterLines;
+    // this._circle._diameter.animations.new()
+    //   .position({ target: new Point(-1, -1), duration: 1 })
+    //   .start();
+    this._circle._diameter.setScenario('center');
+    this.animations.new()
+      .delay(2)
+      .scenario({ element: this._circle._diameter, target: 'diameterLines', duration: 1 })
+      // .dissolveIn({ element: lines._line0, duration: 0.5 })
+      .dissolveIn({ element: lines._line1, duration: 0.5 })
+      .dissolveIn({ element: lines._line2, duration: 0.5 })
+      .start();
     this.diagram.animateNextFrame();
   }
 }

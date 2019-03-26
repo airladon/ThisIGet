@@ -51,6 +51,7 @@ class Content extends PresentationLessonContent {
       //       <li></li>
       //     </ul>
       // `,
+      transitionFromPrev: () => {},
       infoModifiers: {},
       interactiveElements: [
         // interactiveItem(quiz._check),
@@ -153,7 +154,7 @@ class Content extends PresentationLessonContent {
         `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition')}`,
       ],
       modifiers: {
-        straightened: click(circ.straightenCircumference, [circ], colors.circle),
+        straightened: click(circ.straightenCircumference, [circ, 4], colors.circle),
         // circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
       show: [
@@ -166,7 +167,7 @@ class Content extends PresentationLessonContent {
         circ.straighten(0);
         circ.straightening = false;
         circle._line.setColor(colors.grid);
-        circ._activator.onClick = circ.straightenCircumference.bind(circ);
+        circ._activator.onClick = circ.straightenCircumference.bind(circ, 4);
         circ._circle.setScenario('center');
       },
       setLeaveState: () => {
@@ -293,10 +294,12 @@ class Content extends PresentationLessonContent {
         circle._scale.isTouchable = true;
         circ._locationText.setScenario('summary');
         circ._circumferenceText.setScenario('summary');
+        circ._radiusText.setScenario('summary');
         circle._line.setColor(colors.grid);
       },
       setSteadyState: () => {
         circ.setDiameterAndRadiusRotation();
+        circ.updateCircleLocation();
       },
       setLeaveState: () => {
         circle.setScale(1);
@@ -366,6 +369,43 @@ class Content extends PresentationLessonContent {
         circ._dEquation.showForm('diameter');
         circ._dEquation.setScenario('centerTop');
         circ.setDiameterAndRadiusRotation();
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|Diameter| and |circumference| are also related.',
+      ],
+      modifiers: {
+        Diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        circumference: click(circ.pulseCircle, [circ], colors.circle),
+      },
+      show: [
+        circle._line, circle._center, circle._diameter,
+      ],
+    });
+    this.addSection(common, {
+      setContent: [
+        'Thousands of years ago, it was realized that the |circumference| is a little over |three| times the |diameter|.',
+      ],
+      modifiers: {
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
+        circumference: click(circ.pulseBendLine, [circ], colors.circle),
+        three: click(circ.diameterToCicumferenceComparison, [circ], colors.diagram.action),
+      },
+      show: [
+        circle._line, circle._center, circle._diameter, circle._circumference,
+      ],
+      setEnterState: () => {
+        circ.straighten(0);
+        circle._line.setColor(colors.grid);
+        circle._diameter.isTouchable = false;
+        circ.diameterToCicumferenceComparison();
+      },
+      setLeaveState: () => {
+        circle._line.setColor(colors.circle);
+        circle._diameter.setScenario('center');
+        circle._diameter.isTouchable = true;
       },
     });
   }
