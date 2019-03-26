@@ -186,6 +186,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       this._circle._line1.stop(true, false);
       this._circle._angle.pulseScaleNow(1, 1.3);
       this.diagram.animateNextFrame();
+      if (whenFinished != null) {
+        whenFinished();
+      }
       return;
     }
     if (toAngle == null) {
@@ -236,6 +239,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         target = Math.PI * 2 - 1;
         direction = -1;
       } else {
+        whenFinished();
         return;
       }
     }

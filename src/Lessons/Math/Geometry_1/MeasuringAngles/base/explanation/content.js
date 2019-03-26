@@ -496,6 +496,9 @@ class Content extends PresentationLessonContent {
         circle._line1, circle._line2, circle._angleText,
         // equation,
       ],
+      // transitionFromAny: (done) => {
+      //   diag.setLineRotation(null, true, done);
+      // },
     };
     const setup = () => {
       circle.setScenario('center');
