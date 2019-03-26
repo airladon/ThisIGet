@@ -48,6 +48,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     _radius: DiagramElementPrimative;
   } & DiagramEquation;
 
+  _cEquation: {
+    _diameter: DiagramElementPrimative;
+    _equals: DiagramElementPrimative;
+    _pi: DiagramElementPrimative;
+    _circumference: DiagramElementPrimative;
+  } & DiagramEquation;
+
   _diameterLines: {
     _line0: DiagramObjectLine;
     _line1: DiagramObjectLine;
@@ -81,6 +88,11 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._dEquation._radius.onClick = this.pulseRadius.bind(this);
     this._dEquation._diameter.makeTouchable();
     this._dEquation._diameter.onClick = this.pulseDiameter.bind(this);
+
+    this._cEquation._circumference.makeTouchable();
+    this._cEquation._circumference.onClick = this.pulseCircle.bind(this);
+    this._cEquation._diameter.makeTouchable();
+    this._cEquation._diameter.onClick = this.pulseDiameter.bind(this);
   }
 
   updateArc() {

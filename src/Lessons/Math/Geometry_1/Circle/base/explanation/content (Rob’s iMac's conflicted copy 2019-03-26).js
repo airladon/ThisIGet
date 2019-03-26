@@ -425,12 +425,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'So now, we know the relationship between |diameter| and |cicumference| is:',
+        'So now, we know the relationship between diameter and cicumference is:',
       ],
-      modifiers: {
-        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
-        cicumference: click(circ.pulseCircle, [circ], colors.circle),
-      },
       show: [
         circle._line, circle._center, circle._diameter,
       ],

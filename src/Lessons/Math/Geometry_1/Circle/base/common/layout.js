@@ -405,10 +405,11 @@ export default function lessonLayout() {
       scale: 1.3,
       elements: {
         diameter: { text: 'diameter', color: colors.diameter },
-        d: { text: 'd', color: colors.diameter },
+        // d: { text: 'd', color: colors.diameter },
         radius: { text: 'radius', color: colors.radius },
-        r: { text: 'r', color: colors.radius },
+        // r: { text: 'r', color: colors.radius },
         x: `  ${String.fromCharCode(215)}  `,
+        pi: 'π',
         _2: '2 ',
         equals: '  =  ',
         v: { symbol: 'vinculum' },
@@ -425,6 +426,34 @@ export default function lessonLayout() {
     },
   };
 
+  layout.circumferenceEquation = {
+    name: 'cEquation',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1.3,
+      elements: {
+        diameter: { text: 'diameter', color: colors.diameter },
+        radius: { text: 'radius', color: colors.radius },
+        circumference: { text: 'circumference', color: colors.circle },
+        x: `  ${String.fromCharCode(215)}  `,
+        pi: 'π',
+        _2: '2 ',
+        equals: '  =  ',
+      },
+      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      forms: {
+        diameter: ['circumference', 'equals', 'pi', 'x', 'diameter'],
+        radius: ['circumference', 'equals', '_2', 'pi', 'x', 'radius'],
+      },
+    },
+    mods: {
+      scenarios: {
+        centerTop: { position: new Point(0.2, 1.4) },
+      },
+    },
+  };
+
   layout.addCircleElements = [
     activator({
       width: 6,
@@ -435,6 +464,7 @@ export default function lessonLayout() {
     layout.grid,
     layout.circ,
     layout.diameterEquation,
+    layout.circumferenceEquation,
     layout.locationText,
     layout.circumferenceText,
     layout.radiusText,
