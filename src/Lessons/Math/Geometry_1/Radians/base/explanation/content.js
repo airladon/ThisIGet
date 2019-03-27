@@ -111,7 +111,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: centerV([
-        'Now, instead of measuring angle by dividing a full rotation into 360 equal pieces, we can relate it to the |radius| of a circle and |arc length|.',
+        'Now, instead of measuring angle by dividing a full rotation into 360 equal pieces, we can |relate| it to the |radius| of a circle and |arc length|.',
       ]),
     });
 
@@ -145,11 +145,13 @@ class Content extends PresentationLessonContent {
       equal: click(diag.bendRadius, [diag, null], colors.radianLines),
     };
     this.addSection(common, {
-      transitionFromAny: (done) => {
+      transitionFromPrev: (done) => {
         circle._bendLine.showAll();
         diag.bendRadius(done);
       },
       setSteadyState: () => {
+        diag.bend(1);
+        circle._line1.setRotation(1);
         circle.setScenario('center');
         diag.updateAngle();
       },
@@ -173,9 +175,13 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    common.setContent = ['We then use a |radian| as our portions to measure angle.'];
+    common.setContent = ['We then use a |radian| as our |portions| to measure angle.'];
     common.setSteadyState();
     this.addSection(common, {
+      modifiers: {
+        radian: click(diag.goToOneRadian, [diag], colors.angles),
+        portions: click(this.next, [this], colors.radianLines),
+      },
       show: [
         circle._line1, circle._line2, circle._angle,
         circle._arc,
@@ -188,11 +194,54 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      modifiers: {
+        radian: click(diag.goToOneRadian, [diag], colors.angles),
+        portions: click(diag.appearRadianLines, [diag, null], colors.radianLines),
+      },
       show: [
         circle._line1, circle._line2, circle._angle,
         circle._arc,
         circle._radianLines,
-        circle._angleText,
+      ],
+      transitionFromPrev: (done) => {
+        diag.appearRadianLines(done);
+      },
+      setSteadyState: () => {
+        circle.setScenario('center');
+        diag.updateAngle();
+        circle._angleText.showAll();
+        diag.setAngleMarks('radians');
+        circle._angleText.setScenario('bottom');
+        circle._radians.hide();
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|Why do this|? Because from the |radian| definition, we have a relationship between arc |length|, |radius| and |angle|.',
+      ],
+      show: [
+        circle._line1, circle._line2, circle._angle,
+        circle._arc,
+        circle._radianLines,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('center');
+        diag.updateAngle();
+        circle._angleText.showAll();
+        diag.setAngleMarks('radians');
+        circle._angleText.setScenario('bottom');
+        circle._radians.hide();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Lets see the relationship by looking at some examples.',
+      ],
+      show: [
+        circle._arc, circle._radianLines, circle._angle,
+        circle._line1, circle._line2, circle._angleText,
       ],
       setSteadyState: () => {
         circle.setScenario('center');
@@ -200,6 +249,194 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('radians');
         circle._angleText.setScenario('bottom');
         circle._radians.hide();
+      },
+    });
+
+    common = {
+      modifiers: {
+        _1_radian: click(diag.pushLine, [diag, 1, 0, 1, null], colors.angles),
+        _2_radians: click(diag.pushLine, [diag, 2, 0, 1, null], colors.angles),
+        _3_radians: click(diag.pushLine, [diag, 3, 0, 1, null], colors.angles),
+      },
+      show: [
+        circle._arc, circle._radianLines, circle._angle,
+        circle._line1, circle._line2, circle._angleText,
+        // equation,
+      ],
+      // transitionFromAny: (done) => {
+      //   diag.setLineRotation(null, true, done);
+      // },
+    };
+    let setup = () => {
+      circle.setScenario('center');
+      diag.updateAngle();
+      diag.setAngleMarks('radians');
+      circle._angleText.setScenario('bottom');
+      circle._radians.hide();
+      equation.setScenario('top');
+    };
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_1_radian|:',
+      ],
+      setEnterState: () => {
+        equation.setScenario('top');
+      },
+      transitionFromPrev: (done) => {
+        equation.showForm('1rad');
+        diag.setLineRotation(1, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('1rad');
+        diag.setLineRotation(1, false);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_2_radians|:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('2rad');
+        diag.setLineRotation(2, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('2rad');
+        diag.setLineRotation(2, false);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'At an angle of |_3_radians|:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('3rad');
+        diag.setLineRotation(3, true, done);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('3rad');
+        diag.setLineRotation(3, false);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'So we can generalize:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('3rad');
+        equation.animateToForm('3rad1', 2, 0, done);
+        diag.setLineRotation(3, true);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('3rad1');
+        diag.setLineRotation(3, false);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'So we can generalize:',
+      ],
+      transitionFromPrev: (done) => {
+        equation.showForm('3rad1');
+        equation.animateToForm('general', 2, 0, done);
+        diag.setLineRotation(3, true);
+      },
+      setSteadyState: () => {
+        setup();
+        equation.showForm('general');
+        diag.setLineRotation(3, false);
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'This relationship only holds when |angle| is in |radians|, and can be used to calculate |any| of the properties.',
+      ],
+      modifiers: {
+        angle: highlight(colors.angles),
+        any: click(diag.cycleEquation, [diag], colors.lines),
+      },
+      blankTransition: { fromPrev: true },
+      transitionFromPrev: (done) => {
+        equation.showForm('general');
+        equation.animateToForm('general', 2, 0, done);
+        diag.setLineRotation(3, true);
+        equation.animations.new()
+          .scenario({ target: 'center', duration: 2 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        equation.setScenario('center');
+        equation.showForm('arc');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Now, we also know that a circle has a |circumference| of |2π radius lengths|.',
+      ],
+      modifiers: {
+        circumference: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
+      },
+      setSteadyState: () => {
+        diag._arcEqnEqn.setScenario('center');
+        diag._arcEqnEqn.showForm('0');
+        diag._arcEqnEqn.isTouchable = false;
+      },
+    });
+
+    // this.addSection({
+    //   setContent: [
+    //     'Now, we also know that a circle has a |circumference| of |2π radius lengths|.',
+    //   ],
+    //   modifiers: {
+    //     circumference: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
+    //   },
+    //   setSteadyState: () => {
+    //     equation.setScenario('center');
+    //     equation.showForm('arc');
+    //     // diag._circumferenceEqn.setScenario('center');
+    //     // diag._circumferenceEqn.showForm('0');
+    //   },
+    // });
+
+    this.addSection({
+      setContent: [
+        'So when |arc_length| equals the |circumference|, then |angle| must be |_2pi|.',
+      ],
+      modifiers: {
+        circumference: highlight(colors.arc),
+        arc_length: highlight(colors.arc),
+        angle: highlight(colors.angles),
+        _2pi: highlightWord('2π', colors.angles),
+      },
+      setSteadyState: () => {
+        diag._arcEqnEqn.setScenario('center');
+        diag._arcEqnEqn.showForm('0');
+        diag._arcEqnEqn.isTouchable = false;
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'So when |arc_length| equals the |circumference|, then |angle| must be |_2pi|.',
+      ],
+      modifiers: {
+        circumference: highlight(colors.arc),
+        arc_length: highlight(colors.arc),
+        angle: highlight(colors.angles),
+        _2pi: highlightWord('2π', colors.angles),
+      },
+      setSteadyState: () => {
+        diag._arcEqnEqn.setScenario('center');
+        diag._arcEqnEqn.showForm('1');
+        diag._arcEqnEqn.isTouchable = true;
       },
     });
 
@@ -232,9 +469,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: centerV([
-        'More prescisely, the half circle has an angle of |π| radians, and full circle an angle of |2π| radians.',
-        'This is expected as we know the |circumference| is |2π| times the |radius|.',
-        'As each radian covers 1 radius length on the arc, then if we know the arc has 2π radius lengths (circumference), then the angle must be the same number.',
+        'More prescisely, the half circle has an angle of |π radians|, and full circle an angle of |2π radians|.',
       ]),
       modifiers: {
         circumference: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
@@ -243,11 +478,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: centerV([
-        'Saying there are |3.14| radians in half a circle is a |rough approximation|.',
-        'Actually, the digits after the 3 go on forever.',
-        'A more accurate |approximation| is |3.141593...|',
-        'An even more accurate |approximation| is |3.14159265359...|',
+        'This aligns with the |relationship| between |circumference| and |radius|.',
+        'As the |circumference length is 2π radius lengths|, and we know that each radian covers a radius length of the arc, then if follows ',
+        'As each radian covers a radius length on the arc, then if we know the arc has 2π radius lengths (circumference), then the angle must be the same number.',
       ]),
+      modifiers: {
+        relationship: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
+      },
     });
 
     this.addSection({
@@ -312,7 +549,7 @@ class Content extends PresentationLessonContent {
       //   diag.setLineRotation(null, true, done);
       // },
     };
-    const setup = () => {
+    setup = () => {
       circle.setScenario('center');
       diag.updateAngle();
       diag.setAngleMarks('radians');

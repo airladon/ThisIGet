@@ -4815,10 +4815,18 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
 
         if (elementModsToUse != null && elementModsToUse !== {}) {
           element.setProperties(elementModsToUse);
+
+          if (methodPath.slice(-1)[0] === 'addNavigator') {
+            element.eqn.setProperties(elementModsToUse);
+          }
         }
 
         if (firstScenario != null && firstScenario in element.scenarios) {
           element.setScenario(firstScenario);
+
+          if (methodPath.slice(-1)[0] === 'addNavigator') {
+            element.eqn.setScenario(firstScenario);
+          }
         }
       } else {
         var _element;
@@ -30347,6 +30355,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
+
 
 
 function convertTextArrayToParagraphs(text) {
@@ -30574,7 +30584,7 @@ function clickWord(textToUse, id, actionMethod, bind) {
 function click(actionMethod, bind) {
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();
   var classStr = 'action_word';
 
   if (interactive) {
@@ -30606,7 +30616,7 @@ function click(actionMethod, bind) {
 }
 
 function actionWord(text) {
-  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"];
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var classStr = 'action_word';

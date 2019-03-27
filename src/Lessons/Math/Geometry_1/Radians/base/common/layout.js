@@ -316,16 +316,127 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        lowerLeft: { position: new Point(-1, -1) },
-        top: { position: new Point(0, 1.3) },
-        center: { position: new Point(0 ,0) },
+        lowerLeft: { position: new Point(-1, -1), scale: 1 },
+        top: { position: new Point(0, 1.3), scale: 1 },
+        center: { position: new Point(0 ,0), scale: 1.3 },
       },
     },
     scenario: 'lowerLeft',
   };
+
+  layout.circumferenceEqn = {
+    name: 'circumferenceEqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        radius: { text: 'radius', color: colors.lines },
+        circumference: { text: 'circumference', color: colors.arc },
+        x: `  ${String.fromCharCode(215)}  `,
+        _2pi: { text: '2π', color: colors.angles },
+        equals: '  =  ',
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'right',
+        alignV: 'top',
+      },
+      forms: {
+        '0': ['circumference', 'equals', '_2pi', 'x', 'radius'],
+      },
+    },
+    mods: {
+      scenarios: {
+        center: { position: new Point(0 ,0.6), scale: 1.3 },
+      },
+    },
+  };
+
+  layout.arcEqn = {
+    name: 'arcEqn',
+    method: 'addNavigator',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        radius: { text: 'radius', color: colors.lines },
+        arc: { text: 'arc length', color: colors.arc },
+        circumference: { text: 'of circumference', color: colors.arc },
+        x: `  ${String.fromCharCode(215)}  `,
+        _2pi: { text: '2π', color: colors.angles },
+        angle: { text: 'angle', color: colors.angles },
+        equals: '  =  ',
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'right',
+        alignV: 'top',
+      },
+      forms: {
+        '0': ['arc', 'equals', 'angle', 'x', 'radius'],
+        '1': [
+          {
+            annotate: {
+              content: 'arc',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'circumference',
+                  relativeToContent: ['center', 'bottom'],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+          'equals',
+          {
+            annotate: {
+              content: 'angle',
+              withAnnotations: {
+                annotation: {
+                  annotation: '_2pi',
+                  relativeToContent: ['center', 1.5],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.6,
+                },
+              },
+            },
+          },
+          'x', 'radius',
+        ],
+        '2': [
+          {
+            annotate: {
+              content: 'arc',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'circumference',
+                  relativeToContent: ['center', 'bottom'],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+          'equals', '_2pi', 'x', 'radius',
+        ],
+      },
+      formSeries: ['0', '1', '2'],
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0 ,0), scale: 1.3 },
+      },
+    },
+  };
+
   layout.addElements = [
     layout.circle,
     layout.equation,
+    layout.circumferenceEqn,
+    layout.arcEqn,
   ];
   return layout;
 }

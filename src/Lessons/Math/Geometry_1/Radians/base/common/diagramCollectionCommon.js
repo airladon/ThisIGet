@@ -184,6 +184,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     bendLine.animations.new()
       .transform({ target, duration: 1 })
       .custom({ callback: this.bend.bind(this), duration: 1 })
+      .rotation({
+        element: this._circle._line1, target: 1, duration: 1, direction: 2,
+      })
       .whenFinished(finished)
       .start();
     this.diagram.animateNextFrame();
@@ -196,6 +199,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       this.pushLine(1, 0, 1);
     }
+    this.diagram.animateNextFrame();
+  }
+
+  appearRadianLines(done: ?() => void = null) {
+    const lines = this._circle._radianLines;
+    lines._line1.hide();
+    lines._line2.hide();
+    lines._line3.hide();
+    lines._line4.hide();
+    lines._line5.hide();
+    lines.stop(true, true);
+    lines.animations.new()
+      .dissolveIn({ element: lines._line1, duration: 0.5 })
+      .dissolveIn({ element: lines._line2, duration: 0.5 })
+      .dissolveIn({ element: lines._line3, duration: 0.5 })
+      .dissolveIn({ element: lines._line4, duration: 0.5 })
+      .dissolveIn({ element: lines._line5, duration: 0.5 })
+      .whenFinished(done)
+      .start();
     this.diagram.animateNextFrame();
   }
 
