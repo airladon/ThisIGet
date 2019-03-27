@@ -97,12 +97,12 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._line, circle._center, circle._radius, circle._diameter],
       setSteadyState: () => {
-        circ._dEquation.showForm('diameter');
-        circ._dEquation.setScenario('left');
-        circ._cEquation.showForm('diameter');
-        circ._cEquation.setScenario('left');
-        circ._rEquation.showForm('radius');
-        circ._rEquation.setScenario('left');
+        circ._eqnDiameterRadius.showForm('base');
+        circ._eqnDiameterRadius.setScenario('left');
+        circ._eqnCircumferenceDiameter.showForm('base');
+        circ._eqnCircumferenceDiameter.setScenario('left');
+        circ._eqnCircumferenceRadius.showForm('radius');
+        circ._eqnCircumferenceRadius.setScenario('left');
       },
       setLeaveState: () => {},
     });

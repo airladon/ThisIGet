@@ -321,8 +321,8 @@ class Content extends PresentationLessonContent {
         circle._line, circle._radius, circle._center, circle._diameter,
       ],
       setSteadyState: () => {
-        circ._dEquation.showForm('diameter');
-        circ._dEquation.setScenario('centerTop');
+        circ._eqnDiameterRadius.showForm('base');
+        circ._eqnDiameterRadius.setScenario('centerTop');
         circ.setDiameterAndRadiusRotation();
       },
     });
@@ -393,8 +393,8 @@ class Content extends PresentationLessonContent {
         circle._line, circle._center, circle._diameter,
       ],
       setSteadyState: () => {
-        circ._cEquation.showForm('diameter');
-        circ._cEquation.setScenario('centerTop');
+        circ._eqnCircumferenceDiameter.showForm('base');
+        circ._eqnCircumferenceDiameter.setScenario('centerTop');
       },
     });
 
@@ -404,25 +404,25 @@ class Content extends PresentationLessonContent {
         style({ top: 30 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
       ],
       setEnterState: () => {
-        circ._cEquation._circumference.isTouchable = false;
-        circ._cEquation._diameter.isTouchable = false;
-        circ._dEquation._diameter.isTouchable = false;
-        circ._dEquation._radius.isTouchable = false;
+        circ._eqnCircumferenceDiameter._circumference.isTouchable = false;
+        circ._eqnCircumferenceDiameter._diameter.isTouchable = false;
+        circ._eqnDiameterRadius._diameter.isTouchable = false;
+        circ._eqnDiameterRadius._radius.isTouchable = false;
       },
       setSteadyState: () => {
-        circ._dEquation.showForm('diameter');
-        circ._dEquation.setScenario('centerTop');
-        circ._cEquation.showForm('diameter');
-        circ._cEquation.setScenario('centerMid');
+        circ._eqnDiameterRadius.showForm('base');
+        circ._eqnDiameterRadius.setScenario('centerTop');
+        circ._eqnCircumferenceDiameter.showForm('base');
+        circ._eqnCircumferenceDiameter.setScenario('centerMid');
         // circ._allEquationNav.setScenario('bottom');
         circ._allEquationEqn.showForm('4');
         circ._allEquationEqn.setPosition(0, -1);
       },
       setLeaverState: () => {
-        circ._cEquation._circumference.isTouchable = true;
-        circ._cEquation._diameter.isTouchable = true;
-        circ._dEquation._diameter.isTouchable = true;
-        circ._dEquation._radius.isTouchable = true;
+        circ._eqnCircumferenceDiameter._circumference.isTouchable = true;
+        circ._eqnCircumferenceDiameter._diameter.isTouchable = true;
+        circ._eqnDiameterRadius._diameter.isTouchable = true;
+        circ._eqnDiameterRadius._radius.isTouchable = true;
       },
     });
 

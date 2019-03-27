@@ -398,66 +398,144 @@ export default function lessonLayout() {
     ],
   };
 
-  layout.diameterEquation = {
-    name: 'dEquation',
-    method: 'addEquation',
-    options: {
-      color: colors.diagram.text.base,
-      scale: 1.3,
-      elements: {
-        diameter: { text: 'diameter', color: colors.diameter },
-        // d: { text: 'd', color: colors.diameter },
-        radius: { text: 'radius', color: colors.radius },
-        // r: { text: 'r', color: colors.radius },
-        x: `  ${String.fromCharCode(215)}  `,
-        pi: 'π',
-        _2: '2 ',
-        equals: '  =  ',
-        v: { symbol: 'vinculum' },
-      },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
-      forms: {
-        diameter: ['diameter', 'equals', '_2', 'x', 'radius'],
-        short: ['diameter', 'equals', '_2', 'radius'],
-      },
-    },
-    mods: {
-      scenarios: {
-        centerTop: { position: new Point(0.2, 1.5) },
-        left: { position: new Point(-1, 0.5), scale: 0.8 },
-      },
-    },
+  const elements = {
+    diameter: { text: 'diameter', color: colors.diameter },
+    radius: { text: 'radius', color: colors.radius },
+    circumference: { text: 'circumference', color: colors.circle },
+    x: `  ${String.fromCharCode(215)}  `,
+    pi: 'π',
+    _2: '2',
+    equals: '  =  ',
+    v: { symbol: 'vinculum' },
+  };
+  const defaultFormAlignment = {
+    fixTo: 'equals',
+    alignH: 'right',
+    alignV: 'top',
   };
 
-  layout.circumferenceEquation = {
-    name: 'cEquation',
+  const eqn = (name, form, scenariosObject) => ({
+    name,
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
       scale: 1.3,
-      elements: {
-        diameter: { text: 'diameter', color: colors.diameter },
-        radius: { text: 'radius', color: colors.radius },
-        circumference: { text: 'circumference', color: colors.circle },
-        x: `  ${String.fromCharCode(215)}  `,
-        pi: 'π ',
-        _2: '2 ',
-        equals: '  =  ',
-      },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      elements,
+      defaultFormAlignment,
       forms: {
-        diameter: ['circumference', 'equals', 'pi', 'x', 'diameter'],
-        short: ['circumference', 'equals', 'pi', 'diameter'],
+        base: form,
       },
     },
     mods: {
-      scenarios: {
-        centerTop: { position: new Point(0.2, 1.4) },
-        centerMid: { position: new Point(0.2, 1) },
-        left: { position: new Point(-1, 0), scale: 0.8 },
-      },
+      scenarios: scenariosObject,
     },
-  };
+  });
+
+  layout.diameterRadiusEquation = eqn(
+    'eqnDiameterRadius',
+    ['diameter', 'equals', '_2', 'x', 'radius'],
+    {
+      centerTop: { position: new Point(0.2, 1.5) },
+      left: { position: new Point(-1, 0.5), scale: 0.8 },
+      qr: { position: new Point(-0.2, -1.2), scale: 0.5 },
+    },
+  );
+
+  layout.diameterCircumferenceEquation = eqn(
+    'eqnDiameterCircumference',
+    ['diameter', 'equals', { frac: ['circumference', 'pi', 'v'] }],
+    {
+      qr: { position: new Point(-0.2, -1.5), scale: 0.5 },
+    },
+  );
+
+  layout.circumferenceDiameterEquation = eqn(
+    'eqnCircumferenceDiameter',
+    ['circumference', 'equals', 'pi', 'x', 'diameter'],
+    {
+      centerTop: { position: new Point(0.2, 1.4) },
+      centerMid: { position: new Point(0.2, 1) },
+      left: { position: new Point(-1, 0), scale: 0.8 },
+      qr: { position: new Point(0.1, -1.2), scale: 0.5 },
+    },
+  );
+
+  layout.circumferenceRadiusEquation = eqn(
+    'eqnCircumferenceRadius',
+    ['circumference', 'equals', '_2', ' ', 'pi', 'x', 'radius'],
+    {
+      centerTop: { position: new Point(0.2, 1.4) },
+      centerMid: { position: new Point(0.2, 1) },
+      left: { position: new Point(-1, -0.5), scale: 0.8 },
+      qr: { position: new Point(0.1, -1.5), scale: 0.5 },
+    },
+  );
+
+  layout.radiusDiameterEquation = eqn(
+    'eqnRadiusDiameter',
+    ['radius', 'equals', { frac: ['diameter', '_2', 'v'] }],
+    {
+      qr: { position: new Point(-0.1, -1.2), scale: 0.5 },
+    },
+  );
+
+  layout.radiusCircumferenceEquation = eqn(
+    'eqnRadiusCircumference',
+    ['radius', 'equals', { frac: ['circumference', ['_2', 'pi'], 'v'] }],
+    {
+      qr: { position: new Point(-0.1, -1.5), scale: 0.5 },
+    },
+  );
+
+  // layout.diameterRadiusEquation = {
+  //   name: 'eqnDiameterRadius',
+  //   method: 'addEquation',
+  //   options: {
+  //     color: colors.diagram.text.base,
+  //     scale: 1.3,
+  //     elements,
+  //     defaultFormAlignment,
+  //     forms: {
+  //       diameter: ['diameter', 'equals', '_2', 'x', 'radius'],
+  //     },
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       centerTop: { position: new Point(0.2, 1.5) },
+  //       left: { position: new Point(-1, 0.5), scale: 0.8 },
+  //     },
+  //   },
+  // };
+
+  // layout.circumferenceEquation = {
+  //   name: 'cEquation',
+  //   method: 'addEquation',
+  //   options: {
+  //     color: colors.diagram.text.base,
+  //     scale: 1.3,
+  //     elements: {
+  //       diameter: { text: 'diameter', color: colors.diameter },
+  //       radius: { text: 'radius', color: colors.radius },
+  //       circumference: { text: 'circumference', color: colors.circle },
+  //       x: `  ${String.fromCharCode(215)}  `,
+  //       pi: 'π ',
+  //       _2: '2 ',
+  //       equals: '  =  ',
+  //     },
+  //     defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+  //     forms: {
+  //       diameter: ['circumference', 'equals', 'pi', 'x', 'diameter'],
+  //       short: ['circumference', 'equals', 'pi', 'diameter'],
+  //     },
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       centerTop: { position: new Point(0.2, 1.4) },
+  //       centerMid: { position: new Point(0.2, 1) },
+  //       left: { position: new Point(-1, 0), scale: 0.8 },
+  //     },
+  //   },
+  // };
 
   layout.radiusEquation = {
     name: 'rEquation',
@@ -580,9 +658,12 @@ export default function lessonLayout() {
     }),
     layout.grid,
     layout.circ,
-    layout.diameterEquation,
-    layout.circumferenceEquation,
-    layout.radiusEquation,
+    layout.diameterRadiusEquation,
+    layout.circumferenceDiameterEquation,
+    layout.diameterCircumferenceEquation,
+    layout.circumferenceRadiusEquation,
+    layout.radiusDiameterEquation,
+    layout.radiusCircumferenceEquation,
     layout.allEquation,
     layout.locationText,
     layout.circumferenceText,

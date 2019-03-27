@@ -16,6 +16,17 @@ const {
 const { spaceToSpaceTransform } = Fig.tools.g2;
 const { round } = Fig.tools.math;
 
+type TypeEquationElements = {
+  _diameter: DiagramElementPrimative;
+  _equals: DiagramElementPrimative;
+  __2: DiagramElementPrimative;
+  _radius: DiagramElementPrimative;
+  _pi: DiagramElementPrimative;
+  _circumference: DiagramElementPrimative;
+  _v: DiagramElementPrimative;
+  _equals: DiagramElementPrimative;
+} & DiagramEquation;
+
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   percentStraight: number;
   straightening: boolean;
@@ -41,27 +52,12 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
-  _dEquation: {
-    _diameter: DiagramElementPrimative;
-    _equals: DiagramElementPrimative;
-    __2: DiagramElementPrimative;
-    _radius: DiagramElementPrimative;
-  } & DiagramEquation;
-
-  _cEquation: {
-    _diameter: DiagramElementPrimative;
-    _equals: DiagramElementPrimative;
-    _pi: DiagramElementPrimative;
-    _circumference: DiagramElementPrimative;
-  } & DiagramEquation;
-
-  _rEquation: {
-    _radius: DiagramElementPrimative;
-    _equals: DiagramElementPrimative;
-    _pi: DiagramElementPrimative;
-    __2: DiagramElementPrimative;
-    _circumference: DiagramElementPrimative;
-  } & DiagramEquation;
+  _eqnDiameterRadius: TypeEquationElements;
+  _eqnCircumferenceDiameter: TypeEquationElements;
+  _eqnCircumferenceRadius: TypeEquationElements;
+  _eqnDiameterCircumference: TypeEquationElements;
+  _eqnRadiusDiameter: TypeEquationElements;
+  _eqnRadiusCircumference: TypeEquationElements;
 
   _diameterLines: {
     _line0: DiagramObjectLine;
@@ -92,20 +88,32 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this._diameterText.onClick = this.pulseDiameter.bind(this);
     this.containToGrid = false;
 
-    this._dEquation._radius.makeTouchable();
-    this._dEquation._radius.onClick = this.pulseRadius.bind(this);
-    this._dEquation._diameter.makeTouchable();
-    this._dEquation._diameter.onClick = this.pulseDiameter.bind(this);
+    this._eqnDiameterRadius._radius.makeTouchable();
+    this._eqnDiameterRadius._radius.onClick = this.pulseRadius.bind(this);
+    this._eqnDiameterRadius._diameter.makeTouchable();
+    this._eqnDiameterRadius._diameter.onClick = this.pulseDiameter.bind(this);
+    this._eqnDiameterCircumference._circumference.makeTouchable();
+    this._eqnDiameterCircumference._circumference.onClick = this.pulseCircle.bind(this);
+    this._eqnDiameterCircumference._diameter.makeTouchable();
+    this._eqnDiameterCircumference._diameter.onClick = this.pulseDiameter.bind(this);
 
-    this._cEquation._circumference.makeTouchable();
-    this._cEquation._circumference.onClick = this.pulseCircle.bind(this);
-    this._cEquation._diameter.makeTouchable();
-    this._cEquation._diameter.onClick = this.pulseDiameter.bind(this);
+    this._eqnCircumferenceDiameter._circumference.makeTouchable();
+    this._eqnCircumferenceDiameter._circumference.onClick = this.pulseCircle.bind(this);
+    this._eqnCircumferenceDiameter._diameter.makeTouchable();
+    this._eqnCircumferenceDiameter._diameter.onClick = this.pulseDiameter.bind(this);
+    this._eqnCircumferenceRadius._circumference.makeTouchable();
+    this._eqnCircumferenceRadius._circumference.onClick = this.pulseCircle.bind(this);
+    this._eqnCircumferenceRadius._radius.makeTouchable();
+    this._eqnCircumferenceRadius._radius.onClick = this.pulseRadius.bind(this);
 
-    this._rEquation._circumference.makeTouchable();
-    this._rEquation._circumference.onClick = this.pulseCircle.bind(this);
-    this._rEquation._radius.makeTouchable();
-    this._rEquation._radius.onClick = this.pulseRadius.bind(this);
+    this._eqnRadiusDiameter._diameter.makeTouchable();
+    this._eqnRadiusDiameter._diameter.onClick = this.pulseDiameter.bind(this);
+    this._eqnRadiusDiameter._radius.makeTouchable();
+    this._eqnRadiusDiameter._radius.onClick = this.pulseRadius.bind(this);
+    this._eqnRadiusCircumference._circumference.makeTouchable();
+    this._eqnRadiusCircumference._circumference.onClick = this.pulseCircle.bind(this);
+    this._eqnRadiusCircumference._radius.makeTouchable();
+    this._eqnRadiusCircumference._radius.onClick = this.pulseRadius.bind(this);
   }
 
   updateArc() {
@@ -276,7 +284,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   }
 
   // diameterEquationSimplify() {
-  //   const eqn = this._dEquation;
+  //   const eqn = this._eqnDiameterRadius;
   //   eqn.showForm('diameter');
   //   eqn._d.show();
   //   eqn._r.show();
@@ -288,7 +296,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   // }
 
   // diameterEquationOriginal() {
-  //   const eqn = this._dEquation;
+  //   const eqn = this._eqnDiameterRadius;
   //   eqn.showForm('d');
   //   eqn.stop(true, true);
   //   eqn.animateToForm('diameter');
@@ -296,7 +304,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
   // }
 
   // diameterEquationToggle() {
-  //   const eqn = this._dEquation;
+  //   const eqn = this._eqnDiameterRadius;
   //   const form = eqn.getCurrentForm().name;
   //   if (form === 'diameter') {
   //     this.diameterEquationSimplify();
