@@ -10,6 +10,7 @@ var details = {
     'Radius',
     'Circumference',
     'Circle',
+    'Pi',
   ],
 };
 

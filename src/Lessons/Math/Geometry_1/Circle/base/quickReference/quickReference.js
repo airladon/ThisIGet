@@ -173,6 +173,40 @@ export class QRCircle extends PopupBoxCollection {
   }
 }
 
+export class QRPi extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(diagram, layout, transform, 'collection', CommonCollection);
+    this.hasTouchableElements = true;
+    const modifiers = {
+      diameter: highlight(layout.colors.diameter),
+      circumference: highlight(layout.colors.circle),
+    };
+    this.setTitle('Pi (π)');
+    this.setDescription([
+      'The ratio between the |circumference| and |diameter| of a circle is |π|.',
+      'The symbol |π|, pronounced |pi|, represents an irrational number that is approximately |3.1415926535|.',
+      'In other words, if you multiply the diameter by π, then you get the length of the circumference.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    super.show();
+    const circle = this._collection._circle;
+    circle._diameter.showAll();
+    circle._line.show();
+    // circle._center.show();
+    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.25, 2.5, 2.5));
+  }
+}
+
 function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
@@ -185,6 +219,7 @@ function attachQuickReference1() {
     Radius: QRRadius,
     Circumference: QRCircumference,
     Circle: QRCircle,
+    Pi: QRPi,
   };
 }
 
