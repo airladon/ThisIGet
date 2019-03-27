@@ -68,7 +68,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        '|Angles and circles are closely related|. A circle can be created by rotating a line to |_360|.',
+        '|Angles and circles are closely related| as a circle can be created by rotating a line |_360|.',
       ],
       modifiers: {
         _360: clickWord('360º', 'id_360', diag.showCircle, [diag], colors.arc),
@@ -218,7 +218,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        '|Why do this|? Because when we use |radians|, we have a direct relationship between arc |length|, |radius| and |angle|.',
+        '|Why do this?| Because when we use |radians|, we have a direct relationship between |arc length|, |radius| and |angle|.',
       ],
       show: [
         circle._line1, circle._line2, circle._angle,
@@ -387,13 +387,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'We |know| the |circumference| of a circle has a length of |_2pi| times the |radius|.',
+        'We |know| the |circumference| of a circle is |_2pi| |radius_lengths|.',
       ],
       modifiers: {
         know: click(this.showQR, [this, 'circles', 'Circumference'], colors.diagram.action),
         _2pi: highlightWord('2π', colors.angles),
         circumference: click(diag.pulseArc, [diag], colors.arc),
-        radius: click(diag.pulseRadius, [diag], colors.lines),
+        radius_lengths: click(diag.pulseRadius, [diag], colors.lines),
       },
       show: [
         circle._arc, circle._line1,
@@ -496,12 +496,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'We saw previously that the circle |circumference| is a little larger than |_6_radius_lengths|. This aligns well with |_2pi| which is approximately |6.28|.',
+        'We saw previously that the circle |circumference| is a little larger than |_6_radius_lengths|. This aligns well with the number |_2pi| which is approximately |_6p28|.',
       ],
       modifiers: {
         _6_radius_lengths: click(diag.pulseRadianLines, [diag], colors.radianLines),
         circumference: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.arc),
         _2pi: clickWord('2π', 'id_2pi', this.showQR, [this, 'circles', 'Pi'], colors.angles),
+        _6p28: highlightWord('6.28', colors.angles),
       },
       show: [
         circle._arc, circle._radianLines, circle._angle,
