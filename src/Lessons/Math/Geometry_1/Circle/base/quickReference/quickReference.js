@@ -25,16 +25,20 @@ export class QRDiameter extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      diameter: click(this._collection.pulseDiameter, [this._collection], layout.colors.diameter),
-      diameter_: click(this._collection.pulseDiameter, [this._collection], layout.colors.diameter),
-      center: highlight(layout.colors.center),
-      circumference: highlight(layout.colors.circle),
-      radius: highlight(layout.colors.radius),
+      __diameter__: click(
+        this._collection.pulseDiameter, [this._collection], layout.colors.diameter,
+      ),
+      __diameter___: click(
+        this._collection.pulseDiameter, [this._collection], layout.colors.diameter,
+      ),
+      __center__: highlight(layout.colors.center),
+      __circumference__: highlight(layout.colors.circle),
+      __radius__: highlight(layout.colors.radius),
     };
     this.setTitle('Diameter');
     this.setDescription([
-      'A circle\'s |diameter| is any line that extends the width of the circle while crossing through the |center|.',
-      'The |diameter_| is twice the |radius| and can be multiplied by |π| to get the |circumference| length.',
+      'A circle\'s |__diameter__| is any line that extends the width of the circle while crossing through the |__center__|.',
+      'The |__diameter___| is twice the |__radius__| and can be multiplied by |π| to get the |__circumference__| length.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
@@ -66,17 +70,17 @@ export class QRRadius extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      radius: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
-      radius_: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
-      center: highlight(layout.colors.center),
-      edge: highlight(layout.colors.circle),
-      circumference: highlight(layout.colors.circle),
-      diameter: highlight(layout.colors.diameter),
+      __radius__: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
+      __radius___: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
+      __center__: highlight(layout.colors.center),
+      __edge__: highlight(layout.colors.circle),
+      __circumference__: highlight(layout.colors.circle),
+      __diameter__: highlight(layout.colors.diameter),
     };
     this.setTitle('Radius');
     this.setDescription([
-      'A circle\'s |radius| is any line that extends from the circle |center| to the |edge|.',
-      'The |radius_| is half the |diameter| and can be multiplied by |2π| to get the |circumference| length.',
+      'A circle\'s |__radius__| is any line that extends from the circle |__center__| to the |__edge__|.',
+      'The |__radius___| is half the |__diameter__| and can be multiplied by |2π| to get the |__circumference__| length.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
@@ -108,15 +112,19 @@ export class QRCircumference extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      circumference: click(this._collection.pulseCircle, [this._collection], layout.colors.circle),
-      circumference_: click(this._collection.pulseCircle, [this._collection], layout.colors.circle),
-      radius: highlight(layout.colors.radius),
-      diameter: highlight(layout.colors.diameter),
+      __circumference__: click(
+        this._collection.pulseCircle, [this._collection], layout.colors.circle,
+      ),
+      __circumference___: click(
+        this._collection.pulseCircle, [this._collection], layout.colors.circle,
+      ),
+      __radius__: highlight(layout.colors.radius),
+      __diameter__: highlight(layout.colors.diameter),
     };
     this.setTitle('Circumference');
     this.setDescription([
-      'A circle\'s |circumference| or |perimeter| is the outside edge of the circle.',
-      'The |circumference_| has a ratio with the |diameter| of |π|, and ratio with the |radius| of |2π|.',
+      'A circle\'s |__circumference__| or |perimeter| is the outside edge of the circle.',
+      'The |__circumference___| has a ratio with the |__diameter__| of |π|, and ratio with the |__radius__| of |2π|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
@@ -145,12 +153,12 @@ export class QRCircle extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      center: highlight(layout.colors.center),
-      outside_edge: highlight(layout.colors.circle),
+      __center__: highlight(layout.colors.center),
+      __outside_edge__: highlight(layout.colors.circle),
     };
     this.setTitle('Circle');
     this.setDescription([
-      'A circle is a shape whose |outside_edge| is a constant distance from its |center|.',
+      'A circle is a shape whose |__outside_edge__| is a constant distance from its |__center__|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }

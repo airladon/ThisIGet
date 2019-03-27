@@ -37,9 +37,9 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.loadQRs([
+      'circles',
+    ]);
   }
 
   addSections() {
@@ -227,6 +227,17 @@ class Content extends PresentationLessonContent {
       modifiers: {
         full_circle: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1.5, null], colors.angles),
         half_circle: click(diag.pushLine, [diag, Math.PI, 0, 1.5, null], colors.angles),
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'More prescisely, the half circle has an angle of |π| radians, and full circle an angle of |2π| radians.',
+        'This is expected as we know the |circumference| is |2π| times the |radius|.',
+        'As each radian covers 1 radius length on the arc, then if we know the arc has 2π radius lengths (circumference), then the angle must be the same number.',
+      ]),
+      modifiers: {
+        circumference: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
       },
     });
 
