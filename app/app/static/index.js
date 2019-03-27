@@ -30330,7 +30330,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30354,6 +30354,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickId", function() { return clickId; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 
@@ -30615,8 +30616,22 @@ function click(actionMethod, bind) {
   };
 }
 
+function clickId() {
+  var _id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+  var actionMethod = arguments.length > 1 ? arguments[1] : undefined;
+  var bind = arguments.length > 2 ? arguments[2] : undefined;
+  return {
+    id: function id() {
+      return _id;
+    },
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
 function actionWord(text) {
-  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : _tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"];
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var classStr = 'action_word';
@@ -30712,7 +30727,10 @@ function applyModifiers(text, modifiers) {
   var outText = text;
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
-    outText = modifyText(outText, key, mod);
+
+    if (mod.replacementText != null) {
+      outText = modifyText(outText, key, mod);
+    }
   });
   var r = RegExp(/\|([^|]*)\|/, 'gi');
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));

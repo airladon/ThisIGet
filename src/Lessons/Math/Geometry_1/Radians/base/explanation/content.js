@@ -19,10 +19,13 @@ const {
   highlight,
   actionWord,
   clickWord,
-  onClickId,
+  clickId,
+  // onClickId,
 } = Fig.tools.html;
 
-const { rand } = Fig.tools.math;
+// const { rand } = Fig.tools.math;
+
+const { HTMLEquation } = Fig;
 
 const layout = lessonLayout();
 const { colors } = layout;
@@ -93,7 +96,7 @@ class Content extends PresentationLessonContent {
         `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html('id_lesson__isosceles_definition')}`,
       ],
       modifiers: {
-        less: click(diag.pushLine, [diag, null, 0, 1 , null], colors.arc),
+        less: click(diag.pushLine, [diag, null, 2, 1, null], colors.arc),
         arc: click(diag.pulseArc, [diag], colors.arc),
       },
       show: [
@@ -515,6 +518,74 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('radians');
         circle._angleText.setScenario('bottom');
         circle._radians.hide();
+      },
+    });
+
+    const binder = angle => [diag, angle, 2, 1, null];
+    this.addSection({
+      title: 'Common Angles',
+      setContent: () => {
+        const fraction = (id: string, numerator: string, denominator: string) => {
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation',);
+          eqn.createEq([eqn.frac(numerator, denominator)]);
+          return eqn.render();
+        };
+        const charEqn = (id: string, char: string) => {
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation',);
+          eqn.createEq([char]);
+          return eqn.render();
+        };
+        const _3piOn2 = fraction('id_3pi_2', '3&pi;', '2');
+        const _2piOn3 = fraction('id_2pi_3', '2&pi;', '3');
+        const _piOn2 = fraction('id_pi_2', '&pi;', '2');
+        const _pi = charEqn('id_pi', '&pi;');
+        const _2pi = charEqn('id_2pi', '2&pi;');
+        return `
+          <p>
+            Some common angles in degrees and radians.
+          </p>
+          <table class="lesson__table lesson__common_angles_table">
+            <tr>
+              <td></td><td><div class="lesson__deg_title">degrees</div></td><td><div class="lesson__rad_title">radians</div></td>
+            </tr>
+            <tr>
+              <td>Full circle:</td><td>|_360|</td><td>${_2pi}</td>
+            </tr>
+            <tr>
+              <td>Three quarter circle:</td><td>|_270|</td><td>${_3piOn2}</td>
+            </tr>
+            <tr>
+              <td>Half circle:</td><td>|_180|</td><td>${_pi}</td>
+            </tr>
+            <tr>
+              <td>One third circle:</td><td>|_120|</td><td>${_2piOn3}</td>
+            </tr>
+            <tr>
+              <td>One quarter circle:</td><td>|_90|</td><td>${_piOn2}</td>
+            </tr>
+          </table>
+        `;
+      },
+      modifiers: {
+        _2pi: clickId('id_2pi', diag.pushLine, binder(Math.PI * 1.999)),
+        _pi: clickId('id_pi', diag.pushLine, binder(Math.PI)),
+        _2pi_3: clickId('id_2pi_3', diag.pushLine, binder(Math.PI * 2 / 3)),
+        _3pi_2: clickId('id_3pi_2', diag.pushLine, binder(Math.PI * 3 / 2)),
+        _pi_2: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 2)),
+        // _pi: actionWord('&pi;', 'id_pi', colors.action),
+        _360: click(diag.pushLine, binder(Math.PI * 1.999), colors.marks),
+        _270: click(diag.pushLine, binder(Math.PI * 3 / 2), colors.marks),
+        _180: click(diag.pushLine, binder(Math.PI), colors.marks),
+        _120: click(diag.pushLine, binder(Math.PI * 2 / 3), colors.marks),
+        _90: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
+      },
+      show: [
+        circle._line1, circle._line2, circle._radianLines, circle._angle,
+        circle._degrees,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('right');
+        diag.setAngleMarks('degrees');
       },
     });
   }

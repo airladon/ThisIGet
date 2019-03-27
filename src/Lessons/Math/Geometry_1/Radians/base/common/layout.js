@@ -218,7 +218,7 @@ export default function lessonLayout() {
       scenarios: {
         'center': { position: new Point(0, -0.3) },
         'bottom': { position: new Point(0, -0.4) },
-        'right': { position: new Point(1, -0.3) },
+        'right': { position: new Point(1.5, -0.3) },
         'top': { position: new Point(0, -0.1), scale: 0.8 },
       },
     },
