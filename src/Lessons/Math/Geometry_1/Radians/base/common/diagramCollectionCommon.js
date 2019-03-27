@@ -265,6 +265,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseRadianLines() {
+    this._circle._radianLines._line0.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line1.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line2.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line3.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line4.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line5.pulseThickNow(1, 1.04, 5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseMarks(id: number) {
     const element = this._circle[`_marks${id}`];
     element.pulseScaleNow(1, 1.1);

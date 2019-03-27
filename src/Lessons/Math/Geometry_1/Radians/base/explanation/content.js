@@ -391,20 +391,6 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    // this.addSection({
-    //   setContent: [
-    //     'Now, we also know that a circle has a |circumference| of |2π radius lengths|.',
-    //   ],
-    //   modifiers: {
-    //     circumference: click(this.showQR, [this, 'circles', 'Circumference'], colors.arc),
-    //   },
-    //   setSteadyState: () => {
-    //     equation.setScenario('center');
-    //     equation.showForm('arc');
-    //     // diag._circumferenceEqn.setScenario('center');
-    //     // diag._circumferenceEqn.showForm('0');
-    //   },
-    // });
 
     this.addSection({
       setContent: [
@@ -437,6 +423,32 @@ class Content extends PresentationLessonContent {
         diag._arcEqnEqn.setScenario('center');
         diag._arcEqnEqn.showForm('1');
         diag._arcEqnEqn.isTouchable = true;
+      },
+    });
+
+    this.addSection({
+      setContent: centerVH([
+        'The total angle of a circle is |2π radians|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        '|2π radians| is approximately |6.28 radians| which aligns with how the circle circumference is a little larger than |_6| radius lengths.',
+      ],
+      modifiers: {
+        _6: click(diag.pulseRadianLines, [diag], colors.radianLines),
+      },
+      show: [
+        circle._arc, circle._radianLines, circle._angle,
+        circle._line1, circle._line2, circle._angleText,
+      ],
+      setSteadyState: () => {
+        circle.setScenario('center');
+        diag.updateAngle();
+        diag.setAngleMarks('radians');
+        circle._angleText.setScenario('bottom');
+        circle._radians.hide();
       },
     });
 
