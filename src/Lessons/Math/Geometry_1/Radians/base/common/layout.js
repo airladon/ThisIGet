@@ -104,7 +104,7 @@ export default function lessonLayout() {
     name: `line${round(rotation, 0)}`,
     method: 'polygon',
     options: {
-      width,
+      width: width / 2,
       radius: radius + width,
       sides: 314,
       sidesToDraw: sides,
@@ -136,14 +136,15 @@ export default function lessonLayout() {
         options: {
           length: radius,
           color: colors.radianLines,
-          width,
+          width: width / 2,
+          position: new Point(0, -width / 4),
         },
       },
       {
         name: 'arc',
         method: 'polygon',
         options: {
-          width,
+          width: width / 2,
           radius: radius + width,
           sides: 314 * 4,
           sidesToDraw: 50 * 4,
@@ -216,7 +217,9 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         'center': { position: new Point(0, -0.3) },
+        'bottom': { position: new Point(0, -0.4) },
         'right': { position: new Point(1, -0.3) },
+        'top': { position: new Point(0, -0.1), scale: 0.8 },
       },
     },
     scenario: 'center',
@@ -348,7 +351,8 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: new Point(0 ,0.6), scale: 1.3 },
+        center: { position: new Point(0 , 0), scale: 1.3 },
+        bottom: { position: new Point(0.2 , -1.3), scale: 1 },
       },
     },
   };
@@ -419,7 +423,21 @@ export default function lessonLayout() {
               },
             },
           },
-          'equals', '_2pi', 'x', 'radius',
+          'equals',
+          {
+            annotate: {
+              content: '_2pi',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'angle',
+                  relativeToContent: ['center',-0.3],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+          'x', 'radius',
         ],
       },
       formSeries: ['0', '1', '2'],
@@ -427,7 +445,8 @@ export default function lessonLayout() {
 
     mods: {
       scenarios: {
-        center: { position: new Point(0 ,0), scale: 1.3 },
+        center: { position: new Point(0, 0), scale: 1.3 },
+        bottom: { position: new Point(0.2, -1.7), scale: 0.9 },
       },
     },
   };

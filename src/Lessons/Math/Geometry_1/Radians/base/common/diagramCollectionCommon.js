@@ -66,18 +66,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
 
-    this._equation.__arc.onClick = () => {
-      this._equation.goToForm('arc', 2);
-      this.diagram.animateNextFrame();
-    };
-    this._equation.__radius.onClick = () => {
-      this._equation.goToForm('radius', 2);
-      this.diagram.animateNextFrame();
-    };
-    this._equation.__angle.onClick = () => {
-      this._equation.goToForm('angle', 2);
-      this.diagram.animateNextFrame();
-    };
+    this._equation.__arc.onClick = this.goToArcForm.bind(this);
+    this._equation.__radius.onClick = this.goToRadiusForm.bind(this);
+    this._equation.__angle.onClick = this.goToAngleForm.bind(this);
     this._equation.__arc.makeTouchable();
     this._equation.__radius.makeTouchable();
     this._equation.__angle.makeTouchable();
@@ -97,20 +88,20 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._equation.__3.onClick = this.pushLine.bind(this, 3, 0, 1, null);
     this._equation._radiusLength1.makeTouchable();
     this._equation._radiusLength1.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
       this.diagram.animateNextFrame();
     };
     this._equation._radiusLengths2.makeTouchable();
     this._equation._radiusLengths2.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
+      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
       this.diagram.animateNextFrame();
     };
     this._equation._radiusLengths3.makeTouchable();
     this._equation._radiusLengths3.onClick = () => {
-      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 5);
-      this._circle._radianLines._line2.pulseThickNow(1, 1.03, 5);
+      this._circle._radianLines._line0.pulseThickNow(1, 1.03, 9);
+      this._circle._radianLines._line1.pulseThickNow(1, 1.03, 9);
+      this._circle._radianLines._line2.pulseThickNow(1, 1.03, 9);
       this.diagram.animateNextFrame();
     };
 
@@ -118,6 +109,21 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.marks = 12;
     this._circle._angleText._label.onClick = this.pulseAngle.bind(this);
     this._circle._angleText._label.makeTouchable();
+  }
+
+  goToRadiusForm() {
+    this._equation.goToForm('radius', 2);
+    this.diagram.animateNextFrame();
+  }
+
+  goToArcForm() {
+    this._equation.goToForm('arc', 2);
+    this.diagram.animateNextFrame();
+  }
+
+  goToAngleForm() {
+    this._equation.goToForm('angle', 2);
+    this.diagram.animateNextFrame();
   }
 
   updateAngle() {
@@ -166,7 +172,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       (1 - percent) * radius,
       0,
     );
-    arc.angleToDraw = (percent);
+    arc.angleToDraw = (percent * 0.99);
   }
 
   bendRadius(finished: ?() => void = null) {
@@ -266,12 +272,12 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseRadianLines() {
-    this._circle._radianLines._line0.pulseThickNow(1, 1.04, 5);
-    this._circle._radianLines._line1.pulseThickNow(1, 1.04, 5);
-    this._circle._radianLines._line2.pulseThickNow(1, 1.04, 5);
-    this._circle._radianLines._line3.pulseThickNow(1, 1.04, 5);
-    this._circle._radianLines._line4.pulseThickNow(1, 1.04, 5);
-    this._circle._radianLines._line5.pulseThickNow(1, 1.04, 5);
+    this._circle._radianLines._line0.pulseThickNow(1, 1.04, 9);
+    this._circle._radianLines._line1.pulseThickNow(1, 1.04, 9);
+    this._circle._radianLines._line2.pulseThickNow(1, 1.04, 9);
+    this._circle._radianLines._line3.pulseThickNow(1, 1.04, 9);
+    this._circle._radianLines._line4.pulseThickNow(1, 1.04, 9);
+    this._circle._radianLines._line5.pulseThickNow(1, 1.04, 9);
     this.diagram.animateNextFrame();
   }
 
