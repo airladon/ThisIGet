@@ -144,6 +144,23 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseDegrees() {
+    const element = this._circle._degrees;
+    element.pulseScaleNow(1, 1.1);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLines() {
+    this._circle._line1.pulseWidth();
+    this._circle._line2.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngleText() {
+    this._circle._angleText.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
   setLineRotation(
     r: ?number = null,
     animate: boolean = true,

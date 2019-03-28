@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -16,13 +16,13 @@ const {
   click,
   centerVH, centerV,
   highlightWord,
-  highlight,
-  actionWord,
+  // highlight,
+  // actionWord,
   clickWord,
-  onClickId,
+  // onClickId,
 } = Fig.tools.html;
 
-const { rand } = Fig.tools.math;
+// const { rand } = Fig.tools.math;
 
 const layout = lessonLayout();
 const { colors } = layout;
@@ -45,9 +45,9 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const circle = diag._circle;
-    const equation = diag._equation;
+    // const equation = diag._equation;
 
-    let common = {
+    const common = {
       setContent: [],
       show: [],
       modifiers: {},
@@ -217,7 +217,7 @@ class Content extends PresentationLessonContent {
     const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1, null], colors.angles);
 
     this.addSection(common, {
-      title: 'Examples',
+      title: 'Common Angles',
       setContent: () => `
           <p>This means it's easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.</p>
           <table class="in_lesson__fraction_table">

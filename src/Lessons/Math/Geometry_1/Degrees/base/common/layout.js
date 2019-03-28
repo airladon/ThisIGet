@@ -139,6 +139,7 @@ export default function lessonLayout() {
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
         bottomSlightRight: { position: new Point(0.1, -1.5) },
+        summary: { position: new Point(0.1, 1.7), scale: 1.5 },
       },
     },
   };
@@ -162,6 +163,7 @@ export default function lessonLayout() {
       scenarios: {
         'center': { position: new Point(0, -0.3) },
         'right': { position: new Point(1, -0.3) },
+        'summary': { position: new Point(1.5, -0.3), scale: 0.8 },
       },
     },
     scenario: 'center',
