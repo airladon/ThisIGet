@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,13 +11,15 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   click,
-//   centerV,
-// } = Fig.tools.html;
+const {
+  click,
+  style,
+  centerV,
+  highlight,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,16 +34,28 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements._collection;
+    const circle = diag._circle;
 
     this.addSection({
       title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        centerV([
+          style({ right: 30 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
+          style({ right: 50 }, 'When using radians, angle, arc length and radius are related by:'),
+          style({ right: 35, top: 20 }, 'There are |2π| radians in a circle.'),
+        ]),
+        `${new Definition('Radian', '', ['', 'radius']).html('id_lesson__radian_definition')}`,
       ],
-      modifiers: {},
+      modifiers: {
+        radian: click(diag.bendRadius, [diag, null], colors.angles),
+        arc_length: click(diag.pulseArc, [diag], colors.arc),
+        radius: click(diag.pulseRadius, [diag], colors.lines),
+        angle: click(diag.pulseAngle, [diag], colors.angles),
+        _angle: highlight(colors.angles),
+        _arc_length: highlight(colors.arc),
+        _radius: highlight(colors.lines),
+      },
       // setInfo: `
       //     <ul>
       //       <li></li>
@@ -53,9 +67,17 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      show: [],
+      show: [
+        circle._line1, circle._line2, circle._arc, circle._angle],
       hide: [],
-      setSteadyState: () => {},
+      setSteadyState: () => {
+        circle.setScenario('summary');
+        circle._line1.setRotation(1.3);
+        diag.setAngleMarks('radians');
+        diag.updateAngle();
+        diag._equation.showForm('arc');
+        diag._equation.setScenario('summary');
+      },
       setLeaveState: () => {},
     });
   }
