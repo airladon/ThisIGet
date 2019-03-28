@@ -21,7 +21,7 @@ export default function lessonLayout() {
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
   layout.position = new Point(0, 0);
-  const radius = 1.2;
+  const radius = 1;
   layout.radius = radius;
   const width = 0.03;
   layout.width = width;
@@ -38,9 +38,9 @@ export default function lessonLayout() {
         middleLengthPercent: 0,
       },
       label: {
-        text: null,
+        text: '',
         offset: 0.05,
-        precision: 2,
+        // precision: 2,
         location: 'outside',
         orientation: 'horizontal',
       },
@@ -59,7 +59,7 @@ export default function lessonLayout() {
     options: {
       length: radius,
       width,
-      color: colors.lines,
+      color: colors.marks,
     },
   };
   layout.angle = {
@@ -89,7 +89,7 @@ export default function lessonLayout() {
         radius,
       },
       label: {
-        text: null,
+        text: '',
         radius: radius * 0.9,
       },
       color: colors.arc,
@@ -107,19 +107,30 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, -0.3) },
-        'bottom': { position: new Point(0, -0.4) },
-        'right': { position: new Point(1.5, -0.3) },
-        'top': { position: new Point(0, -0.1), scale: 0.8 },
-        'summary': { position: new Point(1.6, -0.3 ) },
-        'qr': { position: new Point(0, 0 ) },
+        'center': { position: new Point(0, 0) },
       },
     },
     scenario: 'center',
   };
 
+  layout.question = {
+    name: 'question',
+    method: 'text',
+    options: {
+      size: 0.2,
+      style: 'normal',
+      family: 'helvetica',
+      hAlign: 'left',
+      vAlign: 'baseline',
+      text: '',
+      color: colors.diagram.text.base,
+      position: new Point(-2, 1.5),
+    },
+  };
+
   layout.addElements = [
     layout.circle,
+    layout.question,
   ];
   return layout;
 }

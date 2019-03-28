@@ -8,7 +8,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const { Transform, DiagramElementPrimative } = Fig;
 
-const { round } = Fig.tools.math;
+const { removeRandElement, round, rand } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
@@ -19,7 +19,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   futurePositions: Object;
   radius: number;
-  answer: number;
+  angle: number;
+  multiplier: number;
+  unknown: 'arc' | 'radius' | 'angle';
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -38,19 +40,33 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.addElements(this, this.layout.addElements);
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
+    this.multiplier = 1;
+    this.radius = 1;
   }
 
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
-    this.radius = this._circle._line1.currentLength;
     if (this._circle._angle.isShown) {
       this._circle._angle.setAngle({ angle: r });
+      this._circle._angle.update(this._circle.getRotation());
+      // this._circle._angle.label.setText(round(r, 2).toFixed(2));
     }
     if (this._circle._arc.isShown) {
       this._circle._arc.setAngle({ angle: r });
-      this._circle._arc.label.setText(`${round(this.radius * r, 2).toFixed(2)}`);
+      this._circle._arc.label.setText(`${round(this.radius * r * this.multiplier, 2).toFixed(2)}`);
+      this._circle._arc.update(this._circle.getRotation());
     }
-    this._circle._line1.updateLabel();
+    this._circle._line1.label.setText(round(this.radius * this.multiplier, 2).toFixed(2));
+    this._circle._line1.updateLabel(this._circle.getRotation());
+    if (this.unknown === 'radius') {
+      this._circle._line1._label.hide();
+    }
+    if (this.unknown === 'angle') {
+      this._circle._angle._label.hide();
+    }
+    if (this.unknown === 'arc') {
+      this._circle._arc._label.hide();
+    }
   }
 
   tryAgain() {
@@ -59,29 +75,65 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this._input.setValue('');
   }
 
+  goToAngle(angle: number) {
+    this._circle._line1.animations.new()
+      .rotation({ target: angle, duration: 1, direction: 2 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
 
   newProblem() {
     super.newProblem();
-    // this.calculateFuturePositions();
-    // this.moveToFuturePositions(1, this.updateAngles.bind(this));
-    // this._input.enable();
-    // this._input.setValue('');
+
+    const radius = rand(1, 1);
+    const angle = rand(0.5, 5);
+    const multiplier = rand(0.1, 10);
+    // const arc = radius * angle;
+
+    this.multiplier = multiplier;
+    this.radius = radius;
+    this.angle = angle;
+    const adjustableOptions = ['arc', 'angle'];
+    // const properties = ['radius', 'arc', 'angle'];
+    const unknown = removeRandElement(adjustableOptions);
+    const adjustable = removeRandElement(adjustableOptions);
+    this.unknown = unknown;
+
+    // Setup circle
+    const randAngle = rand(0.5, 5);
+    this._circle.setScale(radius);
+    this._circle._line1.setRotation(randAngle);
+    this._circle.setRotation(rand(0, Math.PI * 1.5));
+    this.updateAngle();
+
+    this._circle._line1._label.showAll();
+    this._circle._arc._label.showAll();
+    this._circle._angle._label.showAll();
+    if (unknown === 'radius') {
+      this._circle._line._label.hide();
+      this._question.drawingObject.setText(`Adjust the ${adjustable} to get a radius of ${round(this.radius * this.multiplier, 2).toFixed(2)}`);
+    } else if (unknown === 'angle') {
+      this._circle._angle._label.hide();
+      this._question.drawingObject.setText(`Adjust the ${adjustable} to get an angle of ${round(this.angle, 2).toFixed(2)}`);
+    } else if (unknown === 'arc') {
+      this._circle._arc._label.hide();
+      this._question.drawingObject.setText(`Adjust the ${adjustable} to get an arc length of ${round(this.angle * this.radius * this.multiplier, 2).toFixed(2)}`);
+    }
+
+    this._check.show();
     this.diagram.animateNextFrame();
   }
 
   showAnswer() {
     super.showAnswer();
-    // this._input.setValue(this.answer);
-    // this._input.disable();
+    this.goToAngle(this.angle);
     this.diagram.animateNextFrame();
   }
 
   findAnswer() {
-    // this._input.disable();
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    if (this.answer === true) {
+    const angle = round(this._circle._line1.getRotation(), 2);
+    if (angle > round(this.angle, 2) * 0.99 && angle < round(this.angle, 2) * 1.01
+    ) {
       return 'correct';
     }
     return 'incorrect';

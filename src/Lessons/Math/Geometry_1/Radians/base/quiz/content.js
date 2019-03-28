@@ -36,11 +36,11 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements._quiz;
     const circle = diag._circle;
-    // const quiz = diag._quiz;
+    const quiz = diag;
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      setContent: [''],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -53,10 +53,12 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      show: [circle],
+      show: [circle, quiz._check, quiz._question],
       hide: [],
       setSteadyState: () => {
+        circle.setScenario('center');
         diag.updateAngle();
+        diag.newProblem();
       },
       setLeaveState: () => {},
     });
