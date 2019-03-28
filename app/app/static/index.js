@@ -4196,9 +4196,8 @@ function () {
     key: "resize",
     value: function resize() {
       var skipHTMLTie = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var fromWgere = arguments.length > 1 ? arguments[1] : undefined;
-      var event = arguments.length > 2 ? arguments[2] : undefined;
-      console.log('resize', fromWgere, event); // if (this.elements != null) {
+      // console.log('resize', fromWgere, event)
+      // if (this.elements != null) {
       //   this.elements.updateLimits(this.limits, this.spaceTransforms);
       // }
       // if (this.count == null) {
@@ -4211,7 +4210,6 @@ function () {
       //   console.log('unrender')
       //   this.elements.unrenderAll();
       // }
-
       this.webglLow.resize(); // this.webglHigh.resize();
 
       this.draw2DLow.resize(); // this.draw2DHigh.resize();
@@ -15041,10 +15039,11 @@ function (_EquationLabel) {
 
     var curvePosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.5;
     var showRealAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-    var realAngleDecimals = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-    var autoHide = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : -1;
-    var orientation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'horizontal';
-    var scale = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 0.7;
+    var units = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'degrees';
+    var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
+    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : -1;
+    var orientation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'horizontal';
+    var scale = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 0.7;
 
     _classCallCheck(this, AngleLabel);
 
@@ -15056,8 +15055,9 @@ function (_EquationLabel) {
     _this.radius = radius;
     _this.curvePosition = curvePosition;
     _this.showRealAngle = showRealAngle;
+    _this.units = units;
     _this.orientation = orientation;
-    _this.realAngleDecimals = realAngleDecimals;
+    _this.precision = precision;
     _this.autoHide = autoHide;
     return _this;
   }
@@ -15315,7 +15315,8 @@ function (_DiagramElementCollec) {
         radius: 0.4,
         curvePosition: 0.5,
         showRealAngle: false,
-        realAngleDecimals: 0,
+        units: 'degrees',
+        precision: 0,
         orientation: 'horizontal',
         autoHide: -1,
         textScale: 0.7,
@@ -15334,7 +15335,7 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.realAngleDecimals, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn.collection);
@@ -15632,9 +15633,14 @@ function (_DiagramElementCollec) {
           _label.show();
 
           if (label.showRealAngle) {
-            var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.realAngleDecimals).toString();
+            var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle, label.precision).toFixed(label.precision);
 
-            _label._base.drawingObject.setText("".concat(angleText, "\xBA"));
+            if (label.units === 'degrees') {
+              angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision).toFixed(label.precision);
+              angleText = "".concat(angleText, "\xBA");
+            }
+
+            _label._base.drawingObject.setText("".concat(angleText));
 
             label.eqn.reArrangeCurrentForm();
           }
@@ -17381,6 +17387,7 @@ function (_EquationLabel) {
     var orientation = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'horizontal';
     var linePosition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.5;
     var scale = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0.7;
+    var precision = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 1;
 
     _classCallCheck(this, LineLabel);
 
@@ -17394,6 +17401,7 @@ function (_EquationLabel) {
     _this.subLocation = subLocation;
     _this.orientation = orientation;
     _this.linePosition = linePosition;
+    _this.precision = precision;
     return _this;
   }
 
@@ -17652,7 +17660,8 @@ function (_DiagramElementCollec) {
       orientation: 'horizontal',
       linePosition: 0.5,
       scale: 0.7,
-      color: optionsToUse.color
+      color: optionsToUse.color,
+      precision: 1
     };
 
     if (optionsToUse.label) {
@@ -17663,7 +17672,7 @@ function (_DiagramElementCollec) {
         _this2.showRealLength = true;
       }
 
-      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color);
+      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color, labelOptions.precision);
     }
 
     var defaultMoveOptions = {
@@ -17880,7 +17889,8 @@ function (_DiagramElementCollec) {
       var linePosition = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
       var scale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
       var color = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : this.color;
-      this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale);
+      var precision = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 1;
+      this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale, precision);
 
       if (this.label != null) {
         this.add('label', this.label.eqn.collection);
@@ -17902,7 +17912,7 @@ function (_DiagramElementCollec) {
       var labelAngle = 0;
 
       if (this.showRealLength && this._label) {
-        this._label._base.drawingObject.setText(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.currentLength, 2).toString());
+        this._label._base.drawingObject.setText(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.currentLength, 2).toFixed(label.precision));
 
         label.eqn.reArrangeCurrentForm();
       }

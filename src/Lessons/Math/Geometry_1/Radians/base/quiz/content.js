@@ -34,7 +34,8 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
+    const diag = this.diagram.elements._quiz;
+    const circle = diag._circle;
     // const quiz = diag._quiz;
 
     this.addSection({
@@ -52,9 +53,11 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      show: [],
+      show: [circle],
       hide: [],
-      setSteadyState: () => {},
+      setSteadyState: () => {
+        diag.updateAngle();
+      },
       setLeaveState: () => {},
     });
   }

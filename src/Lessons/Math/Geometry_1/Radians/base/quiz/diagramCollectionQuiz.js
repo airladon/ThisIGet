@@ -8,6 +8,8 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const { Transform, DiagramElementPrimative } = Fig;
 
+const { round } = Fig.tools.math;
+
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
@@ -16,6 +18,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   } & TypeMessages;
 
   futurePositions: Object;
+  radius: number;
+  answer: number;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -31,7 +35,22 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     );
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
-    this.hasTouchableElements = true;
+    this.diagram.addElements(this, this.layout.addElements);
+    this._circle._line1.makeTouchable();
+    this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
+  }
+
+  updateAngle() {
+    const r = this._circle._line1.getRotation('0to360');
+    this.radius = this._circle._line1.currentLength;
+    if (this._circle._angle.isShown) {
+      this._circle._angle.setAngle({ angle: r });
+    }
+    if (this._circle._arc.isShown) {
+      this._circle._arc.setAngle({ angle: r });
+      this._circle._arc.label.setText(`${round(this.radius * r, 2).toFixed(2)}`);
+    }
+    this._circle._line1.updateLabel();
   }
 
   tryAgain() {
