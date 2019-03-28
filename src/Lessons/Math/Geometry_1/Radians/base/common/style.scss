@@ -55,7 +55,7 @@ body {
   background-color: color('black', 'darker');
   color: color('grey', 'light');
   border-spacing: 0;
-  border-radius: 0.7em;
+  border-radius: 0.5em;
   // border-top-left-radius: 1em;
   // border-top-right-radius: 1em;
   // border-bottom-left-radius: 1em;
@@ -71,7 +71,7 @@ body {
   text-align: center;
   background-color: color('black', 'dark');
   height: 2.5em;
-  font-size: 0.8em;
+  font-size: 0.7em;
   // border-top-left-radius: 1em;
   // border-top-right-radius: 1em;
 }
@@ -96,11 +96,11 @@ body {
 }
 
 .lesson__deg_title {
-  border-top-left-radius: 0.7em;
+  border-top-left-radius: 0.5em;
 }
 
 .lesson__rad_title {
-  border-top-right-radius: 0.7em;
+  border-top-right-radius: 0.5em;
 }
 
 #id_2pi_3,
