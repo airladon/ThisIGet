@@ -212,9 +212,9 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    const row = (portion: string, angle: number) => `<tr><td>${portion}</td><td>|_${angle}deg|</td></tr>`;
+    const row = (portion: string, angle: number) => `<tr><td class="lesson__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
 
-    const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1, null], colors.diagram.text.keyword);
+    const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1, null], colors.angles);
 
     this.addSection(common, {
       title: 'Examples',
@@ -222,8 +222,8 @@ class Content extends PresentationLessonContent {
           <p>This means it's easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.</p>
           <table class="in_lesson__fraction_table">
             <tr>
-              <th> Fraction </th>
-              <th> Angle </th>
+              <th class="lesson__fraction_title"> Fraction </th>
+              <th class="lesson__angle_title"> Angle </th>
             </tr>
             ${row(String.fromCharCode(190), 270)}
             ${row(String.fromCharCode(8532), 240)}
@@ -251,14 +251,14 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('degrees');
         circle._angleText.setScenario('bottomSlightRight');
         circle.setScenario('right');
-        const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1, null];
+        // const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1, null];
         // onClickId('id_270', diag.pushLine, bindArray(270));
-        onClickId('id_240', diag.pushLine, bindArray(240));
-        onClickId('id_180', diag.pushLine, bindArray(180));
-        onClickId('id_120', diag.pushLine, bindArray(120));
-        onClickId('id_90', diag.pushLine, bindArray(90));
-        onClickId('id_72', diag.pushLine, bindArray(72));
-        onClickId('id_60', diag.pushLine, bindArray(60));
+        // onClickId('id_240', diag.pushLine, bindArray(240));
+        // onClickId('id_180', diag.pushLine, bindArray(180));
+        // onClickId('id_120', diag.pushLine, bindArray(120));
+        // onClickId('id_90', diag.pushLine, bindArray(90));
+        // onClickId('id_72', diag.pushLine, bindArray(72));
+        // onClickId('id_60', diag.pushLine, bindArray(60));
       },
     });
   }

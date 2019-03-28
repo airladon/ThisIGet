@@ -63,7 +63,7 @@ class Content extends PresentationLessonContent {
     };
 
     this.addSection({
-      title: 'Radians',
+      title: 'Introduction',
       setContent: centerV([
         'The second common way to measure angle is by relating it to the |properties of a circle|.',
       ]),
@@ -113,6 +113,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Radian',
       setContent: centerV([
         'Now, instead of measuring |angle| by dividing a full rotation into 360 equal pieces, we can |relate| it to the |radius| of a circle and |arc length|.',
       ]),
@@ -220,6 +221,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Arc, Angle, Radius Relationship',
       setContent: [
         '|Why do this?| Because when we use |radians|, we have a direct relationship between |arc length|, |radius| and |angle|.',
       ],
@@ -270,7 +272,7 @@ class Content extends PresentationLessonContent {
       //   diag.setLineRotation(null, true, done);
       // },
     };
-    let setup = () => {
+    const setup = () => {
       circle.setScenario('center');
       diag.updateAngle();
       diag.setAngleMarks('radians');
@@ -383,6 +385,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Radians in a Circle',
       setContent: centerVH([
         'So how many radians are there in a |circle|?',
       ]),
