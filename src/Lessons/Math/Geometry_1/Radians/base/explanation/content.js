@@ -526,12 +526,12 @@ class Content extends PresentationLessonContent {
       title: 'Common Angles',
       setContent: () => {
         const fraction = (id: string, numerator: string, denominator: string) => {
-          const eqn = new HTMLEquation(`${id}`, 'radian_equation',);
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation');
           eqn.createEq([eqn.frac(numerator, denominator)]);
           return eqn.render();
         };
         const charEqn = (id: string, char: string) => {
-          const eqn = new HTMLEquation(`${id}`, 'radian_equation',);
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation');
           eqn.createEq([char]);
           return eqn.render();
         };
@@ -546,7 +546,7 @@ class Content extends PresentationLessonContent {
           </p>
           <table id="id_common_angles_table" class="lesson__table lesson__common_angles_table">
             <tr>
-              <td><div class="lesson__deg_title">degrees</div></td><td><div class="lesson__rad_title">radians</div></td>
+              <td><div class="lesson__deg_title">Degrees</div></td><td><div class="lesson__rad_title">Radians</div></td>
             </tr>
             <tr>
               <td>|_360|</td><td>${_2pi}</td>
@@ -572,7 +572,6 @@ class Content extends PresentationLessonContent {
         _2pi_3: clickId('id_2pi_3', diag.pushLine, binder(Math.PI * 2 / 3)),
         _3pi_2: clickId('id_3pi_2', diag.pushLine, binder(Math.PI * 3 / 2)),
         _pi_2: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 2)),
-        // _pi: actionWord('&pi;', 'id_pi', colors.action),
         _360: click(diag.pushLine, binder(Math.PI * 1.999), colors.marks),
         _270: click(diag.pushLine, binder(Math.PI * 3 / 2), colors.marks),
         _180: click(diag.pushLine, binder(Math.PI), colors.marks),

@@ -58,13 +58,14 @@ body {
 }
 
 .lesson__common_angles_table tr {
-  height: calc(var(--lesson__diagram-font-size) * 3);
+  height: calc(var(--lesson__diagram-font-size) * 3.5);
 }
 
 .lesson__common_angles_table tr:first-child {
   width: 50%;
   text-align: center;
   background-color: color('black', 'dark');
+  height: calc(var(--lesson__diagram-font-size) * 2);
 }
 
 .lesson__common_angles_table td {
