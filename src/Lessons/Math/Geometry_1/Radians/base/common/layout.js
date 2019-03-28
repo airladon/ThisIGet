@@ -192,7 +192,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         topLeft: { position: new Point(-1.7, 1.5) },
-        bottomRight: { position: new Point(1.7, -1.3) },
+        bottomRight: { position: new Point(0.2, -1.5) },
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
         bottomSlightRight: { position: new Point(0.1, -1.5) },

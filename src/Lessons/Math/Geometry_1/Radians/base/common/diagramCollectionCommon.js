@@ -116,6 +116,24 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  toggleDegrees() {
+    if (this._circle._degrees.isShown) {
+      this._circle._degrees.hide();
+    } else {
+      this._circle._degrees.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  toggleRadians() {
+    if (this._circle._radianLines.isShown) {
+      this._circle._radianLines.hide();
+    } else {
+      this._circle._radianLines.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
+
   goToArcForm() {
     this._equation.goToForm('arc', 2);
     this.diagram.animateNextFrame();
@@ -254,6 +272,21 @@ export default class CommonCollection extends CommonDiagramCollection {
       .whenFinished(whenFinished)
       .start();
     this.diagram.animateNextFrame();
+  }
+
+  pushLineRad(toAngle: number) {
+    this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    this.updateAngle();
+    this.pushLine(toAngle, 2, 1, null);
+    // this.setAngleMarks('radians');
+  }
+
+  pushLineDeg(toAngle: number) {
+    this.setAngleTextProperties(360, 0, 'º');
+    this.updateAngle();
+    this.pushLine(toAngle, 2, 1, null);
+    // this.setAngleMarks('degrees');
+    
   }
 
   pulseAngle() {

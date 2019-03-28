@@ -521,7 +521,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    const binder = angle => [diag, angle, 2, 1, null];
+    // const binder = angle => [diag, angle, 2, 1, null];
     this.addSection({
       title: 'Common Angles',
       setContent: () => {
@@ -544,7 +544,7 @@ class Content extends PresentationLessonContent {
         const _2pi = charEqn('id_2pi', '2&pi;');
         return `
           <p>
-            Some common angles in degrees and radians.
+            Some common angles in |degrees| and |radians|.
           </p>
           <table id="id_common_angles_table" class="lesson__table lesson__common_angles_table">
             <tr>
@@ -575,28 +575,31 @@ class Content extends PresentationLessonContent {
         `;
       },
       modifiers: {
-        _2pi: clickId('id_2pi', diag.pushLine, binder(Math.PI * 1.999)),
-        _pi: clickId('id_pi', diag.pushLine, binder(Math.PI)),
-        _2pi_3: clickId('id_2pi_3', diag.pushLine, binder(Math.PI * 2 / 3)),
-        _3pi_2: clickId('id_3pi_2', diag.pushLine, binder(Math.PI * 3 / 2)),
-        _pi_2: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 2)),
-        _pi_3: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 3)),
-        _pi_6: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 6)),
-        _360: click(diag.pushLine, binder(Math.PI * 1.999), colors.marks),
-        _270: click(diag.pushLine, binder(Math.PI * 3 / 2), colors.marks),
-        _180: click(diag.pushLine, binder(Math.PI), colors.marks),
-        _120: click(diag.pushLine, binder(Math.PI * 2 / 3), colors.marks),
-        _90: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
-        _60: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
-        _30: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
+        degrees: click(diag.toggleDegrees, [diag], colors.marks),
+        radians: click(diag.toggleRadians, [diag], colors.radianLines),
+        _2pi: clickId('id_2pi', diag.pushLineRad, [diag, Math.PI * 1.999]),
+        _pi: clickId('id_pi', diag.pushLineRad, [diag, Math.PI]),
+        _2pi_3: clickId('id_2pi_3', diag.pushLineRad, [diag, Math.PI * 2 / 3]),
+        _3pi_2: clickId('id_3pi_2', diag.pushLineRad, [diag, Math.PI * 3 / 2]),
+        _pi_2: clickId('id_pi_2', diag.pushLineRad, [diag, Math.PI / 2]),
+        _pi_3: clickId('id_pi_3', diag.pushLineRad, [diag, Math.PI / 3]),
+        _pi_6: clickId('id_pi_6', diag.pushLineRad, [diag, Math.PI / 6]),
+        _360: click(diag.pushLineDeg, [diag, Math.PI * 1.999], colors.marks),
+        _270: click(diag.pushLineDeg, [diag, Math.PI * 3 / 2], colors.marks),
+        _180: click(diag.pushLineDeg, [diag, Math.PI], colors.marks),
+        _120: click(diag.pushLineDeg, [diag, Math.PI * 2 / 3], colors.marks),
+        _90: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
+        _60: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
+        _30: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
       },
       show: [
         circle._line1, circle._line2, circle._radianLines, circle._angle,
-        circle._degrees,
+        circle._degrees, circle._angleText,
       ],
       setSteadyState: () => {
         circle.setScenario('right');
         diag.setAngleMarks('degrees');
+        circle._angleText.setScenario('bottomRight');
       },
     });
   }
