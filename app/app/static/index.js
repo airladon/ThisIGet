@@ -3951,9 +3951,9 @@ function () {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
       var scale = this.fontScale * 1 / 35;
-      var size = this.htmlCanvas.clientWidth * scale;
-      console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight);
-      this.htmlCanvas.style.fontSize = "".concat(size, "px");
+      var size = this.htmlCanvas.clientWidth * scale; // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
+
+      this.htmlCanvas.style.fontSize = "".concat(size, "px"); // this.container.style.fontSize = `${size}px`
 
       if (this.updateFontSize) {
         var style = window.getComputedStyle(document.documentElement);

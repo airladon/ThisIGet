@@ -45,7 +45,7 @@ body {
 }
 
 #id_common_angles_table {
-  font-size: 0.8em;
+  font-size: 0.7em;
   width: 35%;
   table-layout: fixed;
   // color: color('diagram', 'text-base');
@@ -55,6 +55,11 @@ body {
   background-color: color('black', 'darker');
   color: color('grey', 'light');
   border-spacing: 0;
+  border-radius: 0.7em;
+  // border-top-left-radius: 1em;
+  // border-top-right-radius: 1em;
+  // border-bottom-left-radius: 1em;
+  // border-bottom-right-radius: 1em;
 }
 
 // .lesson__common_angles_table tr {
@@ -65,7 +70,10 @@ body {
   width: 50%;
   text-align: center;
   background-color: color('black', 'dark');
-  height: 2em;
+  height: 2.5em;
+  font-size: 0.8em;
+  // border-top-left-radius: 1em;
+  // border-top-right-radius: 1em;
 }
 
 .lesson__common_angles_table td {
@@ -75,6 +83,7 @@ body {
 .lesson__common_angles_table td:first-child {
   width: 50%;
   text-align: center;
+  // border-top-left-radius: 1em;
 }
 
 .lesson__common_angles_table td:nth-child(2) {
@@ -82,6 +91,25 @@ body {
   width: 50%;
 }
 
+.lesson__common_angles_table tr:last-child td {
+  padding-bottom: 0.5em;
+}
+
+.lesson__deg_title {
+  border-top-left-radius: 0.7em;
+}
+
+.lesson__rad_title {
+  border-top-right-radius: 0.7em;
+}
+
+#id_2pi_3,
+#id_pi_2,
+#id_pi_3,
+#id_pi_6,
+#id_3pi_2 {
+  font-size: 0.7em;
+}
 // .lesson__common_angles_table td:nth-child(3) {
 //   text-align: center;
 //   width: 17%;

@@ -526,18 +526,20 @@ class Content extends PresentationLessonContent {
       title: 'Common Angles',
       setContent: () => {
         const fraction = (id: string, numerator: string, denominator: string) => {
-          const eqn = new HTMLEquation(`${id}`, 'radian_equation');
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation interactive_word');
           eqn.createEq([eqn.frac(numerator, denominator)]);
           return eqn.render();
         };
         const charEqn = (id: string, char: string) => {
-          const eqn = new HTMLEquation(`${id}`, 'radian_equation');
+          const eqn = new HTMLEquation(`${id}`, 'radian_equation interactive_word');
           eqn.createEq([char]);
           return eqn.render();
         };
         const _3piOn2 = fraction('id_3pi_2', '3&pi;', '2');
         const _2piOn3 = fraction('id_2pi_3', '2&pi;', '3');
         const _piOn2 = fraction('id_pi_2', '&pi;', '2');
+        const _piOn3 = fraction('id_pi_3', '&pi;', '3');
+        const _piOn6 = fraction('id_pi_6', '&pi;', '6');
         const _pi = charEqn('id_pi', '&pi;');
         const _2pi = charEqn('id_2pi', '2&pi;');
         return `
@@ -546,7 +548,7 @@ class Content extends PresentationLessonContent {
           </p>
           <table id="id_common_angles_table" class="lesson__table lesson__common_angles_table">
             <tr>
-              <td><div class="lesson__deg_title">Degrees</div></td><td><div class="lesson__rad_title">Radians</div></td>
+              <td class="lesson__deg_title"><div>Degrees</div></td><td class="lesson__rad_title"><div>Radians</div></td>
             </tr>
             <tr>
               <td>|_360|</td><td>${_2pi}</td>
@@ -563,6 +565,12 @@ class Content extends PresentationLessonContent {
             <tr>
               <td>|_90|</td><td>${_piOn2}</td>
             </tr>
+            <tr>
+              <td>|_60|</td><td>${_piOn3}</td>
+            </tr>
+            <tr>
+              <td>|_30|</td><td>${_piOn6}</td>
+            </tr>
           </table>
         `;
       },
@@ -572,11 +580,15 @@ class Content extends PresentationLessonContent {
         _2pi_3: clickId('id_2pi_3', diag.pushLine, binder(Math.PI * 2 / 3)),
         _3pi_2: clickId('id_3pi_2', diag.pushLine, binder(Math.PI * 3 / 2)),
         _pi_2: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 2)),
+        _pi_3: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 3)),
+        _pi_6: clickId('id_pi_2', diag.pushLine, binder(Math.PI / 6)),
         _360: click(diag.pushLine, binder(Math.PI * 1.999), colors.marks),
         _270: click(diag.pushLine, binder(Math.PI * 3 / 2), colors.marks),
         _180: click(diag.pushLine, binder(Math.PI), colors.marks),
         _120: click(diag.pushLine, binder(Math.PI * 2 / 3), colors.marks),
         _90: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
+        _60: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
+        _30: click(diag.pushLine, binder(Math.PI / 2), colors.marks),
       },
       show: [
         circle._line1, circle._line2, circle._radianLines, circle._angle,
