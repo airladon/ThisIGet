@@ -544,24 +544,24 @@ class Content extends PresentationLessonContent {
           <p>
             Some common angles in degrees and radians.
           </p>
-          <table class="lesson__table lesson__common_angles_table">
+          <table id="id_common_angles_table" class="lesson__table lesson__common_angles_table">
             <tr>
-              <td></td><td><div class="lesson__deg_title">degrees</div></td><td><div class="lesson__rad_title">radians</div></td>
+              <td><div class="lesson__deg_title">degrees</div></td><td><div class="lesson__rad_title">radians</div></td>
             </tr>
             <tr>
-              <td>Full circle:</td><td>|_360|</td><td>${_2pi}</td>
+              <td>|_360|</td><td>${_2pi}</td>
             </tr>
             <tr>
-              <td>Three quarter circle:</td><td>|_270|</td><td>${_3piOn2}</td>
+              <td>|_270|</td><td>${_3piOn2}</td>
             </tr>
             <tr>
-              <td>Half circle:</td><td>|_180|</td><td>${_pi}</td>
+              <td>|_180|</td><td>${_pi}</td>
             </tr>
             <tr>
-              <td>One third circle:</td><td>|_120|</td><td>${_2piOn3}</td>
+              <td>|_120|</td><td>${_2piOn3}</td>
             </tr>
             <tr>
-              <td>One quarter circle:</td><td>|_90|</td><td>${_piOn2}</td>
+              <td>|_90|</td><td>${_piOn2}</td>
             </tr>
           </table>
         `;

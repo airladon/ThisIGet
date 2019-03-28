@@ -86,7 +86,7 @@
   display: table;
 }
 
-@media screen and (min-width: $small-tablet) {
+@media screen and (min-width: $desktop) {
   .fraction_line {
     border-top: solid calc(var(--lesson__diagram-font-size) * 0.07);
   }
