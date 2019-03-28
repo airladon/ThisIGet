@@ -72,7 +72,7 @@ export default function lessonLayout() {
         radius: radius / 4,
       },
       label: {
-        text: null,
+        text: '',
         units: 'radians',
         precision: 2,
       },

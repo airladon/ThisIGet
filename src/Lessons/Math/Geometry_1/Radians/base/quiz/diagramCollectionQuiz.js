@@ -42,14 +42,29 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
     this.multiplier = 1;
     this.radius = 1;
+    this.units = 'radians';
+  }
+
+  updateUnits(units: 'radians' | 'degrees') {
+    if (units === 'radians') {
+      this._circle._angle.label.units = 'radians';
+      this._circle._angle.label.precision = 2;
+    } else {
+      this._circle._angle.label.units = 'degrees';
+      this._circle._angle.label.precision = 0;
+    }
   }
 
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
     if (this._circle._angle.isShown) {
       this._circle._angle.setAngle({ angle: r });
+      let angleText = `${round(r, 2).toFixed(2)} rad`;
+      if (this.units === 'degrees') {
+        angleText = `${round(r / Math.PI * 180, 0)}º`;
+      }
+      this._circle._angle.label.setText(angleText);
       this._circle._angle.update(this._circle.getRotation());
-      // this._circle._angle.label.setText(round(r, 2).toFixed(2));
     }
     if (this._circle._arc.isShown) {
       this._circle._arc.setAngle({ angle: r });
@@ -85,6 +100,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   newProblem() {
     super.newProblem();
 
+    this.units = removeRandElement(['degrees', 'radians']);
+
     const radius = rand(1, 1);
     const angle = rand(0.5, 5);
     const multiplier = rand(0.1, 10);
@@ -114,7 +131,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this._question.drawingObject.setText(`Adjust the ${adjustable} to get a radius of ${round(this.radius * this.multiplier, 2).toFixed(2)}`);
     } else if (unknown === 'angle') {
       this._circle._angle._label.hide();
-      this._question.drawingObject.setText(`Adjust the ${adjustable} to get an angle of ${round(this.angle, 2).toFixed(2)}`);
+      let angleText = `${round(this.angle, 2).toFixed(2)} radians`;
+      if (this.units === 'degrees') {
+        angleText = `${round(this.angle * 180 / Math.PI, 0)}º`;
+      }
+      this._question.drawingObject.setText(`Adjust the ${adjustable} to get an angle of ${angleText}`);
     } else if (unknown === 'arc') {
       this._circle._arc._label.hide();
       this._question.drawingObject.setText(`Adjust the ${adjustable} to get an arc length of ${round(this.angle * this.radius * this.multiplier, 2).toFixed(2)}`);
