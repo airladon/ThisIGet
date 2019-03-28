@@ -47,11 +47,13 @@ $qrHeight: 0.8;
 .lesson__qr__overlay .diagram__gl {
   width: 100%;
   height: 100%;
+  z-index: 1;
 }
 
 .lesson__qr__overlay .diagram__text {
   width: 100%;
   height: 100%;
+  z-index: 2;
 }
 
 .lesson__qr__overlay .lesson__popup_box {
