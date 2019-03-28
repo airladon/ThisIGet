@@ -45,7 +45,7 @@ body {
 }
 
 #id_common_angles_table {
-  font-size: calc(var(--lesson__diagram-font-size) * 1);
+  font-size: 0.8em;
   width: 35%;
   table-layout: fixed;
   // color: color('diagram', 'text-base');
@@ -57,19 +57,19 @@ body {
   border-spacing: 0;
 }
 
-.lesson__common_angles_table tr {
-  height: calc(var(--lesson__diagram-font-size) * 3.5);
-}
+// .lesson__common_angles_table tr {
+//   height: calc(var(--lesson__diagram-font-size) * 3.5);
+// }
 
 .lesson__common_angles_table tr:first-child {
   width: 50%;
   text-align: center;
   background-color: color('black', 'dark');
-  height: calc(var(--lesson__diagram-font-size) * 2);
+  height: 2em;
 }
 
 .lesson__common_angles_table td {
-  height: calc(var(--lesson__diagram-font-size) * 2);
+  height: 2em;
 }
 
 .lesson__common_angles_table td:first-child {

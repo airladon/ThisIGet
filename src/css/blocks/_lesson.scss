@@ -3,8 +3,8 @@ $text-p-top-margin: 3;  // in vw units
 
 // Next/Previous buttons
 $np_button-width: 3;
-$np_button-height-portrait: 8;
-$np_button-height-landscape: 8;
+$np_button-height-portrait: 6;
+$np_button-height-landscape: 6;
 $np_button-vspace: 4;
 $np_button-hspace: 4;
 
@@ -25,24 +25,24 @@ $title_bar_space_low: 90px;
     --lesson__title_space: #{$title_bar_space_high};
     --lesson__container-width: 90vw;
     --lesson__container-height: calc(var(--lesson__container-width) / #{$diagram_ratio});
-    --lesson__title-height: calc(#{$title-height} * 1vw);
-    --lesson__np_button-width: calc(#{$np_button-width} * 1vw);
-    --lesson__np_button-height: calc(#{$np_button-height-portrait} * 1vw);
-    --lesson__np_button-vspace: calc(#{$np_button-vspace} * 1vw);
-    --lesson__np_button-hspace: calc(#{$np_button-hspace} * 1vw);
+    // --lesson__title-height: calc(#{$title-height} * 1em);
+    --lesson__np_button-width: calc(#{$np_button-width} * 1em);
+    --lesson__np_button-height: calc(#{$np_button-height-portrait} * 1em);
+    --lesson__np_button-vspace: calc(#{$np_button-vspace} * 1em);
+    --lesson__np_button-hspace: calc(#{$np_button-hspace} * 1em);
     --lesson__text-margin: 1em;
-    --lesson__goto_button-width: calc(#{$goto_button-width} * 1vw * 1);
-    --lesson__goto_button-height: calc(#{$goto_button-height} * 1vw * 1);
-    --lesson__goto_button-font-size: calc(#{$goto_button-font-size} * 1vw);
     --lesson__text-p-spacing: 1em;
+    --lesson__goto_button-width: calc(#{$goto_button-width} * 1em * 1);
+    --lesson__goto_button-height: calc(#{$goto_button-height} * 1em * 1);
+    --lesson__goto_button-font-size: calc(#{$goto_button-font-size} * 1em);
   }
 }
 
 @media (min-aspect-ratio: 1/1) {
   :root {
-    --lesson__np_button-height: calc(#{$np_button-height-landscape} * 1vw);
-    --lesson__goto_button-width: calc(#{$goto_button-width} * 1vw);
-    --lesson__goto_button-height: calc(#{$goto_button-height} * 1vw);
+    --lesson__np_button-height: calc(#{$np_button-height-landscape} * 1em);
+    --lesson__goto_button-width: calc(#{$goto_button-width} * 1em);
+    --lesson__goto_button-height: calc(#{$goto_button-height} * 1em);
   }
 }
 

@@ -47,7 +47,8 @@ class SimpleLessonContent {
         htmlId: 'id_qr_diagram',
         limits: this.diagram.limits,
       });
-    }    
+      this.qrDiagram.updateFontSize = false;
+    }
     if (this.qrDiagram.elements._qr == null) {
       this.qrDiagram.addElements(
         this.qrDiagram.elements,

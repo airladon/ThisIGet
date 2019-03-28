@@ -3872,7 +3872,8 @@ function () {
       this.elements.name = 'diagramRoot';
     }
 
-    window.addEventListener('resize', this.resize.bind(this, false));
+    this.updateFontSize = true;
+    window.addEventListener('resize', this.resize.bind(this, false, htmlId));
     this.sizeHtmlText();
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
@@ -3950,16 +3951,20 @@ function () {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
       var scale = this.fontScale * 1 / 35;
-      var size = this.htmlCanvas.offsetWidth * scale - 1;
+      var size = this.htmlCanvas.clientWidth * scale;
+      console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight);
       this.htmlCanvas.style.fontSize = "".concat(size, "px");
-      var style = window.getComputedStyle(document.documentElement);
 
-      if (style) {
-        var prop = '--lesson__diagram-font-size';
-        var docElem = document.documentElement;
+      if (this.updateFontSize) {
+        var style = window.getComputedStyle(document.documentElement);
 
-        if (docElem) {
-          docElem.style.setProperty(prop, "".concat(size, "px"));
+        if (style) {
+          var prop = '--lesson__diagram-font-size';
+          var docElem = document.documentElement;
+
+          if (docElem) {
+            docElem.style.setProperty(prop, "".concat(size, "px"));
+          }
         }
       }
     }
@@ -4191,7 +4196,9 @@ function () {
     key: "resize",
     value: function resize() {
       var skipHTMLTie = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      // if (this.elements != null) {
+      var fromWgere = arguments.length > 1 ? arguments[1] : undefined;
+      var event = arguments.length > 2 ? arguments[2] : undefined;
+      console.log('resize', fromWgere, event); // if (this.elements != null) {
       //   this.elements.updateLimits(this.limits, this.spaceTransforms);
       // }
       // if (this.count == null) {
@@ -4204,6 +4211,7 @@ function () {
       //   console.log('unrender')
       //   this.elements.unrenderAll();
       // }
+
       this.webglLow.resize(); // this.webglHigh.resize();
 
       this.draw2DLow.resize(); // this.draw2DHigh.resize();
