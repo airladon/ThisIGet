@@ -285,8 +285,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setAngleTextProperties(360, 0, 'º');
     this.updateAngle();
     this.pushLine(toAngle, 2, 1, null);
-    // this.setAngleMarks('degrees');
-    
   }
 
   pulseAngle() {

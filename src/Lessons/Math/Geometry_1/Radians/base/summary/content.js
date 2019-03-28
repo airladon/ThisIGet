@@ -56,20 +56,8 @@ class Content extends PresentationLessonContent {
         _arc_length: highlight(colors.arc),
         _radius: highlight(colors.lines),
       },
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
       show: [
         circle._line1, circle._line2, circle._arc, circle._angle],
-      hide: [],
       setSteadyState: () => {
         circle.setScenario('summary');
         circle._line1.setRotation(1.3);
@@ -78,7 +66,6 @@ class Content extends PresentationLessonContent {
         diag._equation.showForm('arc');
         diag._equation.setScenario('summary');
       },
-      setLeaveState: () => {},
     });
   }
 }
