@@ -195,6 +195,7 @@ export default function lessonLayout() {
         bottomRight: { position: new Point(0.2, -1.5) },
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
+        summary: { position: new Point(-0.2, -1.5) },
         bottomSlightRight: { position: new Point(0.1, -1.5) },
       },
     },
@@ -562,20 +563,29 @@ export default function lessonLayout() {
           'degrees',
           'equals', 'radians',
         ],
+        '6': [
+          'radians', 'equals',
+          'degrees',
+          'x',
+          {
+            frac: ['_pi', '_180', 'v'],
+          },
+        ],
       },
-      formSeries: ['0', '1', '2'],
+      formSeries: ['0', '1', '2', '3', '4', '5'],
     },
 
     mods: {
       scenarios: {
         center: { position: new Point(0.5, -0.3), scale: 1.3 },
+        summary: { position: new Point(-0.8, 0.9), scale: 1.3 },
       },
     },
   };
 
   layout.degRadEqn = {
-    name: 'degRad',
-    method: 'addNavigator',
+    name: 'degRadEqn',
+    method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
       scale: 1,
@@ -602,12 +612,13 @@ export default function lessonLayout() {
           },
         ],
       },
-      formSeries: ['0', '1', '2'],
+      formSeries: ['0'],
     },
 
     mods: {
       scenarios: {
         center: { position: new Point(0.5, -1), scale: 1.3 },
+        summary: { position: new Point(-0.8, -1.2), scale: 1.3 },
       },
     },
   };

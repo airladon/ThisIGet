@@ -48,7 +48,7 @@ class Content extends PresentationLessonContent {
         `${new Definition('Radian', '', ['', 'radius']).html('id_lesson__radian_definition')}`,
       ],
       modifiers: {
-        radian: click(diag.bendRadius, [diag, null], colors.angles),
+        radian: click(diag.bendRadius, [diag, null], colors.radianLines),
         arc_length: click(diag.pulseArc, [diag], colors.arc),
         radius: click(diag.pulseRadius, [diag], colors.lines),
         angle: click(diag.pulseAngle, [diag], colors.angles),
@@ -57,7 +57,7 @@ class Content extends PresentationLessonContent {
         _radius: highlight(colors.lines),
       },
       show: [
-        circle._line1, circle._line2, circle._arc, circle._angle],
+        circle._line1, circle._line2, circle._arc, circle._angle, circle._angleText],
       setSteadyState: () => {
         circle.setScenario('summary');
         circle._line1.setRotation(1.3);
@@ -65,6 +65,25 @@ class Content extends PresentationLessonContent {
         diag.updateAngle();
         diag._equation.showForm('arc');
         diag._equation.setScenario('summary');
+        circle._angleText.setScenario('summary');
+      },
+    });
+    this.addSection({
+      setContent: [
+        '|Radians| can be converted to |degrees| using:',
+        style({ top: 30 }, '|Degrees| can be converted to |_radians| using:'),
+      ],
+      modifiers: {
+        Radians: highlight(colors.radianLines),
+        _radians: highlight(colors.radianLines),
+        Degrees: highlight(colors.degrees),
+        _degrees: highlight(colors.degrees),
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.setScenario('summary');
+        diag._radDegEqn.showForm('6');
+        diag._degRadEqn.setScenario('summary');
+        diag._degRadEqn.showForm('0');
       },
     });
   }

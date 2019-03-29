@@ -547,7 +547,6 @@ class Content extends PresentationLessonContent {
       _2pi: highlightWord('2π', colors.radianLines),
     };
     this.addSection(common, {
-      title: 'Convert between Radians and Degrees',
       setSteadyState: () => {
         diag._radDegEqn.showForm('0');
         diag._radDegEqn.setScenario('center');

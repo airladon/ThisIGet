@@ -208,22 +208,10 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
-            'quiz',
             'summary',
           ],
           qr: [
             'Main',
-          ],
-        },
-        base_legacy: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
           ],
         },
       },
