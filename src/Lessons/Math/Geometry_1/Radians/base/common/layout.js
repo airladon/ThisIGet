@@ -455,11 +455,172 @@ export default function lessonLayout() {
     },
   };
 
+  layout.radDegEqn = {
+    name: 'radDeg',
+    method: 'addNavigator',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        circle: { text: 'of a circle', color: colors.diagram.text.base },
+        angle: { text: 'angle', color: colors.diagram.text.base },
+        _angle: { text: 'angle', color: colors.diagram.text.base },
+        equals: '  =  ',
+        _equals: '  =  ',
+        _2pi: { text: '2π', color: colors.radianLines },
+        x: `  ${String.fromCharCode(215)}  `,
+        _pi: { text: 'π', color: colors.arc },
+        _360: { text: '360', color: colors.angles },
+        deg: { text: 'º', color: colors.angles },
+        _180: { text: '180', color: colors.arc },
+        _radians: { text: 'radians', color: colors.radianLines },
+        question: { text: '?', color: colors.arc },
+        // inDegrees: { text: 'in degrees', color: colors.angles },
+        // inRadians: { text: 'in radians', color: colors.angles },
+        v: { symbol: 'vinculum', color: colors.arc },
+        degrees: { text: 'degrees', color: colors.angles },
+        radians: { text: 'radians', color: colors.radianLines },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'right',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': [
+          {
+            annotate: {
+              content: 'angle',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'circle',
+                  relativeToContent: ['center', 'bottom'],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+          '_equals',
+          '_360', 'deg',
+          'equals',
+          '_2pi', '  ', '_radians',
+        ],
+        '1': [
+          'question', 'x' , '_360',
+          'equals',
+          '_2pi',
+        ],
+        '2': [
+          {
+            frac: ['question', '_180', 'v'],
+          }, 'x', '_360',
+          'equals',
+          '_2pi',
+        ],
+        '3': [
+          {
+            frac: ['_pi', '_180', 'v'],
+          }, 'x', '_360',
+          'equals',
+          '_2pi',
+        ],
+        '4': [
+          {
+            frac: ['_pi', '_180', 'v'],
+          }, 'x',
+          {
+            annotate: {
+              content: '_360',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'degrees',
+                  relativeToContent: ['center', -0.2],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+          'equals',
+          {
+            annotate: {
+              content: '_2pi',
+              withAnnotations: {
+                annotation: {
+                  annotation: 'radians',
+                  relativeToContent: ['center', -0.2],
+                  relativeToAnnotation: ['center', 'top'],
+                  scale: 0.5,
+                },
+              },
+            },
+          },
+        ],
+        '5': [
+          {
+            frac: ['_pi', '_180', 'v'],
+          }, 'x',
+          'degrees',
+          'equals', 'radians',
+        ],
+      },
+      formSeries: ['0', '1', '2'],
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0.5, -0.3), scale: 1.3 },
+      },
+    },
+  };
+
+  layout.degRadEqn = {
+    name: 'degRad',
+    method: 'addNavigator',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      elements: {
+        equals: '  =  ',
+        x: `  ${String.fromCharCode(215)}  `,
+        _pi: { text: 'π', color: colors.arc },
+        _180: { text: '180', color: colors.arc },
+        v: { symbol: 'vinculum', color: colors.arc },
+        degrees: { text: 'degrees', color: colors.angles },
+        radians: { text: 'radians', color: colors.radianLines },
+      },
+      defaultFormAlignment: {
+        fixTo: 'equals',    // Points can also be defined as objects
+        alignH: 'right',
+        alignV: 'baseline',
+      },
+      forms: {
+        '0': [
+          'degrees', 'equals',
+          'radians', 'x',
+          {
+            frac: ['_180', '_pi', 'v'],
+          },
+        ],
+      },
+      formSeries: ['0', '1', '2'],
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0.5, -1), scale: 1.3 },
+      },
+    },
+  };
+
   layout.addElements = [
     layout.circle,
     layout.equation,
     layout.circumferenceEqn,
     layout.arcEqn,
+    layout.radDegEqn,
+    layout.degRadEqn,
   ];
   return layout;
 }

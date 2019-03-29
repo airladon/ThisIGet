@@ -524,7 +524,139 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    // const binder = angle => [diag, angle, 2, 1, null];
+    this.addSection({
+      title: 'Convert between Radians and Degrees',
+      setContent: centerV([
+        'The |relationship| between arc length, angle and radius is very |useful| but is only valid when the angle is in |radians|.',
+        'If your angle is in |degrees|, then you need to |convert| your angle to radians to use the relationship.',
+        '|How| do you do this?',
+      ]),
+    });
+
+    common = {
+      setContent: [
+        'We know a |circle| has an angle of |_360deg| and |_2pi_radians|.',
+        'So to convert from |degrees to radians|, we need to find a way to convert |_360| to |_2pi|.',
+      ],
+      modifiers: {},
+    };
+    common.modifiers = {
+      _360deg: highlightWord('360º', colors.angles),
+      _2pi_radians: highlightWord('2π radians', colors.radianLines),
+      _360: highlight(colors.angles),
+      _2pi: highlightWord('2π', colors.radianLines),
+    };
+    this.addSection(common, {
+      title: 'Convert between Radians and Degrees',
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('0');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        diag._radDegEqn.showForm('0');
+        diag._radDegEqn.setScenario('center');
+        diag._radDegEqn.animateToForm('1', 2, 0, done);
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('1');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+
+    common.setContent = ['To convert |_360| to |_2|, we can |divide_by_180|.'];
+    common.modifiers = {
+      divide_by_180: highlight(colors.arc),
+      _360: highlight(colors.angles),
+      _2: highlight(colors.radianLines),
+    };
+    this.addSection(common, {
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('1');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        diag._radDegEqn.showForm('1');
+        // diag._radDegEqn.setScenario('center');
+        diag._radDegEqn.animateToForm('2', 2, 0, done);
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('2');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+
+    common.setContent = ['We can then |multiply_by_pi|.'];
+    common.modifiers = {
+      multiply_by_pi: highlightWord('multiply by π', colors.arc),
+    };
+    this.addSection(common, {
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('2');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        diag._radDegEqn.showForm('2');
+        // diag._radDegEqn.setScenario('center');
+        diag._radDegEqn.animateToForm('3', 2, 0, done);
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('3');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+
+    common.setContent = ['We can use this same |multiplier| more |generally|.'];
+    common.modifiers = {
+      multiplier: highlight(colors.arc),
+    };
+    this.addSection(common, {
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('3');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        diag._radDegEqn.showForm('3');
+        diag._radDegEqn.animateToForm('4', 2, 0, done);
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('4');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        diag._radDegEqn.showForm('4');
+        diag._radDegEqn.animateToForm('5', 2, 0, done);
+      },
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('5');
+        diag._radDegEqn.setScenario('center');
+      },
+    });
+
+    common.setContent = ['We can rearrange this to also convert |radians| to |degrees|.'];
+    common.modifiers = {
+      radians: highlight(colors.radianLines),
+      degrees: highlight(colors.angles),
+    };
+    this.addSection(common, {
+      setSteadyState: () => {
+        diag._radDegEqn.showForm('5');
+        diag._radDegEqn.setScenario('center');
+        diag._degRadEqn.showForm('0');
+        diag._degRadEqn.setScenario('center');
+      },
+    });
+
     this.addSection({
       title: 'Common Angles',
       setContent: () => {
