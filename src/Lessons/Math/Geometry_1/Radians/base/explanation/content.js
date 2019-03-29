@@ -541,9 +541,9 @@ class Content extends PresentationLessonContent {
       modifiers: {},
     };
     common.modifiers = {
-      _360deg: highlightWord('360º', colors.angles),
+      _360deg: highlightWord('360º', colors.degrees),
       _2pi_radians: highlightWord('2π radians', colors.radianLines),
-      _360: highlight(colors.angles),
+      _360: highlight(colors.degrees),
       _2pi: highlightWord('2π', colors.radianLines),
     };
     this.addSection(common, {
@@ -569,7 +569,7 @@ class Content extends PresentationLessonContent {
     common.setContent = ['To convert |_360| to |_2|, we can |divide_by_180|.'];
     common.modifiers = {
       divide_by_180: highlight(colors.arc),
-      _360: highlight(colors.angles),
+      _360: highlight(colors.degrees),
       _2: highlight(colors.radianLines),
     };
     this.addSection(common, {
@@ -646,7 +646,7 @@ class Content extends PresentationLessonContent {
     common.setContent = ['We can rearrange this to also convert |radians| to |degrees|.'];
     common.modifiers = {
       radians: highlight(colors.radianLines),
-      degrees: highlight(colors.angles),
+      degrees: highlight(colors.degrees),
     };
     this.addSection(common, {
       setSteadyState: () => {
@@ -710,7 +710,7 @@ class Content extends PresentationLessonContent {
         `;
       },
       modifiers: {
-        degrees: click(diag.toggleDegrees, [diag], colors.marks),
+        degrees: click(diag.toggleDegrees, [diag], colors.degrees),
         radians: click(diag.toggleRadians, [diag], colors.radianLines),
         _2pi: clickId('id_2pi', diag.pushLineRad, [diag, Math.PI * 1.999]),
         _pi: clickId('id_pi', diag.pushLineRad, [diag, Math.PI]),
@@ -719,13 +719,13 @@ class Content extends PresentationLessonContent {
         _pi_2: clickId('id_pi_2', diag.pushLineRad, [diag, Math.PI / 2]),
         _pi_3: clickId('id_pi_3', diag.pushLineRad, [diag, Math.PI / 3]),
         _pi_6: clickId('id_pi_6', diag.pushLineRad, [diag, Math.PI / 6]),
-        _360: click(diag.pushLineDeg, [diag, Math.PI * 1.999], colors.marks),
-        _270: click(diag.pushLineDeg, [diag, Math.PI * 3 / 2], colors.marks),
-        _180: click(diag.pushLineDeg, [diag, Math.PI], colors.marks),
-        _120: click(diag.pushLineDeg, [diag, Math.PI * 2 / 3], colors.marks),
-        _90: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
-        _60: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
-        _30: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.marks),
+        _360: click(diag.pushLineDeg, [diag, Math.PI * 1.999], colors.degrees),
+        _270: click(diag.pushLineDeg, [diag, Math.PI * 3 / 2], colors.degrees),
+        _180: click(diag.pushLineDeg, [diag, Math.PI], colors.degrees),
+        _120: click(diag.pushLineDeg, [diag, Math.PI * 2 / 3], colors.degrees),
+        _90: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
+        _60: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
+        _30: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
       },
       show: [
         circle._line1, circle._line2, circle._radianLines, circle._angle,

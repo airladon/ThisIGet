@@ -9,7 +9,7 @@ const {
 } = Fig.tools.g2;
 
 const cssColorNames = [
-  'lines', 'angles', 'arc', 'marks', 'radianLines',
+  'lines', 'angles', 'arc', 'marks', 'radianLines', 'degrees',
 ];
 
 const { joinObjects } = Fig.tools.misc;
@@ -181,7 +181,7 @@ export default function lessonLayout() {
         name: 'value',
         method: 'text',
         options: {
-          color: colors.lines,
+          color: colors.angles,
           weight: 500,
           family: 'Helvetica',
           hAlign: 'left',
@@ -470,15 +470,13 @@ export default function lessonLayout() {
         _2pi: { text: '2π', color: colors.radianLines },
         x: `  ${String.fromCharCode(215)}  `,
         _pi: { text: 'π', color: colors.arc },
-        _360: { text: '360', color: colors.angles },
-        deg: { text: 'º', color: colors.angles },
+        _360: { text: '360', color: colors.degrees },
+        deg: { text: 'º', color: colors.degrees },
         _180: { text: '180', color: colors.arc },
         _radians: { text: 'radians', color: colors.radianLines },
         question: { text: '?', color: colors.arc },
-        // inDegrees: { text: 'in degrees', color: colors.angles },
-        // inRadians: { text: 'in radians', color: colors.angles },
         v: { symbol: 'vinculum', color: colors.arc },
-        degrees: { text: 'degrees', color: colors.angles },
+        degrees: { text: 'degrees', color: colors.degrees },
         radians: { text: 'radians', color: colors.radianLines },
       },
       defaultFormAlignment: {
@@ -587,7 +585,7 @@ export default function lessonLayout() {
         _pi: { text: 'π', color: colors.arc },
         _180: { text: '180', color: colors.arc },
         v: { symbol: 'vinculum', color: colors.arc },
-        degrees: { text: 'degrees', color: colors.angles },
+        degrees: { text: 'degrees', color: colors.degrees },
         radians: { text: 'radians', color: colors.radianLines },
       },
       defaultFormAlignment: {
