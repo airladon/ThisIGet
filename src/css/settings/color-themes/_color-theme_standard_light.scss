@@ -77,8 +77,15 @@ $_color_theme-standard-light: (
     'text-english':   (color: 'blue',   shade: 'light'),
     'quizCheck':      (color: 'violet', shade: 'base'),
   ),
+  'presentation': (
+    'background':       (color: 'grey',  shade: 'light'),
+    'button':           (color: 'grey',  shade: 'base'),
+    'disabled':         (color: 'grey',  shade: 'lightest'),
+    'hover':            (color: 'grey',  shade: 'lighter'),
+    'text':             (color: 'grey',  shade: 'base'),
+  ),
   'lesson': (
-    'background':       (color: 'grey',   shade: 'lighter'),
+    'background':       (color: 'grey',   shade: 'lightest'),
     'text-title':       (color: 'blue',   shade: 'dark'),
     'title-background': (color: 'white',  shade: 'base'),
     'text':             (color: 'grey',   shade: 'darker'),

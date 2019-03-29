@@ -86,7 +86,12 @@ $title_bar_space_low: 90px;
 }
 
 .lesson__widescreen_backdrop {
-  background-color: color('diagram', 'background');
+  // background-color: color('diagram', 'background');
+  background-color: color('presentation', 'background');
+  padding-top: 10px;
+  padding-bottom: 10px;
+  // margin-left: 20px;
+  // margin-right: 20px;
 }
 
 .lesson__container {
@@ -101,6 +106,7 @@ $title_bar_space_low: 90px;
 .lesson__diagram {
   width: var(--lesson__content-width);
   height: var(--lesson__content-height);
+  background-color: color('diagram', 'background');
 }
 
 .lesson__diagram_text {
@@ -182,7 +188,8 @@ $title_bar_space_low: 90px;
   border-style: none;
   border: 0;
   padding: 0;
-  background-color: color('diagram', 'background');
+  // background-color: color('diagram', 'background');
+  background-color: color('presentation', 'background');
   top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__np_button-height) / 2);
   width: 0;
   height: 0;
@@ -209,37 +216,37 @@ $title_bar_space_low: 90px;
 }
 
 .lesson__button-next-enabled {
-  border-left: var(--lesson__np_button-width) solid color('lesson', 'button');
+  border-left: var(--lesson__np_button-width) solid color('presentation', 'button');
 }
 
 .lesson__button-next-enabled:hover {
-  border-left: var(--lesson__np_button-width) solid color('lesson', 'button', 'lighter');
+  border-left: var(--lesson__np_button-width) solid color('presentation', 'hover');
 }
 
 .lesson__button-next-disabled {
-  border-left: var(--lesson__np_button-width) solid color('lesson', 'button', 'darkest');
+  border-left: var(--lesson__np_button-width) solid color('presentation', 'disabled');
   pointer-events: none;
 }
 
 .lesson__button-next-disabled:hover {
-  border-left: var(--lesson__np_button-width) solid color('lesson', 'button', 'darkest');
+  border-left: var(--lesson__np_button-width) solid color('presentation', 'disabled');
 }
 
 .lesson__button-prev-enabled {
-  border-right: var(--lesson__np_button-width) solid color('lesson', 'button');
+  border-right: var(--lesson__np_button-width) solid color('presentation', 'button');
 }
 
 .lesson__button-prev-enabled:hover {
-  border-right: var(--lesson__np_button-width) solid color('lesson', 'button', 'lighter');
+  border-right: var(--lesson__np_button-width) solid color('presentation', 'hover');
 }
 
 .lesson__button-prev-disabled {
-  border-right: var(--lesson__np_button-width) solid color('lesson', 'button', 'darkest');
+  border-right: var(--lesson__np_button-width) solid color('presentation', 'disabled');
   pointer-events: none;
 }
 
 .lesson__button-prev-disabled:hover {
-  border-right: var(--lesson__np_button-width) solid color('lesson', 'button', 'darkest');
+  border-right: var(--lesson__np_button-width) solid color('presentation', 'disabled');
 }
 
 .lesson__button-goto_container {
@@ -250,29 +257,29 @@ $title_bar_space_low: 90px;
   height: var(--lesson__goto_button-height);
   width: var(--lesson__goto_button-width);
   font-size: var(--lesson__goto_button-font-size);
-  background-color: color('diagram', 'background');
-  border-radius: 0.3em;
+  background-color: color('presentation', 'background');
+  border-radius: 0.6em;
   font-weight: 200;
 }
 
 .lesson__button-goto_container:hover {
-  background-color: color('diagram', 'background', 'darker');
+  background-color: color('presentation', 'hover');
 }
 
 .lesson__button-goto_container-disabled {
   pointer-events: none;
-  color: color('lesson', 'button', 'darkest');
+  color: color('presentation', 'disabled');
 }
 
 .lesson__button-goto_container-disabled:hover {
   pointer-events: none;
-  background-color: color('diagram', 'background');
+  background-color: color('presentation', 'background');
 }
 
 #id__lesson__goto_button {
-  background-color: color('diagram', 'background');
+  background-color: color('presentation', 'background');
   border: 0;
-  color: color('lesson', 'button', 'light');
+  color: color('presentation', 'button');
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
@@ -283,11 +290,11 @@ $title_bar_space_low: 90px;
 #id__lesson__goto_button:hover {
   // background-color: color('diagram', 'background', 'darker');
   cursor: pointer;
-  color: color('lesson', 'button', 'lightest');
+  color: color('presentation', 'hover');
 }
 
 .lesson__button-goto_container-disabled #id__lesson__goto_button {
-  color: color('lesson', 'button', 'darker');
+  color: color('presentation', 'disabled');
 }
 
 // .lesson__button-goto {

@@ -77,6 +77,13 @@ $_color_theme-standard-dark: (
     'text-english':   (color: 'blue',    shade: 'light'),
     'quizCheck':      (color: 'violet',  shade: 'base'),
   ),
+  'presentation': (
+    'background':       (color: 'white',  shade: 'lighter'),
+    'button':           (color: 'white',  shade: 'darker'),
+    'disabled':         (color: 'white',  shade: 'light'),
+    'hover':            (color: 'grey',  shade: 'lighter'),
+    'text':             (color: 'grey',  shade: 'base'),
+  ),
   'lesson': (
     'background':       (color: 'grey',   shade: 'dark'),
     'text-title':       (color: 'blue',   shade: 'dark'),
