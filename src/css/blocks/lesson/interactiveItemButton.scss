@@ -5,7 +5,7 @@
 }
 
 .lesson__interactive_element_button {
-  background-color: color('diagram', 'background');
+  // background-color: color('diagram', 'background');
   color: color('lesson', 'text');
   // font-size: calc(var(--lesson__goto_button-font-size));
   width: calc(var(--lesson__goto_button-font-size) * 3);
@@ -22,7 +22,7 @@
 
 .lesson__interactive_element_button:hover {
   // color: color('diagram', 'background', 'darker');
-  background-color: color('diagram', 'background', 'darker');
+  background-color: color('presentation', 'hover');
 }
 
 // @media screen and (min-width: $small-tablet) {
