@@ -1,23 +1,23 @@
 .lesson__interactive_element_button__container {
   position: absolute;
-  left: calc(90% - var(--lesson__goto_button-font-size) * 6);
-  top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__goto_button-font-size) * 1.5);
+  left: calc(90% - var(--pres__goto_button_font_size) * 6);
+  top: calc(100% - (100% - var(--pres__content_height)) / 2 - var(--pres__goto_button_font_size) * 1.5);
 }
 
 .lesson__interactive_element_button {
   // background-color: color('diagram', 'background');
   color: color('lesson', 'text');
-  // font-size: calc(var(--lesson__goto_button-font-size));
-  width: calc(var(--lesson__goto_button-font-size) * 3);
-  height: calc(var(--lesson__goto_button-font-size) * 3);
+  // font-size: calc(var(--pres__goto_button_font_size));
+  width: calc(var(--pres__goto_button_font_size) * 3);
+  height: calc(var(--pres__goto_button_font_size) * 3);
   // position: absolute;
-  // left: calc(90% - var(--lesson__goto_button-font-size) * 6);
-  // top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__goto_button-font-size) * 1.5);
-  // border: calc(var(--lesson__goto_button-font-size) * 0.2) solid color('diagram', 'background', 'darker');
+  // left: calc(90% - var(--pres__goto_button_font_size) * 6);
+  // top: calc(100% - (100% - var(--pres__content_height)) / 2 - var(--pres__goto_button_font_size) * 1.5);
+  // border: calc(var(--pres__goto_button_font_size) * 0.2) solid color('diagram', 'background', 'darker');
   position: absolute;
   border: 0;
-  border-radius: calc(var(--lesson__goto_button-font-size) * 1.5);
-  padding: calc(var(--lesson__goto_button-font-size) * 0.25);
+  border-radius: calc(var(--pres__goto_button_font_size) * 1.5);
+  padding: calc(var(--pres__goto_button_font_size) * 0.25);
 }
 
 .lesson__interactive_element_button:hover {
@@ -33,8 +33,8 @@
 
 @media (min-aspect-ratio: 3/2) {
   .lesson__interactive_element_button__container {
-    left: calc(100% - var(--lesson__np_button-width) / 2 - calc(var(--lesson__goto_button-font-size) * 1.5));
-    top: calc(70% - var(--lesson__goto_button-font-size) * 1.5);
+    left: calc(100% - var(--pres__nav_button_width) / 2 - calc(var(--pres__goto_button_font_size) * 1.5));
+    top: calc(70% - var(--pres__goto_button_font_size) * 1.5);
   }
 }
 
