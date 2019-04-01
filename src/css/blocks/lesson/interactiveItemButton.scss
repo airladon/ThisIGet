@@ -24,10 +24,10 @@
 //   }
 // }
 
-@media (min-aspect-ratio: 3/2) {
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
   .lesson__interactive_element_button__container {
     left: calc(100% - var(--pres__nav_button_width) / 2 - calc(var(--pres__goto_button_font_size) * 1.5));
-    top: calc(70% - var(--pres__goto_button_font_size) * 1.5);
+    top: calc(70% - var(--pres__button_height) * 0.8);
   }
 }
 

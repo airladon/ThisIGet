@@ -1,0 +1,63 @@
+
+.lesson__button-goto_container {
+  position: absolute;
+  color: color('presentation', 'text');
+  width: calc(var(--pres__button_height) * 2);
+  left: calc(50% - var(--pres__button_height) * 2 / 2);
+  // top: calc(100% - var(--pres__goto_button_height));
+  top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
+  height: var(--pres__button_height);
+  font-size: calc(var(--pres__button_height) * 0.28);
+  background-color: color('presentation', 'background');
+  border-radius: 0.6em;
+  border: solid 1px;
+  font-weight: 200;
+}
+
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
+  .lesson__button-goto_container {
+    left: calc(100% - var(--pres__nav_button_width) / 2 - var(--pres__goto_button_width) / 2);
+    top: calc(93% - var(--pres__button_height) / 2);
+  }
+}
+
+.lesson__button-goto_container:hover {
+  // background-color: color('presentation', 'hover');
+  color: color('presentation', 'hover');
+}
+
+.lesson__button-goto_container-disabled {
+  pointer-events: none;
+  color: color('presentation', 'disabled');
+}
+
+.lesson__button-goto_container-disabled:hover {
+  pointer-events: none;
+  background-color: color('presentation', 'background');
+}
+
+#id__lesson__goto_button {
+  background-color: color('presentation', 'background');
+  border: 0;
+  color: color('presentation', 'button');
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+#id__lesson__goto_button:hover {
+  // background-color: color('diagram', 'background', 'darker');
+  cursor: pointer;
+  color: color('presentation', 'hover');
+}
+
+.lesson__button-goto_container-disabled #id__lesson__goto_button {
+  color: color('presentation', 'disabled');
+}
+
+.lesson__button-goto_container .dropdown_button_label_container {
+  padding-left: 0;
+  padding-right: 0;
+}

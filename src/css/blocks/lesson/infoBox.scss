@@ -1,14 +1,14 @@
 .lesson__info_button {
   background-color: color('presentation', 'background');
   color: color('presentation', 'text');
-  font-size: calc(var(--pres__goto_button_height) * 0.6);
-  width: calc(var(--pres__goto_button_height) * 1);
-  height: calc(var(--pres__goto_button_height) * 1);
+  font-size: calc(var(--pres__button_height) * 0.6);
+  width: calc(var(--pres__button_height) * 1);
+  height: calc(var(--pres__button_height) * 1);
   position: absolute;
-  left: calc(70% - var(--pres__goto_button_height) / 2);
+  left: calc(70% - var(--pres__button_height) / 2);
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
   border: 1px solid;
-  border-radius: calc(var(--pres__goto_button_height) / 2);
+  border-radius: calc(var(--pres__button_height) / 2);
   font-family: times new roman, serif;
   font-style: italic;
   // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
@@ -34,7 +34,7 @@
 //   }
 // }
 
-@media (min-aspect-ratio: 3/2) {
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
   .lesson__info_button {
     left: calc(100% - var(--lesson__np_button-width) / 2 - calc(var(--lesson__goto_button-font-size) * 1.5));
     top: calc(82% - var(--lesson__goto_button-font-size) * 1.5);
