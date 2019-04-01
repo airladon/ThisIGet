@@ -19,21 +19,55 @@ $diagram_ratio: 1.5;
 $title_bar_space_high: 120px;
 $title_bar_space_low: 90px;
 
-// Default variable values for aspect ratios < 3/2
+// Default variable values for portrait, max width aspect ratios
+// Default spacing is:
+//   Content height = 1;
+//   vspace: 0.02;
+//   button height: 0.1;
+//   top/bottom padding: 0.02;
+
+// This means the max container aspect ratio for a 3/2 content screen
+// where vw can be max is:
+// 3 / 2x where x is:
+//   1 + 0.02 + 0.02 * 2 + 0.1) = 2 * 1.16;
+// = 3 / 2.32 = 300 / 232
+$portrait_vspace: 0.02;
+$portrait_vpadding: 0.02;
+$portrait_button_height: 0.1;
+
+// Default variable values for landscape, max height aspect ratios
+// content width = content height * AR
+// hspace: 0.04;
+// button width: 0.1;
+// left/right padding: 0.04;
+//
+// Therefore min aspect ratio for a 3/2 content window is:
+// 3x / 2 where x is:
+//                    1 + 0.04 * 4 + 0.1 * 2 = 1.36
+// => 4.08 / 2 = 408 / 200
+$landscape_hspace: 0.04;
+$landscape_hpadding: 0.04;
+$landscape_button_width: 0.1;
+// In this scenario, the content is  1 / 1.36 the content = 69%
+$landscape_content_width: 0.73;
+
+// In between aspect ratio will be landscape orientation, but width limited
+// Same width ratios as above
+
 @media (min-aspect-ratio: 1/100) {
   :root {
     --lesson__title_space: #{$title_bar_space_high};
     //
-    --pres__container_width: 95vw;
-    --pres__content_width: var(--pres__container_width);
+    --pres__content_width: 95vw;
     --pres__content_height: calc(var(--pres__content_width) / #{$diagram_ratio});
+    --pres__container_width: var(--pres__content_width);
+    //
+    --pres__nav_button_height: calc(var(--pres__content_height) * #{$portrait_button_height});
+    --pres__vspace: calc(var(--pres__content_height) * #{$portrait_vspace});
+    --pres__vpadding: calc(var(--pres__content_height) * #{$portrait_vpadding});
+    --pres__container_height: calc(var(--pres__content_height) + var(--pres__vspace) + var(--pres__nav_button_height) + var(--pres__vpadding) * 2);
     //
     --pres__unit: calc(var(--pres__content_width) / 35);
-    //
-    --pres__nav_button_height: calc(var(--pres__unit) * 3);
-    --pres__vspace: calc(var(--pres__unit) * 1);
-    --pres__vpadding: calc(var(--pres__unit) * 1);
-    --pres__container_height: calc(var(--pres__content_height) + var(--pres__vspace) + var(--pres__nav_button_height));
     //
     --pres__nav_button_width: calc(var(--pres__unit) * 2);
     --pres__hspace: calc(var(--pres__unit) * 2);
@@ -41,42 +75,78 @@ $title_bar_space_low: 90px;
     --pres__text_p_space: calc(var(--pres__unit) * 0.8);
     //
     --pres__goto_button_width: calc(var(--pres__unit) * 9);
-    --pres__goto_button_height: calc(var(--pres__unit) * 4);
+    --pres__goto_button_height: calc(var(--pres__nav_button_height) * 1);
     --pres__goto_button_font_size: calc(var(--pres__unit) * 0.7);
     //
-    --pres__container_bottom_padding: 0;
   }
 }
 
-@media (min-aspect-ratio: 3/2) {
+@media (min-aspect-ratio: 300/232) {
   :root {
     //
-    --pres__container_width: 95vw;
-    --pres__hspace: 2vw;
-    --pres__content_width: calc(var(--pres__container_width) - 2 * var(--pres__nav_button_width) - 2 * var(--pres__hspace));
+    --pres__content_width: calc(100vw * #{$landscape_content_width});
     --pres__content_height: calc(var(--pres__content_width) / #{$diagram_ratio});
-    --pres__container_height: calc(var(--pres__content_height) + var(--pres__vpadding) * 2);
-    --pres__unit: calc(var(--pres__content_width) / 35);
+    --pres__container_width: 100vw;
+    --pres__container_height: calc(var(--pres__content_height) + var(--pres__content_vpadding) * 2);
+    //
+    --pres__hspace: calc(var(--pres__content_width) * #{$landscape_hspace});
+    --pres__hpadding: calc(var(--pres__content_width) * #{$landscape_hpadding});
+    --pres__nav_button_width: calc(var(--pres__content_width) * #{$landscape_button_width});
+    //
+    // --pres__nav_button_height: calc(var(--pres__content_height) * #{$portrait_button_height});
+    // --pres__container_height: calc(var(--pres__content_height) + var(--pres__vspace) + var(--pres__nav_button_height));
+    //
+    // --pres__unit: calc(var(--pres__content_width) / 35);
+    //
+    // --pres__nav_button_width: calc(var(--pres__unit) * 2);
+    // --pres__hspace: calc(var(--pres__unit) * 2);
+    // --pres__text_margin: calc(var(--pres__unit) * 0.8);
+    // --pres__text_p_space: calc(var(--pres__unit) * 0.8);
+    //
+    // --pres__goto_button_width: calc(var(--pres__unit) * 9);
+    // --pres__goto_button_height: calc(var(--pres__nav_button_height) * 4);
+    // --pres__goto_button_font_size: calc(var(--pres__unit) * 0.7);
+    //
+  }
+}
+
+@media (min-aspect-ratio: 408/200) {
+  :root {
+    //
+    --pres__content_height: 100vh;
+    --pres__content_width: calc(var(--pres__content_height) * #{$diagram_ratio});
+    // --pres__nav_button_width: calc(var(--pres__content_width) * 0.1);
+    // --pres__hspace: calc(var(--pres__content_width) * 0.05);
+    --pres__container_width: calc(var(--pres__content_width) * 1.44);
+    // --pres__container_height: calc(var(--pres__content_height) + var(--pres__vspace) * 2);
+    // --pres__content_width: calc(var(--pres__container_width) * 0.7);
+    // --pres__nav_button_width: calc(var(--pres__container_width) * 0.07);
+    // --pres__hspace: calc(var(--pres__container_width) * (1 - 0.7 - 0.07 * 2) / 4);
+    // --pres__hspace: 2vw;
+    // --pres__content_width: calc(var(--pres__container_width) - 2 * var(--pres__nav_button_width) - 2 * var(--pres__hspace));
+    // --pres__content_height: calc(var(--pres__content_width) / #{$diagram_ratio});
+    // --pres__container_height: calc(var(--pres__content_height) + var(--pres__vpadding) * 2);
+    // --pres__unit: calc(var(--pres__content_width) / 35);
     //
     // --lesson__max_container-height: 100vh;
     // --lesson__max_content-height: var(--lesson__max_container-height);
     // --lesson__max_content-width: calc(var(--lesson__max_content-height) * #{$diagram_ratio});
     // --lesson__max_container-width: calc(var(--lesson__max_content-width) + 2 * var(--pres__nav_button_width) + 2 * var(--pres__hspace));
-    --pres__container_bottom_padding: var(--pres__vspace);
+    // --pres__container_bottom_padding: var(--pres__vspace);
     //
-    --pres__nav_button_height: calc(#{$np_button-height-landscape} * var(--pres__unit));
+    // --pres__nav_button_height: calc(#{$np_button-height-landscape} * var(--pres__unit));
   }
 }
 
-@media (min-aspect-ratio: 2/1) and (max-height: 500px) {
-  :root {
-    // --lesson-container-width: calc(150vh * #{$diagram_ratio});
-    // --pres__goto_button_height: 10vh;
-    // --pres__goto_button_width: 20vh;
-    // --pres__nav_button_height: 20vh;
-    // --pres__goto_button_font_size: 3vh;
-  }
-}
+// @media (min-aspect-ratio: 2/1) and (max-height: 500px) {
+//   :root {
+//     // --lesson-container-width: calc(150vh * #{$diagram_ratio});
+//     // --pres__goto_button_height: 10vh;
+//     // --pres__goto_button_width: 20vh;
+//     // --pres__nav_button_height: 20vh;
+//     // --pres__goto_button_font_size: 3vh;
+//   }
+// }
 
 :root {
   --lesson__diagram-font-size: 1;
@@ -266,24 +336,32 @@ $title_bar_space_low: 90px;
 //   color: color('navbar', 'button');
 // }
 
-@media (min-aspect-ratio: 3/2) {
+@media (min-aspect-ratio: 300/232) {
   .lesson__container {
-    width: var(--pres__container_width);
-    height: var(--pres__container_height);
-    margin-left: auto;
-    margin-right: auto;
-    max-height: var(--lesson__max_container-height);
-    max-width: var(--lesson__max_container-width);
+    // width: var(--pres__container_width);
+    // height: var(--pres__container_height);
+    // margin-left: auto;
+    // margin-right: auto;
+    // max-height: var(--lesson__max_container-height);
+    // max-width: var(--lesson__max_container-width);
   }
 
   .lesson__diagram {
     display: inline-block;
-    width: var(--pres__content_width);
-    height: var(--pres__content_height);
+    // width: var(--pres__content_width);
+    // height: var(--pres__content_height);
     margin-left: var(--pres__hspace);
     margin-right: var(--pres__hspace);
-    max-height: var(--lesson__max_content-height);
-    max-width: var(--lesson__max_content-width);
+    // max-height: var(--lesson__max_content-height);
+    // max-width: var(--lesson__max_content-width);
+  }
+
+  #lesson__button-previous {
+    margin-left: var(--pres__hpadding);
+  }
+
+  #lesson__button-next {
+    margin-right: var(--pres__hpadding);
   }
 
   .lesson__np_button {
