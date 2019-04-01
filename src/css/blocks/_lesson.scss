@@ -105,7 +105,7 @@ $landscape_content_width: 0.73;
   --pres__goto_button_height: var(--pres__button_height);
   --pres__goto_button_font_size: calc(var(--pres__unit) * 0.6);
   //
-  --lesson__diagram-font-size: 1;
+  --lesson__diagram-font-size: var(--pres__unit);
 }
 
 @mixin lesson_vars() {

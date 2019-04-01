@@ -5,24 +5,17 @@
 }
 
 .lesson__interactive_element_button {
-  // background-color: color('diagram', 'background');
   color: color('presentation', 'text');
-  // font-size: calc(var(--pres__goto_button_font_size));
   width: var(--pres__button_height);
   height: var(--pres__button_height);
-  // position: absolute;
-  // left: calc(90% - var(--pres__goto_button_font_size) * 6);
-  // top: calc(100% - (100% - var(--pres__content_height)) / 2 - var(--pres__goto_button_font_size) * 1.5);
-  // border: calc(var(--pres__goto_button_font_size) * 0.2) solid color('diagram', 'background', 'darker');
   position: absolute;
   border: 1px solid;
   border-radius: calc(var(--pres__button_height) / 2);
-  padding: calc(var(--pres__goto_button_font_size) * 0.25);
 }
 
 .lesson__interactive_element_button:hover {
-  // color: color('diagram', 'background', 'darker');
-  background-color: color('presentation', 'hover');
+  color: color('presentation', 'hover')
+  // background-color: color('presentation', 'hover');
 }
 
 // @media screen and (min-width: $small-tablet) {

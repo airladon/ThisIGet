@@ -6,16 +6,12 @@
   height: calc(var(--pres__goto_button_height) * 1);
   position: absolute;
   left: calc(70% - var(--pres__goto_button_height) / 2);
-  // top: calc(100% - var(--pres__goto_button_height));
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
-  // top: calc(100% - (100% - var(--lesson__content-height)) / 2 - var(--lesson__goto_button-font-size) * 1.5);
-  // border: calc(var(--lesson__goto_button-font-size) * 0.2) solid color('diagram', 'background', 'darker');
   border: 1px solid;
-  // border-radius: calc(var(--lesson__goto_button-font-size) * 1.5);
   border-radius: calc(var(--pres__goto_button_height) / 2);
   font-family: times new roman, serif;
   font-style: italic;
-  padding: calc(var(--lesson__goto_button-font-size) * 0.25);
+  // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
   // border-color: color('diagram', 'background', 'darker');
 }
 
