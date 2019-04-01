@@ -40,6 +40,7 @@
   background-color: color('presentation', 'background');
   border: 0;
   color: color('presentation', 'button');
+  font-size: calc(var(--pres__unit) * 0.8);
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* Internet Explorer/Edge */
@@ -62,6 +63,28 @@
   padding-right: 0;
 }
 
+.pres__goto_button_label {
+  display: inline-block;
+}
+
 #id__lesson__goto_button_list {
   font-size: calc(var(--pres__unit) * 0.8);
+}
+
+.pres__goto_button_label_page {
+  font-size: calc(var(--pres__unit) * 0.8);
+  display: inline-block;
+  margin-right: calc(var(--pres__unit) * 0.5);
+  width: calc(var(--pres__unit));
+}
+
+.pres__goto_button_label_num_pages {
+  // font-size: calc(var(--pres__unit) * 0.3);
+  // display: inline-block;
+  font-size: calc(var(--pres__unit) * 0.4);
+  // display: inline-block;
+  position: absolute;
+  top: 18%;
+  left: 43%;
+  text-align: center;
 }

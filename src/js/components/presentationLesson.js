@@ -221,7 +221,14 @@ export default class PresentationLessonComponent extends React.Component
       id="id__lesson__button-goto_container">
       <DropDownButton
         id="id__lesson__goto_button"
-        label={`${this.state.page + 1} / ${this.state.numPages}`}
+        label={
+          <div className="pres__goto_button_label">
+            <div className="pres__goto_button_label_page">{`${this.state.page + 1} `}</div>
+            <div className="pres__goto_button_label_num_pages">
+              {`of ${this.state.numPages}`}
+            </div>
+          </div>
+        }
         direction="up"
         xAlign="right"
         list={this.state.listOfSections}/>
