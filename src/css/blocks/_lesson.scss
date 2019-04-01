@@ -25,7 +25,6 @@ $title_bar_space_low: 90px;
     --lesson__title_space: #{$title_bar_space_high};
     --lesson__container-width: 90vw;
     --lesson__container-height: calc(var(--lesson__container-width) / #{$diagram_ratio});
-    // --lesson__title-height: calc(#{$title-height} * 1em);
     --lesson__np_button-width: calc(#{$np_button-width} * var(--presentation_unit));
     --lesson__np_button-height: calc(#{$np_button-height-portrait} * var(--presentation_unit));
     --lesson__np_button-vspace: calc(#{$np_button-vspace} * var(--presentation_unit));
@@ -46,6 +45,21 @@ $title_bar_space_low: 90px;
     --lesson__np_button-height: calc(#{$np_button-height-portrait} * var(--presentation_unit));
     --lesson__goto_button-width: calc(#{$goto_button-width} * var(--presentation_unit));
     --lesson__goto_button-height: calc(#{$goto_button-height} * var(--presentation_unit));
+  }
+}
+
+@media (min-aspect-ratio: 3/2) {
+  :root {
+    --lesson__content-width: calc(var(--lesson__container-width) - 2 * var(--lesson__np_button-width) - 2 * var(--lesson__np_button-hspace));
+    --lesson__content-height: calc(var(--lesson__content-width) / #{$diagram_ratio});
+    --lesson__container-height: var(--lesson__content-height);
+    //
+    --lesson__max_container-height: 100vh;
+    --lesson__max_content-height: var(--lesson__max_container-height);
+    --lesson__max_content-width: calc(var(--lesson__max_content-height) * #{$diagram_ratio});
+    --lesson__max_container-width: calc(var(--lesson__max_content-width) + 2 * var(--lesson__np_button-width) + 2 * var(--lesson__np_button-hspace));
+    --lesson__container-bottom-padding: calc(var(--lesson__np_button-vspace) / 2);
+    --lesson__np_button-height: calc(#{$np_button-height-landscape} * var(--presentation_unit));
   }
 }
 
@@ -325,19 +339,6 @@ $title_bar_space_low: 90px;
 // }
 
 @media (min-aspect-ratio: 3/2) {
-  :root {
-    --lesson__content-width: calc(var(--lesson__container-width) - 2 * var(--lesson__np_button-width) - 2 * var(--lesson__np_button-hspace));
-    --lesson__content-height: calc(var(--lesson__content-width) / #{$diagram_ratio});
-    --lesson__container-height: var(--lesson__content-height);
-    //
-    --lesson__max_container-height: 100vh;
-    --lesson__max_content-height: var(--lesson__max_container-height);
-    --lesson__max_content-width: calc(var(--lesson__max_content-height) * #{$diagram_ratio});
-    --lesson__max_container-width: calc(var(--lesson__max_content-width) + 2 * var(--lesson__np_button-width) + 2 * var(--lesson__np_button-hspace));
-    --lesson__container-bottom-padding: calc(var(--lesson__np_button-vspace) / 2);
-    --lesson__np_button-height: calc(#{$np_button-height-landscape} * var(--presentation_unit));
-  }
-
   .lesson__container {
     width: var(--lesson__container-width);
     height: var(--lesson__container-height);
