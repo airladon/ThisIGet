@@ -3873,8 +3873,8 @@ function () {
     }
 
     this.updateFontSize = true;
-    window.addEventListener('resize', this.resize.bind(this, false, htmlId));
-    this.sizeHtmlText();
+    window.addEventListener('resize', this.resize.bind(this, false, htmlId)); // this.sizeHtmlText();
+
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
     this.animateNextFrame(true, 'first frame');
@@ -3946,28 +3946,24 @@ function () {
       // }
 
       return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
-    }
-  }, {
-    key: "sizeHtmlText",
-    value: function sizeHtmlText() {
-      var scale = this.fontScale * 1 / 35;
-      var size = this.htmlCanvas.clientWidth * scale; // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
+    } // sizeHtmlText() {
+    //   // const scale = this.fontScale * 1 / 35;
+    //   // const size = this.htmlCanvas.clientWidth * scale;
+    //   // // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
+    //   // this.htmlCanvas.style.fontSize = `${size}px`;
+    //   // // this.container.style.fontSize = `${size}px`
+    //   // if (this.updateFontSize) {
+    //   //   const style = window.getComputedStyle(document.documentElement);
+    //   //   if (style) {
+    //   //     const prop = '--lesson__diagram-font-size';
+    //   //     const docElem = document.documentElement;
+    //   //     if (docElem) {
+    //   //       docElem.style.setProperty(prop, `${size}px`);
+    //   //     }
+    //   //   }
+    //   // }
+    // }
 
-      this.htmlCanvas.style.fontSize = "".concat(size, "px"); // this.container.style.fontSize = `${size}px`
-
-      if (this.updateFontSize) {
-        var style = window.getComputedStyle(document.documentElement);
-
-        if (style) {
-          var prop = '--lesson__diagram-font-size';
-          var docElem = document.documentElement;
-
-          if (docElem) {
-            docElem.style.setProperty(prop, "".concat(size, "px"));
-          }
-        }
-      }
-    }
   }, {
     key: "destroy",
     value: function destroy() {
@@ -4218,10 +4214,10 @@ function () {
 
       if (this.elements != null) {
         this.elements.updateLimits(this.limits, this.spaceTransforms);
-      }
-
-      this.sizeHtmlText(); // this.elements.resizeHtmlObject();
+      } // this.sizeHtmlText();
+      // this.elements.resizeHtmlObject();
       // this.updateHTMLElementTie();
+
 
       if (skipHTMLTie) {
         this.elements.resize();

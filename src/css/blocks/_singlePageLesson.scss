@@ -8,6 +8,10 @@
   // position: relative;
 }
 
+// .single_page_lesson__container .lesson__diagram {
+//   background-color: none;
+// }
+
 .single_page_lesson__header1 {
   padding-top: 0.6em;
   padding-bottom: 0.2em;
@@ -70,6 +74,7 @@
 .single_page_lesson__container .lesson__diagram {
   max-width: none;
   max-height: none;
+  background-color: #0000;
 }
 
 .single_page_lesson__figure {
