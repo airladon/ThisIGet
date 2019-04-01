@@ -11,6 +11,11 @@
   border-radius: calc(var(--pres__button_height) / 2);
   font-family: times new roman, serif;
   font-style: italic;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
   // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
   // border-color: color('diagram', 'background', 'darker');
 }
@@ -36,8 +41,9 @@
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
   .lesson__info_button {
-    left: calc(100% - var(--lesson__np_button-width) / 2 - calc(var(--lesson__goto_button-font-size) * 1.5));
-    top: calc(82% - var(--lesson__goto_button-font-size) * 1.5);
+    // left: calc(100% - var(--lesson__np_button-width) / 2 - calc(var(--lesson__goto_button-font-size) * 1.5));
+    left: calc(100% - var(--pres__hspace) - var(--pres__nav_button_width) / 2 - var(--pres__button_height) / 2);
+    top: calc(84% - var(--pres__button_height) / 2);
   }
 }
 
@@ -51,7 +57,7 @@
   color: color('diagram', 'disabled', 'darker');
   border-radius: calc(var(--lesson__diagram-font-size) * 0.4);
   width: max-content;
-  max-width: calc(var(--lesson__content-width) * 0.8);
+  max-width: calc(var(--pres__content_width) * 0.8);
 }
 
 .lesson__info_box ul {
@@ -113,7 +119,7 @@
   padding-left: calc(var(--lesson__diagram-font-size) * 1);
   padding-right: calc(var(--lesson__diagram-font-size) * 1);
   padding-bottom: calc(var(--lesson__diagram-font-size) * 0.5);
-  max-height: calc(var(--lesson__content-height) * 0.4);
+  max-height: calc(var(--pres__content_height) * 0.4);
   overflow: scroll;
   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
 }
