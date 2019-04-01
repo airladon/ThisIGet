@@ -17,11 +17,11 @@ $title_bar_space_low: 90px;
 // This means the max container aspect ratio for a 3/2 content screen
 // where vw can be max is:
 // 3 / 2x where x is:
-//   1 + 0.02 + 0.02 * 2 + 0.1) = 2 * 1.16;
-// = 3 / 2.32 = 300 / 232
+//   1 + 0.02 + 0.02 * 2 + 0.15) = 2 * 1.21;
+// = 3 / 2.42 = 300 / 242
 $portrait_vspace: 0.02;
 $portrait_vpadding: 0.02;
-$portrait_button_height: 0.1;
+$portrait_button_height: 0.15;
 
 // Default variable values for landscape, max height aspect ratios
 // content width = content height * AR
@@ -42,7 +42,7 @@ $landscape_content_width: 0.7353;
 // In between aspect ratio will be landscape orientation, but width limited
 // Same width ratios as above
 
-$landscape_aspect_ratio: "300/232";
+$landscape_aspect_ratio: "300/242";
 $height_limited_landscape_aspect_ratio: "408/200";
 
 @media (min-aspect-ratio: 1/100) {
@@ -58,7 +58,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
     --pres__vpadding: calc(var(--pres__content_height) * #{$portrait_vpadding});
     --pres__container_height: calc(var(--pres__content_height) + var(--pres__vspace) + var(--pres__nav_button_height));
     //
-    --pres__nav_button_width: calc(var(--pres__nav_button_height) * 1);
+    --pres__nav_button_width: calc(var(--pres__nav_button_height) * 0.7);
   }
 }
 
