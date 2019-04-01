@@ -33,15 +33,18 @@
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
   #lesson__button-previous {
     margin-left: var(--pres__hpadding);
+    margin-right: var(--pres__hspace);
   }
 
   #lesson__button-next {
+    margin-left: var(--pres__hspace);
     margin-right: var(--pres__hpadding);
   }
 
   .lesson__np_button {
     position: relative;
-    top: calc(50% - var(--pres__nav_button_height) / 2);
+    top: calc(var(--pres__content_height) / 2 - var(--pres__nav_button_height) / 2);
+    // top: 0;
     display: inline-block;
     vertical-align: top;
     border-top: calc(var(--pres__nav_button_height) / 2) solid transparent;
