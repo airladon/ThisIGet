@@ -200,7 +200,7 @@ export default class PresentationLessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addInfoButton() {
-    return <Button label="i" id="id_lesson__info_button" className="lesson__info_button lesson__info_hide"/>;
+    return <div id="id_lesson__info_button" className="lesson__info_button lesson__info_hide"><div className="lesson__info_button_label"><div className="lesson__info_button_label_text">i</div></div></div>;
   }
 
   // eslint-disable-next-line class-methods-use-this

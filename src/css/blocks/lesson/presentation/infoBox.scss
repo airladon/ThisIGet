@@ -1,24 +1,12 @@
 .lesson__info_button {
   // background-color: color('presentation', 'background');
   background-color: #0000;
-  color: color('presentation', 'text');
-  font-size: calc(var(--pres__button_height) * 0.6);
-  width: calc(var(--pres__button_height) * 1);
-  height: calc(var(--pres__button_height) * 1);
   position: absolute;
   left: calc(70% - var(--pres__button_height) / 2);
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
-  border: 1px solid;
-  border-radius: calc(var(--pres__button_height) / 2);
-  font-family: times new roman, serif;
-  font-style: italic;
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                      supported by Chrome and Opera */
-  // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
-  padding: calc(var(--pres__button_height) * 0.6 * 0.05);
+  width: calc(var(--pres__button_height) * 1);
+  height: calc(var(--pres__button_height) * 1);
+  // padding: calc(var(--pres__button_height) * 0.6 * 0.05);
   // border-color: color('diagram', 'background', 'darker');
 }
 
@@ -30,12 +18,36 @@
 //   color: color('presentation', 'hover');
 // }
 
-.lesson__info_button:hover {
+.lesson__info_button_label {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  color: color('presentation', 'text');
+  font-size: calc(var(--pres__button_height) * 0.6);
+  border: 1px solid color('presentation', 'text');
+  border-radius: calc(var(--pres__button_height) / 2);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+  // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
+}
+
+.lesson__info_button_label_text {
+  position: absolute;
+  left: 40%;
+  top: -2%;
+  font-family: times new roman, serif;
+  font-style: italic;
+}
+
+.lesson__info_button_label:hover {
   color: color('presentation', 'hover');
+  border: 1px solid color('presentation', 'hover');
   cursor: pointer;
   // background-color: color('diagram', 'background', 'darker');
 }
-
 // .lesson__info_button_show {
 //   // background-color: color('diagram', 'background', 'darker');
 // }
