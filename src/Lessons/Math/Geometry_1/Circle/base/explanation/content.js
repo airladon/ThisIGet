@@ -115,7 +115,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._radius, circle._arc, circle._center],
       setSteadyState: () => {
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
         circle._radius.setRotation(0.001);
       },
     });
@@ -148,7 +148,7 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {
         circ._activator.onClick = circ.pulseCircle.bind(circ);
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
       setLeaveState: () => {
         circ._activator.onClick = null;
@@ -176,7 +176,7 @@ class Content extends PresentationLessonContent {
         circ.straightening = false;
         circle._line.setColor(colors.grid);
         circ._activator.onClick = circ.straightenCircumference.bind(circ, 4);
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
       setLeaveState: () => {
         circle._line.setColor(colors.circle);
@@ -195,7 +195,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._line, circle._center],
       setEnterState: () => {
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
     });
     this.addSection(common, {
@@ -215,7 +215,7 @@ class Content extends PresentationLessonContent {
         circ._circle.isTouchable = true;
         circ._circle.hasTouchableElements = true;
         circ._circle._line.isTouchable = true;
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
         circ.setCircleMoveLimits();
         circ.updateCircleLocation();
         circ._locationText.setScenario('topRight');
@@ -240,7 +240,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._line, circle._center, circle._radius],
       setEnterState: () => {
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
     });
     this.addSection(common, {
@@ -257,7 +257,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
     });
     this.addSection(common, {
@@ -269,7 +269,7 @@ class Content extends PresentationLessonContent {
       },
       show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
-        circ._circle.setScenario('center');
+        circ._circle.setScenario('centerHigh');
       },
     });
     this.addSection(common, {
@@ -410,8 +410,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'We now have two relationships:',
-        style({ top: 35 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
+        style({ top: 12 }, 'We now have two relationships:'),
+        style({ top: 22 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
       ],
       modifiers: {
         radius: highlight(colors.radius),
@@ -425,12 +425,13 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         circ._eqnDiameterRadius.showForm('base');
-        circ._eqnDiameterRadius.setScenario('centerTop');
+        circ._eqnDiameterRadius.setScenario('centerMid');
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('centerMid');
         // circ._allEquationNav.setScenario('bottom');
         circ._allEquationEqn.showForm('4');
-        circ._allEquationEqn.setPosition(0.2, -0.9);
+        circ._allEquationEqn.setPosition(0.2, -0.65);
+        circ._allEquationEqn.setScale(0.8);
       },
       setLeaverState: () => {
         circ._eqnCircumferenceDiameter._circumference.isTouchable = true;

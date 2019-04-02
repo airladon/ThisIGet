@@ -47,7 +47,7 @@ class Content extends PresentationLessonContent {
         center: click(circ.pulseCenter, [circ], colors.center),
       },
       setEnterState: () => {
-        circle.setScenario('centerHigh');
+        circle.setScenario('summary');
       },
       show: [circle._line, circle._center],
       setSteadyState: () => {},
@@ -70,7 +70,7 @@ class Content extends PresentationLessonContent {
         circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
       setEnterState: () => {
-        circle.setScenario('centerHigher');
+        circle.setScenario('summaryHigher');
         circle._radius.setRotation(0.5);
         circle._diameter.setRotation(-0.5);
       },

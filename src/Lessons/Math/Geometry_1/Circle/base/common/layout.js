@@ -381,8 +381,9 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, 0) },
-        centerHigh: { position: new Point(0, 0.3) },
-        centerHigher: { position: new Point(0, 0.5) },
+        centerHigh: { position: new Point(0, 0.2) },
+        summary: { position: new Point(0, 0.3) },
+        summaryHigher: { position: new Point(0, 0.5) },
         right: { position: new Point(1.5, 0.2) },
       },
       hasTouchableElements: true,
@@ -436,7 +437,8 @@ export default function lessonLayout() {
     'eqnDiameterRadius',
     ['diameter', 'equals', '_2', 'x', 'radius'],
     {
-      centerTop: { position: new Point(0.2, 1.5) },
+      centerTop: { position: new Point(-0.1, 1.6), scale: 0.9 },
+      centerMid: { position: new Point(-0.25, 1.1), scale: 0.9 },
       left: { position: new Point(-1, 0.8), scale: 0.8 },
       qr: { position: new Point(0, -1.2), scale: 0.7 },
     },
@@ -456,7 +458,7 @@ export default function lessonLayout() {
     ['circumference', 'equals', 'pi', 'x', 'diameter'],
     {
       centerTop: { position: new Point(0.2, 1.4) },
-      centerMid: { position: new Point(0.2, 1) },
+      centerMid: { position: new Point(0.2, 0.7), scale: 0.9 },
       left: { position: new Point(-1, 0.3), scale: 0.8 },
       qr: { position: new Point(0.1, -1.2), scale: 0.7 },
     },
