@@ -225,7 +225,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         topRight: { position: new Point(1.05, 1.6) },
-        summary: { position: new Point(-2.05, 1.2) },
+        summary: { position: new Point(-2.15, 1.35) },
       },
     },
   });
@@ -237,7 +237,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        summary: { position: new Point(-2.05, 1) },
+        summary: { position: new Point(-2.15, 1.15) },
       },
     },
   });
@@ -249,7 +249,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        summary: { position: new Point(-2.05, 0.8) },
+        summary: { position: new Point(-2.15, 0.95) },
       },
     },
   });
@@ -260,7 +260,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        summary: { position: new Point(-2.05, 0.6) },
+        summary: { position: new Point(-2.15, 0.75) },
       },
     },
   });
@@ -382,7 +382,8 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: new Point(0, 0) },
         centerHigh: { position: new Point(0, 0.3) },
-        right: { position: new Point(1.3, 0) },
+        centerHigher: { position: new Point(0, 0.5) },
+        right: { position: new Point(1.5, 0.1) },
       },
       hasTouchableElements: true,
     },
@@ -419,7 +420,7 @@ export default function lessonLayout() {
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
-      scale: 1.3,
+      scale: 1.2,
       elements,
       defaultFormAlignment,
       forms: {

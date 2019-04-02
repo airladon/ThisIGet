@@ -230,7 +230,7 @@ class Content extends PresentationLessonContent {
       title: 'Radius',
       setContent: [
         'The |radius| describes the circle\'s size and is |any| line between the |center| and |edge|. The radius is half the circle width.',
-        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition')}`,
+        `${new Definition('Radius', 'Latin', ['radius', 'MEANING', '', 'spoke of a chariot wheel']).html(colors.radius)}`,
       ],
       modifiers: {
         radius: click(circ.pulseRadius, [circ], colors.radius),
@@ -247,13 +247,13 @@ class Content extends PresentationLessonContent {
       title: 'Diameter',
       setContent: [
         'The |diameter| describes the circle\'s full width and is |any| line that runs between two points on the circle\'s |edge| and the |center|.',
-        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition')}`,
+        `${new Definition('Diameter', 'Greek', ['diametros', 'WHERE', 'dia', 'across', 'metros', 'measure']).html(colors.diameter)}`,
       ],
       modifiers: {
-        diameter: click(circ.pulseDiameter, [circ], colors.radius),
+        diameter: click(circ.pulseDiameter, [circ], colors.diameter),
         center: click(circ.pulseCenter, [circ], colors.center),
         edge: click(circ.pulseCircle, [circ], colors.circle),
-        any: click(circ.pushDiameterRandom, [circ], colors.radius),
+        any: click(circ.pushDiameterRandom, [circ], colors.diameter),
       },
       show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
@@ -264,6 +264,9 @@ class Content extends PresentationLessonContent {
       setContent: [
         '|Diameter| is often used when measuring a circle, as it can be easier to measure. In comparison, |radius| is often used when using a circle\'s properties in more complex problems, as it can make the math simpler.',
       ],
+      modifiers: {
+        Diameter: highlight(colors.diameter),
+      },
       show: [circle._line, circle._center, circle._diameter],
       setEnterState: () => {
         circ._circle.setScenario('center');
@@ -405,11 +408,15 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: [
         'We now have two relationships:',
-        style({ top: 30 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
+        style({ top: 35 }, 'Which we can use to find the relationship between |radius| and |circumference|.'),
       ],
+      modifiers: {
+        radius: highlight(colors.radius),
+        circumference: highlight(colors.circle),
+      },
       setEnterState: () => {
         circ._eqnCircumferenceDiameter._circumference.isTouchable = false;
         circ._eqnCircumferenceDiameter._diameter.isTouchable = false;
@@ -423,7 +430,7 @@ class Content extends PresentationLessonContent {
         circ._eqnCircumferenceDiameter.setScenario('centerMid');
         // circ._allEquationNav.setScenario('bottom');
         circ._allEquationEqn.showForm('4');
-        circ._allEquationEqn.setPosition(0, -1);
+        circ._allEquationEqn.setPosition(0.2, -0.9);
       },
       setLeaverState: () => {
         circ._eqnCircumferenceDiameter._circumference.isTouchable = true;

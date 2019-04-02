@@ -13,6 +13,7 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 
 const {
   click,
+  style,
 //   centerV,
 } = Fig.tools.html;
 
@@ -39,15 +40,15 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Circle',
       setContent: [
-        'A |circle| is a shape whose |edge| is a constant distance from its |center|.',
-        `${new Definition('Circle', 'Latin', ['circulus', 'ring']).html('id_lesson__isosceles_definition', 'lesson__definition_lowest')}`,
+        style({ top: 5 }, 'A |circle| is a shape whose |edge| is a constant distance from its |center|.'),
+        `${new Definition('Circle', 'Latin', ['circulus', 'MEANING', '', 'ring']).html(colors.circle)}`,
       ],
       modifiers: {
         edge: click(circ.pulseCircle, [circ], colors.circle),
         center: click(circ.pulseCenter, [circ], colors.center),
       },
       setEnterState: () => {
-        circle.setScenario('center');
+        circle.setScenario('centerHigh');
       },
       show: [circle._line, circle._center],
       setSteadyState: () => {},
@@ -58,10 +59,10 @@ class Content extends PresentationLessonContent {
       title: 'Circle',
       setContent: [
         'A circle\'s |properties| include the |circumference|, |radius|, |diameter| and |center|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition', 'lesson__definition_highest')}`,
-        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html('id_lesson__radius_definition', 'lesson__definition_higher')}`,
-        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html('id_lesson__diameter_definition', 'lesson__definition_high')}`,
-        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition')}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html({ classes: 'lesson__definition_highest', wordColor: colors.center })}`,
+        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html({ classes: 'lesson__definition_higher', wordColor: colors.radius })}`,
+        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html({ classes: 'lesson__definition_high', wordColor: colors.diameter })}`,
+        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html(colors.circle)}`,
       ],
       modifiers: {
         center: click(circ.pulseCenter, [circ], colors.center),
@@ -70,7 +71,7 @@ class Content extends PresentationLessonContent {
         circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
       setEnterState: () => {
-        circle.setScenario('centerHigh');
+        circle.setScenario('centerHigher');
         circle._radius.setRotation(0.5);
         circle._diameter.setRotation(-0.5);
       },
