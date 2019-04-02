@@ -137,7 +137,7 @@ class Content extends PresentationLessonContent {
       title: 'Circumference',
       setContent: [
         'Every shape has a |perimeter|, which is the shape\'s boundary or outline. The |length| of the perimeter is a |property| used to describe the shape\'s size.',
-        `${new Definition('Perimeter', 'Greek', ['perimetros', 'WHERE', 'peri', 'around', 'metros', 'measure']).html()}`,
+        `${new Definition('Perimeter', 'Greek', ['perimetros', 'WHERE', 'peri', 'around', 'metros', 'measure']).html(colors.circle)}`,
       ],
       modifiers: {
         perimeter: click(circ.pulseCircle, [circ], colors.circle),
@@ -158,7 +158,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'A circle\'s perimeter has the special name |circumference|. The length of the circumference is most easily seen when |straightened| out.',
-        `${new Definition('Circumference', 'Latin', ['circumferentia', 'WHERE', 'circum', 'around', 'ferre', 'carry']).html()}`,
+        `${new Definition('Circumference', 'Latin', ['circumferentia', 'WHERE', 'circum', 'around', 'ferre', 'carry']).html(colors.circle)}`,
       ],
       modifiers: {
         straightened: click(circ.straightenCircumference, [circ, 4], colors.circle),
@@ -187,7 +187,7 @@ class Content extends PresentationLessonContent {
       title: 'Center',
       setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'MEANING', '', 'middle']).html()}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'MEANING', '', 'middle']).html(colors.center)}`,
       ],
       modifiers: {
         center_point: click(circ.pulseCenter, [circ], colors.center),

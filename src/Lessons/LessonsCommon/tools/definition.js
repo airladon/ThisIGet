@@ -1,6 +1,8 @@
 // @flow
 import Fig from 'figureone';
+
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
+const { colorArrayToRGBA } = Fig.tools.color;
 
 class Root {
   root: string;
@@ -16,6 +18,7 @@ const specialWords = {
   WHERE: 'where',
   AND: 'and',
   MEANING: 'meaning',
+  MEANS: 'means',
 };
 
 class SpecialWord {
@@ -101,12 +104,26 @@ export default class Definition {
     const defaultOptions = {
       id: generateUniqueId('definition'),
       classes: '',
+      wordClass: '',
+      wordColor: '',
     };
-    const options = joinObjects(defaultOptions, optionsIn);
+    let options = defaultOptions;
+    if (Array.isArray(optionsIn)) {
+      defaultOptions.wordColor = colorArrayToRGBA(optionsIn);
+    } else {
+      options = joinObjects(defaultOptions, optionsIn);
+    }
+    if (Array.isArray(options.wordColor)) {
+      options.wordColor = colorArrayToRGBA(options.wordColor);
+    }
     const { id, classes } = options;
     let outStr = '';
     outStr += `<div id="${id}" class="lesson__definition_container ${classes}">`;
-    outStr += '<span class="lesson__definition_word">';
+    let style = '';
+    if (options.wordColor) {
+      style = ` style="color:${(options.wordColor)}"`;
+    }
+    outStr += `<span class="lesson__definition_word ${options.wordClass}"${style}>`;
     outStr += this.word;
     outStr += '</span>';
     this.from.forEach((fromLanguage) => {
