@@ -470,7 +470,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 .lesson__diagram_text p:first-child {
-  margin-top: var(--pres__text_margin);
+  margin-top: calc(var(--pres__text_margin) * 2);
 }
 
 // .lesson__p_top_margin_0 {

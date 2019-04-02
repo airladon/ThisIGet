@@ -442,7 +442,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: 'Experiment',
-      setContent: ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.'],
+      setContent: style({ top: 0 }, ['Experiment with changing the circle\'s |size| and |location| to see how it\'s properties change.']),
       show: [
         circle, circ._grid,
         circ._locationText, circ._circumferenceText,

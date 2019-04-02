@@ -13,7 +13,6 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 
 const {
   click,
-  style,
 //   centerV,
 } = Fig.tools.html;
 
@@ -40,7 +39,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Circle',
       setContent: [
-        style({ top: 5 }, 'A |circle| is a shape whose |edge| is a constant distance from its |center|.'),
+        'A |circle| is a shape whose |edge| is a constant distance from its |center|.',
         `${new Definition('Circle', 'Latin', ['circulus', 'MEANING', '', 'ring']).html(colors.circle)}`,
       ],
       modifiers: {
@@ -102,7 +101,7 @@ class Content extends PresentationLessonContent {
         circ._eqnDiameterRadius.setScenario('left');
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('left');
-        circ._eqnCircumferenceRadius.showForm('radius');
+        circ._eqnCircumferenceRadius.showForm('base');
         circ._eqnCircumferenceRadius.setScenario('left');
       },
       setLeaveState: () => {},

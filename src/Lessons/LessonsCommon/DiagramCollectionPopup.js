@@ -242,19 +242,19 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   // For auto, size is 0.5
   setDiagramSpace(
     optionsIn: {
-      location?: 'left' | 'right' | 'top' | 'bottom' | 'auto',
+      location?: 'left' | 'right' | 'top' | 'bottom',
       xSize?: number,
       ySize?: number,
     },
   ) {
     const defaultOptions = {
-      location: 'auto',
+      location: 'top',
       xSize: 0.5,
       ySize: 0.5,
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
 
-    let overlayAR = 1;
+    // let overlayAR = 1;
     let overlay = document.getElementById('presentation_lesson__qr__overlay');
 
     // deterimine the lesson type
@@ -288,21 +288,21 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     // this.diagram.setFirstTransform();
 
     // Overlay aspect ratio
-    overlayAR = overlay.clientWidth / overlay.clientHeight;
+    // overlayAR = overlay.clientWidth / overlay.clientHeight;
 
     // determine the location to use
-    let locationToUse = options.location;
-    if (options.location === 'auto') {
-      if (
-        overlay.clientWidth > 600
-        || overlayAR > 1
-        || lessonType === 'presentation'
-      ) {
-        locationToUse = 'left';
-      } else {
-        locationToUse = 'top';
-      }
-    }
+    const locationToUse = options.location;
+    // if (options.location === 'auto') {
+    //   if (
+    //     overlay.clientWidth > 600
+    //     || overlayAR > 1
+    //     || lessonType === 'presentation'
+    //   ) {
+    //     locationToUse = 'left';
+    //   } else {
+    //     locationToUse = 'top';
+    //   }
+    // }
 
     // determine diagram size to use
     let xSizeD;

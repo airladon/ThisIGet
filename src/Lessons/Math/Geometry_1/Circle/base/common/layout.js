@@ -383,7 +383,7 @@ export default function lessonLayout() {
         center: { position: new Point(0, 0) },
         centerHigh: { position: new Point(0, 0.3) },
         centerHigher: { position: new Point(0, 0.5) },
-        right: { position: new Point(1.5, 0.1) },
+        right: { position: new Point(1.5, 0.2) },
       },
       hasTouchableElements: true,
     },
@@ -437,7 +437,7 @@ export default function lessonLayout() {
     ['diameter', 'equals', '_2', 'x', 'radius'],
     {
       centerTop: { position: new Point(0.2, 1.5) },
-      left: { position: new Point(-1, 0.5), scale: 0.8 },
+      left: { position: new Point(-1, 0.8), scale: 0.8 },
       qr: { position: new Point(0, -1.2), scale: 0.7 },
     },
   );
@@ -457,8 +457,8 @@ export default function lessonLayout() {
     {
       centerTop: { position: new Point(0.2, 1.4) },
       centerMid: { position: new Point(0.2, 1) },
-      left: { position: new Point(-1, 0), scale: 0.8 },
-      qr: { position: new Point(0.1, -1.2), scale: 0.5 },
+      left: { position: new Point(-1, 0.3), scale: 0.8 },
+      qr: { position: new Point(0.1, -1.2), scale: 0.7 },
     },
   );
 
@@ -468,8 +468,8 @@ export default function lessonLayout() {
     {
       centerTop: { position: new Point(0.2, 1.4) },
       centerMid: { position: new Point(0.2, 1) },
-      left: { position: new Point(-1, -0.5), scale: 0.8 },
-      qr: { position: new Point(0.1, -1.5), scale: 0.5 },
+      left: { position: new Point(-1, -0.2), scale: 0.8 },
+      qr: { position: new Point(0.1, -1.5), scale: 0.7 },
     },
   );
 
@@ -477,7 +477,7 @@ export default function lessonLayout() {
     'eqnRadiusDiameter',
     ['radius', 'equals', { frac: ['diameter', '_2', 'v'] }],
     {
-      qr: { position: new Point(-0.1, -1.2), scale: 0.5 },
+      qr: { position: new Point(-0.1, -1.2), scale: 0.7 },
     },
   );
 
@@ -485,7 +485,7 @@ export default function lessonLayout() {
     'eqnRadiusCircumference',
     ['radius', 'equals', { frac: ['circumference', ['_2', 'pi'], 'v'] }],
     {
-      qr: { position: new Point(-0.1, -1.5), scale: 0.5 },
+      qr: { position: new Point(-0.3, -1.6), scale: 0.7 },
     },
   );
 

@@ -86,7 +86,7 @@ export class QRRadius extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const circle = this._collection._circle;
     circle._center.show();
@@ -97,7 +97,7 @@ export class QRRadius extends PopupBoxCollection {
     this._collection._eqnRadiusDiameter.setScenario('qr');
     this._collection._eqnRadiusCircumference.showForm('base');
     this._collection._eqnRadiusCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.5, 2.5, 2.5));
+    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
   }
 }
 
@@ -130,7 +130,7 @@ export class QRCircumference extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const circle = this._collection._circle;
     circle._line.show();
@@ -138,7 +138,7 @@ export class QRCircumference extends PopupBoxCollection {
     this._collection._eqnCircumferenceRadius.setScenario('qr');
     this._collection._eqnCircumferenceDiameter.showForm('base');
     this._collection._eqnCircumferenceDiameter.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.5, 2.5, 2.5));
+    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
   }
 }
 
@@ -164,7 +164,7 @@ export class QRCircle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const circle = this._collection._circle;
     circle._line.show();
@@ -197,13 +197,13 @@ export class QRPi extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.4 });
     super.show();
     const circle = this._collection._circle;
     circle._diameter.showAll();
     circle._line.show();
     // circle._center.show();
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.25, 2.5, 2.5));
+    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.6, 2.5, 3));
   }
 }
 
