@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  DiagramElementCollection, DiagramEquation,
+  DiagramElementCollection,
   Transform,
 } = Fig;
 
@@ -21,6 +21,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _marks20: DiagramElementPrimative;
     _marks50: DiagramElementPrimative;
     _marks100: DiagramElementPrimative;
+    _marks12Long: DiagramElementPrimative;
     _degrees: {
       _marks36: DiagramElementPrimative;
       _marks360: DiagramElementPrimative;
@@ -74,9 +75,16 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   setAngleMarks(
-    marks: 12 | 20 | 50 | 100 | 'degrees' | 'radians' = 'degrees',
+    marks: 12 | 20 | 50 | 100 | '12Long' | 'degrees' = 'degrees',
+    pulseIfSame: boolean = false,
   ) {
+    if (pulseIfSame && marks === this.marks) {
+      this._circle[`_marks${marks}`].pulseScaleNow(1, 1.2);
+      this.diagram.animateNextFrame();
+      return;
+    }
     this._circle._marks12.hide();
+    this._circle._marks12Long.hide();
     this._circle._marks20.hide();
     this._circle._marks50.hide();
     this._circle._marks100.hide();
@@ -84,8 +92,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (marks === 'degrees') {
       this.setAngleTextProperties(360, 0, 'º');
       this._circle._degrees.showAll();
-    } else if (marks === 'radians') {
-      this.setAngleTextProperties(Math.PI * 2, 2, 'radians');
+    } else if (marks === '12Long') {
+      this.setAngleTextProperties(12, 1, 'portions');
+      this._circle._marks12Long.showAll();
     } else {
       this.setAngleTextProperties(marks, 1, 'portions');
       this._circle[`_marks${marks}`].showAll();

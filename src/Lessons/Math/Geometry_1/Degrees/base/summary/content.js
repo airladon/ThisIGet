@@ -41,11 +41,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: '',
       setContent: [centerV([
-        style({ right: 50, size: 0.9 }, '|Angle| is the amount of |rotation| between two |lines|.'),
-        style({ right: 50, size: 0.9 }, 'A full rotation can be split into |360| |equal_portions|, called |degrees|.'),
-        style({ right: 50, size: 0.9 }, 'An angle can be |measured| by counting the number of degrees within it.'),
+        style({ right: 45, size: 1 }, '|Angle| is the amount of |rotation| between two |lines|.'),
+        style({ right: 45, size: 1 }, 'A full rotation can be split into |360| |equal_portions|, called |degrees|.'),
+        style({ right: 45, size: 1 }, 'An angle can be |measured| by counting the number of degrees within it.'),
       ]),
-      `${new Definition('Degree', 'Latin', ['de', 'down', 'gradus', 'step']).html('id_lesson__degree_definition')}`,
+      `${new Definition('Degree', 'Latin', ['de', 'down', 'gradus', 'step']).html(colors.angles)}`,
       ],
       modifiers: {
         full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.angles),

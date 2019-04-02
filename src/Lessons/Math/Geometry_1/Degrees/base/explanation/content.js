@@ -15,8 +15,9 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   centerVH, centerV,
-  highlightWord,
-  // highlight,
+  // highlightWord,
+  highlight,
+  style,
   // actionWord,
   clickWord,
   // onClickId,
@@ -135,7 +136,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: { _12: click(diag.pulseMarks, [diag, 12], colors.marks) },
       show: [
-        circle._line1, circle._line2, circle._angle, circle._marks12,
+        circle._line1, circle._line2, circle._angle, circle._marks12Long,
       ],
     });
 
@@ -149,8 +150,7 @@ class Content extends PresentationLessonContent {
         circle._angleText,
       ],
       setSteadyState: () => {
-        // diag.updateAngle();
-        diag.setAngleMarks(12);
+        diag.setAngleMarks('12Long');
         circle._angleText.setScenario('bottom');
       },
     });
@@ -160,10 +160,10 @@ class Content extends PresentationLessonContent {
         '|_12| portions is just an example. It could also be |_20|, |_50| or |_100|.',
       ],
       modifiers: {
-        _12: click(diag.setAngleMarks, [diag, 12], colors.angles),
-        _20: click(diag.setAngleMarks, [diag, 20], colors.angles),
-        _50: click(diag.setAngleMarks, [diag, 50], colors.angles),
-        _100: click(diag.setAngleMarks, [diag, 100], colors.angles),
+        _12: click(diag.setAngleMarks, [diag, 12, true], colors.angles),
+        _20: click(diag.setAngleMarks, [diag, 20, true], colors.angles),
+        _50: click(diag.setAngleMarks, [diag, 50, true], colors.angles),
+        _100: click(diag.setAngleMarks, [diag, 100, true], colors.angles),
       },
       show: [
         circle._line1, circle._line2, circle._angle, circle._marks12,
@@ -186,9 +186,14 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Degree',
       setContent: centerV([
-        'The word |degree| comes from the Latin words |de| (meaning |down|) and |gradus| (meaning |step|).',
+        'The word |degree| comes from the |Latin| words |de| (meaning |down|) and |gradus| (meaning |step|).',
         'So 360 degrees (360º) is the same as saying there are 360 |smaller steps| or pieces.',
       ]),
+      modifiers: {
+        Latin: highlight('lesson__latin'),
+        de: highlight('lesson__latin'),
+        gradus: highlight('lesson__latin'),
+      },
     });
 
     this.addSection({
@@ -205,11 +210,10 @@ class Content extends PresentationLessonContent {
         'So, |why did they| choose 360?',
         'It\'s not known, but one reason might be |360 is an easy number to work with| when you don\'t have a calculator.',
         '360 has a lot of numbers that can divide into it without a remainder:',
-        '<ul style="list-style-type:none;"><li>|_factors|</li></ul>',
+        style({
+          left: 5, right: 15, size: 1, color: colors.diagram.text.keyword,
+        }, '1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360'),
       ]),
-      modifiers: {
-        _factors: highlightWord('1, 2, 3, 4, 5, 6, 8, 9, 10, 12, 15, 18, 20, 24, 30, 36, 40, 45, 60, 72, 90, 120, 180, 360', 'lesson__diagram_text_small'),
-      },
     });
 
     const row = (portion: string, angle: number) => `<tr><td class="lesson__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
@@ -218,8 +222,9 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: 'Common Angles',
-      setContent: () => `
-          <p>This means it's easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.</p>
+      setContent: () => [
+        style({ top: 0 }, 'This means it\'s easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.'),
+        `
           <table class="in_lesson__fraction_table">
             <tr>
               <th class="lesson__fraction_title"> Fraction </th>
@@ -234,6 +239,7 @@ class Content extends PresentationLessonContent {
             ${row(String.fromCharCode(8537), 60)}
           </table>
         `,
+      ],
       modifiers: {
         _270deg: rowClick(270),
         _240deg: rowClick(240),
@@ -251,14 +257,6 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('degrees');
         circle._angleText.setScenario('bottomSlightRight');
         circle.setScenario('right');
-        // const bindArray = deg => [diag, deg / 180 * Math.PI, 0, 1, null];
-        // onClickId('id_270', diag.pushLine, bindArray(270));
-        // onClickId('id_240', diag.pushLine, bindArray(240));
-        // onClickId('id_180', diag.pushLine, bindArray(180));
-        // onClickId('id_120', diag.pushLine, bindArray(120));
-        // onClickId('id_90', diag.pushLine, bindArray(90));
-        // onClickId('id_72', diag.pushLine, bindArray(72));
-        // onClickId('id_60', diag.pushLine, bindArray(60));
       },
     });
   }

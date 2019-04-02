@@ -30393,6 +30393,7 @@ function style() {
   var marginTop = '';
   var size = '';
   var className = '';
+  var color = '';
 
   if (typeof options === 'number') {
     marginTop = "margin-top:".concat(options, "%");
@@ -30410,16 +30411,20 @@ function style() {
     }
 
     if (options.size != null) {
-      size = "font-size:".concat(options.size, "em");
+      size = "font-size:".concat(options.size, "em;");
     }
 
     if (options.className) {
       className = "class=\"".concat(options.className, "\"");
     }
+
+    if (options.color) {
+      color = "color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(options.color), ";");
+    }
   }
 
-  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(size, "\"").concat(className, ">");
-  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size, "\"").concat(className, ">");
+  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(size).concat(color, "\"").concat(className, ">");
+  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
   var textToUse;
 
   if (Array.isArray(text)) {

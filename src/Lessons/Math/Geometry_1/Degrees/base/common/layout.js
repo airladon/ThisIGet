@@ -75,17 +75,18 @@ export default function lessonLayout() {
     },
   };
 
-  const marks = (numMarks: number, inner: number = radius) => ({
-    name: `marks${numMarks}`,
+  const marks = (numMarks: number, inner: number = radius, lineWidth: number = width / 2, name: string = `marks${numMarks}`) => ({
+    name,
     method: 'radialLines',
     options: {
       innerRadius: inner,
       outerRadius: radius * 1.1,
       color: colors.marks,
-      width: width / 2,
+      width: lineWidth,
       dAngle: Math.PI * 2 / numMarks,
     },
   });
+  layout.marks12Long = marks(12, 0, width / 4, 'marks12Long');
   layout.marks12 = marks(12);
   layout.marks20 = marks(20);
   layout.marks50 = marks(50);
@@ -138,8 +139,9 @@ export default function lessonLayout() {
         bottomRight: { position: new Point(1.7, -1.3) },
         bottomLeft: { position: new Point(-1.2, -1.2) },
         bottom: { position: new Point(-0.2, -1.5) },
-        bottomSlightRight: { position: new Point(0.1, -1.5) },
-        summary: { position: new Point(0.1, 1.7), scale: 1.5 },
+        // bottomSlightRight: { position: new Point(1.4, -1.2) },
+        bottomSlightRight: { position: new Point(0.15, -1.5) },
+        summary: { position: new Point(0.15, -1.55), scale: 1.2 },
         qr: { position: new Point(0.2, -1.7), scale: 1.5 },
       },
     },
@@ -149,6 +151,7 @@ export default function lessonLayout() {
     name: 'circle',
     method: 'collection',
     addElements: [
+      layout.marks12Long,
       layout.marks12,
       layout.marks20,
       layout.marks50,
@@ -162,9 +165,9 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, -0.3) },
-        'right': { position: new Point(1, -0.3) },
-        'summary': { position: new Point(1.5, -0.3), scale: 0.8 },
+        'center': { position: new Point(0, -0.15) },
+        'right': { position: new Point(1.2, -0.3), scale: 0.9 },
+        'summary': { position: new Point(1.4, 0.1), scale: 0.9 },
         'qr': { position: new Point(0, 0.3), scale: 1 },
       },
     },

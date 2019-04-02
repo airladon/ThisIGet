@@ -20,24 +20,25 @@ body {
   // color: color('diagram', 'text-base');
   // font-size: calc(var(--lesson__diagram-font-size) * 0.8);
   table-layout: fixed;
-  width: calc(var(--lesson__diagram-font-size) * 8);
+  width: calc(var(--lesson__diagram-font-size) * 10);
   margin-left: calc(var(--lesson__diagram-font-size) * 1);
   // margin-top: calc(var(--lesson__diagram-font-size) * 3);
   border-spacing: 0;
   background-color: color('black', 'darker');
   color: color('grey', 'light');
   border-radius: 0.5em;
-  font-size: 0.5em;
+  font-size: 0.7em;
   position: absolute;
-  top: 35%;
+  top: 29%;
   left: 7%;
+  font-weight: 100;
 }
 
 .in_lesson__fraction_table tr:first-child {
   text-align: center;
   background-color: color('black', 'dark');
   height: 2.5em;
-  font-size: 0.7em;
+  font-size: 0.8em;
 }
 
 .lesson__fraction {
