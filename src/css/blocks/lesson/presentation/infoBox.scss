@@ -18,7 +18,7 @@
 //   color: color('presentation', 'hover');
 // }
 
-.lesson__info_button_label {
+.lesson__info_button_label_container {
   width: 100%;
   height: 100%;
   position: relative;
@@ -35,14 +35,18 @@
   // padding: calc(var(--lesson__goto_button-font-size) * 0.25);
 }
 
+.lesson__info_button_label {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
 .lesson__info_button_label_text {
   // position: absolute;
   // left: 40%;
   // top: -2%;
-  text-align: center;
-  vertical-align: middle;
   font-family: times new roman, serif;
-  // font-style: italic;
+  font-style: italic;
 }
 
 .lesson__info_button_label:hover {
