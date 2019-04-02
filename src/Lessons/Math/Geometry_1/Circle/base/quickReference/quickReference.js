@@ -44,7 +44,7 @@ export class QRDiameter extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const circle = this._collection._circle;
     circle._center.show();
@@ -55,7 +55,7 @@ export class QRDiameter extends PopupBoxCollection {
     this._collection._eqnDiameterRadius.setScenario('qr');
     this._collection._eqnDiameterCircumference.showForm('base');
     this._collection._eqnDiameterCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.5, 2.5, 2.5));
+    this.transformToQRWindow(this._collection, new Rect(-1.5, -1.9, 2.5, 3));
   }
 }
 

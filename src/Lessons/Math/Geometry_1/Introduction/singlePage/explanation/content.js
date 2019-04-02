@@ -46,7 +46,7 @@ class Content extends SinglePageLessonContent {
       new Transform('circles').scale(1, 1).translate(0, 0),
     ));
     this.loadQRs([
-      'triangle_introduction',
+      'circles/base',
       // 'adjacent_angles/base',
     ]);
   }
@@ -89,11 +89,11 @@ class Content extends SinglePageLessonContent {
       _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       // _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
-      // _test: click(this.showQR, [this, 'triangle_introduction', 'Main'], colors.dimensions),
+      _test: click(this.showQR, [this, 'circles', 'Diameter'], colors.dimensions),
     };
     this.content = [
       '# Shapes',
-      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us.',
+      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us. |_test|',
 
       'Mathematics describes something like an object, path or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
 

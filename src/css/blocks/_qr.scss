@@ -64,7 +64,7 @@ $qrHeight: 0.8;
 }
 
 .lesson__qr__overlay .lesson__popup_box__text {
-  font-size: calc(var(--lesson__diagram-font-size) * 1);
+  font-size: calc(var(--lesson__qr_width) / 35);
   display: table-cell;
   vertical-align: middle;
 }
@@ -77,3 +77,11 @@ $qrHeight: 0.8;
 .lesson__qr__overlay .lesson__popup_box__text_container {
   overflow: scroll;
 }
+
+// .lesson__qr__overlay .lesson__popup_box__title_text {
+//   margin-top: 0;
+// }
+
+// .lesson__qr__overlay .lesson__popup_box__title {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.9);
+// }

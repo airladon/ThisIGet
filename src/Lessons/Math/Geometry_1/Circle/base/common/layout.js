@@ -438,15 +438,16 @@ export default function lessonLayout() {
     {
       centerTop: { position: new Point(0.2, 1.5) },
       left: { position: new Point(-1, 0.5), scale: 0.8 },
-      qr: { position: new Point(-0.2, -1.2), scale: 0.5 },
+      qr: { position: new Point(0, -1.2), scale: 0.7 },
     },
   );
 
   layout.diameterCircumferenceEquation = eqn(
     'eqnDiameterCircumference',
-    ['diameter', 'equals', { frac: ['circumference', 'pi', 'v'] }],
+    // ['diameter', 'equals', { frac: ['circumference', 'pi', 'v'] }],
+    ['diameter', 'x', 'pi', 'equals', 'circumference'],
     {
-      qr: { position: new Point(-0.2, -1.5), scale: 0.5 },
+      qr: { position: new Point(0, -1.5), scale: 0.7 },
     },
   );
 

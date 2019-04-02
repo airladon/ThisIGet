@@ -360,13 +360,14 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     if (overlay == null || lessonContent == null) {
       return;
     }
-    const fontSize = parseFloat(window
-      .getComputedStyle(lessonContent, null)
-      .getPropertyValue('font-size'));
-    const width = overlay.clientWidth;
+    // const fontSize = parseFloat(window
+    //   .getComputedStyle(lessonContent, null)
+    //   .getPropertyValue('font-size'));
+    // const width = overlay.clientWidth;
     const height = overlay.clientHeight;
-    const qrWidth = width * 0.7;
+    // const qrWidth = width * 0.7;
     const qrHeight = height * 0.7;
+    const qrWidth = qrHeight * 3 / 2;
     this.setRootElement(qrWidth, qrHeight);
   }
 
@@ -377,29 +378,28 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     if (overlay == null || lessonContent == null) {
       return;
     }
-    const fontSize = parseFloat(window
-      .getComputedStyle(lessonContent, null)
-      .getPropertyValue('font-size'));
+    // const fontSize = parseFloat(window
+    //   .getComputedStyle(lessonContent, null)
+    //   .getPropertyValue('font-size'));
     const width = overlay.clientWidth;
     const height = overlay.clientHeight;
-    const qrWidth = Math.min(800, width * 0.9);
+    let qrWidth = Math.min(800, width * 0.9);
+    // let qrWidth = width * 0.9;
     let qrHeight = qrWidth * 2 / 3;
-    const qrFontSize = Math.max(fontSize, qrWidth / 35);
-    if (width < 600) {
-      qrHeight = Math.min(height * 0.8, qrHeight * 2);
+    if (width > height) {
+      qrHeight = height * 0.8;
+      qrWidth = qrHeight * 3 / 2;
     }
-    this.setRootElement(qrWidth, qrHeight, qrFontSize);
+
+    this.setRootElement(qrWidth, qrHeight);
   }
 
   // eslint-disable-next-line class-methods-use-this
-  setRootElement(width: number, height: number, fontSize: ?number) {
+  setRootElement(width: number, height: number) {
     const rootElement = document.documentElement;
     if (rootElement != null) {
       rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
       rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
-      if (fontSize != null) {
-        rootElement.style.setProperty('--lesson__popup_font_size', `${fontSize}px`);
-      }
     }
   }
 
