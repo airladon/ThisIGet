@@ -6,15 +6,28 @@ class Root {
   root: string;
   meaning: string;
 
-  constructor(root: string, meaning: string) {
-    this.root = root;
+  constructor(rootWord: string, meaning: string) {
+    this.root = rootWord;
     this.meaning = meaning;
+  }
+}
+
+const specialWords = {
+  WHERE: 'where',
+  AND: 'and',
+};
+
+class SpecialWord {
+  word: string;
+
+  constructor(word: string) {
+    this.word = specialWords[word];
   }
 }
 
 class FromLanguage {
   language: string;
-  roots: Array<Root>;
+  roots: Array<Root | SpecialWord>;
 
   constructor(
     language: string,
@@ -22,11 +35,34 @@ class FromLanguage {
   ) {
     this.language = language;
     this.roots = [];
-    roots.forEach((root, index) => {
-      if (index % 2 === 0 && roots.length >= index) {
-        this.roots.push(new Root(roots[index], roots[index + 1]));
+    for (let i = 0; i < roots.length; i += 1) {
+      const rootWord = roots[i];
+      if (specialWords[rootWord] != null) {
+        this.roots.push(new SpecialWord(rootWord));
+      } else {
+        let rootWordMeaning = '';
+        if (i + 1 < roots.length) {
+          if (specialWords[roots[i + 1]] != null) {
+            this.roots.push(new Root(rootWord, rootWordMeaning));
+            this.roots.push(new SpecialWord(roots[i + 1]));
+          } else {
+            rootWordMeaning = roots[i + 1];
+            this.roots.push(new Root(rootWord, rootWordMeaning));
+          }
+        }
+        i += 1;
       }
-    });
+    }
+    // roots.forEach((rootWord, index) => {
+    //   if (specialWords[rootWord] != null) {
+    //     this.roots.push(new SpecialWord(rootWord));
+    //   } else {
+
+    //   }
+    //   if (index % 2 === 0 && roots.length >= index) {
+    //     this.roots.push(new Root(roots[index], roots[index + 1]));
+    //   }
+    // });
   }
 }
 
@@ -74,16 +110,22 @@ export default class Definition {
       const lang = `lesson__${fromLanguage.language.toLowerCase()}`;
       outStr += ` - from <span class="${''}">${fromLanguage.language}</span> `;
       fromLanguage.roots.forEach((root, index) => {
-        outStr += `<span class="lesson__definition_root ${lang}">`;
-        outStr += `${root.root}`;
-        outStr += '</span>';
-        // outStr += '';
-        if (root.meaning) {
-          outStr += `: <span class="lesson__definition_meaning">${root.meaning}</span>`;
-        }
-        // outStr += '</span>';
-        if (fromLanguage.roots.length > index + 1) {
-          outStr += ', ';
+        if (root instanceof Root) {
+          outStr += `<span class="lesson__definition_root ${lang}">`;
+          outStr += `${root.root}`;
+          outStr += '</span>';
+          // outStr += '';
+          if (root.meaning) {
+            outStr += `: <span class="lesson__definition_meaning">${root.meaning}</span>`;
+          }
+          if (
+            fromLanguage.roots.length > index + 1
+            && fromLanguage.roots[index + 1] instanceof Root
+          ) {
+            outStr += ', ';
+          }
+        } else {
+          outStr += ` ${root.word} `;
         }
       });
     });
