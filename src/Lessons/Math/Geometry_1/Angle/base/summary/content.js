@@ -53,7 +53,7 @@ class Content extends PresentationLessonContent {
         angle._line2.setScenario('start');
         angle._line1.setRotation(1);
         angle._line1.isTouchable = true;
-        angle.setScale(0.8);
+        angle.setScenario('summary');
       },
       show: [angle._line1, angle._line2, angle._fill],
     });

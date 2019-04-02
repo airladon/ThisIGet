@@ -208,6 +208,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, -0.5) },
+        summary: { position: new Point(0, -0.35), scale: 0.8 },
       },
     },
     scenario: 'center',
