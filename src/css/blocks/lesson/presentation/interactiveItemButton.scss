@@ -2,24 +2,25 @@
   position: absolute;
   left: calc(80% - var(--pres__button_height) / 2);
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
-  -webkit-user-select: none; /* Safari */
-  -moz-user-select: none; /* Firefox */
-  -ms-user-select: none; /* Internet Explorer/Edge */
-  user-select: none; /* Non-prefixed version, currently
-                      supported by Chrome and Opera */
 }
 
-.lesson__interactive_element_button {
+#id_lesson__interactive_element_button {
   color: color('presentation', 'text');
   width: var(--pres__button_height);
   height: var(--pres__button_height);
   position: absolute;
   border: 1px solid;
   border-radius: calc(var(--pres__button_height) / 2);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;  /* Internet Explorer/Edge  */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
 }
 
-.lesson__interactive_element_button:hover {
-  color: color('presentation', 'hover')
+#id_lesson__interactive_element_button:hover {
+  color: color('presentation', 'hover');
+  cursor: pointer;
   // background-color: color('presentation', 'hover');
 }
 

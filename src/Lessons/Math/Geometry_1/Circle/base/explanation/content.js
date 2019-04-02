@@ -52,7 +52,7 @@ class Content extends PresentationLessonContent {
       //       <li></li>
       //     </ul>
       // `,
-      transitionFromPrev: () => {},
+      transitionFromPrev: (done) => { done(); },
       infoModifiers: {},
       interactiveElements: [
         // interactiveItem(quiz._check),
