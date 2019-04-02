@@ -16,7 +16,8 @@
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
   .lesson__button-goto_container {
-    left: calc(100% - var(--pres__nav_button_width) / 2 - var(--pres__button_height) - var(--pres__hspace));
+    // left: calc(100% - var(--pres__nav_button_width) / 2 - var(--pres__button_height) - var(--pres__hspace));
+    left: calc(var(--pres__content_width) + var(--pres__hspace) * 3 + var(--pres__nav_button_width) * 1.5 - var(--pres__button_height));
     top: calc(94% - var(--pres__button_height) / 2);
   }
 }

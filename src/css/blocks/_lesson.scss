@@ -81,7 +81,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   :root {
     --pres__content_height: 100vh;
     --pres__content_width: calc(var(--pres__content_height) * #{$diagram_ratio});
-    --pres__container_width: calc(var(--pres__content_width) * 1.44);
+    --pres__container_width: calc(var(--pres__content_width) * 1.36);
   }
 }
 
