@@ -200,18 +200,24 @@ export default class PresentationLessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addInfoButton() {
-    return <div id="id_lesson__info_button" className="lesson__info_button lesson__info_hide"><div className="lesson__info_button_label"><div className="lesson__info_button_label_text">i</div></div></div>;
+    return <div id="id_lesson__info_button" className="lesson__info_button lesson__info_hide">
+      <div className="lesson__info_button_label">
+        <div className="lesson__info_button_label_text">
+          ?
+        </div>
+      </div>
+    </div>;
   }
 
   // eslint-disable-next-line class-methods-use-this
   addInteractiveElementButton() {
     return <div id="id_lesson__interactive_element_button__container"
       className="lesson__interactive_element_button__container">
-        <img
+        <div
           id="id_lesson__interactive_element_button"
           className="lesson__interactive_element_button lesson__interactive_element_button__hide"
           onClick={this.lesson.highlightNextInteractiveItem.bind(this.lesson)}
-          src="/static/star.png"/>
+          />
       </div>;
   }
 

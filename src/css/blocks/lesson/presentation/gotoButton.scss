@@ -67,8 +67,14 @@
   padding: 0;
 }
 
+.lesson__button-goto_container .dropdown_button_label {
+  display: block;
+}
+
 .pres__goto_button_label {
-  display: inline-block;
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 #id__lesson__goto_button_list {
@@ -76,13 +82,15 @@
 }
 
 .pres__goto_button_label_page {
-  font-size: calc(var(--pres__unit) * 0.8);
+  font-size: calc(var(--pres__unit) * 0.9);
   // display: inline-block;
-  position: absolute;
-  left: 24%;
-  top: 2%;
-  margin-right: calc(var(--pres__unit) * 0.5);
-  width: calc(var(--pres__unit));
+  // position: absolute;
+  // left: 24%;
+  // top: 14%;
+  margin-right: calc(var(--pres__unit) * 0.4);
+  width: calc(var(--pres__unit) * 1.8);
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .pres__goto_button_label_num_pages {
@@ -90,16 +98,18 @@
   // display: inline-block;
   font-size: calc(var(--pres__unit) * 0.4);
   // display: inline-block;
-  position: absolute;
-  top: 60%;
-  left: 23%;
+  // position: absolute;
+  // top: 36%;
+  // left: 63%;
+  display: table-cell;
+  vertical-align: middle;
   text-align: center;
 }
 
 #id__lesson__goto_button_label {
   color: color('presentation', 'text');
   border-radius: 0.6em;
-  border: solid 1px color('presentation', 'text');
+  border: solid 1px color('presentation', 'hover');
 }
 
 #id__lesson__goto_button_label:hover {
@@ -110,7 +120,7 @@
 #id__lesson__goto_button_label .dropdown_button_arrow {
   margin-left: 0;
   position: absolute;
-  left: 65%;
+  left: -10000%;
   top: 40%;
 }
 
