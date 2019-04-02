@@ -148,13 +148,13 @@ $height_limited_landscape_aspect_ratio: "408/200";
   }
 }
 
-.lesson-clear-floats {
-  clear: both;
-}
+// .lesson-clear-floats {
+//   clear: both;
+// }
 
-.lesson__padding_override {
-  padding: 0;
-}
+// .lesson__padding_override {
+//   padding: 0;
+// }
 
 .highlight_word {
   color: color('diagram', 'text-keyword');
@@ -179,6 +179,41 @@ $height_limited_landscape_aspect_ratio: "408/200";
 .lesson__arabic,
 .lesson__latin,
 .lesson__greek,
+.lesson__english {
+  font-style: italic;
+  font-family: Times New Roman, serif;
+}
+
+.lesson__sanskrit {
+  // font-style: italic;
+  // font-family: Times New Roman, serif;
+  color: color('diagram', 'text-sanskrit');
+}
+
+.lesson__arabic {
+  // font-style: italic;
+  // font-family: Times New Roman, serif;
+  color: color('diagram', 'text-arabic');
+}
+
+.lesson__latin {
+  // font-style: italic;
+  // font-family: Times New Roman, serif;
+  color: color('diagram', 'text-latin');
+}
+
+.lesson__greek {
+  // font-style: italic;
+  // font-family: Times New Roman, serif;
+  color: color('diagram', 'text-greek');
+}
+
+.lesson__english {
+  // font-style: italic;
+  // font-family: Times New Roman, serif;
+  color: color('diagram', 'text-english');
+}
+
 .greek,
 .latin {
   font-style: italic;
@@ -196,6 +231,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   color: color('diagram', 'text-english');
 }
 
+// Deprecate start
 .lesson__font_0p95 {
   font-size: calc(var(--lesson__diagram-font-size) * 0.95);
 }
@@ -232,6 +268,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   font-size: calc(var(--lesson__diagram-font-size) * 0.4);
   color: color('diagram', 'disabled');
 }
+// Deprecate end
 
 .lesson__sub_title {
   padding-top: 0;

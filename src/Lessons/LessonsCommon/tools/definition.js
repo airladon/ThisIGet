@@ -1,4 +1,6 @@
 // @flow
+import Fig from 'figureone';
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
 class Root {
   root: string;
@@ -53,23 +55,33 @@ export default class Definition {
     });
   }
 
-  html(id: string, classes: string = '') {
+  html(optionsIn: {
+      id?: string,
+      classes?: string,
+    } = {}) {
+    const defaultOptions = {
+      id: generateUniqueId('definition'),
+      classes: '',
+    };
+    const options = joinObjects(defaultOptions, optionsIn);
+    const { id, classes } = options;
     let outStr = '';
     outStr += `<div id="${id}" class="lesson__definition_container ${classes}">`;
     outStr += '<span class="lesson__definition_word">';
     outStr += this.word;
     outStr += '</span>';
     this.from.forEach((fromLanguage) => {
-      outStr += ` - from ${fromLanguage.language}`;
+      const lang = `lesson__${fromLanguage.language.toLowerCase()}`;
+      outStr += ` - from <span class="${''}">${fromLanguage.language}</span> `;
       fromLanguage.roots.forEach((root, index) => {
-        outStr += '<span class="lesson__definition_root">';
+        outStr += `<span class="lesson__definition_root ${lang}">`;
         outStr += `${root.root}`;
         outStr += '</span>';
-        outStr += '<span class="lesson__definition_meaning">';
+        // outStr += '';
         if (root.meaning) {
-          outStr += `: "${root.meaning}"`;
+          outStr += `: <span class="lesson__definition_meaning">${root.meaning}</span>`;
         }
-        outStr += '</span>';
+        // outStr += '</span>';
         if (fromLanguage.roots.length > index + 1) {
           outStr += ', ';
         }

@@ -16,7 +16,7 @@ const {
   click,
   centerV,
   style,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -96,6 +96,12 @@ class Content extends PresentationLessonContent {
         'Similarly, |Latin| also used the word for |ring|, with |circulus|.',
         'Today, our name comes from the Latin root, and it is |circle|.',
       ]),
+      modifiers: {
+        Greek: highlight('lesson__greek'),
+        krikos: highlight('lesson__greek'),
+        Latin: highlight('lesson__latin'),
+        circulus: highlight('lesson__latin'),
+      },
     });
     this.addSection(common, {
       setContent: [
@@ -131,7 +137,7 @@ class Content extends PresentationLessonContent {
       title: 'Circumference',
       setContent: [
         'Every shape has a |perimeter|, which is the shape\'s boundary or outline. The |length| of the perimeter is a |property| used to describe the shape\'s size.',
-        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html('id_lesson__perimeter_definition')}`,
+        `${new Definition('Perimeter', 'Greek', ['perimetros', '', 'peri', 'around', 'metros', 'measure']).html()}`,
       ],
       modifiers: {
         perimeter: click(circ.pulseCircle, [circ], colors.circle),
