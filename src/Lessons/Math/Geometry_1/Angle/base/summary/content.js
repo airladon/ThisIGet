@@ -40,7 +40,7 @@ class Content extends PresentationLessonContent {
       setContent: [
         '|Angle| is the corner formed by two |lines|.',
         'A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
-        `${new Definition('Angle', 'Latin', ['angulus', 'corner']).html('id_lesson__angle_definition')}`,
+        `${new Definition('Angle', 'Latin', ['angulus', 'MEANING', '', 'corner']).html(colors.angles)}`,
       ],
       modifiers: {
         smaller: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),

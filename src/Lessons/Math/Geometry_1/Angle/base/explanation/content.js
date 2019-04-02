@@ -16,7 +16,7 @@ const {
   click,
   centerV,
   withClass,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -62,7 +62,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: centerV([
-        'Instead of simply calling a corner more or less |sharp|, it is useful to |define| it better and ultimately be able to |measure| it.',
+        'Instead of calling a corner more or less |sharp|, it is useful to |define| it better and ultimately be able to |measure| it.',
       ]),
     });
 
@@ -226,6 +226,10 @@ class Content extends PresentationLessonContent {
         'The |Latin| word for |corner| is |angulus|.',
         'Our word for |corner sharpness| comes from this Latin root, and is |angle|.',
       ]),
+      modifiers: {
+        Latin: highlight('lesson__latin'),
+        angulus: highlight('lesson__latin'),
+      },
     });
 
     this.addSection(common, {

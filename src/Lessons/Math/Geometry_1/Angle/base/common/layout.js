@@ -298,15 +298,15 @@ export default function lessonLayout() {
       width,
       close: true,
       color: colors.lines,
-      close: true,
-      angle: {
-        label: {
-          text: null,
-        },
-        curve: {
-          radius: 0.1,
-        },
-      },
+      // close: true,
+      // angle: {
+      //   label: {
+      //     text: null,
+      //   },
+      //   curve: {
+      //     radius: 0.1,
+      //   },
+      // },
     },
   };
 
@@ -343,7 +343,7 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        main: { position: new Point(0, -0.5), scale: new Point(2.3, 2.3) },
+        main: { position: new Point(0, -0.2), scale: new Point(2.3, 2.3) },
       },
     },
     scenario: 'main',
