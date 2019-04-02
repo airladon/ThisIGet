@@ -99,11 +99,12 @@
 #id__lesson__goto_button_label {
   color: color('presentation', 'text');
   border-radius: 0.6em;
-  border: solid 1px;
+  border: solid 1px color('presentation', 'text');
 }
 
 #id__lesson__goto_button_label:hover {
   color: color('presentation', 'hover');
+  border: solid 1px color('presentation', 'hover');
 }
 
 #id__lesson__goto_button_label .dropdown_button_arrow {

@@ -9,7 +9,7 @@
   width: var(--pres__button_height);
   height: var(--pres__button_height);
   position: absolute;
-  border: 1px solid;
+  border: 1px solid color('presentation', 'text');
   border-radius: calc(var(--pres__button_height) / 2);
   -webkit-user-select: none; /* Safari */
   -moz-user-select: none; /* Firefox */
@@ -20,6 +20,7 @@
 
 #id_lesson__interactive_element_button:hover {
   color: color('presentation', 'hover');
+  border: 1px solid color('presentation', 'hover');
   cursor: pointer;
   // background-color: color('presentation', 'hover');
 }
