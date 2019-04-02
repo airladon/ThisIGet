@@ -25580,15 +25580,17 @@ function () {
           height: this.diagramLimits.height
         }
       };
-      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace);
+      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace); // console.log(location, glToDiagramSpace)
+
       return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
     key: "getDiagramPosition",
     value: function getDiagramPosition() {
-      // console.log(this.name, this.getVertexSpaceDiagramPosition(new Point(0, 0)))
+      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)); // console.log(this.name, this.getVertexSpaceDiagramPosition(new Point(0, 0)))
       // console.log(this.transform, this.lastDrawTransform)
-      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)); // const location = new Point(0, 0).transformBy(this.lastDrawTransform.matrix());
+      // return this.getVertexSpaceDiagramPosition(new Point(0, 0));
+      // const location = new Point(0, 0).transformBy(this.lastDrawTransform.matrix());
       // const glSpace = {
       //   x: { bottomLeft: -1, width: 2 },
       //   y: { bottomLeft: -1, height: 2 },
@@ -25664,7 +25666,7 @@ function () {
       };
       var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
       var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
-      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(2));
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.transform.order.length));
       var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix()));
       this.setPosition(newLocation._dup());
     }

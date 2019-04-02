@@ -239,7 +239,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV([
         'The mathematics of shapes also helps us understand phenomenon we can\'t see like |sound|, |gravity|, |electricity|, |radio waves| and |magnetism|.',
-        'It is the basis for most engineering and science disciplines.',
+        'It is the |basis| for most engineering and science disciplines.',
       ]),
     });
     this.addSection({
