@@ -49,7 +49,7 @@
   font-style: italic;
 }
 
-.lesson__info_button_label:hover {
+.lesson__info_button_label_container:hover {
   color: color('presentation', 'hover');
   border: 1px solid color('presentation', 'hover');
   cursor: pointer;
