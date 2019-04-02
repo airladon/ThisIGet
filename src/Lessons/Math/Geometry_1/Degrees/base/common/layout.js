@@ -166,7 +166,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         'center': { position: new Point(0, -0.15) },
-        'right': { position: new Point(1.2, -0.3), scale: 0.9 },
+        'right': { position: new Point(1.2, -0.1), scale: 0.9 },
         'summary': { position: new Point(1.4, 0.1), scale: 0.9 },
         'qr': { position: new Point(0, 0.3), scale: 1 },
       },

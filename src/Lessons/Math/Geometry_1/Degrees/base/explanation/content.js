@@ -179,7 +179,7 @@ class Content extends PresentationLessonContent {
       setContent: centerV([
         'So how many portions should we use?',
         'There are two common practices. The first is dividing into |360| portions.',
-        'Each portion is usually called a degree and is represented by the symbol |º|',
+        'Each portion is usually called a degree and is represented by the symbol |º|.',
       ]),
       // modifiers: {
       //   tester: clickWord('tester', 'id_tester', () => {}, [], 'lesson_tester'),
