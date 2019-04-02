@@ -98,7 +98,21 @@ export default class PresentationLessonComponent extends React.Component
     this.lesson.prevSection();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  resize() {
+    const style = window.getComputedStyle(document.documentElement);
+    if (style) {
+      const docElem = document.documentElement;
+      if (docElem) {
+        docElem.style.setProperty('--pres__vw', `${window.innerWidth}px`);
+        docElem.style.setProperty('--pres__vh', `${window.innerHeight}px`);
+      }
+    }
+  }
+
   componentDidMount() {
+    this.resize();
+    window.addEventListener('resize', this.resize.bind(this));
     // Instantiate diagram now that the canvas elements have been
     // created.
     this.lesson.initialize();
