@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import * as React from 'react';
+// import * as React from 'react';
 import {
   SinglePageLessonContent, makeFig,
 } from '../../../../../../js/Lesson/SinglePageLessonContent';
@@ -45,10 +45,9 @@ class Content extends SinglePageLessonContent {
       layout,
       new Transform('circles').scale(1, 1).translate(0, 0),
     ));
-    this.loadQRs([
-      'circles/base',
-      // 'adjacent_angles/base',
-    ]);
+    // this.loadQRs([
+    //   'circles/base',
+    // ]);
   }
 
   // Array of strings, html or jsx
@@ -89,11 +88,11 @@ class Content extends SinglePageLessonContent {
       _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       // _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
-      _test: click(this.showQR, [this, 'circles', 'Diameter'], colors.dimensions),
+      // _test: click(this.showQR, [this, 'circles', 'Diameter'], colors.dimensions),
     };
     this.content = [
       '# Shapes',
-      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us. |_test|',
+      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us.',
 
       'Mathematics describes something like an object, path or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
 

@@ -3773,6 +3773,7 @@ function () {
   // layout: Object;
   // oldScrollY: number;
   // used for drawing debug only
+  // updateFontSize: boolean;
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -3870,9 +3871,9 @@ function () {
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
-    }
+    } // this.updateFontSize = true;
 
-    this.updateFontSize = true;
+
     window.addEventListener('resize', this.resize.bind(this, false, htmlId)); // this.sizeHtmlText();
 
     this.initialize();
@@ -25587,26 +25588,9 @@ function () {
   }, {
     key: "getDiagramPosition",
     value: function getDiagramPosition() {
-      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)); // console.log(this.name, this.getVertexSpaceDiagramPosition(new Point(0, 0)))
-      // console.log(this.transform, this.lastDrawTransform)
-      // return this.getVertexSpaceDiagramPosition(new Point(0, 0));
-      // const location = new Point(0, 0).transformBy(this.lastDrawTransform.matrix());
-      // const glSpace = {
-      //   x: { bottomLeft: -1, width: 2 },
-      //   y: { bottomLeft: -1, height: 2 },
-      // };
-      // const diagramSpace = {
-      //   x: {
-      //     bottomLeft: this.diagramLimits.left,
-      //     width: this.diagramLimits.width,
-      //   },
-      //   y: {
-      //     bottomLeft: this.diagramLimits.bottom,
-      //     height: this.diagramLimits.height,
-      //   },
-      // };
-      // const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
-      // return location.transformBy(glToDiagramSpace.matrix());
+      // Note, this should be 0,0 as the current transform's translation will
+      // be included in getVertexSpaceDiagramPosition
+      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
     }
   }, {
     key: "getPixelToVertexSpaceScale",
