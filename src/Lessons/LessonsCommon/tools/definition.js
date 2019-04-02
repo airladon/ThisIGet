@@ -15,6 +15,7 @@ class Root {
 const specialWords = {
   WHERE: 'where',
   AND: 'and',
+  MEANING: 'meaning',
 };
 
 class SpecialWord {
@@ -94,7 +95,9 @@ export default class Definition {
   html(optionsIn: {
       id?: string,
       classes?: string,
-    } = {}) {
+      wordClass?: string,
+      wordColor?: Array<number>,
+    } | Array<number> = {}) {
     const defaultOptions = {
       id: generateUniqueId('definition'),
       classes: '',
@@ -116,7 +119,10 @@ export default class Definition {
           outStr += '</span>';
           // outStr += '';
           if (root.meaning) {
-            outStr += `: <span class="lesson__definition_meaning">${root.meaning}</span>`;
+            if (root.root) {
+              outStr += ': ';
+            }
+            outStr += `<span class="lesson__definition_meaning">${root.meaning}</span>`;
           }
           if (
             fromLanguage.roots.length > index + 1

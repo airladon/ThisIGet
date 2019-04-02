@@ -158,10 +158,11 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'A circle\'s perimeter has the special name |circumference|. The length of the circumference is most easily seen when |straightened| out.',
-        `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html('id_lesson__circumference_definition')}`,
+        `${new Definition('Circumference', 'Latin', ['circumferentia', 'WHERE', 'circum', 'around', 'ferre', 'carry']).html()}`,
       ],
       modifiers: {
         straightened: click(circ.straightenCircumference, [circ, 4], colors.circle),
+        circumference: highlight(colors.circle),
         // circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
       show: [
@@ -186,7 +187,7 @@ class Content extends PresentationLessonContent {
       title: 'Center',
       setContent: [
         'The |center_point| is at the middle of the circle and is used to describe the circle\'s |location|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html('id_lesson__center_definition')}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'MEANING', '', 'middle']).html()}`,
       ],
       modifiers: {
         center_point: click(circ.pulseCenter, [circ], colors.center),

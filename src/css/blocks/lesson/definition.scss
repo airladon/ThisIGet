@@ -1,23 +1,23 @@
 .lesson__definition_container {
   color: color('diagram', 'disabled');
   position: absolute;
-  top: 95%;
+  top: 90%;
   left: 7%;
   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
 }
 
 .lesson__definition_high {
-  top: 90%;
-  left: 7%;
-}
-
-.lesson__definition_higher {
   top: 85%;
   left: 7%;
 }
 
-.lesson__definition_highest {
+.lesson__definition_higher {
   top: 80%;
+  left: 7%;
+}
+
+.lesson__definition_highest {
+  top: 75%;
   left: 7%;
 }
 
