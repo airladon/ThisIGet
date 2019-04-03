@@ -79,19 +79,28 @@ class Content extends PresentationLessonContent {
           </tr>
         </table>`,
         container('id_acute_text', style({ centerV: true, right: 50, left: 7 }, [
-          'An |_acute| angle is any angle |less than 90º|.',
+          'An |acute_angle| is any angle |less than 90º|.',
           `${new Definition('Acute', 'Latin', ['acutus', 'MEANING', '', 'sharp or pointed']).html({ color: colors.angle, id: 'id_acute_def' })}`,
         ])),
         container('id_right_text', style({ centerV: true, right: 50, left: 7 }, [
-          'A |right_angle| is angle of |90º|.',
+          'A |right_angle| is an angle of |90º|.',
           'It can be thought of as the angle of a |quarter circle|.',
           'The angle mark is usually shown as a |square|, instead of an arc.',
           `${new Definition('Right Angle', 'Latin', ['angulus rectus', 'MEANING', '', 'upright corner']).html({ color: colors.angle, id: 'id_right_def' })}`,
         ])),
         container('id_obtuse_text', style({ centerV: true, right: 50, left: 7 }, [
-          'An |_obtuse| angle is any angle |between 90º and 180º|.',
+          'An |obtuse_angle| is any angle |between 90º and 180º|.',
           `${new Definition('Obtuse', 'Latin', ['obtusus', 'MEANING', '', 'dull or blunted']).html({ color: colors.angle, id: 'id_obtuse_def' })}`,
         ])),
+        container('id_straight_text', style({ centerV: true, right: 50, left: 7 }, [
+          'A |straight_angle| is an angle of |180º|.',
+        ])),
+        container('id_reflex_text', style({ centerV: true, right: 50, left: 7 }, [
+          'An |reflex_angle| is any angle |between 180º and 360º|.',
+          `${new Definition('Reflex', 'Latin', ['reflexus', 'MEANING', '', 'to bend back']).html({ color: colors.angle, id: 'id_reflex_def' })}`,
+        ])),
+        container('id_full_text', style({ centerV: true, right: 50, left: 7 }, ['An |full_angle| angle is an angle of |360º|.']
+        )),
       ],
       modifiers: {
         Acute: click(coll.goToAcute, [coll], coll.getClass('acute'), true, 'id_acute'),
@@ -100,9 +109,13 @@ class Content extends PresentationLessonContent {
         Straight: click(coll.goToStraight, [coll], coll.getClass('straight'), true, 'id_straight'),
         Reflex: click(coll.goToReflex, [coll], coll.getClass('reflex'), true, 'id_reflex'),
         Full: click(coll.goToFull, [coll], coll.getClass('full'), true, 'id_full'),
-        _acute: click(coll.pulseAngle, [coll], colors.angle),
+        acute_angle: click(coll.pulseAngle, [coll], colors.angle),
         right_angle: click(coll.pulseAngle, [coll], colors.angle),
         square: click(coll.pulseAngle, [coll], colors.angle),
+        obtuse_angle: click(coll.pulseAngle, [coll], colors.angle),
+        straight_angle: click(coll.pulseAngle, [coll], colors.angle),
+        reflex_angle: click(coll.pulseAngle, [coll], colors.angle),
+        full_angle: click(coll.pulseAngle, [coll], colors.angle),
       },
       show: [fig],
       refresh: () => {

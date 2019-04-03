@@ -105,14 +105,24 @@ export default class CommonCollection extends CommonDiagramCollection {
         const element = document.getElementById(id);
         const text = document.getElementById(`${id}_text`);
         const def = document.getElementById(`${id}_def`);
-        if (element != null && text != null && def != null) {
-          if (angle === this.currentAngle) {
+        if (angle === this.currentAngle) {
+          if (element != null) {
             element.classList.add('lesson__important_angles_table__selected');
+          }
+          if (text != null) {
             text.classList.remove('lesson__important_angles__text_hide');
+          }
+          if (def != null) {
             def.classList.remove('lesson__important_angles__text_hide');
-          } else {
+          }
+        } else {
+          if (element != null) {
             element.classList.remove('lesson__important_angles_table__selected');
+          }
+          if (text != null) {
             text.classList.add('lesson__important_angles__text_hide');
+          }
+          if (def != null) {
             def.classList.add('lesson__important_angles__text_hide');
           }
         }
