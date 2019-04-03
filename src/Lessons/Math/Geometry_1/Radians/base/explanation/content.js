@@ -728,8 +728,8 @@ class Content extends PresentationLessonContent {
         _180: click(diag.pushLineDeg, [diag, Math.PI], colors.degrees),
         _120: click(diag.pushLineDeg, [diag, Math.PI * 2 / 3], colors.degrees),
         _90: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
-        _60: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
-        _30: click(diag.pushLineDeg, [diag, Math.PI / 2], colors.degrees),
+        _60: click(diag.pushLineDeg, [diag, Math.PI / 3], colors.degrees),
+        _30: click(diag.pushLineDeg, [diag, Math.PI / 6], colors.degrees),
       },
       show: [
         circle._line1, circle._line2, circle._radianLines, circle._angle,

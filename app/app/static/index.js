@@ -3773,7 +3773,6 @@ function () {
   // layout: Object;
   // oldScrollY: number;
   // used for drawing debug only
-  // updateFontSize: boolean;
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -3871,11 +3870,11 @@ function () {
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
-    } // this.updateFontSize = true;
+    }
 
-
-    window.addEventListener('resize', this.resize.bind(this, false, htmlId)); // this.sizeHtmlText();
-
+    this.updateFontSize = true;
+    window.addEventListener('resize', this.resize.bind(this, false, htmlId));
+    this.sizeHtmlText();
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
     this.animateNextFrame(true, 'first frame');
@@ -3947,24 +3946,34 @@ function () {
       // }
 
       return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
-    } // sizeHtmlText() {
-    //   // const scale = this.fontScale * 1 / 35;
-    //   // const size = this.htmlCanvas.clientWidth * scale;
-    //   // // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
-    //   // this.htmlCanvas.style.fontSize = `${size}px`;
-    //   // // this.container.style.fontSize = `${size}px`
-    //   // if (this.updateFontSize) {
-    //   //   const style = window.getComputedStyle(document.documentElement);
-    //   //   if (style) {
-    //   //     const prop = '--lesson__diagram-font-size';
-    //   //     const docElem = document.documentElement;
-    //   //     if (docElem) {
-    //   //       docElem.style.setProperty(prop, `${size}px`);
-    //   //     }
-    //   //   }
-    //   // }
-    // }
+    }
+  }, {
+    key: "sizeHtmlText",
+    value: function sizeHtmlText() {
+      if (this.updateFontSize) {
+        var style = window.getComputedStyle(document.documentElement);
 
+        if (style) {
+          console.log(style.getPropertyValue('--lesson__diagram-font-size'));
+          this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
+        }
+      } //   // const scale = this.fontScale * 1 / 35;
+      //   // const size = this.htmlCanvas.clientWidth * scale;
+      //   // // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
+      //   // this.htmlCanvas.style.fontSize = `${size}px`;
+      //   // // this.container.style.fontSize = `${size}px`
+      //   // if (this.updateFontSize) {
+      //   //   const style = window.getComputedStyle(document.documentElement);
+      //   //   if (style) {
+      //   //     const prop = '--lesson__diagram-font-size';
+      //   //     const docElem = document.documentElement;
+      //   //     if (docElem) {
+      //   //       docElem.style.setProperty(prop, `${size}px`);
+      //   //     }
+      //   //   }
+      //   // }
+
+    }
   }, {
     key: "destroy",
     value: function destroy() {
@@ -4215,10 +4224,10 @@ function () {
 
       if (this.elements != null) {
         this.elements.updateLimits(this.limits, this.spaceTransforms);
-      } // this.sizeHtmlText();
-      // this.elements.resizeHtmlObject();
-      // this.updateHTMLElementTie();
+      }
 
+      this.sizeHtmlText(); // this.elements.resizeHtmlObject();
+      // this.updateHTMLElementTie();
 
       if (skipHTMLTie) {
         this.elements.resize();
