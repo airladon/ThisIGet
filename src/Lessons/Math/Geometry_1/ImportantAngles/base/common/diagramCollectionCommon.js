@@ -92,16 +92,17 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   updateTable(force: boolean = false) {
-    const angleIds = {
-      acute: 'id_acute',
-      right: 'id_right',
-      obtuse: 'id_obtuse',
-      straight: 'id_straight',
-      reflex: 'id_reflex',
-      full: 'id_full',
+    const angleIds: { [string]: {id: string, interactiveItems: Array<string> }} = {
+      acute: { id: 'id_acute', interactiveItems: ['id_acute_p'] },
+      right: { id: 'id_right', interactiveItems: ['id_right_p', 'id_square_p'] },
+      obtuse: { id: 'id_obtuse', interactiveItems: ['id_obtuse_p'] },
+      straight: { id: 'id_straight', interactiveItems: ['id_straight_p'] },
+      reflex: { id: 'id_reflex', interactiveItems: ['id_reflex_p'] },
+      full: { id: 'id_full', interactiveItems: ['id_full_p'] },
     };
     if (force || this.currentAngle !== this.lastAngle) {
-      Object.entries(angleIds).forEach(([angle, id]) => {
+      Object.entries(angleIds).forEach(([angle, ids]) => {
+        const { id, interactiveItems } = ids;
         const element = document.getElementById(id);
         const text = document.getElementById(`${id}_text`);
         const def = document.getElementById(`${id}_def`);
@@ -115,6 +116,12 @@ export default class CommonCollection extends CommonDiagramCollection {
           if (def != null) {
             def.classList.remove('lesson__important_angles__text_hide');
           }
+          interactiveItems.forEach((interactiveItem) => {
+            const item = document.getElementById(interactiveItem);
+            if (item != null) {
+              item.classList.remove('not_interactive_word');
+            }
+          });
         } else {
           if (element != null) {
             element.classList.remove('lesson__important_angles_table__selected');
@@ -125,6 +132,12 @@ export default class CommonCollection extends CommonDiagramCollection {
           if (def != null) {
             def.classList.add('lesson__important_angles__text_hide');
           }
+          interactiveItems.forEach((interactiveItem) => {
+            const item = document.getElementById(interactiveItem);
+            if (item != null) {
+              item.classList.add('not_interactive_word');
+            }
+          });
         }
       });
     }

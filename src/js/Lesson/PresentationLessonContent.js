@@ -256,10 +256,10 @@ class Section {
           index = 0;
         }
         let { element } = this.interactiveElementList[index];
+        let elementIsVisible = false;
         if (typeof element === 'string') {
           element = document.getElementById(element);
         }
-        let elementIsVisible = false;
         if (element instanceof HTMLElement) {
           const rect = element.getBoundingClientRect();
           if (rect.left > 0 && rect.width > 0) {
@@ -289,6 +289,12 @@ class Section {
           }
         } else if (element instanceof HTMLElement) {
           elementIsTouchable = true;
+          // console.log(element, element.clientWidth)
+          if (element.classList.contains('not_interactive_word')) {
+            elementIsVisible = false;
+          } else {
+            elementIsVisible = true;
+          }
         }
         if (elementIsVisible && elementIsTouchable && element != null) {
           // this.content.highlightInteractiveElement(element, location);
