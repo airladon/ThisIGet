@@ -30371,10 +30371,10 @@ __webpack_require__.r(__webpack_exports__);
 function convertTextArrayToParagraphs(text) {
   var firstParagraphMargin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var textToUse = '';
-  var style = '';
+  var firstPStyle = '';
 
   if (firstParagraphMargin != null) {
-    style = " style=\"margin-top:".concat(firstParagraphMargin, "%\"");
+    firstPStyle = " style=\"margin-top:".concat(firstParagraphMargin, "%\"");
   }
 
   if (Array.isArray(text)) {
@@ -30382,7 +30382,7 @@ function convertTextArrayToParagraphs(text) {
       if (t.startsWith('<')) {
         textToUse += t;
       } else if (index === 0) {
-        textToUse += "<p style=\"margin-top:".concat(firstParagraphMargin, "\">").concat(t, "</p>");
+        textToUse += "<p style=\"margin-top:".concat(firstPStyle, "\">").concat(t, "</p>");
       } else {
         textToUse += "<p>".concat(t, "</p>");
       }
@@ -30456,13 +30456,13 @@ function style() {
 function centerV() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100%; width: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100% text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {

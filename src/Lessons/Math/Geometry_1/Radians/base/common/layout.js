@@ -218,11 +218,12 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         'center': { position: new Point(0, -0.3), scale: 1 },
+        'centerSmaller': { position: new Point(0, -0.3), scale: 0.9 },
         'centerSmall': { position: new Point(0, -0.3), scale: 0.8 },
         'bottom': { position: new Point(0, -0.4), scale: 1 },
         'right': { position: new Point(1.2, -0.1), scale: 0.9 },
         'top': { position: new Point(0, 0.1), scale: 0.8 },
-        'summary': { position: new Point(1.4, 0.1 ), scale: 0.9 },
+        'summary': { position: new Point(1.5, 0.1 ), scale: 0.9 },
         'qr': { position: new Point(0, 0 ), scale: 1 },
       },
     },
@@ -579,7 +580,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0.5, 0), scale: 1.3 },
-        summary: { position: new Point(-0.8, 0.9), scale: 1.3 },
+        // summary: { position: new Point(-0.8, 0.9), scale: 1.3 },
       },
     },
   };
@@ -619,7 +620,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(-0.4, -0.8), scale: 1.3 },
-        summary: { position: new Point(-0.8, -1.2), scale: 1.3 },
+        // summary: { position: new Point(-0.8, -1.2), scale: 1.3 },
       },
     },
   };

@@ -78,13 +78,11 @@ class Content extends PresentationLessonContent {
       },
       show: [
         circle._line1, circle._line2,
-        // circle._angle,
         circle._degrees,
-        // circle._angleText,
         circle._arc,
       ],
       setSteadyState: () => {
-        circle.setScenario('center');
+        circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
         // circle._angleText.setScenario('bottomLeft');
       },
@@ -106,7 +104,7 @@ class Content extends PresentationLessonContent {
         circle._arc,
       ],
       setSteadyState: () => {
-        circle.setScenario('center');
+        circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
         // circle._angleText.setScenario('bottomLeft');
       },

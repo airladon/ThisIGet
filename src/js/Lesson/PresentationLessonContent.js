@@ -1002,6 +1002,7 @@ function makeFig(
     height?: ?number,
     borderDebug?: boolean,
     element: DiagramElement | Array<DiagramElement>,
+    classes?: string,
   },
   // id: string = `id_figure__${generateUniqueId()}`,
   // elements: DiagramElement | Array<DiagramElement>,
@@ -1017,6 +1018,7 @@ function makeFig(
     width: null,
     height: null,
     borderDebug: false,
+    classes: '',
   };
   const options = joinObjects(defaultOptions, optionsIn);
 
@@ -1025,6 +1027,7 @@ function makeFig(
   let width = '';
   let height = '';
   let border = '';
+  let classes = '';
   if (options.left != null) {
     leftMargin = `margin-left:${options.left}%;`;
   }
@@ -1039,6 +1042,9 @@ function makeFig(
   }
   if (options.borderDebug) {
     border = 'border-style:solid;border-width:1px;border-color:red;';
+  }
+  if (options.classes) {
+    classes = ` class="${options.classes}"`;
   }
 
   let elementsToUse;
@@ -1062,8 +1068,7 @@ function makeFig(
       }
     }
   });
-  console.log(`style="${width}${height}${topMargin}${leftMargin}${border}"`)
-  return `<div id="${options.id}" style="${width}${height}${topMargin}${leftMargin}${border}"></div>`;
+  return `<div id="${options.id}" style="${width}${height}${topMargin}${leftMargin}${border}"${classes}></div>`;
 }
 
 export {

@@ -43,18 +43,19 @@ class Content extends PresentationLessonContent {
       title: '',
       setContent: centerV([
         style({ top: 0, right: 45 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
-        style({ right: 45 }, 'Angle, arc length and radius are related by:'),
+        style({ right: 45, top: 5 }, 'There are |2π| radians in a circle.'),
+        style({ right: 45, top: 5 }, 'When using |radians|, angle, arc length and radius are |related|:'),
         // makeFig('id_figure_equation', diag._equation, 'fit', [-1, -0.6, 2, 0.8]),
         makeFig({
           element: diag._equation,
-          window: [-0.9, -0.4, 2, 0.6],
+          window: [-0.9, -0.44, 2, 0.8],
           top: 2,
           left: 5,
-          width: 50,
-          height: 15,
+          width: 45,
+          height: 18,
           // borderDebug: true,
+          classes: 'lesson__equation_border',
         }),
-        style({ right: 45 }, 'There are |2π| radians in a circle.'),
       ]),
       modifiers: {
         radian: click(diag.bendRadius, [diag, null], colors.radianLines),
@@ -77,10 +78,20 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection({
-      setContent: [
+      setContent: centerV([
         '|Radians| can be converted to |degrees| using:',
-        style({ top: 30 }, '|Degrees| can be converted to |_radians| using:'),
-      ],
+        makeFig({
+          element: diag._radDegEqn,
+          id: 'id_rad_equation',
+          window: [-0.9, -0.25, 2, 0.6],
+        }),
+        '|Degrees| can be converted to |_radians| using:',
+        makeFig({
+          element: diag._degRadEqn,
+          id: 'id_deg_equation',
+          window: [-0.9, -0.22, 2, 0.6],
+        }),
+      ]),
       modifiers: {
         Radians: highlight(colors.radianLines),
         _radians: highlight(colors.radianLines),
@@ -88,9 +99,9 @@ class Content extends PresentationLessonContent {
         _degrees: highlight(colors.degrees),
       },
       setSteadyState: () => {
-        diag._radDegEqn.setScenario('summary');
+        // diag._radDegEqn.setScenario('summary');
         diag._radDegEqn.showForm('6');
-        diag._degRadEqn.setScenario('summary');
+        // diag._degRadEqn.setScenario('summary');
         diag._degRadEqn.showForm('0');
       },
     });
