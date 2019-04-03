@@ -1,0 +1,15 @@
+@import '../../../geometry';
+
+$colors: (
+  lines:              color('blue'),
+  angle:             color('green'),
+  axes:              color('grey', 'dark'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}
