@@ -194,25 +194,15 @@ describe('Introduction Base Lesson', () => {
     const image = await page.screenshot({ path: 'introduction.png' });
     expect(image).toMatchImageSnapshot();
   });
-  test('Page 8 - drawing', async () => {
+  test('Page 9 - drawing', async () => {
     const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=8`;
-    // await page.__client.send('Animation.setPlaybackRate', { playbackRate: 4.0 });
-
-    // overwriteTime(page, 1000 / 60);
+      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=9`;
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 800 });
     await page.evaluate(() => {
       window.scrollTo(0, 0);
     });
-    // await page.evaluate(() => {
-    //   return new Promise((resolve) => {
-    //     const abc = (now) => { console.log(now)}
-    //     window.requestAnimationFrame(abc);
-    //     resolve();
-    //   });
-    // });
-    await sleep(4000);
+    await sleep(1000);
 
     const image = await page.screenshot({ path: 'page8.png' });
     expect(image).toMatchImageSnapshot();
@@ -226,16 +216,8 @@ describe('Introduction Base Lesson', () => {
     await page.evaluate(() => {
       window.scrollTo(0, 0);
     });
-    await sleep(4000);
+    await sleep(1000);
     const image = await page.screenshot({ path: 'page12.png' });
     expect(image).toMatchImageSnapshot();
   });
-  // test('Angles Lesson Page 6', async () => {
-  //   const anglesPath =
-  //     `${sitePath}/Lessons/Math/Geometry__1/Angle/base/explanation`;
-  //   await page.goto(`${anglesPath}?page=6`);
-  //   await page.setViewport({ width: 600, height: 800 });
-  //   const image = await page.screenshot({ path: 'anglesPage6.png' });
-  //   expect(image).toMatchImageSnapshot();
-  // });
 });
