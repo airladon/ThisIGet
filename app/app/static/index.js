@@ -2083,6 +2083,7 @@ function (_ElementAnimationStep) {
       var translationOptions = _this.element.animations.options.tranlsation;
 
       if (translationOptions.style != null) {
+        // $FlowFixMe - this is messy, but deal with it
         defaultPositionOptions.style = translationOptions.style;
       }
 
@@ -3873,7 +3874,7 @@ function () {
     }
 
     this.updateFontSize = true;
-    window.addEventListener('resize', this.resize.bind(this, false, htmlId));
+    window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
     this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
@@ -3956,22 +3957,7 @@ function () {
         if (style) {
           this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
         }
-      } //   // const scale = this.fontScale * 1 / 35;
-      //   // const size = this.htmlCanvas.clientWidth * scale;
-      //   // // console.log(size, this.htmlCanvas.clientWidth, this.htmlCanvas.clientHeight, this.htmlCanvas.clientWidth / this.htmlCanvas.clientHeight)
-      //   // this.htmlCanvas.style.fontSize = `${size}px`;
-      //   // // this.container.style.fontSize = `${size}px`
-      //   // if (this.updateFontSize) {
-      //   //   const style = window.getComputedStyle(document.documentElement);
-      //   //   if (style) {
-      //   //     const prop = '--lesson__diagram-font-size';
-      //   //     const docElem = document.documentElement;
-      //   //     if (docElem) {
-      //   //       docElem.style.setProperty(prop, `${size}px`);
-      //   //     }
-      //   //   }
-      //   // }
-
+      }
     }
   }, {
     key: "destroy",
@@ -30338,7 +30324,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId, clickW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -30363,6 +30349,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickId", function() { return clickId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 
@@ -30410,7 +30397,7 @@ function centerV() {
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100% text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100%; text-align:center; width:100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {
@@ -30580,6 +30567,41 @@ function addId() {
   };
 }
 
+function clickW(textToUse, actionMethod, bind) {
+  var classesOrColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var interactive = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
+  var classStr = 'action_word';
+
+  if (interactive) {
+    classStr = "".concat(classStr, " interactive_word");
+  }
+
+  if (typeof classesOrColor === 'string') {
+    classStr = "".concat(classesOrColor, " ").concat(classStr);
+  }
+
+  var color = null;
+
+  if (Array.isArray(classesOrColor)) {
+    color = classesOrColor;
+  }
+
+  var idToUse = function idToUse() {
+    return id;
+  }; // const id = `lesson__id_${textToUse}`;
+
+
+  return {
+    replacementText: function replacementText() {
+      return toHTML(textToUse, idToUse(), classStr, color);
+    },
+    id: idToUse,
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
 function clickWord(textToUse, id, actionMethod, bind) {
   var classesOrColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
   var interactive = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
@@ -30640,7 +30662,7 @@ function click(actionMethod, bind) {
 
   return {
     replacementText: function replacementText(text) {
-      return toHTML(text, idToUse(text), classStr, color);
+      return toHTML(text, idToUse(), classStr, color);
     },
     id: idToUse,
     actionMethod: actionMethod,
