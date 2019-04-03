@@ -119,6 +119,7 @@ class Section {
   interactiveElementsRemove: Array<TypeInteractiveElement>;
   interactiveElementList: TypeInteractiveElements;
   currentInteractiveItem: number;
+  refresh: ?() => void;
 
   constructor(diagram: Diagram) {
     this.diagram = diagram;
@@ -140,6 +141,7 @@ class Section {
     this.interactiveElementList = [];
     this.currentInteractiveItem = -1;
     this.skipWhenComingFromNext = false;
+    this.refresh = null;
   }
 
   setContent(): Array<string> | string {

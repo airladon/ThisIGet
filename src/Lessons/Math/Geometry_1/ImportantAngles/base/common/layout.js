@@ -144,7 +144,7 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        bottom: { position: new Point(0.1, -1.6) },
+        bottom: { position: new Point(0.1, -1.5) },
       },
     },
     scenario: 'bottom',
@@ -209,13 +209,13 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, 0), scale: 1 },
+        'right': { position: new Point(1.4, -0.1), scale: 1 },
         // 'right': { position: new Point(1.2, -0.1), scale: 0.9 },
         'summary': { position: new Point(1.4, 0.1), scale: 0.9 },
         'qr': { position: new Point(0, 0.3), scale: 1 },
       },
     },
-    scenario: 'center',
+    scenario: 'right',
   };
 
   layout.addElements = [

@@ -17,7 +17,7 @@ body {
 }
 
 .lesson__important_angles_table {
-  width: 85%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
   margin-top: 3%;
@@ -30,4 +30,17 @@ body {
 
 .lesson__important_angles_table__selected {
   color: map-get($colors, 'angle');
+}
+
+.lesson__important_angles__text {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  width: 100%;
+  height: 85%;
+}
+
+.lesson__important_angles__text_hide {
+  overflow: hidden;
+  height: 0;
 }

@@ -324,6 +324,9 @@ class PresentationLesson extends SimpleLesson {
     // console.log('setting conclicks')
     const section = this.content.sections[this.currentSectionIndex];
     section.setOnClicks();
+    if (section.refresh != null) {
+      section.refresh();
+    }
   }
 
   componentUpdateComplete() {

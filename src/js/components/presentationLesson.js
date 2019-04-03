@@ -32,6 +32,7 @@ export default class PresentationLessonComponent extends React.Component
   centerLessonFlag: boolean;
   topic: string;
   firstPage: number;
+  // refreshCallback: ?() => void;
 
   constructor(props: Props) {
     super(props);
@@ -50,6 +51,7 @@ export default class PresentationLessonComponent extends React.Component
     this.lesson.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
     this.centerLessonFlag = false;
+    // this.refreshCallback = null;
   }
 
   componentDidUpdate() {
@@ -60,6 +62,9 @@ export default class PresentationLessonComponent extends React.Component
     } else {
       this.lesson.setOnclicks();
     }
+    // if (this.refreshCallback != null) {
+    //   this.refreshCallback();
+    // }
     this.lesson.content.diagram.updateHTMLElementTie();
   }
 
