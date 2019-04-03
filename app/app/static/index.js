@@ -30378,7 +30378,15 @@ function convertTextArrayToParagraphs(text) {
   }
 
   if (Array.isArray(text)) {
-    textToUse = "<p".concat(style, ">").concat(text.join('</p><p>'), "</p>");
+    text.forEach(function (t, index) {
+      if (t.startsWith('<')) {
+        textToUse += t;
+      } else if (index === 0) {
+        textToUse += "<p style=\"margin-top:".concat(firstParagraphMargin, "\">").concat(t, "</p>");
+      } else {
+        textToUse += "<p>".concat(t, "</p>");
+      }
+    }); // textToUse = `<p${style}>${text.join('</p><p>')}</p>`;
   } else {
     textToUse = text;
   }
@@ -30448,7 +30456,7 @@ function style() {
 function centerV() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerVH() {

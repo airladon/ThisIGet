@@ -47,7 +47,8 @@ class Content extends PresentationLessonContent {
         // makeFig('id_figure_equation', diag._equation, 'fit', [-1, -0.6, 2, 0.8]),
         makeFig({
           element: diag._equation,
-          window: [-1, -0.4, 2, 0.6],
+          window: [-0.9, -0.4, 2, 0.6],
+          top: 2,
           left: 5,
           width: 50,
           height: 15,
