@@ -100,6 +100,12 @@ $height_limited_landscape_aspect_ratio: "408/200";
   --lesson__diagram-font-size: var(--pres__unit);
 }
 
+@media (max-width: 700px) {
+  :root {
+    --lesson__diagram-font-size: calc(var(--pres__unit) * (0.85 + 0.15 * (var(--pres__vw) - 200px)/500));
+  }
+}
+
 @mixin lesson_vars() {
   @each $var, $value in $_lesson_vars {
     @if type-of($value) == "map" {
@@ -123,7 +129,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 .lesson__widescreen_backdrop {
-  font-size: var(--pres__unit);
+  font-size: var(--lesson__diagram-font-size);
   // background-color: color('diagram', 'background');
   background-color: color('presentation', 'background');
   padding-top: var(--pres__vpadding);
