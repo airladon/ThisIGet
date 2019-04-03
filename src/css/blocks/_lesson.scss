@@ -101,6 +101,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   --lesson__diagram-font-size: var(--pres__unit);
 }
 
+// The magic offset to make size more consistent accross vw ranges
 @media (max-width: 700px) {
   :root {
     --lesson__diagram-font-size: calc(var(--pres__unit) * (0.84 + 0.15 * (var(--pres__vw1) - 200)/500));

@@ -109,6 +109,10 @@ export default class PresentationLessonComponent extends React.Component
         docElem.style.setProperty('--pres__vh', `${window.innerHeight}px`);
       }
     }
+    if (this.lesson.content.diagram) {
+      this.lesson.content.diagram.animateNextFrame();
+    }
+    window.getComputedStyle(document.documentElement);
   }
 
   componentDidMount() {
