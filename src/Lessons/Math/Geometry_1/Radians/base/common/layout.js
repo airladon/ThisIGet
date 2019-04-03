@@ -217,12 +217,13 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        'center': { position: new Point(0, -0.3) },
-        'bottom': { position: new Point(0, -0.4) },
-        'right': { position: new Point(1.5, -0.3) },
-        'top': { position: new Point(0, -0.1), scale: 0.8 },
-        'summary': { position: new Point(1.6, -0.3 ) },
-        'qr': { position: new Point(0, 0 ) },
+        'center': { position: new Point(0, -0.3), scale: 1 },
+        'centerSmall': { position: new Point(0, -0.3), scale: 0.8 },
+        'bottom': { position: new Point(0, -0.4), scale: 1 },
+        'right': { position: new Point(1.2, -0.1), scale: 0.9 },
+        'top': { position: new Point(0, 0.1), scale: 0.8 },
+        'summary': { position: new Point(1.4, 0.1 ), scale: 0.9 },
+        'qr': { position: new Point(0, 0 ), scale: 1 },
       },
     },
     scenario: 'center',
@@ -237,7 +238,7 @@ export default function lessonLayout() {
         translation: {
           style: 'curved',
           magnitude: mag,
-          direction: direction,
+          direction,
         },
       },
     },
@@ -250,7 +251,7 @@ export default function lessonLayout() {
       scale: 1,
       elements: {
         arc: { text: 'arc length', color: colors.arc },
-        _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4)},
+        _arc: { text: 'arc length', color: colors.arc, mods: mods('up', 0.4) },
         radius: { text: 'radius', color: colors.lines },
         _radius: { text: 'radius', color: colors.lines, mods: mods('down', 0.7) },
         angle: { text: 'angle', color: colors.angles },
@@ -325,7 +326,7 @@ export default function lessonLayout() {
         lowerLeft: { position: new Point(-1, -1), scale: 1 },
         top: { position: new Point(0, 1.3), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
-        summary: { position: new Point(-1.4, -0.5), scale: 1 },
+        summary: { position: new Point(-1.55, -0.2), scale: 1 },
         'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
       },
     },
@@ -357,7 +358,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0 , 0), scale: 1.3 },
-        bottom: { position: new Point(0.2 , -1.3), scale: 1 },
+        bottom: { position: new Point(0.2 , -1.2), scale: 1 },
       },
     },
   };
@@ -451,7 +452,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, 0), scale: 1.3 },
-        bottom: { position: new Point(0.2, -1.7), scale: 0.9 },
+        bottom: { position: new Point(0, -1.6), scale: 0.9 },
       },
     },
   };
@@ -577,7 +578,7 @@ export default function lessonLayout() {
 
     mods: {
       scenarios: {
-        center: { position: new Point(0.5, -0.3), scale: 1.3 },
+        center: { position: new Point(0.5, 0), scale: 1.3 },
         summary: { position: new Point(-0.8, 0.9), scale: 1.3 },
       },
     },
@@ -617,7 +618,7 @@ export default function lessonLayout() {
 
     mods: {
       scenarios: {
-        center: { position: new Point(0.5, -1), scale: 1.3 },
+        center: { position: new Point(-0.4, -0.8), scale: 1.3 },
         summary: { position: new Point(-0.8, -1.2), scale: 1.3 },
       },
     },

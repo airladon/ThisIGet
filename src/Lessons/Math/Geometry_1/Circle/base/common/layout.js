@@ -564,8 +564,8 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        centerTop: { position: new Point(0.2, 1.4) },
-        centerMid: { position: new Point(0.2, 1) },
+        centerTop: { position: new Point(0.2, 1.4), scale: 1 },
+        centerMid: { position: new Point(0.2, 1), scale: 1 },
         left: { position: new Point(-1, -0.5), scale: 0.8 },
       },
     },

@@ -93,7 +93,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'If however, the angle is |less| than 360º, then only part of the circle is created. This part is called an |arc|.',
-        `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html('id_lesson__isosceles_definition')}`,
+        `${new Definition('Arc', 'Latin', ['arcus', 'bow or arch']).html(colors.arc)}`,
       ],
       modifiers: {
         less: click(diag.pushLine, [diag, null, 2, 1, null], colors.arc),
@@ -223,8 +223,13 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Arc, Angle, Radius Relationship',
       setContent: [
-        '|Why do this?| Because when we use |radians|, we have a direct relationship between |arc length|, |radius| and |angle|.',
+        '|Why do this?| Because when we use |radians|, we have a direct relationship between |arc_length|, |radius| and |angle|.',
       ],
+      modifiers: {
+        arc_length: highlight(colors.arc),
+        radius: highlight(colors.lines),
+        angle: highlight(colors.angles),
+      },
       show: [
         circle._line1, circle._line2, circle._angle,
         circle._arc,
@@ -516,7 +521,7 @@ class Content extends PresentationLessonContent {
       ],
       setSteadyState: () => {
         circle._line1.setRotation(1);
-        circle.setScenario('bottom');
+        circle.setScenario('centerSmall');
         diag.updateAngle();
         diag.setAngleMarks('radians');
         circle._angleText.setScenario('bottom');

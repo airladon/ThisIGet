@@ -40,12 +40,10 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: '',
       setContent: [
-        centerV([
-          style({ right: 30 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
-          style({ right: 50 }, 'When using radians, angle, arc length and radius are related by:'),
-          style({ right: 35, top: 20 }, 'There are |2π| radians in a circle.'),
-        ]),
-        `${new Definition('Radian', '', ['', 'radius']).html('id_lesson__radian_definition')}`,
+        style({ top: 7, right: 55 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
+        style({ right: 55 }, 'Angle, arc length and radius are related by:'),
+        style({ right: 55, top: 20 }, 'There are |2π| radians in a circle.'),
+        `${new Definition('Radian', '', ['', 'radius']).html(colors.lines)}`,
       ],
       modifiers: {
         radian: click(diag.bendRadius, [diag, null], colors.radianLines),
