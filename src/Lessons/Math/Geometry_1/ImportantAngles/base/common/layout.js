@@ -15,6 +15,7 @@ const cssColorNames = [
   'angle',
   'axes',
   'fill',
+  'marks',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -170,6 +171,26 @@ export default function lessonLayout() {
     },
   });
 
+  const marks = (numMarks: number, inner: number = radius, lineWidth: number = width / 2, name: string = `marks${numMarks}`) => ({
+    name,
+    method: 'radialLines',
+    options: {
+      innerRadius: inner,
+      outerRadius: radius,
+      color: colors.marks,
+      width: lineWidth,
+      dAngle: Math.PI * 2 / numMarks,
+    },
+  });
+  layout.degrees = {
+    name: 'degrees',
+    method: 'collection',
+    addElements: [
+      marks(360, radius * 0.98),
+      marks(36, radius * 0.95),
+    ],
+  };
+
   layout.fig = {
     name: 'fig',
     method: 'collection',
@@ -177,6 +198,7 @@ export default function lessonLayout() {
       layout.acute,
       layout.obtuse,
       layout.reflex,
+      layout.degrees,
       layout.xAxis,
       layout.yAxis,
       layout.angle,
