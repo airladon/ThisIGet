@@ -88,6 +88,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 :root {
   --tester: 100vw;
   --pres__vw: 100vw;
+  --pres__vw1: 100;
   --pres__vh: 100vh;
   --pres__unit: calc(var(--pres__content_width) / 35);
   //
@@ -102,7 +103,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 @media (max-width: 700px) {
   :root {
-    --lesson__diagram-font-size: calc(var(--pres__unit) * (0.85 + 0.15 * (var(--pres__vw) - 200px)/500));
+    --lesson__diagram-font-size: calc(var(--pres__unit) * (0.84 + 0.15 * (var(--pres__vw1) - 200)/500));
   }
 }
 

@@ -105,6 +105,7 @@ export default class PresentationLessonComponent extends React.Component
       const docElem = document.documentElement;
       if (docElem) {
         docElem.style.setProperty('--pres__vw', `${window.innerWidth}px`);
+        docElem.style.setProperty('--pres__vw1', `${window.innerWidth}`);
         docElem.style.setProperty('--pres__vh', `${window.innerHeight}px`);
       }
     }
