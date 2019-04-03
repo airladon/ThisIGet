@@ -13,14 +13,14 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -44,7 +44,7 @@ class Content extends PresentationLessonContent {
     // console.log(diag)
 
     const common = {
-      setContent: '',
+      setContent: [],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -65,10 +65,32 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: '',
-      setContent: centerV([
-        '',
-      ]),
+      setContent: [
+        `<table class="lesson__important_angles_table">
+          <tr>
+            <td>|Acute|</td>
+            <td>|Right|</td>
+            <td>|Obtuse|</td>
+            <td>|Straight|</td>
+            <td>|Reflex|</td>
+            <td>|Full|</td>
+          </tr>
+        </table>`,
+      ],
+      modifiers: {
+        Acute: click(coll.goToAcute, [coll], coll.getClass('acute'), true, 'id_acute'),
+        Right: click(coll.goToRight, [coll], coll.getClass('right'), true, 'id_right'),
+        Obtuse: click(coll.goToObtuse, [coll], coll.getClass('obtuse'), true, 'id_obtuse'),
+        Straight: click(coll.goToStraight, [coll], coll.getClass('straight'), true, 'id_straight'),
+        Reflex: click(coll.goToReflex, [coll], coll.getClass('reflex'), true, 'id_reflex'),
+        Full: click(coll.goToFull, [coll], coll.getClass('full'), true, 'id_full'),
+      },
       show: [fig],
+      setSteadyState: () => {
+        fig._line1.setRotation(1);
+        coll.updateAngle();
+        coll.updateTable(true);
+      },
     });
   }
 }

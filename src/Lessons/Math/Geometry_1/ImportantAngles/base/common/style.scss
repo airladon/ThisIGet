@@ -4,6 +4,7 @@ $colors: (
   lines:              color('blue'),
   angle:             color('green'),
   axes:              color('grey', 'dark'),
+  fill:              color('green', 'darkest'),
 );
 
 body {
@@ -12,4 +13,20 @@ body {
 
 .diagram__text {
   z-index: 0;
+}
+
+.lesson__important_angles_table {
+  width: 85%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+  // color: map-get($colors, 'angle');
+}
+
+.lesson__important_angles_table__not_selected {
+  color: map-get($colors, 'axes');
+}
+
+.lesson__important_angles_table__selected {
+  color: map-get($colors, 'angle');
 }

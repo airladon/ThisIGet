@@ -14,6 +14,7 @@ const cssColorNames = [
   'lines',
   'angle',
   'axes',
+  'fill',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -67,6 +68,44 @@ export default function lessonLayout() {
       autoRightAngle: true,
       rightAngleRange: 0.01,
       color: colors.angle,
+    },
+  };
+
+  layout.acute = {
+    name: 'acute',
+    method: 'polygon',
+    options: {
+      radius,
+      fill: true,
+      sides: 200,
+      sidesToDraw: 50,
+      color: colors.fill,
+    },
+  };
+
+  layout.obtuse = {
+    name: 'obtuse',
+    method: 'polygon',
+    options: {
+      radius,
+      fill: true,
+      sides: 200,
+      sidesToDraw: 50,
+      rotation: Math.PI / 2,
+      color: colors.fill,
+    },
+  };
+
+  layout.reflex = {
+    name: 'reflex',
+    method: 'polygon',
+    options: {
+      radius,
+      fill: true,
+      sides: 200,
+      sidesToDraw: 100,
+      rotation: Math.PI,
+      color: colors.fill,
     },
   };
 
@@ -135,6 +174,9 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
+      layout.acute,
+      layout.obtuse,
+      layout.reflex,
       layout.xAxis,
       layout.yAxis,
       layout.angle,

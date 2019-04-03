@@ -30462,7 +30462,7 @@ function centerV() {
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100% text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {
@@ -30612,7 +30612,7 @@ function clickWord(textToUse, id, actionMethod, bind) {
 function click(actionMethod, bind) {
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();
+  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
   var classStr = 'action_word';
 
   if (interactive) {
@@ -30629,8 +30629,8 @@ function click(actionMethod, bind) {
     color = classesOrColor;
   }
 
-  var idToUse = function idToUse(text) {
-    return "lesson__id_".concat(text).concat(id);
+  var idToUse = function idToUse() {
+    return id;
   };
 
   return {
