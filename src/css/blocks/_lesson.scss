@@ -460,7 +460,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   margin-right: var(--pres__text_margin);
   margin-top: var(--pres__text_margin);
   height: calc(100% - var(--pres__text_margin) * 2);
-  overflow: auto;
+  overflow: hidden;
 }
 
 .lesson__diagram_text ul {

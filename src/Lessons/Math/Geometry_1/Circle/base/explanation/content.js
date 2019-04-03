@@ -171,7 +171,7 @@ class Content extends PresentationLessonContent {
         circ._activator,
       ],
       setEnterState: () => {
-        circ.containToGrid = false;
+        // circ.containToGrid = false;
         circ.straighten(0);
         circ.straightening = false;
         circle._line.setColor(colors.grid);
@@ -224,6 +224,7 @@ class Content extends PresentationLessonContent {
         circ._circle.isMovable = false;
         circ._circle.isTouchable = false;
         circ._circle._line.isTouchable = false;
+        circ.containToGrid = false;
       },
     });
     this.addSection(common, {
@@ -304,6 +305,7 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         circ.setDiameterAndRadiusRotation();
+        circle.setScenario('centerHigh');
       },
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
@@ -322,6 +324,9 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
       ],
+      setSteadyState: () => {
+        circle.setScenario('centerHigh');
+      },
     });
     this.addSection(common, {
       setContent: [
@@ -334,6 +339,7 @@ class Content extends PresentationLessonContent {
         circ._eqnDiameterRadius.showForm('base');
         circ._eqnDiameterRadius.setScenario('centerTop');
         circ.setDiameterAndRadiusRotation();
+        circle.setScenario('centerHigh');
       },
     });
 
@@ -348,6 +354,9 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._center, circle._diameter,
       ],
+      setSteadyState: () => {
+        circle.setScenario('centerHigh');
+      },
     });
     this.addSection(common, {
       setContent: [
@@ -365,7 +374,10 @@ class Content extends PresentationLessonContent {
         circ.straighten(0);
         circle._line.setColor(colors.grid);
         circle._diameter.isTouchable = false;
+        circle.move.maxTransform.updateTranslation(1000, 1000);
+        circle.move.minTransform.updateTranslation(-1000, -1000);
         circ.diameterToCicumferenceComparison();
+        circle.setScenario('centerHigh');
       },
       setLeaveState: () => {
         circle._line.setColor(colors.circle);
@@ -393,7 +405,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'So now, we know the relationship between |diameter| and |cicumference| is:',
+        'Therefore the relationship between |diameter| and |cicumference| is:',
       ],
       modifiers: {
         diameter: click(circ.pulseDiameter, [circ], colors.diameter),
@@ -405,6 +417,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('centerTop');
+        circle.setScenario('center');
       },
     });
 
@@ -471,9 +484,11 @@ class Content extends PresentationLessonContent {
         circ.updateCircleLocation();
       },
       setLeaveState: () => {
+        circle.move.maxTransform.updateScale(10, 10);
         circle.setScale(1);
         circle._scale.isTouchable = false;
         circle._line.setColor(colors.circle);
+        circ.containToGrid = false;
       },
       setInfo: [
         'Drag circle |edge| to make larger or smaller',

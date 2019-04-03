@@ -30462,7 +30462,7 @@ function centerV() {
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
   var textToUse = convertTextArrayToParagraphs(text, 0);
-  return "<div style=\"display: table; height: 100% text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
+  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {

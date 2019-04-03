@@ -326,7 +326,7 @@ export default function lessonLayout() {
       width,
       color: colors.diameter,
       // vertexSpaceStart: 'start',
-      position: new Point(index * radius * 2, 0),
+      position: new Point(index * radius * 2, 0.2),
     },
   });
   layout.diameterLines = {
@@ -380,11 +380,11 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: new Point(0, 0) },
-        centerHigh: { position: new Point(0, 0.2) },
-        summary: { position: new Point(0, 0.3) },
-        summaryHigher: { position: new Point(0, 0.5) },
-        right: { position: new Point(1.5, 0.2) },
+        center: { position: new Point(0, 0), scale: 1 },
+        centerHigh: { position: new Point(0, 0.2), scale: 1 },
+        summary: { position: new Point(0, 0.3), scale: 1 },
+        summaryHigher: { position: new Point(0, 0.5), scale: 1 },
+        right: { position: new Point(1.5, 0.2), scale: 1 },
       },
       hasTouchableElements: true,
     },
@@ -457,7 +457,7 @@ export default function lessonLayout() {
     'eqnCircumferenceDiameter',
     ['circumference', 'equals', 'pi', 'x', 'diameter'],
     {
-      centerTop: { position: new Point(0.2, 1.4) },
+      centerTop: { position: new Point(0.2, 1.5) },
       centerMid: { position: new Point(0.2, 0.7), scale: 0.9 },
       left: { position: new Point(-1, 0.3), scale: 0.8 },
       qr: { position: new Point(0.1, -1.2), scale: 0.7 },
