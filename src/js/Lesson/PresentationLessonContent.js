@@ -12,7 +12,7 @@ const {
   DiagramElement, Rect,
 } = Fig;
 
-const { generateUniqueId } = Fig.tools.misc;
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
 const { setOnClicks, applyModifiers } = Fig.tools.html;
 
@@ -992,33 +992,78 @@ class PresentationLessonContent extends SimpleLessonContent {
 }
 
 function makeFig(
-  id: string = `id_figure__${generateUniqueId()}`,
-  elements: DiagramElement | Array<DiagramElement>,
-  scale: string = 'fit',
-  limits: Rect | null | Array<number> = null,
+  optionsIn: {
+    id?: string,
+    scale?: string,
+    window?: Array<number>,
+    left?: ?number,
+    top?: ?number,
+    width?: ?number,
+    height?: ?number,
+    borderDebug?: boolean,
+    element: DiagramElement | Array<DiagramElement>,
+  },
+  // id: string = `id_figure__${generateUniqueId()}`,
+  // elements: DiagramElement | Array<DiagramElement>,
+  // scale: string = 'fit',
+  // limits: Rect | null | Array<number> = null,
 ) {
+  const defaultOptions = {
+    id: `id_figure__${generateUniqueId()}`,
+    scale: 'fit',
+    window: [-1, -1, 2, 2],
+    left: null,
+    top: null,
+    width: null,
+    height: null,
+    borderDebug: false,
+  };
+  const options = joinObjects(defaultOptions, optionsIn);
+
+  let leftMargin = '';
+  let topMargin = '';
+  let width = '';
+  let height = '';
+  let border = '';
+  if (options.left != null) {
+    leftMargin = `margin-left:${options.left}%;`;
+  }
+  if (options.top != null) {
+    topMargin = `margin-top:${options.top}%;`;
+  }
+  if (options.left != null) {
+    width = `width:${options.width}%;`;
+  }
+  if (options.left != null) {
+    height = `height:${options.height}%;`;
+  }
+  if (options.borderDebug) {
+    border = 'border-style:solid;border-width:1px;border-color:red;';
+  }
+
   let elementsToUse;
-  if (Array.isArray(elements)) {
-    elementsToUse = elements;
+  if (Array.isArray(options.element)) {
+    elementsToUse = options.element;
   } else {
-    elementsToUse = [elements];
+    elementsToUse = [options.element];
   }
   elementsToUse.forEach((element) => {
     // eslint-disable-next-line no-param-reassign
-    element.tieToHTML.element = id;
+    element.tieToHTML.element = options.id;
     // eslint-disable-next-line no-param-reassign
-    element.tieToHTML.scale = scale;
-    if (limits != null) {
-      if (Array.isArray(limits)) {
+    element.tieToHTML.scale = options.scale;
+    if (options.window != null) {
+      if (Array.isArray(options.window)) {
         // eslint-disable-next-line no-param-reassign
-        element.tieToHTML.window = new Rect(limits[0], limits[1], limits[2], limits[3]);
+        element.tieToHTML.window = new Rect(options.window[0], options.window[1], options.window[2], options.window[3]);
       } else {
         // eslint-disable-next-line no-param-reassign
-        element.tieToHTML.window = limits;
+        element.tieToHTML.window = options.window;
       }
     }
   });
-  return `<div id="${id}"></div>`;
+  console.log(`style="${width}${height}${topMargin}${leftMargin}${border}"`)
+  return `<div id="${options.id}" style="${width}${height}${topMargin}${leftMargin}${border}"></div>`;
 }
 
 export {

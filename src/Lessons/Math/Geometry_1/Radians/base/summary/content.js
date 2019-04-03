@@ -42,9 +42,17 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: '',
       setContent: centerV([
-        style({ top: 7, right: 45 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
+        style({ top: 0, right: 45 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
         style({ right: 45 }, 'Angle, arc length and radius are related by:'),
-        makeFig('id_figure_equation', diag._equation, 'fit', [-1, -0.6, 2, 0.8]),
+        // makeFig('id_figure_equation', diag._equation, 'fit', [-1, -0.6, 2, 0.8]),
+        makeFig({
+          element: diag._equation,
+          window: [-1, -0.4, 2, 0.6],
+          left: 5,
+          width: 50,
+          height: 15,
+          // borderDebug: true,
+        }),
         style({ right: 45 }, 'There are |2π| radians in a circle.'),
       ]),
       modifiers: {
