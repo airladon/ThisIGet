@@ -326,7 +326,7 @@ export default function lessonLayout() {
         lowerLeft: { position: new Point(-1, -1), scale: 1 },
         top: { position: new Point(0, 1.3), scale: 1 },
         center: { position: new Point(0 ,0), scale: 1.3 },
-        summary: { position: new Point(-1.55, -0.2), scale: 1 },
+        // summary: { position: new Point(0, 0), scale: 1 },
         'qr': { position: new Point(0, -1.8 ), scale: 1.2 },
       },
     },

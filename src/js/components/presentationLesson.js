@@ -60,6 +60,7 @@ export default class PresentationLessonComponent extends React.Component
     } else {
       this.lesson.setOnclicks();
     }
+    this.lesson.content.diagram.updateHTMLElementTie();
   }
 
   refreshText(htmlText: string, page: number, callback: ?() => void = null) {
@@ -126,6 +127,7 @@ export default class PresentationLessonComponent extends React.Component
     // Instantiate diagram now that the canvas elements have been
     // created.
     this.lesson.initialize();
+    this.lesson.content.diagram.resize();
     this.setState({
       listOfSections: this.addListOfSections(),
       numPages: this.lesson.content.sections.length,

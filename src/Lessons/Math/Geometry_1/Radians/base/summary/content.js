@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import {
-  PresentationLessonContent,
+  PresentationLessonContent, makeFig,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
@@ -9,7 +9,7 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
 const {
   click,
@@ -17,6 +17,8 @@ const {
   centerV,
   highlight,
 } = Fig.tools.html;
+
+const { Rect } = Fig;
 
 const layout = lessonLayout();
 const { colors } = layout;
@@ -39,11 +41,12 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: '',
-      setContent: [
-        style({ top: 7, right: 55 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
-        style({ right: 55 }, 'Angle, arc length and radius are related by:'),
-        style({ right: 55, top: 20 }, 'There are |2π| radians in a circle.'),
-      ],
+      setContent: centerV([
+        style({ top: 7, right: 45 }, 'A |radian| is the |angle| where the |arc_length| equals the |radius|.'),
+        style({ right: 45 }, 'Angle, arc length and radius are related by:'),
+        makeFig('id_figure_equation', diag._equation, 'fit', [-1, -0.6, 2, 0.8]),
+        style({ right: 45 }, 'There are |2π| radians in a circle.'),
+      ]),
       modifiers: {
         radian: click(diag.bendRadius, [diag, null], colors.radianLines),
         arc_length: click(diag.pulseArc, [diag], colors.arc),
@@ -61,7 +64,6 @@ class Content extends PresentationLessonContent {
         diag.setAngleMarks('radians');
         diag.updateAngle();
         diag._equation.showForm('arc');
-        diag._equation.setScenario('summary');
         circle._angleText.setScenario('summary');
       },
     });

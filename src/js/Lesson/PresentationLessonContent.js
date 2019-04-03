@@ -9,7 +9,10 @@ import SimpleLessonContent from './SimpleLessonContent';
 const {
   Diagram, HTMLObject, Point,
   DiagramElementPrimative, DiagramElementCollection, EquationLegacy,
+  DiagramElement, Rect,
 } = Fig;
+
+const { generateUniqueId } = Fig.tools.misc;
 
 const { setOnClicks, applyModifiers } = Fig.tools.html;
 
@@ -988,7 +991,37 @@ class PresentationLessonContent extends SimpleLessonContent {
   }
 }
 
+function makeFig(
+  id: string = `id_figure__${generateUniqueId()}`,
+  elements: DiagramElement | Array<DiagramElement>,
+  scale: string = 'fit',
+  limits: Rect | null | Array<number> = null,
+) {
+  let elementsToUse;
+  if (Array.isArray(elements)) {
+    elementsToUse = elements;
+  } else {
+    elementsToUse = [elements];
+  }
+  elementsToUse.forEach((element) => {
+    // eslint-disable-next-line no-param-reassign
+    element.tieToHTML.element = id;
+    // eslint-disable-next-line no-param-reassign
+    element.tieToHTML.scale = scale;
+    if (limits != null) {
+      if (Array.isArray(limits)) {
+        // eslint-disable-next-line no-param-reassign
+        element.tieToHTML.window = new Rect(limits[0], limits[1], limits[2], limits[3]);
+      } else {
+        // eslint-disable-next-line no-param-reassign
+        element.tieToHTML.window = limits;
+      }
+    }
+  });
+  return `<div id="${id}"></div>`;
+}
+
 export {
   Section, PresentationLessonContent, diagramCanvas, initializeItemSelector,
-  applyModifiers, interactiveItem, infoList,
+  applyModifiers, interactiveItem, infoList, makeFig,
 };
