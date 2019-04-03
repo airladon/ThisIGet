@@ -14,7 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
-  centerV,
+  // centerV,
   style,
   // highlight,
   // clickWord,
@@ -42,30 +42,9 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
-    // console.log(diag)
-
-    const common = {
-      setContent: [],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
 
     const container = (id, text) => `<div id="${id}"" class="lesson__important_angles__text">${text}</div>`;
-    this.addSection(common, {
+    this.addSection({
       title: '',
       setContent: [
         `<table class="lesson__important_angles_table">

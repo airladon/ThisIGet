@@ -307,20 +307,14 @@ export default function getLessonIndex() {
             'dev',
             'explanation',
             'quiz',
-            'summary',
           ],
           qr: [
-          ],
-        },
-        legacy: {
-          title: 'Legacy',
-          description: 'Legacy explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
+            'Acute',
+            'Right',
+            'Obtuse',
+            'Straight',
+            'Reflex',
+            'Full',
           ],
         },
       },

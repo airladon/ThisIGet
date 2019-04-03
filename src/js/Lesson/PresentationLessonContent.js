@@ -289,7 +289,6 @@ class Section {
           }
         } else if (element instanceof HTMLElement) {
           elementIsTouchable = true;
-          // console.log(element, element.clientWidth)
           if (element.classList.contains('not_interactive_word')) {
             elementIsVisible = false;
           } else {
