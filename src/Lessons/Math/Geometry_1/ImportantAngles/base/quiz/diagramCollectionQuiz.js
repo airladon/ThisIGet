@@ -54,9 +54,30 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this._input.setValue('');
   }
 
+  goToAngle(
+    start: number, angle: number, direction: number, whenFinished: () => void,
+  ) {
+    this._main._fig.stop(true, false);
+    this._main._fig._line1.stop(true, false);
+    const r = this._main._fig._line1.getRotation('0to360');
+    this._main._fig.animations.new()
+      .rotation({ target: start, duration: 1, direction })
+      .whenFinished(whenFinished)
+      .start();
+    this._main._fig._line1.animations.new()
+      .rotation({ target: angle, duration: 1, direction: 2 })
+      .start();
+
+    this.diagram.animateNextFrame();
+  }
 
   newProblem() {
     super.newProblem();
+    this._main._fig.stop(true, false);
+    this._main._fig._line1.stop(true, false);
+    this._main._fig._acute.hide();
+    this._main._fig._obtuse.hide();
+    this._main._fig._reflex.hide();
 
     const possibilities = {
       acute: 'an acute',
@@ -69,8 +90,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.answer = randElement(Object.keys(possibilities));
     this._question.drawingObject.setText('');
 
-    const newRandomAngle = rand(0.2, Math.PI * 1.8);
-    this._main.goToAngle(newRandomAngle, () => {
+    const angle = rand(0.2, Math.PI * 1.8);
+    const start = rand(0, Math.PI * 1.9);
+    const direction = randElement([1, 2, 0, -1]);
+    this.goToAngle(start, angle, direction, () => {
       this._question.drawingObject.setText(`Adjust the blue line to create ${this.answer} angle.`);
       this._check.showAll();
       this.diagram.animateNextFrame();
@@ -80,19 +103,48 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   showAnswer() {
     super.showAnswer();
-    // this._input.setValue(this.answer);
-    // this._input.disable();
+    if (this.answer === 'acute') {
+      this._main._fig._acute.show();
+      this._main.goToAcute();
+    } else if (this.answer === 'right') {
+      this._main.goToRight();
+    } else if (this.answer === 'obtuse') {
+      this._main._fig._obtuse.show();
+      this._main.goToObtuse();
+    } else if (this.answer === 'straight') {
+      this._main.goToStraight();
+    } else if (this.answer === 'reflex') {
+      this._main._fig._reflex.show();
+      this._main.goToReflex();
+    } else if (this.answer === 'full') {
+      this._main.goToFull();
+    }
     this.diagram.animateNextFrame();
   }
 
   findAnswer() {
+    const r = this._main._fig._line1.getRotation('0to360');
+    const possibilities = {
+      acute: [0, Math.PI / 2],
+      obtuse: [Math.PI / 2, Math.PI],
+      full: [Math.PI * 2 - 0.03, Math.PI * 2 + 0.03],
+      straight: [Math.PI - 0.03, Math.PI + 0.03],
+      reflex: [Math.PI, Math.PI * 2],
+      right: [Math.PI / 2 - 0.04, Math.PI / 2 + 0.04],
+    };
+
+    const answerRange = possibilities[this.answer];
+
+    if (r >= answerRange[0] && r <= answerRange[1]) {
+      return 'correct';
+    }
     // this._input.disable();
     // if (this._input.getValue() === this.answer.toString()) {
     //   return 'correct';
     // }
-    if (this.answer === true) {
-      return 'correct';
-    }
+    // if (this.answer === true) {
+    //   return 'correct';
+    // }
     return 'incorrect';
   }
 }
