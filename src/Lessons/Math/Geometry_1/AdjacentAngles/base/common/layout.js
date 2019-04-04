@@ -51,7 +51,7 @@ export default function lessonLayout() {
       },
       label: {
         radius: radius / 4,
-        autoHide: true,
+        autoHide: 0.1,
       },
     },
   };
@@ -61,11 +61,11 @@ export default function lessonLayout() {
   layout.line3 = joinObjects({}, line, { name: 'line3' });
   layout.angleA = joinObjects({}, angle, {
     name: 'angleA',
-    options: { label: { text: 'a' } },
+    options: { label: { text: 'a' }, color: colors.angleA },
   });
   layout.angleB = joinObjects({}, angle, {
     name: 'angleB',
-    options: { label: { text: 'b' } },
+    options: { label: { text: 'b' }, color: colors.angleB },
   });
   layout.angleC = joinObjects({}, angle, {
     name: 'angleC',
@@ -77,6 +77,7 @@ export default function lessonLayout() {
         text: 'c',
         radius: radius * 0.8,
       },
+      color: colors.angleC,
     },
   });
 

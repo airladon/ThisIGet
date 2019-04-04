@@ -4,12 +4,21 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  DiagramElementCollection,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _fig: {
+    _line1: DiagramObjectLine;
+    _line2: DiagramObjectLine;
+    _line3: DiagramObjectLine;
+    _angleA: DiagramObjectAngle;
+    _angleB: DiagramObjectAngle;
+    _angleC: DiagramObjectAngle;
+  } & DiagramElementCollection;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -21,13 +30,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._line1.makeTouchable();
     this._fig._line2.makeTouchable();
     this._fig._line3.makeTouchable();
-    this._fig._line1.setTransformCallback = this.updateAngles.bind(this);
+    this._fig.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line2.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line3.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line1.move.element = this._fig;
   }
 
-   updateAngles() {
+  updateAngles() {
     let r1 = this._fig.getRotation();
     let r2 = this._fig._line2.getRotation();
     let r3 = this._fig._line3.getRotation();
@@ -52,9 +61,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig.transform.updateRotation(r1);
     this._fig._line2.transform.updateRotation(r2);
     this._fig._line3.transform.updateRotation(r3);
-    this._fig._angleA.setAngle({ rotation: r1, })
-    this._fig._angleA.updateAngle(0, r2, r1);
-    this._fig._angleB.updateAngle(r2, r3 - r2, r1);
-    this._fig._angleC.updateAngle(0, r3, r1);
+    this._fig._angleA.setAngle({ angle: r2, rotationOffset: r1 });
+    this._fig._angleB.setAngle({ rotation: r2, angle: r3 - r2, rotationOffset: r1 });
+    this._fig._angleC.setAngle({ angle: r3, rotationOffset: r1 });
+    // this._fig._angleA.updateAngle(0, r2, r1);
+    // this._fig._angleB.updateAngle(r2, r3 - r2, r1);
+    // this._fig._angleC.updateAngle(0, r3, r1);
   }
 }

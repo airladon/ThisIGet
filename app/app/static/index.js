@@ -15281,7 +15281,11 @@ function (_DiagramElementCollec) {
         this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
-      this.update();
+      if (options.rotationOffset != null) {
+        this.update(options.rotationOffset);
+      } else {
+        this.update();
+      }
     }
   }, {
     key: "addSide",
