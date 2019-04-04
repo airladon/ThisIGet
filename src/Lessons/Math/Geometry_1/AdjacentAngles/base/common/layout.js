@@ -22,7 +22,7 @@ export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-  const radius = 1;
+  const radius = 1.4;
   const width = 0.03;
 
   const line = {
@@ -51,13 +51,13 @@ export default function lessonLayout() {
       },
       label: {
         radius: radius / 4,
-        autoHide: 0.1,
+        autoHide: 0.2,
       },
     },
   };
 
   layout.line1 = joinObjects({}, line, { name: 'line1' });
-  layout.line2 = joinObjects({}, line, { name: 'line2' });
+  layout.line2 = joinObjects({}, line, { name: 'line2', options: { length: radius * 1 } });
   layout.line3 = joinObjects({}, line, { name: 'line3' });
   layout.angleA = joinObjects({}, angle, {
     name: 'angleA',
@@ -75,7 +75,8 @@ export default function lessonLayout() {
       },
       label: {
         text: 'c',
-        radius: radius * 0.8,
+        radius: radius * 0.7,
+        autoHide: 0.1,
       },
       color: colors.angleC,
     },
@@ -87,12 +88,19 @@ export default function lessonLayout() {
     addElements: [
       layout.angleA,
       layout.angleB,
-      layout.angleC,
+      
+      
       layout.line1,
       layout.line2,
+      layout.angleC,
       layout.line3,
     ],
-  }
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, -0.3), scale: 1 },
+      },
+    },
+  };
 
   layout.addElements = [
     layout.fig,

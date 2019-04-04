@@ -13,14 +13,14 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -63,11 +63,53 @@ class Content extends PresentationLessonContent {
     };
 
     this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
-      ]),
-      show: [fig]
+      title: 'Introduction',
+      setContent: [
+        '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
+      ],
+      modifiers: {
+        // Adjacent_angles: click(coll.pulseAdjacentAngles, [coll], colors.diagram.action),
+        Adjacent_angles: click(coll.goToRandomAngle, [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null], colors.diagram.action),
+        // edge: click(coll.pulseLine2, [coll], colors.lines),
+      },
+      show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        fig._line1.isTouchable = false;
+        fig._line2.isTouchable = false;
+        fig._line3.isTouchable = false;
+        coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 2, done);
+      },
+      setSteadyState: () => {
+        fig._line1.isTouchable = true;
+        fig._line2.isTouchable = true;
+        fig._line3.isTouchable = true;
+        coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 0);
+      },
+    });
+    this.addSection(common, {
+      title: 'Introduction',
+      setContent: [
+        'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be calculated.',
+      ],
+      modifiers: {
+        adjacent_angles: click(coll.goToRandomAngle, [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null], colors.diagram.action),
+        larger_angle: click(coll.pulseAngleC, [coll], colors.angleC),
+      },
+      show: [fig],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        fig._line1.isTouchable = false;
+        fig._line2.isTouchable = false;
+        fig._line3.isTouchable = false;
+        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
+      },
+      setSteadyState: () => {
+        fig._line1.isTouchable = true;
+        fig._line2.isTouchable = true;
+        fig._line3.isTouchable = true;
+        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
+      },
     });
   }
 }
