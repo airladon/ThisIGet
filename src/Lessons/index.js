@@ -15,6 +15,23 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Complementary',
+            'Supplementary',
+            'Explementary',
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
             'summary',
           ],
           qr: [

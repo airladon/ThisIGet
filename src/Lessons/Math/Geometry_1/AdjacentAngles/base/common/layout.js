@@ -2,95 +2,99 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Point } = Fig;
+const {
+  Point,
+  // Transform,
+  // Line,
+} = Fig.tools.g2;
+
+const { joinObjects } = Fig.tools.misc;
+
 const cssColorNames = [
-  'latin',
+  'lines',
   'angleA',
   'angleB',
   'angleC',
-  'line',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function commonLessonLayout() {
+export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  // layout.position = new Point(0, -0.6);
-  layout.equationPosition = new Point(-0.2, 0.85);
-  layout.equationScale = 1;
-  layout.units = {
-    position: new Point(2, -1.6),
-  };
-  layout.lines = {
-    position: new Point(0, -0.6),
-    rotation: 0,
-  };
-  layout.line = {
-    width: 0.03,
-    length: 1.25,
-  };
-  layout.angle = {
-    radius: 0.3,
-    labelRadiusOffset: 0.07,
-    width: 0.03,
-    sides: 300,
-  };
-  layout.largerAngle = {
-    radius: 1.0,
-    labelRadiusOffset: 0.05,
-    width: 0.015,
-    sides: 400,
-  };
-  layout.line1 = {
-    adjacent: {
-      rotation: 0,
+  const { colors } = layout;
+  const radius = 1;
+  const width = 0.03;
+
+  const line = {
+    method: 'line',
+    options: {
+      length: radius,
+      width,
+      color: colors.lines,
+      move: {
+        type: 'rotation',
+        middleLengthPercent: 0,
+      },
     },
-    adjacentAdd: {
-      rotation: 0,
-    },
-    supplementary: {
-      rotation: 0,
-    },
-    complementary: {
-      rotation: 0,
-    },
-    explementary: {
-      rotation: 0,
+    mods: {
+      interactiveLocation: new Point(radius * 0.8, 0),
     },
   };
-  layout.line2 = {
-    adjacent: {
-      rotation: 1,
-    },
-    adjacentAdd: {
-      rotation: 1,
-    },
-    supplementary: {
-      rotation: 1,
-    },
-    complementary: {
-      rotation: Math.PI / 6,
-    },
-    explementary: {
-      rotation: 2,
+
+  const angle = {
+    method: 'angle',
+    options: {
+      curve: {
+        width,
+        sides: 400,
+        radius: radius / 4,
+      },
+      label: {
+        radius: radius / 4,
+        autoHide: true,
+      },
     },
   };
-  layout.line3 = {
-    adjacent: {
-      rotation: 2,
+
+  layout.line1 = joinObjects({}, line, { name: 'line1' });
+  layout.line2 = joinObjects({}, line, { name: 'line2' });
+  layout.line3 = joinObjects({}, line, { name: 'line3' });
+  layout.angleA = joinObjects({}, angle, {
+    name: 'angleA',
+    options: { label: { text: 'a' } },
+  });
+  layout.angleB = joinObjects({}, angle, {
+    name: 'angleB',
+    options: { label: { text: 'b' } },
+  });
+  layout.angleC = joinObjects({}, angle, {
+    name: 'angleC',
+    options: {
+      curve: {
+        radius: radius * 0.8,
+      },
+      label: {
+        text: 'c',
+        radius: radius * 0.8,
+      },
     },
-    adjacentAdd: {
-      rotation: 2.5,
-    },
-    supplementary: {
-      rotation: Math.PI,
-    },
-    complementary: {
-      rotation: Math.PI / 2,
-    },
-    explementary: {
-      rotation: Math.PI * 2 * 0.9999,
-    },
-  };
+  });
+
+  layout.fig = {
+    name: 'fig',
+    method: 'collection',
+    addElements: [
+      layout.angleA,
+      layout.angleB,
+      layout.angleC,
+      layout.line1,
+      layout.line2,
+      layout.line3,
+    ],
+  }
+
+  layout.addElements = [
+    layout.fig,
+  ];
   return layout;
 }

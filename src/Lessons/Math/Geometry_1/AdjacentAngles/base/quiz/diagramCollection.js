@@ -1,15 +1,15 @@
 // @flow
 import Fig from 'figureone';
-
-import lessonLayout from '../common/layout';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonCollection from '../common/diagramCollectionCommon';
+import lessonLayout from './layout';
+// eslint-disable-next-line import/no-cycle
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+// eslint-disable-next-line import/no-cycle
+import QuizCollection from './diagramCollectionQuiz';
 
 const { Transform } = Fig;
-
 export default class DiagramCollection extends CommonDiagramCollection {
-  _collection: CommonCollection;
+  _quiz: QuizCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,7 +18,6 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('collection', new CommonCollection(diagram, this.layout));
-    this.hasTouchableElements = true;
+    this.add('quiz', new QuizCollection(diagram, this.layout));
   }
 }
