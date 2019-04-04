@@ -36,6 +36,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._line2.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line3.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line1.move.element = this._fig;
+
+    this._eqns._adjacent._c.makeTouchable();
+    this._eqns._adjacent._c.onClick = () => {
+      // this._eqns.stop(true, true);
+      this._eqns._adjacent.goToForm1({ name: 'c', duration: 1, blankTime: 0 });
+      this.diagram.animateNextFrame();
+    };
+    this._eqns._adjacent._a.makeTouchable();
+    this._eqns._adjacent._a.onClick = () => {
+      // this._eqns.stop(true, true);
+      this._eqns._adjacent.goToForm1({ name: 'a', duration: 1, blankTime: 0 });
+      this.diagram.animateNextFrame();
+    };
+    this._eqns._adjacent._b.makeTouchable();
+    this._eqns._adjacent._b.onClick = () => {
+      this._eqns.stop(true, true);
+      this._eqns._adjacent.goToForm1({ name: 'b', duration: 1, blankTime: 0 });
+      this.diagram.animateNextFrame();
+    };
   }
 
   updateAngles() {

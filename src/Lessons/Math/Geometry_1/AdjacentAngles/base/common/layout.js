@@ -37,7 +37,7 @@ export default function lessonLayout() {
       },
     },
     mods: {
-      interactiveLocation: new Point(radius * 0.8, 0),
+      interactiveLocation: new Point(radius * 0.7, 0),
     },
   };
 
@@ -88,8 +88,6 @@ export default function lessonLayout() {
     addElements: [
       layout.angleA,
       layout.angleB,
-      
-      
       layout.line1,
       layout.line2,
       layout.angleC,
@@ -102,8 +100,58 @@ export default function lessonLayout() {
     },
   };
 
+  const mods = (direction, mag) => ({
+    animations: {
+      options: {
+        translation: {
+          style: 'curved',
+          magnitude: mag,
+          direction,
+        },
+      },
+    },
+  });
+
+  layout.adjacentAnglesEqn = {
+    name: 'adjacent',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1.2,
+      elements: {
+        a: { text: 'a', color: colors.angleA, mods: mods('down', 0.4) },
+        b: { text: 'b', color: colors.angleB, mods: mods('down', 0.8) },
+        c: { text: 'c', color: colors.angleC, mods: mods('up', 0.5) },
+        equals: '  =  ',
+        plus: '  +  ',
+        minus: '  -  ',
+      },
+      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      forms: {
+        c: ['c', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', 'c', 'minus', 'b'],
+        b: ['b', 'equals', 'c', 'minus', 'a'],
+      },
+      formSeries: ['c', 'a', 'b'],
+    },
+    mods: {
+      scenarios: {
+        centerTop: { position: new Point(-1.9, 0.9), scale: 1 },
+      },
+    },
+  };
+
+  layout.eqns = {
+    name: 'eqns',
+    method: 'collection',
+    addElements: [
+      layout.adjacentAnglesEqn,
+    ],
+  };
+
   layout.addElements = [
     layout.fig,
+    layout.eqns,
   ];
   return layout;
 }

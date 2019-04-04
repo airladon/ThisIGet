@@ -93,7 +93,11 @@ class Content extends PresentationLessonContent {
         'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be calculated.',
       ],
       modifiers: {
-        adjacent_angles: click(coll.goToRandomAngle, [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null], colors.diagram.action),
+        adjacent_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
+          colors.diagram.action,
+        ),
         larger_angle: click(coll.pulseAngleC, [coll], colors.angleC),
       },
       show: [fig],
@@ -109,6 +113,8 @@ class Content extends PresentationLessonContent {
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
+        coll._eqns._adjacent.setScenario('centerTop');
+        coll._eqns._adjacent.showForm('c');
       },
     });
   }

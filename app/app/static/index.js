@@ -7211,9 +7211,154 @@ function (_DiagramElementCollec) {
       return null;
     }
   }, {
+    key: "goToForm1",
+    value: function goToForm1() {
+      var _this7 = this;
+
+      var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        name: null,
+        index: 0,
+        duration: 0,
+        delay: 0,
+        fromWhere: 'fromAny',
+        animate: false,
+        callback: null,
+        stopExistingAndCancel: false
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
+
+      if (options.duration > 0 && options.animate === 'disolve') {
+        if (options.disolveOutTime == null) {
+          options.disolveOutTime = options.duration * 0.45;
+        }
+
+        if (options.disolveInTime == null) {
+          options.disolveInTime = options.duration * 0.45;
+        }
+
+        if (options.blankTime == null) {
+          options.blankTime = options.duration * 0.1;
+        }
+      }
+
+      if (options.duration > 0 && options.animate === 'move') {
+        if (options.disolveOutTime == null) {
+          options.disolveOutTime = 0.45;
+        }
+
+        if (options.disolveInTime == null) {
+          options.disolveInTime = 0.45;
+        }
+
+        if (options.blankTime == null) {
+          options.blankTime = 0.1;
+        }
+      }
+
+      if (this.eqn.isAnimating) {
+        this.stop(true, true);
+        this.eqn.isAnimating = false;
+        var currentForm = this.getCurrentForm();
+
+        if (currentForm != null) {
+          this.showForm(currentForm);
+        }
+
+        if (options.stopExistingAndCancel) {
+          return;
+        }
+      } // this.stop(true, true);
+      // this.eqn.isAnimating = false;
+      // By default go to the next form in a series
+
+
+      var nextIndex = options.index;
+
+      if (options.name == null) {
+        var index = 0;
+
+        var _currentForm = this.getCurrentForm();
+
+        if (_currentForm != null) {
+          index = this.eqn.formSeries.indexOf(_currentForm.name);
+
+          if (index < 0) {
+            index = 0;
+          }
+        }
+
+        nextIndex = index + 1;
+
+        if (nextIndex === this.eqn.formSeries.length) {
+          nextIndex = 0;
+        }
+      } else if (typeof options.name === 'number') {
+        nextIndex = options.name;
+      } else {
+        nextIndex = this.eqn.formSeries.indexOf(options.name);
+
+        if (nextIndex < 0) {
+          nextIndex = 0;
+        }
+      }
+
+      var nextForm = this.eqn.forms[this.eqn.formSeries[nextIndex]];
+      var nextSubForm = null;
+      var subFormToUse = null;
+      var possibleSubForms = this.eqn.subFormPriority.filter(function (sf) {
+        return sf in nextForm;
+      });
+
+      if (possibleSubForms.length) {
+        // eslint-disable-next-line prefer-destructuring
+        subFormToUse = possibleSubForms[0];
+      }
+
+      if (subFormToUse != null) {
+        // $FlowFixMe
+        nextSubForm = nextForm[subFormToUse];
+
+        if (options.duration === 0) {
+          this.showForm(nextSubForm);
+
+          if (options.callback != null) {
+            options.callback();
+          }
+        } else {
+          this.eqn.isAnimating = true;
+
+          var end = function end() {
+            _this7.eqn.isAnimating = false;
+
+            if (options.callback != null) {
+              options.callback();
+            }
+          };
+
+          if (options.animate === 'move') {
+            var timeToUse = options.duration; // $FlowFixMe - this is going to be ok
+
+            if (nextSubForm.time != null && nextSubForm.time[options.fromWhere] != null) {
+              timeToUse = nextSubForm.time[options.fromWhere];
+            } // console.log('******************* animate')
+
+
+            nextSubForm.animatePositionsTo(options.delay, options.disolveOutTime, timeToUse, options.disolveInTime, end);
+          } else {
+            // console.log('******************* hideshow')
+            nextSubForm.allHideShow(options.delay, options.disolveOutTime, options.blankTime, options.disolveInTime, end);
+          }
+
+          this.setCurrentForm(nextSubForm);
+        } // this.updateDescription();
+
+      }
+    }
+  }, {
     key: "goToForm",
     value: function goToForm() {
-      var _this7 = this;
+      var _this8 = this;
 
       var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
@@ -7248,10 +7393,10 @@ function (_DiagramElementCollec) {
       if (name == null) {
         var index = 0;
 
-        var _currentForm = this.getCurrentForm();
+        var _currentForm2 = this.getCurrentForm();
 
-        if (_currentForm != null) {
-          index = this.eqn.formSeries.indexOf(_currentForm.name);
+        if (_currentForm2 != null) {
+          index = this.eqn.formSeries.indexOf(_currentForm2.name);
 
           if (index < 0) {
             index = 0;
@@ -7299,7 +7444,7 @@ function (_DiagramElementCollec) {
           this.eqn.isAnimating = true;
 
           var end = function end() {
-            _this7.eqn.isAnimating = false;
+            _this8.eqn.isAnimating = false;
 
             if (callback != null) {
               callback();
