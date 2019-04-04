@@ -109,6 +109,7 @@ class Content extends PresentationLessonContent {
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
       },
       setSteadyState: () => {
+        console.log(coll._eqns)
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
