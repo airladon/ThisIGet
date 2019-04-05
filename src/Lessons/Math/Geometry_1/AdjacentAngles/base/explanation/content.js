@@ -90,7 +90,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Introduction',
       setContent: [
-        'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be calculated.',
+        'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be |calculated|.',
       ],
       modifiers: {
         adjacent_angles: click(
@@ -99,6 +99,7 @@ class Content extends PresentationLessonContent {
           colors.diagram.action,
         ),
         larger_angle: click(coll.pulseAngleC, [coll], colors.angleC),
+        calculated: click(coll.stepEqn, [coll], colors.diagram.action)
       },
       show: [fig],
       transitionFromAny: (done) => {
@@ -116,6 +117,7 @@ class Content extends PresentationLessonContent {
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
+        coll._eqns._adjacent.setFormSeries('2');
       },
     });
   }

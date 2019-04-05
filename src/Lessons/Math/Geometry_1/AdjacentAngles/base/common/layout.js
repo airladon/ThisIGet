@@ -132,7 +132,10 @@ export default function lessonLayout() {
         a: ['a', 'equals', 'c', 'minus', 'b'],
         b: ['b', 'equals', 'c', 'minus', 'a'],
       },
-      formSeries: ['c', 'a', 'b'],
+      formSeries: {
+        '1': ['c', 'a', 'b'],
+        '2': ['c', 'b', 'a'],
+      }
     },
     mods: {
       scenarios: {

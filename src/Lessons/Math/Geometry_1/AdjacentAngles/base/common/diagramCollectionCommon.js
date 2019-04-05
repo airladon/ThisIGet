@@ -40,19 +40,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._eqns._adjacent._c.makeTouchable();
     this._eqns._adjacent._c.onClick = () => {
       // this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm1({ name: 'c', duration: 1, blankTime: 0 });
+      this._eqns._adjacent.goToForm1({ name: 'c', duration: 1, blankTime: 0, ifAnimating: { cancelGoTo: true, skipToTarget: true }  });
       this.diagram.animateNextFrame();
     };
     this._eqns._adjacent._a.makeTouchable();
     this._eqns._adjacent._a.onClick = () => {
       // this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm1({ name: 'a', duration: 1, blankTime: 0 });
+      this._eqns._adjacent.goToForm1({ name: 'a', duration: 1, blankTime: 0,ifAnimating: { cancelGoTo: true, skipToTarget: true } });
       this.diagram.animateNextFrame();
     };
     this._eqns._adjacent._b.makeTouchable();
     this._eqns._adjacent._b.onClick = () => {
       this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm1({ name: 'b', duration: 1, blankTime: 0 });
+      this._eqns._adjacent.goToForm1({ name: 'b', duration: 1, blankTime: 0, ifAnimating: { cancelGoTo: true, skipToTarget: true }});
       this.diagram.animateNextFrame();
     };
   }
@@ -141,6 +141,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     }
     const a = rand(b * 0.1, b * 0.9);
     this.goToAngles(a, b, rotation, duration, callback);
+  }
+
+  stepEqn() {
+    this._eqns._adjacent.goToForm1({ duration: 1, animate: 'move', ifAnimating: { cancelGoTo: false, skipToTarget: false } });
+    this.diagram.animateNextFrame();
   }
 
   pulseAdjacentAngles() {
