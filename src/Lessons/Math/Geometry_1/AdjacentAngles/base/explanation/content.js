@@ -89,6 +89,7 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 0);
       },
     });
@@ -117,6 +118,7 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
@@ -155,6 +157,8 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
+        fig._line3.isTouchable = true;
+        fig._line3.move.element = fig;
         coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
         coll._eqns._complementary.setScenario('centerTop');
         coll._eqns._complementary.showForm('c');
@@ -186,6 +190,8 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
+        fig._line3.isTouchable = true;
+        fig._line3.move.element = fig;
         coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
         coll._eqns._supplementary.setScenario('centerTop');
         coll._eqns._supplementary.showForm('c');
@@ -217,6 +223,8 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
+        fig._line3.isTouchable = true;
+        fig._line3.move.element = fig;
         coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
         coll._eqns._explementary.setScenario('centerTop');
         coll._eqns._explementary.showForm('c');
