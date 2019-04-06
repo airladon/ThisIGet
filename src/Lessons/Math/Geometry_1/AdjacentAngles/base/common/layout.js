@@ -65,7 +65,7 @@ export default function lessonLayout() {
   });
   layout.angleB = joinObjects({}, angle, {
     name: 'angleB',
-    options: { label: { text: null }, color: colors.angleB },
+    options: { label: { text: 'b' }, color: colors.angleB },
   });
   layout.angleC = joinObjects({}, angle, {
     name: 'angleC',
