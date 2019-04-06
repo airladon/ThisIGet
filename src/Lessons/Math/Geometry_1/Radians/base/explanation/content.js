@@ -560,7 +560,7 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         diag._radDegEqn.showForm('0');
         diag._radDegEqn.setScenario('center');
-        diag._radDegEqn.animateToForm('1', 2, 0, done);
+        diag._radDegEqn.animateToForm('1', 0.2, 0, done);
       },
       setSteadyState: () => {
         diag._radDegEqn.showForm('1');
@@ -584,7 +584,7 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         diag._radDegEqn.showForm('1');
         // diag._radDegEqn.setScenario('center');
-        diag._radDegEqn.animateToForm('2', 2, 0, done);
+        diag._radDegEqn.animateToForm('2', 1, 0, done);
       },
       setSteadyState: () => {
         diag._radDegEqn.showForm('2');

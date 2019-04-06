@@ -507,11 +507,7 @@ export default function lessonLayout() {
           'equals',
           '_2pi', '  ', '_radians',
         ],
-        '1': [
-          'question', 'x' , '_360',
-          'equals',
-          '_2pi',
-        ],
+        '1': ['question', 'x' , '_360', 'equals', '_2pi'],
         '2': [
           {
             frac: ['question', '_180', 'v'],

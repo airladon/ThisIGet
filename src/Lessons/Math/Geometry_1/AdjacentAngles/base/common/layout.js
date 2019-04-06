@@ -144,38 +144,38 @@ export default function lessonLayout() {
     },
   };
 
-  layout.testEqn = {
-    name: 'test',
-    method: 'addNavigator',
-    options: {
-      navType: '2Line',
-      defaultFormAlignment: {
-        alignH: 'center',
-      },
-      elements: {
-        a: 'a',
-        b: 'Hello this is a test',
-        c: 'c',
-      },
-      forms: {
-        '0': ['b'],
-        '1': ['b', 'c'],
-        '2': ['a', 'b'],
-      },
-      formSeries: ['0', '1', '2'],
-      scale: 1.5,
-    },
-    mods: {
-      scenarios: { base: { position: new Point(0, -1.5 ) } },
-    },
-  };
+  // layout.testEqn = {
+  //   name: 'test',
+  //   method: 'addNavigator',
+  //   options: {
+  //     navType: '2Line',
+  //     defaultFormAlignment: {
+  //       alignH: 'center',
+  //     },
+  //     elements: {
+  //       a: 'a',
+  //       b: 'Hello this is a test',
+  //       c: 'c',
+  //     },
+  //     forms: {
+  //       '0': ['b'],
+  //       '1': ['b', 'c'],
+  //       '2': ['a', 'b'],
+  //     },
+  //     formSeries: ['0', '1', '2'],
+  //     scale: 1.5,
+  //   },
+  //   mods: {
+  //     scenarios: { base: { position: new Point(0, -1.5 ) } },
+  //   },
+  // };
 
   layout.eqns = {
     name: 'eqns',
     method: 'collection',
     addElements: [
       layout.adjacentAnglesEqn,
-      layout.testEqn,
+      // layout.testEqn,
     ],
   };
 

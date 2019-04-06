@@ -115,19 +115,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
-/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
-/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-
+/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+/* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
 
 
 
@@ -166,26 +164,23 @@ var FigureOne = {
   DiagramElementPrimative: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementPrimative"],
   DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__["default"],
   WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__["default"],
-  AnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"],
-  ColorAnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"],
-  CustomAnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"],
   //
-  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__["default"],
-  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__["default"],
-  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["TextObject"],
-  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramText"],
-  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramFont"],
-  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__["default"],
+  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__["default"],
+  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__["default"],
+  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["TextObject"],
+  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramText"],
+  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramFont"],
+  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__["default"],
   //
-  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__["default"],
-  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__["default"],
-  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__["default"],
-  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__["default"],
+  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__["default"],
+  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__["default"],
+  EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_17__["default"],
+  EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_18__["default"],
   //
-  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__["EquationNew"],
+  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_20__["default"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_19__["EquationNew"],
   //
-  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__["default"],
+  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__["default"],
   //
   Point: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"],
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
@@ -3326,345 +3321,6 @@ function trigger() {
 
 /***/ }),
 
-/***/ "./src/js/diagram/AnimationPhase.js":
-/*!******************************************!*\
-  !*** ./src/js/diagram/AnimationPhase.js ***!
-  \******************************************/
-/*! exports provided: AnimationPhase, ColorAnimationPhase, CustomAnimationPhase */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationPhase", function() { return AnimationPhase; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationPhase", function() { return ColorAnimationPhase; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationPhase", function() { return CustomAnimationPhase; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-// eslint-disable-next-line import/no-cycle
- // import { joinObjects } from '../tools/tools';
-// Planned Animation
-
-var AnimationPhase =
-/*#__PURE__*/
-function () {
-  // The target transform to animate to
-  // animation time or velocity.
-  // If velocity=0, it is disregarded.
-  // Time for all transform operations will be equal to the time of the longest
-  // operation.
-  // animation time
-  // Direction of rotation
-  // Animation style
-  // Time when phase started
-  // Transform at start of phase
-  // Transform delta from start to target
-  function AnimationPhase() {
-    var startTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var targetTransform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-    var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-    var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-    var animationStyle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"];
-    var translationStyle = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'linear';
-    var translationOptions = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {
-      rot: 1,
-      magnitude: 0.5,
-      offset: 0.5,
-      controlPoint: null,
-      direction: ''
-    };
-
-    _classCallCheck(this, AnimationPhase);
-
-    if (startTransform == null) {
-      this.startTransform = null;
-    } else {
-      this.startTransform = startTransform._dup();
-    }
-
-    this.targetTransform = targetTransform._dup();
-    this.timeOrVelocity = timeOrVelocity;
-    this.rotDirection = rotDirection;
-    this.animationStyle = animationStyle;
-    this.translationStyle = translationStyle;
-    this.translationOptions = translationOptions;
-    this.callback = callback;
-    this.finishOnCancel = finishOnCancel;
-    this.startTime = -1; // this.startTransform = new Transform();
-
-    this.deltaTransform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-  }
-
-  _createClass(AnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new AnimationPhase(this.startTransform, this.targetTransform, this.timeOrVelocity, this.rotDirection, this.callback, this.finishOnCancel, this.animationStyle, this.translationStyle, Object.assign({}, this.translationOptions));
-      c.startTime = this.startTime; // this.startTransform = this.startTransform._dup();
-
-      c.deltaTransform = this.deltaTransform._dup();
-      return c;
-    }
-  }, {
-    key: "start",
-    value: function start(currentTransform) {
-      var _this = this;
-
-      if (this.startTransform == null) {
-        this.startTransform = currentTransform._dup();
-      }
-
-      var startTransform = this.startTransform;
-
-      if (startTransform != null) {
-        this.deltaTransform = this.targetTransform.sub(startTransform);
-        var time = 0;
-
-        if (typeof this.timeOrVelocity === 'number') {
-          time = this.timeOrVelocity;
-        } else {
-          time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(startTransform, this.targetTransform, this.timeOrVelocity, this.rotDirection);
-        }
-
-        if (time === 0) {
-          this.time = 1;
-        } else {
-          this.time = time;
-        }
-
-        this.deltaTransform.order.forEach(function (delta, index) {
-          var start = startTransform.order[index];
-          var target = _this.targetTransform.order[index];
-
-          if (delta instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && start instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && target instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
-            var rotDiff = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(start.r, target.r, _this.rotDirection); // eslint-disable-next-line no-param-reassign
-
-            delta.r = rotDiff;
-          }
-        });
-        this.startTime = -1;
-      }
-    }
-  }, {
-    key: "finish",
-    value: function finish( // eslint-disable-next-line no-use-before-define
-    element) {
-      var _this2 = this;
-
-      var cancelled = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var forceSetToEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      // console.log('finished', this.callback)
-      var setToEnd = function setToEnd() {
-        element.setTransform(_this2.targetTransform);
-      };
-
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
-        }
-      }
-
-      if (forceSetToEnd === true) {
-        setToEnd();
-      }
-
-      if (this.callback != null) {
-        this.callback(cancelled);
-      }
-    }
-  }]);
-
-  return AnimationPhase;
-}(); // Planned Animation
-
-var ColorAnimationPhase =
-/*#__PURE__*/
-function () {
-  // The target transform to animate to
-  // animation time
-  // Animation style
-  // Time when phase started
-  // callbackOnCancel: boolean;
-  function ColorAnimationPhase() {
-    var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var targetColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [0, 0, 0, 1];
-    var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var disolve = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-    var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-    var animationStyle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["linear"];
-
-    _classCallCheck(this, ColorAnimationPhase);
-
-    this.targetColor = targetColor.slice();
-    this.endColor = targetColor.slice();
-
-    if (disolve === 'out') {
-      this.targetColor[3] = 0.01;
-    }
-
-    this.time = time;
-    this.animationStyle = animationStyle;
-    this.disolve = disolve;
-    this.finishOnCancel = finishOnCancel; // this.callbackOnCancel = callbackOnCancel;
-
-    this.startTime = -1;
-    this.startColor = startColor;
-    this.deltaColor = [0, 0, 0, 1];
-    this.callback = callback;
-  }
-
-  _createClass(ColorAnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new ColorAnimationPhase(this.startColor, this.targetColor, this.time, this.disolve, this.callback, this.finishOnCancel, // this.callbackOnCancel,
-      this.animationStyle);
-      c.startTime = this.startTime; // this.startColor = this.startColor.slice();
-
-      c.deltaColor = this.deltaColor.slice();
-      return c;
-    } // eslint-disable-next-line no-use-before-define
-
-  }, {
-    key: "start",
-    value: function start(element) {
-      if (this.startColor == null) {
-        this.startColor = element.color.slice();
-      }
-
-      var startColor = this.startColor;
-
-      if (startColor != null) {
-        if (this.disolve === 'in') {
-          this.startColor[3] = 0.01;
-          element.setColor(startColor.slice());
-          element.showAll();
-        }
-
-        this.deltaColor = this.targetColor.map(function (c, index) {
-          return c - startColor[index];
-        });
-      }
-
-      this.startTime = -1;
-    }
-  }, {
-    key: "finish",
-    value: function finish( // eslint-disable-next-line no-use-before-define
-    element) {
-      var _this3 = this;
-
-      var cancelled = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var forceSetToEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-
-      var setToEnd = function setToEnd() {
-        element.setColor(_this3.endColor);
-
-        if (_this3.disolve === 'out') {
-          element.hide();
-        }
-      };
-
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
-        }
-      }
-
-      if (forceSetToEnd === true) {
-        setToEnd();
-      }
-
-      if (this.callback != null) {
-        this.callback(cancelled);
-      }
-    }
-  }]);
-
-  return ColorAnimationPhase;
-}(); // Planned Animation
-
-var CustomAnimationPhase =
-/*#__PURE__*/
-function () {
-  // animation time
-  // Time when phase started
-  function CustomAnimationPhase(animationCallback) {
-    var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-    var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var finishOnCancel = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var animationStyle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"];
-
-    _classCallCheck(this, CustomAnimationPhase);
-
-    this.time = time;
-    this.startPercent = startPercent;
-    this.animationCallback = animationCallback;
-    this.startTime = -1;
-    this.animationStyle = animationStyle;
-    this.plannedStartTime = animationStyle(startPercent, true) * time;
-    this.callback = callback;
-    this.finishOnCancel = finishOnCancel;
-  }
-
-  _createClass(CustomAnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new CustomAnimationPhase(this.animationCallback, this.time, this.startPercent, this.callback, this.finishOnCancel, this.animationStyle);
-      c.startTime = this.startTime;
-      return c;
-    }
-  }, {
-    key: "start",
-    value: function start() {
-      // this.startColor = currentColor.slice();
-      // this.deltaColor = this.targetColor.map((c, index) => c - this.startColor[index]);
-      this.startTime = -1;
-    }
-  }, {
-    key: "finish",
-    value: function finish() {
-      var _this4 = this;
-
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-
-      var setToEnd = function setToEnd() {
-        _this4.animationCallback(1);
-      };
-
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
-        }
-      }
-
-      if (forceSetToEnd === true) {
-        setToEnd();
-      }
-
-      if (this.callback != null) {
-        this.callback(cancelled);
-      }
-    }
-  }]);
-
-  return CustomAnimationPhase;
-}();
-
-/***/ }),
-
 /***/ "./src/js/diagram/Diagram.js":
 /*!***********************************!*\
   !*** ./src/js/diagram/Diagram.js ***!
@@ -4613,7 +4269,7 @@ function () {
   }, {
     key: "isAnimating",
     value: function isAnimating() {
-      return this.elements.state.isAnimating;
+      return this.elements.isMoving();
     }
   }, {
     key: "clientToPixel",
@@ -7546,7 +7202,7 @@ function (_DiagramElementCollec) {
     key: "replayCurrentForm",
     value: function replayCurrentForm(time) {
       if (this.eqn.isAnimating) {
-        this.stop(true, true);
+        // this.stop(true, true);
         this.stop(true, true); // this.animations.cancel('complete');
         // this.animations.cancel('complete');
 
@@ -7560,9 +7216,9 @@ function (_DiagramElementCollec) {
         return;
       } // this.animations.cancel();
       // this.animations.cancel();
+      // this.stop();
 
 
-      this.stop();
       this.stop();
       this.eqn.isAnimating = false;
       this.prevForm(0);
@@ -7576,7 +7232,7 @@ function (_DiagramElementCollec) {
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       // this.stopAnimatingColor(true, true);
       // this.stopAnimatingColor(true, true);
-      this.stop();
+      // this.stop();
       this.stop(); // this.animations.cancel();
       // this.animations.cancel();
 
@@ -13271,12 +12927,21 @@ function (_DiagramElementCollec) {
         forceTwoLines: false,
         arrows: false
       },
-      alignH: 'left',
+      alignH: 'center',
       alignV: 'middle',
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
-    _this.eqn = optionsToUse.equation;
+
+    if (optionsToUse.equation != null) {
+      // this.eqn = optionsToUse.equation;
+      // this.eqn.onClick = this.clickNext.bind(this);
+      // this.eqn.hasTouchableElements = true;
+      // this.eqn.isTouchable = true;
+      // this.eqn.touchInBoundingRect = true;
+      _this.connectToEquation(optionsToUse.equation);
+    }
+
     _this.navType = optionsToUse.navType;
     var navigatorHTMLElement = null;
 
@@ -13306,20 +12971,30 @@ function (_DiagramElementCollec) {
       _this.add('table', table);
     }
 
-    _this.eqn.onClick = _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.eqn.hasTouchableElements = true;
-    _this.eqn.isTouchable = true;
-    _this.eqn.touchInBoundingRect = true;
     return _this;
-  } // const navigator = shapes.collection(;
-  // setEquation(eqn: Equation) {
-  //   this.eqn = eqn;
-  //   // this._eqn = [];
-  //   this.add('eqn', eqn.collection);
-  // }
-
+  }
 
   _createClass(EqnNavigator, [{
+    key: "connectToEquation",
+    value: function connectToEquation(eqn) {
+      this.eqn = eqn;
+      this.eqn.onClick = this.clickNext.bind(this);
+      this.eqn.hasTouchableElements = true;
+      this.eqn.isTouchable = true;
+      this.eqn.touchInBoundingRect = true; // this.setTransformCallback = () => {
+      //   const p = this.getPosition();
+      //   this.eqn.setPosition(p);
+      // }
+    } // const navigator = shapes.collection(;
+    // setEquation(eqn: Equation) {
+    //   this.eqn = eqn;
+    //   // this._eqn = [];
+    //   this.add('eqn', eqn.collection);
+    // }
+    // setWidth(width) {
+    // }
+
+  }, {
     key: "clickNext",
     value: function clickNext() {
       this.eqn.nextForm(1.5);
@@ -13431,8 +13106,8 @@ function () {
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       form: '0',
       formType: 'base',
-      alignH: 'middle',
-      alignV: 'center'
+      alignH: 'center',
+      alignV: 'middle'
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var labelTextOrEquation = optionsToUse.label;
@@ -19739,8 +19414,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -19753,14 +19435,6 @@ function _superPropBase(object, property) { while (!Object.prototype.hasOwnPrope
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
@@ -19775,6 +19449,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+ // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
 
 
 
@@ -19787,8 +19462,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // eslint-disable-next-line import/no-cycle
-
-
+// import {
+//   AnimationPhase, ColorAnimationPhase, CustomAnimationPhase,
+// } from './AnimationPhase';
 
 function checkCallback(callback) {
   var callbackToUse = function callbackToUse() {};
@@ -19869,21 +19545,6 @@ function () {
   //  fit: diagram units will be scaled so that diagram limits aspect ratio
   //       fits within the element aspect ratio
   //  '': defaults to fit keeping aspect ratio.
-  // tieToHTMLElement: string | null | HTMLElement;
-  // // Can be:
-  // //  1em: diagram units will be scaled so 0.2 diagram units (default
-  // //       font size) looks like 1em of the element font size in pixels
-  // //  100px: diagram units will be scaled so that the max diagram limit
-  // //         with be the pixel count
-  // //  stretch: diagram units be stretched so diagram limits extend to
-  // //           element dimensions independently in x and y
-  // //  max: -1 to 1 diagram units will be scaled to max dimension of element
-  // //  fit: diagram units will be scaled so that diagram limits aspect ratio
-  // //       fits within the element aspect ratio
-  // //  '': defaults to fit
-  // // keeping aspect ratio.
-  // tieToHTMLElementScale: string;
-  // tieToHTMLElementScaleLimits: Rect;
   function DiagramElement() {
     var _this = this;
 
@@ -20070,31 +19731,6 @@ function () {
         return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
       }
     };
-    this.animate = {
-      color: {
-        plan: [],
-        toDisolve: '',
-        callback: null
-      },
-      transform: {
-        plan: [],
-        translation: {
-          style: 'linear',
-          options: {
-            rot: 1,
-            magnitude: 0.5,
-            offset: 0.5,
-            controlPoint: null,
-            direction: ''
-          }
-        },
-        callback: null
-      },
-      custom: {
-        plan: [],
-        callback: null
-      }
-    };
     this.diagramLimits = diagramLimits;
     this.move = {
       maxTransform: this.transform.constant(1000),
@@ -20103,7 +19739,8 @@ function () {
       maxVelocity: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
       freely: {
         zeroVelocityThreshold: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](0.001, 0.001, 0.001),
-        deceleration: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5)
+        deceleration: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
+        callback: null
       },
       bounce: true,
       canBeMovedAfterLoosingTouch: false,
@@ -20126,28 +19763,6 @@ function () {
       callback: function callback() {}
     };
     this.state = {
-      isAnimating: false,
-      isAnimatingColor: false,
-      isAnimatingCustom: false,
-      disolving: '',
-      animation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"]() // current animation phase
-
-      },
-      colorAnimation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"]() // current animation phase
-
-      },
-      customAnimation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](function () {}) // current animation phase
-
-      },
       isBeingMoved: false,
       isMovingFreely: false,
       movement: {
@@ -20169,63 +19784,14 @@ function () {
       updateOnResize: true
     };
     this.isRenderedAsImage = false;
-    this.unrenderNextDraw = false; // this.tieToHTMLElement = null;
-    // this.tieToHTMLElementScale = 'fit';
-    // this.tieToHTMLElementScaleLimits = this.diagramLimits;
-    // this.presetTransforms = {};
+    this.unrenderNextDraw = false;
   }
 
   _createClass(DiagramElement, [{
     key: "setProperties",
     value: function setProperties(properties) {
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])(this, properties);
-    } // copyFrom(element: Object) {
-    //   const copyValue = (value) => {
-    //     if (typeof value === 'number'
-    //         || typeof value === 'boolean'
-    //         || typeof value === 'string'
-    //         || value == null
-    //         || typeof value === 'function') {
-    //       return value;
-    //     }
-    //     if (typeof value._dup === 'function') {
-    //       return value._dup();
-    //     }
-    //     // if (value instanceof AnimationPhase
-    //     //     || value instanceof ColorAnimationPhase
-    //     //     || value instanceof CustomAnimationPhase
-    //     //     // eslint-disable-next-line no-use-before-define
-    //     //     || value instanceof DiagramElementCollection
-    //     //     // eslint-disable-next-line no-use-before-define
-    //     //     || value instanceof DiagramElementPrimative
-    //     //     || value instanceof DrawingObject
-    //     //     || value instanceof Transform
-    //     //     || value instanceof Point
-    //     //     || value instanceof Rect
-    //     //     || value instanceof TransformLimit) {
-    //     //   return value._dup();
-    //     // }
-    //     if (Array.isArray(value)) {
-    //       const arrayCopy = [];
-    //       value.forEach(arrayElement => arrayCopy.push(copyValue(arrayElement)));
-    //       return arrayCopy;
-    //     }
-    //     if (typeof value === 'object') {
-    //       const objectCopy = {};
-    //       Object.keys(value).forEach((key) => {
-    //         const v = copyValue(value[key]);
-    //         objectCopy[key] = v;
-    //       });
-    //       return objectCopy;
-    //     }
-    //     return value;
-    //   };
-    //   Object.keys(element).forEach((key) => {
-    //     // $FlowFixMe
-    //     this[key] = copyValue(element[key]);
-    //   });
-    // }
-    // Space definition:
+    } // Space definition:
     //   * Pixel space: css pixels
     //   * GL Space: x,y = -1 to 1
     //   * Diagram Space: x,y = diagram limits
@@ -20266,112 +19832,6 @@ function () {
     //     to the clip space.
     //
     // Each diagram element holds a DIAGRAM ELMENT CLIP space
-    // vertexToClip(vertex: Point) {
-    //   const scaleX = this.diagramLimits.width / 2;
-    //   const scaleY = this.diagramLimits.height / 2;
-    //   const biasX = -(-this.diagramLimits.width / 2 - this.diagramLimits.left);
-    //   const biasY = -(this.diagramLimits.height / 2 - this.diagramLimits.top);
-    //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
-    //   return vertex.transformBy(this.lastDrawTransformMatrix)
-    //     .transformBy(transform.matrix());
-    // }
-    // textVertexToClip(vertex: Point) {
-    //   const scaleX = this.diagramLimits.width / 2;
-    //   const scaleY = this.diagramLimits.height / 2;
-    //   const biasX = -(-this.diagramLimits.width / 2 - this.diagramLimits.left);
-    //   const biasY = -(this.diagramLimits.height / 2 - this.diagramLimits.top);
-    //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
-    //   return vertex.transformBy(transform.matrix());
-    // }
-    // updateHTMLElementTieScale(
-    //   diagramCanvas: HTMLElement,
-    // ) {
-    //   let tieToElement;
-    //   if (typeof this.tieToHTML.element === 'string') {
-    //     tieToElement = document.getElementById(this.tieToHTML.element);
-    //   } else if (this.tieToHTML.element instanceof HTMLElement) {
-    //     tieToElement = this.tieToHTML.element;
-    //   }
-    //   if (tieToElement != null) {
-    //     const tie = tieToElement.getBoundingClientRect();
-    //     const canvas = diagramCanvas.getBoundingClientRect();
-    //     const diagram = this.diagramLimits;
-    //     const dWindow = this.tieToHTML.window;
-    //     const cAspectRatio = canvas.width / canvas.height;
-    //     const dAspectRatio = diagram.width / diagram.height;
-    //     const tAspectRatio = tie.width / tie.height;
-    //     const wAspectRatio = dWindow.width / dWindow.height;
-    //     const topLeftPixels = new Point(
-    //       tie.left - canvas.left,
-    //       tie.top - canvas.top,
-    //     );
-    //     const bottomRightPixels = topLeftPixels.add(new Point(
-    //       tie.width, tie.height,
-    //     ));
-    //     const { pixelToDiagram } = this.diagramTransforms;
-    //     const topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
-    //     const bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
-    //     const width = bottomRight.x - topLeft.x;
-    //     const height = topLeft.y - bottomRight.y;
-    //     const center = topLeft.add(new Point(width / 2, -height / 2));
-    //     const scaleString = this.tieToHTML.scale.trim().toLowerCase();
-    //     let scaleX = 1;
-    //     let scaleY = 1;
-    //     const diagramToWindowScaleX = diagram.width / dWindow.width;
-    //     const diagramToWindowScaleY = diagram.height / dWindow.height;
-    //     // Window has no scaling impact on em, it only has impact on translation
-    //     if (scaleString.endsWith('em')) {
-    //       const scale = parseFloat(scaleString);
-    //       const em = parseFloat(getComputedStyle(tieToElement).fontSize);
-    //       // 0.2 is default font size in diagram units
-    //       const defaultFontScale = diagram.width / 0.2;
-    //       scaleX = scale * em * defaultFontScale / canvas.width;
-    //       scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
-    //     }
-    //     // Scale the maximum dimension of the window to the pixel value
-    //     if (scaleString.endsWith('px')) {
-    //       const maxPixels = parseFloat(scaleString);
-    //       if (wAspectRatio > 1) {
-    //         const scale = maxPixels / canvas.width;
-    //         scaleX = scale * diagramToWindowScaleX;
-    //         scaleY = scale * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
-    //       } else {
-    //         const scale = maxPixels / canvas.height;
-    //         scaleX = scale / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
-    //         scaleY = scale * diagramToWindowScaleY;
-    //       }
-    //     }
-    //     // Scale the window x to tie x, and window y to tie y
-    //     if (scaleString === 'stretch') {
-    //       scaleX = tie.width / canvas.width * diagramToWindowScaleX;
-    //       scaleY = tie.height / canvas.height * diagramToWindowScaleY;
-    //     }
-    //     // Scale so window either fits within the tie element, or fits only
-    //     // within the max dimension of the tie element
-    //     if (scaleString === 'max' || scaleString === 'fit') {
-    //       const fitHeightScale = new Point(
-    //         1 / cAspectRatio * dAspectRatio * diagramToWindowScaleY,
-    //         diagramToWindowScaleY,
-    //       );
-    //       const fitWidthScale = new Point(
-    //         diagramToWindowScaleX,
-    //         cAspectRatio / dAspectRatio * diagramToWindowScaleX,
-    //       );
-    //       if (
-    //         (scaleString === 'max' && tAspectRatio > wAspectRatio)
-    //         || (scaleString === 'fit' && tAspectRatio < wAspectRatio)
-    //       ) {
-    //         scaleX = fitWidthScale.x;
-    //         scaleY = fitWidthScale.y;
-    //       } else {
-    //         scaleX = fitHeightScale.x;
-    //         scaleY = fitHeightScale.y;
-    //       }
-    //     }
-    //     this.setScale(scaleX, scaleY);
-    //     return { center, scaleX, scaleY };
-    //   }
-    // }
 
   }, {
     key: "updateHTMLElementTie",
@@ -20461,53 +19921,7 @@ function () {
 
   }, {
     key: "setFirstTransform",
-    value: function setFirstTransform(parentTransform) {} // Calculate the next transform due to a progressing animation
-
-  }, {
-    key: "calcNextAnimationTransform",
-    value: function calcNextAnimationTransform(elapsedTime) {
-      var phase = this.state.animation.currentPhase; // This flow error cannot happen as start is un-nulled in the phase start
-      // $FlowFixMe
-
-      var start = phase.startTransform._dup();
-
-      var delta = phase.deltaTransform._dup();
-
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      var p = percentComplete; // let next = delta._dup().constant(p);
-      // next = start.add(delta.mul(next));
-
-      var next = start.toDelta(delta, p, phase.translationStyle, phase.translationOptions);
-      return next;
-    }
-  }, {
-    key: "calcNextAnimationColor",
-    value: function calcNextAnimationColor(elapsedTime) {
-      var phase = this.state.colorAnimation.currentPhase;
-      var start = phase.startColor;
-      var delta = phase.deltaColor;
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      var p = percentComplete;
-      var next = [0, 0, 0, 1];
-
-      if (start != null) {
-        next = start.map(function (c, index) {
-          return c + delta[index] * p;
-        });
-      }
-
-      return next;
-    }
-  }, {
-    key: "calcNextCustomAnimationPercentComplete",
-    value: function calcNextCustomAnimationPercentComplete(elapsedTime) {
-      var phase = this.state.customAnimation.currentPhase;
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      return percentComplete;
-    }
+    value: function setFirstTransform(parentTransform) {}
   }, {
     key: "setPosition",
     value: function setPosition(pointOrX) {
@@ -20560,8 +19974,7 @@ function () {
       if (this.setTransformCallback) {
         this.setTransformCallback(this.transform);
       }
-    } // Deprecate
-    // Set the next transform (and velocity if moving freely) for the next
+    } // Set the next transform (and velocity if moving freely) for the next
     // animation frame.
     //
     // If animating, this transform will be the next frame determined by
@@ -20576,56 +19989,11 @@ function () {
     // freely.
 
   }, {
-    key: "setNextTransform",
-    value: function setNextTransform(now) {
-      // If animation is happening
-      if (this.state.isAnimating) {
-        var phase = this.state.animation.currentPhase; // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now;
-          return;
-        } // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.animation.currentPhaseIndex < this.animate.transform.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            phase.finish(this); // this.setTransform(this.calcNextAnimationTransform(phase.time));
-            // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.animation.currentPhaseIndex += 1;
-            this.animatePhase(this.state.animation.currentPhaseIndex);
-            this.state.animation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextTransform(now);
-            return;
-          } // Note, stopAnimating will finish the last phase
-
-
-          this.stopAnimating(false);
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-
-
-        this.setTransform(this.calcNextAnimationTransform(deltaTime));
-        return;
-      } // If the element is moving freely, then calc it's next velocity and
+    key: "nextMovingFreelyFrame",
+    value: function nextMovingFreelyFrame(now) {
+      // If the element is moving freely, then calc it's next velocity and
       // transform. Save the new velocity into state.movement and return the
       // transform.
-
-
       if (this.state.isMovingFreely) {
         // If this is the first frame of moving freely, then record the current
         // time so can calculate velocity on next frame
@@ -20636,10 +20004,9 @@ function () {
         // the delta time from this frame to the previous
 
 
-        var _deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
+        var deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
 
-
-        var next = this.decelerate(_deltaTime);
+        var next = this.decelerate(deltaTime);
         this.state.movement.velocity = next.velocity;
         this.state.movement.previousTime = now; // If the velocity is 0, then stop moving freely and return the current
         // transform
@@ -20651,229 +20018,7 @@ function () {
 
         this.setTransform(next.transform);
       }
-    } // Deprecate
-
-  }, {
-    key: "setNextCustomAnimation",
-    value: function setNextCustomAnimation(now) {
-      // If animation is happening
-      // if (this.name === 'diameterDimension') {
-      //   console.log("0", this.state.isAnimatingCustom)
-      // }
-      if (this.state.isAnimatingCustom) {
-        var phase = this.state.customAnimation.currentPhase; // console.log("0.5", phase.startTime)
-        // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now - phase.plannedStartTime;
-          return;
-        } // const percent = calcNextCustomAnimationPercentComplete(now);
-        // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // console.log("1")
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.customAnimation.currentPhaseIndex < this.animate.custom.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            // phase.animationCallback(1);
-            phase.finish(); // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.customAnimation.currentPhaseIndex += 1;
-            this.animateCustomPhase(this.state.customAnimation.currentPhaseIndex);
-            this.state.customAnimation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextCustomAnimation(now);
-            return;
-          } // This needs to go before StopAnimating, as stopAnimating clears
-          // the animation plan (incase a callback is used to start another
-          // animation)
-          // const endColor = this.calcNextAnimationColor(phase.time);
-          // this.setColor(endColor);
-          // console.log("2")
-          // phase.animationCallback(1);
-
-
-          this.stopAnimatingCustom(true); // console.log("3")
-
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-        // console.log("4", this.state.isAnimatingCustom)
-
-
-        var percent = this.calcNextCustomAnimationPercentComplete(deltaTime); // console.log(phase.animationCallback)
-
-        phase.animationCallback(percent); // console.log("5", this.state.isAnimatingCustom)
-        // this.setColor(this.calcNextAnimationColor(deltaTime));
-      } // if (this.name === 'diameterDimension') {
-      //   console.log("6", this.state.isAnimatingCustom)
-      // }
-
-    } // Deprecate
-
-  }, {
-    key: "setNextColor",
-    value: function setNextColor(now) {
-      // If animation is happening
-      if (this.state.isAnimatingColor) {
-        var phase = this.state.colorAnimation.currentPhase; // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now;
-          return;
-        } // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.colorAnimation.currentPhaseIndex < this.animate.color.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            // this.setColor(this.calcNextAnimationColor(phase.time));
-            // Phase callback
-            phase.finish(this); // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.colorAnimation.currentPhaseIndex += 1;
-            this.animateColorPhase(this.state.colorAnimation.currentPhaseIndex);
-            this.state.colorAnimation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextColor(now);
-            return;
-          } // This needs to go before StopAnimating, as stopAnimating clears
-          // the animation plan (incase a callback is used to start another
-          // animation)
-          // const endColor = this.calcNextAnimationColor(phase.time);
-          // this.setColor(endColor);
-          // phase.finish(this);
-
-
-          this.stopAnimatingColor(false);
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-
-
-        this.setColor(this.calcNextAnimationColor(deltaTime)); // if(this.name === 'times') {
-        //   console.log(now, this.color[3])
-        // }
-      }
-    } // ///////////////// Deprecate Start
-    // rotateTo(...optionsIn: Array<TypeRotationAnimationStepInputOptions>) {
-    //   const options = joinObjects({}, { element: this }, ...optionsIn);
-    //   return new animations.RotationAnimationStep(options);
-    // }
-    // scaleTo(...optionsIn: Array<TypeScaleAnimationStepInputOptions>) {
-    //   const options = joinObjects({}, { element: this }, ...optionsIn);
-    //   return new animations.ScaleAnimationStep(options);
-    // }
-    // moveTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
-    //   return this.moveToPosition(...optionsIn);
-    // }
-    // moveToPosition(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
-    //   const options = joinObjects({}, { element: this }, ...optionsIn);
-    //   return new animations.PositionAnimationStep(options);
-    // }
-    // moveToTransform(...optionsIn: Array<TypeTransformAnimationStepInputOptions>) {
-    //   const options = joinObjects({}, { element: this }, ...optionsIn);
-    //   return new animations.TransformAnimationStep(options);
-    // }
-    // dissolveIn(
-    //   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
-    //   ...args: Array<TypeColorAnimationStepInputOptions>
-    // ) {
-    //   const defaultOptions = { element: this };
-    //   let options;
-    //   if (typeof timeOrOptionsIn === 'number') {
-    //     options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
-    //   } else {
-    //     options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
-    //   }
-    //   return new animations.DissolveInAnimationStep(options);
-    // }
-    // dissolveOut(
-    //   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
-    //   ...args: Array<TypeColorAnimationStepInputOptions>
-    // ) {
-    //   const defaultOptions = { element: this };
-    //   let options;
-    //   if (typeof timeOrOptionsIn === 'number') {
-    //     options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
-    //   } else {
-    //     options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
-    //   }
-    //   return new animations.DissolveOutAnimationStep(options);
-    // }
-    // animationBuilder(...optionsIn: Array<TypeAnimationBuilderInputOptions>) {
-    //   return new animations.AnimationBuilder(this, ...optionsIn);
-    // }
-    // Deprecate
-    // moveToScenario(
-    //   ...optionsIn: Array<TypeTransformAnimationStepInputOptions & { scenario: string }>
-    // ) {
-    //   const defaultOptions = { element: this };
-    //   const options = joinObjects({}, defaultOptions, ...optionsIn);
-    //   if (options.target != null
-    //     && options.target in options.element.scenarios
-    //   ) {
-    //     const target = options.element.getScenarioTarget(options.target);
-    //     options.target = target;
-    //   }
-    //   if (options.start != null
-    //     && options.start in options.element.scenarios
-    //   ) {
-    //     const start = options.element.getScenarioTarget(options.start);
-    //     options.start = start;
-    //   }
-    //   if (options.delta != null
-    //     && options.delta in options.element.scenarios
-    //   ) {
-    //     const delta = options.element.getScenarioTarget(options.delta);
-    //     options.delta = delta;
-    //   }
-    //   return new animations.TransformAnimationStep(options);
-    // }
-    // //////////// Deprecate End
-    // moveToScenario_old(
-    //   scenarioName: string,
-    //   animationTimeOrVelocity: ?number = null,    // null uses velocity
-    //   callback: ?() => void = null,
-    //   rotDirection: -1 | 1 | 0 | 2 = 0,
-    // ) {
-    //   this.stop();
-    //   const target = this.getScenarioTarget(scenarioName);
-    //   let time = 1;
-    //   const estimatedTime = this.getTimeToMoveToScenario(scenarioName, rotDirection);
-    //   if (animationTimeOrVelocity == null) {
-    //     time = estimatedTime;
-    //   } else {
-    //     time = animationTimeOrVelocity;
-    //   }
-    //   if (time > 0 && estimatedTime !== 0) {
-    //     this.animateTo(target, time, 0, rotDirection, callback);
-    //   } else if (callback != null) {
-    //     callback();
-    //   }
-    //   return time;
-    // }
-    // Used only to clear 2D context
+    } // Used only to clear 2D context
     // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -21022,569 +20167,12 @@ function () {
     value: function getParentLastDrawTransform() {
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(-parentCount));
-    } // Start an animation plan of phases ending in a callback
-
-  }, {
-    key: "animatePlan",
-    value: function animatePlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimating();
-      this.stopMovingFreely();
-      this.stopBeingMoved();
-      this.animate.transform.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.transform.plan.push(phases[i]);
-      }
-
-      if (this.animate.transform.plan.length > 0) {
-        if (callback) {
-          this.animate.transform.callback = callback;
-        }
-
-        this.state.isAnimating = true;
-        this.state.animation.currentPhaseIndex = 0;
-        this.animatePhase(this.state.animation.currentPhaseIndex);
-      }
-    }
-  }, {
-    key: "animateColorPlan",
-    value: function animateColorPlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingColor();
-      this.animate.color.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.color.plan.push(phases[i]);
-      }
-
-      if (this.animate.color.plan.length > 0) {
-        if (callback) {
-          this.animate.color.callback = callback;
-        } // console.log(this.animate.color.toDisolve, this.name)
-        // this.state.disolving = this.animate.color.toDisolve;
-        // this.animate.color.toDisolve = '';
-
-
-        this.state.isAnimatingColor = true;
-        this.state.colorAnimation.currentPhaseIndex = 0;
-        this.animateColorPhase(this.state.colorAnimation.currentPhaseIndex);
-      }
-    }
-  }, {
-    key: "animateCustomPlan",
-    value: function animateCustomPlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingCustom();
-      this.animate.custom.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.custom.plan.push(phases[i]);
-      }
-
-      if (this.animate.custom.plan.length > 0) {
-        if (callback) {
-          this.animate.custom.callback = callback;
-        }
-
-        this.state.isAnimatingCustom = true;
-        this.state.customAnimation.currentPhaseIndex = 0;
-        this.animateCustomPhase(this.state.customAnimation.currentPhaseIndex);
-      }
-    } // Start the animation of a phase - this should only be called by methods
-    // internal to this class.
-
-  }, {
-    key: "animatePhase",
-    value: function animatePhase(index) {
-      this.state.animation.currentPhase = this.animate.transform.plan[index];
-      this.state.animation.currentPhase.start(this.transform._dup());
-    }
-  }, {
-    key: "animateColorPhase",
-    value: function animateColorPhase(index) {
-      this.state.colorAnimation.currentPhase = this.animate.color.plan[index];
-      this.state.colorAnimation.currentPhase.start(this);
-    }
-  }, {
-    key: "animateCustomPhase",
-    value: function animateCustomPhase(index) {
-      this.state.customAnimation.currentPhase = this.animate.custom.plan[index];
-      this.state.customAnimation.currentPhase.start();
-    }
-  }, {
-    key: "stopAnimatingGeneric",
-    value: function stopAnimatingGeneric(cancelled, forceSetToEnd, currentPhaseIndex, animateString, isState) {
-      // Animation state needs to be cleaned up before calling callbacks
-      // as the last phase callback may trigger more animations which need
-      // to start from scratch (and not use the existing callback for example).
-      // Therefore, make some temporary variables to store the animation state.
-      var runRemainingPhases = false; // const currentIndex = currentPhaseIndex;
-
-      var runLastPhase = false;
-      var _this$animate$animate = this.animate[animateString],
-          plan = _this$animate$animate.plan,
-          callback = _this$animate$animate.callback; // If the animation was cancelled, then run finish on all unfinished
-      // phases.
-
-      if (plan.length > 0 && this.state[isState] && cancelled) {
-        runRemainingPhases = true;
-      } // If the animation finished without being cancelled, then just call
-      // the finish routine on the last phase as it hasn't been called yet
-      // by setNextTransform
-
-
-      if (!cancelled) {
-        runLastPhase = true;
-      } // Reset the animation state, plan and callback
-
-
-      this.state[isState] = false; // $FlowFixMe
-
-      this.animate[animateString].plan = [];
-      this.animate[animateString].callback = null; // Finish remaining phases if required.
-
-      if (runRemainingPhases) {
-        var endIndex = plan.length - 1;
-
-        for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
-          var phase = plan[i];
-
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"]) {
-            phase.finish(cancelled, forceSetToEnd);
-          } else {
-            phase.finish(this, cancelled, forceSetToEnd);
-          }
-        }
-      } // Finish last phases if required.
-
-
-      if (runLastPhase) {
-        if (plan.length > 0) {
-          var _phase = plan.slice(-1)[0];
-
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"]) {
-            _phase.finish(cancelled, forceSetToEnd);
-          } else {
-            _phase.finish(this, cancelled, forceSetToEnd);
-          }
-        }
-      } // Run animation plan callback if it exists.
-
-
-      if (callback != null) {
-        callback(cancelled);
-      }
-    } // When animation is stopped, any callback associated with the animation
-    // needs to be called, with whatever is passed to stopAnimating.
-
-  }, {
-    key: "stopAnimating",
-    value: function stopAnimating() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.animation.currentPhaseIndex, 'transform', 'isAnimating');
-    }
-  }, {
-    key: "stopAnimatingColor",
-    value: function stopAnimatingColor() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.colorAnimation.currentPhaseIndex, 'color', 'isAnimatingColor');
-    }
-  }, {
-    key: "stopAnimatingCustom",
-    value: function stopAnimatingCustom() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.colorAnimation.currentPhaseIndex, 'custom', 'isAnimatingCustom');
-    } // **************************************************************
-    // **************************************************************
-    // Helper functions for quicker animation plans
-    // Deprecate
-
-  }, {
-    key: "animateTo",
-    value: function animateTo(transform) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      this.animateTransformToWithDelay(transform, delay, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    } // Deprecate
-
-  }, {
-    key: "animateFrom",
-    value: function animateFrom(transform) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var rotDirection = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var target = this.transform._dup();
-
-      this.animateTransformToWithDelay(target, 0, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    } // Deprecate
-
-  }, {
-    key: "animateColorTo",
-    value: function animateColorTo(color) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var finishOnCancel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      this.animateColorToWithDelay(color, 0, time, null, callback, finishOnCancel, easeFunction);
-    } // Deprecate
-
-  }, {
-    key: "animateTransformToWithDelay",
-    value: function animateTransformToWithDelay(targetTransform) {
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-      var moveTime = 0;
-
-      if (timeOrVelocity instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
-        moveTime = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform, targetTransform, timeOrVelocity, rotDirection);
-      } else {
-        moveTime = timeOrVelocity;
-      }
-
-      if (delay === 0 && moveTime === 0) {
-        this.setTransform(targetTransform);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseMove = null;
-      var phases = [];
-      var delayCallback = null;
-      var moveCallback = callbackToUse;
-
-      if (moveTime === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          callbackToUse(cancelled);
-        };
-
-        moveCallback = null;
-      }
-
-      if (delay > 0) {
-        var delayTransform = this.transform._dup();
-
-        if (addToExistingPlan && this.animate.transform.plan.length > 0) {
-          delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
-        }
-
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
-        phases.push(phaseDelay);
-      }
-
-      if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
-        phases.push(phaseMove);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimating) {
-          this.animate.transform.plan = [].concat(_toConsumableArray(this.animate.transform.plan), phases);
-        } else {
-          this.animatePlan(phases);
-        }
-      }
-    } // Deprecate
-
-  }, {
-    key: "animateColorToWithDelay",
-    value: function animateColorToWithDelay(color, delay) {
-      var _this3 = this;
-
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var disolve = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-
-      if (delay === 0 && time === 0) {
-        this.setColor(color);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseColor = null;
-      var phases = [];
-      var delayCallback = null;
-      var colorCallback = callbackToUse;
-
-      if (time === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          if (!cancelled && finishOnCancel) {
-            _this3.setColor(color);
-          }
-
-          callbackToUse(cancelled);
-        };
-
-        colorCallback = null;
-      }
-
-      if (delay > 0) {
-        var delayColor = this.color.slice();
-
-        if (addToExistingPlan && this.animate.color.plan.length > 0) {
-          delayColor = this.animate.color.plan.slice(-1)[0].targetColor.slice();
-        }
-
-        var delayDisolve = null;
-
-        if (disolve === 'in') {
-          delayColor[3] = 0.01;
-          delayDisolve = 'in';
-        }
-
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
-        phases.push(phaseDelay);
-      }
-
-      if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
-        phases.push(phaseColor);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimatingColor) {
-          this.animate.color.plan = [].concat(_toConsumableArray(this.animate.color.plan), phases);
-        } else {
-          this.animateColorPlan(phases);
-        }
-      }
-    } // Deprecate
-
-  }, {
-    key: "disolveOutWithDelay",
-    value: function disolveOutWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.animateColorToWithDelay(this.color, delay, time, 'out', callback);
-    } // Deprecate
-
-  }, {
-    key: "disolveInWithDelay",
-    value: function disolveInWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.animateColorToWithDelay(this.color, delay, time, 'in', callback);
-    } // Deprecate
-
-  }, {
-    key: "disolveWithDelay",
-    value: function disolveWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var disolve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'in';
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var finishOnCancel = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-      this.animateColorToWithDelay(this.color, delay, time, disolve, callback, finishOnCancel);
-    } // Deprecate
-
-  }, {
-    key: "animateCustomTo",
-    value: function animateCustomTo(phaseCallback) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      this.animateCustomToWithDelay(0, phaseCallback, time, startPercent, callback, true, easeFunction, true);
-    } // Deprecate
-
-  }, {
-    key: "animateCustomToWithDelay",
-    value: function animateCustomToWithDelay(delay, phaseCallback) {
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var startPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-
-      if (delay === 0 && time === 0) {
-        phaseCallback(1);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseCustom = null;
-      var phases = [];
-      var delayCallback = null;
-      var customCallback = callbackToUse;
-
-      if (time === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          callbackToUse(cancelled);
-        };
-
-        customCallback = null;
-      }
-
-      if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
-        phases.push(phaseDelay);
-      }
-
-      if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_12__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
-        phases.push(phaseCustom);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimating) {
-          this.animate.custom.plan = [].concat(_toConsumableArray(this.animate.custom.plan), phases);
-        } else {
-          this.animateCustomPlan(phases);
-        }
-      }
-    } // Deprecate
-
-  }, {
-    key: "disolveIn",
-    value: function disolveIn() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.disolveInWithDelay(0, time, callback);
-    } // Deprecate
-
-  }, {
-    key: "disolveOut",
-    value: function disolveOut() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.disolveOutWithDelay(0, time, callback);
-    } // With update only first instace of translation in the transform order
-    // Deprecate
-
-  }, {
-    key: "animateTranslationTo",
-    value: function animateTranslationTo(translation) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // With update only first instace of translation in the transform order
-    // Deprecate
-
-  }, {
-    key: "animateScaleTo",
-    value: function animateScaleTo(scale) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateScale(scale);
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // Will update only first instace of translation in the transform order
-    // Deprecate
-
-  }, {
-    key: "animateTranslationFrom",
-    value: function animateTranslationFrom(translation) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var target = this.transform._dup();
-
-      this.transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(target, 0, timeOrVelocity, 0, callback, true, easeFunction); // this.animateTo(target, timeOrVelocity, 0, 0, callback, easeFunction);
-    } // Deprecate
-
-  }, {
-    key: "animateTranslationToWithDelay",
-    value: function animateTranslationToWithDelay(translation) {
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(transform, delay, time, 0, callback, true, easeFunction);
-    } // With update only first instace of rotation in the transform order
-    // Deprecate
-
-  }, {
-    key: "animateRotationTo",
-    value: function animateRotationTo(rotation, rotDirection) {
-      var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateRotation(rotation);
-      this.animateTransformToWithDelay(transform, 0, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    } // With update only first instace of rotation in the transform order
-    // Deprecate
-
-  }, {
-    key: "animateTranslationAndRotationTo",
-    value: function animateTranslationAndRotationTo(translation, rotation, rotDirection) {
-      var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateRotation(rotation);
-      transform.updateTranslation(translation._dup());
-      this.animateTransformToWithDelay(transform, 0, time, rotDirection, callback, true, easeFunction);
-    } // Deprecate
-
-  }, {
-    key: "animateTranslationAndScaleTo",
-    value: function animateTranslationAndScaleTo(translation, scale) {
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      if (typeof scale === 'number') {
-        transform.updateScale(scale, scale);
-      } else {
-        transform.updateScale(scale._dup());
-      }
-
-      transform.updateTranslation(translation._dup());
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // **************************************************************
-    // **************************************************************
-    // Being Moved
+    } // Being Moved
 
   }, {
     key: "startBeingMoved",
     value: function startBeingMoved() {
-      this.stopAnimating();
+      // this.stopAnimating();
       this.animations.cancelAll('noComplete');
       this.stopMovingFreely();
       this.state.movement.velocity = this.transform.zero();
@@ -21638,11 +20226,13 @@ function () {
     key: "startMovingFreely",
     value: function startMovingFreely() {
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.stopAnimating();
+      // this.stopAnimating();
+      this.animations.cancelAll('noComplete');
       this.stopBeingMoved();
 
       if (callback) {
-        this.animate.transform.callback = callback;
+        // this.animate.transform.callback = callback;
+        this.move.freely.callback = callback;
       }
 
       this.state.isMovingFreely = true;
@@ -21656,14 +20246,14 @@ function () {
       this.state.isMovingFreely = false;
       this.state.movement.previousTime = -1;
 
-      if (this.animate.transform.callback) {
-        this.animate.transform.callback(result); // if (result !== null && result !== undefined) {
+      if (this.move.freely.callback) {
+        this.move.freely.callback(result); // if (result !== null && result !== undefined) {
         //   this.animate.transform.callback(result);
         // } else {
         //   this.animate.transform.callback();
         // }
 
-        this.animate.transform.callback = null;
+        this.move.freely.callback = null;
       }
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
@@ -21801,20 +20391,14 @@ function () {
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
-      if (forceSetToEndOfPlan === true) {
+      if (forceSetToEndOfPlan === true || forceSetToEndOfPlan === 'complete') {
         this.animations.cancelAll('complete');
-      } else if (forceSetToEndOfPlan === false) {
+      } else if (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete') {
         this.animations.cancelAll('noComplete');
       } else {
         this.animations.cancelAll(null);
-      } // Deprecate
+      }
 
-
-      this.stopAnimating(cancelled, forceSetToEndOfPlan); // Deprecate
-
-      this.stopAnimatingColor(cancelled, forceSetToEndOfPlan); // Deprecate
-
-      this.stopAnimatingCustom(cancelled, forceSetToEndOfPlan);
       this.stopMovingFreely(cancelled);
       this.stopBeingMoved();
       this.stopPulsing(cancelled);
@@ -22172,33 +20756,7 @@ function () {
         this.isTouchable = true;
         this.isMovable = true;
       }
-    } // processParentTransform(parentTransform: Transform): Transform {
-    //   let newTransform;
-    //   if (this.noRotationFromParent) {
-    //     const finalParentTransform = parentTransform._dup();
-    //     let r = 0;
-    //     for (let i = 0; i < finalParentTransform.order.length; i += 1) {
-    //       const t = finalParentTransform.order[i];
-    //       if (t instanceof Rotation) {
-    //         r += t.r;
-    //       }
-    //     }
-    //     const m = parentTransform.matrix();
-    //     const translation = new Point(m[2], m[5]);
-    //     const scale = new Point(
-    //       new Point(m[0], m[3]).distance(),
-    //       new Point(m[1], m[4]).distance(),
-    //     );
-    //     newTransform = new Transform()
-    //       .scale(scale)
-    //       // .rotate(r)
-    //       .translate(translation);
-    //   } else {
-    //     newTransform = parentTransform;
-    //   }
-    //   return newTransform;
-    // }
-
+    }
   }]);
 
   return DiagramElement;
@@ -22213,7 +20771,7 @@ function (_DiagramElement) {
   _inherits(DiagramElementPrimative, _DiagramElement);
 
   function DiagramElementPrimative(drawingObject) {
-    var _this4;
+    var _this3;
 
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
@@ -22222,15 +20780,15 @@ function (_DiagramElement) {
 
     _classCallCheck(this, DiagramElementPrimative);
 
-    _this4 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
-    _this4.drawingObject = drawingObject;
-    _this4.color = color.slice();
-    _this4.pointsToDraw = -1;
-    _this4.angleToDraw = -1;
-    _this4.lengthToDraw = -1;
-    _this4.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
+    _this3.drawingObject = drawingObject;
+    _this3.color = color.slice();
+    _this3.pointsToDraw = -1;
+    _this3.angleToDraw = -1;
+    _this3.lengthToDraw = -1;
+    _this3.cannotTouchHole = false; // this.setMoveBoundaryToDiagram();
 
-    return _this4;
+    return _this3;
   }
 
   _createClass(DiagramElementPrimative, [{
@@ -22419,7 +20977,7 @@ function (_DiagramElement) {
   }, {
     key: "draw",
     value: function draw() {
-      var _this5 = this;
+      var _this4 = this;
 
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -22433,31 +20991,21 @@ function (_DiagramElement) {
           }
         }
 
-        this.animations.nextFrame(now); // Deprecate
-
-        this.setNextTransform(now); // Deprecate
-
-        this.setNextColor(now); // set next color can end up hiding an element when disolving out
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now);
 
         if (!this.isShown) {
           return;
-        } // Deprecate
-
-
-        this.setNextCustomAnimation(now); // this.lastDrawParentTransform = parentTransform._dup();
+        }
 
         this.lastDrawElementTransformPosition = {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
-        }; // const finalParentTransform = this.processParentTransform(parentTransform);
-
+        };
         var newTransform = parentTransform.transform(this.transform);
-        var pulseTransforms = this.transformWithPulse(now, newTransform); // let matrix = m2.mul(transformMatrix, this.transform.matrix());
-        // matrix = this.transformWithPulse(now, matrix);
-        // eslint-disable-next-line prefer-destructuring
+        var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawTransform = pulseTransforms[0]; // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
-
+        this.lastDrawTransform = pulseTransforms[0];
         var pointCount = -1;
 
         if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
@@ -22478,7 +21026,7 @@ function (_DiagramElement) {
 
         var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
         pulseTransforms.forEach(function (t) {
-          _this5.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, pointCount);
+          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, pointCount);
         });
 
         if (this.unrenderNextDraw) {
@@ -22508,7 +21056,10 @@ function (_DiagramElement) {
   }, {
     key: "isMoving",
     value: function isMoving() {
-      if (this.state.isAnimating || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.state.isAnimatingColor || this.state.isAnimatingCustom || this.animations.state === 'animating') {
+      if ( // this.state.isAnimating
+      this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing // || this.state.isAnimatingColor
+      // || this.state.isAnimatingCustom
+      || this.animations.willStartAnimating()) {
         return true;
       }
 
@@ -22541,51 +21092,7 @@ function (_DiagramElement) {
       }
 
       return oldWebgl;
-    } // // Update the translation move boundary for the element's transform.
-    // // This will limit the first translation part of the transform to only
-    // // translations within the max/min limit.
-    // updateMoveTranslationBoundary(
-    //   bounday: Array<number> = [
-    //     this.diagramLimits.left,
-    //     this.diagramLimits.top - this.diagramLimits.height,
-    //     this.diagramLimits.left + this.diagramLimits.width,
-    //     this.diagramLimits.top],
-    //   scale: Point = new Point(1, 1),
-    // ): void {
-    //   const glSpace = {
-    //     x: { bottomLeft: -1, width: 2 },
-    //     y: { bottomLeft: -1, height: 2 },
-    //   };
-    //   const diagramSpace = {
-    //     x: {
-    //       bottomLeft: this.diagramLimits.left,
-    //       width: this.diagramLimits.width,
-    //     },
-    //     y: {
-    //       bottomLeft: this.diagramLimits.bottom,
-    //       height: this.diagramLimits.height,
-    //     },
-    //   };
-    //   const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
-    //   const rect = this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
-    //   const minPoint = new Point(rect.left, rect.bottom).transformBy(glToDiagramSpace.matrix());
-    //   const maxPoint = new Point(rect.right, rect.top).transformBy(glToDiagramSpace.matrix());
-    //   const min = new Point(0, 0);
-    //   const max = new Point(0, 0);
-    //   min.x = bounday[0] - minPoint.x * scale.x;
-    //   min.y = bounday[1] - minPoint.y * scale.y;
-    //   max.x = bounday[2] - maxPoint.x * scale.x;
-    //   max.y = bounday[3] - maxPoint.y * scale.y;
-    //   this.move.maxTransform.updateTranslation(
-    //     max.x,
-    //     max.y,
-    //   );
-    //   this.move.minTransform.updateTranslation(
-    //     min.x,
-    //     min.y,
-    //   );
-    // }
-
+    }
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
@@ -22659,7 +21166,7 @@ function (_DiagramElement2) {
 
   // biasTransform: Array<number>;
   function DiagramElementCollection() {
-    var _this6;
+    var _this5;
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
@@ -22667,12 +21174,12 @@ function (_DiagramElement2) {
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this6 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
-    _this6.elements = {};
-    _this6.drawOrder = [];
-    _this6.touchInBoundingRect = false;
-    _this6.eqns = {};
-    return _this6;
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
+    _this5.elements = {};
+    _this5.drawOrder = [];
+    _this5.touchInBoundingRect = false;
+    _this5.eqns = {};
+    return _this5;
   }
 
   _createClass(DiagramElementCollection, [{
@@ -22700,7 +21207,10 @@ function (_DiagramElement2) {
         return false;
       }
 
-      if (this.state.isAnimating || this.state.isAnimatingCustom || this.state.isAnimatingColor || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
+      if ( // this.state.isAnimating
+      // || this.state.isAnimatingCustom
+      // || this.state.isAnimatingColor
+      this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
         return true;
       }
 
@@ -22758,21 +21268,8 @@ function (_DiagramElement2) {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      // console.log('draw collection', now, this.name)
-      // if (this.name === 'fig3') {
-      //   const ga = new GlobalAnimation();
-      //   const deltaTime = new Date().getTime() - ga.diagramDrawStart;
-      //   // console.log(this.name, deltaTime)
-      // }
-      // if (this.name === 'circumference') {
-      //   const ga = new GlobalAnimation();
-      //   const deltaTime = new Date().getTime() - ga.diagramDrawStart;
-      //   // console.log(this.name, deltaTime)
-      // }
       if (this.isShown) {
         if (this.isRenderedAsImage === true) {
-          // if (this.willStartAnimating()) {
-          //   console.log(this.name, this.willStartAnimating())
           if (this.willStartAnimating()) {
             this.unrender();
           } else {
@@ -22780,25 +21277,17 @@ function (_DiagramElement2) {
           }
         }
 
-        this.animations.nextFrame(now); // Deprecate
-
-        this.setNextTransform(now); // Deprecate
-
-        this.setNextColor(now); // set next color can end up hiding an element when disolving out
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
 
         if (!this.isShown) {
           return;
-        } // Deprecate
-
-
-        this.setNextCustomAnimation(now); // this.lastDrawParentTransform = parentTransform._dup();
-        // this.lastDrawElementTransform = this.transform._dup();
+        }
 
         this.lastDrawElementTransformPosition = {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
-        }; // const finalParentTransform = this.processParentTransform(parentTransform);
-
+        };
         var newTransform = parentTransform.transform(this.transform);
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
@@ -23047,30 +21536,14 @@ function (_DiagramElement2) {
     }
   }, {
     key: "updateHTMLElementTie",
-    value: function updateHTMLElementTie( // pixelSpaceToDiagramSpaceTransform: Transform,
-    // diagramToPixelSpaceScale: Point,
-    container) {
-      // console.log('collection', this.name)
-      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, // pixelSpaceToDiagramSpaceTransform,
-      // diagramToPixelSpaceScale,
-      // diagramToGLSpaceTransformMatrix,
-      container);
+    value: function updateHTMLElementTie(container) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, container);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.updateHTMLElementTie( // pixelSpaceToDiagramSpaceTransform,
-        // diagramToPixelSpaceScale,
-        // diagramToGLSpaceTransformMatrix,
-        container);
+        element.updateHTMLElementTie(container);
       }
-    } // updateHTMLElementTieScale() {
-    //   super.updateHTMLElementTieScale();
-    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
-    //     const element = this.elements[this.drawOrder[i]];
-    //     element.updateHTMLElementTieScale();
-    //   }
-    // }
-    // Returns an array of touched elements.
+    } // Returns an array of touched elements.
     // In a collection, elements defined later in the collection.order
     // array are on top of earlier elements. The touched array
     // is sorted to have elements on top first, where the collection containing
@@ -23179,11 +21652,11 @@ function (_DiagramElement2) {
   }, {
     key: "reorder",
     value: function reorder() {
-      var _this7 = this;
+      var _this6 = this;
 
       this.drawOrder.sort(function (a, b) {
-        var elemA = _this7.elements[a];
-        var elemB = _this7.elements[b];
+        var elemA = _this6.elements[a];
+        var elemB = _this6.elements[b];
         return elemB.drawPriority - elemA.drawPriority;
       }); // this.elements.sort((a, b) => {
       //   const elemA
@@ -23266,20 +21739,7 @@ function (_DiagramElement2) {
       }
 
       return elements;
-    } // getAllTiedElements() {
-    //   let elements = [];
-    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
-    //     const element = this.elements[this.drawOrder[i]];
-    //     if (element.tieToHTML.element != null) {
-    //       elements.push(element);
-    //     }
-    //     if (element instanceof DiagramElementCollection) {
-    //       elements = [...elements, ...element.getAllTiedElements()];
-    //     }
-    //   }
-    //   return elements;
-    // }
-    // Get all ineractive elemnts, but only go as deep as a
+    } // Get all ineractive elemnts, but only go as deep as a
     // DiagramElementColleciton if it is touchable or movable
 
   }, {
@@ -23303,47 +21763,7 @@ function (_DiagramElement2) {
       }
 
       return elements;
-    } // disolveWithDelay(
-    //   delay: number = 1,
-    //   time: number = 1,
-    //   disolve: 'in' | 'out' = 'in',
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     console.log(element.name)
-    //     element.disolveWithDelay(delay, time, disolve, callback);
-    //   }
-    // }
-    // // deprecate
-    // disolveElementsOut(
-    //   time: number = 1,
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     if (element instanceof DiagramElementCollection) {
-    //       element.disolveElementsOut(time, callback);
-    //     } else {
-    //       element.disolveOut(time, callback);
-    //     }
-    //   }
-    // }
-    // // deprecate
-    // disolveElementsIn(
-    //   time: number = 1,
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     if (element instanceof DiagramElementCollection) {
-    //       element.disolveElementsIn(time, callback);
-    //     } else {
-    //       element.disolveIn(time, callback);
-    //     }
-    //   }
-    // }
-    // This method is here as a convenience method for content item selectors
+    } // This method is here as a convenience method for content item selectors
     // eslint-disable-next-line class-methods-use-this
 
   }, {
