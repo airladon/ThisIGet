@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -222,6 +222,17 @@ class Content extends PresentationLessonContent {
         coll._eqns._explementary.showForm('c');
         coll._eqns._explementary.setFormSeries('1');
       },
+    });
+
+    this.addSection({
+      setContent: style({ top: 15 }, [
+        'The words |complementary|, |supplementary| and |explementary| all have a similar definition - |to fill up or complete|.',
+        'In this case they fill up or complete a |right|, |straight| and |full| angle.',
+        'Its not clear there is a particular reason why each word is assosiated with its angle.',
+        `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_higher' })}`,
+        `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_high' })}`,
+        `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'I fill up']).html()}`,
+      ]),
     });
   }
 }
