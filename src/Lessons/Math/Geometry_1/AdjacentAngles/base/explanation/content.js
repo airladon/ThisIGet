@@ -83,13 +83,13 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = false;
         fig._line2.isTouchable = false;
         fig._line3.isTouchable = false;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 2, done);
       },
       setSteadyState: () => {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
-        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 0);
       },
     });
@@ -112,13 +112,13 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = false;
         fig._line2.isTouchable = false;
         fig._line3.isTouchable = false;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
       },
       setSteadyState: () => {
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
-        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
@@ -152,6 +152,7 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = false;
         fig._line2.isTouchable = false;
         fig._line3.isTouchable = false;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 2, done);
       },
       setSteadyState: () => {
@@ -185,6 +186,7 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = false;
         fig._line2.isTouchable = false;
         fig._line3.isTouchable = false;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
       },
       setSteadyState: () => {
@@ -218,6 +220,7 @@ class Content extends PresentationLessonContent {
         fig._line1.isTouchable = false;
         fig._line2.isTouchable = false;
         fig._line3.isTouchable = false;
+        fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 2, done);
       },
       setSteadyState: () => {
