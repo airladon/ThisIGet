@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  DiagramElementCollection,
+  DiagramElementCollection, Equation,
   Transform,
 } = Fig;
 
@@ -19,6 +19,29 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angleA: DiagramObjectAngle;
     _angleB: DiagramObjectAngle;
     _angleC: DiagramObjectAngle;
+  } & DiagramElementCollection;
+
+  _eqns: {
+    _adjacent: {
+      _a: DiagramElementPrimative;
+      _b: DiagramElementPrimative;
+      _c: DiagramElementPrimative;
+    } & Equation;
+    _complementary: {
+      _a: DiagramElementPrimative;
+      _b: DiagramElementPrimative;
+      _c: DiagramElementPrimative;
+    } & Equation;
+    _supplementary: {
+      _a: DiagramElementPrimative;
+      _b: DiagramElementPrimative;
+      _c: DiagramElementPrimative;
+    } & Equation;
+    _explementary: {
+      _a: DiagramElementPrimative;
+      _b: DiagramElementPrimative;
+      _c: DiagramElementPrimative;
+    } & Equation;
   } & DiagramElementCollection;
 
   constructor(
@@ -37,39 +60,42 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._line3.setTransformCallback = this.updateAngles.bind(this);
     this._fig._line1.move.element = this._fig;
 
-    this._eqns._adjacent._c.makeTouchable();
-    this._eqns._adjacent._c.onClick = () => {
-      // this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm({
-        name: 'c',
-        duration: 1,
-        blankTime: 0,
-        ifAnimating: { cancelGoTo: true, skipToTarget: true },
+    const setFormOnClick = ((eqn, formName, elements: Array<string> = []) => {
+      let elems = elements;
+      if (elements.length === 0) {
+        elems = [formName];
+      }
+      elems.forEach((elem) => {
+        const element = eqn[`_${elem}`];
+        element.makeTouchable();
+        element.onClick = () => {
+          if (eqn.getCurrentForm().name !== formName) {
+            eqn.goToForm({
+              name: formName,
+              duration: 1,
+              animate: 'move',
+              ifAnimating: { cancelGoTo: false, skipToTarget: false },
+            });
+          } else {
+            eqn.pulseScaleNow(1, 1.2);
+          }
+          this.diagram.animateNextFrame();
+        };
       });
-      this.diagram.animateNextFrame();
-    };
-    this._eqns._adjacent._a.makeTouchable();
-    this._eqns._adjacent._a.onClick = () => {
-      // this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm({
-        name: 'a',
-        duration: 1,
-        blankTime: 0,
-        ifAnimating: { cancelGoTo: true, skipToTarget: true },
-      });
-      this.diagram.animateNextFrame();
-    };
-    this._eqns._adjacent._b.makeTouchable();
-    this._eqns._adjacent._b.onClick = () => {
-      this._eqns.stop(true, true);
-      this._eqns._adjacent.goToForm({
-        name: 'b',
-        duration: 1,
-        blankTime: 0,
-        ifAnimating: { cancelGoTo: true, skipToTarget: true },
-      });
-      this.diagram.animateNextFrame();
-    };
+    });
+
+    setFormOnClick(this._eqns._adjacent, 'a');
+    setFormOnClick(this._eqns._adjacent, 'b');
+    setFormOnClick(this._eqns._adjacent, 'c');
+    setFormOnClick(this._eqns._complementary, 'a');
+    setFormOnClick(this._eqns._complementary, 'b');
+    setFormOnClick(this._eqns._complementary, 'c', ['pi', '_2', 'v']);
+    setFormOnClick(this._eqns._supplementary, 'a');
+    setFormOnClick(this._eqns._supplementary, 'b');
+    setFormOnClick(this._eqns._supplementary, 'c', ['pi']);
+    setFormOnClick(this._eqns._explementary, 'a');
+    setFormOnClick(this._eqns._explementary, 'b');
+    setFormOnClick(this._eqns._explementary, 'c', ['_2pi']);
   }
 
   updateAngles() {
@@ -154,7 +180,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       rotation = rand(rotationRange[0], rotationRange[1]);
     }
-    const a = rand(b * 0.1, b * 0.9);
+    // const a = rand(b * 0.1, b * 0.9);
+    const delta = rand(b / 6, b / 2.5);
+    const currentA = this._fig._line2.getRotation();
+    let a = b / 2 + delta;
+    if (currentA > b / 2) {
+      a = b / 2 - delta;
+    }
     this.goToAngles(a, b, rotation, duration, callback);
   }
 

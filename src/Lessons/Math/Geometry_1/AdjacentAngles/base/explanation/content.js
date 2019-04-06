@@ -15,6 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   centerV,
+  style,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
@@ -32,9 +33,9 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.loadQRs([
+      'important_angles',
+    ]);
   }
 
   addSections() {
@@ -69,7 +70,11 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         // Adjacent_angles: click(coll.pulseAdjacentAngles, [coll], colors.diagram.action),
-        Adjacent_angles: click(coll.goToRandomAngle, [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null], colors.diagram.action),
+        Adjacent_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
+          colors.diagram.action,
+        ),
         // edge: click(coll.pulseLine2, [coll], colors.lines),
       },
       show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
@@ -88,10 +93,9 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
-      title: 'Introduction',
-      setContent: [
+      setContent: style({ top: 0 }, [
         'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be |calculated|.',
-      ],
+      ]),
       modifiers: {
         adjacent_angles: click(
           coll.goToRandomAngle,
@@ -99,7 +103,7 @@ class Content extends PresentationLessonContent {
           colors.diagram.action,
         ),
         larger_angle: click(coll.pulseAngleC, [coll], colors.angleC),
-        calculated: click(coll.stepEqn, [coll], colors.diagram.action)
+        calculated: click(coll.stepEqn, [coll], colors.diagram.action),
       },
       show: [fig],
       transitionFromAny: (done) => {
@@ -110,7 +114,6 @@ class Content extends PresentationLessonContent {
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
       },
       setSteadyState: () => {
-        console.log(coll)
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
@@ -118,12 +121,106 @@ class Content extends PresentationLessonContent {
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
         coll._eqns._adjacent.setFormSeries('2');
-        // coll._eqns._testNav.showForm('0');
-        // coll._eqns._testNav.show();
-        // coll._eqns._testNav.setPosition(0, -1.6);
-        // coll._eqns._testNav._table.animations.new()
-        //   .dissolveOut({ duration: 5 })
-        //   .start();
+      },
+    });
+
+    this.addSection(common, {
+      setContent: centerV([
+        'This lesson examines adjacent angles that make up |common larger angles|. ',
+        'Even though the adjacent angle\'s names are different for each case, the concept is always the same: |adjacent angles add up to the larger angle|.',
+      ]),
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        '|Complementary_angles| add up to a |right_angle|, which is |90º|.',
+      ]),
+      modifiers: {
+        Complementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+        right_angle: click(this.showQR, [this, 'important_angles', 'Right'], colors.angleC),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        fig._line1.isTouchable = false;
+        fig._line2.isTouchable = false;
+        fig._line3.isTouchable = false;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 2, done);
+      },
+      setSteadyState: () => {
+        fig._line1.isTouchable = true;
+        fig._line2.isTouchable = true;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
+        coll._eqns._complementary.setScenario('centerTop');
+        coll._eqns._complementary.showForm('c');
+        coll._eqns._complementary.setFormSeries('1');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        '|Supplementary_angles| add up to a |straight_angle|, which is |180º|.',
+      ]),
+      modifiers: {
+        Supplementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI, Math.PI], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+        straight_angle: click(this.showQR, [this, 'important_angles', 'Straight'], colors.angleC),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        fig._line1.isTouchable = false;
+        fig._line2.isTouchable = false;
+        fig._line3.isTouchable = false;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
+      },
+      setSteadyState: () => {
+        fig._line1.isTouchable = true;
+        fig._line2.isTouchable = true;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
+        coll._eqns._supplementary.setScenario('centerTop');
+        coll._eqns._supplementary.showForm('c');
+        coll._eqns._supplementary.setFormSeries('1');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        '|Explementary_angles| add up to a |full_angle|, which is |360º|.',
+      ]),
+      modifiers: {
+        Explementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+        full_angle: click(this.showQR, [this, 'important_angles', 'Full'], colors.angleC),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        fig._line1.isTouchable = false;
+        fig._line2.isTouchable = false;
+        fig._line3.isTouchable = false;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 2, done);
+      },
+      setSteadyState: () => {
+        fig._line1.isTouchable = true;
+        fig._line2.isTouchable = true;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
+        coll._eqns._explementary.setScenario('centerTop');
+        coll._eqns._explementary.showForm('c');
+        coll._eqns._explementary.setFormSeries('1');
       },
     });
   }

@@ -22,7 +22,7 @@ export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-  const radius = 1.4;
+  const radius = 1.3;
   const width = 0.03;
 
   const line = {
@@ -72,6 +72,7 @@ export default function lessonLayout() {
     options: {
       curve: {
         radius: radius * 0.8,
+        width: width / 2,
       },
       label: {
         text: 'c',
@@ -95,7 +96,7 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        center: { position: new Point(0, -0.3), scale: 1 },
+        center: { position: new Point(0, -0.5), scale: 1 },
       },
     },
   };
@@ -112,70 +113,93 @@ export default function lessonLayout() {
     },
   });
 
-  layout.adjacentAnglesEqn = {
-    name: 'adjacent',
+  const eqn = {
     method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
-      scale: 1.2,
+      scale: 1,
       elements: {
         a: { text: 'a', color: colors.angleA, mods: mods('down', 0.4) },
         b: { text: 'b', color: colors.angleB, mods: mods('down', 0.8) },
         c: { text: 'c', color: colors.angleC, mods: mods('up', 0.5) },
+        pi: { text: 'π', color: colors.angleC, mods: mods('up', 0.5 ) },
+        v: { symbol: 'vinculum', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _2: { text: '2', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _2pi: { text: '2π', color: colors.angleC, mods: mods('up', 0.5 ) },
         equals: '  =  ',
         plus: '  +  ',
         minus: '  -  ',
       },
       defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
+      formSeries: {
+        '1': ['c', 'a', 'b'],
+      },
+    },
+    mods: {
+      scenarios: {
+        centerTop: { position: new Point(0, 1.3), scale: 1 },
+      },
+    },
+  };
+
+  layout.adjacentAnglesEqn = joinObjects({}, eqn, {
+    name: 'adjacent',
+    options: {
       forms: {
         c: ['c', 'equals', 'a', 'plus', 'b'],
         a: ['a', 'equals', 'c', 'minus', 'b'],
         b: ['b', 'equals', 'c', 'minus', 'a'],
       },
-      formSeries: {
-        '1': ['c', 'a', 'b'],
-        '2': ['c', 'b', 'a'],
-      },
     },
     mods: {
       scenarios: {
-        centerTop: { position: new Point(-1.9, 0.9), scale: 1 },
+        centerTop: { position: new Point(0, 1.1), scale: 1 },
       },
     },
-  };
+  });
 
-  // layout.testEqn = {
-  //   name: 'test',
-  //   method: 'addNavigator',
-  //   options: {
-  //     navType: '2Line',
-  //     defaultFormAlignment: {
-  //       alignH: 'center',
-  //     },
-  //     elements: {
-  //       a: 'a',
-  //       b: 'Hello this is a test',
-  //       c: 'c',
-  //     },
-  //     forms: {
-  //       '0': ['b'],
-  //       '1': ['b', 'c'],
-  //       '2': ['a', 'b'],
-  //     },
-  //     formSeries: ['0', '1', '2'],
-  //     scale: 1.5,
-  //   },
-  //   mods: {
-  //     scenarios: { base: { position: new Point(0, -1.5 ) } },
-  //   },
-  // };
+  const piOn2 = { frac: ['pi', '_2', 'v'] };
+  layout.complementaryAnglesEqn = joinObjects({}, eqn, {
+    name: 'complementary',
+    options: {
+      forms: {
+        c: [piOn2, 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', piOn2, 'minus', 'b'],
+        b: ['b', 'equals', piOn2, 'minus', 'a'],
+      },
+    },
+  });
+
+  layout.supplementaryAnglesEqn = joinObjects({}, eqn, {
+    name: 'supplementary',
+    options: {
+      forms: {
+        c: ['pi', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', 'pi', 'minus', 'b'],
+        b: ['b', 'equals', 'pi', 'minus', 'a'],
+      },
+    },
+  });
+
+  layout.explementaryAnglesEqn = joinObjects({}, eqn, {
+    name: 'explementary',
+    options: {
+      forms: {
+        c: ['_2pi', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', '_2pi', 'minus', 'b'],
+        b: ['b', 'equals', '_2pi', 'minus', 'a'],
+      },
+    },
+  });
 
   layout.eqns = {
     name: 'eqns',
     method: 'collection',
     addElements: [
       layout.adjacentAnglesEqn,
-      // layout.testEqn,
+      layout.complementaryAnglesEqn,
+      layout.supplementaryAnglesEqn,
+      layout.explementaryAnglesEqn,
     ],
   };
 
