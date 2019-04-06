@@ -149,9 +149,12 @@ export default function lessonLayout() {
     method: 'addNavigator',
     options: {
       navType: '2Line',
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
       elements: {
         a: 'a',
-        b: 'b',
+        b: 'Hello this is a test',
         c: 'c',
       },
       forms: {
