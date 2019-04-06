@@ -110,7 +110,7 @@ class Content extends PresentationLessonContent {
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
       },
       setSteadyState: () => {
-        console.log(coll._eqns)
+        console.log(coll)
         fig._line1.isTouchable = true;
         fig._line2.isTouchable = true;
         fig._line3.isTouchable = true;
@@ -118,6 +118,12 @@ class Content extends PresentationLessonContent {
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
         coll._eqns._adjacent.setFormSeries('2');
+        coll._eqns._testNav.showForm('0');
+        coll._eqns._testNav.show();
+        coll._eqns._testNav.setPosition(0, -1.5);
+        // coll._eqns._testNav._table.animations.new()
+        //   .dissolveOut({ duration: 5 })
+        //   .start();
       },
     });
   }

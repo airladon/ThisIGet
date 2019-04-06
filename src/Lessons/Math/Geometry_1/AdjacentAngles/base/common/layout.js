@@ -65,7 +65,7 @@ export default function lessonLayout() {
   });
   layout.angleB = joinObjects({}, angle, {
     name: 'angleB',
-    options: { label: { text: 'b' }, color: colors.angleB },
+    options: { label: { text: null }, color: colors.angleB },
   });
   layout.angleC = joinObjects({}, angle, {
     name: 'angleC',
@@ -135,7 +135,7 @@ export default function lessonLayout() {
       formSeries: {
         '1': ['c', 'a', 'b'],
         '2': ['c', 'b', 'a'],
-      }
+      },
     },
     mods: {
       scenarios: {
@@ -144,11 +144,35 @@ export default function lessonLayout() {
     },
   };
 
+  layout.testEqn = {
+    name: 'test',
+    method: 'addNavigator',
+    options: {
+      navType: '2Line',
+      elements: {
+        a: 'a',
+        b: 'b',
+        c: 'c',
+      },
+      forms: {
+        '0': ['b'],
+        '1': ['b', 'c'],
+        '2': ['a', 'b'],
+      },
+      formSeries: ['0', '1', '2'],
+      scale: 1.5,
+    },
+    mods: {
+      scenarios: { base: { position: new Point(0, -1.5 ) } },
+    },
+  };
+
   layout.eqns = {
     name: 'eqns',
     method: 'collection',
     addElements: [
       layout.adjacentAnglesEqn,
+      layout.testEqn,
     ],
   };
 
