@@ -97,6 +97,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, -0.5), scale: 1 },
+        summary: { position: new Point(1.4, 0), scale: 1},
       },
     },
   };
@@ -121,7 +122,7 @@ export default function lessonLayout() {
       elements: {
         a: { text: 'a', color: colors.angleA, mods: mods('down', 0.4) },
         b: { text: 'b', color: colors.angleB, mods: mods('down', 0.8) },
-        c: { text: 'c', color: colors.angleC, mods: mods('up', 0.5) },
+        c: { text: 'c', color: colors.angleC, mods: mods('up', 0.7) },
         pi: { text: 'π', color: colors.angleC, mods: mods('up', 0.5 ) },
         v: { symbol: 'vinculum', color: colors.angleC, mods: mods('up', 0.5 ) },
         _2: { text: '2', color: colors.angleC, mods: mods('up', 0.5 ) },
@@ -154,6 +155,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         centerTop: { position: new Point(0, 1.1), scale: 1 },
+        summary: { position: new Point(-1.8, -0.4), scale: 1.2}
       },
     },
   });

@@ -190,6 +190,22 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.goToAngles(a, b, rotation, duration, callback);
   }
 
+  goToRandomAngleThenPulse(
+    bRange: number | [number, number],
+    rotationRange: number | [number, number],
+    duration: number = 1,
+    callback: ?() => void = null,
+  ) {
+    const end = () => {
+      if (callback != null) {
+        callback();
+      }
+      this._fig._angleA.pulseScaleNow(1, 1.2);
+      this._fig._angleB.pulseScaleNow(1, 1.2);
+    }
+    this.goToRandomAngle(bRange, rotationRange, duration, end);
+  }
+
   stepEqn() {
     this._eqns._adjacent.goToForm({
       duration: 1,
@@ -212,6 +228,17 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseAngleC() {
     this._fig._angleC.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  toggleAngleC() {
+    if (this._fig._angleC.isShown) {
+      this._fig._angleC.hide();
+    } else {
+      this._fig._angleC.showAll();
+      this.updateAngles();
+      this._fig._angleC.pulseScaleNow(1, 1.2)
+    }
     this.diagram.animateNextFrame();
   }
 }

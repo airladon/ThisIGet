@@ -64,7 +64,7 @@ class Content extends PresentationLessonContent {
     };
 
     this.addSection(common, {
-      title: 'Introduction',
+      title: 'Adjacent Angles',
       setContent: [
         '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
       ],
@@ -134,6 +134,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Complementary Angles',
       setContent: style({ top: 0 }, [
         '|Complementary_angles| add up to a |right_angle|, which is |90º|.',
       ]),
@@ -168,6 +169,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Supplementary Angles',
       setContent: style({ top: 0 }, [
         '|Supplementary_angles| add up to a |straight_angle|, which is |180º|.',
       ]),
@@ -202,6 +204,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Explementary Angles',
       setContent: style({ top: 0 }, [
         '|Explementary_angles| add up to a |full_angle|, which is |360º|.',
       ]),
@@ -239,7 +242,7 @@ class Content extends PresentationLessonContent {
       setContent: style({ top: 15 }, [
         'The words |complementary|, |supplementary| and |explementary| all have a similar definition - |to fill up or complete|.',
         'In this case they fill up or complete a |right|, |straight| and |full| angle.',
-        'Its not clear there is a particular reason why each word is assosiated with its angle.',
+        'Its not clear there is a particular reason |why| each word is assosiated with its angle, but it is the norm.',
         `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_higher' })}`,
         `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_high' })}`,
         `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'I fill up']).html()}`,
