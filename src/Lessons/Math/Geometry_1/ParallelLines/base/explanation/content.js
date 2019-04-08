@@ -68,9 +68,10 @@ class Content extends PresentationLessonContent {
       title: 'Parallel LInes',
       setContent: style({ centerV: true }, [
         '|Parallel lines| exist everywhere around us.',
-        'Identifying parallel lines can often simplify analysis of a shape, allowing faster calculation of angles and lengths.',
+        'Identifying parallel lines can |simplify| analysis of a shape, allowing faster calculation of angles and lengths.',
       ]),
     });
+
     this.addSection(common, {
       setContent: [
         'Lines are |parallel| if they never meet. They have the same rotation, and are not on top of each other (even if made longer).',
@@ -80,6 +81,53 @@ class Content extends PresentationLessonContent {
         parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines),
       },
       show: [line1, line2],
+      transitionFromAny: (done) => {
+        line1.stop(true, 'noComplete');
+        line2.stop(true, 'noComplete');
+        coll.scaleLine(layout.length);
+        line1.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .whenFinished(done)
+          .start();
+
+        // line1.animations.addTo()
+        //   .custom({ target: 'center', duration: 1 })
+        //   .whenFinished(done)
+        //   .start();
+        line2.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .start();
+      },
+      setSteadyState: () => {
+        // line1.setScale(layout.length, 1);
+        // line2.setScale(layout.length, 1);
+        line1.setScenario('center');
+        line2.setScenario('center');
+        console.log(line1)
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Parallel lines are |parallel| no matter how |long| or |short| they are.',
+      ],
+      modifiers: {
+        parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines),
+        long: click(coll.scaleLine, [coll, layout.scale.long], colors.diagram.action),
+        short: click(coll.scaleLine, [coll, layout.scale.short], colors.diagram.action),
+      },
+      show: [line1, line2],
+      transitionFromAny: (done) => {
+        line1.stop(true, 'noComplete');
+        line2.stop(true, 'noComplete');
+        line1.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .whenFinished(done)
+          .start();
+        line2.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .start();
+      },
       setSteadyState: () => {
         line1.setScenario('center');
         line2.setScenario('center');

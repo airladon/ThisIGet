@@ -10,7 +10,7 @@ const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
   DiagramObjectLine,
-  Transform,
+  Transform, Point, Rect,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -34,6 +34,8 @@ export default class CommonCollection extends CommonDiagramCollection {
       this.normalizeAngle(this._line1);
       this.checkForParallel();
     };
+    this._line1.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
+    this._line2.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
     this._line2.setTransformCallback = (t: Transform) => {
       this._line2.updateMoveTransform(t);
       this.normalizeAngle(this._line2);
@@ -70,12 +72,41 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  scaleLine(length: number) {
+    this._line1.stop(true, 'noComplete');
+    this._line2.stop(true, 'noComplete');
+    const l1 = this._line1.length;
+    const l2 = this._line1.length;
+    const setLength1 = (percent) => {
+      this._line1.setLength(percent * (length - l1) + l1);
+      this._line1.updateMoveTransform();
+      this._line1.setTransform(this._line1.transform._dup());
+    };
+    const setLength2 = (percent) => {
+      this._line2.setLength(percent * (length - l2) + l2);
+      this._line2.updateMoveTransform();
+      this._line2.setTransform(this._line2.transform._dup());
+    };
+    this._line1.animations.new()
+      .custom({ callback: setLength1, duration: 1 })
+      .start();
+    this._line2.animations.new()
+      .custom({ callback: setLength2, duration: 1 })
+      .start();
+    // this._line2.animations.new()
+    //   .scale({ target: new Point(scale, 1), duration: 1 })
+    //   .start();
+    // this.moveToScenario(this._line1, scenario, 1);
+    // this.moveToScenario(this._line2, scenario, 1);
+    this.diagram.animateNextFrame();
+  }
+
   rotateLine1ToParallel() {
     this._line1.stop();
     this._line2.stop();
     makeAnglesClose(this._line1, this._line2);
 
-    const r1 = this._line1.getRotation();
+    // const r1 = this._line1.getRotation();
     const r2 = this._line2.getRotation();
     if (checkElementsForParallel(this._line1, this._line2, false, this.layout.width * 1.1)) {
       this.pulseParallel();

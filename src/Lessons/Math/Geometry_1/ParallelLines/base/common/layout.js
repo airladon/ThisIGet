@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
-  Point,
+  Point, Rect,
   // Transform,
   // Line,
 } = Fig.tools.g2;
@@ -23,6 +23,10 @@ export default function lessonLayout() {
 
   layout.length = 1.5;
   layout.width = 0.03;
+  layout.scale = {
+    long: 2.7,
+    short: 0.5,
+  };
   const line = {
     method: 'line',
     options: {
@@ -30,12 +34,14 @@ export default function lessonLayout() {
       width: layout.width,
       color: colors.lines,
       vertexSpaceStart: 'center',
-      move: { type: 'rotation' },
+      move: {
+        type: 'centerTranslateEndRotation',
+      },
     },
     mods: {
-      interactiveLocation: new Point(layout.length * 0.8, 0),
+      interactiveLocation: new Point(layout.length / 2 * 0.8, 0),
       scenarios: {
-        center: { position: new Point(0, 0.4), rotation: 0 },
+        center: { position: new Point(0, 0.4), rotation: 0, scale: 1 },
       },
     },
   };

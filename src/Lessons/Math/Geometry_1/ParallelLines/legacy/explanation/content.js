@@ -93,7 +93,7 @@ class Content extends PresentationLessonContent {
           Lines are |parallel| if they never meet.
           They have the same rotation, and are not on top of each other (even if made longer).
         </p>
-        ${new Definition('Parallel', 'Greek', ['para', 'beside', 'allelois', 'each other']).html('id_lesson__related_angles_definition')}
+        ${new Definition('Parallel', 'Greek', ['para', 'beside', 'allelois', 'each other']).html()}
       `,
       modifiers: {
         parallel: click(parallel.rotateLine1ToParallel, [parallel], colors.line),

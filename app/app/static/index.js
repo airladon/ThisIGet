@@ -949,7 +949,9 @@ function () {
       removeOnFinish: true,
       name: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["generateRandomString"])(),
       duration: 0,
-      delay: 0
+      delay: 0,
+      beforeFrame: null,
+      afterFrame: null
     };
     var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
     this.onFinish = options.onFinish;
@@ -993,7 +995,15 @@ function () {
           deltaTimeAfterDelay = this.duration;
         }
 
+        if (this.beforeFrame) {
+          this.beforeFrame(deltaTimeAfterDelay / this.duration);
+        }
+
         this.setFrame(deltaTimeAfterDelay);
+
+        if (this.afterFrame) {
+          this.afterFrame(deltaTimeAfterDelay / this.duration);
+        }
 
         if (remainingTime > 0) {
           this.finish();
@@ -13865,7 +13875,8 @@ function (_DiagramElementCollec) {
     }
   }, {
     key: "updateMoveTransform",
-    value: function updateMoveTransform(t) {
+    value: function updateMoveTransform() {
+      var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.transform._dup();
       var r = t.r();
       var bounds = this.multiMove.bounds;
 
