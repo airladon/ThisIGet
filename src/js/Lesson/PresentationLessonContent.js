@@ -434,6 +434,11 @@ class Section {
         if (element instanceof DiagramElementCollection
           || element instanceof DiagramElementPrimative) {
           this.replaceOrAddInteractiveElement(element, '');
+        } else if (typeof element === 'string') {
+          const elem = document.getElementById(element);
+          if (elem != null) {
+            this.replaceOrAddInteractiveElement(element, '');
+          }
         } else {
           this.replaceOrAddInteractiveElement(element.element, element.location);
         }
@@ -458,6 +463,8 @@ class Section {
 
       // Get all movable diagram elements
       const diagramElements = this.diagram.elements.getAllCurrentlyInteractiveElements();
+      // console.log(this.diagram.elements)
+      // debugger;
       diagramElements.forEach((element) => {
         this.interactiveElementList.push({
           element,

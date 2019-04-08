@@ -45,23 +45,37 @@ class Content extends PresentationLessonContent {
     const line2 = coll._line2;
 
     const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      setInfo: [
+        style({ list: 'unordered', listStyleType: 'disc' }, [
+          'Move and rotate the lines to see when they are parallel.',
+          'Move the line by dragging its |middle|.',
+          'Rotate the line by dragging one of its |ends|.',
+          'The lines will have color when they are parallel.',
+          'Touch |parallel| to make the lines parallel.',
+        ]),
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      interactiveElementsOnly: [
+        'id__parallel_lines__parallel',
+        line1._line, line1._midLine,
+        line2._line, line2._midLine,
+      ],
+      setSteadyState: () => {
+        line1.setScenario('center');
+        line2.setScenario('center');
+      },
+      show: [line1, line2],
+      transitionFromAny: (done) => {
+        line1.stop(true, 'noComplete');
+        line2.stop(true, 'noComplete');
+        coll.scaleLine(layout.length);
+        line1.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .whenFinished(done)
+          .start();
+        line2.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .start();
+      },
     };
 
     this.addSection({
@@ -74,36 +88,11 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'Lines are |parallel| if they never meet. They have the same rotation, and are not on top of each other (even if made longer).',
+        'Lines are |parallel| if they have the |same rotation| and |do not touch|. Therefore, the lines cannot be on top of each other, and if extended to an infinite length, would never cross.',
         `${new Definition('Parallel', 'Greek', ['para', 'beside', 'allelois', 'each other']).html()}`,
       ],
       modifiers: {
-        parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines),
-      },
-      show: [line1, line2],
-      transitionFromAny: (done) => {
-        line1.stop(true, 'noComplete');
-        line2.stop(true, 'noComplete');
-        coll.scaleLine(layout.length);
-        line1.animations.new()
-          .scenario({ target: 'center', duration: 1 })
-          .whenFinished(done)
-          .start();
-
-        // line1.animations.addTo()
-        //   .custom({ target: 'center', duration: 1 })
-        //   .whenFinished(done)
-        //   .start();
-        line2.animations.new()
-          .scenario({ target: 'center', duration: 1 })
-          .start();
-      },
-      setSteadyState: () => {
-        // line1.setScale(layout.length, 1);
-        // line2.setScale(layout.length, 1);
-        line1.setScenario('center');
-        line2.setScenario('center');
-        console.log(line1)
+        parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines, true, 'id__parallel_lines__parallel'),
       },
     });
 
@@ -115,22 +104,6 @@ class Content extends PresentationLessonContent {
         parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines),
         long: click(coll.scaleLine, [coll, layout.scale.long], colors.diagram.action),
         short: click(coll.scaleLine, [coll, layout.scale.short], colors.diagram.action),
-      },
-      show: [line1, line2],
-      transitionFromAny: (done) => {
-        line1.stop(true, 'noComplete');
-        line2.stop(true, 'noComplete');
-        line1.animations.new()
-          .scenario({ target: 'center', duration: 1 })
-          .whenFinished(done)
-          .start();
-        line2.animations.new()
-          .scenario({ target: 'center', duration: 1 })
-          .start();
-      },
-      setSteadyState: () => {
-        line1.setScenario('center');
-        line2.setScenario('center');
       },
     });
   }

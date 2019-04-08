@@ -13692,13 +13692,13 @@ function (_DiagramElementCollec) {
     var defaultMoveOptions = {
       type: 'rotation',
       middleLengthPercent: 0.22,
-      translationbounds: _this2.diagramLimits
+      translationBounds: _this2.diagramLimits
     };
 
     if (optionsToUse.move) {
       var moveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultMoveOptions, optionsToUse.move);
 
-      _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationbounds);
+      _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationBounds);
     }
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
@@ -19569,7 +19569,8 @@ function () {
     this.transform = transform._dup();
     this.isMovable = false;
     this.isTouchable = false;
-    this.isInteractive = false;
+    this.isInteractive = null; // means touch or move will dictate
+
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
     this.opacity = 1;
@@ -21756,12 +21757,12 @@ function (_DiagramElement2) {
         var element = this.elements[this.drawOrder[i]]; // if (element.isShown) {
 
         if (element instanceof DiagramElementCollection) {
-          if (!element.isTouchable && !element.isMovable && element.hasTouchableElements && !element.isInteractive) {
+          if (!element.isTouchable && !element.isMovable && element.hasTouchableElements && (!element.isInteractive || element.isInteractive == null)) {
             elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllCurrentlyInteractiveElements()));
           }
         }
 
-        if (element.isTouchable || element.isMovable || element.isInteractive) {
+        if (element.isInteractive !== false && (element.isTouchable || element.isMovable || element.isInteractive)) {
           elements.push(element);
         } // }
 

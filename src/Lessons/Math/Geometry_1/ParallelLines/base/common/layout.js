@@ -24,7 +24,7 @@ export default function lessonLayout() {
   layout.length = 1.5;
   layout.width = 0.03;
   layout.scale = {
-    long: 2.7,
+    long: 2.55,
     short: 0.5,
   };
   const line = {
@@ -36,12 +36,20 @@ export default function lessonLayout() {
       vertexSpaceStart: 'center',
       move: {
         type: 'centerTranslateEndRotation',
+        middleLengthPercent: 0.5,
+        translationBounds: new Rect(-3, -1.6, 6, 2.55),
       },
     },
     mods: {
-      interactiveLocation: new Point(layout.length / 2 * 0.8, 0),
       scenarios: {
         center: { position: new Point(0, 0.4), rotation: 0, scale: 1 },
+      },
+      _line: {
+        isInteractive: true,
+        interactiveLocation: new Point(layout.length / 3 * 0.8, 0),
+      },
+      _midLine: {
+        isInteractive: true,
       },
     },
   };

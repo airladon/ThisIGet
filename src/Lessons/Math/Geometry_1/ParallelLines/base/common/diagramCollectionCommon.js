@@ -28,14 +28,16 @@ export default class CommonCollection extends CommonDiagramCollection {
 
     this._line1.makeTouchable();
     this._line2.makeTouchable();
+    this._line1.setScenario('center');
+    this._line2.setScenario('center');
 
     this._line1.setTransformCallback = (t: Transform) => {
       this._line1.updateMoveTransform(t);
       this.normalizeAngle(this._line1);
       this.checkForParallel();
     };
-    this._line1.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
-    this._line2.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
+    // this._line1.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
+    // this._line2.setMultiMovable(0.5, new Rect(-3, -1.6, 6, 2.8));
     this._line2.setTransformCallback = (t: Transform) => {
       this._line2.updateMoveTransform(t);
       this.normalizeAngle(this._line2);
@@ -77,6 +79,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._line2.stop(true, 'noComplete');
     const l1 = this._line1.length;
     const l2 = this._line1.length;
+    this.hasTouchableElements = false;
     const setLength1 = (percent) => {
       this._line1.setLength(percent * (length - l1) + l1);
       this._line1.updateMoveTransform();
@@ -92,6 +95,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       .start();
     this._line2.animations.new()
       .custom({ callback: setLength2, duration: 1 })
+      .whenFinished(() => { this.hasTouchableElements = true; })
       .start();
     // this._line2.animations.new()
     //   .scale({ target: new Point(scale, 1), duration: 1 })
