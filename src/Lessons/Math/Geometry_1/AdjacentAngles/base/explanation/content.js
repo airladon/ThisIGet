@@ -46,14 +46,8 @@ class Content extends PresentationLessonContent {
     const common = {
       setContent: '',
       modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
       infoModifiers: {},
       interactiveElements: [
-        // interactiveItem(quiz._check),
       ],
       setEnterState: () => {},
       showOnly: [],
@@ -69,13 +63,11 @@ class Content extends PresentationLessonContent {
         '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
       ],
       modifiers: {
-        // Adjacent_angles: click(coll.pulseAdjacentAngles, [coll], colors.diagram.action),
         Adjacent_angles: click(
           coll.goToRandomAngle,
           [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
           colors.diagram.action,
         ),
-        // edge: click(coll.pulseLine2, [coll], colors.lines),
       },
       show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
       transitionFromAny: (done) => {
@@ -225,7 +217,7 @@ class Content extends PresentationLessonContent {
         'Its not clear there is a particular reason |why| each word is assosiated with its angle, but it is the norm.',
         `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_higher' })}`,
         `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_high' })}`,
-        `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'I fill up']).html()}`,
+        `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'fill up']).html()}`,
       ]),
     });
   }

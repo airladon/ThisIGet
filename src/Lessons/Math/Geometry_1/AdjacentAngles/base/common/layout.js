@@ -98,6 +98,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: new Point(0, -0.5), scale: 1 },
         summary: { position: new Point(1.3, 0), scale: 1 },
+        qr: { position: new Point(0, 0), scale: 1 },
       },
     },
   };
@@ -141,6 +142,7 @@ export default function lessonLayout() {
       scenarios: {
         centerTop: { position: new Point(0, 1.3), scale: 1 },
         summary: { position: new Point(-1.6, -0.4), scale: 1.2 },
+        qr: { position: new Point(0, -1.3) },
       },
     },
   };
@@ -171,6 +173,11 @@ export default function lessonLayout() {
         b: ['b', 'equals', '_90', 'minus', 'a'],
       },
     },
+    mods: {
+      scenarios: {
+        qr: { position: new Point(0.5, -0.4), scale: 1 },
+      },
+    },
   });
 
   layout.supplementaryAnglesEqn = joinObjects({}, eqn, {
@@ -182,6 +189,11 @@ export default function lessonLayout() {
         b: ['b', 'equals', '_180', 'minus', 'a'],
       },
     },
+    mods: {
+      scenarios: {
+        qr: { position: new Point(0.1, -0.4), scale: 1.3 },
+      },
+    },
   });
 
   layout.explementaryAnglesEqn = joinObjects({}, eqn, {
@@ -191,6 +203,11 @@ export default function lessonLayout() {
         c: ['_360', 'equals', 'a', 'plus', 'b'],
         a: ['a', 'equals', '_360', 'minus', 'b'],
         b: ['b', 'equals', '_360', 'minus', 'a'],
+      },
+    },
+    mods: {
+      scenarios: {
+        qr: { position: new Point(2.9, -0.7), scale: 1.3 },
       },
     },
   });
