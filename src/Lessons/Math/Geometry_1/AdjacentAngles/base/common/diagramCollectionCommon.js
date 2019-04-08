@@ -89,13 +89,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     setFormOnClick(this._eqns._adjacent, 'c');
     setFormOnClick(this._eqns._complementary, 'a');
     setFormOnClick(this._eqns._complementary, 'b');
-    setFormOnClick(this._eqns._complementary, 'c', ['pi', '_2', 'v']);
+    setFormOnClick(this._eqns._complementary, 'c', ['_90']);
     setFormOnClick(this._eqns._supplementary, 'a');
     setFormOnClick(this._eqns._supplementary, 'b');
-    setFormOnClick(this._eqns._supplementary, 'c', ['pi']);
+    setFormOnClick(this._eqns._supplementary, 'c', ['_180']);
     setFormOnClick(this._eqns._explementary, 'a');
     setFormOnClick(this._eqns._explementary, 'b');
-    setFormOnClick(this._eqns._explementary, 'c', ['_2pi']);
+    setFormOnClick(this._eqns._explementary, 'c', ['_360']);
   }
 
   updateAngles() {

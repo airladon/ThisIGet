@@ -37,7 +37,8 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
 
     this.addSection({
-      setContent: style({ right: 56, top: 15 }, [
+      title: 'Adjacent Angles',
+      setContent: style({ left: 5, right: 56, top: 15 }, [
         '|Adjacent_angles| share a vertex and edge, and sum to give the |larger_angle|.',
       ]),
       modifiers: {
@@ -63,6 +64,99 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.hasTouchableElements = true;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
+      },
+    });
+
+    this.addSection({
+      title: 'Complementary Angles',
+      setContent: style({ left: 5, right: 56, top: 15 }, [
+        '|Complementary_angles| add up to a |right angle|, which is |90º|.',
+        `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html()}`,
+      ]),
+      modifiers: {
+        Complementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('summary');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 2, done);
+        coll._eqns._complementary.setScenario('summary');
+        coll._eqns._complementary.showForm('c');
+        coll._eqns._complementary.setFormSeries('1');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
+      },
+    });
+
+    this.addSection({
+      title: 'Supplementary Angles',
+      setContent: style({ left: 5, right: 56, top: 15 }, [
+        '|Supplementary_angles| add up to a |straight angle|, which is |180º|.',
+        `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html()}`,
+      ]),
+      modifiers: {
+        Supplementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI, Math.PI], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('summary');
+        fig._line3.move.element = null;
+        coll.hasTouchableElements = false;
+        coll._eqns._supplementary.setScenario('summary');
+        coll._eqns._supplementary.showForm('c');
+        coll._eqns._supplementary.setFormSeries('1');
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
+      },
+    });
+
+    this.addSection({
+      title: 'Explementary Angles',
+      setContent: style({ left: 5, right: 56, top: 15 }, [
+        '|Explementary_angles| add up to a |full angle|, which is |360º|.',
+        `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'fill up']).html()}`,
+      ]),
+      modifiers: {
+        Explementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('summary');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 2, done);
+        coll._eqns._explementary.setScenario('summary');
+        coll._eqns._explementary.showForm('c');
+        coll._eqns._explementary.setFormSeries('1');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
       },
     });
   }

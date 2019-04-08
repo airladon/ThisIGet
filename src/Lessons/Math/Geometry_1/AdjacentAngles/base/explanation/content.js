@@ -80,16 +80,12 @@ class Content extends PresentationLessonContent {
       show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
       transitionFromAny: (done) => {
         fig.setScenario('center');
-        fig._line1.isTouchable = false;
-        fig._line2.isTouchable = false;
-        fig._line3.isTouchable = false;
+        coll.hasTouchableElements = false;
         fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 2, done);
       },
       setSteadyState: () => {
-        fig._line1.isTouchable = true;
-        fig._line2.isTouchable = true;
-        fig._line3.isTouchable = true;
+        coll.hasTouchableElements = true;
         coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 0);
       },
     });
@@ -109,20 +105,16 @@ class Content extends PresentationLessonContent {
       show: [fig],
       transitionFromAny: (done) => {
         fig.setScenario('center');
-        fig._line1.isTouchable = false;
-        fig._line2.isTouchable = false;
-        fig._line3.isTouchable = false;
+        coll.hasTouchableElements = false;
         fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
-      },
-      setSteadyState: () => {
-        fig._line1.isTouchable = true;
-        fig._line2.isTouchable = true;
-        fig._line3.isTouchable = true;
-        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
         coll._eqns._adjacent.setScenario('centerTop');
         coll._eqns._adjacent.showForm('c');
         coll._eqns._adjacent.setFormSeries('2');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
       },
     });
 
@@ -150,21 +142,17 @@ class Content extends PresentationLessonContent {
       hide: [fig._angleC],
       transitionFromAny: (done) => {
         fig.setScenario('center');
-        fig._line1.isTouchable = false;
-        fig._line2.isTouchable = false;
-        fig._line3.isTouchable = false;
+        coll.hasTouchableElements = false;
         fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 2, done);
-      },
-      setSteadyState: () => {
-        fig._line1.isTouchable = true;
-        fig._line2.isTouchable = true;
-        fig._line3.isTouchable = true;
-        fig._line3.move.element = fig;
-        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
         coll._eqns._complementary.setScenario('centerTop');
         coll._eqns._complementary.showForm('c');
         coll._eqns._complementary.setFormSeries('1');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
       },
     });
 
@@ -185,21 +173,17 @@ class Content extends PresentationLessonContent {
       hide: [fig._angleC],
       transitionFromAny: (done) => {
         fig.setScenario('center');
-        fig._line1.isTouchable = false;
-        fig._line2.isTouchable = false;
-        fig._line3.isTouchable = false;
+        coll.hasTouchableElements = false;
         fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
-      },
-      setSteadyState: () => {
-        fig._line1.isTouchable = true;
-        fig._line2.isTouchable = true;
-        fig._line3.isTouchable = true;
-        fig._line3.move.element = fig;
-        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
         coll._eqns._supplementary.setScenario('centerTop');
         coll._eqns._supplementary.showForm('c');
         coll._eqns._supplementary.setFormSeries('1');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
       },
     });
 
@@ -220,21 +204,17 @@ class Content extends PresentationLessonContent {
       hide: [fig._angleC],
       transitionFromAny: (done) => {
         fig.setScenario('center');
-        fig._line1.isTouchable = false;
-        fig._line2.isTouchable = false;
-        fig._line3.isTouchable = false;
+        coll.hasTouchableElements = false;
         fig._line3.move.element = null;
         coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 2, done);
-      },
-      setSteadyState: () => {
-        fig._line1.isTouchable = true;
-        fig._line2.isTouchable = true;
-        fig._line3.isTouchable = true;
-        fig._line3.move.element = fig;
-        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
         coll._eqns._explementary.setScenario('centerTop');
         coll._eqns._explementary.showForm('c');
         coll._eqns._explementary.setFormSeries('1');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
       },
     });
 

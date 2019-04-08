@@ -97,7 +97,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: new Point(0, -0.5), scale: 1 },
-        summary: { position: new Point(1.4, 0), scale: 1},
+        summary: { position: new Point(1.3, 0), scale: 1 },
       },
     },
   };
@@ -123,10 +123,11 @@ export default function lessonLayout() {
         a: { text: 'a', color: colors.angleA, mods: mods('down', 0.4) },
         b: { text: 'b', color: colors.angleB, mods: mods('down', 0.8) },
         c: { text: 'c', color: colors.angleC, mods: mods('up', 0.7) },
-        pi: { text: 'π', color: colors.angleC, mods: mods('up', 0.5 ) },
-        v: { symbol: 'vinculum', color: colors.angleC, mods: mods('up', 0.5 ) },
-        _2: { text: '2', color: colors.angleC, mods: mods('up', 0.5 ) },
-        _2pi: { text: '2π', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _180: { text: '180º', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _90: { text: '90º', color: colors.angleC, mods: mods('up', 0.5 ) },
+        // v: { symbol: 'vinculum', color: colors.angleC, mods: mods('up', 0.5 ) },
+        // _2: { text: '2', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _360: { text: '360º', color: colors.angleC, mods: mods('up', 0.5 ) },
         equals: '  =  ',
         plus: '  +  ',
         minus: '  -  ',
@@ -139,6 +140,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         centerTop: { position: new Point(0, 1.3), scale: 1 },
+        summary: { position: new Point(-1.6, -0.4), scale: 1.2 },
       },
     },
   };
@@ -155,19 +157,18 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         centerTop: { position: new Point(0, 1.1), scale: 1 },
-        summary: { position: new Point(-1.8, -0.4), scale: 1.2}
+        // summary: { position: new Point(-1.8, -0.4), scale: 1.2}
       },
     },
   });
 
-  const piOn2 = { frac: ['pi', '_2', 'v'] };
   layout.complementaryAnglesEqn = joinObjects({}, eqn, {
     name: 'complementary',
     options: {
       forms: {
-        c: [piOn2, 'equals', 'a', 'plus', 'b'],
-        a: ['a', 'equals', piOn2, 'minus', 'b'],
-        b: ['b', 'equals', piOn2, 'minus', 'a'],
+        c: ['_90', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', '_90', 'minus', 'b'],
+        b: ['b', 'equals', '_90', 'minus', 'a'],
       },
     },
   });
@@ -176,9 +177,9 @@ export default function lessonLayout() {
     name: 'supplementary',
     options: {
       forms: {
-        c: ['pi', 'equals', 'a', 'plus', 'b'],
-        a: ['a', 'equals', 'pi', 'minus', 'b'],
-        b: ['b', 'equals', 'pi', 'minus', 'a'],
+        c: ['_180', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', '_180', 'minus', 'b'],
+        b: ['b', 'equals', '_180', 'minus', 'a'],
       },
     },
   });
@@ -187,9 +188,9 @@ export default function lessonLayout() {
     name: 'explementary',
     options: {
       forms: {
-        c: ['_2pi', 'equals', 'a', 'plus', 'b'],
-        a: ['a', 'equals', '_2pi', 'minus', 'b'],
-        b: ['b', 'equals', '_2pi', 'minus', 'a'],
+        c: ['_360', 'equals', 'a', 'plus', 'b'],
+        a: ['a', 'equals', '_360', 'minus', 'b'],
+        b: ['b', 'equals', '_360', 'minus', 'a'],
       },
     },
   });
