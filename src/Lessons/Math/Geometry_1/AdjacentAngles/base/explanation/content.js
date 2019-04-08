@@ -211,6 +211,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Explanation of Names',
       setContent: style({ top: 15 }, [
         'The words |complementary|, |supplementary| and |explementary| all have a similar definition - |to fill up or complete|.',
         'In this case they fill up or complete a |right|, |straight| and |full| angle.',
