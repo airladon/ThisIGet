@@ -19465,16 +19465,13 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // import {
 //   AnimationPhase, ColorAnimationPhase, CustomAnimationPhase,
 // } from './AnimationPhase';
-
-function checkCallback(callback) {
-  var callbackToUse = function callbackToUse() {};
-
-  if (typeof callback === 'function') {
-    callbackToUse = callback;
-  }
-
-  return callbackToUse;
-}
+// function checkCallback(callback: ?(boolean) => void): (boolean) => void {
+//   let callbackToUse = () => {};
+//   if (typeof callback === 'function') {
+//     callbackToUse = callback;
+//   }
+//   return callbackToUse;
+// }
 
 // A diagram is composed of multiple diagram elements.
 //
@@ -21207,10 +21204,7 @@ function (_DiagramElement2) {
         return false;
       }
 
-      if ( // this.state.isAnimating
-      // || this.state.isAnimatingCustom
-      // || this.state.isAnimatingColor
-      this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
+      if (this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
         return true;
       }
 
@@ -25197,9 +25191,11 @@ function style() {
   var marginLeft = '';
   var marginRight = '';
   var marginTop = '';
+  var marginLine = '';
   var size = '';
   var className = '';
   var color = '';
+  var listStyleType = '';
 
   if (typeof options === 'number') {
     marginTop = "margin-top:".concat(options, "%");
@@ -25216,6 +25212,10 @@ function style() {
       marginTop = "margin-top:".concat(options.top, "%;");
     }
 
+    if (options.line != null) {
+      marginLine = "margin-top:".concat(options.line, "%;");
+    }
+
     if (options.size != null) {
       size = "font-size:".concat(options.size, "em;");
     }
@@ -25227,19 +25227,40 @@ function style() {
     if (options.color) {
       color = "color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(options.color), ";");
     }
+
+    if (options.listStyleType) {
+      listStyleType = "list-style-type:".concat(options.listStyleType, ";");
+    }
   }
 
-  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(size).concat(color, "\"").concat(className, ">");
+  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color, "\"").concat(className, ">");
   var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var li = "<li style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color).concat(listStyleType, "\"").concat(className, ">");
+  var ul = "<ul style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var ol = "<ol style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
   var textToUse;
 
-  if (Array.isArray(text)) {
-    textToUse = text.join("</p>".concat(p));
-  } else {
-    textToUse = text;
-  }
+  if (options.list != null) {
+    if (Array.isArray(text)) {
+      textToUse = text.join("</li>".concat(li));
+    } else {
+      textToUse = text;
+    }
 
-  textToUse = "".concat(pFirst).concat(textToUse, "</p>");
+    if (options.list === 'unordered') {
+      textToUse = "".concat(ul).concat(li).concat(textToUse, "</ul>");
+    } else {
+      textToUse = "".concat(ol).concat(li).concat(textToUse, "</ol>");
+    }
+  } else {
+    if (Array.isArray(text)) {
+      textToUse = text.join("</p>".concat(p));
+    } else {
+      textToUse = text;
+    }
+
+    textToUse = "".concat(pFirst).concat(textToUse, "</p>");
+  }
 
   if (options.centerV) {
     textToUse = centerV(textToUse);

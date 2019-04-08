@@ -220,6 +220,22 @@ class Content extends PresentationLessonContent {
         `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'fill up']).html()}`,
       ]),
     });
+
+    const indentStyle = {
+      left: 4, top: -2, size: 1, list: 'unordered', listStyleType: 'none',
+    };
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Common adjacent angle names are usually used to |describe| angles in different, and sometimes simpler ways.',
+        'For example, rather than saying:',
+        style(indentStyle, '" angles a and b |add up to 90º| "'),
+        'you could say:',
+        style(indentStyle, [
+          '" angles a and b are |complementary| "',
+          '" |complementary angles| a and b "',
+        ]),
+      ]),
+    });
   }
 }
 
