@@ -1,19 +1,23 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { click } = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
+
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -28,55 +32,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const parallel = diag._parallel;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
     this.addSection({
-      title: 'Parallel Lines',
-      setContent: `
-        <p>
-          |Parallel| lines are lines that never meet.
-          They have the same rotation, and do not touch.
-        </p>
-        ${new Definition('Parallel', 'Greek', ['para', 'beside', 'allelois', 'each other']).html('id_lesson__related_angles_definition')}
-      `,
-      modifiers: {
-        Parallel: click(parallel.rotateLine1ToParallel, [parallel], colors.line),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Move and rotate the lines to see when they are parallel.</li>',
-        '<li>Move the line by dragging its <i>middle</i>.</li>',
-        '<li>Rotate the line by dragging one of its <i>ends</i>.</li>',
-        '<li>The lines will have color when they are parallel.</li>',
-        '<li>Touch |Parallel| to make the lines parallel.</li>',
-        '</ul>',
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
       ],
-      setEnterState: () => {
-        parallel.setPosition(layout.position);
-        parallel._line1.setColor(colors.line);
-      },
-      showOnly: [
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
       ],
-      show: [
-        parallel,
-        parallel._line1,
-        parallel._line2,
-      ],
-      transitionFromAny: (done) => {
-        let time = Math.max(
-          diag.legacyGetTimeToMoveToScenario(parallel._line1),
-          diag.legacyGetTimeToMoveToScenario(parallel._line2),
-        );
-        time = time > 2 ? 2 : time;
-        diag.moveToScenario(parallel._line1, '', time);
-        diag.moveToScenario(parallel._line2, '', time, done);
-      },
-      setSteadyState: () => {
-        diag.isParallelHighlighting = true;
-        diag.moveToScenario(parallel._line1, '', 0.001);
-        diag.moveToScenario(parallel._line2, '', 0.001);
-      },
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

@@ -401,8 +401,23 @@ export default function getLessonIndex() {
       versions: {
         base: {
           title: 'Base',
-          description: 'First explanation of Topic.',
+          description: 'Reference explanation.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+        legacy: {
+          title: 'legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'explanation',

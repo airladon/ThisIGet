@@ -8,6 +8,8 @@ const {
   // Line,
 } = Fig.tools.g2;
 
+// const { joinObjects } = Fig.tools.misc;
+
 const cssColorNames = [
   // 'lines',
 ];
@@ -16,7 +18,7 @@ const cssColorNames = [
 export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.position = new Point(0, 0);
+  const { colors } = layout;
   layout.addElements = [];
   return layout;
 }

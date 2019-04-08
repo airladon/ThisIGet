@@ -1,14 +1,15 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import ParallelCollection from '../common/diagramCollectionParallel';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _parallel: ParallelCollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -17,6 +18,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('parallel', new ParallelCollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }
