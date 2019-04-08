@@ -33,23 +33,20 @@ export default class QRBoilerplate extends PopupBoxCollection {
 
     const modifiers = {};
     this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    this.setDescription('Lines are |parallel| if they have the |same rotation| and |do not touch|. Therefore, the lines cannot be on top of each other, and if extended to an infinite length, would never cross.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.5 });
     super.show();
-    const collection = this._collection;
-    collection.show();
-    // const iso = collection;
-    // iso.show();
-    collection.transform.updateScale(0.6, 0.6);
-    collection.setPosition(this.layout.position);
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    const coll = this._collection;
+    coll.showAll();
+    coll._line1.setScenario('center');
+    coll._line2.setScenario('center');
+    coll._line1.setLength(3);
+    coll._line2.setLength(3);
+    this.transformToQRWindow(coll, new Rect(-2, -0.6, 4, 1.6));
     this.diagram.animateNextFrame();
   }
 }
