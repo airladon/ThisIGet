@@ -492,10 +492,10 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/RelatedAngles',
       uid: 'related_angles',
       versions: {
-        base: {
-          title: 'Base',
+        legacy: {
+          title: 'Legacy',
           description: 'First explanation of Topic.',
-          path: 'base',
+          path: 'Legacy',
           onPath: true,
           topics: [
             'dev',
@@ -508,6 +508,21 @@ export default function getLessonIndex() {
             'Interior',
             'Alternate',
             'Corresponding',
+          ],
+        },
+        Version_uid_here: {
+          title: 'Base',
+          description: 'Base explanation of Topic.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
           ],
         },
       },

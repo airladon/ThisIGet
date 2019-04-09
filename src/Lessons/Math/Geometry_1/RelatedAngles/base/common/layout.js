@@ -2,133 +2,142 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Rect, Point } = Fig;
+const {
+  Point,
+  // Transform,
+  // Line,
+} = Fig.tools.g2;
+
+const { joinObjects } = Fig.tools.misc;
+
 const cssColorNames = [
-  'latin',
-  'line',
-  'angleA',
-  'angleB',
-  'angleC',
-  'angleD',
+  'lines',
+  'angle1',
+  'angle2',
+  'angle3',
+  'angle4',
   'disabled',
-  'supplementary',
-  'intersectingLine',
-  'quizLine',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function commonLessonLayout() {
+export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.units = {
-    position: new Point(2, -1.75),
-  };
-  layout.selector = {
-    position: new Point(0, 1.8),
-  };
-  const len = 1.7;
+  const { colors } = layout;
 
-  layout.position = new Point(1.5, 0);
-  layout.parallelLine = {
-    length: {
-      full: len,
-      end: len / 3,
-      middle: len / 3,
+  layout.length = 2.5;
+  layout.width = 0.03;
+  layout.angleRadius = 0.4;
+
+  layout.line = {
+    method: 'line',
+    options: {
+      length: layout.length,
+      width: layout.width,
+      color: colors.lines,
+      vertexSpaceStart: 'center',
+      move: {
+        type: 'rotation',
+      },
     },
-    label: {
-      length: len / 2,
+    mods: {
+      isInteractive: true,
+      interactiveLocation: new Point(layout.length / 3 * 0.8, 0),
     },
-    width: 0.02,
-    boundary: new Rect(-1.5, -1.7, 3, 3),
-    interactive: new Point(-len / 3, 0),
-  };
-  layout.threeLines = {
-    position: layout.position,
-    rotation: 0,
-  };
-  layout.intersectingLine = {
-    length: {
-      full: len * 1.5,
-      end: len / 3 * 1.5,
-      middle: len / 3 * 1.5,
-    },
-    label: {
-      length: len / 2  * 1.5,
-    },
-    width: 0.02,
-    boundary: new Rect(-1.5, -1.7, 3, 3),
-    interactive: new Point(0, 0),
   };
 
-  layout.line1 = {
-    opposite: {
-      position: new Point(0, 0),
-      rotation: 0,
-    },
-    corresponding: {
-      position: new Point(0, 0.5),
-      rotation: 0,
-    },
-    center: {
-      position: new Point(0, 0),
-      rotation: 0,
-    },
-    quiz: {
-      position: new Point(0, 0),
-      rotation: 0,
-    },
-    position: new Point(0, 0.3),
-    rotation: 0,
-  };
-  layout.line2 = {
-    opposite: {
-      position: new Point(0, 0),
-      rotation: Math.PI / 4,
-    },
-    corresponding: {
-      position: new Point(0, -0.5),
-      rotation: 0,
-    },
-    center: {
-      position: new Point(0, 0),
-      rotation: 0,
-    },
-    quiz: {
-      position: new Point(0, 0),
-      rotation: 0,
-    },
-    position: new Point(0, -0.3),
-    rotation: 0,
-  };
-  layout.line3 = {
-    corresponding: {
-      position: new Point(0, 0),
-      rotation: Math.PI / 3,
-    },
-  };
   layout.angle = {
-    arc: {
-      radius: 0.3,
-      width: 0.02,
-      sides: 200,
+    method: 'angle',
+    options: {
+      curve: {
+        width: layout.width / 3 * 2,
+        sides: 400,
+        radius: layout.angleRadius,
+      },
+      label: {
+        text: '',
+        radius: layout.angleRadius * 1.05,
+        autoHide: 0.2,
+      },
     },
-    label: {
-      radius: 0.35,
+  };
+
+  layout.oppositeLine1 = joinObjects({}, layout.line, { name: 'line1' });
+  layout.oppositeLine2 = joinObjects({}, layout.line, {
+    name: 'line2',
+    // mods: { scenarios: { center: { rotation: 1 } } },
+  });
+  layout.oppositeAngle1 = joinObjects({}, layout.angle, {
+    name: 'angle1',
+    options: { color: colors.angle1 },
+  });
+  layout.oppositeAngle2 = joinObjects({}, layout.angle, {
+    name: 'angle2',
+    options: { color: colors.angle2 },
+  });
+  layout.oppositeAngle3 = joinObjects({}, layout.angle, {
+    name: 'angle3',
+    options: { color: colors.angle3 },
+  });
+  layout.oppositeAngle4 = joinObjects({}, layout.angle, {
+    name: 'angle4',
+    options: { color: colors.angle4 },
+  });
+
+  layout.oppositeEqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      elements: {
+        a: { color: colors.angle1 },
+        b: { color: colors.angle2 },
+        c: { color: colors.angle3 },
+        d: { color: colors.angle4 },
+        equals: { text: ' = ' },
+        plus: { text: ' + ' },
+        minus: { text: ' – ' },
+        _180: { text: '180º' },
+      },
+      defaultFormAlignment: {
+        alignV: 'baseline',
+        alignH: 'center',
+        fixTo: 'equals',
+      },
+      scale: 1.1,
+      forms: {
+        'b': ['b', 'equals', '_180', 'minus', 'a'],
+        'd': ['d', 'equals', '_180', 'minus', 'a'],
+      },
+    },
+    mods: {
+      scenarios: {
+        top: { position: [-0.3, 1.2], scale: 1 },
+      },
     },
   };
-  layout.equation1 = {
-    aPlusB: new Point(-3, -0.5),
-    bPlusC: new Point(-3, -0.5),
+
+  layout.oppositeFig = {
+    name: 'fig',
+    method: 'collection',
+    addElements: [
+      layout.oppositeAngle1,
+      layout.oppositeAngle2,
+      layout.oppositeAngle3,
+      layout.oppositeAngle4,
+      layout.oppositeLine1,
+      layout.oppositeLine2,
+    ],
+    mods: {
+      scenarios: {
+        center: { position: [0, -0.2], scale: 1 },
+      },
+    },
   };
 
-  layout.equation2 = {
-    b: new Point(-3, -1.35),
-    c: new Point(-3, -0.9),
-  };
-
-  layout.equation3 = {
-    cEqualsA: new Point(-3, -1.3),
-  };
-
+  layout.addElements = [
+    layout.oppositeFig,
+    layout.oppositeEqn,
+  ];
   return layout;
 }

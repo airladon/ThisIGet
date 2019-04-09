@@ -6393,13 +6393,21 @@ function (_DiagramElementCollec) {
 
       // Helper function to add text element
       var makeTextElem = function makeTextElem(options) {
+        var defaultText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
         // Priority:
         //  1. color
         //  2. font
         //  3. style
+        //  4. fontMath or fontText based on actual text
+        var textToUse = defaultText;
+
+        if (options.text != null) {
+          textToUse = options.text;
+        }
+
         var fontToUse = _this2.eqn.fontMath;
 
-        if (options.text.match(/[A-Z,a-z]/)) {
+        if (textToUse.match(/[A-Z,a-z]/)) {
           fontToUse = _this2.eqn.fontText;
         }
 
@@ -6417,7 +6425,7 @@ function (_DiagramElementCollec) {
           fontToUse = options.font;
         }
 
-        var p = _this2.shapes.txt(options.text, {
+        var p = _this2.shapes.txt(textToUse, {
           position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
           font: fontToUse
         });
@@ -6471,9 +6479,9 @@ function (_DiagramElementCollec) {
             // console.log(elem.symbol)
             // $FlowFixMe
             diagramElem = makeSymbolElem(elem);
-          } else if (elem.text != null && elem.text) {
+          } else {
             // $FlowFixMe
-            diagramElem = makeTextElem(elem);
+            diagramElem = makeTextElem(elem, key);
           }
 
           if (diagramElem != null) {

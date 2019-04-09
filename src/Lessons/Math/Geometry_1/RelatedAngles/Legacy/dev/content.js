@@ -3,7 +3,6 @@ import Fig from 'figureone';
 import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from '../quickReference/layout';
 import details from '../../details';
-import version from '../version';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -11,9 +10,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
-const { uid } = details.details;
-const vid = version.details.uid;
-const qrids = version.details.qr;
+const uid = 'related_angles';
+const vid = 'base';
+const qrids = [
+  'Alternate',
+  'Interior',
+  'Opposite',
+  'Corresponding',
+];
 
 class Content extends PresentationLessonContent {
   setTitle() {

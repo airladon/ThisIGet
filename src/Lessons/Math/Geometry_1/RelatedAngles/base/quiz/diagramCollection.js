@@ -2,17 +2,14 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-
 // eslint-disable-next-line import/no-cycle
-import QuizAngle1Collection from './diagramCollectionAngles1Quiz';
-import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
+import QuizCollection from './diagramCollectionQuiz';
 
 const { Transform } = Fig;
-
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  units: TypeUnits;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _quiz: QuizCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -21,8 +18,6 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.units = 'deg';
-    this.add('quizA1', new QuizAngle1Collection(diagram, this.layout));
-    this.add('unitsSelector', this.makeUnitsSelector());
+    this.add('quiz', new QuizCollection(diagram, this.layout));
   }
 }

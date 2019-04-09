@@ -2,14 +2,14 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'Base explanation of Topic.',
-  uid: 'base',
+  title: 'Legacy',
+  description: 'First explanation of Topic.',
+  uid: 'legacy',
   qr: [
     'Opposite',
-    'Adjacent',
-    'Corresponding',
     'Interior',
+    'Alternate',
+    'Corresponding',
   ],
 };
 
