@@ -1,5 +1,6 @@
 // @flow
 import Fig from 'figureone';
+import type { TypeParsablePoint } from 'figureone';
 // import LessonDescription from './lessonDescription';
 // import getLessonIndex from '../../Lessons/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
@@ -8,8 +9,8 @@ import SimpleLessonContent from './SimpleLessonContent';
 
 const {
   Diagram, HTMLObject, Point,
-  DiagramElementPrimative, DiagramElementCollection, EquationLegacy,
-  DiagramElement, Rect,
+  DiagramElementPrimative, DiagramElementCollection,
+  DiagramElement, Rect, Equation, parsePoint,
 } = Fig;
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
@@ -37,8 +38,8 @@ type TypeInteractiveElement = DiagramElementCollection
                               | string
                               | HTMLElement;
 type TypeInteractiveElementLocation = 'center' | 'zero' | ''
-                                      | 'topleft' | 'topright'
-                                      | 'vertexLeft' | Point;
+                                      | 'topLeft' | 'topRight'
+                                      | 'vertexLeft' | TypeParsablePoint;
 type TypeInteractiveElements = Array<{
     element: TypeInteractiveElement,
     location: TypeInteractiveElementLocation,
@@ -451,12 +452,12 @@ class Section {
         if (element.id != null) {
           this.interactiveElementList.push({
             element: element.id,
-            location: 'topright',
+            location: 'topRight',
           });
         } else {
           this.interactiveElementList.push({
             element,
-            location: 'topright',
+            location: 'topRight',
           });
         }
       }
@@ -787,10 +788,10 @@ class PresentationLessonContent extends SimpleLessonContent {
           diagramPosition = element.getCenterDiagramPosition();
         } else if (location === 'zero') {
           diagramPosition = element.getDiagramPosition();
-        } else if (location === 'topleft') {
+        } else if (location === 'topLeft') {
           const rect = element.getDiagramBoundingRect();
           diagramPosition = new Point(rect.left, rect.top);
-        } else if (location === 'topright') {
+        } else if (location === 'topRight') {
           const rect = element.getDiagramBoundingRect();
           diagramPosition = new Point(rect.right, rect.top);
         } else if (location === 'vertexLeft') {
@@ -811,15 +812,19 @@ class PresentationLessonContent extends SimpleLessonContent {
           } else {
             diagramPosition = new Point(0, 0);
           }
-        } else if (location instanceof Point) {
+        } else if (location instanceof Point
+          || typeof location === 'number'
+          || Array.isArray(location)
+        ) {
+          const p = parsePoint(location);
           const rect = element.getDiagramBoundingRect();
           diagramPosition = new Point(
-            rect.left + location.x * rect.width,
-            rect.bottom + location.y * rect.height,
+            rect.left + p.x * rect.width,
+            rect.bottom + p.y * rect.height,
           );
         } else {
           diagramPosition = element
-            .getVertexSpaceDiagramPosition(element.interactiveLocation);
+            .getVertexSpaceDiagramPosition(parsePoint(element.interactiveLocation));
         }
         cssPosition = diagramPosition
           .transformBy(this.diagram.spaceTransforms.diagramToPixel.matrix());
@@ -831,12 +836,12 @@ class PresentationLessonContent extends SimpleLessonContent {
         if (html instanceof HTMLElement) {
           const rect = html.getBoundingClientRect();
           const rectBase = this.diagram.htmlCanvas.getBoundingClientRect();
-          if (location === 'topleft') {
+          if (location === 'topLeft') {
             cssPosition = new Point(
               rect.left - rectBase.left + rect.width * 0.05,
               rect.top - rectBase.top + rect.height * 0.25,
             );
-          } else if (location === 'topright') {
+          } else if (location === 'topRight') {
             cssPosition = new Point(
               rect.left - rectBase.left + rect.width * 0.95,
               rect.top - rectBase.top + rect.height * 0.25,
@@ -846,10 +851,14 @@ class PresentationLessonContent extends SimpleLessonContent {
               rect.left - rectBase.left + rect.width * 0.05,
               rect.top - rectBase.top + rect.height * 0.5,
             );
-          } else if (location instanceof Point) {
+          } else if (location instanceof Point
+            || typeof location === 'number'
+            || Array.isArray(location)
+          ) {
+            const p = parsePoint(location);
             cssPosition = new Point(
-              rect.left - rectBase.left + rect.width * location.x,
-              rect.top - rectBase.top + rect.height * location.y,
+              rect.left - rectBase.left + rect.width * p.x,
+              rect.top - rectBase.top + rect.height * p.y,
             );
           } else {
             cssPosition = new Point(
@@ -904,7 +913,7 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   addEqnsStep(
     equations: Array<[
-      { eqn: EquationLegacy } & EquationLegacy,  // or navigator
+      { eqn: Equation } & Equation,  // or navigator
       string | Array<string>,        // From form
       string | Array<string>,        // To Form
     ]>,
@@ -992,7 +1001,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   }
 
   addEqnStep(
-    equationOrNavigator: { eqn: EquationLegacy } & EquationLegacy,
+    equationOrNavigator: { eqn: Equation } & Equation,
     fromForm: string | Array<string>,
     toForm: string | Array<string>,
     ...sectionObjects: Array<Object>

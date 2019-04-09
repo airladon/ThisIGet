@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import {
   PresentationLessonContent,
-  // interactiveItem,
+  interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
@@ -48,7 +48,10 @@ class Content extends PresentationLessonContent {
         'Rotate the line by dragging one of its |ends|.',
       ]),
       interactiveElements: [
-        'id__quiz__1', quiz1._line2._midLine, quiz1._line2._line, quiz1._check,
+        'id__quiz__1',
+        quiz1._line2._midLine,
+        quiz1._line2._line,
+        interactiveItem(quiz1._check, [0.9, 0.8]),
       ],
       show: [quiz1._line1, quiz1._line2],
       setSteadyState: () => {
@@ -56,28 +59,31 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    // this.addSection({
-    //   title: '',
-    //   setContent: ['Select two parallel lines.'],
-    //   setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
-    //     'Touch a line to toggle selection.',
-    //     'Move lines by dragging them to help determine if parallel.',
-    //     'Note, there may be more than one answer to choose from!',
-    //   ]),
-    //   interactiveElements: [
-    //     main2._line1._midLine,
-    //     main2._line2._midLine,
-    //     main2._line3._midLine,
-    //     main2._line4._midLine,
-    //     main2._line5._midLine,
-    //     main2._line6._midLine,
-    //     quiz2._check,
-    //   ],
-    //   show: [main2],
-    //   setSteadyState: () => {
-    //     quiz1.newProblem();
-    //   },
-    // });
+    this.addSection({
+      title: '',
+      setContent: ['Select |two| parallel lines.'],
+      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+        'Touch a line to toggle selection.',
+        'Move lines by dragging them to help determine if parallel.',
+        'Note, there may be more than one answer to choose from!',
+      ]),
+      interactiveElementsOnly: [
+        quiz2._line1._midLine,
+        quiz2._line2._midLine,
+        quiz2._line3._midLine,
+        quiz2._line4._midLine,
+        quiz2._line5._midLine,
+        quiz2._line6._midLine,
+        interactiveItem(quiz2._check, [0.9, 0.8]),
+      ],
+      show: [
+        quiz2._line1, quiz2._line2, quiz2._line3,
+        quiz2._line4, quiz2._line5, quiz2._line6,
+      ],
+      setSteadyState: () => {
+        quiz2.newProblem();
+      },
+    });
   }
 }
 

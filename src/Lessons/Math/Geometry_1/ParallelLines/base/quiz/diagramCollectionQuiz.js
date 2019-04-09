@@ -18,7 +18,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  futurePositions: Object;
+  _line1: DiagramObjectLine;
+  _line2: DiagramObjectLine;
 
   constructor(
     diagram: CommonLessonDiagram,

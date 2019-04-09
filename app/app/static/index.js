@@ -189,7 +189,8 @@ var FigureOne = {
   TransformLimit: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"],
   Translation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"],
   Scale: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"],
-  Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]
+  Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"],
+  parsePoint: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (FigureOne);
 
@@ -20123,7 +20124,7 @@ function () {
         var scenario = this.scenarios[scenarioName];
 
         if (scenario.position != null) {
-          target.updateTranslation(scenario.position);
+          target.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
         }
 
         if (scenario.rotation != null) {
@@ -20131,11 +20132,7 @@ function () {
         }
 
         if (scenario.scale != null) {
-          if (scenario.scale instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-            target.updateScale(scenario.scale);
-          } else {
-            target.updateScale(scenario.scale, scenario.scale);
-          }
+          target.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
         }
       }
 
@@ -20144,13 +20141,17 @@ function () {
   }, {
     key: "setScenario",
     value: function setScenario(scenarioName) {
-      var target = this.getScenarioTarget(scenarioName);
-      this.setTransform(target._dup());
+      if (this.scenarios[scenarioName] != null) {
+        var target = this.getScenarioTarget(scenarioName);
+        this.setTransform(target._dup());
+      }
     }
   }, {
     key: "setScenarios",
     value: function setScenarios(scenarioName) {
-      this.setScenario(scenarioName);
+      if (this.scenarios[scenarioName] != null) {
+        this.setScenario(scenarioName);
+      }
     }
   }, {
     key: "getAllElementsWithScenario",
@@ -21964,7 +21965,8 @@ function (_DiagramElement2) {
     key: "setScenarios",
     value: function setScenarios(scenarioName) {
       var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      this.setScenario(scenarioName);
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setScenarios", this).call(this, scenarioName);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
@@ -24979,6 +24981,10 @@ function parsePoint(p, onFail) {
     }
 
     return onFailToUse;
+  }
+
+  if (typeof p === 'number') {
+    return new Point(p, p);
   }
 
   if (_typeof(p) === 'object') {

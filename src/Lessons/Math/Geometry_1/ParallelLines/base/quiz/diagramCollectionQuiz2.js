@@ -5,12 +5,21 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonCollection from '../common/diagramCollectionCommon';
+
 import {
-  randomizeParallelLine, makeAnglesClose, checkValuesForParallel, checkElementsForParallel,
+  randomizeParallelLine, checkValuesForParallel, checkElementsForParallel,
 } from '../common/tools';
 
-const { Transform, DiagramElementPrimative } = Fig;
+const {
+  Transform, DiagramElementPrimative, DiagramObjectLine,
+  Point,
+} = Fig;
+const { removeRandElement } = Fig.tools.math;
+
+type TypeSelectableLine = {
+  selected: boolean;
+} & DiagramObjectLine;
+
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
@@ -19,7 +28,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  futurePositions: Object;
+  _line1: TypeSelectableLine;
+  _line2: TypeSelectableLine;
+  _line3: TypeSelectableLine;
+  _line4: TypeSelectableLine;
+  _line5: TypeSelectableLine;
+  _line6: TypeSelectableLine;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -38,48 +52,86 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       },
       transform,
     );
-    this.add('main', new CommonCollection(diagram, this.layout));
+    this.diagram.addElements(this, this.layout.addElements);
 
-    this._main._line1.setTransformCallback = (t: Transform) => {
-      this._main._line1.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line1);
+    const setupLines = (lineNumber: number) => {
+      const line = this[`_line${lineNumber}`];
+      line.setTransformCallback = (t: Transform) => {
+        line.updateMoveTransform(t);
+        this.normalizeAngle(line);
+      };
+      line.selected = false;
+      const onClick = () => {
+        line.selected = !line.selected;
+        if (line.selected) {
+          line.setColor(this.layout.colors.selected);
+        } else {
+          line.setColor(this.layout.colors.lines);
+        }
+      };
+      line._line.onClick = onClick;
+      line._midLine.onClick = onClick;
+      if (line._midLine) {
+        line._midLine.move.type = 'translation';
+      }
+      if (line._line) {
+        line._line.move.type = 'translation';
+      }
     };
-    this._main._line2.setTransformCallback = (t: Transform) => {
-      this._main._line2.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line2);
-    };
-    this._main._line3.setTransformCallback = (t: Transform) => {
-      this._main._line3.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line3);
-    };
-    this._main._line4.setTransformCallback = (t: Transform) => {
-      this._main._line4.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line4);
-    };
-    this._main._line5.setTransformCallback = (t: Transform) => {
-      this._main._line5.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line5);
-    };
-    this._main._line6.setTransformCallback = (t: Transform) => {
-      this._main._line6.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line6);
-    };
+    [1, 2, 3, 4, 5, 6].forEach((lineNumber) => { setupLines(lineNumber); });
     this.hasTouchableElements = true;
+  }
+
+  resetLines() {
+    this._line1.setColor(this.layout.colors.lines);
+    this._line1.selected = false;
+    this._line2.setColor(this.layout.colors.lines);
+    this._line2.selected = false;
+    this._line3.setColor(this.layout.colors.lines);
+    this._line3.selected = false;
+    this._line4.setColor(this.layout.colors.lines);
+    this._line4.selected = false;
+    this._line5.setColor(this.layout.colors.lines);
+    this._line5.selected = false;
+    this._line6.setColor(this.layout.colors.lines);
+    this._line6.selected = false;
+  }
+
+  enableTouchLines(isEnabled: boolean = true) {
+    this._line1.hasTouchableElements = isEnabled;
+    this._line2.hasTouchableElements = isEnabled;
+    this._line3.hasTouchableElements = isEnabled;
+    this._line4.hasTouchableElements = isEnabled;
+    this._line5.hasTouchableElements = isEnabled;
+    this._line6.hasTouchableElements = isEnabled;
+    this._line1.isTouchable = isEnabled;
+    this._line2.isTouchable = isEnabled;
+    this._line3.isTouchable = isEnabled;
+    this._line4.isTouchable = isEnabled;
+    this._line5.isTouchable = isEnabled;
+    this._line6.isTouchable = isEnabled;
   }
 
   tryAgain() {
     super.tryAgain();
+    this.resetLines();
     // this._input.enable();
     // this._input.setValue('');
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  normalizeAngle(element: DiagramObjectLine) {
+    const angle = element.getRotation('0to360');
+    element.transform.updateRotation(angle);
+  }
+
   setupNextProblem() {
-    const line1 = this._main._line1;
-    const line2 = this._main._line2;
-    const line3 = this._main._line3;
-    const line4 = this._main._line4;
-    const line5 = this._main._line5;
-    const line6 = this._main._line6;
+    const line1 = this._line1;
+    const line2 = this._line2;
+    const line3 = this._line3;
+    const line4 = this._line4;
+    const line5 = this._line5;
+    const line6 = this._line6;
     const bounds = this.layout.addElements[0].options.move.translationBounds;
     const { length } = this.layout;
     const lay = { bounds, length };
@@ -89,10 +141,40 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     line4.scenarios.quiz = randomizeParallelLine(lay);
     line5.scenarios.quiz = randomizeParallelLine(lay);
     line6.scenarios.quiz = randomizeParallelLine(lay);
+
+    const lines = [1, 2, 3, 4, 5, 6];
+    const p1 = removeRandElement(lines);
+    const p2 = removeRandElement(lines);
+
+    const parallelLine1 = this[`_line${p1}`].scenarios.quiz;
+    const parallelLine2 = this[`_line${p2}`].scenarios.quiz;
+    const { rotation } = parallelLine2;
+    parallelLine1.rotation = rotation;
+    const isParallel = checkValuesForParallel(
+      parallelLine1.rotation,
+      parallelLine1.position,
+      parallelLine2.rotation,
+      parallelLine2.position,
+      this.layout.line.width * 1.1,
+      Math.PI / 200,
+    );
+
+    if (!isParallel) {
+      const xMag = 0.5 * Math.cos(rotation + Math.PI / 2);
+      const yMag = 0.5 * Math.sin(rotation + Math.PI / 2);
+      const oldX = parallelLine1.position.x;
+      const newX = oldX < 0 ? oldX + xMag : oldX - xMag;
+      const oldY = parallelLine1.position.y;
+      const newY = oldY < 0 ? oldY + yMag : oldY - yMag;
+      parallelLine1.position = new Point(newX, newY);
+    }
+
+    this.parallelLines = [this[`_line${p1}`], this[`_line${p2}`]];
   }
 
   beforeTransitionToNewProblem() {
     this.hasTouchableElements = false;
+    this.resetLines();
   }
 
   newProblemReady() {
@@ -103,7 +185,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   newProblem() {
     super.newProblem();
     this.setupNextProblem();
-    console.log(this.getAllElementsWithScenario('quiz'))
     this.beforeTransitionToNewProblem();
     this.animations.new()
       .scenarios({ target: 'quiz', duration: 1 })
@@ -114,59 +195,42 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   showAnswer() {
     super.showAnswer();
-    this._main._line1.stop(true, 'noComplete');
-    this._main._line2.stop(true, 'noComplete');
-    makeAnglesClose(this._main._line1, this._main._line2);
-
-    const r1 = this._main._line1.getRotation();
-    // const r2 = this._main._line2.getRotation();
-    const t1 = this._main._line1.getPosition();
-    const t2 = this._main._line2.getPosition();
-
-    const dist = this.layout.width * 1.1;
-    const rot = Math.PI / 200;
-    if (!checkValuesForParallel(r1, t1, r1, t2, dist, rot)) {
-      const magX = Math.abs(0.4 * Math.cos(r1 + Math.PI / 2));
-      const magY = Math.abs(0.4 * Math.sin(r1 + Math.PI / 2));
-      t2.x = t2.x < 0 ? t2.x + magX : t2.x - magX;
-      t2.y = t2.y < 0 ? t2.y + magY : t2.y - magY;
-    }
-
-    this._main._line2.scenarios.quiz = { position: t2, rotation: r1 };
-    this._main._line2.animations.new()
-      .scenario({ target: 'quiz', duration: 0.5 })
-      .start();
-
+    this.resetLines();
+    this.parallelLines[0]._line.onClick();
+    this.parallelLines[1]._line.onClick();
+    this.parallelLines[0].pulseWidth();
+    this.parallelLines[1].pulseWidth();
     this.diagram.animateNextFrame();
   }
 
-  pulseLine2() {
-    this._main._line2.pulseWidth();
-    this.diagram.animateNextFrame();
-  }
 
-  isParallel(distanceMultiplier: number = 1.1, rotationThreshold: number = Math.PI / 200) {
+  isParallel(
+    line1: TypeSelectableLine,
+    line2: TypeSelectableLine,
+    distanceMultiplier: number = 1.1,
+    rotationThreshold: number = Math.PI / 200,
+  ) {
     return checkElementsForParallel(
-      this._main._line1, this._main._line2, false,
-      this.layout.width * distanceMultiplier, rotationThreshold,
+      line1, line2, false,
+      this.layout.line.width * distanceMultiplier, rotationThreshold,
     );
   }
 
   findAnswer() {
-    if (this.isParallel()) {
+    const lines = [this._line1, this._line2, this._line3, this._line4, this._line5, this._line6];
+    const selected = lines.filter(line => line.selected);
+    if (selected.length !== 2) {
+      return 'selectTwoLines';
+    }
+    if (this.isParallel(selected[0], selected[1])) {
       return 'correct';
     }
-
-    const isTouching = !this.isParallel(1.1, Math.PI * 2);
-    if (isTouching) {
-      return 'touching';
+    // console.log(this.parallelLines, selected, this.parallelLines.indexOf(selected[0]), this.parallelLines.indexOf(selected[1]))
+    if (this.parallelLines.indexOf(selected[0]) > -1
+      && this.parallelLines.indexOf(selected[1]) > -1) {
+      return 'correct';
     }
-
-    const isCloseRotation = this.isParallel(1.1, Math.PI / 20);
-    if (isCloseRotation) {
-      return 'rotation';
-    }
-
+    // console.log('incorrect')
     return 'incorrect';
   }
 }

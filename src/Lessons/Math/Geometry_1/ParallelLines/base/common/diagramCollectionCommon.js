@@ -10,7 +10,7 @@ const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
   DiagramObjectLine,
-  Transform, Point, Rect,
+  Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {

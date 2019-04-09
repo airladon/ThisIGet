@@ -62,6 +62,8 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         line1.setScenario('center');
         line2.setScenario('center');
+        line1.showAll()
+        console.log(line1._line.color)
       },
       show: [line1, line2],
       transitionFromAny: (done) => {
