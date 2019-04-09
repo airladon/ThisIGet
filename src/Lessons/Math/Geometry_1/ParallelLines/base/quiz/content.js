@@ -34,53 +34,50 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const quiz1 = diag._quiz1;
     const quiz2 = diag._quiz2;
-    const main1 = quiz1._main;
-    const main2 = quiz1._main;
+    // const main1 = quiz1._main;
+    // const main2 = quiz1._main;
 
     this.addSection({
       title: '',
       setContent: ['Move the |line| to be parallel with the other line.'],
       modifiers: {
-        line: click(quiz1.pulseLine2, [quiz1], colors.lines, true, 'id__quiz__1'),
+        line: click(quiz1.pulseLine2, [quiz1], colors.movable, true, 'id__quiz__1'),
       },
       setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
-        'Move and rotate the lines to see when they are parallel.',
         'Move the line by dragging its |middle|.',
         'Rotate the line by dragging one of its |ends|.',
-        'The lines will have color when they are parallel.',
-        'Touch |parallel| to make the lines parallel.',
       ]),
       interactiveElements: [
-        'id__quiz__1', main1._line2._midLine, main1._line2._line, quiz1._check,
+        'id__quiz__1', quiz1._line2._midLine, quiz1._line2._line, quiz1._check,
       ],
-      show: [main1._line1, main1._line2],
+      show: [quiz1._line1, quiz1._line2],
       setSteadyState: () => {
         quiz1.newProblem();
       },
     });
 
-    this.addSection({
-      title: '',
-      setContent: ['Select two parallel lines.'],
-      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
-        'Touch a line to toggle selection.',
-        'Move lines by dragging them to help determine if parallel.',
-        'Note, there may be more than one answer to choose from!',
-      ]),
-      interactiveElements: [
-        main2._line1._midLine,
-        main2._line2._midLine,
-        main2._line3._midLine,
-        main2._line4._midLine,
-        main2._line5._midLine,
-        main2._line6._midLine,
-        quiz2._check,
-      ],
-      show: [main2],
-      setSteadyState: () => {
-        quiz1.newProblem();
-      },
-    });
+    // this.addSection({
+    //   title: '',
+    //   setContent: ['Select two parallel lines.'],
+    //   setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+    //     'Touch a line to toggle selection.',
+    //     'Move lines by dragging them to help determine if parallel.',
+    //     'Note, there may be more than one answer to choose from!',
+    //   ]),
+    //   interactiveElements: [
+    //     main2._line1._midLine,
+    //     main2._line2._midLine,
+    //     main2._line3._midLine,
+    //     main2._line4._midLine,
+    //     main2._line5._midLine,
+    //     main2._line6._midLine,
+    //     quiz2._check,
+    //   ],
+    //   show: [main2],
+    //   setSteadyState: () => {
+    //     quiz1.newProblem();
+    //   },
+    // });
   }
 }
 
