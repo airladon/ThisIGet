@@ -52,7 +52,6 @@ class Content extends PresentationLessonContent {
           left: 3,
           top: -3,
           size: 0.95,
-          // line: 0.9,
         }, [
           'when two lines intersect',
           'when a line intersects two parallel lines',
@@ -75,10 +74,6 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.angle1, 'a');
-        opp.updateAngles();
-        // opp.setAngle(2, colors.angle1, 'b');
-        // opp.setAngle(3, colors.angle1, 'c');
-        // opp.setAngle(4, colors.angle1, 'd');
         opp.newPageRotation(done);
       },
       setSteadyState: () => {
