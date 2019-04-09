@@ -31,31 +31,39 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       layout,
       'q2',
       {
-        rotation: {
-          answer: 'Almost!',
-          details: 'Hint: Rotation is slightly off. Bringing lines closer together makes it easier to compare rotation.',
-        },
-        touching: {
-          answer: 'Not Quite',
-          details: 'Hint: Parallel lines cannot touch.',
+        selectTwoLines: {
+          answer: 'Wrong number of lines selected.',
+          details: 'Must select two and only two lines.',
         },
       },
       transform,
     );
-    // this.add('input', this.makeEntryBox('a1', '?', 3));
-    // this._input.setPosition(this.layout.input);
     this.add('main', new CommonCollection(diagram, this.layout));
+
     this._main._line1.setTransformCallback = (t: Transform) => {
       this._main._line1.updateMoveTransform(t);
       this._main.normalizeAngle(this._main._line1);
     };
     this._main._line2.setTransformCallback = (t: Transform) => {
       this._main._line2.updateMoveTransform(t);
-      this._main.normalizeAngle(this._main._line1);
+      this._main.normalizeAngle(this._main._line2);
     };
-    this._main._line1.hasTouchableElements = false;
-    this._main._line1.isTouchable = false;
-    this._main._line1.setColor(this.layout.colors.notParallel);
+    this._main._line3.setTransformCallback = (t: Transform) => {
+      this._main._line3.updateMoveTransform(t);
+      this._main.normalizeAngle(this._main._line3);
+    };
+    this._main._line4.setTransformCallback = (t: Transform) => {
+      this._main._line4.updateMoveTransform(t);
+      this._main.normalizeAngle(this._main._line4);
+    };
+    this._main._line5.setTransformCallback = (t: Transform) => {
+      this._main._line5.updateMoveTransform(t);
+      this._main.normalizeAngle(this._main._line5);
+    };
+    this._main._line6.setTransformCallback = (t: Transform) => {
+      this._main._line6.updateMoveTransform(t);
+      this._main.normalizeAngle(this._main._line6);
+    };
     this.hasTouchableElements = true;
   }
 
@@ -68,11 +76,19 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   setupNextProblem() {
     const line1 = this._main._line1;
     const line2 = this._main._line2;
+    const line3 = this._main._line3;
+    const line4 = this._main._line4;
+    const line5 = this._main._line5;
+    const line6 = this._main._line6;
     const bounds = this.layout.addElements[0].options.move.translationBounds;
     const { length } = this.layout;
     const lay = { bounds, length };
     line1.scenarios.quiz = randomizeParallelLine(lay);
     line2.scenarios.quiz = randomizeParallelLine(lay);
+    line3.scenarios.quiz = randomizeParallelLine(lay);
+    line4.scenarios.quiz = randomizeParallelLine(lay);
+    line5.scenarios.quiz = randomizeParallelLine(lay);
+    line6.scenarios.quiz = randomizeParallelLine(lay);
   }
 
   beforeTransitionToNewProblem() {
@@ -87,6 +103,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   newProblem() {
     super.newProblem();
     this.setupNextProblem();
+    console.log(this.getAllElementsWithScenario('quiz'))
     this.beforeTransitionToNewProblem();
     this.animations.new()
       .scenarios({ target: 'quiz', duration: 1 })

@@ -53,7 +53,7 @@ class Content extends PresentationLessonContent {
       interactiveElements: [
         'id__quiz__1', main1._line2._midLine, main1._line2._line, quiz1._check,
       ],
-      show: [main1],
+      show: [main1._line1, main1._line2],
       setSteadyState: () => {
         quiz1.newProblem();
       },
@@ -68,13 +68,15 @@ class Content extends PresentationLessonContent {
         'Note, there may be more than one answer to choose from!',
       ]),
       interactiveElements: [
-        main1._line1._midLine,
-        main1._line2._midLine,
-        main1._line3._midLine,
-        main1._line4._midLine,
-        main1._line5._midLine,
+        main2._line1._midLine,
+        main2._line2._midLine,
+        main2._line3._midLine,
+        main2._line4._midLine,
+        main2._line5._midLine,
+        main2._line6._midLine,
+        quiz2._check,
       ],
-      show: [main1],
+      show: [main2],
       setSteadyState: () => {
         quiz1.newProblem();
       },

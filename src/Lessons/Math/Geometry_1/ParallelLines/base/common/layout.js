@@ -27,7 +27,7 @@ export default function lessonLayout() {
     long: 2.55,
     short: 0.5,
   };
-  const line = {
+  layout.line = {
     method: 'line',
     options: {
       length: layout.length,
@@ -53,10 +53,10 @@ export default function lessonLayout() {
       },
     },
   };
-  const line1 = joinObjects({}, line, {
+  layout.line1 = joinObjects({}, layout.line, {
     name: 'line1',
   });
-  const line2 = joinObjects({}, line, {
+  layout.line2 = joinObjects({}, layout.line, {
     name: 'line2',
     mods: {
       scenarios: {
@@ -65,8 +65,8 @@ export default function lessonLayout() {
     },
   });
   layout.addElements = [
-    line1,
-    line2,
+    layout.line1,
+    layout.line2,
   ];
   return layout;
 }
