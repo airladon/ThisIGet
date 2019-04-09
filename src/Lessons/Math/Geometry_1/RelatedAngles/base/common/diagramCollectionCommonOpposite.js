@@ -154,8 +154,5 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
         });
       }
     }
-    // line1.updateLabel(r1);
-    // line2.updateLabel(r2);
-    // }
   }
 }

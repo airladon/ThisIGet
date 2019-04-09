@@ -4,7 +4,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point,
-  // Transform,
+  Transform,
   // Line,
 } = Fig.tools.g2;
 
@@ -17,6 +17,7 @@ const cssColorNames = [
   'angle3',
   'angle4',
   'disabled',
+  'intersectingLine',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -62,6 +63,9 @@ export default function lessonLayout() {
     },
   };
 
+  // ////////////////////////////////////////////////////////////
+  // Opposite
+  // ////////////////////////////////////////////////////////////
   layout.oppositeLine1 = joinObjects({}, layout.line, { name: 'line1' });
   layout.oppositeLine2 = joinObjects({}, layout.line, {
     name: 'line2',
@@ -135,9 +139,99 @@ export default function lessonLayout() {
     },
   };
 
+
+  // ////////////////////////////////////////////////////////////
+  // 3 Lines
+  // ////////////////////////////////////////////////////////////
+  layout._3LinesLine1 = joinObjects({}, layout.line, {
+    name: 'line1',
+    mods: {
+      scenarios: { center: { position: [0, 0.6] } },
+    },
+  });
+  layout._3LinesLine2 = joinObjects({}, layout.line, {
+    name: 'line2',
+    mods: {
+      scenarios: { center: { position: [0, -0.6] } },
+    },
+  });
+  layout._3LinesLine3 = joinObjects({}, layout.line, {
+    name: 'line3',
+    options: {
+      length: layout.length * 1.1,
+      color: colors.intersectingLine,
+    },
+    mods: {
+      scenarios: { center: { rotation: Math.PI / 3 } },
+    },
+  });
+
+  layout._3LinesAngleA1 = joinObjects({}, layout.angle, {
+    name: 'angleA1',
+    mods: { angleIndex: 0 },
+  });
+  layout._3LinesAngleA2 = joinObjects({}, layout.angle, {
+    name: 'angleA2',
+    mods: { angleIndex: 0 },
+  });
+  layout._3LinesAngleB1 = joinObjects({}, layout.angle, {
+    name: 'angleB1',
+    mods: { angleIndex: 1 },
+  });
+  layout._3LinesAngleB2 = joinObjects({}, layout.angle, {
+    name: 'angleB2',
+    mods: { angleIndex: 1 },
+  });
+  layout._3LinesAngleC1 = joinObjects({}, layout.angle, {
+    name: 'angleC1',
+    mods: { angleIndex: 2 },
+  });
+  layout._3LinesAngleC2 = joinObjects({}, layout.angle, {
+    name: 'angleC2',
+    mods: { angleIndex: 2 },
+  });
+  layout._3LinesAngleD1 = joinObjects({}, layout.angle, {
+    name: 'angleD1',
+    mods: { angleIndex: 3 },
+  });
+  layout._3LinesAngleD2 = joinObjects({}, layout.angle, {
+    name: 'angleD2',
+    mods: { angleIndex: 3 },
+  });
+
+
+  layout._3LinesFig = {
+    name: 'fig',
+    method: 'collection',
+    addElements: [
+      layout._3LinesAngleA1,
+      layout._3LinesAngleA2,
+      layout._3LinesAngleB1,
+      layout._3LinesAngleB2,
+      layout._3LinesAngleC1,
+      layout._3LinesAngleC2,
+      layout._3LinesAngleD1,
+      layout._3LinesAngleD2,
+      layout._3LinesLine1,
+      layout._3LinesLine2,
+      layout._3LinesLine3,
+    ],
+    mods: {
+      scenarios: {
+        center: { position: [0, -0.2], scale: 1 },
+      },
+    },
+  };
+
+  // ////////////////////////////////////////////////////////////
+  // Collection
+  // ////////////////////////////////////////////////////////////
   layout.addElements = [
     layout.oppositeFig,
     layout.oppositeEqn,
+  ];
+  layout.addElementsThreeLines = [
+    layout._3LinesFig,
   ];
   return layout;
 }
