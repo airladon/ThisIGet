@@ -5,6 +5,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, DiagramElementPrimative } = Fig;
 
@@ -31,6 +32,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     );
     // this.add('input', this.makeEntryBox('a1', '?', 3));
     // this._input.setPosition(this.layout.input);
+    this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 

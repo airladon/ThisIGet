@@ -199,7 +199,7 @@ var FigureOne = {
 /*!***********************************************!*\
   !*** ./src/js/diagram/Animation/Animation.js ***!
   \***********************************************/
-/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep */
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep, ParallelBuilder */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -266,6 +266,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+
+/* harmony import */ var _AnimationStep_ParallelBuilder__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./AnimationStep/ParallelBuilder */ "./src/js/diagram/Animation/AnimationStep/ParallelBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelBuilder", function() { return _AnimationStep_ParallelBuilder__WEBPACK_IMPORTED_MODULE_15__["default"]; });
+
 
 
 
@@ -466,8 +470,8 @@ function (_animation$SerialAnim) {
       return this;
     }
   }, {
-    key: "color",
-    value: function color() {
+    key: "scenarios",
+    value: function scenarios() {
       if (this.element != null) {
         var defaultOptions = {
           element: this.element
@@ -475,6 +479,24 @@ function (_animation$SerialAnim) {
 
         for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
           optionsIn[_key8] = arguments[_key8];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(options.element.anim.scenarios(options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "color",
+    value: function color() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -491,8 +513,8 @@ function (_animation$SerialAnim) {
           element: this.element
         };
 
-        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-          optionsIn[_key9] = arguments[_key9];
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
         }
 
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -510,8 +532,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len10 = arguments.length, args = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
-        args[_key10 - 1] = arguments[_key10];
+      for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+        args[_key11 - 1] = arguments[_key11];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -534,8 +556,8 @@ function (_animation$SerialAnim) {
       };
       var options;
 
-      for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
-        args[_key11 - 1] = arguments[_key11];
+      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
+        args[_key12 - 1] = arguments[_key12];
       }
 
       if (typeof timeOrOptionsIn === 'number') {
@@ -554,8 +576,8 @@ function (_animation$SerialAnim) {
     value: function delay() {
       var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
-        args[_key12 - 1] = arguments[_key12];
+      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        args[_key13 - 1] = arguments[_key13];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
@@ -566,11 +588,29 @@ function (_animation$SerialAnim) {
     value: function trigger() {
       var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
-        optionsIn[_key13 - 1] = arguments[_key13];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        optionsIn[_key14 - 1] = arguments[_key14];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "parallel",
+    value: function parallel() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len15 = arguments.length, optionsIn = new Array(_len15), _key15 = 0; _key15 < _len15; _key15++) {
+          optionsIn[_key15] = arguments[_key15];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ParallelBuilder"](options));
+      }
+
       return this;
     }
   }, {
@@ -578,8 +618,8 @@ function (_animation$SerialAnim) {
     value: function inParallel() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len14 = arguments.length, optionsIn = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
-        optionsIn[_key14 - 1] = arguments[_key14];
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        optionsIn[_key16 - 1] = arguments[_key16];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -590,8 +630,8 @@ function (_animation$SerialAnim) {
     value: function inSerial() {
       var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-      for (var _len15 = arguments.length, optionsIn = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
-        optionsIn[_key15 - 1] = arguments[_key15];
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17 > 1 ? _len17 - 1 : 0), _key17 = 1; _key17 < _len17; _key17++) {
+        optionsIn[_key17 - 1] = arguments[_key17];
       }
 
       this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
@@ -604,8 +644,8 @@ function (_animation$SerialAnim) {
         element: this.element
       };
 
-      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
-        optionsIn[_key16] = arguments[_key16];
+      for (var _len18 = arguments.length, optionsIn = new Array(_len18), _key18 = 0; _key18 < _len18; _key18++) {
+        optionsIn[_key18] = arguments[_key18];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -2911,6 +2951,12 @@ function (_AnimationStep) {
   }
 
   _createClass(ParallelAnimationStep, [{
+    key: "with",
+    value: function _with(step) {
+      this.steps.push(step);
+      return this;
+    }
+  }, {
     key: "nextFrame",
     value: function nextFrame(now) {
       var remaining = -1;
@@ -3008,6 +3054,359 @@ function inParallel() {
 
   return _construct(ParallelAnimationStep, [stepsOrOptionsIn].concat(optionsIn));
 }
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ParallelBuilder.js":
+/*!*******************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ParallelBuilder.js ***!
+  \*******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ParallelBuilder; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+// import * as tools from '../../tools/math';
+
+// import PositionAnimationStep from './AnimationStep/ElementAnimationStep/PositionAnimationStep';
+// import SerialAnimationStep from './AnimationStep/SerialAnimationStep';
+
+
+
+var ParallelBuilder =
+/*#__PURE__*/
+function (_animation$ParallelAn) {
+  _inherits(ParallelBuilder, _animation$ParallelAn);
+
+  function ParallelBuilder() {
+    var _this;
+
+    var elementOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ParallelBuilder);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.element = elementOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ParallelBuilder).call(this, options));
+    _this.element = options.element;
+    return _possibleConstructorReturn(_this, _assertThisInitialized(_assertThisInitialized(_this)));
+  }
+
+  _createClass(ParallelBuilder, [{
+    key: "custom",
+    value: function custom() {
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
+      }
+
+      this.with(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"], optionsIn));
+      return this;
+    }
+  }, {
+    key: "rotation",
+    value: function rotation() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["RotationAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "position",
+    value: function position() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PositionAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "scale",
+    value: function scale() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ScaleAnimationStep"](options));
+      }
+
+      return this;
+    } // moveTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+    // positionTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+
+  }, {
+    key: "transform",
+    value: function transform() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          optionsIn[_key6] = arguments[_key6];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["TransformAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "scenario",
+    value: function scenario() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          optionsIn[_key7] = arguments[_key7];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(options.element.anim.scenario(options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "color",
+    value: function color() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          optionsIn[_key8] = arguments[_key8];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "opacity",
+    value: function opacity() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["OpacityAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "dissolveOut",
+    value: function dissolveOut() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len10 = arguments.length, args = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
+        args[_key10 - 1] = arguments[_key10];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveOut"](options));
+      return this;
+    }
+  }, {
+    key: "dissolveIn",
+    value: function dissolveIn() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+        args[_key11 - 1] = arguments[_key11];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveIn"](options));
+      return this;
+    }
+  }, {
+    key: "delay",
+    value: function delay() {
+      var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
+        args[_key12 - 1] = arguments[_key12];
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
+      return this;
+    }
+  }, {
+    key: "trigger",
+    value: function trigger() {
+      var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        optionsIn[_key13 - 1] = arguments[_key13];
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inParallel",
+    value: function inParallel() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        optionsIn[_key14 - 1] = arguments[_key14];
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inSerial",
+    value: function inSerial() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        optionsIn[_key15 - 1] = arguments[_key15];
+      }
+
+      this.with(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      var defaultOptions = {
+        element: this.element
+      };
+
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16), _key16 = 0; _key16 < _len16; _key16++) {
+        optionsIn[_key16] = arguments[_key16];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      this.with(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PulseAnimationStep"](options));
+      return this;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      this.steps = [];
+      this.state = 'idle';
+    } // whenFinished(callback: (boolean) => void) {
+    //   super.whenFinished(callback);
+    //   return this;
+    // }
+
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var newBuilder = new ParallelBuilder();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newBuilder, ['element']);
+      newBuilder.element = this.element;
+      return newBuilder;
+    }
+  }]);
+
+  return ParallelBuilder;
+}(_Animation__WEBPACK_IMPORTED_MODULE_1__["ParallelAnimationStep"]);
+
+
 
 /***/ }),
 
@@ -19553,6 +19952,21 @@ function () {
   //  fit: diagram units will be scaled so that diagram limits aspect ratio
   //       fits within the element aspect ratio
   //  '': defaults to fit keeping aspect ratio.
+  // scenarioSet: {
+  //   quiz1: [
+  //     { element: xyz, position: (), scale: (), rotation: (), length: () }
+  //     { element: abc, position: (), }
+  //   ],
+  // };
+  //  element1.scenarioSet['quiz'] = [
+  //     { element: abc, position: [1, 2], scale: 2 },
+  //     { element: xyz, position: [2, 2]},
+  //  ];
+  //  element.setScenarios('center', evenIfNotShown
+  //  element.moveToScenarios('center', 1, callback))
+  // element.animations.new()
+  //    .parallel()
+  //
   function DiagramElement() {
     var _this = this;
 
@@ -19738,6 +20152,28 @@ function () {
         }
 
         return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      scenarios: function scenarios() {
+        var defaultOptions = {};
+
+        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+          optionsIn[_key12] = arguments[_key12];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+        var elements = _this.getAllElementsWithScenario(options.target);
+
+        var steps = [];
+        var simpleOptions = {};
+        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
+        elements.forEach(function (element) {
+          steps.push(element.anim.scenario(simpleOptions));
+        });
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
+          steps: steps
+        });
       }
     };
     this.diagramLimits = diagramLimits;
@@ -20085,6 +20521,20 @@ function () {
     value: function setScenario(scenarioName) {
       var target = this.getScenarioTarget(scenarioName);
       this.setTransform(target._dup());
+    }
+  }, {
+    key: "setScenarios",
+    value: function setScenarios(scenarioName) {
+      this.setScenario(scenarioName);
+    }
+  }, {
+    key: "getAllElementsWithScenario",
+    value: function getAllElementsWithScenario(scenarioName) {
+      if (this.scenarios[scenarioName] != null) {
+        return [this];
+      }
+
+      return [];
     }
   }, {
     key: "getTimeToMoveToScenario",
@@ -21745,6 +22195,25 @@ function (_DiagramElement2) {
       }
 
       return elements;
+    }
+  }, {
+    key: "getAllElementsWithScenario",
+    value: function getAllElementsWithScenario(scenario) {
+      var elements = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.scenarios[scenario] != null) {
+          elements.push(element);
+        }
+
+        if (element.DiagramElementCollection) {
+          elements = [].concat(_toConsumableArray(elements), [element.getAllElementsWithScenario(scenario)]);
+        }
+      }
+
+      return elements;
     } // Get all ineractive elemnts, but only go as deep as a
     // DiagramElementColleciton if it is touchable or movable
 
@@ -21863,6 +22332,20 @@ function (_DiagramElement2) {
           element.unrender();
         } else {
           element.unrenderAll();
+        }
+      }
+    }
+  }, {
+    key: "setScenarios",
+    value: function setScenarios(scenarioName) {
+      var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      this.setScenario(scenarioName);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (onlyIfVisible && element.isShown || onlyIfVisible === false) {
+          element.setScenarios(scenarioName, onlyIfVisible);
         }
       }
     }

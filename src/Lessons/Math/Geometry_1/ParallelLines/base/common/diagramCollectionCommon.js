@@ -97,11 +97,6 @@ export default class CommonCollection extends CommonDiagramCollection {
       .custom({ callback: setLength2, duration: 1 })
       .whenFinished(() => { this.hasTouchableElements = true; })
       .start();
-    // this._line2.animations.new()
-    //   .scale({ target: new Point(scale, 1), duration: 1 })
-    //   .start();
-    // this.moveToScenario(this._line1, scenario, 1);
-    // this.moveToScenario(this._line2, scenario, 1);
     this.diagram.animateNextFrame();
   }
 

@@ -36,6 +36,7 @@ class Content extends PresentationLessonContent {
   addSections() {
     // const diag = this.diagram.elements;
     // const quiz = diag._quiz;
+    // const main = quiz._main;
 
     this.addSection({
       title: '',
@@ -52,7 +53,7 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      show: [],
+      // show: [main],
       hide: [],
       setSteadyState: () => {},
       setLeaveState: () => {},
