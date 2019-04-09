@@ -39,28 +39,7 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    // const collection = diag._collection;
     const opp = diag._opposite;
-
-    const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
 
     this.addSection({
       title: 'Related Angles',
@@ -81,7 +60,7 @@ class Content extends PresentationLessonContent {
       ]),
     });
 
-    this.addSection(common, {
+    this.addSection({
       title: 'Opposite Angles',
       setContent: [
         'When two lines intersect, |four_angles| are formed. These angles are |related|.',
@@ -89,13 +68,17 @@ class Content extends PresentationLessonContent {
       modifiers: {
         four_angles: click(opp.toggleAngles, [opp], colors.angle1),
       },
+      setEnterState: () => {
+        opp.setScenarios('center');
+      },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.angle1, 'a');
-        opp.setAngle(2, colors.angle1, 'b');
-        opp.setAngle(3, colors.angle1, 'c');
-        opp.setAngle(4, colors.angle1, 'd');
+        opp.updateAngles();
+        // opp.setAngle(2, colors.angle1, 'b');
+        // opp.setAngle(3, colors.angle1, 'c');
+        // opp.setAngle(4, colors.angle1, 'd');
         opp.newPageRotation(done);
       },
       setSteadyState: () => {
@@ -104,8 +87,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
-      title: 'Opposite Angles',
+    this.addSection({
       setContent: [
         'First consider angles |a| and |b|. These are |supplementary| angles, and therefore they add up to 180º.',
       ],
@@ -128,7 +110,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({ top: 0 }, [
         'Therefore we can calculate |b| from |a|:',
       ]),
@@ -152,7 +134,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({}, [
         'Next we can consider |a| and |d|, which are also |supplementary| angles and add up to 180º.',
       ]),
@@ -177,7 +159,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({ top: 0 }, [
         'Therefore, we can calculate |d| from |a|',
       ]),
@@ -203,7 +185,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({}, [
         'So we can see that the opposite angles |b| and |d| are equal.',
       ]),
@@ -227,7 +209,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({}, [
         'Doing the same exercise with angles |b| and |c|, or |d| and |c| shows that opposite angles |a| and |c| are also equal.',
       ]),
@@ -255,7 +237,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({}, [
         'More |generally|, we can see that at the intersection of two lines, the |opposite angles are always equal|, and |adjacent angles are always supplementary|.',
       ]),
@@ -283,7 +265,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: style({}, [
         'This means, if we know one angle all others can be calculated!',
       ]),
