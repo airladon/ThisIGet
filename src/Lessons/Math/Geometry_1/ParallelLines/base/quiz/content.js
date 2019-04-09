@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
@@ -11,15 +11,12 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
-//   click,
-//   centerV,
-//   highlight,
-//   clickWord,
-// } = Fig.tools.html;
+const {
+  click, style,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -40,23 +37,24 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
+      setContent: ['Move the |line| to be parallel with the other line.'],
+      modifiers: {
+        line: click(quiz.pulseLine2, [quiz], colors.lines, true, 'id__quiz__1'),
+      },
+      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+        'Move and rotate the lines to see when they are parallel.',
+        'Move the line by dragging its |middle|.',
+        'Rotate the line by dragging one of its |ends|.',
+        'The lines will have color when they are parallel.',
+        'Touch |parallel| to make the lines parallel.',
+      ]),
       interactiveElements: [
-        // interactiveItem(quiz._check),
+        'id__quiz__1', main._line2._midLine, main._line2._line,
       ],
-      setEnterState: () => {},
-      showOnly: [],
       show: [main],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setSteadyState: () => {
+        quiz.newProblem();
+      },
     });
   }
 }
