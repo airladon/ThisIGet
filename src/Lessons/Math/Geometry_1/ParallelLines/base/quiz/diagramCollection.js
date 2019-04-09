@@ -6,10 +6,12 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import QuizCollection from './diagramCollectionQuiz';
+import Quiz2Collection from './diagramCollectionQuiz2';
 
 const { Transform } = Fig;
 export default class DiagramCollection extends CommonDiagramCollection {
-  _quiz: QuizCollection;
+  _quiz1: QuizCollection;
+  _quiz2: Quiz2Collection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,6 +20,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('quiz', new QuizCollection(diagram, this.layout));
+    this.add('quiz1', new QuizCollection(diagram, this.layout));
+    this.add('quiz2', new Quiz2Collection(diagram, this.layout));
   }
 }

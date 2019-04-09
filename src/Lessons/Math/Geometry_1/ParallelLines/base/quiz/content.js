@@ -32,14 +32,16 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const quiz = diag._quiz;
-    const main = quiz._main;
+    const quiz1 = diag._quiz1;
+    const quiz2 = diag._quiz2;
+    const main1 = quiz1._main;
+    const main2 = quiz1._main;
 
     this.addSection({
       title: '',
       setContent: ['Move the |line| to be parallel with the other line.'],
       modifiers: {
-        line: click(quiz.pulseLine2, [quiz], colors.lines, true, 'id__quiz__1'),
+        line: click(quiz1.pulseLine2, [quiz1], colors.lines, true, 'id__quiz__1'),
       },
       setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
         'Move and rotate the lines to see when they are parallel.',
@@ -49,11 +51,32 @@ class Content extends PresentationLessonContent {
         'Touch |parallel| to make the lines parallel.',
       ]),
       interactiveElements: [
-        'id__quiz__1', main._line2._midLine, main._line2._line,
+        'id__quiz__1', main1._line2._midLine, main1._line2._line, quiz1._check,
       ],
-      show: [main],
+      show: [main1],
       setSteadyState: () => {
-        quiz.newProblem();
+        quiz1.newProblem();
+      },
+    });
+
+    this.addSection({
+      title: '',
+      setContent: ['Select two parallel lines.'],
+      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+        'Touch a line to toggle selection.',
+        'Move lines by dragging them to help determine if parallel.',
+        'Note, there may be more than one answer to choose from!',
+      ]),
+      interactiveElements: [
+        main1._line1._midLine,
+        main1._line2._midLine,
+        main1._line3._midLine,
+        main1._line4._midLine,
+        main1._line5._midLine,
+      ],
+      show: [main1],
+      setSteadyState: () => {
+        quiz1.newProblem();
       },
     });
   }
