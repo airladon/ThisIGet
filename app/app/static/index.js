@@ -20132,7 +20132,7 @@ function () {
         }
 
         if (scenario.scale != null) {
-          target.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
+          target.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.scale));
         }
       }
 
