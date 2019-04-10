@@ -42,7 +42,7 @@ export default function lessonLayout() {
       },
     },
     mods: {
-      isInteractive: true,
+      // isInteractive: true,
       interactiveLocation: new Point(layout.length / 3 * 0.8, 0),
     },
   };

@@ -43,7 +43,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         text += `<p>${paragraph}</p>`;
       });
     }
-    const modifiedText = html.applyModifiers(text, modifiers);
+    let modifiedText = html.applyModifiers(text, modifiers);
+    modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
     this.descriptionElement.innerHTML = modifiedText;
     // console.log(modifiers)
     html.setOnClicks(modifiers, 'lesson__popup_box__action_word');

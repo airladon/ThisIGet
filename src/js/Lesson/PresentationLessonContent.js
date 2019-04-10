@@ -300,6 +300,7 @@ class Section {
           // this.content.highlightInteractiveElement(element, location);
           this.currentInteractiveItem = index;
           // break;
+          console.log(element)
           return {
             element,
             location: this.interactiveElementList[index].location,
