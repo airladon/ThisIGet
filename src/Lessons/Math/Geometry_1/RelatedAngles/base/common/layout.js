@@ -72,6 +72,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         summary: { rotation: 0 },
+        qr: { rotation: 0 },
       },
     },
   });
@@ -81,6 +82,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { rotation: 1 },
         summary: { rotation: 1 },
+        qr: { rotation: 1 },
       },
     },
   });
@@ -149,6 +151,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: [0, -0.2], scale: 1 },
         summary: { position: [1.3, 0], scale: 0.9 },
+        qr: { position: [0, 0], scale: 0.9 },
       },
     },
   };
@@ -165,6 +168,7 @@ export default function lessonLayout() {
         center: { position: [0, 0.6] },
         translate: { position: [0, 0], rotation: 0 },
         summary: { position: [0, 0.6], rotation: 0 },
+        qr: { position: [0, 0.6], rotation: 0 },
       },
     },
   });
@@ -176,6 +180,7 @@ export default function lessonLayout() {
         center: { position: [0, -0.6] },
         translate: { position: [0, -0.6], rotation: 0 },
         summary: { position: [0, -0.6], rotation: 0 },
+        qr: { position: [0, -0.6], rotation: 0 },
       },
     },
   });
@@ -191,6 +196,7 @@ export default function lessonLayout() {
       scenarios: {
         translate: { rotation: 1 },
         summary: { position: [0, 0], rotation: 1 },
+        qr: { position: [0, 0], rotation: 1 },
       },
     },
   });
@@ -257,6 +263,7 @@ export default function lessonLayout() {
         center: { position: [0, -0.2], scale: 1 },
         translate: { position: [0, -0.2], rotation: 0, scale: 1 },
         summary: { position: [1.3, 0], scale: 0.9, rotation: 0 },
+        qr: { position: [0, 0], scale: 0.9, rotation: 0 },
       },
     },
   };

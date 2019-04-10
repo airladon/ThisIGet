@@ -523,7 +523,7 @@ export default function getLessonIndex() {
           ],
           qr: [
             'Opposite',
-            'Adjacent',
+            'Alternate',
             'Corresponding',
             'Interior',
           ],

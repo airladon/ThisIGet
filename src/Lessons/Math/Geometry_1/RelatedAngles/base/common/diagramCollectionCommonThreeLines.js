@@ -143,7 +143,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.updateAngle(this._fig._angleD2, intersectT2, r);
   }
 
-  setAngle(angleId: number, color: Array<number>, text: 'string') {
+  setAngle(angleId: string, color: Array<number>, text: string) {
     const angle = this._fig[`_angle${angleId}`];
     const { isShown } = angle;
     angle.setColor(color);
@@ -170,6 +170,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     possible.forEach((angle) => {
       if (anglesArray.indexOf(angle) > -1) {
         angle.showAll();
+        angle.pulseScaleNow(1, 1.2);
       } else {
         angle.hide();
       }

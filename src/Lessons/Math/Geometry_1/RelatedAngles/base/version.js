@@ -7,7 +7,7 @@ var details = {
   uid: 'base',
   qr: [
     'Opposite',
-    'Adjacent',
+    'Alternate',
     'Corresponding',
     'Interior',
   ],

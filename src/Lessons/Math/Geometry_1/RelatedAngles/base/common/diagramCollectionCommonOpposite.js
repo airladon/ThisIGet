@@ -62,7 +62,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  setAngle(angleId: number, color: Array<number>, text: 'string') {
+  setAngle(angleId: number, color: Array<number>, text: string) {
     const angle = this._fig[`_angle${angleId}`];
     angle.setColor(color);
     angle.label.setText(text);
@@ -80,6 +80,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     possible.forEach((angle) => {
       if (anglesArray.indexOf(angle) > -1) {
         angle.showAll();
+        angle.pulseScaleNow(1, 1.2);
       } else {
         angle.hide();
       }
