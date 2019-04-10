@@ -4,10 +4,10 @@ $colors: (
   lines:              color('blue'),
   angle1:             color('red'),
   angle2:             color('green'),
-  angle3:             color('cyan'),
-  angle4:             color('yellow'),
+  angle3:             color('yellow'),
+  angle4:             color('cyan'),
   disabled:           color('grey', 'darker'),
-  intersectingLine:   color('cyan'),
+  intersectingLine:   color('blue', 'lighter'),
 );
 
 body {
