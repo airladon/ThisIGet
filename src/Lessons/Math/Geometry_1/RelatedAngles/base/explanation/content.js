@@ -292,17 +292,12 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Parallel Intersection',
       setContent: style({}, [
-        'The next scenario is when there is a line |intersecting| two |parallel| lines. In this case, |eight_angles| are formed.',
+        'The next scenario is a line |intersecting| two |parallel| lines. In this case, |eight_angles| are formed.',
       ]),
       modifiers: {
-        eight_angles: click(three.toggleAngles, [three], colors.angle1)
-        // a: highlight(colors.angle1),
-        // b: highlight(colors.angle2),
-        // c: highlight(colors.angle3),
-        // d: highlight(colors.angle4),
-      },
-      setEnterState: () => {
-        console.log(three._fig)
+        eight_angles: click(three.toggleAngles, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        parallel: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
@@ -315,17 +310,40 @@ class Content extends PresentationLessonContent {
         three.setAngle('C2', colors.angle1, 'g');
         three.setAngle('D1', colors.angle1, 'd');
         three.setAngle('D2', colors.angle1, 'h');
-        done();
-      //   opp.setAngle(2, colors.angle2, 'b');
-      //   opp.setAngle(3, colors.angle1, 'a');
-      //   opp.setAngle(4, colors.angle2, 'b');
-      //   opp.newPageRotation(done);
+        three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
         three._fig._angleA1.showAll();
-        // opp._fig._angle2.showAll();
-        // opp._fig._angle3.showAll();
-        // opp._fig._angle4.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      title: 'Corresponding Angles',
+      setContent: style({}, [
+        '|Corresponding_Angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+      ]),
+      modifiers: {
+        Corresponding_Angles: click(three.toggleCorresponding, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      transitionFromAny: (done) => {
+        three.setScenarios('center');
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three.newPageRotation(0, 1, done);
+      },
+      setSteadyState: () => {
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
       },
     });

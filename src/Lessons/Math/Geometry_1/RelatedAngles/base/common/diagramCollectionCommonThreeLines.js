@@ -84,6 +84,36 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     }
   }
 
+  pulseIntersecting() {
+    this._fig._line3.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseParallel() {
+    this._fig._line1.pulseWidth();
+    this._fig._line2.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  newPageRotation(angle: ?number, line3Angle: ?number, done: ?() => void = null) {
+    if (angle != null || line3Angle != null) {
+      this._fig.stop(true, 'noComplete');
+      this._fig.animations.new()
+        .inParallel([
+          this._fig.anim.rotation({ target: angle, velocity: 1 }),
+          this._fig._line3.anim.rotation({ target: line3Angle, velocity: 1 }),
+        ])
+        // .rotation({ target: angle, velocity: 2 })
+        // .rotation({ element: this._fig._line3, target: line3Angle, velocity: 2 })
+        .whenFinished(done)
+        .start();
+      console.log(this._fig.animations.animations[0].steps[0].steps[1].duration);
+    } else if (done != null) {
+      done();
+    }
+    this.diagram.animateNextFrame();
+  }
+
   updateIntersectingLineAngle() {
     const r = this._fig._line3.getRotation();
     const t1 = this._fig._line1.getPosition();
@@ -110,12 +140,8 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
   setAngle(angleId: number, color: Array<number>, text: 'string') {
     const angle = this._fig[`_angle${angleId}`];
     const { isShown } = angle;
-    console.log(angle.name)
-    console.log(angle.isShown)
     angle.setColor(color);
-    console.log(angle.isShown)
     angle.label.setText(text);
-    console.log(angle.isShown)
     if (!isShown) {
       angle.hide();
     }
@@ -161,6 +187,20 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
       this.showAngles(this._fig._angleD2);
     } else if (this._fig._angleD2.isShown) {
       this.showAngles(this._fig._angleA1);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleCorresponding() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles([this._fig._angleB1, this._fig._angleB2]);
+    } else if (this._fig._angleB1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleC2]);
+    } else if (this._fig._angleC1.isShown) {
+      this.showAngles([this._fig._angleD1, this._fig._angleD2]);
+    } else if (this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleA1, this._fig._angleA2]);
     }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();

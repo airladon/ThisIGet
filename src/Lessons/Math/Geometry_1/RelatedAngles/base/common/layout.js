@@ -161,9 +161,9 @@ export default function lessonLayout() {
       length: layout.length * 1.1,
       color: colors.intersectingLine,
     },
-    mods: {
-      scenarios: { center: { rotation: Math.PI / 3 } },
-    },
+    // mods: {
+    //   scenarios: { center: { rotation: Math.PI / 3 } },
+    // },
   });
 
   layout._3LinesAngleA1 = joinObjects({}, layout.angle, {
