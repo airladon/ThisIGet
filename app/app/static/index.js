@@ -853,7 +853,11 @@ function () {
           if (animation.name === name) {
             if (animation.state !== 'animating') {
               animation.start();
-              this.state = 'animating';
+              animation.finishIfZeroDuration();
+
+              if (animation.state === 'animating') {
+                this.state = 'animating';
+              }
             }
           }
         }
@@ -867,7 +871,11 @@ function () {
 
         if (animation.state !== 'animating') {
           animation.start();
-          this.state = 'animating';
+          animation.finishIfZeroDuration();
+
+          if (animation.state === 'animating') {
+            this.state = 'animating';
+          }
         }
       }
     }
@@ -1047,6 +1055,13 @@ function () {
       var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
       this.startTime = startTime;
       this.state = 'animating';
+    }
+  }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      if (this.duration === 0) {
+        this.finish();
+      }
     } // eslint-disable-next-line class-methods-use-this, no-unused-vars
 
   }, {
@@ -2241,7 +2256,8 @@ function (_ElementAnimationStep) {
       numLines: 1,
       type: 'pulse',
       duration: 1,
-      frequency: 0
+      frequency: 0,
+      stopAfterDuration: true
     };
 
     for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -2282,7 +2298,9 @@ function (_ElementAnimationStep) {
     key: "setToEnd",
     value: function setToEnd() {
       if (this.element != null) {
-        this.element.stopPulsing(true);
+        if (this.stopAfterDuration) {
+          this.element.stopPulsing(true);
+        }
       }
     }
   }, {
@@ -2958,6 +2976,20 @@ function (_AnimationStep) {
       return remaining;
     }
   }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      var state = 'finished';
+      this.steps.forEach(function (step) {
+        if (step.state !== 'finished') {
+          state = 'animating';
+        }
+      });
+
+      if (state === 'finished') {
+        this.finish();
+      }
+    }
+  }, {
     key: "startWaiting",
     value: function startWaiting() {
       _get(_getPrototypeOf(ParallelAnimationStep.prototype), "startWaiting", this).call(this);
@@ -2975,6 +3007,7 @@ function (_AnimationStep) {
 
       this.steps.forEach(function (step) {
         step.start(startTime);
+        step.finishIfZeroDuration();
       });
     }
   }, {
@@ -3160,7 +3193,31 @@ function (_AnimationStep) {
 
         if (this.steps.length > 0) {
           this.steps[0].start(startTime);
+          this.steps[0].finishIfZeroDuration();
         }
+      }
+
+      this.finishIfZeroDuration();
+    }
+  }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      var i = 0;
+      var step = this.steps[0];
+
+      while (i < this.steps.length && step.state === 'finished') {
+        i += 1;
+
+        if (i < this.steps.length) {
+          this.index = i;
+          step = this.steps[i];
+          step.start(this.steps[i - 1].startTime);
+          step.finishIfZeroDuration();
+        }
+      }
+
+      if (i === this.steps.length) {
+        this.finish();
       }
     }
   }, {

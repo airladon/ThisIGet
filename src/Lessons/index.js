@@ -510,7 +510,7 @@ export default function getLessonIndex() {
             'Corresponding',
           ],
         },
-        Version_uid_here: {
+        base: {
           title: 'Base',
           description: 'Base explanation of Topic.',
           path: 'base',
@@ -522,7 +522,10 @@ export default function getLessonIndex() {
             'summary',
           ],
           qr: [
-            'Main',
+            'Opposite',
+            'Adjacent',
+            'Corresponding',
+            'Interior',
           ],
         },
       },
