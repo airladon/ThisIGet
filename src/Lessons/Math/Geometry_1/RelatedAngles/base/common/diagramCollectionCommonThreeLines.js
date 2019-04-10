@@ -63,7 +63,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     if (angle.isShown === false) {
       return;
     }
-    const figRot = this.getRotation();
+    const figRot = this._fig.getRotation();
     // angle.setPosition(intersect);
     if (angle.angleIndex === 0) {
       angle.setAngle({
@@ -109,8 +109,16 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
 
   setAngle(angleId: number, color: Array<number>, text: 'string') {
     const angle = this._fig[`_angle${angleId}`];
+    const { isShown } = angle;
+    console.log(angle.name)
+    console.log(angle.isShown)
     angle.setColor(color);
+    console.log(angle.isShown)
     angle.label.setText(text);
+    console.log(angle.isShown)
+    if (!isShown) {
+      angle.hide();
+    }
   }
 
   showAngles(angles: Array<DiagramObjectAngle> | DiagramObjectAngle) {
