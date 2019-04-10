@@ -147,6 +147,7 @@ export default function lessonLayout() {
   layout._3LinesLine1 = joinObjects({}, layout.line, {
     name: 'line1',
     mods: {
+      interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {
         center: { position: [0, 0.6] },
         translate: { position: [0, 0], rotation: 0 },
@@ -156,6 +157,7 @@ export default function lessonLayout() {
   layout._3LinesLine2 = joinObjects({}, layout.line, {
     name: 'line2',
     mods: {
+      interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {
         center: { position: [0, -0.6] },
         translate: { position: [0, -0.6], rotation: 0 },
@@ -170,6 +172,7 @@ export default function lessonLayout() {
       angle: 1,
     },
     mods: {
+      interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {
         translate: { rotation: 1 },
       },

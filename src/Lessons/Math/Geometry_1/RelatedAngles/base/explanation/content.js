@@ -289,6 +289,11 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     this.addSection({
       title: 'Parallel Intersection',
       setContent: style({}, [
@@ -318,6 +323,11 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
     this.addSection({
       title: 'Corresponding Angles',
       setContent: style({}, [
@@ -508,10 +518,11 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({}, [
-        'In general, |corresponding_angles| are always |equal| when the two lines being intersected are parallel.',
+        'In general, |corresponding_angles| are always |equal| when the two lines being intersected are |parallel|.',
       ]),
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
@@ -535,6 +546,203 @@ class Content extends PresentationLessonContent {
         three.setAngle('D2', colors.angle1, 'd');
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Alternate Angles',
+      setContent: [
+        '|Alternate_angles| are the angles that are on opposite sides of the |intersecting| and |parallel_lines|.',
+      ],
+      modifiers: {
+        Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        parallel_lines: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'How can relationship between |alternate_angles| be determined?',
+      ],
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'First, we know |corresponding_angles| are equal.',
+      ],
+      modifiers: {
+        corresponding_angles: click(three.pulseAngles, [three], colors.angle2),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle2, 'a');
+        three.setAngle('A2', colors.angle2, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.pulseAngles();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+    this.addSection({
+      setContent: [
+        'We also know that |opposite_angles| are equal.',
+      ],
+      modifiers: {
+        opposite_angles: click(three.adjacentPulseOpposite, [three], colors.angle3),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        done();
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.disabled, 'a');
+        three.setAngle('A2', colors.angle3, 'a');
+        three.setAngle('C2', colors.angle3, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three._fig._angleC2.showAll();
+        three.adjacentPulseOpposite();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore |alternate_angles| are equal.',
+      ],
+      modifiers: {
+        alternate_angles: click(three.adjacentPulseAlternate, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        done();
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three.setAngle('C2', colors.angle1, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three._fig._angleC2.showAll();
+        three.adjacentPulseAlternate();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'In general, |alternate_angles| are always |equal| when the two lines being intersected are |parallel|.',
+      ]),
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'c');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'd');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'a');
+        three.setAngle('D1', colors.angle1, 'b');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
       },
       setLeaveState: () => {

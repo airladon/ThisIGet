@@ -226,6 +226,44 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
+  toggleAlternate() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles([this._fig._angleB1, this._fig._angleD2]);
+    } else if (this._fig._angleB1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleA2]);
+    } else if (this._fig._angleC1.isShown) {
+      this.showAngles([this._fig._angleD1, this._fig._angleB2]);
+    } else if (this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleA1, this._fig._angleC2]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngles() {
+    const angles = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+    angles.forEach((angle) => {
+      const element = this._fig[`_angle${angle}`];
+      if (element.isShown) {
+        element.pulseScaleNow(1, 1.2);
+      }
+    });
+    this.diagram.animateNextFrame();
+  }
+
+  adjacentPulseOpposite() {
+    this._fig._angleA2.pulseScaleNow(1, 1.2);
+    this._fig._angleC2.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  adjacentPulseAlternate() {
+    this._fig._angleA1.pulseScaleNow(1, 1.2);
+    this._fig._angleC2.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+
   randomTranslateLine() {
     const newY = rand(
       this.layout.moveLine.distance / 4,
