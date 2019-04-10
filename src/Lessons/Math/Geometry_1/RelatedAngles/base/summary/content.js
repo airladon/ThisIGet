@@ -92,6 +92,60 @@ class Content extends PresentationLessonContent {
         three.updateIntersectingLineAngle();
       },
     });
+
+    this.addSection({
+      title: 'Alternate Angles',
+      setContent: style({ left: 5, right: 55, centerV: true }, [
+        '|Alternate_angles| are the angles on opposite sides of the |intersecting| line that crosses |two_lines|.',
+        'When the two lines are |parallel|, the alternate angles are always |equal|.',
+      ]),
+      modifiers: {
+        Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      setSteadyState: () => {
+        three.setScenarios('summary');
+        three.setAngle('A1', colors.angle1, 'c');
+        three.setAngle('A2', colors.angle1, 'a');
+        three.setAngle('B1', colors.angle1, 'd');
+        three.setAngle('B2', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'a');
+        three.setAngle('C2', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'b');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleC1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      title: 'Interior Angles',
+      setContent: style({ left: 5, right: 55, centerV: true }, [
+        '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
+        'When the two lines are |parallel|, the interior angles always add to |180º|.',
+      ]),
+      modifiers: {
+        Interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      setSteadyState: () => {
+        three.setScenarios('summary');
+        three.setAngle('A2', colors.angle1, '180º – a');
+        three.setAngle('B2', colors.angle1, '180º – b');
+        three.setAngle('C1', colors.angle1, 'b');
+        three.setAngle('D1', colors.angle1, 'a');
+        three._fig._angleA2.showAll();
+        three._fig._angleD1.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
   }
 }
 

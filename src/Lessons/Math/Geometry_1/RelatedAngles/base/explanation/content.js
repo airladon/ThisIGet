@@ -830,7 +830,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         three.setAngle('D1', colors.disabled, 'd');
         three.setAngle('D2', colors.angle3, 'd');
-        three.setAngle('A2', colors.angle3, '180º - d');
+        three.setAngle('A2', colors.angle3, '180º – d');
         three._fig._angleD1.showAll();
         three._fig._angleD2.showAll();
         three._fig._angleA2.showAll();
@@ -856,7 +856,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         three.setAngle('D1', colors.angle1, 'd');
         three.setAngle('D2', colors.disabled, 'd');
-        three.setAngle('A2', colors.angle1, '180º - d');
+        three.setAngle('A2', colors.angle1, '180º – d');
         three._fig._angleD1.showAll();
         three._fig._angleD2.showAll();
         three._fig._angleA2.showAll();
@@ -884,8 +884,8 @@ class Content extends PresentationLessonContent {
         }
       },
       setSteadyState: () => {
-        three.setAngle('A2', colors.angle1, '180º - d');
-        three.setAngle('B2', colors.angle1, '180º - c');
+        three.setAngle('A2', colors.angle1, '180º – d');
+        three.setAngle('B2', colors.angle1, '180º – c');
         three.setAngle('C1', colors.angle1, 'c');
         three.setAngle('D1', colors.angle1, 'd');
         three._fig._angleA2.showAll();
