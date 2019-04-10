@@ -511,9 +511,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
 
     this.addSection({
@@ -547,9 +544,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -590,9 +584,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
 
     this.addSection({
@@ -624,9 +615,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
 
     this.addSection({
@@ -653,9 +641,6 @@ class Content extends PresentationLessonContent {
         three.pulseAngles();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
     this.addSection({
       setContent: [
@@ -680,9 +665,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleC2.showAll();
         three.adjacentPulseOpposite();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -709,9 +691,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleC2.showAll();
         three.adjacentPulseAlternate();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -744,9 +723,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA1.showAll();
         three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -783,9 +759,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
 
     this.addSection({
@@ -810,9 +783,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleD1.showAll();
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -839,9 +809,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleD2.showAll();
         three.pulseAngles();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -870,9 +837,6 @@ class Content extends PresentationLessonContent {
         three.interiorPulseSupplementary();
         three.updateIntersectingLineAngle();
       },
-      setLeaveState: () => {
-        leaveTranslationLine();
-      },
     });
 
     this.addSection({
@@ -898,9 +862,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three.interiorPulseinterior();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 
@@ -930,9 +891,6 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three._fig._angleD1.showAll();
         three.updateIntersectingLineAngle();
-      },
-      setLeaveState: () => {
-        leaveTranslationLine();
       },
     });
 

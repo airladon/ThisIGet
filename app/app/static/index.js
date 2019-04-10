@@ -22036,7 +22036,7 @@ function (_DiagramElement2) {
   }, {
     key: "setScenarios",
     value: function setScenarios(scenarioName) {
-      var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+      var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
 
       _get(_getPrototypeOf(DiagramElementCollection.prototype), "setScenarios", this).call(this, scenarioName);
 

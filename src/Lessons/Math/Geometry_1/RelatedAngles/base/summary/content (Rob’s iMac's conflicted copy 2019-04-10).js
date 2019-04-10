@@ -52,45 +52,44 @@ class Content extends PresentationLessonContent {
         opp.setAngle(3, colors.angle1, 'a');
         opp.setAngle(4, colors.angle1, 'b');
       },
+      showOnly: [],
       show: [
         opp._fig._line1, opp._fig._line2,
       ],
+      hide: [],
       setSteadyState: () => {
         opp._fig._angle1.showAll();
         opp._fig._angle3.showAll();
-        opp.updateAngles();
       },
+      setLeaveState: () => {},
     });
 
     this.addSection({
       title: 'Corresponding Angles',
       setContent: style({ left: 5, right: 55, centerV: true }, [
-        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+        '|Corresponding_Angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
         'When the two lines are |parallel|, corresponding angles are always |equal|.',
       ]),
       modifiers: {
-        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
-        parallel: click(three.pulseParallel, [three], colors.lines),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        Corresponding_Angles: click(three.toggleCorresponding, [three], colors.angle1),
       },
       setEnterState: () => {
-        three.setScenarios('summary');
-        three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle1, 'a');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle1, 'b');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle1, 'c');
-        three.setAngle('D1', colors.angle1, 'd');
-        three.setAngle('D2', colors.angle1, 'd');
+        opp._fig.setScenarios('summary');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle1, 'b');
+        opp.setAngle(3, colors.angle1, 'a');
+        opp.setAngle(4, colors.angle1, 'b');
       },
-      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      showOnly: [],
+      show: [
+        opp._fig._line1, opp._fig._line2,
+      ],
+      hide: [],
       setSteadyState: () => {
-        three._fig._angleA1.showAll();
-        three._fig._angleA2.showAll();
-        three.updateIntersectingLineAngle();
+        opp._fig._angle1.showAll();
+        opp._fig._angle3.showAll();
       },
+      setLeaveState: () => {},
     });
   }
 }

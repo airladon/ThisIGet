@@ -67,7 +67,14 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // Opposite
   // ////////////////////////////////////////////////////////////
-  layout.oppositeLine1 = joinObjects({}, layout.line, { name: 'line1' });
+  layout.oppositeLine1 = joinObjects({}, layout.line, {
+    name: 'line1',
+    mods: {
+      scenarios: {
+        summary: { rotation: 0 },
+      },
+    },
+  });
   layout.oppositeLine2 = joinObjects({}, layout.line, {
     name: 'line2',
     mods: {
@@ -157,6 +164,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: [0, 0.6] },
         translate: { position: [0, 0], rotation: 0 },
+        summary: { position: [0, 0.6], rotation: 0 },
       },
     },
   });
@@ -167,6 +175,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: [0, -0.6] },
         translate: { position: [0, -0.6], rotation: 0 },
+        summary: { position: [0, -0.6], rotation: 0 },
       },
     },
   });
@@ -181,6 +190,7 @@ export default function lessonLayout() {
       interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {
         translate: { rotation: 1 },
+        summary: { position: [0, 0], rotation: 1 },
       },
     },
   });
@@ -246,6 +256,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: [0, -0.2], scale: 1 },
         translate: { position: [0, -0.2], rotation: 0, scale: 1 },
+        summary: { position: [1.3, 0], scale: 0.9, rotation: 0 },
       },
     },
   };
