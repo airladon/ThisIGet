@@ -12,6 +12,8 @@ const {
 
 // const { minAngleDiff } = Fig.tools.g2;
 
+const { rand } = Fig.tools.math;
+
 export type TypeIndexAngle = {
   lineIndex: number;
   angleIndex: number;
@@ -95,6 +97,11 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
+  pulseShaddow() {
+    this._fig._line2.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
   newPageRotation(angle: ?number, line3Angle: ?number, done: ?() => void = null) {
     if (angle != null || line3Angle != null) {
       this._fig.stop(true, 'noComplete');
@@ -102,14 +109,11 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
         .inParallel([
           this._fig.anim.rotation({ target: angle, velocity: 1.5 }),
           this._fig._line3.anim.rotation({ target: line3Angle, velocity: 1 }),
+          this._fig._line1.anim.scenario({ target: 'center', velocity: 1 }),
+          this._fig._line2.anim.scenario({ target: 'center', velocity: 1 }),
         ])
-        // .rotation({ target: angle, velocity: 1 })
-        // // .rotation({ target: angle, duration: 0 })
-        // .rotation({ element: this._fig._line3, target: line3Angle, velocity: 1 })
         .whenFinished(done)
         .start();
-      // const a = this._fig.animations.animations[0].steps[0].steps[0];
-      // console.log('asdf', a.rotation.start, a.rotation.target, a.rotation.delta, a.duration, a.rotation.velocity);
     } else if (done != null) {
       done();
     }
@@ -194,6 +198,20 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
+  toggle4Angles() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles(this._fig._angleB1);
+    } else if (this._fig._angleB1.isShown) {
+      this.showAngles(this._fig._angleC1);
+    } else if (this._fig._angleC1.isShown) {
+      this.showAngles(this._fig._angleD1);
+    } else if (this._fig._angleD1.isShown) {
+      this.showAngles(this._fig._angleA1);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
   toggleCorresponding() {
     if (this._fig._angleA1.isShown) {
       this.showAngles([this._fig._angleB1, this._fig._angleB2]);
@@ -208,118 +226,27 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
-  // newPageRotation(done: ?() => void = null) {
-  //   const line1 = this._fig._line1;
-  //   const line2 = this._fig._line2;
-  //   const r1 = line1.getRotation();
-  //   const r2 = line2.getRotation();
-  //   const minAngle = minAngleDiff(r2, r1);
-  //   this._fig.stop(true, 'noComplete');
-  //   if (Math.abs(minAngle) < 0.3) {
-  //     line2.animations.new()
-  //       .rotation({ target: 1, duration: 0.5 })
-  //       .whenFinished(done)
-  //       .start();
-  //     line1.animations.new()
-  //       .rotation({ target: 0, duration: 0.5 })
-  //       .start();
-  //   } else if (done != null) {
-  //     done();
-  //   }
-  //   this.diagram.animateNextFrame();
-  // }
+  randomTranslateLine() {
+    const newY = rand(
+      this.layout.moveLine.distance / 4,
+      this.layout.moveLine.distance / 2,
+    );
+    this.shaddowLine1();
+    const p1 = this._fig._line1.getPosition();
+    let target = p1.add(0, newY);
+    if (p1.y > 0) {
+      target = p1.sub(0, newY);
+    }
+    this._fig._line1.stop(true, 'noComplete');
+    this._fig._line1.animations.new()
+      .position({ target, duration: 0.7 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
 
-  // setAngle(angleId: number, color: Array<number>, text: 'string') {
-  //   const angle = this._fig[`_angle${angleId}`];
-  //   angle.setColor(color);
-  //   angle.label.setText(text);
-  // }
-
-  // showAngles(angles: Array<DiagramObjectAngle> | DiagramObjectAngle) {
-  //   let anglesArray = [];
-  //   if (!Array.isArray(angles)) {
-  //     anglesArray = [angles];
-  //   } else {
-  //     anglesArray = angles;
-  //   }
-  //   const fig = this._fig;
-  //   const possible = [fig._angle1, fig._angle2, fig._angle3, fig._angle4];
-  //   possible.forEach((angle) => {
-  //     if (anglesArray.indexOf(angle) > -1) {
-  //       angle.showAll();
-  //     } else {
-  //       angle.hide();
-  //     }
-  //   });
-  // }
-
-  // toggleAngles() {
-  //   if (this._fig._angle1.isShown) {
-  //     this.showAngles(this._fig._angle2);
-  //   } else if (this._fig._angle2.isShown) {
-  //     this.showAngles(this._fig._angle3);
-  //   } else if (this._fig._angle3.isShown) {
-  //     this.showAngles(this._fig._angle4);
-  //   } else if (this._fig._angle4.isShown) {
-  //     this.showAngles(this._fig._angle1);
-  //   }
-  //   this.updateAngles();
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // updateAngles() {
-  //   const line1 = this._fig._line1;
-  //   const line2 = this._fig._line2;
-  //   const angle1 = this._fig._angle1;
-  //   const angle2 = this._fig._angle2;
-  //   const angle3 = this._fig._angle3;
-  //   const angle4 = this._fig._angle4;
-
-  //   const r1 = line1.getRotation();
-  //   const r2 = line2.getRotation();
-  //   const minAngle = minAngleDiff(r2, r1);
-  //   if (angle1.isShown) {
-  //     if (minAngle > 0) {
-  //       angle1.setAngle({ rotation: r1, angle: minAngle });
-  //     } else {
-  //       angle1.setAngle({ rotation: r1, angle: Math.PI - Math.abs(minAngle) });
-  //     }
-  //   }
-  //   if (angle2.isShown) {
-  //     if (minAngle > 0) {
-  //       angle2.setAngle({
-  //         rotation: r1 + Math.PI - (Math.PI - minAngle),
-  //         angle: Math.PI - minAngle,
-  //       });
-  //     } else {
-  //       angle2.setAngle({
-  //         rotation: r1 + Math.PI - Math.abs(minAngle),
-  //         angle: Math.abs(minAngle),
-  //       });
-  //     }
-  //   }
-  //   if (angle3.isShown) {
-  //     if (minAngle > 0) {
-  //       angle3.setAngle({ rotation: r1 + Math.PI, angle: minAngle });
-  //     } else {
-  //       angle3.setAngle({
-  //         rotation: r1 + Math.PI,
-  //         angle: Math.PI - Math.abs(minAngle),
-  //       });
-  //     }
-  //   }
-  //   if (angle4.isShown) {
-  //     if (minAngle > 0) {
-  //       angle4.setAngle({
-  //         rotation: r1 + 2 * Math.PI - (Math.PI - minAngle),
-  //         angle: Math.PI - minAngle,
-  //       });
-  //     } else {
-  //       angle4.setAngle({
-  //         rotation: r1 + 2 * Math.PI - Math.abs(minAngle),
-  //         angle: Math.abs(minAngle),
-  //       });
-  //     }
-  //   }
-  // }
+  shaddowLine1() {
+    const p = this._fig._line1.getPosition();
+    this._fig._line2.setPosition(p);
+    this.diagram.animateNextFrame();
+  }
 }

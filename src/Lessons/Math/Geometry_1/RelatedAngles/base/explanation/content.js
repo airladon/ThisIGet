@@ -321,10 +321,10 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Corresponding Angles',
       setContent: style({}, [
-        '|Corresponding_Angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
       ]),
       modifiers: {
-        Corresponding_Angles: click(three.toggleCorresponding, [three], colors.angle1),
+        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
       },
@@ -345,7 +345,200 @@ class Content extends PresentationLessonContent {
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
-        console.log(this.sections[11])
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'How are |corresponding_Angles| related? We can examine this by looking at just one intersection.',
+      ]),
+      modifiers: {
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      transitionFromAny: (done) => {
+        three.setScenarios('center');
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three.newPageRotation(0, 1, done);
+      },
+      setSteadyState: () => {
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    const enterTranslateLine = () => {
+      three._fig._line1.move.type = 'translation';
+      three._fig._line1.move.element = null;
+      three._fig._line1.setTransformCallback = three._fig._line3.setTransformCallback;
+      three._fig._line1.move.limitLine = layout.moveLine;
+      three._fig._line3.isTouchable = false;
+      three._fig._line3.isInteractive = false;
+      three._fig._line2.isTouchable = false;
+      three._fig._line2.isInteractive = false;
+      three._fig._line2.setColor(colors.disabled);
+    };
+    const leaveTranslationLine = () => {
+      three._fig._line1.move.type = 'rotation';
+      three._fig._line1.move.element = three._fig;
+      three._fig._line1.setTransformCallback = null;
+      three._fig._line1.move.limitLine = null;
+      three._fig._line3.isTouchable = true;
+      three._fig._line3.isInteractive = null;
+      three._fig._line2.isTouchable = true;
+      three._fig._line2.isInteractive = null;
+      three._fig._line2.setColor(colors.lines);
+    };
+
+    this.addSection({
+      setContent: style({}, [
+        'At one intersection there are four |angles| formed. When one line is |moved| without rotation, those angles stay the same.',
+      ]),
+      modifiers: {
+        angles: click(three.toggle4Angles, [three], colors.angle1),
+        moved: click(three.randomTranslateLine, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3],
+      transitionFromAny: (done) => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        enterTranslateLine();
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('translate');
+          done();
+        } else if (this.comingFrom === 'prev') {
+          three._fig.stop(true, 'noComplete');
+          three._fig.animations.new()
+            .inParallel([
+              three._fig.anim.rotation({ target: 0, velocity: 2 }),
+              three._fig._line3.anim.rotation({ target: 1, velocity: 2 }),
+              three._fig._line1.anim.scenario({ target: 'translate', duration: 0.5 }),
+            ])
+            .whenFinished(done)
+            .start();
+        } else {
+          done();
+        }
+      },
+      setSteadyState: () => {
+        three._fig._angleA1.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+    this.addSection({
+      setContent: style({}, [
+        '|Moving| a line without rotation means it is |parallel| to its |original| location.',
+      ]),
+      modifiers: {
+        original: click(three.pulseShaddow, [three], colors.disabled),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+        Moving: click(three.randomTranslateLine, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      setSteadyState: () => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('translate');
+        }
+        if (this.comingFrom === 'prev') {
+          three.shaddowLine1();
+        }
+        enterTranslateLine();
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'Therefore comparing the |original| and |moved| line, shows |corresponding_angles| are |equal|.',
+      ]),
+      modifiers: {
+        original: click(three.pulseShaddow, [three], colors.disabled),
+        moved: click(three.randomTranslateLine, [three], colors.lines),
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('translate');
+          done();
+        } else if (this.comingFrom === 'next') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
+      },
+      setSteadyState: () => {
+        enterTranslateLine();
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.disabled, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.disabled, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.disabled, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'In general, |corresponding_angles| are always |equal| when the two lines being intersected are parallel.',
+      ]),
+      modifiers: {
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else if (this.comingFrom === 'prev') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
       },
     });
   }

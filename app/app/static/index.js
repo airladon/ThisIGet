@@ -737,7 +737,7 @@ function () {
     value: function nextFrame(now) {
       // console.log('animation manager', now)
       var animationsToRemove = [];
-      var remaining = -1;
+      var remaining = null;
       var isAnimating = false;
       this.animations.forEach(function (animation, index) {
         var animationIsAnimating = false;
@@ -745,7 +745,7 @@ function () {
         if (animation.state === 'waitingToStart' || animation.state === 'animating') {
           var stepRemaining = animation.nextFrame(now);
 
-          if (remaining === -1) {
+          if (remaining === null) {
             remaining = stepRemaining;
           }
 
@@ -1011,13 +1011,13 @@ function () {
         this.startTime = now - this.startTimeOffset;
       }
 
-      var remainingTime = 0;
       var deltaTime = now - this.startTime;
+      var remainingTime = -(this.duration + this.startDelay - deltaTime);
 
       if (deltaTime >= this.startDelay) {
         var deltaTimeAfterDelay = deltaTime - this.startDelay;
 
-        if (deltaTimeAfterDelay > this.duration) {
+        if (deltaTimeAfterDelay >= this.duration) {
           remainingTime = deltaTimeAfterDelay - this.duration;
           deltaTimeAfterDelay = this.duration;
         }
@@ -1032,7 +1032,7 @@ function () {
           this.afterFrame(deltaTimeAfterDelay / this.duration);
         }
 
-        if (remainingTime > 0) {
+        if (remainingTime >= 0) {
           this.finish();
         }
       }
@@ -2270,6 +2270,7 @@ function (_ElementAnimationStep) {
     _this.numLines = options.numLines;
     _this.duration = options.duration;
     _this.frequency = options.frequency;
+    _this.stopAfterDuration = options.stopAfterDuration;
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -2956,20 +2957,26 @@ function (_AnimationStep) {
   }, {
     key: "nextFrame",
     value: function nextFrame(now) {
-      var remaining = -1;
+      var remaining = null;
       this.steps.forEach(function (step) {
-        var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
+        if (step.state === 'animating' || step.state === 'waitingToStart') {
+          var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
 
-        if (remaining === -1) {
-          remaining = stepRemaining;
-        }
+          if (remaining === null) {
+            remaining = stepRemaining;
+          }
 
-        if (stepRemaining < remaining) {
-          remaining = stepRemaining;
+          if (stepRemaining < remaining) {
+            remaining = stepRemaining;
+          }
         }
       });
 
-      if (remaining > 0) {
+      if (remaining === null) {
+        remaining = 0;
+      }
+
+      if (remaining >= 0) {
         this.finish();
       }
 
@@ -3228,7 +3235,7 @@ function (_AnimationStep) {
       if (this.index <= this.steps.length - 1) {
         remaining = this.steps[this.index].nextFrame(now); // console.log('serial', now, this.index, remaining)
 
-        if (remaining > 0) {
+        if (remaining >= 0) {
           if (this.index === this.steps.length - 1) {
             this.finish();
             return remaining;
@@ -24940,9 +24947,17 @@ function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform
   var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
   var deltaTransform = stopTransform.sub(startTransform);
   var time = 0;
+  var velocityTransformToUse;
+
+  if (typeof velocityTransform === 'number') {
+    velocityTransformToUse = startTransform._dup().constant(velocityTransform);
+  } else {
+    velocityTransformToUse = velocityTransform;
+  }
+
   deltaTransform.order.forEach(function (delta, index) {
     if (delta instanceof Translation || delta instanceof Scale) {
-      var v = velocityTransform.order[index];
+      var v = velocityTransformToUse.order[index];
 
       if ((v instanceof Translation || v instanceof Scale) && v.x !== 0 && v.y !== 0) {
         var xTime = Math.abs(delta.x) / v.x;
@@ -24959,7 +24974,7 @@ function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform
       var rotDiff = getDeltaAngle(start.r, target.r, rotDirection); // eslint-disable-next-line no-param-reassign
 
       delta.r = rotDiff;
-      var _v = velocityTransform.order[index];
+      var _v = velocityTransformToUse.order[index];
 
       if (_v instanceof Rotation && _v !== 0) {
         var rTime = Math.abs(delta.r / _v.r);

@@ -5,6 +5,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 const {
   Point,
   Transform,
+  Line,
   // Line,
 } = Fig.tools.g2;
 
@@ -146,13 +147,19 @@ export default function lessonLayout() {
   layout._3LinesLine1 = joinObjects({}, layout.line, {
     name: 'line1',
     mods: {
-      scenarios: { center: { position: [0, 0.6] } },
+      scenarios: {
+        center: { position: [0, 0.6] },
+        translate: { position: [0, 0], rotation: 0 },
+      },
     },
   });
   layout._3LinesLine2 = joinObjects({}, layout.line, {
     name: 'line2',
     mods: {
-      scenarios: { center: { position: [0, -0.6] } },
+      scenarios: {
+        center: { position: [0, -0.6] },
+        translate: { position: [0, -0.6], rotation: 0 },
+      },
     },
   });
   layout._3LinesLine3 = joinObjects({}, layout.line, {
@@ -162,10 +169,19 @@ export default function lessonLayout() {
       color: colors.intersectingLine,
       angle: 1,
     },
-    // mods: {
-    //   scenarios: { center: { rotation: Math.PI / 3 } },
-    // },
+    mods: {
+      scenarios: {
+        translate: { rotation: 1 },
+      },
+    },
   });
+  layout.moveLine = new Line(new Point(0, -0.8), 1.6, Math.PI / 2);
+  // layout._3LinesLine4 = joinObjects({}, layout.line, {
+  //   name: 'line4',
+  //   options: {
+  //     color: colors.intersectingLine,
+  //   },
+  // });
 
   layout._3LinesAngleA1 = joinObjects({}, layout.angle, {
     name: 'angleA1',
@@ -205,21 +221,22 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
-      layout._3LinesAngleA1,
       layout._3LinesAngleA2,
-      layout._3LinesAngleB1,
+      layout._3LinesAngleA1,
       layout._3LinesAngleB2,
-      layout._3LinesAngleC1,
+      layout._3LinesAngleB1,
       layout._3LinesAngleC2,
-      layout._3LinesAngleD1,
+      layout._3LinesAngleC1,
       layout._3LinesAngleD2,
-      layout._3LinesLine1,
+      layout._3LinesAngleD1,
       layout._3LinesLine2,
+      layout._3LinesLine1,
       layout._3LinesLine3,
     ],
     mods: {
       scenarios: {
         center: { position: [0, -0.2], scale: 1 },
+        translate: { position: [0, -0.2], rotation: 0, scale: 1 },
       },
     },
   };
