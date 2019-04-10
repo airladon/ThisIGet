@@ -160,6 +160,7 @@ export default function lessonLayout() {
     options: {
       length: layout.length * 1.1,
       color: colors.intersectingLine,
+      angle: 1,
     },
     // mods: {
     //   scenarios: { center: { rotation: Math.PI / 3 } },

@@ -345,7 +345,7 @@ class Content extends PresentationLessonContent {
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
-        console.log(three)
+        console.log(this.sections[11])
       },
     });
   }

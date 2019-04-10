@@ -99,13 +99,13 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     if (angle != null || line3Angle != null) {
       this._fig.stop(true, 'noComplete');
       this._fig.animations.new()
-        // .inParallel([
-        //   this._fig.anim.rotation({ target: angle, velocity: 2 }),
-        //   this._fig._line3.anim.rotation({ target: line3Angle, velocity: 0.2 }),
-        // ])
-        .rotation({ target: angle, duration: 0 })
-        // .rotation({ target: angle, duration: 0 })
-        .rotation({ element: this._fig._line3, target: line3Angle, duration: 0.1 })
+        .inParallel([
+          this._fig.anim.rotation({ target: angle, velocity: 1.5 }),
+          this._fig._line3.anim.rotation({ target: line3Angle, velocity: 1 }),
+        ])
+        // .rotation({ target: angle, velocity: 1 })
+        // // .rotation({ target: angle, duration: 0 })
+        // .rotation({ element: this._fig._line3, target: line3Angle, velocity: 1 })
         .whenFinished(done)
         .start();
       // const a = this._fig.animations.animations[0].steps[0].steps[0];
