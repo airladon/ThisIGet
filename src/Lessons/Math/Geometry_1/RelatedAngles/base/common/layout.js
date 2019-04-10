@@ -70,7 +70,12 @@ export default function lessonLayout() {
   layout.oppositeLine1 = joinObjects({}, layout.line, { name: 'line1' });
   layout.oppositeLine2 = joinObjects({}, layout.line, {
     name: 'line2',
-    mods: { scenarios: { center: { rotation: 1 } } },
+    mods: {
+      scenarios: {
+        center: { rotation: 1 },
+        summary: { rotation: 1 },
+      },
+    },
   });
   layout.oppositeAngle1 = joinObjects({}, layout.angle, {
     name: 'angle1',
@@ -136,6 +141,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: [0, -0.2], scale: 1 },
+        summary: { position: [1.3, 0], scale: 0.9 },
       },
     },
   };

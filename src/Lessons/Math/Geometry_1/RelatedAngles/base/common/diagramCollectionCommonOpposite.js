@@ -100,6 +100,16 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  toggleOpposite() {
+    if (this._fig._angle1.isShown) {
+      this.showAngles([this._fig._angle2, this._fig._angle4]);
+    } else if (this._fig._angle2.isShown) {
+      this.showAngles([this._fig._angle1, this._fig._angle3]);
+    }
+    this.updateAngles();
+    this.diagram.animateNextFrame();
+  }
+
   updateAngles() {
     const line1 = this._fig._line1;
     const line2 = this._fig._line2;

@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -9,15 +9,15 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   click,
-//   centerV,
-// } = Fig.tools.html;
+const {
+  click,
+  style,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,30 +32,35 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const opp = diag._opposite;
+    const three = diag._threeLines;
 
     this.addSection({
-      title: '',
-      setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
-      ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
+      title: 'Opposite Angles',
+      setContent: style({ left: 5, right: 55, centerV: true }, [
+        'When two lines intersect, four angles are created.',
+        '|Opposite_angles| at the intersection are |equal|.',
+      ]),
+      modifiers: {
+        Opposite_angles: click(opp.toggleOpposite, [opp], colors.angle1),
+      },
+      setEnterState: () => {
+        opp._fig.setScenarios('summary');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle1, 'b');
+        opp.setAngle(3, colors.angle1, 'a');
+        opp.setAngle(4, colors.angle1, 'b');
+      },
       showOnly: [],
-      show: [],
+      show: [
+        opp._fig._line1, opp._fig._line2,
+      ],
       hide: [],
-      setSteadyState: () => {},
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle3.showAll();
+      },
       setLeaveState: () => {},
     });
   }
