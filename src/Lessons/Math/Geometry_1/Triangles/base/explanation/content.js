@@ -13,14 +13,14 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   style,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -39,9 +39,9 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const collection = diag._collection;
-    const examples = collection._examples;
-    const custom = collection._customTriangle;
+    const coll = diag._collection;
+    const examples = coll._examples;
+    const custom = coll._customTriangle;
 
     // const common = {
     //   setContent: '',
@@ -76,13 +76,19 @@ class Content extends PresentationLessonContent {
       setContent: [
         'Another way to make a triangle is to draw lines between any |three_points|.',
       ],
-      show: [custom],
-      setSteadyState: () => {
-        console.log(custom)
-        // custom._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
-        // console.log(custom._pad0.move.maxTransform.t())
-        // console.log(custom._pad1.move.maxTransform.t())
+      modifiers: {
+        three_points: click(coll.newCustomTriangle, [coll, null], colors.pads),
       },
+      show: [custom],
+      transitionFromAny: (done) => {
+        coll.newCustomTriangle(done);
+      },
+      // setSteadyState: () => {
+      //   console.log(custom)
+      //   // custom._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
+      //   // console.log(custom._pad0.move.maxTransform.t())
+      //   // console.log(custom._pad1.move.maxTransform.t())
+      // },
     });
   }
 }

@@ -87,7 +87,7 @@ export default function lessonLayout() {
   //   Variable Triangle
   // ////////////////////////////////////////////////////////
 
-  const customTriangle = {
+  layout.customTriangle = {
     name: 'customTriangle',
     method: 'polyLine',
     options: {
@@ -106,7 +106,7 @@ export default function lessonLayout() {
         fill: true,
         isMovable: true,
         touchRadius: 0.4,
-        boundary: [-3, -2, 6, 3.5],
+        boundary: [-2.9, -1.9, 5.8, 3.3],
       },
       position: new Point(0, 0),
     },
@@ -114,7 +114,7 @@ export default function lessonLayout() {
 
   layout.addElements = [
     triangleExamples,
-    customTriangle,
+    layout.customTriangle,
   ];
 
 

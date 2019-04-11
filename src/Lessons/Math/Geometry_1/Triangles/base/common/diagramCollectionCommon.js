@@ -6,10 +6,15 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
-  Transform, Rect
+  DiagramObjectPolyLine,
+  Transform,
 } = Fig;
 
+const { removeRandElement, rand } = Fig.tools.math;
+
 export default class CommonCollection extends CommonDiagramCollection {
+  _customTriangle: DiagramObjectPolyLine;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -20,8 +25,38 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
     this._customTriangle._pad0.makeTouchable();
-    // this._customTriangle._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
-    // console.log(this._customTriangle._pad0.move.maxTransform.t())
-    // console.log(this._customTriangle._pad1.move.maxTransform.t())
+  }
+
+  randomCustomTriangle() {
+    const { boundary, radius } = this.layout.customTriangle.options.pad;
+    const boundaryTop = boundary[1] + boundary[3] - radius;
+    const boundaryRight = boundary[0] + boundary[2] - radius;
+    const quadrants = [1, 2, 3, 4];
+    const pads = [0, 1, 2];
+    pads.forEach((pad) => {
+      const quadrant = removeRandElement(quadrants);
+      let x = rand(0.3, boundaryRight);
+      let y = rand(0.3, boundaryTop);
+      if (quadrant === 2 || quadrant === 3) {
+        x *= -1;
+      }
+      if (quadrant === 3 || quadrant === 4) {
+        y *= -1;
+      }
+      this._customTriangle[`_pad${pad}`].scenarios.next = {
+        position: [x, y],
+        rotation: 0,
+      };
+    });
+  }
+
+  newCustomTriangle(callback: ?() => void = null) {
+    this.randomCustomTriangle();
+    this._customTriangle.stop(true, 'noComplete');
+    this._customTriangle.animations.new()
+      .scenarios({ target: 'next', duration: 1.5 })
+      .whenFinished(callback)
+      .start();
+    this.diagram.animateNextFrame();
   }
 }
