@@ -2,8 +2,10 @@
 
 $colors: (
   lines:              color('blue'),
-  angle1:             color('red'),
-  angle2:             color('green'),
+  sideLengths:        color('yellow'),
+  angles:             color('green'),
+  angle1:             color('green'),
+  angle2:             color('red'),
   angle3:             color('yellow'),
   disabled:           color('grey', 'darker'),
   parallel:           color('red'),

@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const examples = coll._examples;
     const custom = coll._customTriangle;
+    const prop = coll._propertyTriangle;
 
     // const common = {
     //   setContent: '',
@@ -79,16 +80,43 @@ class Content extends PresentationLessonContent {
       modifiers: {
         three_points: click(coll.newCustomTriangle, [coll, null], colors.pads),
       },
-      show: [custom],
+      show: [
+        custom._line, custom._pad0, custom._pad1, custom._pad2,
+      ],
       transitionFromAny: (done) => {
         coll.newCustomTriangle(done);
       },
-      // setSteadyState: () => {
-      //   console.log(custom)
-      //   // custom._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
-      //   // console.log(custom._pad0.move.maxTransform.t())
-      //   // console.log(custom._pad1.move.maxTransform.t())
-      // },
+    });
+
+    this.addSection({
+      setContent: [
+        'What properties does a triangle have? Well, its definition gives us some, |three_side_lengths|, and |three_angles|.',
+      ],
+      modifiers: {
+        three_side_lengths: click(coll.growSides, [coll], colors.sideLengths),
+        three_angles: click(coll.pulseAngles, [coll], colors.angles),
+      },
+      show: [custom._line],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'prev') {
+          custom.stop(true, 'noComplete');
+          custom.animations.new()
+            .scenarios({ target: 'props', duration: 1 })
+            .whenFinished(done)
+            .start();
+        } else {
+          custom.setScenarios('props');
+          done();
+        }
+      },
+      setSteadyState: () => {
+        custom._angle0.showAll();
+        custom._angle1.showAll();
+        custom._angle2.showAll();
+        custom._side01.showAll();
+        custom._side12.showAll();
+        custom._side20.showAll();
+      },
     });
   }
 }

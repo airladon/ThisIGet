@@ -16,9 +16,11 @@ const cssColorNames = [
   'angle1',
   'angle2',
   'angle3',
+  'angles',
   'disabled',
   'parallel',
   'pads',
+  'sideLengths',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -108,7 +110,30 @@ export default function lessonLayout() {
         touchRadius: 0.4,
         boundary: [-2.9, -1.9, 5.8, 3.3],
       },
-      position: new Point(0, 0),
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.3,
+          width: layout.width,
+        },
+        autoRightAngle: false,
+      },
+      side: {
+        offset: 0.3,
+        color: colors.sideLengths,
+        showLine: true,
+        width: layout.width / 2,
+        vertexSpaceStart: 'center',
+        arrows: {
+          width: 0.08,
+          height: 0.08,
+        },
+      },
+    },
+    mods: {
+      _pad0: { scenarios: { props: { position: [2, -1.3] } } },
+      _pad1: { scenarios: { props: { position: [-2, -1.3] } } },
+      _pad2: { scenarios: { props: { position: [-1, 0.5] } } },
     },
   };
 
@@ -116,7 +141,5 @@ export default function lessonLayout() {
     triangleExamples,
     layout.customTriangle,
   ];
-
-
   return layout;
 }

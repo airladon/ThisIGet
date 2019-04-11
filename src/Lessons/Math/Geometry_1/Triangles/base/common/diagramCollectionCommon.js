@@ -59,4 +59,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       .start();
     this.diagram.animateNextFrame();
   }
+
+  pulseAngles() {
+    this._customTriangle._angle0.pulseScaleNow(1, 1.5);
+    this._customTriangle._angle1.pulseScaleNow(1, 1.5);
+    this._customTriangle._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  growSides() {
+    this._customTriangle._side01.grow(0, 1.5);
+    this._customTriangle._side12.grow(0, 1.5);
+    this._customTriangle._side20.grow(0, 1.5);
+    this.diagram.animateNextFrame();
+  }
 }

@@ -14752,11 +14752,17 @@ function (_DiagramElementCollec) {
           var _name3 = "angle".concat(_i4);
 
           if (this.elements[_name3] != null) {
+            var wasHidden = !this.elements[_name3].isShown;
+
             this.elements[_name3].setAngle({
               p1: newPoints[k],
               p2: newPoints[_i4],
               p3: newPoints[_j2]
             });
+
+            if (wasHidden) {
+              this.elements[_name3].hide();
+            }
           }
         }
       }
