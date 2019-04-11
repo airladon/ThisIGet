@@ -6,7 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
-  Transform,
+  Transform, Rect
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -19,5 +19,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
+    this._customTriangle._pad0.makeTouchable();
+    // this._customTriangle._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
+    // console.log(this._customTriangle._pad0.move.maxTransform.t())
+    // console.log(this._customTriangle._pad1.move.maxTransform.t())
   }
 }

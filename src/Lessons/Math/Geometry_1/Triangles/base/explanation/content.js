@@ -41,6 +41,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const collection = diag._collection;
     const examples = collection._examples;
+    const custom = collection._customTriangle;
 
     // const common = {
     //   setContent: '',
@@ -69,6 +70,19 @@ class Content extends PresentationLessonContent {
         `${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html()}`,
       ],
       show: [examples],
+    });
+
+    this.addSection({
+      setContent: [
+        'Another way to make a triangle is to draw lines between any |three_points|.',
+      ],
+      show: [custom],
+      setSteadyState: () => {
+        console.log(custom)
+        // custom._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
+        // console.log(custom._pad0.move.maxTransform.t())
+        // console.log(custom._pad1.move.maxTransform.t())
+      },
     });
   }
 }

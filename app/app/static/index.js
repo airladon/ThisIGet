@@ -14338,6 +14338,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -14454,7 +14462,9 @@ function (_DiagramElementCollec) {
       radius: 0.1,
       color: options.color == null ? [0, 1, 0, 1] : options.color,
       fill: true,
-      isMovable: false
+      isMovable: false,
+      boundary: 'diagram',
+      touchRadiusInBoundary: false
     };
 
     if (options.side != null) {
@@ -14503,23 +14513,25 @@ function (_DiagramElementCollec) {
     _this.largerTouchBorder = optionsToUse.largerTouchBorder;
     _this.isTouchDevice = isTouchDevice;
     _this.animateNextFrame = animateNextFrame;
-    _this.position = optionsToUse.position;
+    _this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
 
     _this.transform.updateTranslation(_this.position);
 
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
-    _this.points = optionsToUse.points; // Add Pads
+    _this.points = optionsToUse.points.map(function (p) {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+    }); // Add Pads
 
     if (optionsToUse.pad) {
       var pad = optionsToUse.pad;
-      var pCount = optionsToUse.points.length;
+      var pCount = _this.points.length;
       var padArray = makeArray(pad, pCount);
 
       var _loop = function _loop(i) {
         var name = "pad".concat(i);
         var padOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(optionsToUse.points[i])
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(_this.points[i])
         }, padArray[i]);
 
         var padShape = _this.shapes.polygon(padOptions);
@@ -14527,8 +14539,33 @@ function (_DiagramElementCollec) {
         if (padArray[i].isMovable) {
           padShape.isMovable = true;
           padShape.isTouchable = true;
-          padShape.move.limitToDiagram = true;
-          padShape.setMoveBoundaryToDiagram();
+
+          if (padArray[i].touchRadius != null) {
+            var multiplier = padArray[i].touchRadius / padArray[i].radius;
+            padShape.increaseBorderSize(multiplier);
+          }
+
+          var boundary = pad.boundary;
+
+          if (boundary === 'diagram') {
+            boundary = shapes.limits._dup();
+          } else if (Array.isArray(boundary)) {
+            var _boundary = boundary,
+                _boundary2 = _slicedToArray(_boundary, 4),
+                left = _boundary2[0],
+                bottom = _boundary2[1],
+                width = _boundary2[2],
+                height = _boundary2[3];
+
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
+          }
+
+          if (pad.touchRadiusInBoundary === false && pad.touchRadius != null) {
+            var delta = pad.touchRadius - pad.radius;
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundary.left - delta, boundary.bottom - delta, boundary.width + 2 * delta, boundary.height + 2 * delta);
+          }
+
+          padShape.setMoveBoundaryToDiagram(boundary);
 
           padShape.setTransformCallback = function (transform) {
             var index = parseInt(padShape.name.slice(3), 10);
@@ -14540,11 +14577,6 @@ function (_DiagramElementCollec) {
               _this.updatePoints(_this.points);
             }
           };
-
-          if (padArray[i].touchRadius != null) {
-            var multiplier = padArray[i].touchRadius / padArray[i].radius;
-            padShape.increaseBorderSize(multiplier);
-          }
         }
 
         _this.add(name, padShape);
@@ -14558,7 +14590,7 @@ function (_DiagramElementCollec) {
 
     if (optionsToUse.showLine) {
       var line = _this.shapes.polyLine({
-        points: optionsToUse.points,
+        points: _this.points,
         color: optionsToUse.color,
         close: optionsToUse.close,
         borderToPoint: optionsToUse.borderToPoint,
@@ -14572,7 +14604,7 @@ function (_DiagramElementCollec) {
     if (optionsToUse.side) {
       var side = optionsToUse.side;
 
-      var _pCount = optionsToUse.points.length - 1;
+      var _pCount = _this.points.length - 1;
 
       if (optionsToUse.close) {
         _pCount += 1;
@@ -14589,8 +14621,8 @@ function (_DiagramElementCollec) {
 
         var name = "side".concat(i).concat(j);
         var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[i],
-          p2: optionsToUse.points[j]
+          p1: _this.points[i],
+          p2: _this.points[j]
         }, sideArray[i]);
 
         var sideLine = _this.objects.line(sideOptions);
@@ -14602,7 +14634,7 @@ function (_DiagramElementCollec) {
 
     if (optionsToUse.angle) {
       var angle = optionsToUse.angle;
-      var _pCount2 = optionsToUse.points.length;
+      var _pCount2 = _this.points.length;
 
       if (optionsToUse.close === false) {
         _pCount2 -= 2;
@@ -14631,9 +14663,9 @@ function (_DiagramElementCollec) {
         var _name = "angle".concat(_i2);
 
         var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[k],
-          p2: optionsToUse.points[_i2],
-          p3: optionsToUse.points[_j]
+          p1: _this.points[k],
+          p2: _this.points[_i2],
+          p3: _this.points[_j]
         }, angleArray[_i2]);
 
         var angleAnnotation = _this.objects.angle(angleOptions);
@@ -15992,8 +16024,8 @@ function (_DrawingObject) {
   }, {
     key: "glToPixelSpace",
     value: function glToPixelSpace(p) {
-      var x = (p.x - -1) / 2 * this.parentDiv.offsetWidth;
-      var y = (1 - p.y) / 2 * this.parentDiv.offsetHeight;
+      var x = (p.x - -1) / 2 * this.parentDiv.clientWidth;
+      var y = (1 - p.y) / 2 * this.parentDiv.clientHeight;
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
     }
   }, {
@@ -19545,6 +19577,14 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
 
 function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
@@ -19879,7 +19919,7 @@ function () {
     this.move = {
       maxTransform: this.transform.constant(1000),
       minTransform: this.transform.constant(-1000),
-      limitToDiagram: false,
+      boundary: null,
       maxVelocity: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
       freely: {
         zeroVelocityThreshold: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](0.001, 0.001, 0.001),
@@ -20765,15 +20805,35 @@ function () {
   }, {
     key: "setMoveBoundaryToDiagram",
     value: function setMoveBoundaryToDiagram() {
-      var boundary = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [this.diagramLimits.left, this.diagramLimits.top - this.diagramLimits.height, this.diagramLimits.left + this.diagramLimits.width, this.diagramLimits.top];
+      var boundaryIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.move.boundary;
       var scale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
 
       if (!this.isMovable) {
         return;
       }
 
-      if (!this.move.limitToDiagram) {
+      if (boundaryIn != null) {
+        this.move.boundary = boundaryIn;
+      }
+
+      if (this.move.boundary == null) {
         return;
+      }
+
+      var boundary;
+
+      if (Array.isArray(this.move.boundary)) {
+        var _this$move$boundary = _slicedToArray(this.move.boundary, 4),
+            left = _this$move$boundary[0],
+            bottom = _this$move$boundary[1],
+            width = _this$move$boundary[2],
+            height = _this$move$boundary[3];
+
+        boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
+      } else if (this.move.boundary === 'diagram') {
+        boundary = this.diagramLimits;
+      } else {
+        boundary = this.move.boundary;
       }
 
       var glSpace = {
@@ -20803,10 +20863,10 @@ function () {
       var maxPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.right, rect.top).transformBy(glToDiagramScaleMatrix);
       var min = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       var max = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      min.x = boundary[0] - minPoint.x * scale.x;
-      min.y = boundary[1] - minPoint.y * scale.y;
-      max.x = boundary[2] - maxPoint.x * scale.x;
-      max.y = boundary[3] - maxPoint.y * scale.y;
+      min.x = boundary.left - minPoint.x * scale.x;
+      min.y = boundary.bottom - minPoint.y * scale.y;
+      max.x = boundary.right - maxPoint.x * scale.x;
+      max.y = boundary.top - maxPoint.y * scale.y;
       this.move.maxTransform.updateTranslation(max.x, max.y);
       this.move.minTransform.updateTranslation(min.x, min.y);
     }

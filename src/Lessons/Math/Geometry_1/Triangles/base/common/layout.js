@@ -4,6 +4,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point,
+  Rect,
   // Transform,
   // Line,
 } = Fig.tools.g2;
@@ -17,6 +18,7 @@ const cssColorNames = [
   'angle3',
   'disabled',
   'parallel',
+  'pads',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -81,8 +83,40 @@ export default function lessonLayout() {
     ],
   };
 
+  // ////////////////////////////////////////////////////////
+  //   Variable Triangle
+  // ////////////////////////////////////////////////////////
+
+  const customTriangle = {
+    name: 'customTriangle',
+    method: 'polyLine',
+    options: {
+      points: [
+        [-1, -1],
+        [0, 1],
+        [1, -1],
+      ],
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      pad: {
+        color: colors.pads,
+        radius: 0.2,
+        sides: 30,
+        fill: true,
+        isMovable: true,
+        touchRadius: 0.4,
+        boundary: [-3, -2, 6, 3.5],
+      },
+      position: new Point(0, 0),
+    },
+  };
+
   layout.addElements = [
     triangleExamples,
+    customTriangle,
   ];
+
+
   return layout;
 }
