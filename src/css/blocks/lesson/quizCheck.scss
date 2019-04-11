@@ -33,7 +33,7 @@
   text-align: center;
   cursor: pointer;
   border: 1px solid color('black', 'light');
-  margin: 0.8em;
+  // margin: 0.8em;
   padding: calc(var(--lesson__diagram-font-size) * 0.2);
   padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
   padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
@@ -63,6 +63,8 @@
   color: color('white', 'base');
   background-color: rgba(100, 0, 0, 1);
   border: 1px solid color('black', 'lightest');
+  margin-top: 0.8em;
+  margin-bottom: 0.8em;
 }
 
 .lesson__quiz__answer_correct .lesson__quiz__button:hover {
@@ -97,7 +99,7 @@
 
 .lesson__quiz_input {
   border: 0;
-  margin: 0.6em;
+  // margin: 0.6em;
   padding: calc(var(--lesson__diagram-font-size) * 0.5);
   border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
   color: color('diagram', 'disabled', 'darker');

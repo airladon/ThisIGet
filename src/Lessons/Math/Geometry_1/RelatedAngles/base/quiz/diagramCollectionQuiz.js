@@ -7,7 +7,7 @@ import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectio
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import CommonCollection from '../common/diagramCollectionCommonThreeLines';
 
-const { Transform, DiagramElementPrimative, Point } = Fig;
+const { Transform, DiagramElementPrimative } = Fig;
 const { rand, removeRandElement, roundNum } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
@@ -29,15 +29,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    this.add('input', this.makeEntryBox('a1', '?', 3));
-    this._input.setPosition(this.layout.quiz.input);
+
+    this.addInput('input', '?', 3, 0);
     this.add('main', new CommonCollection(diagram, this.layout));
 
     this._main._fig._line1.isInteractive = false;
     this._main._fig._line2.isInteractive = false;
     this._main._fig._line3.isInteractive = false;
-    this._input.interactiveLocation = new Point(0.24, 0.17);
-    this._check.interactiveLocation = new Point(0.26, 0.12);
   }
 
   randomizeLines() {

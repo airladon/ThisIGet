@@ -785,17 +785,26 @@ class PresentationLessonContent extends SimpleLessonContent {
       if (element instanceof DiagramElementPrimative
         || element instanceof DiagramElementCollection) {
         let diagramPosition;
-        if (location === 'center') {
+        if (location === 'center'
+          || (location === '' && element.interactiveLocation === 'center')
+        ) {
           diagramPosition = element.getCenterDiagramPosition();
-        } else if (location === 'zero') {
+        } else if (location === 'zero'
+        || (location === '' && element.interactiveLocation === 'zero')) {
           diagramPosition = element.getDiagramPosition();
-        } else if (location === 'topLeft') {
+        } else if (location === 'topLeft'
+          || (location === '' && element.interactiveLocation === 'topLeft')
+        ) {
           const rect = element.getDiagramBoundingRect();
           diagramPosition = new Point(rect.left, rect.top);
-        } else if (location === 'topRight') {
+        } else if (location === 'topRight'
+          || (location === '' && element.interactiveLocation === 'topRight')
+        ) {
           const rect = element.getDiagramBoundingRect();
           diagramPosition = new Point(rect.right, rect.top);
-        } else if (location === 'vertexLeft') {
+        } else if (location === 'vertexLeft'
+          || (location === '' && element.interactiveLocation === 'vertexLeft')
+        ) {
           const borders = element.getVertexSpaceBoundaries();
           let minXPoint;
           borders.forEach((border) => {

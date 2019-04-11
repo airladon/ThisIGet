@@ -202,9 +202,12 @@ const CommonQuizMixin = superclass => class extends superclass {
   }
 
   makeCheckButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `check__${id}`, 'Check', this.checkAnswer.bind(this), this.layout.quiz.check,
     );
+    button.interactiveLocation = 'topRight';
+    // button.interactiveLocation = new Point(0.26, 0.12);
+    return button;
   }
 
   makeNewProblemButton(id: string) {
@@ -212,6 +215,7 @@ const CommonQuizMixin = superclass => class extends superclass {
       `new_problem__${id}`, 'New Problem', this.newProblem.bind(this),
       this.layout.quiz.newProblem,
     );
+    button.interactiveLocation = 'topRight';
     return button;
   }
 
@@ -228,7 +232,8 @@ const CommonQuizMixin = superclass => class extends superclass {
     numDigits: number = 10,
     decimalPlaces: number = 0,
   ) {
-    this.add('input', this.makeEntryBox('input1', defaultText, numDigits, decimalPlaces));
+    this.add('input', this.makeEntryBox(id, defaultText, numDigits, decimalPlaces));
+    this._input.interactiveLocation = 'topRight';
     if (this.layout.quiz) {
       if (this.layout.quiz.input) {
         this._input.setPosition(this.layout.quiz.input);
