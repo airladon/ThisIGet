@@ -77,7 +77,13 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.hasTouchableElements = false;
     this._messages.hideAll();
     this._check.hide();
+    console.log(document.getElementById('id__lesson_quiz_button_new_problem__q1').clientWidth)
     this._newProblem.show();
+    console.log(document.getElementById('id__lesson_quiz_button_new_problem__q1').clientWidth)
+    // this._newProblem.setFirstTransform(this.transform);
+    // this._newProblem.setFirstTransform(this.transform);
+    // this._newProblem.setPosition(this.layout.quiz.newProblem);
+    // this._newProblem.setPosition(this.layout.quiz.newProblem);
     if (this._input != null) {
       this._input.disable();
       this._input.setValue(this.answer);
@@ -100,6 +106,15 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.add('newProblem', this.makeNewProblemButton(id));
     this.add('messages', this.makeQuizAnswerMessages(id, messages));
     this.add('showAnotherAnswer', this.makeShowAnotherAnswerButton(id));
+    console.log(document.getElementById('id__lesson_quiz_button_new_problem__q1').clientWidth)
+    console.log(this._newProblem.lastDrawTransform._dup())
+    console.log(this.diagram.spaceTransforms.diagramToGL)
+    console.log('1')
+    this.diagram.setFirstTransform();
+    console.log('2')
+    this._newProblem.show();
+    console.log(this._newProblem.lastDrawTransform._dup())
+    console.log(document.getElementById('id__lesson_quiz_button_new_problem__q1').clientWidth)
     this._messages.hideAll();
     this.answers = [];
     this.answer = '';

@@ -16018,8 +16018,9 @@ function (_DrawingObject) {
       if (this.show) {
         var glLocation = this.location.transformBy(transformMatrix);
         var pixelLocation = this.glToPixelSpace(glLocation);
-        var w = this.element.offsetWidth;
-        var h = this.element.offsetHeight;
+        var w = this.element.clientWidth;
+        var h = this.element.clientHeight; // console.log(w, h, this.element.id)
+
         var left = 0;
         var top = 0;
 

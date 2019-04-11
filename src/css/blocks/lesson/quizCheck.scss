@@ -47,6 +47,7 @@
 
 .lesson__quiz__button:hover {
   color: color('white', 'lightest');
+  background-color: color('diagram', 'background', 'darker');
 }
 
 .lesson__quiz__answer_incorrect {

@@ -636,6 +636,7 @@ class PresentationLessonContent extends SimpleLessonContent {
     this.addSections();
     this.addInfoBox();
     this.addStar();
+    this.diagram.setFirstTransform();
   }
 
   // eslint-disable-next-line class-methods-use-this

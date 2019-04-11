@@ -129,6 +129,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   newProblem() {
+    // this.diagram.setFirstTransform();
     super.newProblem();
     this.setupNextProblem();
     this.beforeTransitionToNewProblem();
