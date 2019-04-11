@@ -32,7 +32,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.add('input', this.makeEntryBox('a1', '?', 3));
     this._input.setPosition(this.layout.quiz.input);
     this.add('main', new CommonCollection(diagram, this.layout));
-    this.hasTouchableElements = false;
   }
 
   randomizeLines() {
@@ -40,10 +39,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this.layout.minSeparation,
       this.layout.maxSeparation,
     );
-    const intersectingLineRotation = rand(
-      Math.PI / 4,
-      Math.PI - Math.PI / 4,
-    );
+    const intersectingLineRotation = rand(1, Math.PI - 1);
     const rotation = rand(2 * Math.PI);
     const fig = this._main._fig;
     fig._line1.scenarios.quiz = { position: [0, separation / 2], rotation: 0 };
@@ -84,7 +80,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (r == null) {
       return;
     }
-    const angleAValue = roundNum(r * 180 / Math.PI, 0);
+    // const angleAValue = roundNum(r * 180 / Math.PI, 0);
+    const angleAValue = roundNum(
+      this._main._fig._line3.scenarios.quiz.rotation * 180 / Math.PI,
+      0,
+    );
     const angleBValue = 180 - angleAValue;
     const angleValues = {
       A: angleAValue,
@@ -126,6 +126,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._input.setValue('');
     this._input.enable();
     this._check.show();
+    this._main._fig.hasTouchableElements = false;
   }
 
   newProblem() {

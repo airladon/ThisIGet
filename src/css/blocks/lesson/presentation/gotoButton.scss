@@ -51,11 +51,12 @@
 }
 
 #id__lesson__goto_button:hover {
+  // background-color: color('presentation', 'hover', 'light');
   // background-color: color('diagram', 'background', 'darker');
   cursor: pointer;
-  color: color('presentation', 'hover');
+  // color: color('presentation', 'hover');
   border: 0;
-  border-radius: 0;
+  // border-radius: 0;
 }
 
 .lesson__button-goto_container-disabled #id__lesson__goto_button {

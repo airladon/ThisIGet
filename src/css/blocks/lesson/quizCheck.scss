@@ -30,18 +30,14 @@
 .lesson__quiz__button {
   border-radius: calc(var(--lesson__diagram-font-size) * 0.35);
   // background-color: color('diagram', 'primary');
+  color: color('white', 'dark');
   text-align: center;
   cursor: pointer;
-  // margin-left: auto;
-  // margin-right: auto;
-  // margin-bottom: 10px;
   border: 1px solid color('black', 'light');
   margin: 10px;
   padding: calc(var(--lesson__diagram-font-size) * 0.2);
   padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
   padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
-  // color: color('white');
-  color: color('white', 'dark');
   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
 }
 
@@ -50,21 +46,32 @@
   background-color: color('diagram', 'background', 'darker');
 }
 
-.lesson__quiz__answer_incorrect {
-  background-color: rgba(100, 0, 0, 0.95);
-}
-
 .lesson__quiz__answer_correct {
   background-color: rgba(0, 100, 0, 0.95);
 }
 
+.lesson__quiz__answer_incorrect {
+  background-color: rgba(100, 0, 0, 0.95);
+}
+
 .lesson__quiz__answer_correct .lesson__quiz__button {
   color: color('white', 'base');
-  border: 1px solid color('white', 'light');
+  background-color: rgba(0, 100, 0, 1);
+  border: 1px solid color('white', 'darker');
+}
+
+.lesson__quiz__answer_incorrect .lesson__quiz__button {
+  color: color('white', 'base');
+  background-color: rgba(100, 0, 0, 1);
+  border: 1px solid color('black', 'lightest');
 }
 
 .lesson__quiz__answer_correct .lesson__quiz__button:hover {
-  background-color: rgba(0, 140, 0, 0.95);
+  background-color: rgba(0, 140, 0, 1);
+}
+
+.lesson__quiz__answer_incorrect .lesson__quiz__button:hover {
+  background-color: rgba(140, 0, 0, 1);
 }
 
 .lesson__quiz__button_fixed_size {
@@ -86,12 +93,10 @@
   }
 }
 
-
-
 .lesson__quiz_input {
   border: 0;
   margin: 10px;
-  padding: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding: calc(var(--lesson__diagram-font-size) * 0.5);
   border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
   color: color('diagram', 'disabled', 'darker');
   text-align: center;

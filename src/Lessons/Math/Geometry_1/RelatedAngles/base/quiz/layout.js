@@ -18,7 +18,7 @@ export default function lessonLayout() {
   layout.quiz = {
     check: new Point( 0.7, -1.7),
     input: new Point(0, -1.7),
-    newProblem: new Point(1, -1.7),
+    newProblem: new Point(0.852, -1.7),
   };
   // layout.check = new Point(1, -1.5);
   return layout;
