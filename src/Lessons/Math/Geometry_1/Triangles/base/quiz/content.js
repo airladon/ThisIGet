@@ -1,16 +1,22 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  PresentationLessonContent, interactiveItem,
+  PresentationLessonContent,
+  // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import {
-//   click, highlight,
-// } from '../../../../../../js/tools/htmlGenerator';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -28,47 +34,29 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const tri = diag._triangle;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
+    // const main = quiz._main;
 
     this.addSection({
-      title: 'Summary',
-      setContent: `
-        <p>
-          Find the unknown angle in the triangle.
-        </p>
-      `,
-      setInfo: [
-        '<ul>',
-        '<li>Touch the grey box to enter the angle, then touch the |check| button to check the answer.</li>',
-        '</ul>',
-      ],
+      title: '',
+      setContent: ['Question'],
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
       interactiveElements: [
-        interactiveItem(diag._check),
+        // interactiveItem(quiz._check),
       ],
-      setEnterState: () => {
-        tri._triangle.hasTouchableElements = true;
-        tri._triangle.autoShowAngles = true;
-        diag._input.setValue('');
-        diag.randomizeFuturePositions();
-      },
-      show: [tri],
-      hide: [
-        tri._line1,
-        tri._line2,
-        tri._angleA,
-        tri._angleB,
-        tri._eqn,
-      ],
-      transitionFromAny: (done) => {
-        tri.moveToFuturePositions(1, done);
-      },
-      setSteadyState: () => {
-        tri.setFuturePositions();
-        diag._input.enable();
-        diag._check.show();
-        diag.showAngles();
-      },
+      setEnterState: () => {},
+      showOnly: [],
+      // show: [main],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

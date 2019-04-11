@@ -1,23 +1,23 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import {
-//   click, highlight,
-// } from '../../../../../../js/tools/htmlGenerator';
-import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { click, highlight } = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,39 +32,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const tri = diag._triangle;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
     this.addSection({
-      title: 'Summary',
-      setContent: `
-        <p>
-          A |Triangle| is a shape with |three sides|, and |three angles|. All the angles within a triangle add up to 180º.
-        </p>
-        ${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html('id_lesson__related_angles_definition', 'lesson__definition_lowest')}
-      `,
-      modifiers: {
-        Triangle: click(tri.randomize, [tri], colors.line),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the triangle corners or touch the |Triangle| text to change the triangle\'s shape.</li>',
-        '</ul>',
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
       ],
-      infoModifiers: {
-        Triangle: highlight(colors.line),
-      },
-      setEnterState: () => {
-        tri._triangle.hasTouchableElements = true;
-        tri._triangle.autoShowAngles = true;
-      },
-      show: [tri],
-      hide: [
-        tri._line1,
-        tri._line2,
-        tri._angleA,
-        tri._angleB,
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
       ],
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }
