@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
@@ -11,12 +11,13 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
-//   click,
-//   centerV,
-//   highlight,
-//   clickWord,
-// } = Fig.tools.html;
+const {
+  // click,
+  // centerV,
+  // highlight,
+  // clickWord,
+  centerH,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -34,13 +35,13 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
-    // const main = quiz._main;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    const fig = quiz._main._fig;
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      setContent: centerH(['Enter the unknown angle in degrees.']),
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -52,10 +53,14 @@ class Content extends PresentationLessonContent {
         // interactiveItem(quiz._check),
       ],
       setEnterState: () => {},
-      showOnly: [],
-      // show: [main],
+      showOnly: [
+      ],
+      show: [fig._line1, fig._line2, fig._line3, quiz._input],
       hide: [],
-      setSteadyState: () => {},
+      setSteadyState: () => {
+        quiz.newProblem();
+        console.log(quiz)
+      },
       setLeaveState: () => {},
     });
   }
