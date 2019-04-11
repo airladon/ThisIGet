@@ -30,7 +30,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       transform,
     );
     this.add('input', this.makeEntryBox('a1', '?', 3));
-    this._input.setPosition(this.layout.input);
+    this._input.setPosition(this.layout.quiz.input);
     this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = false;
   }
@@ -104,10 +104,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
     // $FlowFixMe
     const knownAngleElement = fig[`_angle${knownAngle}`];
-    // console.log(knownAngleElement)
     knownAngleElement.label.setText(`${knownAngleValue}º`);
-    // knownAngleElement.label.eqn.showForm('a');
-    // knownAngleElement._curve.show();
     knownAngleElement.showAll();
     knownAngleElement.setColor(this.layout.colors.angle2);
     // knownAngleElement.label.eqn.reArrangeCurrentForm();
@@ -115,15 +112,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // $FlowFixMe
     const unknownAngleElement = fig[`_angle${unknownAngle}`];
     unknownAngleElement.label.setText('?º');
-    // unknownAngleElement.label.eqn.showForm('a');
-    // unknownAngleElement._arc.show();
     unknownAngleElement.showAll();
     unknownAngleElement.setColor(this.layout.colors.angle1);
-    // unknownAngleElement.label.eqn.reArrangeCurrentForm();
     this._main.updateIntersectingLineAngle();
     this._input.show();
   }
 
+  // eslint-disable-next-line class-methods-use-this
   beforeTransitionToNewProblem() {
   }
 

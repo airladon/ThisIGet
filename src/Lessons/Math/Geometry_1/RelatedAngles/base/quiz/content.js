@@ -42,26 +42,14 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: '',
       setContent: centerH(['Enter the unknown angle in degrees.']),
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
       infoModifiers: {},
       interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [
       ],
       show: [fig._line1, fig._line2, fig._line3, quiz._input],
       hide: [],
       setSteadyState: () => {
         quiz.newProblem();
-        console.log(quiz)
       },
-      setLeaveState: () => {},
     });
   }
 }

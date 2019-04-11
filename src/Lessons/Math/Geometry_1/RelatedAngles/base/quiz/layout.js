@@ -15,7 +15,11 @@ export default function lessonLayout() {
   layout.minSeparation = 0.6;
   layout.maxSeparation = 1.5;
 
-  layout.input = new Point(-0.5, -1.7);
+  layout.quiz = {
+    check: new Point( 0.7, -1.7),
+    input: new Point(0, -1.7),
+    newProblem: new Point(1, -1.7),
+  };
   // layout.check = new Point(1, -1.5);
   return layout;
 }
