@@ -87,6 +87,11 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     });
   }
 
+  pulseLine1() {
+    this._fig._line1.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
   toggleAngles() {
     if (this._fig._angle1.isShown) {
       this.showAngles(this._fig._angle2);

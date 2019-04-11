@@ -45,8 +45,8 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Related Angles',
       setContent: style({ centerV: true }, [
-        '|Related angles| are angles that have the same value, but are in different locations.',
-        'This lesson will look at related angles in two scenarios:',
+        '|Related angles| are angles that can be used to calculate each other.',
+        'This lesson will look at related angles in two common scenarios:',
         style({
           list: 'unordered',
           listStyleType: 'disc',
@@ -63,18 +63,20 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Opposite Angles',
       setContent: [
-        'When two lines intersect, |four_angles| are formed. These angles are |related|.',
+        'When two lines intersect, |four_angles| are formed. These angles are |related|, and if you know one then you can |calulate| all others.',
       ],
       modifiers: {
         four_angles: click(opp.toggleAngles, [opp], colors.angle1),
       },
       setEnterState: () => {
         opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b');
+        opp.setAngle(3, colors.angle3, 'c');
+        opp.setAngle(4, colors.angle4, 'd');
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
-        opp.setAngle(1, colors.angle1, 'a');
         opp.newPageRotation(done);
       },
       setSteadyState: () => {
@@ -85,12 +87,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'First consider angles |a| and |b|. These are |supplementary| angles, and therefore they add up to 180º.',
+        'First consider angles |a| and |b|. These form around a |straight_line|, and therefore are |supplementary| angles, adding up to 180º.',
       ],
       modifiers: {
         supplementary: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
         a: highlight(colors.angle1),
         b: highlight(colors.angle2),
+        straight_line: click(opp.pulseLine1, [opp], colors.lines),
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
@@ -118,7 +121,7 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.angle1, 'a');
-        opp.setAngle(2, colors.angle2, '180º - a');
+        opp.setAngle(2, colors.angle2, 'b = 180º - a');
         opp._eqn.showForm('b');
         opp._eqn.setScenario('top');
         opp.newPageRotation(done);
@@ -143,7 +146,7 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.angle1, 'a');
-        opp.setAngle(2, colors.disabled, '180º - a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
         opp.setAngle(4, colors.angle4, 'd');
         opp.newPageRotation(done);
       },
@@ -167,8 +170,8 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.angle1, 'a');
-        opp.setAngle(2, colors.disabled, '180º - a');
-        opp.setAngle(4, colors.angle4, '180º - a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
+        opp.setAngle(4, colors.angle4, 'd = 180º - a');
         opp._eqn.showForm('d');
         opp._eqn.setScenario('top');
         opp.newPageRotation(done);
@@ -193,8 +196,8 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.disabled, 'a');
-        opp.setAngle(2, colors.angle2, '180º - a');
-        opp.setAngle(4, colors.angle4, '180º - a');
+        opp.setAngle(2, colors.angle2, 'b = 180º - a');
+        opp.setAngle(4, colors.angle4, 'd = 180º - a');
         opp.newPageRotation(done);
       },
       setSteadyState: () => {
@@ -219,9 +222,9 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         opp.setScenarios('center');
         opp.setAngle(1, colors.disabled, 'a');
-        opp.setAngle(2, colors.disabled, '180º - a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
         opp.setAngle(3, colors.angle3, 'c = a');
-        opp.setAngle(4, colors.disabled, '180º - a');
+        opp.setAngle(4, colors.disabled, 'd = 180º - a');
         opp.newPageRotation(done);
       },
       setSteadyState: () => {
@@ -263,7 +266,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({}, [
-        'This means, if we know one angle all others can be calculated!',
+        'This means, if we know |one| angle all others can be |calculated|.',
       ]),
       modifiers: {
         a: highlight(colors.angle1),
@@ -297,15 +300,14 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Parallel Intersection',
       setContent: style({}, [
-        'The next scenario is a line |intersecting| two |parallel| lines. In this case, |eight_angles| are formed.',
+        'The next scenario is a |line| intersecting two |parallel_lines|. In this case, |eight_angles| are formed.',
       ]),
       modifiers: {
         eight_angles: click(three.toggleAngles, [three], colors.angle1),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
-        parallel: click(three.pulseParallel, [three], colors.lines),
+        line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        parallel_lines: click(three.pulseParallel, [three], colors.lines),
       },
-      show: [three._fig._line1, three._fig._line2, three._fig._line3],
-      transitionFromAny: (done) => {
+      setEnterState: () => {
         three.setScenarios('center');
         three.setAngle('A1', colors.angle1, 'a');
         three.setAngle('A2', colors.angle1, 'e');
@@ -315,6 +317,9 @@ class Content extends PresentationLessonContent {
         three.setAngle('C2', colors.angle1, 'g');
         three.setAngle('D1', colors.angle1, 'd');
         three.setAngle('D2', colors.angle1, 'h');
+      },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      transitionFromAny: (done) => {
         three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
@@ -331,11 +336,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Corresponding Angles',
       setContent: style({}, [
-        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
       ]),
       modifiers: {
         Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
@@ -511,6 +516,9 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
       },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
     });
 
     this.addSection({
@@ -555,7 +563,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Alternate Angles',
       setContent: [
-        '|Alternate_angles| are the angles that are on opposite sides of the |intersecting| and |parallel_lines|.',
+        '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting| and |parallel_lines|.',
       ],
       modifiers: {
         Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
@@ -588,7 +596,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'How can relationship between |alternate_angles| be determined?',
+        'How can the relationship between |alternate_angles| be determined?',
       ],
       modifiers: {
         alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
@@ -734,11 +742,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Interior Angles',
       setContent: [
-        '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
+        '|Interior_angles| are the inside angles on the same side of the |intersecting_line| that crosses |two_lines|.',
       ],
       modifiers: {
         Interior_angles: click(three.toggleInterior, [three], colors.angle1),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],

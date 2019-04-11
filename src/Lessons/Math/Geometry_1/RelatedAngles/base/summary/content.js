@@ -65,14 +65,14 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Corresponding Angles',
       setContent: style({ left: 5, right: 55, centerV: true }, [
-        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
         'When the two lines are |parallel|, corresponding angles are always |equal|.',
       ]),
       modifiers: {
         Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         parallel: click(three.pulseParallel, [three], colors.lines),
         two_lines: click(three.pulseParallel, [three], colors.lines),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       },
       setEnterState: () => {
         three.setScenarios('summary');
@@ -96,12 +96,12 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Alternate Angles',
       setContent: style({ left: 5, right: 55, centerV: true }, [
-        '|Alternate_angles| are the angles on opposite sides of the |intersecting| line that crosses |two_lines|.',
+        '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
         'When the two lines are |parallel|, the alternate angles are always |equal|.',
       ]),
       modifiers: {
         Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
         parallel: click(three.pulseParallel, [three], colors.lines),
       },

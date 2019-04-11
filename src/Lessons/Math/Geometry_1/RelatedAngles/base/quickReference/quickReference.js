@@ -158,14 +158,14 @@ export class QRAlternate extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
-      intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       two_lines: click(three.pulseParallel, [three], colors.lines),
       parallel: click(three.pulseParallel, [three], colors.lines),
       alternate_angles_are_always_equal: highlight(colors.angle3),
     };
     this.setTitle('Alternate Angles');
     this.setDescription([
-      '|Alternate_angles| are the angles on opposite sides of the |intersecting| line that crosses |two_lines|.',
+      '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
       'When the two lines are |parallel|, the |alternate_angles_are_always_equal|.',
     ], modifiers);
     this.setLink(details.details.uid);

@@ -44,7 +44,7 @@ export default function lessonLayout() {
     },
     mods: {
       // isInteractive: true,
-      interactiveLocation: new Point(layout.length / 3 * 0.8, 0),
+      interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
     },
   };
 
@@ -200,7 +200,7 @@ export default function lessonLayout() {
       },
     },
   });
-  layout.moveLine = new Line(new Point(0, -0.8), 1.6, Math.PI / 2);
+  layout.moveLine = new Line(new Point(0, -0.7), 1.4, Math.PI / 2);
   // layout._3LinesLine4 = joinObjects({}, layout.line, {
   //   name: 'line4',
   //   options: {
