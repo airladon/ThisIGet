@@ -27,11 +27,14 @@ export default function baseLayout() {
     },
 
     quiz: {
-      check: new Point(0, -1.7),
+      check: new Point( 2.4, -1.7),
+      input: new Point(2.4, -1.3),
+      newProblem: new Point(2.4, -1.7),
+      // check: new Point(0, -1.7),
       position: new Point(0, 0),
       answer: new Point(0, -1.7),
       nextSteps: new Point(0, -1.9),
-      newProblem: new Point(0, -1.7),
+      // newProblem: new Point(0, -1.7),
       showAnotherAnswer: new Point(-1, -1.7),
     },
 

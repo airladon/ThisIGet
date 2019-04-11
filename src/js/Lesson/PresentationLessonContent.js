@@ -39,6 +39,7 @@ type TypeInteractiveElement = DiagramElementCollection
                               | HTMLElement;
 type TypeInteractiveElementLocation = 'center' | 'zero' | ''
                                       | 'topLeft' | 'topRight'
+                                      | 'topRightText'
                                       | 'vertexLeft' | TypeParsablePoint;
 type TypeInteractiveElements = Array<{
     element: TypeInteractiveElement,
@@ -452,12 +453,12 @@ class Section {
         if (element.id != null) {
           this.interactiveElementList.push({
             element: element.id,
-            location: 'topRight',
+            location: 'topRightText',
           });
         } else {
           this.interactiveElementList.push({
             element,
-            location: 'topRight',
+            location: 'topRightText',
           });
         }
       }
@@ -845,16 +846,25 @@ class PresentationLessonContent extends SimpleLessonContent {
         }
         if (html instanceof HTMLElement) {
           const rect = html.getBoundingClientRect();
+
+          const fontSize = parseFloat(
+            window.getComputedStyle(html, null).getPropertyValue('font-size'),
+          );
           const rectBase = this.diagram.htmlCanvas.getBoundingClientRect();
           if (location === 'topLeft') {
             cssPosition = new Point(
-              rect.left - rectBase.left + rect.width * 0.05,
-              rect.top - rectBase.top + rect.height * 0.25,
+              rect.left - rectBase.left,
+              rect.top - rectBase.top,
             );
           } else if (location === 'topRight') {
             cssPosition = new Point(
-              rect.left - rectBase.left + rect.width * 0.95,
-              rect.top - rectBase.top + rect.height * 0.25,
+              rect.left - rectBase.left + rect.width,
+              rect.top - rectBase.top,
+            );
+          } else if (location === 'topRightText') {
+            cssPosition = new Point(
+              rect.left - rectBase.left + rect.width,
+              rect.top - rectBase.top + fontSize * 0.3,
             );
           } else if (location === 'vertexLeft') {
             cssPosition = new Point(
