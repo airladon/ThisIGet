@@ -9,13 +9,6 @@
   max-width: 80vw;
 }
 
-.lesson__quiz__answer_incorrect {
-  background-color: rgba(100, 0, 0, 0.9);
-}
-
-.lesson__quiz__answer_correct {
-  background-color: rgba(0, 100, 0, 0.9);
-}
 
 .lesson__quiz__answer_text {
   font-size: calc(var(--lesson__diagram-font-size) * 0.8);
@@ -35,19 +28,42 @@
 }
 
 .lesson__quiz__button {
-  border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
-  background-color: color('diagram', 'primary');
+  border-radius: calc(var(--lesson__diagram-font-size) * 0.35);
+  // background-color: color('diagram', 'primary');
   text-align: center;
   cursor: pointer;
   // margin-left: auto;
   // margin-right: auto;
   // margin-bottom: 10px;
+  border: 1px solid color('black', 'light');
   margin: 10px;
   padding: calc(var(--lesson__diagram-font-size) * 0.2);
   padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
   padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
-  color: color('white');
+  // color: color('white');
+  color: color('white', 'dark');
   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+.lesson__quiz__button:hover {
+  color: color('white', 'lightest');
+}
+
+.lesson__quiz__answer_incorrect {
+  background-color: rgba(100, 0, 0, 0.95);
+}
+
+.lesson__quiz__answer_correct {
+  background-color: rgba(0, 100, 0, 0.95);
+}
+
+.lesson__quiz__answer_correct .lesson__quiz__button {
+  color: color('white', 'base');
+  border: 1px solid color('white', 'light');
+}
+
+.lesson__quiz__answer_correct .lesson__quiz__button:hover {
+  background-color: rgba(0, 140, 0, 0.95);
 }
 
 .lesson__quiz__button_fixed_size {
@@ -69,11 +85,7 @@
   }
 }
 
-.lesson__quiz__button:hover {
-  // border-radius: 5px;
-  background-color: color('diagram', 'primary', 'light');
-  color: color('white');
-}
+
 
 .lesson__quiz_input {
   border: 0;
