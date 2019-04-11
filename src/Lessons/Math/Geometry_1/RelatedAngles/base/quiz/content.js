@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import {
   PresentationLessonContent,
-  // interactiveItem,
+  interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
@@ -16,7 +16,7 @@ const {
   // centerV,
   // highlight,
   // clickWord,
-  centerH,
+  style,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -41,10 +41,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: '',
-      setContent: centerH(['Enter the unknown angle in degrees.']),
-      infoModifiers: {},
-      interactiveElements: [
-      ],
+      setContent: style({ top: 0, left: 30 }, ['Enter the unknown angle in degrees.']),
       show: [fig._line1, fig._line2, fig._line3, quiz._input],
       hide: [],
       setSteadyState: () => {

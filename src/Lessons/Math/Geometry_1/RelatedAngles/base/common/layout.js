@@ -264,6 +264,7 @@ export default function lessonLayout() {
         translate: { position: [0, -0.2], rotation: 0, scale: 1 },
         summary: { position: [1.3, 0], scale: 0.9, rotation: 0 },
         qr: { position: [0, 0], scale: 0.9, rotation: 0 },
+        quiz: { position: [0, 0.3], scale: 0.95 },
       },
     },
   };

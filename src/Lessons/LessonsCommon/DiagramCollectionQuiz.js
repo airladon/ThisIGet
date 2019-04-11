@@ -208,10 +208,11 @@ const CommonQuizMixin = superclass => class extends superclass {
   }
 
   makeNewProblemButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `new_problem__${id}`, 'New Problem', this.newProblem.bind(this),
       this.layout.quiz.newProblem,
     );
+    return button;
   }
 
   makeShowAnotherAnswerButton(id: string) {
