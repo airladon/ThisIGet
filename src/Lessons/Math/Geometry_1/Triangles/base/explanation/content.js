@@ -158,6 +158,7 @@ class Content extends PresentationLessonContent {
         total._fixedTriangle._line,
       ],
       transitionFromAny: (done) => {
+        total._fixedTriangle._line.setColor(colors.lines);
         coll.makeBaseHorizontal(done);
       },
     });
@@ -181,6 +182,7 @@ class Content extends PresentationLessonContent {
         total._angleA.setColor(colors.angle1);
         total._angleB.setColor(colors.angle2);
         total._angleC.setColor(colors.angle3);
+        total._fixedTriangle._line.setColor(colors.lines);
         coll.updateTotalAngles();
       },
       show: [
@@ -188,9 +190,6 @@ class Content extends PresentationLessonContent {
         total._angleC, total._angleB, total._angleA,
       ],
       setSteadyState: () => {
-        // total._angleA.showAll();
-        // total._angleB.showAll();
-        // total._angleC.showAll();
         coll.totalPulseAngles(['A', 'B', 'C']);
       },
     });
@@ -205,6 +204,7 @@ class Content extends PresentationLessonContent {
         total._angleC.setColor(colors.angle3);
         total._topParallel.setColor(colors.parallel);
         total._bottomParallel.setColor(colors.parallel);
+        total._fixedTriangle._line.setColor(colors.lines);
         total.setScenarios('offscreen');
         coll.updateTotalAngles();
       },
@@ -235,8 +235,132 @@ class Content extends PresentationLessonContent {
           coll.drawParallelLines(done);
         }
       },
+    });
+
+    common = {
+      setContent: style({}, [
+        'When a line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.',
+      ]),
+      modifiers: {
+        alternate_angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.angle1),
+        a: highlight(colors.angle1),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+      ],
+    };
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.parallel);
+        total._bottomParallel.setColor(colors.parallel);
+        total._fixedTriangle._line.setColor(colors.lines);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
       setSteadyState: () => {
-        console.log(total)
+        total._angleATop.showAll();
+        total._angleATop.pulseScaleNow(1, 1.2);
+      },
+    });
+
+    common = {
+      setContent: style({}, [
+        'We can similarly identify the |alternate_angle| of |b|.',
+      ]),
+      modifiers: {
+        alternate_angle: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.angle2),
+        b: highlight(colors.angle2),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA, total._angleATop,
+      ],
+      setEnterState: () => {
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.disabled);
+        total._angleB.setColor(colors.angle2);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    };
+    this.addSection(common, {
+    });
+    this.addSection(common, {
+      setSteadyState: () => {
+        total._angleBTop.showAll();
+        total._angleBTop.pulseScaleNow(1, 1.2);
+      },
+    });
+
+    common = {
+      setContent: style({}, [
+        'Around the triangle\'s top point, |a|, |b| and |c| form a straight angle and are therefore |supplementary_angles|.',
+      ]),
+      modifiers: {
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+        total._angleATop, total._angleBTop,
+      ],
+      setEnterState: () => {
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    };
+    this.addSection(common, {
+    });
+    this.addSection(common, {
+      setContent: 'Therefore:',
+      setSteadyState: () => {
+        total._eqn.showForm('0');
+        total._eqn.setScenario('top');
       },
     });
   }

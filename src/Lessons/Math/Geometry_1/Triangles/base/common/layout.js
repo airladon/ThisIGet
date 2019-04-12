@@ -194,6 +194,7 @@ export default function lessonLayout() {
       curve: {
         width: layout.width,
         radius: 0.3,
+        sides: 400,
         label: {
           radius: 0.31,
         },
@@ -250,6 +251,32 @@ export default function lessonLayout() {
     mods: { scenarios: { offscreen: { position: [0, -2] } } },
   };
 
+  layout.eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      elements: {
+        a: { color: colors.angle1 },
+        b: { color: colors.angle2 },
+        c: { color: colors.angle3 },
+        equals: '  =  ',
+        _180: '180º',
+        plus: ' + ',
+        plus_: ' + ',
+      },
+      scale: 1,
+      color: colors.diagram.text.base,
+      forms: {
+        '0': ['a', 'plus', 'b', 'plus_', 'c', 'equals', '_180'],
+      },
+    },
+    mods: {
+      scenarios: {
+        top: { position: [-1.6, 1.22], scale: 1 },
+      },
+    },
+  };
+
   layout.totalAngle = {
     name: 'totalAngle',
     method: 'collection',
@@ -263,8 +290,10 @@ export default function lessonLayout() {
       layout.topParallel,
       layout.triangle,
       layout.fixedTriangle,
+      layout.eqn,
     ],
   };
+
   layout.addElements = [
     triangleExamples,
     layout.customTriangle,
