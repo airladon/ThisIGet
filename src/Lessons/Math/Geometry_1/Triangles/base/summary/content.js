@@ -17,7 +17,7 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 // } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,31 +32,23 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const total = coll._totalAngle;
 
     this.addSection({
       title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'A |triangle| is a shape that has |three sides| and |three angles|. All the angles within a triangle add up to |180º|.',
+        `${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html()}`,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      setEnterState: () => {
+        coll.updateTotalAngles();
+      },
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
     });
   }
 }

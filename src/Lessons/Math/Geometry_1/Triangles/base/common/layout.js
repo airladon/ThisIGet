@@ -193,10 +193,10 @@ export default function lessonLayout() {
     options: {
       curve: {
         width: layout.width,
-        radius: 0.3,
+        radius: 0.4,
         sides: 400,
         label: {
-          radius: 0.31,
+          radius: 0.41,
         },
       },
     },

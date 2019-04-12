@@ -14,7 +14,7 @@ const { Transform, Rect } = Fig;
 //   clickWord,
 // } = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QRTriangle extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -33,10 +33,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
 
     const modifiers = {};
     this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    this.setDescription('A |triangle| is a shape that has |three sides| and |three angles|. All the angles within a triangle add up to |180º|.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -45,10 +42,12 @@ export default class QRBoilerplate extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
-    // const iso = collection;
-    // iso.show();
-    collection.transform.updateScale(0.6, 0.6);
-    collection.setPosition(this.layout.position);
+    const total = collection._totalAngle;
+    collection.updateTotalAngles();
+    total._fixedTriangle._line.show();
+    total._angleC.showAll();
+    total._angleB.showAll();
+    total._angleA.showAll();
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
@@ -62,7 +61,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
+    Main: QRTriangle,
     // QR2: QRBoilerplate2,
   };
 }
