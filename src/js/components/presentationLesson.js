@@ -255,23 +255,26 @@ export default class PresentationLessonComponent extends React.Component
   }
 
   addGoToButton() {
-    return <div
-      className="lesson__button-goto_container"
-      id="id__lesson__button-goto_container">
-      <DropDownButton
-        id="id__lesson__goto_button"
-        label={
-          <div className="pres__goto_button_label">
-            <div className="pres__goto_button_label_page">{`${this.state.page + 1} `}</div>
-            <div className="pres__goto_button_label_num_pages">
-              {`of ${this.state.numPages}`}
+    if (this.state.listOfSections.length > 0) {
+      return <div
+        className="lesson__button-goto_container"
+        id="id__lesson__button-goto_container">
+        <DropDownButton
+          id="id__lesson__goto_button"
+          label={
+            <div className="pres__goto_button_label">
+              <div className="pres__goto_button_label_page">{`${this.state.page + 1} `}</div>
+              <div className="pres__goto_button_label_num_pages">
+                {`of ${this.state.numPages}`}
+              </div>
             </div>
-          </div>
-        }
-        direction="up"
-        xAlign="right"
-        list={this.state.listOfSections}/>
-    </div>;
+          }
+          direction="up"
+          xAlign="right"
+          list={this.state.listOfSections}/>
+      </div>;
+    }
+    return <div></div>;
   }
 
   belongsTo(index: number) {
