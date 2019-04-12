@@ -10,11 +10,16 @@ export type TypeMessages = {
   _incorrect: DiagramElementPrimative;
 } & DiagramElementCollection;
 
+export type TypeButton = {
+  enable: () => void;
+  disable: () => void;
+} & DiagramElementPrimative;
+
 // $FlowFixMe
 const CommonQuizMixin = superclass => class extends superclass {
-  _check: DiagramElementPrimative;
-  _newProblem: DiagramElementPrimative;
-  _showAnotherAnswer: DiagramElementPrimative;
+  _check: TypeButton;
+  _newProblem: TypeButton;
+  _showAnotherAnswer: TypeButton;
   +_messages: TypeMessages;
   answers: any;
   answer: any;
@@ -24,6 +29,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     this._messages.hideAll();
     if (showCheck) {
       this._check.show();
+      this._check.enable();
     }
     this.hasTouchableElements = true;
     if (this._intput != null) {
@@ -48,10 +54,11 @@ const CommonQuizMixin = superclass => class extends superclass {
 
   showCheck() {
     this._check.show();
+    this._check.enable();
   }
 
   checkAnswer() {
-    this._check.hide();
+    this._check.disable();
     this.hasTouchableElements = false;
     const answer = this.findAnswer();
     if (answer === 'correct') {
@@ -76,7 +83,7 @@ const CommonQuizMixin = superclass => class extends superclass {
   showAnswer() {
     this.hasTouchableElements = false;
     this._messages.hideAll();
-    this._check.hide();
+    this._check.disable();
     this._newProblem.show();
     if (this._input != null) {
       this._input.disable();
@@ -198,6 +205,15 @@ const CommonQuizMixin = superclass => class extends superclass {
       'center',
     );
     html.isInteractive = true;
+
+    html.disable = () => {
+      html.isInteractive = false;
+      button.classList.add('lesson__quiz__button_disabled');
+    };
+    html.enable = () => {
+      html.isInteractive = true;
+      button.classList.remove('lesson__quiz__button_disabled');
+    };
     return html;
   }
 

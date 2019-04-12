@@ -28,12 +28,10 @@
 
 .lesson__quiz__button {
   border-radius: calc(var(--lesson__diagram-font-size) * 0.35);
-  // background-color: color('diagram', 'primary');
   color: color('white', 'dark');
   text-align: center;
   cursor: pointer;
   border: 1px solid color('black', 'light');
-  // margin: 0.8em;
   padding: calc(var(--lesson__diagram-font-size) * 0.2);
   padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
   padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
@@ -43,6 +41,16 @@
 .lesson__quiz__button:hover {
   color: color('white', 'lightest');
   background-color: color('diagram', 'background', 'darker');
+}
+
+.lesson__quiz__button_disabled {
+  pointer-events: none;
+  color: color('black', 'dark');
+}
+
+.lesson__quiz__button_disabled:hover {
+  color: color('black', 'dark');
+  background-color: color('diagram', 'background');
 }
 
 .lesson__quiz__answer_correct {

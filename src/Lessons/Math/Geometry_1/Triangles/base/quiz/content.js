@@ -36,14 +36,12 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
-    // const main = quiz._main;
-    // const total = main._totalAngle;
-
     this.addSection({
       setContent: ['Find the |unknown| angle in the triangle.'],
-      modifiers: {
-        unknown: highlight(colors.angle2),
-      },
+      // modifiers: {
+      //   unknown: highlight(colors.angle2),
+      // },
+      show: [quiz._check, quiz._input],
       setSteadyState: () => {
         quiz.newProblem();
       },

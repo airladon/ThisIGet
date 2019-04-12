@@ -106,8 +106,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._main._totalAngle._angleA.hide();
     this._main._totalAngle._angleB.hide();
     this._main._totalAngle._angleC.hide();
-    this._check.hide();
-    this._input.hide();
   }
 
   afterTransitionToNewProblem() {
@@ -132,14 +130,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._main._totalAngle._angleA.showAll();
     this._main._totalAngle._angleB.showAll();
     this._main._totalAngle._angleC.showAll();
-    this._input.enable();
-    this._input.setValue('');
-    this._input.show();
-    this._check.show();
   }
 
   newProblem() {
     super.newProblem();
+    this.showCheck();
     this.setupNextProblem();
     this.beforeTransitionToNewProblem();
     this.animations.new()
@@ -153,6 +148,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     super.showAnswer();
     this._input.setValue(this.answer);
     this._input.disable();
+    this._check.hide();
     this.diagram.animateNextFrame();
   }
 
