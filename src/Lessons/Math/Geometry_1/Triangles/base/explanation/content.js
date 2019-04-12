@@ -15,7 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   style,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -132,6 +132,13 @@ class Content extends PresentationLessonContent {
       modifiers: {
         any: click(coll.newTotalTriangle, [coll, null], colors.lines),
       },
+      setEnterState: () => {
+        if (this.comingFrom === 'next') {
+          coll.dupFixedTriangle();
+        } else {
+          total._triangle.updatePoints(layout.defaultTri);
+        }
+      },
       show: [
         total._triangle._line,
         total._triangle._pad0,
@@ -142,7 +149,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({}, [
-        'Orient the triangle so its base is horizontal.',
+        'Orient the triangle so its |base| is |horizontal|.',
       ]),
       modifiers: {
         any: click(coll.newTotalTriangle, [coll, null], colors.lines),
@@ -153,9 +160,84 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         coll.makeBaseHorizontal(done);
       },
-      // setSteadyState: () => {
-      //   console.log(total._triangle)
-      // }
+    });
+
+    let common = {
+      setContent: style({}, [
+        'Label the angles |a|, |b| and |c|.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+      },
+      show: [
+        total._fixedTriangle._line,
+      ],
+    };
+    this.addSection(common);
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        coll.updateTotalAngles();
+      },
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
+      ],
+      setSteadyState: () => {
+        // total._angleA.showAll();
+        // total._angleB.showAll();
+        // total._angleC.showAll();
+        coll.totalPulseAngles(['A', 'B', 'C']);
+      },
+    });
+
+    common = {
+      setContent: style({}, [
+        'Draw |parallel_lines| that enclose the triangle and align with the bottom side of the triangle.',
+      ]),
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.parallel);
+        total._bottomParallel.setColor(colors.parallel);
+        total.setScenarios('offscreen');
+        coll.updateTotalAngles();
+      },
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        parallel_lines: click(this.next, [this], colors.parallel),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        parallel_lines: click(coll.drawParallelLines, [coll, null], colors.parallel),
+      },
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
+        total._topParallel, total._bottomParallel,
+      ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'next') {
+          total.setScenarios('parallel');
+          done();
+        } else {
+          coll.drawParallelLines(done);
+        }
+      },
+      setSteadyState: () => {
+        console.log(total)
+      },
     });
   }
 }

@@ -14682,7 +14682,11 @@ function (_DiagramElementCollec) {
 
   _createClass(DiagramObjectPolyLine, [{
     key: "updatePoints",
-    value: function updatePoints(newPoints) {
+    value: function updatePoints(newPointsIn) {
+      var newPoints = newPointsIn.map(function (p) {
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      });
+
       if (this._line != null) {
         this._line.drawingObject.change(newPoints);
       } // Add Pads

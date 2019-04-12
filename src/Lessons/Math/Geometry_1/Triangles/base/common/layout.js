@@ -88,16 +88,16 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////
   //   Variable Triangle
   // ////////////////////////////////////////////////////////
-  const defaultTri = [
-    [2, -1.3],
-    [-2, -1.3],
-    [-1, 0.5],
+  layout.defaultTri = [
+    [2, -1.1],
+    [-2, -1.1],
+    [-1, 0.7],
   ];
   layout.customTriangle = {
     name: 'customTriangle',
     method: 'polyLine',
     options: {
-      points: defaultTri,
+      points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
@@ -131,9 +131,9 @@ export default function lessonLayout() {
       },
     },
     mods: {
-      _pad0: { scenarios: { props: { position: defaultTri[0] } } },
-      _pad1: { scenarios: { props: { position: defaultTri[1] } } },
-      _pad2: { scenarios: { props: { position: defaultTri[2] } } },
+      _pad0: { scenarios: { props: { position: layout.defaultTri[0] } } },
+      _pad1: { scenarios: { props: { position: layout.defaultTri[1] } } },
+      _pad2: { scenarios: { props: { position: layout.defaultTri[2] } } },
     },
   };
 
@@ -145,7 +145,7 @@ export default function lessonLayout() {
     name: 'triangle',
     method: 'polyLine',
     options: {
-      points: defaultTri,
+      points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
@@ -156,7 +156,7 @@ export default function lessonLayout() {
         fill: true,
         isMovable: true,
         touchRadius: 0.4,
-        boundary: [-2.9, -1.9, 5.8, 3.3],
+        boundary: [-2.5, -1.7, 5, 3],
       },
       // angle: {
       //   color: colors.angles,
@@ -178,7 +178,7 @@ export default function lessonLayout() {
     name: 'fixedTriangle',
     method: 'polyLine',
     options: {
-      points: defaultTri,
+      points: layout.defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
@@ -226,6 +226,30 @@ export default function lessonLayout() {
     options: { color: colors.angle2, label: { text: 'b' } },
   });
 
+  layout.topParallel = {
+    name: 'topParallel',
+    method: 'line',
+    options: {
+      length: 5.5,
+      width: layout.width / 3,
+      color: colors.parallel,
+      vertexSpaceStart: 'center',
+    },
+    mods: { scenarios: { offscreen: { position: [0, 2] } } },
+  };
+
+  layout.bottomParallel = {
+    name: 'bottomParallel',
+    method: 'line',
+    options: {
+      length: 5.5,
+      width: layout.width / 3,
+      color: colors.parallel,
+      vertexSpaceStart: 'center',
+    },
+    mods: { scenarios: { offscreen: { position: [0, -2] } } },
+  };
+
   layout.totalAngle = {
     name: 'totalAngle',
     method: 'collection',
@@ -235,6 +259,8 @@ export default function lessonLayout() {
       layout.angleC,
       layout.angleATop,
       layout.angleBTop,
+      layout.bottomParallel,
+      layout.topParallel,
       layout.triangle,
       layout.fixedTriangle,
     ],

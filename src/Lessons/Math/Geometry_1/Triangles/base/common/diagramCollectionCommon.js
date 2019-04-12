@@ -90,6 +90,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  dupFixedTriangle() {
+    this._totalAngle._triangle.updatePoints(
+      this._totalAngle._fixedTriangle.points.map(p => p._dup()),
+    );
+  }
+
   makeBaseHorizontal(callback: ?() => void = null) {
     const triangle = this._totalAngle._triangle;
     const fixedTri = this._totalAngle._fixedTriangle;
@@ -123,13 +129,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     fixedTri.stop(true, 'noComplete');
     fixedTri.animations.new()
       .inParallel([
-        fixedTri.anim.rotation({ target: -angle, duration: 1 }),
-        fixedTri.anim.position({ target: new Point(0, 0), duration: 1 }),
+        fixedTri.anim.rotation({ target: -angle, velocity: 1 }),
+        fixedTri.anim.position({ target: new Point(0, 0), velocity: 1 }),
       ])
       .whenFinished(() => {
         fixedTri.setPositionWithoutMoving(new Point(0, 0));
         fixedTri.setRotationWithoutMoving(0);
         this.updateTotalAngles();
+        this.dupFixedTriangle();
         if (callback != null) {
           callback();
         }
@@ -141,24 +148,20 @@ export default class CommonCollection extends CommonDiagramCollection {
   updateTotalAngles() {
     const { points } = this._totalAngle._fixedTriangle;
     const maxIndex = points.reduce((yMax, p, i, arr) => {
-      console.log(yMax, p, i, arr, p.y, arr[yMax].y)
       if (p.y > arr[yMax].y) {
         return i;
       }
       return yMax;
     }, 0);
-    console.log(maxIndex, points)
     let remainingPoints = [0, 1, 2];
     const top = points[maxIndex];
     remainingPoints = remainingPoints.filter((val, i) => i !== maxIndex);
-    console.log(remainingPoints)
     let left = points[remainingPoints[0]];
     let right = points[remainingPoints[1]];
     if (left.x > right.x) {
       left = points[remainingPoints[1]];
       right = points[remainingPoints[0]];
     }
-    console.log(left, right, top)
 
     const angleA = this._totalAngle._angleA;
     const angleB = this._totalAngle._angleB;
@@ -170,12 +173,36 @@ export default class CommonCollection extends CommonDiagramCollection {
     angleB.setAngle({ p1: top, p2: right, p3: left });
     angleC.setAngle({ p1: left, p2: top, p3: right });
     angleATop.setAngle({ p1: new Point(top.x - 1, top.y), p2: top, p3: left });
-    // console.log(angleATop)
     angleBTop.setAngle({ p1: right, p2: top, p3: new Point(top.x + 1, top.y) });
-    angleA.showAll();
-    angleB.showAll();
-    angleC.showAll();
-    angleATop.showAll();
-    angleBTop.showAll();
+    angleA.hide();
+    angleB.hide();
+    angleC.hide();
+    angleATop.hide();
+    angleBTop.hide();
+
+    this._totalAngle._bottomParallel.scenarios.parallel = {
+      position: [0, left.y - this.layout.width / 2],
+    };
+    this._totalAngle._topParallel.scenarios.parallel = {
+      position: [0, top.y + this.layout.width / 2],
+    };
+  }
+
+  totalPulseAngles(angles: Array<string> = []) {
+    angles.forEach((angle) => {
+      const a = this._totalAngle[`_angle${angle}`];
+      a.pulseScaleNow(1, 1.5);
+    });
+    this.diagram.animateNextFrame();
+  }
+
+  drawParallelLines(callback: ?() => void = null) {
+    this._totalAngle.setScenarios('offscreen');
+    this._totalAngle.stop(true, 'noComplete');
+    this._totalAngle.animations.new()
+      .scenarios({ target: 'parallel', duration: 1.5 })
+      .whenFinished(callback)
+      .start();
+    this.diagram.animateNextFrame();
   }
 }
