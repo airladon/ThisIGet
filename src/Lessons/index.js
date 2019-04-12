@@ -169,9 +169,30 @@ export default function getLessonIndex() {
       uid: 'congruent_triangles',
       versions: {
         base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
+          title: 'Initial',
+          description: 'Initial Explanation - Presentation Format.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Asa',
+            'Sss',
+            'Sas',
+            'Aas',
+            'Aaa',
+            'Ssa',
+            'Main',
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'dev',

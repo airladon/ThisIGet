@@ -14587,6 +14587,47 @@ function (_DiagramElementCollec) {
       for (var i = 0; i < pCount; i += 1) {
         _loop(i);
       }
+    } // Add Angles
+
+
+    if (optionsToUse.angle) {
+      var angle = optionsToUse.angle;
+      var _pCount = _this.points.length;
+
+      if (optionsToUse.close === false) {
+        _pCount -= 2;
+      }
+
+      var angleArray = makeArray(angle, _pCount);
+      var firstIndex = 0;
+
+      if (optionsToUse.close === false) {
+        firstIndex = 1;
+      }
+
+      for (var i = firstIndex; i < _pCount + firstIndex; i += 1) {
+        var j = i + 1;
+        var k = i - 1;
+
+        if (i === _pCount - 1 && optionsToUse.close) {
+          j = 0;
+        }
+
+        if (i === 0 && optionsToUse.close) {
+          k = _pCount - 1;
+        }
+
+        var name = "angle".concat(i);
+        var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          p1: _this.points[k],
+          p2: _this.points[i],
+          p3: _this.points[j]
+        }, angleArray[i]);
+
+        var angleAnnotation = _this.objects.angle(angleOptions);
+
+        _this.add(name, angleAnnotation);
+      }
     } // Add Line
 
 
@@ -14606,73 +14647,31 @@ function (_DiagramElementCollec) {
     if (optionsToUse.side) {
       var side = optionsToUse.side;
 
-      var _pCount = _this.points.length - 1;
+      var _pCount2 = _this.points.length - 1;
 
       if (optionsToUse.close) {
-        _pCount += 1;
+        _pCount2 += 1;
       }
 
-      var sideArray = makeArray(side, _pCount);
+      var sideArray = makeArray(side, _pCount2);
 
-      for (var i = 0; i < _pCount; i += 1) {
-        var j = i + 1;
-
-        if (i === _pCount - 1 && optionsToUse.close) {
-          j = 0;
-        }
-
-        var name = "side".concat(i).concat(j);
-        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: _this.points[i],
-          p2: _this.points[j]
-        }, sideArray[i]);
-
-        var sideLine = _this.objects.line(sideOptions);
-
-        _this.add(name, sideLine);
-      }
-    } // Add Angles
-
-
-    if (optionsToUse.angle) {
-      var angle = optionsToUse.angle;
-      var _pCount2 = _this.points.length;
-
-      if (optionsToUse.close === false) {
-        _pCount2 -= 2;
-      }
-
-      var angleArray = makeArray(angle, _pCount2);
-      var firstIndex = 0;
-
-      if (optionsToUse.close === false) {
-        firstIndex = 1;
-      }
-
-      for (var _i2 = firstIndex; _i2 < _pCount2 + firstIndex; _i2 += 1) {
+      for (var _i2 = 0; _i2 < _pCount2; _i2 += 1) {
         var _j = _i2 + 1;
-
-        var k = _i2 - 1;
 
         if (_i2 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        if (_i2 === 0 && optionsToUse.close) {
-          k = _pCount2 - 1;
-        }
+        var _name = "side".concat(_i2).concat(_j);
 
-        var _name = "angle".concat(_i2);
+        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          p1: _this.points[_i2],
+          p2: _this.points[_j]
+        }, sideArray[_i2]);
 
-        var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: _this.points[k],
-          p2: _this.points[_i2],
-          p3: _this.points[_j]
-        }, angleArray[_i2]);
+        var sideLine = _this.objects.line(sideOptions);
 
-        var angleAnnotation = _this.objects.angle(angleOptions);
-
-        _this.add(_name, angleAnnotation);
+        _this.add(_name, sideLine);
       }
     }
 
@@ -14773,8 +14772,51 @@ function (_DiagramElementCollec) {
       this.points = newPoints;
     }
   }, {
+    key: "updateRotation",
+    value: function updateRotation() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var i = 0; // $FlowFixMe
+
+      var angle = this["_angle".concat(i)];
+
+      while (angle != null) {
+        angle.update(this.getRotation() + rotationOffset);
+        i += 1; // $FlowFixMe
+
+        angle = this["_angle".concat(i)];
+      }
+
+      i = 0; // $FlowFixMe
+
+      var side = this["_side".concat(i).concat(i + 1)];
+
+      while (side != null) {
+        side.updateLabel(this.getRotation() + rotationOffset);
+        i += 1; // $FlowFixMe
+
+        side = this["_side".concat(i).concat(i + 1)];
+      } // $FlowFixMe
+
+
+      side = this["_side".concat(i, 0)];
+
+      if (side != null) {
+        side.updateLabel(this.getRotation() + rotationOffset);
+      }
+    }
+  }, {
     key: "setPositionWithoutMoving",
-    value: function setPositionWithoutMoving(newPosition) {
+    value: function setPositionWithoutMoving(newPositionPointOrX) {
+      var newPositionY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var newPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (typeof newPositionPointOrX === 'number') {
+        newPosition.x = newPositionPointOrX;
+        newPosition.y = newPositionY;
+      } else {
+        newPosition = newPositionPointOrX;
+      }
+
       var currentPosition = this.getPosition();
       var delta = currentPosition.sub(newPosition);
       this.setPosition(newPosition);
@@ -14797,7 +14839,17 @@ function (_DiagramElementCollec) {
     }
   }, {
     key: "setScaleWithoutMoving",
-    value: function setScaleWithoutMoving(newScale) {
+    value: function setScaleWithoutMoving(newScalePointOrX) {
+      var newScaleY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var newScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (typeof newScalePointOrX === 'number') {
+        newScale.x = newScalePointOrX;
+        newScale.y = newScaleY;
+      } else {
+        newScale = newScalePointOrX;
+      }
+
       var currentScale = this.getScale();
       var delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](currentScale.x / newScale.x, currentScale.y / newScale.y);
       var deltaMatrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(delta).m();

@@ -1,35 +1,24 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-import TriangleCollection from '../common/diagramCollectionTriangles';
-import AAACollection from '../common/diagramCollectionAAA';
-import SASCollection from '../common/diagramCollectionSAS';
-import SSSCollection from '../common/diagramCollectionSSS';
-import SSACollection from '../common/diagramCollectionSSA';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _triangle: TriangleCollection;
-  _aaa: AAACollection;
-  _sas: SASCollection;
-  _sss: SSSCollection;
-  _ssa: SSACollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
-    transform: Transform = new Transform('1 DiagramCollection'),
+    transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('triangle', new TriangleCollection(diagram, this.layout));
-    this.add('aaa', new AAACollection(diagram, this.layout));
-    this.add('sas', new SASCollection(diagram, this.layout));
-    this.add('sss', new SSSCollection(diagram, this.layout));
-    this.add('ssa', new SSACollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 }

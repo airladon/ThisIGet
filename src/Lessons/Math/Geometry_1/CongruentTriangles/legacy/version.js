@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Initial',
-  description: 'Initial Explanation - Presentation Format.',
-  uid: 'base',
+  title: 'Legacy',
+  description: 'First explanation of Topic.',
+  uid: 'legacy',
   qr: [
     'Asa',
     'Sss',
