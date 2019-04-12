@@ -363,6 +363,75 @@ class Content extends PresentationLessonContent {
         total._eqn.setScenario('top');
       },
     });
+
+
+    common = {
+      setContent: style({}, [
+        'Remember, angles |a| and |b| originally come from the triangle.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+        total._angleATop, total._angleBTop,
+      ],
+      setEnterState: () => {
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    };
+    this.addSection(common);
+
+    common.setEnterState = () => {
+      total._angleA.setColor(colors.angle1);
+      total._angleATop.setColor(colors.disabled);
+      total._angleB.setColor(colors.angle2);
+      total._angleBTop.setColor(colors.disabled);
+      total._angleC.setColor(colors.angle3);
+      total._topParallel.setColor(colors.disabled);
+      total._bottomParallel.setColor(colors.disabled);
+      total._fixedTriangle._line.setColor(colors.lines);
+      coll.updateTotalAngles();
+      total.setScenarios('parallel');
+    };
+    this.addSection(common, {
+      setSteadyState: () => {
+        coll.totalPulseAngles(['A', 'B']);
+      },
+    });
+
+    common.show = [
+      total._fixedTriangle._line,
+      total._angleC, total._angleB, total._angleA,
+    ];
+    this.addSection(common, {
+      setContent: 'Therefore:',
+      setSteadyState: () => {
+        total._eqn.showForm('0');
+        total._eqn.setScenario('top');
+      },
+    });
+    this.addSection(common, {
+      setContent: 'So angles in a triangle add up to |180º|.',
+    });
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        '|All triangles| have this relationship between angles.',
+        'This means if you know any two angles, you can always |calculate| the third!',
+      ]),
+    });
   }
 }
 
