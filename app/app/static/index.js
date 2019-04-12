@@ -12156,14 +12156,13 @@ function (_DiagramElementCollec) {
         precision: 0,
         orientation: 'horizontal',
         autoHide: -1,
-        textScale: 0.7,
+        scale: 0.7,
         color: this.color
       };
 
       if (this.curve) {
         defaultLabelOptions.radius = this.curve.radius;
-      } // console.log(options)
-
+      }
 
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultLabelOptions, options);
 
@@ -12172,7 +12171,7 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.scale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn);

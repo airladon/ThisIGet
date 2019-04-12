@@ -195,9 +195,10 @@ export default function lessonLayout() {
         width: layout.width,
         radius: 0.4,
         sides: 400,
-        label: {
-          radius: 0.41,
-        },
+      },
+      label: {
+        radius: 0.4,
+        scale: 1,
       },
     },
   };
