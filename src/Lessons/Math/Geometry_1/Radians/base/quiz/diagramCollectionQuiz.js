@@ -139,9 +139,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this._circle._arc._label.hide();
       this._question.drawingObject.setText(`Adjust the ${adjustable} to get an arc length of ${round(this.angle * this.radius * this.multiplier, 2).toFixed(2)}`);
     }
-
-    // this._check.show();
-    // this.diagram.animateNextFrame();
   }
 
   showAnswer() {

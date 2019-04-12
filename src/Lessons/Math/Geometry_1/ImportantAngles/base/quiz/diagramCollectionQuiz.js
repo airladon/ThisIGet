@@ -32,8 +32,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    // this.add('input', this.makeEntryBox('a1', '?', 3));
-    // this._input.setPosition(this.layout.input);
+    this.addCheck();
     this.add('main', new CommonCollection(diagram, this.layout));
     this.diagram.addElements(this, this.layout.addQuestion);
     this.hasTouchableElements = true;
@@ -59,7 +58,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   ) {
     this._main._fig.stop(true, false);
     this._main._fig._line1.stop(true, false);
-    const r = this._main._fig._line1.getRotation('0to360');
+    // const r = this._main._fig._line1.getRotation('0to360');
     this._main._fig.animations.new()
       .rotation({ target: start, duration: 1, direction })
       .whenFinished(whenFinished)
@@ -71,8 +70,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.animateNextFrame();
   }
 
-  newProblem() {
-    super.newProblem();
+  setupNewProblem() {
     this._main._fig.stop(true, false);
     this._main._fig._line1.stop(true, false);
     this._main._fig._acute.hide();
@@ -138,13 +136,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (r >= answerRange[0] && r <= answerRange[1]) {
       return 'correct';
     }
-    // this._input.disable();
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    // if (this.answer === true) {
-    //   return 'correct';
-    // }
     return 'incorrect';
   }
 }
