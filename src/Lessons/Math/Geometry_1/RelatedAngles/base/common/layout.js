@@ -60,6 +60,7 @@ export default function lessonLayout() {
         text: '',
         radius: layout.angleRadius * 1.05,
         autoHide: 0.2,
+        scale: 0.9,
       },
     },
   };

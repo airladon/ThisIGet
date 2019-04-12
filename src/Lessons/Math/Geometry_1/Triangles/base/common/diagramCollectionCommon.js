@@ -151,6 +151,11 @@ export default class CommonCollection extends CommonDiagramCollection {
       if (p.y > arr[yMax].y) {
         return i;
       }
+      if (p.y === arr[yMax].y) {
+        if (p.x > arr[yMax].x) {
+          return i;
+        }
+      }
       return yMax;
     }, 0);
     let remainingPoints = [0, 1, 2];
