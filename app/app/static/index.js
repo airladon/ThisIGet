@@ -19769,8 +19769,7 @@ function () {
     this.transform = transform._dup();
     this.isMovable = false;
     this.isTouchable = false;
-    this.isInteractive = null; // means touch or move will dictate
-
+    this.isInteractive = undefined;
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
     this.opacity = 1;
@@ -22020,12 +22019,36 @@ function (_DiagramElement2) {
       }
 
       return elements;
-    } // Get all ineractive elemnts, but only go as deep as a
+    } // // Get all ineractive elemnts, but only go as deep as a
+    // // DiagramElementColleciton if it is touchable or movable
+    // getAllCurrentlyInteractiveElements() {
+    //   let elements = [];
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     // if (element.isShown) {
+    //     if (element instanceof DiagramElementCollection) {
+    //       if (!element.isTouchable
+    //         && !element.isMovable
+    //         && element.hasTouchableElements
+    //         && (!element.isInteractive || element.isInteractive == null)
+    //       ) {
+    //         elements = [...elements, ...element.getAllCurrentlyInteractiveElements()];
+    //       }
+    //     }
+    //     if (element.isInteractive !== false
+    //       && (element.isTouchable || element.isMovable || element.isInteractive)) {
+    //       elements.push(element);
+    //     }
+    //     // }
+    //   }
+    //   return elements;
+    // }
+    // Get all ineractive elemnts, but only go as deep as a
     // DiagramElementColleciton if it is touchable or movable
 
   }, {
-    key: "getAllCurrentlyInteractiveElements",
-    value: function getAllCurrentlyInteractiveElements() {
+    key: "getAllPossiblyInteractiveElements",
+    value: function getAllPossiblyInteractiveElements() {
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
@@ -22033,14 +22056,13 @@ function (_DiagramElement2) {
 
         if (element instanceof DiagramElementCollection) {
           if (!element.isTouchable && !element.isMovable && element.hasTouchableElements && (!element.isInteractive || element.isInteractive == null)) {
-            elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllCurrentlyInteractiveElements()));
+            elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllPossiblyInteractiveElements()));
           }
         }
 
-        if (element.isInteractive !== false && (element.isTouchable || element.isMovable || element.isInteractive)) {
+        if (element.isInteractive !== undefined || element.isTouchable || element.isMovable) {
           elements.push(element);
-        } // }
-
+        }
       }
 
       return elements;

@@ -337,8 +337,7 @@ class PresentationLesson extends SimpleLesson {
     section.setSteadyState(this.state);
     this.firstPageShown = false;
     section.setInfoButton();
-    section.setInteractiveElements();
-    section.setInteractiveElementsButton();
+    this.updateInteractiveItems();
     this.inTransition = false;
     const { diagram } = this;
     if (diagram) {
@@ -347,6 +346,12 @@ class PresentationLesson extends SimpleLesson {
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.renderDiagrams();
+  }
+
+  updateInteractiveItems() {
+    const section = this.content.sections[this.currentSectionIndex];
+    section.setInteractiveElements();
+    section.setInteractiveElementsButton();
   }
 
   currentSection() {
@@ -400,6 +405,7 @@ class PresentationLesson extends SimpleLesson {
     super.initialize();
     // this.content.initialize();
     this.diagram = this.content.diagram;
+
     // this.overlayDiagram = this.content.overlayDiagram;
     this.diagram.lesson = this;
   }

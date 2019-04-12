@@ -414,19 +414,6 @@ export default function getLessonIndex() {
             'Main',
           ],
         },
-        legacy: {
-          title: 'legacy',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-          ],
-        },
       },
       dependencies: [
         'adjacent_angles',
@@ -570,21 +557,6 @@ export default function getLessonIndex() {
           title: 'Initial',
           description: 'Presentation form - interactive..',
           path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
-        },
-        legacy: {
-          title: 'Legacy',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
           onPath: true,
           topics: [
             'dev',

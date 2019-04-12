@@ -464,7 +464,7 @@ class Section {
       }
 
       // Get all movable diagram elements
-      const diagramElements = this.diagram.elements.getAllCurrentlyInteractiveElements();
+      const diagramElements = this.diagram.elements.getAllPossiblyInteractiveElements();
       // console.log(this.diagram.elements)
       // debugger;
       diagramElements.forEach((element) => {

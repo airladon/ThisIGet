@@ -59,6 +59,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.hasTouchableElements = true;
     this.answerIndex = -1;
     this.setupNewProblem();
+    this.diagram.lesson.updateInteractiveItems();
     this.diagram.animateNextFrame();
   }
 
@@ -91,6 +92,7 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.show();
       this._check.enable();
     }
+    this.diagram.lesson.updateInteractiveItems();
   }
 
   showCheck() {
