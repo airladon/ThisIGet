@@ -151,6 +151,27 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   updateTotalAngles() {
+    const { points } = this._totalAngle._fixedTriangle;
+    let maxIndex = points.reduce((yMax, p, i, arr) => {
+      if (p.y > arr[yMax]) {
+        return i;
+      }
+      return yMax;
+    }, 0);
+    let remainingPoints = [0, 1, 2];
+    const top = points[maxIndex];
+    remainingPoints = remainingPoints.filter((val, i, arr) => i === maxIndex);
+    let left = points(remainingPoints[0]);
+    let right = points(remainingPoints[1]);
+    if (left.x > right.x) {
+      left = points(remainingPoints[1]);
+      right = points(remainingPoints[0]);
+    }
 
+    const angleA = this._totalAngle._angleA;
+    const angleB = this._totalAngle._angleB;
+    const angleC = this._totalAngle._angleC;
+
+    angleA
   }
 }
