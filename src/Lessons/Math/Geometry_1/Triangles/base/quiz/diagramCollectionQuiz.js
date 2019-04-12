@@ -97,7 +97,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
-    super.setupNewProblem();
     this.randomTriangle();
     this.triangle.updatePoints(this.fixedTriangle.points.map(p => p._dup()));
     this.triangle._line.show();
