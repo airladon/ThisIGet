@@ -14769,6 +14769,41 @@ function (_DiagramElementCollec) {
 
       this.points = newPoints;
     }
+  }, {
+    key: "setPositionWithoutMoving",
+    value: function setPositionWithoutMoving(newPosition) {
+      var currentPosition = this.getPosition();
+      var delta = currentPosition.sub(newPosition);
+      this.setPosition(newPosition);
+      var newPoints = this.points.map(function (p) {
+        return p.add(delta);
+      });
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setRotationWithoutMoving",
+    value: function setRotationWithoutMoving(newRotation) {
+      var currentRotation = this.getRotation();
+      var delta = currentRotation - newRotation;
+      var deltaMatrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(delta).m();
+      this.setRotation(newRotation);
+      var newPoints = this.points.map(function (p) {
+        return p.transformBy(deltaMatrix);
+      });
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setScaleWithoutMoving",
+    value: function setScaleWithoutMoving(newScale) {
+      var currentScale = this.getScale();
+      var delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](currentScale.x / newScale.x, currentScale.y / newScale.y);
+      var deltaMatrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(delta).m();
+      this.setScale(newScale);
+      var newPoints = this.points.map(function (p) {
+        return p.transformBy(deltaMatrix);
+      });
+      this.updatePoints(newPoints);
+    }
   }]);
 
   return DiagramObjectPolyLine;
@@ -23691,13 +23726,13 @@ function () {
     /* eslint-disable comma-dangle */
 
   }, {
-    key: "midpoint",
-    value: function midpoint() {
+    key: "midPoint",
+    value: function midPoint() {
       var length = this.length();
       var direction = this.p2.sub(this.p1);
       var angle = Math.atan2(direction.y, direction.x);
-      var midpoint = point(this.p1.x + length / 2 * Math.cos(angle), this.p1.y + length / 2 * Math.sin(angle));
-      return midpoint;
+      var midPoint = point(this.p1.x + length / 2 * Math.cos(angle), this.p1.y + length / 2 * Math.sin(angle));
+      return midPoint;
     }
     /* eslint-enable comma-dangle */
 
@@ -23883,22 +23918,22 @@ function () {
           var line21 = new Line(l1.p2, l2.p1);
           var line22 = new Line(l1.p2, l2.p2);
 
-          var _i2 = line11.midpoint();
+          var _i2 = line11.midPoint();
 
           var len = line11.length();
 
           if (line12.length() < len) {
-            _i2 = line12.midpoint();
+            _i2 = line12.midPoint();
             len = line12.length();
           }
 
           if (line21.length() < len) {
-            _i2 = line21.midpoint();
+            _i2 = line21.midPoint();
             len = line21.length();
           }
 
           if (line22.length() < len) {
-            _i2 = line22.midpoint();
+            _i2 = line22.midPoint();
             len = line22.length();
           }
 
@@ -23910,12 +23945,12 @@ function () {
         }
 
         if (l1.p1.isOnLine(l2, precision) && l1.p2.isOnLine(l2, precision) && (!l2.p1.isOnLine(l1, precision) || !l2.p2.isOnLine(l1, precision)) || l2.p1.isOnLine(l1, precision) && l2.p2.isOnLine(l1, precision) && (!l1.p1.isOnLine(l2, precision) || !l1.p2.isOnLine(l2, precision))) {
-          var _midLine = new Line(l1.midpoint(), l2.midpoint());
+          var _midLine = new Line(l1.midPoint(), l2.midPoint());
 
           return {
             onLine: true,
             inLine: true,
-            intersect: _midLine.midpoint()
+            intersect: _midLine.midPoint()
           };
         }
 
@@ -23940,7 +23975,7 @@ function () {
         var _i;
 
         if (midLine instanceof Line) {
-          _i = midLine.midpoint();
+          _i = midLine.midPoint();
         }
 
         return {

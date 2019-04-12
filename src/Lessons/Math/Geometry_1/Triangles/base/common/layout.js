@@ -88,16 +88,16 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////
   //   Variable Triangle
   // ////////////////////////////////////////////////////////
-
+  const defaultTri = [
+    [2, -1.3],
+    [-2, -1.3],
+    [-1, 0.5],
+  ];
   layout.customTriangle = {
     name: 'customTriangle',
     method: 'polyLine',
     options: {
-      points: [
-        [-1, -1],
-        [0, 1],
-        [1, -1],
-      ],
+      points: defaultTri,
       close: true,
       color: colors.lines,
       width: layout.width,
@@ -131,15 +131,118 @@ export default function lessonLayout() {
       },
     },
     mods: {
-      _pad0: { scenarios: { props: { position: [2, -1.3] } } },
-      _pad1: { scenarios: { props: { position: [-2, -1.3] } } },
-      _pad2: { scenarios: { props: { position: [-1, 0.5] } } },
+      _pad0: { scenarios: { props: { position: defaultTri[0] } } },
+      _pad1: { scenarios: { props: { position: defaultTri[1] } } },
+      _pad2: { scenarios: { props: { position: defaultTri[2] } } },
     },
   };
 
+  // ////////////////////////////////////////////////////////
+  //   Total Angle
+  // ////////////////////////////////////////////////////////
+
+  layout.triangle = {
+    name: 'triangle',
+    method: 'polyLine',
+    options: {
+      points: defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      pad: {
+        color: colors.diagram.background,
+        radius: 0.2,
+        sides: 30,
+        fill: true,
+        isMovable: true,
+        touchRadius: 0.4,
+        boundary: [-2.9, -1.9, 5.8, 3.3],
+      },
+      // angle: {
+      //   color: colors.angles,
+      //   curve: {
+      //     radius: 0.3,
+      //     width: layout.width,
+      //   },
+      //   autoRightAngle: false,
+      // },
+      side: {
+        label: {
+          text: '',
+        },
+      },
+    },
+  };
+
+  layout.fixedTriangle = {
+    name: 'fixedTriangle',
+    method: 'polyLine',
+    options: {
+      points: defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+    },
+  };
+
+  // layout.fixedTriangleWindow = new Rect(-2.5, -1.7, 5, 3);
+  layout.fixedTriangleCenter = new Point(0, -0.2);
+
+  const angles = {
+    method: 'angle',
+    options: {
+      curve: {
+        width: layout.width,
+        radius: 0.3,
+        label: {
+          radius: 0.31,
+        },
+      },
+    },
+  };
+
+  layout.angleA = joinObjects({}, angles, {
+    name: 'angleA',
+    options: { color: colors.angle1, label: { text: 'a' } },
+  });
+
+  layout.angleB = joinObjects({}, angles, {
+    name: 'angleB',
+    options: { color: colors.angle2, label: { text: 'b' } },
+  });
+
+  layout.angleC = joinObjects({}, angles, {
+    name: 'angleC',
+    options: { color: colors.angle3, label: { text: 'c' } },
+  });
+
+  layout.angleATop = joinObjects({}, angles, {
+    name: 'angleATop',
+    options: { color: colors.angle1, label: { text: 'a' } },
+  });
+
+  layout.angleCTop = joinObjects({}, angles, {
+    name: 'angleCTop',
+    options: { color: colors.angle3, label: { text: 'c' } },
+  });
+
+  layout.totalAngle = {
+    name: 'totalAngle',
+    method: 'collection',
+    addElements: [
+      layout.angleA,
+      layout.angleB,
+      layout.angleC,
+      layout.angleATop,
+      layout.angleCTop,
+      layout.triangle,
+      layout.fixedTriangle,
+    ],
+  };
   layout.addElements = [
     triangleExamples,
     layout.customTriangle,
+    layout.totalAngle,
   ];
   return layout;
 }
