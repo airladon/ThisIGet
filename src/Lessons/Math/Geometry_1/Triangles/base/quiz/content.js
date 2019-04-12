@@ -12,10 +12,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 
 const {
-//   click,
-//   centerV,
   highlight,
-//   clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -38,9 +35,9 @@ class Content extends PresentationLessonContent {
     const quiz = diag._quiz;
     this.addSection({
       setContent: ['Find the |unknown| angle in the triangle.'],
-      // modifiers: {
-      //   unknown: highlight(colors.angle2),
-      // },
+      modifiers: {
+        unknown: highlight(colors.angle2),
+      },
       show: [quiz._check, quiz._input],
       setSteadyState: () => {
         quiz.newProblem();

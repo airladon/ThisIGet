@@ -52,6 +52,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       },
       transform,
     );
+    this.addCheck();
     this.diagram.addElements(this, this.layout.addElements);
 
     const setupLines = (lineNumber: number) => {
@@ -115,8 +116,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   tryAgain() {
     super.tryAgain();
     this.resetLines();
-    // this._input.enable();
-    // this._input.setValue('');
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -125,7 +124,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     element.transform.updateRotation(angle);
   }
 
-  setupNextProblem() {
+  setupNewProblem() {
     const line1 = this._line1;
     const line2 = this._line2;
     const line3 = this._line3;
@@ -170,27 +169,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
 
     this.parallelLines = [this[`_line${p1}`], this[`_line${p2}`]];
-  }
 
-  beforeTransitionToNewProblem() {
-    this.hasTouchableElements = false;
     this.resetLines();
-  }
-
-  newProblemReady() {
-    this.hasTouchableElements = true;
-    this._check.show();
-  }
-
-  newProblem() {
-    super.newProblem();
-    this.setupNextProblem();
-    this.beforeTransitionToNewProblem();
-    this.animations.new()
-      .scenarios({ target: 'quiz', duration: 1 })
-      .whenFinished(this.newProblemReady.bind(this))
-      .start();
-    this.diagram.animateNextFrame();
+    this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
   showAnswer() {
@@ -225,12 +206,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (this.isParallel(selected[0], selected[1])) {
       return 'correct';
     }
-    // console.log(this.parallelLines, selected, this.parallelLines.indexOf(selected[0]), this.parallelLines.indexOf(selected[1]))
     if (this.parallelLines.indexOf(selected[0]) > -1
       && this.parallelLines.indexOf(selected[1]) > -1) {
       return 'correct';
     }
-    // console.log('incorrect')
     return 'incorrect';
   }
 }

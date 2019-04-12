@@ -5,6 +5,8 @@ const {
   Diagram, Transform, Point, DiagramElementCollection, DiagramElementPrimative,
 } = Fig;
 
+const { joinObjects } = Fig.tools.misc;
+
 export type TypeMessages = {
   _correct: DiagramElementPrimative;
   _incorrect: DiagramElementPrimative;
@@ -39,7 +41,33 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.diagram.animateNextFrame();
   }
 
-  beforeTransitionToNewProblem() {
+  // eslint-disable-next-line class-methods-use-this
+  setupNewProblem() {}
+
+  newProblem() {
+    this._messages.hideAll();
+    this._newProblem.hide();
+    this._showAnotherAnswer.hide();
+    if (this._input != null) {
+      this._input.enable();
+      this._input.setValue('');
+    }
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
+    this.hasTouchableElements = true;
+    this.answerIndex = -1;
+    this.setupNewProblem();
+    this.diagram.animateNextFrame();
+  }
+
+  transitionToNewProblem(optionsIn: Object = {}) {
+    const defaultOptionsIn = {
+      target: 'quiz',
+      duration: 1,
+    };
+    const options = joinObjects({}, defaultOptionsIn, optionsIn);
     if (this._input != null) {
       this._input.disable();
       this._input.setValue('');
@@ -47,6 +75,11 @@ const CommonQuizMixin = superclass => class extends superclass {
     if (this._check != null) {
       this._check.disable();
     }
+    this.animations.new()
+      .scenarios(options)
+      .whenFinished(this.afterTransitionToNewProblem.bind(this))
+      .start();
+    this.diagram.animateNextFrame();
   }
 
   afterTransitionToNewProblem() {
@@ -58,30 +91,6 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.show();
       this._check.enable();
     }
-  }
-
-  newProblem() {
-    this._messages.hideAll();
-    this._newProblem.hide();
-    this._showAnotherAnswer.hide();
-    this.hasTouchableElements = true;
-    this.answerIndex = -1;
-    this.diagram.animateNextFrame();
-  }
-
-  newProblem() {
-    this._messages.hideAll();
-    this._newProblem.hide();
-    this._showAnotherAnswer.hide();
-    this.hasTouchableElements = true;
-    this.answerIndex = -1;
-    this.setupNewProblem();
-    this.beforeTransitionToNewProblem();
-    this.animations.new()
-      .scenarios({ target: 'next', duration: 1 })
-      .whenFinished(this.afterTransitionToNewProblem.bind(this))
-      .start();
-    this.diagram.animateNextFrame();
   }
 
   showCheck() {

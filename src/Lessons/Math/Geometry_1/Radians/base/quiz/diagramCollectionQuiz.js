@@ -35,8 +35,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    // this.add('input', this.makeEntryBox('a1', '?', 3));
-    // this._input.setPosition(this.layout.input);
+    this.addCheck();
     this.diagram.addElements(this, this.layout.addElements);
     this._circle._line1.makeTouchable();
     this._circle._line1.setTransformCallback = this.updateAngle.bind(this);
@@ -97,8 +96,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.diagram.animateNextFrame();
   }
 
-  newProblem() {
-    super.newProblem();
+  setupNewProblem() {
+    // super.newProblem();
 
     this.units = removeRandElement(['degrees', 'radians']);
 
@@ -141,8 +140,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this._question.drawingObject.setText(`Adjust the ${adjustable} to get an arc length of ${round(this.angle * this.radius * this.multiplier, 2).toFixed(2)}`);
     }
 
-    this._check.show();
-    this.diagram.animateNextFrame();
+    // this._check.show();
+    // this.diagram.animateNextFrame();
   }
 
   showAnswer() {

@@ -51,7 +51,7 @@ class Content extends PresentationLessonContent {
         'id__quiz__1',
         quiz1._line2._midLine,
         quiz1._line2._line,
-        interactiveItem(quiz1._check, [0.9, 0.8]),
+        quiz1._check,
       ],
       show: [quiz1._line1, quiz1._line2],
       setSteadyState: () => {
@@ -74,7 +74,7 @@ class Content extends PresentationLessonContent {
         quiz2._line4._midLine,
         quiz2._line5._midLine,
         quiz2._line6._midLine,
-        interactiveItem(quiz2._check, [0.9, 0.8]),
+        quiz2._check,
       ],
       show: [
         quiz2._line1, quiz2._line2, quiz2._line3,

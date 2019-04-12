@@ -42,6 +42,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       },
       transform,
     );
+    this.addCheck();
     this.diagram.addElements(this, this.layout.addElements);
     this._line1.setTransformCallback = (t: Transform) => {
       this._line1.updateMoveTransform(t);
@@ -64,13 +65,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     element.transform.updateRotation(angle);
   }
 
-  tryAgain() {
-    super.tryAgain();
-    // this._input.enable();
-    // this._input.setValue('');
-  }
-
-  setupNextProblem() {
+  setupNewProblem() {
     const line1 = this._line1;
     const line2 = this._line2;
     const bounds = this.layout.addElements[0].options.move.translationBounds;
@@ -78,26 +73,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const lay = { bounds, length };
     line1.scenarios.quiz = randomizeParallelLine(lay);
     line2.scenarios.quiz = randomizeParallelLine(lay);
-  }
-
-  beforeTransitionToNewProblem() {
-    this.hasTouchableElements = false;
-  }
-
-  newProblemReady() {
-    this.hasTouchableElements = true;
-    this._check.show();
-  }
-
-  newProblem() {
-    super.newProblem();
-    this.setupNextProblem();
-    this.beforeTransitionToNewProblem();
-    this.animations.new()
-      .scenarios({ target: 'quiz', duration: 1 })
-      .whenFinished(this.newProblemReady.bind(this))
-      .start();
-    this.diagram.animateNextFrame();
+    this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
   showAnswer() {

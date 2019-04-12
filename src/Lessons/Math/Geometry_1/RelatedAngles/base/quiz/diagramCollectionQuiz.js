@@ -29,13 +29,16 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-
+    this.addCheck();
     this.addInput('input', '?', 3, 0);
     this.add('main', new CommonCollection(diagram, this.layout));
 
     this._main._fig._line1.isInteractive = false;
     this._main._fig._line2.isInteractive = false;
     this._main._fig._line3.isInteractive = false;
+    this._main._fig._line1.isTouchable = false;
+    this._main._fig._line2.isTouchable = false;
+    this._main._fig._line3.isTouchable = false;
   }
 
   randomizeLines() {
@@ -76,7 +79,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
 
-  setupNextProblem() {
+  setupNewProblem() {
     this.randomizeLines();
     this.hideAngles();
     const fig = this._main._fig;
@@ -84,7 +87,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (r == null) {
       return;
     }
-    // const angleAValue = roundNum(r * 180 / Math.PI, 0);
     const angleAValue = roundNum(
       this._main._fig._line3.scenarios.quiz.rotation * 180 / Math.PI,
       0,
@@ -104,14 +106,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const knownAngleValue = angleValues[knownAngle.charAt(0)];
     const unknownAngleValue = angleValues[unknownAngle.charAt(0)];
 
-    this.angleToFind = unknownAngleValue;
+    this.answer = unknownAngleValue;
 
     // $FlowFixMe
     const knownAngleElement = fig[`_angle${knownAngle}`];
     knownAngleElement.label.setText(`${knownAngleValue}º`);
     knownAngleElement.showAll();
     knownAngleElement.setColor(this.layout.colors.angle2);
-    // knownAngleElement.label.eqn.reArrangeCurrentForm();
 
     // $FlowFixMe
     const unknownAngleElement = fig[`_angle${unknownAngle}`];
@@ -119,41 +120,17 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     unknownAngleElement.showAll();
     unknownAngleElement.setColor(this.layout.colors.angle1);
     this._main.updateIntersectingLineAngle();
-    this._input.show();
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  beforeTransitionToNewProblem() {
-  }
-
-  newProblemReady() {
-    this._input.setValue('');
-    this._input.enable();
-    this._main._fig.hasTouchableElements = false;
-  }
-
-  newProblem() {
-    super.newProblem();
-    this.showCheck();
-    this.setupNextProblem();
-    this.beforeTransitionToNewProblem();
-    this.animations.new()
-      .scenarios({ target: 'quiz', duration: 1 })
-      .whenFinished(this.newProblemReady.bind(this))
-      .start();
-    this.diagram.animateNextFrame();
+    this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
   showAnswer() {
     super.showAnswer();
-    this._input.setValue(this.angleToFind);
-    this._input.disable();
     this.diagram.animateNextFrame();
   }
 
   findAnswer() {
     this._input.disable();
-    if (this._input.getValue() === this.angleToFind.toString()) {
+    if (this._input.getValue() === this.answer.toString()) {
       return 'correct';
     }
     return 'incorrect';

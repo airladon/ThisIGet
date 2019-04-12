@@ -96,18 +96,16 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._input.setValue('');
   }
 
-  setupNextProblem() {
+  setupNewProblem() {
+    super.setupNewProblem();
     this.randomTriangle();
-  }
-
-  beforeTransitionToNewProblem() {
-    super.beforeTransitionToNewProblem();
     this.triangle.updatePoints(this.fixedTriangle.points.map(p => p._dup()));
     this.triangle._line.show();
     this.fixedTriangle.hide();
     this._main._totalAngle._angleA.hide();
     this._main._totalAngle._angleB.hide();
     this._main._totalAngle._angleC.hide();
+    this.transitionToNewProblem({ target: 'next', duration: 1 });
   }
 
   afterTransitionToNewProblem() {
@@ -133,17 +131,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._main._totalAngle._angleA.showAll();
     this._main._totalAngle._angleB.showAll();
     this._main._totalAngle._angleC.showAll();
-  }
-
-  newProblem() {
-    super.newProblem();
-    this.setupNextProblem();
-    this.beforeTransitionToNewProblem();
-    this.animations.new()
-      .scenarios({ target: 'next', duration: 1 })
-      .whenFinished(this.afterTransitionToNewProblem.bind(this))
-      .start();
-    this.diagram.animateNextFrame();
   }
 
   showAnswer() {
