@@ -221,9 +221,9 @@ export default function lessonLayout() {
     options: { color: colors.angle1, label: { text: 'a' } },
   });
 
-  layout.angleCTop = joinObjects({}, angles, {
-    name: 'angleCTop',
-    options: { color: colors.angle3, label: { text: 'c' } },
+  layout.angleBTop = joinObjects({}, angles, {
+    name: 'angleBTop',
+    options: { color: colors.angle2, label: { text: 'b' } },
   });
 
   layout.totalAngle = {
@@ -234,7 +234,7 @@ export default function lessonLayout() {
       layout.angleB,
       layout.angleC,
       layout.angleATop,
-      layout.angleCTop,
+      layout.angleBTop,
       layout.triangle,
       layout.fixedTriangle,
     ],
