@@ -40,7 +40,7 @@ class Content extends PresentationLessonContent {
     const fig = main._fig;
 
     this.addSection({
-      show: [fig._line1, fig._line2, fig._angle, quiz._question],
+      show: [fig._line1, fig._line2, fig._angle, quiz._question, quiz._check],
       setSteadyState: () => {
         fig.setScenario('quiz');
         quiz.newProblem();

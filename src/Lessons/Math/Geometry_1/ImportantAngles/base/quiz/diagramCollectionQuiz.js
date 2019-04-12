@@ -93,9 +93,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const angle = rand(0.2, Math.PI * 1.8);
     const start = rand(0, Math.PI * 1.9);
     const direction = randElement([1, 2, 0, -1]);
+    this.showCheck();
     this.goToAngle(start, angle, direction, () => {
       this._question.drawingObject.setText(`Adjust the blue line to create ${this.answer} angle.`);
-      this._check.showAll();
       this.diagram.animateNextFrame();
     });
     this.diagram.animateNextFrame();

@@ -129,13 +129,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   newProblemReady() {
     this._input.setValue('');
     this._input.enable();
-    this._check.show();
     this._main._fig.hasTouchableElements = false;
   }
 
   newProblem() {
-    // this.diagram.setFirstTransform();
     super.newProblem();
+    this.showCheck();
     this.setupNextProblem();
     this.beforeTransitionToNewProblem();
     this.animations.new()

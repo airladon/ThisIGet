@@ -38,6 +38,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
+    this.addCheck();
     this.addInput('input', '?', 3, 0);
     this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
@@ -100,6 +101,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   beforeTransitionToNewProblem() {
+    super.beforeTransitionToNewProblem();
     this.triangle.updatePoints(this.fixedTriangle.points.map(p => p._dup()));
     this.triangle._line.show();
     this.fixedTriangle.hide();
@@ -109,6 +111,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   afterTransitionToNewProblem() {
+    super.afterTransitionToNewProblem();
     this.triangle.hide();
     this.fixedTriangle.updatePoints(this.triangle.points.map(p => p._dup()));
     this.updateAngles();
@@ -134,7 +137,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   newProblem() {
     super.newProblem();
-    this.showCheck();
     this.setupNextProblem();
     this.beforeTransitionToNewProblem();
     this.animations.new()
@@ -146,9 +148,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   showAnswer() {
     super.showAnswer();
-    this._input.setValue(this.answer);
-    this._input.disable();
-    this._check.hide();
     this.diagram.animateNextFrame();
   }
 

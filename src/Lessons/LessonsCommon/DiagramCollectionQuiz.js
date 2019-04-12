@@ -25,9 +25,9 @@ const CommonQuizMixin = superclass => class extends superclass {
   answer: any;
   answerIndex: number;
 
-  tryAgain(showCheck: boolean = true) {
+  tryAgain() {
     this._messages.hideAll();
-    if (showCheck) {
+    if (this._check != null) {
       this._check.show();
       this._check.enable();
     }
@@ -39,26 +39,62 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.diagram.animateNextFrame();
   }
 
-  newProblem() {
-    this._messages.hideAll();
-    this._newProblem.hide();
+  beforeTransitionToNewProblem() {
+    if (this._input != null) {
+      this._input.disable();
+      this._input.setValue('');
+    }
+    if (this._check != null) {
+      this._check.disable();
+    }
+  }
+
+  afterTransitionToNewProblem() {
     if (this._input != null) {
       this._input.enable();
       this._input.setValue('');
     }
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
+  }
+
+  newProblem() {
+    this._messages.hideAll();
+    this._newProblem.hide();
     this._showAnotherAnswer.hide();
     this.hasTouchableElements = true;
     this.answerIndex = -1;
     this.diagram.animateNextFrame();
   }
 
+  newProblem() {
+    this._messages.hideAll();
+    this._newProblem.hide();
+    this._showAnotherAnswer.hide();
+    this.hasTouchableElements = true;
+    this.answerIndex = -1;
+    this.setupNewProblem();
+    this.beforeTransitionToNewProblem();
+    this.animations.new()
+      .scenarios({ target: 'next', duration: 1 })
+      .whenFinished(this.afterTransitionToNewProblem.bind(this))
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   showCheck() {
-    this._check.show();
-    this._check.enable();
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
   }
 
   checkAnswer() {
-    this._check.disable();
+    if (this._check != null) {
+      this._check.disable();
+    }
     this.hasTouchableElements = false;
     const answer = this.findAnswer();
     if (answer === 'correct') {
@@ -83,11 +119,14 @@ const CommonQuizMixin = superclass => class extends superclass {
   showAnswer() {
     this.hasTouchableElements = false;
     this._messages.hideAll();
-    this._check.disable();
     this._newProblem.show();
     if (this._input != null) {
       this._input.disable();
       this._input.setValue(this.answer);
+    }
+    if (this._check != null) {
+      this._check.hide();
+      this._check.disable();
     }
     this.answerIndex = (this.answerIndex + 1) % this.answers.length;
     if (this.answers.length > 1) {
@@ -103,14 +142,21 @@ const CommonQuizMixin = superclass => class extends superclass {
     transform: Transform = new Transform(),
   ) {
     super(diagram, layout, transform);
-    this.add('check', this.makeCheckButton(id));
+    // this.add('check', this.makeCheckButton(id));
     this.add('newProblem', this.makeNewProblemButton(id));
     this.add('messages', this.makeQuizAnswerMessages(id, messages));
     this.add('showAnotherAnswer', this.makeShowAnotherAnswerButton(id));
     this._messages.hideAll();
     this.answers = [];
     this.answer = '';
+    this.id = id;
     // this.answerIndex = -1;
+  }
+
+  addCheck(
+    id: string = this.id,
+  ) {
+    this.add('check', this.makeCheckButton(id));
   }
 
   makeAnswerBox(
