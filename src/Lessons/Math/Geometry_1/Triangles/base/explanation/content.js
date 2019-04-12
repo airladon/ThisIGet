@@ -71,7 +71,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Properties',
       setContent: [
-        'What properties does a triangle have? Well, its definition gives us some, |three_side_lengths|, and |three_angles|.',
+        'What |properties| does a triangle have? Well, its definition gives us some to start with: |three_side_lengths|, and |three_angles|.',
       ],
       modifiers: {
         three_side_lengths: click(coll.growSides, [coll], colors.sideLengths),
@@ -111,7 +111,7 @@ class Content extends PresentationLessonContent {
       setContent: style({ centerV: true }, [
         'In fact, a triangle\'s side lengths and angles |are all related|. If you know any four (and sometimes three), you can calculate the remainder!',
         'In this lesson we will focus on the |relationship between angles|.',
-        ' The relationship between sides and angles requires developing other concepts first, which are future lessons.',
+        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future lessons.',
       ]),
     });
 
@@ -126,6 +126,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Total Angle',
       setContent: style({}, [
         'Start with |any| triangle.',
       ]),
