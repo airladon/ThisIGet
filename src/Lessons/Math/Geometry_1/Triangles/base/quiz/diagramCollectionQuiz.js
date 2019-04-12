@@ -124,8 +124,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       const roundedAngle = round(element.angle * 180 / Math.PI, 0);
       sumAngles += roundedAngle;
       element.label.setText(`${roundedAngle}º`);
+      element.setColor(this.layout.colors.angle1);
     });
     this._main._totalAngle[`_angle${unknown}`].label.setText('?');
+    this._main._totalAngle[`_angle${unknown}`].setColor(this.layout.colors.angle2);
     this.answer = 180 - sumAngles;
     this._main._totalAngle._angleA.showAll();
     this._main._totalAngle._angleB.showAll();

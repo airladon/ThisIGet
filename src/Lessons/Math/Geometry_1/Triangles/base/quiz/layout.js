@@ -12,5 +12,8 @@ import commonLessonLayout from '../common/layout';
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
   const layout: Object = commonLessonLayout();
+  layout.angleA.options.label.scale = 0.8;
+  layout.angleB.options.label.scale = 0.8;
+  layout.angleC.options.label.scale = 0.8;
   return layout;
 }

@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
@@ -11,15 +11,15 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
+const {
 //   click,
 //   centerV,
-//   highlight,
+  highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -36,15 +36,17 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
-    const main = quiz._main;
-    const total = main._totalAngle;
+    // const main = quiz._main;
+    // const total = main._totalAngle;
 
     this.addSection({
-      setContent: ['Question'],
+      setContent: ['Find the |unknown| angle in the triangle.'],
+      modifiers: {
+        unknown: highlight(colors.angle2),
+      },
       setSteadyState: () => {
         quiz.newProblem();
       },
-      setLeaveState: () => {},
     });
   }
 }
