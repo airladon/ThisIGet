@@ -14543,6 +14543,7 @@ function (_DiagramElementCollec) {
     _this.largerTouchBorder = optionsToUse.largerTouchBorder;
     _this.isTouchDevice = isTouchDevice;
     _this.animateNextFrame = animateNextFrame;
+    _this.updatePointsCallback = null;
     _this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
 
     _this.transform.updateTranslation(_this.position);
@@ -14575,7 +14576,7 @@ function (_DiagramElementCollec) {
             padShape.increaseBorderSize(multiplier);
           }
 
-          var boundary = pad.boundary;
+          var boundary = padArray[i].boundary; // console.log(boundary, padArray[i])
 
           if (boundary === 'diagram') {
             boundary = shapes.limits._dup();
@@ -14590,8 +14591,8 @@ function (_DiagramElementCollec) {
             boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
           }
 
-          if (pad.touchRadiusInBoundary === false && pad.touchRadius != null) {
-            var delta = pad.touchRadius - pad.radius;
+          if (padArray[i].touchRadiusInBoundary === false && padArray[i].touchRadius != null) {
+            var delta = padArray[i].touchRadius - padArray[i].radius;
             boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundary.left - delta, boundary.bottom - delta, boundary.width + 2 * delta, boundary.height + 2 * delta);
           }
 
@@ -14650,7 +14651,7 @@ function (_DiagramElementCollec) {
           p1: _this.points[k],
           p2: _this.points[i],
           p3: _this.points[j]
-        }, angleArray[i]);
+        }, angleArray[i - firstIndex]);
 
         var angleAnnotation = _this.objects.angle(angleOptions);
 
@@ -14798,6 +14799,10 @@ function (_DiagramElementCollec) {
       }
 
       this.points = newPoints;
+
+      if (this.updatePointsCallback != null) {
+        this.updatePointsCallback();
+      }
     }
   }, {
     key: "updateRotation",

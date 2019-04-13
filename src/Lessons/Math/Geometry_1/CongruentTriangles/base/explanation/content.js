@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const congruent = coll._congruentTriangles;
     const aaa = diag._aaa;
+    const sas = diag._sas;
 
     this.addSection({
       title: 'Congruency',
@@ -125,8 +126,18 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       show: [aaa],
+    });
+    this.addSection({
+      setContent: ['|rotation| |length| |goto|'],
+      modifiers: {
+        rotation: click(sas.randRotation, [sas], colors.diagram.action),
+        length: click(sas.randLength, [sas], colors.diagram.action),
+        goto: click(sas.goToTri, [sas], colors.diagram.action),
+      },
+      show: [sas],
       setSteadyState: () => {
-        console.log(coll)
+        console.log(sas)
+        sas._fig._angle2.showAll();
       }
     });
   }

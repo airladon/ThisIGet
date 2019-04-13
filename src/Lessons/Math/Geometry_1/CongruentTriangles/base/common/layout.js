@@ -157,66 +157,110 @@ export default function lessonLayout() {
     },
   };
 
-  // const aaaAngle = (name, rc, rt) => ({
-  //   {
-  //     name,
-  //     method: 'angle',
-  //     options: {
-  //     color: colors.angles,
-  //     curve: {
-  //       radius: rc,
-  //       width: layout.width,
-  //     },
-  //     sides: 200,
-  //     label: {
-  //       text: null,
-  //       showRealAngle: true,
-  //       precision: 0,
-  //       radius: rt,
-  //     },
-  //   }
-  // });
 
-  // layout.aaaLeft = aaaAngle('corner1', 0.3, 0.3);
-  // layout.aaaTop = aaaAngle('corner1', 0.3, 0.4);
-  // layout.aaaRight = aaaAngle('corner1', 0.3, 0.3);
   layout.aaa = {
     name: 'fig',
     method: 'collection',
     addElements: [
       layout.aaaTri,
-      // layout.aaaLeft,
-      // layout.aaaTop,
-      // layout.aaaRight,
     ],
   };
 
   layout.addElementsAAA = [
     layout.aaa,
   ];
-  // ],
-  //   AAA: {
-  //     c1: {
-  //       angle: Math.PI / 6,
-  //       scenario: { position: new Point(-2, -1), rotation: 0 },
-  //       side: 3,
-  //       limitLine: new Line(new Point(-2.2, -1), new Point(-1, -1)),
-  //     },
-  //     c2: {
-  //       angle: Math.PI / 3,
-  //       scenario: { position: new Point(2, -1), rotation: Math.PI / 3 * 2 },
-  //       side: 2,
-  //       limitLine: new Line(new Point(2.2, -1), new Point(1, -1)),
-  //     },
-  //     c3: {
-  //       angle: Math.PI / 2,
-  //       scenario: {
-  //         position: new Point(1, 2 * (Math.sqrt(3) / 2 - 0.5)),
-  //         rotation: Math.PI / 6 * 7,
-  //       },
-  //       side: 0.5,
-  //       limitLine: null,
-  //     },
-  //   },
+
+  // /////////////////////////////////////////////////////////////////
+  // SAS
+  // /////////////////////////////////////////////////////////////////
+  const sasAngle = (rc, rt) => ({
+    color: colors.angles,
+    curve: {
+      radius: rc,
+      width: layout.width,
+    },
+    sides: 200,
+    label: {
+      text: null,
+      showRealAngle: true,
+      precision: 0,
+      radius: rt,
+    },
+  });
+
+  const sasPad = (moveable) => {
+    if (moveable) {
+      return {
+        color: colors.pads,
+        isMovable: true,
+        sides: 20,
+        radius: 0.07,
+        touchRadius: 0.8,
+        fill: true,
+        boundary: 'diagram',
+        touchRadiusInBoundary: false,
+      };
+    }
+    return {
+      color: colors.diagram.background,
+      radius: 0.01,
+      touchRadius: 0.01,
+    };
+  };
+  layout.sas = {
+    name: 'fig',
+    method: 'polyLine',
+    options: {
+      points: [
+        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
+        [2, -1],
+        [-2, -1],
+        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
+      ],
+      color: colors.sides,
+      width: layout.width,
+      close: false,
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.4,
+          width: layout.width,
+          sides: 100,
+        },
+        label: {
+          text: null,
+          showRealAngle: true,
+          precision: 0,
+          radius: 0.4,
+        },
+      },
+      side: {
+        offset: 0.1,
+        label: {
+          text: null,
+        },
+      },
+      pad: [
+        sasPad(true),
+        sasPad(false),
+        sasPad(false),
+        sasPad(false),
+      ],
+    },
+  };
+
+
+  // layout.sas = {
+  //   name: 'fig',
+  //   method: 'collection',
+  //   addElements: [
+  //     layout.sasTri,
+  //   ],
+  // };
+
+  layout.addElementsSAS = [
+    layout.sas,
+  ];
+  
   return layout;
 }
