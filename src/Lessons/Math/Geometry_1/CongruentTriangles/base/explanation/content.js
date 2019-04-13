@@ -15,7 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   style,
-  // highlight,
+  highlight,
   // clickW,
 } = Fig.tools.html;
 
@@ -207,6 +207,89 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
 
+    this.addSection({
+      setContent: [
+        'Now consider if you know |two side lengths| and the |angle_between| those two sides. How many triangles can be made with these constraints?',
+      ],
+      modifiers: {
+        angle_between: highlight(colors.angles),
+      },
+      show: [sas],
+      setSteadyState: () => {
+        sas.setProblemStatement();
+      },
+    });
+
+    let common = {
+      setContent: [
+        'There is |one_line| that can be drawn that connects the two end points.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        one_line: click(this.next, [this], colors.sides),
+      },
+      show: [sas],
+      setSteadyState: () => {
+        sas.setProblemStatement();
+      },
+    });
+
+    this.addSection(common, {
+      modifiers: {
+        one_line: click(sas.oneLine, [sas], colors.sides),
+      },
+      show: [sas],
+      setSteadyState: () => {
+        sas.setProblemStatement();
+        sas._fig._pad0.show();
+        sas._fig._angle1.show();
+        sas._fig._side01.show();
+        sas._fig._pad0.setColor(colors.diagram.background);
+        sas.oneLine();
+      },
+      setLeaveState: () => {
+        sas._fig._pad0.setColor(colors.pads);
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Are there any others? You can move the |pad| to try different lines.',
+      ],
+      modifiers: {
+        pad: click(sas.pulsePad, [sas], colors.pads),
+      },
+      show: [sas],
+      setSteadyState: () => {
+        sas.setMovableLeg();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'There is only one line |length| and |angle| possible. If this line has a |different_length| or |different_angle|, it does not form a triangle.',
+      ],
+      modifiers: {
+        length: click(sas.goToTri, [sas], colors.sides),
+        angle: click(sas.goToTri, [sas], colors.angles),
+        different_length: click(sas.randLength, [sas], colors.sides),
+        different_angle: click(sas.randRotation, [sas], colors.angles),
+      },
+      show: [sas],
+      setSteadyState: () => {
+        sas.setMovableLeg();
+      },
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
 
     this.addSection({
       setContent: ['|rotation| |length| |goto|'],

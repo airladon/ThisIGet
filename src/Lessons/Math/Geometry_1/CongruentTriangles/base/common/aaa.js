@@ -61,16 +61,18 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const left = this._fig._tri._pad2;
     const pad = randElement([right, left]);
     const { limitLine } = pad.move;
-    const midPoint = limitLine.midPoint();
-    let delta = rand(limitLine.length() / 3, limitLine.length() / 2);
-    const padPosition = pad.getPosition();
-    if (padPosition.x > midPoint.x) {
-      delta = -delta;
+    if (limitLine != null) {
+      const midPoint = limitLine.midPoint();
+      let delta = rand(limitLine.length() / 3, limitLine.length() / 2);
+      const padPosition = pad.getPosition();
+      if (padPosition.x > midPoint.x) {
+        delta = -delta;
+      }
+      pad.animations.cancelAll();
+      pad.animations.new()
+        .position({ target: padPosition.add(delta), duration: 0.5 })
+        .start();
     }
-    pad.animations.cancelAll();
-    pad.animations.new()
-      .position({ target: padPosition.add(delta), duration: 0.5 })
-      .start();
     this.diagram.animateNextFrame();
   }
 

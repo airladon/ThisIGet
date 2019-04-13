@@ -199,6 +199,7 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'polyLine',
     options: {
+      position: [0, 0],
       points: [
         [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
         [2, -1],

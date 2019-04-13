@@ -11,10 +11,11 @@ const {
   // DiagramObjectAngle, DiagramObjectLine,
   Transform,
   // Point,
-  // Line,
+  Line,
 } = Fig;
 
 const { rand } = Fig.tools.math;
+const { getPoint } = Fig.tools.g2;
 
 export default class CommonCollectionSAS extends CommonDiagramCollection {
   _fig: {
@@ -40,12 +41,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     super(diagram, layout, transform);
     this.diagram.addElements(this, this.layout.addElementsSAS);
     this.hasTouchableElements = true;
-    this.resetTri();
-  }
-
-  resetTri() {
     const fig = this._fig;
-    fig._pad0.makeTouchable();
     fig.updatePointsCallback = () => {
       const side01 = fig._side01;
       if (side01.length < this.layout.sas.options.angle.curve.radius) {
@@ -54,6 +50,35 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
         fig._angle1.showAll();
       }
     };
+  }
+
+  setProblemStatement() {
+    const fig = this._fig;
+    fig.updatePoints(this.layout.sas.options.points.map(p => getPoint(p)));
+    fig._pad0.setPosition(fig._pad1.getPosition().add(0, 0));
+    // fig._pad0.isTouchable = false;
+    // fig._pad0.isMovable = false;
+    fig._pad0.hide();
+    fig._angle1.hide();
+    fig._side01.hide();
+  }
+
+  setMovableLeg() {
+    const fig = this._fig;
+    fig.updatePoints(this.layout.sas.options.points.map(p => getPoint(p)));
+    fig._pad0.makeTouchable();
+    fig._pad0.isMovable = true;
+  }
+
+  oneLine() {
+    const fig = this._fig;
+    fig._pad0.setPositionToElement(fig._pad1);
+    this.goToTri();
+  }
+
+  pulsePad() {
+    this._fig._pad0.pulseScaleNow(1, 2.5);
+    this.diagram.animateNextFrame();
   }
 
   randRotation() {
@@ -103,8 +128,16 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
   goToTri() {
     this._fig._pad0.animations.cancelAll();
     this._fig._pad0.animations.new()
-      .position({ target: this._fig._pad3.getPosition(), duration: 1 })
+      .position({ target: this._fig._pad3.getPosition(), velocity: 1 })
       .start();
     this.diagram.animateNextFrame();
+  }
+
+  goToLength() {
+    const line = new Line(
+      this._fig._pad1.getPosition(),
+      this._fig._pad3.getPosition()
+    );
+
   }
 }
