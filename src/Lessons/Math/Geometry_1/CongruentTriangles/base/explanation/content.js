@@ -98,30 +98,45 @@ class Content extends PresentationLessonContent {
       modifiers: {
         side_lengths: click(coll.toggleBothSides, [coll, null], colors.sides),
         angles: click(coll.toggleBothAngles, [coll, null], colors.angles),
-        flipped: click(coll.flipTriangle, [coll], colors.diagram.action),
+        flipped: click(coll.flipTriangle, [coll, 1, null], colors.diagram.action),
       },
       show: [congruent._tri1._line, congruent._tri2._line],
-      transitionFromPrev: (done) => {
-        congruent._tri1.setScenario('left');
-        coll.isFlipped = false;
-        congruent._tri2.animations.new()
-          .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
-          .trigger({ callback: coll.flipTriangle.bind(coll), duration: 3 })
-          .whenFinished(done)
-          .start();
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'prev') {
+          coll.isFlipped = false;
+          congruent._tri1.setScenario('left');
+          coll.flipTriangle(1, done);
+        } else {
+          congruent._tri1.setScenario('left');
+          congruent._tri2.setScenario('right');
+          // congruent._tri2.setScenario('mirror');
+          // congruent._tri2.setScaleWithoutMoving(1, 1);
+          coll.isFlipped = false;
+          coll.flipTriangle(0, done);
+        }
+        // coll.isFlipped = false;
+        // congruent.animations.new()
+        //   .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+        //   .trigger({ callback: coll.flipTriangle.bind(coll, true), duration: 3 })
+        //   .whenFinished(done)
+        //   .start();
       },
       setSteadyState: () => {
-        congruent._tri1.setScenario('left');
-        congruent._tri2.setScenario('mirror');
-        congruent._tri2.setScaleWithoutMoving(1, 1);
+        console.log(congruent)
+        // congruent._tri1.setScenario('left');
+        // congruent._tri2.setScenario('mirror');
+        // congruent._tri2.setScaleWithoutMoving(1, 1);
       },
       setLeaveState: () => {
         congruent._tri2.stop(true, 'complete');
-        console.log(coll.isFlipped)
-        if (coll.isFlipped) {
-          congruent._tri2.setScenario('mirror');
-          congruent._tri2.setScaleWithoutMoving(1, 1);
-        }
+        coll.resetTriangle();
+        // congruent._tri2.stop(true, 'complete');
+
+        // console.log(coll.isFlipped)
+        // if (coll.isFlipped) {
+        //   congruent._tri2.setScenario('mirror');
+        //   congruent._tri2.setScaleWithoutMoving(1, 1);
+        // }
       },
     });
   }

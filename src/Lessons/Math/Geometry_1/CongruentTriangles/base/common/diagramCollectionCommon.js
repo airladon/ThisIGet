@@ -6,7 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, DiagramObjectPolyLine,
-  Transform,
+  Transform, Point
 } = Fig;
 
 const { rand, randElement } = Fig.tools.math;
@@ -40,6 +40,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     };
     this.isFlipping = false;
     this.isFlipped = false;
+  }
+
+  resetTriangle() {
+    const { tri2 } = this._congruentTriangles.elements;
+    tri2.updatePoints(this.layout.tri2.options.points);
+    tri2.setScale(1, 1);
+    tri2.setRotation(0);
   }
 
   rotateTriangle(rotationIn: ?number = null) {
@@ -121,7 +128,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.toggleAngles(2, toShowIn);
   }
 
-  flipTriangle() {
+  flipTriangle(duration: number, callback: ?() => void = null) {
     const { tri2 } = this._congruentTriangles.elements;
     const anglesShown = tri2._angle0.isShown;
     const sidesShown = tri2._side01.isShown;
@@ -130,14 +137,23 @@ export default class CommonCollection extends CommonDiagramCollection {
     tri2.stop(true, 'noComplete');
     this.isFlipping = true;
     tri2.animations.new()
-      .scenario({ target: 'mirror', duration: 3 })
+      .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+      .scale({ target: new Point(-1, 1), duration })
       .whenFinished(() => {
         tri2.setScaleWithoutMoving(1, 1);
         tri2.updatePoints([tri2.points[2], tri2.points[1], tri2.points[0]]);
-        tri2._angle0.label.setText('a');
-        tri2._angle2.label.setText('c');
-        tri2._side01.label.setText('B');
-        tri2._side12.label.setText('A');
+        this.isFlipped = !this.isFlipped;
+        if (this.isFlipped) {
+          tri2._angle0.label.setText('a');
+          tri2._angle2.label.setText('c');
+          tri2._side01.label.setText('B');
+          tri2._side12.label.setText('A');
+        } else {
+          tri2._angle0.label.setText('c');
+          tri2._angle2.label.setText('a');
+          tri2._side01.label.setText('A');
+          tri2._side12.label.setText('B');
+        }
         tri2.hideAll();
         tri2._line.show();
         if (anglesShown) {
@@ -151,8 +167,10 @@ export default class CommonCollection extends CommonDiagramCollection {
           tri2._side20.showAll();
         }
         this.isFlipping = false;
-        this.isFlipped = !this.isFlipped;
-        console.log('stopped', this.isFlipped)
+        if (callback != null) {
+          callback();
+        }
+        // console.log('stopped', this.isFlipped)
       })
       .start();
     this.diagram.animateNextFrame();
