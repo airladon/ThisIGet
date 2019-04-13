@@ -90,6 +90,40 @@ class Content extends PresentationLessonContent {
         congruent._tri2.isMovable = false;
       },
     });
+
+    this.addSection({
+      setContent: [
+        'If one triangle is |flipped|, the triangles are still congruent as the |side_lengths| and |angles| are the same.',
+      ],
+      modifiers: {
+        side_lengths: click(coll.toggleBothSides, [coll, null], colors.sides),
+        angles: click(coll.toggleBothAngles, [coll, null], colors.angles),
+        flipped: click(coll.flipTriangle, [coll], colors.diagram.action),
+      },
+      show: [congruent._tri1._line, congruent._tri2._line],
+      transitionFromPrev: (done) => {
+        congruent._tri1.setScenario('left');
+        coll.isFlipped = false;
+        congruent._tri2.animations.new()
+          .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+          .trigger({ callback: coll.flipTriangle.bind(coll), duration: 3 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        congruent._tri1.setScenario('left');
+        congruent._tri2.setScenario('mirror');
+        congruent._tri2.setScaleWithoutMoving(1, 1);
+      },
+      setLeaveState: () => {
+        congruent._tri2.stop(true, 'complete');
+        console.log(coll.isFlipped)
+        if (coll.isFlipped) {
+          congruent._tri2.setScenario('mirror');
+          congruent._tri2.setScaleWithoutMoving(1, 1);
+        }
+      },
+    });
   }
 }
 

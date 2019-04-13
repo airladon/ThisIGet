@@ -17,6 +17,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _tri2: DiagramObjectPolyLine;
   } & DiagramElementCollection;
 
+  isFlipping: boolean;
+  isFlipped: boolean;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -35,6 +38,8 @@ export default class CommonCollection extends CommonDiagramCollection {
         tri2._angle2.hide();
       }
     };
+    this.isFlipping = false;
+    this.isFlipped = false;
   }
 
   rotateTriangle(rotationIn: ?number = null) {
@@ -101,31 +106,55 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   toggleBothSides(toShowIn: ?boolean = null) {
+    if (this.isFlipping) {
+      this._congruentTriangles._tri2.stop(true, 'complete');
+    }
     this.toggleSides(1, toShowIn);
     this.toggleSides(2, toShowIn);
   }
 
   toggleBothAngles(toShowIn: ?boolean = null) {
+    if (this.isFlipping) {
+      this._congruentTriangles._tri2.stop(true, 'complete');
+    }
     this.toggleAngles(1, toShowIn);
     this.toggleAngles(2, toShowIn);
   }
 
   flipTriangle() {
     const { tri2 } = this._congruentTriangles.elements;
+    const anglesShown = tri2._angle0.isShown;
+    const sidesShown = tri2._side01.isShown;
     tri2.hideAll();
     tri2._line.show();
     tri2.stop(true, 'noComplete');
+    this.isFlipping = true;
     tri2.animations.new()
       .scenario({ target: 'mirror', duration: 3 })
       .whenFinished(() => {
         tri2.setScaleWithoutMoving(1, 1);
-        tri2.showAll();
         tri2.updatePoints([tri2.points[2], tri2.points[1], tri2.points[0]]);
         tri2._angle0.label.setText('a');
         tri2._angle2.label.setText('c');
         tri2._side01.label.setText('B');
         tri2._side12.label.setText('A');
+        tri2.hideAll();
+        tri2._line.show();
+        if (anglesShown) {
+          tri2._angle0.showAll();
+          tri2._angle1.showAll();
+          tri2._angle2.showAll();
+        }
+        if (sidesShown) {
+          tri2._side01.showAll();
+          tri2._side12.showAll();
+          tri2._side20.showAll();
+        }
+        this.isFlipping = false;
+        this.isFlipped = !this.isFlipped;
+        console.log('stopped', this.isFlipped)
       })
       .start();
+    this.diagram.animateNextFrame();
   }
 }

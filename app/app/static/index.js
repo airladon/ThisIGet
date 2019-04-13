@@ -2083,7 +2083,7 @@ function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'position'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime']);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(PositionAnimationStep).call(this, ElementAnimationStepOptionsIn));
     var defaultPositionOptions = {
       start: null,
@@ -2095,7 +2095,8 @@ function (_ElementAnimationStep) {
         magnitude: 0.5,
         offset: 0.5,
         controlPoint: null,
-        direction: ''
+        direction: '',
+        maxTime: null
       },
       velocity: null
     };
@@ -2116,7 +2117,7 @@ function (_ElementAnimationStep) {
     _this.position = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.position.translationOptions);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
@@ -2163,6 +2164,12 @@ function (_ElementAnimationStep) {
         }
 
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(velocityToUse));
+      }
+
+      if (this.position.maxTime != null) {
+        if (this.duration > this.position.maxTime) {
+          this.duration = this.position.maxTime;
+        }
       }
     }
   }, {
@@ -2390,7 +2397,7 @@ function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'rotation'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'direction', 'velocity', 'clipTo']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'direction', 'velocity', 'clipTo', 'maxTime']);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(RotationAnimationStep).call(this, ElementAnimationStepOptionsIn));
     var defaultTransformOptions = {
       start: null,
@@ -2398,12 +2405,13 @@ function (_ElementAnimationStep) {
       delta: null,
       direction: 0,
       velocity: null,
-      clipTo: null
+      clipTo: null,
+      maxTime: null
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
 
     _this.rotation = {};
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo', 'maxTime']);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -2440,6 +2448,12 @@ function (_ElementAnimationStep) {
 
       if (velocity != null) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(velocity), this.rotation.direction);
+      }
+
+      if (this.rotation.maxTime != null) {
+        if (this.duration > this.rotation.maxTime) {
+          this.duration = this.rotation.maxTime;
+        }
       }
     }
   }, {
@@ -2539,13 +2553,14 @@ function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'position'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'velocity']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'velocity', 'maxTime']);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(ScaleAnimationStep).call(this, ElementAnimationStepOptionsIn));
     var defaultPositionOptions = {
       start: null,
       target: null,
       delta: null,
-      velocity: null
+      velocity: null,
+      maxTime: null
     };
     var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
 
@@ -2563,7 +2578,7 @@ function (_ElementAnimationStep) {
       options.delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.delta, options.delta);
     }
 
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
   // This is done here in case the start is defined as null meaning it is
@@ -2609,6 +2624,12 @@ function (_ElementAnimationStep) {
         }
 
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(velocityToUse));
+      }
+
+      if (this.scale.maxTime != null) {
+        if (this.duration > this.scale.maxTime) {
+          this.duration = this.scale.maxTime;
+        }
       }
     }
   }, {
@@ -2716,7 +2737,7 @@ function (_ElementAnimationStep) {
     var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
       type: 'transform'
     }].concat(optionsIn));
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxTime']);
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TransformAnimationStep).call(this, ElementAnimationStepOptionsIn));
     var defaultTransformOptions = {
       start: null,
@@ -2732,7 +2753,8 @@ function (_ElementAnimationStep) {
         direction: ''
       },
       velocity: null,
-      clipRotationTo: null
+      clipRotationTo: null,
+      maxTime: null
     };
 
     if (_this.element && _this.element.animations.options.translation) {
@@ -2750,7 +2772,7 @@ function (_ElementAnimationStep) {
     _this.transform = {
       translationOptions: {}
     };
-    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime']);
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
     return _this;
   } // On start, calculate the duration, target and delta if not already present.
@@ -2798,6 +2820,12 @@ function (_ElementAnimationStep) {
 
       if (this.transform.velocity != null) {
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform.start, this.transform.target, this.transform.velocity, this.transform.rotDirection);
+      }
+
+      if (this.transform.maxTime != null) {
+        if (this.duration > this.transform.maxTime) {
+          this.duration = this.transform.maxTime;
+        }
       }
     }
   }, {
