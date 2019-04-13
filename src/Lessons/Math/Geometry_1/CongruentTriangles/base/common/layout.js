@@ -54,9 +54,9 @@ export default function lessonLayout() {
     method: 'polyLine',
     options: {
       points: [
-        [0.7, 0.5],
-        [1, -1],
-        [-1.2, -1],
+        [0.7, 0.8],
+        [1, -0.7],
+        [-1.2, -0.7],
       ],
       width: layout.width,
       color: colors.sides,
@@ -74,16 +74,21 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        left: { position: [-1.4, 0], rotation: 0, scale: 1 },
-        right: { position: [1.4, 0], rotation: 0, scale: 1 },
-        mirror: { position: [1.4, 0], rotation: 0, scale: [-1, 1] },
-        rotate: { position: [1.4, -0.5], rotation: Math.PI, scale: 1 },
+        left: { position: [-1.4, -0.3], rotation: 0, scale: 1 },
+        right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
+        mirror: { position: [1.4, -0.3], rotation: 0, scale: [-1, 1] },
+        rotate: { position: [1.4, -0.3], rotation: Math.PI, scale: 1 },
       },
     },
   };
 
   layout.tri1 = joinObjects({}, triangle, { name: 'tri1' });
-  layout.tri2 = joinObjects({}, triangle, { name: 'tri2' });
+  layout.tri2 = joinObjects({}, triangle, {
+    name: 'tri2',
+    mods: {
+      interactiveLocation: [0.7, 0.8],
+    },
+  });
 
   layout.congruentTriangles = {
     name: 'congruentTriangles',

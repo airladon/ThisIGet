@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -13,14 +13,14 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
-  centerV,
+  click,
+  style,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -42,36 +42,52 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const congruent = coll._congruentTriangles;
 
-    const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
-
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
+    this.addSection({
+      title: 'Congruency',
+      setContent: style({ centerV: true }, [
+        'In mathematics, if |two shapes are the same size and shape|, then they are said to be |congruent|.',
+        'The word |congruent| comes from |Latin|, where it means |"agreeing, meeting together"|.',
+        `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
+      `,
       ]),
-      show: [congruent],
+    });
+
+    this.addSection({
+      setContent: [
+        'For two triangles to be |congruent|, the corresponding |side_lengths| and |angles| of each triangle must be the same as the other.',
+      ],
+      modifiers: {
+        side_lengths: click(coll.toggleBothSides, [coll, null], colors.sides),
+        angles: click(coll.toggleBothAngles, [coll, null], colors.angles),
+      },
+      show: [congruent._tri1._line, congruent._tri2._line],
       setSteadyState: () => {
         congruent._tri1.setScenario('left');
-        congruent._tri2.setScenario('left');
-        coll.congruentFlip();
+        congruent._tri2.setScenario('right');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'If one triangle is |rotated|, the triangles are still congruent as the |side_lengths| and |angles| are the same.',
+      ],
+      modifiers: {
+        side_lengths: click(coll.toggleBothSides, [coll, null], colors.sides),
+        angles: click(coll.toggleBothAngles, [coll, null], colors.angles),
+        rotated: click(coll.rotateTriangle, [coll, null], colors.diagram.action),
+      },
+      show: [congruent._tri1._line, congruent._tri2._line],
+      setSteadyState: () => {
+        congruent._tri2.makeTouchable();
+        congruent._tri2.isMovable = true;
+        congruent._tri2.touchInBoundingRect = true;
+        congruent._tri2.move.type = 'rotation';
+        congruent._tri1.setScenario('left');
+        congruent._tri2.setScenario('right');
+      },
+      setLeaveState: () => {
+        congruent._tri2.isTouchable = false;
+        congruent._tri2.isMovable = false;
       },
     });
   }
