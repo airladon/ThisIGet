@@ -76,7 +76,7 @@ export default function lessonLayout() {
       scenarios: {
         left: { position: [-1.4, -0.3], rotation: 0, scale: 1 },
         right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
-        mirror: { position: [1.4, -0.3], scale: [-1, 1] },
+        mirror: { position: [1.4, -0.3], rotation: 0, scale: [-1, 1] },
         rotate: { position: [1.4, -0.3], rotation: Math.PI, scale: 1 },
       },
     },

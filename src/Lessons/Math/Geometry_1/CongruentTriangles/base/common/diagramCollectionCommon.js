@@ -138,7 +138,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.isFlipping = true;
     tri2.animations.new()
       .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
-      .scale({ target: new Point(-1, 1), duration })
+      .scenario({ target: 'mirror', duration })
+      // .scale({ target: new Point(-1, 1), duration })
       .whenFinished(() => {
         tri2.setScaleWithoutMoving(1, 1);
         tri2.updatePoints([tri2.points[2], tri2.points[1], tri2.points[0]]);
