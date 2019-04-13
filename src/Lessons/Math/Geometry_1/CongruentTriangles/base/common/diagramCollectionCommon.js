@@ -7,7 +7,8 @@ const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, DiagramObjectPolyLine,
   DiagramObjectAngle, DiagramObjectLine,
-  Transform, Point
+  Transform,
+  // Point
 } = Fig;
 
 const { rand, randElement } = Fig.tools.math;
@@ -64,7 +65,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     tri2.setRotation(0);
   }
 
-  rotateTriangle(rotationIn: ?number = null) {
+  rotateTriangle(rotationIn: ?number = null, callback: ?() => void = null) {
     const { tri2 } = this._congruentTriangles.elements;
 
     let rotation = rotationIn;
@@ -77,6 +78,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     tri2.stop(true, 'noComplete');
     tri2.animations.new()
       .rotation({ target: rotation, duration: 2, diration: 0 })
+      .whenFinished(callback)
       .start();
     this.diagram.animateNextFrame();
   }

@@ -51,12 +51,6 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     tri._pad2.setTransformCallback = this.updateTri.bind(this);
     tri._pad1.setTransformCallback = this.updateTri.bind(this);
     tri._pad0.setTransformCallback = this.updateTop.bind(this);
-    // tri._pad0.setMoveBoundaryToDiagram([-1, -1, 2, 2])
-    
-    // tri._pad0.setColor(this.colors.diagram.background);
-    // tri._pad0.isTouchable = false;
-    // tri._pad0.isInteractive = false;
-    // tri._pad0.isMovable = false;
   }
 
   updateTop() {
@@ -76,7 +70,6 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const leftTop = new Line(left, 5, this.leftAngle);
     const rightTop = new Line(right, 5, this.rightAngle);
     const top = leftTop.intersectsWith(rightTop).intersect;
-    // console.log(top)
     tri.updatePoints([top, right, left]);
 
     tri._pad0.move.maxTransform.updateTranslation(

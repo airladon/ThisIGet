@@ -75,16 +75,19 @@ class Content extends PresentationLessonContent {
       modifiers: {
         side_lengths: click(coll.toggleBothSides, [coll, null], colors.sides),
         angles: click(coll.toggleBothAngles, [coll, null], colors.angles),
-        rotated: click(coll.rotateTriangle, [coll, null], colors.diagram.action),
+        rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
       },
       show: [congruent._tri1._line, congruent._tri2._line],
+      transitionFromAny: (done) => {
+        congruent._tri1.setScenario('left');
+        congruent._tri2.setScenario('right');
+        coll.rotateTriangle(Math.PI, done);
+      },
       setSteadyState: () => {
         congruent._tri2.makeTouchable();
         congruent._tri2.isMovable = true;
         congruent._tri2.touchInBoundingRect = true;
         congruent._tri2.move.type = 'rotation';
-        congruent._tri1.setScenario('left');
-        congruent._tri2.setScenario('right');
       },
       setLeaveState: () => {
         congruent._tri2.isTouchable = false;
