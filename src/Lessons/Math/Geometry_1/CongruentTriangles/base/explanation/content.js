@@ -109,34 +109,13 @@ class Content extends PresentationLessonContent {
         } else {
           congruent._tri1.setScenario('left');
           congruent._tri2.setScenario('right');
-          // congruent._tri2.setScenario('mirror');
-          // congruent._tri2.setScaleWithoutMoving(1, 1);
           coll.isFlipped = false;
           coll.flipTriangle(0, done);
         }
-        // coll.isFlipped = false;
-        // congruent.animations.new()
-        //   .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
-        //   .trigger({ callback: coll.flipTriangle.bind(coll, true), duration: 3 })
-        //   .whenFinished(done)
-        //   .start();
-      },
-      setSteadyState: () => {
-        console.log(congruent)
-        // congruent._tri1.setScenario('left');
-        // congruent._tri2.setScenario('mirror');
-        // congruent._tri2.setScaleWithoutMoving(1, 1);
       },
       setLeaveState: () => {
         congruent._tri2.stop(true, 'complete');
         coll.resetTriangle();
-        // congruent._tri2.stop(true, 'complete');
-
-        // console.log(coll.isFlipped)
-        // if (coll.isFlipped) {
-        //   congruent._tri2.setScenario('mirror');
-        //   congruent._tri2.setScaleWithoutMoving(1, 1);
-        // }
       },
     });
   }
