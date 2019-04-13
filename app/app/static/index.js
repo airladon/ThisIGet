@@ -23838,10 +23838,31 @@ function () {
   }, {
     key: "midPoint",
     value: function midPoint() {
+      // const length = this.length();
+      // const direction = this.p2.sub(this.p1);
+      // const angle = Math.atan2(direction.y, direction.x);
+      // const midPoint = point(
+      //   this.p1.x + length / 2 * Math.cos(angle),
+      //   this.p1.y + length / 2 * Math.sin(angle)
+      // );
+      // return midPoint;
+      return this.pointAtPercent(0.5);
+    }
+  }, {
+    key: "pointAtPercent",
+    value: function pointAtPercent(percent) {
       var length = this.length();
       var direction = this.p2.sub(this.p1);
       var angle = Math.atan2(direction.y, direction.x);
-      var midPoint = point(this.p1.x + length / 2 * Math.cos(angle), this.p1.y + length / 2 * Math.sin(angle));
+      var midPoint = point(this.p1.x + length * percent * Math.cos(angle), this.p1.y + length * percent * Math.sin(angle));
+      return midPoint;
+    }
+  }, {
+    key: "pointAtLength",
+    value: function pointAtLength(length) {
+      var direction = this.p2.sub(this.p1);
+      var angle = Math.atan2(direction.y, direction.x);
+      var midPoint = point(this.p1.x + length * Math.cos(angle), this.p1.y + length * Math.sin(angle));
       return midPoint;
     }
     /* eslint-enable comma-dangle */

@@ -173,29 +173,14 @@ export default function lessonLayout() {
   // /////////////////////////////////////////////////////////////////
   // SAS
   // /////////////////////////////////////////////////////////////////
-  const sasAngle = (rc, rt) => ({
-    color: colors.angles,
-    curve: {
-      radius: rc,
-      width: layout.width,
-    },
-    sides: 200,
-    label: {
-      text: null,
-      showRealAngle: true,
-      precision: 0,
-      radius: rt,
-    },
-  });
-
-  const sasPad = (moveable) => {
+  const movablePad = (moveable) => {
     if (moveable) {
       return {
         color: colors.pads,
         isMovable: true,
         sides: 20,
         radius: 0.07,
-        touchRadius: 0.8,
+        touchRadius: 0.3,
         fill: true,
         boundary: 'diagram',
         touchRadiusInBoundary: false,
@@ -241,26 +226,66 @@ export default function lessonLayout() {
         },
       },
       pad: [
-        sasPad(true),
-        sasPad(false),
-        sasPad(false),
-        sasPad(false),
+        movablePad(true),
+        movablePad(false),
+        movablePad(false),
+        movablePad(false),
       ],
     },
   };
 
-
-  // layout.sas = {
-  //   name: 'fig',
-  //   method: 'collection',
-  //   addElements: [
-  //     layout.sasTri,
-  //   ],
-  // };
-
   layout.addElementsSAS = [
     layout.sas,
   ];
-  
+
+  // /////////////////////////////////////////////////////////////////
+  // ASA
+  // /////////////////////////////////////////////////////////////////
+  layout.asa = {
+    name: 'fig',
+    method: 'polyLine',
+    options: {
+      points: [
+        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
+        [2, -1],
+        [-2, -1],
+        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
+      ],
+      color: colors.sides,
+      width: layout.width,
+      close: false,
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.4,
+          width: layout.width,
+          sides: 100,
+        },
+        label: {
+          text: null,
+          showRealAngle: true,
+          precision: 0,
+          radius: 0.4,
+        },
+      },
+      side: {
+        offset: 0.1,
+        label: {
+          text: null,
+        },
+      },
+      pad: [
+        movablePad(true),
+        movablePad(false),
+        movablePad(false),
+        movablePad(true),
+      ],
+    },
+  };
+
+  layout.addElementsASA = [
+    layout.asa,
+  ];
+
   return layout;
 }

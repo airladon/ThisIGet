@@ -14,7 +14,7 @@ const {
   // Line,
 } = Fig;
 
-const { rand, randElement } = Fig.tools.math;
+const { rand } = Fig.tools.math;
 
 export default class CommonCollectionSAS extends CommonDiagramCollection {
   _fig: {
@@ -46,7 +46,6 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
   resetTri() {
     const fig = this._fig;
     fig._pad0.makeTouchable();
-    // fig._pad0.setMoveBoundaryToDiagram('diagram');
     fig.updatePointsCallback = () => {
       const side01 = fig._side01;
       if (side01.length < this.layout.sas.options.angle.curve.radius) {
