@@ -126,8 +126,88 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      show: [aaa],
+      setContent: style({ centerV: true }, [
+        'Showing two triangles are congruent can sometimes be beneficial in calculating a geometric problem.',
+        'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the other triangle.',
+      ]),
     });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'So |how| can you figure out if two triangles are congruent?',
+        'One way is to measure all the angles and sides and see if they are equal.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'But this means the advantage of knowing triangles are congruent is reduced as you already know the angles and lengths of both triangles.',
+        'In addition, |sometimes all properties cannot be measured or known|, so such a comparison is not practical.',
+        'Therefore, it\'s important to explore how many side lengths and angles of a triangle really need to be known to guarantee two triangles are congruent.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'One way to do this is to take a set of known properties, then figure out how many triangles can be created from them.',
+        'If |more than one size and shape of triangle| can be created, then the selected properties are |not enough| to guarantee two triangles that share those properties are congruent.',
+      ]),
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+
+    this.addSection({
+      title: 'Angle Angle Angle',
+      setContent: [
+        'First consider when only the three angles are known. Do triangles of different sizes exist that have the same angles?',
+      ],
+      show: [
+        aaa._fig._tri._line, aaa._fig._tri._angle0, aaa._fig._tri._angle1, aaa._fig._tri._angle2,
+      ],
+      setEnterState: () => {
+        aaa.resetTri();
+        aaa.hasTouchableElements = false;
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Yes. You can |move| the bottom corners of the triangle to see the |same angles can make triangles of different sizes|. You can move the top corner of the triangle to test different triangles.',
+      ],
+      modifiers: {
+        move: click(aaa.randomSize, [aaa], colors.diagram.action),
+      },
+      show: [aaa],
+      setEnterState: () => {
+        aaa.resetTri();
+        aaa.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'So triangles with the |same angles|, can have |different side lengths|.',
+        'Only knowing two triangles have the same angles, is |not enough| to know they are congruent.',
+      ]),
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+
+
     this.addSection({
       setContent: ['|rotation| |length| |goto|'],
       modifiers: {
@@ -153,6 +233,8 @@ class Content extends PresentationLessonContent {
         asa._fig._angle2.showAll();
       },
     });
+
+
   }
 }
 

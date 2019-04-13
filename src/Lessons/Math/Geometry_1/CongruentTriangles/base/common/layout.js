@@ -161,6 +161,9 @@ export default function lessonLayout() {
   layout.aaa = {
     name: 'fig',
     method: 'collection',
+    options: {
+      position: [0, -0.3],
+    },
     addElements: [
       layout.aaaTri,
     ],

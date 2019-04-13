@@ -13,7 +13,9 @@ const {
   Line,
 } = Fig;
 
-// const { rand, randElement } = Fig.tools.math;
+const { rand, randElement } = Fig.tools.math;
+
+const { getPoint } = Fig.tools.g2;
 
 export default class CommonCollectionAAA extends CommonDiagramCollection {
   _fig: {
@@ -45,12 +47,31 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     this.leftAngle = Math.PI / 6;
     this.rightAngle = Math.PI / 3 * 2;
     const tri = this._fig._tri;
+    tri.updatePoints(this.layout.aaaTri.options.points.map(p => getPoint(p)));
     tri._pad2.move.limitLine = new Line(new Point(-2.2, -1), new Point(-1, -1));
     tri._pad1.move.limitLine = new Line(new Point(2.2, -1), new Point(1, -1));
     tri._pad1.makeTouchable();
     tri._pad2.setTransformCallback = this.updateTri.bind(this);
     tri._pad1.setTransformCallback = this.updateTri.bind(this);
     tri._pad0.setTransformCallback = this.updateTop.bind(this);
+  }
+
+  randomSize() {
+    const right = this._fig._tri._pad1;
+    const left = this._fig._tri._pad2;
+    const pad = randElement([right, left]);
+    const { limitLine } = pad.move;
+    const midPoint = limitLine.midPoint();
+    let delta = rand(limitLine.length() / 3, limitLine.length() / 2);
+    const padPosition = pad.getPosition();
+    if (padPosition.x > midPoint.x) {
+      delta = -delta;
+    }
+    pad.animations.cancelAll();
+    pad.animations.new()
+      .position({ target: padPosition.add(delta), duration: 0.5 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 
   updateTop() {
@@ -67,6 +88,7 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     const tri = this._fig._tri;
     const left = tri._pad2.getPosition();
     const right = tri._pad1.getPosition();
+    const leftRight = new Line(left, right);
     const leftTop = new Line(left, 5, this.leftAngle);
     const rightTop = new Line(right, 5, this.rightAngle);
     const top = leftTop.intersectsWith(rightTop).intersect;
@@ -74,7 +96,7 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
 
     tri._pad0.move.maxTransform.updateTranslation(
       Math.max(1, top.x),
-      Math.max(1.5, top.y),
+      Math.max(Math.min(leftRight.length() / 2 + left.y, 1.1), top.y),
     );
     tri._pad0.move.minTransform.updateTranslation(
       Math.min(-1, top.x),
