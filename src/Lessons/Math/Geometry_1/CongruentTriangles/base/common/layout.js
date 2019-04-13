@@ -13,6 +13,7 @@ const { joinObjects } = Fig.tools.misc;
 const cssColorNames = [
   'sides',
   'angles',
+  'pads',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -122,10 +123,10 @@ export default function lessonLayout() {
   });
 
   const aaaPad = () => ({
-    // color: colors.diagram.background,
+    color: colors.pads,
     isMovable: true,
     sides: 20,
-    radius: 0.1,
+    radius: 0.07,
     touchRadius: 0.8,
     fill: true,
   });

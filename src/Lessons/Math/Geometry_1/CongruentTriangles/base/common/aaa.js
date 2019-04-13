@@ -46,6 +46,9 @@ export default class CommonCollectionAAA extends CommonDiagramCollection {
     tri._pad2.setTransformCallback = this.updateTri.bind(this);
     tri._pad1.setTransformCallback = this.updateTri.bind(this);
     tri._pad0.setColor(this.colors.diagram.background);
+    tri._pad0.isTouchable = false;
+    tri._pad0.isInteractive = false;
+    tri._pad0.isMovable = false;
   }
 
   updateTri() {
