@@ -16,7 +16,7 @@ const {
   click,
   style,
   // highlight,
-  // clickWord,
+  // clickW,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -41,6 +41,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const congruent = coll._congruentTriangles;
+    const aaa = diag._aaa;
 
     this.addSection({
       title: 'Congruency',
@@ -117,6 +118,13 @@ class Content extends PresentationLessonContent {
         congruent._tri2.stop(true, 'complete');
         coll.resetTriangle();
       },
+    });
+
+    this.addSection({
+      show: [aaa],
+      setSteadyState: () => {
+        console.log(coll)
+      }
     });
   }
 }

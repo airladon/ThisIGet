@@ -6,6 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   DiagramElementCollection, DiagramObjectPolyLine,
+  DiagramObjectAngle, DiagramObjectLine,
   Transform, Point
 } = Fig;
 
@@ -13,8 +14,22 @@ const { rand, randElement } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _congruentTriangles: {
-    _tri1: DiagramObjectPolyLine;
-    _tri2: DiagramObjectPolyLine;
+    _tri1: {
+      _angle0: DiagramObjectAngle,
+      _angle1: DiagramObjectAngle,
+      _angle2: DiagramObjectAngle,
+      _side01: DiagramObjectLine,
+      _side12: DiagramObjectLine,
+      _side20: DiagramObjectLine,
+    } & DiagramObjectPolyLine;
+    _tri2: {
+      _angle0: DiagramObjectAngle,
+      _angle1: DiagramObjectAngle,
+      _angle2: DiagramObjectAngle,
+      _side01: DiagramObjectLine,
+      _side12: DiagramObjectLine,
+      _side20: DiagramObjectLine,
+    } & DiagramObjectPolyLine;
   } & DiagramElementCollection;
 
   isFlipping: boolean;
@@ -171,7 +186,6 @@ export default class CommonCollection extends CommonDiagramCollection {
         if (callback != null) {
           callback();
         }
-        // console.log('stopped', this.isFlipped)
       })
       .start();
     this.diagram.animateNextFrame();

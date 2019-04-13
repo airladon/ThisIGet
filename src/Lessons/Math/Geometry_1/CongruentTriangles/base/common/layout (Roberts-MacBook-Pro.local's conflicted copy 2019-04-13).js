@@ -5,8 +5,8 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 const {
   Point,
   // Transform,
-  Line,
-} = Fig;
+  // Line,
+} = Fig.tools.g2;
 
 const { joinObjects } = Fig.tools.misc;
 
@@ -106,87 +106,26 @@ export default function lessonLayout() {
   // /////////////////////////////////////////////////////////////////
   // AAA
   // /////////////////////////////////////////////////////////////////
-  const aaaAngle = (rc, rt) => ({
-    color: colors.angles,
-    curve: {
-      radius: rc,
-      width: layout.width,
-    },
-    sides: 200,
-    label: {
-      text: null,
-      showRealAngle: true,
-      precision: 0,
-      radius: rt,
-    },
-  });
-
-  const aaaPad = () => ({
-    // color: colors.diagram.background,
-    isMovable: true,
-    sides: 20,
-    radius: 0.1,
-    touchRadius: 0.8,
-    fill: true,
-  });
-
-
   layout.aaaTri = {
     name: 'tri',
     method: 'polyLine',
     options: {
       points: [
-        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
-        [2, -1],
         [-2, -1],
+        [2, -1],
+        [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
       ],
       color: colors.sides,
       width: layout.width,
       close: true,
-      angle: [
-        aaaAngle(0.3, 0.4),
-        aaaAngle(0.3, 0.3),
-        aaaAngle(0.3, 0.3),
-      ],
-      pad: [
-        aaaPad(),
-        aaaPad(),
-        aaaPad(),
-      ],
     },
   };
 
-  // const aaaAngle = (name, rc, rt) => ({
-  //   {
-  //     name,
-  //     method: 'angle',
-  //     options: {
-  //     color: colors.angles,
-  //     curve: {
-  //       radius: rc,
-  //       width: layout.width,
-  //     },
-  //     sides: 200,
-  //     label: {
-  //       text: null,
-  //       showRealAngle: true,
-  //       precision: 0,
-  //       radius: rt,
-  //     },
-  //   }
-  // });
-
-  // layout.aaaLeft = aaaAngle('corner1', 0.3, 0.3);
-  // layout.aaaTop = aaaAngle('corner1', 0.3, 0.4);
-  // layout.aaaRight = aaaAngle('corner1', 0.3, 0.3);
   layout.aaa = {
     name: 'fig',
     method: 'collection',
     addElements: [
       layout.aaaTri,
-      // layout.aaaLeft,
-      // layout.aaaTop,
-      // layout.aaaRight,
     ],
   };
 
