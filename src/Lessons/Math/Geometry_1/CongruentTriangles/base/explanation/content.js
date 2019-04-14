@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const aaa = diag._aaa;
     const sas = diag._sas;
     const asa = diag._asa;
+    const sss = diag._sss;
 
     this.addSection({
       title: 'Congruency',
@@ -208,6 +209,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
+      title: 'Side Angle Side Congruency',
       setContent: [
         'Now consider if you know |two side lengths| and the |angle_between| those two sides. How many triangles can be made with these constraints?',
       ],
@@ -311,30 +313,67 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
-      setContent: ['|rotation| |length| |goto|'],
-      modifiers: {
-        rotation: click(sas.randRotation, [sas], colors.diagram.action),
-        length: click(sas.randLength, [sas], colors.diagram.action),
-        goto: click(sas.goToTri, [sas], colors.diagram.action),
-      },
-      show: [sas],
+      title: 'Side Side Side Congruency',
+      setContent: [
+        'Next consider the case where only the |three side lengths| are known. How many triangles can be created with just this knowledge?',
+      ],
+      show: [sss],
       setSteadyState: () => {
-        sas._fig._angle2.showAll();
+        sss.setScenarios('disconnected');
       },
     });
 
-    this.addSection({
-      setContent: ['|length1| |length2| |goto|'],
-      modifiers: {
-        length1: click(asa.randLength, [asa, '01'], colors.diagram.action),
-        length2: click(asa.randLength, [asa, '23'], colors.diagram.action),
-        goto: click(asa.goToTri, [asa], colors.diagram.action),
-      },
-      show: [asa],
+    common = {
+      setContent: [
+        'We know a |triangle| is formed by |connecting three lines| together, so we can start by connecting one line\'s ends to the other two lines',
+      ],
+      show: [sss._fig._left, sss._fig._base, sss._fig._right],
+    };
+    this.addSection(common, {
       setSteadyState: () => {
-        asa._fig._angle2.showAll();
+        sss.setScenarios('disconnected');
+        sss.hasTouchableElements = false;
       },
     });
+
+    this.addSection(common, {
+      transitionFromPrev: (done) => {
+        sss.animations.cancelAll();
+        sss.animations.new()
+          .scenarios({ target: 'connected', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = false;
+        sss.setScenarios('connected');
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Now, how can the end lines be |rotated| to form a |triangle|? Can only |one triangle| be formed? You can experiment by rotating the end lines.',
+      ],
+      show: [sss._fig._left, sss._fig._base, sss._fig._right],
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+        sss.setScenarios('connected');
+        console.log(sss)
+      },
+    });
+
+    // this.addSection({
+    //   setContent: ['|length1| |length2| |goto|'],
+    //   modifiers: {
+    //     length1: click(asa.randLength, [asa, '01'], colors.diagram.action),
+    //     length2: click(asa.randLength, [asa, '23'], colors.diagram.action),
+    //     goto: click(asa.goToTri, [asa], colors.diagram.action),
+    //   },
+    //   show: [asa],
+    //   setSteadyState: () => {
+    //     asa._fig._angle2.showAll();
+    //   },
+    // });
 
 
   }
