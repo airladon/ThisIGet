@@ -268,17 +268,36 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'There is only one line |length| and |angle| possible. If this line has a |different_length| or |different_angle|, it does not form a triangle.',
+        'There is |only_one| line length and angle possible. If this line has a |different_length| or |different_angle|, it does not form a triangle.',
       ],
       modifiers: {
-        length: click(sas.goToTri, [sas], colors.sides),
-        angle: click(sas.goToTri, [sas], colors.angles),
+        only_one: click(sas.goToTri, [sas], colors.sides),
         different_length: click(sas.randLength, [sas], colors.sides),
         different_angle: click(sas.randRotation, [sas], colors.angles),
       },
       show: [sas],
       setSteadyState: () => {
         sas.setMovableLeg();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore if two triangles share |two sides of the same length|, and the |angle_between| those two sides is also the same on both triangles, then they |are congruent|.',
+        'This case is often called the |Side Angle Side| case.',
+      ],
+      modifiers: {
+        angle_between: highlight(colors.angles),
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle0, congruent._tri1._angle1,
+        congruent._tri2._angle0, congruent._tri2._angle1,
+        congruent._tri1._side01, congruent._tri2._side01,
+      ],
+      setSteadyState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
       },
     });
 

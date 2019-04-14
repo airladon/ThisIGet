@@ -11,7 +11,7 @@ const {
   // DiagramObjectAngle, DiagramObjectLine,
   Transform,
   // Point,
-  Line,
+  // Line,
 } = Fig;
 
 const { rand } = Fig.tools.math;
@@ -56,8 +56,6 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     const fig = this._fig;
     fig.updatePoints(this.layout.sas.options.points.map(p => getPoint(p)));
     fig._pad0.setPosition(fig._pad1.getPosition().add(0, 0));
-    // fig._pad0.isTouchable = false;
-    // fig._pad0.isMovable = false;
     fig._pad0.hide();
     fig._angle1.hide();
     fig._side01.hide();
@@ -129,15 +127,11 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this._fig._pad0.animations.cancelAll();
     this._fig._pad0.animations.new()
       .position({ target: this._fig._pad3.getPosition(), velocity: 1 })
+      .whenFinished(() => {
+        this._fig._side01._label.pulseScaleNow(1, 2);
+        this._fig._angle1.pulseScaleNow(1, 1.3);
+      })
       .start();
     this.diagram.animateNextFrame();
-  }
-
-  goToLength() {
-    const line = new Line(
-      this._fig._pad1.getPosition(),
-      this._fig._pad3.getPosition()
-    );
-
   }
 }

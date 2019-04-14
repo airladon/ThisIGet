@@ -79,6 +79,8 @@ export default function lessonLayout() {
         right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
         mirror: { position: [1.4, -0.3], rotation: 0, scale: [-1, 1] },
         rotate: { position: [1.4, -0.3], rotation: Math.PI, scale: 1 },
+        lowLeft: { position: [-1.4, -0.5], rotation: 0, scale: 0.9 },
+        rightLeft: { position: [1.4, -0.5], rotation: 0, scale: 0.9 },
       },
     },
   };
