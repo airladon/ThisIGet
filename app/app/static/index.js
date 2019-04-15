@@ -12012,7 +12012,7 @@ function (_DiagramElementCollec) {
     _this2.isTouchDevice = isTouchDevice;
     _this2.animateNextFrame = animateNextFrame; // Calculate and store the angle geometry
 
-    _this2.position = optionsToUse.position;
+    _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
     _this2.rotation = optionsToUse.rotation;
     _this2.direction = optionsToUse.direction;
     _this2.angle = optionsToUse.angle;
@@ -13698,7 +13698,7 @@ function (_DiagramElementCollec) {
 
     _this2.offset = optionsToUse.offset;
     _this2.width = optionsToUse.width;
-    _this2.position = optionsToUse.position;
+    _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
     _this2.length = optionsToUse.length;
     _this2.angle = optionsToUse.angle;
 

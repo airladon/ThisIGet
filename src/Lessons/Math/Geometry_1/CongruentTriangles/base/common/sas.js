@@ -14,7 +14,7 @@ const {
   // Line,
 } = Fig;
 
-const { rand } = Fig.tools.math;
+const { rand, round } = Fig.tools.math;
 const { getPoint } = Fig.tools.g2;
 
 export default class CommonCollectionSAS extends CommonDiagramCollection {
@@ -30,8 +30,13 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     _side23: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
+  _angle: DiagramObjectAngle;
+  _base: DiagramObjectLine;
+  _line: DiagramObjectLine;
+
   leftAngle: number;
   rightAngle: number;
+  anglePosition: number;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -50,6 +55,26 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
         fig._angle1.showAll();
       }
     };
+    this._angle.setTransformCallback = () => {
+      this._angle.position = this._angle.getPosition();
+      this._angle.rotation = this._angle.getRotation();
+      this._angle.update();
+    };
+  }
+
+  toggleAngles() {
+    this.animations.cancelAll();
+    let target = (this.anglePosition + 1) % 5;
+    if (target === 0) {
+      target = 1;
+    }
+    this.animations.new()
+      .scenarios({ target: `center${target}`, duration: 1 })
+      .whenFinished(() => {
+        this.anglePosition = target;
+      })
+      .start();
+    this.diagram.animateNextFrame();
   }
 
   setProblemStatement() {
@@ -68,6 +93,14 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     fig._pad0.isMovable = true;
   }
 
+  setMovableLegReady() {
+    const fig = this._fig;
+    fig.updatePoints(this.layout.sas.options.points.map(p => getPoint(p)));
+    fig._pad0.makeTouchable();
+    fig._pad0.isMovable = true;
+    fig._pad0.setPosition(1.5, 0.5);
+  }
+
   oneLine() {
     const fig = this._fig;
     fig._pad0.setPositionToElement(fig._pad1);
@@ -84,7 +117,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     const side01 = this._fig._side01;
     const radius = side01.length;
     const angle = side01.line.angle() + Math.PI;
-    if (angle > Math.PI / 4 * 3 && angle < Math.PI * 3 / 2) {
+    if (angle > Math.PI / 3 * 2 && angle < Math.PI * 3 / 2) {
       delta = -delta;
     }
     const p1 = this._fig._pad1.getPosition();
@@ -123,13 +156,16 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  goToTri() {
+  goToTri(callback: ?() => void = null) {
     this._fig._pad0.animations.cancelAll();
     this._fig._pad0.animations.new()
       .position({ target: this._fig._pad3.getPosition(), velocity: 1 })
       .whenFinished(() => {
         this._fig._side01._label.pulseScaleNow(1, 2);
         this._fig._angle1.pulseScaleNow(1, 1.3);
+        if (callback != null) {
+          callback();
+        }
       })
       .start();
     this.diagram.animateNextFrame();

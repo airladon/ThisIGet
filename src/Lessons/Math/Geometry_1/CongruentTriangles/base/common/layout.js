@@ -178,6 +178,197 @@ export default function lessonLayout() {
   // /////////////////////////////////////////////////////////////////
   // SAS
   // /////////////////////////////////////////////////////////////////
+  const sasLineBase = {
+    method: 'line',
+    options: {
+      color: colors.sides,
+      width: layout.width,
+      length: 4,
+      vertexSpaceStart: 'start',
+      position: [-2, -1],
+      label: {
+        text: null,
+        offset: 0.2,
+        location: 'bottom',
+      },
+    },
+  };
+  const sasLine2 = joinObjects({}, sasLineBase, {
+    options: {
+      length: 4 * Math.sqrt(3) / 2,
+      label: {
+        text: null,
+        offset: 0.2,
+        location: 'top',
+      },
+    },
+  });
+  const sasAngle = {
+    method: 'angle',
+    options: {
+      angle: Math.PI / 6,
+      rotation: 0,
+      color: colors.angles,
+      curve: {
+        radius: 0.4,
+        width: layout.width,
+        sides: 100,
+      },
+      label: {
+        text: null,
+        showRealAngle: true,
+        precision: 0,
+        radius: 0.4,
+      },
+      sides: {
+        length: 0.5,
+        color: colors.sides,
+      },
+    },
+  };
+  const sasBase1 = joinObjects({}, sasLineBase, { name: 'base' });
+  const sasBase2 = joinObjects({}, sasLineBase, {
+    name: 'base',
+    options: {
+      label: {
+        location: 'top',
+      },
+    },
+  });
+  const sasBase3 = joinObjects({}, sasLineBase, { name: 'base' });
+  const sasBase4 = joinObjects({}, sasLineBase, {
+    name: 'base',
+    options: {
+      label: {
+        location: 'top',
+      },
+    },
+  });
+  const sasLine21 = joinObjects({}, sasLine2, {
+    name: 'line',
+    options: {
+      position: [-2, -1],
+      angle: Math.PI / 6,
+    },
+  });
+  const sasLine22 = joinObjects({}, sasLine2, {
+    name: 'line',
+    options: {
+      position: [-2, -1],
+      angle: -Math.PI / 6,
+      label: {
+        location: 'bottom',
+      },
+    },
+  });
+  const sasLine23 = joinObjects({}, sasLine2, {
+    name: 'line',
+    options: {
+      position: [2, -1],
+      angle: Math.PI - Math.PI / 6,
+    },
+  });
+  const sasLine24 = joinObjects({}, sasLine2, {
+    name: 'line',
+    options: {
+      position: [2, -1],
+      angle: Math.PI + Math.PI / 6,
+      label: {
+        location: 'bottom',
+      },
+    },
+  });
+  const sasAngle1 = joinObjects({}, sasAngle, {
+    name: 'angle',
+    options: {
+      position: [-2, -1],
+      rotation: 0,
+      angle: Math.PI / 6,
+    },
+  });
+  const sasAngle2 = joinObjects({}, sasAngle, {
+    name: 'angle',
+    options: {
+      position: [-2, -1],
+      rotation: Math.PI * 2 - Math.PI / 6,
+      angle: Math.PI / 6,
+    },
+  });
+  const sasAngle3 = joinObjects({}, sasAngle, {
+    name: 'angle',
+    options: {
+      position: [2, -1],
+      rotation: Math.PI - Math.PI / 6,
+      angle: Math.PI / 6,
+    },
+  });
+  const sasAngle4 = joinObjects({}, sasAngle, {
+    name: 'angle',
+    options: {
+      position: [2, -1],
+      rotation: Math.PI,
+      angle: Math.PI / 6,
+    },
+  });
+  const config1 = {
+    name: 'config1',
+    method: 'collection',
+    addElements: [sasBase1, sasLine21, sasAngle1],
+    mods: {
+      scenarios: {
+        'showAll': { position: [-1.5, 0.5], scale: 0.6 },
+        'center': { position: [0, 0], scale: 1 },
+      },
+    },
+  };
+  const config2 = {
+    name: 'config2',
+    method: 'collection',
+    addElements: [sasBase2, sasLine22, sasAngle2],
+    mods: { scenarios: { 'showAll': { position: [-1.5, 0], scale: 0.6 } } },
+  };
+  const config3 = {
+    name: 'config3',
+    method: 'collection',
+    addElements: [sasBase3, sasLine23, sasAngle3],
+    mods: { scenarios: { 'showAll': { position: [1.5, 0.5], scale: 0.6 } } },
+  };
+  const config4 = {
+    name: 'config4',
+    method: 'collection',
+    addElements: [sasBase4, sasLine24, sasAngle4],
+    mods: { scenarios: { 'showAll': { position: [1.5, 0], scale: 0.6 } } },
+  };
+  const sasBaseSep = joinObjects({}, sasLineBase, {
+    name: 'base',
+    mods: {
+      scenarios: {
+        initial: { position: [-2, -1], scale: 1 },
+        center: { position: [-2, -1], scale: 1 },
+      },
+    },
+  });
+  const sasLine2Sep = joinObjects({}, sasLine2, {
+    name: 'line',
+    mods: {
+      scenarios: {
+        initial: { position: [-1.75, 0.5], rotation: 0, scale: 1 },
+      },
+    },
+  });
+  const sasAngleSep = joinObjects({}, sasAngle, {
+    name: 'angle',
+    mods: {
+      scenarios: {
+        initial: { position: [-0.25, -0.4], rotation: 0, scale: 1 },
+        center1: { position: [-2, -1], rotation: 0, scale: 1 },
+        center2: { position: [-2, -1], rotation: Math.PI * 2 - Math.PI / 6, scale: 1 },
+        center4: { position: [2, -1], rotation: Math.PI - Math.PI / 6, scale: 1 },
+        center3: { position: [2, -1], rotation: Math.PI, scale: 1 },
+      },
+    },
+  });
+
   const movablePad = (moveable) => {
     if (moveable) {
       return {
@@ -242,6 +433,13 @@ export default function lessonLayout() {
 
   layout.addElementsSAS = [
     layout.sas,
+    config1,
+    config2,
+    config3,
+    config4,
+    sasBaseSep,
+    sasAngleSep,
+    sasLine2Sep,
   ];
 
   // /////////////////////////////////////////////////////////////////

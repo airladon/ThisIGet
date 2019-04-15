@@ -180,7 +180,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'Yes. You can |move| the bottom corners of the triangle to see the |same angles can make triangles of different sizes|. You can move the top corner of the triangle to test different triangles.',
+        'You can |move| the bottom corners of the triangle to see that |triangles with the same angles, can be of different sizes|. You can move the top corner of the triangle to test different triangles.',
       ],
       modifiers: {
         move: click(aaa.randomSize, [aaa], colors.diagram.action),
@@ -207,64 +207,132 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */
-
     this.addSection({
       title: 'Side Angle Side Congruency',
       setContent: [
-        'Now consider if you know |two side lengths| and the |angle_between| those two sides. How many triangles can be made with these constraints?',
+        'Now consider the case where you know two side lengths, and the angle |between| them. Can more than one triangle be made?',
       ],
       modifiers: {
-        angle_between: highlight(colors.angles),
+        between: highlight(colors.angles)
       },
-      show: [sas],
+      show: [sas._line, sas._angle, sas._base],
       setSteadyState: () => {
-        sas.setProblemStatement();
+        sas.setScenarios('initial');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'We can start by connecting the angle to one of the lines. There are |four| ways to do this.',
+      ],
+      modifiers: {
+        four: click(sas.toggleAngles, [sas], colors.angles),
+      },
+      show: [sas._angle, sas._base],
+      transitionFromPrev: (done) => {
+        sas.setScenarios('initial');
+        sas.animations.cancelAll();
+        sas.animations.new()
+          .scenarios({ target: 'center1', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sas.setScenarios('center1');
+        sas.anglePosition = 1;
+      },
+      transitionToNext: (done) => {
+        // const r = sas._angle.getRotation();
+        if (sas.anglePosition !== 1) {
+          sas.animations.cancelAll();
+          sas.animations.new()
+            .scenarios({ target: 'center1', duration: 1 })
+            .whenFinished(done)
+            .start();
+        } else {
+          done();
+        }
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'We can visualize these 4 ways at the same time.',
+      ],
+      transitionFromPrev: (done) => {
+        sas._config1.showAll();
+        sas._config1._line.hide();
+        sas._config1.setScenario('center');
+        sas._config1.animations.cancelAll();
+        sas._config1.animations.new()
+          .scenario({ target: 'showAll', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sas._config1.showAll();
+        sas._config2.showAll();
+        sas._config3.showAll();
+        sas._config4.showAll();
+        sas._config1._line.hide();
+        sas._config2._line.hide();
+        sas._config3._line.hide();
+        sas._config4._line.hide();
+        sas.setScenarios('showAll');
       },
     });
 
     let common = {
       setContent: [
-        'There is |one_line| that can be drawn that connects the two end points.',
+        'Next, we can connect the |second| known line. It can |only| connect to the angle, as we are considering the case where the angle is |between| the two known lines.',
       ],
+      modifiers: {
+        between: highlight(colors.angles),
+      },
+      setSteadyState: () => {
+        sas.setScenarios('showAll');
+      },
     };
     this.addSection(common, {
-      modifiers: {
-        one_line: click(this.next, [this], colors.sides),
-      },
-      show: [sas],
-      setSteadyState: () => {
-        sas.setProblemStatement();
-      },
+      show: [sas._config1, sas._config2, sas._config3, sas._config4],
+      hide: [
+        sas._config1._line, sas._config2._line,
+        sas._config3._line, sas._config4._line,
+      ],
+    });
+    this.addSection(common, {
+      show: [sas._config1, sas._config2, sas._config3, sas._config4],
     });
 
-    this.addSection(common, {
-      modifiers: {
-        one_line: click(sas.oneLine, [sas], colors.sides),
+    this.addSection({
+      setContent: [
+        'We start by considering just one of these scenarios.',
+      ],
+      show: [sas._config1],
+      transitionFromPrev: (done) => {
+        sas._config1.animations.cancelAll();
+        sas._config1.animations.new()
+          .scenario({ target: 'center', duration: 1 })
+          .whenFinished(done)
+          .start();
       },
-      show: [sas],
       setSteadyState: () => {
+        sas._fig.showAll();
         sas.setProblemStatement();
-        sas._fig._pad0.show();
-        sas._fig._angle1.show();
-        sas._fig._side01.show();
-        sas._fig._pad0.setColor(colors.diagram.background);
-        sas.oneLine();
-      },
-      setLeaveState: () => {
-        sas._fig._pad0.setColor(colors.pads);
+        sas._config1.hide();
       },
     });
 
     this.addSection({
       setContent: [
-        'Are there any others? You can move the |pad| to try different lines.',
+        'You can move the |pad| to see how many different third lines can be drawn to make a triangle.',
       ],
       modifiers: {
         pad: click(sas.pulsePad, [sas], colors.pads),
       },
-      show: [sas],
+      show: [sas._fig],
       setSteadyState: () => {
-        sas.setMovableLeg();
+        sas.setMovableLegReady();
       },
     });
 
@@ -273,11 +341,14 @@ class Content extends PresentationLessonContent {
         'There is |only_one| line length and angle possible. If this line has a |different_length| or |different_angle|, it does not form a triangle.',
       ],
       modifiers: {
-        only_one: click(sas.goToTri, [sas], colors.sides),
+        only_one: click(sas.goToTri, [sas, null], colors.sides),
         different_length: click(sas.randLength, [sas], colors.sides),
         different_angle: click(sas.randRotation, [sas], colors.angles),
       },
-      show: [sas],
+      show: [sas._fig],
+      transitionFromPrev: (done) => {
+        sas.goToTri(done);
+      },
       setSteadyState: () => {
         sas.setMovableLeg();
       },
