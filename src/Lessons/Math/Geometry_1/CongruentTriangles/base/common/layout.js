@@ -5,7 +5,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 const {
   Point,
   // Transform,
-  Line,
+  // Line,
 } = Fig;
 
 const { joinObjects } = Fig.tools.misc;
@@ -14,6 +14,7 @@ const cssColorNames = [
   'sides',
   'angles',
   'pads',
+  'disabled',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -278,6 +279,38 @@ export default function lessonLayout() {
       },
     },
   });
+  const sasLine31 = joinObjects({}, sasLine2, {
+    name: 'line3',
+    options: {
+      position: [2, -1],
+      angle: Math.PI - Math.PI / 3,
+      length: 2,
+    },
+  });
+  const sasLine32 = joinObjects({}, sasLine2, {
+    name: 'line3',
+    options: {
+      position: [2, -1],
+      angle: Math.PI + Math.PI / 3,
+      length: 2,
+    },
+  });
+  const sasLine33 = joinObjects({}, sasLine2, {
+    name: 'line3',
+    options: {
+      position: [-2, -1],
+      angle: Math.PI / 3,
+      length: 2,
+    },
+  });
+  const sasLine34 = joinObjects({}, sasLine2, {
+    name: 'line3',
+    options: {
+      position: [-2, -1],
+      angle: -Math.PI / 3,
+      length: 2,
+    },
+  });
   const sasAngle1 = joinObjects({}, sasAngle, {
     name: 'angle',
     options: {
@@ -310,10 +343,42 @@ export default function lessonLayout() {
       angle: Math.PI / 6,
     },
   });
+  const sasAngle21 = joinObjects({}, sasAngle, {
+    name: 'angle2',
+    options: {
+      position: [2, -1],
+      rotation: Math.PI / 3 * 2,
+      angle: Math.PI / 3,
+    },
+  });
+  const sasAngle22 = joinObjects({}, sasAngle, {
+    name: 'angle2',
+    options: {
+      position: [2, -1],
+      rotation: Math.PI,
+      angle: Math.PI / 3,
+    },
+  });
+  const sasAngle23 = joinObjects({}, sasAngle, {
+    name: 'angle2',
+    options: {
+      position: [-2, -1],
+      rotation: 0,
+      angle: Math.PI / 3,
+    },
+  });
+  const sasAngle24 = joinObjects({}, sasAngle, {
+    name: 'angle2',
+    options: {
+      position: [-2, -1],
+      rotation: Math.PI  * 2 - Math.PI / 3,
+      angle: Math.PI / 3,
+    },
+  });
   const config1 = {
     name: 'config1',
     method: 'collection',
-    addElements: [sasBase1, sasLine21, sasAngle1],
+    addElements: [sasLine31, sasAngle21, sasBase1, sasLine21, sasAngle1],
     mods: {
       scenarios: {
         'showAll': { position: [-1.5, 0.5], scale: 0.6 },
@@ -324,19 +389,19 @@ export default function lessonLayout() {
   const config2 = {
     name: 'config2',
     method: 'collection',
-    addElements: [sasBase2, sasLine22, sasAngle2],
+    addElements: [sasLine32, sasAngle22, sasBase2, sasLine22, sasAngle2],
     mods: { scenarios: { 'showAll': { position: [-1.5, 0], scale: 0.6 } } },
   };
   const config3 = {
     name: 'config3',
     method: 'collection',
-    addElements: [sasBase3, sasLine23, sasAngle3],
+    addElements: [sasLine33, sasAngle23, sasBase3, sasLine23, sasAngle3],
     mods: { scenarios: { 'showAll': { position: [1.5, 0.5], scale: 0.6 } } },
   };
   const config4 = {
     name: 'config4',
     method: 'collection',
-    addElements: [sasBase4, sasLine24, sasAngle4],
+    addElements: [sasLine34, sasAngle24, sasBase4, sasLine24, sasAngle4],
     mods: { scenarios: { 'showAll': { position: [1.5, 0], scale: 0.6 } } },
   };
   const sasBaseSep = joinObjects({}, sasLineBase, {

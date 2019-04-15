@@ -262,6 +262,8 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         sas._config1.showAll();
         sas._config1._line.hide();
+        sas._config1._line3.hide();
+        sas._config1._angle2.hide();
         sas._config1.setScenario('center');
         sas._config1.animations.cancelAll();
         sas._config1.animations.new()
@@ -278,6 +280,14 @@ class Content extends PresentationLessonContent {
         sas._config2._line.hide();
         sas._config3._line.hide();
         sas._config4._line.hide();
+        sas._config1._line3.hide();
+        sas._config2._line3.hide();
+        sas._config3._line3.hide();
+        sas._config4._line3.hide();
+        sas._config1._angle2.hide();
+        sas._config2._angle2.hide();
+        sas._config3._angle2.hide();
+        sas._config4._angle2.hide();
         sas.setScenarios('showAll');
       },
     });
@@ -298,10 +308,33 @@ class Content extends PresentationLessonContent {
       hide: [
         sas._config1._line, sas._config2._line,
         sas._config3._line, sas._config4._line,
+        sas._config1._line3, sas._config2._line3,
+        sas._config3._line3, sas._config4._line3,
+        sas._config1._angle2, sas._config2._angle2,
+        sas._config3._angle2, sas._config4._angle2,
       ],
     });
     this.addSection(common, {
       show: [sas._config1, sas._config2, sas._config3, sas._config4],
+      hide: [
+        sas._config1._line3, sas._config2._line3,
+        sas._config3._line3, sas._config4._line3,
+        sas._config1._angle2, sas._config2._angle2,
+        sas._config3._angle2, sas._config4._angle2,
+      ],
+    });
+    this.addSection(common, {
+      setContent: [
+        'For each of these scenarios, how many triangles can be made?',
+      ],
+      show: [sas._config1, sas._config2, sas._config3, sas._config4],
+      hide: [
+        sas._config1._line3, sas._config2._line3,
+        sas._config3._line3, sas._config4._line3,
+        sas._config1._angle2, sas._config2._angle2,
+        sas._config3._angle2, sas._config4._angle2,
+      ],
+
     });
 
     this.addSection({
@@ -309,6 +342,7 @@ class Content extends PresentationLessonContent {
         'We start by considering just one of these scenarios.',
       ],
       show: [sas._config1],
+      hide: [sas._config1._line3, sas._config1._angle2],
       transitionFromPrev: (done) => {
         sas._config1.animations.cancelAll();
         sas._config1.animations.new()
@@ -351,6 +385,38 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         sas.setMovableLeg();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Now, triangles are congruent if they have the same side lengths and angles. They can be moved, rotated and flipped and still be contruent.',
+      ],
+      show: [sas._config1],
+      setSteadyState: () => {
+        sas._config1.setScenario('center');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Now, triangles are congruent if they have the same side lengths and angles. They can be moved, rotated and flipped and still be contruent. |test|, |asdf| |qwer|',
+      ],
+      modifiers: {
+        test: click(sas.createCongruentTriangles, [sas, null], colors.sides),
+        asdf: click(sas.configColors, [sas, colors.disabled, colors.disabled], colors.disabled),
+        qwer: click(sas.configColors, [sas, colors.sides, colors.angles], colors.disabled),
+      },
+      show: [sas._config1],
+      transitionFromPrev: (done) => {
+        sas._config1.animations.cancelAll();
+        sas._config1.animations.new()
+          .scenario({ target: 'showAll', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sas._config1.setScenario('showAll');
       },
     });
 

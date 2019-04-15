@@ -7,15 +7,23 @@ const {
   DiagramElementPrimative, DiagramObjectAngle,
   DiagramObjectLine,
   DiagramObjectPolyLine,
-  // DiagramElementCollection,
+  DiagramElementCollection,
   // DiagramObjectAngle, DiagramObjectLine,
   Transform,
-  // Point,
+  Point,
   // Line,
 } = Fig;
 
 const { rand, round } = Fig.tools.math;
 const { getPoint } = Fig.tools.g2;
+
+type TypeConfig = {
+  _base: DiagramObjectLine;
+  _angle: DiagramObjectAngle;
+  _line: DiagramObjectLine;
+  _angle2: DiagramObjectAngle;
+  _line3: DiagramObjectLine;
+} & DiagramElementCollection;
 
 export default class CommonCollectionSAS extends CommonDiagramCollection {
   _fig: {
@@ -33,6 +41,10 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
   _angle: DiagramObjectAngle;
   _base: DiagramObjectLine;
   _line: DiagramObjectLine;
+  _config1: TypeConfig;
+  _config2: TypeConfig;
+  _config3: TypeConfig;
+  _config4: TypeConfig;
 
   leftAngle: number;
   rightAngle: number;
@@ -160,7 +172,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this._fig._pad0.animations.cancelAll();
     this._fig._pad0.animations.new()
       .position({ target: this._fig._pad3.getPosition(), velocity: 1 })
-      .whenFinished(() => {
+      .whenFinished(() => {       // $FlowFixMe - label exists
         this._fig._side01._label.pulseScaleNow(1, 2);
         this._fig._angle1.pulseScaleNow(1, 1.3);
         if (callback != null) {
@@ -168,6 +180,70 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
         }
       })
       .start();
+    this.diagram.animateNextFrame();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  hideLabels(element: Object) {
+    element._line3._label.hide();
+    element._angle2.hide();
+    element._angle.hide();
+    element._line._label.hide();
+    element._base._label.hide();
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  showLabels(element: Object) {
+    element._line3._label.showAll();
+    element._angle2.showAll();
+    element._angle.showAll();
+    element._line._label.showAll();
+    element._base._label.showAll();
+  }
+
+  createCongruentTriangles(callback: ?() => void = null) {
+    this.stop(true, 'complete');
+    this._config2.showAll();
+    this._config3.showAll();
+    this._config4.hideAll();
+    this.hideLabels(this._config2);
+    this.hideLabels(this._config3);
+    const s = this._config1.getScale();
+    const p = this._config1.getPosition();
+    this._config2.setScale(s.x, -s.y);
+    this._config2.setPosition(p.x, p.y - 1 - 0.2);
+    this._config3.setScale(-s.x, s.y);
+    this._config3.setPosition(p.x, p.y);
+    this._config4.setScale(s.x, -s.y);        // $FlowFixMe - scenario exists
+    const p3 = getPoint(this._config3.scenarios.showAll.position);
+    this._config4.setPosition(p3.x, p3.y - 1 - 0.2);
+
+    this.animations.new()
+      .then(this._config2.anim.scenario({ target: 'showAll', duration: 1 }))
+      .trigger({ callback: this.showLabels.bind(this, this._config2) })
+      .then(this._config3.anim.scenario({ target: 'showAll', duration: 1 }))
+      .trigger({ callback: this.showLabels.bind(this, this._config3) })
+      .trigger({ callback: () => { this._config4.showAll(); } })
+      .then(this._config4.anim.scenario({ target: 'showAll', duration: 1 }))
+      .trigger({ callback: this.showLabels.bind(this, this._config4) })
+      .whenFinished(callback)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  configColors(color: Array<number>, color2: Array<number>) {
+    this._config1._line3.setColor(color);
+    this._config2._line3.setColor(color);
+    this._config3._line3.setColor(color);
+    this._config4._line3.setColor(color);
+    this._config1._angle2.setColor(color2);
+    this._config2._angle2.setColor(color2);
+    this._config3._angle2.setColor(color2);
+    this._config4._angle2.setColor(color2);
+    // this._config1._line.setColor(color);
+    // this._config2._line.setColor(color);
+    // this._config3._line.setColor(color);
+    // this._config4._line.setColor(color);
     this.diagram.animateNextFrame();
   }
 }
