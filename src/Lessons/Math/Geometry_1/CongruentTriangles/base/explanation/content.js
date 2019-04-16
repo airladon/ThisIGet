@@ -44,7 +44,7 @@ class Content extends PresentationLessonContent {
     const aaa = diag._aaa;
     const sas = diag._sas;
     const asa = diag._asa;
-    const sss = diag._sss;
+    // const sss = diag._sss;
 
     this.addSection({
       title: 'Congruency',
@@ -446,8 +446,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'So all four scenarios result in the same triangle, just flipped or rotated compared to the first.',
-        'Only one triangle can be formed when given two side lengths and the angle between them.',
+        'So all four scenarios result in the |same triangle|, just flipped or rotated compared to the first.',
+        'So we see that only one triangle can be formed when given two side lengths and the angle between them.',
       ]),
     });
 
@@ -483,69 +483,131 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
-      title: 'Side Side Side Congruency',
       setContent: [
-        'Next consider the case where only the |three side lengths| are known. How many triangles can be created with just this knowledge?',
+        'The next case to consider is where |one_side| and its |adjacent_angles| are known. Can only one triangle be formed from this configuration?',
       ],
-      show: [sss],
-      setSteadyState: () => {
-        sss.setScenarios('disconnected');
+      modifiers: {
+        one_side: highlight(colors.sides),
+        adjacent_angles: highlight(colors.angles),
       },
+      setEnterState: () => {
+        asa.initialTri();
+      },
+      show: [asa],
+      hide: [
+        asa._fig._pad0, asa._fig._pad3,
+        asa._fig._side01._label, asa._fig._side23._label],
     });
 
-    common = {
+    this.addSection({
       setContent: [
-        'We know a |triangle| is formed by |connecting three lines| together, so we can start by connecting one line\'s ends to the other two lines',
+        'As the two angles are fixed, the only way to make a triangle is to |extend| the remaining sides till they meet.',
       ],
-      show: [sss._fig._left, sss._fig._base, sss._fig._right],
-    };
-    this.addSection(common, {
-      setSteadyState: () => {
-        sss.setScenarios('disconnected');
-        sss.hasTouchableElements = false;
+      modifiers: {
+        extend: click(this.next, [this], colors.sides),
       },
+      setEnterState: () => {
+        asa.initialTri();
+      },
+      show: [asa],
+      hide: [
+        asa._fig._pad0, asa._fig._pad3,
+        asa._fig._side01._label, asa._fig._side23._label],
     });
 
-    this.addSection(common, {
-      transitionFromPrev: (done) => {
-        sss.animations.cancelAll();
-        sss.animations.new()
-          .scenarios({ target: 'connected', duration: 1 })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        sss.hasTouchableElements = false;
-        sss.setScenarios('connected');
-      },
-    });
-
-    this.addSection(common, {
+    this.addSection({
       setContent: [
-        'Now, how can the end lines be |rotated| to form a |triangle|? Can only |one triangle| be formed? You can experiment by rotating the end lines.',
+        'As the two angles are fixed, the only way to make a triangle is to |extend| the remaining sides till they meet.',
       ],
-      show: [sss._fig._left, sss._fig._base, sss._fig._right],
+      modifiers: {
+        extend: click(asa.goToTri, [asa, null, true], colors.sides),
+      },
+      transitionFromAny: (done) => {
+        // asa.initialTri();
+        if (this.comingFrom === 'prev') {
+          asa.goToTri(done, true);
+        } else {
+          asa.goToTri(done, false);
+        }
+      },
+      show: [asa],
+      hide: [
+        asa._fig._pad0, asa._fig._pad3,
+      ],
+    });
+
+    this.addSection({
+      setContent: [
+        'Different lengths of the |left| or |right| side will not result in a triangle. Only |one_length| for each side will form the triangle.',
+      ],
+      modifiers: {
+        one_length: click(asa.goToTri, [asa, null, false], colors.sides),
+        left: click(asa.randLength, [asa, '01'], colors.sides),
+        right: click(asa.randLength, [asa, '23'], colors.sides),
+      },
+      show: [asa],
       setSteadyState: () => {
-        sss.hasTouchableElements = true;
-        sss.setScenarios('connected');
-        console.log(sss)
+        asa.goToTri(null, false);
       },
     });
 
-    // this.addSection({
-    //   setContent: ['|length1| |length2| |goto|'],
-    //   modifiers: {
-    //     length1: click(asa.randLength, [asa, '01'], colors.diagram.action),
-    //     length2: click(asa.randLength, [asa, '23'], colors.diagram.action),
-    //     goto: click(asa.goToTri, [asa], colors.diagram.action),
-    //   },
-    //   show: [asa],
-    //   setSteadyState: () => {
-    //     asa._fig._angle2.showAll();
-    //   },
-    // });
+    this.addSection({
+      setContent: [
+        'Note, similar to the Side-Angle-Side case, we started this with a |choice| on how to orient the known |angles| and |side|.',
+      ],
+      modifiers: {
+        angles: highlight(colors.angles),
+        sides: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        asa.initialTri();
+      },
+      show: [asa],
+      hide: [
+        asa._fig._pad0, asa._fig._pad3,
+        asa._fig._side01._label, asa._fig._side23._label,
+      ],
+    });
 
+    this.addSection({
+      setContent: [
+        'We can follow the same procedure as the Side-Angle-Side case to show that these choices simply result in the same triangle which is either |rotated| or |flipped|.',
+        'Therefore, the triangles resulting from these choices are all |congruent|.',
+      ],
+      modifiers: {
+        angles: highlight(colors.angles),
+        sides: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        asa.initialTri();
+      },
+      show: [asa],
+      hide: [
+        asa._fig._pad0, asa._fig._pad3,
+        asa._fig._side01._label, asa._fig._side23._label,
+      ],
+    });
 
+    this.addSection({
+      setContent: [
+        'Therefore if two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
+        'This case is often called the |Angle Side Angle| case.',
+      ],
+      modifiers: {
+        two_angles: highlight(colors.angles),
+        side_between: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle0, congruent._tri2._angle0,
+        congruent._tri1._side01, congruent._tri2._side01,
+        congruent._tri1._side20, congruent._tri2._side20,
+      ],
+    });
   }
 }
 

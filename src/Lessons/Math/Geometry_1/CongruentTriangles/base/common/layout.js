@@ -565,122 +565,122 @@ export default function lessonLayout() {
   // /////////////////////////////////////////////////////////////////
   // SSS
   // /////////////////////////////////////////////////////////////////
-  const base = 1.5;
-  const left = base / ((Math.sqrt(3) + 1 / Math.sqrt(3)) / 2);
-  const right = Math.sqrt(base ** 2 - left ** 2);
-  const sssLine = {
-    method: 'line',
-    options: {
-      color: colors.sides,
-      width: layout.width,
-      move: { type: 'rotation' },
-      vertexSpaceStart: 'start',
-      length: 1,
-    },
-    mods: {
-      isTouchable: true,
-      isMovable: true,
-    },
-  };
-  layout.sssBase = joinObjects({}, sssLine, {
-    name: 'base',
-    options: {
-      length: base,
-      vertexSpaceStart: 'center',
-    },
-    mods: {
-      isTouchable: false,
-      isMovable: false,
-      isInteractive: false,
-      _line: {
-        isTouchable: false,
-      },
-      scenarios: {
-        disconnected: {
-          position: [0, 0], rotation: Math.PI / 2, scale: 1,
-        },
-        connected: {
-          position: [0, 0], rotation: 0, scale: 1,
-        },
-      },
-    },
-  });
-  layout.sssLeft = joinObjects({}, sssLine, {
-    name: 'left',
-    options: {
-      length: left,
-    },
-    mods: {
-      scenarios: {
-        disconnected: {
-          position: [-1, -left / 2], rotation: Math.PI / 2, scale: 1,
-        },
-        connected: {
-          position: [-base / 2, 0], rotation: Math.PI * 2 / 3, scale: 1,
-        },
-      },
-      interactiveLocation: [left * 0.8, 0],
-    },
-  });
-  layout.sssRight = joinObjects({}, sssLine, {
-    name: 'right',
-    options: {
-      length: right,
-    },
-    mods: {
-      scenarios: {
-        disconnected: {
-          position: [1, -right / 2], rotation: Math.PI / 2, scale: 1,
-        },
-        connected: {
-          position: [base / 2, 0], rotation: Math.PI / 3, scale: 1,
-        },
-      },
-      interactiveLocation: [right * 0.8, 0],
-    },
-  });
+  // const base = 1.5;
+  // const left = base / ((Math.sqrt(3) + 1 / Math.sqrt(3)) / 2);
+  // const right = Math.sqrt(base ** 2 - left ** 2);
+  // const sssLine = {
+  //   method: 'line',
+  //   options: {
+  //     color: colors.sides,
+  //     width: layout.width,
+  //     move: { type: 'rotation' },
+  //     vertexSpaceStart: 'start',
+  //     length: 1,
+  //   },
+  //   mods: {
+  //     isTouchable: true,
+  //     isMovable: true,
+  //   },
+  // };
+  // layout.sssBase = joinObjects({}, sssLine, {
+  //   name: 'base',
+  //   options: {
+  //     length: base,
+  //     vertexSpaceStart: 'center',
+  //   },
+  //   mods: {
+  //     isTouchable: false,
+  //     isMovable: false,
+  //     isInteractive: false,
+  //     _line: {
+  //       isTouchable: false,
+  //     },
+  //     scenarios: {
+  //       disconnected: {
+  //         position: [0, 0], rotation: Math.PI / 2, scale: 1,
+  //       },
+  //       connected: {
+  //         position: [0, 0], rotation: 0, scale: 1,
+  //       },
+  //     },
+  //   },
+  // });
+  // layout.sssLeft = joinObjects({}, sssLine, {
+  //   name: 'left',
+  //   options: {
+  //     length: left,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       disconnected: {
+  //         position: [-1, -left / 2], rotation: Math.PI / 2, scale: 1,
+  //       },
+  //       connected: {
+  //         position: [-base / 2, 0], rotation: Math.PI * 2 / 3, scale: 1,
+  //       },
+  //     },
+  //     interactiveLocation: [left * 0.8, 0],
+  //   },
+  // });
+  // layout.sssRight = joinObjects({}, sssLine, {
+  //   name: 'right',
+  //   options: {
+  //     length: right,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       disconnected: {
+  //         position: [1, -right / 2], rotation: Math.PI / 2, scale: 1,
+  //       },
+  //       connected: {
+  //         position: [base / 2, 0], rotation: Math.PI / 3, scale: 1,
+  //       },
+  //     },
+  //     interactiveLocation: [right * 0.8, 0],
+  //   },
+  // });
 
-  const constructionCircle = {
-    method: 'polygon',
-    options: {
-      width: layout.width / 4,
-      color: colors.construction,
-      sides: 100,
-    },
-  };
+  // const constructionCircle = {
+  //   method: 'polygon',
+  //   options: {
+  //     width: layout.width / 4,
+  //     color: colors.construction,
+  //     sides: 100,
+  //   },
+  // };
 
-  layout.circleLeft = joinObjects({}, constructionCircle, {
-    name: 'circleLeft',
-    options: {
-      radius: left,
-    },
-  });
+  // layout.circleLeft = joinObjects({}, constructionCircle, {
+  //   name: 'circleLeft',
+  //   options: {
+  //     radius: left,
+  //   },
+  // });
 
-  layout.circleRight = joinObjects({}, constructionCircle, {
-    name: 'circleRight',
-    options: {
-      radius: right,
-    },
-  });
+  // layout.circleRight = joinObjects({}, constructionCircle, {
+  //   name: 'circleRight',
+  //   options: {
+  //     radius: right,
+  //   },
+  // });
 
-  layout.sss = {
-    name: 'fig',
-    method: 'collection',
-    addElements: [
-      layout.circleLeft,
-      layout.circleRight,
-      layout.sssBase,
-      layout.sssLeft,
-      layout.sssRight,
-    ],
-    options: {
-      position: new Point(0, -0.3),
-    },
-  };
+  // layout.sss = {
+  //   name: 'fig',
+  //   method: 'collection',
+  //   addElements: [
+  //     layout.circleLeft,
+  //     layout.circleRight,
+  //     layout.sssBase,
+  //     layout.sssLeft,
+  //     layout.sssRight,
+  //   ],
+  //   options: {
+  //     position: new Point(0, -0.3),
+  //   },
+  // };
 
-  layout.addElementsSSS = [
-    layout.sss,
-  ];
+  // layout.addElementsSSS = [
+  //   layout.sss,
+  // ];
 
   return layout;
 }

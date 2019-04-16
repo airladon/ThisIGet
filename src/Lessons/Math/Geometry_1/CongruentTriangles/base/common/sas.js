@@ -10,18 +10,24 @@ const {
   DiagramElementCollection,
   // DiagramObjectAngle, DiagramObjectLine,
   Transform,
-  Point,
+  // Point,
   // Line,
 } = Fig;
 
-const { rand, round } = Fig.tools.math;
+const { rand } = Fig.tools.math;
 const { getPoint } = Fig.tools.g2;
 
 type TypeConfig = {
   _base: DiagramObjectLine;
-  _angle: DiagramObjectAngle;
+  _angle: {
+    _side1: DiagramObjectLine;
+    _side2: DiagramObjectLine;
+  } & DiagramObjectAngle;
   _line: DiagramObjectLine;
-  _angle2: DiagramObjectAngle;
+  _angle2: {
+    _side1: DiagramObjectLine;
+    _side2: DiagramObjectLine;
+  } & DiagramObjectAngle;
   _line3: DiagramObjectLine;
 } & DiagramElementCollection;
 

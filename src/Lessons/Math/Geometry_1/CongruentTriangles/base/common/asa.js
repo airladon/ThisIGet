@@ -43,17 +43,33 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElementsASA);
     this.hasTouchableElements = true;
     this.resetTri();
+    this._fig._pad0.color = this.layout.colors.diagram.background;
+    this._fig._pad3.color = this.layout.colors.diagram.background;
+  }
+
+  initialTri() {
+    const fig = this._fig;
+    fig._pad0.isTouchable = false;
+    fig._pad3.isTouchable = false;
+    const points = this.layout.asa.options.points.map(p => getPoint(p));
+    const line10 = new Line(points[1], points[0]);
+    fig._pad0.move.limitLine = null;
+    fig._pad0.setPosition(line10.pointAtPercent(0.25));
+    const line23 = new Line(points[2], points[3]);
+    fig._pad3.move.limitLine = null;
+    fig._pad3.setPosition(line23.pointAtPercent(0.15));
   }
 
   resetTri() {
     const fig = this._fig;
     fig._pad0.makeTouchable();
     fig._pad3.makeTouchable();
-    const line10 = new Line(fig.points[1], fig.points[0]);
-    const moveLine01 = new Line(line10.pointAtPercent(0.4), 2.2, line10.angle());
+    const points = this.layout.asa.options.points.map(p => getPoint(p));
+    const line10 = new Line(points[1], points[0]);
+    const moveLine01 = new Line(line10.pointAtPercent(0.4), 1.7, line10.angle());
     fig._pad0.move.limitLine = moveLine01;
-    const line23 = new Line(fig.points[2], fig.points[3]);
-    const moveLine23 = new Line(line23.midPoint(), 3, line23.angle());
+    const line23 = new Line(points[2], points[3]);
+    const moveLine23 = new Line(line23.midPoint(), 2.7, line23.angle());
     fig._pad3.move.limitLine = moveLine23;
   }
 
@@ -69,7 +85,7 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
       line = line23;
       pad = fig._pad3;
     }
-    let delta = rand(0.7, 1.3) + Math.abs(line.length() - side.length);
+    let delta = rand(0.7, 1.2) + Math.abs(line.length() - side.length);
     if (side.length > line.length()) {
       delta = -delta;
     }
@@ -83,20 +99,23 @@ export default class CommonCollectionASA extends CommonDiagramCollection {
     };
     pad.animations.cancelAll();
     pad.animations.new()
-      .custom({ callback: customMove, duration: 0.3 })
+      .custom({ callback: customMove, duration: 0.5 })
       .start();
     this.diagram.animateNextFrame();
   }
 
-  goToTri() {
+  goToTri(callback: ?() => void = null, setInitial: boolean) {
     const target = getPoint(this.layout.asa.options.points[0]);
-    this._fig._pad0.animations.cancelAll();
-    this._fig._pad0.animations.new()
-      .position({ target, velocity: 1 })
-      .start();
-    this._fig._pad3.animations.cancelAll();
-    this._fig._pad3.animations.new()
-      .position({ target, velocity: 1 })
+    this._fig.animations.cancelAll();
+    if (setInitial) {
+      this.initialTri();
+    }
+    this._fig.animations.new()
+      .inParallel([
+        this._fig._pad0.anim.position({ target, velocity: 1 }),
+        this._fig._pad3.anim.position({ target, velocity: 1.9 }),
+      ])
+      .whenFinished(callback)
       .start();
     this.diagram.animateNextFrame();
   }
