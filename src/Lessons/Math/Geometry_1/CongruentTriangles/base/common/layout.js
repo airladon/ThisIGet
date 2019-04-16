@@ -293,6 +293,9 @@ export default function lessonLayout() {
       position: [2, -1],
       angle: Math.PI + Math.PI / 3,
       length: 2,
+      label: {
+        location: 'bottom',
+      },
     },
   });
   const sasLine33 = joinObjects({}, sasLine2, {
@@ -309,6 +312,9 @@ export default function lessonLayout() {
       position: [-2, -1],
       angle: -Math.PI / 3,
       length: 2,
+      label: {
+        location: 'bottom',
+      },
     },
   });
   const sasAngle1 = joinObjects({}, sasAngle, {

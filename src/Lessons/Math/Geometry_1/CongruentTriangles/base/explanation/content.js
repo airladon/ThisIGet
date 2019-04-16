@@ -128,8 +128,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'Showing two triangles are congruent can sometimes be beneficial in calculating a geometric problem.',
-        'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the other triangle.',
+        'Showing two triangles are congruent can be beneficial in calculating a geometric problem.',
+        'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the known lengths and angles other triangle.',
       ]),
     });
 
@@ -294,7 +294,7 @@ class Content extends PresentationLessonContent {
 
     let common = {
       setContent: [
-        'Next, we can connect the |second| known line. It can |only| connect to the angle, as we are considering the case where the angle is |between| the two known lines.',
+        'Next, we can connect the |second| known line. As we are considering the case where the angle is |between| the sides, then it connects to the free arm of the angle.',
       ],
       modifiers: {
         between: highlight(colors.angles),
@@ -325,7 +325,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'For each of these scenarios, how many triangles can be made?',
+        'For each of these scenarios, how many triangles can be made, and do the different scenarios create different triangles?',
       ],
       show: [sas._config1, sas._config2, sas._config3, sas._config4],
       hide: [
@@ -359,7 +359,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'You can move the |pad| to see how many different third lines can be drawn to make a triangle.',
+        'You can move the |pad| to see how many different lines can be drawn to make a triangle with the known sides and angle.',
       ],
       modifiers: {
         pad: click(sas.pulsePad, [sas], colors.pads),
@@ -390,7 +390,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'We can |flip| this triangle in different ways, and all the reflections will be |congruent|.',
+        'Now if we |flip| this triangle in different ways, we know all the reflections are |congruent|.',
       ],
       show: [sas._config1],
       setSteadyState: () => {
@@ -400,7 +400,7 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'Therefore, we can |flip| them to resemble the |original| four options we had to connect the angle to the first side.',
+        'Therefore, we can |flip| them to resemble the |original| four scenarios of connecting the angle to the first side.',
       ],
       show: [sas._config1],
     };
@@ -424,16 +424,11 @@ class Content extends PresentationLessonContent {
         sas.setScenario('center');
         sas.animations.cancelAll();
         sas.animations.new()
-          .scenario({ target: 'showAll', duration: 1 })
+          .scenarios({ target: 'showAll', duration: 1 })
           .trigger({
-            callback: sas.createCongruentTriangles.bind(sas, false),
-            duration: 4,
+            callback: sas.createCongruentTriangles.bind(sas, null, false),
+            duration: 3,
           })
-          .trigger({ callback: sas.configColors.bind(sas, colors.disabled, colors.disabled) })
-          // .trigger({ callback: () => {
-          //   sas.configColors(colors.disabled, colors.disabled);
-          //   console.log('triggered');
-          // }, duration: 1, delay: 3 })
           .whenFinished(done)
           .start();
       },
@@ -449,32 +444,11 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    // this.addSection({
-    //   setContent: [
-    //     'We have flipped these '
-    //   ]
-    // }
-
     this.addSection({
-      setContent: [
-        'Now, triangles are congruent if they have the same side lengths and angles. They can be moved, rotated and flipped and still be contruent. |test|, |asdf| |qwer|',
-      ],
-      modifiers: {
-        test: click(sas.createCongruentTriangles, [sas, null], colors.sides),
-        asdf: click(sas.configColors, [sas, colors.disabled, colors.disabled], colors.disabled),
-        qwer: click(sas.configColors, [sas, colors.sides, colors.angles], colors.disabled),
-      },
-      show: [sas._config1],
-      transitionFromPrev: (done) => {
-        sas._config1.animations.cancelAll();
-        sas._config1.animations.new()
-          .scenario({ target: 'showAll', duration: 1 })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        sas._config1.setScenario('showAll');
-      },
+      setContent: style({ centerV: true }, [
+        'So all four scenarios result in the same triangle, just flipped or rotated compared to the first.',
+        'Only one triangle can be formed when given two side lengths and the angle between them.',
+      ]),
     });
 
     this.addSection({
@@ -485,16 +459,18 @@ class Content extends PresentationLessonContent {
       modifiers: {
         angle_between: highlight(colors.angles),
       },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
       show: [congruent],
       hide: [
         congruent._tri1._angle0, congruent._tri1._angle1,
         congruent._tri2._angle0, congruent._tri2._angle1,
         congruent._tri1._side01, congruent._tri2._side01,
       ],
-      setSteadyState: () => {
-        congruent._tri1.setScenario('lowLeft');
-        congruent._tri2.setScenario('rightLeft');
-      },
+      // setSteadyState: () => {
+      // },
     });
 
     /* ********************************************************************* */

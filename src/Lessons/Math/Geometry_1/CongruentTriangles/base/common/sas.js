@@ -205,6 +205,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     if (stop) {
       this.stop(true, 'complete');
     }
+    this.configColors(this.layout.colors.sides, this.layout.colors.angles);
     this._config2.showAll();
     this._config3.showAll();
     this._config4.hideAll();
@@ -225,9 +226,19 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
       .trigger({ callback: this.showLabels.bind(this, this._config2) })
       .then(this._config3.anim.scenario({ target: 'showAll', duration: 1 }))
       .trigger({ callback: this.showLabels.bind(this, this._config3) })
-      .trigger({ callback: () => { this._config4.showAll(); } })
+      .trigger({
+        callback: () => {
+          this._config4.showAll();
+          this.hideLabels(this._config4);
+        },
+      })
       .then(this._config4.anim.scenario({ target: 'showAll', duration: 1 }))
       .trigger({ callback: this.showLabels.bind(this, this._config4) })
+      .trigger({
+        callback: this.configColors.bind(
+          this, this.layout.colors.disabled, this.layout.colors.disabled,
+        ),
+      })
       .whenFinished(callback)
       .start();
     this.diagram.animateNextFrame();
@@ -239,9 +250,17 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this._config3._line3.setColor(color);
     this._config4._line3.setColor(color);
     this._config1._angle2.setColor(color2);
+    this._config1._angle2._side1.setColor(color);
+    this._config1._angle2._side2.setColor(color);
     this._config2._angle2.setColor(color2);
+    this._config2._angle2._side1.setColor(color);
+    this._config2._angle2._side2.setColor(color);
     this._config3._angle2.setColor(color2);
+    this._config3._angle2._side1.setColor(color);
+    this._config3._angle2._side2.setColor(color);
     this._config4._angle2.setColor(color2);
+    this._config4._angle2._side1.setColor(color);
+    this._config4._angle2._side2.setColor(color);
     this.diagram.animateNextFrame();
   }
 
