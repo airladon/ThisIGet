@@ -13674,6 +13674,8 @@ function (_DiagramElementCollec) {
       var defaultMaxLength = optionsToUse.length;
 
       if (optionsToUse.p1 != null && optionsToUse.p2 != null) {
+        optionsToUse.p1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1);
+        optionsToUse.p2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2);
         defaultMaxLength = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(optionsToUse.p1, optionsToUse.p2);
       }
 
@@ -14228,7 +14230,7 @@ function (_DiagramElementCollec) {
       var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.offset;
       this.offset = offset;
 
-      var _this$calculateFromP = this.calculateFromP1P2(p, q),
+      var _this$calculateFromP = this.calculateFromP1P2(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(q)),
           length = _this$calculateFromP.length,
           angle = _this$calculateFromP.angle,
           position = _this$calculateFromP.position;

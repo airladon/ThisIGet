@@ -32,9 +32,9 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.loadQRs([
+      'triangle_introduction/base',
+    ]);
   }
 
   addSections() {
@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const aaa = diag._aaa;
     const sas = diag._sas;
     const asa = diag._asa;
+    const aas = diag._aas;
     // const sss = diag._sss;
 
     this.addSection({
@@ -483,6 +484,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
+      title: 'Angle Side Angle',
       setContent: [
         'The next case to consider is where |one_side| and its |adjacent_angles| are known. Can only one triangle be formed from this configuration?',
       ],
@@ -607,6 +609,95 @@ class Content extends PresentationLessonContent {
         congruent._tri1._side01, congruent._tri2._side01,
         congruent._tri1._side20, congruent._tri2._side20,
       ],
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    this.addSection({
+      title: 'Angle Angle Side',
+      setContent: [
+        'The next case is when |two_angles| and the |side_not_between| them are known.',
+      ],
+      modifiers: {
+        side_not_between: highlight(colors.sides),
+        two_angles: highlight(colors.angles),
+      },
+      show: [aas._angle1, aas._angle3, aas._side],
+    });
+
+    common = {
+      setContent: [
+        'First, we know angles in a |triangle| always add up to 180º. Therefore we can |calculate| the third angle.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        triangle: click(this.showQR, [this, 'triangle_introduction/base', 'Main'], colors.sides),
+        calculate: click(this.next, [this], colors.angles),
+      },
+      show: [aas._angle1, aas._angle3, aas._side],
+    });
+    this.addSection(common, {
+      modifiers: {
+        triangle: click(this.showQR, [this, 'triangle_introduction/base', 'Main'], colors.sides),
+        calculate: click(aas.pulseAngle2, [aas], colors.angles),
+      },
+      show: [aas],
+      setSteadyState: () => {
+        aas.pulseAngle2();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'The third angle has now given us the |Angle Side Angle| case. With this established, we know only one triangle can be formed.',
+      ],
+      show: [aas],
+      setSteadyState: () => {
+        aas._angle3.setColor(colors.disabled);
+      },
+      setLeaveState: () => {
+        aas._angle3.setColor(colors.angles);
+        aas._angle3._side1.setColor(colors.sides);
+        aas._angle3._side2.setColor(colors.sides);
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore if two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|.',
+        'This case is often called the |Angle Angle Side| case.',
+      ],
+      modifiers: {
+        two_angles: highlight(colors.angles),
+        side_not_between: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle1, congruent._tri2._angle1,
+        congruent._tri1._side01, congruent._tri2._side01,
+        congruent._tri1._side20, congruent._tri2._side20,
+      ],
+    });
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'The |Angle Side Side| and |Angle Angle Side| cases can be combined to be more general as all the combinations of two angles and one side are covered between them.',
+        'Therefore, if two triangles share the same |two_angles| and |relatively_positioned_side|, then the |triangles are congruent|.',
+      ]),
+      modifiers: {
+        two_angles: highlight(colors.angles),
+        relatively_positioned_side: highlight(colors.sides),
+      },
     });
   }
 }

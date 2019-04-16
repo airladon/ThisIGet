@@ -563,6 +563,78 @@ export default function lessonLayout() {
   ];
 
   // /////////////////////////////////////////////////////////////////
+  // AAS
+  // /////////////////////////////////////////////////////////////////
+  const aasSide = {
+    name: 'side',
+    method: 'line',
+    options: {
+      width: layout.width,
+      p1: [-2, -1],
+      p2: [2, -1],
+      color: colors.sides,
+      label: {
+        text: null,
+        offset: 0.1,
+        location: 'bottom',
+      },
+    },
+  };
+
+  const aasAngle = {
+    method: 'angle',
+    options: {
+      color: colors.angles,
+      sides: {
+        color: colors.sides,
+        length: 0.5,
+      },
+      curve: {
+        radius: 0.4,
+        width: layout.width,
+      },
+      label: {
+        text: null,
+        radius: 0.4,
+      },
+    },
+  };
+
+  const aasAngle1 = joinObjects({}, aasAngle, {
+    name: 'angle1',
+    options: {
+      rotation: 0,
+      angle: Math.PI / 6,
+      position: [-2, -1],
+    },
+  });
+
+  const aasAngle2 = joinObjects({}, aasAngle, {
+    name: 'angle2',
+    options: {
+      rotation: Math.PI - Math.PI / 3,
+      angle: Math.PI / 3,
+      position: [2, -1],
+    },
+  });
+
+  const aasAngle3 = joinObjects({}, aasAngle, {
+    name: 'angle3',
+    options: {
+      rotation: Math.PI + Math.PI / 6,
+      angle: Math.PI / 2,
+      position: [1, 2 * (Math.sqrt(3) / 2 - 0.5)],
+    },
+  });
+
+  layout.addElementsAAS = [
+    aasAngle1,
+    aasAngle2,
+    aasAngle3,
+    aasSide,
+  ];
+
+  // /////////////////////////////////////////////////////////////////
   // SSS
   // /////////////////////////////////////////////////////////////////
   // const base = 1.5;
