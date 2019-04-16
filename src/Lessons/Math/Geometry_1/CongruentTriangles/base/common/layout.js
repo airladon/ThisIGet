@@ -189,7 +189,7 @@ export default function lessonLayout() {
       position: [-2, -1],
       label: {
         text: null,
-        offset: 0.2,
+        offset: 0.1,
         location: 'bottom',
       },
     },
@@ -199,7 +199,7 @@ export default function lessonLayout() {
       length: 4 * Math.sqrt(3) / 2,
       label: {
         text: null,
-        offset: 0.2,
+        offset: 0.1,
         location: 'top',
       },
     },
@@ -482,7 +482,7 @@ export default function lessonLayout() {
         },
       },
       side: {
-        offset: 0.1,
+        // offset: 0,
         label: {
           text: null,
         },

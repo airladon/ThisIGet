@@ -210,7 +210,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Angle Side Congruency',
       setContent: [
-        'Now consider the case where you know two side lengths, and the angle |between| them. Can more than one triangle be made?',
+        'Next, consider the case where you know two side lengths, and the angle |between| them. Can more than one triangle be made?',
       ],
       modifiers: {
         between: highlight(colors.angles)
@@ -223,7 +223,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'We can start by connecting the angle to one of the lines. There are |four| ways to do this.',
+        'We can start by connecting the angle to one of the sides. At first look, there seem to be |four| ways to do this.',
       ],
       modifiers: {
         four: click(sas.toggleAngles, [sas], colors.angles),
@@ -390,13 +390,70 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'Now, triangles are congruent if they have the same side lengths and angles. They can be moved, rotated and flipped and still be contruent.',
+        'We can |flip| this triangle in different ways, and all the reflections will be |congruent|.',
       ],
       show: [sas._config1],
       setSteadyState: () => {
         sas._config1.setScenario('center');
       },
     });
+
+    common = {
+      setContent: [
+        'Therefore, we can |flip| them to resemble the |original| four options we had to connect the angle to the first side.',
+      ],
+      show: [sas._config1],
+    };
+    this.addSection(common, {
+      modifiers: {
+        flip: click(this.next, [this], colors.sides),
+        original: click(this.next, [this], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        sas._config1.setScenario('center');
+      },
+    });
+
+    this.addSection(common, {
+      modifiers: {
+        flip: click(sas.createCongruentTriangles, [sas, null, true], colors.sides),
+        original: click(sas.toggleConfig, [sas, null], colors.diagram.action),
+      },
+      show: [sas._config1],
+      transitionFromPrev: (done) => {
+        sas.setScenario('center');
+        sas.animations.cancelAll();
+        sas.animations.new()
+          .scenario({ target: 'showAll', duration: 1 })
+          .trigger({
+            callback: sas.createCongruentTriangles.bind(sas, false),
+            duration: 4,
+          })
+          .trigger({ callback: sas.configColors.bind(sas, colors.disabled, colors.disabled) })
+          // .trigger({ callback: () => {
+          //   sas.configColors(colors.disabled, colors.disabled);
+          //   console.log('triggered');
+          // }, duration: 1, delay: 3 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sas._config2.showAll();
+        sas._config3.showAll();
+        sas._config4.showAll();
+        sas.setScenarios('showAll');
+        sas.configColors(colors.disabled, colors.disabled);
+      },
+      setLeaveState: () => {
+        sas.configColors(colors.sides, colors.angles);
+      },
+    });
+
+    // this.addSection({
+    //   setContent: [
+    //     'We have flipped these '
+    //   ]
+    // }
 
     this.addSection({
       setContent: [

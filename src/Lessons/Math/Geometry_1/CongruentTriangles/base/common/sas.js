@@ -201,8 +201,10 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     element._base._label.showAll();
   }
 
-  createCongruentTriangles(callback: ?() => void = null) {
-    this.stop(true, 'complete');
+  createCongruentTriangles(callback: ?() => void = null, stop: boolean = false) {
+    if (stop) {
+      this.stop(true, 'complete');
+    }
     this._config2.showAll();
     this._config3.showAll();
     this._config4.hideAll();
@@ -240,10 +242,27 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this._config2._angle2.setColor(color2);
     this._config3._angle2.setColor(color2);
     this._config4._angle2.setColor(color2);
-    // this._config1._line.setColor(color);
-    // this._config2._line.setColor(color);
-    // this._config3._line.setColor(color);
-    // this._config4._line.setColor(color);
+    this.diagram.animateNextFrame();
+  }
+
+  toggleConfig(showIn: ?boolean = null) {
+    let show = !this._config1._line3.isShown;
+    if (showIn != null) {
+      show = showIn;
+    }
+    const showConfig = (config) => {
+      if (show) {
+        config._line3.showAll();
+        config._angle2.showAll();
+      } else {
+        config._line3.hide();
+        config._angle2.hide();
+      }
+    };
+    showConfig(this._config1);
+    showConfig(this._config2);
+    showConfig(this._config3);
+    showConfig(this._config4);
     this.diagram.animateNextFrame();
   }
 }
