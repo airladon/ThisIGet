@@ -675,7 +675,8 @@ export default function lessonLayout() {
         radius: 0.1,
         sides: 3,
       },
-      reference: 'center',
+      // reference: 'center',
+      reference: [0, -1],
       color: colors.angle,
     },
   };
