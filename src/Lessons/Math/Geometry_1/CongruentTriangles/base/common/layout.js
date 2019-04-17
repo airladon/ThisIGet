@@ -665,6 +665,14 @@ export default function lessonLayout() {
     },
   });
 
+  const basePad = {
+    name: 'basePad',
+    method: 'fan'
+    options: {
+      points: []
+    }
+  }
+
   const ssaSideRight = joinObjects({}, ssaSide, {
     name: 'right',
     options: {
