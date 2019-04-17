@@ -11673,8 +11673,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function RectangleFilled(webgl, topLeft, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
-  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, topLeft, width, height, cornerRadius, cornerSides);
+function RectangleFilled(webgl, alignH, alignV, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
+  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, alignH, alignV, width, height, cornerRadius, cornerSides);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -15412,10 +15412,14 @@ function () {
     key: "rectangle",
     value: function rectangle() {
       var defaultOptions = {
-        reference: 'bottomLeft',
+        alignV: 'middle',
+        alignH: 'center',
         width: 1,
         height: 1,
-        corner: null,
+        corner: {
+          radius: 0,
+          sides: 1
+        },
         fill: false,
         color: [1, 0, 0, 1],
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
@@ -15426,15 +15430,13 @@ function () {
         optionsIn[_key7] = arguments[_key7];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
-      var defultCornerOptions = {
-        radius: options.width / 10,
-        sides: 10
-      };
-
-      if (options.corner != null) {
-        options.corner = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defultCornerOptions, options.corner);
-      }
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn)); // const defultCornerOptions = {
+      //   radius: options.width / 10,
+      //   sides: 10,
+      // };
+      // if (options.corner != null) {
+      //   options.corner = joinObjects({}, defultCornerOptions, options.corner);
+      // }
 
       if (options.position != null) {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
@@ -15444,14 +15446,22 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.reference, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
-    }
-  }, {
-    key: "rectangleFilled",
-    value: function rectangleFilled(topLeft, width, height, cornerRadius, cornerSides, color) {
-      var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, topLeft, width, height, cornerRadius, cornerSides, color, transform, this.limits);
-    }
+      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+    } // rectangleFilled(
+    //   topLeft: TypeRectangleFilledReference,
+    //   width: number,
+    //   height: number,
+    //   cornerRadius: number,
+    //   cornerSides: number,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return RectangleFilled(
+    //     this.webgl, topLeft, width, height,
+    //     cornerRadius, cornerSides, color, transform, this.limits,
+    //   );
+    // }
+
   }, {
     key: "radialLines",
     value: function radialLines() {
@@ -19383,13 +19393,13 @@ var VertexRectangleFilled =
 function (_VertexObject) {
   _inherits(VertexRectangleFilled, _VertexObject);
 
-  function VertexRectangleFilled(webgl, reference) {
+  function VertexRectangleFilled(webgl, alignH, alignV) {
     var _this;
 
-    var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-    var cornerRadius = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-    var cornerSides = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 20;
+    var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+    var height = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+    var cornerRadius = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+    var cornerSides = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 20;
 
     _classCallCheck(this, VertexRectangleFilled);
 
@@ -19401,8 +19411,8 @@ function (_VertexObject) {
     var makeCorner = function makeCorner(radius, sides, rotation, offset) {
       var cornerPoints = [];
 
-      if (radius === 0 || sides <= 1) {
-        cornerPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+      if (radius === 0 || sides === 0) {
+        cornerPoints.push(offset);
       } else {
         var step = Math.PI / 2 / sides;
 
@@ -19414,34 +19424,72 @@ function (_VertexObject) {
       return cornerPoints;
     };
 
-    var rad = cornerRadius;
+    var rad = Math.min(cornerRadius, width / 2, height / 2);
     var sides = cornerSides;
+
+    if (sides === 0) {
+      rad = 0;
+    }
+
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, 0, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, height / 2 - rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, height / 2 - rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, -height / 2 + rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2 * 3, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, -height / 2 + rad))));
 
-    if (reference === 'topLeft') {
+    if (alignV === 'top') {
       points = points.map(function (p) {
-        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+        return p.add(0, -height / 2);
       });
-    } else if (reference === 'topRight') {
+    } else if (alignV === 'bottom') {
       points = points.map(function (p) {
-        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2, -height / 2));
+        return p.add(0, height / 2);
       });
-    } else if (reference === 'bottomLeft') {
+    } else if (alignV === 'middle') {
       points = points.map(function (p) {
-        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, height / 2));
+        return p.add(0, 0);
       });
-    } else if (reference === 'bottomRight') {
+    } else {
       points = points.map(function (p) {
-        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2, height / 2));
-      });
-    } else if (reference instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-      points = points.map(function (p) {
-        return p.add(reference);
+        return p.add(0, alignV);
       });
     }
+
+    if (alignH === 'left') {
+      points = points.map(function (p) {
+        return p.add(width / 2, 0);
+      });
+    } else if (alignH === 'right') {
+      points = points.map(function (p) {
+        return p.add(-width / 2, 0);
+      });
+    } else if (alignH === 'center') {
+      points = points.map(function (p) {
+        return p.add(0, 0);
+      });
+    } else {
+      points = points.map(function (p) {
+        return p.add(alignH, alignH);
+      });
+    } // if (reference === 'topLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, -height / 2)));
+    // } else if (reference === 'topRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, -height / 2)));
+    // } else if (reference === 'bottomLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, height / 2)));
+    // } else if (reference === 'bottomRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, height / 2)));
+    // } else if (reference === 'middleLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, 0)));
+    // } else if (reference === 'middleRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, 0)));
+    // } else if (reference === 'topCenter') {
+    //   points = points.map(p => p.add(new Point(0, -height / 2)));
+    // } else if (reference === 'bottomCenter') {
+    //   points = points.map(p => p.add(new Point(0, height / 2)));
+    // } else if (typeof reference !== 'string') {   // $FlowFixMe
+    //   points = points.map(p => p.add(reference));
+    // }
+
 
     points.forEach(function (p) {
       _this.points.push(p.x);

@@ -661,7 +661,7 @@ export default function lessonLayout() {
       length: 2,
       angle: Math.PI,
       position: [0, 0],
-      move: { type: 'scaleX' },
+      // move: { type: 'scaleX' },
     },
   });
 
@@ -669,15 +669,21 @@ export default function lessonLayout() {
     name: 'basePad',
     method: 'rectangle',
     options: {
-      width: 2,
-      height: 1,
+      alignV: 'middle',
+      alignH: 'left',
+      width: 1,
+      height: 0.3,
       corner: {
         radius: 0.1,
-        sides: 3,
+        sides: 0,
       },
       // reference: 'center',
       reference: [0, -1],
       color: colors.angle,
+      position: [-2, 0],
+    },
+    mods: {
+      isMovable: true,
     },
   };
 
@@ -735,7 +741,11 @@ export default function lessonLayout() {
       color: colors.construction,
       width: layout.width / 3,
       length: 2,
+      angle: Math.PI / 6,
       vertexSpaceStart: 'start',
+      move: {
+        type: 'rotation',
+      },
     },
   };
 
