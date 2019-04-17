@@ -13560,6 +13560,10 @@ function makeStraightLine(shapes, length, width, position, color, dashStyle, lar
   if (largerTouchBorder) {
     var multiplier = isTouchDevice ? 16 : 8;
 
+    if (typeof largerTouchBorder === 'number') {
+      multiplier = largerTouchBorder;
+    }
+
     var increaseBorderSize = function increaseBorderSize(element) {
       for (var i = 0; i < element.drawingObject.border[0].length; i += 1) {
         // eslint-disable-next-line no-param-reassign

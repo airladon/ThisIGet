@@ -44,6 +44,8 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._basePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
     this._basePad.setTransformCallback = this.updatePosition.bind(this);
     this._line.setTransformCallback = this.updateRotation.bind(this);
+    this._line.move.maxTransform.updateRotation(Math.PI * 2 / 3);
+    this._line.move.minTransform.updateRotation(Math.PI / 10);
   }
 
   updatePosition() {
@@ -56,7 +58,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
 
   updateRotation() {
     const r = this._line.getRotation();
-    this._angle.setAngle({ angle: r });
+    this._angle.setAngle({ angle: r, position: this._basePad.getPosition().add(0.2, 0) });
     this._left.setRotation(r);
   }
 }

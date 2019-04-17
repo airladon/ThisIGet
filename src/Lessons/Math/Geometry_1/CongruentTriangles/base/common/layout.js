@@ -652,6 +652,7 @@ export default function lessonLayout() {
     name: 'left',
     options: {
       angle: Math.PI / 6,
+      length: 0.5
     },
   });
 
@@ -701,10 +702,10 @@ export default function lessonLayout() {
     options: {
       angle: Math.PI / 6,
       color: colors.angles,
-      sides: {
-        color: colors.sides,
-        length: 0.5,
-      },
+      // sides: {
+      //   color: colors.sides,
+      //   length: 0.5,
+      // },
       curve: {
         radius: 0.4,
         width: layout.width,
@@ -746,6 +747,10 @@ export default function lessonLayout() {
       move: {
         type: 'rotation',
       },
+      largerTouchBorder: 100,
+    },
+    mods: {
+      canBeMovedAfterLoosingTouch: true,
     },
   };
 
