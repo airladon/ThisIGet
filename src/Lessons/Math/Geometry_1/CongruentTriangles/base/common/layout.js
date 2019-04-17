@@ -5,7 +5,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 const {
   Point,
   // Transform,
-  // Line,
+  Line,
 } = Fig;
 
 const { joinObjects } = Fig.tools.misc;
@@ -15,6 +15,7 @@ const cssColorNames = [
   'angles',
   'pads',
   'disabled',
+  'construction',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -633,6 +634,107 @@ export default function lessonLayout() {
     aasAngle3,
     aasSide,
   ];
+
+  // /////////////////////////////////////////////////////////////////
+  // SSA
+  // /////////////////////////////////////////////////////////////////
+  const ssaRadius = 1.4;
+  const ssaSide = {
+    method: 'line',
+    options: {
+      width: layout.width,
+      color: colors.sides,
+      vertexSpaceStart: 'start',
+    },
+  };
+
+  const ssaSideLeft = joinObjects({}, ssaSide, {
+    name: 'left',
+    options: {
+      angle: Math.PI / 6,
+    },
+  });
+
+  const ssaSideBase = joinObjects({}, ssaSide, {
+    name: 'base',
+    options: {
+      length: 2,
+      angle: Math.PI,
+      position: [0, 0],
+      move: { type: 'scaleX' },
+    },
+  });
+
+  const ssaSideRight = joinObjects({}, ssaSide, {
+    name: 'right',
+    options: {
+      length: ssaRadius,
+      position: [0, 0],
+      angle: Math.PI / 3,
+    },
+  });
+  const ssaAngle = {
+    name: 'angle',
+    method: 'angle',
+    options: {
+      angle: Math.PI / 6,
+      color: colors.angles,
+      sides: {
+        color: colors.sides,
+        length: 0.5,
+      },
+      curve: {
+        radius: 0.4,
+        width: layout.width,
+      },
+      label: {
+        text: null,
+        radius: 0.4,
+      },
+    },
+    mods: {
+      scenarios: {
+        init: { position: [-2, 0], rotation: 0 },
+      },
+      // touchInBoundingRect: true,
+    },
+  };
+
+  const constructionCircle = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      color: colors.construction,
+      width: layout.width / 3,
+      radius: ssaRadius,
+      sides: 200,
+      position: [0, 0],
+    },
+  };
+
+  const constructionLine = {
+    name: 'line',
+    method: 'line',
+    options: {
+      color: colors.construction,
+      width: layout.width / 3,
+      length: 2,
+      vertexSpaceStart: 'start',
+    },
+  };
+
+  layout.addElementsSSA = [
+    ssaAngle,
+    constructionCircle,
+    constructionLine,
+    ssaSideLeft,
+    ssaSideBase,
+    ssaSideRight,
+  ];
+
+  layout.ssaScenarios = {
+    init: { position: [1, -0.2], scale: 1 },
+  };
 
   // /////////////////////////////////////////////////////////////////
   // SSS

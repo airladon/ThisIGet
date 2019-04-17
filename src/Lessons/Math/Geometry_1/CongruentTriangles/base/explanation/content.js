@@ -45,6 +45,7 @@ class Content extends PresentationLessonContent {
     const sas = diag._sas;
     const asa = diag._asa;
     const aas = diag._aas;
+    const ssa = diag._ssa;
     // const sss = diag._sss;
 
     this.addSection({
@@ -698,6 +699,23 @@ class Content extends PresentationLessonContent {
         two_angles: highlight(colors.angles),
         relatively_positioned_side: highlight(colors.sides),
       },
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    this.addSection({
+      title: 'Side Side Angle',
+      show: [ssa],
+      setSteadyState: () => {
+        ssa.setScenarios('init');
+        console.log(ssa)
+      }
     });
   }
 }
