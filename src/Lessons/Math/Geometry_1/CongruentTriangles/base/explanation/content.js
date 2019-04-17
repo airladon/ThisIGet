@@ -711,11 +711,16 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     this.addSection({
       title: 'Side Side Angle',
+      setContent: [
+        'this is a |test|',
+      ],
       show: [ssa],
+      modifiers: {
+        test: click(ssa.calcInterceptAngles, [ssa, null], colors.construction),
+      },
       setSteadyState: () => {
         ssa.setScenarios('init');
-        console.log(ssa)
-      }
+      },
     });
   }
 }

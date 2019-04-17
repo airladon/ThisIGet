@@ -15,7 +15,7 @@ const {
   Line,
 } = Fig;
 
-// const { rand } = Fig.tools.math;
+const { randInt } = Fig.tools.math;
 
 // const { getPoint } = Fig.tools.g2;
 
@@ -39,13 +39,12 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.scenarios = this.layout.ssaScenarios;
     this._basePad.makeTouchable();
     this._line.makeTouchable();
-    // this._basePad.move.maxTransform.updateScale(1.2, 1);
-    // this._basePad.move.minTransform.updateScale(0.8, 1);
     this._basePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
     this._basePad.setTransformCallback = this.updatePosition.bind(this);
     this._line.setTransformCallback = this.updateRotation.bind(this);
     this._line.move.maxTransform.updateRotation(Math.PI * 2 / 3);
     this._line.move.minTransform.updateRotation(Math.PI / 10);
+    this._right.makeTouchable();
   }
 
   updatePosition() {
@@ -60,5 +59,48 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     const r = this._line.getRotation();
     this._angle.setAngle({ angle: r, position: this._basePad.getPosition().add(0.2, 0) });
     this._left.setRotation(r);
+    this._line.setLength(1.7 / Math.sin(r));
+  }
+
+  createConstructionLines(callback: ?() => void = null) {
+    const r = this._line.getRotation();
+    this._line.setLength(1.7 / Math.sin(r));
+    // this._line.grow(0, 1);
+    const rr = this._right.getRotation();
+    this._circle.setRotation(rr);
+    const growLine = (percent) => {
+      this._line.setLength(1.7 / Math.sin(r) * percent);
+    };
+    const createCircle = (percent) => {
+      this._circle.angleToDraw = percent * Math.PI * 1.999;
+    };
+    this.animations.cancelAll();
+    this._line.setLength(0);
+    this.animations.new()
+      .custom({ callback: createCircle.bind(this), duration: 2 })
+      .custom({ callback: growLine.bind(this), duration: 1 })
+      .whenFinished(callback)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  calcInterceptAngles() {
+    const b = this._line.getRotation();
+    const A = this._base.length;
+    const B = this._right.length;
+    const a = Math.asin(A * Math.sin(b) / B);
+    const c = a + b;
+    const thresholdAngle = Math.asin(B / A);
+    const intercepts = [];
+    if (A <= B) {
+      intercepts.push(c);
+    } else if (b < thresholdAngle) {
+      intercepts.push(c);
+      intercepts.push(b + (Math.PI - a));
+    } else if (b === thresholdAngle) {
+      intercepts.push(c);
+    }
+    this._right.setRotation(intercepts[randInt(intercepts.length)]);
+    this.diagram.animateNextFrame();
   }
 }

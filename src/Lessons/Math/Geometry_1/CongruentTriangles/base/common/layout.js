@@ -652,7 +652,7 @@ export default function lessonLayout() {
     name: 'left',
     options: {
       angle: Math.PI / 6,
-      length: 0.5
+      length: 0.5,
     },
   });
 
@@ -680,7 +680,7 @@ export default function lessonLayout() {
       },
       // reference: 'center',
       reference: [0, -1],
-      color: colors.angle,
+      color: colors.diagram.background,
       position: [-2, 0],
     },
     mods: {
@@ -694,6 +694,9 @@ export default function lessonLayout() {
       length: ssaRadius,
       position: [0, 0],
       angle: Math.PI / 3,
+      move: {
+        type: 'rotation',
+      },
     },
   });
   const ssaAngle = {
@@ -709,6 +712,7 @@ export default function lessonLayout() {
       curve: {
         radius: 0.4,
         width: layout.width,
+        sides: 400,
       },
       label: {
         text: null,
@@ -728,9 +732,9 @@ export default function lessonLayout() {
     method: 'polygon',
     options: {
       color: colors.construction,
-      width: layout.width / 3,
+      width: layout.width / 2,
       radius: ssaRadius,
-      sides: 200,
+      sides: 400,
       position: [0, 0],
     },
   };
@@ -740,14 +744,14 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       color: colors.construction,
-      width: layout.width / 3,
+      width: layout.width / 2,
       length: 2,
       angle: Math.PI / 6,
       vertexSpaceStart: 'start',
       move: {
         type: 'rotation',
       },
-      largerTouchBorder: 100,
+      largerTouchBorder: 50,
     },
     mods: {
       canBeMovedAfterLoosingTouch: true,

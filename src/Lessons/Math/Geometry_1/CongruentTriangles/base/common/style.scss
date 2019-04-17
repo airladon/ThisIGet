@@ -12,6 +12,7 @@ body {
   @include color_vars($colors);
 }
 
-.diagram__text {
-  z-index: 0;
+#id_diagram__text__low {
+// .diagram__text {
+  z-index: 1;
 }
