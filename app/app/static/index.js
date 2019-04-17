@@ -4476,6 +4476,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       textGL: shapes.textGL.bind(shapes),
       axes: shapes.axes.bind(shapes),
       radialLines: shapes.radialLines.bind(shapes),
+      rectangle: shapes.rectangle.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -15408,6 +15409,44 @@ function () {
       return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, dashStyle, color, transform, this.limits);
     }
   }, {
+    key: "rectangle",
+    value: function rectangle() {
+      var defaultOptions = {
+        reference: 'bottomLeft',
+        width: 1,
+        height: 1,
+        corner: null,
+        fill: false,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var defultCornerOptions = {
+        radius: options.width / 10,
+        sides: 10
+      };
+
+      if (options.corner != null) {
+        options.corner = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"])({}, defultCornerOptions, options.corner);
+      }
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      if (typeof options.reference !== 'string') {
+        options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
+      }
+
+      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.reference, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+    }
+  }, {
     key: "rectangleFilled",
     value: function rectangleFilled(topLeft, width, height, cornerRadius, cornerSides, color) {
       var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
@@ -15424,8 +15463,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15458,8 +15497,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len8 = arguments.length, moreOptions = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
-          moreOptions[_key8 - 1] = arguments[_key8];
+        for (var _len9 = arguments.length, moreOptions = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+          moreOptions[_key9 - 1] = arguments[_key9];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -15564,8 +15603,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -19385,6 +19424,22 @@ function (_VertexObject) {
     if (reference === 'topLeft') {
       points = points.map(function (p) {
         return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+      });
+    } else if (reference === 'topRight') {
+      points = points.map(function (p) {
+        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2, -height / 2));
+      });
+    } else if (reference === 'bottomLeft') {
+      points = points.map(function (p) {
+        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, height / 2));
+      });
+    } else if (reference === 'bottomRight') {
+      points = points.map(function (p) {
+        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2, height / 2));
+      });
+    } else if (reference instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+      points = points.map(function (p) {
+        return p.add(reference);
       });
     }
 

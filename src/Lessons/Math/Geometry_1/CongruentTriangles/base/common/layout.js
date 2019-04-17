@@ -667,11 +667,18 @@ export default function lessonLayout() {
 
   const basePad = {
     name: 'basePad',
-    method: 'fan'
+    method: 'rectangle',
     options: {
-      points: []
-    }
-  }
+      width: 2,
+      height: 1,
+      corner: {
+        radius: 0.1,
+        sides: 3,
+      },
+      reference: 'center',
+      color: colors.angle,
+    },
+  };
 
   const ssaSideRight = joinObjects({}, ssaSide, {
     name: 'right',
@@ -732,6 +739,7 @@ export default function lessonLayout() {
   };
 
   layout.addElementsSSA = [
+    basePad,
     ssaAngle,
     constructionCircle,
     constructionLine,
