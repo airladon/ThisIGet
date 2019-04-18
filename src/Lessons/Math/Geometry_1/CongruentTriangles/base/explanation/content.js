@@ -212,10 +212,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Angle Side Congruency',
       setContent: [
-        'Next, consider the case where you know two side lengths, and the angle |between| them. Can more than one triangle be made?',
+        'Next, consider the case where you know an |angle| and its |two_adjacent_side_lengths|. Can more than one triangle be made?',
       ],
       modifiers: {
-        between: highlight(colors.angles)
+        angle: highlight(colors.angles),
+        two_adjacent_side_lengths: highlight(colors.sides),
       },
       show: [sas._line, sas._angle, sas._base],
       setSteadyState: () => {
@@ -296,10 +297,10 @@ class Content extends PresentationLessonContent {
 
     let common = {
       setContent: [
-        'Next, we can connect the |second| known line. As we are considering the case where the angle is |between| the sides, then it connects to the free arm of the angle.',
+        'Next, we can connect the |second line|. As we are considering the case where where both sides are |adjacent_to_the_angle|, then it connects to the free arm of the angle.',
       ],
       modifiers: {
-        between: highlight(colors.angles),
+        adjacent_to_the_angle: highlight(colors.angles),
       },
       setSteadyState: () => {
         sas.setScenarios('showAll');
@@ -487,11 +488,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Angle Side Angle',
       setContent: [
-        'The next case to consider is where |one_side| and its |adjacent_angles| are known. Can only one triangle be formed from this configuration?',
+        'The next case to consider is where |one_side| and its |two_adjacent_angles| are known. Can only one triangle be formed from this configuration?',
       ],
       modifiers: {
         one_side: highlight(colors.sides),
-        adjacent_angles: highlight(colors.angles),
+        two_adjacent_angles: highlight(colors.angles),
       },
       setEnterState: () => {
         asa.initialTri();
@@ -712,14 +713,19 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Side Angle',
       setContent: [
-        'this is a |test|',
+        'Next we consider the case where an |angle|, its |adjacent_side| and its |opposite_side| are known.',
       ],
-      show: [ssa],
       modifiers: {
-        test: click(ssa.toggleInterceptAngles, [ssa, null], colors.construction),
+        angle: highlight(colors.angles),
+        adjacent_side: highlight(colors.sides),
+        opposite_side: highlight(colors.sides),
       },
+      show: [ssa._left, ssa._right, ssa._angle, ssa._basePad, ssa._base],
       setSteadyState: () => {
+        ssa.hasTouchableElements = false;
         ssa.setScenarios('init');
+        ssa.updatePosition();
+        ssa.updateRotation();
       },
     });
   }

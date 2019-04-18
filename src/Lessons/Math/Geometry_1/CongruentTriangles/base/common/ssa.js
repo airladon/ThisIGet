@@ -48,6 +48,14 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._right.setTransformCallback = this.tryToShowTriangle.bind(this);
   }
 
+  setInitialPosition() {
+    this._basePad.setPosition(-2, 0);
+    this._left.setRotation(Math.PI / 6);
+    this._right.setRotation(Math.PI / 3);
+    this._line.hide();
+    this._circle.hide();
+  }
+
   updatePosition() {
     const p = this._basePad.getPosition().x + 0.2;
     this._angle.setPosition(p, 0);
@@ -124,8 +132,6 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
       intercepts.push(c);
     }
     return intercepts;
-    // this._right.setRotation(intercepts[randInt(intercepts.length)]);
-    // this.diagram.animateNextFrame();
   }
 
   toggleInterceptAngles() {
