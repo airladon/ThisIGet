@@ -716,7 +716,7 @@ class Content extends PresentationLessonContent {
       ],
       show: [ssa],
       modifiers: {
-        test: click(ssa.calcInterceptAngles, [ssa, null], colors.construction),
+        test: click(ssa.toggleInterceptAngles, [ssa, null], colors.construction),
       },
       setSteadyState: () => {
         ssa.setScenarios('init');

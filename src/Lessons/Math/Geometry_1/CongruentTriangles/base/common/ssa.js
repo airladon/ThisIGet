@@ -15,9 +15,9 @@ const {
   Line,
 } = Fig;
 
-const { randInt } = Fig.tools.math;
+const { round } = Fig.tools.math;
 
-// const { getPoint } = Fig.tools.g2;
+const { minAngleDiff } = Fig.tools.g2;
 
 export default class CommonCollectionSSA extends CommonDiagramCollection {
   _angle: DiagramObjectAngle;
@@ -45,6 +45,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._line.move.maxTransform.updateRotation(Math.PI * 2 / 3);
     this._line.move.minTransform.updateRotation(Math.PI / 10);
     this._right.makeTouchable();
+    this._right.setTransformCallback = this.tryToShowTriangle.bind(this);
   }
 
   updatePosition() {
@@ -53,6 +54,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._left.setPosition(p, 0);
     this._base.setLength(-p);
     this._line.transform.updateTranslation(p, 0);
+    this.tryToShowTriangle();
   }
 
   updateRotation() {
@@ -60,6 +62,27 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._angle.setAngle({ angle: r, position: this._basePad.getPosition().add(0.2, 0) });
     this._left.setRotation(r);
     this._line.setLength(1.7 / Math.sin(r));
+    this.tryToShowTriangle();
+  }
+
+  tryToShowTriangle() {
+    const c = this._right.getRotation();
+    const intercepts = this.calcInterceptAngles();
+    let isTri = false;
+    intercepts.forEach((i) => {
+      if (round(c, 2) === round(i, 2)) {
+        isTri = true;
+      }
+    });
+    if (isTri) {
+      this._right.updateLineGeometry();
+      this._left.setEndPoints(
+        this._angle.getPosition(),
+        this._right.p2,
+      );
+    } else {
+      this._left.setLength(0.5);
+    }
   }
 
   createConstructionLines(callback: ?() => void = null) {
@@ -100,7 +123,38 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     } else if (b === thresholdAngle) {
       intercepts.push(c);
     }
-    this._right.setRotation(intercepts[randInt(intercepts.length)]);
+    return intercepts;
+    // this._right.setRotation(intercepts[randInt(intercepts.length)]);
+    // this.diagram.animateNextFrame();
+  }
+
+  toggleInterceptAngles() {
+    const interceptAngles = this.calcInterceptAngles();
+    if (interceptAngles.length === 0) {
+      return;
+    }
+    let target = interceptAngles[0];
+    if (interceptAngles.length === 2) {
+      const c = this._right.getRotation('0to360');
+      const c0 = Math.abs(minAngleDiff(c, interceptAngles[0]));
+      const c1 = Math.abs(minAngleDiff(c, interceptAngles[1]));
+      if (
+        (c1 < c0 && round(interceptAngles[1], 2) !== round(c, 2))
+        || round(interceptAngles[0], 2) === round(c, 2)
+      ) {
+        [, target] = interceptAngles;
+      }
+    }
+    this.animations.cancelAll();
+    this.animations.new()
+      .rotation({
+        element: this._right,
+        target,
+        velocity: 1,
+        maxDuration: 1,
+        direction: 0,
+      })
+      .start();
     this.diagram.animateNextFrame();
   }
 }

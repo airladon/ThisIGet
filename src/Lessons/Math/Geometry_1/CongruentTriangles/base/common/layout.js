@@ -759,10 +759,12 @@ export default function lessonLayout() {
   };
 
   layout.addElementsSSA = [
-    basePad,
+    
     ssaAngle,
+
     constructionCircle,
     constructionLine,
+    basePad,
     ssaSideLeft,
     ssaSideBase,
     ssaSideRight,
