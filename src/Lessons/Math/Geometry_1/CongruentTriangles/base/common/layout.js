@@ -639,6 +639,7 @@ export default function lessonLayout() {
   // SSA
   // /////////////////////////////////////////////////////////////////
   const ssaRadius = 1.4;
+  layout.ssaRadius = ssaRadius;
   const ssaSide = {
     method: 'line',
     options: {
@@ -690,6 +691,7 @@ export default function lessonLayout() {
     },
     mods: {
       isMovable: true,
+      interactiveLocation: [0.5, 0],
       scenarios: {
         init: { position: [-2.2, 0], rotation: 0 },
       },
@@ -768,6 +770,7 @@ export default function lessonLayout() {
       largerTouchBorder: 50,
     },
     mods: {
+      interactiveLocation: [1, 0],
       canBeMovedAfterLoosingTouch: true,
     },
   };
@@ -783,7 +786,7 @@ export default function lessonLayout() {
   ];
 
   layout.ssaScenarios = {
-    init: { position: [0.5, -0.5], scale: 1 },
+    init: { position: [0.5, -0.4], scale: 1 },
   };
   return layout;
 }

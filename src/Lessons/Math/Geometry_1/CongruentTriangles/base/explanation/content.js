@@ -16,7 +16,7 @@ const {
   click,
   style,
   highlight,
-  // clickW,
+  highlightWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -781,10 +781,11 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'The |intersect| points are the possible triangles.',
+        'The |intersect| points are the possible triangles. In this case there are |two| possible triangles.',
       ],
       modifiers: {
         intersect: click(ssa.toggleInterceptAngles, [ssa], colors.sides),
+        two: click(ssa.toggleInterceptAngles, [ssa], colors.sides),
       },
       show: [ssa],
       setEnterState: () => {
@@ -801,6 +802,130 @@ class Content extends PresentationLessonContent {
         ssa._adjacentMovePad.isTouchable = false;
         ssa._adjacentMovePad.isMovable = false;
       },
+    });
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'But what happens if we start with a different length of the adjacent side, or different angle? Are two triangles still formed?',
+      ]),
+      show: [ssa],
+      setEnterState: () => {
+        if (this.comingFrom === 'goto') {
+          ssa.setScenarios('init');
+          ssa.updatePosition();
+          ssa.updateRotation();
+        }
+      },
+      setSteadyState: () => {
+        ssa.makeFullyInteractive();
+      },
+    });
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'You might see different scenarios where |two|, |one| or |zero| triangles can be formed.',
+      ]),
+      show: [ssa],
+      setEnterState: () => {
+        if (this.comingFrom === 'goto') {
+          ssa.setScenarios('init');
+          ssa.updatePosition();
+          ssa.updateRotation();
+        }
+      },
+      setSteadyState: () => {
+        ssa.makeFullyInteractive();
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'When the |adjacent| side is |shorter| than or equal to the |opposite| side, onle |one triangle| can ever be formed.',
+      ]),
+      modifiers: {
+        adjacent: click(ssa.pulseAdjacent, [ssa], colors.sides),
+        opposite: click(ssa.pulseOpposite, [ssa], colors.sides),
+        shorter: click(ssa.adjacentShorter, [ssa, null], colors.diagram.action),
+      },
+      show: [ssa],
+      setEnterState: () => {
+        if (this.comingFrom === 'goto') {
+          ssa.setScenarios('init');
+          ssa.updatePosition();
+          ssa.updateRotation();
+        }
+      },
+      transitionFromAny: (done) => {
+        ssa.adjacentShorter(done);
+      },
+      setSteadyState: () => {
+        ssa.makeFullyInteractive();
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'When the |adjacent| side is |longer| than  the |opposite| side, then either |two|, |one| or |zero| triangles can be formed.',
+      ]),
+      modifiers: {
+        adjacent: click(ssa.pulseAdjacent, [ssa], colors.sides),
+        opposite: click(ssa.pulseOpposite, [ssa], colors.sides),
+        two: click(ssa.adjacentTwo, [ssa, null], colors.diagram.action),
+        one: click(ssa.adjacentOne, [ssa, null], colors.diagram.action),
+        zero: click(ssa.adjacentZero, [ssa, null], colors.diagram.action),
+      },
+      show: [ssa],
+      setEnterState: () => {
+        if (this.comingFrom === 'goto') {
+          ssa.setScenarios('init');
+          ssa.updatePosition();
+          ssa.updateRotation();
+        }
+      },
+      transitionFromAny: (done) => {
+        ssa.adjacentTwo(done);
+      },
+      setSteadyState: () => {
+        ssa.makeFullyInteractive();
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'To summarize, if we know an |angle| an |adjacent side| and an |opposite side| of a triangle, then we can uniquely create just one triangle if the |adjacent side is shorter than the opposite side|.',
+        'If the adjacent side is longer than the opposite side, then up to two triangles might be possible.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'This case is often referred to as the |Side Side Angle| case.',
+        'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (C)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|.',
+      ]),
+      modifiers: {
+        angle_a: highlightWord('angle (a)', colors.angles),
+      },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle1, congruent._tri2._angle1,
+        congruent._tri1._angle0, congruent._tri2._angle0,
+        // congruent._tri1._side01, congruent._tri2._side01,
+        congruent._tri1._side20, congruent._tri2._side20,
+      ],
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'We have now seen whether we can determine congruency from most combinations of three properties including:',
+        style({ left: 3, list: 'unordered' }, [
+          '|All angles| - Angle-Angle-Angle',
+          '|Two angles and a side| - Angle-Side-Angle and Angle-Angle-Side',
+          '|Two sides and an angle| - Side-Angle-Side and Side-Side-Angle',
+        ]),
+        'The only remaining one is |all sides|. We will wait to look at this one till |Isosceles Triangles| as this concept is needed to see whether knowing just the side lengths of two triangles shows they are congruent.',
+      ]),
     });
   }
 }

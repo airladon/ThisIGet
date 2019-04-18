@@ -15,7 +15,7 @@ const {
   Line,
 } = Fig;
 
-const { round } = Fig.tools.math;
+const { round, rand } = Fig.tools.math;
 
 const { minAngleDiff } = Fig.tools.g2;
 
@@ -27,6 +27,8 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   _constructionLine: DiagramObjectLine;
   _adjacentMovePad: DiagramElementPrimative;
   _constructionCircle: DiagramElementPrimative;
+
+  toggle: number;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -42,10 +44,11 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._adjacentMovePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
     this._adjacentMovePad.setTransformCallback = this.updatePosition.bind(this);
     this._constructionLine.setTransformCallback = this.updateRotation.bind(this);
-    this._constructionLine.move.maxTransform.updateRotation(Math.PI * 2 / 3);
+    this._constructionLine.move.maxTransform.updateRotation(Math.PI * 3 / 4);
     this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
     this._opposite.makeTouchable();
     this._opposite.setTransformCallback = this.tryToShowTriangle.bind(this);
+    this.toggle = 0;
   }
 
   setInitialPosition() {
@@ -54,6 +57,16 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this._opposite.setRotation(Math.PI / 3);
     this._constructionLine.hide();
     this._constructionCircle.hide();
+  }
+
+  makeFullyInteractive() {
+    this.hasTouchableElements = true;
+    this._constructionLine.isTouchable = true;
+    this._constructionLine.isMovable = true;
+    this._constructionLine._line.isMovable = true;
+    this._constructionLine._line.isTouchable = true;
+    this._adjacentMovePad.isTouchable = true;
+    this._adjacentMovePad.isMovable = true;
   }
 
   updatePosition() {
@@ -134,15 +147,19 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  calcInterceptAngles() {
+  calcInterceptAngles(
+    b: number = this._constructionLine.getRotation(),
+    A: number = this._adjacent.length,
+    B: number = this._opposite.length,
+  ) {
     // b: angle of known angle
     // A: Adjacent side length
     // B: Opposite side length
     // a: Unknown-Opposite angle
     // c: Angle of side B relative to 0 (external angle of Adjacent-Opposite)
-    const b = this._constructionLine.getRotation();
-    const A = this._adjacent.length;
-    const B = this._opposite.length;
+    // const b = this._constructionLine.getRotation();
+    // const A = this._adjacent.length;
+    // const B = this._opposite.length;
     const a = Math.asin(A * Math.sin(b) / B);
     const c = a + b;
     const thresholdAngle = Math.asin(B / A);
@@ -186,6 +203,95 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
       })
       .start();
     this.diagram.animateNextFrame();
+  }
+
+  goToAngleAndLength(angle: number, length: number, done: ?() => void = null) {
+    let intercept = this.calcInterceptAngles(angle, length - 0.2)[0];
+    if (intercept == null) {
+      intercept = this._opposite.getRotation();
+    }
+    this.animations.cancelAll();
+    this._unknown.hide();
+    this.animations.new()
+      .inParallel([
+        this._constructionLine.anim.rotation({ target: angle, duration: 0.8 }),
+        this._adjacentMovePad.anim.position({
+          target: new Point(-length, 0),
+          duration: 0.8,
+        }),
+        this._opposite.anim.rotation({ target: intercept, duration: 0.8 }),
+      ])
+      .whenFinished(() => {
+        this._unknown.show();
+        this.updateRotation();
+        if (done != null) {
+          done();
+        }
+      })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  adjacentShorter(done: ?() => void = null) {
+    const adjacentLength = rand(
+      Math.abs(this._adjacentMovePad.move.limitLine.p2.x),
+      this.layout.ssaRadius * 0.9,
+    );
+    const angle = rand(
+      this._constructionLine.move.minTransform.r() || 0,
+      this._constructionLine.move.maxTransform.r() || 0,
+    );
+    this.goToAngleAndLength(angle, adjacentLength, done);
+  }
+
+  adjacentTwo(done: ?() => void = null) {
+    if (this.toggle > 0) {
+      this.animations.new()
+        .trigger({ callback: this.toggleInterceptAngles.bind(this) })
+        .start();
+      this.toggleInterceptAngles();
+      this.toggle -= 1;
+      if (done != null) {
+        done();
+      }
+      return;
+    }
+    this.toggle = 1;
+    const adjacentLength = rand(
+      this.layout.ssaRadius + 0.3,
+      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+    );
+    const maxAngle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
+
+    const angle = rand(
+      this._constructionLine.move.minTransform.r() || 0,
+      maxAngle * 0.9,
+    );
+    this.goToAngleAndLength(angle, adjacentLength, done);
+  }
+
+  adjacentOne(done: ?() => void = null) {
+    const adjacentLength = rand(
+      this.layout.ssaRadius + 0.3,
+      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+    );
+    const angle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
+
+    this.goToAngleAndLength(angle, adjacentLength, done);
+  }
+
+  adjacentZero(done: ?() => void = null) {
+    const adjacentLength = rand(
+      this.layout.ssaRadius + 0.3,
+      Math.abs(this._adjacentMovePad.move.limitLine.p1.x),
+    );
+    const minAngle = Math.asin(this.layout.ssaRadius / (adjacentLength - 0.2));
+
+    const angle = rand(
+      minAngle * 1.1,
+      this._constructionLine.move.maxTransform.r() || 0,
+    );
+    this.goToAngleAndLength(angle, adjacentLength, done);
   }
 
   pulseOpposite() {
