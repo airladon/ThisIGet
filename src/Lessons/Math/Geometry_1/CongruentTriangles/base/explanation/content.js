@@ -710,22 +710,96 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */
-    this.addSection({
+    common = {
+      show: [
+        ssa._unknown, ssa._opposite, ssa._adjacent, ssa._angle,
+        ssa._adjacentMovePad,
+      ],
+      setSteadyState: () => {
+        ssa.hasTouchableElements = false;
+        ssa.setScenarios('init');
+        ssa.updatePosition();
+        ssa.updateRotation();
+      },
+    };
+    this.addSection(common, {
       title: 'Side Side Angle',
       setContent: [
         'Next we consider the case where an |angle|, its |adjacent_side| and its |opposite_side| are known.',
       ],
       modifiers: {
         angle: highlight(colors.angles),
-        adjacent_side: highlight(colors.sides),
-        opposite_side: highlight(colors.sides),
+        adjacent_side: click(ssa.pulseAdjacent, [ssa], colors.sides),
+        opposite_side: click(ssa.pulseOpposite, [ssa], colors.sides),
       },
-      show: [ssa._left, ssa._right, ssa._angle, ssa._basePad, ssa._base],
-      setSteadyState: () => {
-        ssa.hasTouchableElements = false;
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'How many triangles can be made with this set of constraints?',
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'To help visualize, we can |extend| the unknown side and |rotate| the opposite side while tracing its end.',
+      ],
+      modifiers: {
+        extend: click(this.next, [this], colors.sides),
+        rotate: click(this.next, [this], colors.sides),
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'To help visualize, we can |extend| the unknown side and |rotate| the opposite side while tracing its end.',
+      ],
+      modifiers: {
+        extend: click(ssa.createConstructionLines, [ssa, null, 'line'], colors.sides),
+        rotate: click(ssa.createConstructionLines, [ssa, null, 'circle'], colors.sides),
+      },
+      show: [ssa],
+      setEnterState: () => {
         ssa.setScenarios('init');
         ssa.updatePosition();
         ssa.updateRotation();
+      },
+      transitionFromPrev: (done) => {
+        ssa._constructionCircle.angleToDraw = 0;
+        ssa.createConstructionLines(done, 'both');
+      },
+      setSteadyState: () => {
+        ssa.hasTouchableElements = true;
+        ssa._constructionLine.isTouchable = false;
+        ssa._constructionLine.isMovable = false;
+        ssa._constructionLine._line.isMovable = false;
+        ssa._constructionLine._line.isTouchable = false;
+        ssa._adjacentMovePad.isTouchable = false;
+        ssa._adjacentMovePad.isMovable = false;
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'The |intersect| points are the possible triangles.',
+      ],
+      modifiers: {
+        intersect: click(ssa.toggleInterceptAngles, [ssa], colors.sides),
+      },
+      show: [ssa],
+      setEnterState: () => {
+        ssa.setScenarios('init');
+        ssa.updatePosition();
+        ssa.updateRotation();
+      },
+      setSteadyState: () => {
+        ssa.hasTouchableElements = true;
+        ssa._constructionLine.isTouchable = false;
+        ssa._constructionLine.isMovable = false;
+        ssa._constructionLine._line.isMovable = false;
+        ssa._constructionLine._line.isTouchable = false;
+        ssa._adjacentMovePad.isTouchable = false;
+        ssa._adjacentMovePad.isMovable = false;
       },
     });
   }

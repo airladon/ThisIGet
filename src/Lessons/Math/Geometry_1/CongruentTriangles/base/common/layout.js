@@ -648,8 +648,8 @@ export default function lessonLayout() {
     },
   };
 
-  const ssaSideLeft = joinObjects({}, ssaSide, {
-    name: 'left',
+  const ssaSideUnknown = joinObjects({}, ssaSide, {
+    name: 'unknown',
     options: {
       angle: Math.PI / 6,
       length: 0.5,
@@ -661,8 +661,8 @@ export default function lessonLayout() {
     },
   });
 
-  const ssaSideBase = joinObjects({}, ssaSide, {
-    name: 'base',
+  const ssaSideAdjacent = joinObjects({}, ssaSide, {
+    name: 'adjacent',
     options: {
       length: 2,
       angle: Math.PI,
@@ -671,8 +671,8 @@ export default function lessonLayout() {
     },
   });
 
-  const basePad = {
-    name: 'basePad',
+  const ssaAdjacentMovePad = {
+    name: 'adjacentMovePad',
     method: 'rectangle',
     options: {
       alignV: 'middle',
@@ -685,19 +685,19 @@ export default function lessonLayout() {
       },
       // reference: 'center',
       reference: [0, -1],
-      color: colors.diagram.background,
-      position: [-2, 0],
+      color: [0, 0, 0, 0.001],
+      // position: [-2, 0],
     },
     mods: {
       isMovable: true,
       scenarios: {
-        init: { position: [-2, 0], rotation: 0 },
+        init: { position: [-2.2, 0], rotation: 0 },
       },
     },
   };
 
-  const ssaSideRight = joinObjects({}, ssaSide, {
-    name: 'right',
+  const ssaSideOpposite = joinObjects({}, ssaSide, {
+    name: 'opposite',
     options: {
       length: ssaRadius,
       position: [0, 0],
@@ -707,6 +707,7 @@ export default function lessonLayout() {
       },
     },
     mods: {
+      interactiveLocation: [ssaRadius * 0.9, 0],
       scenarios: {
         init: { rotation: Math.PI / 3 },
       },
@@ -741,7 +742,7 @@ export default function lessonLayout() {
   };
 
   const constructionCircle = {
-    name: 'circle',
+    name: 'constructionCircle',
     method: 'polygon',
     options: {
       color: colors.construction,
@@ -753,7 +754,7 @@ export default function lessonLayout() {
   };
 
   const constructionLine = {
-    name: 'line',
+    name: 'constructionLine',
     method: 'line',
     options: {
       color: colors.construction,
@@ -774,11 +775,11 @@ export default function lessonLayout() {
   layout.addElementsSSA = [
     constructionCircle,
     constructionLine,
-    basePad,
+    ssaAdjacentMovePad,
+    ssaSideAdjacent,
     ssaAngle,
-    ssaSideLeft,
-    ssaSideBase,
-    ssaSideRight,
+    ssaSideUnknown,
+    ssaSideOpposite,
   ];
 
   layout.ssaScenarios = {

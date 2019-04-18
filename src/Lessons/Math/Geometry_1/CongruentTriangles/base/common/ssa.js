@@ -21,12 +21,12 @@ const { minAngleDiff } = Fig.tools.g2;
 
 export default class CommonCollectionSSA extends CommonDiagramCollection {
   _angle: DiagramObjectAngle;
-  _base: DiagramObjectLine;
-  _left: DiagramObjectLine;
-  _right: DiagramObjectLine;
-  _line: DiagramObjectLine;
-  _basePad: DiagramElementPrimative;
-  _circle: DiagramElementPrimative;
+  _adjacent: DiagramObjectLine;
+  _unknown: DiagramObjectLine;
+  _opposite: DiagramObjectLine;
+  _constructionLine: DiagramObjectLine;
+  _adjacentMovePad: DiagramElementPrimative;
+  _constructionCircle: DiagramElementPrimative;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -37,44 +37,47 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElementsSSA);
     this.hasTouchableElements = true;
     this.scenarios = this.layout.ssaScenarios;
-    this._basePad.makeTouchable();
-    this._line.makeTouchable();
-    this._basePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
-    this._basePad.setTransformCallback = this.updatePosition.bind(this);
-    this._line.setTransformCallback = this.updateRotation.bind(this);
-    this._line.move.maxTransform.updateRotation(Math.PI * 2 / 3);
-    this._line.move.minTransform.updateRotation(Math.PI / 10);
-    this._right.makeTouchable();
-    this._right.setTransformCallback = this.tryToShowTriangle.bind(this);
+    this._adjacentMovePad.makeTouchable();
+    this._constructionLine.makeTouchable();
+    this._adjacentMovePad.move.limitLine = new Line(new Point(-2.5, 0), 1.8, 0);
+    this._adjacentMovePad.setTransformCallback = this.updatePosition.bind(this);
+    this._constructionLine.setTransformCallback = this.updateRotation.bind(this);
+    this._constructionLine.move.maxTransform.updateRotation(Math.PI * 2 / 3);
+    this._constructionLine.move.minTransform.updateRotation(Math.PI / 10);
+    this._opposite.makeTouchable();
+    this._opposite.setTransformCallback = this.tryToShowTriangle.bind(this);
   }
 
   setInitialPosition() {
-    this._basePad.setPosition(-2, 0);
-    this._left.setRotation(Math.PI / 6);
-    this._right.setRotation(Math.PI / 3);
-    this._line.hide();
-    this._circle.hide();
+    this._adjacentMovePad.setPosition(-2, 0);
+    this._unknown.setRotation(Math.PI / 6);
+    this._opposite.setRotation(Math.PI / 3);
+    this._constructionLine.hide();
+    this._constructionCircle.hide();
   }
 
   updatePosition() {
-    const p = this._basePad.getPosition().x + 0.2;
+    const p = this._adjacentMovePad.getPosition().x + 0.2;
     this._angle.setPosition(p, 0);
-    this._left.setPosition(p, 0);
-    this._base.setLength(-p);
-    this._line.transform.updateTranslation(p, 0);
+    this._unknown.setPosition(p, 0);
+    this._adjacent.setLength(-p);
+    this._constructionLine.transform.updateTranslation(p, 0);
     this.tryToShowTriangle();
   }
 
   updateRotation() {
-    const r = this._line.getRotation();
-    this._angle.setAngle({ angle: r, position: this._basePad.getPosition().add(0.2, 0) });
-    this._left.setRotation(r);
-    this._line.setLength(1.7 / Math.sin(r));
+    const r = this._constructionLine.getRotation();
+    this._angle.setAngle({
+      angle: r,
+      position: this._adjacentMovePad.getPosition().add(0.2, 0),
+    });
+    this._unknown.setRotation(r);
+    this._constructionLine.setLength(1.7 / Math.sin(r));
     this.tryToShowTriangle();
   }
 
   tryToShowTriangle() {
-    const c = this._right.getRotation();
+    const c = this._opposite.getRotation();
     const intercepts = this.calcInterceptAngles();
     let isTri = false;
     intercepts.forEach((i) => {
@@ -83,42 +86,63 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
       }
     });
     if (isTri) {
-      this._right.updateLineGeometry();
-      this._left.setEndPoints(
+      this._opposite.updateLineGeometry();
+      this._unknown.setEndPoints(
         this._angle.getPosition(),
-        this._right.p2,
+        this._opposite.p2,
       );
     } else {
-      this._left.setLength(0.5);
+      this._unknown.setLength(0.5);
     }
   }
 
-  createConstructionLines(callback: ?() => void = null) {
-    const r = this._line.getRotation();
-    this._line.setLength(1.7 / Math.sin(r));
+  createConstructionLines(
+    callback: ?() => void = null,
+    which: 'line' | 'circle' | 'both' = 'both',
+  ) {
+    const r = this._constructionLine.getRotation();
+    this._constructionLine.setLength(1.7 / Math.sin(r));
     // this._line.grow(0, 1);
-    const rr = this._right.getRotation();
-    this._circle.setRotation(rr);
+    const rr = this._opposite.getRotation();
+    this._constructionCircle.setRotation(rr);
     const growLine = (percent) => {
-      this._line.setLength(1.7 / Math.sin(r) * percent);
+      this._constructionLine.setLength(1.7 / Math.sin(r) * percent);
     };
     const createCircle = (percent) => {
-      this._circle.angleToDraw = percent * Math.PI * 1.999;
+      this._constructionCircle.angleToDraw = percent * Math.PI * 2;
+      this._opposite.setRotation(percent * Math.PI * 2 + rr);
     };
     this.animations.cancelAll();
-    this._line.setLength(0);
-    this.animations.new()
-      .custom({ callback: createCircle.bind(this), duration: 2 })
-      .custom({ callback: growLine.bind(this), duration: 1 })
-      .whenFinished(callback)
-      .start();
+    this._constructionLine.setLength(0);
+    if (which === 'both') {
+      this.animations.new()
+        .custom({ callback: growLine.bind(this), duration: 1 })
+        .custom({ callback: createCircle.bind(this), duration: 2 })
+        .whenFinished(callback)
+        .start();
+    } else if (which === 'line') {
+      this.animations.new()
+        .custom({ callback: growLine.bind(this), duration: 1 })
+        .whenFinished(callback)
+        .start();
+    } else {
+      this.animations.new()
+        .custom({ callback: createCircle.bind(this), duration: 2 })
+        .whenFinished(callback)
+        .start();
+    }
     this.diagram.animateNextFrame();
   }
 
   calcInterceptAngles() {
-    const b = this._line.getRotation();
-    const A = this._base.length;
-    const B = this._right.length;
+    // b: angle of known angle
+    // A: Adjacent side length
+    // B: Opposite side length
+    // a: Unknown-Opposite angle
+    // c: Angle of side B relative to 0 (external angle of Adjacent-Opposite)
+    const b = this._constructionLine.getRotation();
+    const A = this._adjacent.length;
+    const B = this._opposite.length;
     const a = Math.asin(A * Math.sin(b) / B);
     const c = a + b;
     const thresholdAngle = Math.asin(B / A);
@@ -141,7 +165,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     }
     let target = interceptAngles[0];
     if (interceptAngles.length === 2) {
-      const c = this._right.getRotation('0to360');
+      const c = this._opposite.getRotation('0to360');
       const c0 = Math.abs(minAngleDiff(c, interceptAngles[0]));
       const c1 = Math.abs(minAngleDiff(c, interceptAngles[1]));
       if (
@@ -154,13 +178,23 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
     this.animations.cancelAll();
     this.animations.new()
       .rotation({
-        element: this._right,
+        element: this._opposite,
         target,
         velocity: 1,
         maxDuration: 1,
         direction: 0,
       })
       .start();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseOpposite() {
+    this._opposite.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAdjacent() {
+    this._adjacent.pulseWidth({ line: 6 });
     this.diagram.animateNextFrame();
   }
 }
