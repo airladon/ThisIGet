@@ -77,6 +77,7 @@ export default function lessonLayout() {
         right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
         summaryLeft: { position: [-1.4, -0.3], rotation: 0, scale: 0.9 },
         summaryRight: { position: [1.4, -0.3], rotation: 0, scale: 0.9 },
+        summaryTri1: { position: [1, 0], rotation: 0, scale: 1 },
         mirror: { position: [1.4, -0.3], rotation: 0, scale: [-1, 1] },
         rotate: { position: [1.4, -0.3], rotation: Math.PI, scale: 1 },
         lowLeft: { position: [-1.4, -0.5], rotation: 0, scale: 0.9 },
@@ -105,6 +106,10 @@ export default function lessonLayout() {
   layout.addElements = [
     layout.congruentTriangles,
   ];
+
+  layout.label = {
+    position: new Point(1, -1),
+  };
 
   // /////////////////////////////////////////////////////////////////
   // AAA
