@@ -75,7 +75,11 @@ export default class CommonCollection extends CommonDiagramCollection {
       rotation = tri2.getRotation() + direction * rand(Math.PI / 3, Math.PI);
     }
 
-    tri2.stop(true, 'noComplete');
+    if (this.isFlipping) {
+      tri2.stop(true, 'complete');
+    } else {
+      tri2.stop(true, 'noComplete');
+    }
     tri2.animations.new()
       .rotation({ target: rotation, duration: 2, diration: 0 })
       .whenFinished(callback)
@@ -185,6 +189,55 @@ export default class CommonCollection extends CommonDiagramCollection {
           tri2._side20.showAll();
         }
         this.isFlipping = false;
+        if (callback != null) {
+          callback();
+        }
+      })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  simpleFlip(duration: number, callback: ?() => void = null) {
+    const { tri2 } = this._congruentTriangles.elements;
+    if (this.isFlipping) {
+      tri2.stop(true, 'complete');
+    } else {
+      tri2.stop(true, 'noComplete');
+    }
+    // const anglesShown = tri2._angle0.isShown;
+    // const sidesShown = tri2._side01.isShown;
+    tri2.hideAll();
+    tri2._line.show();
+
+    this.isFlipping = true;
+    tri2.animations.new()
+      // .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
+      // .scenario({ target: 'mirror', duration })
+      .scale({ target: [-1, 1], duration })
+      .whenFinished(() => {
+        tri2.setScaleWithoutMoving(1, 1);
+        tri2.updatePoints([tri2.points[2], tri2.points[1], tri2.points[0]]);
+        this.isFlipped = !this.isFlipped;
+        if (this.isFlipped) {
+          tri2._angle0.label.setText('a');
+          tri2._angle2.label.setText('c');
+          tri2._side01.label.setText('B');
+          tri2._side12.label.setText('A');
+        } else {
+          tri2._angle0.label.setText('c');
+          tri2._angle2.label.setText('a');
+          tri2._side01.label.setText('A');
+          tri2._side12.label.setText('B');
+        }
+        tri2._line.show();
+        tri2._angle0.showAll();
+        tri2._angle1.showAll();
+        tri2._angle2.showAll();
+        tri2._side01.showAll();
+        tri2._side12.showAll();
+        tri2._side20.showAll();
+        this.isFlipping = false;
+        tri2.updateRotation();
         if (callback != null) {
           callback();
         }

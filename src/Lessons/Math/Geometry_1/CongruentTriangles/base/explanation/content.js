@@ -956,6 +956,7 @@ class Content extends PresentationLessonContent {
         congruent._tri1._side20, congruent._tri2._side20,
       ],
     });
+
     this.addSection({
       setContent: style({ centerV: true }, [
         'The |Angle Side Side| and |Angle Angle Side| cases can be combined to be more general as all the combinations of two angles and one side are covered between them.',
@@ -967,16 +968,46 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
     this.addSection({
+      title: 'Side Side Side',
       setContent: style({ centerV: true }, [
-        'We have now seen whether we can determine congruency from |most| combinations of three properties including:',
+        'We have now seen whether we can determine congruency from |most| combinations of |three properties| including:',
         style({ left: 3, list: 'unordered' }, [
           'All angles - |Angle-Angle-Angle|',
           'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',
           'Two angles and a side - |Angle-Side-Angle| and |Angle-Angle-Side|',
         ]),
-        'The remaining combination is |all sides|. In fact, knowing three sides of two triangles is enough to determine they are congruent, but to show this we first need to look at |Isosceles Triangles|.',
+        'The remaining combination is |all sides| (|Side-Side-Side|).',
+        'In fact, knowing three sides of two triangles |is| enough to determine they are congruent, but to show this we first need to look at |Isosceles Triangles|.',
       ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'If two triangles share the same |side_lengths|, then they will be |congruent|.',
+        'This case is often called the |Side Side Side| case.',
+      ],
+      modifiers: {
+        side_lengths: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle1, congruent._tri2._angle1,
+        congruent._tri1._angle2, congruent._tri2._angle2,
+        congruent._tri1._angle0, congruent._tri2._angle0,
+      ],
     });
   }
 }

@@ -2112,7 +2112,20 @@ function (_ElementAnimationStep) {
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultPositionOptions.translationOptions, translationOptions);
     }
 
-    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+
+    if (options.start != null) {
+      options.start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start);
+    }
+
+    if (options.target != null) {
+      options.target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.target);
+    }
+
+    if (options.delta != null) {
+      options.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta);
+    } // $FlowFixMe
+
 
     _this.position = {
       translationOptions: {}
@@ -2157,12 +2170,7 @@ function (_ElementAnimationStep) {
           velocity = _this$position.velocity;
 
       if (velocity != null && start != null && target != null) {
-        var velocityToUse = velocity;
-
-        if (typeof velocity === 'number') {
-          velocityToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](velocity, velocity);
-        }
-
+        var velocityToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(velocity);
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(velocityToUse));
       }
 
@@ -2566,16 +2574,16 @@ function (_ElementAnimationStep) {
 
     _this.scale = {};
 
-    if (typeof options.start === 'number') {
-      options.start = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.start, options.start);
+    if (options.start != null) {
+      options.start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start);
     }
 
-    if (typeof options.target === 'number') {
-      options.target = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.target, options.target);
+    if (options.target != null) {
+      options.target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.target);
     }
 
-    if (typeof options.delta === 'number') {
-      options.delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](options.delta, options.delta);
+    if (options.delta != null) {
+      options.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta);
     }
 
     Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
@@ -2617,11 +2625,9 @@ function (_ElementAnimationStep) {
           velocity = _this$scale.velocity;
 
       if (velocity != null && target != null && start != null) {
-        var velocityToUse = velocity;
-
-        if (typeof velocity === 'number') {
-          velocityToUse = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](velocity, velocity);
-        }
+        var velocityToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(velocity); // if (typeof velocity === 'number') {
+        //   velocityToUse = new Point(velocity, velocity);
+        // }
 
         this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(velocityToUse));
       }
@@ -14958,6 +14964,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import type { TypeRectangleFilledReference } from '../DiagramElements/RectangleFilled';
 
 
 

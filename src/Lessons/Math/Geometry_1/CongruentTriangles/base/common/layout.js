@@ -26,32 +26,28 @@ export default function lessonLayout() {
 
   layout.width = 0.02;
 
-  const angle = (text) => {
-    return {
-      color: colors.angles,
-      curve: {
-        radius: 0.4,
-        width: layout.width,
-        sides: 200,
-      },
-      label: {
-        text,
-        scale: 0.8,
-      },
-    };
-  };
+  const angle = text => ({
+    color: colors.angles,
+    curve: {
+      radius: 0.4,
+      width: layout.width,
+      sides: 200,
+    },
+    label: {
+      text,
+      scale: 0.8,
+    },
+  });
 
-  const side = (text) => {
-    return {
-      color: colors.sides,
-      label: {
-        text,
-        scale: 0.8,
-        offset: 0.1,
-        location: 'outside',
-      },
-    };
-  };
+  const side = text => ({
+    color: colors.sides,
+    label: {
+      text,
+      scale: 0.8,
+      offset: 0.1,
+      location: 'outside',
+    },
+  });
 
   const triangle = {
     method: 'polyLine',
@@ -79,6 +75,8 @@ export default function lessonLayout() {
       scenarios: {
         left: { position: [-1.4, -0.3], rotation: 0, scale: 1 },
         right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
+        summaryLeft: { position: [-1.4, -0.3], rotation: 0, scale: 0.9 },
+        summaryRight: { position: [1.4, -0.3], rotation: 0, scale: 0.9 },
         mirror: { position: [1.4, -0.3], rotation: 0, scale: [-1, 1] },
         rotate: { position: [1.4, -0.3], rotation: Math.PI, scale: 1 },
         lowLeft: { position: [-1.4, -0.5], rotation: 0, scale: 0.9 },

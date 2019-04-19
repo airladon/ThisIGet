@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,13 +11,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   click,
+const {
+  highlight,
+  click,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,31 +33,41 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const congruent = coll._congruentTriangles;
 
     this.addSection({
       title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
+        `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
+      `,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      modifiers: {
+        side_lengths: highlight(colors.sides),
+        angles: highlight(colors.angles),
+        rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
+        flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
+      },
+      show: [congruent],
+      // transitionFromAny: (done) => {
+        
+      //   coll.rotateTriangle(Math.PI, done);
+      // },
+      setSteadyState: () => {
+        congruent.isFlipped = false;
+        congruent._tri1.setScenario('summaryLeft');
+        congruent._tri2.setScenario('summaryRight');
+        congruent._tri2.makeTouchable();
+        congruent._tri2.isMovable = true;
+        congruent._tri2.touchInBoundingRect = true;
+        congruent._tri2.move.type = 'rotation';
+      },
+      setLeaveState: () => {
+        congruent._tri2.isTouchable = false;
+        congruent._tri2.isMovable = false;
+      },
     });
   }
 }
