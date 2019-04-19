@@ -49,12 +49,12 @@ class Content extends PresentationLessonContent {
     // const sss = diag._sss;
 
     this.addSection({
-      title: 'Congruency',
+      title: 'Congruent Triangles',
       setContent: style({ centerV: true }, [
         'In mathematics, if |two shapes are the same size and shape|, then they are said to be |congruent|.',
         'The word |congruent| comes from |Latin|, where it means |"agreeing, meeting together"|.',
-        `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
-      `,
+      //   `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
+      // `,
       ]),
     });
 
@@ -223,7 +223,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         two_sides: highlight(colors.sides),
         one_angle: highlight(colors.angles),
-      }
+      },
     });
     /* ********************************************************************* */
     /* ********************************************************************* */
@@ -234,7 +234,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Side Angle Side Congruency',
+      title: 'Side Angle Side',
       setContent: [
         'First consider the case where the |two_sides_are_adjacent| to the |angle|. Can more than one triangle be made?',
       ],
@@ -969,13 +969,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'We have now seen whether we can determine congruency from most combinations of three properties including:',
+        'We have now seen whether we can determine congruency from |most| combinations of three properties including:',
         style({ left: 3, list: 'unordered' }, [
-          '|All angles| - Angle-Angle-Angle',
-          '|Two angles and a side| - Angle-Side-Angle and Angle-Angle-Side',
-          '|Two sides and an angle| - Side-Angle-Side and Side-Side-Angle',
+          'All angles - |Angle-Angle-Angle|',
+          'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',
+          'Two angles and a side - |Angle-Side-Angle| and |Angle-Angle-Side|',
         ]),
-        'The only remaining one is |all sides|. We will wait to look at this one till |Isosceles Triangles| as this concept is needed to see whether knowing just the side lengths of two triangles shows they are congruent.',
+        'The remaining combination is |all sides|. In fact, knowing three sides of two triangles is enough to determine they are congruent, but to show this we first need to look at |Isosceles Triangles|.',
       ]),
     });
   }
