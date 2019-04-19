@@ -131,7 +131,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'Showing two triangles are congruent can be beneficial in calculating a geometric problem.',
-        'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the known lengths and angles other triangle.',
+        'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the known lengths and angles of the other triangle.',
       ]),
     });
 
@@ -169,8 +169,11 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Angle Angle Angle',
       setContent: [
-        'First consider when only the three angles are known. Do triangles of different sizes exist that have the same angles?',
+        'First consider when only the |three_angles| are known. Do triangles of different sizes exist that have the same angles?',
       ],
+      modifiers: {
+        three_angles: highlight(colors.angles),
+      },
       show: [
         aaa._fig._tri._line, aaa._fig._tri._angle0, aaa._fig._tri._angle1, aaa._fig._tri._angle2,
       ],
@@ -196,9 +199,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'So triangles with the |same angles|, can have |different side lengths|.',
+        'So triangles with the |same_angles|, can have |different_side_lengths|.',
         'Only knowing two triangles have the same angles, is |not enough| to know they are congruent.',
       ]),
+      modifiers: {
+        same_angles: highlight(colors.angles),
+        different_side_lengths: highlight(colors.sides),
+      },
     });
 
     /* ********************************************************************* */
@@ -212,10 +219,10 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Angle Side Congruency',
       setContent: [
-        'Next, consider the case where you know an |angle| and its |two_adjacent_side_lengths|. Can more than one triangle be made?',
+        'Next, consider the case where you know |one_angle| and its |two_adjacent_side_lengths|. Can more than one triangle be made?',
       ],
       modifiers: {
-        angle: highlight(colors.angles),
+        one_angle: highlight(colors.angles),
         two_adjacent_side_lengths: highlight(colors.sides),
       },
       show: [sas._line, sas._angle, sas._base],
@@ -328,7 +335,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'For each of these scenarios, how many triangles can be made, and do the different scenarios create different triangles?',
+        'For each of these scenarios, how many triangles can be made, and are the triangles between scenarios the same or different?',
       ],
       show: [sas._config1, sas._config2, sas._config3, sas._config4],
       hide: [
@@ -388,6 +395,21 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         sas.setMovableLeg();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'So for this scenario, |only one| triangle can be made.',
+      ],
+      show: [sas._fig],
+      transitionFromPrev: (done) => {
+        sas.goToTri(done);
+      },
+      setSteadyState: () => {
+        sas._fig.hide();
+        sas._config1.showAll();
+        sas._config1.setScenario('center');
       },
     });
 
@@ -624,11 +646,12 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Angle Angle Side',
       setContent: [
-        'The next case is when |two_angles| and the |side_not_between| them are known.',
+        'The next case is when a |side| and its |adjacent_angle| and |opposite_angle| are known.',
       ],
       modifiers: {
-        side_not_between: highlight(colors.sides),
-        two_angles: highlight(colors.angles),
+        side: highlight(colors.sides),
+        opposite_angle: highlight(colors.angles),
+        adjacent_angle: highlight(colors.angles),
       },
       show: [aas._angle1, aas._angle3, aas._side],
     });
