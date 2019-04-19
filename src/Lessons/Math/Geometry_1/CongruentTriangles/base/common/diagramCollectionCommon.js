@@ -208,14 +208,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     // const sidesShown = tri2._side01.isShown;
     tri2.hideAll();
     tri2._line.show();
+    const currentScale = tri2.getScale().y;
 
     this.isFlipping = true;
     tri2.animations.new()
       // .scenario({ target: 'right', velocity: 1, maxTime: 0.9 })
       // .scenario({ target: 'mirror', duration })
-      .scale({ target: [-1, 1], duration })
+      .scale({ target: [-currentScale, currentScale], duration })
       .whenFinished(() => {
-        tri2.setScaleWithoutMoving(1, 1);
+        tri2.setScaleWithoutMoving(currentScale, currentScale);
         tri2.updatePoints([tri2.points[2], tri2.points[1], tri2.points[0]]);
         this.isFlipped = !this.isFlipped;
         if (this.isFlipped) {
@@ -223,11 +224,13 @@ export default class CommonCollection extends CommonDiagramCollection {
           tri2._angle2.label.setText('c');
           tri2._side01.label.setText('B');
           tri2._side12.label.setText('A');
+          tri2.interactiveLocation = [-0.7, 0.8];
         } else {
           tri2._angle0.label.setText('c');
           tri2._angle2.label.setText('a');
           tri2._side01.label.setText('A');
           tri2._side12.label.setText('B');
+          tri2.interactiveLocation = [0.7, 0.8];
         }
         tri2._line.show();
         tri2._angle0.showAll();
