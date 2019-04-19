@@ -186,7 +186,7 @@ export default function getLessonIndex() {
             'Aas',
             'Aaa',
             'Ssa',
-            'Main',
+            'CongruentTriangles',
           ],
         },
         legacy: {

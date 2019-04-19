@@ -53,8 +53,6 @@ class Content extends PresentationLessonContent {
       setContent: style({ centerV: true }, [
         'In mathematics, if |two shapes are the same size and shape|, then they are said to be |congruent|.',
         'The word |congruent| comes from |Latin|, where it means |"agreeing, meeting together"|.',
-      //   `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
-      // `,
       ]),
     });
 

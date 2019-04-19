@@ -12,7 +12,7 @@ var details = {
     'Aas',
     'Aaa',
     'Ssa',
-    'Main',
+    'CongruentTriangles',
   ],
 };
 

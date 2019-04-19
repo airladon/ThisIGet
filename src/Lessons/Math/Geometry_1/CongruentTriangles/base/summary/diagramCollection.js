@@ -35,7 +35,6 @@ export default class DiagramCollection extends CommonDiagramCollection {
     this.label = document.createElement('div');
     container.classList.add('lesson__congruent_angles_summary__label');
     container.appendChild(this.label);
-    console.log(this.layout.label.position)
     return this.diagram.shapes.htmlElement(
       container,
       'id_lesson__congruent_angles_summary__label',
