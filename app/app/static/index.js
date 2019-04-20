@@ -14475,7 +14475,8 @@ function (_DiagramElementCollec) {
       close: false,
       showLine: true,
       borderToPoint: 'never',
-      width: 0.01
+      width: 0.01,
+      reverse: false
     };
     var defaultSideOptions = {
       showLine: false,
@@ -14563,6 +14564,7 @@ function (_DiagramElementCollec) {
 
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
+    _this.reverse = optionsToUse.reverse;
     _this.points = optionsToUse.points.map(function (p) {
       return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
     }); // Add Pads
@@ -14660,6 +14662,13 @@ function (_DiagramElementCollec) {
         }
 
         var name = "angle".concat(i);
+
+        if (_this.reverse) {
+          var newJ = k;
+          k = j;
+          j = newJ;
+        }
+
         var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
           p1: _this.points[k],
           p2: _this.points[i],
@@ -14710,6 +14719,13 @@ function (_DiagramElementCollec) {
           p1: _this.points[_i2],
           p2: _this.points[_j]
         }, sideArray[_i2]);
+
+        if (_this.reverse) {
+          sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+            p1: _this.points[_j],
+            p2: _this.points[_i2]
+          }, sideArray[_i2]);
+        }
 
         var sideLine = _this.objects.line(sideOptions);
 
@@ -14762,7 +14778,11 @@ function (_DiagramElementCollec) {
           var _name2 = "side".concat(_i3).concat(j);
 
           if (this.elements[_name2] != null) {
-            this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+            if (this.reverse) {
+              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i3]);
+            } else {
+              this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+            }
           }
         }
       }
@@ -14797,6 +14817,12 @@ function (_DiagramElementCollec) {
 
           if (this.elements[_name3] != null) {
             var wasHidden = !this.elements[_name3].isShown;
+
+            if (this.reverse) {
+              var newJ = k;
+              k = _j2;
+              _j2 = newJ;
+            }
 
             this.elements[_name3].setAngle({
               p1: newPoints[k],
@@ -14849,6 +14875,17 @@ function (_DiagramElementCollec) {
       if (side != null) {
         side.updateLabel(this.getRotation() + rotationOffset);
       }
+    }
+  }, {
+    key: "reversePoints",
+    value: function reversePoints() {
+      var newPoints = [];
+
+      for (var i = 0; i < this.points.length; i += 1) {
+        newPoints.push(this.points[this.points.length - 1 - i]);
+      }
+
+      this.updatePoints(newPoints);
     }
   }, {
     key: "setPositionWithoutMoving",

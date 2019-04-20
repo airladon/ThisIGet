@@ -42,7 +42,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    // this.addCheck();
+    this.addCheck();
     // this.addInput('input', '?', 3, 0);
     // this.add('main', new CommonCollection(diagram, this.layout));
     this.diagram.addElements(this, this.layout.addElementsQuiz);
@@ -92,6 +92,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._tri2._pad0.scenarios.quiz = { position: points2[0] };
     this._tri2._pad1.scenarios.quiz = { position: points2[1] };
     this._tri2._pad2.scenarios.quiz = { position: points2[2] };
+    const trick = rand(0, 1);
+    if (trick < 0.3) {
+      this._tri2._pad0.scenarios.quiz = { position: points2[0].add(0.05, 0) };
+      this.hint = 'checkDimensions';
+    } else {
+      this.hint = 'incorrect';
+    }
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -116,36 +123,36 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   getPropertiesType(knownProperties: Array<string>) {
     const AAA = [
-      ['1', '2', '3'],
+      ['0', '1', '2'],
     ];
     const SSA = [
-      ['1', '12', '23'],
-      ['1', '23', '31'],
-      ['2', '23', '31'],
-      ['12', '2', '31'],
-      ['12', '3', '31'],
-      ['12', '23', '3'],
+      ['0', '01', '12'],
+      ['0', '12', '20'],
+      ['1', '12', '20'],
+      ['01', '1', '20'],
+      ['01', '2', '20'],
+      ['01', '12', '2'],
     ];
     const SSS = [
-      ['12', '23', '31'],
+      ['01', '12', '20'],
     ];
     const SAA = [
-      ['12', '2', '3'],
-      ['1', '12', '3'],
-      ['1', '23', '3'],
-      ['1', '2', '23'],
-      ['1', '2', '31'],
-      ['1', '3', '31'],
+      ['01', '1', '2'],
+      ['0', '01', '2'],
+      ['0', '12', '2'],
+      ['0', '1', '12'],
+      ['0', '1', '20'],
+      ['0', '2', '20'],
     ];
     const ASA = [
+      ['0', '01', '1'],
       ['1', '12', '2'],
-      ['2', '23', '3'],
-      ['1', '3', '31'],
+      ['0', '2', '20'],
     ];
     const SAS = [
-      ['12', '2', '23'],
-      ['23', '3', '31'],
-      ['1', '12', '31'],
+      ['01', '1', '12'],
+      ['12', '2', '20'],
+      ['0', '01', '20'],
     ];
     if (this.getKnownPropertiesType(AAA, knownProperties)) {
       return 'AAA';
@@ -170,7 +177,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   // eslint-disable-next-line class-methods-use-this
   getUnknownAngles(knownProperties: Array<string>) {
-    const possibleAngles = ['1', '2', '3'];
+    const possibleAngles = ['0', '1', '2'];
     const unknownAngles = [];
     possibleAngles.forEach((angle) => {
       if (knownProperties.indexOf(angle) === -1) {
@@ -192,7 +199,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   // eslint-disable-next-line class-methods-use-this
   getUnknownSides(knownProperties: Array<string>) {
-    const possibleSides = ['12', '23', '31'];
+    const possibleSides = ['01', '12', '20'];
     const unknownASides = [];
     possibleSides.forEach((side) => {
       if (knownProperties.indexOf(side) === -1) {
@@ -203,17 +210,31 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   showAnglesAndSides() {
-    this._triangle._tri1.hideAll();
-    this._triangle._tri1._line.show();
-    this._triangle._tri2.hideAll();
-    this._triangle._tri2._line.show();
+    if (this._tri1._angle0.angle > Math.PI) {
+      this._tri1.reverse = !this._tri1.reverse;
+      this._tri1.updatePoints(this._tri1.points);
+    }
+    if (this._tri2._angle0.angle > Math.PI) {
+      this._tri2.reverse = !this._tri2.reverse;
+      this._tri2.updatePoints(this._tri2.points);
+    }
+    this._tri1.hideAll();
+    this._tri1._line.show();
+    this._tri1._pad0.show();
+    this._tri1._pad1.show();
+    this._tri1._pad2.show();
+    this._tri2.hideAll();
+    this._tri2._line.show();
+    this._tri2._pad0.show();
+    this._tri2._pad1.show();
+    this._tri2._pad2.show();
     const possible = ['angle', 'angle', 'angle', 'side', 'side', 'side'];
     const propertiesToShow = randElements(3, possible);
-    const possibleAngles = ['1', '2', '3'];
-    const possibleSides = ['12', '23', '31'];
-    const order = ['1', '12', '2', '23', '3', '31'];
+    const possibleAngles = ['0', '1', '2'];
+    const possibleSides = ['01', '12', '20'];
+    const order = ['0', '01', '1', '12', '2', '20'];
     const knownProperties = [];
-    this.hint = 'incorrect';
+    // this.hint = 'incorrect';
     let answer = 'possible';
     propertiesToShow.forEach((p) => {
       let elementId;
@@ -226,8 +247,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         elementId = `_side${sideId}`;
         knownProperties.push(sideId);
       }
-      const element1 = this._triangle._tri1[elementId];
-      const element2 = this._triangle._tri2[elementId];
+      const element1 = this._tri1[elementId];
+      const element2 = this._tri2[elementId];
       element1.showAll();
       element2.showAll();
     });
@@ -252,27 +273,16 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         }
       });
       if (oppositeSide && adjacentSide) {
-        const lengthOpp = this._triangle._tri1[`b${oppositeSide}`].length();
-        const lengthAdj = this._triangle._tri1[`b${adjacentSide}`].length();
+        const lengthOpp = this._tri1[`_side${oppositeSide}`].length;
+        const lengthAdj = this._tri1[`_side${adjacentSide}`].length;
         if (lengthAdj > lengthOpp) {
           answer = 'not possible';
         }
       }
     }
-    const trick = rand(0, 1);
-    if (trick < 0.3) {
-      answer = 'not possible';
-      this._tri2.updatePoints(
-        this._tri2.p1.add(0.05, 0),
-        this._tri2.p2,
-        this._tri2.p3,
-      );
-      this.hint = 'checkDimensions';
-      // if (propertiesType === 'ASA') {
-      //   const knownAngle = this.getKnownAngles(sortedKnownProperties)[0];
-      //   const unknownAngle = this.getUnknownAngles(sortedKnownProperties)[0];
 
-      // }
+    if (this.hint === 'checkDimensions') {
+      answer = 'not possible';
     }
     this.answer = answer;
     this._check.show();
@@ -285,12 +295,26 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
 
   setupNewProblem() {
-    // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
+    this.calcRandomTriangles();
+    this._tri1.hideAll();
+    this._tri1.show();
+    this._tri1._line.show();
+    this._tri1._pad0.show();
+    this._tri1._pad1.show();
+    this._tri1._pad2.show();
+    this._tri2.hideAll();
+    this._tri2.show();
+    this._tri2._line.show();
+    this._tri2._pad0.show();
+    this._tri2._pad1.show();
+    this._tri2._pad2.show();
+    this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
-  // afterTransitionToNewProblem() {
-  //   super.afterTransitionToNewProblem();
-  // }
+  afterTransitionToNewProblem() {
+    super.afterTransitionToNewProblem();
+    this.showAnglesAndSides();
+  }
 
   // showAnswer() {
   //   super.showAnswer();

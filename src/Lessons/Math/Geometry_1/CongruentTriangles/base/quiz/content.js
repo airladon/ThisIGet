@@ -53,10 +53,11 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      show: [quiz._tri1],
+      show: [quiz._tri1, quiz._tri2],
       hide: [],
       setSteadyState: () => {
         console.log(quiz)
+        quiz.newProblem();
       },
       setLeaveState: () => {},
     });

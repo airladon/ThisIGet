@@ -27,6 +27,8 @@ export default function lessonLayout() {
       close: true,
       pad: {
         color: colors.diagram.background,
+        // color: colors.angles,
+        isMovable: true,
         sides: 4,
         radius: 0.1,
       },
@@ -45,6 +47,7 @@ export default function lessonLayout() {
       side: {
         label: {
           text: null,
+          location: 'outside',
         },
       },
     },
