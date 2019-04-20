@@ -709,7 +709,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: style({}, [
         'This case is often referred to as the |Side Side Angle| case.',
-        'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (C)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|.',
+        'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|.',
       ]),
       modifiers: {
         angle_a: highlightWord('angle (a)', colors.angles),

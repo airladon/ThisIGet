@@ -11,6 +11,7 @@ const { Transform, Rect } = Fig;
 const {
   click,
   highlight,
+  highlightWord,
 //   clickWord,
 } = Fig.tools.html;
 
@@ -94,7 +95,7 @@ export class QRAaa extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.65, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -138,14 +139,13 @@ export class QRSas extends PopupBoxCollection {
     };
     this.setTitle('Side Angle Side Triangle Congruency Test');
     this.setDescription([
-      'If two triangles share |two_sides_of_the_same_length|, and the |angle_between| those two sides is also the same on both triangles, then the triangles |are congruent|.',
-      'This case is often called the |Side Angle Side| case.',
+      'If two triangles share |two_sides_of_the_same_length|, and the |angle_between| those two sides is also the same on both triangles, then the triangles |are congruent|. This case is often called the |Side Angle Side| case.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -164,6 +164,206 @@ export class QRSas extends PopupBoxCollection {
   }
 }
 
+export class QRSsa extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      angle_a: highlightWord('angle (a)', colors.angles),
+    };
+    this.setTitle('Side Side Angle Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|. This case is often called the |Side Side Angle| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._angle1.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._angle1.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+export class QRAsa extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_angles: highlight(colors.angles),
+      side_between: highlight(colors.sides),
+    };
+    this.setTitle('Angle Side Angle Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
+      'This case is often called the |Angle Side Angle| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._side01.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._side01.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+export class QRAas extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_angles: highlight(colors.angles),
+      side_not_between: highlight(colors.sides),
+    };
+    this.setTitle('Angle Angle Side Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|. This case is often called the |Angle Angle Side| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._side12.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._side12.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+
+export class QRSss extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      side_lengths: highlight(colors.sides),
+    };
+    this.setTitle('Side Side Side Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |side_lengths|, then they will be |congruent|. This case is often called the |Side Side Side| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._angle0.hide();
+    congruent._tri1._angle1.hide();
+    congruent._tri1._angle2.hide();
+    congruent._tri2._angle0.hide();
+    congruent._tri2._angle1.hide();
+    congruent._tri2._angle2.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
 function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
@@ -175,6 +375,10 @@ function attachQuickReference1() {
     CongruentTriangles: QRCongruentTriangles,
     Aaa: QRAaa,
     Sas: QRSas,
+    Ssa: QRSsa,
+    Asa: QRAsa,
+    Aas: QRAas,
+    Sss: QRSss,
   };
 }
 
