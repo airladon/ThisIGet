@@ -6,10 +6,20 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
   // DiagramElementCollection,
+  DiagramObjectAngle, DiagramObjectLine, DiagramObjectPolyLine,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _triangle: {
+    _side01: DiagramObjectLine;
+    _side12: DiagramObjectLine;
+    _side20: DiagramObjectLine;
+    _angle0: DiagramObjectAngle;
+    _angle1: DiagramObjectAngle;
+    _angle2: DiagramObjectAngle;
+  } & DiagramObjectPolyLine;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -19,5 +29,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
+  }
+
+  pulseEqualSides() {
+    this._triangle._side01._label.pulseScaleNow(1, 2);
+    this._triangle._side12._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
   }
 }
