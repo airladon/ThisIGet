@@ -56,18 +56,22 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
           answer: 'Incorrect',
           details: 'Angle-Angle-Angle does not guarantee congruency as triangles with the same angles can be different sizes.',
         },
-        sas: {
-          answer: 'Incorrect',
-          details: 'Side-Angle-Side does guarantee congruency.',
-        },
-        aas: {
-          answer: 'Incorrect',
-          details: 'Angle-Angle-Side does guarantee congruency.',
-        },
-        asa: {
-          answer: 'Incorrect',
-          details: 'Angle-Side-Angle does guarantee congruency.',
-        },
+        // sas: {
+        //   answer: 'Incorrect',
+        //   details: 'This is a Side-Angle-Side configuration, which does guarantee congruency.',
+        // },
+        // aas: {
+        //   answer: 'Incorrect',
+        //   details: 'This is a Angle-Angle-Side configuration which does guarantee congruency.',
+        // },
+        // asa: {
+        //   answer: 'Incorrect',
+        //   details: 'This is a Angle-Side-Angle configuration which does guarantee congruency.',
+        // },
+        // sss: {
+        //   answer: 'Incorrect',
+        //   details: 'This is a Side-Side-Side configuration which does guarantee congruency.',
+        // },
       },
       transform,
     );
@@ -81,7 +85,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   // eslint-disable-next-line class-methods-use-this
   randomTriangle(
-    maxQuadrantBounds: Point = new Point(1, 1),
+    maxQuadrantBounds: Point = new Point(0.9, 0.9),
     minQuadrantBounds: Point = new Point(0.4, 0.4),
   ): Array<Point> {
     const possibleQuads = [0, 1, 2, 3];
@@ -356,7 +360,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     } else {
       this.selectMultipleChoice('congruent_tri_1', 1);
     }
-    this._answerBox.disable();
+    // this._answerBox.disable();
     this.diagram.animateNextFrame();
   }
 

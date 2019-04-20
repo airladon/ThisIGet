@@ -26,7 +26,7 @@ export default function lessonLayout() {
       width: layout.width,
       close: true,
       pad: {
-        color: colors.diagram.background,
+        color: [0, 0, 0, 0.001],
         // color: colors.angles,
         isMovable: true,
         sides: 4,
