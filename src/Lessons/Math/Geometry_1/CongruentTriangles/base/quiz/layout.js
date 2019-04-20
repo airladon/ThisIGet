@@ -41,11 +41,10 @@ export default function lessonLayout() {
           text: null,
           precision: 0,
         },
-        side: {
-          offset: 0.1,
-          label: {
-            text: null,
-          },
+      },
+      side: {
+        label: {
+          text: null,
         },
       },
     },
