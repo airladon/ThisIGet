@@ -396,7 +396,7 @@ export default function getLessonIndex() {
       versions: {
         base: {
           title: 'Base',
-          description: 'First explanation of Topic.',
+          description: 'Explanation_of_version_here.',
           path: 'base',
           onPath: true,
           topics: [
@@ -411,7 +411,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'quadrangles',
+        'congruent_triangles',
       ],
       enabled: true,
     }),

@@ -5,13 +5,17 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import IsocelesCollection from '../common/diagramCollectionIsoceles';
+import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-const { click } = Fig.tools.html;
+// const {
+//   click,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
-export default class QRIsosceles extends PopupBoxCollection {
-  _collection: IsocelesCollection;
+export default class QRBoilerplate extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -23,56 +27,29 @@ export default class QRIsosceles extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      IsocelesCollection,
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {
-      two_equal_sides: click(
-        this._collection.pulseEqualSides,
-        [this._collection],
-        this.layout.colors.equalLength,
-      ),
-      two_equal_angles: click(
-        this._collection.pulseEqualAngles,
-        [this._collection],
-        this.layout.colors.angles,
-      ),
-      opposite: click(
-        this._collection.pulseOpposites,
-        [this._collection],
-        this.layout.colors.diagram.action,
-      ),
-    };
-    this.setTitle('Isosceles Triangle');
+    const modifiers = {};
+    this.setTitle('');
     this.setDescription(`
       <p>
-      An |Isosceles| triangle has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.
-      </p>
-      <p>
-      All triangles with two equal sides will have two equal angles, and all triangles with two equal angles will have two equal sides.
       </p>
     `, modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
-    const iso = collection;
-    const iTri = this._collection._tri;
-    iso.show();
-    iTri.show();
-    iTri._line.show();
-    iTri._side23.showAll();
-    iTri._side31.showAll();
-    iTri._angle1.showAll();
-    iTri._angle2.showAll();
-    // collection.transform.updateScale(0.6, 0.6);
+    // const iso = collection;
+    // iso.show();
+    collection.transform.updateScale(0.6, 0.6);
     collection.setPosition(this.layout.position);
-    this.transformToQRWindow(iTri, new Rect(-1.6, -0.9, 3.2, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -85,7 +62,8 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRIsosceles,
+    Main: QRBoilerplate,
+    // QR2: QRBoilerplate2,
   };
 }
 

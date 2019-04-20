@@ -5,11 +5,20 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform, DiagramElementPrimative } = Fig;
+const {
+  Transform,
+  DiagramElementPrimative,
+} = Fig;
 
-export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagramCollection) {
-// export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
+// const {
+//   removeRandElement,
+//   round,
+//   rand
+// } = Fig.tools.math;
+
+export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
   _messages: {
     _touching: DiagramElementPrimative;
@@ -30,33 +39,29 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
       {},
       transform,
     );
-    // this.add('input', this.makeEntryBox('a1', '?', 3));
-    // this._input.setPosition(this.layout.input);
+    // this.addCheck();
+    // this.addInput('input', '?', 3, 0);
+    this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 
-  tryAgain() {
-    super.tryAgain();
-    // this._input.enable();
-    // this._input.setValue('');
-  }
+  // tryAgain() {
+  //   super.tryAgain();
+  // }
 
 
-  newProblem() {
-    super.newProblem();
-    // this.calculateFuturePositions();
-    // this.moveToFuturePositions(1, this.updateAngles.bind(this));
-    // this._input.enable();
-    // this._input.setValue('');
-    this.diagram.animateNextFrame();
+  setupNewProblem() {
+    // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
-  showAnswer() {
-    super.showAnswer();
-    // this._input.setValue(this.answer);
-    // this._input.disable();
-    this.diagram.animateNextFrame();
-  }
+  // afterTransitionToNewProblem() {
+  //   super.afterTransitionToNewProblem();
+  // }
+
+  // showAnswer() {
+  //   super.showAnswer();
+  //   this.diagram.animateNextFrame();
+  // }
 
   findAnswer() {
     // this._input.disable();
