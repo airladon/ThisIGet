@@ -77,7 +77,7 @@ export default function lessonLayout() {
         right: { position: [1.4, -0.3], rotation: 0, scale: 1 },
         summaryLeft: { position: [-1.4, -0.3], rotation: 0, scale: 0.9 },
         summaryRight: { position: [1.4, -0.3], rotation: 0, scale: 0.9 },
-        summaryTri1: { position: [1, 0], rotation: 0, scale: 1 },
+        summaryTri1: { position: [1, 0.2], rotation: 0, scale: 1 },
         qrLeft: { position: [-1.4, -0.3], rotation: 0, scale: 0.9 },
         qrRight: { position: [1.4, -0.3], rotation: 0, scale: 0.9 },
         qrLeftAaa: { position: [-1.4, -0.3], rotation: 0, scale: 1 },
