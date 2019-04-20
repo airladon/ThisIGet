@@ -33,6 +33,11 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.show();
       this._check.enable();
     }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
     this.hasTouchableElements = true;
     if (this._intput != null) {
       this._input.enable();
@@ -56,6 +61,11 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.show();
       this._check.enable();
     }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
     this.hasTouchableElements = true;
     this.answerIndex = -1;
     this.setupNewProblem();
@@ -76,6 +86,10 @@ const CommonQuizMixin = superclass => class extends superclass {
     if (this._check != null) {
       this._check.disable();
     }
+    if (this._choice != null) {
+      this._choice.disable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
     this.animations.new()
       .scenarios(options)
       .whenFinished(this.afterTransitionToNewProblem.bind(this))
@@ -92,6 +106,11 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.show();
       this._check.enable();
     }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
     this.diagram.lesson.updateInteractiveItems();
   }
 
@@ -105,6 +124,9 @@ const CommonQuizMixin = superclass => class extends superclass {
   checkAnswer() {
     if (this._check != null) {
       this._check.disable();
+    }
+    if (this._choice != null) {
+      this._choice.disable();
     }
     this.hasTouchableElements = false;
     const answer = this.findAnswer();
@@ -139,6 +161,9 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._check.hide();
       this._check.disable();
     }
+    if (this._choice != null) {
+      this._choice.disable();
+    }
     this.answerIndex = (this.answerIndex + 1) % this.answers.length;
     if (this.answers.length > 1) {
       this._showAnotherAnswer.show();
@@ -168,6 +193,14 @@ const CommonQuizMixin = superclass => class extends superclass {
     id: string = this.id,
   ) {
     this.add('check', this.makeCheckButton(id));
+  }
+
+  addMultipleChoice(
+    id: string = this.id,
+    choices: Array<string>,
+  ) {
+    this.add('choice', this.makeMultipleChoice(id, choices));
+    this._choice.setPosition(this.layout.quiz.choice);
   }
 
   makeAnswerBox(

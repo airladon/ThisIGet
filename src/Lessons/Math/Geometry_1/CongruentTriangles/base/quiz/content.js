@@ -40,7 +40,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      setContent: ['Can you determine if the triangles are congruent based on the properties shown?'],
       modifiers: {},
       // setInfo: `
       //     <ul>

@@ -39,11 +39,41 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       diagram,
       layout,
       'q1',
-      {},
+      {
+        checkDimensions: {
+          answer: 'Incorrect',
+          details: 'Make sure to check the dimensions are the same',
+        },
+        notSelected: {
+          answer: 'Incorrect',
+          details: 'Make sure to select "Yes" or "No" above the "Check" button',
+        },
+        ssa: {
+          answer: 'Incorrect',
+          details: 'Side-Side-Angle does not guarantee congruency if the angle\'s opposite side is longer than the adjacent side.',
+        },
+        aaa: {
+          answer: 'Incorrect',
+          details: 'Angle-Angle-Angle does not guarantee congruency as triangles with the same angles can be different sizes.',
+        },
+        sas: {
+          answer: 'Incorrect',
+          details: 'Side-Angle-Side does guarantee congruency.',
+        },
+        aas: {
+          answer: 'Incorrect',
+          details: 'Angle-Angle-Side does guarantee congruency.',
+        },
+        asa: {
+          answer: 'Incorrect',
+          details: 'Angle-Side-Angle does guarantee congruency.',
+        },
+      },
       transform,
     );
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
+    this.addMultipleChoice('congruent_tri_1', ['Yes', 'No']);
     // this.add('main', new CommonCollection(diagram, this.layout));
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
@@ -257,6 +287,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const propertiesType = this.getPropertiesType(sortedKnownProperties);
     if (propertiesType === 'AAA') {
       answer = 'not possible';
+      this.hint = 'aaa';
     }
     if (propertiesType === 'SSA') {
       let angleIndex = sortedKnownProperties.filter(p => p.length === 1)[0];
@@ -277,6 +308,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         const lengthAdj = this._tri1[`_side${adjacentSide}`].length;
         if (lengthAdj > lengthOpp) {
           answer = 'not possible';
+          this.hint = 'ssa';
         }
       }
     }
@@ -286,6 +318,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
     this.answer = answer;
     this._check.show();
+    this._choice.show();
     this.diagram.animateNextFrame();
   }
 
@@ -316,19 +349,27 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.showAnglesAndSides();
   }
 
-  // showAnswer() {
-  //   super.showAnswer();
-  //   this.diagram.animateNextFrame();
-  // }
+  showAnswer() {
+    super.showAnswer();
+    if (this.answer === 'possible') {
+      this.selectMultipleChoice('congruent_tri_1', 0);
+    } else {
+      this.selectMultipleChoice('congruent_tri_1', 1);
+    }
+    this._answerBox.disable();
+    this.diagram.animateNextFrame();
+  }
 
   findAnswer() {
-    // this._input.disable();
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    if (this.answer === true) {
+    const selection = this.getMultipleChoiceSelection('congruent_tri_1');
+    if (selection === -1) {
+      return 'notSelected';
+    }
+    if ((selection === 0 && this.answer === 'possible')
+      || (selection === 1 && this.answer === 'not possible')) {
       return 'correct';
     }
-    return 'incorrect';
+    return this.hint;
+    // return 'incorrect';
   }
 }

@@ -19,6 +19,7 @@
   font-size: calc(var(--lesson__diagram-font-size) * 0.5);
   color: color('white');
   margin-bottom: 0.6em;
+  width: 20em;
 }
 
 .lesson__quiz__next_steps {
@@ -149,6 +150,11 @@
 // Multiple choice box
 .lesson__quiz_multiple_choice_box_table {
   font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  color: color('white', 'dark');
+}
+
+.lesson__quiz_multiple_choice_box_answer__disable .lesson__quiz_multiple_choice_box_table {
+  color: color('black', 'dark');
 }
 
 .lesson__quiz_multiple_choice_box_row {
@@ -174,12 +180,12 @@
   height: calc(var(--lesson__diagram-font-size) * 0.5);
   border-radius: calc(var(--lesson__diagram-font-size) * 0.25);
   border: calc(var(--lesson__diagram-font-size) * 0.08) solid;
-  color: color('diagram', 'disabled', 'base');
+  // color: color('diagram', 'disabled', 'base');
 }
 
-.lesson__quiz_multiple_choice_box_answer {
-  color: color('diagram', 'disabled', 'base');
-}
+// .lesson__quiz_multiple_choice_box_answer {
+//   color: color('diagram', 'disabled', 'base');
+// }
 
 // .lesson__quiz_multiple_choice_box__selected {
 // }
@@ -194,6 +200,16 @@
   font-weight: bold;
 }
 
+.lesson__quiz_multiple_choice_box_answer__disable .lesson__quiz_multiple_choice_box_circle__selected {
+  background-color: color('diagram', 'primary', 'darker');
+  color: color('diagram', 'primary', 'darker');
+}
+
+.lesson__quiz_multiple_choice_box_answer__disable .lesson__quiz_multiple_choice_box_answer__selected {
+  color: color('diagram', 'primary', 'darker');
+}
+
 .lesson__quiz_multiple_choice_box_answer__disable {
   pointer-events: none;
+  // color: color('diagram', 'disabled', 'darker');
 }
