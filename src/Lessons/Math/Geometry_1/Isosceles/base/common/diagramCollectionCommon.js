@@ -29,8 +29,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
+    _angleEqual: DiagramObjectAngle;
+    _angleBase: DiagramObjectAngle;
     _sideEqual: DiagramObjectLine;
     _sideSplit: DiagramObjectLine;
+    _sideBase: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   _right: {
@@ -41,8 +44,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
+    _angleEqual: DiagramObjectAngle;
+    _angleBase: DiagramObjectAngle;
     _sideEqual: DiagramObjectLine;
     _sideSplit: DiagramObjectLine;
+    _sideBase: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   _split: { _label: DiagramElementCollection; } & DiagramObjectLine;
@@ -57,11 +63,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
     this._left._angleTop = this._left._angle1;
+    this._left._angleEqual = this._left._angle0;
+    this._left._angleBase = this._left._angle2;
     this._right._angleTop = this._right._angle2;
+    this._right._angleEqual = this._right._angle1;
+    this._right._angleBase = this._right._angle0;
     this._left._sideEqual = this._left._side01;
+    this._left._sideSplit = this._left._side12;
+    this._left._sideBase = this._left._side20;
     this._right._sideEqual = this._right._side20;
     this._right._sideSplit = this._right._side12;
-    this._left._sideSplit = this._left._side12;
+    this._right._sideBase = this._right._side01;
   }
 
   pulseEqualSides() {
@@ -97,6 +109,7 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   splitTriangle(done: ?() => void = null) {
     this.animations.cancelAll();
+    this.setScenarios('combined');
     this.animations.new()
       .scenarios({ target: 'separate', duration: 1 })
       .whenFinished(done)
@@ -104,14 +117,34 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  joinTriangles(done: ?() => void = null) {
+    this.animations.cancelAll();
+    this.setScenarios('separate');
+    this.animations.new()
+      .scenarios({ target: 'combined', duration: 1 })
+      .whenFinished(done)
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
   pulseTopAngles() {
-    this._left._angleTop.pulseScaleNow(1, 1.5);
-    this._right._angleTop.pulseScaleNow(1, 1.5);
+    this._left._angleTop.pulseScaleNow(1, 1.3);
+    this._right._angleTop.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 
   pulseL() {
     this._split._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseRemainingLeftRightProperties() {
+    this._left._angleEqual.pulseScaleNow(1, 1.3);
+    this._right._angleEqual.pulseScaleNow(1, 1.3);
+    this._left._angleBase.pulseScaleNow(1, 1.3);
+    this._right._angleBase.pulseScaleNow(1, 1.3);
+    this._left._sideBase._label.pulseScaleNow(1, 2);
+    this._right._sideBase._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 }

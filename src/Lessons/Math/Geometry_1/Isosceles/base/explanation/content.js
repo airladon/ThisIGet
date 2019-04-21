@@ -40,6 +40,10 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
+    const left = coll._left;
+    const right = coll._right;
+    const tri = coll._triangle;
+    const split = coll._split;
 
     this.addSection({
       title: 'Isosceles Triangle',
@@ -61,14 +65,14 @@ class Content extends PresentationLessonContent {
       modifiers: {
         two_sides: click(coll.pulseEqualSides, [coll], colors.sides),
       },
-      show: [coll._triangle._line, coll._triangle._side01, coll._triangle._side12],
+      show: [tri._line, tri._side01, tri._side12],
     });
 
     this.addSection({
       setContent: [
         'When |two sides| of a triangle are |equal|, the triangle\'s |angles| have a special relationship.',
       ],
-      show: [coll._triangle._line, coll._triangle._side01, coll._triangle._side12],
+      show: [tri._line, tri._side01, tri._side12],
     });
 
     let common = {
@@ -82,7 +86,7 @@ class Content extends PresentationLessonContent {
         equal_angles: click(this.next, [this], colors.angles),
       },
       show: [
-        coll._triangle._line, coll._triangle._side01, coll._triangle._side12,
+        tri._line, tri._side01, tri._side12,
       ],
     });
 
@@ -92,9 +96,9 @@ class Content extends PresentationLessonContent {
         equal_angles: click(coll.pulseTopAngles, [coll], colors.angles),
       },
       show: [
-        coll._triangle._line, coll._triangle._side01,
-        coll._triangle._side12, coll._split._line, coll._left._angleTop,
-        coll._right._angleTop,
+        tri._line, tri._side01,
+        tri._side12, coll._split._line, left._angleTop,
+        right._angleTop,
       ],
       transitionFromPrev: (done) => {
         coll.growSplit(done);
@@ -109,9 +113,9 @@ class Content extends PresentationLessonContent {
         'This line has some length, which we can label as |L|.',
       ],
       show: [
-        coll._triangle._line, coll._triangle._side01,
-        coll._triangle._side12, coll._split._line, coll._left._angleTop,
-        coll._right._angleTop,
+        tri._line, tri._side01,
+        tri._side12, coll._split._line, left._angleTop,
+        right._angleTop,
       ],
       setSteadyState: () => {
         coll.setScenarios('combined');
@@ -147,9 +151,9 @@ class Content extends PresentationLessonContent {
         separately: click(this.next, [this], colors.sides),
       },
       show: [
-        coll._triangle._line, coll._triangle._side01,
-        coll._triangle._side12, coll._split,
-        coll._left._angleTop, coll._right._angleTop,
+        tri._line, tri._side01, tri._side12,
+        split,
+        left._angleTop, right._angleTop,
       ],
       setSteadyState: () => {
         coll.setScenarios('combined');
@@ -160,16 +164,82 @@ class Content extends PresentationLessonContent {
         separately: click(coll.splitTriangle, [coll, null], colors.sides),
       },
       show: [
-        coll._left._line, coll._left._angleTop,
-        coll._right._line, coll._right._angleTop,
-        coll._left._sideEqual, coll._right._sideEqual,
-        coll._left._sideSplit, coll._right._sideSplit,
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
       ],
       transitionFromPrev: (done) => {
         coll.splitTriangle(done);
       },
       setSteadyState: () => {
         coll.setScenarios('separate');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'These two triangles have the same |Side-Angle-Side| combination are therefore, contruent.',
+      ],
+      modifiers: {
+        'Side-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Sas'], colors.diagram.action),
+      },
+      show: [
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+
+    common = {
+      setContent: ['Therefore, the remaining sides and angles are the |same| between the triangles.'],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    };
+    this.addSection(common, {
+      modifiers: { same: click(this.next, [this], colors.diagram.action) },
+      show: [
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        same: click(
+          coll.pulseRemainingLeftRightProperties,
+          [coll],
+          colors.diagram.action,
+        ),
+      },
+      show: [left, right],
+      transitionFromPrev: (done) => {
+        coll.pulseRemainingLeftRightProperties();
+        done();
+      },
+    });
+
+    common = {
+      setContent: ['If we now |recombine| these triangles, we can make a couple of observations.'],
+      show: [left, right],
+    };
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(this.next, [this], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(coll.joinTriangles, [coll, null], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll.joinTriangles(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('combined');
       },
     });
   }
