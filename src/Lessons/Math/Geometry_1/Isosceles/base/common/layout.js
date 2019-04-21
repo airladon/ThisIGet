@@ -39,8 +39,13 @@ export default function lessonLayout() {
       text,
     },
   });
-  const side = text => ({
-    label: { text, offset: 0.1, location: 'outside' },
+  const side = (text, linePosition = 0.5, location = 'outside') => ({
+    label: {
+      text,
+      offset: 0.1,
+      location,
+      linePosition,
+    },
   });
   layout.left = {
     name: 'left',
@@ -50,7 +55,7 @@ export default function lessonLayout() {
       points: [points[0], points[1], midPoint],
       close: true,
       angle: [angle('a'), angle('b'), angle('c')],
-      side: [side('A'), side('h'), side('B')],
+      side: [side('A'), side('L', 0.7, 'inside'), side('B')],
       color: colors.sides,
     },
     mods: {
@@ -68,7 +73,7 @@ export default function lessonLayout() {
       points: [points[2], midPoint, points[1]],
       close: true,
       angle: [angle('a'), angle('c'), angle('b')],
-      side: [side('B'), side('h'), side('A')],
+      side: [side('B'), side('L', 0.3, 'inside'), side('A')],
       color: colors.sides,
     },
     mods: {
@@ -101,12 +106,13 @@ export default function lessonLayout() {
     options: {
       width,
       vertexSpaceStart: 'start',
-      position: midPoint,
+      position: points[1],
       length: points[1][1] - midPoint[1],
-      angle: Math.PI / 2,
+      angle: -Math.PI / 2,
       label: {
-        text: 'h',
+        text: 'L',
         offset: 0.1,
+        linePosition: 0.7,
       },
       // angle: [angle('a'), angle(''), angle('a')],
       // side: [side('C'), side('C'), side('2B')],
