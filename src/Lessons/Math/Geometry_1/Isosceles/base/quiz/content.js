@@ -40,7 +40,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      setContent: ['Find the missing property:'],
       setEnterState: () => {},
       showOnly: [],
       show: [tri],
