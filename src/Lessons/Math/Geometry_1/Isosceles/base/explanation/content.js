@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const right = coll._right;
     const tri = coll._triangle;
     const split = coll._split;
+    const correction = coll._correction;
 
     this.addSection({
       title: 'Isosceles Triangle',
@@ -248,6 +249,7 @@ class Content extends PresentationLessonContent {
         coll.joinTriangles(done);
       },
       setSteadyState: () => {
+        correction.showAll();
         coll.setScenarios('combined');
       },
     });
@@ -261,7 +263,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         two_angles: click(this.next, [this], colors.diagram.action),
       },
-      show: [left, right],
+      show: [left, right, correction],
       setSteadyState: () => {
         coll.setScenarios('center');
       },
@@ -289,7 +291,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         two_angles: click(this.next, [this], colors.diagram.action),
       },
-      show: [left, right],
+      show: [left, right, correction],
       setSteadyState: () => {
         coll.setScenarios('center');
       },
