@@ -7,6 +7,7 @@ var details = {
   uid: 'base',
   qr: [
     'Main',
+    'SplitLine',
   ],
 };
 
