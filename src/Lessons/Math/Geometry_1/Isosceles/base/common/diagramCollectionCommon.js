@@ -87,6 +87,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._left._angleTop.hide();
     this._right._angleTop.hide();
     this._split._label.hide();
+    this._triangle._angle1.showAll();
     this.animations.new()
       .trigger({
         callback: () => {
@@ -96,6 +97,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       })
       .trigger({
         callback: () => {
+          this._triangle._angle1.hide();
           this._left._angleTop.showAll();
           this._right._angleTop.showAll();
           this.pulseTopAngles();
@@ -130,6 +132,12 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseTopAngles() {
     this._left._angleTop.pulseScaleNow(1, 1.3);
     this._right._angleTop.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEqualAngles() {
+    this._triangle._angle0.pulseScaleNow(1, 1.3);
+    this._triangle._angle2.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 

@@ -89,6 +89,15 @@ class Content extends PresentationLessonContent {
         tri._line, tri._side01, tri._side12,
       ],
     });
+    this.addSection(common, {
+      modifiers: {
+        line: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        tri._line, tri._side01, tri._side12, tri._angle1,
+      ],
+    });
 
     this.addSection(common, {
       modifiers: {
@@ -143,7 +152,7 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'We now have two triangles which we can now look at |separately|.',
+        'We now have two triangles which we can look at |separately|.',
       ],
     };
     this.addSection(common, {
@@ -177,7 +186,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'These two triangles have the same |Side-Angle-Side| combination are therefore, contruent.',
+        'These two triangles have the same |Side-Angle-Side| combination are therefore, |congruent|.',
       ],
       modifiers: {
         'Side-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Sas'], colors.diagram.action),
@@ -240,6 +249,62 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         coll.setScenarios('combined');
+      },
+    });
+
+    common = {
+      setContent: [
+        'First we can see that an isosceles triangle has |two_angles| that are equal. The equal angles are not the angle between the two equal sides.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(this.next, [this], colors.diagram.action),
+      },
+      show: [left, right],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+      },
+      show: [tri._line, tri._side01, tri._side12, tri._angle0, tri._angle2],
+      transitionFromPrev: (done) => {
+        coll.pulseEqualAngles();
+        done();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+
+    common = {
+      setContent: [
+        'Another observation is for an isosceles triangle relates to the line that splits the angle between the equal sides.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(this.next, [this], colors.diagram.action),
+      },
+      show: [left, right],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+      },
+      show: [tri._line, tri._side01, tri._side12, tri._angle0, tri._angle2],
+      transitionFromPrev: (done) => {
+        // coll.pulseEqualAngles();
+        done();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
       },
     });
   }

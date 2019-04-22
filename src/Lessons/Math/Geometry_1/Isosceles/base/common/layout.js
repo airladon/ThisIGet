@@ -47,6 +47,22 @@ export default function lessonLayout() {
       linePosition,
     },
   });
+
+  const bon2 = {
+    elements: {
+      b: 'b',
+      v: { symbol: 'vinculum' },
+      _2: '2',
+    },
+    forms: {
+      base: { frac: ['b', '_2', 'v'] },
+    },
+    scale: 0.6,
+    defaultFormAlignment: {
+      alignH: 'center',
+    },
+  };
+
   layout.left = {
     name: 'left',
     method: 'polyLine',
@@ -54,7 +70,7 @@ export default function lessonLayout() {
       width,
       points: [points[0], points[1], midPoint],
       close: true,
-      angle: [angle('a'), angle('b'), angle('c')],
+      angle: [angle('a'), angle(bon2), angle('c')],
       side: [side('A'), side('L', 0.7, 'inside'), side('B')],
       color: colors.sides,
     },
@@ -65,6 +81,7 @@ export default function lessonLayout() {
       },
     },
   };
+
   layout.right = {
     name: 'right',
     method: 'polyLine',
@@ -72,7 +89,7 @@ export default function lessonLayout() {
       width,
       points: [points[2], midPoint, points[1]],
       close: true,
-      angle: [angle('a'), angle('c'), angle('b')],
+      angle: [angle('a'), angle('c'), angle(bon2)],
       side: [side('B'), side('L', 0.3, 'inside'), side('A')],
       color: colors.sides,
     },
@@ -90,7 +107,7 @@ export default function lessonLayout() {
       width,
       points,
       close: true,
-      angle: [angle('a'), angle(''), angle('a')],
+      angle: [angle('a'), angle('b'), angle('a')],
       side: [side('A'), side('A'), side('2B')],
       color: colors.sides,
     },
@@ -124,11 +141,21 @@ export default function lessonLayout() {
       },
     },
   };
+
+  // layout.eqn = {
+  //   name: 'eqn',
+  //   method: 'addEquation',
+  //   elements: {
+  //     'a'
+  //   }
+  // };
+
   layout.addElements = [
     layout.left,
     layout.right,
     layout.triangle,
     layout.split,
+    // layout.eqn,
   ];
   return layout;
 }

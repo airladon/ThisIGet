@@ -13326,28 +13326,23 @@ function () {
 
       eqn.setCurrentForm(form, formType);
     } else {
-      // eslint-disable-next-line no-lonely-if
-      if (labelTextOrEquation.eqn === 'fraction') {
-        var defaultFracOptions = {
-          color: color,
-          scale: 0.5
-        };
-        var fracOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultFracOptions, labelTextOrEquation);
-        eqn = equations.fraction(fracOptions);
-        eqn.setCurrentForm('base');
-      } else {
-        // if (labelTextOrEquation.eqn === 'fractionPre') {
-        var _defaultFracOptions = {
-          color: color,
-          scale: 0.7,
-          fracScale: 0.5
-        };
-
-        var _fracOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, _defaultFracOptions, labelTextOrEquation);
-
-        eqn = equations.fractionPre(_fracOptions);
-        eqn.setCurrentForm('base');
-      }
+      // // eslint-disable-next-line no-lonely-if
+      // if (labelTextOrEquation.eqn === 'fraction') {
+      //   const defaultFracOptions = { color, scale: 0.5 };
+      //   const fracOptions = joinObjects({}, defaultFracOptions, labelTextOrEquation);
+      //   eqn = equations.fraction(fracOptions);
+      //   eqn.setCurrentForm('base');
+      // } else {
+      // // if (labelTextOrEquation.eqn === 'fractionPre') {
+      //   const defaultFracOptions = { color, scale: 0.7, fracScale: 0.5 };
+      //   const fracOptions = joinObjects({}, defaultFracOptions, labelTextOrEquation);
+      //   eqn = equations.fractionPre(fracOptions);
+      //   eqn.setCurrentForm('base');
+      // }
+      var defaultEqnOptions = {
+        color: color
+      };
+      eqn = equations.equation(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultEqnOptions, labelTextOrEquation));
     }
 
     this.eqn = eqn;
