@@ -55,6 +55,8 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _split: { _label: DiagramElementCollection; } & DiagramObjectLine;
 
+  lastOpposite: boolean;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -210,6 +212,18 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._right._angleBase.pulseScaleNow(1, 1.3);
     this._left._sideBase._label.pulseScaleNow(1, 1.7);
     this._right._sideBase._label.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseOpposites() {
+    if (this.lastOpposite) {
+      this._triangle._side01._label.pulseScaleNow(1, 2.5);
+      this._triangle._angle2.pulseScaleNow(1, 1.3);
+    } else {
+      this._triangle._side12._label.pulseScaleNow(1, 2.5);
+      this._triangle._angle0.pulseScaleNow(1, 1.3);
+    }
+    this.lastOpposite = !this.lastOpposite;
     this.diagram.animateNextFrame();
   }
 }

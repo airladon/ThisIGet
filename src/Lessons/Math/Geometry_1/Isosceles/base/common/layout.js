@@ -78,6 +78,7 @@ export default function lessonLayout() {
       scenarios: {
         combined: { position: [0, 0], scale: 1 },
         separate: { position: [-0.5, 0], scale: 1 },
+        summary: { position: [0, -0.2], scale: 1 },
       },
     },
   };
@@ -97,6 +98,7 @@ export default function lessonLayout() {
       scenarios: {
         combined: { position: [0, 0], scale: 1 },
         separate: { position: [0.5, 0], scale: 1 },
+        summary: { position: [0, -0.2], scale: 1 },
       },
     },
   };
@@ -114,6 +116,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: [0, 0], scale: 1 },
+        summary: { position: [0, 0], scale: 1 },
       },
     },
   };
@@ -138,6 +141,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: points[1], scale: 1 },
+        summary: { position: [points[1][0], points[1][1] - 0.2], scale: 1 },
       },
     },
   };
@@ -162,6 +166,11 @@ export default function lessonLayout() {
       close: false,
       color: colors.diagram.background, // [0, 1, 0, 1],
       width: width * 2,
+    },
+    mods: {
+      scenarios: {
+        summary: { position: [0, -0.2], scale: 1 },
+      },
     },
   };
 
