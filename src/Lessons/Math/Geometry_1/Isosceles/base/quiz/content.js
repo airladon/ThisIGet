@@ -34,28 +34,20 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
-    // const main = quiz._main;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    const tri = quiz._triangle;
 
     this.addSection({
       title: '',
       setContent: ['Question'],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
       setEnterState: () => {},
       showOnly: [],
-      // show: [main],
-      hide: [],
-      setSteadyState: () => {},
+      show: [tri],
+      setSteadyState: () => {
+        quiz.newProblem();
+        console.log(quiz._triangle)
+      },
       setLeaveState: () => {},
     });
   }

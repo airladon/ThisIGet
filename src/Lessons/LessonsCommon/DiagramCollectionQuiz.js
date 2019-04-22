@@ -39,7 +39,8 @@ const CommonQuizMixin = superclass => class extends superclass {
       this.selectMultipleChoice(this._choice.id, -1);
     }
     this.hasTouchableElements = true;
-    if (this._intput != null) {
+    if (this._input != null) {
+      this._input.show();
       this._input.enable();
       this._input.setValue('');
     }
@@ -54,6 +55,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     this._newProblem.hide();
     this._showAnotherAnswer.hide();
     if (this._input != null) {
+      this._input.show();
       this._input.enable();
       this._input.setValue('');
     }

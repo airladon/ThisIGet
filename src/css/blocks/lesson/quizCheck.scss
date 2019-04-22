@@ -116,6 +116,7 @@
   background-color: color('white', 'base');
   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
   font-weight: 200;
+  width: 4em;
 }
 
 .lesson__quiz_input::placeholder {
