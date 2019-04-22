@@ -5,7 +5,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonCollection from '../common/diagramCollectionCommon';
+// import CommonCollection from '../common/diagramCollectionCommon';
 
 const {
   Transform,
@@ -26,9 +26,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  // angle: number;
-  // side: number;
-
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -43,7 +40,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     );
     this.addCheck();
     this.addInput('input', '?', 3, 0);
-    // this.add('main', new CommonCollection(diagram, this.layout));
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     this.hasTouchableElements = true;
   }
@@ -175,9 +171,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (this._input.getValue().toString() === this.answer) {
       return 'correct';
     }
-    // if (this.answer === true) {
-    //   return 'correct';
-    // }
     return 'incorrect';
   }
 }

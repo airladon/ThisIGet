@@ -46,7 +46,6 @@ class Content extends PresentationLessonContent {
       show: [tri],
       setSteadyState: () => {
         quiz.newProblem();
-        console.log(quiz._triangle)
       },
       setLeaveState: () => {},
     });
