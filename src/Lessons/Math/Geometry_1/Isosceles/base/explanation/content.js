@@ -17,7 +17,7 @@ const {
   centerV,
   highlight,
   style,
-  // clickWord,
+  clickW,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -36,6 +36,7 @@ class Content extends PresentationLessonContent {
     this.loadQRs([
       'congruent_triangles/base',
       'adjacent_angles/base',
+      'triangle_introduction/base',
     ]);
   }
 
@@ -47,6 +48,7 @@ class Content extends PresentationLessonContent {
     const tri = coll._triangle;
     const split = coll._split;
     const correction = coll._correction;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Isosceles Triangle',
@@ -607,6 +609,75 @@ class Content extends PresentationLessonContent {
         _two_equal_sides: highlight(colors.sides),
         two_equal_angles: highlight(colors.angles),
         _two_equal_angles: highlight(colors.angles),
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'We can also use the knowledge that |two_angles_are_the_same| to consider the |relationship| between all |three angles| in an isosceles triangle.',
+      ]),
+      modifiers: {
+        two_angles_are_the_same: highlight(colors.angles),
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'We know that all angles in a triangle must add to |_180|, and in this case |two_angles| are the same.',
+      ],
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2,
+      ],
+      modifiers: {
+        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        _180: clickW(
+          '180º',
+          this.showQR,
+          [this, 'triangle_introduction/base', 'Main'],
+          colors.angles,
+        ),
+      },
+    });
+    this.addSection({
+      setContent: [
+        'Therefore:',
+      ],
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('1');
+        eqn.setScenario('top');
+      },
+    });
+    this.addSection({
+      setContent: [
+        'So if |a| is known:',
+      ],
+      modifiers: {
+        a: highlight(colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('b');
+        eqn.setScenario('top');
+      },
+    });
+    this.addSection({
+      setContent: [
+        'Or if |b| is known:',
+      ],
+      modifiers: {
+        b: highlight(colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('a');
+        eqn.setScenario('top');
       },
     });
   }
