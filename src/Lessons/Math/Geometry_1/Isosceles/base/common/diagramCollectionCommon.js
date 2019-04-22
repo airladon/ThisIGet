@@ -66,14 +66,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._left._angleEqual = this._left._angle0;
     this._left._angleBase = this._left._angle2;
     this._right._angleTop = this._right._angle2;
-    this._right._angleEqual = this._right._angle1;
-    this._right._angleBase = this._right._angle0;
+    this._right._angleEqual = this._right._angle0;
+    this._right._angleBase = this._right._angle1;
     this._left._sideEqual = this._left._side01;
     this._left._sideSplit = this._left._side12;
     this._left._sideBase = this._left._side20;
     this._right._sideEqual = this._right._side20;
     this._right._sideSplit = this._right._side12;
     this._right._sideBase = this._right._side01;
+    this._left._angleBase.autoRightAngle = false;
+    this._right._angleBase.autoRightAngle = false;
   }
 
   pulseEqualSides() {
@@ -144,6 +146,43 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseL() {
     this._split._label.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
+  }
+
+  pulseSplit() {
+    this._split.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLeftRightBaseLabel() {
+    this._left._sideBase._label.pulseScaleNow(1, 1.7);
+    this._right._sideBase._label.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLeftRightBaseAngles() {
+    this._left._angleBase.pulseScaleNow(1, 1.3);
+    this._right._angleBase.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLeftRightEqualAngles() {
+    this._left._angleEqual.pulseScaleNow(1, 1.3);
+    this._right._angleEqual.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLeftRightEqualSides() {
+    this._left._sideEqual._label.pulseScaleNow(1, 2);
+    this._right._sideEqual._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseRightAngle() {
+    this._left._angleBase.autoRightAngle = true;
+    this._right._angleBase.autoRightAngle = true;
+    this._left._angleBase.update();
+    this._right._angleBase.update();
+    this.pulseLeftRightBaseAngles();
   }
 
   pulseRemainingLeftRightProperties() {

@@ -27,13 +27,13 @@ export default function lessonLayout() {
     [1, -1],
   ];
   const midPoint = [0, -1];
-  const angle = text => ({
+  const angle = (text, autoRightAngle = false) => ({
     curve: {
       radius: 0.3,
       width,
       sides: 200,
     },
-    autoRightAngle: false,
+    autoRightAngle,
     color: colors.angles,
     label: {
       text,
@@ -48,20 +48,20 @@ export default function lessonLayout() {
     },
   });
 
-  const bon2 = {
+  const on2 = numerator => ({
     elements: {
-      b: 'b',
+      num: numerator,
       v: { symbol: 'vinculum' },
       _2: '2',
     },
     forms: {
-      base: { frac: ['b', '_2', 'v'] },
+      base: { frac: ['num', '_2', 'v'] },
     },
     scale: 0.6,
     defaultFormAlignment: {
       alignH: 'center',
     },
-  };
+  });
 
   layout.left = {
     name: 'left',
@@ -70,8 +70,8 @@ export default function lessonLayout() {
       width,
       points: [points[0], points[1], midPoint],
       close: true,
-      angle: [angle('a'), angle(bon2), angle('c')],
-      side: [side('A'), side('L', 0.7, 'inside'), side('B')],
+      angle: [angle('a'), angle(on2('b')), angle('c', true)],
+      side: [side('A'), side('L', 0.7, 'inside'), side(on2('B'))],
       color: colors.sides,
     },
     mods: {
@@ -89,8 +89,8 @@ export default function lessonLayout() {
       width,
       points: [points[2], midPoint, points[1]],
       close: true,
-      angle: [angle('a'), angle('c'), angle(bon2)],
-      side: [side('B'), side('L', 0.3, 'inside'), side('A')],
+      angle: [angle('a'), angle('c', true), angle(on2('b'))],
+      side: [side(on2('B')), side('L', 0.3, 'inside'), side('A')],
       color: colors.sides,
     },
     mods: {
@@ -137,7 +137,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: [0, 0], scale: 1 },
+        center: { position: points[1], scale: 1 },
       },
     },
   };

@@ -15,7 +15,8 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   centerV,
-  // highlight,
+  highlight,
+  style,
   // clickWord,
 } = Fig.tools.html;
 
@@ -34,6 +35,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'congruent_triangles/base',
+      'adjacent_angles/base',
     ]);
   }
 
@@ -256,12 +258,12 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'First we can see that an isosceles triangle has |two_angles| that are equal. The equal angles are not the angle between the two equal sides.',
+        'First we can see that an isosceles triangle has |two_angles| that are equal. The equal angles are the angles |not between| the two equal sides.',
       ],
     };
     this.addSection(common, {
       modifiers: {
-        two_angles: click(this.next, [this], colors.diagram.action),
+        two_angles: click(this.next, [this], colors.angles),
       },
       show: [left, right, correction],
       setSteadyState: () => {
@@ -284,12 +286,12 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'Another observation is for an isosceles triangle relates to the line that splits the angle between the equal sides.',
+        'Another observation relates to the |line| that splits the angle between the equal sides.',
       ],
     };
     this.addSection(common, {
       modifiers: {
-        two_angles: click(this.next, [this], colors.diagram.action),
+        line: click(this.next, [this], colors.sides),
       },
       show: [left, right, correction],
       setSteadyState: () => {
@@ -298,15 +300,89 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        line: click(coll.pulseSplit, [coll], colors.sides),
       },
-      show: [tri._line, tri._side01, tri._side12, tri._angle0, tri._angle2],
+      show: [
+        left._line, left._angleTop, left._angleBase, left._sideBase,
+        right._line, right._angleTop, right._angleBase, right._sideBase,
+        correction, split._line,
+      ],
       transitionFromPrev: (done) => {
-        // coll.pulseEqualAngles();
+        coll.pulseSplit();
         done();
       },
       setSteadyState: () => {
         coll.setScenarios('center');
+      },
+    });
+
+    common = {
+      show: [
+        left._line, left._angleTop, left._angleBase, left._sideBase,
+        right._line, right._angleTop, right._angleBase, right._sideBase,
+        correction, split._line,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    };
+    this.addSection(common, {
+      setContent: [
+        'This line splits the base side into |two_equal_lengths|.',
+      ],
+      modifiers: {
+        two_equal_lengths: click(coll.pulseLeftRightBaseLabel, [coll], colors.sides),
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'In addition, as the two |c| angles make a |supplementary| angle, then |_c| is 90º, and so the line joins the base side at a |right_angle|.',
+      ],
+      modifiers: {
+        c: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
+        _c: highlight(colors.angles),
+        supplementary: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.angles),
+        right_angle: click(coll.pulseRightAngle, [coll], colors.angles),
+      },
+      setLeaveState: () => {
+        left._angleBase.autoRightAngle = false;
+        right._angleBase.autoRightAngle = false;
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'So we see a triangle with two |equal_sides|, has two |equal_angles|, and the |line| that splits the third angle also splits the |opposite_side| equally and intersects at a |right_angle|.',
+      ]),
+      modifiers: {
+        equal_sides: click(coll.pulseLeftRightEqualSides, [coll], colors.sides),
+        equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
+        opposite_side: click(coll.pulseLeftRightBaseLabel, [coll], colors.sides),
+        right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
+        line: click(coll.pulseSplit, [coll], colors.sides),
+      },
+      show: [
+        left._line, left._angleTop, left._sideBase, left._angleEqual,
+        left._sideEqual,
+        right._line, right._angleTop, right._sideBase, right._angleEqual,
+        right._sideEqual, right._angleBase._curve,
+        correction, split._line,
+      ],
+      setSteadyState: () => {
+        right._angleBase.autoRightAngle = true;
+        right._angleBase.update();
+        left._angleTop.setColor(colors.disabled);
+        right._angleTop.setColor(colors.disabled);
+        split._line.setColor(colors.disabled);
+        // right._angleBase.setColor(colors.disabled);
+      },
+      setLeaveState: () => {
+        right._angleBase.autoRightAngle = false;
+        left._angleTop.setColor(colors.angles);
+        right._angleTop.setColor(colors.angles);
+        split._line.setColor(colors.sides);
+        // right._angleBase.setColor(colors.angles);
       },
     });
   }

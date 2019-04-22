@@ -12248,7 +12248,7 @@ function (_DiagramElementCollec) {
 
       if (this.autoRightAngle) {
         var right = this.shapes.collection();
-        var rightLength = optionsToUse.radius; // / Math.sqrt(2);
+        var rightLength = optionsToUse.radius * 0.707; // / Math.sqrt(2);
 
         right.add('line1', this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rightLength, 0), rightLength + optionsToUse.width / 2, optionsToUse.width, Math.PI / 2, this.color));
         right.add('line2', this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, rightLength), rightLength - optionsToUse.width / 2, optionsToUse.width, 0, this.color));
