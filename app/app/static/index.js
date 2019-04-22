@@ -25498,7 +25498,7 @@ baseColors.forEach(function (color) {
     paletteColorNames.push("--palette-".concat(color, "-").concat(shade));
   });
 });
-var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-quizCheck'];
+var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-qr-background'];
 function getCSSColors() {
   var customColorNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var colors = {};

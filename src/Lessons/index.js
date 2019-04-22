@@ -407,6 +407,7 @@ export default function getLessonIndex() {
           ],
           qr: [
             'Main',
+            'SplitLine',
           ],
         },
       },
