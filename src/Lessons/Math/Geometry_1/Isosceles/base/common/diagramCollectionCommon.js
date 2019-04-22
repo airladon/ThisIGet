@@ -21,34 +21,36 @@ export default class CommonCollection extends CommonDiagramCollection {
     _angle2: DiagramObjectAngle;
   } & DiagramObjectPolyLine;
 
+  _correction: DiagramObjectPolyLine;
+
   _left: {
-    _side01: DiagramObjectLine;
-    _side12: DiagramObjectLine;
-    _side20: DiagramObjectLine;
+    _side01: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _side12: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _side20: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
     _angleEqual: DiagramObjectAngle;
     _angleBase: DiagramObjectAngle;
-    _sideEqual: DiagramObjectLine;
-    _sideSplit: DiagramObjectLine;
-    _sideBase: DiagramObjectLine;
+    _sideEqual: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _sideSplit: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _sideBase: { _label: DiagramElementCollection; } & DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   _right: {
-    _side01: DiagramObjectLine;
-    _side12: DiagramObjectLine;
-    _side20: DiagramObjectLine;
+    _side01: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _side12: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _side20: { _label: DiagramElementCollection; } & DiagramObjectLine;
     _angle0: DiagramObjectAngle;
     _angle1: DiagramObjectAngle;
     _angle2: DiagramObjectAngle;
     _angleTop: DiagramObjectAngle;
     _angleEqual: DiagramObjectAngle;
     _angleBase: DiagramObjectAngle;
-    _sideEqual: DiagramObjectLine;
-    _sideSplit: DiagramObjectLine;
-    _sideBase: DiagramObjectLine;
+    _sideEqual: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _sideSplit: { _label: DiagramElementCollection; } & DiagramObjectLine;
+    _sideBase: { _label: DiagramElementCollection; } & DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   _split: { _label: DiagramElementCollection; } & DiagramObjectLine;
@@ -124,9 +126,15 @@ export default class CommonCollection extends CommonDiagramCollection {
   joinTriangles(done: ?() => void = null) {
     this.animations.cancelAll();
     this.setScenarios('separate');
+    this._correction.hide();
     this.animations.new()
       .scenarios({ target: 'combined', duration: 1 })
-      .whenFinished(done)
+      .whenFinished(() => {
+        this._correction.showAll();
+        if (done != null) {
+          done();
+        }
+      })
       .start();
     this.diagram.animateNextFrame();
   }
@@ -190,8 +198,18 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._right._angleEqual.pulseScaleNow(1, 1.3);
     this._left._angleBase.pulseScaleNow(1, 1.3);
     this._right._angleBase.pulseScaleNow(1, 1.3);
-    this._left._sideBase._label.pulseScaleNow(1, 2);
-    this._right._sideBase._label.pulseScaleNow(1, 2);
+    this._left._sideBase._label.pulseScaleNow(1, 1.7);
+    this._right._sideBase._label.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseRemainingLeftRightProperties2() {
+    this._left._sideEqual._label.pulseScaleNow(1, 2);
+    this._right._sideEqual._label.pulseScaleNow(1, 2);
+    this._left._angleBase.pulseScaleNow(1, 1.3);
+    this._right._angleBase.pulseScaleNow(1, 1.3);
+    this._left._sideBase._label.pulseScaleNow(1, 1.7);
+    this._right._sideBase._label.pulseScaleNow(1, 1.7);
     this.diagram.animateNextFrame();
   }
 }

@@ -19,7 +19,7 @@ export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
-
+  layout.position = [0, -0.1];
   const width = 0.02;
   const points = [
     [-1, -1],

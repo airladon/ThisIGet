@@ -20389,7 +20389,7 @@ function () {
     key: "setPosition",
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var position = pointOrX;
+      var position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(pointOrX);
 
       if (typeof pointOrX === 'number') {
         position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](pointOrX, y);
@@ -20412,7 +20412,7 @@ function () {
     key: "setScale",
     value: function setScale(scaleOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var scale = scaleOrX;
+      var scale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scaleOrX);
 
       if (typeof scaleOrX === 'number') {
         if (y == null) {
