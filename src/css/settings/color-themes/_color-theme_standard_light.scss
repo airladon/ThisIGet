@@ -61,7 +61,7 @@ $_color_theme-standard-light: (
     'construction7':  (color: 'cyan',    shade: 'base'),
     'construction8':  (color: 'green',   shade: 'base'),
     'construction9':  (color: 'red',     shade: 'base'),
-    'disabled':       (color: 'grey',   shade: 'base'),
+    'disabled':       (color: 'black',   shade: 'light'),
     'disabledDark':   (color: 'grey',   shade: 'dark'),
     'disabledDarker': (color: 'grey',   shade: 'darker'),
     'disabledDarkest': (color: 'grey',   shade: 'darkest'),
@@ -80,6 +80,8 @@ $_color_theme-standard-light: (
     'quizCheck':      (color: 'violet', shade: 'base'),
     'equation-border':(color: 'black', shade: 'dark'),
     'qr-background':  (color: 'black',  shade: 'darker'),
+    'qr-corners':     (color: 'grey',  shade: 'base'),
+    'qr-text':        (color: 'grey',  shade: 'light'),
   ),
   'presentation': (
     'background':       (color: 'grey',  shade: 'light'),

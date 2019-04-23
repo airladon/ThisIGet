@@ -5,12 +5,10 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonCollection from '../common/diagramCollectionCommon';
 
 const {
   Transform,
   DiagramElementPrimative,
-  Point,
 } = Fig;
 
 const { randomPoint } = Fig.tools.g2;
@@ -94,21 +92,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._quad._angle1.label.setText(`${a1}º`);
     this._quad._angle2.label.setText(`${a2}º`);
     this._quad._angle3.label.setText('?');
-    // this._quad._angle0.showAll();
-    // this._quad._angle1.showAll();
-    // this._quad._angle2.showAll();
-    // const angles0To2 =
-    //   parseInt(this._quad._angle0.label.getText(), 10)
-    //   + parseInt(this._quad._angle1.label.getText(), 10)
-    //   + parseInt(this._quad._angle2.label.getText(), 10);
-    // this._quad._angle3.showAll()
-    // this.answer = 360 - angles0To2;
   }
-
-  // showAnswer() {
-  //   super.showAnswer();
-  //   this.diagram.animateNextFrame();
-  // }
 
   findAnswer() {
     this._input.disable();
