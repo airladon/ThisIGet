@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,13 +11,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   click,
-//   centerV,
-// } = Fig.tools.html;
+const {
+  click,
+  //   centerV,
+  highlightWord,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,31 +33,51 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const rect = coll._rect;
+    const square = coll._square;
 
     this.addSection({
-      title: '',
+      title: 'Rectangle',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'A |rectangle| is a quadrangle with |all_angles_equal_to_90|. A rectangle\'s |opposite| sides are |parallel| and |equal| in length.',
+        `${new Definition('Rectangle', 'Latin', ['rectus', 'right', 'angulus', 'corner, angle']).html(colors.sides)}`,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      modifiers: {
+        opposite: click(coll.toggleOppositeSides, [coll], colors.diagram.action),
+        all_angles_equal_to_90: highlightWord('all angles equal to 90º', colors.angles),
+      },
+      show: [
+        rect._left, rect._right, rect._top, rect._bottom,
+        rect._bottomLeft, rect._topLeft, rect._topRight, rect._bottomRight,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setRectLabels('ABAB');
+        coll.resetColors();
+      },
+    });
+
+    this.addSection({
+      title: 'Rectangle',
+      setContent: [
+        'A |square| is a rectangle with |all sides equal|. Therefore all the angles in a square are |_90| and its opposite sides are |parallel|.',
+        `${new Definition('Square', 'Old French', ['esquare', 'square'], 'Latin', ['quadra', 'square']).html(colors.sides)}`,
+      ],
+      modifiers: {
+        opposite: click(coll.toggleOppositeSides, [coll], colors.diagram.action),
+        _90: highlightWord('90º', colors.angles),
+      },
+      show: [
+        rect._left, rect._right, rect._top, rect._bottom,
+        rect._bottomLeft, rect._topLeft, rect._topRight, rect._bottomRight,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setRectLabels('ABAB');
+        coll.resetColors();
+      },
     });
   }
 }
