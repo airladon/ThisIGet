@@ -41,12 +41,13 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
+    const congruent = coll._congruentTriangles;
 
     this.addSection({
       title: 'Introduction',
       setContent: style({ centerV: true }, [
-        'If two triangles have the same side lengths and angles, then they are |congruent|.',
-        'Sometimes, only |three| of the 6 side lengths and angles are needed to show two triangles are congruent.',
+        'If two triangles have the same |side lengths| and |angles|, then they are |congruent|.',
+        'Sometimes, only |three| of the side lengths and angles are needed to show two triangles are congruent.',
       ]),
     });
     this.addSection({
@@ -72,6 +73,7 @@ class Content extends PresentationLessonContent {
       show: [coll._left, coll._base, coll._right],
       setSteadyState: () => {
         coll.setScenarios('initial');
+        coll.updateLabels();
         coll.hasTouchableElements = false;
       },
     });
@@ -82,23 +84,26 @@ class Content extends PresentationLessonContent {
       ],
     };
     this.addSection(common, {
-      show: [coll._left._line, coll._base, coll._right._line],
+      show: [coll._left, coll._base, coll._right],
       setSteadyState: () => {
         coll.setScenarios('initial');
+        coll.updateLabels();
         coll.hasTouchableElements = false;
       },
     });
     this.addSection(common, {
-      show: [coll._left._line, coll._base, coll._right._line],
+      show: [coll._left, coll._base, coll._right],
       transitionFromPrev: (done) => {
         coll.animations.cancelAll();
         coll.animations.new()
           .scenarios({ target: 'center', duration: 1 })
+          .afterFrame(() => { coll.updateLabels(); })
           .whenFinished(done)
           .start();
       },
       setSteadyState: () => {
         coll.setScenarios('center');
+        coll.updateLabels();
         coll.hasTouchableElements = false;
       },
     });
@@ -110,7 +115,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         rotate: click(this.next, [this], colors.diagram.action),
       },
-      show: [coll._left._line, coll._base, coll._right._line],
+      show: [coll._left._line, coll._base._line, coll._right._line],
       setSteadyState: () => {
         coll.setScenarios('center');
         coll.hasTouchableElements = false;
@@ -121,7 +126,7 @@ class Content extends PresentationLessonContent {
         rotate: click(coll.createConstructionLines, [coll, null], colors.diagram.action),
       },
       show: [
-        coll._left._line, coll._base, coll._right._line,
+        coll._left._line, coll._base._line, coll._right._line,
         coll._leftCircle, coll._rightCircle,
       ],
       transitionFromPrev: (done) => {
@@ -142,7 +147,7 @@ class Content extends PresentationLessonContent {
         coll.toggleIntersects('top', done);
       },
       show: [
-        coll._left._line, coll._base, coll._right._line,
+        coll._left._line, coll._base._line, coll._right._line,
         coll._leftCircle, coll._rightCircle,
       ],
       setSteadyState: () => {
@@ -155,7 +160,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: 'Are these the same triangles or different?',
       show: [
-        coll._left._line, coll._base, coll._right._line,
+        coll._left._line, coll._base._line, coll._right._line,
         coll._leftCircle, coll._rightCircle,
       ],
       setSteadyState: () => {
@@ -174,7 +179,7 @@ class Content extends PresentationLessonContent {
         right: click(coll.pulseRightLabels, [coll], colors.diagram.action),
       },
       show: [
-        coll._left._line, coll._base, coll._right._line,
+        coll._left._line, coll._base._line, coll._right._line,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom._line, coll._rightBottom._line,
       ],
@@ -187,7 +192,7 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'We can also |draw| a line from the top triangle point to the bottom.',
+      setContent: 'We can also |draw| a line from the top intersect point to the bottom.',
       setSteadyState: () => {
         coll.setScenarios('center');
         coll.setScenarios('default');
@@ -200,7 +205,7 @@ class Content extends PresentationLessonContent {
         draw: click(this.next, [this], colors.sides),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom,
       ],
@@ -214,7 +219,7 @@ class Content extends PresentationLessonContent {
         ),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom,
         coll._constructionLine,
@@ -233,7 +238,7 @@ class Content extends PresentationLessonContent {
         coll.updateLabels();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
       ],
@@ -283,7 +288,7 @@ class Content extends PresentationLessonContent {
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
       ],
@@ -294,7 +299,7 @@ class Content extends PresentationLessonContent {
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -318,7 +323,7 @@ class Content extends PresentationLessonContent {
         coll.setDefaultColors();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -343,7 +348,8 @@ class Content extends PresentationLessonContent {
         coll.colorRightIsosceles();
       },
       transitionFromPrev: (done) => {
-        coll.pulseRightIsosceles(done);
+        coll.pulseRightIsosceles();
+        done();
       },
     });
 
@@ -368,7 +374,7 @@ class Content extends PresentationLessonContent {
         two_equal_angles: click(this.next, [this], colors.angles),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -379,7 +385,7 @@ class Content extends PresentationLessonContent {
         two_equal_angles: click(coll.pulseRightIsoscelesAngles, [coll], colors.angles),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -412,7 +418,7 @@ class Content extends PresentationLessonContent {
         coll.colorRightIsosceles();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftCircle, coll._rightCircle,
         coll._leftBottom, coll._rightBottom, coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -424,7 +430,7 @@ class Content extends PresentationLessonContent {
         coll.colorRightIsosceles();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftBottom, coll._rightBottom,
         coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -436,7 +442,7 @@ class Content extends PresentationLessonContent {
         coll.colorTopBottomTriangles();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftBottom, coll._rightBottom,
         coll._constructionLine,
         coll._angleTopLeft, coll._angleBottomLeft,
@@ -448,14 +454,14 @@ class Content extends PresentationLessonContent {
         coll.colorTopBottomTriangles();
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftBottom, coll._rightBottom,
         coll._angleTop, coll._angleBottom,
       ],
     });
 
     this.addSection({
-      setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the same.',
+      setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the |same|.',
       modifiers: {
         'Side-Angle-Side': click(
           this.showQR,
@@ -466,7 +472,7 @@ class Content extends PresentationLessonContent {
         bottom: click(coll.pulseBottomTriangle, [coll], colors.sides),
       },
       show: [
-        coll._left, coll._base, coll._right,
+        coll._left, coll._base._line, coll._right,
         coll._leftBottom, coll._rightBottom,
         coll._angleTop, coll._angleBottom,
       ],
@@ -482,6 +488,31 @@ class Content extends PresentationLessonContent {
       setEnterState: () => {
         coll.colorTopBottomTriangles();
       },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'So if you know |three side lengths|, there is only one triangle that can be made, with one set of angles.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'If two triangles share the same |side_lengths|, then they will be |congruent|.',
+        'This case is often called the |Side Side Side| case.',
+      ],
+      modifiers: {
+        side_lengths: highlight(colors.sides),
+      },
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle1, congruent._tri2._angle1,
+        congruent._tri1._angle2, congruent._tri2._angle2,
+        congruent._tri1._angle0, congruent._tri2._angle0,
+      ],
     });
   }
 }

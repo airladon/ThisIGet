@@ -43,6 +43,13 @@ export default function lessonLayout() {
     name: 'base',
     options: {
       length: hypotenuse,
+      label: {
+        text: 'C',
+        offset: 0.1,
+        location: 'outside',
+        // subLocation: 'left',
+        orientation: 'horizontal',
+      },
     },
     mods: {
       scenarios: {
@@ -63,7 +70,7 @@ export default function lessonLayout() {
       label: {
         text: 'A',
         offset: 0.1,
-        location: 'top',
+        location: 'outside',
         orientation: 'horizontal',
       },
     },
@@ -104,6 +111,7 @@ export default function lessonLayout() {
         text: 'B',
         offset: 0.1,
         location: 'top',
+        subLocation: 'left',
         orientation: 'horizontal',
       },
     },
@@ -237,6 +245,83 @@ export default function lessonLayout() {
     'angleBottom', 'a + b', intersectBottom, Math.PI / 3, Math.PI / 2,
   );
 
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////////
+  const angleCongruent = text => ({
+    color: colors.angles,
+    curve: {
+      radius: 0.4,
+      width: layout.width,
+      sides: 200,
+    },
+    label: {
+      text,
+      scale: 0.8,
+    },
+  });
+
+  const sideCongruent = text => ({
+    color: colors.sides,
+    label: {
+      text,
+      scale: 0.8,
+      offset: 0.1,
+      location: 'outside',
+    },
+  });
+
+  const triangle = {
+    method: 'polyLine',
+    options: {
+      points: [
+        [0.7, 0.8],
+        [1, -0.7],
+        [-1.2, -0.7],
+      ],
+      width: layout.width,
+      color: colors.sides,
+      close: true,
+      angle: [
+        angleCongruent('c'),
+        angleCongruent('b'),
+        angleCongruent('a'),
+      ],
+      side: [
+        sideCongruent('A'),
+        sideCongruent('B'),
+        sideCongruent('C'),
+      ],
+    },
+    mods: {
+      scenarios: {
+        default: { position: [-1.4, -0.1], rotation: 0, scale: 1 },
+      },
+    },
+  };
+
+  layout.tri1 = joinObjects({}, triangle, { name: 'tri1' });
+  layout.tri2 = joinObjects({}, triangle, {
+    name: 'tri2',
+    mods: {
+      scenarios: {
+        default: { position: [1.4, -0.1], rotation: 0, scale: 1 },
+      },
+    },
+  });
+
+  layout.congruentTriangles = {
+    name: 'congruentTriangles',
+    method: 'collection',
+    addElements: [
+      layout.tri1,
+      layout.tri2,
+    ],
+  };
   layout.addElements = [
     leftCircle,
     rightCircle,
@@ -252,6 +337,7 @@ export default function lessonLayout() {
     right,
     leftBottom,
     rightBottom,
+    layout.congruentTriangles,
   ];
   return layout;
 }

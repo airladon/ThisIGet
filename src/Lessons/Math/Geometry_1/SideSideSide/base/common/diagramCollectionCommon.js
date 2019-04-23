@@ -92,6 +92,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._right.isShown) {
       this._right.updateLabel();
     }
+    if (this._base.isShown) {
+      this._base.updateLabel();
+    }
     if (this._leftBottom.isShown) {
       this._leftBottom.updateLabel();
     }
@@ -217,7 +220,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._base.pulseWidth();
     this.diagram.animateNextFrame();
   }
-  
+
   pulseBottomTriangle() {
     this._leftBottom.pulseWidth();
     this._rightBottom.pulseWidth();
