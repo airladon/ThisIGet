@@ -34,6 +34,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'congruent_triangles/base',
+      'isosceles_triangles/base',
     ]);
   }
 
@@ -81,14 +82,14 @@ class Content extends PresentationLessonContent {
       ],
     };
     this.addSection(common, {
-      show: [coll._left, coll._base, coll._right],
+      show: [coll._left._line, coll._base, coll._right._line],
       setSteadyState: () => {
         coll.setScenarios('initial');
         coll.hasTouchableElements = false;
       },
     });
     this.addSection(common, {
-      show: [coll._left, coll._base, coll._right],
+      show: [coll._left._line, coll._base, coll._right._line],
       transitionFromPrev: (done) => {
         coll.animations.cancelAll();
         coll.animations.new()
@@ -103,11 +104,205 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'We can then rotate the two end sides to see where they meet to form a triangle.'
+      setContent: 'We can then |rotate| the two end sides to see where they meet to form a triangle.',
     };
     this.addSection(common, {
-      
-    })
+      modifiers: {
+        rotate: click(this.next, [this], colors.diagram.action),
+      },
+      show: [coll._left._line, coll._base, coll._right._line],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.hasTouchableElements = false;
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        rotate: click(coll.createConstructionLines, [coll, null], colors.diagram.action),
+      },
+      show: [
+        coll._left._line, coll._base, coll._right._line,
+        coll._leftCircle, coll._rightCircle,
+      ],
+      transitionFromPrev: (done) => {
+        coll.createConstructionLines(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection(common, {
+      setContent: 'The two |intersect| points of the circles, are the two side rotations where triangles can be formed.',
+      modifiers: {
+        intersect: click(coll.toggleIntersects, [coll, null, null], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll.toggleIntersects('top', done);
+      },
+      show: [
+        coll._left._line, coll._base, coll._right._line,
+        coll._leftCircle, coll._rightCircle,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('top');
+        coll.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection({
+      setContent: 'Are these the same triangles or different?',
+      show: [
+        coll._left._line, coll._base, coll._right._line,
+        coll._leftCircle, coll._rightCircle,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll._leftBottom._line.showAll();
+        coll._rightBottom._line.showAll();
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+      },
+    });
+
+    this.addSection({
+      setContent: 'First we know the two |left| sides are the same length, and the two |right| sides are the same length.',
+      modifiers: {
+        left: click(coll.pulseLeftLabels, [coll], colors.diagram.action),
+        right: click(coll.pulseRightLabels, [coll], colors.diagram.action),
+      },
+      show: [
+        coll._left._line, coll._base, coll._right._line,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom._line, coll._rightBottom._line,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+    });
+
+    common = {
+      setContent: 'We can also |draw| a line from the top triangle point to the bottom.',
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        draw: click(this.next, [this], colors.sides),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        draw: click(
+          coll._constructionLine.grow,
+          [coll._constructionLine, 0, 0.7, false, null],
+          colors.sides,
+        ),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom,
+        coll._constructionLine,
+      ],
+      transitionFromPrev: (done) => {
+        coll._constructionLine.grow(0, 0.7, false, done);
+      },
+    });
+
+    common = {
+      setContent: 'We now have two |isosceles| triangles of which we will first look at the |left|.',
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+      ],
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        left: click(this.next, [this], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        left: click(coll.pulseLeftIsosceles, [coll], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+      setEnterState: () => {
+        coll.colorLeftIsosceles();
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseLeftIsosceles();
+        done();
+      },
+    });
+
+    common = {
+      setContent: 'We know an |isosceles| triangle\'s |two_angles| opposite the two equal sides will be equal.',
+      setEnterState: () => {
+        coll.colorLeftIsosceles();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(this.next, [this], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        two_angles: click(coll.pulseLeftIsoscelesAngles, [coll], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseLeftIsoscelesAngles();
+        done();
+      },
+    });
   }
 }
 
