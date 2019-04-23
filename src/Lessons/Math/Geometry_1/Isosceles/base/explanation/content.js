@@ -74,6 +74,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Angle Relationship',
       setContent: [
         'When |two sides| of a triangle are |equal|, the triangle\'s |angles| have a special relationship.',
       ],
@@ -292,6 +293,7 @@ class Content extends PresentationLessonContent {
       ],
     };
     this.addSection(common, {
+      title: 'Split Line',
       modifiers: {
         line: click(this.next, [this], colors.sides),
       },
@@ -387,6 +389,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Triangle With Two Equal Angles',
       setContent: [
         'We can use the same process to show a triangle with two |equal_angles|, also has two equal sides and is therefore an |isosceles| triangle.',
       ],
@@ -613,6 +616,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Calculate All Angles',
       setContent: style({ centerV: true }, [
         'We can also use the knowledge that |two_angles_are_the_same| to consider the |relationship| between all |three angles| in an isosceles triangle.',
       ]),

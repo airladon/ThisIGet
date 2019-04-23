@@ -525,6 +525,31 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    side_side_side: new LessonDescription({
+      name: 'Side-Side-Side Congruency',
+      path: '/Lessons/Math/Geometry_1/SideSideSide',
+      uid: 'side_side_side',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Explanation_of_version_here.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+          ],
+        },
+      },
+      dependencies: [
+        'isosceles_triangles',
+      ],
+      enabled: true,
+    }),
     calculating_pi: new LessonDescription({
       name: 'Calculating Pi',
       path: '/Lessons/Math/Geometry_1/ToDo/Calculating Pi',
