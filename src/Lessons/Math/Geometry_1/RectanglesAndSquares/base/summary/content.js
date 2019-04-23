@@ -66,14 +66,11 @@ class Content extends PresentationLessonContent {
         `${new Definition('Square', 'Old French', ['esquare', 'square'], 'Latin', ['quadra', 'square']).html(colors.sides)}`,
       ],
       modifiers: {
-        opposite: click(coll.toggleOppositeSides, [coll], colors.diagram.action),
         _90: highlightWord('90º', colors.angles),
       },
       show: [square],
       setSteadyState: () => {
         coll.setScenarios('center');
-        coll.setRectLabels('ABAB');
-        coll.resetColors();
       },
     });
   }

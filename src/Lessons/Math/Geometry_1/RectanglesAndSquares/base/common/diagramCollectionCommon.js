@@ -5,6 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   // DiagramElementPrimative,
+  DiagramObjectPolyLine,
   DiagramObjectAngle,
   DiagramObjectLine,
   DiagramElementCollection,
@@ -26,6 +27,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _bottomRightDiag: DiagramObjectAngle;
     _topLeftDiag: DiagramObjectAngle;
   } & DiagramElementCollection;
+
+  _square: DiagramObjectPolyLine;
 
   opposite: boolean;
   triangle: boolean;
