@@ -37,7 +37,7 @@ export default function lessonLayout() {
         },
       },
       pad: {
-        color: colors.angles,
+        color: colors.diagram.background,
         isMovable: true,
       },
     },

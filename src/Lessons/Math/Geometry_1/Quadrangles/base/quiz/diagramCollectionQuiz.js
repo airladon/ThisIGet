@@ -16,7 +16,7 @@ const {
 const { randomPoint } = Fig.tools.g2;
 const {
   removeRandElement,
-//   round,
+  round,
 //   rand
 } = Fig.tools.math;
 
@@ -44,13 +44,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.addCheck();
     this.addInput('input', '?', 3, 0);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
-    // this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 
-  // tryAgain() {
-  //   super.tryAgain();
-  // }
   randomQuadPoints() {
     const points = [
       randomPoint(this.layout.quadrants.quad1),
@@ -89,15 +85,24 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     if (totalAngle > Math.PI * 2.01) {
       this._quad.reversePoints();
     }
-    this._quad._angle0.showAll();
-    this._quad._angle1.showAll();
-    this._quad._angle2.showAll();
-    const angles0To2 =
-      parseInt(this._quad._angle0.label.getText(), 10)
-      + parseInt(this._quad._angle1.label.getText(), 10)
-      + parseInt(this._quad._angle2.label.getText(), 10);
-
-    this.answer = 360 - angles0To2;
+    this._quad.showAngles();
+    const a0 = round(this._quad._angle0.angle * 180 / Math.PI, 0);
+    const a1 = round(this._quad._angle1.angle * 180 / Math.PI, 0);
+    const a2 = round(this._quad._angle2.angle * 180 / Math.PI, 0);
+    this.answer = 360 - a0 - a1 - a2;
+    this._quad._angle0.label.setText(`${a0}º`);
+    this._quad._angle1.label.setText(`${a1}º`);
+    this._quad._angle2.label.setText(`${a2}º`);
+    this._quad._angle3.label.setText('?');
+    // this._quad._angle0.showAll();
+    // this._quad._angle1.showAll();
+    // this._quad._angle2.showAll();
+    // const angles0To2 =
+    //   parseInt(this._quad._angle0.label.getText(), 10)
+    //   + parseInt(this._quad._angle1.label.getText(), 10)
+    //   + parseInt(this._quad._angle2.label.getText(), 10);
+    // this._quad._angle3.showAll()
+    // this.answer = 360 - angles0To2;
   }
 
   // showAnswer() {
