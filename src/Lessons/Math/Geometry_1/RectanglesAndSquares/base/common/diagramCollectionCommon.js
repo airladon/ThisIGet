@@ -84,6 +84,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseDiagonal() {
+    this._rect._diagonal.pulseWidth({ line: 5 });
+    this.diagram.animateNextFrame();
+  }
+
   pulseLeftRight() {
     this._rect._left.pulseWidth({ line: 5 });
     this._rect._right.pulseWidth({ line: 5 });
@@ -112,6 +117,12 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseBottomRightAngles() {
     this._rect._bottomLeft.pulseScaleNow(1, 1.3);
     this._rect._bottomRight.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAlternateAngles() {
+    this._rect._bottomRightDiag.pulseScaleNow(1, 1.3);
+    this._rect._topLeftDiag.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 

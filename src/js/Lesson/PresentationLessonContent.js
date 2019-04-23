@@ -15,7 +15,7 @@ const {
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
-const { setOnClicks, applyModifiers } = Fig.tools.html;
+const { setOnClicks, applyModifiers, click } = Fig.tools.html;
 
 function initializeItemSelector(
   methodToExecute: Function,
@@ -894,6 +894,14 @@ class PresentationLessonContent extends SimpleLessonContent {
       star.style.top = `${cssPosition.y - rect.height / 2}px`;
       star.addEventListener(this.animationEnd, animationEnd.bind(this));
     }
+  }
+
+  bindNext(color: Array<number> = [1, 0, 0, 1]) {
+    return click(this.next, [this], color);
+  }
+
+  bindShowQR(uid: string, qrid: string, color: Array<number> = this.diagram.layout.colors.diagram.action) {
+    return click(this.showQR, [this, uid, qrid], color);
   }
 
   addStar() {

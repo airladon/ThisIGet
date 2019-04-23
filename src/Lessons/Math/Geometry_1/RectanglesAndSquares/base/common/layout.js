@@ -88,7 +88,7 @@ export default function lessonLayout() {
       line('left', points[0], h, Math.PI / 2),
       line('right', points[2], h, -Math.PI / 2),
       line('bottom', points[3], w, Math.PI),
-      line('diagonal', points[3], diagLength, diagAngle),
+      line('diagonal', points[1], diagLength, -aAngle),
     ],
     mods: {
       scenarios: {
