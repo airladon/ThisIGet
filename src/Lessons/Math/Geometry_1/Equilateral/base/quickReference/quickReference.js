@@ -8,13 +8,13 @@ import version from '../version';
 import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
-//   highlight,
+const {
+  click,
+  highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QREquilateral extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -31,21 +31,30 @@ export default class QRBoilerplate extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
+    const coll = this._collection;
+    // const tri = coll._triangle;
+    const { colors } = this.layout;
+
+    const modifiers = {
+      three_equal_sides: click(coll.pulseSides, [coll], colors.sides),
+      three_equal_angles: click(coll.pulseAngles, [coll], colors.angles),
+      sides: highlight(colors.sides),
+      angles: highlight(colors.angles),
+    };
     this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    this.setDescription([
+      'An |equilateral| triangle has |three_equal_sides| and |three_equal_angles|.',
+      '|Any| triangle with three equal |sides| |or| three equal |angles| will be an equilateral triangle.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    collection.show();
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    collection._triangle.showAll();
+    this.transformToQRWindow(collection, new Rect(-1.3, -1, 2.6, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -58,7 +67,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
+    Main: QREquilateral,
     // QR2: QRBoilerplate2,
   };
 }
