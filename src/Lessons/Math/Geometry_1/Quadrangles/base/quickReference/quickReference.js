@@ -59,7 +59,6 @@ function attachQuickReference1() {
   }
   window.quickReference[details.details.uid][version.details.uid] = {
     Main: QRQuadrangle,
-    // QR2: QRBoilerplate2,
   };
 }
 

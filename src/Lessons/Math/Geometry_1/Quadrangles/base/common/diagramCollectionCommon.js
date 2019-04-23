@@ -6,6 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   // DiagramElementPrimative, DiagramObjectAngle,
   DiagramObjectLine,
+  DiagramObjectPolyLine,
   // DiagramElementCollection,
   Transform,
 } = Fig;
@@ -14,6 +15,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
   _line3: DiagramObjectLine;
+  _quad1: DiagramObjectPolyLine;
+  _quad2: DiagramObjectPolyLine;
+  _quad3: DiagramObjectPolyLine;
 
   constructor(
     diagram: CommonLessonDiagram,
