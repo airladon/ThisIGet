@@ -15,7 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   click,
   style,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -389,6 +389,70 @@ class Content extends PresentationLessonContent {
         coll.pulseRightIsoscelesAngles();
         done();
       },
+    });
+
+    common = {
+      setContent: 'Lets not simplify this diagram by removing unnecessary lines and joining angles |a| and |b|.',
+      modifiers: {
+        a: highlight(colors.angles),
+        b: highlight(colors.angles),
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll._angleBottomLeft.setScenario('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+    };
+    this.addSection(common, {
+      setEnterState: () => {
+        coll.colorRightIsosceles();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+        coll._angleTopRight, coll._angleBottomRight,
+      ],
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        coll.colorRightIsosceles();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftBottom, coll._rightBottom,
+        coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+        coll._angleTopRight, coll._angleBottomRight,
+      ],
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        coll.colorTopBottomTriangles();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftBottom, coll._rightBottom,
+        coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+        coll._angleTopRight, coll._angleBottomRight,
+      ],
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        coll.colorTopBottomTriangles();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftBottom, coll._rightBottom,
+        coll._angleTop, coll._angleBottom,
+      ],
     });
   }
 }

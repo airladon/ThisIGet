@@ -24,7 +24,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   _angleTopLeft: { _label: DiagramElementCollection } & DiagramObjectAngle;
   _angleBottomLeft: { _label: DiagramElementCollection } & DiagramObjectAngle;
   _angleTopRight: { _label: DiagramElementCollection } & DiagramObjectAngle;
+  _angleTop: { _label: DiagramElementCollection } & DiagramObjectAngle;
   _angleBottomRight: { _label: DiagramElementCollection } & DiagramObjectAngle;
+  _angleBottom: { _label: DiagramElementCollection } & DiagramObjectAngle;
   location: 'top' | 'bottom';
 
   constructor(
@@ -102,6 +104,18 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._angleTopLeft.isShown) {
       this._angleTopLeft.updateLabel();
     }
+    if (this._angleBottomRight.isShown) {
+      this._angleBottomRight.updateLabel();
+    }
+    if (this._angleTopRight.isShown) {
+      this._angleTopRight.updateLabel();
+    }
+    if (this._angleTop.isShown) {
+      this._angleTop.updateLabel();
+    }
+    if (this._angleBottom.isShown) {
+      this._angleBottom.updateLabel();
+    }
     this.diagram.animateNextFrame();
   }
 
@@ -158,6 +172,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._base.setColor(this.layout.colors.disabled);
     this._angleTopRight.setColor(this.layout.colors.disabled);
     this._angleBottomRight.setColor(this.layout.colors.disabled);
+    this.diagram.animateNextFrame();
+  }
+
+  colorTopBottomTriangles() {
+    this.setDefaultColors();
+    // this._right.setColor(this.layout.colors.disabled);
+    // this._rightBottom.setColor(this.layout.colors.disabled);
+    // this._base.setColor(this.layout.colors.disabled);
+    // this._angleTopRight.setColor(this.layout.colors.disabled);
+    // this._angleBottomRight.setColor(this.layout.colors.disabled);
+    this._constructionLine.setColor(this.layout.colors.disabled);
     this.diagram.animateNextFrame();
   }
 

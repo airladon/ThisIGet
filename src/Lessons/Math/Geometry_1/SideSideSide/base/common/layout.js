@@ -230,6 +230,12 @@ export default function lessonLayout() {
   const angleBottomRight = angle(
     'angleBottomRight', 'b', intersectBottom, Math.PI / 3, Math.PI / 6,
   );
+  const angleTop = angle(
+    'angleTop', 'a + b', intersectTop, Math.PI + Math.PI / 6, Math.PI / 2,
+  );
+  const angleBottom = angle(
+    'angleBottom', 'a + b', intersectBottom, Math.PI / 3, Math.PI / 2,
+  );
 
   layout.addElements = [
     leftCircle,
@@ -238,6 +244,8 @@ export default function lessonLayout() {
     angleBottomLeft,
     angleTopRight,
     angleBottomRight,
+    angleTop,
+    angleBottom,
     base,
     constructionLine,
     left,
