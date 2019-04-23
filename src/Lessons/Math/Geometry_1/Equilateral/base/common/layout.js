@@ -45,6 +45,11 @@ export default function lessonLayout() {
         curve: { radius: 0.3, sides: 100, width },
       },
     },
+    mods: {
+      scenarios: {
+        summary: { position: [0, -0.3] },
+      },
+    },
   };
   const angle = {
     name: 'angle',

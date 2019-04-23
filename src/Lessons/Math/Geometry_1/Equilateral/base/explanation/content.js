@@ -43,7 +43,6 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const tri = coll._triangle;
-    const angle = coll._angle;
 
     this.addSection({
       setContent: [

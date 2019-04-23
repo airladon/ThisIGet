@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,13 +11,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   click,
+const {
+  click,
+  highlight,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -32,31 +33,25 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const tri = coll._triangle;
 
     this.addSection({
-      title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'An |equilateral| triangle has |three_equal_sides| and |three_equal_angles|. |Any| triangle with three equal |sides| |or| three equal |angles| will be an equilateral triangle.',
+        `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html()}`,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      modifiers: {
+        three_equal_sides: click(coll.pulseSides, [coll], colors.sides),
+        three_equal_angles: click(coll.pulseAngles, [coll], colors.angles),
+        sides: highlight(colors.sides),
+        angles: highlight(colors.angles),
+      },
+      show: [tri],
+      setSteadyState: () => {
+        tri.setScenario('summary');
+      },
     });
   }
 }
