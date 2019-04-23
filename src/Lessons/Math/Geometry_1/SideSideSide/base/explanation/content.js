@@ -392,7 +392,7 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'Lets not simplify this diagram by removing unnecessary lines and joining angles |a| and |b|.',
+      setContent: 'Lets now |simplify this diagram| by removing unnecessary lines and joining angles |a| and |b|.',
       modifiers: {
         a: highlight(colors.angles),
         b: highlight(colors.angles),
@@ -400,7 +400,6 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.setScenarios('center');
         coll.setScenarios('default');
-        coll._angleBottomLeft.setScenario('default');
         coll.hasTouchableElements = false;
         coll.updateLabels();
       },
@@ -453,6 +452,36 @@ class Content extends PresentationLessonContent {
         coll._leftBottom, coll._rightBottom,
         coll._angleTop, coll._angleBottom,
       ],
+    });
+
+    this.addSection({
+      setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the same.',
+      modifiers: {
+        'Side-Angle-Side': click(
+          this.showQR,
+          [this, 'congruent_triangles/base', 'Sas'],
+          colors.diagram.action,
+        ),
+        top: click(coll.pulseTopTriangle, [coll], colors.sides),
+        bottom: click(coll.pulseBottomTriangle, [coll], colors.sides),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftBottom, coll._rightBottom,
+        coll._angleTop, coll._angleBottom,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+      setEnterState: () => {
+        coll.colorTopBottomTriangles();
+      },
     });
   }
 }

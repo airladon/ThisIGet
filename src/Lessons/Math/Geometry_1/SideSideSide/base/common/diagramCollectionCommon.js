@@ -177,11 +177,6 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   colorTopBottomTriangles() {
     this.setDefaultColors();
-    // this._right.setColor(this.layout.colors.disabled);
-    // this._rightBottom.setColor(this.layout.colors.disabled);
-    // this._base.setColor(this.layout.colors.disabled);
-    // this._angleTopRight.setColor(this.layout.colors.disabled);
-    // this._angleBottomRight.setColor(this.layout.colors.disabled);
     this._constructionLine.setColor(this.layout.colors.disabled);
     this.diagram.animateNextFrame();
   }
@@ -213,6 +208,20 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.colorRightIsosceles();
     this._angleTopRight.pulseScaleNow(1, 1.3);
     this._angleBottomRight.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTopTriangle() {
+    this._left.pulseWidth();
+    this._right.pulseWidth();
+    this._base.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+  
+  pulseBottomTriangle() {
+    this._leftBottom.pulseWidth();
+    this._rightBottom.pulseWidth();
+    this._base.pulseWidth();
     this.diagram.animateNextFrame();
   }
 }
