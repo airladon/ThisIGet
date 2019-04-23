@@ -69,10 +69,7 @@ class Content extends PresentationLessonContent {
         opposite: click(coll.toggleOppositeSides, [coll], colors.diagram.action),
         _90: highlightWord('90º', colors.angles),
       },
-      show: [
-        rect._left, rect._right, rect._top, rect._bottom,
-        rect._bottomLeft, rect._topLeft, rect._topRight, rect._bottomRight,
-      ],
+      show: [square],
       setSteadyState: () => {
         coll.setScenarios('center');
         coll.setRectLabels('ABAB');
