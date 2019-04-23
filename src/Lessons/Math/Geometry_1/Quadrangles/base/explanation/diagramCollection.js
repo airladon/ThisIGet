@@ -1,33 +1,23 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-import QuadCollection from '../common/diagramCollectionQuad';
-import RectCollection from '../common/diagramCollectionRect';
-import SquareCollection from '../common/diagramCollectionSquare';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  // _triangle: TriangleCollection;
-  // _qr: QuickReferenceCollection;
-  _quad: QuadCollection;
-  _rect: RectCollection;
-  _square: SquareCollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
-    transform: Transform = new Transform('1 DiagramCollection'),
+    transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('quad', new QuadCollection(diagram, this.layout));
-    this.add('rect', new RectCollection(diagram, this.layout));
-    this.add('square', new SquareCollection(diagram, this.layout));
-    // this.add('qr', new QuickReferenceCollection(diagram, this.layout));
-    // this._qr.hideAll();
-    this.hasTouchableElements = true;
+    this.add('collection', new CommonCollection(diagram, this.layout));
   }
 }

@@ -448,8 +448,8 @@ export default function getLessonIndex() {
       uid: 'quadrangles',
       versions: {
         base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
+          title: 'Base Explanation',
+          description: 'Explanation_of_version_here.',
           path: 'base',
           onPath: true,
           topics: [
@@ -460,13 +460,26 @@ export default function getLessonIndex() {
           ],
           qr: [
             'Main',
-            'Rectangle',
-            'Square',
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
           ],
         },
       },
       dependencies: [
-        'congruent_triangles',
+        'triangle_introduction',
       ],
       enabled: true,
     }),
@@ -493,6 +506,34 @@ export default function getLessonIndex() {
       },
       dependencies: [
         'measuring_angles_degrees',
+      ],
+      enabled: true,
+    }),
+    rectangles_and_squares: new LessonDescription({
+      name: 'Rectangles and Squares',
+      path: '/Lessons/Math/Geometry_1/RectanglesAndSquares',
+      uid: 'rectangles_and_squares',
+      versions: {
+        base: {
+          title: 'Base Explanation',
+          description: 'Explanation_of_version_here.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Rectangle',
+            'Square',
+          ],
+        },
+      },
+      dependencies: [
+        'quadrangles',
+        'congruent_triangles',
       ],
       enabled: true,
     }),

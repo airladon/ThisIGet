@@ -99,29 +99,29 @@ export default class Definition {
       id?: string,
       classes?: string,
       wordClass?: string,
-      wordColor?: Array<number>,
+      color?: Array<number>,
     } | Array<number> = {}) {
     const defaultOptions = {
       id: generateUniqueId('definition'),
       classes: '',
       wordClass: '',
-      wordColor: '',
+      color: '',
     };
     let options = defaultOptions;
     if (Array.isArray(optionsIn)) {
-      defaultOptions.wordColor = colorArrayToRGBA(optionsIn);
+      defaultOptions.color = colorArrayToRGBA(optionsIn);
     } else {
       options = joinObjects(defaultOptions, optionsIn);
     }
-    if (Array.isArray(options.wordColor)) {
-      options.wordColor = colorArrayToRGBA(options.wordColor);
+    if (Array.isArray(options.color)) {
+      options.color = colorArrayToRGBA(options.color);
     }
     const { id, classes } = options;
     let outStr = '';
     outStr += `<div id="${id}" class="lesson__definition_container ${classes}">`;
     let style = '';
-    if (options.wordColor) {
-      style = ` style="color:${(options.wordColor)}"`;
+    if (options.color) {
+      style = ` style="color:${(options.color)}"`;
     }
     outStr += `<span class="lesson__definition_word ${options.wordClass}"${style}>`;
     outStr += this.word;

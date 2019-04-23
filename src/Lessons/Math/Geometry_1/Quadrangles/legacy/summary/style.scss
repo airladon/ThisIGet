@@ -1,0 +1,41 @@
+@import '../common/style';
+
+.diagram__html {
+  z-index: 1;
+}
+
+// .lesson__congruent_angles_summary__cannot_list {
+//   color: color('diagram', 'disabled', 'base');
+// }
+
+.lesson__congruent_angles_summary__list {
+  // color: color('diagram', 'text-base');
+  list-style: none;
+  // margin-left: calc(var(--lesson__text-margin) * 1.2);
+}
+
+.lesson__congruent_angles_summary__sub_title {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  color: color('diagram', 'disabled', 'dark');
+  margin-left: calc(var(--lesson__text-margin) * 1.3);
+  margin-top: calc(var(--lesson__text-margin) * 2);
+  margin-bottom: calc(var(--lesson__text-margin) * 0.5);
+  font-weight: 100;
+}
+
+.lesson__diagram_text ul {
+  margin-left: calc(var(--lesson__text-margin) * 1);
+  padding-left: calc(var(--lesson__diagram-font-size) * 0.8);
+  padding-right: calc(var(--lesson__diagram-font-size) * 0.8);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+}
+
+.lesson__congruent_angles_summary__label {
+  color: color('diagram', 'text-base');
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  width: calc(var(--lesson__diagram-font-size) * 13);
+}
+
+.lesson__congruent_angles_summary__label_warning {
+  color: color('diagram', 'warning');
+}
