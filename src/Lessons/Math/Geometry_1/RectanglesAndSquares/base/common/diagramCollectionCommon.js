@@ -28,6 +28,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   opposite: boolean;
+  triangle: boolean;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -39,6 +40,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
     this.opposite = false;
+    this.triangle = false;
   }
 
   setRectLabels(label: string) {
@@ -131,12 +133,49 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseCommonAngles() {
+    this.pulseAlternateAngles();
+    this._rect._bottomLeft.pulseScaleNow(1, 1.3);
+    this._rect._topRight.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
   toggleOppositeSides() {
     this.opposite = !this.opposite;
     if (this.opposite) {
       this.pulseTopBottom();
     } else {
       this.pulseLeftRight();
+    }
+  }
+
+  pulseCommonProperties() {
+    if (this.triangle) {
+      this._rect._bottomLeft.pulseScaleNow(1, 1.3);
+      this._rect._bottomRightDiag.pulseScaleNow(1, 1.3);
+    } else {
+      this._rect._topRight.pulseScaleNow(1, 1.3);
+      this._rect._topLeftDiag.pulseScaleNow(1, 1.3);
+    }
+    this._rect._diagonal.pulseWidth({ line: 5 });
+    this.diagram.animateNextFrame();
+  }
+
+  toggleTriangles() {
+    this.triangle = !this.triangle;
+    const rect = this._rect;
+    if (this.triangle) {
+      this.disableElements([
+        rect._right, rect._topRight, rect._bottomRight,
+        rect._topLeft, rect._top, rect._topLeftDiag,
+        rect._left._label, rect._bottom._label,
+      ]);
+    } else {
+      this.disableElements([
+        rect._left, rect._topLeft, rect._bottomLeft,
+        rect._bottomRight, rect._bottom, rect._bottomRightDiag,
+        rect._right._label, rect._top._label,
+      ]);
     }
   }
 }

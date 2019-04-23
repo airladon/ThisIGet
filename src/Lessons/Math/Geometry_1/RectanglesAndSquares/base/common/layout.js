@@ -96,8 +96,37 @@ export default function lessonLayout() {
       },
     },
   };
+
+  const square = {
+    name: 'square',
+    method: 'polyLine',
+    options: {
+      points: [[-h / 2, -h / 2], [-h / 2, h / 2], [h / 2, h / 2], [h / 2, -h / 2]],
+      close: true,
+      width,
+      color: colors.sides,
+      angle: {
+        label: { text: '' },
+        curve: {
+          width,
+          radius: 0.3,
+        },
+        color: colors.angles,
+      },
+      side: {
+        label: { text: 'A', offset: 0.1 },
+      },
+    },
+    mods: {
+      scenarios: {
+        center: { position: [0, -0.2] },
+      },
+    },
+  };
+
   layout.addElements = [
     rectangle,
+    square,
   ];
   return layout;
 }

@@ -896,7 +896,7 @@ class PresentationLessonContent extends SimpleLessonContent {
     }
   }
 
-  bindNext(color: Array<number> = [1, 0, 0, 1]) {
+  bindNext(color: Array<number> = this.diagram.layout.colors.diagram.action) {
     return click(this.next, [this], color);
   }
 

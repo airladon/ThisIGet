@@ -16,7 +16,7 @@ const {
   click,
   style,
   // centerV,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -35,6 +35,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'related_angles/base',
+      'congruent_triangles/base',
     ]);
   }
 
@@ -42,6 +43,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const rect = coll._rect;
+    const square = coll._square;
 
     let common = {
       show: [
@@ -59,7 +61,7 @@ class Content extends PresentationLessonContent {
       title: 'Rectangle',
       setContent: [
         'A special type of |quadrangle| is one where all the angles are |90º|. This shape is called a |rectangle|.',
-        `${new Definition('Rectangle', 'Latin', ['rectus', 'right', 'angulus', 'corner, angle']).html()}`,
+        `${new Definition('Rectangle', 'Latin', ['rectus', 'right', 'angulus', 'corner, angle']).html(colors.sides)}`,
       ],
     });
 
@@ -221,11 +223,11 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, false, null], colors.sides),
+        draw: click(rect._diagonal.grow, [rect._diagonal, 0, 1, true, null], colors.sides),
       },
       transitionFromPrev: (done) => {
         rect._diagonal.showAll();
-        rect._diagonal.grow(0, 1, false, done);
+        rect._diagonal.grow(0, 1, true, done);
       },
       setSteadyState: () => {
         rect._diagonal.showAll();
@@ -233,7 +235,7 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'If we look at lines |B| and |D|, we see the new |line| intersects two |parallel| lines.',
+      setContent: 'The new |line| intersects |parallel| lines |B| and |D|.',
       show: [
         rect._left, rect._right, rect._top, rect._bottom,
         rect._bottomLeft, rect._topLeft, rect._topRight, rect._bottomRight,
@@ -265,7 +267,7 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'We know |alternate| angles for a line intersecting parallel lines are equal, so we can say the |alternate_intersection_angles| for |B| and |D| are |equal|.',
+      setContent: 'We know |alternate| angles for a line intersecting parallel lines are equal, so we can say the |alternate_intersection_angles| for |B| and |D| are also |equal|.',
       setEnterState: () => {
         coll.disableElements([
           rect._right, rect._topRight, rect._bottomRight,
@@ -296,9 +298,129 @@ class Content extends PresentationLessonContent {
         coll.pulseAlternateAngles();
         done();
       },
-      // setSteadyState: () => {
+    });
 
-      // },
+    common = {
+      setContent: 'We know have two |triangles| that |share| the same two |angles| and common |side_length|.',
+      setEnterState: () => {
+        coll.resetColors();
+        coll.setScenarios('center');
+        coll.setRectLabels('ABCD');
+      },
+      show: [rect],
+    };
+    this.addSection(common, {
+      modifiers: {
+        triangles: this.bindNext(colors.sides),
+        share: this.bindNext(colors.diagram.action),
+        side_length: highlight(colors.sides),
+        angles: highlight(colors.angles),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        triangles: click(coll.toggleTriangles, [coll], colors.sides),
+        side_length: highlight(colors.sides),
+        angles: highlight(colors.angles),
+        share: click(coll.pulseCommonProperties, [coll], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll.triangle = false;
+        coll.toggleTriangles();
+      },
+    });
+
+    this.addSection({
+      setContent: 'Therefore, using |Angle-Angle-Side| the congruency test, we can see the two |triangles| are |congruent|.',
+      modifiers: {
+        'Angle-Angle-Side': this.bindShowQR('congruent_triangles/base', 'Aas'),
+        triangles: click(coll.toggleTriangles, [coll], colors.sides),
+      },
+      setEnterState: () => {
+        coll.resetColors();
+        coll.setScenarios('center');
+        coll.setRectLabels('ABCD');
+      },
+      setSteadyState: () => {
+        if (this.comingFrom === 'prev') {
+          coll.triangle = !coll.triangle;
+        } else {
+          coll.triangle = false;
+        }
+        coll.toggleTriangles();
+      },
+      show: [rect],
+    });
+
+    common = {
+      setContent: 'As the triangles are |congruent|, then one triangle\'s sides lengths are the |same| as the other triangle.',
+      show: [rect],
+      setEnterState: () => {
+        coll.disableElements([
+          rect._topRight, rect._bottomRight,
+          rect._topLeft, rect._topLeftDiag,
+          rect._bottomLeft, rect._bottomRightDiag,
+        ]);
+        coll.setScenarios('center');
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        same: this.bindNext(colors.sides),
+      },
+      setSteadyState: () => {
+        coll.setRectLabels('ABCD');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        same: click(coll.toggleOppositeSides, [coll], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.setRectLabels('ABAB');
+        rect._right._label.pulseScaleNow(1, 2);
+        rect._bottom._label.pulseScaleNow(1, 2);
+        done();
+      },
+      setSteadyState: () => {
+        coll.setRectLabels('ABAB');
+      },
+    });
+
+    this.addSection({
+      setContent: 'And so we see that a rectangle\'s |opposite| sides are |equal|.',
+      modifiers: {
+        opposite: click(coll.toggleOppositeSides, [coll], colors.sides),
+      },
+      show: [rect._left, rect._bottom, rect._top, rect._right],
+      setSteadyState: () => {
+        coll.resetColors();
+        coll.setScenarios('center');
+        coll.setRectLabels('ABAB');
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'In summary, a rectangle is a quadrangle with |all angles equal to 90º|.',
+        '|Opposite sides| of a rectangle are |parallel| and have |equal length|.',
+      ]),
+    });
+
+    this.addSection({
+      title: 'Square',
+      setContent: [
+        'A special type of rectangle is one where |all the sides are equal|. This shape is called a |square|.',
+        `${new Definition('Square', 'Old French', ['esquare', 'square'], 'Latin', ['quadra', 'square']).html(colors.sides)}`,
+      ],
+      show: [square],
+    });
+
+    this.addSection({
+      setContent: [
+        'As a square is a rectangle, it also shares the same property relationships. All |angles are 90º|, and |opposite sides are parallel|.',
+      ],
+      show: [square],
     });
   }
 }

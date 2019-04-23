@@ -127,7 +127,8 @@ export default class Definition {
     outStr += this.word;
     outStr += '</span>';
     this.from.forEach((fromLanguage) => {
-      const lang = `lesson__${fromLanguage.language.toLowerCase()}`;
+      let lang = `lesson__${fromLanguage.language.toLowerCase()}`;
+      lang = lang.replace(/ /g, '_');
       outStr += ` - from <span class="${''}">${fromLanguage.language}</span> `;
       fromLanguage.roots.forEach((root, index) => {
         if (root instanceof Root) {

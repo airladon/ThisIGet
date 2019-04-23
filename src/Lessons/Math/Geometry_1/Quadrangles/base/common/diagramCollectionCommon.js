@@ -31,9 +31,9 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   drawLines(done: ?() => void) {
-    this._line1.grow(0, 0.8, false, null);
-    this._line2.grow(0, 0.8, false, null);
-    this._line3.grow(0, 0.8, false, done);
+    this._line1.grow(0, 0.8, true, null);
+    this._line2.grow(0, 0.8, true, null);
+    this._line3.grow(0, 0.8, true, done);
     this.diagram.animateNextFrame();
   }
 }
