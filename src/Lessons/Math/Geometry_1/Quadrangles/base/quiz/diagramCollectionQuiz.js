@@ -10,13 +10,15 @@ import CommonCollection from '../common/diagramCollectionCommon';
 const {
   Transform,
   DiagramElementPrimative,
+  Point,
 } = Fig;
 
-// const {
-//   removeRandElement,
+const { randomPoint } = Fig.tools.g2;
+const {
+  removeRandElement,
 //   round,
 //   rand
-// } = Fig.tools.math;
+} = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
@@ -39,24 +41,64 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    // this.addCheck();
-    // this.addInput('input', '?', 3, 0);
-    this.add('main', new CommonCollection(diagram, this.layout));
+    this.addCheck();
+    this.addInput('input', '?', 3, 0);
+    this.diagram.addElements(this, this.layout.addElementsQuiz);
+    // this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 
   // tryAgain() {
   //   super.tryAgain();
   // }
-
-
-  setupNewProblem() {
-    // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
+  randomQuadPoints() {
+    const points = [
+      randomPoint(this.layout.quadrants.quad1),
+      randomPoint(this.layout.quadrants.quad2),
+      randomPoint(this.layout.quadrants.quad3),
+      randomPoint(this.layout.quadrants.quad4),
+    ];
+    const index = removeRandElement([0, 1, 2, 3]);
+    const newPoints = [];
+    for (let i = 0; i < 4; i += 1) {
+      newPoints.push(points[(i + index) % 4]);
+    }
+    return {
+      p1: newPoints[0],
+      p2: newPoints[1],
+      p3: newPoints[2],
+      p4: newPoints[3],
+    };
   }
 
-  // afterTransitionToNewProblem() {
-  //   super.afterTransitionToNewProblem();
-  // }
+  setupNewProblem() {
+    const newPoints = this.randomQuadPoints();
+    this._quad._pad0.scenarios.quiz = { position: newPoints.p1 };
+    this._quad._pad1.scenarios.quiz = { position: newPoints.p2 };
+    this._quad._pad2.scenarios.quiz = { position: newPoints.p3 };
+    this._quad._pad3.scenarios.quiz = { position: newPoints.p4 };
+    this._quad.hideAngles();
+    this.transitionToNewProblem({ target: 'quiz', duration: 1 });
+  }
+
+  afterTransitionToNewProblem() {
+    super.afterTransitionToNewProblem();
+    const totalAngle = this._quad._angle0.angle + this._quad._angle1.angle
+                       + this._quad._angle0.angle + this._quad._angle1.angle;
+
+    if (totalAngle > Math.PI * 2.01) {
+      this._quad.reversePoints();
+    }
+    this._quad._angle0.showAll();
+    this._quad._angle1.showAll();
+    this._quad._angle2.showAll();
+    const angles0To2 =
+      parseInt(this._quad._angle0.label.getText(), 10)
+      + parseInt(this._quad._angle1.label.getText(), 10)
+      + parseInt(this._quad._angle2.label.getText(), 10);
+
+    this.answer = 360 - angles0To2;
+  }
 
   // showAnswer() {
   //   super.showAnswer();
@@ -64,11 +106,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   // }
 
   findAnswer() {
-    // this._input.disable();
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    if (this.answer === true) {
+    this._input.disable();
+    if (this._input.getValue() === this.answer.toString()) {
       return 'correct';
     }
     return 'incorrect';

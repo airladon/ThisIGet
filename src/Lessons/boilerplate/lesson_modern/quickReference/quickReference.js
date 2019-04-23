@@ -45,10 +45,6 @@ export default class QRBoilerplate extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
-    // const iso = collection;
-    // iso.show();
-    collection.transform.updateScale(0.6, 0.6);
-    collection.setPosition(this.layout.position);
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }

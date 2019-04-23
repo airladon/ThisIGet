@@ -987,8 +987,6 @@ function () {
     this.onFinish = options.onFinish;
     this.completeOnCancel = options.completeOnCancel;
     this.duration = options.duration;
-    this.afterEachFrame = options.afterFrame;
-    this.beforeEachFrame = options.beforeFrame;
     this.startTime = -1;
     this.state = 'idle';
     this.name = options.name;
@@ -1027,14 +1025,14 @@ function () {
           deltaTimeAfterDelay = this.duration;
         }
 
-        if (this.beforeEachFrame) {
-          this.beforeEachFrame(deltaTimeAfterDelay / this.duration);
+        if (this.beforeFrame) {
+          this.beforeFrame(deltaTimeAfterDelay / this.duration);
         }
 
         this.setFrame(deltaTimeAfterDelay);
 
-        if (this.afterEachFrame) {
-          this.afterEachFrame(deltaTimeAfterDelay / this.duration);
+        if (this.afterFrame) {
+          this.afterFrame(deltaTimeAfterDelay / this.duration);
         }
 
         if (remainingTime >= 0) {
@@ -1139,12 +1137,6 @@ function () {
     key: "whenFinished",
     value: function whenFinished(callback) {
       this.onFinish = callback;
-      return this;
-    }
-  }, {
-    key: "afterFrame",
-    value: function afterFrame(callback) {
-      this.afterEachFrame = callback;
       return this;
     }
   }, {
@@ -3003,11 +2995,6 @@ function (_AnimationStep) {
     key: "nextFrame",
     value: function nextFrame(now) {
       var remaining = null;
-
-      if (this.beforeEachFrame) {
-        this.beforeEachFrame((now - this.startTime) / this.duration);
-      }
-
       this.steps.forEach(function (step) {
         if (step.state === 'animating' || step.state === 'waitingToStart') {
           var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
@@ -3021,10 +3008,6 @@ function (_AnimationStep) {
           }
         }
       });
-
-      if (this.afterEachFrame) {
-        this.afterEachFrame((now - this.startTime) / this.duration);
-      }
 
       if (remaining === null) {
         remaining = 0;
@@ -3286,17 +3269,8 @@ function (_AnimationStep) {
     value: function nextFrame(now) {
       var remaining = -1;
 
-      if (this.beforeEachFrame) {
-        this.beforeEachFrame((now - this.startTime) / this.duration);
-      }
-
       if (this.index <= this.steps.length - 1) {
-        remaining = this.steps[this.index].nextFrame(now);
-
-        if (this.afterEachFrame) {
-          this.afterEachFrame((now - this.startTime) / this.duration);
-        } // console.log('serial', now, this.index, remaining)
-
+        remaining = this.steps[this.index].nextFrame(now); // console.log('serial', now, this.index, remaining)
 
         if (remaining >= 0) {
           if (this.index === this.steps.length - 1) {
@@ -15029,6 +15003,41 @@ function (_DiagramElementCollec) {
         return p.transformBy(deltaMatrix);
       });
       this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setShow",
+    value: function setShow(name, show) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.name.startsWith(name)) {
+          if (show) {
+            element.showAll();
+          } else {
+            element.hide();
+          }
+        }
+      }
+    }
+  }, {
+    key: "hideAngles",
+    value: function hideAngles() {
+      this.setShow('angle', false);
+    }
+  }, {
+    key: "hideSides",
+    value: function hideSides() {
+      this.setShow('side', false);
+    }
+  }, {
+    key: "showAngles",
+    value: function showAngles() {
+      this.setShow('angle', true);
+    }
+  }, {
+    key: "showSides",
+    value: function showSides() {
+      this.setShow('side', true);
     }
   }]);
 
