@@ -11943,9 +11943,12 @@ function (_DiagramElementCollec) {
     // Diagram elements
     // Objects that may or may not exist
     // angle properties - pulic read only
+    // rotation: number;
+    // position: Point;
     // angle properties - pulic read/write
     // angle properties - private internal use only
     // Pulic Angle methods
+    // nextAngle: ?number;
     // eslint-disable-next-line class-methods-use-this
     value: function calculateFromP1P2P3(p1, p2, p3) {
       var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
@@ -12019,8 +12022,8 @@ function (_DiagramElementCollec) {
     _this2.isTouchDevice = isTouchDevice;
     _this2.animateNextFrame = animateNextFrame; // Calculate and store the angle geometry
 
-    _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
-    _this2.rotation = optionsToUse.rotation;
+    _this2.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
+    _this2.nextRotation = optionsToUse.rotation;
     _this2.direction = optionsToUse.direction;
     _this2.angle = optionsToUse.angle;
     _this2.lastLabelRotationOffset = 0;
@@ -12035,13 +12038,19 @@ function (_DiagramElementCollec) {
           angle = _this2$calculateFromP.angle;
 
       _this2.angle = angle;
-      _this2.rotation = rotation;
-      _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
+      _this2.nextRotation = rotation;
+      _this2.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
     }
 
-    _this2.transform.updateTranslation(_this2.position);
-
-    _this2.transform.updateRotation(_this2.rotation); // Setup default values for sides, arrows, curve and label
+    _this2.setNextPositionAndRotation(); // if (this.nextPosition != null) {
+    //   this.transform.updateTranslation(this.nextPosition);
+    // }
+    // if (this.nextRotation != null) {
+    //   this.transform.updateRotation(this.nextRotation);
+    // }
+    // this.nextPosition = null;
+    // this.nextRotation = null;
+    // Setup default values for sides, arrows, curve and label
 
 
     _this2.side1 = null;
@@ -12127,16 +12136,30 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectAngle, [{
+    key: "setNextPositionAndRotation",
+    value: function setNextPositionAndRotation() {
+      if (this.nextPosition != null) {
+        this.transform.updateTranslation(this.nextPosition);
+      }
+
+      if (this.nextRotation != null) {
+        this.transform.updateRotation(this.nextRotation);
+      }
+
+      this.nextPosition = null;
+      this.nextRotation = null;
+    }
+  }, {
     key: "setAngle",
     value: function setAngle() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       if (options.position != null) {
-        this.position = options.position;
+        this.nextPosition = options.position;
       }
 
       if (options.rotation != null) {
-        this.rotation = options.rotation;
+        this.nextRotation = options.rotation;
       }
 
       if (options.angle != null) {
@@ -12154,8 +12177,8 @@ function (_DiagramElementCollec) {
             angle = _this$calculateFromP.angle;
 
         this.angle = angle;
-        this.rotation = rotation;
-        this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
+        this.nextRotation = rotation;
+        this.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
       if (options.rotationOffset != null) {
@@ -12452,8 +12475,9 @@ function (_DiagramElementCollec) {
         this.lastLabelRotationOffset = labelRotationOffset;
       }
 
-      this.transform.updateTranslation(this.position);
-      this.transform.updateRotation(this.rotation);
+      this.setNextPositionAndRotation(); // this.transform.updateTranslation(this.position);
+      // this.transform.updateRotation(this.rotation);
+
       var _curve = this._curve,
           curve = this.curve,
           _curveRight = this._curveRight;
@@ -12492,8 +12516,68 @@ function (_DiagramElementCollec) {
 
           this.updateCurve(curveAngle, this.angle, rotationForArrow1, true);
         }
+      } // const { _label, label } = this;
+      // if (_label && label) {
+      //   if (label.autoHide > this.angle) {
+      //     _label.hide();
+      //   } else {
+      //     _label.show();
+      //     if (label.showRealAngle) {
+      //       let angleText = roundNum(this.angle, label.precision)
+      //         .toFixed(label.precision);
+      //       if (label.units === 'degrees') {
+      //         angleText = roundNum(
+      //           this.angle * 180 / Math.PI,
+      //           label.precision,
+      //         ).toFixed(label.precision);
+      //         angleText = `${angleText}º`;
+      //       }
+      //       label.setText(angleText);
+      //       // _label._base.drawingObject.setText(`${angleText}`);
+      //       // label.eqn.reArrangeCurrentForm();
+      //     }
+      //     const labelPosition = polarToRect(label.radius, this.angle * label.curvePosition);
+      //     if (label.orientation === 'horizontal') {
+      //       label.updateRotation(
+      //         -this.rotation - this.lastLabelRotationOffset,
+      //         labelPosition,
+      //         label.radius / 5,
+      //         this.angle * label.curvePosition,
+      //       );
+      //     }
+      //     if (label.orientation === 'tangent') {
+      //       label.updateRotation(
+      //         this.angle * label.curvePosition - Math.PI / 2,
+      //         labelPosition,
+      //         label.radius / 50,
+      //         this.angle * label.curvePosition,
+      //       );
+      //     }
+      //   }
+      // }
+
+
+      this.updateLabel();
+      var _side1 = this._side1,
+          side1 = this.side1;
+
+      if (_side1 && side1) {
+        // _side1.transform.updateRotation(this.rotation);
+        _side1.transform.updateScale(side1.length, 1);
       }
 
+      var _side2 = this._side2,
+          side2 = this.side2;
+
+      if (_side2 && side2) {
+        _side2.transform.updateRotation(this.angle);
+
+        _side2.transform.updateScale(side2.length, 1);
+      }
+    }
+  }, {
+    key: "updateLabel",
+    value: function updateLabel() {
       var _label = this._label,
           label = this.label;
 
@@ -12518,30 +12602,13 @@ function (_DiagramElementCollec) {
           var labelPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(label.radius, this.angle * label.curvePosition);
 
           if (label.orientation === 'horizontal') {
-            label.updateRotation(-this.rotation - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition);
+            label.updateRotation(-this.getRotation() - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition);
           }
 
           if (label.orientation === 'tangent') {
             label.updateRotation(this.angle * label.curvePosition - Math.PI / 2, labelPosition, label.radius / 50, this.angle * label.curvePosition);
           }
         }
-      }
-
-      var _side1 = this._side1,
-          side1 = this.side1;
-
-      if (_side1 && side1) {
-        // _side1.transform.updateRotation(this.rotation);
-        _side1.transform.updateScale(side1.length, 1);
-      }
-
-      var _side2 = this._side2,
-          side2 = this.side2;
-
-      if (_side2 && side2) {
-        _side2.transform.updateRotation(this.angle);
-
-        _side2.transform.updateScale(side2.length, 1);
       }
     }
   }, {

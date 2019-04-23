@@ -166,11 +166,12 @@ export default function lessonLayout() {
   const intersectTop = new Point(
     -hypotenuse / 2 + leftLen * Math.cos(Math.PI / 6),
     height,
-  )
+  );
   const intersectBottom = new Point(
     -hypotenuse / 2 + leftLen * Math.cos(Math.PI / 6),
-    height,
-  )
+    -height,
+  );
+
   const constructionLine = {
     name: 'constructionLine',
     method: 'line',
@@ -195,14 +196,14 @@ export default function lessonLayout() {
     method: 'angle',
     options: {
       color: colors.angles,
-      radius: 0.3,
       curve: {
         width: layout.width,
         sides: 100,
+        radius: 0.4,
       },
       label: {
         text,
-        radius: 0.31,
+        radius: 0.35,
       },
       angle,
     },
@@ -224,10 +225,10 @@ export default function lessonLayout() {
   );
 
   const angleTopRight = angle(
-    'angleTopRight', 'a', intersectTop, -Math.PI / 2, Math.PI / 6,
+    'angleTopRight', 'b', intersectTop, -Math.PI / 2, Math.PI / 6,
   );
   const angleBottomRight = angle(
-    'angleBottomRight', 'a', intersectBottom, Math.PI / 3, Math.PI / 6,
+    'angleBottomRight', 'b', intersectBottom, Math.PI / 3, Math.PI / 6,
   );
 
   layout.addElements = [
@@ -237,8 +238,8 @@ export default function lessonLayout() {
     angleBottomLeft,
     angleTopRight,
     angleBottomRight,
-    constructionLine,
     base,
+    constructionLine,
     left,
     right,
     leftBottom,

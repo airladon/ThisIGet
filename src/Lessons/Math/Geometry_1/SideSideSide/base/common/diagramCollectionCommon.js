@@ -169,6 +169,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseRightIsosceles() {
+    this.colorRightIsosceles();
+    this._right.pulseWidth();
+    this._rightBottom.pulseWidth();
+    this._constructionLine.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
   pulseLeftIsoscelesAngles() {
     this.colorLeftIsosceles();
     this._angleTopLeft.pulseScaleNow(1, 1.3);

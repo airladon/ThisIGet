@@ -269,6 +269,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.setScenarios('center');
         coll.setScenarios('default');
+        coll._angleBottomLeft.setScenario('default');
         coll.hasTouchableElements = false;
         coll.updateLabels();
       },
@@ -278,7 +279,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        two_angles: click(this.next, [this], colors.sides),
+        two_angles: click(this.next, [this], colors.angles),
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       show: [
@@ -289,7 +290,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        two_angles: click(coll.pulseLeftIsoscelesAngles, [coll], colors.sides),
+        two_angles: click(coll.pulseLeftIsoscelesAngles, [coll], colors.angles),
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       show: [
@@ -300,6 +301,92 @@ class Content extends PresentationLessonContent {
       ],
       transitionFromPrev: (done) => {
         coll.pulseLeftIsoscelesAngles();
+        done();
+      },
+    });
+
+    common = {
+      setContent: 'Next we look at the |right| isosceles triangle.',
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll._angleBottomLeft.setScenario('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+      ],
+    };
+
+    this.addSection(common, {
+      modifiers: {
+        right: click(this.next, [this], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+      setEnterState: () => {
+        coll.colorLeftIsosceles();
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        right: click(coll.pulseRightIsosceles, [coll], colors.sides),
+        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+      },
+      setEnterState: () => {
+        coll.colorRightIsosceles();
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseRightIsosceles(done);
+      },
+    });
+
+    common = {
+      setContent: 'It also has |two_equal_angles| opposite the two equal sides.',
+      setEnterState: () => {
+        coll.colorRightIsosceles();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+        coll.setScenarios('default');
+        coll._angleBottomLeft.setScenario('default');
+        coll.hasTouchableElements = false;
+        coll.updateLabels();
+      },
+      setLeaveState: () => {
+        coll.setDefaultColors();
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        two_equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        two_equal_angles: click(coll.pulseRightIsoscelesAngles, [coll], colors.angles),
+      },
+      show: [
+        coll._left, coll._base, coll._right,
+        coll._leftCircle, coll._rightCircle,
+        coll._leftBottom, coll._rightBottom, coll._constructionLine,
+        coll._angleTopLeft, coll._angleBottomLeft,
+        coll._angleTopRight, coll._angleBottomRight,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseRightIsoscelesAngles();
         done();
       },
     });
