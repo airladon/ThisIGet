@@ -1,135 +1,64 @@
 // @flow
 import Fig from 'figureone';
-// import {
-//   Point, Line, Transform,
-// } from '../../../../../../js/diagram/tools/g2';
-// import getCssColors from '../../../../../../js/tools/getCssColors';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Point, Transform } = Fig.tools.g2;
+const {
+  Point,
+  // Transform,
+  // Line,
+} = Fig.tools.g2;
+
+// const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'equilLines',
-  'equilAngles',
-  'equalLength',
-  'points',
-  'construction',
+  'sides',
+  'angles',
+  'highlight',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.colors.lines = layout.colors.equilLines;
-  layout.colors.angles = layout.colors.equilAngles;
-
-  // **********************************************************************
-  // **********************************************************************
-  // **********************************************************************
-  // **********************************************************************
-  // **********************************************************************
-  // **********************************************************************
-  const equilPoints = [
+  const { colors } = layout;
+  const points = [
     new Point(-1, -1).add(0, 1 - Math.tan(Math.PI / 6)),
-    new Point(1, -1).add(0, 1 - Math.tan(Math.PI / 6)),
     new Point(0, 0.732050).add(0, 1 - Math.tan(Math.PI / 6)),
+    new Point(1, -1).add(0, 1 - Math.tan(Math.PI / 6)),
   ];
-
-  layout.equil = {
-    position: new Point(0, 0),
-    scenario: {
-      center: { position: new Point(0, -(1 - Math.tan(Math.PI / 6))) },
-    },
-    tri: {
-      points: equilPoints,
-      width: 0.015,
+  layout.position = [0, -0.2];
+  const width = 0.02;
+  const triangle = {
+    name: 'triangle',
+    method: 'polyLine',
+    options: {
+      width,
+      color: colors.sides,
       close: true,
-      borderToPoint: 'alwaysOn',
-      position: new Point(0, 0),
-      color: layout.colors.lines,
-    },
-    sideLength: {
-      color: layout.colors.lines,
-      offset: 0.15,
-      label: {
-        text: 'A',
-        location: 'outside',
-        orientation: 'horizontal',
+      points,
+      side: {
+        label: { text: 'A', offset: 0.1, location: 'outside' },
       },
-      showLine: false,
-    },
-    side12: {
-      p1: equilPoints[1],
-      p2: equilPoints[0],
-      color: layout.colors.lines,
-    },
-    side23: {
-      p1: equilPoints[2],
-      p2: equilPoints[1],
-      color: layout.colors.lines,
-    },
-    side31: {
-      p1: equilPoints[0],
-      p2: equilPoints[2],
-      color: layout.colors.lines,
-    },
-    angle: {
-      curve: {
-        radius: 0.2,
-        sides: 150,
-        width: 0.02,
+      angle: {
+        color: colors.angles,
+        label: { text: 'a', radius: 0.29 },
+        curve: { radius: 0.3, sides: 100, width },
       },
-      label: {
-        text: 'a',
-        radius: 0.18,
-      },
-      color: layout.colors.angles,
-    },
-    angle1: {
-      p1: equilPoints[1],
-      p2: equilPoints[0],
-      p3: equilPoints[2],
-      // label: { text: ['a', '60º'] },
-    },
-    angle2: {
-      p1: equilPoints[2],
-      p2: equilPoints[1],
-      p3: equilPoints[0],
-    },
-    angle3: {
-      p1: equilPoints[0],
-      p2: equilPoints[2],
-      p3: equilPoints[1],
-    },
-    isoLines: {
-      close: false,
-      color: layout.colors.equalLength,
-      width: 0.03,
-      borderToPoint: 'never',
-      transform: new Transform('iso').rotate(0).translate(0, 0),
     },
   };
-
-  const { equil } = layout;
-  layout.addEquilateralElements = [
-    {
-      name: 'tri',
-      method: 'collection',
-      options: {
-        transform: new Transform('equil').translate(0, 0),
-      },
-      addElements: [
-        ['', 'line', 'polyLine', equil.tri],
-        ['', 'side12', 'line', [equil.sideLength, equil.side12]],
-        ['', 'side23', 'line', [equil.sideLength, equil.side23]],
-        ['', 'side31', 'line', [equil.sideLength, equil.side31]],
-        ['', 'angle1', 'angle', [equil.angle, equil.angle1]],
-        ['', 'angle2', 'angle', [equil.angle, equil.angle2]],
-        ['', 'angle3', 'angle', [equil.angle, equil.angle3]],
-        ['', 'isoLines', 'polyLine', [equil.tri, equil.isoLines]],
-      ],
+  const angle = {
+    name: 'angle',
+    method: 'polyLine',
+    options: {
+      points,
+      close: false,
+      color: colors.highlight,
+      width: width * 2,
     },
+  };
+  layout.addElements = [
+    triangle,
+    angle,
   ];
-
   return layout;
 }

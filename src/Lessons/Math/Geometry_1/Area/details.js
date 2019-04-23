@@ -4,7 +4,7 @@
 var details = {
   title: 'Area and Rectangles',
   uid: 'area_introduction',
-  dependencies: ['quadrangles'],
+  dependencies: ['rectangles_and_squares'],
 };
 
 module.exports = {

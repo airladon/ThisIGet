@@ -3,13 +3,13 @@ import Fig from 'figureone';
 
 import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import EquilateralCollection from '../common/diagramCollectionEquilateral';
+import CommonCollection from '../common/diagramCollectionCommon';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonDiagramCollection {
-  _equil: EquilateralCollection;
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -17,7 +17,8 @@ export default class DiagramCollection extends CommonDiagramCollection {
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
-    this.add('equil', new EquilateralCollection(diagram, this.layout));
+
+    this.add('collection', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 }

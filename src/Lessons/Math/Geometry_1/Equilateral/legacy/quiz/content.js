@@ -1,20 +1,17 @@
 // @flow
-// import Fig from 'figureone';
 import {
   PresentationLessonContent,
+  // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
+// import {
+//   click, centerH,
+// } from '../../../../../../js/tools/htmlGenerator';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
-
-// const {
-//   click,
-//   centerV,
-// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -32,31 +29,38 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
 
     this.addSection({
-      title: '',
+      title: 'Enter_title_here',
+      setContent: ['Enter_content_here'],
+      show: [quiz],
+    });
+    this.addSection({
+      title: 'Enter_title_here',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'Enter_question_here',
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
+      modifiers: {
+      },
+      setInfo: `<ul>
+          <li></li>
+          </ul>
+      `,
+      infoModifiers: {
+      },
       interactiveElements: [
         // interactiveItem(quiz._check),
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setEnterState: () => {
+      },
+      showOnly: [
+      ],
+      show: [
+      ],
+      setSteadyState: () => {
+      },
     });
   }
 }

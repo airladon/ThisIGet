@@ -78,7 +78,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'quadrangles',
+        'rectangles_and_squares',
       ],
       enabled: true,
     }),
@@ -296,8 +296,23 @@ export default function getLessonIndex() {
         },
         base: {
           title: 'Base',
-          description: 'First explanation of Topic.',
+          description: 'Explanation_of_version_here.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'dev',

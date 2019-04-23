@@ -5,13 +5,17 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import EquilateralCollection from '../common/diagramCollectionEquilateral';
+import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-const { click } = Fig.tools.html;
+// const {
+//   click,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
-export default class QREquilateral extends PopupBoxCollection {
-  _collection: EquilateralCollection;
+export default class QRBoilerplate extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -23,29 +27,14 @@ export default class QREquilateral extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      EquilateralCollection,
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {
-      three_equal_sides: click(
-        this._collection.pulseSides,
-        [this._collection],
-        this.layout.colors.lines,
-      ),
-      three_equal_angles: click(
-        this._collection.pulseAngles,
-        [this._collection],
-        this.layout.colors.angles,
-      ),
-    };
-    this.setTitle('Equilateral Triangle');
+    const modifiers = {};
+    this.setTitle('');
     this.setDescription(`
       <p>
-      An |Equilateral| triangle has |three_equal_sides| and |three_equal_angles|.
-      </p>
-      <p>
-      All triangles with three equal sides will have three equal angles, and all triangles with three equal angles will have three equal sides.
       </p>
     `, modifiers);
     this.setLink(details.details.uid);
@@ -56,20 +45,7 @@ export default class QREquilateral extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
-    const iso = collection;
-    const iTri = this._collection._tri;
-    iso.show();
-    iTri.show();
-    iTri._line.show();
-    iTri._side23.showAll();
-    iTri._side31.showAll();
-    iTri._side12.showAll();
-    iTri._angle1.showAll();
-    iTri._angle2.showAll();
-    iTri._angle3.showAll();
-    // collection.transform.updateScale(0.6, 0.6);
-    // collection.setPosition(this.layout.position);
-    this.transformToQRWindow(collection, new Rect(-1.6, -1.2, 3.2, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -82,7 +58,8 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QREquilateral,
+    Main: QRBoilerplate,
+    // QR2: QRBoilerplate2,
   };
 }
 
