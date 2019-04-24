@@ -14,6 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
+  style,
   centerV,
   highlight,
   highlightWord,
@@ -43,6 +44,7 @@ class Content extends PresentationLessonContent {
     const examples = coll._examples;
     const meas = coll._measure;
     const unit = coll._unitShape;
+    const shapes = coll._shapes;
 
     this.addSection({
       title: 'Introduction',
@@ -129,22 +131,61 @@ class Content extends PresentationLessonContent {
       setContent: [
         'Similarly, |area| is measured by counting |reference areas|.',
       ],
-      show: [
-        meas._area,
-        // meas._squareGrid, meas._squareA,
-        // meas._circleA, meas._triangleA,
-      ],
+      show: [meas._area, shapes._circle, shapes._square, shapes._triangle],
     });
 
     this.addSection({
       setContent: [
-        'But what shape should the reference area be?.',
+        'But what |shape| should the reference area be?',
       ],
-      show: [
-        unit._genericGrid,
-        // meas._squareGrid, meas._squareA,
-        // meas._circleA, meas._triangleA,
+      modifiers: {
+        shape: click(coll.toggleGrid, [coll], colors.diagram.action),
+      },
+      show: [shapes._circle, shapes._square, shapes._triangle, unit._grid],
+    });
+
+    this.addSection({
+      setContent: [
+        'There are |many| shapes to choose from, but some will be more |convenient| than others.',
       ],
+      show: [shapes._circle, shapes._square, shapes._triangle, unit._grid],
+    });
+    this.addSection({
+      setContent: [
+        'A |circle| reference shape has |gaps| when stacked. It would be more convenient to have a shape that can stack |without gaps|.',
+      ],
+      show: [shapes._circle, shapes._square, shapes._triangle, unit._circleGrid],
+    });
+
+    this.addSection({
+      setContent: [
+        'This shape can be stacked without gaps, but its |curves| make it hard to work with. Selecting a shape that is |simple|, |symmetric| and |easy to analyze| will be more convenient.',
+      ],
+      show: [shapes._circle, shapes._square, shapes._triangle, unit._genericGrid],
+    });
+
+    this.addSection({
+      setContent: [
+        'A square can be |stacked without gaps|, is |symmetric|, |simple| and |easy to analyze|. It is more convenient than other shapes including triangles.',
+      ],
+      show: [shapes._circle, shapes._square, shapes._triangle, unit._grid],
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore |area| is most commonly measured in |squares|.',
+      ],
+      show: [shapes, unit._grid],
+      setSteadyState: () => {
+        coll.setAreaToSquares();
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'What |size| are the |reference squares| used to measure area?',
+        'Similar to |length|, there are several common sizes used depending on the size of the shape you are measuring.',
+      ]),
     });
   }
 }

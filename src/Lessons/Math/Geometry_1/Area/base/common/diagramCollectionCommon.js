@@ -26,6 +26,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
+  _unitShape: {
+    _circle: DiagramElementPrimative;
+    _grid: DiagramElementPrimative;
+    _genericGrid: DiagramElementPrimative;
+    _circleGrid: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
   // eslint-disable-next-line class-methods-use-this
   makeWaveSegment(
     length: number,
@@ -57,11 +64,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       hPoints, false, lay.width, this.layout.colors.grid,
       'never',
     );
-    const hLines = this.diagram.shapes.repeatPatternVertex(
-      hSegment,
-      length / sideLength, height / sideLength + 1,
-      sideLength, sideLength,
-    );
+    const hLines = this.diagram.shapes.repeatPatternVertex({
+      element: hSegment,
+      xNum: length / sideLength,
+      yNum: height / sideLength + 1,
+      xStep: sideLength,
+      yStep: sideLength,
+    });
 
     const vPoints = this.makeWaveSegment(
       sideLength, lay.waveMag,
@@ -71,10 +80,13 @@ export default class CommonCollection extends CommonDiagramCollection {
       vPoints, false, lay.width, this.layout.colors.grid,
       'never',
     );
-    const vLines = this.diagram.shapes.repeatPatternVertex(
-      vSegment, length / sideLength + 1,
-      height / sideLength, sideLength, lay.sideLength,
-    );
+    const vLines = this.diagram.shapes.repeatPatternVertex({
+      element: vSegment,
+      xNum: length / sideLength + 1,
+      yNum: height / sideLength,
+      xStep: sideLength,
+      yStep: lay.sideLength,
+    });
 
     const group = this.diagram.shapes.collection({ transform: new Transform().translate(0, 0) });
     group.add('vLines', vLines);
@@ -90,7 +102,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       roundNum(grid.height / lay.sideLength, 4),
       lay.sideLength,
     );
-    group.setPosition(lay.position);
+    group.setPosition(0, -0.25 - 0.125);
     this._unitShape.add('genericGrid', group);
   }
 
@@ -112,15 +124,35 @@ export default class CommonCollection extends CommonDiagramCollection {
       element: this._unitShape._circle._dup(),
       xNum: 20,
       xStep: 0.25,
-      yNum: 10,
+      yNum: 7,
       yStep: 0.25,
     });
-    grid.setPosition(-2.5 + 0.125, -1.5 + 0.125);
+    grid.setPosition(-2.5 + 0.125, -1.125);
     this._unitShape.add('circleGrid', grid);
   }
 
   pulseMeasureLine() {
     this._measure._length._line.pulseWidth({ line: 5 });
     this.diagram.animateNextFrame();
+  }
+
+  toggleGrid() {
+    if (this._unitShape._grid.isShown) {
+      this._unitShape._grid.hide();
+      this._unitShape._circleGrid.show();
+    } else if (this._unitShape._circleGrid.isShown) {
+      this._unitShape._circleGrid.hide();
+      this._unitShape._genericGrid.showAll();
+    } else {
+      this._unitShape._genericGrid.hide();
+      this._unitShape._grid.show();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  setAreaToSquares() {
+    this._shapes._circleLabel.drawingObject.setText('Area = 19.6 squares');
+    this._shapes._squareLabel.drawingObject.setText('Area = 25 squares');
+    this._shapes._triangleLabel.drawingObject.setText('Area = 14.5 squares');
   }
 }

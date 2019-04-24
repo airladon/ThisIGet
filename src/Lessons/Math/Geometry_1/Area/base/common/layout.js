@@ -81,6 +81,79 @@ export default function lessonLayout() {
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
+  const shapeCircle = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      width: 0.03,
+      color: colors.sides,
+      sides: 100,
+      radius: 0.625,
+      position: [-1.75, -0.37],
+    },
+  };
+  const shapeSquare = {
+    name: 'square',
+    method: 'polygon',
+    options: {
+      width: 0.03,
+      color: colors.sides,
+      sides: 4,
+      radius: 0.89,
+      rotation: Math.PI / 4,
+      position: [0, -0.37],
+    },
+  };
+  const shapeTriangle = {
+    name: 'triangle',
+    method: 'polygon',
+    options: {
+      width: 0.05,
+      color: colors.sides,
+      sides: 3,
+      radius: 0.84,
+      rotation: -Math.PI / 6,
+      position: [1.7, -0.58],
+    },
+  };
+  const shapeCircleLabel = {
+    name: 'circleLabel',
+    method: 'text',
+    options: { color: colors.sides, position: [-1.75, -1.45], size: 0.15 },
+  };
+  const shapeSquareLabel = {
+    name: 'squareLabel',
+    method: 'text',
+    options: { color: colors.sides, position: [0, -1.45], size: 0.15 },
+  };
+  const shapeTriangleLabel = {
+    name: 'triangleLabel',
+    method: 'text',
+    options: { color: colors.sides, position: [1.75, -1.45], size: 0.15 },
+  };
+  const shapes = {
+    name: 'shapes',
+    method: 'collection',
+    addElements: [
+      shapeCircle,
+      shapeSquare,
+      shapeTriangle,
+      shapeCircleLabel,
+      shapeSquareLabel,
+      shapeTriangleLabel,
+    ],
+    options: {
+      position: [0, 0.2],
+    },
+  };
+
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
 
   const measureLengthTicks = {
     name: 'ticks',
@@ -208,7 +281,7 @@ export default function lessonLayout() {
   };
 
   const gridL = 5;
-  const gridW = 2.5;
+  const gridW = 1.75;
   layout.grid = {
     length: gridL,
     height: gridW,
@@ -218,56 +291,23 @@ export default function lessonLayout() {
     name: 'grid',
     method: 'grid',
     options: {
-      bounds: new Rect(-2.5, -1.5, 5, 2.5),
+      bounds: new Rect(-2.5, -1.25, 5, 1.75),
       xStep: 0.25,
       yStep: 0.25,
       numLinesThick: 2,
       color: colors.grid,
     },
   };
-  const measureAreaCircle = {
-    name: 'circle',
-    method: 'polygon',
-    options: {
-      width: 0.03,
-      color: colors.sides,
-      sides: 100,
-      radius: 0.625,
-      position: [-1.75, -0.37],
-    },
-  };
-  const measureAreaSquare = {
-    name: 'square',
-    method: 'polygon',
-    options: {
-      width: 0.03,
-      color: colors.sides,
-      sides: 4,
-      radius: 0.89,
-      rotation: Math.PI / 4,
-      position: [0, -0.37],
-    },
-  };
-  const measureAreaTriangle = {
-    name: 'triangle',
-    method: 'polygon',
-    options: {
-      width: 0.05,
-      color: colors.sides,
-      sides: 3,
-      radius: 0.84,
-      rotation: -Math.PI / 6,
-      position: [1.7, -0.58],
-    },
-  };
+
   const measureArea = {
     name: 'area',
     method: 'collection',
     addElements: [
       measureAreaGrid,
-      measureAreaCircle,
-      measureAreaTriangle,
-      measureAreaSquare,
+      // measureAreaCircle,
+      // measureAreaTriangle,
+      // measureAreaSquare,
+      // measureCircleAreaLabel,
     ],
   };
   const measure = {
@@ -302,8 +342,8 @@ export default function lessonLayout() {
   layout.genericGrid = {
     position: new Point(0, 0.2),
     smallPosition: new Point(-2, 0),
-    sideLength: 0.3,
-    waveMag: 0.015,
+    sideLength: 0.25,
+    waveMag: 0.0125,
     width: 0.01,
     segments: 20,
   };
@@ -313,13 +353,18 @@ export default function lessonLayout() {
     method: 'collection',
     addElements: [
       unitShapeCircle,
+      measureAreaGrid,
     ],
+    options: {
+      position: [0, 0.2],
+    },
   };
 
   layout.addElements = [
     examples,
-    measure,
     unitShape,
+    measure,
+    shapes,
   ];
   return layout;
 }
