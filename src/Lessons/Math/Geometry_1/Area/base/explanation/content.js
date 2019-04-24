@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const examples = coll._examples;
     const meas = coll._measure;
+    const unit = coll._unitShape;
 
     this.addSection({
       title: 'Introduction',
@@ -130,6 +131,17 @@ class Content extends PresentationLessonContent {
       ],
       show: [
         meas._area,
+        // meas._squareGrid, meas._squareA,
+        // meas._circleA, meas._triangleA,
+      ],
+    });
+
+    this.addSection({
+      setContent: [
+        'But what shape should the reference area be?.',
+      ],
+      show: [
+        unit._genericGrid,
         // meas._squareGrid, meas._squareA,
         // meas._circleA, meas._triangleA,
       ],

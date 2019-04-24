@@ -9,7 +9,12 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   Transform,
+  Point,
 } = Fig;
+
+const {
+  range, roundNum,
+} = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _measure: {
@@ -21,6 +26,74 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
+  // eslint-disable-next-line class-methods-use-this
+  makeWaveSegment(
+    length: number,
+    mag: number,
+    segments: number,
+    start: Point = new Point(0, 0),
+    rotation: number = 0,
+  ) {
+    const step = length / segments;
+    const xPoints = range(0, length, step);
+    const points = xPoints.map(x => new Point(
+      x,
+      mag * Math.cos(x / length * 2 * Math.PI),
+    ));
+    const transform = new Transform().rotate(rotation).translate(start);
+    const tPoints: Array<Point> = points.map(p => p.transformBy(transform.m()));
+    return tPoints;
+  }
+
+  makeGenericGrid(xNum: number, yNum: number, sideLength: number) {
+    const lay = this.layout.genericGrid;
+    const length = xNum * sideLength;
+    const height = yNum * sideLength;
+    const hPoints = this.makeWaveSegment(
+      sideLength, lay.waveMag,
+      lay.segments, new Point(-length / 2, -height / 2 - lay.waveMag),
+    );
+    const hSegment = this.diagram.shapes.polyLineLegacy(
+      hPoints, false, lay.width, this.layout.colors.grid,
+      'never',
+    );
+    const hLines = this.diagram.shapes.repeatPatternVertex(
+      hSegment,
+      length / sideLength, height / sideLength + 1,
+      sideLength, sideLength,
+    );
+
+    const vPoints = this.makeWaveSegment(
+      sideLength, lay.waveMag,
+      lay.segments, new Point(-length / 2 + lay.waveMag, -height / 2), Math.PI / 2,
+    );
+    const vSegment = this.diagram.shapes.polyLineLegacy(
+      vPoints, false, lay.width, this.layout.colors.grid,
+      'never',
+    );
+    const vLines = this.diagram.shapes.repeatPatternVertex(
+      vSegment, length / sideLength + 1,
+      height / sideLength, sideLength, lay.sideLength,
+    );
+
+    const group = this.diagram.shapes.collection({ transform: new Transform().translate(0, 0) });
+    group.add('vLines', vLines);
+    group.add('hLines', hLines);
+    return group;
+  }
+
+  addGenericGrid() {
+    const lay = this.layout.genericGrid;
+    const { grid } = this.layout;
+    const group = this.makeGenericGrid(
+      roundNum(grid.length / lay.sideLength, 4),
+      roundNum(grid.height / lay.sideLength, 4),
+      lay.sideLength,
+    );
+    group.setPosition(lay.position);
+    this._unitShape.add('genericGrid', group);
+  }
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -30,6 +103,20 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
+    this.makeUnitCircleGrid();
+    this.addGenericGrid();
+  }
+
+  makeUnitCircleGrid() {
+    const grid = this.diagram.shapes.repeatPatternVertex({
+      element: this._unitShape._circle._dup(),
+      xNum: 20,
+      xStep: 0.25,
+      yNum: 10,
+      yStep: 0.25,
+    });
+    grid.setPosition(-2.5 + 0.125, -1.5 + 0.125);
+    this._unitShape.add('circleGrid', grid);
   }
 
   pulseMeasureLine() {

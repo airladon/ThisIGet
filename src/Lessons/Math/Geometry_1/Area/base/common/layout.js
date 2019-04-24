@@ -207,6 +207,12 @@ export default function lessonLayout() {
     },
   };
 
+  const gridL = 5;
+  const gridW = 2.5;
+  layout.grid = {
+    length: gridL,
+    height: gridW,
+  };
 
   const measureAreaGrid = {
     name: 'grid',
@@ -281,10 +287,39 @@ export default function lessonLayout() {
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
+  const unitShapeCircle = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      width: 0.01,
+      color: colors.grid,
+      sides: 100,
+      radius: 0.125,
+      trianglePrimitives: true,
+    },
+  };
+
+  layout.genericGrid = {
+    position: new Point(0, 0.2),
+    smallPosition: new Point(-2, 0),
+    sideLength: 0.3,
+    waveMag: 0.015,
+    width: 0.01,
+    segments: 20,
+  };
+
+  const unitShape = {
+    name: 'unitShape',
+    method: 'collection',
+    addElements: [
+      unitShapeCircle,
+    ],
+  };
 
   layout.addElements = [
     examples,
     measure,
+    unitShape,
   ];
   return layout;
 }

@@ -11569,8 +11569,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSidesToDraw, center, color, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, numSides, radius, lineWidth, rotation, center, numSidesToDraw, direction);
+function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSidesToDraw, center, color, transformOrLocation, diagramLimits, triangles) {
+  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, numSides, radius, lineWidth, rotation, center, numSidesToDraw, direction, triangles);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
@@ -15480,7 +15480,8 @@ function () {
         mods: {},
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
         position: null,
-        center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)
+        center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        trianglePrimitives: false
       };
 
       for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
@@ -15517,7 +15518,7 @@ function () {
       if (options.fill) {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
       if (options.mods != null && options.mods !== {}) {
@@ -15624,16 +15625,74 @@ function () {
       return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
     }
   }, {
-    key: "radialLinesLegacy",
-    value: function radialLinesLegacy() {
-      var innerRadius = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var outerRadius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.05;
-      var dAngle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Math.PI / 4;
-      var color = arguments.length > 4 ? arguments[4] : undefined;
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, innerRadius, outerRadius, width, dAngle, color, transform, this.limits);
-    }
+    key: "repeatPatternVertex",
+    value: function repeatPatternVertex() {
+      var defaultOptions = {
+        element: null,
+        xNum: 2,
+        yNum: 2,
+        xStep: 1,
+        yStep: 1,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
+      };
+
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var element = options.element,
+          transform = options.transform,
+          xNum = options.xNum,
+          yNum = options.yNum,
+          xStep = options.xStep,
+          yStep = options.yStep;
+
+      if (element == null) {
+        return this.collection();
+      }
+
+      var copy = element._dup();
+
+      var drawingObject = element.drawingObject; // console.log(element.drawingObject.points)
+
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+        copy.transform = transform._dup();
+        var newPoints = [];
+        var points = drawingObject.points;
+
+        for (var x = 0; x < xNum; x += 1) {
+          for (var y = 0; y < yNum; y += 1) {
+            for (var p = 0; p < points.length; p += 2) {
+              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[p] + x * xStep, points[p + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
+            }
+          }
+        } // console.log(newPoints)
+
+
+        copy.drawingObject.changeVertices(newPoints);
+      }
+
+      return copy;
+    } // radialLinesLegacy(
+    //   innerRadius: number = 0,
+    //   outerRadius: number = 1,
+    //   width: number = 0.05,
+    //   dAngle: number = Math.PI / 4,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return RadialLines(
+    //     this.webgl, innerRadius, outerRadius, width,
+    //     dAngle, color, transform, this.limits,
+    //   );
+    // }
+
   }, {
     key: "collection",
     value: function collection() {
@@ -15645,8 +15704,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len10 = arguments.length, moreOptions = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
-          moreOptions[_key10 - 1] = arguments[_key10];
+        for (var _len11 = arguments.length, moreOptions = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+          moreOptions[_key11 - 1] = arguments[_key11];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -15704,8 +15763,8 @@ function () {
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
-    key: "repeatPatternVertex",
-    value: function repeatPatternVertex(element, xNum, yNum, xStep, yStep) {
+    key: "repeatPatternVertexLegacy",
+    value: function repeatPatternVertexLegacy(element, xNum, yNum, xStep, yStep) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
 
       var copy = element._dup();
@@ -15751,8 +15810,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15852,121 +15911,141 @@ function () {
       var xy = this.collection(transform);
 
       if (showGrid) {
-        var gridLines = this.grid(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8), 1, gridColor, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0));
+        var gridLines = this.grid({
+          bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
+          stepX: _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8),
+          stepY: _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8),
+          numThickLines: 1,
+          color: gridColor,
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0)
+        });
         xy.add('grid', gridLines);
       }
 
       xy.add('y', yAxis);
       xy.add('x', xAxis);
       return xy;
-    }
-  }, {
-    key: "axesLegacy",
-    value: function axesLegacy() {
-      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var limits = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
-      var yAxisLocation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var xAxisLocation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-      var stepX = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.1;
-      var stepY = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.1;
-      var fontSize = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.13;
-      var showGrid = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : true;
-      var color = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : [1, 1, 1, 0];
-      var gridColor = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : [1, 1, 1, 0];
-      var location = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var decimalPlaces = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : 1;
-      var lineWidth = 0.01;
-      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
-      xProps.minorTicks.mode = 'off';
-      xProps.minorGrid.mode = 'off';
-      xProps.majorGrid.mode = 'off';
-      xProps.length = width;
-      xProps.width = lineWidth;
-      xProps.limits = {
-        min: limits.left,
-        max: limits.right
-      };
-      xProps.color = color.slice();
-      xProps.title = '';
-      xProps.majorTicks.start = limits.left;
-      xProps.majorTicks.step = stepX;
-      xProps.majorTicks.length = lineWidth * 5;
-      xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
-      xProps.majorTicks.width = lineWidth * 2;
-      xProps.majorTicks.labelMode = 'off';
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
-        return v.toFixed(decimalPlaces);
-      }).map(function (v) {
-        if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
-          return "".concat(v, "     ");
-        }
+    } // axesLegacy(
+    //   width: number = 1,
+    //   height: number = 1,
+    //   limits: Rect = new Rect(-1, -1, 2, 2),
+    //   yAxisLocation: number = 0,
+    //   xAxisLocation: number = 0,
+    //   stepX: number = 0.1,
+    //   stepY: number = 0.1,
+    //   fontSize: number = 0.13,
+    //   showGrid: boolean = true,
+    //   color: Array<number> = [1, 1, 1, 0],
+    //   gridColor: Array<number> = [1, 1, 1, 0],
+    //   location: Transform | Point = new Transform(),
+    //   decimalPlaces: number = 1,
+    // ) {
+    //   const lineWidth = 0.01;
+    //   const xProps = new AxisProperties('x', 0);
+    //   xProps.minorTicks.mode = 'off';
+    //   xProps.minorGrid.mode = 'off';
+    //   xProps.majorGrid.mode = 'off';
+    //   xProps.length = width;
+    //   xProps.width = lineWidth;
+    //   xProps.limits = { min: limits.left, max: limits.right };
+    //   xProps.color = color.slice();
+    //   xProps.title = '';
+    //   xProps.majorTicks.start = limits.left;
+    //   xProps.majorTicks.step = stepX;
+    //   xProps.majorTicks.length = lineWidth * 5;
+    //   xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
+    //   xProps.majorTicks.width = lineWidth * 2;
+    //   xProps.majorTicks.labelMode = 'off';
+    //   xProps.majorTicks.labels = tools.range(
+    //     xProps.limits.min,
+    //     xProps.limits.max,
+    //     stepX,
+    //   ).map(v => v.toFixed(decimalPlaces)).map((v) => {
+    //     if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
+    //       return `${v}     `;
+    //     }
+    //     return v;
+    //   });
+    //   // xProps.majorTicks.labels[xProps.majorTicks.labels / 2] = '   0';
+    //   xProps.majorTicks.labelOffset = new Point(
+    //     0,
+    //     xProps.majorTicks.offset - fontSize * 0.1,
+    //   );
+    //   xProps.majorTicks.labelsHAlign = 'center';
+    //   xProps.majorTicks.labelsVAlign = 'top';
+    //   xProps.majorTicks.fontColor = color.slice();
+    //   xProps.majorTicks.fontSize = fontSize;
+    //   xProps.majorTicks.fontWeight = '400';
+    //   const xAxis = new Axis(
+    //     this.webgl, this.draw2D, xProps,
+    //     new Transform().scale(1, 1).rotate(0)
+    //       .translate(0, xAxisLocation - limits.bottom * height / 2),
+    //     this.limits,
+    //   );
+    //   const yProps = new AxisProperties('x', 0);
+    //   yProps.minorTicks.mode = 'off';
+    //   yProps.minorGrid.mode = 'off';
+    //   yProps.majorGrid.mode = 'off';
+    //   yProps.length = height;
+    //   yProps.width = xProps.width;
+    //   yProps.limits = { min: limits.bottom, max: limits.top };
+    //   yProps.color = xProps.color;
+    //   yProps.title = '';
+    //   yProps.rotation = Math.PI / 2;
+    //   yProps.majorTicks.step = stepY;
+    //   yProps.majorTicks.start = limits.bottom;
+    //   yProps.majorTicks.length = xProps.majorTicks.length;
+    //   yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
+    //   yProps.majorTicks.width = xProps.majorTicks.width;
+    //   yProps.majorTicks.labelMode = 'off';
+    //   yProps.majorTicks.labels = tools.range(
+    //     yProps.limits.min,
+    //     yProps.limits.max,
+    //     stepY,
+    //   ).map(v => v.toFixed(decimalPlaces)).map((v) => {
+    //     if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
+    //       return '';
+    //     }
+    //     return v;
+    //   });
+    //   // yProps.majorTicks.labels[3] = '';
+    //   yProps.majorTicks.labelOffset = new Point(
+    //     yProps.majorTicks.offset - fontSize * 0.2,
+    //     0,
+    //   );
+    //   yProps.majorTicks.labelsHAlign = 'right';
+    //   yProps.majorTicks.labelsVAlign = 'middle';
+    //   yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
+    //   yProps.majorTicks.fontSize = fontSize;
+    //   yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
+    //   const yAxis = new Axis(
+    //     this.webgl, this.draw2D, yProps,
+    //     new Transform().scale(1, 1).rotate(0)
+    //       .translate(yAxisLocation - limits.left * width / 2, 0),
+    //     this.limits,
+    //   );
+    //   let transform = new Transform();
+    //   if (location instanceof Point) {
+    //     transform = transform.translate(location.x, location.y);
+    //   } else {
+    //     transform = location._dup();
+    //   }
+    //   const xy = this.collection(transform);
+    //   if (showGrid) {
+    //     const gridLines = this.grid(
+    //       new Rect(0, 0, width, height),
+    //       tools.roundNum(stepX * width / limits.width, 8),
+    //       tools.roundNum(stepY * height / limits.height, 8),
+    //       1,
+    //       gridColor, new Transform().scale(1, 1).rotate(0).translate(0, 0),
+    //     );
+    //     xy.add('grid', gridLines);
+    //   }
+    //   xy.add('y', yAxis);
+    //   xy.add('x', xAxis);
+    //   return xy;
+    // }
 
-        return v;
-      }); // xProps.majorTicks.labels[xProps.majorTicks.labels / 2] = '   0';
-
-      xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
-      xProps.majorTicks.labelsHAlign = 'center';
-      xProps.majorTicks.labelsVAlign = 'top';
-      xProps.majorTicks.fontColor = color.slice();
-      xProps.majorTicks.fontSize = fontSize;
-      xProps.majorTicks.fontWeight = '400';
-      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
-      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
-      yProps.minorTicks.mode = 'off';
-      yProps.minorGrid.mode = 'off';
-      yProps.majorGrid.mode = 'off';
-      yProps.length = height;
-      yProps.width = xProps.width;
-      yProps.limits = {
-        min: limits.bottom,
-        max: limits.top
-      };
-      yProps.color = xProps.color;
-      yProps.title = '';
-      yProps.rotation = Math.PI / 2;
-      yProps.majorTicks.step = stepY;
-      yProps.majorTicks.start = limits.bottom;
-      yProps.majorTicks.length = xProps.majorTicks.length;
-      yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
-      yProps.majorTicks.width = xProps.majorTicks.width;
-      yProps.majorTicks.labelMode = 'off';
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
-        return v.toFixed(decimalPlaces);
-      }).map(function (v) {
-        if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
-          return '';
-        }
-
-        return v;
-      }); // yProps.majorTicks.labels[3] = '';
-
-      yProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](yProps.majorTicks.offset - fontSize * 0.2, 0);
-      yProps.majorTicks.labelsHAlign = 'right';
-      yProps.majorTicks.labelsVAlign = 'middle';
-      yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
-      yProps.majorTicks.fontSize = fontSize;
-      yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
-      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
-      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-
-      if (location instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-        transform = transform.translate(location.x, location.y);
-      } else {
-        transform = location._dup();
-      }
-
-      var xy = this.collection(transform);
-
-      if (showGrid) {
-        var gridLines = this.grid(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8), 1, gridColor, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0));
-        xy.add('grid', gridLines);
-      }
-
-      xy.add('y', yAxis);
-      xy.add('x', xAxis);
-      return xy;
-    }
   }]);
 
   return DiagramPrimatives;
@@ -18924,12 +19003,19 @@ function (_VertexObject) {
     var center = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     var numSidesToDraw = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : numSides;
     var direction = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+    var triangles = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
 
     _classCallCheck(this, VertexPolygon);
 
     // setup webgl stuff
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
-    _this.glPrimative = webgl.gl.TRIANGLE_STRIP; // Check potential errors in constructor input
+
+    if (triangles) {
+      _this.glPrimative = webgl.gl.TRIANGLES;
+    } else {
+      _this.glPrimative = webgl.gl.TRIANGLE_STRIP;
+    } // Check potential errors in constructor input
+
 
     var sides = numSides;
     var sidesToDraw = Math.floor(numSidesToDraw);
@@ -18957,11 +19043,45 @@ function (_VertexObject) {
     var j = 0;
 
     for (i = 0; i <= sidesToDraw; i += 1) {
-      _this.points[j] = center.x + inRad * Math.cos(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 1] = center.y + inRad * Math.sin(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 2] = center.x + radius * Math.cos(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 3] = center.y + radius * Math.sin(i * _this.dAngle * direction + rotation * direction);
-      j += 4;
+      var angle = i * _this.dAngle * direction + rotation * direction;
+      var lastAngle = (i - 1) * _this.dAngle * direction + rotation * direction;
+      var inPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(angle), inRad * Math.sin(angle)).add(center);
+      var outPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(angle), radius * Math.sin(angle)).add(center);
+      var lastInPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(lastAngle), inRad * Math.sin(lastAngle)).add(center);
+      var lastOutPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(lastAngle), radius * Math.sin(lastAngle)).add(center);
+
+      if (triangles) {
+        if (i > 0) {
+          _this.points[j] = lastInPoint.x;
+          _this.points[j + 1] = lastInPoint.y;
+          _this.points[j + 2] = lastOutPoint.x;
+          _this.points[j + 3] = lastOutPoint.y;
+          _this.points[j + 4] = outPoint.x;
+          _this.points[j + 5] = outPoint.y;
+          _this.points[j + 6] = outPoint.x;
+          _this.points[j + 7] = outPoint.y;
+          _this.points[j + 8] = lastInPoint.x;
+          _this.points[j + 9] = lastInPoint.y;
+          _this.points[j + 10] = inPoint.x;
+          _this.points[j + 11] = inPoint.y;
+          j += 12;
+        }
+      } else {
+        // this.points[j] =
+        //   center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 1] =
+        //   center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 2] =
+        //   center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 3] =
+        //   center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
+        // j += 4;
+        _this.points[j] = inPoint.x;
+        _this.points[j + 1] = inPoint.y;
+        _this.points[j + 2] = outPoint.x;
+        _this.points[j + 3] = outPoint.y;
+        j += 4;
+      }
     } // Make the encapsulating border
 
 
