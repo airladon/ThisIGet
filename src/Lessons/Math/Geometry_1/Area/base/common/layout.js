@@ -562,6 +562,7 @@ export default function lessonLayout() {
         equals: '  =  ',
         _equals: '  =  ',
         _6: '6',
+        _2: { text: '2', color: colors.highlight },
         x: ' \u00D7 ',
         _x: ' \u00D7 ',
         __x: ' \u00D7 ',
@@ -578,8 +579,17 @@ export default function lessonLayout() {
         brace: brace(4),
         _brace: brace(4),
         sBrace: brace(1),
+        mBrace: brace(2),
         _sBrace: brace(1),
         _60: '60',
+        _1: '1',
+        __1: '1',
+        // m: { color: colors.highlight, mods: mods('up', 0.6) },
+        m: { color: colors.highlight },
+        _m: { text: 'm', color: colors.highlight },
+        __m: { text: 'm', color: colors.highlight },
+        s: { symbol: 'strike', color: colors.gridLight },
+        _s: { symbol: 'strike', color: colors.gridLight },
       },
       forms: {
         '0': ['Area', 'equals', '_6', 'x', '_10', '_equals', '_60', '  ', 'squares'],
@@ -599,6 +609,37 @@ export default function lessonLayout() {
           comment('B', 'height', '_sBrace'),
         ],
         '6': ['Area', 'equals', 'width', 'x', 'height'],
+        // Units Forms
+        '10': ['Area', 'equals', '_10', 'm', 'x', '_6', '_m'],
+        '11': ['Area', 'equals', '_10', '_x', '_1', 'm', 'x', '_6', '__x', '__1', '_m'],
+        '12': {
+          content: ['Area', 'equals', '_10', 'x', '_6', '__x', '__1', '_m', '_x', '_1', 'm'],
+          translation: {
+            m: ['curved', 'up', 0.5],
+            _1: ['curved', 'up', 0.5],
+            _x: ['curved', 'up', 0.5],
+          },
+        },
+        '13': [
+          'Area', 'equals',
+          comment(['_10', 'x', '_6'], '_60', 'mBrace'),
+          '__x',
+          { strike: ['__1', 's'] },
+          '_m', '_x',
+          { strike: ['_1', '_s'] },
+          'm'],
+        '14': {
+          content: ['Area', 'equals', '_60', '__x', '_m', '_x', 'm'],
+          translation: {
+            m: ['linear'],
+            _x: ['linear'],
+          },
+        },
+        '15': [
+          'Area', 'equals', '_60', '__x',
+          comment(['_m', '_x', 'm'], { sup: ['__m', '_2'] }, 'mBrace'),
+        ],
+        '16': ['Area', 'equals', '_60', { sup: ['__m', '_2'] }],
       },
       defaultFormAlignment: {
         alignH: 'center',

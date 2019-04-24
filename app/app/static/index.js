@@ -716,7 +716,9 @@ function () {
     this.element = options.element;
     this.animations = [];
     this.state = 'idle';
-    this.options = {};
+    this.options = {
+      translation: {}
+    };
     return this;
   }
 
@@ -8015,30 +8017,29 @@ function (_Elements) {
         translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation, this.fromNext);
       } else {
         translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation);
-      } // Object.values(translationToUse).forEach((mods) => {
+      }
 
+      Object.keys(translationToUse).forEach(function (key) {
+        var mods = translationToUse[key];
+        var element = mods.element,
+            style = mods.style,
+            direction = mods.direction,
+            mag = mods.mag;
 
-      var _translationToUse = translationToUse,
-          element = _translationToUse.element,
-          style = _translationToUse.style,
-          direction = _translationToUse.direction,
-          mag = _translationToUse.mag;
+        if (element) {
+          if (style != null) {
+            element.animations.options.translation.style = style;
+          }
 
-      if (element) {
-        if (style != null) {
-          element.animations.options.translation.style = style;
+          if (direction != null) {
+            element.animations.options.translation.direction = direction;
+          }
+
+          if (mag != null) {
+            element.animations.options.translation.magnitude = mag;
+          }
         }
-
-        if (direction != null) {
-          element.animations.options.translation.direction = direction;
-        }
-
-        if (mag != null) {
-          element.animations.options.translation.magnitude = mag;
-        }
-      } // });
-
-
+      });
       var t = this.collectionMethods.animateToTransforms(animateToTransforms, moveTimeToUse, cumTime, 0, moveCallback);
 
       if (t > 0) {

@@ -373,6 +373,31 @@ class Content extends PresentationLessonContent {
         'We can put these together to understand how the units for area are |normally written|.',
       ]),
     });
+
+    common = {
+      show: [rect._grid, rect._line, rect._label10, rect._label6],
+      setSteadyState: () => {
+        eqn.setScenario('top');
+        eqn.showForm('6');
+      },
+    };
+
+    content = {
+      setContent: 'Lets assume the reference squares have |1m side| length. Therefore the rectangle\'s |height| is |6m| and |width| is |10m|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '10', to: '10' }, common, content, {});
+    content = {
+      setContent: 'We can |simplify| and |rearrange| this equation to find the units of area.',
+    };
+    this.addSectionEqnStep({ eqn, from: '10', to: '10' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '10', to: '11' }, common, content, {});
+    this.addSectionEqnStep({
+      eqn, from: '11', to: '12', duration: 1.1,
+    }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '12', to: '13' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '13', to: '14' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '14', to: '15' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '15', to: '16' }, common, content, {});
   }
 }
 
