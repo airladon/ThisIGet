@@ -1,0 +1,16 @@
+@import '../common/style';
+
+// $colors: (
+//   square1:             color('red', 'base'),
+//   square2:             color('blue', 'base'),
+//   circle:              color('red', 'base'),
+// );
+
+body {
+  @include color_vars($colors);
+}
+
+.lesson__area_intro__area_label {
+  z-index: 10;
+  font-size: calc(var(--lesson__diagram-font-size) * 0.4);
+}

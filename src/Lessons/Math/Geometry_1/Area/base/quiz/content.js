@@ -1,22 +1,25 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
-  PresentationLessonContent, interactiveItem,
+  PresentationLessonContent,
+  // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import {
-//   toHTML,
-// } from '../../../../../../js/tools/htmlGenerator';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
-const { toHTML } = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -31,42 +34,29 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const quiz = diag._quiz;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
+    // const main = quiz._main;
 
-    // this.addSection({
-    //   title: 'Enter_title_here',
-    //   setContent: ['Enter_content_here'],
-    // });
     this.addSection({
-      title: 'Area of rectangle and square.',
-      setContent: [
-        'Create a rectangle or square that has an area of |area| squares.',
-      ],
-      modifiers: {
-        area: toHTML('?', 'id__lessons__area_quiz1', '', colors.unit),
-      },
-      setInfo: `<ul>
-          <li>Move rectangle sides to change rectangle width and height.</li>
-          <li>Press |Check| button when rectange area is thought to be the target area.</li>
-          </ul>
-      `,
-      infoModifiers: {
-      },
+      title: '',
+      setContent: ['Question'],
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
       interactiveElements: [
-        interactiveItem(quiz._check),
+        // interactiveItem(quiz._check),
       ],
-      setEnterState: () => {
-      },
-      showOnly: [
-        quiz,
-      ],
-      show: [
-        quiz._rect, quiz._grid, quiz._check,
-      ],
-      setSteadyState: () => {
-        quiz.newProblem();
-      },
+      setEnterState: () => {},
+      showOnly: [],
+      // show: [main],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

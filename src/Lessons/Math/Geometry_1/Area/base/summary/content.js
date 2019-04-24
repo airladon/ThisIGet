@@ -1,15 +1,20 @@
 // @flow
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
-import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -27,66 +32,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const meas = diag._measure;
-    const rect = diag._rect;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
-    const common = {
-      setContent: [],
-      setInfo: '',
+    this.addSection({
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      ],
       modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
       infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
+      ],
       setEnterState: () => {},
       showOnly: [],
       show: [],
       hide: [],
       setSteadyState: () => {},
       setLeaveState: () => {},
-    };
-    // ******************************************************************
-    // ******************************************************************
-    // ******************************************************************
-    // Measure
-    // ******************************************************************
-    // ******************************************************************
-    // ******************************************************************
-    common.showOnly = [meas];
-    this.addSection(common, {
-      title: 'Area',
-      setContent: [
-        '|Area| is the |amount of space| a shape takes up and is measured in |squared length| units, such as |square meters| normally written as |m<sup>2</sup>|.',
-        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html('id_lesson__area_definition', 'lesson__definition_low')}`,
-      ],
-      showOnly: [meas],
-      show: [
-        meas._mediumGrid, meas._squareA,
-        meas._circleA, meas._triangleA,
-        meas._triLabelMeters, meas._squareLabelMeters, meas._circleLabelMeters,
-      ],
-    });
-
-    this.addSection(common, {
-      title: 'Rectangle',
-      setContent: [
-        'The |area of a rectangle| is equal to its |width| multiplied by its |height|.',
-      ],
-      showOnly: [rect],
-      show: [rect._line, rect._sideWidth, rect._sideHeight],
-      setSteadyState: () => {
-        rect.eqns.squareRectEqn.showForm('0');
-      },
-    });
-
-    this.addSection(common, {
-      title: 'Square',
-      setContent: [
-        'The |area of a square| is equal to its |side length squared|.',
-      ],
-      showOnly: [rect],
-      show: [rect._square, rect._sideSquareA, rect._sideSquareB],
-      setSteadyState: () => {
-        rect.eqns.squareRectEqn.showForm('1');
-      },
     });
   }
 }
