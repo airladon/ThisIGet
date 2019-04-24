@@ -61,8 +61,25 @@ export default function getLessonIndex() {
       versions: {
         base: {
           title: 'Base',
-          description: 'First explanation of Topic.',
+          description: 'Explanation_of_version_here.',
           path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Area',
+            'Square',
+            'Rectangle',
+          ],
+        },
+        legacy: {
+          title: 'Legacy',
+          description: 'First explanation of Topic.',
+          path: 'legacy',
           onPath: true,
           topics: [
             'dev',

@@ -1,8 +1,10 @@
 @import '../../../geometry';
 
 $colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
+  sides:             color('blue'),
+  example1:          color('red'),
+  example2:          color('blue'),
+  disabled:          color('diagram', 'disabled'),
 );
 
 body {
