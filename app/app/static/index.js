@@ -4483,6 +4483,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       axes: shapes.axes.bind(shapes),
       radialLines: shapes.radialLines.bind(shapes),
       rectangle: shapes.rectangle.bind(shapes),
+      grid: shapes.grid.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -13347,15 +13348,7 @@ function () {
           base: ['base']
         },
         position: position
-      }); // eqn = equations.makeEqn();
-      // eqn.createElements({ base: labelTextOrEquation }, color);
-      // eqn.collection.transform = new Transform().scale(1, 1).rotate(0).translate(position);
-      // eqn.formAlignment.fixTo = new Point(0, 0);
-      // eqn.formAlignment.alignH = alignH;
-      // eqn.formAlignment.alignV = alignV;
-      // eqn.formAlignment.scale = scale;
-      // eqn.addForm('base', ['base']);
-
+      });
       eqn.setCurrentForm('base');
     } else if (labelTextOrEquation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_1__["EquationNew"]) {
       eqn = labelTextOrEquation;
@@ -13365,10 +13358,7 @@ function () {
       labelTextOrEquation.forEach(function (labelText, index) {
         elements["_".concat(index)] = labelText;
         forms[index] = [labelText];
-      }); // labelTextOrEquation.forEach((labelText, index) => {
-      //   eqn.addForm(`${index}`, [`_${index}`]);
-      // });
-
+      });
       eqn = equations.equation({
         elements: elements,
         forms: forms,
@@ -13380,32 +13370,9 @@ function () {
           alignV: alignV
         },
         scale: scale
-      }); // eqn = equations.makeEqn();
-      // eqn.createElements(elements, color);
-      // eqn.collection.transform = new Transform().scale(1, 1).rotate(0).translate(position);
-      // eqn.formAlignment.fixTo = new Point(0, 0);
-      // eqn.formAlignment.alignH = alignH;
-      // eqn.formAlignment.alignV = alignV;
-      // eqn.formAlignment.scale = scale;
-      // labelTextOrEquation.forEach((labelText, index) => {
-      //   eqn.addForm(`${index}`, [`_${index}`]);
-      // });
-
+      });
       eqn.setCurrentForm(form, formType);
     } else {
-      // // eslint-disable-next-line no-lonely-if
-      // if (labelTextOrEquation.eqn === 'fraction') {
-      //   const defaultFracOptions = { color, scale: 0.5 };
-      //   const fracOptions = joinObjects({}, defaultFracOptions, labelTextOrEquation);
-      //   eqn = equations.fraction(fracOptions);
-      //   eqn.setCurrentForm('base');
-      // } else {
-      // // if (labelTextOrEquation.eqn === 'fractionPre') {
-      //   const defaultFracOptions = { color, scale: 0.7, fracScale: 0.5 };
-      //   const fracOptions = joinObjects({}, defaultFracOptions, labelTextOrEquation);
-      //   eqn = equations.fractionPre(fracOptions);
-      //   eqn.setCurrentForm('base');
-      // }
       var defaultEqnOptions = {
         color: color
       };
@@ -13413,7 +13380,10 @@ function () {
     }
 
     this.eqn = eqn;
-  }
+  } // TODO
+  // setEqn() {
+  // }
+
 
   _createClass(EquationLabel, [{
     key: "setText",
@@ -15419,8 +15389,8 @@ function () {
       return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
     }
   }, {
-    key: "grid",
-    value: function grid(bounds, xStep, yStep, numLinesThick, color) {
+    key: "gridLegacy",
+    value: function gridLegacy(bounds, xStep, yStep, numLinesThick, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
 
@@ -15437,37 +15407,58 @@ function () {
       }
 
       return this.lines(linePairs, numLinesThick, color, transform);
-    } // polygon(
-    //   numSides: number,
-    //   radius: number,
-    //   lineWidth: number,
-    //   rotation: number,
-    //   direction: -1 | 1,
-    //   numSidesToDraw: number,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return Polygon(
-    //     this.webgl, numSides, radius, lineWidth,
-    //     rotation, direction, numSidesToDraw, color, transform, this.limits,
-    //   );
-    // }
-    // polygonFilled(
-    //   numSides: number,
-    //   radius: number,
-    //   rotation: number,
-    //   numSidesToDraw: number,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    //   textureLocation: string = '',
-    //   textureCoords: Rect = new Rect(0, 0, 1, 1),
-    // ) {
-    //   return PolygonFilled(
-    //     this.webgl, numSides, radius,
-    //     rotation, numSidesToDraw, color, transform, this.limits, textureLocation, textureCoords,
-    //   );
-    // }
+    }
+  }, {
+    key: "grid",
+    value: function grid() {
+      var defaultOptions = {
+        bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+        xStep: 0.1,
+        yStep: 0.1,
+        xOffset: 0,
+        yOffset: 0,
+        numLinesThick: 1,
+        color: [1, 0, 0, 1],
+        position: null,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
+      };
 
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(point);
+      }
+
+      var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
+
+      var bounds = options.bounds,
+          xStep = options.xStep,
+          xOffset = options.xOffset,
+          yStep = options.yStep,
+          yOffset = options.yOffset,
+          color = options.color,
+          numLinesThick = options.numLinesThick,
+          transform = options.transform;
+
+      if (options.xStep !== 0) {
+        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](x, 8) <= bounds.right; x += xStep) {
+          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
+        }
+      }
+
+      if (yStep !== 0) {
+        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](y, 8) <= bounds.top; y += yStep) {
+          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
+        }
+      }
+
+      return this.lines(linePairs, numLinesThick, color, transform);
+    }
   }, {
     key: "polygon",
     value: function polygon() {
@@ -15491,8 +15482,8 @@ function () {
         center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
@@ -15571,8 +15562,8 @@ function () {
         position: null
       };
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn)); // const defultCornerOptions = {
@@ -15618,8 +15609,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15652,8 +15643,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len9 = arguments.length, moreOptions = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
-          moreOptions[_key9 - 1] = arguments[_key9];
+        for (var _len10 = arguments.length, moreOptions = new Array(_len10 > 1 ? _len10 - 1 : 0), _key10 = 1; _key10 < _len10; _key10++) {
+          moreOptions[_key10 - 1] = arguments[_key10];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -15758,8 +15749,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
