@@ -104,23 +104,34 @@ class Content extends PresentationLessonContent {
         'A |line| of length |4 meters|, has four |_1_meter| reference lengths.',
       ],
       modifiers: {
-        _1_meter: highlight(colors.grid),
+        _1_meter: highlight(colors.measure),
         line: click(coll.pulseMeasureLine, [coll], colors.sides),
       },
       show: [meas._length],
     });
 
-    this.addSection(common, {
+    this.addSection({
       setContent: [
         '|Angle| is measured by counting |reference angles|.',
         'An angle of |_60deg|, has sixty |_1deg| reference angles.',
       ],
       modifiers: {
         _60deg: highlightWord('60º', colors.angles),
-        _1deg: highlightWord('1º', colors.grid),
+        _1deg: highlightWord('1º', colors.measure),
       },
       show: [
         meas._angle,
+      ],
+    });
+
+    this.addSection({
+      setContent: [
+        'Similarly, |area| is measured by counting |reference areas|.',
+      ],
+      show: [
+        meas._area,
+        // meas._squareGrid, meas._squareA,
+        // meas._circleA, meas._triangleA,
       ],
     });
   }

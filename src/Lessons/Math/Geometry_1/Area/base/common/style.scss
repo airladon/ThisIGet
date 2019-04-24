@@ -6,7 +6,8 @@ $colors: (
   example1:          color('red'),
   example2:          color('blue'),
   disabled:          color('diagram', 'disabled'),
-  grid:              color('grey', 'base'),
+  grid:              color('grey', 'darker'),
+  measure:           color('grey', 'base'),
 );
 
 body {

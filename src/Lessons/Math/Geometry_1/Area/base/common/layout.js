@@ -18,6 +18,7 @@ const cssColorNames = [
   'disabled',
   'grid',
   'angles',
+  'measure',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -89,7 +90,7 @@ export default function lessonLayout() {
       xStep: 1,
       yStep: 0,
       numLinesThick: 2,
-      color: colors.grid,
+      color: colors.measure,
     },
   };
 
@@ -98,7 +99,7 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       width: 0.01,
-      color: colors.grid,
+      color: colors.measure,
       length: 4,
       vertexSpaceStart: 'center',
     },
@@ -108,7 +109,7 @@ export default function lessonLayout() {
     name: 'label',
     method: 'text',
     options: {
-      color: colors.grid,
+      color: colors.measure,
       text: '1m',
       position: [-1.5, 0.15],
       size: 0.15,
@@ -174,7 +175,7 @@ export default function lessonLayout() {
       innerRadius: measureAngleRadius + 0.25,
       outerRadius: measureAngleRadius + 0.3,
       width: 0.01,
-      color: colors.grid,
+      color: colors.measure,
       dAngle: Math.PI / 180,
       angle: Math.PI / 3,
     },
@@ -187,7 +188,7 @@ export default function lessonLayout() {
       innerRadius: measureAngleRadius + 0.2,
       outerRadius: measureAngleRadius + 0.3,
       width: 0.01,
-      color: colors.grid,
+      color: colors.measure,
       dAngle: Math.PI / 18,
       angle: Math.PI / 3,
     },
@@ -207,12 +208,69 @@ export default function lessonLayout() {
   };
 
 
+  const measureAreaGrid = {
+    name: 'grid',
+    method: 'grid',
+    options: {
+      bounds: new Rect(-2.5, -1.5, 5, 2.5),
+      xStep: 0.25,
+      yStep: 0.25,
+      numLinesThick: 2,
+      color: colors.grid,
+    },
+  };
+  const measureAreaCircle = {
+    name: 'circle',
+    method: 'polygon',
+    options: {
+      width: 0.03,
+      color: colors.sides,
+      sides: 100,
+      radius: 0.625,
+      position: [-1.75, -0.37],
+    },
+  };
+  const measureAreaSquare = {
+    name: 'square',
+    method: 'polygon',
+    options: {
+      width: 0.03,
+      color: colors.sides,
+      sides: 4,
+      radius: 0.89,
+      rotation: Math.PI / 4,
+      position: [0, -0.37],
+    },
+  };
+  const measureAreaTriangle = {
+    name: 'triangle',
+    method: 'polygon',
+    options: {
+      width: 0.05,
+      color: colors.sides,
+      sides: 3,
+      radius: 0.84,
+      rotation: -Math.PI / 6,
+      position: [1.7, -0.58],
+    },
+  };
+  const measureArea = {
+    name: 'area',
+    method: 'collection',
+    addElements: [
+      measureAreaGrid,
+      measureAreaCircle,
+      measureAreaTriangle,
+      measureAreaSquare,
+    ],
+  };
   const measure = {
     name: 'measure',
     method: 'collection',
     addElements: [
       measureLength,
       measureAngle,
+      measureArea,
     ],
   };
 
