@@ -164,6 +164,7 @@ export default function lessonLayout() {
       yStep: 0,
       numLinesThick: 2,
       color: colors.measure,
+      position: [0, -0.2],
     },
   };
 
@@ -175,6 +176,7 @@ export default function lessonLayout() {
       color: colors.measure,
       length: 4,
       vertexSpaceStart: 'center',
+      position: [0, -0.2],
     },
   };
 
@@ -184,7 +186,7 @@ export default function lessonLayout() {
     options: {
       color: colors.measure,
       text: '1m',
-      position: [-1.5, 0.15],
+      position: [-1.5, -0.05],
       size: 0.15,
     },
   };
@@ -197,7 +199,7 @@ export default function lessonLayout() {
       color: colors.sides,
       length: 4,
       vertexSpaceStart: 'center',
-      position: [0, -0.5],
+      position: [0, -0.7],
     },
   };
 
@@ -276,7 +278,7 @@ export default function lessonLayout() {
       measureAngle10Degrees,
     ],
     options: {
-      position: [-1.25, -1.5],
+      position: [-1.25, -1.7],
     },
   };
 
@@ -318,6 +320,9 @@ export default function lessonLayout() {
       measureAngle,
       measureArea,
     ],
+    options: {
+      position: [0, 0.2],
+    },
   };
 
   // //////////////////////////////////////////////////////////////////
@@ -348,12 +353,58 @@ export default function lessonLayout() {
     segments: 20,
   };
 
+  const dimension = (name, p1, p2, text) => ({
+    method: 'line',
+    name,
+    options: {
+      p1,
+      p2,
+      width: 0.01,
+      color: colors.grid,
+      arrows: {
+        width: 0.05,
+        height: 0.05,
+      },
+      label: {
+        text,
+        offset: 0.05,
+        location: 'top',
+        subLocation: 'left',
+        orientation: 'horizontal',
+      },
+    },
+  });
+ 
+  const space = 0.15;
+  const unitSquare = (name, d, label) => ({
+    method: 'collection',
+    name,
+    addElements: [
+      {
+        name: 'mmSquare',
+        method: 'polyLine',
+        options: {
+          points: [[-d, -d], [-d, d], [d, d], [d, -d]],
+          close: true,
+          color: colors.grid,
+        },
+      },
+      dimension('hDimension', [-d, d + space], [d, d + space], label),
+      dimension('vDimension', [-d - space, -d], [-d - space, d], label),
+    ],
+    options: {
+      position: [0, -0.5],
+    },
+  });
+
   const unitShape = {
     name: 'unitShape',
     method: 'collection',
     addElements: [
       unitShapeCircle,
       measureAreaGrid,
+      unitSquare('mmSquare', 0.2, '1mm'),
+      unitSquare('mSquare', 1, '1m'),
     ],
     options: {
       position: [0, 0.2],

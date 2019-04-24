@@ -187,6 +187,28 @@ class Content extends PresentationLessonContent {
         'Similar to |length|, there are several common sizes used depending on the size of the shape you are measuring.',
       ]),
     });
+
+    this.addSection({
+      setContent: [
+        'A square with side |1mm| would be used for small areas, like the size of silicon chips. This square is normally called a |square millimeter|.',
+      ],
+      show: [unit._mmSquare],
+    });
+
+    this.addSection({
+      setContent: [
+        'A square with side |1m| would be used for larger areas, like a house. This square is normally called a |square meter|.',
+      ],
+      show: [unit._mSquare],
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'A |reference square| is typically a |unit square|.',
+        'This means its |side has a length of 1|.',
+        'For example, a reference square would normally have a side length of |1m|, and |not 2m|.',
+      ]),
+    });
   }
 }
 
