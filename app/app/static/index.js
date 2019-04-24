@@ -11643,10 +11643,11 @@ function RadialLines(webgl) {
   var outerRadius = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.05;
   var dAngle = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Math.PI / 4;
-  var color = arguments.length > 5 ? arguments[5] : undefined;
-  var transformOrLocation = arguments.length > 6 ? arguments[6] : undefined;
-  var diagramLimits = arguments.length > 7 ? arguments[7] : undefined;
-  var vertexLine = new _DrawingObjects_VertexObject_VertexRadialLines__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, innerRadius, outerRadius, width, dAngle, Math.PI * 2);
+  var maxAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Math.PI * 2;
+  var color = arguments.length > 6 ? arguments[6] : undefined;
+  var transformOrLocation = arguments.length > 7 ? arguments[7] : undefined;
+  var diagramLimits = arguments.length > 8 ? arguments[8] : undefined;
+  var vertexLine = new _DrawingObjects_VertexObject_VertexRadialLines__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, innerRadius, outerRadius, width, dAngle, maxAngle);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -15606,6 +15607,7 @@ function () {
         outerRadius: 1,
         width: 0.05,
         dAngle: Math.PI / 4,
+        angle: Math.PI * 2,
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
@@ -15619,7 +15621,7 @@ function () {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.color, options.transform, this.limits);
+      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
     }
   }, {
     key: "radialLinesLegacy",

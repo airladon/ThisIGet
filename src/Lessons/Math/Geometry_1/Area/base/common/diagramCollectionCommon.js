@@ -4,12 +4,23 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementPrimative,
+  // DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _measure: {
+    _length: {
+      _line: DiagramObjectLine;
+      _measureLine: DiagramObjectLine;
+      _label: DiagramElementPrimative;
+      _grid: DiagramElementPrimative;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -19,5 +30,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
+  }
+
+  pulseMeasureLine() {
+    this._measure._length._line.pulseWidth({ line: 5 });
+    this.diagram.animateNextFrame();
   }
 }

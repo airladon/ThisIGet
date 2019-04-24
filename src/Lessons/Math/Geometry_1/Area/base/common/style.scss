@@ -2,9 +2,11 @@
 
 $colors: (
   sides:             color('blue'),
+  angles:            color('red'),
   example1:          color('red'),
   example2:          color('blue'),
   disabled:          color('diagram', 'disabled'),
+  grid:              color('grey', 'base'),
 );
 
 body {

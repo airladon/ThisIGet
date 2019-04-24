@@ -13,10 +13,10 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // click,
+  click,
   centerV,
   highlight,
-  // clickWord,
+  highlightWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -41,6 +41,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const examples = coll._examples;
+    const meas = coll._measure;
 
     this.addSection({
       title: 'Introduction',
@@ -95,6 +96,32 @@ class Content extends PresentationLessonContent {
         '|Area| is a property that has now been |identified| and |named|.',
         'How can we |measure| it?',
       ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Well, |length| is measured by counting |reference lengths|.',
+        'A |line| of length |4 meters|, has four |_1_meter| reference lengths.',
+      ],
+      modifiers: {
+        _1_meter: highlight(colors.grid),
+        line: click(coll.pulseMeasureLine, [coll], colors.sides),
+      },
+      show: [meas._length],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        '|Angle| is measured by counting |reference angles|.',
+        'An angle of |_60deg|, has sixty |_1deg| reference angles.',
+      ],
+      modifiers: {
+        _60deg: highlightWord('60º', colors.angles),
+        _1deg: highlightWord('1º', colors.grid),
+      },
+      show: [
+        meas._angle,
+      ],
     });
   }
 }
