@@ -45,6 +45,7 @@ class Content extends PresentationLessonContent {
     const meas = coll._measure;
     const unit = coll._unitShape;
     const shapes = coll._shapes;
+    const rect = coll._rectangle;
 
     this.addSection({
       title: 'Introduction',
@@ -208,6 +209,64 @@ class Content extends PresentationLessonContent {
         'This means its |side has a length of 1|.',
         'For example, a reference square would normally have a side length of |1m|, and |not 2m|.',
       ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'A |unit reference square| makes it easy to |relate number of squares and length|.',
+      ],
+      show: [unit._squareLength._squares, unit._squareLength._unitDimension],
+    });
+
+    this.addSection({
+      setContent: [
+        'In this case, there are |four squares| with |1mm side| length, and therefore the total length is |4mm|.',
+      ],
+      show: [unit._squareLength],
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore, the |number of squares| in a row, will be |equal| to the total |length| of the row.',
+      ],
+      show: [unit._squareLength],
+    });
+
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    // Rectangle
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    this.addSection({
+      title: 'Rectangle',
+      setContent: [
+        'We can now examine the |area| of a |rectangle| and |square| and see if it is |related| to any other properties of the shape.',
+      ],
+      show: [rect._grid, rect._line],
+    });
+
+    this.addSection({
+      title: 'Rectangle',
+      setContent: [
+        'Using reference squares to measure area makes it particularly convenient to examine the |area of a rectangle|.',
+      ],
+      show: [rect._grid, rect._line],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'In this case, there are |six_rows| of |ten_squares|.',
+      ],
+      modifiers: {
+        six_rows: click(coll.toggleRow, [coll], colors.row),
+        ten_squares: click(coll.toggleRow, [coll], colors.row),
+      },
+      show: [rect._grid, rect._line],
+      setSteadyState: () => {
+        coll.row = 5;
+      },
     });
   }
 }

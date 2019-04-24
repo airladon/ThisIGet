@@ -19,6 +19,8 @@ const cssColorNames = [
   'grid',
   'angles',
   'measure',
+  'gridLight',
+  'row',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -306,10 +308,6 @@ export default function lessonLayout() {
     method: 'collection',
     addElements: [
       measureAreaGrid,
-      // measureAreaCircle,
-      // measureAreaTriangle,
-      // measureAreaSquare,
-      // measureCircleAreaLabel,
     ],
   };
   const measure = {
@@ -337,7 +335,7 @@ export default function lessonLayout() {
     method: 'polygon',
     options: {
       width: 0.01,
-      color: colors.grid,
+      color: colors.gridLight,
       sides: 100,
       radius: 0.125,
       trianglePrimitives: true,
@@ -360,7 +358,7 @@ export default function lessonLayout() {
       p1,
       p2,
       width: 0.01,
-      color: colors.grid,
+      color: colors.gridLight,
       arrows: {
         width: 0.05,
         height: 0.05,
@@ -374,7 +372,7 @@ export default function lessonLayout() {
       },
     },
   });
- 
+
   const space = 0.15;
   const unitSquare = (name, d, label) => ({
     method: 'collection',
@@ -386,7 +384,7 @@ export default function lessonLayout() {
         options: {
           points: [[-d, -d], [-d, d], [d, d], [d, -d]],
           close: true,
-          color: colors.grid,
+          color: colors.gridLight,
         },
       },
       dimension('hDimension', [-d, d + space], [d, d + space], label),
@@ -397,6 +395,40 @@ export default function lessonLayout() {
     },
   });
 
+  const squareSize = 0.4;
+  const squareLength = {
+    name: 'squareLength',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'squares',
+        method: 'grid',
+        options: {
+          xStep: squareSize,
+          yStep: squareSize,
+          bounds: new Rect(-squareSize * 2, -squareSize / 2, squareSize * 4, squareSize),
+          width: 0.01,
+          color: colors.gridLight,
+        },
+      },
+      dimension(
+        'unitDimension',
+        [-squareSize * 2, squareSize / 2 + space],
+        [-squareSize * 2 + squareSize, squareSize / 2 + space],
+        '1mm',
+      ),
+      dimension(
+        'dimension',
+        [-squareSize * 2, squareSize / 2 + space * 3.5],
+        [-squareSize * 2 + squareSize * 4, squareSize / 2 + space * 3.5],
+        '4mm',
+      ),
+    ],
+    options: {
+      position: [0, -0.3],
+    },
+  };
+
   const unitShape = {
     name: 'unitShape',
     method: 'collection',
@@ -405,9 +437,79 @@ export default function lessonLayout() {
       measureAreaGrid,
       unitSquare('mmSquare', 0.2, '1mm'),
       unitSquare('mSquare', 1, '1m'),
+      squareLength,
     ],
     options: {
       position: [0, 0.2],
+    },
+  };
+
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  const rectWidth = 3;
+  const rectHeight = 1.5;
+  const rectGrid = 0.25;
+  const rect = {
+    name: 'line',
+    method: 'polyLine',
+    options: {
+      points: [
+        [-rectWidth / 2, -rectHeight / 2],
+        [-rectWidth / 2, rectHeight / 2],
+        [rectWidth / 2, rectHeight / 2],
+        [rectWidth / 2, -rectHeight / 2],
+      ],
+      color: colors.sides,
+      width: 0.03,
+      close: true,
+    },
+  };
+  const rectangleGrid = {
+    name: 'grid',
+    method: 'grid',
+    options: {
+      bounds: new Rect(-rectWidth / 2, -rectHeight / 2, rectWidth, rectHeight),
+      xStep: rectGrid,
+      yStep: rectGrid,
+      color: colors.grid,
+    },
+  };
+  const row = {
+    name: 'row',
+    method: 'grid',
+    options: {
+      bounds: new Rect(-rectWidth / 2, 0, rectWidth, rectGrid),
+      xStep: rectGrid,
+      yStep: rectGrid,
+      color: colors.row,
+      numLinesThick: 6,
+    },
+    mods: {
+      scenarios: {
+        '0': { position: [0, rectHeight / 2 - 1 * rectGrid] },
+        '1': { position: [0, rectHeight / 2 - 2 * rectGrid] },
+        '2': { position: [0, rectHeight / 2 - 3 * rectGrid] },
+        '3': { position: [0, rectHeight / 2 - 4 * rectGrid] },
+        '4': { position: [0, rectHeight / 2 - 5 * rectGrid] },
+        '5': { position: [0, rectHeight / 2 - 6 * rectGrid] },
+      },
+    },
+  };
+  const rectangle = {
+    name: 'rectangle',
+    method: 'collection',
+    addElements: [
+      rectangleGrid,
+      rect,
+      row,
+    ],
+    options: {
+      position: [0, -0.3],
     },
   };
 
@@ -416,6 +518,7 @@ export default function lessonLayout() {
     unitShape,
     measure,
     shapes,
+    rectangle,
   ];
   return layout;
 }

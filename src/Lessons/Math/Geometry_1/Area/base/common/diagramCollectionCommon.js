@@ -33,6 +33,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _circleGrid: DiagramElementPrimative;
   } & DiagramElementCollection;
 
+  rows: number;
+
   // eslint-disable-next-line class-methods-use-this
   makeWaveSegment(
     length: number,
@@ -154,5 +156,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._shapes._circleLabel.drawingObject.setText('Area = 19.6 squares');
     this._shapes._squareLabel.drawingObject.setText('Area = 25 squares');
     this._shapes._triangleLabel.drawingObject.setText('Area = 14.5 squares');
+  }
+
+  toggleRow() {
+    this._rectangle._row.show();
+    this.row = (this.row + 1) % 6;
+    console.log(this.row)
+    this._rectangle._row.setScenario(`${this.row}`);
+    this.diagram.animateNextFrame();
   }
 }
