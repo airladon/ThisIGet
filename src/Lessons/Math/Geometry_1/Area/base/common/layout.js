@@ -20,6 +20,7 @@ const cssColorNames = [
   'angles',
   'measure',
   'gridLight',
+  'highlight',
   'row',
 ];
 
@@ -451,7 +452,7 @@ export default function lessonLayout() {
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
-  const rectWidth = 3;
+  const rectWidth = 2.5;
   const rectHeight = 1.5;
   const rectGrid = 0.25;
   const rect = {
@@ -500,6 +501,18 @@ export default function lessonLayout() {
       },
     },
   };
+
+  const label = (name, text, position) => ({
+    name,
+    method: 'text',
+    options: {
+      text,
+      position,
+      color: colors.sides,
+      size: 0.15,
+    },
+  });
+
   const rectangle = {
     name: 'rectangle',
     method: 'collection',
@@ -507,9 +520,94 @@ export default function lessonLayout() {
       rectangleGrid,
       rect,
       row,
+      label('labelB', 'B', [-rectWidth / 2 - 0.2, 0]),
+      label('labelA', 'A', [0, -rectHeight / 2 - 0.2]),
+      label('labelHeight', 'Height', [-rectWidth / 2 - 0.3, 0]),
+      label('labelWidth', 'Width', [0, -rectHeight / 2 - 0.2]),
+      label('label6', '6m', [-rectWidth / 2 - 0.3, 0]),
+      label('label10', '10m', [0, -rectHeight / 2 - 0.2]),
     ],
     options: {
       position: [0, -0.3],
+    },
+  };
+
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  const comment = (content, comment, symbol) => ({
+    bottomComment: {
+      content,
+      comment,
+      symbol,
+      // contentSpace: 0.1,
+      // commentSpace: 0.2,
+    },
+  });
+  const brace = numLines => ({
+    symbol: 'brace', side: 'bottom', color: colors.gridLight, numLines,
+  });
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        Area: { color: colors.highlight },
+        equals: '  =  ',
+        _equals: '  =  ',
+        _6: '6',
+        x: ' \u00D7 ',
+        _x: ' \u00D7 ',
+        __x: ' \u00D7 ',
+        _10: '10',
+        squares: { color: colors.highlight },
+        numSquares: ' num squares ',
+        _numSquares: ' num squares ',
+        A: { text: ' A ', color: colors.sides },
+        B: { text: ' B ', color: colors.sides },
+        width: { text: ' width ', color: colors.sides },
+        height: { text: ' height ',color: colors.sides },
+        _length: ' length ',
+        length: ' length ',
+        brace: brace(4),
+        _brace: brace(4),
+        sBrace: brace(1),
+        _sBrace: brace(1),
+        _60: '60',
+      },
+      forms: {
+        '0': ['Area', 'equals', '_6', 'x', '_10', '_equals', '_60', '  ', 'squares'],
+        '1': ['Area', 'equals', 'numSquares', 'A', 'x', '_numSquares', 'B'],
+        '2': [
+          'Area', 'equals',
+          comment('numSquares', 'length', 'brace'), 'A',
+          'x',
+          comment('_numSquares', '_length', '_brace'), 'B',
+        ],
+        '3': ['Area', 'equals', 'length', 'A', 'x', '_length', 'B'],
+        '4': ['Area', 'equals', 'A', 'x', 'B'],
+        '5': [
+          'Area', 'equals',
+          comment('A', 'width', 'sBrace'),
+          'x',
+          comment('B', 'height', '_sBrace'),
+        ],
+        '6': ['Area', 'equals', 'width', 'x', 'height'],
+      },
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
+    },
+    mods: {
+      scenarios: {
+        top: { position: [0, 0.9] },
+      },
     },
   };
 
@@ -519,6 +617,7 @@ export default function lessonLayout() {
     measure,
     shapes,
     rectangle,
+    eqn,
   ];
   return layout;
 }

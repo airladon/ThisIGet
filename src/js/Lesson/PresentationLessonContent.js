@@ -939,6 +939,50 @@ class PresentationLessonContent extends SimpleLessonContent {
     this.sections.push(s);
   }
 
+  addSectionEqnStep(
+    optionsIn: {
+      eqn: { eqn: Equation } & Equation,  // or navigator
+      from: string,                       // From form
+      to: string,                         // To Form
+      duration?: number,                   // duration
+      animate?: 'dissolve' | 'move',
+    },
+    ...sectionObjects: Array<Object>
+  ) {
+    const defaultOptions = {
+      animate: 'move',
+      duration: 0.8,
+    };
+    const options = joinObjects({}, defaultOptions, optionsIn);
+    const userSections = Object.assign({}, ...sectionObjects);
+    const { eqn, animate, duration } = options;
+    const fromForm = options.from;
+    const toForm = options.to;
+    const eqnSection = {
+      transitionFromPrev: (done) => {
+        if (fromForm === toForm) {
+          done();
+          return;
+        }
+        eqn.showForm(fromForm);
+        eqn.goToForm({
+          name: toForm,
+          duration,
+          callback: done,
+          animate,
+        });
+      },
+      setSteadyState: () => {
+        if (userSections.setSteadyState != null) {
+          userSections.setSteadyState();
+        }
+        eqn.showForm(toForm);
+      },
+    };
+    const section = Object.assign({}, ...sectionObjects, eqnSection);
+    this.addSection(section);
+  }
+
   addEqnsStep(
     equations: Array<[
       { eqn: Equation } & Equation,  // or navigator

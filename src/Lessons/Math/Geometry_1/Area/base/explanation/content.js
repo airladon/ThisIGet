@@ -46,6 +46,7 @@ class Content extends PresentationLessonContent {
     const unit = coll._unitShape;
     const shapes = coll._shapes;
     const rect = coll._rectangle;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Introduction',
@@ -267,6 +268,110 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.row = 5;
       },
+    });
+
+    common = {
+      show: [rect._grid, rect._line],
+      setEnterState: () => {
+        eqn.setScenario('top');
+      },
+    };
+    this.addSection(common, {
+      setContent: [
+        'Therefore, the area of a rectangle can be calculated:',
+      ],
+      setSteadyState: () => {
+        eqn.showForm('0');
+      },
+    });
+
+    let content = {
+      setContent:
+        '|Area| is calculated by |multiplying the number of squares| for two |adjacent sides|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, content, {});
+    this.addSectionEqnStep({
+      eqn, from: '0', to: '1', duration: 0, animate: 'dissolve',
+    }, common, content, {
+      show: [rect._grid, rect._line, rect._labelA, rect._labelB],
+    });
+
+    common = {
+      show: [rect._grid, rect._line, rect._labelA, rect._labelB],
+      setEnterState: () => {
+        eqn.setScenario('top');
+      },
+    };
+    content = {
+      setContent:
+        'We know the |number of squares| in a side |equals| the side\'s |length|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, content, {});
+
+    content = {
+      setContent:
+        'So the area of a rectangle is also equal to the product of |two adjacent side lengths|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
+
+    content = {
+      setContent:
+        'The word |length| is usually assumed, and so it can be removed from the equation for simplicity.',
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, content, {});
+
+    content = {
+      setContent:
+        'Often, a rectangle\'s sides are renamed to be something more |intuitive|. For example maybe |width| and |height| for this case.',
+    };
+    this.addSectionEqnStep({ eqn, from: '4', to: '4' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, content, {
+      show: [rect._grid, rect._line, rect._labelWidth, rect._labelHeight],
+    });
+    this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, content, {
+      show: [rect._grid, rect._line, rect._labelWidth, rect._labelHeight],
+    });
+
+    common = {
+      show: [rect._grid, rect._line, rect._labelWidth, rect._labelHeight],
+      setSteadyState: () => {
+        eqn.setScenario('top');
+        eqn.showForm('6');
+      },
+    };
+    this.addSection(common, {
+      setContent:
+        'And so the area of a rectangle is the multiple of its |width| and |height|.',
+    });
+    this.addSection(common, {
+      setContent:
+        'We have found a |relationship| between a rectangle\'s |area| and its |side lengths|.',
+      modifiers: {
+        area: highlight(colors.highlight),
+      },
+    });
+    this.addSection(common, {
+      setContent:
+        'If you |know two| of the three properties, you can |calculate the third|.',
+    });
+
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    // Area Units
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    this.addSection({
+      title: 'Area Units',
+      setContent: centerV([
+        'So we know that |area of a rectangle| is the |product of two adjacent side lengths|.',
+        'We also know area is measured in |reference squares|, that can have a specific side length such as |meters|.',
+        'We can put these together to understand how the units for area are |normally written|.',
+      ]),
     });
   }
 }
