@@ -4,12 +4,27 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementPrimative,
+  // DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
+  _rectangle: {
+    _left: DiagramObjectLine;
+    _right: DiagramObjectLine;
+    _top: DiagramObjectLine;
+    _bottom: DiagramObjectLine;
+    _diagonal: DiagramObjectLine;
+  } & DiagramElementCollection;
+
+  _intro: {
+    _grid: DiagramElementPrimative;
+    _triangle: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,

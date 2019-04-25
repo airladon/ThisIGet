@@ -1,8 +1,11 @@
 @import '../../../geometry';
 
 $colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
+  sides:             color('blue'),
+  angles:            color('red'),
+  area:              color('red'),
+  grid:              color('grey', 'darker'),
+  disabled:          color('grey', 'darker'),
 );
 
 body {
