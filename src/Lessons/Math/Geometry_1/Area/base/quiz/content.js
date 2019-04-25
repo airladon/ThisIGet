@@ -34,13 +34,13 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
     // const main = quiz._main;
 
     this.addSection({
       title: '',
-      setContent: ['Question'],
+      setContent: [],
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -53,9 +53,13 @@ class Content extends PresentationLessonContent {
       ],
       setEnterState: () => {},
       showOnly: [],
-      // show: [main],
-      hide: [],
-      setSteadyState: () => {},
+      show: [
+        quiz._left, quiz._right, quiz._top, quiz._bottom, quiz._check,
+        quiz._question,
+      ],
+      setSteadyState: () => {
+        quiz.newProblem();
+      },
       setLeaveState: () => {},
     });
   }

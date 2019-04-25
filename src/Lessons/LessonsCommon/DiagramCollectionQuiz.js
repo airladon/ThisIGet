@@ -328,10 +328,12 @@ const CommonQuizMixin = superclass => class extends superclass {
   }
 
   makeShowAnotherAnswerButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `show_another_answer__${id}`, 'Show Another Answer', this.showAnswer.bind(this),
       this.layout.quiz.showAnotherAnswer,
     );
+    button.interactiveLocation = 'topRight';
+    return button;
   }
 
   addInput(

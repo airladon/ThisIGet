@@ -2,6 +2,7 @@
 
 $colors: (
   sides:             color('blue'),
+  sidesDisabled:     color('blue', darker),
   angles:            color('red'),
   row:               color('red'),
   highlight:         color('red'),

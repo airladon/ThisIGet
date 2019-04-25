@@ -35,7 +35,7 @@ export default function baseLayout() {
       answer: new Point(0, -1.7),
       nextSteps: new Point(0, -1.9),
       // newProblem: new Point(0, -1.7),
-      showAnotherAnswer: new Point(-1, -1.7),
+      showAnotherAnswer: new Point(1.1, -1.7),
       choice: new Point(2.02, -1.1),
     },
 

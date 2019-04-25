@@ -297,7 +297,7 @@ class Section {
             elementIsVisible = true;
           }
         }
-        if (elementIsVisible && elementIsTouchable && element != null) {
+        if (elementIsVisible && elementIsTouchable && element != null && element.isInteractive !== false) {
           // this.content.highlightInteractiveElement(element, location);
           this.currentInteractiveItem = index;
           // break;

@@ -14,8 +14,8 @@ export default function lessonLayout() {
   const layout: Object = commonLessonLayout();
   const { colors } = layout;
 
-  layout.bounds = new Rect(-2.5, -1.3, 5, 2.2);
-  layout.minSide = 0.2;
+  layout.bounds = new Rect(-2.5, -1.5, 5, 2.5);
+  layout.minSide = 0.5;
   layout.width = 0.03;
 
   const line = (name, angle, position, location) => ({
@@ -28,7 +28,7 @@ export default function lessonLayout() {
       vertexSpaceStart: 'start',
       angle,
       label: {
-        text: '',
+        text: null,
         location,
         offset: 0.1,
       },
@@ -37,34 +37,15 @@ export default function lessonLayout() {
         type: 'translation',
       },
     },
-    mods: {
-      scenarios: {
-        newProblem: { position },
-      },
-    },
   });
-
-  layout.question = {
-    name: 'question',
-    method: 'text',
-    options: {
-      size: 0.18,
-      style: 'normal',
-      family: 'helvetica',
-      hAlign: 'left',
-      vAlign: 'baseline',
-      text: '',
-      color: colors.diagram.text.base,
-      position: new Point(-2.7, 1.5),
-    },
-  };
-  // const pad = name => ({
+  // const pad = (name, position) => ({
   //   name,
   //   method: 'polygon',
   //   options: {
   //     radius: 0.1,
-  //     color: [1, 0, 0, 0],
+  //     color: [1, 0, 0, 1],
   //     fill: true,
+  //     position,
   //   },
   //   mods: {
   //     isTouchable: true,
@@ -77,7 +58,7 @@ export default function lessonLayout() {
     line('right', Math.PI / 2, [1, -0.5], 'right'),
     line('top', 0, [-1, 0.5], 'top'),
     line('bottom', 0, [-1, -0.5], 'bottom'),
-    layout.question,
+    // pad('bottomLeft', [-1, -0.5]),
   ];
 
   return layout;

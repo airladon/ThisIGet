@@ -13,6 +13,7 @@ const {
 
 const cssColorNames = [
   'sides',
+  'sidesDisabled',
   'example1',
   'example2',
   'disabled',
