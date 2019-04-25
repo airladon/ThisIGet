@@ -156,6 +156,18 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn, from: '7', to: '8' }, common, content);
     this.addSectionEqnStep({ eqn, from: '8', to: '9' }, common, content);
     this.addSectionEqnStep({ eqn, from: '9', to: '10' }, common, content);
+
+    this.addSectionEqnStep({ eqn, from: '20', to: '20' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '20', to: '21' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '21', to: '22' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '22', to: '23' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '23', to: '24' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '24', to: '25' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '25', to: '26' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '26', to: '27' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '27', to: '28' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '28', to: '29' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '29', to: '30' }, common, content);
   }
 }
 

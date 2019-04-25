@@ -342,6 +342,7 @@ export default function lessonLayout() {
         equals: '  =  ',
         mul: ' \u00D7 ',
         plus: '  +  ',
+        minus: '  –  ',
         _1: '1',
         _2: '2',
         v: { symbol: 'vinculum' },
@@ -417,6 +418,61 @@ export default function lessonLayout() {
           sub('Area', 'tri'), 'equals', half, '  ', 'height', 'mul', 'base',
         ],
         '10': [
+          'Area', 'equals', half, '  ', 'height', 'mul', 'base',
+        ],
+        // /////////////////////////////////////////////
+        // /////////////////////////////////////////////
+        // /////////////////////////////////////////////
+        // /////////////////////////////////////////////
+        '20': [
+          sub('Area', 'tri'), 'equals',
+          sub('__Area', 'trihc'), 'minus', sub('_Area', 'trihb'),
+        ],
+        '21': [
+          sub('Area', 'tri'), 'equals',
+          top(sub('__Area', 'trihc'), [__half, '__h', 'C'], 'brace'),
+          'minus',
+          top(sub('_Area', 'trihb'), [_half, '_h', 'B'], '_brace'),
+        ],
+        '22': [
+          sub('Area', 'tri'), 'equals', '    ', __half, ' ', '__h', ' ', 'C',
+          'minus', _half, ' ', '_h', ' ', 'B',
+        ],
+        '23': [
+          sub('Area', 'tri'), 'equals',
+          { brac: [[__half, ' ', '__h', ' ', 'C', 'minus', _half, ' ', '_h', ' ', 'B'], 'lb', 'rb'] },
+        ],
+        '24': [
+          sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
+          {
+            brac: [
+              [
+                { strike: [[__half, ' ', '__h'], 's'] }, ' ', 'C',
+                'minus',
+                { strike: [[_half, ' ', '_h'], '_s'] }, ' ', 'B',
+              ],
+              'lb', 'rb',
+            ],
+          },
+        ],
+        '25': [
+          sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
+          { brac: [['C', 'minus', 'B'], 'lb', 'rb'] },
+        ],
+        '26': [
+          sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul',
+          top({ brac: [['C', 'minus', 'B'], 'lb', 'rb'] }, 'base', 'brace'),
+        ],
+        '27': [sub('Area', 'tri'), 'equals', half, ' ', 'h', ' ', 'mul', 'base'],
+        '28': [
+          sub('Area', 'tri'), 'equals', half,
+          top([' ', 'h', ' '], 'height', 'sBrace'),
+          'mul', 'base',
+        ],
+        '29': [
+          sub('Area', 'tri'), 'equals', half, '  ', 'height', 'mul', 'base',
+        ],
+        '30': [
           'Area', 'equals', half, '  ', 'height', 'mul', 'base',
         ],
       },
