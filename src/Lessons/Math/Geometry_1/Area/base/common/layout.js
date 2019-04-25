@@ -553,8 +553,9 @@ export default function lessonLayout() {
   });
   const eqn = {
     name: 'eqn',
-    method: 'addEquation',
+    method: 'addNavigator',
     options: {
+      navType: 'description',
       color: colors.diagram.text.base,
       scale: 0.9,
       elements: {
@@ -648,6 +649,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         top: { position: [0, 0.9] },
+        nav: { position: [0, 1.3] },
       },
     },
   };

@@ -715,7 +715,8 @@ function () {
 
     this.element = options.element;
     this.animations = [];
-    this.state = 'idle';
+    this.state = 'idle'; // $FlowFixme
+
     this.options = {
       translation: {}
     };
@@ -12787,14 +12788,19 @@ function updateDescription(eqn, subForm, descriptionElement, index) {
 
   var form = null; // $FlowFixMe
   // form = eqn.eqn.formSeries[index][formType];
+  // form = eqn.getForm(eqn.eqn.currentFormSeries[index], subForm);
 
-  form = eqn.getForm(eqn.eqn.currentFormSeries[index], subForm);
+  form = eqn.getCurrentForm();
 
   if (form == null) {
     return;
   }
 
   if (form.description == null) {
+    if (element != null) {
+      element.innerHTML = '';
+    }
+
     return;
   }
 

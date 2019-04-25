@@ -955,7 +955,13 @@ class PresentationLessonContent extends SimpleLessonContent {
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
     const userSections = Object.assign({}, ...sectionObjects);
-    const { eqn, animate, duration } = options;
+    let { eqn } = options;
+    const { animate, duration } = options;
+    let nav = null;
+    if (eqn.table != null) {
+      nav = eqn;
+      ({ eqn } = nav);
+    }
     const fromForm = options.from;
     const toForm = options.to;
     const eqnSection = {
@@ -971,12 +977,18 @@ class PresentationLessonContent extends SimpleLessonContent {
           callback: done,
           animate,
         });
+        if (nav != null) {
+          nav.updateButtons();
+        }
       },
       setSteadyState: () => {
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
         }
         eqn.showForm(toForm);
+        if (nav != null) {
+          nav.updateButtons();
+        }
       },
     };
     const section = Object.assign({}, ...sectionObjects, eqnSection);
