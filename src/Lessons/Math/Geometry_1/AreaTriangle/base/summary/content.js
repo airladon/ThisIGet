@@ -1,18 +1,20 @@
 // @flow
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import {
-//   click,
-// } from '../../../../../../js/tools/htmlGenerator';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
-// import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -30,41 +32,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const tri = diag._tri;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
     this.addSection({
-      title: 'Area of a Triangle',
-      setContent: 'The |area of a triangle| is equal to |half its base times its height|.',
-      showOnly: [tri],
-      show: [
-        tri._tri2,
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
       ],
-      transitionFromNext: (done) => {
-        tri.moveToScenario(tri._tri2, layout.tri2Scenario, 1, done, 0);
-      },
-      setSteadyState: () => {
-        tri._sideTri2Base.showAll();
-        tri._sideTri2Height.showAll();
-        tri.eqns.tri2AreaEqn.showForm('10');
-      },
-    });
-
-    this.addSection({
-      setContent: '|Area| can be calculated with any side as the |base|.',
-      showOnly: [tri],
-      show: [
-        tri._tri2,
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
       ],
-      transitionFromPrev: (done) => {
-        tri.moveToScenario(tri._tri2, layout.tri3Scenario, 1, done, 0);
-      },
-      setSteadyState: () => {
-        tri.legacySetScenario(tri._tri2, layout.tri3Scenario);
-        tri._sideTri3Base.showAll();
-        tri._sideTri3Height.showAll();
-        tri.eqns.tri3AreaEqn.showForm('10');
-      },
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

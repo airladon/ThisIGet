@@ -3,13 +3,14 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonLessonDiagramCollection from '../common/diagramCollection';
-// eslint-disable-next-line import/no-cycle
-import QuizCollection from './diagramCollectionQuiz';
+import TriangleAreaCollection from '../common/diagramCollectionTri';
+import SameAreaCollection from '../common/diagramCollectionSameArea';
 
 const { Transform } = Fig;
 
 export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _quiz: QuizCollection;
+  _tri: TriangleAreaCollection;
+  _same: SameAreaCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,6 +19,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('quiz', new QuizCollection(diagram, this.layout));
+    this.add('tri', new TriangleAreaCollection(diagram, this.layout));
+    this.add('same', new SameAreaCollection(diagram, this.layout));
   }
 }

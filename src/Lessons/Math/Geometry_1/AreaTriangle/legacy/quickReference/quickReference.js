@@ -5,17 +5,12 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import CommonCollection from '../common/diagramCollectionCommon';
+import TriangleAreaCollection from '../common/diagramCollectionTri';
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
-//   highlight,
-//   clickWord,
-// } = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
-  _collection: CommonCollection;
+export default class QRTriangleArea extends PopupBoxCollection {
+  _collection: TriangleAreaCollection;
 
   constructor(
     diagram: Object,
@@ -27,16 +22,14 @@ export default class QRBoilerplate extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      CommonCollection,
+      TriangleAreaCollection,
     );
     this.hasTouchableElements = true;
 
     const modifiers = {};
-    this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+
+    this.setTitle('Area of a Triangle');
+    this.setDescription('The |area of a triangle| is equal to |half its base times its height|. Any side can be the |base| if the height changes to be relative to the base.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -44,13 +37,21 @@ export default class QRBoilerplate extends PopupBoxCollection {
     this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
+    // collection.showAll();
     collection.show();
+    collection._tri2.showAll();
+    collection._sideTri2Base.showAll();
+    collection._sideTri2Height.showAll();
+    collection._tri2AreaEqn.show();
+    collection.eqns.tri2AreaEqn.showForm('10');
+    // collection.transform.updateScale(0.7, 0.7);
+    // collection.setPosition(this.layout.position);
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-function attachQuickReference1() {
+function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -58,10 +59,8 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
-    // QR2: QRBoilerplate2,
+    Main: QRTriangleArea,
   };
 }
 
-attachQuickReference1();
-
+attachQuickReference();

@@ -1,20 +1,17 @@
 // @flow
 import Fig from 'figureone';
 import {
-  PresentationLessonContent, interactiveItem,
+  PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import {
-//   toHTML,
-// } from '../../../../../../js/tools/htmlGenerator';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 
 const { toHTML } = Fig.tools.html;
-
 const layout = lessonLayout();
 const { colors } = layout;
 
@@ -39,22 +36,22 @@ class Content extends PresentationLessonContent {
     //   setContent: ['Enter_content_here'],
     // });
     this.addSection({
-      title: 'Area of rectangle and square.',
+      title: 'Enter_title_here',
       setContent: [
-        'Create a rectangle or square that has an area of |area| squares.',
+        'Create a triangle that has an area of |area| squares.',
       ],
       modifiers: {
         area: toHTML('?', 'id__lessons__area_quiz1', '', colors.unit),
       },
       setInfo: `<ul>
-          <li>Move rectangle sides to change rectangle width and height.</li>
-          <li>Press |Check| button when rectange area is thought to be the target area.</li>
+          <li>Move triangle points to change triangle base and height.</li>
+          <li>Press |Check| button when triangle has target area.</li>
           </ul>
       `,
       infoModifiers: {
       },
       interactiveElements: [
-        interactiveItem(quiz._check),
+        // interactiveItem(quiz._check),
       ],
       setEnterState: () => {
       },
@@ -62,7 +59,9 @@ class Content extends PresentationLessonContent {
         quiz,
       ],
       show: [
-        quiz._rect, quiz._grid, quiz._check,
+        quiz._tri, quiz._grid, quiz._topPad, quiz._leftBasePad, quiz._rightBasePad,
+        quiz._base, quiz._height,
+        // quiz._check,
       ],
       setSteadyState: () => {
         quiz.newProblem();

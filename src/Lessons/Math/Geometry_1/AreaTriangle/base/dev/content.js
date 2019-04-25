@@ -12,7 +12,7 @@ const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
 const { uid } = details.details;
-const vid = 'base';
+const vid = version.details.uid;
 const qrids = version.details.qr;
 
 class Content extends PresentationLessonContent {
