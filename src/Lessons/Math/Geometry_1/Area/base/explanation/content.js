@@ -444,8 +444,6 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         eqn.setScenario('square');
         eqn.showForm('square');
-        console.log(nav)
-        console.log(eqn)
       },
     });
   }

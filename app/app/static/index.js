@@ -4483,6 +4483,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       arrow: shapes.arrow.bind(shapes),
       text: shapes.txt.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
+      textHTML: shapes.htmlText.bind(shapes),
       axes: shapes.axes.bind(shapes),
       radialLines: shapes.radialLines.bind(shapes),
       rectangle: shapes.rectangle.bind(shapes),
@@ -15037,31 +15038,33 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimatives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
-/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
-/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
-/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
-/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
-/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
-/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
-/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
-/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
-/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
-/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
-/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
+/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
+/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
+/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
+/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
+/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
+/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
+/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
+/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
+/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
+/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
+/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
 
 
 
@@ -15106,13 +15109,13 @@ function () {
     value: function polyLineLegacy(points, close, lineWidth, color) {
       var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLine"])(this.webgl, points, close, lineWidth, color, borderToPoint, transform, this.limits);
+      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, close, lineWidth, color, borderToPoint, transform, this.limits);
     }
   }, {
     key: "polyLineCornersLegacy",
     value: function polyLineCornersLegacy(points, close, cornerLength, lineWidth, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLineCorners"])(this.webgl, points, close, cornerLength, lineWidth, color, transform, this.limits);
+      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, close, cornerLength, lineWidth, color, transform, this.limits);
     }
   }, {
     key: "polyLineCorners",
@@ -15144,7 +15147,7 @@ function () {
         });
       }
 
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -15183,7 +15186,7 @@ function () {
         });
       }
 
-      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
+      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -15212,7 +15215,7 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__["default"])(this.webgl, options.points, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points, options.color, options.transform, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -15223,7 +15226,7 @@ function () {
   }, {
     key: "textGL",
     value: function textGL(options) {
-      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_18__["default"])(this.webgl, this.limits, options);
+      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_19__["default"])(this.webgl, this.limits, options);
     }
   }, {
     key: "txt",
@@ -15251,11 +15254,11 @@ function () {
       }
 
       if (typeof textOrOptions === 'string') {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions, {
           text: textOrOptions
         }].concat(optionsIn));
       } else {
-        options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions, textOrOptions].concat(optionsIn));
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions, textOrOptions].concat(optionsIn));
       }
 
       if (options.position != null) {
@@ -15268,12 +15271,12 @@ function () {
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramText"](o.offset, text, fontToUse);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["TextObject"](this.draw2D, [dT]);
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, o.transform, o.color, this.limits);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramText"](o.offset, text, fontToUse);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](to, o.transform, o.color, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -15306,7 +15309,7 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
@@ -15325,21 +15328,21 @@ function () {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var tip = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       var rotation = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
+      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
     }
   }, {
     key: "text",
     value: function text(textInput, location, color) {
       var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
+      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
 
       if (fontInput !== null) {
         font = fontInput;
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_19__["TextObject"](this.draw2D, [dT]);
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), color, this.limits);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
+      return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), color, this.limits);
     }
   }, {
     key: "htmlElement",
@@ -15369,24 +15372,53 @@ function () {
       element.style.position = 'absolute';
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_20__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_21__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
-    }
+    } // htmlText(
+    //   textInput: string,
+    //   id: string = generateUniqueId('id__html_text_'),
+    //   classes: string = '',
+    //   location: Point = new Point(0, 0),
+    //   alignV: 'top' | 'bottom' | 'middle' = 'middle',
+    //   alignH: 'left' | 'right' | 'center' = 'left',
+    // ) {
+    //   // const inside = document.createTextNode(textInput);
+    //   const inside = document.createElement('div');
+    //   inside.innerHTML = textInput;
+    //   return this.htmlElement(inside, id, classes, location, alignV, alignH);
+    // }
+
   }, {
     key: "htmlText",
-    value: function htmlText(textInput) {
-      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["generateUniqueId"])('id__html_text_');
-      var classes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      var location = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var alignV = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'middle';
-      var alignH = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'left';
-      // const inside = document.createTextNode(textInput);
-      var inside = document.createElement('div');
-      inside.innerHTML = textInput;
-      return this.htmlElement(inside, id, classes, location, alignV, alignH);
+    value: function htmlText() {
+      var defaultOptions = {
+        text: '',
+        id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["generateUniqueId"])('id__html_text_'),
+        classes: '',
+        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        alignV: 'middle',
+        alignH: 'left',
+        color: [1, 0, 0, 1]
+      };
+
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var inside = document.createElement('div'); // const htmlText = toHTML(options.textInput, '', '', options.color);
+      // console.log(options.textInput, htmlText)
+
+      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__["setHTML"])(inside, options.text, options.modifiers);
+      var id = options.id,
+          classes = options.classes,
+          position = options.position,
+          alignV = options.alignV,
+          alignH = options.alignH;
+      return this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
     }
   }, {
     key: "lines",
@@ -15394,27 +15426,7 @@ function () {
       var numLinesThick = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var color = arguments.length > 2 ? arguments[2] : undefined;
       var transform = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
-    }
-  }, {
-    key: "gridLegacy",
-    value: function gridLegacy(bounds, xStep, yStep, numLinesThick, color) {
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
-
-      if (xStep !== 0) {
-        for (var x = bounds.left; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](x, 8) <= bounds.right; x += xStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
-        }
-      }
-
-      if (yStep !== 0) {
-        for (var y = bounds.bottom; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](y, 8) <= bounds.top; y += yStep) {
-          linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
-        }
-      }
-
-      return this.lines(linePairs, numLinesThick, color, transform);
+      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
     }
   }, {
     key: "grid",
@@ -15431,11 +15443,11 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
       };
 
-      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
-        optionsIn[_key6] = arguments[_key6];
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
         var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
@@ -15454,13 +15466,13 @@ function () {
           transform = options.transform;
 
       if (options.xStep !== 0) {
-        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](x, 8) <= bounds.right; x += xStep) {
+        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](x, 8) <= bounds.right; x += xStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
         }
       }
 
       if (yStep !== 0) {
-        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](y, 8) <= bounds.top; y += yStep) {
+        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](y, 8) <= bounds.top; y += yStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
         }
       }
@@ -15491,8 +15503,8 @@ function () {
         trianglePrimitives: false
       };
 
-      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
-        optionsIn[_key7] = arguments[_key7];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
       var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
@@ -15523,9 +15535,9 @@ function () {
       var element;
 
       if (options.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
       if (options.mods != null && options.mods !== {}) {
@@ -15539,19 +15551,19 @@ function () {
     value: function polygonLine(numSides, radius, rotation, direction, numSidesToDraw, numLines, // equivalent to thickness - integer
     color) {
       var transform = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
+      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
     }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
+      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
     }
   }, {
     key: "dashedLine",
     value: function dashedLine(start, length, width, rotation, dashStyle, color) {
       var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, dashStyle, color, transform, this.limits);
+      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, start, length, width, rotation, dashStyle, color, transform, this.limits);
     }
   }, {
     key: "rectangle",
@@ -15571,11 +15583,11 @@ function () {
         position: null
       };
 
-      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
-        optionsIn[_key8] = arguments[_key8];
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn)); // const defultCornerOptions = {
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn)); // const defultCornerOptions = {
       //   radius: options.width / 10,
       //   sides: 10,
       // };
@@ -15591,7 +15603,7 @@ function () {
         options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
       }
 
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
+      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
     } // rectangleFilled(
     //   topLeft: TypeRectangleFilledReference,
     //   width: number,
@@ -15619,17 +15631,17 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
       }
 
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
     }
   }, {
     key: "repeatPatternVertex",
@@ -15643,11 +15655,11 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
@@ -15668,7 +15680,7 @@ function () {
 
       var drawingObject = element.drawingObject; // console.log(element.drawingObject.points)
 
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
         copy.transform = transform._dup();
         var newPoints = [];
         var points = drawingObject.points;
@@ -15711,11 +15723,11 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len11 = arguments.length, moreOptions = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
-          moreOptions[_key11 - 1] = arguments[_key11];
+        for (var _len12 = arguments.length, moreOptions = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
+          moreOptions[_key12 - 1] = arguments[_key12];
         }
 
-        var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
+        var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
 
         if (optionsToUse.transform != null) {
           transform = optionsToUse.transform;
@@ -15726,7 +15738,7 @@ function () {
         }
       }
 
-      var element = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
       return element;
     }
   }, {
@@ -15778,7 +15790,7 @@ function () {
 
       var drawingObject = element.drawingObject; // console.log(element.drawingObject.points)
 
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
         copy.transform = transform._dup();
         var newPoints = [];
         var points = drawingObject.points;
@@ -15817,11 +15829,11 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
-        optionsIn[_key12] = arguments[_key12];
+      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
+        optionsIn[_key13] = arguments[_key13];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
       var width = options.width,
           lineWidth = options.lineWidth,
           limits = options.limits,
@@ -15836,7 +15848,7 @@ function () {
           location = options.location,
           showGrid = options.showGrid,
           gridColor = options.gridColor;
-      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       xProps.minorTicks.mode = 'off';
       xProps.minorGrid.mode = 'off';
       xProps.majorGrid.mode = 'off';
@@ -15854,7 +15866,7 @@ function () {
       xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -15870,8 +15882,8 @@ function () {
       xProps.majorTicks.fontColor = color.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
-      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
-      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
+      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       yProps.minorTicks.mode = 'off';
       yProps.minorGrid.mode = 'off';
       yProps.majorGrid.mode = 'off';
@@ -15890,7 +15902,7 @@ function () {
       yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -15906,7 +15918,7 @@ function () {
       yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
       yProps.majorTicks.fontSize = fontSize;
       yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
-      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
+      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
 
       if (location instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
@@ -15920,8 +15932,8 @@ function () {
       if (showGrid) {
         var gridLines = this.grid({
           bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
-          stepX: _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8),
-          stepY: _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8),
+          stepX: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepX * width / limits.width, 8),
+          stepY: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepY * height / limits.height, 8),
           numThickLines: 1,
           color: gridColor,
           transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0)

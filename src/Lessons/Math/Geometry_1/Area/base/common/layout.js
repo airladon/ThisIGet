@@ -134,6 +134,27 @@ export default function lessonLayout() {
     method: 'text',
     options: { color: colors.sides, position: [1.75, -1.45], size: 0.15 },
   };
+  const htmlText = (name, value, position) => ({
+    name,
+    method: 'textHTML',
+    options: {
+      text: `Area = ${value}m<sup>2</sup>`,
+      classes: 'area__label',
+      alignH: 'center',
+      position,
+    },
+  });
+  // const shapeHtmlTriangleLabel = {
+  //   name: 'triangleHtmlLabel',
+  //   method: 'textHTML',
+  //   options: {
+  //     text: 'Area = m<sup>2</sup>',
+  //     classes: 'area__label',
+  //     alignH: 'center',
+  //     color: colors.sides,
+  //     position: [0, -1.45],
+  //   },
+  // };
   const shapes = {
     name: 'shapes',
     method: 'collection',
@@ -144,9 +165,18 @@ export default function lessonLayout() {
       shapeCircleLabel,
       shapeSquareLabel,
       shapeTriangleLabel,
+      // shapeHtmlTriangleLabel,
+      htmlText('triangleHtmlLabel', 14.5, [1.75, -1.45]),
+      htmlText('squareHtmlLabel', 25, [0, -1.45]),
+      htmlText('circleHtmlLabel', 19.6, [-1.75, -1.45]),
     ],
     options: {
       position: [0, 0.2],
+    },
+    mods: {
+      scenarios: {
+        summary: { position: [0, 0.4] },
+      },
     },
   };
 
@@ -442,6 +472,11 @@ export default function lessonLayout() {
     ],
     options: {
       position: [0, 0.2],
+    },
+    mods: {
+      scenarios: {
+        summary: { position: [0, 0.4] },
+      },
     },
   };
 

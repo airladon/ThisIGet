@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,10 +11,11 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
+const {
+  style,
 //   click,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -32,31 +33,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const examples = coll._examples;
+    const meas = coll._measure;
+    const unit = coll._unitShape;
+    const shapes = coll._shapes;
+    const rect = coll._rectangle;
+    const square = coll._square;
+    const eqn = coll._eqnEqn;
+    const nav = coll._eqnNav;
 
     this.addSection({
       title: '',
-      setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      setContent: style({ top: 0 }, [
+        '|Area| is the |amount of space| a shape takes up and is measured in |squared length| units, such as |square meters| normally written as |m<sup>2</sup>|.',
+        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html({ classes: 'lesson__definition_high' })}`,
+      ]),
+      show: [
+        shapes._circle, shapes._triangle, shapes._square, unit._grid,
+        shapes._triangleHtmlLabel, shapes._squareHtmlLabel,
+        shapes._circleHtmlLabel,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setSteadyState: () => {
+        coll.setScenarios('summary');
+      },
     });
   }
 }

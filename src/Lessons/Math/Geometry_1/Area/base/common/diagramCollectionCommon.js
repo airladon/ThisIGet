@@ -33,7 +33,35 @@ export default class CommonCollection extends CommonDiagramCollection {
     _circleGrid: DiagramElementPrimative;
   } & DiagramElementCollection;
 
-  rows: number;
+  _shapes: {
+    _circleLabel: DiagramElementPrimative;
+    _squareLabel: DiagramElementPrimative;
+    _triangleLabel: DiagramElementPrimative;
+    _square: DiagramElementPrimative;
+    _circle: DiagramElementPrimative;
+    _triangle: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  _rectangle: {
+    _row: DiagramElementPrimative;
+    _line: DiagramObjectLine;
+    _grid: DiagramElementPrimative;
+    _labelB: DiagramElementPrimative;
+    _labelA: DiagramElementPrimative;
+    _labelHeight: DiagramElementPrimative;
+    _labelWidth: DiagramElementPrimative;
+    _label6: DiagramElementPrimative;
+    _label10: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  _square: {
+    _line: DiagramObjectLine;
+    _grid: DiagramElementPrimative;
+    _labelB1: DiagramElementPrimative;
+    _labelB2: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  row: number;
 
   // eslint-disable-next-line class-methods-use-this
   makeWaveSegment(
@@ -158,10 +186,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._shapes._triangleLabel.drawingObject.setText('Area = 14.5 squares');
   }
 
+  // setAreaToSquares() {
+  //   this._shapes._circleLabel.drawingObject.setText('Area = 19.6 m2');
+  //   this._shapes._squareLabel.drawingObject.setText('Area = 25 squares');
+  //   this._shapes._triangleLabel.drawingObject.setText('Area = 14.5 squares');
+  // }
+
   toggleRow() {
     this._rectangle._row.show();
     this.row = (this.row + 1) % 6;
-    console.log(this.row)
     this._rectangle._row.setScenario(`${this.row}`);
     this.diagram.animateNextFrame();
   }
