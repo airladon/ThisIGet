@@ -3,9 +3,13 @@
 $colors: (
   sides:             color('blue'),
   angles:            color('red'),
-  area:              color('red'),
+  area:              color('blue'),
   grid:              color('grey', 'darker'),
   disabled:          color('grey', 'darker'),
+  construction1:     color('red', 'darker'),
+  construction2:     color('green', 'darker'),
+  fill1:              color('red', 'darkest'),
+  fill2:              color('green', 'darkest'),
 );
 
 body {

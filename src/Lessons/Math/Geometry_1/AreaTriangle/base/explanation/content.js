@@ -43,6 +43,9 @@ class Content extends PresentationLessonContent {
     const intro = coll._intro;
     const rect = coll._rectangle;
     const rectEqn = coll._rectEqn;
+    const area1 = coll._area1;
+    const area2 = coll._area2;
+    const eqn = coll._eqn;
 
     this.addSection({
       title: 'Introduction',
@@ -98,6 +101,61 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV(['We can now use this to calculate the area of |any triangle|, not just one that is part of a rectangle.']),
     });
+
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    this.addSection({
+      setContent: ['Start with any triangle.'],
+      show: [area1._tri],
+    });
+
+    content = { setContent: 'Draw a |rectangle| with the triangle\'s |top| point, and |left bottom| point and label its side lengths.' };
+    this.addSection(content, { show: [area1._tri] });
+    this.addSection(content, { show: [area1._tri, area1._leftRect] });
+    this.addSection(content, {
+      setContent: 'We use |h| as short hand for the |height| of the triangle',
+      modifiers: { h: highlight(colors.construction1) },
+      show: [area1._tri, area1._leftRect],
+    });
+
+    content = { setContent: 'Draw a |second rectangle| with the triangle\'s |top| point and |right bottom| point and label its side lengths.' };
+    this.addSection(content, { show: [area1._tri, area1._leftRect] });
+    this.addSection(content, {
+      show: [area1._tri, area1._leftRect, area1._rightRect],
+    });
+
+    content = { setContent: 'The |area of the triangle| is the |sum| of the areas of the |two smaller triangles|.' };
+    this.addSection(content, {
+      show: [area1._tri, area1._leftRect, area1._rightRect],
+    });
+    common = {
+      show: [
+        area1._tri, area1._leftRect, area1._rightRect,
+        area1._leftFill, area1._rightFill,
+      ],
+      setSteadyState: () => {
+        eqn.setScenario('area1');
+      },
+    };
+    this.addSection(common, content);
+    this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, content);
+    this.addSectionEqnStep({
+      eqn, from: '2', to: '3', duration: 0,
+    }, common, content);
+    this.addSectionEqnStep({ eqn, from: '3', to: '4' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '4', to: '5' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '6', to: '7' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '7', to: '8' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '8', to: '9' }, common, content);
+    this.addSectionEqnStep({ eqn, from: '9', to: '10' }, common, content);
   }
 }
 

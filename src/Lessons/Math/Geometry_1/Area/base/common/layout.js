@@ -627,7 +627,7 @@ export default function lessonLayout() {
   const comment = (content, commentText, symbol) => ({
     bottomComment: {
       content,
-      commentText,
+      comment: commentText,
       symbol,
       // contentSpace: 0.1,
       // commentSpace: 0.2,

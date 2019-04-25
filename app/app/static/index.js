@@ -4481,6 +4481,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       polyLineCorners: shapes.polyLineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
+      fan: shapes.fan.bind(shapes),
       text: shapes.txt.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
       textHTML: shapes.htmlText.bind(shapes),
