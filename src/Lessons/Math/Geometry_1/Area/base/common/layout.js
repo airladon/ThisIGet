@@ -557,13 +557,18 @@ export default function lessonLayout() {
       row,
       label('labelB', 'B', [-rectWidth / 2 - 0.2, 0]),
       label('labelA', 'A', [0, -rectHeight / 2 - 0.2]),
-      label('labelHeight', 'Height', [-rectWidth / 2 - 0.3, 0]),
-      label('labelWidth', 'Width', [0, -rectHeight / 2 - 0.2]),
+      label('labelHeight', 'height', [-rectWidth / 2 - 0.3, 0]),
+      label('labelWidth', 'width', [0, -rectHeight / 2 - 0.2]),
       label('label6', '6m', [-rectWidth / 2 - 0.3, 0]),
       label('label10', '10m', [0, -rectHeight / 2 - 0.2]),
     ],
     options: {
       position: [0, -0.3],
+    },
+    mods: {
+      scenarios: {
+        summary: { position: [0, 0], scale: 1.2 },
+      },
     },
   };
 
@@ -604,6 +609,11 @@ export default function lessonLayout() {
     options: {
       position: [0, -0.3],
     },
+    mods: {
+      scenarios: {
+        summary: { position: [0, 0], scale: 1.2 },
+      },
+    },
   };
 
   // //////////////////////////////////////////////////////////////////
@@ -613,10 +623,10 @@ export default function lessonLayout() {
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
-  const comment = (content, comment, symbol) => ({
+  const comment = (content, commentText, symbol) => ({
     bottomComment: {
       content,
-      comment,
+      commentText,
       symbol,
       // contentSpace: 0.1,
       // commentSpace: 0.2,
@@ -635,6 +645,7 @@ export default function lessonLayout() {
       alignH: 'left',
       elements: {
         Area: { color: colors.highlight },
+        _Area: { text: 'Area', color: colors.sides },
         equals: '  =  ',
         _equals: '  =  ',
         _6: '6',
@@ -728,6 +739,15 @@ export default function lessonLayout() {
           'Area', 'equals', 'B', 'x', '_B', '_equals',
           { sup: ['__B', '__2'] },
         ],
+        // //////////////////////////////////////////
+        // Summary
+        // //////////////////////////////////////////
+        summaryRect: [
+          '_Area', 'equals', 'width', 'x', 'height',
+        ],
+        summarySquare: [
+          '_Area', 'equals', { sup: ['__B', '__2'] },
+        ],
       },
       defaultFormAlignment: {
         alignH: 'center',
@@ -738,6 +758,7 @@ export default function lessonLayout() {
         top: { position: [0, 0.9] },
         square: { position: [0, 0.8] },
         nav: { position: [-2.74, 1.6] },
+        summary: { position: [0, 0] },
       },
       isTouchable: false,
     },
