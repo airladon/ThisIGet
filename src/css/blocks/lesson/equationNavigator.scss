@@ -20,7 +20,7 @@
 }
 
 .lesson__eqn_nav__table {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-size: calc(var(--lesson__diagram-font-size) * 1);
   color: color('diagram', 'disabled', 'base');
 
   --lesson__eqn_nav__font_size: 1em;

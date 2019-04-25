@@ -46,19 +46,21 @@ class Content extends PresentationLessonContent {
     const unit = coll._unitShape;
     const shapes = coll._shapes;
     const rect = coll._rectangle;
+    const square = coll._square;
     const eqn = coll._eqnEqn;
     const nav = coll._eqnNav;
 
     const mods = {
       m: highlight(colors.highlight),
+      m2: highlightWord('m<sup>2</sup>', colors.highlight),
     };
     // eqn.changeDescription('10', 'Rectangle area is product of width and height.', mods);
     eqn.changeDescription('11', 'Expand both 6|m| and 10|m| as 6|m| is the same as saying 6 lots of 1|m|.', mods);
     eqn.changeDescription('12', 'Reorder equation so all |m| terms are on the right.', mods);
-    eqn.changeDescription('13', 'Calculate 6 ⨉ 10 and remove redundant 1s', mods);
-    eqn.changeDescription('14', ' Calculate 6 ⨉ 10 and remove redundant 1s', mods);
+    eqn.changeDescription('13', 'Calculate 6 ⨉ 10 and remove redundant 1s.', mods);
+    eqn.changeDescription('14', ' Calculate 6 ⨉ 10 and remove redundant 1s.', mods);
     eqn.changeDescription('15', 'Multiplying something by itself is the same as squaring it.', mods);
-    eqn.changeDescription('16', 'Resulting area of rectangle', mods);
+    // eqn.changeDescription('16', 'Resulting area of rectangle has units of |m2|.', mods);
 
     this.addSection({
       title: 'Introduction',
@@ -108,7 +110,15 @@ class Content extends PresentationLessonContent {
       show: [examples._largeCircle, examples._smallSquare],
     });
 
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    // Measurement
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
     this.addSection({
+      title: 'Measurement',
       setContent: centerV([
         '|Area| is a property that has now been |identified| and |named|.',
         'How can we |measure| it?',
@@ -261,7 +271,6 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Rectangle',
       setContent: [
         'Using reference squares to measure area makes it particularly convenient to examine the |area of a rectangle|.',
       ],
@@ -402,6 +411,7 @@ class Content extends PresentationLessonContent {
       setContent: 'We can |simplify| and |rearrange| this equation to find the units of area.',
     };
     this.addSectionEqnStep({ eqn: nav, from: '10', to: '10' }, common, content, {});
+    content = { setContent: '' };
     this.addSectionEqnStep({ eqn: nav, from: '10', to: '11' }, common, content, {});
     this.addSectionEqnStep({
       eqn: nav, from: '11', to: '12', duration: 1.1,
@@ -409,7 +419,35 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn: nav, from: '12', to: '13' }, common, content, {});
     this.addSectionEqnStep({ eqn: nav, from: '13', to: '14' }, common, content, {});
     this.addSectionEqnStep({ eqn: nav, from: '14', to: '15' }, common, content, {});
-    this.addSectionEqnStep({ eqn: nav, from: '15', to: '16' }, common, content, {});
+
+    this.addSectionEqnStep({ eqn: nav, from: '15', to: '16' }, common, {
+      setContent: 'So the short hand way of writing units is to use the mathematical |square notation|.',
+    });
+
+    this.addSectionEqnStep({ eqn: nav, from: '16', to: '16' }, common, {
+      setContent: 'If the reference squares have side length |1m|, then we would say the area unit is |meters squared| or |m<sup>2</sup>|.',
+    });
+
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    // Square
+    // ******************************************************************
+    // ******************************************************************
+    // ******************************************************************
+    this.addSection(common, {
+      title: 'Square',
+      setContent: [
+        'As a |square| is a special type of rectangle, so area can be calculated the same way: |adjacent sides are multiplied|.',
+      ],
+      show: [square],
+      setSteadyState: () => {
+        eqn.setScenario('square');
+        eqn.showForm('square');
+        console.log(nav)
+        console.log(eqn)
+      },
+    });
   }
 }
 

@@ -532,6 +532,45 @@ export default function lessonLayout() {
     },
   };
 
+  const squareLine = {
+    name: 'line',
+    method: 'polyLine',
+    options: {
+      points: [
+        [-rectHeight / 2, -rectHeight / 2],
+        [-rectHeight / 2, rectHeight / 2],
+        [rectHeight / 2, rectHeight / 2],
+        [rectHeight / 2, -rectHeight / 2],
+      ],
+      color: colors.sides,
+      width: 0.03,
+      close: true,
+    },
+  };
+  const squareGrid = {
+    name: 'grid',
+    method: 'grid',
+    options: {
+      bounds: new Rect(-rectHeight / 2, -rectHeight / 2, rectHeight, rectHeight),
+      xStep: rectGrid,
+      yStep: rectGrid,
+      color: colors.grid,
+    },
+  };
+  const square = {
+    name: 'square',
+    method: 'collection',
+    addElements: [
+      squareGrid,
+      squareLine,
+      label('labelB1', 'B', [-rectHeight / 2 - 0.2, 0]),
+      label('labelB2', 'B', [0, -rectHeight / 2 - 0.2]),
+    ],
+    options: {
+      position: [0, -0.3],
+    },
+  };
+
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
   // //////////////////////////////////////////////////////////////////
@@ -558,12 +597,14 @@ export default function lessonLayout() {
       navType: 'description',
       color: colors.diagram.text.base,
       scale: 0.9,
+      alignH: 'left',
       elements: {
         Area: { color: colors.highlight },
         equals: '  =  ',
         _equals: '  =  ',
         _6: '6',
         _2: { text: '2', color: colors.highlight },
+        __2: { text: '2', color: colors.sides },
         x: ' \u00D7 ',
         _x: ' \u00D7 ',
         __x: ' \u00D7 ',
@@ -573,6 +614,8 @@ export default function lessonLayout() {
         _numSquares: ' num squares ',
         A: { text: ' A ', color: colors.sides },
         B: { text: ' B ', color: colors.sides },
+        _B: { text: ' B ', color: colors.sides },
+        __B: { text: ' B ', color: colors.sides },
         width: { text: ' width ', color: colors.sides },
         height: { text: ' height ',color: colors.sides },
         _length: ' length ',
@@ -610,7 +653,9 @@ export default function lessonLayout() {
           comment('B', 'height', '_sBrace'),
         ],
         '6': ['Area', 'equals', 'width', 'x', 'height'],
+        // //////////////////////////////////////////
         // Units Forms
+        // //////////////////////////////////////////
         '10': ['Area', 'equals', '_10', 'm', 'x', '_6', '_m'],
         '11': ['Area', 'equals', '_10', '_x', '_1', 'm', 'x', '_6', '__x', '__1', '_m'],
         '12': {
@@ -641,6 +686,13 @@ export default function lessonLayout() {
           comment(['_m', '_x', 'm'], { sup: ['__m', '_2'] }, 'mBrace'),
         ],
         '16': ['Area', 'equals', '_60', { sup: ['__m', '_2'] }],
+        // //////////////////////////////////////////
+        // Square
+        // //////////////////////////////////////////
+        square: [
+          'Area', 'equals', 'B', 'x', '_B', '_equals',
+          { sup: ['__B', '__2'] },
+        ],
       },
       defaultFormAlignment: {
         alignH: 'center',
@@ -649,8 +701,10 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         top: { position: [0, 0.9] },
-        nav: { position: [0, 1.3] },
+        square: { position: [0, 0.8] },
+        nav: { position: [-2.74, 1.6] },
       },
+      isTouchable: false,
     },
   };
 
@@ -661,6 +715,7 @@ export default function lessonLayout() {
     shapes,
     rectangle,
     eqn,
+    square,
   ];
   return layout;
 }
