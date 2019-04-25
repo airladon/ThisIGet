@@ -76,7 +76,7 @@ export default function lessonLayout() {
     line('left', Math.PI / 2, [-1, -0.5], 'left'),
     line('right', Math.PI / 2, [1, -0.5], 'right'),
     line('top', 0, [-1, 0.5], 'top'),
-    line('bottom', 0, [-1, -0.5], 'bottom'),
+    line('bottom', 0, [-1 - layout.width / 2, -0.5], 'bottom'),
     layout.question,
   ];
 

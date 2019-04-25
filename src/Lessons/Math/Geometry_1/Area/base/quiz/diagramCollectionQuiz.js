@@ -14,6 +14,10 @@ const {
 } = Fig;
 
 const {
+  getPoint,
+} = Fig.tools.g2;
+
+const {
 //   removeRandElement,
   round,
   rand,
@@ -173,19 +177,26 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
 
     this._question.drawingObject.setText(`Create a rectangle or square that has an area of ${area} squares.`);
-    this.transitionToNewProblem({ target: 'newProblem', duration: 1 });
+
+    const left = this._left;
+    const right = this._right;
+    const top = this._top;
+    const bottom = this._bottom;
+    if (left.getPosition().isNotEqualTo(getPoint(left.scenarios.newProblem.position))
+      || top.getPosition().isNotEqualTo(getPoint(top.scenarios.newProblem.position))
+      || right.getPosition().isNotEqualTo(getPoint(right.scenarios.newProblem.position))
+      || bottom.getPosition().isNotEqualTo(getPoint(bottom.scenarios.newProblem.position))
+    ) {
+      this.transitionToNewProblem({ target: 'newProblem', duration: 2 });
+    }
   }
 
   afterTransitionToNewProblem() {
+    this._left.setMovable(true);
+    this._right.setMovable(true);
+    this._top.setMovable(true);
+    this._bottom.setMovable(true);
     super.afterTransitionToNewProblem();
-    this._left._line.isInteractive = null;
-    this._left.isInteractive = null;
-    this._bottom._line.isInteractive = null;
-    this._bottom.isInteractive = null;
-    this._top._line.isInteractive = null;
-    this._top.isInteractive = null;
-    this._right._line.isInteractive = null;
-    this._right.isInteractive = null;
   }
 
   showAnswer() {
@@ -193,19 +204,16 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const answerToShow = this.answers[this.answerIndex];
     const [width, height] = answerToShow;
     this.goToRectangle(width, height);
-    this._left._line.isInteractive = false;
-    this._left.isInteractive = false;
-    this._bottom._line.isInteractive = false;
-    this._bottom.isInteractive = false;
-    this._top._line.isInteractive = false;
-    this._top.isInteractive = false;
-    this._right._line.isInteractive = false;
-    this._right.isInteractive = false;
+    this._left.setMovable(false);
+    this._right.setMovable(false);
+    this._top.setMovable(false);
+    this._bottom.setMovable(false);
     this._left.setColor(this.layout.colors.sidesDisabled);
     this._right.setColor(this.layout.colors.sidesDisabled);
     this._top.setColor(this.layout.colors.sidesDisabled);
     this._bottom.setColor(this.layout.colors.sidesDisabled);
     this.diagram.animateNextFrame();
+    this.diagram.lesson.enableInteractiveItems();
   }
 
   findAnswer() {

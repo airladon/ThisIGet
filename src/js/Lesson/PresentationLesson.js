@@ -409,6 +409,19 @@ class PresentationLesson extends SimpleLesson {
     // this.overlayDiagram = this.content.overlayDiagram;
     this.diagram.lesson = this;
   }
+
+  // eslint-disable-next-line class-methods-use-this
+  disableInteractiveItems() {
+    const button = document.getElementById('id_lesson__interactive_element_button');
+    if (button != null) {
+      button.classList.add('lesson__interactive_element_button__hide');
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  enableInteractiveItems() {
+    this.updateInteractiveItems();
+  }
 }
 
 export default PresentationLesson;

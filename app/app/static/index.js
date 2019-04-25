@@ -14024,6 +14024,12 @@ function (_DiagramElementCollec) {
         }
       } else {
         this.isMovable = false;
+        this.isTouchable = false;
+
+        if (this._line != null) {
+          this._line.isTouchable = false;
+          this._line.isMovable = false;
+        }
       }
     }
   }, {
@@ -15400,8 +15406,8 @@ function () {
         classes: '',
         position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
         alignV: 'middle',
-        alignH: 'left',
-        color: [1, 0, 0, 1]
+        alignH: 'left' // color: [1, 0, 0, 1],
+
       };
 
       for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -21408,6 +21414,20 @@ function () {
 
       if (this.parent != null) {
         this.parent.makeTouchable(false);
+      }
+    }
+  }, {
+    key: "setMovable",
+    value: function setMovable() {
+      var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (movable) {
+        this.isMovable = true;
+        this.isTouchable = true;
+        this.parent.makeTouchable(false);
+      } else {
+        this.isMovable = false;
+        this.isTouchable = false;
       }
     }
   }, {
