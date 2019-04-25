@@ -10,6 +10,7 @@ const {
   DiagramElementCollection,
   Transform,
   Point,
+  Equation,
 } = Fig;
 
 const {
@@ -40,6 +41,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _square: DiagramElementPrimative;
     _circle: DiagramElementPrimative;
     _triangle: DiagramElementPrimative;
+    _triangleHtmlLabel: DiagramElementPrimative;
+    _squareHtmlLabel: DiagramElementPrimative;
+    _circleHtmlLabel: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   _rectangle: {
@@ -60,6 +64,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _labelB1: DiagramElementPrimative;
     _labelB2: DiagramElementPrimative;
   } & DiagramElementCollection;
+
+  _eqnEqn: Equation;
 
   row: number;
 

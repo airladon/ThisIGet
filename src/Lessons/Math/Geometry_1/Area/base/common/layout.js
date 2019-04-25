@@ -759,6 +759,7 @@ export default function lessonLayout() {
         square: { position: [0, 0.8] },
         nav: { position: [-2.74, 1.6] },
         summary: { position: [0, 0] },
+        qr: { position: [0, -1.5] },
       },
       isTouchable: false,
     },
