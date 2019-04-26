@@ -9,7 +9,7 @@ const {
   // DiagramObjectLine,
   // DiagramElementCollection,
   // DiagramObjectPolyLine,
-  // DiagramEquation,
+  // Equation,
   Transform,
 } = Fig;
 

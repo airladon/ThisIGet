@@ -12,7 +12,10 @@ import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
 // const {
+//   style,
 //   click,
+//   clickW,
+//   highlight,
 //   centerV,
 // } = Fig.tools.html;
 
@@ -33,7 +36,7 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    // const coll = diag._collection;
 
     this.addSection({
       title: '',

@@ -9,13 +9,14 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   // DiagramObjectPolyLine,
-  // DiagramEquation,
+  Equation,
   Transform,
 } = Fig;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _lightCircle: DiagramElementPrimative;
+    _circle: DiagramElementPrimative;
     _poly: {
       _fill: DiagramElementPrimative;
       _triFill: DiagramElementPrimative;
@@ -48,6 +49,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection;
     _circleFill: DiagramElementPrimative;
   } & DiagramElementCollection;
+
+  _eqn: Equation;
 
   constructor(
     diagram: CommonLessonDiagram,

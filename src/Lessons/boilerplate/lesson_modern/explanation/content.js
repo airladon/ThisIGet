@@ -13,10 +13,11 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
+  // style,
   // click,
-  centerV,
+  // clickW,
   // highlight,
-  // clickWord,
+  centerV,
 } = Fig.tools.html;
 
 const layout = lessonLayout();

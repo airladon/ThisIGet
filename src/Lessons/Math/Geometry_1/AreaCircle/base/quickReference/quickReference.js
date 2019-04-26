@@ -8,13 +8,13 @@ import version from '../version';
 import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-// const {
+const {
 //   click,
-//   highlight,
+  highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QRCircleArea extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -31,21 +31,27 @@ export default class QRBoilerplate extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
-    this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    const modifiers = { radius: highlight(layout.colors.radius) };
+    this.setTitle('Circle Area');
+    this.setDescription('|Circle area| is the product of |π| and the |radius| squared.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
-    const collection = this._collection;
-    collection.show();
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    const coll = this._collection;
+    const fig = coll._fig;
+    const polyMost = fig._polyMost;
+    const circle = fig._circle;
+    const eqn = coll._eqn;
+    circle.show();
+    polyMost._radius.showAll();
+    eqn.setScenario('qr');
+    eqn.showForm('14');
+    polyMost._radius.setScenario('circle');
+    polyMost._radius.updateLabel(polyMost._radius.getRotation() + polyMost.getRotation());
+    this.transformToQRWindow(coll, new Rect(-1.6, -1.4, 3.2, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -58,8 +64,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
-    // QR2: QRBoilerplate2,
+    Main: QRCircleArea,
   };
 }
 
