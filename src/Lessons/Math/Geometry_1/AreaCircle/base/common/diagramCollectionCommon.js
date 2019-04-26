@@ -19,8 +19,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _poly: {
       _fill: DiagramElementPrimative;
       _triFill: DiagramElementPrimative;
-      _height: DiagramElementLine;
-      _base: DiagramElementLine;
+      _height: DiagramObjectLine;
+      _radius: DiagramObjectLine;
+      _base: DiagramObjectLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
@@ -28,8 +29,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _polyMore: {
       _fill: DiagramElementPrimative;
       _triFill: DiagramElementPrimative;
-      _height: DiagramElementLine;
-      _base: DiagramElementLine;
+      _height: DiagramObjectLine;
+      _radius: DiagramObjectLine;
+      _base: DiagramObjectLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
@@ -37,8 +39,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     _polyMost: {
       _fill: DiagramElementPrimative;
       _triFill: DiagramElementPrimative;
-      _height: DiagramElementLine;
-      _base: DiagramElementLine;
+      _height: DiagramObjectLine;
+      _radius: DiagramObjectLine;
+      _base: DiagramObjectLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
@@ -75,6 +78,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseMostBorder() {
+    this._fig._polyMost._borderHighlight.pulseThickNow(1, 1.03, 7);
+    this.diagram.animateNextFrame();
+  }
+
   pulseCircumference() {
     this._fig._lightCircle.pulseThickNow(1, 1.035, 11);
     this.diagram.animateNextFrame();
@@ -84,7 +92,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (this._fig._circleFill.isShown) {
       this._fig._circleFill.hide();
       this._fig._poly._fill.show();
-    } else if (this._fig._polyFill.isShown) {
+    } else if (this._fig._poly._fill.isShown) {
       this._fig._poly._fill.hide();
     } else {
       this._fig._poly._fill.show();

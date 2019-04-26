@@ -40,7 +40,7 @@ export default function lessonLayout() {
     name: 'circle',
     method: 'polygon',
     options: {
-      radius,
+      radius: radius + 0.02,
       width: 0.03,
       sides: 200,
       color: colors.sides,
@@ -51,8 +51,8 @@ export default function lessonLayout() {
     name: 'lightCircle',
     method: 'polygon',
     options: {
-      radius,
-      width: 0.01,
+      radius: radius + 0.02,
+      width: 0.02,
       sides: 200,
       color: colors.disabled,
     },
@@ -163,6 +163,27 @@ export default function lessonLayout() {
         },
       },
       {
+        name: 'radius',
+        method: 'line',
+        options: {
+          p1: [0, 0],
+          p2: [radius, 0],
+          width: 0.015,
+          label: {
+            text: 'r',
+            offset: 0.05,
+            location: 'outside',
+          },
+          color: colors.height,
+        },
+        mods: {
+          scenarios: {
+            height: { rotation: triAngle[index] / 2 },
+            circle: { rotation: 0 },
+          },
+        },
+      },
+      {
         name: 'base',
         method: 'line',
         options: {
@@ -234,6 +255,7 @@ export default function lessonLayout() {
     },
   });
   const half = { frac: ['_1', '_2', 'v', 0.6] };
+  const r2 = { sup: ['__r', [' ', '_2']] };
   const eqn = {
     name: 'eqn',
     method: 'addEquation',
@@ -255,31 +277,69 @@ export default function lessonLayout() {
         _mul: ' \u00D7 ',
         h: { text: 'h', color: colors.height },
         b: { text: 'b', color: colors.border },
-        border: { text: 'border', color: colors.border },
+        border: { text: ' border', color: colors.border },
         r: { text: 'r', color: colors.radius },
         _r: { text: 'r', color: colors.radius },
+        __r: { text: 'r', color: colors.radius },
         _1: '1',
         _2: '2',
         __2: '2',
+        pi: 'π',
         sides: { text: `${layout.polygonSides[0]}` },
         v: { symbol: 'vinculum' },
         brace: {
-          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabledLabel,
         },
         sBrace: {
-          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabled,
+          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabledLabel,
         },
-        s: { symbol: 'strike', color: colors.disabled },
-        _s: { symbol: 'strike', color: colors.disabled },
+        x: { symbol: 'xStrike', color: colors.disabledLabel },
+        _x: { symbol: 'xStrike', color: colors.disabledLabel },
       },
       forms: {
-        '0': [AreaTri, 'equals', half, ' ', 'h', 'mul', 'b'],
-        '1': [AreaAll, 'equals', half, ' ', 'h', 'mul', 'b', '_mul', 'sides'],
+        '0': [AreaTri, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b'],
+        '1': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b', '_mul', ' ', 'sides'],
         '2': [
-          AreaAll, 'equals', half, ' ', 'h', 'mul',
-          top(['b', '_mul', 'sides'], 'border', 'brace'),
+          AreaAll, 'equals', half, ' ', 'h', ' ', 'mul',
+          top(['b', ' ', '_mul', 'sides'], 'border', 'brace'),
         ],
-        '3': [AreaAll, 'equals', half, ' ', 'h', 'mul', 'border'],
+        '3': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
+        '4': [AreaCirc, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
+        '5': [
+          AreaCirc, 'equals', half,
+          top([' ', 'h', ' '], [' ', 'r', ' '], 'sBrace'),
+          'mul', 'border'],
+        '6': [AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul', 'border'],
+        '7': [
+          AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul',
+          top('border', ['__2', ' ', 'pi', ' ', '_r'], 'brace'),
+        ],
+        '8': [
+          AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul', '__2', ' ', 'pi', ' ', '_r',
+        ],
+        '9': {
+          content: [
+            AreaCirc, 'equals', half, ' ', 'mul', '__2', ' ',
+            'pi', ' ', '_r', ' ', 'r',
+          ],
+          translation: {
+            r: ['curved', 'up', 0.8],
+          },
+        },
+        '10': [
+          AreaCirc, 'equals',
+          { strike: [half, 'x'] },
+          ' ', 'mul',
+          { strike: ['__2', '_x'] }, ' ',
+          'pi', ' ', '_r', ' ', 'r',
+        ],
+        '11': [AreaCirc, 'equals', 'pi', ' ', '_r', ' ', 'r'],
+        '12': [
+          AreaCirc, 'equals', 'pi', ' ',
+          top(['_r', ' ', 'r'], r2, 'sBrace'),
+        ],
+        '13': [AreaCirc, 'equals', 'pi', ' ', r2],
+        '14': ['_Area', 'equals', 'pi', ' ', r2],
       },
     },
     mods: {
