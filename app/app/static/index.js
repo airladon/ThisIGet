@@ -15242,7 +15242,9 @@ function () {
         options.transform.updateTranslation(p);
       }
 
-      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points, options.color, options.transform, this.limits);
+      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      }), options.color, options.transform, this.limits);
 
       if (options.mods != null && options.mods !== {}) {
         element.setProperties(options.mods);
