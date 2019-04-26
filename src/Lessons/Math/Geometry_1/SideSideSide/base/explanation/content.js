@@ -96,8 +96,11 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         coll.animations.cancelAll();
         coll.animations.new()
-          .scenarios({ target: 'center', duration: 1 })
-          .afterFrame(() => { coll.updateLabels(); })
+          .scenarios({
+            target: 'center',
+            duration: 1,
+            afterFrame: () => { console.log('asdf'); coll.updateLabels(); },
+          })
           .whenFinished(done)
           .start();
       },

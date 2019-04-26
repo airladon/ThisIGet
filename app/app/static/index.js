@@ -715,7 +715,7 @@ function () {
 
     this.element = options.element;
     this.animations = [];
-    this.state = 'idle'; // $FlowFixme
+    this.state = 'idle'; // $FlowFixMe
 
     this.options = {
       translation: {}
@@ -2998,6 +2998,11 @@ function (_AnimationStep) {
     key: "nextFrame",
     value: function nextFrame(now) {
       var remaining = null;
+
+      if (this.beforeFrame != null) {
+        this.beforeFrame(now - this.startTime);
+      }
+
       this.steps.forEach(function (step) {
         if (step.state === 'animating' || step.state === 'waitingToStart') {
           var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
@@ -3011,6 +3016,10 @@ function (_AnimationStep) {
           }
         }
       });
+
+      if (this.afterFrame != null) {
+        this.afterFrame(now - this.startTime);
+      }
 
       if (remaining === null) {
         remaining = 0;
@@ -3272,8 +3281,17 @@ function (_AnimationStep) {
     value: function nextFrame(now) {
       var remaining = -1;
 
+      if (this.beforeFrame != null) {
+        this.beforeFrame(now - this.startTime);
+      }
+
       if (this.index <= this.steps.length - 1) {
-        remaining = this.steps[this.index].nextFrame(now); // console.log('serial', now, this.index, remaining)
+        remaining = this.steps[this.index].nextFrame(now);
+
+        if (this.afterFrame != null) {
+          this.afterFrame(now - this.startTime);
+        } // console.log('serial', now, this.index, remaining)
+
 
         if (remaining >= 0) {
           if (this.index === this.steps.length - 1) {

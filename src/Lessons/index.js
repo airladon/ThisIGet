@@ -127,21 +127,6 @@ export default function getLessonIndex() {
             'Main',
           ],
         },
-        legacy: {
-          title: 'Legacy',
-          description: 'First explanation of Topic.',
-          path: 'legacy',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
-        },
       },
       dependencies: [
         'area_introduction',
