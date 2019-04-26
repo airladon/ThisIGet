@@ -21424,8 +21424,7 @@ function () {
 
       if (movable) {
         this.isMovable = true;
-        this.isTouchable = true;
-        this.parent.makeTouchable(false);
+        this.makeTouchable(true);
       } else {
         this.isMovable = false;
         this.isTouchable = false;
@@ -21498,17 +21497,13 @@ function () {
       if (this.onClick !== null && this.onClick !== undefined) {
         this.onClick(this);
       }
-    }
-  }, {
-    key: "setMovable",
-    value: function setMovable() {
-      var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+    } // setMovable(movable: boolean = true) {
+    //   if (movable) {
+    //     this.isTouchable = true;
+    //     this.isMovable = true;
+    //   }
+    // }
 
-      if (movable) {
-        this.isTouchable = true;
-        this.isMovable = true;
-      }
-    }
   }]);
 
   return DiagramElement;
@@ -22584,9 +22579,10 @@ function (_DiagramElement2) {
     value: function setMovable() {
       var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setMovable", this).call(this, movable);
+
       if (movable) {
-        this.hasTouchableElements = true;
-        this.isMovable = true;
+        this.hasTouchableElements = true; // this.isMovable = true;
       }
     }
   }, {

@@ -19,6 +19,7 @@ const cssColorNames = [
   'disabled',
   'construction1',
   'construction2',
+  'fill',
   'fill1',
   'fill2',
 ];
@@ -176,10 +177,10 @@ export default function lessonLayout() {
       color,
       points,
       side: [
-        { label: { text: text1, offset: 0.1, location: 'outside' } },
-        { label: { text: text2, offset: 0.1, location: 'outside' } },
-        { label: { text: text3, offset: 0.1, location: 'outside' } },
-        { label: { text: text4, offset: 0.1, location: 'outside' } },
+        { label: { text: text1, offset: 0.05, location: 'outside' } },
+        { label: { text: text2, offset: 0.05, location: 'outside' } },
+        { label: { text: text3, offset: 0.05, location: 'outside' } },
+        { label: { text: text4, offset: 0.05, location: 'outside' } },
       ],
       close: true,
     },
@@ -246,6 +247,11 @@ export default function lessonLayout() {
     },
   });
 
+  const side = new Line(tri1[0], tri1[2]);
+  const t = new Transform().rotate(-side.ang + Math.PI).translate(0, -0.9);
+  const temp = tri1.map(p => p.transformBy(t.m()));
+  const tri2 = [temp[2], temp[0], temp[1]];
+
   const area1 = {
     name: 'area1',
     method: 'collection',
@@ -270,12 +276,14 @@ export default function lessonLayout() {
       base('base', tri1[0], tri1[1], -0.5, 'base'),
       height('height', tri1[1], new Point(tri1[1].x, tri1[2].y), 0.5, 'height'),
     ],
+    mods: {
+      scenarios: {
+        area2: { rotation: -side.ang + Math.PI, position: [-0.5, -1.1] },
+        default: { rotation: 0, position: [0, -0.3] },
+      },
+    },
   };
 
-  const side = new Line(tri1[0], tri1[2]);
-  const t = new Transform().rotate(-side.ang + Math.PI).translate(0, -0.9);
-  const temp = tri1.map(p => p.transformBy(t.m()));
-  const tri2 = [temp[2], temp[0], temp[1]];
   const area2 = {
     name: 'area2',
     method: 'collection',
@@ -288,6 +296,7 @@ export default function lessonLayout() {
         'leftFill', [tri2[0], tri2[2], new Point(tri2[2].x, tri2[0].y)],
         colors.fill1,
       ),
+      fill('triFill', [tri2[0], tri2[2], tri2[1]], colors.fill),
       tri('tri', tri2),
       rect(
         'leftRect', rectPoints(tri2, true, -0.01, 0.0, -0.005, 0.0),
@@ -297,9 +306,15 @@ export default function lessonLayout() {
         'rightRect', rectPoints(tri2, false, -0.02, -0.01, 0.02, 0.01),
         colors.construction2, '', 'C', 'h','',
       ),
-      base('base', tri2[0], tri2[1], -0.5, 'base'),
+      base('base', tri2[0], tri2[1], -0.3, 'base'),
       height('height', tri2[1], new Point(tri2[1].x, tri2[2].y), 0.5, 'height'),
     ],
+    mods: {
+      scenarios: {
+        // area2: { rotation: -side.ang + Math.PI, position: [0, -0.9] },
+        area2: { position: [-0.5, -0.2] },
+      },
+    },
   };
 
   const sub = (content, subscript) => ({
@@ -315,13 +330,11 @@ export default function lessonLayout() {
   const half = { frac: ['_1', '_2', 'v', 0.6] };
   const _half = { frac: ['__1', '__2', '_v', 0.6] };
   const __half = { frac: ['___1', '___2', '__v', 0.6] };
-  // const half()
-  // const topComment = 
+
   const eqn = {
     name: 'eqn',
     method: 'addEquation',
     options: {
-      // position: [0, 0.9],
       scale: 1,
       defaultFormAlignment: {
         fixTo: 'equals',
@@ -479,9 +492,136 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        area1: { position: [-0.7, 0.9] },
+        default: { position: [-0.6, 0.7] },
+        area2: { position: [-0.6, 0.9] },
       },
     },
+  };
+
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  // //////////////////////////////////////////////////////////////////
+  layout.bounds = new Rect(-2.4, -1.2, 4.8, 2.2);
+  layout.minSeparation = 0.4;
+  layout.gridSpacing = 0.2;
+  layout.baseY = -1.3;
+  layout.heightX = 2.5;
+  const dimHeight = {
+    name: 'height',
+    method: 'line',
+    options: {
+      vertexSpaceStart: 'start',
+      width: 0.01,
+      arrows: {
+        height: 0.04,
+        width: 0.04,
+      },
+      angle: Math.PI / 2,
+      color: colors.sides,
+      position: [layout.heightX, -0.5],
+      label: {
+        text: null,
+        location: 'right',
+        offset: 0.05,
+      },
+      length: 1,
+    },
+  };
+
+  const dimBase = {
+    name: 'base',
+    method: 'line',
+    options: {
+      vertexSpaceStart: 'start',
+      width: 0.01,
+      arrows: {
+        height: 0.04,
+        width: 0.04,
+      },
+      angle: 0,
+      color: colors.sides,
+      position: [-0.5, layout.baseY],
+      label: {
+        text: null,
+        location: 'bottom',
+        offset: 0.05,
+      },
+      length: 1,
+    },
+  };
+
+  const implicationsGrid = {
+    name: 'grid',
+    method: 'grid',
+    options: {
+      bounds: layout.bounds,
+      xStep: layout.gridSpacing,
+      yStep: layout.gridSpacing,
+      numLinesThick: 2,
+      color: colors.grid,
+    },
+  };
+
+  const implicationsTri = {
+    name: 'tri',
+    method: 'polyLine',
+    options: {
+      // borderToPoint: 'alwaysOn',
+      color: colors.sides,
+      points: [[-1, -1], [0, 0.8], [1, -1]],
+      close: true,
+      width: 0.03,
+      // pad: {
+      //   color: [1, 0, 0, 0.4],
+      //   radius: 0.1,
+      //   touchRadius: 0.3,
+      //   sides: 100,
+      //   // isMovable: true,
+      // },
+    },
+  };
+
+  const pad = (name, position) => ({
+    name,
+    method: 'polygon',
+    options: {
+      color: [1, 0, 0, 0.4],
+      radius: 0.1,
+      sides: 100,
+      position,
+      fill: true,
+    },
+  });
+
+  const implicationsText = {
+    name: 'text',
+    method: 'text',
+    options: {
+      text: 'Area',
+      alignH: 'center',
+      position: [0, -1.8],
+      color: colors.sides,
+      size: 0.15,
+    },
+  };
+
+  const implications = {
+    name: 'implications',
+    method: 'collection',
+    addElements: [
+      pad('pad0', [-1, -1]),
+      pad('pad1', [0, 0.8]),
+      pad('pad2', [1, -1]),
+      implicationsGrid,
+      implicationsTri,
+      dimHeight,
+      dimBase,
+      implicationsText,
+    ],
   };
 
   layout.addElements = [
@@ -491,6 +631,7 @@ export default function lessonLayout() {
     area1,
     area2,
     eqn,
+    implications,
   ];
   return layout;
 }
