@@ -5,6 +5,8 @@ const {
   Diagram, Transform, Point, DiagramElementCollection, DiagramElementPrimative,
 } = Fig;
 
+const { parsePoint } = Fig.tools.g2;
+
 const { joinObjects } = Fig.tools.misc;
 
 export type TypeMessages = {
@@ -210,8 +212,17 @@ const CommonQuizMixin = superclass => class extends superclass {
     this._choice.setPosition(this.layout.quiz.choice);
   }
 
-  addQuestion() {
-    const question = this.diagram.shapes.text({
+  addQuestion(optionsIn: {
+    size?: number,
+    style?: 'normal' | 'italics',
+    family?: string,
+    hAlign?: 'left' | 'right' | 'center',
+    vAlign?: 'bottom' | 'top' | 'middle' | 'baseline',
+    text?: string,
+    color?: Array<number>,
+    position?: Point | [number, number],
+  }) {
+    const defaultOptions = {
       size: 0.18,
       style: 'normal',
       family: 'helvetica',
@@ -220,7 +231,10 @@ const CommonQuizMixin = superclass => class extends superclass {
       text: '',
       color: this.layout.colors.diagram.text.base,
       position: new Point(-2.7, 1.5),
-    });
+    };
+    const options = joinObjects({}, defaultOptions, optionsIn);
+    options.position = parsePoint(options.position);
+    const question = this.diagram.shapes.text(options);
     this.add('question', question);
   }
 

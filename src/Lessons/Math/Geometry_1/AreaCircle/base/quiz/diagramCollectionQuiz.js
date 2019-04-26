@@ -59,7 +59,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
-    this.addQuestion();
+    this.addQuestion({ size: 0.16, position: [0, 1.7], hAlign: 'center' });
     this.addCheck();
     this.addInput('input', '?', 5, 2);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
@@ -107,7 +107,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const diameter = round(radius * 2, 1);
 
     const findRadius = () => {
-      const question = `What is the radius of a circle with area ${area}?`;
+      const question = `What is the radius (to 2 decimal places) of a circle with area ${area}?`;
       this.answer = round(Math.sqrt(area / Math.PI), 2);
       this._radius.showAll();
       this._radius.label.setText('radius = ?');
@@ -118,7 +118,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     };
 
     const findCircumference = () => {
-      const question = `What is the circumference of a circle with area ${area}?`;
+      const question = `What is the circumference (to 2 decimal places) of a circle with area ${area}?`;
       this.answer = round(Math.sqrt(area / Math.PI), 2);
       this._circumference.showAll();
       this._circumference._label.drawingObject.setText('circumference = ?');
@@ -128,7 +128,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     };
 
     const findDiameter = () => {
-      const question = `What is the diameter of a circle with area ${area}?`;
+      const question = `What is the diameter (to 2 decimal places) of a circle with area ${area}?`;
       this.answer = round(Math.sqrt(area / Math.PI) * 2, 2);
       this._diameter.showAll();
       this._diameter.label.setText('diameter = ?');
@@ -138,7 +138,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     };
 
     const findAreaFromRadius = () => {
-      const question = `What is the area of a circle with radius ${radius}?`;
+      const question = `What is the area (to 2 decimal places) of a circle with radius ${radius}?`;
       this.answer = round(radius ** 2 * Math.PI, 2);
       this._radius.showAll();
       this._radius.label.setText(`radius = ${radius}`);
@@ -148,7 +148,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     };
 
     const findAreaFromDiameter = () => {
-      const question = `What is the area of a circle with diameter ${diameter}?`;
+      const question = `What is the area (to 2 decimal places) of a circle with diameter ${diameter}?`;
       this.answer = round((diameter / 2) ** 2 * Math.PI, 2);
       this._diameter.showAll();
       this._diameter.label.setText(`diameter = ${diameter}`);
@@ -158,7 +158,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     };
 
     const findAreaFromCircumference = () => {
-      const question = `What is the area of a circle with circumference ${circumference}?`;
+      const question = `What is the area (to 2 decimal places) of a circle with circumference ${circumference}?`;
       this.answer = round((circumference / 2 / Math.PI) ** 2 * Math.PI, 2);
       this._circumference.showAll();
       this._circumference._label.drawingObject.setText(`circumference = ${circumference}`);
