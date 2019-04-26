@@ -85,28 +85,41 @@ export default function lessonLayout() {
     10,
     50,
   ];
+  const triAngle = layout.polygonSides.map(a => Math.PI * 2 / a);
+  const triPoints = triAngle.map(a => [
+    [0, 0],
+    [radius, 0],
+    [radius * Math.cos(a), radius * Math.sin(a)],
+  ]);
 
-  const polyFill = (name, sides) => ({
-    name,
-    method: 'polygon',
-    options: {
-      radius,
-      fill: true,
-      sides,
-      color: colors.areaPoly,
-    },
-  });
-
-  const poly = (name, sides) => ({
+  const poly = (name, index) => ({
     name,
     method: 'collection',
     addElements: [
+      {
+        name: 'fill',
+        method: 'polygon',
+        options: {
+          radius,
+          fill: true,
+          sides: layout.polygonSides[index],
+          color: colors.areaPoly,
+        },
+      },
+      {
+        name: 'triFill',
+        method: 'fan',
+        options: {
+          points: triPoints[index],
+          color: colors.areaTri,
+        },
+      },
       {
         name: 'lines',
         method: 'radialLines',
         options: {
           outerRadius: radius,
-          dAngle: Math.PI * 2 / sides,
+          dAngle: Math.PI * 2 / layout.polygonSides[index],
           color: colors.sides,
           width: 0.008,
         },
@@ -117,7 +130,7 @@ export default function lessonLayout() {
         options: {
           radius,
           width: 0.02,
-          sides,
+          sides: layout.polygonSides[index],
           color: colors.border,
         },
       },
@@ -127,29 +140,8 @@ export default function lessonLayout() {
         options: {
           radius,
           width: 0.008,
-          sides,
+          sides: layout.polygonSides[index],
           color: colors.sides,
-        },
-      },
-    ],
-  });
-
-  const triAngle = Math.PI * 2 / layout.polygonSides[0];
-  const triPoints = [
-    [0, 0],
-    [radius, 0],
-    [radius * Math.cos(triAngle), radius * Math.sin(triAngle)],
-  ];
-  const tri = {
-    name: 'tri',
-    method: 'collection',
-    addElements: [
-      {
-        name: 'fill',
-        method: 'fan',
-        options: {
-          points: triPoints,
-          color: colors.areaTri,
         },
       },
       {
@@ -158,8 +150,8 @@ export default function lessonLayout() {
         options: {
           p1: [0, 0],
           p2: [
-            radius * Math.cos(triAngle / 2) * Math.cos(triAngle / 2),
-            radius * Math.cos(triAngle / 2) * Math.sin(triAngle / 2),
+            radius * Math.cos(triAngle[index] / 2) * Math.cos(triAngle[index] / 2),
+            radius * Math.cos(triAngle[index] / 2) * Math.sin(triAngle[index] / 2),
           ],
           width: 0.015,
           label: {
@@ -175,7 +167,10 @@ export default function lessonLayout() {
         method: 'line',
         options: {
           p2: [radius, 0],
-          p1: [radius * Math.cos(triAngle), radius * Math.sin(triAngle)],
+          p1: [
+            radius * Math.cos(triAngle[index]),
+            radius * Math.sin(triAngle[index]),
+          ],
           width: 0.015,
           offset: 0.3,
           label: {
@@ -191,7 +186,7 @@ export default function lessonLayout() {
         },
       },
     ],
-  };
+  });
 
   const fig = {
     name: 'fig',
@@ -201,13 +196,12 @@ export default function lessonLayout() {
       grid,
       circle,
       lightCircle,
-      polyFill('polyFill', layout.polygonSides[0]),
-      polyFill('polyFillMore', layout.polygonSides[1]),
-      polyFill('polyFillMost', layout.polygonSides[2]),
-      tri,
-      poly('poly', layout.polygonSides[0]),
-      poly('polyMore', layout.polygonSides[1]),
-      poly('polyMost', layout.polygonSides[2]),
+      // polyFill('polyFill', layout.polygonSides[0]),
+      // polyFill('polyFillMore', layout.polygonSides[1]),
+      // polyFill('polyFillMost', layout.polygonSides[2]),
+      poly('poly', 0),
+      poly('polyMore', 1),
+      poly('polyMost', 2),
     ],
     mods: {
       scenarios: {

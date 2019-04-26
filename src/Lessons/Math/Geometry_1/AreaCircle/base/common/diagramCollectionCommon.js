@@ -15,25 +15,30 @@ const {
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
-    _tri: {
-      _height: DiagramObjectLine;
-      _base: DiagramObjectLine;
-    } & DiagramElementCollection;
-    _polyFill: DiagramElementPrimative;
     _lightCircle: DiagramElementPrimative;
     _poly: {
+      _fill: DiagramElementPrimative;
+      _triFill: DiagramElementPrimative;
+      _height: DiagramElementLine;
+      _base: DiagramElementLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
     } & DiagramElementCollection;
-    _polyFillMore: DiagramElementPrimative;
     _polyMore: {
+      _fill: DiagramElementPrimative;
+      _triFill: DiagramElementPrimative;
+      _height: DiagramElementLine;
+      _base: DiagramElementLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
     } & DiagramElementCollection;
-    _polyFillMost: DiagramElementPrimative;
     _polyMost: {
+      _fill: DiagramElementPrimative;
+      _triFill: DiagramElementPrimative;
+      _height: DiagramElementLine;
+      _base: DiagramElementLine;
       _border: DiagramElementPrimative;
       _borderHighlight: DiagramElementPrimative;
       _lines: DiagramElementPrimative;
@@ -55,13 +60,13 @@ export default class CommonCollection extends CommonDiagramCollection {
   toggleTri(targetIn: ?number = null) {
     let target = targetIn;
     if (target == null) {
-      let r = this._fig._tri.getRotation();
+      let r = this._fig._poly.getRotation();
       r += Math.PI * 2 / this.layout.polygonSides[0];
       target = r;
     }
-    this._fig._tri.setRotation(target);
-    this._fig._tri._height.updateLabel(target);
-    this._fig._tri._base.updateLabel(target);
+    this._fig._poly.setRotation(target);
+    this._fig._poly._height.updateLabel(target);
+    this._fig._poly._base.updateLabel(target);
     this.diagram.animateNextFrame();
   }
 
@@ -78,19 +83,19 @@ export default class CommonCollection extends CommonDiagramCollection {
   showTrianglesArea() {
     if (this._fig._circleFill.isShown) {
       this._fig._circleFill.hide();
-      this._fig._polyFill.show();
+      this._fig._poly._fill.show();
     } else if (this._fig._polyFill.isShown) {
-      this._fig._polyFill.hide();
+      this._fig._poly._fill.hide();
     } else {
-      this._fig._polyFill.show();
+      this._fig._poly._fill.show();
     }
     this.diagram.animateNextFrame();
   }
 
   showCircleArea() {
-    if (this._fig._polyFill.isShown) {
+    if (this._fig._poly._fill.isShown) {
       this._fig._circleFill.show();
-      this._fig._polyFill.hide();
+      this._fig._poly._fill.hide();
     } else if (this._fig._circleFill.isShown) {
       this._fig._circleFill.hide();
     } else {
@@ -100,6 +105,41 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   showLeastSides() {
-    this._poly.
+    this._fig._poly.setRotation(0);
+    this._fig._poly._height.updateLabel(0);
+    this._fig._poly._base.updateLabel(0);
+    this._fig._poly._lines.show();
+    this._fig._poly._height.showAll();
+    this._fig._poly._fill.show();
+    this._fig._poly._borderHighlight.show();
+    this._fig._polyMore.hide();
+    this._fig._polyMost.hide();
+    this.diagram.animateNextFrame();
+  }
+
+  showMoreSides() {
+    this._fig._polyMore.setRotation(0);
+    this._fig._polyMore._height.updateLabel(0);
+    this._fig._polyMore._base.updateLabel(0);
+    this._fig._polyMore._lines.show();
+    this._fig._polyMore._height.showAll();
+    this._fig._polyMore._fill.show();
+    this._fig._polyMore._borderHighlight.show();
+    this._fig._poly.hide();
+    this._fig._polyMost.hide();
+    this.diagram.animateNextFrame();
+  }
+
+  showMostSides() {
+    this._fig._polyMost.setRotation(0);
+    this._fig._polyMost._height.updateLabel(0);
+    this._fig._polyMost._base.updateLabel(0);
+    this._fig._polyMost._lines.show();
+    this._fig._polyMost._height.showAll();
+    this._fig._polyMost._fill.show();
+    this._fig._polyMost._borderHighlight.show();
+    this._fig._polyMore.hide();
+    this._fig._poly.hide();
+    this.diagram.animateNextFrame();
   }
 }

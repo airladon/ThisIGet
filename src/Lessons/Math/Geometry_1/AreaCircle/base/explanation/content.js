@@ -46,9 +46,9 @@ class Content extends PresentationLessonContent {
     const grid = fig._grid;
     const circle = fig._circle;
     const poly = fig._poly;
-    const polyFill = fig._polyFill;
+    // const polyFill = fig._polyFill;
     const lightCircle = fig._lightCircle;
-    const tri = fig._tri;
+    // const tri = fig._tri;
     const eqn = coll._eqn;
     const circleFill = fig._circleFill;
 
@@ -109,7 +109,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         Each: click(coll.toggleTri, [coll, null], colors.diagram.action),
       },
-      show: [lightCircle, poly._lines, poly._border, tri._height, tri._base],
+      show: [lightCircle, poly._lines, poly._border, poly._height, poly._base],
     });
 
     content = {
@@ -119,14 +119,14 @@ class Content extends PresentationLessonContent {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
       },
-      show: [lightCircle, poly._lines, poly._border, tri._height, tri._base],
+      show: [lightCircle, poly._lines, poly._border, poly._height, poly._base],
     });
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
       },
       show: [
-        lightCircle, poly._lines, poly._border, tri._height, tri._base,
+        lightCircle, poly._lines, poly._border, poly._height, poly._base,
       ],
       transitionFromPrev: (done) => {
         fig.animations.cancelAll();
@@ -139,7 +139,7 @@ class Content extends PresentationLessonContent {
         fig.setScenario('left');
         eqn.showForm('0');
         eqn.setScenario('right');
-        tri._fill.show();
+        poly._triFill.show();
       },
     });
 
@@ -154,14 +154,14 @@ class Content extends PresentationLessonContent {
     };
     this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, content, {
       show: [
-        lightCircle, poly._lines, poly._border, tri._height, tri._base,
-        tri._fill,
+        lightCircle, poly._lines, poly._border, poly._height, poly._base,
+        poly._triFill,
       ],
     });
     this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, content, {
       show: [
-        lightCircle, poly._lines, poly._border, tri._height, tri._base,
-        polyFill,
+        lightCircle, poly._lines, poly._border, poly._height, poly._base,
+        poly._fill,
       ],
     });
 
@@ -174,8 +174,8 @@ class Content extends PresentationLessonContent {
         base: highlight(colors.border),
       },
       show: [
-        lightCircle, poly._lines, poly._border, tri._height, tri._base,
-        polyFill,
+        lightCircle, poly._lines, poly._border, poly._height, poly._base,
+        poly._fill,
       ],
     });
     this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {
@@ -184,8 +184,8 @@ class Content extends PresentationLessonContent {
         base: highlight(colors.border),
       },
       show: [
-        lightCircle, poly._lines, tri._height, tri._base,
-        polyFill, poly._borderHighlight,
+        lightCircle, poly._lines, poly._height, poly._base,
+        poly._fill, poly._borderHighlight,
       ],
       setSteadyState: () => {
         fig.setScenario('left');
@@ -200,8 +200,8 @@ class Content extends PresentationLessonContent {
         border: click(coll.pulseBorder, [coll], colors.border),
       },
       show: [
-        lightCircle, poly._lines, tri._height, tri._base,
-        polyFill, poly._borderHighlight,
+        lightCircle, poly._lines, poly._height, poly._base,
+        poly._fill, poly._borderHighlight,
       ],
     };
     this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {});
@@ -214,7 +214,7 @@ class Content extends PresentationLessonContent {
         eqn.setScenario('right');
       },
       show: [
-        lightCircle, poly._lines, tri._height, polyFill, poly._borderHighlight,
+        lightCircle, poly._lines, poly._height, poly._fill, poly._borderHighlight,
       ],
     };
     content = {
