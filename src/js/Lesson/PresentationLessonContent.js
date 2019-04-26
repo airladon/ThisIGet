@@ -899,7 +899,11 @@ class PresentationLessonContent extends SimpleLessonContent {
     return click(this.next, [this], color);
   }
 
-  bindShowQR(uid: string, qrid: string, color: Array<number> = this.diagram.layout.colors.diagram.action) {
+  bindShowQR(
+    uid: string,
+    qrid: string,
+    color: Array<number> = this.diagram.layout.colors.diagram.action,
+  ) {
     return click(this.showQR, [this, uid, qrid], color);
   }
 
@@ -992,108 +996,6 @@ class PresentationLessonContent extends SimpleLessonContent {
     };
     const section = Object.assign({}, ...sectionObjects, eqnSection);
     this.addSection(section);
-  }
-
-  addEqnsStep(
-    equations: Array<[
-      { eqn: Equation } & Equation,  // or navigator
-      string | Array<string>,        // From form
-      string | Array<string>,        // To Form
-    ]>,
-    ...sectionObjects: Array<Object>
-  ) {
-    const userSections = Object.assign({}, ...sectionObjects);
-
-    const eqnSection = {
-      transitionFromPrev: (done) => {
-        let time = null;
-        let count = 0;
-        const eqnDone = () => {
-          count += 1;
-          if (count === equations.length) {
-            done();
-          }
-        };
-        equations.forEach((equation) => {
-          const [nav, fromForm, toForm] = equation;
-          let eqn = nav;
-          if (eqn.eqn) {
-            ({ eqn } = nav);
-          }
-          let formChange = true;
-          if (Array.isArray(fromForm)) {
-            nav.showForm(fromForm[0], fromForm[1]);
-            if (Array.isArray(toForm)) {
-              if (fromForm[0] === toForm[0]
-                && fromForm[1] === toForm[1]) {
-                formChange = false;
-              }
-            }
-          } else {
-            nav.showForm(fromForm);
-            if (typeof toForm === 'string') {
-              if (fromForm === toForm) {
-                formChange = false;
-              }
-            }
-          }
-          let nextForm;
-          if (Array.isArray(toForm)) {
-            nextForm = eqn.getForm(toForm[0], toForm[1]);
-          } else {
-            nextForm = eqn.getForm(toForm);
-          }
-          // const nextForm = eqn.getForm(toForm);
-          if (nextForm != null && nextForm.time != null) {
-            if (typeof nextForm.time === 'number') {
-              ({ time } = nextForm);
-            } else if (nextForm.time.fromPrev != null) {
-              time = nextForm.time.fromPrev;
-            }
-          }
-          const cleanup = () => {
-            eqn.collection.stop(true, true);
-            eqnDone();
-          };
-
-          if (nextForm != null && formChange) {
-            nextForm.animatePositionsTo(0, 0.5, time, 0.5, cleanup);
-          } else {
-            eqnDone();
-          }
-        });
-      },
-      setSteadyState: () => {
-        if (userSections.setSteadyState != null) {
-          userSections.setSteadyState();
-        }
-        equations.forEach((equation) => {
-          const [nav, , toForm] = equation;
-          // const nav = equation.eqnOrNav;
-          // const { toForm } = equation;
-          if (Array.isArray(toForm)) {
-            nav.showForm(toForm[0], toForm[1]);
-          } else {
-            nav.showForm(toForm);
-          }
-        });
-      },
-    };
-    const section = Object.assign({}, ...sectionObjects, eqnSection);
-    this.addSection(section);
-  }
-
-  addEqnStep(
-    equationOrNavigator: { eqn: Equation } & Equation,
-    fromForm: string | Array<string>,
-    toForm: string | Array<string>,
-    ...sectionObjects: Array<Object>
-  ) {
-    this.addEqnsStep([[
-      equationOrNavigator,
-      fromForm,
-      toForm,
-    ]], ...sectionObjects);
   }
 }
 
