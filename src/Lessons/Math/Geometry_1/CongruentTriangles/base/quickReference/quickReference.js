@@ -41,7 +41,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
       flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
     };
     this.setTitle('Congruent Triangles');
-    this.setDescription(['Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
+    this.setDescription(['Triangles are congruent when they have the same corresponding |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
@@ -53,7 +53,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     const congruent = collection._congruentTriangles;
     congruent.showAll();
     collection.resetTriangle();
-    congruent.isFlipped = false;
+    collection.isFlipped = false;
     congruent._tri1.setScenario('qrLeft');
     congruent._tri2.setScenario('qrRight');
     congruent._tri2.makeTouchable();
@@ -82,7 +82,6 @@ export class QRAaa extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
       different_side_lengths: highlight(colors.sides),

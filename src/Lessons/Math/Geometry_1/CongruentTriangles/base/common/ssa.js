@@ -24,8 +24,13 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
   _adjacent: DiagramObjectLine;
   _unknown: DiagramObjectLine;
   _opposite: DiagramObjectLine;
-  _constructionLine: DiagramObjectLine;
-  _adjacentMovePad: DiagramElementPrimative;
+  _constructionLine: { _line: DiagramElementPrimative } & DiagramObjectLine;
+  _adjacentMovePad: {
+    move: {
+      limitLine: Line;
+    };
+  } & DiagramElementPrimative;
+
   _constructionCircle: DiagramElementPrimative;
 
   toggle: number;

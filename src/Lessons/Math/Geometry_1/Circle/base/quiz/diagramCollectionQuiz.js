@@ -48,11 +48,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.checkAnswer();
   }
 
-  tryAgain() {
-    super.tryAgain(false);
-    // this._input.enable();
-    // this._input.setValue('');
-  }
+  // tryAgain() {
+  //   super.tryAgain();
+  //   // this._input.enable();
+  //   // this._input.setValue('');
+  // }
 
 
   newProblem() {

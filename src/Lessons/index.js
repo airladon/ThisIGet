@@ -226,54 +226,6 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/Equilateral',
       uid: 'equilateral_triangles',
       versions: {
-        justangles: {
-          title: 'Just Angles',
-          description: 'Shows angles derivation only.',
-          path: 'AngleOnly',
-          onPath: false,
-          topics: [
-            'explanation',
-            'quiz',
-          ],
-          qr: [
-          ],
-        },
-        complete: {
-          title: 'Complete',
-          description: 'Complete derivation.',
-          path: 'Complete',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
-        euclid: {
-          title: 'Euclid',
-          description: 'The way Euclid did it.',
-          path: 'Euclid',
-          onPath: true,
-          topics: [
-            'explanation',
-            'summary',
-          ],
-          qr: [
-          ],
-        },
-        trionly: {
-          title: 'Tri Only',
-          description: 'Triangle derivation only.',
-          path: 'TriOnly',
-          onPath: false,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-          ],
-          qr: [
-          ],
-        },
         base: {
           title: 'Base',
           description: 'Explanation_of_version_here.',

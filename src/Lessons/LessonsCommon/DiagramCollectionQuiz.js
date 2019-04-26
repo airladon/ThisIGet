@@ -221,7 +221,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     text?: string,
     color?: Array<number>,
     position?: Point | [number, number],
-  }) {
+  } = {}) {
     const defaultOptions = {
       size: 0.18,
       style: 'normal',

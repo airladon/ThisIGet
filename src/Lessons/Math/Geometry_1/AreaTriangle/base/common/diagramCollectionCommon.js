@@ -11,7 +11,7 @@ const {
   DiagramElementCollection,
   Transform,
   Point,
-  DiagramEquation,
+  Equation,
 } = Fig;
 
 const { round, rand } = Fig.tools.math;
@@ -62,7 +62,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _pad2: DiagramElementPrimative;
   } & DiagramElementCollection;
 
-  _eqn: DiagramEquation;
+  _eqn: Equation;
   base: number;
   height: number;
   area: number;

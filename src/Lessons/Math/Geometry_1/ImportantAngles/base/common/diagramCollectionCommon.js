@@ -102,6 +102,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     };
     if (force || this.currentAngle !== this.lastAngle) {
       Object.entries(angleIds).forEach(([angle, ids]) => {
+        // $FlowFixMe
         const { id, interactiveItems } = ids;
         const element = document.getElementById(id);
         const text = document.getElementById(`${id}_text`);

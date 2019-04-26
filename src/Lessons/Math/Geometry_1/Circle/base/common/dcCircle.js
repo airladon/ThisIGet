@@ -4,11 +4,10 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  DiagramElement,
   DiagramElementPrimative,
   DiagramObjectLine,
   DiagramElementCollection,
-  DiagramEquation,
+  Equation,
   // DiagramObjectAngle,
   Transform, Point,
 } = Fig;
@@ -25,7 +24,7 @@ type TypeEquationElements = {
   _circumference: DiagramElementPrimative;
   _v: DiagramElementPrimative;
   _equals: DiagramElementPrimative;
-} & DiagramEquation;
+} & Equation;
 
 export default class CommonCollectionCircle extends CommonDiagramCollection {
   percentStraight: number;
@@ -165,6 +164,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     const width = this.widthOfCircumference();
     this.setCircleMoveLimits(width);
 
+    // $FlowFixMe
     this._circle.setTransformCallback = null;
     this._circle.setTransform(this._circle.transform);
     this._circle.setTransformCallback = this.updateCircleLocation.bind(this);

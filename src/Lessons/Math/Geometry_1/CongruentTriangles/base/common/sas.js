@@ -74,8 +74,6 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
       }
     };
     this._angle.setTransformCallback = () => {
-      this._angle.position = this._angle.getPosition();
-      this._angle.rotation = this._angle.getRotation();
       this._angle.update();
     };
   }
