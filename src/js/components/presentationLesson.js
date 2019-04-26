@@ -115,15 +115,6 @@ export default class PresentationLessonComponent extends React.Component
         docElem.style.setProperty('--pres__vh', `${window.innerHeight}px`);
       }
     }
-    // if (this.lesson.content.diagram) {
-    //   const style1 = window.getComputedStyle(document.documentElement);
-    //   this.lesson.content.diagram.animateNextFrame();
-    //   this.lesson.content.diagram.htmlCanvas.style.fontSize = style1.getPropertyValue('--lesson__diagram-font-size');
-    // }
-    // if (style) {
-    //   this.lesson.content.diagram.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
-    // }
-    // window.getComputedStyle(document.documentElement);
   }
 
   componentDidMount() {

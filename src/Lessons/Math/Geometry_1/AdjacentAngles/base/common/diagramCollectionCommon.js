@@ -202,7 +202,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       }
       this._fig._angleA.pulseScaleNow(1, 1.2);
       this._fig._angleB.pulseScaleNow(1, 1.2);
-    }
+    };
     this.goToRandomAngle(bRange, rotationRange, duration, end);
   }
 
@@ -237,7 +237,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       this._fig._angleC.showAll();
       this.updateAngles();
-      this._fig._angleC.pulseScaleNow(1, 1.2)
+      this._fig._angleC.pulseScaleNow(1, 1.2);
     }
     this.diagram.animateNextFrame();
   }

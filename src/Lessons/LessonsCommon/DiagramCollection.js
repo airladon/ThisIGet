@@ -23,11 +23,6 @@ export type TypeAddElementObject = {
   addElements?: Array<TypeAddElementObject>
 };
 
-type TypeFuturePosition = {
-  element: DiagramElement;
-  scenario: TypeScenario;
-};
-
 export default class CommonDiagramCollection extends DiagramElementCollection {
   layout: Object;
   colors: Object;

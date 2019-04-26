@@ -1069,7 +1069,10 @@ function makeFig(
     if (options.window != null) {
       if (Array.isArray(options.window)) {
         // eslint-disable-next-line no-param-reassign
-        element.tieToHTML.window = new Rect(options.window[0], options.window[1], options.window[2], options.window[3]);
+        element.tieToHTML.window = new Rect(
+          options.window[0], options.window[1],
+          options.window[2], options.window[3],
+        );
       } else {
         // eslint-disable-next-line no-param-reassign
         element.tieToHTML.window = options.window;
