@@ -23,8 +23,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  triangle: DiagramObjectPolyLine;
-  fixedTriangle: DiagramObjectPolyLine;
+  triangle: {
+    _line: DiagramElementPrimative;
+  } & DiagramObjectPolyLine;
+
+  fixedTriangle: {
+    _line: DiagramElementPrimative;
+  } & DiagramObjectPolyLine;
 
   constructor(
     diagram: CommonLessonDiagram,

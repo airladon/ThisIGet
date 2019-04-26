@@ -4,8 +4,10 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementPrimative,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  DiagramElementCollection,
   DiagramObjectPolyLine,
   Transform,
   Line, Point,
@@ -15,8 +17,38 @@ const { removeRandElement, rand } = Fig.tools.math;
 const { minAngleDiff } = Fig.tools.g2;
 
 export default class CommonCollection extends CommonDiagramCollection {
-  _customTriangle: DiagramObjectPolyLine;
-  _totalAngle: DiagramObjectPolyLine;
+  _customTriangle: {
+    _pad0: DiagramElementPrimative;
+    _pad1: DiagramElementPrimative;
+    _pad2: DiagramElementPrimative;
+    _angle0: DiagramObjectAngle;
+    _angle1: DiagramObjectAngle;
+    _angle2: DiagramObjectAngle;
+    _side01: DiagramObjectLine;
+    _side12: DiagramObjectLine;
+    _side20: DiagramObjectLine;
+  } & DiagramObjectPolyLine;
+
+  _totalAngle: {
+    _triangle: {
+      _pad0: DiagramElementPrimative;
+      _pad1: DiagramElementPrimative;
+      _pad2: DiagramElementPrimative;
+      _side01: DiagramObjectLine;
+      _side12: DiagramObjectLine;
+      _side20: DiagramObjectLine;
+    } & DiagramObjectPolyLine;
+    _fixedTriangle: {
+      _line: DiagramElementPrimative;
+    } & DiagramObjectPolyLine;
+    _angleA: DiagramObjectAngle;
+    _angleB: DiagramObjectAngle;
+    _angleC: DiagramObjectAngle;
+    _angleATop: DiagramObjectAngle;
+    _angleBTop: DiagramObjectAngle;
+    _topParallel: DiagramObjectLine;
+    _bottomParallel: DiagramObjectLine;
+  } & DiagramElementCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -48,7 +80,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       if (quadrant === 3 || quadrant === 4) {
         y *= -1;
       }
-      // eslint-disable-next-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign, $FlowFixMe
       triangle[`_pad${pad}`].scenarios.next = {
         position: [x, y],
         rotation: 0,
