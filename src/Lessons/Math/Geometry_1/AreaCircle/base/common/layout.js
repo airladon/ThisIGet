@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
-  Point,
+  // Point,
   Rect,
   // Transform,
   // Line,
@@ -25,7 +25,7 @@ const cssColorNames = [
   'radius',
   'circumference',
   'disabled',
-  'disabledLabel'
+  'disabledLabel',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */

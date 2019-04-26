@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
@@ -11,13 +11,13 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-const {
-//   click,
-//   centerV,
-//   highlight,
-//   clickWord,
-  // toHTML,
-} = Fig.tools.html;
+// const {
+// //   click,
+// //   centerV,
+// //   highlight,
+// //   clickWord,
+//   // toHTML,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;

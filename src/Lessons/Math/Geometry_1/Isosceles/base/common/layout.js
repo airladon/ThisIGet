@@ -2,11 +2,11 @@
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const {
-  // Point,
-  // Transform,
-  // Line,
-} = Fig.tools.g2;
+// const {
+//   // Point,
+//   // Transform,
+//   // Line,
+// } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
 
