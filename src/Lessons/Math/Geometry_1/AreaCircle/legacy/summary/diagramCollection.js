@@ -2,14 +2,15 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-// eslint-disable-next-line import/no-cycle
-import QuizCollection from './diagramCollectionQuiz';
+
+import CircleAreaCollection from '../common/diagramCollectionCircleArea';
+import CommonLessonDiagramCollection from '../common/diagramCollection';
 
 const { Transform } = Fig;
-export default class DiagramCollection extends CommonDiagramCollection {
-  _quiz: QuizCollection;
+
+export default class DiagramCollection extends CommonLessonDiagramCollection {
+  _circ: CircleAreaCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,6 +19,6 @@ export default class DiagramCollection extends CommonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('quiz', new QuizCollection(diagram, this.layout));
+    this.add('circ', new CircleAreaCollection(diagram, this.layout));
   }
 }

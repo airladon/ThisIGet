@@ -1,14 +1,22 @@
 // @flow
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -26,37 +34,29 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const quiz = diag._quiz;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
+    // const main = quiz._main;
 
-    // this.addSection({
-    // title: 'Enter_title_here',
-    //   setContent: ['What is the area of a circle'],
-    // });
     this.addSection({
-      title: 'Area of a Circle',
-      setContent: '<p id="id_lesson__quiz_question">asdf</p>',
-      modifiers: {
-      },
-      setInfo: [
-        'Touch the answer box to enter the answer, then touch the check button to submit.'],
-      infoModifiers: {
-      },
-      // interactiveElements: [
-      //   interactiveItem(quiz._input),
-      // ],
-      setEnterState: () => {
-      },
-      showOnly: [
-        quiz, quiz._circle,
+      title: '',
+      setContent: ['Question'],
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
       ],
-      show: [
-        quiz._area, quiz._input,
-        quiz._check,
-      ],
-      setSteadyState: () => {
-        quiz.newProblem();
-      },
+      setEnterState: () => {},
+      showOnly: [],
+      // show: [main],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

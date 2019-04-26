@@ -1,16 +1,21 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
-
-import CircleAreaCollection from '../common/diagramCollectionCircleArea';
+import version from '../version';
+import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-const { html } = Fig.tools;
+// const {
+//   click,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
-export default class QR_TODO extends PopupBoxCollection {
-  _collection: CircleAreaCollection;
+export default class QRBoilerplate extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -22,30 +27,41 @@ export default class QR_TODO extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      CircleAreaCollection,
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
-    const modifiers = { radius: html.highlight(this.layout.colors.radius) };
-
-    this.setTitle('Area of a Circle');
-    this.setDescription('|Circle area| is the product of |π| and the |radius| squared.', modifiers);
+    const modifiers = {};
+    this.setTitle('');
+    this.setDescription(`
+      <p>
+      </p>
+    `, modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'auto', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
-    collection._circle.show();
-    collection._radius.showAll();
-    collection.eqns.triRectEqn.showForm('14');
-    collection.eqns.triRectEqn.getCurrentForm().arrange(1.5, 'center', 'middle');
-    collection.legacySetScenario(collection._radius, { rotation: 0 });
-    // collection.transform.updateScale(0.5, 0.5);
-    // collection.setPosition(this.layout.position);
-    this.transformToQRWindow(collection, new Rect(-1.5, -1.4, 3, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
+
+function attachQuickReference1() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
+    Main: QRBoilerplate,
+    // QR2: QRBoilerplate2,
+  };
+}
+
+attachQuickReference1();
+

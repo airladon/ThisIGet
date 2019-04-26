@@ -99,7 +99,7 @@ class Content extends PresentationLessonContent {
           .scenarios({
             target: 'center',
             duration: 1,
-            afterFrame: () => { console.log('asdf'); coll.updateLabels(); },
+            afterFrame: () => { coll.updateLabels(); },
           })
           .whenFinished(done)
           .start();

@@ -1,21 +1,23 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
-// import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { highlight } = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -30,24 +32,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-    const circ = diag._circ;
+    // const diag = this.diagram.elements;
+    // const quiz = diag._quiz;
 
     this.addSection({
-      title: 'Summary',
-      setContent: '|Circle area| is the product of |π| and the |radius| squared.',
-      modifiers: { radius: highlight(colors.radius) },
-      setInfo: [
-        'Touch |Area| in the equation to toggle the area fill.',
-        'Touch |r| in the equation to highlight the circle\'s radius.',
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
       ],
-      showOnly: [circ],
-      show: [circ._circle, circ._radius],
-      setSteadyState: () => {
-        circ.eqns.triRectEqn.showForm('14');
-        circ.legacySetScenario(circ, layout.collection.scenarios.left);
-        circ.legacySetScenario(circ._radius, { rotation: 0 });
-      },
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
+      ],
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }
