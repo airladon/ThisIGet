@@ -48,7 +48,7 @@ class Content extends PresentationLessonContent {
       show: [circle, polyMost._radius],
       setSteadyState: () => {
         fig.setScenario('left');
-        eqn.setScenario('right');
+        eqn.setScenario('summary');
         eqn.showForm('14');
         polyMost._radius.setScenario('circle');
         polyMost._radius.updateLabel(polyMost._radius.getRotation() + polyMost.getRotation());

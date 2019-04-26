@@ -346,6 +346,7 @@ export default function lessonLayout() {
       scenarios: {
         right: { position: [1.2, 0] },
         qr: { position: [2.7, 0.5], scale: 1.2 },
+        summary: { position: [1.2, -0.2] },
       },
     },
   };

@@ -15317,10 +15317,10 @@ function () {
     key: "arrow",
     value: function arrow() {
       var defaultOptions = {
-        width: 1,
-        legWidth: 1,
-        height: 1,
-        legHeight: 1,
+        width: 0.5,
+        legWidth: 0,
+        height: 0.5,
+        legHeight: 0,
         color: [1, 0, 0, 1],
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('arrow').standard(),
         tip: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
