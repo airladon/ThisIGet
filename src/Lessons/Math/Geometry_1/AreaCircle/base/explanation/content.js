@@ -34,7 +34,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'triangle_area/base',
+      'area_triangle/base',
       'congruent_triangles/base',
       'circles/base',
     ]);
@@ -48,11 +48,8 @@ class Content extends PresentationLessonContent {
     const circle = fig._circle;
     const poly = fig._poly;
     const polyMost = fig._polyMost;
-    // const polyFill = fig._polyFill;
     const lightCircle = fig._lightCircle;
-    // const tri = fig._tri;
     const eqn = coll._eqn;
-    const circleFill = fig._circleFill;
 
     const leastSides = layout.polygonSides[0];
     const moreSides = layout.polygonSides[1];
@@ -73,6 +70,7 @@ class Content extends PresentationLessonContent {
       setContent: `Start by splitting the circle into |equal| pieces, for example we will use |${leastSides}|.`,
     };
     this.addSection(common, content, {
+      title: 'Approximation',
       show: [circle],
     });
     this.addSection(common, content, {
@@ -120,13 +118,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
-        area: this.bindShowQR('triangle_area/base', 'Main', colors.areaTriLabel),
+        area: this.bindShowQR('area_triangle/base', 'Main', colors.areaTriLabel),
       },
       show: [lightCircle, poly._lines, poly._border, poly._height, poly._base],
     });
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
+        area: this.bindShowQR('area_triangle/base', 'Main', colors.areaTriLabel),
       },
       show: [
         lightCircle, poly._lines, poly._border, poly._height, poly._base,
@@ -240,6 +239,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
 
     content = {
+      title: 'Refine Approximation',
       setContent: 'Now, what happens when we |increase| the number of triangles?',
     };
     this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
@@ -326,6 +326,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn, from: '12', to: '13' }, common, content, {});
 
     this.addSection({
+      title: 'Area',
       setContent: 'So we have found the |area of a circle| and can see it is related to its |radius|.',
       show: [circle, polyMost._radius],
       transitionFromPrev: (done) => {
