@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
-  Point,
+  // Point,
   // Transform,
   // Line,
 } = Fig.tools.g2;

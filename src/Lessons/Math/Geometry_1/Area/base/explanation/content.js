@@ -14,7 +14,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
-  style,
+  // style,
   centerV,
   highlight,
   highlightWord,

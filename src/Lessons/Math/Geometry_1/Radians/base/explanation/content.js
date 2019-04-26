@@ -17,7 +17,7 @@ const {
   centerVH, centerV,
   highlightWord,
   highlight,
-  actionWord,
+  // actionWord,
   clickWord,
   clickId,
   // onClickId,
@@ -429,7 +429,7 @@ class Content extends PresentationLessonContent {
         arc_length: click(diag.pulseArc, [diag], colors.arc),
         radius: click(diag.pulseRadius, [diag], colors.lines),
       },
-      show: [ circle._arc, circle._line1 ],
+      show: [circle._arc, circle._line1],
       setSteadyState: () => {
         circle._line1.setRotation(Math.PI * 1.999);
         circle._line1.isTouchable = false;

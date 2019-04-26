@@ -110,7 +110,7 @@ class Content extends PresentationLessonContent {
     // //////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////////////////////////////
     // //////////////////////////////////////////////////////////////////
-    common = { setSteadyState: () => { coll.setScenarios('default'); } }
+    common = { setSteadyState: () => { coll.setScenarios('default'); } };
     this.addSection(common, {
       title: 'Calculate Area',
       setContent: ['Start with any triangle.'],
@@ -172,7 +172,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn, from: '5', to: '5' }, common, content);
     this.addSectionEqnStep({ eqn, from: '5', to: '6' }, common, content);
     this.addSectionEqnStep({ eqn, from: '6', to: '7' }, common, content);
-    content = { setContent: '|h| is rewritten as the |height| of the triangle.'};
+    content = { setContent: '|h| is rewritten as the |height| of the triangle.' };
     this.addSectionEqnStep({ eqn, from: '7', to: '7' }, common, content);
     common = {
       show: [

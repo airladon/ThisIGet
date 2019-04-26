@@ -12,8 +12,6 @@ const {
   click,
   centerH,
   clickW,
-//   highlight,
-  clickWord,
 } = Fig.tools.html;
 
 export class QRAcute extends PopupBoxCollection {

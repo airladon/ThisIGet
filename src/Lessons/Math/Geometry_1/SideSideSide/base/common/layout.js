@@ -199,7 +199,7 @@ export default function lessonLayout() {
     },
   };
 
-  const angle = (name, text, position, rotation, angle) => ({
+  const angle = (name, text, position, rotation, angleIn) => ({
     name,
     method: 'angle',
     options: {
@@ -213,7 +213,7 @@ export default function lessonLayout() {
         text,
         radius: 0.35,
       },
-      angle,
+      angle: angleIn,
     },
     mods: {
       scenarios: {

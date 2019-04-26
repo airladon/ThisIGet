@@ -4,7 +4,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point,
-  Rect,
+  // Rect,
   // Transform,
   // Line,
 } = Fig.tools.g2;

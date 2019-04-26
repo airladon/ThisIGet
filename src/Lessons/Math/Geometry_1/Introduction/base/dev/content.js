@@ -24,7 +24,6 @@ class Content extends PresentationLessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
-    console.log(uid, vid)
     this.loadQRs([
       `${uid}/${vid}`,
     ]);

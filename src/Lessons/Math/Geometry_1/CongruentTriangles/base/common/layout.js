@@ -5,7 +5,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 const {
   Point,
   // Transform,
-  Line,
+  // Line,
 } = Fig;
 
 const { joinObjects } = Fig.tools.misc;

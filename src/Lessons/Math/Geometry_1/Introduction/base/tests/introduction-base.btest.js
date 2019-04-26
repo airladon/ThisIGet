@@ -74,7 +74,8 @@ function sleep(ms) {
 //       };
 //       var __clearTimeout = function (id) {
 //         // according to https://developer.mozilla.org/en-US-docs/Web/API/WindowOrWorkerGlobalScope/setInterval,
-//         // setInterval and setTimeout share the same pool of IDs, and clearInterval and clearTimeout
+//         // setInterval and setTimeout share
+//         // the same pool of IDs, and clearInterval and clearTimeout
 //         // can technically be used interchangeably
 //         var i = 0;
 //         if (__intervals[id]) {
@@ -125,7 +126,8 @@ function sleep(ms) {
 //         __idCount++;
 //         lastCallId = __setTimeout(intervalfn1, interval);
 //         // according to https://developer.mozilla.org/en-US-docs/Web/API/WindowOrWorkerGlobalScope/setInterval,
-//         // setInterval and setTimeout share the same pool of IDs, and clearInterval and clearTimeout
+//         // setInterval and setTimeout share
+//         // the same pool of IDs, and clearInterval and clearTimeout
 //         // can technically be used interchangeably
 //         return id;
 //       };

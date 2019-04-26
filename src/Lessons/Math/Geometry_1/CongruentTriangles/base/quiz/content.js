@@ -36,30 +36,13 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
-    // const main = quiz._main;
 
     this.addSection({
-      title: '',
       setContent: ['Can you determine if the triangles are congruent based on the properties shown?'],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
       show: [quiz._tri1, quiz._tri2],
-      hide: [],
       setSteadyState: () => {
-        console.log(quiz)
         quiz.newProblem();
       },
-      setLeaveState: () => {},
     });
   }
 }

@@ -18,7 +18,7 @@ const {
   highlight,
 } = Fig.tools.html;
 
-const { Rect } = Fig;
+// const { Rect } = Fig;
 
 const layout = lessonLayout();
 const { colors } = layout;

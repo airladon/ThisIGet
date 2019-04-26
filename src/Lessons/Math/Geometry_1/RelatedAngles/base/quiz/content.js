@@ -2,7 +2,6 @@
 import Fig from 'figureone';
 import {
   PresentationLessonContent,
-  interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';

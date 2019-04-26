@@ -17,7 +17,6 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 // } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {

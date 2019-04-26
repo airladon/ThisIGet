@@ -16,11 +16,11 @@ const {
 //   centerV,
 //   highlight,
 //   clickWord,
-  toHTML,
+  // toHTML,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {

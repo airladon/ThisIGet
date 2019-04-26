@@ -4,7 +4,7 @@ import commonLessonLayout from '../common/layout';
 
 const {
   Point,
-  Transform,
+  // Transform,
   polarToRect,
 } = Fig.tools.g2;
 

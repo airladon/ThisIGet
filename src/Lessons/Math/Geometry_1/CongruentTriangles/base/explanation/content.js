@@ -4,7 +4,7 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -591,7 +591,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: style({ top: 0}, [
+      setContent: style({ top: 0 }, [
         'The |intersect| points are the possible triangles. In this case there are |two| possible triangles.',
       ]),
       modifiers: {
@@ -744,7 +744,7 @@ class Content extends PresentationLessonContent {
       modifiers: ({
         two_angles: highlight(colors.angles),
         one_side: highlight(colors.sides),
-      })
+      }),
     });
 
     this.addSection({

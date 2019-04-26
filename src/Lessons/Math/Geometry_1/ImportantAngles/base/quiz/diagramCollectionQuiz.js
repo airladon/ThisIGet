@@ -9,7 +9,7 @@ import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, DiagramElementPrimative } = Fig;
 
-const { round, rand, randElement } = Fig.tools.math;
+const { rand, randElement } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
