@@ -590,10 +590,15 @@ export default function lessonLayout() {
     method: 'polygon',
     options: {
       color: [1, 0, 0, 0.4],
-      radius: 0.1,
+      radius: 0.15,
       sides: 100,
       position,
       fill: true,
+    },
+    mods: {
+      move: {
+        canBeMovedAfterLoosingTouch: true,
+      },
     },
   });
 

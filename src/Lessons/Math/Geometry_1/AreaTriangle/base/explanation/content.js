@@ -312,13 +312,13 @@ class Content extends PresentationLessonContent {
       setContent: [
         'This means |all triangles| with the |same base| and |height| will have the |same_area|.',
       ],
-      // modifiers: {
-      //   same_area: click(coll.moveTopPad, [coll], colors.diagram.action),
-      // },
+      modifiers: {
+        same_area: click(coll.moveTopPad, [coll], colors.diagram.action),
+      },
       show: [implications],
       setSteadyState: () => {
         coll.update();
-      }
+      },
     });
   }
 }

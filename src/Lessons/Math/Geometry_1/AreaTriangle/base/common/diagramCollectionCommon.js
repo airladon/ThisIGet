@@ -13,7 +13,7 @@ const {
   Point,
 } = Fig;
 
-const { round } = Fig.tools.math;
+const { round, rand } = Fig.tools.math;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _rectangle: {
@@ -233,6 +233,20 @@ export default class CommonCollection extends CommonDiagramCollection {
       bounds.right,
       bounds.top,
     );
+  }
+
+  moveTopPad() {
+    const top = this._implications._pad1;
+    const pos = top.getPosition();
+    let newX = rand(this.layout.bounds.width / 3, this.layout.bounds.width / 2);
+    if (pos.x > 0) {
+      newX *= -1;
+    }
+    top.animations.cancelAll();
+    top.animations.new()
+      .position({ target: new Point(newX, pos.y), velocity: 2 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 
   showTriFill() {
