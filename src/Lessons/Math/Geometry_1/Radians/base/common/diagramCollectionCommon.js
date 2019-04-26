@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  DiagramElementCollection, DiagramEquation,
+  DiagramElementCollection, Equation,
   Transform,
 } = Fig;
 
@@ -42,13 +42,17 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   _equation: {
     _arc: DiagramElementPrimative;
-    _radius: DiagramElementPrimative;
     __arc: DiagramElementPrimative;
+    _radius: DiagramElementPrimative;
+    __radius: DiagramElementPrimative;
     _angle: DiagramElementPrimative;
+    __angle: DiagramElementPrimative;
     _radiusLength1: DiagramElementPrimative;
     _radiusLengths2: DiagramElementPrimative;
     _radiusLengths3: DiagramElementPrimative;
-  } & DiagramEquation;
+  } & Equation;
+
+  _radDegEqn: Equation;
 
   marks: number;
   decimals: number;
@@ -115,7 +119,15 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   goToRadiusForm() {
-    this._equation.goToForm('radius', 2);
+    this._equation.goToForm({
+      name: 'radius',
+      duration: 2,
+      animate: 'move',
+      ifAnimating: {
+        cancelGoTo: false,
+        skipToTarget: false,
+      },
+    });
     this.diagram.animateNextFrame();
   }
 
@@ -138,12 +150,28 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   goToArcForm() {
-    this._equation.goToForm('arc', 2);
+    this._equation.goToForm({
+      name: 'arc',
+      duration: 2,
+      animate: 'move',
+      ifAnimating: {
+        cancelGoTo: false,
+        skipToTarget: false,
+      },
+    });
     this.diagram.animateNextFrame();
   }
 
   goToAngleForm() {
-    this._equation.goToForm('angle', 2);
+    this._equation.goToForm({
+      name: 'angle',
+      duration: 2,
+      animate: 'move',
+      ifAnimating: {
+        cancelGoTo: false,
+        skipToTarget: false,
+      },
+    });
     this.diagram.animateNextFrame();
   }
 
