@@ -5,7 +5,6 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonCollection from '../common/diagramCollectionCommon';
 
 const {
   DiagramElementPrimative,
