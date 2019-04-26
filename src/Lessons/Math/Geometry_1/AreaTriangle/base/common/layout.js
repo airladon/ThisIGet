@@ -242,7 +242,7 @@ export default function lessonLayout() {
       label: {
         text,
         offset: 0.01,
-        location: 'right',
+        location: 'outside',
       },
     },
   });
@@ -273,13 +273,15 @@ export default function lessonLayout() {
         'rightRect', rectPoints(tri1, false, 0.005, -0.01, 0.02, 0.01),
         colors.construction2, '', '', 'h','C',
       ),
-      base('base', tri1[0], tri1[1], -0.5, 'base'),
-      height('height', tri1[1], new Point(tri1[1].x, tri1[2].y), 0.5, 'height'),
+      base('base', tri1[0], tri1[1], -0.3, 'base'),
+      height('height', new Point(tri1[1].x, tri1[2].y), tri1[1], 0.3, 'height'),
     ],
     mods: {
       scenarios: {
         area2: { rotation: -side.ang + Math.PI, position: [-0.5, -1.1] },
+        summary2: { rotation: -side.ang + Math.PI, position: [-0.0, -0.9] },
         default: { rotation: 0, position: [0, -0.3] },
+        summary: { rotation: 0, position: [0, 0] },
       },
     },
   };
@@ -307,7 +309,7 @@ export default function lessonLayout() {
         colors.construction2, '', 'C', 'h','',
       ),
       base('base', tri2[0], tri2[1], -0.3, 'base'),
-      height('height', tri2[1], new Point(tri2[1].x, tri2[2].y), 0.5, 'height'),
+      height('height', tri2[0], new Point(tri2[0].x, tri2[2].y), -0.7, 'height'),
     ],
     mods: {
       scenarios: {
@@ -493,6 +495,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [-0.6, 0.7] },
+        summary: { position: [-0.4, 0.9] },
         area2: { position: [-0.6, 0.9] },
       },
     },

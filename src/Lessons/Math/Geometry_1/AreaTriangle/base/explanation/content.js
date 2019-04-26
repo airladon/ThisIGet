@@ -204,6 +204,9 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       title: 'Rotate Triangle',
+      setSteadyState: () => {
+        area1.setScenario('default');
+      },
     });
     this.addSection(common, {
       transitionFromPrev: (done) => {

@@ -9,7 +9,7 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
 // const {
 //   click,
@@ -32,31 +32,43 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const area1 = coll._area1;
+    const area2 = coll._area2;
+    const eqn = coll._eqn;
 
     this.addSection({
-      title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'The area of a triangle is equal to |half its base times its height|.',
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      show: [area1._tri, area1._base, area1._height],
+      setSteadyState: () => {
+        coll.setScenarios('summary');
+        eqn.showForm('10');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        '|Area| can be calculated with |any| side as the |base|.',
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      show: [area1._tri],
+      transitionFromPrev: (done) => {
+        area1.animations.cancelAll();
+        area1.animations.new()
+          .scenario({ target: 'summary2', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        area1.hide();
+        area2._tri.showAll();
+        area2._height.showAll();
+        area2._base.showAll();
+        coll.setScenarios('summary');
+        eqn.showForm('30');
+      },
     });
   }
 }
