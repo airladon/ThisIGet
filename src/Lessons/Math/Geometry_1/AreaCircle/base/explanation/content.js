@@ -16,7 +16,7 @@ const {
   style,
   click,
   centerV,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -46,11 +46,14 @@ class Content extends PresentationLessonContent {
     const grid = fig._grid;
     const circle = fig._circle;
     const poly = fig._poly;
+    const polyFill = fig._polyFill;
     const lightCircle = fig._lightCircle;
     const tri = fig._tri;
+    const eqn = coll._eqn;
+    const circleFill = fig._circleFill;
 
     const leastSides = layout.polygonSides[0];
-    const midSides = layout.polygonSides[1];
+    const moreSides = layout.polygonSides[1];
     const mostSides = layout.polygonSides[2];
 
     let common = { setSteadyState: () => { fig.setScenario('center'); } };
@@ -124,7 +127,6 @@ class Content extends PresentationLessonContent {
       },
       show: [
         lightCircle, poly._lines, poly._border, tri._height, tri._base,
-        tri._fill,
       ],
       transitionFromPrev: (done) => {
         fig.animations.cancelAll();
@@ -135,10 +137,123 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         fig.setScenario('left');
+        eqn.showForm('0');
+        eqn.setScenario('right');
+        tri._fill.show();
       },
     });
 
-    common = { setSteadyState: () => { fig.setScenario('left'); } };
+    common = {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('right');
+      },
+    };
+    content = {
+      setContent: `The |area| of |all triangles| is then |${leastSides} | times the area of |one triangle|.`,
+    };
+    this.addSectionEqnStep({ eqn, from: '0', to: '0' }, common, content, {
+      show: [
+        lightCircle, poly._lines, poly._border, tri._height, tri._base,
+        tri._fill,
+      ],
+    });
+    this.addSectionEqnStep({ eqn, from: '0', to: '1' }, common, content, {
+      show: [
+        lightCircle, poly._lines, poly._border, tri._height, tri._base,
+        polyFill,
+      ],
+    });
+
+    content = {
+      setContent: `Similarly, the outside |border| of |all triangles| is |${leastSides}| |base| lengths.`,
+    };
+    this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {
+      modifiers: {
+        border: this.bindNext(colors.border),
+        base: highlight(colors.border),
+      },
+      show: [
+        lightCircle, poly._lines, poly._border, tri._height, tri._base,
+        polyFill,
+      ],
+    });
+    this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {
+      modifiers: {
+        border: click(coll.pulseBorder, [coll], colors.border),
+        base: highlight(colors.border),
+      },
+      show: [
+        lightCircle, poly._lines, tri._height, tri._base,
+        polyFill, poly._borderHighlight,
+      ],
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('right');
+        coll.pulseBorder();
+      },
+    });
+
+    content = {
+      setContent: 'The last terms of the |area| equation can be seen as the |border| and so the equation can be rearranged.',
+      modifiers: {
+        border: click(coll.pulseBorder, [coll], colors.border),
+      },
+      show: [
+        lightCircle, poly._lines, tri._height, tri._base,
+        polyFill, poly._borderHighlight,
+      ],
+    };
+    this.addSectionEqnStep({ eqn, from: '1', to: '1' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '1', to: '2' }, common, content, {});
+    this.addSectionEqnStep({ eqn, from: '2', to: '3' }, common, content, {});
+
+    common = {
+      setSteadyState: () => {
+        fig.setScenario('left');
+        eqn.setScenario('right');
+      },
+      show: [
+        lightCircle, poly._lines, tri._height, polyFill, poly._borderHighlight,
+      ],
+    };
+    content = {
+      setContent: 'The |area| of the |triangles|, is a rough |approximation| of the |circle_area|.',
+      modifiers: {
+        triangles: click(coll.showTrianglesArea, [coll], colors.areaPolyLabel),
+        circle_area: click(coll.showCircleArea, [coll], colors.areaCircleLabel),
+      },
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {
+    });
+
+    content = {
+      setContent: 'The |border| of the |triangles|, is a rough |approximation| of the circle |circumference|.',
+      modifiers: {
+        border: click(coll.pulseBorder, [coll], colors.border),
+        circumference: click(coll.pulseCircumference, [coll], colors.disabledLabel),
+      },
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
+
+    content = {
+      setContent: 'Now, what happens when we |increase| the number of triangles?',
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
+
+    content = {
+      setContent: `Examine |_${leastSides}|, |_${moreSides}|, and |_${mostSides}| triangles to see how the approximations change.`,
+      modifiers: {},
+    };
+    content.modifiers[`_${leastSides}`] = click(coll.showLeastSides, [coll], colors.diagram.action);
+    content.modifiers[`_${moreSides}`] = click(coll.showMoreSides, [coll], colors.diagram.action);
+    content.modifiers[`_${mostSides}`] = click(coll.showMostSides, [coll], colors.diagram.action);
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
+
+    content = {
+      setContent: 'As the number of triangles is |increased| the |area appoximation| becomes |better|.',
+    };
+    this.addSectionEqnStep({ eqn, from: '3', to: '3' }, common, content, {});
   }
 }
 

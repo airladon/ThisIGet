@@ -24,6 +24,8 @@ const cssColorNames = [
   'border',
   'radius',
   'circumference',
+  'disabled',
+  'disabledLabel'
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -52,7 +54,18 @@ export default function lessonLayout() {
       radius,
       width: 0.01,
       sides: 200,
-      color: colors.grid,
+      color: colors.disabled,
+    },
+  };
+
+  const circleFill = {
+    name: 'circleFill',
+    method: 'polygon',
+    options: {
+      radius,
+      fill: true,
+      sides: 100,
+      color: colors.areaCircle,
     },
   };
 
@@ -73,20 +86,21 @@ export default function lessonLayout() {
     50,
   ];
 
+  const polyFill = (name, sides) => ({
+    name,
+    method: 'polygon',
+    options: {
+      radius,
+      fill: true,
+      sides,
+      color: colors.areaPoly,
+    },
+  });
+
   const poly = (name, sides) => ({
     name,
     method: 'collection',
     addElements: [
-      {
-        name: 'fill',
-        method: 'polygon',
-        options: {
-          radius,
-          fill: true,
-          sides,
-          color: colors.areaPoly,
-        },
-      },
       {
         name: 'lines',
         method: 'radialLines',
@@ -183,9 +197,13 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
+      circleFill,
       grid,
       circle,
       lightCircle,
+      polyFill('polyFill', layout.polygonSides[0]),
+      polyFill('polyFillMore', layout.polygonSides[1]),
+      polyFill('polyFillMost', layout.polygonSides[2]),
       tri,
       poly('poly', layout.polygonSides[0]),
       poly('polyMore', layout.polygonSides[1]),
@@ -194,7 +212,85 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         center: { position: [0, -0.2] },
-        left: { position: [-1, -0.2] },
+        left: { position: [-1.2, -0.2] },
+      },
+    },
+  };
+
+  const AreaTri = {
+    bottomComment: {
+      content: 'Area', comment: 'tri', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const AreaCirc = {
+    bottomComment: {
+      content: '_Area', comment: 'circle', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const AreaAll = {
+    bottomComment: {
+      content: '__Area', comment: 'allTri', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const top = (content, commentText, symbol) => ({
+    topComment: {
+      content,
+      comment: commentText,
+      symbol,
+    },
+  });
+  const half = { frac: ['_1', '_2', 'v', 0.6] };
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 1,
+      defaultFormAlignment: {
+        fixTo: 'equals',
+      },
+      elements: {
+        Area: { color: colors.sides },
+        _Area: { text: 'Area', color: colors.sides },
+        __Area: { text: 'Area', color: colors.sides },
+        tri: { text: 'triangle', color: colors.sides },
+        allTri: { text: 'all triangles', color: colors.sides },
+        circle: { text: 'circle', color: colors.sides },
+        equals: '  =  ',
+        mul: ' \u00D7 ',
+        _mul: ' \u00D7 ',
+        h: { text: 'h', color: colors.height },
+        b: { text: 'b', color: colors.border },
+        border: { text: 'border', color: colors.border },
+        r: { text: 'r', color: colors.radius },
+        _r: { text: 'r', color: colors.radius },
+        _1: '1',
+        _2: '2',
+        __2: '2',
+        sides: { text: `${layout.polygonSides[0]}` },
+        v: { symbol: 'vinculum' },
+        brace: {
+          symbol: 'brace', side: 'top', numLines: 3, color: colors.disabled,
+        },
+        sBrace: {
+          symbol: 'brace', side: 'top', numLines: 1, color: colors.disabled,
+        },
+        s: { symbol: 'strike', color: colors.disabled },
+        _s: { symbol: 'strike', color: colors.disabled },
+      },
+      forms: {
+        '0': [AreaTri, 'equals', half, ' ', 'h', 'mul', 'b'],
+        '1': [AreaAll, 'equals', half, ' ', 'h', 'mul', 'b', '_mul', 'sides'],
+        '2': [
+          AreaAll, 'equals', half, ' ', 'h', 'mul',
+          top(['b', '_mul', 'sides'], 'border', 'brace'),
+        ],
+        '3': [AreaAll, 'equals', half, ' ', 'h', 'mul', 'border'],
+      },
+    },
+    mods: {
+      scenarios: {
+        right: { position: [1.2, 0] },
       },
     },
   };
@@ -202,6 +298,7 @@ export default function lessonLayout() {
 
   layout.addElements = [
     fig,
+    eqn,
   ];
   return layout;
 }

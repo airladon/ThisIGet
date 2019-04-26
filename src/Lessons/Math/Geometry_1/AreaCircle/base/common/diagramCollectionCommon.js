@@ -18,8 +18,27 @@ export default class CommonCollection extends CommonDiagramCollection {
     _tri: {
       _height: DiagramObjectLine;
       _base: DiagramObjectLine;
-      _fill: DiagramElementPrimative;
     } & DiagramElementCollection;
+    _polyFill: DiagramElementPrimative;
+    _lightCircle: DiagramElementPrimative;
+    _poly: {
+      _border: DiagramElementPrimative;
+      _borderHighlight: DiagramElementPrimative;
+      _lines: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _polyFillMore: DiagramElementPrimative;
+    _polyMore: {
+      _border: DiagramElementPrimative;
+      _borderHighlight: DiagramElementPrimative;
+      _lines: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _polyFillMost: DiagramElementPrimative;
+    _polyMost: {
+      _border: DiagramElementPrimative;
+      _borderHighlight: DiagramElementPrimative;
+      _lines: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _circleFill: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   constructor(
@@ -44,5 +63,43 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._tri._height.updateLabel(target);
     this._fig._tri._base.updateLabel(target);
     this.diagram.animateNextFrame();
+  }
+
+  pulseBorder() {
+    this._fig._poly._borderHighlight.pulseThickNow(1, 1.03, 7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseCircumference() {
+    this._fig._lightCircle.pulseThickNow(1, 1.035, 11);
+    this.diagram.animateNextFrame();
+  }
+
+  showTrianglesArea() {
+    if (this._fig._circleFill.isShown) {
+      this._fig._circleFill.hide();
+      this._fig._polyFill.show();
+    } else if (this._fig._polyFill.isShown) {
+      this._fig._polyFill.hide();
+    } else {
+      this._fig._polyFill.show();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  showCircleArea() {
+    if (this._fig._polyFill.isShown) {
+      this._fig._circleFill.show();
+      this._fig._polyFill.hide();
+    } else if (this._fig._circleFill.isShown) {
+      this._fig._circleFill.hide();
+    } else {
+      this._fig._circleFill.show();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  showLeastSides() {
+    this._poly.
   }
 }
