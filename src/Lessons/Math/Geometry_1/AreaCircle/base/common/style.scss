@@ -1,8 +1,20 @@
 @import '../../../geometry';
 
 $colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
+  sides:             color('blue', 'base'),
+  areaTri:           color('diagram', 'construction6', 'darkest'),
+  areaTriLabel:      color('diagram', 'construction6'),
+  areaPoly:          color('diagram', 'construction6', 'darkest'),
+  areaPolyLabel:     color('diagram', 'construction6'),
+  areaCircle:        color('diagram', 'construction6', 'darkest'),
+  areaCircleLabel:   color('diagram', 'construction6'),
+  //
+  height:            color('diagram', 'construction7'),
+  border:            color('diagram', 'construction8'),
+  radius:            color('diagram', 'construction7'),
+  circumference:     color('diagram', 'disabledDark'),
+  //
+  grid:              color('grey', 'darker'),
 );
 
 body {

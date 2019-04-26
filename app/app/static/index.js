@@ -993,6 +993,8 @@ function () {
     this.startTime = -1;
     this.state = 'idle';
     this.name = options.name;
+    this.afterFrame = options.afterFrame;
+    this.beforeFrame = options.beforeFrame;
     this.startDelay = options.delay; // This is only for it this step is a primary path in an Animation Manager
 
     this.removeOnFinish = options.removeOnFinish; // Each animation frame will typically calculate a percent complete,
