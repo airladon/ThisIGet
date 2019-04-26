@@ -41,6 +41,7 @@ export default class QRArea extends PopupBoxCollection {
     this.setDiagramSpace({ location: 'top', ySize: 0.8, xSize: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.show();
     const area1 = collection._area1;
     const eqn = collection._eqn;
     area1.show([area1._tri, area1._base, area1._height]);

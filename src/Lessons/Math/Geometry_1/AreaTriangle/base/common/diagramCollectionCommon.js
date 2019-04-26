@@ -82,6 +82,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._implications._pad0.setTransformCallback = this.update.bind(this);
     this._implications._pad1.setTransformCallback = this.update.bind(this);
     this._implications._pad2.setTransformCallback = this.update.bind(this);
+    this.updateBounds();
   }
 
   update() {
@@ -206,7 +207,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  updateLimits() {
+  updateBounds() {
     const { bounds, minSeparation } = this.layout;
     const bottomLeft = this._implications._pad0;
     const top = this._implications._pad1;

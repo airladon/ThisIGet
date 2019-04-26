@@ -72,6 +72,7 @@ class SimpleLessonContent {
       this.getQR(uid, versionUid);
     });
     // this.qrDiagram.elements.hasTouchableElements = true;
+    // this.qrDiagram.elements.updateLimits(this._qrDiagram.limits);
     this.qrDiagram.setFirstTransform();
   }
 
