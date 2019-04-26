@@ -20,8 +20,6 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  futurePositions: Object;
-
   constructor(
     diagram: LessonDiagram,
     layout: Object,

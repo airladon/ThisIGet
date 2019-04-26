@@ -173,19 +173,23 @@ export default class Definition {
       container.appendChild(language);
 
       const { roots } = fromLanguage;
-      roots.forEach((root, index) => {
+      roots.forEach((rootWord, index) => {
         const rootElement = document.createElement('span');
-        rootElement.innerHTML = root.root;
+        if (rootWord.root != null && typeof rootWord.root === 'string') {
+          rootElement.innerHTML = rootWord.root;
+        }
         rootElement.classList.add('lesson__definition_root');
         container.appendChild(rootElement);
 
         const meaningElement = document.createElement('span');
         meaningElement.classList.add('lesson__definition_meaning');
-        let meaningString = `"${root.meaning}"`;
-        if (roots.length > index + 1) {
-          meaningString += ',';
+        if (rootWord.meaning != null && typeof rootWord.meaning === 'string') {
+          let meaningString = `"${rootWord.meaning}"`;
+          if (roots.length > index + 1) {
+            meaningString += ',';
+          }
+          meaningElement.innerHTML = meaningString;
         }
-        meaningElement.innerHTML = meaningString;
         container.appendChild(meaningElement);
       });
     });
