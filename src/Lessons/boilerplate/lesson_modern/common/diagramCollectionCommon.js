@@ -4,8 +4,12 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
+  // DiagramElementPrimative,
+  // DiagramObjectAngle,
+  // DiagramObjectLine,
   // DiagramElementCollection,
+  // DiagramObjectPolyLine,
+  // DiagramEquation,
   Transform,
 } = Fig;
 

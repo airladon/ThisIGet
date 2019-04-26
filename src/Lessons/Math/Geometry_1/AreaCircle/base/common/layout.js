@@ -163,7 +163,7 @@ export default function lessonLayout() {
           p2: [radius, 0],
           p1: [radius * Math.cos(triAngle), radius * Math.sin(triAngle)],
           width: 0.015,
-          offset: 0.4,
+          offset: 0.3,
           label: {
             text: 'b',
             offset: 0.05,
@@ -186,10 +186,10 @@ export default function lessonLayout() {
       grid,
       circle,
       lightCircle,
+      tri,
       poly('poly', layout.polygonSides[0]),
       poly('polyMore', layout.polygonSides[1]),
       poly('polyMost', layout.polygonSides[2]),
-      tri,
     ],
     mods: {
       scenarios: {
@@ -198,6 +198,7 @@ export default function lessonLayout() {
       },
     },
   };
+
 
   layout.addElements = [
     fig,

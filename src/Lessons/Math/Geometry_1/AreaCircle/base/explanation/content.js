@@ -14,14 +14,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   style,
-  // click,
+  click,
   centerV,
   // highlight,
   // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -94,14 +94,51 @@ class Content extends PresentationLessonContent {
     });
 
     content = {
-      setContent: 'Each triangle has the same |height| and |base|.',
+      setContent: '|Each| triangle has the same |height| and |base|.',
     };
     this.addSection(common, content, {
+      modifiers: {
+        Each: this.bindNext(colors.diagram.action),
+      },
       show: [lightCircle, poly._lines, poly._border],
     });
     this.addSection(common, content, {
+      modifiers: {
+        Each: click(coll.toggleTri, [coll, null], colors.diagram.action),
+      },
       show: [lightCircle, poly._lines, poly._border, tri._height, tri._base],
     });
+
+    content = {
+      setContent: 'And therefore |each| triangle has the same |area|.',
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        each: click(coll.toggleTri, [coll, null], colors.diagram.action),
+      },
+      show: [lightCircle, poly._lines, poly._border, tri._height, tri._base],
+    });
+    this.addSection(common, content, {
+      modifiers: {
+        each: click(coll.toggleTri, [coll, null], colors.diagram.action),
+      },
+      show: [
+        lightCircle, poly._lines, poly._border, tri._height, tri._base,
+        tri._fill,
+      ],
+      transitionFromPrev: (done) => {
+        fig.animations.cancelAll();
+        fig.animations.new()
+          .scenario({ target: 'left', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenario('left');
+      },
+    });
+
+    common = { setSteadyState: () => { fig.setScenario('left'); } };
   }
 }
 
