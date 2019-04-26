@@ -282,6 +282,7 @@ export default function lessonLayout() {
         summary2: { rotation: -side.ang + Math.PI, position: [-0.0, -0.9] },
         default: { rotation: 0, position: [0, -0.3] },
         summary: { rotation: 0, position: [0, 0] },
+        qr: { rotation: 0, position: [0, -0.1] },
       },
     },
   };
@@ -496,6 +497,8 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [-0.6, 0.7] },
         summary: { position: [-0.4, 0.9] },
+        // qr: { position: [-0.4, -1.3] },
+        qr: { position: [-2, 0.4] },
         area2: { position: [-0.6, 0.9] },
       },
     },
