@@ -4482,7 +4482,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       polygon: shapes.polygon.bind(shapes),
       arrow: shapes.arrow.bind(shapes),
       fan: shapes.fan.bind(shapes),
-      text: shapes.txt.bind(shapes),
+      text: shapes.text.bind(shapes),
       textGL: shapes.textGL.bind(shapes),
       textHTML: shapes.htmlText.bind(shapes),
       axes: shapes.axes.bind(shapes),
@@ -6533,7 +6533,7 @@ function (_DiagramElementCollec) {
           fontToUse = options.font;
         }
 
-        var p = _this2.shapes.txt(textToUse, {
+        var p = _this2.shapes.text(textToUse, {
           position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
           font: fontToUse
         });
@@ -15236,8 +15236,8 @@ function () {
       return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_19__["default"])(this.webgl, this.limits, options);
     }
   }, {
-    key: "txt",
-    value: function txt(textOrOptions) {
+    key: "text",
+    value: function text(textOrOptions) {
       var defaultOptions = {
         text: '',
         // position: new Point(0, 0),
@@ -15338,8 +15338,8 @@ function () {
       return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
     }
   }, {
-    key: "text",
-    value: function text(textInput, location, color) {
+    key: "textLegacy",
+    value: function textLegacy(textInput, location, color) {
       var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
 

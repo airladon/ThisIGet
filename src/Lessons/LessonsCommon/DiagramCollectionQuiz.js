@@ -52,6 +52,9 @@ const CommonQuizMixin = superclass => class extends superclass {
   setupNewProblem() {}
 
   newProblem() {
+    if (this._question) {
+      this._question.show();
+    }
     this._messages.hideAll();
     this._newProblem.hide();
     this._showAnotherAnswer.hide();
@@ -172,7 +175,6 @@ const CommonQuizMixin = superclass => class extends superclass {
     if (this.answers.length > 1) {
       this._showAnotherAnswer.show();
     }
-    this.diagram.lesson.enableInteractiveItems();
   }
 
   constructor(
@@ -206,6 +208,20 @@ const CommonQuizMixin = superclass => class extends superclass {
   ) {
     this.add('choice', this.makeMultipleChoice(id, choices));
     this._choice.setPosition(this.layout.quiz.choice);
+  }
+
+  addQuestion() {
+    const question = this.diagram.shapes.text({
+      size: 0.18,
+      style: 'normal',
+      family: 'helvetica',
+      hAlign: 'left',
+      vAlign: 'baseline',
+      text: '',
+      color: this.layout.colors.diagram.text.base,
+      position: new Point(-2.7, 1.5),
+    });
+    this.add('question', question);
   }
 
   makeAnswerBox(

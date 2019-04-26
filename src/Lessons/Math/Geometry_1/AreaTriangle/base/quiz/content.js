@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
   // interactiveItem,
@@ -11,15 +11,16 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-// const {
+const {
 //   click,
 //   centerV,
 //   highlight,
 //   clickWord,
-// } = Fig.tools.html;
+  toHTML,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -34,29 +35,22 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
-    // const main = quiz._main;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    const main = quiz._main;
 
     this.addSection({
-      title: '',
-      setContent: ['Question'],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      // show: [main],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      // setContent: [
+      //   'Create a triangle that has an area of |area| squares.',
+      // ],
+      // modifiers: {
+      //   area: toHTML('?', 'id__lessons__area_quiz1', '', colors.area),
+      // },
+      show: [main._implications],
+      hide: [main._implications._text],
+      setSteadyState: () => {
+        quiz.newProblem();
+      },
     });
   }
 }

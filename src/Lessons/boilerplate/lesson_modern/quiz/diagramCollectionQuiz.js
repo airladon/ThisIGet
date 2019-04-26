@@ -39,6 +39,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {},
       transform,
     );
+    // this.addQuestion();
     // this.addCheck();
     // this.addInput('input', '?', 3, 0);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
@@ -52,6 +53,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
 
   setupNewProblem() {
+    // this._question.drawingObject.setText(`Question here ${value}:`);
     // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
