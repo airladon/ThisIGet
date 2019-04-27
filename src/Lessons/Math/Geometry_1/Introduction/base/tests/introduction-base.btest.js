@@ -40,28 +40,16 @@ describe('Introduction Base Lesson', () => {
   test.only('Navigation', async () => {
     jest.setTimeout(30000);
     const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=14`;
+      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=1`;
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 400 });
     await page.evaluate(() => {
       window.scrollTo(0, 180);
     });
 
-    const watchDog = page.waitForFunction(() => {
-      if (window.frameCounter == null) {
-        window.frameCounter = 0;
-      }
-      window.frameCounter += 1;
-      if (window.frameCounter === 60) {
-        window.frameCounter = 0;
-        return true;
-      }
-      return false;
-    }, { polling: 'raf' });
-
     let disabled = false;
     let lastPage = -1;
-    let state = '_transition';
+    let state = 'next';
     while (!disabled) {
       let classList = [];
       // eslint-disable-next-line no-await-in-loop
@@ -86,19 +74,30 @@ describe('Introduction Base Lesson', () => {
       // eslint-disable-next-line no-await-in-loop
       const image = await page.screenshot({ path: `nextPage${1}.png` });
       expect(image).toMatchImageSnapshot({
-        failureThreshold: '0.002',             // 480 pixels
+        failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
         customSnapshotIdentifier: `page ${pageNumber} ${state}`,
       });
 
       if (!disabled) {
+        const watchDog = page.waitForFunction(() => {
+          if (window.frameCounter == null) {
+            window.frameCounter = 0;
+          }
+          window.frameCounter += 1;
+          if (window.frameCounter === 30) {
+            window.frameCounter = 0;
+            return true;
+          }
+          return false;
+        }, { polling: 'raf' });
         // eslint-disable-next-line no-await-in-loop
         const hrefElement = await page.$('#lesson__button-next');
         // eslint-disable-next-line no-await-in-loop
         await hrefElement.click();
         // eslint-disable-next-line no-await-in-loop
         await watchDog;
-        state = '_transition';
+        state = 'next';
         lastPage = pageNumber;
       }
     }
