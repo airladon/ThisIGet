@@ -94,7 +94,6 @@ def get_lesson(path):
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
     lesson_page = request.args.get('page')
-    print('page', lesson_page)
     res = make_response(render_template('lesson.html', css=css, js=js))
     if lesson_page:
         res = make_response(redirect(request.path))

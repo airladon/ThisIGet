@@ -89,7 +89,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  growDimensions(done: ?() => void = null, time: number = 4) {
+  growDimensions(done: ?() => void = null, time: number = 3) {
     this._properties.animations.cancelAll('complete');
     const c = this._properties._c;
     const d = this._properties._d;

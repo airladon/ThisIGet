@@ -10,9 +10,14 @@ function sleep(ms) {
 }
 
 const numPages = 16;
+const pagesWithAnimations = [6, 8];
 const pages = [];
 for (let i = 1; i <= numPages; i += 1) {
-  pages.push([i]);
+  let time = 100;
+  if (pagesWithAnimations.indexOf(i) > -1) {
+    time = 3500;
+  }
+  pages.push([i, time]);
 }
 // const pages = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16].map(p => [p]);
 describe('Introduction Base Lesson', () => {
@@ -56,8 +61,8 @@ describe('Introduction Base Lesson', () => {
   // });
 
   test.each(pages)(
-    'Per page',
-    async (p) => {
+    'Page %i, time: %i',
+    async (p, t) => {
       const anglesPath =
         `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=${p}`;
       await page.goto(anglesPath);
@@ -65,7 +70,7 @@ describe('Introduction Base Lesson', () => {
       await page.evaluate(() => {
         window.scrollTo(0, 0);
       });
-      await sleep(2000);
+      await sleep(t);
 
       const image = await page.screenshot({ path: `page${p}.png` });
       expect(image).toMatchImageSnapshot();
