@@ -10,20 +10,16 @@ function sleep(ms) {
 }
 
 const numPages = 16;
-const pagesWithAnimations = [6, 8];
+// const pagesWithAnimations = [6, 8];
 const pages = [];
 for (let i = 1; i <= numPages; i += 1) {
-  let time = 100;
-  if (pagesWithAnimations.indexOf(i) > -1) {
-    time = 3500;
-  }
-  pages.push([i, time]);
+  pages.push([i]);
 }
 
 describe('Introduction Base Lesson', () => {
   test.each(pages)(
     'Page %i, time: %i',
-    async (p, t) => {
+    async (p) => {
       const anglesPath =
         `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=${p}`;
       await page.goto(anglesPath);
@@ -31,13 +27,18 @@ describe('Introduction Base Lesson', () => {
       await page.evaluate(() => {
         window.scrollTo(0, 180);
       });
-      await sleep(t);
+
+      await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
 
       const image = await page.screenshot({ path: `page${p}.png` });
-      expect(image).toMatchImageSnapshot();
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: '0.005',             // 480 pixels
+        failureThresholdType: 'percent',
+        customSnapshotIdentifier: `page ${p}`,
+      });
     },
   );
-  test.only('Navigation', async () => {
+  test('Navigation', async () => {
     jest.setTimeout(30000);
     const anglesPath =
       `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=1`;
@@ -55,11 +56,11 @@ describe('Introduction Base Lesson', () => {
 
       // Take screenshot
       // eslint-disable-next-line no-await-in-loop
-      const image = await page.screenshot({ path: `nextPage${1}.png` });
+      const image = await page.screenshot();
       expect(image).toMatchImageSnapshot({
         failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
-        customSnapshotIdentifier: `page ${j} steady`,
+        customSnapshotIdentifier: `page ${j}`,
       });
 
       if (j < numPages) {
@@ -78,6 +79,8 @@ describe('Introduction Base Lesson', () => {
         const hrefElement = await page.$('#lesson__button-next');
         // eslint-disable-next-line no-await-in-loop
         await hrefElement.click();
+        // eslint-disable-next-line no-await-in-loop
+        await page.mouse.click(0, 0);
         // eslint-disable-next-line no-await-in-loop
         await watchDog;
       }
