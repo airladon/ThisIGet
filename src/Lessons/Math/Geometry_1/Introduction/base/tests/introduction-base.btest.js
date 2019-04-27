@@ -39,12 +39,37 @@ describe('Introduction Base Lesson', () => {
   );
   test.only('Navigation', async () => {
     const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=5`;
+      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=1`;
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 400 });
     await page.evaluate(() => {
       window.scrollTo(0, 180);
     });
+
+
+    // let cookies;
+    // await page.cookies()
+    //   .then((c) => { cookies = c; });
+
+    // const p = cookies.filter(c => c.name === 'page');
+    // console.log(p[0].value)
+
+    let p = -1;
+    await page.cookies()
+      .then(cookies => cookies.filter(c => c.name === 'page'))
+      .then((pageCookie) => { p = pageCookie[0].value; });
+
+    console.log(p);
+
+    let classList;
+    // while (classList.indexOf('lesson__button-next-disabled') === -1) {
+    await page.$('#lesson__button-next')
+      .then(el => el.getProperty('className'))
+      .then(cn => cn.jsonValue())
+      .then(classNameString => classNameString.split(' '))
+      .then((x) => { classList = x; });
+    console.log(classList)
+
     const watchDog = page.waitForFunction(() => {
       if (window.frameCounter == null) {
         window.frameCounter = 0;
@@ -59,10 +84,14 @@ describe('Introduction Base Lesson', () => {
     const hrefElement = await page.$('#lesson__button-next');
     await hrefElement.click();
     await watchDog;
+
+
+    // }
     const image = await page.screenshot({ path: `nextPage${1}.png` });
     expect(image).toMatchImageSnapshot({
       failureThreshold: '0.002',             // 480 pixels
       failureThresholdType: 'percent',
+      customSnapshotIdentifier: `test`,
     });
   });
 });
