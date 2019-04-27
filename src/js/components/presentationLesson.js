@@ -265,7 +265,7 @@ export default class PresentationLessonComponent extends React.Component
           list={this.state.listOfSections}/>
       </div>;
     }
-    return <div></div>;
+    return '';
   }
 
   belongsTo(index: number) {

@@ -57,8 +57,8 @@ class Content extends PresentationLessonContent {
     // eqn.changeDescription('10', 'Rectangle area is product of width and height.', mods);
     eqn.changeDescription('11', 'Expand both 6|m| and 10|m| as 6|m| is the same as saying 6 lots of 1|m|.', mods);
     eqn.changeDescription('12', 'Reorder equation so all |m| terms are on the right.', mods);
-    eqn.changeDescription('13', 'Calculate 6 ⨉ 10 and remove redundant 1s.', mods);
-    eqn.changeDescription('14', ' Calculate 6 ⨉ 10 and remove redundant 1s.', mods);
+    eqn.changeDescription('13', 'Calculate 6 x 10 and remove redundant 1s.', mods);
+    eqn.changeDescription('14', ' Calculate 6 x 10 and remove redundant 1s.', mods);
     eqn.changeDescription('15', 'Multiplying something by itself is the same as squaring it.', mods);
     // eqn.changeDescription('16', 'Resulting area of rectangle has units of |m2|.', mods);
 
