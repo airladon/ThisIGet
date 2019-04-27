@@ -699,11 +699,14 @@ class PresentationLessonContent extends SimpleLessonContent {
       overlay.style.zIndex = '-1';
     }
     const next = document.getElementById('lesson__button-next');
-    if (next) {
+    if (next
+      && this.diagram.lesson.currentSectionIndex
+        < this.diagram.lesson.content.sections.length - 1
+    ) {
       next.classList.remove('lesson__button-next-disabled');
     }
     const prev = document.getElementById('lesson__button-previous');
-    if (prev) {
+    if (prev && this.diagram.lesson.currentSectionIndex > 0) {
       prev.classList.remove('lesson__button-prev-disabled');
     }
     const gotoButton =
