@@ -37,4 +37,32 @@ describe('Introduction Base Lesson', () => {
       expect(image).toMatchImageSnapshot();
     },
   );
+  test.only('Navigation', async () => {
+    const anglesPath =
+      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=5`;
+    await page.goto(anglesPath);
+    await page.setViewport({ width: 600, height: 400 });
+    await page.evaluate(() => {
+      window.scrollTo(0, 180);
+    });
+    const watchDog = page.waitForFunction(() => {
+      if (window.frameCounter == null) {
+        window.frameCounter = 0;
+      }
+      window.frameCounter += 1;
+      if (window.frameCounter === 30) {
+        window.frameCounter = 0;
+        return true;
+      }
+      return false;
+    }, { polling: 'raf' });
+    const hrefElement = await page.$('#lesson__button-next');
+    await hrefElement.click();
+    await watchDog;
+    const image = await page.screenshot({ path: `nextPage${1}.png` });
+    expect(image).toMatchImageSnapshot({
+      failureThreshold: '0.002',             // 480 pixels
+      failureThresholdType: 'percent',
+    });
+  });
 });
