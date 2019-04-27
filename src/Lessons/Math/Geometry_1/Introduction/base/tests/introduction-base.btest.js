@@ -38,60 +38,69 @@ describe('Introduction Base Lesson', () => {
     },
   );
   test.only('Navigation', async () => {
+    jest.setTimeout(30000);
     const anglesPath =
-      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=1`;
+      `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=14`;
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 400 });
     await page.evaluate(() => {
       window.scrollTo(0, 180);
     });
 
-
-    // let cookies;
-    // await page.cookies()
-    //   .then((c) => { cookies = c; });
-
-    // const p = cookies.filter(c => c.name === 'page');
-    // console.log(p[0].value)
-
-    let p = -1;
-    await page.cookies()
-      .then(cookies => cookies.filter(c => c.name === 'page'))
-      .then((pageCookie) => { p = pageCookie[0].value; });
-
-    console.log(p);
-
-    let classList;
-    // while (classList.indexOf('lesson__button-next-disabled') === -1) {
-    await page.$('#lesson__button-next')
-      .then(el => el.getProperty('className'))
-      .then(cn => cn.jsonValue())
-      .then(classNameString => classNameString.split(' '))
-      .then((x) => { classList = x; });
-    console.log(classList)
-
     const watchDog = page.waitForFunction(() => {
       if (window.frameCounter == null) {
         window.frameCounter = 0;
       }
       window.frameCounter += 1;
-      if (window.frameCounter === 30) {
+      if (window.frameCounter === 60) {
         window.frameCounter = 0;
         return true;
       }
       return false;
     }, { polling: 'raf' });
-    const hrefElement = await page.$('#lesson__button-next');
-    await hrefElement.click();
-    await watchDog;
 
+    let disabled = false;
+    let lastPage = -1;
+    let state = '_transition';
+    while (!disabled) {
+      let classList = [];
+      // eslint-disable-next-line no-await-in-loop
+      await page.$('#lesson__button-next')
+        .then(el => el.getProperty('className'))
+        .then(cn => cn.jsonValue())
+        .then(classNameString => classNameString.split(' '))
+        // eslint-disable-next-line no-loop-func
+        .then((x) => { classList = x; });
 
-    // }
-    const image = await page.screenshot({ path: `nextPage${1}.png` });
-    expect(image).toMatchImageSnapshot({
-      failureThreshold: '0.002',             // 480 pixels
-      failureThresholdType: 'percent',
-      customSnapshotIdentifier: `test`,
-    });
+      disabled = classList.indexOf('lesson__button-next-disabled') > -1;
+
+      let pageNumber = -1;
+      // eslint-disable-next-line no-await-in-loop
+      await page.cookies()
+        .then(cookies => cookies.filter(c => c.name === 'page'))
+        .then((pageCookie) => { pageNumber = pageCookie[0].value; });
+
+      if (pageNumber === lastPage) {
+        state = 'steady';
+      }
+      // eslint-disable-next-line no-await-in-loop
+      const image = await page.screenshot({ path: `nextPage${1}.png` });
+      expect(image).toMatchImageSnapshot({
+        failureThreshold: '0.002',             // 480 pixels
+        failureThresholdType: 'percent',
+        customSnapshotIdentifier: `page ${pageNumber} ${state}`,
+      });
+
+      if (!disabled) {
+        // eslint-disable-next-line no-await-in-loop
+        const hrefElement = await page.$('#lesson__button-next');
+        // eslint-disable-next-line no-await-in-loop
+        await hrefElement.click();
+        // eslint-disable-next-line no-await-in-loop
+        await watchDog;
+        state = '_transition';
+        lastPage = pageNumber;
+      }
+    }
   });
 });
