@@ -199,7 +199,10 @@ class Content extends PresentationLessonContent {
       setContent: [
         'Therefore |area| is most commonly measured in |squares|.',
       ],
-      show: [shapes, unit._grid],
+      show: [
+        shapes._circle, shapes._square, shapes._triangle, unit._grid,
+        shapes._circleLabel, shapes._squareLabel, shapes._triangleLabel,
+      ],
       setSteadyState: () => {
         coll.setAreaToSquares();
       },
