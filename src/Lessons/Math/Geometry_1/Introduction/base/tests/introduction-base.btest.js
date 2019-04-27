@@ -215,6 +215,7 @@ describe('Introduction Base Lesson', () => {
       `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=12`;
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 800 });
+
     await page.evaluate(() => {
       window.scrollTo(0, 0);
     });

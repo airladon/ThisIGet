@@ -44,7 +44,7 @@ docker_run_browser_test() {
         --name devenv-browser-test \
         --entrypoint "npm" \
         airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
-        "run" "jest" "--" $2 $3 $4
+        "run" "jest" "--" $2 $3 $4 "--runInBand"
 }
 
 title() {
