@@ -27,9 +27,9 @@ describe('Introduction Base Lesson', () => {
       const anglesPath =
         `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=${p}`;
       await page.goto(anglesPath);
-      await page.setViewport({ width: 600, height: 800 });
+      await page.setViewport({ width: 600, height: 400 });
       await page.evaluate(() => {
-        window.scrollTo(0, 0);
+        window.scrollTo(0, 180);
       });
       await sleep(t);
 
