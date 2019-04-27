@@ -135,8 +135,7 @@ class Content extends PresentationLessonContent {
         Properties: click(circ.growDimensions, [circ, null, 4], colors.dimension),
       },
       transitionFromAny: (done) => {
-        circ.growDimensions();
-        done();
+        circ.growDimensions(done);
       },
       setEnterState: () => {
         circ._circle.setScenario('right');
@@ -165,7 +164,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        Relationships: click(circ.makeEqnFromProperties, [circ], colors.dimension),
+        Relationships: click(circ.makeEqnFromProperties, [circ, null], colors.dimension),
         properties: click(circ.pulseProperties, [circ], colors.dimension),
       },
       setEnterState: () => {
@@ -176,8 +175,7 @@ class Content extends PresentationLessonContent {
         circ._properties._eqn.setScenario('left');
       },
       transitionFromPrev: (done) => {
-        circ.makeEqnFromProperties();
-        done();
+        circ.makeEqnFromProperties(done);
       },
       show: [circ._circle, circ._properties],
     });

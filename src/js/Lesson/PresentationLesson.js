@@ -93,6 +93,7 @@ class PresentationLesson extends SimpleLesson {
     this.firstPageShown = true;
     this.state = {};
     this.inTransition = false;
+    window.presentationLessonTransitionStatus = 'noSteady';
     this.refresh = function () {}; // eslint-disable-line func-names
     this.comingFrom = '';
     this.transitionCancelled = false;
@@ -109,7 +110,7 @@ class PresentationLesson extends SimpleLesson {
 
   nextSection() {
     const { diagram } = this;
-
+    window.presentationLessonTransitionStatus = 'notSteady';
     if (this.currentSectionIndex < this.content.sections.length - 1 && diagram) {
       // If in transition, then cancel the transition.
       if (this.inTransition) {
@@ -139,6 +140,7 @@ class PresentationLesson extends SimpleLesson {
 
   prevSection() {
     const { diagram } = this;
+    window.presentationLessonTransitionStatus = 'notSteady';
     if (this.currentSectionIndex > 0 && diagram) {
       if (this.inTransition) {
         const { comingFrom } = this;
@@ -170,6 +172,7 @@ class PresentationLesson extends SimpleLesson {
   }
 
   goToSection(sectionId: number | string) {
+    window.presentationLessonTransitionStatus = 'notSteady';
     // console.log('goToSection')
     let sectionIndex = 0;
     if (typeof sectionId === 'number') {
@@ -346,6 +349,7 @@ class PresentationLesson extends SimpleLesson {
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.renderDiagrams();
+    window.presentationLessonTransitionStatus = 'steady';
   }
 
   updateInteractiveItems() {

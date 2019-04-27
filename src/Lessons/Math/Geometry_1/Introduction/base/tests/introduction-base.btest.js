@@ -47,39 +47,22 @@ describe('Introduction Base Lesson', () => {
       window.scrollTo(0, 180);
     });
 
-    let disabled = false;
-    let lastPage = -1;
-    let state = 'next';
-    while (!disabled) {
-      let classList = [];
+    for (let j = 1; j <= numPages; j += 1) {
+      // Wait for steady state
+      const steadyWatch = page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
       // eslint-disable-next-line no-await-in-loop
-      await page.$('#lesson__button-next')
-        .then(el => el.getProperty('className'))
-        .then(cn => cn.jsonValue())
-        .then(classNameString => classNameString.split(' '))
-        // eslint-disable-next-line no-loop-func
-        .then((x) => { classList = x; });
+      await steadyWatch;
 
-      disabled = classList.indexOf('lesson__button-next-disabled') > -1;
-
-      let pageNumber = -1;
-      // eslint-disable-next-line no-await-in-loop
-      await page.cookies()
-        .then(cookies => cookies.filter(c => c.name === 'page'))
-        .then((pageCookie) => { pageNumber = pageCookie[0].value; });
-
-      if (pageNumber === lastPage) {
-        state = 'steady';
-      }
+      // Take screenshot
       // eslint-disable-next-line no-await-in-loop
       const image = await page.screenshot({ path: `nextPage${1}.png` });
       expect(image).toMatchImageSnapshot({
         failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
-        customSnapshotIdentifier: `page ${pageNumber} ${state}`,
+        customSnapshotIdentifier: `page ${j} steady`,
       });
 
-      if (!disabled) {
+      if (j < numPages) {
         const watchDog = page.waitForFunction(() => {
           if (window.frameCounter == null) {
             window.frameCounter = 0;
@@ -97,9 +80,28 @@ describe('Introduction Base Lesson', () => {
         await hrefElement.click();
         // eslint-disable-next-line no-await-in-loop
         await watchDog;
-        state = 'next';
-        lastPage = pageNumber;
       }
     }
+    // let disabled = false;
+    // // let lastPage = -1;
+    // // let state = 'next';
+    // while (!disabled) {
+    //   let pageNumber = -1;
+    //   // eslint-disable-next-line no-await-in-loop
+    //   await page.cookies()
+    //     .then(cookies => cookies.filter(c => c.name === 'page'))
+    //     .then((pageCookie) => { pageNumber = pageCookie[0].value; });
+
+
+    //   let classList = [];
+    //   // eslint-disable-next-line no-await-in-loop
+    //   await page.$('#lesson__button-next')
+    //     .then(el => el.getProperty('className'))
+    //     .then(cn => cn.jsonValue())
+    //     .then(classNameString => classNameString.split(' '))
+    //     // eslint-disable-next-line no-loop-func
+    //     .then((x) => { classList = x; });
+
+    //   disabled = classList.indexOf('lesson__button-next-disabled') > -1;
   });
 });

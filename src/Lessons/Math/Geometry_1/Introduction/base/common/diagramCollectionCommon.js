@@ -126,7 +126,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  makeEqnFromProperties() {
+  makeEqnFromProperties(done: ?() => void = null) {
     const prop = this._properties;
     const eqn = prop._eqn;
     eqn.animations.cancelAll('complete');
@@ -154,6 +154,7 @@ export default class CommonCollection extends CommonDiagramCollection {
         eqn._equals.anim.dissolveIn(1),
         eqn._pi.anim.dissolveIn(1),
       ])
+      .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
   }
