@@ -48,7 +48,20 @@ describe('Introduction Base Lesson', () => {
       window.scrollTo(0, 180);
     });
 
-    for (let j = 1; j <= numPages; j += 1) {
+    let p = 1;
+    let navigation = 'lesson__button-next';
+    for (let j = 1; j < numPages * 2; j += 1) {
+      if (j > numPages) {
+        p = numPages - (j - numPages);
+      } else {
+        p = j;
+      }
+      if (j < numPages) {
+        navigation = 'lesson__button-next';
+      } else {
+        navigation = 'lesson__button-previous';
+      }
+
       // Wait for steady state
       const steadyWatch = page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
       // eslint-disable-next-line no-await-in-loop
@@ -60,31 +73,30 @@ describe('Introduction Base Lesson', () => {
       expect(image).toMatchImageSnapshot({
         failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
-        customSnapshotIdentifier: `page ${j}`,
+        customSnapshotIdentifier: `page ${p}`,
       });
 
-      if (j < numPages) {
-        const watchDog = page.waitForFunction(() => {
-          if (window.frameCounter == null) {
-            window.frameCounter = 0;
-          }
-          window.frameCounter += 1;
-          if (window.frameCounter === 30) {
-            window.frameCounter = 0;
-            return true;
-          }
-          return false;
-        }, { polling: 'raf' });
-        // eslint-disable-next-line no-await-in-loop
-        const hrefElement = await page.$('#lesson__button-next');
-        // eslint-disable-next-line no-await-in-loop
-        await hrefElement.click();
-        // eslint-disable-next-line no-await-in-loop
-        await page.mouse.click(0, 0);
-        // eslint-disable-next-line no-await-in-loop
-        await watchDog;
-      }
+      const watchDog = page.waitForFunction(() => {
+        if (window.frameCounter == null) {
+          window.frameCounter = 0;
+        }
+        window.frameCounter += 1;
+        if (window.frameCounter === 30) {
+          window.frameCounter = 0;
+          return true;
+        }
+        return false;
+      }, { polling: 'raf' });
+      // eslint-disable-next-line no-await-in-loop
+      const hrefElement = await page.$(`#${navigation}`);
+      // eslint-disable-next-line no-await-in-loop
+      await hrefElement.click();
+      // eslint-disable-next-line no-await-in-loop
+      await page.mouse.click(0, 0);
+      // eslint-disable-next-line no-await-in-loop
+      await watchDog;
     }
+    // }
     // let disabled = false;
     // // let lastPage = -1;
     // // let state = 'next';
