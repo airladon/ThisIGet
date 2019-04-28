@@ -8,3 +8,10 @@
 // body {
 //   @include color_vars($colors);
 // }
+// .diagram__text {
+//   z-index: 4;
+// }
+
+#id_diagram__text__high {
+  z-index: 3;
+}

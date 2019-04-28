@@ -9,7 +9,7 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-const numPages = 16;
+const numPages = 4;
 // const pagesWithAnimations = [6, 8];
 const pages = [];
 for (let i = 1; i <= numPages; i += 1) {
@@ -38,7 +38,7 @@ describe('Introduction Base Lesson', () => {
       });
     },
   );
-  test('Navigation', async () => {
+  test.only('Navigation', async () => {
     jest.setTimeout(30000);
     const anglesPath =
       `${sitePath}/Lessons/Math/Geometry_1/Introduction/base/explanation?page=1`;
@@ -48,7 +48,17 @@ describe('Introduction Base Lesson', () => {
       window.scrollTo(0, 180);
     });
 
-    for (let j = 1; j <= numPages; j += 1) {
+    let p = 1;
+    let navigation = 'lesson__button-next';
+    for (let j = 1; j < numPages * 2; j += 1) {
+      if (j > numPages) {
+        p = numPages - (j - numPages);
+        navigation = 'lesson__button-previous';
+      } else {
+        p = j;
+        navigation = 'lesson__button-next';
+      }
+      console.log(p, `#lesson__button-next`)
       // Wait for steady state
       const steadyWatch = page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
       // eslint-disable-next-line no-await-in-loop
@@ -60,7 +70,7 @@ describe('Introduction Base Lesson', () => {
       expect(image).toMatchImageSnapshot({
         failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
-        customSnapshotIdentifier: `page ${j}`,
+        customSnapshotIdentifier: `page ${p}`,
       });
 
       if (j < numPages) {
@@ -76,7 +86,7 @@ describe('Introduction Base Lesson', () => {
           return false;
         }, { polling: 'raf' });
         // eslint-disable-next-line no-await-in-loop
-        const hrefElement = await page.$('#lesson__button-next');
+        const hrefElement = await page.$(`#${navigation}`);
         // eslint-disable-next-line no-await-in-loop
         await hrefElement.click();
         // eslint-disable-next-line no-await-in-loop
