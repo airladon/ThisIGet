@@ -5,7 +5,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 const lessons = [
   {
     path: 'areaTriangle/base',
-    explanation: 5,
+    explanation: 3,
     summary: 1,
   },
   // {
@@ -34,19 +34,29 @@ lessons.forEach((lesson) => {
     if (topicOrPath !== 'path') {
       const topicName = topicOrPath;
       const numPages = lesson[topicName];
-      // for (let i = 1; i < numPages; i += 1) {
-      //   allTests.push([path, topicName, i, [i]]);
-      // }
+      for (let i = 1; i < numPages; i += 1) {
+        allTests.push([path, topicName, i, [i]]);
+      }
       allTests.push([path, topicName, 1, [numPages, 1]]);
     }
   });
 });
 console.log(allTests)
 
-describe('Lesson browser tests', () => {
-  test.each(allTests)(
-    '%s/%s from %i, to %i',
-    async (path, topicName, fromPage, toPages) => {
+describe.each(allTests)('%s/%s from %i, to %i', (pathIn, topicNameIn, fromPageIn, toPagesIn) => {
+  let path;
+  let topicName;
+  let fromPage;
+  let toPages;
+  beforeEach(() => {
+    path = pathIn;
+    topicName = topicNameIn;
+    fromPage = fromPageIn;
+    toPages = toPagesIn;
+  });
+  test(
+    'hello',
+    async () => {
       jest.setTimeout(120000);
       const fullpath =
         `${sitePath}/Lessons/Math/Geometry_1/${path}/${topicName}?page=${fromPage}`;
