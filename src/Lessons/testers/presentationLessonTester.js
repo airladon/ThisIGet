@@ -1,6 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+const fs = require('fs');
 
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
@@ -112,6 +113,9 @@ export function tester(lesson) {
   });
 }
 
-export function contentSectionCount(path) {
-  console.log(path);
+export function contentSectionCount(testPath, topicName) {
+  let fileName = testPath.split('/').slice(0, -1).join('/');
+  fileName = `${fileName}/${topicName}/content.js`;
+  const content = fs.readFileSync(fileName, 'utf8');
+  return (content.match(/\n *this\.addSection/g) || []).length;
 }

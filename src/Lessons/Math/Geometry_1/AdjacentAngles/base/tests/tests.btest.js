@@ -6,9 +6,18 @@ import {
 
 tester({
   path: __dirname.split('/').slice(-3, -1).join('/'),
-  explanation: 3,
-  summary: 1,
+  explanation: contentSectionCount(__dirname, 'explanation'),
+  summary: contentSectionCount(__dirname, 'summary'),
   // extraTests: [
   //   ['explanation', 3, [1, 5]],
   // ],
 });
+
+
+// tester(__dirname,
+//   'explanation',
+//   'summary',
+//   [
+//     ['explanation', 3, [1, 5]],
+//   ],
+// );
