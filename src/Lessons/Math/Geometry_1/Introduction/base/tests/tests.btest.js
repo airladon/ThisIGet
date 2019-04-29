@@ -3,9 +3,9 @@ import 'babel-polyfill';
 import tester from '../../../../../testers/presentationLessonTester';
 
 tester(
-  //__dirname
+  // __dirname
   'explanation',
-  'summary',
+  // 'summary',
   [
     ['explanation', 3, [1, 5]],
   ],

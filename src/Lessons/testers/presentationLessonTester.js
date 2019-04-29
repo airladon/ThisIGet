@@ -14,10 +14,11 @@ function contentSectionCount(testPath, topicName) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
-export default function tester(fullPath, ...scenarios) {
+export default function tester(...scenarios) {
   const allTests = [];
+  const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const path = fullPath.split('/').slice(-3, -1).join('/');
-
+  // console.log()
   scenarios.forEach((scenario) => {
     if (typeof scenario === 'string') {
       const topicName = scenario;
@@ -59,6 +60,10 @@ export default function tester(fullPath, ...scenarios) {
           } else {
             navigation = null;
           }
+
+          // eslint-disable-next-line no-await-in-loop
+          await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
+
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
@@ -91,10 +96,8 @@ export default function tester(fullPath, ...scenarios) {
               await watchDog;
             }
 
-            // Wait for steady state
-            const steadyWatch = page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
             // eslint-disable-next-line no-await-in-loop
-            await steadyWatch;
+            await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
 
             // Get current page
             // eslint-disable-next-line no-await-in-loop
