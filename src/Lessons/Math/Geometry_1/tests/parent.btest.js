@@ -2,24 +2,36 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
+// const fs = require('fs');
+// const path = require('path');
+
+
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-export default function tester(pathIn, topicNameIn, fromPageIn, toPagesIn) {
-  describe('describing', () => {
-    let path;
-    let topicName;
-    let fromPage;
-    let toPages;
-    beforeEach(() => {
-      path = pathIn;
-      topicName = topicNameIn;
-      fromPage = fromPageIn;
-      toPages = toPagesIn;
+export default function tester(lesson) {
+  const allTests = [];
+  const { path } = lesson;
+  Object.keys(lesson).forEach((topicOrPath) => {
+    if (topicOrPath !== 'path' && topicOrPath !== 'extraTests') {
+      const topicName = topicOrPath;
+      const numPages = lesson[topicName];
+      for (let i = 1; i < numPages; i += 1) {
+        allTests.push([topicName, i, [i]]);
+      }
+      allTests.push([topicName, 1, [numPages, 1]]);
+    }
+  });
+  const { extraTests } = lesson;
+  if (extraTests != null) {
+    extraTests.forEach((extra) => {
+      allTests.push(extra);
     });
-    test(
-      'hello',
-      async () => {
+  }
+  describe(`${path}`, () => {
+    test.each(allTests)(
+      '%s - from: %i, to: %s',
+      async (topicName, fromPage, toPages) => {
         jest.setTimeout(120000);
         const fullpath =
           `${sitePath}/Lessons/Math/Geometry_1/${path}/${topicName}?page=${fromPage}`;
@@ -45,10 +57,13 @@ export default function tester(pathIn, topicNameIn, fromPageIn, toPagesIn) {
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
+          // if (!fs.existsSync(`${localPath}/__image_snapshots__/${topicName}`)) {
+          //   fs.mkdirSync(`${localPath}/__image_snapshots__/${topicName}`);
+          // }
           expect(image).toMatchImageSnapshot({
             failureThreshold: '0.005',             // 480 pixels
             failureThresholdType: 'percent',
-            customSnapshotIdentifier: `${path}/${topicName} page ${currentPage}`,
+            customSnapshotIdentifier: `${topicName} page ${currentPage}`,
           });
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
@@ -92,7 +107,7 @@ export default function tester(pathIn, topicNameIn, fromPageIn, toPagesIn) {
             expect(image).toMatchImageSnapshot({
               failureThreshold: '0.005',             // 480 pixels
               failureThresholdType: 'percent',
-              customSnapshotIdentifier: `${path}/${topicName} page ${currentPage}`,
+              customSnapshotIdentifier: `${topicName} page ${currentPage}`,
             });
           }
         }

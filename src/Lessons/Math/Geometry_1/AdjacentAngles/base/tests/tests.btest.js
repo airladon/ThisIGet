@@ -1,9 +1,9 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-import tester from './parent.btest';
+import tester from '../../../tests/parent.btest';
 
 tester({
-  path: 'areaTriangle/base',
+  path: 'adjacentAngles/base',
   explanation: 6,
   summary: 1,
   extraTests: [
