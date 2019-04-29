@@ -2,9 +2,10 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-const lessonPath = 'introduction/base';
+const lessonPath = 'rectanglesAndSquares/base';
 const topics = {
-  explanation: 16,
+  explanation: 27,
+  summary: 2,
 };
 
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
@@ -39,7 +40,7 @@ describe(`${lessonPath}`, () => {
       expect(image).toMatchImageSnapshot({
         failureThreshold: '0.005',             // 480 pixels
         failureThresholdType: 'percent',
-        customSnapshotIdentifier: `page ${p}`,
+        customSnapshotIdentifier: `${t} page ${p}`,
       });
     },
   );
@@ -48,7 +49,7 @@ describe(`${lessonPath}`, () => {
     async (t, numP) => {
       jest.setTimeout(60000);
       const anglesPath =
-        `${sitePath}/Lessons/Math/Geometry_1/${lessonPath}/explanation?page=1`;
+        `${sitePath}/Lessons/Math/Geometry_1/${lessonPath}/${t}?page=1`;
       await page.goto(anglesPath);
       await page.setViewport({ width: 600, height: 400 });
       await page.evaluate(() => {
@@ -80,7 +81,7 @@ describe(`${lessonPath}`, () => {
         expect(image).toMatchImageSnapshot({
           failureThreshold: '0.005',             // 480 pixels
           failureThresholdType: 'percent',
-          customSnapshotIdentifier: `page ${p}`,
+          customSnapshotIdentifier: `${t} page ${p}`,
         });
 
         const watchDog = page.waitForFunction(() => {
@@ -105,26 +106,4 @@ describe(`${lessonPath}`, () => {
       }
     },
   );
-  // }
-  // let disabled = false;
-  // // let lastPage = -1;
-  // // let state = 'next';
-  // while (!disabled) {
-  //   let pageNumber = -1;
-  //   // eslint-disable-next-line no-await-in-loop
-  //   await page.cookies()
-  //     .then(cookies => cookies.filter(c => c.name === 'page'))
-  //     .then((pageCookie) => { pageNumber = pageCookie[0].value; });
-
-
-  //   let classList = [];
-  //   // eslint-disable-next-line no-await-in-loop
-  //   await page.$('#lesson__button-next')
-  //     .then(el => el.getProperty('className'))
-  //     .then(cn => cn.jsonValue())
-  //     .then(classNameString => classNameString.split(' '))
-  //     // eslint-disable-next-line no-loop-func
-  //     .then((x) => { classList = x; });
-
-  //   disabled = classList.indexOf('lesson__button-next-disabled') > -1;
 });
