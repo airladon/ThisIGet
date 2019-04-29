@@ -2,49 +2,21 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-const lessons = [
-  {
-    path: 'areaTriangle/base',
-    explanation: 3,
-    summary: 1,
-  },
-  // {
-  //   path: 'angle/base',
-  //   explanation: 10,
-  //   summary: 1,
-  // },
-];
-
-// const lessonPath = 'areaTriangle/base';
-// const topics = {
-//   explanation: 61,
-//   summary: 1,
-// };
-
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-
-// const gotoTests = [];
-// const navigationTests = [];
-const allTests = [];
-lessons.forEach((lesson) => {
-  const { path } = lesson;
-  Object.keys(lesson).forEach((topicOrPath) => {
-    if (topicOrPath !== 'path') {
-      const topicName = topicOrPath;
-      const numPages = lesson[topicName];
-      for (let i = 1; i < numPages; i += 1) {
-        allTests.push([path, topicName, i, [i]]);
-      }
-      allTests.push([path, topicName, 1, [numPages, 1]]);
-    }
-  });
-});
-console.log(allTests)
-allTests.forEach((allTest) => {
-  const [path, topicName, fromPage, toPages] = allTest;
+export default function tester(pathIn, topicNameIn, fromPageIn, toPagesIn) {
   describe('describing', () => {
+    let path;
+    let topicName;
+    let fromPage;
+    let toPages;
+    beforeEach(() => {
+      path = pathIn;
+      topicName = topicNameIn;
+      fromPage = fromPageIn;
+      toPages = toPagesIn;
+    });
     test(
       'hello',
       async () => {
@@ -127,4 +99,4 @@ allTests.forEach((allTest) => {
       },
     );
   });
-});
+}
