@@ -1,30 +1,38 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
+
 const fs = require('fs');
 
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-export function tester(lesson) {
+function contentSectionCount(testPath, topicName) {
+  let fileName = testPath.split('/').slice(0, -1).join('/');
+  fileName = `${fileName}/${topicName}/content.js`;
+  const content = fs.readFileSync(fileName, 'utf8');
+  return (content.match(/\n *this\.addSection/g) || []).length;
+}
+
+export default function tester(fullPath, ...scenarios) {
   const allTests = [];
-  const { path } = lesson;
-  Object.keys(lesson).forEach((topicOrPath) => {
-    if (topicOrPath !== 'path' && topicOrPath !== 'extraTests') {
-      const topicName = topicOrPath;
-      const numPages = lesson[topicName];
-      for (let i = 1; i < numPages; i += 1) {
+  const path = fullPath.split('/').slice(-3, -1).join('/');
+
+  scenarios.forEach((scenario) => {
+    if (typeof scenario === 'string') {
+      const topicName = scenario;
+      const numPages = contentSectionCount(fullPath, topicName);
+      for (let i = 1; i <= numPages; i += 1) {
         allTests.push([topicName, i, [i]]);
       }
       allTests.push([topicName, 1, [numPages, 1]]);
+    } else {
+      scenario.forEach((extraScenario) => {
+        allTests.push(extraScenario);
+      });
     }
   });
-  const { extraTests } = lesson;
-  if (extraTests != null) {
-    extraTests.forEach((extra) => {
-      allTests.push(extra);
-    });
-  }
+
   describe(`${path}`, () => {
     test.each(allTests)(
       '%s - from: %i, to: %s',
@@ -54,9 +62,6 @@ export function tester(lesson) {
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
-          // if (!fs.existsSync(`${localPath}/__image_snapshots__/${topicName}`)) {
-          //   fs.mkdirSync(`${localPath}/__image_snapshots__/${topicName}`);
-          // }
           expect(image).toMatchImageSnapshot({
             failureThreshold: '0.005',             // 480 pixels
             failureThresholdType: 'percent',
@@ -111,11 +116,4 @@ export function tester(lesson) {
       },
     );
   });
-}
-
-export function contentSectionCount(testPath, topicName) {
-  let fileName = testPath.split('/').slice(0, -1).join('/');
-  fileName = `${fileName}/${topicName}/content.js`;
-  const content = fs.readFileSync(fileName, 'utf8');
-  return (content.match(/\n *this\.addSection/g) || []).length;
 }
