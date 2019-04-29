@@ -103,8 +103,11 @@ export default function tester(...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await page.cookies()
               .then(cookies => cookies.filter(c => c.name === 'page'))
+              .then(cookies => cookies.filter(c => c.path.length > 1))
               // eslint-disable-next-line no-loop-func
-              .then((pageCookie) => { currentPage = pageCookie[0].value; });
+              .then((pageCookie) => {
+                currentPage = pageCookie[0].value;
+              });
 
             // Take screenshot
             // eslint-disable-next-line no-await-in-loop

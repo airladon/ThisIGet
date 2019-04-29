@@ -972,18 +972,19 @@ class PresentationLessonContent extends SimpleLessonContent {
     const toForm = options.to;
     const eqnSection = {
       transitionFromPrev: (done) => {
+        let callback = done;
         if (userSections.transitionFromPrev != null) {
-          userSections.transitionFromPrev(() => {});
+          callback = userSections.transitionFromPrev.bind(userSections, done);
         }
         if (fromForm === toForm) {
-          done();
+          callback();
           return;
         }
         eqn.showForm(fromForm);
         eqn.goToForm({
           name: toForm,
           duration,
-          callback: done,
+          callback,
           animate,
         });
         if (nav != null) {
