@@ -161,7 +161,7 @@ class Content extends PresentationLessonContent {
         `${new Definition('Circumference', 'Latin', ['circumferentia', 'WHERE', 'circum', 'around', 'ferre', 'carry']).html(colors.circle)}`,
       ],
       modifiers: {
-        straightened: click(circ.straightenCircumference, [circ, 4], colors.circle),
+        straightened: click(circ.straightenCircumference, [circ, 4, null], colors.circle),
         circumference: highlight(colors.circle),
         // circumference: click(circ.pulseCircle, [circ], colors.circle),
       },
@@ -175,7 +175,7 @@ class Content extends PresentationLessonContent {
         circ.straighten(0);
         circ.straightening = false;
         circle._line.setColor(colors.grid);
-        circ._activator.onClick = circ.straightenCircumference.bind(circ, 4);
+        circ._activator.onClick = circ.straightenCircumference.bind(circ, 4, null);
         circ._circle.setScenario('centerHigh');
       },
       setLeaveState: () => {
@@ -285,7 +285,7 @@ class Content extends PresentationLessonContent {
       circ.setDiameterAndRadiusRotation(true, done);
     };
 
-    this.addSection(common, {
+    this.addSection({
       title: 'Relationships',
       setContent: centerV([
         'Once properties are defined, the |relationship| between them can be investigated.',
@@ -365,18 +365,18 @@ class Content extends PresentationLessonContent {
       modifiers: {
         diameter: click(circ.pulseDiameter, [circ], colors.diameter),
         circumference: click(circ.pulseBendLine, [circ], colors.circle),
-        three: click(circ.diameterToCicumferenceComparison, [circ], colors.diagram.action),
+        three: click(circ.diameterToCicumferenceComparison, [circ, null], colors.diagram.action),
       },
       show: [
         circle._line, circle._center, circle._diameter, circle._circumference,
       ],
-      setEnterState: () => {
+      transitionFromAny: (done) => {
         circ.straighten(0);
         circle._line.setColor(colors.grid);
         circle._diameter.isTouchable = false;
         circle.move.maxTransform.updateTranslation(1000, 1000);
         circle.move.minTransform.updateTranslation(-1000, -1000);
-        circ.diameterToCicumferenceComparison();
+        circ.diameterToCicumferenceComparison(done);
         circle.setScenario('centerHigh');
       },
       setLeaveState: () => {
@@ -415,6 +415,7 @@ class Content extends PresentationLessonContent {
         circle._line, circle._center, circle._diameter,
       ],
       setSteadyState: () => {
+        circ.setDiameterAndRadiusRotation(false);
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('centerTop');
         circle.setScenario('center');

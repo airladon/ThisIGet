@@ -4,7 +4,7 @@ import tester from '../../../../../testers/presentationLessonTester';
 
 tester(
   'explanation',
-  'summary',
+  // 'summary',
   // [
   //   ['explanation', 3, [1, 5]],
   // ],

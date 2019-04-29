@@ -392,7 +392,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     );
   }
 
-  straightenCircumference(duration: number = 4) {
+  straightenCircumference(duration: number = 4, done: ?() => void = null) {
     this._circle._circumference.stop(true, false);
     if (this.straightening || this.percentStraight === 1) {
       this.straightening = false;
@@ -402,6 +402,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
           duration,
           startPercent: 1 - this.percentStraight,
         })
+        .whenFinished(done)
         .start();
     } else {
       this.straightening = true;
@@ -411,6 +412,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
           duration,
           startPercent: this.percentStraight,
         })
+        .whenFinished(done)
         .start();
     }
     this.diagram.animateNextFrame();
@@ -451,14 +453,14 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  diameterToCicumferenceComparison() {
+  diameterToCicumferenceComparison(done: ?() => void = null) {
     this.stop(true, true);
     this._diameterLines.hideAll();
     // this._circle.stop(true, false);
     this.straighten(0);
     this.straightening = false;
     this.diameterLinesAppear();
-    this.straightenCircumference(2);
+    this.straightenCircumference(2, done);
   }
 
   diameterLinesAppear() {
