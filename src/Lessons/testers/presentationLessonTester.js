@@ -2,14 +2,10 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-// const fs = require('fs');
-// const path = require('path');
-
-
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-export default function tester(lesson) {
+export function tester(lesson) {
   const allTests = [];
   const { path } = lesson;
   Object.keys(lesson).forEach((topicOrPath) => {
@@ -114,4 +110,8 @@ export default function tester(lesson) {
       },
     );
   });
+}
+
+export function contentSectionCount(path) {
+  console.log(path);
 }

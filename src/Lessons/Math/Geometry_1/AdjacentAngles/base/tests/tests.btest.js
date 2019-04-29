@@ -1,12 +1,14 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-import tester from '../../../tests/parent.btest';
+import {
+  tester, contentSectionCount,
+} from '../../../../../testers/presentationLessonTester';
 
 tester({
-  path: 'adjacentAngles/base',
-  explanation: 6,
+  path: __dirname.split('/').slice(-3, -1).join('/'),
+  explanation: 3,
   summary: 1,
-  extraTests: [
-    ['explanation', 3, [1, 5]],
-  ],
+  // extraTests: [
+  //   ['explanation', 3, [1, 5]],
+  // ],
 });

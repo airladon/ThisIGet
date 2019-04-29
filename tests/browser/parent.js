@@ -2,52 +2,32 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
-const lessons = [
-  {
-    path: 'areaTriangle/base',
-    explanation: 3,
-    summary: 1,
-  },
-  // {
-  //   path: 'angle/base',
-  //   explanation: 10,
-  //   summary: 1,
-  // },
-];
-
-// const lessonPath = 'areaTriangle/base';
-// const topics = {
-//   explanation: 61,
-//   summary: 1,
-// };
-
 const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-
-// const gotoTests = [];
-// const navigationTests = [];
-const allTests = [];
-lessons.forEach((lesson) => {
+export default function tester(lesson) {
+  const allTests = [];
   const { path } = lesson;
   Object.keys(lesson).forEach((topicOrPath) => {
-    if (topicOrPath !== 'path') {
+    if (topicOrPath !== 'path' && topicOrPath !== 'extraTests') {
       const topicName = topicOrPath;
       const numPages = lesson[topicName];
       for (let i = 1; i < numPages; i += 1) {
-        allTests.push([path, topicName, i, [i]]);
+        allTests.push([topicName, i, [i]]);
       }
-      allTests.push([path, topicName, 1, [numPages, 1]]);
+      allTests.push([topicName, 1, [numPages, 1]]);
     }
   });
-});
-console.log(allTests)
-allTests.forEach((allTest) => {
-  const [path, topicName, fromPage, toPages] = allTest;
-  describe('describing', () => {
-    test(
-      'hello',
-      async () => {
+  const { extraTests } = lesson;
+  if (extraTests != null) {
+    extraTests.forEach((extra) => {
+      allTests.push(extra);
+    });
+  }
+  describe(`${path}`, () => {
+    test.each(allTests)(
+      '%s - from: %i, to: %s',
+      async (topicName, fromPage, toPages) => {
         jest.setTimeout(120000);
         const fullpath =
           `${sitePath}/Lessons/Math/Geometry_1/${path}/${topicName}?page=${fromPage}`;
@@ -73,10 +53,13 @@ allTests.forEach((allTest) => {
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
+          // if (!fs.existsSync(`${localPath}/__image_snapshots__/${topicName}`)) {
+          //   fs.mkdirSync(`${localPath}/__image_snapshots__/${topicName}`);
+          // }
           expect(image).toMatchImageSnapshot({
             failureThreshold: '0.005',             // 480 pixels
             failureThresholdType: 'percent',
-            customSnapshotIdentifier: `${path}/${topicName} page ${currentPage}`,
+            customSnapshotIdentifier: `${topicName} page ${currentPage}`,
           });
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
@@ -120,11 +103,11 @@ allTests.forEach((allTest) => {
             expect(image).toMatchImageSnapshot({
               failureThreshold: '0.005',             // 480 pixels
               failureThresholdType: 'percent',
-              customSnapshotIdentifier: `${path}/${topicName} page ${currentPage}`,
+              customSnapshotIdentifier: `${topicName} page ${currentPage}`,
             });
           }
         }
       },
     );
   });
-});
+}
