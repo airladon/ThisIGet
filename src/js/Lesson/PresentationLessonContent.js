@@ -972,6 +972,9 @@ class PresentationLessonContent extends SimpleLessonContent {
     const toForm = options.to;
     const eqnSection = {
       transitionFromPrev: (done) => {
+        if (userSections.transitionFromPrev != null) {
+          userSections.transitionFromPrev(() => {});
+        }
         if (fromForm === toForm) {
           done();
           return;

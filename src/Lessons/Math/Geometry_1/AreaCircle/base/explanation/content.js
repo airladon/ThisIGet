@@ -189,10 +189,12 @@ class Content extends PresentationLessonContent {
         lightCircle, poly._lines, poly._height, poly._base,
         poly._fill, poly._borderHighlight,
       ],
+      transitionFromPrev: (done) => {
+        fig._poly._borderHighlight.pulseThickNow(1, 1.03, 7, done);
+      },
       setSteadyState: () => {
         fig.setScenario('left');
         eqn.setScenario('right');
-        coll.pulseBorder();
       },
     });
 
