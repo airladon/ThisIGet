@@ -135,6 +135,7 @@ class Content extends PresentationLessonContent {
     content = { setContent: 'The |area of the triangle| is the |sum| of the areas of the |two smaller triangles|.' };
     this.addSection(content, {
       show: [area1._tri, area1._leftRect, area1._rightRect],
+      setSteadyState: () => { coll.setScenarios('default'); },
     });
     common = {
       show: [
