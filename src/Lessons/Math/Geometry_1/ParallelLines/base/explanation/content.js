@@ -43,6 +43,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const line1 = coll._line1;
     const line2 = coll._line2;
+    const markings = coll._markings;
 
     const common = {
       setInfo: [
@@ -105,6 +106,13 @@ class Content extends PresentationLessonContent {
         long: click(coll.scaleLine, [coll, layout.scale.long], colors.diagram.action),
         short: click(coll.scaleLine, [coll, layout.scale.short], colors.diagram.action),
       },
+    });
+
+    this.addSection({
+      setContent: [
+        'Lines that are parallel are sometimes marked with small |arrows| to make it clear they are parallel. When different numbers of arrows are used, the lines with the same number are parallel to each other.',
+      ],
+      show: [markings],
     });
   }
 }

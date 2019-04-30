@@ -33,7 +33,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
 
     const modifiers = {};
     this.setTitle('');
-    this.setDescription('Lines are |parallel| if they have the |same rotation| and |do not touch|. Therefore, the lines cannot be on top of each other, and if extended to an infinite length, would never cross.', modifiers);
+    this.setDescription('Lines are |parallel| if they have the |same rotation| and |do not touch|. Therefore, the lines cannot be on top of each other, and if extended to an infinite length, would never cross. Small arrows are sometimes used to mark lines as parallel.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -41,11 +41,11 @@ export default class QRBoilerplate extends PopupBoxCollection {
     this.setDiagramSpace({ location: 'top', ySize: 0.5 });
     super.show();
     const coll = this._collection;
-    coll.showAll();
-    coll._line1.setScenario('center');
-    coll._line2.setScenario('center');
-    coll._line1.setLength(3);
-    coll._line2.setLength(3);
+    const markings = coll._markings;
+    markings._l1.showAll();
+    markings._l2.showAll();
+    markings._l1.setPosition(0, 0.3);
+    markings._l2.setPosition(0, -0.4);
     this.transformToQRWindow(coll, new Rect(-2, -0.6, 4, 1.6));
     this.diagram.animateNextFrame();
   }

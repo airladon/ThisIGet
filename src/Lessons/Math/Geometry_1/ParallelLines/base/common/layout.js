@@ -4,7 +4,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point, Rect,
-  // Transform,
+  Transform,
   // Line,
 } = Fig.tools.g2;
 
@@ -64,9 +64,53 @@ export default function lessonLayout() {
       },
     },
   });
+
+  const size = 0.08;
+  const marking = name => ({
+    name,
+    method: 'polyLine',
+    options: {
+      points: [[-size, size], [0, 0], [-size, -size]],
+      color: colors.lines,
+    },
+  });
+  const lineWithMark = (name, position, angle) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      joinObjects({}, layout.line, { name: 'line' }),
+      marking('mark'),
+    ],
+    options: {
+      transform: new Transform().translate(position).rotate(angle),
+    },
+  });
+  const lineWithTwoMarks = (name, position, angle) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      joinObjects({}, layout.line, { name: 'line' }),
+      marking('mark'),
+      joinObjects({}, marking('mark2'), { options: { position: [size, 0] } }),
+    ],
+    options: {
+      transform: new Transform().rotate(angle).translate(position),
+    },
+  });
+  layout.perpendicularMarkings = {
+    name: 'markings',
+    method: 'collection',
+    addElements: [
+      lineWithMark('l1', new Point(-1.2, 0), 0),
+      lineWithMark('l2', new Point(-1.2, -1), 0),
+      lineWithTwoMarks('l3', new Point(1.2, -0.1), Math.PI / 6),
+      lineWithTwoMarks('l4', new Point(1.2, -0.7), Math.PI / 6),
+    ],
+  };
   layout.addElements = [
     layout.line1,
     layout.line2,
+    layout.perpendicularMarkings,
   ];
   return layout;
 }

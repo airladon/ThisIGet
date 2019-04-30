@@ -7,8 +7,9 @@ import {
 } from './tools';
 
 const {
-  // DiagramElementPrimative, DiagramObjectAngle, DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramElementPrimative,
+  // DiagramObjectAngle,
+  DiagramElementCollection,
   DiagramObjectLine,
   Transform,
 } = Fig;
@@ -16,6 +17,26 @@ const {
 export default class CommonCollection extends CommonDiagramCollection {
   _line1: DiagramObjectLine;
   _line2: DiagramObjectLine;
+  _markings: {
+    _l1: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _l2: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _l3: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+      _mark2: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _l4: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+      _mark2: DiagramElementPrimative;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
