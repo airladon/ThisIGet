@@ -152,6 +152,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         diag.setAngleMarks('12Long');
         circle._angleText.setScenario('bottom');
+        circle.setScenario('center');
       },
     });
 
@@ -172,6 +173,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         diag.setAngleMarks(12);
         circle._angleText.setScenario('bottom');
+        circle.setScenario('center');
       },
     });
 
