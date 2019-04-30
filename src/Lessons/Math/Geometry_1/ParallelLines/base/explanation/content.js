@@ -109,6 +109,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Markings',
       setContent: [
         'Lines that are parallel are sometimes marked with small |arrows| to make it clear they are parallel. When different numbers of arrows are used, the lines with the same number are parallel to each other.',
       ],
