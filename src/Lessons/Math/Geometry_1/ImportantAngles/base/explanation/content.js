@@ -14,9 +14,9 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   click,
-  // centerV,
+  centerV,
   style,
-  // highlight,
+  highlight,
   // clickWord,
 } = Fig.tools.html;
 
@@ -42,10 +42,11 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
+    const right = coll._right;
 
     const container = (id, text) => `<div id="${id}"" class="lesson__important_angles__text">${text}</div>`;
     this.addSection({
-      title: '',
+      title: 'Important Angles',
       setContent: [
         `<table class="lesson__important_angles_table">
           <tr>
@@ -105,6 +106,32 @@ class Content extends PresentationLessonContent {
         coll.updateAngle();
         coll.updateTable(true);
       },
+    });
+
+    this.addSection({
+      title: 'Right Angles',
+      setContent: centerV([
+        'Many |relationships| between right angles and different geometries have been found.',
+        'This makes the right angle an |important angle| as identifying one often leads to a simpler analysis of a problem.',
+      ]),
+    });
+    this.addSection({
+      setContent: [
+        'Another way to define a right angle is to consider a line intersecting another. A |right_angle| is the angle between the lines where the two |intersection_angles| are |equal|.',
+      ],
+      modifiers: {
+        right_angle: highlight(colors.angle),
+        intersection_angles: highlight(colors.angle),
+      },
+      show: [right],
+    });
+    this.addSection({
+      setContent: [
+        'When two lines are at right angles to each other, they are often given the special name |perpendicular| lines.',
+        `${new Definition('Perpendicular', 'Latin', ['perpendicularis', 'MEANING', '', 'vertical, as a plumb line']).html({ color: colors.diagram.highlight, id: 'id_acute_def' })}`,
+      ],
+      show: [right],
+      hide: [right._leftAngle],
     });
   }
 }

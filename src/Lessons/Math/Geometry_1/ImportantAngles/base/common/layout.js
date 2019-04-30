@@ -218,8 +218,71 @@ export default function lessonLayout() {
     scenario: 'right',
   };
 
+
+  layout.right = {
+    name: 'right',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'horizontal',
+        method: 'line',
+        options: {
+          color: colors.lines,
+          vertexSpaceStart: 'center',
+          position: [0, 0],
+          length: 4,
+          width,
+        },
+      },
+      {
+        name: 'vertical',
+        method: 'line',
+        options: {
+          color: colors.lines,
+          vertexSpaceStart: 'start',
+          position: [0, 0],
+          length: 1.5,
+          angle: Math.PI / 2,
+          width,
+        },
+      },
+      {
+        name: 'leftAngle',
+        method: 'angle',
+        options: {
+          color: colors.angle,
+          autoRightAngle: true,
+          rotation: Math.PI / 2,
+          angle: Math.PI / 2,
+          curve: {
+            radius: 0.3,
+            width,
+          },
+        },
+      },
+      {
+        name: 'rightAngle',
+        method: 'angle',
+        options: {
+          color: colors.angle,
+          autoRightAngle: true,
+          rotation: 0,
+          angle: Math.PI / 2,
+          curve: {
+            radius: 0.3,
+            width,
+          },
+        },
+      },
+    ],
+    options: {
+      position: [0, -1],
+    },
+  };
+
   layout.addElements = [
     layout.fig,
+    layout.right,
   ];
 
   return layout;

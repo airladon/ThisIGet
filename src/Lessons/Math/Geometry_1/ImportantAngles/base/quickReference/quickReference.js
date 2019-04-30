@@ -12,6 +12,7 @@ const {
   click,
   centerH,
   clickW,
+  highlightWord,
 } = Fig.tools.html;
 
 export class QRAcute extends PopupBoxCollection {
@@ -81,19 +82,19 @@ export class QRRight extends PopupBoxCollection {
     const modifiers = {
       right_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
       angle_mark: click(coll.pulseAngle, [coll], layout.colors.angle),
+      _90: highlightWord('90º', layout.colors.angle),
     };
     this.setTitle('Right Angle');
     this.setDescription([
       centerH([
-        'A |right_angle| is an angle of |90º|.',
-        'The |angle_mark| is often shown as a square instead of an arc.',
+        'A |right_angle| is an angle of |_90|. Two lines that form a right angle are called |perpendicular| lines. The |angle_mark| is often shown as a square instead of an arc.',
       ]),
     ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.6 });
     super.show();
     const collection = this._collection;
     collection.show();
