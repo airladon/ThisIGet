@@ -415,9 +415,10 @@ class Content extends PresentationLessonContent {
         circle._line, circle._center, circle._diameter,
       ],
       setSteadyState: () => {
-        circ.setDiameterAndRadiusRotation(false);
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('centerTop');
+        circ._circle._diameter.setRotation(0);
+        circ._circle._radius.setRotation(0.5);
         circle.setScenario('center');
       },
     });

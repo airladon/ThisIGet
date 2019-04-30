@@ -64,7 +64,16 @@ class Content extends PresentationLessonContent {
         custom._line, custom._pad0, custom._pad1, custom._pad2,
       ],
       transitionFromAny: (done) => {
-        coll.newCustomTriangle(done);
+        if (this.comingFrom === 'prev') {
+          custom.stop(true, 'noComplete');
+          custom.animations.new()
+            .scenarios({ target: 'props', duration: 1 })
+            .whenFinished(done)
+            .start();
+        } else {
+          custom.setScenarios('props');
+          done();
+        }
       },
     });
 

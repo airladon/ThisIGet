@@ -85,7 +85,7 @@ export default function tester(...scenarios) {
                 }
                 return false;
               }, { polling: 'raf' });
-              console.log(currentPage, targetPage)
+              // console.log(currentPage, targetPage)
               // eslint-disable-next-line no-await-in-loop
               const hrefElement = await page.$(`#${navigation}`);
               // eslint-disable-next-line no-await-in-loop
