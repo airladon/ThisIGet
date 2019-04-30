@@ -6,6 +6,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   DiagramElementPrimative, DiagramObjectLine,
   DiagramElementCollection,
+  DiagramObjectAngle,
   Transform,
 } = Fig;
 
@@ -39,6 +40,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       _moreSharpCorners: DiagramElementCollection;
       _lessSharpCorners: DiagramElementCollection;
     } & DiagramElementCollection;
+  } & DiagramElementCollection;
+
+  _equalAnglesExample: {
+    _angle1: DiagramObjectAngle;
+    _angle2: DiagramObjectAngle;
+    _angle: DiagramObjectAngle;
   } & DiagramElementCollection;
 
   angleIndex: number;
@@ -208,6 +215,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     // $FlowFixMe
     const angleElement = this._example[`_angle${indeces[this.angleIndex]}`];
     angleElement._label.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseDoubleAngles() {
+    this._equalAnglesExample._angle1.pulseScaleNow(1, 1.5);
+    this._equalAnglesExample._angle2.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
 }

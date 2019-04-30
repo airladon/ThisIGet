@@ -43,6 +43,7 @@ class Content extends PresentationLessonContent {
     const shapes = diag._shapes;
     const angle = diag._angle;
     const example = diag._example;
+    const equalAnglesExample = diag._equalAnglesExample;
 
     this.addSection({
       title: 'Corners',
@@ -245,6 +246,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Markings',
       setContent: [
         'Angles are often |marked| in a shape with a |line| and |label|.',
       ],
@@ -257,6 +259,19 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         diag.toggleAngle(0);
       },
+    });
+
+    this.addSection({
+      setContent: [
+        'Angles are sometimes marked with |multiple_lines|. Angles with the same number of lines are equal.',
+      ],
+      modifiers: {
+        multiple_lines: click(diag.pulseDoubleAngles, [diag], colors.angles),
+      },
+      show: [equalAnglesExample],
+      // setSteadyState: () => {
+      //   diag.toggleAngle(0);
+      // },
     });
 
     // this.addSection({

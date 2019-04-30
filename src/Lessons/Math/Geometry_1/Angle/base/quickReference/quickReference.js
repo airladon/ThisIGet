@@ -41,8 +41,7 @@ export default class QRAngle extends PopupBoxCollection {
     };
     this.setTitle('Angle');
     this.setDescription([
-      '|Angle| is the corner formed by two lines.',
-      'A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
+      '|Angle| is the corner formed by two lines. A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
     ], modifiers);
     this.setLink(details.details.uid);
   }

@@ -350,10 +350,67 @@ export default function lessonLayout() {
     scenario: 'main',
   };
 
+  // //////////////////////////////////////////////////
+  // Same Angle example
+  // //////////////////////////////////////////////////
+
+  const triPoints = [
+    [-1, -1],
+    [0, 1],
+    [1, -1],
+  ];
+
+  const triangle = {
+    name: 'tri',
+    method: 'polyLine',
+    options: {
+      points: triPoints,
+      width,
+      close: true,
+      color: colors.lines,
+    },
+  };
+
+  const angleDouble = (index, p1, p2, p3, r = 0.4) => ({
+    name: `angle${index}`,
+    method: 'angle',
+    options: {
+      p1,
+      p2,
+      p3,
+      curve: {
+        width: width * 0.6,
+        radius: r,
+        num: 2,
+        step: -0.05,
+        sides: 200,
+      },
+      color: colors.angles,
+    },
+  });
+
+  layout.equalAnglesExample = {
+    name: 'equalAnglesExample',
+    method: 'collection',
+    addElements: [
+      angleDouble('1', triPoints[2], triPoints[0], triPoints[1]),
+      angleDouble('2', triPoints[1], triPoints[2], triPoints[0]),
+      angle('', triPoints[0], triPoints[1], triPoints[2], 0.4),
+      triangle,
+    ],
+    mods: {
+      scenarios: {
+        main: { position: new Point(0, -0.2) },
+      },
+    },
+    scenario: 'main',
+  };
+
   layout.addElements = [
     layout.shapes,
     layout.angle,
     layout.example,
+    layout.equalAnglesExample,
   ];
   return layout;
 }
