@@ -40,8 +40,8 @@ export default function lessonLayout() {
   const isoscelesBase = new Line(triPoints[0], isoscelesPoint);
 
   const width = 0.04;
-  const angle = (text, radius = 0.3) => ({
-    color: colors.angles,
+  const angle = (text, radius = 0.3, color = colors.angles) => ({
+    color,
     curve: {
       radius,
       width: 0.015,
@@ -103,9 +103,9 @@ export default function lessonLayout() {
         isoscelesPoint,
       ],
       angle: [
-        angle('m', 0.55),
+        angle('m', 0.55, colors.isosceles),
         angle('', 0),
-        angle('n', 0.3),
+        angle('n', 0.3, colors.isosceles),
       ],
       side: [
         sideDash('|'),
@@ -132,7 +132,7 @@ export default function lessonLayout() {
       label: {
         text: 'o',
       },
-      color: colors.angle,
+      color: colors.isosceles,
       position: triPoints[0],
       angle: isoscelesBase.angle(),
     },
@@ -168,9 +168,9 @@ export default function lessonLayout() {
   const elements = {
     A: { color: colors.sides },
     B: { color: colors.sides },
-    m: { color: colors.angles },
-    n: { color: colors.angles },
-    o: { color: colors.angles },
+    m: { color: colors.isosceles },
+    n: { color: colors.isosceles },
+    o: { color: colors.isosceles },
     a: { color: colors.angles },
     b: { color: colors.angles },
     equals: '  =  ',
@@ -275,10 +275,10 @@ export default function lessonLayout() {
       angle: [
         angle('', 0),
         angle('', 0),
-        angle('a', 0.5),
+        angle('b', 0.6),
       ],
       side: [
-        side('A'),
+        side('B'),
         side(''),
         side(''),
       ],
@@ -295,11 +295,11 @@ export default function lessonLayout() {
     longestSideExample,
     shortestSideExample,
     fig,
-    nav('0', 0.5),
-    nav('1', 0),
-    nav('2', -0.5),
-    nav('3', -1),
-    nav('4', -1.5),
+    nav('0', 0.8),
+    nav('1', 0.3),
+    nav('2', -0.2),
+    nav('3', -0.7),
+    nav('4', -1.2),
   ];
   return layout;
 }
