@@ -1,19 +1,18 @@
 // @flow
-import {
-  Transform,
-} from '../../../../../js/diagram/tools/g2';
+import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import QuizCollection from './diagramCollectionQuiz';
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
+const { Transform } = Fig;
+export default class DiagramCollection extends CommonDiagramCollection {
   _quiz: QuizCollection;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();

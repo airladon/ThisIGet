@@ -1,16 +1,24 @@
 // @flow
+import Fig from 'figureone';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
-// import { Rect, Point } from '../../../../../js/diagram/tools/g2';
-import getCssColors from '../../../../../js/tools/getCssColors';
-import baseLayout from '../../../../LessonsCommon/layout';
+const {
+  Point,
+  // Transform,
+  // Line,
+} = Fig.tools.g2;
+
+// const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  // 'line',
+  // 'lines',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function commonLessonLayout() {
+export default function lessonLayout() {
   const layout: Object = baseLayout();
-  layout.colors = getCssColors(cssColorNames);
+  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const { colors } = layout;
+  layout.addElements = [];
   return layout;
 }

@@ -1,23 +1,24 @@
 // @flow
-import { Transform } from '../../../../../js/diagram/tools/g2';
-import lessonLayout from './layout';
+import Fig from 'figureone';
 
-// eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
+import lessonLayout from '../common/layout';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
-// import ParallelCollection from '../common/diagramCollectionParallel';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  // _parallel: ParallelCollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    // this.add('parallel', new ParallelCollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

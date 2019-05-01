@@ -247,7 +247,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     triangle_external_angle: new LessonDescription({
-      name: 'External Angle of a Triangle',
+      name: 'External Angle Triangle',
       path: '/Lessons/Math/Geometry_1/ExternalAngles',
       uid: 'triangle_external_angle',
       versions: {

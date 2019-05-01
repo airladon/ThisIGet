@@ -1,7 +1,8 @@
-@import '../../geometry';
+@import '../../../geometry';
 
 $colors: (
-  // line:             map-get($geometry_colors, lines),
+  // lines:             map-get($geometry_colors, lines),
+  // angles:            color('diagram', 'construction8'),
 );
 
 body {
@@ -9,5 +10,5 @@ body {
 }
 
 .diagram__text {
-  z-index: 1;
+  z-index: 0;
 }
