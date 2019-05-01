@@ -8,11 +8,11 @@ import version from '../version';
 import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
+const {
+  click,
 //   highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 export default class QRBoilerplate extends PopupBoxCollection {
   _collection: CommonCollection;
@@ -31,12 +31,18 @@ export default class QRBoilerplate extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
-    this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    const coll = this._collection;
+    const { colors } = this.layout;
+    // const fig = coll._fig;
+    const modifiers = {
+      external_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
+      exterior_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
+      sum_of_the_opposite_angles: click(coll.pulseOppositeAngles, [coll, null], colors.angles),
+      side: click(coll.pulseAdjacent, [coll], colors.sides),
+      extended_outwards: click(coll.pulseExternalLine, [coll], colors.externalSide),
+    };
+    this.setTitle('External or Exterior Angle');
+    this.setDescription('The |external_angle|, or |exterior_angle| of a triangle is the angle between a |side| and its adjacent side |extended_outwards|, and is |equal| to the |sum_of_the_opposite_angles|.', modifiers);
     this.setLink(details.details.uid);
   }
 
@@ -45,6 +51,12 @@ export default class QRBoilerplate extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     collection.show();
+    const fig = collection._fig;
+    fig.show([
+      fig._tri._line, fig._tri._angle0, fig._tri._angle1,
+      fig._externalLine, fig._externalAngle,
+      fig._adjacent,
+    ]);
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
