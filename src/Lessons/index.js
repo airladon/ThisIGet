@@ -259,7 +259,6 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
-            'quiz',
             'summary',
           ],
           qr: [
@@ -508,6 +507,32 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    side_angle_relationship: new LessonDescription({
+      name: 'Side Angle Relationships',
+      path: '/Lessons/Math/Geometry_1/SideAngleRelationship',
+      uid: 'side_angle_relationship',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Explanation_of_version_here.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'isosceles_triangles',
+      ],
+      enabled: true,
+    }),
     side_side_side: new LessonDescription({
       name: 'Side-Side-Side Congruency',
       path: '/Lessons/Math/Geometry_1/SideSideSide',
@@ -572,7 +597,7 @@ export default function getLessonIndex() {
       versions: {
       },
       dependencies: [
-        'congruent_triangles',
+        'pythagoras',
       ],
       enabled: false,
     }),

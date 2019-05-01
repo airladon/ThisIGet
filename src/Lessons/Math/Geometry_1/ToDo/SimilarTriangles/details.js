@@ -4,7 +4,7 @@
 var details = {
   title: 'Similar Triangles',
   uid: 'similar_triangles',
-  dependencies: ['congruent_triangles'],
+  dependencies: ['pythagoras'],
   enabled: false,
 };
 
