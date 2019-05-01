@@ -4610,19 +4610,15 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         var element = method(collectionPath, nameToUse, optionsToUse);
 
         if (elementModsToUse != null && elementModsToUse !== {}) {
-          element.setProperties(elementModsToUse);
-
-          if (methodPath.slice(-1)[0] === 'addNavigator') {
-            element.eqn.setProperties(elementModsToUse);
-          }
+          element.setProperties(elementModsToUse); // if (methodPath.slice(-1)[0] === 'addNavigator') {
+          //   element.eqn.setProperties(elementModsToUse);
+          // }
         }
 
         if (firstScenario != null && firstScenario in element.scenarios) {
-          element.setScenario(firstScenario);
-
-          if (methodPath.slice(-1)[0] === 'addNavigator') {
-            element.eqn.setScenario(firstScenario);
-          }
+          element.setScenario(firstScenario); // if (methodPath.slice(-1)[0] === 'addNavigator') {
+          //   element.eqn.setScenario(firstScenario);
+          // }
         }
       } else {
         var _element;
@@ -11789,6 +11785,22 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
 /* harmony import */ var _DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -11842,6 +11854,48 @@ function () {
         var equation = this.addEquation(parent, "".concat(name, "Eqn"), options);
         optionsToUse.equation = equation;
         navNameToUse = "".concat(name, "Nav");
+      } else if (!(optionsToUse.equation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"])) {
+        // let methodPathToUse;
+        var nameToUse; // let pathToUse;
+
+        var eqnOptions;
+        var elementModsToUse; // let addElementsToUse;
+
+        var firstScenario;
+
+        if (Array.isArray(optionsToUse.equation)) {
+          var _optionsToUse$equatio = _slicedToArray(optionsToUse.equation, 7);
+
+          nameToUse = _optionsToUse$equatio[1];
+          eqnOptions = _optionsToUse$equatio[3];
+          elementModsToUse = _optionsToUse$equatio[4];
+          firstScenario = _optionsToUse$equatio[6];
+        } else {
+          nameToUse = optionsToUse.equation.name; // pathToUse = optionsToUse.equation.path;
+
+          eqnOptions = optionsToUse.equation.options; // methodPathToUse = optionsToUse.equation.method;
+
+          elementModsToUse = optionsToUse.equation.mods;
+          firstScenario = optionsToUse.equation.scenario;
+        }
+
+        var _equation;
+
+        if (Array.isArray(eqnOptions)) {
+          _equation = this.addEquation.apply(this, [parent, nameToUse].concat(_toConsumableArray(eqnOptions)));
+        } else {
+          _equation = this.addEquation(parent, nameToUse, eqnOptions);
+        }
+
+        if (elementModsToUse != null && elementModsToUse !== {}) {
+          _equation.setProperties(elementModsToUse);
+        }
+
+        if (firstScenario != null && firstScenario in _equation.scenarios) {
+          _equation.setScenario(firstScenario);
+        }
+
+        optionsToUse.equation = _equation;
       } // $FlowFixMe
 
 
@@ -13172,6 +13226,7 @@ function (_DiagramElementCollec) {
       },
       alignH: 'center',
       alignV: 'middle',
+      interactive: true,
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
@@ -13182,7 +13237,7 @@ function (_DiagramElementCollec) {
       // this.eqn.hasTouchableElements = true;
       // this.eqn.isTouchable = true;
       // this.eqn.touchInBoundingRect = true;
-      _this.connectToEquation(optionsToUse.equation);
+      _this.connectToEquation(optionsToUse.equation, optionsToUse.interactive);
     }
 
     _this.navType = optionsToUse.navType;
@@ -13219,15 +13274,19 @@ function (_DiagramElementCollec) {
 
   _createClass(EqnNavigator, [{
     key: "connectToEquation",
-    value: function connectToEquation(eqn) {
+    value: function connectToEquation(eqn, interactive) {
       this.eqn = eqn;
-      this.eqn.onClick = this.clickNext.bind(this);
-      this.eqn.hasTouchableElements = true;
-      this.eqn.isTouchable = true;
-      this.eqn.touchInBoundingRect = true; // this.setTransformCallback = () => {
+
+      if (interactive) {
+        this.eqn.onClick = this.clickNext.bind(this);
+        this.eqn.hasTouchableElements = true;
+        this.eqn.isTouchable = true;
+        this.eqn.touchInBoundingRect = true;
+      } // this.setTransformCallback = () => {
       //   const p = this.getPosition();
       //   this.eqn.setPosition(p);
       // }
+
     } // const navigator = shapes.collection(;
     // setEquation(eqn: Equation) {
     //   this.eqn = eqn;

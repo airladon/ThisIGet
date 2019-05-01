@@ -156,6 +156,12 @@ export default function lessonLayout() {
       tri,
       isosceles,
     ],
+    mods: {
+      scenarios: {
+        default: { position: [0.7, 0], scale: 1 },
+        left: { position: [-1.1, 0], scale: 0.8 },
+      },
+    },
   };
 
   const elements = {
@@ -173,7 +179,7 @@ export default function lessonLayout() {
     less: ' < ',
   };
 
-  const eqn = name => ({
+  const eqn = (name, y) => ({
     // name: 'eqn',
     name,
     method: 'addNavigator',
@@ -182,7 +188,7 @@ export default function lessonLayout() {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         alignH: 'center',
-        alignV: 'center',
+        alignV: 'middle',
       },
       scale: 0.9,
       elements,
@@ -193,10 +199,10 @@ export default function lessonLayout() {
         },
         'sides1': {
           content: ['n', 'equals', 'o', 'plus', 'a'],
-          description: 'n is an exterior angle',
+          description: 'n is an exterior angle:',
         },
         'sides2': {
-          content: ['m', '_equals', 'n', 'equals', 'o', 'plus', 'a'],
+          content: ['m', 'equals', 'o', 'plus', 'a'],
           description: 'm and n are equal angles in the isosceles triangle:',
         },
         'sides3': {
@@ -205,15 +211,42 @@ export default function lessonLayout() {
         },
         'sides4': {
           content: ['b', 'greater', 'a'],
-          description: 'b is the sum of |m| and |o| and therefore must be greater than a:',
+          description: 'b is the sum of m and o and therefore must be greater than a:',
         },
       },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [2, y] },
+      },
+    },
+  });
+
+  const nav = (name, y) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      equation: eqn(`${name}Eqn`, y),
+      interactive: false,
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0.5, y] },
+      },
+      // isInteractive: false,
+      // isTouchable: false,
+      // hasTouchableElements: false,
     },
   });
 
   layout.addElements = [
     fig,
-    eqn('0'),
+    nav('0', 0.5),
+    nav('1', 0),
+    nav('2', -0.5),
+    nav('3', -1),
+    nav('4', -1.5),
   ];
   return layout;
 }

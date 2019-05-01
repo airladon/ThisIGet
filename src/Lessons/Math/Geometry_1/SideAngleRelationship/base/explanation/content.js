@@ -70,9 +70,12 @@ class Content extends PresentationLessonContent {
       show: [coll],
       setSteadyState: () => {
         coll.setScenarios('default');
-        coll._0Nav.showForm('sides4');
-        coll._0Nav.setPosition(1, 0);
-        coll._0Eqn.setPosition(2, 0);
+        coll._0.showForm('sides0');
+        coll._1.showForm('sides1');
+        coll._2.showForm('sides2');
+        coll._3.showForm('sides3');
+        coll._4.showForm('sides4');
+        coll._fig.setScenarios('left');
       },
     });
   }
