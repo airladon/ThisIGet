@@ -39,8 +39,8 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const collection = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
 
     const common = {
       setContent: '',
@@ -67,6 +67,7 @@ class Content extends PresentationLessonContent {
       setContent: centerV([
         '',
       ]),
+      show: [coll],
     });
   }
 }

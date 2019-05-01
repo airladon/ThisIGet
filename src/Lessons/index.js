@@ -246,6 +246,32 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    triangle_external_angle: new LessonDescription({
+      name: 'External Angle of a Triangle',
+      path: '/Lessons/Math/Geometry_1/ExternalAngles',
+      uid: 'triangle_external_angle',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Explanation_of_version_here.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'triangle_introduction',
+      ],
+      enabled: true,
+    }),
     important_angles: new LessonDescription({
       name: 'Important Angles',
       path: '/Lessons/Math/Geometry_1/ImportantAngles',
