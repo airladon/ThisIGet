@@ -1,14 +1,17 @@
 @import '../../../geometry';
 
 $colors: (
-  // lines:             map-get($geometry_colors, lines),
-  // angles:            color('diagram', 'construction8'),
+  sides:                  color('blue'),
+  angles:                 color('green'),
+  isosceles:              color('red'),
+  equalSide:              color('blue', darker),
+  fill:                   color('blue', darkest),
 );
 
 body {
   @include color_vars($colors);
 }
 
-.diagram__text {
-  z-index: 0;
-}
+// .diagram__text {
+//   z-index: 0;
+// }
