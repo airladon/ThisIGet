@@ -496,9 +496,9 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [-0.6, 0.7] },
-        summary: { position: [-0.4, 0.9] },
+        summary: { position: [-0.4, 0.4] },
         // qr: { position: [-0.4, -1.3] },
-        qr: { position: [-2, 0.4] },
+        qr: { position: [-0.6, 0.7] },
         area2: { position: [-0.6, 0.9] },
       },
     },
@@ -635,6 +635,103 @@ export default function lessonLayout() {
     ],
   };
 
+  // ////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////
+  const heightLine = (position, length) => ({
+    name: 'height',
+    method: 'collection',
+    addElements: [
+      {
+        name: 'line',
+        method: 'line',
+        options: {
+          angle: Math.PI / 2,
+          color: colors.sides,
+          width: 0.01,
+          length,
+          dashStyle: {
+            style: [0.05, 0.02],
+          },
+          label: {
+            text: 'height',
+            orientation: 'horizontal',
+            offset: 0.07,
+            location: 'left',
+          },
+        },
+      },
+      {
+        name: 'angle',
+        method: 'angle',
+        options: {
+          angle: Math.PI / 2,
+          color: colors.sides,
+          autoRightAngle: true,
+          curve: {
+            width: 0.01,
+            radius: 0.2,
+          },
+        },
+      },
+    ],
+    options: {
+      position,
+    },
+  });
+
+  const height1 = {
+    name: 'height1',
+    method: 'collection',
+    addElements: [
+      base('base', tri1[0], tri1[1], -0.3, 'base'),
+      heightLine([tri1[2].x, tri1[0].y], tri1[2].y - tri1[0].y),
+      tri('tri', tri1),
+    ],
+    mods: {
+      scenarios: {
+        default: { position: [-1.4, -0.25], scale: 0.8 },
+        summary: { position: [-1.4, -0.65], scale: 0.8 },
+        qr: { position: [-1.4, -0.25], scale: 0.8 },
+      },
+    },
+  };
+
+  const height2 = {
+    name: 'height2',
+    method: 'collection',
+    addElements: [
+      heightLine([tri2[2].x, tri2[0].y], tri2[2].y - tri2[0].y),
+      {
+        name: 'baseExtension',
+        method: 'line',
+        options: {
+          color: colors.sides,
+          width: 0.01,
+          length: 0.8,
+          angle: Math.PI,
+          position: tri2[0],
+          dashStyle: {
+            style: [0.05, 0.02],
+          },
+          vertexSpaceStart: 'start',
+        },
+      },
+      base('base', tri2[0], tri2[1], -0.3, 'base'),
+      tri('tri', tri2),
+    ],
+    mods: {
+      scenarios: {
+        default: { position: [1.3, 0], scale: 0.8 },
+        summary: { position: [1.3, -0.4], scale: 0.8 },
+        qr: { position: [1.3, 0], scale: 0.8 },
+      },
+    },
+  };
+
   layout.addElements = [
     intro,
     rectangle,
@@ -643,6 +740,8 @@ export default function lessonLayout() {
     area2,
     eqn,
     implications,
+    height1,
+    height2,
   ];
   return layout;
 }

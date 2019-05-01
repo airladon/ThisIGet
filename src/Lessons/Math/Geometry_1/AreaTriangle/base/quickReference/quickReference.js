@@ -33,18 +33,22 @@ export default class QRArea extends PopupBoxCollection {
 
     const modifiers = {};
     this.setTitle('Area of a Triangle');
-    this.setDescription('The area of a triangle is equal to |half its base times its height|.', modifiers);
+    this.setDescription('The area of a triangle is equal to |half its base times its height|. The base can be any side, and the |height| is equal to the |perpendicular line between the line on which the base sits and the top| point.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.8, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    collection.show();
-    const area1 = collection._area1;
+    // collection.show();
+    // const area1 = collection._area1;
     const eqn = collection._eqn;
-    area1.show([area1._tri, area1._base, area1._height]);
+    // area1.show([area1._tri, area1._base, area1._height]);
+    const height1 = collection._height1;
+    const height2 = collection._height2;
+    height1.showAll();
+    height2.showAll();
     collection.setScenarios('qr');
     eqn.showForm('10');
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));

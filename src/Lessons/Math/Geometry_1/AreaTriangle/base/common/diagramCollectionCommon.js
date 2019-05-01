@@ -5,7 +5,7 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative,
-  // DiagramObjectAngle,
+  DiagramObjectAngle,
   DiagramObjectLine,
   DiagramObjectPolyLine,
   DiagramElementCollection,
@@ -60,6 +60,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     _pad0: DiagramElementPrimative;
     _pad1: DiagramElementPrimative;
     _pad2: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  _height1: {
+    _line: DiagramObjectLine;
+    _angle: DiagramObjectAngle;
+    _base: DiagramObjectLine;
+  } & DiagramElementCollection;
+
+  _height2: {
+    _line: DiagramObjectLine;
+    _angle: DiagramObjectAngle;
+    _base: DiagramObjectLine;
+    _baseExtension: DiagramObjectLine;
   } & DiagramElementCollection;
 
   _eqn: Equation;

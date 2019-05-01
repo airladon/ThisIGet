@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,10 +11,11 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
+const {
+  style,
 //   click,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -34,40 +35,20 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
-    const area1 = coll._area1;
-    const area2 = coll._area2;
     const eqn = coll._eqn;
+    const height1 = coll._height1;
+    const height2 = coll._height2;
 
     this.addSection({
       setContent: [
-        'The area of a triangle is equal to |half its base times its height|.',
+        'The area of a triangle is equal to |half its base times its height|. The base can be any side, and the |height| is equal to the |perpendicular line between the line on which the base sits and the top| point.',
       ],
-      show: [area1._tri, area1._base, area1._height],
+      show: [height1, height2],
       setSteadyState: () => {
+        height1.setScenario('summary');
+        height2.setScenario('summary');
         coll.setScenarios('summary');
         eqn.showForm('10');
-      },
-    });
-
-    this.addSection({
-      setContent: [
-        '|Area| can be calculated with |any| side as the |base|.',
-      ],
-      show: [area1._tri],
-      transitionFromPrev: (done) => {
-        area1.animations.cancelAll();
-        area1.animations.new()
-          .scenario({ target: 'summary2', duration: 1 })
-          .whenFinished(done)
-          .start();
-      },
-      setSteadyState: () => {
-        area1.hide();
-        area2._tri.showAll();
-        area2._height.showAll();
-        area2._base.showAll();
-        coll.setScenarios('summary');
-        eqn.showForm('30');
       },
     });
   }

@@ -47,6 +47,8 @@ class Content extends PresentationLessonContent {
     const area2 = coll._area2;
     const eqn = coll._eqn;
     const implications = coll._implications;
+    const height1 = coll._height1;
+    const height2 = coll._height2;
 
     this.addSection({
       title: 'Introduction',
@@ -294,6 +296,41 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn, from: '30', to: '30' }, common, content);
     this.addSectionEqnStep({ eqn, from: '30', to: '30' }, common, content, {
       show: [area2._tri, area2._base, area2._height],
+    });
+
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    // //////////////////////////////////////////////////////////////////
+    this.addSection({
+      title: 'Height',
+      setContent: [
+        'The height of the triangle came from the rectangles formed between the top point of the triangle and it\'s base points',
+      ],
+      show: [
+        area1._tri, area1._leftRect, area1._rightRect, area1._height,
+      ],
+      hide: [
+        area1._leftRect._side30._label, area1._rightRect._side30._label,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('default');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'As a rectangle\'s sides are |perpendicular| to each other, and one of the sides is |aligned with the base| of the triangle, then the triangle |height| must be equal to the |perpendicular line between the base and the top| point.',
+      ],
+      show: [height1, height2],
+      hide: [height1._base, height2._base],
+      setSteadyState: () => {
+        height1.setScenario('default');
+        height2.setScenario('default');
+      },
     });
 
     // //////////////////////////////////////////////////////////////////

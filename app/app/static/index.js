@@ -4509,6 +4509,7 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       radialLines: shapes.radialLines.bind(shapes),
       rectangle: shapes.rectangle.bind(shapes),
       grid: shapes.grid.bind(shapes),
+      dashedLine: shapes.dashedLine.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -13622,7 +13623,23 @@ function makeStraightLine(shapes, length, width, position, color, dashStyle, lar
   var straightLine = shapes.horizontalLine(position, length, width, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0));
 
   if (dashStyle) {
-    straightLine = shapes.dashedLine(position, dashStyle.maxLength, width, 0, dashStyle.style, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0));
+    straightLine = shapes.dashedLine({
+      position: position,
+      length: dashStyle.maxLength,
+      width: width,
+      rotation: 0,
+      dashStyle: dashStyle.style,
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0)
+    }); //   position,
+    //   dashStyle.maxLength, width,
+    //   0, dashStyle.style, color, new Transform().scale(1, 1).translate(0, 0),
+    // );
+    // straightLine = shapes.dashedLine(
+    //   position,
+    //   dashStyle.maxLength, width,
+    //   0, dashStyle.style, color, new Transform().scale(1, 1).translate(0, 0),
+    // );
   }
 
   if (largerTouchBorder) {
@@ -13971,7 +13988,20 @@ function (_DiagramElementCollec) {
         r = Math.PI / 2 * 3;
       }
 
-      var a = this.shapes.arrowLegacy(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
+      var a = this.shapes.arrow({
+        width: width,
+        legWidth: 0,
+        height: height,
+        legHeight: 0,
+        color: this.color,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0),
+        tip: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        rotation: r
+      }); // const a = this.shapes.arrowLegacy(
+      //   width, 0, height, 0,
+      //   this.color, new Transform().translate(this.vertexSpaceStart.x, 0), new Point(0, 0), r,
+      // );
+      // $FlowFixMe
 
       this["arrow".concat(index)] = {
         height: height
@@ -15345,34 +15375,49 @@ function () {
       }
 
       return element;
-    }
-  }, {
-    key: "arrowLegacy",
-    value: function arrowLegacy() {
-      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var legWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
-      var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var legHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.5;
-      var color = arguments.length > 4 ? arguments[4] : undefined;
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var tip = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var rotation = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
-    }
-  }, {
-    key: "textLegacy",
-    value: function textLegacy(textInput, location, color) {
-      var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
+    } // arrowLegacy(
+    //   width: number = 1,
+    //   legWidth: number = 0.5,
+    //   height: number = 1,
+    //   legHeight: number = 0.5,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    //   tip: Point = new Point(0, 0),
+    //   rotation: number = 0,
+    // ) {
+    //   return Arrow(
+    //     this.webgl, width, legWidth, height, legHeight,
+    //     tip, rotation, color, transform, this.limits,
+    //   );
+    // }
+    // textLegacy(
+    //   textInput: string,
+    //   location: Point,
+    //   color: Array<number>,
+    //   fontInput: DiagramFont | null = null,
+    // ) {
+    //   let font = new DiagramFont(
+    //     'Times New Roman',
+    //     'italic',
+    //     0.2,
+    //     '200',
+    //     'center',
+    //     'middle',
+    //     color,
+    //   );
+    //   if (fontInput !== null) {
+    //     font = fontInput;
+    //   }
+    //   const dT = new DiagramText(new Point(0, 0), textInput, font);
+    //   const to = new TextObject(this.draw2D, [dT]);
+    //   return new DiagramElementPrimative(
+    //     to,
+    //     new Transform().scale(1, 1).translate(location.x, location.y),
+    //     color,
+    //     this.limits,
+    //   );
+    // }
 
-      if (fontInput !== null) {
-        font = fontInput;
-      }
-
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
-      return new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), color, this.limits);
-    }
   }, {
     key: "htmlElement",
     value: function htmlElement(elementToAdd) {
@@ -15590,10 +15635,43 @@ function () {
     }
   }, {
     key: "dashedLine",
-    value: function dashedLine(start, length, width, rotation, dashStyle, color) {
-      var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, start, length, width, rotation, dashStyle, color, transform, this.limits);
-    }
+    value: function dashedLine() {
+      var defaultOptions = {
+        start: [0, 0],
+        length: 1,
+        width: 0.01,
+        rotation: 0,
+        dashStyle: [0.1, 0.1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('dashedLine').scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+    } // dashedLine(
+    //   start: Point,
+    //   length: number,
+    //   width: number,
+    //   rotation: number,
+    //   dashStyle: Array<number>,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return DashedLine(
+    //     this.webgl, start, length, width,
+    //     rotation, dashStyle, color, transform, this.limits,
+    //   );
+    // }
+
   }, {
     key: "rectangle",
     value: function rectangle() {
@@ -15612,17 +15690,11 @@ function () {
         position: null
       };
 
-      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
-        optionsIn[_key9] = arguments[_key9];
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
       }
 
-      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn)); // const defultCornerOptions = {
-      //   radius: options.width / 10,
-      //   sides: 10,
-      // };
-      // if (options.corner != null) {
-      //   options.corner = joinObjects({}, defultCornerOptions, options.corner);
-      // }
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
 
       if (options.position != null) {
         options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
@@ -15633,21 +15705,7 @@ function () {
       }
 
       return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
-    } // rectangleFilled(
-    //   topLeft: TypeRectangleFilledReference,
-    //   width: number,
-    //   height: number,
-    //   cornerRadius: number,
-    //   cornerSides: number,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return RectangleFilled(
-    //     this.webgl, topLeft, width, height,
-    //     cornerRadius, cornerSides, color, transform, this.limits,
-    //   );
-    // }
-
+    }
   }, {
     key: "radialLines",
     value: function radialLines() {
@@ -15660,8 +15718,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
       };
 
-      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
-        optionsIn[_key10] = arguments[_key10];
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15684,8 +15742,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
       };
 
-      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
-        optionsIn[_key11] = arguments[_key11];
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15727,20 +15785,7 @@ function () {
       }
 
       return copy;
-    } // radialLinesLegacy(
-    //   innerRadius: number = 0,
-    //   outerRadius: number = 1,
-    //   width: number = 0.05,
-    //   dAngle: number = Math.PI / 4,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return RadialLines(
-    //     this.webgl, innerRadius, outerRadius, width,
-    //     dAngle, color, transform, this.limits,
-    //   );
-    // }
-
+    }
   }, {
     key: "collection",
     value: function collection() {
@@ -15752,8 +15797,8 @@ function () {
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len12 = arguments.length, moreOptions = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
-          moreOptions[_key12 - 1] = arguments[_key12];
+        for (var _len13 = arguments.length, moreOptions = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+          moreOptions[_key13 - 1] = arguments[_key13];
         }
 
         var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
@@ -15858,8 +15903,8 @@ function () {
         lineWidth: 0.01
       };
 
-      for (var _len13 = arguments.length, optionsIn = new Array(_len13), _key13 = 0; _key13 < _len13; _key13++) {
-        optionsIn[_key13] = arguments[_key13];
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
@@ -15973,127 +16018,7 @@ function () {
       xy.add('y', yAxis);
       xy.add('x', xAxis);
       return xy;
-    } // axesLegacy(
-    //   width: number = 1,
-    //   height: number = 1,
-    //   limits: Rect = new Rect(-1, -1, 2, 2),
-    //   yAxisLocation: number = 0,
-    //   xAxisLocation: number = 0,
-    //   stepX: number = 0.1,
-    //   stepY: number = 0.1,
-    //   fontSize: number = 0.13,
-    //   showGrid: boolean = true,
-    //   color: Array<number> = [1, 1, 1, 0],
-    //   gridColor: Array<number> = [1, 1, 1, 0],
-    //   location: Transform | Point = new Transform(),
-    //   decimalPlaces: number = 1,
-    // ) {
-    //   const lineWidth = 0.01;
-    //   const xProps = new AxisProperties('x', 0);
-    //   xProps.minorTicks.mode = 'off';
-    //   xProps.minorGrid.mode = 'off';
-    //   xProps.majorGrid.mode = 'off';
-    //   xProps.length = width;
-    //   xProps.width = lineWidth;
-    //   xProps.limits = { min: limits.left, max: limits.right };
-    //   xProps.color = color.slice();
-    //   xProps.title = '';
-    //   xProps.majorTicks.start = limits.left;
-    //   xProps.majorTicks.step = stepX;
-    //   xProps.majorTicks.length = lineWidth * 5;
-    //   xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
-    //   xProps.majorTicks.width = lineWidth * 2;
-    //   xProps.majorTicks.labelMode = 'off';
-    //   xProps.majorTicks.labels = tools.range(
-    //     xProps.limits.min,
-    //     xProps.limits.max,
-    //     stepX,
-    //   ).map(v => v.toFixed(decimalPlaces)).map((v) => {
-    //     if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
-    //       return `${v}     `;
-    //     }
-    //     return v;
-    //   });
-    //   // xProps.majorTicks.labels[xProps.majorTicks.labels / 2] = '   0';
-    //   xProps.majorTicks.labelOffset = new Point(
-    //     0,
-    //     xProps.majorTicks.offset - fontSize * 0.1,
-    //   );
-    //   xProps.majorTicks.labelsHAlign = 'center';
-    //   xProps.majorTicks.labelsVAlign = 'top';
-    //   xProps.majorTicks.fontColor = color.slice();
-    //   xProps.majorTicks.fontSize = fontSize;
-    //   xProps.majorTicks.fontWeight = '400';
-    //   const xAxis = new Axis(
-    //     this.webgl, this.draw2D, xProps,
-    //     new Transform().scale(1, 1).rotate(0)
-    //       .translate(0, xAxisLocation - limits.bottom * height / 2),
-    //     this.limits,
-    //   );
-    //   const yProps = new AxisProperties('x', 0);
-    //   yProps.minorTicks.mode = 'off';
-    //   yProps.minorGrid.mode = 'off';
-    //   yProps.majorGrid.mode = 'off';
-    //   yProps.length = height;
-    //   yProps.width = xProps.width;
-    //   yProps.limits = { min: limits.bottom, max: limits.top };
-    //   yProps.color = xProps.color;
-    //   yProps.title = '';
-    //   yProps.rotation = Math.PI / 2;
-    //   yProps.majorTicks.step = stepY;
-    //   yProps.majorTicks.start = limits.bottom;
-    //   yProps.majorTicks.length = xProps.majorTicks.length;
-    //   yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
-    //   yProps.majorTicks.width = xProps.majorTicks.width;
-    //   yProps.majorTicks.labelMode = 'off';
-    //   yProps.majorTicks.labels = tools.range(
-    //     yProps.limits.min,
-    //     yProps.limits.max,
-    //     stepY,
-    //   ).map(v => v.toFixed(decimalPlaces)).map((v) => {
-    //     if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
-    //       return '';
-    //     }
-    //     return v;
-    //   });
-    //   // yProps.majorTicks.labels[3] = '';
-    //   yProps.majorTicks.labelOffset = new Point(
-    //     yProps.majorTicks.offset - fontSize * 0.2,
-    //     0,
-    //   );
-    //   yProps.majorTicks.labelsHAlign = 'right';
-    //   yProps.majorTicks.labelsVAlign = 'middle';
-    //   yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
-    //   yProps.majorTicks.fontSize = fontSize;
-    //   yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
-    //   const yAxis = new Axis(
-    //     this.webgl, this.draw2D, yProps,
-    //     new Transform().scale(1, 1).rotate(0)
-    //       .translate(yAxisLocation - limits.left * width / 2, 0),
-    //     this.limits,
-    //   );
-    //   let transform = new Transform();
-    //   if (location instanceof Point) {
-    //     transform = transform.translate(location.x, location.y);
-    //   } else {
-    //     transform = location._dup();
-    //   }
-    //   const xy = this.collection(transform);
-    //   if (showGrid) {
-    //     const gridLines = this.grid(
-    //       new Rect(0, 0, width, height),
-    //       tools.roundNum(stepX * width / limits.width, 8),
-    //       tools.roundNum(stepY * height / limits.height, 8),
-    //       1,
-    //       gridColor, new Transform().scale(1, 1).rotate(0).translate(0, 0),
-    //     );
-    //     xy.add('grid', gridLines);
-    //   }
-    //   xy.add('y', yAxis);
-    //   xy.add('x', xAxis);
-    //   return xy;
-    // }
-
+    }
   }]);
 
   return DiagramPrimatives;

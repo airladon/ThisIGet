@@ -269,25 +269,7 @@ class Content extends PresentationLessonContent {
         multiple_lines: click(diag.pulseDoubleAngles, [diag], colors.angles),
       },
       show: [equalAnglesExample],
-      // setSteadyState: () => {
-      //   diag.toggleAngle(0);
-      // },
     });
-
-    // this.addSection({
-    //   setContent: centerV([
-    //     'The common name we use for |corner sharpness| is |angle|.',
-    //     'The word comes from the |Latin| word for |corner|, which is |angulus|.',
-    //   ]),
-    // });
-
-    // this.addSection(common, {
-    //   title: '',
-    //   setContent: centerV([
-    //     '',
-    //   ]),
-    //   show: [shapes, angle],
-    // });
   }
 }
 
