@@ -14,14 +14,14 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   // style,
-  // click,
+  click,
   // clickW,
   // highlight,
   centerV,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -41,42 +41,34 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const coll = diag._collection;
+    const shortestExample = coll._shortestExample;
+    const longestExample = coll._longestExample;
+    const fig = coll._fig;
 
-    const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+    this.addSection({
+      title: 'Introduction',
+      setContent: [
+        'There are some triangles where the |longest| side’s opposite angle is the |largest|, and the |shortest| side’s opposite angle is the |smallest|.',
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
-
-    this.addSection(common, {
-      title: '',
-      setContent: centerV([
-        '',
-      ]),
-      show: [coll],
-      setSteadyState: () => {
-        coll.setScenarios('default');
-        coll._0.showForm('sides0');
-        coll._1.showForm('sides1');
-        coll._2.showForm('sides2');
-        coll._3.showForm('sides3');
-        coll._4.showForm('sides4');
-        coll._fig.setScenarios('left');
+      modifiers: {
+        shortest: click(coll.pulseShortestSide, [coll], colors.sides),
+        smallest: click(coll.pulseSmallestAngle, [coll], colors.angles),
+        longest: click(coll.pulseLongestSide, [coll], colors.sides),
+        largest: click(coll.pulseLargestAngle, [coll], colors.angles),
       },
+      show: [shortestExample, longestExample],
+      setEnterState: () => {
+        coll.setScenarios('default');
+      },
+      // setSteadyState: () => {
+      //   coll.setScenarios('default');
+      //   coll._0.showForm('sides0');
+      //   coll._1.showForm('sides1');
+      //   coll._2.showForm('sides2');
+      //   coll._3.showForm('sides3');
+      //   coll._4.showForm('sides4');
+      //   coll._fig.setScenarios('left');
+      // },
     });
   }
 }

@@ -45,6 +45,7 @@ export default function lessonLayout() {
     curve: {
       radius,
       width: 0.015,
+      sides: 200,
     },
     label: {
       text,
@@ -234,13 +235,65 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [0.5, y] },
       },
-      // isInteractive: false,
-      // isTouchable: false,
-      // hasTouchableElements: false,
     },
   });
 
+
+  const longestSideExample = {
+    name: 'longestExample',
+    method: 'polyLine',
+    options: {
+      width: width * 0.7,
+      close: true,
+      color: colors.sides,
+      angle: [
+        angle('', 0),
+        angle('a', 0.2),
+        angle('', 0),
+      ],
+      side: [
+        side(''),
+        side(''),
+        side('A'),
+      ],
+      points: [[-2, -0.25], [0, 0.25], [2, -0.25]],
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, 0.4] },
+      },
+    },
+  };
+
+  const shortestSideExample = {
+    name: 'shortestExample',
+    method: 'polyLine',
+    options: {
+      width: width * 0.7,
+      close: true,
+      color: colors.sides,
+      angle: [
+        angle('', 0),
+        angle('', 0),
+        angle('a', 0.5),
+      ],
+      side: [
+        side('A'),
+        side(''),
+        side(''),
+      ],
+      points: [[-2, -0.5], [-2, 0.5], [2, 0]],
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, -1] },
+      },
+    },
+  };
+
   layout.addElements = [
+    longestSideExample,
+    shortestSideExample,
     fig,
     nav('0', 0.5),
     nav('1', 0),
