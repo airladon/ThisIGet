@@ -70,7 +70,10 @@ class Content extends PresentationLessonContent {
       show: [coll],
       setSteadyState: () => {
         coll.setScenarios('default');
-      }
+        coll._0Nav.showForm('sides4');
+        coll._0Nav.setPosition(1, 0);
+        coll._0Eqn.setPosition(2, 0);
+      },
     });
   }
 }

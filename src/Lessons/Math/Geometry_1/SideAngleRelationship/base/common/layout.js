@@ -16,6 +16,7 @@ const cssColorNames = [
   'equalSide',
   'isosceles',
   'fill',
+  'description',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -88,18 +89,6 @@ export default function lessonLayout() {
     },
   };
 
-  // const isoscelesEqualSide = {
-  //   name: 'isoscelesEqualSide',
-  //   method: 'line',
-  //   options: {
-  //     color: colors.equalSide,
-  //     position: triPoints[1],
-  //     angle: rightLine.angle(),
-  //     length: leftLine.distance,
-  //     width,
-  //   },
-  // };
-
   const isosceles = {
     name: 'isosceles',
     method: 'polyLine',
@@ -169,8 +158,62 @@ export default function lessonLayout() {
     ],
   };
 
+  const elements = {
+    A: { color: colors.sides },
+    B: { color: colors.sides },
+    m: { color: colors.angles },
+    n: { color: colors.angles },
+    o: { color: colors.angles },
+    a: { color: colors.angles },
+    b: { color: colors.angles },
+    equals: '  =  ',
+    _equals: '  =  ',
+    plus: ' + ',
+    greater: ' > ',
+    less: ' < ',
+  };
+
+  const eqn = name => ({
+    // name: 'eqn',
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'center',
+      },
+      scale: 0.9,
+      elements,
+      forms: {
+        'sides0': {
+          content: ['B', 'greater', 'A'],
+          description: 'Start with:',
+        },
+        'sides1': {
+          content: ['n', 'equals', 'o', 'plus', 'a'],
+          description: 'n is an exterior angle',
+        },
+        'sides2': {
+          content: ['m', '_equals', 'n', 'equals', 'o', 'plus', 'a'],
+          description: 'm and n are equal angles in the isosceles triangle:',
+        },
+        'sides3': {
+          content: ['m', 'greater', 'a'],
+          description: 'm is the sum of a and o, and therefore must be greater than a:',
+        },
+        'sides4': {
+          content: ['b', 'greater', 'a'],
+          description: 'b is the sum of |m| and |o| and therefore must be greater than a:',
+        },
+      },
+    },
+  });
+
   layout.addElements = [
     fig,
+    eqn('0'),
   ];
   return layout;
 }

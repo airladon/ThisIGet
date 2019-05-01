@@ -6,6 +6,7 @@ $colors: (
   isosceles:              color('red'),
   equalSide:              color('blue', darker),
   fill:                   color('blue', darkest),
+  description:            color('grey', base),
 );
 
 body {
@@ -15,3 +16,10 @@ body {
 // .diagram__text {
 //   z-index: 0;
 // }
+
+.lesson__eqn_nav__description {
+  font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  color: map-get($colors, 'description');
+  text-align: left;
+  width: 8em;
+}
