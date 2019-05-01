@@ -30,7 +30,7 @@ export default function lessonLayout() {
     label: {
       text,
       radius: 0.43,
-      scale: 1,
+      scale: 0.9,
     },
     curve: {
       radius: 0.4,
@@ -90,7 +90,7 @@ export default function lessonLayout() {
       label: {
         text: 'e',
         radius: 0.4,
-        scale: 1,
+        scale: 0.9,
       },
       curve: {
         radius: 0.4,

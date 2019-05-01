@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -11,16 +11,16 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import DiagramCollection from './diagramCollection';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
+const {
 //   style,
-//   click,
+  click,
 //   clickW,
 //   highlight,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -35,31 +35,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
 
     this.addSection({
-      title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'The |external_angle|, or |exterior_angle| of a triangle is the angle between a |side| and its adjacent side |extended_outwards|, and is |equal| to the |sum_of_the_opposite_angles|.',
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      modifiers: {
+        external_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
+        exterior_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
+        sum_of_the_opposite_angles: click(coll.pulseOppositeAngles, [coll, null], colors.angles),
+        side: click(coll.pulseAdjacent, [coll], colors.sides),
+        extended_outwards: click(coll.pulseExternalLine, [coll], colors.externalSide),
+      },
+      show: [
+        fig._tri._line, fig._tri._angle0, fig._tri._angle1,
+        fig._externalLine, fig._externalAngle,
+        fig._adjacent,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setEnterState: () => {
+        fig.setScenario('default');
+        fig._externalAngle.label.setText('a + b');
+        fig._externalAngle.updateLabel();
+      },
     });
   }
 }
