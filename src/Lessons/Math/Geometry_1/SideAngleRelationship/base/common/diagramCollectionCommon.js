@@ -20,6 +20,7 @@ type TypeFullPolyLine = {
   _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
   _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
   _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
+  _line: DiagramElementPrimative;
 } & DiagramObjectPolyLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
@@ -155,8 +156,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._3Eqn.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
-  // pulseSideB() {
-  //   this._fig._tri._side12._label.pulseScaleNow(1, 2.5);
-  //   this.diagram.animateNextFrame();
-  // }
+
+  pulseLargestSideAngle() {
+    this.pulseAngleB();
+    this.pulseSideB();
+  }
+
+  pulseSmallestSideAngle() {
+    this.pulseAngleA();
+    this.pulseSideA();
+  }
 }

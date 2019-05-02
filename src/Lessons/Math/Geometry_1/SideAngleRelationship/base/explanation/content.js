@@ -371,7 +371,7 @@ class Content extends PresentationLessonContent {
       title: 'Angle to Side Relationship',
       setContent: style({ centerV: true }, [
         'Does the relationship hold in the |other| direction?',
-        'If you have two angles that are different, will the two side lengths also be different and will the longer side be opposite the larger angle?',
+        'If you have |two angles| that are |different|, will the two side lengths also be different and will the longer side be opposite the larger angle?',
       ]),
     });
 
@@ -526,8 +526,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'In other words, a triangle\'s longest side and largest angle will always be opposite each other.',
-        'A triangle\'s shortest side and smallest angle will always be opposite each other',
+        'In other words, a triangle\'s |longest side| and |largest angle| will always be |opposite| each other.',
+        'A triangle\'s |shortest side| and |smallest angle| will always be |opposite| each other.',
       ]),
     });
   }

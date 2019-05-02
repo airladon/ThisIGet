@@ -8,11 +8,11 @@ import version from '../version';
 import CommonCollection from '../common/diagramCollectionCommon';
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
+const {
+  click,
 //   highlight,
 //   clickWord,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 export default class QRBoilerplate extends PopupBoxCollection {
   _collection: CommonCollection;
@@ -31,20 +31,32 @@ export default class QRBoilerplate extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {};
-    this.setTitle('');
-    this.setDescription(`
-      <p>
-      </p>
-    `, modifiers);
+    const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      Angles_opposite_longer_sides: click(coll.pulseLargestSideAngle, [coll], colors.angles),
+      angles_opposite_shorter_sides: click(coll.pulseSmallestSideAngle, [coll], colors.angles),
+      sides_opposite_larger_angles: click(coll.pulseLargestSideAngle, [coll], colors.sides),
+      sides_opposite_smaller_angles: click(coll.pulseSmallestSideAngle, [coll], colors.sides),
+    };
+    this.setTitle('Triangle Angle Side Relationships');
+    this.setDescription([
+      '|Angles_opposite_longer_sides| will always be |larger| than |angles_opposite_shorter_sides| in the same triangle. Similarly, |sides_opposite_larger_angles| will always be |longer| than |sides_opposite_smaller_angles| in the same triangle.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.55, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    collection.show();
+    const fig = collection._fig;
+    fig.show([
+      fig._tri._line,
+      fig._tri._angle0, fig._tri._angle2,
+      fig._tri._side01, fig._tri._side12,
+    ]);
+    fig.setScenarios('qr');
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }

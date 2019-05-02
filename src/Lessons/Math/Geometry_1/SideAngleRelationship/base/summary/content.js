@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -9,18 +9,14 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   style,
-//   click,
-//   clickW,
-//   highlight,
-//   centerV,
-// } = Fig.tools.html;
+const {
+  click,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -35,31 +31,29 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
 
     this.addSection({
-      title: '',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        '|Angles_opposite_longer_sides| will always be |larger| than |angles_opposite_shorter_sides| in the same triangle.',
+        'Similarly, |sides_opposite_larger_angles| will always be |longer| than |sides_opposite_smaller_angles| in the same triangle.',
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      modifiers: {
+        Angles_opposite_longer_sides: click(coll.pulseLargestSideAngle, [coll], colors.angles),
+        angles_opposite_shorter_sides: click(coll.pulseSmallestSideAngle, [coll], colors.angles),
+        sides_opposite_larger_angles: click(coll.pulseLargestSideAngle, [coll], colors.sides),
+        sides_opposite_smaller_angles: click(coll.pulseSmallestSideAngle, [coll], colors.sides),
+      },
+      setEnterState: () => {
+        coll.setScenarios('summary');
+      },
+      show: [
+        fig._tri._line,
+        fig._tri._angle0, fig._tri._angle2,
+        fig._tri._side01, fig._tri._side12,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
     });
   }
 }

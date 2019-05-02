@@ -161,6 +161,8 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [0.7, 0], scale: 1 },
         left: { position: [-1.1, 0], scale: 0.8 },
+        summary: { position: [0.7, -0.5], scale: 1 },
+        qr: { position: [0.7, 0], scale: 1.3 },
       },
     },
   };
