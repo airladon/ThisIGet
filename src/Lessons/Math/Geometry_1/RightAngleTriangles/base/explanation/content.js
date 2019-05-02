@@ -74,7 +74,7 @@ class Content extends PresentationLessonContent {
         fig.setScenarios('left');
         coll.updatePythagorusSquareLabels();
         coll._0.showForm('0');
-        coll._1.showForm('1');
+        coll._1.showForm('0a');
         coll._2.showForm('2');
         coll._3.showForm('3');
       },

@@ -15,6 +15,7 @@ const cssColorNames = [
   'sides',
   'angles',
   'rightAngle',
+  'description',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -278,6 +279,15 @@ export default function lessonLayout() {
     _4: '4',
     mul: ' \u00D7 ',
     v: { symbol: 'vinculum' },
+    'brace': {
+      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
+    },
+    '_brace': {
+      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
+    },
+    '__brace': {
+      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
+    },
   };
 
   const top = (content, commentText, symbol) => ({
@@ -285,6 +295,7 @@ export default function lessonLayout() {
       content,
       comment: commentText,
       symbol,
+      includeInSize: false,
     },
   });
   const AreaTri = {
@@ -325,6 +336,20 @@ export default function lessonLayout() {
           ],
           description: 'Area of a large square:',
         },
+        '0a': {
+          content: [
+            top(
+              AreaLSquare,
+              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              'brace',
+            ),
+            'equals', '_4', 'mul',
+            top(AreaTri, [half, '_A', '_B'], '_brace'),
+            '__plus',
+            top(AreaSSquare, sup('C', '_2b'), '__brace'),
+          ],
+          description: 'Substitute in areas:',
+        },
         '1': {
           content: [
             { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
@@ -352,6 +377,9 @@ export default function lessonLayout() {
           description: 'Subtract 2AB from both sides:',
         },
       },
+      formSeries: {
+        '1': ['0', '0a', '1'],
+      },
     },
     mods: {
       scenarios: {
@@ -366,7 +394,7 @@ export default function lessonLayout() {
     options: {
       navType: 'description',
       equation: eqn(`${name}Eqn`, y),
-      interactive: false,
+      // interactive: false,
     },
     mods: {
       scenarios: {
