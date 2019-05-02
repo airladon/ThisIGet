@@ -14975,10 +14975,16 @@ function (_DiagramElementCollec) {
           var _name2 = "side".concat(_i3).concat(j);
 
           if (this.elements[_name2] != null) {
+            var wasHidden = !this.elements[_name2].isShown;
+
             if (this.reverse) {
               this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i3]);
             } else {
               this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+            }
+
+            if (wasHidden) {
+              this.elements[_name2].hide();
             }
           }
         }
@@ -15013,7 +15019,7 @@ function (_DiagramElementCollec) {
           var _name3 = "angle".concat(_i4);
 
           if (this.elements[_name3] != null) {
-            var wasHidden = !this.elements[_name3].isShown;
+            var _wasHidden = !this.elements[_name3].isShown;
 
             if (this.reverse) {
               var newJ = k;
@@ -15027,7 +15033,7 @@ function (_DiagramElementCollec) {
               p3: newPoints[_j2]
             });
 
-            if (wasHidden) {
+            if (_wasHidden) {
               this.elements[_name3].hide();
             }
           }

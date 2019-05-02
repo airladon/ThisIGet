@@ -85,8 +85,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       const points = [];
       pads.forEach((pad) => {
         const quadrant = removeRandElement(quadrants);
-        let x = rand(0.5, 1);
-        let y = rand(0.5, 1);
+        let x = rand(0.7, 1.6);
+        let y = rand(0.5, 1.1);
         if (quadrant === 2 || quadrant === 3) {
           x *= -1;
         }
@@ -149,6 +149,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const property = removeRandElement(knownPropertyPossibilities);
     const size = randElement(unknownSizePossibilities);
 
+    let sizeText = size;
+    if (size === 'middle') {
+      sizeText = 'neither biggest or smallest';
+    }
+    this._question.drawingObject.setText(
+      `Select the ${knownPropertyPossibilities[0]} that is ${sizeText}:`,
+    );
     if (property === 'angle') {
       this.triangle._angle0.setLabelToRealAngle();
       this.triangle._angle1.setLabelToRealAngle();
@@ -156,7 +163,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this.triangle._side01.setLabel('x');
       this.triangle._side12.setLabel('y');
       this.triangle._side20.setLabel('z');
-      this._question.drawingObject.setText(`Select the ${size} ${knownPropertyPossibilities[0]}:`);
     } else {
       this.triangle._side01.setLabelToRealLength();
       this.triangle._side12.setLabelToRealLength();
@@ -164,16 +170,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this.triangle._angle0.setLabel('y');
       this.triangle._angle1.setLabel('z');
       this.triangle._angle2.setLabel('x');
-      this._question.drawingObject.setText(`Select the ${size} ${knownPropertyPossibilities[0]}:`);
     }
 
     this.answer = this.triState[size];
   }
 
-  // showAnswer() {
-  //   super.showAnswer();
-  //   this.diagram.animateNextFrame();
-  // }
 
   showAnswer() {
     super.showAnswer();
@@ -184,7 +185,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     } else {
       this.selectMultipleChoice('side_angle_relationship_choice', 2);
     }
-    // this._answerBox.disable();
     this.diagram.animateNextFrame();
   }
 
