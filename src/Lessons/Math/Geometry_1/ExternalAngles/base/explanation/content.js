@@ -71,7 +71,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         inernal_angles: click(coll.pulseInternalAngles, [coll], colors.angles),
-        external_angle: click(coll.pulseExternalAngle, [coll], colors.externalAngle),
+        external_angle: click(coll.pulseExternalAngle, [coll, null], colors.externalAngle),
       },
       show: [
         fig._tri._line, fig._externalAngle._curve, fig._externalLine,
@@ -118,7 +118,7 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'As a triangle\'s |internal_angles| add to 180º, put |c| in terms of |a| and |b|.',
+        'As a triangle\'s |internal_angles| add to 180º, we can put |c| in terms of |a| and |b|.',
       ],
       modifiers: {
         internal_angles: this.bindShowQR('triangle_introduction/base', 'Main'),
@@ -186,7 +186,7 @@ class Content extends PresentationLessonContent {
         fig._externalAngle.updateLabel();
       },
       transitionFromPrev: (done) => {
-        coll.pulseAngleC(done);
+        coll.pulseExternalAngle(done);
       },
     });
 

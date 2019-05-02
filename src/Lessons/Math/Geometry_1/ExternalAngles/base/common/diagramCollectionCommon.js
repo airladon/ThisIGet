@@ -66,7 +66,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseAngleC(done: ?() => void = null) {
-    this._fig._externalAngle.pulseScaleNow(1, 1.5, 0, done);
+    this._fig._tri._angle2.pulseScaleNow(1, 1.5, 0, done);
     this.diagram.animateNextFrame();
   }
 }
