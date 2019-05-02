@@ -6491,7 +6491,11 @@ function (_DiagramElementCollec) {
       } else {
         _this.eqn.formSeries = optionsToUse.formSeries;
 
-        _this.setFormSeries(Object.keys(_this.eqn.formSeries)[0]);
+        if (optionsToUse.defaultFormSeries != null) {
+          _this.setFormSeries(optionsToUse.defaultFormSeries);
+        } else {
+          _this.setFormSeries(Object.keys(_this.eqn.formSeries)[0]);
+        }
       }
     }
 

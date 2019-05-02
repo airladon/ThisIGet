@@ -261,6 +261,12 @@ export default function lessonLayout() {
     _B: { text: 'B', color: colors.sides },
     __A: { text: 'A', color: colors.sides },
     __B: { text: 'B', color: colors.sides },
+    ___A: { text: 'A', color: colors.sides },
+    ___B: { text: 'B', color: colors.sides },
+    _AB: { text: 'AB', color: colors.sides },
+    AB: { text: 'AB', color: colors.sides },
+    m2AB: { text: '-2AB', color: colors.description },
+    _m2AB: { text: '-2AB', color: colors.description },
     C: { text: 'C', color: colors.sides },
     equals: '  =  ',
     plus: ' + ',
@@ -282,12 +288,8 @@ export default function lessonLayout() {
     'brace': {
       symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
     },
-    '_brace': {
-      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
-    },
-    '__brace': {
-      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
-    },
+    'x': { symbol: 'xStrike', color: colors.description },
+    '_x': { symbol: 'xStrike', color: colors.description },
   };
 
   const top = (content, commentText, symbol) => ({
@@ -316,7 +318,22 @@ export default function lessonLayout() {
   const half = { frac: ['_1', '_2g', 'v', 0.7] };
   const sup = (content, s) => ({ sup: [content, ['  ', s]] });
 
-  const eqn = (name, y) => ({
+  const ann = (content, annotation) => ({
+    annotate: {
+      content,
+      withAnnotations: {
+        annotation: {
+          annotation,
+          relativeToContent: ['center', 1.4],
+          relativeToAnnotation: ['center', 'bottom'],
+          scale: 0.5,
+        },
+      },
+      includeAnnotationInSize: false,
+    },
+  });
+
+  const eqn = (name, y, defaultFormSeries) => ({
     // name: 'eqn',
     name,
     method: 'addNavigator',
@@ -325,7 +342,7 @@ export default function lessonLayout() {
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         alignH: 'center',
-        alignV: 'middle',
+        alignV: 'baseline',
       },
       scale: 0.9,
       elements,
@@ -344,12 +361,57 @@ export default function lessonLayout() {
               'brace',
             ),
             'equals', '_4', 'mul',
+            AreaTri,
+            '__plus',
+            AreaSSquare,
+          ],
+          description: 'Large square side is A+B, and area is square of side:',
+        },
+        '0b': {
+          content: [
+            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            'equals', '_4', 'mul',
+            AreaTri,
+            '__plus',
+            AreaSSquare,
+          ],
+          description: 'Large square side is A+B, and area is square of side:',
+        },
+        '0c': {
+          content: [
+            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            'equals', '_4', 'mul',
             top(AreaTri, [half, '_A', '_B'], '_brace'),
+            '__plus',
+            AreaSSquare,
+          ],
+          description: 'Right triangle area is half of product of two sides adjacent to right angle:',
+        },
+        '0d': {
+          content: [
+            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            'equals', '_4', 'mul',
+            half, '_A', '_B',
+            '__plus',
+            AreaSSquare,
+          ],
+          description: 'Right triangle area is half of product of two sides adjacent to right angle:',
+        },
+        '0e': {
+          content: [
+            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            'equals', '_4', 'mul',
+            half, '_A', '_B',
             '__plus',
             top(AreaSSquare, sup('C', '_2b'), '__brace'),
           ],
-          description: 'Substitute in areas:',
+          description: 'Side length of small square is C, and area is side squared:',
         },
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
         '1': {
           content: [
             { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
@@ -359,18 +421,77 @@ export default function lessonLayout() {
           ],
           description: 'Substitute in areas:',
         },
+        '1a': {
+          content: [
+            top(
+              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              [
+                sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
+                '_plus', sup('___B', '_2d'),
+              ],
+              'brace',
+            ),
+            'equals',
+            '_4', 'mul', half, '_A', '_B',
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Expand the left side',
+        },
+
+        '1b': {
+          content: [
+            sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
+            '_plus', sup('___B', '_2d'),
+            'equals',
+            '_4', 'mul', half, '_A', '_B',
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Expand the left side',
+        },
+
+        '1c': {
+          content: [
+            sup('___A', '_2c'), 'plus', '_2f', '__A', '__B',
+            '_plus', sup('___B', '_2d'),
+            'equals',
+            top(['_4', 'mul', half], '_2e', 'brace'),
+            '_A', '_B',
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Simplify the right side',
+        },
+
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////
         '2': {
           content: [
-            sup('A', '_2c'), 'plus', '_2f', '__A', '__B', '_plus', sup('B', '_2d'),
+            sup('___A', '_2c'), 'plus', '_2f', '__A', '__B', '_plus', sup('___B', '_2d'),
             'equals',
             '_2e', '_A', '_B',
             '__plus', sup('C', '_2b'),
           ],
           description: 'Expand left side, and simplify the right:',
         },
+
+        '2a': {
+          content: [
+            sup('___A', '_2c'), 'plus',
+            ann({ strike: [['_2f', '__A', '__B'], 'x'] }, 'm2AB'),
+            '_plus', sup('___B', '_2d'),
+            'equals',
+            ann({ strike: [['_2e', '_A', '_B'], '_x'] }, '_m2AB'),
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Expand left side, and simplify the right:',
+        },
+
+
         '3': {
           content: [
-            sup('A', '_2c'), 'plus', sup('B', '_2d'),
+            sup('___A', '_2c'), 'plus', sup('___B', '_2d'),
             'equals',
             sup('C', '_2b'),
           ],
@@ -378,8 +499,11 @@ export default function lessonLayout() {
         },
       },
       formSeries: {
-        '1': ['0', '0a', '1'],
+        '1': ['0', '0a', '0b', '0c', '0d', '0e', '1'],
+        '2': ['1', '1a', '1b', '1c', '2'],
+        '3': ['2', '2a', '3'],
       },
+      defaultFormSeries,
     },
     mods: {
       scenarios: {
@@ -388,13 +512,14 @@ export default function lessonLayout() {
     },
   });
 
-  const nav = (name, y) => ({
+  const nav = (name, y, interactive, defaultFormSeries = null) => ({
     name,
     method: 'addNavigator',
     options: {
       navType: 'description',
-      equation: eqn(`${name}Eqn`, y),
-      // interactive: false,
+      equation: eqn(`${name}Eqn`, y, defaultFormSeries),
+      interactive,
+      alignV: 'middle',
     },
     mods: {
       scenarios: {
@@ -405,10 +530,10 @@ export default function lessonLayout() {
 
   layout.addElements = [
     fig,
-    nav('0', 0.8),
-    nav('1', 0.1),
-    nav('2', -0.6),
-    nav('3', -1.3),
+    nav('0', 0.8, false),
+    nav('1', 0.1, true, '1'),
+    nav('2', -0.6, true, '2'),
+    nav('3', -1.3, true, '3'),
   ];
   return layout;
 }
