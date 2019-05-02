@@ -14,12 +14,15 @@ const {
   DiagramObjectAngle,
   DiagramObjectLine,
   EquationLabel,
+  Line,
+  Point,
 } = Fig;
 
 const {
   removeRandElement,
-//   round,
-  rand
+  randElement,
+  round,
+  rand,
 } = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
@@ -37,9 +40,9 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _pad0: DiagramElementPrimative;
     _pad1: DiagramElementPrimative;
     _pad2: DiagramElementPrimative;
-    _side01: DiagramObjectLine;
-    _side12: DiagramObjectLine;
-    _side20: DiagramObjectLine;
+    _side01: { label: EquationLabel } & DiagramObjectLine;
+    _side12: { label: EquationLabel } & DiagramObjectLine;
+    _side20: { label: EquationLabel } & DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   constructor(
@@ -51,59 +54,141 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       diagram,
       layout,
       'q1',
-      {},
+      {
+        notSelected: {
+          answer: 'Incorrect',
+          details: 'Make sure to select "Yes" or "No" above the "Check" button',
+        },
+      },
       transform,
     );
     // this.addQuestion();
     this.addCheck();
-    this.addInput('input', '?', 3, 0);
+    // this.addInput('input', '?', 3, 0);
+    this.addMultipleChoice('side_angle_relationship_choice', ['x', 'y', 'z']);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     // this.add('main', new CommonCollection(diagram, this.layout));
     this.triangle = this._fig._tri;
     this.hasTouchableElements = true;
+    this.state = {
+      biggest: '',
+      middle: '',
+      smallest: '',
+    };
   }
 
   randomTriangle() {
-    const quadrants = [1, 2, 3, 4];
-    const pads = [0, 1, 2];
-    pads.forEach((pad) => {
-      const quadrant = removeRandElement(quadrants);
-      let x = rand(0.5, 1);
-      let y = rand(0.5, 1);
-      if (quadrant === 2 || quadrant === 3) {
-        x *= -1;
+    let same = true;
+    while (same === true) {
+      const quadrants = [1, 2, 3, 4];
+      const pads = [0, 1, 2];
+      const points = [];
+      pads.forEach((pad) => {
+        const quadrant = removeRandElement(quadrants);
+        let x = rand(0.5, 1);
+        let y = rand(0.5, 1);
+        if (quadrant === 2 || quadrant === 3) {
+          x *= -1;
+        }
+        if (quadrant === 3 || quadrant === 4) {
+          y *= -1;
+        }
+        this._fig._tri[`_pad${pad}`].scenarios.next = {
+          position: [x, y],
+          rotation: 0,
+        };
+        points.push(new Point(x, y));
+      });
+      const line1 = round(new Line(points[0], points[1]).distance, 1);
+      const line2 = round(new Line(points[1], points[2]).distance, 1);
+      const line3 = round(new Line(points[2], points[0]).distance, 1);
+      if (line1 === line2 || line1 === line3 || line2 === line3) {
+        same = true;
+      } else {
+        same = false;
       }
-      if (quadrant === 3 || quadrant === 4) {
-        y *= -1;
-      }
-      this._fig._tri[`_pad${pad}`].scenarios.next = {
-        position: [x, y],
-        rotation: 0,
+      const lines = [
+        [line1, 'x'],
+        [line2, 'y'],
+        [line3, 'z'],
+      ];
+      lines.sort((a, b) => a[0] - b[0]);
+      this.state = {
+        biggest: lines[0][1],
+        middle: lines[1][1],
+        smallest: lines[2][1],
       };
-    });
+    }
   }
 
   setupNewProblem() {
     this.randomTriangle();
     this.triangle.hideAngles();
+    this.triangle.hideSides();
     this.transitionToNewProblem({ target: 'next', duration: 1 });
   }
 
-  // afterTransitionToNewProblem() {
-  //   super.afterTransitionToNewProblem();
-  // }
+  afterTransitionToNewProblem() {
+    super.afterTransitionToNewProblem();
+    const totalAngle = this.triangle._angle0.angle
+                       + this.triangle._angle1.angle
+                       + this.triangle._angle2.angle;
+
+    if (totalAngle > Math.PI * 2.01) {
+      this.triangle.reversePoints();
+    }
+
+    const knownPropertyPossibilities = ['angles', 'sides'];
+    const unknownSizePossibilities = ['biggest', 'smallest', 'middle'];
+
+    const property = randElement(knownPropertyPossibilities);
+    const size = randElement(unknownSizePossibilities);
+
+    if (property === 'angles') {
+      this.triangle._angle0.setLabelToRealAngle();
+      this.triangle._angle1.setLabelToRealAngle();
+      this.triangle._angle2.setLabelToRealAngle();
+      this.triangle._side01.setLabel('x');
+      this.triangle._side12.setLabel('y');
+      this.triangle._side20.setLabel('z');
+    } else {
+      this.triangle._side01.setLabelToRealLength();
+      this.triangle._side12.setLabelToRealLength();
+      this.triangle._side20.setLabelToRealLength();
+      this.triangle._angle0.setLabel('x');
+      this.triangle._angle1.setLabel('y');
+      this.triangle._angle2.setLabel('z');
+    }
+
+    this.answer = this.state[size];
+  }
 
   // showAnswer() {
   //   super.showAnswer();
   //   this.diagram.animateNextFrame();
   // }
 
+  showAnswer() {
+    super.showAnswer();
+    if (this.answer === 'x') {
+      this.selectMultipleChoice('side_angle_relationship_choice', 0);
+    } else if (this.answer === 'y') {
+      this.selectMultipleChoice('side_angle_relationship_choice', 1);
+    } else {
+      this.selectMultipleChoice('side_angle_relationship_choice', 2);
+    }
+    // this._answerBox.disable();
+    this.diagram.animateNextFrame();
+  }
+
   findAnswer() {
-    // this._input.disable();
-    // if (this._input.getValue() === this.answer.toString()) {
-    //   return 'correct';
-    // }
-    if (this.answer === true) {
+    const selection = this.getMultipleChoiceSelection('side_angle_relationship_choice');
+    if (selection === -1) {
+      return 'notSelected';
+    }
+    if ((selection === 0 && this.answer === 'x')
+      || (selection === 1 && this.answer === 'y')
+      || (selection === 2 && this.answer === 'z')) {
       return 'correct';
     }
     return 'incorrect';

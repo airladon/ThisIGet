@@ -12657,6 +12657,29 @@ function (_DiagramElementCollec) {
       }
     }
   }, {
+    key: "setLabel",
+    value: function setLabel(text) {
+      var label = this.label;
+
+      if (label != null) {
+        label.setText(text);
+        label.showRealAngle = false;
+      }
+
+      this.updateLabel();
+    }
+  }, {
+    key: "setLabelToRealAngle",
+    value: function setLabelToRealAngle() {
+      var label = this.label;
+
+      if (label != null) {
+        label.showRealAngle = true;
+      }
+
+      this.updateLabel();
+    }
+  }, {
     key: "updateLabel",
     value: function updateLabel() {
       var _label = this._label,
@@ -13009,7 +13032,6 @@ function makeType3Line(prevMethod, refreshMethod, nextMethod, options) {
   prevDescription.classList.add('lesson__eqn_nav__3line__prevRow__description');
   description.classList.add('lesson__eqn_nav__3line__currentRow__description');
   description.classList.add('lesson__eqn_nav__description');
-  description.classList.add('lesson__eqn_nav__description_override');
   nextDescription.classList.add('lesson__eqn_nav__3line__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
@@ -13058,7 +13080,6 @@ function makeTypeDescriptionOnly(nextMethod) {
   currentGroup.classList.add('lesson__eqn_nav__description_only__currentRow');
   description.classList.add('lesson__eqn_nav__description_only__currentRow__description');
   description.classList.add('lesson__eqn_nav__description');
-  description.classList.add('lesson__eqn_nav__description_override');
   currentGroup.onclick = nextMethod;
   return {
     table: table,
@@ -13085,7 +13106,6 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
   next.classList.add('lesson__eqn_nav__1line__next__button');
   description.classList.add('lesson__eqn_nav__1line__currentRow__description');
   description.classList.add('lesson__eqn_nav__description');
-  description.classList.add('lesson__eqn_nav__description_override');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13151,7 +13171,6 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   next.classList.add('lesson__eqn_nav__2lines__next__button');
   description.classList.add('lesson__eqn_nav__2lines__currentRow__description');
   description.classList.add('lesson__eqn_nav__description');
-  description.classList.add('lesson__eqn_nav__description_override');
   nextDescription.classList.add('lesson__eqn_nav__2lines__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
@@ -14212,6 +14231,23 @@ function (_DiagramElementCollec) {
         this.add('label', this.label.eqn);
       }
 
+      this.updateLabel();
+    }
+  }, {
+    key: "setLabel",
+    value: function setLabel(text) {
+      this.showRealLength = false;
+
+      if (this.label != null) {
+        this.label.setText(text);
+      }
+
+      this.updateLabel();
+    }
+  }, {
+    key: "setLabelToRealLength",
+    value: function setLabelToRealLength() {
+      this.showRealLength = true;
       this.updateLabel();
     }
   }, {
