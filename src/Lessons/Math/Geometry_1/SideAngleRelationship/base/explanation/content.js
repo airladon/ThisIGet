@@ -55,13 +55,15 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Introduction',
       setContent: [
-        'There are some triangles where the |longest| side’s opposite angle is the |largest|, and the |shortest| side’s opposite angle is the |smallest|.',
+        'There are some triangles where the |longest| side’s |opposite_angle| is the |largest|, and the |shortest| side’s |_opposite_angle| is the |smallest|.',
       ],
       modifiers: {
+        _opposite_angle: click(coll.pulseSmallestAngle, [coll], colors.angles),
         shortest: click(coll.pulseShortestSide, [coll], colors.sides),
         smallest: click(coll.pulseSmallestAngle, [coll], colors.angles),
         longest: click(coll.pulseLongestSide, [coll], colors.sides),
         largest: click(coll.pulseLargestAngle, [coll], colors.angles),
+        opposite_angle: click(coll.pulseLargestAngle, [coll], colors.angles),
       },
       show: [shortestExample, longestExample],
       setEnterState: () => {
@@ -250,7 +252,7 @@ class Content extends PresentationLessonContent {
 
     content = {
       setContent: [
-        'Angles |m| and |n| are equal as they are not between the |isosceles| triangle\'s equal sides.',
+        'Angles |m| and |n| are |equal| as they are the angles opposite the |isosceles| triangle\'s equal sides.',
       ],
       modifiers: {
         n: click(coll.pulseAngleN, [coll], colors.isosceles),
@@ -353,6 +355,71 @@ class Content extends PresentationLessonContent {
         coll.setScenarios('default');
       },
     });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'This conclusion applies to |all sides| in a triangle, as the same logic can be applied to any pair of sides.',
+      ]),
+    });
+
+    this.addSection({
+      title: 'Angle to Side Relationship',
+      setContent: style({ centerV: true }, [
+        'Does the relationship hold in the |other| direction?',
+        'If you have two angles that are different, will the two side lengths also be different and will the longer side be opposite the larger angle?',
+      ]),
+    });
+
+    common = {
+      setEnterState: () => {
+        // coll._0.showForm('angles0');
+        // coll._1.showForm('angles1');
+        // coll._2.showForm('angles2');
+        // coll._3.showForm('angles3');
+        // coll._4.showForm('angles4');
+        coll.setScenarios('default');
+        coll.setScenarios('left');
+      },
+      show: [
+        fig._tri._line, fig._tri._side01, fig._tri._side12,
+        fig._tri._angle0, fig._tri._angle2,
+      ],
+    };
+    this.addSection(common, {
+      setContent: style({}, [
+        'We can show this through a contradiction.',
+      ]),
+    });
+
+    content = {
+      setContent: [
+        'We start with the knowledge that angle |b| is larger than angle |a|.',
+      ],
+      modifiers: {
+        n: click(coll.pulseAngleN, [coll], colors.isosceles),
+        m: click(coll.pulseAngleM, [coll], colors.isosceles),
+        isosceles: this.bindShowQR('isosceles_triangles/base', 'Main', colors.isosceles),
+        lower_triangle: click(coll.toggleLowerTriangle, [coll], colors.sides),
+      },
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+        coll._3.showForm('angles3');
+        coll._4.showForm('angles4');
+        coll._0.setFirstTransform();
+        // coll._5.showForm('angles5');
+      },
+    });
+    // this.addSection(common, content, {
+    //   setSteadyState: () => {
+    //     coll._0.showForm('angles0');
+    //     coll._1.showForm('angles0');
+    //     coll._2.showForm('angles0');
+    //   },
+    // });
   }
 }
 

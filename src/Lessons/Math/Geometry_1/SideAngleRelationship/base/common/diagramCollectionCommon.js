@@ -30,6 +30,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   _2Eqn: Equation;
   _3Eqn: Equation;
   _4Eqn: Equation;
+  _5Eqn: Equation;
   _fig: {
     _tri: TypeFullPolyLine;
     _isosceles: TypeFullPolyLine;

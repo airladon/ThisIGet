@@ -168,6 +168,8 @@ export default function lessonLayout() {
   const elements = {
     A: { color: colors.sides },
     B: { color: colors.sides },
+    _A: { text: 'A', color: colors.sides },
+    _B: { text: 'B', color: colors.sides },
     m: { color: colors.isosceles },
     n: { color: colors.isosceles },
     o: { color: colors.isosceles },
@@ -178,6 +180,11 @@ export default function lessonLayout() {
     plus: ' + ',
     greater: ' > ',
     less: ' < ',
+    _less: ' < ',
+    lessOrEqual: '  \u2264  ',
+    or: '  or  ',
+    if: '  if  ',
+    then: '  then  ',
   };
 
   const eqn = (name, y) => ({
@@ -200,7 +207,7 @@ export default function lessonLayout() {
         },
         'sides1': {
           content: ['n', 'equals', 'o', 'plus', 'a'],
-          description: 'n is an exterior angle:',
+          description: 'n is an external angle:',
         },
         'sides2': {
           content: ['m', 'equals', 'o', 'plus', 'a'],
@@ -213,6 +220,30 @@ export default function lessonLayout() {
         'sides4': {
           content: ['b', 'greater', 'a'],
           description: 'b is the sum of m and o and therefore must be greater than a:',
+        },
+        // ////////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////////
+        // ////////////////////////////////////////////////////////////////
+        'angles0': {
+          content: ['b', 'greater', 'a'],
+          description: 'Start with:',
+        },
+        'angles1': {
+          content: ['B', 'lessOrEqual', 'A'],
+          description: 'Assume B is NOT longer than A:',
+        },
+        'angles2': {
+          content: ['if', 'B', 'equals', 'A', 'then', 'b', '_equals', 'a'],
+          description: 'If A = B, then it is an isosceles triangle:',
+        },
+        'angles3': {
+          content: ['if', 'B', 'less', 'A', 'then', 'b', '_less', 'a'],
+          description: 'From before in this lesson:',
+        },
+        'angles4': {
+          content: ['B', 'greater', 'A'],
+          description: 'Both conclusions are inconsistent with the starting knowledge, so B must be greater than A:',
         },
       },
     },
@@ -300,6 +331,7 @@ export default function lessonLayout() {
     nav('2', -0.2),
     nav('3', -0.7),
     nav('4', -1.2),
+    // nav('5', -1.7),
   ];
   return layout;
 }
