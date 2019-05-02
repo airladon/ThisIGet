@@ -136,6 +136,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.pulseAngleO();
   }
 
+  pulseEqn0() {
+    this._0Eqn.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEqn1() {
+    this._1Eqn.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseEqn2() {
     this._2Eqn.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();

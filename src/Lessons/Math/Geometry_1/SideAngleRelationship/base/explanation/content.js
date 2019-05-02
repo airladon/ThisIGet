@@ -15,7 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   style,
   click,
-  // clickW,
+  highlightWord,
   highlight,
   centerV,
 } = Fig.tools.html;
@@ -422,6 +422,108 @@ class Content extends PresentationLessonContent {
         coll._0.showForm('angles0');
         coll._1.showForm('angles1');
       },
+    });
+
+    content = {
+      setContent: [
+        'In the case that |B| |=| |A|, the triangle must be an |isosceles| triangle. This would mean |_b| and |_a| are equal, which |contradicts| the initial |condition|.',
+      ],
+      modifiers: {
+        A: click(coll.pulseSideA, [coll], colors.sides),
+        B: click(coll.pulseSideB, [coll], colors.sides),
+        _a: click(coll.pulseAngleA, [coll], colors.angles),
+        _b: click(coll.pulseAngleB, [coll], colors.angles),
+        condition: click(coll.pulseEqn0, [coll], colors.diagram.action),
+        isosceles: this.bindShowQR('isosceles_triangles/base', 'Main'),
+      },
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+      },
+    });
+
+    content = {
+      setContent: style({ top: 0 }, [
+        'In the case that |B| |<| |A|, we just showed that if one side of a triangle is shorter than another side, then its opposite angle must be smaller. This would mean |_b| |_<| |_a|, which |also contradicts| the initial |condition|.',
+      ]),
+      modifiers: {
+        A: click(coll.pulseSideA, [coll], colors.sides),
+        B: click(coll.pulseSideB, [coll], colors.sides),
+        _a: click(coll.pulseAngleA, [coll], colors.angles),
+        _b: click(coll.pulseAngleB, [coll], colors.angles),
+        '_<': highlight(colors.angles),
+        condition: click(coll.pulseEqn0, [coll], colors.diagram.action),
+      },
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+        coll._3.showForm('angles3');
+      },
+    });
+
+    content = {
+      setContent: style({ top: 0 }, [
+        'So the |assumption| of |B| |le| |A| leads to |contradictions|. This means the assumption cannot be true, and therefore |_B| |>| |_A|.',
+      ]),
+      modifiers: {
+        A: click(coll.pulseSideA, [coll], colors.sides),
+        B: click(coll.pulseSideB, [coll], colors.sides),
+        _A: click(coll.pulseSideA, [coll], colors.sides),
+        _B: click(coll.pulseSideB, [coll], colors.sides),
+        assumption: click(coll.pulseEqn1, [coll], colors.diagram.action),
+        le: highlightWord('\u2264', colors.sides),
+      },
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+        coll._3.showForm('angles3');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+        coll._2.showForm('angles2');
+        coll._3.showForm('angles3');
+        coll._4.showForm('angles4');
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'So the sides and angles of a triangle are |related| to each other.',
+        'A |side longer than another| side, will have an |opposite angle that is larger| than the other side\'s opposite angle.',
+        'An |angle larger than another| angle, will have an |opposite side that is longer| than the other angle\'s opposite side.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'In other words, a triangle\'s longest side and largest angle will always be opposite each other.',
+        'A triangle\'s shortest side and smallest angle will always be opposite each other',
+      ]),
     });
   }
 }

@@ -239,11 +239,11 @@ export default function lessonLayout() {
         },
         'angles3': {
           content: ['if', 'B', 'less', 'A', 'then', 'b', '_less', 'a'],
-          description: 'From before in this lesson:',
+          description: 'From earlier in this lesson:',
         },
         'angles4': {
           content: ['B', 'greater', 'A'],
-          description: 'Both conclusions are inconsistent with the starting knowledge, so B must be greater than A:',
+          description: 'Both conclusions are inconsistent with the initial condition, so B must be greater than A:',
         },
       },
     },
