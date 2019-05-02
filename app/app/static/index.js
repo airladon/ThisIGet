@@ -14253,7 +14253,7 @@ function (_DiagramElementCollec) {
   }, {
     key: "updateLabel",
     value: function updateLabel() {
-      var parentRotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var parentRotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getRotation() + this.angle;
       var label = this.label;
 
       if (label == null) {
@@ -14666,14 +14666,15 @@ function (_DiagramElementCollec) {
     _classCallCheck(this, DiagramObjectPolyLine);
 
     var defaultOptions = {
-      position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      position: null,
       color: [0, 1, 0, 1],
       points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 1)],
       close: false,
       showLine: true,
       borderToPoint: 'never',
       width: 0.01,
-      reverse: false
+      reverse: false,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0)
     };
     var defaultSideOptions = {
       showLine: false,
@@ -14744,7 +14745,7 @@ function (_DiagramElementCollec) {
       });
     }
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, optionsToUse.transform, shapes.limits));
 
     _this.setColor(optionsToUse.color);
 
@@ -14755,10 +14756,12 @@ function (_DiagramElementCollec) {
     _this.isTouchDevice = isTouchDevice;
     _this.animateNextFrame = animateNextFrame;
     _this.updatePointsCallback = null;
-    _this.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
 
-    _this.transform.updateTranslation(_this.position);
+    if (optionsToUse.position != null) {
+      _this.transform.updateTranslation(_this.position);
+    }
 
+    _this.position = _this.getPosition();
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
     _this.reverse = optionsToUse.reverse;
@@ -15247,7 +15250,7 @@ function (_DiagramElementCollec) {
   }, {
     key: "updateLabels",
     value: function updateLabels() {
-      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getRotation();
       this.updateAngleLabels(rotationOffset);
       this.updateSideLabels(rotationOffset);
     }

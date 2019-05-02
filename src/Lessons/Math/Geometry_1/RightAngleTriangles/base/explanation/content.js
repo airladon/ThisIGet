@@ -68,10 +68,11 @@ class Content extends PresentationLessonContent {
       setContent: centerV([
         '',
       ]),
-      show: [fig],
+      show: [fig._pythagorusSquare],
       setSteadyState: () => {
-        fig.setScenarios('aDown');
-        coll.updateMainAnnotations();
+        fig.setScenarios('default');
+        fig.setScenarios('left');
+        coll.updatePythagorusSquareLabels();
       },
     });
   }

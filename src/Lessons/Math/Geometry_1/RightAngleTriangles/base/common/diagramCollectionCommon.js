@@ -33,6 +33,12 @@ export default class CommonCollection extends CommonDiagramCollection {
       _baseA: DiagramObjectLine;
       _base: DiagramObjectLine;
     } & DiagramElementCollection;
+    _pythagorusSquare: {
+      _bottomLeft: DiagramObjectPolyLine;
+      _bottomRight: DiagramObjectPolyLine;
+      _topLeft: DiagramObjectPolyLine;
+      _topRight: DiagramObjectPolyLine;
+    } & DiagramElementCollection
   } & DiagramElementCollection;
 
   constructor(
@@ -46,12 +52,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.hasTouchableElements = true;
   }
 
-  updateMainAnnotations() {
+  updateMainLabels() {
     const r = this._fig._main.getRotation();
-    this._fig._main._tri.updateLabels(r);
+    this._fig._main._tri.updateLabels();
     this._fig._main._height._line.updateLabel(r);
     this._fig._main._heightB.updateLabel(r);
     this._fig._main._base.updateLabel(r);
     this._fig._main._baseA.updateLabel(r);
+  }
+
+  updatePythagorusSquareLabels() {
+    this._fig._pythagorusSquare._bottomLeft.updateLabels();
+    this._fig._pythagorusSquare._bottomRight.updateLabels();
+    this._fig._pythagorusSquare._topLeft.updateLabels();
+    this._fig._pythagorusSquare._topRight.updateLabels();
   }
 }

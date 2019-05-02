@@ -4,8 +4,9 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point,
-  // Transform,
-  Line,
+  Transform,
+  // Line,
+  getPoint,
 } = Fig.tools.g2;
 
 // const { joinObjects } = Fig.tools.misc;
@@ -23,8 +24,8 @@ export default function lessonLayout() {
   const { colors } = layout;
 
   const leftSide = 3;
-  const p0 = new Point(-2, -1);
-  const p1 = new Point(-2, -1)
+  const p0 = new Point(0, 0);
+  const p1 = p0
     .add(leftSide * Math.cos(Math.PI / 6), leftSide * Math.sin(Math.PI / 6));
   const height = p1.y - p0.y;
   const p2 = new Point(
@@ -32,6 +33,9 @@ export default function lessonLayout() {
     p0.y,
   );
   const triPoints = [p0, p1, p2];
+  const tri2Points = triPoints.map(p => p.transformBy(
+    (new Transform().rotate(Math.PI / 6 * 5).translate(leftSide, 0)).m(),
+  ));
 
   const angle = (color = colors.angles, radius = 0.3) => ({
     curve: {
@@ -41,19 +45,24 @@ export default function lessonLayout() {
     autoRightAngle: true,
     color,
   });
+  const side = (text, scale) => ({
+    label: {
+      text, location: 'outside', offset: 0.05, scale,
+    },
+  });
 
-  const tri = name => ({
+  const tri = (name, points = triPoints, position = [0, 0], rotation = 0, scale = 1, textScale = 1) => ({
     name,
     method: 'polyLine',
     options: {
       color: colors.sides,
       close: true,
       width: 0.03,
-      points: triPoints,
+      points,
       side: [
-        { label: { text: 'A', location: 'outside', offset: 0.05 } },
-        { label: { text: 'B', location: 'outside', offset: 0.05 } },
-        { label: { text: 'C', location: 'outside', offset: 0.05 } },
+        side('A', textScale),
+        side('B', textScale),
+        side('C', textScale),
       ],
       angle: [
         angle(colors.angles, 0.4),
@@ -63,8 +72,14 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [0, 0], rotation: 0, scale: 1 },
-        bDown: { position: [0, 0], rotation: Math.PI / 6 * 5, scale: 1 },
+        default: { position, rotation, scale },
+        split: {
+          position: [getPoint(position).x / 1.3, getPoint(position).y / 2],
+          rotation: 0,
+          scale,
+        },
+        together: { position: [0, 0], rotation: 0, scale: 0.5 },
+        normalSize: { position: [0, 0], rotation: 0, scale: 1 },
       },
     },
   });
@@ -171,8 +186,40 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [0, 0], rotation: 0, scale: 1 },
-        aDown: { position: [0, 0], rotation: Math.PI / 6 * 5, scale: 1 },
+        default: { position: [-1.7, -0.8], rotation: 0, scale: 1 },
+        aDown: { position: [1.7, -0.7], rotation: Math.PI / 6 * 5, scale: 1 },
+      },
+    },
+  };
+
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  const scale = 0.5;
+  const textScale = 1;
+  const sideA = scale * leftSide;
+  const sideB = scale * height / Math.sin(Math.PI / 3);
+  const AB = sideA + sideB;
+  const pythagorusSquare = {
+    name: 'pythagorusSquare',
+    method: 'collection',
+    addElements: [
+      tri('bottomLeft', tri2Points, [0, 0], 0, scale, textScale),
+      tri('bottomRight', tri2Points, [AB, 0], Math.PI / 2, scale, textScale),
+      tri('topRight', tri2Points, [AB, AB], Math.PI, scale, textScale),
+      tri('topLeft', tri2Points, [0, AB], Math.PI * 3 / 2, scale, textScale),
+    ],
+    mods: {
+      scenarios: {
+        default: { position: [-1, -1.4] },
+        left: { position: [-2.5, -1.4] },
+        split: { position: [-1.5, -1.4] },
+        together: { position: [-0.5, -0.5] },
+        normalSize: { position: [-1.5, -1] },
       },
     },
   };
@@ -182,6 +229,7 @@ export default function lessonLayout() {
     method: 'collection',
     addElements: [
       mainTri,
+      pythagorusSquare,
     ],
     mods: {
       scenarios: {
