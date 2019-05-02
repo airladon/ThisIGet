@@ -5,18 +5,22 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonCollection from '../common/diagramCollectionCommon';
+// import CommonCollection from '../common/diagramCollectionCommon';
 
 const {
   Transform,
   DiagramElementPrimative,
+  DiagramObjectPolyLine,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  EquationLabel,
 } = Fig;
 
-// const {
-//   removeRandElement,
+const {
+  removeRandElement,
 //   round,
-//   rand
-// } = Fig.tools.math;
+  rand
+} = Fig.tools.math;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
@@ -24,6 +28,19 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     _touching: DiagramElementPrimative;
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
+
+  triangle: {
+    _line: DiagramElementPrimative;
+    _angle0: { label: EquationLabel } & DiagramObjectAngle;
+    _angle1: { label: EquationLabel } & DiagramObjectAngle;
+    _angle2: { label: EquationLabel } & DiagramObjectAngle;
+    _pad0: DiagramElementPrimative;
+    _pad1: DiagramElementPrimative;
+    _pad2: DiagramElementPrimative;
+    _side01: DiagramObjectLine;
+    _side12: DiagramObjectLine;
+    _side20: DiagramObjectLine;
+  } & DiagramObjectPolyLine;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -38,21 +55,38 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       transform,
     );
     // this.addQuestion();
-    // this.addCheck();
-    // this.addInput('input', '?', 3, 0);
+    this.addCheck();
+    this.addInput('input', '?', 3, 0);
     this.diagram.addElements(this, this.layout.addElementsQuiz);
     // this.add('main', new CommonCollection(diagram, this.layout));
+    this.triangle = this._fig._tri;
     this.hasTouchableElements = true;
   }
 
-  // tryAgain() {
-  //   super.tryAgain();
-  // }
-
+  randomTriangle() {
+    const quadrants = [1, 2, 3, 4];
+    const pads = [0, 1, 2];
+    pads.forEach((pad) => {
+      const quadrant = removeRandElement(quadrants);
+      let x = rand(0.5, 1);
+      let y = rand(0.5, 1);
+      if (quadrant === 2 || quadrant === 3) {
+        x *= -1;
+      }
+      if (quadrant === 3 || quadrant === 4) {
+        y *= -1;
+      }
+      this._fig._tri[`_pad${pad}`].scenarios.next = {
+        position: [x, y],
+        rotation: 0,
+      };
+    });
+  }
 
   setupNewProblem() {
-    // this._question.drawingObject.setText(`Question here ${value}:`);
-    // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
+    this.randomTriangle();
+    this.triangle.hideAngles();
+    this.transitionToNewProblem({ target: 'next', duration: 1 });
   }
 
   // afterTransitionToNewProblem() {

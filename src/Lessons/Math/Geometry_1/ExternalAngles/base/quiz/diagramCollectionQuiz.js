@@ -10,6 +10,9 @@ const {
   Transform,
   DiagramElementPrimative,
   DiagramObjectPolyLine,
+  DiagramObjectAngle,
+  DiagramObjectLine,
+  EquationLabel,
 } = Fig;
 
 const {
@@ -28,6 +31,15 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
   triangle: {
     _line: DiagramElementPrimative;
+    _angle0: { label: EquationLabel } & DiagramObjectAngle;
+    _angle1: { label: EquationLabel } & DiagramObjectAngle;
+    _angle2: { label: EquationLabel } & DiagramObjectAngle;
+    _pad0: DiagramElementPrimative;
+    _pad1: DiagramElementPrimative;
+    _pad2: DiagramElementPrimative;
+    _side01: DiagramObjectLine;
+    _side12: DiagramObjectLine;
+    _side20: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
   constructor(
@@ -90,8 +102,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
 
     this.externalAngle.showAll();
-    this.externalAngle.setPosition(this.triangle.p1);
-    this.externalAngle.setRotation(this.triangle._side01.angle);
     this.externalAngle.setAngle({
       position: this.triangle._pad0.getPosition(),
       rotation: this.triangle._side01.line.angle(),
