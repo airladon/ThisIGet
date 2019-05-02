@@ -508,6 +508,34 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    right_angle_triangles: new LessonDescription({
+      name: 'Right Angle Triangles',
+      path: '/Lessons/Math/Geometry_1/RightAngleTriangles',
+      uid: 'right_angle_triangles',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Explanation_of_version_here.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+            'Pythagorus',
+          ],
+        },
+      },
+      dependencies: [
+        'important_triangles',
+        'area_triangle',
+      ],
+      enabled: true,
+    }),
     side_angle_relationship: new LessonDescription({
       name: 'Side Angle Relationships',
       path: '/Lessons/Math/Geometry_1/SideAngleRelationship',
@@ -576,18 +604,6 @@ export default function getLessonIndex() {
       },
       dependencies: [
         'right_angle_triangles',
-      ],
-      enabled: false,
-    }),
-    right_angle_triangles: new LessonDescription({
-      name: 'Right Angle Triangles',
-      path: '/Lessons/Math/Geometry_1/ToDo/RightAngleTriangles',
-      uid: 'right_angle_triangles',
-      versions: {
-      },
-      dependencies: [
-        'important_triangles',
-        'area_triangle',
       ],
       enabled: false,
     }),

@@ -14934,6 +14934,70 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectPolyLine, [{
+    key: "updateSideLabels",
+    value: function updateSideLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (this.options.side != null) {
+        var pCount = this.points.length - 1;
+
+        if (this.close) {
+          pCount += 1;
+        }
+
+        for (var i = 0; i < pCount; i += 1) {
+          var j = i + 1;
+
+          if (i === pCount - 1 && this.close) {
+            j = 0;
+          }
+
+          var name = "side".concat(i).concat(j);
+
+          if (this.elements[name] != null) {
+            var wasHidden = !this.elements[name].isShown;
+            this.elements[name].updateLabel(rotationOffset);
+
+            if (wasHidden) {
+              this.elements[name].hide();
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "updateAngleLabels",
+    value: function updateAngleLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (this.options.angle != null) {
+        var pCount = this.points.length;
+
+        if (this.close === false) {
+          pCount -= 2;
+        }
+
+        var firstIndex = 0;
+
+        if (this.close === false) {
+          firstIndex = 1;
+        }
+
+        for (var i = firstIndex; i < pCount + firstIndex; i += 1) {
+          var name = "angle".concat(i);
+
+          if (this.elements[name] != null) {
+            var wasHidden = !this.elements[name].isShown;
+            this.elements[name].updateLabel(rotationOffset);
+
+            if (wasHidden) {
+              this.elements[name].hide();
+            }
+          }
+        }
+      }
+    }
+  }, {
     key: "updatePoints",
     value: function updatePoints(newPointsIn) {
       var newPoints = newPointsIn.map(function (p) {
@@ -15179,6 +15243,13 @@ function (_DiagramElementCollec) {
     key: "showSides",
     value: function showSides() {
       this.setShow('side', true);
+    }
+  }, {
+    key: "updateLabels",
+    value: function updateLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.updateAngleLabels(rotationOffset);
+      this.updateSideLabels(rotationOffset);
     }
   }]);
 
