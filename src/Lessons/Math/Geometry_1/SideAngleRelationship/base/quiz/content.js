@@ -40,7 +40,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       // title: '',
-      setContent: ['Question'],
+      // setContent: ['Question'],
       // modifiers: {},
       // setInfo: `
       //     <ul>

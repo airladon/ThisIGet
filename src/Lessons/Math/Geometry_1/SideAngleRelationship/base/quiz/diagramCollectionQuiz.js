@@ -57,12 +57,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       {
         notSelected: {
           answer: 'Incorrect',
-          details: 'Make sure to select "Yes" or "No" above the "Check" button',
+          details: 'Make sure to select "x", "y" or "z" above the "Check" button',
         },
       },
       transform,
     );
-    // this.addQuestion();
+    this.addQuestion();
     this.addCheck();
     // this.addInput('input', '?', 3, 0);
     this.addMultipleChoice('side_angle_relationship_choice', ['x', 'y', 'z']);
@@ -70,7 +70,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     // this.add('main', new CommonCollection(diagram, this.layout));
     this.triangle = this._fig._tri;
     this.hasTouchableElements = true;
-    this.state = {
+    this.triState = {
       biggest: '',
       middle: '',
       smallest: '',
@@ -107,17 +107,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       } else {
         same = false;
       }
-      const lines = [
-        [line1, 'x'],
-        [line2, 'y'],
-        [line3, 'z'],
-      ];
-      lines.sort((a, b) => a[0] - b[0]);
-      this.state = {
-        biggest: lines[0][1],
-        middle: lines[1][1],
-        smallest: lines[2][1],
-      };
     }
   }
 
@@ -126,6 +115,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.triangle.hideAngles();
     this.triangle.hideSides();
     this.transitionToNewProblem({ target: 'next', duration: 1 });
+    this._question.drawingObject.setText('');
   }
 
   afterTransitionToNewProblem() {
@@ -138,29 +128,46 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       this.triangle.reversePoints();
     }
 
-    const knownPropertyPossibilities = ['angles', 'sides'];
+    const line1 = this.triangle._side01;
+    const line2 = this.triangle._side12;
+    const line3 = this.triangle._side20;
+    const lines = [
+      [line1, 'x'],
+      [line2, 'y'],
+      [line3, 'z'],
+    ];
+    lines.sort((a, b) => a[0].length - b[0].length);
+    this.triState = {
+      biggest: lines[2][1],
+      middle: lines[1][1],
+      smallest: lines[0][1],
+    };
+
+    const knownPropertyPossibilities = ['angle', 'side'];
     const unknownSizePossibilities = ['biggest', 'smallest', 'middle'];
 
-    const property = randElement(knownPropertyPossibilities);
+    const property = removeRandElement(knownPropertyPossibilities);
     const size = randElement(unknownSizePossibilities);
 
-    if (property === 'angles') {
+    if (property === 'angle') {
       this.triangle._angle0.setLabelToRealAngle();
       this.triangle._angle1.setLabelToRealAngle();
       this.triangle._angle2.setLabelToRealAngle();
       this.triangle._side01.setLabel('x');
       this.triangle._side12.setLabel('y');
       this.triangle._side20.setLabel('z');
+      this._question.drawingObject.setText(`Select the ${size} ${knownPropertyPossibilities[0]}:`);
     } else {
       this.triangle._side01.setLabelToRealLength();
       this.triangle._side12.setLabelToRealLength();
       this.triangle._side20.setLabelToRealLength();
-      this.triangle._angle0.setLabel('x');
-      this.triangle._angle1.setLabel('y');
-      this.triangle._angle2.setLabel('z');
+      this.triangle._angle0.setLabel('y');
+      this.triangle._angle1.setLabel('z');
+      this.triangle._angle2.setLabel('x');
+      this._question.drawingObject.setText(`Select the ${size} ${knownPropertyPossibilities[0]}:`);
     }
 
-    this.answer = this.state[size];
+    this.answer = this.triState[size];
   }
 
   // showAnswer() {
