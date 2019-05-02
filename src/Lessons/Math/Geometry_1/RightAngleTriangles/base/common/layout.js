@@ -199,7 +199,7 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
-  const scale = 0.5;
+  const scale = 0.4;
   const textScale = 1;
   const sideA = scale * leftSide;
   const sideB = scale * height / Math.sin(Math.PI / 3);
@@ -216,7 +216,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [-1, -1.4] },
-        left: { position: [-2.5, -1.4] },
+        left: { position: [-2.7, -1.2] },
         split: { position: [-1.5, -1.4] },
         together: { position: [-0.5, -0.5] },
         normalSize: { position: [-1.5, -1] },
@@ -238,8 +238,149 @@ export default function lessonLayout() {
     },
   };
 
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  const elements = {
+    Area: { color: colors.sides },
+    _Area: { text: 'Area', color: colors.sides },
+    __Area: { text: 'Area', color: colors.sides },
+    largeSquare: { text: 'large square', color: colors.sides },
+    smallSquare: { text: 'small square', color: colors.sides },
+    triangle: { text: 'triangle', color: colors.sides },
+    lb: { symbol: 'bracket', side: 'left' },
+    rb: { symbol: 'bracket', side: 'right' },
+    A: { color: colors.sides },
+    B: { color: colors.sides },
+    _A: { text: 'A', color: colors.sides },
+    _B: { text: 'B', color: colors.sides },
+    __A: { text: 'A', color: colors.sides },
+    __B: { text: 'B', color: colors.sides },
+    C: { text: 'C', color: colors.sides },
+    equals: '  =  ',
+    plus: ' + ',
+    _plus: ' + ',
+    __plus: ' + ',
+    ___plus: ' + ',
+    _2a: '2',
+    _2b: '2',
+    _2c: '2',
+    _2d: '2',
+    _2e: '2',
+    _2f: '2',
+    _2g: '2',
+    _1: '1',
+    __2_: '2',
+    _4: '4',
+    mul: ' \u00D7 ',
+    v: { symbol: 'vinculum' },
+  };
+
+  const top = (content, commentText, symbol) => ({
+    topComment: {
+      content,
+      comment: commentText,
+      symbol,
+    },
+  });
+  const AreaTri = {
+    bottomComment: {
+      content: 'Area', comment: 'triangle', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const AreaSSquare = {
+    bottomComment: {
+      content: '_Area', comment: 'smallSquare', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const AreaLSquare = {
+    bottomComment: {
+      content: '__Area', comment: 'largeSquare', scale: 0.5, contentSpace: 0,
+    },
+  };
+  const half = { frac: ['_1', '_2g', 'v', 0.7] };
+  const sup = (content, s) => ({ sup: [content, ['  ', s]] });
+
+  const eqn = (name, y) => ({
+    // name: 'eqn',
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'middle',
+      },
+      scale: 0.9,
+      elements,
+      forms: {
+        '0': {
+          content: [
+            AreaLSquare, 'equals', '_4', 'mul', AreaTri, '__plus', AreaSSquare,
+          ],
+          description: 'Area of a large square:',
+        },
+        '1': {
+          content: [
+            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+            'equals',
+            '_4', 'mul', half, '_A', '_B',
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Substitute in areas:',
+        },
+        '2': {
+          content: [
+            sup('A', '_2c'), 'plus', '_2f', '__A', '__B', '_plus', sup('B', '_2d'),
+            'equals',
+            '_2e', '_A', '_B',
+            '__plus', sup('C', '_2b'),
+          ],
+          description: 'Expand left side, and simplify the right:',
+        },
+        '3': {
+          content: [
+            sup('A', '_2c'), 'plus', sup('B', '_2d'),
+            'equals',
+            sup('C', '_2b'),
+          ],
+          description: 'Subtract 2AB from both sides:',
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        default: { position: [1.8, y] },
+      },
+    },
+  });
+
+  const nav = (name, y) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      equation: eqn(`${name}Eqn`, y),
+      interactive: false,
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0.2, y] },
+      },
+    },
+  });
+
   layout.addElements = [
     fig,
+    nav('0', 0.8),
+    nav('1', 0.1),
+    nav('2', -0.6),
+    nav('3', -1.3),
   ];
   return layout;
 }

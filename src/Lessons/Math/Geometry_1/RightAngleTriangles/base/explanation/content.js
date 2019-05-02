@@ -70,9 +70,13 @@ class Content extends PresentationLessonContent {
       ]),
       show: [fig._pythagorusSquare],
       setSteadyState: () => {
-        fig.setScenarios('default');
+        coll.setScenarios('default');
         fig.setScenarios('left');
         coll.updatePythagorusSquareLabels();
+        coll._0.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('2');
+        coll._3.showForm('3');
       },
     });
   }
