@@ -76,7 +76,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   afterTransitionToNewProblem() {
     super.afterTransitionToNewProblem();
     const totalAngle = this._quad._angle0.angle + this._quad._angle1.angle
-                       + this._quad._angle0.angle + this._quad._angle1.angle;
+                       + this._quad._angle2.angle + this._quad._angle3.angle;
 
     if (totalAngle > Math.PI * 2.01) {
       this._quad.reversePoints();

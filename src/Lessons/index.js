@@ -259,6 +259,7 @@ export default function getLessonIndex() {
           topics: [
             'dev',
             'explanation',
+            'quiz',
             'summary',
           ],
           qr: [
