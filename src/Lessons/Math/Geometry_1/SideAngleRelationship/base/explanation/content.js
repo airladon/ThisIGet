@@ -372,11 +372,6 @@ class Content extends PresentationLessonContent {
 
     common = {
       setEnterState: () => {
-        // coll._0.showForm('angles0');
-        // coll._1.showForm('angles1');
-        // coll._2.showForm('angles2');
-        // coll._3.showForm('angles3');
-        // coll._4.showForm('angles4');
         coll.setScenarios('default');
         coll.setScenarios('left');
       },
@@ -393,33 +388,41 @@ class Content extends PresentationLessonContent {
 
     content = {
       setContent: [
-        'We start with the knowledge that angle |b| is larger than angle |a|.',
+        'We start with the knowledge that angle |b| is |larger| than angle |a|.',
       ],
       modifiers: {
-        n: click(coll.pulseAngleN, [coll], colors.isosceles),
-        m: click(coll.pulseAngleM, [coll], colors.isosceles),
-        isosceles: this.bindShowQR('isosceles_triangles/base', 'Main', colors.isosceles),
-        lower_triangle: click(coll.toggleLowerTriangle, [coll], colors.sides),
+        b: click(coll.pulseAngleB, [coll], colors.angles),
+        a: click(coll.pulseAngleA, [coll], colors.angles),
+      },
+    };
+    this.addSection(common, content, {
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+      },
+    });
+
+    content = {
+      setContent: [
+        'Now we make an assumption that |B| is |shorter| than |A|. If this assumption results in a |contradiction|, then we know the assumption is wrong.',
+      ],
+      modifiers: {
+        A: click(coll.pulseSideA, [coll], colors.sides),
+        B: click(coll.pulseSideB, [coll], colors.sides),
       },
     };
     this.addSection(common, content, {
       setSteadyState: () => {
         coll._0.showForm('angles0');
-        coll._1.showForm('angles1');
-        coll._2.showForm('angles2');
-        coll._3.showForm('angles3');
-        coll._4.showForm('angles4');
-        coll._0.setFirstTransform();
-        // coll._5.showForm('angles5');
       },
     });
-    // this.addSection(common, content, {
-    //   setSteadyState: () => {
-    //     coll._0.showForm('angles0');
-    //     coll._1.showForm('angles0');
-    //     coll._2.showForm('angles0');
-    //   },
-    // });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._0.showForm('angles0');
+        coll._1.showForm('angles1');
+      },
+    });
   }
 }
 

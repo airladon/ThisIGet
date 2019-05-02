@@ -59,6 +59,16 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseSideB() {
+    this._fig._tri._side12._label.pulseScaleNow(1, 2.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSideA() {
+    this._fig._tri._side01._label.pulseScaleNow(1, 2.5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseLargestAngle() {
     this._longestExample._angle1.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();

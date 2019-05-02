@@ -231,7 +231,7 @@ export default function lessonLayout() {
         },
         'angles1': {
           content: ['B', 'lessOrEqual', 'A'],
-          description: 'Assume B is NOT longer than A:',
+          description: 'Assume:',
         },
         'angles2': {
           content: ['if', 'B', 'equals', 'A', 'then', 'b', '_equals', 'a'],
