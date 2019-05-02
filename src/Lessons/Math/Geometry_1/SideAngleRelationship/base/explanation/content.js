@@ -55,14 +55,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Introduction',
       setContent: [
-        'There are some triangles where the |longest| side’s |opposite_angle| is the |largest|, and the |shortest| side’s |_opposite_angle| is the |smallest|.',
+        'There are some triangles where the |longest_side|’s |opposite_angle| is the |largest| angle in the triangle, and the |shortest_side|’s |_opposite_angle| is the |smallest| angle in a triangle.',
       ],
       modifiers: {
         _opposite_angle: click(coll.pulseSmallestAngle, [coll], colors.angles),
-        shortest: click(coll.pulseShortestSide, [coll], colors.sides),
-        smallest: click(coll.pulseSmallestAngle, [coll], colors.angles),
-        longest: click(coll.pulseLongestSide, [coll], colors.sides),
-        largest: click(coll.pulseLargestAngle, [coll], colors.angles),
+        shortest_side: click(coll.pulseShortestSide, [coll], colors.sides),
+        // smallest: click(coll.pulseSmallestAngle, [coll], colors.angles),
+        longest_side: click(coll.pulseLongestSide, [coll], colors.sides),
+        // largest: click(coll.pulseLargestAngle, [coll], colors.angles),
         opposite_angle: click(coll.pulseLargestAngle, [coll], colors.angles),
       },
       show: [shortestExample, longestExample],
@@ -82,7 +82,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: centerV([
-        'We wish to see if this observation holds |generally|.',
+        'Does this observation hold |generally| for all triangles?',
         'Do the longest side\'s opposite angle |always| correspond to the largest angle?',
         'Conversely, does the largest angle\'s opposite side |always| correspond to the longest side?',
       ]),
@@ -126,7 +126,7 @@ class Content extends PresentationLessonContent {
 
     content = {
       setContent: [
-        'As we know |side B > side A|, we can mark out |length A| on |side B|, and then form an |isosceles| |triangle| with |side A|.',
+        'As we know |side B > side A|, we can mark out |length A| on |side B| to form an |isosceles| |triangle| with |side A|.',
       ],
     };
     this.addSection(common, content, {
@@ -218,7 +218,7 @@ class Content extends PresentationLessonContent {
 
     content = {
       setContent: [
-        'First, we started with the knowledge that |side B| was |longer| than |side A|.',
+        'First, we started with the condition that |side B| was |longer| than |side A|.',
       ],
     };
     this.addSection(common, content);
@@ -336,9 +336,14 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'So we see if |one side of a triangle is a different length to another|, then the |angles opposite the sides| will also be |different|.',
-        'In addition, the |longer side| will |always| be opposite the |larger angle|.',
+        'So we see if one |side| of a triangle is |longer| than |another|, then the |angle_opposite_the_longer_side| will be |larger| than the |angle_opposite_the_shorter_side|.',
       ]),
+      modifiers: {
+        side: click(coll.pulseSideB, [coll], colors.sides),
+        another: click(coll.pulseSideA, [coll], colors.sides),
+        angle_opposite_the_longer_side: click(coll.pulseAngleB, [coll], colors.angles),
+        angle_opposite_the_shorter_side: click(coll.pulseAngleA, [coll], colors.angles),
+      },
       show: [
         fig._tri._line, fig._tri._side01, fig._tri._side12,
         fig._tri._angle0, fig._tri._angle2,
