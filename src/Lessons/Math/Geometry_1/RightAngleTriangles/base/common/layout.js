@@ -16,6 +16,9 @@ const cssColorNames = [
   'angles',
   'rightAngle',
   'description',
+  'vertex',
+  'opposite',
+  'perpendicular',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -37,6 +40,10 @@ export default function lessonLayout() {
   const tri2Points = triPoints.map(p => p.transformBy(
     (new Transform().rotate(Math.PI / 6 * 5).translate(leftSide, 0)).m(),
   ));
+
+  // const tri3Points = triPoints.map(p => p.transformBy(
+  //   (new Transform().rotate(0).translate(-1, 0)).m(),
+  // ));
 
   const angle = (color = colors.angles, radius = 0.3) => ({
     curve: {
@@ -85,16 +92,7 @@ export default function lessonLayout() {
     },
   });
 
-  const opposite = {
-    name: 'opposite',
-    method: 'line',
-    options: {
-      color: colors.sides,
-      width: 0.02,
-      p1: triPoints[0],
-      p2: triPoints[2],
-    },
-  };
+
   const heightLine = {
     name: 'height',
     method: 'collection',
@@ -185,12 +183,60 @@ export default function lessonLayout() {
     },
   };
 
+  const vertex = {
+    name: 'vertex',
+    method: 'polygon',
+    options: {
+      color: colors.vertex,
+      fill: true,
+      radius: 0.05,
+      sides: 100,
+      position: triPoints[1],
+    },
+  };
+
+  const opposite = {
+    name: 'opposite',
+    method: 'line',
+    options: {
+      color: colors.opposite,
+      width: 0.02,
+      p1: triPoints[0].add(-0.05, -0.02),
+      p2: triPoints[2].add(0.03, -0.02),
+    },
+  };
+
+  const leftPerpendicular = {
+    name: 'leftSide',
+    method: 'line',
+    options: {
+      color: colors.perpendicular,
+      width: 0.02,
+      p1: triPoints[0].add(-0.045, -0.005),
+      p2: triPoints[1].add(0, 0.025),
+    },
+  };
+
+  const rightPerpendicular = {
+    name: 'rightSide',
+    method: 'line',
+    options: {
+      color: colors.perpendicular,
+      width: 0.02,
+      p1: triPoints[1].add(0, 0.02),
+      p2: triPoints[2].add(0.035, -0.01),
+    },
+  };
+
   const mainTri = {
     name: 'main',
     method: 'collection',
     addElements: [
+      vertex,
       tri('tri'),
       opposite,
+      leftPerpendicular,
+      rightPerpendicular,
       heightLine,
       heightB,
       base,
@@ -199,7 +245,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [-1.7, -0.8], rotation: 0, scale: 1 },
-        aDown: { position: [1.7, -0.7], rotation: Math.PI / 6 * 5, scale: 1 },
+        aDown: { position: [1.7, -1.2], rotation: Math.PI / 6 * 5, scale: 1 },
       },
     },
   };

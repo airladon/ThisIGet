@@ -14094,9 +14094,11 @@ function (_DiagramElementCollec) {
       var defaultOptions = {
         line: 3,
         label: 1.5,
-        arrow: 2
+        arrow: 2,
+        done: null
       };
       var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])(defaultOptions, optionsIn);
+      var done = options.done;
       var line = this._line;
 
       if (line != null) {
@@ -14115,24 +14117,32 @@ function (_DiagramElementCollec) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
-        line.pulseScaleNow(1, options.line);
+        line.pulseScaleNow(1, options.line, 0, done);
+        done = null;
       }
 
       var arrow1 = this._arrow1;
       var arrow2 = this._arrow2;
 
       if (arrow1 != null) {
-        arrow1.pulseScaleNow(1, options.arrow);
+        arrow1.pulseScaleNow(1, options.arrow, 0, done);
+        done = null;
       }
 
       if (arrow2 != null) {
-        arrow2.pulseScaleNow(1, options.arrow);
+        arrow2.pulseScaleNow(1, options.arrow, 0, done);
+        done = null;
       }
 
       var label = this._label;
 
       if (label != null) {
-        label.pulseScaleNow(1, options.label);
+        label.pulseScaleNow(1, options.label, 0, done);
+        done = null;
+      }
+
+      if (done != null) {
+        done();
       }
 
       this.animateNextFrame();

@@ -3,8 +3,11 @@
 $colors: (
   sides:                       color('blue'),
   rightAngle:                  color('red'),
+  opposite:                    color('red'),
+  perpendicular:               color('red'),
   angles:                      color('green'),
   description:                 color('grey', base),
+  vertex:                      color('yellow'),
 );
 
 body {

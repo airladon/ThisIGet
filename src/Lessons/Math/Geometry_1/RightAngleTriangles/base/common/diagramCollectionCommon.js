@@ -34,6 +34,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       _baseA: DiagramObjectLine;
       _base: DiagramObjectLine;
       _opposite: DiagramObjectLine;
+      _vertex: DiagramElementPrimative;
+      _leftSide: DiagramObjectLine;
+      _rightSide: DiagramObjectLine;
     } & DiagramElementCollection;
     _pythagorusSquare: {
       _bottomLeft: DiagramObjectPolyLine;
@@ -101,8 +104,24 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseBase() {
+    this._fig._main._base.pulseWidth({ line: 8, label: 2 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulsePerpendicularSides(done: ?() => void = null) {
+    this._fig._main._leftSide.pulseWidth({ line: 6, done });
+    this._fig._main._rightSide.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
   pulseHeight() {
-    this._fig._main._height._line.pulseWidth({ line: 6, label: 1 });
+    this._fig._main._height._line.pulseWidth({ line: 6, label: 2 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseVertex() {
+    this._fig._main._vertex.pulseScaleNow(1, 2.5);
     this.diagram.animateNextFrame();
   }
 }

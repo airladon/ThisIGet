@@ -49,7 +49,7 @@ class Content extends PresentationLessonContent {
     const main = fig._main;
 
     let common = {
-      show: [main._tri._line, main._tri._angle1, main._opposite],
+      show: [main._tri._line, main._tri._angle1],
       setSteadyState: () => {
         main.setScenarios('default');
         coll.updateMainLabels();
@@ -86,38 +86,130 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'In |any| triangle, the |side_opposite| the largest angle will have the |longest| length. Therefore the side opposite the right angle is always the longest| in a right triangle.',
+        'A triangle\'s sides and angles are |related| such that the |opposite_side| to the |largest_angle| will have the |longest| length in any triangle.',
       ],
       modifiers: {
-        side_opposite: click(coll.pulseOpposite, [coll], colors.sides),
-        any: this.bindShowQR('side_angle_relationship/base', 'Main'),
-      },
-    });
-
-    this.addSection(common, {
-      setContent: style({ top: 0 }, [
-        'The |side_opposite| the right angle is often called the |hypotenuse|. The word comes from the |Greek| word |hypoteinousa| which means “stretching under”. Therefore the |hypotenuse is the side stretching under the right angle|.',
-      ]),
-      modifiers: {
-        side_opposite: click(coll.pulseOpposite, [coll], colors.sides),
-        Greek: highlight('lesson__greek'),
-        hypoteinousa: highlight('lesson__greek'),
-      },
-    });
-
-    this.addSection(common, {
-      setContent: style({ top: 0 }, [
-        'To calculate triangle |area|, the triangle |height| is required. The height is a perpendicular line from the triangle |base_side| to the opposite vertex.',
-      ]),
-      modifiers: {
-        base_side: click(coll.pulseOpposite, [coll], colors.sides),
-        height: click(coll.pulseHeight, [coll], colors.sides),
-        area: this.bindShowQR('area_triangle/base', 'Main'),
+        opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
+        related: this.bindShowQR('side_angle_relationship/base', 'Main'),
+        largest_angle: click(coll.pulseRightAngle, [coll], colors.opposite),
       },
       show: [
         main._tri._line, main._tri._angle1, main._opposite,
-        main._base, main._height,
       ],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Therefore the |side opposite the right angle is always the longest| in a right triangle.',
+      ],
+      modifiers: {
+        opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
+        sides_and_angles: this.bindShowQR('side_angle_relationship/base', 'Main'),
+      },
+      show: [
+        main._tri._line, main._tri._angle1, main._opposite,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'The |opposite_side| to the right angle is often called the |hypotenuse|. The word comes from the |Greek| word |hypoteinousa| which means “stretching under”. Therefore the |hypotenuse is the side stretching under the right angle|.',
+      ]),
+      modifiers: {
+        opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
+        hypotenuse: click(coll.pulseOpposite, [coll], colors.opposite),
+        Greek: highlight('lesson__greek'),
+        hypoteinousa: highlight('lesson__greek'),
+      },
+      show: [
+        main._tri._line, main._tri._angle1, main._opposite,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'To calculate |triangle_area|, the triangle |height| is required. The height is a |perpendicular line| from the triangle |base_side| to the opposite |vertex|.',
+      ]),
+      modifiers: {
+        base_side: click(coll.pulseBase, [coll], colors.sides),
+        height: click(coll.pulseHeight, [coll], colors.sides),
+        triangle_area: this.bindShowQR('area_triangle/base', 'Main'),
+        vertex: click(coll.pulseVertex, [coll], colors.vertex),
+      },
+      show: [
+        main._tri._line, main._tri._angle1,
+        main._base, main._height, main._vertex,
+      ],
+    });
+
+    let content = {
+      setContent: style({}, [
+        'However, in a right angle triangle, |two_sides| of the triangle are already perpendicular.',
+      ]),
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        two_sides: this.bindNext(colors.perpendicular),
+      },
+      show: [
+        main._tri._line, main._tri._angle1,
+        // main._base, main._height, main._vertex,
+      ],
+    });
+
+    this.addSection(common, content, {
+      modifiers: {
+        two_sides: click(coll.pulsePerpendicularSides, [coll, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulsePerpendicularSides(done);
+      },
+      show: [
+        main._tri._line, main._tri._angle1,
+        // main._base, main._height, main._vertex,
+        main._leftSide, main._rightSide,
+      ],
+    });
+
+    content = {
+      setContent: style({}, [
+        'Therefore, |these sides can be used as the base and the height|, instead of needing to find a new dimension across the triangle.',
+      ]),
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        two_sides: click(coll.pulsePerpendicularSides, [coll, null], colors.sides),
+      },
+      show: [
+        main._tri._line, main._tri._angle1, main._leftSide, main._rightSide,
+      ],
+    });
+
+    this.addSection(common, content, {
+      modifiers: {
+        two_sides: click(coll.pulsePerpendicularSides, [coll, null], colors.sides),
+      },
+      show: [
+        main._tri._line, main._tri._angle1, main._leftSide, main._rightSide,
+        main._baseA, main._heightB,
+      ],
+      transitionFromPrev: (done) => {
+        main.setScenario('default');
+        main.animations.cancelAll();
+        main.animations.new()
+          .scenario({
+            target: 'aDown',
+            duration: 1,
+            afterFrame: coll.updateMainLabels.bind(coll),
+            rotDirection: -1,
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        main.setScenario('aDown');
+        coll.updateMainLabels();
+      },
     });
 
     // this.addSection({
