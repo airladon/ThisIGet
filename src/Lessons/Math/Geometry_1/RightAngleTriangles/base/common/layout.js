@@ -344,7 +344,7 @@ export default function lessonLayout() {
         alignH: 'center',
         alignV: 'baseline',
       },
-      scale: 0.9,
+      scale: 0.8,
       elements,
       forms: {
         '0': {

@@ -77,7 +77,6 @@ class Content extends PresentationLessonContent {
         coll._1.showForm('1');
         coll._2.showForm('2');
         coll._3.showForm('3');
-        console.log(coll)
       },
     });
   }
