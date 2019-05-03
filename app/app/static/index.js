@@ -7293,16 +7293,29 @@ function (_DiagramElementCollec) {
             subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
           } else if (options.animate === 'moveFrom' && this.eqn.formRestartPosition != null) {
             var target = this.getPosition();
+            var start = this.getPosition();
 
-            if (this.eqn.formRestartPosition instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
-              this.setPosition(this.eqn.formRestartPosition.getPosition());
-            } else {
-              // $FlowFixMe
-              this.setPosition(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition));
+            if (this.eqn.formRestartPosition instanceof EquationNew) {
+              this.eqn.formRestartPosition.showForm(subFormToUse);
             }
 
-            this.showForm(subForm);
-            this.animations.new().position({
+            if (this.eqn.formRestartPosition instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+              start = this.eqn.formRestartPosition.getPosition();
+            } else {
+              // $FlowFixMe
+              start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition);
+            }
+
+            this.showForm(subForm); // console.log(target)
+
+            this.animations.new() // .dissolveOut({ duration: 0.6 })
+            .position({
+              target: start,
+              duration: 0
+            }) // .trigger({
+            //   callback: () => { this.showForm(subForm); },
+            // })
+            .position({
               target: target,
               duration: duration
             }).whenFinished(end).start();

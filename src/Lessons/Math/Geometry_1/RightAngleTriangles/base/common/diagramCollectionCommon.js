@@ -50,6 +50,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
+    this._1.eqn.formRestartPosition = this._0Eqn;
+    this._2.eqn.formRestartPosition = this._1Eqn;
+    this._3.eqn.formRestartPosition = this._2Eqn;
   }
 
   updateMainLabels() {
