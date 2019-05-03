@@ -191,7 +191,6 @@ class Content extends PresentationLessonContent {
       },
       show: [
         main._tri._line, main._tri._angle1, main._leftSide, main._rightSide,
-        main._baseA, main._heightB,
       ],
       transitionFromPrev: (done) => {
         main.setScenario('default');
@@ -208,26 +207,28 @@ class Content extends PresentationLessonContent {
       },
       setSteadyState: () => {
         main.setScenario('aDown');
+        main._baseA.showAll();
+        main._heightB.showAll();
         coll.updateMainLabels();
       },
     });
 
-    // this.addSection({
-    //   title: 'Right Angle Triangle',
-    //   setContent: [
-    //     'A right angle triangle, or right triangle, is a triangle where one of the angles is a right angle.',
-    //   ],
-    //   show: [main._line, main._angle1],
-    //   setSteadyState: () => {
-    //     main.setScenarios('default');
-    //     fig.setScenarios('left');
-    //     coll.updatePythagorusSquareLabels();
-    //     coll._0.showForm('0');
-    //     coll._1.showForm('1');
-    //     coll._2.showForm('2');
-    //     coll._3.showForm('3');
-    //   },
-    // });
+    this.addSection({
+      title: 'Right Angle Triangle',
+      setContent: [
+        'A right angle triangle, or right triangle, is a triangle where one of the angles is a right angle.',
+      ],
+      show: [fig._pythagorusSquare],
+      setSteadyState: () => {
+        coll.setScenarios('default');
+        fig.setScenarios('left');
+        coll.updatePythagorusSquareLabels();
+        coll._0.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('2');
+        coll._3.showForm('3');
+      },
+    });
   }
 }
 

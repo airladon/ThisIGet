@@ -28,7 +28,7 @@ export default function lessonLayout() {
   const { colors } = layout;
 
   const leftSide = 3;
-  const p0 = new Point(0, 0);
+  const p0 = new Point(-1.7, -0.7);
   const p1 = p0
     .add(leftSide * Math.cos(Math.PI / 6), leftSide * Math.sin(Math.PI / 6));
   const height = p1.y - p0.y;
@@ -37,9 +37,11 @@ export default function lessonLayout() {
     p0.y,
   );
   const triPoints = [p0, p1, p2];
-  const tri2Points = triPoints.map(p => p.transformBy(
-    (new Transform().rotate(Math.PI / 6 * 5).translate(leftSide, 0)).m(),
-  ));
+  const t = new Transform()
+    .translate(1.7, 0.7)
+    .rotate(Math.PI / 6 * 5)
+    .translate(leftSide, 0);
+  const tri2Points = triPoints.map(p => p.transformBy(t.m()));
 
   // const tri3Points = triPoints.map(p => p.transformBy(
   //   (new Transform().rotate(0).translate(-1, 0)).m(),
@@ -244,8 +246,8 @@ export default function lessonLayout() {
     ],
     mods: {
       scenarios: {
-        default: { position: [-1.7, -0.8], rotation: 0, scale: 1 },
-        aDown: { position: [1.7, -1.2], rotation: Math.PI / 6 * 5, scale: 1 },
+        default: { position: [0, -0.5], rotation: 0, scale: 1 },
+        aDown: { position: [0, -0.9], rotation: Math.PI / 6 * 5, scale: 1 },
       },
     },
   };
