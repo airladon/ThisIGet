@@ -7298,7 +7298,6 @@ function (_DiagramElementCollec) {
               this.setPosition(this.eqn.formRestartPosition.getPosition());
             } else {
               // $FlowFixMe
-              console.log(this.eqn.formRestartPosition);
               this.setPosition(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition));
             }
 
