@@ -14,7 +14,7 @@ const {
 //   clickWord,
 } = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QRSideAngleRelationship extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -57,6 +57,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
       fig._tri._side01, fig._tri._side12,
     ]);
     fig.setScenarios('qr');
+    fig._tri.updateLabels();
     this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
@@ -70,7 +71,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRBoilerplate,
+    Main: QRSideAngleRelationship,
     // QR2: QRBoilerplate2,
   };
 }

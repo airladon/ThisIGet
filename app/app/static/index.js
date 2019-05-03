@@ -7324,6 +7324,7 @@ function (_DiagramElementCollec) {
               duration: 0
             }).trigger({
               callback: function callback() {
+                // $FlowFixMe
                 _this7.showForm(subForm.name, subFormToUse, false);
               },
               duration: 0.01
@@ -7337,7 +7338,8 @@ function (_DiagramElementCollec) {
             var newEnd = function newEnd() {
               _this7.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
 
-              if (pulse.element != null && pulse.element instanceof EquationNew && pulse.element.getCurrentForm().name === subForm.name) {
+              if (pulse.element != null && pulse.element instanceof EquationNew // $FlowFixMe
+              && pulse.element.getCurrentForm().name === subForm.name) {
                 pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
               }
             };
@@ -14329,7 +14331,7 @@ function (_DiagramElementCollec) {
   }, {
     key: "updateLabel",
     value: function updateLabel() {
-      var parentRotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getRotation() + this.angle;
+      var parentRotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var label = this.label;
 
       if (label == null) {

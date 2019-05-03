@@ -36,8 +36,11 @@ class Content extends PresentationLessonContent {
     this.loadQRs([
       'important_angles',
       'triangle_introduction',
+      'side_angle_relationship',
+      'area_triangle',
     ]);
   }
+
 
   addSections() {
     const diag = this.diagram.elements;
@@ -45,7 +48,14 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
     const main = fig._main;
 
-    this.addSection({
+    let common = {
+      show: [main._tri._line, main._tri._angle1, main._opposite],
+      setSteadyState: () => {
+        main.setScenarios('default');
+        coll.updateMainLabels();
+      },
+    };
+    this.addSection(common, {
       title: 'Right Angle Triangle',
       setContent: [
         'A |right angle triangle|, or |right triangle|, is a triangle where one of the |angles| is a |right_angle|.',
@@ -53,10 +63,6 @@ class Content extends PresentationLessonContent {
       modifiers: {
         angles: click(coll.pulseRightAngle, [coll], colors.rightAngle),
         right_angle: this.bindShowQR('important_angles/base', 'Right'),
-      },
-      show: [main._tri._line, main._tri._angle1],
-      setSteadyState: () => {
-        main.setScenarios('default');
       },
     });
 
@@ -78,6 +84,41 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    this.addSection(common, {
+      setContent: [
+        'In |any| triangle, the |side_opposite| the largest angle will have the |longest| length. Therefore the side opposite the right angle is always the longest| in a right triangle.',
+      ],
+      modifiers: {
+        side_opposite: click(coll.pulseOpposite, [coll], colors.sides),
+        any: this.bindShowQR('side_angle_relationship/base', 'Main'),
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'The |side_opposite| the right angle is often called the |hypotenuse|. The word comes from the |Greek| word |hypoteinousa| which means “stretching under”. Therefore the |hypotenuse is the side stretching under the right angle|.',
+      ]),
+      modifiers: {
+        side_opposite: click(coll.pulseOpposite, [coll], colors.sides),
+        Greek: highlight('lesson__greek'),
+        hypoteinousa: highlight('lesson__greek'),
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'To calculate triangle |area|, the triangle |height| is required. The height is a perpendicular line from the triangle |base_side| to the opposite vertex.',
+      ]),
+      modifiers: {
+        base_side: click(coll.pulseOpposite, [coll], colors.sides),
+        height: click(coll.pulseHeight, [coll], colors.sides),
+        area: this.bindShowQR('area_triangle/base', 'Main'),
+      },
+      show: [
+        main._tri._line, main._tri._angle1, main._opposite,
+        main._base, main._height,
+      ],
+    });
 
     // this.addSection({
     //   title: 'Right Angle Triangle',

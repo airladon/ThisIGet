@@ -33,13 +33,14 @@ export default class CommonCollection extends CommonDiagramCollection {
       _heightB: DiagramObjectLine;
       _baseA: DiagramObjectLine;
       _base: DiagramObjectLine;
+      _opposite: DiagramObjectLine;
     } & DiagramElementCollection;
     _pythagorusSquare: {
       _bottomLeft: DiagramObjectPolyLine;
       _bottomRight: DiagramObjectPolyLine;
       _topLeft: DiagramObjectPolyLine;
       _topRight: DiagramObjectPolyLine;
-    } & DiagramElementCollection
+    } & DiagramElementCollection;
   } & DiagramElementCollection;
 
   _0Eqn: Equation;
@@ -92,6 +93,16 @@ export default class CommonCollection extends CommonDiagramCollection {
   pulseNonRightAngles() {
     this._fig._main._tri._angle0.pulseScaleNow(1, 1.5);
     this._fig._main._tri._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseOpposite() {
+    this._fig._main._opposite.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseHeight() {
+    this._fig._main._height._line.pulseWidth({ line: 6, label: 1 });
     this.diagram.animateNextFrame();
   }
 }

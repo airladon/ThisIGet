@@ -85,6 +85,16 @@ export default function lessonLayout() {
     },
   });
 
+  const opposite = {
+    name: 'opposite',
+    method: 'line',
+    options: {
+      color: colors.sides,
+      width: 0.02,
+      p1: triPoints[0],
+      p2: triPoints[2],
+    },
+  };
   const heightLine = {
     name: 'height',
     method: 'collection',
@@ -180,6 +190,7 @@ export default function lessonLayout() {
     method: 'collection',
     addElements: [
       tri('tri'),
+      opposite,
       heightLine,
       heightB,
       base,

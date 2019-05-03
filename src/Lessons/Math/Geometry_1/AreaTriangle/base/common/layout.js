@@ -243,6 +243,7 @@ export default function lessonLayout() {
         text,
         offset: 0.01,
         location: 'outside',
+        orientation: 'horizontal',
       },
     },
   });
