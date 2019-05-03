@@ -6439,7 +6439,8 @@ function (_DiagramElementCollec) {
       },
       elements: {},
       forms: {},
-      formSeries: {}
+      formSeries: {},
+      formRestartPosition: null
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
     optionsToUse.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.position, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
@@ -6468,7 +6469,8 @@ function (_DiagramElementCollec) {
       fontText: optionsToUse.fontText,
       isAnimating: false,
       descriptionElement: null,
-      descriptionPosition: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)
+      descriptionPosition: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      formRestartPosition: optionsToUse.formRestartPosition
     };
 
     _this.setPosition(optionsToUse.position);
@@ -7289,6 +7291,22 @@ function (_DiagramElementCollec) {
             // console.log('move', duration, options, subForm.duration)
             // console.log('******************* animate')
             subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
+          } else if (options.animate === 'moveFrom' && this.eqn.formRestartPosition != null) {
+            var target = this.getPosition();
+
+            if (this.eqn.formRestartPosition instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+              this.setPosition(this.eqn.formRestartPosition.getPosition());
+            } else {
+              // $FlowFixMe
+              console.log(this.eqn.formRestartPosition);
+              this.setPosition(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition));
+            }
+
+            this.showForm(subForm);
+            this.animations.new().position({
+              target: target,
+              duration: duration
+            }).whenFinished(end).start();
           } else {
             // console.log('******************* hideshow')
             subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, end);
@@ -7358,7 +7376,12 @@ function (_DiagramElementCollec) {
 
         if (index > this.eqn.currentFormSeries.length - 1) {
           index = 0;
-          animate = 'dissolve';
+
+          if (this.eqn.formRestartPosition != null) {
+            animate = 'moveFrom';
+          } else {
+            animate = 'dissolve';
+          }
         }
 
         this.goToForm({

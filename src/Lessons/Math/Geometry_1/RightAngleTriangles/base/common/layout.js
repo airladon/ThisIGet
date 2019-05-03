@@ -333,7 +333,7 @@ export default function lessonLayout() {
     },
   });
 
-  const eqn = (name, y, defaultFormSeries) => ({
+  const eqn = (name, y, defaultFormSeries, formStart) => ({
     // name: 'eqn',
     name,
     method: 'addNavigator',
@@ -504,6 +504,7 @@ export default function lessonLayout() {
         '3': ['2', '2a', '3'],
       },
       defaultFormSeries,
+      formRestartPosition: [1.8, formStart],
     },
     mods: {
       scenarios: {
@@ -512,12 +513,12 @@ export default function lessonLayout() {
     },
   });
 
-  const nav = (name, y, interactive, defaultFormSeries = null) => ({
+  const nav = (name, y, interactive, defaultFormSeries = null, formStart = null) => ({
     name,
     method: 'addNavigator',
     options: {
       navType: 'description',
-      equation: eqn(`${name}Eqn`, y, defaultFormSeries),
+      equation: eqn(`${name}Eqn`, y, defaultFormSeries, formStart),
       interactive,
       alignV: 'middle',
     },
@@ -531,9 +532,9 @@ export default function lessonLayout() {
   layout.addElements = [
     fig,
     nav('0', 0.8, false),
-    nav('1', 0.1, true, '1'),
-    nav('2', -0.6, true, '2'),
-    nav('3', -1.3, true, '3'),
+    nav('1', 0.1, true, '1', 0.8),
+    nav('2', -0.6, true, '2', 0.1),
+    nav('3', -1.3, true, '3', -0.6),
   ];
   return layout;
 }
