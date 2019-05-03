@@ -7061,10 +7061,11 @@ function (_DiagramElementCollec) {
   }, {
     key: "render",
     value: function render() {
+      var animationStop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var form = this.getCurrentForm();
 
       if (form != null) {
-        form.showHide();
+        form.showHide(0, 0, null, animationStop);
         this.show();
         form.setPositions();
         form.applyElementMods(); // this.updateDescription();
@@ -7095,6 +7096,7 @@ function (_DiagramElementCollec) {
     key: "showForm",
     value: function showForm(formOrName) {
       var subForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var animationStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.show();
       var form = formOrName;
 
@@ -7104,7 +7106,7 @@ function (_DiagramElementCollec) {
 
       if (form) {
         this.setCurrentForm(form);
-        this.render();
+        this.render(animationStop);
       }
     }
   }, {
@@ -7293,10 +7295,32 @@ function (_DiagramElementCollec) {
             subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
           } else if (options.animate === 'moveFrom' && this.eqn.formRestartPosition != null) {
             var target = this.getPosition();
-            var start = this.getPosition();
+            var start = this.getPosition(); // let pulseDuration = 0;
+            // let pulseCallback = () => {};
+
+            var hideShowCallback = function hideShowCallback() {};
+
+            var hideShowCallbackDuration = 0;
 
             if (this.eqn.formRestartPosition instanceof EquationNew) {
-              this.eqn.formRestartPosition.showForm(subFormToUse);
+              console.log(this.eqn.formRestartPosition.eqn.currentForm, subForm.name);
+
+              if (this.eqn.formRestartPosition.currentForm !== subForm.name) {
+                hideShowCallback = function hideShowCallback() {
+                  _this7.eqn.formRestartPosition.goToForm({
+                    name: subForm.name,
+                    animate: 'dissolve' // duration: 0.5,
+
+                  });
+                };
+
+                hideShowCallbackDuration = 1;
+              }
+
+              this.eqn.formRestartPosition.showForm(subForm.name); // pulseDuration = 1;
+              // pulseCallback = () => {
+              //   this.eqn.formRestartPosition.pulseScaleNow(1, 1.3);
+              // };
             }
 
             if (this.eqn.formRestartPosition instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
@@ -7304,18 +7328,22 @@ function (_DiagramElementCollec) {
             } else {
               // $FlowFixMe
               start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition);
-            }
+            } // this.showForm(subForm);
 
-            this.showForm(subForm); // console.log(target)
 
-            this.animations.new() // .dissolveOut({ duration: 0.6 })
+            this.animations.new().dissolveOut({
+              duration: 0.6
+            }) // .trigger({ callback: pulseCallback.bind(this), duration: pulseDuration })
+            // .trigger({ callback: hideShowCallback, duration: hideShowCallbackDuration })
             .position({
               target: start,
               duration: 0
-            }) // .trigger({
-            //   callback: () => { this.showForm(subForm); },
-            // })
-            .position({
+            }).trigger({
+              callback: function callback() {
+                _this7.showForm(subForm.name, subFormToUse, false);
+              },
+              duration: 0.01
+            }).position({
               target: target,
               duration: duration
             }).whenFinished(end).start();
@@ -7835,7 +7863,12 @@ function (_Elements) {
       var showTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var hideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.collectionMethods.stop();
+      var animationStop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+      if (animationStop) {
+        this.collectionMethods.stop();
+      }
+
       this.collectionMethods.show();
 
       var _this$getElementsToSh = this.getElementsToShowAndHide(),
@@ -7864,7 +7897,12 @@ function (_Elements) {
       var showTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var hideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.collectionMethods.stop();
+      var animationStop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+      if (animationStop) {
+        this.collectionMethods.stop();
+      }
+
       this.collectionMethods.show();
 
       var _this$getElementsToSh2 = this.getElementsToShowAndHide(),
