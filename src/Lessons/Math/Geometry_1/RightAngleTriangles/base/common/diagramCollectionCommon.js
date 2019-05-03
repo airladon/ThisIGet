@@ -83,4 +83,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._pythagorusSquare._topLeft.updateLabels();
     this._fig._pythagorusSquare._topRight.updateLabels();
   }
+
+  pulseRightAngle() {
+    this._fig._main._tri._angle1.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseNonRightAngles() {
+    this._fig._main._tri._angle0.pulseScaleNow(1, 1.5);
+    this._fig._main._tri._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
 }
