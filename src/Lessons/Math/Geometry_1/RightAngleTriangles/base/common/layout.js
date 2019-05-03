@@ -504,7 +504,14 @@ export default function lessonLayout() {
         '3': ['2', '2a', '3'],
       },
       defaultFormSeries,
-      formRestartPosition: [1.8, formStart],
+      formRestart: {
+        pulse: {
+          duration: 1,
+          scale: 1.1,
+        },
+      },
+      // formRestartPosition: [1.8, formStart],
+      // formRestartAnimation: 'pulse',
     },
     mods: {
       scenarios: {

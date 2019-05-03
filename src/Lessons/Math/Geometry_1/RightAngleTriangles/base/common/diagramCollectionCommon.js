@@ -9,7 +9,8 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
-  // Equation,
+  Equation,
+  EqnNavigator,
   Transform,
 } = Fig;
 
@@ -41,6 +42,15 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramElementCollection
   } & DiagramElementCollection;
 
+  _0Eqn: Equation;
+  _1Eqn: Equation;
+  _2Eqn: Equation;
+  _3Eqn: Equation;
+  _0: EqnNavigator;
+  _1: EqnNavigator;
+  _2: EqnNavigator;
+  _3: EqnNavigator;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -50,9 +60,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
-    this._1Eqn.eqn.formRestartPosition = this._0Eqn;
-    this._2Eqn.eqn.formRestartPosition = this._1Eqn;
-    this._3Eqn.eqn.formRestartPosition = this._2Eqn;
+    this._1Eqn.eqn.formRestart.pulse.element = this._0Eqn;
+    this._2Eqn.eqn.formRestart.pulse.element = this._1Eqn;
+    this._3Eqn.eqn.formRestart.pulse.element = this._2Eqn;
+    // this._1Eqn.eqn.formRestart.moveFrom = this._0Eqn;
+    // this._2Eqn.eqn.formRestart.moveFrom = this._1Eqn;
+    // this._3Eqn.eqn.formRestart.moveFrom = this._2Eqn;
   }
 
   updateMainLabels() {

@@ -6440,11 +6440,19 @@ function (_DiagramElementCollec) {
       elements: {},
       forms: {},
       formSeries: {},
-      formRestartPosition: null
+      formRestart: null
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
     optionsToUse.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.position, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
     optionsToUse.defaultFormAlignment.fixTo = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.defaultFormAlignment.fixTo, optionsToUse.defaultFormAlignment.fixTo);
+
+    if (optionsToUse.formRestart != null && optionsToUse.formRestart.pulse != null) {
+      optionsToUse.formRestart.pulse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+        scale: 1.1,
+        duration: 1
+      }, optionsToUse.formRestart.pulse);
+    }
+
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNew).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
     _this.shapes = shapes;
     _this.color = optionsToUse.color; // this.isTouchDevice = isTouchDevice;
@@ -6470,7 +6478,7 @@ function (_DiagramElementCollec) {
       isAnimating: false,
       descriptionElement: null,
       descriptionPosition: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-      formRestartPosition: optionsToUse.formRestartPosition
+      formRestart: optionsToUse.formRestart
     };
 
     _this.setPosition(optionsToUse.position);
@@ -7293,49 +7301,25 @@ function (_DiagramElementCollec) {
             // console.log('move', duration, options, subForm.duration)
             // console.log('******************* animate')
             subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
-          } else if (options.animate === 'moveFrom' && this.eqn.formRestartPosition != null) {
+          } else if (options.animate === 'moveFrom' && this.eqn.formRestart != null && this.eqn.formRestart.moveFrom != null) {
+            var moveFrom = this.eqn.formRestart.moveFrom;
             var target = this.getPosition();
-            var start = this.getPosition(); // let pulseDuration = 0;
-            // let pulseCallback = () => {};
+            var start = this.getPosition();
 
-            var hideShowCallback = function hideShowCallback() {};
-
-            var hideShowCallbackDuration = 0;
-
-            if (this.eqn.formRestartPosition instanceof EquationNew) {
-              console.log(this.eqn.formRestartPosition.eqn.currentForm, subForm.name);
-
-              if (this.eqn.formRestartPosition.currentForm !== subForm.name) {
-                hideShowCallback = function hideShowCallback() {
-                  _this7.eqn.formRestartPosition.goToForm({
-                    name: subForm.name,
-                    animate: 'dissolve' // duration: 0.5,
-
-                  });
-                };
-
-                hideShowCallbackDuration = 1;
-              }
-
-              this.eqn.formRestartPosition.showForm(subForm.name); // pulseDuration = 1;
-              // pulseCallback = () => {
-              //   this.eqn.formRestartPosition.pulseScaleNow(1, 1.3);
-              // };
+            if (moveFrom instanceof EquationNew) {
+              moveFrom.showForm(subForm.name);
             }
 
-            if (this.eqn.formRestartPosition instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
-              start = this.eqn.formRestartPosition.getPosition();
+            if (moveFrom instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+              start = moveFrom.getPosition();
             } else {
               // $FlowFixMe
-              start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestartPosition);
-            } // this.showForm(subForm);
-
+              start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestart.moveFrom);
+            }
 
             this.animations.new().dissolveOut({
-              duration: 0.6
-            }) // .trigger({ callback: pulseCallback.bind(this), duration: pulseDuration })
-            // .trigger({ callback: hideShowCallback, duration: hideShowCallbackDuration })
-            .position({
+              duration: options.dissolveOutTime
+            }).position({
               target: start,
               duration: 0
             }).trigger({
@@ -7347,6 +7331,18 @@ function (_DiagramElementCollec) {
               target: target,
               duration: duration
             }).whenFinished(end).start();
+          } else if (options.animate === 'pulse' && this.eqn.formRestart != null && this.eqn.formRestart.pulse != null) {
+            var pulse = this.eqn.formRestart.pulse;
+
+            var newEnd = function newEnd() {
+              _this7.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
+
+              if (pulse.element != null && pulse.element instanceof EquationNew && pulse.element.getCurrentForm().name === subForm.name) {
+                pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
+              }
+            };
+
+            subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, newEnd);
           } else {
             // console.log('******************* hideshow')
             subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, end);
@@ -7416,9 +7412,12 @@ function (_DiagramElementCollec) {
 
         if (index > this.eqn.currentFormSeries.length - 1) {
           index = 0;
+          var formRestart = this.eqn.formRestart;
 
-          if (this.eqn.formRestartPosition != null) {
+          if (formRestart != null && formRestart.moveFrom != null) {
             animate = 'moveFrom';
+          } else if (formRestart != null && formRestart.pulse != null) {
+            animate = 'pulse';
           } else {
             animate = 'dissolve';
           }
