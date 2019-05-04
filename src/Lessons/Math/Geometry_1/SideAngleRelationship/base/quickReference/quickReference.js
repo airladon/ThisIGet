@@ -5,7 +5,7 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import CommonCollection from '../common/diagramCollectionCommon';
+import QRCollection from './collection';
 
 const { Transform, Rect } = Fig;
 const {
@@ -15,7 +15,7 @@ const {
 } = Fig.tools.html;
 
 export default class QRSideAngleRelationship extends PopupBoxCollection {
-  _collection: CommonCollection;
+  _collection: QRCollection;
 
   constructor(
     diagram: Object,
@@ -27,7 +27,7 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      CommonCollection,
+      QRCollection,
     );
     this.hasTouchableElements = true;
 

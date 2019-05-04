@@ -34,11 +34,11 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'important_angles',
-      'triangle_introduction',
+      // 'important_angles',
+      // 'triangle_introduction',
       'side_angle_relationship',
-      'area_triangle',
-      'adjacent_angles',
+      // 'area_triangle',
+      // 'adjacent_angles',
     ]);
   }
 
