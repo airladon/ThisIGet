@@ -14,6 +14,10 @@ const {
   Transform,
 } = Fig;
 
+type fullTriangle = {
+
+} & DiagramObjectPolyLine;
+
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _main: {
@@ -43,6 +47,18 @@ export default class CommonCollection extends CommonDiagramCollection {
       _bottomRight: DiagramObjectPolyLine;
       _topLeft: DiagramObjectPolyLine;
       _topRight: DiagramObjectPolyLine;
+      _largeSquare: DiagramElementPrimative;
+      _smallSquare: DiagramElementPrimative;
+      _vertex1: DiagramElementPrimative;
+      _vertex2: DiagramElementPrimative;
+      _vertex3: DiagramElementPrimative;
+      _vertex4: DiagramElementPrimative;
+      _largeSquareArea: DiagramElementPrimative;
+      _smallSquareArea: DiagramElementPrimative;
+      _bottomLeftArea: DiagramElementPrimative;
+      _bottomRightArea: DiagramElementPrimative;
+      _topLeftArea: DiagramElementPrimative;
+      _topRightArea: DiagramElementPrimative;
     } & DiagramElementCollection;
   } & DiagramElementCollection;
 
@@ -122,6 +138,73 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseVertex() {
     this._fig._main._vertex.pulseScaleNow(1, 2.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSideLengths() {
+    this._fig._pythagorusSquare._topLeft._side01._label.pulseScaleNow(1, 1.7);
+    this._fig._pythagorusSquare._topLeft._side12._label.pulseScaleNow(1, 1.7);
+    this._fig._pythagorusSquare._topLeft._side20._label.pulseScaleNow(1, 1.7);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseLargeSquare(done: ?() => void = null) {
+    this._fig._pythagorusSquare._largeSquare.pulseThickNow(1, 1.03, 11, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSmallSquare() {
+    this._fig._pythagorusSquare._smallSquare.pulseThickNow(1, 1.03, 11);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTriangleAngles(done: ?() => void = null) {
+    this._fig._pythagorusSquare._topLeft._angle0.pulseScaleNow(1, 2, 0, done);
+    this._fig._pythagorusSquare._topLeft._angle2.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._topRight._angle0.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._topRight._angle2.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._bottomLeft._angle0.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._bottomLeft._angle2.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._bottomRight._angle0.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._bottomRight._angle2.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseVertices() {
+    this._fig._pythagorusSquare._vertex1.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._vertex2.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._vertex3.pulseScaleNow(1, 2);
+    this._fig._pythagorusSquare._vertex4.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  hideAreas() {
+    this._fig._pythagorusSquare._largeSquareArea.hide();
+    this._fig._pythagorusSquare._smallSquareArea.hide();
+    this._fig._pythagorusSquare._bottomLeftArea.hide();
+    this._fig._pythagorusSquare._bottomRightArea.hide();
+    this._fig._pythagorusSquare._topLeftArea.hide();
+    this._fig._pythagorusSquare._topRightArea.hide();
+  }
+
+  showLargeSquareArea() {
+    this.hideAreas();
+    this._fig._pythagorusSquare._largeSquareArea.show();
+    this.diagram.animateNextFrame();
+  }
+
+  showSmallSquareArea() {
+    this.hideAreas();
+    this._fig._pythagorusSquare._smallSquareArea.show();
+    this.diagram.animateNextFrame();
+  }
+
+  showTriangleAreas() {
+    this.hideAreas();
+    this._fig._pythagorusSquare._bottomLeftArea.show();
+    this._fig._pythagorusSquare._bottomRightArea.show();
+    this._fig._pythagorusSquare._topLeftArea.show();
+    this._fig._pythagorusSquare._topRightArea.show();
     this.diagram.animateNextFrame();
   }
 }

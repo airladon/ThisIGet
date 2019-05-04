@@ -19,6 +19,7 @@ const cssColorNames = [
   'vertex',
   'opposite',
   'perpendicular',
+  'areaFill',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -47,10 +48,14 @@ export default function lessonLayout() {
   //   (new Transform().rotate(0).translate(-1, 0)).m(),
   // ));
 
-  const angle = (color = colors.angles, radius = 0.3) => ({
+  const angle = (text, textScale, color = colors.angles, radius = 0.3) => ({
     curve: {
       radius,
       sides: 100,
+    },
+    label: {
+      text,
+      scale: textScale,
     },
     autoRightAngle: true,
     color,
@@ -75,25 +80,25 @@ export default function lessonLayout() {
         side('C', textScale),
       ],
       angle: [
-        angle(colors.angles, 0.4),
-        angle(colors.rightAngle, 0.4),
-        angle(),
+        angle('b', 1, colors.angles, 0.4),
+        angle('', 1, colors.rightAngle, 0.4),
+        angle('a', 1),
       ],
     },
     mods: {
       scenarios: {
-        default: { position, rotation, scale },
+        default: { position: [0, 0], rotation: 0, scale: 1 },
+        square: { position, rotation, scale },
         split: {
           position: [getPoint(position).x / 1.3, getPoint(position).y / 2],
           rotation: 0,
           scale,
         },
-        together: { position: [0, 0], rotation: 0, scale: 0.5 },
+        together: { position: [0, 0], rotation: 0, scale },
         normalSize: { position: [0, 0], rotation: 0, scale: 1 },
       },
     },
   });
-
 
   const heightLine = {
     name: 'height',
@@ -259,27 +264,138 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
-  const scale = 0.4;
+  const scale = 0.5;
   const textScale = 1;
   const sideA = scale * leftSide;
   const sideB = scale * height / Math.sin(Math.PI / 3);
   const AB = sideA + sideB;
+  const hypotenuse = (p2.x - p0.x) * scale;
+  const largeSquare = {
+    name: 'largeSquare',
+    method: 'polygon',
+    options: {
+      radius: Math.sqrt(AB * AB + AB * AB) / 2,
+      width: 0.01,
+      rotation: Math.PI / 4,
+      color: colors.sides,
+      sides: 4,
+    },
+    mods: {
+      scenarios: {
+        'square': { position: [AB / 2, AB / 2] },
+        'left': { position: [AB / 2, AB / 2] },
+      },
+    },
+  };
+
+  const largeSquareArea = {
+    name: 'largeSquareArea',
+    method: 'polygon',
+    options: {
+      radius: Math.sqrt(AB * AB + AB * AB) / 2,
+      fill: true,
+      rotation: Math.PI / 4,
+      color: colors.areaFill,
+      sides: 4,
+    },
+    mods: {
+      scenarios: {
+        'square': { position: [AB / 2, AB / 2] },
+        'left': { position: [AB / 2, AB / 2] },
+      },
+    },
+  };
+
+  const smallSquare = {
+    name: 'smallSquare',
+    method: 'polygon',
+    options: {
+      radius: Math.sqrt((hypotenuse ** 2) * 2) / 2,
+      width: 0.01,
+      rotation: Math.PI / 12,
+      color: colors.sides,
+      sides: 4,
+    },
+    mods: {
+      scenarios: {
+        'square': { position: [AB / 2, AB / 2] },
+        'left': { position: [AB / 2, AB / 2] },
+      },
+    },
+  };
+
+  const smallSquareArea = {
+    name: 'smallSquareArea',
+    method: 'polygon',
+    options: {
+      radius: Math.sqrt((hypotenuse ** 2) * 2) / 2,
+      rotation: Math.PI / 12,
+      color: colors.areaFill,
+      sides: 4,
+      fill: true,
+    },
+    mods: {
+      scenarios: {
+        'square': { position: [AB / 2, AB / 2] },
+        'left': { position: [AB / 2, AB / 2] },
+      },
+    },
+  };
+
+  const triArea = (name, position, rotation) => ({
+    name,
+    method: 'fan',
+    options: {
+      points: tri2Points,
+      color: colors.areaFill,
+      transform: new Transform().scale(scale, scale).rotate(rotation).translate(getPoint(position)),
+    },
+  });
+
+  const triangleTouchPoint = (name, position, rotation) => ({
+    name,
+    method: 'polygon',
+    options: {
+      fill: true,
+      color: colors.vertex,
+      sides: 50,
+      radius: 0.05,
+      position: new Point(
+        position[0] + sideA * Math.cos(rotation),
+        position[1] + sideA * Math.sin(rotation),
+      ),
+    },
+  });
+
   const pythagorusSquare = {
     name: 'pythagorusSquare',
     method: 'collection',
     addElements: [
+      largeSquareArea,
+      smallSquareArea,
+      triArea('bottomLeftArea', [0, 0], 0),
+      triArea('bottomRightArea', [AB, 0], Math.PI / 2),
+      triArea('topRightArea', [AB, AB], Math.PI),
+      triArea('topLeftArea', [0, AB], Math.PI * 3 / 2),
+      triangleTouchPoint('vertex1', [0, 0], 0),
+      triangleTouchPoint('vertex2', [AB, 0], Math.PI / 2),
+      triangleTouchPoint('vertex3', [AB, AB], Math.PI),
+      triangleTouchPoint('vertex4', [0, AB], Math.PI * 3 / 2),
       tri('bottomLeft', tri2Points, [0, 0], 0, scale, textScale),
       tri('bottomRight', tri2Points, [AB, 0], Math.PI / 2, scale, textScale),
       tri('topRight', tri2Points, [AB, AB], Math.PI, scale, textScale),
       tri('topLeft', tri2Points, [0, AB], Math.PI * 3 / 2, scale, textScale),
+      largeSquare,
+      smallSquare,
     ],
     mods: {
       scenarios: {
-        default: { position: [-1, -1.4] },
-        left: { position: [-2.7, -1.2] },
-        split: { position: [-1.5, -1.4] },
-        together: { position: [-0.5, -0.5] },
-        normalSize: { position: [-1.5, -1] },
+        default: { position: [-1.175, -1.145], scale: 1 },
+        square: { position: [-0.7, -1.4], scale: 1 },
+        left: { position: [-2.7, -1.2], scale: 0.9 },
+        split: { position: [-0.7, -1.4], scale: 1 },
+        together: { position: [-0.7, -1.4], scale: 1 },
+        normalSize: { position: [-1.5, -1], scale: 1 },
       },
     },
   };

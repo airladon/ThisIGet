@@ -1,6 +1,7 @@
 @import '../../../geometry';
 
 $colors: (
+  areaFill:                    color('blue', 'darkest'),
   sides:                       color('blue'),
   rightAngle:                  color('red'),
   opposite:                    color('red'),

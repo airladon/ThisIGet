@@ -12760,6 +12760,12 @@ function (_DiagramElementCollec) {
   }, {
     key: "updateLabel",
     value: function updateLabel() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (rotationOffset != null) {
+        this.lastLabelRotationOffset = rotationOffset;
+      }
+
       var _label = this._label,
           label = this.label;
 

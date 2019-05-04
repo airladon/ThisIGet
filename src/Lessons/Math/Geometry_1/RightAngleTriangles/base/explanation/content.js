@@ -38,6 +38,7 @@ class Content extends PresentationLessonContent {
       'triangle_introduction',
       'side_angle_relationship',
       'area_triangle',
+      'adjacent_angles',
     ]);
   }
 
@@ -47,6 +48,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const fig = coll._fig;
     const main = fig._main;
+    const pyth = fig._pythagorusSquare;
 
     let common = {
       show: [main._tri._line, main._tri._angle1],
@@ -68,12 +70,12 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'The total angle in a |triangle| is 180º, and a |right_angle| is 90º, so then the sum of the |remaining_angles| must be 90º. Therefore the 90º angle is the |largest| angle in a right triangle.',
+        'The |right_angle| is the largest angle in the triangle as the |total_angle| in a triangle is 180º and the sum of the |remaining_angles| is 90º.',
       ],
       modifiers: {
         remaining_angles: click(coll.pulseNonRightAngles, [coll], colors.angles),
-        right_angle: this.bindShowQR('important_angles/base', 'Right'),
-        triangle: this.bindShowQR('triangle_introduction/base', 'Main'),
+        right_angle: click(coll.pulseRightAngle, [coll], colors.rightAngle),
+        total_angle: this.bindShowQR('triangle_introduction/base', 'Main'),
       },
       show: [
         main._tri._line, main._tri._angle1,
@@ -214,21 +216,262 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Right Angle Triangle',
       setContent: [
-        'A right angle triangle, or right triangle, is a triangle where one of the angles is a right angle.',
+        'Another important property of right angle triangles is the |relationship| between |side_lengths|.',
       ],
-      show: [fig._pythagorusSquare],
+      modifiers: {
+        side_lengths: click(coll.pulseSideLengths, [coll], colors.sides),
+      },
+      show: [
+        pyth._topLeft,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+      ],
       setSteadyState: () => {
-        coll.setScenarios('default');
-        fig.setScenarios('left');
+        pyth.setScenarios('normalSize');
         coll.updatePythagorusSquareLabels();
-        coll._0.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('2');
-        coll._3.showForm('3');
       },
     });
+
+    content = {
+      setContent: [
+        'We can see this by taking |four congruent right angle triangle\'s| and rotating them into a |square|.',
+      ],
+    };
+
+    this.addSection(content, {
+      modifiers: {
+        square: this.bindNext(colors.sides),
+      },
+      show: [
+        pyth._topLeft,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+      ],
+      setSteadyState: () => {
+        pyth.setScenarios('normalSize');
+        coll.updatePythagorusSquareLabels();
+      },
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        square: click(coll.pulseLargeSquare, [coll, null], colors.sides),
+      },
+      show: [
+        pyth._topLeft, pyth._topRight, pyth._bottomLeft, pyth._bottomRight,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+        pyth._topRight._angle0, pyth._topRight._angle2,
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
+        pyth._bottomRight._angle0, pyth._bottomRight._angle2,
+      ],
+      transitionFromPrev: (done) => {
+        fig.setScenario('default');
+        coll.updatePythagorusSquareLabels();
+        fig.setScenarios('normalSize');
+        fig.animations.new()
+          .scenarios({ target: 'together', duration: 1 })
+          .scenarios({ target: 'split', duration: 2 })
+          .scenarios({
+            target: 'square',
+            duration: 3,
+            afterFrame: coll.updatePythagorusSquareLabels.bind(coll),
+          })
+          .trigger({ callback: () => { pyth._largeSquare.show(); } })
+          .whenFinished(coll.pulseLargeSquare.bind(coll, done))
+          .start();
+      },
+      setSteadyState: () => {
+        fig.setScenarios('square');
+        pyth._largeSquare.show();
+        coll.updatePythagorusSquareLabels();
+      },
+    });
+
+    common = {
+      show: [
+        pyth._topLeft, pyth._topRight, pyth._bottomLeft, pyth._bottomRight,
+        pyth._largeSquare, pyth._smallSquare,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+        pyth._topRight._angle0, pyth._topRight._angle2,
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
+        pyth._bottomRight._angle0, pyth._bottomRight._angle2,
+        pyth._vertex1, pyth._vertex2, pyth._vertex3, pyth._vertex4,
+      ],
+      setSteadyState: () => {
+        fig.setScenarios('square');
+        coll.updatePythagorusSquareLabels();
+      },
+    };
+
+    content = {
+      setContent: 'Actually, there is a second |smaller_square| in the picture.',
+      modifiers: {
+        smaller_square: click(coll.pulseSmallSquare, [coll], colors.sides),
+      },
+    };
+    this.addSection(common, content);
+
+    content = {
+      setContent: 'We can show this is a |square| by showing the |angles| of the triangles.',
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        angles: this.bindNext(colors.angles),
+        square: click(coll.pulseSmallSquare, [coll], colors.sides),
+      },
+    });
+    this.addSection(common, content, {
+      modifiers: {
+        angles: click(coll.pulseTriangleAngles, [coll, null], colors.angles),
+        square: click(coll.pulseSmallSquare, [coll], colors.sides),
+      },
+      show: [pyth],
+      hide: [
+        pyth._vertex1, pyth._vertex2, pyth._vertex3, pyth._vertex4,
+        pyth._bottomLeftArea,
+        pyth._topLeftArea, pyth._bottomRightArea,
+        pyth._topRightArea, pyth._largeSquareArea, pyth._smallSquareArea,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseTriangleAngles(done);
+      },
+    });
+
+    content = {
+      setContent: style({ top: 0 }, ['At each |point| where two triangles touch, angles |a|, |b| and the |inside_shape| are |supplementary| angles. As |_a| and |_b| sum to 90º, the remaining angle is then also |90º|.']),
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        inside_shape: click(coll.pulseSmallSquare, [coll], colors.sides),
+        a: highlight(colors.angles),
+        b: highlight(colors.angles),
+        _a: highlight(colors.angles),
+        _b: highlight(colors.angles),
+        supplementary: this.bindShowQR('adjacent_angles/base', 'Supplementary'),
+        point: click(coll.pulseVertices, [coll], colors.vertex),
+      },
+      show: [pyth],
+      hide: [
+        pyth._bottomLeftArea, pyth._topLeftArea, pyth._bottomRightArea,
+        pyth._topRightArea, pyth._largeSquareArea, pyth._smallSquareArea,
+      ],
+    });
+
+
+    // this.addSection(common, content, {
+    //   modifiers: {
+    //     angles: this.bindNext(colors.angles),
+    //   },
+    // });
+    // this.addSection(common, content, {
+    //   modifiers: {
+    //     angles: click(coll.pulseTriangleAngles, [coll, null], colors.angles),
+    //   },
+    //   show: [pyth],
+    //   hide: [],
+    //   transitionFromPrev: (done) => {
+    //     coll.pulseTriangleAngles(done);
+    //   },
+    // });
+
+    common = {
+      show: [
+        pyth._topLeft, pyth._topRight, pyth._bottomLeft, pyth._bottomRight,
+        pyth._largeSquare, pyth._smallSquare,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+        pyth._topRight._angle0, pyth._topRight._angle2,
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
+        pyth._bottomRight._angle0, pyth._bottomRight._angle2,
+      ],
+      setSteadyState: () => {
+        fig.setScenarios('square');
+        coll.updatePythagorusSquareLabels();
+      },
+    };
+
+    content = {
+      setContent: 'We can now calculate the area of the |larger_square|.',
+      modifiers: {
+        larger_square: click(coll.pulseLargeSquare, [coll], colors.sides),
+      },
+    };
+
+    this.addSection(common, content);
+
+    content = {
+      setContent: 'The area of the |larger_square| is the sum of the areas of the |four_triangles| and |smaller_square|.',
+      modifiers: {
+        larger_square: click(coll.showLargeSquareArea, [coll, null], colors.sides),
+        smaller_square: click(coll.showSmallSquareArea, [coll], colors.sides),
+        four_triangles: click(coll.showTriangleAreas, [coll], colors.sides),
+      },
+    };
+    this.addSection(common, content);
+
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        pyth.setScenarios('square');
+        pyth.animations.new()
+          .scenario({ target: 'left', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        pyth.setScenarios('square');
+        pyth.setScenario('left');
+        coll.updatePythagorusSquareLabels();
+      },
+    });
+
+    common = {
+      show: [
+        pyth._topLeft, pyth._topRight, pyth._bottomLeft, pyth._bottomRight,
+        pyth._largeSquare, pyth._smallSquare,
+      ],
+      hide: [
+        pyth._topLeft._angle0, pyth._topLeft._angle2,
+        pyth._topRight._angle0, pyth._topRight._angle2,
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
+        pyth._bottomRight._angle0, pyth._bottomRight._angle2,
+        pyth._vertex1, pyth._vertex2, pyth._vertex3, pyth._vertex4,
+      ],
+      setEnterState: () => {
+        fig.setScenarios('left');
+        coll.updatePythagorusSquareLabels();
+      },
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0.showForm('0');
+      },
+    });
+
+    // this.addSection({
+    //   title: 'Right Angle Triangle',
+    //   setContent: [
+    //     'A right angle triangle, or right triangle, is a triangle where one of the angles is a right angle.',
+    //   ],
+    //   show: [fig._pythagorusSquare],
+    //   setSteadyState: () => {
+    //     coll.setScenarios('default');
+    //     fig.setScenarios('left');
+    //     coll.updatePythagorusSquareLabels();
+    //     coll._0.showForm('0');
+    //     coll._1.showForm('1');
+    //     coll._2.showForm('2');
+    //     coll._3.showForm('3');
+    //   },
+    // });
   }
 }
 
