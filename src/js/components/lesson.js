@@ -9,7 +9,7 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import LessonNavigator from './lessonNavigator';
 // import LessonTilePath from './lessonPathTile';
 import LessonTitle from './lessonTitle';
-import getLessonIndex from '../../Lessons/index';
+import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
 import LessonDescription from '../Lesson/lessonDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';

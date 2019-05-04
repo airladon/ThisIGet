@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import CommonDiagramCollection from './DiagramCollection';
-import getLessonIndex from '../index';
+import getLessonIndex from './lessonindex';
 
 const {
   Transform, Point, DiagramElementPrimative, Rect,

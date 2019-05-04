@@ -1,5 +1,5 @@
 // @flow
-import getLessonIndex from '../../Lessons/index';
+import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
 import type { TypeLessonDescription } from './lessonDescription';
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list

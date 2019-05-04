@@ -270,6 +270,14 @@ module.exports = (env) => {
             test: /Lessons\/LessonsCommon/,
             name: 'commonlessons',
           },
+          // lessonindex: {
+          //   minSize: 10,
+          //   minChunks: 2,
+          //   priority: 0,
+          //   reuseExistingChunk: true,
+          //   test: /Lessons\/index.js/,
+          //   name: 'lessonindex',
+          // },
           commoncss: {
             minSize: 10,
             minChunks: 2,

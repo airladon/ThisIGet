@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import getLessonIndex from '../../Lessons/index';
+import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {

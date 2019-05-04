@@ -97,7 +97,7 @@ function makeLessonIndex(buildMode) {
   const lessons = getAllLessons('./src/Lessons');
   // const lessonDescriptions = [];
   let outStr =
-`import LessonDescription from '../js/Lesson/lessonDescription';
+`import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {`;
@@ -203,7 +203,7 @@ export default function getLessonIndex() {
   outStr = `${outStr}\n  };`;
   outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   if (outStr !== '') {
-    fs.writeFile('./src/Lessons/index.js', outStr, (err) => {
+    fs.writeFile('./src/Lessons/LessonsCommon/lessonindex.js', outStr, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(err);
