@@ -399,19 +399,19 @@ class Content extends PresentationLessonContent {
     };
 
     content = {
-      setContent: 'We can now calculate the area of the |larger_square|.',
+      setContent: 'We can now calculate the area of the |large_square|.',
       modifiers: {
-        larger_square: click(coll.pulseLargeSquare, [coll], colors.sides),
+        large_square: click(coll.pulseLargeSquare, [coll], colors.sides),
       },
     };
 
     this.addSection(common, content);
 
     content = {
-      setContent: 'The area of the |larger_square| is the sum of the areas of the |four_triangles| and |smaller_square|.',
+      setContent: 'The area of the |large_square| is the sum of the areas of the |four_triangles| and |small_square|.',
       modifiers: {
-        larger_square: click(coll.showLargeSquareArea, [coll, null], colors.sides),
-        smaller_square: click(coll.showSmallSquareArea, [coll], colors.sides),
+        large_square: click(coll.showLargeSquareArea, [coll, null], colors.sides),
+        small_square: click(coll.showSmallSquareArea, [coll], colors.sides),
         four_triangles: click(coll.showTriangleAreas, [coll], colors.sides),
       },
     };
@@ -445,6 +445,7 @@ class Content extends PresentationLessonContent {
         pyth._vertex1, pyth._vertex2, pyth._vertex3, pyth._vertex4,
       ],
       setEnterState: () => {
+        coll.setScenarios('default');
         fig.setScenarios('left');
         coll.updatePythagorusSquareLabels();
       },
@@ -456,6 +457,18 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    content = {
+      setContent: 'We know area length of a square is ',
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('2');
+        coll._3.showForm('3');
+      },
+    });
     // this.addSection({
     //   title: 'Right Angle Triangle',
     //   setContent: [

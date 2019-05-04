@@ -89,6 +89,7 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [0, 0], rotation: 0, scale: 1 },
         square: { position, rotation, scale },
+        left: { position, rotation, scale },
         split: {
           position: [getPoint(position).x / 1.3, getPoint(position).y / 2],
           rotation: 0,
@@ -392,7 +393,7 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [-1.175, -1.145], scale: 1 },
         square: { position: [-0.7, -1.4], scale: 1 },
-        left: { position: [-2.7, -1.2], scale: 0.9 },
+        left: { position: [-2.7, -1.6], scale: 1 },
         split: { position: [-0.7, -1.4], scale: 1 },
         together: { position: [-0.7, -1.4], scale: 1 },
         normalSize: { position: [-1.5, -1], scale: 1 },
@@ -461,14 +462,14 @@ export default function lessonLayout() {
     mul: ' \u00D7 ',
     v: { symbol: 'vinculum' },
     'brace': {
-      symbol: 'brace', side: 'top', numLines: 2, color: colors.description,
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
     },
     'x': { symbol: 'xStrike', color: colors.description },
     '_x': { symbol: 'xStrike', color: colors.description },
   };
 
   const top = (content, commentText, symbol) => ({
-    topComment: {
+    bottomComment: {
       content,
       comment: commentText,
       symbol,
@@ -508,7 +509,7 @@ export default function lessonLayout() {
     },
   });
 
-  const eqn = (name, y, defaultFormSeries, formStart) => ({
+  const eqn = (name, y, defaultFormSeries) => ({
     // name: 'eqn',
     name,
     method: 'addNavigator',
@@ -516,6 +517,7 @@ export default function lessonLayout() {
       navType: 'description',
       color: colors.diagram.text.base,
       defaultFormAlignment: {
+        fixTo: 'equals',
         alignH: 'center',
         alignV: 'baseline',
       },
@@ -690,23 +692,24 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [1.8, y] },
+        default: { position: [1.2, y] },
       },
     },
   });
 
-  const nav = (name, y, interactive, defaultFormSeries = null, formStart = null) => ({
+  const nav = (name, y, interactive, defaultFormSeries = null) => ({
     name,
     method: 'addNavigator',
     options: {
       navType: 'description',
-      equation: eqn(`${name}Eqn`, y, defaultFormSeries, formStart),
+      equation: eqn(`${name}Eqn`, y, defaultFormSeries),
       interactive,
       alignV: 'middle',
+      alignH: 'left',
     },
     mods: {
       scenarios: {
-        default: { position: [0.2, y] },
+        default: { position: [0, y + 0.3] },
       },
     },
   });
@@ -714,9 +717,9 @@ export default function lessonLayout() {
   layout.addElements = [
     fig,
     nav('0', 0.8, false),
-    nav('1', 0.1, true, '1', 0.8),
-    nav('2', -0.6, true, '2', 0.1),
-    nav('3', -1.3, true, '3', -0.6),
+    nav('1', 0, true, '1'),
+    nav('2', -0.8, true, '2'),
+    nav('3', -1.6, true, '3'),
   ];
   return layout;
 }
