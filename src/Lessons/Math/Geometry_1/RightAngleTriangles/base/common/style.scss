@@ -8,7 +8,7 @@ $colors: (
   perpendicular:               color('red'),
   angles:                      color('green'),
   description:                 color('grey', base),
-  vertex:                      color('yellow'),
+  vertex:                      color('yellow', 'dark'),
 );
 
 body {

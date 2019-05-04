@@ -15,21 +15,19 @@ const {
 } = Fig;
 
 type fullTriangle = {
-
-} & DiagramObjectPolyLine;
-
-export default class CommonCollection extends CommonDiagramCollection {
-  _fig: {
-    _main: {
-      _tri: {
-        _side01: DiagramObjectLine;
+  _side01: DiagramObjectLine;
         _side12: DiagramObjectLine;
         _side20: DiagramObjectLine;
         _angle0: DiagramObjectAngle;
         _angle1: DiagramObjectAngle;
         _angle2: DiagramObjectAngle;
         _line: DiagramElementPrimative;
-      } & DiagramObjectPolyLine;
+} & DiagramObjectPolyLine;
+
+export default class CommonCollection extends CommonDiagramCollection {
+  _fig: {
+    _main: {
+      _tri: fullTriangle;
       _height: {
         _angle: DiagramObjectAngle;
         _line: DiagramObjectLine;
@@ -43,10 +41,10 @@ export default class CommonCollection extends CommonDiagramCollection {
       _rightSide: DiagramObjectLine;
     } & DiagramElementCollection;
     _pythagorusSquare: {
-      _bottomLeft: DiagramObjectPolyLine;
-      _bottomRight: DiagramObjectPolyLine;
-      _topLeft: DiagramObjectPolyLine;
-      _topRight: DiagramObjectPolyLine;
+      _bottomLeft: fullTriangle;
+      _bottomRight: fullTriangle;
+      _topLeft: fullTriangle;
+      _topRight: fullTriangle;
       _largeSquare: DiagramElementPrimative;
       _smallSquare: DiagramElementPrimative;
       _vertex1: DiagramElementPrimative;

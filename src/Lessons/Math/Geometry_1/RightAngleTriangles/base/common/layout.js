@@ -393,7 +393,7 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [-1.175, -1.145], scale: 1 },
         square: { position: [-0.7, -1.4], scale: 1 },
-        left: { position: [-2.7, -1.6], scale: 1 },
+        left: { position: [-2.6, -1.5], scale: 1 },
         split: { position: [-0.7, -1.4], scale: 1 },
         together: { position: [-0.7, -1.4], scale: 1 },
         normalSize: { position: [-1.5, -1], scale: 1 },
@@ -692,7 +692,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [1.2, y] },
+        default: { position: [1.6, y] },
       },
     },
   });
@@ -709,7 +709,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [0, y + 0.3] },
+        default: { position: [0.4, y + 0.3] },
       },
     },
   });
