@@ -1075,11 +1075,49 @@ class PresentationLessonContent extends SimpleLessonContent {
               });
             } else {
               let moveFromPosition = options.moveFrom;
+              let pulseMoveFrom = () => {};
+              let dullLastEqn = () => {};
               if (options.moveFrom instanceof DiagramElementCollection) {
                 moveFromPosition = options.moveFrom.getPosition();
+                pulseMoveFrom = () => {
+                  options.moveFrom.pulseScaleNow(1, 1.2);
+                };
+                if (options.moveFrom instanceof EqnNavigator
+                  || options.moveFrom instanceof Equation
+                ) {
+                  dullLastEqn = () => {
+                    options.moveFrom.showForm(options.form);
+                    options.moveFrom.setOpacity(0.5);
+                  };
+                }
               }
               eqn.animations.new()
-                .position
+                .position({ target: moveFromPosition })
+                .trigger({ callback: pulseMoveFrom })
+                .pulse({ scale: 1.2 })
+                .trigger({ callback: dullLastEqn })
+                .position({
+                  start: moveFromPosition,
+                  target: eqn.getPosition(),
+                  duration: 1,
+                })
+                // eslint-disable-next-line no-loop-func
+                .whenFinished(() => {
+                  if (equation instanceof EqnNavigator) {
+                    equation.showForm(options.toForm);
+                  }
+                  eqn.showForm(options.form);
+                  eqn.goToForm({
+                    name: options.toForm,
+                    animate: 'move',
+                    duration: 1,
+                    callback: () => {
+                      equation.showForm(options.toForm);
+                      countUp();
+                    },
+                  });
+                })
+                .start();
             }
             if (i < equations.length - 1) {
               eqn.setOpacity(0.5);
