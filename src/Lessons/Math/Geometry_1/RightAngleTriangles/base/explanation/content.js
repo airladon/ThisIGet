@@ -462,6 +462,59 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._0Eqn.showForm('0');
+        coll._1Eqn.showForm('0');
+        coll._1Eqn.animations.new()
+          .position({
+            start: coll._0Eqn.getPosition(),
+            target: coll._1Eqn.getPosition(),
+            duration: 1,
+          })
+          .whenFinished(() => {
+            coll._1.showForm('0f');
+            coll._1Eqn.showForm('0');
+            coll._1Eqn.goToForm({
+              name: '0f',
+              animate: 'move',
+              callback: () => {
+                coll._1.showForm('0f');
+                done();
+              },
+            });
+          })
+          .start();
+      },
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('0f');
+      },
+    });
+
+    content = {
+      setContent: 'Now |substitute| in the areas.',
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('0f');
+      },
+    });
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._1Eqn.showForm('0f');
+        coll._1Eqn.goToForm({
+          name: '1',
+          animate: 'move',
+          callback: () => {
+            done();
+          },
+        });
+      },
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();
         coll._0Eqn.showForm('0');
@@ -470,7 +523,7 @@ class Content extends PresentationLessonContent {
     });
 
     content = {
-      setContent: 'Then |expand| out the left and right sides.',
+      setContent: 'Then |expand| out the left side.',
     };
     this.addSection(common, content, {
       setSteadyState: () => {
@@ -479,6 +532,63 @@ class Content extends PresentationLessonContent {
         coll._1.showForm('1');
       },
     });
+
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2Eqn.showForm('1');
+        coll._2Eqn.animations.new()
+          .position({
+            start: coll._1Eqn.getPosition(),
+            target: coll._2Eqn.getPosition(),
+            duration: 1,
+          })
+          .whenFinished(() => {
+            coll._2.showForm('1a');
+            coll._2Eqn.showForm('1');
+            coll._2Eqn.goToForm({
+              name: '1a',
+              animate: 'move',
+              callback: () => {
+                coll._2.showForm('1a');
+                done();
+              },
+            });
+          })
+          .start();
+      },
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('1a');
+      },
+    });
+
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('1b');
+        coll._2Eqn.showForm('1a');
+        coll._2Eqn.goToForm({
+          name: '1b',
+          animate: 'move',
+          callback: () => {
+            done();
+          },
+        });
+      },
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('b');
+      },
+    });
+
+
     this.addSection(common, content, {
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();

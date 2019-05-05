@@ -464,6 +464,12 @@ export default function lessonLayout() {
     'brace': {
       symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
     },
+    '_brace': {
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
+    },
+    '__brace': {
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.description,
+    },
     'x': { symbol: 'xStrike', color: colors.description },
     '_x': { symbol: 'xStrike', color: colors.description },
   };
@@ -584,6 +590,21 @@ export default function lessonLayout() {
           ],
           description: 'Side length of small square is C, and area is side squared:',
         },
+
+        '0f': {
+          content: [
+            top(
+              AreaLSquare,
+              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+              'brace',
+            ),
+            'equals', '_4', 'mul',
+            top(AreaTri, [half, '_A', '_B'], '_brace'),
+            '__plus',
+            top(AreaSSquare, sup('C', '_2b'), '__brace'),
+          ],
+          description: 'Put area in terms of side lengths:',
+        },
         // ////////////////////////////////////////////////////////////
         // ////////////////////////////////////////////////////////////
         // ////////////////////////////////////////////////////////////
@@ -612,7 +633,7 @@ export default function lessonLayout() {
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
           ],
-          description: 'Expand the left side',
+          description: 'Expand the left side:',
         },
 
         '1b': {
@@ -623,7 +644,7 @@ export default function lessonLayout() {
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
           ],
-          description: 'Expand the left side',
+          description: 'Expand the left side:',
         },
 
         '1c': {
