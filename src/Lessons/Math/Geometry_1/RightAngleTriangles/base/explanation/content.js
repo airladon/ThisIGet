@@ -426,9 +426,11 @@ class Content extends PresentationLessonContent {
           .start();
       },
       setSteadyState: () => {
+        coll.setScenarios('default');
         pyth.setScenarios('square');
         pyth.setScenario('left');
         coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
       },
     });
 
@@ -450,20 +452,57 @@ class Content extends PresentationLessonContent {
         coll.updatePythagorusSquareLabels();
       },
     };
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0.showForm('0');
-      },
-    });
-
     content = {
-      setContent: 'We know area length of a square is ',
+      setContent: 'We can put the areas in the form of |side lengths|.',
     };
     this.addSection(common, content, {
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();
-        coll._0.showForm('0');
+        coll._0Eqn.showForm('0');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+      },
+    });
+
+    content = {
+      setContent: 'Then |expand| out the left and right sides.',
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('2');
+      },
+    });
+
+    content = {
+      setContent: 'And finally subtract |2AB| from both sides.',
+    };
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
+        coll._1.showForm('1');
+        coll._2.showForm('2');
+      },
+    });
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+        coll._0Eqn.showForm('0');
         coll._1.showForm('1');
         coll._2.showForm('2');
         coll._3.showForm('3');

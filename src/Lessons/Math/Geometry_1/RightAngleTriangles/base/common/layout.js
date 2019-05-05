@@ -392,7 +392,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [-1.175, -1.145], scale: 1 },
-        square: { position: [-0.7, -1.4], scale: 1 },
+        square: { position: [-0.7, -1.5], scale: 1 },
         left: { position: [-2.6, -1.5], scale: 1 },
         split: { position: [-0.7, -1.4], scale: 1 },
         together: { position: [-0.7, -1.4], scale: 1 },
@@ -558,7 +558,7 @@ export default function lessonLayout() {
           content: [
             { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
             'equals', '_4', 'mul',
-            top(AreaTri, [half, '_A', '_B'], '_brace'),
+            top(AreaTri, [half, '_A', '_B'], 'brace'),
             '__plus',
             AreaSSquare,
           ],
@@ -580,7 +580,7 @@ export default function lessonLayout() {
             'equals', '_4', 'mul',
             half, '_A', '_B',
             '__plus',
-            top(AreaSSquare, sup('C', '_2b'), '__brace'),
+            top(AreaSSquare, sup('C', '_2b'), 'brace'),
           ],
           description: 'Side length of small square is C, and area is side squared:',
         },

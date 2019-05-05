@@ -15,9 +15,9 @@ body {
   @include color_vars($colors);
 }
 
-// .diagram__text {
-//   z-index: 0;
-// }
+#id_diagram__text__low {
+  z-index: 1;
+}
 
 .lesson__eqn_nav__description {
   font-size: calc(var(--lesson__diagram-font-size) * 0.55);
