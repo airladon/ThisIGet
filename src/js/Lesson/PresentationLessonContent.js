@@ -11,6 +11,7 @@ const {
   Diagram, HTMLObject, Point,
   DiagramElementPrimative, DiagramElementCollection,
   DiagramElement, Rect, Equation, parsePoint,
+  EqnNavigator,
 } = Fig;
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
@@ -990,6 +991,121 @@ class PresentationLessonContent extends SimpleLessonContent {
         if (nav != null) {
           nav.updateButtons();
         }
+      },
+      setSteadyState: () => {
+        if (userSections.setSteadyState != null) {
+          userSections.setSteadyState();
+        }
+        eqn.showForm(toForm);
+        if (nav != null) {
+          nav.updateButtons();
+        }
+      },
+    };
+    const section = Object.assign({}, ...sectionObjects, eqnSection);
+    this.addSection(section);
+  }
+
+  addSectionEqnStory(
+    // optionsIn: {
+    //   eqn: { eqn: Equation } & Equation,  // or navigator
+    //   from: string,                       // From form
+    //   to: string,                         // To Form
+    //   duration?: number,                   // duration
+    //   animate?: 'dissolve' | 'move',
+    // },
+    equations: Array<{
+      eqn: Equation | EqnNavigator,
+      form?: string,
+      toForm?: string,
+      moveFrom?: DiagramElementCollection | Point,
+      duration?: number,
+      dissolveIn?: number,
+      dissolveOut?: number,
+      animate?: 'dissolve' | 'move',
+    }>,
+    ...sectionObjects: Array<Object>
+  ) {
+    const defaultEqnOptions = {
+      animate: 'move',
+      duration: 0.8,
+      dissolveIn: 0.5,
+      dissolveOut: 0.5,
+    };
+    // const options = joinObjects({}, defaultOptions, optionsIn);
+    const userSections = Object.assign({}, ...sectionObjects);
+    // let { eqn } = options;
+    // const { animate, duration } = options;
+    // let nav = null;
+    // if (eqn.table != null) {
+    //   nav = eqn;
+    //   ({ eqn } = nav);
+    // }
+    // const fromForm = options.from;
+    // const toForm = options.to;
+    const eqnSection = {
+      transitionFromPrev: (done) => {
+        let counter = 0;
+        let countTarget = 0;
+        const countUp = () => {
+          counter += 1;
+          if (counter === countTarget) {
+            done();
+          }
+        };
+        for (let i = 0; i < equations.length; i += 1) {
+          const equation = equations[i];
+          if (equation.toForm === null && equation.form != null) {
+            equation.showForm(equation.form);
+          } else if (equation.toForm != null && equation.form != null) {
+            const options = joinObjects({}, defaultEqnOptions, equation);
+            equation.showForm(options.toForm);
+            let eqn = equation;
+            if (eqn instanceof EqnNavigator) {
+              ({ eqn } = equation);
+            }
+            eqn.showForm(options.form);
+            countTarget += 1;
+            if (options.moveFrom == null) {
+              eqn.goToForm({
+                name: options.toForm,
+                animate: options.animate,
+                duration: options.duration,
+                callback: countUp,
+              });
+            } else {
+              let moveFromPosition = options.moveFrom;
+              if (options.moveFrom instanceof DiagramElementCollection) {
+                moveFromPosition = options.moveFrom.getPosition();
+              }
+              eqn.animations.new()
+                .position
+            }
+            if (i < equations.length - 1) {
+              eqn.setOpacity(0.5);
+            }
+          }
+        }
+
+
+        // let callback = done;
+        // if (userSections.transitionFromPrev != null) {
+        //   callback = userSections.transitionFromPrev.bind(userSections, done);
+        // }
+        // if (fromForm === toForm) {
+        //   callback();
+        //   return;
+        // }
+        // eqn.showForm(fromForm);
+        // eqn.goToForm({
+        //   name: toForm,
+        //   duration,
+        //   callback,
+        //   animate,
+        // });
+        // if (nav != null) {
+        //   nav.updateButtons();
+        // }
       },
       setSteadyState: () => {
         if (userSections.setSteadyState != null) {
