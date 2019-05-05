@@ -9,7 +9,7 @@
   "scripts": {
     "build": "webpack --env.mode=prod",
     "webpack": "webpack",
-    "watch": "webpack --watch",
+    "watch": "webpack --watch --progress",
     "flow": "flow",
     "jest": "jest",
     "lint": "eslint src",
