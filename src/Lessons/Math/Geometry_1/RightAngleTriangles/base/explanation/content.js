@@ -463,9 +463,17 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, content, {
       transitionFromPrev: (done) => {
-        coll._0Eqn.showForm('0');
+        coll._0Eqn.hide();
         coll._1Eqn.showForm('0');
         coll._1Eqn.animations.new()
+          .position({ target: coll._0Eqn.getPosition() })
+          .pulse({ scale: 1.2 })
+          .trigger({
+            callback: () => {
+              coll._0Eqn.showForm('0');
+              coll._0Eqn.setOpacity(0.5);
+            },
+          })
           .position({
             start: coll._0Eqn.getPosition(),
             target: coll._1Eqn.getPosition(),
@@ -477,6 +485,8 @@ class Content extends PresentationLessonContent {
             coll._1Eqn.goToForm({
               name: '0f',
               animate: 'move',
+              duration: 1,
+              dissolveInTime: 1,
               callback: () => {
                 coll._1.showForm('0f');
                 done();
@@ -488,6 +498,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();
         coll._0Eqn.showForm('0');
+        coll._0Eqn.setOpacity(0.5);
         coll._1.showForm('0f');
       },
     });
@@ -499,17 +510,20 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();
         coll._0Eqn.showForm('0');
+        coll._0Eqn.setOpacity(0.5);
         coll._1.showForm('0f');
       },
     });
     this.addSection(common, content, {
       transitionFromPrev: (done) => {
         coll._0Eqn.showForm('0');
+        coll._0Eqn.setOpacity(0.5);
         coll._1.showForm('1');
         coll._1Eqn.showForm('0f');
         coll._1Eqn.goToForm({
           name: '1',
           animate: 'move',
+          duration: 2,
           callback: () => {
             done();
           },
