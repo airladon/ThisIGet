@@ -444,7 +444,7 @@ export default function lessonLayout() {
     m2AB: { text: '-2AB', color: colors.description },
     _m2AB: { text: '-2AB', color: colors.description },
     C: { text: 'C', color: colors.sides },
-    equals: '  =  ',
+    equals: '   =   ',
     plus: ' + ',
     _plus: ' + ',
     __plus: ' + ',
@@ -692,7 +692,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [1.6, y] },
+        default: { position: [1.4, y] },
       },
     },
   });
@@ -709,7 +709,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [0.4, y + 0.3] },
+        default: { position: [0.3, y + 0.3] },
       },
     },
   });

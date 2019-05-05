@@ -51,7 +51,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseSmallestAngle() {
-    this._shortestExample._angle2.pulseScaleNow(1, 1.5);
+    this._shortestExample._angle2.pulseScaleNow(1, 1.4);
     this.diagram.animateNextFrame();
   }
 
