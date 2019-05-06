@@ -451,213 +451,80 @@ class Content extends PresentationLessonContent {
         fig.setScenarios('left');
         coll.updatePythagorusSquareLabels();
       },
+      setSteadyState: () => {
+        coll.updatePythagorusSquareLabels();
+      },
     };
     content = {
       setContent: 'We can put the areas in the form of |side lengths|.',
     };
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0.showForm('0');
-      },
-    });
+    this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       {
         nav: coll._1, form: '0', toForm: '0f', moveFrom: coll._0Eqn,
       },
-    ], common, content, {
-      setSteadySate: () => {
-        coll.updatePythagorusSquareLabels();
-      },
-    });
-    // this.addSection(common, content, {
-    //   transitionFromPrev: (done) => {
-    //     coll._0Eqn.hide();
-    //     coll._1Eqn.showForm('0');
-    //     coll._1Eqn.animations.new()
-    //       .position({ target: coll._0Eqn.getPosition() })
-    //       .pulse({ scale: 1.2 })
-    //       .trigger({
-    //         callback: () => {
-    //           coll._0Eqn.showForm('0');
-    //           coll._0Eqn.setOpacity(0.5);
-    //         },
-    //       })
-    //       .position({
-    //         start: coll._0Eqn.getPosition(),
-    //         target: coll._1Eqn.getPosition(),
-    //         duration: 1,
-    //       })
-    //       .whenFinished(() => {
-    //         coll._1.showForm('0f');
-    //         coll._1Eqn.showForm('0');
-    //         coll._1Eqn.goToForm({
-    //           name: '0f',
-    //           animate: 'move',
-    //           duration: 1,
-    //           dissolveInTime: 1,
-    //           callback: () => {
-    //             coll._1.showForm('0f');
-    //             done();
-    //           },
-    //         });
-    //       })
-    //       .start();
-    //   },
-    //   setSteadyState: () => {
-    //     coll.updatePythagorusSquareLabels();
-    //     coll._0Eqn.showForm('0');
-    //     coll._0Eqn.setOpacity(0.5);
-    //     coll._1.showForm('0f');
-    //   },
-    // });
+    ], common, content);
+
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '0f', toForm: '1' },
+    ], common, content);
 
     content = {
-      setContent: 'Now |substitute| in the areas.',
+      setContent: '|Expand| and |simplify| the terms on both sides of the equation.',
     };
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._0Eqn.setOpacity(0.5);
-        coll._1.showForm('0f');
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+    ], common, content);
+
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      {
+        nav: coll._2, form: '1', toForm: '1a', moveFrom: coll._1Eqn,
       },
-    });
-    this.addSection(common, content, {
-      transitionFromPrev: (done) => {
-        coll._0Eqn.showForm('0');
-        coll._0Eqn.setOpacity(0.5);
-        coll._1.showForm('1');
-        coll._1Eqn.showForm('0f');
-        coll._1Eqn.goToForm({
-          name: '1',
-          animate: 'move',
-          duration: 2,
-          callback: () => {
-            done();
-          },
-        });
-      },
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-      },
-    });
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '1a', toForm: '1b' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '1b', toForm: '1c' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '1c', toForm: '2' },
+    ], common, content);
 
     content = {
-      setContent: 'Then |expand| out the left side.',
+      setContent: 'Finally subtract |2AB| from both sides.',
     };
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-      },
-    });
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '2' },
+    ], common, content);
 
-    this.addSection(common, content, {
-      transitionFromPrev: (done) => {
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2Eqn.showForm('1');
-        coll._2Eqn.animations.new()
-          .position({
-            start: coll._1Eqn.getPosition(),
-            target: coll._2Eqn.getPosition(),
-            duration: 1,
-          })
-          .whenFinished(() => {
-            coll._2.showForm('1a');
-            coll._2Eqn.showForm('1');
-            coll._2Eqn.goToForm({
-              name: '1a',
-              animate: 'move',
-              callback: () => {
-                coll._2.showForm('1a');
-                done();
-              },
-            });
-          })
-          .start();
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '2' },
+      {
+        nav: coll._3, form: '2', toForm: '2a', moveFrom: coll._2Eqn,
       },
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('1a');
-      },
-    });
-
-    this.addSection(common, content, {
-      transitionFromPrev: (done) => {
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('1b');
-        coll._2Eqn.showForm('1a');
-        coll._2Eqn.goToForm({
-          name: '1b',
-          animate: 'move',
-          callback: () => {
-            done();
-          },
-        });
-      },
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('b');
-      },
-    });
-
-
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('2');
-      },
-    });
-
-    content = {
-      setContent: 'And finally subtract |2AB| from both sides.',
-    };
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('2');
-      },
-    });
-    this.addSection(common, content, {
-      setSteadyState: () => {
-        coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._1.showForm('1');
-        coll._2.showForm('2');
-        coll._3.showForm('3');
-      },
-    });
-    // this.addSection({
-    //   title: 'Right Angle Triangle',
-    //   setContent: [
-    //     'A right angle triangle, or right triangle, is a triangle where one of the angles is a right angle.',
-    //   ],
-    //   show: [fig._pythagorusSquare],
-    //   setSteadyState: () => {
-    //     coll.setScenarios('default');
-    //     fig.setScenarios('left');
-    //     coll.updatePythagorusSquareLabels();
-    //     coll._0.showForm('0');
-    //     coll._1.showForm('1');
-    //     coll._2.showForm('2');
-    //     coll._3.showForm('3');
-    //   },
-    // });
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '2' },
+      { nav: coll._3, form: '2a', toForm: '3' },
+    ], common, content);
   }
 }
 

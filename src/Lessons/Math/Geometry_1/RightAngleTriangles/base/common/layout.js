@@ -617,7 +617,7 @@ export default function lessonLayout() {
             '_4', 'mul', half, '_A', '_B',
             '__plus', sup('C', '_2b'),
           ],
-          description: 'Substitute in areas:',
+          description: 'Put area in terms of side lengths:',
         },
         '1a': {
           content: [
@@ -656,7 +656,7 @@ export default function lessonLayout() {
             '_A', '_B',
             '__plus', sup('C', '_2b'),
           ],
-          description: 'Simplify the right side',
+          description: 'Simplify the right:',
         },
 
         // ////////////////////////////////////////////////////////////
@@ -683,7 +683,7 @@ export default function lessonLayout() {
             ann({ strike: [['_2e', '_A', '_B'], '_x'] }, '_m2AB'),
             '__plus', sup('C', '_2b'),
           ],
-          description: 'Expand left side, and simplify the right:',
+          description: 'Subtract 2AB from both sides:',
         },
 
 

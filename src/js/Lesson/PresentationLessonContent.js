@@ -1030,7 +1030,7 @@ class PresentationLessonContent extends SimpleLessonContent {
       dissolveOutTime: 0.5,
       pulseDuration: 1,
       pulseScale: 1.1,
-      opacity: 0.5,
+      opacity: 0.6,
     };
     const userSections = Object.assign({}, ...sectionObjects);
     const eqnSection = {
@@ -1112,10 +1112,10 @@ class PresentationLessonContent extends SimpleLessonContent {
             return;
           }
 
-          
           eqn.showForm(options.form);
           if (options.moveFrom == null) {
             nav.showForm(toForm);
+            eqn.showForm(form);
             eqn.goToForm({
               name: toForm,
               animate,
