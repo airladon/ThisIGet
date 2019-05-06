@@ -464,8 +464,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       {
-        nav: coll._1, form: '0f', animate: 'dissolve',
-        // nav: coll._1, form: '0f',
+        nav: coll._1, form: '0', toForm: '0f', moveFrom: coll._0Eqn,
       },
     ], common, content, {
       setSteadySate: () => {

@@ -1112,9 +1112,10 @@ class PresentationLessonContent extends SimpleLessonContent {
             return;
           }
 
-          nav.showForm(toForm);
+          
           eqn.showForm(options.form);
           if (options.moveFrom == null) {
+            nav.showForm(toForm);
             eqn.goToForm({
               name: toForm,
               animate,
@@ -1158,7 +1159,7 @@ class PresentationLessonContent extends SimpleLessonContent {
               // if (equation instanceof EqnNavigator) {
               //   equation.showForm(toForm);
               // }
-              nav.showForm(form);
+              nav.showForm(toForm);
               eqn.showForm(form);
               eqn.goToForm({
                 name: toForm,
