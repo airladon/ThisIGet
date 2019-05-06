@@ -521,15 +521,19 @@ class Content extends PresentationLessonContent {
         pyth.setScenarios('left');
         coll._3Eqn.showForm('3');
         coll.updatePythagorusSquareLabels();
-        pyth._bottomLeft.animations.new()
-          .inParallel([
-            pyth.anim.scenarios({
-              target: 'normalSize', duration: 1,
-            }),
-            coll._3Eqn.anim.scenario({
-              start: 'default', target: 'top', duration: 1,
-            }),
-          ])
+        pyth.animations.new()
+          // .inParallel([
+          //   pyth.anim.scenarios({
+          //     target: 'normalSize', duration: 1,
+          //   }),
+          //   // pyth._bottomLeft.anim.scenario({
+          //   //   target: 'normalSize', duration: 1,
+          //   // }),
+          //   coll._3Eqn.anim.scenario({
+          //     start: 'default', target: 'top', duration: 1,
+          //   }),
+          // ])
+          .scenarios({ target: 'normalSize', duration: 1 })
           // .scenario({ target: 'normalSize', duration: 1 })
           .whenFinished(done)
           .start();
