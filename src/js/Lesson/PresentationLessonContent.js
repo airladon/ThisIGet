@@ -1014,19 +1014,24 @@ class PresentationLessonContent extends SimpleLessonContent {
       toForm?: string,
       moveFrom?: DiagramElementCollection | Point,
       duration?: number,
-      dissolveIn?: number,
-      dissolveOut?: number,
+      dissolveInTime?: number,
+      dissolveOutTime?: number,
       animate?: 'dissolve' | 'move',
+      pulseDuration?: number,
+      pulseScale?: number,
+      opacity?: number,
     }>,
     ...sectionObjects: Array<Object>
   ) {
     const defaultEqnOptions = {
       animate: 'move',
-      duration: 0.8,
-      dissolveIn: 0.5,
-      dissolveOut: 0.5,
+      duration: 1,
+      dissolveInTime: 1,
+      dissolveOutTime: 0.5,
+      pulseDuration: 1,
+      pulseScale: 1.1,
+      opacity: 0.5,
     };
-    console.log('asdfasf')
     const userSections = Object.assign({}, ...sectionObjects);
     const eqnSection = {
       transitionFromPrev: (done) => {
@@ -1047,7 +1052,9 @@ class PresentationLessonContent extends SimpleLessonContent {
           }
           const options = joinObjects({}, defaultEqnOptions, eqOptions);
           const {
-            form, duration, toForm, dissolveIn, dissolveOut, animate,
+            form, duration, toForm,
+            dissolveInTime, dissolveOutTime, pulseDuration, pulseScale,
+            animate, opacity,
             moveFrom,
           } = options;
           let { eqn, nav } = options;
@@ -1055,95 +1062,140 @@ class PresentationLessonContent extends SimpleLessonContent {
             ({ eqn } = nav);
           }
           if (nav == null) {
-            nav = { showForm: (t) => {} };
+            nav = {
+              // eslint-disable-next-line no-unused-vars
+              showForm: (t) => {},
+              // eslint-disable-next-line no-unused-vars
+              setOpacity: (o) => {},
+            };
           }
-          if (toForm === null && form != null) {
-            nav.showForm(form);
-            eqn.showForm(form);
+
+          if (toForm == null && form == null) {
+            return;
+          }
+
+          function setFinalForm(f) {
+            nav.showForm(f);
+            eqn.showForm(f);
             countUp();
-          } else if (toForm != null && form != null) {
-            nav.showForm(toForm);
             if (i < equations.length - 1) {
-              eqn.setOpacity(0.5);
+              eqn.setOpacity(opacity);
+              nav.setOpacity(opacity);
             }
-            eqn.showForm(options.form);
-            if (form === toForm) {
-              countUp();
-            } else if (options.moveFrom == null) {
+          }
+
+          if (toForm == null && form != null) {
+            if (animate === 'dissolve') {
+              // nav.showForm(form);
+              eqn.hide();
+              eqn.goToForm({
+                name: form,
+                animate: 'dissolve',
+                duration,
+                dissolveInTime,
+                dissolveOutTime,
+                callback: setFinalForm.bind(this, form),
+              });
+              return;
+            }
+            setFinalForm(form);
+            return;
+          }
+
+          if (form == null && toForm != null) {
+            setFinalForm(toForm);
+            return;
+          }
+
+          if (form === toForm) {
+            setFinalForm(form);
+            return;
+          }
+
+          nav.showForm(toForm);
+          eqn.showForm(options.form);
+          if (options.moveFrom == null) {
+            eqn.goToForm({
+              name: toForm,
+              animate,
+              duration,
+              dissolveInTime,
+              dissolveOutTime,
+              callback: setFinalForm.bind(this, toForm),
+            });
+            return;
+          }
+
+          let moveFromPosition = moveFrom;
+          let pulseMoveFrom = () => {};
+          let dullLastEqn = () => {};
+          if (options.moveFrom instanceof DiagramElementCollection) {
+            moveFromPosition = moveFrom.getPosition();
+            pulseMoveFrom = () => {
+              moveFrom.pulseScaleNow(pulseDuration, pulseScale);
+            };
+            if (moveFrom instanceof EqnNavigator
+              || moveFrom instanceof Equation
+            ) {
+              dullLastEqn = () => {
+                moveFrom.showForm(form);
+                moveFrom.setOpacity(0.5);
+              };
+            }
+          }
+          eqn.animations.new()
+            .position({ target: moveFromPosition })
+            .trigger({ callback: pulseMoveFrom })
+            .pulse({ duration: pulseDuration, scale: pulseScale })
+            .trigger({ callback: dullLastEqn })
+            .position({
+              start: moveFromPosition,
+              target: eqn.getPosition(),
+              duration,
+            })
+            // eslint-disable-next-line no-loop-func
+            .whenFinished(() => {
+              // if (equation instanceof EqnNavigator) {
+              //   equation.showForm(toForm);
+              // }
+              nav.showForm(form);
+              eqn.showForm(form);
               eqn.goToForm({
                 name: toForm,
-                animate,
+                animate: 'move',
                 duration,
-                callback: countUp,
+                dissolveInTime,
+                dissolveOutTime,
+                callback: () => {
+                  nav.showForm(toForm);
+                  countUp();
+                },
               });
-            } else {
-              let moveFromPosition = moveFrom;
-              let pulseMoveFrom = () => {};
-              let dullLastEqn = () => {};
-              if (options.moveFrom instanceof DiagramElementCollection) {
-                moveFromPosition = moveFrom.getPosition();
-                pulseMoveFrom = () => {
-                  moveFrom.pulseScaleNow(1, 1.2);
-                };
-                if (moveFrom instanceof EqnNavigator
-                  || moveFrom instanceof Equation
-                ) {
-                  dullLastEqn = () => {
-                    moveFrom.showForm(form);
-                    moveFrom.setOpacity(0.5);
-                  };
-                }
-              }
-              eqn.animations.new()
-                .position({ target: moveFromPosition })
-                .trigger({ callback: pulseMoveFrom })
-                .pulse({ scale: 1.2 })
-                .trigger({ callback: dullLastEqn })
-                .position({
-                  start: moveFromPosition,
-                  target: eqn.getPosition(),
-                  duration,
-                })
-                // eslint-disable-next-line no-loop-func
-                .whenFinished(() => {
-                  // if (equation instanceof EqnNavigator) {
-                  //   equation.showForm(toForm);
-                  // }
-                  nav.showForm(form);
-                  eqn.showForm(form);
-                  eqn.goToForm({
-                    name: toForm,
-                    animate: 'move',
-                    duration,
-                    dissolveInTime: dissolveIn,
-                    dissolveOutTime: dissolveOut,
-                    callback: () => {
-                      nav.showForm(toForm);
-                      countUp();
-                    },
-                  });
-                })
-                .start();
-            }
-          }
+            })
+            .start();
         });
       },
       setSteadyState: () => {
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
         }
-        equations.forEach((eqOptions) => {
+        equations.forEach((eqOptions, i) => {
           if (eqOptions.nav == null && eqOptions.eqn == null) {
             return;
           }
           const options = joinObjects({}, defaultEqnOptions, eqOptions);
-          const { form, toForm } = options;
+          const { form, toForm, opacity } = options;
           let { eqn, nav } = options;
           if (eqn == null) {
             ({ eqn } = nav);
           }
           if (nav == null) {
-            nav = { showForm: (t) => {} };
+            nav = {
+              // eslint-disable-next-line no-unused-vars
+              showForm: (t) => {},
+              // eslint-disable-next-line no-unused-vars
+              setOpacity: (o) => {},
+            };
           }
           if (toForm == null && form != null) {
             nav.showForm(form);
@@ -1151,6 +1203,10 @@ class PresentationLessonContent extends SimpleLessonContent {
           } else if (toForm != null) {
             nav.showForm(toForm);
             eqn.showForm(toForm);
+          }
+          if (i < equations.length - 1) {
+            eqn.setOpacity(opacity);
+            nav.setOpacity(opacity);
           }
         });
       },

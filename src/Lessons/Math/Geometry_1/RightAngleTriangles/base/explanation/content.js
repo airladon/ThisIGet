@@ -458,13 +458,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       setSteadyState: () => {
         coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
+        coll._0.showForm('0');
       },
     });
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       {
-        nav: coll._1, form: '0', toForm: '0f', animate: 'move',
+        nav: coll._1, form: '0f', animate: 'dissolve',
+        // nav: coll._1, form: '0f',
       },
     ], common, content, {
       setSteadySate: () => {
