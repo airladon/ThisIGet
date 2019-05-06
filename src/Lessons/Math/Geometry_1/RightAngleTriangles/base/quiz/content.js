@@ -36,29 +36,13 @@ class Content extends PresentationLessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
-    // const main = quiz._main;
+    const fig = quiz._fig;
 
     this.addSection({
-      // title: '',
-      setContent: ['Question'],
-      // modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      // infoModifiers: {},
-      // interactiveElements: [
-      //   interactiveItem(quiz._check),
-      // ],
-      // setEnterState: () => {},
-      // showOnly: [],
-      // show: [main],
-      // hide: [],
+      show: [fig],
       setSteadyState: () => {
         quiz.newProblem();
       },
-      // setLeaveState: () => {},
     });
   }
 }

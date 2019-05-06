@@ -12735,6 +12735,17 @@ function (_DiagramElementCollec) {
       }
     }
   }, {
+    key: "getAngle",
+    value: function getAngle() {
+      var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
+
+      if (units === 'deg') {
+        return this.angle * 180 / Math.PI;
+      }
+
+      return this.angle;
+    }
+  }, {
     key: "setLabel",
     value: function setLabel(text) {
       var label = this.label;
@@ -14326,6 +14337,22 @@ function (_DiagramElementCollec) {
       }
 
       this.updateLabel();
+    }
+  }, {
+    key: "getLength",
+    value: function getLength() {
+      return this.length;
+    }
+  }, {
+    key: "getAngle",
+    value: function getAngle() {
+      var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
+
+      if (units === 'deg') {
+        return this.angle * 180 / Math.PI;
+      }
+
+      return this.angle;
     }
   }, {
     key: "setLabel",

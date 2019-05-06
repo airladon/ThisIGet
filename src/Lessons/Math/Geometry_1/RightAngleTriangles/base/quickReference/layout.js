@@ -29,6 +29,7 @@ export default function lessonLayout() {
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
 
+  // overly complicated as just a cut and past from explanation layout
   const leftSide = 3;
   const p0 = new Point(-1.7, -0.7);
   const p1 = p0
@@ -44,10 +45,6 @@ export default function lessonLayout() {
     .rotate(Math.PI / 6 * 5)
     .translate(leftSide, 0);
   const tri2Points = triPoints.map(p => p.transformBy(t.m()));
-
-  // const tri3Points = triPoints.map(p => p.transformBy(
-  //   (new Transform().rotate(0).translate(-1, 0)).m(),
-  // ));
 
   const angle = (text, textScale, color = colors.angles, radius = 0.3) => ({
     curve: {
@@ -94,48 +91,6 @@ export default function lessonLayout() {
     },
   };
 
-  // const baseA = {
-  //   name: 'baseA',
-  //   method: 'line',
-  //   options: {
-  //     color: colors.sides,
-  //     p1: p0,
-  //     p2: p1,
-  //     width: 0.01,
-  //     label: {
-  //       text: 'base',
-  //       location: 'outside',
-  //       offset: 0.06,
-  //     },
-  //   },
-  // };
-
-  // const heightB = {
-  //   name: 'heightB',
-  //   method: 'line',
-  //   options: {
-  //     color: colors.sides,
-  //     p1,
-  //     p2,
-  //     width: 0.01,
-  //     label: {
-  //       text: 'height',
-  //       location: 'outside',
-  //       offset: 0.06,
-  //     },
-  //   },
-  // };
-
-  // const opposite = {
-  //   name: 'opposite',
-  //   method: 'line',
-  //   options: {
-  //     color: colors.opposite,
-  //     width: 0.02,
-  //     p1: tri2Points[0].add(-0.05, -0.02),
-  //     p2: tri2Points[2].add(0.03, -0.02),
-  //   },
-  // };
 
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
