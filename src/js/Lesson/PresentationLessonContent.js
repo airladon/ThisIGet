@@ -1045,28 +1045,42 @@ class PresentationLessonContent extends SimpleLessonContent {
     // const toForm = options.to;
     const eqnSection = {
       transitionFromPrev: (done) => {
+        let callback = done;
+        if (userSections.transitionFromPrev != null) {
+          callback = userSections.transitionFromPrev.bind(userSections, done);
+        }
         let counter = 0;
-        let countTarget = 0;
         const countUp = () => {
           counter += 1;
-          if (counter === countTarget) {
-            done();
+          if (counter === equations.length) {
+            callback();
           }
         };
         for (let i = 0; i < equations.length; i += 1) {
           const equation = equations[i];
+          let { eqn } = equation;
+          let nav = {
+            // eslint-disable-next-line
+            showForm: (f) => {},
+          };
+          if (eqn instanceof EqnNavigator && eqn.eqn instanceof Equation) {
+            nav = equation.eqn;
+            ({ eqn } = nav);
+          }
           if (equation.toForm === null && equation.form != null) {
-            equation.showForm(equation.form);
+            nav.showForm(equation.form);
+            eqn.showForm(equation.form);
+            countUp();
           } else if (equation.toForm != null && equation.form != null) {
             const options = joinObjects({}, defaultEqnOptions, equation);
-            equation.showForm(options.toForm);
-            let eqn = equation;
-            if (eqn instanceof EqnNavigator) {
-              ({ eqn } = equation);
+            nav.showForm(options.toForm);
+            if (i < equations.length - 1) {
+              eqn.setOpacity(0.5);
             }
             eqn.showForm(options.form);
-            countTarget += 1;
-            if (options.moveFrom == null) {
+            if (options.form === options.toForm) {
+              countUp();
+            } else if (options.moveFrom == null) {
               eqn.goToForm({
                 name: options.toForm,
                 animate: options.animate,
@@ -1112,15 +1126,12 @@ class PresentationLessonContent extends SimpleLessonContent {
                     animate: 'move',
                     duration: 1,
                     callback: () => {
-                      equation.showForm(options.toForm);
+                      nav.showForm(options.toForm);
                       countUp();
                     },
                   });
                 })
                 .start();
-            }
-            if (i < equations.length - 1) {
-              eqn.setOpacity(0.5);
             }
           }
         }
@@ -1149,9 +1160,24 @@ class PresentationLessonContent extends SimpleLessonContent {
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
         }
-        eqn.showForm(toForm);
-        if (nav != null) {
-          nav.updateButtons();
+        for (let i = 0; i < equations.length; i += 1) {
+          const equation = equations[i];
+          let { eqn } = equation;
+          let nav = {
+            // eslint-disable-next-line
+            showForm: (f) => {},
+          };
+          if (eqn instanceof EqnNavigator && eqn.eqn instanceof Equation) {
+            nav = equation.eqn;
+            ({ eqn } = nav);
+          }
+          if (equation.toForm == null && equation.form != null) {
+            nav.showForm(equation.form);
+            eqn.showForm(equation.form);
+          } else if (equation.toForm != null) {
+            nav.showForm(equation.toForm);
+            eqn.showForm(equation.toForm);
+          }
         }
       },
     };
