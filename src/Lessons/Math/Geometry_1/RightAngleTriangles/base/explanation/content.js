@@ -461,47 +461,57 @@ class Content extends PresentationLessonContent {
         coll._0Eqn.showForm('0');
       },
     });
-    this.addSection(common, content, {
-      transitionFromPrev: (done) => {
-        coll._0Eqn.hide();
-        coll._1Eqn.showForm('0');
-        coll._1Eqn.animations.new()
-          .position({ target: coll._0Eqn.getPosition() })
-          .pulse({ scale: 1.2 })
-          .trigger({
-            callback: () => {
-              coll._0Eqn.showForm('0');
-              coll._0Eqn.setOpacity(0.5);
-            },
-          })
-          .position({
-            start: coll._0Eqn.getPosition(),
-            target: coll._1Eqn.getPosition(),
-            duration: 1,
-          })
-          .whenFinished(() => {
-            coll._1.showForm('0f');
-            coll._1Eqn.showForm('0');
-            coll._1Eqn.goToForm({
-              name: '0f',
-              animate: 'move',
-              duration: 1,
-              dissolveInTime: 1,
-              callback: () => {
-                coll._1.showForm('0f');
-                done();
-              },
-            });
-          })
-          .start();
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      {
+        nav: coll._1, form: '0', toForm: '0f', animate: 'move',
       },
-      setSteadyState: () => {
+    ], common, content, {
+      setSteadySate: () => {
         coll.updatePythagorusSquareLabels();
-        coll._0Eqn.showForm('0');
-        coll._0Eqn.setOpacity(0.5);
-        coll._1.showForm('0f');
       },
     });
+    // this.addSection(common, content, {
+    //   transitionFromPrev: (done) => {
+    //     coll._0Eqn.hide();
+    //     coll._1Eqn.showForm('0');
+    //     coll._1Eqn.animations.new()
+    //       .position({ target: coll._0Eqn.getPosition() })
+    //       .pulse({ scale: 1.2 })
+    //       .trigger({
+    //         callback: () => {
+    //           coll._0Eqn.showForm('0');
+    //           coll._0Eqn.setOpacity(0.5);
+    //         },
+    //       })
+    //       .position({
+    //         start: coll._0Eqn.getPosition(),
+    //         target: coll._1Eqn.getPosition(),
+    //         duration: 1,
+    //       })
+    //       .whenFinished(() => {
+    //         coll._1.showForm('0f');
+    //         coll._1Eqn.showForm('0');
+    //         coll._1Eqn.goToForm({
+    //           name: '0f',
+    //           animate: 'move',
+    //           duration: 1,
+    //           dissolveInTime: 1,
+    //           callback: () => {
+    //             coll._1.showForm('0f');
+    //             done();
+    //           },
+    //         });
+    //       })
+    //       .start();
+    //   },
+    //   setSteadyState: () => {
+    //     coll.updatePythagorusSquareLabels();
+    //     coll._0Eqn.showForm('0');
+    //     coll._0Eqn.setOpacity(0.5);
+    //     coll._1.showForm('0f');
+    //   },
+    // });
 
     content = {
       setContent: 'Now |substitute| in the areas.',

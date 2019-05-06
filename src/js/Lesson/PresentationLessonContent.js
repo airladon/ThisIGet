@@ -1007,15 +1007,9 @@ class PresentationLessonContent extends SimpleLessonContent {
   }
 
   addSectionEqnStory(
-    // optionsIn: {
-    //   eqn: { eqn: Equation } & Equation,  // or navigator
-    //   from: string,                       // From form
-    //   to: string,                         // To Form
-    //   duration?: number,                   // duration
-    //   animate?: 'dissolve' | 'move',
-    // },
     equations: Array<{
-      eqn: Equation | EqnNavigator,
+      nav?: EqnNavigator,
+      eq?: Equation,
       form?: string,
       toForm?: string,
       moveFrom?: DiagramElementCollection | Point,
@@ -1032,17 +1026,8 @@ class PresentationLessonContent extends SimpleLessonContent {
       dissolveIn: 0.5,
       dissolveOut: 0.5,
     };
-    // const options = joinObjects({}, defaultOptions, optionsIn);
+    console.log('asdfasf')
     const userSections = Object.assign({}, ...sectionObjects);
-    // let { eqn } = options;
-    // const { animate, duration } = options;
-    // let nav = null;
-    // if (eqn.table != null) {
-    //   nav = eqn;
-    //   ({ eqn } = nav);
-    // }
-    // const fromForm = options.from;
-    // const toForm = options.to;
     const eqnSection = {
       transitionFromPrev: (done) => {
         let callback = done;
@@ -1056,52 +1041,56 @@ class PresentationLessonContent extends SimpleLessonContent {
             callback();
           }
         };
-        for (let i = 0; i < equations.length; i += 1) {
-          const equation = equations[i];
-          let { eqn } = equation;
-          let nav = {
-            // eslint-disable-next-line
-            showForm: (f) => {},
-          };
-          if (eqn instanceof EqnNavigator && eqn.eqn instanceof Equation) {
-            nav = equation.eqn;
+        equations.forEach((eqOptions, i) => {
+          if (eqOptions.nav == null && eqOptions.eqn == null) {
+            return;
+          }
+          const options = joinObjects({}, defaultEqnOptions, eqOptions);
+          const {
+            form, duration, toForm, dissolveIn, dissolveOut, animate,
+            moveFrom,
+          } = options;
+          let { eqn, nav } = options;
+          if (eqn == null) {
             ({ eqn } = nav);
           }
-          if (equation.toForm === null && equation.form != null) {
-            nav.showForm(equation.form);
-            eqn.showForm(equation.form);
+          if (nav == null) {
+            nav = { showForm: (t) => {} };
+          }
+          if (toForm === null && form != null) {
+            nav.showForm(form);
+            eqn.showForm(form);
             countUp();
-          } else if (equation.toForm != null && equation.form != null) {
-            const options = joinObjects({}, defaultEqnOptions, equation);
-            nav.showForm(options.toForm);
+          } else if (toForm != null && form != null) {
+            nav.showForm(toForm);
             if (i < equations.length - 1) {
               eqn.setOpacity(0.5);
             }
             eqn.showForm(options.form);
-            if (options.form === options.toForm) {
+            if (form === toForm) {
               countUp();
             } else if (options.moveFrom == null) {
               eqn.goToForm({
-                name: options.toForm,
-                animate: options.animate,
-                duration: options.duration,
+                name: toForm,
+                animate,
+                duration,
                 callback: countUp,
               });
             } else {
-              let moveFromPosition = options.moveFrom;
+              let moveFromPosition = moveFrom;
               let pulseMoveFrom = () => {};
               let dullLastEqn = () => {};
               if (options.moveFrom instanceof DiagramElementCollection) {
-                moveFromPosition = options.moveFrom.getPosition();
+                moveFromPosition = moveFrom.getPosition();
                 pulseMoveFrom = () => {
-                  options.moveFrom.pulseScaleNow(1, 1.2);
+                  moveFrom.pulseScaleNow(1, 1.2);
                 };
-                if (options.moveFrom instanceof EqnNavigator
-                  || options.moveFrom instanceof Equation
+                if (moveFrom instanceof EqnNavigator
+                  || moveFrom instanceof Equation
                 ) {
                   dullLastEqn = () => {
-                    options.moveFrom.showForm(options.form);
-                    options.moveFrom.setOpacity(0.5);
+                    moveFrom.showForm(form);
+                    moveFrom.setOpacity(0.5);
                   };
                 }
               }
@@ -1113,20 +1102,23 @@ class PresentationLessonContent extends SimpleLessonContent {
                 .position({
                   start: moveFromPosition,
                   target: eqn.getPosition(),
-                  duration: 1,
+                  duration,
                 })
                 // eslint-disable-next-line no-loop-func
                 .whenFinished(() => {
-                  if (equation instanceof EqnNavigator) {
-                    equation.showForm(options.toForm);
-                  }
-                  eqn.showForm(options.form);
+                  // if (equation instanceof EqnNavigator) {
+                  //   equation.showForm(toForm);
+                  // }
+                  nav.showForm(form);
+                  eqn.showForm(form);
                   eqn.goToForm({
-                    name: options.toForm,
+                    name: toForm,
                     animate: 'move',
-                    duration: 1,
+                    duration,
+                    dissolveInTime: dissolveIn,
+                    dissolveOutTime: dissolveOut,
                     callback: () => {
-                      nav.showForm(options.toForm);
+                      nav.showForm(toForm);
                       countUp();
                     },
                   });
@@ -1134,51 +1126,33 @@ class PresentationLessonContent extends SimpleLessonContent {
                 .start();
             }
           }
-        }
-
-
-        // let callback = done;
-        // if (userSections.transitionFromPrev != null) {
-        //   callback = userSections.transitionFromPrev.bind(userSections, done);
-        // }
-        // if (fromForm === toForm) {
-        //   callback();
-        //   return;
-        // }
-        // eqn.showForm(fromForm);
-        // eqn.goToForm({
-        //   name: toForm,
-        //   duration,
-        //   callback,
-        //   animate,
-        // });
-        // if (nav != null) {
-        //   nav.updateButtons();
-        // }
+        });
       },
       setSteadyState: () => {
         if (userSections.setSteadyState != null) {
           userSections.setSteadyState();
         }
-        for (let i = 0; i < equations.length; i += 1) {
-          const equation = equations[i];
-          let { eqn } = equation;
-          let nav = {
-            // eslint-disable-next-line
-            showForm: (f) => {},
-          };
-          if (eqn instanceof EqnNavigator && eqn.eqn instanceof Equation) {
-            nav = equation.eqn;
+        equations.forEach((eqOptions) => {
+          if (eqOptions.nav == null && eqOptions.eqn == null) {
+            return;
+          }
+          const options = joinObjects({}, defaultEqnOptions, eqOptions);
+          const { form, toForm } = options;
+          let { eqn, nav } = options;
+          if (eqn == null) {
             ({ eqn } = nav);
           }
-          if (equation.toForm == null && equation.form != null) {
-            nav.showForm(equation.form);
-            eqn.showForm(equation.form);
-          } else if (equation.toForm != null) {
-            nav.showForm(equation.toForm);
-            eqn.showForm(equation.toForm);
+          if (nav == null) {
+            nav = { showForm: (t) => {} };
           }
-        }
+          if (toForm == null && form != null) {
+            nav.showForm(form);
+            eqn.showForm(form);
+          } else if (toForm != null) {
+            nav.showForm(toForm);
+            eqn.showForm(toForm);
+          }
+        });
       },
     };
     const section = Object.assign({}, ...sectionObjects, eqnSection);
