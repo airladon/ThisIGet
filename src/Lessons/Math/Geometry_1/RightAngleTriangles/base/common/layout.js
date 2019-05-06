@@ -714,6 +714,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [1.4, y] },
+        top: { position: [0, 1.5] },
       },
     },
   });

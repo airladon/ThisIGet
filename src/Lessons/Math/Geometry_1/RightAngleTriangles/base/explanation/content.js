@@ -364,23 +364,6 @@ class Content extends PresentationLessonContent {
       ],
     });
 
-
-    // this.addSection(common, content, {
-    //   modifiers: {
-    //     angles: this.bindNext(colors.angles),
-    //   },
-    // });
-    // this.addSection(common, content, {
-    //   modifiers: {
-    //     angles: click(coll.pulseTriangleAngles, [coll, null], colors.angles),
-    //   },
-    //   show: [pyth],
-    //   hide: [],
-    //   transitionFromPrev: (done) => {
-    //     coll.pulseTriangleAngles(done);
-    //   },
-    // });
-
     common = {
       show: [
         pyth._topLeft, pyth._topRight, pyth._bottomLeft, pyth._bottomRight,
@@ -525,6 +508,40 @@ class Content extends PresentationLessonContent {
       { nav: coll._2, form: '2' },
       { nav: coll._3, form: '2a', toForm: '3' },
     ], common, content);
+
+    this.addSection({
+      show: [
+        pyth._bottomLeft,
+      ],
+      hide: [
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
+      ],
+      transitionFromPrev: (done) => {
+        coll.setScenarios('default');
+        pyth.setScenarios('left');
+        coll._3Eqn.showForm('3');
+        coll.updatePythagorusSquareLabels();
+        pyth._bottomLeft.animations.new()
+          .inParallel([
+            pyth.anim.scenarios({
+              target: 'normalSize', duration: 1,
+            }),
+            coll._3Eqn.anim.scenario({
+              start: 'default', target: 'top', duration: 1,
+            }),
+          ])
+          // .scenario({ target: 'normalSize', duration: 1 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll.setScenarios('default');
+        pyth._bottomLeft.setScenarios('normalSize');
+        coll._3Eqn.setScenario('top');
+        coll._3Eqn.showForm('3');
+        coll.updatePythagorusSquareLabels();
+      },
+    });
   }
 }
 
