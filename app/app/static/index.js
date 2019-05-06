@@ -22707,7 +22707,7 @@ function (_DiagramElement2) {
   }, {
     key: "getAllElementsWithScenario",
     value: function getAllElementsWithScenario(scenario) {
-      var elements = [];
+      var elements = _get(_getPrototypeOf(DiagramElementCollection.prototype), "getAllElementsWithScenario", this).call(this, scenario);
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];

@@ -509,43 +509,66 @@ class Content extends PresentationLessonContent {
       { nav: coll._3, form: '2a', toForm: '3' },
     ], common, content);
 
-    this.addSection({
+
+    content = {
+      setContent: 'So for a right angle triangle, the |square of the hypotenuse| is equal to the |sum of the squares of the other two sides|.',
+    };
+
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1' },
+      { nav: coll._2, form: '2' },
+      { nav: coll._3, form: '3' },
+    ], common, content);
+
+    common = {
       show: [
         pyth._bottomLeft,
       ],
       hide: [
         pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
       ],
+      setSteadyState: () => {
+        coll.setScenarios('default');
+        pyth._bottomLeft.setScenario('normalSize');
+        pyth.setScenario('normalSizeLeft');
+        coll._3Eqn.setScenario('top');
+        coll._3Eqn.showForm('3');
+        coll.updatePythagorusSquareLabels();
+      },
+    };
+    this.addSection(common, content, {
       transitionFromPrev: (done) => {
         coll.setScenarios('default');
         pyth.setScenarios('left');
         coll._3Eqn.showForm('3');
         coll.updatePythagorusSquareLabels();
         pyth.animations.new()
-          // .inParallel([
-          //   pyth.anim.scenarios({
-          //     target: 'normalSize', duration: 1,
-          //   }),
-          //   // pyth._bottomLeft.anim.scenario({
-          //   //   target: 'normalSize', duration: 1,
-          //   // }),
-          //   coll._3Eqn.anim.scenario({
-          //     start: 'default', target: 'top', duration: 1,
-          //   }),
-          // ])
-          .scenarios({ target: 'normalSize', duration: 1 })
-          // .scenario({ target: 'normalSize', duration: 1 })
+          .inParallel([
+            pyth.anim.scenarios({
+              target: 'normalSizeLeft', duration: 2,
+            }),
+            pyth._bottomLeft.anim.scenarios({
+              target: 'normalSize', duration: 2,
+            }),
+            coll._3Eqn.anim.scenario({
+              start: 'default', target: 'top', duration: 2,
+            }),
+          ])
           .whenFinished(done)
           .start();
       },
-      setSteadyState: () => {
-        coll.setScenarios('default');
-        pyth._bottomLeft.setScenarios('normalSize');
-        coll._3Eqn.setScenario('top');
-        coll._3Eqn.showForm('3');
-        coll.updatePythagorusSquareLabels();
-      },
     });
+
+    content = {
+      setContent: 'This is very useful as it gives a way to |calculate| one side length from the other two.',
+    };
+    this.addSection(common, content);
+
+    content = {
+      setContent: 'While it is not clear if he was the first to discover it, this |relationship| was first attributed to an ancient Greek philosopher named |Pythagorus| who lived over 2500 years ago. As such, this relationship is often called the |Pythagorean theorem|.',
+    };
+    this.addSection(common, content);
   }
 }
 
