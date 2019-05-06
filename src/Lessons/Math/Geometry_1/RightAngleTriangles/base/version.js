@@ -8,6 +8,7 @@ var details = {
   qr: [
     'Main',
     'Pythagorus',
+    'Area',
   ],
 };
 

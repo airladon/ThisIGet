@@ -527,6 +527,7 @@ export default function getLessonIndex() {
           qr: [
             'Main',
             'Pythagorus',
+            'Area',
           ],
         },
       },

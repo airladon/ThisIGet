@@ -66,6 +66,7 @@ export default function lessonLayout() {
     },
   });
 
+  // eslint-disable-next-line max-len
   const tri = (name, points = triPoints, position = [0, 0], rotation = 0, scale = 1, textScale = 1) => ({
     name,
     method: 'polyLine',

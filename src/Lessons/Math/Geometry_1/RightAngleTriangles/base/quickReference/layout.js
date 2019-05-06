@@ -1,13 +1,197 @@
 // @flow
 import Fig from 'figureone';
+import baseLayout from '../../../../../LessonsCommon/layout';
 import './style.scss';
-import commonLessonLayout from '../common/layout';
-// import { Point } from '../../../../../../js/diagram/tools/g2';
 
-const { Point } = Fig;
+const {
+  Point,
+  Transform,
+  // Line,
+  // getPoint,
+} = Fig.tools.g2;
 
+// const { joinObjects } = Fig.tools.misc;
+
+const cssColorNames = [
+  'sides',
+  'angles',
+  'rightAngle',
+  'description',
+  'vertex',
+  'opposite',
+  'perpendicular',
+  'areaFill',
+];
+
+/* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
-  const layout: Object = commonLessonLayout();
-  layout.position = new Point(0, 0.45);
+  const layout: Object = baseLayout();
+  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const { colors } = layout;
+
+  const leftSide = 3;
+  const p0 = new Point(-1.7, -0.7);
+  const p1 = p0
+    .add(leftSide * Math.cos(Math.PI / 6), leftSide * Math.sin(Math.PI / 6));
+  const height = p1.y - p0.y;
+  const p2 = new Point(
+    p1.x + height / Math.tan(Math.PI / 3),
+    p0.y,
+  );
+  const triPoints = [p0, p1, p2];
+  const t = new Transform()
+    .translate(1.7, 0.7)
+    .rotate(Math.PI / 6 * 5)
+    .translate(leftSide, 0);
+  const tri2Points = triPoints.map(p => p.transformBy(t.m()));
+
+  // const tri3Points = triPoints.map(p => p.transformBy(
+  //   (new Transform().rotate(0).translate(-1, 0)).m(),
+  // ));
+
+  const angle = (text, textScale, color = colors.angles, radius = 0.3) => ({
+    curve: {
+      radius,
+      sides: 100,
+    },
+    label: {
+      text,
+      scale: textScale,
+    },
+    autoRightAngle: true,
+    color,
+  });
+  const side = (text, scale) => ({
+    label: {
+      text, location: 'outside', offset: 0.05, scale,
+    },
+  });
+
+  // eslint-disable-next-line max-len
+  const tri = {
+    name: 'tri',
+    method: 'polyLine',
+    options: {
+      color: colors.sides,
+      close: true,
+      width: 0.03,
+      points: tri2Points,
+      side: [
+        side('A', 1.2),
+        side('B', 1.2),
+        side('C', 1.2),
+      ],
+      angle: [
+        angle(''),
+        angle('', 1, colors.rightAngle, 0.4),
+        angle(''),
+      ],
+    },
+    mods: {
+      scenarios: {
+        qr: { position: [-1.3, -0.5], scale: 1 },
+      },
+    },
+  };
+
+  // const baseA = {
+  //   name: 'baseA',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.sides,
+  //     p1: p0,
+  //     p2: p1,
+  //     width: 0.01,
+  //     label: {
+  //       text: 'base',
+  //       location: 'outside',
+  //       offset: 0.06,
+  //     },
+  //   },
+  // };
+
+  // const heightB = {
+  //   name: 'heightB',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.sides,
+  //     p1,
+  //     p2,
+  //     width: 0.01,
+  //     label: {
+  //       text: 'height',
+  //       location: 'outside',
+  //       offset: 0.06,
+  //     },
+  //   },
+  // };
+
+  // const opposite = {
+  //   name: 'opposite',
+  //   method: 'line',
+  //   options: {
+  //     color: colors.opposite,
+  //     width: 0.02,
+  //     p1: tri2Points[0].add(-0.05, -0.02),
+  //     p2: tri2Points[2].add(0.03, -0.02),
+  //   },
+  // };
+
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  const elements = {
+    A: { color: colors.sides },
+    B: { color: colors.sides },
+    C: { text: 'C', color: colors.sides },
+    equals: '   =   ',
+    plus: ' + ',
+    _1: '1',
+    _2a: '2',
+    _2b: '2',
+    _2c: '2',
+    v: { symbol: 'vinculum' },
+    Area: { text: 'Area', color: colors.sides },
+  };
+
+  const half = { frac: ['_1', '_2a', 'v', 0.7] };
+  const sup = (content, s) => ({ sup: [content, ['  ', s]] });
+
+  const eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      scale: 1.5,
+      elements,
+      forms: {
+        '0': [
+          sup('A', '_2a'), 'plus', sup('B', '_2b'),
+          'equals',
+          sup('C', '_2c'),
+        ],
+        'area': ['Area', 'equals', half, ' ', 'A', ' ', 'B'],
+      },
+    },
+    mods: {
+      scenarios: {
+        qr: { position: [0, -1.5], scale: 1 },
+      },
+    },
+  };
+
+
+  layout.addElements = [
+    tri,
+    eqn,
+  ];
   return layout;
 }
