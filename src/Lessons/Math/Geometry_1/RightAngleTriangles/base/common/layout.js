@@ -97,6 +97,7 @@ export default function lessonLayout() {
         },
         together: { position: [0, 0], rotation: 0, scale },
         normalSize: { position: [0, 0], rotation: 0, scale: 1 },
+        summary: { position: [0, 0], rotation: 0, scale: 1 },
       },
     },
   });
@@ -398,6 +399,7 @@ export default function lessonLayout() {
         together: { position: [-0.7, -1.4], scale: 1 },
         normalSize: { position: [-1.175, -1.145], scale: 1 },
         normalSizeLeft: { position: [-2, -1.145], scale: 0.9 },
+        summary: { position: [-2, -1.4], scale: 0.9 },
       },
     },
   };
@@ -716,6 +718,7 @@ export default function lessonLayout() {
       scenarios: {
         default: { position: [1.4, y], scale: 1 },
         top: { position: [1.5, -0.2], scale: 1.3 },
+        summary: { position: [1.5, -0.2], scale: 1.3 },
       },
     },
   });

@@ -114,6 +114,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Hypotenuse',
       setContent: style({ top: 0 }, [
         'The |opposite_side| to the right angle is often called the |hypotenuse|. The word comes from the |Greek| word |hypoteinousa| which means “stretching under”. Therefore the |hypotenuse is the side stretching under the right angle|.',
       ]),
@@ -129,6 +130,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Area',
       setContent: style({}, [
         'To calculate |triangle_area|, the triangle |height| is required. The height is a |perpendicular line| from the triangle |base_side| to the opposite |vertex|.',
       ]),
@@ -216,6 +218,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Relationship between Sides',
       setContent: [
         'Another important property of right angle triangles is the |relationship| between |side_lengths|.',
       ],
@@ -566,9 +569,20 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content);
 
     content = {
-      setContent: 'While it is not clear if he was the first to discover it, this |relationship| was first attributed to an ancient Greek philosopher named |Pythagorus| who lived over 2500 years ago. As such, this relationship is often called the |Pythagorean theorem|.',
+      title: 'Pythagorus',
+      setContent: style({ top: 0 }, 'While it is not clear if he was the first to discover it, this |relationship| was first attributed to an ancient Greek philosopher named |Pythagorus| who lived over 2500 years ago. As such, this relationship is often called the |Pythagorean theorem|.'),
     };
     this.addSection(common, content);
+
+    content = {
+      title: 'Uses',
+      setContent: style({ centerV: true }, [
+        'Right angle triangles are |everywhere|.',
+        'Often more complicated shapes can be simplified into right angle triangles, making them easier to analyze them.',
+        'Right angle triangles form the basis of |trigonometry| - a field of mathematics that studies triangles and is the basis of many science and engineering disciplines.',
+      ]),
+    };
+    this.addSection(content);
   }
 }
 

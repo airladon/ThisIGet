@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -9,18 +9,18 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   style,
-//   click,
+const {
+  style,
+  click,
 //   clickW,
 //   highlight,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -35,31 +35,32 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
+    const pyth = fig._pythagorusSquare;
 
     this.addSection({
-      title: '',
-      setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      setContent: style({ top: 0 }, [
+        'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
+        'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
+      ]),
+      modifiers: {
+        right_angle: click(coll.pulseBottomLeftRightAngle, [coll], colors.rightAngle),
+        longest_side: click(coll.pulseBottomLeftOpposite, [coll], colors.sides),
+        equal: click(coll.pulseEquation3, [coll], colors.sides),
+      },
+      show: [
+        pyth._bottomLeft,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      hide: [
+        pyth._bottomLeft._angle0, pyth._bottomLeft._angle2,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setSteadyState: () => {
+        coll.setScenarios('summary');
+        coll._3Eqn.showForm('3');
+        coll.updatePythagorusSquareLabels();
+      },
     });
   }
 }

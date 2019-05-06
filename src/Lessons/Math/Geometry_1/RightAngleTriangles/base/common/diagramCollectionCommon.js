@@ -15,9 +15,9 @@ const {
 } = Fig;
 
 type fullTriangle = {
-  _side01: DiagramObjectLine;
-        _side12: DiagramObjectLine;
-        _side20: DiagramObjectLine;
+        _side01: { _label: DiagramElementPrimative } & DiagramObjectLine;
+        _side12: { _label: DiagramElementPrimative } & DiagramObjectLine;
+        _side20: { _label: DiagramElementPrimative } & DiagramObjectLine;
         _angle0: DiagramObjectAngle;
         _angle1: DiagramObjectAngle;
         _angle2: DiagramObjectAngle;
@@ -78,12 +78,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
-    this._1Eqn.eqn.formRestart.pulse.element = this._0Eqn;
-    this._2Eqn.eqn.formRestart.pulse.element = this._1Eqn;
-    this._3Eqn.eqn.formRestart.pulse.element = this._2Eqn;
-    // this._1Eqn.eqn.formRestart.moveFrom = this._0Eqn;
-    // this._2Eqn.eqn.formRestart.moveFrom = this._1Eqn;
-    // this._3Eqn.eqn.formRestart.moveFrom = this._2Eqn;
+    this._1Eqn.eqn.formRestart = { pulse: { element: this._0Eqn, duration: 1, scale: 1.1 } };
+    this._2Eqn.eqn.formRestart = { pulse: { element: this._1Eqn, duration: 1, scale: 1.1 } };
+    this._3Eqn.eqn.formRestart = { pulse: { element: this._2Eqn, duration: 1, scale: 1.1 } }; 
   }
 
   updateMainLabels() {
@@ -107,6 +104,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulseBottomLeftRightAngle() {
+    this._fig._pythagorusSquare._bottomLeft._angle1.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
   pulseNonRightAngles() {
     this._fig._main._tri._angle0.pulseScaleNow(1, 1.5);
     this._fig._main._tri._angle2.pulseScaleNow(1, 1.5);
@@ -115,6 +117,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseOpposite() {
     this._fig._main._opposite.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseBottomLeftOpposite() {
+    this._fig._pythagorusSquare._bottomLeft._side20.pulseWidth({ label: 2 });
     this.diagram.animateNextFrame();
   }
 
@@ -203,6 +210,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._pythagorusSquare._bottomRightArea.show();
     this._fig._pythagorusSquare._topLeftArea.show();
     this._fig._pythagorusSquare._topRightArea.show();
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEquation3() {
+    this._3Eqn.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();
   }
 }

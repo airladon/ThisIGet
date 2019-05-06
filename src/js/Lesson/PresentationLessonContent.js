@@ -1009,7 +1009,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   addSectionEqnStory(
     equations: Array<{
       nav?: EqnNavigator,
-      eq?: Equation,
+      eqn?: Equation,
       form?: string,
       toForm?: string,
       moveFrom?: DiagramElementCollection | Point,
