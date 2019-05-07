@@ -47,22 +47,29 @@ class Content extends PresentationLessonContent {
     const common = {
       setContent: [],
       modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
+      // // setInfo: `
+      // //     <ul>
+      // //       <li></li>
+      // //     </ul>
+      // // `,
+      // transitionFromPrev: (done) => { done(); },
+      // infoModifiers: {},
+      // interactiveElements: [
+      //   // interactiveItem(quiz._check),
+      // ],
+      // setEnterState: () => {},
+      // showOnly: [],
+      // show: [],
+      // hide: [],
+      // setSteadyState: () => {},
+      // setLeaveState: () => {},
       transitionFromPrev: (done) => { done(); },
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          circ.resetDiameterAndRadius();
+        }
+        done();
+      },
     };
 
     this.addSection(common, {
@@ -217,8 +224,10 @@ class Content extends PresentationLessonContent {
         circ._circle._line.isTouchable = true;
         circ._circle.setScenario('centerHigh');
         circ.setCircleMoveLimits();
-        circ.updateCircleLocation();
         circ._locationText.setScenario('topRight');
+      },
+      setSteadyState: () => {
+        circ.updateCircleLocation();
       },
       setLeaveState: () => {
         circ._circle.isMovable = false;
@@ -240,8 +249,9 @@ class Content extends PresentationLessonContent {
         any: click(circ.pushRadiusRandom, [circ], colors.radius),
       },
       show: [circle._line, circle._center, circle._radius],
-      setEnterState: () => {
+      setSteadyState: () => {
         circ._circle.setScenario('centerHigh');
+        circ._circle._radius.setRotation(0);
       },
     });
     this.addSection(common, {
@@ -257,6 +267,12 @@ class Content extends PresentationLessonContent {
         any: click(circ.pushDiameterRandom, [circ], colors.diameter),
       },
       show: [circle._line, circle._center, circle._diameter],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'next') {
+          circ.resetDiameterAndRadius();
+        }
+        done();
+      },
       setEnterState: () => {
         circ._circle.setScenario('centerHigh');
       },
@@ -269,6 +285,12 @@ class Content extends PresentationLessonContent {
         Diameter: highlight(colors.diameter),
       },
       show: [circle._line, circle._center, circle._diameter],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'prev') {
+          circ.resetDiameterAndRadius();
+        }
+        done();
+      },
       setEnterState: () => {
         circ._circle.setScenario('centerHigh');
       },
@@ -280,10 +302,6 @@ class Content extends PresentationLessonContent {
         'However, as it was first studied a long time ago in different languages, it is called a |circle|, with properties |center|, |radius|, |diameter| and |circumference|.',
       ]),
     });
-
-    common.transitionFromPrev = (done) => {
-      circ.setDiameterAndRadiusRotation(true, done);
-    };
 
     this.addSection({
       title: 'Relationships',
@@ -300,9 +318,11 @@ class Content extends PresentationLessonContent {
         radius: click(circ.pulseRadius, [circ], colors.radius),
       },
       setEnterState: () => {
-        circle._radius.setRotation(0.5);
-        circle._diameter.setRotation(-0.5);
+        circ.resetDiameterAndRadius();
       },
+      // transitionFromPrev: (done) => {
+      //   circ.setDiameterAndRadiusRotation(true, done);
+      // },
       setSteadyState: () => {
         circ.setDiameterAndRadiusRotation();
         circle.setScenario('centerHigh');
@@ -324,6 +344,14 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
       ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'goto') {
+          circ.setDiameterAndRadiusRotation(true, done);
+        } else {
+          circ.resetDiameterAndRadius();
+          done();
+        }
+      },
       setSteadyState: () => {
         circle.setScenario('centerHigh');
       },
@@ -335,6 +363,14 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._radius, circle._center, circle._diameter,
       ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'goto') {
+          circ.setDiameterAndRadiusRotation(true, done);
+        } else {
+          circ.resetDiameterAndRadius();
+          done();
+        }
+      },
       setSteadyState: () => {
         circ._eqnDiameterRadius.showForm('base');
         circ._eqnDiameterRadius.setScenario('centerTop');
@@ -354,6 +390,14 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._center, circle._diameter,
       ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'goto') {
+          circ.setDiameterAndRadiusRotation(true, done);
+        } else {
+          circ.resetDiameterAndRadius();
+          done();
+        }
+      },
       setSteadyState: () => {
         circle.setScenario('centerHigh');
       },
@@ -414,12 +458,16 @@ class Content extends PresentationLessonContent {
       show: [
         circle._line, circle._center, circle._diameter,
       ],
+      transitionFromAny: (done) => {
+        circ.resetDiameterAndRadius();
+        done();
+      },
       setSteadyState: () => {
+        circle.setScenario('center');
         circ._eqnCircumferenceDiameter.showForm('base');
         circ._eqnCircumferenceDiameter.setScenario('centerTop');
-        circ._circle._diameter.setRotation(0);
-        circ._circle._radius.setRotation(0.5);
-        circle.setScenario('center');
+        // circ._circle._diameter.setRotation(0);
+        // circ._circle._radius.setRotation(0.5);
       },
     });
 
@@ -465,13 +513,33 @@ class Content extends PresentationLessonContent {
         circ._diameterText, circ._radiusText,
       ],
       hide: [circle._arc],
-      setEnterState: () => {
+      // setEnterState: () => {
+      //   circ.containToGrid = true;
+      //   circ.straighten(0);
+      //   circ.straightening = false;
+      //   circle.setScenario('center');
+      //   circle._radius.setRotation(0.5);
+      //   circle._diameter.setRotation(-0.5);
+      //   circle.setScale(0.7);
+      //   circle.move.maxTransform.updateScale(0.78, 0.78);
+      //   circle.move.minTransform.updateScale(0.3, 0.3);
+      //   circle._scale.isTouchable = true;
+      //   circ._locationText.setScenario('summary');
+      //   circ._circumferenceText.setScenario('summary');
+      //   circ._radiusText.setScenario('summary');
+      //   circle._line.setColor(colors.grid);
+      // },
+      // transitionFromAny: (done) => { done(); },
+      // transitionFromPrev: (done) => { done(); },
+      setSteadyState: () => {
+        // circ.setDiameterAndRadiusRotation();
+        circ.resetDiameterAndRadius();
         circ.containToGrid = true;
         circ.straighten(0);
         circ.straightening = false;
         circle.setScenario('center');
         circle._radius.setRotation(0.5);
-        circle._diameter.setRotation(-0.5);
+        circle._diameter.setRotation(0);
         circle.setScale(0.7);
         circle.move.maxTransform.updateScale(0.78, 0.78);
         circle.move.minTransform.updateScale(0.3, 0.3);
@@ -480,9 +548,6 @@ class Content extends PresentationLessonContent {
         circ._circumferenceText.setScenario('summary');
         circ._radiusText.setScenario('summary');
         circle._line.setColor(colors.grid);
-      },
-      setSteadyState: () => {
-        circ.setDiameterAndRadiusRotation();
         circ.updateCircleLocation();
       },
       setLeaveState: () => {

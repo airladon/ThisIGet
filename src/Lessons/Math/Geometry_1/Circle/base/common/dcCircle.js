@@ -418,6 +418,13 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  resetDiameterAndRadius() {
+    this._circle._radius.setRotation(0.5);
+    this._circle._diameter.setRotation(0);
+    this._circle._diameter.setPosition(0, 0);
+    this.diagram.animateNextFrame();
+  }
+
   setDiameterAndRadiusRotation(
     animate: boolean = false,
     whenFinished: ?() => void = null,

@@ -457,7 +457,7 @@ export default function lessonLayout() {
     'eqnCircumferenceDiameter',
     ['circumference', 'equals', 'pi', 'x', 'diameter'],
     {
-      centerTop: { position: new Point(0.2, 1.5) },
+      centerTop: { position: new Point(0.2, 1.5), scale: 1 },
       centerMid: { position: new Point(0.2, 0.7), scale: 0.9 },
       left: { position: new Point(-1, 0.3), scale: 0.8 },
       qr: { position: new Point(0.1, -1.2), scale: 0.7 },
