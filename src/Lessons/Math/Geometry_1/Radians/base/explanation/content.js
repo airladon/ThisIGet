@@ -437,9 +437,9 @@ class Content extends PresentationLessonContent {
         diag._circumferenceEqn.setScenario('bottom');
         diag._circumferenceEqn.showForm('0');
         diag._circumferenceEqn.isTouchable = false;
-        diag._arcEqnEqn.setScenario('bottom');
-        diag._arcEqnEqn.showForm('0');
-        diag._arcEqnEqn.isTouchable = false;
+        diag._arcEqn.setScenario('bottom');
+        diag._arcEqn.showForm('0');
+        diag._arcEqn.isTouchable = false;
       },
       setLeaveState: () => {
         circle._line1.isTouchable = true;
@@ -458,9 +458,9 @@ class Content extends PresentationLessonContent {
         _2pi: highlightWord('2π', colors.angles),
       },
       transitionFromPrev: (done) => {
-        diag._arcEqnEqn.showForm('0');
+        diag._arcEqn.showForm('0');
         diag._circumferenceEqn.showForm('0');
-        diag._arcEqnEqn.animateToForm('1', 1, 0, done);
+        diag._arcEqn.animateToForm('1', 1, 0, done);
       },
       show: [circle._arc, circle._line1],
       setSteadyState: () => {
@@ -470,9 +470,10 @@ class Content extends PresentationLessonContent {
         diag._circumferenceEqn.setScenario('bottom');
         diag._circumferenceEqn.showForm('0');
         diag._circumferenceEqn.isTouchable = false;
-        diag._arcEqnEqn.setScenario('bottom');
-        diag._arcEqnEqn.showForm('1');
-        diag._arcEqnEqn.isTouchable = true;
+        diag._arcEqn.setScenario('bottom');
+        diag._arcEqn.showForm('1');
+        diag._arcEqn.isTouchable = false;
+        // diag._arcEqnNav.showForm('1');
       },
       setLeaveState: () => {
         circle._line1.isTouchable = true;
@@ -490,16 +491,16 @@ class Content extends PresentationLessonContent {
         _2pi: highlightWord('2π', colors.angles),
       },
       transitionFromPrev: (done) => {
-        diag._arcEqnEqn.showForm('1');
-        diag._arcEqnEqn.animateToForm('2', 1, 1, done);
-        diag._arcEqnEqn.animations.new()
+        diag._arcEqn.showForm('1');
+        diag._arcEqn.animateToForm('2', 1, 1, done);
+        diag._arcEqn.animations.new()
           .scenario({ target: 'center', duration: 1 })
           .start();
       },
       setSteadyState: () => {
-        diag._arcEqnEqn.setScenario('center');
-        diag._arcEqnEqn.showForm('2');
-        diag._arcEqnEqn.isTouchable = true;
+        diag._arcEqn.setScenario('center');
+        diag._arcEqn.isTouchable = true;
+        diag._arcEqnNav.showForm('2');
       },
     });
 

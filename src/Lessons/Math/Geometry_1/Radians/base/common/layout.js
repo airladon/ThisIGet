@@ -364,9 +364,10 @@ export default function lessonLayout() {
     },
   };
 
+
   layout.arcEqn = {
     name: 'arcEqn',
-    method: 'addNavigator',
+    method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
       scale: 1,
@@ -458,6 +459,23 @@ export default function lessonLayout() {
     },
   };
 
+  layout.arcEqnNav = {
+    name: 'arcEqnNav',
+    method: 'addNavigator',
+    options: {
+      equation: layout.arcEqn,
+      type: 'equationOnly',
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0), scale: 1.3 },
+        bottom: { position: new Point(0, -1.6), scale: 0.9 },
+      },
+    },
+  };
+
+  
   layout.radDegEqn = {
     name: 'radDeg',
     method: 'addNavigator',
@@ -625,7 +643,8 @@ export default function lessonLayout() {
     layout.circle,
     layout.equation,
     layout.circumferenceEqn,
-    layout.arcEqn,
+    // layout.arcEqn,
+    layout.arcEqnNav,
     layout.radDegEqn,
     layout.degRadEqn,
   ];
