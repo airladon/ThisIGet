@@ -11,6 +11,7 @@ const {
   Transform,
   Point,
   Equation,
+  EqnNavigator,
 } = Fig;
 
 const {
@@ -65,7 +66,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _labelB2: DiagramElementPrimative;
   } & DiagramElementCollection;
 
-  _eqnEqn: Equation;
+  _eqn: Equation;
+  _nav: EqnNavigator;
 
   row: number;
 

@@ -47,8 +47,8 @@ class Content extends PresentationLessonContent {
     const shapes = coll._shapes;
     const rect = coll._rectangle;
     const square = coll._square;
-    const eqn = coll._eqnEqn;
-    const nav = coll._eqnNav;
+    const eqn = coll._eqn;
+    const nav = coll._nav;
 
     const mods = {
       m: highlight(colors.highlight),
@@ -305,6 +305,7 @@ class Content extends PresentationLessonContent {
         'Therefore, the area of a rectangle can be calculated:',
       ],
       setSteadyState: () => {
+        console.log(eqn)
         eqn.showForm('0');
       },
     });
@@ -399,7 +400,7 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      show: [rect._grid, rect._line, rect._label10, rect._label6, coll._eqnNav],
+      show: [rect._grid, rect._line, rect._label10, rect._label6, coll._nav],
       setSteadyState: () => {
         eqn.setScenario('top');
         nav.setScenario('nav');

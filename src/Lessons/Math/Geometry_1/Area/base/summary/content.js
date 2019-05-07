@@ -41,7 +41,7 @@ class Content extends PresentationLessonContent {
     const shapes = coll._shapes;
     const rect = coll._rectangle;
     const square = coll._square;
-    const eqn = coll._eqnEqn;
+    const eqn = coll._eqn;
     // const nav = coll._eqnNav;
 
     this.addSection({

@@ -636,14 +636,13 @@ export default function lessonLayout() {
   const brace = numLines => ({
     symbol: 'brace', side: 'bottom', color: colors.gridLight, numLines,
   });
+
   const eqn = {
     name: 'eqn',
-    method: 'addNavigator',
+    method: 'addEquation',
     options: {
-      navType: 'description',
       color: colors.diagram.text.base,
       scale: 0.9,
-      alignH: 'left',
       elements: {
         Area: { color: colors.highlight },
         _Area: { text: 'Area', color: colors.sides },
@@ -766,13 +765,33 @@ export default function lessonLayout() {
     },
   };
 
+  const nav = {
+    name: 'nav',
+    method: 'addNavigator',
+    options: {
+      equation: eqn,
+      navType: 'description',
+      alignH: 'left',
+    },
+    mods: {
+      scenarios: {
+        top: { position: [0, 0.9] },
+        square: { position: [0, 0.8] },
+        nav: { position: [-2.74, 1.6] },
+        summary: { position: [0, 0] },
+        qr: { position: [0, -1.5] },
+      },
+      isTouchable: false,
+    },
+  };
+
   layout.addElements = [
     examples,
     unitShape,
     measure,
     shapes,
     rectangle,
-    eqn,
+    nav,
     square,
   ];
   return layout;
