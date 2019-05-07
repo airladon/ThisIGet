@@ -125,8 +125,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseAlternateAngles() {
-    this._rect._bottomRightDiag.pulseScaleNow(1, 1.3);
+  pulseAlternateAngles(done: ?() => void = null) {
+    this._rect._bottomRightDiag.pulseScaleNow(1, 1.3, 0, done);
     this._rect._topLeftDiag.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }

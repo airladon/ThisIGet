@@ -291,12 +291,13 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         alternate: this.bindShowQR('related_angles/base', 'Alternate'),
-        alternate_intersection_angles: click(coll.pulseAlternateAngles, [coll], colors.angles),
+        alternate_intersection_angles: click(
+          coll.pulseAlternateAngles, [coll, null], colors.angles,
+        ),
       },
       show: [rect],
       transitionFromPrev: (done) => {
-        coll.pulseAlternateAngles();
-        done();
+        coll.pulseAlternateAngles(done);
       },
     });
 
@@ -379,8 +380,7 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         coll.setRectLabels('ABAB');
         rect._right._label.pulseScaleNow(1, 2);
-        rect._bottom._label.pulseScaleNow(1, 2);
-        done();
+        rect._bottom._label.pulseScaleNow(1, 2, 0, done);
       },
       setSteadyState: () => {
         coll.setRectLabels('ABAB');
@@ -414,6 +414,9 @@ class Content extends PresentationLessonContent {
         `${new Definition('Square', 'Old French', ['esquare', 'square'], 'Latin', ['quadra', 'square']).html(colors.sides)}`,
       ],
       show: [square],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
     });
 
     this.addSection({
@@ -421,6 +424,9 @@ class Content extends PresentationLessonContent {
         'As a square is a rectangle, it also shares the same property relationships. All |angles are 90º|, and |opposite sides are parallel|.',
       ],
       show: [square],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      }
     });
   }
 }
