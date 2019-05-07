@@ -105,7 +105,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   afterTransitionToNewProblem() {
     super.afterTransitionToNewProblem();
     const problemType = randElement(['side', 'angle', 'area']);
-    // const problemType = 'side'
+    // const problemType = 'area'
     this.triangle.updateLabels();
     this._question.drawingObject.setText(`Enter the unknown ${problemType}:`);
     this._fig._tri._angle1.showAll();
@@ -129,11 +129,15 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         this._fig._tri._side20,
       ];
       const unknownSide = removeRandElement(possibleSides);
-      let scale = rand(1, 100);
-      if (problemType === 'area') {
-        scale = rand(1, 10);
-      }
-      const knownSideValues = possibleSides.map(s => round(s.getLength() * scale, 0));
+      const scale = rand(1, 10);
+      const knownSideValues = possibleSides.map(s => round(s.getLength() * scale, 1));
+      // if (problemType === 'area') {
+      //   scale = rand(1, 10);
+      //   knownSideValues = possibleSides.map(s => round(s.getLength() * scale, 1));
+      // }
+      
+      console.log(possibleSides)
+      console.log(knownSideValues);
       if (unknownSide === this._fig._tri._side20) {
         if (problemType === 'side') {
           const square = knownSideValues[0] ** 2 + knownSideValues[1] ** 2;
