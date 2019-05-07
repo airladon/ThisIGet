@@ -475,10 +475,9 @@ export default function lessonLayout() {
     },
   };
 
-  
   layout.radDegEqn = {
-    name: 'radDeg',
-    method: 'addNavigator',
+    name: 'radDegEqn',
+    method: 'addEquation',
     options: {
       color: colors.diagram.text.base,
       scale: 1,
@@ -555,6 +554,7 @@ export default function lessonLayout() {
                   scale: 0.5,
                 },
               },
+              includeAnnotationInSize: false,
             },
           },
           'equals',
@@ -569,6 +569,7 @@ export default function lessonLayout() {
                   scale: 0.5,
                 },
               },
+              includeAnnotationInSize: false,
             },
           },
         ],
@@ -589,6 +590,22 @@ export default function lessonLayout() {
         ],
       },
       formSeries: ['0', '1', '2', '3', '4', '5'],
+    },
+
+    mods: {
+      scenarios: {
+        center: { position: new Point(0.5, 0), scale: 1.3 },
+        // summary: { position: new Point(-0.8, 0.9), scale: 1.3 },
+      },
+    },
+  };
+
+  layout.radDegEqnNav = {
+    name: 'radDeg',
+    method: 'addNavigator',
+    options: {
+      equation: layout.radDegEqn,
+      type: 'equationOnly',
     },
 
     mods: {
@@ -645,7 +662,7 @@ export default function lessonLayout() {
     layout.circumferenceEqn,
     // layout.arcEqn,
     layout.arcEqnNav,
-    layout.radDegEqn,
+    layout.radDegEqnNav,
     layout.degRadEqn,
   ];
   return layout;
