@@ -152,8 +152,8 @@ class Content extends PresentationLessonContent {
         diag.bendRadius(done);
       },
       setSteadyState: () => {
-        diag.bend(1);
         circle._line1.setRotation(1);
+        diag.bendLineToEnd();
         circle.setScenario('center');
         diag.updateAngle();
       },

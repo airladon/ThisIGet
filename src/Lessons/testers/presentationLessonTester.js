@@ -68,7 +68,7 @@ export default function tester(...scenarios) {
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
           expect(image).toMatchImageSnapshot({
-            failureThreshold: '0.005',             // 480 pixels
+            failureThreshold: '0.00001',             // 480 pixels
             failureThresholdType: 'percent',
             customSnapshotIdentifier: `${topicName} page ${currentPage}`,
           });
@@ -113,7 +113,7 @@ export default function tester(...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
-              failureThreshold: '0.005',             // 480 pixels
+              failureThreshold: '0.00001',             // 480 pixels
               failureThresholdType: 'percent',
               customSnapshotIdentifier: `${topicName} page ${currentPage}`,
             });

@@ -224,6 +224,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     arc.angleToDraw = (percent * 0.99);
   }
 
+  bendLineToEnd() {
+    const bendLine = this._circle._bendLine;
+    const { radius, width } = this.layout;
+    bendLine.showAll();
+    bendLine.stop(true, false);
+    this.bend(1);
+    bendLine.setPosition(radius + width / 2, 0);
+    bendLine.setRotation(Math.PI / 2);
+    this.diagram.animateNextFrame();
+  }
+
   bendRadius(finished: ?() => void = null) {
     const line1 = this._circle._line1;
     const bendLine = this._circle._bendLine;
