@@ -347,7 +347,9 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         equation.showForm('3rad');
         equation.animateToForm('3rad1', 2, 0, done);
-        diag.setLineRotation(3, true);
+        if (circle._line1.getRotation() !== 3) {
+          diag.setLineRotation(3, true);
+        }
       },
       setSteadyState: () => {
         setup();
@@ -363,7 +365,9 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         equation.showForm('3rad1');
         equation.animateToForm('general', 2, 0, done);
-        diag.setLineRotation(3, true);
+        if (circle._line1.getRotation() !== 3) {
+          diag.setLineRotation(3, true);
+        }
       },
       setSteadyState: () => {
         setup();
