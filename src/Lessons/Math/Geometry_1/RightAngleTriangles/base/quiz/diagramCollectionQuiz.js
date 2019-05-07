@@ -131,13 +131,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       const unknownSide = removeRandElement(possibleSides);
       const scale = rand(1, 10);
       const knownSideValues = possibleSides.map(s => round(s.getLength() * scale, 1));
-      // if (problemType === 'area') {
-      //   scale = rand(1, 10);
-      //   knownSideValues = possibleSides.map(s => round(s.getLength() * scale, 1));
-      // }
-      
-      console.log(possibleSides)
-      console.log(knownSideValues);
+
       if (unknownSide === this._fig._tri._side20) {
         if (problemType === 'side') {
           const square = knownSideValues[0] ** 2 + knownSideValues[1] ** 2;
