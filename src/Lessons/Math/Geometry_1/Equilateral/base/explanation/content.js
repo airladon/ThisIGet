@@ -87,7 +87,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         all_sides: click(coll.pulseSides, [coll], colors.sides),
-        all_angles: click(coll.pulseAngles, [coll], colors.angles),
+        all_angles: click(coll.pulseAngles, [coll, null], colors.angles),
       },
       show: [tri],
     });
@@ -123,11 +123,11 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common);
     this.addSection(common, {
-      setSteadyState: () => {
+      transitionFromAny: (done) => {
         tri._angle0.label.setText('60º');
         tri._angle1.label.setText('60º');
         tri._angle2.label.setText('60º');
-        coll.pulseAngles();
+        coll.pulseAngles(done);
       },
       setLeaveState: () => {
         tri._angle0.label.setText('a');

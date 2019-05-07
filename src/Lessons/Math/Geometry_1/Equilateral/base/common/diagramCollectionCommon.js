@@ -69,10 +69,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseAngles() {
+  pulseAngles(done: ?() => void = null) {
     this._triangle._angle0.pulseScaleNow(1, 1.3);
     this._triangle._angle1.pulseScaleNow(1, 1.3);
-    this._triangle._angle2.pulseScaleNow(1, 1.3);
+    this._triangle._angle2.pulseScaleNow(1, 1.3, 0, done);
     this.diagram.animateNextFrame();
   }
 
