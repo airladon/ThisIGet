@@ -75,7 +75,7 @@ function joinObjects(...objects) {
 //       scrollTo: 180,
 //     },
 //     pages: {
-//       1: { thresholds: { goto: 0.001, next: 0.01, prev: 0.01 } },
+//       1: { threshold: { goto: 0.001, next: 0.01, prev: 0.01 } },
 //       2: { threshold: 0.003 },
 //       3: { otherOptions: 'a' },
 //     },
@@ -92,11 +92,11 @@ function getThreshold(page, options, comingFrom) {
     return defaultThreshold.toString();
   }
   const pageOptions = options.pages[page];
-  if (pageOptions.threshold != null) {
+  if (pageOptions.threshold != null && typeof pageOptions.threshold === 'string') {
     return pageOptions.threshold.toString();
   }
-  if (pageOptions.thresholds != null && pageOptions.thresholds[comingFrom] != null) {
-    return pageOptions.thresholds[comingFrom].toString();
+  if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {
+    return pageOptions.threshold[comingFrom].toString();
   }
   return defaultThreshold.toString();
 }
@@ -109,9 +109,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
   let scenariosToUse = scenarios;
   const defaultOptions = {
     thresholds: {
-      goto: 0.00001,
-      next: 0.00001,
-      prev: 0.00001,
+      goto: 0.00002,  // 7 pixels
+      next: 0.00002,  // 7 pixels
+      prev: 0.00002,  // 7 pixels
     },
     viewPort: {
       width: 600,

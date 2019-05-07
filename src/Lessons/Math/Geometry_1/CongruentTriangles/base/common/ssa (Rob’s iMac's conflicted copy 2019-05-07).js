@@ -239,7 +239,7 @@ export default class CommonCollectionSSA extends CommonDiagramCollection {
 
   setDefault() {
     this._constructionLine.setRotation(Math.PI / 6);
-    this._adjacentMovePad.setPosition(-2.2, 0);
+    this._adjacentMovePad.setPosition(-2, 0);
     this._opposite.setRotation(Math.PI / 3);
     this.diagram.animateNextFrame();
   }

@@ -376,9 +376,9 @@ class Content extends PresentationLessonContent {
           .start();
       },
       setSteadyState: () => {
-        // sas._fig.showAll();
+        sas._fig.showAll();
         sas.setProblemStatement();
-        // sas._config1.hide();
+        sas._config1.hide();
         // console.log(sas)
       },
     });
@@ -390,7 +390,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         pad: click(sas.pulsePad, [sas], colors.pads),
       },
-      show: [sas._config1],
+      show: [sas._fig],
       setSteadyState: () => {
         sas.setMovableLegReady();
       },
@@ -407,7 +407,11 @@ class Content extends PresentationLessonContent {
       },
       show: [sas._fig],
       transitionFromPrev: (done) => {
-        sas.goToTri(done);
+        if (sas._fig._pad0.getPosition().isNotEqualTo(sas._fig._pad3.getPosition())) {
+          sas.goToTri(done);
+        } else {
+          done();
+        }
       },
       setSteadyState: () => {
         sas.setMovableLeg();
@@ -420,10 +424,15 @@ class Content extends PresentationLessonContent {
       ],
       show: [sas._fig],
       transitionFromPrev: (done) => {
-        sas.goToTri(done);
+        if (sas._fig._pad0.getPosition().isNotEqualTo(sas._fig._pad3.getPosition())) {
+          sas.goToTri(done);
+        } else {
+          done();
+        }
       },
+      interactiveItemsOnly: [],
       setSteadyState: () => {
-        sas._fig.hide();
+        sas._fig.hideAll();
         sas._config1.showAll();
         sas._config1.setScenario('center');
       },
@@ -532,6 +541,7 @@ class Content extends PresentationLessonContent {
         ssa.setScenarios('init');
         ssa.updatePosition();
         ssa.updateRotation();
+        ssa.setDefault();
       },
     };
     this.addSection(common, {
@@ -588,6 +598,7 @@ class Content extends PresentationLessonContent {
         ssa._constructionLine._line.isTouchable = false;
         ssa._adjacentMovePad.isTouchable = false;
         ssa._adjacentMovePad.isMovable = false;
+        ssa.setDefault();
       },
     });
 
@@ -613,6 +624,7 @@ class Content extends PresentationLessonContent {
         ssa._constructionLine._line.isTouchable = false;
         ssa._adjacentMovePad.isTouchable = false;
         ssa._adjacentMovePad.isMovable = false;
+        ssa.setDefault();
       },
     });
     this.addSection({
@@ -659,6 +671,7 @@ class Content extends PresentationLessonContent {
       },
       show: [ssa],
       setEnterState: () => {
+        ssa.setScenario('init');
         if (this.comingFrom === 'goto') {
           ssa.setScenarios('init');
           ssa.updatePosition();
@@ -666,7 +679,7 @@ class Content extends PresentationLessonContent {
         }
       },
       transitionFromAny: (done) => {
-        ssa.adjacentShorter(done);
+        ssa.adjacentShorterDefault(done);
       },
       setSteadyState: () => {
         ssa.makeFullyInteractive();
@@ -693,7 +706,7 @@ class Content extends PresentationLessonContent {
         }
       },
       transitionFromAny: (done) => {
-        ssa.adjacentTwo(done);
+        ssa.adjacentTwoDefault(done);
       },
       setSteadyState: () => {
         ssa.makeFullyInteractive();
@@ -813,8 +826,8 @@ class Content extends PresentationLessonContent {
         right: click(asa.randLength, [asa, '23'], colors.sides),
       },
       show: [asa],
-      setSteadyState: () => {
-        asa.goToTri(null, false);
+      transitionFromAny: (done) => {
+        asa.goToTri(done, false);
       },
     });
 
@@ -915,8 +928,8 @@ class Content extends PresentationLessonContent {
         calculate: click(aas.pulseAngle2, [aas], colors.angles),
       },
       show: [aas],
-      setSteadyState: () => {
-        aas.pulseAngle2();
+      transitionFromPrev: (done) => {
+        aas.pulseAngle2(done);
       },
     });
 

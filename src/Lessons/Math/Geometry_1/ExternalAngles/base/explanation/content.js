@@ -118,7 +118,7 @@ class Content extends PresentationLessonContent {
 
     common = {
       setContent: [
-        'As a triangle\'s |internal_angles| add to 180º, we can put |c| in terms of |a| and |b|.',
+        'As a triangle\'s |internal_angles| add up to 180º, we can put |c| in terms of |a| and |b|.',
       ],
       modifiers: {
         internal_angles: this.bindShowQR('triangle_introduction/base', 'Main'),

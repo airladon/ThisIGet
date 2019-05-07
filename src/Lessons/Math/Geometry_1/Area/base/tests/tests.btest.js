@@ -5,8 +5,8 @@ import tester from '../../../../../testers/presentationLessonTester';
 tester(
   {
     pages: {
-      39: { thresholds: { goto: 0.0002, next: 0.0002, prev: 0.0002 } },
-      40: { thresholds: { goto: 0.0002, next: 0.0002, prev: 0.0002 } },
+      39: { threshold: { goto: 0.0002, next: 0.0002, prev: 0.0002 } },
+      40: { threshold: { goto: 0.0002, next: 0.0002, prev: 0.0002 } },
       41: { threshold: 0.0001 },
     },
   },

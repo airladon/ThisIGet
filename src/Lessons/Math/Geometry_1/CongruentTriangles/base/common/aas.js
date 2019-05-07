@@ -35,8 +35,8 @@ export default class CommonCollectionAAS extends CommonDiagramCollection {
     this.hasTouchableElements = true;
   }
 
-  pulseAngle2() {
-    this._angle2.pulseScaleNow(1, 1.5);
+  pulseAngle2(done: ?() => void = null) {
+    this._angle2.pulseScaleNow(1, 1.5, 0, done);
     this.diagram.animateNextFrame();
   }
 }

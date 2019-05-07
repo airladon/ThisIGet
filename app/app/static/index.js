@@ -14879,7 +14879,7 @@ function (_DiagramElementCollec) {
     _this.updatePointsCallback = null;
 
     if (optionsToUse.position != null) {
-      _this.transform.updateTranslation(_this.position);
+      _this.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
     }
 
     _this.position = _this.getPosition();

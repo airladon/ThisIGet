@@ -115,7 +115,7 @@ export default class CommonCollection extends CommonDiagramCollection {
           this._right._angleTop.showAll();
           this.pulseTopAngles();
         },
-        duration: 0.5,
+        duration: 1,
       })
       .whenFinished(done)
       .start();

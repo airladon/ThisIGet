@@ -63,6 +63,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     tri2.updatePoints(this.layout.tri2.options.points);
     tri2.setScale(1, 1);
     tri2.setRotation(0);
+    tri2._angle0.label.setText('c');
+    tri2._angle2.label.setText('a');
+    tri2._side01.label.setText('A');
+    tri2._side12.label.setText('B');
   }
 
   rotateTriangle(rotationIn: ?number = null, callback: ?() => void = null) {

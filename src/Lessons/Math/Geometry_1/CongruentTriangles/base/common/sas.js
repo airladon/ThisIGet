@@ -12,6 +12,7 @@ const {
   Transform,
   // Point,
   // Line,
+  // EquationLabel,
 } = Fig;
 
 const { rand } = Fig.tools.math;
@@ -39,7 +40,7 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     _pad1: DiagramElementPrimative;
     _pad2: DiagramElementPrimative;
     _pad3: DiagramElementPrimative;
-    _side01: DiagramObjectLine;
+    _side01: { _label: DiagramElementCollection } & DiagramObjectLine;
     _side12: DiagramObjectLine;
     _side23: DiagramObjectLine;
   } & DiagramObjectPolyLine;
@@ -176,13 +177,14 @@ export default class CommonCollectionSAS extends CommonDiagramCollection {
     this._fig._pad0.animations.cancelAll();
     this._fig._pad0.animations.new()
       .position({ target: this._fig._pad3.getPosition(), velocity: 1 })
-      .whenFinished(() => {       // $FlowFixMe - label exists
-        this._fig._side01._label.pulseScaleNow(1, 2);
-        this._fig._angle1.pulseScaleNow(1, 1.3);
-        if (callback != null) {
-          callback();
-        }
+      .trigger({
+        duration: 1,
+        callback: () => {
+          this._fig._side01._label.pulseScaleNow(1, 2);
+          this._fig._angle1.pulseScaleNow(1, 1.3);
+        },
       })
+      .whenFinished(callback)
       .start();
     this.diagram.animateNextFrame();
   }
