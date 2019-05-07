@@ -376,9 +376,10 @@ class Content extends PresentationLessonContent {
           .start();
       },
       setSteadyState: () => {
-        sas._fig.showAll();
+        // sas._fig.showAll();
         sas.setProblemStatement();
-        sas._config1.hide();
+        // sas._config1.hide();
+        // console.log(sas)
       },
     });
 
@@ -389,7 +390,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         pad: click(sas.pulsePad, [sas], colors.pads),
       },
-      show: [sas._fig],
+      show: [sas._config1],
       setSteadyState: () => {
         sas.setMovableLegReady();
       },
