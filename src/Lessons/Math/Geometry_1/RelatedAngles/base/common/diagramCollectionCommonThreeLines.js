@@ -251,43 +251,47 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
-  pulseAngles() {
+  pulseAngles(done: ?() => void = null) {
     const angles = ['A1', 'A2', 'B1', 'B2', 'C1', 'C2', 'D1', 'D2'];
+    let callback = done;
     angles.forEach((angle) => {
       const element = this._fig[`_angle${angle}`];
       if (element.isShown) {
-        element.pulseScaleNow(1, 1.2);
+        element.pulseScaleNow(1, 1.2, 0, callback);
+        if (callback != null) {
+          callback = null;
+        }
       }
     });
     this.diagram.animateNextFrame();
   }
 
-  adjacentPulseOpposite() {
+  adjacentPulseOpposite(done: ?() => void = null) {
     this._fig._angleA2.pulseScaleNow(1, 1.2);
-    this._fig._angleC2.pulseScaleNow(1, 1.2);
+    this._fig._angleC2.pulseScaleNow(1, 1.2, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  adjacentPulseAlternate() {
+  adjacentPulseAlternate(done: ?() => void = null) {
     this._fig._angleA1.pulseScaleNow(1, 1.2);
-    this._fig._angleC2.pulseScaleNow(1, 1.2);
+    this._fig._angleC2.pulseScaleNow(1, 1.2, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  interiorPulseSupplementary() {
+  interiorPulseSupplementary(done: ?() => void = null) {
     this._fig._angleA2.pulseScaleNow(1, 1.2);
-    this._fig._angleD2.pulseScaleNow(1, 1.2);
+    this._fig._angleD2.pulseScaleNow(1, 1.2, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  interiorPulseinterior() {
+  interiorPulseinterior(done: ?() => void = null) {
     this._fig._angleD1.pulseScaleNow(1, 1.2);
-    this._fig._angleA2.pulseScaleNow(1, 1.2);
+    this._fig._angleA2.pulseScaleNow(1, 1.2, 0, done);
     this.diagram.animateNextFrame();
   }
 
 
-  randomTranslateLine() {
+  randomTranslateLine(done: ?() => void = null) {
     const newY = rand(
       this.layout.moveLine.distance / 4,
       this.layout.moveLine.distance / 2,
@@ -301,6 +305,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this._fig._line1.stop(true, 'noComplete');
     this._fig._line1.animations.new()
       .position({ target, duration: 0.7 })
+      .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
   }

@@ -419,7 +419,7 @@ class Content extends PresentationLessonContent {
       ]),
       modifiers: {
         angles: click(three.toggle4Angles, [three], colors.angle1),
-        moved: click(three.randomTranslateLine, [three], colors.lines),
+        moved: click(three.randomTranslateLine, [three, null], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3],
       transitionFromAny: (done) => {
@@ -460,21 +460,24 @@ class Content extends PresentationLessonContent {
       modifiers: {
         original: click(three.pulseShaddow, [three], colors.disabled),
         parallel: click(three.pulseParallel, [three], colors.lines),
-        Moving: click(three.randomTranslateLine, [three], colors.lines),
+        Moving: click(three.randomTranslateLine, [three, null], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
-      setSteadyState: () => {
-        if (this.comingFrom === 'goto') {
-          three.setScenarios('translate');
-        }
-        if (this.comingFrom === 'prev') {
-          three.shaddowLine1();
-        }
-        enterTranslateLine();
+      transitionFromAny: (done) => {
         three.setAngle('A1', colors.angle1, 'a');
         three.setAngle('A2', colors.disabled, 'a');
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
+        enterTranslateLine();
+        if (this.comingFrom === 'goto' || this.comingFrom === 'next') {
+          three.setScenarios('translate');
+          done();
+        } else if (this.comingFrom === 'prev') {
+          three.shaddowLine1();
+          three.randomTranslateLine(done);
+        }
+      },
+      setSteadyState: () => {
         three.updateIntersectingLineAngle();
       },
       setLeaveState: () => {
@@ -488,7 +491,7 @@ class Content extends PresentationLessonContent {
       ]),
       modifiers: {
         original: click(three.pulseShaddow, [three], colors.disabled),
-        moved: click(three.randomTranslateLine, [three], colors.lines),
+        moved: click(three.randomTranslateLine, [three, null], colors.lines),
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -630,24 +633,24 @@ class Content extends PresentationLessonContent {
         'First, we know |corresponding_angles| are equal.',
       ],
       modifiers: {
-        corresponding_angles: click(three.pulseAngles, [three], colors.angle2),
+        corresponding_angles: click(three.pulseAngles, [three, null], colors.angle2),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
+        const afterPulse = () => {
+          three.setAngle('A1', colors.angle2, 'a');
+          three.setAngle('A2', colors.angle2, 'a');
+          three._fig._angleA1.showAll();
+          three._fig._angleA2.showAll();
+          three.updateIntersectingLineAngle();
+          three.pulseAngles(done);
+        };
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
-          done();
+          afterPulse();
         } else {
-          three.newPageRotation(0, 1, done);
+          three.newPageRotation(0, 1, afterPulse);
         }
-      },
-      setSteadyState: () => {
-        three.setAngle('A1', colors.angle2, 'a');
-        three.setAngle('A2', colors.angle2, 'a');
-        three._fig._angleA1.showAll();
-        three._fig._angleA2.showAll();
-        three.pulseAngles();
-        three.updateIntersectingLineAngle();
       },
     });
     this.addSection({
@@ -655,24 +658,21 @@ class Content extends PresentationLessonContent {
         'We also know that |opposite_angles| are equal.',
       ],
       modifiers: {
-        opposite_angles: click(three.adjacentPulseOpposite, [three], colors.angle3),
+        opposite_angles: click(three.adjacentPulseOpposite, [three, null], colors.angle3),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
-        if (this.comingFrom === 'goto') {
-          three.setScenarios('center');
-        }
-        done();
-      },
-      setSteadyState: () => {
         three.setAngle('A1', colors.disabled, 'a');
         three.setAngle('A2', colors.angle3, 'a');
         three.setAngle('C2', colors.angle3, 'a');
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three._fig._angleC2.showAll();
-        three.adjacentPulseOpposite();
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
         three.updateIntersectingLineAngle();
+        three.adjacentPulseOpposite(done);
       },
     });
 
@@ -688,17 +688,14 @@ class Content extends PresentationLessonContent {
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
         }
-        done();
-      },
-      setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
         three.setAngle('A2', colors.disabled, 'a');
         three.setAngle('C2', colors.angle1, 'a');
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three._fig._angleC2.showAll();
-        three.adjacentPulseAlternate();
         three.updateIntersectingLineAngle();
+        three.adjacentPulseAlternate(done);
       },
     });
 
@@ -799,24 +796,24 @@ class Content extends PresentationLessonContent {
         'First, we know |corresponding_angles| are equal.',
       ],
       modifiers: {
-        corresponding_angles: click(three.pulseAngles, [three], colors.angle2),
+        corresponding_angles: click(three.pulseAngles, [three, null], colors.angle2),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
+        const afterPulse = () => {
+          three.setAngle('D1', colors.angle2, 'd');
+          three.setAngle('D2', colors.angle2, 'd');
+          three._fig._angleD1.showAll();
+          three._fig._angleD2.showAll();
+          three.updateIntersectingLineAngle();
+          three.pulseAngles(done);
+        };
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
-          done();
+          afterPulse();
         } else {
-          three.newPageRotation(0, 1, done);
+          three.newPageRotation(0, 1, afterPulse);
         }
-      },
-      setSteadyState: () => {
-        three.setAngle('D1', colors.angle2, 'd');
-        three.setAngle('D2', colors.angle2, 'd');
-        three._fig._angleD1.showAll();
-        three._fig._angleD2.showAll();
-        three.pulseAngles();
-        three.updateIntersectingLineAngle();
       },
     });
 
@@ -826,24 +823,21 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         supplementary: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.angle3),
-        _180: clickW('180º', three.interiorPulseSupplementary, [three], colors.angle3),
+        _180: clickW('180º', three.interiorPulseSupplementary, [three, null], colors.angle3),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
         }
-        done();
-      },
-      setSteadyState: () => {
         three.setAngle('D1', colors.disabled, 'd');
         three.setAngle('D2', colors.angle3, 'd');
         three.setAngle('A2', colors.angle3, '180º – d');
         three._fig._angleD1.showAll();
         three._fig._angleD2.showAll();
         three._fig._angleA2.showAll();
-        three.interiorPulseSupplementary();
         three.updateIntersectingLineAngle();
+        three.interiorPulseSupplementary(done);
       },
     });
 
@@ -852,24 +846,21 @@ class Content extends PresentationLessonContent {
         'Adding the |interior| angles shows their total is |180º|.',
       ],
       modifiers: {
-        interior: click(three.interiorPulseinterior, [three], colors.angle1),
+        interior: click(three.interiorPulseinterior, [three, null], colors.angle1),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
         }
-        done();
-      },
-      setSteadyState: () => {
         three.setAngle('D1', colors.angle1, 'd');
         three.setAngle('D2', colors.disabled, 'd');
         three.setAngle('A2', colors.angle1, '180º – d');
         three._fig._angleD1.showAll();
         three._fig._angleD2.showAll();
         three._fig._angleA2.showAll();
-        three.interiorPulseinterior();
         three.updateIntersectingLineAngle();
+        three.interiorPulseinterior(done);
       },
     });
 
