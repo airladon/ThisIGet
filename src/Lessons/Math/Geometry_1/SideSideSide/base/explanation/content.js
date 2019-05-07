@@ -264,8 +264,7 @@ class Content extends PresentationLessonContent {
         coll.colorLeftIsosceles();
       },
       transitionFromPrev: (done) => {
-        coll.pulseLeftIsosceles();
-        done();
+        coll.pulseLeftIsosceles(done);
       },
     });
 

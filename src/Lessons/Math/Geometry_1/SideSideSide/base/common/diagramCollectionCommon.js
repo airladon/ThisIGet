@@ -184,11 +184,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseLeftIsosceles() {
+  pulseLeftIsosceles(done: ?() => void = null) {
     this.colorLeftIsosceles();
     this._left.pulseWidth();
     this._leftBottom.pulseWidth();
-    this._constructionLine.pulseWidth();
+    this._constructionLine.pulseWidth({ done });
     this.diagram.animateNextFrame();
   }
 
@@ -200,17 +200,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseLeftIsoscelesAngles() {
+  pulseLeftIsoscelesAngles(done: ?() => void = null) {
     this.colorLeftIsosceles();
     this._angleTopLeft.pulseScaleNow(1, 1.3);
-    this._angleBottomLeft.pulseScaleNow(1, 1.3);
+    this._angleBottomLeft.pulseScaleNow(1, 1.3, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  pulseRightIsoscelesAngles() {
+  pulseRightIsoscelesAngles(done: ?() => void = null) {
     this.colorRightIsosceles();
     this._angleTopRight.pulseScaleNow(1, 1.3);
-    this._angleBottomRight.pulseScaleNow(1, 1.3);
+    this._angleBottomRight.pulseScaleNow(1, 1.3, 0, done);
     this.diagram.animateNextFrame();
   }
 
