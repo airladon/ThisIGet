@@ -4,7 +4,7 @@
 var details = {
   title: 'Similar Triangles',
   uid: 'similar_triangles',
-  dependencies: ['pythagoras'],
+  dependencies: ['parallel_line_distance'],
   enabled: false,
 };
 

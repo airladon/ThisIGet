@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Pythagorean Theorm',
-  uid: 'pythagoras',
+  title: 'Parallel Line Distance',
+  uid: 'parallel_line_distance',
   dependencies: ['right_angle_triangles'],
   enabled: false,
 };

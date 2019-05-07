@@ -597,10 +597,10 @@ export default function getLessonIndex() {
       ],
       enabled: false,
     }),
-    pythagoras: new LessonDescription({
-      name: 'Pythagorean Theorm',
+    parallel_line_distance: new LessonDescription({
+      name: 'Parallel Line Distance',
       path: '/Lessons/Math/Geometry_1/ToDo/Pythagoras',
-      uid: 'pythagoras',
+      uid: 'parallel_line_distance',
       versions: {
       },
       dependencies: [
@@ -615,7 +615,7 @@ export default function getLessonIndex() {
       versions: {
       },
       dependencies: [
-        'pythagoras',
+        'parallel_line_distance',
       ],
       enabled: false,
     }),
