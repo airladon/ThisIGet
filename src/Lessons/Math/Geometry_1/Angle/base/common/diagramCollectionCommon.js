@@ -101,8 +101,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseAnchor() {
-    this._angle._anchor.pulseScaleNow(1, 1.5);
+  pulseAnchor(done: ?() => void = null) {
+    this._angle._anchor.pulseScaleNow(1, 1.5, 0, done);
     this.diagram.animateNextFrame();
   }
 
@@ -181,7 +181,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  toggleAngle(angleIndex: number | null) {
+  toggleAngle(angleIndex: number | null, pulse: boolean = true) {
     const indeces = ['a', 'b', 'c', 'd', 'e'];
     if (angleIndex == null) {
       this.angleIndex = (this.angleIndex + 1) % 5;
@@ -193,7 +193,9 @@ export default class CommonCollection extends CommonDiagramCollection {
       const angleElement = this._example[`_angle${indeces[i]}`];
       if (i === this.angleIndex) {
         angleElement.showAll();
-        angleElement.pulseScaleNow(1, 1.3);
+        if (pulse) {
+          angleElement.pulseScaleNow(1, 1.3);
+        }
       } else {
         angleElement.stop(true, true);
         angleElement.hide();

@@ -101,7 +101,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         // lines: click(diag.pulseLines, [diag], colors.lines),
-        anchor: click(diag.pulseAnchor, [diag], colors.center),
+        anchor: click(diag.pulseAnchor, [diag, null], colors.center),
       },
       setEnterState: () => {
         angle._line1.setScenario('vertical');
@@ -116,12 +116,12 @@ class Content extends PresentationLessonContent {
         angle._line2.animations.new()
           .scenario({ target: 'start', duration: 1 })
           .start();
+        diag.pulseAnchor();
       },
       setSteadyState: () => {
         angle._line1.setScenario('start');
         angle._line2.setScenario('start');
         angle._anchor.show();
-        diag.pulseAnchor();
       },
       show: [angle._line1, angle._line2],
     });
@@ -251,13 +251,13 @@ class Content extends PresentationLessonContent {
         'Angles are often |marked| in a shape with a |line| and |label|.',
       ],
       modifiers: {
-        marked: click(diag.toggleAngle, [diag, null], colors.angles),
+        marked: click(diag.toggleAngle, [diag, null, true], colors.angles),
         line: click(diag.pulseAngleLine, [diag], colors.angles),
         label: click(diag.pulseAngleLabel, [diag], colors.angles),
       },
       show: [example],
       setSteadyState: () => {
-        diag.toggleAngle(0);
+        diag.toggleAngle(0, false);
       },
     });
 
