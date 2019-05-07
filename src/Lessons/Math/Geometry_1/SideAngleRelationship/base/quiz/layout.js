@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import commonLessonLayout from '../common/layout';
 
-const { Point} = Fig.tools.g2;
+const { Point } = Fig.tools.g2;
 
 // const cssColorNames = [
 //   'latin',

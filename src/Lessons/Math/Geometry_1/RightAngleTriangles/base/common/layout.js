@@ -540,60 +540,6 @@ export default function lessonLayout() {
           ],
           description: 'Area of a large square:',
         },
-        // '0a': {
-        //   content: [
-        //     top(
-        //       AreaLSquare,
-        //       { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-        //       'brace',
-        //     ),
-        //     'equals', '_4', 'mul',
-        //     AreaTri,
-        //     '__plus',
-        //     AreaSSquare,
-        //   ],
-        //   description: 'Large square side is A+B, and area is square of side:',
-        // },
-        // '0b': {
-        //   content: [
-        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-        //     'equals', '_4', 'mul',
-        //     AreaTri,
-        //     '__plus',
-        //     AreaSSquare,
-        //   ],
-        //   description: 'Large square side is A+B, and area is square of side:',
-        // },
-        // '0c': {
-        //   content: [
-        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-        //     'equals', '_4', 'mul',
-        //     top(AreaTri, [half, '_A', '_B'], 'brace'),
-        //     '__plus',
-        //     AreaSSquare,
-        //   ],
-        //   description: 'Right triangle area is half of product of two sides adjacent to right angle:',
-        // },
-        // '0d': {
-        //   content: [
-        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-        //     'equals', '_4', 'mul',
-        //     half, '_A', '_B',
-        //     '__plus',
-        //     AreaSSquare,
-        //   ],
-        //   description: 'Right triangle area is half of product of two sides adjacent to right angle:',
-        // },
-        // '0e': {
-        //   content: [
-        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-        //     'equals', '_4', 'mul',
-        //     half, '_A', '_B',
-        //     '__plus',
-        //     top(AreaSSquare, sup('C', '_2b'), 'brace'),
-        //   ],
-        //   description: 'Side length of small square is C, and area is side squared:',
-        // },
 
         '0f': {
           content: [

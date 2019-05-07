@@ -81,7 +81,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.straightening = true;
     this._circle._scale.move.element = this._circle;
     this._circle._translate.move.element = this._circle;
-    this._circumferenceText.onClick = this.straightenCircumference.bind(this, 4);
+    this._circumferenceText.onClick = this.straightenCircumference.bind(this, 4, null);
     this._locationText.onClick = this.pulseCenter.bind(this);
     this._radiusText.onClick = this.pulseRadius.bind(this);
     this._diameterText.onClick = this.pulseDiameter.bind(this);

@@ -1,11 +1,11 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import commonLessonLayout from '../common/layout';
 
-const {
-  // Point, Transform, Line
-  Rect,
-} = Fig.tools.g2;
+// const {
+//   // Point, Transform, Line
+//   Rect,
+// } = Fig.tools.g2;
 
 // const cssColorNames = [
 //   'latin',

@@ -597,14 +597,25 @@ export default function getLessonIndex() {
       ],
       enabled: false,
     }),
-    parallel_line_distance: new LessonDescription({
-      name: 'Parallel Line Distance',
-      path: '/Lessons/Math/Geometry_1/ToDo/Pythagoras',
-      uid: 'parallel_line_distance',
+    line_point_distance: new LessonDescription({
+      name: 'Line Point Distance',
+      path: '/Lessons/Math/Geometry_1/ToDo/LineAndPoint',
+      uid: 'line_point_distance',
       versions: {
       },
       dependencies: [
         'right_angle_triangles',
+      ],
+      enabled: false,
+    }),
+    parallel_line_distance: new LessonDescription({
+      name: 'Parallel Line Distance',
+      path: '/Lessons/Math/Geometry_1/ToDo/ParallelLineDistance',
+      uid: 'parallel_line_distance',
+      versions: {
+      },
+      dependencies: [
+        'line_point_distance',
       ],
       enabled: false,
     }),
