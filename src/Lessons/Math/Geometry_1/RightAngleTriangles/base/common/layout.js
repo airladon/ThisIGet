@@ -510,8 +510,8 @@ export default function lessonLayout() {
       withAnnotations: {
         annotation: {
           annotation,
-          relativeToContent: ['center', 1.4],
-          relativeToAnnotation: ['center', 'bottom'],
+          relativeToContent: ['center', -0.5],
+          relativeToAnnotation: ['center', 'top'],
           scale: 0.5,
         },
       },
@@ -540,60 +540,60 @@ export default function lessonLayout() {
           ],
           description: 'Area of a large square:',
         },
-        '0a': {
-          content: [
-            top(
-              AreaLSquare,
-              { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-              'brace',
-            ),
-            'equals', '_4', 'mul',
-            AreaTri,
-            '__plus',
-            AreaSSquare,
-          ],
-          description: 'Large square side is A+B, and area is square of side:',
-        },
-        '0b': {
-          content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-            'equals', '_4', 'mul',
-            AreaTri,
-            '__plus',
-            AreaSSquare,
-          ],
-          description: 'Large square side is A+B, and area is square of side:',
-        },
-        '0c': {
-          content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-            'equals', '_4', 'mul',
-            top(AreaTri, [half, '_A', '_B'], 'brace'),
-            '__plus',
-            AreaSSquare,
-          ],
-          description: 'Right triangle area is half of product of two sides adjacent to right angle:',
-        },
-        '0d': {
-          content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-            'equals', '_4', 'mul',
-            half, '_A', '_B',
-            '__plus',
-            AreaSSquare,
-          ],
-          description: 'Right triangle area is half of product of two sides adjacent to right angle:',
-        },
-        '0e': {
-          content: [
-            { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
-            'equals', '_4', 'mul',
-            half, '_A', '_B',
-            '__plus',
-            top(AreaSSquare, sup('C', '_2b'), 'brace'),
-          ],
-          description: 'Side length of small square is C, and area is side squared:',
-        },
+        // '0a': {
+        //   content: [
+        //     top(
+        //       AreaLSquare,
+        //       { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+        //       'brace',
+        //     ),
+        //     'equals', '_4', 'mul',
+        //     AreaTri,
+        //     '__plus',
+        //     AreaSSquare,
+        //   ],
+        //   description: 'Large square side is A+B, and area is square of side:',
+        // },
+        // '0b': {
+        //   content: [
+        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+        //     'equals', '_4', 'mul',
+        //     AreaTri,
+        //     '__plus',
+        //     AreaSSquare,
+        //   ],
+        //   description: 'Large square side is A+B, and area is square of side:',
+        // },
+        // '0c': {
+        //   content: [
+        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+        //     'equals', '_4', 'mul',
+        //     top(AreaTri, [half, '_A', '_B'], 'brace'),
+        //     '__plus',
+        //     AreaSSquare,
+        //   ],
+        //   description: 'Right triangle area is half of product of two sides adjacent to right angle:',
+        // },
+        // '0d': {
+        //   content: [
+        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+        //     'equals', '_4', 'mul',
+        //     half, '_A', '_B',
+        //     '__plus',
+        //     AreaSSquare,
+        //   ],
+        //   description: 'Right triangle area is half of product of two sides adjacent to right angle:',
+        // },
+        // '0e': {
+        //   content: [
+        //     { sup: [{ brac: [['A', '___plus', 'B'], 'lb', 'rb'] }, '_2a'] },
+        //     'equals', '_4', 'mul',
+        //     half, '_A', '_B',
+        //     '__plus',
+        //     top(AreaSSquare, sup('C', '_2b'), 'brace'),
+        //   ],
+        //   description: 'Side length of small square is C, and area is side squared:',
+        // },
 
         '0f': {
           content: [
@@ -701,7 +701,7 @@ export default function lessonLayout() {
         },
       },
       formSeries: {
-        '1': ['0', '0a', '0b', '0c', '0d', '0e', '1'],
+        '1': ['0', '0f', '1'],
         '2': ['1', '1a', '1b', '1c', '2'],
         '3': ['2', '2a', '3'],
       },
@@ -744,9 +744,9 @@ export default function lessonLayout() {
   layout.addElements = [
     fig,
     nav('0', 0.8, false),
-    nav('1', 0, true, '1'),
-    nav('2', -0.8, true, '2'),
-    nav('3', -1.6, true, '3'),
+    nav('1', 0, false, '1'),
+    nav('2', -0.8, false, '2'),
+    nav('3', -1.6, false, '3'),
   ];
   return layout;
 }
