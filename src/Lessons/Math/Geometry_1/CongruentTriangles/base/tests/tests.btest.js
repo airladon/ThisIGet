@@ -15,7 +15,9 @@ tester(
       // 39: { threshold: { next: 0.00002, prev: 0.00002 } },
     },
   },
-  [
-    ['explanation', 30, [40, 30]],
-  ],
+  'explanation',
+  'summary',
+  // [
+  //   ['explanation', 32, [37, 32]],
+  // ],
 );
