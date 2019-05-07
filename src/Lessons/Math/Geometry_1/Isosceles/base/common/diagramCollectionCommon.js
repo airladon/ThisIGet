@@ -154,19 +154,19 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseEqualAngles() {
+  pulseEqualAngles(done: ?() => void = null) {
     this._triangle._angle0.pulseScaleNow(1, 1.3);
-    this._triangle._angle2.pulseScaleNow(1, 1.3);
+    this._triangle._angle2.pulseScaleNow(1, 1.3, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  pulseL() {
-    this._split._label.pulseScaleNow(1, 2);
+  pulseL(done: ?() => void = null) {
+    this._split._label.pulseScaleNow(1, 2, 0, done);
     this.diagram.animateNextFrame();
   }
 
-  pulseSplit() {
-    this._split.pulseWidth();
+  pulseSplit(done: ?() => void = null) {
+    this._split.pulseWidth({ done });
     this.diagram.animateNextFrame();
   }
 
@@ -188,9 +188,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseLeftRightEqualSides() {
+  pulseLeftRightEqualSides(done: ?() => void = null) {
     this._left._sideEqual._label.pulseScaleNow(1, 2);
-    this._right._sideEqual._label.pulseScaleNow(1, 2);
+    this._right._sideEqual._label.pulseScaleNow(1, 2, 0, done);
     this.diagram.animateNextFrame();
   }
 
@@ -202,13 +202,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.pulseLeftRightBaseAngles();
   }
 
-  pulseRemainingLeftRightProperties() {
+  pulseRemainingLeftRightProperties(done: ?() => void = null) {
     this._left._angleEqual.pulseScaleNow(1, 1.3);
     this._right._angleEqual.pulseScaleNow(1, 1.3);
     this._left._angleBase.pulseScaleNow(1, 1.3);
     this._right._angleBase.pulseScaleNow(1, 1.3);
     this._left._sideBase._label.pulseScaleNow(1, 1.7);
-    this._right._sideBase._label.pulseScaleNow(1, 1.7);
+    this._right._sideBase._label.pulseScaleNow(1, 1.7, 0, done);
     this.diagram.animateNextFrame();
   }
 

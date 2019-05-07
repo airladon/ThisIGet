@@ -143,12 +143,11 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        L: click(coll.pulseL, [coll], colors.sides),
+        L: click(coll.pulseL, [coll, null], colors.sides),
       },
       transitionFromPrev: (done) => {
         coll._split._label.showAll();
-        coll.pulseL();
-        done();
+        coll.pulseL(done);
       },
       setSteadyState: () => {
         coll._split._label.showAll();
@@ -223,14 +222,13 @@ class Content extends PresentationLessonContent {
       modifiers: {
         same: click(
           coll.pulseRemainingLeftRightProperties,
-          [coll],
+          [coll, null],
           colors.diagram.action,
         ),
       },
       show: [left, right],
       transitionFromPrev: (done) => {
-        coll.pulseRemainingLeftRightProperties();
-        done();
+        coll.pulseRemainingLeftRightProperties(done);
       },
     });
 
@@ -275,12 +273,11 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
       },
       show: [tri._line, tri._side01, tri._side12, tri._angle0, tri._angle2],
       transitionFromPrev: (done) => {
-        coll.pulseEqualAngles();
-        done();
+        coll.pulseEqualAngles(done);
       },
       setSteadyState: () => {
         coll.setScenarios('center');
@@ -304,7 +301,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        line: click(coll.pulseSplit, [coll], colors.sides),
+        line: click(coll.pulseSplit, [coll, null], colors.sides),
       },
       show: [
         left._line, left._angleTop, left._angleBase, left._sideBase,
@@ -312,8 +309,7 @@ class Content extends PresentationLessonContent {
         correction, split._line,
       ],
       transitionFromPrev: (done) => {
-        coll.pulseSplit();
-        done();
+        coll.pulseSplit(done);
       },
       setSteadyState: () => {
         coll.setScenarios('center');
@@ -360,11 +356,11 @@ class Content extends PresentationLessonContent {
         'So we see a triangle with two |equal_sides|, has two |equal_angles|, and the |line| that splits the third angle also splits the |opposite_side| equally and intersects at a |right_angle|.',
       ]),
       modifiers: {
-        equal_sides: click(coll.pulseLeftRightEqualSides, [coll], colors.sides),
+        equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.sides),
         equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
         opposite_side: click(coll.pulseLeftRightBaseLabel, [coll], colors.sides),
         right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
-        line: click(coll.pulseSplit, [coll], colors.sides),
+        line: click(coll.pulseSplit, [coll, null], colors.sides),
       },
       show: [
         left._line, left._angleTop, left._sideBase, left._angleEqual,
@@ -394,7 +390,7 @@ class Content extends PresentationLessonContent {
         'We can use the same process to show a triangle with two |equal_angles|, also has two equal sides and is therefore an |isosceles| triangle.',
       ],
       modifiers: {
-        equal_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
       },
       show: [
         tri._line, tri._angle0, tri._angle2,
@@ -460,13 +456,12 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        L: click(coll.pulseL, [coll], colors.sides),
+        L: click(coll.pulseL, [coll, null], colors.sides),
         separately: click(this.next, [this], colors.sides),
       },
       transitionFromPrev: (done) => {
         coll._split._label.showAll();
-        coll.pulseL();
-        done();
+        coll.pulseL(done);
       },
       setSteadyState: () => {
         coll._split._label.showAll();
@@ -544,8 +539,7 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         coll.pulseLeftRightBaseLabel();
         coll.pulseLeftRightBaseAngles();
-        coll.pulseLeftRightEqualSides();
-        done();
+        coll.pulseLeftRightEqualSides(done);
       },
     });
 
@@ -633,7 +627,7 @@ class Content extends PresentationLessonContent {
         tri._line, tri._angle0, tri._angle1, tri._angle2,
       ],
       modifiers: {
-        two_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+        two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
         _180: clickW(
           '180º',
           this.showQR,
