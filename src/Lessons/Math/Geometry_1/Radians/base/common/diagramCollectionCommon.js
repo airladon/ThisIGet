@@ -298,11 +298,11 @@ export default class CommonCollection extends CommonDiagramCollection {
       && round(toAngle, 5) === round(this._circle._line1.getRotation('0to360'), 5)
       && this._circle._angle.isShown === true) {
       this._circle._line1.stop(true, false);
-      this._circle._angle.pulseScaleNow(1, 1.3);
+      this._circle._angle.pulseScaleNow(1, 1.3, 0, whenFinished);
       this.diagram.animateNextFrame();
-      if (whenFinished != null) {
-        whenFinished();
-      }
+      // if (whenFinished != null) {
+      //   whenFinished();
+      // }
       return;
     }
     if (toAngle == null) {

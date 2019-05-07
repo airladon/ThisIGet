@@ -41,7 +41,7 @@ export default function lessonLayout() {
     mods: {
       interactiveLocation: new Point(radius * 0.8, 0),
       scenarios: {
-        start: { rotation: 1.3 },
+        start: { rotation: 1 },
       },
     },
     scenario: 'start',

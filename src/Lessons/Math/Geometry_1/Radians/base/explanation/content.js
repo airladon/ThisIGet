@@ -82,6 +82,9 @@ class Content extends PresentationLessonContent {
         circle._arc,
       ],
       setSteadyState: () => {
+        if (this.comingFrom !== 'next') {
+          circle._line1.setRotation(1.3);
+        }
         circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
         // circle._angleText.setScenario('bottomLeft');
@@ -152,7 +155,7 @@ class Content extends PresentationLessonContent {
         diag.bendRadius(done);
       },
       setSteadyState: () => {
-        circle._line1.setRotation(1);
+        // circle._line1.setRotation(1);
         diag.bendLineToEnd();
         circle.setScenario('center');
         diag.updateAngle();
@@ -290,12 +293,13 @@ class Content extends PresentationLessonContent {
       setEnterState: () => {
         equation.setScenario('top');
       },
-      transitionFromPrev: (done) => {
+      transitionFromAny: (done) => {
+        setup();
         equation.showForm('1rad');
         diag.setLineRotation(1, true, done);
       },
       setSteadyState: () => {
-        setup();
+        // setup();
         equation.showForm('1rad');
         diag.setLineRotation(1, false);
       },
