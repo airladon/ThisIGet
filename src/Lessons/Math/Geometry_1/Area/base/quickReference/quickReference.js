@@ -41,7 +41,7 @@ export class QRArea extends PopupBoxCollection {
     this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    // collection.show();
+    collection.show();
     const shapes = collection._shapes;
     const unit = collection._unitShape;
     collection.show([
@@ -83,7 +83,7 @@ export class QRRectangle extends PopupBoxCollection {
     const collection = this._collection;
     // collection.show();
     const rect = collection._rectangle;
-    const eqn = collection._eqnEqn;
+    const eqn = collection._eqn;
     collection.show([
       rect._line, rect._labelWidth, rect._labelHeight, eqn,
     ]);
@@ -123,7 +123,7 @@ export class QRSquare extends PopupBoxCollection {
     const collection = this._collection;
     // collection.show();
     const square = collection._square;
-    const eqn = collection._eqnEqn;
+    const eqn = collection._eqn;
     collection.show([
       square._line, square._labelB1, square._labelB2, eqn,
     ]);
