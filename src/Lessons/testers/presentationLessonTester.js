@@ -14,22 +14,129 @@ function contentSectionCount(testPath, topicName) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
-export default function tester(...scenarios) {
+function joinObjects(...objects) {
+  // if (typeof objects === 'object') {
+  //   return objects;
+  // }
+  const assignObjectFromTo = (fromObject, toObject) => {
+    Object.keys(fromObject).forEach((key) => {
+      const value = fromObject[key];
+      if (typeof value === 'number'
+        || typeof value === 'boolean'
+        || typeof value === 'string'
+        || value == null
+        || typeof value === 'function'
+        || typeof value._dup === 'function'
+        || Array.isArray(value)
+      ) {
+        // console.log(value, toObject[key])
+        if (value !== undefined || toObject[key] === undefined) {
+          // eslint-disable-next-line no-param-reassign
+          toObject[key] = value;
+        }
+      } else {
+        const toValue = toObject[key];
+        if (typeof toValue === 'number'
+          || typeof toValue === 'boolean'
+          || typeof toValue === 'string'
+          || toValue == null
+          || typeof toValue === 'function'
+          || Array.isArray(toValue)
+        ) {
+          // eslint-disable-next-line no-param-reassign
+          toObject[key] = {};
+        }
+        assignObjectFromTo(value, toObject[key]);
+      }
+    });
+  };
+
+  const num = objects.length;
+  const out = objects[0];
+  for (let i = 1; i < num; i += 1) {
+    const o = objects[i];
+    if (o != null) {
+      assignObjectFromTo(o, out);
+    }
+  }
+  return out;
+}
+
+// tester(
+//   {
+//     thresholds: {
+//       goto: 0.00001,
+//       next: 0.0001,
+//       prev: 0.0001,
+//     },
+//     viewPort: {
+//       width: 600,
+//       height: 400,
+//       scrollTo: 180,
+//     },
+//     pages: {
+//       1: { thresholds: { goto: 0.001, next: 0.01, prev: 0.01 } },
+//       2: { threshold: 0.003 },
+//       3: { otherOptions: 'a' },
+//     },
+//   },
+//   'explanation',
+//   'summary',
+//   [
+//     ['explanation', 3, [1, 5]],
+//   ],
+// );
+function getThreshold(page, options, comingFrom) {
+  const defaultThreshold = options.thresholds[comingFrom];
+  if (options.pages[page] == null) {
+    return defaultThreshold.toString();
+  }
+  const pageOptions = options.pages[page];
+  if (pageOptions.threshold != null) {
+    return pageOptions.threshold.toString();
+  }
+  if (pageOptions.thresholds != null && pageOptions.thresholds[comingFrom] != null) {
+    return pageOptions.thresholds[comingFrom].toString();
+  }
+  return defaultThreshold.toString();
+}
+
+export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const path = fullPath.split('/').slice(-3, -1).join('/');
-  // console.log()
-  scenarios.forEach((scenario) => {
+
+  let scenariosToUse = scenarios;
+  const defaultOptions = {
+    thresholds: {
+      goto: 0.00001,
+      next: 0.00001,
+      prev: 0.00001,
+    },
+    viewPort: {
+      width: 600,
+      height: 400,
+      scrollTo: 180,
+    },
+    pages: {},
+  };
+  let optionsToUse = defaultOptions;
+  if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string') {
+    scenariosToUse = [optionsOrScenario, ...scenarios];
+  } else {
+    optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
+  }
+  scenariosToUse.forEach((scenario) => {
     if (typeof scenario === 'string') {
       const topicName = scenario;
       const numPages = contentSectionCount(fullPath, topicName);
       for (let i = 1; i <= numPages; i += 1) {
-        allTests.push([topicName, i, [i]]);
+        allTests.push([topicName, i, [i], optionsToUse]);
       }
-      allTests.push([topicName, 1, [numPages, 1]]);
+      allTests.push([topicName, 1, [numPages, 1], optionsToUse]);
     } else {
       scenario.forEach((extraScenario) => {
-        allTests.push(extraScenario);
+        allTests.push([...extraScenario, optionsToUse]);
       });
     }
   });
@@ -37,15 +144,20 @@ export default function tester(...scenarios) {
   describe(`${path}`, () => {
     test.each(allTests)(
       '%s - from: %i, to: %s',
-      async (topicName, fromPage, toPages) => {
+      async (topicName, fromPage, toPages, options) => {
         jest.setTimeout(120000);
         const fullpath =
           `${sitePath}/Lessons/Math/Geometry_1/${path}/${topicName}?page=${fromPage}`;
         await page.goto(fullpath);
-        await page.setViewport({ width: 600, height: 400 });
-        await page.evaluate(() => {
-          window.scrollTo(0, 180);
+
+        await page.setViewport({
+          width: options.viewPort.width,
+          height: options.viewPort.height,
         });
+
+        await page.evaluate((y) => {
+          window.scrollTo(0, y);
+        }, options.viewPort.scrollTo);
 
         let currentPage = fromPage;
         const next = 'lesson__button-next';
@@ -67,8 +179,9 @@ export default function tester(...scenarios) {
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
+          const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
-            failureThreshold: '0.00001',             // 480 pixels
+            failureThreshold: gotoThreshold,             // 480 pixels
             failureThresholdType: 'percent',
             customSnapshotIdentifier: `${topicName} page ${currentPage}`,
           });
@@ -109,11 +222,13 @@ export default function tester(...scenarios) {
                 currentPage = pageCookie[0].value;
               });
 
+            const comingFrom = navigation === next ? 'next' : 'prev';
+            const threshold = getThreshold(currentPage, options, comingFrom);
             // Take screenshot
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
-              failureThreshold: '0.00001',             // 480 pixels
+              failureThreshold: threshold,             // 480 pixels
               failureThresholdType: 'percent',
               customSnapshotIdentifier: `${topicName} page ${currentPage}`,
             });

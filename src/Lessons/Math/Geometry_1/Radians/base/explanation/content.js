@@ -106,6 +106,13 @@ class Content extends PresentationLessonContent {
         // circle._angleText,
         circle._arc,
       ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom !== 'prev') {
+          diag.setLineRotation(1.3, false, done);
+        } else {
+          diag.setLineRotation(null, true, done);
+        }
+      },
       setSteadyState: () => {
         circle.setScenario('centerSmaller');
         diag.setAngleMarks('degrees');
