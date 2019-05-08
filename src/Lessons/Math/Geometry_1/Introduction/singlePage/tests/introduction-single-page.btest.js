@@ -11,46 +11,19 @@ expect.extend({ toMatchImageSnapshot });
 //   return new Promise(resolve => setTimeout(resolve, ms));
 // }
 
-// const pageTest = async (path, fileName, delay = 0, scrollTo = 0) => {
-//   const url = `${sitePath}/${path}`;
-//   await page.goto(url);
-//   await page.setViewport({ width: 600, height: 800 });
-//   await page.evaluate(() => {
-//     window.scrollTo(0, scrollTo);
-//   });
-//   sleep(delay);
-//   const image = await page.screenshot({ path: `${fileName}.png` });
-//   expect(image).toMatchImageSnapshot();
-// };
-
 describe(`${details.details.uid} - ${version.details.uid}`, () => {
-  // let pageTest;
-  // beforeEach(() => {
-  //   pageTest = async (path, fileName, delay = 0, scrollTo = 0) => {
-  //     const url = `${sitePath}/${path}`;
-  //     await page.goto(url);
-  //     await page.setViewport({ width: 600, height: 800 });
-  //     await page.evaluate(() => {
-  //       window.scrollTo(0, scrollTo);
-  //     });
-  //     const image = await page.screenshot({ path: `${fileName}.png` });
-  //     expect(image).toMatchImageSnapshot();
-  //   };
-  // });
   test('Top of page', async () => {
     const anglesPath =
       `${sitePath}/Lessons/Math/Geometry_1/Introduction/singlePage/explanation`;
     await page.goto(anglesPath);
-    await page.setViewport({ width: 600, height: 800 });
+    await page.setViewport({ width: 600, height: 200 });
     await page.evaluate(() => {
-      window.scrollTo(0, 180);
+      window.scrollTo(0, 200);
     });
-    const image = await page.screenshot({ path: 'top.png' });
-    expect(image).toMatchImageSnapshot();
-    // pageTest(
-    //   '/Lessons/Math/Geometry_1/Introduction/singlePage/explanation',
-    //   'top',
-    // );
+    const image = await page.screenshot();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: '01_Scroll-top',
+    });
   });
 
   test('Middle of page', async () => {
@@ -61,10 +34,9 @@ describe(`${details.details.uid} - ${version.details.uid}`, () => {
     await page.evaluate(() => {
       window.scrollTo(0, 500);
     });
-    const image = await page.screenshot({ path: 'middle.png' });
-    expect(image).toMatchImageSnapshot();
-    // pageTest(
-    //   '/Lessons/Math/Geometry_1/Introduction/singlePage/explanation',
-    //   'middle', 0, 500);
+    const image = await page.screenshot();
+    expect(image).toMatchImageSnapshot({
+      customSnapshotIdentifier: '02_Scroll-Middle',
+    });
   });
 });

@@ -15,9 +15,6 @@ function contentSectionCount(testPath, topicName) {
 }
 
 function joinObjects(...objects) {
-  // if (typeof objects === 'object') {
-  //   return objects;
-  // }
   const assignObjectFromTo = (fromObject, toObject) => {
     Object.keys(fromObject).forEach((key) => {
       const value = fromObject[key];

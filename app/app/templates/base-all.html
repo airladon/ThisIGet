@@ -22,7 +22,8 @@
     <div id="logged_in" style="font-size:0">{{ current_user.name }}</div>
   {% endif %} -->
   {% block content %}{% endblock %}
-<script type="text/javascript" src="/static/dist/vendors.js"></script>
+  {% block vendors %}{% endblock %}
+
 <script type="text/javascript" src="/static/dist/tools.js"></script>
 <script type="text/javascript" src="/static/dist/commonlessons.js"></script>
 {% block tail %}{% endblock %}
