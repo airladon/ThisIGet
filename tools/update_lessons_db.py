@@ -73,7 +73,7 @@ def index_loader(file):
     return json.loads(modified_str)
 
 
-index = index_loader(pathlib.Path('./src/Lessons/LessonsCommon/index.js'))
+index = index_loader(pathlib.Path('./src/Lessons/LessonsCommon/lessonindex.js'))
 
 for key, value in index.items():            # noqa
     # Update or create category row

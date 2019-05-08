@@ -249,7 +249,7 @@ This is best done locally outside of a container. You will need to have:
 
 #### Start from scratch - Local SQL
 ```
-rm app/app.db
+rm app/app/app.db
 rm -rf migrations
 unset DATABASE_URL
 flask db init
@@ -274,15 +274,13 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-#### Start from scratch - Heroku
-Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
+#### Start from scratch - Heroku - 1
 ```
-heroku pg:reset --app=thisiget-dev
-tools/get_config_vars.sh thisiget-dev
+tools/get_config_vars.sh thisiget-test
 ```
 paste in the environment variable exports
 ```
-tools/reset_and_prepopulate_database.sh
+tools/reset_and_prepopulate_database.sh thisiget-test init_flask
 unset SECRET_KEY
 unset AES_KEY
 unset PEPPER
@@ -294,18 +292,41 @@ unset MAIL_USERNAME
 ```
 
 Can check with
-`heroku pg:psql --app=itgetitest -c 'select * from users'`
+`heroku pg:psql --app=itgetitest -c 'select username,last_login from users'`
+
+
+#### Start from scratch - Heroku
+Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
+```
+heroku pg:reset --app=thisiget-test
+tools/get_config_vars.sh thisiget-test
+```
+paste in the environment variable exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-test
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
+
+Can check with
+`heroku pg:psql --app=thisiget-test -c 'select username,last_login from users'`
 
 
 #### Upload local database to Heroku
 Assume database is called `thisiget_local`
 ```
 heroku pg:reset --app=thisiget-dev
-heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest
+heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=thisiget-test
 ```
 
 Can check with
-`heroku pg:psql --app=itgetitest -c 'select * from users'`
+`heroku pg:psql --app=thisiget-test -c 'select * from users'`
 
 > Note: If `AES_KEY` or `PEPPER` is different on the local environment compared to the Heroku environment, and data in the database was generated locally with the different environment variables, then app on Heroku won't be able to read the locally generated entries.
 
