@@ -5,12 +5,12 @@ import tester from '../../../../../testers/presentationLessonTester';
 tester(
   {
     pages: {
-      27: { threshold: 0.000025 },
+      27: { threshold: 0.00005 },
     },
   },
   'explanation',
   'summary',
   // [
-  //   ['explanation', 14, [16]],
+  //   ['explanation', 26, [28, 26]],
   // ],
 );

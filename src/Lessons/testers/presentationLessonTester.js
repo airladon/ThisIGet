@@ -4,7 +4,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 const fs = require('fs');
 
-const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
 function contentSectionCount(testPath, topicName) {
@@ -92,7 +92,9 @@ function getThreshold(page, options, comingFrom) {
     return defaultThreshold.toString();
   }
   const pageOptions = options.pages[page];
-  if (pageOptions.threshold != null && typeof pageOptions.threshold === 'string') {
+  if (pageOptions.threshold != null
+    && (typeof pageOptions.threshold === 'string' || typeof pageOptions.threshold === 'number')
+  ) {
     return pageOptions.threshold.toString();
   }
   if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {

@@ -4,7 +4,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import version from '../version';
 import details from '../../details';
 
-const sitePath = process.env.TIG__ADDRESS || 'http://host.docker.internal:5003';
+const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
 // function sleep(ms) {
@@ -43,7 +43,7 @@ describe(`${details.details.uid} - ${version.details.uid}`, () => {
     await page.goto(anglesPath);
     await page.setViewport({ width: 600, height: 800 });
     await page.evaluate(() => {
-      window.scrollTo(0, 0);
+      window.scrollTo(0, 180);
     });
     const image = await page.screenshot({ path: 'top.png' });
     expect(image).toMatchImageSnapshot();
