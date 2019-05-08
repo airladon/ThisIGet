@@ -199,8 +199,8 @@ class Content extends PresentationLessonContent {
         total._fixedTriangle._line,
         total._angleC, total._angleB, total._angleA,
       ],
-      setSteadyState: () => {
-        coll.totalPulseAngles(['A', 'B', 'C']);
+      transitionFromAny: (done) => {
+        coll.totalPulseAngles(['A', 'B', 'C'], done);
       },
     });
 
@@ -296,9 +296,9 @@ class Content extends PresentationLessonContent {
         coll.updateTotalAngles();
         total.setScenarios('parallel');
       },
-      setSteadyState: () => {
+      transitionFromAny: (done) => {
         total._angleATop.showAll();
-        total._angleATop.pulseScaleNow(1, 1.2);
+        total._angleATop.pulseScaleNow(1, 1.2, 0, done);
       },
     });
 
@@ -330,9 +330,9 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
     });
     this.addSection(common, {
-      setSteadyState: () => {
+      transitionFromAny: (done) => {
         total._angleBTop.showAll();
-        total._angleBTop.pulseScaleNow(1, 1.2);
+        total._angleBTop.pulseScaleNow(1, 1.2, 0, done);
       },
     });
 
@@ -417,8 +417,8 @@ class Content extends PresentationLessonContent {
       total.setScenarios('parallel');
     };
     this.addSection(common, {
-      setSteadyState: () => {
-        coll.totalPulseAngles(['A', 'B']);
+      transitionFromAny: (done) => {
+        coll.totalPulseAngles(['A', 'B'], done);
       },
     });
 

@@ -225,10 +225,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     };
   }
 
-  totalPulseAngles(angles: Array<string> = []) {
+  totalPulseAngles(angles: Array<string> = [], done: ?() => void = null) {
+    let callback = done;
     angles.forEach((angle) => {
       const a = this._totalAngle[`_angle${angle}`];
-      a.pulseScaleNow(1, 1.5);
+      a.pulseScaleNow(1, 1.5, 0, callback);
+      callback = null;
     });
     this.diagram.animateNextFrame();
   }
