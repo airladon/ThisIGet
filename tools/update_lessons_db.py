@@ -105,6 +105,8 @@ for key, value in index.items():            # noqa
     for version_name, version_info in value['versions'].items():
         topics = version_info['topics']
         for topic_name in topics:
+            if topic_name == 'dev':
+                continue
             topic = Topics.query.filter_by(
                 lesson_id=lesson.id, name=topic_name).first()
             if topic is None:
