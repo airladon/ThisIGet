@@ -215,8 +215,8 @@ def confirm_account_message(username):
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(username=username).first()
     if user is None:
-            flash('User does not exist', 'error')
-            return redirect(url_for('create'))
+        flash('User does not exist', 'error')
+        return redirect(url_for('create'))
     if form.validate_on_submit():
         send_confirm_account_email(user)
         redirect(f'confirmAccountEmailSent/{user.username}')

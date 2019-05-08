@@ -36,7 +36,7 @@ title() {
 ###########################################################################
 title "Run Lint Checks, Tests and Build App"
 ./build.sh prod
-
+check_status
 
 ###########################################################################
 title "Deploy to thisiget-test"
