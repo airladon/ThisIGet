@@ -74,12 +74,15 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     infoSymbol.innerHTML = 'i';
     titleElement.appendChild(infoSymbol);
 
+    const closeContainer = document.createElement('div');
+    closeContainer.classList.add('lesson__popup_box__close_container');
     const close = document.createElement('div');
     close.classList.add('lesson__popup_box__close');
     close.id = 'id_lesson__popup_box__close';
     close.innerHTML = 'X';
     close.onclick = this.hideAll.bind(this);
-    titleElement.appendChild(close);
+    closeContainer.appendChild(close);
+    titleElement.appendChild(closeContainer);
 
     const titleText = document.createElement('div');
     titleText.classList.add('lesson__popup_box__title_text');
