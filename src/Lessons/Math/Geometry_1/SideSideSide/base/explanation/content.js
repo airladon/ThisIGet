@@ -257,7 +257,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        left: click(coll.pulseLeftIsosceles, [coll], colors.sides),
+        left: click(coll.pulseLeftIsosceles, [coll, null], colors.sides),
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       setEnterState: () => {
@@ -297,7 +297,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        two_angles: click(coll.pulseLeftIsoscelesAngles, [coll], colors.angles),
+        two_angles: click(coll.pulseLeftIsoscelesAngles, [coll, null], colors.angles),
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       show: [
@@ -307,8 +307,7 @@ class Content extends PresentationLessonContent {
         coll._angleTopLeft, coll._angleBottomLeft,
       ],
       transitionFromPrev: (done) => {
-        coll.pulseLeftIsoscelesAngles();
-        done();
+        coll.pulseLeftIsoscelesAngles(done);
       },
     });
 
@@ -343,15 +342,14 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        right: click(coll.pulseRightIsosceles, [coll], colors.sides),
+        right: click(coll.pulseRightIsosceles, [coll, null], colors.sides),
         isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
       },
       setEnterState: () => {
         coll.colorRightIsosceles();
       },
       transitionFromPrev: (done) => {
-        coll.pulseRightIsosceles();
-        done();
+        coll.pulseRightIsosceles(done);
       },
     });
 
@@ -384,7 +382,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        two_equal_angles: click(coll.pulseRightIsoscelesAngles, [coll], colors.angles),
+        two_equal_angles: click(coll.pulseRightIsoscelesAngles, [coll, null], colors.angles),
       },
       show: [
         coll._left, coll._base._line, coll._right,
@@ -394,8 +392,7 @@ class Content extends PresentationLessonContent {
         coll._angleTopRight, coll._angleBottomRight,
       ],
       transitionFromPrev: (done) => {
-        coll.pulseRightIsoscelesAngles();
-        done();
+        coll.pulseRightIsoscelesAngles(done);
       },
     });
 
