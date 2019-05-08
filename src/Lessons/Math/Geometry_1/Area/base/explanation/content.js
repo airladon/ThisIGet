@@ -305,7 +305,6 @@ class Content extends PresentationLessonContent {
         'Therefore, the area of a rectangle can be calculated:',
       ],
       setSteadyState: () => {
-        console.log(eqn)
         eqn.showForm('0');
       },
     });

@@ -426,7 +426,7 @@ class Content extends PresentationLessonContent {
       show: [square],
       setSteadyState: () => {
         coll.setScenarios('center');
-      }
+      },
     });
   }
 }
