@@ -5,10 +5,10 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 
 const {
   DiagramElementPrimative,
-  DiagramObjectAngle,
+  // DiagramObjectAngle,
   DiagramObjectLine,
-  // DiagramElementCollection,
-  DiagramObjectPolyLine,
+  DiagramElementCollection,
+  // DiagramObjectPolyLine,
   Equation,
   Transform,
 } = Fig;
