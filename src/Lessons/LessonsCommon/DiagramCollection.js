@@ -3,6 +3,7 @@ import Fig from 'figureone';
 import {
   makeSelectorText, SelectorList,
 } from './tools/selector';
+// eslint-disable-next-line import/no-cycle
 import CommonLessonDiagram from './CommonLessonDiagram';
 
 const { Point, Transform } = Fig.tools.g2;

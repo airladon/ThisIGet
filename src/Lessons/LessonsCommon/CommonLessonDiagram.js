@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import type { TypeDiagramOptions } from 'figureone';
 // import Lesson from '../../js/Lesson/Lesson';
+// eslint-disable-next-line import/no-cycle
 import CommonDiagramCollection from './DiagramCollection';
 
 const { Diagram, Rect } = Fig;

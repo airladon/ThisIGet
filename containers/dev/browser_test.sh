@@ -43,7 +43,7 @@ docker_run_browser_test() {
         -e TIG_ADDRESS=$1 \
         --name devenv-browser-test \
         --entrypoint "npm" \
-        airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
+        airladon/pynode:python3.7.3-node12.1.0-npm6.9.0-puppeteer \
         "run" "jest" "--" $2 $3 $4 "--runInBand"
 }
 

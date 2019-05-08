@@ -4,7 +4,7 @@
 #   - JS Building
 #   - Flask debugging
 
-FROM airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-docker-heroku
+FROM airladon/pynode:python3.7.3-node12.1.0-npm6.9.0-docker-heroku
 
 # ## General ##
 WORKDIR /opt/app

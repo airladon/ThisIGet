@@ -135,7 +135,7 @@ then
     -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
     -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
     -v $PROJECT_PATH/.babelrc:/home/pptruser/.babelrc \
-    airladon/pynode:python3.7.2-node10.15.0-npm6.6.0-puppeteer \
+    airladon/pynode:python3.7.3-node12.1.0-npm6.9.0-puppeteer \
     bash
 else
   # docker volume create browser-tests

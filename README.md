@@ -146,6 +146,8 @@ From here you can perform:
   * `./browser_test.sh beta` for heroku beta site browser tests
   * `./browser_test.sh prod` for production site browser tests
   * `./browser_test.sh <SITE>` for custom site browser tests at <SITE>
+  * `./browser_test.sh local <TEST_REGEX>` for specific tests
+  * `./browser_test.sh local <TEST_REGEX> -u` to update snapshots
 
 * Build and Deploy:
   * `build.sh` Test and build dev version
@@ -295,31 +297,8 @@ Can check with
 `heroku pg:psql --app=itgetitest -c 'select username,last_login from users'`
 
 
-#### Start from scratch - Heroku
-Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
-```
-heroku pg:reset --app=thisiget-test
-tools/get_config_vars.sh thisiget-test
-```
-paste in the environment variable exports
-```
-tools/reset_and_prepopulate_database.sh thisiget-test
-unset SECRET_KEY
-unset AES_KEY
-unset PEPPER
-unset DATABASE_URL
-unset MAIL_PASSWORD
-unset MAIL_SENDER
-unset MAIL_SERVER
-unset MAIL_USERNAME
-```
-
-Can check with
-`heroku pg:psql --app=thisiget-test -c 'select username,last_login from users'`
-
-
 #### Upload local database to Heroku
-Assume database is called `thisiget_local`
+Assume local database is called `thisiget_local` and you want to update heroku database `thisiget-dev`
 ```
 heroku pg:reset --app=thisiget-dev
 heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=thisiget-test
@@ -392,27 +371,57 @@ CREATE DATABASE thisiget_local;
 ```
 
 ## Updating Python, Python Packages and NPM packages for the project
-### Javascript
-* Create branch
-* Update the version numbers in the package.json file
-* `rm -rf node_modules`
-* `npm install`
-* Run dev container and confirm all lint and type checks, and tests pass
-* Do a test build to local
-* If all passes, commit and pull request
 
-##### Python Packages
-This is only if python packages need to be updated. This will update both production and dev packages.
+### Python, Node or NPM Versions
+* Open pynode project and update base, Docker-heroku (used for dev) and pupp (used for browser testing in puppeteer)
+* Build locally without deploying
+* Update `start_env.sh` to reflect new docker image (in section "Starting Container", "Pupp" (approx line 138))
+* Update `containers/Dockerfile_dev` to reflect new docker image
+* Update `containers/dev/browser_test.sh` to reflect new docker image
+* If python version was updated, then also update `containers/Dockerfile_stage` and `containers/Dockerfile_prod` with new python version.
 
-To see which packages are out of date:
-`pipenv update --outdated`
+### NPM Packages
+Before updating NPM packages, make sure lint, type checking and unit tests all pass.
 
-Update version numbers in Pipfile
+In dev container:
+```
+flow
+npm run lint
+npm run css
+jest
+./browser_tests.sh local
+```
 
-`pipenv install -d`
+If just updating one package, then update the package version in `package.json`.
 
-If Pipfile.lock is out of date, then use this to bring it up to date.
-`pipenv lock`
+If want to update all packages, then in dev container:
+```
+npm update
+cat package.json
+```
+Then copy and paste the package names and version numbers into `package.json` in local root directory.
+
+Now retest all line, type checking and units tests:
+In dev container:
+```
+flow
+npm run lint
+npm run css
+jest
+./browser_tests.sh local
+```
+
+With updates to lint and test packages, it is possible additional bugs will be found that will need to be dealt with.
+
+If everything was fixable, then commit changes.
+
+### Python Packages
+In dev container:
+```
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+pip freeze
+```
+Then copy and paste the package names and versions into the local `requirements.txt`.
 
 
 #### Update python version
@@ -432,7 +441,6 @@ Remove existing virtual environment
 `rm -rf env`
 
 Setup new virtual environment
-
 
 
 # Deploy to new Heroku App
