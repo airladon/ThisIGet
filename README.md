@@ -249,6 +249,67 @@ This is best done locally outside of a container. You will need to have:
 * Installed Heroku CLI if you want to manage a heroku database
 * Installed postgres.app locally if you want to manage a local postgres database
 
+#### Start from scratch all DBs update:
+
+Local SQL
+```
+export FLASK_APP=app/my_app.py
+rm app/app/app.db
+rm -rf migrations
+unset DATABASE_URL
+flask db init
+flask db migrate
+flask db upgrade
+python ./tools/update_lessons_db.py
+python ./tools/prepopulate.py
+```
+
+Local Postgress
+```
+psql -c 'drop database thisiget_local'
+psql -c 'create database thisiget_local'
+export DATABASE_URL=postgresql://postgres@localhost/thisiget_local
+flask db upgrade
+python ./tools/update_lessons_db.py
+python ./tools/prepopulate.py
+```
+
+Test
+```
+tools/get_config_vars.sh thisiget-test
+```
+Copy paste exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-test
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
+
+Dev
+```
+tools/get_config_vars.sh thisiget-dev
+```
+Copy paste exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-dev
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
+
+
+
 #### Start from scratch - Local SQL
 ```
 rm app/app/app.db
