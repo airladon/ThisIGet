@@ -44,7 +44,12 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const fig = coll._fig;
 
-    this.addSection({
+    let common = {
+      setEnterState: () => {
+        fig.setScenario('default');
+      },
+    };
+    this.addSection(common, {
       title: 'Introduction',
       setContent: 'It is often necessary to find the |distance| between a |point| and a |line|.',
       modifiers: {
@@ -55,7 +60,7 @@ class Content extends PresentationLessonContent {
       show: [fig._point, fig._line],
     });
 
-    this.addSection({
+    this.addSection(common, {
       setContent: 'But from |where| on the line do you measure the distance?',
       modifiers: {
         where: click(coll.moveMeasurement, [coll, null, null], colors.distance),
@@ -70,7 +75,8 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection({
+    this.addSection(common, {
+      title: 'Shortest Distance',
       setContent: 'The most common way is to define the distance as the |shortest| possible distance between the point and the line.',
       modifiers: {
         shortest: click(coll.moveMeasurement, [coll, 0, null], colors.distance),
@@ -84,8 +90,9 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection({
-      setContent: 'Are their any |relationships| between the point and line at the |shortest| distance?',
+    this.addSection(common, {
+      title: 'Perpendicular Distance',
+      setContent: 'Is there a |relationship| between the |point| and |line| at the |shortest| distance?',
       modifiers: {
         shortest: click(coll.moveMeasurement, [coll, 0, null], colors.distance),
       },
@@ -101,7 +108,7 @@ class Content extends PresentationLessonContent {
     let content = {
       setContent: 'To investigate this, lets start by |drawing_a_line| connecting the |point| to the |original_line| at a |right_angle|.',
     };
-    this.addSection(content, {
+    this.addSection(common, content, {
       show: [fig._point, fig._line],
       modifiers: {
         drawing_a_line: this.bindNext(colors.distance),
@@ -110,7 +117,7 @@ class Content extends PresentationLessonContent {
         right_angle: this.bindNext(colors.distance),
       },
     });
-    this.addSection(content, {
+    this.addSection(common, content, {
       modifiers: {
         drawing_a_line: click(coll.drawPerpendicular, [coll, null], colors.distance),
         point: click(coll.pulsePoint, [coll], colors.points),
@@ -126,13 +133,13 @@ class Content extends PresentationLessonContent {
     content = {
       setContent: 'Lets label this line |d|.',
     };
-    this.addSection(content, {
+    this.addSection(common, content, {
       modifiers: {
         d: this.bindNext(colors.distance),
       },
       show: [fig._point, fig._line, fig._perpendicular._line, fig._rightAngle],
     });
-    this.addSection(content, {
+    this.addSection(common, content, {
       modifiers: {
         d: click(coll.pulsePerpendicularLabel, [coll], colors.distance),
       },
@@ -142,8 +149,9 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    const common = {
+    common = {
       setEnterState: () => {
+        fig.setScenario('default');
         fig._hypotPad.setScenario('default');
       },
     };
@@ -242,9 +250,12 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
-      setContent: 'As the original line is straight, then |any| two lines between the point and the line must form a triangle.',
+      setContent: 'As the |original_line| is straight, then |any| two lines between the |point| and the |line| must form a |triangle|.',
       modifiers: {
         any: click(coll.moveHypot, [coll, null], colors.distance),
+        point: click(coll.pulsePoint, [coll], colors.points),
+        original_line: click(coll.pulseLine, [coll], colors.lines),
+        line: click(coll.pulseLine, [coll], colors.lines),
       },
       show: [
         fig._point, fig._line, fig._perpendicular._line, fig._rightAngle,
@@ -255,7 +266,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: centerV([
         'A |triangle| has three angles that add up to 180º, therefore |only one angle| in a triangle can be |90º|.',
-        'A triangle |cannot| be made with two lines perpendicular to a third line, as the total angle would be larger than 180º.',
+        'A triangle |cannot| be made with two angles of 90º, as the total angle would be larger than 180º.',
       ]),
       modifiers: {
         triangle: this.bindShowQR('triangle_introduction/base', 'Main'),
@@ -264,10 +275,17 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: 'Summary',
-      setContent: 'So a ',
-      setEnterState: () => {},
+      setContent: 'So the distance between a |point| and a |line| is the |shortest distance|. When one of the line\'s ends is not the closest part to the point, then the shortest distance is the |perpendicular| from the line to the point. ',
+      modifiers: {
+        point: click(coll.pulsePoint, [coll], colors.points),
+        line: click(coll.pulseLine, [coll], colors.lines),
+        perpendicular: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+      },
+      setEnterState: () => {
+        fig.setScenario('low');
+      },
       show: [
-        fig._point, fig._line, fig._perpendicular._line, fig._rightAngle,
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle,
       ],
     });
   }

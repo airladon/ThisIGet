@@ -190,6 +190,13 @@ export default function lessonLayout() {
       hypot,
       base,
     ],
+    mods: {
+      scenarios: {
+        default: { position: [0, 0] },
+        low: { position: [0, -0.5] },
+        summary: { position: [0, -0.5] },
+      },
+    },
   };
 
   layout.addElements = [fig];
