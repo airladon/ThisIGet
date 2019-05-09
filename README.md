@@ -308,6 +308,22 @@ unset MAIL_SERVER
 unset MAIL_USERNAME
 ```
 
+Beta
+```
+tools/get_config_vars.sh thisiget-beta
+```
+Copy paste exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-beta
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
 
 
 #### Start from scratch - Local SQL
@@ -561,7 +577,7 @@ heroku addons:attach <EXISTING_APP>::DATABASE --app=<NEW_APP_NAME>
 ```
 
 
-# Work flow - To be changed
+# Work flow
 
 An example contribution work flow to lesson content (just javascript and scss/css) is:
 * `git clone https://github.com/airladon/itiget/`
@@ -577,9 +593,36 @@ An example contribution work flow to lesson content (just javascript and scss/cs
   * `npm run lint`
   * `npm run css`
   * `jest`
-* If all looks good, try a test build
-  * `./build.sh prod deploy test`
-* If the test site looks good, create a pull request.
+  * `./browser_tests.sh local <LESSON_REGEX>`
+Run browser tests a second time to ensure the snap shots created in the last run are consistent.
+  * `./browser_tests.sh local <LESSON_REGEX>`
+  * `./ratings_test.sh local`
+>>> If ratings_tests failed and you needed to update the database, then the dev, test and beta/prod databases will also need to be updated.
+
+* If all looks good, build to dev site
+  * `./build.sh deploy dev`
+* Open site (thisiget-dev.herokuapp.com) and see it if looks ok.
+* Back in the dev container, run ratings and browser tests
+  * `./ratings_tests.sh dev`
+  * `./browser_tests.sh local <LESSON_REGEX>`
+* Run ratings tests
+  * `./ratings_tests.sh dev`
+  * `./browser_tests.sh dev`
+* If ratings_tests failed and you needed to update the database, then the test and beta/prod database will also need to be updated. Test it by:
+  * `./ratings_tests.sh test`
+  * `./ratings_tests.sh beta`
+* If the dev site looks good, create a pull request into master.
+
+The CI will then:
+  * Check linting, type checking and unit tests
+  * Build app to test site
+  * Run all browser and ratings tests
+  * Build app to beta site
+  * Run subset of broswer tests, all ratings tests
+  * Build app to prod site
+  * Run subset of browser tests, all ratings tests
+  * If all passes, a master merge will be allowed.
+
 
 # Useful notes
 ### Removing columns in SQLite
