@@ -44,10 +44,11 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const fig = coll._fig;
 
-    let common = {
+    const common = {
       setEnterState: () => {
         fig.setScenario('default');
         fig._point.setScenario('default');
+        fig._hypotPad.setScenario('default');
         coll.padUpdated();
         coll.hypotPadUpdated();
       },
@@ -183,12 +184,15 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    common = {
-      setEnterState: () => {
-        fig.setScenario('default');
-        fig._hypotPad.setScenario('default');
-      },
-    };
+    // common = {
+    //   setEnterState: () => {
+    //     fig.setScenario('default');
+    //     fig._hypotPad.setScenario('default');
+    //     fig._point.setScenario('default');
+    //     coll.padUpdated();
+    //     coll.hypotPadUpdated();
+    //   },
+    // };
     content = {
       setContent: 'Now draw a |second_line| that is |not perpendicular| and labeled |h|.',
     };

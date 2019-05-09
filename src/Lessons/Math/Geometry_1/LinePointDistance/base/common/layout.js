@@ -14,6 +14,7 @@ const cssColorNames = [
   'lines',
   'points',
   'distance',
+  'distance2',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -26,6 +27,7 @@ export default function lessonLayout() {
   const p1 = new Point(-2, -0.7);
   const p2 = new Point(2, -0.7);
   const mid = new Point(0, -0.7);
+  const p3 = p0.add(p1.x - 0.4, 0);
 
   layout.mid = mid;
   layout.p1 = p1;
@@ -43,8 +45,20 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: p0 },
-        end: { position: p0.add(p1.x - 0.4, 0) },
+        end: { position: p3 },
       },
+    },
+  };
+
+  const pointEnd = {
+    name: 'pointEnd',
+    method: 'polygon',
+    options: {
+      sides: 100,
+      radius: 0.05,
+      color: colors.points,
+      fill: true,
+      position: p3,
     },
   };
 
@@ -115,6 +129,23 @@ export default function lessonLayout() {
       label: {
         text: 'd',
         location: 'left',
+        offset: 0.05,
+        linePosition: 0.6,
+      },
+    },
+  };
+
+  const distanceEnd = {
+    name: 'distanceEnd',
+    method: 'line',
+    options: {
+      p1: p3,
+      p2: p1,
+      color: colors.distance2,
+      width: 0.01,
+      label: {
+        text: 'd',
+        location: 'top',
         offset: 0.05,
         linePosition: 0.6,
       },
@@ -209,6 +240,8 @@ export default function lessonLayout() {
       rightAngle,
       hypot,
       base,
+      pointEnd,
+      distanceEnd,
     ],
     mods: {
       scenarios: {

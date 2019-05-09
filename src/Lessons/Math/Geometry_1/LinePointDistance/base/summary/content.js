@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -9,18 +9,18 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
-//   style,
-//   click,
+const {
+  // style,
+  click,
 //   clickW,
 //   highlight,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -35,31 +35,31 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
 
     this.addSection({
-      title: '',
-      setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      setContent: 'The distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between point and line. ',
+      modifiers: {
+        point: click(coll.pulsePoints, [coll], colors.points),
+        point_: click(coll.pulsePointEnd, [coll], colors.points),
+        point__: click(coll.pulsePoint, [coll], colors.points),
+        line: click(coll.pulseLine, [coll], colors.lines),
+        perpendicular_line: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+        point_and_line_end: click(coll.pulseDistanceEnd, [coll], colors.distance2),
+        line_end: click(coll.pulseEnd, [coll], colors.lines),
+      },
+      setEnterState: () => {
+        fig.setScenario('low');
+        fig._point.setScenario('default');
+        coll.padUpdated();
+        coll.hypotPadUpdated();
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle,
+        fig._pointEnd, fig._distanceEnd, fig._end,
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
     });
   }
 }

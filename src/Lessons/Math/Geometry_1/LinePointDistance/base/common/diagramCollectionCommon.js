@@ -31,6 +31,8 @@ export default class CommonCollection extends CommonDiagramCollection {
     _base: DiagramObjectLine;
     _hypotPad: DiagramElementPrimative;
     _end: DiagramElementPrimative;
+    _distanceEnd: DiagramObjectLine;
+    _pointEnd: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   constructor(
@@ -68,6 +70,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  pulsePointEnd() {
+    this._fig._pointEnd.pulseScaleNow(1, 4);
+    this.diagram.animateNextFrame();
+  }
+
   pulseLine() {
     this._fig._line.pulseWidth({ line: 6 });
     this.diagram.animateNextFrame();
@@ -90,6 +97,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseEnd() {
     this._fig._end.pulseScaleNow(1, 10);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseDistanceEnd() {
+    this._fig._distanceEnd.pulseWidth({ label: 2, line: 1 });
     this.diagram.animateNextFrame();
   }
 
@@ -165,5 +177,10 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._base.pulseWidth({ line: 5 });
     this._fig._perpendicular.pulseWidth({ line: 5, label: 1, done });
     this.diagram.animateNextFrame();
+  }
+
+  pulsePoints() {
+    this.pulsePoint();
+    this.pulsePointEnd();
   }
 }
