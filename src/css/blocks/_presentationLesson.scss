@@ -1,0 +1,38 @@
+#presentation_lesson__qr__overlay {
+  z-index: -1;
+  position: absolute;
+  // width: var(--lesson__qr_width);
+  // height: var(--lesson__qr_height);
+  // top: calc(50% - var(--lesson__qr_height) / 2);
+  // left: calc(50% - var(--lesson__qr_width) / 2);
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+}
+
+// #presentation_lesson__qr__overlay .lesson__popup_box__title_text {
+//   // font-size: calc(var(--lesson__diagram-font-size) * 0.9);
+//   font-size: calc(var(--lesson__qr_width) / 35 * 1.2);
+//   margin-top: 0;
+// }
+
+// #presentation_lesson__qr__overlay .lesson__popup_box__link {
+//   // font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+//   font-size: calc(var(--lesson__qr_width) / 35 * 0.8);
+// }
+
+#presentation_lesson__qr__overlay #lesson__qr__container {
+  position: relative;
+  width: var(--lesson__qr_width);
+  height: var(--lesson__qr_height);
+  top: calc(50% - var(--lesson__qr_height) / 2);
+  pointer-events: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#presentation_lesson__qr__overlay .diagram__html {
+  pointer-events: auto;
+}

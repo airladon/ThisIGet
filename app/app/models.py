@@ -58,6 +58,7 @@ class Users(UserMixin, db.Model):
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
     ratings = db.relationship('Ratings', backref='user', lazy='dynamic')
+    all_ratings = db.relationship('AllRatings', backref='user', lazy='dynamic')
     last_login = db.Column(db.DateTime)
 
     def __repr__(self):
@@ -139,16 +140,30 @@ class Lessons(db.Model):
     dependencies = db.Column(db.String(1024), index=True)
     enabled = db.Column(db.Boolean, index=True)
     path = db.Column(db.String(128))
-    versions = db.relationship('Versions', backref='lesson', lazy='dynamic')
+    # versions = db.relationship('Versions', backref='lesson', lazy='dynamic')
     topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
         return '<Lessons {}>'.format(self.name)
 
 
+class Topics(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(128), index=True)
+    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    versions = db.relationship('Versions', backref='topic', lazy='dynamic')
+    # version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    # ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
+    # ratings = db.relationship('AllRatings', backref='topic', lazy='dynamic')
+
+    def __repr__(self):
+        return '<Topics {}>'.format(self.name)
+
+
 class Versions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    # lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
     uid = db.Column(db.String(128), index=True)
     title = db.Column(db.String(128), index=True)
     description = db.Column(db.String(256), index=True)
@@ -156,34 +171,68 @@ class Versions(db.Model):
     onPath = db.Column(db.Boolean, index=True)
     # topics = db.Column(db.String(512), index=True)
     qr = db.Column(db.String(1024), index=True)
-    ratings = db.relationship('Topics', backref='version', lazy='dynamic')
+    ratings = db.relationship('Ratings', backref='version', lazy='dynamic')
+    all_ratings = db.relationship(
+        'AllRatings', backref='version', lazy='dynamic')
+    # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
         return '<Versions {}>'.format(self.title)
 
 
-class Topics(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True)
-    lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
-    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
-    ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
+# class Versions(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+#     uid = db.Column(db.String(128), index=True)
+#     title = db.Column(db.String(128), index=True)
+#     description = db.Column(db.String(256), index=True)
+#     path = db.Column(db.String(128), index=True)
+#     onPath = db.Column(db.Boolean, index=True)
+#     # topics = db.Column(db.String(512), index=True)
+#     qr = db.Column(db.String(1024), index=True)
+#     ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
-    def __repr__(self):
-        return '<Topics {}>'.format(self.name)
+#     def __repr__(self):
+#         return '<Versions {}>'.format(self.title)
+
+
+# class Topics(db.Model):
+#     id = db.Column(db.Integer, primary_key=True)
+#     name = db.Column(db.String(128), index=True)
+#     lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
+#     version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+#     ratings = db.relationship('Ratings', backref='topic', lazy='dynamic')
+#     ratings = db.relationship('AllRatings', backref='topic', lazy='dynamic')
+
+#     def __repr__(self):
+#         return '<Topics {}>'.format(self.name)
 
 
 class Ratings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    topic_id = db.Column(db.Integer, db.ForeignKey('topics.id'))
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
     rating = db.Column(db.Integer, index=True)
+
+    def __repr__(self):
+        return '<Rating {} {} {} {}>'.format(
+            self.version.topic.lesson, self.version.topic, self.version,
+            self.user.username, self.rating)
+
+
+class AllRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    rating = db.Column(db.Integer, index=True)
+    page = db.Column(db.Integer)
+    pages = db.Column(db.Integer)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
-            self.topic.lesson, self.topic.version, self.topic.name,
-            self.rating, self.rating)
+            self.version.topic.lesson, self.version.topic, self.version,
+            self.user.username, self.rating)
 
 
 class Comment(db.Model):

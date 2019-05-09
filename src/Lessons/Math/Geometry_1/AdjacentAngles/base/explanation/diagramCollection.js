@@ -1,16 +1,15 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
-import AdjacentCollection from '../common/diagramCollectionAdjacent';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _adjacent: AdjacentCollection;
-  units: TypeUnits;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -18,18 +17,8 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
-    this.units = 'deg';
-    this.add('adjacent', new AdjacentCollection(diagram, this.layout));
-    this.add('unitsSelector', this.makeUnitsSelector());
-    this._adjacent.setPosition(this.layout.position);
-    this.hasTouchableElements = true;
-  }
 
-  // eslint-disable-next-line class-methods-use-this
-  setUnits(units: TypeUnits) {
-    this.units = units;
-    if (this._adjacent.isShown) {
-      this._adjacent.setUnits(units);
-    }
+    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

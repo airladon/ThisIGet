@@ -1,19 +1,27 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent,
+  PresentationLessonContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -28,32 +36,10 @@ class Content extends LessonContent {
   addSections() {
     const diag = this.diagram.elements;
     const quiz = diag._quiz;
+    // const main = quiz._main;
 
-    // this.addSection({
-    // title: 'Enter_title_here',
-    //   setContent: ['What is the area of a circle'],
-    // });
     this.addSection({
-      title: 'Area of a Circle',
-      setContent: '<p id="id_lesson__quiz_question">asdf</p>',
-      modifiers: {
-      },
-      setInfo: [
-        'Touch the answer box to enter the answer, then touch the check button to submit.'],
-      infoModifiers: {
-      },
-      // interactiveElements: [
-      //   interactiveItem(quiz._input),
-      // ],
-      setEnterState: () => {
-      },
-      showOnly: [
-        quiz, quiz._circle,
-      ],
-      show: [
-        quiz._area, quiz._input,
-        quiz._check,
-      ],
+      show: [quiz._circle, quiz._area],
       setSteadyState: () => {
         quiz.newProblem();
       },

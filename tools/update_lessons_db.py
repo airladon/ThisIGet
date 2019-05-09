@@ -73,7 +73,7 @@ def index_loader(file):
     return json.loads(modified_str)
 
 
-index = index_loader(pathlib.Path('./src/Lessons/index.js'))
+index = index_loader(pathlib.Path('./src/Lessons/LessonsCommon/lessonindex.js'))
 
 for key, value in index.items():            # noqa
     # Update or create category row
@@ -103,29 +103,42 @@ for key, value in index.items():            # noqa
 
     # Update or Create Topic Versions
     for version_name, version_info in value['versions'].items():
-        version = Versions.query.filter_by(
-            lesson_id=lesson.id, uid=version_name).first()
-        if version is None:
-            version = Versions(lesson_id=lesson.id, uid=version_name)
-            db.session.add(version)
-        if version.title != version_info['title']:
-            version.title = version_info['title']
-        if version.description != version_info['description']:
-            version.description = version_info['description']
-        if version.path != version_info['path']:
-            version.path = version_info['path']
-        if version.onPath != bool(version_info['onPath']):
-            version.onPath = bool(version_info['onPath'])
-
-        # Update or Create Topics
-        # print(version_info['topics'])
-        for topic_name in version_info['topics']:
+        topics = version_info['topics']
+        for topic_name in topics:
+            if topic_name == 'dev':
+                continue
             topic = Topics.query.filter_by(
-                lesson_id=lesson.id, version_id=version.id, name=topic_name).first()
+                lesson_id=lesson.id, name=topic_name).first()
             if topic is None:
-                topic = Topics(
-                    lesson_id=lesson.id, version_id=version.id, name=topic_name)
+                topic = Topics(lesson_id=lesson.id, name=topic_name)
                 db.session.add(topic)
+            version = Versions.query.filter_by(
+                topic_id=topic.id, uid=version_name).first()
+            if version is None:
+                version = Versions(topic_id=topic.id, uid=version_name)
+                db.session.add(version)
+
+        # if version is None:
+        #     version = Versions(lesson_id=lesson.id, uid=version_name)
+        #     db.session.add(version)
+            if version.title != version_info['title']:
+                version.title = version_info['title']
+            if version.description != version_info['description']:
+                version.description = version_info['description']
+            if version.path != version_info['path']:
+                version.path = version_info['path']
+            if version.onPath != bool(version_info['onPath']):
+                version.onPath = bool(version_info['onPath'])
+
+        # # Update or Create Topics
+        # # print(version_info['topics'])
+        # for topic_name in version_info['topics']:
+        #     topic = Topics.query.filter_by(
+        #         lesson_id=lesson.id, version_id=version.id, name=topic_name).first()
+        #     if topic is None:
+        #         topic = Topics(
+        #             lesson_id=lesson.id, version_id=version.id, name=topic_name)
+        #         db.session.add(topic)
 
 db.session.commit()
 # print(value['name'], value['uid'])

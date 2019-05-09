@@ -5,12 +5,17 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import TriangleAreaCollection from '../common/diagramCollectionTri';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform } = Fig;
+const { Transform, Rect } = Fig;
+// const {
+//   click,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
-export default class QRTriangleArea extends PopupBoxCollection {
-  _collection: TriangleAreaCollection;
+export default class QRArea extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -22,35 +27,36 @@ export default class QRTriangleArea extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      TriangleAreaCollection,
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
     const modifiers = {};
-
     this.setTitle('Area of a Triangle');
-    this.setDescription('The |area of a triangle| is equal to |half its base times its height|. Any side can be the |base| if the height changes to be relative to the base.', modifiers);
+    this.setDescription('The area of a triangle is equal to |half its base times its height|. The base can be any side, and the |height| is equal to the |perpendicular line between the line on which the base sits and the top| point.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    // collection.showAll();
-    collection.show();
-    collection._tri2.showAll();
-    collection._sideTri2Base.showAll();
-    collection._sideTri2Height.showAll();
-    collection._tri2AreaEqn.show();
-    collection.eqns.tri2AreaEqn.showForm('10');
-    collection.transform.updateScale(0.7, 0.7);
-    // collection.setPosition(this.layout.position);
+    // collection.show();
+    // const area1 = collection._area1;
+    const eqn = collection._eqn;
+    // area1.show([area1._tri, area1._base, area1._height]);
+    const height1 = collection._height1;
+    const height2 = collection._height2;
+    height1.showAll();
+    height2.showAll();
+    collection.setScenarios('qr');
+    eqn.showForm('10');
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-function attachQuickReference() {
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -58,8 +64,10 @@ function attachQuickReference() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRTriangleArea,
+    Main: QRArea,
+    // QR2: QRBoilerplate2,
   };
 }
 
-attachQuickReference();
+attachQuickReference1();
+

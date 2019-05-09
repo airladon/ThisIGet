@@ -1,230 +1,72 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import TriangleCollection from '../common/diagramCollectionTriangles';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform } = Fig;
-const { html } = Fig.tools;
-class QRCongruent extends PopupBoxCollection {
-  _triangle: TriangleCollection;
-  name: string;
+const { Transform, Rect } = Fig;
+const {
+  click,
+  highlight,
+  highlightWord,
+//   clickWord,
+} = Fig.tools.html;
+
+export class QRCongruentTriangles extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-    name: string = 'triangle',
   ) {
     const layout = lessonLayout();
     super(
       diagram,
       layout,
       transform,
-      'triangle',
-      TriangleCollection,
-      name,
+      'collection',
+      CommonCollection,
     );
-    this.name = name;
+    this.hasTouchableElements = true;
 
+    const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      side_lengths: highlight(colors.sides),
+      angles: highlight(colors.angles),
+      rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
+      flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
+    };
+    this.setTitle('Congruent Triangles');
+    this.setDescription(['Triangles are congruent when they have the same corresponding |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
-  setDescription(specificText: string, extraModifiers: Object = {}) {
-    const finalText = `<p>
-        Two triangles are |congruent| (same size and shape) if they share the same |side_lengths| and |angles|.
-      </p>
-      ${specificText}
-      <p>
-        Triangles are congruent even if |rotated| or |mirrored|.
-      </p>`;
-    const modifiers = Object.assign({}, {
-      angles: html.highlight(this.layout.colors.angleLabels),
-      side_lengths: html.highlight(this.layout.colors.lineLabels),
-      rotated: html.clickWord(
-        'rotated',
-        `id_lesson__qr_congruent_triangles_${this.name}__rotated`,
-        this._triangle.toggleCongruentRotate, [this._triangle],
-        this.layout.colors.line,
-      ),
-      mirrored: html.clickWord(
-        'mirrored',
-        `id_lesson__qr_congruent_triangles__${this.name}__mirrored`,
-        this._triangle.toggleCongruentFlip, [this._triangle],
-        this.layout.colors.line,
-      ),
-    }, extraModifiers);
-    super.setDescription(finalText, modifiers);
-  }
-
   show() {
-    this.setDiagramSize(2.5, 1.2);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
-    const tri = this._triangle;
-    const lay = this.layout.triangles.congruent;
-
-    this.hasTouchableElements = true;
-    tri.hasTouchableElements = true;
-    tri._tri2.isMovable = true;
-    tri._tri2.isTouchable = true;
-    tri._tri2.touchInBoundingRect = true;
-    tri._tri2.move.type = 'rotation';
-
-    tri.setTriangleScenarios(lay.points, lay.points, lay.tri1.scenario, lay.tri2.scenario);
-    tri.show();
-    tri._tri1.show();
-    tri._tri2.show();
-    tri._tri1._line.show();
-    tri._tri2._line.show();
-    tri.transform.updateScale(0.7, 0.7);
-    tri.setPosition(0, 0.75);
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    collection.isFlipped = false;
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri2.makeTouchable();
+    congruent._tri2.isMovable = true;
+    congruent._tri2.touchInBoundingRect = true;
+    congruent._tri2.move.type = 'rotation';
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
     this.diagram.animateNextFrame();
   }
 }
-
-export class QRAsa extends QRCongruent {
-  _triangle: TriangleCollection;
-  last: string;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    super(diagram, transform, 'triangle_asa');
-    const modifiers = {
-      two_angles: html.highlight(this.layout.colors.angleLabels),
-      side_between_them: html.highlight(this.layout.colors.lineLabels),
-      // rotated: html.click(
-      //   this._triangle.toggleCongruentRotate, [this._triangle],
-      //   this.layout.colors.line,
-      // ),
-    };
-
-    this.setTitle('Congruent by Angle-Side-Angle');
-    this.setDescription(`
-      <p>
-        All angles and side lengths of a triangle can be calculated if only |two_angles| and the |side_between_them| is known (|Angle-Side-Angle configuration|). Therefore, if two triangles share the same two angles and enclosed side length, the triangles will be congruent.
-      </p>`, modifiers);
-  }
-
-  show() {
-    super.show();
-    const tri = this._triangle;
-    tri._tri1._angle1.showAll();
-    tri._tri2._angle1.showAll();
-    tri._tri1._angle2.showAll();
-    tri._tri2._angle2.showAll();
-    tri._tri1._dimension12.showAll();
-    tri._tri2._dimension12.showAll();
-    this.diagram.animateNextFrame();
-  }
-}
-
-export class QRSss extends QRCongruent {
-  _triangle: TriangleCollection;
-  last: string;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    super(diagram, transform, 'triangle_sss');
-    const modifiers = {
-      three_side_lengths: html.highlight(this.layout.colors.lineLabels),
-    };
-
-    this.setTitle('Congruent by Side-Side-Side');
-    this.setDescription(`
-      <p>
-        All angles and side lengths of a triangle can be calculated if only the |three_side_lengths| are known (|Side-Side-Side configuration|). Therefore, if two triangles share the same side lengths, the triangles will be congruent.
-      </p>`, modifiers);
-  }
-
-  show() {
-    super.show();
-    const tri = this._triangle;
-    tri._tri1._dimension12.showAll();
-    tri._tri2._dimension12.showAll();
-    tri._tri1._dimension23.showAll();
-    tri._tri2._dimension23.showAll();
-    tri._tri1._dimension31.showAll();
-    tri._tri2._dimension31.showAll();
-    this.diagram.animateNextFrame();
-  }
-}
-
-export class QRSas extends QRCongruent {
-  _triangle: TriangleCollection;
-  last: string;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    super(diagram, transform, 'triangle_sas');
-    const modifiers = {
-      two_sides: html.highlight(this.layout.colors.lineLabels),
-      angle_between_them: html.highlight(this.layout.colors.angleLabels),
-    };
-
-    this.setTitle('Congruent by Side-Angle-Side');
-    this.setDescription(`
-      <p>
-        All angles and side lengths of a triangle can be calculated if only |two_sides| and the |angle_between_them| is known (|Side-Angle-Side configuration|). Therefore, if two triangles share the same two side lengths and enclosed angle, the triangles will be congruent.
-      </p>`, modifiers);
-  }
-
-  show() {
-    super.show();
-    const tri = this._triangle;
-    tri._tri1._dimension12.showAll();
-    tri._tri2._dimension12.showAll();
-    tri._tri1._dimension31.showAll();
-    tri._tri2._dimension31.showAll();
-    tri._tri1._angle1.showAll();
-    tri._tri2._angle1.showAll();
-    this.diagram.animateNextFrame();
-  }
-}
-
-export class QRAas extends QRCongruent {
-  _triangle: TriangleCollection;
-  last: string;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    super(diagram, transform, 'triangle_aas');
-    const modifiers = {
-      side_not_between: html.highlight(this.layout.colors.lineLabels),
-      two_angles: html.highlight(this.layout.colors.angleLabels),
-    };
-
-    this.setTitle('Congruent by Angle-Angle-Side');
-    this.setDescription(`
-      <p>
-        All angles and side lengths of a triangle can be calculated if only |two_angles| and a |side_not_between| them is known (|Angle-Angle-Side configuration|). Therefore, if two triangles share the same two angles and adjacent side length, the triangles will be congruent.
-      </p>`, modifiers);
-  }
-
-  show() {
-    super.show();
-    const tri = this._triangle;
-    tri._tri1._dimension23.showAll();
-    tri._tri2._dimension23.showAll();
-    tri._tri1._angle1.showAll();
-    tri._tri2._angle1.showAll();
-    tri._tri1._angle2.showAll();
-    tri._tri2._angle2.showAll();
-    this.diagram.animateNextFrame();
-  }
-}
-
 
 export class QRAaa extends PopupBoxCollection {
-  _triangle: TriangleCollection;
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -235,52 +77,94 @@ export class QRAaa extends PopupBoxCollection {
       diagram,
       layout,
       transform,
-      'triangle',
-      TriangleCollection,
-      'triangle_aaa',
+      'collection',
+      CommonCollection,
     );
+    this.hasTouchableElements = true;
 
-    this.setTitle('Angle-Angle-Angle Ambiguity');
+    const { colors } = this.layout;
     const modifiers = {
-      three_angles: html.highlight(this.layout.colors.angleLabels),
+      different_side_lengths: highlight(colors.sides),
+      three_angles: highlight(colors.angles),
     };
-    this.setDescription(`
-      <p>
-        If only |three_angles| of a triangle are known, the |sides cannot be calculated|.
-      </p>
-      <p>
-        For example, if you scale a triangle larger or smaller, its angles will remain the same. Therefore, knowing just the angles of two triangles is |not enough information to determine that they are congruent| (the same size and shape).
-      </p>`, modifiers);
-
+    this.setTitle('Angle Angle Angle Triangle Congruency Test');
+    this.setDescription(['Triangles with the same |three_angles| can have |different_side_lengths|. Therefore knowing two triangles have the same three angles is |not sufficient to determine if they are congruent|.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.2);
+    this.setDiagramSpace({ location: 'top', ySize: 0.65, xSize: 0.5 });
     super.show();
-    const tri = this._triangle;
-    const lay = this.layout.triangles.aaa;
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    congruent._tri1._side01.hide();
+    congruent._tri1._side12.hide();
+    congruent._tri1._side20.hide();
+    congruent._tri2._side01.hide();
+    congruent._tri2._side12.hide();
+    congruent._tri2._side20.hide();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeftAaa');
+    congruent._tri2.setScenario('qrRightAaa');
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
 
-    tri.setTriangleScenarios(lay.points, lay.points, lay.tri1.scenario, lay.tri2.scenario);
-    tri.show();
-    tri._tri1.show();
-    tri._tri2.show();
-    tri._tri1._line.show();
-    tri._tri2._line.show();
-    tri._tri1._angle1.showAll();
-    tri._tri1._angle2.showAll();
-    tri._tri1._angle3.showAll();
-    tri._tri2._angle1.showAll();
-    tri._tri2._angle2.showAll();
-    tri._tri2._angle3.showAll();
-    tri.transform.updateScale(0.7, 0.7);
-    tri.setPosition(0, 0.6);
+export class QRSas extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_sides_of_the_same_length: highlight(colors.sides),
+      three_angles: highlight(colors.angles),
+    };
+    this.setTitle('Side Angle Side Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share |two_sides_of_the_same_length|, and the |angle_between| those two sides is also the same on both triangles, then the triangles |are congruent|. This case is often called the |Side Angle Side| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side01.hide();
+    congruent._tri1._angle1.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side01.hide();
+    congruent._tri2._angle1.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
     this.diagram.animateNextFrame();
   }
 }
 
 export class QRSsa extends PopupBoxCollection {
-  _triangle: TriangleCollection;
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -291,127 +175,195 @@ export class QRSsa extends PopupBoxCollection {
       diagram,
       layout,
       transform,
-      'triangle',
-      TriangleCollection,
-      'triangle_ssa',
+      'collection',
+      CommonCollection,
     );
-
-    this.setTitle('Side-Side-Angle Ambiguity');
-    const modifiers = {
-      angle: html.highlightWord('angle (a)', this.layout.colors.angleLabels),
-      adjacent_side: html.highlightWord(
-        'adjacent side (C)',
-        this.layout.colors.lineLabels,
-      ),
-      opposite_side: html.highlightWord(
-        'opposite side (A)',
-        this.layout.colors.lineLabels,
-      ),
-      angle_not_between_the_sides: html.highlight(this.layout.colors.angleLabels),
-    };
-    this.setDescription(`
-      <p>
-        If an |angle|, |adjacent_side| and |opposite_side| of a triangle is known, the remaining angles and side can be calculated with certainty only if the |opposite side is longer than or equal to the adjancent side or A ≥ C|.
-      </p>
-      <p>
-        Therefore, if two triangles share the same angle, adjancent side and opposite side, and the opposite side longer than or equal to the adjacent side, then the triangles will be congruent.
-      </p>`, modifiers);
-
-    this.setLink(details.details.uid);
-  }
-
-  show() {
-    this.setDiagramSize(2.5, 1);
-    super.show();
-    const tri = this._triangle;
-    const lay = this.layout.triangles.saa;
-    tri.setTriangleScenarios(
-      lay.tri1.points, lay.tri2.points,
-      lay.tri1.scenario, lay.tri2.scenario,
-    );
-    tri.show();
-    tri._tri1.show();
-    tri._tri2.show();
-    tri._tri1._line.show();
-    tri._tri2._line.show();
-    tri._tri1._angle1.showAll();
-    tri._tri1._dimension12.showAll();
-    tri._tri1._dimension23.showAll();
-    tri._tri2._angle1.showAll();
-    tri._tri2._dimension12.showAll();
-    tri._tri2._dimension23.showAll();
-    tri.transform.updateScale(0.7, 0.7);
-    tri.setPosition(0, 0.4);
-    this.diagram.animateNextFrame();
-  }
-}
-
-export class QRCongruentTriangles extends PopupBoxCollection {
-  _triangle: TriangleCollection;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'triangle',
-      TriangleCollection,
-      'triangle_congruent',
-    );
-
-    this.setTitle('Congruent Triangles');
-    const modifiers = {
-      side_lengths: html.highlight(this.layout.colors.lineLabels),
-      angles: html.highlight(this.layout.colors.angleLabels),
-      rotated: html.clickWord(
-        'rotated', 'id_lesson__QRCongruentTriangles__rotated',
-        this._triangle.toggleCongruentRotate, [this._triangle],
-        this.layout.colors.diagram.action,
-      ),
-      flipped: html.clickWord(
-        'flipped', 'id_lesson__QRCongruentTriangles__flipped',
-        this._triangle.toggleCongruentFlip, [this._triangle],
-        this.layout.colors.diagram.action,
-      ),
-    };
-    this.setDescription(`
-      <p>
-        Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|.
-      </p>
-      <p>
-        Shapes remain |congruent| if one is |rotated| or |flipped|.
-      </p>`, modifiers);
-
-    this.setLink(details.details.uid);
-  }
-
-  show() {
-    this.setDiagramSize(2.5, 1.3);
-    super.show();
-    const tri = this._triangle;
-    const lay = this.layout.triangles.congruent;
-    tri.setTriangleScenarios(
-      lay.points, lay.points,
-      lay.tri1.scenario, lay.tri2.scenario,
-    );
-    tri.showAll();
-    tri._tri2.isMovable = true;
-    tri._tri2.isTouchable = true;
-    tri._tri2.touchInBoundingRect = true;
-    tri._tri2.move.type = 'rotation';
     this.hasTouchableElements = true;
-    tri.hasTouchableElements = true;
-    tri.transform.updateScale(0.7, 0.7);
-    tri.setPosition(0, 0.4);
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      angle_a: highlightWord('angle (a)', colors.angles),
+    };
+    this.setTitle('Side Side Angle Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|. This case is often called the |Side Side Angle| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._angle1.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._angle1.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
     this.diagram.animateNextFrame();
   }
 }
 
-function attachQuickReference() {
+export class QRAsa extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_angles: highlight(colors.angles),
+      side_between: highlight(colors.sides),
+    };
+    this.setTitle('Angle Side Angle Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
+      'This case is often called the |Angle Side Angle| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._side01.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._side01.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+export class QRAas extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      two_angles: highlight(colors.angles),
+      side_not_between: highlight(colors.sides),
+    };
+    this.setTitle('Angle Angle Side Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|. This case is often called the |Angle Angle Side| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._side20.hide();
+    congruent._tri1._side12.hide();
+    congruent._tri1._angle0.hide();
+    congruent._tri2._side20.hide();
+    congruent._tri2._side12.hide();
+    congruent._tri2._angle0.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+
+export class QRSss extends PopupBoxCollection {
+  _collection: CommonCollection;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
+    this.hasTouchableElements = true;
+
+    // const coll = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      side_lengths: highlight(colors.sides),
+    };
+    this.setTitle('Side Side Side Triangle Congruency Test');
+    this.setDescription([
+      'If two triangles share the same |side_lengths|, then they will be |congruent|. This case is often called the |Side Side Side| case.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    const congruent = collection._congruentTriangles;
+    congruent.showAll();
+    collection.resetTriangle();
+    congruent._tri1.setScenario('qrLeft');
+    congruent._tri2.setScenario('qrRight');
+    congruent._tri1._angle0.hide();
+    congruent._tri1._angle1.hide();
+    congruent._tri1._angle2.hide();
+    congruent._tri2._angle0.hide();
+    congruent._tri2._angle1.hide();
+    congruent._tri2._angle2.hide();
+    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.diagram.animateNextFrame();
+  }
+}
+
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -419,14 +371,15 @@ function attachQuickReference() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Asa: QRAsa,
-    Sss: QRSss,
-    Sas: QRSas,
-    Aas: QRAas,
+    CongruentTriangles: QRCongruentTriangles,
     Aaa: QRAaa,
+    Sas: QRSas,
     Ssa: QRSsa,
-    Main: QRCongruentTriangles,
+    Asa: QRAsa,
+    Aas: QRAas,
+    Sss: QRSss,
   };
 }
 
-attachQuickReference();
+attachQuickReference1();
+

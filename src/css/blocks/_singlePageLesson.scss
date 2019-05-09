@@ -1,0 +1,144 @@
+.single_page_lesson__container {
+  // padding: 20px;
+  // margin-left: 20px;
+  // margin-right: 20px;
+  // background-color: color('white', 'lightest');
+  color: color('grey', 'darkest');
+  background-color: color('lesson', 'title-background');
+  // position: relative;
+}
+
+// .single_page_lesson__container .lesson__diagram {
+//   background-color: none;
+// }
+
+.single_page_lesson__header1 {
+  padding-top: 0.6em;
+  padding-bottom: 0.2em;
+  font-size: 1.6em;
+  font-weight: 500;
+}
+
+.single_page_lesson__container .single_page_lesson__header1:first-child {
+  padding-top: 0;
+}
+
+.single_page_lesson__header2 {
+  padding-top: 0.6em;
+  padding-bottom: 0.2em;
+  font-size: 1.2em;
+  font-weight: 700;
+}
+
+.single_page_lesson__diagram_container {
+  // position: absolute;
+  // width: 100%;
+  // height: 100%;
+  // width: 500px;
+  // height: 1000px;
+  position: absolute;
+  width: 100%;
+  height: 150%;
+  left: 0;
+  top: 0;
+  margin-left: 0;
+}
+
+// #id_diagram__text__high {
+//   width: 10px;
+//   height: 10px;
+// }
+
+#id_diagram__text__low {
+  width: 100%;
+  height: 100%;
+}
+
+.single_page_lesson__container .diagram__html {
+  pointer-events: none;
+  // touch-action: auto;
+}
+
+.single_page_lesson__container .highlight_word {
+  color: color('diagram', 'text-keyword', 'dark');
+}
+
+.single_page_lesson__text_container {
+  position: static;
+  background-color: color('white', 'lightest');
+  padding: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.single_page_lesson__container .lesson__diagram {
+  max-width: none;
+  max-height: none;
+  background-color: transparent;
+}
+
+.single_page_lesson__figure {
+  position: relative;
+  overflow: hidden;
+}
+
+.single_page_lesson__figure_image {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+}
+
+#hidden_offscreen {
+  top: -10000px;
+  position: absolute;
+  width: 100px;
+  height: 100px;
+}
+
+#lesson__qr__diagram__singlePage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#single_page_lesson__qr__overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  z-index: -1;
+}
+
+#single_page_lesson__qr__overlay #lesson__qr__container {
+  position: relative;
+  width: var(--lesson__qr_width);
+  height: var(--lesson__qr_height);
+  top: calc(50% - var(--lesson__qr_height) / 2);
+  // left: calc(50% - var(--lesson__qr_width) / 2);
+  pointer-events: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#single_page_lesson__qr__overlay .diagram__html {
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+}
+
+// #single_page_lesson__qr__overlay .lesson__popup_box__text {
+//   // font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+//   font-size: var(--lesson__popup_font_size);
+// }
+
+// #single_page_lesson__qr__overlay .lesson__popup_box__title_text {
+//   font-size: var(--lesson__popup_font_size);
+// }
+
+// #single_page_lesson__qr__overlay .lesson__popup_box__link {
+//   font-size: var(--lesson__popup_font_size);
+// }

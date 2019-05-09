@@ -8,6 +8,6 @@ const { Point } = Fig;
 
 export default function lessonLayout() {
   const layout: Object = commonLessonLayout();
-  layout.position = new Point(0, 0.3);
+  layout.position = new Point(0, 0.45);
   return layout;
 }

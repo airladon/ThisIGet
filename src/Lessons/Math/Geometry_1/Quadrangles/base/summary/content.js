@@ -1,22 +1,25 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-// import {
-//   click, highlight, clickWord,
-// } from '../../../../../../js/tools/htmlGenerator';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -30,56 +33,16 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const quad = diag._quad;
-    const rect = diag._rect;
-    const square = diag._square;
+    const coll = diag._collection;
 
     this.addSection({
-      title: 'Quadrangle',
-      setContent: `
-        <p>
-          A |quadrangle|, or |quadrilateral| is a shape with |four sides| and |four angles|. A quadrangle's angles always add up to 360º.
-        </p>
-        ${new Definition('Quadrangle', 'Latin', ['quattuor', 'four', 'angulus', 'angle, corner']).html('id_lesson__quadrilateral_definition')}
-        ${new Definition('Quadrilateral', 'Latin', ['quattuor', 'four', 'latus, later', 'side']).html('id_lesson__quadrilateral_definition', 'lesson__definition_low')}
-      `,
-      showOnly: [
-        quad, quad._quad1, quad._quad2, quad._quad3,
+      title: '',
+      setContent: [
+        'A |quadrangle|, or |quadrilateral| is a shape with |four sides| and |four angles|. A quadrangle\'s angles will always add to |360º|.',
+        `${new Definition('Quadrangle', 'Latin', ['quattuor', 'four', 'angulus', 'angle, corner']).html({ classes: 'lesson__definition_high', color: colors.sides })}`,
+        `${new Definition('Quadrilateral', 'Latin', ['quattuor', 'four', 'latus, later', 'side']).html(colors.sides)}`,
       ],
-    });
-
-    this.addSection({
-      title: 'Rectangle',
-      setContent: `
-        <p>
-          A |rectangle|, is a quadrangle with |all angles equal to 90º|. A rectangle's |opposite sides are parallel and equal length|.
-        </p>
-        ${new Definition('Rectangle', 'Latin', ['rectus', 'right', 'angulus', 'corner, angle']).html('id_lesson__rectangle_definition', 'lesson__definition_low')}
-      `,
-      showOnly: [
-        rect, rect._rect,
-      ],
-      show: [
-        rect._rect._rightAngle1, rect._rect._rightAngle2,
-        rect._rect._rightAngle3, rect._rect._rightAngle4,
-        rect._rect._lineA, rect._rect._lineB,
-        rect._rect._lineC, rect._rect._lineD,
-      ],
-      hide: [
-        rect._rect._lineC._label.__0,
-        rect._rect._lineD._label.__0,
-      ],
-    });
-
-    this.addSection({
-      title: 'Square',
-      setContent: `
-        <p>
-          A |square|, is a |rectangle with all sides equal|. Therefore a squares's angles are all 90º and its opposite sides are parallel.
-        </p>
-        ${new Definition('Square', 'Old French', ['esquare', 'square'], 'Latin', ['quadra', 'square']).html('id_lesson__square_definition', 'lesson__definition_low')}
-      `,
-      show: [square],
+      show: [coll._quad1, coll._quad2, coll._quad3],
     });
   }
 }

@@ -1,24 +1,29 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
-// import { easeinout } from '../../../../js/diagram/tools/mathtools';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
-import lessonLayout from './layout';
 import details from '../../details';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  actionWord, onClickId,
-  highlightWord, centerVH, centerV,
+  click,
+  centerV,
+  withClass,
+  highlight,
+  // clickWord,
 } = Fig.tools.html;
-const { Transform } = Fig;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -26,317 +31,244 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new CommonCollection(this.diagram, layout);
+    // this.loadQRs([
+    //   'qr_names_here',
+    // ]);
   }
 
   addSections() {
-    const shapes = this.diagram.elements._shapes;
-    const circle = this.diagram.elements._circle;
+    const diag = this.diagram.elements;
+    const shapes = diag._shapes;
+    const angle = diag._angle;
+    const example = diag._example;
+    const equalAnglesExample = diag._equalAnglesExample;
 
     this.addSection({
       title: 'Corners',
-      setContent: () => `<p>
-          Many |_shapes| have |_corners|.
-        </p> <p>
-          Somes corners are |_more_sharp|, while others are |_less_sharp|.
-        </p><p style="margin-top:33%">
-          The |_sharpness| of the corner is a property that can describe a shape.
-        </p>`,
-      modifiers: {
-        _shapes: actionWord('shapes', 'id_shapes', colors.lines),
-        _corners: actionWord('corners', 'id_corners', colors.corners),
-        _more_sharp: actionWord('more sharp', 'id_more_sharp', colors.moreSharp),
-        _less_sharp: actionWord('less sharp', 'id_less_sharp', colors.lessSharp),
-        _sharpness: highlightWord('sharpness', 'english'),
-      },
-      hideOnly: [
-        circle,
-        shapes._square._corners,
-        shapes._square._lessSharpCorners,
-        shapes._triangle._moreSharpCorners,
-        shapes._triangle._corners,
-        shapes._pent._corners,
-        shapes._pent._moreSharpCorners,
-        shapes._pent._lessSharpCorners,
+      setContent: [
+        'Many |shapes| have |corners|.',
+        'Some corners are |more_sharp|, while others are |less_sharp|.',
+        withClass(['The |sharpness| of a corner is a property that can describe a shape.'], 'content_angles_bottom'),
       ],
-      setSteadyState: () => {
-        onClickId('id_shapes', shapes.pulseShapes, [shapes]);
-        onClickId('id_corners', shapes.toggleCorners, [shapes]);
-        onClickId('id_more_sharp', shapes.toggleMoreSharpCorners, [shapes]);
-        onClickId('id_less_sharp', shapes.toggleLessSharpCorners, [shapes]);
+      modifiers: {
+        shapes: click(diag.pulseShapeElement, [diag, 'lines'], colors.lines),
+        corners: click(diag.pulseShapeElement, [diag, 'corners'], colors.lines),
+        more_sharp: click(diag.pulseShapeElement, [diag, 'moreSharp'], colors.moreSharp),
+        less_sharp: click(diag.pulseShapeElement, [diag, 'lessSharp'], colors.lessSharp),
       },
+      show: [shapes._shape1._line, shapes._shape2._line, shapes._shape3._line],
     });
 
     this.addSection({
-      setContent: () => centerVH(`
-          <p>
-            How can we |_measure| corner sharpness?
-          </p> 
-          <p>
-            What |_name| do we give to the sharpness?
-          </p>
-        `),
-      showOnly: [],
-      modifiers: {
-        _measure: highlightWord('measure', 'english'),
-        _name: highlightWord('name', 'english'),
-      },
+      setContent: centerV([
+        'Instead of calling a corner more or less |sharp|, it is useful to |define| it better and ultimately be able to |measure| it.',
+      ]),
     });
 
     this.addSection({
-      setContent: () => `
-        <p>
-          Let's start with two |_lines|.
-        </p>
-        `,
+      setContent: [
+        'To |create| a corner, start with two |lines|.',
+      ],
       modifiers: {
-        _lines: actionWord('lines', 'id_reference_lines', colors.reference),
+        lines: click(diag.pulseLines, [diag], colors.lines),
       },
-      showOnly: () => {
-        this.diagram.elements.showOnly([
-          circle._fakeRadius,
-          circle._reference,
-          circle,
-        ]);
-      },
-      setSteadyState: () => {
-        circle._fakeRadius.transform.updateTranslation(-1, 0);
-        circle._fakeRadius.transform.updateRotation(Math.PI / 2);
-        circle._reference.transform.updateTranslation(1, 0);
-        circle._reference.transform.updateRotation(Math.PI / 2);
-
-        onClickId('id_reference_lines', circle.pulseLines, [circle]);
-      },
-      transitionFromAny: (done) => {
-        circle._fakeRadius.animateTo(new Transform()
-          .rotate(Math.PI / 2)
-          .translate(-1, 0), 1);
-
-        circle._reference.animateTo(new Transform()
-          .rotate(Math.PI / 2)
-          .translate(1, 0), 1, 0, 0, done);
+      setEnterState: () => {
+        angle._line1.setScenario('offScreen');
+        angle._line2.setScenario('offScreen');
+        angle._line1.isTouchable = false;
       },
       transitionFromPrev: (done) => {
-        circle._fakeRadius.transform.updateTranslation(-4.5, 1);
-        circle._fakeRadius.transform.updateRotation(0);
-        circle._reference.transform.updateTranslation(4.5, 1);
-        circle._reference.transform.updateRotation(Math.PI);
-        done();
+        angle._line1.animations.new()
+          .scenario({ target: 'vertical', duration: 1 })
+          .whenFinished(done)
+          .start();
+        angle._line2.animations.new()
+          .scenario({ target: 'vertical', duration: 1 })
+          .start();
+      },
+      setSteadyState: () => {
+        angle._line1.setScenario('vertical');
+        angle._line2.setScenario('vertical');
+      },
+      show: [angle._line1, angle._line2],
+    });
+
+    this.addSection({
+      setContent: [
+        'Place them on top of each other, and |anchor| one end.',
+      ],
+      modifiers: {
+        // lines: click(diag.pulseLines, [diag], colors.lines),
+        anchor: click(diag.pulseAnchor, [diag, null], colors.center),
+      },
+      setEnterState: () => {
+        angle._line1.setScenario('vertical');
+        angle._line2.setScenario('vertical');
+        angle._line1.isTouchable = false;
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .scenario({ target: 'start', duration: 1 })
+          .whenFinished(done)
+          .start();
+        angle._line2.animations.new()
+          .scenario({ target: 'start', duration: 1 })
+          .start();
+        diag.pulseAnchor();
+      },
+      setSteadyState: () => {
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._anchor.show();
+      },
+      show: [angle._line1, angle._line2],
+    });
+
+    this.addSection({
+      setContent: [
+        'Rotate one line by |pushing| the free end, and a |corner| is formed.',
+      ],
+      modifiers: {
+        lines: click(diag.pulseLines, [diag], colors.lines),
+        pushing: click(diag.push, [diag], colors.arrow),
+      },
+      setEnterState: () => {
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._arrow.setColor(colors.arrow);
+        angle._line1.isTouchable = true;
+      },
+      setSteadyState: () => {
+        diag.updateAngle();
+        diag.pulseArrow();
+      },
+      setLeaveState: () => {
+        angle._arrow.setColor(colors.arrow);
+      },
+      show: [angle._line1, angle._line2, angle._anchor, angle._arrow],
+    });
+
+    this.addSection({
+      setContent: [
+        '|Small_rotation| creates a |sharper corner|.',
+        '|Larger_rotation| creates a |less sharp corner|.',
+      ],
+      modifiers: {
+        Small_rotation: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
+        Larger_rotation: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
+      },
+      setEnterState: () => {
+        const r = angle._line1.getRotation();
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._line1.setRotation(r);
+        angle._line1.isTouchable = true;
+      },
+      transitionFromPrev: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
       },
       transitionFromNext: (done) => {
-        circle._fakeRadius.transform = circle._radius.transform._dup();
-        done();
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
       },
-    });
-    this.addSection({
-      setContent: () => `
-        <p>
-          Move the lines on top of each other and |_anchor| one end.
-        </p>
-        <p>
-          Rotate one line by |_pushing| the free end and a |_corner| is formed.
-        </p>
-        `,
-      modifiers: {
-        _anchor: actionWord('anchor', 'id_anchor', colors.anchor),
-        _pushing: actionWord('pushing', 'id_push', colors.arrow),
-        _corner: actionWord('corner', 'id_corner', colors.corners),
-      },
-      showOnly: [
-        circle,
-        circle._radius,
-        circle._reference,
-        circle._anchor,
-      ],
       setSteadyState: () => {
-        circle._radius.transform.updateRotation(0.01);
-        circle._radius.transform.updateTranslation(0, 0);
-        circle._reference.transform.updateRotation(0);
-        circle._reference.transform.updateTranslation(0, 0);
-        circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_anchor', circle.pulseAnchor, [circle]);
-        onClickId('id_push', circle.pushRadius, [circle]);
-        onClickId('id_corner', circle.toggleCorners, [circle]);
-        circle._arrow.show();
-        circle.pulseArrow();
+        angle._line1.setRotation(1);
       },
-      transitionPrev: (done) => {
-        circle._fakeRadius.transform = circle._radius.transform._dup();
-        done();
-      },
-      transitionFromAny: (done) => {
-        circle._reference.animateTo(new Transform()
-          .rotate(0)
-          .translate(0, 0), 1);
-        circle._radius.animateTo(new Transform()
-          .rotate(0)
-          .translate(0, 0), 1.3, 0, 0, done);
+      show: [angle._line1, angle._line2, angle._anchor],
+    });
 
-        if (circle._anchor.color[3] === 0.01) {
-          circle._anchor.color[3] = 1;
-          circle._anchor.disolveInWithDelay(1, 0.3);
-        }
+    const common = {
+      setEnterState: () => {
+        const r = angle._line1.getRotation();
+        angle._line1.setScenario('start');
+        angle._line2.setScenario('start');
+        angle._line1.setRotation(r);
+        angle._line1.isTouchable = true;
       },
       transitionFromPrev: (done) => {
-        circle._anchor.color[3] = 0.01;
-        circle._radius.transform = circle._fakeRadius.transform._dup();
-        done();
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
       },
-    });
-
-    this.addSection({
-      setContent: () => `
-        <p>
-          |_small_rotation| results in a |_sharp_corner|.
-        </p>
-        <p>
-          |_large_rotation| results in a |_less_sharp_corner|.
-        </p>
-        `,
-      modifiers: {
-        _small_rotation: actionWord('Small rotation', 'id_small_rotation', colors.moreSharp),
-        _large_rotation: actionWord('Large rotation', 'id_large_rotation', colors.lessSharp),
-        _sharp_corner: actionWord('sharp corner', 'id_sharp_corner', colors.moreSharp),
-        _less_sharp_corner: actionWord('less sharp corner', 'id_less_sharp_corner', colors.lessSharp),
+      transitionFromNext: (done) => {
+        angle._line1.animations.new()
+          .rotation({ target: 1, duration: 1 })
+          .whenFinished(done)
+          .start();
       },
-      showOnly: [
-        circle,
-        circle._radius,
-        circle._reference,
-        circle._anchor,
-      ],
       setSteadyState: () => {
-        const smallRotation = [circle, Math.PI / 7, 0, 1, () => {}];
-        const largeRotation = [circle, 5 * Math.PI / 6, 0, 1, () => {}];
-        circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_small_rotation', circle.rotateTo, smallRotation);
-        onClickId('id_large_rotation', circle.rotateTo, largeRotation);
-        onClickId('id_sharp_corner', circle.rotateTo, smallRotation);
-        onClickId('id_less_sharp_corner', circle.rotateTo, largeRotation);
-        circle._reference.transform.updateTranslation(0, 0);
-        circle._reference.transform.updateRotation(0);
-        circle._radius.transform.updateTranslation(0, 0);
+        angle._line1.setRotation(1);
       },
-      transitionFromAny: (done) => {
-        if (circle._radius.transform.r() < Math.PI / 6) {
-          circle._reference.animateTo(new Transform()
-            .rotate(0)
-            .translate(0, 0), Math.PI / 6);
-          circle._radius.animateTo(new Transform()
-            .rotate(0.5)
-            .translate(0, 0), Math.PI / 6, 0, 0, done);
-        } else {
-          done();
-        }
+      show: [angle._line1, angle._line2, angle._fill],
+    };
+
+    this.addSection(common, {
+      setContent: [
+        'So the |amount| of |rotation| determines the sharpness of the corner.',
+      ],
+      modifiers: {
+        amount: click(diag.pulseFill, [diag], colors.angles),
+        rotation: click(diag.rotateLine, [diag, ''], colors.moreSharp),
       },
     });
 
     this.addSection({
       title: 'Angle',
-      setContent: () => `
-        <p>
-        So the |_amount| of |_rotation| determines the sharpness of the corner.
-        </p>
-        `,
+      setContent: centerV([
+        'What |name| do we use for corner sharpness?',
+        'The |Latin| word for |corner| is |angulus|.',
+        'Our word for |corner sharpness| comes from this Latin root, and is |angle|.',
+      ]),
       modifiers: {
-        _amount: actionWord('amount', 'id_amount', colors.angleText),
-        _rotation: actionWord('rotation', 'id_push', colors.arrow),
+        Latin: highlight('lesson__latin'),
+        angulus: highlight('lesson__latin'),
       },
-      showOnly: [
-        circle,
-        circle._radius,
-        circle._reference,
-        circle._anchor,
-        circle._angle,
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'So, a |larger| |angle| is a less sharp corner, and a |smaller| |_angle| is a more sharp corner.',
       ],
-      setSteadyState: () => {
-        circle._reference.transform.updateTranslation(0, 0);
-        circle._reference.transform.updateRotation(0);
-        circle._radius.transform.updateTranslation(0, 0);
-        onClickId('id_push', circle.pushRadius, [circle]);
-        onClickId('id_amount', circle.pulseAngle, [circle]);
-        onClickId('id_angle', circle.pulseAngle, [circle]);
-        onClickId('id_corner', circle.toggleCorners, [circle]);
-        if (circle._radius.transform.r() < 0.2) {
-          circle._radius.transform.updateRotation(Math.PI / 6);
-        }
-        circle.updateRotation();
+      modifiers: {
+        smaller: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
+        larger: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
+        angle: click(diag.pulseFill, [diag], colors.angles),
+        _angle: click(diag.pulseFill, [diag], colors.angles),
       },
     });
 
     this.addSection({
-      setContent: () => centerV(`
-          <p>
-            What |_name| do we use for corner sharpness?
-          </p> 
-          <p>
-            The |_Latin| word for |_corner| is |_angulus|.</p>
-          <p>
-            Our word for |_corner_sharpness| comes from this Latin root and is |_angle|.</p>
-          </p>
-        `),
-      showOnly: [],
-      modifiers: {
-        _angle: highlightWord('angle', 'english'),
-        _angulus: highlightWord('angulus', 'latin'),
-        _Latin: highlightWord('Latin', 'latin'),
-        _corner: highlightWord('corner', 'english'),
-        _corner_sharpness: highlightWord('corner sharpness', 'english'),
-        _name: highlightWord('name', 'english'),
-      },
-    });
-
-    this.addSection({
-      setContent: () => `
-        <p>
-        So |_angle| is the word that describes how sharp a corner is.
-        </p>
-        <p>
-        A |_larger_angle| is a less sharp corner, and a |_smaller_angle| is a more sharp corner.
-        </p>
-        `,
-      modifiers: {
-        _angle: actionWord('angle', 'id_angle', colors.angleText),
-        _smaller_angle: actionWord('small angle', 'id_small_rotation', colors.moreSharp),
-        _larger_angle: actionWord('large angle', 'id_large_rotation', colors.lessSharp),
-      },
-      showOnly: [
-        circle,
-        circle._radius,
-        circle._reference,
-        circle._angle,
+      title: 'Markings',
+      setContent: [
+        'Angles are often |marked| in a shape with a |line| and |label|.',
       ],
+      modifiers: {
+        marked: click(diag.toggleAngle, [diag, null, true], colors.angles),
+        line: click(diag.pulseAngleLine, [diag], colors.angles),
+        label: click(diag.pulseAngleLabel, [diag], colors.angles),
+      },
+      show: [example],
       setSteadyState: () => {
-        circle._reference.transform.updateTranslation(0, 0);
-        circle._reference.transform.updateRotation(0);
-        circle._radius.transform.updateTranslation(0, 0);
-        const bindArray = [circle, 1, () => {}];
-        circle._anchor.color = circle.colors.anchor.slice();
-        onClickId('id_small_rotation', circle.rotateToRandomSmall, bindArray);
-        onClickId('id_large_rotation', circle.rotateToRandomLarge, bindArray);
-
-        onClickId('id_angle', circle.pulseAngle, [circle]);
-        if (circle._radius.transform.r() < 0.2) {
-          circle._radius.transform.updateRotation(Math.PI / 6);
-        }
-        circle.updateRotation();
+        diag.toggleAngle(0, false);
       },
     });
 
     this.addSection({
-      setContent: () => centerV(`
-          <p>
-            Now, describing the angle as more sharp or less sharp is not that useful.
-          </p> 
-          <p>
-            So how can we more precisely describe, or |_measure| the angle?
-          </p>
-        `),
-      showOnly: [],
+      setContent: [
+        'Angles are sometimes marked with |multiple_lines|. Angles with the same number of lines are equal.',
+      ],
       modifiers: {
-        _measure: highlightWord('measure', 'english'),
-        _angle: highlightWord('angle', 'english'),
+        multiple_lines: click(diag.pulseDoubleAngles, [diag], colors.angles),
       },
+      show: [equalAnglesExample],
     });
   }
 }

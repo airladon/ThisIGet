@@ -1,0 +1,23 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  sides:                  color('blue'),
+  angles:                 color('green'),
+  isosceles:              color('red'),
+  equalSide:              color('blue', darker),
+  fill:                   color('blue', darkest),
+  description:            color('grey', base),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+// $colors: (
+//   line:             darken(map-get($geometry_colors, lines), 30),
+//   intersectingLine: lighten(map-get($geometry_colors, lines), 0),
+// );
+
+// body {
+//   @include color_vars($colors);
+// }

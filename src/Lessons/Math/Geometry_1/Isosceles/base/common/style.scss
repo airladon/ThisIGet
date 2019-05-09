@@ -1,16 +1,9 @@
 @import '../../../geometry';
 
 $colors: (
-  lines:             map-get($geometry_colors, lines),
-  angles:            color('diagram', 'construction8'),
-  equalLength:       color('diagram', 'construction9'),
-  points:            color('diagram', 'construction9'),
-  height:            color('diagram', 'construction8'),
-  construction:      color('diagram', 'construction1'),
-  //
-  // height:            color('diagram', 'construction7'),
-  // border:            color('diagram', 'construction8'),
-  // radius:            color('diagram', 'construction7'),
+  sides:             color('blue'),
+  angles:            color('red'),
+  disabled:          color('diagram', 'disabled', 'darker'),
 );
 
 body {
@@ -19,16 +12,4 @@ body {
 
 .diagram__text {
   z-index: 0;
-}
-
-// .lesson__eqn_nav__description {
-//   width: 35em;
-// }
-
-.lesson__eqn_nav__description {
-  width: 10em;
-}
-
-.lesson__eqn_nav__table {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
 }

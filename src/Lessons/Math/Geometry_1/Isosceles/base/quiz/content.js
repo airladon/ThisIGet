@@ -1,11 +1,9 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent,
+  PresentationLessonContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
-// import {
-//   click, centerH,
-// } from '../../../../../../js/tools/htmlGenerator';
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -13,10 +11,17 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
+
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,37 +34,20 @@ class Content extends LessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const quiz = diag._quiz;
+    const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    const tri = quiz._triangle;
 
     this.addSection({
-      title: 'Enter_title_here',
-      setContent: ['Enter_content_here'],
-    });
-    this.addSection({
-      title: 'Enter_title_here',
-      setContent: [
-        'Enter_question_here',
-      ],
-      modifiers: {
-      },
-      setInfo: `<ul>
-          <li></li>
-          </ul>
-      `,
-      infoModifiers: {
-      },
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {
-      },
-      showOnly: [
-      ],
-      show: [
-      ],
+      title: '',
+      setContent: ['Find the missing property:'],
+      setEnterState: () => {},
+      showOnly: [],
+      show: [tri],
       setSteadyState: () => {
+        quiz.newProblem();
       },
+      setLeaveState: () => {},
     });
   }
 }

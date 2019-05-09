@@ -1,18 +1,21 @@
 // @flow
 import Fig from 'figureone';
-import { LessonContent } from '../../../../../../js/Lesson/LessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
+import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from '../quickReference/layout';
 import details from '../../details';
+import version from '../version';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const { click, centerH } = Fig.tools.html;
+const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
-class Content extends LessonContent {
+const { uid } = details.details;
+const vid = version.details.uid;
+const qrids = version.details.qr;
+
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -21,25 +24,25 @@ class Content extends LessonContent {
 
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
-    this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      `${uid}/${vid}`,
+    ]);
   }
 
   addSections() {
-    const diag = this.diagram.elements;
-
     this.addSection({
       title: 'QR Test',
       setContent: () => {
         let out = '<p>Quick Reference Popups</p><p></p>';
-        Object.keys(diag.elements).forEach((key) => {
-          out = `${out}<p style="margin-top:0%">|${key}|</p>`;
+        qrids.forEach((qrid) => {
+          out += `<p>|${qrid}|</p>`;
         });
-        return centerH(out);
+        return out;
       },
       modifiers: () => {
         const out = {};
-        Object.keys(diag.elements).forEach((key) => {
-          out[key] = click(diag.elements[`${key}`].show, [diag.elements[`${key}`]]);
+        qrids.forEach((qrid) => {
+          out[qrid] = click(this.showQR, [this, uid, qrid]);
         });
         return out;
       },

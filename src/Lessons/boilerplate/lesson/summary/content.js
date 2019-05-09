@@ -1,21 +1,28 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../js/Lesson/LessonContent';
-// import {
-//   click,
-// } from '../../../../../js/tools/htmlGenerator';
-import LessonDiagram from './diagram';
-// import Definition from '../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
-import imgLink from '../tile.png';
-import imgLinkGrey from '../tile-grey.png';
-import details from '../details';
+import imgLink from '../../tile.png';
+import imgLinkGrey from '../../tile-grey.png';
+import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+
+// const {
+//   style,
+//   click,
+//   clickW,
+//   highlight,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -23,13 +30,36 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId, layout);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
   }
 
   addSections() {
     // const diag = this.diagram.elements;
+    // const coll = diag._collection;
 
     this.addSection({
+      title: '',
+      setContent: [
+        'Summary',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+      ],
+      modifiers: {},
+      // setInfo: `
+      //     <ul>
+      //       <li></li>
+      //     </ul>
+      // `,
+      infoModifiers: {},
+      interactiveElements: [
+        // interactiveItem(quiz._check),
+      ],
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     });
   }
 }

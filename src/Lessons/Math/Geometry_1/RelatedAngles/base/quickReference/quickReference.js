@@ -1,46 +1,22 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
-import OppositeCollection from '../common/diagramCollectionOpposite';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
+import CommonCollectionOpposite from '../common/diagramCollectionCommonOpposite';
+import CommonCollectionThreeLines from '../common/diagramCollectionCommonThreeLines';
 
-const { Transform } = Fig;
-const { html } = Fig.tools;
+const { Transform, Rect } = Fig;
+const {
+  click,
+  highlight,
+//   clickWord,
+} = Fig.tools.html;
 
-function showThreeLines(
-  threeLines: ThreeLinesCollection,
-  toggleFunction: Function,
-  color: Array<number>,
-) {
-  threeLines.transform.updateScale(0.6, 0.6);
-  threeLines.transform.updateRotation(0);
-  threeLines.calculateFuturePositions('corresponding');
-  threeLines.setFuturePositions();
-  threeLines.setPosition(0, 0.3);
-  threeLines.show();
-  threeLines._line1.showAll();
-  // threeLines._line1._end1.show();
-  // threeLines._line1._end2.show();
-  // threeLines._line1._mid.show();
-  threeLines._line2.showAll();
-  // threeLines._line2._end1.show();
-  // threeLines._line2._end2.show();
-  // threeLines._line2._mid.show();
-  threeLines._line3.showAll();
-  // threeLines._line3._end1.show();
-  // threeLines._line3._end2.show();
-  // threeLines._line3._mid.show();
-
-  toggleFunction();
-  threeLines._line1.setColor(color);
-  threeLines._line2.setColor(color);
-}
-
-export class QRCorrespondingAngles extends PopupBoxCollection {
-  _threeLines: ThreeLinesCollection;
+export class QROpposite extends PopupBoxCollection {
+  _collection: CommonCollectionOpposite;
 
   constructor(
     diagram: Object,
@@ -51,185 +27,247 @@ export class QRCorrespondingAngles extends PopupBoxCollection {
       diagram,
       layout,
       transform,
-      'threeLines',
-      ThreeLinesCollection,
+      'collection',
+      CommonCollectionOpposite,
     );
     this.hasTouchableElements = true;
 
+    const opp = this._collection;
+    const { colors } = this.layout;
     const modifiers = {
-      Corresponding_Angles: html.click(
-        this._threeLines.correspondingToggleAngles,
-        [this._threeLines, null], this.layout.colors.angleA,
-      ),
+      Opposite_angles: click(opp.toggleOpposite, [opp], colors.angle1),
     };
-
-    this.setTitle('Corresponding Angles');
-    this.setDescription('|Corresponding_Angles| are angles in the same relative position at the intersection of two lines and an intersecting line. When the two lines are parallel, |corresponding angles are equal|.', modifiers);
-    this.setLink(details.details.uid);
-  }
-
-  show() {
-    this.setDiagramSize(2.5, 1.55);
-    super.show();
-    showThreeLines(
-      this._threeLines,
-      this._threeLines.correspondingToggleAngles.bind(this._threeLines),
-      this.layout.colors.line,
-    );
-  }
-}
-
-export class QRAlternateAngles extends PopupBoxCollection {
-  _threeLines: ThreeLinesCollection;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'threeLines',
-      ThreeLinesCollection,
-    );
-    this.hasTouchableElements = true;
-
-    const modifiers = {
-      Alternate_angles: html.click(
-        this._threeLines.alternateToggleAngles,
-        [this._threeLines, null], this.layout.colors.angleA,
-      ),
-    };
-
-    this.setTitle('Alternate Angles');
-    this.setDescription('|Alternate_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |alternate angles are equal|.', modifiers);
-    this.setLink(details.details.uid);
-  }
-
-  show() {
-    this.setDiagramSize(2.5, 1.55);
-    super.show();
-    showThreeLines(
-      this._threeLines,
-      this._threeLines.alternateToggleAngles.bind(this._threeLines),
-      this.layout.colors.line,
-    );
-  }
-}
-
-
-export class QRInteriorAngles extends PopupBoxCollection {
-  _threeLines: ThreeLinesCollection;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'threeLines',
-      ThreeLinesCollection,
-    );
-    this.hasTouchableElements = true;
-
-    const modifiers = {
-      Interior_angles: html.click(
-        this._threeLines.interiorToggleAngles,
-        [this._threeLines, false], this.layout.colors.angleA,
-      ),
-    };
-
-    this.setTitle('Interior Angles');
-    this.setDescription('|Interior_angles| are angles on opposite sides of an intersecting line crossing two lines. When the two lines are parallel, |interior angles add up to 180º (π radians)|.', modifiers);
-    this.setLink(details.details.uid);
-  }
-
-  show() {
-    this.setDiagramSize(2.5, 1.55);
-    super.show();
-    this._threeLines.setUnits('deg');
-    showThreeLines(
-      this._threeLines,
-      this._threeLines.interiorToggleAngles.bind(this._threeLines, false),
-      this.layout.colors.line,
-    );
-  }
-}
-
-export class QROppositeAngles extends PopupBoxCollection {
-  _opposite: OppositeCollection;
-
-  constructor(
-    diagram: Object,
-    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
-  ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'opposite',
-      OppositeCollection,
-    );
-    this.hasTouchableElements = true;
-
-    const modifiers = {
-      opposite_angles: html.click(
-        this._opposite.toggleOppositeAngles,
-        [this._opposite, false], this.layout.colors.angleA,
-      ),
-    };
-
     this.setTitle('Opposite Angles');
-    this.setDescription('When two lines intersect, the |opposite_angles| at the intersection are always equal.', modifiers);
+    this.setDescription([
+      'When two lines intersect, four angles are created.',
+      '|Opposite_angles| at the intersection are |equal|.',
+    ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.55);
+    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
     super.show();
-    const opp = this._opposite;
-    opp.transform.updateScale(0.7, 0.7);
-
-    opp._angleA.setColor(this.layout.colors.angleA);
-    opp._angleB.setColor(this.layout.colors.angleB);
-    opp._angleC.setColor(this.layout.colors.angleA);
-    opp._angleD.setColor(this.layout.colors.angleB);
-    opp._line1.setColor(this.layout.colors.intersectingLine);
-    opp._line2.setColor(this.layout.colors.intersectingLine);
-
-    opp.calculateFuturePositions();
-    opp.setPosition(0, 0.15);
-
-    opp.show();
-    opp._angleA.show();
-    opp._angleC.show();
-    opp._line1.showAll();
-    // opp._line1._end1.show();
-    // opp._line1._end2.show();
-    // opp._line1._mid.show();
-    opp._line2.showAll();
-    // opp._line2._end1.show();
-    // opp._line2._end2.show();
-    // opp._line2._mid.show();
-
-    opp.setFuturePositions();
-    opp._angleA._arc.show();
-    opp._angleC._arc.show();
-    opp._angleA.showForm('a');
-    opp._angleC.showForm('a');
-    // opp.toggleOppositeAngles();
+    const collection = this._collection;
+    collection.show();
+    const opp = this._collection;
+    const { colors } = this.layout;
+    opp.setAngle(1, colors.angle1, 'a');
+    opp.setAngle(2, colors.angle1, 'b');
+    opp.setAngle(3, colors.angle1, 'a');
+    opp.setAngle(4, colors.angle1, 'b');
+    opp.hideAll();
+    opp._fig.setScenarios('qr');
+    opp._fig._line1.showAll();
+    opp._fig._line2.showAll();
+    opp._fig._angle1.showAll();
+    opp._fig._angle3.showAll();
+    opp._fig._line1.makeTouchable();
+    opp._fig._line2.makeTouchable();
+    opp.updateAngles();
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.5, 3, 3));
     this.diagram.animateNextFrame();
   }
 }
 
+export class QRCorresponding extends PopupBoxCollection {
+  _collection: CommonCollectionThreeLines;
 
-function attachQuickReference() {
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollectionThreeLines,
+    );
+    this.hasTouchableElements = true;
+
+    const three = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+      parallel: click(three.pulseParallel, [three], colors.lines),
+      two_lines: click(three.pulseParallel, [three], colors.lines),
+      intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      corresponding_angles_are_always_equal: highlight(colors.angle3),
+    };
+    this.setTitle('Corresponding Angles');
+    this.setDescription([
+      '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
+      'When the two lines are |parallel|, |corresponding_angles_are_always_equal|.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    collection.show();
+    const three = this._collection;
+    const { colors } = this.layout;
+    three.setScenarios('qr');
+    three.setAngle('A1', colors.angle1, 'a');
+    three.setAngle('A2', colors.angle1, 'a');
+    three.setAngle('B1', colors.angle1, 'b');
+    three.setAngle('B2', colors.angle1, 'b');
+    three.setAngle('C1', colors.angle1, 'c');
+    three.setAngle('C2', colors.angle1, 'c');
+    three.setAngle('D1', colors.angle1, 'd');
+    three.setAngle('D2', colors.angle1, 'd');
+    three.hideAll();
+
+    three._fig._angleA1.showAll();
+    three._fig._angleA2.showAll();
+    three._fig._line1.showAll();
+    three._fig._line2.showAll();
+    three._fig._line3.showAll();
+    three._fig._line1.makeTouchable();
+    three._fig._line2.makeTouchable();
+    three._fig._line3.makeTouchable();
+    three.updateIntersectingLineAngle();
+
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.5, 3, 3));
+    this.diagram.animateNextFrame();
+  }
+}
+
+export class QRAlternate extends PopupBoxCollection {
+  _collection: CommonCollectionThreeLines;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollectionThreeLines,
+    );
+    this.hasTouchableElements = true;
+
+    const three = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+      intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      two_lines: click(three.pulseParallel, [three], colors.lines),
+      parallel: click(three.pulseParallel, [three], colors.lines),
+      alternate_angles_are_always_equal: highlight(colors.angle3),
+    };
+    this.setTitle('Alternate Angles');
+    this.setDescription([
+      '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
+      'When the two lines are |parallel|, the |alternate_angles_are_always_equal|.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    collection.show();
+    const three = this._collection;
+    const { colors } = this.layout;
+    three.setScenarios('qr');
+    three.setAngle('A1', colors.angle1, 'c');
+    three.setAngle('A2', colors.angle1, 'a');
+    three.setAngle('B1', colors.angle1, 'd');
+    three.setAngle('B2', colors.angle1, 'b');
+    three.setAngle('C1', colors.angle1, 'a');
+    three.setAngle('C2', colors.angle1, 'c');
+    three.setAngle('D1', colors.angle1, 'b');
+    three.setAngle('D2', colors.angle1, 'd');
+    three.hideAll();
+
+    three._fig._angleC1.showAll();
+    three._fig._angleA2.showAll();
+    three._fig._line1.showAll();
+    three._fig._line2.showAll();
+    three._fig._line3.showAll();
+    three._fig._line1.makeTouchable();
+    three._fig._line2.makeTouchable();
+    three._fig._line3.makeTouchable();
+    three.updateIntersectingLineAngle();
+
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.5, 3, 3));
+    this.diagram.animateNextFrame();
+  }
+}
+
+export class QRInterior extends PopupBoxCollection {
+  _collection: CommonCollectionThreeLines;
+
+  constructor(
+    diagram: Object,
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollectionThreeLines,
+    );
+    this.hasTouchableElements = true;
+
+    const three = this._collection;
+    const { colors } = this.layout;
+    const modifiers = {
+      Interior_angles: click(three.toggleInterior, [three], colors.angle1),
+      intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      two_lines: click(three.pulseParallel, [three], colors.lines),
+      parallel: click(three.pulseParallel, [three], colors.lines),
+      interior_angles_always_add_to_180º: highlight(colors.angle3),
+    };
+    this.setTitle('Interior Angles');
+    this.setDescription([
+      '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
+      'When the two lines are |parallel|, the |interior_angles_always_add_to_180º|.',
+    ], modifiers);
+    this.setLink(details.details.uid);
+  }
+
+  show() {
+    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    super.show();
+    const collection = this._collection;
+    collection.show();
+    const three = this._collection;
+    const { colors } = this.layout;
+    three.setScenarios('qr');
+    three.setAngle('A2', colors.angle1, '180º – a');
+    three.setAngle('B2', colors.angle1, '180º – b');
+    three.setAngle('C1', colors.angle1, 'b');
+    three.setAngle('D1', colors.angle1, 'a');
+    three.hideAll();
+
+    three._fig._angleA2.showAll();
+    three._fig._angleD1.showAll();
+    three._fig._line1.showAll();
+    three._fig._line2.showAll();
+    three._fig._line3.showAll();
+    three._fig._line1.makeTouchable();
+    three._fig._line2.makeTouchable();
+    three._fig._line3.makeTouchable();
+    three.updateIntersectingLineAngle();
+
+    this.transformToQRWindow(collection, new Rect(-1.5, -1.5, 3, 3));
+    this.diagram.animateNextFrame();
+  }
+}
+
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -237,11 +275,12 @@ function attachQuickReference() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Opposite: QROppositeAngles,
-    Interior: QRInteriorAngles,
-    Alternate: QRAlternateAngles,
-    Corresponding: QRCorrespondingAngles,
+    Opposite: QROpposite,
+    Corresponding: QRCorresponding,
+    Alternate: QRAlternate,
+    Interior: QRInterior,
   };
 }
 
-attachQuickReference();
+attachQuickReference1();
+

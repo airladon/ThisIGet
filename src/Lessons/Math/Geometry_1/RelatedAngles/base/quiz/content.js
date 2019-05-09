@@ -1,21 +1,27 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent, interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
-const { click, centerH } = Fig.tools.html;
+const {
+  // click,
+  // centerV,
+  // highlight,
+  // clickWord,
+  style,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,46 +35,16 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const quizA1 = diag._quizA1;
+    const quiz = diag._quiz;
+    const fig = quiz._main._fig;
 
     this.addSection({
-      title: 'Related Angles 1',
-      setContent: centerH(`
-        <p style="margin-top:3%">
-          Enter the unknown angle in degrees.
-        </p>
-      `),
-      modifiers: {
-        red_line: click(quizA1.pulseLine2, [quizA1], colors.quizLine),
-        blue_line: click(quizA1.pulseLine1, [quizA1], colors.line),
-      },
-      setInfo: 'Touch the grey box to enter the angle',
-      interactiveElements: [
-        interactiveItem(quizA1._input, ''),
-      ],
-      setEnterState: () => {
-        quizA1.setPosition(0, 0);
-        quizA1.hasTouchableElements = true;
-        quizA1.randomizeLines();
-        quizA1._input.setValue('');
-      },
-      showOnly: [
-        quizA1,
-        quizA1._lines,
-      ],
-      show: [
-        quizA1._lines._line1,
-        quizA1._lines._line2,
-        quizA1._lines._line3,
-      ],
-      transitionFromAny: (done) => {
-        quizA1.moveToFuturePositions(2, done);
-      },
+      title: '',
+      setContent: style({ top: 0, left: 30 }, ['Enter the unknown angle in degrees.']),
+      show: [fig._line1, fig._line2, fig._line3, quiz._input],
+      hide: [],
       setSteadyState: () => {
-        quizA1.setFuturePositions();
-        quizA1.showAngles();
-        quizA1._input.enable();
-        quizA1._check.show();
+        quiz.newProblem();
       },
     });
   }

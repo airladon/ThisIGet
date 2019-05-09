@@ -3,47 +3,31 @@ import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
-import SameAreaCollection from '../common/diagramCollectionSameArea';
+import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform, Point } = Fig;
-const { rand, round, range } = Fig.tools.math;
+const {
+  Transform,
+  DiagramElementPrimative,
+  Point,
+} = Fig;
 
-export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCollection) {
-// export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
+const {
+//   removeRandElement,
+  round,
+  rand,
+  range,
+} = Fig.tools.math;
+
+const { getPoint } = Fig.tools.g2;
+
+export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
-
-  answers: Array<Array<number>>;
-  answer: number;
-
-  // updateLimits() {
-  //   const lay = this.layout.same;
-  //   const { length, height } = lay.grid;
-  //   const minSeparation = lay.basePadMinSeparation;
-  //   this._leftBasePad.move.minTransform.updateTranslation(
-  //     -length / 2,
-  //     -height / 2,
-  //   );
-  //   this._leftBasePad.move.maxTransform.updateTranslation(
-  //     length / 2 - minSeparation,
-  //     height / 2 - minSeparation,
-  //   );
-  //   this._rightBasePad.move.minTransform.updateTranslation(
-  //     -length / 2 + minSeparation,
-  //     -height / 2,
-  //   );
-  //   this._rightBasePad.move.maxTransform.updateTranslation(
-  //     length / 2,
-  //     height / 2 - minSeparation,
-  //   );
-  //   this._topPad.move.minTransform.updateTranslation(
-  //     -length / 2,
-  //     -height / 2 + minSeparation,
-  //   );
-  //   this._topPad.move.maxTransform.updateTranslation(
-  //     length / 2,
-  //     height / 2,
-  //   );
-  // }
+  _messages: {
+    _touching: DiagramElementPrimative;
+    _rotation: DiagramElementPrimative;
+  } & TypeMessages;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -57,13 +41,17 @@ export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCol
       {},
       transform,
     );
-    this.setPosition(this.layout.samePosition);
+    this.addCheck();
+    this.addQuestion();
+    // this.addInput('input', '?', 3, 0);
+    // this.diagram.addElements(this, this.layout.addElementsQuiz);
+    this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 
-  tryAgain() {
-    super.tryAgain();
-  }
+  // tryAgain() {
+  //   super.tryAgain();
+  // }
 
   addToAnswers(answers: Array<Array<number>>, answer: Array<number>) {
     if (Array.isArray(this.answers)) {
@@ -80,11 +68,11 @@ export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCol
   }
 
   getAnswers() {
-    const lay = this.layout.same;
-    const maxBase = lay.grid.length / lay.grid.spacing;
-    const maxHeight = lay.grid.height / lay.grid.spacing;
-    const minBase = lay.basePadMinSeparation;
-    const minHeight = lay.basePadMinSeparation;
+    const { bounds, gridSpacing, minSeparation } = this.layout;
+    const maxBase = bounds.width / gridSpacing;
+    const maxHeight = bounds.height / gridSpacing;
+    const minBase = minSeparation / gridSpacing;
+    const minHeight = minSeparation / gridSpacing;
     const maxArea = maxBase * maxHeight * 0.5;
     const minArea = minBase * minHeight * 0.5;
     const answers = [];
@@ -106,48 +94,48 @@ export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCol
   }
 
   goToTriangle(baseInUnits: number, heightInUnits: number) {
-    const lay = this.layout.same;
-    const base = baseInUnits * lay.grid.spacing;
-    const height = heightInUnits * lay.grid.spacing;
+    const { gridSpacing } = this.layout;
+    const base = baseInUnits * gridSpacing;
+    const height = heightInUnits * gridSpacing;
 
     const left = new Point(-base / 2, -height / 2);
     const right = new Point(base / 2, -height / 2);
     const top = new Point(0, height / 2);
 
-    const futurePos = (element, x, y) => ({
-      element,
-      scenario: {
-        position: new Point(x, y),
-      },
-    });
-
-    this.futurePositions = [];
-    this.futurePositions.push(futurePos(
-      this._leftBasePad, left.x, left.y,
-    ));
-    this.futurePositions.push(futurePos(
-      this._rightBasePad, right.x, right.y,
-    ));
-    this.futurePositions.push(futurePos(
-      this._topPad, top.x, top.y,
-    ));
-    this.moveToFuturePositions(1, this.updateTriangle.bind(this));
+    this._main._implications._pad0.scenarios.quiz = { position: left };
+    this._main._implications._pad2.scenarios.quiz = { position: right };
+    this._main._implications._pad1.scenarios.quiz = { position: top };
+    this._main._implications.animations.cancelAll();
+    this._main._implications.animations.new()
+      .scenarios({ target: 'quiz', duration: 1 })
+      .start();
   }
 
-  newProblem() {
-    super.newProblem();
-    const element = document.getElementById('id__lessons__area_quiz1');
+  setupNewProblem() {
+    // const element = document.getElementById('id__lessons__area_quiz1');
     const { area, answers } = this.getAnswers();
     this.answer = area;
     this.answers = answers;
 
-    if (element) {
-      element.innerHTML = area.toString();
-    }
-    this._check.show();
+    this._question.drawingObject.setText(`Create a triangle with an area of ${area} squares.`);
+
     this.goToTriangle(5, 5);
+
+    const pad0 = this._main._implications._pad0;
+    const pad1 = this._main._implications._pad1;
+    const pad2 = this._main._implications._pad2;
+    if (pad0.getPosition().isNotEqualTo(getPoint(pad0.scenarios.quiz.position))
+      || pad1.getPosition().isNotEqualTo(getPoint(pad1.scenarios.quiz.position))
+      || pad2.getPosition().isNotEqualTo(getPoint(pad2.scenarios.quiz.position))
+    ) {
+      this.transitionToNewProblem({ target: 'quiz', duration: 1 });
+    }
     this.diagram.animateNextFrame();
   }
+
+  // afterTransitionToNewProblem() {
+  //   super.afterTransitionToNewProblem();
+  // }
 
   showAnswer() {
     super.showAnswer();
@@ -159,8 +147,8 @@ export default class QuizParallel1Collection extends CommonQuizMixin(SameAreaCol
 
   findAnswer() {
     this._check.hide();
-    const base = parseFloat(this._base.label.getText());
-    const height = parseFloat(this._height.label.getText());
+    const base = parseFloat(this._main._implications._base.label.getText());
+    const height = parseFloat(this._main._implications._height.label.getText());
     const potentialAnswer = [base, height];
     let result = 'incorrect';
     this.answers.forEach((answer) => {

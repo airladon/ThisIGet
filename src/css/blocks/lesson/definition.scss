@@ -1,18 +1,23 @@
 .lesson__definition_container {
-  color: color('diagram', 'disabled');
+  color: color('diagram', 'text-definition');
   position: absolute;
-  top: 87%;
+  top: 90%;
   left: 7%;
-  font-size: calc(var(--lesson__diagram-font-size) * 0.45);
+  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
 }
 
-.lesson__definition_low {
-  top: 91%;
+.lesson__definition_high {
+  top: 85%;
   left: 7%;
 }
 
-.lesson__definition_lowest {
-  top: 95%;
+.lesson__definition_higher {
+  top: 80%;
+  left: 7%;
+}
+
+.lesson__definition_highest {
+  top: 75%;
   left: 7%;
 }
 
@@ -22,7 +27,7 @@
 }
 
 .lesson__definition_root {
-  color: color('diagram', 'text-latin');
+  // color: color('diagram', 'text-latin');
   font-family: times new roman, serif;
   font-style: italic;
   padding-left: calc(var(--lesson__diagram-font-size) * 0.15);

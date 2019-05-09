@@ -1,0 +1,64 @@
+.lesson__interactive_element_button__container {
+  position: absolute;
+  left: calc(80% - var(--pres__button_height) / 2);
+  top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
+}
+
+#id_lesson__interactive_element_button {
+  color: color('presentation', 'text');
+  width: var(--pres__button_height);
+  height: var(--pres__button_height);
+  position: absolute;
+  border: 1px solid color('presentation', 'hover');
+  border-radius: calc(var(--pres__button_height) / 2);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none;  /* Internet Explorer/Edge  */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+  background-image: $star-999999;
+  // background-size: cover;
+  background-size: 75% 75%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+#id_lesson__interactive_element_button:hover {
+  background-color: color('presentation', 'hoverBackground');
+  border: 1px solid color('presentation', 'hover');
+  cursor: pointer;
+}
+
+// @media screen and (min-width: $small-tablet) {
+//   .lesson__interactive_element_button {
+//     border: 2px solid;
+//   }
+// }
+
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
+  .lesson__interactive_element_button__container {
+    // left: calc(100% - var(--pres__hspace) - var(--pres__nav_button_width) / 2 - var(--pres__button_height) / 2);
+    left: calc(var(--pres__content_width) + var(--pres__hspace) * 3 + var(--pres__nav_button_width) * 1.5 - var(--pres__button_height) / 2);
+    top: calc(75% - var(--pres__button_height) / 2);
+  }
+}
+
+.lesson__interactive_element_button__hide {
+  left: -10000px;
+  top: -10000px;
+  font-size: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}
+
+.lesson__interactive_element_button__disable {
+  pointer-events: none;
+  // left: -10000px;
+  // top: -10001px;
+  // font-size: 0;
+  // border: 0;
+  // height: 0;
+  // width: 0;
+  opacity: 0.5;
+}

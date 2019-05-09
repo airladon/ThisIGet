@@ -1,16 +1,15 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
-// eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-import CircleAreaCollection from '../common/diagramCollectionCircleArea';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
+import lessonLayout from '../common/layout';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _circ: CircleAreaCollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -19,6 +18,7 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('circ', new CircleAreaCollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

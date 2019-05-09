@@ -1,4 +1,8 @@
 // @flow
+import Fig from 'figureone';
+
+const { Point } = Fig;
+const { joinObjects } = Fig.tools.misc;
 
 const classify = (key: string, value: string) => {
   const nonEmpty = value || key;
@@ -111,8 +115,57 @@ function logout() {
   logInOut(true);
 }
 
+function activator(
+  width: number | Object,
+  height?: number | Object,
+  ...inputOptions: Array<Object>
+  // color: [number, number, number, number] = [0, 0, 0, 0],
+) {
+  const defaultOptions = {
+    color: [0, 0, 0, 0],
+    position: new Point(0, 0),
+    width: 1,
+    height: 1,
+  };
+  let options = joinObjects({}, defaultOptions);
+  if (typeof width === 'number') {
+    options.width = width;
+  } else {
+    options = joinObjects({}, options, width);
+  }
+  if (height) {
+    if (typeof height === 'number') {
+      options.height = height;
+    } else {
+      options = joinObjects({}, options, height);
+    }
+  }
+  if (inputOptions != null && inputOptions.length > 0) {
+    options = joinObjects({}, options, ...inputOptions);
+  }
+
+  const points: Array<Point> = [
+    new Point(-options.width / 2, -options.height / 2),
+    new Point(-options.width / 2, options.height / 2),
+    new Point(options.width / 2, options.height / 2),
+    new Point(options.width / 2, -options.height / 2),
+  ].map(p => p.add(options.position));
+
+  return {
+    name: 'activator',
+    method: 'polyLine',
+    options: {
+      points,
+      color: options.color,
+    },
+    mods: {
+      isTouchable: true,
+    },
+  };
+}
+
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie,
+  createCookie, activator,
 };
 

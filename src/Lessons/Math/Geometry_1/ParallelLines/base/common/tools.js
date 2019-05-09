@@ -78,18 +78,16 @@ export function checkElementsForParallel(
 }
 
 type TypeLineLayout = {
-  length: {
-    full: number;
-  };
-  boundary: Rect;
+  length: number;
+  bounds: Rect;
 };
 
 export function randomizeParallelLine(lineLayout: TypeLineLayout) {
   const limit = new Rect(
-    lineLayout.boundary.left + lineLayout.length.full / 2,
-    lineLayout.boundary.bottom + lineLayout.length.full / 2,
-    lineLayout.boundary.width - lineLayout.length.full,
-    lineLayout.boundary.height - lineLayout.length.full,
+    lineLayout.bounds.left + lineLayout.length / 2,
+    lineLayout.bounds.bottom + lineLayout.length / 2,
+    lineLayout.bounds.width - lineLayout.length,
+    lineLayout.bounds.height - lineLayout.length,
   );
 
   const x = Math.random() * limit.width + limit.left;

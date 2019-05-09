@@ -1,167 +1,170 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
-import AdjacentCollection from '../common/diagramCollectionAdjacent';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform, Point } = Fig;
-const { html } = Fig.tools;
+const { Transform, Rect } = Fig;
+const {
+  click,
+//   highlight,
+//   clickWord,
+} = Fig.tools.html;
 
-function showAdjacent(
-  adjacent: AdjacentCollection,
-  colorA: Array<number>,
-  colorB: Array<number>,
-  position: Point,
-) {
-  // adjacent.transform.updateTranslation(position);
-  adjacent.transform.updateScale(0.7, 0.7);
-  adjacent.transform.updateRotation(0);
-  adjacent.calculateFuturePositions(adjacent.angleType);
-  adjacent.setFuturePositions();
-  adjacent.show();
-  adjacent._lines.show();
-  adjacent._lines._line1.showAll();
-  adjacent._lines._line2.showAll();
-  adjacent._lines._line3.showAll();
-  adjacent.showAngles([
-    [adjacent._lines._angleA, 'a', colorA],
-    [adjacent._lines._angleB, 'b', colorB],
-  ]);
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line3.isTouchable = false;
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line3.hasTouchableElements = false;
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line3.isMovable = false;
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line1.isTouchable = false;
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line1.hasTouchableElements = false;
-  // eslint-disable-next-line no-param-reassign
-  adjacent._lines._line1.isMovable = false;
-  adjacent._lines.setPosition(position);
-}
-
-export class QRComplementaryAngles extends PopupBoxCollection {
-  _adjacent: AdjacentCollection;
+export class QRComplementary extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
-    transform: Transform = new Transform('QRComplementaryAngles').scale(1, 1).translate(0, 0),
+    transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     const layout = lessonLayout();
-    super(diagram, layout, transform, 'adjacent', AdjacentCollection);
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
     this.hasTouchableElements = true;
+
+    const coll = this._collection;
     const modifiers = {
-      Complementary_Angles: html.click(
-        this._adjacent.goToRandomComplementaryAngle,
-        [this._adjacent], this.layout.colors.angleA,
+      Complementary_angles: click(
+        coll.goToRandomAngle,
+        [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
+        this.layout.colors.diagram.action,
       ),
     };
     this.setTitle('Complementary Angles');
-    this.setDescription('|Complementary_Angles| add up to 90º or &pi;/2 radians.', modifiers);
+    this.setDescription('|Complementary_angles| add up to a |right angle|, which is |90º|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2, 1.2);
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
-    this._adjacent._eqn.show();
-    this._adjacent.eqn.showForm('com_add');
-    this._adjacent._eqn.setPosition(this.layout.complementary.equationPosition);
-    this._adjacent.angleType = 'complementary';
-    showAdjacent(
-      this._adjacent,
-      this.layout.colors.angleA,
-      this.layout.colors.angleB,
-      this.layout.complementary.linesPosition,
-    );
+    const coll = this._collection;
+    const fig = this._collection._fig;
+    coll.show();
+    fig.showAll();
+    fig._angleC.hide();
+    fig.setScenario('qr');
+    coll._eqns._complementary.setScenario('qr');
+    coll._eqns._complementary.showForm('c');
+    coll._eqns._complementary.setFormSeries('1');
+    fig._line3.move.element = null;
+    fig._line3.setRotation(Math.PI / 2);
+    fig._line2.setRotation(Math.PI / 6);
+    this.transformToQRWindow(coll, new Rect(-0.6, -0.8, 2, 2.4));
+    this.diagram.animateNextFrame();
   }
 }
 
-
-export class QRSupplementaryAngles extends PopupBoxCollection {
-  _adjacent: AdjacentCollection;
+export class QRSupplementary extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     const layout = lessonLayout();
-    super(diagram, layout, transform, 'adjacent', AdjacentCollection);
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
     this.hasTouchableElements = true;
 
+    const coll = this._collection;
     const modifiers = {
-      Supplementary_Angles: html.click(
-        this._adjacent.goToRandomSupplementaryAngle,
-        [this._adjacent], this.layout.colors.angleA,
+      Supplementary_angles: click(
+        coll.goToRandomAngle,
+        [coll, [Math.PI, Math.PI], 0, 1.5, null],
+        this.layout.colors.diagram.action,
       ),
     };
-
     this.setTitle('Supplementary Angles');
-    this.setDescription('|Supplementary_Angles| add up to 180º or &pi; radians.', modifiers);
+    this.setDescription('|Supplementary_angles| add up to a |straight angle|, which is |180º|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2, 1.2);
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
-    this._adjacent._eqn.show();
-    this._adjacent.eqn.showForm('sup_add');
-    this._adjacent._eqn.setPosition(this.layout.supplementary.equationPosition);
-    this._adjacent.angleType = 'supplementary';
-    showAdjacent(
-      this._adjacent,
-      this.layout.colors.angleA,
-      this.layout.colors.angleB,
-      this.layout.supplementary.linesPosition,
-    );
+    const coll = this._collection;
+    const fig = this._collection._fig;
+    coll.show();
+    fig.showAll();
+    fig._angleC.hide();
+    fig.setScenario('qr');
+    coll._eqns._supplementary.setScenario('qr');
+    coll._eqns._supplementary.showForm('c');
+    coll._eqns._supplementary.setFormSeries('1');
+    fig._line3.move.element = null;
+    fig._line3.setRotation(Math.PI);
+    fig._line2.setRotation(Math.PI / 3);
+    this.transformToQRWindow(coll, new Rect(-1.5, -1, 3, 2.4));
+    this.diagram.animateNextFrame();
   }
 }
 
-
-export class QRExplementaryAngles extends PopupBoxCollection {
-  _adjacent: AdjacentCollection;
+export class QRExplementary extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     const layout = lessonLayout();
-    super(diagram, layout, transform, 'adjacent', AdjacentCollection);
+    super(
+      diagram,
+      layout,
+      transform,
+      'collection',
+      CommonCollection,
+    );
     this.hasTouchableElements = true;
 
+    const coll = this._collection;
     const modifiers = {
-      Explementary_Angles: html.click(
-        this._adjacent.goToRandomExplementaryAngle,
-        [this._adjacent], this.layout.colors.angleA,
+      Explementary_angles: click(
+        coll.goToRandomAngle,
+        [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
+        this.layout.colors.diagram.action,
       ),
     };
-
     this.setTitle('Explementary Angles');
-    this.setDescription('|Explementary_Angles| add up to 360º or 2&pi; radians.', modifiers);
+    this.setDescription('|Explementary_angles| add up to a |full angle|, which is |360º|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
-    this._adjacent._eqn.show();
-    this._adjacent.eqn.showForm('exp_add');
-    this._adjacent._eqn.setPosition(this.layout.explementary.equationPosition);
-    this._adjacent.angleType = 'explementary';
-    showAdjacent(
-      this._adjacent,
-      this.layout.colors.angleA,
-      this.layout.colors.angleB,
-      this.layout.explementary.linesPosition,
-    );
+    const coll = this._collection;
+    const fig = this._collection._fig;
+    coll.show();
+    fig.showAll();
+    fig._angleC.hide();
+    fig.setScenario('qr');
+    coll._eqns._explementary.setScenario('qr');
+    coll._eqns._explementary.showForm('c');
+    coll._eqns._explementary.setFormSeries('1');
+    fig._line3.move.element = null;
+    fig._line3.setRotation(Math.PI * 1.999);
+    fig._line2.setRotation(Math.PI / 3 * 2);
+    this.transformToQRWindow(coll, new Rect(-1.5, -1.2, 3, 2.4));
+    this.diagram.animateNextFrame();
   }
 }
 
-function attachQuickReference() {
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -169,10 +172,12 @@ function attachQuickReference() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Complementary: QRComplementaryAngles,
-    Supplementary: QRSupplementaryAngles,
-    Explementary: QRExplementaryAngles,
+    Complementary: QRComplementary,
+    Supplementary: QRSupplementary,
+    Explementary: QRExplementary,
+    // QR2: QRBoilerplate2,
   };
 }
 
-attachQuickReference();
+attachQuickReference1();
+

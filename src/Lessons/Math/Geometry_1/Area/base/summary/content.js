@@ -1,20 +1,26 @@
 // @flow
+import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
-import Definition from '../../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+
+const {
+  style,
+//   click,
+//   centerV,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -28,64 +34,53 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const meas = diag._measure;
-    const rect = diag._rect;
+    const coll = diag._collection;
+    // const examples = coll._examples;
+    // const meas = coll._measure;
+    const unit = coll._unitShape;
+    const shapes = coll._shapes;
+    const rect = coll._rectangle;
+    const square = coll._square;
+    const eqn = coll._eqn;
+    // const nav = coll._eqnNav;
 
-    const common = {
-      setContent: [],
-      setInfo: '',
-      modifiers: {},
-      infoModifiers: {},
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
-    // ******************************************************************
-    // ******************************************************************
-    // ******************************************************************
-    // Measure
-    // ******************************************************************
-    // ******************************************************************
-    // ******************************************************************
-    common.showOnly = [meas];
-    this.addSection(common, {
+    this.addSection({
       title: 'Area',
-      setContent: [
+      setContent: style({ top: 0 }, [
         '|Area| is the |amount of space| a shape takes up and is measured in |squared length| units, such as |square meters| normally written as |m<sup>2</sup>|.',
-        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html('id_lesson__area_definition', 'lesson__definition_low')}`,
-      ],
-      showOnly: [meas],
+        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html({ classes: 'lesson__definition_high' })}`,
+      ]),
       show: [
-        meas._mediumGrid, meas._squareA,
-        meas._circleA, meas._triangleA,
-        meas._triLabelMeters, meas._squareLabelMeters, meas._circleLabelMeters,
+        shapes._circle, shapes._triangle, shapes._square, unit._grid,
+        shapes._triangleHtmlLabel, shapes._squareHtmlLabel,
+        shapes._circleHtmlLabel,
       ],
+      setSteadyState: () => {
+        coll.setScenarios('summary');
+      },
     });
 
-    this.addSection(common, {
+    this.addSection({
       title: 'Rectangle',
       setContent: [
         'The |area of a rectangle| is equal to its |width| multiplied by its |height|.',
       ],
-      showOnly: [rect],
-      show: [rect._line, rect._sideWidth, rect._sideHeight],
+      show: [rect._line, rect._labelWidth, rect._labelHeight, eqn],
       setSteadyState: () => {
-        rect.eqns.squareRectEqn.showForm('0');
+        coll.setScenarios('summary');
+        eqn.showForm('summaryRect');
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       title: 'Square',
       setContent: [
         'The |area of a square| is equal to its |side length squared|.',
       ],
-      showOnly: [rect],
-      show: [rect._square, rect._sideSquareA, rect._sideSquareB],
+      show: [square._line, square._labelB1, square._labelB2, eqn],
       setSteadyState: () => {
-        rect.eqns.squareRectEqn.showForm('1');
+        coll.setScenarios('summary');
+        eqn.showForm('summarySquare');
       },
     });
   }

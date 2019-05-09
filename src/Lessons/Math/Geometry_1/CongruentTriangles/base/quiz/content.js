@@ -1,7 +1,9 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent, interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -9,10 +11,17 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
+
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -26,38 +35,13 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const tri = diag._triangle;
+    const quiz = diag._quiz;
 
     this.addSection({
-      title: 'Quiz',
-      setContent: `
-        <p>
-          Can you determine if the triangles are congruent based on the properities shown?
-        </p>
-      `,
-      setInfo: 'Select |Yes| or |No| then touch the |Check| box',
-      setEnterState: () => {
-        diag.calcRandomTriangles();
-      },
-      interactiveElements: [
-        interactiveItem(diag._check),
-        interactiveItem(diag._answerBox, 'center'),
-      ],
-      showOnly: [tri,
-        tri._tri1, tri._tri1._line,
-        tri._tri1._point1, tri._tri1._point2, tri._tri1._point3,
-        tri._tri2, tri._tri2._line,
-        tri._tri2._point1, tri._tri2._point2, tri._tri2._point3,
-        diag._answerBox,
-      ],
-      transitionFromAny: (done) => {
-        diag._answerBox.disable();
-        diag.moveToFuturePositions(1, done);
-      },
+      setContent: ['Can you determine if the triangles are congruent based on the properties shown?'],
+      show: [quiz._tri1, quiz._tri2],
       setSteadyState: () => {
-        diag.setFuturePositions();
-        diag.showAnglesAndSides();
-        diag._answerBox.enable();
+        quiz.newProblem();
       },
     });
   }

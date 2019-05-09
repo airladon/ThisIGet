@@ -2,9 +2,10 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'First explanation of Topic.',
+  title: 'Initial',
+  description: 'Presentation form - interactive.',
   uid: 'base',
+  qr: ['Abstraction'],
 };
 
 module.exports = {

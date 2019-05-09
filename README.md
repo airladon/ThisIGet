@@ -55,7 +55,8 @@ Local environment variables are used for
 * Defining which database to connect to
 * Running flask database migrations
 * Running flask locally (though recommended to use a container to run flask normally)
-* Deployment to Heroku for test site 
+* Deployment to Heroku for test site
+* Disabling some security features
 
 #### `DATABASE_URL`
 The environment variable `DATABASE_URL` defines which database option to use.
@@ -114,6 +115,11 @@ Only needed if writing to or reading from a production database used by an app w
 #### `SECRET_KEY`
 Only needed if debugging a flask session from an app with a custom SECRET_KEY.
 
+#### `LOCAL_PRODUCTION`
+If there is an environment variable called `LOCAL_PRODUCTION` and its value is `DISABLE_SECURITY`, then flask Talisman will not be run.
+
+This is useful for running stage and production environments locally, where you cannot connect with a https connection.
+
 ## Docker Containers
 All lint and type checking, testing, building and deployment can be done using docker containers that can be used on any system that has docker installed. This makes development easy to start on any platform.
 
@@ -140,6 +146,8 @@ From here you can perform:
   * `./browser_test.sh beta` for heroku beta site browser tests
   * `./browser_test.sh prod` for production site browser tests
   * `./browser_test.sh <SITE>` for custom site browser tests at <SITE>
+  * `./browser_test.sh local <TEST_REGEX>` for specific tests
+  * `./browser_test.sh local <TEST_REGEX> -u` to update snapshots
 
 * Build and Deploy:
   * `build.sh` Test and build dev version
@@ -243,7 +251,7 @@ This is best done locally outside of a container. You will need to have:
 
 #### Start from scratch - Local SQL
 ```
-rm app/app.db
+rm app/app/app.db
 rm -rf migrations
 unset DATABASE_URL
 flask db init
@@ -268,15 +276,13 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-#### Start from scratch - Heroku
-Assumes have already reset local postgress (removed migrations, initialized db and initialized migration).
+#### Start from scratch - Heroku - 1
 ```
-heroku pg:reset --app=thisiget-dev
-tools/get_config_vars.sh thisiget-dev
+tools/get_config_vars.sh thisiget-test
 ```
 paste in the environment variable exports
 ```
-tools/reset_and_prepopulate_database.sh
+tools/reset_and_prepopulate_database.sh thisiget-test init_flask
 unset SECRET_KEY
 unset AES_KEY
 unset PEPPER
@@ -288,18 +294,18 @@ unset MAIL_USERNAME
 ```
 
 Can check with
-`heroku pg:psql --app=itgetitest -c 'select * from users'`
+`heroku pg:psql --app=itgetitest -c 'select username,last_login from users'`
 
 
 #### Upload local database to Heroku
-Assume database is called `thisiget_local`
+Assume local database is called `thisiget_local` and you want to update heroku database `thisiget-dev`
 ```
 heroku pg:reset --app=thisiget-dev
-heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=itgetitest
+heroku pg:push postgresql://localhost/thisiget_local postgresql-lively-27815 --app=thisiget-test
 ```
 
 Can check with
-`heroku pg:psql --app=itgetitest -c 'select * from users'`
+`heroku pg:psql --app=thisiget-test -c 'select * from users'`
 
 > Note: If `AES_KEY` or `PEPPER` is different on the local environment compared to the Heroku environment, and data in the database was generated locally with the different environment variables, then app on Heroku won't be able to read the locally generated entries.
 
@@ -365,27 +371,57 @@ CREATE DATABASE thisiget_local;
 ```
 
 ## Updating Python, Python Packages and NPM packages for the project
-### Javascript
-* Create branch
-* Update the version numbers in the package.json file
-* `rm -rf node_modules`
-* `npm install`
-* Run dev container and confirm all lint and type checks, and tests pass
-* Do a test build to local
-* If all passes, commit and pull request
 
-##### Python Packages
-This is only if python packages need to be updated. This will update both production and dev packages.
+### Python, Node or NPM Versions
+* Open pynode project and update base, Docker-heroku (used for dev) and pupp (used for browser testing in puppeteer)
+* Build locally without deploying
+* Update `start_env.sh` to reflect new docker image (in section "Starting Container", "Pupp" (approx line 138))
+* Update `containers/Dockerfile_dev` to reflect new docker image
+* Update `containers/dev/browser_test.sh` to reflect new docker image
+* If python version was updated, then also update `containers/Dockerfile_stage` and `containers/Dockerfile_prod` with new python version.
 
-To see which packages are out of date:
-`pipenv update --outdated`
+### NPM Packages
+Before updating NPM packages, make sure lint, type checking and unit tests all pass.
 
-Update version numbers in Pipfile
+In dev container:
+```
+flow
+npm run lint
+npm run css
+jest
+./browser_tests.sh local
+```
 
-`pipenv install -d`
+If just updating one package, then update the package version in `package.json`.
 
-If Pipfile.lock is out of date, then use this to bring it up to date.
-`pipenv lock`
+If want to update all packages, then in dev container:
+```
+npm update
+cat package.json
+```
+Then copy and paste the package names and version numbers into `package.json` in local root directory.
+
+Now retest all line, type checking and units tests:
+In dev container:
+```
+flow
+npm run lint
+npm run css
+jest
+./browser_tests.sh local
+```
+
+With updates to lint and test packages, it is possible additional bugs will be found that will need to be dealt with.
+
+If everything was fixable, then commit changes.
+
+### Python Packages
+In dev container:
+```
+pip list --outdated --format=freeze | grep -v '^\-e' | cut -d = -f 1  | xargs -n1 pip install -U
+pip freeze
+```
+Then copy and paste the package names and versions into the local `requirements.txt`.
 
 
 #### Update python version
@@ -405,7 +441,6 @@ Remove existing virtual environment
 `rm -rf env`
 
 Setup new virtual environment
-
 
 
 # Deploy to new Heroku App

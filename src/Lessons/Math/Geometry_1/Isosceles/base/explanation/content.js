@@ -1,8 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
@@ -12,13 +13,17 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  click, centerV, highlight, clickWord,
+  click,
+  centerV,
+  highlight,
+  style,
+  clickW,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,539 +34,649 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'triangle_introduction',
-      'congruent_triangles',
-      'related_angles',
-      'quadrangles',
-      'adjacent_angles',
+      'congruent_triangles/base',
+      'adjacent_angles/base',
+      'triangle_introduction/base',
     ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
-    const iso = diag._iso;
-    const iTri = iso._tri;
-    const left = iso._left;
-    const right = iso._right;
-    const rec = iso._rect;
-
-    let common = {
-      setContent: '',
-      setInfo: '',
-      modifiers: {},
-      infoModifiers: {},
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
-    };
+    const coll = diag._collection;
+    const left = coll._left;
+    const right = coll._right;
+    const tri = coll._triangle;
+    const split = coll._split;
+    const correction = coll._correction;
+    const eqn = coll._eqn;
 
     this.addSection({
-      title: 'Introduction',
+      title: 'Isosceles Triangle',
       setContent: centerV([
         'There are several |types of triangle| commonly found in many applications.',
-        'Being able to |identify| these types of triangle can make |understanding| a problem |quicker and easier|.',
+        'Being able to |identify| these types of triangle can make |analysing| a problem |quicker| and |easier|.',
       ]),
-      setSteadyState: () => {
-        // qr._quadrangles._Rectangle.show();
-      },
-      // setSteadyState: () => {
-      // iso.show();
-      // equil.showAll();
-      // iso._tri.showAll();
-      // iso._rect.showAll();
-      // iso._rect._tri1._angle2.update();
-      // iso._rect._tri2._angle2.update();
-      // iso._isoEqn.showAll();
-      // iso.eqns.isoEqn.showForm('3');
-      // iso._testEqn.setPosition(-1, 1);
-      // iso._testEqn.showForm('1');
-      // iso._testNav.setPosition(-1, 1);
-      // iso._testNav.showForm('0');
-      // },
     });
-
     this.addSection({
       setContent: centerV([
         'Triangles are commonly grouped by either their |side lengths| or |angles|.',
       ]),
-      setSteadyState: () => {
-        // qr.show();
-        // qr._quadrangles.show();
-        // qr._quadrangles._Main.show();
-      },
     });
-
-
-    common = {
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
-      },
-    };
-    this.addSection(common, {
-      title: 'Equal Sides',
+    this.addSection({
       setContent: [
-        'A triangle with |two_sides| of |equal length| is called an |Isosceles| triangle.',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        'A triangle with |two_sides| of |equal length| is called an |isosceles| triangle.',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
       ],
       modifiers: {
-        two_sides: click(iso.pulseEqualSides, [iso], colors.equalLength),
-        // equal_length: click(iso.pulseEqualSides, [iso], colors.equalLength),
+        two_sides: click(coll.pulseEqualSides, [coll], colors.sides),
       },
-      showOnly: [iso, iTri, iTri._line],
-      show: [iTri._side12, iTri._side23, iTri._side31],
+      show: [tri._line, tri._side01, tri._side12],
     });
-
-
-    this.addSection(common, {
-      setContent: 'When |two sides| of a triangle are |equal|, the triangle\'s |angles| have a special relationship.',
-      showOnly: [iso, iTri, iTri._line],
-      show: [iTri._side12, iTri._side23, iTri._side31],
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
-      },
-    });
-
-    common = {
-      setContent: 'We can show this by |drawing_a_line| from the |point| between the equal sides to the |middle| of the opposite side.',
-      modifiers: {
-        drawing_a_line: highlight(colors.lines),
-        point: click(iso.pulseTopPoint, [iso], colors.points),
-        middle: click(iso.pulseMidPoint, [iso], colors.points),
-      },
-      showOnly: [iso, iTri, iTri._line],
-      show: [iTri._side12, iTri._side23, iTri._side31],
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
-      },
-    };
-    this.addSection(common);
-    common.modifiers = {
-      drawing_a_line: click(iso.growSplit, [iso], colors.lines),
-      point: click(iso.pulseTopPoint, [iso], colors.points),
-      middle: click(iso.pulseMidPoint, [iso], colors.points),
-    };
-    this.addSection(common, {
-      show: [iTri._side12, iTri._side23, iTri._side31, iso._split],
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
-        iso.growSplit();
-      },
-    });
-
-    common = {
-      setContent: 'This line will have some length, which we can label |C|.',
-      showOnly: [
-        iso, iTri, iTri._line, left,
-        // left, left._line, right, right._line,
-      ],
-      show: [iTri._side12, iTri._side23, iTri._side31, iso._split],
-      setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.center);
-        iso.setScenario(right, layout.iso.right.scenario.center);
-        iso.setScenario(iTri, layout.iso.scenario.center);
-      },
-    };
-    this.addSection(common);
-    this.addSection(common, {
-      show: [iTri._side12, iTri._side23, iTri._side31, iso._split, left._side23],
-    });
-
-    this.addSection(common, {
-      setContent: 'This line splits the triangle into two.',
-      showOnly: [
-        iso,
-        left, left._line,
-        right, right._line,
-      ],
-      show: [
-        left._side31, right._side23, left._side23,
-      ],
-      transitionFromPrev: (done) => {
-        iso.moveToScenario(left, layout.iso.left.scenario.left, 1, done);
-        iso.moveToScenario(right, layout.iso.right.scenario.right, 1);
-      },
-      setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
-        right._side12.showAll();
-        left._side12.showAll();
-        right._side31.showAll();
-      },
-    });
-
-
-    common = {
-      setContent: 'The |Side_Side_Side| triangle congruency test says that if two triangles share the same side lengths, then their |angles| are also |equal|.',
-      modifiers: {
-        Side_Side_Side: click(this.showQR, [this, 'congruent_triangles', 'Sss'], colors.diagram.action),
-      },
-      showOnly: [
-        iso,
-        left, left._line,
-        right, right._line,
-      ],
-      show: [
-        left._side12, left._side31, left._side23,
-        right._side12, right._side23, right._side31,
-      ],
-      setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
-      },
-    };
-    this.addSection(common);
-    common.setContent = 'These two triangles do |share the same side lengths|, and therefore their |angles are also the same|.';
-    this.addSection(common);
-    common.show = [
-      left, right,
-    ];
-    this.addSection(common, {
-      show: [iso._left, iso._right],
-      transitionFromPrev: (done) => {
-        left._angle1.pulseScaleNow(1, 1.5);
-        left._angle2.pulseScaleNow(1, 1.5);
-        left._angle3.pulseScaleNow(1, 1.5);
-        right._angle1.pulseScaleNow(1, 1.5);
-        right._angle2.pulseScaleNow(1, 1.5);
-        right._angle3.pulseScaleNow(1, 1.5);
-        done();
-      },
-      setSteadState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
-      },
-    });
-
-    common = {
-      setContent: 'Angles |b| and |c|, and side |C_| were not part of the original isosceles triangles, so we can remove them.',
-      modifiers: {
-        b: highlight(colors.angles),
-        c: highlight(colors.angles),
-        C_: highlight(colors.lines),
-      },
-      showOnly: [iso],
-      show: [left, right],
-      setSteadyState: () => {
-        iso.setScenario(left, layout.iso.left.scenario.left);
-        iso.setScenario(right, layout.iso.right.scenario.right);
-      },
-    };
-    this.addSection(common);
-    common.showOnly = [
-      iso,
-      left, left._line,
-      right, right._line,
-    ];
-    common.show = [
-      left._angle1, left._side31, left._side12,
-      right._angle2, right._side23, right._side12,
-    ];
-    this.addSection(common);
-    common.setContent = 'Now we can |join| the two triangles to re-form the |isoceles triangle|.';
-    this.addSection(common, {
-      transitionFromPrev: (done) => {
-        iso.moveToScenario(left, layout.iso.left.scenario.center, 1, done);
-        iso.moveToScenario(right, layout.iso.right.scenario.center, 1);
-      },
-      setSteadyState: () => {
-        iso.setScenario(iso._left, layout.iso.left.scenario.center);
-        iso.setScenario(iso._right, layout.iso.right.scenario.center);
-        iTri.show();
-        iTri._line.show();
-        iso._left._line.hide();
-        iso._right._line.hide();
-        iso._split.showAll();
-      },
-    });
-    common.showOnly = [iso, iTri, iTri._line];
-    common.show = [
-      iTri._angle1, iTri._angle2,
-      iTri._side12, iTri._side23, iTri._side31,
-    ];
-    common.setSteadyState = () => {
-      iso.setScenario(left, layout.iso.left.scenario.center);
-      iso.setScenario(right, layout.iso.right.scenario.center);
-      iso.setScenario(iTri, layout.iso.scenario.center);
-    };
-    this.addSection(common);
-    this.addSection(common, {
-      setContent: 'And so we can see, when a triangle has two equal |sides|, it also has two equal |angles|.',
-      modifiers: {
-        sides: click(iso.pulseEqualSides, [iso], colors.equalLength),
-        angles: click(iso.pulseEqualAngles, [iso], colors.angles),
-      },
-    });
-
-    common.showOnly = [iso, iTri, iTri._line];
-    common.show = [
-      iTri._angle1, iTri._angle2,
-      iTri._side12, iTri._side23, iTri._side31,
-    ];
-    common.setSteadyState = () => {
-      iso.setScenario(left, layout.iso.left.scenario.center);
-      iso.setScenario(right, layout.iso.right.scenario.center);
-      iso.setScenario(iTri, layout.iso.scenario.center);
-    };
-
-    common = {
-      setContent: 'However, if we |only know| a triangle has two |equal_angles|, can we also show it has two equal sides?',
-      modifiers: {
-        equal_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
-        rectangle: click(this.showQR, [this, 'quadrangles', 'Rectangle'], colors.construction),
-        right_angles: highlight(colors.angles),
-        right_angles_: click(iso.pulseRectRightAngles, [iso], colors.angles),
-        Alternate_Angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.diagram.action),
-        Angle_Angle_Side: click(this.showQR, [this, '_congruent_triangles', '_Aas'], colors.diagram.action),
-        two_angles: click(iso.pulseEqualAngles, [iso], colors.angles),
-        two_sides: click(iso.pulseEqualSides, [iso], colors.equalLength),
-        triangles_: click(iso.pulseRectTriangles, [iso], colors.construction),
-        side_: click(iso.pulseRectHeight, [iso], colors.lines),
-        two_angles_: click(iso.pulseRectAngles, [iso], colors.angles),
-        angles: highlight(colors.angles),
-      },
-      showOnly: [iso, iTri, iTri._line],
-      show: [iTri._angle1, iTri._angle2],
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.center);
-      },
-    };
-    this.addSection(common, {
-      title: 'Equal Angles',
-      transitionFromNext: (done) => {
-        iso.moveToScenario(iTri, layout.iso.scenario.center, 1, done);
-      },
-    });
-
-    // common.setContent = 'We can start by |labeling| the side between the equal angles.';
-    // this.addSection(common);
-    // common.show = [iTri._angle1, iTri._angle2, iTri._side12];
-    // this.addSection(common, {
-    //   transitionFromPrev: (done) => {
-    //     iTri._side12._label.pulseScaleNow(1, 2);
-    //     done();
-    //   },
-    // });
-
-    common.setContent = 'Start by drawing a |rectangle| around the triangle.';
-    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2];
-    this.addSection(common);
-    common.show = [
-      iTri._angle1, iTri._angle2,
-      rec._tri1._line, rec._tri2._line,
-    ];
-    this.addSection(common);
-
-    common.setContent = 'The |vertical sides| of the |rectangle| are the same as the |height| of the triangle, so we can label them.';
-    this.addSection(common);
-    common.show = [
-      iTri._angle1, iTri._angle2,
-      rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
-    ];
-    this.addSection(common);
-
-
-    common.setContent = 'The |angles| of the |rectangle| are all |right_angles| and so we can label them.';
-    this.addSection(common);
-    common.setContent = 'The |angles| of the |rectangle| are all |right_angles_| and so we can label them.';
-    common.show = [
-      iTri._angle1, iTri._angle2,
-      rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
-      rec._tri1._angle2, rec._tri2._angle2,
-    ];
-    this.addSection(common);
-
-    common.setContent = 'As the sides of |rectangle| are parallel, we can use |Alternate_Angles| to find two top angles.';
-    this.addSection(common);
-    common.show = [...common.show, rec._tri1._angle1];
-    this.addSection(common, {
-      transitionFromPrev: (done) => {
-        rec._tri1._angle1.pulseScaleNow(1, 1.5);
-        iTri._angle1.pulseScaleNow(1, 1.5);
-        done();
-      },
-    });
-    common.show = [...common.show, rec._tri2._angle1];
-    this.addSection(common, {
-      transitionFromPrev: (done) => {
-        rec._tri2._angle1.pulseScaleNow(1, 1.5);
-        iTri._angle2.pulseScaleNow(1, 1.5);
-        done();
-      },
-    });
-
-    common.setContent = 'Let\'s |simplify| the diagram to consider just the two outside triangles.';
-    this.addSection(common);
-    common.showOnly = [iso, rec, rec._tri1, rec._tri2];
-    common.show = [
-      rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
-      rec._tri1._angle2, rec._tri2._angle2,
-      rec._tri1._angle1, rec._tri2._angle1,
-      rec._tri1._closeLine, rec._tri2._closeLine,
-    ];
-    this.addSection(common);
-    common.setContent = 'We can see the triangles have the same |two_angles_| and |side_|.';
-    this.addSection(common);
-    common.setContent = 'The |Angle_Angle_Side| triangle congruency test can therefore be used to say that these two |triangles_| are the |same|.';
-    this.addSection(common);
-    common.setContent = 'As these |triangles_| are the |same|, then their |sides| are also |equal|.';
-    this.addSection(common);
-    common.show = [
-      rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
-      rec._tri1._angle2, rec._tri2._angle2,
-      rec._tri1._angle1, rec._tri2._angle1,
-      rec._tri1._closeLine, rec._tri2._closeLine,
-      rec._tri1._side31, rec._tri2._side31,
-    ];
-    this.addSection(common, {
-      transitionFromPrev: (done) => {
-        rec._tri1._side31._label.pulseScaleNow(1, 1.5);
-        rec._tri2._side31._label.pulseScaleNow(1, 1.5);
-        done();
-      },
-    });
-
-    common.setContent = 'Let\'s show the |original triangle|, and remove the rectangle.';
-    this.addSection(common);
-    common.showOnly = [iso, iTri, iTri._line, rec, rec._tri1, rec._tri2];
-    common.show = [
-      iTri._angle1, iTri._angle2, iTri._side23, iTri._side31,
-      rec._tri1._line, rec._tri2._line, rec._tri1._side12, rec._tri2._side12,
-      rec._tri1._angle2, rec._tri2._angle2,
-      rec._tri1._angle1, rec._tri2._angle1,
-    ];
-    this.addSection(common);
-    common.show = [
-      iTri._angle1, iTri._angle2, iTri._side23, iTri._side31,
-    ];
-    this.addSection(common);
-
-    common.setContent = 'So, if a triangle has |two_angles| that are the |same|, then the |two_sides| not between the angles must also be the same';
-    this.addSection(common);
 
     this.addSection({
-      setContent: centerV([
-        'If you know a triangle has |two_equal_sides|, then you know it is an |isosceles triangle| and also has |two_equal_angles|.',
-        'Similarly, if you know a triangle has |two_equal_angles|, then you know it also has |two_equal_sides| and is an |isosceles triangle|.',
-      ]),
+      title: 'Angle Relationship',
+      setContent: [
+        'When |two sides| of a triangle are |equal|, the triangle\'s |angles| have a special relationship.',
+      ],
+      show: [tri._line, tri._side01, tri._side12],
+    });
+
+    let common = {
+      setContent: [
+        'We can show this by drawing a |line| that splits the triangle such that the top angle is split into two |equal_angles|.',
+      ],
+    };
+    this.addSection(common, {
       modifiers: {
-        two_equal_sides: highlight(colors.equalLength),
-        two_equal_angles: highlight(colors.angles),
+        line: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        tri._line, tri._side01, tri._side12,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        line: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        tri._line, tri._side01, tri._side12, tri._angle1,
+      ],
+    });
+
+    this.addSection(common, {
+      modifiers: {
+        line: click(coll.growSplit, [coll, null], colors.sides),
+        equal_angles: click(coll.pulseTopAngles, [coll], colors.angles),
+      },
+      show: [
+        tri._line, tri._side01,
+        tri._side12, coll._split._line, left._angleTop,
+        right._angleTop,
+      ],
+      transitionFromPrev: (done) => {
+        coll.growSplit(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('combined');
+      },
+    });
+
+    common = {
+      setContent: [
+        'This line has some length, which we can label as |L|.',
+      ],
+      show: [
+        tri._line, tri._side01,
+        tri._side12, coll._split._line, left._angleTop,
+        right._angleTop,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('combined');
+      },
+    };
+    this.addSection(common, {
+      modifiers: {
+        L: click(this.next, [this], colors.sides),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        L: click(coll.pulseL, [coll, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll._split._label.showAll();
+        coll.pulseL(done);
+      },
+      setSteadyState: () => {
+        coll._split._label.showAll();
+        coll.setScenarios('combined');
+      },
+    });
+
+    common = {
+      setContent: [
+        'We now have two triangles which we can look at |separately|.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        separately: click(this.next, [this], colors.sides),
+      },
+      show: [
+        tri._line, tri._side01, tri._side12,
+        split,
+        left._angleTop, right._angleTop,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('combined');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        separately: click(coll.splitTriangle, [coll, null], colors.sides),
+      },
+      show: [
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
+      ],
+      transitionFromPrev: (done) => {
+        coll.splitTriangle(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('separate');
       },
     });
 
     this.addSection({
-      setContent: centerV([
-        'We can now use the knowledge that |two angles are the same| to consider the relationship between all the angles in an |isosceles| triangle.',
-      ]),
-    });
-
-    common.setSteadyState = () => {
-      iso.setScenario(iTri, layout.iso.scenario.bottom);
-    };
-    this.addSection(common, {
-      title: 'Angle Relationships',
       setContent: [
-        'We know |angles| in a triangle are related: their |sum| always equals |_180|. Therefore to calculate |all| angles, |two must be known|.',
+        'These two triangles have the same |Side-Angle-Side| combination are therefore, |congruent|.',
       ],
       modifiers: {
-        _180: clickWord(
-          '180º', 'id_important_triangles_sum1',
-          this.showQR, [this, '_triangle_introduction', '_Main'],
+        'Side-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Sas'], colors.diagram.action),
+      },
+      show: [
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+
+    common = {
+      setContent: ['Therefore, the remaining sides and angles are the |same| between the triangles.'],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    };
+    this.addSection(common, {
+      modifiers: { same: click(this.next, [this], colors.diagram.action) },
+      show: [
+        left._line, left._angleTop, left._sideEqual, left._sideSplit,
+        right._line, right._angleTop, right._sideEqual, right._sideSplit,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        same: click(
+          coll.pulseRemainingLeftRightProperties,
+          [coll, null],
           colors.diagram.action,
         ),
-        angles: highlight(colors.angles),
+      },
+      show: [left, right],
+      transitionFromPrev: (done) => {
+        coll.pulseRemainingLeftRightProperties(done);
+      },
+    });
+
+    common = {
+      setContent: ['If we now |recombine| these triangles, we can make a couple of observations.'],
+      show: [left, right],
+    };
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(this.next, [this], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(coll.joinTriangles, [coll, null], colors.diagram.action),
       },
       transitionFromPrev: (done) => {
-        iso.moveToScenario(iTri, layout.iso.scenario.bottom, 1, done);
+        coll.joinTriangles(done);
       },
-    });
-
-    this.addSection(common, {
-      setContent: 'But, if we |also know that two angles are equal|, then actually we only need to know |one angle| to calculate all three.',
-    });
-
-    common = {
-      setContent: 'We start by labelling the |third angle| as |b| and adding all the angles to |_180|.',
-      modifiers: {
-        _180: clickWord(
-          '180º', 'id_important_triangles_sum1',
-          this.showQR, [this, '_triangle_introduction', '_Main'], colors.diagram.action,
-        ),
-        b: highlight(colors.angles),
-        a: highlight(colors.angles),
-        rearrange: click(iso._eqnANav.clickNext, [iso._eqnANav], colors.diagram.action),
-      },
-      showOnly: [iso, iTri, iTri._line],
-      show: [
-        iTri._angle1, iTri._angle2, iTri._angle3,
-        iTri._side23, iTri._side31,
-      ],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-      },
-    };
-    this.addSection(common, {
-      hide: [iTri._angle3],
-    });
-    this.addSection(common, {
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-        iso.pulseAngle3();
-        iso._eqnANav.showForm('0');
-        iso._eqnAEqn.isTouchable = false;
-      },
-    });
-    common.setContent = 'We can now |rearrange| for either |a| or |b|. We will start by rearranging for |b|.';
-    this.addSection(common, {
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-        iso._eqnANav.showForm('0');
-        iso._eqnAEqn.isTouchable = true;
-      },
-    });
-    this.addSection(common, {
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-        iso._eqnANav.showForm('5');
+        correction.showAll();
+        coll.setScenarios('combined');
       },
     });
 
     common = {
-      setContent: 'Similarly, if we know |a| we can |rearrange| to find |b|.',
-      modifiers: {
-        b: highlight(colors.angles),
-        a: highlight(colors.angles),
-        rearrange: click(iso._eqnANav.clickNext, [iso._eqnBNav], colors.diagram.action),
-      },
-      showOnly: [iso, iTri, iTri._line],
-      show: [
-        iTri._angle1, iTri._angle2, iTri._angle3,
-        iTri._side23, iTri._side31,
+      setContent: [
+        'First we can see that an isosceles triangle has |two_angles| that are equal. The equal angles are the angles |not between| the two equal sides.',
       ],
-      setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-      },
     };
     this.addSection(common, {
+      modifiers: {
+        two_angles: click(this.next, [this], colors.angles),
+      },
+      show: [left, right, correction],
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-        iso._eqnBNav.showForm('0');
+        coll.setScenarios('center');
       },
     });
     this.addSection(common, {
+      modifiers: {
+        two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
+      },
+      show: [tri._line, tri._side01, tri._side12, tri._angle0, tri._angle2],
+      transitionFromPrev: (done) => {
+        coll.pulseEqualAngles(done);
+      },
       setSteadyState: () => {
-        iso.setScenario(iTri, layout.iso.scenario.bottom);
-        iso._eqnBNav.showForm('9');
+        coll.setScenarios('center');
+      },
+    });
+
+    common = {
+      setContent: [
+        'Another observation relates to the |line| that splits the angle between the equal sides.',
+      ],
+    };
+    this.addSection(common, {
+      title: 'Split Line',
+      modifiers: {
+        line: click(this.next, [this], colors.sides),
+      },
+      show: [left, right, correction],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        line: click(coll.pulseSplit, [coll, null], colors.sides),
+      },
+      show: [
+        left._line, left._angleTop, left._angleBase, left._sideBase,
+        right._line, right._angleTop, right._angleBase, right._sideBase,
+        correction, split._line,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseSplit(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+
+    common = {
+      show: [
+        left._line, left._angleTop, left._angleBase, left._sideBase,
+        right._line, right._angleTop, right._angleBase, right._sideBase,
+        correction, split._line,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    };
+    this.addSection(common, {
+      setContent: [
+        'This line splits the base side into |two_equal_lengths|.',
+      ],
+      modifiers: {
+        two_equal_lengths: click(coll.pulseLeftRightBaseLabel, [coll], colors.sides),
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'In addition, as the two |c| angles make a |supplementary| angle, then |_c| is 90º, and so the line joins the base side at a |right_angle|.',
+      ],
+      modifiers: {
+        c: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
+        _c: highlight(colors.angles),
+        supplementary: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.angles),
+        right_angle: click(coll.pulseRightAngle, [coll], colors.angles),
+      },
+      setLeaveState: () => {
+        left._angleBase.autoRightAngle = false;
+        right._angleBase.autoRightAngle = false;
       },
     });
 
     this.addSection({
-      setContent: centerV([
-        'And so we have found that only |one angle| is needed in an |isosceles triangle| to |calculate all three|.',
+      setContent: style({ top: 0 }, [
+        'So we see a triangle with two |equal_sides|, has two |equal_angles|, and the |line| that splits the third angle also splits the |opposite_side| equally and intersects at a |right_angle|.',
       ]),
+      modifiers: {
+        equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.sides),
+        equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
+        opposite_side: click(coll.pulseLeftRightBaseLabel, [coll], colors.sides),
+        right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
+        line: click(coll.pulseSplit, [coll, null], colors.sides),
+      },
+      show: [
+        left._line, left._angleTop, left._sideBase, left._angleEqual,
+        left._sideEqual,
+        right._line, right._angleTop, right._sideBase, right._angleEqual,
+        right._sideEqual, right._angleBase._curve,
+        correction, split._line,
+      ],
+      setSteadyState: () => {
+        right._angleBase.autoRightAngle = true;
+        right._angleBase.update();
+        left._angleTop.setColor(colors.disabled);
+        right._angleTop.setColor(colors.disabled);
+        // split._line.setColor(colors.disabled);
+      },
+      setLeaveState: () => {
+        right._angleBase.autoRightAngle = false;
+        left._angleTop.setColor(colors.angles);
+        right._angleTop.setColor(colors.angles);
+        // split._line.setColor(colors.sides);
+      },
+    });
+
+    this.addSection({
+      title: 'Triangle With Two Equal Angles',
+      setContent: [
+        'We can use the same process to show a triangle with two |equal_angles|, also has two equal sides and is therefore an |isosceles| triangle.',
+      ],
+      modifiers: {
+        equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle2,
+      ],
+    });
+
+    common = {
+      setContent: [
+        'Draw a |line| that splits the triangle such that the top angle is split into two |equal_angles|.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        line: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle2,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        line: click(this.next, [this], colors.sides),
+        equal_angles: click(this.next, [this], colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle2, tri._angle1,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        line: click(coll.growSplit, [coll, null], colors.sides),
+        equal_angles: click(coll.pulseTopAngles, [coll], colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0,
+        tri._angle2, coll._split._line, left._angleTop,
+        right._angleTop,
+      ],
+      transitionFromPrev: (done) => {
+        coll.growSplit(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('combined');
+      },
+    });
+
+    common = {
+      setContent: [
+        'Label this line |L|, then consider the triangle\'s |separately|.',
+      ],
+      show: [
+        tri._line, tri._angle0,
+        tri._angle2, coll._split._line, left._angleTop,
+        right._angleTop,
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        L: click(this.next, [this], colors.sides),
+        separately: click(this.next, [this], colors.sides),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        L: click(coll.pulseL, [coll, null], colors.sides),
+        separately: click(this.next, [this], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll._split._label.showAll();
+        coll.pulseL(done);
+      },
+      setSteadyState: () => {
+        coll._split._label.showAll();
+        coll.setScenarios('combined');
+      },
+    });
+
+    // this.addSection(common, {
+    //   modifiers: {
+    //     separately: click(this.next, [this], colors.sides),
+    //   },
+    //   show: [
+    //     tri._line, tri._side01, tri._side12,
+    //     split,
+    //     left._angleTop, right._angleTop,
+    //   ],
+    //   setSteadyState: () => {
+    //     coll.setScenarios('combined');
+    //   },
+    // });
+    this.addSection(common, {
+      modifiers: {
+        separately: click(coll.splitTriangle, [coll, null], colors.sides),
+      },
+      show: [
+        left._line, left._angleTop, left._angleEqual, left._sideSplit,
+        right._line, right._angleTop, right._angleEqual, right._sideSplit,
+      ],
+      transitionFromPrev: (done) => {
+        coll.splitTriangle(done);
+      },
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'These two triangles have the same |Angle-Angle-Side| combination are therefore, |congruent|.',
+      ],
+      modifiers: {
+        'Angle-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Aas'], colors.diagram.action),
+      },
+      show: [
+        left._line, left._angleTop, left._angleEqual, left._sideSplit,
+        right._line, right._angleTop, right._angleEqual, right._sideSplit,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+
+    common = {
+      setContent: ['Therefore, the remaining sides and angles are the |same| between the triangles.'],
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    };
+    this.addSection(common, {
+      modifiers: { same: click(this.next, [this], colors.diagram.action) },
+      show: [
+        left._line, left._angleTop, left._angleEqual, left._sideSplit,
+        right._line, right._angleTop, right._angleEqual, right._sideSplit,
+      ],
+    });
+    this.addSection(common, {
+      modifiers: {
+        same: click(
+          coll.pulseRemainingLeftRightProperties2,
+          [coll],
+          colors.diagram.action,
+        ),
+      },
+      show: [left, right],
+      transitionFromPrev: (done) => {
+        coll.pulseLeftRightBaseLabel();
+        coll.pulseLeftRightBaseAngles();
+        coll.pulseLeftRightEqualSides(done);
+      },
+    });
+
+    common = {
+      setContent: ['We then |recombine| the triangles.'],
+      show: [left, right],
+    };
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(this.next, [this], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll.setScenarios('separate');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        recombine: click(coll.joinTriangles, [coll, null], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll.joinTriangles(done);
+      },
+      setSteadyState: () => {
+        correction.showAll();
+        coll.setScenarios('combined');
+      },
+    });
+
+    common = {
+      setContent: [
+        'And can see that a triangle with two |equal_angles|, also has two |equal_sides| and is therefore an |isosceles| triangle.',
+      ],
+    };
+    this.addSection(common, {
+      modifiers: {
+        equal_angles: click(this.next, [this], colors.angles),
+        equal_sides: click(this.next, [this], colors.sides),
+      },
+      show: [left, right, correction],
+      setSteadyState: () => {
+        coll.setScenarios('combined');
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
+        equal_sides: click(coll.pulseEqualSides, [coll, null], colors.sides),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle2, tri._side01, tri._side12,
+      ],
+      setSteadyState: () => {
+        coll.setScenarios('center');
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'If you know a triangle has |two_equal_sides| then it is called an |isosceles triangle|, and also has |two_equal_angles|.',
+        'Similarly, if you know a triangle has |_two_equal_angles| then it also has |_two_equal_sides| and is therefore an |isosceles triangle|.',
+      ]),
+      modifiers: {
+        two_equal_sides: highlight(colors.sides),
+        _two_equal_sides: highlight(colors.sides),
+        two_equal_angles: highlight(colors.angles),
+        _two_equal_angles: highlight(colors.angles),
+      },
+    });
+
+    this.addSection({
+      title: 'Calculate All Angles',
+      setContent: style({ centerV: true }, [
+        'We can also use the knowledge that |two_angles_are_the_same| to consider the |relationship| between all |three angles| in an isosceles triangle.',
+      ]),
+      modifiers: {
+        two_angles_are_the_same: highlight(colors.angles),
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'We know that all angles in a triangle must add to |_180|, and in this case |two_angles| are the same.',
+      ],
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2,
+      ],
+      modifiers: {
+        two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
+        _180: clickW(
+          '180º',
+          this.showQR,
+          [this, 'triangle_introduction/base', 'Main'],
+          colors.angles,
+        ),
+      },
+    });
+    this.addSection({
+      setContent: [
+        'Therefore:',
+      ],
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('1');
+        eqn.setScenario('top');
+      },
+    });
+    this.addSection({
+      setContent: [
+        'So if |a| is known:',
+      ],
+      modifiers: {
+        a: highlight(colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('b');
+        eqn.setScenario('top');
+      },
+    });
+    this.addSection({
+      setContent: [
+        'Or if |b| is known:',
+      ],
+      modifiers: {
+        b: highlight(colors.angles),
+      },
+      show: [
+        tri._line, tri._angle0, tri._angle1, tri._angle2, eqn,
+      ],
+      setSteadyState: () => {
+        eqn.showForm('a');
+        eqn.setScenario('top');
+      },
     });
   }
 }

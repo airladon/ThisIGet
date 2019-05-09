@@ -2,34 +2,64 @@
 import Fig from 'figureone';
 import commonLessonLayout from '../common/layout';
 
-const { Point } = Fig;
+// const { Point, Transform, Line } = Fig.tools.g2;
+
 // const cssColorNames = [
 //   'latin',
 //   'line',
-//   'angleA',
-//   'angleB',
-//   'angleC',
-//   'angleD',
-//   'disabled',
-//   'supplementary',
-//   'intersectingLine',
-//   'quizLine',
 // ];
+const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
   const layout: Object = commonLessonLayout();
-  layout.input = new Point(0, -1.7);
-  layout.quiz = {
-    position: new Point(0, 0),
-    answer: new Point(0, -1.7),
-    nextSteps: new Point(0, -1.9),
-    check: new Point(0.7, -1.7),
-    newProblem: new Point(0.9, -1.7),
+  const { colors } = layout;
+  const quizTri = {
+    method: 'polyLine',
+    options: {
+      points: [
+        [0, 0],
+        [0, 1.5],
+        [1.5, 0],
+      ],
+      color: colors.sides,
+      width: layout.width,
+      close: true,
+      pad: {
+        color: [0, 0, 0, 0.001],
+        // color: colors.angles,
+        isMovable: true,
+        sides: 4,
+        radius: 0.1,
+      },
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.3,
+          width: layout.width,
+        },
+        autoRightAngle: false,
+        label: {
+          text: null,
+          precision: 0,
+        },
+      },
+      side: {
+        label: {
+          text: null,
+          location: 'outside',
+        },
+      },
+    },
   };
-  layout.answerBox = new Point(-0.6, -1.45);
 
-  layout.triangle.angle.radius = 0.2;
-  layout.triangle.angle.labelRadius = 0.25;
+  const tri1 = joinObjects({}, quizTri, { name: 'tri1' });
+  const tri2 = joinObjects({}, quizTri, { name: 'tri2' });
+
+  layout.addElementsQuiz = [
+    tri1,
+    tri2,
+  ];
+
   return layout;
 }

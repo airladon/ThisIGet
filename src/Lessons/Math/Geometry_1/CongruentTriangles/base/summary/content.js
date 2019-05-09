@@ -1,21 +1,27 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { click, highlight, clickWord } = Fig.tools.html;
+const {
+  highlight,
+  click,
+  clickWord,
+//   centerV,
+} = Fig.tools.html;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,53 +35,42 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const tri = diag._triangle;
+    const coll = diag._collection;
+    const congruent = coll._congruentTriangles;
 
     this.addSection({
-      title: 'Congruent Triangles',
-      setContent: `
-        <p class="lesson__font_0p9">
-          Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|. Shapes remain |congruent| if one is |rotated| or |flipped|.
-        </p>
-        ${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html('id_lesson__congruent_angles_definition')}
+      setContent: [
+        'Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
+        `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
       `,
-      modifiers: {
-        rotated: click(tri.toggleCongruentRotate, [tri], colors.diagram.action),
-        flipped: click(tri.toggleCongruentFlip, [tri], colors.diagram.action),
-        side_lengths: highlight(colors.lineLabels),
-        angles: highlight(colors.angleLabels),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the right triangle or touch the |rotated| text to rotate the triangle and see the angles and sides stay the same.</li>',
-        '<li>Touch the |flipped| text to flip the triangle and see the angles and sides stay the same.</li>',
-        '</ul>',
       ],
-      infoModifiers: {
-        rotated: highlight(colors.diagram.action),
-        flipped: highlight(colors.diagram.action),
+      modifiers: {
+        side_lengths: highlight(colors.sides),
+        angles: highlight(colors.angles),
+        rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
+        flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
       },
-      setEnterState: () => {
-        const lay = layout.triangles.congruent;
-        tri.setTriangleScenarios(
-          lay.points, lay.points,
-          lay.tri1.scenario, lay.tri2.scenario,
-        );
-        tri._tri2.isMovable = true;
-        tri._tri2.isTouchable = true;
-        tri._tri2.touchInBoundingRect = true;
-        tri._tri2.move.type = 'rotation';
+      show: [congruent],
+      setSteadyState: () => {
+        congruent.isFlipped = false;
+        congruent._tri1.setScenario('summaryLeft');
+        congruent._tri2.setScenario('summaryRight');
+        congruent._tri2.makeTouchable();
+        congruent._tri2.isMovable = true;
+        congruent._tri2.touchInBoundingRect = true;
+        congruent._tri2.move.type = 'rotation';
       },
-      show: [tri],
+      setLeaveState: () => {
+        congruent._tri2.isTouchable = false;
+        congruent._tri2.isMovable = false;
+      },
     });
-
     this.addSection({
-      title: 'Congruency Tests',
-      setContent: `
-        <p class="lesson__font_0p9">
+      setContent: [
+        `<p class="lesson__font_0p9">
           |All sides and angles can be measured| to show two triangles are congruent. There are also some combinations of |three properties| that can show congruency.
         </p>
-        <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40" style="margin-top: 7%">
+        <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40" style="margin-top: 3%">
         <b>CAN</b> guarantee congruency.
         </div>
           <ul class="lesson__congruent_angles_summary__list">
@@ -96,7 +91,7 @@ class Content extends LessonContent {
           <ul class="lesson__congruent_angles_summary__list">
             <li>|AAA|</li>
           </ul>
-      `,
+      `],
       modifiers: {
         SAS: clickWord(
           'Side Angle Side', 'id_lesson__congruent_SAS',
@@ -123,20 +118,26 @@ class Content extends LessonContent {
           diag.showCombination, [diag, 'ssa'], colors.diagram.text.base,
         ),
       },
-      setInfo: [
-        '<ul>',
-        '<li>Touch the property combinations to see more explanation.</li>',
-        '</ul>',
-      ],
-      setEnterState: () => {
-        const lay = layout.triangles.congruent;
-        tri.setTriangleScenarios(
-          lay.points, lay.points,
-          lay.tri1CongruencyTests.scenario, lay.tri1CongruencyTests.scenario,
-        );
+      // modifiers: {
+      //   side_lengths: highlight(colors.sides),
+      //   angles: highlight(colors.angles),
+      //   rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
+      //   flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
+      // },
+      show: [congruent._tri1, diag._label],
+      setSteadyState: () => {
+      //   congruent.isFlipped = false;
+        congruent._tri1.setScenario('summaryTri1');
+      //   congruent._tri2.setScenario('summaryRight');
+      //   congruent._tri2.makeTouchable();
+      //   congruent._tri2.isMovable = true;
+      //   congruent._tri2.touchInBoundingRect = true;
+      //   congruent._tri2.move.type = 'rotation';
       },
-      showOnly: [tri],
-      show: [tri._tri1, diag._label],
+      // setLeaveState: () => {
+      //   congruent._tri2.isTouchable = false;
+      //   congruent._tri2.isMovable = false;
+      // },
     });
   }
 }

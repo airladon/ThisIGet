@@ -115,20 +115,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./js/diagram/Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./js/diagram/DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
 /* harmony import */ var _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./js/diagram/webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
-/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/DrawingObject */ "./src/js/diagram/DrawingObjects/DrawingObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./js/diagram/DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
 /* harmony import */ var _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
 /* harmony import */ var _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./js/diagram/DiagramObjects/EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-
+/* harmony import */ var _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./js/diagram/DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
 
 
 
@@ -168,27 +166,24 @@ var FigureOne = {
   DiagramElementPrimative: _js_diagram_Element__WEBPACK_IMPORTED_MODULE_7__["DiagramElementPrimative"],
   DrawContext2D: _js_diagram_DrawContext2D__WEBPACK_IMPORTED_MODULE_8__["default"],
   WebGLInstance: _js_diagram_webgl_webgl__WEBPACK_IMPORTED_MODULE_9__["default"],
-  AnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["AnimationPhase"],
-  ColorAnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationPhase"],
-  CustomAnimationPhase: _js_diagram_AnimationPhase__WEBPACK_IMPORTED_MODULE_10__["CustomAnimationPhase"],
   //
-  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_11__["default"],
-  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_12__["default"],
-  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["TextObject"],
-  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramText"],
-  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_13__["DiagramFont"],
-  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_14__["default"],
+  DrawingObject: _js_diagram_DrawingObjects_DrawingObject__WEBPACK_IMPORTED_MODULE_10__["default"],
+  VertexObject: _js_diagram_DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_11__["default"],
+  TextObject: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["TextObject"],
+  DiagramText: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramText"],
+  DiagramFont: _js_diagram_DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_12__["DiagramFont"],
+  HTMLObject: _js_diagram_DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_13__["default"],
   //
-  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_16__["default"],
-  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_17__["default"],
+  DiagramObjectAngle: _js_diagram_DiagramObjects_Angle__WEBPACK_IMPORTED_MODULE_15__["default"],
+  DiagramObjectLine: _js_diagram_DiagramObjects_Line__WEBPACK_IMPORTED_MODULE_16__["default"],
+  DiagramObjectPolyLine: _js_diagram_DiagramObjects_PolyLine__WEBPACK_IMPORTED_MODULE_17__["default"],
   EqnNavigator: _js_diagram_DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_18__["default"],
   EquationLabel: _js_diagram_DiagramObjects_EquationLabel__WEBPACK_IMPORTED_MODULE_19__["default"],
   //
-  EquationLegacy: _js_diagram_DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_20__["Equation"],
-  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_22__["default"],
-  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_21__["EquationNew"],
+  EquationForm: _js_diagram_DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_21__["default"],
+  Equation: _js_diagram_DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_20__["EquationNew"],
   //
-  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__["default"],
+  HTMLEquation: _js_diagram_DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_14__["default"],
   //
   Point: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"],
   Line: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"],
@@ -197,347 +192,3291 @@ var FigureOne = {
   TransformLimit: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"],
   Translation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Translation"],
   Scale: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Scale"],
-  Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]
+  Rotation: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"],
+  parsePoint: _js_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"]
 };
 /* harmony default export */ __webpack_exports__["default"] = (FigureOne);
 
 /***/ }),
 
-/***/ "./src/js/diagram/AnimationPhase.js":
-/*!******************************************!*\
-  !*** ./src/js/diagram/AnimationPhase.js ***!
-  \******************************************/
-/*! exports provided: AnimationPhase, ColorAnimationPhase, CustomAnimationPhase */
+/***/ "./src/js/diagram/Animation/Animation.js":
+/*!***********************************************!*\
+  !*** ./src/js/diagram/Animation/Animation.js ***!
+  \***********************************************/
+/*! exports provided: PositionAnimationStep, AnimationBuilder, ParallelAnimationStep, SerialAnimationStep, TransformAnimationStep, AnimationStep, DelayStep, TriggerStep, inParallel, inSerial, trigger, delay, ColorAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut, CustomAnimationStep, custom, AnimationManager, RotationAnimationStep, ScaleAnimationStep, PulseAnimationStep, OpacityAnimationStep */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AnimationPhase", function() { return AnimationPhase; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationPhase", function() { return ColorAnimationPhase; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationPhase", function() { return CustomAnimationPhase; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PositionAnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PositionAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PositionAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PositionAnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ColorAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ColorAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ColorAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/OpacityAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["DissolveInAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["dissolveIn"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["DissolveOutAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["dissolveOut"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "OpacityAnimationStep", function() { return _AnimationStep_ElementAnimationStep_OpacityAnimationStep__WEBPACK_IMPORTED_MODULE_2__["OpacityAnimationStep"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/TransformAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TransformAnimationStep", function() { return _AnimationStep_ElementAnimationStep_TransformAnimationStep__WEBPACK_IMPORTED_MODULE_3__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/RotationAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "RotationAnimationStep", function() { return _AnimationStep_ElementAnimationStep_RotationAnimationStep__WEBPACK_IMPORTED_MODULE_4__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/ScaleAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ScaleAnimationStep", function() { return _AnimationStep_ElementAnimationStep_ScaleAnimationStep__WEBPACK_IMPORTED_MODULE_5__["default"]; });
+
+/* harmony import */ var _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./AnimationStep/ElementAnimationStep/PulseAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "PulseAnimationStep", function() { return _AnimationStep_ElementAnimationStep_PulseAnimationStep__WEBPACK_IMPORTED_MODULE_6__["default"]; });
+
+/* harmony import */ var _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./AnimationStep/TriggerStep */ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__["TriggerStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return _AnimationStep_TriggerStep__WEBPACK_IMPORTED_MODULE_7__["trigger"]; });
+
+/* harmony import */ var _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./AnimationStep/CustomStep */ "./src/js/diagram/Animation/AnimationStep/CustomStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__["CustomAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return _AnimationStep_CustomStep__WEBPACK_IMPORTED_MODULE_8__["custom"]; });
+
+/* harmony import */ var _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationStep/ParallelAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__["ParallelAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return _AnimationStep_ParallelAnimationStep__WEBPACK_IMPORTED_MODULE_9__["inParallel"]; });
+
+/* harmony import */ var _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./AnimationStep/SerialAnimationStep */ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__["SerialAnimationStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return _AnimationStep_SerialAnimationStep__WEBPACK_IMPORTED_MODULE_10__["inSerial"]; });
+
+/* harmony import */ var _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./AnimationStep/DelayStep */ "./src/js/diagram/Animation/AnimationStep/DelayStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__["DelayStep"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return _AnimationStep_DelayStep__WEBPACK_IMPORTED_MODULE_11__["delay"]; });
+
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationStep", function() { return _AnimationStep__WEBPACK_IMPORTED_MODULE_12__["default"]; });
+
+/* harmony import */ var _AnimationManager__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./AnimationManager */ "./src/js/diagram/Animation/AnimationManager.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationManager", function() { return _AnimationManager__WEBPACK_IMPORTED_MODULE_13__["default"]; });
+
+/* harmony import */ var _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./AnimationBuilder */ "./src/js/diagram/Animation/AnimationBuilder.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "AnimationBuilder", function() { return _AnimationBuilder__WEBPACK_IMPORTED_MODULE_14__["default"]; });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationBuilder.js":
+/*!******************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationBuilder.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationBuilder; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+// import * as tools from '../../tools/math';
+
+// import PositionAnimationStep from './AnimationStep/ElementAnimationStep/PositionAnimationStep';
+// import SerialAnimationStep from './AnimationStep/SerialAnimationStep';
 
 
-// eslint-disable-next-line import/no-cycle
- // Planned Animation
 
-var AnimationPhase =
+var AnimationBuilder =
 /*#__PURE__*/
-function () {
-  // The target transform to animate to
-  // animation time or velocity.
-  // If velocity=0, it is disregarded.
-  // Time for all transform operations will be equal to the time of the longest
-  // operation.
-  // animation time
-  // Direction of rotation
-  // Animation style
-  // Time when phase started
-  // Transform at start of phase
-  // Transform delta from start to target
-  function AnimationPhase() {
-    var startTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var targetTransform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-    var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-    var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-    var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-    var animationStyle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"];
-    var translationStyle = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'linear';
-    var translationOptions = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : {
-      rot: 1,
-      magnitude: 0.5,
-      offset: 0.5,
-      controlPoint: null,
-      direction: ''
-    };
+function (_animation$SerialAnim) {
+  _inherits(AnimationBuilder, _animation$SerialAnim);
 
-    _classCallCheck(this, AnimationPhase);
+  function AnimationBuilder() {
+    var _this;
 
-    if (startTransform == null) {
-      this.startTransform = null;
+    var elementOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, AnimationBuilder);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.element = elementOrOptionsIn;
     } else {
-      this.startTransform = startTransform._dup();
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
     }
 
-    this.targetTransform = targetTransform._dup();
-    this.timeOrVelocity = timeOrVelocity;
-    this.rotDirection = rotDirection;
-    this.animationStyle = animationStyle;
-    this.translationStyle = translationStyle;
-    this.translationOptions = translationOptions;
-    this.callback = callback;
-    this.finishOnCancel = finishOnCancel;
-    this.startTime = -1; // this.startTransform = new Transform();
-
-    this.deltaTransform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(AnimationBuilder).call(this, options));
+    _this.element = options.element;
+    return _possibleConstructorReturn(_this, _assertThisInitialized(_assertThisInitialized(_this)));
   }
 
-  _createClass(AnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new AnimationPhase(this.startTransform, this.targetTransform, this.timeOrVelocity, this.rotDirection, this.callback, this.finishOnCancel, this.animationStyle, this.translationStyle, Object.assign({}, this.translationOptions));
-      c.startTime = this.startTime; // this.startTransform = this.startTransform._dup();
-
-      c.deltaTransform = this.deltaTransform._dup();
-      return c;
-    }
-  }, {
-    key: "start",
-    value: function start(currentTransform) {
-      var _this = this;
-
-      if (this.startTransform == null) {
-        this.startTransform = currentTransform._dup();
+  _createClass(AnimationBuilder, [{
+    key: "custom",
+    value: function custom() {
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
       }
 
-      var startTransform = this.startTransform;
+      this.then(_construct(_Animation__WEBPACK_IMPORTED_MODULE_1__["CustomAnimationStep"], optionsIn));
+      return this;
+    }
+  }, {
+    key: "rotation",
+    value: function rotation() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
 
-      if (startTransform != null) {
-        this.deltaTransform = this.targetTransform.sub(startTransform);
-        var time = 0;
-
-        if (typeof this.timeOrVelocity === 'number') {
-          time = this.timeOrVelocity;
-        } else {
-          time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(startTransform, this.targetTransform, this.timeOrVelocity, this.rotDirection);
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
         }
 
-        if (time === 0) {
-          this.time = 1;
-        } else {
-          this.time = time;
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["RotationAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "position",
+    value: function position() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
         }
 
-        this.deltaTransform.order.forEach(function (delta, index) {
-          var start = startTransform.order[index];
-          var target = _this.targetTransform.order[index];
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PositionAnimationStep"](options));
+      }
 
-          if (delta instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && start instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && target instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
-            var rotDiff = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(start.r, target.r, _this.rotDirection); // eslint-disable-next-line no-param-reassign
+      return this;
+    }
+  }, {
+    key: "scale",
+    value: function scale() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
 
-            delta.r = rotDiff;
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ScaleAnimationStep"](options));
+      }
+
+      return this;
+    } // moveTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+    // positionTo(...optionsIn: Array<TypePositionAnimationStepInputOptions>) {
+    //   return this.moveToPosition(...optionsIn);
+    // }
+
+  }, {
+    key: "transform",
+    value: function transform() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          optionsIn[_key6] = arguments[_key6];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["TransformAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "scenario",
+    value: function scenario() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          optionsIn[_key7] = arguments[_key7];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(options.element.anim.scenario(options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "scenarios",
+    value: function scenarios() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+          optionsIn[_key8] = arguments[_key8];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(options.element.anim.scenarios(options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "color",
+    value: function color() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+          optionsIn[_key9] = arguments[_key9];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["ColorAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "opacity",
+    value: function opacity() {
+      if (this.element != null) {
+        var defaultOptions = {
+          element: this.element
+        };
+
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+        this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["OpacityAnimationStep"](options));
+      }
+
+      return this;
+    }
+  }, {
+    key: "dissolveOut",
+    value: function dissolveOut() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len11 = arguments.length, args = new Array(_len11 > 1 ? _len11 - 1 : 0), _key11 = 1; _key11 < _len11; _key11++) {
+        args[_key11 - 1] = arguments[_key11];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveOut"](options));
+      return this;
+    }
+  }, {
+    key: "dissolveIn",
+    value: function dissolveIn() {
+      var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        element: this.element
+      };
+      var options;
+
+      for (var _len12 = arguments.length, args = new Array(_len12 > 1 ? _len12 - 1 : 0), _key12 = 1; _key12 < _len12; _key12++) {
+        args[_key12 - 1] = arguments[_key12];
+      }
+
+      if (typeof timeOrOptionsIn === 'number') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          duration: timeOrOptionsIn
+        }].concat(args));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["dissolveIn"](options));
+      return this;
+    }
+  }, {
+    key: "delay",
+    value: function delay() {
+      var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len13 = arguments.length, args = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+        args[_key13 - 1] = arguments[_key13];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["delay"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [numOrOptionsIn].concat(args)));
+      return this;
+    }
+  }, {
+    key: "trigger",
+    value: function trigger() {
+      var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14 > 1 ? _len14 - 1 : 0), _key14 = 1; _key14 < _len14; _key14++) {
+        optionsIn[_key14 - 1] = arguments[_key14];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["trigger"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [triggerOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inParallel",
+    value: function inParallel() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len15 = arguments.length, optionsIn = new Array(_len15 > 1 ? _len15 - 1 : 0), _key15 = 1; _key15 < _len15; _key15++) {
+        optionsIn[_key15 - 1] = arguments[_key15];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inParallel"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "inSerial",
+    value: function inSerial() {
+      var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      for (var _len16 = arguments.length, optionsIn = new Array(_len16 > 1 ? _len16 - 1 : 0), _key16 = 1; _key16 < _len16; _key16++) {
+        optionsIn[_key16 - 1] = arguments[_key16];
+      }
+
+      this.then(_Animation__WEBPACK_IMPORTED_MODULE_1__["inSerial"].apply(_Animation__WEBPACK_IMPORTED_MODULE_1__, [stepsOrOptionsIn].concat(optionsIn)));
+      return this;
+    }
+  }, {
+    key: "pulse",
+    value: function pulse() {
+      var defaultOptions = {
+        element: this.element
+      };
+
+      for (var _len17 = arguments.length, optionsIn = new Array(_len17), _key17 = 0; _key17 < _len17; _key17++) {
+        optionsIn[_key17] = arguments[_key17];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      this.then(new _Animation__WEBPACK_IMPORTED_MODULE_1__["PulseAnimationStep"](options));
+      return this;
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
+      this.steps = [];
+      this.state = 'idle';
+    } // whenFinished(callback: (boolean) => void) {
+    //   super.whenFinished(callback);
+    //   return this;
+    // }
+
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var newBuilder = new AnimationBuilder();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newBuilder, ['element']);
+      newBuilder.element = this.element;
+      return newBuilder;
+    }
+  }]);
+
+  return AnimationBuilder;
+}(_Animation__WEBPACK_IMPORTED_MODULE_1__["SerialAnimationStep"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationManager.js":
+/*!******************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationManager.js ***!
+  \******************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationManager; });
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _Animation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import * as tools from '../../tools/math';
+ // import type { TypeSerialAnimationStepInputOptions } from './AnimationStep/SerialAnimationStep';
+// import type {
+//   TypePositionAnimationStepInputOptions, TypeParallelAnimationStepInputOptions,
+//   TypeDelayStepInputOptions, TypeTriggerStepInputOptions,
+//   TypeColorAnimationStepInputOptions, TypeCustomAnimationStepInputOptions,
+// } from './Animation';
+
+
+
+
+var AnimationManager =
+/*#__PURE__*/
+function () {
+  function AnimationManager() {
+    var elementOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, AnimationManager);
+
+    var defaultOptions = {};
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (elementOrOptionsIn instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElement"]) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.element = elementOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}, defaultOptions, elementOrOptionsIn].concat(optionsIn));
+    }
+
+    this.element = options.element;
+    this.animations = [];
+    this.state = 'idle'; // $FlowFixMe
+
+    this.options = {
+      translation: {}
+    };
+    return this;
+  }
+
+  _createClass(AnimationManager, [{
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      if (this.state === 'animating') {
+        return true;
+      }
+
+      var isAnimating = false;
+      this.animations.forEach(function (animation) {
+        if (animation.state === 'waitingToStart' || animation.state === 'animating') {
+          isAnimating = true;
+        }
+      });
+      return isAnimating;
+    }
+  }, {
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      // console.log('animation manager', now)
+      var animationsToRemove = [];
+      var remaining = null;
+      var isAnimating = false;
+      this.animations.forEach(function (animation, index) {
+        var animationIsAnimating = false;
+
+        if (animation.state === 'waitingToStart' || animation.state === 'animating') {
+          var stepRemaining = animation.nextFrame(now);
+
+          if (remaining === null) {
+            remaining = stepRemaining;
           }
-        });
-        this.startTime = -1;
+
+          if (stepRemaining < remaining) {
+            remaining = stepRemaining;
+          }
+
+          animationIsAnimating = true;
+        }
+
+        if (animation.state === 'finished' && animation.removeOnFinish) {
+          animationIsAnimating = false;
+          animationsToRemove.push(index);
+        }
+
+        if (animationIsAnimating) {
+          isAnimating = true;
+        }
+      });
+
+      if (isAnimating) {
+        this.state = 'animating';
+      } else {
+        this.state = 'idle';
       }
+
+      for (var i = animationsToRemove.length - 1; i >= 0; i -= 1) {
+        this.animations.splice(animationsToRemove[i], 1);
+      } // if (initialState !== 'animating' && this.state === 'animating') {
+      //   if (this.element != null) {
+      //     this.element.unrender();
+      //   }
+      // }
+
+
+      return remaining;
     }
   }, {
-    key: "finish",
-    value: function finish( // eslint-disable-next-line no-use-before-define
-    element) {
-      var _this2 = this;
+    key: "cleanAnimations",
+    value: function cleanAnimations() {
+      var animationsToRemove = [];
+      var isAnimating = false;
 
-      var cancelled = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var forceSetToEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
 
-      // console.log('finished', this.callback)
-      var setToEnd = function setToEnd() {
-        element.setTransform(_this2.targetTransform);
-      };
-
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
+        if (animation.state === 'finished' && animation.removeOnFinish) {
+          animationsToRemove.push(i);
+        } else {
+          isAnimating = true;
         }
       }
 
-      if (forceSetToEnd === true) {
-        setToEnd();
+      for (var _i = animationsToRemove.length - 1; _i >= 0; _i -= 1) {
+        this.animations.splice(animationsToRemove[_i], 1);
       }
 
-      if (this.callback != null) {
-        this.callback(cancelled);
+      if (isAnimating) {
+        this.state = 'animating';
+      } else {
+        this.state = 'idle';
+      }
+    } // Cancel all primary animations with the name
+    // animations will be cleaned up on next frame
+
+  }, {
+    key: "cancel",
+    value: function cancel(name) {
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (name == null) {
+        this.cancelAll(force);
+      } else {
+        for (var i = 0; i < this.animations.length; i += 1) {
+          var animation = this.animations[i];
+
+          if (animation.name === name) {
+            animation.cancel(force);
+          }
+        }
+
+        this.cleanAnimations();
       }
     }
-  }]);
+  }, {
+    key: "cancelAll",
+    value: function cancelAll() {
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
 
-  return AnimationPhase;
-}(); // Planned Animation
+      for (var i = 0; i < this.animations.length; i += 1) {
+        this.animations[i].cancel(force);
+      }
 
-var ColorAnimationPhase =
-/*#__PURE__*/
-function () {
-  // The target transform to animate to
-  // animation time
-  // Animation style
-  // Time when phase started
-  // callbackOnCancel: boolean;
-  function ColorAnimationPhase() {
-    var startColor = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-    var targetColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [0, 0, 0, 1];
-    var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var disolve = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-    var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-    var animationStyle = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["linear"];
-
-    _classCallCheck(this, ColorAnimationPhase);
-
-    this.targetColor = targetColor.slice();
-    this.endColor = targetColor.slice();
-
-    if (disolve === 'out') {
-      this.targetColor[3] = 0.01;
+      this.cleanAnimations();
     }
-
-    this.time = time;
-    this.animationStyle = animationStyle;
-    this.disolve = disolve;
-    this.finishOnCancel = finishOnCancel; // this.callbackOnCancel = callbackOnCancel;
-
-    this.startTime = -1;
-    this.startColor = startColor;
-    this.deltaColor = [0, 0, 0, 1];
-    this.callback = callback;
-  }
-
-  _createClass(ColorAnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new ColorAnimationPhase(this.startColor, this.targetColor, this.time, this.disolve, this.callback, this.finishOnCancel, // this.callbackOnCancel,
-      this.animationStyle);
-      c.startTime = this.startTime; // this.startColor = this.startColor.slice();
-
-      c.deltaColor = this.deltaColor.slice();
-      return c;
-    } // eslint-disable-next-line no-use-before-define
-
   }, {
     key: "start",
-    value: function start(element) {
-      if (this.startColor == null) {
-        this.startColor = element.color.slice();
-      }
+    value: function start(name) {
+      if (name == null) {
+        this.startAll();
+      } else {
+        for (var i = 0; i < this.animations.length; i += 1) {
+          var animation = this.animations[i];
 
-      var startColor = this.startColor;
+          if (animation.name === name) {
+            if (animation.state !== 'animating') {
+              animation.start();
+              animation.finishIfZeroDuration();
 
-      if (startColor != null) {
-        if (this.disolve === 'in') {
-          this.startColor[3] = 0.01;
-          element.setColor(startColor.slice());
-          element.showAll();
+              if (animation.state === 'animating') {
+                this.state = 'animating';
+              }
+            }
+          }
         }
-
-        this.deltaColor = this.targetColor.map(function (c, index) {
-          return c - startColor[index];
-        });
       }
-
-      this.startTime = -1;
     }
   }, {
-    key: "finish",
-    value: function finish( // eslint-disable-next-line no-use-before-define
-    element) {
-      var _this3 = this;
+    key: "startAll",
+    value: function startAll() {
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
 
-      var cancelled = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      var forceSetToEnd = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+        if (animation.state !== 'animating') {
+          animation.start();
+          animation.finishIfZeroDuration();
 
-      var setToEnd = function setToEnd() {
-        element.setColor(_this3.endColor);
-
-        if (_this3.disolve === 'out') {
-          element.hide();
-        }
-      };
-
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
+          if (animation.state === 'animating') {
+            this.state = 'animating';
+          }
         }
       }
+    }
+  }, {
+    key: "addTo",
+    value: function addTo(name) {
+      for (var i = 0; i < this.animations.length; i += 1) {
+        var animation = this.animations[i];
 
-      if (forceSetToEnd === true) {
-        setToEnd();
+        if (animation.name === name) {
+          return animation;
+        }
       }
 
-      if (this.callback != null) {
-        this.callback(cancelled);
+      return this.new(name);
+    }
+  }, {
+    key: "new",
+    value: function _new(nameOrStep) {
+      if (typeof nameOrStep === 'string' || nameOrStep == null) {
+        var options = {};
+
+        if (this.element != null) {
+          options.element = this.element;
+        }
+
+        if (nameOrStep != null) {
+          options.name = nameOrStep;
+        }
+
+        var animation = new _Animation__WEBPACK_IMPORTED_MODULE_1__["AnimationBuilder"](options);
+        this.animations.push(animation);
+        return animation;
       }
+
+      if (nameOrStep != null) {
+        this.animations.push(nameOrStep);
+      }
+
+      return nameOrStep;
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var newManager = new AnimationManager();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, newManager, ['element']);
+      newManager.element = this.element;
+      return newManager;
     }
   }]);
 
-  return ColorAnimationPhase;
-}(); // Planned Animation
+  return AnimationManager;
+}();
 
-var CustomAnimationPhase =
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep.js":
+/*!***************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep.js ***!
+  \***************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return AnimationStep; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+// import {
+//   Transform, Point,
+//   Rotation, getDeltaAngle, getMaxTimeFromVelocity,
+// } from '../tools/g2';
+// import * as tools from '../tools/math';
+// import type { pathOptionsType } from '../tools/g2';
+// eslint-disable-next-line import/no-cycle
+// import { DiagramElement } from './Element';
+
+
+var AnimationStep =
 /*#__PURE__*/
 function () {
-  // animation time
-  // Time when phase started
-  function CustomAnimationPhase(animationCallback) {
-    var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-    var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-    var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-    var finishOnCancel = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-    var animationStyle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_1__["easeinout"];
+  // animations: Array<AnimationStep>;
+  function AnimationStep() {
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
-    _classCallCheck(this, CustomAnimationPhase);
+    _classCallCheck(this, AnimationStep);
 
-    this.time = time;
-    this.startPercent = startPercent;
-    this.animationCallback = animationCallback;
+    var defaultOptions = {
+      onFinish: null,
+      completeOnCancel: null,
+      removeOnFinish: true,
+      name: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["generateRandomString"])(),
+      duration: 0,
+      delay: 0,
+      beforeFrame: null,
+      afterFrame: null
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"])({}, defaultOptions, optionsIn);
+    this.onFinish = options.onFinish;
+    this.completeOnCancel = options.completeOnCancel;
+    this.duration = options.duration;
     this.startTime = -1;
-    this.animationStyle = animationStyle;
-    this.plannedStartTime = animationStyle(startPercent, true) * time;
-    this.callback = callback;
-    this.finishOnCancel = finishOnCancel;
-  }
+    this.state = 'idle';
+    this.name = options.name;
+    this.afterFrame = options.afterFrame;
+    this.beforeFrame = options.beforeFrame;
+    this.startDelay = options.delay; // This is only for it this step is a primary path in an Animation Manager
 
-  _createClass(CustomAnimationPhase, [{
-    key: "_dup",
-    value: function _dup() {
-      var c = new CustomAnimationPhase(this.animationCallback, this.time, this.startPercent, this.callback, this.finishOnCancel, this.animationStyle);
-      c.startTime = this.startTime;
-      return c;
-    }
+    this.removeOnFinish = options.removeOnFinish; // Each animation frame will typically calculate a percent complete,
+    // which is based on the duration, and from the percent complete calculate
+    // the position of the current animation.
+    // However, if you want to start an animation not from 0 percent, then this
+    // value can be used. When startTimeOffset != 0, then the first frame
+    // will be calculated at this.progression(startTimeOffset). The animation
+    // will still go to 1, but will be reduced in duration by startTimeOffset.
+    // When progressions aren't linear, then this time is non-trival.
+
+    this.startTimeOffset = 0;
+    return this;
+  } // returns remaining time if this step completes
+  // Return of 0 means this step is still going
+
+
+  _createClass(AnimationStep, [{
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      if (this.startTime === -1) {
+        this.startTime = now - this.startTimeOffset;
+      }
+
+      var deltaTime = now - this.startTime;
+      var remainingTime = -(this.duration + this.startDelay - deltaTime);
+
+      if (deltaTime >= this.startDelay) {
+        var deltaTimeAfterDelay = deltaTime - this.startDelay;
+
+        if (deltaTimeAfterDelay >= this.duration) {
+          remainingTime = deltaTimeAfterDelay - this.duration;
+          deltaTimeAfterDelay = this.duration;
+        }
+
+        if (this.beforeFrame) {
+          this.beforeFrame(deltaTimeAfterDelay / this.duration);
+        }
+
+        this.setFrame(deltaTimeAfterDelay);
+
+        if (this.afterFrame) {
+          this.afterFrame(deltaTimeAfterDelay / this.duration);
+        }
+
+        if (remainingTime >= 0) {
+          this.finish();
+        }
+      }
+
+      return remainingTime;
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {}
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      this.state = 'waitingToStart';
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
   }, {
     key: "start",
     value: function start() {
-      // this.startColor = currentColor.slice();
-      // this.deltaColor = this.targetColor.map((c, index) => c - this.startColor[index]);
-      this.startTime = -1;
+      var startTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.startTime = startTime;
+      this.state = 'animating';
+    }
+  }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      if (this.duration === 0) {
+        this.finish();
+      }
+    } // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {} // eslint-disable-next-line class-methods-use-this, no-unused-vars
+
+  }, {
+    key: "finish",
+    value: function finish() {
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      // this.startTime = -2;
+      // this.onFinish(false);
+      if (this.state === 'idle' || this.state === 'finished') {
+        return;
+      }
+
+      var oldState = this.state;
+      this.state = 'finished';
+
+      if (cancelled) {
+        if (force === 'complete') {
+          if (oldState === 'waitingToStart') {
+            this.start();
+          }
+
+          this.setToEnd();
+        } else if (force == null && this.completeOnCancel === true) {
+          if (oldState === 'waitingToStart') {
+            this.start();
+          }
+
+          this.setToEnd();
+        } else if (oldState === 'waitingToStart') {
+          this.cancelledWithNoComplete();
+        }
+      }
+
+      if (cancelled === false) {
+        if (oldState === 'waitingToStart') {
+          this.start();
+        }
+
+        this.setToEnd();
+      }
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    } // eslint-disable-next-line class-methods-use-this
+
+  }, {
+    key: "cancelledWithNoComplete",
+    value: function cancelledWithNoComplete() {}
+  }, {
+    key: "cancel",
+    value: function cancel() {
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.finish(true, force);
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new AnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }, {
+    key: "whenFinished",
+    value: function whenFinished(callback) {
+      this.onFinish = callback;
+      return this;
+    }
+  }, {
+    key: "ifCanceledThenComplete",
+    value: function ifCanceledThenComplete() {
+      this.completeOnCancel = true;
+      return this;
+    }
+  }, {
+    key: "ifCanceledThenStop",
+    value: function ifCanceledThenStop() {
+      this.completeOnCancel = false;
+      return this;
+    }
+  }]);
+
+  return AnimationStep;
+}();
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/CustomStep.js":
+/*!**************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/CustomStep.js ***!
+  \**************************************************************/
+/*! exports provided: CustomAnimationStep, custom */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CustomAnimationStep", function() { return CustomAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "custom", function() { return custom; });
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var CustomAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(CustomAnimationStep, _AnimationStep);
+
+  function CustomAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, CustomAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var AnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}].concat(optionsIn));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(CustomAnimationStep).call(this, AnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      callback: null,
+      startPercent: 0,
+      progression: 'linear'
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+
+    if (options.progression === 'linear') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    } else if (options.progression === 'easein') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+    } else if (options.progression === 'easeout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+    } else if (options.progression === 'easeinout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
+    } else {
+      _this.progression = options.progression;
+    }
+
+    _this.callback = options.callback;
+    _this.startPercent = options.startPercent;
+
+    if (typeof _this.progression === 'function') {
+      _this.startTimeOffset = _this.progression(options.startPercent, true) * options.duration;
+    }
+
+    _this.duration = options.duration;
+    return _this;
+  }
+
+  _createClass(CustomAnimationStep, [{
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+
+      if (this.callback != null) {
+        this.callback(percentComplete);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.callback != null) {
+        this.callback(1);
+      }
+    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
+    //   if (this.state === 'idle') {
+    //     return;
+    //   }
+    //   super.finish(cancelled, force);
+    //   const setToEnd = () => {
+    //     if (this.callback != null) {
+    //       this.callback(1);
+    //     }
+    //   };
+    //   if (cancelled && force === 'complete') {
+    //     setToEnd();
+    //   }
+    //   if (cancelled && force == null && this.completeOnCancel === true) {
+    //     setToEnd();
+    //   }
+    //   if (cancelled === false) {
+    //     setToEnd();
+    //   }
+    //   if (this.onFinish != null) {
+    //     this.onFinish(cancelled);
+    //   }
+    // }
+
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new CustomAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }]);
+
+  return CustomAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+function custom() {
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+    optionsIn[_key2] = arguments[_key2];
+  }
+
+  return _construct(CustomAnimationStep, optionsIn);
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/DelayStep.js":
+/*!*************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/DelayStep.js ***!
+  \*************************************************************/
+/*! exports provided: DelayStep, delay */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DelayStep", function() { return DelayStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "delay", function() { return delay; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+// Animations get started from a parent, but finish themselves
+var DelayStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(DelayStep, _AnimationStep);
+
+  function DelayStep() {
+    var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DelayStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 0
+    };
+
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (typeof numOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: numOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, numOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DelayStep).call(this, options)); // this.duration = options.duration;
+  }
+
+  _createClass(DelayStep, [{
+    key: "_dup",
+    value: function _dup() {
+      var dup = new DelayStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, dup);
+      return dup;
+    }
+  }]);
+
+  return DelayStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function delay() {
+  var numOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    args[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(DelayStep, [numOrOptionsIn].concat(args));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js":
+/*!************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js ***!
+  \************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ElementAnimationStep; });
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+ // import { DiagramElement } from '../../Element';
+
+
+
+
+var ElementAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(ElementAnimationStep, _AnimationStep);
+
+  function ElementAnimationStep() {
+    var _this;
+
+    var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ElementAnimationStep);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ElementAnimationStep).call(this, optionsIn));
+    var defaultProgression = 'easeinout';
+
+    if (optionsIn.type === 'color' || optionsIn.type === 'custom') {
+      defaultProgression = 'linear';
+    }
+
+    var defaultOptions = {
+      element: null,
+      type: 'custom',
+      progression: defaultProgression,
+      duration: 0
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, optionsIn);
+    _this.element = options.element;
+    _this.type = options.type;
+    _this.onFinish = options.onFinish;
+    _this.duration = options.duration;
+
+    if (options.progression === 'linear') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["linear"];
+    } else if (options.progression === 'easein') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easein"];
+    } else if (options.progression === 'easeout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeout"];
+    } else if (options.progression === 'easeinout') {
+      _this.progression = _tools_math__WEBPACK_IMPORTED_MODULE_0__["easeinout"];
+    } else {
+      _this.progression = options.progression;
+    }
+
+    return _this;
+  }
+
+  _createClass(ElementAnimationStep, [{
+    key: "_dup",
+    value: function _dup() {
+      var step = new ElementAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return ElementAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ColorAnimationStep.js ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ColorAnimationStep; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import {
+//   Transform, Point, getMaxTimeFromVelocity,
+// } from '../../../../tools/g2';
+
+
+
+var addColors = function addColors(color1, color2) {
+  return color1.map(function (c, index) {
+    return Math.min(c + color2[index], 1);
+  });
+};
+
+var subtractColors = function subtractColors(color1, color2) {
+  return color1.map(function (c, index) {
+    return c - color2[index];
+  });
+};
+
+var ColorAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(ColorAnimationStep, _ElementAnimationStep);
+
+  function ColorAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, ColorAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn, [{
+      type: 'color'
+    }]));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ColorAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      dissolve: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.color = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.color, ['start', 'delta', 'target', 'dissolve']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(ColorAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var element = this.element;
+
+      if (element != null) {
+        _get(_getPrototypeOf(ColorAnimationStep.prototype), "start", this).call(this, startTime);
+
+        if (this.color.start == null) {
+          this.color.start = element.color.slice();
+        }
+
+        if (this.color.delta == null && this.color.target == null) {
+          this.color.target = this.color.start.slice();
+        } else if (this.color.delta != null) {
+          this.color.target = addColors(this.color.start, this.color.delta);
+        }
+
+        this.color.whenComplete = this.color.target.slice();
+
+        if (this.color.dissolve === 'out') {
+          this.color.target[3] = 0.001;
+        }
+
+        if (this.color.dissolve === 'in') {
+          this.color.start[3] = 0.001;
+          element.setColor(this.color.start);
+          element.showAll();
+        }
+
+        this.color.delta = subtractColors(this.color.target, this.color.start);
+      } else {
+        this.duration = 0;
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var _this2 = this;
+
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+      var next = this.color.start.map(function (c, index) {
+        var newColor = c + _this2.color.delta[index] * p;
+
+        if (newColor > 1) {
+          newColor = 1;
+        }
+
+        if (newColor < 0) {
+          newColor = 0;
+        }
+
+        return newColor;
+      });
+
+      if (this.element != null) {
+        this.element.setColor(next);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      var element = this.element;
+
+      if (element != null) {
+        // console.log(this.name, this.color.whenComplete)
+        element.setColor(this.color.whenComplete);
+
+        if (this.color.dissolve === 'out') {
+          element.hide();
+        }
+      }
+    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
+    //   if (this.state === 'idle') {
+    //     return;
+    //   }
+    //   super.finish(cancelled, force);
+    //   const setToEnd = () => {
+    //     const { element } = this;
+    //     if (element != null) {
+    //       element.setColor(this.color.whenComplete);
+    //       if (this.color.dissolve === 'out') {
+    //         element.hide();
+    //       }
+    //     }
+    //   };
+    //   if (cancelled && force === 'complete') {
+    //     setToEnd();
+    //   }
+    //   if (cancelled && force == null && this.completeOnCancel === true) {
+    //     setToEnd();
+    //   }
+    //   if (cancelled === false) {
+    //     setToEnd();
+    //   }
+    //   if (this.onFinish != null) {
+    //     this.onFinish(cancelled);
+    //   }
+    // }
+
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new ColorAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return ColorAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]); // export class DissolveInAnimationStep extends ColorAnimationStep {
+//   constructor(
+//     timeOrOptionsIn: number | TypeElementAnimationStepInputOptions = {},
+//     ...args: Array<TypeElementAnimationStepInputOptions>
+//   ) {
+//     let options = {};
+//     const defaultOptions = { duration: 1, dissolve: 'in', completeOnCancel: true };
+//     if (typeof timeOrOptionsIn === 'number') {
+//       options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
+//     } else {
+//       options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
+//     }
+//     super(options);
+//   }
+// }
+// export function dissolveIn(
+//   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
+//   ...args: Array<TypeColorAnimationStepInputOptions>
+// ) {
+//   return new DissolveInAnimationStep(timeOrOptionsIn, ...args);
+// }
+// export class DissolveOutAnimationStep extends ColorAnimationStep {
+//   constructor(
+//     timeOrOptionsIn: number | TypeElementAnimationStepInputOptions = {},
+//     ...args: Array<TypeElementAnimationStepInputOptions>
+//   ) {
+//     let options = {};
+//     const defaultOptions = { duration: 1, dissolve: 'out', completeOnCancel: true };
+//     if (typeof timeOrOptionsIn === 'number') {
+//       options = joinObjects({}, defaultOptions, { duration: timeOrOptionsIn }, ...args);
+//     } else {
+//       options = joinObjects({}, defaultOptions, timeOrOptionsIn, ...args);
+//     }
+//     super(options);
+//   }
+// }
+// export function dissolveOut(
+//   timeOrOptionsIn: number | TypeColorAnimationStepInputOptions = {},
+//   ...args: Array<TypeColorAnimationStepInputOptions>
+// ) {
+//   return new DissolveOutAnimationStep(timeOrOptionsIn, ...args);
+// }
+
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js":
+/*!*********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/OpacityAnimationStep.js ***!
+  \*********************************************************************************************/
+/*! exports provided: OpacityAnimationStep, DissolveInAnimationStep, dissolveIn, DissolveOutAnimationStep, dissolveOut */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "OpacityAnimationStep", function() { return OpacityAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveInAnimationStep", function() { return DissolveInAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveIn", function() { return dissolveIn; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DissolveOutAnimationStep", function() { return DissolveOutAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "dissolveOut", function() { return dissolveOut; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import {
+//   Transform, Point, getMaxTimeFromVelocity,
+// } from '../../../../tools/g2';
+
+
+var OpacityAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(OpacityAnimationStep, _ElementAnimationStep);
+
+  function OpacityAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, OpacityAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}].concat(optionsIn, [{
+      type: 'color'
+    }]));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'dissolve']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(OpacityAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      dissolve: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.opacity = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["copyKeysFromTo"])(options, _this.opacity, ['start', 'delta', 'target', 'dissolve']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(OpacityAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var element = this.element;
+
+      if (element != null) {
+        _get(_getPrototypeOf(OpacityAnimationStep.prototype), "start", this).call(this, startTime);
+
+        if (this.opacity.start == null) {
+          // eslint-disable-next-line prefer-destructuring
+          this.opacity.start = element.opacity;
+        }
+
+        if (this.opacity.delta == null && this.opacity.target == null) {
+          this.opacity.target = this.opacity.start;
+        } else if (this.opacity.delta != null) {
+          this.opacity.target = this.opacity.start + this.opacity.delta;
+        }
+
+        this.opacity.whenComplete = this.opacity.target;
+
+        if (this.opacity.dissolve === 'out') {
+          // this.opacity.start = 1;
+          this.opacity.target = 0.001;
+          this.opacity.whenComplete = 1;
+          element.setOpacity(this.opacity.start); // this.opacity.target = 0.001;
+        }
+
+        if (this.opacity.dissolve === 'in') {
+          this.opacity.start = 0.001;
+          this.opacity.target = 1;
+          this.opacity.whenComplete = 1;
+          element.showAll();
+          element.setOpacity(this.opacity.start);
+        }
+
+        this.opacity.delta = this.opacity.target - this.opacity.start;
+      } else {
+        this.duration = 0;
+      }
+    }
+  }, {
+    key: "cancelledWithNoComplete",
+    value: function cancelledWithNoComplete() {
+      var element = this.element;
+
+      if (element != null) {
+        if (element.opacity === 0.001) {
+          element.hide();
+          element.opacity = 1;
+        }
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+      var next = this.opacity.start + this.opacity.delta * p;
+
+      if (next > 1) {
+        next = 1;
+      }
+
+      if (next < 0) {
+        next = 0;
+      }
+
+      if (this.element != null) {
+        this.element.setOpacity(next);
+      }
+    } // cancelledWithNoComplete() {
+    //   const { element } = this;
+    //   console.log('cancel with no complete')
+    //   if (element != null) {
+    //     if (this.color.fullOpacity) {
+    //       element.setColor([...element.color.slice(0, 3), 1]);
+    //     }
+    //   }
+    // }
+
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      var element = this.element;
+
+      if (element != null) {
+        // console.log(this.name, this.color.whenComplete)
+        element.setOpacity(this.opacity.whenComplete);
+
+        if (this.opacity.dissolve === 'out') {
+          element.hide();
+        }
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new OpacityAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return OpacityAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+var DissolveInAnimationStep =
+/*#__PURE__*/
+function (_OpacityAnimationStep) {
+  _inherits(DissolveInAnimationStep, _OpacityAnimationStep);
+
+  function DissolveInAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveInAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'in',
+      completeOnCancel: true
+    };
+
+    for (var _len2 = arguments.length, args = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+      args[_key2 - 1] = arguments[_key2];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveInAnimationStep).call(this, options));
+  }
+
+  return DissolveInAnimationStep;
+}(OpacityAnimationStep);
+function dissolveIn() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len3 = arguments.length, args = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
+    args[_key3 - 1] = arguments[_key3];
+  }
+
+  return _construct(DissolveInAnimationStep, [timeOrOptionsIn].concat(args));
+}
+var DissolveOutAnimationStep =
+/*#__PURE__*/
+function (_OpacityAnimationStep2) {
+  _inherits(DissolveOutAnimationStep, _OpacityAnimationStep2);
+
+  function DissolveOutAnimationStep() {
+    var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, DissolveOutAnimationStep);
+
+    var options = {};
+    var defaultOptions = {
+      duration: 1,
+      dissolve: 'out',
+      completeOnCancel: true
+    };
+
+    for (var _len4 = arguments.length, args = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+      args[_key4 - 1] = arguments[_key4];
+    }
+
+    if (typeof timeOrOptionsIn === 'number') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+        duration: timeOrOptionsIn
+      }].concat(args));
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+    }
+
+    return _possibleConstructorReturn(this, _getPrototypeOf(DissolveOutAnimationStep).call(this, options));
+  }
+
+  return DissolveOutAnimationStep;
+}(OpacityAnimationStep);
+function dissolveOut() {
+  var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len5 = arguments.length, args = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
+    args[_key5 - 1] = arguments[_key5];
+  }
+
+  return _construct(DissolveOutAnimationStep, [timeOrOptionsIn].concat(args));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js":
+/*!**********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PositionAnimationStep.js ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PositionAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var PositionAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(PositionAnimationStep, _ElementAnimationStep);
+
+  function PositionAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, PositionAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'position'
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'translationStyle', 'translationOptions', 'velocity', 'maxTime']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PositionAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      translationStyle: 'linear',
+      translationOptions: {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: '',
+        maxTime: null
+      },
+      velocity: null
+    };
+
+    if (_this.element && _this.element.animations.options.tranlsation) {
+      var translationOptions = _this.element.animations.options.tranlsation;
+
+      if (translationOptions.style != null) {
+        // $FlowFixMe - this is messy, but deal with it
+        defaultPositionOptions.style = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultPositionOptions.translationOptions, translationOptions);
+    }
+
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn));
+
+    if (options.start != null) {
+      options.start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start);
+    }
+
+    if (options.target != null) {
+      options.target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.target);
+    }
+
+    if (options.delta != null) {
+      options.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta);
+    } // $FlowFixMe
+
+
+    _this.position = {
+      translationOptions: {}
+    };
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.position, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.position.translationOptions);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(PositionAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(PositionAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.position.start === null) {
+        if (this.element != null) {
+          this.position.start = this.element.getPosition();
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.position.delta == null && this.position.target != null && this.position.start != null) {
+        var delta = this.position.target.sub(this.position.start);
+        this.position.delta = delta;
+      } else if (this.position.delta != null && this.position.start != null) {
+        this.position.target = this.position.start.add(this.position.delta);
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      var _this$position = this.position,
+          target = _this$position.target,
+          start = _this$position.start,
+          velocity = _this$position.velocity;
+
+      if (velocity != null && start != null && target != null) {
+        var velocityToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(velocity);
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(velocityToUse));
+      }
+
+      if (this.position.maxTime != null) {
+        if (this.duration > this.position.maxTime) {
+          this.duration = this.position.maxTime;
+        }
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+
+      if (this.position.delta != null && this.position.start != null) {
+        var next = this.position.start.toDelta(this.position.delta, p, this.position.translationStyle, this.position.translationOptions);
+
+        if (this.element != null) {
+          this.element.setPosition(next);
+        }
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element != null) {
+        this.element.setPosition(this.position.target);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new PositionAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return PositionAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/PulseAnimationStep.js ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return PulseAnimationStep; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+var PulseAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(PulseAnimationStep, _ElementAnimationStep);
+
+  function PulseAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, PulseAnimationStep);
+
+    // const ElementAnimationStepOptionsIn =
+    //   joinObjects({}, { type: 'pulse' }, ...optionsIn);
+    // super(ElementAnimationStepOptionsIn);
+    var defaultOptions = {
+      scale: 1.5,
+      numLines: 1,
+      type: 'pulse',
+      duration: 1,
+      frequency: 0,
+      stopAfterDuration: true
+    };
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(PulseAnimationStep).call(this, options));
+    _this.scale = options.scale;
+    _this.numLines = options.numLines;
+    _this.duration = options.duration;
+    _this.frequency = options.frequency;
+    _this.stopAfterDuration = options.stopAfterDuration;
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(PulseAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(PulseAnimationStep.prototype), "start", this).call(this, startTime);
+
+      var element = this.element;
+
+      if (element != null) {
+        if (this.numLines === 1) {
+          element.pulseScaleNow(this.duration, this.scale, this.frequency);
+        } else {
+          element.pulseThickNow(this.duration, this.scale, this.numLines);
+        }
+      }
+    } // setFrame(deltaTime: number) {
+    // }
+
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element != null) {
+        if (this.stopAfterDuration) {
+          this.element.stopPulsing(true);
+        }
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new PulseAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return PulseAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js":
+/*!**********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/RotationAnimationStep.js ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return RotationAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+// A transform animation unit manages a transform animation on an element.
+//
+// The start transform can either be defined initially, or null. Null means
+// the start transform is whatever the current element transform is when the
+// unit is started with start().
+//
+// The transform target is defined with either the target or delta properties.
+// Target is used to predefine the target.
+// Delta is used to calculate the target when the unit is started with start()
+//
+var RotationAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(RotationAnimationStep, _ElementAnimationStep);
+
+  function RotationAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, RotationAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'rotation'
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'direction', 'velocity', 'clipTo', 'maxTime']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(RotationAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultTransformOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      direction: 0,
+      velocity: null,
+      clipTo: null,
+      maxTime: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.rotation = {};
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.rotation, ['start', 'delta', 'target', 'velocity', 'direction', 'clipTo', 'maxTime']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(RotationAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(RotationAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.rotation.start === null) {
+        if (this.element != null) {
+          this.rotation.start = this.element.transform.r() || 0;
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.rotation.delta == null && this.rotation.target != null) {
+        var delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(this.rotation.start, this.rotation.target, this.rotation.direction);
+        this.rotation.delta = delta;
+      } else if (this.rotation.delta != null) {
+        this.rotation.target = this.rotation.start + this.rotation.delta;
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      var velocity = this.rotation.velocity;
+
+      if (velocity != null) {
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(this.rotation.target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(velocity), this.rotation.direction);
+      }
+
+      if (this.rotation.maxTime != null) {
+        if (this.duration > this.rotation.maxTime) {
+          this.duration = this.rotation.maxTime;
+        }
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+      var nextR = this.rotation.start + this.rotation.delta * p;
+      nextR = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(nextR, this.rotation.clipTo);
+      var element = this.element;
+
+      if (element != null) {
+        element.setRotation(nextR);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      var element = this.element;
+
+      if (element != null) {
+        element.transform.updateRotation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(this.rotation.target, this.rotation.clipTo));
+        element.setTransformCallback(element.transform);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new RotationAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return RotationAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js":
+/*!*******************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/ScaleAnimationStep.js ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return ScaleAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+var ScaleAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(ScaleAnimationStep, _ElementAnimationStep);
+
+  function ScaleAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, ScaleAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'position'
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'velocity', 'maxTime']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ScaleAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultPositionOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      velocity: null,
+      maxTime: null
+    };
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultPositionOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.scale = {};
+
+    if (options.start != null) {
+      options.start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start);
+    }
+
+    if (options.target != null) {
+      options.target = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.target);
+    }
+
+    if (options.delta != null) {
+      options.delta = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.delta);
+    }
+
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.scale, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'maxTime']);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(ScaleAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      _get(_getPrototypeOf(ScaleAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.scale.start === null) {
+        if (this.element != null) {
+          this.scale.start = this.element.getScale();
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.scale.delta == null && this.scale.target != null && this.scale.start != null) {
+        var delta = this.scale.target.sub(this.scale.start);
+        this.scale.delta = delta;
+      } else if (this.scale.delta != null && this.scale.start != null) {
+        this.scale.target = this.scale.start.add(this.scale.delta);
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      var _this$scale = this.scale,
+          target = _this$scale.target,
+          start = _this$scale.start,
+          velocity = _this$scale.velocity;
+
+      if (velocity != null && target != null && start != null) {
+        var velocityToUse = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(velocity); // if (typeof velocity === 'number') {
+        //   velocityToUse = new Point(velocity, velocity);
+        // }
+
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(start), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(target), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(velocityToUse));
+      }
+
+      if (this.scale.maxTime != null) {
+        if (this.duration > this.scale.maxTime) {
+          this.duration = this.scale.maxTime;
+        }
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete;
+
+      if (this.scale.start != null && this.scale.delta != null) {
+        var next = this.scale.start.toDelta(this.scale.delta, p);
+
+        if (this.element != null) {
+          this.element.setScale(next);
+        }
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element != null) {
+        this.element.setScale(this.scale.target);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new ScaleAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return ScaleAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js":
+/*!***********************************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ElementAnimationStep/TransformAnimationStep.js ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return TransformAnimationStep; });
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../ElementAnimationStep */ "./src/js/diagram/Animation/AnimationStep/ElementAnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+// A transform animation unit manages a transform animation on an element.
+//
+// The start transform can either be defined initially, or null. Null means
+// the start transform is whatever the current element transform is when the
+// unit is started with start().
+//
+// The transform target is defined with either the target or delta properties.
+// Target is used to predefine the target.
+// Delta is used to calculate the target when the unit is started with start()
+//
+var TransformAnimationStep =
+/*#__PURE__*/
+function (_ElementAnimationStep) {
+  _inherits(TransformAnimationStep, _ElementAnimationStep);
+
+  function TransformAnimationStep() {
+    var _this;
+
+    _classCallCheck(this, TransformAnimationStep);
+
+    for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+      optionsIn[_key] = arguments[_key];
+    }
+
+    var ElementAnimationStepOptionsIn = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, {
+      type: 'transform'
+    }].concat(optionsIn));
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["deleteKeys"])(ElementAnimationStepOptionsIn, ['start', 'delta', 'target', 'rotDirection', 'translationStyle', 'translationOptions', 'velocity', 'clipRotationTo', 'maxTime']);
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TransformAnimationStep).call(this, ElementAnimationStepOptionsIn));
+    var defaultTransformOptions = {
+      start: null,
+      target: null,
+      delta: null,
+      translationStyle: 'linear',
+      rotDirection: 0,
+      translationOptions: {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: ''
+      },
+      velocity: null,
+      clipRotationTo: null,
+      maxTime: null
+    };
+
+    if (_this.element && _this.element.animations.options.translation) {
+      var translationOptions = _this.element.animations.options.translation;
+
+      if (translationOptions.style != null) {
+        defaultTransformOptions.translationStyle = translationOptions.style;
+      }
+
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultTransformOptions.translationOptions, translationOptions);
+    }
+
+    var options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultTransformOptions].concat(optionsIn)); // $FlowFixMe
+
+    _this.transform = {
+      translationOptions: {}
+    };
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["copyKeysFromTo"])(options, _this.transform, ['start', 'delta', 'target', 'translationStyle', 'velocity', 'rotDirection', 'clipRotationTo', 'maxTime']);
+    Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(options.translationOptions, _this.transform.translationOptions);
+    return _this;
+  } // On start, calculate the duration, target and delta if not already present.
+  // This is done here in case the start is defined as null meaning it is
+  // going to start from present transform.
+  // Setting a duration to 0 will effectively skip this animation step
+
+
+  _createClass(TransformAnimationStep, [{
+    key: "start",
+    value: function start(startTime) {
+      var _this2 = this;
+
+      _get(_getPrototypeOf(TransformAnimationStep.prototype), "start", this).call(this, startTime);
+
+      if (this.transform.start === null) {
+        if (this.element != null) {
+          this.transform.start = this.element.transform._dup();
+        } else {
+          this.duration = 0;
+          return;
+        }
+      } // if delta is null, then calculate it from start and target
+
+
+      if (this.transform.delta == null && this.transform.target != null) {
+        var delta = this.transform.target.sub(this.transform.start);
+        delta.order.forEach(function (deltaStep, index) {
+          var startStep = _this2.transform.start.order[index];
+          var targetStep = _this2.transform.target.order[index];
+
+          if (deltaStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && startStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"] && targetStep instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rotation"]) {
+            var rotDiff = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getDeltaAngle"])(startStep.r, targetStep.r, _this2.transform.rotDirection); // eslint-disable-next-line no-param-reassign
+
+            deltaStep.r = rotDiff;
+          }
+        });
+        this.transform.delta = delta;
+      } else if (this.transform.delta != null) {
+        this.transform.target = this.transform.start.add(this.transform.delta);
+      } else {
+        this.duration = 0;
+      } // If Velocity is defined, then use it to calculate duration
+
+
+      if (this.transform.velocity != null) {
+        this.duration = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform.start, this.transform.target, this.transform.velocity, this.transform.rotDirection);
+      }
+
+      if (this.transform.maxTime != null) {
+        if (this.duration > this.transform.maxTime) {
+          this.duration = this.transform.maxTime;
+        }
+      }
+    }
+  }, {
+    key: "setFrame",
+    value: function setFrame(deltaTime) {
+      // const start = phase.startTransform._dup();
+      // const delta = phase.deltaTransform._dup();
+      var percentTime = deltaTime / this.duration;
+      var percentComplete = this.progression(percentTime);
+      var p = percentComplete; // let next = delta._dup().constant(p);
+      // next = start.add(delta.mul(next));
+
+      var next = this.transform.start.toDelta(this.transform.delta, p, this.transform.translationStyle, this.transform.translationOptions);
+
+      if (this.transform.clipRotationTo !== null) {
+        next.clipRotation(this.transform.clipRotationTo);
+      }
+
+      if (this.element != null) {
+        this.element.setTransform(next);
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.element != null) {
+        this.element.setTransform(this.transform.target);
+      }
+    } // finish(cancelled: boolean = false, force: ?'complete' | 'noComplete' = null) {
+    //   if (this.state === 'idle') {
+    //     return;
+    //   }
+    //   super.finish(cancelled, force);
+    //   const setToEnd = () => {
+    //     if (this.element != null) {
+    //       this.element.setTransform(this.transform.target);
+    //     }
+    //   };
+    //   if (cancelled && force === 'complete') {
+    //     setToEnd();
+    //   }
+    //   if (cancelled && force == null && this.completeOnCancel === true) {
+    //     setToEnd();
+    //   }
+    //   if (cancelled === false) {
+    //     setToEnd();
+    //   }
+    //   if (this.onFinish != null) {
+    //     this.onFinish(cancelled);
+    //   }
+    // }
+
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new TransformAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step, ['element']);
+      step.element = this.element;
+      return step;
+    }
+  }]);
+
+  return TransformAnimationStep;
+}(_ElementAnimationStep__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js":
+/*!*************************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/ParallelAnimationStep.js ***!
+  \*************************************************************************/
+/*! exports provided: ParallelAnimationStep, inParallel */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ParallelAnimationStep", function() { return ParallelAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inParallel", function() { return inParallel; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+// Animations get started from a parent, but finish themselves
+var ParallelAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(ParallelAnimationStep, _AnimationStep);
+
+  function ParallelAnimationStep() {
+    var _this;
+
+    var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, ParallelAnimationStep);
+
+    var defaultOptions = {
+      steps: []
+    };
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (Array.isArray(stepsOrOptionsIn)) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.steps = stepsOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, stepsOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(ParallelAnimationStep).call(this, options));
+    _this.steps = [];
+
+    if (!Array.isArray(options.steps) && options.steps != null) {
+      _this.steps = [options.steps];
+    } else if (options.steps != null) {
+      _this.steps = options.steps;
+    }
+
+    return _this;
+  }
+
+  _createClass(ParallelAnimationStep, [{
+    key: "with",
+    value: function _with(step) {
+      this.steps.push(step);
+      return this;
+    }
+  }, {
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      var remaining = null;
+
+      if (this.beforeFrame != null) {
+        this.beforeFrame(now - this.startTime);
+      }
+
+      this.steps.forEach(function (step) {
+        if (step.state === 'animating' || step.state === 'waitingToStart') {
+          var stepRemaining = step.nextFrame(now); // console.log(step.element.uid, stepRemaining)
+
+          if (remaining === null) {
+            remaining = stepRemaining;
+          }
+
+          if (stepRemaining < remaining) {
+            remaining = stepRemaining;
+          }
+        }
+      });
+
+      if (this.afterFrame != null) {
+        this.afterFrame(now - this.startTime);
+      }
+
+      if (remaining === null) {
+        remaining = 0;
+      }
+
+      if (remaining >= 0) {
+        this.finish();
+      }
+
+      return remaining;
+    }
+  }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      var state = 'finished';
+      this.steps.forEach(function (step) {
+        if (step.state !== 'finished') {
+          state = 'animating';
+        }
+      });
+
+      if (state === 'finished') {
+        this.finish();
+      }
+    }
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "startWaiting", this).call(this);
+
+      this.steps.forEach(function (step) {
+        step.startWaiting();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start(startTime) {
+      this.startWaiting();
+
+      _get(_getPrototypeOf(ParallelAnimationStep.prototype), "start", this).call(this, startTime);
+
+      this.steps.forEach(function (step) {
+        step.start(startTime);
+        step.finishIfZeroDuration();
+      });
     }
   }, {
     key: "finish",
     value: function finish() {
-      var _this4 = this;
-
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
 
-      var setToEnd = function setToEnd() {
-        _this4.animationCallback(1);
-      };
+      if (this.state === 'idle' || this.state === 'finished') {
+        return;
+      } // super.finish(cancelled, force);
 
-      if (forceSetToEnd === null) {
-        if (!cancelled || this.finishOnCancel) {
-          setToEnd();
+
+      this.state = 'finished';
+      var forceToUse = null;
+
+      if (this.completeOnCancel === true) {
+        forceToUse = 'complete';
+      }
+
+      if (this.completeOnCancel === false) {
+        forceToUse = 'noComplete';
+      }
+
+      if (force != null) {
+        forceToUse = force;
+      }
+
+      this.steps.forEach(function (step) {
+        if (step.state !== 'idle' && step.state !== 'finished') {
+          step.finish(cancelled, forceToUse);
         }
-      }
+      });
 
-      if (forceSetToEnd === true) {
-        setToEnd();
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
       }
-
-      if (this.callback != null) {
-        this.callback(cancelled);
-      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new ParallelAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
     }
   }]);
 
-  return CustomAnimationPhase;
-}();
+  return ParallelAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function inParallel() {
+  var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(ParallelAnimationStep, [stepsOrOptionsIn].concat(optionsIn));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js":
+/*!***********************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/SerialAnimationStep.js ***!
+  \***********************************************************************/
+/*! exports provided: SerialAnimationStep, inSerial */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SerialAnimationStep", function() { return SerialAnimationStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "inSerial", function() { return inSerial; });
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
+
+function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+// import * as tools from '../../tools/math';
+// import { DiagramElement } from '../Element';
+
+
+var SerialAnimationStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(SerialAnimationStep, _AnimationStep);
+
+  function SerialAnimationStep() {
+    var _this;
+
+    var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, SerialAnimationStep);
+
+    var defaultOptions = {
+      steps: []
+    };
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (Array.isArray(stepsOrOptionsIn)) {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.steps = stepsOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"].apply(void 0, [{}, defaultOptions, stepsOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(SerialAnimationStep).call(this, options));
+    _this.index = 0;
+    _this.steps = [];
+
+    if (!Array.isArray(options.steps) && options.steps != null) {
+      _this.steps = [options.steps];
+    } else if (options.steps != null) {
+      _this.steps = options.steps;
+    }
+
+    return _this;
+  } // constructor(optionsIn: TypeSerialAnimationStepInputOptions = {}) {
+  //   super(optionsIn);
+  //   this.index = 0;
+  //   const defaultOptions = {};
+  //   const options = joinObjects({}, defaultOptions, optionsIn);
+  //   this.steps = [];
+  //   if (!Array.isArray(options.steps) && options.steps != null) {
+  //     this.steps = [options.steps];
+  //   } else if (options.steps != null) {
+  //     this.steps = options.steps;
+  //   }
+  //   return this;
+  // }
+
+
+  _createClass(SerialAnimationStep, [{
+    key: "then",
+    value: function then(step) {
+      this.steps.push(step);
+      return this;
+    }
+  }, {
+    key: "startWaiting",
+    value: function startWaiting() {
+      _get(_getPrototypeOf(SerialAnimationStep.prototype), "startWaiting", this).call(this);
+
+      this.steps.forEach(function (step) {
+        step.startWaiting();
+      });
+    }
+  }, {
+    key: "start",
+    value: function start(startTime) {
+      if (this.state !== 'animating') {
+        this.startWaiting();
+
+        _get(_getPrototypeOf(SerialAnimationStep.prototype), "start", this).call(this, startTime);
+
+        this.index = 0;
+
+        if (this.steps.length > 0) {
+          this.steps[0].start(startTime);
+          this.steps[0].finishIfZeroDuration();
+        }
+      }
+
+      this.finishIfZeroDuration();
+    }
+  }, {
+    key: "finishIfZeroDuration",
+    value: function finishIfZeroDuration() {
+      var i = 0;
+      var step = this.steps[0];
+
+      while (i < this.steps.length && step.state === 'finished') {
+        i += 1;
+
+        if (i < this.steps.length) {
+          this.index = i;
+          step = this.steps[i];
+          step.start(this.steps[i - 1].startTime);
+          step.finishIfZeroDuration();
+        }
+      }
+
+      if (i === this.steps.length) {
+        this.finish();
+      }
+    }
+  }, {
+    key: "nextFrame",
+    value: function nextFrame(now) {
+      var remaining = -1;
+
+      if (this.beforeFrame != null) {
+        this.beforeFrame(now - this.startTime);
+      }
+
+      if (this.index <= this.steps.length - 1) {
+        remaining = this.steps[this.index].nextFrame(now);
+
+        if (this.afterFrame != null) {
+          this.afterFrame(now - this.startTime);
+        } // console.log('serial', now, this.index, remaining)
+
+
+        if (remaining >= 0) {
+          if (this.index === this.steps.length - 1) {
+            this.finish();
+            return remaining;
+          }
+
+          this.index += 1;
+          this.steps[this.index].start(now - remaining);
+          return this.nextFrame(now);
+        }
+      }
+
+      return remaining;
+    }
+  }, {
+    key: "finish",
+    value: function finish() {
+      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var force = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+
+      if (this.state === 'idle' || this.state === 'finished') {
+        return;
+      } // super.finish(cancelled, force);
+
+
+      this.state = 'finished';
+      var forceToUse = null;
+
+      if (this.completeOnCancel === true) {
+        forceToUse = 'complete';
+      }
+
+      if (this.completeOnCancel === false) {
+        forceToUse = 'noComplete';
+      }
+
+      if (force != null) {
+        forceToUse = force;
+      }
+
+      this.steps.forEach(function (step) {
+        if (step.state !== 'idle' && step.state !== 'finished') {
+          step.finish(cancelled, forceToUse);
+        }
+      });
+
+      if (this.onFinish != null) {
+        this.onFinish(cancelled);
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new SerialAnimationStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, step);
+      return step;
+    }
+  }]);
+
+  return SerialAnimationStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_0__["default"]);
+function inSerial() {
+  var stepsOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(SerialAnimationStep, [stepsOrOptionsIn].concat(optionsIn));
+}
+
+/***/ }),
+
+/***/ "./src/js/diagram/Animation/AnimationStep/TriggerStep.js":
+/*!***************************************************************!*\
+  !*** ./src/js/diagram/Animation/AnimationStep/TriggerStep.js ***!
+  \***************************************************************/
+/*! exports provided: TriggerStep, trigger */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "TriggerStep", function() { return TriggerStep; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "trigger", function() { return trigger; });
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _AnimationStep__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../AnimationStep */ "./src/js/diagram/Animation/AnimationStep.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+var TriggerStep =
+/*#__PURE__*/
+function (_AnimationStep) {
+  _inherits(TriggerStep, _AnimationStep);
+
+  function TriggerStep() {
+    var _this;
+
+    var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+    _classCallCheck(this, TriggerStep);
+
+    var defaultOptions = {
+      payload: null,
+      duration: 0
+    };
+    var options;
+
+    for (var _len = arguments.length, optionsIn = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      optionsIn[_key - 1] = arguments[_key];
+    }
+
+    if (typeof triggerOrOptionsIn === 'function') {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      options.callback = triggerOrOptionsIn;
+    } else {
+      options = _tools_tools__WEBPACK_IMPORTED_MODULE_0__["joinObjects"].apply(void 0, [{}, defaultOptions, triggerOrOptionsIn].concat(optionsIn));
+    }
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(TriggerStep).call(this, options));
+    _this.callback = options.callback;
+    _this.payload = options.payload;
+    _this.duration = options.duration;
+    return _this;
+  }
+
+  _createClass(TriggerStep, [{
+    key: "setFrame",
+    value: function setFrame() {
+      if (this.callback != null) {
+        this.callback(this.payload);
+        this.callback = null;
+      }
+    }
+  }, {
+    key: "setToEnd",
+    value: function setToEnd() {
+      if (this.callback != null) {
+        this.callback(this.payload);
+        this.callback = null;
+      }
+    }
+  }, {
+    key: "_dup",
+    value: function _dup() {
+      var step = new TriggerStep();
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_0__["duplicateFromTo"])(this, step, ['element']);
+      return step;
+    }
+  }]);
+
+  return TriggerStep;
+}(_AnimationStep__WEBPACK_IMPORTED_MODULE_1__["default"]);
+function trigger() {
+  var triggerOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+  for (var _len2 = arguments.length, optionsIn = new Array(_len2 > 1 ? _len2 - 1 : 0), _key2 = 1; _key2 < _len2; _key2++) {
+    optionsIn[_key2 - 1] = arguments[_key2];
+  }
+
+  return _construct(TriggerStep, [triggerOrOptionsIn].concat(optionsIn));
+}
 
 /***/ }),
 
@@ -551,24 +3490,23 @@ function () {
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _webgl_shaders__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./webgl/shaders */ "./src/js/diagram/webgl/shaders.js");
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
-/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./webgl/GlobalAnimation */ "./src/js/diagram/webgl/GlobalAnimation.js");
+/* harmony import */ var _Gesture__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Gesture */ "./src/js/diagram/Gesture.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DiagramObjects/DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./DiagramAddElements/addElements */ "./src/js/diagram/DiagramAddElements/addElements.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-
+ // import getShaders from './webgl/shaders';
 
 
 
@@ -597,242 +3535,221 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 // It is then transformed by the element colleciton
 // It is then transformed by the diagram
 // it is then transformed into GL Space
+//
+// Diagram elements can also be rendered to an image in a HTML 2D canvas
+// element. To do so, pass in:
+//    - Diagram Element (primative or collection) to render
+//    - HTML element (which is a 2D canvas)
+//    - Window of diagram to render
+//    - Window scaling (how does the window fit within the HTML Element)
+//      - fit: diagram units will be scaled so that diagram window limits
+//             aspect ratio fits within the element aspect ratio
+//      - 1em: diagram units will be scaled so 0.2 diagram units (default font
+//             size) looks like 1em of the html element font size in pixels
+//      - 10px: diagram units will be scaled so that the max diagram window
+//              limit will be the pixel count
+//      - strech: diagram units will be scaled so that the diagram window
+//                limits will be stretched to fit the html element width
+//                and height
+// Then the process is:
+//    - html element size in pixels and aspect ratio found
+//    - html element size in gl coordinates found
 var Diagram =
 /*#__PURE__*/
 function () {
+  // canvasHigh: HTMLCanvasElement;
+  // textCanvasHigh: HTMLCanvasElement;
+  // draw2DHigh: DrawContext2D;
+  // webglHigh: WebGLInstance;
   // gestureElement: HTMLElement;
-  // addElements: DiagramAddElements;
-  // addElementsLow: DiagramAddElements;
-  // addElementsHigh: DiagramAddElements;
+  // shapesHigh: Object;
+  // equationHigh: Object;
+  // objectsHigh: DiagramObjects;
   // layout: Object;
-  function Diagram( // canvas: HTMLCanvasElement,
-  options) // limitsOrxMin: number | Rect = new Rect(-1, -1, 2, 2),
-  // yMin: number = -1,
-  // width: number = 2,
-  // height: number = 2,
-  // backgroundColor: Array<number> = [1, 1, 1, 1],
-  // layout: Object = {},
-  // vertexShader: string = 'simple',
-  // fragmentShader: string = 'simple',
-  {
+  // oldScrollY: number;
+  // used for drawing debug only
+  function Diagram(options) {
     _classCallCheck(this, Diagram);
 
     var defaultOptions = {
       htmlId: 'id_figureone_canvases',
-      limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Rect"](-1, -1, 2, 2),
+      limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
-      // layout: {},
-      vertexShader: 'simple',
-      fragmentShader: 'simple',
       fontScale: 1
     };
-    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultOptions, options);
+    this.scrolled = false; // this.oldScrollY = 0;
+
+    var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
-        limits = optionsToUse.limits,
-        vertexShader = optionsToUse.vertexShader,
-        fragmentShader = optionsToUse.fragmentShader; // if (typeof containerIdOrOptions !== 'string') {
-    //   optionsToUse = joinObjects(
-    //     defaultOptions, containerIdOrOptions,
-    //   );
-    // } else {
-    //   optionsToUse.htmlId = containerIdOrOptions;
-    //   if (typeof limitsOrxMin === 'number') {
-    //     optionsToUse.limits = new Rect(
-    //       limitsOrxMin,
-    //       yMin,
-    //       width,
-    //       height,
-    //     );
-    //   } else {
-    //     optionsToUse.limits = limitsOrxMin;
-    //   }
-    //   optionsToUse.backgroundColor = backgroundColor;
-    //   optionsToUse.layout = layout;
-    //   optionsToUse.vertexShader = vertexShader;
-    //   optionsToUse.fragmentShader = fragmentShader;
-    // }
-    // this.layout = layout;
+        limits = optionsToUse.limits; // this.layout = layout;
 
     if (typeof htmlId === 'string') {
       var container = document.getElementById(htmlId);
 
       if (container instanceof HTMLElement) {
+        this.container = container;
         var children = container.children;
 
         for (var i = 0; i < children.length; i += 1) {
           var child = children[i];
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl')) {
-            if (child.id === 'id_diagram__gl__low') {
-              this.canvasLow = child;
-            }
-
-            if (child.id === 'id_diagram__gl__high') {
-              this.canvasHigh = child;
-            }
+            // if (child.id === 'id_diagram__gl__low') {
+            this.canvasLow = child; // }
+            // if (child.id === 'id_diagram__gl__high') {
+            //   this.canvasHigh = child;
+            // }
           }
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text')) {
-            if (child.id === 'id_diagram__text__low') {
-              this.textCanvasLow = child;
-            }
-
-            if (child.id === 'id_diagram__text__high') {
-              this.textCanvasHigh = child;
-            }
+            // if (child.id === 'id_diagram__text__low') {
+            this.textCanvasLow = child; // }
+            // if (child.id === 'id_diagram__text__high') {
+            //   this.textCanvasHigh = child;
+            // }
           }
 
           if (child.classList.contains('diagram__html')) {
             this.htmlCanvas = child;
-          } // if (child.classList.contains('diagram__gesture')) {
-          //   this.gestureElement = child;
-          // }
-
+          }
         }
 
         this.backgroundColor = backgroundColor;
-        var shaders = Object(_webgl_shaders__WEBPACK_IMPORTED_MODULE_1__["default"])(vertexShader, fragmentShader);
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, shaders.vertexSource, shaders.fragmentSource, shaders.varNames, this.backgroundColor);
-        var webglHigh = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasHigh, shaders.vertexSource, shaders.fragmentSource, shaders.varNames, this.backgroundColor);
-        this.webglLow = webglLow;
-        this.webglHigh = webglHigh; // const draw2D = this.textCanvas.getContext('2d');
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor); // const webglHigh = new WebGLInstance(
+        //   this.canvasHigh,
+        //   this.backgroundColor,
+        // );
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasLow);
-        this.draw2DHigh = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_7__["default"](this.textCanvasHigh);
+        this.webglLow = webglLow; // this.webglHigh = webglHigh;
+
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow); // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
       }
-    } // if (this.textCanvas instanceof HTMLCanvasElement) {
-    //   this.draw2D = new DrawContext2D(this.textCanvas);
-    // }
-
-
-    if (this instanceof Diagram) {
-      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_6__["default"](this);
     }
 
-    this.fontScale = optionsToUse.fontScale; // let limits;
-    // if (limitsOrxMin instanceof Rect) {
-    //   const r = limitsOrxMin;
-    //   limits = new Rect(r.left, r.bottom, r.width, r.height);
-    // } else {
-    //   limits = new Rect(limitsOrxMin, yMin, width, height);
-    // }
+    if (optionsToUse.gestureCanvas != null) {
+      var gestureCanvas = document.getElementById(optionsToUse.gestureCanvas);
 
+      if (gestureCanvas != null) {
+        this.gestureCanvas = gestureCanvas;
+      }
+    }
+
+    if (this.gestureCanvas == null) {
+      this.gestureCanvas = this.htmlCanvas;
+    }
+
+    if (this instanceof Diagram) {
+      this.gesture = new _Gesture__WEBPACK_IMPORTED_MODULE_5__["default"](this);
+    }
+
+    this.fontScale = optionsToUse.fontScale;
     this.updateLimits(limits);
     this.drawQueued = false;
-    this.inTransition = false; // console.log(this.limits)
-
+    this.lastDrawTime = 0;
+    this.inTransition = false;
     this.beingMovedElements = [];
     this.beingTouchedElements = [];
     this.moveTopElementOnly = true;
-    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_5__["default"]();
-    this.shapesLow = this.getShapes(false);
-    this.shapesHigh = this.getShapes(true);
-    this.shapes = this.shapesLow;
-    this.equationLow = this.getEquations(false);
-    this.equationHigh = this.getEquations(true);
-    this.equation = this.equationLow;
-    this.objectsLow = this.getObjects(false);
-    this.objectsHigh = this.getObjects(true);
-    this.objects = this.objectsLow; // this.addElementsLow = this.getAddElements(false);
-    // this.addElementsHigh = this.getAddElements(true);
-    // this.addElements = this.getAddElements();
+    this.globalAnimation = new _webgl_GlobalAnimation__WEBPACK_IMPORTED_MODULE_4__["default"]();
+    this.shapesLow = this.getShapes(); // this.shapesHigh = this.getShapes(true);
 
+    this.shapes = this.shapesLow;
+    this.equationLow = this.getEquations(); // this.equationHigh = this.getEquations(true);
+
+    this.equation = this.equationLow;
+    this.objectsLow = this.getObjects(); // this.objectsHigh = this.getObjects(true);
+
+    this.objects = this.objectsLow;
     this.createDiagramElements();
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
     }
 
+    this.updateFontSize = true;
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
-    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["isTouchDevice"])();
-    this.animateNextFrame();
+    this.isTouchDevice = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["isTouchDevice"])();
+    this.animateNextFrame(true, 'first frame');
 
     if (optionsToUse.elements) {
       // eslint-disable-next-line new-cap
       this.elements = new optionsToUse.elements(this);
       this.elements.diagramLimits = this.limits;
     }
+
+    this.waitForFrames = 0;
+    this.scrollingFast = false;
+    this.scrollTimeoutId = null;
+    this.oldScroll = window.pageYOffset;
+    this.drawAnimationFrames = 0;
   }
 
   _createClass(Diagram, [{
+    key: "scrollEvent",
+    value: function scrollEvent() {
+      this.scrolled = true;
+      this.animateNextFrame(false, 'scroll event');
+    }
+  }, {
+    key: "enableScrolling",
+    value: function enableScrolling() {
+      document.addEventListener('scroll', this.scrollEvent.bind(this), false);
+    }
+  }, {
+    key: "disableScrolling",
+    value: function disableScrolling() {
+      document.removeEventListener('scroll', this.scrollEvent.bind(this), false);
+    }
+  }, {
     key: "addElements",
     value: function addElements(rootCollection, layout) {
       var addElementsKey = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'addElements';
 
-      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_11__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
+      Object(_DiagramAddElements_addElements__WEBPACK_IMPORTED_MODULE_10__["default"])(this.shapes, this.equation, this.objects, rootCollection, layout, addElementsKey);
     }
   }, {
     key: "getShapes",
     value: function getShapes() {
-      var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var webgl = this.webglLow;
-      var draw2D = this.draw2DLow;
+      var draw2D = this.draw2DLow; // if (high) {
+      //   webgl = this.webglHigh;
+      //   draw2D = this.draw2DHigh;
+      // }
 
-      if (high) {
-        webgl = this.webglHigh;
-        draw2D = this.draw2DHigh;
-      }
-
-      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_8__["default"](webgl, draw2D, this.htmlCanvas, this.limits);
+      return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
+      this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
     }
   }, {
     key: "getEquations",
     value: function getEquations() {
-      var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      var shapes = this.shapesLow;
+      var shapes = this.shapesLow; // if (high) {
+      //   shapes = this.shapesHigh;
+      // }
 
-      if (high) {
-        shapes = this.shapesHigh;
-      }
-
-      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, this.animateNextFrame.bind(this));
+      return new _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_8__["default"](shapes, this.animateNextFrame.bind(this, true, 'equations'));
     }
   }, {
     key: "getObjects",
     value: function getObjects() {
-      var high = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
       var shapes = this.shapesLow;
-      var equation = this.equationLow;
+      var equation = this.equationLow; // if (high) {
+      //   shapes = this.shapesHigh;
+      //   equation = this.equationHigh;
+      // }
 
-      if (high) {
-        shapes = this.shapesHigh;
-        equation = this.equationHigh;
-      }
-
-      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_10__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this));
-    } // getAddElements(high: boolean = false) {
-    //   let shapes = this.shapesLow;
-    //   let objects = this.objectsLow;
-    //   let equation = this.equationLow;
-    //   if (high) {
-    //     shapes = this.shapesHigh;
-    //     objects = this.objectsHigh;
-    //     equation = this.equationHigh;
-    //   }
-    //   return new DiagramAddElements(
-    //     shapes,
-    //     objects,
-    //     equation,
-    //   );
-    // }
-
+      return new _DiagramObjects_DiagramObjects__WEBPACK_IMPORTED_MODULE_9__["default"](shapes, equation, this.isTouchDevice, this.animateNextFrame.bind(this, true, 'objects'));
+    }
   }, {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
-      var scale = this.fontScale * 1 / 35;
-      var size = this.htmlCanvas.offsetWidth * scale - 1;
-      this.htmlCanvas.style.fontSize = "".concat(size, "px");
-      var style = window.getComputedStyle(document.documentElement);
+      if (this.updateFontSize) {
+        var style = window.getComputedStyle(document.documentElement);
 
-      if (style) {
-        var prop = '--lesson__diagram-font-size';
-        var docElem = document.documentElement;
-
-        if (docElem) {
-          docElem.style.setProperty(prop, "".concat(size, "px"));
+        if (style) {
+          this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
         }
       }
     }
@@ -840,23 +3757,8 @@ function () {
     key: "destroy",
     value: function destroy() {
       this.gesture.destroy();
-      this.webglLow.gl.getExtension('WEBGL_lose_context').loseContext();
-      this.webglHigh.gl.getExtension('WEBGL_lose_context').loseContext();
-    } // setGLDiagramSpaceTransforms() {
-    //   const glSpace = {
-    //     x: { bottomLeft: -1, width: 2 },
-    //     y: { bottomLeft: -1, height: 2 },
-    //   };
-    //   const diagramSpace = {
-    //     x: { bottomLeft: this.limits.left, width: this.limits.width },
-    //     y: { bottomLeft: this.limits.bottom, height: this.limits.height },
-    //   };
-    //   this.diagramToGLSpaceTransformMatrix =
-    //     spaceToSpaceTransformMatrix(glSpace, diagramSpace);
-    //   this.glToDiagramSpaceTransformMatrix =
-    //     spaceToSpaceTransformMatrix(diagramSpace, glSpace);
-    // }
-
+      this.webglLow.gl.getExtension('WEBGL_lose_context').loseContext(); // this.webglHigh.gl.getExtension('WEBGL_lose_context').loseContext();
+    }
   }, {
     key: "setSpaceTransforms",
     value: function setSpaceTransforms() {
@@ -901,41 +3803,232 @@ function () {
           height: -1
         }
       };
-      this.diagramToGLSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, glSpace, 'Diagram');
-      this.glToDiagramSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(glSpace, diagramSpace);
-      this.pixelToDiagramSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(pixelSpace, diagramSpace);
-      this.diagramToPixelSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, pixelSpace);
-      this.pixelToGLSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(pixelSpace, glSpace);
-      this.glToPixelSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(glSpace, pixelSpace);
-      this.diagramToCSSPercentSpaceTransform = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["spaceToSpaceTransform"])(diagramSpace, percentSpace);
+      this.spaceTransforms = {
+        diagramToGL: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, glSpace, 'Diagram'),
+        glToDiagram: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(glSpace, diagramSpace),
+        pixelToDiagram: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(pixelSpace, diagramSpace),
+        diagramToPixel: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, pixelSpace),
+        pixelToGL: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(pixelSpace, glSpace),
+        glToPixel: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(glSpace, pixelSpace),
+        diagramToCSSPercent: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["spaceToSpaceTransform"])(diagramSpace, percentSpace)
+      };
     }
   }, {
     key: "initialize",
     value: function initialize() {
       // this.setSpaceTransforms();
-      this.elements.setFirstTransform(this.diagramToGLSpaceTransform);
+      this.setFirstTransform();
+    }
+  }, {
+    key: "setFirstTransform",
+    value: function setFirstTransform() {
+      this.elements.setFirstTransform(this.spaceTransforms.diagramToGL);
     }
   }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
       this.limits = limits._dup();
       this.setSpaceTransforms();
+    } // Renders all tied elements in the first level of diagram elements
+
+  }, {
+    key: "renderAllElementsToTiedCanvases",
+    value: function renderAllElementsToTiedCanvases() {
+      var _this = this;
+
+      var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var needClear = false;
+      Object.keys(this.elements.elements).forEach(function (name) {
+        var element = _this.elements.elements[name];
+
+        if (element.isShown && (element.isRenderedAsImage === false || force) && element.tieToHTML.element != null) {
+          element.isRenderedAsImage = true;
+
+          _this.renderElementToTiedCanvas(name);
+
+          needClear = true;
+        }
+      });
+
+      if (needClear) {
+        this.drawQueued = true;
+        this.draw(-1);
+      }
     }
+  }, {
+    key: "renderElementToTiedCanvas",
+    value: function renderElementToTiedCanvas(elementName) {
+      var _this2 = this;
+
+      // record visibility of top level elements in diagram
+      var currentVisibility = {};
+      Object.keys(this.elements.elements).forEach(function (name) {
+        var element = _this2.elements.elements[name];
+        currentVisibility[name] = element.isShown;
+      }); // Hide all elements
+
+      Object.keys(this.elements.elements).forEach(function (name) {
+        _this2.elements.elements[name].hide();
+      }); // Show the element to render
+
+      var elementToRender = this.elements.elements[elementName];
+      elementToRender.show(); // Move it to the origin to render
+
+      var oldPosition = elementToRender.getPosition();
+      var oldScale = elementToRender.getScale();
+      elementToRender.setPosition(0, 0); // elementToRender.updateHTMLElementTieScale(this.canvasLow);
+      // Stop animations and render
+
+      elementToRender.isRenderedAsImage = false;
+      elementToRender.stop(true, true);
+      this.renderToCanvas(elementToRender.tieToHTML.element);
+      elementToRender.isRenderedAsImage = true; // reset position
+
+      elementToRender.setPosition(oldPosition);
+      elementToRender.setScale(oldScale); // this.draw(-1);
+      // this.fromWhere = 'reset Position';
+      // elementToRender.hide();
+      // show all elements that were shown previously (except element that was just rendered)
+
+      Object.keys(this.elements.elements).forEach(function (name) {
+        var element = _this2.elements.elements[name];
+
+        if (currentVisibility[name] === true) {
+          element.show();
+        } else {
+          element.hide();
+        }
+      });
+    } // This method will render the gl and 2d contexts to a canvas
+
+  }, {
+    key: "renderToCanvas",
+    value: function renderToCanvas() {
+      var htmlCanvasElementOrId = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var htmlCanvas = htmlCanvasElementOrId;
+
+      if (typeof htmlCanvasElementOrId === 'string') {
+        htmlCanvas = document.getElementById(htmlCanvasElementOrId);
+      }
+
+      if (!(htmlCanvas instanceof HTMLElement)) {
+        return;
+      } // if (!(htmlCanvas instanceof HTMLImageElement)) {
+      //   return;
+      // }
+
+
+      this.drawQueued = true; // this.fromWhere = 'RenderToCanvas';
+
+      this.draw(-1); // const { ctx } = new DrawContext2D(htmlCanvas);
+
+      var getDimensions = function getDimensions(c) {
+        return {
+          // width: c.width,
+          // height: c.height,
+          clientWidth: c.clientWidth,
+          clientHeight: c.clientHeight
+        };
+      };
+
+      var canvas = getDimensions(htmlCanvas);
+      var gl = getDimensions(this.webglLow.gl.canvas);
+      var text = getDimensions(this.draw2DLow.canvas); // const glWidthOfCanvas = canvas.clientWidth / gl.clientWidth * gl.width;
+      // const glHeightOfCanvas = canvas.clientHeight / gl.clientHeight * gl.height;
+      // const glStartOfCanavas = new Point(
+      //   gl.width / 2 - glWidthOfCanvas / 2,
+      //   gl.height / 2 - glHeightOfCanvas / 2,
+      // );
+      // const textWidthOfCanvas = canvas.clientWidth / text.clientWidth
+      //                           * text.width;
+      // const textHeightOfCanvas = canvas.clientHeight / text.clientHeight
+      //                            * text.height;
+      // const textStartOfCanvas = new Point(
+      //   text.width / 2 - textWidthOfCanvas / 2,
+      //   text.height / 2 - textHeightOfCanvas / 2,
+      // );
+
+      var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
+
+      if (w instanceof HTMLImageElement) {
+        w.src = this.webglLow.gl.canvas.toDataURL('image/png', 0.5); // w.src = offscreenCanvas.toDataURL();
+
+        w.style.visibility = 'visible';
+        w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")");
+      }
+
+      var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d"));
+
+      if (d instanceof HTMLImageElement) {
+        d.src = this.draw2DLow.canvas.toDataURL('image/png', 0.5);
+        d.style.visibility = 'visible';
+        d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")");
+      }
+
+      this.clearContext();
+    }
+  }, {
+    key: "unrenderAll",
+    value: function unrenderAll() {
+      // console.log('unrender all', Object.keys(this.elements.drawOrder).length)
+      for (var i = 0; i < this.elements.drawOrder.length; i += 1) {
+        var element = this.elements.elements[this.elements.drawOrder[i]];
+        element.unrender();
+      }
+    } // resize should only be called if the viewport size has changed.
+
   }, {
     key: "resize",
     value: function resize() {
+      var skipHTMLTie = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      // console.log('resize', fromWgere, event)
+      // if (this.elements != null) {
+      //   this.elements.updateLimits(this.limits, this.spaceTransforms);
+      // }
+      // if (this.count == null) {
+      //   this.count = 0;
+      // } else {
+      //   this.count += 1
+      // }
+      // console.log('resize')
+      // if (this.count > 2) {
+      //   console.log('unrender')
+      //   this.elements.unrenderAll();
+      // }
+      this.webglLow.resize(); // this.webglHigh.resize();
+
+      this.draw2DLow.resize(); // this.draw2DHigh.resize();
+
+      this.setSpaceTransforms();
+
       if (this.elements != null) {
-        this.elements.updateLimits(this.limits);
+        this.elements.updateLimits(this.limits, this.spaceTransforms);
       }
 
-      this.webglLow.resize();
-      this.webglHigh.resize();
-      this.draw2DLow.resize();
-      this.draw2DHigh.resize();
-      this.setSpaceTransforms();
-      this.sizeHtmlText();
-      this.elements.resizeHtmlObject();
-      this.animateNextFrame();
+      this.sizeHtmlText(); // this.elements.resizeHtmlObject();
+      // this.updateHTMLElementTie();
+
+      if (skipHTMLTie) {
+        this.elements.resize();
+      } else {
+        this.elements.resize(this.canvasLow);
+      }
+
+      if (this.oldWidth !== this.canvasLow.clientWidth) {
+        // this.unrenderAll();
+        this.renderAllElementsToTiedCanvases(true);
+        this.oldWidth = this.canvasLow.clientWidth;
+      }
+
+      this.animateNextFrame(true, 'resize');
+      this.drawAnimationFrames = 2; // this.renderAllElementsToTiedCanvases(true);
+    }
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie() {
+      if (this.elements != null) {
+        this.elements.updateHTMLElementTie(this.canvasLow);
+      }
     } // Handle touch down, or mouse click events within the canvas.
     // The default behavior is to be able to move objects that are touched
     // and dragged, then when they are released, for them to move freely before
@@ -951,7 +4044,7 @@ function () {
 
       var pixelPoint = this.clientToPixel(clientPoint); // console.log(pixelPoint)
 
-      var glPoint = pixelPoint.transformBy(this.pixelToGLSpaceTransform.matrix()); // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
+      var glPoint = pixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // console.log(glPoint.transformBy(this.glToDiagramSpaceTransform.matrix()))
       // const clipPoint = this.clientToClip(clientPoint);
       // Get all the diagram elements that were touched at this point (element
       // must have isTouchable = true to be considered)
@@ -982,7 +4075,7 @@ function () {
       }
 
       if (this.beingMovedElements.length > 0) {
-        this.animateNextFrame();
+        this.animateNextFrame(true, 'touch down handler');
       }
 
       if (this.beingTouchedElements.length > 0) {
@@ -1014,19 +4107,30 @@ function () {
   }, {
     key: "rotateElement",
     value: function rotateElement(element, previousClientPoint, currentClientPoint) {
-      var center = element.getDiagramPosition();
+      var centerDiagramSpace = element.getDiagramPosition();
 
-      if (center == null) {
-        center = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0);
+      if (centerDiagramSpace == null) {
+        centerDiagramSpace = new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0);
       }
 
+      var center = centerDiagramSpace.transformBy(this.spaceTransforms.diagramToPixel.matrix());
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
-      var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentAngle = Math.atan2(currentDiagramPoint.y - center.y, currentDiagramPoint.x - center.x);
-      var previousAngle = Math.atan2(previousDiagramPoint.y - center.y, previousDiagramPoint.x - center.x);
-      var diffAngle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_2__["minAngleDiff"])(previousAngle, currentAngle);
+      var currentPixelPoint = this.clientToPixel(currentClientPoint); // const previousDiagramPoint =
+      //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentDiagramPoint =
+      //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentAngle = Math.atan2(
+      //   currentDiagramPoint.y - center.y,
+      //   currentDiagramPoint.x - center.x,
+      // );
+      // const previousAngle = Math.atan2(
+      //   previousDiagramPoint.y - center.y,
+      //   previousDiagramPoint.x - center.x,
+      // );
+
+      var currentAngle = Math.atan2(currentPixelPoint.y - center.y, currentPixelPoint.x - center.x);
+      var previousAngle = Math.atan2(previousPixelPoint.y - center.y, previousPixelPoint.x - center.x);
+      var diffAngle = -Object(_tools_g2__WEBPACK_IMPORTED_MODULE_1__["minAngleDiff"])(previousAngle, currentAngle);
 
       var transform = element.transform._dup();
 
@@ -1051,16 +4155,20 @@ function () {
     value: function translateElement(element, previousClientPoint, currentClientPoint) {
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
       var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var delta = currentDiagramPoint.sub(previousDiagramPoint);
+      var previousDiagramPoint = previousPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+      var currentDiagramPoint = currentPixelPoint.transformBy(this.spaceTransforms.pixelToDiagram.matrix());
+      var m = element.diagramSpaceToVertexSpaceTransformMatrix();
+      var currentVertexSpacePoint = currentDiagramPoint.transformBy(m);
+      var previousVertexSpacePoint = previousDiagramPoint.transformBy(m); // const delta = currentDiagramPoint.sub(previousDiagramPoint);
+
+      var elementSpaceDelta = currentVertexSpacePoint.sub(previousVertexSpacePoint); // console.log(delta, elementSpaceDelta)
 
       var currentTransform = element.transform._dup();
 
       var currentTranslation = currentTransform.t();
 
       if (currentTranslation != null) {
-        var newTranslation = currentTranslation.add(delta);
+        var newTranslation = currentTranslation.add(elementSpaceDelta);
         currentTransform.updateTranslation(newTranslation);
         element.moved(currentTransform);
       }
@@ -1070,12 +4178,17 @@ function () {
     value: function scaleElement(element, previousClientPoint, currentClientPoint) {
       var type = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
       var previousPixelPoint = this.clientToPixel(previousClientPoint);
-      var currentPixelPoint = this.clientToPixel(currentClientPoint);
-      var previousDiagramPoint = previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var currentDiagramPoint = currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
-      var center = element.getDiagramPosition();
-      var previousMag = previousDiagramPoint.sub(center).distance();
-      var currentMag = currentDiagramPoint.sub(center).distance();
+      var currentPixelPoint = this.clientToPixel(currentClientPoint); // const previousDiagramPoint =
+      //   previousPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const currentDiagramPoint =
+      //   currentPixelPoint.transformBy(this.pixelToDiagramSpaceTransform.matrix());
+      // const center = element.getDiagramPosition();
+      // const previousMag = previousDiagramPoint.sub(center).distance();
+      // const currentMag = currentDiagramPoint.sub(center).distance();
+
+      var center = element.getDiagramPosition().transformBy(this.spaceTransforms.diagramToPixel.matrix());
+      var previousMag = previousPixelPoint.sub(center).distance();
+      var currentMag = currentPixelPoint.sub(center).distance();
       var currentScale = element.transform.s();
 
       if (currentScale != null) {
@@ -1116,7 +4229,7 @@ function () {
 
       var previousPixelPoint = this.clientToPixel(previousClientPoint); // const currentPixelPoint = this.clientToPixel(currentClientPoint);
 
-      var previousGLPoint = previousPixelPoint.transformBy(this.pixelToGLSpaceTransform.matrix()); // Go through each element being moved, get the current translation
+      var previousGLPoint = previousPixelPoint.transformBy(this.spaceTransforms.pixelToGL.matrix()); // Go through each element being moved, get the current translation
 
       for (var i = 0; i < this.beingMovedElements.length; i += 1) {
         var element = this.beingMovedElements[i];
@@ -1152,7 +4265,7 @@ function () {
         }
       }
 
-      this.animateNextFrame();
+      this.animateNextFrame(true, 'touch move handler');
       return true;
     }
   }, {
@@ -1168,7 +4281,7 @@ function () {
     key: "createDiagramElements",
     value: function createDiagramElements() {
       // $FlowFixMe
-      this.elements = new _Element__WEBPACK_IMPORTED_MODULE_4__["DiagramElementCollection"]();
+      this.elements = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]();
       this.elements.diagramLimits = this.limits;
     }
   }, {
@@ -1177,65 +4290,151 @@ function () {
       this.elements.add(name, diagramElement);
     }
   }, {
+    key: "setElementsToCollection",
+    value: function setElementsToCollection(collection) {
+      this.elements = collection;
+      this.setFirstTransform();
+    }
+  }, {
     key: "clearContext",
     value: function clearContext() {
-      // const bc = this.backgroundColor;
-      // this.webgl.gl.clearColor(bc[0], bc[1], bc[2], bc[3]);
       this.webglLow.gl.clearColor(0, 0, 0, 0);
-      this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
-      this.webglHigh.gl.clearColor(0, 0, 0, 0);
-      this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
+      this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT); // this.webglHigh.gl.clearColor(0, 0, 0, 0);
+      // this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
 
-      if (this.draw2DLow) {
-        this.draw2DLow.ctx.clearRect(0, 0, this.draw2DLow.ctx.canvas.width, this.draw2DLow.ctx.canvas.height);
-      }
+      this.elements.clear();
+    } // scroll() {
+    //   if (this.scrollingFast === false) {
+    //     this.webglLow.gl.canvas.style.top = '-10000px';
+    //     this.renderAllElementsToTiedCanvases();
+    //     this.scrollingFast = true;
+    //     if (this.scrollTimeoutId) {
+    //       clearTimeout(this.scrollTimeoutId);
+    //       this.scrollTimeoutId = null;
+    //     }
+    //     this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
+    //   }
+    // }
 
-      if (this.draw2DHigh) {
-        this.draw2DHigh.ctx.clearRect(0, 0, this.draw2DHigh.ctx.canvas.width, this.draw2DHigh.ctx.canvas.height);
-      }
+  }, {
+    key: "drawNow",
+    value: function drawNow() {
+      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.drawQueued = true;
+      this.draw(time);
     }
   }, {
     key: "draw",
-    value: function draw(now) {
-      this.drawQueued = false;
-      this.clearContext(); // This transform converts standard gl clip space, to diagram clip space
-      // defined in limits.
-      // const normWidth = 2 / this.limits.width;
-      // const normHeight = 2 / this.limits.height;
-      // const clipTransform = new Transform()
-      //   .scale(normWidth, normHeight)
-      //   .translate(
-      //     (-this.limits.width / 2 - this.limits.left) * normWidth,
-      //     (this.limits.height / 2 - this.limits.top) * normHeight,
-      //   );
-      // const t1 = performance.now();
+    value: function draw(nowIn) {
+      var now = nowIn;
 
-      this.elements.draw(this.diagramToGLSpaceTransform, now);
+      if (nowIn === -1) {
+        now = this.lastDrawTime;
+      } // console.log((now - this.lastDrawTime) * 1000);
+
+
+      this.lastDrawTime = now;
+
+      if (this.scrolled === true) {
+        this.scrolled = false;
+
+        if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 4) {
+          if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+            this.webglLow.gl.canvas.style.top = '-10000px';
+            this.waitForFrames = 1;
+          }
+
+          if (this.waitForFrames > 0) {
+            this.waitForFrames -= 1;
+          } else {
+            this.renderAllElementsToTiedCanvases();
+          }
+
+          this.scrollingFast = true;
+
+          if (this.scrollTimeoutId) {
+            clearTimeout(this.scrollTimeoutId);
+            this.scrollTimeoutId = null;
+          }
+
+          this.scrollTimeoutId = setTimeout(this.centerDrawingLens.bind(this, true), 100);
+        }
+      } // If only a scroll event called draw, then quit before drawing
+
+
+      if (this.drawQueued === false) {
+        return;
+      }
+
+      this.drawQueued = false;
+      this.clearContext();
+      this.elements.draw(this.spaceTransforms.diagramToGL, now);
 
       if (this.elements.isMoving()) {
-        this.animateNextFrame();
-      } // console.log(performance.now() - t1)
-      // console.log(Date.now() - measure)
+        this.animateNextFrame(true, 'is moving');
+      }
 
+      if (this.drawAnimationFrames > 0) {
+        this.drawAnimationFrames -= 1;
+        this.animateNextFrame(true, 'queued frames');
+      }
+    }
+  }, {
+    key: "centerDrawingLens",
+    value: function centerDrawingLens() {
+      var fromTimeOut = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (fromTimeOut) {
+        this.scrollingFast = false;
+      }
+
+      var viewPortHeight = window.innerHeight || 0;
+
+      if (document.documentElement != null) {
+        viewPortHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+      }
+
+      var newTop = window.pageYOffset + viewPortHeight / 2 - this.webglLow.gl.canvas.clientHeight / 2;
+
+      if (newTop < 0) {
+        newTop = 0;
+      }
+
+      var newTopInPx = "".concat(newTop, "px");
+
+      if (this.webglLow.gl.canvas.style.top !== newTopInPx) {
+        this.webglLow.gl.canvas.style.top = "".concat(newTop, "px");
+        this.draw2DLow.canvas.style.top = "".concat(newTop, "px");
+        this.updateHTMLElementTie();
+      }
+
+      this.oldScroll = window.pageYOffset;
     }
   }, {
     key: "animateNextFrame",
     value: function animateNextFrame() {
+      var draw = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+      var fromWhere = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      this.fromWhere = fromWhere;
+
       if (!this.drawQueued) {
-        this.drawQueued = true;
+        if (draw) {
+          this.drawQueued = true;
+        }
+
         this.globalAnimation.queueNextFrame(this.draw.bind(this));
       }
     }
   }, {
     key: "isAnimating",
     value: function isAnimating() {
-      return this.elements.state.isAnimating;
+      return this.elements.isMoving();
     }
   }, {
     key: "clientToPixel",
     value: function clientToPixel(clientLocation) {
       var canvas = this.canvasLow.getBoundingClientRect();
-      return new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](clientLocation.x - canvas.left, clientLocation.y - canvas.top);
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](clientLocation.x - canvas.left, clientLocation.y - canvas.top);
     }
   }]);
 
@@ -1298,8 +4497,19 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
   var getMethod = function getMethod(method) {
     var methods = {
       collection: shapes.collection.bind(shapes),
-      polyLine: shapes.polyLine.bind(shapes),
+      polyLine: objects.polyLine.bind(objects),
+      polyLineCorners: shapes.polyLineCorners.bind(shapes),
       polygon: shapes.polygon.bind(shapes),
+      arrow: shapes.arrow.bind(shapes),
+      fan: shapes.fan.bind(shapes),
+      text: shapes.text.bind(shapes),
+      textGL: shapes.textGL.bind(shapes),
+      textHTML: shapes.htmlText.bind(shapes),
+      axes: shapes.axes.bind(shapes),
+      radialLines: shapes.radialLines.bind(shapes),
+      rectangle: shapes.rectangle.bind(shapes),
+      grid: shapes.grid.bind(shapes),
+      dashedLine: shapes.dashedLine.bind(shapes),
       //
       line: objects.line.bind(objects),
       angle: objects.angle.bind(objects),
@@ -1336,10 +4546,11 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       var pathToUse;
       var optionsToUse;
       var elementModsToUse;
-      var addElementsToUse; // Extract the parameters from the layout object
+      var addElementsToUse;
+      var firstScenario; // Extract the parameters from the layout object
 
       if (Array.isArray(elementDefinition)) {
-        var _elementDefinition = _slicedToArray(elementDefinition, 6);
+        var _elementDefinition = _slicedToArray(elementDefinition, 7);
 
         pathToUse = _elementDefinition[0];
         nameToUse = _elementDefinition[1];
@@ -1347,13 +4558,19 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
         optionsToUse = _elementDefinition[3];
         elementModsToUse = _elementDefinition[4];
         addElementsToUse = _elementDefinition[5];
+        firstScenario = _elementDefinition[6];
       } else {
+        if (elementDefinition == null) {
+          throw Error("Add elements index ".concat(index, " does not exist in layout"));
+        }
+
         nameToUse = elementDefinition.name;
         pathToUse = elementDefinition.path;
         optionsToUse = elementDefinition.options;
         addElementsToUse = elementDefinition[addElementsKey];
         methodPathToUse = elementDefinition.method;
         elementModsToUse = elementDefinition.mods;
+        firstScenario = elementDefinition.scenario;
       }
 
       var collectionPath;
@@ -1390,26 +4607,42 @@ function addElements(shapes, equation, objects, rootCollection, layout, addEleme
       }
 
       if (methodPath.slice(-1)[0].startsWith('add')) {
-        method(collectionPath, nameToUse, optionsToUse);
-      } else {
-        var element;
+        var element = method(collectionPath, nameToUse, optionsToUse);
 
-        if (Array.isArray(optionsToUse)) {
-          element = method.apply(void 0, _toConsumableArray(optionsToUse));
-        } else {
-          element = method(optionsToUse);
+        if (elementModsToUse != null && elementModsToUse !== {}) {
+          element.setProperties(elementModsToUse); // if (methodPath.slice(-1)[0] === 'addNavigator') {
+          //   element.eqn.setProperties(elementModsToUse);
+          // }
         }
 
-        if (element == null) {
+        if (firstScenario != null && firstScenario in element.scenarios) {
+          element.setScenario(firstScenario); // if (methodPath.slice(-1)[0] === 'addNavigator') {
+          //   element.eqn.setScenario(firstScenario);
+          // }
+        }
+      } else {
+        var _element;
+
+        if (Array.isArray(optionsToUse)) {
+          _element = method.apply(void 0, _toConsumableArray(optionsToUse));
+        } else {
+          _element = method(optionsToUse);
+        }
+
+        if (_element == null) {
           return;
         }
 
         if (elementModsToUse != null && elementModsToUse !== {}) {
-          element.setProperties(elementModsToUse);
+          _element.setProperties(elementModsToUse);
         }
 
         if (collectionPath instanceof _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementCollection"]) {
-          collectionPath.add(nameToUse, element);
+          collectionPath.add(nameToUse, _element);
+        }
+
+        if (firstScenario != null && firstScenario in _element.scenarios) {
+          _element.setScenario(firstScenario);
         }
       }
 
@@ -3120,14 +6353,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "EquationNew", function() { return EquationNew; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _Elements_Element__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Elements/Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
-/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _EquationSymbols__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationSymbols */ "./src/js/diagram/DiagramElements/Equation/EquationSymbols.js");
-/* harmony import */ var _EquationFunctions__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./EquationFunctions */ "./src/js/diagram/DiagramElements/Equation/EquationFunctions.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _Elements_Element__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Elements/Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
+/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _EquationSymbols__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EquationSymbols */ "./src/js/diagram/DiagramElements/Equation/EquationSymbols.js");
+/* harmony import */ var _EquationFunctions__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./EquationFunctions */ "./src/js/diagram/DiagramElements/Equation/EquationFunctions.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -3159,7 +6391,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 
-
+ // import { RGBToArray } from '../../../tools/color';
 
 
 
@@ -3196,8 +6428,8 @@ function (_DiagramElementCollec) {
 
     var defaultOptions = {
       color: color,
-      fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
-      fontText: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'left', 'alphabetic', color),
+      fontMath: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color),
+      fontText: new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_3__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'left', 'alphabetic', color),
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       scale: 0.7,
       defaultFormAlignment: {
@@ -3207,11 +6439,20 @@ function (_DiagramElementCollec) {
       },
       elements: {},
       forms: {},
-      formSeries: []
+      formSeries: {},
+      formRestart: null
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, defaultOptions, options);
     optionsToUse.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.position, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
     optionsToUse.defaultFormAlignment.fixTo = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["parsePoint"])(optionsToUse.defaultFormAlignment.fixTo, optionsToUse.defaultFormAlignment.fixTo);
+
+    if (optionsToUse.formRestart != null && optionsToUse.formRestart.pulse != null) {
+      optionsToUse.formRestart.pulse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+        scale: 1.1,
+        duration: 1
+      }, optionsToUse.formRestart.pulse);
+    }
+
     _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNew).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
     _this.shapes = shapes;
     _this.color = optionsToUse.color; // this.isTouchDevice = isTouchDevice;
@@ -3223,17 +6464,21 @@ function (_DiagramElementCollec) {
       currentForm: '',
       currentSubForm: '',
       subFormPriority: ['base'],
-      formSeries: [],
-      currentFormSeries: '',
+      formSeries: {
+        base: []
+      },
+      currentFormSeries: [],
+      currentFormSeriesName: '',
       scale: optionsToUse.scale,
       defaultFormAlignment: optionsToUse.defaultFormAlignment,
-      functions: new _EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["EquationFunctions"](_this.elements),
-      symbols: new _EquationSymbols__WEBPACK_IMPORTED_MODULE_8__["default"](_this.shapes, _this.color),
+      functions: new _EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["EquationFunctions"](_this.elements),
+      symbols: new _EquationSymbols__WEBPACK_IMPORTED_MODULE_7__["default"](_this.shapes, _this.color),
       fontMath: optionsToUse.fontMath,
       fontText: optionsToUse.fontText,
       isAnimating: false,
       descriptionElement: null,
-      descriptionPosition: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)
+      descriptionPosition: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      formRestart: optionsToUse.formRestart
     };
 
     _this.setPosition(optionsToUse.position);
@@ -3247,26 +6492,61 @@ function (_DiagramElementCollec) {
     }
 
     if (optionsToUse.formSeries != null) {
-      _this.setFormSeries(optionsToUse.formSeries);
+      if (Array.isArray(optionsToUse.formSeries)) {
+        _this.eqn.formSeries = {
+          base: optionsToUse.formSeries
+        };
+        _this.eqn.currentFormSeries = _this.eqn.formSeries.base;
+        _this.eqn.currentFormSeriesName = 'base';
+      } else {
+        _this.eqn.formSeries = optionsToUse.formSeries;
+
+        if (optionsToUse.defaultFormSeries != null) {
+          _this.setFormSeries(optionsToUse.defaultFormSeries);
+        } else {
+          _this.setFormSeries(Object.keys(_this.eqn.formSeries)[0]);
+        }
+      }
     }
 
     return _this;
   }
 
   _createClass(EquationNew, [{
+    key: "setFormSeries",
+    value: function setFormSeries(name) {
+      if (this.eqn.formSeries[name] != null) {
+        this.eqn.currentFormSeries = this.eqn.formSeries[name];
+        this.eqn.currentFormSeriesName = name;
+      }
+    }
+  }, {
+    key: "getFormSeries",
+    value: function getFormSeries() {
+      return this.eqn.currentFormSeriesName;
+    }
+  }, {
     key: "addElements",
     value: function addElements(elems) {
       var _this2 = this;
 
       // Helper function to add text element
       var makeTextElem = function makeTextElem(options) {
+        var defaultText = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
         // Priority:
         //  1. color
         //  2. font
         //  3. style
+        //  4. fontMath or fontText based on actual text
+        var textToUse = defaultText;
+
+        if (options.text != null) {
+          textToUse = options.text;
+        }
+
         var fontToUse = _this2.eqn.fontMath;
 
-        if (options.text.match(/[A-Z,a-z]/)) {
+        if (textToUse.match(/[A-Z,a-z]/)) {
           fontToUse = _this2.eqn.fontText;
         }
 
@@ -3284,15 +6564,15 @@ function (_DiagramElementCollec) {
           fontToUse = options.font;
         }
 
-        var p = _this2.shapes.txt(options.text, {
-          location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        var p = _this2.shapes.text(textToUse, {
+          position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
           font: fontToUse
         });
 
         if (options.color != null) {
           p.setColor(options.color);
         } else {
-          p.setColor(Object(_tools_color__WEBPACK_IMPORTED_MODULE_2__["RGBToArray"])(p.drawingObject.text[0].font.color));
+          p.setColor(p.drawingObject.text[0].font.color);
         }
 
         return p;
@@ -3322,14 +6602,14 @@ function (_DiagramElementCollec) {
         var elem = elems[key];
 
         if (typeof elem === 'string') {
-          if (!key.startsWith('space')) {
+          if (!(key.startsWith('space') && key.startsWith(' '))) {
             _this2.add(key, makeTextElem({
               text: elem
             }));
           }
-        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"]) {
+        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"]) {
           _this2.add(key, elem);
-        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]) {
+        } else if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
           _this2.add(key, elem);
         } else {
           var diagramElem;
@@ -3338,14 +6618,14 @@ function (_DiagramElementCollec) {
             // console.log(elem.symbol)
             // $FlowFixMe
             diagramElem = makeSymbolElem(elem);
-          } else if (elem.text != null && elem.text) {
+          } else {
             // $FlowFixMe
-            diagramElem = makeTextElem(elem);
+            diagramElem = makeTextElem(elem, key);
           }
 
           if (diagramElem != null) {
-            if (elem.elementOptions != null) {
-              diagramElem.setProperties(elem.elementOptions);
+            if (elem.mods != null) {
+              diagramElem.setProperties(elem.mods);
             }
 
             _this2.add(key, diagramElem);
@@ -3451,7 +6731,7 @@ function (_DiagramElementCollec) {
       };
 
       var isFormElements = function isFormElements(form) {
-        return form instanceof _Elements_Element__WEBPACK_IMPORTED_MODULE_5__["Elements"];
+        return form instanceof _Elements_Element__WEBPACK_IMPORTED_MODULE_4__["Elements"];
       };
 
       var isFormFullObject = function isFormFullObject(form) {
@@ -3477,22 +6757,27 @@ function (_DiagramElementCollec) {
         // $FlowFixMe
         var formContent = [_this4.eqn.functions.contentToElement(form.content)];
         var subForm = form.subForm,
-            addToSeries = form.addToSeries,
             elementMods = form.elementMods,
-            time = form.time,
+            duration = form.duration,
             alignment = form.alignment,
             scale = form.scale,
             description = form.description,
-            modifiers = form.modifiers;
+            modifiers = form.modifiers,
+            fromPrev = form.fromPrev,
+            fromNext = form.fromNext,
+            translation = form.translation;
         var options = {
           subForm: subForm,
-          addToSeries: addToSeries,
+          // addToSeries,
           elementMods: elementMods,
-          time: time,
+          duration: duration,
+          translation: translation,
           alignment: alignment,
           scale: scale,
           description: description,
-          modifiers: modifiers
+          modifiers: modifiers,
+          fromPrev: fromPrev,
+          fromNext: fromNext
         }; // $FlowFixMe
 
         _this4.addForm(name, formContent, options);
@@ -3532,7 +6817,7 @@ function (_DiagramElementCollec) {
     key: "checkFixTo",
     value: function checkFixTo(fixTo) {
       if (typeof fixTo === 'string') {
-        var element = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(this, fixTo);
+        var element = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["getDiagramElement"])(this, fixTo);
 
         if (element != null) {
           return element;
@@ -3541,7 +6826,7 @@ function (_DiagramElementCollec) {
         return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       }
 
-      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"] || fixTo instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
+      if (fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"] || fixTo instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"] || fixTo instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
         return fixTo;
       }
 
@@ -3551,7 +6836,7 @@ function (_DiagramElementCollec) {
     key: "createForm",
     value: function createForm() {
       var elements = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.elements;
-      return new _EquationForm__WEBPACK_IMPORTED_MODULE_6__["default"](elements, {
+      return new _EquationForm__WEBPACK_IMPORTED_MODULE_5__["default"](elements, {
         getAllElements: this.getAllElements.bind(this),
         hideAll: this.hideAll.bind(this),
         show: this.show.bind(this),
@@ -3577,12 +6862,15 @@ function (_DiagramElementCollec) {
       var defaultOptions = {
         subForm: 'base',
         elementMods: {},
-        time: null,
-        // use velocities instead of time
+        duration: undefined,
+        // duration: null,                // use velocities instead of time
         description: '',
         modifiers: {},
         scale: this.eqn.scale,
-        alignment: this.eqn.defaultFormAlignment
+        alignment: this.eqn.defaultFormAlignment,
+        translation: {},
+        fromNext: undefined,
+        fromPrev: undefined
       };
       var optionsToUse = defaultOptions;
 
@@ -3594,60 +6882,150 @@ function (_DiagramElementCollec) {
           subForm = _optionsToUse.subForm,
           description = _optionsToUse.description,
           modifiers = _optionsToUse.modifiers,
-          time = _optionsToUse.time,
-          elementMods = _optionsToUse.elementMods;
+          duration = _optionsToUse.duration;
       this.eqn.forms[name].name = name;
       var form = this.eqn.forms[name];
-      form[subForm] = this.createForm(); // form[subForm].name = subForm;
-
+      form[subForm] = this.createForm();
       form[subForm].description = description;
       form[subForm].modifiers = modifiers;
       form[subForm].name = name;
       form[subForm].subForm = subForm;
+      form[subForm].duration = duration; // Populate element mods
+
       form[subForm].elementMods = {};
+      Object.keys(optionsToUse.elementMods).forEach(function (elementName) {
+        var mods = optionsToUse.elementMods[elementName];
+        var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["getDiagramElement"])(_this5, elementName);
 
-      if (typeof time === 'number') {
-        form[subForm].time = {
-          fromPrev: time,
-          fromNext: time,
-          fromAny: time
-        };
-      } else if (time == null) {
-        form[subForm].time = null;
-      } else {
-        var defaultTime = {
-          fromPrev: null,
-          fromNext: null,
-          fromAny: null
-        };
-        form[subForm].time = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultTime, time);
-      }
-
-      Object.keys(elementMods).forEach(function (elementName) {
-        var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_9__["getDiagramElement"])(_this5, elementName);
-
-        if (diagramElement) {
-          var color;
-          var elementOptions;
-
-          if (Array.isArray(elementMods[elementName])) {
-            var _elementMods$elementN = _slicedToArray(elementMods[elementName], 2);
-
-            color = _elementMods$elementN[0];
-            elementOptions = _elementMods$elementN[1];
-          } else {
-            var _elementMods$elementN2 = elementMods[elementName];
-            color = _elementMods$elementN2.color;
-            elementOptions = _elementMods$elementN2.elementOptions;
-          }
-
+        if (diagramElement != null) {
           form[subForm].elementMods[elementName] = {
             element: diagramElement,
-            color: color,
-            elementOptions: elementOptions
+            mods: mods
           };
         }
-      });
+      }); // Populate translation mods
+
+      form[subForm].translation = {};
+      Object.keys(optionsToUse.translation).forEach(function (elementName) {
+        var mods = optionsToUse.translation[elementName];
+        var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["getDiagramElement"])(_this5, elementName);
+        var direction;
+        var style;
+        var mag;
+
+        if (Array.isArray(mods)) {
+          var _mods = _slicedToArray(mods, 3);
+
+          style = _mods[0];
+          direction = _mods[1];
+          mag = _mods[2];
+        } else {
+          style = mods.style;
+          direction = mods.direction;
+          mag = mods.mag;
+        }
+
+        if (diagramElement != null) {
+          form[subForm].translation[elementName] = {
+            element: diagramElement,
+            style: style,
+            direction: direction,
+            mag: mag
+          };
+        }
+      }); // Populate translation mods
+
+      var _optionsToUse2 = optionsToUse,
+          fromPrev = _optionsToUse2.fromPrev;
+
+      if (fromPrev != null) {
+        form[subForm].fromPrev = {};
+
+        if (fromPrev.duration !== undefined) {
+          form[subForm].fromPrev.duration = fromPrev.duration;
+        }
+
+        form[subForm].fromPrev.translation = {};
+
+        if (fromPrev.translation != null) {
+          Object.keys(fromPrev.translation).forEach(function (elementName) {
+            var mods = fromPrev.translation[elementName];
+            var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["getDiagramElement"])(_this5, elementName);
+            var direction;
+            var style;
+            var mag;
+
+            if (Array.isArray(mods)) {
+              var _mods2 = _slicedToArray(mods, 3);
+
+              style = _mods2[0];
+              direction = _mods2[1];
+              mag = _mods2[2];
+            } else {
+              style = mods.style;
+              direction = mods.direction;
+              mag = mods.mag;
+            }
+
+            if (diagramElement != null) {
+              // $FlowFixMe
+              form[subForm].fromPrev.translation[elementName] = {
+                element: diagramElement,
+                style: style,
+                direction: direction,
+                mag: mag
+              };
+            }
+          });
+        }
+      } // Populate translation mods
+
+
+      var _optionsToUse3 = optionsToUse,
+          fromNext = _optionsToUse3.fromNext;
+
+      if (fromNext != null) {
+        form[subForm].fromNext = {};
+
+        if (fromNext.duration !== undefined) {
+          form[subForm].fromNext.duration = fromNext.duration;
+        }
+
+        form[subForm].fromNext.translation = {};
+
+        if (fromNext.translation != null) {
+          Object.keys(fromNext.translation).forEach(function (elementName) {
+            var mods = fromNext.translation[elementName];
+            var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_8__["getDiagramElement"])(_this5, elementName);
+            var direction;
+            var style;
+            var mag;
+
+            if (Array.isArray(mods)) {
+              var _mods3 = _slicedToArray(mods, 3);
+
+              style = _mods3[0];
+              direction = _mods3[1];
+              mag = _mods3[2];
+            } else {
+              style = mods.style;
+              direction = mods.direction;
+              mag = mods.mag;
+            }
+
+            if (diagramElement != null) {
+              // $FlowFixMe
+              form[subForm].fromNext.translation[elementName] = {
+                element: diagramElement,
+                style: style,
+                direction: direction,
+                mag: mag
+              };
+            }
+          });
+        }
+      }
+
       optionsToUse.alignment.fixTo = this.checkFixTo(optionsToUse.alignment.fixTo);
       form[subForm].content = content;
       form[subForm].arrange(optionsToUse.scale, optionsToUse.alignment.alignH, optionsToUse.alignment.alignV, optionsToUse.alignment.fixTo); // const { addToSeries } = optionsToUse;
@@ -3676,11 +7054,6 @@ function (_DiagramElementCollec) {
       }
     }
   }, {
-    key: "setFormSeries",
-    value: function setFormSeries(series) {
-      this.eqn.formSeries = series.slice();
-    }
-  }, {
     key: "getCurrentForm",
     value: function getCurrentForm() {
       if (this.eqn.forms[this.eqn.currentForm] == null) {
@@ -3696,12 +7069,14 @@ function (_DiagramElementCollec) {
   }, {
     key: "render",
     value: function render() {
+      var animationStop = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var form = this.getCurrentForm();
 
       if (form != null) {
-        form.showHide();
+        form.showHide(0, 0, null, animationStop);
         this.show();
-        form.setPositions(); // this.updateDescription();
+        form.setPositions();
+        form.applyElementMods(); // this.updateDescription();
       }
     }
   }, {
@@ -3729,6 +7104,7 @@ function (_DiagramElementCollec) {
     key: "showForm",
     value: function showForm(formOrName) {
       var subForm = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var animationStop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : true;
       this.show();
       var form = formOrName;
 
@@ -3738,7 +7114,7 @@ function (_DiagramElementCollec) {
 
       if (form) {
         this.setCurrentForm(form);
-        this.render();
+        this.render(animationStop);
       }
     }
   }, {
@@ -3746,7 +7122,7 @@ function (_DiagramElementCollec) {
     value: function getForm(formOrName, subForm) {
       var _this6 = this;
 
-      if (formOrName instanceof _EquationForm__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+      if (formOrName instanceof _EquationForm__WEBPACK_IMPORTED_MODULE_5__["default"]) {
         return formOrName;
       }
 
@@ -3771,71 +7147,90 @@ function (_DiagramElementCollec) {
       }
 
       return null;
-    }
+    } // This animates to a form
+
   }, {
     key: "goToForm",
     value: function goToForm() {
       var _this7 = this;
 
-      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var fromWhere = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'fromAny';
-      var animate = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-      var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        duration: null,
+        prioritizeFormDuration: true,
+        delay: 0,
+        fromWhere: null,
+        animate: 'dissolve',
+        callback: null,
+        // finishAnimatingAndCancelGoTo: false,
+        ifAnimating: {
+          skipToTarget: true,
+          cancelGoTo: true
+        }
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, optionsIn);
 
       if (this.eqn.isAnimating) {
-        this.stop(true, true);
-        this.stop(true, true);
-        this.eqn.isAnimating = false;
-        var currentForm = this.getCurrentForm();
+        if (options.ifAnimating.skipToTarget) {
+          this.stop(true, true);
+          var currentForm = this.getCurrentForm();
 
-        if (currentForm != null) {
-          this.showForm(currentForm);
+          if (currentForm != null) {
+            this.showForm(currentForm);
+          }
+        } else {
+          this.stop(true, false);
         }
 
-        return;
-      }
+        this.eqn.isAnimating = false;
 
-      this.stop();
-      this.stop();
-      this.eqn.isAnimating = false; // By default go to the next form in a series
+        if (options.ifAnimating.cancelGoTo) {
+          return;
+        }
+      } // this.stop(true, true);
+      // this.eqn.isAnimating = false;
+      // Get the desired form - preference is name, then series index,
+      // then next form in the current series
 
-      var nextIndex = 0;
 
-      if (name == null) {
+      var form;
+
+      if (options.name != null) {
+        form = this.eqn.forms[options.name];
+      } else if (options.index != null) {
+        form = this.eqn.forms[this.eqn.currentFormSeries[options.index]];
+      } else if (this.eqn.currentFormSeries.length > 0) {
         var index = 0;
 
         var _currentForm = this.getCurrentForm();
 
         if (_currentForm != null) {
-          index = this.eqn.formSeries.indexOf(_currentForm.name);
+          index = this.eqn.currentFormSeries.indexOf(_currentForm.name);
 
           if (index < 0) {
             index = 0;
           }
         }
 
-        nextIndex = index + 1;
+        var formIndex = index + 1;
 
-        if (nextIndex === this.eqn.formSeries.length) {
-          nextIndex = 0;
+        if (formIndex === this.eqn.currentFormSeries.length) {
+          formIndex = 0;
         }
-      } else if (typeof name === 'number') {
-        nextIndex = name;
-      } else {
-        nextIndex = this.eqn.formSeries.indexOf(name);
 
-        if (nextIndex < 0) {
-          nextIndex = 0;
-        }
+        form = this.eqn.forms[this.eqn.currentFormSeries[formIndex]];
       }
 
-      var nextForm = this.eqn.forms[this.eqn.formSeries[nextIndex]];
-      var nextSubForm = null;
+      if (form == null) {
+        return;
+      } // const nextForm = this.eqn.forms[this.eqn.currentFormSeries[formIndex]];
+
+
+      var subForm = null;
       var subFormToUse = null;
-      var possibleSubForms = this.eqn.subFormPriority.filter(function (sf) {
-        return sf in nextForm;
+      var possibleSubForms // $FlowFixMe - this is already checked above
+      = this.eqn.subFormPriority.filter(function (sf) {
+        return sf in form;
       });
 
       if (possibleSubForms.length) {
@@ -3845,13 +7240,51 @@ function (_DiagramElementCollec) {
 
       if (subFormToUse != null) {
         // $FlowFixMe
-        nextSubForm = nextForm[subFormToUse];
+        subForm = form[subFormToUse];
+        var duration = options.duration;
 
-        if (time === 0) {
-          this.showForm(nextSubForm);
+        if (options.prioritizeFormDuration) {
+          if (options.fromWhere === 'fromPrev' && subForm.fromPrev != null && subForm.fromPrev.duration !== undefined) {
+            duration = subForm.fromPrev.duration;
+          } else if (options.fromWhere === 'fromNext' && subForm.fromNext != null && subForm.fromNext.duration !== undefined) {
+            duration = subForm.fromNext.duration;
+          } else if (subForm.duration !== undefined) {
+            var _subForm = subForm;
+            duration = _subForm.duration;
+          }
+        }
 
-          if (callback != null) {
-            callback();
+        if (duration != null && duration > 0 && options.animate === 'dissolve') {
+          if (options.dissolveOutTime == null) {
+            options.dissolveOutTime = duration * 0.4;
+          }
+
+          if (options.dissolveInTime == null) {
+            options.dissolveInTime = duration * 0.4;
+          }
+
+          if (options.blankTime == null) {
+            options.blankTime = duration * 0.2;
+          }
+        } else {
+          if (options.dissolveOutTime == null) {
+            options.dissolveOutTime = 0.4;
+          }
+
+          if (options.dissolveInTime == null) {
+            options.dissolveInTime = 0.4;
+          }
+
+          if (options.blankTime == null) {
+            options.blankTime = 0.2;
+          }
+        }
+
+        if (duration === 0) {
+          this.showForm(subForm);
+
+          if (options.callback != null) {
+            options.callback();
           }
         } else {
           this.eqn.isAnimating = true;
@@ -3859,24 +7292,65 @@ function (_DiagramElementCollec) {
           var end = function end() {
             _this7.eqn.isAnimating = false;
 
-            if (callback != null) {
-              callback();
+            if (options.callback != null) {
+              options.callback();
             }
           };
 
-          if (animate) {
-            var timeToUse = time; // $FlowFixMe - this is going to be ok
+          if (options.animate === 'move') {
+            // console.log('move', duration, options, subForm.duration)
+            // console.log('******************* animate')
+            subForm.animatePositionsTo(options.delay, options.dissolveOutTime, duration, options.dissolveInTime, end, options.fromWhere);
+          } else if (options.animate === 'moveFrom' && this.eqn.formRestart != null && this.eqn.formRestart.moveFrom != null) {
+            var moveFrom = this.eqn.formRestart.moveFrom;
+            var target = this.getPosition();
+            var start = this.getPosition();
 
-            if (nextSubForm.time != null && nextSubForm.time[fromWhere] != null) {
-              timeToUse = nextSubForm.time[fromWhere];
+            if (moveFrom instanceof EquationNew) {
+              moveFrom.showForm(subForm.name);
             }
 
-            nextSubForm.animatePositionsTo(delay, 0.4, timeToUse, 0.4, end);
+            if (moveFrom instanceof _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]) {
+              start = moveFrom.getPosition();
+            } else {
+              // $FlowFixMe
+              start = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(this.eqn.formRestart.moveFrom);
+            }
+
+            this.animations.new().dissolveOut({
+              duration: options.dissolveOutTime
+            }).position({
+              target: start,
+              duration: 0
+            }).trigger({
+              callback: function callback() {
+                // $FlowFixMe
+                _this7.showForm(subForm.name, subFormToUse, false);
+              },
+              duration: 0.01
+            }).position({
+              target: target,
+              duration: duration
+            }).whenFinished(end).start();
+          } else if (options.animate === 'pulse' && this.eqn.formRestart != null && this.eqn.formRestart.pulse != null) {
+            var pulse = this.eqn.formRestart.pulse;
+
+            var newEnd = function newEnd() {
+              _this7.pulseScaleNow(pulse.duration, pulse.scale, 0, end);
+
+              if (pulse.element != null && pulse.element instanceof EquationNew // $FlowFixMe
+              && pulse.element.getCurrentForm().name === subForm.name) {
+                pulse.element.pulseScaleNow(pulse.duration, pulse.scale);
+              }
+            };
+
+            subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, newEnd);
           } else {
-            nextSubForm.allHideShow(delay, 0.5, 0.2, 0.5, end);
+            // console.log('******************* hideshow')
+            subForm.allHideShow(options.delay, options.dissolveOutTime, options.blankTime, options.dissolveInTime, end);
           }
 
-          this.setCurrentForm(nextSubForm);
+          this.setCurrentForm(subForm);
         } // this.updateDescription();
 
       }
@@ -3888,7 +7362,7 @@ function (_DiagramElementCollec) {
       var index = -1;
 
       if (form != null) {
-        index = this.eqn.formSeries.indexOf(form.name);
+        index = this.eqn.currentFormSeries.indexOf(form.name);
       }
 
       return index;
@@ -3910,10 +7384,15 @@ function (_DiagramElementCollec) {
         index -= 1;
 
         if (index < 0) {
-          index = this.eqn.formSeries.length - 1;
+          index = this.eqn.currentFormSeries.length - 1;
         }
 
-        this.goToForm(index, time, delay, 'fromNext');
+        this.goToForm({
+          index: index,
+          duration: time,
+          delay: delay,
+          fromWhere: 'fromNext'
+        });
       }
     }
   }, {
@@ -3921,7 +7400,7 @@ function (_DiagramElementCollec) {
     value: function nextForm() {
       var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var animate = true;
+      var animate = 'move';
       var currentForm = this.getCurrentForm();
 
       if (currentForm == null) {
@@ -3933,20 +7412,36 @@ function (_DiagramElementCollec) {
       if (index > -1) {
         index += 1;
 
-        if (index > this.eqn.formSeries.length - 1) {
+        if (index > this.eqn.currentFormSeries.length - 1) {
           index = 0;
-          animate = false;
+          var formRestart = this.eqn.formRestart;
+
+          if (formRestart != null && formRestart.moveFrom != null) {
+            animate = 'moveFrom';
+          } else if (formRestart != null && formRestart.pulse != null) {
+            animate = 'pulse';
+          } else {
+            animate = 'dissolve';
+          }
         }
 
-        this.goToForm(index, time, delay, 'fromPrev', animate);
+        this.goToForm({
+          index: index,
+          duration: time,
+          delay: delay,
+          fromWhere: 'fromPrev',
+          animate: animate
+        });
       }
     }
   }, {
     key: "replayCurrentForm",
     value: function replayCurrentForm(time) {
       if (this.eqn.isAnimating) {
-        this.stop(true, true);
-        this.stop(true, true);
+        // this.stop(true, true);
+        this.stop(true, true); // this.animations.cancel('complete');
+        // this.animations.cancel('complete');
+
         this.eqn.isAnimating = false;
         var currentForm = this.getCurrentForm();
 
@@ -3955,9 +7450,11 @@ function (_DiagramElementCollec) {
         }
 
         return;
-      }
+      } // this.animations.cancel();
+      // this.animations.cancel();
+      // this.stop();
 
-      this.stop();
+
       this.stop();
       this.eqn.isAnimating = false;
       this.prevForm(0);
@@ -3969,10 +7466,12 @@ function (_DiagramElementCollec) {
       var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      this.stopAnimatingColor(true, true);
-      this.stopAnimatingColor(true, true);
-      this.stop();
-      this.stop();
+      // this.stopAnimatingColor(true, true);
+      // this.stopAnimatingColor(true, true);
+      // this.stop();
+      this.stop(); // this.animations.cancel();
+      // this.animations.cancel();
+
       var form = this.getForm(name);
 
       if (form != null) {
@@ -4001,7 +7500,7 @@ function (_DiagramElementCollec) {
       var form = this.getForm(formOrName, subForm);
 
       if (form != null && form.description != null) {
-        return _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_7__["applyModifiers"](form.description, form.modifiers);
+        return _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__["applyModifiers"](form.description, form.modifiers);
       }
 
       return '';
@@ -4043,7 +7542,7 @@ function (_DiagramElementCollec) {
   }]);
 
   return EquationNew;
-}(_Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);
 
 /***/ }),
 
@@ -4096,7 +7595,8 @@ var EquationForm =
 function (_Elements) {
   _inherits(EquationForm, _Elements);
 
-  // deprecate
+  // These properties are just saved in the form and not used by this class
+  // They are used by external classes using this form
   function EquationForm(elements, collectionMethods) {
     var _this;
 
@@ -4107,8 +7607,9 @@ function (_Elements) {
     _this.collectionMethods = collectionMethods;
     _this.description = null;
     _this.modifiers = {};
-    _this.elementMods = {};
-    _this.time = null;
+    _this.elementMods = {}; // this.duration = null;
+
+    _this.translation = {};
     _this.subForm = '';
     return _this;
   }
@@ -4151,6 +7652,10 @@ function (_Elements) {
           if (c.startsWith('space')) {
             var spaceNum = parseFloat(c.replace(/space[_]*/, '')) || 0.03;
             elements.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["BlankElement"](spaceNum)));
+          } else if (c.startsWith(' ')) {
+            var _spaceNum = c.length * 0.03;
+
+            elements.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_3__["BlankElement"](_spaceNum)));
           } else {
             var diagramElement = Object(_EquationFunctions__WEBPACK_IMPORTED_MODULE_4__["getDiagramElement"])(_this2.elements, c);
 
@@ -4293,7 +7798,7 @@ function (_Elements) {
   }, {
     key: "dissolveElements",
     value: function dissolveElements(elements) {
-      var disolve = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'in';
+      var dissolve = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'in';
       var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.01;
       var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
       var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
@@ -4308,7 +7813,7 @@ function (_Elements) {
       var count = elements.length;
       var completed = 0;
 
-      var end = function end(cancelled) {
+      var onFinish = function onFinish(cancelled) {
         completed += 1;
 
         if (completed === count) {
@@ -4319,7 +7824,13 @@ function (_Elements) {
       };
 
       elements.forEach(function (e) {
-        e.disolveWithDelay(delay, time, disolve, end);
+        e.animations.addTo('Equation Color').opacity({
+          dissolve: dissolve,
+          onFinish: onFinish,
+          duration: time,
+          delay: delay,
+          completeOnCancel: true
+        }).start();
       });
     }
   }, {
@@ -4353,7 +7864,12 @@ function (_Elements) {
       var showTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var hideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.collectionMethods.stop();
+      var animationStop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+      if (animationStop) {
+        this.collectionMethods.stop();
+      }
+
       this.collectionMethods.show();
 
       var _this$getElementsToSh = this.getElementsToShowAndHide(),
@@ -4382,7 +7898,12 @@ function (_Elements) {
       var showTime = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var hideTime = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.collectionMethods.stop();
+      var animationStop = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+
+      if (animationStop) {
+        this.collectionMethods.stop();
+      }
+
       this.collectionMethods.show();
 
       var _this$getElementsToSh2 = this.getElementsToShowAndHide(),
@@ -4428,7 +7949,7 @@ function (_Elements) {
       var elementsToDelayShowing = elementsToShow.filter(function (e) {
         return !e.isShown;
       });
-      var elementsToShowAfterDisolve = elementsToShow.filter(function (e) {
+      var elementsToShowAfterDissolve = elementsToShow.filter(function (e) {
         return e.isShown;
       });
       var cumTime = delay;
@@ -4438,17 +7959,14 @@ function (_Elements) {
           callback(false);
           return;
         }
-      } // disolve out
-      // set positions
-      // disolve in
+      }
 
-
-      var disolveOutCallback = function disolveOutCallback() {
+      var dissolveOutCallback = function dissolveOutCallback() {
         _this3.setPositions();
       };
 
       if (elementsToShow.length === 0) {
-        disolveOutCallback = function disolveOutCallback(cancelled) {
+        dissolveOutCallback = function dissolveOutCallback(cancelled) {
           _this3.setPositions();
 
           if (callback != null) {
@@ -4458,16 +7976,17 @@ function (_Elements) {
       }
 
       if (elementsShown.length > 0) {
-        this.dissolveElements(elementsShown, 'out', delay, hideTime, disolveOutCallback);
+        this.dissolveElements(elementsShown, 'out', delay, hideTime, dissolveOutCallback);
         cumTime += hideTime;
       } else {
         this.setPositions();
       }
 
+      this.applyElementMods();
       var count = elementsToShow.length;
       var completed = 0;
 
-      var end = function end(cancelled) {
+      var onFinish = function onFinish(cancelled) {
         completed += 1;
 
         if (completed === count - 1) {
@@ -4478,24 +7997,62 @@ function (_Elements) {
       };
 
       elementsToDelayShowing.forEach(function (e) {
-        e.disolveWithDelay(cumTime + blankTime, showTime, 'in', end);
+        e.animations.addTo('Equation Color').dissolveIn({
+          duration: showTime,
+          onFinish: onFinish,
+          delay: cumTime + blankTime
+        }).start();
       });
-      elementsToShowAfterDisolve.forEach(function (e) {
-        e.disolveWithDelay(blankTime, showTime, 'in', end);
+      elementsToShowAfterDissolve.forEach(function (e) {
+        e.animations.addTo('Equation Color').dissolveIn({
+          duration: showTime,
+          onFinish: onFinish,
+          delay: blankTime
+        }).start();
+      });
+    }
+  }, {
+    key: "applyElementMods",
+    value: function applyElementMods() {
+      var _this4 = this;
+
+      Object.keys(this.elementMods).forEach(function (elementName) {
+        var _this4$elementMods$el = _this4.elementMods[elementName],
+            element = _this4$elementMods$el.element,
+            mods = _this4$elementMods$el.mods;
+
+        if (element != null && mods != null) {
+          element.setProperties(mods);
+
+          if (mods.color != null) {
+            element.setColor(mods.color);
+          }
+
+          if (mods.opacity != null) {
+            element.setOpacity(mods.opacity);
+          }
+        }
       });
     }
   }, {
     key: "animatePositionsTo",
-    value: function animatePositionsTo(delay, disolveOutTime, moveTime, disolveInTime) {
-      var _this4 = this;
-
+    value: function animatePositionsTo(delay, dissolveOutTime, moveTime, dissolveInTime) {
       var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+      var fromWhere = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
       var allElements = this.collectionMethods.getAllElements();
       this.collectionMethods.stop();
+      var elementsShownTarget = this.getAllElements();
+      elementsShownTarget.forEach(function (e) {
+        if (e.opacity === 0.001) {
+          e.hide();
+          e.setOpacity(1);
+        } else {
+          e.setOpacity(1);
+        }
+      });
       var elementsShown = allElements.filter(function (e) {
         return e.isShown;
       });
-      var elementsShownTarget = this.getAllElements();
       var elementsToHide = elementsShown.filter(function (e) {
         return elementsShownTarget.indexOf(e) === -1;
       });
@@ -4533,45 +8090,51 @@ function (_Elements) {
       this.collectionMethods.setElementTransforms(currentTransforms);
       var cumTime = delay;
       var moveCallback = null;
-      var disolveInCallback = null;
-      var disolveOutCallback = null;
+      var dissolveInCallback = null;
+      var dissolveOutCallback = null;
 
       if (elementsToMove.length === 0 && elementsToShow.length === 0) {
-        disolveOutCallback = callback;
+        dissolveOutCallback = callback;
       } else if (elementsToShow.length === 0) {
         moveCallback = callback;
       } else {
-        disolveInCallback = callback;
+        dissolveInCallback = callback;
       }
 
       if (elementsToHide.length > 0) {
-        this.dissolveElements(elementsToHide, 'out', delay, disolveOutTime, disolveOutCallback);
-        cumTime += disolveOutTime;
+        this.dissolveElements(elementsToHide, 'out', delay, dissolveOutTime, dissolveOutCallback);
+        cumTime += dissolveOutTime;
       }
 
-      Object.keys(this.elementMods).forEach(function (elementName) {
-        var mods = _this4.elementMods[elementName];
+      this.applyElementMods();
+      var translationToUse = {};
+
+      if (fromWhere === 'fromPrev' && this.fromPrev != null) {
+        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation, this.fromPrev);
+      } else if (fromWhere === 'fromNext' && this.fromNext != null) {
+        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation, this.fromNext);
+      } else {
+        translationToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, this.translation);
+      }
+
+      Object.keys(translationToUse).forEach(function (key) {
+        var mods = translationToUse[key];
         var element = mods.element,
-            color = mods.color,
             style = mods.style,
             direction = mods.direction,
             mag = mods.mag;
 
-        if (element != null) {
-          if (color != null) {
-            element.animateColorToWithDelay(color, cumTime, moveTimeToUse);
-          }
-
+        if (element) {
           if (style != null) {
-            element.animate.transform.translation.style = style;
+            element.animations.options.translation.style = style;
           }
 
           if (direction != null) {
-            element.animate.transform.translation.options.direction = direction;
+            element.animations.options.translation.direction = direction;
           }
 
           if (mag != null) {
-            element.animate.transform.translation.options.magnitude = mag;
+            element.animations.options.translation.magnitude = mag;
           }
         }
       });
@@ -4582,8 +8145,8 @@ function (_Elements) {
       }
 
       if (elementsToShow.length > 0) {
-        this.dissolveElements(elementsToShow, 'in', cumTime, disolveInTime, disolveInCallback);
-        cumTime += disolveInTime + 0.001;
+        this.dissolveElements(elementsToShow, 'in', cumTime, dissolveInTime, dissolveInCallback);
+        cumTime += dissolveInTime + 0.001;
       }
 
       return cumTime;
@@ -4725,6 +8288,12 @@ function () {
       if (content.startsWith('space')) {
         var spaceNum = parseFloat(content.replace(/space[_]*/, '')) || 0.03;
         return new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["BlankElement"](spaceNum));
+      }
+
+      if (content.startsWith(' ')) {
+        var _spaceNum = content.length * 0.03;
+
+        return new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_2__["BlankElement"](_spaceNum));
       }
 
       var diagramElement = getDiagramElement(this.elements, content);
@@ -5466,23 +9035,26 @@ function () {
       var contSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
       var comSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
       var comScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
+      var includeInSizeCalc = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : null;
       var content;
       var comment;
       var symbol;
       var contentSpace;
       var commentSpace;
       var scale;
+      var includeInSize;
 
-      if (!(commentString == null && sym == null && contSpace == null && comSpace == null && comScale == null)) {
+      if (!(commentString == null && sym == null && contSpace == null && comSpace == null && comScale == null && includeInSizeCalc == null)) {
         content = optionsOrContent;
         comment = commentString;
         symbol = sym;
         contentSpace = contSpace;
         commentSpace = comSpace;
         scale = comScale;
+        includeInSize = includeInSizeCalc;
       } else if (Array.isArray(optionsOrContent)) {
         // $FlowFixMe
-        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 6);
+        var _optionsOrContent9 = _slicedToArray(optionsOrContent, 7);
 
         content = _optionsOrContent9[0];
         comment = _optionsOrContent9[1];
@@ -5490,6 +9062,7 @@ function () {
         contentSpace = _optionsOrContent9[3];
         commentSpace = _optionsOrContent9[4];
         scale = _optionsOrContent9[5];
+        includeInSize = _optionsOrContent9[6];
       } else {
         content = optionsOrContent.content;
         comment = optionsOrContent.comment;
@@ -5497,6 +9070,7 @@ function () {
         contentSpace = optionsOrContent.contentSpace;
         commentSpace = optionsOrContent.commentSpace;
         scale = optionsOrContent.scale;
+        includeInSize = optionsOrContent.includeInSize;
       }
 
       var contentSpaceToUse = 0.03;
@@ -5517,20 +9091,27 @@ function () {
         scaleToUse = scale;
       }
 
-      return [content, comment, symbol, contentSpaceToUse, commentSpaceToUse, scaleToUse];
+      var includeInSizeToUse = true;
+
+      if (includeInSize != null) {
+        includeInSizeToUse = includeInSize;
+      }
+
+      return [content, comment, symbol, contentSpaceToUse, commentSpaceToUse, scaleToUse, includeInSizeToUse];
     } // $FlowFixMe
 
   }, {
     key: "bottomComment",
     value: function bottomComment() {
       var _this$processComment = this.processComment.apply(this, arguments),
-          _this$processComment2 = _slicedToArray(_this$processComment, 6),
+          _this$processComment2 = _slicedToArray(_this$processComment, 7),
           content = _this$processComment2[0],
           comment = _this$processComment2[1],
           symbol = _this$processComment2[2],
           contentSpaceToUse = _this$processComment2[3],
           commentSpaceToUse = _this$processComment2[4],
-          scaleToUse = _this$processComment2[5];
+          scaleToUse = _this$processComment2[5],
+          includeInSize = _this$processComment2[6];
 
       var contentToUse;
 
@@ -5554,7 +9135,9 @@ function () {
           relativeToContent: ['center', 'bottom'],
           relativeToAnnotation: ['center', 'top'],
           scale: scaleToUse
-        })]
+        })],
+        // $FlowFixMe
+        includeAnnotationInSize: includeInSize
       });
     } // $FlowFixMe
 
@@ -5562,13 +9145,14 @@ function () {
     key: "topComment",
     value: function topComment() {
       var _this$processComment3 = this.processComment.apply(this, arguments),
-          _this$processComment4 = _slicedToArray(_this$processComment3, 6),
+          _this$processComment4 = _slicedToArray(_this$processComment3, 7),
           content = _this$processComment4[0],
           comment = _this$processComment4[1],
           symbol = _this$processComment4[2],
           contentSpaceToUse = _this$processComment4[3],
           commentSpaceToUse = _this$processComment4[4],
-          scaleToUse = _this$processComment4[5];
+          scaleToUse = _this$processComment4[5],
+          includeInSize = _this$processComment4[6];
 
       var contentToUse;
 
@@ -5592,7 +9176,9 @@ function () {
           relativeToContent: ['center', 'top'],
           relativeToAnnotation: ['center', 'bottom'],
           scale: scaleToUse
-        })]
+        })],
+        // $FlowFixMe
+        includeAnnotationInSize: includeInSize
       });
     } // eslint-disable-next-line class-methods-use-this
 
@@ -5927,1873 +9513,6 @@ function () {
 }();
 
 
-
-/***/ }),
-
-/***/ "./src/js/diagram/DiagramElements/Equation/GLEquation.js":
-/*!***************************************************************!*\
-  !*** ./src/js/diagram/DiagramElements/Equation/GLEquation.js ***!
-  \***************************************************************/
-/*! exports provided: getDiagramElement, createEquationElements, contentToElement, Equation */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDiagramElement", function() { return getDiagramElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "createEquationElements", function() { return createEquationElements; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "contentToElement", function() { return contentToElement; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Equation", function() { return Equation; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
-/* harmony import */ var _Elements_Element__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Elements/Element */ "./src/js/diagram/DiagramElements/Equation/Elements/Element.js");
-/* harmony import */ var _Elements_Fraction__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Elements/Fraction */ "./src/js/diagram/DiagramElements/Equation/Elements/Fraction.js");
-/* harmony import */ var _Elements_Strike__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Elements/Strike */ "./src/js/diagram/DiagramElements/Equation/Elements/Strike.js");
-/* harmony import */ var _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Elements/SuperSub */ "./src/js/diagram/DiagramElements/Equation/Elements/SuperSub.js");
-/* harmony import */ var _Elements_Brackets__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ./Elements/Brackets */ "./src/js/diagram/DiagramElements/Equation/Elements/Brackets.js");
-/* harmony import */ var _Elements_Annotation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ./Elements/Annotation */ "./src/js/diagram/DiagramElements/Equation/Elements/Annotation.js");
-/* harmony import */ var _EquationForm__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
-
-function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
-// Deprecate
- // import { roundNum } from '../../../tools/math';
-
-
-
-
-
-
- // import { TextObject } from './DrawingObjects/TextObject/TextObject';
-
-
-
-
-
-
-
- // // Equation is a class that takes a set of drawing objects (TextObjects,
-// // DiagramElementPrimatives or DiagramElementCollections and HTML Objects
-// // and arranges their size in a )
-
-
-function getDiagramElement(collection, name) {
-  if (typeof name === 'string') {
-    if (collection && "_".concat(name) in collection) {
-      // $FlowFixMe
-      return collection["_".concat(name)];
-    }
-
-    return null;
-  }
-
-  return name;
-}
-function createEquationElements(elems, drawContext2D) {
-  var colorOrFont = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [];
-  var diagramLimits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
-  var firstTransform = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-  var existingCollection = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-  var color = [1, 1, 1, 1];
-
-  if (Array.isArray(colorOrFont)) {
-    color = colorOrFont.slice();
-  }
-
-  var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'normal', 0.2, '200', 'left', 'alphabetic', color);
-  var fontItalic = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'left', 'alphabetic', color);
-
-  if (colorOrFont instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]) {
-    font = colorOrFont._dup();
-    font.style = 'normal';
-    fontItalic = colorOrFont._dup();
-    fontItalic.style = 'italic';
-
-    if (font.color != null) {
-      color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_2__["RGBToArray"])(font.color);
-    }
-  }
-
-  var collection;
-
-  if (existingCollection != null) {
-    collection = existingCollection;
-  } else {
-    collection = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation Elements Collection').scale(1, 1).rotate(0).translate(0, 0), diagramLimits);
-  }
-
-  var makeElem = function makeElem(text, fontOrStyle) {
-    var fontToUse = font;
-
-    if (fontOrStyle instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramFont"]) {
-      fontToUse = fontOrStyle;
-    } else if (fontOrStyle === 'italic') {
-      fontToUse = fontItalic;
-    } else if (fontOrStyle === 'normal') {
-      fontToUse = font;
-    } else if (text.match(/[A-Z,a-z]/)) {
-      fontToUse = fontItalic;
-    }
-
-    var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), text, fontToUse);
-    var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_4__["TextObject"](drawContext2D, [dT]);
-    var p = new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation Element').scale(1, 1).translate(0, 0), color, diagramLimits);
-    return p;
-  };
-
-  Object.keys(elems).forEach(function (key) {
-    if (typeof elems[key] === 'string') {
-      if (!key.startsWith('space')) {
-        collection.add(key, makeElem(elems[key], null));
-      }
-    } else if (elems[key] instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"]) {
-      collection.add(key, elems[key]);
-    } else if (elems[key] instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]) {
-      collection.add(key, elems[key]);
-    } else if (Array.isArray(elems[key])) {
-      var _elems$key = _slicedToArray(elems[key], 7),
-          text = _elems$key[0],
-          col = _elems$key[1],
-          isTouchable = _elems$key[2],
-          onClick = _elems$key[3],
-          direction = _elems$key[4],
-          mag = _elems$key[5],
-          fontOrStyle = _elems$key[6];
-
-      var elem = makeElem(text, fontOrStyle);
-
-      if (col) {
-        elem.setColor(col);
-      }
-
-      if (isTouchable) {
-        elem.isTouchable = isTouchable;
-      }
-
-      if (onClick) {
-        elem.onClick = onClick;
-      }
-
-      if (direction) {
-        elem.animate.transform.translation.style = 'curved';
-        elem.animate.transform.translation.options.direction = direction;
-      }
-
-      if (mag) {
-        elem.animate.transform.translation.style = 'curved';
-        elem.animate.transform.translation.options.magnitude = mag;
-      }
-
-      collection.add(key, elem);
-    } else {
-      var _elems$key2 = elems[key],
-          _text = _elems$key2.text,
-          _isTouchable = _elems$key2.isTouchable,
-          _onClick = _elems$key2.onClick,
-          _direction = _elems$key2.direction,
-          _mag = _elems$key2.mag,
-          _fontOrStyle = _elems$key2.fontOrStyle,
-          drawPriority = _elems$key2.drawPriority;
-
-      var _col;
-
-      if (elems[key].color) {
-        _col = elems[key].color;
-      }
-
-      var _elem = makeElem(_text, _fontOrStyle);
-
-      if (_col != null) {
-        _elem.setColor(_col);
-      }
-
-      if (_isTouchable != null) {
-        _elem.isTouchable = _isTouchable;
-      }
-
-      if (_onClick) {
-        _elem.onClick = _onClick;
-      }
-
-      if (_direction != null) {
-        _elem.animate.transform.translation.style = 'curved';
-        _elem.animate.transform.translation.options.direction = _direction;
-      }
-
-      if (drawPriority != null) {
-        _elem.drawPriority = drawPriority;
-      }
-
-      if (_mag != null) {
-        _elem.animate.transform.translation.style = 'curved';
-        _elem.animate.transform.translation.options.magnitude = _mag;
-      }
-
-      collection.add(key, _elem);
-    }
-  });
-  collection.setFirstTransform(firstTransform);
-  return collection;
-}
-function contentToElement(collection, content) {
-  // If input is alread an Elements object, then return it
-  if (content instanceof _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Elements"]) {
-    // const namedElements = {};
-    // collection.getAllElements().forEach((element) => {
-    //   namedElements[element.name] = element;
-    // });
-    return content._dup();
-  } // If it is not an Elements object, then create an Element(s) array
-  // and create a new Elements Object
-
-
-  var elementArray = []; // If the content is a string, then find the corresponding
-  // DiagramElement associated with the string
-
-  if (typeof content === 'string') {
-    if (content.startsWith('space')) {
-      var spaceNum = parseFloat(content.replace(/space[_]*/, '')) || 0.03;
-      elementArray.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["BlankElement"](spaceNum)));
-    } else {
-      var diagramElement = getDiagramElement(collection, content);
-
-      if (diagramElement) {
-        elementArray.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Element"](diagramElement));
-      }
-    } // Otherwise, if the input content is an array, then process each element
-    // and add it to the ElementArray
-
-  } else if (Array.isArray(content)) {
-    content.forEach(function (c) {
-      if (typeof c === 'string') {
-        if (c.startsWith('space')) {
-          var _spaceNum = parseFloat(c.replace(/space[_]*/, '')) || 0.03;
-
-          elementArray.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Element"](new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["BlankElement"](_spaceNum)));
-        } else {
-          var _diagramElement = getDiagramElement(collection, c);
-
-          if (_diagramElement) {
-            elementArray.push(new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Element"](_diagramElement));
-          }
-        }
-      } else if (c !== null) {
-        elementArray.push(c);
-      }
-    }); // Otherwise, if the input is an Element or Elements object, so just add
-    // it to the ElementsArray
-  } else if (content !== null) {
-    elementArray.push(content);
-  }
-
-  return new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Elements"](elementArray);
-} // export type TypeHAlign = 'left' | 'right' | 'center';
-// export type TypeVAlign = 'top' | 'bottom' | 'middle' | 'baseline';
-// export type TypeEquationForm = {
-//   collection: DiagramElementCollection;
-//   createEq: (Array<Elements | Element | string>) => void;
-//   arrange: (
-//     number, TypeHAlign | null, TypeVAlign | null,
-//     DiagramElementPrimative | DiagramElementCollection | Point
-//   ) => void;
-//   dissolveElements: (
-//     Array<DiagramElementPrimative | DiagramElementCollection>,
-//     boolean, number, number, ?(?boolean)) => void;
-//   getElementsToShowAndHide: () => void;
-//   showHide: (number, number, ?(?mixed)) => void;
-//   hideShow: (number, number, ?(?mixed)) => void;
-//   // animateTo: (
-//   //   number, number,
-//   //   DiagramElementPrimative | DiagramElementCollection | Point,
-//   //   ?(?mixed) => void,
-//   //   'left' | 'center' | 'right', 'top' | 'bottom' | 'middle' | 'baseline',
-//   // ) => void;
-//   animatePositionsTo: (number, ?(?mixed) => void) => void;
-//   description: string | null;
-//   modifiers: Object;
-//   type: string;
-//   elementMods: Object;
-//   time: number | null;
-// } & Elements;
-// export class EquationForm extends Elements {
-//   collection: DiagramElementCollection;
-//   name: string;
-//   type: string;
-//   description: string | null;
-//   modifiers: Object;
-//   elementMods: Object;
-//   time: number | null;
-//   constructor(collection: DiagramElementCollection) {
-//     super([]);
-//     this.collection = collection;
-//     this.description = null;
-//     this.modifiers = {};
-//     this.elementMods = {};
-//     this.time = null;
-//   }
-//   getNamedElements() {
-//     const namedElements = {};
-//     this.collection.getAllElements().forEach((element) => {
-//       namedElements[element.name] = element;
-//     });
-//     return namedElements;
-//   }
-//   _dup(collection: DiagramElementCollection = this.collection) {
-//     const equationCopy = new EquationForm(collection);
-//     const namedElements = {};
-//     collection.getAllElements().forEach((element) => {
-//       namedElements[element.name] = element;
-//     });
-//     const newContent = [];
-//     this.content.forEach((contentElement) => {
-//       newContent.push(contentElement._dup(namedElements));
-//     });
-//     equationCopy.content = newContent;
-//     duplicateFromTo(this, equationCopy, ['content', 'collection', 'form']);
-//     return equationCopy;
-//   }
-//   createEq(content: Array<Elements | Element | string>) {
-//     const elements = [];
-//     content.forEach((c) => {
-//       if (typeof c === 'string') {
-//         if (c.startsWith('space')) {
-//           const spaceNum = parseFloat(c.replace(/space[_]*/, '')) || 0.03;
-//           elements.push(new Element(new BlankElement(spaceNum)));
-//         } else {
-//           const diagramElement = getDiagramElement(this.collection, c);
-//           if (diagramElement) {
-//             elements.push(new Element(diagramElement));
-//           }
-//         }
-//       } else {
-//         elements.push(c._dup());
-//       }
-//       this.content = elements;
-//     });
-//   }
-//   // An Equation collection is a flat collection of DiagramElements.
-//   //
-//   // The form determines how elements are positioned relative to each other.
-//   //
-//   // A form of an equation takes the form's elements (a subset of the
-//   // collection) and applies a translation and scale transformation. This
-//   // aligns all the elements of a form relative to each other to render
-//   // the desired form.
-//   //
-//   // Arranging a form of an equation goes through each element in the form
-//   // and positions and scales it in the equation's vertex space.
-//   // It also saves the locaiton and scale information in the form's element
-//   // property.
-//   //
-//   // The elements are positioned relative to 0,0 in vertex space based on the
-//   // fixTo, alignH and alignV parameters.
-//   //
-//   // fixTo can only be a point in the equation's vertex space, or a
-//   // DiagramElement in the equation.
-//   //
-//   // If fixTo is an element in the equation:
-//   //    - the fixTo element is positioned at 0, 0, and all other elements
-//   //      repositioned relative to that.
-//   //    - The equation collection setPosition (or translation transform) can
-//   //      then be used to position the equation in the diagram (or relative
-//   //      collection space)
-//   //    - if alignH is:
-//   //        - 'middle': the fixTo element is centered in x around (0, 0)
-//   //        - 'right': the fixTo element right most point is at x = 0
-//   //        - 'left': default - the fixTo element x position at 0
-//   //    - if alignV is:
-//   //        - 'center': the fixTo element is centered in y around (0, 0)
-//   //        - 'bottom': the fixTo element bottom most point is at y = 0
-//   //        - 'top': the fixTo element top most point is at y = 0
-//   //        - 'baseline': default - the fixTo element y position at 0
-//   //
-//   // If fixTo is a Point, the equation is positioned at that point in the
-//   // equation's vertex space.
-//   //  - alignH:
-//   //    - 'left': The equation's left most element's left most point is at
-//   //              Point.x
-//   //    - 'right': The equation's right most element's right most point is at
-//   //              Point.x
-//   //    - 'center': The equation is centered horizontally around Point.x
-//   //  - alignV:
-//   //    - 'baseline': The equation's baseline is at Point.y
-//   //    - 'top': The equation's top most element's top most point is at Point.y
-//   //    - 'bottom': The equation's top most element's top most point is at
-//   //                Point.y
-//   //    - 'middle': The equation is centered vertically around Point.y
-//   //
-//   arrange(
-//     scale: number = 1,
-//     alignH: TypeHAlign | null = 'left',
-//     alignV: TypeVAlign | null = 'baseline',
-//     fixTo: DiagramElementPrimative | DiagramElementCollection | Point = new Point(0, 0),
-//   ) {
-//     const elementsInCollection = this.collection.getAllElements();
-//     const elementsCurrentlyShowing = elementsInCollection.filter(e => e.isShown);
-//     this.collection.hideAll();
-//     this.collection.show();
-//     super.calcSize(new Point(0, 0), scale);
-//     let fixPoint = new Point(0, 0);
-//     if (fixTo instanceof DiagramElementPrimative
-//         || fixTo instanceof DiagramElementCollection) {
-//       const t = fixTo.transform.t();
-//       if (t != null) {
-//         fixPoint = t._dup();
-//       }
-//     } else {
-//       fixPoint = new Point(-fixTo.x, -fixTo.y);
-//     }
-//     let w = this.width;
-//     let h = this.height;
-//     let a = this.ascent;
-//     let d = this.descent;
-//     let p = this.location._dup();
-//     if (fixTo instanceof DiagramElementPrimative
-//         || fixTo instanceof DiagramElementCollection) {
-//       const t = fixTo.transform.t();
-//       const s = fixTo.transform.s();
-//       if (t != null && s != null) {
-//         const rect = fixTo.getVertexSpaceBoundingRect();
-//         w = rect.width * s.x;
-//         h = rect.height * s.y;
-//         a = rect.top * s.y - t.y;
-//         d = t.y - rect.bottom * s.y;
-//         p = t._dup();
-//       }
-//     }
-//     if (alignH === 'right') {
-//       fixPoint.x += w;
-//     } else if (alignH === 'center') {
-//       fixPoint.x += w / 2;
-//     }
-//     if (alignV === 'top') {
-//       fixPoint.y += p.y + a;
-//     } else if (alignV === 'bottom') {
-//       fixPoint.y += p.y - d;
-//     } else if (alignV === 'middle') {
-//       fixPoint.y += p.y - d + h / 2;
-//     }
-//     const delta = new Point(0, 0).sub(fixPoint);
-//     if (delta.x !== 0 || delta.y !== 0) {
-//       this.offsetLocation(delta);
-//       this.setPositions();
-//     }
-//     this.collection.showOnly(elementsCurrentlyShowing);
-//   }
-//   // eslint-disable-next-line class-methods-use-this
-//   dissolveElements(
-//     elements: Array<DiagramElementPrimative | DiagramElementCollection>,
-//     disolve: 'in' | 'out' = 'in',
-//     delay: number = 0.01,
-//     time: number = 1,
-//     callback: ?(boolean) => void = null,
-//   ) {
-//     if (elements.length === 0) {
-//       if (callback) {
-//         callback(false);
-//         return;
-//       }
-//     }
-//     const count = elements.length;
-//     let completed = 0;
-//     const end = (cancelled: boolean) => {
-//       completed += 1;
-//       if (completed === count) {
-//         if (callback) {
-//           callback(cancelled);
-//         }
-//       }
-//     };
-//     elements.forEach((e) => {
-//       e.disolveWithDelay(delay, time, disolve, end);
-//     });
-//   }
-//   getElementsToShowAndHide() {
-//     const allElements = this.collection.getAllElements();
-//     const elementsShown = allElements.filter(e => e.isShown);
-//     const elementsShownTarget = this.getAllElements();
-//     const elementsToHide =
-//       elementsShown.filter(e => elementsShownTarget.indexOf(e) === -1);
-//     const elementsToShow =
-//       elementsShownTarget.filter(e => elementsShown.indexOf(e) === -1);
-//     return {
-//       show: elementsToShow,
-//       hide: elementsToHide,
-//     };
-//   }
-//   render() {
-//     this.hideShow();
-//     this.setPositions();
-//   }
-//   showHide(
-//     showTime: number = 0,
-//     hideTime: number = 0,
-//     callback: ?(?mixed) => void = null,
-//   ) {
-//     this.collection.stop();
-//     this.collection.show();
-//     const { show, hide } = this.getElementsToShowAndHide();
-//     if (showTime === 0) {
-//       show.forEach((e) => {
-//         e.showAll();
-//       });
-//     } else {
-//       this.dissolveElements(show, 'in', 0.01, showTime, null);
-//     }
-//     if (hideTime === 0) {
-//       hide.forEach(e => e.hide());
-//     } else {
-//       this.dissolveElements(hide, 'out', showTime, hideTime, callback);
-//     }
-//   }
-//   hideShow(
-//     showTime: number = 0,
-//     hideTime: number = 0,
-//     callback: ?(?mixed) => void = null,
-//   ) {
-//     this.collection.stop();
-//     this.collection.show();
-//     const { show, hide } = this.getElementsToShowAndHide();
-//     if (hideTime === 0) {
-//       hide.forEach(e => e.hide());
-//     } else {
-//       this.dissolveElements(hide, 'out', 0.01, hideTime, null);
-//     }
-//     if (showTime === 0) {
-//       show.forEach((e) => {
-//         e.showAll();
-//       });
-//       if (callback != null) {
-//         callback();
-//       }
-//     } else {
-//       this.dissolveElements(show, 'in', hideTime, showTime, callback);
-//     }
-//   }
-//   allHideShow(
-//     delay: number = 0,
-//     hideTime: number = 0.5,
-//     blankTime: number = 0.5,
-//     showTime: number = 0.5,
-//     callback: ?(boolean) => void = null,
-//   ) {
-//     this.collection.stop();
-//     const allElements = this.collection.getAllElements();
-//     const elementsShown = allElements.filter(e => e.isShown);
-//     const elementsToShow = this.getAllElements();
-//     const elementsToDelayShowing = elementsToShow.filter(e => !e.isShown);
-//     const elementsToShowAfterDisolve = elementsToShow.filter(e => e.isShown);
-//     let cumTime = delay;
-//     if (elementsToShow.length === 0 && elementsShown.length === 0) {
-//       if (callback != null) {
-//         callback(false);
-//         return;
-//       }
-//     }
-//     // disolve out
-//     // set positions
-//     // disolve in
-//     let disolveOutCallback = () => {
-//       this.setPositions();
-//     };
-//     if (elementsToShow.length === 0) {
-//       disolveOutCallback = (cancelled: boolean) => {
-//         this.setPositions();
-//         if (callback != null) {
-//           callback(cancelled);
-//         }
-//       };
-//     }
-//     if (elementsShown.length > 0) {
-//       this.dissolveElements(
-//         elementsShown, 'out', delay, hideTime, disolveOutCallback,
-//       );
-//       cumTime += hideTime;
-//     } else {
-//       this.setPositions();
-//     }
-//     const count = elementsToShow.length;
-//     let completed = 0;
-//     const end = (cancelled: boolean) => {
-//       completed += 1;
-//       if (completed === count - 1) {
-//         if (callback) {
-//           callback(cancelled);
-//         }
-//       }
-//     };
-//     elementsToDelayShowing.forEach((e) => {
-//       e.disolveWithDelay(cumTime + blankTime, showTime, 'in', end);
-//     });
-//     elementsToShowAfterDisolve.forEach((e) => {
-//       e.disolveWithDelay(blankTime, showTime, 'in', end);
-//     });
-//   }
-//   animatePositionsTo(
-//     delay: number,
-//     disolveOutTime: number,
-//     moveTime: number | null,
-//     disolveInTime: number,
-//     callback: ?(?mixed) => void = null,
-//   ) {
-//     const allElements = this.collection.getAllElements();
-//     this.collection.stop();
-//     const elementsShown = allElements.filter(e => e.isShown);
-//     const elementsShownTarget = this.getAllElements();
-//     const elementsToHide =
-//       elementsShown.filter(e => elementsShownTarget.indexOf(e) === -1);
-//     const elementsToShow =
-//       elementsShownTarget.filter(e => elementsShown.indexOf(e) === -1);
-//     const currentTransforms = this.collection.getElementTransforms();
-//     this.setPositions();
-//     const animateToTransforms = this.collection.getElementTransforms();
-//     const elementsToMove = [];
-//     const toMoveStartTransforms = [];
-//     const toMoveStopTransforms = [];
-//     Object.keys(animateToTransforms).forEach((key) => {
-//       const currentT = currentTransforms[key];
-//       const nextT = animateToTransforms[key];
-//       if (!currentT.isEqualTo(nextT)) {
-//         elementsToMove.push(key);
-//         toMoveStartTransforms.push(currentT);
-//         toMoveStopTransforms.push(nextT);
-//       }
-//     });
-//     // Find move time to use. If moveTime is null, then a velocity is used.
-//     let moveTimeToUse;
-//     if (moveTime === null) {
-//       moveTimeToUse = getMoveTime(
-//         toMoveStartTransforms, toMoveStopTransforms, 0,
-//         new Point(0.35, 0.35),      // 0.25 diagram space per s
-//         2 * Math.PI / 6,            // 60º per second
-//         new Point(0.4, 0.4),            // 100% per second
-//       );
-//     } else {
-//       moveTimeToUse = moveTime;
-//     }
-//     this.collection.setElementTransforms(currentTransforms);
-//     let cumTime = delay;
-//     let moveCallback = null;
-//     let disolveInCallback = null;
-//     let disolveOutCallback = null;
-//     if (elementsToMove.length === 0 && elementsToShow.length === 0) {
-//       disolveOutCallback = callback;
-//     } else if (elementsToShow.length === 0) {
-//       moveCallback = callback;
-//     } else {
-//       disolveInCallback = callback;
-//     }
-//     if (elementsToHide.length > 0) {
-//       this.dissolveElements(elementsToHide, 'out', delay, disolveOutTime, disolveOutCallback);
-//       cumTime += disolveOutTime;
-//     }
-//     Object.keys(this.elementMods).forEach((elementName) => {
-//       const mods = this.elementMods[elementName];
-//       const {
-//         element, color, style, direction, mag,
-//       } = mods;
-//       if (element != null) {
-//         if (color != null) {
-//           element.animateColorToWithDelay(color, cumTime, moveTimeToUse);
-//         }
-//         if (style != null) {
-//           element.animate.transform.translation.style = style;
-//         }
-//         if (direction != null) {
-//           element.animate.transform.translation.options.direction = direction;
-//         }
-//         if (mag != null) {
-//           element.animate.transform.translation.options.magnitude = mag;
-//         }
-//       }
-//     });
-//     const t = this.collection.animateToTransforms(
-//       animateToTransforms,
-//       moveTimeToUse,
-//       cumTime,
-//       0,
-//       moveCallback,
-//     );
-//     if (t > 0) {
-//       cumTime = t;
-//     }
-//     if (elementsToShow.length > 0) {
-//       this.dissolveElements(elementsToShow, 'in', cumTime, disolveInTime, disolveInCallback);
-//       cumTime += disolveInTime + 0.001;
-//     }
-//     return cumTime;
-//   }
-// }
-
-// class EquationFunctions {
-//   // eslint-disable-next-line no-use-before-define
-//   collection: EquationNew;
-//   // eslint-disable-next-line no-use-before-define
-//   constructor(collection: EquationNew) {
-//     this.collection = collection;
-//   }
-//   frac(options: {
-//       numerator: TypeEquationInput,
-//       denominator: TypeEquationInput,
-//       vinculum: string | DiagramElementPrimative | DiagramElementCollection,
-//     }
-//     | [
-//         TypeEquationInput,
-//         TypeEquationInput,
-//         string | DiagramElementPrimative | DiagramElementCollection
-//       ]) {
-//     let numerator;
-//     let denominator;
-//     let vinculum;
-//     if (Array.isArray(options)) {
-//       [numerator, denominator, vinculum] = options;
-//     } else {
-//       ({ numerator, denominator, vinculum } = options);
-//     }
-//     return new Fraction(
-//       contentToElement(this.collection, numerator),
-//       contentToElement(this.collection, denominator),
-//       getDiagramElement(this.collection, vinculum),
-//     );
-//   }
-// }
-// // An Equation is a collection of elements that can be arranged into different
-// // forms.
-// // Equation allows setting of forms, and navigating through form series
-// // Eqn manages different forms of the
-// export class EquationNew extends DiagramElementCollection {
-//   eqn: {
-//     forms: { [formName: string]: {
-//       base: EquationForm;                   // There is always a base form
-//       [subFormName: string]: EquationForm;  // Sub forms may differ in units
-//       name: string;                         // Name of form
-//     } };
-//     currentForm: string;
-//     currentSubForm: string;
-//     getCurrentForm: () => ?EquationForm;
-//     subFormPriority: Array<string>,
-//     //
-//     formSeries: { [seriesName: String]: Array<EquationForm> };
-//     currentFormSeries: string;
-//     getCurrentFormSeries: () => ?Array<EquationForm>;
-//     //
-//     defaultFormAlignment: {
-//       fixTo: DiagramElementPrimative | DiagramElementCollection | Point;
-//       hAlign: TypeHAlign;
-//       vAlign: TypeVAlign;
-//       scale: number,
-//     };
-//     //
-//     showForm: (EquationForm | string, ?string) => {};
-//     //
-//   };
-//   // isTouchDevice: boolean;
-//   // animateNextFrame: void => void;
-//   shapes: Object;
-//   constructor(
-//     shapes: Object,
-//     // equations: Object,
-//     // equation: Object,
-//     // isTouchDevice: boolean,
-//     // animateNextFrame: void => void,
-//     options: TypeEquationOptions = {},
-//   ) {
-//     const defaultOptions = {
-//       color: [0.5, 0.5, 0.5, 1],
-//       position: new Point(0, 0),
-//       defaultFormAlignment: {
-//         fixTo: new Point(0, 0),
-//         hAlign: 'left',
-//         vAlign: 'baseline',
-//         scale: 0.7,
-//       },
-//     };
-//     const optionsToUse = joinObjects({}, defaultOptions, options);
-//     super(new Transform('Equation')
-//       .scale(1, 1)
-//       .rotate(0)
-//       .translate(0, 0), shapes.limits);
-//     this.shapes = shapes;
-//     this.color = optionsToUse.color;
-//     this.setPosition(optionsToUse.position);
-//     // this.isTouchDevice = isTouchDevice;
-//     // this.animateNextFrame = animateNextFrame;
-//     // Set default values
-//     this.eqn = {
-//       forms: {},
-//       currentForm: '',
-//       currentSubForm: '',
-//       subFormPriority: ['base'],
-//       formSeries: {},
-//       currentFormSeries: '',
-//       defaultFormAlignment: optionsToUse.defaultFormAlignment,
-//       functions: new EquationFunctions(this),
-//     };
-//     if (optionsToUse.elements != null) {
-//       this.addElements(optionsToUse.elements, this.color);
-//     }
-//   }
-//   addElements(
-//     elems: Object,
-//     colorOrFont: Array<number> | DiagramFont = [],
-//     // descriptionElement: DiagramElementPrimative | null = null,
-//     // descriptionPosition: Point = new Point(0, 0),
-//   ) {
-//     this.addEquationElements(elems, colorOrFont);
-//     // this.addDescriptionElement(descriptionElement, descriptionPosition);
-//   }
-//   addEquationElements(
-//     elems: Object,
-//     colorOrFont: Array<number> | DiagramFont = [],
-//   ) {
-//     let color = [1, 1, 1, 1];
-//     if (Array.isArray(colorOrFont)) {
-//       color = colorOrFont.slice();
-//     }
-//     let font = new DiagramFont(
-//       'Times New Roman',
-//       'normal',
-//       0.2, '200', 'left', 'alphabetic', color,
-//     );
-//     let fontItalic = new DiagramFont(
-//       'Times New Roman',
-//       'italic',
-//       0.2, '200', 'left', 'alphabetic', color,
-//     );
-//     if (colorOrFont instanceof DiagramFont) {
-//       font = colorOrFont._dup();
-//       font.style = 'normal';
-//       fontItalic = colorOrFont._dup();
-//       fontItalic.style = 'italic';
-//       if (font.color != null) {
-//         color = RGBToArray(font.color);
-//       }
-//     }
-//     const makeElem = (text: string, fontOrStyle: DiagramFont | string | null) => {
-//       let fontToUse: DiagramFont = font;
-//       if (fontOrStyle instanceof DiagramFont) {
-//         fontToUse = fontOrStyle;
-//       } else if (fontOrStyle === 'italic') {
-//         fontToUse = fontItalic;
-//       } else if (fontOrStyle === 'normal') {
-//         fontToUse = font;
-//       } else if (text.match(/[A-Z,a-z]/)) {
-//         fontToUse = fontItalic;
-//       }
-//       const p = this.shapes.txt(
-//         text,
-//         { location: new Point(0, 0), font: fontToUse },
-//       );
-//       return p;
-//     };
-//     Object.keys(elems).forEach((key) => {
-//       if (typeof elems[key] === 'string') {
-//         if (!key.startsWith('space')) {
-//           this.add(key, makeElem(elems[key], null));
-//         }
-//       } else if (elems[key] instanceof DiagramElementPrimative) {
-//         this.add(key, elems[key]);
-//       } else if (elems[key] instanceof DiagramElementCollection) {
-//         this.add(key, elems[key]);
-//       } else {
-//         const {
-//           text, fontOrStyle, col, elementOptions,
-//         } = elems[key];
-//         const elem = makeElem(text, fontOrStyle);
-//         if (elementOptions != null) {
-//           elem.setProperties(elementOptions);
-//         }
-//         if (col != null) {
-//           elem.setColor(col);
-//         }
-//         this.add(key, elem);
-//       }
-//     });
-//     this.setFirstTransform(this.transform);
-//   }
-//   addForm(
-//     name: string,
-//     content: Array<Elements | Element | string>,
-//     options: {
-//       subForm?: string,
-//       addToSeries?: string,
-//       elementMods?: Object,
-//       time?: number | null | { fromPrev?: number, fromNext?: number },
-//       description?: string,
-//       modifiers?: Object,
-//     } = {},
-//   ) {
-//     if (!(name in this.eqn.forms)) {
-//       this.eqn.forms[name] = {};
-//     }
-//     const defaultOptions = {
-//       subForm: 'base',
-//       addToSeries: '',
-//       elementMods: {},
-//       animationTime: null,          // use velocities instead of time
-//       description: '',
-//       modifiers: {},
-//     };
-//     let optionsToUse = defaultOptions;
-//     if (options) {
-//       optionsToUse = Object.assign({}, defaultOptions, options);
-//     }
-//     const {
-//       subForm, description, modifiers,
-//       animationTime, elementMods, addToSeries,
-//     } = optionsToUse;
-//     const time = animationTime;
-//     this.eqn.forms[name].name = name;
-//     const form = this.eqn.forms[name];
-//     form[subForm] = new EquationForm(this);
-//     // form[subForm].name = subForm;
-//     form[subForm].description = description;
-//     form[subForm].modifiers = modifiers;
-//     form[subForm].name = name;
-//     form[subForm].subForm = subForm;
-//     form[subForm].elementMods = {};
-//     if (typeof time === 'number') {
-//       form[name].time = {
-//         fromPrev: time, fromNext: time, fromAny: time,
-//       };
-//     } else {
-//       form[subForm].time = time;
-//     }
-//     Object.keys(elementMods).forEach((elementName) => {
-//       const diagramElement = getDiagramElement(this, elementName);
-//       if (diagramElement) {
-//         let color;
-//         let elementOptions;
-//         if (Array.isArray(elementMods[elementName])) {
-//           [color, elementOptions] = elementMods[elementName];
-//         } else {
-//           ({
-//             color, elementOptions,
-//           } = elementMods[elementName]);
-//         }
-//         form[subForm].elementMods[elementName] = {
-//           element: diagramElement,
-//           color,
-//           elementOptions,
-//         };
-//       }
-//     });
-//     // const form = this.form[name][formType];
-//     form[subForm].createEq(content);
-//     // form[subForm].subForm = formType;
-//     form[subForm].arrange(
-//       this.eqn.defaultFormAlignment.scale,
-//       this.eqn.defaultFormAlignment.hAlign,
-//       this.eqn.defaultFormAlignment.vAlign,
-//       this.eqn.defaultFormAlignment.fixTo,
-//     );
-//     // if (addToSeries != null && addToSeries !== '') {
-//     //   if (this.eqn.formSeries[addToSeries] == null) {
-//     //     this.eqn.formSeries[addToSeries] = [];
-//     //   }
-//     //   this.eqn.formSeries[addToSeries].push(this.eqn.forms[name]);
-//     // }
-//     // make the first form added also equal to the base form as always
-//     // need a base form for some functions
-//     if (this.eqn.forms[name].base === undefined) {
-//       const baseOptions = Object.assign({}, options);
-//       baseOptions.subForm = 'base';
-//       this.addForm(name, content, baseOptions);
-//     }
-//     if (this.eqn.currentForm === '') {
-//       this.eqn.currentForm = name;
-//     }
-//     if (this.eqn.currentSubForm === '') {
-//       this.eqn.currentSubForm = 'base';
-//     }
-//   }
-//   getCurrentForm() {
-//     console.log(this.eqn.currentForm, this.eqn.currentSubForm, this.eqn.forms)
-//     if (this.eqn.forms[this.eqn.currentForm] == null) {
-//       return null;
-//     }
-//     if (this.eqn.forms[this.eqn.currentForm][this.eqn.currentSubForm] == null) {
-//       return null;
-//     }
-//     return this.eqn.forms[this.eqn.currentForm][this.eqn.currentSubForm];
-//   }
-//   render() {
-//     const form = this.getCurrentForm();
-//     if (form != null) {
-//       form.showHide();
-//       this.show();
-//       form.setPositions();
-//       // this.updateDescription();
-//     }
-//   }
-//   setCurrentForm(
-//     formOrName: EquationForm | string,
-//     subForm: string = 'base',
-//   ) {
-//     if (typeof formOrName === 'string') {
-//       this.eqn.currentForm = '';
-//       this.eqn.currentSubForm = '';
-//       if (formOrName in this.eqn.forms) {
-//         this.eqn.currentForm = formOrName;
-//         if (subForm in this.eqn.forms[formOrName]) {
-//           this.eqn.currentSubForm = subForm;
-//         }
-//       }
-//     } else {
-//       this.eqn.currentForm = formOrName.name;
-//       this.eqn.currentSubForm = formOrName.subForm;
-//     }
-//   }
-//   showForm(
-//     formOrName: EquationForm | string,
-//     subForm: ?string = null,
-//   ) {
-//     this.show();
-//     let form = formOrName;
-//     if (typeof formOrName === 'string') {
-//       form = this.getForm(formOrName, subForm);
-//     }
-//     if (form) {
-//       this.setCurrentForm(form);
-//       this.render();
-//     }
-//   }
-//   getForm(
-//     formOrName: string | EquationForm,
-//     subForm: ?string,
-//   ): null | EquationForm {
-//     if (formOrName instanceof EquationForm) {
-//       return formOrName;
-//     }
-//     // console.log(formType, this.form[formOrName])
-//     if (formOrName in this.eqn.forms) {
-//       let formTypeToUse = subForm;
-//       if (formTypeToUse == null) {
-//         const possibleFormTypes
-//           = this.eqn.subFormPriority.filter(fType => fType in this.eqn.forms[formOrName]);
-//         if (possibleFormTypes.length) {
-//           // eslint-disable-next-line prefer-destructuring
-//           formTypeToUse = possibleFormTypes[0];
-//         }
-//       }
-//       if (formTypeToUse != null) {
-//         return this.eqn.forms[formOrName][formTypeToUse];
-//       }
-//     }
-//     return null;
-//   }
-// }
-// An Equation is tied to a collection of elements.
-//
-// The Equation class manages equation forms that
-// speicify how to lay out the collection of elements.
-//
-// The Equation class also has a helper that can create a colleciton
-// of DiagramElements for an equation
-//
-// EqnCollection extends DiagramElementCollection
-//    eqns: { equations that manage this collection }
-//    eqnName: direct access to equation with a particular name
-var Equation =
-/*#__PURE__*/
-function () {
-  // currentForm: ?EquationForm;
-  // currentFormName: string;
-  // currentFormType: string;
-  function Equation(drawContext2D) {
-    var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
-    var firstTransform = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Equation').scale(1, 1).rotate(0).translate(0, 0);
-
-    _classCallCheck(this, Equation);
-
-    this.drawContext2D = drawContext2D;
-    this.diagramLimits = diagramLimits;
-    this.firstTransform = firstTransform;
-    this.form = {};
-    this.formAlignment = {
-      vAlign: 'baseline',
-      hAlign: 'left',
-      fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-      scale: 1
-    };
-    this.currentForm = '';
-    this.currentFormType = '';
-    this.formTypeOrder = ['base'];
-    this.descriptionPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.isAnimating = false;
-  }
-
-  _createClass(Equation, [{
-    key: "_dup",
-    value: function _dup() {
-      var _this = this;
-
-      var equationCopy = new Equation(this.drawContext2D, this.diagramLimits._dup(), this.firstTransform._dup());
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this, equationCopy, ['collection', 'form', 'drawContext2D', 'formAlignment']);
-
-      var newCollection = this.collection._dup();
-
-      equationCopy.collection = newCollection;
-      var newForm = {};
-      Object.keys(this.form).forEach(function (name) {
-        if (!(name in newForm)) {
-          newForm[name] = {};
-        }
-
-        Object.keys(_this.form[name]).forEach(function (formType) {
-          if (formType !== 'name') {
-            newForm[name][formType] = _this.form[name][formType]._dup(newCollection.elements, {
-              getAllElements: newCollection.getAllElements.bind(newCollection),
-              hideAll: newCollection.hideAll.bind(newCollection),
-              show: newCollection.show.bind(newCollection),
-              showOnly: newCollection.showOnly.bind(newCollection),
-              stop: newCollection.stop.bind(newCollection),
-              getElementTransforms: newCollection.getElementTransforms.bind(newCollection),
-              setElementTransforms: newCollection.setElementTransforms.bind(newCollection),
-              animateToTransforms: newCollection.animateToTransforms.bind(newCollection)
-            });
-          } else {
-            newForm[name][formType] = _this.form[name][formType];
-          }
-        });
-      });
-      equationCopy.form = newForm;
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["duplicateFromTo"])(this.formAlignment, equationCopy.formAlignment, ['fixTo']);
-      var fixTo = this.formAlignment.fixTo;
-
-      if (fixTo instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-        equationCopy.formAlignment.fixTo = this.formAlignment.fixTo._dup();
-      } else {
-        Object.keys(newCollection.elements).forEach(function (key) {
-          if (newCollection.elements[key].name === fixTo.name) {
-            equationCopy.formAlignment.fixTo = newCollection.elements[key];
-          }
-        });
-      }
-
-      return equationCopy;
-    }
-  }, {
-    key: "createElements",
-    value: function createElements(elems) {
-      var colorOrFont = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-      var descriptionElement = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var descriptionPosition = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var existingCollection = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      this.collection = createEquationElements(elems, this.drawContext2D, colorOrFont, this.diagramLimits, this.firstTransform, existingCollection);
-      this.addDescriptionElement(descriptionElement, descriptionPosition);
-    }
-  }, {
-    key: "addDescriptionElement",
-    value: function addDescriptionElement() {
-      var descriptionElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var descriptionPosition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      this.descriptionElement = descriptionElement;
-      this.descriptionPosition = descriptionPosition;
-
-      if (this.descriptionElement) {
-        this.descriptionElement.setPosition(this.collection.getDiagramPosition().add(descriptionPosition));
-      }
-    }
-  }, {
-    key: "setPosition",
-    value: function setPosition(position) {
-      this.collection.setPosition(position);
-
-      if (this.descriptionElement) {
-        this.descriptionElement.setPosition(position.add(this.descriptionPosition));
-      }
-    }
-  }, {
-    key: "stop",
-    value: function stop() {
-      this.collection.stop();
-    }
-  }, {
-    key: "setElem",
-    value: function setElem(element) {
-      var elementColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var isTouchable = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-      var mag = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.5;
-      var elem = element;
-
-      if (typeof elem === 'string') {
-        elem = getDiagramElement(this.collection, element);
-      }
-
-      if (elem instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"] || elem instanceof _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"]) {
-        if (elementColor != null) {
-          elem.setColor(elementColor);
-        }
-
-        elem.isTouchable = isTouchable;
-
-        if (isTouchable) {
-          this.collection.hasTouchableElements = true;
-        }
-
-        elem.animate.transform.translation.style = 'curved';
-        elem.animate.transform.translation.options.direction = direction;
-        elem.animate.transform.translation.options.magnitude = mag;
-      }
-    }
-  }, {
-    key: "addForm",
-    value: function addForm(name, content) {
-      var _this2 = this;
-
-      var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-
-      if (!(name in this.form)) {
-        this.form[name] = {};
-      }
-
-      var defaultOptions = {
-        formType: 'base',
-        addToSeries: true,
-        elementMods: {},
-        animationTime: null,
-        // use velocities instead of time
-        description: '',
-        modifiers: {}
-      };
-      var optionsToUse = defaultOptions;
-
-      if (options) {
-        optionsToUse = Object.assign({}, defaultOptions, options);
-      }
-
-      var _optionsToUse = optionsToUse,
-          formType = _optionsToUse.formType,
-          description = _optionsToUse.description,
-          modifiers = _optionsToUse.modifiers,
-          animationTime = _optionsToUse.animationTime,
-          elementMods = _optionsToUse.elementMods,
-          addToSeries = _optionsToUse.addToSeries;
-      var time = animationTime;
-      this.form[name][formType] = new _EquationForm__WEBPACK_IMPORTED_MODULE_14__["default"](this.collection.elements, {
-        getAllElements: this.collection.getAllElements.bind(this.collection),
-        hideAll: this.collection.hideAll.bind(this.collection),
-        show: this.collection.show.bind(this.collection),
-        showOnly: this.collection.showOnly.bind(this.collection),
-        stop: this.collection.stop.bind(this.collection),
-        getElementTransforms: this.collection.getElementTransforms.bind(this.collection),
-        setElementTransforms: this.collection.setElementTransforms.bind(this.collection),
-        animateToTransforms: this.collection.animateToTransforms.bind(this.collection)
-      });
-      this.form[name].name = name;
-      this.form[name][formType].name = name;
-      this.form[name][formType].description = description;
-      this.form[name][formType].modifiers = modifiers;
-      this.form[name][formType].type = formType;
-      this.form[name][formType].elementMods = {};
-
-      if (typeof time === 'number') {
-        this.form[name][formType].time = {
-          fromPrev: time,
-          fromNext: time,
-          fromAny: time
-        };
-      } else {
-        this.form[name][formType].time = time;
-      }
-
-      Object.keys(elementMods).forEach(function (elementName) {
-        var diagramElement = getDiagramElement(_this2.collection, elementName);
-
-        if (diagramElement) {
-          var color;
-          var style;
-          var direction;
-          var mag;
-
-          if (Array.isArray(elementMods[elementName])) {
-            var _elementMods$elementN = _slicedToArray(elementMods[elementName], 4);
-
-            color = _elementMods$elementN[0];
-            style = _elementMods$elementN[1];
-            direction = _elementMods$elementN[2];
-            mag = _elementMods$elementN[3];
-          } else {
-            var _elementMods$elementN2 = elementMods[elementName];
-            color = _elementMods$elementN2.color;
-            style = _elementMods$elementN2.style;
-            direction = _elementMods$elementN2.direction;
-            mag = _elementMods$elementN2.mag;
-          }
-
-          _this2.form[name][formType].elementMods[elementName] = {
-            element: diagramElement,
-            color: color,
-            style: style,
-            direction: direction,
-            mag: mag
-          };
-        }
-      });
-      var form = this.form[name][formType];
-      form.createEq(content);
-      form.type = formType;
-      form.arrange(this.formAlignment.scale, this.formAlignment.hAlign, this.formAlignment.vAlign, this.formAlignment.fixTo);
-
-      if (addToSeries) {
-        if (this.formSeries == null) {
-          this.formSeries = [];
-        }
-
-        this.formSeries.push(this.form[name]);
-      } // make the first form added also equal to the base form as always
-      // need a base form for some functions
-
-
-      if (this.form[name].base === undefined) {
-        var baseOptions = Object.assign({}, options);
-        baseOptions.formType = 'base';
-        this.addForm(name, content, baseOptions);
-      }
-    }
-  }, {
-    key: "getCurrentForm",
-    value: function getCurrentForm() {
-      if (this.form[this.currentForm] == null) {
-        return null;
-      }
-
-      if (this.form[this.currentForm][this.currentFormType] == null) {
-        return null;
-      }
-
-      return this.form[this.currentForm][this.currentFormType];
-    }
-  }, {
-    key: "reArrangeCurrentForm",
-    value: function reArrangeCurrentForm() {
-      var form = this.getCurrentForm();
-
-      if (form == null) {
-        return;
-      }
-
-      form.arrange(this.formAlignment.scale, this.formAlignment.hAlign, this.formAlignment.vAlign, this.formAlignment.fixTo);
-    }
-  }, {
-    key: "scaleForm",
-    value: function scaleForm(name, scale) {
-      var formType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'base';
-
-      // console.log(name, this.form, formType, this.form[name][formType])
-      if (name in this.form) {
-        if (formType in this.form[name]) {
-          this.form[name][formType].arrange(scale, this.formAlignment.hAlign, this.formAlignment.vAlign, this.formAlignment.fixTo);
-        }
-      }
-    }
-  }, {
-    key: "scale",
-    value: function scale(_scale) {
-      var _this3 = this;
-
-      Object.keys(this.form).forEach(function (name) {
-        Object.keys(_this3.form[name]).forEach(function (formType) {
-          if (formType !== 'name') {
-            _this3.scaleForm(name, _scale, formType);
-          }
-        });
-      });
-    }
-  }, {
-    key: "setFormSeries",
-    value: function setFormSeries(series) {
-      var _this4 = this;
-
-      this.formSeries = [];
-      series.forEach(function (form) {
-        if (typeof form === 'string') {
-          _this4.formSeries.push(_this4.form[form]);
-        } else {
-          _this4.formSeries.push(form);
-        }
-      });
-    }
-  }, {
-    key: "getFormIndex",
-    value: function getFormIndex(formToGet) {
-      var form = this.getForm(formToGet);
-      var index = -1;
-
-      if (form != null) {
-        index = this.formSeries.indexOf(this.form[form.name]);
-      }
-
-      return index;
-    }
-  }, {
-    key: "prevForm",
-    value: function prevForm() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var currentForm = this.getCurrentForm();
-
-      if (currentForm == null) {
-        return;
-      }
-
-      var index = this.getFormIndex(currentForm);
-
-      if (index > -1) {
-        index -= 1;
-
-        if (index < 0) {
-          index = this.formSeries.length - 1;
-        }
-
-        this.goToForm(index, time, delay, 'fromNext');
-      }
-    }
-  }, {
-    key: "nextForm",
-    value: function nextForm() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var animate = true;
-      var currentForm = this.getCurrentForm();
-
-      if (currentForm == null) {
-        return;
-      }
-
-      var index = this.getFormIndex(currentForm);
-
-      if (index > -1) {
-        index += 1;
-
-        if (index > this.formSeries.length - 1) {
-          index = 0;
-          animate = false;
-        }
-
-        this.goToForm(index, time, delay, 'fromPrev', animate);
-      }
-    }
-  }, {
-    key: "replayCurrentForm",
-    value: function replayCurrentForm(time) {
-      if (this.isAnimating) {
-        this.collection.stop(true, true);
-        this.collection.stop(true, true);
-        this.isAnimating = false;
-        var currentForm = this.getCurrentForm();
-
-        if (currentForm != null) {
-          this.showForm(currentForm);
-        }
-
-        return;
-      }
-
-      this.collection.stop();
-      this.collection.stop();
-      this.isAnimating = false;
-      this.prevForm(0);
-      this.nextForm(time, 0.5);
-    }
-  }, {
-    key: "animateToForm",
-    value: function animateToForm(name) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      this.collection.stopAnimatingColor(true, true);
-      this.collection.stopAnimatingColor(true, true);
-      this.collection.stop();
-      this.collection.stop();
-      var form = this.getForm(name);
-
-      if (form != null) {
-        form.animatePositionsTo(delay, 0.4, time, 0.4, callback);
-      }
-
-      this.setCurrentForm(name); // if (this.isAnimating) {
-      //   this.collection.stop(true, true);
-      //   this.collection.stop(true, true);
-      //   this.isAnimating = false;
-      //   const currentForm = this.getCurrentForm();
-      //   if (currentForm != null) {
-      //     this.showForm(currentForm);
-      //   }
-      //   // return;
-      // }
-      // this.collection.stop();
-      // this.collection.stop();
-      // this.isAnimating = false;
-    }
-  }, {
-    key: "goToForm",
-    value: function goToForm() {
-      var _this5 = this;
-
-      var name = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var fromWhere = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'fromAny';
-      var animate = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-      var callback = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : null;
-
-      if (this.isAnimating) {
-        this.collection.stop(true, true);
-        this.collection.stop(true, true);
-        this.isAnimating = false;
-        var currentForm = this.getCurrentForm();
-
-        if (currentForm != null) {
-          this.showForm(currentForm);
-        }
-
-        return;
-      }
-
-      this.collection.stop();
-      this.collection.stop();
-      this.isAnimating = false; // By default go to the next form in a series
-
-      var nextIndex = 0;
-
-      if (name == null) {
-        var index = 0;
-
-        var _currentForm = this.getCurrentForm();
-
-        if (_currentForm != null) {
-          index = this.formSeries.indexOf(this.form[_currentForm.name]);
-
-          if (index < 0) {
-            index = 0;
-          }
-        }
-
-        nextIndex = index + 1;
-
-        if (nextIndex === this.formSeries.length) {
-          nextIndex = 0;
-        }
-      } else if (typeof name === 'number') {
-        nextIndex = name;
-      } else {
-        this.formSeries.forEach(function (form, index) {
-          if (form.name === name) {
-            nextIndex = index;
-          }
-        });
-      }
-
-      var form = null;
-      var formTypeToUse = null;
-      var possibleFormTypes = this.formTypeOrder.filter(function (fType) {
-        return fType in _this5.formSeries[nextIndex];
-      });
-
-      if (possibleFormTypes.length) {
-        // eslint-disable-next-line prefer-destructuring
-        formTypeToUse = possibleFormTypes[0];
-      }
-
-      if (formTypeToUse != null) {
-        // $FlowFixMe
-        form = this.formSeries[nextIndex][formTypeToUse];
-
-        if (time === 0) {
-          this.showForm(form);
-
-          if (callback != null) {
-            callback();
-          }
-        } else {
-          this.isAnimating = true;
-
-          var end = function end() {
-            _this5.isAnimating = false;
-
-            if (callback != null) {
-              callback();
-            }
-          };
-
-          if (animate) {
-            var timeToUse = null;
-
-            if (form.time != null && form.time[fromWhere] != null) {
-              timeToUse = form.time[fromWhere];
-            }
-
-            form.animatePositionsTo(delay, 0.4, timeToUse, 0.4, end);
-          } else {
-            form.allHideShow(delay, 0.5, 0.2, 0.5, end);
-          }
-
-          this.setCurrentForm(form);
-        }
-
-        this.updateDescription();
-      }
-    }
-  }, {
-    key: "changeDescription",
-    value: function changeDescription(formOrName) {
-      var description = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-      var modifiers = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
-      var formType = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'base';
-      var form = this.getForm(formOrName, formType);
-
-      if (form != null) {
-        form.description = "".concat(description);
-        form.modifiers = modifiers;
-      }
-    }
-  }, {
-    key: "updateDescription",
-    value: function updateDescription() {
-      var formOrName = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      var formType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'base';
-      var element = this.descriptionElement;
-
-      if (element == null) {
-        return;
-      }
-
-      if (element.isShown === false) {
-        return;
-      }
-
-      var form = null;
-
-      if (formOrName == null) {
-        form = this.getCurrentForm();
-      } else if (typeof formOrName === 'string') {
-        form = this.getForm(formOrName, formType);
-      } else {
-        form = formOrName;
-      }
-
-      if (form == null) {
-        return;
-      }
-
-      if (form.description == null) {
-        return;
-      }
-
-      var drawingObject = element.drawingObject;
-
-      if (drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
-        drawingObject.change(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__["applyModifiers"](form.description, form.modifiers), element.lastDrawTransform.m());
-        _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_6__["setOnClicks"](form.modifiers);
-      }
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      var form = this.getCurrentForm();
-
-      if (form != null) {
-        form.showHide();
-        this.collection.show();
-        form.setPositions();
-        this.updateDescription();
-      }
-    }
-  }, {
-    key: "setCurrentForm",
-    value: function setCurrentForm(formOrName) {
-      var formType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'base';
-
-      if (typeof formOrName === 'string') {
-        this.currentForm = '';
-        this.currentFormType = '';
-
-        if (formOrName in this.form) {
-          this.currentForm = formOrName;
-
-          if (formType in this.form[formOrName]) {
-            this.currentFormType = formType;
-          }
-        }
-      } else {
-        this.currentForm = formOrName.name;
-        this.currentFormType = formOrName.type;
-      }
-    }
-  }, {
-    key: "setUnits",
-    value: function setUnits(units) {
-      if (units === 'deg') {
-        this.formTypeOrder = ['deg', 'base'];
-      }
-
-      if (units === 'rad') {
-        this.formTypeOrder = ['rad', 'base'];
-      }
-
-      if (this.collection.isShown) {
-        this.showForm(this.currentForm);
-      }
-    }
-  }, {
-    key: "showForm",
-    value: function showForm(formOrName) {
-      var formType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.collection.show();
-      var form = formOrName;
-
-      if (typeof formOrName === 'string') {
-        form = this.getForm(formOrName, formType);
-      }
-
-      if (form) {
-        this.setCurrentForm(form);
-        this.render();
-      }
-    }
-  }, {
-    key: "getForm",
-    value: function getForm(formOrName, formType) {
-      var _this6 = this;
-
-      if (formOrName instanceof _EquationForm__WEBPACK_IMPORTED_MODULE_14__["default"]) {
-        return formOrName;
-      } // console.log(formType, this.form[formOrName])
-
-
-      if (formOrName in this.form) {
-        var formTypeToUse = formType;
-
-        if (formTypeToUse == null) {
-          var possibleFormTypes = this.formTypeOrder.filter(function (fType) {
-            return fType in _this6.form[formOrName];
-          });
-
-          if (possibleFormTypes.length) {
-            // eslint-disable-next-line prefer-destructuring
-            formTypeToUse = possibleFormTypes[0];
-          }
-        }
-
-        if (formTypeToUse != null) {
-          return this.form[formOrName][formTypeToUse];
-        }
-      }
-
-      return null;
-    }
-  }, {
-    key: "phrase",
-    value: function phrase(content) {
-      return new _Elements_Element__WEBPACK_IMPORTED_MODULE_8__["Elements"]([contentToElement(this.collection, content)]);
-    }
-  }, {
-    key: "frac",
-    value: function frac(numerator, denominator, vinculum) {
-      return new _Elements_Fraction__WEBPACK_IMPORTED_MODULE_9__["default"](contentToElement(this.collection, numerator), contentToElement(this.collection, denominator), getDiagramElement(this.collection, vinculum));
-    }
-  }, {
-    key: "strike",
-    value: function strike(content, _strike) {
-      var strikeInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      return new _Elements_Strike__WEBPACK_IMPORTED_MODULE_10__["default"](contentToElement(this.collection, content), getDiagramElement(this.collection, _strike), strikeInSize);
-    }
-  }, {
-    key: "annotation",
-    value: function annotation(content, annotationArray) {
-      var annotationInSize = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_13__["Annotation"](contentToElement(this.collection, content), annotationArray, annotationInSize);
-    }
-  }, {
-    key: "ann",
-    value: function ann(content) {
-      var xPosition = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'right';
-      var yPosition = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'top';
-      var xAlign = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 'left';
-      var yAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'bottom';
-      var annotationScale = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
-      return new _Elements_Annotation__WEBPACK_IMPORTED_MODULE_13__["AnnotationInformation"](contentToElement(this.collection, content), xPosition, yPosition, xAlign, yAlign, annotationScale);
-    }
-  }, {
-    key: "sfrac",
-    value: function sfrac(numerator, denominator, vinculum) {
-      var scaleModifier = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-      var f = this.frac(numerator, denominator, vinculum);
-      f.scaleModifier = scaleModifier;
-      return f;
-    }
-  }, {
-    key: "sub",
-    value: function sub(content, subscript) {
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_11__["default"](contentToElement(this.collection, content), null, contentToElement(this.collection, subscript));
-    }
-  }, {
-    key: "sup",
-    value: function sup(content, superscript) {
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_11__["default"](contentToElement(this.collection, content), contentToElement(this.collection, superscript), null);
-    }
-  }, {
-    key: "supsub",
-    value: function supsub(content, superscript, subscript) {
-      return new _Elements_SuperSub__WEBPACK_IMPORTED_MODULE_11__["default"](contentToElement(this.collection, content), contentToElement(this.collection, superscript), contentToElement(this.collection, subscript));
-    }
-  }, {
-    key: "brac",
-    value: function brac(content, leftBracket, rightBracket) {
-      var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_12__["Brackets"](contentToElement(this.collection, content), getDiagramElement(this.collection, leftBracket), getDiagramElement(this.collection, rightBracket), space);
-    }
-  }, {
-    key: "topBar",
-    value: function topBar(content, bar) {
-      var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.03;
-      var outsideSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_12__["Bar"](contentToElement(this.collection, content), getDiagramElement(this.collection, bar), space, outsideSpace, 'top');
-    }
-  }, {
-    key: "bottomBar",
-    value: function bottomBar(content, bar) {
-      var space = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.03;
-      var outsideSpace = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
-      return new _Elements_Brackets__WEBPACK_IMPORTED_MODULE_12__["Bar"](contentToElement(this.collection, content), getDiagramElement(this.collection, bar), space, outsideSpace, 'bottom');
-    }
-  }, {
-    key: "topComment",
-    value: function topComment(content, comment, bar) {
-      var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.03;
-      var outsideSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.03;
-      return this.annotation(this.topBar(content, bar, space, outsideSpace), [this.ann(comment, 'center', 'top', 'center', 'bottom')]);
-    }
-  }, {
-    key: "bottomComment",
-    value: function bottomComment(content, comment, bar) {
-      var space = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.0;
-      var outsideSpace = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.03;
-      return this.annotation(this.bottomBar(content, bar, space, outsideSpace), [this.ann(comment, 'center', 'bottom', 'center', 'top')]);
-    }
-  }]);
-
-  return Equation;
-}();
 
 /***/ }),
 
@@ -9949,8 +11668,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSidesToDraw, color, transformOrLocation, diagramLimits) {
-  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, numSides, radius, lineWidth, rotation, new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"](0, 0), numSidesToDraw, direction);
+function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSidesToDraw, center, color, transformOrLocation, diagramLimits, triangles) {
+  var vertexLine = new _DrawingObjects_VertexObject_VertexPolygon__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, numSides, radius, lineWidth, rotation, center, numSidesToDraw, direction, triangles);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
@@ -9962,10 +11681,16 @@ function Polygon(webgl, numSides, radius, lineWidth, rotation, direction, numSid
   return new _Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementPrimative"](vertexLine, transform, color, diagramLimits);
 }
 
-function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, color, transformOrLocation, diagramLimits) {
-  var textureLocation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : '';
-  var textureCoords = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Rect"](0, 0, 1, 1);
-  var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolygonFilled__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, numSides, radius, rotation, new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"](0, 0), numSidesToDraw, textureLocation, textureCoords);
+function PolygonFilled(webgl, numSides, radius, rotation, numSidesToDraw, center, color, transformOrLocation, diagramLimits) {
+  var textureLocation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : '';
+  var textureCoords = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Rect"](0, 0, 1, 1);
+  var onLoad = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : null;
+  var vertexLineCorners = new _DrawingObjects_VertexObject_VertexPolygonFilled__WEBPACK_IMPORTED_MODULE_1__["default"](webgl, numSides, radius, rotation, center, numSidesToDraw, textureLocation, textureCoords);
+
+  if (textureLocation) {
+    vertexLineCorners.onLoad = onLoad;
+  }
+
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_4__["Point"]) {
@@ -10017,10 +11742,11 @@ function RadialLines(webgl) {
   var outerRadius = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
   var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.05;
   var dAngle = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : Math.PI / 4;
-  var color = arguments.length > 5 ? arguments[5] : undefined;
-  var transformOrLocation = arguments.length > 6 ? arguments[6] : undefined;
-  var diagramLimits = arguments.length > 7 ? arguments[7] : undefined;
-  var vertexLine = new _DrawingObjects_VertexObject_VertexRadialLines__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, innerRadius, outerRadius, width, dAngle, Math.PI * 2);
+  var maxAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : Math.PI * 2;
+  var color = arguments.length > 6 ? arguments[6] : undefined;
+  var transformOrLocation = arguments.length > 7 ? arguments[7] : undefined;
+  var diagramLimits = arguments.length > 8 ? arguments[8] : undefined;
+  var vertexLine = new _DrawingObjects_VertexObject_VertexRadialLines__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, innerRadius, outerRadius, width, dAngle, maxAngle);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -10054,8 +11780,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-function RectangleFilled(webgl, topLeft, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
-  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, topLeft, width, height, cornerRadius, cornerSides);
+function RectangleFilled(webgl, alignH, alignV, width, height, cornerRadius, cornerSides, color, transformOrLocation, diagramLimits) {
+  var vertexRectangle = new _DrawingObjects_VertexObject_VertexRectangleFilled__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, alignH, alignV, width, height, cornerRadius, cornerSides);
   var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]();
 
   if (transformOrLocation instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"]) {
@@ -10066,6 +11792,57 @@ function RectangleFilled(webgl, topLeft, width, height, cornerRadius, cornerSide
 
   return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexRectangle, transform, color, diagramLimits);
 }
+
+/***/ }),
+
+/***/ "./src/js/diagram/DiagramElements/Text.js":
+/*!************************************************!*\
+  !*** ./src/js/diagram/DiagramElements/Text.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexText */ "./src/js/diagram/DrawingObjects/VertexObject/VertexText.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+// import VertexPolygon from '../DrawingObjects/VertexObject/VertexPolygon';
+ // import VertexPolygonLine from '../DrawingObjects/VertexObject/VertexPolygonLine';
+
+
+
+
+
+
+function Text(webgl, diagramLimits, optionsIn) {
+  var defaultOptions = {
+    position: new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Point"](0, 0),
+    color: [1, 0, 0, 1]
+  };
+  var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, optionsIn);
+
+  if (options.transform == null) {
+    options.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_2__["Transform"]('Text').translate(0, 0);
+  }
+
+  if (options.position != null) {
+    options.transform.updateTranslation(options.position);
+  }
+
+  var vertexText = new _DrawingObjects_VertexObject_VertexText__WEBPACK_IMPORTED_MODULE_0__["default"](webgl, options); // let transform = new Transform();
+  // if (transformOrLocation instanceof Point) {
+  //   transform = transform.translate(transformOrLocation.x, transformOrLocation.y);
+  // } else {
+  //   transform = transformOrLocation._dup();
+  // }
+
+  return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](vertexText, options.transform, options.color, diagramLimits);
+}
+
+/* harmony default export */ __webpack_exports__["default"] = (Text);
 
 /***/ }),
 
@@ -10084,33 +11861,29 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_Integral__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/Integral */ "./src/js/diagram/DiagramElements/Equation/Symbols/Integral.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_Bracket__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/Bracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bracket.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_Bar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/Bar */ "./src/js/diagram/DiagramElements/Equation/Symbols/Bar.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/SquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/SquareBracket.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_Brace__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/Brace */ "./src/js/diagram/DiagramElements/Equation/Symbols/Brace.js");
-/* harmony import */ var _DiagramElements_Equation_Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/Equation/Symbols/RoundedSquareBracket */ "./src/js/diagram/DiagramElements/Equation/Symbols/RoundedSquareBracket.js");
-/* harmony import */ var _DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
-/* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
-/* harmony import */ var _DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Equation/HTMLEquation */ "./src/js/diagram/DiagramElements/Equation/HTMLEquation.js");
-/* harmony import */ var _DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+/* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
+/* harmony import */ var _DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramObjects/EqnNavigator */ "./src/js/diagram/DiagramObjects/EqnNavigator.js");
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -10131,665 +11904,20 @@ function () {
     this.limits = shapes.limits;
     this.shapes = shapes;
     this.animateNextFrame = animateNextFrame;
-  } // deprecate
-
+  }
 
   _createClass(DiagramEquation, [{
-    key: "elements",
-    value: function elements(elems) {
-      var colorOrFont = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-      var firstTransform = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('elements');
-      return Object(_DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_13__["createEquationElements"])(elems, this.draw2D, colorOrFont, this.limits, firstTransform);
-    } // deprecate
-
-  }, {
-    key: "vinculum",
-    value: function vinculum() {
-      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [1, 1, 1, 1];
-      return this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('vinculum').scale(1, 1).translate(0, 0));
-    } // deprecate
-
-  }, {
-    key: "strike",
-    value: function strike() {
-      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [1, 1, 1, 1];
-      return this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('strike').scale(1, 1).rotate(0).translate(0, 0));
-    } // deprecate
-
-  }, {
-    key: "xStrike",
-    value: function xStrike() {
-      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [1, 1, 1, 1];
-      var cross = this.shapes.collection(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('strike').scale(1, 1).rotate(0).translate(0, 0));
-      cross.color = color;
-      var strike1 = this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), 1, 1, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('strike').scale(1, 1).rotate(0).translate(0, 0));
-
-      var strike2 = strike1._dup();
-
-      cross.add('s1', strike1);
-      cross.add('s2', strike2);
-      return cross;
-    } // deprecate
-
-  }, {
-    key: "integral",
-    value: function integral() {
-      var numLines = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_Integral__WEBPACK_IMPORTED_MODULE_6__["default"](this.webgl, color, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('integral').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-
-  }, {
-    key: "bracket",
-    value: function bracket(side) {
-      var numLines = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_Bracket__WEBPACK_IMPORTED_MODULE_7__["default"](this.webgl, color, side, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('bracket').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-
-  }, {
-    key: "bar",
-    value: function bar(side) {
-      var numLines = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_Bar__WEBPACK_IMPORTED_MODULE_8__["default"](this.webgl, color, side, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('bar').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-
-  }, {
-    key: "squareBracket",
-    value: function squareBracket(side) {
-      var numLines = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_SquareBracket__WEBPACK_IMPORTED_MODULE_9__["default"](this.webgl, color, side, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('bar').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-
-  }, {
-    key: "brace",
-    value: function brace(side) {
-      var numLines = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_Brace__WEBPACK_IMPORTED_MODULE_10__["default"](this.webgl, color, side, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('bar').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-
-  }, {
-    key: "roundedSquareBracket",
-    value: function roundedSquareBracket(side) {
-      var numLines = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [1, 1, 1, 1];
-      return new _DiagramElements_Equation_Symbols_RoundedSquareBracket__WEBPACK_IMPORTED_MODULE_11__["default"](this.webgl, color, side, numLines, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]('bar').scale(1, 1).translate(0, 0), this.limits);
-    } // deprecate
-    // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "make",
-    value: function make(equationCollection) {
-      return new _DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_12__["default"](equationCollection.elements, {
-        getAllElements: equationCollection.getAllElements.bind(equationCollection),
-        hideAll: equationCollection.hideAll.bind(equationCollection),
-        show: equationCollection.show.bind(equationCollection),
-        showOnly: equationCollection.showOnly.bind(equationCollection),
-        stop: equationCollection.stop.bind(equationCollection),
-        getElementTransforms: equationCollection.getElementTransforms.bind(equationCollection),
-        setElementTransforms: equationCollection.setElementTransforms.bind(equationCollection),
-        animateToTransforms: equationCollection.animateToTransforms.bind(equationCollection)
-      });
-    } // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "makeHTML",
-    value: function makeHTML() {
-      var id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-      var classes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [];
-      return new _DiagramElements_Equation_HTMLEquation__WEBPACK_IMPORTED_MODULE_15__["default"](id, classes);
+    key: "equation",
+    value: function equation(options) {
+      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"](this.shapes, options);
+      return equation;
     }
-  }, {
-    key: "makeEqn",
-    value: function makeEqn() {
-      // Deprecate
-      return new _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_13__["Equation"](this.draw2D, this.limits);
-    }
-  }, {
-    key: "makeDescription",
-    value: function makeDescription(id) {
-      // Deprecate
-      return this.shapes.htmlElement(document.createElement('div'), id, 'lesson__equation_description', new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0), 'middle', 'left');
-    } // eslint-disable-next-line class-methods-use-this
-    // makeEqnFromOptions(...options: Array<{
-    //   color?: Array<number>,
-    //   position?: Point,
-    //   currentForm?: string,
-    //   addToCollection?: DiagramElementCollection;
-    //   name?: string,
-    //   elements: {
-    //     [elementName: string]: string | {
-    //       text: string,
-    //       color?: Array<number>,
-    //       isTouchable?: boolean,
-    //       onClick?: () => void | null,
-    //       direction?: '' | 'up' | 'left' | 'down' | 'right',
-    //       mag?: number,
-    //       drawPriority?: number,      // higher numbers are above lower numbers
-    //       fontOrStyle?: DiagramFont | null,
-    //       diagramElement: string | null,
-    //       side?: 'up' | 'left' | 'down' | 'right',
-    //       numLines?: number,
-    //       diagramObj?: string,
-    //     };
-    //   };
-    //   formAlignment?: {
-    //     fixTo?: Point | string,
-    //     scale?: number,
-    //     alignH?: TypeHAlign | null,
-    //     alignV?: TypeVAlign | null,
-    //   },
-    //   forms?: {
-    //     // $FlowFixMe
-    //     [formName: string]: TypeEquationArray | {
-    //       content: TypeEquationArray,
-    //       elementMods?: {
-    //         [elementName: string]: {
-    //           style?: 'linear' | 'curved',
-    //           color?: Array<number>,
-    //           direction?: '' | 'up' | 'left' | 'down' | 'right',
-    //           mag?: number,
-    //         }
-    //       },
-    //       type?: string,
-    //       alignment?: {
-    //         fixTo?: Point | string,
-    //         scale?: number,
-    //         alignH?: TypeHAlign | null,
-    //         alignV?: TypeVAlign | null,
-    //       },
-    //     },
-    //   },
-    //   formSeries?: {
-    //     [seriesName: string]: Array<string>,
-    //   },
-    // }>) {
-    //   const eqn = this.makeEqn();
-    //   const defaultOptions = {
-    //     color: [0.5, 0.5, 0.5, 1],
-    //     position: new Point(0, 0),
-    //     currentForm: 'base',
-    //     formAlignment: {
-    //       fixTo: new Point(0, 0),
-    //       scale: 0.7,
-    //       alignH: 'left',     // applies to fixTo if fixTo is a DiagramElement
-    //       alignV: 'baseline', // applies to fixTo if fixTo is a DiagramElement
-    //     },
-    //     elements: {},
-    //     forms: {},
-    //     formSeries: null,
-    //   };
-    //   const optionsToUse = joinObjects({}, defaultOptions, ...options);
-    //   // Create Equation Elements
-    //   const defElementOptions = {
-    //     text: '',
-    //     color: optionsToUse.color,
-    //     isTouchable: false,
-    //     onClick: null,
-    //     direction: '',
-    //     mag: 0,
-    //     fontOrStyle: null,
-    //     drawPriority: 1,
-    //     diagramElement: null,
-    //     side: 'left',
-    //     numLines: 1,
-    //   };
-    //   Object.keys(optionsToUse.elements).forEach((elementName, index) => {
-    //     const elementValue = optionsToUse.elements[elementName];
-    //     let elementOptions;
-    //     if (typeof elementValue === 'string') {
-    //       elementOptions = joinObjects({}, defElementOptions, { text: elementValue });
-    //     } else {
-    //       elementOptions = joinObjects({}, defElementOptions, elementValue);
-    //     }
-    //     if (elementOptions.diagramObj != null) {
-    //       let diagramElement;
-    //       if (elementOptions.diagramObj === 'vinculum') {
-    //         diagramElement = this.vinculum(elementOptions.color);
-    //       }
-    //       if (elementOptions.diagramObj === 'bracket') {
-    //         diagramElement = this.bracket(
-    //           elementOptions.side, elementOptions.numLines, elementOptions.color,
-    //         );
-    //       }
-    //       if (elementOptions.diagramObj === 'brace') {
-    //         diagramElement = this.brace(
-    //           elementOptions.side, elementOptions.numLines, elementOptions.color,
-    //         );
-    //       }
-    //       if (elementOptions.diagramObj === 'bar') {
-    //         diagramElement = this.bar(
-    //           elementOptions.side, elementOptions.numLines, elementOptions.color,
-    //         );
-    //       }
-    //       if (elementOptions.diagramObj === 'squareBracket') {
-    //         diagramElement = this.squareBracket(
-    //           elementOptions.side, elementOptions.numLines, elementOptions.color,
-    //         );
-    //       }
-    //       if (elementOptions.diagramObj === 'roundedSquareBracket') {
-    //         diagramElement = this.roundedSquareBracket(
-    //           elementOptions.side, elementOptions.numLines, elementOptions.color,
-    //         );
-    //       }
-    //       if (elementOptions.diagramObj === 'strike') {
-    //         diagramElement = this.strike(elementOptions.color);
-    //       }
-    //       if (elementOptions.diagramObj === 'xStrike') {
-    //         diagramElement = this.xStrike(elementOptions.color);
-    //       }
-    //       if (elementOptions.diagramObj === 'integral') {
-    //         diagramElement = this.integral(elementOptions.color);
-    //       }
-    //       if (diagramElement != null) {
-    //         diagramElement.isTouchable = elementOptions.isTouchable;
-    //         diagramElement.onClick = elementOptions.onClick;
-    //         diagramElement.animate.transform.translation
-    //           .options.direction = elementOptions.direction;
-    //         diagramElement.animate.transform.translation
-    //           .options.magnitude = elementOptions.mag;
-    //         diagramElement.drawPriority = elementOptions.drawPriority;
-    //         elementOptions = diagramElement;
-    //       }
-    //     }
-    //     const elementObject = {};
-    //     elementObject[elementName] = elementOptions;
-    //     if (index === 0) {
-    //       eqn.createElements(elementObject);
-    //     } else {
-    //       eqn.createElements(
-    //         elementObject,
-    //         [], null, new Point(0, 0),
-    //         eqn.collection,
-    //       );
-    //     }
-    //     eqn.collection.reorder();
-    //   });
-    //   // Create Equation Forms
-    //   const defElementMods = {
-    //     style: 'linear',
-    //     color: defElementOptions.color,
-    //     direction: defElementOptions.direction,
-    //     mag: defElementOptions.mag,
-    //   };
-    //   const defForm = {
-    //     alignment: defaultOptions.formAlignment,
-    //     type: 'base',
-    //     elementMods: {},
-    //     animationTime: null,
-    //     addToSeries: false,
-    //   };
-    //   const makePhrase = (phrase: TypeEquationArray) => {
-    //     const out = [];
-    //     if (typeof phrase === 'string') {
-    //       return [phrase];
-    //     }
-    //     for (let i = 0; i < phrase.length; i += 1) {
-    //       const element = phrase[i];
-    //       if (typeof element === 'string') {
-    //         if (element.startsWith('.') && i < phrase.length - 1) {
-    //           if (element === '.frac') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [num, den, vinculum] = parameters;
-    //               out.push(eqn.frac(  // $FlowFixMe
-    //                 makePhrase(num),  // $FlowFixMe
-    //                 makePhrase(den),  // $FlowFixMe
-    //                 vinculum,
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { numerator, denominator, vinculum } = parameters;
-    //               out.push(eqn.frac(
-    //                 makePhrase(numerator),
-    //                 makePhrase(denominator),
-    //                 vinculum,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.sfrac') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [num, den, vinculum, scale] = parameters;
-    //               out.push(eqn.sfrac(     // $FlowFixMe
-    //                 makePhrase(num),      // $FlowFixMe
-    //                 makePhrase(den),      // $FlowFixMe
-    //                 vinculum,             // $FlowFixMe
-    //                 scale,
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { numerator, denominator } = parameters;  // $FlowFixMe
-    //               const { vinculum, scale } = parameters;
-    //               out.push(eqn.sfrac(
-    //                 makePhrase(numerator),
-    //                 makePhrase(denominator),
-    //                 vinculum,
-    //                 scale,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.strike') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [content, strike, strikeInSize] = parameters;
-    //               out.push(eqn.strike(                   // $FlowFixMe
-    //                 makePhrase(content),              // $FlowFixMe
-    //                 strike,
-    //                 strikeInSize,
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { content, strike, strikeInSize } = parameters;  // $FlowFixMe
-    //               out.push(eqn.strike(
-    //                 makePhrase(content),                        // $FlowFixMe
-    //                 strike,
-    //                 strikeInSize,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.sub') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [content, subscript] = parameters;
-    //               out.push(eqn.sub(                   // $FlowFixMe
-    //                 makePhrase(content),              // $FlowFixMe
-    //                 makePhrase(subscript),            // $FlowFixMe
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { content, subscript } = parameters;  // $FlowFixMe
-    //               out.push(eqn.sub(
-    //                 makePhrase(content),                        // $FlowFixMe
-    //                 makePhrase(subscript),
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.sup') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [content, superscript] = parameters;
-    //               out.push(eqn.sup( // $FlowFixMe
-    //                 makePhrase(content),  // $FlowFixMe
-    //                 makePhrase(superscript),  // $FlowFixMe
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { content, superscript } = parameters;  // $FlowFixMe
-    //               out.push(eqn.sup(
-    //                 makePhrase(content),                        // $FlowFixMe
-    //                 makePhrase(superscript),
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.supsub') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [content, subscript, superscript] = parameters;
-    //               out.push(eqn.supsub(        // $FlowFixMe
-    //                 makePhrase(content),      // $FlowFixMe
-    //                 makePhrase(subscript),    // $FlowFixMe
-    //                 makePhrase(superscript),  // $FlowFixMe
-    //               ));
-    //             } else {
-    //               // $FlowFixMe
-    //               const { content, subscript, superscript } = parameters;  // $FlowFixMe
-    //               out.push(eqn.supsub(
-    //                 makePhrase(content),  // $FlowFixMe
-    //                 makePhrase(subscript),  // $FlowFixMe
-    //                 makePhrase(superscript),  // $FlowFixMe
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.brac') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [content, left, right, space] = parameters;
-    //               out.push(eqn.brac(      // $FlowFixMe
-    //                 makePhrase(content),  // $FlowFixMe
-    //                 left,                 // $FlowFixMe
-    //                 right,                // $FlowFixMe
-    //                 space,
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, left, right, space,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.brac(
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 left,                         // $FlowFixMe
-    //                 right,                        // $FlowFixMe
-    //                 space,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.topComment') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                       // $FlowFixMe
-    //                 content, comment, bar, space, outsideSpace,
-    //               ] = parameters;
-    //               out.push(eqn.topComment(      // $FlowFixMe
-    //                 makePhrase(content),        // $FlowFixMe
-    //                 makePhrase(comment),        // $FlowFixMe
-    //                 bar,                        // $FlowFixMe
-    //                 space,                      // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, comment, bar, space, outsideSpace,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.topComment(
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 makePhrase(comment),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.bottomComment') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                         // $FlowFixMe
-    //                 content, comment, bar, space, outsideSpace,
-    //               ] = parameters;
-    //               out.push(eqn.bottomComment(     // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 makePhrase(comment),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, comment, bar, space, outsideSpace,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.bottomComment(
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 makePhrase(comment),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.topBar') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                         // $FlowFixMe
-    //                 content, bar, space, outsideSpace,
-    //               ] = parameters;
-    //               out.push(eqn.topBar(     // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, bar, space, outsideSpace,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.topBar(
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.bottomBar') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                         // $FlowFixMe
-    //                 content, bar, space, outsideSpace,
-    //               ] = parameters;
-    //               out.push(eqn.bottomBar(     // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, bar, space, outsideSpace,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.bottomBar(
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 bar,                          // $FlowFixMe
-    //                 space,                        // $FlowFixMe
-    //                 outsideSpace,
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.ann') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                         // $FlowFixMe
-    //                 content, xPosition, yPosition, xAlign,  // $FlowFixMe
-    //                 yAlign, annotationScale,
-    //               ] = parameters;
-    //               out.push(eqn.ann(               // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 xPosition,                    // $FlowFixMe
-    //                 yPosition,                    // $FlowFixMe
-    //                 xAlign,                       // $FlowFixMe
-    //                 yAlign,                       // $FlowFixMe
-    //                 annotationScale,              // $FlowFixMe
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, xPosition, yPosition, xAlign,  // $FlowFixMe
-    //                 yAlign, annotationScale,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.ann(               // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 xPosition,                    // $FlowFixMe
-    //                 yPosition,                    // $FlowFixMe
-    //                 xAlign,                       // $FlowFixMe
-    //                 yAlign,                       // $FlowFixMe
-    //                 annotationScale,              // $FlowFixMe
-    //               ));
-    //             }
-    //           }
-    //           if (element === '.annotation') {
-    //             const parameters = phrase[i + 1];
-    //             if (Array.isArray(parameters)) {
-    //               const [                         // $FlowFixMe
-    //                 content, annotationArray, annotationInSize,
-    //               ] = parameters;
-    //               out.push(eqn.annotation(        // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 makePhrase(annotationArray),  // $FlowFixMe
-    //                 annotationInSize,             // $FlowFixMe
-    //               ));
-    //             } else {
-    //               const {                         // $FlowFixMe
-    //                 content, annotationArray, annotationInSize,
-    //               } = parameters;                 // $FlowFixMe
-    //               out.push(eqn.annotation(        // $FlowFixMe
-    //                 makePhrase(content),          // $FlowFixMe
-    //                 makePhrase(annotationArray),  // $FlowFixMe
-    //                 annotationInSize,             // $FlowFixMe
-    //               ));
-    //             }
-    //           }
-    //         } else {
-    //           out.push(element);
-    //         }
-    //       }
-    //     }
-    //     return out;
-    //   };
-    //   Object.keys(optionsToUse.forms).forEach((name) => {
-    //     const form = optionsToUse.forms[name];
-    //     const formOptionsArray = [];
-    //     if (Array.isArray(form)) {
-    //       formOptionsArray.push(joinObjects({}, defForm, { content: form }));
-    //     } else if (form.content == null) {
-    //       Object.keys(form).forEach((formType) => {
-    //         formOptionsArray.push(joinObjects(
-    //           {}, defForm, form[formType], { type: formType },
-    //         ));
-    //       });
-    //     } else {
-    //       formOptionsArray.push(joinObjects({}, defForm, form));
-    //     }
-    //     formOptionsArray.forEach((formOptions) => {
-    //       Object.keys(formOptions.elementMods).forEach((key) => {
-    //         // eslint-disable-next-line no-param-reassign
-    //         formOptions.elementMods[key] = joinObjects(
-    //           {}, defElementMods,
-    //           formOptions.elementMods[key],
-    //         );
-    //       });
-    //       if (typeof formOptions.alignment.fixTo === 'string') {
-    //         const elem = getDiagramElement(eqn.collection, formOptions.alignment.fixTo);
-    //         if (elem != null) {
-    //           eqn.formAlignment.fixTo = elem;
-    //         }
-    //       } else {
-    //         eqn.formAlignment.fixTo = formOptions.alignment.fixTo;
-    //       }
-    //       eqn.formAlignment.hAlign = formOptions.alignment.hAlign;
-    //       eqn.formAlignment.vAlign = formOptions.alignment.vAlign;
-    //       eqn.formAlignment.scale = formOptions.alignment.scale;
-    //       eqn.addForm(
-    //         name,
-    //         makePhrase(formOptions.content),
-    //         {
-    //           animationTime: formOptions.animationTime,
-    //           elementMods: formOptions.elementMods,
-    //           formType: formOptions.type,
-    //           addToSeries: formOptions.addToSeries,
-    //         },
-    //       );
-    //     });
-    //   });
-    //   if (optionsToUse.formSeries != null) {
-    //     eqn.setFormSeries(optionsToUse.formSeries);
-    //   }
-    //   eqn.collection.setPosition(optionsToUse.position);
-    //   eqn.setCurrentForm(optionsToUse.currentForm);
-    //   const { addToCollection } = optionsToUse;
-    //   if (addToCollection != null) {
-    //     addToCollection.eqns[optionsToUse.name] = eqn;
-    //     addToCollection.add(optionsToUse.name, eqn.collection);
-    //   }
-    //   eqn.formTypeOrder = ['rad', 'deg', 'base'];
-    //   return eqn;
-    // }
-
   }, {
     key: "addEquation",
     value: function addEquation(parent, name) {
       var options = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : {};
       // $FlowFixMe
-      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_14__["EquationNew"](this.shapes, options);
+      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"](this.shapes, options);
       parent.add(name, equation);
       return equation;
     }
@@ -10804,591 +11932,54 @@ function () {
         var equation = this.addEquation(parent, "".concat(name, "Eqn"), options);
         optionsToUse.equation = equation;
         navNameToUse = "".concat(name, "Nav");
+      } else if (!(optionsToUse.equation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__["EquationNew"])) {
+        // let methodPathToUse;
+        var nameToUse; // let pathToUse;
+
+        var eqnOptions;
+        var elementModsToUse; // let addElementsToUse;
+
+        var firstScenario;
+
+        if (Array.isArray(optionsToUse.equation)) {
+          var _optionsToUse$equatio = _slicedToArray(optionsToUse.equation, 7);
+
+          nameToUse = _optionsToUse$equatio[1];
+          eqnOptions = _optionsToUse$equatio[3];
+          elementModsToUse = _optionsToUse$equatio[4];
+          firstScenario = _optionsToUse$equatio[6];
+        } else {
+          nameToUse = optionsToUse.equation.name; // pathToUse = optionsToUse.equation.path;
+
+          eqnOptions = optionsToUse.equation.options; // methodPathToUse = optionsToUse.equation.method;
+
+          elementModsToUse = optionsToUse.equation.mods;
+          firstScenario = optionsToUse.equation.scenario;
+        }
+
+        var _equation;
+
+        if (Array.isArray(eqnOptions)) {
+          _equation = this.addEquation.apply(this, [parent, nameToUse].concat(_toConsumableArray(eqnOptions)));
+        } else {
+          _equation = this.addEquation(parent, nameToUse, eqnOptions);
+        }
+
+        if (elementModsToUse != null && elementModsToUse !== {}) {
+          _equation.setProperties(elementModsToUse);
+        }
+
+        if (firstScenario != null && firstScenario in _equation.scenarios) {
+          _equation.setScenario(firstScenario);
+        }
+
+        optionsToUse.equation = _equation;
       } // $FlowFixMe
 
 
-      var navigator = new _DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_16__["default"](this.shapes, this.animateNextFrame, optionsToUse);
+      var navigator = new _DiagramObjects_EqnNavigator__WEBPACK_IMPORTED_MODULE_6__["default"](this.shapes, this.animateNextFrame, optionsToUse);
       parent.add(navNameToUse, navigator);
       return navigator;
-    } // deprecate
-    // Make an Equation Diagram Collection
-    // eslint-disable-next-line class-methods-use-this
-
-  }, {
-    key: "addEquationLegacy",
-    value: function addEquationLegacy(parent) {
-      var _this = this;
-
-      var defaultEquationOptions = {
-        color: [0.5, 0.5, 0.5, 1],
-        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0),
-        elements: {},
-        //
-        defaultFormAlignment: {
-          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0),
-          scale: 0.7,
-          alignH: 'left',
-          // applies to fixTo if fixTo is a DiagramElement
-          alignV: 'baseline' // applies to fixTo if fixTo is a DiagramElement
-
-        },
-        forms: {},
-        firstForm: null,
-        formSeries: []
-      };
-
-      for (var _len = arguments.length, options = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
-        options[_key - 1] = arguments[_key];
-      }
-
-      var equationOptionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"].apply(void 0, [{}, defaultEquationOptions].concat(options)); // $FlowFixMe
-
-      var equation = new _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_14__["EquationNew"](this.shapes, {
-        defaultFormAlignment: equationOptionsToUse.defaultFormAlignment
-      });
-      parent.add(equationOptionsToUse.name, equation); // Create Equation Elements
-
-      var defEqnElementOptions = {
-        color: equationOptionsToUse.color,
-        elementOptions: {},
-        //
-        text: '',
-        textOptions: {
-          fontOrStyle: null
-        },
-        symbol: null,
-        symbolOptions: {
-          side: 'left',
-          numLines: 1
-        }
-      };
-      var elements = equationOptionsToUse.elements;
-      Object.keys(elements).forEach(function (elementName) {
-        var element = elements[elementName];
-        var elementToAdd;
-        var eqnElementOptions; // If element is defined as string, then it is a text element
-
-        if (typeof element === 'string') {
-          eqnElementOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defEqnElementOptions, {
-            text: element
-          }); // Otherwise it's an object of options
-        } else {
-          eqnElementOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defEqnElementOptions, element);
-        } // See if the eqnElementOptions object has a defined symbol. If it
-        // does, then create the element.
-
-
-        var _eqnElementOptions = eqnElementOptions,
-            symbol = _eqnElementOptions.symbol;
-
-        if (symbol != null) {
-          var _eqnElementOptions$sy = eqnElementOptions.symbolOptions,
-              color = _eqnElementOptions$sy.color,
-              numLines = _eqnElementOptions$sy.numLines,
-              side = _eqnElementOptions$sy.side;
-          var diagramElement;
-
-          if (symbol === 'vinculum') {
-            diagramElement = _this.vinculum(color);
-          }
-
-          if (symbol === 'bracket') {
-            diagramElement = _this.bracket(side, numLines, color);
-          }
-
-          if (symbol === 'brace') {
-            diagramElement = _this.brace(side, numLines, color);
-          }
-
-          if (symbol === 'bar') {
-            diagramElement = _this.bar(side, numLines, color);
-          }
-
-          if (symbol === 'squareBracket') {
-            diagramElement = _this.squareBracket(side, numLines, color);
-          }
-
-          if (symbol === 'roundedSquareBracket') {
-            diagramElement = _this.roundedSquareBracket(side, numLines, color);
-          }
-
-          if (symbol === 'strike') {
-            diagramElement = _this.strike(color);
-          }
-
-          if (symbol === 'xStrike') {
-            diagramElement = _this.xStrike(color);
-          }
-
-          if (symbol === 'integral') {
-            diagramElement = _this.integral(color);
-          }
-
-          if (diagramElement != null) {
-            diagramElement.setProperties(eqnElementOptions.elementOptions);
-            elementToAdd = diagramElement;
-          }
-        } else {
-          elementToAdd = eqnElementOptions;
-        }
-
-        if (elementToAdd != null) {
-          var elementObject = {};
-          elementObject[elementName] = elementToAdd;
-          equation.addElements(elementObject);
-        }
-      });
-      equation.reorder(); // Create Equation Forms
-
-      var defElementMods = {
-        color: equationOptionsToUse.color,
-        elementOptions: {} // fromNext: {
-        //   color: equationOptionsToUse.color,
-        //   elementOptions: {},
-        // },
-        // fromPrev: {
-        //   color: equationOptionsToUse.color,
-        //   elementOptions: {},
-        // },
-        // color: equationOptionsToUse.color,
-        // direction: null,                    // Will populate all from* options
-        // elementOptions: {},
-
-      };
-      var defForm = {
-        alignment: equationOptionsToUse.defaultFormAlignment,
-        subForm: 'base',
-        elementMods: {},
-        animationTime: null // addToSeries: false,
-
-      };
-
-      var makePhrase = function makePhrase(phrase) {
-        var out = [];
-
-        if (typeof phrase === 'string') {
-          return [phrase];
-        }
-
-        for (var i = 0; i < phrase.length; i += 1) {
-          var element = phrase[i];
-
-          if (typeof element === 'string') {
-            if (i < phrase.length - 1) {
-              // eslint-disable-next-line
-              var methodName = element;
-
-              if (element === '.frac') {
-                var parameters = phrase[i + 1];
-                out.push(equation.eqn.functions.frac(parameters));
-                i += 1;
-              } // if (element === '.sfrac') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [num, den, vinculum, scale] = parameters;
-              //     out.push(eqn.sfrac(     // $FlowFixMe
-              //       makePhrase(num),      // $FlowFixMe
-              //       makePhrase(den),      // $FlowFixMe
-              //       vinculum,             // $FlowFixMe
-              //       scale,
-              //     ));
-              //   } else {
-              //     // $FlowFixMe
-              //     const { numerator, denominator } = parameters;  // $FlowFixMe
-              //     const { vinculum, scale } = parameters;
-              //     out.push(eqn.sfrac(
-              //       makePhrase(numerator),
-              //       makePhrase(denominator),
-              //       vinculum,
-              //       scale,
-              //     ));
-              //   }
-              // }
-              // if (element === '.strike') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [content, strike, strikeInSize] = parameters;
-              //     out.push(eqn.strike(                   // $FlowFixMe
-              //       makePhrase(content),              // $FlowFixMe
-              //       strike,
-              //       strikeInSize,
-              //     ));
-              //   } else {
-              //     // $FlowFixMe
-              //     const { content, strike, strikeInSize } = parameters;  // $FlowFixMe
-              //     out.push(eqn.strike(
-              //       makePhrase(content),                        // $FlowFixMe
-              //       strike,
-              //       strikeInSize,
-              //     ));
-              //   }
-              // }
-              // if (element === '.sub') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [content, subscript] = parameters;
-              //     out.push(eqn.sub(                   // $FlowFixMe
-              //       makePhrase(content),              // $FlowFixMe
-              //       makePhrase(subscript),            // $FlowFixMe
-              //     ));
-              //   } else {
-              //     // $FlowFixMe
-              //     const { content, subscript } = parameters;  // $FlowFixMe
-              //     out.push(eqn.sub(
-              //       makePhrase(content),                        // $FlowFixMe
-              //       makePhrase(subscript),
-              //     ));
-              //   }
-              // }
-              // if (element === '.sup') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [content, superscript] = parameters;
-              //     out.push(eqn.sup( // $FlowFixMe
-              //       makePhrase(content),  // $FlowFixMe
-              //       makePhrase(superscript),  // $FlowFixMe
-              //     ));
-              //   } else {
-              //     // $FlowFixMe
-              //     const { content, superscript } = parameters;  // $FlowFixMe
-              //     out.push(eqn.sup(
-              //       makePhrase(content),                        // $FlowFixMe
-              //       makePhrase(superscript),
-              //     ));
-              //   }
-              // }
-              // if (element === '.supsub') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [content, subscript, superscript] = parameters;
-              //     out.push(eqn.supsub(        // $FlowFixMe
-              //       makePhrase(content),      // $FlowFixMe
-              //       makePhrase(subscript),    // $FlowFixMe
-              //       makePhrase(superscript),  // $FlowFixMe
-              //     ));
-              //   } else {
-              //     // $FlowFixMe
-              //     const { content, subscript, superscript } = parameters;  // $FlowFixMe
-              //     out.push(eqn.supsub(
-              //       makePhrase(content),  // $FlowFixMe
-              //       makePhrase(subscript),  // $FlowFixMe
-              //       makePhrase(superscript),  // $FlowFixMe
-              //     ));
-              //   }
-              // }
-              // if (element === '.brac') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [content, left, right, space] = parameters;
-              //     out.push(eqn.brac(      // $FlowFixMe
-              //       makePhrase(content),  // $FlowFixMe
-              //       left,                 // $FlowFixMe
-              //       right,                // $FlowFixMe
-              //       space,
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, left, right, space,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.brac(
-              //       makePhrase(content),          // $FlowFixMe
-              //       left,                         // $FlowFixMe
-              //       right,                        // $FlowFixMe
-              //       space,
-              //     ));
-              //   }
-              // }
-              // if (element === '.topComment') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                       // $FlowFixMe
-              //       content, comment, bar, space, outsideSpace,
-              //     ] = parameters;
-              //     out.push(eqn.topComment(      // $FlowFixMe
-              //       makePhrase(content),        // $FlowFixMe
-              //       makePhrase(comment),        // $FlowFixMe
-              //       bar,                        // $FlowFixMe
-              //       space,                      // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, comment, bar, space, outsideSpace,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.topComment(
-              //       makePhrase(content),          // $FlowFixMe
-              //       makePhrase(comment),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   }
-              // }
-              // if (element === '.bottomComment') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                         // $FlowFixMe
-              //       content, comment, bar, space, outsideSpace,
-              //     ] = parameters;
-              //     out.push(eqn.bottomComment(     // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       makePhrase(comment),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, comment, bar, space, outsideSpace,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.bottomComment(
-              //       makePhrase(content),          // $FlowFixMe
-              //       makePhrase(comment),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   }
-              // }
-              // if (element === '.topBar') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                         // $FlowFixMe
-              //       content, bar, space, outsideSpace,
-              //     ] = parameters;
-              //     out.push(eqn.topBar(     // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, bar, space, outsideSpace,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.topBar(
-              //       makePhrase(content),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   }
-              // }
-              // if (element === '.bottomBar') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                         // $FlowFixMe
-              //       content, bar, space, outsideSpace,
-              //     ] = parameters;
-              //     out.push(eqn.bottomBar(     // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, bar, space, outsideSpace,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.bottomBar(
-              //       makePhrase(content),          // $FlowFixMe
-              //       bar,                          // $FlowFixMe
-              //       space,                        // $FlowFixMe
-              //       outsideSpace,
-              //     ));
-              //   }
-              // }
-              // if (element === '.ann') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                         // $FlowFixMe
-              //       content, xPosition, yPosition, xAlign,  // $FlowFixMe
-              //       yAlign, annotationScale,
-              //     ] = parameters;
-              //     out.push(eqn.ann(               // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       xPosition,                    // $FlowFixMe
-              //       yPosition,                    // $FlowFixMe
-              //       xAlign,                       // $FlowFixMe
-              //       yAlign,                       // $FlowFixMe
-              //       annotationScale,              // $FlowFixMe
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, xPosition, yPosition, xAlign,  // $FlowFixMe
-              //       yAlign, annotationScale,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.ann(               // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       xPosition,                    // $FlowFixMe
-              //       yPosition,                    // $FlowFixMe
-              //       xAlign,                       // $FlowFixMe
-              //       yAlign,                       // $FlowFixMe
-              //       annotationScale,              // $FlowFixMe
-              //     ));
-              //   }
-              // }
-              // if (element === '.annotation') {
-              //   const parameters = phrase[i + 1];
-              //   if (Array.isArray(parameters)) {
-              //     const [                         // $FlowFixMe
-              //       content, annotationArray, annotationInSize,
-              //     ] = parameters;
-              //     out.push(eqn.annotation(        // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       makePhrase(annotationArray),  // $FlowFixMe
-              //       annotationInSize,             // $FlowFixMe
-              //     ));
-              //   } else {
-              //     const {                         // $FlowFixMe
-              //       content, annotationArray, annotationInSize,
-              //     } = parameters;                 // $FlowFixMe
-              //     out.push(eqn.annotation(        // $FlowFixMe
-              //       makePhrase(content),          // $FlowFixMe
-              //       makePhrase(annotationArray),  // $FlowFixMe
-              //       annotationInSize,             // $FlowFixMe
-              //     ));
-              //   }
-              // }
-
-            } else {
-              out.push(element);
-            }
-          } else if (Array.isArray(element)) {
-            out.push(element);
-          } else {
-            var _methodName = Object.keys(element)[0];
-            var methodParams = Object.values(element)[0]; // $FlowFixMe
-
-            if (equation.eqn.functions[_methodName]) {
-              // $FlowFixMe
-              out.push(equation.eqn.functions[_methodName](methodParams));
-            }
-          }
-        }
-
-        return out;
-      }; // Go through each form and create it
-
-
-      Object.keys(equationOptionsToUse.forms).forEach(function (name) {
-        var form = equationOptionsToUse.forms[name];
-        var formOptionsArray = []; // If the form is an array
-
-        if (Array.isArray(form)) {
-          formOptionsArray.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defForm, {
-            content: form
-          })); // Otherwise if it's an object without a content field (meaning it's keys
-          // will just be formTypes)
-        } else if (form.content == null) {
-          Object.keys(form).forEach(function (subForm) {
-            formOptionsArray.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])(defForm, form[subForm], {
-              subForm: subForm
-            }));
-          }); // Otherwise it's a form fully defined as an object
-        } else {
-          formOptionsArray.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defForm, form));
-        } // Populate the elementMods with default values when values are missing
-
-
-        formOptionsArray.forEach(function (formOptions) {
-          Object.keys(formOptions.elementMods).forEach(function (key) {
-            // eslint-disable-next-line no-param-reassign
-            formOptions.elementMods[key] = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defElementMods, formOptions.elementMods[key]);
-          });
-
-          if (typeof formOptions.alignment.fixTo === 'string') {
-            var elem = Object(_DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_13__["getDiagramElement"])(equation, formOptions.alignment.fixTo);
-
-            if (elem != null) {
-              equation.eqn.defaultFormAlignment.fixTo = elem;
-            }
-          } else {
-            equation.eqn.defaultFormAlignment.fixTo = formOptions.alignment.fixTo;
-          }
-
-          equation.eqn.defaultFormAlignment.alignH = formOptions.alignment.alignH;
-          equation.eqn.defaultFormAlignment.alignV = formOptions.alignment.alignV;
-          equation.eqn.scale = formOptions.alignment.scale;
-          equation.addForm(name, // $FlowFixMe
-          makePhrase(formOptions.content), {
-            animationTime: formOptions.animationTime,
-            elementMods: formOptions.elementMods,
-            subForm: formOptions.subForm,
-            addToSeries: formOptions.addToSeries
-          });
-        });
-      }); // if (optionsToUse.formSeries != null) {
-      //   eqn.setFormSeries(optionsToUse.formSeries);
-      // }
-      // eqn.collection.setPosition(optionsToUse.position);
-      // eqn.setCurrentForm(optionsToUse.currentForm);
-      // const { addToCollection } = optionsToUse;
-      // if (addToCollection != null) {
-      //   addToCollection.eqns[optionsToUse.name] = eqn;
-      //   addToCollection.add(optionsToUse.name, eqn.collection);
-      // }
-      // eqn.formTypeOrder = ['rad', 'deg', 'base'];
-      // return eqn;
-    }
-  }, {
-    key: "fraction",
-    value: function fraction() {
-      var defaultOptions = {
-        numerator: '1',
-        denominator: 'NOT DEFINED',
-        color: [1, 0, 0, 1],
-        scale: 0.5
-      };
-
-      for (var _len2 = arguments.length, options = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        options[_key2] = arguments[_key2];
-      }
-
-      var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(options));
-      var eqn = this.makeEqn();
-      eqn.createElements({
-        num: optionsToUse.numerator,
-        den: optionsToUse.denominator,
-        v: this.vinculum(optionsToUse.color)
-      }, optionsToUse.color);
-      eqn.formAlignment.hAlign = 'center';
-      eqn.formAlignment.vAlign = 'baseline';
-      eqn.formAlignment.scale = optionsToUse.scale;
-      eqn.addForm('base', [eqn.frac('num', 'den', 'v')]);
-      eqn.setCurrentForm('base');
-      return eqn;
-    }
-  }, {
-    key: "fractionPre",
-    value: function fractionPre() {
-      var defaultOptions = {
-        numerator: '1',
-        denominator: 'NOT DEFINED',
-        main: 'NOT DEFINED',
-        color: [1, 0, 0, 1],
-        scale: 0.5,
-        fracScale: 0.6
-      };
-
-      for (var _len3 = arguments.length, options = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
-        options[_key3] = arguments[_key3];
-      }
-
-      var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(options));
-      var eqn = this.makeEqn();
-      eqn.createElements({
-        num: optionsToUse.numerator,
-        den: optionsToUse.denominator,
-        main: optionsToUse.main,
-        v: this.vinculum(optionsToUse.color)
-      }, optionsToUse.color);
-      eqn.formAlignment.hAlign = 'center';
-      eqn.formAlignment.vAlign = 'baseline';
-      eqn.formAlignment.scale = optionsToUse.scale;
-      eqn.addForm('base', [eqn.sfrac('num', 'den', 'v', optionsToUse.fracScale), 'space', 'main']);
-      eqn.setCurrentForm('base');
-      return eqn;
     }
   }]);
 
@@ -11413,7 +12004,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+/* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
 function _get(target, property, receiver) { if (typeof Reflect !== "undefined" && Reflect.get) { _get = Reflect.get; } else { _get = function _get(target, property, receiver) { var base = _superPropBase(target, property); if (!base) return; var desc = Object.getOwnPropertyDescriptor(base, property); if (desc.get) { return desc.get.call(receiver); } return desc.value; }; } return _get(target, property, receiver || target); }
 
 function _superPropBase(object, property) { while (!Object.prototype.hasOwnProperty.call(object, property)) { object = _getPrototypeOf(object); if (object === null) break; } return object; }
@@ -11475,10 +12066,11 @@ function (_EquationLabel) {
 
     var curvePosition = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0.5;
     var showRealAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
-    var realAngleDecimals = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0;
-    var autoHide = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : -1;
-    var orientation = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 'horizontal';
-    var scale = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 0.7;
+    var units = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'degrees';
+    var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
+    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : -1;
+    var orientation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'horizontal';
+    var scale = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 0.7;
 
     _classCallCheck(this, AngleLabel);
 
@@ -11490,8 +12082,9 @@ function (_EquationLabel) {
     _this.radius = radius;
     _this.curvePosition = curvePosition;
     _this.showRealAngle = showRealAngle;
+    _this.units = units;
     _this.orientation = orientation;
-    _this.realAngleDecimals = realAngleDecimals;
+    _this.precision = precision;
     _this.autoHide = autoHide;
     return _this;
   }
@@ -11509,20 +12102,38 @@ function (_DiagramElementCollec) {
     // Diagram elements
     // Objects that may or may not exist
     // angle properties - pulic read only
+    // rotation: number;
+    // position: Point;
     // angle properties - pulic read/write
     // angle properties - private internal use only
     // Pulic Angle methods
+    // nextAngle: ?number;
     // eslint-disable-next-line class-methods-use-this
     value: function calculateFromP1P2P3(p1, p2, p3) {
+      var direction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+
       var position = p2._dup();
 
-      var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
-      var rotation = L21.angle();
       var angle = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["threePointAngle"])(p1, p2, p3);
+
+      if (direction === 1) {
+        var L21 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+
+        var _rotation = L21.angle();
+
+        return {
+          position: position,
+          rotation: _rotation,
+          angle: angle
+        };
+      }
+
+      var L23 = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Line"](p2, p1);
+      var rotation = L23.angle();
       return {
         position: position,
         rotation: rotation,
-        angle: angle
+        angle: Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(Math.PI * 2 - angle, '0to360')
       };
     }
   }]);
@@ -11541,6 +12152,7 @@ function (_DiagramElementCollec) {
       // radius: 0.1,
       color: [0, 1, 0, 1],
       // clockwise: false,
+      direction: 1,
       autoRightAngle: false,
       rightAngleRange: 0.001,
       curve: null,
@@ -11569,8 +12181,9 @@ function (_DiagramElementCollec) {
     _this2.isTouchDevice = isTouchDevice;
     _this2.animateNextFrame = animateNextFrame; // Calculate and store the angle geometry
 
-    _this2.position = optionsToUse.position;
-    _this2.rotation = optionsToUse.rotation;
+    _this2.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
+    _this2.nextRotation = optionsToUse.rotation;
+    _this2.direction = optionsToUse.direction;
     _this2.angle = optionsToUse.angle;
     _this2.lastLabelRotationOffset = 0;
     _this2.autoRightAngle = optionsToUse.autoRightAngle;
@@ -11578,19 +12191,25 @@ function (_DiagramElementCollec) {
     // this.radius = optionsToUse.radius;
 
     if (optionsToUse.p1 != null && optionsToUse.p2 != null && optionsToUse.p3 != null) {
-      var _this2$calculateFromP = _this2.calculateFromP1P2P3(optionsToUse.p1, optionsToUse.p2, optionsToUse.p3),
+      var _this2$calculateFromP = _this2.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p3), _this2.direction),
           position = _this2$calculateFromP.position,
           rotation = _this2$calculateFromP.rotation,
           angle = _this2$calculateFromP.angle;
 
       _this2.angle = angle;
-      _this2.rotation = rotation;
-      _this2.position = position;
+      _this2.nextRotation = rotation;
+      _this2.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
     }
 
-    _this2.transform.updateTranslation(_this2.position);
-
-    _this2.transform.updateRotation(_this2.rotation); // Setup default values for sides, arrows, curve and label
+    _this2.setNextPositionAndRotation(); // if (this.nextPosition != null) {
+    //   this.transform.updateTranslation(this.nextPosition);
+    // }
+    // if (this.nextRotation != null) {
+    //   this.transform.updateRotation(this.nextRotation);
+    // }
+    // this.nextPosition = null;
+    // this.nextRotation = null;
+    // Setup default values for sides, arrows, curve and label
 
 
     _this2.side1 = null;
@@ -11676,34 +12295,56 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectAngle, [{
+    key: "setNextPositionAndRotation",
+    value: function setNextPositionAndRotation() {
+      if (this.nextPosition != null) {
+        this.transform.updateTranslation(this.nextPosition);
+      }
+
+      if (this.nextRotation != null) {
+        this.transform.updateRotation(this.nextRotation);
+      }
+
+      this.nextPosition = null;
+      this.nextRotation = null;
+    }
+  }, {
     key: "setAngle",
     value: function setAngle() {
       var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
 
       if (options.position != null) {
-        this.position = options.position;
+        this.nextPosition = options.position;
       }
 
       if (options.rotation != null) {
-        this.rotation = options.rotation;
+        this.nextRotation = options.rotation;
       }
 
       if (options.angle != null) {
         this.angle = options.angle;
       }
 
-      if (options.p1 != null && options.p2 != null && options.p3 != null) {
-        var _this$calculateFromP = this.calculateFromP1P2P3(options.p1, options.p2, options.p3),
+      var p1 = options.p1,
+          p2 = options.p2,
+          p3 = options.p3;
+
+      if (p1 != null && p2 != null && p3 != null) {
+        var _this$calculateFromP = this.calculateFromP1P2P3(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p1), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p2), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p3), this.direction),
             position = _this$calculateFromP.position,
             rotation = _this$calculateFromP.rotation,
             angle = _this$calculateFromP.angle;
 
         this.angle = angle;
-        this.rotation = rotation;
-        this.position = position;
+        this.nextRotation = rotation;
+        this.nextPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position);
       }
 
-      this.update();
+      if (options.rotationOffset != null) {
+        this.update(options.rotationOffset);
+      } else {
+        this.update();
+      }
     }
   }, {
     key: "addSide",
@@ -11728,17 +12369,17 @@ function (_DiagramElementCollec) {
         radius: 0.4,
         curvePosition: 0.5,
         showRealAngle: false,
-        realAngleDecimals: 0,
+        units: 'degrees',
+        precision: 0,
         orientation: 'horizontal',
         autoHide: -1,
-        textScale: 0.7,
+        scale: 0.7,
         color: this.color
       };
 
       if (this.curve) {
         defaultLabelOptions.radius = this.curve.radius;
-      } // console.log(options)
-
+      }
 
       var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultLabelOptions, options);
 
@@ -11747,10 +12388,10 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.realAngleDecimals, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.textScale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.scale);
 
       if (this.label != null) {
-        this.add('label', this.label.eqn.collection);
+        this.add('label', this.label.eqn);
       } // this.updateLabel();
 
     }
@@ -11789,7 +12430,7 @@ function (_DiagramElementCollec) {
 
       if (this.autoRightAngle) {
         var right = this.shapes.collection();
-        var rightLength = optionsToUse.radius; // / Math.sqrt(2);
+        var rightLength = optionsToUse.radius * 0.707; // / Math.sqrt(2);
 
         right.add('line1', this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rightLength, 0), rightLength + optionsToUse.width / 2, optionsToUse.width, Math.PI / 2, this.color));
         right.add('line2', this.shapes.horizontalLine(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, rightLength), rightLength - optionsToUse.width / 2, optionsToUse.width, 0, this.color));
@@ -11862,7 +12503,7 @@ function (_DiagramElementCollec) {
         r = Math.PI / 2 * 3;
       }
 
-      var a = this.shapes.arrow(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(0).translate(0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
+      var a = this.shapes.arrowLegacy(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(0).translate(0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
 
       this["arrow".concat(index)] = arrowOptions;
       this.add("arrow".concat(index), a);
@@ -11993,8 +12634,9 @@ function (_DiagramElementCollec) {
         this.lastLabelRotationOffset = labelRotationOffset;
       }
 
-      this.transform.updateTranslation(this.position);
-      this.transform.updateRotation(this.rotation);
+      this.setNextPositionAndRotation(); // this.transform.updateTranslation(this.position);
+      // this.transform.updateRotation(this.rotation);
+
       var _curve = this._curve,
           curve = this.curve,
           _curveRight = this._curveRight;
@@ -12033,37 +12675,48 @@ function (_DiagramElementCollec) {
 
           this.updateCurve(curveAngle, this.angle, rotationForArrow1, true);
         }
-      }
+      } // const { _label, label } = this;
+      // if (_label && label) {
+      //   if (label.autoHide > this.angle) {
+      //     _label.hide();
+      //   } else {
+      //     _label.show();
+      //     if (label.showRealAngle) {
+      //       let angleText = roundNum(this.angle, label.precision)
+      //         .toFixed(label.precision);
+      //       if (label.units === 'degrees') {
+      //         angleText = roundNum(
+      //           this.angle * 180 / Math.PI,
+      //           label.precision,
+      //         ).toFixed(label.precision);
+      //         angleText = `${angleText}º`;
+      //       }
+      //       label.setText(angleText);
+      //       // _label._base.drawingObject.setText(`${angleText}`);
+      //       // label.eqn.reArrangeCurrentForm();
+      //     }
+      //     const labelPosition = polarToRect(label.radius, this.angle * label.curvePosition);
+      //     if (label.orientation === 'horizontal') {
+      //       label.updateRotation(
+      //         -this.rotation - this.lastLabelRotationOffset,
+      //         labelPosition,
+      //         label.radius / 5,
+      //         this.angle * label.curvePosition,
+      //       );
+      //     }
+      //     if (label.orientation === 'tangent') {
+      //       label.updateRotation(
+      //         this.angle * label.curvePosition - Math.PI / 2,
+      //         labelPosition,
+      //         label.radius / 50,
+      //         this.angle * label.curvePosition,
+      //       );
+      //     }
+      //   }
+      // }
 
-      var _label = this._label,
-          label = this.label;
 
-      if (_label && label) {
-        if (label.autoHide > this.angle) {
-          _label.hide();
-        } else {
-          _label.show();
-
-          if (label.showRealAngle) {
-            var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.realAngleDecimals).toString();
-
-            _label._base.drawingObject.setText("".concat(angleText, "\xBA"));
-
-            label.eqn.reArrangeCurrentForm();
-          }
-
-          var labelPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(label.radius, this.angle * label.curvePosition);
-
-          if (label.orientation === 'horizontal') {
-            label.updateRotation(-this.rotation - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition);
-          }
-
-          if (label.orientation === 'tangent') {
-            label.updateRotation(this.angle * label.curvePosition - Math.PI / 2, labelPosition, label.radius / 50, this.angle * label.curvePosition);
-          }
-        }
-      }
-
+      this.updateLabel();
       var _side1 = this._side1,
           side1 = this.side1;
 
@@ -12079,6 +12732,82 @@ function (_DiagramElementCollec) {
         _side2.transform.updateRotation(this.angle);
 
         _side2.transform.updateScale(side2.length, 1);
+      }
+    }
+  }, {
+    key: "getAngle",
+    value: function getAngle() {
+      var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
+
+      if (units === 'deg') {
+        return this.angle * 180 / Math.PI;
+      }
+
+      return this.angle;
+    }
+  }, {
+    key: "setLabel",
+    value: function setLabel(text) {
+      var label = this.label;
+
+      if (label != null) {
+        label.setText(text);
+        label.showRealAngle = false;
+      }
+
+      this.updateLabel();
+    }
+  }, {
+    key: "setLabelToRealAngle",
+    value: function setLabelToRealAngle() {
+      var label = this.label;
+
+      if (label != null) {
+        label.showRealAngle = true;
+      }
+
+      this.updateLabel();
+    }
+  }, {
+    key: "updateLabel",
+    value: function updateLabel() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (rotationOffset != null) {
+        this.lastLabelRotationOffset = rotationOffset;
+      }
+
+      var _label = this._label,
+          label = this.label;
+
+      if (_label && label) {
+        if (label.autoHide > this.angle) {
+          _label.hide();
+        } else {
+          _label.show();
+
+          if (label.showRealAngle) {
+            var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle, label.precision).toFixed(label.precision);
+
+            if (label.units === 'degrees') {
+              angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision).toFixed(label.precision);
+              angleText = "".concat(angleText, "\xBA");
+            }
+
+            label.setText(angleText); // _label._base.drawingObject.setText(`${angleText}`);
+            // label.eqn.reArrangeCurrentForm();
+          }
+
+          var labelPosition = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(label.radius, this.angle * label.curvePosition);
+
+          if (label.orientation === 'horizontal') {
+            label.updateRotation(-this.getRotation() - this.lastLabelRotationOffset, labelPosition, label.radius / 5, this.angle * label.curvePosition);
+          }
+
+          if (label.orientation === 'tangent') {
+            label.updateRotation(this.angle * label.curvePosition - Math.PI / 2, labelPosition, label.radius / 50, this.angle * label.curvePosition);
+          }
+        }
       }
     }
   }, {
@@ -12111,12 +12840,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _EquationNavigator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./EquationNavigator */ "./src/js/diagram/DiagramObjects/EquationNavigator.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
-/* harmony import */ var _Line__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Line */ "./src/js/diagram/DiagramObjects/Line.js");
-/* harmony import */ var _Angle__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
-/* harmony import */ var _PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
-/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
+/* harmony import */ var _Line__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Line */ "./src/js/diagram/DiagramObjects/Line.js");
+/* harmony import */ var _Angle__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Angle */ "./src/js/diagram/DiagramObjects/Angle.js");
+/* harmony import */ var _PolyLine__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./PolyLine */ "./src/js/diagram/DiagramObjects/PolyLine.js");
+/* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -12129,8 +12856,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 //   DiagramElementCollection,
 // } from '../Element';
 
-
-
+ // import EquationNavigator from './EquationNavigator';
 
 
 
@@ -12153,16 +12879,6 @@ function () {
   }
 
   _createClass(DiagramObjects, [{
-    key: "equationNavigator",
-    value: function equationNavigator(equation, offset) {
-      var navType = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'threeLine';
-      var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : '';
-      var xAlign = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'left';
-      var vAlign = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'middle';
-      var id = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : "id_lesson__equation_navigator_".concat(Math.floor(Math.random() * 10000));
-      return new _EquationNavigator__WEBPACK_IMPORTED_MODULE_4__["default"](this.shapes, this.animateNextFrame, equation, offset, navType, options, xAlign, vAlign, id);
-    }
-  }, {
     key: "line",
     value: function line() {
       for (var _len = arguments.length, options = new Array(_len), _key = 0; _key < _len; _key++) {
@@ -12172,7 +12888,7 @@ function () {
       // const optionsToUse = Object.assign({}, ...options);
       // console.log(Object.assign({}, ...options))
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _Line__WEBPACK_IMPORTED_MODULE_6__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
+      return new _Line__WEBPACK_IMPORTED_MODULE_4__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
     }
   }, {
     key: "angle",
@@ -12182,7 +12898,7 @@ function () {
       }
 
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _Angle__WEBPACK_IMPORTED_MODULE_7__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
+      return new _Angle__WEBPACK_IMPORTED_MODULE_5__["default"](this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame, optionsToUse);
     }
   }, {
     key: "label",
@@ -12193,7 +12909,7 @@ function () {
 
       // const optionsToUse = Object.assign({}, ...options);
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _EquationLabel__WEBPACK_IMPORTED_MODULE_9__["default"](this.equation, optionsToUse);
+      return new _EquationLabel__WEBPACK_IMPORTED_MODULE_7__["default"](this.equation, optionsToUse);
     }
   }, {
     key: "polyLine",
@@ -12203,255 +12919,8 @@ function () {
       }
 
       var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"].apply(void 0, [{}].concat(options));
-      return new _PolyLine__WEBPACK_IMPORTED_MODULE_8__["default"](this.shapes, this.equation, this, this.isTouchDevice, this.animateNextFrame, optionsToUse);
-    } // lineNew(
-    //   position: Point,
-    //   length: number,
-    //   angle: number,
-    //   width: number,
-    //   color: Array<number>,
-    //   vertexSpaceStart: 'start' | 'end' | 'center' | number | Point = 'start',
-    //   showLine: boolean,
-    //   largerTouchBorder: boolean,
-    // ) {
-    //   return new DiagramObjectLine(
-    //     this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //     {
-    //       position,
-    //       length,
-    //       angle,
-    //       vertexSpaceStart,
-    //       width,
-    //       color,
-    //       showLine,
-    //       largerTouchBorder,
-    //     },
-    //   );
-    // }
-    // linePoints(
-    //   p1: Point,
-    //   p2: Point,
-    //   width: number,
-    //   color: Array<number>,
-    //   vertexOrigin: 'start' | 'end' | 'center' | number | Point = 'start',
-    //   showLine: boolean,
-    //   largerTouchBorder: boolean,
-    //   ) {
-    // }
-    // length
-    // width
-    // color
-    // vertexOrigin
-    // line(
-    //   p1OrPositionOrLength: Point | number,
-    //   p2OrLengthOrWidth: Point | number,
-    //   widthOrAngleOrColor: number | Array<number>,
-    //   colorOrWidthOrVertexOrigin: Array<number> | number | TypeVertexSpaceStart | null = null,
-    //   vertexOriginOrColor: TypeVertexOrigin | Array<number> | null = null,
-    //   showLineOrVertexOrigin: boolean | TypeVertexOrigin | null = null,
-    //   largerTouchBorderOrShowLine: boolean | null = null,
-    //   largerTouchBorder: boolean | null = null,
-    // ) {
-    //   let position = new Point(0, 0);
-    //   let length = 1;
-    //   let angle = 0;
-    //   let width = 0.01;
-    //   let color = [1, 0, 0, 1];
-    //   let vertexOrigin = 'start';
-    //   let showLine = true;
-    //   let largerTouchBorderToUse = true;
-    //   if (p1OrPositionOrLength instanceof Point
-    //     && p2OrLengthOrWidth instanceof Point) {
-    //     const p1 = p1OrPositionOrLength;
-    //     const p2 = p2OrLengthOrWidth;
-    //     const line = new Line(p1, p2);
-    //     position = p1OrPositionOrLength;
-    //     length = line.length();
-    //     angle = line.angle();
-    //     width = widthOrAngleOrColor;
-    //     color = colorOrWidthOrVertexOrigin;
-    //     vertexOrigin = vertexOriginOrColor;
-    //     showLine = showLineOrVertexOrigin;
-    //     largerTouchBorderToUse = largerTouchBorderOrShowLine;
-    //   } else if (p1OrPositionOrLength instanceof Point
-    //     && typeof p2OrLengthOrWidth === 'number'
-    //   ) {
-    //     position = p1OrPositionOrLength;
-    //     length = p2OrLengthOrWidth;
-    //     angle = widthOrAngleOrColor;
-    //     width = colorOrWidthOrVertexOrigin;
-    //     color = vertexOriginOrColor;
-    //     vertexOrigin = showLineOrVertexOrigin;
-    //     showLine = largerTouchBorderOrShowLine;
-    //     largerTouchBorderToUse = largerTouchBorder;
-    //   } else {
-    //     position = new Point(0, 0);
-    //     length = p1OrPositionOrLength;
-    //     width = p2OrLengthOrWidth;
-    //     color = widthOrAngleOrColor;
-    //     vertexOrigin = colorOrWidthOrVertexOrigin;
-    //     showLine = true;
-    //     largerTouchBorderToUse = true;
-    //   }
-    //   if (vertexOrigin == null) {
-    //     vertexOrigin = 'start';
-    //   }
-    //   if (showLine == null) {
-    //     showLine = true;
-    //   }
-    //   if (largerTouchBorderToUse == null) {
-    //     largerTouchBorderToUse = true;
-    //   }
-    //   return new DiagramObjectLine(
-    //     // $FlowFixMe
-    //     this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //     {
-    //       position,
-    //       length,
-    //       angle,
-    //       vertexOrigin,
-    //       width,
-    //       color,
-    //       showLine,
-    //       largerTouchBorder,
-    //     },
-    //   );
-    // }
-    // lineOld(
-    //   referenceOrP1: TypeVertexSpaceStart | Point = 'center',
-    //   lengthOrP2: number | Point,
-    //   width: number,
-    //   color: Array<number>,
-    //   showLine: boolean = true,
-    //   largerTouchBorder: boolean = true,
-    // ) {
-    //   let line;
-    //   if (referenceOrP1 instanceof Point && lengthOrP2 instanceof Point) {
-    //     line = new DiagramObjectLine(
-    //       this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //       {
-    //         position: referenceOrP1,
-    //         width,
-    //         color,
-    //         showLine,
-    //         largerTouchBorder,
-    //       },
-    //     );
-    //     line.setEndPoints(referenceOrP1, lengthOrP2);
-    //     // return line;
-    //   } else if (referenceOrP1 instanceof Point && typeof lengthOrP2 === 'number') {
-    //     line = this.lineNew(
-    //       referenceOrP1, lengthOrP2, 0, width, color, 'start', showLine,
-    //       largerTouchBorder,
-    //     );
-    //     // return line;
-    //     // const line = new DiagramObjectLine(
-    //     //   this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //     //   referenceOrP1, lengthOrP2, width, 'end', width, color, showLine,
-    //     //   largerTouchBorder,
-    //     // )
-    //     // return new DiagramObjectLine(
-    //     //   this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //     //   referenceOrP1, lengthOrP2, width, color, showLine, largerTouchBorder,
-    //     // );
-    //   } else if (typeof lengthOrP2 === 'number') {
-    //     line = this.lineNew(
-    //       new Point(0, 0), lengthOrP2, 0, width, color, referenceOrP1, showLine,
-    //       largerTouchBorder,
-    //     );
-    //   } else {
-    //     line = this.lineNew(
-    //       new Point(0, 0), 1, 0, 0.01, [1, 0, 0, 1], 'start', true, true,
-    //     );
-    //   }
-    //   return line;
-    // }
-    // lineArrow(
-    //   referenceOrP1: TypeVertexSpaceStart = 'center',
-    //   lengthOrP2: number | Point,
-    //   width: number,
-    //   color: Array<number>,
-    //   arrowHeight: number = width * 4,
-    //   arrowWidth: number = width * 4,
-    //   largerTouchBorder: boolean = true,
-    // ) {
-    //   const line = this.lineOld(
-    //     referenceOrP1, lengthOrP2, width, color,
-    //     true, largerTouchBorder,
-    //   );
-    //   // const line = new DiagramObjectLine(
-    //   //   this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //   //   referenceOrP1, lengthOrP2, width, color, true, largerTouchBorder,
-    //   // );
-    //   line.addArrow(2, arrowWidth, arrowHeight);
-    //   return line;
-    // }
-    // lineArrows(
-    //   referenceOrP1: TypeVertexSpaceStart = 'center',
-    //   lengthOrP2: number | Point,
-    //   width: number,
-    //   color: Array<number>,
-    //   arrowHeight: number = width * 4,
-    //   arrowWidth: number = width * 4,
-    //   largerTouchBorder: boolean = true,
-    // ) {
-    //   const line = this.lineArrow(
-    //     referenceOrP1, lengthOrP2, width, color, arrowHeight, arrowWidth,
-    //     largerTouchBorder,
-    //   );
-    //   line.addArrow(1, arrowWidth, arrowHeight);
-    //   return line;
-    // }
-    // lineLabelOnly(
-    //   referenceOrP1: TypeVertexSpaceStart = 'center',
-    //   lengthOrP2: number | Point,
-    //   color: Array<number>,
-    //   labelText: string | Equation | Array<string>,
-    //   offset: number,
-    //   location: TypeLineLabelLocation = 'outside',
-    //   subLocation: TypeLineLabelSubLocation = 'left',
-    //   orientation: TypeLineLabelOrientation = 'horizontal',
-    //   linePosition: number = 0.5,
-    // ) {
-    //   const line = this.lineOld(
-    //     referenceOrP1, lengthOrP2, 0.001, color,
-    //     false, false,
-    //   );
-    //   // const line = new DiagramObjectLine(
-    //   //   this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //   //   referenceOrP1, lengthOrP2, 0.001, color, false, false,
-    //   // );
-    //   line.addLabel(
-    //     labelText, offset, location, subLocation, orientation, linePosition,
-    //   );
-    //   return line;
-    // }
-    // lineLabel(
-    //   referenceOrP1: TypeVertexSpaceStart = 'center',
-    //   lengthOrP2: number | Point,
-    //   width: number,
-    //   color: Array<number>,
-    //   labelText: string | Equation | Array<string>,
-    //   offset: number,
-    //   location: TypeLineLabelLocation = 'outside',
-    //   subLocation: TypeLineLabelSubLocation = 'left',
-    //   orientation: TypeLineLabelOrientation = 'horizontal',
-    //   linePosition: number = 0.5,
-    // ) {
-    //   // const line = new DiagramObjectLine(
-    //   //   this.shapes, this.equation, this.isTouchDevice, this.animateNextFrame,
-    //   //   referenceOrP1, lengthOrP2, width, color, true, false,
-    //   // );
-    //   const line = this.lineOld(
-    //     referenceOrP1, lengthOrP2, width, color,
-    //     true, false,
-    //   );
-    //   line.addLabel(
-    //     labelText, offset, location, subLocation, orientation, linePosition,
-    //   );
-    //   return line;
-    // }
-
+      return new _PolyLine__WEBPACK_IMPORTED_MODULE_6__["default"](this.shapes, this.equation, this, this.isTouchDevice, this.animateNextFrame, optionsToUse);
+    }
   }]);
 
   return DiagramObjects;
@@ -12496,7 +12965,6 @@ function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || func
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
 
 
- // import { Equation } from '../DiagramElements/Equation/GLEquation';
 
 
 
@@ -12515,14 +12983,19 @@ function updateDescription(eqn, subForm, descriptionElement, index) {
 
   var form = null; // $FlowFixMe
   // form = eqn.eqn.formSeries[index][formType];
+  // form = eqn.getForm(eqn.eqn.currentFormSeries[index], subForm);
 
-  form = eqn.getForm(eqn.eqn.formSeries[index], subForm);
+  form = eqn.getCurrentForm();
 
   if (form == null) {
     return;
   }
 
   if (form.description == null) {
+    if (element != null) {
+      element.innerHTML = '';
+    }
+
     return;
   }
 
@@ -12580,7 +13053,7 @@ nav) {
       enableTouch(nav.description);
     }
 
-    if (nav.eqn.eqn.formSeries.length > 1) {
+    if (nav.eqn.eqn.currentFormSeries.length > 1) {
       enableTouch(nav.next);
       enableTouch(nav.nextDescription);
     } else {
@@ -12590,7 +13063,7 @@ nav) {
 
     var nextIndex = index + 1;
 
-    if (nextIndex > nav.eqn.eqn.formSeries.length - 1) {
+    if (nextIndex > nav.eqn.eqn.currentFormSeries.length - 1) {
       if (nav.nextDescription) {
         // eslint-disable-next-line no-param-reassign
         nav.nextDescription.innerHTML = 'RESTART from begining';
@@ -12869,12 +13342,22 @@ function (_DiagramElementCollec) {
         forceTwoLines: false,
         arrows: false
       },
-      alignH: 'left',
+      alignH: 'center',
       alignV: 'middle',
+      interactive: true,
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
-    _this.eqn = optionsToUse.equation;
+
+    if (optionsToUse.equation != null) {
+      // this.eqn = optionsToUse.equation;
+      // this.eqn.onClick = this.clickNext.bind(this);
+      // this.eqn.hasTouchableElements = true;
+      // this.eqn.isTouchable = true;
+      // this.eqn.touchInBoundingRect = true;
+      _this.connectToEquation(optionsToUse.equation, optionsToUse.interactive);
+    }
+
     _this.navType = optionsToUse.navType;
     var navigatorHTMLElement = null;
 
@@ -12904,20 +13387,34 @@ function (_DiagramElementCollec) {
       _this.add('table', table);
     }
 
-    _this.eqn.onClick = _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.eqn.hasTouchableElements = true;
-    _this.eqn.isTouchable = true;
-    _this.eqn.touchInBoundingRect = true;
     return _this;
-  } // const navigator = shapes.collection(;
-  // setEquation(eqn: Equation) {
-  //   this.eqn = eqn;
-  //   // this._eqn = [];
-  //   this.add('eqn', eqn.collection);
-  // }
-
+  }
 
   _createClass(EqnNavigator, [{
+    key: "connectToEquation",
+    value: function connectToEquation(eqn, interactive) {
+      this.eqn = eqn;
+
+      if (interactive) {
+        this.eqn.onClick = this.clickNext.bind(this);
+        this.eqn.hasTouchableElements = true;
+        this.eqn.isTouchable = true;
+        this.eqn.touchInBoundingRect = true;
+      } // this.setTransformCallback = () => {
+      //   const p = this.getPosition();
+      //   this.eqn.setPosition(p);
+      // }
+
+    } // const navigator = shapes.collection(;
+    // setEquation(eqn: Equation) {
+    //   this.eqn = eqn;
+    //   // this._eqn = [];
+    //   this.add('eqn', eqn.collection);
+    // }
+    // setWidth(width) {
+    // }
+
+  }, {
     key: "clickNext",
     value: function clickNext() {
       this.eqn.nextForm(1.5);
@@ -12995,7 +13492,7 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EquationLabel; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+/* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -13029,8 +13526,8 @@ function () {
       position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
       form: '0',
       formType: 'base',
-      vAlign: 'middle',
-      hAlign: 'center'
+      alignH: 'center',
+      alignV: 'middle'
     };
     var optionsToUse = Object.assign({}, defaultOptions, options);
     var labelTextOrEquation = optionsToUse.label;
@@ -13039,67 +13536,62 @@ function () {
         position = optionsToUse.position;
     var form = optionsToUse.form,
         formType = optionsToUse.formType;
-    var vAlign = optionsToUse.vAlign,
-        hAlign = optionsToUse.hAlign;
+    var alignV = optionsToUse.alignV,
+        alignH = optionsToUse.alignH;
     var eqn;
 
     if (typeof labelTextOrEquation === 'string') {
-      eqn = equations.makeEqn();
-      eqn.createElements({
-        base: labelTextOrEquation
-      }, color);
-      eqn.collection.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(position);
-      eqn.formAlignment.fixTo = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      eqn.formAlignment.hAlign = hAlign;
-      eqn.formAlignment.vAlign = vAlign;
-      eqn.formAlignment.scale = scale;
-      eqn.addForm('base', ['base']);
+      eqn = equations.equation({
+        elements: {
+          base: labelTextOrEquation
+        },
+        color: color,
+        defaultFormAlignment: {
+          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+          alignH: alignH,
+          alignV: alignV
+        },
+        scale: scale,
+        forms: {
+          base: ['base']
+        },
+        position: position
+      });
       eqn.setCurrentForm('base');
-    } else if (labelTextOrEquation instanceof _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_1__["Equation"]) {
+    } else if (labelTextOrEquation instanceof _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_1__["EquationNew"]) {
       eqn = labelTextOrEquation;
     } else if (Array.isArray(labelTextOrEquation)) {
-      eqn = equations.makeEqn();
       var elements = {};
+      var forms = {};
       labelTextOrEquation.forEach(function (labelText, index) {
         elements["_".concat(index)] = labelText;
+        forms[index] = [labelText];
       });
-      eqn.createElements(elements, color);
-      eqn.collection.transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(position);
-      eqn.formAlignment.fixTo = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      eqn.formAlignment.hAlign = hAlign;
-      eqn.formAlignment.vAlign = vAlign;
-      eqn.formAlignment.scale = scale;
-      labelTextOrEquation.forEach(function (labelText, index) {
-        eqn.addForm("".concat(index), ["_".concat(index)]);
+      eqn = equations.equation({
+        elements: elements,
+        forms: forms,
+        color: color,
+        position: position,
+        defaultFormAlignment: {
+          fixTo: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+          alignH: alignH,
+          alignV: alignV
+        },
+        scale: scale
       });
       eqn.setCurrentForm(form, formType);
     } else {
-      // eslint-disable-next-line no-lonely-if
-      if (labelTextOrEquation.eqn === 'fraction') {
-        var defaultFracOptions = {
-          color: color,
-          scale: 0.5
-        };
-        var fracOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultFracOptions, labelTextOrEquation);
-        eqn = equations.fraction(fracOptions);
-        eqn.setCurrentForm('base');
-      } else {
-        // if (labelTextOrEquation.eqn === 'fractionPre') {
-        var _defaultFracOptions = {
-          color: color,
-          scale: 0.7,
-          fracScale: 0.5
-        };
-
-        var _fracOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, _defaultFracOptions, labelTextOrEquation);
-
-        eqn = equations.fractionPre(_fracOptions);
-        eqn.setCurrentForm('base');
-      }
+      var defaultEqnOptions = {
+        color: color
+      };
+      eqn = equations.equation(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])(defaultEqnOptions, labelTextOrEquation));
     }
 
     this.eqn = eqn;
-  }
+  } // TODO
+  // setEqn() {
+  // }
+
 
   _createClass(EquationLabel, [{
     key: "setText",
@@ -13117,7 +13609,7 @@ function () {
           textObject.setText(text);
         }
 
-        form.arrange(this.eqn.formAlignment.scale, this.eqn.formAlignment.hAlign, this.eqn.formAlignment.vAlign, this.eqn.formAlignment.fixTo);
+        form.arrange(this.eqn.eqn.scale, this.eqn.eqn.defaultFormAlignment.alignH, this.eqn.eqn.defaultFormAlignment.alignV, this.eqn.eqn.defaultFormAlignment.fixTo);
       }
     }
   }, {
@@ -13162,12 +13654,12 @@ function () {
         var a = labelWidth + offsetMag;
         var b = labelHeight + offsetMag;
         var r = a * b / Math.sqrt(Math.pow(b * Math.cos(labelAngle - offsetAngle), 2) + Math.pow(a * Math.sin(labelAngle - offsetAngle), 2));
-        this.eqn.collection.setPosition(position.add(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(r, offsetAngle)));
+        this.eqn.setPosition(position.add(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["polarToRect"])(r, offsetAngle)));
       } else {
-        this.eqn.collection.setPosition(position);
+        this.eqn.setPosition(position);
       }
 
-      this.eqn.collection.transform.updateRotation(labelAngle);
+      this.eqn.transform.updateRotation(labelAngle);
     } // const label = {
     //   eqn,
     //   updateRotation,
@@ -13181,517 +13673,6 @@ function () {
 
   return EquationLabel;
 }();
-
-
-
-/***/ }),
-
-/***/ "./src/js/diagram/DiagramObjects/EquationNavigator.js":
-/*!************************************************************!*\
-  !*** ./src/js/diagram/DiagramObjects/EquationNavigator.js ***!
-  \************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return EquationNavigator; });
-/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
-/* harmony import */ var _DiagramElements_Equation_EquationForm__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramElements/Equation/EquationForm */ "./src/js/diagram/DiagramElements/Equation/EquationForm.js");
-/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
-
-function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
-
-function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
-
-function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
-
-
-
-
-
-
- // eslint-disable-next-line no-use-before-define
-
-function updateDescription(eqn, formType, descriptionElement, index) {
-  var setClicks = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : false;
-  var prefix = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
-  var element = descriptionElement;
-
-  if (element == null) {
-    return;
-  }
-
-  var form = null; // $FlowFixMe
-
-  form = eqn.formSeries[index][formType];
-
-  if (form == null) {
-    return;
-  }
-
-  if (form.description == null) {
-    return;
-  }
-
-  var monochrome = !setClicks;
-
-  if (descriptionElement) {
-    if (setClicks) {
-      // eslint-disable-next-line no-param-reassign
-      descriptionElement.innerHTML = _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__["applyModifiers"]("".concat(prefix).concat(form.description), form.modifiers);
-      _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__["setOnClicks"](form.modifiers);
-    } else {
-      // eslint-disable-next-line no-param-reassign
-      descriptionElement.innerHTML = _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_4__["applyModifiers"]("".concat(prefix).concat(form.description), form.modifiers, '', monochrome);
-    }
-  }
-}
-
-function enableTouch(element) {
-  if (element) {
-    element.classList.remove('lesson__eqn_nav__not_touchable');
-  }
-}
-
-function disableTouch(element) {
-  if (element) {
-    element.classList.add('lesson__eqn_nav__not_touchable');
-  }
-}
-
-function _updateButtons(nav) {
-  var includeNextPrevPrefix = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-  var nextPrefix = '';
-  var prevPrefix = '';
-
-  if (includeNextPrevPrefix) {
-    nextPrefix = 'NEXT: ';
-    prevPrefix = 'PREV: ';
-  }
-
-  var currentForm = nav.eqn.getCurrentForm();
-
-  if (currentForm != null) {
-    var index = nav.eqn.getFormIndex(currentForm);
-
-    if (index === 0) {
-      disableTouch(nav.refresh);
-      disableTouch(nav.prev);
-      disableTouch(nav.prevDescription);
-      disableTouch(nav.description); // enableTouch(nav.nextDescription, true);
-    } else {
-      enableTouch(nav.refresh);
-      enableTouch(nav.prev);
-      enableTouch(nav.prevDescription);
-      enableTouch(nav.description);
-    }
-
-    if (nav.eqn.formSeries.length > 1) {
-      enableTouch(nav.next);
-      enableTouch(nav.nextDescription);
-    } else {
-      disableTouch(nav.next);
-      disableTouch(nav.nextDescription);
-    }
-
-    var nextIndex = index + 1;
-
-    if (nextIndex > nav.eqn.formSeries.length - 1) {
-      if (nav.nextDescription) {
-        // eslint-disable-next-line no-param-reassign
-        nav.nextDescription.innerHTML = 'RESTART from begining';
-      }
-    } else {
-      updateDescription(nav.eqn, currentForm.type, nav.nextDescription, nextIndex, false, nextPrefix);
-    }
-
-    updateDescription(nav.eqn, currentForm.type, nav.description, index, true); // nav.eqn.updateDescription(currentForm);
-
-    var prevIndex = index - 1;
-
-    if (prevIndex >= 0) {
-      updateDescription(nav.eqn, currentForm.type, nav.prevDescription, prevIndex, false, prevPrefix);
-    } else if (nav.prevDescription) {
-      // eslint-disable-next-line no-param-reassign
-      nav.prevDescription.innerHTML = '';
-    }
-  }
-}
-
-function updateButtonsDescriptionOnly(nav) {
-  var currentForm = nav.eqn.getCurrentForm();
-
-  if (currentForm != null) {
-    var index = nav.eqn.getFormIndex(currentForm);
-    enableTouch(nav.description);
-    updateDescription(nav.eqn, currentForm.type, nav.description, index, true);
-  }
-}
-
-function makeType3Line(prevMethod, refreshMethod, nextMethod) // can be: 'twoLines'
-{
-  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var table = document.createElement('table');
-  var prevGroup = document.createElement('tr');
-  var currentGroup = document.createElement('tr');
-  var nextGroup = document.createElement('tr');
-  var prev = document.createElement('td');
-  var refresh = document.createElement('td');
-  var next = document.createElement('td');
-  var prevDescription = document.createElement('td');
-  var description = document.createElement('td');
-  var nextDescription = document.createElement('td');
-  prevGroup.appendChild(prev);
-  prevGroup.appendChild(prevDescription);
-  nextGroup.appendChild(next);
-  nextGroup.appendChild(nextDescription);
-  currentGroup.appendChild(refresh);
-  currentGroup.appendChild(description);
-  table.appendChild(prevGroup);
-  table.appendChild(currentGroup);
-  table.appendChild(nextGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  prevGroup.classList.add('lesson__eqn_nav__3line__prevRow');
-  currentGroup.classList.add('lesson__eqn_nav__3line__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__3line__nextRow');
-  prev.classList.add('lesson__eqn_nav__3line__prevRow__button');
-  refresh.classList.add('lesson__eqn_nav__3line__currentRow__button');
-  next.classList.add('lesson__eqn_nav__3line__nextRow__button');
-  prevDescription.classList.add('lesson__eqn_nav__3line__prevRow__description');
-  description.classList.add('lesson__eqn_nav__3line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__3line__nextRow__description');
-  var optionsToUse = options;
-
-  if (!Array.isArray(options)) {
-    optionsToUse = [options];
-  } // Use two lines to stop jittering when transitioning from one line to two
-  // lines
-
-
-  if (optionsToUse.indexOf('twoLines') > -1) {
-    prevGroup.classList.add('lesson__eqn_nav__3line__prev_twoLines');
-    currentGroup.classList.add('lesson__eqn_nav__3line__current_twoLines');
-    nextGroup.classList.add('lesson__eqn_nav__3line__next_twoLines');
-  }
-
-  prevGroup.onclick = prevMethod;
-  currentGroup.onclick = refreshMethod;
-  nextGroup.onclick = nextMethod;
-  next.innerHTML = 'Next';
-  prev.innerHTML = 'Prev';
-  refresh.innerHTML = 'Refresh';
-  return {
-    table: table,
-    prevGroup: prevGroup,
-    currentGroup: currentGroup,
-    nextGroup: nextGroup,
-    prev: prev,
-    refresh: refresh,
-    next: next,
-    prevDescription: prevDescription,
-    description: description,
-    nextDescription: nextDescription
-  };
-}
-
-function makeTypeDescriptionOnly(nextMethod) {
-  var table = document.createElement('table');
-  var currentGroup = document.createElement('tr');
-  var description = document.createElement('td');
-  currentGroup.appendChild(description);
-  table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__description_only__currentRow');
-  description.classList.add('lesson__eqn_nav__description_only__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  currentGroup.onclick = nextMethod;
-  return {
-    table: table,
-    currentGroup: currentGroup,
-    description: description
-  };
-}
-
-function makeType1Line(prevMethod, refreshMethod, nextMethod) // can be: 'twoLines'
-{
-  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var table = document.createElement('table');
-  var currentGroup = document.createElement('tr');
-  var prev = document.createElement('td');
-  var next = document.createElement('td');
-  var description = document.createElement('td');
-  currentGroup.appendChild(prev);
-  currentGroup.appendChild(description);
-  currentGroup.appendChild(next);
-  table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__1line__currentRow');
-  prev.classList.add('lesson__eqn_nav__1line__prev__button');
-  next.classList.add('lesson__eqn_nav__1line__next__button');
-  description.classList.add('lesson__eqn_nav__1line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  var optionsToUse = options;
-
-  if (!Array.isArray(options)) {
-    optionsToUse = [options];
-  } // Use two lines to stop jittering when transitioning from one line to two
-  // lines
-
-
-  if (optionsToUse.indexOf('twoLines') > -1) {
-    currentGroup.classList.add('lesson__eqn_nav__1line__current_twoLines');
-  }
-
-  prev.onclick = prevMethod;
-  description.onclick = refreshMethod;
-  next.onclick = nextMethod;
-
-  if (optionsToUse.indexOf('arrows') > -1) {
-    var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
-    next.appendChild(nextArrow);
-    var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
-    prev.appendChild(prevArrow);
-  } else {
-    next.innerHTML = 'Next';
-    prev.innerHTML = 'Prev';
-  }
-
-  return {
-    table: table,
-    currentGroup: currentGroup,
-    prev: prev,
-    next: next,
-    description: description
-  };
-}
-
-function makeType2Line(prevMethod, refreshMethod, nextMethod) // can be: 'twoLines'
-{
-  var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : [];
-  var table = document.createElement('table');
-  var row = document.createElement('tr');
-  var descriptionRows = document.createElement('tr');
-  var currentGroup = document.createElement('tr');
-  var prev = document.createElement('td');
-  var next = document.createElement('td');
-  var nextGroup = document.createElement('tr'); // const descriptionRows = document.createElement('td');
-  // const descriptionRow = document.createElement('tr');
-  // const nextDescriptionRow = document.createElement('tr');
-
-  var description = document.createElement('td');
-  var nextDescription = document.createElement('td');
-  currentGroup.appendChild(description);
-  nextGroup.appendChild(nextDescription);
-  descriptionRows.appendChild(currentGroup);
-  descriptionRows.appendChild(nextGroup);
-  row.appendChild(prev);
-  row.appendChild(descriptionRows);
-  row.appendChild(next);
-  table.appendChild(row);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__2lines__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__2lines__nextRow');
-  prev.classList.add('lesson__eqn_nav__2lines__prev__button');
-  next.classList.add('lesson__eqn_nav__2lines__next__button');
-  description.classList.add('lesson__eqn_nav__2lines__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__2lines__nextRow__description');
-  var optionsToUse = options;
-
-  if (!Array.isArray(options)) {
-    optionsToUse = [options];
-  } // Use two lines to stop jittering when transitioning from one line to two
-  // lines
-
-
-  if (optionsToUse.indexOf('twoLines') > -1) {
-    currentGroup.classList.add('lesson__eqn_nav__2lines__current_twoLines');
-  }
-
-  prev.onclick = prevMethod;
-  description.onclick = refreshMethod;
-  next.onclick = nextMethod;
-  nextDescription.onclick = nextMethod;
-
-  if (optionsToUse.indexOf('arrows') > -1) {
-    var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
-    next.appendChild(nextArrow);
-    var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
-    prev.appendChild(prevArrow);
-  } else {
-    next.innerHTML = 'Next';
-    prev.innerHTML = 'Prev';
-  }
-
-  return {
-    table: table,
-    currentGroup: currentGroup,
-    nextGroup: nextGroup,
-    prev: prev,
-    next: next,
-    nextDescription: nextDescription,
-    description: description
-  };
-}
-
-var EquationNavigator =
-/*#__PURE__*/
-function (_DiagramElementCollec) {
-  _inherits(EquationNavigator, _DiagramElementCollec);
-
-  function EquationNavigator(shapes, animateNextFrame, equation, offset) {
-    var _this;
-
-    var navType = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'threeLine';
-    var options = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : '';
-    var xAlign = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'left';
-    var vAlign = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 'middle';
-    var id = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["generateUniqueId"])('id_lesson__equation_navigator_');
-
-    _classCallCheck(this, EquationNavigator);
-
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(EquationNavigator).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('Eqn Nav').scale(1, 1).translate(0, 0), shapes.limits));
-    _this.shapes = shapes;
-
-    _this.setEquation(equation);
-
-    _this.prev = null;
-    _this.next = null;
-    _this.refresh = null;
-    _this.description = null;
-    _this.nextDescription = null;
-    _this.prevDescription = null;
-    _this.table = null;
-    _this.prevGroup = null;
-    _this.currentGroup = null;
-    _this.nextGroup = null;
-    _this.animateNextFrame = animateNextFrame;
-    _this.navType = navType;
-    var navigatorHTMLElement = null;
-
-    if (_this.navType === 'threeLine') {
-      navigatorHTMLElement = makeType3Line(_this.clickPrev.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickRefresh.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))), options);
-    }
-
-    if (_this.navType === 'descriptionOnly') {
-      navigatorHTMLElement = makeTypeDescriptionOnly(_this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))));
-    }
-
-    if (_this.navType === 'oneLine') {
-      navigatorHTMLElement = makeType1Line(_this.clickPrev.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickRefresh.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))), options);
-    }
-
-    if (_this.navType === 'twoLine') {
-      navigatorHTMLElement = makeType2Line(_this.clickPrev.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickRefresh.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))), options);
-    }
-
-    var eqnCollectionPosition = _this.eqn.collection.getPosition();
-
-    if (navigatorHTMLElement != null) {
-      Object.assign(_assertThisInitialized(_assertThisInitialized(_this)), navigatorHTMLElement);
-
-      var table = _this.shapes.htmlElement(navigatorHTMLElement.table, "".concat(id, "_table"), '', eqnCollectionPosition.add(offset), vAlign, xAlign);
-
-      _this.add('table', table);
-    }
-
-    _this.eqn.collection.onClick = _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this)));
-    _this.hasTouchableElements = true;
-    _this.eqn.collection.isTouchable = true;
-    _this.eqn.collection.touchInBoundingRect = true;
-    return _this;
-  } // const navigator = shapes.collection(;
-
-
-  _createClass(EquationNavigator, [{
-    key: "setEquation",
-    value: function setEquation(eqn) {
-      this.eqn = eqn; // this._eqn = [];
-
-      this.add('eqn', eqn.collection);
-    }
-  }, {
-    key: "clickNext",
-    value: function clickNext() {
-      this.eqn.nextForm(1.5);
-      this.updateButtons();
-      this.animateNextFrame();
-    }
-  }, {
-    key: "clickPrev",
-    value: function clickPrev() {
-      this.eqn.prevForm(1.5);
-      this.updateButtons();
-      this.animateNextFrame();
-    }
-  }, {
-    key: "clickRefresh",
-    value: function clickRefresh() {
-      var currentForm = this.eqn.getCurrentForm();
-
-      if (currentForm != null) {
-        var index = this.eqn.getFormIndex(currentForm);
-
-        if (index > 0) {
-          this.eqn.replayCurrentForm(1.5);
-          this.animateNextFrame();
-        }
-      }
-
-      this.updateButtons();
-    }
-  }, {
-    key: "updateButtons",
-    value: function updateButtons() {
-      if (this.navType === 'equationOnly') {
-        return;
-      }
-
-      if (this.navType === 'descriptionOnly') {
-        updateButtonsDescriptionOnly(this);
-      } else if (this.navType === 'twoLine') {
-        _updateButtons(this, true);
-      } else {
-        _updateButtons(this);
-      }
-    }
-  }, {
-    key: "showForm",
-    value: function showForm(formOrName) {
-      var formType = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.show();
-      this.eqn.showForm(formOrName, formType);
-
-      if (this._table) {
-        this._table.show();
-
-        this.updateButtons();
-      }
-    }
-  }]);
-
-  return EquationNavigator;
-}(_Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"]);
 
 
 
@@ -13711,7 +13692,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
 /* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
 /* harmony import */ var _EquationLabel__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./EquationLabel */ "./src/js/diagram/DiagramObjects/EquationLabel.js");
-/* harmony import */ var _DiagramElements_Equation_GLEquation__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramElements/Equation/GLEquation */ "./src/js/diagram/DiagramElements/Equation/GLEquation.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _DiagramElements_Equation_Equation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramElements/Equation/Equation */ "./src/js/diagram/DiagramElements/Equation/Equation.js");
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
@@ -13731,6 +13713,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 // import Diagram from '../Diagram';
+
 
 
 
@@ -13792,6 +13775,7 @@ function (_EquationLabel) {
     var orientation = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'horizontal';
     var linePosition = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.5;
     var scale = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 0.7;
+    var precision = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 1;
 
     _classCallCheck(this, LineLabel);
 
@@ -13805,6 +13789,7 @@ function (_EquationLabel) {
     _this.subLocation = subLocation;
     _this.orientation = orientation;
     _this.linePosition = linePosition;
+    _this.precision = precision;
     return _this;
   }
 
@@ -13815,11 +13800,31 @@ function makeStraightLine(shapes, length, width, position, color, dashStyle, lar
   var straightLine = shapes.horizontalLine(position, length, width, 0, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0));
 
   if (dashStyle) {
-    straightLine = shapes.dashedLine(position, dashStyle.maxLength, width, 0, dashStyle.style, color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0));
+    straightLine = shapes.dashedLine({
+      position: position,
+      length: dashStyle.maxLength,
+      width: width,
+      rotation: 0,
+      dashStyle: dashStyle.style,
+      color: color,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(0, 0)
+    }); //   position,
+    //   dashStyle.maxLength, width,
+    //   0, dashStyle.style, color, new Transform().scale(1, 1).translate(0, 0),
+    // );
+    // straightLine = shapes.dashedLine(
+    //   position,
+    //   dashStyle.maxLength, width,
+    //   0, dashStyle.style, color, new Transform().scale(1, 1).translate(0, 0),
+    // );
   }
 
   if (largerTouchBorder) {
     var multiplier = isTouchDevice ? 16 : 8;
+
+    if (typeof largerTouchBorder === 'number') {
+      multiplier = largerTouchBorder;
+    }
 
     var increaseBorderSize = function increaseBorderSize(element) {
       for (var i = 0; i < element.drawingObject.border[0].length; i += 1) {
@@ -13936,6 +13941,8 @@ function (_DiagramElementCollec) {
       var defaultMaxLength = optionsToUse.length;
 
       if (optionsToUse.p1 != null && optionsToUse.p2 != null) {
+        optionsToUse.p1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p1);
+        optionsToUse.p2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.p2);
         defaultMaxLength = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["distance"])(optionsToUse.p1, optionsToUse.p2);
       }
 
@@ -13960,7 +13967,7 @@ function (_DiagramElementCollec) {
 
     _this2.offset = optionsToUse.offset;
     _this2.width = optionsToUse.width;
-    _this2.position = optionsToUse.position;
+    _this2.position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position);
     _this2.length = optionsToUse.length;
     _this2.angle = optionsToUse.angle;
 
@@ -14063,7 +14070,8 @@ function (_DiagramElementCollec) {
       orientation: 'horizontal',
       linePosition: 0.5,
       scale: 0.7,
-      color: optionsToUse.color
+      color: optionsToUse.color,
+      precision: 1
     };
 
     if (optionsToUse.label) {
@@ -14074,7 +14082,19 @@ function (_DiagramElementCollec) {
         _this2.showRealLength = true;
       }
 
-      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color);
+      _this2.addLabel(labelOptions.text, labelOptions.offset, labelOptions.location, labelOptions.subLocation, labelOptions.orientation, labelOptions.linePosition, labelOptions.scale, labelOptions.color, labelOptions.precision);
+    }
+
+    var defaultMoveOptions = {
+      type: 'rotation',
+      middleLengthPercent: 0.22,
+      translationBounds: _this2.diagramLimits
+    };
+
+    if (optionsToUse.move) {
+      var moveOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultMoveOptions, optionsToUse.move);
+
+      _this2.setMovable(true, moveOptions.type, moveOptions.middleLengthPercent, moveOptions.translationBounds);
     }
 
     if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
@@ -14087,6 +14107,15 @@ function (_DiagramElementCollec) {
   _createClass(DiagramObjectLine, [{
     key: "pulseWidth",
     value: function pulseWidth() {
+      var optionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var defaultOptions = {
+        line: 3,
+        label: 1.5,
+        arrow: 2,
+        done: null
+      };
+      var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])(defaultOptions, optionsIn);
+      var done = options.done;
       var line = this._line;
 
       if (line != null) {
@@ -14105,24 +14134,32 @@ function (_DiagramElementCollec) {
           return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, s);
         };
 
-        line.pulseScaleNow(1, 3);
+        line.pulseScaleNow(1, options.line, 0, done);
+        done = null;
       }
 
       var arrow1 = this._arrow1;
       var arrow2 = this._arrow2;
 
       if (arrow1 != null) {
-        arrow1.pulseScaleNow(1, 2);
+        arrow1.pulseScaleNow(1, options.arrow, 0, done);
+        done = null;
       }
 
       if (arrow2 != null) {
-        arrow2.pulseScaleNow(1, 2);
+        arrow2.pulseScaleNow(1, options.arrow, 0, done);
+        done = null;
       }
 
       var label = this._label;
 
       if (label != null) {
-        label.pulseScaleNow(1, 1.5);
+        label.pulseScaleNow(1, options.label, 0, done);
+        done = null;
+      }
+
+      if (done != null) {
+        done();
       }
 
       this.animateNextFrame();
@@ -14138,7 +14175,20 @@ function (_DiagramElementCollec) {
         r = Math.PI / 2 * 3;
       }
 
-      var a = this.shapes.arrow(width, 0, height, 0, this.color, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), r); // $FlowFixMe
+      var a = this.shapes.arrow({
+        width: width,
+        legWidth: 0,
+        height: height,
+        legHeight: 0,
+        color: this.color,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(this.vertexSpaceStart.x, 0),
+        tip: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        rotation: r
+      }); // const a = this.shapes.arrowLegacy(
+      //   width, 0, height, 0,
+      //   this.color, new Transform().translate(this.vertexSpaceStart.x, 0), new Point(0, 0), r,
+      // );
+      // $FlowFixMe
 
       this["arrow".concat(index)] = {
         height: height
@@ -14212,6 +14262,12 @@ function (_DiagramElementCollec) {
         }
       } else {
         this.isMovable = false;
+        this.isTouchable = false;
+
+        if (this._line != null) {
+          this._line.isTouchable = false;
+          this._line.isMovable = false;
+        }
       }
     }
   }, {
@@ -14244,7 +14300,8 @@ function (_DiagramElementCollec) {
     }
   }, {
     key: "updateMoveTransform",
-    value: function updateMoveTransform(t) {
+    value: function updateMoveTransform() {
+      var t = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.transform._dup();
       var r = t.r();
       var bounds = this.multiMove.bounds;
 
@@ -14271,13 +14328,47 @@ function (_DiagramElementCollec) {
       var orientation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'horizontal';
       var linePosition = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.5;
       var scale = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.7;
-      var color = arguments.length > 7 ? arguments[7] : undefined;
-      this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale);
+      var color = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : this.color;
+      var precision = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : 1;
+      this.label = new LineLabel(this.equation, labelText, color, offset, location, subLocation, orientation, linePosition, scale, precision);
 
       if (this.label != null) {
-        this.add('label', this.label.eqn.collection);
+        this.add('label', this.label.eqn);
       }
 
+      this.updateLabel();
+    }
+  }, {
+    key: "getLength",
+    value: function getLength() {
+      return this.length;
+    }
+  }, {
+    key: "getAngle",
+    value: function getAngle() {
+      var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
+
+      if (units === 'deg') {
+        return this.angle * 180 / Math.PI;
+      }
+
+      return this.angle;
+    }
+  }, {
+    key: "setLabel",
+    value: function setLabel(text) {
+      this.showRealLength = false;
+
+      if (this.label != null) {
+        this.label.setText(text);
+      }
+
+      this.updateLabel();
+    }
+  }, {
+    key: "setLabelToRealLength",
+    value: function setLabelToRealLength() {
+      this.showRealLength = true;
       this.updateLabel();
     }
   }, {
@@ -14294,9 +14385,9 @@ function (_DiagramElementCollec) {
       var labelAngle = 0;
 
       if (this.showRealLength && this._label) {
-        this._label._base.drawingObject.setText(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.currentLength, 2).toString());
-
-        label.eqn.reArrangeCurrentForm();
+        // this._label._base.drawingObject.setText(roundNum(this.currentLength, 2)
+        //   .toFixed(label.precision));
+        label.setText(Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.currentLength, 2).toFixed(label.precision)); // label.eqn.reArrangeCurrentForm();
       }
 
       var labelPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](this.vertexSpaceStart.x * this.currentLength + label.linePosition * this.currentLength, 0);
@@ -14468,7 +14559,7 @@ function (_DiagramElementCollec) {
       var offset = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : this.offset;
       this.offset = offset;
 
-      var _this$calculateFromP = this.calculateFromP1P2(p, q),
+      var _this$calculateFromP = this.calculateFromP1P2(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p), Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(q)),
           length = _this$calculateFromP.length,
           angle = _this$calculateFromP.angle,
           position = _this$calculateFromP.position;
@@ -14529,7 +14620,13 @@ function (_DiagramElementCollec) {
         }
       };
 
-      this.animateCustomTo(func, time, 0, done);
+      this.animations.new('Line Length').custom({
+        callback: func,
+        duration: time
+      }).whenFinished(done).start(); // this.animations.start();
+
+      this.animateNextFrame(); // console.log(this)
+      // this.animateCustomTo(func, time, 0, done);
     }
   }, {
     key: "grow",
@@ -14601,6 +14698,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -14682,13 +14787,15 @@ function (_DiagramElementCollec) {
     _classCallCheck(this, DiagramObjectPolyLine);
 
     var defaultOptions = {
-      position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+      position: null,
       color: [0, 1, 0, 1],
       points: [new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 1)],
       close: false,
       showLine: true,
       borderToPoint: 'never',
-      width: 0.01
+      width: 0.01,
+      reverse: false,
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0)
     };
     var defaultSideOptions = {
       showLine: false,
@@ -14718,7 +14825,9 @@ function (_DiagramElementCollec) {
       radius: 0.1,
       color: options.color == null ? [0, 1, 0, 1] : options.color,
       fill: true,
-      isMovable: false
+      isMovable: false,
+      boundary: 'diagram',
+      touchRadiusInBoundary: false
     };
 
     if (options.side != null) {
@@ -14757,7 +14866,7 @@ function (_DiagramElementCollec) {
       });
     }
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0), shapes.limits));
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(DiagramObjectPolyLine).call(this, optionsToUse.transform, shapes.limits));
 
     _this.setColor(optionsToUse.color);
 
@@ -14767,23 +14876,29 @@ function (_DiagramElementCollec) {
     _this.largerTouchBorder = optionsToUse.largerTouchBorder;
     _this.isTouchDevice = isTouchDevice;
     _this.animateNextFrame = animateNextFrame;
-    _this.position = optionsToUse.position;
+    _this.updatePointsCallback = null;
 
-    _this.transform.updateTranslation(_this.position);
+    if (optionsToUse.position != null) {
+      _this.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
+    }
 
+    _this.position = _this.getPosition();
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
-    _this.points = optionsToUse.points; // Add Pads
+    _this.reverse = optionsToUse.reverse;
+    _this.points = optionsToUse.points.map(function (p) {
+      return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+    }); // Add Pads
 
     if (optionsToUse.pad) {
       var pad = optionsToUse.pad;
-      var pCount = optionsToUse.points.length;
+      var pCount = _this.points.length;
       var padArray = makeArray(pad, pCount);
 
       var _loop = function _loop(i) {
         var name = "pad".concat(i);
         var padOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(optionsToUse.points[i])
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().translate(_this.points[i])
         }, padArray[i]);
 
         var padShape = _this.shapes.polygon(padOptions);
@@ -14791,8 +14906,33 @@ function (_DiagramElementCollec) {
         if (padArray[i].isMovable) {
           padShape.isMovable = true;
           padShape.isTouchable = true;
-          padShape.move.limitToDiagram = true;
-          padShape.setMoveBoundaryToDiagram();
+
+          if (padArray[i].touchRadius != null) {
+            var multiplier = padArray[i].touchRadius / padArray[i].radius;
+            padShape.increaseBorderSize(multiplier);
+          }
+
+          var boundary = padArray[i].boundary; // console.log(boundary, padArray[i])
+
+          if (boundary === 'diagram') {
+            boundary = shapes.limits._dup();
+          } else if (Array.isArray(boundary)) {
+            var _boundary = boundary,
+                _boundary2 = _slicedToArray(_boundary, 4),
+                left = _boundary2[0],
+                bottom = _boundary2[1],
+                width = _boundary2[2],
+                height = _boundary2[3];
+
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
+          }
+
+          if (padArray[i].touchRadiusInBoundary === false && padArray[i].touchRadius != null) {
+            var delta = padArray[i].touchRadius - padArray[i].radius;
+            boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](boundary.left - delta, boundary.bottom - delta, boundary.width + 2 * delta, boundary.height + 2 * delta);
+          }
+
+          padShape.setMoveBoundaryToDiagram(boundary);
 
           padShape.setTransformCallback = function (transform) {
             var index = parseInt(padShape.name.slice(3), 10);
@@ -14804,11 +14944,6 @@ function (_DiagramElementCollec) {
               _this.updatePoints(_this.points);
             }
           };
-
-          if (padArray[i].touchRadius != null) {
-            var multiplier = padArray[i].touchRadius / padArray[i].radius;
-            padShape.increaseBorderSize(multiplier);
-          }
         }
 
         _this.add(name, padShape);
@@ -14817,12 +14952,60 @@ function (_DiagramElementCollec) {
       for (var i = 0; i < pCount; i += 1) {
         _loop(i);
       }
+    } // Add Angles
+
+
+    if (optionsToUse.angle) {
+      var angle = optionsToUse.angle;
+      var _pCount = _this.points.length;
+
+      if (optionsToUse.close === false) {
+        _pCount -= 2;
+      }
+
+      var angleArray = makeArray(angle, _pCount);
+      var firstIndex = 0;
+
+      if (optionsToUse.close === false) {
+        firstIndex = 1;
+      }
+
+      for (var i = firstIndex; i < _pCount + firstIndex; i += 1) {
+        var j = i + 1;
+        var k = i - 1;
+
+        if (i === _pCount - 1 && optionsToUse.close) {
+          j = 0;
+        }
+
+        if (i === 0 && optionsToUse.close) {
+          k = _pCount - 1;
+        }
+
+        var name = "angle".concat(i);
+
+        if (_this.reverse) {
+          var newJ = k;
+          k = j;
+          j = newJ;
+        }
+
+        var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          p1: _this.points[k],
+          p2: _this.points[i],
+          p3: _this.points[j]
+        }, angleArray[i - firstIndex]);
+
+        var angleAnnotation = _this.objects.angle(angleOptions);
+
+        _this.add(name, angleAnnotation);
+      }
     } // Add Line
 
 
     if (optionsToUse.showLine) {
       var line = _this.shapes.polyLine({
-        points: optionsToUse.points,
+        points: _this.points,
         color: optionsToUse.color,
         close: optionsToUse.close,
         borderToPoint: optionsToUse.borderToPoint,
@@ -14836,73 +15019,38 @@ function (_DiagramElementCollec) {
     if (optionsToUse.side) {
       var side = optionsToUse.side;
 
-      var _pCount = optionsToUse.points.length - 1;
+      var _pCount2 = _this.points.length - 1;
 
       if (optionsToUse.close) {
-        _pCount += 1;
+        _pCount2 += 1;
       }
 
-      var sideArray = makeArray(side, _pCount);
+      var sideArray = makeArray(side, _pCount2);
 
-      for (var i = 0; i < _pCount; i += 1) {
-        var j = i + 1;
-
-        if (i === _pCount - 1 && optionsToUse.close) {
-          j = 0;
-        }
-
-        var name = "side".concat(i).concat(j);
-        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[i],
-          p2: optionsToUse.points[j]
-        }, sideArray[i]);
-
-        var sideLine = _this.objects.line(sideOptions);
-
-        _this.add(name, sideLine);
-      }
-    } // Add Angles
-
-
-    if (optionsToUse.angle) {
-      var angle = optionsToUse.angle;
-      var _pCount2 = optionsToUse.points.length;
-
-      if (optionsToUse.close === false) {
-        _pCount2 -= 2;
-      }
-
-      var angleArray = makeArray(angle, _pCount2);
-      var firstIndex = 0;
-
-      if (optionsToUse.close === false) {
-        firstIndex = 1;
-      }
-
-      for (var _i2 = firstIndex; _i2 < _pCount2 + firstIndex; _i2 += 1) {
+      for (var _i2 = 0; _i2 < _pCount2; _i2 += 1) {
         var _j = _i2 + 1;
-
-        var k = _i2 - 1;
 
         if (_i2 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        if (_i2 === 0 && optionsToUse.close) {
-          k = _pCount2 - 1;
+        var _name = "side".concat(_i2).concat(_j);
+
+        var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+          p1: _this.points[_i2],
+          p2: _this.points[_j]
+        }, sideArray[_i2]);
+
+        if (_this.reverse) {
+          sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
+            p1: _this.points[_j],
+            p2: _this.points[_i2]
+          }, sideArray[_i2]);
         }
 
-        var _name = "angle".concat(_i2);
+        var sideLine = _this.objects.line(sideOptions);
 
-        var angleOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: optionsToUse.points[k],
-          p2: optionsToUse.points[_i2],
-          p3: optionsToUse.points[_j]
-        }, angleArray[_i2]);
-
-        var angleAnnotation = _this.objects.angle(angleOptions);
-
-        _this.add(_name, angleAnnotation);
+        _this.add(_name, sideLine);
       }
     }
 
@@ -14910,8 +15058,76 @@ function (_DiagramElementCollec) {
   }
 
   _createClass(DiagramObjectPolyLine, [{
+    key: "updateSideLabels",
+    value: function updateSideLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (this.options.side != null) {
+        var pCount = this.points.length - 1;
+
+        if (this.close) {
+          pCount += 1;
+        }
+
+        for (var i = 0; i < pCount; i += 1) {
+          var j = i + 1;
+
+          if (i === pCount - 1 && this.close) {
+            j = 0;
+          }
+
+          var name = "side".concat(i).concat(j);
+
+          if (this.elements[name] != null) {
+            var wasHidden = !this.elements[name].isShown;
+            this.elements[name].updateLabel(rotationOffset);
+
+            if (wasHidden) {
+              this.elements[name].hide();
+            }
+          }
+        }
+      }
+    }
+  }, {
+    key: "updateAngleLabels",
+    value: function updateAngleLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (this.options.angle != null) {
+        var pCount = this.points.length;
+
+        if (this.close === false) {
+          pCount -= 2;
+        }
+
+        var firstIndex = 0;
+
+        if (this.close === false) {
+          firstIndex = 1;
+        }
+
+        for (var i = firstIndex; i < pCount + firstIndex; i += 1) {
+          var name = "angle".concat(i);
+
+          if (this.elements[name] != null) {
+            var wasHidden = !this.elements[name].isShown;
+            this.elements[name].updateLabel(rotationOffset);
+
+            if (wasHidden) {
+              this.elements[name].hide();
+            }
+          }
+        }
+      }
+    }
+  }, {
     key: "updatePoints",
-    value: function updatePoints(newPoints) {
+    value: function updatePoints(newPointsIn) {
+      var newPoints = newPointsIn.map(function (p) {
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      });
+
       if (this._line != null) {
         this._line.drawingObject.change(newPoints);
       } // Add Pads
@@ -14947,7 +15163,17 @@ function (_DiagramElementCollec) {
           var _name2 = "side".concat(_i3).concat(j);
 
           if (this.elements[_name2] != null) {
-            this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+            var wasHidden = !this.elements[_name2].isShown;
+
+            if (this.reverse) {
+              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i3]);
+            } else {
+              this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+            }
+
+            if (wasHidden) {
+              this.elements[_name2].hide();
+            }
           }
         }
       }
@@ -14981,16 +15207,173 @@ function (_DiagramElementCollec) {
           var _name3 = "angle".concat(_i4);
 
           if (this.elements[_name3] != null) {
+            var _wasHidden = !this.elements[_name3].isShown;
+
+            if (this.reverse) {
+              var newJ = k;
+              k = _j2;
+              _j2 = newJ;
+            }
+
             this.elements[_name3].setAngle({
               p1: newPoints[k],
               p2: newPoints[_i4],
               p3: newPoints[_j2]
             });
+
+            if (_wasHidden) {
+              this.elements[_name3].hide();
+            }
           }
         }
       }
 
       this.points = newPoints;
+
+      if (this.updatePointsCallback != null) {
+        this.updatePointsCallback();
+      }
+    }
+  }, {
+    key: "updateRotation",
+    value: function updateRotation() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var i = 0; // $FlowFixMe
+
+      var angle = this["_angle".concat(i)];
+
+      while (angle != null) {
+        angle.update(this.getRotation() + rotationOffset);
+        i += 1; // $FlowFixMe
+
+        angle = this["_angle".concat(i)];
+      }
+
+      i = 0; // $FlowFixMe
+
+      var side = this["_side".concat(i).concat(i + 1)];
+
+      while (side != null) {
+        side.updateLabel(this.getRotation() + rotationOffset);
+        i += 1; // $FlowFixMe
+
+        side = this["_side".concat(i).concat(i + 1)];
+      } // $FlowFixMe
+
+
+      side = this["_side".concat(i, 0)];
+
+      if (side != null) {
+        side.updateLabel(this.getRotation() + rotationOffset);
+      }
+    }
+  }, {
+    key: "reversePoints",
+    value: function reversePoints() {
+      var newPoints = [];
+
+      for (var i = 0; i < this.points.length; i += 1) {
+        newPoints.push(this.points[this.points.length - 1 - i]);
+      }
+
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setPositionWithoutMoving",
+    value: function setPositionWithoutMoving(newPositionPointOrX) {
+      var newPositionY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var newPosition = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (typeof newPositionPointOrX === 'number') {
+        newPosition.x = newPositionPointOrX;
+        newPosition.y = newPositionY;
+      } else {
+        newPosition = newPositionPointOrX;
+      }
+
+      var currentPosition = this.getPosition();
+      var delta = currentPosition.sub(newPosition);
+      this.setPosition(newPosition);
+      var newPoints = this.points.map(function (p) {
+        return p.add(delta);
+      });
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setRotationWithoutMoving",
+    value: function setRotationWithoutMoving(newRotation) {
+      var currentRotation = this.getRotation();
+      var delta = currentRotation - newRotation;
+      var deltaMatrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().rotate(delta).m();
+      this.setRotation(newRotation);
+      var newPoints = this.points.map(function (p) {
+        return p.transformBy(deltaMatrix);
+      });
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setScaleWithoutMoving",
+    value: function setScaleWithoutMoving(newScalePointOrX) {
+      var newScaleY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var newScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (typeof newScalePointOrX === 'number') {
+        newScale.x = newScalePointOrX;
+        newScale.y = newScaleY;
+      } else {
+        newScale = newScalePointOrX;
+      }
+
+      var currentScale = this.getScale();
+      var delta = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](currentScale.x / newScale.x, currentScale.y / newScale.y);
+      var deltaMatrix = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(delta).m();
+      this.setScale(newScale);
+      var newPoints = this.points.map(function (p) {
+        return p.transformBy(deltaMatrix);
+      });
+      this.updatePoints(newPoints);
+    }
+  }, {
+    key: "setShow",
+    value: function setShow(name, show) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.name.startsWith(name)) {
+          if (show) {
+            element.showAll();
+          } else {
+            element.hide();
+          }
+        }
+      }
+    }
+  }, {
+    key: "hideAngles",
+    value: function hideAngles() {
+      this.setShow('angle', false);
+    }
+  }, {
+    key: "hideSides",
+    value: function hideSides() {
+      this.setShow('side', false);
+    }
+  }, {
+    key: "showAngles",
+    value: function showAngles() {
+      this.setShow('angle', true);
+    }
+  }, {
+    key: "showSides",
+    value: function showSides() {
+      this.setShow('side', true);
+    }
+  }, {
+    key: "updateLabels",
+    value: function updateLabels() {
+      var rotationOffset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.getRotation();
+      this.updateAngleLabels(rotationOffset);
+      this.updateSideLabels(rotationOffset);
     }
   }]);
 
@@ -15012,25 +15395,27 @@ function (_DiagramElementCollec) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramPrimatives; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
-/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
-/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
-/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
-/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
-/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
-/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
-/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
-/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
-/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
-/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
-/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
-/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
-/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
-/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
+/* harmony import */ var _tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/htmlGenerator */ "./src/js/tools/htmlGenerator.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../DrawingObjects/VertexObject/VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../DiagramElements/PolyLine */ "./src/js/diagram/DiagramElements/PolyLine.js");
+/* harmony import */ var _DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../DiagramElements/Fan */ "./src/js/diagram/DiagramElements/Fan.js");
+/* harmony import */ var _DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../DiagramElements/Polygon */ "./src/js/diagram/DiagramElements/Polygon.js");
+/* harmony import */ var _DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../DiagramElements/RadialLines */ "./src/js/diagram/DiagramElements/RadialLines.js");
+/* harmony import */ var _DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../DiagramElements/HorizontalLine */ "./src/js/diagram/DiagramElements/HorizontalLine.js");
+/* harmony import */ var _DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! ../DiagramElements/DashedLine */ "./src/js/diagram/DiagramElements/DashedLine.js");
+/* harmony import */ var _DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ../DiagramElements/RectangleFilled */ "./src/js/diagram/DiagramElements/RectangleFilled.js");
+/* harmony import */ var _DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../DiagramElements/Lines */ "./src/js/diagram/DiagramElements/Lines.js");
+/* harmony import */ var _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ../DiagramElements/Arrow */ "./src/js/diagram/DiagramElements/Arrow.js");
+/* harmony import */ var _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ../DiagramElements/Plot/AxisProperties */ "./src/js/diagram/DiagramElements/Plot/AxisProperties.js");
+/* harmony import */ var _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../DiagramElements/Plot/Axis */ "./src/js/diagram/DiagramElements/Plot/Axis.js");
+/* harmony import */ var _DiagramElements_Text__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ../DiagramElements/Text */ "./src/js/diagram/DiagramElements/Text.js");
+/* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ../DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
+/* harmony import */ var _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ../DrawingObjects/HTMLObject/HTMLObject */ "./src/js/diagram/DrawingObjects/HTMLObject/HTMLObject.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
@@ -15051,6 +15436,9 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
 
+ // import type { TypeRectangleFilledReference } from '../DiagramElements/RectangleFilled';
+
+
 
 
 
@@ -15061,13 +15449,16 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var DiagramPrimatives =
 /*#__PURE__*/
 function () {
-  function DiagramPrimatives(webgl, draw2D, htmlCanvas, limits) {
+  function DiagramPrimatives(webgl, draw2D, // draw2DFigures: Object,
+  htmlCanvas, limits, spaceTransforms, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
     this.webgl = webgl;
     this.draw2D = draw2D;
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
+    this.animateNextFrame = animateNextFrame;
+    this.spaceTransforms = spaceTransforms; // this.draw2DFigures = draw2DFigures;
   }
 
   _createClass(DiagramPrimatives, [{
@@ -15075,8 +15466,53 @@ function () {
     value: function polyLineLegacy(points, close, lineWidth, color) {
       var borderToPoint = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'never';
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLine"])(this.webgl, points, close, lineWidth, color, borderToPoint, transform, this.limits);
+      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, close, lineWidth, color, borderToPoint, transform, this.limits);
     }
+  }, {
+    key: "polyLineCornersLegacy",
+    value: function polyLineCornersLegacy(points, close, cornerLength, lineWidth, color) {
+      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, close, cornerLength, lineWidth, color, transform, this.limits);
+    }
+  }, {
+    key: "polyLineCorners",
+    value: function polyLineCorners() {
+      var defaultOptions = {
+        color: [1, 0, 0, 1],
+        close: true,
+        width: 0.01,
+        cornerLength: 0.1,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLineCorners').standard()
+      };
+
+      for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+        optionsIn[_key] = arguments[_key];
+      }
+
+      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
+      }
+
+      var points = [];
+
+      if (options.points) {
+        points = options.points.map(function (p) {
+          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+        });
+      }
+
+      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLineCorners"])(this.webgl, points, options.close, options.cornerLength, options.width, options.color, options.transform, this.limits);
+
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
+    } // borderToPoint options: 'alwaysOn' | 'onSharpAnglesOnly' | 'never'
+
   }, {
     key: "polyLine",
     value: function polyLine() {
@@ -15085,25 +15521,35 @@ function () {
         close: true,
         width: 0.01,
         borderToPoint: 'never',
-        position: null,
-        transform: null
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine').standard()
       };
 
-      for (var _len = arguments.length, options = new Array(_len), _key = 0; _key < _len; _key++) {
-        options[_key] = arguments[_key];
+      for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+        optionsIn[_key2] = arguments[_key2];
       }
 
-      var optionsToUse = Object.assign.apply(Object, [{}, defaultOptions].concat(options));
-      var o = optionsToUse;
-      var transform = o.transform;
+      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
-      if (transform == null && o.position != null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine').translate(o.position);
-      } else if (transform == null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polyLine');
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLine"])(this.webgl, o.points, o.close, o.width, o.color, o.borderToPoint, transform, this.limits);
+      var points = [];
+
+      if (options.points) {
+        points = options.points.map(function (p) {
+          return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+        });
+      }
+
+      var element = Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_8__["PolyLine"])(this.webgl, points, options.close, options.width, options.color, options.borderToPoint, options.transform, this.limits);
+
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
     }
   }, {
     key: "fan",
@@ -15111,41 +15557,42 @@ function () {
       var defaultOptions = {
         points: [],
         color: [1, 0, 0, 1],
-        transform: null,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('fan').standard(),
         position: null
       };
 
-      for (var _len2 = arguments.length, options = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
-        options[_key2] = arguments[_key2];
+      for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+        optionsIn[_key3] = arguments[_key3];
       }
 
-      var optionsToUse = Object.assign.apply(Object, [{}, defaultOptions].concat(options));
-      var o = optionsToUse;
-      var transform = o.transform;
+      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
 
-      if (transform == null && o.position != null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('fan').translate(o.position);
-      } else if (transform == null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('fan');
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
       }
 
-      return Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_8__["default"])(this.webgl, o.points, o.color, transform, this.limits);
-    } // fan(
-    //   points: Array<Point>,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return Fan(
-    //     this.webgl, points,
-    //     color, transform, this.limits,
-    //   );
-    // }
+      var element = Object(_DiagramElements_Fan__WEBPACK_IMPORTED_MODULE_9__["default"])(this.webgl, options.points.map(function (p) {
+        return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
+      }), options.color, options.transform, this.limits);
 
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
+    }
   }, {
-    key: "txt",
-    value: function txt(text) {
+    key: "textGL",
+    value: function textGL(options) {
+      return Object(_DiagramElements_Text__WEBPACK_IMPORTED_MODULE_19__["default"])(this.webgl, this.limits, options);
+    }
+  }, {
+    key: "text",
+    value: function text(textOrOptions) {
       var defaultOptions = {
-        location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        text: '',
+        // position: new Point(0, 0),
         font: null,
         family: 'Times New Roman',
         style: 'italic',
@@ -15153,39 +15600,124 @@ function () {
         weight: '200',
         hAlign: 'center',
         vAlign: 'middle',
-        color: [1, 0, 0, 1]
-      };
+        offset: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        // vertex space offset
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('text').standard() // draw2D: this.draw2D,
 
-      for (var _len3 = arguments.length, options = new Array(_len3 > 1 ? _len3 - 1 : 0), _key3 = 1; _key3 < _len3; _key3++) {
-        options[_key3 - 1] = arguments[_key3];
+      };
+      var options;
+
+      for (var _len4 = arguments.length, optionsIn = new Array(_len4 > 1 ? _len4 - 1 : 0), _key4 = 1; _key4 < _len4; _key4++) {
+        optionsIn[_key4 - 1] = arguments[_key4];
       }
 
-      var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [defaultOptions].concat(options));
-      var o = optionsToUse;
+      if (typeof textOrOptions === 'string') {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+          text: textOrOptions
+        }].concat(optionsIn));
+      } else {
+        options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions, textOrOptions].concat(optionsIn));
+      }
+
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
+      }
+
+      var o = options;
+      var text = o.text;
       var fontToUse = o.font;
 
       if (fontToUse === null) {
-        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
+        fontToUse = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramFont"](o.family, o.style, o.size, o.weight, o.hAlign, o.vAlign, o.color);
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), text, fontToUse);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["TextObject"](this.draw2D, [dT]);
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(o.location.x, o.location.y), [1, 0, 0, 1], this.limits);
+      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["DiagramText"](o.offset, text, fontToUse);
+      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_20__["TextObject"](this.draw2D, [dT]);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](to, o.transform, o.color, this.limits);
+
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
     }
   }, {
-    key: "text",
-    value: function text(textInput, location, color) {
-      var fontInput = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramFont"]('Times New Roman', 'italic', 0.2, '200', 'center', 'middle', color);
+    key: "arrow",
+    value: function arrow() {
+      var defaultOptions = {
+        width: 0.5,
+        legWidth: 0,
+        height: 0.5,
+        legHeight: 0,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('arrow').standard(),
+        tip: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        rotation: 0
+      };
 
-      if (fontInput !== null) {
-        font = fontInput;
+      for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+        optionsIn[_key5] = arguments[_key5];
       }
 
-      var dT = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), textInput, font);
-      var to = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_18__["TextObject"](this.draw2D, [dT]);
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](to, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), color, this.limits);
-    }
+      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        var p = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(p);
+      }
+
+      var element = new _DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_16__["default"](this.webgl, options.width, options.legWidth, options.height, options.legHeight, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.tip), options.rotation, options.color, options.transform, this.limits);
+
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
+      }
+
+      return element;
+    } // arrowLegacy(
+    //   width: number = 1,
+    //   legWidth: number = 0.5,
+    //   height: number = 1,
+    //   legHeight: number = 0.5,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    //   tip: Point = new Point(0, 0),
+    //   rotation: number = 0,
+    // ) {
+    //   return Arrow(
+    //     this.webgl, width, legWidth, height, legHeight,
+    //     tip, rotation, color, transform, this.limits,
+    //   );
+    // }
+    // textLegacy(
+    //   textInput: string,
+    //   location: Point,
+    //   color: Array<number>,
+    //   fontInput: DiagramFont | null = null,
+    // ) {
+    //   let font = new DiagramFont(
+    //     'Times New Roman',
+    //     'italic',
+    //     0.2,
+    //     '200',
+    //     'center',
+    //     'middle',
+    //     color,
+    //   );
+    //   if (fontInput !== null) {
+    //     font = fontInput;
+    //   }
+    //   const dT = new DiagramText(new Point(0, 0), textInput, font);
+    //   const to = new TextObject(this.draw2D, [dT]);
+    //   return new DiagramElementPrimative(
+    //     to,
+    //     new Transform().scale(1, 1).translate(location.x, location.y),
+    //     color,
+    //     this.limits,
+    //   );
+    // }
+
   }, {
     key: "htmlElement",
     value: function htmlElement(elementToAdd) {
@@ -15214,37 +15746,53 @@ function () {
       element.style.position = 'absolute';
       element.setAttribute('id', id);
       this.htmlCanvas.appendChild(element);
-      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_19__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
-      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
+      var hT = new _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_21__["default"](this.htmlCanvas, id, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0), alignV, alignH);
+      var diagramElement = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementPrimative"](hT, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).translate(location.x, location.y), [1, 1, 1, 1], this.limits); // console.log('html', diagramElement.transform.mat, location)
       // diagramElement.setFirstTransform();
 
       return diagramElement;
-    }
+    } // htmlText(
+    //   textInput: string,
+    //   id: string = generateUniqueId('id__html_text_'),
+    //   classes: string = '',
+    //   location: Point = new Point(0, 0),
+    //   alignV: 'top' | 'bottom' | 'middle' = 'middle',
+    //   alignH: 'left' | 'right' | 'center' = 'left',
+    // ) {
+    //   // const inside = document.createTextNode(textInput);
+    //   const inside = document.createElement('div');
+    //   inside.innerHTML = textInput;
+    //   return this.htmlElement(inside, id, classes, location, alignV, alignH);
+    // }
+
   }, {
     key: "htmlText",
-    value: function htmlText(textInput) {
-      var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools_tools__WEBPACK_IMPORTED_MODULE_5__["generateUniqueId"])('id__html_text_');
-      var classes = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
-      var location = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var alignV = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 'middle';
-      var alignH = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 'left';
-      // const inside = document.createTextNode(textInput);
-      var inside = document.createElement('div');
-      inside.innerHTML = textInput;
-      return this.htmlElement(inside, id, classes, location, alignV, alignH);
-    }
-  }, {
-    key: "arrow",
-    value: function arrow() {
-      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var legWidth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0.5;
-      var height = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var legHeight = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0.5;
-      var color = arguments.length > 4 ? arguments[4] : undefined;
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var tip = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      var rotation = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-      return Object(_DiagramElements_Arrow__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, width, legWidth, height, legHeight, tip, rotation, color, transform, this.limits);
+    value: function htmlText() {
+      var defaultOptions = {
+        text: '',
+        id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_6__["generateUniqueId"])('id__html_text_'),
+        classes: '',
+        position: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        alignV: 'middle',
+        alignH: 'left' // color: [1, 0, 0, 1],
+
+      };
+
+      for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+        optionsIn[_key6] = arguments[_key6];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var inside = document.createElement('div'); // const htmlText = toHTML(options.textInput, '', '', options.color);
+      // console.log(options.textInput, htmlText)
+
+      Object(_tools_htmlGenerator__WEBPACK_IMPORTED_MODULE_1__["setHTML"])(inside, options.text, options.modifiers);
+      var id = options.id,
+          classes = options.classes,
+          position = options.position,
+          alignV = options.alignV,
+          alignH = options.alignH;
+      return this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
     }
   }, {
     key: "lines",
@@ -15252,64 +15800,59 @@ function () {
       var numLinesThick = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
       var color = arguments.length > 2 ? arguments[2] : undefined;
       var transform = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
+      return Object(_DiagramElements_Lines__WEBPACK_IMPORTED_MODULE_15__["default"])(this.webgl, linePairs, numLinesThick, color, transform, this.limits);
     }
   }, {
     key: "grid",
-    value: function grid(bounds, xStep, yStep, numLinesThick, color) {
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+    value: function grid() {
+      var defaultOptions = {
+        bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+        xStep: 0.1,
+        yStep: 0.1,
+        xOffset: 0,
+        yOffset: 0,
+        numLinesThick: 1,
+        color: [1, 0, 0, 1],
+        position: null,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('grid').standard()
+      };
+
+      for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+        optionsIn[_key7] = arguments[_key7];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(point);
+      }
+
       var linePairs = []; // const xLimit = tools.roundNum(bounds.righ + xStep);
 
-      if (xStep !== 0) {
-        for (var x = bounds.left; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](x, 8) <= bounds.right; x += xStep) {
+      var bounds = options.bounds,
+          xStep = options.xStep,
+          xOffset = options.xOffset,
+          yStep = options.yStep,
+          yOffset = options.yOffset,
+          color = options.color,
+          numLinesThick = options.numLinesThick,
+          transform = options.transform;
+
+      if (options.xStep !== 0) {
+        for (var x = bounds.left + xOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](x, 8) <= bounds.right; x += xStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.top), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, bounds.bottom)]);
         }
       }
 
       if (yStep !== 0) {
-        for (var y = bounds.bottom; _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](y, 8) <= bounds.top; y += yStep) {
+        for (var y = bounds.bottom + yOffset; _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](y, 8) <= bounds.top; y += yStep) {
           linePairs.push([new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.left, y), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](bounds.right, y)]);
         }
       }
 
       return this.lines(linePairs, numLinesThick, color, transform);
     }
-  }, {
-    key: "polyLineCorners",
-    value: function polyLineCorners(points, close, cornerLength, lineWidth, color) {
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_PolyLine__WEBPACK_IMPORTED_MODULE_7__["PolyLineCorners"])(this.webgl, points, close, cornerLength, lineWidth, color, transform, this.limits);
-    } // polygon(
-    //   numSides: number,
-    //   radius: number,
-    //   lineWidth: number,
-    //   rotation: number,
-    //   direction: -1 | 1,
-    //   numSidesToDraw: number,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    // ) {
-    //   return Polygon(
-    //     this.webgl, numSides, radius, lineWidth,
-    //     rotation, direction, numSidesToDraw, color, transform, this.limits,
-    //   );
-    // }
-    // polygonFilled(
-    //   numSides: number,
-    //   radius: number,
-    //   rotation: number,
-    //   numSidesToDraw: number,
-    //   color: Array<number>,
-    //   transform: Transform | Point = new Transform(),
-    //   textureLocation: string = '',
-    //   textureCoords: Rect = new Rect(0, 0, 1, 1),
-    // ) {
-    //   return PolygonFilled(
-    //     this.webgl, numSides, radius,
-    //     rotation, numSidesToDraw, color, transform, this.limits, textureLocation, textureCoords,
-    //   );
-    // }
-
   }, {
     key: "polygon",
     value: function polygon() {
@@ -15322,47 +15865,57 @@ function () {
         sidesToDraw: null,
         color: [1, 0, 0, 1],
         fill: false,
-        transform: null,
-        point: null,
         textureLocation: '',
+        // If including a texture, make sure to use
         textureCoords: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, 1, 1),
-        mods: {}
+        // correct shader in diagram
+        onLoad: this.animateNextFrame,
+        mods: {},
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
+        position: null,
+        center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
+        trianglePrimitives: false
       };
 
-      for (var _len4 = arguments.length, options = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
-        options[_key4] = arguments[_key4];
+      for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
+        optionsIn[_key8] = arguments[_key8];
       }
 
-      var optionsToUse = Object.assign.apply(Object, [{}, defaultOptions].concat(options));
-      var o = optionsToUse;
-      var transform = o.transform;
+      var options = Object.assign.apply(Object, [{}, defaultOptions].concat(optionsIn)); // const o = optionsToUse;
+      // let { transform } = options;
+      // if (transform == null) {
+      //   transform = new Transform('polygon').scale(1, 1).rotate(0).translate(0, 0);
+      // }
 
-      if (transform == null && o.point != null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').translate(o.point);
-      } else if (transform == null) {
-        transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon');
+      if (options.position != null) {
+        var point = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position);
+        options.transform.updateTranslation(point);
       }
 
-      if (o.sidesToDraw == null) {
-        o.sidesToDraw = o.sides;
+      if (options.center != null) {
+        options.center = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.center);
+      }
+
+      if (options.sidesToDraw == null) {
+        options.sidesToDraw = options.sides;
       }
 
       var direction = 1;
 
-      if (o.clockwise) {
+      if (options.clockwise) {
         direction = -1;
       }
 
       var element;
 
-      if (o.fill) {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonFilled"])(this.webgl, o.sides, o.radius, o.rotation, o.sidesToDraw, o.color, transform, this.limits, o.textureLocation, o.textureCoords);
+      if (options.fill) {
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
-        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["Polygon"])(this.webgl, o.sides, o.radius, o.width, o.rotation, direction, o.sidesToDraw, o.color, transform, this.limits);
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
       }
 
-      if (optionsToUse.mods != null && optionsToUse.mods !== {}) {
-        element.setProperties(optionsToUse.mods);
+      if (options.mods != null && options.mods !== {}) {
+        element.setProperties(options.mods);
       }
 
       return element;
@@ -15372,66 +15925,195 @@ function () {
     value: function polygonLine(numSides, radius, rotation, direction, numSidesToDraw, numLines, // equivalent to thickness - integer
     color) {
       var transform = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_9__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
+      return Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, numSides, radius, rotation, direction, numSidesToDraw, numLines, color, transform, this.limits);
     }
   }, {
     key: "horizontalLine",
     value: function horizontalLine(start, length, width, rotation, color) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
+      return Object(_DiagramElements_HorizontalLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, color, transform, this.limits);
     }
   }, {
     key: "dashedLine",
-    value: function dashedLine(start, length, width, rotation, dashStyle, color) {
-      var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_12__["default"])(this.webgl, start, length, width, rotation, dashStyle, color, transform, this.limits);
-    }
+    value: function dashedLine() {
+      var defaultOptions = {
+        start: [0, 0],
+        length: 1,
+        width: 0.01,
+        rotation: 0,
+        dashStyle: [0.1, 0.1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('dashedLine').scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len9 = arguments.length, optionsIn = new Array(_len9), _key9 = 0; _key9 < _len9; _key9++) {
+        optionsIn[_key9] = arguments[_key9];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      return Object(_DiagramElements_DashedLine__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.start), options.length, options.width, options.rotation, options.dashStyle, options.color, options.transform, this.limits);
+    } // dashedLine(
+    //   start: Point,
+    //   length: number,
+    //   width: number,
+    //   rotation: number,
+    //   dashStyle: Array<number>,
+    //   color: Array<number>,
+    //   transform: Transform | Point = new Transform(),
+    // ) {
+    //   return DashedLine(
+    //     this.webgl, start, length, width,
+    //     rotation, dashStyle, color, transform, this.limits,
+    //   );
+    // }
+
   }, {
-    key: "rectangleFilled",
-    value: function rectangleFilled(topLeft, width, height, cornerRadius, cornerSides, color) {
-      var transform = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_13__["default"])(this.webgl, topLeft, width, height, cornerRadius, cornerSides, color, transform, this.limits);
+    key: "rectangle",
+    value: function rectangle() {
+      var defaultOptions = {
+        alignV: 'middle',
+        alignH: 'center',
+        width: 1,
+        height: 1,
+        corner: {
+          radius: 0,
+          sides: 1
+        },
+        fill: false,
+        color: [1, 0, 0, 1],
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0),
+        position: null
+      };
+
+      for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+        optionsIn[_key10] = arguments[_key10];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      if (typeof options.reference !== 'string') {
+        options.reference = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.reference);
+      }
+
+      return Object(_DiagramElements_RectangleFilled__WEBPACK_IMPORTED_MODULE_14__["default"])(this.webgl, options.alignH, options.alignV, options.width, options.height, options.corner.radius, options.corner.sides, options.color, options.transform, this.limits);
     }
   }, {
     key: "radialLines",
     value: function radialLines() {
-      var innerRadius = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var outerRadius = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0.05;
-      var dAngle = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : Math.PI / 4;
-      var color = arguments.length > 4 ? arguments[4] : undefined;
-      var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_10__["default"])(this.webgl, innerRadius, outerRadius, width, dAngle, color, transform, this.limits);
+      var defaultOptions = {
+        innerRadius: 0,
+        outerRadius: 1,
+        width: 0.05,
+        dAngle: Math.PI / 4,
+        angle: Math.PI * 2,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().standard()
+      };
+
+      for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+        optionsIn[_key11] = arguments[_key11];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      return Object(_DiagramElements_RadialLines__WEBPACK_IMPORTED_MODULE_11__["default"])(this.webgl, options.innerRadius, options.outerRadius, options.width, options.dAngle, options.angle, options.color, options.transform, this.limits);
+    }
+  }, {
+    key: "repeatPatternVertex",
+    value: function repeatPatternVertex() {
+      var defaultOptions = {
+        element: null,
+        xNum: 2,
+        yNum: 2,
+        xStep: 1,
+        yStep: 1,
+        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('repeatPattern').standard()
+      };
+
+      for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+        optionsIn[_key12] = arguments[_key12];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.position != null) {
+        options.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(options.position));
+      }
+
+      var element = options.element,
+          transform = options.transform,
+          xNum = options.xNum,
+          yNum = options.yNum,
+          xStep = options.xStep,
+          yStep = options.yStep;
+
+      if (element == null) {
+        return this.collection();
+      }
+
+      var copy = element._dup();
+
+      var drawingObject = element.drawingObject; // console.log(element.drawingObject.points)
+
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
+        copy.transform = transform._dup();
+        var newPoints = [];
+        var points = drawingObject.points;
+
+        for (var x = 0; x < xNum; x += 1) {
+          for (var y = 0; y < yNum; y += 1) {
+            for (var p = 0; p < points.length; p += 2) {
+              newPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](points[p] + x * xStep, points[p + 1] + y * yStep)); // console.log(points[p], points[p+1], newPoints.slice(-1))
+            }
+          }
+        } // console.log(newPoints)
+
+
+        copy.drawingObject.changeVertices(newPoints);
+      }
+
+      return copy;
     }
   }, {
     key: "collection",
     value: function collection() {
-      var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {
-        transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]()
-      };
-      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
+      var transformOrPointOrOptions = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+      var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('collection').scale(1, 1).rotate(0).translate(0, 0);
 
       if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
-        transform = transform.translate(transformOrPointOrOptions.x, transformOrPointOrOptions.y);
+        transform.updateTranslation(transformOrPointOrOptions);
       } else if (transformOrPointOrOptions instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
         transform = transformOrPointOrOptions._dup();
       } else {
-        for (var _len5 = arguments.length, moreOptions = new Array(_len5 > 1 ? _len5 - 1 : 0), _key5 = 1; _key5 < _len5; _key5++) {
-          moreOptions[_key5 - 1] = arguments[_key5];
+        for (var _len13 = arguments.length, moreOptions = new Array(_len13 > 1 ? _len13 - 1 : 0), _key13 = 1; _key13 < _len13; _key13++) {
+          moreOptions[_key13 - 1] = arguments[_key13];
         }
 
-        var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_5__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
-
-        if (optionsToUse.position != null) {
-          transform = transform.translate(optionsToUse.position.x, optionsToUse.position.y);
-        }
+        var optionsToUse = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [transformOrPointOrOptions].concat(moreOptions));
 
         if (optionsToUse.transform != null) {
           transform = optionsToUse.transform;
         }
+
+        if (optionsToUse.position != null) {
+          transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
+        }
       }
 
-      return new _Element__WEBPACK_IMPORTED_MODULE_1__["DiagramElementCollection"](transform, this.limits);
+      var element = new _Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"](transform, this.limits);
+      return element;
     }
   }, {
     key: "repeatPattern",
@@ -15474,15 +16156,15 @@ function () {
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
-    key: "repeatPatternVertex",
-    value: function repeatPatternVertex(element, xNum, yNum, xStep, yStep) {
+    key: "repeatPatternVertexLegacy",
+    value: function repeatPatternVertexLegacy(element, xNum, yNum, xStep, yStep) {
       var transform = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
 
       var copy = element._dup();
 
       var drawingObject = element.drawingObject; // console.log(element.drawingObject.points)
 
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_6__["default"]) {
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_7__["default"]) {
         copy.transform = transform._dup();
         var newPoints = [];
         var points = drawingObject.points;
@@ -15504,21 +16186,43 @@ function () {
   }, {
     key: "axes",
     value: function axes() {
-      var width = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var height = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var limits = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
-      var yAxisLocation = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var xAxisLocation = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-      var stepX = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0.1;
-      var stepY = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 0.1;
-      var fontSize = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0.13;
-      var showGrid = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : true;
-      var color = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : [1, 1, 1, 0];
-      var gridColor = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : [1, 1, 1, 0];
-      var location = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
-      var decimalPlaces = arguments.length > 12 && arguments[12] !== undefined ? arguments[12] : 1;
-      var lineWidth = 0.01;
-      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      var defaultOptions = {
+        width: 1,
+        height: 1,
+        limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2),
+        yAxisLocation: 0,
+        xAxisLocation: 0,
+        stepX: 0.1,
+        stepY: 0.1,
+        fontSize: 0.13,
+        showGrid: true,
+        color: [1, 1, 1, 0],
+        gridColor: [1, 1, 1, 0],
+        location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](),
+        decimalPlaces: 1,
+        lineWidth: 0.01
+      };
+
+      for (var _len14 = arguments.length, optionsIn = new Array(_len14), _key14 = 0; _key14 < _len14; _key14++) {
+        optionsIn[_key14] = arguments[_key14];
+      }
+
+      var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+      var width = options.width,
+          lineWidth = options.lineWidth,
+          limits = options.limits,
+          color = options.color,
+          stepX = options.stepX,
+          decimalPlaces = options.decimalPlaces,
+          yAxisLocation = options.yAxisLocation,
+          xAxisLocation = options.xAxisLocation,
+          fontSize = options.fontSize,
+          height = options.height,
+          stepY = options.stepY,
+          location = options.location,
+          showGrid = options.showGrid,
+          gridColor = options.gridColor;
+      var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       xProps.minorTicks.mode = 'off';
       xProps.minorGrid.mode = 'off';
       xProps.majorGrid.mode = 'off';
@@ -15536,7 +16240,7 @@ function () {
       xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
-      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
+      xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === yAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -15552,8 +16256,8 @@ function () {
       xProps.majorTicks.fontColor = color.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
-      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
-      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_16__["AxisProperties"]('x', 0);
+      var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
+      var yProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       yProps.minorTicks.mode = 'off';
       yProps.minorGrid.mode = 'off';
       yProps.majorGrid.mode = 'off';
@@ -15572,7 +16276,7 @@ function () {
       yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
-      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_4__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
+      yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
         if (v === xAxisLocation.toString() && yAxisLocation === xAxisLocation) {
@@ -15588,7 +16292,7 @@ function () {
       yProps.majorTicks.fontColor = xProps.majorTicks.fontColor;
       yProps.majorTicks.fontSize = fontSize;
       yProps.majorTicks.fontWeight = xProps.majorTicks.fontWeight;
-      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_17__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
+      var yAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, yProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(yAxisLocation - limits.left * width / 2, 0), this.limits);
       var transform = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
 
       if (location instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"]) {
@@ -15600,7 +16304,14 @@ function () {
       var xy = this.collection(transform);
 
       if (showGrid) {
-        var gridLines = this.grid(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepX * width / limits.width, 8), _tools_math__WEBPACK_IMPORTED_MODULE_4__["roundNum"](stepY * height / limits.height, 8), 1, gridColor, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0));
+        var gridLines = this.grid({
+          bounds: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](0, 0, width, height),
+          stepX: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepX * width / limits.width, 8),
+          stepY: _tools_math__WEBPACK_IMPORTED_MODULE_5__["roundNum"](stepY * height / limits.height, 8),
+          numThickLines: 1,
+          color: gridColor,
+          transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, 0)
+        });
         xy.add('grid', gridLines);
       }
 
@@ -15722,6 +16433,8 @@ function () {
   // numPoints: number;           // Number of primative vertices
   // Border vertices
   // Border of any holes inside of main border
+  // Only used for drawing objects with asynchronous
+  //                            loading (like textures)
   function DrawingObject() {
     _classCallCheck(this, DrawingObject);
 
@@ -15729,6 +16442,9 @@ function () {
     this.location = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     this.border = [[]];
     this.holeBorder = [[]];
+    this.onLoad = null;
+    this.type = 'drawingObject';
+    this.state = 'loading';
   }
 
   _createClass(DrawingObject, [{
@@ -15981,8 +16697,8 @@ function (_DrawingObject) {
   }, {
     key: "glToPixelSpace",
     value: function glToPixelSpace(p) {
-      var x = (p.x - -1) / 2 * this.parentDiv.offsetWidth;
-      var y = (1 - p.y) / 2 * this.parentDiv.offsetHeight;
+      var x = (p.x - -1) / 2 * this.parentDiv.clientWidth;
+      var y = (1 - p.y) / 2 * this.parentDiv.clientHeight;
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](x, y);
     }
   }, {
@@ -16007,8 +16723,9 @@ function (_DrawingObject) {
       if (this.show) {
         var glLocation = this.location.transformBy(transformMatrix);
         var pixelLocation = this.glToPixelSpace(glLocation);
-        var w = this.element.offsetWidth;
-        var h = this.element.offsetHeight;
+        var w = this.element.clientWidth;
+        var h = this.element.clientHeight; // console.log(w, h, this.element.id)
+
         var left = 0;
         var top = 0;
 
@@ -16068,6 +16785,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
 function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
@@ -16115,6 +16840,7 @@ function () {
     this.weight = weight;
     this.alignH = alignH;
     this.alignV = alignV;
+    this.opacity = 1;
     this.setColor(color); // if (Array.isArray(color)) {
     //   this.color = colorArrayToString(color);
     // } else {
@@ -16126,12 +16852,12 @@ function () {
     key: "setColor",
     value: function setColor() {
       var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-
-      if (Array.isArray(color)) {
-        this.color = colorArrayToString(color);
-      } else {
-        this.color = color;
-      }
+      // if (Array.isArray(color)) {
+      //   this.color = colorArrayToString(color);
+      // } else {
+      //   this.color = color;
+      // }
+      this.color = color;
     }
   }, {
     key: "set",
@@ -16196,6 +16922,8 @@ function (_DrawingObject) {
     _this.drawContext2D = drawContext2D;
     _this.text = text;
     _this.scalingFactor = 1;
+    _this.lastDraw = [];
+    _this.lastDrawTransform = []; // this.glRect = new Rect(-1, -1, 2, 2);
 
     if (text.length > 0) {
       var minSize = _this.text[0].font.size;
@@ -16218,6 +16946,7 @@ function (_DrawingObject) {
 
     _this.setBorder();
 
+    _this.state = 'loaded';
     return _this;
   }
 
@@ -16251,12 +16980,18 @@ function (_DrawingObject) {
       this.setBorder();
     }
   }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      for (var i = 0; i < this.text.length; i += 1) {
+        this.text[i].font.opacity = opacity;
+      }
+    }
+  }, {
     key: "setColor",
     value: function setColor(color) {
-      var c = colorArrayToString(color);
-
+      // const c = colorArrayToString(color);
       for (var i = 0; i < this.text.length; i += 1) {
-        this.text[i].font.color = c;
+        this.text[i].font.color = color;
       }
     }
   }, {
@@ -16305,6 +17040,8 @@ function (_DrawingObject) {
   }, {
     key: "drawWithTransformMatrix",
     value: function drawWithTransformMatrix(transformMatrix) {
+      var _this2 = this;
+
       var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [1, 1, 1, 1];
       var ctx = this.drawContext2D.ctx; // Arbitrary scaling factor used to ensure font size is >> 1 pixel
       // const scalingFactor = this.drawContext2D.canvas.offsetHeight /
@@ -16334,40 +17071,103 @@ function (_DrawingObject) {
       // and apply it to the drawing context.
 
       var totalT = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["mul"]([sx, 0, tx, 0, sy, ty, 0, 0, 1], t);
-      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]); // Fill in all the text
+      ctx.transform(totalT[0], totalT[3], totalT[1], totalT[4], totalT[2], totalT[5]);
+      this.lastDrawTransform = totalT.slice(); // Fill in all the text
 
       this.text.forEach(function (diagramText) {
         diagramText.font.set(ctx, scalingFactor);
 
-        if (diagramText.font.color) {
-          ctx.fillStyle = diagramText.font.color;
+        if (diagramText.font.color != null) {
+          var c = [].concat(_toConsumableArray(diagramText.font.color.slice(0, 3)), [// $FlowFixMe
+          diagramText.font.color[3] * diagramText.font.opacity]);
+          ctx.fillStyle = colorArrayToString(c);
         } else {
           ctx.fillStyle = parentColor;
-        }
+        } // const w = ctx.measureText(diagramText.text).width;
+        // this.lastDraw.push({
+        //   width: w * 2,
+        //   height: w * 2,
+        //   x: diagramText.location.x * scalingFactor - w,
+        //   y: diagramText.location.y * -scalingFactor - w,
+        // });
+
+
+        _this2.recordLastDraw(ctx, diagramText, scalingFactor, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
 
         ctx.fillText(diagramText.text, diagramText.location.x * scalingFactor, diagramText.location.y * -scalingFactor);
       });
       ctx.restore();
     }
   }, {
+    key: "recordLastDraw",
+    value: function recordLastDraw(ctx, diagramText, scalingFactor, x, y) {
+      var width = ctx.measureText(diagramText.text).width * 1.2;
+      var height = diagramText.font.size * scalingFactor * 1.2;
+      var bottom = y + height * 0.1;
+      var left = x - width * 0.1;
+
+      if (diagramText.font.alignV === 'baseline') {
+        bottom = y + height * 0.2;
+      } else if (diagramText.font.alignV === 'top') {
+        bottom = y + height;
+      } else if (diagramText.font.alignV === 'middle') {
+        bottom = y + height / 2;
+      }
+
+      if (diagramText.font.alignH === 'center') {
+        left -= width / 2;
+      } else if (diagramText.font.alignH === 'right') {
+        left -= width;
+      }
+
+      this.lastDraw.push({
+        width: width,
+        height: -height,
+        x: left,
+        y: bottom
+      }); // console.log(this.lastDraw)
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      var lastDraw = this.lastDraw;
+
+      if (lastDraw.length > 0) {
+        var ctx = this.drawContext2D.ctx;
+        var t = this.lastDrawTransform;
+        ctx.save();
+        ctx.transform(t[0], t[3], t[1], t[4], t[2], t[5]);
+        lastDraw.forEach(function (draw) {
+          // const x = Math.max(0, draw.x - draw.width * 0.5);
+          // const y = Math.max(0, draw.y - draw.height * 0.5);
+          var x = draw.x - draw.width;
+          var y = draw.y - draw.height;
+          ctx.clearRect(x, y, draw.width * 3, draw.height * 3);
+        });
+        ctx.restore();
+      }
+
+      this.lastDraw = [];
+    }
+  }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries(lastDrawTransformMatrix) {
-      var _this2 = this;
+      var _this3 = this;
 
       var glBoundaries = [];
       this.text.forEach(function (t) {
-        glBoundaries.push(_this2.getGLBoundaryOfText(t, lastDrawTransformMatrix));
+        glBoundaries.push(_this3.getGLBoundaryOfText(t, lastDrawTransformMatrix));
       });
       return glBoundaries;
     }
   }, {
     key: "setBorder",
     value: function setBorder() {
-      var _this3 = this;
+      var _this4 = this;
 
       this.border = [];
       this.text.forEach(function (t) {
-        _this3.border.push(_this3.getBoundaryOfText(t));
+        _this4.border.push(_this4.getBoundaryOfText(t));
       }); // return glBoundaries;
     } // This method is used instead of the actual ctx.measureText because
     // Firefox and Chrome don't yet support it's advanced features.
@@ -17856,11 +18656,15 @@ function (_DrawingObject) {
   // webgl instance for a html canvas
   // primitive tyle (e.g. TRIANGLE_STRIP)
   // Vertex buffer
+  // textureBuffer: WebGLBuffer;
   // Primative vertices of shape
   // Number of primative vertices
   // Border vertices
   function VertexObject(webgl) {
     var _this;
+
+    var vertexShader = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'simple';
+    var fragmentShader = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'simple';
 
     _classCallCheck(this, VertexObject);
 
@@ -17870,81 +18674,147 @@ function (_DrawingObject) {
     _this.webgl = webgl;
     _this.glPrimative = webgl.gl.TRIANGLES;
     _this.points = [];
-    _this.z = 0;
-    _this.textureLocation = '';
-    _this.texturePoints = [];
+    _this.z = 0; // this.textureLocation = '';
+    // this.texturePoints = [];
+
+    _this.texture = null;
+    _this.programIndex = webgl.getProgram(vertexShader, fragmentShader);
+    _this.type = 'vertexPrimative';
     return _this;
   }
 
   _createClass(VertexObject, [{
+    key: "addTextureToBuffer",
+    value: function addTextureToBuffer(glTexture, image) // image data
+    {
+      function isPowerOf2(value) {
+        // eslint-disable-next-line no-bitwise
+        return (value & value - 1) === 0;
+      }
+
+      var texture = this.texture;
+
+      if (texture != null) {
+        var index = this.webgl.textures[texture.id].index;
+        this.gl.activeTexture(this.gl.TEXTURE0 + index);
+        this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
+        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
+        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
+
+        if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
+          // Yes, it's a power of 2. Generate mips.
+          this.gl.generateMipmap(this.gl.TEXTURE_2D);
+        } else {
+          // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
+          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+        }
+      }
+    }
+  }, {
     key: "setupBuffer",
     value: function setupBuffer() {
       var _this2 = this;
 
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      this.state = 'loaded';
 
       if (numPoints === 0) {
         this.numPoints = this.points.length / 2.0;
       } else {
         this.numPoints = numPoints;
-      }
-
-      if (this.texturePoints.length === 0 && this.textureLocation) {
-        this.createTextureMap();
-      }
-
-      if (this.textureLocation) {
-        this.textureBuffer = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.textureBuffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.texturePoints), this.gl.STATIC_DRAW); // Create a texture.
-
-        var texture = this.gl.createTexture();
-        this.gl.bindTexture(this.gl.TEXTURE_2D, texture); // Fill the texture with a 1x1 blue pixel.
-
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 255]));
-        var image = new Image();
-        image.src = this.textureLocation;
-        image.addEventListener('load', function () {
-          // Now that the image has loaded make copy it to the texture.
-          _this2.gl.bindTexture(_this2.gl.TEXTURE_2D, texture);
-
-          _this2.gl.pixelStorei(_this2.gl.UNPACK_FLIP_Y_WEBGL, 1);
-
-          _this2.gl.texImage2D(_this2.gl.TEXTURE_2D, 0, _this2.gl.RGBA, _this2.gl.RGBA, _this2.gl.UNSIGNED_BYTE, image);
-
-          function isPowerOf2(value) {
-            // eslint-disable-next-line no-bitwise
-            return (value & value - 1) === 0;
-          } // Check if the image is a power of 2 in both dimensions.
+      } // if (this.texture && this.texture.points == null) {
+      //   this.texture.points = [];
+      //   this.createTextureMap();
+      // }
 
 
-          if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
-            // Yes, it's a power of 2. Generate mips.
-            _this2.gl.generateMipmap(_this2.gl.TEXTURE_2D);
-          } else {
-            // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_WRAP_S, _this2.gl.CLAMP_TO_EDGE);
+      var texture = this.texture;
 
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_WRAP_T, _this2.gl.CLAMP_TO_EDGE);
+      if (texture != null) {
+        if (texture.points == null) {
+          texture.points = [];
+        }
 
-            _this2.gl.texParameteri(_this2.gl.TEXTURE_2D, _this2.gl.TEXTURE_MIN_FILTER, _this2.gl.LINEAR);
+        if (texture.points.length === 0) {
+          this.createTextureMap();
+        }
+
+        texture.buffer = this.gl.createBuffer();
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
+        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texture.points), this.gl.STATIC_DRAW);
+
+        if (!(texture.id in this.webgl.textures) || texture.id in this.webgl.textures && this.webgl.textures[texture.id].glTexture == null) {
+          var glTexture = this.gl.createTexture();
+          this.webgl.addTexture(texture.id, glTexture, texture.type);
+          this.gl.activeTexture(this.gl.TEXTURE0 + this.webgl.textures[texture.id].index);
+          this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
+          var src = texture.src;
+
+          if (src) {
+            // Fill the texture with a 1x1 blue pixel.
+            this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
+            var image = new Image();
+            image.src = src;
+            this.state = 'loading';
+            this.webgl.textures[texture.id].state = 'loading';
+            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
+            image.addEventListener('load', function () {
+              // Now that the image has loaded make copy it to the texture.
+              texture.data = image;
+
+              _this2.addTextureToBuffer(glTexture, texture.data); // if (this.onLoad != null) {
+
+
+              _this2.webgl.onLoad(texture.id); // this.onLoad();
+              // }
+
+
+              _this2.state = 'loaded';
+              _this2.webgl.textures[texture.id].state = 'loaded';
+            });
+          } else if (texture.data != null) {
+            this.addTextureToBuffer(glTexture, texture.data);
           }
-        });
-      } // this.buffer = createBuffer(this.gl, this.vertices);
-
+        } else if (texture.id in this.webgl.textures) {
+          if (this.webgl.textures[texture.id].state === 'loading') {
+            this.state = 'loading';
+            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
+          } else {
+            this.state = 'loaded';
+          }
+        }
+      }
 
       this.buffer = this.gl.createBuffer();
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
       this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.points), this.gl.STATIC_DRAW);
     }
   }, {
+    key: "executeOnLoad",
+    value: function executeOnLoad() {
+      if (this.onLoad != null) {
+        this.onLoad();
+      }
+    }
+  }, {
     key: "resetBuffer",
     value: function resetBuffer() {
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      var texture = this.texture;
 
-      if (this.textureLocation) {
-        this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-        this.gl.deleteTexture(this.textureBuffer);
+      if (texture) {
+        // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+        // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+        if (this.webgl.textures[texture.id].glTexture != null) {
+          this.gl.deleteTexture(this.webgl.textures[texture.id].glTexture);
+          this.webgl.textures[texture.id].glTexture = null;
+        }
+
+        this.gl.deleteBuffer(texture.buffer); // texture.glTexture = null;
+
+        texture.buffer = null;
       } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
 
@@ -18009,7 +18879,17 @@ function (_DrawingObject) {
     key: "getPointCountForLength",
     value: function getPointCountForLength(drawLength) {
       return this.numPoints;
-    }
+    } // A texture map is a texture coords point that lines up with the texture
+    // vertex point. So, if the vertex shape is rectangular, centered at the
+    // origin and wants to incorporate the entire texture, then the map would
+    // be:
+    // vertex space            texture space
+    // this.points         this.texture.points
+    //    -1,  -1,                  0,  0
+    //    -1,   1,                  0,  1
+    //     1,   1,                  1,  1
+    //     1,  -1,                  1,  0
+
   }, {
     key: "createTextureMap",
     value: function createTextureMap() {
@@ -18025,29 +18905,35 @@ function (_DrawingObject) {
       var glHeight = yMaxGL - yMinGL;
       var texWidth = xMaxTex - xMinTex;
       var texHeight = yMaxTex - yMinTex;
-      this.texturePoints = [];
+      var texture = this.texture;
 
-      for (var i = 0; i < this.points.length; i += 2) {
-        var x = this.points[i];
-        var y = this.points[i + 1];
-        var texNormX = (x - xMinGL) / glWidth;
-        var texNormY = (y - yMinGL) / glHeight;
-        this.texturePoints.push(texNormX * texWidth + xMinTex);
-        this.texturePoints.push(texNormY * texHeight + yMinTex);
+      if (texture != null) {
+        texture.points = [];
+
+        for (var i = 0; i < this.points.length; i += 2) {
+          var x = this.points[i];
+          var y = this.points[i + 1];
+          var texNormX = (x - xMinGL) / glWidth;
+          var texNormY = (y - yMinGL) / glHeight;
+          texture.points.push(texNormX * texWidth + xMinTex);
+          texture.points.push(texNormY * texHeight + yMinTex);
+        }
       }
     }
   }, {
     key: "draw",
     value: function draw(translation, rotation, scale, count, color) {
+      var webGLInstance = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : this.webgl;
       var transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["identity"]();
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["translate"](transformation, translation.x, translation.y);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["rotate"](transformation, rotation);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["scale"](transformation, scale.x, scale.y);
-      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count);
+      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count, webGLInstance);
     }
   }, {
     key: "drawWithTransformMatrix",
     value: function drawWithTransformMatrix(transformMatrix, color, count) {
+      var webglInstance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.webgl;
       var size = 2; // 2 components per iteration
 
       var type = this.gl.FLOAT; // the data is 32bit floats
@@ -18058,19 +18944,33 @@ function (_DrawingObject) {
 
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
-      // Turn on the attribute
 
-      this.gl.enableVertexAttribArray(this.webgl.locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
+      var locations = webglInstance.useProgram(this.programIndex);
+
+      if (this.texture && webglInstance.textures[this.texture.id].type === 'canvasText') {
+        // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
+        // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+      } else {
+        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+      } // Turn on the attribute
+
+
+      this.gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 
       this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 
-      this.gl.vertexAttribPointer(this.webgl.locations.a_position, size, type, normalize, stride, offset);
-      this.gl.uniformMatrix3fv(this.webgl.locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
+      this.gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
+      this.gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
 
-      this.gl.uniform1f(this.webgl.locations.u_z, this.z);
-      this.gl.uniform4f(this.webgl.locations.u_color, color[0], color[1], color[2], color[3]); // Translate
+      this.gl.uniform1f(locations.u_z, this.z);
+      this.gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
 
-      if (this.textureLocation) {
+      var texture = this.texture;
+
+      if (texture != null) {
         // Textures
         // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         var texSize = 2; // 2 components per iteration
@@ -18084,21 +18984,24 @@ function (_DrawingObject) {
 
         var texOffset = 0; // start at the beginning of the buffer
 
-        this.gl.enableVertexAttribArray(this.webgl.locations.a_texcoord);
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.textureBuffer);
-        this.gl.vertexAttribPointer(this.webgl.locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
+        this.gl.enableVertexAttribArray(locations.a_texcoord);
+        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
+        this.gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
       }
 
-      if (this.textureLocation) {
-        this.gl.uniform1i(this.webgl.locations.u_use_texture, 1);
+      if (texture) {
+        this.gl.uniform1i(locations.u_use_texture, 1);
+        var index = webglInstance.textures[texture.id].index; // console.log(texture.id, index, webglInstance.textures)
+
+        this.gl.uniform1i(locations.u_texture, index);
       } else {
-        this.gl.uniform1i(this.webgl.locations.u_use_texture, 0);
+        this.gl.uniform1i(locations.u_use_texture, 0);
       }
 
       this.gl.drawArrays(this.glPrimative, offset, count);
 
-      if (this.textureLocation) {
-        this.gl.disableVertexAttribArray(this.webgl.locations.a_texcoord);
+      if (texture) {
+        this.gl.disableVertexAttribArray(locations.a_texcoord);
       }
     }
   }, {
@@ -18373,12 +19276,19 @@ function (_VertexObject) {
     var center = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
     var numSidesToDraw = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : numSides;
     var direction = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 1;
+    var triangles = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : false;
 
     _classCallCheck(this, VertexPolygon);
 
     // setup webgl stuff
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
-    _this.glPrimative = webgl.gl.TRIANGLE_STRIP; // Check potential errors in constructor input
+
+    if (triangles) {
+      _this.glPrimative = webgl.gl.TRIANGLES;
+    } else {
+      _this.glPrimative = webgl.gl.TRIANGLE_STRIP;
+    } // Check potential errors in constructor input
+
 
     var sides = numSides;
     var sidesToDraw = Math.floor(numSidesToDraw);
@@ -18406,11 +19316,45 @@ function (_VertexObject) {
     var j = 0;
 
     for (i = 0; i <= sidesToDraw; i += 1) {
-      _this.points[j] = center.x + inRad * Math.cos(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 1] = center.y + inRad * Math.sin(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 2] = center.x + radius * Math.cos(i * _this.dAngle * direction + rotation * direction);
-      _this.points[j + 3] = center.y + radius * Math.sin(i * _this.dAngle * direction + rotation * direction);
-      j += 4;
+      var angle = i * _this.dAngle * direction + rotation * direction;
+      var lastAngle = (i - 1) * _this.dAngle * direction + rotation * direction;
+      var inPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(angle), inRad * Math.sin(angle)).add(center);
+      var outPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(angle), radius * Math.sin(angle)).add(center);
+      var lastInPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](inRad * Math.cos(lastAngle), inRad * Math.sin(lastAngle)).add(center);
+      var lastOutPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](radius * Math.cos(lastAngle), radius * Math.sin(lastAngle)).add(center);
+
+      if (triangles) {
+        if (i > 0) {
+          _this.points[j] = lastInPoint.x;
+          _this.points[j + 1] = lastInPoint.y;
+          _this.points[j + 2] = lastOutPoint.x;
+          _this.points[j + 3] = lastOutPoint.y;
+          _this.points[j + 4] = outPoint.x;
+          _this.points[j + 5] = outPoint.y;
+          _this.points[j + 6] = outPoint.x;
+          _this.points[j + 7] = outPoint.y;
+          _this.points[j + 8] = lastInPoint.x;
+          _this.points[j + 9] = lastInPoint.y;
+          _this.points[j + 10] = inPoint.x;
+          _this.points[j + 11] = inPoint.y;
+          j += 12;
+        }
+      } else {
+        // this.points[j] =
+        //   center.x + inRad * Math.cos(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 1] =
+        //   center.y + inRad * Math.sin(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 2] =
+        //   center.x + radius * Math.cos(i * this.dAngle * direction + rotation * direction);
+        // this.points[j + 3] =
+        //   center.y + radius * Math.sin(i * this.dAngle * direction + rotation * direction);
+        // j += 4;
+        _this.points[j] = inPoint.x;
+        _this.points[j + 1] = inPoint.y;
+        _this.points[j + 2] = outPoint.x;
+        _this.points[j + 3] = outPoint.y;
+        j += 4;
+      }
     } // Make the encapsulating border
 
 
@@ -18522,7 +19466,12 @@ function (_VertexObject) {
 
     _classCallCheck(this, PolygonFilled);
 
-    _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
+    if (textureLocation !== '') {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl, 'withTexture', 'withTexture'));
+    } else {
+      _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
+    }
+
     _this.glPrimative = webgl.gl.TRIANGLE_FAN; // Check potential errors in constructor input
 
     var sides = numSides;
@@ -18566,13 +19515,20 @@ function (_VertexObject) {
       _this.border[0].push(center._dup());
     }
 
-    _this.textureLocation = textureLocation;
+    if (textureLocation) {
+      _this.texture = {
+        id: textureLocation,
+        src: textureLocation,
+        type: 'image',
+        points: []
+      };
 
-    _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+      _this.createTextureMap(-_this.radius * 1.01 + center.x, _this.radius * 1.01 + center.x, -_this.radius * 1.01 + center.y, _this.radius * 1.01 + center.y, textureCoords.left, textureCoords.right, textureCoords.bottom, textureCoords.top);
+    }
 
     _this.setupBuffer();
 
-    return _this;
+    return _possibleConstructorReturn(_this);
   }
 
   _createClass(PolygonFilled, [{
@@ -18968,13 +19924,13 @@ var VertexRectangleFilled =
 function (_VertexObject) {
   _inherits(VertexRectangleFilled, _VertexObject);
 
-  function VertexRectangleFilled(webgl, reference) {
+  function VertexRectangleFilled(webgl, alignH, alignV) {
     var _this;
 
-    var width = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-    var height = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-    var cornerRadius = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 0;
-    var cornerSides = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 20;
+    var width = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
+    var height = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : 1;
+    var cornerRadius = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
+    var cornerSides = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 20;
 
     _classCallCheck(this, VertexRectangleFilled);
 
@@ -18986,8 +19942,8 @@ function (_VertexObject) {
     var makeCorner = function makeCorner(radius, sides, rotation, offset) {
       var cornerPoints = [];
 
-      if (radius === 0 || sides <= 1) {
-        cornerPoints.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+      if (radius === 0 || sides === 0) {
+        cornerPoints.push(offset);
       } else {
         var step = Math.PI / 2 / sides;
 
@@ -18999,18 +19955,72 @@ function (_VertexObject) {
       return cornerPoints;
     };
 
-    var rad = cornerRadius;
+    var rad = Math.min(cornerRadius, width / 2, height / 2);
     var sides = cornerSides;
+
+    if (sides === 0) {
+      rad = 0;
+    }
+
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, 0, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, height / 2 - rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, height / 2 - rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](-width / 2 + rad, -height / 2 + rad))));
     points = [].concat(_toConsumableArray(points), _toConsumableArray(makeCorner(rad, sides, Math.PI / 2 * 3, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2 - rad, -height / 2 + rad))));
 
-    if (reference === 'topLeft') {
+    if (alignV === 'top') {
       points = points.map(function (p) {
-        return p.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+        return p.add(0, -height / 2);
+      });
+    } else if (alignV === 'bottom') {
+      points = points.map(function (p) {
+        return p.add(0, height / 2);
+      });
+    } else if (alignV === 'middle') {
+      points = points.map(function (p) {
+        return p.add(0, 0);
+      });
+    } else {
+      points = points.map(function (p) {
+        return p.add(0, alignV);
       });
     }
+
+    if (alignH === 'left') {
+      points = points.map(function (p) {
+        return p.add(width / 2, 0);
+      });
+    } else if (alignH === 'right') {
+      points = points.map(function (p) {
+        return p.add(-width / 2, 0);
+      });
+    } else if (alignH === 'center') {
+      points = points.map(function (p) {
+        return p.add(0, 0);
+      });
+    } else {
+      points = points.map(function (p) {
+        return p.add(alignH, alignH);
+      });
+    } // if (reference === 'topLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, -height / 2)));
+    // } else if (reference === 'topRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, -height / 2)));
+    // } else if (reference === 'bottomLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, height / 2)));
+    // } else if (reference === 'bottomRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, height / 2)));
+    // } else if (reference === 'middleLeft') {
+    //   points = points.map(p => p.add(new Point(width / 2, 0)));
+    // } else if (reference === 'middleRight') {
+    //   points = points.map(p => p.add(new Point(-width / 2, 0)));
+    // } else if (reference === 'topCenter') {
+    //   points = points.map(p => p.add(new Point(0, -height / 2)));
+    // } else if (reference === 'bottomCenter') {
+    //   points = points.map(p => p.add(new Point(0, height / 2)));
+    // } else if (typeof reference !== 'string') {   // $FlowFixMe
+    //   points = points.map(p => p.add(reference));
+    // }
+
 
     points.forEach(function (p) {
       _this.points.push(p.x);
@@ -19036,6 +20046,259 @@ function (_VertexObject) {
 
 /***/ }),
 
+/***/ "./src/js/diagram/DrawingObjects/VertexObject/VertexText.js":
+/*!******************************************************************!*\
+  !*** ./src/js/diagram/DrawingObjects/VertexObject/VertexText.js ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../tools/g2 */ "./src/js/tools/g2.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _VertexObject__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./VertexObject */ "./src/js/diagram/DrawingObjects/VertexObject/VertexObject.js");
+/* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../tools/tools */ "./src/js/tools/tools.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../tools/math */ "./src/js/tools/math.js");
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
+
+function _assertThisInitialized(self) { if (self === void 0) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return self; }
+
+function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
+
+function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
+
+function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
+
+
+
+
+
+ // import { identity } from '../../../tools/m2';
+
+// type TypeTextOptions = {
+//   text: string;
+//   size: number;
+//   family: string;
+//   weight: number;
+//   style: 'normal' | 'italic',
+//   alignH: 'left' | 'center' | 'right',
+//   alignV: 'top' | 'bottom' | 'middle' | 'baseline',
+// };
+var VertexText =
+/*#__PURE__*/
+function (_VertexObject) {
+  _inherits(VertexText, _VertexObject);
+
+  // WebGL primitive used
+  // radius from center to outside of polygon
+  // center point
+  // angle between adjacent verteces to center lines
+  function VertexText(webgl, textOptions) {
+    var _this;
+
+    _classCallCheck(this, VertexText);
+
+    _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'text'));
+    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    var defaultTextOptions = {
+      text: 'DEFAULT_TEXT',
+      size: '20px',
+      // Text in pixels, or in vertex space units.
+      family: 'Helvetica',
+      style: 'normal',
+      weight: 400,
+      alignH: 'center',
+      alignV: 'alphabetic',
+      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["generateUniqueId"])('vertexText')
+    };
+    var options = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_3__["joinObjects"])({}, defaultTextOptions, textOptions);
+    _this.size = options.size;
+    _this.text = options.text;
+    _this.family = options.family;
+    _this.alignH = options.alignH;
+    _this.alignV = options.alignV;
+    _this.style = options.style;
+    _this.weight = options.weight;
+    _this.canvas = document.createElement('canvas');
+    _this.canvas.id = options.id;
+    _this.ctx = _this.canvas.getContext('2d');
+    _this.texture = {
+      id: options.id,
+      points: [],
+      type: 'canvasText'
+    };
+    _this.type = 'vertexText';
+
+    _this.drawTextIntoBuffer();
+
+    return _this;
+  } // Text is positioned such that the text baseline will be at
+  // vertex space y = 0.
+  // The border will then cover the ascent and descent of the text.
+
+
+  _createClass(VertexText, [{
+    key: "resizeText",
+    value: function resizeText() {
+      var _this2 = this;
+
+      var pixelToVertexSpaceScale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
+      var width = this.canvas.width * pixelToVertexSpaceScale.x;
+      var height = this.canvas.height * pixelToVertexSpaceScale.y;
+      var start = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (this.alignH === 'center') {
+        start.x = -width / 2;
+      } else if (this.alignH === 'right') {
+        start.x = -width;
+      }
+
+      if (this.alignV === 'baseline') {
+        start.y = -height * 0.25;
+      } else if (this.alignV === 'top') {
+        start.y = -height;
+      } else if (this.alignV === 'middle') {
+        start.y = -height / 2;
+      }
+
+      var points = [start, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, start.y + height), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, start.y + height), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, start.y)];
+      this.width = width;
+      this.height = height;
+      this.calcAscentDescent();
+      this.points = [];
+      points.forEach(function (point) {
+        _this2.points.push(point.x);
+
+        _this2.points.push(point.y);
+      });
+      this.border = [[new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, -this.descent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x, this.ascent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, this.ascent), new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](start.x + width, -this.descent)]];
+      var texture = this.texture;
+
+      if (texture != null) {
+        texture.points = [0, 0, 0, 1, 1, 1, 1, 0];
+        texture.data = this.ctx.canvas;
+
+        if (texture.buffer) {
+          this.resetBuffer();
+        } else {
+          this.setupBuffer();
+        }
+      }
+    }
+  }, {
+    key: "calcAscentDescent",
+    value: function calcAscentDescent() {
+      // const aWidth = this.ctx.measureText('a').width;
+      // Estimations of FONT ascent and descent for a baseline of "alphabetic"
+      var ascent = 0.75;
+      var descent = 0;
+      var lowAscentRe = /[,.]/g;
+      var midAscentRe = /[acemnorsuvwxz*gyq:><;p=]/g;
+      var midDecentRe = /[;,$]/g;
+      var maxDescentRe = /[gjyqp@Q(){}[\]|]/g;
+      var lowAscentMatches = this.text.match(lowAscentRe);
+
+      if (Array.isArray(lowAscentMatches)) {
+        if (lowAscentMatches.length === this.text.length) {
+          ascent = 0.1;
+        }
+      }
+
+      var midAscentMatches = this.text.match(midAscentRe);
+
+      if (Array.isArray(midAscentMatches)) {
+        if (midAscentMatches.length === this.text.length) {
+          ascent = 0.5;
+        }
+      }
+
+      var midDescentMatches = this.text.match(midDecentRe);
+
+      if (Array.isArray(midDescentMatches)) {
+        if (midDescentMatches.length > 0) {
+          descent = 0.1;
+        }
+      }
+
+      var maxDescentMatches = this.text.match(maxDescentRe);
+
+      if (Array.isArray(maxDescentMatches)) {
+        if (maxDescentMatches.length > 0) {
+          descent = 0.25;
+        }
+      }
+
+      this.ascent = ascent * this.height;
+      this.descent = descent * this.height;
+    } // If font size is defined in pixels, then the size will always be the size
+    // in pixels independent of how the diagram window or scaling changes
+    // If the font size is defined in vertex space units, then the font size
+    // will always be scaled to look like the vertex space size, but a new canvas
+    // will be drawn each time to minimize aliasing.
+
+  }, {
+    key: "drawTextIntoBuffer",
+    value: function drawTextIntoBuffer() {
+      var pixelToVertexSpaceScale = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
+      var pixelFontSize = 20;
+
+      if (typeof this.size === 'string' && this.size.endsWith('px')) {
+        pixelFontSize = parseInt(this.size, 10);
+      } else {
+        var diagramFontSize;
+
+        if (typeof this.size === 'string') {
+          diagramFontSize = parseFloat(this.size);
+        } else {
+          diagramFontSize = this.size;
+        }
+
+        pixelFontSize = Object(_tools_math__WEBPACK_IMPORTED_MODULE_4__["round"])(diagramFontSize / pixelToVertexSpaceScale.x, 0);
+      }
+
+      if (pixelFontSize < 1) {
+        pixelFontSize = 1;
+      }
+
+      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
+      var hBuffer = 0.3;
+      var width = this.ctx.measureText(this.text).width + pixelFontSize * hBuffer;
+      var height = pixelFontSize * 1.15;
+      this.canvas.width = Math.max(width, 1);
+      this.canvas.height = Math.max(height, 1);
+      this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height); // need to reset font after a canvas resize
+
+      this.ctx.font = "".concat(this.style, " ").concat(this.weight, " ").concat(pixelFontSize, "px ").concat(this.family);
+      this.ctx.textAlign = 'left';
+      this.ctx.textBaseline = 'alphabetic'; // this.ctx.fillStyle = 'white';
+
+      this.ctx.fillStyle = 'white'; // this.ctx.fillStyle = 'rgba(200,200,200,255)';   // debug only
+      // this.ctx.fillStyle = 'blue';
+
+      var startX = pixelFontSize * hBuffer / 2;
+      var baselineHeightFromBottom = 0.25;
+      var startY = this.canvas.height * (1 - baselineHeightFromBottom);
+      this.ctx.fillText(this.text, startX, startY);
+      this.resizeText(pixelToVertexSpaceScale);
+    }
+  }]);
+
+  return VertexText;
+}(_VertexObject__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
+/* harmony default export */ __webpack_exports__["default"] = (VertexText);
+
+/***/ }),
+
 /***/ "./src/js/diagram/Element.js":
 /*!***********************************!*\
   !*** ./src/js/diagram/Element.js ***!
@@ -19057,8 +20320,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./AnimationPhase */ "./src/js/diagram/AnimationPhase.js");
+/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _possibleConstructorReturn(self, call) { if (call && (_typeof(call) === "object" || typeof call === "function")) { return call; } return _assertThisInitialized(self); }
 
@@ -19072,15 +20345,19 @@ function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.g
 
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function"); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, writable: true, configurable: true } }); if (superClass) _setPrototypeOf(subClass, superClass); }
 
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
+function isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Reflect.construct) return false; if (Reflect.construct.sham) return false; if (typeof Proxy === "function") return true; try { Date.prototype.toString.call(Reflect.construct(Date, [], function () {})); return true; } catch (e) { return false; } }
+
+function _construct(Parent, args, Class) { if (isNativeReflectConstruct()) { _construct = Reflect.construct; } else { _construct = function _construct(Parent, args, Class) { var a = [null]; a.push.apply(a, args); var Constructor = Function.bind.apply(Parent, a); var instance = new Constructor(); if (Class) _setPrototypeOf(instance, Class.prototype); return instance; }; } return _construct.apply(null, arguments); }
+
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
-
-function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
-
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
-
-function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
-
-function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -19089,26 +20366,31 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+ // import type { pathOptionsType, TypeRotationDirection } from '../tools/g2';
 
 
 
 
+
+
+
+ // import GlobalAnimation from './webgl/GlobalAnimation';
 
 
 
  // eslint-disable-next-line import/no-cycle
+// import {
+//   AnimationPhase, ColorAnimationPhase, CustomAnimationPhase,
+// } from './AnimationPhase';
+// function checkCallback(callback: ?(boolean) => void): (boolean) => void {
+//   let callbackToUse = () => {};
+//   if (typeof callback === 'function') {
+//     callbackToUse = callback;
+//   }
+//   return callbackToUse;
+// }
 
-
-
-function checkCallback(callback) {
-  var callbackToUse = function callbackToUse() {};
-
-  if (typeof callback === 'function') {
-    callbackToUse = callback;
-  }
-
-  return callbackToUse;
-} // A diagram is composed of multiple diagram elements.
+// A diagram is composed of multiple diagram elements.
 //
 // A diagram element can either be a:
 //  - Primative: a basic element that has the webGL vertices, color
@@ -19142,8 +20424,6 @@ function checkCallback(callback) {
 // the element's current transform used for drawing itself and any children
 // elements it has.
 //
-
-
 var DiagramElement =
 /*#__PURE__*/
 function () {
@@ -19164,9 +20444,42 @@ function () {
   // this is in vertex space
   // Current animation/movement state of element
   // Pulse animation state
+  // Rename to animate in future
+  // This will scale and position this element such that the center of the
+  // diagram limits will will look like it is centered on a html element
+  // when this figurone element is drawn.
+  // Scale can be:
+  //  1em: diagram units will be scaled so 0.2 diagram units (default
+  //       font size) looks like 1em of the element font size in pixels
+  //  100px: diagram units will be scaled so that the max diagram limit
+  //         with be the pixel count
+  //  stretch: diagram units be stretched so diagram limits extend to
+  //           element dimensions independently in x and y
+  //  max: -1 to 1 diagram units will be scaled to max dimension of element
+  //  fit: diagram units will be scaled so that diagram limits aspect ratio
+  //       fits within the element aspect ratio
+  //  '': defaults to fit keeping aspect ratio.
+  // scenarioSet: {
+  //   quiz1: [
+  //     { element: xyz, position: (), scale: (), rotation: (), length: () }
+  //     { element: abc, position: (), }
+  //   ],
+  // };
+  //  element1.scenarioSet['quiz'] = [
+  //     { element: abc, position: [1, 2], scale: 2 },
+  //     { element: xyz, position: [2, 2]},
+  //  ];
+  //  element.setScenarios('center', evenIfNotShown
+  //  element.moveToScenarios('center', 1, callback))
+  // element.animations.new()
+  //    .parallel()
+  //
   function DiagramElement() {
+    var _this = this;
+
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
     _classCallCheck(this, DiagramElement);
 
@@ -19177,55 +20490,208 @@ function () {
     this.transform = transform._dup();
     this.isMovable = false;
     this.isTouchable = false;
-    this.isInteractive = false;
+    this.isInteractive = undefined;
     this.hasTouchableElements = false;
     this.color = [1, 1, 1, 1];
+    this.opacity = 1;
 
     this.setTransformCallback = function () {};
 
-    this.beforeDrawCallback = null;
     this.lastDrawTransform = this.transform._dup();
     this.onClick = null;
     this.lastDrawElementTransformPosition = {
       parentCount: 0,
       elementCount: 0
     };
+    this.parent = parent;
     this.drawPriority = 1;
-    this.noRotationFromParent = false;
-    this.animate = {
-      color: {
-        plan: [],
-        toDisolve: '',
-        callback: null
+    this.noRotationFromParent = false; // Rename to animate in future
+
+    this.anim = {
+      rotation: function rotation() {
+        for (var _len = arguments.length, optionsIn = new Array(_len), _key = 0; _key < _len; _key++) {
+          optionsIn[_key] = arguments[_key];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
       },
-      transform: {
-        plan: [],
-        translation: {
-          style: 'linear',
-          options: {
-            rot: 1,
-            magnitude: 0.5,
-            offset: 0.5,
-            controlPoint: null,
-            direction: ''
-          }
-        },
-        callback: null
+      scale: function scale() {
+        for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+          optionsIn[_key2] = arguments[_key2];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
       },
-      custom: {
-        plan: [],
-        callback: null
+      position: function position() {
+        for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
+          optionsIn[_key3] = arguments[_key3];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
+      },
+      color: function color() {
+        for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
+          optionsIn[_key4] = arguments[_key4];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          elements: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
+      },
+      opacity: function opacity() {
+        for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
+          optionsIn[_key5] = arguments[_key5];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          elements: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
+      },
+      transform: function transform() {
+        for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
+          optionsIn[_key6] = arguments[_key6];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: _this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+      },
+      pulse: function pulse() {
+        for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
+          optionsIn[_key7] = arguments[_key7];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
+          element: this
+        }].concat(optionsIn));
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      dissolveIn: function dissolveIn() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len8 = arguments.length, args = new Array(_len8 > 1 ? _len8 - 1 : 0), _key8 = 1; _key8 < _len8; _key8++) {
+          args[_key8 - 1] = arguments[_key8];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      dissolveOut: function dissolveOut() {
+        var timeOrOptionsIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+        var defaultOptions = {
+          element: _this
+        };
+        var options;
+
+        for (var _len9 = arguments.length, args = new Array(_len9 > 1 ? _len9 - 1 : 0), _key9 = 1; _key9 < _len9; _key9++) {
+          args[_key9 - 1] = arguments[_key9];
+        }
+
+        if (typeof timeOrOptionsIn === 'number') {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, {
+            duration: timeOrOptionsIn
+          }].concat(args));
+        } else {
+          options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      builder: function builder() {
+        for (var _len10 = arguments.length, optionsIn = new Array(_len10), _key10 = 0; _key10 < _len10; _key10++) {
+          optionsIn[_key10] = arguments[_key10];
+        }
+
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
+      },
+      // eslint-disable-next-line max-len
+      scenario: function scenario() {
+        var defaultOptions = {
+          element: _this
+        };
+
+        for (var _len11 = arguments.length, optionsIn = new Array(_len11), _key11 = 0; _key11 < _len11; _key11++) {
+          optionsIn[_key11] = arguments[_key11];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+        if (options.target != null && options.target in options.element.scenarios) {
+          var target = options.element.getScenarioTarget(options.target);
+          options.target = target;
+        }
+
+        if (options.start != null && options.start in options.element.scenarios) {
+          var start = options.element.getScenarioTarget(options.start);
+          options.start = start;
+        }
+
+        if (options.delta != null && options.delta in options.element.scenarios) {
+          var delta = options.element.getScenarioTarget(options.delta);
+          options.delta = delta;
+        }
+
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+      },
+      // eslint-disable-next-line max-len
+      scenarios: function scenarios() {
+        var defaultOptions = {};
+
+        for (var _len12 = arguments.length, optionsIn = new Array(_len12), _key12 = 0; _key12 < _len12; _key12++) {
+          optionsIn[_key12] = arguments[_key12];
+        }
+
+        var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+        var elements = _this.getAllElementsWithScenario(options.target);
+
+        var steps = [];
+        var simpleOptions = {};
+        Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(options, simpleOptions, ['steps', 'element']);
+        elements.forEach(function (element) {
+          steps.push(element.anim.scenario(simpleOptions));
+        });
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
+          steps: steps
+        });
       }
     };
     this.diagramLimits = diagramLimits;
     this.move = {
       maxTransform: this.transform.constant(1000),
       minTransform: this.transform.constant(-1000),
-      limitToDiagram: false,
+      boundary: null,
       maxVelocity: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
       freely: {
         zeroVelocityThreshold: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](0.001, 0.001, 0.001),
-        deceleration: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5)
+        deceleration: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["TransformLimit"](5, 5, 5),
+        callback: null
       },
       bounce: true,
       canBeMovedAfterLoosingTouch: false,
@@ -19233,6 +20699,7 @@ function () {
       element: null,
       limitLine: null
     };
+    this.scenarios = {};
     this.pulse = {
       time: 1,
       frequency: 0.5,
@@ -19247,28 +20714,6 @@ function () {
       callback: function callback() {}
     };
     this.state = {
-      isAnimating: false,
-      isAnimatingColor: false,
-      isAnimatingCustom: false,
-      disolving: '',
-      animation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"]() // current animation phase
-
-      },
-      colorAnimation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"]() // current animation phase
-
-      },
-      customAnimation: {
-        currentPhaseIndex: 0,
-        // current animation phase index in plan
-        currentPhase: new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](function () {}) // current animation phase
-
-      },
       isBeingMoved: false,
       isMovingFreely: false,
       movement: {
@@ -19281,60 +20726,23 @@ function () {
         startTime: -1
       }
     };
-    this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0); // this.presetTransforms = {};
+    this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
+    this.tieToHTML = {
+      element: null,
+      scale: 'fit',
+      window: this.diagramLimits,
+      updateOnResize: true
+    };
+    this.isRenderedAsImage = false;
+    this.unrenderNextDraw = false;
   }
 
   _createClass(DiagramElement, [{
     key: "setProperties",
     value: function setProperties(properties) {
       Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"])(this, properties);
-    } // copyFrom(element: Object) {
-    //   const copyValue = (value) => {
-    //     if (typeof value === 'number'
-    //         || typeof value === 'boolean'
-    //         || typeof value === 'string'
-    //         || value == null
-    //         || typeof value === 'function') {
-    //       return value;
-    //     }
-    //     if (typeof value._dup === 'function') {
-    //       return value._dup();
-    //     }
-    //     // if (value instanceof AnimationPhase
-    //     //     || value instanceof ColorAnimationPhase
-    //     //     || value instanceof CustomAnimationPhase
-    //     //     // eslint-disable-next-line no-use-before-define
-    //     //     || value instanceof DiagramElementCollection
-    //     //     // eslint-disable-next-line no-use-before-define
-    //     //     || value instanceof DiagramElementPrimative
-    //     //     || value instanceof DrawingObject
-    //     //     || value instanceof Transform
-    //     //     || value instanceof Point
-    //     //     || value instanceof Rect
-    //     //     || value instanceof TransformLimit) {
-    //     //   return value._dup();
-    //     // }
-    //     if (Array.isArray(value)) {
-    //       const arrayCopy = [];
-    //       value.forEach(arrayElement => arrayCopy.push(copyValue(arrayElement)));
-    //       return arrayCopy;
-    //     }
-    //     if (typeof value === 'object') {
-    //       const objectCopy = {};
-    //       Object.keys(value).forEach((key) => {
-    //         const v = copyValue(value[key]);
-    //         objectCopy[key] = v;
-    //       });
-    //       return objectCopy;
-    //     }
-    //     return value;
-    //   };
-    //   Object.keys(element).forEach((key) => {
-    //     // $FlowFixMe
-    //     this[key] = copyValue(element[key]);
-    //   });
-    // }
-    // Space definition:
+    } // Space definition:
     //   * Pixel space: css pixels
     //   * GL Space: x,y = -1 to 1
     //   * Diagram Space: x,y = diagram limits
@@ -19375,75 +20783,101 @@ function () {
     //     to the clip space.
     //
     // Each diagram element holds a DIAGRAM ELMENT CLIP space
-    // vertexToClip(vertex: Point) {
-    //   const scaleX = this.diagramLimits.width / 2;
-    //   const scaleY = this.diagramLimits.height / 2;
-    //   const biasX = -(-this.diagramLimits.width / 2 - this.diagramLimits.left);
-    //   const biasY = -(this.diagramLimits.height / 2 - this.diagramLimits.top);
-    //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
-    //   return vertex.transformBy(this.lastDrawTransformMatrix)
-    //     .transformBy(transform.matrix());
-    // }
-    // textVertexToClip(vertex: Point) {
-    //   const scaleX = this.diagramLimits.width / 2;
-    //   const scaleY = this.diagramLimits.height / 2;
-    //   const biasX = -(-this.diagramLimits.width / 2 - this.diagramLimits.left);
-    //   const biasY = -(this.diagramLimits.height / 2 - this.diagramLimits.top);
-    //   const transform = new Transform().scale(scaleX, scaleY).translate(biasX, biasY);
-    //   return vertex.transformBy(transform.matrix());
-    // }
-    // Calculate the next transform due to a progressing animation
 
   }, {
-    key: "calcNextAnimationTransform",
-    value: function calcNextAnimationTransform(elapsedTime) {
-      var phase = this.state.animation.currentPhase; // This flow error cannot happen as start is un-nulled in the phase start
-      // $FlowFixMe
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(diagramCanvas) {
+      var tieToElement;
 
-      var start = phase.startTransform._dup();
-
-      var delta = phase.deltaTransform._dup();
-
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      var p = percentComplete; // let next = delta._dup().constant(p);
-      // next = start.add(delta.mul(next));
-
-      var next = start.toDelta(delta, p, phase.translationStyle, phase.translationOptions);
-      return next;
-    }
-  }, {
-    key: "calcNextAnimationColor",
-    value: function calcNextAnimationColor(elapsedTime) {
-      var phase = this.state.colorAnimation.currentPhase;
-      var start = phase.startColor;
-      var delta = phase.deltaColor;
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      var p = percentComplete;
-      var next = [0, 0, 0, 1];
-
-      if (start != null) {
-        next = start.map(function (c, index) {
-          return c + delta[index] * p;
-        });
+      if (typeof this.tieToHTML.element === 'string') {
+        tieToElement = document.getElementById(this.tieToHTML.element);
       }
 
-      return next;
-    }
+      if (tieToElement != null) {
+        var tie = tieToElement.getBoundingClientRect();
+        var canvas = diagramCanvas.getBoundingClientRect();
+        var diagram = this.diagramLimits;
+        var dWindow = this.tieToHTML.window;
+        var cAspectRatio = canvas.width / canvas.height;
+        var dAspectRatio = diagram.width / diagram.height;
+        var tAspectRatio = tie.width / tie.height;
+        var wAspectRatio = dWindow.width / dWindow.height;
+        var topLeftPixels = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.left - canvas.left, tie.top - canvas.top);
+        var bottomRightPixels = topLeftPixels.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.width, tie.height));
+        var pixelToDiagram = this.diagramTransforms.pixelToDiagram;
+        var topLeft = topLeftPixels.transformBy(pixelToDiagram.m());
+        var bottomRight = bottomRightPixels.transformBy(pixelToDiagram.m());
+        var width = bottomRight.x - topLeft.x;
+        var height = topLeft.y - bottomRight.y;
+        var center = topLeft.add(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](width / 2, -height / 2));
+        var scaleString = this.tieToHTML.scale.trim().toLowerCase();
+        var scaleX = 1;
+        var scaleY = 1;
+        var diagramToWindowScaleX = diagram.width / dWindow.width;
+        var diagramToWindowScaleY = diagram.height / dWindow.height; // Window has no scaling impact on em, it only has impact on translation
+
+        if (scaleString.endsWith('em')) {
+          var scale = parseFloat(scaleString);
+          var em = parseFloat(getComputedStyle(tieToElement).fontSize); // 0.2 is default font size in diagram units
+
+          var defaultFontScale = diagram.width / 0.2;
+          scaleX = scale * em * defaultFontScale / canvas.width;
+          scaleY = scale * em * defaultFontScale / dAspectRatio / canvas.height;
+        } // Scale the maximum dimension of the window to the pixel value
+
+
+        if (scaleString.endsWith('px')) {
+          var maxPixels = parseFloat(scaleString);
+
+          if (wAspectRatio > 1) {
+            var _scale = maxPixels / canvas.width;
+
+            scaleX = _scale * diagramToWindowScaleX;
+            scaleY = _scale * cAspectRatio / dAspectRatio * diagramToWindowScaleX;
+          } else {
+            var _scale2 = maxPixels / canvas.height;
+
+            scaleX = _scale2 / cAspectRatio * dAspectRatio * diagramToWindowScaleY;
+            scaleY = _scale2 * diagramToWindowScaleY;
+          }
+        } // Scale the window x to tie x, and window y to tie y
+
+
+        if (scaleString === 'stretch') {
+          scaleX = tie.width / canvas.width * diagramToWindowScaleX;
+          scaleY = tie.height / canvas.height * diagramToWindowScaleY;
+        } // Scale so window either fits within the tie element, or fits only
+        // within the max dimension of the tie element
+
+
+        if (scaleString === 'max' || scaleString === 'fit') {
+          var fitHeightScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.height / canvas.height / cAspectRatio * dAspectRatio * diagramToWindowScaleY, tie.height / canvas.height * diagramToWindowScaleY);
+          var fitWidthScale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](tie.width / canvas.width * diagramToWindowScaleX, tie.width / canvas.width * cAspectRatio / dAspectRatio * diagramToWindowScaleX);
+
+          if (scaleString === 'max' && tAspectRatio > wAspectRatio || scaleString === 'fit' && tAspectRatio < wAspectRatio) {
+            scaleX = fitWidthScale.x;
+            scaleY = fitWidthScale.y;
+          } else {
+            scaleX = fitHeightScale.x;
+            scaleY = fitHeightScale.y;
+          }
+        }
+
+        this.setScale(scaleX, scaleY); // Offset the element relative to the tie
+
+        this.setPosition(center.x - scaleX * (this.tieToHTML.window.left + this.tieToHTML.window.width / 2), center.y - scaleY * (this.tieToHTML.window.bottom + this.tieToHTML.window.height / 2));
+        this.setFirstTransform(this.getParentLastDrawTransform());
+      }
+    } // eslint-disable-next-line no-unused-vars, class-methods-use-this
+
   }, {
-    key: "calcNextCustomAnimationPercentComplete",
-    value: function calcNextCustomAnimationPercentComplete(elapsedTime) {
-      var phase = this.state.customAnimation.currentPhase;
-      var percentTime = elapsedTime / phase.time;
-      var percentComplete = phase.animationStyle(percentTime);
-      return percentComplete;
-    }
+    key: "setFirstTransform",
+    value: function setFirstTransform(parentTransform) {}
   }, {
     key: "setPosition",
     value: function setPosition(pointOrX) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var position = pointOrX;
+      var position = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(pointOrX);
 
       if (typeof pointOrX === 'number') {
         position = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](pointOrX, y);
@@ -19452,6 +20886,33 @@ function () {
       var currentTransform = this.transform._dup();
 
       currentTransform.updateTranslation(position);
+      this.setTransform(currentTransform);
+    }
+  }, {
+    key: "setRotation",
+    value: function setRotation(rotation) {
+      var currentTransform = this.transform._dup();
+
+      currentTransform.updateRotation(rotation);
+      this.setTransform(currentTransform);
+    }
+  }, {
+    key: "setScale",
+    value: function setScale(scaleOrX) {
+      var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+      var scale = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scaleOrX);
+
+      if (typeof scaleOrX === 'number') {
+        if (y == null) {
+          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, scaleOrX);
+        } else {
+          scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleOrX, y);
+        }
+      }
+
+      var currentTransform = this.transform._dup();
+
+      currentTransform.updateScale(scale);
       this.setTransform(currentTransform);
     } // Use this method to set the element's transform in case a callback has been
     // connected that is tied to an update of the transform.
@@ -19479,56 +20940,11 @@ function () {
     // freely.
 
   }, {
-    key: "setNextTransform",
-    value: function setNextTransform(now) {
-      // If animation is happening
-      if (this.state.isAnimating) {
-        var phase = this.state.animation.currentPhase; // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now;
-          return;
-        } // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.animation.currentPhaseIndex < this.animate.transform.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            phase.finish(this); // this.setTransform(this.calcNextAnimationTransform(phase.time));
-            // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.animation.currentPhaseIndex += 1;
-            this.animatePhase(this.state.animation.currentPhaseIndex);
-            this.state.animation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextTransform(now);
-            return;
-          } // Note, stopAnimating will finish the last phase
-
-
-          this.stopAnimating(false);
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-
-
-        this.setTransform(this.calcNextAnimationTransform(deltaTime));
-        return;
-      } // If the element is moving freely, then calc it's next velocity and
+    key: "nextMovingFreelyFrame",
+    value: function nextMovingFreelyFrame(now) {
+      // If the element is moving freely, then calc it's next velocity and
       // transform. Save the new velocity into state.movement and return the
       // transform.
-
-
       if (this.state.isMovingFreely) {
         // If this is the first frame of moving freely, then record the current
         // time so can calculate velocity on next frame
@@ -19539,10 +20955,9 @@ function () {
         // the delta time from this frame to the previous
 
 
-        var _deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
+        var deltaTime = now - this.state.movement.previousTime; // Calculate the new velocity and position
 
-
-        var next = this.decelerate(_deltaTime);
+        var next = this.decelerate(deltaTime);
         this.state.movement.velocity = next.velocity;
         this.state.movement.previousTime = now; // If the velocity is 0, then stop moving freely and return the current
         // transform
@@ -19554,133 +20969,90 @@ function () {
 
         this.setTransform(next.transform);
       }
-    }
+    } // Used only to clear 2D context
+    // eslint-disable-next-line class-methods-use-this
+
   }, {
-    key: "setNextCustomAnimation",
-    value: function setNextCustomAnimation(now) {
-      // If animation is happening
-      // if (this.name === 'diameterDimension') {
-      //   console.log("0", this.state.isAnimatingCustom)
-      // }
-      if (this.state.isAnimatingCustom) {
-        var phase = this.state.customAnimation.currentPhase; // console.log("0.5", phase.startTime)
-        // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now - phase.plannedStartTime;
-          return;
-        } // const percent = calcNextCustomAnimationPercentComplete(now);
-        // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // console.log("1")
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.customAnimation.currentPhaseIndex < this.animate.custom.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            // phase.animationCallback(1);
-            phase.finish(); // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.customAnimation.currentPhaseIndex += 1;
-            this.animateCustomPhase(this.state.customAnimation.currentPhaseIndex);
-            this.state.customAnimation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextCustomAnimation(now);
-            return;
-          } // This needs to go before StopAnimating, as stopAnimating clears
-          // the animation plan (incase a callback is used to start another
-          // animation)
-          // const endColor = this.calcNextAnimationColor(phase.time);
-          // this.setColor(endColor);
-          // console.log("2")
-          // phase.animationCallback(1);
-
-
-          this.stopAnimatingCustom(true); // console.log("3")
-
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-        // console.log("4", this.state.isAnimatingCustom)
-
-
-        var percent = this.calcNextCustomAnimationPercentComplete(deltaTime); // console.log(phase.animationCallback)
-
-        phase.animationCallback(percent); // console.log("5", this.state.isAnimatingCustom)
-        // this.setColor(this.calcNextAnimationColor(deltaTime));
-      } // if (this.name === 'diameterDimension') {
-      //   console.log("6", this.state.isAnimatingCustom)
-      // }
-
-    }
+    key: "clear",
+    value: function clear() {}
   }, {
-    key: "setNextColor",
-    value: function setNextColor(now) {
-      // If animation is happening
-      if (this.state.isAnimatingColor) {
-        var phase = this.state.colorAnimation.currentPhase; // If an animation hasn't yet started, the start time will be -1.
-        // If this is so, then set the start time to the current time and
-        // return the current transform.
-
-        if (phase.startTime < 0) {
-          phase.startTime = now;
-          return;
-        } // If we have got here, that means the animation has already started,
-        // so calculate the time delta between now and the startTime
-
-
-        var deltaTime = now - phase.startTime; // If this time delta is larger than the phase's planned time, then
-        // either progress to the next animation phase, or end animation.
-
-        if (deltaTime > phase.time) {
-          // If there are more animation phases in the plan:
-          //   - set the current transform to be the end of the current phase
-          //   - start the next phase
-          if (this.state.colorAnimation.currentPhaseIndex < this.animate.color.plan.length - 1) {
-            // Set current transform to the end of the current phase
-            // this.setColor(this.calcNextAnimationColor(phase.time));
-            // Phase callback
-            phase.finish(this); // Get the amount of time that has elapsed in the next phase
-
-            var nextPhaseDeltaTime = deltaTime - phase.time; // Start the next animation phase
-
-            this.state.colorAnimation.currentPhaseIndex += 1;
-            this.animateColorPhase(this.state.colorAnimation.currentPhaseIndex);
-            this.state.colorAnimation.currentPhase.startTime = now - nextPhaseDeltaTime;
-            this.setNextColor(now);
-            return;
-          } // This needs to go before StopAnimating, as stopAnimating clears
-          // the animation plan (incase a callback is used to start another
-          // animation)
-          // const endColor = this.calcNextAnimationColor(phase.time);
-          // this.setColor(endColor);
-          // phase.finish(this);
-
-
-          this.stopAnimatingColor(false);
-          return;
-        } // If we are here, that means the time elapsed is not more than the
-        // current animation phase plan time, so calculate the next transform.
-
-
-        this.setColor(this.calcNextAnimationColor(deltaTime)); // if(this.name === 'times') {
-        //   console.log(now, this.color[3])
-        // }
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      if (this.animations.willStartAnimating()) {
+        return true;
       }
+
+      return false;
     }
   }, {
     key: "setColor",
     value: function setColor(color) {
       this.color = color.slice();
+    }
+  }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      // this.color[3] = opacity;
+      this.opacity = opacity;
+    }
+  }, {
+    key: "getScenarioTarget",
+    value: function getScenarioTarget(scenarioName) {
+      var target = this.transform._dup();
+
+      if (scenarioName in this.scenarios) {
+        var scenario = this.scenarios[scenarioName];
+
+        if (scenario.position != null) {
+          target.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.position));
+        }
+
+        if (scenario.rotation != null) {
+          target.updateRotation(scenario.rotation);
+        }
+
+        if (scenario.scale != null) {
+          target.updateScale(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(scenario.scale));
+        }
+      }
+
+      return target;
+    }
+  }, {
+    key: "setScenario",
+    value: function setScenario(scenarioName) {
+      if (this.scenarios[scenarioName] != null) {
+        var target = this.getScenarioTarget(scenarioName);
+        this.setTransform(target._dup());
+      }
+    }
+  }, {
+    key: "setScenarios",
+    value: function setScenarios(scenarioName) {
+      if (this.scenarios[scenarioName] != null) {
+        this.setScenario(scenarioName);
+      }
+    }
+  }, {
+    key: "getAllElementsWithScenario",
+    value: function getAllElementsWithScenario(scenarioName) {
+      if (this.scenarios[scenarioName] != null) {
+        return [this];
+      }
+
+      return [];
+    }
+  }, {
+    key: "getTimeToMoveToScenario",
+    value: function getTimeToMoveToScenario(scenarioName) {
+      var rotDirection = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var target = this.getScenarioTarget(scenarioName);
+      var velocity = this.transform.constant(0);
+      velocity.updateTranslation(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / 2, 1 / 2));
+      velocity.updateRotation(2 * Math.PI / 6);
+      velocity.updateScale(1, 1);
+      var time = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform._dup(), target, velocity, rotDirection);
+      return time;
     } // Decelerate over some time when moving freely to get a new element
     // transform and movement velocity
 
@@ -19746,12 +21118,12 @@ function () {
   }, {
     key: "updateLastDrawTransform",
     value: function updateLastDrawTransform() {
-      var _this = this;
+      var _this2 = this;
 
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       var pLength = this.lastDrawTransform.order.length;
       this.transform.order.forEach(function (t, index) {
-        _this.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
+        _this2.lastDrawTransform.order[pLength - parentCount - index - 1] = t._dup();
       });
       this.lastDrawTransform.calcMatrix();
     }
@@ -19760,575 +21132,19 @@ function () {
     value: function getParentLastDrawTransform() {
       var parentCount = this.lastDrawElementTransformPosition.parentCount;
       return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(-parentCount));
-    } // Start an animation plan of phases ending in a callback
-
-  }, {
-    key: "animatePlan",
-    value: function animatePlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimating();
-      this.stopMovingFreely();
-      this.stopBeingMoved();
-      this.animate.transform.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.transform.plan.push(phases[i]);
-      }
-
-      if (this.animate.transform.plan.length > 0) {
-        if (callback) {
-          this.animate.transform.callback = callback;
-        }
-
-        this.state.isAnimating = true;
-        this.state.animation.currentPhaseIndex = 0;
-        this.animatePhase(this.state.animation.currentPhaseIndex);
-      }
-    }
-  }, {
-    key: "animateColorPlan",
-    value: function animateColorPlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingColor();
-      this.animate.color.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.color.plan.push(phases[i]);
-      }
-
-      if (this.animate.color.plan.length > 0) {
-        if (callback) {
-          this.animate.color.callback = callback;
-        } // console.log(this.animate.color.toDisolve, this.name)
-        // this.state.disolving = this.animate.color.toDisolve;
-        // this.animate.color.toDisolve = '';
-
-
-        this.state.isAnimatingColor = true;
-        this.state.colorAnimation.currentPhaseIndex = 0;
-        this.animateColorPhase(this.state.colorAnimation.currentPhaseIndex);
-      }
-    }
-  }, {
-    key: "animateCustomPlan",
-    value: function animateCustomPlan(phases) {
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingCustom();
-      this.animate.custom.plan = [];
-
-      for (var i = 0, j = phases.length; i < j; i += 1) {
-        this.animate.custom.plan.push(phases[i]);
-      }
-
-      if (this.animate.custom.plan.length > 0) {
-        if (callback) {
-          this.animate.custom.callback = callback;
-        }
-
-        this.state.isAnimatingCustom = true;
-        this.state.customAnimation.currentPhaseIndex = 0;
-        this.animateCustomPhase(this.state.customAnimation.currentPhaseIndex);
-      }
-    } // Start the animation of a phase - this should only be called by methods
-    // internal to this class.
-
-  }, {
-    key: "animatePhase",
-    value: function animatePhase(index) {
-      this.state.animation.currentPhase = this.animate.transform.plan[index];
-      this.state.animation.currentPhase.start(this.transform._dup());
-    }
-  }, {
-    key: "animateColorPhase",
-    value: function animateColorPhase(index) {
-      this.state.colorAnimation.currentPhase = this.animate.color.plan[index];
-      this.state.colorAnimation.currentPhase.start(this);
-    }
-  }, {
-    key: "animateCustomPhase",
-    value: function animateCustomPhase(index) {
-      this.state.customAnimation.currentPhase = this.animate.custom.plan[index];
-      this.state.customAnimation.currentPhase.start();
-    }
-  }, {
-    key: "stopAnimatingGeneric",
-    value: function stopAnimatingGeneric(cancelled, forceSetToEnd, currentPhaseIndex, animateString, isState) {
-      // Animation state needs to be cleaned up before calling callbacks
-      // as the last phase callback may trigger more animations which need
-      // to start from scratch (and not use the existing callback for example).
-      // Therefore, make some temporary variables to store the animation state.
-      var runRemainingPhases = false; // const currentIndex = currentPhaseIndex;
-
-      var runLastPhase = false;
-      var _this$animate$animate = this.animate[animateString],
-          plan = _this$animate$animate.plan,
-          callback = _this$animate$animate.callback; // If the animation was cancelled, then run finish on all unfinished
-      // phases.
-
-      if (plan.length > 0 && this.state[isState] && cancelled) {
-        runRemainingPhases = true;
-      } // If the animation finished without being cancelled, then just call
-      // the finish routine on the last phase as it hasn't been called yet
-      // by setNextTransform
-
-
-      if (!cancelled) {
-        runLastPhase = true;
-      } // Reset the animation state, plan and callback
-
-
-      this.state[isState] = false; // $FlowFixMe
-
-      this.animate[animateString].plan = [];
-      this.animate[animateString].callback = null; // Finish remaining phases if required.
-
-      if (runRemainingPhases) {
-        var endIndex = plan.length - 1;
-
-        for (var i = currentPhaseIndex; i <= endIndex; i += 1) {
-          var phase = plan[i];
-
-          if (phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"]) {
-            phase.finish(cancelled, forceSetToEnd);
-          } else {
-            phase.finish(this, cancelled, forceSetToEnd);
-          }
-        }
-      } // Finish last phases if required.
-
-
-      if (runLastPhase) {
-        if (plan.length > 0) {
-          var _phase = plan.slice(-1)[0];
-
-          if (_phase instanceof _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"]) {
-            _phase.finish(cancelled, forceSetToEnd);
-          } else {
-            _phase.finish(this, cancelled, forceSetToEnd);
-          }
-        }
-      } // Run animation plan callback if it exists.
-
-
-      if (callback != null) {
-        callback(cancelled);
-      }
-    } // When animation is stopped, any callback associated with the animation
-    // needs to be called, with whatever is passed to stopAnimating.
-
-  }, {
-    key: "stopAnimating",
-    value: function stopAnimating() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.animation.currentPhaseIndex, 'transform', 'isAnimating');
-    }
-  }, {
-    key: "stopAnimatingColor",
-    value: function stopAnimatingColor() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.colorAnimation.currentPhaseIndex, 'color', 'isAnimatingColor');
-    }
-  }, {
-    key: "stopAnimatingCustom",
-    value: function stopAnimatingCustom() {
-      var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-      var forceSetToEnd = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.stopAnimatingGeneric(cancelled, forceSetToEnd, this.state.colorAnimation.currentPhaseIndex, 'custom', 'isAnimatingCustom');
-    } // **************************************************************
-    // **************************************************************
-    // Helper functions for quicker animation plans
-
-  }, {
-    key: "animateTo",
-    value: function animateTo(transform) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var delay = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      this.animateTransformToWithDelay(transform, delay, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    }
-  }, {
-    key: "animateFrom",
-    value: function animateFrom(transform) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var rotDirection = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var target = this.transform._dup();
-
-      this.animateTransformToWithDelay(target, 0, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    }
-  }, {
-    key: "animateColorTo",
-    value: function animateColorTo(color) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var finishOnCancel = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      this.animateColorToWithDelay(color, 0, time, null, callback, finishOnCancel, easeFunction);
-    }
-  }, {
-    key: "animateTransformToWithDelay",
-    value: function animateTransformToWithDelay(targetTransform) {
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
-      var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-      var moveTime = 0;
-
-      if (timeOrVelocity instanceof _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]) {
-        moveTime = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getMaxTimeFromVelocity"])(this.transform, targetTransform, timeOrVelocity, rotDirection);
-      } else {
-        moveTime = timeOrVelocity;
-      }
-
-      if (delay === 0 && moveTime === 0) {
-        this.setTransform(targetTransform);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseMove = null;
-      var phases = [];
-      var delayCallback = null;
-      var moveCallback = callbackToUse;
-
-      if (moveTime === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          callbackToUse(cancelled);
-        };
-
-        moveCallback = null;
-      }
-
-      if (delay > 0) {
-        var delayTransform = this.transform._dup();
-
-        if (addToExistingPlan && this.animate.transform.plan.length > 0) {
-          delayTransform = this.animate.transform.plan.slice(-1)[0].targetTransform._dup();
-        }
-
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"](delayTransform, delayTransform, delay, rotDirection, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"], this.animate.transform.translation.style, this.animate.transform.translation.options);
-        phases.push(phaseDelay);
-      }
-
-      if (moveTime > 0) {
-        phaseMove = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["AnimationPhase"](null, targetTransform, timeOrVelocity, rotDirection, moveCallback, finishOnCancel, easeFunction, this.animate.transform.translation.style, this.animate.transform.translation.options);
-        phases.push(phaseMove);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimating) {
-          this.animate.transform.plan = [].concat(_toConsumableArray(this.animate.transform.plan), phases);
-        } else {
-          this.animatePlan(phases);
-        }
-      }
-    }
-  }, {
-    key: "animateColorToWithDelay",
-    value: function animateColorToWithDelay(color, delay) {
-      var _this2 = this;
-
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var disolve = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-
-      if (delay === 0 && time === 0) {
-        this.setColor(color);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseColor = null;
-      var phases = [];
-      var delayCallback = null;
-      var colorCallback = callbackToUse;
-
-      if (time === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          if (!cancelled && finishOnCancel) {
-            _this2.setColor(color);
-          }
-
-          callbackToUse(cancelled);
-        };
-
-        colorCallback = null;
-      }
-
-      if (delay > 0) {
-        var delayColor = this.color.slice();
-
-        if (addToExistingPlan && this.animate.color.plan.length > 0) {
-          delayColor = this.animate.color.plan.slice(-1)[0].targetColor.slice();
-        }
-
-        var delayDisolve = null;
-
-        if (disolve === 'in') {
-          delayColor[3] = 0.01;
-          delayDisolve = 'in';
-        }
-
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"](delayColor, delayColor, delay, delayDisolve, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
-        phases.push(phaseDelay);
-      }
-
-      if (time > 0) {
-        phaseColor = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationPhase"](null, color, time, disolve, colorCallback, finishOnCancel, easeFunction);
-        phases.push(phaseColor);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimatingColor) {
-          this.animate.color.plan = [].concat(_toConsumableArray(this.animate.color.plan), phases);
-        } else {
-          this.animateColorPlan(phases);
-        }
-      }
-    }
-  }, {
-    key: "disolveOutWithDelay",
-    value: function disolveOutWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.animateColorToWithDelay(this.color, delay, time, 'out', callback);
-    }
-  }, {
-    key: "disolveInWithDelay",
-    value: function disolveInWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      this.animateColorToWithDelay(this.color, delay, time, 'in', callback);
-    }
-  }, {
-    key: "disolveWithDelay",
-    value: function disolveWithDelay() {
-      var delay = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var disolve = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'in';
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var finishOnCancel = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-      this.animateColorToWithDelay(this.color, delay, time, disolve, callback, finishOnCancel);
-    }
-  }, {
-    key: "animateCustomTo",
-    value: function animateCustomTo(phaseCallback) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var startPercent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"];
-      this.animateCustomToWithDelay(0, phaseCallback, time, startPercent, callback, true, easeFunction, true);
-    }
-  }, {
-    key: "animateCustomToWithDelay",
-    value: function animateCustomToWithDelay(delay, phaseCallback) {
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var startPercent = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var finishOnCancel = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-      var easeFunction = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-      var addToExistingPlan = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : true;
-      var callbackToUse = checkCallback(callback);
-
-      if (delay === 0 && time === 0) {
-        phaseCallback(1);
-        callbackToUse(false);
-        return;
-      }
-
-      var phaseDelay = null;
-      var phaseCustom = null;
-      var phases = [];
-      var delayCallback = null;
-      var customCallback = callbackToUse;
-
-      if (time === 0) {
-        delayCallback = function delayCallback(cancelled) {
-          callbackToUse(cancelled);
-        };
-
-        customCallback = null;
-      }
-
-      if (delay > 0) {
-        phaseDelay = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](function () {}, delay, 0, delayCallback, finishOnCancel, _tools_math__WEBPACK_IMPORTED_MODULE_2__["linear"]);
-        phases.push(phaseDelay);
-      }
-
-      if (time > 0) {
-        phaseCustom = new _AnimationPhase__WEBPACK_IMPORTED_MODULE_9__["CustomAnimationPhase"](phaseCallback, time, startPercent, customCallback, finishOnCancel, easeFunction);
-        phases.push(phaseCustom);
-      }
-
-      if (phases.length > 0) {
-        if (addToExistingPlan && this.state.isAnimating) {
-          this.animate.custom.plan = [].concat(_toConsumableArray(this.animate.custom.plan), phases);
-        } else {
-          this.animateCustomPlan(phases);
-        }
-      } // if (delay === 0 && time === 0) {
-      //   if (callback != null) {
-      //     callback();
-      //   }
-      //   return;
-      // }
-      // let timeToUse = time;
-      // if (time === 0) {
-      //   timeToUse = 0.0001;
-      // }
-      // const phaseDelay = new CustomAnimationPhase(() => {}, delay, 0, easeFunction);
-      // const phaseMove = new CustomAnimationPhase(
-      //   phaseCallback, timeToUse,
-      //   startPercent, easeFunction,
-      // );
-      // if (delay === 0) {
-      //   this.animateCustomPlan([phaseMove], checkCallback(callback));
-      // } else {
-      //   this.animateCustomPlan([phaseDelay, phaseMove], checkCallback(callback));
-      // }
-
-    }
-  }, {
-    key: "disolveIn",
-    value: function disolveIn() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.disolveInWithDelay(0, time, callback);
-    }
-  }, {
-    key: "disolveOut",
-    value: function disolveOut() {
-      var time = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
-      var callback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
-      this.disolveOutWithDelay(0, time, callback);
-    } // With update only first instace of translation in the transform order
-
-  }, {
-    key: "animateTranslationTo",
-    value: function animateTranslationTo(translation) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // With update only first instace of translation in the transform order
-
-  }, {
-    key: "animateScaleTo",
-    value: function animateScaleTo(scale) {
-      var time = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateScale(scale);
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // Will update only first instace of translation in the transform order
-
-  }, {
-    key: "animateTranslationFrom",
-    value: function animateTranslationFrom(translation) {
-      var timeOrVelocity = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var callback = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-      var easeFunction = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var target = this.transform._dup();
-
-      this.transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(target, 0, timeOrVelocity, 0, callback, true, easeFunction); // this.animateTo(target, timeOrVelocity, 0, 0, callback, easeFunction);
-    }
-  }, {
-    key: "animateTranslationToWithDelay",
-    value: function animateTranslationToWithDelay(translation) {
-      var delay = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 1;
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateTranslation(translation);
-      this.animateTransformToWithDelay(transform, delay, time, 0, callback, true, easeFunction);
-    } // With update only first instace of rotation in the transform order
-
-  }, {
-    key: "animateRotationTo",
-    value: function animateRotationTo(rotation, rotDirection) {
-      var timeOrVelocity = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateRotation(rotation);
-      this.animateTransformToWithDelay(transform, 0, timeOrVelocity, rotDirection, callback, true, easeFunction);
-    } // With update only first instace of rotation in the transform order
-
-  }, {
-    key: "animateTranslationAndRotationTo",
-    value: function animateTranslationAndRotationTo(translation, rotation, rotDirection) {
-      var time = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 1;
-      var callback = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-      var easeFunction = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      transform.updateRotation(rotation);
-      transform.updateTranslation(translation._dup());
-      this.animateTransformToWithDelay(transform, 0, time, rotDirection, callback, true, easeFunction);
-    }
-  }, {
-    key: "animateTranslationAndScaleTo",
-    value: function animateTranslationAndScaleTo(translation, scale) {
-      var time = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 1;
-      var callback = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-      var easeFunction = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : _tools_math__WEBPACK_IMPORTED_MODULE_2__["easeinout"];
-
-      var transform = this.transform._dup();
-
-      if (typeof scale === 'number') {
-        transform.updateScale(scale, scale);
-      } else {
-        transform.updateScale(scale._dup());
-      }
-
-      transform.updateTranslation(translation._dup());
-      this.animateTransformToWithDelay(transform, 0, time, 0, callback, true, easeFunction);
-    } // **************************************************************
-    // **************************************************************
-    // Being Moved
+    } // Being Moved
 
   }, {
     key: "startBeingMoved",
     value: function startBeingMoved() {
-      this.stopAnimating();
+      // this.stopAnimating();
+      this.animations.cancelAll('noComplete');
       this.stopMovingFreely();
       this.state.movement.velocity = this.transform.zero();
       this.state.movement.previousTransform = this.transform._dup();
       this.state.movement.previousTime = Date.now() / 1000;
       this.state.isBeingMoved = true;
+      this.unrender();
     }
   }, {
     key: "moved",
@@ -20375,11 +21191,13 @@ function () {
     key: "startMovingFreely",
     value: function startMovingFreely() {
       var callback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
-      this.stopAnimating();
+      // this.stopAnimating();
+      this.animations.cancelAll('noComplete');
       this.stopBeingMoved();
 
       if (callback) {
-        this.animate.transform.callback = callback;
+        // this.animate.transform.callback = callback;
+        this.move.freely.callback = callback;
       }
 
       this.state.isMovingFreely = true;
@@ -20393,14 +21211,14 @@ function () {
       this.state.isMovingFreely = false;
       this.state.movement.previousTime = -1;
 
-      if (this.animate.transform.callback) {
-        this.animate.transform.callback(result); // if (result !== null && result !== undefined) {
+      if (this.move.freely.callback) {
+        this.move.freely.callback(result); // if (result !== null && result !== undefined) {
         //   this.animate.transform.callback(result);
         // } else {
         //   this.animate.transform.callback();
         // }
 
-        this.animate.transform.callback = null;
+        this.move.freely.callback = null;
       }
     } // Take an input transform matrix, and output a list of transform matrices
     // that have been transformed by a pulse. The first matrix in the list
@@ -20519,6 +21337,7 @@ function () {
     value: function pulseNow() {
       this.state.isPulsing = true;
       this.state.pulse.startTime = -1;
+      this.unrender();
     }
   }, {
     key: "stopPulsing",
@@ -20536,9 +21355,15 @@ function () {
     value: function stop() {
       var cancelled = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var forceSetToEndOfPlan = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
-      this.stopAnimating(cancelled, forceSetToEndOfPlan);
-      this.stopAnimatingColor(cancelled, forceSetToEndOfPlan);
-      this.stopAnimatingCustom(cancelled, forceSetToEndOfPlan);
+
+      if (forceSetToEndOfPlan === true || forceSetToEndOfPlan === 'complete') {
+        this.animations.cancelAll('complete');
+      } else if (forceSetToEndOfPlan === false || forceSetToEndOfPlan === 'noComplete') {
+        this.animations.cancelAll('noComplete');
+      } else {
+        this.animations.cancelAll(null);
+      }
+
       this.stopMovingFreely(cancelled);
       this.stopBeingMoved();
       this.stopPulsing(cancelled);
@@ -20546,7 +21371,18 @@ function () {
   }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
+      var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;
       this.diagramLimits = limits;
+      this.diagramTransforms = transforms;
+    }
+  }, {
+    key: "resize",
+    value: function resize() {
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      if (diagramHTMLElement && this.tieToHTML.updateOnResize) {
+        this.updateHTMLElementTie(diagramHTMLElement);
+      }
     } // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -20593,6 +21429,35 @@ function () {
       return position;
     }
   }, {
+    key: "getScale",
+    value: function getScale() {
+      var s = this.transform.s();
+      var scale = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
+
+      if (s != null) {
+        scale = s._dup();
+      }
+
+      return scale;
+    }
+  }, {
+    key: "getRotation",
+    value: function getRotation() {
+      var normalize = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var r = this.transform.r();
+      var rotation = 0;
+
+      if (r != null) {
+        rotation = r;
+      }
+
+      if (normalize !== '' && r != null) {
+        rotation = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(r, normalize);
+      }
+
+      return rotation;
+    }
+  }, {
     key: "getVertexSpaceDiagramPosition",
     value: function getVertexSpaceDiagramPosition(vertexSpacePoint) {
       var location = vertexSpacePoint.transformBy(this.lastDrawTransform.matrix());
@@ -20616,31 +21481,49 @@ function () {
           height: this.diagramLimits.height
         }
       };
-      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace);
+      var glToDiagramSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(glSpace, diagramSpace); // console.log(location, glToDiagramSpace)
+
       return location.transformBy(glToDiagramSpace.matrix());
     }
   }, {
     key: "getDiagramPosition",
     value: function getDiagramPosition() {
-      // console.log(this.name, this.getVertexSpaceDiagramPosition(new Point(0, 0)))
-      // console.log(this.transform, this.lastDrawTransform)
-      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0)); // const location = new Point(0, 0).transformBy(this.lastDrawTransform.matrix());
-      // const glSpace = {
-      //   x: { bottomLeft: -1, width: 2 },
-      //   y: { bottomLeft: -1, height: 2 },
-      // };
-      // const diagramSpace = {
-      //   x: {
-      //     bottomLeft: this.diagramLimits.left,
-      //     width: this.diagramLimits.width,
-      //   },
-      //   y: {
-      //     bottomLeft: this.diagramLimits.bottom,
-      //     height: this.diagramLimits.height,
-      //   },
-      // };
-      // const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
-      // return location.transformBy(glToDiagramSpace.matrix());
+      // Note, this should be 0,0 as the current transform's translation will
+      // be included in getVertexSpaceDiagramPosition
+      return this.getVertexSpaceDiagramPosition(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
+    }
+  }, {
+    key: "getPixelToVertexSpaceScale",
+    value: function getPixelToVertexSpaceScale() {
+      var pixelToDiagram = this.diagramTransforms.pixelToDiagram.matrix();
+      var diagramToVertex = this.diagramSpaceToVertexSpaceTransformMatrix();
+      var scaleX = pixelToDiagram[0] * diagramToVertex[0];
+      var scaleY = pixelToDiagram[4] * diagramToVertex[4];
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](scaleX, scaleY);
+    }
+  }, {
+    key: "getVertexToPixelSpaceScale",
+    value: function getVertexToPixelSpaceScale() {
+      var pixelToVertexSpaceScale = this.getPixelToVertexSpaceScale();
+      return new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1 / pixelToVertexSpaceScale.x, 1 / pixelToVertexSpaceScale.y);
+    }
+  }, {
+    key: "getDiagramPositionInVertexSpace",
+    value: function getDiagramPositionInVertexSpace(diagramPosition) {
+      return diagramPosition.transformBy(this.diagramSpaceToVertexSpaceTransformMatrix());
+    }
+  }, {
+    key: "diagramSpaceToVertexSpaceTransformMatrix",
+    value: function diagramSpaceToVertexSpaceTransformMatrix() {
+      // Diagram transform will always be two
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.lastDrawElementTransformPosition.elementCount, this.lastDrawTransform.order.length - 2));
+      return _tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix());
+    }
+  }, {
+    key: "vertexToDiagramSpaceTransformMatrix",
+    value: function vertexToDiagramSpaceTransformMatrix() {
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(0, this.lastDrawTransform.order.length - 2));
+      return t.matrix();
     }
   }, {
     key: "setDiagramPosition",
@@ -20667,7 +21550,7 @@ function () {
       };
       var diagramToGLSpace = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["spaceToSpaceTransform"])(diagramSpace, glSpace);
       var glLocation = diagramPosition.transformBy(diagramToGLSpace.matrix());
-      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(2));
+      var t = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](this.lastDrawTransform.order.slice(this.transform.order.length));
       var newLocation = glLocation.transformBy(_tools_m2__WEBPACK_IMPORTED_MODULE_1__["inverse"](t.matrix()));
       this.setPosition(newLocation._dup());
     }
@@ -20689,15 +21572,35 @@ function () {
   }, {
     key: "setMoveBoundaryToDiagram",
     value: function setMoveBoundaryToDiagram() {
-      var boundary = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [this.diagramLimits.left, this.diagramLimits.top - this.diagramLimits.height, this.diagramLimits.left + this.diagramLimits.width, this.diagramLimits.top];
+      var boundaryIn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : this.move.boundary;
       var scale = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](1, 1);
 
       if (!this.isMovable) {
         return;
       }
 
-      if (!this.move.limitToDiagram) {
+      if (boundaryIn != null) {
+        this.move.boundary = boundaryIn;
+      }
+
+      if (this.move.boundary == null) {
         return;
+      }
+
+      var boundary;
+
+      if (Array.isArray(this.move.boundary)) {
+        var _this$move$boundary = _slicedToArray(this.move.boundary, 4),
+            left = _this$move$boundary[0],
+            bottom = _this$move$boundary[1],
+            width = _this$move$boundary[2],
+            height = _this$move$boundary[3];
+
+        boundary = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](left, bottom, width, height);
+      } else if (this.move.boundary === 'diagram') {
+        boundary = this.diagramLimits;
+      } else {
+        boundary = this.move.boundary;
       }
 
       var glSpace = {
@@ -20727,10 +21630,10 @@ function () {
       var maxPoint = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](rect.right, rect.top).transformBy(glToDiagramScaleMatrix);
       var min = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
       var max = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-      min.x = boundary[0] - minPoint.x * scale.x;
-      min.y = boundary[1] - minPoint.y * scale.y;
-      max.x = boundary[2] - maxPoint.x * scale.x;
-      max.y = boundary[3] - maxPoint.y * scale.y;
+      min.x = boundary.left - minPoint.x * scale.x;
+      min.y = boundary.bottom - minPoint.y * scale.y;
+      max.x = boundary.right - maxPoint.x * scale.x;
+      max.y = boundary.top - maxPoint.y * scale.y;
       this.move.maxTransform.updateTranslation(max.x, max.y);
       this.move.minTransform.updateTranslation(min.x, min.y);
     }
@@ -20738,6 +21641,78 @@ function () {
     key: "show",
     value: function show() {
       this.isShown = true;
+      this.setOpacity(1);
+
+      if (this.parent != null) {
+        if (!this.parent.isShown) {
+          this.parent.show();
+        }
+      }
+    }
+  }, {
+    key: "makeTouchable",
+    value: function makeTouchable() {
+      var makeThisElementTouchable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (makeThisElementTouchable) {
+        this.isTouchable = true;
+      } else {
+        this.hasTouchableElements = true;
+      }
+
+      if (this.parent != null) {
+        this.parent.makeTouchable(false);
+      }
+    }
+  }, {
+    key: "setMovable",
+    value: function setMovable() {
+      var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
+
+      if (movable) {
+        this.isMovable = true;
+        this.makeTouchable(true);
+      } else {
+        this.isMovable = false;
+        this.isTouchable = false;
+      }
+    }
+  }, {
+    key: "clearRender",
+    value: function clearRender() {
+      var tieToElement;
+      var elementId = '';
+
+      if (typeof this.tieToHTML.element === 'string') {
+        elementId = this.tieToHTML.element;
+        tieToElement = document.getElementById(this.tieToHTML.element);
+      }
+
+      if (tieToElement) {
+        var w = document.getElementById("".concat(elementId, "_webgl"));
+
+        if (w != null) {
+          w.style.visibility = 'hidden';
+        }
+
+        var d = document.getElementById("".concat(elementId, "_2d"));
+
+        if (d != null) {
+          d.style.visibility = 'hidden';
+        }
+      }
+    }
+  }, {
+    key: "unrender",
+    value: function unrender() {
+      if (this.isRenderedAsImage) {
+        this.unrenderNextDraw = true;
+        this.isRenderedAsImage = false;
+      }
+
+      if (this.parent != null) {
+        this.parent.unrender();
+      }
     }
   }, {
     key: "showAll",
@@ -20769,41 +21744,11 @@ function () {
       if (this.onClick !== null && this.onClick !== undefined) {
         this.onClick(this);
       }
-    }
-  }, {
-    key: "setMovable",
-    value: function setMovable() {
-      var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
-
-      if (movable) {
-        this.isTouchable = true;
-        this.isMovable = true;
-      }
-    } // processParentTransform(parentTransform: Transform): Transform {
-    //   let newTransform;
-    //   if (this.noRotationFromParent) {
-    //     const finalParentTransform = parentTransform._dup();
-    //     let r = 0;
-    //     for (let i = 0; i < finalParentTransform.order.length; i += 1) {
-    //       const t = finalParentTransform.order[i];
-    //       if (t instanceof Rotation) {
-    //         r += t.r;
-    //       }
-    //     }
-    //     const m = parentTransform.matrix();
-    //     const translation = new Point(m[2], m[5]);
-    //     const scale = new Point(
-    //       new Point(m[0], m[3]).distance(),
-    //       new Point(m[1], m[4]).distance(),
-    //     );
-    //     newTransform = new Transform()
-    //       .scale(scale)
-    //       // .rotate(r)
-    //       .translate(translation);
-    //   } else {
-    //     newTransform = parentTransform;
+    } // setMovable(movable: boolean = true) {
+    //   if (movable) {
+    //     this.isTouchable = true;
+    //     this.isMovable = true;
     //   }
-    //   return newTransform;
     // }
 
   }]);
@@ -20825,10 +21770,11 @@ function (_DiagramElement) {
     var transform = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var color = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : [0.5, 0.5, 0.5, 1];
     var diagramLimits = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, -1, 2, 2);
+    var parent = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
 
     _classCallCheck(this, DiagramElementPrimative);
 
-    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits));
+    _this3 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementPrimative).call(this, transform, diagramLimits, parent));
     _this3.drawingObject = drawingObject;
     _this3.color = color.slice();
     _this3.pointsToDraw = -1;
@@ -20840,6 +21786,12 @@ function (_DiagramElement) {
   }
 
   _createClass(DiagramElementPrimative, [{
+    key: "setAngleToDraw",
+    value: function setAngleToDraw() {
+      var intputAngle = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : -1;
+      this.angleToDraw = intputAngle;
+    }
+  }, {
     key: "isBeingTouched",
     value: function isBeingTouched(glLocation) {
       if (!this.isTouchable) {
@@ -20875,6 +21827,13 @@ function (_DiagramElement) {
       return false;
     }
   }, {
+    key: "updateContext",
+    value: function updateContext(context) {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        this.drawingObject.drawContext2D = context;
+      }
+    }
+  }, {
     key: "_dup",
     value: function _dup() {
       var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
@@ -20889,13 +21848,35 @@ function (_DiagramElement) {
       // primative.angleToDraw = this.angleToDraw;
       // primative.copyFrom(this);
 
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative);
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, primative, ['parent']);
 
       if (transform != null) {
         primative.transform = transform._dup();
       }
 
       return primative;
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+        this.drawingObject.clear();
+      }
+    }
+  }, {
+    key: "resize",
+    value: function resize() {
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.resizeHtmlObject();
+
+      _get(_getPrototypeOf(DiagramElementPrimative.prototype), "resize", this).call(this, diagramHTMLElement); // If gl canvas is resized, webgl text will need to be updated.
+
+
+      if (this.drawingObject.type === 'vertexText') {
+        var pixelToVertexScale = this.getPixelToVertexSpaceScale(); // $FlowFixMe
+
+        this.drawingObject.drawTextIntoBuffer(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](pixelToVertexScale.x, Math.abs(pixelToVertexScale.y)));
+      }
     }
   }, {
     key: "setColor",
@@ -20910,6 +21891,27 @@ function (_DiagramElement) {
         if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
           // $FlowFixMe
           this.drawingObject.element.style.color = Object(_tools_color__WEBPACK_IMPORTED_MODULE_8__["colorArrayToRGBA"])(this.color);
+        }
+      }
+    }
+  }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      // this.color[3] = opacity;
+      this.opacity = opacity;
+
+      if (this instanceof DiagramElementPrimative) {
+        if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
+          this.drawingObject.setOpacity(opacity);
+        }
+
+        if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
+          // console.log(this.name, this.drawingObject)
+          // $FlowFixMe
+          // this.drawingObject.element.style.color =
+          // colorArrayToRGBA([...this.color.slice(0, 2), opacity]);
+          // console.log(this.drawingObject.element)
+          this.drawingObject.element.style.opacity = "".concat(opacity);
         }
       }
     }
@@ -20974,32 +21976,30 @@ function (_DiagramElement) {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (this.beforeDrawCallback) {
-        this.beforeDrawCallback(this);
-      }
-
       if (this.isShown) {
-        this.setNextTransform(now);
-        this.setNextColor(now); // set next color can end up hiding an element when disolving out
+        if (this.isRenderedAsImage === true) {
+          if (this.willStartAnimating()) {
+            this.unrender();
+          } else {
+            return;
+          }
+        }
+
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now);
 
         if (!this.isShown) {
           return;
         }
 
-        this.setNextCustomAnimation(now); // this.lastDrawParentTransform = parentTransform._dup();
-
         this.lastDrawElementTransformPosition = {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
-        }; // const finalParentTransform = this.processParentTransform(parentTransform);
-
+        };
         var newTransform = parentTransform.transform(this.transform);
-        var pulseTransforms = this.transformWithPulse(now, newTransform); // let matrix = m2.mul(transformMatrix, this.transform.matrix());
-        // matrix = this.transformWithPulse(now, matrix);
-        // eslint-disable-next-line prefer-destructuring
+        var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
-        this.lastDrawTransform = pulseTransforms[0]; // this.lastDrawPulseTransform = pulseTransforms[0]._dup();
-
+        this.lastDrawTransform = pulseTransforms[0];
         var pointCount = -1;
 
         if (this.drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
@@ -21018,9 +22018,15 @@ function (_DiagramElement) {
           }
         }
 
+        var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
         pulseTransforms.forEach(function (t) {
-          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), _this4.color, pointCount);
+          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, pointCount);
         });
+
+        if (this.unrenderNextDraw) {
+          this.clearRender();
+          this.unrenderNextDraw = false;
+        }
       }
     }
   }, {
@@ -21044,56 +22050,43 @@ function (_DiagramElement) {
   }, {
     key: "isMoving",
     value: function isMoving() {
-      if (this.state.isAnimating || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.state.isAnimatingColor || this.state.isAnimatingCustom) {
+      if ( // this.state.isAnimating
+      this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing // || this.state.isAnimatingColor
+      // || this.state.isAnimatingCustom
+      || this.animations.willStartAnimating()) {
         return true;
       }
 
       return false;
-    } // // Update the translation move boundary for the element's transform.
-    // // This will limit the first translation part of the transform to only
-    // // translations within the max/min limit.
-    // updateMoveTranslationBoundary(
-    //   bounday: Array<number> = [
-    //     this.diagramLimits.left,
-    //     this.diagramLimits.top - this.diagramLimits.height,
-    //     this.diagramLimits.left + this.diagramLimits.width,
-    //     this.diagramLimits.top],
-    //   scale: Point = new Point(1, 1),
-    // ): void {
-    //   const glSpace = {
-    //     x: { bottomLeft: -1, width: 2 },
-    //     y: { bottomLeft: -1, height: 2 },
-    //   };
-    //   const diagramSpace = {
-    //     x: {
-    //       bottomLeft: this.diagramLimits.left,
-    //       width: this.diagramLimits.width,
-    //     },
-    //     y: {
-    //       bottomLeft: this.diagramLimits.bottom,
-    //       height: this.diagramLimits.height,
-    //     },
-    //   };
-    //   const glToDiagramSpace = spaceToSpaceTransform(glSpace, diagramSpace);
-    //   const rect = this.drawingObject.getRelativeGLBoundingRect(this.lastDrawTransform.matrix());
-    //   const minPoint = new Point(rect.left, rect.bottom).transformBy(glToDiagramSpace.matrix());
-    //   const maxPoint = new Point(rect.right, rect.top).transformBy(glToDiagramSpace.matrix());
-    //   const min = new Point(0, 0);
-    //   const max = new Point(0, 0);
-    //   min.x = bounday[0] - minPoint.x * scale.x;
-    //   min.y = bounday[1] - minPoint.y * scale.y;
-    //   max.x = bounday[2] - maxPoint.x * scale.x;
-    //   max.y = bounday[3] - maxPoint.y * scale.y;
-    //   this.move.maxTransform.updateTranslation(
-    //     max.x,
-    //     max.y,
-    //   );
-    //   this.move.minTransform.updateTranslation(
-    //     min.x,
-    //     min.y,
-    //   );
-    // }
+    }
+  }, {
+    key: "setupWebGLBuffers",
+    value: function setupWebGLBuffers(newWebgl) {
+      var drawingObject = this.drawingObject;
 
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        var oldWebgl = drawingObject.webgl;
+        drawingObject.webgl = newWebgl;
+        drawingObject.gl = newWebgl.gl;
+        drawingObject.setupBuffer();
+        drawingObject.webgl = oldWebgl;
+        drawingObject.gl = oldWebgl.gl;
+      }
+    }
+  }, {
+    key: "changeWebGLInstance",
+    value: function changeWebGLInstance(newWebgl) {
+      var oldWebgl;
+      var drawingObject = this.drawingObject;
+
+      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
+        oldWebgl = drawingObject.webgl;
+        drawingObject.webgl = newWebgl;
+        drawingObject.gl = newWebgl.gl;
+      }
+
+      return oldWebgl;
+    }
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
@@ -21171,10 +22164,11 @@ function (_DiagramElement2) {
 
     var transform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
     var diagramLimits = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Rect"](-1, 1, 2, 2);
+    var parent = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
 
     _classCallCheck(this, DiagramElementCollection);
 
-    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits));
+    _this5 = _possibleConstructorReturn(this, _getPrototypeOf(DiagramElementCollection).call(this, transform, diagramLimits, parent));
     _this5.elements = {};
     _this5.drawOrder = [];
     _this5.touchInBoundingRect = false;
@@ -21191,7 +22185,7 @@ function (_DiagramElement2) {
       var doNotDuplicate = this.drawOrder.map(function (e) {
         return "_".concat(e);
       });
-      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder'].concat(_toConsumableArray(doNotDuplicate)));
+      Object(_tools_tools__WEBPACK_IMPORTED_MODULE_7__["duplicateFromTo"])(this, collection, ['elements', 'drawOrder', 'parent'].concat(_toConsumableArray(doNotDuplicate)));
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var name = this.drawOrder[i];
@@ -21207,7 +22201,7 @@ function (_DiagramElement2) {
         return false;
       }
 
-      if (this.state.isAnimating || this.state.isAnimatingCustom || this.state.isAnimatingColor || this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing) {
+      if (this.state.isMovingFreely || this.state.isBeingMoved || this.state.isPulsing || this.animations.state === 'animating') {
         return true;
       }
 
@@ -21229,6 +22223,8 @@ function (_DiagramElement2) {
     key: "add",
     value: function add(name, diagramElement) {
       var index = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : -1;
+      // eslint-disable-next-line no-param-reassign
+      diagramElement.parent = this;
       this.elements[name] = diagramElement;
       this.elements[name].name = name; // $FlowFixMe
 
@@ -21241,31 +22237,48 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "willStartAnimating",
+    value: function willStartAnimating() {
+      var result = _get(_getPrototypeOf(DiagramElementCollection.prototype), "willStartAnimating", this).call(this);
+
+      if (result) {
+        return true;
+      }
+
+      for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
+        if (this.elements[this.drawOrder[i]].willStartAnimating()) {
+          return true;
+        }
+      }
+
+      return false;
+    }
+  }, {
     key: "draw",
     value: function draw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
 
-      if (this.beforeDrawCallback) {
-        this.beforeDrawCallback(this);
-      }
-
       if (this.isShown) {
-        this.setNextTransform(now);
-        this.setNextColor(now); // set next color can end up hiding an element when disolving out
+        if (this.isRenderedAsImage === true) {
+          if (this.willStartAnimating()) {
+            this.unrender();
+          } else {
+            return;
+          }
+        }
+
+        this.animations.nextFrame(now);
+        this.nextMovingFreelyFrame(now); // set next color can end up hiding an element when disolving out
 
         if (!this.isShown) {
           return;
         }
 
-        this.setNextCustomAnimation(now); // this.lastDrawParentTransform = parentTransform._dup();
-        // this.lastDrawElementTransform = this.transform._dup();
-
         this.lastDrawElementTransformPosition = {
           parentCount: parentTransform.order.length,
           elementCount: this.transform.order.length
-        }; // const finalParentTransform = this.processParentTransform(parentTransform);
-
+        };
         var newTransform = parentTransform.transform(this.transform);
         var pulseTransforms = this.transformWithPulse(now, newTransform); // eslint-disable-next-line prefer-destructuring
 
@@ -21275,6 +22288,11 @@ function (_DiagramElement2) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
             this.elements[this.drawOrder[i]].draw(pulseTransforms[k], now);
           }
+        }
+
+        if (this.unrenderNextDraw) {
+          this.clearRender();
+          this.unrenderNextDraw = false;
         }
       }
     }
@@ -21402,6 +22420,26 @@ function (_DiagramElement2) {
       }
     }
   }, {
+    key: "resize",
+    value: function resize() {
+      var diagramHTMLElement = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "resize", this).call(this, diagramHTMLElement);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.resize(diagramHTMLElement);
+      }
+    }
+  }, {
+    key: "clear",
+    value: function clear() {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.clear();
+      }
+    }
+  }, {
     key: "setFirstTransform",
     value: function setFirstTransform() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
@@ -21477,12 +22515,25 @@ function (_DiagramElement2) {
   }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
+      var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.updateLimits(limits);
+        element.updateLimits(limits, transforms);
       }
 
       this.diagramLimits = limits;
+      this.diagramTransforms = transforms;
+    }
+  }, {
+    key: "updateHTMLElementTie",
+    value: function updateHTMLElementTie(container) {
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "updateHTMLElementTie", this).call(this, container);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.updateHTMLElementTie(container);
+      }
     } // Returns an array of touched elements.
     // In a collection, elements defined later in the collection.order
     // array are on top of earlier elements. The touched array
@@ -21534,7 +22585,7 @@ function (_DiagramElement2) {
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.stop(cancelled, forceSetToEndOfPlan);
+        element.stop(cancelled, forceSetToEndOfPlan); // element.cancel(forceSetToEndOfPlan);
       }
     }
   }, {
@@ -21554,6 +22605,17 @@ function (_DiagramElement2) {
       }
 
       this.color = color.slice();
+    }
+  }, {
+    key: "setOpacity",
+    value: function setOpacity(opacity) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setOpacity(opacity);
+      } // this.color[3] = opacity;
+
+
+      this.opacity = opacity;
     }
   }, {
     key: "getElementTransforms",
@@ -21617,7 +22679,13 @@ function (_DiagramElement2) {
         if (element.name in elementTransforms) {
           if (element.isShown) {
             if (!elementTransforms[element.name].isEqualTo(element.transform)) {
-              element.animateTo(elementTransforms[element.name], time, delay, rotDirection, callbackMethod, easeFunction); // only want to send callback once
+              element.animations.new().delay(delay).transform({
+                target: elementTransforms[element.name],
+                duration: time,
+                rotDirection: rotDirection,
+                progression: easeFunction,
+                onFinish: callbackMethod
+              }).start(); // only want to send callback once
 
               callbackMethod = null;
               timeToAnimate = time + delay;
@@ -21662,71 +22730,73 @@ function (_DiagramElement2) {
       }
 
       return elements;
-    } // Get all ineractive elemnts, but only go as deep as a
+    }
+  }, {
+    key: "getAllElementsWithScenario",
+    value: function getAllElementsWithScenario(scenario) {
+      var elements = _get(_getPrototypeOf(DiagramElementCollection.prototype), "getAllElementsWithScenario", this).call(this, scenario);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element.scenarios[scenario] != null) {
+          elements.push(element);
+        }
+
+        if (element instanceof DiagramElementCollection) {
+          elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllElementsWithScenario(scenario)));
+        }
+      }
+
+      return elements;
+    } // // Get all ineractive elemnts, but only go as deep as a
+    // // DiagramElementColleciton if it is touchable or movable
+    // getAllCurrentlyInteractiveElements() {
+    //   let elements = [];
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     // if (element.isShown) {
+    //     if (element instanceof DiagramElementCollection) {
+    //       if (!element.isTouchable
+    //         && !element.isMovable
+    //         && element.hasTouchableElements
+    //         && (!element.isInteractive || element.isInteractive == null)
+    //       ) {
+    //         elements = [...elements, ...element.getAllCurrentlyInteractiveElements()];
+    //       }
+    //     }
+    //     if (element.isInteractive !== false
+    //       && (element.isTouchable || element.isMovable || element.isInteractive)) {
+    //       elements.push(element);
+    //     }
+    //     // }
+    //   }
+    //   return elements;
+    // }
+    // Get all ineractive elemnts, but only go as deep as a
     // DiagramElementColleciton if it is touchable or movable
 
   }, {
-    key: "getAllCurrentlyInteractiveElements",
-    value: function getAllCurrentlyInteractiveElements() {
+    key: "getAllPossiblyInteractiveElements",
+    value: function getAllPossiblyInteractiveElements() {
       var elements = [];
 
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]]; // if (element.isShown) {
 
         if (element instanceof DiagramElementCollection) {
-          if (!element.isTouchable && !element.isMovable && element.hasTouchableElements && !element.isInteractive) {
-            elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllCurrentlyInteractiveElements()));
+          if (!element.isTouchable && !element.isMovable && element.hasTouchableElements && (!element.isInteractive || element.isInteractive == null)) {
+            elements = [].concat(_toConsumableArray(elements), _toConsumableArray(element.getAllPossiblyInteractiveElements()));
           }
         }
 
-        if (element.isTouchable || element.isMovable || element.isInteractive) {
+        if (element.isInteractive !== undefined || element.isTouchable || element.isMovable) {
           elements.push(element);
-        } // }
-
+        }
       }
 
       return elements;
-    } // disolveWithDelay(
-    //   delay: number = 1,
-    //   time: number = 1,
-    //   disolve: 'in' | 'out' = 'in',
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     console.log(element.name)
-    //     element.disolveWithDelay(delay, time, disolve, callback);
-    //   }
-    // }
-    // // deprecate
-    // disolveElementsOut(
-    //   time: number = 1,
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     if (element instanceof DiagramElementCollection) {
-    //       element.disolveElementsOut(time, callback);
-    //     } else {
-    //       element.disolveOut(time, callback);
-    //     }
-    //   }
-    // }
-    // // deprecate
-    // disolveElementsIn(
-    //   time: number = 1,
-    //   callback: ?(boolean) => void = null,
-    // ): void {
-    //   for (let i = 0; i < this.order.length; i += 1) {
-    //     const element = this.elements[this.order[i]];
-    //     if (element instanceof DiagramElementCollection) {
-    //       element.disolveElementsIn(time, callback);
-    //     } else {
-    //       element.disolveIn(time, callback);
-    //     }
-    //   }
-    // }
-    // This method is here as a convenience method for content item selectors
+    } // This method is here as a convenience method for content item selectors
     // eslint-disable-next-line class-methods-use-this
 
   }, {
@@ -21756,9 +22826,87 @@ function (_DiagramElement2) {
     value: function setMovable() {
       var movable = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
 
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setMovable", this).call(this, movable);
+
       if (movable) {
-        this.hasTouchableElements = true;
-        this.isMovable = true;
+        this.hasTouchableElements = true; // this.isMovable = true;
+      }
+    }
+  }, {
+    key: "updateContext",
+    value: function updateContext(context) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.updateContext(context);
+      }
+    }
+  }, {
+    key: "setupWebGLBuffers",
+    value: function setupWebGLBuffers(newWebgl) {
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        element.setupWebGLBuffers(newWebgl);
+      }
+    }
+  }, {
+    key: "changeWebGLInstance",
+    value: function changeWebGLInstance(newWebgl) {
+      var oldInstance;
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+        oldInstance = element.changeWebGLInstance(newWebgl);
+      }
+
+      return oldInstance;
+    }
+  }, {
+    key: "getLoadingElements",
+    value: function getLoadingElements() {
+      var elems = [];
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimative) {
+          if (element.drawingObject.state === 'loading') {
+            elems.push(element);
+          }
+        } else {
+          elems = [].concat(_toConsumableArray(elems), _toConsumableArray(element.getLoadingElements()));
+        }
+      }
+
+      return elems;
+    }
+  }, {
+    key: "unrenderAll",
+    value: function unrenderAll() {
+      this.unrender();
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (element instanceof DiagramElementPrimative) {
+          element.unrender();
+        } else {
+          element.unrenderAll();
+        }
+      }
+    }
+  }, {
+    key: "setScenarios",
+    value: function setScenarios(scenarioName) {
+      var onlyIfVisible = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      _get(_getPrototypeOf(DiagramElementCollection.prototype), "setScenarios", this).call(this, scenarioName);
+
+      for (var i = 0; i < this.drawOrder.length; i += 1) {
+        var element = this.elements[this.drawOrder[i]];
+
+        if (onlyIfVisible && element.isShown || onlyIfVisible === false) {
+          element.setScenarios(scenarioName, onlyIfVisible);
+        }
       }
     }
   }]);
@@ -21830,12 +22978,12 @@ function () {
   _createClass(Gesture, [{
     key: "addEvent",
     value: function addEvent(event, method, flag) {
-      this.diagram.htmlCanvas.addEventListener(event, method.bind(this), flag);
+      this.diagram.gestureCanvas.addEventListener(event, method.bind(this), flag);
     }
   }, {
     key: "removeEvent",
     value: function removeEvent(event, method, flag) {
-      this.diagram.htmlCanvas.removeEventListener(event, method.bind(this), flag);
+      this.diagram.gestureCanvas.removeEventListener(event, method.bind(this), flag);
     }
   }, {
     key: "startHandler",
@@ -21865,9 +23013,8 @@ function () {
         }
 
         this.previousPoint = point;
-      }
+      } // event.preventDefault();
 
-      event.preventDefault();
     }
   }, {
     key: "touchStartHandler",
@@ -21882,7 +23029,11 @@ function () {
   }, {
     key: "mouseDownHandler",
     value: function mouseDownHandler(event) {
-      this.startHandler(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event.clientX, event.clientY));
+      var disableEvent = this.startHandler(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](event.clientX, event.clientY));
+
+      if (disableEvent) {
+        event.preventDefault();
+      }
     }
   }, {
     key: "touchMoveHandler",
@@ -22035,6 +23186,17 @@ var fragment = {
   withTexture: {
     source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform int u_use_texture;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' + 'if ( u_use_texture == 1) {' + 'gl_FragColor = texture2D(u_texture, v_texcoord);' + '} else {' + 'gl_FragColor = u_color;' + '}' + '}',
     varNames: ['u_color', 'u_use_texture', 'u_texture']
+  },
+  text: {
+    source: 'precision mediump float;' + 'uniform vec4 u_color;' + 'uniform sampler2D u_texture;' + 'varying vec2 v_texcoord;' + 'void main() {' // + 'float a = texture2D(u_texture, v_texcoord).a;'
+    // + 'if ( a < 0.2 ) {'
+    //   + 'a = a / 1.2;'
+    // + '}'
+    // + 'gl_FragColor = vec4(u_color.rgb, min(a * 1.2, 1.0) * u_color.a);'
+    // + '}'
+    // + 'gl_FragColor = a * u_color;'
+    + 'vec4 c = texture2D(u_texture, v_texcoord);' + 'gl_FragColor = vec4(c.a * u_color.rgb, c.a * u_color.a);' + '}',
+    varNames: ['u_color', 'u_texture']
   }
 };
 
@@ -22070,11 +23232,14 @@ var getShaders = function getShaders() {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _shaders__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./shaders */ "./src/js/diagram/webgl/shaders.js");
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+
 
 function createProgram(gl, vertexShader, fragmentShader) {
   var program = gl.createProgram();
@@ -22171,17 +23336,95 @@ function autoResize(event) {// let contRect = document.getElementById('container
 var WebGLInstance =
 /*#__PURE__*/
 function () {
-  function WebGLInstance(canvas, vertexSource, fragmentSource, shaderLocations, backgroundColor) {
+  _createClass(WebGLInstance, [{
+    key: "addTexture",
+    // locations: Object;
+    value: function addTexture(id, glTexture, type) {
+      if (this.textures[id] && this.textures[id].glTexture != null) {
+        return this.textures[id].index;
+      }
+
+      var index = 0;
+
+      if (this.textures[id]) {
+        index = this.textures[id].index;
+      } else {
+        index = Object.keys(this.textures).length;
+      }
+
+      this.textures[id] = {
+        glTexture: glTexture,
+        index: index,
+        type: type,
+        state: 'loaded',
+        onLoad: []
+      };
+      return index;
+    }
+  }, {
+    key: "onLoad",
+    value: function onLoad(textureId) {
+      this.textures[textureId].onLoad.forEach(function (f) {
+        return f();
+      });
+      this.textures[textureId].onLoad = [];
+    }
+  }, {
+    key: "getProgram",
+    value: function getProgram(vertexShader, fragmentShader) {
+      for (var i = 0; i < this.programs.length; i += 1) {
+        var program = this.programs[i];
+
+        if (program.vertexShader === vertexShader && program.fragmentShader === fragmentShader) {
+          return i;
+        }
+      }
+
+      var shaders = Object(_shaders__WEBPACK_IMPORTED_MODULE_0__["default"])(vertexShader, fragmentShader);
+      var newProgram = createProgramFromScripts(this.gl, shaders.vertexSource, shaders.fragmentSource);
+      var programDetails = {
+        vertexShader: vertexShader,
+        fragmentShader: fragmentShader,
+        program: newProgram,
+        locations: getGLLocations(this.gl, newProgram, shaders.varNames)
+      };
+      this.programs.push(programDetails);
+      return this.programs.length - 1;
+    }
+  }, {
+    key: "useProgram",
+    value: function useProgram(programIndex) {
+      var program = this.programs[programIndex];
+
+      if (this.lastUsedProgram !== program) {
+        this.gl.useProgram(program.program);
+        this.lastUsedProgram = program.program;
+      }
+
+      return program.locations;
+    }
+  }]);
+
+  function WebGLInstance(canvas, // vertexSource: string,
+  // fragmentSource: string,
+  backgroundColor) {
     _classCallCheck(this, WebGLInstance);
 
     var gl = canvas.getContext('webgl', {
       antialias: true
     });
+    this.programs = [];
+    this.lastUsedProgram = null;
+    this.textures = {};
 
     if (gl instanceof WebGLRenderingContext) {
-      this.gl = gl;
-      this.program = createProgramFromScripts(this.gl, vertexSource, fragmentSource);
-      this.locations = getGLLocations(this.gl, this.program, shaderLocations); // Prep canvas
+      this.gl = gl; // this.program = createProgramFromScripts(
+      //   this.gl,
+      //   vertexSource,
+      //   fragmentSource,
+      // );
+      // this.locations = getGLLocations(this.gl, this.program, shaderLocations);
+      // Prep canvas
       // resizeCanvasToDisplaySize(this.gl.canvas);
 
       this.resize(); // Tell WebGL how to convert from clip space to pixels
@@ -22196,8 +23439,8 @@ function () {
       this.gl.clear(this.gl.COLOR_BUFFER_BIT);
       this.gl.disable(this.gl.DEPTH_TEST);
       gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.enable(gl.BLEND);
-      this.gl.useProgram(this.program); // window.addEventListener('resize', autoResize.bind(this, event));
+      gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
+      // window.addEventListener('resize', autoResize.bind(this, event));
     }
   }
 
@@ -22521,7 +23764,7 @@ function colorNames() {
 /*!****************************!*\
   !*** ./src/js/tools/g2.js ***!
   \****************************/
-/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint */
+/*! exports provided: point, Point, line, Line, distance, minAngleDiff, deg, normAngle, Transform, TransformLimit, Rect, Translation, Scale, Rotation, spaceToSpaceTransform, getBoundingRect, linearPath, curvedPath, quadraticBezier, translationPath, polarToRect, rectToPolar, getDeltaAngle, normAngleTo90, threePointAngle, threePointAngleMin, randomPoint, getMaxTimeFromVelocity, getMoveTime, parsePoint, clipAngle, spaceToSpaceScale, getPoint */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -22551,10 +23794,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getDeltaAngle", function() { return getDeltaAngle; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "normAngleTo90", function() { return normAngleTo90; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threePointAngle", function() { return threePointAngle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "threePointAngleMin", function() { return threePointAngleMin; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randomPoint", function() { return randomPoint; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMaxTimeFromVelocity", function() { return getMaxTimeFromVelocity; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getMoveTime", function() { return getMoveTime; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "parsePoint", function() { return parsePoint; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clipAngle", function() { return clipAngle; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "spaceToSpaceScale", function() { return spaceToSpaceScale; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPoint", function() { return getPoint; });
 /* harmony import */ var _math__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./math */ "./src/js/tools/math.js");
 /* harmony import */ var _m2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./m2 */ "./src/js/tools/m2.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
@@ -22610,6 +23857,32 @@ function _quadraticBezier(P0, P1, P2, t) {
   return (1 - t) * ((1 - t) * P0 + t * P1) + t * ((1 - t) * P1 + t * P2);
 }
 
+function clipAngle(angleToClip, clipTo) {
+  var angle = angleToClip;
+
+  if (clipTo === '0to360') {
+    if (angle < 0) {
+      angle += Math.PI * 2;
+    }
+
+    if (angle >= Math.PI * 2) {
+      angle -= Math.PI * 2;
+    }
+  }
+
+  if (clipTo === '-180to180') {
+    if (angle < -Math.PI) {
+      angle += Math.PI * 2;
+    }
+
+    if (angle >= Math.PI) {
+      angle -= Math.PI * 2;
+    }
+  }
+
+  return angle;
+}
+
 var Rect =
 /*#__PURE__*/
 function () {
@@ -22656,6 +23929,7 @@ function () {
 
     this.x = x;
     this.y = y;
+    this._type = 'point';
   }
 
   _createClass(Point, [{
@@ -22922,6 +24196,21 @@ function () {
         angle: Math.atan2(this.y, this.x)
       };
     }
+  }, {
+    key: "toDelta",
+    value: function toDelta(delta, percent) {
+      var translationStyle = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 'linear';
+      var translationOptions = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {
+        rot: 1,
+        magnitude: 0.5,
+        offset: 0.5,
+        controlPoint: null,
+        direction: ''
+      };
+      // eslint-disable-next-line no-use-before-define
+      var pathPoint = translationPath(translationStyle, this._dup(), delta, percent, translationOptions);
+      return pathPoint;
+    }
   }], [{
     key: "isLeft",
     value: function isLeft(p0, p1, p2) {
@@ -22931,6 +24220,73 @@ function () {
 
   return Point;
 }();
+
+function linearPath(start, delta, percent) {
+  return start.add(delta.x * percent, delta.y * percent);
+}
+
+function curvedPath(start, delta, percent, options) {
+  var o = options;
+  var angle = Math.atan2(delta.y, delta.x);
+  var midPoint = start.add(new Point(delta.x * o.offset, delta.y * o.offset));
+  var dist = delta.toPolar().mag * o.magnitude;
+  var controlPoint = options.controlPoint;
+
+  if (controlPoint == null) {
+    var direction = options.direction;
+    var xDelta = Math.cos(angle + o.rot * Math.PI / 2);
+    var yDelta = Math.sin(angle + o.rot * Math.PI / 2);
+
+    if (direction === 'up') {
+      if (yDelta < 0) {
+        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'down') {
+      if (yDelta > 0) {
+        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'left') {
+      if (xDelta > 0) {
+        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    } else if (direction === 'right') {
+      if (xDelta < 0) {
+        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
+      }
+    }
+
+    controlPoint = new Point(midPoint.x + dist * xDelta, midPoint.y + dist * yDelta);
+  }
+
+  var p0 = start;
+  var p1 = controlPoint;
+  var p2 = start.add(delta);
+  var t = percent;
+
+  var bx = _quadraticBezier(p0.x, p1.x, p2.x, t);
+
+  var by = _quadraticBezier(p0.y, p1.y, p2.y, t);
+
+  return new Point(bx, by);
+}
+
+function translationPath() {
+  var pathType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'linear';
+  var start = arguments.length > 1 ? arguments[1] : undefined;
+  var delta = arguments.length > 2 ? arguments[2] : undefined;
+  var percent = arguments.length > 3 ? arguments[3] : undefined;
+  var options = arguments.length > 4 ? arguments[4] : undefined;
+
+  if (pathType === 'linear') {
+    return linearPath(start, delta, percent);
+  }
+
+  if (pathType === 'curved') {
+    return curvedPath(start, delta, percent, options);
+  }
+
+  return new Point(0, 0);
+}
 
 function point(x, y) {
   return new Point(x, y);
@@ -23126,13 +24482,34 @@ function () {
     /* eslint-disable comma-dangle */
 
   }, {
-    key: "midpoint",
-    value: function midpoint() {
+    key: "midPoint",
+    value: function midPoint() {
+      // const length = this.length();
+      // const direction = this.p2.sub(this.p1);
+      // const angle = Math.atan2(direction.y, direction.x);
+      // const midPoint = point(
+      //   this.p1.x + length / 2 * Math.cos(angle),
+      //   this.p1.y + length / 2 * Math.sin(angle)
+      // );
+      // return midPoint;
+      return this.pointAtPercent(0.5);
+    }
+  }, {
+    key: "pointAtPercent",
+    value: function pointAtPercent(percent) {
       var length = this.length();
       var direction = this.p2.sub(this.p1);
       var angle = Math.atan2(direction.y, direction.x);
-      var midpoint = point(this.p1.x + length / 2 * Math.cos(angle), this.p1.y + length / 2 * Math.sin(angle));
-      return midpoint;
+      var midPoint = point(this.p1.x + length * percent * Math.cos(angle), this.p1.y + length * percent * Math.sin(angle));
+      return midPoint;
+    }
+  }, {
+    key: "pointAtLength",
+    value: function pointAtLength(length) {
+      var direction = this.p2.sub(this.p1);
+      var angle = Math.atan2(direction.y, direction.x);
+      var midPoint = point(this.p1.x + length * Math.cos(angle), this.p1.y + length * Math.sin(angle));
+      return midPoint;
     }
     /* eslint-enable comma-dangle */
 
@@ -23318,22 +24695,22 @@ function () {
           var line21 = new Line(l1.p2, l2.p1);
           var line22 = new Line(l1.p2, l2.p2);
 
-          var _i2 = line11.midpoint();
+          var _i2 = line11.midPoint();
 
           var len = line11.length();
 
           if (line12.length() < len) {
-            _i2 = line12.midpoint();
+            _i2 = line12.midPoint();
             len = line12.length();
           }
 
           if (line21.length() < len) {
-            _i2 = line21.midpoint();
+            _i2 = line21.midPoint();
             len = line21.length();
           }
 
           if (line22.length() < len) {
-            _i2 = line22.midpoint();
+            _i2 = line22.midPoint();
             len = line22.length();
           }
 
@@ -23345,12 +24722,12 @@ function () {
         }
 
         if (l1.p1.isOnLine(l2, precision) && l1.p2.isOnLine(l2, precision) && (!l2.p1.isOnLine(l1, precision) || !l2.p2.isOnLine(l1, precision)) || l2.p1.isOnLine(l1, precision) && l2.p2.isOnLine(l1, precision) && (!l1.p1.isOnLine(l2, precision) || !l1.p2.isOnLine(l2, precision))) {
-          var _midLine = new Line(l1.midpoint(), l2.midpoint());
+          var _midLine = new Line(l1.midPoint(), l2.midPoint());
 
           return {
             onLine: true,
             inLine: true,
-            intersect: _midLine.midpoint()
+            intersect: _midLine.midPoint()
           };
         }
 
@@ -23375,7 +24752,7 @@ function () {
         var _i;
 
         if (midLine instanceof Line) {
-          _i = midLine.midpoint();
+          _i = midLine.midPoint();
         }
 
         return {
@@ -23619,73 +24996,6 @@ function (_Point2) {
   return Scale;
 }(Point);
 
-function linearPath(start, delta, percent) {
-  return start.add(delta.x * percent, delta.y * percent);
-}
-
-function curvedPath(start, delta, percent, options) {
-  var o = options;
-  var angle = Math.atan2(delta.y, delta.x);
-  var midPoint = start.add(new Point(delta.x * o.offset, delta.y * o.offset));
-  var dist = delta.toPolar().mag * o.magnitude;
-  var controlPoint = options.controlPoint;
-
-  if (controlPoint == null) {
-    var direction = options.direction;
-    var xDelta = Math.cos(angle + o.rot * Math.PI / 2);
-    var yDelta = Math.sin(angle + o.rot * Math.PI / 2);
-
-    if (direction === 'up') {
-      if (yDelta < 0) {
-        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'down') {
-      if (yDelta > 0) {
-        yDelta = Math.sin(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'left') {
-      if (xDelta > 0) {
-        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    } else if (direction === 'right') {
-      if (xDelta < 0) {
-        xDelta = Math.cos(angle + o.rot * Math.PI / 2 + Math.PI);
-      }
-    }
-
-    controlPoint = new Point(midPoint.x + dist * xDelta, midPoint.y + dist * yDelta);
-  }
-
-  var p0 = start;
-  var p1 = controlPoint;
-  var p2 = start.add(delta);
-  var t = percent;
-
-  var bx = _quadraticBezier(p0.x, p1.x, p2.x, t);
-
-  var by = _quadraticBezier(p0.y, p1.y, p2.y, t);
-
-  return new Point(bx, by);
-}
-
-function translationPath() {
-  var pathType = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'linear';
-  var start = arguments.length > 1 ? arguments[1] : undefined;
-  var delta = arguments.length > 2 ? arguments[2] : undefined;
-  var percent = arguments.length > 3 ? arguments[3] : undefined;
-  var options = arguments.length > 4 ? arguments[4] : undefined;
-
-  if (pathType === 'linear') {
-    return linearPath(start, delta, percent);
-  }
-
-  if (pathType === 'curved') {
-    return curvedPath(start, delta, percent, options);
-  }
-
-  return new Point(0, 0);
-}
-
 var TransformLimit =
 /*#__PURE__*/
 function () {
@@ -23728,10 +25038,16 @@ function () {
 
 
     this.index = this.order.length;
+    this._type = 'transform';
     this.calcMatrix();
   }
 
   _createClass(Transform, [{
+    key: "standard",
+    value: function standard() {
+      return this.scale(1, 1).rotate(0).translate(0, 0);
+    }
+  }, {
     key: "translate",
     value: function translate(x) {
       var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
@@ -23828,6 +25144,17 @@ function () {
       }
 
       return null;
+    }
+  }, {
+    key: "clipRotation",
+    value: function clipRotation(clipTo) {
+      for (var i = 0; i < this.order.length; i += 1) {
+        var transformStep = this.order[i];
+
+        if (transformStep instanceof Rotation) {
+          transformStep.r = clipAngle(transformStep.r, clipTo);
+        }
+      }
     }
   }, {
     key: "updateTranslation",
@@ -24392,6 +25719,12 @@ function spaceToSpaceTransform(s1, s2) {
   return t;
 }
 
+function spaceToSpaceScale(s1, s2) {
+  var xScale = s2.x.width / s1.x.width;
+  var yScale = s2.y.height / s1.y.height;
+  return new Point(xScale, yScale);
+}
+
 function comparePoints(p, currentMin, currentMax, firstPoint) {
   var min = new Point(0, 0);
   var max = new Point(0, 0);
@@ -24461,13 +25794,30 @@ function getBoundingRect(pointArrays) {
     firstPoint = false;
   });
   return new Rect(result.min.x, result.min.y, result.max.x - result.min.x, result.max.y - result.min.y);
-}
+} // Finds the min angle between three points
 
-function threePointAngle(p2, p1, p3) {
+
+function threePointAngleMin(p2, p1, p3) {
   var p12 = distance(p1, p2);
   var p13 = distance(p1, p3);
   var p23 = distance(p2, p3);
   return Math.acos((Math.pow(p12, 2) + Math.pow(p13, 2) - Math.pow(p23, 2)) / (2 * p12 * p13));
+} // Finds the angle between three points for p12 to p13 in the positive
+// angle direction
+
+
+function threePointAngle(p2, p1, p3) {
+  var r12 = p2.sub(p1);
+  var r13 = p3.sub(p1); // const p12 = distance(p1, p2);
+  // const p13 = distance(p1, p3);
+  // const p23 = distance(p2, p3);
+  // const minAngle = Math.acos((p12 ** 2 + p13 ** 2 - p23 ** 2) / (2 * p12 * p13));
+
+  var angle12 = r12.toPolar().angle;
+  var angle13 = r13.toPolar().angle;
+  angle13 -= angle12;
+  angle12 = 0;
+  return clipAngle(angle13, '0to360');
 }
 
 function randomPoint(withinRect) {
@@ -24475,12 +25825,21 @@ function randomPoint(withinRect) {
   return new Point(randPoint.x, randPoint.y);
 }
 
-function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform, rotDirection) {
+function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform) {
+  var rotDirection = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
   var deltaTransform = stopTransform.sub(startTransform);
   var time = 0;
+  var velocityTransformToUse;
+
+  if (typeof velocityTransform === 'number') {
+    velocityTransformToUse = startTransform._dup().constant(velocityTransform);
+  } else {
+    velocityTransformToUse = velocityTransform;
+  }
+
   deltaTransform.order.forEach(function (delta, index) {
     if (delta instanceof Translation || delta instanceof Scale) {
-      var v = velocityTransform.order[index];
+      var v = velocityTransformToUse.order[index];
 
       if ((v instanceof Translation || v instanceof Scale) && v.x !== 0 && v.y !== 0) {
         var xTime = Math.abs(delta.x) / v.x;
@@ -24497,7 +25856,7 @@ function getMaxTimeFromVelocity(startTransform, stopTransform, velocityTransform
       var rotDiff = getDeltaAngle(start.r, target.r, rotDirection); // eslint-disable-next-line no-param-reassign
 
       delta.r = rotDiff;
-      var _v = velocityTransform.order[index];
+      var _v = velocityTransformToUse.order[index];
 
       if (_v instanceof Rotation && _v !== 0) {
         var rTime = Math.abs(delta.r / _v.r);
@@ -24586,6 +25945,10 @@ function parsePoint(p, onFail) {
     return onFailToUse;
   }
 
+  if (typeof p === 'number') {
+    return new Point(p, p);
+  }
+
   if (_typeof(p) === 'object') {
     var keys = Object.keys(p);
 
@@ -24595,6 +25958,16 @@ function parsePoint(p, onFail) {
   }
 
   return onFailToUse;
+}
+
+function getPoint(p) {
+  var parsedPoint = parsePoint(p);
+
+  if (parsedPoint == null) {
+    parsedPoint = new Point(0, 0);
+  }
+
+  return parsedPoint;
 }
 
 
@@ -24623,7 +25996,7 @@ baseColors.forEach(function (color) {
     paletteColorNames.push("--palette-".concat(color, "-").concat(shade));
   });
 });
-var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-quizCheck'];
+var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-qr-background'];
 function getCSSColors() {
   var customColorNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var colors = {};
@@ -24818,7 +26191,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId, clickW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -24840,30 +26213,148 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyModifiers", function() { return applyModifiers; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setOnClicks", function() { return setOnClicks; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickId", function() { return clickId; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
+/* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 
 
-function centerV() {
-  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+function convertTextArrayToParagraphs(text) {
+  var firstParagraphMargin = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
   var textToUse = '';
+  var firstPStyle = '';
+
+  if (firstParagraphMargin != null) {
+    firstPStyle = " style=\"margin-top:".concat(firstParagraphMargin, "%\"");
+  }
 
   if (Array.isArray(text)) {
-    textToUse = "<p>".concat(text.join('</p><p>'), "</p>");
+    text.forEach(function (t, index) {
+      if (t.startsWith('<')) {
+        textToUse += t;
+      } else if (index === 0) {
+        textToUse += "<p style=\"margin-top:".concat(firstPStyle, "\">").concat(t, "</p>");
+      } else {
+        textToUse += "<p>".concat(t, "</p>");
+      }
+    }); // textToUse = `<p${style}>${text.join('</p><p>')}</p>`;
   } else {
     textToUse = text;
   }
 
-  return "<div style=\"display: table; height: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(textToUse, "</div></div>");
+  return textToUse;
+}
+
+function withClass() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var classText = arguments.length > 1 ? arguments[1] : undefined;
+  var textToUse = convertTextArrayToParagraphs(text);
+  return "<div class=\"".concat(classText, "\">").concat(textToUse, "</div>");
+}
+
+function centerV() {
+  var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+  var textToUse = convertTextArrayToParagraphs(text, 0);
+  return "<div style=\"display: table; height: 100%; width: 100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerVH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  return "<div style=\"display: table; height: 100%; text-align:center; width:100%\">\n        <div style=\"display: table-cell; vertical-align: middle\">\n        ".concat(text, "</div></div>");
+  var textToUse = convertTextArrayToParagraphs(text, 0);
+  return "<div style=\"display: table; height: 100%; text-align:center; width:100%;\">\n        <div style=\"display: table-cell; vertical-align: middle; height: 100%; width: 100%;\">\n        ".concat(textToUse, "</div></div>");
 }
 
 function centerH() {
   var text = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-  return "<div style=\"text-align:center;\">\n        ".concat(text, "</div>");
+  var textToUse = convertTextArrayToParagraphs(text);
+  return "<div style=\"text-align:center;\">\n        ".concat(textToUse, "</div>");
+}
+
+function style() {
+  var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+  var text = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var marginLeft = '';
+  var marginRight = '';
+  var marginTop = '';
+  var marginLine = '';
+  var size = '';
+  var className = '';
+  var color = '';
+  var listStyleType = '';
+
+  if (typeof options === 'number') {
+    marginTop = "margin-top:".concat(options, "%");
+  } else {
+    if (options.left != null) {
+      marginLeft = "margin-left:".concat(options.left, "%;");
+    }
+
+    if (options.right != null) {
+      marginRight = "margin-right:".concat(options.right, "%;");
+    }
+
+    if (options.top != null) {
+      marginTop = "margin-top:".concat(options.top, "%;");
+    }
+
+    if (options.line != null) {
+      marginLine = "margin-top:".concat(options.line, "%;");
+    }
+
+    if (options.size != null) {
+      size = "font-size:".concat(options.size, "em;");
+    }
+
+    if (options.className) {
+      className = "class=\"".concat(options.className, "\"");
+    }
+
+    if (options.color) {
+      color = "color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(options.color), ";");
+    }
+
+    if (options.listStyleType) {
+      listStyleType = "list-style-type:".concat(options.listStyleType, ";");
+    }
+  }
+
+  var p = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color, "\"").concat(className, ">");
+  var pFirst = "<p style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var li = "<li style=\"".concat(marginLeft).concat(marginRight).concat(marginLine).concat(size).concat(color).concat(listStyleType, "\"").concat(className, ">");
+  var ul = "<ul style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var ol = "<ol style=\"".concat(marginLeft).concat(marginRight).concat(marginTop).concat(size).concat(color, "\"").concat(className, ">");
+  var textToUse;
+
+  if (options.list != null) {
+    if (Array.isArray(text)) {
+      textToUse = text.join("</li>".concat(li));
+    } else {
+      textToUse = text;
+    }
+
+    if (options.list === 'unordered') {
+      textToUse = "".concat(ul).concat(li).concat(textToUse, "</ul>");
+    } else {
+      textToUse = "".concat(ol).concat(li).concat(textToUse, "</ol>");
+    }
+  } else {
+    if (Array.isArray(text)) {
+      textToUse = text.join("</p>".concat(p));
+    } else {
+      textToUse = text;
+    }
+
+    textToUse = "".concat(pFirst).concat(textToUse, "</p>");
+  }
+
+  if (options.centerV) {
+    textToUse = centerV(textToUse);
+  }
+
+  return textToUse;
 }
 
 function itemSelector() {
@@ -24970,6 +26461,41 @@ function addId() {
   };
 }
 
+function clickW(textToUse, actionMethod, bind) {
+  var classesOrColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var interactive = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
+  var classStr = 'action_word';
+
+  if (interactive) {
+    classStr = "".concat(classStr, " interactive_word");
+  }
+
+  if (typeof classesOrColor === 'string') {
+    classStr = "".concat(classesOrColor, " ").concat(classStr);
+  }
+
+  var color = null;
+
+  if (Array.isArray(classesOrColor)) {
+    color = classesOrColor;
+  }
+
+  var idToUse = function idToUse() {
+    return id;
+  }; // const id = `lesson__id_${textToUse}`;
+
+
+  return {
+    replacementText: function replacementText() {
+      return toHTML(textToUse, idToUse(), classStr, color);
+    },
+    id: idToUse,
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
 function clickWord(textToUse, id, actionMethod, bind) {
   var classesOrColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
   var interactive = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
@@ -25007,7 +26533,7 @@ function clickWord(textToUse, id, actionMethod, bind) {
 function click(actionMethod, bind) {
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : '';
+  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
   var classStr = 'action_word';
 
   if (interactive) {
@@ -25024,13 +26550,13 @@ function click(actionMethod, bind) {
     color = classesOrColor;
   }
 
-  var idToUse = function idToUse(text) {
-    return "lesson__id_".concat(text).concat(id);
+  var idToUse = function idToUse() {
+    return id;
   };
 
   return {
     replacementText: function replacementText(text) {
-      return toHTML(text, idToUse(text), classStr, color);
+      return toHTML(text, idToUse(), classStr, color);
     },
     id: idToUse,
     actionMethod: actionMethod,
@@ -25038,8 +26564,22 @@ function click(actionMethod, bind) {
   };
 }
 
+function clickId() {
+  var _id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+  var actionMethod = arguments.length > 1 ? arguments[1] : undefined;
+  var bind = arguments.length > 2 ? arguments[2] : undefined;
+  return {
+    id: function id() {
+      return _id;
+    },
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
 function actionWord(text) {
-  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+  var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();
   var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
   var classStr = 'action_word';
@@ -25135,7 +26675,10 @@ function applyModifiers(text, modifiers) {
   var outText = text;
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
-    outText = modifyText(outText, key, mod);
+
+    if (mod.replacementText != null) {
+      outText = modifyText(outText, key, mod);
+    }
   });
   var r = RegExp(/\|([^|]*)\|/, 'gi');
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
@@ -25655,7 +27198,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!*******************************!*\
   !*** ./src/js/tools/tools.js ***!
   \*******************************/
-/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS */
+/*! exports provided: divide, mulToString, add, Console, classify, extractFrom, ObjectKeyPointer, getElement, addToObject, duplicateFromTo, isTouchDevice, generateUniqueId, joinObjects, cleanUIDs, loadRemote, loadRemoteCSS, deleteKeys, copyKeysFromTo, generateRandomString */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -25676,6 +27219,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "cleanUIDs", function() { return cleanUIDs; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadRemote", function() { return loadRemote; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "loadRemoteCSS", function() { return loadRemoteCSS; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "deleteKeys", function() { return deleteKeys; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "copyKeysFromTo", function() { return copyKeysFromTo; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "generateRandomString", function() { return generateRandomString; });
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -26045,6 +27591,28 @@ var cleanUIDs = function cleanUIDs(objectToClean) {
     }
   }
 };
+
+function deleteKeys(obj, keys) {
+  keys.forEach(function (key) {
+    if (obj[key] !== undefined) {
+      // eslint-disable-next-line no-param-reassign
+      delete obj[key];
+    }
+  });
+}
+
+function copyKeysFromTo(source, destination, keys) {
+  keys.forEach(function (key) {
+    if (source[key] !== undefined) {
+      // eslint-disable-next-line no-param-reassign
+      destination[key] = source[key];
+    }
+  });
+}
+
+function generateRandomString() {
+  return (Math.random() * 1e18).toString(36);
+}
 
 
 

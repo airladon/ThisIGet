@@ -15,6 +15,10 @@ class LoginForm(FlaskForm):
     # remember_me = BooleanField('Remember Me')
     submit = SubmitField('Sign In')
 
+    def validate_username_or_email(self, username_or_email):
+        if len(username_or_email.data) > 32:
+            raise ValidationError('Username max length is 32 characters')
+
 
 class CreateAccountForm(FlaskForm):
     username = StringField('Username:', validators=[DataRequired()])

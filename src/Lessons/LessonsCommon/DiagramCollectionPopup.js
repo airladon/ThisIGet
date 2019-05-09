@@ -1,13 +1,14 @@
 // @flow
 import Fig from 'figureone';
 import CommonDiagramCollection from './DiagramCollection';
-import getLessonIndex from '../index';
+import getLessonIndex from './lessonindex';
 
 const {
-  Transform, Point, DiagramElementPrimative,
+  Transform, Point, DiagramElementPrimative, Rect,
+  DiagramElementCollection,
 } = Fig;
 const { html } = Fig.tools;
-const { generateUniqueId } = Fig.tools.misc;
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
 export default class PopupBoxCollection extends CommonDiagramCollection {
   id: string;
@@ -22,6 +23,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   linkElement: HTMLElement;
   interactiveButtonMethod: Function | null;
 
+  lastElement: HTMLElement;
+  lastWindow: Rect;
+  internalResize: boolean;
+
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
     this.titleElement.innerHTML = modifiedText;
@@ -29,9 +34,19 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.modifiers = modifiers;
   }
 
-  setDescription(description: string, modifiers: Object = {}) {
-    const modifiedText = html.applyModifiers(description, modifiers);
+  setDescription(description: Array<string> | string, modifiers: Object = {}) {
+    let text = '';
+    if (typeof description === 'string') {
+      text = description;
+    } else {
+      description.forEach((paragraph) => {
+        text += `<p>${paragraph}</p>`;
+      });
+    }
+    let modifiedText = html.applyModifiers(text, modifiers);
+    modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
     this.descriptionElement.innerHTML = modifiedText;
+    // console.log(modifiers)
     html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
     this.modifiers = modifiers;
   }
@@ -54,36 +69,61 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     titleElement.classList.add('lesson__popup_box__title');
     container.appendChild(titleElement);
 
+    const infoSymbolContainer = document.createElement('div');
+    infoSymbolContainer.classList.add('lesson__popup_box__title_i_container');
     const infoSymbol = document.createElement('div');
     infoSymbol.classList.add('lesson__popup_box__title_i');
     infoSymbol.innerHTML = 'i';
-    titleElement.appendChild(infoSymbol);
+    infoSymbolContainer.appendChild(infoSymbol);
+    titleElement.appendChild(infoSymbolContainer);
 
+    const closeContainer = document.createElement('div');
+    closeContainer.classList.add('lesson__popup_box__close_container');
     const close = document.createElement('div');
     close.classList.add('lesson__popup_box__close');
     close.id = 'id_lesson__popup_box__close';
     close.innerHTML = 'X';
     close.onclick = this.hideAll.bind(this);
-    titleElement.appendChild(close);
+    closeContainer.appendChild(close);
+    titleElement.appendChild(closeContainer);
 
+    const titleContainer = document.createElement('div');
+    titleContainer.classList.add('lesson__popup_box__title_text_container');
     const titleText = document.createElement('div');
     titleText.classList.add('lesson__popup_box__title_text');
     this.titleElement = titleText;
     this.setTitle(title);
-    titleElement.appendChild(titleText);
+    titleContainer.appendChild(titleText);
+    titleElement.appendChild(titleContainer);
+
+    const content = document.createElement('div');
+    content.classList.add('lesson__popup_box__content');
+    container.appendChild(content);
 
     const spaceForDiagram = document.createElement('div');
     spaceForDiagram.classList.add('lesson__popup_box__diagram');
     spaceForDiagram.id = (`id_lesson__popup_box__diagram__${id}`);
     this.spaceForDiagramElement = spaceForDiagram;
-    container.appendChild(spaceForDiagram);
+    content.appendChild(spaceForDiagram);
 
+    const textContainer = document.createElement('div');
+    textContainer.classList.add('lesson__popup_box__text_container');
+    textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
+
+    const centeringTextContainer = document.createElement('div');
+    centeringTextContainer.classList.add('lesson__popup_box__centering_text_container');
+    centeringTextContainer.id = `id_lesson__popup_box__centering_text_container__${this.id}`;
+    textContainer.appendChild(centeringTextContainer);
+    // const textSubContainer = document.createElement('div');
+    // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
+    // textContainer.appendChild(textSubContainer);
+    content.appendChild(textContainer);
     const descriptionElement = document.createElement('div');
     descriptionElement.classList.add('lesson__popup_box__text');
     descriptionElement.id = `id_lesson__popup_box__text__${id}`;
     this.descriptionElement = descriptionElement;
     this.setDescription(description);
-    container.appendChild(descriptionElement);
+    centeringTextContainer.appendChild(descriptionElement);
 
     const linkElement = document.createElement('div');
     linkElement.classList.add('lesson__popup_box__link');
@@ -91,7 +131,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     container.appendChild(linkElement);
 
 
-    const element = this.diagram.shapesHigh.htmlElement(
+    const element = this.diagram.shapes.htmlElement(
       container,
       `id_lesson__popup_box__${this.id}`,
       'lesson__popup_box',
@@ -107,22 +147,23 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     diagram: Object,
     layout: Object,
     transform: Transform = new Transform(),
-    collectionName: string,
+    collectionName: string = '',
     Collection: Function | null = null,
     id: string = generateUniqueId(),
   ) {
     super(diagram, layout, transform);
+    this.internalResize = false;
     if (Collection) {
-      this.diagram.shapes = this.diagram.shapesHigh;
-      this.diagram.equation = this.diagram.equationHigh;
-      this.diagram.objects = this.diagram.objectsHigh;
+      // this.diagram.shapes = this.diagram.shapesHigh;
+      // this.diagram.equation = this.diagram.equationHigh;
+      // this.diagram.objects = this.diagram.objectsHigh;
       this.add(collectionName, new Collection(
         diagram, layout,
         new Transform(id).scale(1, 1).rotate(0).translate(0, 0),
       ));
-      this.diagram.shapes = this.diagram.shapesLow;
-      this.diagram.equation = this.diagram.equationLow;
-      this.diagram.objects = this.diagram.objectsLow;
+      // this.diagram.shapes = this.diagram.shapesLow;
+      // this.diagram.equation = this.diagram.equationLow;
+      // this.diagram.objects = this.diagram.objectsLow;
     }
     this.add('box', this.makeBox(id));
     this.interactiveButtonMethod = null;
@@ -157,29 +198,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         link = `${versionPath}/${topics[0]}`;
       }
     }
-    // Object.entries(index).forEach((uid, lessonDescription) => {
-    //   if (uid === linkOrLessonID) {
-    //     const { versions } = lessonDescription;
-    //     let version;
-    //     if (versionId !== '') {
-    //       if (versions[versionId] != null)
-    //         version = versions[versionId];
-    //     }
-    //     if (version == null) {
-    //       version = versions[Object.keys(versions)[0]];
-    //     }
-    //     const { paths } = version;
-    //     const subPath = version.path;
-    //     const explanationPath = `${lessonDescription.path}/${version.path}`;
-    //     if (paths.indexOf('summary') > -1) {
-    //       link = `${explanationPath}/summary`;
-    //     } else if (paths.indexOf('explanation') > -1) {
-    //       link = `${explanationPath}/explanation`;
-    //     } else {
-    //       link = `${explanationPath}/${paths[0]}`;
-    //     }
-    //   }
-    // });
     return link;
   }
 
@@ -192,50 +210,207 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       a.innerHTML = 'Go to lesson to see why';
       this.linkElement.appendChild(a);
     }
-    // this.linkElement.innerHTML = `<a href=${link}>Go to lesson</a>`;
   }
 
-  getDiagramSpacePosition(reference: 'topLeft' | 'center') {
-    const matrix = this.diagram.pixelToDiagramSpaceTransform.matrix();
+  resize(diagramHTMLElement: ?HTMLElement = null) {
+    super.resize(diagramHTMLElement);
+    // console.log(this.internalResize, this.isShown)
+    if (this.internalResize === true) {
+      return;
+    }
+    if (this.isShown) {
+      this.hideAll();
+    } else {
+      super.hideAll();
+    }
+    // // if ((this.internalResize === false && this.isShown) || this.internalResize === true) {
+    // //   this.hideAll();
+    // // } else {
+    // //   super.hideAll();
+    // // }
+    this.diagram.animateNextFrame();
+  }
 
-    const dBound = this.spaceForDiagramElement.getBoundingClientRect();
-    const cBound = this.diagram.htmlCanvas.getBoundingClientRect();
-    const pixelTopLeft = new Point(
-      dBound.left - cBound.left,
-      dBound.top - cBound.top,
-    );
-    const pixelBottomRight = new Point(
-      dBound.right - cBound.left,
-      dBound.bottom - cBound.top,
-    );
+  transformToQRWindow(
+    element: DiagramElementCollection | DiagramElementPrimative,
+    lensWindow: Rect,
+  ) {
+    const diagramContainer = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    if (diagramContainer != null) {
+      // eslint-disable-next-line no-param-reassign
+      element.tieToHTML = {
+        element: diagramContainer.id,
+        window: lensWindow,
+        scale: 'fit',
+        updateOnResize: true,
+      };
+      element.updateHTMLElementTie(this.diagram.canvasLow);
+    }
+  }
 
-    const topLeft = pixelTopLeft.transformBy(matrix);
-    const bottomRight = pixelBottomRight.transformBy(matrix);
+  // size is width for 'left' or 'right', an height for 'up' or 'down'
+  // For auto, size is 0.5
+  setDiagramSpace(
+    optionsIn: {
+      location?: 'left' | 'right' | 'top' | 'bottom',
+      xSize?: number,
+      ySize?: number,
+    },
+  ) {
+    const defaultOptions = {
+      location: 'top',
+      xSize: 0.5,
+      ySize: 0.5,
+    };
+    const options = joinObjects({}, defaultOptions, optionsIn);
 
-    if (reference === 'topLeft') {
-      return topLeft;
+    // let overlayAR = 1;
+    let overlay = document.getElementById('presentation_lesson__qr__overlay');
+
+    // deterimine the lesson type
+    let lessonType = 'presentation';
+    if (overlay == null) {
+      lessonType = 'singlePage';
+      overlay = document.getElementById('single_page_lesson__qr__overlay');
+    }
+    if (overlay == null) {
+      return;
     }
 
-    const width = bottomRight.x - topLeft.x;
-    const height = topLeft.y - bottomRight.y;
-    return new Point(topLeft.x + width / 2, bottomRight.y + height / 2);
+    // set size of font and window
+    if (lessonType === 'singlePage') {
+      this.setSinglePageSize();
+    } else {
+      this.setPresentationPageSize();
+    }
+    // this.diagram.webglLow.resize();
+    // this.diagram.draw2DLow.resize();
+    // this.diagram.setSpaceTransforms();
+    // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    // this.internalResize = true;
+    // console.log('1')
+    // console.trace()
+    this.tieToHTML.updateOnResize = false;
+    this.diagram.resize(true);
+    this.tieToHTML.updateOnResize = true;
+    // console.log('2')
+    // this.internalResize = false;
+    // this.diagram.setFirstTransform();
+
+    // Overlay aspect ratio
+    // overlayAR = overlay.clientWidth / overlay.clientHeight;
+
+    // determine the location to use
+    const locationToUse = options.location;
+    // if (options.location === 'auto') {
+    //   if (
+    //     overlay.clientWidth > 600
+    //     || overlayAR > 1
+    //     || lessonType === 'presentation'
+    //   ) {
+    //     locationToUse = 'left';
+    //   } else {
+    //     locationToUse = 'top';
+    //   }
+    // }
+
+    // determine diagram size to use
+    let xSizeD;
+    let ySizeD;
+    let xSizeT;
+    let ySizeT;
+    if (locationToUse === 'top' || locationToUse === 'bottom') {
+      xSizeD = 1;
+      ySizeD = options.ySize;
+      xSizeT = 1;
+      ySizeT = 1 - options.ySize;
+      this.spaceForDiagramElement.style.float = 'none';
+    } else {
+      xSizeD = options.xSize;
+      ySizeD = 1;
+      xSizeT = 1 - options.xSize;
+      ySizeT = 1;
+      this.spaceForDiagramElement.style.float = locationToUse;
+    }
+
+    // Arrange diagram and text content accordinly
+    const textElement = document.getElementById(`id_lesson__popup_box__text_container__${this.id}`);
+    const diagramElement = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    if (textElement != null && diagramElement != null) {
+      const parent = textElement.parentElement;
+      if (parent != null) {
+        parent.removeChild(textElement);
+        parent.removeChild(diagramElement);
+        if (locationToUse === 'bottom') {
+          parent.appendChild(textElement);
+          parent.appendChild(diagramElement);
+        } else {
+          parent.appendChild(diagramElement);
+          parent.appendChild(textElement);
+        }
+      }
+    }
+
+    // set size of diagram and text element
+    if (textElement != null && diagramElement != null) {
+      diagramElement.style.width
+        = `calc(var(--lesson__qr_width) * ${xSizeD})`;
+      diagramElement.style.height
+        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.75})`;
+      textElement.style.width
+        = `calc(var(--lesson__qr_width) * ${xSizeT})`;
+      textElement.style.height
+        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.75})`;
+    }
   }
 
-  setDiagramSize(width: number, height: number) {
-    // As css 0, 0 is in top left and we are converting a relative dimension,
-    // not absolute, then first make a point of the relavent dimension relative
-    // to the top left of the diagram
-    const diagramSpace = new Point(
-      this.diagram.limits.left + width,
-      this.diagram.limits.top - height,
-    );
-    const cssSpace = diagramSpace
-      .transformBy(this.diagram.diagramToCSSPercentSpaceTransform.matrix());
+  setPresentationPageSize() {
+    const overlay = document.getElementById('id_diagram__html');
+    const lessonContent = document.getElementById('lesson__content');
+    if (overlay == null || lessonContent == null) {
+      return;
+    }
+    // const fontSize = parseFloat(window
+    //   .getComputedStyle(lessonContent, null)
+    //   .getPropertyValue('font-size'));
+    // const width = overlay.clientWidth;
+    const height = overlay.clientHeight;
+    // const qrWidth = width * 0.7;
+    const qrHeight = height * 0.7;
+    const qrWidth = qrHeight * 3 / 2;
+    this.setRootElement(qrWidth, qrHeight);
+  }
 
-    this.spaceForDiagramElement.style.width
-      = `calc(var(--lesson__content-width) * ${cssSpace.x})`;
-    this.spaceForDiagramElement.style.height
-      = `calc(var(--lesson__content-height) * ${cssSpace.y})`;
+
+  setSinglePageSize() {
+    const overlay = document.getElementById('single_page_lesson__qr__overlay');
+    const lessonContent = document.getElementById('lesson__content');
+    if (overlay == null || lessonContent == null) {
+      return;
+    }
+    // const fontSize = parseFloat(window
+    //   .getComputedStyle(lessonContent, null)
+    //   .getPropertyValue('font-size'));
+    const width = overlay.clientWidth;
+    const height = overlay.clientHeight;
+    let qrWidth = Math.min(800, width * 0.9);
+    // let qrWidth = width * 0.9;
+    let qrHeight = qrWidth * 2 / 3;
+    if (width > height) {
+      qrHeight = height * 0.8;
+      qrWidth = qrHeight * 3 / 2;
+    }
+
+    this.setRootElement(qrWidth, qrHeight);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setRootElement(width: number, height: number) {
+    const rootElement = document.documentElement;
+    if (rootElement != null) {
+      rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
+      rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
+    }
   }
 
   showAll() {
@@ -248,46 +423,20 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   show() {
     super.show();
-    // this.toggle(true);
-    // console.log(this.diagram.elements.elements)
-    // Object.keys(this.diagram.elements.elements).forEach((key) => {
-    //   const element = this.diagram.elements.elements[key];
-    //   if (element.name !== this.name) {
-    //     console.log(element.name)
-    //   }
-    // })
-    const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    if (interactiveButton instanceof HTMLElement) {
-      interactiveButton.classList.add('lesson__interactive_element_button__disable');
-    }
-    const actionElements = document.getElementsByClassName('action_word_enabled');
-    if (actionElements) {
-      for (let i = 0; i < actionElements.length; i += 1) {
-        const element = actionElements[i];
-        if (!element.classList.contains('lesson__popup_box__action_word')) {
-          element.classList.add('lesson__action_word_disabled_by_popup');
-        }
-      }
-    }
-
     this._box.show();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  prepareToHideAll() {
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  prepareToShow() {
+  }
+
   hideAll() {
+    this.prepareToHideAll();
     super.hideAll();
-    const interactiveButton = document.getElementById('id_lesson__interactive_element_button__container');
-    if (interactiveButton instanceof HTMLElement) {
-      interactiveButton.classList.remove('lesson__interactive_element_button__disable');
-    }
-    const actionElements = document.getElementsByClassName('action_word_enabled');
-    if (actionElements) {
-      for (let i = 0; i < actionElements.length; i += 1) {
-        const element = actionElements[i];
-        if (!element.classList.contains('lesson__popup_box__action_word')) {
-          element.classList.remove('lesson__action_word_disabled_by_popup');
-        }
-      }
-    }
     this.diagram.animateNextFrame();
   }
 }

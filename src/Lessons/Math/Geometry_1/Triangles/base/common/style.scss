@@ -1,17 +1,15 @@
 @import '../../../geometry';
 
 $colors: (
-  latin:            color('diagram', 'text-latin'),
-  line:             map-get($geometry_colors, lines),
-  point:            map-get($geometry_colors, length),
-  pointText:        map-get($geometry_colors, length),
-  angle:            map-get($geometry_colors, angle),
-  angleA:            map-get($geometry_colors, angleA),
-  angleB:            map-get($geometry_colors, angleB),
-  angleC:            map-get($geometry_colors, angleC),
-  angleText:        map-get($geometry_colors, angleText),
-  parallelLines:    color('red', 'base', 'light'),
-  dimensions:       map-get($geometry_colors, length),
+  lines:              color('blue'),
+  sideLengths:        color('yellow'),
+  angles:             color('green'),
+  angle1:             color('green'),
+  angle2:             color('red'),
+  angle3:             color('yellow'),
+  disabled:           color('grey', 'darker'),
+  parallel:           color('red'),
+  pads:               color('red', 'lighter'),
 );
 
 body {
@@ -19,26 +17,5 @@ body {
 }
 
 .diagram__text {
-  z-index: 1;
+  z-index: 0;
 }
-
-// #id_lesson__related_angles_definition {
-//   top: 92%;
-//   left: 7%;
-// }
-
-// .lesson__related_angles__angleA {
-//   color: map-get($colors, angleA);
-// }
-
-// .lesson__related_angles__angleB {
-//   color: map-get($colors, angleB);
-// }
-
-// .lesson__related_angles__angleC {
-//   color: map-get($colors, angleC);
-// }
-
-// .lesson__related_angles__angleD {
-//   color: map-get($colors, angleD);
-// }

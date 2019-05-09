@@ -1,151 +1,304 @@
 // @flow
 import Fig from 'figureone';
-// import { Rect, Point } from '../../../../../../js/diagram/tools/g2';
-// import getCssColors from '../../../../../../js/tools/getCssColors';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Rect, Point } = Fig;
+const {
+  Point,
+  // Rect,
+  // Transform,
+  // Line,
+} = Fig.tools.g2;
+
+const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'latin',
-  'line',
-  'point',
-  'pointText',
-  'angle',
-  'angleText',
-  'dimensions',
-  'angleA',
-  'angleB',
-  'angleC',
-  'parallelLines',
+  'lines',
+  'angle1',
+  'angle2',
+  'angle3',
+  'angles',
+  'disabled',
+  'parallel',
+  'pads',
+  'sideLengths',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function commonLessonLayout() {
+export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  layout.position = new Point(0, 0);
+  const { colors } = layout;
 
-  const pointRadius = 0.15;
-  layout.custom = {
-    lineWidth: 0.02,
-    pointRadius,
-    pointPositions: {
-      p1: new Point(0, 0.7),
-      p2: new Point(-1.4, -0.7),
-      p3: new Point(1.4, -0.7),
+  layout.width = 0.03;
+  const exampleTri = {
+    method: 'polyLine',
+    options: {
+      width: layout.width,
+      color: colors.lines,
+      close: true,
     },
-    boundary: new Rect(
-      -2.5, -1.5, 5, 2.3,
-    ),
-    pointSides: 50,
-    randomBoundary: new Rect(
-      0.2,
-      0.2,
-      1.5,
-      0.5,
-    ),
   };
+
+  const tri1 = joinObjects({}, exampleTri, {
+    name: 'tri1',
+    options: {
+      points: [
+        [-0.5, -0.5],
+        [0, 0.5],
+        [0.5, -0.5],
+      ],
+      position: new Point(-1.7, 0),
+    },
+  });
+
+  const tri2 = joinObjects({}, exampleTri, {
+    name: 'tri2',
+    options: {
+      points: [
+        [-0.5, -0.5],
+        [0.5, 0.5],
+        [0.5, -0.5],
+      ],
+      position: new Point(-0.15, 0),
+    },
+  });
+
+  const tri3 = joinObjects({}, exampleTri, {
+    name: 'tri3',
+    options: {
+      points: [
+        [-0.3, -0.5],
+        [-0.8, 0.5],
+        [0.5, -0.5],
+      ],
+      position: new Point(1.7, 0),
+    },
+  });
+
+  const triangleExamples = {
+    name: 'examples',
+    method: 'collection',
+    addElements: [
+      tri1,
+      tri2,
+      tri3,
+    ],
+  };
+
+  // ////////////////////////////////////////////////////////
+  //   Variable Triangle
+  // ////////////////////////////////////////////////////////
+  layout.defaultTri = [
+    [2, -1.1],
+    [-2, -1.1],
+    [-1, 0.7],
+  ];
+  layout.customTriangle = {
+    name: 'customTriangle',
+    method: 'polyLine',
+    options: {
+      points: layout.defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      pad: {
+        color: colors.pads,
+        radius: 0.2,
+        sides: 30,
+        fill: true,
+        isMovable: true,
+        touchRadius: 0.4,
+        boundary: [-2.9, -1.9, 5.8, 3.3],
+      },
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.3,
+          width: layout.width,
+        },
+        autoRightAngle: false,
+      },
+      side: {
+        offset: 0.3,
+        color: colors.sideLengths,
+        showLine: true,
+        width: layout.width / 2,
+        vertexSpaceStart: 'center',
+        arrows: {
+          width: 0.08,
+          height: 0.08,
+        },
+      },
+    },
+    mods: {
+      _pad0: { scenarios: { props: { position: layout.defaultTri[0] } } },
+      _pad1: { scenarios: { props: { position: layout.defaultTri[1] } } },
+      _pad2: { scenarios: { props: { position: layout.defaultTri[2] } } },
+    },
+  };
+
+  // ////////////////////////////////////////////////////////
+  //   Total Angle
+  // ////////////////////////////////////////////////////////
+
+  layout.triangle = {
+    name: 'triangle',
+    method: 'polyLine',
+    options: {
+      points: layout.defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      pad: {
+        color: colors.diagram.background,
+        radius: 0.2,
+        sides: 30,
+        fill: true,
+        isMovable: true,
+        touchRadius: 0.4,
+        boundary: [-2.5, -1.7, 5, 3],
+      },
+      // angle: {
+      //   color: colors.angles,
+      //   curve: {
+      //     radius: 0.3,
+      //     width: layout.width,
+      //   },
+      //   autoRightAngle: false,
+      // },
+      side: {
+        label: {
+          text: '',
+        },
+      },
+    },
+  };
+
+  layout.fixedTriangle = {
+    name: 'fixedTriangle',
+    method: 'polyLine',
+    options: {
+      points: layout.defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+    },
+  };
+
+  // layout.fixedTriangleWindow = new Rect(-2.5, -1.7, 5, 3);
+  layout.fixedTriangleCenter = new Point(0, -0.2);
+
+  const angles = {
+    method: 'angle',
+    options: {
+      curve: {
+        width: layout.width,
+        radius: 0.4,
+        sides: 400,
+      },
+      label: {
+        radius: 0.4,
+        scale: 1,
+      },
+    },
+  };
+
+  layout.angleA = joinObjects({}, angles, {
+    name: 'angleA',
+    options: { color: colors.angle1, label: { text: 'a' } },
+  });
+
+  layout.angleB = joinObjects({}, angles, {
+    name: 'angleB',
+    options: { color: colors.angle2, label: { text: 'b' } },
+  });
+
+  layout.angleC = joinObjects({}, angles, {
+    name: 'angleC',
+    options: { color: colors.angle3, label: { text: 'c' } },
+  });
+
+  layout.angleATop = joinObjects({}, angles, {
+    name: 'angleATop',
+    options: { color: colors.angle1, label: { text: 'a' } },
+  });
+
+  layout.angleBTop = joinObjects({}, angles, {
+    name: 'angleBTop',
+    options: { color: colors.angle2, label: { text: 'b' } },
+  });
+
+  layout.topParallel = {
+    name: 'topParallel',
+    method: 'line',
+    options: {
+      length: 5.5,
+      width: layout.width / 3,
+      color: colors.parallel,
+      vertexSpaceStart: 'center',
+    },
+    mods: { scenarios: { offscreen: { position: [0, 2] } } },
+  };
+
+  layout.bottomParallel = {
+    name: 'bottomParallel',
+    method: 'line',
+    options: {
+      length: 5.5,
+      width: layout.width / 3,
+      color: colors.parallel,
+      vertexSpaceStart: 'center',
+    },
+    mods: { scenarios: { offscreen: { position: [0, -2] } } },
+  };
+
+  layout.eqn = {
+    name: 'eqn',
+    method: 'addEquation',
+    options: {
+      elements: {
+        a: { color: colors.angle1 },
+        b: { color: colors.angle2 },
+        c: { color: colors.angle3 },
+        equals: '  =  ',
+        _180: '180º',
+        plus: ' + ',
+        plus_: ' + ',
+      },
+      scale: 1,
+      color: colors.diagram.text.base,
+      forms: {
+        '0': ['a', 'plus', 'b', 'plus_', 'c', 'equals', '_180'],
+      },
+    },
+    mods: {
+      scenarios: {
+        top: { position: [-1.6, 1.22], scale: 1 },
+      },
+    },
+  };
+
   layout.totalAngle = {
-    lineWidth: 0.02,
-    pointRadius: 0.4,
-    pointPositions: {
-      p1: new Point(-2, -1),
-      p2: new Point(2, -1),
-      p3: new Point(-1, 0.5),
-    },
-    parallelLine: {
-      length: 5,
-      width: 0.015,
-      offScreen: {
-        line1: new Point(-2.5, -2),
-        line2: new Point(-2.5, 2),
-      },
-    },
-    equation: {
-      position: new Point(-1.2, 1.1),
-      scale: 1.2,
-    },
-    boundary: new Rect(
-      -2.5, -1.5, 5, 2.3,
-    ),
-    // pointSides: 50,
-    randomBoundary: new Rect(
-      1,
-      0.5,
-      1.5,
-      1,
-    ),
-    angle: {
-      radius: 0.4,
-      lineWidth: 0.03,
-      sides: 200,
-      labelRadius: 0.45,
-    },
+    name: 'totalAngle',
+    method: 'collection',
+    addElements: [
+      layout.angleA,
+      layout.angleB,
+      layout.angleC,
+      layout.angleATop,
+      layout.angleBTop,
+      layout.bottomParallel,
+      layout.topParallel,
+      layout.triangle,
+      layout.fixedTriangle,
+      layout.eqn,
+    ],
   };
 
-  layout.examples = {
-    lineWidth: 0.02,
-    tri1: {
-      points: [
-        new Point(-0.5, 0),
-        new Point(0, 1),
-        new Point(0.5, 0),
-      ],
-      position: {
-        position: new Point(-2, -1),
-        rotation: 0,
-      },
-    },
-    tri2: {
-      points: [
-        new Point(-0.5, 0),
-        new Point(0.7, 1),
-        new Point(0.7, 0),
-      ],
-      position: {
-        position: new Point(-0.1, -1),
-        rotation: 0,
-      },
-    },
-    tri3: {
-      points: [
-        new Point(1, 0),
-        new Point(0.3, 0),
-        new Point(-0.5, 1),
-      ],
-      position: {
-        position: new Point(1.7, -1),
-        rotation: 0,
-      },
-    },
-  };
-
-  layout.properties = {
-    lineWidth: 0.02,
-    boundary: new Rect(
-      -2.5, -1.5, 5, 2.3,
-    ),
-    dimension: {
-      lineWidth: 0.01,
-      arrowHeight: 0.06,
-      arrowWidth: 0.06,
-      labelOffset: 0.01,
-      offset: 0.3,
-    },
-    angle: {
-      radius: 0.3,
-      lineWidth: 0.03,
-      sides: 200,
-    },
-    triangle: {
-      points: [
-        new Point(-2, -1),
-        new Point(-1, 0.5),
-        new Point(2, -1),
-      ],
-      position: new Point(0, -0.85),
-    },
-  };
+  layout.addElements = [
+    triangleExamples,
+    layout.customTriangle,
+    layout.totalAngle,
+  ];
   return layout;
 }

@@ -1,0 +1,87 @@
+
+.lesson__np_button {
+  position: absolute;
+  border-style: none;
+  border: 0;
+  padding: 0;
+  background-color: color('presentation', 'background');
+  top: calc(100% - var(--pres__nav_button_height));
+  width: 0;
+  height: 0;
+  border-top: calc(var(--pres__nav_button_height) / 2) solid transparent;
+  border-bottom: calc(var(--pres__nav_button_height) / 2) solid transparent;
+}
+
+#lesson__button-previous {
+  left: 0;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+#lesson__button-next {
+  right: 0;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
+  #lesson__button-previous {
+    margin-left: var(--pres__hpadding);
+    margin-right: var(--pres__hspace);
+  }
+
+  #lesson__button-next {
+    margin-left: var(--pres__hspace);
+    margin-right: var(--pres__hpadding);
+  }
+
+  .lesson__np_button {
+    position: relative;
+    top: calc(var(--pres__content_height) / 2 - var(--pres__nav_button_height) / 2);
+    // top: 0;
+    display: inline-block;
+    vertical-align: top;
+    border-top: calc(var(--pres__nav_button_height) / 2) solid transparent;
+    border-bottom: calc(var(--pres__nav_button_height) / 2) solid transparent;
+  }
+}
+
+.lesson__button-next-enabled {
+  border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
+}
+
+.lesson__button-next-enabled:hover {
+  border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
+}
+
+.lesson__button-next-disabled {
+  border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  pointer-events: none;
+}
+
+.lesson__button-next-disabled:hover {
+  border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+}
+
+.lesson__button-prev-enabled {
+  border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
+}
+
+.lesson__button-prev-enabled:hover {
+  border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
+}
+
+.lesson__button-prev-disabled {
+  border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  pointer-events: none;
+}
+
+.lesson__button-prev-disabled:hover {
+  border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+}

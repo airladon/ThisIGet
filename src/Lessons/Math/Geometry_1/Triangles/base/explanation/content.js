@@ -1,24 +1,28 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-// import LessonDiagram from './diagram';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import Definition from '../../../../../LessonsCommon/tools/definition';
-import lessonLayout from './layout';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  click, centerV, highlight,
+  click,
+  style,
+  highlight,
+  // clickWord,
 } = Fig.tools.html;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,491 +33,414 @@ class Content extends LessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'related_angles',
-      'adjacent_angles/base',
+      'adjacent_angles', 'related_angles',
     ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
-    const examples = diag._examples;
-    const custom = diag._custom;
-    const properties = diag._properties;
-    const totalAngle = diag._totalAngle;
-    let common = {};
+    const coll = diag._collection;
+    const examples = coll._examples;
+    const custom = coll._customTriangle;
+    const total = coll._totalAngle;
 
     this.addSection({
-      title: 'Introduction',
-      setContent: `
-        <p>
-          A triangle is a shape formed by |three straight lines| connected at |three corners| (or angles). 
-        </p>
-        <p>
-          Hence the name |tri| (three) |angle| (corner).
-        </p>
-        ${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html('id_lesson__related_angles_definition')}
-      `,
-      show: [
-        examples,
+      title: 'Triangle',
+      setContent: [
+        'A triangle is a shape formed by |three straight lines| connected at |three corners| (or angles).',
+        `${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html()}`,
       ],
-      setSteadyState: () => {
-        examples.setScenario(examples._tri1, layout.examples.tri1.position);
-        examples.setScenario(examples._tri2, layout.examples.tri2.position);
-        examples.setScenario(examples._tri3, layout.examples.tri3.position);
-      },
+      show: [examples],
     });
 
     this.addSection({
-      setContent: `
-        <p>
-          Another way to make a triangle is to draw lines between any |three_points|.
-        </p>
-      `,
-      modifiers: {
-        three_points: click(custom.newTriangle, [custom], colors.pointText),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the points or touch the |three_points| text to change the triangle.</li>',
-        '</ul>',
+      setContent: [
+        'Another way to make a triangle is to draw lines between any |three_points|.',
       ],
-      infoModifiers: {
-        three_points: highlight(colors.pointText),
+      modifiers: {
+        three_points: click(coll.newCustomTriangle, [coll, null], colors.pads),
       },
       show: [
-        custom,
+        custom._line, custom._pad0, custom._pad1, custom._pad2,
       ],
-      setEnterState: () => {
-        custom.calculateFuturePositions();
-        custom._triangle._point1.setPosition(0.1, 0.1);
-        custom._triangle._point1.setPosition(0.1, -0.1);
-        custom._triangle._point1.setPosition(-0.1, 0.1);
-      },
       transitionFromAny: (done) => {
-        custom.moveToFuturePositions(1.5, done);
-      },
-      setSteadyState: () => {
-        custom.setFuturePositions();
+        if (this.comingFrom === 'prev') {
+          custom.stop(true, 'noComplete');
+          custom.animations.new()
+            .scenarios({ target: 'props', duration: 1 })
+            .whenFinished(done)
+            .start();
+        } else {
+          custom.setScenarios('props');
+          done();
+        }
       },
     });
 
     this.addSection({
       title: 'Properties',
-      setContent: `
-        <p>
-          What properties does a triangle have? Well, its definition gives us some, |three_side_lengths|, and |three_angles|.
-        </p>
-      `,
+      setContent: [
+        'What |properties| does a triangle have? Well, its definition gives us some to start with: |three_side_lengths|, and |three_angles|.',
+      ],
       modifiers: {
-        three_side_lengths: click(properties.growDimensions, [properties], colors.dimensions),
-        three_angles: click(properties.pulseAngles, [properties], colors.angleText),
+        three_side_lengths: click(coll.growSides, [coll], colors.sideLengths),
+        three_angles: click(coll.pulseAngles, [coll], colors.angles),
       },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the triangle corners to change the triangle.</li>',
-        '<li>Touch the |three_side_lengths| and |three_angle_sizes| text to highlight the side lengths and angles.</li>',
-        '</ul>',
-      ],
-      infoModifiers: {
-        three_side_lengths: highlight(colors.dimensions),
-        three_angle_sizes: highlight(colors.angleText),
-      },
-      setEnterState: () => {
-        if (this.comingFrom === 'prev') {
-          const tri = custom._triangle;
-          properties._triangle.updatePoints(tri.p1, tri.p2, tri.p3);
-        }
-        properties.calculateFuturePositions();
-      },
-      showOnly: [
-        diag,
-        properties,
-        properties._triangle,
-        properties._triangle._line,
-        properties._triangle._point1,
-        properties._triangle._point2,
-        properties._triangle._point3,
-      ],
+      show: [custom._line],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'prev') {
-          properties.moveToFuturePositions(2, done);
+          custom.stop(true, 'noComplete');
+          custom.animations.new()
+            .scenarios({ target: 'props', duration: 1 })
+            .whenFinished(done)
+            .start();
         } else {
+          custom.setScenarios('props');
           done();
         }
       },
       setSteadyState: () => {
-        properties.setFuturePositions();
-        properties._triangle.showDimensions(false);
-        properties._triangle.showAngles(false);
+        custom._angle0.showAll();
+        custom._angle1.showAll();
+        custom._angle2.showAll();
+        custom._side01.showAll();
+        custom._side12.showAll();
+        custom._side20.showAll();
       },
     });
 
     this.addSection({
-      setContent: centerV(`
-        <p>
-          Once properties are identified, the next question is |are they related?|
-        </p>
-        <p>
-          If they are, then future analysis of the shape is simplified as you only need to know some properties to calculate the rest.
-        </p>
-
-      `),
+      setContent: style({ centerV: true }, [
+        'Once properties are identified, the next question is |are they related?|',
+        'If they are, then future analysis of the shape is simplified as you only need to know some properties to calculate the rest.',
+      ]),
     });
 
     this.addSection({
-      setContent: centerV(`
-        <p>
-          In fact, a triangle's side lengths and angles |are all related|. If you know any four (and sometimes three), you can calculate the remainder!
-        </p>
-        <p>
-          In this lesson we will focus on the |relationship between angles|. The relationship to sides requires knowledge of the sine function, which which is in a later lesson.
-        </p>
-      `),
+      setContent: style({ centerV: true }, [
+        'In fact, a triangle\'s side lengths and angles |are all related|. If you know any four (and sometimes three), you can calculate the remainder!',
+        'In this lesson we will focus on the |relationship between angles|.',
+        ' The relationship between sides and angles, and exploration of additional properties, requires developing other concepts first, which are future lessons.',
+      ]),
     });
+
     this.addSection({
-      setContent: centerV(`
-        <p>
-          To find this relationship, we can use knowledge of |supplementary_angles| and |alternate_angles| when a line intersects parallel lines.
-        </p>
-      `),
+      setContent: style({ centerV: true }, [
+        'To find the |relationship| between a triangle\'s |angles|, we can use  |supplementary_angles| and |alternate_angles|.',
+      ]),
       modifiers: {
-        alternate_angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.line),
-        supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.line),
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.diagram.action),
+        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.diagram.action),
       },
     });
 
-    common = {
-      showOnly: [
-        totalAngle,
-      ],
-      show: [
-        totalAngle._triangle,
-      ],
-      hide: [
-        totalAngle._triangle._angle1,
-        totalAngle._triangle._angle2,
-        totalAngle._triangle._angle3,
-      ],
-    };
-    this.addSection(common, {
+    this.addSection({
       title: 'Total Angle',
-      setContent: `
-        <p>
-          Start with |any| triangle.
-        </p>
-      `,
+      setContent: style({}, [
+        'Start with |any| triangle.',
+      ]),
       modifiers: {
-        any: click(totalAngle.randomize, [totalAngle, false], colors.diagram.action),
+        any: click(coll.newTotalTriangle, [coll, null], colors.lines),
       },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the corners or touch the |any| text to change the triangle.</li>',
-        '</ul>',
+      setEnterState: () => {
+        if (this.comingFrom === 'next') {
+          coll.dupFixedTriangle();
+        } else {
+          total._triangle.updatePoints(layout.defaultTri);
+        }
+      },
+      show: [
+        total._triangle._line,
+        total._triangle._pad0,
+        total._triangle._pad1,
+        total._triangle._pad2,
       ],
-      infoModifiers: {
-        any: highlight(colors.diagram.action),
-      },
-      setEnterState: () => {
-        totalAngle._triangle.hasTouchableElements = true;
-      },
-      setLeaveState: () => {
-        totalAngle._triangle.hasTouchableElements = false;
-      },
     });
 
-    this.addSection(common, {
-      setContent: `
-        <p>
-          For convenience orient it so one side is horizontal.
-        </p>
-      `,
-      setEnterState: () => {
-        totalAngle.calculateTriangleFuturePositions();
+    this.addSection({
+      setContent: style({}, [
+        'Orient the triangle so its |base| is |horizontal|.',
+      ]),
+      modifiers: {
+        any: click(coll.newTotalTriangle, [coll, null], colors.lines),
       },
+      show: [
+        total._fixedTriangle._line,
+      ],
       transitionFromAny: (done) => {
-        totalAngle.moveToFuturePositions(1, done);
-      },
-      setSteadyState: () => {
-        totalAngle.setFuturePositions();
-        totalAngle.resetTrianglePoints();
+        total._fixedTriangle._line.setColor(colors.lines);
+        coll.makeBaseHorizontal(done);
       },
     });
 
-    this.addSection(common, {
-      setContent: `
-        <p>
-          Label the angles |a|, |b| and |c|.
-        </p>
-      `,
+    let common = {
+      setContent: style({}, [
+        'Label the angles |a|, |b| and |c|.',
+      ]),
       modifiers: {
-        a: highlight(colors.angleA),
-        b: highlight(colors.angleB),
-        c: highlight(colors.angleC),
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
       },
-    });
-
+      show: [
+        total._fixedTriangle._line,
+      ],
+    };
+    this.addSection(common);
     this.addSection(common, {
-      setContent: `
-        <p>
-          Label the angles |a|, |b| and |c|.
-        </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        b: highlight(colors.angleB),
-        c: highlight(colors.angleC),
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._fixedTriangle._line.setColor(colors.lines);
+        coll.updateTotalAngles();
       },
-      hide: [],
-      setSteadyState: () => {
-        totalAngle._triangle._angle1.pulseScaleNow(1, 1.2);
-        totalAngle._triangle._angle2.pulseScaleNow(1, 1.2);
-        totalAngle._triangle._angle3.pulseScaleNow(1, 1.2);
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
+      ],
+      transitionFromAny: (done) => {
+        coll.totalPulseAngles(['A', 'B', 'C'], done);
       },
     });
 
     common = {
-      setContent: `
-        <p>
-          Draw parallel lines that enclose the triangle and align with the bottom side of the triangle.
-        </p>
-      `,
-      showOnly: [
-        totalAngle,
-      ],
+      setContent: style({}, [
+        'Draw |parallel_lines| that enclose the triangle and align with the bottom side of the triangle.',
+      ]),
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.parallel);
+        total._bottomParallel.setColor(colors.parallel);
+        total._fixedTriangle._line.setColor(colors.lines);
+        total.setScenarios('offscreen');
+        coll.updateTotalAngles();
+      },
       show: [
-        totalAngle._triangle,
-        // totalAngle._angleC,
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
       ],
     };
     this.addSection(common, {
+      modifiers: {
+        parallel_lines: click(this.next, [this], colors.parallel),
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        parallel_lines: click(coll.drawParallelLines, [coll, null], colors.parallel),
+      },
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
+        total._topParallel, total._bottomParallel,
+      ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'next') {
+          total.setScenarios('parallel');
+          done();
+        } else {
+          coll.drawParallelLines(done);
+        }
+      },
     });
 
+    common = {
+      setContent: style({}, [
+        'When a line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.',
+      ]),
+      modifiers: {
+        alternate_angles: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.angle1),
+        a: highlight(colors.angle1),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+      ],
+    };
     this.addSection(common, {
       setEnterState: () => {
-        const { offScreen } = layout.totalAngle.parallelLine;
-        totalAngle.calculateParallelLineFuturePositions();
-        totalAngle._line1.setPosition(offScreen.line1);
-        totalAngle._line2.setPosition(offScreen.line2);
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.parallel);
+        total._bottomParallel.setColor(colors.parallel);
+        total._fixedTriangle._line.setColor(colors.lines);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
       },
-      show: [...common.show, totalAngle._line1, totalAngle._line2],
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    });
+    this.addSection(common, {
+      setEnterState: () => {
+        total._angleA.setColor(colors.angle1);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
       transitionFromAny: (done) => {
-        totalAngle.moveToFuturePositions(1.5, done);
+        total._angleATop.showAll();
+        total._angleATop.pulseScaleNow(1, 1.2, 0, done);
       },
-      skipWhenComingFromNext: true,
+    });
+
+    common = {
+      setContent: style({}, [
+        'We can similarly identify the |alternate_angle| of |b|.',
+      ]),
+      modifiers: {
+        alternate_angle: click(this.showQR, [this, 'related_angles', 'Alternate'], colors.angle2),
+        b: highlight(colors.angle2),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA, total._angleATop,
+      ],
+      setEnterState: () => {
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.disabled);
+        total._angleB.setColor(colors.angle2);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.disabled);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    };
+    this.addSection(common, {
+    });
+    this.addSection(common, {
+      transitionFromAny: (done) => {
+        total._angleBTop.showAll();
+        total._angleBTop.pulseScaleNow(1, 1.2, 0, done);
+      },
+    });
+
+    common = {
+      setContent: style({}, [
+        'Around the triangle\'s top point, |a|, |b| and |c| form a straight angle and are therefore |supplementary_angles|.',
+      ]),
+      modifiers: {
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+      },
+      show: [
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+        total._angleATop, total._angleBTop,
+      ],
+      setEnterState: () => {
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
+      },
+    };
+    this.addSection(common, {
+    });
+    this.addSection(common, {
+      setContent: 'Therefore:',
       setSteadyState: () => {
-        totalAngle.setFuturePositions();
+        total._eqn.showForm('0');
+        total._eqn.setScenario('top');
       },
     });
 
 
     common = {
-      setContent: `
-        <p>
-          When one line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.
-        </p>
-      `,
+      setContent: style({}, [
+        'Remember, angles |a| and |b| originally come from the triangle.',
+      ]),
       modifiers: {
-        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
-        a: highlight(colors.angleA),
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
       },
-      showOnly: [
-        totalAngle,
-      ],
       show: [
-        totalAngle._triangle,
-        totalAngle._line1,
-        totalAngle._line2,
-        // totalAngle._angleC,
+        total._fixedTriangle._line, total._topParallel, total._bottomParallel,
+        total._angleC, total._angleB, total._angleA,
+        total._angleATop, total._angleBTop,
       ],
-      setLeaveState: () => {
-        totalAngle.resetColors();
-      },
-    };
-    const greyLines = {
       setEnterState: () => {
-        totalAngle._triangle._angle2.setColor(colors.diagram.disabled);
-        totalAngle._triangle._angle3.setColor(colors.diagram.disabled);
-        // totalAngle._angleC.setColor(colors.diagram.disabled);
-        totalAngle._line1.setColor(colors.diagram.disabled);
-        totalAngle._line2.setColor(colors.diagram.disabled);
-        totalAngle._triangle._line.setColor(colors.diagram.disabled);
+        total._angleA.setColor(colors.disabled);
+        total._angleATop.setColor(colors.angle1);
+        total._angleB.setColor(colors.disabled);
+        total._angleBTop.setColor(colors.angle2);
+        total._angleC.setColor(colors.angle3);
+        total._topParallel.setColor(colors.disabled);
+        total._bottomParallel.setColor(colors.disabled);
+        total._fixedTriangle._line.setColor(colors.disabled);
+        coll.updateTotalAngles();
+        total.setScenarios('parallel');
       },
     };
     this.addSection(common);
-    this.addSection(common, greyLines);
-    this.addSection(common, greyLines, {
-      modifiers: {
-        alternate_angles: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
-        a: click(totalAngle.pulseAlternateA, [totalAngle], colors.angleA),
-      },
-      show: [
-        ...common.show,
-        totalAngle._angleA,
-      ],
-      setSteadyState: () => {
-        totalAngle.pulseAlternateA();
-      },
-    });
 
-    common = {
-      setContent: `
-        <p>
-          We can similarly identify the |alternate_angle| of |b|.
-        </p>
-      `,
-      modifiers: {
-        alternate_angle: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
-        b: highlight(colors.angleB),
-      },
-      setEnterState: () => {
-        totalAngle._triangle._angle1.setColor(colors.diagram.disabled);
-        totalAngle._triangle._angle3.setColor(colors.diagram.disabled);
-        // totalAngle._angleC.setColor(colors.diagram.disabled);
-        totalAngle._angleA.setColor(colors.diagram.disabled);
-        totalAngle._triangle._line.setColor(colors.diagram.disabled);
-      },
-      showOnly: [
-        totalAngle,
-      ],
-      show: [
-        totalAngle._triangle,
-        totalAngle._line1,
-        totalAngle._line2,
-        // totalAngle._angleC,
-        totalAngle._angleA,
-      ],
-      setLeaveState: () => {
-        totalAngle.resetColors();
-      },
-    };
-
-    this.addSection(common, {
-    });
-    common.modifiers = {
-      alternate_angle: click(this.showQR, [this, 'related_angles/base', 'Alternate'], colors.line),
-      b: click(totalAngle.pulseAlternateB, [totalAngle], colors.angleB),
-    };
-
-    this.addSection(common, {
-      show: [...common.show, totalAngle._angleB],
-      setSteadyState: () => {
-        totalAngle.pulseAlternateB();
-      },
-    });
-
-    common = {
-      setContent: `
-        <p>
-          Therefore:
-        </p>
-      `,
-      setEnterState: () => {
-        totalAngle._triangle._angle1.setColor(colors.diagram.disabled);
-        totalAngle._triangle._angle2.setColor(colors.diagram.disabled);
-        totalAngle._triangle._line.setColor(colors.diagram.disabled);
-      },
-      showOnly: [
-        totalAngle,
-        totalAngle._eqn,
-      ],
-      show: [
-        totalAngle._triangle,
-        totalAngle._line1,
-        totalAngle._line2,
-        // totalAngle._angleC,
-        totalAngle._angleA,
-        totalAngle._angleB,
-      ],
-      setSteadyState: () => {
-        totalAngle.eqn.showForm('base');
-      },
-      setLeaveState: () => {
-        totalAngle.resetColors();
-      },
+    common.setEnterState = () => {
+      total._angleA.setColor(colors.angle1);
+      total._angleATop.setColor(colors.disabled);
+      total._angleB.setColor(colors.angle2);
+      total._angleBTop.setColor(colors.disabled);
+      total._angleC.setColor(colors.angle3);
+      total._topParallel.setColor(colors.disabled);
+      total._bottomParallel.setColor(colors.disabled);
+      total._fixedTriangle._line.setColor(colors.lines);
+      coll.updateTotalAngles();
+      total.setScenarios('parallel');
     };
     this.addSection(common, {
-      setContent: `
-        <p>
-          Around the triangle's top point, |a|, |b| and |c| form a straight angle and are therefore |supplementary_angles|.
-        </p>
-      `,
-      modifiers: {
-        supplementary_angles: click(this.showQR, [this, 'adjacent_angles/base', 'Supplementary'], colors.line),
-        b: highlight(colors.angleB),
-        a: highlight(colors.angleA),
-        c: highlight(colors.angleC),
-      },
-      setSteadyState: () => {},
-    });
-    this.addSection(common, {
-      setSteadyState: () => {
-        totalAngle.eqn.showForm('base');
-      },
-    });
-    this.addSection(common, {
-      setContent: `
-        <p>
-          Remember, angles |a| and |b| originally come from the triangle.
-        </p>
-      `,
-      modifiers: {
-        b: highlight(colors.angleB),
-        a: highlight(colors.angleA),
-      },
-      setSteadyState: () => {},
-    });
-    this.addSection(common, {
-      setContent: `
-        <p>
-          Remember, angles |a| and |b| originally come from the triangle.
-        </p>
-      `,
-      modifiers: {
-        b: highlight(colors.angleB),
-        a: highlight(colors.angleA),
-      },
-      setEnterState: () => {
-        totalAngle._angleA.setColor(colors.diagram.disabled);
-        totalAngle._angleB.setColor(colors.diagram.disabled);
-        // totalAngle._triangle._line.setColor(colors.diagram.disabled);
-      },
-      setSteadyState: () => {
-        totalAngle._triangle._angle1.pulseScaleNow(1, 1.2);
-        totalAngle._triangle._angle2.pulseScaleNow(1, 1.2);
-      },
-    });
-    this.addSection(common, {
-      setEnterState: () => {
-      },
-      show: [
-        totalAngle._triangle,
-        // totalAngle._angleC,
-      ],
-      setSteadyState: () => {
-        totalAngle.eqn.showForm('base');
+      transitionFromAny: (done) => {
+        coll.totalPulseAngles(['A', 'B'], done);
       },
     });
 
+    common.show = [
+      total._fixedTriangle._line,
+      total._angleC, total._angleB, total._angleA,
+    ];
+    this.addSection(common, {
+      setContent: 'Therefore:',
+      setSteadyState: () => {
+        total._eqn.showForm('0');
+        total._eqn.setScenario('top');
+      },
+    });
+    this.addSection(common, {
+      setContent: 'So angles in a triangle add up to |180º|.',
+    });
     this.addSection({
-      setContent: `
-        <p>
-         So angles in a triangle add up to |180º| or |π radians|.
-        </p>
-      `,
-      showOnly: [
-        totalAngle,
-      ],
-      show: [
-        totalAngle._triangle,
-      ],
-    });
-
-    this.addSection({
-      setContent: centerV(`
-        <p>
-         |All triangles| have this property. This means if you know two angles, you can always calculate the third!
-        </p>
-      `),
+      setContent: style({ centerV: true }, [
+        '|All triangles| have this relationship between angles.',
+        'This means if you know any two angles, you can always |calculate| the third!',
+      ]),
     });
   }
 }

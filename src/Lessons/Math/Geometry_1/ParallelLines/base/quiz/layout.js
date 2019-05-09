@@ -1,77 +1,85 @@
 // @flow
 import Fig from 'figureone';
-import commonLessonLayout from '../common/layout';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
-const { Point, Rect } = Fig;
+const { Rect, Point } = Fig.tools.g2;
 
-// const cssColorNames = [
-//   'latin',
-//   'line',
-//   'angleA',
-//   'angleB',
-//   'angleC',
-//   'angleD',
-//   'disabled',
-//   'supplementary',
-//   'intersectingLine',
-//   'quizLine',
-// ];
+const cssColorNames = [
+  'lines',
+  'movable',
+  'selected',
+];
+
+const { joinObjects } = Fig.tools.misc;
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
-  const layout: Object = commonLessonLayout();
-  // layout.colors = getCssColors(cssColorNames);
-  const len = 1.7;
-  layout.position = new Point(0, 0);
-  layout.line = {
-    length: {
-      full: len,
-      end: len / 3,
-      middle: len / 3,
-    },
-    width: 0.02,
-    boundary: new Rect(-3, -1.7, 6, 3),
-  };
+  const layout: Object = baseLayout();
+  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const { colors } = layout;
 
-  layout.quiz = {
-    position: new Point(0, 0),
-    line1: {
-      position: new Point(-1, 0),
-      rotation: Math.PI / 2,
-    },
-    line2: {
-      position: new Point(1, 0),
-      rotation: Math.PI / 4,
-    },
-    answer: new Point(0, -1.7),
-    nextSteps: new Point(0, -1.9),
-    check: new Point(0, -1.7),
+  layout.length = 1.5;
+  layout.width = 0.03;
+  layout.scale = {
+    long: 2.55,
+    short: 0.5,
   };
-  // layout.quiz2 = {
-  //   first: {
-  //     line1: {
-  //       position: new Point(0, 0),
-  //       rotation: 0,
-  //     },
-  //     line2: {
-  //       position: new Point(0, 0),
-  //       rotation: 0,
-  //     },
-  //     line3: {
-  //       position: new Point(0, 0),
-  //       rotation: 0,
-  //     },
-  //     line4: {
-  //       position: new Point(0, 0),
-  //       rotation: 0,
-  //     },
-  //     line5: {
-  //       position: new Point(0, 0),
-  //       rotation: 0,
+  layout.line = {
+    method: 'line',
+    options: {
+      length: layout.length,
+      width: layout.width,
+      color: colors.lines,
+      vertexSpaceStart: 'center',
+      move: {
+        type: 'centerTranslateEndRotation',
+        middleLengthPercent: 0.5,
+        translationBounds: new Rect(-2.5, -1.5, 5, 3),
+      },
+    },
+    mods: {
+      scenarios: {
+        center: { position: new Point(0, 0.4), rotation: 0, scale: 1 },
+      },
+      _line: {
+        isInteractive: true,
+        interactiveLocation: new Point(layout.length / 3 * 0.8, 0),
+      },
+      _midLine: {
+        isInteractive: true,
+      },
+    },
+  };
+  // layout.line1 = joinObjects({}, layout.line, {
+  //   name: 'line1',
+  // });
+  // layout.line2 = joinObjects({}, layout.line, {
+  //   name: 'line2',
+  //   mods: {
+  //     scenarios: {
+  //       center: { position: new Point(0, -0.4) },
   //     },
   //   },
-  // };
+  // });
+  // layout.addElements = [
+  //   layout.line1,
+  //   layout.line2,
+  // ];
 
-  // layout.line.boundary = new Rect(-2.5, -1.7, 5, 3);
+  layout.line1 = joinObjects({}, layout.line, { name: 'line1' });
+  layout.line2 = joinObjects({}, layout.line, { name: 'line2' });
+  layout.line3 = joinObjects({}, layout.line, { name: 'line3' });
+  layout.line4 = joinObjects({}, layout.line, { name: 'line4' });
+  layout.line5 = joinObjects({}, layout.line, { name: 'line5' });
+  layout.line6 = joinObjects({}, layout.line, { name: 'line6' });
+
+  layout.addElements = [
+    layout.line1,
+    layout.line2,
+    layout.line3,
+    layout.line4,
+    layout.line5,
+    layout.line6,
+  ];
   return layout;
 }

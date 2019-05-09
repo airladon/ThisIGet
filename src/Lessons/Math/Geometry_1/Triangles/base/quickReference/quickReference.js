@@ -1,18 +1,21 @@
 // @flow
 import Fig from 'figureone';
-// import { Transform } from '../../../../../../js/diagram/tools/g2';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
-import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-const { Transform } = Fig;
-const { html } = Fig.tools;
+const { Transform, Rect } = Fig;
+// const {
+//   click,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 export default class QRTriangle extends PopupBoxCollection {
-  _tri: TotalAngleTriangleCollection;
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -23,44 +26,34 @@ export default class QRTriangle extends PopupBoxCollection {
       diagram,
       layout,
       transform,
-      'tri',
-      TotalAngleTriangleCollection,
+      'collection',
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
-    const modifiers = {
-      Triangle: html.click(
-        this._tri.randomize,
-        [this._tri, null], this.layout.colors.line,
-      ),
-    };
-
-    this.setTitle('Triangle');
-    this.setDescription('A |Triangle| is a shape with |three sides|, and |three angles|. All the angles within a triangle add up to |180º| (|π radians|).', modifiers);
+    const modifiers = {};
+    this.setTitle('');
+    this.setDescription('A |triangle| is a shape that has |three sides| and |three angles|. All the angles within a triangle add up to |180º|.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.3);
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
-    const tri = this._tri;
-    tri.showAll();
-    tri._triangle._point1.setColor([0, 0, 0, 0.1]);
-    tri._triangle._point2.setColor([0, 0, 0, 0.1]);
-    tri._triangle._point3.setColor([0, 0, 0, 0.1]);
-    tri.transform.updateScale(0.7, 0.7);
-    tri._line1.hide();
-    tri._line2.hide();
-    tri._angleA.hide();
-    tri._angleB.hide();
-    tri._triangle.hasTouchableElements = true;
-    tri._triangle.autoShowAngles = true;
+    const collection = this._collection;
+    collection.show();
+    const total = collection._totalAngle;
+    collection.updateTotalAngles();
+    total._fixedTriangle._line.show();
+    total._angleC.showAll();
+    total._angleB.showAll();
+    total._angleA.showAll();
+    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-// console.log('Tri Tri')
-function attachQuickReference() {
+function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
@@ -72,4 +65,5 @@ function attachQuickReference() {
   };
 }
 
-attachQuickReference();
+attachQuickReference1();
+

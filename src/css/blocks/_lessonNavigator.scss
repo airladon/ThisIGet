@@ -14,7 +14,7 @@
 
 .naviagator__container {
   width: 100%;
-  height: calc(var(--navigator__tile_height) * 3 + var(--navigator__tile_vSpace) * 6);
+  height: calc(var(--navigator__tile_height) * 4 + var(--navigator__tile_vSpace) * 6);
   max-height: 95vh;
   position: relative;
   background: white;

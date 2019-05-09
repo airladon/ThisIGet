@@ -1,18 +1,17 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
-import OppositeCollection from '../common/diagramCollectionOpposite';
-import ThreeLinesCollection from '../common/diagramCollectionThreeLines';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-import type { TypeUnits } from '../../../../../LessonsCommon/DiagramCollection';
+
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonCollectionOpposite from '../common/diagramCollectionCommonOpposite';
+import CommonCollectionThreeLines from '../common/diagramCollectionCommonThreeLines';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _opposite: OppositeCollection;
-  _threeLines: ThreeLinesCollection;
-  units: TypeUnits;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _opposite: CommonCollectionOpposite;
+  _threeLines: CommonCollectionThreeLines;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -21,20 +20,8 @@ export default class DiagramCollection extends CommonLessonDiagramCollection {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.units = 'deg';
-    this.add('opposite', new OppositeCollection(diagram, this.layout));
-    this.add('threeLines', new ThreeLinesCollection(diagram, this.layout));
-    this.add('unitsSelector', this.makeUnitsSelector());
-  }
-
-  // eslint-disable-next-line class-methods-use-this
-  setUnits(units: TypeUnits) {
-    this.units = units;
-    if (this._opposite.isShown) {
-      this._opposite.setUnits(units);
-    }
-    if (this._threeLines.isShown) {
-      this._threeLines.setUnits(units);
-    }
+    this.add('opposite', new CommonCollectionOpposite(diagram, this.layout));
+    this.add('threeLines', new CommonCollectionThreeLines(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

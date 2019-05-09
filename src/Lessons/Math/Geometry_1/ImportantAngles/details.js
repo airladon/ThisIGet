@@ -4,7 +4,7 @@
 var details = {
   title: 'Important Angles',
   uid: 'important_angles',
-  dependencies: ['measuring_angles'],
+  dependencies: ['measuring_angles_degrees'],
 };
 
 module.exports = {

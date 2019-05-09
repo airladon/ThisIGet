@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -13,12 +13,14 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 
 const {
   click,
+  highlight,
+//   centerV,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -32,26 +34,23 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const equil = diag._equil;
+    const coll = diag._collection;
+    const tri = coll._triangle;
 
     this.addSection({
-      title: 'Equilateral',
       setContent: [
-        'An |Equilateral| triangle has |three_equal_sides| and |three_equal_angles|. Any triangle with equal angles will have equal sides and vise vesa.',
-        `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html('id_lesson__eqiuilateral_definition')}`,
+        'An |equilateral| triangle has |three_equal_sides| and |three_equal_angles|. |Any| triangle with three equal |sides| |or| three equal |angles| will be an equilateral triangle.',
+        `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html()}`,
       ],
       modifiers: {
-        three_equal_sides: click(equil.pulseSides, [equil], colors.lines),
-        three_equal_angles: click(equil.pulseAngles, [equil], colors.angles),
+        three_equal_sides: click(coll.pulseSides, [coll], colors.sides),
+        three_equal_angles: click(coll.pulseAngles, [coll], colors.angles),
+        sides: highlight(colors.sides),
+        angles: highlight(colors.angles),
       },
-      showOnly: [equil, equil._tri],
-      show: [
-        equil._tri._line,
-        equil._tri._side12, equil._tri._side23, equil._tri._side31,
-        equil._tri._angle1, equil._tri._angle2, equil._tri._angle3,
-      ],
+      show: [tri],
       setSteadyState: () => {
-        equil.setScenario(equil._tri, layout.equil.scenario.center);
+        tri.setScenario('summary');
       },
     });
   }

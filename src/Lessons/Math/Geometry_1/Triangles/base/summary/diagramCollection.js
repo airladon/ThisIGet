@@ -1,26 +1,24 @@
 // @flow
 import Fig from 'figureone';
-// import { Transform } from '../../../../../../js/diagram/tools/g2';
-import lessonLayout from './layout';
 
+import lessonLayout from '../common/layout';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-
-// import TriangleCollection from '../common/diagramCollectionTriangle';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
-import TotalAngleTriangleCollection from '../common/diagramCollectionTotalAngleTriangle';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
 
-export default class DiagramCollection extends CommonLessonDiagramCollection {
-  _triangle: TotalAngleTriangleCollection;
+export default class DiagramCollection extends CommonDiagramCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
-    transform: Transform = new Transform('1 DiagramCollection'),
+    transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('triangle', new TotalAngleTriangleCollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
+    this.hasTouchableElements = true;
   }
 }

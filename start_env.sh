@@ -82,7 +82,7 @@ fi
 
 if [ $1 = "pupp" ];
 then
-  DOCKERFILE="Dockerfile_puppeteer"
+  # DOCKERFILE="Dockerfile_puppeteer"
   CONTAINER_PORT=5000
 fi
 
@@ -102,14 +102,17 @@ then
   DOCKERFILE="Dockerfile_dev"
 fi
 
-echo
-echo "${bold}${cyan}================= Building container ===================${reset}"
-cp containers/$DOCKERFILE Dockerfile
+if [ $1 != "pupp" ];
+then
+  echo
+  echo "${bold}${cyan}================= Building container ===================${reset}"
+  cp containers/$DOCKERFILE Dockerfile
 
-GUNICORN_PORT=4000
-docker build -t devenv-$1 .
+  GUNICORN_PORT=4000
+  docker build -t devenv-$1 .
 
-rm Dockerfile
+  rm Dockerfile
+fi
 
 # --env-file=$PROJECT_PATH/containers/env.txt \
 echo
@@ -132,7 +135,7 @@ then
     -v $PROJECT_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
     -v $PROJECT_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
     -v $PROJECT_PATH/.babelrc:/home/pptruser/.babelrc \
-    devenv-$1 \
+    airladon/pynode:python3.7.3-node12.1.0-npm6.9.0-puppeteer \
     bash
 else
   # docker volume create browser-tests
@@ -140,11 +143,13 @@ else
   docker run -it --rm \
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
     -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
+    -v $PROJECT_PATH/containers/dev/jest.index.config.js:/opt/app/jest.index.config.js \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \

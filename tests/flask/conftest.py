@@ -6,6 +6,9 @@ sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Users, Ratings  # noqa
 
+# Remember, if database changes have happened, need to copy the new
+# app.db to tests/flask/test_app.db
+
 
 def remove_account(username):
     user = Users.query.filter_by(username=username).first()

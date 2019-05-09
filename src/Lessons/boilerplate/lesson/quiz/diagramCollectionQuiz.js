@@ -1,29 +1,32 @@
 // @flow
+import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import LessonDiagram from './diagram';
-import {
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonCollection from '../common/diagramCollectionCommon';
+
+const {
   Transform,
-} from '../../../../../js/diagram/tools/g2';
-import {
   DiagramElementPrimative,
-} from '../../../../../js/diagram/Element';
+} = Fig;
 
-import CommonQuizMixin from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../LessonsCommon/DiagramCollectionQuiz';
-import CommonDiagramCollection from '../../../../LessonsCommon/DiagramCollection';
+// const {
+//   removeRandElement,
+//   round,
+//   rand
+// } = Fig.tools.math;
 
-export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagramCollection) {
-// export default class QuizParallel1Collection extends CommonQuizDiagramCollection {
-  diagram: LessonDiagram;
+export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
+  diagram: CommonLessonDiagram;
   _messages: {
     _touching: DiagramElementPrimative;
     _rotation: DiagramElementPrimative;
   } & TypeMessages;
 
-  futurePositions: Object;
-
   constructor(
-    diagram: LessonDiagram,
+    diagram: CommonLessonDiagram,
     layout: Object,
     transform: Transform = new Transform().translate(0, 0),
   ) {
@@ -34,33 +37,32 @@ export default class QuizParallel1Collection extends CommonQuizMixin(CommonDiagr
       {},
       transform,
     );
-    // this.add('input', this.makeEntryBox('a1', '?', 3));
-    // this._input.setPosition(this.layout.input);
+    // this.addQuestion();
+    // this.addCheck();
+    // this.addInput('input', '?', 3, 0);
+    this.diagram.addElements(this, this.layout.addElementsQuiz);
+    // this.add('main', new CommonCollection(diagram, this.layout));
     this.hasTouchableElements = true;
   }
 
-  tryAgain() {
-    super.tryAgain();
-    // this._input.enable();
-    // this._input.setValue('');
-  }
+  // tryAgain() {
+  //   super.tryAgain();
+  // }
 
 
-  newProblem() {
-    super.newProblem();
-    // this.calculateFuturePositions();
-    // this.moveToFuturePositions(1, this.updateAngles.bind(this));
-    // this._input.enable();
-    // this._input.setValue('');
-    this.diagram.animateNextFrame();
+  setupNewProblem() {
+    // this._question.drawingObject.setText(`Question here ${value}:`);
+    // this.transitionToNewProblem({ target: 'quiz', duration: 1 });
   }
 
-  showAnswer() {
-    super.showAnswer();
-    // this._input.setValue(this.answer);
-    // this._input.disable();
-    this.diagram.animateNextFrame();
-  }
+  // afterTransitionToNewProblem() {
+  //   super.afterTransitionToNewProblem();
+  // }
+
+  // showAnswer() {
+  //   super.showAnswer();
+  //   this.diagram.animateNextFrame();
+  // }
 
   findAnswer() {
     // this._input.disable();

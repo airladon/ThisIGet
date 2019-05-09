@@ -1,34 +1,29 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import LessonDiagram from './diagram';
-// import HTMLEquation from '../../../../js/diagram/DiagramElements/Equation/HTMLEquation';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
-import lessonLayout from './layout';
 import details from '../../details';
+import DiagramCollection from './diagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  clickWord, onClickId, click, highlight,
+  click,
+  centerV,
+  style,
+  highlight,
+  // clickWord,
 } = Fig.tools.html;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-const unit = (deg: string, rad: string, angleType: string, num: number = 1) => `<span id="id_${angleType}_deg${num}" class="highlight_word">${deg}&deg;</span><span id="id_${angleType}_rad${num}" class="highlight_word">${rad} radians</span>
-  `;
-
-// const fraction = (id: string, numerator: string, denominator: string) => {
-//   const eqn = new HTMLEquation(`${id}`);
-//   eqn.createEq([eqn.frac(numerator, denominator)]);
-//   return eqn.render();
-// };
-
-const _piOn2 = '<sup>&pi;</sup>&frasl;<sub>2</sub>';
-// const _piOn2 = '<sup>1</sup>&frasl;<sub>2</sub>';
-
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -36,17 +31,24 @@ class Content extends LessonContent {
   }
 
   setDiagram(htmlId: string = '') {
-    this.diagram = new LessonDiagram(htmlId);
+    this.diagram = new CommonLessonDiagram({ htmlId }, layout);
+    this.diagram.elements = new DiagramCollection(this.diagram);
+    // this.loadQRs([
+    //   'qr_names_here',
+    // ]);
   }
 
   addSections() {
-    const circle = this.diagram.elements._circle;
-
     const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
+    const right = coll._right;
+
+    const container = (id, text) => `<div id="${id}"" class="lesson__important_angles__text">${text}</div>`;
     this.addSection({
-      title: 'Summary',
-      setContent: [`
-        <table class="lesson__important_angles_table">
+      title: 'Important Angles',
+      setContent: [
+        `<table class="lesson__important_angles_table">
           <tr>
             <td>|Acute|</td>
             <td>|Right|</td>
@@ -55,128 +57,81 @@ class Content extends LessonContent {
             <td>|Reflex|</td>
             <td>|Full|</td>
           </tr>
-        </table>
-        <div id="id_unit_selection"
-             class="lesson__important_angles_unit_selection">
-          <span id="id_radians">Radians</span>
-          /
-          <span id="id_degrees">Degrees</span>
-        </div>
-      `,
-      `<div id="id_acute_text">
-        <p class="lesson__diagram_text_p_width_45"
-          style="margin-top:20%">
-          An |acute_angle| is any angle less than
-          ${unit('90', _piOn2, 'acute')}.
-        </p>
-        <p class="lesson__font_0p5" style="margin-top:23%; margin-left: 4%">
-          <span class="english">Acute</span> |from_Latin| <i class="latin">acutus</i>: “sharp, pointed”
-        </p>
-      </div>`,
-      `<div id="id_obtuse_text">
-        <p class="lesson__diagram_text_p_width_40"
-           style="margin-top:17%">
-          An |obtuse_angle| is any angle between
-          ${unit('90', _piOn2, 'obtuse')}
-          and
-          ${unit('180', '&pi;', 'obtuse', 2)}.
-        </p>
-        <p class="lesson__font_0p5"
-          style="margin-top:21%; margin-left: 4%">
-          <span class="english">Obtuse</span> |from_Latin| <i class="latin">obtusus</i>: “dull, blunted”
-        </p>
-      </div>`,
-      `<div id="id_straight_text">
-        <p class="lesson__diagram_text_p_width_45"
-           style="margin-top:20%">
-          A |straight_angle| is an angle of
-          ${unit('180', '&pi;', 'straight')}.
-        </p>
-        <p class="lesson__font_0p5"
-          style="margin-top:23.2%; margin-left: 4%">
-          <span class="english">Straight</span>: “direct, undeviating; not crooked, not bent or curved”
-        </p>
-      </div>`,
-      `<div id="id_right_text">
-        <p class="lesson__diagram_text_p_width_45"
-           style="margin-top:5%">
-          A |right_angle| is an angle of
-          ${unit('90', _piOn2, 'right')}.
-        </p>
-        <p class="lesson__diagram_text_p_width_45">
-          It can also be thought of as the angle of a |quarter_circle|.
-        </p>
-        <p class="lesson__diagram_text_p_width_45">
-          The angle mark is usually shown as a |square| instead of arc.
-        </p>
-        <p class="lesson__font_0p5"
-           style="margin-top:3%; margin-left: 4%">
-          <span class="english">Right Angle</span> |from_Latin| <i class="latin">angulus rectus</i>: “upright corner”
-        </p>
-      </div>`,
-      `<div id="id_reflex_text">
-        <p class="lesson__diagram_text_p_width_40"
-          style="margin-top:17%">
-          A |reflex_angle| is any angle between
-          ${unit('180', '&pi;', 'reflex')}
-          and ${unit('360', '2&pi;', 'reflex', 2)}.
-        </p>
-        <p class="lesson__font_0p5"
-          style="margin-top:21%; margin-left: 4%">
-          <span class="english">Reflex</span> |from_Late_Latin| <i class="latin">reflexus</i>: “to bend back”
-        </p>
-      </div>`,
-      `<div id="id_full_text">
-        <p class="lesson__diagram_text_p_width_40"
-          style="margin-top:20%">
-          A |full_angle| is an angle of
-          ${unit('360', '2&pi;', 'full')}.
-        </p>
-        <p class="lesson__font_0p5"
-          style="margin-top:23.2%; margin-left: 4%">
-          <span class="english">Full</span>: “containing all that can be received; perfect, entire”
-        </p>
-      </div>`,
+        </table>`,
+        container('id_acute_text', style({ centerV: true, right: 50, left: 7 }, [
+          'An |acute_angle| is any angle |less than 90º|.',
+          `${new Definition('Acute', 'Latin', ['acutus', 'MEANING', '', 'sharp or pointed']).html({ color: colors.angle, id: 'id_acute_def' })}`,
+        ])),
+        container('id_right_text', style({ centerV: true, right: 50, left: 7 }, [
+          'A |right_angle| is an angle of |90º|.',
+          'It can be thought of as the angle of a |quarter circle|.',
+          'The angle mark is usually shown as a |square|, instead of an arc.',
+          `${new Definition('Right Angle', 'Latin', ['angulus rectus', 'MEANING', '', 'upright corner']).html({ color: colors.angle, id: 'id_right_def' })}`,
+        ])),
+        container('id_obtuse_text', style({ centerV: true, right: 50, left: 7 }, [
+          'An |obtuse_angle| is any angle |between 90º and 180º|.',
+          `${new Definition('Obtuse', 'Latin', ['obtusus', 'MEANING', '', 'dull or blunted']).html({ color: colors.angle, id: 'id_obtuse_def' })}`,
+        ])),
+        container('id_straight_text', style({ centerV: true, right: 50, left: 7 }, [
+          'A |straight_angle| is an angle of |180º|.',
+        ])),
+        container('id_reflex_text', style({ centerV: true, right: 50, left: 7 }, [
+          'An |reflex_angle| is any angle |between 180º and 360º|.',
+          `${new Definition('Reflex', 'Latin', ['reflexus', 'MEANING', '', 'to bend back']).html({ color: colors.angle, id: 'id_reflex_def' })}`,
+        ])),
+        container('id_full_text', style({ centerV: true, right: 50, left: 7 }, ['An |full_angle| angle is an angle of |360º|.'])),
       ],
       modifiers: {
-        Acute: clickWord('Acute', 'id_acute', diag.goToAcute, [diag]),
-        Right: clickWord('Right', 'id_right', diag.goToRight, [diag]),
-        Obtuse: clickWord('Obtuse', 'id_obtuse', diag.goToObtuse, [diag]),
-        Straight: clickWord('Straight', 'id_straight', diag.goToStraight, [diag]),
-        Reflex: clickWord('Reflex', 'id_reflex', diag.goToReflex, [diag]),
-        Full: clickWord('Full', 'id_full', diag.goToFull, [diag]),
-        acute_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        straight_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        obtuse_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        right_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        reflex_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        full_angle: click(diag.pulseAngle, [diag], colors.angleText),
-        quarter_circle: highlight(),
-        square: click(diag.toggleRightAngleLine, [diag, true], colors.angleText),
-        from_Latin: highlight('lesson__important_angles_from_Latin'),
-        from_Late_Latin: highlight('lesson__important_angles_from_Latin'),
+        Acute: click(coll.goToAcute, [coll], coll.getClass('acute'), true, 'id_acute'),
+        Right: click(coll.goToRight, [coll], coll.getClass('right'), true, 'id_right'),
+        Obtuse: click(coll.goToObtuse, [coll], coll.getClass('obtuse'), true, 'id_obtuse'),
+        Straight: click(coll.goToStraight, [coll], coll.getClass('straight'), true, 'id_straight'),
+        Reflex: click(coll.goToReflex, [coll], coll.getClass('reflex'), true, 'id_reflex'),
+        Full: click(coll.goToFull, [coll], coll.getClass('full'), true, 'id_full'),
+        acute_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_acute_p'),
+        right_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_right_p'),
+        square: click(coll.pulseAngle, [coll], colors.angle, true, 'id_square_p'),
+        obtuse_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_obtuse_p'),
+        straight_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_straight_p'),
+        reflex_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_reflex_p'),
+        full_angle: click(coll.pulseAngle, [coll], colors.angle, true, 'id_full_p'),
       },
-      setEnterState: () => {
-        diag.setRotation(Math.PI / 3);
-        diag._angleText.setPosition(layout.angleEqualsText.bottomRight);
+      show: [fig],
+      refresh: () => {
+        coll.updateAngle();
+        coll.updateTable(true);
       },
-      showOnly: [
-        circle,
-        circle._radius,
-        circle._reference,
-      ],
       setSteadyState: () => {
-        diag.resetCircle('right', Math.PI / 3);
-        circle._angle.showAll();
-        circle._axes.showAll();
-        diag._angleText.setPosition(layout.angleEqualsText.bottomRight);
-        diag._angleText.showAll();
-        diag.showRadians();
-        diag.selectAngle('acute');
-        onClickId('id_unit_selection', diag.toggleUnits, [diag, null]);
-        diag.toggleUnits('deg');
-        onClickId('id_angle_text', diag.pulseAngle, [diag]);
+        fig._line1.setRotation(1);
+        coll.updateAngle();
+        coll.updateTable(true);
       },
+    });
+
+    this.addSection({
+      title: 'Right Angles',
+      setContent: centerV([
+        'Many |relationships| between right angles and different geometries have been found.',
+        'This makes the right angle an |important angle| as identifying one often leads to a simpler analysis of a problem.',
+      ]),
+    });
+    this.addSection({
+      setContent: [
+        'Another way to define a right angle is to consider a line intersecting another. A |right_angle| is the angle between the lines where the two |intersection_angles| are |equal|.',
+      ],
+      modifiers: {
+        right_angle: highlight(colors.angle),
+        intersection_angles: highlight(colors.angle),
+      },
+      show: [right],
+    });
+    this.addSection({
+      setContent: [
+        'When two lines are at right angles to each other, they are often given the special name |perpendicular| lines.',
+        `${new Definition('Perpendicular', 'Latin', ['perpendicularis', 'MEANING', '', 'vertical, as a plumb line']).html({ color: colors.diagram.highlight, id: 'id_acute_def' })}`,
+      ],
+      show: [right],
+      hide: [right._leftAngle],
     });
   }
 }

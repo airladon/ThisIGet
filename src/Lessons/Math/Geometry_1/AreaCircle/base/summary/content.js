@@ -1,23 +1,26 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import DiagramCollection from './diagramCollection';
-
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { highlight } = Fig.tools.html;
+const {
+  highlight,
+//   click,
+//   centerV,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -31,22 +34,24 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const circ = diag._circ;
+    const coll = diag._collection;
+    const fig = coll._fig;
+    const polyMost = fig._polyMost;
+    const circle = fig._circle;
+    const eqn = coll._eqn;
 
     this.addSection({
-      title: 'Summary',
       setContent: '|Circle area| is the product of |π| and the |radius| squared.',
-      modifiers: { radius: highlight(colors.radius) },
-      setInfo: [
-        'Touch |Area| in the equation to toggle the area fill.',
-        'Touch |r| in the equation to highlight the circle\'s radius.',
-      ],
-      showOnly: [circ],
-      show: [circ._circle, circ._radius],
+      modifiers: {
+        radius: highlight(colors.radius),
+      },
+      show: [circle, polyMost._radius],
       setSteadyState: () => {
-        circ.eqns.triRectEqn.showForm('14');
-        circ.setScenario(circ, layout.collection.scenarios.left);
-        circ.setScenario(circ._radius, { rotation: 0 });
+        fig.setScenario('left');
+        eqn.setScenario('summary');
+        eqn.showForm('14');
+        polyMost._radius.setScenario('circle');
+        polyMost._radius.updateLabel(polyMost._radius.getRotation() + polyMost.getRotation());
       },
     });
   }

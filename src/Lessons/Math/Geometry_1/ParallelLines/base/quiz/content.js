@@ -1,20 +1,24 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent, interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
-import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
 
-const { click, centerH } = Fig.tools.html;
+const {
+  click, style,
+} = Fig.tools.html;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -28,103 +32,56 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const quizP1 = diag._quizP1;
-    const quizP2 = diag._quizP2;
+    const quiz1 = diag._quiz1;
+    const quiz2 = diag._quiz2;
+    // const main1 = quiz1._main;
+    // const main2 = quiz1._main;
 
     this.addSection({
-      title: 'Parallel Lines 1',
-      setContent: centerH(`
-        <p style="margin-top:3%">
-          Move the |red_line| to be parallel with the |blue_line|.
-        </p>
-      `),
+      title: '',
+      setContent: ['Move the |line| to be parallel with the other line.'],
       modifiers: {
-        red_line: click(quizP1.pulseLine2, [quizP1], colors.quizLine),
-        blue_line: click(quizP1.pulseLine1, [quizP1], colors.line),
+        line: click(quiz1.pulseLine2, [quiz1], colors.movable, true, 'id__quiz__1'),
       },
-      setInfo: `<ul>
-          <li>Move the line by dragging its |middle|.</li>
-          <li>Rotate the line by dragging one of its |ends|.</li>
-          </ul>
-      `,
-      infoModifiers: {
-        middle: click(this.highlightInteractiveElement, [this, quizP1._line2._mid, ''], layout.colors.line, false),
-        ends: click(this.highlightInteractiveElement, [this, quizP1._line2._end1, 'center'], layout.colors.line, false),
-      },
+      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+        'Move the line by dragging its |middle|.',
+        'Rotate the line by dragging one of its |ends|.',
+      ]),
       interactiveElements: [
-        interactiveItem(quizP1._check),
+        'id__quiz__1',
+        quiz1._line2._midLine,
+        quiz1._line2._line,
+        quiz1._check,
       ],
-      setEnterState: () => {
-        quizP1.setPosition(0, 0);
-        quizP1._line2.setColor(colors.quizLine);
-        quizP1.hasTouchableElements = true;
-        quizP1.randomizeFuturePositions();
-      },
-      showOnly: [
-        quizP1,
-      ],
-      show: [
-        quizP1._line1,
-        quizP1._line2,
-      ],
-      transitionFromAny: (done) => {
-        quizP1.moveToFuturePositions(2, done);
-      },
+      show: [quiz1._line1, quiz1._line2],
       setSteadyState: () => {
-        quizP1.setFuturePositions();
-        quizP1._check.show();
+        quiz1.newProblem();
       },
     });
 
     this.addSection({
-      title: 'Parallel Lines 2',
-      setContent: centerH(`
-        <p style="margin-top:3%">
-          Select two parallel lines.
-        </p>
-      `),
-      modifiers: {
-        red_line: click(quizP1.pulseLine2, [quizP1], colors.quizLine),
-        blue_line: click(quizP1.pulseLine1, [quizP1], colors.line),
-      },
-      setInfo: `<ul>
-          <li>Touch a line to toggle selection.</li>
-          <li>Move lines by dragging them to help determine if parallel.</li>
-          <li>Note, there may be more than one answer to choose from!</li>
-          </ul>
-      `,
+      title: '',
+      setContent: ['Select |two| parallel lines.'],
+      setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
+        'Touch a line to toggle selection.',
+        'Move lines by dragging them to help determine if parallel.',
+        'Note, there may be more than one answer to choose from!',
+      ]),
       interactiveElementsOnly: [
-        interactiveItem(quizP2._line1),
-        interactiveItem(quizP2._line2),
-        interactiveItem(quizP2._line3),
-        interactiveItem(quizP2._line4),
-        interactiveItem(quizP2._line5),
-        interactiveItem(quizP2._line6),
-        interactiveItem(quizP2._check),
-      ],
-      setEnterState: () => {
-        quizP2.setPosition(0, 0);
-        quizP2.hasTouchableElements = true;
-        quizP2.randomizeFuturePositions();
-        quizP2.resetLines();
-      },
-      showOnly: [
-        quizP2,
+        quiz2._line1._midLine,
+        quiz2._line2._midLine,
+        quiz2._line3._midLine,
+        quiz2._line4._midLine,
+        quiz2._line5._midLine,
+        quiz2._line6._midLine,
+        quiz2._check,
       ],
       show: [
-        quizP2._line1,
-        quizP2._line2,
-        quizP2._line3,
-        quizP2._line4,
-        quizP2._line5,
-        quizP2._line6,
+        quiz2._line1, quiz2._line2, quiz2._line3,
+        quiz2._line4, quiz2._line5, quiz2._line6,
       ],
-      transitionFromAny: (done) => {
-        quizP2.moveToFuturePositions(2, done);
-      },
       setSteadyState: () => {
-        quizP2.setFuturePositions();
-        quizP2._check.show();
+        quiz2.newProblem();
       },
     });
   }

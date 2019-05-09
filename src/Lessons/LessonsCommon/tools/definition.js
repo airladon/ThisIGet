@@ -1,18 +1,37 @@
 // @flow
+import Fig from 'figureone';
+
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
+const { colorArrayToRGBA } = Fig.tools.color;
 
 class Root {
   root: string;
   meaning: string;
 
-  constructor(root: string, meaning: string) {
-    this.root = root;
+  constructor(rootWord: string, meaning: string) {
+    this.root = rootWord;
     this.meaning = meaning;
+  }
+}
+
+const specialWords = {
+  WHERE: 'where',
+  AND: 'and',
+  MEANING: 'meaning',
+  MEANS: 'means',
+};
+
+class SpecialWord {
+  word: string;
+
+  constructor(word: string) {
+    this.word = specialWords[word];
   }
 }
 
 class FromLanguage {
   language: string;
-  roots: Array<Root>;
+  roots: Array<Root | SpecialWord>;
 
   constructor(
     language: string,
@@ -20,11 +39,34 @@ class FromLanguage {
   ) {
     this.language = language;
     this.roots = [];
-    roots.forEach((root, index) => {
-      if (index % 2 === 0 && roots.length >= index) {
-        this.roots.push(new Root(roots[index], roots[index + 1]));
+    for (let i = 0; i < roots.length; i += 1) {
+      const rootWord = roots[i];
+      if (specialWords[rootWord] != null) {
+        this.roots.push(new SpecialWord(rootWord));
+      } else {
+        let rootWordMeaning = '';
+        if (i + 1 < roots.length) {
+          if (specialWords[roots[i + 1]] != null) {
+            this.roots.push(new Root(rootWord, rootWordMeaning));
+            this.roots.push(new SpecialWord(roots[i + 1]));
+          } else {
+            rootWordMeaning = roots[i + 1];
+            this.roots.push(new Root(rootWord, rootWordMeaning));
+          }
+        }
+        i += 1;
       }
-    });
+    }
+    // roots.forEach((rootWord, index) => {
+    //   if (specialWords[rootWord] != null) {
+    //     this.roots.push(new SpecialWord(rootWord));
+    //   } else {
+
+    //   }
+    //   if (index % 2 === 0 && roots.length >= index) {
+    //     this.roots.push(new Root(roots[index], roots[index + 1]));
+    //   }
+    // });
   }
 }
 
@@ -53,25 +95,61 @@ export default class Definition {
     });
   }
 
-  html(id: string, classes: string = '') {
+  html(optionsIn: {
+      id?: string,
+      classes?: string,
+      wordClass?: string,
+      color?: Array<number>,
+    } | Array<number> = {}) {
+    const defaultOptions = {
+      id: generateUniqueId('definition'),
+      classes: '',
+      wordClass: '',
+      color: '',
+    };
+    let options = defaultOptions;
+    if (Array.isArray(optionsIn)) {
+      defaultOptions.color = colorArrayToRGBA(optionsIn);
+    } else {
+      options = joinObjects(defaultOptions, optionsIn);
+    }
+    if (Array.isArray(options.color)) {
+      options.color = colorArrayToRGBA(options.color);
+    }
+    const { id, classes } = options;
     let outStr = '';
     outStr += `<div id="${id}" class="lesson__definition_container ${classes}">`;
-    outStr += '<span class="lesson__definition_word">';
+    let style = '';
+    if (options.color) {
+      style = ` style="color:${(options.color)}"`;
+    }
+    outStr += `<span class="lesson__definition_word ${options.wordClass}"${style}>`;
     outStr += this.word;
     outStr += '</span>';
     this.from.forEach((fromLanguage) => {
-      outStr += ` - from ${fromLanguage.language}`;
+      let lang = `lesson__${fromLanguage.language.toLowerCase()}`;
+      lang = lang.replace(/ /g, '_');
+      outStr += ` - from <span class="${''}">${fromLanguage.language}</span> `;
       fromLanguage.roots.forEach((root, index) => {
-        outStr += '<span class="lesson__definition_root">';
-        outStr += `${root.root}`;
-        outStr += '</span>';
-        outStr += '<span class="lesson__definition_meaning">';
-        if (root.meaning) {
-          outStr += `: "${root.meaning}"`;
-        }
-        outStr += '</span>';
-        if (fromLanguage.roots.length > index + 1) {
-          outStr += ', ';
+        if (root instanceof Root) {
+          outStr += `<span class="lesson__definition_root ${lang}">`;
+          outStr += `${root.root}`;
+          outStr += '</span>';
+          // outStr += '';
+          if (root.meaning) {
+            if (root.root) {
+              outStr += ': ';
+            }
+            outStr += `<span class="lesson__definition_meaning">${root.meaning}</span>`;
+          }
+          if (
+            fromLanguage.roots.length > index + 1
+            && fromLanguage.roots[index + 1] instanceof Root
+          ) {
+            outStr += ', ';
+          }
+        } else {
+          outStr += ` ${root.word} `;
         }
       });
     });
@@ -95,19 +173,23 @@ export default class Definition {
       container.appendChild(language);
 
       const { roots } = fromLanguage;
-      roots.forEach((root, index) => {
+      roots.forEach((rootWord, index) => {
         const rootElement = document.createElement('span');
-        rootElement.innerHTML = root.root;
+        if (rootWord.root != null && typeof rootWord.root === 'string') {
+          rootElement.innerHTML = rootWord.root;
+        }
         rootElement.classList.add('lesson__definition_root');
         container.appendChild(rootElement);
 
         const meaningElement = document.createElement('span');
         meaningElement.classList.add('lesson__definition_meaning');
-        let meaningString = `"${root.meaning}"`;
-        if (roots.length > index + 1) {
-          meaningString += ',';
+        if (rootWord.meaning != null && typeof rootWord.meaning === 'string') {
+          let meaningString = `"${rootWord.meaning}"`;
+          if (roots.length > index + 1) {
+            meaningString += ',';
+          }
+          meaningElement.innerHTML = meaningString;
         }
-        meaningElement.innerHTML = meaningString;
         container.appendChild(meaningElement);
       });
     });

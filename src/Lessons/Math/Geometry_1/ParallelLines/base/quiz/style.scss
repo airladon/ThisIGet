@@ -1,9 +1,15 @@
-@import '../common/style';
+@import '../../../geometry';
 
-.lesson__quiz_input {
-  width: calc(var(--lesson__diagram-font-size) * 3);
+$colors: (
+  lines:              color('grey', 'dark'),
+  selected:           color('red'),
+  movable:            color('blue'),
+);
+
+body {
+  @include color_vars($colors);
 }
 
-.diagram__html {
-  z-index: 1;
+.diagram__text {
+  z-index: 0;
 }

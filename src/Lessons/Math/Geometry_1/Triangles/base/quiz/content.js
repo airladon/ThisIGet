@@ -1,10 +1,9 @@
 // @flow
+import Fig from 'figureone';
 import {
-  LessonContent, interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
-// import {
-//   click, highlight,
-// } from '../../../../../../js/tools/htmlGenerator';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
@@ -12,10 +11,14 @@ import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
 
-const layout = lessonLayout();
-// const { colors } = layout;
+const {
+  highlight,
+} = Fig.tools.html;
 
-class Content extends LessonContent {
+const layout = lessonLayout();
+const { colors } = layout;
+
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -29,45 +32,15 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const tri = diag._triangle;
-
+    const quiz = diag._quiz;
     this.addSection({
-      title: 'Summary',
-      setContent: `
-        <p>
-          Find the unknown angle in the triangle.
-        </p>
-      `,
-      setInfo: [
-        '<ul>',
-        '<li>Touch the grey box to enter the angle, then touch the |check| button to check the answer.</li>',
-        '</ul>',
-      ],
-      interactiveElements: [
-        interactiveItem(diag._check),
-      ],
-      setEnterState: () => {
-        tri._triangle.hasTouchableElements = true;
-        tri._triangle.autoShowAngles = true;
-        diag._input.setValue('');
-        diag.randomizeFuturePositions();
+      setContent: ['Find the |unknown| angle in the triangle.'],
+      modifiers: {
+        unknown: highlight(colors.angle2),
       },
-      show: [tri],
-      hide: [
-        tri._line1,
-        tri._line2,
-        tri._angleA,
-        tri._angleB,
-        tri._eqn,
-      ],
-      transitionFromAny: (done) => {
-        tri.moveToFuturePositions(1, done);
-      },
+      show: [quiz._check, quiz._input],
       setSteadyState: () => {
-        tri.setFuturePositions();
-        diag._input.enable();
-        diag._check.show();
-        diag.showAngles();
+        quiz.newProblem();
       },
     });
   }

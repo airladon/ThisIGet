@@ -143,24 +143,24 @@
   @if $color == #000 {
     $map: (
       'base': $color,
-      'lightest': lighten($color, 90),
-      'lighter': lighten($color, 80),
-      'light': lighten($color, 60),
-      'dark': lighten($color, 40),
-      'darker': lighten($color, 20),
-      'darkest': lighten($color, 10),
+      'lightest': #666,
+      'lighter': #555,
+      'light': #444,
+      'dark': #333,
+      'darker': #222,
+      'darkest': #111,
     );
   }
 
   @if $color == #FFF {
     $map: (
       'base': $color,
-      'lightest': darken($color, 10),
-      'lighter': darken($color, 20),
-      'light': darken($color, 40),
-      'dark': darken($color, 60),
-      'darker': darken($color, 80),
-      'darkest': darken($color, 90),
+      'lightest': #EEE,
+      'lighter': #DDD,
+      'light': #CCC,
+      'dark': #BBB,
+      'darker': #AAA,
+      'darkest': #999,
     );
   }
 

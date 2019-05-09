@@ -1,14 +1,32 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import TotalAngleTriangleCollection from '../common/diagramCollectionTriangles';
 
-const { Transform, DiagramElementPrimative } = Fig;
+import lessonLayout from '../common/layout';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonCollection from '../common/diagramCollectionCommon';
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+
+const {
+  Transform, DiagramElementPrimative, DiagramElementCollection,
+  DiagramObjectAngle, DiagramObjectLine, DiagramObjectPolyLine,
+} = Fig;
+
 const { html } = Fig.tools;
+
 export default class DiagramCollection extends CommonDiagramCollection {
-  _triangle: TotalAngleTriangleCollection;
+  _collection: {
+    _congruentTriangles: {
+      _tri1: {
+        _angle0: DiagramObjectAngle,
+        _angle1: DiagramObjectAngle,
+        _angle2: DiagramObjectAngle,
+        _side01: DiagramObjectLine,
+        _side12: DiagramObjectLine,
+        _side20: DiagramObjectLine,
+      } & DiagramObjectPolyLine;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
+
   _label: DiagramElementPrimative;
   label: HTMLElement;
 
@@ -27,30 +45,31 @@ export default class DiagramCollection extends CommonDiagramCollection {
 
   constructor(
     diagram: CommonLessonDiagram,
-    transform: Transform = new Transform('1 DiagramCollection'),
+    transform: Transform = new Transform(),
   ) {
     const layout = lessonLayout();
     super(diagram, layout, transform);
 
-    this.add('triangle', new TotalAngleTriangleCollection(diagram, this.layout));
+    this.add('collection', new CommonCollection(diagram, this.layout));
     this.add('label', this.makeLabel());
+    this.hasTouchableElements = true;
   }
 
-  showCombination(type: string) {
-    // const tri = this._triangle._tri1;
-    const angle1 = this._triangle._tri1._angle1;
-    const angle2 = this._triangle._tri1._angle2;
-    const angle3 = this._triangle._tri1._angle3;
-    const side12 = this._triangle._tri1._dimension12;
-    const side23 = this._triangle._tri1._dimension23;
-    const side31 = this._triangle._tri1._dimension31;
 
+  showCombination(type: string) {
+    // const tri = this._collection._tri1;
+    const angle1 = this._collection._congruentTriangles._tri1._angle0;
+    const angle2 = this._collection._congruentTriangles._tri1._angle1;
+    const angle3 = this._collection._congruentTriangles._tri1._angle2;
+    const side12 = this._collection._congruentTriangles._tri1._side01;
+    const side23 = this._collection._congruentTriangles._tri1._side12;
+    const side31 = this._collection._congruentTriangles._tri1._side20;
     if (type === 'sas') {
-      angle1.showAll();
+      angle1.hide();
       angle2.hide();
-      angle3.hide();
-      side12.showAll();
-      side23.hide();
+      angle3.showAll();
+      side12.hide();
+      side23.showAll();
       side31.showAll();
       html.setHTML(
         this.label,
@@ -70,11 +89,11 @@ export default class DiagramCollection extends CommonDiagramCollection {
       );
     }
     if (type === 'asa') {
-      angle1.showAll();
+      angle1.hide();
       angle2.showAll();
-      angle3.hide();
-      side12.showAll();
-      side23.hide();
+      angle3.showAll();
+      side12.hide();
+      side23.showAll();
       side31.hide();
       html.setHTML(
         this.label,
@@ -83,8 +102,8 @@ export default class DiagramCollection extends CommonDiagramCollection {
     }
     if (type === 'aas') {
       angle1.showAll();
-      angle2.showAll();
-      angle3.hide();
+      angle2.hide();
+      angle3.showAll();
       side12.hide();
       side23.showAll();
       side31.hide();
@@ -106,9 +125,9 @@ export default class DiagramCollection extends CommonDiagramCollection {
       );
     }
     if (type === 'ssa') {
-      angle1.showAll();
+      angle1.hide();
       angle2.hide();
-      angle3.hide();
+      angle3.showAll();
       side12.showAll();
       side23.showAll();
       side31.hide();

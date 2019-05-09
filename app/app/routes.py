@@ -20,7 +20,7 @@ import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users
-from app.models import Ratings
+from app.models import Ratings, AllRatings
 from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
@@ -94,7 +94,6 @@ def get_lesson(path):
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
     lesson_page = request.args.get('page')
-    print('page', lesson_page)
     res = make_response(render_template('lesson.html', css=css, js=js))
     if lesson_page:
         res = make_response(redirect(request.path))
@@ -159,6 +158,7 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username.ilike(form.username_or_email.data)).first()
+        # pdb.set_trace()
         if user is None:
             formatted_email = format_email(form.username_or_email.data)
             user = Users.query.filter_by(
@@ -215,8 +215,8 @@ def confirm_account_message(username):
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(username=username).first()
     if user is None:
-            flash('User does not exist', 'error')
-            return redirect(url_for('create'))
+        flash('User does not exist', 'error')
+        return redirect(url_for('create'))
     if form.validate_on_submit():
         send_confirm_account_email(user)
         redirect(f'confirmAccountEmailSent/{user.username}')
@@ -316,71 +316,100 @@ def logout():
     # return redirect(url_for('home'))
 
 
+def isInt(s):
+    try:
+        int(s)
+        return True
+    except ValueError:
+        return False
+
+
 @check_confirmed
-@app.route('/rate/<lesson_uid>/<topic>/<version_uid>/<rating_value>')
-def rate(lesson_uid, topic, version_uid, rating_value):
+@app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
+def rate(lesson_uid, topic_name, version_uid, rating_value):
     status = 'not logged in'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
         if lesson is None:
             return jsonify(
                 {'status': 'fail', 'message': 'lesson does not exist'})
-        version = Versions.query.filter_by(
-            lesson_id=lesson.id, uid=version_uid).first()
-        if version is None:
-            return jsonify(
-                {'status': 'fail', 'message': 'version does not exist'})
         topic = Topics.query.filter_by(
-            lesson=lesson, version=version, name=topic).first()
+            lesson=lesson, name=topic_name).first()
         if topic is None:
             return jsonify(
                 {'status': 'fail', 'message': 'topic does not exist'})
-        rating = Ratings.query.filter_by(
-            topic=topic, user=current_user).first()
-        if rating is None:
-            rating = Ratings(user=current_user, topic=topic)
-            db.session.add(rating)
-        if rating.rating != rating_value:
-            rating.rating = rating_value
-            rating.timestamp = datetime.datetime.now()
+        version = Versions.query.filter_by(
+            topic_id=topic.id, uid=version_uid).first()
+        if version is None:
+            return jsonify(
+                {'status': 'fail', 'message': 'version does not exist'})
+
+        user_rating = Ratings.query.filter_by(
+            version=version, user=current_user).first()
+        if user_rating is None:
+            user_rating = Ratings(user=current_user, version=version)
+            db.session.add(user_rating)
+        if rating_value not in ['1', '2', '3', '4', '5']:
+            return jsonify(
+                {'status': 'fail', 'message': 'invalid rating'})
+        if user_rating.rating != rating_value:
+            user_rating.rating = rating_value
+
+        generic_rating = AllRatings(user=current_user, version=version)
+        generic_rating.timestamp = datetime.datetime.now()
+        generic_rating.rating = rating_value
+
+        page = request.args.get('page')
+        pages = request.args.get('pages')
+        if page is not None and pages is not None \
+           and isInt(page) and isInt(pages) \
+           and int(page) < int(pages):
+            generic_rating.page = page
+            generic_rating.pages = pages
+
+        db.session.add(generic_rating)
         db.session.commit()
         status = 'done'
     return jsonify({'status': status})
 
 
 @check_confirmed
-@app.route('/rating/<lesson_uid>/<topic>/<version_uid>')
-def get_rating(lesson_uid, topic, version_uid):
+@app.route('/rating/<lesson_uid>/<topic_name>/<version_uid>')
+def get_rating(lesson_uid, topic_name, version_uid):
     num_ratings = 0
     ave_rating = 0
+    num_high_ratings = 0
     user_rating_value = 'not logged in'
 
     lesson = Lessons.query.filter_by(uid=lesson_uid).first()
     if lesson is None:
         return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
-    version = Versions.query.filter_by(
-        lesson_id=lesson.id, uid=version_uid).first()
-    if version is None:
-        return jsonify({'status': 'fail', 'message': 'version does not exist'})
     topic = Topics.query.filter_by(
-        lesson=lesson, version=version, name=topic).first()
+        lesson=lesson, name=topic_name).first()
     if topic is None:
         return jsonify({'status': 'fail', 'message': 'topic does not exist'})
+    version = Versions.query.filter_by(
+        topic_id=topic.id, uid=version_uid).first()
+    if version is None:
+        return jsonify({'status': 'fail', 'message': 'version does not exist'})
 
-    ratings = Ratings.query.filter_by(topic=topic).all()
+    ratings = Ratings.query.filter_by(version=version).all()
     if ratings is None:
         ratings = []
     num_ratings = len(ratings)
     sum_ratings = 0
+    num_high_ratings = 0
     for r in ratings:
         sum_ratings += r.rating
+        if r.rating >= 4:
+            num_high_ratings += 1
     ave_rating = 0
     if num_ratings > 0:
-        ave_rating = sum_ratings / num_ratings
+        ave_rating = round(sum_ratings / num_ratings, 1)
 
     if current_user.is_authenticated:
         user_rating = Ratings.query.filter_by(
-            user=current_user, topic=topic).first()
+            user=current_user, version=version).first()
         if user_rating is None:
             user_rating_value = 'not rated'
         else:
@@ -390,4 +419,5 @@ def get_rating(lesson_uid, topic, version_uid):
         'message': '',
         'userRating': user_rating_value,
         'numRatings': num_ratings,
-        'aveRating': ave_rating})
+        'aveRating': ave_rating,
+        'numHighRatings': num_high_ratings})

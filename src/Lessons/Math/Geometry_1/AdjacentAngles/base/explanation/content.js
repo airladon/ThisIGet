@@ -1,21 +1,29 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-import lessonLayout from './layout';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
+import Definition from '../../../../../LessonsCommon/tools/definition';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const { click, centerV, unit } = Fig.tools.html;
+const {
+  click,
+  centerV,
+  style,
+  // highlight,
+  // clickWord,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -25,201 +33,209 @@ class Content extends LessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      'important_angles',
+    ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
-    const adjacent = diag._adjacent;
+    const coll = diag._collection;
+    const fig = coll._fig;
 
     const common = {
-      setEnterState: () => {
-        adjacent.calculateFuturePositions(adjacent.angleType);
-        diag._unitsSelector.select(diag.units);
-      },
-      showOnly: () => {
-        adjacent.show();
-        adjacent._lines.show();
-        adjacent._lines._line1.showAll();
-        adjacent._lines._line2.showAll();
-        adjacent._lines._line3.showAll();
-        adjacent.showAngles([
-          [adjacent._lines._angleA, 'a', colors.angleA],
-          [adjacent._lines._angleB, 'b', colors.angleB],
-        ]);
-        adjacent._eqn.hideAll();
-        diag._unitsSelector.hideAll();
-      },
-      transitionFromAny: (done) => {
-        adjacent.moveToFuturePositions(null, done, 2);
-      },
-      setSteadyState: () => {
-        adjacent.setFuturePositions();
-        adjacent.showAngles([
-          [adjacent._lines._angleA, 'a', colors.angleA],
-          [adjacent._lines._angleB, 'b', colors.angleB],
-        ]);
-      },
+      setContent: '',
+      modifiers: {},
+      infoModifiers: {},
+      interactiveElements: [
+      ],
+      setEnterState: () => {},
+      showOnly: [],
+      show: [],
+      hide: [],
+      setSteadyState: () => {},
+      setLeaveState: () => {},
     };
+
     this.addSection(common, {
       title: 'Adjacent Angles',
-      setContent: `
-        <p>
-          |Adjacent_angles| are any angles that share a common vertex and edge.
-        </p>
-      `,
+      setContent: [
+        '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
+      ],
       modifiers: {
-        Adjacent_angles: click(adjacent.goToRandomAdjacentAngle, [adjacent], colors.diagram.action),
-      },
-      setEnterState: () => {
-        adjacent.angleType = 'adjacent';
-        common.setEnterState();
-      },
-      setSteadyState: () => {
-        common.setSteadyState();
-        adjacent._lines._line3.move.element = adjacent._lines._line3;
-      },
-    });
-    this.addSection(common, {
-      setContent: `
-        <p>
-          The sum of |adjacent_angles|, is the |larger_angle|. When you know any two angles, you can |calculate_the_other|.
-        </p>
-      `,
-      modifiers: {
-        adjacent_angles: click(adjacent.goToRandomAdjacentAngle, [adjacent], colors.diagram.action),
-        larger_angle: click(adjacent.pulseAngleC, [adjacent], colors.angleC),
-        calculate_the_other: click(
-          adjacent.adjacentNextEquationform, [adjacent],
+        Adjacent_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
           colors.diagram.action,
         ),
       },
-      interactiveElements: [
-        adjacent._eqn._a,
-        adjacent._eqn._b,
-        adjacent._eqn._c,
-      ],
-      setEnterState: () => {
-        adjacent.angleType = 'adjacentAdd';
-        common.setEnterState();
+      show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 2, done);
       },
       setSteadyState: () => {
-        common.setSteadyState();
-        adjacent.showAngles([
-          [adjacent._lines._angleC, 'c', colors.angleC],
-        ], false);
-        adjacent._eqn.show();
-        adjacent.eqn.showForm('adj_add');
-        adjacent._lines._line3.move.element = adjacent._lines._line3;
+        coll.hasTouchableElements = true;
+        coll.goToAngles(Math.PI / 3, Math.PI / 3 * 2, 0, 0);
+      },
+    });
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be |calculated|.',
+      ]),
+      modifiers: {
+        adjacent_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+        larger_angle: click(coll.pulseAngleC, [coll], colors.angleC),
+        calculated: click(coll.stepEqn, [coll], colors.diagram.action),
+      },
+      show: [fig],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 2, done);
+        coll._eqns._adjacent.setScenario('centerTop');
+        coll._eqns._adjacent.showForm('c');
+        coll._eqns._adjacent.setFormSeries('2');
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        coll.goToAngles(Math.PI / 3, Math.PI / 6 * 5, 0, 0);
       },
     });
 
-    this.addSection({
-      setContent: centerV(`
-        <p>
-          This lesson examines adjacent angles that make up |common larger angles|. 
-        </p>
-        <p>
-          Even though the adjacent angle's names are different for each case, the concept is always the same: |adjacent angles add up to the larger angle|.
-        </p>
-      `),
+    this.addSection(common, {
+      setContent: centerV([
+        'This lesson examines adjacent angles that make up |common larger angles|. ',
+        'Even though the adjacent angle\'s names are different for each case, the concept is always the same: |adjacent angles add up to the larger angle|.',
+      ]),
     });
+
     this.addSection(common, {
       title: 'Complementary Angles',
-      setContent: `
-        <p>
-          |Complementary_angles| add up to be a right angle, which is ${unit('|90&deg;|', '|&pi;/2 radians|')}. 
-        </p>
-      `,
+      setContent: style({ top: 0 }, [
+        '|Complementary_angles| add up to a |right_angle|, which is |90º|.',
+      ]),
       modifiers: {
         Complementary_angles: click(
-          adjacent.goToRandomComplementaryAngle,
-          [adjacent], colors.diagram.action,
+          coll.goToRandomAngle,
+          [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
+          colors.diagram.action,
         ),
+        right_angle: click(this.showQR, [this, 'important_angles', 'Right'], colors.angleC),
       },
-      interactiveElements: [
-        adjacent._eqn._a,
-        adjacent._eqn._b,
-        adjacent._eqn._c,
-      ],
-      setEnterState: () => {
-        adjacent.angleType = 'complementary';
-        common.setEnterState();
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 2, done);
+        coll._eqns._complementary.setScenario('centerTop');
+        coll._eqns._complementary.showForm('c');
+        coll._eqns._complementary.setFormSeries('1');
       },
-      show: [
-        diag._unitsSelector,
-      ],
       setSteadyState: () => {
-        common.setSteadyState();
-        adjacent._eqn.show();
-        adjacent.eqn.showForm('com_add');
-        adjacent._lines._line3.move.element = adjacent._lines;
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 6, Math.PI / 2, 0, 0);
       },
     });
 
     this.addSection(common, {
       title: 'Supplementary Angles',
-      setContent: `
-        <p>
-          |Supplementary_angles| add up to be a straight angle, which is ${unit('|180&deg;|', '|&pi; radians|')}. 
-        </p>
-      `,
+      setContent: style({ top: 0 }, [
+        '|Supplementary_angles| add up to a |straight_angle|, which is |180º|.',
+      ]),
       modifiers: {
         Supplementary_angles: click(
-          adjacent.goToRandomSupplementaryAngle,
-          [adjacent], colors.diagram.action,
+          coll.goToRandomAngle,
+          [coll, [Math.PI, Math.PI], 0, 1.5, null],
+          colors.diagram.action,
         ),
+        straight_angle: click(this.showQR, [this, 'important_angles', 'Straight'], colors.angleC),
       },
-      interactiveElements: [
-        adjacent._eqn._a,
-        adjacent._eqn._b,
-        adjacent._eqn._c,
-      ],
-      setEnterState: () => {
-        adjacent.angleType = 'supplementary';
-        common.setEnterState();
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
+        coll._eqns._supplementary.setScenario('centerTop');
+        coll._eqns._supplementary.showForm('c');
+        coll._eqns._supplementary.setFormSeries('1');
       },
-      show: [
-        diag._unitsSelector,
-      ],
       setSteadyState: () => {
-        common.setSteadyState();
-        adjacent._eqn.show();
-        adjacent.eqn.showForm('sup_add');
-        adjacent._lines._line3.move.element = adjacent._lines;
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
       },
     });
 
     this.addSection(common, {
       title: 'Explementary Angles',
-      setContent: `
-        <p>
-          |Explementary_angles| add up to be a full angle, which is ${unit('|360&deg;|', '|2&pi; radians|')}. 
-        </p>
-      `,
+      setContent: style({ top: 0 }, [
+        '|Explementary_angles| add up to a |full_angle|, which is |360º|.',
+      ]),
       modifiers: {
         Explementary_angles: click(
-          adjacent.goToRandomExplementaryAngle,
-          [adjacent], colors.diagram.action,
+          coll.goToRandomAngle,
+          [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
+          colors.diagram.action,
         ),
+        full_angle: click(this.showQR, [this, 'important_angles', 'Full'], colors.angleC),
       },
-      interactiveElements: [
-        adjacent._eqn._a,
-        adjacent._eqn._b,
-        adjacent._eqn._c,
-      ],
-      setEnterState: () => {
-        adjacent.angleType = 'explementary';
-        common.setEnterState();
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 2, done);
+        coll._eqns._explementary.setScenario('centerTop');
+        coll._eqns._explementary.showForm('c');
+        coll._eqns._explementary.setFormSeries('1');
       },
-      show: [
-        diag._unitsSelector,
-      ],
       setSteadyState: () => {
-        common.setSteadyState();
-        adjacent._eqn.show();
-        adjacent.eqn.showForm('exp_add');
-        adjacent._lines._line3.move.element = adjacent._lines;
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3 * 2, Math.PI * 1.999, 0, 0);
       },
+    });
+
+    this.addSection({
+      title: 'Explanation of Names',
+      setContent: style({ top: 15 }, [
+        'The words |complementary|, |supplementary| and |explementary| all have a similar definition - |to fill up or complete|.',
+        'In this case they fill up or complete a |right|, |straight| and |full| angle.',
+        'Its not clear there is a particular reason |why| each word is assosiated with its angle, but it is the norm.',
+        `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_higher' })}`,
+        `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_high' })}`,
+        `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'fill up']).html()}`,
+      ]),
+    });
+
+    const indentStyle = {
+      left: 4, top: -2, size: 1, list: 'unordered', listStyleType: 'none',
+    };
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Common adjacent angle names are usually used to |describe| angles in different, and sometimes simpler ways.',
+        'For example, rather than saying:',
+        style(indentStyle, '" angles a and b |add up to 90º| "'),
+        'you could say:',
+        style(indentStyle, [
+          '" angles a and b are |complementary| "',
+          '" |complementary angles| a and b "',
+        ]),
+      ]),
     });
   }
 }

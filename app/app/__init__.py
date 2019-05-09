@@ -5,24 +5,32 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_talisman import Talisman
+import os
 
 app = Flask(__name__)
 app.config.from_object(Config)
 SELF = "'self'"
-talisman = Talisman(
-    app,
-    content_security_policy={
-        'default-src': SELF,
-        'img-src': '*',
-        'script-src': [
-            SELF,
-            'https://unpkg.com/',
-        ],
-        'style-src': [
-            SELF,
-            "'unsafe-inline'",
-        ],
-    },)
+if not os.environ.get('LOCAL_PRODUCTION') \
+   or os.environ.get('LOCAL_PRODUCTION') != 'DISABLE_SECURITY':
+    talisman = Talisman(
+        app,
+        content_security_policy={
+            'default-src': SELF,
+            'img-src': [
+                SELF,
+                # "'unsafe-inline'",
+                "data:",
+            ],
+            'script-src': [
+                SELF,
+                'https://unpkg.com/',
+                "'unsafe-inline'",          # this needs to be removed later
+            ],
+            'style-src': [
+                SELF,
+                "'unsafe-inline'",
+            ],
+        },)
 
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)

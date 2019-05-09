@@ -1,16 +1,21 @@
 // @flow
 import Fig from 'figureone';
 import lessonLayout from './layout';
+// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
+import version from '../version';
+import CommonCollection from '../common/diagramCollectionCommon';
 
-import CircleAreaCollection from '../common/diagramCollectionCircleArea';
+const { Transform, Rect } = Fig;
+const {
+//   click,
+  highlight,
+//   clickWord,
+} = Fig.tools.html;
 
-const { Transform } = Fig;
-const { html } = Fig.tools;
-
-export default class QR_TODO extends PopupBoxCollection {
-  _collection: CircleAreaCollection;
+export default class QRCircleArea extends PopupBoxCollection {
+  _collection: CommonCollection;
 
   constructor(
     diagram: Object,
@@ -22,29 +27,46 @@ export default class QR_TODO extends PopupBoxCollection {
       layout,
       transform,
       'collection',
-      CircleAreaCollection,
+      CommonCollection,
     );
     this.hasTouchableElements = true;
 
-    const modifiers = { radius: html.highlight(this.layout.colors.radius) };
-
-    this.setTitle('Area of a Circle');
+    const modifiers = { radius: highlight(layout.colors.radius) };
+    this.setTitle('Circle Area');
     this.setDescription('|Circle area| is the product of |π| and the |radius| squared.', modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSize(2.5, 1.7);
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
-    const collection = this._collection;
-    collection.show();
-    collection._circle.show();
-    collection._radius.showAll();
-    collection.eqns.triRectEqn.showForm('14');
-    collection.eqns.triRectEqn.getCurrentForm().arrange(1.5, 'center', 'middle');
-    collection.setScenario(collection._radius, { rotation: 0 });
-    collection.transform.updateScale(0.5, 0.5);
-    collection.setPosition(this.layout.position);
+    const coll = this._collection;
+    const fig = coll._fig;
+    const polyMost = fig._polyMost;
+    const circle = fig._circle;
+    const eqn = coll._eqn;
+    circle.show();
+    polyMost._radius.showAll();
+    eqn.setScenario('qr');
+    eqn.showForm('14');
+    polyMost._radius.setScenario('circle');
+    polyMost._radius.updateLabel(polyMost._radius.getRotation() + polyMost.getRotation());
+    this.transformToQRWindow(coll, new Rect(-1.6, -1.4, 3.2, 2.4));
     this.diagram.animateNextFrame();
   }
 }
+
+function attachQuickReference1() {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  if (window.quickReference[details.details.uid] == null) {
+    window.quickReference[details.details.uid] = {};
+  }
+  window.quickReference[details.details.uid][version.details.uid] = {
+    Main: QRCircleArea,
+  };
+}
+
+attachQuickReference1();
+

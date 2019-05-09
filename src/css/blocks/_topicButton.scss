@@ -1,0 +1,74 @@
+.topic_button__listItem {
+  width: 300px;
+  table-layout: fixed;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
+}
+
+.topic_button__label {
+  vertical-align: middle;
+  text-align: left;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+}
+
+.topic_button__label_description {
+  font-size: 0.8em;
+  // opacity: 0.6;
+}
+
+.topic_button__rating {
+  vertical-align: middle;
+  width: 4em;
+  white-space: pre-wrap;      /* CSS3 */
+  white-space: -moz-pre-wrap; /* Firefox */
+  white-space: -pre-wrap;     /* Opera <7 */
+  white-space: -o-pre-wrap;   /* Opera 7 */
+  word-wrap: break-word;      /* IE */
+}
+
+.topic_button__rating_value {
+  font-size: 0.8em;
+  text-align: center;
+}
+
+.topic_button__rating_num_reviews {
+  font-size: 0.6em;
+  text-align: center;
+}
+
+// .topic_button_listItem_title {
+//   margin-left: 0.5em;
+// }
+
+// .topic_button_listItem_title .topic_button__rating {
+//   width: 5em;
+// }
+
+// .topic_button__single_item {
+//   width: 100%;
+//   height: 100%;
+//   display: table;
+//   border-radius: $radius;
+//   background-color: color('lesson', 'title-background');
+//   border: 1px solid color('white', 'lighter');
+//   color: #929292;
+// }
+
+.topic_button__single_item_label {
+  vertical-align: middle;
+  display: table-cell;
+  text-decoration: none;
+  color: #929292;
+}
+
+.topic_button__single_item_label:hover {
+  text-decoration: none;
+}
+
+.dropdown_button_selected .topic_button__single_item_label {
+  color: white;
+}

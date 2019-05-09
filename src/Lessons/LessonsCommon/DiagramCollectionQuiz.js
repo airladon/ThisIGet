@@ -5,16 +5,25 @@ const {
   Diagram, Transform, Point, DiagramElementCollection, DiagramElementPrimative,
 } = Fig;
 
+const { parsePoint } = Fig.tools.g2;
+
+const { joinObjects } = Fig.tools.misc;
+
 export type TypeMessages = {
   _correct: DiagramElementPrimative;
   _incorrect: DiagramElementPrimative;
 } & DiagramElementCollection;
 
+export type TypeButton = {
+  enable: () => void;
+  disable: () => void;
+} & DiagramElementPrimative;
+
 // $FlowFixMe
 const CommonQuizMixin = superclass => class extends superclass {
-  _check: DiagramElementPrimative;
-  _newProblem: DiagramElementPrimative;
-  _showAnotherAnswer: DiagramElementPrimative;
+  _check: TypeButton;
+  _newProblem: TypeButton;
+  _showAnotherAnswer: TypeButton;
   +_messages: TypeMessages;
   answers: any;
   answer: any;
@@ -22,34 +31,112 @@ const CommonQuizMixin = superclass => class extends superclass {
 
   tryAgain() {
     this._messages.hideAll();
-    this._check.show();
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
     this.hasTouchableElements = true;
-    if (this._intput != null) {
+    if (this._input != null) {
+      this._input.show();
       this._input.enable();
       this._input.setValue('');
     }
     this.diagram.animateNextFrame();
+    this.diagram.lesson.enableInteractiveItems();
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setupNewProblem() {}
+
   newProblem() {
+    if (this._question) {
+      this._question.show();
+    }
     this._messages.hideAll();
     this._newProblem.hide();
+    this._showAnotherAnswer.hide();
+    if (this._input != null) {
+      this._input.show();
+      this._input.enable();
+      this._input.setValue('');
+    }
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
+    this.hasTouchableElements = true;
+    this.answerIndex = -1;
+    this.setupNewProblem();
+    this.diagram.lesson.updateInteractiveItems();
+    this.diagram.animateNextFrame();
+  }
+
+  transitionToNewProblem(optionsIn: Object = {}) {
+    const defaultOptionsIn = {
+      target: 'quiz',
+      duration: 1,
+    };
+    const options = joinObjects({}, defaultOptionsIn, optionsIn);
+    if (this._input != null) {
+      this._input.disable();
+      this._input.setValue('');
+    }
+    if (this._check != null) {
+      this._check.disable();
+    }
+    if (this._choice != null) {
+      this._choice.disable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
+    this.animations.new()
+      .scenarios(options)
+      .whenFinished(this.afterTransitionToNewProblem.bind(this))
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  afterTransitionToNewProblem() {
     if (this._input != null) {
       this._input.enable();
       this._input.setValue('');
     }
-    this._showAnotherAnswer.hide();
-    this.hasTouchableElements = true;
-    this.answerIndex = -1;
-    this.diagram.animateNextFrame();
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
+    if (this._choice != null) {
+      this._choice.show();
+      this._choice.enable();
+      this.selectMultipleChoice(this._choice.id, -1);
+    }
+    this.diagram.lesson.enableInteractiveItems();
   }
 
   showCheck() {
-    this._check.show();
+    if (this._check != null) {
+      this._check.show();
+      this._check.enable();
+    }
   }
 
   checkAnswer() {
-    this._check.hide();
+    if (this._check != null) {
+      this._check.disable();
+    }
+    if (this._choice != null) {
+      this._choice.disable();
+    }
+    this.diagram.lesson.disableInteractiveItems();
     this.hasTouchableElements = false;
     const answer = this.findAnswer();
     if (answer === 'correct') {
@@ -74,11 +161,17 @@ const CommonQuizMixin = superclass => class extends superclass {
   showAnswer() {
     this.hasTouchableElements = false;
     this._messages.hideAll();
-    this._check.hide();
     this._newProblem.show();
     if (this._input != null) {
       this._input.disable();
       this._input.setValue(this.answer);
+    }
+    if (this._check != null) {
+      this._check.hide();
+      this._check.disable();
+    }
+    if (this._choice != null) {
+      this._choice.disable();
     }
     this.answerIndex = (this.answerIndex + 1) % this.answers.length;
     if (this.answers.length > 1) {
@@ -94,14 +187,55 @@ const CommonQuizMixin = superclass => class extends superclass {
     transform: Transform = new Transform(),
   ) {
     super(diagram, layout, transform);
-    this.add('check', this.makeCheckButton(id));
+    // this.add('check', this.makeCheckButton(id));
     this.add('newProblem', this.makeNewProblemButton(id));
     this.add('messages', this.makeQuizAnswerMessages(id, messages));
     this.add('showAnotherAnswer', this.makeShowAnotherAnswerButton(id));
     this._messages.hideAll();
     this.answers = [];
     this.answer = '';
+    this.id = id;
     // this.answerIndex = -1;
+  }
+
+  addCheck(
+    id: string = this.id,
+  ) {
+    this.add('check', this.makeCheckButton(id));
+  }
+
+  addMultipleChoice(
+    id: string = this.id,
+    choices: Array<string>,
+  ) {
+    this.add('choice', this.makeMultipleChoice(id, choices));
+    this._choice.setPosition(this.layout.quiz.choice);
+  }
+
+  addQuestion(optionsIn: {
+    size?: number,
+    style?: 'normal' | 'italics',
+    family?: string,
+    hAlign?: 'left' | 'right' | 'center',
+    vAlign?: 'bottom' | 'top' | 'middle' | 'baseline',
+    text?: string,
+    color?: Array<number>,
+    position?: Point | [number, number],
+  } = {}) {
+    const defaultOptions = {
+      size: 0.18,
+      style: 'normal',
+      family: 'helvetica',
+      hAlign: 'left',
+      vAlign: 'baseline',
+      text: '',
+      color: this.layout.colors.diagram.text.base,
+      position: new Point(-2.7, 1.5),
+    };
+    const options = joinObjects({}, defaultOptions, optionsIn);
+    options.position = parsePoint(options.position);
+    const question = this.diagram.shapes.text(options);
+    this.add('question', question);
   }
 
   makeAnswerBox(
@@ -196,27 +330,43 @@ const CommonQuizMixin = superclass => class extends superclass {
       'center',
     );
     html.isInteractive = true;
+
+    html.disable = () => {
+      html.isInteractive = false;
+      button.classList.add('lesson__quiz__button_disabled');
+    };
+    html.enable = () => {
+      html.isInteractive = true;
+      button.classList.remove('lesson__quiz__button_disabled');
+    };
     return html;
   }
 
   makeCheckButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `check__${id}`, 'Check', this.checkAnswer.bind(this), this.layout.quiz.check,
     );
+    button.interactiveLocation = 'topRight';
+    // button.interactiveLocation = new Point(0.26, 0.12);
+    return button;
   }
 
   makeNewProblemButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `new_problem__${id}`, 'New Problem', this.newProblem.bind(this),
       this.layout.quiz.newProblem,
     );
+    button.interactiveLocation = 'topRight';
+    return button;
   }
 
   makeShowAnotherAnswerButton(id: string) {
-    return this.makeButton(
+    const button = this.makeButton(
       `show_another_answer__${id}`, 'Show Another Answer', this.showAnswer.bind(this),
       this.layout.quiz.showAnotherAnswer,
     );
+    button.interactiveLocation = 'topRight';
+    return button;
   }
 
   addInput(
@@ -225,7 +375,8 @@ const CommonQuizMixin = superclass => class extends superclass {
     numDigits: number = 10,
     decimalPlaces: number = 0,
   ) {
-    this.add('input', this.makeEntryBox('input1', defaultText, numDigits, decimalPlaces));
+    this.add('input', this.makeEntryBox(id, defaultText, numDigits, decimalPlaces));
+    this._input.interactiveLocation = 'topRight';
     if (this.layout.quiz) {
       if (this.layout.quiz.input) {
         this._input.setPosition(this.layout.quiz.input);

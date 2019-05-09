@@ -84,13 +84,14 @@
   width: 100%;
   margin-bottom: calc(var(--lesson__diagram-font-size) * 0.05);
   display: table;
+  height: 1px;
 }
 
-@media screen and (min-width: $small-tablet) {
-  .fraction_line {
-    border-top: solid calc(var(--lesson__diagram-font-size) * 0.07);
-  }
-}
+// @media screen and (min-width: $desktop) {
+//   .fraction_line {
+//     border-top: solid calc(var(--lesson__diagram-font-size) * 0.07);
+//   }
+// }
 
 .numerator {
   margin-left: auto;

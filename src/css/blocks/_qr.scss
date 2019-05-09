@@ -1,0 +1,101 @@
+$qrWidth: 0.8;
+$qrHeight: 0.8;
+
+// @media (max-aspect-ratio: 1) and (max-width: 600px) {
+:root {
+  --lesson__qr_width: calc(var(--pres__content_width) * #{$qrWidth});
+  --lesson__qr_height: calc(var(--pres__content_height) * #{$qrHeight});
+  --lesson__qr_top: calc(50vh - var(--pres__content_height) * #{$qrHeight} / 2);
+}
+
+// @media (max-width: 600px) {
+//   :root {
+//     --lesson__qr_height: calc(var(--pres__content_height) * #{$qrHeight} * 1.5);
+//     --lesson__qr_top: calc(50vh - var(--pres__content_height) * #{$qrHeight} / 2 * 1.5);
+//   }
+// }
+
+// @media (max-width: 400px) {
+//   :root {
+//     --lesson__qr_height: calc(var(--pres__content_height) * #{$qrHeight} * 2);
+//     --lesson__qr_top: calc(50vh - var(--pres__content_height) * #{$qrHeight} / 2 * 2);
+//   }
+// }
+
+.lesson__qr__overlay .lesson__popup_box__content {
+  height: calc(var(--lesson__qr_height) * 0.8);
+  overflow: scroll;
+}
+
+.lesson__qr_container {
+  width: var(--lesson__qr_width);
+  height: var(--lesson__qr_height);
+  top: var(--lesson__qr_top);
+}
+
+.lesson__qr__overlay #id_qr_diagram {
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__overlay .diagram__html {
+  pointer-events: auto;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
+.lesson__qr__overlay .diagram__gl {
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.lesson__qr__overlay .diagram__text {
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+}
+
+.lesson__qr__overlay .lesson__popup_box {
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: colors('qr', 'background');
+}
+
+.lesson__qr__overlay .lesson__popup_box__text {
+  font-size: calc(var(--lesson__qr_width) / 35);
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr__overlay .lesson__popup_box__centering_text_container {
+  display: table;
+  height: 100%;
+  width: 100%;
+}
+
+.lesson__qr__overlay .lesson__popup_box__text_container {
+  overflow: scroll;
+}
+
+.lesson__qr__overlay .lesson__popup_box__title_text {
+  // font-size: calc(var(--lesson__diagram-font-size) * 0.9);
+  font-size: calc(var(--lesson__qr_width) / 35 * 1.2);
+  margin-top: 0;
+}
+
+.lesson__qr__overlay .lesson__popup_box__link {
+  // font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  font-size: calc(var(--lesson__qr_width) / 35 * 0.8);
+}
+
+// .lesson__qr__overlay .lesson__popup_box__title_text {
+//   margin-top: 0;
+// }
+
+// .lesson__qr__overlay .lesson__popup_box__title {
+//   font-size: calc(var(--lesson__diagram-font-size) * 0.9);
+// }

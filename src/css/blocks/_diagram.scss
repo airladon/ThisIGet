@@ -23,6 +23,7 @@
   height: 100%;
   left: 0;
   top: 0;
+  z-index: 1;
   // background-color: white;
   pointer-events: none;
 }
@@ -33,6 +34,7 @@
   height: 100%;
   left: 0;
   top: 0;
+  z-index: 1;
   // pointer-events: none;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -41,7 +43,7 @@
   -ms-user-select: none; /* Internet Explorer/Edge */
   user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome and Opera */
-  touch-action: manipulation;
+  // touch-action: manipulation;
   pointer-events: auto;
 }
 
@@ -52,14 +54,22 @@
   left: 0;
   top: 0;
   pointer-events: none;
+  z-index: 1;
 }
 
-#id_diagram__text__high {
-  pointer-events: none;
-  z-index: 2;
+#id_qr_diagram {
+  z-index: -1;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
-#id_diagram__gl__high {
-  pointer-events: none;
-  z-index: 2;
-}
+// #id_diagram__text__high {
+//   pointer-events: none;
+//   z-index: 2;
+// }
+
+// #id_diagram__gl__high {
+//   pointer-events: none;
+//   z-index: 2;
+// }

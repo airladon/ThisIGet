@@ -1,10 +1,11 @@
 // @flow
 import Fig from 'figureone';
 import {
-  LessonContent, // interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
-import lessonLayout from './layout';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -12,12 +13,16 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  click, highlight, centerV, unit,
+  click,
+  style,
+  highlight,
+  clickW,
 } = Fig.tools.html;
+
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -27,349 +32,299 @@ class Content extends LessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    this.loadQRs([
+      'adjacent_angles/base',
+    ]);
   }
 
   addSections() {
     const diag = this.diagram.elements;
     const opp = diag._opposite;
-    const threeLines = diag._threeLines;
+    const three = diag._threeLines;
 
     this.addSection({
-      title: 'Introduction',
-      setContent: centerV(`
-        <p>
-          |Related angles| are angles that have the same value, but are in different locations. 
-        </p>
-        <p>
-          This lesson will look at related angles in two scenarios:
-          <ul>
-            <li>when two lines intersect</li>
-            <li>when a line intersects two parallel lines</li>
-          </ul>
-        </p>
-      `),
+      title: 'Related Angles',
+      setContent: style({ centerV: true }, [
+        '|Related angles| are angles that can be used to calculate each other.',
+        'This lesson will look at related angles in two common scenarios:',
+        style({
+          list: 'unordered',
+          listStyleType: 'disc',
+          left: 3,
+          top: -3,
+          size: 0.95,
+        }, [
+          'when two lines intersect',
+          'when a line intersects two parallel lines',
+        ]),
+      ]),
     });
 
-    const oppCommon = {
-      // interactiveElementsRemove: [
-      //   opp._line1,
-      //   opp._line2,
-      // ],
-      // interactiveElements: [
-      //   interactiveItem(opp._line1),
-      //   interactiveItem(opp._line2),
-      // ],
-      setInfo: [
-        '<ul>',
-        '<li>Drag the lines to rotate and see a different perspective.</li>',
-        '</ul>',
-      ],
-      setEnterState: () => {
-        opp._line1.setColor(colors.line);
-        opp._line2.setColor(colors.line);
-        diag._unitsSelector.select(diag.units);
-      },
-      showOnly: [
-        opp,
-      ],
-      show: [
-        opp._line1,
-        opp._line2,
-        diag._unitsSelector,
-      ],
-    };
-
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    this.addSection(oppCommon, {
+    this.addSection({
       title: 'Opposite Angles',
-      setContent: `
-      <p>
-        When two lines intersect, |four_angles| are formed. If you know one angle, can you calulate all the others?
-      </p>
-      `,
-      modifiers: {
-        four_angles: click(opp.toggleAngles, [opp], layout.colors.angleA),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |four_angles| to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
+      setContent: [
+        'When two lines intersect, |four_angles| are formed. These angles are |related|, and if you know one then you can |calulate| all others.',
       ],
-      infoModifiers: {
-        four_angles: highlight(colors.angleA),
+      modifiers: {
+        four_angles: click(opp.toggleAngles, [opp], colors.angle1),
       },
       setEnterState: () => {
-        oppCommon.setEnterState();
-        opp.calculateFuturePositions();
-        // diag._unitsSelector.select(diag.units);
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b');
+        opp.setAngle(3, colors.angle3, 'c');
+        opp.setAngle(4, colors.angle4, 'd');
       },
-      hide: [
-        diag._unitsSelector,
-      ],
+      show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.moveToFuturePositions(done);
+        opp.newPageRotation(done);
       },
       setSteadyState: () => {
-        opp.setFuturePositions();
-        opp.showAngles([[opp._angleA, 'a', colors.angleA]]);
+        opp._fig._angle1.showAll();
+        opp.updateAngles();
       },
     });
 
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        First consider angles |a| and |b|. These are supplementary angles, and therefore they add up to ${unit('|180&deg;|', '|&pi; radians|')}.
-      </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        b: highlight(colors.angleB),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b', colors.angleB],
-        ]);
-        // diag._unitsSelector.select('rad');
-        // diag.setUnits('rad');
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        Therefore we can calculate |b| from |a|:
-      </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        b: highlight(colors.angleB),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b_silent', colors.angleB],
-        ]);
-        opp._equation2.eqn.showForm('b');
-        opp._equation2.eqn.setPosition(layout.equation2.b);
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        Next we can consider |a| and |d|, which are also supplementary angles and add up to ${unit('|180&deg;|', '|&pi; radians|')}.
-      </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        d: highlight(colors.angleD),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b_silent', colors.disabled],
-          [opp._angleD, 'd', colors.angleD],
-        ]);
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        Therefore, we can calculate |d| from |a|:
-      </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        d: highlight(colors.angleD),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b_silent', colors.disabled],
-          [opp._angleD, 'd_silent', colors.angleD],
-        ]);
-        opp._equation2.eqn.showForm('d');
-        opp._equation2.eqn.setPosition(layout.equation2.b);
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        So we can see that the opposite angles |b| and |d| are equal.
-      </p>
-      `,
-      modifiers: {
-        b: highlight(colors.angleB),
-        d: highlight(colors.angleD),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.disabled],
-          [opp._angleB, 'b_equals', colors.angleB],
-          [opp._angleD, 'd_equals', colors.angleD],
-        ]);
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        Doing the same exercise with angles |b| and |c|, or |d| and |c| shows that opposite angles |a| and |c| are also equal.
-      </p>
-      `,
-      modifiers: {
-        a: highlight(colors.angleA),
-        b: highlight(colors.angleB),
-        c: highlight(colors.angleC),
-        d: highlight(colors.angleD),
-      },
-      // show: [
-      //   diag._unitsSelector,
-      // ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.disabled],
-          [opp._angleB, 'b_equals', colors.disabled],
-          [opp._angleC, 'c_equals', colors.angleC],
-          [opp._angleD, 'd_equals', colors.disabled],
-        ]);
-      },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        More generally, we can see that at the intersection of two lines, the |opposite angles are always equal|.
-      </p>
-      `,
-      hide: [
-        diag._unitsSelector,
+    this.addSection({
+      setContent: [
+        'First consider angles |a| and |b|. These form around a |straight_line|, and therefore are |supplementary| angles, adding up to 180º.',
       ],
-      setSteadyState: () => {
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b', colors.angleB],
-          [opp._angleC, 'a', colors.angleA],
-          [opp._angleD, 'b', colors.angleB],
-        ]);
+      modifiers: {
+        supplementary: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        straight_line: click(opp.pulseLine1, [opp], colors.lines),
       },
-    });
-
-    this.addSection(oppCommon, {
-      setContent: `
-      <p>
-        If we know one angle, all others can be calculated!
-      </p>
-      `,
-      setEnterState: () => {
-        oppCommon.setEnterState();
-        opp.calculateFuturePositions();
-      },
-      hide: [
-        diag._unitsSelector,
-      ],
+      show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.moveToFuturePositions(done);
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b');
+        opp.newPageRotation(done);
       },
       setSteadyState: () => {
-        opp.setFuturePositions();
-        opp.showAngles([
-          [opp._angleA, 'a', colors.angleA],
-          [opp._angleB, 'b', colors.angleB],
-          [opp._angleC, 'a', colors.angleA],
-          [opp._angleD, 'b', colors.angleB],
-        ]);
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp.updateAngles();
       },
     });
 
-
-    // Intersecting Line
-    const common = {
-      interactiveElementsRemove: [
-        threeLines._line1._mid,
-        threeLines._line2._mid,
-        threeLines._line3._mid,
-      ],
-      setInfo: [
-        '<ul>',
-        '<li>Drag the different lines see a different perspective.</li>',
-        '</ul>',
-      ],
-      setEnterState: () => {
-        threeLines._line1.setColor(layout.colors.line);
-        threeLines._line2.setColor(layout.colors.line);
-        threeLines.calculateFuturePositions('corresponding');
-        diag._unitsSelector.select(diag.units);
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'Therefore we can calculate |b| from |a|:',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
       },
-      showOnly: [
-        threeLines,
-        threeLines._line1,
-        // threeLines._line1._end1,
-        // threeLines._line1._end2,
-        // threeLines._line1._mid,
-        threeLines._line2,
-        // threeLines._line2._end1,
-        // threeLines._line2._end2,
-        // threeLines._line2._mid,
-        threeLines._line3,
-        // threeLines._line3._end1,
-        // threeLines._line3._end2,
-        // threeLines._line3._mid,
-      ],
-      show: [
-        threeLines._line1,
-        threeLines._line2,
-        threeLines._line3,
-      ],
-    };
-    this.addSection(common, {
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b = 180º - a');
+        opp._eqn.showForm('b');
+        opp._eqn.setScenario('top');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'Next we can consider |a| and |d|, which are also |supplementary| angles and add up to 180º.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        d: highlight(colors.angle4),
+        supplementary: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
+        opp.setAngle(4, colors.angle4, 'd');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'Therefore, we can calculate |d| from |a|',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        d: highlight(colors.angle4),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
+        opp.setAngle(4, colors.angle4, 'd = 180º - a');
+        opp._eqn.showForm('d');
+        opp._eqn.setScenario('top');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'So we can see that the opposite angles |b| and |d| are equal.',
+      ]),
+      modifiers: {
+        b: highlight(colors.angle2),
+        d: highlight(colors.angle4),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.disabled, 'a');
+        opp.setAngle(2, colors.angle2, 'b = 180º - a');
+        opp.setAngle(4, colors.angle4, 'd = 180º - a');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'Doing the same exercise with angles |b| and |c|, or |d| and |c| shows that opposite angles |a| and |c| are also equal.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+        d: highlight(colors.angle4),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.disabled, 'a');
+        opp.setAngle(2, colors.disabled, 'b = 180º - a');
+        opp.setAngle(3, colors.angle3, 'c = a');
+        opp.setAngle(4, colors.disabled, 'd = 180º - a');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle3.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'More |generally|, we can see that at the intersection of two lines, the |opposite angles are always equal|, and |adjacent angles are always supplementary|.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+        d: highlight(colors.angle4),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b');
+        opp.setAngle(3, colors.angle1, 'a');
+        opp.setAngle(4, colors.angle2, 'b');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle3.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'This means, if we know |one| angle all others can be |calculated|.',
+      ]),
+      modifiers: {
+        a: highlight(colors.angle1),
+        b: highlight(colors.angle2),
+        c: highlight(colors.angle3),
+        d: highlight(colors.angle4),
+      },
+      show: [opp._fig._line1, opp._fig._line2],
+      transitionFromAny: (done) => {
+        opp.setScenarios('center');
+        opp.setAngle(1, colors.angle1, 'a');
+        opp.setAngle(2, colors.angle2, 'b');
+        opp.setAngle(3, colors.angle1, 'a');
+        opp.setAngle(4, colors.angle2, 'b');
+        opp.newPageRotation(done);
+      },
+      setSteadyState: () => {
+        opp._fig._angle1.showAll();
+        opp._fig._angle2.showAll();
+        opp._fig._angle3.showAll();
+        opp._fig._angle4.showAll();
+        opp.updateAngles();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
       title: 'Parallel Intersection',
-      setContent: `
-        <p>
-          The next scenario is when there is a line |intersecting| two |parallel| lines. In this case, |eight_angles| are formed.
-        </p>
-      `,
+      setContent: style({}, [
+        'The next scenario is a |line| intersecting two |parallel_lines|. In this case, |eight_angles| are formed.',
+      ]),
       modifiers: {
-        eight_angles: click(threeLines.toggleAllAngles, [threeLines], colors.angleA),
-        parallel: click(threeLines.pulseParallel, [threeLines], colors.line),
-        intersecting: click(threeLines.pulseLine, [threeLines, 3], colors.intersectingLine),
+        eight_angles: click(three.toggleAngles, [three], colors.angle1),
+        line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        parallel_lines: click(three.pulseParallel, [three], colors.lines),
       },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |eight_angles| to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        eight_angles: highlight(colors.angleA),
+      setEnterState: () => {
+        three.setScenarios('center');
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle1, 'h');
       },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
+        three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.showAngles([[threeLines._angleA1, 'a', colors.angleA]]);
+        three._fig._angleA1.showAll();
+        three.updateIntersectingLineAngle();
       },
     });
 
@@ -378,584 +333,581 @@ class Content extends LessonContent {
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
-    this.addSection(common, {
+    this.addSection({
       title: 'Corresponding Angles',
-      setContent: `
-        <p >
-          |Corresponding_Angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.
-        </p>
-      `,
+      setContent: style({}, [
+        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
+      ]),
       modifiers: {
-        Corresponding_Angles: click(
-          threeLines.correspondingToggleAngles, [threeLines, false, true],
-          colors.angleA,
-        ),
-        two_lines: click(threeLines.pulseParallel, [threeLines], colors.line),
-        intersecting: click(threeLines.pulseLine, [threeLines, 3], colors.intersectingLine),
+        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
       },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |Corresponding_Angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        Corresponding_Angles: highlight(colors.angleA),
-      },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
+        three.setScenarios('center');
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.correspondingToggleAngles(false, true);
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
       },
     });
 
-    this.addSection(common, {
-      setContent: `
-        <p >
-          What is the relationship between |corresponding_angles|?
-        </p>
-      `,
+    this.addSection({
+      setContent: style({}, [
+        'How are |corresponding_Angles| related? We can examine this by looking at just one intersection.',
+      ]),
       modifiers: {
-        corresponding_angles: click(
-          threeLines.correspondingToggleAngles, [threeLines, false, true],
-          colors.angleA,
-        ),
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
       },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |Corresponding_Angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        Corresponding_Angles: highlight(colors.angleA),
-      },
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
-        if (!(this.comingFrom === 'prev')) {
-          threeLines.moveToFuturePositions(done);
+        three.setScenarios('center');
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three.newPageRotation(0, 1, done);
+      },
+      setSteadyState: () => {
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    const enterTranslateLine = () => {
+      three._fig._line1.move.type = 'translation';
+      three._fig._line1.move.element = null;
+      three._fig._line1.setTransformCallback = three._fig._line3.setTransformCallback;
+      three._fig._line1.move.limitLine = layout.moveLine;
+      three._fig._line3.isTouchable = false;
+      three._fig._line3.isInteractive = false;
+      three._fig._line2.isTouchable = false;
+      three._fig._line2.isInteractive = false;
+      three._fig._line2.setColor(colors.disabled);
+    };
+    const leaveTranslationLine = () => {
+      three._fig._line1.move.type = 'rotation';
+      three._fig._line1.move.element = three._fig;
+      three._fig._line1.setTransformCallback = null;
+      three._fig._line1.move.limitLine = null;
+      three._fig._line3.isTouchable = true;
+      three._fig._line3.isInteractive = null;
+      three._fig._line2.isTouchable = true;
+      three._fig._line2.isInteractive = null;
+      three._fig._line2.setColor(colors.lines);
+    };
+
+    this.addSection({
+      setContent: style({}, [
+        'At one intersection there are four |angles| formed. When one line is |moved| without rotation, those angles stay the same.',
+      ]),
+      modifiers: {
+        angles: click(three.toggle4Angles, [three], colors.angle1),
+        moved: click(three.randomTranslateLine, [three, null], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3],
+      transitionFromAny: (done) => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        enterTranslateLine();
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('translate');
+          done();
+        } else if (this.comingFrom === 'prev') {
+          three._fig.stop(true, 'noComplete');
+          three._fig.animations.new()
+            .inParallel([
+              three._fig.anim.rotation({ target: 0, velocity: 2 }),
+              three._fig._line3.anim.rotation({ target: 1, velocity: 2 }),
+              three._fig._line1.anim.scenario({ target: 'translate', duration: 0.5 }),
+            ])
+            .whenFinished(done)
+            .start();
         } else {
           done();
         }
       },
       setSteadyState: () => {
-        if (!(this.comingFrom === 'prev')) {
-          threeLines.setFuturePositions();
-        }
-        threeLines.correspondingToggleAngles(false, true);
-      },
-      // setSteadyState: () => {
-      //   threeLines.correspondingToggleAngles(false, true);
-      // },
-    });
-
-    const commonCorresponding = {
-      setEnterState: () => {
-        threeLines._line1.setColor(layout.colors.line);
-        threeLines._line2.setColor(layout.colors.disabled);
-      },
-      setSteadyState: () => {
-        threeLines.correspondingToggleAngles(true);
-        threeLines._line1.move.type = 'translation';
-        threeLines._line1.move.element = threeLines._line1;
-        threeLines._line1.move.maxTransform.updateTranslation(
-          10,
-          layout.line1.corresponding.position.y,
-        );
-        threeLines._line1.move.minTransform.updateTranslation(
-          -10,
-          layout.line2.corresponding.position.y,
-        );
-        threeLines._line2.showAll();
-        threeLines._line2.isTouchable = false;
-        threeLines._line2.hasTouchableElements = false;
+        three._fig._angleA1.showAll();
+        three.updateIntersectingLineAngle();
       },
       setLeaveState: () => {
-        threeLines._line1.move.type = 'rotation';
-        threeLines._line1.move.element = threeLines;
-        threeLines._line2.isTouchable = true;
-        threeLines._line2.hasTouchableElements = true;
+        leaveTranslationLine();
       },
-    };
-
-    this.addSection(common, commonCorresponding, {
-      setContent: `
-        <p>
-          When two lines intersect, an |angle| is formed. This angle doesn't change when one line is |moved| without rotation.
-        </p>
-      `,
-      interactiveElementsRemove: [
-        threeLines._line2,
-      ],
+    });
+    this.addSection({
+      setContent: style({}, [
+        '|Moving| a line without rotation means it is |parallel| to its |original| location.',
+      ]),
       modifiers: {
-        angle: click(threeLines.correspondingToggleAngles, [threeLines, true], colors.angleA),
-        moved: click(
-          threeLines.correspondingTranslateLine1,
-          [threeLines], colors.line,
-        ),
+        original: click(three.pulseShaddow, [three], colors.disabled),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+        Moving: click(three.randomTranslateLine, [three, null], colors.lines),
       },
-      setInfo: [
-        '<ul>',
-        '<li>Move the horizontal line to see if the angle changes.</li>',
-        '<li>Touch |moved| to move the line a random distance.</li>',
-        '<li>Touch |angle| text to toggle the angles.</li>',
-        '</ul>',
-      ],
-      infoModifiers: {
-        angle: highlight(colors.angleA),
-        moved: highlight(colors.line),
-      },
-      setEnterState: () => {
-        commonCorresponding.setEnterState();
-        if (this.comingFrom !== 'next') {
-          threeLines.moveLine1ToLine2();
-          threeLines.correspondingTranslateLine1Future(0.5);
-        }
-      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
-        if (this.comingFrom !== 'next') {
-          threeLines.moveToFuturePositions(2, done);
-        } else {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        enterTranslateLine();
+        if (this.comingFrom === 'goto' || this.comingFrom === 'next') {
+          three.setScenarios('translate');
           done();
+        } else if (this.comingFrom === 'prev') {
+          three.shaddowLine1();
+          three.randomTranslateLine(done);
         }
       },
       setSteadyState: () => {
-        commonCorresponding.setSteadyState();
-        if (this.comingFrom !== 'next') {
-          threeLines.setFuturePositions();
-        }
+        three.updateIntersectingLineAngle();
       },
-    });
-
-    this.addSection(common, commonCorresponding, {
-      setContent: `
-        <p>
-          |Moving| a line without rotation means the line is |parallel| to its original.
-        </p>
-      `,
-      modifiers: {
-        Moving: click(threeLines.correspondingTranslateLine1, [threeLines], colors.line),
-        parallel: click(threeLines.pulseParallel, [threeLines], colors.line),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Move the horizontal line to see if the angle changes.</li>',
-        '<li>Touch |Moving| text to move the line a random distance.</li>',
-        '</ul>',
-      ],
-      infoModifiers: {
-        Moving: highlight(colors.line),
-      },
-      interactiveElementsRemove: [
-        threeLines._line2,
-      ],
-      setSteadyState: () => {
-        commonCorresponding.setSteadyState();
-        threeLines.correspondingToggleAngles(true);
-      },
-    });
-
-    this.addSection(common, commonCorresponding, {
-      setContent: `
-        <p>
-          Therefore comparing the original and moved line, shows |corresponding_angles| are |equal|.
-        </p>
-      `,
-      modifiers: {
-        corresponding_angles: click(
-          threeLines.correspondingToggleAngles, [threeLines, false, false],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |corresponding_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        corresponding_angles: highlight(colors.angleA),
-      },
-      interactiveElementsRemove: [
-        threeLines._line2,
-      ],
-      setEnterState: () => {
-        commonCorresponding.setEnterState();
-        if (this.comingFrom !== 'prev') {
-          threeLines.moveLine1ToLine2();
-          threeLines.correspondingTranslateLine1Future(0.5);
-        }
-      },
-      transitionFromAny: (done) => {
-        if (this.comingFrom !== 'prev') {
-          threeLines.moveToFuturePositions(done);
-        } else {
-          done();
-        }
-      },
-      setSteadyState: () => {
-        if (this.comingFrom !== 'prev') {
-          threeLines.setFuturePositions();
-        }
-        commonCorresponding.setSteadyState();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          In general, |corresponding_angles| are always |equal| when the two lines being intersected are parallel.
-        </p>
-      `,
-      modifiers: {
-        corresponding_angles: click(
-          threeLines.correspondingToggleAngles, [threeLines, false, false],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |corresponding_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        corresponding_angles: highlight(colors.angleA),
-      },
-      transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.correspondingToggleAngles(false, false);
-      },
-    });
-
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    this.addSection(common, {
-      title: 'Alternate Angles',
-      setContent: `
-        <p>
-          |Alternate_angles| are the angles that are on opposite sides of the |intersecting| and |parallel_lines|.
-        </p>
-      `,
-      modifiers: {
-        Alternate_angles: click(
-          threeLines.alternateToggleAngles, [threeLines, true],
-          colors.angleA,
-        ),
-        parallel_lines: click(threeLines.pulseParallel, [threeLines], colors.line),
-        intersecting: click(threeLines.pulseLine, [threeLines, 3], colors.intersectingLine),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |Alternate_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        Alternate_angles: highlight(colors.angleA),
-      },
-      transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.alternateToggleAngles(true);
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          How can relationship between |alternate_angles| be determined?
-        </p>
-      `,
-      modifiers: {
-        alternate_angles: click(
-          threeLines.alternateToggleAngles, [threeLines, true],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |Alternate_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        Alternate_angles: highlight(colors.angleA),
-      },
-      setSteadyState: () => {
-        threeLines.alternateToggleAngles(true);
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          First, we know |corresponding_angles| are equal.
-        </p>
-      `,
-      modifiers: {
-        corresponding_angles: click(
-          threeLines.alternateShowCorrespondingAngles, [threeLines],
-          colors.angleB,
-        ),
-      },
-      setSteadyState: () => {
-        threeLines.alternateShowCorrespondingAngles();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          We also know that |opposite_angles| are equal.
-        </p>
-      `,
-      modifiers: {
-        opposite_angles: click(
-          threeLines.alternateShowOppositeAngles, [threeLines],
-          colors.angleC,
-        ),
-      },
-      setSteadyState: () => {
-        threeLines.alternateShowOppositeAngles();
-      },
-    });
-    this.addSection(common, {
-      setContent: `
-        <p>
-          Therefore |alternate_angles| are equal.
-        </p>
-      `,
-      modifiers: {
-        alternate_angles: click(
-          threeLines.alternateToggleAngles, [threeLines],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |alternate_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        alternate_angles: highlight(colors.angleA),
-      },
-      setSteadyState: () => {
-        threeLines.alternateToggleAngles();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          In general, all |alternate_angles| are equal when a line intersects with parallel lines.
-        </p>
-      `,
-      modifiers: {
-        alternate_angles: click(
-          threeLines.alternateToggleAngles, [threeLines],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |alternate_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        alternate_angles: highlight(colors.angleA),
-      },
-      transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.alternateToggleAngles();
-      },
-    });
-
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    // ************************************************************************
-    this.addSection(common, {
-      title: 'Interior Angles',
-      setContent: `
-        <p>
-          |Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.
-        </p>
-      `,
-      modifiers: {
-        Interior_angles: click(
-          threeLines.interiorToggleAngles, [threeLines, true],
-          colors.angleA,
-        ),
-        parallel: click(threeLines.pulseParallel, [threeLines], colors.line),
-        two_lines: click(threeLines.pulseParallel, [threeLines], colors.line),
-        intersecting: click(threeLines.pulseLine, [threeLines, 3], colors.intersectingLine),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |Interior_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        Interior_angles: highlight(colors.angleA),
-      },
-      transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.interiorToggleAngles(true);
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          How can the relationship between |interior_angles| be determined?
-        </p>
-      `,
-      modifiers: {
-        Interior_angles: click(
-          threeLines.interiorToggleAngles, [threeLines, true],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |interior_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        interior_angles: highlight(colors.angleA),
-      },
-      setSteadyState: () => {
-        threeLines.interiorToggleAngles(true);
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          First, we know |corresponding_angles| are equal.
-        </p>
-      `,
-      modifiers: {
-        corresponding_angles: click(
-          threeLines.interiorShowCorresponding, [threeLines],
-          colors.angleB,
-        ),
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines._angleA1.show();
-        threeLines.interiorShowCorresponding();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          We also know that |supplementary| angles add up to ${unit('|180&deg;|', '|&pi; radians|')}.
-        </p>
-      `,
-      modifiers: {
-        supplementary: click(
-          threeLines.interiorShowSupplementary, [threeLines],
-          colors.angleC,
-        ),
-      },
-      setEnterState: () => {
-        common.setEnterState();
-        diag._unitsSelector.select(diag.units);
-      },
-      show: [
-        diag._unitsSelector, ...common.show,
-      ],
-      setSteadyState: () => {
-        threeLines.interiorShowSupplementary();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          Adding the |interior| angles shows they add up to ${unit('|180&deg;|', '|&pi; radians|')}.
-        </p>
-      `,
-      modifiers: {
-        interior: click(
-          threeLines.interiorShowInterior, [threeLines],
-          colors.angleA,
-        ),
-      },
-      setEnterState: () => {
-        common.setEnterState();
-        diag._unitsSelector.select(diag.units);
-      },
-      show: [
-        diag._unitsSelector, ...common.show,
-      ],
-      setSteadyState: () => {
-        threeLines.interiorShowInterior();
-      },
-    });
-
-    this.addSection(common, {
-      setContent: `
-        <p>
-          In general, for any line intersecting any parallel lines, the |interior_angles| always add up to ${unit('|180&deg;|', '|&pi; radians|')}.
-        </p>
-      `,
-      modifiers: {
-        interior_angles: click(
-          threeLines.interiorToggleAngles, [threeLines],
-          colors.angleA,
-        ),
-      },
-      setInfo: [
-        ...oppCommon.setInfo.slice(0, 2),
-        '<li>Touch |interior_angles| text to toggle the angles.</li>',
-        ...oppCommon.setInfo.slice(2),
-      ],
-      infoModifiers: {
-        interior_angles: highlight(colors.angleA),
-      },
-      setEnterState: () => {
-        common.setEnterState();
-        diag._unitsSelector.select(diag.units);
-      },
-      show: [
-        diag._unitsSelector, ...common.show,
-      ],
-      transitionFromAny: (done) => {
-        threeLines.moveToFuturePositions(done);
-      },
-      setSteadyState: () => {
-        threeLines.setFuturePositions();
-        threeLines.interiorToggleAngles();
+      setLeaveState: () => {
+        leaveTranslationLine();
       },
     });
 
     this.addSection({
+      setContent: style({}, [
+        'Therefore comparing the |original| and |moved| line, shows |corresponding_angles| are |equal|.',
+      ]),
+      modifiers: {
+        original: click(three.pulseShaddow, [three], colors.disabled),
+        moved: click(three.randomTranslateLine, [three, null], colors.lines),
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('translate');
+          done();
+        } else if (this.comingFrom === 'next') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
+      },
+      setSteadyState: () => {
+        enterTranslateLine();
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.disabled, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.disabled, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.disabled, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+      setLeaveState: () => {
+        leaveTranslationLine();
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'In general, |corresponding_angles| are always |equal| when the two lines being intersected are |parallel|.',
+      ]),
+      modifiers: {
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else if (this.comingFrom === 'prev') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'a');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Alternate Angles',
+      setContent: [
+        '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting| and |parallel_lines|.',
+      ],
+      modifiers: {
+        Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        parallel_lines: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'How can the relationship between |alternate_angles| be determined?',
+      ],
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle2, 'g');
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.angle2, 'h');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'First, we know |corresponding_angles| are equal.',
+      ],
+      modifiers: {
+        corresponding_angles: click(three.pulseAngles, [three, null], colors.angle2),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        const afterPulse = () => {
+          three.setAngle('A1', colors.angle2, 'a');
+          three.setAngle('A2', colors.angle2, 'a');
+          three._fig._angleA1.showAll();
+          three._fig._angleA2.showAll();
+          three.updateIntersectingLineAngle();
+          three.pulseAngles(done);
+        };
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          afterPulse();
+        } else {
+          three.newPageRotation(0, 1, afterPulse);
+        }
+      },
+    });
+    this.addSection({
+      setContent: [
+        'We also know that |opposite_angles| are equal.',
+      ],
+      modifiers: {
+        opposite_angles: click(three.adjacentPulseOpposite, [three, null], colors.angle3),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        three.setAngle('A1', colors.disabled, 'a');
+        three.setAngle('A2', colors.angle3, 'a');
+        three.setAngle('C2', colors.angle3, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three._fig._angleC2.showAll();
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        three.updateIntersectingLineAngle();
+        three.adjacentPulseOpposite(done);
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore |alternate_angles| are equal.',
+      ],
+      modifiers: {
+        alternate_angles: click(three.adjacentPulseAlternate, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.disabled, 'a');
+        three.setAngle('C2', colors.angle1, 'a');
+        three._fig._angleA1.showAll();
+        three._fig._angleA2.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+        three.adjacentPulseAlternate(done);
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'In general, |alternate_angles| are always |equal| when the two lines being intersected are |parallel|.',
+      ]),
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'c');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'd');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'a');
+        three.setAngle('D1', colors.angle1, 'b');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
+      title: 'Interior Angles',
+      setContent: [
+        '|Interior_angles| are the inside angles on the same side of the |intersecting_line| that crosses |two_lines|.',
+      ],
+      modifiers: {
+        Interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three._fig._angleD1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'How can relationship between |interior_angles| be determined?',
+      ],
+      modifiers: {
+        interior_angles: click(three.toggleInterior, [three], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        done();
+      },
+      setSteadyState: () => {
+        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('B2', colors.angle2, 'f');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three._fig._angleD1.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'First, we know |corresponding_angles| are equal.',
+      ],
+      modifiers: {
+        corresponding_angles: click(three.pulseAngles, [three, null], colors.angle2),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        const afterPulse = () => {
+          three.setAngle('D1', colors.angle2, 'd');
+          three.setAngle('D2', colors.angle2, 'd');
+          three._fig._angleD1.showAll();
+          three._fig._angleD2.showAll();
+          three.updateIntersectingLineAngle();
+          three.pulseAngles(done);
+        };
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          afterPulse();
+        } else {
+          three.newPageRotation(0, 1, afterPulse);
+        }
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'We also know that |supplementary| angles add up to |_180|.',
+      ],
+      modifiers: {
+        supplementary: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.angle3),
+        _180: clickW('180º', three.interiorPulseSupplementary, [three, null], colors.angle3),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        three.setAngle('D1', colors.disabled, 'd');
+        three.setAngle('D2', colors.angle3, 'd');
+        three.setAngle('A2', colors.angle3, '180º – d');
+        three._fig._angleD1.showAll();
+        three._fig._angleD2.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+        three.interiorPulseSupplementary(done);
+      },
+    });
+
+    this.addSection({
+      setContent: [
+        'Adding the |interior| angles shows their total is |180º|.',
+      ],
+      modifiers: {
+        interior: click(three.interiorPulseinterior, [three, null], colors.angle1),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+        }
+        three.setAngle('D1', colors.angle1, 'd');
+        three.setAngle('D2', colors.disabled, 'd');
+        three.setAngle('A2', colors.angle1, '180º – d');
+        three._fig._angleD1.showAll();
+        three._fig._angleD2.showAll();
+        three._fig._angleA2.showAll();
+        three.updateIntersectingLineAngle();
+        three.interiorPulseinterior(done);
+      },
+    });
+
+    this.addSection({
+      setContent: style({}, [
+        'In general, for any |line| intersecting any |parallel| lines, the |interior_angles| always add up to |180º|.',
+      ]),
+      modifiers: {
+        interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+        line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto' || this.comingFrom === 'next') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A2', colors.angle1, '180º – d');
+        three.setAngle('B2', colors.angle1, '180º – c');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three._fig._angleA2.showAll();
+        three._fig._angleD1.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    // ************************************************************************
+    this.addSection({
       title: 'Conculsion',
-      setContent: centerV(`
-        <p>
-          When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding| and |alternate| and |interior| angles can be used to find all angles in the system.
-        </p>
-        <p>
-          However, you don't necessarily need to remember these relationships to use them.
-        </p>
-        <p>
-          If you forget, you can always figure them out, just using |supplementary angles|!
-        </p>
-      `),
+      setContent: style({ centerV: true }, [
+        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding| and |alternate| and |interior| angles can be used to find all angles in the system.',
+        'However, you don\'t necessarily need to remember these relationships to use them.',
+        'If you forget, you can always figure them out, just using |supplementary_angles|!',
+      ]),
+      modifiers: {
+        supplementary_angles: click(this.showQR, [this, 'adjacent_angles', 'Supplementary'], colors.diagram.action),
+      },
     });
   }
 }

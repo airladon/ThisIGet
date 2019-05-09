@@ -1,8 +1,7 @@
 @import '../../../geometry';
 
 $colors: (
-  lines:             map-get($geometry_colors, lines),
-  //
+  sides:             color('blue', 'base'),
   areaTri:           color('diagram', 'construction6', 'darkest'),
   areaTriLabel:      color('diagram', 'construction6'),
   areaPoly:          color('diagram', 'construction6', 'darkest'),
@@ -15,7 +14,10 @@ $colors: (
   radius:            color('diagram', 'construction7'),
   circumference:     color('diagram', 'disabledDark'),
   //
-  grid:              color('diagram', 'disabled', 'darkest'),
+  disabled:          color('grey', 'darker'),
+  disabledLabel:     color('grey', 'base'),
+  //
+  grid:              color('grey', 'darker'),
 );
 
 body {

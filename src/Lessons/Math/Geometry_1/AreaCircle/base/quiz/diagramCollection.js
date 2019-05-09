@@ -2,14 +2,13 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
+import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonLessonDiagramCollection from '../common/diagramCollection';
 // eslint-disable-next-line import/no-cycle
 import QuizCollection from './diagramCollectionQuiz';
 
 const { Transform } = Fig;
-
-export default class DiagramCollection extends CommonLessonDiagramCollection {
+export default class DiagramCollection extends CommonDiagramCollection {
   _quiz: QuizCollection;
 
   constructor(

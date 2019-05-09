@@ -1,18 +1,27 @@
 // @flow
+// import Fig from 'figureone';
 import {
-  LessonContent, interactiveItem,
-} from '../../../../../../js/Lesson/LessonContent';
-import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+  PresentationLessonContent,
+  // interactiveItem,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import DiagramCollection from './diagramCollection';
+
+// const {
+//   click,
+//   centerV,
+//   highlight,
+//   clickWord,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -26,32 +35,14 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
+    const quiz = diag._quiz;
+    // const main = quiz._main;
 
     this.addSection({
-      title: 'Quiz',
-      setContent: `
-        <p>
-          Calculate the unknown angle in the quadrangle.
-        </p>
-      `,
-      setInfo: [
-        '<ul>',
-        '<li>Touch the grey box to enter the angle, then touch the |check| button to check the answer.</li>',
-        '</ul>',
-      ],
-      interactiveElements: [
-        interactiveItem(diag._check),
-      ],
-      show: [
-        diag._input, diag._quad,
-      ],
-      setEnterState: () => {
-        diag.calculateFuturePositions();
-      },
+      setContent: ['Find the unknown angle:'],
+      show: [quiz._quad],
       setSteadyState: () => {
-        diag.showCheck();
-        diag.setFuturePositions();
-        diag.updateAngles();
+        quiz.newProblem();
       },
     });
   }

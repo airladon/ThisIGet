@@ -1,7 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import type { TypeDiagramOptions } from 'figureone';
-import Lesson from '../../js/Lesson/Lesson';
+// import Lesson from '../../js/Lesson/Lesson';
+// eslint-disable-next-line import/no-cycle
 import CommonDiagramCollection from './DiagramCollection';
 
 const { Diagram, Rect } = Fig;
@@ -9,12 +10,12 @@ const { joinObjects } = Fig.tools.misc;
 
 export type TypeCommonLessonDiagram = {
   layout: {};
-  lesson: Lesson;
+  lesson: Object;
 } & Diagram;
 
 export default class CommonLessonDiagram extends Diagram {
   layout: Object;
-  lesson: Lesson;
+  lesson: Object;
   // $FlowFixMe
   elements: CommonDiagramCollection;
 

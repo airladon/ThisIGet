@@ -1,25 +1,24 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import {
-  LessonContent,
-} from '../../../../../../js/Lesson/LessonContent';
-// import {
-//   click, highlight,
-// } from '../../../../../../js/tools/htmlGenerator';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+  PresentationLessonContent,
+} from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
+import Definition from '../../../../../LessonsCommon/tools/definition';
 
-const { click, highlight } = Fig.tools.html;
+// const {
+//   click,
+//   centerV,
+// } = Fig.tools.html;
 
 const layout = lessonLayout();
-const { colors } = layout;
 
-class Content extends LessonContent {
+class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.details.title;
     this.iconLink = imgLink;
@@ -33,37 +32,21 @@ class Content extends LessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const tri = diag._triangle;
+    const coll = diag._collection;
+    const total = coll._totalAngle;
 
     this.addSection({
-      title: 'Summary',
-      setContent: `
-        <p>
-          A |Triangle| is a shape with |three sides|, and |three angles|. All the angles within a triangle add up to 180º.
-        </p>
-        ${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html('id_lesson__related_angles_definition', 'lesson__definition_lowest')}
-      `,
-      modifiers: {
-        Triangle: click(tri.randomize, [tri], colors.line),
-      },
-      setInfo: [
-        '<ul>',
-        '<li>Drag the triangle corners or touch the |Triangle| text to change the triangle\'s shape.</li>',
-        '</ul>',
+      title: '',
+      setContent: [
+        'A |triangle| is a shape that has |three sides| and |three angles|. All the angles within a triangle add up to |180º|.',
+        `${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html()}`,
       ],
-      infoModifiers: {
-        Triangle: highlight(colors.line),
-      },
       setEnterState: () => {
-        tri._triangle.hasTouchableElements = true;
-        tri._triangle.autoShowAngles = true;
+        coll.updateTotalAngles();
       },
-      show: [tri],
-      hide: [
-        tri._line1,
-        tri._line2,
-        tri._angleA,
-        tri._angleB,
+      show: [
+        total._fixedTriangle._line,
+        total._angleC, total._angleB, total._angleA,
       ],
     });
   }

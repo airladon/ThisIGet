@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'First explanation of Topic.',
+  title: 'Initial',
+  description: 'Initial Explanation - Presentation Format.',
   uid: 'base',
   qr: [
     'Asa',
@@ -12,7 +12,7 @@ var details = {
     'Aas',
     'Aaa',
     'Ssa',
-    'Main',
+    'CongruentTriangles',
   ],
 };
 
