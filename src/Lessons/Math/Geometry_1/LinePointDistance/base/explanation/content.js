@@ -311,19 +311,29 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
+    this.addSection({
       title: 'Summary',
-      setContent: 'So the distance between a |point| and a |line| is the |shortest distance|. When the point is |closest| to a line end, then the distance is between the |point and line end|. When the point is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between point and line. ',
+      setContent: 'So the distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between |point___| and |line_|. ',
       modifiers: {
-        point: click(coll.pulsePoint, [coll], colors.points),
+        point: click(coll.pulsePoints, [coll], colors.points),
+        point_: click(coll.pulsePointEnd, [coll], colors.points),
+        point__: click(coll.pulsePoint, [coll], colors.points),
+        point___: click(coll.pulsePoint, [coll], colors.points),
         line: click(coll.pulseLine, [coll], colors.lines),
+        line_: click(coll.pulseLine, [coll], colors.lines),
         perpendicular_line: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+        point_and_line_end: click(coll.pulseDistanceEnd, [coll], colors.distance2),
+        line_end: click(coll.pulseEnd, [coll], colors.lines),
       },
       setEnterState: () => {
         fig.setScenario('low');
+        fig._point.setScenario('default');
+        coll.padUpdated();
+        coll.hypotPadUpdated();
       },
       show: [
         fig._point, fig._line, fig._perpendicular, fig._rightAngle,
+        fig._pointEnd, fig._distanceEnd, fig._end,
       ],
     });
   }
