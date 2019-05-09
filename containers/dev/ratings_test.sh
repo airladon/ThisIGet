@@ -1,13 +1,12 @@
 #!/bin/bash
 
-# browser_test.sh                    http://host.docker.internal:5003
-# browser_test.sh local              http://host.docker.internal:5003
-# browser_test.sh dev                https://thisiget-dev.herokuapp.com
-# browser_test.sh test               https://thisiget-test.herokuapp.com
-# browser_test.sh beta               https://thisiget-beta.herokuapp.com
-# browser_test.sh prod               https://thisiget.com
-# browser_test.sh <SITE>             SITE
-# browser_test.sh <SITE> -u          SITE updating jest snap shots
+# ratings_test.sh                    http://host.docker.internal:5003
+# ratings_test.sh local              http://host.docker.internal:5003
+# ratings_test.sh dev                https://thisiget-dev.herokuapp.com
+# ratings_test.sh test               https://thisiget-test.herokuapp.com
+# ratings_test.sh beta               https://thisiget-beta.herokuapp.com
+# ratings_test.sh prod               https://thisiget.com
+# ratings_test.sh <SITE>             SITE
 
 # Setup colors and text formatting
 red=`tput setaf 1`
@@ -30,22 +29,6 @@ check_status() {
     echo "${bold}${green}OK${reset}"
   fi
 }
-
-# --entrypoint "/home/pptruser/node_modules/.bin/jest" \
-# docker_run_browser_test() {
-#     echo $2 $3 $4
-#     docker run -it --rm \
-#         -v $HOST_PATH/tests/browser:/home/pptruser/tests \
-#         -v $HOST_PATH/src:/home/pptruser/src \
-#         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
-#         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \
-#         -v $HOST_PATH/.babelrc:/home/pptruser/.babelrc \
-#         -e TIG_ADDRESS=$1 \
-#         --name devenv-browser-test \
-#         --entrypoint "npm" \
-#         airladon/pynode:python3.7.3-node12.1.0-npm6.9.0-puppeteer \
-#         "run" "jest" "--" $2 $3 $4 "--runInBand"
-# }
 
 title() {
     echo
