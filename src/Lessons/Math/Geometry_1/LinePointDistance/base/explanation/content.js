@@ -47,6 +47,9 @@ class Content extends PresentationLessonContent {
     let common = {
       setEnterState: () => {
         fig.setScenario('default');
+        fig._point.setScenario('default');
+        coll.padUpdated();
+        coll.hypotPadUpdated();
       },
     };
     this.addSection(common, {
@@ -90,22 +93,53 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection(common, {
-      title: 'Perpendicular Distance',
-      setContent: 'Is there a |relationship| between the |point| and |line| at the |shortest| distance?',
+    let content = {
+      setContent: 'If the point is closest to a |line_end|, then the |shortest| distance will simply be the |distance between point and end|.',
+    };
+
+    this.addSection(common, content, {
+      title: 'Point Closest to Line End',
       modifiers: {
-        shortest: click(coll.moveMeasurement, [coll, 0, null], colors.distance),
+        shortest: click(coll.moveMeasurement, [coll, layout.p1.x, null], colors.distance),
+        line_end: click(coll.pulseEnd, [coll], colors.lines),
       },
-      show: [fig._point, fig._line, fig._distance],
+      show: [fig._point, fig._line, fig._distance, fig._end],
       transitionFromPrev: (done) => {
-        coll.moveMeasurement(0, done);
+        fig.animations.cancelAll();
+        fig.animations.new()
+          .scenarios({ target: 'end', duration: 1 })
+          .whenFinished(done)
+          .start();
       },
       setSteadyState: () => {
-        fig._distance._pad.setPosition(layout.mid);
+        fig.setScenarios('end');
       },
     });
 
-    let content = {
+    this.addSection(common, {
+      title: 'Point Not Closest to Line End',
+      setContent: 'However if the point is |not| closest to a line end, is there a |relationship| between the |point| and |line| at the |shortest| distance?',
+      modifiers: {
+        shortest: highlight(colors.distance),
+      },
+      setEnterState: () => {
+        fig.setScenario('default');
+      },
+      show: [fig._point, fig._line],
+      transitionFromPrev: (done) => {
+        fig.animations.cancelAll();
+        fig.animations.new()
+          .scenarios({ target: 'default', velocity: 2 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        fig._distance._pad.setPosition(layout.mid);
+        fig._point.setScenario('default');
+      },
+    });
+
+    content = {
       setContent: 'To investigate this, lets start by |drawing_a_line| connecting the |point| to the |original_line| at a |right_angle|.',
     };
     this.addSection(common, content, {
@@ -275,11 +309,11 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: 'Summary',
-      setContent: 'So the distance between a |point| and a |line| is the |shortest distance|. When one of the line\'s ends is not the closest part to the point, then the shortest distance is the |perpendicular| from the line to the point. ',
+      setContent: 'So the distance between a |point| and a |line| is the |shortest distance|. When the point is |closest| to a line end, then the distance is between the |point and line end|. When the point is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between point and line. ',
       modifiers: {
         point: click(coll.pulsePoint, [coll], colors.points),
         line: click(coll.pulseLine, [coll], colors.lines),
-        perpendicular: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+        perpendicular_line: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
       },
       setEnterState: () => {
         fig.setScenario('low');

@@ -30,6 +30,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     _hypot: { _label: DiagramElementPrimative } & DiagramObjectLine;
     _base: DiagramObjectLine;
     _hypotPad: DiagramElementPrimative;
+    _end: DiagramElementPrimative;
   } & DiagramElementCollection;
 
   constructor(
@@ -84,6 +85,11 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseHypotLabel(done: ?() => void = null) {
     this._fig._hypot._label.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEnd() {
+    this._fig._end.pulseScaleNow(1, 10);
     this.diagram.animateNextFrame();
   }
 

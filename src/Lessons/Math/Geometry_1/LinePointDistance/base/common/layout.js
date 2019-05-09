@@ -28,6 +28,7 @@ export default function lessonLayout() {
   const mid = new Point(0, -0.7);
 
   layout.mid = mid;
+  layout.p1 = p1;
 
   const point = {
     name: 'point',
@@ -38,6 +39,12 @@ export default function lessonLayout() {
       color: colors.points,
       fill: true,
       position: p0,
+    },
+    mods: {
+      scenarios: {
+        default: { position: p0 },
+        end: { position: p0.add(p1.x - 0.4, 0) },
+      },
     },
   };
 
@@ -73,6 +80,7 @@ export default function lessonLayout() {
           isMovable: true,
           scenarios: {
             default: { position: p1.add(0.2, 0) },
+            end: { position: p1 },
           },
         },
       },
@@ -177,10 +185,22 @@ export default function lessonLayout() {
     },
   };
 
+  const end = {
+    name: 'end',
+    method: 'polygon',
+    options: {
+      color: colors.lines,
+      radius: 0.01,
+      sides: 100,
+      position: p1,
+    },
+  };
+
   const fig = {
     name: 'fig',
     method: 'collection',
     addElements: [
+      end,
       hypotPad,
       point,
       line,
