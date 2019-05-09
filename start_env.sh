@@ -143,6 +143,7 @@ else
   docker run -it --rm \
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \

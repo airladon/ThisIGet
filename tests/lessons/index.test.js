@@ -2,6 +2,7 @@
 import 'babel-polyfill';
 import getLessonIndex from '../../src/Lessons/LessonsCommon/lessonindex';
 
+const fs = require('fs');
 const fetch = require('node-fetch');
 
 const getData = async (url) => {
@@ -14,24 +15,13 @@ const getData = async (url) => {
   }
 };
 
-const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
+function getAddress() {
+  const content = fs.readFileSync('/opt/app/tests/lessons/tig_address', 'utf8');
+  return content.slice(0, -1);      // remove the carrige return
+}
 
-// export default function ratingTester(...topics) {
-//   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-//   const uid = fullPath.split('/').slice(-3, -2);
-//   const version = fullPath.split('/').slice(-2, -1);
-//   const allTests = [];
-//   topics.forEach((topic) => {
-//     allTests.push([topic]);
-//   });
-//   describe(`Ratings tester ${uid}/${version}`, () => {
-//     test.each(allTests)('%s', async (topic) => {
-//       const result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
-//       console.log(result)
-//       expect(result.status).toBe('ok');
-//     });
-//   });
-// }
+// const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
+const sitePath = getAddress();
 
 const allTests = [];
 const index = getLessonIndex();
@@ -52,7 +42,6 @@ describe('Lesson ratings', () => {
   test.each(allTests)(
     '%s/%s/%s', async (uid, topic, version) => {
       const result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
-      // console.log(result)
       expect(result.status).toBe('ok');
     },
   );
