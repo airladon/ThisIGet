@@ -50,5 +50,5 @@ fi
 title "Running tests on $TIG_ADDRESS"
 # docker_run_browser_test "$TIG_ADDRESS" $2 $3 $4
 echo $TIG_ADDRESS > /opt/app/tests/lessons/tig_address
-jest index.test.js
+jest --config /opt/app/jest.index.config.js index.test.js
 

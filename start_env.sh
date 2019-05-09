@@ -149,6 +149,7 @@ else
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
     -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
+    -v $PROJECT_PATH/containers/dev/jest.index.config.js:/opt/app/jest.index.config.js \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
