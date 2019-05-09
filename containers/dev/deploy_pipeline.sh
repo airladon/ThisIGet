@@ -47,6 +47,10 @@ title "Delay for thisiget-test to restart"
 sleep 5s
 check_status
 
+title "Ratings Test: thisiget-test"
+./ratings_test.sh test
+check_status
+
 title "Browser Tests: thisiget-test"
 ./browser_test.sh test
 check_status
@@ -60,8 +64,12 @@ title "Delay for thisiget-beta to restart"
 sleep 5s
 check_status
 
+title "Ratings Test: thisiget-beta"
+./ratings_test.sh beta
+check_status
+
 title "Browser Tests: thisiget-beta"
-./browser_test.sh beta
+./browser_test.sh beta prod.btest.js
 check_status
 
 ###########################################################################
@@ -74,8 +82,12 @@ title "Delay for thisiget to restart"
 sleep 5s
 check_status
 
+title "Ratings Test: thisiget"
+./ratings_test.sh prod
+check_status
+
 title "Browser Tests: thisiget"
-./browser_test.sh prod
+./browser_test.sh prod prod.btest.js
 if [ $? != 0 ];
 then
     heroku rollback $CURRENT_VERSION

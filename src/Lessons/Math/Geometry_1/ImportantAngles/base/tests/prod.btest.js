@@ -8,9 +8,7 @@ tester(
       1: { threshold: 0.005 },
     },
   },
-  'explanation',
-  // 'summary',
-  // [
-  //   ['explanation', 3, [1, 5]],
-  // ],
+  [
+    ['explanation', 1, [1]],
+  ],
 );
