@@ -17,7 +17,7 @@ const {
   click,
   // clickW,
   highlight,
-  // centerV,
+  centerV,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -33,9 +33,10 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
-    // this.loadQRs([
-    //   'qr_names_here',
-    // ]);
+    this.loadQRs([
+      'right_angle_triangles',
+      'triangle_introduction',
+    ]);
   }
 
   addSections() {
@@ -139,6 +140,135 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => {
         coll.pulsePerpendicularLabel(done);
       },
+    });
+
+    const common = {
+      setEnterState: () => {
+        fig._hypotPad.setScenario('default');
+      },
+    };
+    content = {
+      setContent: 'Now draw a |second_line| that is |not perpendicular| and labeled |h|.',
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        second_line: this.bindNext(colors.distance),
+        h: this.bindNext(colors.distance),
+      },
+      show: [fig._point, fig._line, fig._perpendicular, fig._rightAngle],
+    });
+    this.addSection(common, content, {
+      modifiers: {
+        second_line: click(coll.drawHypotenuse, [coll, null], colors.distance),
+        h: click(coll.pulseHypotLabel, [coll, null], colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+      ],
+      transitionFromPrev: (done) => {
+        coll.drawHypotenuse(done);
+      },
+    });
+
+    content = {
+      setContent: 'These two lines create a |right_angle_triangle|.',
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        right_angle_triangle: this.bindNext(colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+      ],
+    });
+    this.addSection(common, content, {
+      modifiers: {
+        right_angle_triangle: click(coll.pulseRightAngleTriangle, [coll, null], colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+        fig._base,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseRightAngleTriangle(done);
+      },
+    });
+
+    content = {
+      setContent: 'Now, we know for a |right_angle_triangle| that the |hypotenuse| is the side opposite the |right_angle|, and is always the longest side.',
+    };
+    this.addSection(common, content, {
+      modifiers: {
+        right_angle: click(coll.pulseRightAngle, [coll], colors.distance),
+        hypotenuse: click(coll.pulseHypotLabel, [coll, null], colors.distance),
+        right_angle_triangle: this.bindShowQR('right_angle_triangles/base', 'Main'),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+        fig._base,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: 'Therefore |h| is the hypotenuse, and it is longer than |d|.',
+      modifiers: {
+        d: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+        h: click(coll.pulseHypotLabel, [coll, null], colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+        fig._base,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: 'No matter what line we draw for |h|, it is always the hypotenuse of the right angle triangle, and so the perpendicular line |d| will always be the |shortest distance|.',
+      modifiers: {
+        d: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
+        h: click(coll.moveHypot, [coll, null], colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
+        fig._hypotPad, fig._base,
+      ],
+    });
+
+    this.addSection(common, {
+      title: 'Number of Perpendicular Lines',
+      setContent: 'Can there be |more than one| perpendicular line between the point and the original line?',
+      show: [
+        fig._point, fig._line, fig._perpendicular._line, fig._rightAngle,
+      ],
+    });
+
+    this.addSection(common, {
+      setContent: 'As the original line is straight, then |any| two lines between the point and the line must form a triangle.',
+      modifiers: {
+        any: click(coll.moveHypot, [coll, null], colors.distance),
+      },
+      show: [
+        fig._point, fig._line, fig._perpendicular._line, fig._rightAngle,
+        fig._hypot._line,
+        fig._hypotPad, fig._base,
+      ],
+    });
+    this.addSection(common, {
+      setContent: centerV([
+        'A |triangle| has three angles that add up to 180º, therefore |only one angle| in a triangle can be |90º|.',
+        'A triangle |cannot| be made with two lines perpendicular to a third line, as the total angle would be larger than 180º.',
+      ]),
+      modifiers: {
+        triangle: this.bindShowQR('triangle_introduction/base', 'Main'),
+      },
+    });
+
+    this.addSection(common, {
+      title: 'Summary',
+      setContent: 'So a ',
+      setEnterState: () => {},
+      show: [
+        fig._point, fig._line, fig._perpendicular._line, fig._rightAngle,
+      ],
     });
   }
 }

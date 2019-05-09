@@ -108,6 +108,7 @@ export default function lessonLayout() {
         text: 'd',
         location: 'left',
         offset: 0.05,
+        linePosition: 0.6,
       },
     },
   };
@@ -117,7 +118,7 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       p1: mid,
-      p2: mid.add(0.5, 0),
+      p2: mid.add(0.75, 0),
       color: colors.distance,
       width: 0.01,
     },
@@ -128,9 +129,35 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       p1: p0,
-      p2: mid.add(0.5, 0),
+      p2: mid.add(0.75, 0),
       color: colors.distance,
       width: 0.01,
+      label: {
+        text: 'h',
+        location: 'top',
+        offset: 0.05,
+      },
+    },
+  };
+
+  const hypotPad = {
+    name: 'hypotPad',
+    method: 'polygon',
+    options: {
+      color: [0, 0, 0, 0.001],
+      radius: 0.5,
+      sides: 30,
+      position: p1,
+    },
+    mods: {
+      move: {
+        limitLine: new Line(p1, p2),
+      },
+      isTouchable: true,
+      isMovable: true,
+      scenarios: {
+        default: { position: [0.75, 0] },
+      },
     },
   };
 
@@ -154,12 +181,13 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
+      hypotPad,
       point,
       line,
       distance,
       perpendicular,
       rightAngle,
-      hypot, 
+      hypot,
       base,
     ],
   };
