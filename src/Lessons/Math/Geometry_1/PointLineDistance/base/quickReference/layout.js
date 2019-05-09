@@ -85,10 +85,10 @@ export default function lessonLayout() {
       width: 0.01,
       label: {
         text: 'd',
-        scale: 1.6,
+        scale: 1.4,
         location: 'left',
         offset: 0.05,
-        linePosition: 0.6,
+        linePosition: 0.5,
       },
     },
   };
@@ -103,10 +103,10 @@ export default function lessonLayout() {
       width: 0.01,
       label: {
         text: 'd',
-        scale: 1.6,
+        scale: 1.4,
         location: 'top',
         offset: 0.05,
-        linePosition: 0.6,
+        linePosition: 0.5,
       },
     },
   };
