@@ -13,7 +13,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'summary',
           ],
@@ -40,7 +39,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'summary',
           ],
@@ -65,7 +63,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -93,7 +90,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -119,7 +115,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -145,7 +140,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -175,7 +169,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -207,7 +200,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'summary',
           ],
@@ -232,7 +224,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'summary',
           ],
@@ -257,7 +248,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -283,7 +273,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
           ],
@@ -313,7 +302,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
           ],
           qr: [
@@ -358,7 +346,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -385,7 +372,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -411,7 +397,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -437,7 +422,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -463,7 +447,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'summary',
           ],
@@ -490,7 +473,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -519,7 +501,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -548,7 +529,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -641,7 +621,6 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
-            'dev',
             'explanation',
             'quiz',
             'summary',
