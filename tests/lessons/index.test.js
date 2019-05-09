@@ -40,6 +40,7 @@ Object.keys(index).forEach((lessonName) => {
 describe('Lesson ratings', () => {
   test.each(allTests)(
     '%s/%s/%s', async (uid, topic, version) => {
+      jest.setTimeout(60000);
       const result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
       expect(result.status).toBe('ok');
     },
