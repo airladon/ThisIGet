@@ -24428,6 +24428,11 @@ function () {
   }
 
   _createClass(Line, [{
+    key: "_dup",
+    value: function _dup() {
+      return new Line(this.p1, this.p2);
+    }
+  }, {
     key: "getPoint",
     value: function getPoint() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;

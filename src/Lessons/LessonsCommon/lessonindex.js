@@ -13,6 +13,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'summary',
           ],
@@ -39,6 +40,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'summary',
           ],
@@ -63,6 +65,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -90,6 +93,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -115,6 +119,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -140,6 +145,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -169,6 +175,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -200,6 +207,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'summary',
           ],
@@ -224,6 +232,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'summary',
           ],
@@ -248,6 +257,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -273,6 +283,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
           ],
@@ -302,6 +313,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
           ],
           qr: [
@@ -346,6 +358,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -361,6 +374,32 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    line_point_distance: new LessonDescription({
+      name: 'Line Point Distance',
+      path: '/Lessons/Math/Geometry_1/LinePointDistance',
+      uid: 'line_point_distance',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Presentation.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'quiz',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'right_angle_triangles',
+      ],
+      enabled: true,
+    }),
     parallel_lines: new LessonDescription({
       name: 'Parallel Lines',
       path: '/Lessons/Math/Geometry_1/ParallelLines',
@@ -372,6 +411,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -397,6 +437,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -422,6 +463,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -447,6 +489,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'summary',
           ],
@@ -473,6 +516,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -501,6 +545,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -529,6 +574,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
@@ -577,17 +623,6 @@ export default function getLessonIndex() {
       ],
       enabled: false,
     }),
-    line_point_distance: new LessonDescription({
-      name: 'Line Point Distance',
-      path: '/Lessons/Math/Geometry_1/ToDo/LineAndPoint',
-      uid: 'line_point_distance',
-      versions: {
-      },
-      dependencies: [
-        'right_angle_triangles',
-      ],
-      enabled: false,
-    }),
     parallel_line_distance: new LessonDescription({
       name: 'Parallel Line Distance',
       path: '/Lessons/Math/Geometry_1/ToDo/ParallelLineDistance',
@@ -621,6 +656,7 @@ export default function getLessonIndex() {
           path: 'base',
           onPath: true,
           topics: [
+            'dev',
             'explanation',
             'quiz',
             'summary',
