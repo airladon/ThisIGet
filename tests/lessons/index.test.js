@@ -20,7 +20,6 @@ function getAddress() {
   return content.slice(0, -1);      // remove the carrige return
 }
 
-// const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 const sitePath = getAddress();
 
 const allTests = [];
