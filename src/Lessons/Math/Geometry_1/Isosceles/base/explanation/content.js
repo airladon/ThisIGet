@@ -372,14 +372,14 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         right._angleBase.autoRightAngle = true;
         right._angleBase.update();
-        left._angleTop.setColor(colors.disabled);
-        right._angleTop.setColor(colors.disabled);
+        // left._angleTop.setColor(colors.disabled);
+        // right._angleTop.setColor(colors.disabled);
         // split._line.setColor(colors.disabled);
       },
       setLeaveState: () => {
         right._angleBase.autoRightAngle = false;
-        left._angleTop.setColor(colors.angles);
-        right._angleTop.setColor(colors.angles);
+        // left._angleTop.setColor(colors.angles);
+        // right._angleTop.setColor(colors.angles);
         // split._line.setColor(colors.sides);
       },
     });
