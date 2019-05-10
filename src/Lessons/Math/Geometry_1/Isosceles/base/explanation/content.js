@@ -191,7 +191,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'These two triangles have the same |Side-Angle-Side| combination are therefore, |congruent|.',
+        'These two triangles have the same |Side-Angle-Side| combination, and are therefore |congruent|.',
       ],
       modifiers: {
         'Side-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Sas'], colors.diagram.action),

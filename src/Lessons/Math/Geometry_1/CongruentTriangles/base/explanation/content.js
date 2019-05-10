@@ -662,7 +662,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ top: 0 }, [
-        'When the |adjacent| side is |shorter| than or equal to the |opposite| side, onle |one triangle| can ever be formed.',
+        'When the |adjacent| side is |shorter| than or equal to the |opposite| side, only |one triangle| can ever be formed.',
       ]),
       modifiers: {
         adjacent: click(ssa.pulseAdjacent, [ssa], colors.sides),
@@ -715,7 +715,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'To summarize, if we know an |angle| an |adjacent side| and an |opposite side| of a triangle, then we can uniquely create just one triangle if the |adjacent side is shorter than the opposite side|.',
+        'To summarize, if we know an |angle|, an |adjacent side|, and an |opposite side| of a triangle, then we can uniquely create just one triangle if the |adjacent side is shorter than or equal to the opposite side|.',
         'If the adjacent side is longer than the opposite side, then up to two triangles might be possible.',
       ]),
     });
