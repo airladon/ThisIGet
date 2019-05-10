@@ -96,7 +96,7 @@ class Content extends PresentationLessonContent {
     // ******************************************************************
     common = {
       setContent: [
-        'The |sides are also related| to each other. The first relationship can be seen from looking at the |angle| the opposite sides |A| and |C| make with |D|.',
+        'The |sides are also related| to each other. The first relationship can be seen from looking at the |angles| the opposite sides |A| and |C| make with |D|.',
       ],
       show: [
         rect._left, rect._right, rect._top, rect._bottom,
