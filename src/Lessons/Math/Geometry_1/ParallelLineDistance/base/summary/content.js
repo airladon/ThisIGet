@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
@@ -9,18 +9,18 @@ import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
 
-// const {
+const {
 //   style,
-//   click,
+  click,
 //   clickW,
 //   highlight,
 //   centerV,
-// } = Fig.tools.html;
+} = Fig.tools.html;
 
 const layout = lessonLayout();
-// const { colors } = layout;
+const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -35,31 +35,27 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
+    const topLine = fig._topLine;
+    const bottomLine = fig._bottomLine;
+    const middleLine = fig._middleLine;
+    const topMiddleAngle = fig._topMiddleAngle;
+    const bottomMiddleAngle = fig._bottomMiddleAngle;
 
     this.addSection({
-      title: '',
+      title: 'Summary',
       setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
+        'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
       ],
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
+      show: [
+        topLine, bottomLine, middleLine, topMiddleAngle, bottomMiddleAngle,
       ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      modifiers: {
+        line_perpendicular: click(coll.pulseMiddleLineAndAngles, [coll], colors.distance),
+        parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.lines),
+      },
     });
   }
 }

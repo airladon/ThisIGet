@@ -244,7 +244,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Summary',
       setContent: [
-        'We can therefore conclude that the distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines',
+        'We can therefore conclude that the distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
       ],
       show: [
         topLine, bottomLine, middleLine, topMiddleAngle, bottomMiddleAngle,
