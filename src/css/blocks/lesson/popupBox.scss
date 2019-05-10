@@ -109,7 +109,7 @@
   padding-bottom: calc(var(--lesson__popup_font_size) * 0.2);
   padding-top: calc(var(--lesson__popup_font_size) * 0.2);
   max-height: calc(var(--pres__content_height) * 0.4);
-  overflow: scroll;
+  overflow-y: scroll;
   color: color('diagram', 'qr-text');
   font-size: calc(var(--lesson__popup_font_size) * 0.5);
 }

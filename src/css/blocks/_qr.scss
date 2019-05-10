@@ -24,7 +24,8 @@ $qrHeight: 0.8;
 
 .lesson__qr__overlay .lesson__popup_box__content {
   height: calc(var(--lesson__qr_height) * 0.8);
-  overflow: scroll;
+  overflow-y: scroll;
+  float: left;
 }
 
 .lesson__qr_container {

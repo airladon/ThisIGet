@@ -5,7 +5,7 @@ import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import details from '../../details';
 import version from '../version';
-import CommonCollection from '../common/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const { Transform, Rect } = Fig;
 // const {
