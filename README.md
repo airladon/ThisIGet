@@ -605,7 +605,7 @@ Run browser tests a second time to ensure the snap shots created in the last run
 * Back in the dev container, run ratings and browser tests
   * `./ratings_tests.sh dev`
   * `./browser_tests.sh local <LESSON_REGEX>`
-* If ratings_tests failed and you needed to update the database, then the test and beta/prod database will also need to be updated. Test it by:
+* Test ratings test on test and beta sites as well:
   * `./ratings_tests.sh test`
   * `./ratings_tests.sh beta`
 * If the dev site looks good, create a pull request into master.

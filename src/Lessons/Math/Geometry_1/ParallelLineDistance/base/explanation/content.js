@@ -1,23 +1,24 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import {
   PresentationLessonContent,
+  // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-import lessonLayout from './layout';
+// import Definition from '../../../../../LessonsCommon/tools/definition';
+import lessonLayout from '../common/layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-import Definition from '../../../../../LessonsCommon/tools/definition';
+import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-// const {
-//   style,
-//   click,
-//   clickW,
-//   highlight,
-//   centerV,
-// } = Fig.tools.html;
+const {
+  // style,
+  // click,
+  // clickW,
+  // highlight,
+  centerV,
+} = Fig.tools.html;
 
 const layout = lessonLayout();
 // const { colors } = layout;
@@ -32,18 +33,17 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
+    // this.loadQRs([
+    //   'qr_names_here',
+    // ]);
   }
 
   addSections() {
     // const diag = this.diagram.elements;
-    // const coll = diag._collection;
+    // const collection = diag._collection;
 
-    this.addSection({
-      title: '',
-      setContent: [
-        'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
-      ],
+    const common = {
+      setContent: '',
       modifiers: {},
       // setInfo: `
       //     <ul>
@@ -60,6 +60,13 @@ class Content extends PresentationLessonContent {
       hide: [],
       setSteadyState: () => {},
       setLeaveState: () => {},
+    };
+
+    this.addSection(common, {
+      title: '',
+      setContent: centerV([
+        '',
+      ]),
     });
   }
 }

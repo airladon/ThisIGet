@@ -9,7 +9,7 @@ import CommonCollection from './collection';
 
 const { Transform, Rect } = Fig;
 const {
-  // click,
+  click,
 //   highlight,
 //   clickWord,
 } = Fig.tools.html;

@@ -5,7 +5,7 @@ var details = {
   title: 'Parallel Line Distance',
   uid: 'parallel_line_distance',
   dependencies: ['point_line_distance'],
-  enabled: false,
+  enabled: true,
 };
 
 module.exports = {
