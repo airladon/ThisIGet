@@ -313,8 +313,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: 'Summary',
-      setContent: style({ size: 0.9}, [
-        'So the distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between |point___| and |line_|. '
+      setContent: style({ size: 0.9 }, [
+        'So the distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between |point___| and |line_|. ',
       ]),
       modifiers: {
         point: click(coll.pulsePoints, [coll], colors.points),

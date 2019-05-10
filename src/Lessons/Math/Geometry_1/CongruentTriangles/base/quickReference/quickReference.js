@@ -106,7 +106,6 @@ export class QRAaa extends PopupBoxCollection {
     congruent._tri2._side01.hide();
     congruent._tri2._side12.hide();
     congruent._tri2._side20.hide();
-    
     congruent._tri1.setScenario('qrLeftAaa');
     congruent._tri2.setScenario('qrRightAaa');
     this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
