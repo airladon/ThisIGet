@@ -39,34 +39,22 @@ class Content extends PresentationLessonContent {
   }
 
   addSections() {
-    // const diag = this.diagram.elements;
-    // const collection = diag._collection;
+    const diag = this.diagram.elements;
+    const coll = diag._collection;
+    const fig = coll._fig;
 
     const common = {
-      setContent: '',
-      modifiers: {},
-      // setInfo: `
-      //     <ul>
-      //       <li></li>
-      //     </ul>
-      // `,
-      infoModifiers: {},
-      interactiveElements: [
-        // interactiveItem(quiz._check),
-      ],
-      setEnterState: () => {},
-      showOnly: [],
-      show: [],
-      hide: [],
-      setSteadyState: () => {},
-      setLeaveState: () => {},
+      setEnterState: () => {
+        coll.resetColors();
+      },
     };
 
     this.addSection(common, {
-      title: '',
+      title: 'Introduction',
       setContent: centerV([
         '',
       ]),
+      show: [fig],
     });
   }
 }
