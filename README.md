@@ -251,7 +251,7 @@ This is best done locally outside of a container. You will need to have:
 
 #### Start from scratch all DBs update:
 
-Local SQL
+##### Local SQL
 ```
 export FLASK_APP=app/my_app.py
 rm app/app/app.db
@@ -264,7 +264,7 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-Local Postgress
+##### Local Postgress
 ```
 psql -c 'drop database thisiget_local'
 psql -c 'create database thisiget_local'
@@ -274,24 +274,7 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-Test
-```
-tools/get_config_vars.sh thisiget-test
-```
-Copy paste exports
-```
-tools/reset_and_prepopulate_database.sh thisiget-test
-unset SECRET_KEY
-unset AES_KEY
-unset PEPPER
-unset DATABASE_URL
-unset MAIL_PASSWORD
-unset MAIL_SENDER
-unset MAIL_SERVER
-unset MAIL_USERNAME
-```
-
-Dev
+##### Dev
 ```
 tools/get_config_vars.sh thisiget-dev
 ```
@@ -308,7 +291,24 @@ unset MAIL_SERVER
 unset MAIL_USERNAME
 ```
 
-Beta
+##### Test
+```
+tools/get_config_vars.sh thisiget-test
+```
+Copy paste exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-test
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
+
+##### Beta
 ```
 tools/get_config_vars.sh thisiget-beta
 ```
