@@ -54,9 +54,9 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       title: 'Introduction',
-      setContent: [
+      setContent: style({ top: 0 }, [
         'There are some triangles where the |longest_side|’s |opposite_angle| is the |largest| angle in the triangle, and the |shortest_side|’s |_opposite_angle| is the |smallest| angle in a triangle.',
-      ],
+      ]),
       modifiers: {
         _opposite_angle: click(coll.pulseSmallestAngle, [coll], colors.angles),
         shortest_side: click(coll.pulseShortestSide, [coll], colors.sides),

@@ -15,6 +15,7 @@ const {
   highlight,
   click,
   clickWord,
+  style,
 //   centerV,
 } = Fig.tools.html;
 
@@ -39,11 +40,11 @@ class Content extends PresentationLessonContent {
     const congruent = coll._congruentTriangles;
 
     this.addSection({
-      setContent: [
+      setContent: style({ top: 0 }, [
         'Shapes are |congruent| when they are the |same size and shape|. Triangles are congruent when they have the same set of |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
         `${new Definition('Congruent', 'Latin', ['congruent', 'agreeing, meeting together']).html()}
       `,
-      ],
+      ]),
       modifiers: {
         side_lengths: highlight(colors.sides),
         angles: highlight(colors.angles),
@@ -68,7 +69,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         `<p class="lesson__font_0p9">
-          |All sides and angles can be measured| to show two triangles are congruent. There are also some combinations of |three properties| that can show congruency.
+          There are also some combinations of |three properties| that can show congruency.
         </p>
         <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40" style="margin-top: 3%">
         <b>CAN</b> guarantee congruency.

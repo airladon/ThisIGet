@@ -990,9 +990,9 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     this.addSection({
       title: 'Side Side Side',
-      setContent: style({ centerV: true }, [
+      setContent: style({ centerV: true, size: 0.9 }, [
         'We have now seen whether we can determine congruency from |most| combinations of |three properties| including:',
-        style({ left: 3, list: 'unordered' }, [
+        style({ left: 3, list: 'unordered', size: 0.9 }, [
           'All angles - |Angle-Angle-Angle|',
           'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',
           'Two angles and a side - |Angle-Side-Angle| and |Angle-Angle-Side|',

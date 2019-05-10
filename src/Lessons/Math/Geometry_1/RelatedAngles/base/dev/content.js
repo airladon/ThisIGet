@@ -7,6 +7,7 @@ import version from '../version';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import '../common/style.scss';
 
 const { click } = Fig.tools.html;
 const layout = lessonLayout();

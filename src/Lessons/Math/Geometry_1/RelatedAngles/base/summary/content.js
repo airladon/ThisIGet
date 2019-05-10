@@ -64,13 +64,17 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: 'Corresponding Angles',
-      setContent: style({ left: 5, right: 55, centerV: true }, [
+      setContent: style({
+        left: 5, right: 55, centerV: true, size: 0.9,
+      }, [
         '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
         'When the two lines are |parallel|, corresponding angles are always |equal|.',
+        'Similarly, if corresponding angles are |equal|, then the two lines are always |parallel_|.',
       ]),
       modifiers: {
         Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         parallel: click(three.pulseParallel, [three], colors.lines),
+        parallel_: click(three.pulseParallel, [three], colors.lines),
         two_lines: click(three.pulseParallel, [three], colors.lines),
         intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       },
@@ -95,15 +99,19 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: 'Alternate Angles',
-      setContent: style({ left: 5, right: 55, centerV: true }, [
+      setContent: style({
+        left: 5, right: 55, size: 0.9, centerV: true,
+      }, [
         '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
         'When the two lines are |parallel|, the alternate angles are always |equal|.',
+        'Similarly, if alternate angles are |equal|, then the two lines are always |parallel_|.',
       ]),
       modifiers: {
         Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
         intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
         parallel: click(three.pulseParallel, [three], colors.lines),
+        parallel_: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       setSteadyState: () => {
@@ -124,15 +132,19 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: 'Interior Angles',
-      setContent: style({ left: 5, right: 55, centerV: true }, [
+      setContent: style({
+        left: 5, right: 55, size: 0.9, centerV: true,
+      }, [
         '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
         'When the two lines are |parallel|, the interior angles always add to |180º|.',
+        'Similarly, if interior angles are |add to 180º|, then the two lines are always |parallel_|.',
       ]),
       modifiers: {
         Interior_angles: click(three.toggleInterior, [three], colors.angle1),
         intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
         two_lines: click(three.pulseParallel, [three], colors.lines),
         parallel: click(three.pulseParallel, [three], colors.lines),
+        parallel_: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       setSteadyState: () => {

@@ -41,7 +41,7 @@ class Content extends PresentationLessonContent {
     const pyth = fig._pythagorusSquare;
 
     this.addSection({
-      setContent: style({ top: 0 }, [
+      setContent: style({ top: 0, size: 0.9 }, [
         'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
         'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
       ]),

@@ -26301,6 +26301,10 @@ function style() {
       marginRight = "margin-right:".concat(options.right, "%;");
     }
 
+    if (options.centerV) {
+      marginTop = 'margin-top:0;';
+    }
+
     if (options.top != null) {
       marginTop = "margin-top:".concat(options.top, "%;");
     }
