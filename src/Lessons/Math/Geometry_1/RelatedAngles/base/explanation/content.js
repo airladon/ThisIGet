@@ -560,8 +560,8 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: style({}, [
-        'Similarly, if the |corresponding_angles| of |two_lines| being intersected by a |third_line| are equal, then you know the two lines have the |same rotation|, and are therefore |parallel|.',
+      setContent: style({ top: 0 }, [
+        'Similarly, if the |corresponding_angles| of |two_lines| being intersected by a |third_line| are |equal|, then the two lines have the |same rotation|, and are therefore |parallel|.',
       ]),
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),

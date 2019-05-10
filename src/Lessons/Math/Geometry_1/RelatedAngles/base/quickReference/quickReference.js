@@ -95,11 +95,13 @@ export class QRCorresponding extends PopupBoxCollection {
       two_lines: click(three.pulseParallel, [three], colors.lines),
       intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
       corresponding_angles_are_always_equal: highlight(colors.angle3),
+      two_lines_are_always_parallel: highlight(colors.angle3),
     };
     this.setTitle('Corresponding Angles');
     this.setDescription([
       '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting| line.',
       'When the two lines are |parallel|, |corresponding_angles_are_always_equal|.',
+      'If corresponding angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }

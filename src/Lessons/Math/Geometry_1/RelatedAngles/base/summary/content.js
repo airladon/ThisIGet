@@ -67,11 +67,12 @@ class Content extends PresentationLessonContent {
       setContent: style({ left: 5, right: 55, centerV: true }, [
         '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
         'When the two lines are |parallel|, corresponding angles are always |equal|.',
-        'Similarly, if corresponding angles are |equal|, then the two lines are always |parallel|.',
+        'Similarly, if corresponding angles are |equal|, then the two lines are always |parallel_|.',
       ]),
       modifiers: {
         Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         parallel: click(three.pulseParallel, [three], colors.lines),
+        parallel_: click(three.pulseParallel, [three], colors.lines),
         two_lines: click(three.pulseParallel, [three], colors.lines),
         intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       },
