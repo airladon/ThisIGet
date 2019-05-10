@@ -2,10 +2,10 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Line Point Distance',
-  uid: 'line_point_distance',
+  title: 'Point to Line Distance',
+  uid: 'point_line_distance',
   dependencies: ['right_angle_triangles'],
-  enabled: false,
+  enabled: true,
 };
 
 module.exports = {

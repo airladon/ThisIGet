@@ -4,7 +4,7 @@
 var details = {
   title: 'Parallel Line Distance',
   uid: 'parallel_line_distance',
-  dependencies: ['line_point_distance'],
+  dependencies: ['point_line_distance'],
   enabled: false,
 };
 
