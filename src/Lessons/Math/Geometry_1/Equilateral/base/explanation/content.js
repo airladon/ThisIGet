@@ -113,7 +113,7 @@ class Content extends PresentationLessonContent {
 
     const common = {
       setContent: [
-        'We know all the angles of a |triangle| sum to |_180|. Therefore, each angle must be a |third_of_180|, which is |_60|',
+        'We know all the angles of a |triangle| sum to |_180|. Therefore, each angle must be a |third_of_180|, which is |_60|.',
       ],
       modifiers: {
         _180: highlightWord('180º', colors.angles),

@@ -348,7 +348,7 @@ class Content extends PresentationLessonContent {
     });
 
     content = {
-      setContent: style({ top: 0 }, ['At each |point| where two triangles touch, angles |a|, |b| and the |inside_shape| are |supplementary| angles. As |_a| and |_b| sum to 90º, the remaining angle is then also |90º|.']),
+      setContent: style({ top: 0, size: 0.9 }, ['At each |point| where two triangles touch, angles |a|, |b| and the |inside_shape| are |supplementary| angles. As |_a| and |_b| sum to 90º, the remaining angle is then also |90º|.']),
     };
     this.addSection(common, content, {
       modifiers: {

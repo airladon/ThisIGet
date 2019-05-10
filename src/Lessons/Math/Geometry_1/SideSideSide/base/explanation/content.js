@@ -51,7 +51,7 @@ class Content extends PresentationLessonContent {
       ]),
     });
     this.addSection({
-      setContent: style({ centerV: true }, [
+      setContent: style({ centerV: true, size: 0.9 }, [
         'For instance, if two triangles share the same |two angles|, and |one relatively positioned side|, then they are |congruent|. These cases are called the |Angle-Side-Angle| and |Angle-Angle-Side| congruency tests.',
         'If the triangles share the same angle and adjacent two sides (|Side-Angle-Side|), they are also congruent.',
         'If triangles share the same angle, adjacent side and opposite side (|Side-Side-Angle|) they are congruent only when the adjacent side is shorter than or equal to the opposite side.',
