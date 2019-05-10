@@ -107,7 +107,7 @@ export class QRCorresponding extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -164,17 +164,19 @@ export class QRAlternate extends PopupBoxCollection {
       two_lines: click(three.pulseParallel, [three], colors.lines),
       parallel: click(three.pulseParallel, [three], colors.lines),
       alternate_angles_are_always_equal: highlight(colors.angle3),
+      two_lines_are_always_parallel: highlight(colors.angle3),
     };
     this.setTitle('Alternate Angles');
     this.setDescription([
       '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
       'When the two lines are |parallel|, the |alternate_angles_are_always_equal|.',
+      'If alternate angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -231,17 +233,19 @@ export class QRInterior extends PopupBoxCollection {
       two_lines: click(three.pulseParallel, [three], colors.lines),
       parallel: click(three.pulseParallel, [three], colors.lines),
       interior_angles_always_add_to_180º: highlight(colors.angle3),
+      two_lines_are_always_parallel: highlight(colors.angle3),
     };
     this.setTitle('Interior Angles');
     this.setDescription([
       '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
       'When the two lines are |parallel|, the |interior_angles_always_add_to_180º|.',
+      'If interior angles are |add to 180º|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();

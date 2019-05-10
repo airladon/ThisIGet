@@ -768,6 +768,38 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'Similarly, if |alternate_angles| are |equal|, then you can use the reverse procedure to show the |corresponding angles are equal|, and therefore the two lines are |parallel|.',
+      ]),
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A1', colors.angle1, 'a');
+        three.setAngle('A2', colors.angle1, 'c');
+        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('B2', colors.angle1, 'd');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C2', colors.angle1, 'a');
+        three.setAngle('D1', colors.angle1, 'b');
+        three.setAngle('D2', colors.angle1, 'd');
+        three._fig._angleA1.showAll();
+        three._fig._angleC2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
     // ************************************************************************
     // ************************************************************************
     // ************************************************************************
@@ -909,6 +941,34 @@ class Content extends PresentationLessonContent {
         interior_angles: click(three.toggleInterior, [three], colors.angle1),
         parallel: click(three.pulseParallel, [three], colors.lines),
         line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+      },
+      show: [three._fig._line1, three._fig._line3, three._fig._line2],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto' || this.comingFrom === 'next') {
+          three.setScenarios('center');
+          done();
+        } else {
+          three.newPageRotation(0, 1, done);
+        }
+      },
+      setSteadyState: () => {
+        three.setAngle('A2', colors.angle1, '180º – d');
+        three.setAngle('B2', colors.angle1, '180º – c');
+        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('D1', colors.angle1, 'd');
+        three._fig._angleA2.showAll();
+        three._fig._angleD1.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'Similarly, if the |interior_angles| add to 180º, then you can use the reverse procedure to show the |corresponding angles are equal|, and  therefore the two lines being intersected are |parallel|.',
+      ]),
+      modifiers: {
+        interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        parallel: click(three.pulseParallel, [three], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
       transitionFromAny: (done) => {
