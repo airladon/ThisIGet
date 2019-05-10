@@ -278,9 +278,9 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
-      setContent: [
-        '|Diameter| is often used when measuring a circle, as it can be easier to measure. In comparison, |radius| is often used when using a circle\'s properties in more complex problems, as it can make the math simpler.',
-      ],
+      setContent: style({ top: 0 }, [
+        '|Diameter| is often used when measuring a circle, as it can be easier to measure. |Radius| is often used when relating a circle\'s properties as it can make the math simpler.',
+      ]),
       modifiers: {
         Diameter: highlight(colors.diameter),
       },
@@ -449,7 +449,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'Therefore the relationship between |diameter| and |cicumference| is:',
+        'So the relationship between |diameter| and |cicumference| is:',
       ],
       modifiers: {
         diameter: click(circ.pulseDiameter, [circ], colors.diameter),
