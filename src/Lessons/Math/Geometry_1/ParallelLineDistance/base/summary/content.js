@@ -46,9 +46,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       title: 'Summary',
-      setContent: [
-        'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
-      ],
+      setContent: 'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
       show: [
         topLine, bottomLine, middleLine, topMiddleAngle, bottomMiddleAngle,
       ],

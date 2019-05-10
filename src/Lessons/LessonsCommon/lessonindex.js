@@ -379,9 +379,9 @@ export default function getLessonIndex() {
       path: '/Lessons/Math/Geometry_1/ParallelLineDistance',
       uid: 'parallel_line_distance',
       versions: {
-        Version_uid_here: {
-          title: 'Version_title_here',
-          description: 'Explanation_of_version_here.',
+        base: {
+          title: 'Base',
+          description: 'Base explanation.',
           path: 'base',
           onPath: true,
           topics: [

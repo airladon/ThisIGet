@@ -1,7 +1,9 @@
-@import '../../../../../../css/color';
+@import '../../../geometry';
 
 $colors: (
-  // lines:                       color('blue'),
+  qrLines:               color('blue'),
+  qrDistance:            color('yellow'),
+  qrAngles:              color('yellow'),
 );
 
 body {

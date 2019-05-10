@@ -14,7 +14,7 @@ const {
 //   clickWord,
 } = Fig.tools.html;
 
-export default class QRMain extends PopupBoxCollection {
+export default class QRParallelLineDistance extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -31,22 +31,26 @@ export default class QRMain extends PopupBoxCollection {
     );
     this.hasTouchableElements = true;
 
-    // const coll = this._collection;
-    // const { colors } = this.layout;
+    const coll = this._collection;
+    const { colors } = this.layout;
+
     const modifiers = {
+      line_perpendicular: click(coll.pulseMiddleLineAndAngles, [coll], colors.qrDistance),
+      parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.qrLines),
     };
-    this.setTitle('');
+    this.setTitle('Parallel Line Distance');
     this.setDescription([
+      'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
     ], modifiers);
     this.setLink(details.details.uid);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
+
     coll.showAll();
-    // coll.setScenarios('qr');
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
@@ -60,7 +64,7 @@ function attachQuickReference1() {
     window.quickReference[details.details.uid] = {};
   }
   window.quickReference[details.details.uid][version.details.uid] = {
-    Main: QRMain,
+    Main: QRParallelLineDistance,
   };
 }
 
