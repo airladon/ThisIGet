@@ -193,23 +193,32 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   showLargeSquareArea() {
+    const { isShown } = this._fig._pythagorusSquare._largeSquareArea;
     this.hideAreas();
-    this._fig._pythagorusSquare._largeSquareArea.show();
+    if (!isShown) {
+      this._fig._pythagorusSquare._largeSquareArea.show();
+    }
     this.diagram.animateNextFrame();
   }
 
   showSmallSquareArea() {
+    const { isShown } = this._fig._pythagorusSquare._smallSquareArea;
     this.hideAreas();
-    this._fig._pythagorusSquare._smallSquareArea.show();
+    if (!isShown) {
+      this._fig._pythagorusSquare._smallSquareArea.show();
+    }
     this.diagram.animateNextFrame();
   }
 
   showTriangleAreas() {
+    const { isShown } = this._fig._pythagorusSquare._bottomLeftArea;
     this.hideAreas();
-    this._fig._pythagorusSquare._bottomLeftArea.show();
-    this._fig._pythagorusSquare._bottomRightArea.show();
-    this._fig._pythagorusSquare._topLeftArea.show();
-    this._fig._pythagorusSquare._topRightArea.show();
+    if (!isShown) {
+      this._fig._pythagorusSquare._bottomLeftArea.show();
+      this._fig._pythagorusSquare._bottomRightArea.show();
+      this._fig._pythagorusSquare._topLeftArea.show();
+      this._fig._pythagorusSquare._topRightArea.show();
+    }
     this.diagram.animateNextFrame();
   }
 
