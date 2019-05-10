@@ -47,7 +47,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       // title: 'External ',
       setContent: [
-        'An |exterior_angle| or |external_angle| is the angle between a |side| of a shape and an adjacent side |extended_outwards|.',
+        'An |external_angle| (also called |exterior_angle|) is the angle between a |side| of a shape and an adjacent side |extended_outwards|.',
       ],
       modifiers: {
         side: click(coll.pulseAdjacent, [coll], colors.sides),
