@@ -45,6 +45,7 @@ class Content extends PresentationLessonContent {
     const tri = coll._triangle;
 
     this.addSection({
+      title: 'Equilateral Triangle',
       setContent: [
         'A triangle that has all |three sides| the |same length| is called an |equilateral| triangle.',
         `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html()}`,
@@ -100,6 +101,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      title: 'Angle Relationship',
       setContent: [
         'Next we can consider the |relationship| between an equilateral triangle\'s |angles|.',
       ],
