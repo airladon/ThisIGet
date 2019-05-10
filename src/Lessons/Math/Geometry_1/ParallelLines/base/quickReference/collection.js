@@ -4,17 +4,26 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const {
-  // DiagramElementPrimative,
+  DiagramElementPrimative,
   // DiagramObjectAngle,
-  // DiagramObjectLine,
-  // DiagramElementCollection,
+  DiagramObjectLine,
+  DiagramElementCollection,
   // DiagramObjectPolyLine,
   // Equation,
   Transform,
 } = Fig;
 
 export default class QRCollection extends CommonDiagramCollection {
-  _markings: DiagramElementCollection;
+  _markings: {
+    _l1: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+    } & DiagramElementCollection;
+    _l2: {
+      _line: DiagramObjectLine;
+      _mark: DiagramElementPrimative;
+    } & DiagramElementCollection;
+  } & DiagramElementCollection;
 
   constructor(
     diagram: CommonLessonDiagram,
