@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
-  Point,
+  // Point,
   // Transform,
   // Line,
 } = Fig.tools.g2;
@@ -18,7 +18,7 @@ const cssColorNames = [
 export default function lessonLayout() {
   const layout: Object = baseLayout();
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
-  const { colors } = layout;
+  // const { colors } = layout;
   layout.addElements = [];
   return layout;
 }

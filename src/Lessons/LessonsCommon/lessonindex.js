@@ -374,6 +374,31 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    parallel_line_distance: new LessonDescription({
+      name: 'Parallel Line Distance',
+      path: '/Lessons/Math/Geometry_1/ParallelLineDistance',
+      uid: 'parallel_line_distance',
+      versions: {
+        base: {
+          title: 'Base',
+          description: 'Base explanation.',
+          path: 'base',
+          onPath: true,
+          topics: [
+            'dev',
+            'explanation',
+            'summary',
+          ],
+          qr: [
+            'Main',
+          ],
+        },
+      },
+      dependencies: [
+        'point_line_distance',
+      ],
+      enabled: true,
+    }),
     parallel_lines: new LessonDescription({
       name: 'Parallel Lines',
       path: '/Lessons/Math/Geometry_1/ParallelLines',
@@ -619,17 +644,6 @@ export default function getLessonIndex() {
       },
       dependencies: [
         'right_angle_triangles',
-      ],
-      enabled: false,
-    }),
-    parallel_line_distance: new LessonDescription({
-      name: 'Parallel Line Distance',
-      path: '/Lessons/Math/Geometry_1/ToDo/ParallelLineDistance',
-      uid: 'parallel_line_distance',
-      versions: {
-      },
-      dependencies: [
-        'point_line_distance',
       ],
       enabled: false,
     }),

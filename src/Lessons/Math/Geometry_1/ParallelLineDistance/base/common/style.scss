@@ -1,0 +1,14 @@
+@import '../../../geometry';
+
+$colors: (
+  lines:               color('blue'),
+  distance:            color('yellow'),
+  points:              color('yellow'),
+  angles:              color('yellow'),
+  disabled:            color('grey', 'darker'),
+  rectangle:           color('green'),
+);
+
+body {
+  @include color_vars($colors);
+}

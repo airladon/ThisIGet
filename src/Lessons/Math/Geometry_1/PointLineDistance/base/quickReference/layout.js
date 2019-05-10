@@ -1,6 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
+import './style.scss';
 
 const {
   Point,

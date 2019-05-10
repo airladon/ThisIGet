@@ -42,7 +42,7 @@ class Content extends PresentationLessonContent {
       title: '',
       setContent: [
         'Summary',
-        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html('id_lesson__isosceles_definition')}`,
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
       ],
       modifiers: {},
       // setInfo: `

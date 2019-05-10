@@ -251,7 +251,7 @@ This is best done locally outside of a container. You will need to have:
 
 #### Start from scratch all DBs update:
 
-Local SQL
+##### Local SQL
 ```
 export FLASK_APP=app/my_app.py
 rm app/app/app.db
@@ -264,7 +264,7 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-Local Postgress
+##### Local Postgress
 ```
 psql -c 'drop database thisiget_local'
 psql -c 'create database thisiget_local'
@@ -274,24 +274,7 @@ python ./tools/update_lessons_db.py
 python ./tools/prepopulate.py
 ```
 
-Test
-```
-tools/get_config_vars.sh thisiget-test
-```
-Copy paste exports
-```
-tools/reset_and_prepopulate_database.sh thisiget-test
-unset SECRET_KEY
-unset AES_KEY
-unset PEPPER
-unset DATABASE_URL
-unset MAIL_PASSWORD
-unset MAIL_SENDER
-unset MAIL_SERVER
-unset MAIL_USERNAME
-```
-
-Dev
+##### Dev
 ```
 tools/get_config_vars.sh thisiget-dev
 ```
@@ -308,7 +291,24 @@ unset MAIL_SERVER
 unset MAIL_USERNAME
 ```
 
-Beta
+##### Test
+```
+tools/get_config_vars.sh thisiget-test
+```
+Copy paste exports
+```
+tools/reset_and_prepopulate_database.sh thisiget-test
+unset SECRET_KEY
+unset AES_KEY
+unset PEPPER
+unset DATABASE_URL
+unset MAIL_PASSWORD
+unset MAIL_SENDER
+unset MAIL_SERVER
+unset MAIL_USERNAME
+```
+
+##### Beta
 ```
 tools/get_config_vars.sh thisiget-beta
 ```
@@ -605,7 +605,7 @@ Run browser tests a second time to ensure the snap shots created in the last run
 * Back in the dev container, run ratings and browser tests
   * `./ratings_tests.sh dev`
   * `./browser_tests.sh local <LESSON_REGEX>`
-* If ratings_tests failed and you needed to update the database, then the test and beta/prod database will also need to be updated. Test it by:
+* Test ratings test on test and beta sites as well:
   * `./ratings_tests.sh test`
   * `./ratings_tests.sh beta`
 * If the dev site looks good, create a pull request into master.
