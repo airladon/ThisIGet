@@ -28,7 +28,7 @@ export default function lessonLayout() {
   // const linewidth = 0.03;
   const wheelSize = 0.8;
   const wheelPoints = 50;
-  const textureFile = `/static/dist/${textureMap}`;
+  const textureFile = `${textureMap}`;
   const left = new Point(-1, -0.4);
   const center = new Point(0, -0.4);
   const right = new Point(1, -0.4);

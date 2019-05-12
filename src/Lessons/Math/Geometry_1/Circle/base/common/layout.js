@@ -34,7 +34,7 @@ export default function lessonLayout() {
   // ///////////////////////////////////////////////////////////////
   let radius = 1;
   const sides = 50;
-  const textureFile = `/static/dist/${textureMap}`;
+  const textureFile = `${textureMap}`;
   const lineWidth = 0.08;
   const scenarios = {
     moreLeft: { position: new Point(-2, -0.4), scale: 0.7 },

@@ -29,7 +29,7 @@ export default function lessonLayout() {
   // const linewidth = 0.03;
   const radius = 0.9;
   const sides = 50;
-  const textureFile = `/static/dist/${textureMap}`;
+  const textureFile = `${textureMap}`;
   const lineWidth = 0.05;
   const dimensionWidth = 0.015;
 
