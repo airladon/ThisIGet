@@ -354,7 +354,7 @@ export default class LessonComponent extends React.Component
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <LessonTitle
-          imgLink={`/${this.lesson.content.iconLinkGrey}`}
+          imgLink={`${this.lesson.content.iconLinkGrey}`}
           key='1'
           label={this.lesson.content.title}
           />
