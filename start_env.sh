@@ -154,6 +154,7 @@ else
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
     -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
+    -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \
