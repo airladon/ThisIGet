@@ -216,6 +216,15 @@ module.exports = (env) => {
           ],
         },
         {
+          test: /\.(md)$/,
+          use: [
+            'html-loader',
+            {
+              loader: 'markdown-loader',
+            },
+          ],
+        },
+        {
           test: /\.(png|jpg|gif)$/,
           use: [
             {

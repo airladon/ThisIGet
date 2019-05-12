@@ -320,6 +320,17 @@ export default function getLessonIndex() {
             'Abstraction',
           ],
         },
+        introduction_markdown: {
+          title: 'Markdown',
+          description: 'Markdown generated.',
+          path: 'markdown',
+          onPath: true,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
         initial_not_interactive: {
           title: 'Simple',
           description: 'Not interactive.',
