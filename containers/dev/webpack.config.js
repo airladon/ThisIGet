@@ -2,7 +2,7 @@ const path = require('path');
 const entryPoints = require('./getLessons.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
-const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
+// const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
@@ -110,21 +110,21 @@ module.exports = (env) => {
   //   allChunks: true,
   // });
 
-  const copy = new CopyWebpackPlugin(
-    [
-      {
-        from: '/opt/app/src/Lessons/*/*/topic.png',
-        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-        test: /\/opt\/app\/src\/(.*)topic\.png$/,
-      },
-      // {
-      //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
-      //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
-      //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
-      // },
-    ],
-    // { debug: 'debug' },
-  );
+  // const copy = new CopyWebpackPlugin(
+  //   [
+  //     {
+  //       from: '/opt/app/src/Lessons/*/*/topic.png',
+  //       to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+  //       test: /\/opt\/app\/src\/(.*)topic\.png$/,
+  //     },
+  //     // {
+  //     //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
+  //     //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
+  //     //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
+  //     // },
+  //   ],
+  //   // { debug: 'debug' },
+  // );
 
   let cssMini = '';
   if (e.uglify) {
@@ -142,7 +142,7 @@ module.exports = (env) => {
     uglify,
     define,
     extract,
-    copy,
+    // copy,
     clean,
     cssMini].filter(elem => elem !== '');
 
@@ -233,37 +233,40 @@ module.exports = (env) => {
               //   name: '[path][hash].[ext]'
               // }
               options: {
-                name(file) {
-                  // if (env === 'development') {
-                  //   return '[path][name].[ext]'
-                  // }
-                  // let newPath = file.replace('/opt/app/src/', '');
-                  // // newPath = newPath.replace('/tile.png', '');
-                  // newPath = newPath.replace(/\/[^/]*$/, '');
-                  // // console.log(newPath)
-                  // return `${newPath}/[name].[ext]`;
-                  return '[path][name].[ext]';
-                },
-                publicPath: (url, resourcePath, context) => {
-                  // `resourcePath` is original absolute path to asset
-                  // `context` is directory where stored asset (`rootContext`) or `context` option
+                // name(file) {
+                //   // if (env === 'development') {
+                //   //   return '[path][name].[ext]'
+                //   // }
+                //   // let newPath = file.replace('/opt/app/src/', '');
+                //   // // newPath = newPath.replace('/tile.png', '');
+                //   // newPath = newPath.replace(/\/[^/]*$/, '');
+                //   // // console.log(newPath)
+                //   // return `${newPath}/[name].[ext]`;
+                //   return '[path][name].[ext]';
+                // },
+                // publicPath: (url, resourcePath, context) => {
+                //   // `resourcePath` is original absolute path to asset
+                //   // `context` is directory where stored asset (`rootContext`) or `context` option
 
-                  // To get relative path you can use
-                  // const relativePath = path.relative(context, resourcePath);
+                //   // To get relative path you can use
+                //   // const relativePath = path.relative(context, resourcePath);
 
-                  // if (/my-custom-image\.png/.test(resourcePath)) {
-                  //   return `other_public_path/${url}`;
-                  // }
+                //   // if (/my-custom-image\.png/.test(resourcePath)) {
+                //   //   return `other_public_path/${url}`;
+                //   // }
 
-                  // if (/images/.test(context)) {
-                  //   return `image_output_path/${url}`;
-                  // }
-                  let newPath = url.replace('/opt/app/src/', '');
-                  // newPath = newPath.replace('/tile.png', '');
-                  newPath = newPath.replace(/\/[^/]*$/, '');
-                  console.log(url, newPath, resourcePath, context)
-                  return `/static/dist/${newPath}`;
-                },
+                //   // if (/images/.test(context)) {
+                //   //   return `image_output_path/${url}`;
+                //   // }
+                //   // let newPath = url.replace('/opt/app/src/', '');
+                //   // // newPath = newPath.replace('/tile.png', '');
+                //   // newPath = newPath.replace(/\/[^/]*$/, '');
+                //   // console.log(url, newPath, resourcePath, context)
+                //   // return `/static/dist/${newPath}`;
+                //   return `/static/dist/`;
+                // },
+                name: '[path][name].[ext]',
+                publicPath: '/static/dist/',
               },
             },
           ],
