@@ -2,11 +2,11 @@ const path = require('path');
 const entryPoints = require('./getLessons.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin'); // eslint-disable-line import/no-unresolved
-// const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
+const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-line import/no-unresolved
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+// const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
@@ -267,6 +267,7 @@ module.exports = (env) => {
                 // },
                 name: '[path][name].[ext]',
                 publicPath: '/static/dist/',
+                context: '/opt/app/src',
               },
             },
           ],
