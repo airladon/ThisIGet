@@ -6,7 +6,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin'); // eslint-disable-li
 const webpack = require('webpack'); // eslint-disable-line import/no-unresolved
 const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disable-line import/no-unresolved
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
-// const CopyWebpackPlugin = require('copy-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
@@ -110,21 +110,21 @@ module.exports = (env) => {
   //   allChunks: true,
   // });
 
-  // const copy = new CopyWebpackPlugin(
-  //   [
-  //     {
-  //       from: '/opt/app/src/Lessons/*/*/topic.png',
-  //       to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-  //       test: /\/opt\/app\/src\/(.*)topic\.png$/,
-  //     },
-  //     // {
-  //     //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
-  //     //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
-  //     //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
-  //     // },
-  //   ],
-  //   // { debug: 'debug' },
-  // );
+  const copy = new CopyWebpackPlugin(
+    [
+      {
+        from: '/opt/app/src/Lessons/*/*/topic.png',
+        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+        test: /\/opt\/app\/src\/(.*)topic\.png$/,
+      },
+      // {
+      //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
+      //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
+      //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
+      // },
+    ],
+    // { debug: 'debug' },
+  );
 
   let cssMini = '';
   if (e.uglify) {
@@ -142,7 +142,7 @@ module.exports = (env) => {
     uglify,
     define,
     extract,
-    // copy,
+    copy,
     clean,
     cssMini].filter(elem => elem !== '');
 
