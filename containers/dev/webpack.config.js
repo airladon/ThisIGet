@@ -237,11 +237,32 @@ module.exports = (env) => {
                   // if (env === 'development') {
                   //   return '[path][name].[ext]'
                   // }
-                  let newPath = file.replace('/opt/app/src/', '');
+                  // let newPath = file.replace('/opt/app/src/', '');
+                  // // newPath = newPath.replace('/tile.png', '');
+                  // newPath = newPath.replace(/\/[^/]*$/, '');
+                  // // console.log(newPath)
+                  // return `${newPath}/[name].[ext]`;
+                  return '[path][name].[ext]';
+                },
+                publicPath: (url, resourcePath, context) => {
+                  // `resourcePath` is original absolute path to asset
+                  // `context` is directory where stored asset (`rootContext`) or `context` option
+
+                  // To get relative path you can use
+                  // const relativePath = path.relative(context, resourcePath);
+
+                  // if (/my-custom-image\.png/.test(resourcePath)) {
+                  //   return `other_public_path/${url}`;
+                  // }
+
+                  // if (/images/.test(context)) {
+                  //   return `image_output_path/${url}`;
+                  // }
+                  let newPath = url.replace('/opt/app/src/', '');
                   // newPath = newPath.replace('/tile.png', '');
                   newPath = newPath.replace(/\/[^/]*$/, '');
-                  // console.log(newPath)
-                  return `${newPath}/[name].[ext]`;
+                  console.log(url, newPath, resourcePath, context)
+                  return `/static/dist/${newPath}`;
                 },
               },
             },
