@@ -42,34 +42,39 @@ module.exports = async function tester(callback, source, map, meta) {
     },
   });
   mjAPI.start();
-  const split = source.split('$$');
-  if (split.length === 1) {
-    callback(null, source, map, meta);
-    return;
-  }
-  const count = Math.floor(split.length / 2);
-
-  console.log(split)
-  for ([index, text] of split.entries()) {
-    console.log(index, text)
-    if (index % 2 === 0) {
+  const lines = source.split('\n').map((l) => l.trim());
+  // console.log(lines)
+  const outLines = [];
+  for ([i, line] of lines.entries()) {
+  // for ([i, line] of lines.entries()) {
+    // console.log(i, line)
+    const split = line.split('$$');
+    if (split.length === 1) {
+      outLines.push(line);
       continue;
     }
-    
-    await mjAPI.typeset({
-      math: text,
-      format: 'TeX', // or "inline-TeX", "MathML"
-      svg: true,      // or svg:true, or html:true
-    }).then((data) => {
-      split[index] = data.svg;
-      // tempCallback()
-      console.log(index);
-    });
-    console.log('done')
+    const inlineStart = '<div style="display:inline;">';
+    const inlineEnd = '</div>';
+    for ([index, text] of split.entries()) {
+      if (index % 2 === 0) {
+        continue;
+      }
+      await mjAPI.typeset({
+        math: text,
+        format: 'TeX', // or "inline-TeX", "MathML"
+        svg: true,      // or svg:true, or html:true
+      }).then((data) => {
+        split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
+      });
+    };
+    // console.log(split)
+    const combined = split.join('');
+    // console.log(combined)
+    // lines[i] = combined;
+    outLines.push(combined)
   };
-  const combined = split.join('');
-  console.log('returning')
-  callback(null, combined, map, meta);
+  // console.log(outLines)
+  callback(null, outLines.join('\n'), map, meta);
 }
 
 

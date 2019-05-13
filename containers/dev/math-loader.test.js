@@ -6,7 +6,11 @@ const callback = (a, b, c, d) => {
 
 const c = async () => {
   const a = 'asdf';
-  await mathloader(callback, 'This is a $$mc ^ 2$$ so there');
+  // await mathloader(callback, `
+  //     This is a $$c ^ 2$$ so there
+  //     Hello $$c ^ 2$$ World
+  //   `);
+  await mathloader(callback, 'hello $$e = mc^2$$ there')
 };
 
 c();
