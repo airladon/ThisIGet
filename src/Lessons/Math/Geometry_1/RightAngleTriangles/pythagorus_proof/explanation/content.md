@@ -24,9 +24,9 @@ The side length of the large square is $$\color{lessonBlue}A+B$$ and so the area
 
 As $$\color{lessonBlue}e$$ is a right-angle, then the inside shape is also a square with area $$\color{lessonBlue}C^2$$.
 
-Each right angle triangle has an area of $$\color{lessonBlue}\textstyle{\frac{1}{2}}AB$$
+Each right angle triangle has an area of $$\color{lessonBlue}\textstyle{\frac{1}{2}}AB$$.
 
-The area of the triangles and the small square is the same as the area of the large square:
+The large square's area is the sum of the four triangles and the smaller square:
 
 $$\color{lessonBlue}\(A+B\)^2 = 4\textstyle{\frac{1}{2}}AB + C^2$$
 
@@ -36,6 +36,8 @@ $$\color{lessonBlue} A^2 + 2AB + B^2 = 2AB + C^2$$
 
 Subtract $$\color{lessonBlue}2AB$$ from both sides:
 
-$$\color{lessonBlue} A^2 + B^2 = C^2$$
+$$\color{lessonBlue} \bbox[20px,border:1px solid red]{A^2 + B^2 = C^2}$$
 
-And so the 
+And so for a right angle triangle the sum of the squares of the perpendicular sides is equal to the square of the hypotenuse. This can also be visulaized as squares made from the edges of the right angle triangle:
+
+![](./ThreeTriangles.png)
