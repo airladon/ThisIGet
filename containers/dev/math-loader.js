@@ -33,7 +33,6 @@ async function tester(callback, source, map, meta) {
     callback(null, source, map, meta);
     return;
   }
-  const count = Math.floor(split.length / 2);
 
   for ([index, text] of split.entries()) {
     if (index % 2 === 0) {
@@ -49,7 +48,29 @@ async function tester(callback, source, map, meta) {
     });
   };
   const combined = split.join('');
-  callback(null, combined, map, meta);
+
+  const inlineSplit = combined.split('%%');
+  if (inlineSplit.length === 1) {
+    callback(null, combined, map, meta);
+    return;
+  }
+
+  for ([index, text] of inlineSplit.entries()) {
+    if (index % 2 === 0) {
+      continue;
+    }
+    
+    await mjAPI.typeset({
+      math: text,
+      format: 'inline-TeX', // or "inline-TeX", "MathML"
+      svg: true,      // or svg:true, or html:true
+    }).then((data) => {
+      inlineSplit[index] = data.svg;
+    });
+  };
+  const inlineCombined = inlineSplit.join('');
+
+  callback(null, inlineCombined, map, meta);
 }
 
 module.exports = function(source, map, meta) {
