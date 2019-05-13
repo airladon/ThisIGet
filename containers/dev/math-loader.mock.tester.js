@@ -30,8 +30,15 @@ module.exports = async function mathparser(callback, source, map, meta) {
         math: text,
         format: 'TeX', // or "inline-TeX", "MathML"
         svg: true,      // or svg:true, or html:true
+        extensions: 'color.js'
       }).then((data) => {
-        split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
+        if (data.errors) {
+          split[index] = `Error ${data.errors}`;
+        } else {
+          split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
+        }
+      }).catch((err) => {
+        split[index] = 'err';
       });
     };
     const combined = split.join('');

@@ -591,6 +591,17 @@ export default function getLessonIndex() {
             'Area',
           ],
         },
+        pythagorus_proof: {
+          title: 'Pythagorean Theorem',
+          description: 'Proof - static and simple.',
+          path: 'pythagorus_proof',
+          onPath: false,
+          topics: [
+            'explanation',
+          ],
+          qr: [
+          ],
+        },
       },
       dependencies: [
         'important_triangles',

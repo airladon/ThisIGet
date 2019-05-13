@@ -4,6 +4,7 @@ async function mathparser(callback, source, map, meta) {
   const mjAPI = require("mathjax-node");
   mjAPI.config({
     MathJax: {
+      extensions: 'TeX/color.js',
       // traditional MathJax configuration
     },
   });
@@ -27,7 +28,13 @@ async function mathparser(callback, source, map, meta) {
         format: 'TeX', // or "inline-TeX", "MathML"
         svg: true,      // or svg:true, or html:true
       }).then((data) => {
-        split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
+        if (data.errors) {
+          split[index] = `Data Errors ${data.errors}`;
+        } else {
+          split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
+        }
+      }).catch((err) => {
+        split[index] = 'Error ${err}';
       });
     };
     const combined = split.join('');
