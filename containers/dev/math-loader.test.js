@@ -1,12 +1,13 @@
 const mathloader = require('./mathjax.js');
 
 const callback = (a, b, c, d) => {
-  console.log(b);
+  console.log('done')
+  console.log(a, b, c, d);
 }
 
 const c = async () => {
   const a = 'asdf';
-  await mathloader(callback, 'This is a $$mc ^ 2$$ so there');
+  await mathloader(callback, '"When $$a \\ne 0$$, there are two solutions to $$(ax^2 + bx + c = 0)$$ and they are $$x = {-b \\pm \\sqrt{b^2-4ac} \\over 2a}.$$"');
 };
 
 c();
