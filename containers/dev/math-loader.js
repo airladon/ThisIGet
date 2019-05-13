@@ -1,26 +1,6 @@
 //https://webpack.js.org/api/loaders/
 
-// async function tester(callback, source, map, meta) {
-//   const mjAPI = require("mathjax-node");
-//   mjAPI.config({
-//     MathJax: {
-//       // traditional MathJax configuration
-//     },
-//   });
-//   mjAPI.start();
-
-//   const yourMath = 'E = mc^2';
-//   mjAPI.typeset({
-//     math: yourMath,
-//     format: 'TeX', // or "inline-TeX", "MathML"
-//     svg: true,      // or svg:true, or html:true
-//   }, (data) => {
-//     callback(null, data.svg, map, meta)
-//   });
-// }
-
-
-async function tester(callback, source, map, meta) {
+async function mathparser(callback, source, map, meta) {
   const mjAPI = require("mathjax-node");
   mjAPI.config({
     MathJax: {
@@ -58,5 +38,5 @@ async function tester(callback, source, map, meta) {
 
 module.exports = function(source, map, meta) {
   const callback = this.async();
-  tester(callback, source, map, meta)
+  mathparser(callback, source, map, meta)
 };
