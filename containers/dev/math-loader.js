@@ -36,8 +36,8 @@ async function tester(callback, source, map, meta) {
       outLines.push(line);
       continue;
     }
-    const inlineStart = '<html><div style="display:inline;">';
-    const inlineEnd = '</div></html>';
+    const inlineStart = '';
+    const inlineEnd = '';
     for ([index, text] of split.entries()) {
       if (index % 2 === 0) {
         continue;

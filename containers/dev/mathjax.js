@@ -53,8 +53,8 @@ module.exports = async function tester(callback, source, map, meta) {
       outLines.push(line);
       continue;
     }
-    const inlineStart = '<div style="display:inline;">';
-    const inlineEnd = '</div>';
+    const inlineStart = '<span style="display:inline-block;"><html>';
+    const inlineEnd = '</html></span>';
     for ([index, text] of split.entries()) {
       if (index % 2 === 0) {
         continue;
