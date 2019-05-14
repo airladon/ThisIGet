@@ -575,8 +575,8 @@ export default function getLessonIndex() {
       uid: 'right_angle_triangles',
       versions: {
         base: {
-          title: 'Presentation',
-          description: 'Full explanation.',
+          title: 'Airladon',
+          description: 'Presentation',
           path: 'base',
           onPath: true,
           topics: [
@@ -593,7 +593,7 @@ export default function getLessonIndex() {
         },
         pythagorus_proof: {
           title: 'Pythagorean Theorem',
-          description: 'Proof - static and simple.',
+          description: 'Single Page.',
           path: 'pythagorus_proof',
           onPath: false,
           topics: [
