@@ -74,60 +74,8 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addCircleElements);
     this.hasTouchableElements = true;
     this.scenarios = layout.circleScenarios;
-    this.setScenario('center');
-    // this._circle._radius.setTransformCallback = this.updateArc.bind(this);
-    // this._circle.setTransformCallback = this.updateCircleLocation.bind(this);
-    // this.percentStraight = 0;
-    // this.straightening = true;
-    // this._circle._scale.move.element = this._circle;
-    // this._circle._translate.move.element = this._circle;
-    // this._circumferenceText.onClick = this.straightenCircumference.bind(this, 4, null);
-    // this._locationText.onClick = this.pulseCenter.bind(this);
-    // this._radiusText.onClick = this.pulseRadius.bind(this);
-    // this._diameterText.onClick = this.pulseDiameter.bind(this);
-    // this.containToGrid = false;
-
-  //   this._eqnDiameterRadius._radius.makeTouchable();
-  //   this._eqnDiameterRadius._radius.onClick = this.pulseRadius.bind(this);
-  //   this._eqnDiameterRadius._diameter.makeTouchable();
-  //   this._eqnDiameterRadius._diameter.onClick = this.pulseDiameter.bind(this);
-  //   this._eqnDiameterCircumference._circumference.makeTouchable();
-  //   this._eqnDiameterCircumference._circumference.onClick = this.pulseCircle.bind(this);
-  //   this._eqnDiameterCircumference._diameter.makeTouchable();
-  //   this._eqnDiameterCircumference._diameter.onClick = this.pulseDiameter.bind(this);
-
-  //   this._eqnCircumferenceDiameter._circumference.makeTouchable();
-  //   this._eqnCircumferenceDiameter._circumference.onClick = this.pulseCircle.bind(this);
-  //   this._eqnCircumferenceDiameter._diameter.makeTouchable();
-  //   this._eqnCircumferenceDiameter._diameter.onClick = this.pulseDiameter.bind(this);
-  //   this._eqnCircumferenceRadius._circumference.makeTouchable();
-  //   this._eqnCircumferenceRadius._circumference.onClick = this.pulseCircle.bind(this);
-  //   this._eqnCircumferenceRadius._radius.makeTouchable();
-  //   this._eqnCircumferenceRadius._radius.onClick = this.pulseRadius.bind(this);
-
-  //   this._eqnRadiusDiameter._diameter.makeTouchable();
-  //   this._eqnRadiusDiameter._diameter.onClick = this.pulseDiameter.bind(this);
-  //   this._eqnRadiusDiameter._radius.makeTouchable();
-  //   this._eqnRadiusDiameter._radius.onClick = this.pulseRadius.bind(this);
-  //   this._eqnRadiusCircumference._circumference.makeTouchable();
-  //   this._eqnRadiusCircumference._circumference.onClick = this.pulseCircle.bind(this);
-  //   this._eqnRadiusCircumference._radius.makeTouchable();
-  //   this._eqnRadiusCircumference._radius.onClick = this.pulseRadius.bind(this);
+    this.setScenario('center');  
   }
-
-  // updateArc() {
-  //   if (this._circle._arc.isShown) {
-  //     let r = this._circle._radius.getRotation();
-  //     while (r > Math.PI * 2) {
-  //       r -= Math.PI * 2;
-  //     }
-  //     while (r < 0) {
-  //       r += Math.PI * 2;
-  //     }
-  //     this._circle._arc.setAngleToDraw(r);
-  //     this.diagram.animateNextFrame();
-  //   }
-  // }
 
   pushRadiusRandom() {
     const r = Math.random() * Math.PI + Math.PI / 2;

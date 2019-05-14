@@ -5,11 +5,8 @@ import './style.scss';
 
 const {
   Point,
-  Rect,
   Transform,
 } = Fig.tools.g2;
-
-const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
   'qrCircle_circle',
@@ -28,9 +25,6 @@ export default function lessonLayout() {
   layout.colors = colors;
   layout.position = new Point(0, 0);
 
-  // ///////////////////////////////////////////////////////////////
-  // Shapes
-  // ///////////////////////////////////////////////////////////////
   let radius = 1;
 
   // ///////////////////////////////////////////////////////////////
@@ -50,7 +44,7 @@ export default function lessonLayout() {
     },
   };
 
-  layout.arc = joinObjects({}, layout.circleLine, { name: 'arc' });
+  // layout.arc = joinObjects({}, layout.circleLine, { name: 'arc' });
 
   layout.radius = {
     name: 'radius',
@@ -113,197 +107,6 @@ export default function lessonLayout() {
     'center': { position: new Point(0, -0.4) },
   };
 
-  layout.grid = {
-    name: 'grid',
-    method: 'axes',
-    options: {
-      width: 4.5,
-      height: 2.7,
-      limits: new Rect(0, 0, 10, 6),
-      yAxisLocation: 0,
-      xAxisLocation: 0,
-      stepX: 1,
-      stepY: 1,
-      fontSize: 0.1,
-      showGrid: true,
-      color: colors.qrCircle_grid,
-      gridColor: colors.qrCircle_grid,
-      location: new Point(-2.2, -1.2),
-      decimalPlaces: 0,
-      lineWidth: 0.01,
-    },
-  };
-
-  layout.text = {
-    method: 'text',
-    options: {
-      size: 0.12,
-      family: 'helvetica',
-      hAlign: 'left',
-      style: 'normal',
-      weight: 500,
-    },
-    mods: {
-      isTouchable: true,
-    },
-    scenario: 'summary',
-  };
-
-  layout.locationText = joinObjects({}, layout.text, {
-    name: 'locationText',
-    options: {
-      color: colors.qrCircle_center,
-    },
-    mods: {
-      scenarios: {
-        topRight: { position: new Point(1.05, 1.6) },
-        summary: { position: new Point(-2.15, 1.35) },
-      },
-    },
-  });
-
-  layout.circumferenceText = joinObjects({}, layout.text, {
-    name: 'circumferenceText',
-    options: {
-      color: colors.qrCircle_circle,
-    },
-    mods: {
-      scenarios: {
-        summary: { position: new Point(-2.15, 1.15) },
-      },
-    },
-  });
-
-  layout.radiusText = joinObjects({}, layout.text, {
-    name: 'radiusText',
-    options: {
-      color: colors.qrCircle_radius,
-    },
-    mods: {
-      scenarios: {
-        summary: { position: new Point(-2.15, 0.95) },
-      },
-    },
-  });
-  layout.diameterText = joinObjects({}, layout.text, {
-    name: 'diameterText',
-    options: {
-      color: colors.qrCircle_diameter,
-    },
-    mods: {
-      scenarios: {
-        summary: { position: new Point(-2.15, 0.75) },
-      },
-    },
-  });
-
-
-  layout.circumferenceLeftLine = {
-    name: 'leftLine',
-    method: 'line',
-    options: {
-      length: radius * Math.PI,
-      width,
-      color: colors.qrCircle_circle,
-      vertexSpaceStart: 'end',
-      position: new Point(0, -radius + width / 2),
-    },
-  };
-  layout.circumferenceRightLine = joinObjects(
-    {}, layout.circumferenceLeftLine,
-    { name: 'rightLine', options: { vertexSpaceStart: 'start' } },
-  );
-
-  layout.circumferenceLeftArc = {
-    name: 'leftArc',
-    method: 'polygon',
-    options: {
-      radius,
-      width,
-      sides: 400,
-      sidesToDraw: 200,
-      clockwise: true,
-      color: colors.qrCircle_circle,
-      rotation: Math.PI / 2,
-      transform: new Transform().translate(0, 0),
-    },
-  };
-  layout.circumferenceRightArc = joinObjects(
-    {}, layout.circumferenceLeftArc,
-    {
-      name: 'rightArc',
-      options: { rotation: -Math.PI / 2, clockwise: false },
-    },
-  );
-
-  layout.circumference = {
-    name: 'circumference',
-    method: 'collection',
-    options: {
-      transform: new Transform().scale(1, 1).translate(0, 0),
-    },
-    addElements: [
-      layout.circumferenceLeftLine,
-      layout.circumferenceRightLine,
-      layout.circumferenceLeftArc,
-      layout.circumferenceRightArc,
-    ],
-  };
-
-  const diameterLine = index => ({
-    name: `line${index}`,
-    method: 'line',
-    options: {
-      length: radius * 1.98,
-      width,
-      color: colors.qrCircle_diameter,
-      // vertexSpaceStart: 'start',
-      position: new Point(index * radius * 2, 0.2),
-    },
-  });
-  layout.diameterLines = {
-    name: 'diameterLines',
-    method: 'collection',
-    options: {
-      position: [-radius * Math.PI, -radius * 1.1],
-    },
-    addElements: [
-      diameterLine(0),
-      diameterLine(1),
-      diameterLine(2),
-    ],
-  };
-
-  layout.scalingCircle = joinObjects({}, layout.circleLine, {
-    name: 'scale',
-    options: {
-      fill: true,
-      color: [0, 0, 1, 0],
-      radius: radius * 1.2,
-    },
-    mods: {
-      isTouchable: true,
-      isMovable: true,
-      move: {
-        type: 'scale',
-      },
-      interactiveLocation: new Point(radius, 0),
-    },
-  });
-
-  layout.translatingCircle = joinObjects({}, layout.circleLine, {
-    name: 'translate',
-    options: {
-      fill: true,
-      color: [0, 1, 0, 0],
-      radius: radius * 0.4,
-    },
-    mods: {
-      isTouchable: true,
-      isMovable: true,
-    },
-  });
-
   layout.circ = {
     name: 'circle',
     method: 'collection',
@@ -321,14 +124,10 @@ export default function lessonLayout() {
       hasTouchableElements: true,
     },
     addElements: [
-      layout.scalingCircle,
       layout.circleLine,
-      layout.circumference,
-      layout.arc,
       layout.radius,
       layout.diameter,
       layout.center,
-      layout.translatingCircle,
     ],
   };
 
@@ -453,90 +252,8 @@ export default function lessonLayout() {
     },
   };
 
-  layout.allEquation = {
-    name: 'allEquation',
-    method: 'addNavigator',
-    options: {
-      color: colors.diagram.text.base,
-      scale: 1.3,
-      elements: {
-        diameter: { text: 'diameter', color: colors.qrCircle_diameter },
-        radius: { text: 'radius', color: colors.qrCircle_radius },
-        circumference: { text: 'circumference', color: colors.qrCircle_circle },
-        x: `  ${String.fromCharCode(215)}  `,
-        _x: `  ${String.fromCharCode(215)}  `,
-        pi: 'π ',
-        _2: '2 ',
-        equals: '  =  ',
-        v: { symbol: 'vinculum' },
-        brace: { symbol: 'brace', side: 'top', numLines: 3 },
-      },
-      defaultFormAlignment: { fixTo: 'equals', alignH: 'right', alignV: 'top' },
-      forms: {
-        '0': ['circumference', 'equals', 'pi', 'x', 'diameter'],
-        '1': ['circumference', 'equals', 'pi', 'diameter'],
-        '2': ['circumference', 'equals', 'pi', {
-          topComment: ['diameter', ['_2', 'radius'], 'brace'],
-        }],
-        '3': {
-          content: ['circumference', 'equals', 'pi', '_2', 'radius'],
-          elementMods: {
-            '_2': {
-              mods: {
-                animations: {
-                  options: {
-                    translation: {
-                      style: 'linear',
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-        '4': {
-          content: ['circumference', 'equals', '_2', 'pi', 'radius'],
-          elementMods: {
-            '_2': {
-              mods: {
-                animations: {
-                  options: {
-                    translation: {
-                      style: 'curved',
-                      magnitude: 1,
-                      direction: 'up',
-                    },
-                  },
-                },
-              },
-            },
-            'pi': {
-              mods: {
-                animations: {
-                  options: {
-                    translation: {
-                      style: 'curved',
-                      magnitude: 1,
-                      direction: 'down',
-                    },
-                  },
-                },
-              },
-            },
-          },
-        },
-      },
-      formSeries: ['0', '1', '2', '3', '4'],
-    },
-    mods: {
-      scenarios: {
-        bottom: { position: new Point(0.2, -2) },
-      },
-    },
-  };
 
   layout.addCircleElements = [
-    layout.grid,
     layout.circ,
     layout.diameterRadiusEquation,
     layout.circumferenceDiameterEquation,
@@ -544,12 +261,6 @@ export default function lessonLayout() {
     layout.circumferenceRadiusEquation,
     layout.radiusDiameterEquation,
     layout.radiusCircumferenceEquation,
-    layout.allEquation,
-    layout.locationText,
-    layout.circumferenceText,
-    layout.radiusText,
-    layout.diameterText,
-    layout.diameterLines,
   ];
 
   return layout;
