@@ -5,6 +5,7 @@ import PresentationLesson from '../../../../../../js/Lesson/PresentationLesson';
 import Content from './content';
 import details from '../../details';
 import version from './version';
+import '../../../geometry.scss';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];

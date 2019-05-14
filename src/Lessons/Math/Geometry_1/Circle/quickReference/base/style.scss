@@ -1,13 +1,13 @@
 @import '../../../../../../css/color';
 
 $colors: (
-  circle:               color('red'),
-  radius:               color('blue'),
-  diameter:             color('green'),
-  center:               color('yellow'),
-  grid:                 color('grey', 'dark'),
-  circleFill:           color('black', 'dark'),
-  property:             color('red'),
+  qrCircle_circle:      color('red'),
+  qrCircle_radius:               color('blue'),
+  qrCircle_diameter:             color('green'),
+  qrCircle_center:               color('yellow'),
+  qrCircle_grid:                 color('grey', 'dark'),
+  qrCircle_circleFill:           color('black', 'dark'),
+  qrCircle_property:             color('red'),
 );
 
 body {

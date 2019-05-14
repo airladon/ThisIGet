@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import CommonCollection from '../../explanation/base/dcCircle';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -27,14 +27,14 @@ export class QRDiameter extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const modifiers = {
       __diameter__: click(
-        this._collection.pulseDiameter, [this._collection], layout.colors.diameter,
+        this._collection.pulseDiameter, [this._collection], layout.colors.qrCircle_diameter,
       ),
       __diameter___: click(
-        this._collection.pulseDiameter, [this._collection], layout.colors.diameter,
+        this._collection.pulseDiameter, [this._collection], layout.colors.qrCircle_diameter,
       ),
-      __center__: highlight(layout.colors.center),
-      __circumference__: highlight(layout.colors.circle),
-      __radius__: highlight(layout.colors.radius),
+      __center__: highlight(layout.colors.qrCircle_center),
+      __circumference__: highlight(layout.colors.qrCircle_circle),
+      __radius__: highlight(layout.colors.qrCircle_radius),
     };
     this.setTitle('Diameter');
     this.setDescription([
@@ -71,12 +71,12 @@ export class QRRadius extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      __radius__: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
-      __radius___: click(this._collection.pulseRadius, [this._collection], layout.colors.radius),
-      __center__: highlight(layout.colors.center),
-      __edge__: highlight(layout.colors.circle),
-      __circumference__: highlight(layout.colors.circle),
-      __diameter__: highlight(layout.colors.diameter),
+      __radius__: click(this._collection.pulseRadius, [this._collection], layout.colors.qrCircle_radius),
+      __radius___: click(this._collection.pulseRadius, [this._collection], layout.colors.qrCircle_radius),
+      __center__: highlight(layout.colors.qrCircle_center),
+      __edge__: highlight(layout.colors.qrCircle_circle),
+      __circumference__: highlight(layout.colors.qrCircle_circle),
+      __diameter__: highlight(layout.colors.qrCircle_diameter),
     };
     this.setTitle('Radius');
     this.setDescription([
@@ -114,13 +114,13 @@ export class QRCircumference extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const modifiers = {
       __circumference__: click(
-        this._collection.pulseCircle, [this._collection], layout.colors.circle,
+        this._collection.pulseCircle, [this._collection], layout.colors.qrCircle_circle,
       ),
       __circumference___: click(
-        this._collection.pulseCircle, [this._collection], layout.colors.circle,
+        this._collection.pulseCircle, [this._collection], layout.colors.qrCircle_circle,
       ),
-      __radius__: highlight(layout.colors.radius),
-      __diameter__: highlight(layout.colors.diameter),
+      __radius__: highlight(layout.colors.qrCircle_radius),
+      __diameter__: highlight(layout.colors.qrCircle_diameter),
     };
     this.setTitle('Circumference');
     this.setDescription([
@@ -154,8 +154,8 @@ export class QRCircle extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      __center__: highlight(layout.colors.center),
-      __outside_edge__: highlight(layout.colors.circle),
+      __center__: highlight(layout.colors.qrCircle_center),
+      __outside_edge__: highlight(layout.colors.qrCircle_circle),
     };
     this.setTitle('Circle');
     this.setDescription([
@@ -185,8 +185,8 @@ export class QRPi extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      diameter: highlight(layout.colors.diameter),
-      circumference: highlight(layout.colors.circle),
+      diameter: highlight(layout.colors.qrCircle_diameter),
+      circumference: highlight(layout.colors.qrCircle_circle),
     };
     this.setTitle('Pi (π)');
     this.setDescription([
