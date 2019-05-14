@@ -4,7 +4,7 @@ import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -35,8 +35,8 @@ export class QRAcute extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      less_than_90: clickW('less than 90º', coll.goToAcute, [coll], layout.colors.angle),
-      acute_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
+      less_than_90: clickW('less than 90º', coll.goToAcute, [coll], layout.colors.qrImportantAngles_angle),
+      acute_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Acute Angle');
     this.setDescription([
@@ -57,6 +57,7 @@ export class QRAcute extends PopupBoxCollection {
     fig._angle.showAll();
     fig._line1.setRotation(0.5);
     fig._line1.makeTouchable();
+    fig._acute.showAll();
     fig._line1.move.maxTransform.updateRotation(Math.PI / 2 * 0.98);
     fig._line1.move.minTransform.updateRotation(0);
     this.transformToQRWindow(collection, new Rect(-0.6, 0.2, 2, 1.6));
@@ -82,9 +83,9 @@ export class QRRight extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      right_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
-      angle_mark: click(coll.pulseAngle, [coll], layout.colors.angle),
-      _90: highlightWord('90º', layout.colors.angle),
+      right_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
+      angle_mark: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
+      _90: highlightWord('90º', layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Right Angle');
     this.setDescription([
@@ -129,8 +130,8 @@ export class QRObtuse extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      between_90_and_180: clickW('between 90º and 180º', coll.goToObtuse, [coll], layout.colors.angle),
-      obtuse_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
+      between_90_and_180: clickW('between 90º and 180º', coll.goToObtuse, [coll], layout.colors.qrImportantAngles_angle),
+      obtuse_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Obtuse Angle');
     this.setDescription([
@@ -151,6 +152,7 @@ export class QRObtuse extends PopupBoxCollection {
     fig._angle.showAll();
     fig._line1.setRotation(2);
     fig._line1.makeTouchable();
+    fig._obtuse.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI / 2 * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 0.98);
     this.transformToQRWindow(collection, new Rect(-1.2, -0.2, 3, 2));
@@ -176,8 +178,8 @@ export class QRStraight extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      straight_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
-      _180: clickW('180º', this.makeStraightAngle, [this], layout.colors.angle),
+      straight_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
+      _180: clickW('180º', this.makeStraightAngle, [this], layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Straight Angle');
     this.setDescription([
@@ -228,8 +230,8 @@ export class QRReflex extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      between_180_and_360: clickW('between 180º and 360º', coll.goToReflex, [coll], layout.colors.angle),
-      reflex_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
+      between_180_and_360: clickW('between 180º and 360º', coll.goToReflex, [coll], layout.colors.qrImportantAngles_angle),
+      reflex_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Reflex Angle');
     this.setDescription([
@@ -250,6 +252,7 @@ export class QRReflex extends PopupBoxCollection {
     fig._angle.showAll();
     fig._line1.setRotation(4);
     fig._line1.makeTouchable();
+    fig._reflex.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 1.98);
     this.transformToQRWindow(collection, new Rect(-1.2, -1, 3, 2));
@@ -275,8 +278,8 @@ export class QRFull extends PopupBoxCollection {
     this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      full_angle: click(coll.pulseAngle, [coll], layout.colors.angle),
-      _360: clickW('360º', this.makeFullAngle, [this], layout.colors.angle),
+      full_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
+      _360: clickW('360º', this.makeFullAngle, [this], layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Full Angle');
     this.setDescription([
