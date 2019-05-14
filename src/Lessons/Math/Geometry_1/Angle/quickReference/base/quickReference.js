@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
-// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 
 import CommonCollection from './collection';
@@ -66,18 +66,6 @@ export default class QRAngle extends PopupBoxCollection {
   }
 }
 
-function attachQuickReference1() {
-  if (window.quickReference == null) {
-    window.quickReference = {};
-  }
-  if (window.quickReference[lessonUID] == null) {
-    window.quickReference[lessonUID] = {};
-  }
-  window.quickReference[lessonUID][versionUID] = {
-    Main: QRAngle,
-    // QR2: QRBoilerplate2,
-  };
-}
-
-attachQuickReference1();
-
+attachQuickReference(lessonUID, versionUID, {
+  Main: QRAngle,
+});

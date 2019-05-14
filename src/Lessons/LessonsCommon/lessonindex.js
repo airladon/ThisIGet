@@ -100,6 +100,49 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Degrees: new LessonDescription({
+      title: 'Degrees',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Degrees',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Angle',
+      ],
+      enabled: true,
+    }),
     Introduction: new LessonDescription({
       title: 'Why Study Shapes?',
       path: '/Lessons/Math/Geometry_1',

@@ -1,6 +1,7 @@
 // @flow
 // import Fig from 'figureone';
 import lessonLayout from './layout';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 
@@ -35,16 +36,6 @@ export default class QRAbstraction extends PopupBoxCollection {
   }
 }
 
-function attachQuickReference() {
-  if (window.quickReference == null) {
-    window.quickReference = {};
-  }
-  if (window.quickReference[lessonUID] == null) {
-    window.quickReference[lessonUID] = {};
-  }
-  window.quickReference[lessonUID][versionUID] = {
-    Abstraction: QRAbstraction,
-  };
-}
-
-attachQuickReference();
+attachQuickReference(lessonUID, versionUID, {
+  Abstraction: QRAbstraction,
+});

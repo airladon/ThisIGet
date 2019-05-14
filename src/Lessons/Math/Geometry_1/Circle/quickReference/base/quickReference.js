@@ -1,5 +1,6 @@
 // @flow
 import Fig from 'figureone';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
@@ -214,21 +215,11 @@ export class QRPi extends PopupBoxCollection {
   }
 }
 
-function attachQuickReference1() {
-  if (window.quickReference == null) {
-    window.quickReference = {};
-  }
-  if (window.quickReference[lessonUID] == null) {
-    window.quickReference[lessonUID] = {};
-  }
-  window.quickReference[lessonUID][versionUID] = {
-    Diameter: QRDiameter,
-    Radius: QRRadius,
-    Circumference: QRCircumference,
-    Circle: QRCircle,
-    Pi: QRPi,
-  };
-}
-
-attachQuickReference1();
+attachQuickReference(lessonUID, versionUID, {
+  Diameter: QRDiameter,
+  Radius: QRRadius,
+  Circumference: QRCircumference,
+  Circle: QRCircle,
+  Pi: QRPi,
+});
 

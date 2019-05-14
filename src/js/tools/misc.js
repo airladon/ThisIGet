@@ -164,8 +164,24 @@ function activator(
   };
 }
 
+function attachQuickReference(
+  lessonUID: string,
+  versionUID: string,
+  qrs: {
+    [name: string]: Object,
+  },
+) {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
+  if (window.quickReference[lessonUID] == null) {
+    window.quickReference[lessonUID] = {};
+  }
+  window.quickReference[lessonUID][versionUID] = qrs;
+}
+
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie, activator,
+  createCookie, activator, attachQuickReference,
 };
 

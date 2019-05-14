@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
-// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import CommonCollection from '../../explanation/base/diagramCollectionCommon';
 
@@ -24,15 +24,7 @@ export default class QRDegrees extends PopupBoxCollection {
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
-
+    super(diagram, layout, transform, 'collection', CommonCollection);
     const diag = this._collection;
     const { colors } = this.layout;
     const modifiers = {
@@ -56,7 +48,6 @@ export default class QRDegrees extends PopupBoxCollection {
     this.setDiagramSpace({ location: 'left', ySize: 0.5, xSize: 0.5 });
     super.show();
     const collection = this._collection;
-    // collection.show();
     const circle = collection._circle;
     circle._line1.showAll();
     circle._line2.showAll();
@@ -69,26 +60,12 @@ export default class QRDegrees extends PopupBoxCollection {
     collection.setAngleMarks('degrees');
     circle._angleText.setScenario('qr');
     collection.updateAngle();
-    // const iso = collection;
-    // iso.show();
-    // collection.transform.updateScale(0.6, 0.6);
-    // collection.setPosition(this.layout.position);
     this.transformToQRWindow(collection, new Rect(-2, -1, 4, 2.2));
     this.diagram.animateNextFrame();
   }
 }
 
-function attachQuickReference1() {
-  if (window.quickReference == null) {
-    window.quickReference = {};
-  }
-  if (window.quickReference[lessonUID] == null) {
-    window.quickReference[lessonUID] = {};
-  }
-  window.quickReference[lessonUID][versionUID] = {
-    Main: QRDegrees,
-  };
-}
-
-attachQuickReference1();
+attachQuickReference(lessonUID, versionUID, {
+  Main: QRDegrees,
+});
 
