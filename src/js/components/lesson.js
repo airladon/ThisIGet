@@ -224,10 +224,8 @@ export default class LessonComponent extends React.Component
           const version = lessonDescription.topics[topicName][versionUID];
           const label = version.title;
           let link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
-          console.log(topicName)
           if (topicName === 'dev') {
             link = `/dev${lessonDescription.path}/${lessonDescription.uid}/quickReference/${versionUID}`;
-            console.log(link)
           }
           const { description } = version;
           const { fullLesson } = version;
