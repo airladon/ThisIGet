@@ -5,7 +5,7 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 const { Point } = Fig;
 
 export type TypeLessonDescription = {
-  name: string;
+  title: string;
   path: string;
   imgLink: string;
   location: Point;
@@ -39,7 +39,7 @@ export type TypeLessonDescription = {
 };
 
 export default class LessonDescription {
-  name: string;
+  title: string;
   path: string;
   imgLink: string;
   location: Point;
@@ -106,18 +106,19 @@ export default class LessonDescription {
   ) {
     this.title = lesson.title;
     this.path = lesson.path;
+    this.uid = lesson.uid;
+    this.dependencies = lesson.dependencies;
     this.location = new Point(0, 0);
     this.id = id;
-    this.imgLink = `${this.path}/tile.png`;
+    this.imgLink = `${this.path}/${this.uid}/tile.png`;
     if (id === '') {
       this.id = `id_lesson__navigator_tile_${lesson.uid}`;
     }
-    this.dependencies = lesson.dependencies;
-    this.uid = lesson.uid;
-    this.topics = {};
-    Object.keys(lesson.topics).forEach((topic) => {
-      this.topics[topic] = lesson.topics[topic];
-    });
+    // this.topics = {};
+    // Object.keys(lesson.topics).forEach((topic) => {
+    //   this.topics[topic] = lesson.topics[topic];
+    // });
+    this.topics = lesson.topics;
 
     // this.versions = {};       // Deprecate
     // Object.keys(lesson.versions).forEach((key) => {
@@ -200,7 +201,7 @@ export default class LessonDescription {
     //         this.waitThenCallback(callback);
     //       });
     //   });
-    });
+    // });
   }
 }
 

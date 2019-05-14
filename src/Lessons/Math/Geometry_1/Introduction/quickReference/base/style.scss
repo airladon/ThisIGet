@@ -1,4 +1,4 @@
-@import '../common/style';
+@import '../../../geometry';
 
 // $colors: (
 //   square1:             color('red', 'base'),
@@ -6,6 +6,6 @@
 //   circle:              color('red', 'base'),
 // );
 
-body {
-  @include color_vars($colors);
-}
+// body {
+//   @include color_vars($colors);
+// }

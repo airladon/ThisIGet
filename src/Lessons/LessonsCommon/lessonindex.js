@@ -3,42 +3,38 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 export default function getLessonIndex() {
   const lessonIndex = {
     Introduction: new LessonDescription({
-      name: 'Why Study Shapes?',
+      title: 'Why Study Shapes?',
       path: '/Lessons/Math/Geometry_1',
       uid: 'Introduction',
       topics: {
-        explanation: [
-          {
-            uid: 'base',
+        explanation: {
+          base: {
             type: 'presentation',
             title: 'Initial',
             description: 'Presentation form - interactive.',
             fullLesson: true,
           },
-          {
-            uid: 'simple',
+          simple: {
             type: 'singlePage',
             title: 'Simple',
             description: 'Not interactive.',
             fullLesson: true,
           },
-          {
-            uid: 'singlePage',
+          singlePage: {
             type: 'singlePage',
             title: 'Initial - Single Page',
             description: 'Single page form - interactive.',
             fullLesson: true,
           },
-        ],
-        quickReference: [
-          {
-            uid: 'base',
+        },
+        quickReference: {
+          base: {
             type: 'presentation',
             references: [
               'Abstraction',
             ],
           },
-        ],
+        },
       },
       dependencies: [
       ],

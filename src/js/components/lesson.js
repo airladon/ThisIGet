@@ -70,7 +70,7 @@ export default class LessonComponent extends React.Component
       ratings: this.fillRatings(),
     };
     this.versionDetails = props.versionDetails;
-    const [topic] = window.location.pathname.split('/').slice(-1);
+    const [topic] = window.location.pathname.split('/').slice(-2, -1);
     this.topic = topic;
     this.key = 0;
     this.showNavigator = false;
@@ -199,7 +199,7 @@ export default class LessonComponent extends React.Component
 
   getTopics() {
     const topics = {};
-    const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
     const { lessonDescription } = this;
     if (lessonDescription != null) {
       Object.keys(this.state.ratings).forEach((topicName) => {
@@ -207,16 +207,16 @@ export default class LessonComponent extends React.Component
         Object.keys(topic).forEach((versionUID) => {
           const version = lessonDescription.topics[topicName][versionUID];
           const label = version.title;
-          const link = `${lessonDescription.path}/${version.path}/${topicName}`;
+          const link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
           const { description } = version;
-          const { onPath } = version;
+          const { fullLesson } = version;
 
           if (!(topicName in topics)) {
             topics[topicName] = {};
           }
           let active = false;
           // console.log(currentExplanation, version, topic)
-          if (currentExplanation === version.path
+          if (currentVersion === versionUID
             && currentTopic === topicName) {
             active = true;
           }
@@ -230,7 +230,7 @@ export default class LessonComponent extends React.Component
             numHighRatings: rating.numHighRatings,
             description,
             active,
-            onPath,
+            fullLesson,
           };
         });
       });
@@ -250,14 +250,14 @@ export default class LessonComponent extends React.Component
         topicNames.push(topicName);
       }
     });
-    const currentTopic = window.location.href.split('/').slice(-1)[0];
+    const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     topicNames.forEach((name) => {
       if (topics[name] != null) {
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
-        const onPathCount = Object.values(topic).filter(ver => ver.onPath).length;
+        const fullLessonCount = Object.values(topic).filter(ver => ver.fullLesson).length;
         // $FlowFixMe - onPath is there and boolean
-        const offPathCount = Object.values(topic).filter(ver => !ver.onPath).length;
+        const partialLessonCount = Object.values(topic).filter(ver => !ver.fullLesson).length;
         let selected = false;
         if (currentTopic === name) {
           selected = true;
@@ -288,8 +288,8 @@ export default class LessonComponent extends React.Component
           listItems.push(topic[vUID]);
         });
         this.key += 1;
-        if (offPathCount > 0 && name !== 'quiz') {
-          listItems.splice(onPathCount, 0, {
+        if (partialLessonCount > 0 && name !== 'quiz') {
+          listItems.splice(fullLessonCount, 0, {
             label: 'Lesson Portion',
             separator: true,
           });
@@ -330,7 +330,7 @@ export default class LessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
-    const topicName = window.location.href.split('/').slice(-1)[0];
+    const topicName = window.location.href.split('/').slice(-2, -1)[0];
     return topicName.charAt(0).toUpperCase() + topicName.slice(1);
   }
 

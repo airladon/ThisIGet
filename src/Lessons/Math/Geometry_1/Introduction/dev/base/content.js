@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
-import lessonLayout from '../quickReference/layout';
+import lessonLayout from '../../quickReference/base/layout';
 import details from '../../details';
-import version from '../version';
+import version from '../../quickReference/base/version';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';

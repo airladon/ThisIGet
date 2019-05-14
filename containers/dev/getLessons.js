@@ -125,7 +125,7 @@ export default function getLessonIndex() {
     }
     if (title !== '') {
       outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
-      outStr = `${outStr}\n      name: '${title}',`;
+      outStr = `${outStr}\n      title: '${title}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      topics: {`;
@@ -143,7 +143,7 @@ export default function getLessonIndex() {
 
       Object.keys(topics).forEach((topicName) => {
         const topicVersions = topics[topicName];
-        outStr = `${outStr}\n        ${topicName}: [`;
+        outStr = `${outStr}\n        ${topicName}: {`;
         topicVersions.forEach((v) => {
           const [versionUid, versionPath] = v;
           let versionTitle = '';
@@ -173,8 +173,7 @@ export default function getLessonIndex() {
             }
           }
 
-          outStr = `${outStr}\n          {`;
-          outStr = `${outStr}\n            uid: '${versionUid}',`;
+          outStr = `${outStr}\n          ${versionUid}: {`;
           outStr = `${outStr}\n            type: '${type}',`;
           if (topicName === 'quickReference') {
             outStr = `${outStr}\n            references: [`;
@@ -190,7 +189,7 @@ export default function getLessonIndex() {
           outStr = `${outStr}\n          },`;
         });
 
-        outStr = `${outStr}\n        ],`;
+        outStr = `${outStr}\n        },`;
       });
 
       // versionPaths.forEach((versionPath) => {
