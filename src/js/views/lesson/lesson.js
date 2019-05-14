@@ -14,7 +14,7 @@ function renderLesson(
   lessonDetails: {
     title: string,
     dependencies: Array<string>,
-    enabled: boolean,
+    enabled?: boolean,
   },
   versionDetails: {
     title?: string,

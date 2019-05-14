@@ -2,6 +2,49 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {
+    Angle: new LessonDescription({
+      title: 'Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Angle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: 'Introduction to Angles.',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: 'Introduction to Angles.',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Circle',
+      ],
+      enabled: true,
+    }),
     Circle: new LessonDescription({
       title: 'Circles',
       path: '/Lessons/Math/Geometry_1',
