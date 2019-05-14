@@ -143,6 +143,54 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    ImportantAngles: new LessonDescription({
+      title: 'Important Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ImportantAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Acute',
+              'Right',
+              'Obtuse',
+              'Straight',
+              'Reflex',
+              'Full',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Degrees',
+      ],
+      enabled: true,
+    }),
     Introduction: new LessonDescription({
       title: 'Why Study Shapes?',
       path: '/Lessons/Math/Geometry_1',
