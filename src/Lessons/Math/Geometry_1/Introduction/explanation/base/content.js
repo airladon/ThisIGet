@@ -9,7 +9,7 @@ import lessonLayout from './layout';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import DiagramCollection from './diagramCollection';
+import DiagramCollection from './collection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
@@ -41,7 +41,7 @@ class Content extends PresentationLessonContent {
 
   addSections() {
     const diag = this.diagram.elements;
-    const circ = diag._circles;
+    const circ = diag;
 
     const common = {
       setContent: [],

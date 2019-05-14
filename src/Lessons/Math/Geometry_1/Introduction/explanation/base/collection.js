@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import lessonLayout from './layout';
 // import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
 
 const {
@@ -32,6 +33,18 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   propertiesPosition: number;
+
+  constructor(
+    diagram: CommonLessonDiagram,
+    transform: Transform = new Transform('Circle').rotate(0).translate(0, 0),
+  ) {
+    const layout = lessonLayout();
+    super(diagram, layout, transform);
+    this.setPosition(this.layout.position);
+    this.propertiesPosition = 0;
+    this.diagram.addElements(this, this.layout.addElements);
+    this.hasTouchableElements = true;
+  }
 
   appearCircleAndMoveWheel(done: ?() => {}) {
     this._circle.animations.cancelAll();
@@ -170,17 +183,5 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._properties.setScenario(goToScenario);
     this.growDimensions(null, 2);
     this.diagram.animateNextFrame();
-  }
-
-  constructor(
-    diagram: CommonLessonDiagram,
-    layout: Object,
-    transform: Transform = new Transform('Circle').rotate(0).translate(0, 0),
-  ) {
-    super(diagram, layout, transform);
-    this.setPosition(this.layout.position);
-    this.propertiesPosition = 0;
-    this.diagram.addElements(this, this.layout.addElements);
-    this.hasTouchableElements = true;
   }
 }
