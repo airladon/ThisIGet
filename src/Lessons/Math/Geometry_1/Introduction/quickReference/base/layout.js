@@ -1,12 +1,12 @@
 // @flow
 import Fig from 'figureone';
 import './style.scss';
-import commonLessonLayout from '../common/layout';
+import baseLayout from '../../../../../LessonsCommon/layout';
 
 const { Point } = Fig;
 
 export default function lessonLayout() {
-  const layout: Object = commonLessonLayout();
+  const layout: Object = baseLayout();
 
   layout.triPosition = new Point(0, 0.3);
   layout.triLabelOffset = 0.04;

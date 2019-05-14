@@ -9,25 +9,34 @@ export default function getLessonIndex() {
       topics: {
         explanation: [
           {
+            uid: 'base',
+            type: 'presentation',
             title: 'Initial',
             description: 'Presentation form - interactive.',
-            uid: 'base',
             fullLesson: true,
-            type: 'presentation',
           },
           {
+            uid: 'simple',
+            type: 'singlePage',
             title: 'Simple',
             description: 'Not interactive.',
-            uid: 'simple',
             fullLesson: true,
-            type: 'singlePage',
           },
           {
+            uid: 'singlePage',
+            type: 'singlePage',
             title: 'Initial - Single Page',
             description: 'Single page form - interactive.',
-            uid: 'singlePage',
             fullLesson: true,
-            type: 'singlePage',
+          },
+        ],
+        quickReference: [
+          {
+            uid: 'base',
+            type: 'presentation',
+            references: [
+              'Abstraction',
+            ],
           },
         ],
       },

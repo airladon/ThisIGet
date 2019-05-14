@@ -150,6 +150,7 @@ export default function getLessonIndex() {
           let versionDescription = '';
           let fullLesson = true;
           let type = 'generic';
+          let references = [];
           const versionFileName = `./${versionPath}/version.js`;
           if (fs.existsSync(versionFileName)) {
             // eslint-disable-next-line global-require, import/no-dynamic-require
@@ -167,14 +168,25 @@ export default function getLessonIndex() {
             if (version.details.type != null) {
               ({ type } = version.details);
             }
+            if (version.details.references != null) {
+              ({ references } = version.details);
+            }
           }
+
           outStr = `${outStr}\n          {`;
-          outStr = `${outStr}\n            title: '${versionTitle}',`;
-          outStr = `${outStr}\n            description: '${versionDescription}',`;
-          // outStr = `${outStr}\n          uid: '${explanationUid}',`;
           outStr = `${outStr}\n            uid: '${versionUid}',`;
-          outStr = `${outStr}\n            fullLesson: ${fullLesson},`;
           outStr = `${outStr}\n            type: '${type}',`;
+          if (topicName === 'quickReference') {
+            outStr = `${outStr}\n            references: [`;
+            references.forEach((reference) => {
+              outStr = `${outStr}\n              '${reference}',`;
+            });
+            outStr = `${outStr}\n            ],`;
+          } else {
+            outStr = `${outStr}\n            title: '${versionTitle}',`;
+            outStr = `${outStr}\n            description: '${versionDescription}',`;
+            outStr = `${outStr}\n            fullLesson: ${fullLesson},`;
+          }
           outStr = `${outStr}\n          },`;
         });
 
