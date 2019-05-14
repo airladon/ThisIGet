@@ -3,7 +3,5 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationLessonTester';
 
 tester(
-  [
-    ['explanation', 1, [1]],
-  ],
+  1,
 );
