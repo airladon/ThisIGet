@@ -95,28 +95,26 @@ function entryPoints(buildMode) {
 
 function makeLessonIndex(buildMode) {
   const lessons = getAllLessons('./src/Lessons');
-  // const lessonDescriptions = [];
+
   let outStr =
 `import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {`;
   lessons.forEach((lessonPath) => {
-    const shortPath = lessonPath.replace(/src/, '');
+    const splitLessonPath = lessonPath.split('/');
+    const parentPath = splitLessonPath.slice(1, -1).join('/');
+    const uid = splitLessonPath.slice(-1)[0];
     const detailsPath = `./${lessonPath}/details.js`;
     let title = '';
     let dependencies = [];
-    let uid = '';
     let enabled = true;
-    // let qr = {};
-
     if (fs.existsSync(detailsPath)) {
-      // const detailsPath = `./${lessonPath}/details.js`;
       // eslint-disable-next-line global-require, import/no-dynamic-require
       const details = require(detailsPath);
       ({ title } = details.details);
       ({ dependencies } = details.details);
-      ({ uid } = details.details);
+      // ({ uid } = details.details);
       ({ enabled } = details.details);
       // ({ qr } = details.details);
       if (enabled != null && enabled === false) {
@@ -128,65 +126,116 @@ export default function getLessonIndex() {
     if (title !== '') {
       outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
       outStr = `${outStr}\n      name: '${title}',`;
-      outStr = `${outStr}\n      path: '${shortPath}',`;
+      outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
-      outStr = `${outStr}\n      versions: {`;
-      const versionPaths = getAllVersions(lessonPath);
-      versionPaths.forEach((versionPath) => {
-        let versionUid = '';
-        let versionTitle = '';
-        let versionDescription = '';
-        const versionSubPath = versionPath.replace(/.*\//, '');
-        let versionOnPath = true;
-        let versionQR = {};
-        const versionFileName = `./${versionPath}/version.js`;
-        if (fs.existsSync(versionFileName)) {
-          // eslint-disable-next-line global-require, import/no-dynamic-require
-          const version = require(versionFileName);
-
-          if (version.details.title != null) {
-            versionTitle = version.details.title;
-          }
-          if (version.details.uid != null) {
-            versionUid = version.details.uid;
-          }
-          if (version.details.description != null) {
-            versionDescription = version.details.description;
-          }
-          if (version.details.onPath != null) {
-            versionOnPath = version.details.onPath;
-          }
-          if (version.details.qr != null) {
-            versionQR = version.details.qr;
-          }
+      outStr = `${outStr}\n      topics: {`;
+      const versions = getAllVersions(lessonPath);
+      const topics = {};
+      versions.forEach((versionPath) => {
+        const splitPath = versionPath.split('/');
+        const topicName = splitPath.slice(-2, -1)[0];
+        const versionUid = splitPath.slice(-1)[0];
+        if (topics[topicName] == null) {
+          topics[topicName] = [];
         }
-        const lessonPaths = getAllPaths(
-          versionPath,
-          ['lesson.js'],
-          ['lesson-dev.js'],
-          buildMode,
-        );
-        outStr = `${outStr}\n        ${versionUid}: {`;
-        outStr = `${outStr}\n          title: '${versionTitle}',`;
-        outStr = `${outStr}\n          description: '${versionDescription}',`;
-        // outStr = `${outStr}\n          uid: '${explanationUid}',`;
-        outStr = `${outStr}\n          path: '${versionSubPath}',`;
-        outStr = `${outStr}\n          onPath: ${versionOnPath},`;
-        outStr = `${outStr}\n          topics: [`;
-        lessonPaths.forEach((lesson) => {
-          const shortP = lesson.path.replace(`${lessonPath}/${versionSubPath}/`, '');
-          outStr = `${outStr}\n            '${shortP}',`;
-        });
-        outStr = `${outStr}\n          ],`;
-        outStr = `${outStr}\n          qr: [`;
-        if (versionQR != null && Array.isArray(versionQR)) {
-          versionQR.forEach((page) => {
-            outStr = `${outStr}\n            '${page}',`;
-          });
-        }
-        outStr = `${outStr}\n          ],`;
-        outStr = `${outStr}\n        },`;
+        topics[topicName].push([versionUid, versionPath]);
       });
+
+      Object.keys(topics).forEach((topicName) => {
+        const topicVersions = topics[topicName];
+        outStr = `${outStr}\n        ${topicName}: [`;
+        topicVersions.forEach((v) => {
+          const [versionUid, versionPath] = v;
+          let versionTitle = '';
+          let versionDescription = '';
+          let fullLesson = true;
+          let type = 'generic';
+          const versionFileName = `./${versionPath}/version.js`;
+          if (fs.existsSync(versionFileName)) {
+            // eslint-disable-next-line global-require, import/no-dynamic-require
+            const version = require(versionFileName);
+
+            if (version.details.title != null) {
+              versionTitle = version.details.title;
+            }
+            if (version.details.description != null) {
+              versionDescription = version.details.description;
+            }
+            if (version.details.fullLesson != null) {
+              ({ fullLesson } = version.details);
+            }
+            if (version.details.type != null) {
+              ({ type } = version.details);
+            }
+          }
+          outStr = `${outStr}\n          {`;
+          outStr = `${outStr}\n            title: '${versionTitle}',`;
+          outStr = `${outStr}\n            description: '${versionDescription}',`;
+          // outStr = `${outStr}\n          uid: '${explanationUid}',`;
+          outStr = `${outStr}\n            uid: '${versionUid}',`;
+          outStr = `${outStr}\n            fullLesson: ${fullLesson},`;
+          outStr = `${outStr}\n            type: '${type}',`;
+          outStr = `${outStr}\n          },`;
+        });
+
+        outStr = `${outStr}\n        ],`;
+      });
+
+      // versionPaths.forEach((versionPath) => {
+      //   let versionUid = '';
+      //   let versionTitle = '';
+      //   let versionDescription = '';
+      //   const versionSubPath = versionPath.replace(/.*\//, '');
+      //   let versionOnPath = true;
+      //   let versionQR = {};
+      //   const versionFileName = `./${versionPath}/version.js`;
+      //   if (fs.existsSync(versionFileName)) {
+      //     // eslint-disable-next-line global-require, import/no-dynamic-require
+      //     const version = require(versionFileName);
+
+      //     if (version.details.title != null) {
+      //       versionTitle = version.details.title;
+      //     }
+      //     if (version.details.uid != null) {
+      //       versionUid = version.details.uid;
+      //     }
+      //     if (version.details.description != null) {
+      //       versionDescription = version.details.description;
+      //     }
+      //     if (version.details.onPath != null) {
+      //       versionOnPath = version.details.onPath;
+      //     }
+      //     if (version.details.qr != null) {
+      //       versionQR = version.details.qr;
+      //     }
+      //   }
+      //   const lessonPaths = getAllPaths(
+      //     versionPath,
+      //     ['lesson.js'],
+      //     ['lesson-dev.js'],
+      //     buildMode,
+      //   );
+      //   outStr = `${outStr}\n        ${versionUid}: {`;
+      //   outStr = `${outStr}\n          title: '${versionTitle}',`;
+      //   outStr = `${outStr}\n          description: '${versionDescription}',`;
+      //   // outStr = `${outStr}\n          uid: '${explanationUid}',`;
+      //   outStr = `${outStr}\n          path: '${versionSubPath}',`;
+      //   outStr = `${outStr}\n          onPath: ${versionOnPath},`;
+      //   outStr = `${outStr}\n          topics: [`;
+      //   lessonPaths.forEach((lesson) => {
+      //     const shortP = lesson.path.replace(`${lessonPath}/${versionSubPath}/`, '');
+      //     outStr = `${outStr}\n            '${shortP}',`;
+      //   });
+      //   outStr = `${outStr}\n          ],`;
+      //   outStr = `${outStr}\n          qr: [`;
+      //   if (versionQR != null && Array.isArray(versionQR)) {
+      //     versionQR.forEach((page) => {
+      //       outStr = `${outStr}\n            '${page}',`;
+      //     });
+      //   }
+      //   outStr = `${outStr}\n          ],`;
+      //   outStr = `${outStr}\n        },`;
+      // });
       outStr = `${outStr}\n      },`;
       outStr = `${outStr}\n      dependencies: [`;
       if (dependencies.length > 0) {
