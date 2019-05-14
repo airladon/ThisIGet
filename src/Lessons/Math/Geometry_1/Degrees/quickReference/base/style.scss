@@ -1,10 +1,12 @@
-@import '../../explanation/base/style';
+@import '../../../../../../css/color';
 
-// $colors: (
-//   line:             darken(map-get($geometry_colors, lines), 30),
-//   intersectingLine: lighten(map-get($geometry_colors, lines), 0),
-// );
+$colors: (
+  qrDegrees_lines:              color('blue'),
+  qrDegrees_angles:             color('green'),
+  qrDegrees_arc:                color('red'),
+  qrDegrees_marks:              color('grey', 'dark'),
+);
 
-// body {
-//   @include color_vars($colors);
-// }
+body {
+  @include color_vars($colors);
+}

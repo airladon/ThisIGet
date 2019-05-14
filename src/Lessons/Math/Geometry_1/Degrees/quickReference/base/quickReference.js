@@ -11,8 +11,6 @@ const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
 const { Transform, Rect } = Fig;
 const {
   click,
-  // highlight,
-  // clickWord,
   style,
 } = Fig.tools.html;
 
@@ -28,12 +26,15 @@ export default class QRDegrees extends PopupBoxCollection {
     const diag = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      full_rotation: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.angles),
-      Angle: click(diag.pulseAngle, [diag], colors.angles),
-      equal_portions: click(diag.pulseDegrees, [diag], colors.marks),
-      lines: click(diag.pulseLines, [diag], colors.lines),
-      rotation: click(diag.pushLine, [diag, null, 2, 1, null], colors.angles),
-      measured: click(diag.pulseAngleText, [diag], colors.angles),
+      full_rotation: click(
+        diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null],
+        colors.qrDegrees_angles,
+      ),
+      Angle: click(diag.pulseAngle, [diag], colors.qrDegrees_angles),
+      equal_portions: click(diag.pulseDegrees, [diag], colors.qrDegrees_marks),
+      lines: click(diag.pulseLines, [diag], colors.qrDegrees_lines),
+      rotation: click(diag.pushLine, [diag, null, 2, 1, null], colors.qrDegrees_angles),
+      measured: click(diag.pulseAngleText, [diag], colors.qrDegrees_angles),
     };
     this.setTitle('Degrees');
     this.setDescription([
