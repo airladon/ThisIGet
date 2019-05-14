@@ -95,8 +95,8 @@ class SimpleLessonContent {
       }
       versionUids.forEach((vUid) => {
         const version = lesson.versions[vUid];
-        cssLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.css`;
-        jsLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.js`;
+        cssLink = `/static/dist/${lesson.path}/quickReference/${version.path}/qr.css`;
+        jsLink = `/static/dist/${lesson.path}/quickReference/${version.path}/qr.js`;
         if (version.qr != null && version.qr.length > 0) {
           this.qrDiagram.elements._qr[`_${uid}`].add(vUid, this.qrDiagram.shapes.collection());
           version.qr.forEach((qrid) => {

@@ -223,7 +223,12 @@ export default class LessonComponent extends React.Component
         Object.keys(topic).forEach((versionUID) => {
           const version = lessonDescription.topics[topicName][versionUID];
           const label = version.title;
-          const link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
+          let link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
+          console.log(topicName)
+          if (topicName === 'dev') {
+            link = `/dev${lessonDescription.path}/${lessonDescription.uid}/quickReference/${versionUID}`;
+            console.log(link)
+          }
           const { description } = version;
           const { fullLesson } = version;
 
@@ -268,7 +273,7 @@ export default class LessonComponent extends React.Component
     });
     // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     topicNames.forEach((name) => {
-      if (topics[name] != null) {
+      if (topics[name] != null && name !== 'quickReference') {
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
         const fullLessonCount = Object.values(topic).filter(ver => ver.fullLesson).length;
@@ -302,6 +307,9 @@ export default class LessonComponent extends React.Component
         const listItems = [];
         vUIDs.forEach((vUID) => {
           listItems.push(topic[vUID]);
+          if (name === 'quickReference') {
+            listItems.slice(-1)[0].label = vUID;
+          }
         });
         this.key += 1;
         if (partialLessonCount > 0 && name !== 'quiz') {

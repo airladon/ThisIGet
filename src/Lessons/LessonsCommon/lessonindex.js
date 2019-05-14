@@ -35,6 +35,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
       },
       dependencies: [
       ],

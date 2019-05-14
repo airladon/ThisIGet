@@ -85,10 +85,14 @@ function entryPoints(buildMode) {
     ['lesson-dev.js'],
     buildMode,
   );
+  // console.log(lessons)
   lessons.forEach((lesson) => {
     const p = lesson.path.replace(/src\/Lessons\//, '');
-    points[`Lessons/${p}/lesson`] = `./${lesson.path}/${lesson.name}`;
+    const name = lesson.name.slice(0, -3);
+    points[`Lessons/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
   });
+  // console.log(buildMode)
+  // console.log(points)
   // console.log(points)
   return points;
 }
@@ -188,8 +192,21 @@ export default function getLessonIndex() {
           }
           outStr = `${outStr}\n          },`;
         });
-
         outStr = `${outStr}\n        },`;
+
+        if (topicName === 'quickReference') {
+          outStr = `${outStr}\n        dev: {`;
+          topicVersions.forEach((v) => {
+            const [versionUid] = v;
+            outStr = `${outStr}\n          ${versionUid}: {`;
+            outStr = `${outStr}\n            type: 'presentation',`;
+            outStr = `${outStr}\n            title: '${versionUid}',`;
+            outStr = `${outStr}\n            description: '',`;
+            outStr = `${outStr}\n            fullLesson: false,`;
+            outStr = `${outStr}\n          },`;
+          });
+          outStr = `${outStr}\n        },`;
+        }
       });
 
       // versionPaths.forEach((versionPath) => {

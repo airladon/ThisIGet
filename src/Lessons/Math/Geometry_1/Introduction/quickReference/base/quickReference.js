@@ -3,16 +3,16 @@
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import details from '../../details';
-import version from './version';
+// import details from '../../details';
+// import version from './version';
+const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
+const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
 // import TriangleAreaCollection from '../common/diagramCollectionTri';
 
 // const { Transform } = Fig;
-
 export default class QRAbstraction extends PopupBoxCollection {
   constructor(
     diagram: Object,
-    // transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
     const layout = lessonLayout();
     super(
@@ -29,7 +29,7 @@ export default class QRAbstraction extends PopupBoxCollection {
       'Making something more |simple| makes it easier to analyze. Making something more |general| means the analysis can be applied to other situations.',
       'Making something more simple and general, is similar to drawing out the essence of that thing. Accordingly, the word |abstract| comes from the Latin word |abstractus| which means "drawn away".',
     ], modifiers);
-    this.setLink(details.details.uid);
+    this.setLink(lessonUID);
   }
 
   show() {
@@ -42,10 +42,10 @@ function attachQuickReference() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  if (window.quickReference[details.details.uid] == null) {
-    window.quickReference[details.details.uid] = {};
+  if (window.quickReference[lessonUID] == null) {
+    window.quickReference[lessonUID] = {};
   }
-  window.quickReference[details.details.uid][version.details.uid] = {
+  window.quickReference[lessonUID][versionUID] = {
     Abstraction: QRAbstraction,
   };
 }

@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
-import lessonLayout from '../../quickReference/base/layout';
+import lessonLayout from './layout';
 import details from '../../details';
-import version from '../../quickReference/base/version';
+import version from './version';
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -11,9 +11,12 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
-const { uid } = details.details;
-const vid = version.details.uid;
-const qrids = version.details.qr;
+const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
+const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
+
+// const { uid } = details.details;
+// const vid = version.details.uid;
+const qrids = version.details.references;
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -25,7 +28,7 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.loadQRs([
-      `${uid}/${vid}`,
+      `${lessonUID}/${versionUID}`,
     ]);
   }
 
@@ -42,7 +45,7 @@ class Content extends PresentationLessonContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = click(this.showQR, [this, uid, qrid]);
+          out[qrid] = click(this.showQR, [this, lessonUID, qrid]);
         });
         return out;
       },
