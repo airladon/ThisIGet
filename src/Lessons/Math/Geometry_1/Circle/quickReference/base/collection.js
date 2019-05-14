@@ -9,11 +9,11 @@ const {
   DiagramElementCollection,
   Equation,
   // DiagramObjectAngle,
-  Transform, Point,
+  Transform,
 } = Fig;
 
-const { spaceToSpaceTransform } = Fig.tools.g2;
-const { round } = Fig.tools.math;
+// const { spaceToSpaceTransform } = Fig.tools.g2;
+// const { round } = Fig.tools.math;
 
 type TypeEquationElements = {
   _diameter: DiagramElementPrimative;
@@ -74,7 +74,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     this.diagram.addElements(this, this.layout.addCircleElements);
     this.hasTouchableElements = true;
     this.scenarios = layout.circleScenarios;
-    this.setScenario('center');  
+    this.setScenario('center');
   }
 
   pushRadiusRandom() {
