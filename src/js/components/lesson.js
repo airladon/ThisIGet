@@ -290,7 +290,7 @@ export default class LessonComponent extends React.Component
         this.key += 1;
         if (offPathCount > 0 && name !== 'quiz') {
           listItems.splice(onPathCount, 0, {
-            label: 'Portion of Lesson',
+            label: 'Lesson Portion',
             separator: true,
           });
         }
