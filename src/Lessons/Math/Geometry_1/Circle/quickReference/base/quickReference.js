@@ -71,8 +71,14 @@ export class QRRadius extends PopupBoxCollection {
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
-      __radius__: click(this._collection.pulseRadius, [this._collection], layout.colors.qrCircle_radius),
-      __radius___: click(this._collection.pulseRadius, [this._collection], layout.colors.qrCircle_radius),
+      __radius__: click(
+        this._collection.pulseRadius, [this._collection],
+        layout.colors.qrCircle_radius,
+      ),
+      __radius___: click(
+        this._collection.pulseRadius, [this._collection],
+        layout.colors.qrCircle_radius,
+      ),
       __center__: highlight(layout.colors.qrCircle_center),
       __edge__: highlight(layout.colors.qrCircle_circle),
       __circumference__: highlight(layout.colors.qrCircle_circle),
