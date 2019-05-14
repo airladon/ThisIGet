@@ -4,7 +4,7 @@ import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -36,14 +36,14 @@ export default class QRAngle extends PopupBoxCollection {
     const diag = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      smaller: click(diag.rotateLine, [diag, 'small'], colors.lessSharp),
-      larger: click(diag.rotateLine, [diag, 'large'], colors.moreSharp),
-      Angle: click(diag.pulseFill, [diag], colors.angles),
-      lines: click(diag.pulseLines, [diag], colors.lines),
+      smaller: click(diag.rotateLine, [diag, 'small'], colors.qrAngles_lessSharp),
+      larger: click(diag.rotateLine, [diag, 'large'], colors.qrAngles_moreSharp),
+      Angle: click(diag.pulseFill, [diag], colors.qrAngles_angles),
+      lines: click(diag.pulseLines, [diag], colors.qrAngles_lines),
     };
     this.setTitle('Angle');
     this.setDescription([
-      '|Angle| is the corner formed by two lines. A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
+      '|Angle| is the corner formed by two |lines|. A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
     ], modifiers);
     this.setLink(lessonUID);
   }
