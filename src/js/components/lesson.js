@@ -21,8 +21,20 @@ import SinglePageLessonComponent from './singlePageLesson';
 
 type Props = {
   lesson: Object;
-  lessonDetails: Object;
-  versionDetails: Object;
+  lessonUID: string,
+  topicName: string,
+  versionUID: string,
+  lessonDetails: {
+    title: string,
+    dependencies: Array<string>,
+    enabled: boolean,
+  },
+  versionDetails: {
+    title: string,
+    description: string,
+    fullLesson: boolean,
+    type: 'presentation' | 'singlePage' | 'generic',
+  },
   isLoggedIn: boolean;
 };
 
@@ -59,12 +71,17 @@ export default class LessonComponent extends React.Component
   versionDetails: Object;
   topic: string;
   firstPage: number;
+  lessonUID: string;
+  versionUID: string;
 
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
-    this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
+    this.lessonUID = props.lessonUID;
+    this.versionUID = props.versionUID;
+    this.topic = props.topicName;
+    this.lessonDescription = getLessonDescription(this.lessonUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -108,9 +125,9 @@ export default class LessonComponent extends React.Component
   }
 
   getRating(topic: string) {
-    const lessonUid = this.lessonDetails.details.uid;
-    const versionUid = this.versionDetails.details.uid;
-    const link = `/rating/${lessonUid}/${topic}/${versionUid}`;
+    // const lessonUid = this.lessonDetails.details.uid;
+    // const versionUid = this.versionDetails.details.uid;
+    const link = `/rating/${this.lessonUID}/${topic}/${this.versionUID}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -143,9 +160,7 @@ export default class LessonComponent extends React.Component
       }
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
-    const lessonUid = this.lessonDetails.details.uid;
-    const versionUid = this.versionDetails.details.uid;
-    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
+    const link = `/rate/${this.lessonUID}/${this.topic}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -199,7 +214,8 @@ export default class LessonComponent extends React.Component
 
   getTopics() {
     const topics = {};
-    const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
+    // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
+
     const { lessonDescription } = this;
     if (lessonDescription != null) {
       Object.keys(this.state.ratings).forEach((topicName) => {
@@ -216,8 +232,8 @@ export default class LessonComponent extends React.Component
           }
           let active = false;
           // console.log(currentExplanation, version, topic)
-          if (currentVersion === versionUID
-            && currentTopic === topicName) {
+          if (this.versionUID === versionUID
+            && this.topic === topicName) {
             active = true;
           }
 
@@ -250,7 +266,7 @@ export default class LessonComponent extends React.Component
         topicNames.push(topicName);
       }
     });
-    const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
+    // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     topicNames.forEach((name) => {
       if (topics[name] != null) {
         const topic = topics[name];
@@ -259,7 +275,7 @@ export default class LessonComponent extends React.Component
         // $FlowFixMe - onPath is there and boolean
         const partialLessonCount = Object.values(topic).filter(ver => !ver.fullLesson).length;
         let selected = false;
-        if (currentTopic === name) {
+        if (this.topic === name) {
           selected = true;
         }
         let vUIDs = Object.keys(topic);
@@ -294,7 +310,6 @@ export default class LessonComponent extends React.Component
             separator: true,
           });
         }
-
         if (listItems.length === 1) {
           let singleItemClass = 'dropdown_button_container';
           if (selected) {
@@ -330,8 +345,8 @@ export default class LessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
-    const topicName = window.location.href.split('/').slice(-2, -1)[0];
-    return topicName.charAt(0).toUpperCase() + topicName.slice(1);
+    // const topicName = window.location.href.split('/').slice(-2, -1)[0];
+    return this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
   }
 
   renderLesson() {

@@ -53,6 +53,9 @@ export default class LessonDescription {
       uid: string,
       fullLesson: boolean,
       type: 'presentation' | 'singlePage' | 'video' | 'audio',
+      aveRating: number;
+      numRatings: number;
+      numHighRatings: number;
     }>
   };
 
@@ -79,7 +82,7 @@ export default class LessonDescription {
   //   };
   // };
 
-  // numVersions: number;
+  numVersions: number;
   callbackCount: number;
 
   enabled: boolean;
@@ -169,39 +172,41 @@ export default class LessonDescription {
   }
 
   getRatings(callback: Function) {
-    // this.callbackCount = 0;
-    // Object.keys(this.topics).forEach((topicName) => {
-    //   const topic = this.topics[topicName];
-    //   Object.keys(topic).forEach((versionUID) => {
-    //     const version = topic[versionUID];
-    //     const link = `/rating/${this.uid}/${topicName}/${versionUID}`;
-    //     fetchPolyfill(link, { credentials: 'same-origin' })
-    //       .then((response) => {
-    //         if (!response.ok) {
-    //           this.waitThenCallback(callback);
-    //           throw Error(response.statusText);
-    //         }
-    //         return response.json();
-    //       })
-    //       .then((data: {
-    //         status: 'ok' | 'fail',
-    //         message?: string,
-    //         aveRating?: number,
-    //         numRatings?: number,
-    //         numHighRatings: number,
-    //       }) => {
-    //         if (data.status === 'ok') {
-    //           version.aveRating = data.aveRating;
-    //           version.numRatings = data.numRatings;
-    //           version.numHighRatings = data.numHighRatings;
-    //         }
-    //         this.waitThenCallback(callback);
-    //       })
-    //       .catch(() => {
-    //         this.waitThenCallback(callback);
-    //       });
-    //   });
-    // });
+    this.callbackCount = 0;
+    this.numVersions = 0;
+    Object.keys(this.topics).forEach((topicName) => {
+      const topic = this.topics[topicName];
+      this.numVersions += Object.keys(topic).length;
+      Object.keys(topic).forEach((versionUID) => {
+        const version = topic[versionUID];
+        const link = `/rating/${this.uid}/${topicName}/${versionUID}`;
+        fetchPolyfill(link, { credentials: 'same-origin' })
+          .then((response) => {
+            if (!response.ok) {
+              this.waitThenCallback(callback);
+              throw Error(response.statusText);
+            }
+            return response.json();
+          })
+          .then((data: {
+            status: 'ok' | 'fail',
+            message?: string,
+            aveRating?: number,
+            numRatings?: number,
+            numHighRatings: number,
+          }) => {
+            if (data.status === 'ok') {
+              version.aveRating = data.aveRating;
+              version.numRatings = data.numRatings;
+              version.numHighRatings = data.numHighRatings;
+            }
+            this.waitThenCallback(callback);
+          })
+          .catch(() => {
+            this.waitThenCallback(callback);
+          });
+      });
+    });
   }
 }
 
