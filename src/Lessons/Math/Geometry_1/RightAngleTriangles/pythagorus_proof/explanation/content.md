@@ -40,4 +40,4 @@ $$\color{lessonBlue} \bbox[20px,border:1px solid red]{A^2 + B^2 = C^2}$$
 
 And so for a right angle triangle the sum of the squares of the perpendicular sides is equal to the square of the hypotenuse. This can also be visulaized as squares made from the edges of the right angle triangle:
 
-![](./ThreeTriangles.png)
+![](./Squares.png)

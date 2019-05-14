@@ -575,8 +575,8 @@ export default function getLessonIndex() {
       uid: 'right_angle_triangles',
       versions: {
         base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
+          title: 'Presentation',
+          description: 'Full explanation.',
           path: 'base',
           onPath: true,
           topics: [

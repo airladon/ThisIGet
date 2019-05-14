@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Base',
-  description: 'Explanation_of_version_here.',
+  title: 'Airladon',
+  description: 'Presentation',
   uid: 'base',
   qr: [
     'Main',
