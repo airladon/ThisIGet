@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Why Study Shapes?',
-  dependencies: [],
+  title: 'Circles',
+  dependencies: ['Introduction'],
   enabled: true,
 };
 

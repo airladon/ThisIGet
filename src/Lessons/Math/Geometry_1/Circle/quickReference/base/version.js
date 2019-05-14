@@ -2,10 +2,14 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Initial',
-  description: 'Presentation form - interactive.',
-  fullLesson: true,
   type: 'presentation',
+  references: [
+    'Diameter',
+    'Radius',
+    'Circumference',
+    'Circle',
+    'Pi',
+  ],
 };
 
 module.exports = {

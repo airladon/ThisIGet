@@ -1,0 +1,15 @@
+@import '../../../geometry';
+
+$colors: (
+  circle:               color('red'),
+  radius:               color('blue'),
+  diameter:             color('green'),
+  center:               color('yellow'),
+  grid:                 color('grey', 'dark'),
+  circleFill:           color('black', 'dark'),
+  property:             color('red'),
+);
+
+body {
+  @include color_vars($colors);
+}

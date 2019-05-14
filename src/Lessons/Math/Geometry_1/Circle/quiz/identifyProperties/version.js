@@ -2,8 +2,8 @@
 
 // eslint-disable-next-line no-var
 var details = {
-  title: 'Initial',
-  description: 'Presentation form - interactive.',
+  title: 'Identify Properties',
+  description: 'Identify the properties of a circle.',
   fullLesson: true,
   type: 'presentation',
 };
