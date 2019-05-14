@@ -17,10 +17,11 @@ function renderLesson(
     enabled: boolean,
   },
   versionDetails: {
-    title: string,
-    description: string,
-    fullLesson: boolean,
+    title?: string,
+    description?: string,
+    fullLesson?: boolean,
     type: 'presentation' | 'singlePage' | 'generic',
+    references?: Array<string>,
   },
 ) {
   const lessonId: HTMLElement | null = document.getElementById('single-page-lesson');

@@ -14,8 +14,6 @@ const layout = lessonLayout();
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
 
-// const { uid } = details.details;
-// const vid = version.details.uid;
 const qrids = version.details.references;
 
 class Content extends PresentationLessonContent {
