@@ -595,6 +595,51 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    RectanglesAndSquares: new LessonDescription({
+      title: 'Rectangles and Squares',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'RectanglesAndSquares',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Rectangle',
+              'Square',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Quadrangles',
+        'CongruentTriangles',
+      ],
+      enabled: true,
+    }),
     RelatedAngles: new LessonDescription({
       title: 'Related Angles',
       path: '/Lessons/Math/Geometry_1',
