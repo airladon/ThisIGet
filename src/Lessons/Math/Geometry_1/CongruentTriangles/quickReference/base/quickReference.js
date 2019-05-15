@@ -4,7 +4,7 @@ import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -37,8 +37,8 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      side_lengths: highlight(colors.sides),
-      angles: highlight(colors.angles),
+      side_lengths: highlight(colors.qrCongruent_sides),
+      angles: highlight(colors.qrCongruent_angles),
       rotated: click(coll.rotateTriangle, [coll, null, null], colors.diagram.action),
       flipped: click(coll.simpleFlip, [coll, 1, null], colors.diagram.action),
     };
@@ -86,8 +86,8 @@ export class QRAaa extends PopupBoxCollection {
 
     const { colors } = this.layout;
     const modifiers = {
-      different_side_lengths: highlight(colors.sides),
-      three_angles: highlight(colors.angles),
+      different_side_lengths: highlight(colors.qrCongruent_sides),
+      three_angles: highlight(colors.qrCongruent_angles),
     };
     this.setTitle('Angle Angle Angle Triangle Congruency Test');
     this.setDescription(['Triangles with the same |three_angles| can have |different_side_lengths|. Therefore knowing two triangles have the same three angles is |not sufficient to determine if they are congruent|.',
@@ -135,8 +135,8 @@ export class QRSas extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      two_sides_of_the_same_length: highlight(colors.sides),
-      three_angles: highlight(colors.angles),
+      two_sides_of_the_same_length: highlight(colors.qrCongruent_sides),
+      three_angles: highlight(colors.qrCongruent_angles),
     };
     this.setTitle('Side Angle Side Triangle Congruency Test');
     this.setDescription([
@@ -185,7 +185,7 @@ export class QRSsa extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      angle_a: highlightWord('angle (a)', colors.angles),
+      angle_a: highlightWord('angle (a)', colors.qrCongruent_angles),
     };
     this.setTitle('Side Side Angle Triangle Congruency Test');
     this.setDescription([
@@ -234,8 +234,8 @@ export class QRAsa extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      two_angles: highlight(colors.angles),
-      side_between: highlight(colors.sides),
+      two_angles: highlight(colors.qrCongruent_angles),
+      side_between: highlight(colors.qrCongruent_sides),
     };
     this.setTitle('Angle Side Angle Triangle Congruency Test');
     this.setDescription([
@@ -285,8 +285,8 @@ export class QRAas extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      two_angles: highlight(colors.angles),
-      side_not_between: highlight(colors.sides),
+      two_angles: highlight(colors.qrCongruent_angles),
+      side_not_between: highlight(colors.qrCongruent_sides),
     };
     this.setTitle('Angle Angle Side Triangle Congruency Test');
     this.setDescription([
@@ -336,7 +336,7 @@ export class QRSss extends PopupBoxCollection {
     // const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      side_lengths: highlight(colors.sides),
+      side_lengths: highlight(colors.qrCongruent_sides),
     };
     this.setTitle('Side Side Side Triangle Congruency Test');
     this.setDescription([
