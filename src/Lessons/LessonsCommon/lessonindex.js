@@ -1115,6 +1115,44 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    CalculatingPi: new LessonDescription({
+      title: 'Calculating Pi',
+      path: '/Lessons/Math/Geometry_1/ToDo',
+      uid: 'CalculatingPi',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'RightAngleTriangles',
+      ],
+      enabled: false,
+    }),
+    SimilarTriangles: new LessonDescription({
+      title: 'Similar Triangles',
+      path: '/Lessons/Math/Geometry_1/ToDo',
+      uid: 'SimilarTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLineDistance',
+      ],
+      enabled: false,
+    }),
     Triangles: new LessonDescription({
       title: 'Triangles',
       path: '/Lessons/Math/Geometry_1',
