@@ -2,6 +2,51 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {
+    AdjacentAngles: new LessonDescription({
+      title: 'Adjacent Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AdjacentAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Complementary',
+              'Supplementary',
+              'Explementary',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ImportantAngles',
+      ],
+      enabled: true,
+    }),
     Angle: new LessonDescription({
       title: 'Angles',
       path: '/Lessons/Math/Geometry_1',
