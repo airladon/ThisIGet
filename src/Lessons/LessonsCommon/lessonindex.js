@@ -298,6 +298,49 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Equilateral: new LessonDescription({
+      title: 'Equilateral Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Equilateral',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Isosceles',
+      ],
+      enabled: true,
+    }),
     ExternalAngles: new LessonDescription({
       title: 'External Angle of a Triangle',
       path: '/Lessons/Math/Geometry_1',

@@ -1,0 +1,17 @@
+@import '../../../geometry';
+
+$colors: (
+  sides:             color('blue'),
+  angles:            color('red'),
+  highlight:         color('green'),
+  // disabled:          color('diagram', 'disabled'),
+  // disabled:          color('black', 'light'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}
