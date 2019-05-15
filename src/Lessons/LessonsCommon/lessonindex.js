@@ -892,6 +892,65 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    RightAngleTriangles: new LessonDescription({
+      title: 'Right Angle Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'RightAngleTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+          pythagorus_proof: {
+            type: 'SinglePage',
+            title: 'Pythagorean Theorem Derivation',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+              'Pythagorus',
+              'Area',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'AreaTriangle',
+      ],
+      enabled: true,
+    }),
     SideAngleRelationship: new LessonDescription({
       title: 'Side Angle Relationships',
       path: '/Lessons/Math/Geometry_1',
