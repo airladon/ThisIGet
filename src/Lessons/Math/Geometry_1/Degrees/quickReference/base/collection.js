@@ -54,14 +54,28 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._circle._angleText._label.makeTouchable();
   }
 
+  setAngleTextProperties(marks: number, decimals: number, units: string) {
+    this.marks = marks;
+    this.decimals = decimals;
+    this.units = units;
+  }
+
+  setAngleMarks(
+  ) {
+    this.setAngleTextProperties(360, 0, 'º');
+    this._circle._degrees.showAll();
+    this.updateAngle();
+    this.diagram.animateNextFrame();
+  }
+
   updateAngle() {
     const r = this._circle._line1.getRotation('0to360');
     if (this._circle._angle.isShown) {
       this._circle._angle.setAngle({ angle: r });
     }
-    if (this._circle._arc.isShown) {
-      this._circle._arc.setAngleToDraw(r + 0.01);
-    }
+    // if (this._circle._arc.isShown) {
+    //   this._circle._arc.setAngleToDraw(r + 0.01);
+    // }
     if (this._circle._angleText.isShown) {
       const text = `${round(r * this.marks / Math.PI / 2, this.decimals).toFixed(this.decimals)} ${this.units}`;
       this._circle._angleText._value.drawingObject.setText(text);

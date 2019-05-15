@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -58,7 +58,7 @@ export default class QRDegrees extends PopupBoxCollection {
     circle._line1.setRotation(1);
     circle._line1.makeTouchable();
     circle.setScenario('qr');
-    collection.setAngleMarks('degrees');
+    collection.setAngleMarks();
     circle._angleText.setScenario('qr');
     collection.updateAngle();
     this.transformToQRWindow(collection, new Rect(-2, -1, 4, 2.2));
