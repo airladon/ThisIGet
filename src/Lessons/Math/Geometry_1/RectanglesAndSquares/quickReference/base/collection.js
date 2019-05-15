@@ -136,12 +136,12 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseCommonAngles() {
-    this.pulseAlternateAngles();
-    this._rect._bottomLeft.pulseScaleNow(1, 1.3);
-    this._rect._topRight.pulseScaleNow(1, 1.3);
-    this.diagram.animateNextFrame();
-  }
+  // pulseCommonAngles() {
+  //   this.pulseAlternateAngles();
+  //   this._rect._bottomLeft.pulseScaleNow(1, 1.3);
+  //   this._rect._topRight.pulseScaleNow(1, 1.3);
+  //   this.diagram.animateNextFrame();
+  // }
 
   toggleOppositeSides() {
     this.opposite = !this.opposite;
