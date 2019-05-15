@@ -1,0 +1,14 @@
+@import '../../../geometry';
+
+$colors: (
+  sides:             map-get($geometry_colors, lines),
+  angles:            map-get($geometry_colors, angleLabels),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}
