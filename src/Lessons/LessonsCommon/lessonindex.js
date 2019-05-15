@@ -143,6 +143,57 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    AreaTriangle: new LessonDescription({
+      title: 'Area of a Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AreaTriangle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Area',
+      ],
+      enabled: true,
+    }),
     Circle: new LessonDescription({
       title: 'Circles',
       path: '/Lessons/Math/Geometry_1',

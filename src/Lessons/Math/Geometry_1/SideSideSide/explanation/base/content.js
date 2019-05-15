@@ -33,8 +33,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'congruent_triangles/base',
-      'isosceles_triangles/base',
+      'CongruentTriangles/base',
+      'Isosceles/base',
     ]);
   }
 
@@ -58,11 +58,11 @@ class Content extends PresentationLessonContent {
         'If triangles share the same angles only, then they cannot be determined to be congruent (|Angle-Angle-Angle|).',
       ]),
       modifiers: {
-        'Angle-Side-Angle': click(this.showQR, [this, 'congruent_triangles/base', 'Asa'], colors.diagram.action),
-        'Angle-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Aas'], colors.diagram.action),
-        'Side-Angle-Side': click(this.showQR, [this, 'congruent_triangles/base', 'Sas'], colors.diagram.action),
-        'Side-Side-Angle': click(this.showQR, [this, 'congruent_triangles/base', 'Ssa'], colors.diagram.action),
-        'Angle-Angle-Angle': click(this.showQR, [this, 'congruent_triangles/base', 'Aaa'], colors.diagram.action),
+        'Angle-Side-Angle': click(this.showQR, [this, 'CongruentTriangles/base', 'Asa'], colors.diagram.action),
+        'Angle-Angle-Side': click(this.showQR, [this, 'CongruentTriangles/base', 'Aas'], colors.diagram.action),
+        'Side-Angle-Side': click(this.showQR, [this, 'CongruentTriangles/base', 'Sas'], colors.diagram.action),
+        'Side-Side-Angle': click(this.showQR, [this, 'CongruentTriangles/base', 'Ssa'], colors.diagram.action),
+        'Angle-Angle-Angle': click(this.showQR, [this, 'CongruentTriangles/base', 'Aaa'], colors.diagram.action),
       },
     });
     this.addSection({
@@ -252,13 +252,13 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         left: click(this.next, [this], colors.sides),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
     });
     this.addSection(common, {
       modifiers: {
         left: click(coll.pulseLeftIsosceles, [coll, null], colors.sides),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
       setEnterState: () => {
         coll.colorLeftIsosceles();
@@ -287,7 +287,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         two_angles: click(this.next, [this], colors.angles),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
       show: [
         coll._left, coll._base._line, coll._right,
@@ -298,7 +298,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         two_angles: click(coll.pulseLeftIsoscelesAngles, [coll, null], colors.angles),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
       show: [
         coll._left, coll._base._line, coll._right,
@@ -334,7 +334,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         right: click(this.next, [this], colors.sides),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
       setEnterState: () => {
         coll.colorLeftIsosceles();
@@ -343,7 +343,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         right: click(coll.pulseRightIsosceles, [coll, null], colors.sides),
-        isosceles: click(this.showQR, [this, 'isosceles_triangles/base', 'Main'], colors.sides),
+        isosceles: click(this.showQR, [this, 'Isosceles/base', 'Main'], colors.sides),
       },
       setEnterState: () => {
         coll.colorRightIsosceles();
@@ -464,7 +464,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         'Side-Angle-Side': click(
           this.showQR,
-          [this, 'congruent_triangles/base', 'Sas'],
+          [this, 'CongruentTriangles/base', 'Sas'],
           colors.diagram.action,
         ),
         top: click(coll.pulseTopTriangle, [coll], colors.sides),
