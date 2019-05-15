@@ -97,7 +97,10 @@ export class QRCorresponding extends PopupBoxCollection {
       ),
       parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
       two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      intersecting: click(three.pulseIntersecting, [three], colors.qrRelatedAngles_intersectingLine),
+      intersecting: click(
+        three.pulseIntersecting, [three],
+        colors.qrRelatedAngles_intersectingLine,
+      ),
       corresponding_angles_are_always_equal: highlight(colors.qrRelatedAngles_angle3),
       two_lines_are_always_parallel: highlight(colors.qrRelatedAngles_angle3),
     };
@@ -164,7 +167,10 @@ export class QRAlternate extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       Alternate_angles: click(three.toggleAlternate, [three], colors.qrRelatedAngles_angle1),
-      intersecting_line: click(three.pulseIntersecting, [three], colors.qrRelatedAngles_intersectingLine),
+      intersecting_line: click(
+        three.pulseIntersecting, [three],
+        colors.qrRelatedAngles_intersectingLine,
+      ),
       two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
       parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
       alternate_angles_are_always_equal: highlight(colors.qrRelatedAngles_angle3),
@@ -233,7 +239,10 @@ export class QRInterior extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       Interior_angles: click(three.toggleInterior, [three], colors.qrRelatedAngles_angle1),
-      intersecting: click(three.pulseIntersecting, [three], colors.qrRelatedAngles_intersectingLine),
+      intersecting: click(
+        three.pulseIntersecting, [three],
+        colors.qrRelatedAngles_intersectingLine,
+      ),
       two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
       parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
       interior_angles_always_add_to_180º: highlight(colors.qrRelatedAngles_angle3),
