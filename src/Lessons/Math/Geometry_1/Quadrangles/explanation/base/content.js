@@ -34,7 +34,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'triangle_introduction/base',
+      'Triangles/base',
     ]);
   }
 
@@ -63,7 +63,7 @@ class Content extends PresentationLessonContent {
         'Similar to a |triangle|, all the angles of a quadrangle are |related| and will |always add up to the same angle|.',
       ],
       modifiers: {
-        triangle: click(this.showQR, [this, 'triangle_introduction/base', 'Main'], colors.diagram.action),
+        triangle: click(this.showQR, [this, 'Triangles/base', 'Main'], colors.diagram.action),
       },
       show: [coll._quad1, coll._quad2, coll._quad3],
     });
@@ -101,7 +101,7 @@ class Content extends PresentationLessonContent {
         'As angles in |triangle| always sum to 180º, then the angles in a quadrangle must always sum to |twice| that, or |360º|.',
       ],
       modifiers: {
-        triangle: click(this.showQR, [this, 'triangle_introduction/base', 'Main'], colors.diagram.action),
+        triangle: click(this.showQR, [this, 'Triangles/base', 'Main'], colors.diagram.action),
       },
       show: [coll],
     });

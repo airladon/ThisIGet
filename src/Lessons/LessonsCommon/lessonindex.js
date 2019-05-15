@@ -441,6 +441,57 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Quadrangles: new LessonDescription({
+      title: 'Quadrangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Quadrangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Triangles',
+      ],
+      enabled: true,
+    }),
     Radians: new LessonDescription({
       title: 'Radians',
       path: '/Lessons/Math/Geometry_1',
