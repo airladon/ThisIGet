@@ -12,4 +12,4 @@ const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
 const topic = require.resolve('./version').split('/').slice(-3, -2)[0];
 
 const lesson = new PresentationLesson(new Content());
-renderLesson(lesson, lessonUID, versionUID, topic, details.details, version.details);
+renderLesson(lesson, lessonUID, topic, versionUID, details.details, version.details);

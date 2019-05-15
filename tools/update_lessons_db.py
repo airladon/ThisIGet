@@ -5,7 +5,6 @@ import sys
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics  # noqa
-import pdb
 
 
 def index_loader(file):
@@ -139,4 +138,5 @@ for key, value in index.items():            # noqa
                     toBool(version_object['fullLesson']))
             check(version, 'pageType', version_object['type'])
 
-db.session.commit()
+if write:
+    db.session.commit()

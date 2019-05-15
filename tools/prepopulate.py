@@ -48,7 +48,7 @@ def addRating(lesson_uid, topic_name, version_uid, rating_value, username):
     db.session.commit()
 
 
-addUser('airladon', 'airladon@gmail.com', 'asdfasdf')
+# addUser('airladon', 'airladon@gmail.com', 'asdfasdf')
 for i in range(10):
     username = f'test_user_{i:03}'
     email = f'{username}@thisiget.com'

@@ -160,6 +160,7 @@ export default class LessonComponent extends React.Component
       }
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
+
     const link = `/rate/${this.lessonUID}/${this.topic}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
