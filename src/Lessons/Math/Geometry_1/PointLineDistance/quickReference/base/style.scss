@@ -1,0 +1,12 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  lines:                color('blue'),
+  points:               color('blue'),
+  distance:             color('yellow'),
+  distance2:            color('violet'),
+);
+
+body {
+  @include color_vars($colors);
+}

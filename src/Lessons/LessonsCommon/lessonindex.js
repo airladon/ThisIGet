@@ -691,6 +691,49 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    PointLineDistance: new LessonDescription({
+      title: 'Point to Line Distance',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'PointLineDistance',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'RightAngleTriangles',
+      ],
+      enabled: true,
+    }),
     Quadrangles: new LessonDescription({
       title: 'Quadrangles',
       path: '/Lessons/Math/Geometry_1',
@@ -905,7 +948,7 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
           pythagorus_proof: {
-            type: 'SinglePage',
+            type: 'singlePage',
             title: 'Pythagorean Theorem Derivation',
             description: '',
             fullLesson: false,
