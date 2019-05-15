@@ -3,7 +3,7 @@
 // eslint-disable-next-line no-var
 var details = {
   type: 'presentation',
-  qr: [
+  references: [
     'Main',
   ],
 };

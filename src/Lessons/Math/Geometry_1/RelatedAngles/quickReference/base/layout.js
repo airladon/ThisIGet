@@ -13,13 +13,12 @@ const {
 const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'qrLines',
-  'qrAngle1',
-  'qrAngle2',
-  'qrAngle3',
-  'qrAngle4',
-  'qrDisabled',
-  'qrIntersectingLine',
+  'qrRelatedAngles_lines',
+  'qrRelatedAngles_angle1',
+  'qrRelatedAngles_angle2',
+  'qrRelatedAngles_angle3',
+  'qrRelatedAngles_angle4',
+  'qrRelatedAngles_intersectingLine',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -37,7 +36,7 @@ export default function lessonLayout() {
     options: {
       length: layout.length,
       width: layout.width,
-      color: colors.qrLines,
+      color: colors.qrRelatedAngles_lines,
       vertexSpaceStart: 'center',
       move: {
         type: 'rotation',
@@ -90,19 +89,19 @@ export default function lessonLayout() {
   });
   layout.oppositeAngle1 = joinObjects({}, layout.angle, {
     name: 'angle1',
-    options: { color: colors.qrAngle1 },
+    options: { color: colors.qrRelatedAngles_angle1 },
   });
   layout.oppositeAngle2 = joinObjects({}, layout.angle, {
     name: 'angle2',
-    options: { color: colors.qrAngle2 },
+    options: { color: colors.qrRelatedAngles_angle2 },
   });
   layout.oppositeAngle3 = joinObjects({}, layout.angle, {
     name: 'angle3',
-    options: { color: colors.qrAngle3 },
+    options: { color: colors.qrRelatedAngles_angle3 },
   });
   layout.oppositeAngle4 = joinObjects({}, layout.angle, {
     name: 'angle4',
-    options: { color: colors.qrAngle4 },
+    options: { color: colors.qrRelatedAngles_angle4 },
   });
 
   layout.oppositeEqn = {
@@ -111,10 +110,10 @@ export default function lessonLayout() {
     options: {
       color: colors.diagram.text.base,
       elements: {
-        a: { color: colors.qrAngle1 },
-        b: { color: colors.qrAngle2 },
-        c: { color: colors.qrAngle3 },
-        d: { color: colors.qrAngle4 },
+        a: { color: colors.qrRelatedAngles_angle1 },
+        b: { color: colors.qrRelatedAngles_angle2 },
+        c: { color: colors.qrRelatedAngles_angle3 },
+        d: { color: colors.qrRelatedAngles_angle4 },
         equals: { text: ' = ' },
         plus: { text: ' + ' },
         minus: { text: ' – ' },
@@ -190,7 +189,7 @@ export default function lessonLayout() {
     name: 'line3',
     options: {
       length: layout.length * 1.1,
-      color: colors.qrIntersectingLine,
+      color: colors.qrRelatedAngles_intersectingLine,
       angle: 1,
     },
     mods: {
