@@ -1,10 +1,11 @@
-@import '../../explanation/base/style';
+@import '../../../../../../css/color';
 
-// $colors: (
-//   line:             darken(map-get($geometry_colors, lines), 30),
-//   intersectingLine: lighten(map-get($geometry_colors, lines), 0),
-// );
+$colors: (
+  sides:             color('blue'),
+  angles:            color('red'),
+  disabled:          color('diagram', 'disabled', 'darker'),
+);
 
-// body {
-//   @include color_vars($colors);
-// }
+body {
+  @include color_vars($colors);
+}

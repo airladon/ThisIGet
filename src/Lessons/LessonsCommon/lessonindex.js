@@ -390,6 +390,58 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Isosceles: new LessonDescription({
+      title: 'Isosceles Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Isosceles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+              'SplitLine',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'CongruentTriangles',
+      ],
+      enabled: true,
+    }),
     ParallelLines: new LessonDescription({
       title: 'Parallel Lines',
       path: '/Lessons/Math/Geometry_1',

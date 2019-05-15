@@ -4,7 +4,7 @@ import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
-import CommonCollection from '../../explanation/base/diagramCollectionCommon';
+import CommonCollection from './collection';
 
 const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
@@ -36,7 +36,7 @@ export class QRMain extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      two_equal_angles: click(coll.pulseEqualAngles, [coll], colors.angles),
+      two_equal_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
       two_equal_sides: click(coll.pulseEqualSides, [coll], colors.sides),
       _two_equal_sides: highlight(colors.sides),
       _two_equal_angles: highlight(colors.angles),
@@ -90,8 +90,8 @@ export class QRSplitLine extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       right_angle: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
-      line: click(coll.pulseSplit, [coll], colors.sides),
-      equal_sides: click(coll.pulseLeftRightEqualSides, [coll], colors.sides),
+      line: click(coll.pulseSplit, [coll, null], colors.sides),
+      equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.sides),
       equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
     };
     this.setTitle('Isosceles Triangle');
