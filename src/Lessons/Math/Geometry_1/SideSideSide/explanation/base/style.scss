@@ -1,0 +1,17 @@
+@import '../../../geometry';
+
+$colors: (
+  sides:             color('blue'),
+  angles:            color('red'),
+  pads:              color('yellow', 'darkest'),
+  construction:      color('yellow', 'darkest'),
+  disabled:          color('diagram', 'disabled', 'darker'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}

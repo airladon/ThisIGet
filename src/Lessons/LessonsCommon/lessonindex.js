@@ -841,6 +841,33 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    SideSideSide: new LessonDescription({
+      title: 'Side-Side-Side Congruency',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SideSideSide',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Isosceles',
+      ],
+      enabled: true,
+    }),
     Triangles: new LessonDescription({
       title: 'Triangles',
       path: '/Lessons/Math/Geometry_1',
