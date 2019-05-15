@@ -1,10 +1,10 @@
 @import '../../../../../../css/color';
 
 $colors: (
-  lines:                color('blue'),
-  points:               color('blue'),
-  distance:             color('yellow'),
-  distance2:            color('violet'),
+  qrPointsLineDistance_lines:                color('blue'),
+  qrPointsLineDistance_points:               color('blue'),
+  qrPointsLineDistance_distance:             color('yellow'),
+  qrPointsLineDistance_distance2:            color('violet'),
 );
 
 body {

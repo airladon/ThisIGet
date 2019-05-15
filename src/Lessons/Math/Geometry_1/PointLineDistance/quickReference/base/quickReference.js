@@ -36,15 +36,32 @@ export default class QRPointLineDistance extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      point: click(coll.pulsePoints, [coll], colors.points),
-      point_: click(coll.pulsePointEnd, [coll], colors.points),
-      point__: click(coll.pulsePoint, [coll], colors.points),
-      point___: click(coll.pulsePoint, [coll], colors.points),
-      line: click(coll.pulseLine, [coll], colors.lines),
-      line_: click(coll.pulseLine, [coll], colors.lines),
-      perpendicular_line: click(coll.pulsePerpendicularLabel, [coll, null], colors.distance),
-      point_and_line_end: click(coll.pulseDistanceEnd, [coll], colors.distance2),
-      line_end: click(coll.pulseEnd, [coll], colors.lines),
+      point: click(
+        coll.pulsePoints, [coll], colors.qrPointsLineDistance_points,
+      ),
+      point_: click(
+        coll.pulsePointEnd, [coll], colors.qrPointsLineDistance_points,
+      ),
+      point__: click(
+        coll.pulsePoint, [coll], colors.qrPointsLineDistance_points,
+      ),
+      point___: click(
+        coll.pulsePoint, [coll], colors.qrPointsLineDistance_points,
+      ),
+      line: click(
+        coll.pulseLine, [coll], colors.qrPointsLineDistance_lines,
+      ),
+      line_: click(
+        coll.pulseLine, [coll], colors.qrPointsLineDistance_lines,
+      ),
+      perpendicular_line: click(
+        coll.pulsePerpendicularLabel, [coll, null],
+        colors.qrPointsLineDistance_distance,
+      ),
+      point_and_line_end: click(
+        coll.pulseDistanceEnd, [coll], colors.qrPointsLineDistance_distance2,
+      ),
+      line_end: click(coll.pulseEnd, [coll], colors.qrPointsLineDistance_lines),
     };
     this.setTitle('Point Line Distance');
     this.setDescription('The distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between |point___| and |line_|. ', modifiers);

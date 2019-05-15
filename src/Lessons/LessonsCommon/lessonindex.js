@@ -640,6 +640,49 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    ParallelLineDistance: new LessonDescription({
+      title: 'Parallel Line Distance',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ParallelLineDistance',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'PointLineDistance',
+      ],
+      enabled: true,
+    }),
     ParallelLines: new LessonDescription({
       title: 'Parallel Lines',
       path: '/Lessons/Math/Geometry_1',

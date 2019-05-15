@@ -12,10 +12,10 @@ const {
 // const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'lines',
-  'points',
-  'distance',
-  'distance2',
+  'qrPointsLineDistance_lines',
+  'qrPointsLineDistance_points',
+  'qrPointsLineDistance_distance',
+  'qrPointsLineDistance_distance2',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -39,7 +39,7 @@ export default function lessonLayout() {
     options: {
       sides: 100,
       radius: 0.05,
-      color: colors.points,
+      color: colors.qrPointsLineDistance_points,
       fill: true,
       position: p0,
     },
@@ -57,7 +57,7 @@ export default function lessonLayout() {
     options: {
       sides: 100,
       radius: 0.05,
-      color: colors.points,
+      color: colors.qrPointsLineDistance_points,
       fill: true,
       position: p3,
     },
@@ -68,7 +68,7 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       vertexSpaceStart: 'center',
-      color: colors.lines,
+      color: colors.qrPointsLineDistance_lines,
       width: 0.03,
       p1,
       p2,
@@ -82,7 +82,7 @@ export default function lessonLayout() {
     options: {
       p1: p0,
       p2: mid,
-      color: colors.distance,
+      color: colors.qrPointsLineDistance_distance,
       width: 0.01,
       label: {
         text: 'd',
@@ -100,7 +100,7 @@ export default function lessonLayout() {
     options: {
       p1: p3,
       p2: p1,
-      color: colors.distance2,
+      color: colors.qrPointsLineDistance_distance2,
       width: 0.01,
       label: {
         text: 'd',
@@ -119,7 +119,7 @@ export default function lessonLayout() {
       p1: p2,
       p2: mid,
       p3: p0,
-      color: colors.distance,
+      color: colors.qrPointsLineDistance_distance,
       autoRightAngle: true,
       curve: {
         radius: 0.2,
@@ -132,7 +132,7 @@ export default function lessonLayout() {
     name: 'end',
     method: 'polygon',
     options: {
-      color: colors.lines,
+      color: colors.qrPointsLineDistance_lines,
       radius: 0.01,
       sides: 100,
       position: p1,
