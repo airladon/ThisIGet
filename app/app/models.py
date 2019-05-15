@@ -134,7 +134,7 @@ class Categories(db.Model):
 
 class Lessons(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128), index=True, unique=True)
+    title = db.Column(db.String(128), index=True, unique=True)
     uid = db.Column(db.String(128), index=True, unique=True)
     category = db.Column(db.Integer, db.ForeignKey('categories.id'))
     dependencies = db.Column(db.String(1024), index=True)
@@ -167,10 +167,11 @@ class Versions(db.Model):
     uid = db.Column(db.String(128), index=True)
     title = db.Column(db.String(128), index=True)
     description = db.Column(db.String(256), index=True)
-    path = db.Column(db.String(128), index=True)
-    onPath = db.Column(db.Boolean, index=True)
+    # path = db.Column(db.String(128), index=True)
+    fullLesson = db.Column(db.Boolean, index=True)
+    pageType = db.Column(db.String(128), index=True)
     # topics = db.Column(db.String(512), index=True)
-    qr = db.Column(db.String(1024), index=True)
+    # qr = db.Column(db.String(1024), index=True)
     ratings = db.relationship('Ratings', backref='version', lazy='dynamic')
     all_ratings = db.relationship(
         'AllRatings', backref='version', lazy='dynamic')
