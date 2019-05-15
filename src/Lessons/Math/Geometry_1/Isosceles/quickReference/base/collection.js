@@ -95,59 +95,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  // growSplit(done: ?() => void = null) {
-  //   this.animations.cancelAll();
-  //   this._left._angleTop.hide();
-  //   this._right._angleTop.hide();
-  //   this._split._label.hide();
-  //   this._triangle._angle1.showAll();
-  //   this.animations.new()
-  //     .trigger({
-  //       callback: () => {
-  //         this._split.grow(0, 0.8);
-  //       },
-  //       duration: 0.8,
-  //     })
-  //     .trigger({
-  //       callback: () => {
-  //         this._triangle._angle1.hide();
-  //         this._left._angleTop.showAll();
-  //         this._right._angleTop.showAll();
-  //         this.pulseTopAngles();
-  //       },
-  //       duration: 1,
-  //     })
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // splitTriangle(done: ?() => void = null) {
-  //   this.animations.cancelAll();
-  //   this.setScenarios('combined');
-  //   this.animations.new()
-  //     .scenarios({ target: 'separate', duration: 1 })
-  //     .whenFinished(done)
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // joinTriangles(done: ?() => void = null) {
-  //   this.animations.cancelAll();
-  //   this.setScenarios('separate');
-  //   this._correction.hide();
-  //   this.animations.new()
-  //     .scenarios({ target: 'combined', duration: 1 })
-  //     .whenFinished(() => {
-  //       this._correction.showAll();
-  //       if (done != null) {
-  //         done();
-  //       }
-  //     })
-  //     .start();
-  //   this.diagram.animateNextFrame();
-  // }
-
   pulseTopAngles() {
     this._left._angleTop.pulseScaleNow(1, 1.3);
     this._right._angleTop.pulseScaleNow(1, 1.3);
@@ -169,12 +116,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._split.pulseWidth({ done });
     this.diagram.animateNextFrame();
   }
-
-  // pulseLeftRightBaseLabel() {
-  //   this._left._sideBase._label.pulseScaleNow(1, 1.7);
-  //   this._right._sideBase._label.pulseScaleNow(1, 1.7);
-  //   this.diagram.animateNextFrame();
-  // }
 
   pulseLeftRightBaseAngles() {
     this._left._angleBase.pulseScaleNow(1, 1.3);
@@ -201,26 +142,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._right._angleBase.update();
     this.pulseLeftRightBaseAngles();
   }
-
-  // pulseRemainingLeftRightProperties(done: ?() => void = null) {
-  //   this._left._angleEqual.pulseScaleNow(1, 1.3);
-  //   this._right._angleEqual.pulseScaleNow(1, 1.3);
-  //   this._left._angleBase.pulseScaleNow(1, 1.3);
-  //   this._right._angleBase.pulseScaleNow(1, 1.3);
-  //   this._left._sideBase._label.pulseScaleNow(1, 1.7);
-  //   this._right._sideBase._label.pulseScaleNow(1, 1.7, 0, done);
-  //   this.diagram.animateNextFrame();
-  // }
-
-  // pulseRemainingLeftRightProperties2() {
-  //   this._left._sideEqual._label.pulseScaleNow(1, 2);
-  //   this._right._sideEqual._label.pulseScaleNow(1, 2);
-  //   this._left._angleBase.pulseScaleNow(1, 1.3);
-  //   this._right._angleBase.pulseScaleNow(1, 1.3);
-  //   this._left._sideBase._label.pulseScaleNow(1, 1.7);
-  //   this._right._sideBase._label.pulseScaleNow(1, 1.7);
-  //   this.diagram.animateNextFrame();
-  // }
 
   pulseOpposites() {
     if (this.lastOpposite) {

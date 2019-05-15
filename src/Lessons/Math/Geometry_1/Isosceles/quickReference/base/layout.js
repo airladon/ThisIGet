@@ -175,43 +175,6 @@ export default function lessonLayout() {
     },
   };
 
-  // layout.eqn = {
-  //   name: 'eqn',
-  //   method: 'addEquation',
-  //   options: {
-  //     color: colors.diagram.text.base,
-  //     scale: 0.9,
-  //     elements: {
-  //       a: { color: colors.angles },
-  //       // a: 'a',
-  //       _a: { text: 'a', color: colors.angles },
-  //       b: { color: colors.angles },
-  //       plus: ' + ',
-  //       _plus: ' + ',
-  //       minus: ' – ',
-  //       equals: ' = ',
-  //       _180: '180º',
-  //       _2: '2',
-  //       v: { symbol: 'vinculum' },
-  //     },
-  //     forms: {
-  //       '0': ['a', 'plus', '_a', '_plus', 'b', 'equals', '_180'],
-  //       '1': ['_2', '_a', '_plus', 'b', 'equals', '_180'],
-  //       'a': ['a', 'equals', { frac: [['_180', 'minus', 'b'], '_2', 'v'] }],
-  //       'b': ['b', 'equals', '_180', 'minus', '_2', 'a'],
-  //     },
-  //     defaultFormAlignment: {
-  //       // fixTo: 'equals',
-  //       alignH: 'center',
-  //     },
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       top: { position: [0, 1.4] },
-  //     },
-  //   },
-  // };
-
   layout.addElements = [
     layout.left,
     layout.right,
