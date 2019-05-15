@@ -4,7 +4,7 @@ import { toMatchImageSnapshot } from 'jest-image-snapshot';
 
 const lessonUID = require.resolve('../../../details').split('/').slice(-2, -1)[0];
 const versionUID = require.resolve('../version').split('/').slice(-2, -1)[0];
-const topic = require.resolve('./version').split('/').slice(-3, -2)[0];
+const topic = require.resolve('../version').split('/').slice(-3, -2)[0];
 
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
