@@ -790,6 +790,57 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    SideAngleRelationship: new LessonDescription({
+      title: 'Side Angle Relationships',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SideAngleRelationship',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Isosceles',
+      ],
+      enabled: true,
+    }),
     Triangles: new LessonDescription({
       title: 'Triangles',
       path: '/Lessons/Math/Geometry_1',
