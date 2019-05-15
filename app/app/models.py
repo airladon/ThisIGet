@@ -144,7 +144,7 @@ class Lessons(db.Model):
     topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lessons {}>'.format(self.name)
+        return '<Lessons {}>'.format(self.title)
 
 
 class Topics(db.Model):

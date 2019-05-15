@@ -5,53 +5,7 @@ import sys
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics  # noqa
-
-# user = Users.query.filter_by(username='airladon').first()
-# print(user.username)
-
-
-# def json_loader(file):
-#     f = open(file.as_posix())
-#     details_str = f.read()
-#     start = re.search(r'\nvar details *=', details_str)
-#     stop = re.search(r'\n};', details_str)
-#     details_str = details_str[start.span()[1]:stop.span()[0] + 2]
-#     modified_str = re.sub(r"new LessonDescription\(", '', details_str)
-#     modified_str = re.sub(r"} *\) *,", '|,', modified_str)
-#     modified_str = re.sub("'", '"', modified_str)
-#     modified_str = re.sub(r"([^' ]*):", r'"\1":', modified_str)
-#     modified_str = re.sub("\n", "", modified_str)
-#     modified_str = re.sub("([^'])false([^'])", r'\1"false"\2', modified_str)
-#     modified_str = re.sub("([^'])true([^'])", r'\1"true"\2', modified_str)
-#     modified_str = re.sub(", *} *$", "}", modified_str)
-#     modified_str = re.sub(", *}", "}", modified_str)
-#     modified_str = re.sub(", *]", "]", modified_str)
-#     return json.loads(modified_str)
-
-
-# keep_out = ['boilerplate', 'LessonsCommon']
-
-
-# def iter_path(path):
-#     p = pathlib.Path(path)
-#     for x in p.iterdir():
-#         if x.is_dir() and x.name not in keep_out:
-#             iter_path('./' + x.as_posix())
-#         else:
-#             if x.name == 'details.js':
-#                 details = json_loader(x)
-#                 lesson = Lesson(lesson_name=details['title'], lesson_uid=details['uid'])
-#                 print(lesson)
-#                 db.session.add(lesson)
-
-#             # if x.name == 'version.js':
-#             #     details = json_loader(x)
-#             #     print(details)
-
-
-# Lesson.query.delete()
-# iter_path('./src/Lessons')
-# db.session.commit()
+import pdb
 
 
 def index_loader(file):
@@ -82,6 +36,56 @@ def toBool(str):
         return False
     return True
 
+
+write = False
+showUpdates = True
+
+
+def check(table, key, value):
+    if key not in table.__dict__:
+        if showUpdates:
+            if 'name' in table.__dict__:
+                topic = table
+                lesson = Lessons.query.filter_by(id=topic.lesson_id).first()
+                print(f'Create: {lesson.uid}->{topic.name} - {key}: {value}')
+            elif 'topic_id' in table.__dict__:
+                topic = Topics.query.filter_by(id=table.topic_id).first()
+                lesson = Lessons.query.filter_by(id=topic.lesson_id).first()
+                version = table
+                print(
+                    f'Create: {lesson.uid}->{topic.name}->'
+                    f'{version.uid} - {key}: {value}')
+            else:
+                print(f'Create: {table.uid} - {key}: {value}')
+        if write:
+            table.__dict__[key] = value
+        return
+
+    if table.__dict__[key] != value:
+        if showUpdates:
+            if 'name' in table.__dict__:
+                topic = table
+                lesson = Lessons.query.filter_by(id=topic.lesson_id).first()
+                print(
+                    f'Change: {lesson.uid} {topic.name} - '
+                    f'{key}: {table.__dict__[key]}   =>  {value}')
+            elif 'topic_id' in table.__dict__:
+                topic = Topics.query.filter_by(id=table.topic_id).first()
+                lesson = Lessons.query.filter_by(id=topic.lesson_id).first()
+                version = table
+                print(
+                    f'Change: {lesson.uid} {topic.name} {version.uid} - '
+                    f'{key}: {table.__dict__[key]}   =>  {value}')
+            else:
+                print(
+                    f'Change: {table.uid} - '
+                    f'{key}: {table.__dict__[key]}   =>  {value}')
+        table.__dict__[key] = value
+
+
+def printChange(lesson, topic, version, key, fromValue, toValue):
+    print(f'{lesson} {topic} {version} - {key}: {fromValue}  =>  {toValue}')
+
 for key, value in index.items():            # noqa
     # Update or create category row
     category_name = value['path'].split('/')[3]
@@ -96,19 +100,16 @@ for key, value in index.items():            # noqa
     if lesson is None:
         lesson = Lessons(uid=value['uid'])
         db.session.add(lesson)
-    if lesson.title != value['title']:
-        lesson.title = value['title']
-    if lesson.path != value['path']:
-        lesson.path = value['path']
-    if lesson.enabled != toBool(value['enabled']):
-        lesson.enabled = toBool(value['enabled'])
-    dependencies = ','.join(value['dependencies'])
-    if lesson.dependencies != dependencies:
-        lesson.dependencies = dependencies
-    if (lesson.category) != category.id:
-        lesson.category = category.id
 
-    # Update or Create Topic Versions
+    check(lesson, 'title', value['title'])
+    check(lesson, 'path', value['path'])
+    check(lesson, 'enabled', toBool(value['enabled']))
+    check(lesson, 'path', value['path'])
+    dependencies = ','.join(value['dependencies'])
+    check(lesson, 'dependencies', dependencies)
+    check(lesson, 'category', category.id)
+
+    # Update or Create Topics
     for topic_name, topic_object in value['topics'].items():
         if topic_name == 'dev':
             continue
@@ -119,23 +120,23 @@ for key, value in index.items():            # noqa
             topic = Topics(lesson_id=lesson.id, name=topic_name)
             db.session.add(topic)
 
+        # Update or Create Versions
         for version_name, version_object in topic_object.items():
             version = Versions.query.filter_by(
                 topic_id=topic.id, uid=version_name).first()
             if version is None:
                 version = Versions(topic_id=topic.id, uid=version_name)
                 db.session.add(version)
-            if 'title' in version_object and \
-                    version.title != version_object['title']:
-                version.title = version_object['title']
-            if 'description' in version_object and \
-                    version.description != version_object['description']:
-                version.description = version_object['description']
-            if 'fullLesson' in version_object and \
-                    version.fullLesson != toBool(version_object['fullLesson']):
-                version.fullLesson = toBool(version_object['fullLesson'])
-            if version.pageType != version_object['type']:
-                version.pageType = version_object['type']
+            if 'title' in version_object:
+                check(version, 'title', version_object['title'])
+
+            if 'description' in version_object:
+                check(version, 'description', version_object['description'])
+
+            if 'fullLesson' in version_object:
+                check(
+                    version, 'fullLesson',
+                    toBool(version_object['fullLesson']))
+            check(version, 'pageType', version_object['type'])
 
 db.session.commit()
-
