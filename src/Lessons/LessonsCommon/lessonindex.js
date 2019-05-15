@@ -145,6 +145,63 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    CongruentTriangles: new LessonDescription({
+      title: 'Congruent Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'CongruentTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Asa',
+              'Sss',
+              'Sas',
+              'Aas',
+              'Aaa',
+              'Ssa',
+              'CongruentTriangles',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Triangles',
+      ],
+      enabled: true,
+    }),
     Degrees: new LessonDescription({
       title: 'Degrees',
       path: '/Lessons/Math/Geometry_1',
