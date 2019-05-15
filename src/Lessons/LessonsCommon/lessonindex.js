@@ -90,6 +90,59 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Area: new LessonDescription({
+      title: 'Area and Rectangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Area',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quickReference: {
+          base: {
+            type: 'presentation',
+            references: [
+              'Area',
+              'Square',
+              'Rectangle',
+            ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'RectanglesAndSquares',
+      ],
+      enabled: true,
+    }),
     Circle: new LessonDescription({
       title: 'Circles',
       path: '/Lessons/Math/Geometry_1',
