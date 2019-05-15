@@ -18,9 +18,7 @@ export default class ViewHome extends React.Component<Props> {
       <div className='lesson__white_spacer'/>
       <LessonNavigator learningPath={'Geometry_1'}/>
       <div className='lesson__white_spacer'/>
-      {/*
       <LessonNavigator learningPath={'Trigonometry_1'}/>
-      */}
       <div className='lesson__white_spacer'/>
     </div>;
   }

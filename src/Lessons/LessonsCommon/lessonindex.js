@@ -1204,6 +1204,214 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    Chord: new LessonDescription({
+      title: 'Chord',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Chord',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Sine',
+      ],
+      enabled: false,
+    }),
+    Cosecant: new LessonDescription({
+      title: 'Cosecant',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cosecant',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Secant',
+      ],
+      enabled: false,
+    }),
+    Cosine: new LessonDescription({
+      title: 'Cosine',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cosine',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Sine',
+      ],
+      enabled: false,
+    }),
+    Cotangent: new LessonDescription({
+      title: 'Cotangent',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cotangent',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Pythagoras',
+      ],
+      enabled: false,
+    }),
+    LawOfCosines: new LessonDescription({
+      title: 'Law of Cosines',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'LawOfCosines',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'LawOfSines',
+      ],
+      enabled: false,
+    }),
+    LawOfSines: new LessonDescription({
+      title: 'Law of Sines',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'LawOfSines',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Pythagoras',
+      ],
+      enabled: false,
+    }),
+    Pythagoras: new LessonDescription({
+      title: 'Pythagorean Identity',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Pythagoras',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Tangent',
+      ],
+      enabled: false,
+    }),
+    Secant: new LessonDescription({
+      title: 'Secant',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Secant',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Pythagoras',
+      ],
+      enabled: false,
+    }),
+    Sine: new LessonDescription({
+      title: 'Sine',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Sine',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'UnitCircle',
+      ],
+      enabled: false,
+    }),
+    Tangent: new LessonDescription({
+      title: 'Tangent',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Tangent',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Chord',
+      ],
+      enabled: false,
+    }),
+    UnitCircle: new LessonDescription({
+      title: 'Unit Circle',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'UnitCircle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+      ],
+      enabled: false,
+    }),
   };
   return lessonIndex;
 }
