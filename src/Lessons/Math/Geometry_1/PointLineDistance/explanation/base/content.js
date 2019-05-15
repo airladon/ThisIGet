@@ -229,14 +229,14 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, content, {
       modifiers: {
-        right_angle_triangle: click(coll.pulseRightAngleTriangles, [coll, null], colors.distance),
+        right_angle_triangle: click(coll.pulseRightAngleTriangle, [coll, null], colors.distance),
       },
       show: [
         fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
         fig._base,
       ],
       transitionFromPrev: (done) => {
-        coll.pulseRightAngleTriangles(done);
+        coll.pulseRightAngleTriangle(done);
       },
     });
 
