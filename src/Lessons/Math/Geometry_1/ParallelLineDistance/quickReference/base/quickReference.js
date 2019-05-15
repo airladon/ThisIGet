@@ -37,8 +37,14 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
     const { colors } = this.layout;
 
     const modifiers = {
-      line_perpendicular: click(coll.pulseMiddleLineAndAngles, [coll], colors.qrParallelLineDistance_distance),
-      parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.qrParallelLineDistance_lines),
+      line_perpendicular: click(
+        coll.pulseMiddleLineAndAngles, [coll],
+        colors.qrParallelLineDistance_distance,
+      ),
+      parallel_lines: click(
+        coll.pulseParallelLines, [coll, null],
+        colors.qrParallelLineDistance_lines,
+      ),
     };
     this.setTitle('Parallel Line Distance');
     this.setDescription([
