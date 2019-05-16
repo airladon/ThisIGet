@@ -27,14 +27,21 @@ const index = getLessonIndex();
 Object.keys(index).forEach((lessonName) => {
   const lesson = index[lessonName];
   const { uid } = lesson;
-  Object.keys(lesson.versions).forEach((version) => {
-    const { topics } = lesson.versions[version];
-    topics.forEach((topic) => {
-      if (topic !== 'dev') {
+  Object.keys(lesson.topics).forEach((topic) => {
+    Object.keys(lesson.topics[topic]).forEach((version) => {
+      if (topic !== 'dev' && topic !== 'quickReference') {
         allTests.push([uid, topic, version]);
       }
     });
   });
+  // Object.keys(lesson.versions).forEach((version) => {
+  //   const { topics } = lesson.versions[version];
+  //   topics.forEach((topic) => {
+  //     if (topic !== 'dev') {
+  //       allTests.push([uid, topic, version]);
+  //     }
+  //   });
+  // });
 });
 
 describe('Lesson ratings', () => {
