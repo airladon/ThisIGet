@@ -102,6 +102,7 @@ then
   DOCKERFILE="Dockerfile_dev"
 fi
 
+
 if [ $1 != "pupp" ];
 then
   echo
@@ -110,7 +111,6 @@ then
 
   GUNICORN_PORT=4000
   docker build -t devenv-$1 .
-
   rm Dockerfile
 fi
 

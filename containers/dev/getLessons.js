@@ -97,6 +97,11 @@ function entryPoints(buildMode) {
   return points;
 }
 
+function updateDetailsAndVersions() {
+  const lessons = getAllLessons('./src/Lessons');
+  console.log(lessons)
+}
+
 function makeLessonIndex(buildMode) {
   const lessons = getAllLessons('./src/Lessons');
 

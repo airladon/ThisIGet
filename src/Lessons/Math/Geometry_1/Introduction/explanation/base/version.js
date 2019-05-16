@@ -6,6 +6,8 @@ var details = {
   description: 'Presentation form - interactive.',
   fullLesson: true,
   type: 'presentation',
+  topic: 'explanation',
+  uid: 'base',
 };
 
 module.exports = {
