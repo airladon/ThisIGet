@@ -98,6 +98,7 @@ function entryPoints(buildMode) {
 }
 
 function updateDetailsAndVersions() {
+  console.log('Updating details and versions...');
   const lessons = getAllLessons('./src/Lessons');
   lessons.forEach((lessonPath) => {
     const detailsPath = `./${lessonPath}/details.js`;
@@ -145,21 +146,24 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
       outStr = `${outStr}\nvar details = {`;
-      if (versionUID !== 'quickReference') {
-        outStr = `${outStr}\n  title: '${version.details.title || ''},`;
-        outStr = `${outStr}\n  description: '${version.details.description || ''},`;
-        outStr = `${outStr}\n  fullLesson: '${version.details.fullLesson || 'false'},`;
-        outStr = `${outStr}\n  type: '${version.details.type || 'generic'},`;
-        outStr = `${outStr}\n  topic: '${topic},`;
-        outStr = `${outStr}\n  uid: '${versionUID},`;
+      if (topic !== 'quickReference') {
+        outStr = `${outStr}\n  uid: '${versionUID}',`;
+        outStr = `${outStr}\n  topic: '${topic}',`;
+        outStr = `${outStr}\n  title: '${version.details.title || ''}',`;
+        outStr = `${outStr}\n  description: '${version.details.description || ''}',`;
+        outStr = `${outStr}\n  fullLesson: ${version.details.fullLesson || 'false'},`;
+        outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
       } else {
-        outStr = `${outStr}\n  type: '${version.details.type || 'generic'},`;
+        outStr = `${outStr}\n  uid: '${versionUID}',`;
+        outStr = `${outStr}\n  topic: '${topic}',`;
+        outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
         outStr = `${outStr}\n  references: [`;
         if (version.details.references.length > 0) {
           version.details.references.forEach((reference) => {
             outStr = `${outStr}\n    '${reference}',`;
           });
         }
+        outStr = `${outStr}\n  ],`;
       }
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
@@ -167,7 +171,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  details,`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      fs.writeFileSync(`./${versionPath}/version1.js`, outStr, (err) => {
+      fs.writeFileSync(versionFile, outStr, (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -175,10 +179,10 @@ function updateDetailsAndVersions() {
       });
     }
   });
-  console.log('done')
 }
 
 function makeLessonIndex(buildMode) {
+  console.log('Making lesson index...');
   const lessons = getAllLessons('./src/Lessons');
 
   let outStr =
@@ -233,7 +237,7 @@ export default function getLessonIndex() {
           const [versionUid, versionPath] = v;
           let versionTitle = '';
           let versionDescription = '';
-          let fullLesson = true;
+          let fullLesson = false;
           let type = 'generic';
           let references = [];
           const versionFileName = `./${versionPath}/version.js`;

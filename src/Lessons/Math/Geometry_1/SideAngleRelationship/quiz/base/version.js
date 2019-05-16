@@ -2,10 +2,12 @@
 
 // eslint-disable-next-line no-var
 var details = {
+  uid: 'base',
+  topic: 'quiz',
   title: 'Base',
   description: '',
-  type: 'presentation',
   fullLesson: true,
+  type: 'presentation',
 };
 
 module.exports = {

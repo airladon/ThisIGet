@@ -2,10 +2,12 @@
 
 // eslint-disable-next-line no-var
 var details = {
+  uid: 'pythagorus_proof',
+  topic: 'explanation',
   title: 'Pythagorean Theorem Derivation',
   description: '',
-  type: 'singlePage',
   fullLesson: false,
+  type: 'singlePage',
 };
 
 module.exports = {
