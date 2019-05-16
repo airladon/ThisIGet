@@ -55,9 +55,10 @@ def check_write_db(show=True, write=False):
                 else:
                     print(f'Create: {table.uid} - {key}: {value}')
             if write:
-                table.__dict__[key] = value
+                # table.__dict__[key] = value
+                return True
                 # print(table.__dict__[key], value)
-            return
+            return False
 
         if table.__dict__[key] != value:
             if show:
@@ -81,7 +82,12 @@ def check_write_db(show=True, write=False):
                         f'Change: {table.uid} - '
                         f'{key}: {table.__dict__[key]}   =>  {value}')
             if write:
-                table.__dict__[key] = value
+                return True
+            return False
+        return False
+        # if (key == 'pageType'):
+        #     print(table.__dict__[key], value)
+        # table.__dict__[key] = value
 
     for key, value in index.items():            # noqa
         # Update or create category row
@@ -98,13 +104,17 @@ def check_write_db(show=True, write=False):
             lesson = Lessons(uid=value['uid'])
             db.session.add(lesson)
 
-        check(lesson, 'title', value['title'])
-        check(lesson, 'path', value['path'])
-        check(lesson, 'enabled', toBool(value['enabled']))
-        check(lesson, 'path', value['path'])
+        if check(lesson, 'title', value['title']):
+            lesson.title = value['title']
+        if check(lesson, 'path', value['path']):
+            lesson.path = value['path']
+        if check(lesson, 'enabled', toBool(value['enabled'])):
+            lesson.enabled = toBool(value['enabled'])
         dependencies = ','.join(value['dependencies'])
-        check(lesson, 'dependencies', dependencies)
-        check(lesson, 'category', category.id)
+        if check(lesson, 'dependencies', dependencies):
+            lesson.dependencies = dependencies
+        if check(lesson, 'category', category.id):
+            lesson.category = category.id
 
         # Update or Create Topics
         for topic_name, topic_object in value['topics'].items():
@@ -119,23 +129,29 @@ def check_write_db(show=True, write=False):
 
             # Update or Create Versions
             for version_name, version_object in topic_object.items():
-                version = Versions.query.filter_by(
+                version = db.session.query(Versions).filter_by(
                     topic_id=topic.id, uid=version_name).first()
                 if version is None:
                     version = Versions(topic_id=topic.id, uid=version_name)
                     db.session.add(version)
                 if 'title' in version_object:
-                    check(version, 'title', version_object['title'])
+                    if check(version, 'title', version_object['title']):
+                        version.title = version_object['title']
 
                 if 'description' in version_object:
-                    check(
-                        version, 'description', version_object['description'])
+                    if check(version,
+                             'description', version_object['description']):
+                        version.description = version_object['description']
 
                 if 'fullLesson' in version_object:
-                    check(
-                        version, 'fullLesson',
-                        toBool(version_object['fullLesson']))
-                check(version, 'pageType', version_object['type'])
+                    if check(version,
+                             'fullLesson',
+                             toBool(version_object['fullLesson'])):
+                        version.fullLesson = toBool(
+                            version_object['fullLesson'])
+                if check(version, 'pageType', version_object['type']):
+                    version.pageType = version_object['type']
+                db.session.commit()
 
     if write:
         db.session.commit()
