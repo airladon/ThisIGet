@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'PointLineDistance',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'ParallelLineDistance',
 };
 

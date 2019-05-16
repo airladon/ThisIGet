@@ -21,15 +21,18 @@ import SinglePageLessonComponent from './singlePageLesson';
 
 type Props = {
   lesson: Object;
-  lessonUID: string,
-  topicName: string,
-  versionUID: string,
+  // lessonUID: string,
+  // topicName: string,
+  // versionUID: string,
   lessonDetails: {
+    uid: string,
     title: string,
     dependencies: Array<string>,
     enabled?: boolean,
   },
   versionDetails: {
+    uid: string,
+    topic: string,
     title: string,
     description: string,
     fullLesson: boolean,
@@ -78,9 +81,9 @@ export default class LessonComponent extends React.Component
     super(props);
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
-    this.lessonUID = props.lessonUID;
-    this.versionUID = props.versionUID;
-    this.topic = props.topicName;
+    this.lessonUID = props.lessonDetails.uid;
+    this.versionUID = props.versionDetails.uid;
+    this.topic = props.versionDetails.topic;
     this.lessonDescription = getLessonDescription(this.lessonUID);
     this.state = {
       userRating: 0,

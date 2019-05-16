@@ -8,15 +8,18 @@ import withLoginManager from '../../components/view';
 
 function renderLesson(
   lesson: Object,
-  lessonUID: string,
-  topicName: string,
-  versionUID: string,
+  // lessonUID: string,
+  // topicName: string,
+  // versionUID: string,
   lessonDetails: {
+    uid: string,
     title: string,
     dependencies: Array<string>,
     enabled?: boolean,
   },
   versionDetails: {
+    uid: string,
+    topic: string,
     title?: string,
     description?: string,
     fullLesson?: boolean,
@@ -31,9 +34,9 @@ function renderLesson(
     ReactDOM.render(
       <LessonView
         lesson={lesson}
-        lessonUID={lessonUID}
-        topicName={topicName}
-        versionUID={versionUID}
+        // lessonUID={lessonUID}
+        // topicName={topicName}
+        // versionUID={versionUID}
         lessonDetails={lessonDetails}
         versionDetails={versionDetails}
       />,

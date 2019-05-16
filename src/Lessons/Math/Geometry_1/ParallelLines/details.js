@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'AdjacentAngles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'ParallelLines',
 };
 

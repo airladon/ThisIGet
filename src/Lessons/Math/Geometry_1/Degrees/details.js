@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'Angle',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'Degrees',
 };
 

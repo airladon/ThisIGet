@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'RelatedAngles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'Triangles',
 };
 

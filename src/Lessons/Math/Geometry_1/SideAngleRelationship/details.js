@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'Isosceles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'SideAngleRelationship',
 };
 

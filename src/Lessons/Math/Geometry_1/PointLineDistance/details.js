@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'RightAngleTriangles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'PointLineDistance',
 };
 

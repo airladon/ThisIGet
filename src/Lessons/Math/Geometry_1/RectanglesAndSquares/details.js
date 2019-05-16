@@ -7,7 +7,7 @@ var details = {
     'Quadrangles',
     'CongruentTriangles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'RectanglesAndSquares',
 };
 

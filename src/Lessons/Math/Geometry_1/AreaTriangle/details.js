@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'Area',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'AreaTriangle',
 };
 

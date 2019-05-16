@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'CongruentTriangles',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'Isosceles',
 };
 

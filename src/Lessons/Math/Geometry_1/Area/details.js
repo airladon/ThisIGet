@@ -6,7 +6,7 @@ var details = {
   dependencies: [
     'RectanglesAndSquares',
   ],
-  enabled: false,
+  enabled: true,
   uid: 'Area',
 };
 
