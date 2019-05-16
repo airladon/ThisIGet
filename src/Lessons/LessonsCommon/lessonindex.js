@@ -15,24 +15,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Complementary',
-              'Supplementary',
-              'Explementary',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -60,22 +42,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -101,24 +67,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Area',
-              'Square',
-              'Rectangle',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -156,22 +104,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -205,22 +137,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -258,26 +174,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Diameter',
-              'Radius',
-              'Circumference',
-              'Circle',
-              'Pi',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -311,28 +207,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Asa',
-              'Sss',
-              'Sas',
-              'Aas',
-              'Aaa',
-              'Ssa',
-              'CongruentTriangles',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -370,22 +244,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -413,22 +271,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -454,22 +296,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -505,27 +331,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Acute',
-              'Right',
-              'Obtuse',
-              'Straight',
-              'Reflex',
-              'Full',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -567,22 +372,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Abstraction',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
       },
       dependencies: [
       ],
@@ -599,23 +388,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-              'SplitLine',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -653,22 +425,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -694,22 +450,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -747,22 +487,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -788,22 +512,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -841,22 +549,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -892,23 +584,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Rectangle',
-              'Square',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -935,25 +610,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Opposite',
-              'Alternate',
-              'Corresponding',
-              'Interior',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -997,24 +653,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-              'Pythagorus',
-              'Area',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1048,22 +686,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1164,22 +786,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {

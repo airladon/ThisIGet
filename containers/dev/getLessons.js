@@ -231,6 +231,12 @@ export default function getLessonIndex() {
       });
 
       Object.keys(topics).forEach((topicName) => {
+        if (
+          buildMode !== 'development'
+          && (topicName === 'quickReference' || topicName === 'dev')
+        ) {
+          return;
+        }
         const topicVersions = topics[topicName];
         outStr = `${outStr}\n        ${topicName}: {`;
         topicVersions.forEach((v) => {
