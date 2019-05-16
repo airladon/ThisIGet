@@ -116,15 +116,15 @@ function updateDetailsAndVersions() {
         });
       }
       outStr = `${outStr}\n  ],`;
-      outStr = `${outStr}\n  enabled: ${details.details.enabled},`;
+      outStr = `${outStr}\n  enabled: ${details.details.enabled || 'false'},`;
       outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
       outStr = `${outStr}\nmodule.exports = {`;
       outStr = `${outStr}\n  details,`;
-      outStr = `${outStr}\n}`;
+      outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      fs.writeFile(detailsPath, outStr, (err) => {
+      fs.writeFileSync(detailsPath, outStr, (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -132,6 +132,7 @@ function updateDetailsAndVersions() {
       });
     }
   });
+  console.log('done')
 }
 
 function makeLessonIndex(buildMode) {
