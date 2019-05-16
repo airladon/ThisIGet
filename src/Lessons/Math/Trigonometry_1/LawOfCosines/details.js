@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Law of Cosines',
-  dependencies: ['LawOfSines'],
+  dependencies: [
+    'LawOfSines',
+  ],
   enabled: false,
+  uid: 'LawOfCosines',
 };
 
 module.exports = {

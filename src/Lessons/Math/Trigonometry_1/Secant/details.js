@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Secant',
-  dependencies: ['Pythagoras'],
+  dependencies: [
+    'Pythagoras',
+  ],
   enabled: false,
+  uid: 'Secant',
 };
 
 module.exports = {

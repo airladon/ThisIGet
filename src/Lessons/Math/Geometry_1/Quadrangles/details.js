@@ -3,7 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Quadrangles',
-  dependencies: ['Triangles'],
+  dependencies: [
+    'Triangles',
+  ],
+  enabled: false,
+  uid: 'Quadrangles',
 };
 
 module.exports = {

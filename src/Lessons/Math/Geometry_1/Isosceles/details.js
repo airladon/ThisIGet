@@ -3,7 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Isosceles Triangle',
-  dependencies: ['CongruentTriangles'],
+  dependencies: [
+    'CongruentTriangles',
+  ],
+  enabled: false,
+  uid: 'Isosceles',
 };
 
 module.exports = {

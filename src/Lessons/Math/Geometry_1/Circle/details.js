@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Circles',
-  dependencies: ['Introduction'],
+  dependencies: [
+    'Introduction',
+  ],
   enabled: true,
+  uid: 'Circle',
 };
 
 module.exports = {

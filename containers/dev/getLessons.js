@@ -132,6 +132,49 @@ function updateDetailsAndVersions() {
       });
     }
   });
+
+  const versions = getAllVersions('./src/Lessons');
+  versions.forEach((versionPath) => {
+    const versionFile = `./${versionPath}/version.js`;
+    const topic = versionPath.split('/').slice(-2, -1)[0];
+    const versionUID = versionPath.split('/').slice(-1)[0];
+    if (fs.existsSync(versionFile)) {
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      const version = require(versionFile);
+      let outStr = '// @flow';
+      outStr = `${outStr}\n`;
+      outStr = `${outStr}\n// eslint-disable-next-line no-var`;
+      outStr = `${outStr}\nvar details = {`;
+      if (versionUID !== 'quickReference') {
+        outStr = `${outStr}\n  title: '${version.details.title || ''},`;
+        outStr = `${outStr}\n  description: '${version.details.description || ''},`;
+        outStr = `${outStr}\n  fullLesson: '${version.details.fullLesson || 'false'},`;
+        outStr = `${outStr}\n  type: '${version.details.type || 'generic'},`;
+        outStr = `${outStr}\n  topic: '${topic},`;
+        outStr = `${outStr}\n  uid: '${versionUID},`;
+      } else {
+        outStr = `${outStr}\n  type: '${version.details.type || 'generic'},`;
+        outStr = `${outStr}\n  references: [`;
+        if (version.details.references.length > 0) {
+          version.details.references.forEach((reference) => {
+            outStr = `${outStr}\n    '${reference}',`;
+          });
+        }
+      }
+      outStr = `${outStr}\n};`;
+      outStr = `${outStr}\n`;
+      outStr = `${outStr}\nmodule.exports = {`;
+      outStr = `${outStr}\n  details,`;
+      outStr = `${outStr}\n};`;
+      outStr = `${outStr}\n`;
+      fs.writeFileSync(`./${versionPath}/version1.js`, outStr, (err) => {
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
+      });
+    }
+  });
   console.log('done')
 }
 

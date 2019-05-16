@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Cosecant',
-  dependencies: ['Secant'],
+  dependencies: [
+    'Secant',
+  ],
   enabled: false,
+  uid: 'Cosecant',
 };
 
 module.exports = {
