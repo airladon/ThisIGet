@@ -4,13 +4,13 @@ import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users, Ratings  # noqa E402
 
-lesson1 = 'why_study_shapes/explanation/base'
-lesson2 = 'circles/explanation/base'
+lesson1 = 'Introduction/explanation/base'
+lesson2 = 'Circle/explanation/base'
 
 
 def login(
         client,
-        username='test_User_01',
+        username='test_user_01',
         password='12345678'):
     return client.post('/login', data=dict(
         username_or_email=username,
@@ -41,7 +41,7 @@ def test_set_rating(client):
     # Create the rating
     res = client.get(f'/rate/{lesson1}/4').get_json()
     assert res['status'] == 'done'
-
+    print('qwer')
     # Check the rating is 4
     rating = Ratings.query.filter_by(user_id=user_id).first()
     assert rating.rating == 4
@@ -52,6 +52,7 @@ def test_set_rating(client):
     assert res['status'] == 'done'
     rating = Ratings.query.filter_by(user_id=user_id).first()
     assert rating.rating == 3
+
     # assert rating.timestamp > time
 
 
@@ -66,11 +67,11 @@ def test_set_rating_wrong_input(client):
     assert res['status'] == 'fail'
     assert res['message'] == 'lesson does not exist'
 
-    res = client.get(f'/rate/circles/invalid/base/4').get_json()
+    res = client.get(f'/rate/Circle/invalid/base/4').get_json()
     assert res['status'] == 'fail'
     assert res['message'] == 'topic does not exist'
 
-    res = client.get(f'/rate/circles/explanation/invalid/4').get_json()
+    res = client.get(f'/rate/Circle/explanation/invalid/4').get_json()
     assert res['status'] == 'fail'
     assert res['message'] == 'version does not exist'
 

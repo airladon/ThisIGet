@@ -349,6 +349,7 @@ def isInt(s):
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic_name, version_uid, rating_value):
+    print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()
