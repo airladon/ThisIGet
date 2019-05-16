@@ -99,7 +99,39 @@ function entryPoints(buildMode) {
 
 function updateDetailsAndVersions() {
   const lessons = getAllLessons('./src/Lessons');
-  console.log(lessons)
+  lessons.forEach((lessonPath) => {
+    const detailsPath = `./${lessonPath}/details.js`;
+    if (fs.existsSync(detailsPath)) {
+      // eslint-disable-next-line global-require, import/no-dynamic-require
+      const details = require(detailsPath);
+      let outStr = '// @flow';
+      outStr = `${outStr}\n`;
+      outStr = `${outStr}\n// eslint-disable-next-line no-var`;
+      outStr = `${outStr}\nvar details = {`;
+      outStr = `${outStr}\n  title: '${details.details.title}',`;
+      outStr = `${outStr}\n  dependencies: [`;
+      if (details.details.dependencies.length > 0) {
+        details.details.dependencies.forEach((dependency) => {
+          outStr = `${outStr}\n    '${dependency}',`;
+        });
+      }
+      outStr = `${outStr}\n  ],`;
+      outStr = `${outStr}\n  enabled: ${details.details.enabled},`;
+      outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
+      outStr = `${outStr}\n};`;
+      outStr = `${outStr}\n`;
+      outStr = `${outStr}\nmodule.exports = {`;
+      outStr = `${outStr}\n  details,`;
+      outStr = `${outStr}\n}`;
+      outStr = `${outStr}\n`;
+      fs.writeFile(detailsPath, outStr, (err) => {
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.log(err);
+        }
+      });
+    }
+  });
 }
 
 function makeLessonIndex(buildMode) {
@@ -295,5 +327,5 @@ export default function getLessonIndex() {
 }
 
 module.exports = {
-  entryPoints, makeLessonIndex, getAllLessons,
+  entryPoints, makeLessonIndex, getAllLessons, updateDetailsAndVersions,
 };

@@ -55,6 +55,7 @@ module.exports = (env) => {
       e = envConfig.dev;
     }
   }
+  entryPoints.updateDetailsAndVersions();
   entryPoints.makeLessonIndex(e.name);
   setFilesForBuild.setBaseHTML(e.shortName);
 
