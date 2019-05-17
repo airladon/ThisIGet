@@ -1,0 +1,11 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrEquilateral_sides:             color('blue'),
+  qrEquilateral_angles:            color('red'),
+  qrEquilateral_highlight:         color('green'),
+);
+
+body {
+  @include color_vars($colors);
+}

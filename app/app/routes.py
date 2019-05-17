@@ -108,6 +108,28 @@ def get_lesson(path):
         res.set_cookie('username', '')
     return res
 
+
+@app.route('/dev/Lessons/', defaults={'path': ''})
+@app.route('/dev/Lessons/<path:path>')
+def get_lesson_dev(path):
+    path = f'/static/dist/Lessons/{path}'
+    css = f'{path}/lesson-dev.css'
+    js = f'{path}/lesson-dev.js'
+    lesson_page = request.args.get('page')
+    res = make_response(render_template('lesson.html', css=css, js=js))
+    if lesson_page:
+        res = make_response(redirect(request.path))
+        res.set_cookie(
+            key='page', value=lesson_page,
+            path=request.path, max_age=30 * 60)
+        return res
+
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.username)
+    else:
+        res.set_cookie('username', '')
+    return res
+
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
 #     print(lesson_id)
@@ -327,6 +349,7 @@ def isInt(s):
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic_name, version_uid, rating_value):
+    print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
         lesson = Lessons.query.filter_by(uid=lesson_uid).first()

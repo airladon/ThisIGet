@@ -21,8 +21,23 @@ import SinglePageLessonComponent from './singlePageLesson';
 
 type Props = {
   lesson: Object;
-  lessonDetails: Object;
-  versionDetails: Object;
+  // lessonUID: string,
+  // topicName: string,
+  // versionUID: string,
+  lessonDetails: {
+    uid: string,
+    title: string,
+    dependencies: Array<string>,
+    enabled?: boolean,
+  },
+  versionDetails: {
+    uid: string,
+    topic: string,
+    title: string,
+    description: string,
+    fullLesson: boolean,
+    type: 'presentation' | 'singlePage' | 'generic',
+  },
   isLoggedIn: boolean;
 };
 
@@ -59,18 +74,23 @@ export default class LessonComponent extends React.Component
   versionDetails: Object;
   topic: string;
   firstPage: number;
+  lessonUID: string;
+  versionUID: string;
 
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
     this.lessonDetails = props.lessonDetails;
-    this.lessonDescription = getLessonDescription(props.lessonDetails.details.uid);
+    this.lessonUID = props.lessonDetails.uid;
+    this.versionUID = props.versionDetails.uid;
+    this.topic = props.versionDetails.topic;
+    this.lessonDescription = getLessonDescription(this.lessonUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
     };
     this.versionDetails = props.versionDetails;
-    const [topic] = window.location.pathname.split('/').slice(-1);
+    const [topic] = window.location.pathname.split('/').slice(-2, -1);
     this.topic = topic;
     this.key = 0;
     this.showNavigator = false;
@@ -108,9 +128,9 @@ export default class LessonComponent extends React.Component
   }
 
   getRating(topic: string) {
-    const lessonUid = this.lessonDetails.details.uid;
-    const versionUid = this.versionDetails.details.uid;
-    const link = `/rating/${lessonUid}/${topic}/${versionUid}`;
+    // const lessonUid = this.lessonDetails.details.uid;
+    // const versionUid = this.versionDetails.details.uid;
+    const link = `/rating/${this.lessonUID}/${topic}/${this.versionUID}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -143,9 +163,8 @@ export default class LessonComponent extends React.Component
       }
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
-    const lessonUid = this.lessonDetails.details.uid;
-    const versionUid = this.versionDetails.details.uid;
-    const link = `/rate/${lessonUid}/${this.topic}/${versionUid}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
+
+    const link = `/rate/${this.lessonUID}/${this.topic}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -199,7 +218,8 @@ export default class LessonComponent extends React.Component
 
   getTopics() {
     const topics = {};
-    const [currentExplanation, currentTopic] = window.location.href.split('/').slice(-2);
+    // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
+
     const { lessonDescription } = this;
     if (lessonDescription != null) {
       Object.keys(this.state.ratings).forEach((topicName) => {
@@ -207,17 +227,20 @@ export default class LessonComponent extends React.Component
         Object.keys(topic).forEach((versionUID) => {
           const version = lessonDescription.topics[topicName][versionUID];
           const label = version.title;
-          const link = `${lessonDescription.path}/${version.path}/${topicName}`;
+          let link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
+          if (topicName === 'dev') {
+            link = `/dev${lessonDescription.path}/${lessonDescription.uid}/quickReference/${versionUID}`;
+          }
           const { description } = version;
-          const { onPath } = version;
+          const { fullLesson } = version;
 
           if (!(topicName in topics)) {
             topics[topicName] = {};
           }
           let active = false;
           // console.log(currentExplanation, version, topic)
-          if (currentExplanation === version.path
-            && currentTopic === topicName) {
+          if (this.versionUID === versionUID
+            && this.topic === topicName) {
             active = true;
           }
 
@@ -230,7 +253,7 @@ export default class LessonComponent extends React.Component
             numHighRatings: rating.numHighRatings,
             description,
             active,
-            onPath,
+            fullLesson,
           };
         });
       });
@@ -250,16 +273,16 @@ export default class LessonComponent extends React.Component
         topicNames.push(topicName);
       }
     });
-    const currentTopic = window.location.href.split('/').slice(-1)[0];
+    // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
     topicNames.forEach((name) => {
-      if (topics[name] != null) {
+      if (topics[name] != null && name !== 'quickReference') {
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
-        const onPathCount = Object.values(topic).filter(ver => ver.onPath).length;
+        const fullLessonCount = Object.values(topic).filter(ver => ver.fullLesson).length;
         // $FlowFixMe - onPath is there and boolean
-        const offPathCount = Object.values(topic).filter(ver => !ver.onPath).length;
+        const partialLessonCount = Object.values(topic).filter(ver => !ver.fullLesson).length;
         let selected = false;
-        if (currentTopic === name) {
+        if (this.topic === name) {
           selected = true;
         }
         let vUIDs = Object.keys(topic);
@@ -286,15 +309,17 @@ export default class LessonComponent extends React.Component
         const listItems = [];
         vUIDs.forEach((vUID) => {
           listItems.push(topic[vUID]);
+          if (name === 'quickReference') {
+            listItems.slice(-1)[0].label = vUID;
+          }
         });
         this.key += 1;
-        if (offPathCount > 0 && name !== 'quiz') {
-          listItems.splice(onPathCount, 0, {
-            label: 'Portion of Lesson',
+        if (partialLessonCount > 0 && name !== 'quiz') {
+          listItems.splice(fullLessonCount, 0, {
+            label: 'Lesson Portion',
             separator: true,
           });
         }
-
         if (listItems.length === 1) {
           let singleItemClass = 'dropdown_button_container';
           if (selected) {
@@ -330,8 +355,8 @@ export default class LessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
-    const topicName = window.location.href.split('/').slice(-1)[0];
-    return topicName.charAt(0).toUpperCase() + topicName.slice(1);
+    // const topicName = window.location.href.split('/').slice(-2, -1)[0];
+    return this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
   }
 
   renderLesson() {
@@ -354,7 +379,7 @@ export default class LessonComponent extends React.Component
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <LessonTitle
-          imgLink={`/${this.lesson.content.iconLinkGrey}`}
+          imgLink={`${this.lesson.content.iconLinkGrey}`}
           key='1'
           label={this.lesson.content.title}
           />

@@ -251,6 +251,8 @@ This is best done locally outside of a container. You will need to have:
 
 #### Start from scratch all DBs update:
 
+Note, if changes to the model are made, `tests/flask/app_test.db` will probably need to be updated by copying the local app.db.
+
 ##### Local SQL
 ```
 export FLASK_APP=app/my_app.py

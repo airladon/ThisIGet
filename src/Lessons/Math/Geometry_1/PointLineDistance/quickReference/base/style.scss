@@ -1,0 +1,12 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrPointsLineDistance_lines:                color('blue'),
+  qrPointsLineDistance_points:               color('blue'),
+  qrPointsLineDistance_distance:             color('yellow'),
+  qrPointsLineDistance_distance2:            color('violet'),
+);
+
+body {
+  @include color_vars($colors);
+}

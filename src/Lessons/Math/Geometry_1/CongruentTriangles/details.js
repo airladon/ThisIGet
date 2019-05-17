@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Congruent Triangles',
-  uid: 'congruent_triangles',
-  dependencies: ['triangle_introduction'],
+  dependencies: [
+    'Triangles',
+  ],
+  enabled: true,
+  uid: 'CongruentTriangles',
 };
 
 module.exports = {

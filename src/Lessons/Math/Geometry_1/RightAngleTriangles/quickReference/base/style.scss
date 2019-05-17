@@ -1,0 +1,11 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrRightAngleTriangle_sides:                       color('blue'),
+  qrRightAngleTriangle_rightAngle:                  color('red'),
+  qrRightAngleTriangle_angles:                      color('green'),
+);
+
+body {
+  @include color_vars($colors);
+}

@@ -1,0 +1,21 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrTriangles_lines:              color('blue'),
+  qrTriangles_sideLengths:        color('yellow'),
+  qrTriangles_angles:             color('green'),
+  qrTriangles_angle1:             color('green'),
+  qrTriangles_angle2:             color('red'),
+  qrTriangles_angle3:             color('yellow'),
+  qrTriangles_disabled:           color('grey', 'darker'),
+  qrTriangles_parallel:           color('red'),
+  qrTriangles_pads:               color('red', 'lighter'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}

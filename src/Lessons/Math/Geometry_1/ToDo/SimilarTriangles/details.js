@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Similar Triangles',
-  uid: 'similar_triangles',
-  dependencies: ['parallel_line_distance'],
+  dependencies: [
+    'ParallelLineDistance',
+  ],
   enabled: false,
+  uid: 'SimilarTriangles',
 };
 
 module.exports = {

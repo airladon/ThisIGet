@@ -1,0 +1,10 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrAreaCircle_sides:             color('blue', 'base'),
+  qrAreaCircle_radius:            color('diagram', 'construction7'),
+);
+
+body {
+  @include color_vars($colors);
+}

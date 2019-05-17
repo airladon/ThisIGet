@@ -55,6 +55,7 @@ module.exports = (env) => {
       e = envConfig.dev;
     }
   }
+  entryPoints.updateDetailsAndVersions();
   entryPoints.makeLessonIndex(e.name);
   setFilesForBuild.setBaseHTML(e.shortName);
 
@@ -216,24 +217,28 @@ module.exports = (env) => {
           ],
         },
         {
+          test: /\.(md)$/,
+          use: [
+            'html-loader',
+            // 'markdown-loader',
+            
+            {
+              loader: path.resolve('/opt/app/math-loader.js'),
+            },
+            {
+              loader: 'markdown-loader',
+            }
+          ],
+        },
+        {
           test: /\.(png|jpg|gif)$/,
           use: [
             {
               loader: 'file-loader',
-              // options: {
-              //   name: '[path][hash].[ext]'
-              // }
               options: {
-                name(file) {
-                  // if (env === 'development') {
-                  //   return '[path][name].[ext]'
-                  // }
-                  let newPath = file.replace('/opt/app/src/', '');
-                  // newPath = newPath.replace('/tile.png', '');
-                  newPath = newPath.replace(/\/[^/]*$/, '');
-                  // console.log(newPath)
-                  return `${newPath}/[name].[ext]`;
-                },
+                name: '[path][name].[ext]',
+                publicPath: '/static/dist/',
+                context: '/opt/app/src',
               },
             },
           ],

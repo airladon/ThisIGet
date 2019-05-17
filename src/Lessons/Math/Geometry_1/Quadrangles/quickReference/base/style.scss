@@ -1,0 +1,9 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrQuadrangles_sides:             color('blue'),
+);
+
+body {
+  @include color_vars($colors);
+}

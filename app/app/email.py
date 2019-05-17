@@ -51,13 +51,3 @@ def send_confirm_account_email(user):
                                          user=user, token=token),
                html_body=render_template('email/confirm_account.html',
                                          user=user, token=token))
-
-# def send_password_reset_email_test(user):
-#     token = user.get_reset_password_token()
-#     send_email('ThisIGet Account Password Reset',
-#                sender='noreply@thisiget.com',
-#                recipients=['airladon@gmail.com'],
-#                text_body=render_template('email/reset_password.txt',
-#                                          user=user, token=token),
-#                html_body=render_template('email/reset_password.html',
-#                                          user=user, token=token))

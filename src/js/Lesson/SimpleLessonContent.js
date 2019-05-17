@@ -82,52 +82,55 @@ class SimpleLessonContent {
 
   getQR(
     uid: string,
-    versionUid: string = '',
+    versionUidToLoad: string = '',
   ) {
     const index = getLessonIndex();
     let jsLink = '';
     let cssLink = '';
     const lesson = index[uid];
-    if (lesson != null) {
-      let versionUids = Object.keys(lesson.versions);
-      if (versionUid != null && versionUid !== '') {
-        versionUids = [versionUid];
-      }
-      versionUids.forEach((vUid) => {
-        const version = lesson.versions[vUid];
-        cssLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.css`;
-        jsLink = `/static/dist/${lesson.path}/${version.path}/quickReference/lesson.js`;
-        if (version.qr != null && version.qr.length > 0) {
-          this.qrDiagram.elements._qr[`_${uid}`].add(vUid, this.qrDiagram.shapes.collection());
-          version.qr.forEach((qrid) => {
-            const loadingQR = this.qrDiagram.shapes.collection();
-            loadingQR.hideAll();
-            this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`] = loadingQR;
-          });
-        }
-        if (cssLink !== '') {
-          loadRemoteCSS(`${uid}${vUid}CSS`, cssLink, () => {
-            loadRemote(`${uid}${vUid}Script`, jsLink, () => {
-              Object.keys(window.quickReference[uid][vUid]).forEach((qrid) => {
-                const element = this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`][`_${qrid}`];
-                const { isShown } = element;
-                const qr = new window.quickReference[uid][vUid][qrid](this.qrDiagram);
-                // console.log(qr)
-                qr.prepareToHideAll = this.prepareToHideQR.bind(this);
-                qr.prepareToShow = this.prepareToShowQR.bind(this);
-                this.qrDiagram.elements._qr[`_${uid}`][`_${vUid}`].add(qrid, qr);
-                if (isShown) {
-                  qr.show();
-                  qr.showAll();
-                  element.hideAll();
-                } else {
-                  qr.hideAll();
-                }
+    // console.log(lesson)
+    if (lesson != null && lesson.topics.quickReference != null) {
+      const versions = Object.keys(lesson.topics.quickReference);
+      if (versions.length > 0) {
+        versions.forEach((versionUID) => {
+          if (versionUidToLoad !== '' && versionUidToLoad !== versionUID) {
+            return;
+          }
+          const version = lesson.topics.quickReference[versionUID];
+          cssLink = `/static/dist/${lesson.path}/${uid}/quickReference/${versionUID}/quickReference.css`;
+          jsLink = `/static/dist/${lesson.path}/${uid}/quickReference/${versionUID}/quickReference.js`;
+          if (version.references != null && version.references.length > 0) {
+            this.qrDiagram.elements._qr[`_${uid}`].add(versionUID, this.qrDiagram.shapes.collection());
+            version.references.forEach((qrid) => {
+              const loadingQR = this.qrDiagram.shapes.collection();
+              loadingQR.hideAll();
+              this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`][`_${qrid}`] = loadingQR;
+            });
+          }
+          if (cssLink !== '') {
+            loadRemoteCSS(`${uid}${versionUID}CSS`, cssLink, () => {
+              loadRemote(`${uid}${versionUID}Script`, jsLink, () => {
+                Object.keys(window.quickReference[uid][versionUID]).forEach((qrid) => {
+                  const element = this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`][`_${qrid}`];
+                  const { isShown } = element;
+                  const qr = new window.quickReference[uid][versionUID][qrid](this.qrDiagram);
+                  // console.log(qr)
+                  qr.prepareToHideAll = this.prepareToHideQR.bind(this);
+                  qr.prepareToShow = this.prepareToShowQR.bind(this);
+                  this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`].add(qrid, qr);
+                  if (isShown) {
+                    qr.show();
+                    qr.showAll();
+                    element.hideAll();
+                  } else {
+                    qr.hideAll();
+                  }
+                });
               });
             });
-          });
-        }
-      });
+          }
+        });
+      }
     }
   }
 

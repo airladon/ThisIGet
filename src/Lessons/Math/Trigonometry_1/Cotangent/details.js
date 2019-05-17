@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Cotangent',
-  uid: 'cotangent_introduction',
-  dependencies: ['pythagorean_identity'],
+  dependencies: [
+    'Pythagoras',
+  ],
   enabled: false,
+  uid: 'Cotangent',
 };
 
 module.exports = {

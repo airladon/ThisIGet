@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Cosine',
-  uid: 'consine_introduction',
-  dependencies: ['sine_introduction'],
+  dependencies: [
+    'Sine',
+  ],
   enabled: false,
+  uid: 'Cosine',
 };
 
 module.exports = {

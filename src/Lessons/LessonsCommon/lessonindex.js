@@ -2,806 +2,1019 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {
-    adjacent_angles: new LessonDescription({
-      name: 'Adjacent Angles',
-      path: '/Lessons/Math/Geometry_1/AdjacentAngles',
-      uid: 'adjacent_angles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Complementary',
-            'Supplementary',
-            'Explementary',
-          ],
+    AdjacentAngles: new LessonDescription({
+      title: 'Adjacent Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AdjacentAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'important_angles',
+        'ImportantAngles',
       ],
       enabled: true,
     }),
-    angles: new LessonDescription({
-      name: 'Angles',
-      path: '/Lessons/Math/Geometry_1/Angle',
-      uid: 'angles',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    Angle: new LessonDescription({
+      title: 'Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Angle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: 'Introduction to Angles.',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: 'Introduction to Angles.',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'circles',
+        'Circle',
       ],
       enabled: true,
     }),
-    area_introduction: new LessonDescription({
-      name: 'Area and Rectangles',
-      path: '/Lessons/Math/Geometry_1/Area',
-      uid: 'area_introduction',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Area',
-            'Square',
-            'Rectangle',
-          ],
+    Area: new LessonDescription({
+      title: 'Area and Rectangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Area',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'rectangles_and_squares',
+        'RectanglesAndSquares',
       ],
       enabled: true,
     }),
-    area_circle: new LessonDescription({
-      name: 'Area of a Circle',
-      path: '/Lessons/Math/Geometry_1/AreaCircle',
-      uid: 'area_circle',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    AreaCircle: new LessonDescription({
+      title: 'Area of a Circle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AreaCircle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'area_triangle',
+        'AreaTriangle',
       ],
       enabled: true,
     }),
-    area_triangle: new LessonDescription({
-      name: 'Area of a Triangle',
-      path: '/Lessons/Math/Geometry_1/AreaTriangle',
-      uid: 'area_triangle',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    AreaTriangle: new LessonDescription({
+      title: 'Area of a Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AreaTriangle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'area_introduction',
+        'Area',
       ],
       enabled: true,
     }),
-    circles: new LessonDescription({
-      name: 'Circles',
-      path: '/Lessons/Math/Geometry_1/Circle',
-      uid: 'circles',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Diameter',
-            'Radius',
-            'Circumference',
-            'Circle',
-            'Pi',
-          ],
+    Circle: new LessonDescription({
+      title: 'Circles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Circle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Initial',
+            description: 'Presentation form - interactive.',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          identifyProperties: {
+            type: 'presentation',
+            title: 'Identify Properties',
+            description: 'Identify the properties of a circle.',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Initial',
+            description: 'Presentation form - interactive.',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'why_study_shapes',
+        'Introduction',
       ],
       enabled: true,
     }),
-    congruent_triangles: new LessonDescription({
-      name: 'Congruent Triangles',
-      path: '/Lessons/Math/Geometry_1/CongruentTriangles',
-      uid: 'congruent_triangles',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Initial Explanation - Presentation Format.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Asa',
-            'Sss',
-            'Sas',
-            'Aas',
-            'Aaa',
-            'Ssa',
-            'CongruentTriangles',
-          ],
+    CongruentTriangles: new LessonDescription({
+      title: 'Congruent Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'CongruentTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'triangle_introduction',
+        'Triangles',
       ],
       enabled: true,
     }),
-    measuring_angles_degrees: new LessonDescription({
-      name: 'Degrees',
-      path: '/Lessons/Math/Geometry_1/Degrees',
-      uid: 'measuring_angles_degrees',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    Degrees: new LessonDescription({
+      title: 'Degrees',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Degrees',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'angles',
+        'Angle',
       ],
       enabled: true,
     }),
-    equilateral_triangles: new LessonDescription({
-      name: 'Equilateral Triangle',
-      path: '/Lessons/Math/Geometry_1/Equilateral',
-      uid: 'equilateral_triangles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    Equilateral: new LessonDescription({
+      title: 'Equilateral Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Equilateral',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'isosceles_triangles',
+        'Isosceles',
       ],
       enabled: true,
     }),
-    triangle_external_angle: new LessonDescription({
-      name: 'External Angle of a Triangle',
-      path: '/Lessons/Math/Geometry_1/ExternalAngles',
-      uid: 'triangle_external_angle',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    ExternalAngles: new LessonDescription({
+      title: 'External Angle of a Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ExternalAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'triangle_introduction',
+        'Triangles',
       ],
       enabled: true,
     }),
-    important_angles: new LessonDescription({
-      name: 'Important Angles',
-      path: '/Lessons/Math/Geometry_1/ImportantAngles',
-      uid: 'important_angles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'First explanation of Topic.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-          ],
-          qr: [
-            'Acute',
-            'Right',
-            'Obtuse',
-            'Straight',
-            'Reflex',
-            'Full',
-          ],
+    ImportantAngles: new LessonDescription({
+      title: 'Important Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ImportantAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'measuring_angles_degrees',
+        'Degrees',
       ],
       enabled: true,
     }),
-    why_study_shapes: new LessonDescription({
-      name: 'Why Study Shapes?',
-      path: '/Lessons/Math/Geometry_1/Introduction',
-      uid: 'why_study_shapes',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-          ],
-          qr: [
-            'Abstraction',
-          ],
-        },
-        initial_not_interactive: {
-          title: 'Simple',
-          description: 'Not interactive.',
-          path: 'simple',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
-        },
-        initial_single_page: {
-          title: 'Initial - Single Page',
-          description: 'Single page form - interactive.',
-          path: 'singlePage',
-          onPath: true,
-          topics: [
-            'explanation',
-          ],
-          qr: [
-          ],
+    Introduction: new LessonDescription({
+      title: 'Why Study Shapes?',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Introduction',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Initial',
+            description: 'Presentation form - interactive.',
+            fullLesson: true,
+          },
+          simple: {
+            type: 'singlePage',
+            title: 'Simple',
+            description: 'Not interactive.',
+            fullLesson: true,
+          },
+          singlePage: {
+            type: 'singlePage',
+            title: 'Initial - Single Page',
+            description: 'Single page form - interactive.',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
       ],
       enabled: true,
     }),
-    isosceles_triangles: new LessonDescription({
-      name: 'Isosceles Triangle',
-      path: '/Lessons/Math/Geometry_1/Isosceles',
-      uid: 'isosceles_triangles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-            'SplitLine',
-          ],
+    Isosceles: new LessonDescription({
+      title: 'Isosceles Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Isosceles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'congruent_triangles',
+        'CongruentTriangles',
       ],
       enabled: true,
     }),
-    parallel_line_distance: new LessonDescription({
-      name: 'Parallel Line Distance',
-      path: '/Lessons/Math/Geometry_1/ParallelLineDistance',
-      uid: 'parallel_line_distance',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Base explanation.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    ParallelLineDistance: new LessonDescription({
+      title: 'Parallel Line Distance',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ParallelLineDistance',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'point_line_distance',
+        'PointLineDistance',
       ],
       enabled: true,
     }),
-    parallel_lines: new LessonDescription({
-      name: 'Parallel Lines',
-      path: '/Lessons/Math/Geometry_1/ParallelLines',
-      uid: 'parallel_lines',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Reference explanation.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    ParallelLines: new LessonDescription({
+      title: 'Parallel Lines',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ParallelLines',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'adjacent_angles',
+        'AdjacentAngles',
       ],
       enabled: true,
     }),
-    point_line_distance: new LessonDescription({
-      name: 'Point to Line Distance',
-      path: '/Lessons/Math/Geometry_1/PointLineDistance',
-      uid: 'point_line_distance',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Presentation.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    PointLineDistance: new LessonDescription({
+      title: 'Point to Line Distance',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'PointLineDistance',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'right_angle_triangles',
+        'RightAngleTriangles',
       ],
       enabled: true,
     }),
-    quadrangles: new LessonDescription({
-      name: 'Quadrangles',
-      path: '/Lessons/Math/Geometry_1/Quadrangles',
-      uid: 'quadrangles',
-      versions: {
-        base: {
-          title: 'Base Explanation',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    Quadrangles: new LessonDescription({
+      title: 'Quadrangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Quadrangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'triangle_introduction',
+        'Triangles',
       ],
       enabled: true,
     }),
-    measuring_angles_radians: new LessonDescription({
-      name: 'Radians',
-      path: '/Lessons/Math/Geometry_1/Radians',
-      uid: 'measuring_angles_radians',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    Radians: new LessonDescription({
+      title: 'Radians',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Radians',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'measuring_angles_degrees',
+        'Degrees',
       ],
       enabled: true,
     }),
-    rectangles_and_squares: new LessonDescription({
-      name: 'Rectangles and Squares',
-      path: '/Lessons/Math/Geometry_1/RectanglesAndSquares',
-      uid: 'rectangles_and_squares',
-      versions: {
-        base: {
-          title: 'Base Explanation',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'summary',
-          ],
-          qr: [
-            'Rectangle',
-            'Square',
-          ],
+    RectanglesAndSquares: new LessonDescription({
+      title: 'Rectangles and Squares',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'RectanglesAndSquares',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'quadrangles',
-        'congruent_triangles',
+        'Quadrangles',
+        'CongruentTriangles',
       ],
       enabled: true,
     }),
-    related_angles: new LessonDescription({
-      name: 'Related Angles',
-      path: '/Lessons/Math/Geometry_1/RelatedAngles',
-      uid: 'related_angles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Base explanation of Topic.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Opposite',
-            'Alternate',
-            'Corresponding',
-            'Interior',
-          ],
+    RelatedAngles: new LessonDescription({
+      title: 'Related Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'RelatedAngles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'parallel_lines',
+        'ParallelLines',
       ],
       enabled: true,
     }),
-    right_angle_triangles: new LessonDescription({
-      name: 'Right Angle Triangles',
-      path: '/Lessons/Math/Geometry_1/RightAngleTriangles',
-      uid: 'right_angle_triangles',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-            'Pythagorus',
-            'Area',
-          ],
+    RightAngleTriangles: new LessonDescription({
+      title: 'Right Angle Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'RightAngleTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+          pythagorus_proof: {
+            type: 'singlePage',
+            title: 'Pythagorean Theorem Derivation',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'important_triangles',
-        'area_triangle',
+        'AreaTriangle',
       ],
       enabled: true,
     }),
-    side_angle_relationship: new LessonDescription({
-      name: 'Side Angle Relationships',
-      path: '/Lessons/Math/Geometry_1/SideAngleRelationship',
-      uid: 'side_angle_relationship',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    SideAngleRelationship: new LessonDescription({
+      title: 'Side Angle Relationships',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SideAngleRelationship',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'isosceles_triangles',
+        'Isosceles',
       ],
       enabled: true,
     }),
-    side_side_side: new LessonDescription({
-      name: 'Side-Side-Side Congruency',
-      path: '/Lessons/Math/Geometry_1/SideSideSide',
-      uid: 'side_side_side',
-      versions: {
-        base: {
-          title: 'Base',
-          description: 'Explanation_of_version_here.',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'explanation',
-            'summary',
-          ],
-          qr: [
-          ],
+    SideSideSide: new LessonDescription({
+      title: 'Side-Side-Side Congruency',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SideSideSide',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'isosceles_triangles',
+        'Isosceles',
       ],
       enabled: true,
     }),
-    calculating_pi: new LessonDescription({
-      name: 'Calculating Pi',
-      path: '/Lessons/Math/Geometry_1/ToDo/Calculating Pi',
-      uid: 'calculating_pi',
-      versions: {
+    CalculatingPi: new LessonDescription({
+      title: 'Calculating Pi',
+      path: '/Lessons/Math/Geometry_1/ToDo',
+      uid: 'CalculatingPi',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'right_angle_triangles',
+        'RightAngleTriangles',
       ],
       enabled: false,
     }),
-    similar_triangles: new LessonDescription({
-      name: 'Similar Triangles',
-      path: '/Lessons/Math/Geometry_1/ToDo/SimilarTriangles',
-      uid: 'similar_triangles',
-      versions: {
-      },
-      dependencies: [
-        'parallel_line_distance',
-      ],
-      enabled: false,
-    }),
-    triangle_introduction: new LessonDescription({
-      name: 'Triangles',
-      path: '/Lessons/Math/Geometry_1/Triangles',
-      uid: 'triangle_introduction',
-      versions: {
-        base: {
-          title: 'Initial',
-          description: 'Presentation form - interactive..',
-          path: 'base',
-          onPath: true,
-          topics: [
-            'dev',
-            'explanation',
-            'quiz',
-            'summary',
-          ],
-          qr: [
-            'Main',
-          ],
+    SimilarTriangles: new LessonDescription({
+      title: 'Similar Triangles',
+      path: '/Lessons/Math/Geometry_1/ToDo',
+      uid: 'SimilarTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
         },
       },
       dependencies: [
-        'related_angles',
+        'ParallelLineDistance',
+      ],
+      enabled: false,
+    }),
+    Triangles: new LessonDescription({
+      title: 'Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Triangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'RelatedAngles',
       ],
       enabled: true,
     }),
-    chord: new LessonDescription({
-      name: 'Chord',
-      path: '/Lessons/Math/Trigonometry_1/Chord',
-      uid: 'chord',
-      versions: {
+    Chord: new LessonDescription({
+      title: 'Chord',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Chord',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'sine_introduction',
+        'Sine',
       ],
       enabled: false,
     }),
-    cosecant_introduction: new LessonDescription({
-      name: 'Cosecant',
-      path: '/Lessons/Math/Trigonometry_1/Cosecant',
-      uid: 'cosecant_introduction',
-      versions: {
+    Cosecant: new LessonDescription({
+      title: 'Cosecant',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cosecant',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'secant_introduction',
+        'Secant',
       ],
       enabled: false,
     }),
-    consine_introduction: new LessonDescription({
-      name: 'Cosine',
-      path: '/Lessons/Math/Trigonometry_1/Cosine',
-      uid: 'consine_introduction',
-      versions: {
+    Cosine: new LessonDescription({
+      title: 'Cosine',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cosine',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'sine_introduction',
+        'Sine',
       ],
       enabled: false,
     }),
-    cotangent_introduction: new LessonDescription({
-      name: 'Cotangent',
-      path: '/Lessons/Math/Trigonometry_1/Cotangent',
-      uid: 'cotangent_introduction',
-      versions: {
+    Cotangent: new LessonDescription({
+      title: 'Cotangent',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Cotangent',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'pythagorean_identity',
+        'Pythagoras',
       ],
       enabled: false,
     }),
-    law_of_cosines: new LessonDescription({
-      name: 'Law of Cosines',
-      path: '/Lessons/Math/Trigonometry_1/Law of Cosines',
-      uid: 'law_of_cosines',
-      versions: {
+    LawOfCosines: new LessonDescription({
+      title: 'Law of Cosines',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'LawOfCosines',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'law_of_sines',
+        'LawOfSines',
       ],
       enabled: false,
     }),
-    law_of_sines: new LessonDescription({
-      name: 'Law of Sines',
-      path: '/Lessons/Math/Trigonometry_1/Law of Sines',
-      uid: 'law_of_sines',
-      versions: {
+    LawOfSines: new LessonDescription({
+      title: 'Law of Sines',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'LawOfSines',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'pythagorean_identity',
+        'Pythagoras',
       ],
       enabled: false,
     }),
-    pythagorean_identity: new LessonDescription({
-      name: 'Pythagorean Identity',
-      path: '/Lessons/Math/Trigonometry_1/Pythagoras',
-      uid: 'pythagorean_identity',
-      versions: {
+    Pythagoras: new LessonDescription({
+      title: 'Pythagorean Identity',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Pythagoras',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'tangent_introduction',
+        'Tangent',
       ],
       enabled: false,
     }),
-    secant_introduction: new LessonDescription({
-      name: 'Secant',
-      path: '/Lessons/Math/Trigonometry_1/Secant',
-      uid: 'secant_introduction',
-      versions: {
+    Secant: new LessonDescription({
+      title: 'Secant',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Secant',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'pythagorean_identity',
+        'Pythagoras',
       ],
       enabled: false,
     }),
-    sine_introduction: new LessonDescription({
-      name: 'Sine',
-      path: '/Lessons/Math/Trigonometry_1/Sine',
-      uid: 'sine_introduction',
-      versions: {
+    Sine: new LessonDescription({
+      title: 'Sine',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Sine',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'unit_circle',
+        'UnitCircle',
       ],
       enabled: false,
     }),
-    tangent_introduction: new LessonDescription({
-      name: 'Tangent',
-      path: '/Lessons/Math/Trigonometry_1/Tangent',
-      uid: 'tangent_introduction',
-      versions: {
+    Tangent: new LessonDescription({
+      title: 'Tangent',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'Tangent',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'chord',
+        'Chord',
       ],
       enabled: false,
     }),
-    unit_circle: new LessonDescription({
-      name: 'Unit Circle',
-      path: '/Lessons/Math/Trigonometry_1/UnitCircle',
-      uid: 'unit_circle',
-      versions: {
+    UnitCircle: new LessonDescription({
+      title: 'Unit Circle',
+      path: '/Lessons/Math/Trigonometry_1',
+      uid: 'UnitCircle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            fullLesson: true,
+          },
+        },
       },
       dependencies: [
-        'quadrangles',
       ],
       enabled: false,
     }),

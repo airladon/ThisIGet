@@ -7,8 +7,23 @@ import LessonComponent from './lesson';
 
 type Props = {
   lesson: Object,
-  lessonDetails: Object,
-  versionDetails: Object,
+  // lessonUID: string,
+  // topicName: string,
+  // versionUID: string,
+  lessonDetails: {
+    uid: string,
+    title: string,
+    dependencies: Array<string>,
+    enabled?: boolean,
+  },
+  versionDetails: {
+    uid: string,
+    topic: string,
+    title: string,
+    description: string,
+    fullLesson: boolean,
+    type: 'presentation' | 'singlePage' | 'generic',
+  },
   isLoggedIn: boolean,
   username: string,
 };
@@ -27,6 +42,9 @@ export default class ViewLesson extends React.Component
     delete props.active;
     return <LessonComponent
         lesson={this.props.lesson}
+        // lessonUID={this.props.lessonUID}
+        // topicName={this.props.topicName}
+        // versionUID={this.props.versionUID}
         lessonDetails={this.props.lessonDetails}
         versionDetails={this.props.versionDetails}
         isLoggedIn={this.props.isLoggedIn}

@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Pythagorean Identity',
-  uid: 'pythagorean_identity',
-  dependencies: ['tangent_introduction'],
+  dependencies: [
+    'Tangent',
+  ],
   enabled: false,
+  uid: 'Pythagoras',
 };
 
 module.exports = {

@@ -5,7 +5,7 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 const { Point } = Fig;
 
 export type TypeLessonDescription = {
-  name: string;
+  title: string;
   path: string;
   imgLink: string;
   location: Point;
@@ -39,21 +39,34 @@ export type TypeLessonDescription = {
 };
 
 export default class LessonDescription {
-  name: string;
+  title: string;
   path: string;
   imgLink: string;
   location: Point;
   id: string;
   uid: string;
   dependencies: Array<string>;
-  versions: {[vuid: string]: {
-    title: string;
-    description: string;
-    onPath: boolean;
-    topics: Array<string>;
-    qr: Array<string>;
-    path: string,
-  }};
+  topics: {
+    [topicName: string]: Array<{
+      title: string,
+      description: string,
+      uid: string,
+      fullLesson: boolean,
+      type: 'presentation' | 'singlePage' | 'video' | 'audio',
+      aveRating: number;
+      numRatings: number;
+      numHighRatings: number;
+    }>
+  };
+
+  // versions: {[vuid: string]: {
+  //   title: string;
+  //   description: string;
+  //   onPath: boolean;
+  //   topics: Array<string>;
+  //   qr: Array<string>;
+  //   path: string,
+  // }};
 
   topics: Object;
   // topics: {
@@ -77,71 +90,78 @@ export default class LessonDescription {
 
   constructor(
     lesson: {
-      name: string,
+      title: string,
       path: string,
       uid: string,
-      versions: {[name: string]: {
-        title: string,
-        description: string,
-        onPath: boolean,
-        topics: Array<string>,
-        qr: Array<string>,
-        path: string,
-      }},
+      topics: {
+        [topicName: string]: Array<{
+          title: string,
+          description: string,
+          uid: string,
+          fullLesson: boolean,
+          type: 'presentation' | 'singlePage' | 'video' | 'audio',
+        }>
+      },
       dependencies: Array<string>,
       enabled: boolean;
     },
     id: string = '',
   ) {
-    this.name = lesson.name;
+    this.title = lesson.title;
     this.path = lesson.path;
+    this.uid = lesson.uid;
+    this.dependencies = lesson.dependencies;
     this.location = new Point(0, 0);
     this.id = id;
-    this.imgLink = `${this.path}/tile.png`;
+    this.imgLink = `${this.path}/${this.uid}/tile.png`;
     if (id === '') {
       this.id = `id_lesson__navigator_tile_${lesson.uid}`;
     }
-    this.dependencies = lesson.dependencies;
-    this.uid = lesson.uid;
-    this.versions = {};       // Deprecate
-    Object.keys(lesson.versions).forEach((key) => {
-      const version = lesson.versions[key];
-      const {
-        title, description, onPath, topics, qr, path,
-      } = version;
-      this.versions[key] = {
-        title, description, onPath, topics, qr, path,
-      };
-    });
+    // this.topics = {};
+    // Object.keys(lesson.topics).forEach((topic) => {
+    //   this.topics[topic] = lesson.topics[topic];
+    // });
+    this.topics = lesson.topics;
+
+    // this.versions = {};       // Deprecate
+    // Object.keys(lesson.versions).forEach((key) => {
+    //   const version = lesson.versions[key];
+    //   const {
+    //     title, description, onPath, topics, qr, path,
+    //   } = version;
+    //   this.versions[key] = {
+    //     title, description, onPath, topics, qr, path,
+    //   };
+    // });
     this.enabled = lesson.enabled;
 
-    this.topics = {};
-    this.numVersions = 0;
-    this.callbackCount = 0;
-    Object.keys(lesson.versions).forEach((versionName) => {
-      const version = lesson.versions[versionName];
-      const {
-        title, description, onPath, topics, qr, path,
-      } = version;
-      topics.forEach((topicName) => {
-        const v = {
-          title,
-          description,
-          onPath,
-          qr,
-          path,
-          aveRating: 0,
-          numRatings: 0,
-          numHighRatings: 0,
-        };
+    // this.topics = {};
+    // this.numVersions = 0;
+    // this.callbackCount = 0;
+    // Object.keys(lesson.versions).forEach((versionName) => {
+    //   const version = lesson.versions[versionName];
+    //   const {
+    //     title, description, onPath, topics, qr, path,
+    //   } = version;
+    //   topics.forEach((topicName) => {
+    //     const v = {
+    //       title,
+    //       description,
+    //       onPath,
+    //       qr,
+    //       path,
+    //       aveRating: 0,
+    //       numRatings: 0,
+    //       numHighRatings: 0,
+    //     };
 
-        if (this.topics[topicName] == null) {   // $FlowFixMe
-          this.topics[topicName] = {};
-        }
-        this.topics[topicName][versionName] = v;
-        this.numVersions += 1;
-      });
-    });
+    //     if (this.topics[topicName] == null) {   // $FlowFixMe
+    //       this.topics[topicName] = {};
+    //     }
+    //     this.topics[topicName][versionName] = v;
+    //     this.numVersions += 1;
+    //   });
+    // });
   }
 
   waitThenCallback(callback: Function) {
@@ -153,8 +173,10 @@ export default class LessonDescription {
 
   getRatings(callback: Function) {
     this.callbackCount = 0;
+    this.numVersions = 0;
     Object.keys(this.topics).forEach((topicName) => {
       const topic = this.topics[topicName];
+      this.numVersions += Object.keys(topic).length;
       Object.keys(topic).forEach((versionUID) => {
         const version = topic[versionUID];
         const link = `/rating/${this.uid}/${topicName}/${versionUID}`;

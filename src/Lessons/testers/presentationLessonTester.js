@@ -8,10 +8,10 @@ const fs = require('fs');
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
-function contentSectionCount(testPath, topicName) {
-  let fileName = testPath.split('/').slice(0, -1).join('/');
-  fileName = `${fileName}/${topicName}/content.js`;
-  const content = fs.readFileSync(fileName, 'utf8');
+function contentSectionCount(contentPath) {
+  // let fileName = testPath.split('/').slice(0, -1).join('/');
+  // fileName = `${fileName}/${topicName}/content.js`;
+  const content = fs.readFileSync(contentPath, 'utf8');
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
@@ -33,11 +33,11 @@ function contentSectionCount(testPath, topicName) {
 //       3: { otherOptions: 'a' },
 //     },
 //   },
-//   'explanation',
-//   'summary',
-//   [
-//     ['explanation', 3, [1, 5]],
-//   ],
+//   'goto',
+//   'nextPrev',
+//   3,                           // Test page 3 only
+//   [3, 3],                      // Test page 3 only
+//   [1, 10, 5, 3]                // Go from page 1 to 10, to 5, to 3
 // );
 function getThreshold(page, options, comingFrom) {
   const defaultThreshold = options.thresholds[comingFrom];
@@ -59,8 +59,9 @@ function getThreshold(page, options, comingFrom) {
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const path = fullPath.split('/').slice(-3, -1).join('/');
-
+  // const path = fullPath.split('/').slice(-3, -1).join('/');
+  const versionPath = fullPath.split('/').slice(4, -1).join('/');
+  const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   let scenariosToUse = scenarios;
   const defaultOptions = {
     thresholds: {
@@ -76,33 +77,43 @@ export default function tester(optionsOrScenario, ...scenarios) {
     pages: {},
   };
   let optionsToUse = defaultOptions;
-  if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string') {
+  if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
     scenariosToUse = [optionsOrScenario, ...scenarios];
   } else {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   }
   scenariosToUse.forEach((scenario) => {
     if (typeof scenario === 'string') {
-      const topicName = scenario;
-      const numPages = contentSectionCount(fullPath, topicName);
-      for (let i = 1; i <= numPages; i += 1) {
-        allTests.push([topicName, i, [i], optionsToUse]);
+      const numPages = contentSectionCount(contentPath);
+      if (scenario === 'goto') {
+        for (let i = 1; i <= numPages; i += 1) {
+          allTests.push([i, [i], optionsToUse]);
+        }
+      } else if (scenario === 'nextPrev') {
+        allTests.push([1, [numPages, 1], optionsToUse]);
       }
-      allTests.push([topicName, 1, [numPages, 1], optionsToUse]);
     } else {
-      scenario.forEach((extraScenario) => {
-        allTests.push([...extraScenario, optionsToUse]);
-      });
+      let fromPage = 1;
+      let toPages = 1;
+      if (Array.isArray(scenario)) {
+        [fromPage] = scenario;
+        toPages = scenario.slice(1);
+      } else {
+        fromPage = scenario;
+        toPages = [scenario];
+      }
+      allTests.push([fromPage, toPages, optionsToUse]);
     }
   });
 
-  describe(`${path}`, () => {
+  describe(`${versionPath}`, () => {
     test.each(allTests)(
-      '%s - from: %i, to: %s',
-      async (topicName, fromPage, toPages, options) => {
+      'From: %i, to: %s',
+      async (fromPage, toPages, options) => {
         jest.setTimeout(120000);
+
         const fullpath =
-          `${sitePath}/Lessons/Math/Geometry_1/${path}/${topicName}?page=${fromPage}`;
+          `${sitePath}/${versionPath}?page=${fromPage}`;
         await page.goto(fullpath);
 
         await page.setViewport({
@@ -138,7 +149,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,             // 480 pixels
             failureThresholdType: 'percent',
-            customSnapshotIdentifier: `${topicName} page ${currentPage}`,
+            customSnapshotIdentifier: `page ${currentPage}`,
           });
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
@@ -185,7 +196,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,             // 480 pixels
               failureThresholdType: 'percent',
-              customSnapshotIdentifier: `${topicName} page ${currentPage}`,
+              customSnapshotIdentifier: `page ${currentPage}`,
             });
           }
         }

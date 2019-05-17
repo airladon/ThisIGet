@@ -1,0 +1,16 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrAdjacentAngles_lines:              color('blue'),
+  qrAdjacentAngles_angleA:             color('red'),
+  qrAdjacentAngles_angleB:             color('green'),
+  qrAdjacentAngles_angleC:             color('yellow'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}

@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Area of a Triangle',
-  uid: 'area_triangle',
-  dependencies: ['area_introduction'],
+  dependencies: [
+    'Area',
+  ],
+  enabled: true,
+  uid: 'AreaTriangle',
 };
 
 module.exports = {

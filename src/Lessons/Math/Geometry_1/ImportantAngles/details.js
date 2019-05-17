@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Important Angles',
-  uid: 'important_angles',
-  dependencies: ['measuring_angles_degrees'],
+  dependencies: [
+    'Degrees',
+  ],
+  enabled: true,
+  uid: 'ImportantAngles',
 };
 
 module.exports = {

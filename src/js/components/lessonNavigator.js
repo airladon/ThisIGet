@@ -228,7 +228,7 @@ export default class LessonNavigator extends React.Component
     this.key += 1;
     let state = '';
     const { x, y } = lesson.location;
-    if (lesson.name === this.selected) {
+    if (lesson.title === this.selected) {
       state = 'selected';
       this.selectedLesson = lesson;
     }
@@ -237,10 +237,10 @@ export default class LessonNavigator extends React.Component
     }
     return <LessonTile
               id={lesson.id}
-              link={`${lesson.path}/base/explanation`}
+              link={`${lesson.path}/${lesson.uid}/explanation/base`}
               imgLink={lesson.imgLink}
               key={this.key}
-              label={lesson.name}
+              label={lesson.title}
               state={state}
               left={`${x}px`}
               top={`${y}px`}

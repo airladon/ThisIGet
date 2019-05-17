@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Sine',
-  uid: 'sine_introduction',
-  dependencies: ['unit_circle'],
+  dependencies: [
+    'UnitCircle',
+  ],
   enabled: false,
+  uid: 'Sine',
 };
 
 module.exports = {

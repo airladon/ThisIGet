@@ -102,6 +102,7 @@ then
   DOCKERFILE="Dockerfile_dev"
 fi
 
+
 if [ $1 != "pupp" ];
 then
   echo
@@ -110,7 +111,6 @@ then
 
   GUNICORN_PORT=4000
   docker build -t devenv-$1 .
-
   rm Dockerfile
 fi
 
@@ -148,12 +148,14 @@ else
     -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
+    -v $PROJECT_PATH/containers/dev/getLessons.test.js:/opt/app/getLessons.test.js \
     -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/containers/dev/jest.index.config.js:/opt/app/jest.index.config.js \
     -v $PROJECT_PATH/containers/dev/pytest.ini:/opt/app/pytest.ini \
     -v $PROJECT_PATH/containers/dev/setFilesForBuild.js:/opt/app/setFilesForBuild.js \
     -v $PROJECT_PATH/containers/dev/update_paths.py:/opt/app/update_paths.py \
     -v $PROJECT_PATH/containers/dev/webpack.config.js:/opt/app/webpack.config.js \
+    -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \

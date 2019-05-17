@@ -1,0 +1,17 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  // lines:             map-get($geometry_colors, lines),
+  // angles:            color('diagram', 'construction8'),
+  qrRadians_lines:              color('blue'),
+  qrRadians_angles:             color('green'),
+  qrRadians_arc:                color('red'),
+  qrRadians_marks:              color('grey', 'dark'),
+  qrRadians_radianLines:        color('yellow'),
+  qrRadians_degrees:            color('blue', 'lighter'),
+  // arrow:              color('red'),
+);
+
+body {
+  @include color_vars($colors);
+}

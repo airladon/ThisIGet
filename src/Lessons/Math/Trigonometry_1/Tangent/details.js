@@ -3,9 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Tangent',
-  uid: 'tangent_introduction',
-  dependencies: ['chord'],
+  dependencies: [
+    'Chord',
+  ],
   enabled: false,
+  uid: 'Tangent',
 };
 
 module.exports = {

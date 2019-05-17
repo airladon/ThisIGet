@@ -3,8 +3,11 @@
 // eslint-disable-next-line no-var
 var details = {
   title: 'Parallel Lines',
-  uid: 'parallel_lines',
-  dependencies: ['adjacent_angles'],
+  dependencies: [
+    'AdjacentAngles',
+  ],
+  enabled: true,
+  uid: 'ParallelLines',
 };
 
 module.exports = {
