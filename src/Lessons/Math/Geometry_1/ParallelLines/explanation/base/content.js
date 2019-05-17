@@ -93,7 +93,11 @@ class Content extends PresentationLessonContent {
         `${new Definition('Parallel', 'Greek', ['para', 'beside', 'allelois', 'each other']).html()}`,
       ],
       modifiers: {
-        parallel: click(coll.rotateLine1ToParallel, [coll], colors.lines, true, 'id__parallel_lines__parallel'),
+        parallel: click(coll.rotateLine1ToParallel, [coll], {
+          color: colors.lines,
+          interactive: true,
+          id: 'id__parallel_lines__parallel',
+        }),
       },
     });
 

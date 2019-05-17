@@ -26540,23 +26540,41 @@ function clickWord(textToUse, id, actionMethod, bind) {
 }
 
 function click(actionMethod, bind) {
-  var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
-  var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
-  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
+  var colorOrOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
   var classStr = 'action_word';
+  var colorToUse = null;
+  var defaultOptions = {
+    color: null,
+    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    interactive: true,
+    classes: '',
+    text: null
+  };
+  var options = defaultOptions;
+
+  if (Array.isArray(colorOrOptions)) {
+    colorToUse = colorOrOptions;
+  } else if (colorOrOptions != null) {
+    options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
+  }
+
+  var _options = options,
+      interactive = _options.interactive,
+      color = _options.color,
+      id = _options.id,
+      classes = _options.classes,
+      text = _options.text;
+
+  if (color != null) {
+    colorToUse = color;
+  }
 
   if (interactive) {
     classStr = "".concat(classStr, " interactive_word");
   }
 
-  if (typeof classesOrColor === 'string') {
-    classStr = "".concat(classesOrColor, " ").concat(classStr);
-  }
-
-  var color = null;
-
-  if (Array.isArray(classesOrColor)) {
-    color = classesOrColor;
+  if (classes !== '') {
+    classStr = "".concat(classStr, " ").concat(classes);
   }
 
   var idToUse = function idToUse() {
@@ -26564,14 +26582,40 @@ function click(actionMethod, bind) {
   };
 
   return {
-    replacementText: function replacementText(text) {
-      return toHTML(text, idToUse(), classStr, color);
+    replacementText: function replacementText(textIn) {
+      return toHTML(text || textIn, idToUse(), classStr, colorToUse);
     },
     id: idToUse,
     actionMethod: actionMethod,
     bind: bind
   };
-}
+} // function click(
+//   actionMethod: Function,
+//   bind: Array<mixed>,
+//   classesOrColor: string | Array<number> | null = null,
+//   interactive: boolean = true,
+//   id: string = `lesson__id_${generateUniqueId()}`,
+// ) {
+//   let classStr = 'action_word';
+//   if (interactive) {
+//     classStr = `${classStr} interactive_word`;
+//   }
+//   if (typeof classesOrColor === 'string') {
+//     classStr = `${classesOrColor} ${classStr}`;
+//   }
+//   let color = null;
+//   if (Array.isArray(classesOrColor)) {
+//     color = classesOrColor;
+//   }
+//   const idToUse = () => id;
+//   return {
+//     replacementText: (text: string) => toHTML(text, idToUse(), classStr, color),
+//     id: idToUse,
+//     actionMethod,
+//     bind,
+//   };
+// }
+
 
 function clickId() {
   var _id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';

@@ -19,7 +19,7 @@ const {
   highlight,
   style,
   // actionWord,
-  clickWord,
+  // clickWord,
   // onClickId,
 } = Fig.tools.html;
 
@@ -183,9 +183,6 @@ class Content extends PresentationLessonContent {
         'There are two common practices. The first is dividing into |360| portions.',
         'Each portion is usually called a degree and is represented by the symbol |º|.',
       ]),
-      // modifiers: {
-      //   tester: clickWord('tester', 'id_tester', () => {}, [], 'lesson_tester'),
-      // },
     });
 
     this.addSection({
@@ -223,8 +220,15 @@ class Content extends PresentationLessonContent {
 
     const row = (portion: string, angle: number) => `<tr><td class="lesson__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
 
-    const rowClick = (angle: number) => clickWord(`${angle}&deg;`, `id_${angle}`, diag.pushLine, [diag, angle / 180 * Math.PI, 0, 1, null], colors.angles);
-
+    const rowClick = (angle: number) => click(
+      diag.pushLine,
+      [diag, angle / 180 * Math.PI, 0, 1, null],
+      {
+        color: colors.angles,
+        id: `id_${angle}`,
+        text: `${angle}&deg;`,
+      },
+    );
     this.addSection(common, {
       title: 'Common Angles',
       setContent: () => [

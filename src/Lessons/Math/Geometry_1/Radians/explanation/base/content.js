@@ -41,7 +41,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.loadQRs([
-      'circles',
+      'Circle',
     ]);
   }
 
@@ -74,7 +74,11 @@ class Content extends PresentationLessonContent {
         '|Angles and circles are closely related| as a circle can be created by rotating a line |_360|.',
       ],
       modifiers: {
-        _360: clickWord('360º', 'id_360', diag.showCircle, [diag], colors.arc),
+        _360: click(diag.showCircle, [diag], {
+          color: colors.arc,
+          text: '360º',
+          id: 'id_360',
+        }),
       },
       show: [
         circle._line1, circle._line2,
@@ -414,7 +418,7 @@ class Content extends PresentationLessonContent {
         'We |know| the |circumference| of a circle is |_2pi| |radius_lengths|.',
       ],
       modifiers: {
-        know: click(this.showQR, [this, 'circles', 'Circumference'], colors.diagram.action),
+        know: click(this.showQR, [this, 'Circle', 'Circumference'], colors.diagram.action),
         _2pi: highlightWord('2π', colors.angles),
         circumference: click(diag.pulseArc, [diag], colors.arc),
         radius_lengths: click(diag.pulseRadius, [diag], colors.lines),
@@ -526,7 +530,11 @@ class Content extends PresentationLessonContent {
       modifiers: {
         _6_radius_lengths: click(diag.pulseRadianLines, [diag], colors.radianLines),
         circumference: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.arc),
-        _2pi: clickWord('2π', 'id_2pi', this.showQR, [this, 'circles', 'Pi'], colors.angles),
+        _2pi: click(this.showQR, [this, 'Circle', 'Pi'], {
+          color: colors.angles,
+          text: '2π',
+          id: 'id_2pi',
+        }),
         _6p28: highlightWord('6.28', colors.angles),
       },
       show: [
