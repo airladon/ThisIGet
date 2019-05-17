@@ -21,6 +21,7 @@ function contentSectionCount(contentPath) {
 
 // tester(
 //   {
+//     prePath: 'dev'
 //     thresholds: {
 //       goto: 0.00001,
 //       next: 0.0001,
@@ -79,6 +80,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
       scrollTo: 180,
     },
     pages: {},
+    prePath: '',
   };
   let optionsToUse = defaultOptions;
   if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
@@ -86,6 +88,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   } else {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   }
+  const { prePath } = optionsToUse;
   scenariosToUse.forEach((scenario) => {
     if (typeof scenario === 'string') {
       const numPages = contentSectionCount(contentPath);
@@ -117,7 +120,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         jest.setTimeout(120000);
 
         const fullpath =
-          `${sitePath}/${versionPath}?page=${fromPage}`;
+          `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
         await page.goto(fullpath);
 
         await page.setViewport({
