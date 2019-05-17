@@ -5,9 +5,11 @@ import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import CommonCollection from './collection';
+import details from '../../details';
+import version from './version';
 
-const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
-const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
+const lessonUID = details.details.uid;
+const versionUID = version.details.uid;
 
 const { Transform, Rect } = Fig;
 // const {

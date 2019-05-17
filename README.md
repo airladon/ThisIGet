@@ -227,6 +227,17 @@ sudo pfctl -s nat
 * Runs Flask automatically at `localhost:5001`
    - Can see flask requests and responses
 
+A convenient way to use the stage container is:
+* In dev container, run webpack stage build with watch option:
+  * ./start_env.sh dev
+  * webpack --watch --env.mode=stage --progress
+
+* In another terminal window, run the stage container
+  * export LOCAL_PRODUCTION=DISABLE_SECURITY
+  * ./start_env.sh stage
+  * Navigate to http://localhost:5001
+
+
 ### Production Container
 `./startenv prod`
 
