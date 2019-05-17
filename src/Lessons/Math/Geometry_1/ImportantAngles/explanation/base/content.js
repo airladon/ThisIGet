@@ -91,7 +91,7 @@ class Content extends PresentationLessonContent {
           interactive: true,
           id: 'id_right',
         }),
-        Obtuse: click(coll.goToObtuse, [coll], { 
+        Obtuse: click(coll.goToObtuse, [coll], {
           classes: coll.getClass('obtuse'),
           interactive: true,
           id: 'id_obtuse',
