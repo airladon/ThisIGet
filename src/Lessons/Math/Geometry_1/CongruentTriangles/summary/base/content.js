@@ -14,7 +14,6 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 const {
   highlight,
   click,
-  // clickWord,
   style,
 //   centerV,
 } = Fig.tools.html;

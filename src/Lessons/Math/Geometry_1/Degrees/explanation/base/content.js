@@ -19,7 +19,6 @@ const {
   highlight,
   style,
   // actionWord,
-  // clickWord,
   // onClickId,
 } = Fig.tools.html;
 

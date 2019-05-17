@@ -14,7 +14,6 @@ const {
   // click,
   // centerV,
   // highlight,
-  // clickWord,
   style,
 } = Fig.tools.html;
 

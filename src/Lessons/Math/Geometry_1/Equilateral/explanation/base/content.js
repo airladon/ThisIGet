@@ -17,7 +17,6 @@ const {
   centerV,
   highlight,
   highlightWord,
-  // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
