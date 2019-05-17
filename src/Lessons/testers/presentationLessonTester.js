@@ -158,53 +158,25 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
           // Find all links on page that go to QR popups
           // eslint-disable-next-line no-await-in-loop, no-loop-func
-          // const a = []
-          // await page.$$('.lesson__qr_action_word', (qrLinks, b) => {
-          //   // for (let element of qrLinks) {
-          //   //   await page.click(`#${element.id}`);
-          //   //   expect(image).toMatchImageSnapshot({
-          //   //     failureThreshold: gotoThreshold,             // 480 pixels
-          //   //     failureThresholdType: 'percent',
-          //   //     customSnapshotIdentifier: `page ${currentPage} - QR`,
-          //   //   });
-          //   // }
-          //   for (let qrLink of qrLinks) {
-          //     b.push(qrLink.id)
-          //   }
-          // }, a);
-          const a = await page.$$eval('.lesson__qr_action_word', divs => divs.length);
-          console.log(a)
-          const b = await page.$$('.lesson__qr_action_word');
-
-          // const c = await b[0].getProperty('id')
-          // console.log(c)
-          // await page.click(b[0])
-          await page.click('.lesson__qr_action_word')
-          image = await page.screenshot();
-          // sleep(1000)
-
-          // const b = await page.$$('.actionW')
-          // const a = (await page.$$('.lesson__qr_action_word'))[0];
-          // await page.evaluate(element => element.click(), a);
-          expect(image).toMatchImageSnapshot({
-            failureThreshold: gotoThreshold,             // 480 pixels
-            failureThresholdType: 'percent',
-            customSnapshotIdentifier: `page ${currentPage} - QR`,
-          });
-          // console.log(await a.getProperty('id'))
-          // console.log(qrLinks)
-          // for (let element of qrLinks) {
-          //   await page.evaluate((link) => link.click(), element);
-          //   // const id = await element.attribute(id)
-          //   // console.log(id)
-          //   // await page.click(`#${element.id}`)
-          //   await sleep(1000);
-          //   expect(image).toMatchImageSnapshot({
-          //     failureThreshold: gotoThreshold,             // 480 pixels
-          //     failureThresholdType: 'percent',
-          //     customSnapshotIdentifier: `page ${currentPage} - QR`,
-          //   });
-          // }
+          const qrLinks = await page.$$('.lesson__qr_action_word');
+          let index = 0;
+          // eslint-disable-next-line no-restricted-syntax
+          for (const link of qrLinks) {
+            // eslint-disable-next-line no-await-in-loop
+            await link.click();
+            // eslint-disable-next-line no-await-in-loop
+            await page.evaluate((y) => {
+              window.scrollTo(0, y);
+            }, options.viewPort.scrollTo);
+            // eslint-disable-next-line no-await-in-loop
+            image = await page.screenshot();
+            expect(image).toMatchImageSnapshot({
+              failureThreshold: gotoThreshold,             // 480 pixels
+              failureThresholdType: 'percent',
+              customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
+            });
+            index += 1;
+          }
 
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
