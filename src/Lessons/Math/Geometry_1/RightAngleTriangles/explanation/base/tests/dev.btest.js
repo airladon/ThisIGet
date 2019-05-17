@@ -4,7 +4,7 @@ import tester from '../../../../../../testers/presentationLessonTester';
 
 tester(
   'goto',
-  // 'nextPrev',
+  'nextPrev',
   // 1,
   // 2,
   // 3,
