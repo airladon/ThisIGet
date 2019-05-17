@@ -85,9 +85,11 @@ export default class LessonComponent extends React.Component
     // const topic = path.slice(-2, -1)[0];
     // const versionUID = path.slice(-1)[0];
     // this.lessonDetails = props.lessonDetails;
+    /* eslint-disable prefer-destructuring */
     this.lessonUID = path.slice(-3, -2)[0];
     this.versionUID = path.slice(-1)[0];
     this.topic = path.slice(-2, -1)[0];
+    /* eslint-enable */
     this.lessonDescription = getLessonDescription(this.lessonUID);
     this.state = {
       userRating: 0,
