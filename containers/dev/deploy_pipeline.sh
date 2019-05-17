@@ -52,7 +52,7 @@ title "Ratings Test: thisiget-test"
 check_status
 
 title "Browser Tests: thisiget-test"
-./browser_test.sh test
+./browser_test.sh test stage.btest.js
 check_status
 
 ###########################################################################
