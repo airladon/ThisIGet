@@ -91,7 +91,7 @@ class Content extends PresentationLessonContent {
         'First consider angles |a| and |b|. These form around a |straight_line|, and therefore are |supplementary| angles, adding up to 180º.',
       ],
       modifiers: {
-        supplementary: click(this.showQR, [this, 'AdjacentAngles/base', 'Supplementary'], colors.diagram.action),
+        supplementary: this.bindShowQR('AdjacentAngles/base', 'Supplementary', colors.diagram.action),
         a: highlight(colors.angle1),
         b: highlight(colors.angle2),
         straight_line: click(opp.pulseLine1, [opp], colors.lines),
@@ -141,7 +141,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         a: highlight(colors.angle1),
         d: highlight(colors.angle4),
-        supplementary: click(this.showQR, [this, 'AdjacentAngles', 'Supplementary'], colors.diagram.action),
+        supplementary: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
@@ -891,7 +891,7 @@ class Content extends PresentationLessonContent {
         'We also know that |supplementary| angles add up to |_180|.',
       ],
       modifiers: {
-        supplementary: click(this.showQR, [this, 'AdjacentAngles', 'Supplementary'], colors.angle3),
+        supplementary: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.angle3),
         _180: clickW('180º', three.interiorPulseSupplementary, [three, null], colors.angle3),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -1003,7 +1003,7 @@ class Content extends PresentationLessonContent {
         'If you forget, you can always figure them out, just using |supplementary_angles|!',
       ]),
       modifiers: {
-        supplementary_angles: click(this.showQR, [this, 'AdjacentAngles', 'Supplementary'], colors.diagram.action),
+        supplementary_angles: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
       },
     });
   }

@@ -917,14 +917,14 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        triangle: click(this.showQR, [this, 'Triangles/base', 'Main'], colors.sides),
+        triangle: this.bindShowQR('Triangles/base', 'Main', colors.sides),
         calculate: click(this.next, [this], colors.angles),
       },
       show: [aas._angle1, aas._angle3, aas._side],
     });
     this.addSection(common, {
       modifiers: {
-        triangle: click(this.showQR, [this, 'Triangles/base', 'Main'], colors.sides),
+        triangle: this.bindShowQR('Triangles/base', 'Main', colors.sides),
         calculate: click(aas.pulseAngle2, [aas], colors.angles),
       },
       show: [aas],

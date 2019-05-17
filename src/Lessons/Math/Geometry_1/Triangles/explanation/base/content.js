@@ -128,8 +128,8 @@ class Content extends PresentationLessonContent {
         'To find the |relationship| between a triangle\'s |angles|, we can use  |supplementary_angles| and |alternate_angles|.',
       ]),
       modifiers: {
-        supplementary_angles: click(this.showQR, [this, 'AdjacentAngles/base', 'Supplementary'], colors.diagram.action),
-        alternate_angles: click(this.showQR, [this, 'RelatedAngles/base', 'Alternate'], colors.diagram.action),
+        supplementary_angles: this.bindShowQR('AdjacentAngles/base', 'Supplementary', colors.diagram.action),
+        alternate_angles: this.bindShowQR('RelatedAngles/base', 'Alternate', colors.diagram.action),
       },
     });
 
@@ -251,7 +251,7 @@ class Content extends PresentationLessonContent {
         'When a line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.',
       ]),
       modifiers: {
-        alternate_angles: click(this.showQR, [this, 'RelatedAngles', 'Alternate'], colors.angle1),
+        alternate_angles: this.bindShowQR('RelatedAngles', 'Alternate', colors.angle1),
         a: highlight(colors.angle1),
       },
       show: [
@@ -306,7 +306,7 @@ class Content extends PresentationLessonContent {
         'We can similarly identify the |alternate_angle| of |b|.',
       ]),
       modifiers: {
-        alternate_angle: click(this.showQR, [this, 'RelatedAngles', 'Alternate'], colors.angle2),
+        alternate_angle: this.bindShowQR('RelatedAngles', 'Alternate', colors.angle2),
         b: highlight(colors.angle2),
       },
       show: [
@@ -340,7 +340,7 @@ class Content extends PresentationLessonContent {
         'Around the triangle\'s top point, |a|, |b| and |c| form a straight angle and are therefore |supplementary_angles|.',
       ]),
       modifiers: {
-        supplementary_angles: click(this.showQR, [this, 'AdjacentAngles', 'Supplementary'], colors.diagram.action),
+        supplementary_angles: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
         a: highlight(colors.angle1),
         b: highlight(colors.angle2),
         c: highlight(colors.angle3),

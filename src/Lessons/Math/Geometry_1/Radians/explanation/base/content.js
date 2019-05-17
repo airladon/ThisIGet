@@ -416,7 +416,7 @@ class Content extends PresentationLessonContent {
         'We |know| the |circumference| of a circle is |_2pi| |radius_lengths|.',
       ],
       modifiers: {
-        know: click(this.showQR, [this, 'Circle', 'Circumference'], colors.diagram.action),
+        know: this.bindShowQR('Circle', 'Circumference', colors.diagram.action),
         _2pi: highlightWord('2π', colors.angles),
         circumference: click(diag.pulseArc, [diag], colors.arc),
         radius_lengths: click(diag.pulseRadius, [diag], colors.lines),

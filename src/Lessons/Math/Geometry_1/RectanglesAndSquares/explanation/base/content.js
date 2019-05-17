@@ -136,7 +136,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         line: click(coll.pulseBottom, [coll], colors.sides),
         two_lines: click(coll.pulseLeftRight, [coll], colors.sides),
-        interior_angles: click(this.showQR, [this, 'RelatedAngles/base', 'Interior'], colors.diagram.action),
+        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
       },
     });
 
@@ -145,7 +145,7 @@ class Content extends PresentationLessonContent {
         'We also know that the |interior_angles| of two |parallel lines| intersected by a third line will always add to |180º|.',
       ],
       modifiers: {
-        interior_angles: click(this.showQR, [this, 'RelatedAngles/base', 'Interior'], colors.diagram.action),
+        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
       },
     });
 
@@ -154,7 +154,7 @@ class Content extends PresentationLessonContent {
         'The reverse of this is: if the |interior_angles| of two lines intersected by a third line |add to 180º|, then the lines |must be parallel|.',
       ],
       modifiers: {
-        interior_angles: click(this.showQR, [this, 'RelatedAngles/base', 'Interior'], colors.diagram.action),
+        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
       },
     });
 
