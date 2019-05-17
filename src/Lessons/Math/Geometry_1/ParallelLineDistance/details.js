@@ -7,7 +7,6 @@ var details = {
     'PointLineDistance',
   ],
   enabled: true,
-  uid: 'ParallelLineDistance',
 };
 
 module.exports = {

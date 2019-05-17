@@ -7,7 +7,6 @@ var details = {
     'Degrees',
   ],
   enabled: true,
-  uid: 'ImportantAngles',
 };
 
 module.exports = {

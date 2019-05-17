@@ -7,7 +7,6 @@ var details = {
     'RectanglesAndSquares',
   ],
   enabled: true,
-  uid: 'Area',
 };
 
 module.exports = {

@@ -7,7 +7,6 @@ var details = {
     'Isosceles',
   ],
   enabled: true,
-  uid: 'SideAngleRelationship',
 };
 
 module.exports = {

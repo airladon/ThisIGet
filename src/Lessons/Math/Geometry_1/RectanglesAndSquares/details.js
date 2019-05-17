@@ -8,7 +8,6 @@ var details = {
     'CongruentTriangles',
   ],
   enabled: true,
-  uid: 'RectanglesAndSquares',
 };
 
 module.exports = {

@@ -52,7 +52,7 @@ export default class LessonDescription {
       description: string,
       uid: string,
       fullLesson: boolean,
-      type: 'presentation' | 'singlePage' | 'video' | 'audio',
+      type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
       aveRating: number;
       numRatings: number;
       numHighRatings: number;

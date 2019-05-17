@@ -6,7 +6,6 @@ var details = {
   dependencies: [
   ],
   enabled: false,
-  uid: 'UnitCircle',
 };
 
 module.exports = {

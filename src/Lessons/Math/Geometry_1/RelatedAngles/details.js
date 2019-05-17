@@ -7,7 +7,6 @@ var details = {
     'ParallelLines',
   ],
   enabled: true,
-  uid: 'RelatedAngles',
 };
 
 module.exports = {

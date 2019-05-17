@@ -7,7 +7,6 @@ var details = {
     'Sine',
   ],
   enabled: false,
-  uid: 'Chord',
 };
 
 module.exports = {

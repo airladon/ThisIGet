@@ -7,7 +7,6 @@ var details = {
     'AreaTriangle',
   ],
   enabled: true,
-  uid: 'RightAngleTriangles',
 };
 
 module.exports = {

@@ -7,7 +7,6 @@ var details = {
     'CongruentTriangles',
   ],
   enabled: true,
-  uid: 'Isosceles',
 };
 
 module.exports = {

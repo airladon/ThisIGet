@@ -7,7 +7,6 @@ var details = {
     'Triangles',
   ],
   enabled: true,
-  uid: 'Quadrangles',
 };
 
 module.exports = {

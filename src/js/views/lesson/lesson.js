@@ -11,21 +11,21 @@ function renderLesson(
   // lessonUID: string,
   // topicName: string,
   // versionUID: string,
-  lessonDetails: {
-    uid: string,
-    title: string,
-    dependencies: Array<string>,
-    enabled?: boolean,
-  },
-  versionDetails: {
-    uid: string,
-    topic: string,
-    title?: string,
-    description?: string,
-    fullLesson?: boolean,
-    type: 'presentation' | 'singlePage' | 'generic',
-    references?: Array<string>,
-  },
+  // lessonDetails: {
+  //   uid: string,
+  //   title: string,
+  //   dependencies: Array<string>,
+  //   enabled?: boolean,
+  // },
+  // versionDetails: {
+  //   uid: string,
+  //   topic: string,
+  //   title?: string,
+  //   description?: string,
+  //   fullLesson?: boolean,
+  //   type: 'presentation' | 'singlePage' | 'generic',
+  //   references?: Array<string>,
+  // },
 ) {
   const lessonId: HTMLElement | null = document.getElementById('single-page-lesson');
   const LessonView = withLoginManager(ViewLesson);
@@ -37,8 +37,8 @@ function renderLesson(
         // lessonUID={lessonUID}
         // topicName={topicName}
         // versionUID={versionUID}
-        lessonDetails={lessonDetails}
-        versionDetails={versionDetails}
+        // lessonDetails={lessonDetails}
+        // versionDetails={versionDetails}
       />,
       lessonId,
     );

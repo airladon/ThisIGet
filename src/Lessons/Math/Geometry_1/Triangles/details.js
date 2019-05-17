@@ -7,7 +7,6 @@ var details = {
     'RelatedAngles',
   ],
   enabled: true,
-  uid: 'Triangles',
 };
 
 module.exports = {

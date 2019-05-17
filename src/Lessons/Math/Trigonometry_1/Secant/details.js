@@ -7,7 +7,6 @@ var details = {
     'Pythagoras',
   ],
   enabled: false,
-  uid: 'Secant',
 };
 
 module.exports = {

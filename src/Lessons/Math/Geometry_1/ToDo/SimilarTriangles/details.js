@@ -7,7 +7,6 @@ var details = {
     'ParallelLineDistance',
   ],
   enabled: false,
-  uid: 'SimilarTriangles',
 };
 
 module.exports = {

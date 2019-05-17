@@ -7,7 +7,6 @@ var details = {
     'Chord',
   ],
   enabled: false,
-  uid: 'Tangent',
 };
 
 module.exports = {
