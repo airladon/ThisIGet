@@ -176,6 +176,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
               customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
             });
             index += 1;
+            // eslint-disable-next-line no-await-in-loop
+            const closeButtons = await page.$$('.lesson__popup_box__close');
+            // eslint-disable-next-line no-restricted-syntax
+            for (const closeButton of closeButtons) {
+              if (closeButton.boundingBox() != null) {
+                closeButton.click();
+                break;
+              }
+            }
+            // eslint-disable-next-line no-await-in-loop
+            await page.evaluate((y) => {
+              window.scrollTo(0, y);
+            }, options.viewPort.scrollTo);
           }
 
           while (currentPage.toString() !== targetPage.toString()) {

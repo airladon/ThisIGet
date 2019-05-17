@@ -16721,6 +16721,7 @@ function (_DrawingObject) {
     key: "transformHtml",
     value: function transformHtml(transformMatrix) {
       if (this.show) {
+        this.element.style.visibility = 'visible';
         var glLocation = this.location.transformBy(transformMatrix);
         var pixelLocation = this.glToPixelSpace(glLocation);
         var w = this.element.clientWidth;
@@ -16747,9 +16748,10 @@ function (_DrawingObject) {
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
       } else {
-        this.element.style.position = 'absolute';
-        this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px'; // console.trace()
+        // this.element.style.position = 'absolute';
+        // this.element.style.left = '-10000px';
+        // this.element.style.top = '-10000px';
+        this.element.style.visibility = 'hidden'; // console.trace()
       }
     }
   }, {
@@ -26466,35 +26468,7 @@ function addId() {
     } // id: '',
 
   };
-} // function clickWord(
-//   textToUse: string,
-//   id: string,
-//   actionMethod: Function,
-//   bind: Array<mixed>,
-//   classesOrColor: string | Array<number> | null = null,
-//   interactive: boolean = true,
-// ) {
-//   let classStr = 'action_word';
-//   if (interactive) {
-//     classStr = `${classStr} interactive_word`;
-//   }
-//   if (typeof classesOrColor === 'string') {
-//     classStr = `${classesOrColor} ${classStr}`;
-//   }
-//   let color = null;
-//   if (Array.isArray(classesOrColor)) {
-//     color = classesOrColor;
-//   }
-//   const idToUse = () => id;
-//   // const id = `lesson__id_${textToUse}`;
-//   return {
-//     replacementText: () => toHTML(textToUse, idToUse(), classStr, color),
-//     id: idToUse,
-//     actionMethod,
-//     bind,
-//   };
-// }
-
+}
 
 function click(actionMethod, bind) {
   var colorOrOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -26554,44 +26528,7 @@ function clickW(textToUse, actionMethod, bind) {
     color: color,
     text: textToUse
   });
-} // function click(
-//   actionMethod: Function,
-//   bind: Array<mixed>,
-//   classesOrColor: string | Array<number> | null = null,
-//   interactive: boolean = true,
-//   id: string = `lesson__id_${generateUniqueId()}`,
-// ) {
-//   let classStr = 'action_word';
-//   if (interactive) {
-//     classStr = `${classStr} interactive_word`;
-//   }
-//   if (typeof classesOrColor === 'string') {
-//     classStr = `${classesOrColor} ${classStr}`;
-//   }
-//   let color = null;
-//   if (Array.isArray(classesOrColor)) {
-//     color = classesOrColor;
-//   }
-//   const idToUse = () => id;
-//   return {
-//     replacementText: (text: string) => toHTML(text, idToUse(), classStr, color),
-//     id: idToUse,
-//     actionMethod,
-//     bind,
-//   };
-// }
-// function clickId(
-//   id: string = '',
-//   actionMethod: Function,
-//   bind: Array<mixed>,
-// ) {
-//   return {
-//     id: () => id,
-//     actionMethod,
-//     bind,
-//   };
-// }
-
+}
 
 function actionWord(text) {
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();
