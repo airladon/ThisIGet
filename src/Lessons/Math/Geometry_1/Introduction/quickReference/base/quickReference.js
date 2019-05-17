@@ -4,9 +4,11 @@ import lessonLayout from './layout';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import details from '../../details';
+import version from './version';
 
-const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
-const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
+const lessonUID = details.details.uid;
+const versionUID = version.details.uid;
 
 export default class QRAbstraction extends PopupBoxCollection {
   constructor(
