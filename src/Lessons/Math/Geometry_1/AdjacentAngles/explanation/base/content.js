@@ -127,7 +127,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
           colors.diagram.action,
         ),
-        right_angle: click(this.showQR, [this, 'important_angles', 'Right'], colors.angleC),
+        right_angle: this.bindShowQR('important_angles', 'Right', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],

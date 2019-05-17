@@ -15,6 +15,10 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 // tester(
 //   {
 //     thresholds: {
@@ -151,6 +155,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
             failureThresholdType: 'percent',
             customSnapshotIdentifier: `page ${currentPage}`,
           });
+
+          // Find all links on page that go to QR popups
+          // eslint-disable-next-line no-await-in-loop, no-loop-func
+          const qrLinks = await page.$$('.lesson__qr_action_word');
+          console.log(qrLinks)
+          for (let element of qrLinks) {
+            await page.evaluate((link) => link.click(), element);
+            // const id = await element.attribute(id)
+            // console.log(id)
+            // await page.click(`#${element.id}`)
+            await sleep(1000);
+            expect(image).toMatchImageSnapshot({
+              failureThreshold: gotoThreshold,             // 480 pixels
+              failureThresholdType: 'percent',
+              customSnapshotIdentifier: `page ${currentPage} - QR`,
+            });
+          }
+
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
               const watchDog = page.waitForFunction(() => {

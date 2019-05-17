@@ -908,7 +908,10 @@ class PresentationLessonContent extends SimpleLessonContent {
     qrid: string,
     color: Array<number> = this.diagram.layout.colors.diagram.action,
   ) {
-    return click(this.showQR, [this, uid, qrid], color);
+    return click(this.showQR, [this, uid, qrid], {
+      color,
+      classes: 'lesson__qr_action_word',
+    });
   }
 
   addStar() {
