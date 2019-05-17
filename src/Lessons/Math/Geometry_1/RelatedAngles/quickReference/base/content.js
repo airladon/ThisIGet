@@ -1,5 +1,4 @@
 // @flow
-import Fig from 'figureone';
 import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
 import details from '../../details';
@@ -8,7 +7,6 @@ import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
-const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
 const path = window.location.pathname.split('/');
@@ -44,7 +42,7 @@ class Content extends PresentationLessonContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = click(this.showQR, [this, lessonUID, qrid]);
+          out[qrid] = this.bindShowQR(lessonUID, qrid);
         });
         return out;
       },
