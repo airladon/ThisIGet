@@ -11,8 +11,9 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
-const lessonUID = require.resolve('../../details').split('/').slice(-2, -1)[0];
-const versionUID = require.resolve('./version').split('/').slice(-2, -1)[0];
+const path = window.location.pathname.split('/');
+const [lessonUID] = path.slice(-3, -2);
+const [versionUID] = path.slice(-1);
 
 const qrids = version.details.references;
 

@@ -199,8 +199,10 @@ export default function getLessonIndex() {
     let dependencies = [];
     let enabled = true;
     if (fs.existsSync(detailsPath)) {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
+      /* eslint-disable global-require, import/no-dynamic-require */
+      // $FlowFixMe
       const details = require(detailsPath);
+      /* eslint-enable */
       ({ title } = details.details);
       ({ dependencies } = details.details);
       // ({ uid } = details.details);
@@ -248,9 +250,10 @@ export default function getLessonIndex() {
           let references = [];
           const versionFileName = `./${versionPath}/version.js`;
           if (fs.existsSync(versionFileName)) {
-            // eslint-disable-next-line global-require, import/no-dynamic-require
+            /* eslint-disable global-require, import/no-dynamic-require */
+            // $FlowFixMe
             const version = require(versionFileName);
-
+            /* eslint-enable */
             if (version.details.title != null) {
               versionTitle = version.details.title;
             }
@@ -279,7 +282,7 @@ export default function getLessonIndex() {
           } else {
             outStr = `${outStr}\n            title: '${versionTitle}',`;
             outStr = `${outStr}\n            description: '${versionDescription}',`;
-            outStr = `${outStr}\n            fullLesson: ${fullLesson},`;
+            outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
           }
           outStr = `${outStr}\n          },`;
         });

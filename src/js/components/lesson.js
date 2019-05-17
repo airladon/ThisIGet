@@ -24,20 +24,20 @@ type Props = {
   // lessonUID: string,
   // topicName: string,
   // versionUID: string,
-  lessonDetails: {
-    uid: string,
-    title: string,
-    dependencies: Array<string>,
-    enabled?: boolean,
-  },
-  versionDetails: {
-    uid: string,
-    topic: string,
-    title: string,
-    description: string,
-    fullLesson: boolean,
-    type: 'presentation' | 'singlePage' | 'generic',
-  },
+  // lessonDetails: {
+  //   uid: string,
+  //   title: string,
+  //   dependencies: Array<string>,
+  //   enabled?: boolean,
+  // },
+  // versionDetails: {
+  //   uid: string,
+  //   topic: string,
+  //   title: string,
+  //   description: string,
+  //   fullLesson: boolean,
+  //   type: 'presentation' | 'singlePage' | 'generic',
+  // },
   isLoggedIn: boolean;
 };
 
@@ -80,18 +80,24 @@ export default class LessonComponent extends React.Component
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
-    this.lessonDetails = props.lessonDetails;
-    this.lessonUID = props.lessonDetails.uid;
-    this.versionUID = props.versionDetails.uid;
-    this.topic = props.versionDetails.topic;
+    const path = window.location.pathname.split('/');
+    // const lessonUID = path.slice(-3, -2)[0];
+    // const topic = path.slice(-2, -1)[0];
+    // const versionUID = path.slice(-1)[0];
+    // this.lessonDetails = props.lessonDetails;
+    /* eslint-disable prefer-destructuring */
+    this.lessonUID = path.slice(-3, -2)[0];
+    this.versionUID = path.slice(-1)[0];
+    this.topic = path.slice(-2, -1)[0];
+    /* eslint-enable */
     this.lessonDescription = getLessonDescription(this.lessonUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
     };
-    this.versionDetails = props.versionDetails;
-    const [topic] = window.location.pathname.split('/').slice(-2, -1);
-    this.topic = topic;
+    // this.versionDetails = props.versionDetails;
+    // const [topic] = window.location.pathname.split('/').slice(-2, -1);
+    // this.topic = topic;
     this.key = 0;
     this.showNavigator = false;
     this.getRating(this.topic);
