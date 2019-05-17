@@ -18,7 +18,6 @@ const {
   highlightWord,
   highlight,
   // actionWord,
-  clickId,
   // onClickId,
 } = Fig.tools.html;
 
@@ -737,13 +736,27 @@ class Content extends PresentationLessonContent {
       modifiers: {
         degrees: click(diag.toggleDegrees, [diag], colors.degrees),
         radians: click(diag.toggleRadians, [diag], colors.radianLines),
-        _2pi: clickId('id_2pi', diag.pushLineRad, [diag, Math.PI * 1.999]),
-        _pi: clickId('id_pi', diag.pushLineRad, [diag, Math.PI]),
-        _2pi_3: clickId('id_2pi_3', diag.pushLineRad, [diag, Math.PI * 2 / 3]),
-        _3pi_2: clickId('id_3pi_2', diag.pushLineRad, [diag, Math.PI * 3 / 2]),
-        _pi_2: clickId('id_pi_2', diag.pushLineRad, [diag, Math.PI / 2]),
-        _pi_3: clickId('id_pi_3', diag.pushLineRad, [diag, Math.PI / 3]),
-        _pi_6: clickId('id_pi_6', diag.pushLineRad, [diag, Math.PI / 6]),
+        _2pi: click(diag.pushLineRad, [diag, Math.PI * 1.999], {
+          id: 'id_2pi',
+        }),
+        _pi: click(diag.pushLineRad, [diag, Math.PI], {
+          id: 'id_pi',
+        }),
+        _2pi_3: click(diag.pushLineRad, [diag, Math.PI * 2 / 3], {
+          id: 'id_2pi_3',
+        }),
+        _3pi_2: click(diag.pushLineRad, [diag, Math.PI * 3 / 2], {
+          id: 'id_3pi_2',
+        }),
+        _pi_2: click(diag.pushLineRad, [diag, Math.PI / 2], {
+          id: 'id_pi_2',
+        }),
+        _pi_3: click(diag.pushLineRad, [diag, Math.PI / 3], {
+          id: 'id_pi_3',
+        }),
+        _pi_6: click(diag.pushLineRad, [diag, Math.PI / 6], {
+          id: 'id_pi_6',
+        }),
         _360: click(diag.pushLineDeg, [diag, Math.PI * 1.999], colors.degrees),
         _270: click(diag.pushLineDeg, [diag, Math.PI * 3 / 2], colors.degrees),
         _180: click(diag.pushLineDeg, [diag, Math.PI], colors.degrees),

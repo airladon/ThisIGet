@@ -16,7 +16,6 @@ const {
   click,
   highlight,
   highlightWord,
-//   clickWord,
 } = Fig.tools.html;
 
 export class QRCongruentTriangles extends PopupBoxCollection {

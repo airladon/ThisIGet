@@ -26196,7 +26196,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId, clickW */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26212,7 +26212,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centerH", function() { return centerH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centerVH", function() { return centerVH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHTML", function() { return toHTML; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickWord", function() { return clickWord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "itemSelector", function() { return itemSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unit", function() { return unit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyModifiers", function() { return applyModifiers; });
@@ -26220,7 +26219,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickId", function() { return clickId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
@@ -26468,76 +26466,35 @@ function addId() {
     } // id: '',
 
   };
-}
+} // function clickWord(
+//   textToUse: string,
+//   id: string,
+//   actionMethod: Function,
+//   bind: Array<mixed>,
+//   classesOrColor: string | Array<number> | null = null,
+//   interactive: boolean = true,
+// ) {
+//   let classStr = 'action_word';
+//   if (interactive) {
+//     classStr = `${classStr} interactive_word`;
+//   }
+//   if (typeof classesOrColor === 'string') {
+//     classStr = `${classesOrColor} ${classStr}`;
+//   }
+//   let color = null;
+//   if (Array.isArray(classesOrColor)) {
+//     color = classesOrColor;
+//   }
+//   const idToUse = () => id;
+//   // const id = `lesson__id_${textToUse}`;
+//   return {
+//     replacementText: () => toHTML(textToUse, idToUse(), classStr, color),
+//     id: idToUse,
+//     actionMethod,
+//     bind,
+//   };
+// }
 
-function clickW(textToUse, actionMethod, bind) {
-  var classesOrColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  var interactive = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
-  var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
-  var classStr = 'action_word';
-
-  if (interactive) {
-    classStr = "".concat(classStr, " interactive_word");
-  }
-
-  if (typeof classesOrColor === 'string') {
-    classStr = "".concat(classesOrColor, " ").concat(classStr);
-  }
-
-  var color = null;
-
-  if (Array.isArray(classesOrColor)) {
-    color = classesOrColor;
-  }
-
-  var idToUse = function idToUse() {
-    return id;
-  }; // const id = `lesson__id_${textToUse}`;
-
-
-  return {
-    replacementText: function replacementText() {
-      return toHTML(textToUse, idToUse(), classStr, color);
-    },
-    id: idToUse,
-    actionMethod: actionMethod,
-    bind: bind
-  };
-}
-
-function clickWord(textToUse, id, actionMethod, bind) {
-  var classesOrColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
-  var interactive = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
-  var classStr = 'action_word';
-
-  if (interactive) {
-    classStr = "".concat(classStr, " interactive_word");
-  }
-
-  if (typeof classesOrColor === 'string') {
-    classStr = "".concat(classesOrColor, " ").concat(classStr);
-  }
-
-  var color = null;
-
-  if (Array.isArray(classesOrColor)) {
-    color = classesOrColor;
-  }
-
-  var idToUse = function idToUse() {
-    return id;
-  }; // const id = `lesson__id_${textToUse}`;
-
-
-  return {
-    replacementText: function replacementText() {
-      return toHTML(textToUse, idToUse(), classStr, color);
-    },
-    id: idToUse,
-    actionMethod: actionMethod,
-    bind: bind
-  };
-}
 
 function click(actionMethod, bind) {
   var colorOrOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
@@ -26589,6 +26546,14 @@ function click(actionMethod, bind) {
     actionMethod: actionMethod,
     bind: bind
   };
+}
+
+function clickW(textToUse, actionMethod, bind) {
+  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  return click(actionMethod, bind, {
+    color: color,
+    text: textToUse
+  });
 } // function click(
 //   actionMethod: Function,
 //   bind: Array<mixed>,
@@ -26615,21 +26580,18 @@ function click(actionMethod, bind) {
 //     bind,
 //   };
 // }
+// function clickId(
+//   id: string = '',
+//   actionMethod: Function,
+//   bind: Array<mixed>,
+// ) {
+//   return {
+//     id: () => id,
+//     actionMethod,
+//     bind,
+//   };
+// }
 
-
-function clickId() {
-  var _id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-
-  var actionMethod = arguments.length > 1 ? arguments[1] : undefined;
-  var bind = arguments.length > 2 ? arguments[2] : undefined;
-  return {
-    id: function id() {
-      return _id;
-    },
-    actionMethod: actionMethod,
-    bind: bind
-  };
-}
 
 function actionWord(text) {
   var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])();

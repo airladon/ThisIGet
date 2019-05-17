@@ -15,7 +15,6 @@ import DiagramCollection from './diagramCollection';
 //   click,
 //   centerV,
 //   highlight,
-//   clickWord,
 // } = Fig.tools.html;
 
 const layout = lessonLayout();

@@ -15,7 +15,6 @@ const { Transform, Rect } = Fig;
 const {
   click,
   highlightWord,
-//   clickWord,
 } = Fig.tools.html;
 
 export class QRRectangle extends PopupBoxCollection {
