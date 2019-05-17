@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import joinObjects from './tools';
@@ -15,9 +15,9 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
-const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+// const sleep = (milliseconds) => {
+//   return new Promise(resolve => setTimeout(resolve, milliseconds))
+// }
 
 // tester(
 //   {
@@ -180,8 +180,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
             const closeButtons = await page.$$('.lesson__popup_box__close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
-              if (closeButton.boundingBox() != null) {
-                closeButton.click();
+              if ((await closeButton.boundingBox()).x > 0) {
+                await closeButton.click();
                 break;
               }
             }

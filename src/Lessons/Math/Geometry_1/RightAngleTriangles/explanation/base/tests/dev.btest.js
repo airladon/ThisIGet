@@ -3,6 +3,14 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationLessonTester';
 
 tester(
-  // 'goto',
-  'nextPrev',
+  'goto',
+  // 'nextPrev',
+  // 1,
+  // 2,
+  // 3,
+  // 4,
+  // 5,
+  // 6,
+  // 7,
+  // 8,
 );

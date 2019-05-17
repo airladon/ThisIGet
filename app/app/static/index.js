@@ -16721,7 +16721,7 @@ function (_DrawingObject) {
     key: "transformHtml",
     value: function transformHtml(transformMatrix) {
       if (this.show) {
-        this.element.style.visibility = 'visible';
+        // this.element.style.visibility = 'visible';
         var glLocation = this.location.transformBy(transformMatrix);
         var pixelLocation = this.glToPixelSpace(glLocation);
         var w = this.element.clientWidth;
@@ -16748,10 +16748,10 @@ function (_DrawingObject) {
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
       } else {
-        // this.element.style.position = 'absolute';
-        // this.element.style.left = '-10000px';
-        // this.element.style.top = '-10000px';
-        this.element.style.visibility = 'hidden'; // console.trace()
+        this.element.style.position = 'absolute';
+        this.element.style.left = '-10000px';
+        this.element.style.top = '-10000px'; // this.element.style.visibility = 'hidden';
+        // console.trace()
       }
     }
   }, {
