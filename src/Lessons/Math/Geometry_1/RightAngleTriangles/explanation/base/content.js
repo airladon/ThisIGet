@@ -34,7 +34,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'ImportantAngles',
+      'ImportantAngles/base',
       'Triangles',
       'SideAngleRelationship',
       'AreaTriangle',

@@ -235,7 +235,7 @@ export default function getLessonIndex() {
       Object.keys(topics).forEach((topicName) => {
         if (
           buildMode !== 'development'
-          && (topicName === 'quickReference' || topicName === 'dev')
+          && (topicName === 'dev')
         ) {
           return;
         }
