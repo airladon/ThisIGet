@@ -6,6 +6,7 @@ var details = {
   dependencies: [
   ],
   enabled: true,
+  uid: 'Introduction',
 };
 
 module.exports = {

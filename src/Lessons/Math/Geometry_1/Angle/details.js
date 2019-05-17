@@ -7,6 +7,7 @@ var details = {
     'Circle',
   ],
   enabled: true,
+  uid: 'Angle',
 };
 
 module.exports = {

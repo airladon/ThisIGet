@@ -7,6 +7,7 @@ var details = {
     'Sine',
   ],
   enabled: false,
+  uid: 'Cosine',
 };
 
 module.exports = {

@@ -7,6 +7,7 @@ var details = {
     'RightAngleTriangles',
   ],
   enabled: true,
+  uid: 'PointLineDistance',
 };
 
 module.exports = {

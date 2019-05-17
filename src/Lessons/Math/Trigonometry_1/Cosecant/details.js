@@ -7,6 +7,7 @@ var details = {
     'Secant',
   ],
   enabled: false,
+  uid: 'Cosecant',
 };
 
 module.exports = {

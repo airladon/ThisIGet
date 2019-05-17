@@ -7,6 +7,7 @@ var details = {
     'RightAngleTriangles',
   ],
   enabled: false,
+  uid: 'CalculatingPi',
 };
 
 module.exports = {

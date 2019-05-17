@@ -7,6 +7,7 @@ var details = {
     'Isosceles',
   ],
   enabled: true,
+  uid: 'Equilateral',
 };
 
 module.exports = {

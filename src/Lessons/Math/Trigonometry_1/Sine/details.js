@@ -7,6 +7,7 @@ var details = {
     'UnitCircle',
   ],
   enabled: false,
+  uid: 'Sine',
 };
 
 module.exports = {

@@ -7,6 +7,7 @@ var details = {
     'Pythagoras',
   ],
   enabled: false,
+  uid: 'LawOfSines',
 };
 
 module.exports = {

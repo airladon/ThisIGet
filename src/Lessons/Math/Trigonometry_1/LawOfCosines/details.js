@@ -7,6 +7,7 @@ var details = {
     'LawOfSines',
   ],
   enabled: false,
+  uid: 'LawOfCosines',
 };
 
 module.exports = {

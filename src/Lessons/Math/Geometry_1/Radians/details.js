@@ -7,6 +7,7 @@ var details = {
     'Degrees',
   ],
   enabled: true,
+  uid: 'Radians',
 };
 
 module.exports = {

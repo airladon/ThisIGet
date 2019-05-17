@@ -7,6 +7,7 @@ var details = {
     'Tangent',
   ],
   enabled: false,
+  uid: 'Pythagoras',
 };
 
 module.exports = {

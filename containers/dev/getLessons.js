@@ -118,7 +118,7 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n  ],`;
       outStr = `${outStr}\n  enabled: ${details.details.enabled || 'false'},`;
-      // outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
+      outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
       outStr = `${outStr}\nmodule.exports = {`;
@@ -154,8 +154,8 @@ function updateDetailsAndVersions() {
         outStr = `${outStr}\n  fullLesson: ${version.details.fullLesson || 'false'},`;
         outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
       } else {
-        // outStr = `${outStr}\n  uid: '${versionUID}',`;
-        // outStr = `${outStr}\n  topic: '${topic}',`;
+        outStr = `${outStr}\n  uid: '${versionUID}',`;
+        outStr = `${outStr}\n  topic: '${topic}',`;
         outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
         outStr = `${outStr}\n  references: [`;
         if (version.details.references.length > 0) {
