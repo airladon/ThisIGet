@@ -14,6 +14,7 @@ export type TypeTopicButtonListItem = {
   link?: Function | string;
   active?: boolean;
   separator?: boolean;
+  type?: 'presentation' | 'singlePage' | 'generic' | 'video';
 };
 
 type Props = {
@@ -57,9 +58,21 @@ export default class TopicButton extends React.Component <Props> {
     if (listItem.description != null) {
       ({ description } = listItem);
     }
+    let typeClass = 'topic_button__type_icon_generic';
+    const { type } = listItem;
+    if (type === 'presentation') {
+      typeClass = 'topic_button__type_icon_presentation';
+    } else if (type === 'singlePage') {
+      typeClass = 'topic_button__type_icon_singlePage';
+    }
+
     return <table className="topic_button__listItem">
       <tbody>
       <tr>
+        <td className="topic_button__type">
+          <div className={typeClass}>
+          </div>
+        </td>
         <td className="topic_button__label">
           <div className="topic_button__label_title">
             {label}
@@ -93,6 +106,11 @@ export default class TopicButton extends React.Component <Props> {
     return <table className="topic_button__listItem topic_button_listItem_title">
       <tbody>
       <tr>
+        <td className="topic_button__type">
+          <div className="topic_button__type_title">
+            Type
+          </div>
+        </td>
         <td className="topic_button__label">
           <div className="topic_button__label_title">
             Version

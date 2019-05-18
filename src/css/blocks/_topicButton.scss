@@ -72,3 +72,34 @@
 .dropdown_button_selected .topic_button__single_item_label {
   color: white;
 }
+
+.topic_button__type {
+  text-align: left;
+  vertical-align: middle;
+  width: 3.4em;
+}
+
+.topic_button__type_icon_presentation {
+  background-image: $lesson-presentation;
+  background-size: contain;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.topic_button__type_icon_generic,
+.topic_button__type_icon_singlePage {
+  background-image: $lesson-singlePage;
+  background-size: contain;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.topic_button__type_icon_video {
+  background-image: $lesson-video;
+  background-size: contain;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+}

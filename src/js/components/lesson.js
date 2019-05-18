@@ -239,6 +239,7 @@ export default class LessonComponent extends React.Component
           }
           const { description } = version;
           const { fullLesson } = version;
+          const { type } = version;
 
           if (!(topicName in topics)) {
             topics[topicName] = {};
@@ -260,6 +261,7 @@ export default class LessonComponent extends React.Component
             description,
             active,
             fullLesson,
+            type,
           };
         });
       });
