@@ -17,7 +17,7 @@ const {
   centerV,
   highlight,
   style,
-  clickW,
+  // clickW,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -194,7 +194,7 @@ class Content extends PresentationLessonContent {
         'These two triangles have the same |Side-Angle-Side| combination, and are therefore |congruent|.',
       ],
       modifiers: {
-        'Side-Angle-Side': click(this.showQR, [this, 'CongruentTriangles/base', 'Sas'], colors.diagram.action),
+        'Side-Angle-Side': this.bindShowQR('CongruentTriangles/base', 'Sas', colors.diagram.action),
       },
       show: [
         left._line, left._angleTop, left._sideEqual, left._sideSplit,
@@ -342,7 +342,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         c: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
         _c: highlight(colors.angles),
-        supplementary: click(this.showQR, [this, 'AdjacentAngles/base', 'Supplementary'], colors.angles),
+        supplementary: this.bindShowQR('AdjacentAngles/base', 'Supplementary', colors.angles),
         right_angle: click(coll.pulseRightAngle, [coll], colors.angles),
       },
       setLeaveState: () => {
@@ -503,7 +503,7 @@ class Content extends PresentationLessonContent {
         'These two triangles have the same |Angle-Angle-Side| combination are therefore, |congruent|.',
       ],
       modifiers: {
-        'Angle-Angle-Side': click(this.showQR, [this, 'CongruentTriangles/base', 'Aas'], colors.diagram.action),
+        'Angle-Angle-Side': this.bindShowQR('CongruentTriangles/base', 'Aas', colors.diagram.action),
       },
       show: [
         left._line, left._angleTop, left._angleEqual, left._sideSplit,
@@ -628,12 +628,10 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
-        _180: clickW(
-          '180º',
-          this.showQR,
-          [this, 'Triangles/base', 'Main'],
-          colors.angles,
-        ),
+        _180: this.bindShowQR('Triangles/base', 'Main', {
+          text: '180º',
+          color: colors.angles,
+        }),
       },
     });
     this.addSection({

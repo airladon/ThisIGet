@@ -18,8 +18,6 @@ const {
   highlightWord,
   highlight,
   // actionWord,
-  clickWord,
-  clickId,
   // onClickId,
 } = Fig.tools.html;
 
@@ -41,7 +39,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.loadQRs([
-      'circles',
+      'Circle',
     ]);
   }
 
@@ -74,7 +72,11 @@ class Content extends PresentationLessonContent {
         '|Angles and circles are closely related| as a circle can be created by rotating a line |_360|.',
       ],
       modifiers: {
-        _360: clickWord('360º', 'id_360', diag.showCircle, [diag], colors.arc),
+        _360: click(diag.showCircle, [diag], {
+          color: colors.arc,
+          text: '360º',
+          id: 'id_360',
+        }),
       },
       show: [
         circle._line1, circle._line2,
@@ -414,7 +416,7 @@ class Content extends PresentationLessonContent {
         'We |know| the |circumference| of a circle is |_2pi| |radius_lengths|.',
       ],
       modifiers: {
-        know: click(this.showQR, [this, 'circles', 'Circumference'], colors.diagram.action),
+        know: this.bindShowQR('Circle', 'Circumference', colors.diagram.action),
         _2pi: highlightWord('2π', colors.angles),
         circumference: click(diag.pulseArc, [diag], colors.arc),
         radius_lengths: click(diag.pulseRadius, [diag], colors.lines),
@@ -526,7 +528,11 @@ class Content extends PresentationLessonContent {
       modifiers: {
         _6_radius_lengths: click(diag.pulseRadianLines, [diag], colors.radianLines),
         circumference: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.arc),
-        _2pi: clickWord('2π', 'id_2pi', this.showQR, [this, 'circles', 'Pi'], colors.angles),
+        _2pi: this.bindShowQR('Circle/base', 'Pi', {
+          color: colors.angles,
+          text: '2π',
+          id: 'id_2pi',
+        }),
         _6p28: highlightWord('6.28', colors.angles),
       },
       show: [
@@ -730,13 +736,27 @@ class Content extends PresentationLessonContent {
       modifiers: {
         degrees: click(diag.toggleDegrees, [diag], colors.degrees),
         radians: click(diag.toggleRadians, [diag], colors.radianLines),
-        _2pi: clickId('id_2pi', diag.pushLineRad, [diag, Math.PI * 1.999]),
-        _pi: clickId('id_pi', diag.pushLineRad, [diag, Math.PI]),
-        _2pi_3: clickId('id_2pi_3', diag.pushLineRad, [diag, Math.PI * 2 / 3]),
-        _3pi_2: clickId('id_3pi_2', diag.pushLineRad, [diag, Math.PI * 3 / 2]),
-        _pi_2: clickId('id_pi_2', diag.pushLineRad, [diag, Math.PI / 2]),
-        _pi_3: clickId('id_pi_3', diag.pushLineRad, [diag, Math.PI / 3]),
-        _pi_6: clickId('id_pi_6', diag.pushLineRad, [diag, Math.PI / 6]),
+        _2pi: click(diag.pushLineRad, [diag, Math.PI * 1.999], {
+          id: 'id_2pi',
+        }),
+        _pi: click(diag.pushLineRad, [diag, Math.PI], {
+          id: 'id_pi',
+        }),
+        _2pi_3: click(diag.pushLineRad, [diag, Math.PI * 2 / 3], {
+          id: 'id_2pi_3',
+        }),
+        _3pi_2: click(diag.pushLineRad, [diag, Math.PI * 3 / 2], {
+          id: 'id_3pi_2',
+        }),
+        _pi_2: click(diag.pushLineRad, [diag, Math.PI / 2], {
+          id: 'id_pi_2',
+        }),
+        _pi_3: click(diag.pushLineRad, [diag, Math.PI / 3], {
+          id: 'id_pi_3',
+        }),
+        _pi_6: click(diag.pushLineRad, [diag, Math.PI / 6], {
+          id: 'id_pi_6',
+        }),
         _360: click(diag.pushLineDeg, [diag, Math.PI * 1.999], colors.degrees),
         _270: click(diag.pushLineDeg, [diag, Math.PI * 3 / 2], colors.degrees),
         _180: click(diag.pushLineDeg, [diag, Math.PI], colors.degrees),

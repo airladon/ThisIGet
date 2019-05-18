@@ -14,7 +14,6 @@ import Definition from '../../../../../LessonsCommon/tools/definition';
 const {
   highlight,
   click,
-  clickWord,
   style,
 //   centerV,
 } = Fig.tools.html;
@@ -94,30 +93,30 @@ class Content extends PresentationLessonContent {
           </ul>
       `],
       modifiers: {
-        SAS: clickWord(
-          'Side Angle Side', 'id_lesson__congruent_SAS',
-          diag.showCombination, [diag, 'sas'], colors.diagram.text.base,
-        ),
-        SSS: clickWord(
-          'Side Side Side', 'id_lesson__congruent_SSS',
-          diag.showCombination, [diag, 'sss'], colors.diagram.text.base,
-        ),
-        ASA: clickWord(
-          'Angle Side Angle', 'id_lesson__congruent_ASA',
-          diag.showCombination, [diag, 'asa'], colors.diagram.text.base,
-        ),
-        AAS: clickWord(
-          'Angle Angle Side', 'id_lesson__congruent_AAS',
-          diag.showCombination, [diag, 'aas'], colors.diagram.text.base,
-        ),
-        AAA: clickWord(
-          'Angle Angle Angle', 'id_lesson__congruent_AAA',
-          diag.showCombination, [diag, 'aaa'], colors.diagram.text.base,
-        ),
-        SSA: clickWord(
-          'Side Side Angle', 'id_lesson__congruent_SSA',
-          diag.showCombination, [diag, 'ssa'], colors.diagram.text.base,
-        ),
+        SAS: click(diag.showCombination, [diag, 'sas'], {
+          color: colors.diagram.text.base,
+          text: 'Side Angle Side',
+        }),
+        SSS: click(diag.showCombination, [diag, 'sss'], {
+          color: colors.diagram.text.base,
+          text: 'Side Side Side',
+        }),
+        ASA: click(diag.showCombination, [diag, 'asa'], {
+          color: colors.diagram.text.base,
+          text: 'Angle Side Angle',
+        }),
+        AAS: click(diag.showCombination, [diag, 'aas'], {
+          color: colors.diagram.text.base,
+          text: 'Angle Angle Side',
+        }),
+        AAA: click(diag.showCombination, [diag, 'aaa'], {
+          color: colors.diagram.text.base,
+          text: 'Angle Angle Angle',
+        }),
+        SSA: click(diag.showCombination, [diag, 'ssa'], {
+          color: colors.diagram.text.base,
+          text: 'Side Side Angle',
+        }),
       },
       // modifiers: {
       //   side_lengths: highlight(colors.sides),

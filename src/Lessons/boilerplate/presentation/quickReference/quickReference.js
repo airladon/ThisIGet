@@ -11,7 +11,6 @@ const { Transform, Rect } = Fig;
 const {
   // click,
 //   highlight,
-//   clickWord,
 } = Fig.tools.html;
 
 export default class QRMain extends PopupBoxCollection {

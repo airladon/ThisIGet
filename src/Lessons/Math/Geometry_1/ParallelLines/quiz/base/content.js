@@ -41,7 +41,11 @@ class Content extends PresentationLessonContent {
       title: '',
       setContent: ['Move the |line| to be parallel with the other line.'],
       modifiers: {
-        line: click(quiz1.pulseLine2, [quiz1], colors.movable, true, 'id__quiz__1'),
+        line: click(quiz1.pulseLine2, [quiz1], {
+          color: colors.movable,
+          interactive: true,
+          id: 'id__quiz__1',
+        }),
       },
       setInfo: style({ list: 'unordered', listStyleType: 'disc' }, [
         'Move the line by dragging its |middle|.',

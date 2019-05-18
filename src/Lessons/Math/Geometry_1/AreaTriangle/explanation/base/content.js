@@ -16,7 +16,6 @@ const {
   click,
   centerV,
   highlight,
-  // clickWord,
 } = Fig.tools.html;
 
 const layout = lessonLayout();
@@ -33,7 +32,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'congruent_triangles/base',
+      'CongruentTriangles/base',
     ]);
   }
 
@@ -80,7 +79,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn: rectEqn, from: 'rect', to: 'rect' }, common, {
       setContent: 'These two triangles share the same side lengths, and are therefore |equal|.',
       modifiers: {
-        equal: this.bindShowQR('congruent_triangles/base', 'Sss'),
+        equal: this.bindShowQR('CongruentTriangles/base', 'Sss'),
       },
     });
 

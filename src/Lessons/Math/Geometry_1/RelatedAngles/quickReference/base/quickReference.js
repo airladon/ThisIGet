@@ -16,7 +16,6 @@ const { Transform, Rect } = Fig;
 const {
   click,
   highlight,
-//   clickWord,
 } = Fig.tools.html;
 
 export class QROpposite extends PopupBoxCollection {

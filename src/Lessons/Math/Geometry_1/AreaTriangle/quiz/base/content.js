@@ -15,7 +15,6 @@ import DiagramCollection from './diagramCollection';
 // //   click,
 // //   centerV,
 // //   highlight,
-// //   clickWord,
 //   // toHTML,
 // } = Fig.tools.html;
 

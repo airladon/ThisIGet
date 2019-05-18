@@ -43,7 +43,7 @@ class Content extends PresentationLessonContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = click(this.showQR, [this, uid, qrid]);
+          out[qrid] = this.bindShowQR(uid, qrid);
         });
         return out;
       },

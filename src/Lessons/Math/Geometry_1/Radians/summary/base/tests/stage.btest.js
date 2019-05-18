@@ -5,7 +5,7 @@ import tester from '../../../../../../testers/presentationLessonTester';
 tester(
   {
     pages: {
-      5: { threshold: { next: 0.001, prev: 0.001 } },
+      1: { threshold: { next: 0.01, prev: 0.01 } },
     },
   },
   'goto',

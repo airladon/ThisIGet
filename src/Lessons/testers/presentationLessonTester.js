@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import joinObjects from './tools';
@@ -15,8 +15,13 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
+// const sleep = (milliseconds) => {
+//   return new Promise(resolve => setTimeout(resolve, milliseconds))
+// }
+
 // tester(
 //   {
+//     prePath: 'dev'
 //     thresholds: {
 //       goto: 0.00001,
 //       next: 0.0001,
@@ -75,6 +80,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
       scrollTo: 180,
     },
     pages: {},
+    prePath: '',
   };
   let optionsToUse = defaultOptions;
   if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
@@ -82,6 +88,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   } else {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   }
+  const { prePath } = optionsToUse;
   scenariosToUse.forEach((scenario) => {
     if (typeof scenario === 'string') {
       const numPages = contentSectionCount(contentPath);
@@ -113,7 +120,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         jest.setTimeout(120000);
 
         const fullpath =
-          `${sitePath}/${versionPath}?page=${fromPage}`;
+          `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
         await page.goto(fullpath);
 
         await page.setViewport({
@@ -151,6 +158,42 @@ export default function tester(optionsOrScenario, ...scenarios) {
             failureThresholdType: 'percent',
             customSnapshotIdentifier: `page ${currentPage}`,
           });
+
+          // Find all links on page that go to QR popups
+          // eslint-disable-next-line no-await-in-loop, no-loop-func
+          const qrLinks = await page.$$('.lesson__qr_action_word');
+          let index = 0;
+          // eslint-disable-next-line no-restricted-syntax
+          for (const link of qrLinks) {
+            // eslint-disable-next-line no-await-in-loop
+            await link.click();
+            // eslint-disable-next-line no-await-in-loop
+            await page.evaluate((y) => {
+              window.scrollTo(0, y);
+            }, options.viewPort.scrollTo);
+            // eslint-disable-next-line no-await-in-loop
+            image = await page.screenshot();
+            expect(image).toMatchImageSnapshot({
+              failureThreshold: gotoThreshold,             // 480 pixels
+              failureThresholdType: 'percent',
+              customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
+            });
+            index += 1;
+            // eslint-disable-next-line no-await-in-loop
+            const closeButtons = await page.$$('.lesson__popup_box__close');
+            // eslint-disable-next-line no-restricted-syntax
+            for (const closeButton of closeButtons) {
+              if ((await closeButton.boundingBox()).x > 0) {
+                await closeButton.click();
+                break;
+              }
+            }
+            // eslint-disable-next-line no-await-in-loop
+            await page.evaluate((y) => {
+              window.scrollTo(0, y);
+            }, options.viewPort.scrollTo);
+          }
+
           while (currentPage.toString() !== targetPage.toString()) {
             if (navigation != null) {
               const watchDog = page.waitForFunction(() => {
