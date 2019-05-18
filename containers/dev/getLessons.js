@@ -233,12 +233,13 @@ export default function getLessonIndex() {
       });
 
       Object.keys(topics).forEach((topicName) => {
-        if (
-          buildMode !== 'development'
-          && (topicName === 'dev')
-        ) {
-          return;
-        }
+        console.log(topicName)
+        // if (
+        //   buildMode !== 'development' && topicName === 'dev'
+        // ) {
+        //   console.log('returning early')
+        //   return;
+        // }
         const topicVersions = topics[topicName];
         outStr = `${outStr}\n        ${topicName}: {`;
         topicVersions.forEach((v) => {
@@ -288,7 +289,7 @@ export default function getLessonIndex() {
         });
         outStr = `${outStr}\n        },`;
 
-        if (topicName === 'quickReference') {
+        if (topicName === 'quickReference' && buildMode === 'development') {
           outStr = `${outStr}\n        dev: {`;
           topicVersions.forEach((v) => {
             const [versionUid] = v;
