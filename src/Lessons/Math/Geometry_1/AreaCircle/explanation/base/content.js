@@ -15,7 +15,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   style,
   click,
-  clickW,
+  // clickW,
   highlight,
 } = Fig.tools.html;
 
