@@ -233,7 +233,6 @@ export default function getLessonIndex() {
       });
 
       Object.keys(topics).forEach((topicName) => {
-        console.log(topicName)
         // if (
         //   buildMode !== 'development' && topicName === 'dev'
         // ) {

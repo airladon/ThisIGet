@@ -25,6 +25,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -58,6 +66,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         summary: {
@@ -95,6 +111,14 @@ export default function getLessonIndex() {
               'Square',
               'Rectangle',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -140,6 +164,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -181,6 +213,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -228,6 +268,14 @@ export default function getLessonIndex() {
               'Circle',
               'Pi',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -279,6 +327,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -322,6 +378,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -357,6 +421,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -390,6 +462,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -440,6 +520,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -487,6 +575,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
       },
       dependencies: [
       ],
@@ -512,6 +608,14 @@ export default function getLessonIndex() {
               'Main',
               'SplitLine',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -557,6 +661,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -590,6 +702,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -635,6 +755,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -668,6 +796,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -711,6 +847,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -757,6 +901,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -794,6 +946,14 @@ export default function getLessonIndex() {
               'Corresponding',
               'Interior',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -847,6 +1007,14 @@ export default function getLessonIndex() {
             ],
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -888,6 +1056,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -996,6 +1172,14 @@ export default function getLessonIndex() {
             references: [
               'Main',
             ],
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
