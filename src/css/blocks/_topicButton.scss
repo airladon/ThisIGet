@@ -5,6 +5,10 @@
   margin-bottom: 0.1em;
 }
 
+.topic_button .dropdown_button_list_item {
+  padding: 0.2em 0.2em 0.2em 0.2em;
+}
+
 .topic_button__label {
   vertical-align: middle;
   text-align: left;
@@ -74,9 +78,9 @@
 }
 
 .topic_button__type {
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
-  width: 3.4em;
+  width: 3em;
 }
 
 .topic_button__type_icon_presentation {

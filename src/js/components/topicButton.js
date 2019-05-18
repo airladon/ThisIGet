@@ -172,6 +172,7 @@ export default class TopicButton extends React.Component <Props> {
       xAlign={props.xAlign}
       list={listItems}
       selected={props.selected}
+      classes='topic_button'
     />;
   }
 }
