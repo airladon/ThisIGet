@@ -14,7 +14,7 @@ describe(`${lessonUID} - ${versionUID}`, () => {
     const anglesPath =
       `${sitePath}/Lessons/Math/Geometry_1/${lessonUID}/${topic}/${versionUID}`;
     await page.goto(anglesPath);
-    await page.setViewport({ width: 600, height: 2900 });
+    await page.setViewport({ width: 600, height: 4500 });
     await page.evaluate(() => {
       window.scrollTo(0, 200);
     });
