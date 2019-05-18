@@ -906,12 +906,27 @@ class PresentationLessonContent extends SimpleLessonContent {
   bindShowQR(
     uid: string,
     qrid: string,
-    color: Array<number> = this.diagram.layout.colors.diagram.action,
+    colorOrOptions: Array<number> | {
+      color?: ?Array<number>,
+      interactive?: boolean,
+      id?: string,
+      classes?: string,
+      text?: ?string,
+    } = {},
+    // color: Array<number> = this.diagram.layout.colors.diagram.action,
   ) {
-    return click(this.showQR, [this, uid, qrid], {
-      color,
-      classes: 'lesson__qr_action_word',
-    });
+    const defaultOptions = {
+      color: this.diagram.layout.colors.diagram.action,
+      classes: '',
+    };
+    let options = defaultOptions;
+    if (Array.isArray(colorOrOptions)) {
+      options.color = colorOrOptions;
+    } else {
+      options = joinObjects({}, defaultOptions, colorOrOptions);
+      options.classes = `lesson__qr_action_word ${options.classes}`;
+    }
+    return click(this.showQR, [this, uid, qrid], options);
   }
 
   addStar() {

@@ -528,7 +528,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         _6_radius_lengths: click(diag.pulseRadianLines, [diag], colors.radianLines),
         circumference: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.arc),
-        _2pi: click(this.showQR, [this, 'Circle', 'Pi'], {
+        _2pi: this.bindShowQR('Circle/base', 'Pi', {
           color: colors.angles,
           text: '2π',
           id: 'id_2pi',

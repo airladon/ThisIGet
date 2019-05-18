@@ -309,7 +309,10 @@ class Content extends PresentationLessonContent {
       modifiers: {
         border: click(coll.pulseMostBorder, [coll], colors.border),
         circumference: click(coll.pulseCircumference, [coll], colors.disabledLabel),
-        _2pir: clickW('2πr', this.showQR, [this, 'Circle/base', 'Circumference'], colors.diagram.action),
+        _2pir: this.bindShowQR('Circle/base', 'Circumference', {
+          text: '2πr',
+          color: colors.diagram.action,
+        }),
       },
     };
     this.addSectionEqnStep({ eqn, from: '6', to: '6' }, common, content, {});

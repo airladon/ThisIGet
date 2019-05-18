@@ -628,12 +628,10 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         two_angles: click(coll.pulseEqualAngles, [coll, null], colors.angles),
-        _180: clickW(
-          '180º',
-          this.showQR,
-          [this, 'Triangles/base', 'Main'],
-          colors.angles,
-        ),
+        _180: this.bindShowQR('Triangles/base', 'Main', {
+          text: '180º',
+          color: colors.angles,
+        }),
       },
     });
     this.addSection({
