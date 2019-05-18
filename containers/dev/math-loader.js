@@ -27,6 +27,7 @@ async function mathparser(callback, source, map, meta) {
         math: text,
         format: 'TeX', // or "inline-TeX", "MathML"
         svg: true,      // or svg:true, or html:true
+        equationNumbers: 'AMS',
       }).then((data) => {
         if (data.errors) {
           split[index] = `Data Errors ${data.errors}`;
