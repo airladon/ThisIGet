@@ -11,9 +11,10 @@
 
 .topic_button .dropdown_button_list_item:first-child {
   // background-color: color('white', 'lightest');
+  // background-color: color('white', 'lightest');
   background-color: #F5F5F5;
   color: color('white', 'darkest');
-  border-bottom: 1px white solid;
+  // border-bottom: 1px white solid;
 }
 
 .topic_button__label {
@@ -134,7 +135,7 @@
 }
 
 .topic_button__portion_separator {
-  height: 3em;
+  height: 1em;
   display: table;
   margin-left: 1.2em;
 }
@@ -147,4 +148,5 @@
 
 .topic_button .dropdown_button_list_item_separator {
   background-color: #F5F5F5;
+  color: color('white', 'dark');
 }
