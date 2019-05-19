@@ -49,6 +49,7 @@ type State = {
         aveRating: number,
         numRatings: number,
         numHighRatings: number,
+        userRating: number,
       },
     }
   },
@@ -121,6 +122,7 @@ export default class LessonComponent extends React.Component
             aveRating: version.aveRating,
             numRatings: version.numRatings,
             numHighRatings: version.numHighRatings,
+            userRating: version.userRating,
           };
         });
       });
@@ -240,6 +242,8 @@ export default class LessonComponent extends React.Component
           const { description } = version;
           const { fullLesson } = version;
           const { type } = version;
+          const rating = this.state.ratings[topicName][versionUID];
+          let { userRating } = rating;
 
           if (!(topicName in topics)) {
             topics[topicName] = {};
@@ -249,12 +253,12 @@ export default class LessonComponent extends React.Component
           if (this.versionUID === versionUID
             && this.topic === topicName) {
             active = true;
+            ({ userRating } = this.state);
           }
-
-          const rating = this.state.ratings[topicName][versionUID];
           topics[topicName][versionUID] = {
             label,
             link,
+            userRating,
             rating: rating.aveRating,
             numReviews: rating.numRatings,
             numHighRatings: rating.numHighRatings,
