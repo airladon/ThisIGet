@@ -151,7 +151,8 @@ def check_write_db(show=True, write=False):
                             version_object['fullLesson'])
                 if check(version, 'pageType', version_object['type']):
                     version.pageType = version_object['type']
-                db.session.commit()
+                if write:
+                    db.session.commit()
 
     if write:
         db.session.commit()

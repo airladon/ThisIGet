@@ -260,6 +260,37 @@ This is best done locally outside of a container. You will need to have:
 * Installed Heroku CLI if you want to manage a heroku database
 * Installed postgres.app locally if you want to manage a local postgres database
 
+#### Add new lesson:
+
+##### Local SQL
+```
+unset DATABASE_URL
+python ./tools/check_db.py
+```
+If the output makes sense then
+```
+python ./tools/update_lessons_db.py
+```
+
+##### Heroku Postgress
+```
+tools/get_config_vars.sh thisiget-dev
+```
+Copy and paste the export DATABASE_URL line
+```
+python ./tools/check_db.py
+```
+If the output makes sense then
+```
+python ./tools/update_lessons_db.py
+```
+
+Repeat for
+```
+tools/get_config_vars.sh thisiget-test
+tools/get_config_vars.sh thisiget-beta
+```
+
 #### Start from scratch all DBs update:
 
 Note, if changes to the model are made, `tests/flask/app_test.db` will probably need to be updated by copying the local app.db.
