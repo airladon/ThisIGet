@@ -9,6 +9,13 @@
   padding: 0.2em 0.2em 0.2em 0.2em;
 }
 
+.topic_button .dropdown_button_list_item:first-child {
+  // background-color: color('white', 'lightest');
+  background-color: #F5F5F5;
+  color: color('white', 'darkest');
+  border-bottom: 1px white solid;
+}
+
 .topic_button__label {
   vertical-align: middle;
   text-align: left;
@@ -62,6 +69,11 @@
 //   color: #929292;
 // }
 
+.topic_button__label_title {
+  font-size: 0.8em;
+  margin-left: 0.8em;
+}
+
 .topic_button__single_item_label {
   vertical-align: middle;
   display: table-cell;
@@ -80,7 +92,7 @@
 .topic_button__type {
   text-align: center;
   vertical-align: middle;
-  width: 3em;
+  width: 3.5em;
 }
 
 .topic_button__type_icon_presentation {
@@ -89,6 +101,10 @@
   height: 20px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.dropdown_button_list_item_active .topic_button__type_icon_presentation {
+  background-image: $lesson-presentation-active;
 }
 
 .topic_button__type_icon_generic,
@@ -100,10 +116,35 @@
   background-position: center;
 }
 
+.dropdown_button_list_item_active .topic_button__type_icon_generic,
+.dropdown_button_list_item_active .topic_button__type_icon_singlePage {
+  background-image: $lesson-singlePage-active;
+}
+
 .topic_button__type_icon_video {
   background-image: $lesson-video;
   background-size: contain;
   height: 20px;
   background-repeat: no-repeat;
   background-position: center;
+}
+
+.dropdown_button_list_item_active .topic_button__type_icon_video {
+  background-image: $lesson-video-active;
+}
+
+.topic_button__portion_separator {
+  height: 3em;
+  display: table;
+  margin-left: 1.2em;
+}
+
+.topic_button__portion_separator_label {
+  vertical-align: middle;
+  display: table-cell;
+  font-size: 1em;
+}
+
+.topic_button .dropdown_button_list_item_separator {
+  background-color: #F5F5F5;
 }

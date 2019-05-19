@@ -106,16 +106,17 @@ export default class TopicButton extends React.Component <Props> {
     return <table className="topic_button__listItem topic_button_listItem_title">
       <tbody>
       <tr>
-        <td className="topic_button__type">
-          <div className="topic_button__type_title">
-            Type
-          </div>
-        </td>
-        <td className="topic_button__label">
+        <td className="topic_button__label" colSpan="2">
           <div className="topic_button__label_title">
             Version
           </div>
         </td>
+        {/*<td className="topic_button__label">
+          <div className="topic_button__label_title">
+            Version
+          </div>
+        </td>
+      */}
         <td className="topic_button__rating">
           <div className="topic_button__rating_num_reviews">
             Ave
