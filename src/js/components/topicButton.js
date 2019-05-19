@@ -81,7 +81,7 @@ export default class TopicButton extends React.Component <Props> {
           </div>
         </td>
         <td className="topic_button__label">
-          <div className="topic_button__label_title">
+          <div className="topic_button__label_text">
             {label}
           </div>
           <div className="topic_button__label_description">
@@ -157,15 +157,15 @@ export default class TopicButton extends React.Component <Props> {
   render() {
     const props = Object.assign({}, this.props);
     const listItems = [];
-    let addTitle = false;
-    props.list.forEach((listElement) => {
-      if (listElement.numReviews != null && listElement.numReviews > 0) {
-        addTitle = true;
-      }
-    });
-    if (addTitle) {
-      listItems.push({ label: this.renderTitle() });
-    }
+    // let addTitle = true;
+    // props.list.forEach((listElement) => {
+    //   if (listElement.numReviews != null && listElement.numReviews > 0) {
+    //     addTitle = true;
+    //   }
+    // });
+    // if (addTitle) {
+    listItems.push({ label: this.renderTitle() });
+    // }
     props.list.forEach((listElement) => {
       listItems.push({
         label: this.renderListLabel(listElement),

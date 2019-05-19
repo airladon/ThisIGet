@@ -326,7 +326,7 @@ export default class LessonComponent extends React.Component
           }
         });
         this.key += 1;
-        if (partialLessonCount > 0 && name !== 'quiz') {
+        if (partialLessonCount > 0 && name === 'explanation') {
           listItems.splice(fullLessonCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
@@ -335,7 +335,6 @@ export default class LessonComponent extends React.Component
             </div>,
             separator: true,
           });
-
           listItems.splice(0, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
