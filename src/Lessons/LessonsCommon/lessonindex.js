@@ -998,8 +998,8 @@ export default function getLessonIndex() {
           },
           pythagorus_proof: {
             type: 'singlePage',
-            title: 'Pythagorean Theorem Derivation',
-            description: '',
+            title: 'Derivation',
+            description: 'Pythagorean Theorem Only',
             fullLesson: false,
           },
         },
