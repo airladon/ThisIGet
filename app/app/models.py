@@ -188,7 +188,7 @@ class Links(db.Model):
     pageType = db.Column(db.String(128), index=True)
 
 
-class Vlinks(db.Model):
+class LinkVersions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
     link_id = db.Column(db.Integer, db.ForeignKey('links.id'))
@@ -236,7 +236,7 @@ class Ratings(db.Model):
 class LinkRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    vlink_id = db.Column(db.Integer, db.ForeignKey('vlinks.id'))
+    linkversion_id = db.Column(db.Integer, db.ForeignKey('LinkVersions.id'))
     rating = db.Column(db.Integer, index=True)
 
     def __repr__(self):
