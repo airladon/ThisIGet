@@ -124,7 +124,7 @@ export default class TopicButton extends React.Component <Props> {
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_num_reviews">
-            {'Community'}
+            {'Total'}
           </div>
           <div className="topic_button__rating_num_reviews">
             {

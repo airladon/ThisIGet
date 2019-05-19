@@ -1,0 +1,26 @@
+.lesson__links_table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+.lesson__links_table__title_row {
+  font-size: 0.8em;
+  color: color('white', 'dark');
+}
+
+.lesson__links_table__link_title {
+}
+
+.lesson__links_table__description_title {
+  width: 30%;
+}
+
+.lesson__links_table__your_rating_title {
+  width: 6em;
+  text-align: center;
+}
+
+.lesson__links_table__total_rating_title {
+  width: 6em;
+  text-align: center;
+}
