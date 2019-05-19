@@ -21,17 +21,7 @@ function makeTable(inputLinks: Array<{
     </tr>);
   });
 
-  return <table className="lesson__links_table">
-    <tbody>
-    <tr className="lesson__links_table__title_row">
-      <td className="lesson__links_table__link_title">Link</td>
-      <td className="lesson__links_table__description_title">Description</td>
-      <td className="lesson__links_table__your_rating_title">{'Your\nRating'}</td>
-      <td className="lesson__links_table__total_rating_title">Total Ratings ≥4</td>
-    </tr>
-    {links}
-    </tbody>
-  </table>;
+  return 
 }
 
 class Content extends SimpleLessonContent {

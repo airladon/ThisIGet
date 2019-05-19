@@ -181,6 +181,18 @@ class Versions(db.Model):
         return '<Versions {}>'.format(self.title)
 
 
+class Links(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    path = db.Column(db.String(512), index=True)
+    author = db.Column(db.String(128), index=True)
+    pageType = db.Column(db.String(128), index=True)
+
+
+class VersionLinks(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    link_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
 # class Versions(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
 #     lesson_id = db.Column(db.Integer, db.ForeignKey('lessons.id'))
@@ -221,6 +233,18 @@ class Ratings(db.Model):
             self.user.username, self.rating)
 
 
+class LinkRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    versionlink_id = db.Column(db.Integer, db.ForeignKey('versionlinks.id'))
+    rating = db.Column(db.Integer, index=True)
+
+    def __repr__(self):
+        return '<Rating {} {} {}>'.format(
+            self.link.path,
+            self.user.username, self.rating)
+
+
 class AllRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -233,6 +257,19 @@ class AllRatings(db.Model):
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
             self.version.topic.lesson, self.version.topic, self.version,
+            self.user.username, self.rating)
+
+
+class AllLinkRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    versionlink_id = db.Column(db.Integer, db.ForeignKey('versionlinks.id'))
+    rating = db.Column(db.Integer, index=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Rating {} {} {} {}>'.format(
+            self.timestamp, self.link.path,
             self.user.username, self.rating)
 
 
