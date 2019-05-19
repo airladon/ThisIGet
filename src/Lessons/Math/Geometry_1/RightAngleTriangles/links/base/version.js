@@ -27,6 +27,14 @@ module.exports = {
 /*
   Links live in database
 
-  On load page, 
+  On load page,
 
+  * Links exist in version files in each lesson/links/version folder
+  * Script 1 - Checker:
+      - Find all links version files
+      - Scrape lessonUID, topic, versionUID (links), and individual links
+      - Check lesson/topic/version/link exists in vlinks table
+      - Check link exists in link table
+  * Script 2 - Updater:
+      - Same as script 1, but make changes to links and vlinks table
 */
