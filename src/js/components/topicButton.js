@@ -1,13 +1,13 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import DropDownButtonBase from './dropDownButtonBase';
 
-const { round } = Fig.tools.math;
+// const { round } = Fig.tools.math;
 
 export type TypeTopicButtonListItem = {
   label: string | React.Element<'div'>;
-  userRating: number;
+  userRating?: number;
   rating?: number;
   numReviews?: number;
   numHighRatings?: number;
@@ -34,7 +34,7 @@ export default class TopicButton extends React.Component <Props> {
       return listItem.label;
     }
     let numReviews = listItem.numReviews || 0;
-    let rating = listItem.rating || 0;
+    // let rating = listItem.rating || 0;
     let numHighRatings = listItem.numHighRatings || 0;
     let userRating = '';
     if (numReviews > 0) {
@@ -42,18 +42,19 @@ export default class TopicButton extends React.Component <Props> {
       // if (rating === '') {
       //   rating = '-';
       // }
-      rating = (rating).toLocaleString('en');
+      // rating = (rating).toLocaleString('en');
       numReviews = `${(numReviews).toLocaleString('en')}`;
-      // numHighRatings = `${round(parseInt(numHighRatings, 10) / parseInt(numReviews, 10) * 100, 0)}%`;
+      // numHighRatings = `${round(parseInt(numHighRatings, 10)
+      // / parseInt(numReviews, 10) * 100, 0)}%`;
     }
-    if (listItem.userRating > 0) {
+    if (listItem.userRating != null && listItem.userRating > 0) {
       for (let i = 0; i < listItem.userRating; i += 1) {
         userRating = `${userRating}\u2605`;
       }
     }
     if (numReviews === 0) {
       numReviews = '';
-      rating = '';
+      // rating = '';
       numHighRatings = '';
       // highRatingsSubText = '';
     }
@@ -98,13 +99,6 @@ export default class TopicButton extends React.Component <Props> {
             {numHighRatings}
           </div>
         </td>
-        { /*}
-        <td className="topic_button__rating">
-          <div className="topic_button__rating_value">
-            {numReviews}
-          </div>
-        </td>
-        */}
       </tr>
       </tbody>
     </table>;
@@ -139,16 +133,6 @@ export default class TopicButton extends React.Component <Props> {
             }
           </div>
         </td>
-        { /*}
-        <td className="topic_button__rating">
-          <div className="topic_button__rating_num_reviews">
-            Num
-          </div>
-          <div className="topic_button__rating_num_reviews">
-            Ratings
-          </div>
-        </td>
-        */}
       </tr>
       </tbody>
     </table>;
