@@ -185,6 +185,7 @@ class Links(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     path = db.Column(db.String(512), index=True)
     author = db.Column(db.String(128), index=True)
+    publisher = db.Column(db.String(128), index=True)
     pageType = db.Column(db.String(128), index=True)
 
 
