@@ -6,17 +6,17 @@ var details = {
   topic: 'links',
   links: [
     {
-      link: 'https://en.wikipedia.org/wiki/Right_triangle',
+      url: 'https://en.wikipedia.org/wiki/Right_triangle',
       publisher: 'Wikipedia',
       pageType: 'generic',
     },
     {
-      link: 'https://www.mathsisfun.com/right_angle_triangle.html',
+      url: 'https://www.mathsisfun.com/right_angle_triangle.html',
       publisher: 'Math is Fun',
       pageType: 'generic',
     },
     {
-      link: 'https://www.mathplanet.com/education/pre-algebra/right-triangles-and-algebra/the-pythagorean-theorem',
+      url: 'https://www.mathplanet.com/education/pre-algebra/right-triangles-and-algebra/the-pythagorean-theorem',
       publisher: 'Math Planet',
       pageType: 'generic',
     },

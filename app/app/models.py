@@ -183,7 +183,7 @@ class Versions(db.Model):
 
 class Links(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    path = db.Column(db.String(512), index=True)
+    url = db.Column(db.String(512), index=True)
     author = db.Column(db.String(128), index=True)
     publisher = db.Column(db.String(128), index=True)
     pageType = db.Column(db.String(128), index=True)
@@ -242,7 +242,7 @@ class LinkRatings(db.Model):
 
     def __repr__(self):
         return '<Rating {} {} {}>'.format(
-            self.link_versions.path,
+            self.link_versions.url,
             self.user.username, self.rating)
 
 
@@ -270,7 +270,7 @@ class AllLinkRatings(db.Model):
 
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
-            self.timestamp, self.link_versions.path,
+            self.timestamp, self.link_versions.url,
             self.user.username, self.rating)
 
 

@@ -11,7 +11,7 @@ set_app_env(app)
 
 sys.path.insert(0, './app/')
 from app import app  # noqa
-from app.models import db, Versions, Lessons, Categories, Topics  # noqa
+from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
 
 print(f'Using database: ${db.engine.url}\n')
 print('Creating links index\n')
@@ -26,4 +26,5 @@ links = []
 with open('./tools/link_index.json') as f:
     links = json.load(f)
 
-print(links)
+lessons = Lessons.query.all()
+print(lessons[0])
