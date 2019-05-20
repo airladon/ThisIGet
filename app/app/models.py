@@ -144,7 +144,7 @@ class Lessons(db.Model):
     topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lessons {}>'.format(self.title)
+        return '<Lesson {}/{}>'.format(self.path, self.uid)
 
 
 class Topics(db.Model):
@@ -157,7 +157,8 @@ class Topics(db.Model):
     # ratings = db.relationship('AllRatings', backref='topic', lazy='dynamic')
 
     def __repr__(self):
-        return '<Topics {}>'.format(self.name)
+        return '<Topic: {}/{}/{}>'.format(
+            self.topic.lesson.path, self.lesson.uid, self.name)
 
 
 class Versions(db.Model):
@@ -178,7 +179,9 @@ class Versions(db.Model):
     # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
-        return '<Versions {}>'.format(self.title)
+        return '<Version: {}/{}/{}/{}>'.format(
+            self.topic.lesson.path, self.topic.lesson.uid, self.topic.name,
+            self.title)
 
 
 class Links(db.Model):
@@ -188,11 +191,17 @@ class Links(db.Model):
     publisher = db.Column(db.String(128), index=True)
     pageType = db.Column(db.String(128), index=True)
 
+    def __repr__(self):
+        return '<Link: {}>'.format(self.url)
+
 
 class LinkVersions(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
     link_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __repr__(self):
+        return '<Link Version: {}/{}/{}>'.format(self.version, self.link.url)
 
 # class Versions(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
