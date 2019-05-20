@@ -236,12 +236,12 @@ class Ratings(db.Model):
 class LinkRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    linkversion_id = db.Column(db.Integer, db.ForeignKey('LinkVersions.id'))
+    link_version_id = db.Column(db.Integer, db.ForeignKey('link_versions.id'))
     rating = db.Column(db.Integer, index=True)
 
     def __repr__(self):
         return '<Rating {} {} {}>'.format(
-            self.vlink.path,
+            self.link_versions.path,
             self.user.username, self.rating)
 
 
@@ -263,13 +263,13 @@ class AllRatings(db.Model):
 class AllLinkRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    vlink_id = db.Column(db.Integer, db.ForeignKey('vlinks.id'))
+    link_version_id = db.Column(db.Integer, db.ForeignKey('link_versions.id'))
     rating = db.Column(db.Integer, index=True)
     timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
 
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
-            self.timestamp, self.vlink.path,
+            self.timestamp, self.link_versions.path,
             self.user.username, self.rating)
 
 
