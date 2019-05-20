@@ -9,11 +9,10 @@ from check_row import check_row
 import pdb
 app = sys.argv[-1]
 set_app_env(app)
-
+# print(os.environ['DATABASE_URL'])
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-
 
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
@@ -54,18 +53,12 @@ print(f'Using database: ${db.engine.url}\n')
 show = True
 write = False
 
-# Create Links File
-all_links = subprocess.run(['node', './tools/getAllLinks.js'])
-if all_links.returncode != 0:
-    print(all_links.stderr)
-    raise Exception(f'Error creating links file')
-
 # #######################################################################
 # Lesson Index
 # #######################################################################
 # Create Index File
 print('Creating lesson index\n')
-index = subprocess.run(['node', './tools/generateIndex.js'])
+index = subprocess.run(['node', './tools/generateLessonIndex.js'])
 if index.returncode != 0:
     print(index.stderr)
     raise Exception(f'Error creating index')
@@ -116,18 +109,13 @@ for key, value in index.items():            # noqa
             db.session.add(topic)
         # Update or Create Versions
         for version_name, version_object in topic_object.items():
-            if topic.name == 'links':
-                pdb.set_trace()
             version = db.session.query(Versions).filter_by(
                 topic_id=topic.id, uid=version_name).first()
             if version is None:
                 version = Versions(topic_id=topic.id, uid=version_name)
                 db.session.add(version)
-            try:
-                print(version)
-            except:
-                pdb.set_trace()
-            print(version.topic)
+            version = db.session.query(Versions).filter_by(
+                topic_id=topic.id, uid=version_name).first()
             if check(show, write, version, 'title', version_object, 'title'):
                     version.title = version_object['title']
 
@@ -148,6 +136,12 @@ for key, value in index.items():            # noqa
 # #######################################################################
 # Links
 # #######################################################################
+# Create Links File
+all_links = subprocess.run(['node', './tools/generateLinkIndex.js'])
+if all_links.returncode != 0:
+    print(all_links.stderr)
+    raise Exception(f'Error creating links file')
+
 links = []
 with open('./tools/link_index.json') as f:
     links = json.load(f)
@@ -163,7 +157,7 @@ for link in links:
         db_link.pageType = link['pageType']
     if check(show, write, db_link, 'publisher', link, 'publisher'):
         db_link.type = link['publisher']
-    if check(db_link, 'author', link, 'author'):
+    if check(show, write, db_link, 'author', link, 'author'):
         db_link.type = link['author']
 
     lesson = Lessons.query.filter_by(

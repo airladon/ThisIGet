@@ -179,9 +179,11 @@ class Versions(db.Model):
     # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
-        return '<Version: {}/{}/{}/{}>'.format(
-            self.topic.lesson.path, self.topic.lesson.uid, self.topic.name,
-            self.title)
+        return '<Version: {}/{}({})/{}({})/{}({})>'.format(
+            self.topic.lesson.path,
+            self.topic.lesson.uid, self.topic.lesson.id,
+            self.topic.name, self.topic.id,
+            self.uid, self.id)
 
 
 class Links(db.Model):

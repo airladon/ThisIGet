@@ -1,38 +1,38 @@
 const fs = require('fs');
-const path = require('path');
+// const path = require('path');
+const pathTools = require('../containers/dev/pathTools.js');
+// function walkSync(currentDirPath, fileIdentifier, callback) {
+//   fs.readdirSync(currentDirPath).forEach((name) => {
+//     const filePath = path.join(currentDirPath, name);
+//     const stat = fs.statSync(filePath);
+//     if (stat.isFile()) {
+//       if (Array.isArray(fileIdentifier)) {
+//         fileIdentifier.forEach((id) => {
+//           if (id === name) {
+//             callback(currentDirPath, id);
+//           }
+//         });
+//       } else if (name === fileIdentifier) {
+//         callback(currentDirPath, fileIdentifier);
+//       }
+//     } else if (stat.isDirectory()) {
+//       walkSync(filePath, fileIdentifier, callback);
+//     }
+//   });
+// }
 
-function walkSync(currentDirPath, fileIdentifier, callback) {
-  fs.readdirSync(currentDirPath).forEach((name) => {
-    const filePath = path.join(currentDirPath, name);
-    const stat = fs.statSync(filePath);
-    if (stat.isFile()) {
-      if (Array.isArray(fileIdentifier)) {
-        fileIdentifier.forEach((id) => {
-          if (id === name) {
-            callback(currentDirPath, id);
-          }
-        });
-      } else if (name === fileIdentifier) {
-        callback(currentDirPath, fileIdentifier);
-      }
-    } else if (stat.isDirectory()) {
-      walkSync(filePath, fileIdentifier, callback);
-    }
-  });
-}
-
-function getAllVersions(versionsPath) {
-  const versions = [];
-  walkSync(versionsPath, 'version.js', (versionPath) => {
-    versions.push(versionPath);
-  });
-  return versions;
-}
+// function getAllVersions(versionsPath) {
+//   const versions = [];
+//   walkSync(versionsPath, 'version.js', (versionPath) => {
+//     versions.push(versionPath);
+//   });
+//   return versions;
+// }
 
 function createIndexList() {
   const projectPath = __dirname.split('/').slice(0, -1).join('/');
   const lessonsPath = `${projectPath}/src/Lessons`;
-  const versions = getAllVersions(lessonsPath);
+  const versions = pathTools.getAllVersions(lessonsPath);
   let links = [];
   versions.forEach((versionPath) => {
     const versionFile = `${versionPath}/version.js`;
