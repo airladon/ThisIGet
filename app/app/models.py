@@ -158,7 +158,7 @@ class Topics(db.Model):
 
     def __repr__(self):
         return '<Topic: {}/{}/{}>'.format(
-            self.topic.lesson.path, self.lesson.uid, self.name)
+            self.lesson.path, self.lesson.uid, self.name)
 
 
 class Versions(db.Model):
