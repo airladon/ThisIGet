@@ -1005,9 +1005,9 @@ export default function getLessonIndex() {
         },
         links: {
           base: {
-            type: 'singlePage',
-            title: 'Derivation',
-            description: 'Pythagorean Theorem Only',
+            type: 'generic',
+            title: '',
+            description: '',
             fullLesson: false,
           },
         },

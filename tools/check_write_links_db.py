@@ -17,6 +17,15 @@ from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVer
 print(f'Using database: ${db.engine.url}\n')
 print('Creating links index\n')
 
+# Create Index File
+index = subprocess.run(['node', './containers/getAllLinks.js'])
+
+if all_links.returncode != 0:
+    print(all_links.stderr)
+    raise Exception(f'Error creating links file')
+
+
+# Create Links File
 all_links = subprocess.run(['node', './tools/getAllLinks.js'])
 
 if all_links.returncode != 0:
@@ -38,6 +47,7 @@ def check(row, key, value):
     return check_row(show, write, row, key, value)
 
 
+
 for link in links:
     db_link = Links.query.filter_by(url=link['url']).first()
     if db_link is None:
@@ -52,6 +62,17 @@ for link in links:
     if 'author' in link and check(db_link, 'author', link['author']):
         db_link.type = link['author']
 
-    lesson = Lessons.query.filter_by(uid=link['lessonUID'], path=link['lessonPath']).first()
-    topic = Topics.query.filter_by(lesson_id=lesson.id, name=link['topic']).first()
-    db_link_version = LinkVersions.query.filter_by(link_id=db_link.id, )
+    lesson = Lessons.query.filter_by(
+        uid=link['lessonUID'], path=link['lessonPath']).first()
+    topic = Topics.query.filter_by(
+        lesson_id=lesson.id, name=link['topic']).first()
+    version = Versions.query.filter_by(
+        topic_id=topic.id, uid=link['versionUID']).first()
+    db_link_version = LinkVersions.query.filter_by(
+        version_id=version.id, link_id=db_link.id).first()
+    if db_link_version is None:
+        if show:
+            print(f'Create link: {link["url"]}')
+        db_link_version = LinkVersions(
+            version_id=version.id, link_id=db_link.id)
+        db.session.add(db_link)
