@@ -52,5 +52,6 @@ for link in links:
     if 'author' in link and check(db_link, 'author', link['author']):
         db_link.type = link['author']
 
-    lesson = Lessons.query.filter_by(uid=link.lessonUID)
+    lesson = Lessons.query.filter_by(uid=link['lessonUID'], path=link['lessonPath']).first()
+    topic = Topics.query.filter_by(lesson_id=lesson.id, name=link['topic']).first()
     db_link_version = LinkVersions.query.filter_by(link_id=db_link.id, )

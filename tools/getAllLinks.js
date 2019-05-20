@@ -36,7 +36,7 @@ function createIndexList() {
   let links = [];
   versions.forEach((versionPath) => {
     const versionFile = `${versionPath}/version.js`;
-    const lessonPath = versionPath.split('/').slice(1, -3).join('/');
+    const lessonPath = versionPath.replace(/^.*\/thisiget\/src/, '').split('/').slice(1, -3).join('/');
     const lessonUID = versionPath.split('/').slice(-3, -2)[0];
     const topic = versionPath.split('/').slice(-2, -1)[0];
     const versionUID = versionPath.split('/').slice(-1)[0];
