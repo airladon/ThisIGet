@@ -18,8 +18,16 @@
   font-size: 1em;
 }
 
+@media (max-width: 400px) {
+  .lesson__links_table__link {
+    visibility: hidden;
+    overflow: hidden;
+    word-break: normal;
+  }
+}
+
 .lesson__links_table__description {
-  width: 20%;
+  width: 10em;
 }
 
 .lesson__links_table__your_rating {
