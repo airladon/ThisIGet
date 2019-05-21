@@ -50,6 +50,7 @@ export default class LinksTable extends React.Component
   callbackCount: number;
   numLinks: number;
   links: Array<TypeLink>;
+  hasDescription: boolean;
 
   constructor(props: Props) {
     super(props);
@@ -66,6 +67,12 @@ export default class LinksTable extends React.Component
         userRating: null,
         userRatingIsHigh: false,
       });
+    });
+    this.hasDescription = false;
+    this.links.forEach((link) => {
+      if (link.description) {
+        this.hasDescription = true;
+      }
     });
     /* eslint-disable prefer-destructuring */
     this.lessonUID = path.slice(-3, -2)[0];
@@ -237,13 +244,18 @@ export default class LinksTable extends React.Component
       } else if (type === 'video') {
         typeClass = 'lesson__links_table__icon lesson__links_table__icon_video';
       }
+
+      let description = null;
+      if (this.hasDescription) {
+        description = <td className="lesson__links_table__description">{link.description}</td>;
+      }
       links.push(<tr key={index}>
         <td className="lesson__links_table__type">
           <div className={typeClass}>
           </div>
         </td>
         <td className="lesson__links_table__title">{title}</td>
-        <td className="lesson__links_table__description">{link.description}</td>
+        {description}
         <td className="lesson__links_table__your_rating">{rating}</td>
         <td className="lesson__links_table__total_rating">{numHighRatings}</td>
       </tr>);
@@ -263,13 +275,17 @@ export default class LinksTable extends React.Component
   }
 
   render() {
+    let description = null;
+    if (this.hasDescription) {
+      description = <td className="lesson__links_table__description lesson__links_table__description_title">Description</td>;
+    }
     // const props = Object.assign({}, this.props);
     return <table className="lesson__links_table">
       <tbody>
         <tr className="lesson__links_table__title_row">
         <td className="lesson__links_table__type_title lesson__links_table__type"></td>
         <td className="lesson__links_table__title_title lesson__links_table__title">Link</td>
-        <td className="lesson__links_table__description lesson__links_table__description_title">Description</td>
+        {description}
         <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
         <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
         </tr>

@@ -11,7 +11,7 @@ var details = {
       hash: '0d0bf3df02ca4f1cae21e8ee0fc2f2c5',
       publisher: 'Wikipedia',
       type: 'generic',
-      description: 'Complete coverage of Right Angle Triangle',
+      // description: 'Complete coverage of Right Angle Triangle',
     },
     {
       url: 'https://www.mathsisfun.com/right_angle_triangle.html',
