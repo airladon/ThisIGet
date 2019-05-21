@@ -7,7 +7,7 @@ from check_row import check_row
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-
+import pdb
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
         return check_row(show, write, row, key, valueDict[valueKey])
@@ -175,7 +175,7 @@ for link in links:
             print(f'Create link: {link["url"]}')
         db_link_version = LinkVersions(
             version_id=version.id, link_id=db_link.id)
-        db.session.add(db_link)
+        db.session.add(db_link_version)
 
 if show:
     print()

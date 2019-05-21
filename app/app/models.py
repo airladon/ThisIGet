@@ -203,7 +203,7 @@ class LinkVersions(db.Model):
     link_id = db.Column(db.Integer, db.ForeignKey('links.id'))
 
     def __repr__(self):
-        return '<Link Version: {}/{}/{}>'.format(self.version, self.link.url)
+        return '<Link Version: {}/{}>'.format(self.version.id, self.link.url)
 
 # class Versions(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
