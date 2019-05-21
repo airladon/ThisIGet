@@ -199,6 +199,7 @@ def test_get_rating(client):
 
 
 def test_get_link_rating(client):
+    LinkRatings.query.delete()
     # Check default values
     res = client.get(f'/linkrating/{lesson3}').get_json()
     assert res['status'] == 'ok'

@@ -62,6 +62,7 @@ def client(request):
     def fin():
         Users.query.delete()
         Ratings.query.delete()
-        LinkRatings.query.delete()
+        AllRatings.query.delete()
         AllLinkRatings.query.delete()
+        LinkRatings.query.delete()
     request.addfinalizer(fin)
