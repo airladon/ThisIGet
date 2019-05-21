@@ -320,7 +320,7 @@ python ./tools/prepopulate.py
 
 ##### Dev
 ```
-tools/get_config_vars.sh thisiget-dev
+./getenv.sh dev
 ```
 Copy paste exports
 ```
@@ -337,7 +337,7 @@ unset MAIL_USERNAME
 
 ##### Test
 ```
-tools/get_config_vars.sh thisiget-test
+./getenv.sh test
 ```
 Copy paste exports
 ```
@@ -354,7 +354,7 @@ unset MAIL_USERNAME
 
 ##### Beta
 ```
-tools/get_config_vars.sh thisiget-beta
+./getenv.sh beta
 ```
 Copy paste exports
 ```
