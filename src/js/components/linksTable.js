@@ -16,6 +16,7 @@ type TypeLinkIn = {
   type?: 'presentation' | 'generic' | 'video',
   author?: string;
   publisher?: string;
+  description?: string;
 };
 
 type TypeLink = {
@@ -23,6 +24,7 @@ type TypeLink = {
   hash: string;
   type: 'presentation' | 'generic' | 'video',
   description: string;
+  title: string;
   numHighRatings: ?number;
   userRating: ?number;
   userRatingIsHigh: boolean;
@@ -58,7 +60,8 @@ export default class LinksTable extends React.Component
         url: link.url,
         hash: link.hash,
         type: link.type || 'generic',
-        description: link.author || link.publisher || '',
+        title: link.author || link.publisher || '',
+        description: link.description || '',
         numHighRatings: null,
         userRating: null,
         userRatingIsHigh: false,
@@ -128,11 +131,15 @@ export default class LinksTable extends React.Component
           numRatings?: number,
           numHighRatings: number,
         }) => {
+          let userRatingIsHigh = false;
+          if (data.userRating != null && data.userRating > 3) {
+            userRatingIsHigh = true;
+          }
           if (data.status === 'ok') {
             /* eslint-disable no-param-reassign */
             link.numHighRatings = data.numHighRatings;
             link.userRating = data.userRating;
-            link.userRatingIsHigh = data.userRating > 3 ? true : false;
+            link.userRatingIsHigh = userRatingIsHigh;
             /* eslint-enable */
           }
           this.waitThenCallback(callback);
@@ -213,13 +220,13 @@ export default class LinksTable extends React.Component
       if (this.state.ratings[index].numHighRatings) {
         ({ numHighRatings } = this.state.ratings[index]);
       }
-      const description = <a
+      const title = <a
           className=""
           href={link.url}
           rel='noreferrer noopener'
           target="_blank"
         >
-        {link.description}
+        {link.title}
       </a>;
       let typeClass = 'lesson__links_table__icon lesson__links_table__icon_generic';
       const { type } = link;
@@ -235,10 +242,8 @@ export default class LinksTable extends React.Component
           <div className={typeClass}>
           </div>
         </td>
-        <td className="lesson__links_table__description">{description}</td>
-        { /*}
-        <td className="lesson__links_table__link">{link.url}</td>
-        */ }
+        <td className="lesson__links_table__title">{title}</td>
+        <td className="lesson__links_table__description">{link.description}</td>
         <td className="lesson__links_table__your_rating">{rating}</td>
         <td className="lesson__links_table__total_rating">{numHighRatings}</td>
       </tr>);
@@ -262,13 +267,11 @@ export default class LinksTable extends React.Component
     return <table className="lesson__links_table">
       <tbody>
         <tr className="lesson__links_table__title_row">
-        <td className="lesson__links_table__type_title lesson__links_table__type">Type</td>
-        <td className="lesson__links_table__description_title lesson__links_table__description">Link</td>
-          { /*
-          <td className="lesson__links_table__link lesson__links_table__link_title">Link</td>
-          */ }
-          <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
-          <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
+        <td className="lesson__links_table__type_title lesson__links_table__type"></td>
+        <td className="lesson__links_table__title_title lesson__links_table__title">Link</td>
+        <td className="lesson__links_table__description lesson__links_table__description_title">Description</td>
+        <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
+        <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
       </tbody>

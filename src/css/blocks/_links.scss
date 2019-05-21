@@ -7,7 +7,7 @@
 }
 
 .lesson__links_table__title_row {
-  font-size: 0.8em;
+  font-size: 0.9em;
   color: color('white', 'darkest');
   border-bottom: 1px solid color('white', 'light');
   border-top: 1px solid color('white', 'light');
@@ -22,26 +22,28 @@
   font-size: 1em;
 }
 
-.lesson__links_table__link {
-  font-size: 0.6em;
-  word-break: break-all;
-  text-align: center;
-}
-
-.lesson__links_table__link_title {
-  font-size: 1em;
-}
-
-@media (max-width: 400px) {
-  .lesson__links_table__link {
-    visibility: hidden;
-    overflow: hidden;
-    word-break: normal;
-  }
-}
-
 .lesson__links_table__description {
+  // font-size: 0.6em;
+  // word-break: break-all;
+  // text-align: center;
+  padding-left: 2em;
+  padding-right: 2em;
+  color: color('black', 'lightest');
+  font-size: 0.9em;
+}
+
+.lesson__links_table__description_title {
+  padding-left: 2em;
+  font-size: 1em;
+  color: color('white', 'darkest');
+}
+
+.lesson__links_table__title {
   // width: 10em;
+}
+
+.lesson__links_table__title_title {
+  text-align: left;
 }
 
 .lesson__links_table__your_rating {
@@ -55,9 +57,18 @@
   vertical-align: middle;
 }
 
+// .lesson__links_table__your_rating .rating__label {
+//   margin-right: 0;
+// }
+
 .lesson__links_table__total_rating {
   width: 6em;
   text-align: center;
+  color: color('black', 'lightest');
+}
+
+.lesson__links_table__total_rating_title {
+  color: color('white', 'darkest');
 }
 
 .lesson__links_table__disabled {
@@ -79,8 +90,53 @@
 .lesson__links_table__icon_generic,
 .lesson__links_table__icon_single_page {
   background-image: $lesson-singlePage;
+  width: 3em;
 }
 
 .lesson__links_table__icon_video {
   background-image: $lesson-video;
+}
+
+@media (max-width: 500px) {
+  .lesson__links_table__description {
+    visibility: hidden;
+    overflow: hidden;
+    padding-left: 0;
+    padding-right: 0;
+    font-size: 0;
+    width: 0;
+    // word-break: normal;
+  }
+
+  .lesson__links_table__description_title {
+    padding-left: 0;
+    visibility: hidden;
+    overflow: hidden;
+    font-size: 0;
+  }
+
+  .lesson__links_table__icon_generic,
+  .lesson__links_table__icon_single_page,
+  .lesson__links_table__icon_video,
+  .lesson__links_table__icon {
+    width: 0;
+  }
+
+  .lesson__links_table__type {
+    font-size: 0;
+  }
+
+  .lesson__links_table__type_title {
+    font-size: 0;
+    width: 0;
+  }
+
+  .lesson__links_table__total_rating {
+    width: 4em;
+    text-align: center;
+  }
+
+  .lesson__links_table {
+    width: 100%;
+  }
 }
