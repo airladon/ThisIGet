@@ -372,10 +372,10 @@ def getVersion(lesson_uid, topic_name, version_uid):
     return version
 
 
-def getLinkVersion(version_uid, url_hash):
+def getLinkVersion(version_id, url_hash):
     link_version = db.session.query(LinkVersions).join(Links).filter(
         Links.url_hash == url_hash,
-        Versions.version_id == version_uid).first()
+        Versions.id == version_id).first()
     # link = Links.query.filter_by(url_hash=url_hash)
     # if link is None:
     #     return jsonify(
@@ -393,7 +393,7 @@ def getLinkVersion(version_uid, url_hash):
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic_name, version_uid, rating_value):
-    print(lesson_uid, topic_name, version_uid, rating_value)
+    # print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
         version = getVersion(lesson_uid, topic_name, version_uid)
@@ -432,7 +432,7 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
 @app.route(
     '/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')
 def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
-    print(lesson_uid, topic_name, version_uid, rating_value)
+    # print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
         version = getVersion(lesson_uid, topic_name, version_uid)
@@ -440,14 +440,14 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
             return jsonify({'status': 'fail', 'message': version})
 
         link_version = getLinkVersion(version.id, url_hash)
-        if isinstance(version, str):
-            return jsonify({'status': 'fail', 'message': version})
+        if isinstance(link_version, str):
+            return jsonify({'status': 'fail', 'message': link_version})
 
         user_rating = LinkRatings.query.filter_by(
-            link_version=link_version, user=current_user).first()
+            link_version_id=link_version.id, user_id=current_user.id).first()
         if user_rating is None:
             user_rating = LinkRatings(
-                user=current_user, link_version=link_version)
+                user_id=current_user.id, link_version_id=link_version.id)
             db.session.add(user_rating)
 
         if rating_value not in ['1', '2', '3', '4', '5']:
@@ -457,7 +457,7 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
             user_rating.rating = rating_value
 
         generic_rating = AllLinkRatings(
-            user=current_user, version=link_version)
+            user_id=current_user.id, link_version_id=link_version.id)
         generic_rating.timestamp = datetime.datetime.now()
         generic_rating.rating = rating_value
 
@@ -533,7 +533,8 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
     if isinstance(version, str):
         return jsonify({'status': 'fail', 'message': version})
 
-    ratings = LinkRatings.query.filter_by(link_version=link_version).all()
+    ratings = LinkRatings.query.filter_by(
+        link_version_id=link_version.id).all()
     if ratings is None:
         ratings = []
     num_ratings = len(ratings)
@@ -549,7 +550,7 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
 
     if current_user.is_authenticated:
         user_rating = LinkRatings.query.filter_by(
-            user=current_user, link_version=link_version).first()
+            user_id=current_user.id, link_version_id=link_version.id).first()
         if user_rating is None:
             user_rating_value = 'not rated'
         else:
