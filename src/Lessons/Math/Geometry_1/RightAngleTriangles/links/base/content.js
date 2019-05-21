@@ -8,24 +8,6 @@ import details from '../../details';
 import LinksTable from '../../../../../../js/components/linksTable';
 import version from './version';
 
-function makeTable(inputLinks: Array<{
-    link: string;
-    uid: string;
-    description: string;
-  }>) {
-  const links = [];
-  inputLinks.forEach((link, index) => {
-    links.push(<tr key={index}>
-      <td>{link.link}</td>
-      <td>{link.description}</td>
-      <td>3</td>
-      <td>4</td>
-    </tr>);
-  });
-
-  return 
-}
-
 class Content extends SimpleLessonContent {
   setTitle() {
     this.title = details.details.title;

@@ -2,15 +2,16 @@
 
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+import Rating from './rating';
 // import '../../css/style.scss';
 // import img from '../../tile.png';
 
 type TypeLinkIn = {
   url: string;
   hash: string;
-  uid: string;
-  topic: string,
-  type: 'presentation' | 'generic' | 'video',
+  uid?: string;
+  topic?: string,
+  type?: 'presentation' | 'generic' | 'video',
   author?: string;
   publisher?: string;
 };
@@ -29,12 +30,10 @@ type Props = {
 };
 
 type State = {
-  ratings: {
-    [linkUID: string]: {
-      userRating: number;
-      totalRating: number;
-    }
-  },
+  ratings: Array<{
+      userRating: ?number;
+      numHighRatings: ?number;
+  }>,
 };
 
 export default class LinksTable extends React.Component
@@ -54,7 +53,7 @@ export default class LinksTable extends React.Component
       this.links.push({
         url: link.url,
         hash: link.hash,
-        type: link.type,
+        type: link.type || 'generic',
         description: link.author || link.publisher || '',
         numHighRatings: null,
         userRating: null,
@@ -66,10 +65,9 @@ export default class LinksTable extends React.Component
     this.topic = path.slice(-2, -1)[0];
     // /* eslint-enable */
     // this.lessonDescription = getLessonDescription(this.lessonUID);
-    // this.state = {
-    //   userRating: 0,
-    //   ratings: this.fillRatings(),
-    // };
+    this.state = {
+      ratings: this.fillRatings(),
+    };
     // // this.versionDetails = props.versionDetails;
     // // const [topic] = window.location.pathname.split('/').slice(-2, -1);
     // // this.topic = topic;
@@ -79,6 +77,21 @@ export default class LinksTable extends React.Component
     // if (this.lessonDescription != null) {
     //   this.lessonDescription.getRatings(this.gotRatings.bind(this));
     // }
+  }
+
+  fillRatings() {
+    const ratings = [];
+    this.links.forEach((link) => {
+      ratings.push({
+        userRating: link.userRating,
+        numHighRatings: link.numHighRatings,
+      });
+    });
+    return ratings;
+  }
+
+  gotLinkRatings() {
+    this.setState({ ratings: this.fillRatings() });
   }
 
   waitThenCallback(callback: Function) {
@@ -127,8 +140,13 @@ export default class LinksTable extends React.Component
       links.push(<tr key={index}>
         <td>{link.url}</td>
         <td>{link.description}</td>
-        <td>3</td>
-        <td>4</td>
+        <td><Rating
+          topic={this.topic}
+          rating={this.state.ratings[index].userRating || 0}
+          ratingCallback={this.setUserRating.bind(this)}
+          isLoggedIn={this.props.isLoggedIn}
+        /></td>
+        <td>{this.state.ratings[index].numHighRatings}</td>
       </tr>);
     });
     return links;
