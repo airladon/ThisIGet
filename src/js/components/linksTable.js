@@ -127,8 +127,10 @@ export default class LinksTable extends React.Component
           numHighRatings: number,
         }) => {
           if (data.status === 'ok') {
+            /* eslint-disable no-param-reassign */
             link.numHighRatings = data.numHighRatings;
             link.userRating = data.userRating;
+            /* eslint-enable */
           }
           this.waitThenCallback(callback);
         })
@@ -186,7 +188,7 @@ export default class LinksTable extends React.Component
         {'-'}
       </div>;
       if (this.state.ratings[index].numHighRatings) {
-        numHighRatings = this.state.ratings[index].numHighRatings;
+        ({ numHighRatings } = this.state.ratings[index]);
       }
       const description = <a
           className=""
