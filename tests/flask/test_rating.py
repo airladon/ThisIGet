@@ -65,15 +65,15 @@ def test_set_rating_not_logged_in(client):
 def test_set_rating_wrong_input(client):
     res = client.get(f'/rate/invalid/explanation/base/4').get_json()
     assert res['status'] == 'fail'
-    assert res['message'] == 'lesson does not exist'
+    assert res['message'] == 'lesson/topic/version does not exist'
 
     res = client.get(f'/rate/Circle/invalid/base/4').get_json()
     assert res['status'] == 'fail'
-    assert res['message'] == 'topic does not exist'
+    assert res['message'] == 'lesson/topic/version does not exist'
 
     res = client.get(f'/rate/Circle/explanation/invalid/4').get_json()
     assert res['status'] == 'fail'
-    assert res['message'] == 'version does not exist'
+    assert res['message'] == 'lesson/topic/version does not exist'
 
     res = client.get(f'/rate/{lesson1}/6)').get_json()
     assert res['status'] == 'fail'

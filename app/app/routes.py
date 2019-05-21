@@ -347,34 +347,46 @@ def isInt(s):
 
 
 def getVersion(lesson_uid, topic_name, version_uid):
-    lesson = Lessons.query.filter_by(uid=lesson_uid).first()
-    if lesson is None:
-        return jsonify(
-            {'status': 'fail', 'message': 'lesson does not exist'})
-    topic = Topics.query.filter_by(
-        lesson=lesson, name=topic_name).first()
-    if topic is None:
-        return jsonify(
-            {'status': 'fail', 'message': 'topic does not exist'})
-    version = Versions.query.filter_by(
-        topic_id=topic.id, uid=version_uid).first()
+    # lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+    # if lesson is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'lesson does not exist'})
+    # topic = Topics.query.filter_by(
+    #     lesson=lesson, name=topic_name).first()
+    # if topic is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'topic does not exist'})
+    # version = Versions.query.filter_by(
+    #     topic_id=topic.id, uid=version_uid).first()
+    # if version is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'version does not exist'})
+    version = db.session.query(Versions).join(Topics).join(Lessons).filter(
+        Lessons.uid == lesson_uid,
+        Topics.name == topic_name,
+        Versions.uid == version_uid).first()
     if version is None:
-        return jsonify(
-            {'status': 'fail', 'message': 'version does not exist'})
+        return 'lesson/topic/version does not exist'
+        # return jsonify(
+        #     {'status': 'fail', 'message': 'lesson/topic/version exist'})
     return version
 
 
-def getLinkVersion(verion_uid, url_hash):
-    link = Links.query.filter_by(url_hash=url_hash)
-    if link is None:
-        return jsonify(
-            {'status': 'fail', 'message': 'link does not exist'})
+def getLinkVersion(version_uid, url_hash):
+    link_version = db.session.query(LinkVersions).join(Links).filter(
+        Links.url_hash == url_hash,
+        Versions.version_id == version_uid).first()
+    # link = Links.query.filter_by(url_hash=url_hash)
+    # if link is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'link does not exist'})
 
-    link_version = LinkVersions.query.filter_by(
-        version_id=verion_uid, link_id=link.id)
+    # link_version = LinkVersions.query.filter_by(
+    #     version_id=version_uid, link_id=link.id)
     if link_version is None:
-        return jsonify(
-            {'status': 'fail', 'message': 'link version does not exist'})
+        return 'link/version does not exist'
+        # return jsonify(
+        #     {'status': 'fail', 'message': 'link/version does not exist'})
     return link_version
 
 
@@ -385,8 +397,8 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
     status = 'not logged in'
     if current_user.is_authenticated:
         version = getVersion(lesson_uid, topic_name, version_uid)
-        if 'status' in version:
-            return version
+        if isinstance(version, str):
+            return jsonify({'status': 'fail', 'message': version})
 
         user_rating = Ratings.query.filter_by(
             version=version, user=current_user).first()
@@ -394,8 +406,7 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
             user_rating = Ratings(user=current_user, version=version)
             db.session.add(user_rating)
         if rating_value not in ['1', '2', '3', '4', '5']:
-            return jsonify(
-                {'status': 'fail', 'message': 'invalid rating'})
+            return jsonify({'status': 'fail', 'message': 'invalid rating'})
         if user_rating.rating != rating_value:
             user_rating.rating = rating_value
 
@@ -425,15 +436,15 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     status = 'not logged in'
     if current_user.is_authenticated:
         version = getVersion(lesson_uid, topic_name, version_uid)
-        if 'status' in version:
-            return version
+        if isinstance(version, str):
+            return jsonify({'status': 'fail', 'message': version})
 
         link_version = getLinkVersion(version.id, url_hash)
-        if 'status' in link_version:
-            return link_version
+        if isinstance(version, str):
+            return jsonify({'status': 'fail', 'message': version})
 
         user_rating = LinkRatings.query.filter_by(
-            version=version, user=current_user).first()
+            link_version=link_version, user=current_user).first()
         if user_rating is None:
             user_rating = LinkRatings(
                 user=current_user, link_version=link_version)
@@ -473,8 +484,8 @@ def get_rating(lesson_uid, topic_name, version_uid):
     user_rating_value = 'not logged in'
 
     version = getVersion(lesson_uid, topic_name, version_uid)
-    if 'status' in version:
-        return version
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
 
     ratings = Ratings.query.filter_by(version=version).all()
     if ratings is None:
@@ -515,12 +526,12 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
     user_rating_value = 'not logged in'
 
     version = getVersion(lesson_uid, topic_name, version_uid)
-    if 'status' in version:
-        return version
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
 
     link_version = getLinkVersion(version.id, url_hash)
-    if 'status' in link_version:
-        return link_version
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
 
     ratings = LinkRatings.query.filter_by(link_version=link_version).all()
     if ratings is None:
