@@ -6,7 +6,8 @@
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base"
+    "versionUID": "base",
+    "hash": "0d0bf3df02ca4f1cae21e8ee0fc2f2c5"
   },
   {
     "url": "https://www.mathsisfun.com/right_angle_triangle.html",
@@ -15,7 +16,8 @@
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base"
+    "versionUID": "base",
+    "hash": "6a789eea2c88f07978d1b2a9bc2697cd"
   },
   {
     "url": "https://www.mathplanet.com/education/pre-algebra/right-triangles-and-algebra/the-pythagorean-theorem",
@@ -24,6 +26,7 @@
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base"
+    "versionUID": "base",
+    "hash": "c5f008a4c8193905f1a6b4ffaff9fb00"
   }
 ]

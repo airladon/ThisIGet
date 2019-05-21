@@ -192,6 +192,7 @@ class Links(db.Model):
     author = db.Column(db.String(128), index=True)
     publisher = db.Column(db.String(128), index=True)
     pageType = db.Column(db.String(128), index=True)
+    url_hash = db.Column(db.String(32))
 
     def __repr__(self):
         return '<Link: {}>'.format(self.url)

@@ -1,4 +1,5 @@
 const fs = require('fs');
+const crypto = require('crypto')
 // const path = require('path');
 const pathTools = require('../containers/dev/pathTools.js');
 // function walkSync(currentDirPath, fileIdentifier, callback) {
@@ -50,6 +51,7 @@ function createIndexList() {
           link.lessonUID = lessonUID;
           link.topic = topic;
           link.versionUID = versionUID;
+          link.hash = crypto.createHash('md5').update(link.url).digest('hex');
           /* eslint-enable */
         });
       }

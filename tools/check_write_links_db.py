@@ -163,6 +163,8 @@ for link in links:
         db_link.publisher = link['publisher']
     if check(show, write, db_link, 'author', link, 'author'):
         db_link.author = link['author']
+    if check(show, write, db_link, 'url_hash', link, 'hash'):
+        db_link.url_hash = link['hash']
 
     lesson = Lessons.query.filter_by(
         uid=link['lessonUID'], path=link['lessonPath']).first()

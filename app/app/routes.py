@@ -364,8 +364,8 @@ def getVersion(lesson_uid, topic_name, version_uid):
     return version
 
 
-def getLinkVersion(verion_uid, url):
-    link = Links.query.filter_by(url=url)
+def getLinkVersion(verion_uid, url_hash):
+    link = Links.query.filter_by(url_hash=url_hash)
     if link is None:
         return jsonify(
             {'status': 'fail', 'message': 'link does not exist'})
@@ -419,8 +419,8 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
 
 @check_confirmed
 @app.route(
-    '/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url>/<rating_value>')
-def rateLink(lesson_uid, topic_name, version_uid, url, rating_value):
+    '/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')
+def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
@@ -428,7 +428,7 @@ def rateLink(lesson_uid, topic_name, version_uid, url, rating_value):
         if 'status' in version:
             return version
 
-        link_version = getLinkVersion(version.id, url)
+        link_version = getLinkVersion(version.id, url_hash)
         if 'status' in link_version:
             return link_version
 
@@ -505,10 +505,10 @@ def get_rating(lesson_uid, topic_name, version_uid):
         'aveRating': ave_rating,
         'numHighRatings': num_high_ratings})
 
-# This isn't going to work as url will have weird characters in it. Maybe to a hash?
+
 @check_confirmed
-@app.route('/linkrating/<lesson_uid>/<topic_name>/<version_uid>/url')
-def get_link_rating(lesson_uid, topic_name, version_uid, url):
+@app.route('/linkrating/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>')
+def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
     num_ratings = 0
     ave_rating = 0
     num_high_ratings = 0
@@ -518,7 +518,7 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url):
     if 'status' in version:
         return version
 
-    link_version = getLinkVersion(version.id, url)
+    link_version = getLinkVersion(version.id, url_hash)
     if 'status' in link_version:
         return link_version
 
