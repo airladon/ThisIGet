@@ -97,6 +97,19 @@
   background-image: $lesson-video;
 }
 
+.lesson__links_table__disclaimer {
+  font-size: 0.8em;
+}
+
+.lesson__links_table__disclaimer_email {
+  color: color('blue');
+}
+
+.lesson__links_table__disclaimer_email:hover {
+  color: color('blue', 'lighter');
+  text-decoration: none;
+}
+
 @media (max-width: 500px) {
   .lesson__links_table__description {
     visibility: hidden;
