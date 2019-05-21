@@ -1,18 +1,13 @@
 import pathlib
 import re
 import json
-import os
 import sys
 import subprocess
-from set_app_env import set_app_env
 from check_row import check_row
-import pdb
-app = sys.argv[-1]
-set_app_env(app)
-# print(os.environ['DATABASE_URL'])
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
+
 
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
@@ -50,14 +45,20 @@ def toBool(str):
 # #######################################################################
 print()
 print(f'Using database: ${db.engine.url}\n')
-show = True
+show = False
 write = False
+for arg in sys.argv:
+    if (arg == 'show'):
+        show = True
+    if (arg == 'write'):
+        write = True
+
 
 # #######################################################################
 # Lesson Index
 # #######################################################################
 # Create Index File
-print('Creating lesson index\n')
+# print('Creating lesson index')
 index = subprocess.run(['node', './tools/generateLessonIndex.js'])
 if index.returncode != 0:
     print(index.stderr)
@@ -67,7 +68,7 @@ if index.returncode != 0:
 index = index_loader(
     pathlib.Path('./src/Lessons/LessonsCommon/lessonindex.js'))
 
-print('Checking lesson index in database\n')
+# print('Checking lesson index in database\n')
 # Process Index
 for key, value in index.items():            # noqa
     # Update or create category row
@@ -130,18 +131,20 @@ for key, value in index.items():            # noqa
                         version_object['fullLesson'])
             if check(show, write, version, 'pageType', version_object, 'type'):
                 version.pageType = version_object['type']
-            if write:
-                db.session.commit()
+            # if write:
+            #     db.session.commit()
 
 # #######################################################################
 # Links
 # #######################################################################
 # Create Links File
+print()
+# print('Creating link index')
 all_links = subprocess.run(['node', './tools/generateLinkIndex.js'])
 if all_links.returncode != 0:
     print(all_links.stderr)
     raise Exception(f'Error creating links file')
-
+# print('Checking link index\n')
 links = []
 with open('./tools/link_index.json') as f:
     links = json.load(f)
@@ -174,3 +177,9 @@ for link in links:
         db_link_version = LinkVersions(
             version_id=version.id, link_id=db_link.id)
         db.session.add(db_link)
+
+if show:
+    print()
+
+if write:
+    db.session.commit()
