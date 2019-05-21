@@ -1,6 +1,7 @@
 .lesson__links_table {
   table-layout: fixed;
   width: 100%;
+  font-size: 0.8em;
 }
 
 .lesson__links_table__title_row {
@@ -8,19 +9,25 @@
   color: color('white', 'dark');
 }
 
-// .lesson__links_table__link_title {
-// }
-
-.lesson__links_table__description_title {
-  width: 30%;
+.lesson__links_table__link {
+  font-size: 0.6em;
+  word-break: break-all;
 }
 
-.lesson__links_table__your_rating_title {
+.lesson__links_table__link_title {
+  font-size: 1em;
+}
+
+.lesson__links_table__description {
+  width: 20%;
+}
+
+.lesson__links_table__your_rating {
   width: 8em;
   text-align: center;
 }
 
-.lesson__links_table__total_rating_title {
+.lesson__links_table__total_rating {
   width: 6em;
   text-align: center;
 }

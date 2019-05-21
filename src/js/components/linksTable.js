@@ -76,6 +76,7 @@ export default class LinksTable extends React.Component
     // this.key = 0;
     // this.showNavigator = false;
     // this.getRating(this.topic);
+    this.getLinkRatings(this.gotLinkRatings.bind(this));
     // if (this.lessonDescription != null) {
     //   this.lessonDescription.getRatings(this.gotRatings.bind(this));
     // }
@@ -170,17 +171,18 @@ export default class LinksTable extends React.Component
   renderLinks() {
     const links = [];
     this.links.forEach((link, index) => {
+      console.log(this.state.ratings[index].userRating)
       links.push(<tr key={index}>
-        <td>{link.url}</td>
-        <td>{link.description}</td>
-        <td><Rating
+        <td className="lesson__links_table__description">{link.description}</td>
+        <td className="lesson__links_table__link">{link.url}</td>
+        <td className="lesson__links_table__your_rating"><Rating
           topic={this.topic}
           rating={this.state.ratings[index].userRating || 0}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
           index={index}
         /></td>
-        <td>{this.state.ratings[index].numHighRatings}</td>
+        <td className="lesson__links_table__total_rating">{this.state.ratings[index].numHighRatings || '-'}</td>
       </tr>);
     });
     return links;
@@ -192,10 +194,10 @@ export default class LinksTable extends React.Component
     return <table className="lesson__links_table">
       <tbody>
         <tr className="lesson__links_table__title_row">
-          <td className="lesson__links_table__link_title">Link</td>
-          <td className="lesson__links_table__description_title">Description</td>
-          <td className="lesson__links_table__your_rating_title">{'Your\nRating'}</td>
-          <td className="lesson__links_table__total_rating_title">Total Ratings ≥4</td>
+        <td className="lesson__links_table__description_title lesson__links_table__description">Description</td>
+          <td className="lesson__links_table__link lesson__links_table__link_title">Link</td>
+          <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{'Your\nRating'}</td>
+          <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
       </tbody>
