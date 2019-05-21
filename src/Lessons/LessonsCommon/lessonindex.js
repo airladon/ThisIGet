@@ -846,9 +846,9 @@ export default function getLessonIndex() {
         links: {
           base: {
             type: 'generic',
-            title: '',
+            title: 'Base',
             description: '',
-            fullLesson: false,
+            fullLesson: true,
           },
         },
         quickReference: {

@@ -4,6 +4,8 @@
 var details = {
   uid: 'base',
   topic: 'links',
+  title: 'Base',
+  fullLesson: true,
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Right_triangle',

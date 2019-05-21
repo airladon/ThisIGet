@@ -8,7 +8,6 @@ sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
 
-
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
         return check_row(show, write, row, key, valueDict[valueKey])
@@ -157,11 +156,11 @@ for link in links:
         db_link = Links(url=link['url'])
         db.session.add(db_link)
     if check(show, write, db_link, 'pageType', link, 'type'):
-        db_link.pageType = link['pageType']
+        db_link.pageType = link['type']
     if check(show, write, db_link, 'publisher', link, 'publisher'):
-        db_link.type = link['publisher']
+        db_link.publisher = link['publisher']
     if check(show, write, db_link, 'author', link, 'author'):
-        db_link.type = link['author']
+        db_link.author = link['author']
 
     lesson = Lessons.query.filter_by(
         uid=link['lessonUID'], path=link['lessonPath']).first()
