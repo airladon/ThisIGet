@@ -1,6 +1,8 @@
 .lesson__links_table {
   table-layout: fixed;
-  width: 100%;
+  // width: 100%;
+  margin-left: auto;
+  margin-right: auto;
   font-size: 0.8em;
 }
 
@@ -11,9 +13,19 @@
   border-top: 1px solid color('white', 'light');
 }
 
+.lesson__links_table__type {
+  text-align: center;
+}
+
+.lesson__links_table__type_title {
+  text-align: center;
+  font-size: 1em;
+}
+
 .lesson__links_table__link {
   font-size: 0.6em;
   word-break: break-all;
+  text-align: center;
 }
 
 .lesson__links_table__link_title {
@@ -29,7 +41,7 @@
 }
 
 .lesson__links_table__description {
-  width: 10em;
+  // width: 10em;
 }
 
 .lesson__links_table__your_rating {
@@ -39,6 +51,10 @@
   padding-top: 1em;
 }
 
+.lesson__links_table__your_rating .rating__stars {
+  vertical-align: middle;
+}
+
 .lesson__links_table__total_rating {
   width: 6em;
   text-align: center;
@@ -46,4 +62,25 @@
 
 .lesson__links_table__disabled {
   color: color('grey', 'light');
+}
+
+.lesson__links_table__icon {
+  background-size: contain;
+  height: 20px;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 4em;
+}
+
+.lesson__links_table__icon_presentation {
+  background-image: $lesson-presentation;
+}
+
+.lesson__links_table__icon_generic,
+.lesson__links_table__icon_single_page {
+  background-image: $lesson-singlePage;
+}
+
+.lesson__links_table__icon_video {
+  background-image: $lesson-video;
 }

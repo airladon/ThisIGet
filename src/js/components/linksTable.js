@@ -221,9 +221,24 @@ export default class LinksTable extends React.Component
         >
         {link.description}
       </a>;
+      let typeClass = 'lesson__links_table__icon lesson__links_table__icon_generic';
+      const { type } = link;
+      if (type === 'presentation') {
+        typeClass = 'lesson__links_table__icon lesson__links_table__icon_presentation';
+      } else if (type === 'singlePage') {
+        typeClass = 'lesson__links_table__icon lesson__links_table__icon_single_page';
+      } else if (type === 'video') {
+        typeClass = 'lesson__links_table__icon lesson__links_table__icon_video';
+      }
       links.push(<tr key={index}>
+        <td className="lesson__links_table__type">
+          <div className={typeClass}>
+          </div>
+        </td>
         <td className="lesson__links_table__description">{description}</td>
+        { /*}
         <td className="lesson__links_table__link">{link.url}</td>
+        */ }
         <td className="lesson__links_table__your_rating">{rating}</td>
         <td className="lesson__links_table__total_rating">{numHighRatings}</td>
       </tr>);
@@ -247,8 +262,11 @@ export default class LinksTable extends React.Component
     return <table className="lesson__links_table">
       <tbody>
         <tr className="lesson__links_table__title_row">
-        <td className="lesson__links_table__description_title lesson__links_table__description">Description</td>
+        <td className="lesson__links_table__type_title lesson__links_table__type">Type</td>
+        <td className="lesson__links_table__description_title lesson__links_table__description">Link</td>
+          { /*
           <td className="lesson__links_table__link lesson__links_table__link_title">Link</td>
+          */ }
           <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
           <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
         </tr>
