@@ -19,6 +19,7 @@ import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
 import SinglePageLessonComponent from './singlePageLesson';
 import LinksLessonComponent from './linksLesson';
+import { login } from '../tools/misc';
 
 type Props = {
   lesson: Object;
@@ -406,6 +407,18 @@ export default class LessonComponent extends React.Component
     />;
   }
 
+  ratingLabel() {
+    if (this.props.isLoggedIn) {
+      if (this.lesson.type === 'links') {
+        return 'Are this links helpful?';
+      }
+      return `Is this ${this.topic} helpful?`;
+    }
+    return <div>
+      <span className="rating__login" onClick={login}>Login</span> to rate {this.topic}:
+    </div>;
+  }
+
   render() {
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
@@ -424,6 +437,7 @@ export default class LessonComponent extends React.Component
           rating={this.state.userRating}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
+          label={this.ratingLabel()}
         />
       </div>
       {this.renderLesson()}
