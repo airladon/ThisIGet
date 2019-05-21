@@ -178,6 +178,7 @@ export default class LinksTable extends React.Component
           rating={this.state.ratings[index].userRating || 0}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
+          index={index}
         /></td>
         <td>{this.state.ratings[index].numHighRatings}</td>
       </tr>);
