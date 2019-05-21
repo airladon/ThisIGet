@@ -18,6 +18,7 @@ import { getCookie } from '../tools/misc';
 import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
 import SinglePageLessonComponent from './singlePageLesson';
+import LinksLessonComponent from './linksLesson';
 
 type Props = {
   lesson: Object;
@@ -392,6 +393,12 @@ export default class LessonComponent extends React.Component
     if (this.lesson.type === 'singlePage') {
       return <SinglePageLessonComponent
         lesson={this.lesson}
+      />;
+    }
+    if (this.lesson.type === 'links') {
+      return <LinksLessonComponent
+        lesson={this.lesson}
+        isLoggedIn={this.props.isLoggedIn}
       />;
     }
     return <SimpleLessonComponent

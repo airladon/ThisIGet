@@ -7,6 +7,7 @@ type Props={
   num: number;
   callback: Function;
   isLoggedIn: boolean;
+  index: number;
 };
 
 export default class Star extends React.Component
@@ -23,7 +24,7 @@ export default class Star extends React.Component
   // }
 
   setRating() {
-    this.props.callback(this.props.num);
+    this.props.callback(this.props.num, this.props.index);
   }
 
   star() {

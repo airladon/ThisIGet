@@ -11,6 +11,7 @@ type Props = {
   // lessonId: string,
   ratingCallback: Function,
   isLoggedIn: boolean,
+  index?: number,
 };
 
 export default class Rating extends React.Component
@@ -22,6 +23,7 @@ export default class Rating extends React.Component
       stars.push(<Star isFull={true}
         key={i}
         callback={this.props.ratingCallback}
+        index={this.props.index || 0}
         num={i + 1}
         isLoggedIn={this.props.isLoggedIn}
       />);
@@ -31,6 +33,7 @@ export default class Rating extends React.Component
         num={i + 1}
         key={i}
         callback={this.props.ratingCallback}
+        index={this.props.index || 0}
         isLoggedIn={this.props.isLoggedIn}
       />);
     }

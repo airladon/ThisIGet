@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Rating from './rating';
+import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
 // import img from '../../tile.png';
 
@@ -27,6 +28,7 @@ type TypeLink = {
 
 type Props = {
   links: Array<TypeLinkIn>,
+  isLoggedIn: boolean;
 };
 
 type State = {
@@ -132,6 +134,37 @@ export default class LinksTable extends React.Component
           this.waitThenCallback(callback);
         });
     });
+  }
+
+  setUserRating(rating: number, index: number) {
+    const { cookie } = document;
+    if (cookie != null) {
+      const username = cookie.match(/username=[^;]*;/);
+      if (username != null) {
+        if (username[0].split('=')[1].slice(0, -1) === '') {
+          return;
+        }
+      }
+    }
+    // const page = parseInt(getCookie('page'), 10) - 1 || 0;
+    this.links[index].userRating = rating;
+    const endpoint = `/ratelink/${this.lessonUID}/${this.topic}/${this.versionUID}/${this.links[index].hash}/${rating}`;
+
+    fetchPolyfill(endpoint, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.status === 'done') {
+          this.setState({ ratings: this.fillRatings() });
+        } else {
+          // console.log('failed to set rating:', data.message);
+        }
+      })
+      .catch(() => {});
   }
 
   renderLinks() {

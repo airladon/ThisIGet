@@ -1,4 +1,5 @@
 // @flow
+import SimpleLesson from './SimpleLesson';
 // import Fig from 'figureone';
 // import SimpleLessonContent from './SimpleLessonContent';
 // import { PresentationLessonContent } from './PresentationLessonContent';
@@ -6,18 +7,11 @@
 
 // const { Diagram } = Fig;
 
-class SimpleLesson {
-  content: Object;
-  type: 'simple' | 'singlePage' | 'presentation' | 'links';
-
+class LinksLesson extends SimpleLesson {
   constructor(content: Object) {
-    this.content = content;
-    this.type = 'simple';
-  }
-
-  initialize() {
-    this.content.initialize();
+    super(content);
+    this.type = 'links';
   }
 }
 
-export default SimpleLesson;
+export default LinksLesson;
