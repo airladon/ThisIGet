@@ -7,7 +7,8 @@ from check_row import check_row
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-import pdb
+
+
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
         return check_row(show, write, row, key, valueDict[valueKey])
@@ -38,6 +39,7 @@ def toBool(str):
     if (str.lower() == 'false'):
         return False
     return True
+
 
 # #######################################################################
 # Initialize
