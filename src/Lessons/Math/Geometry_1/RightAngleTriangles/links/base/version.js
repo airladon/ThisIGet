@@ -4,8 +4,7 @@
 var details = {
   uid: 'base',
   topic: 'links',
-  title: 'Base',
-  fullLesson: true,
+  type: 'generic',
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Right_triangle',
@@ -28,18 +27,3 @@ var details = {
 module.exports = {
   details,
 };
-
-/*
-  Links live in database
-
-  On load page,
-
-  * Links exist in version files in each lesson/links/version folder
-  * Script 1 - Checker:
-      - Find all links version files
-      - Scrape lessonUID, topic, versionUID (links), and individual links
-      - Check lesson/topic/version/link exists in vlinks table
-      - Check link exists in link table
-  * Script 2 - Updater:
-      - Same as script 1, but make changes to links and vlinks table
-*/
