@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const crypto = require('crypto');
 const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
 function entryPoints(buildMode) {
@@ -94,6 +95,7 @@ function updateDetailsAndVersions() {
             outStr = `${outStr}\n    {`;
             if (link.url != null) {
               outStr = `${outStr}\n      url: '${link.url}',`;
+              outStr = `${outStr}\n      hash: '${crypto.createHash('md5').update(link.url).digest('hex')}',`;
             }
             if (link.publisher != null) {
               outStr = `${outStr}\n      publisher: '${link.publisher}',`;

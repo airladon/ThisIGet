@@ -5,7 +5,8 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import LinksTable from '../../../../../../js/components/linksTable'
+import LinksTable from '../../../../../../js/components/linksTable';
+import version from './version';
 
 function makeTable(inputLinks: Array<{
     link: string;
@@ -35,13 +36,7 @@ class Content extends SimpleLessonContent {
   setContent() {
     this.sections = [
       <div key={0} className="simple_lesson__container">
-        <LinksTable links={[
-          {
-            link: 'https://en.wikipedia.org/wiki/Right_triangle',
-            description: 'Wikipedia',
-            uid: 'wikipedia',
-          },
-        ]} />
+        <LinksTable links={version.details.links} />
       </div>,
     ];
   }

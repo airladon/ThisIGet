@@ -1,15 +1,31 @@
 // @flow
 
 import * as React from 'react';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import '../../css/style.scss';
 // import img from '../../tile.png';
 
+type TypeLinkIn = {
+  url: string;
+  hash: string;
+  uid: string;
+  topic: string,
+  type: 'presentation' | 'generic' | 'video',
+  author?: string;
+  publisher?: string;
+};
+
+type TypeLink = {
+  url: string;
+  hash: string;
+  type: 'presentation' | 'generic' | 'video',
+  description: string;
+  numHighRatings: ?number;
+  userRating: ?number;
+};
+
 type Props = {
-  links: Array<{
-    link: string;
-    uid?: string;
-    description?: string;
-  }>,
+  links: Array<TypeLinkIn>,
 };
 
 type State = {
@@ -23,13 +39,31 @@ type State = {
 
 export default class LinksTable extends React.Component
                                     <Props, State> {
+  lessonUID: string;
+  versionUID: string;
+  topic: string;
+  callbackCount: number;
+  numLinks: number;
+  links: Array<TypeLink>;
+
   constructor(props: Props) {
     super(props);
-    // const path = window.location.pathname.split('/');
+    const path = window.location.pathname.split('/');
+    this.links = [];
+    props.links.forEach((link) => {
+      this.links.push({
+        url: link.url,
+        hash: link.hash,
+        type: link.type,
+        description: link.author || link.publisher || '',
+        numHighRatings: null,
+        userRating: null,
+      });
+    });
     /* eslint-disable prefer-destructuring */
-    // this.lessonUID = path.slice(-3, -2)[0];
-    // this.versionUID = path.slice(-1)[0];
-    // this.topic = path.slice(-2, -1)[0];
+    this.lessonUID = path.slice(-3, -2)[0];
+    this.versionUID = path.slice(-1)[0];
+    this.topic = path.slice(-2, -1)[0];
     // /* eslint-enable */
     // this.lessonDescription = getLessonDescription(this.lessonUID);
     // this.state = {
@@ -47,57 +81,51 @@ export default class LinksTable extends React.Component
     // }
   }
 
-  // waitThenCallback(callback: Function) {
-  //   this.callbackCount += 1;
-  //   if (this.callbackCount === this.numVersions) {
-  //     callback();
-  //   }
-  // }
+  waitThenCallback(callback: Function) {
+    this.callbackCount += 1;
+    if (this.callbackCount === this.props.links.length) {
+      callback();
+    }
+  }
 
-  // getLinkRatings(callback: Function) {
-  //   this.callbackCount = 0;
-  //   this.numLinks = 0;
-  //   Object.keys(this.topics).forEach((topicName) => {
-  //     const topic = this.topics[topicName];
-  //     this.numVersions += Object.keys(topic).length;
-  //     Object.keys(topic).forEach((versionUID) => {
-  //       const version = topic[versionUID];
-  //       const link = `/rating/${this.uid}/${topicName}/${versionUID}`;
-  //       fetchPolyfill(link, { credentials: 'same-origin' })
-  //         .then((response) => {
-  //           if (!response.ok) {
-  //             this.waitThenCallback(callback);
-  //             throw Error(response.statusText);
-  //           }
-  //           return response.json();
-  //         })
-  //         .then((data: {
-  //           status: 'ok' | 'fail',
-  //           message?: string,
-  //           userRating?: number,
-  //           aveRating?: number,
-  //           numRatings?: number,
-  //           numHighRatings: number,
-  //         }) => {
-  //           if (data.status === 'ok') {
-  //             version.aveRating = data.aveRating;
-  //             version.numRatings = data.numRatings;
-  //             version.numHighRatings = data.numHighRatings;
-  //             version.userRating = data.userRating;
-  //           }
-  //           this.waitThenCallback(callback);
-  //         })
-  //         .catch(() => {
-  //           this.waitThenCallback(callback);
-  //         });
-  //     });
-  //   });
-  // }
+  getLinkRatings(callback: Function) {
+    this.callbackCount = 0;
+    this.numLinks = 0;
+    this.links.forEach((link) => {
+      const endpoint = `/linkrating/${this.lessonUID}/${this.topic}/${this.versionUID}/${link.hash}`;
+      fetchPolyfill(endpoint, { credentials: 'same-origin' })
+        .then((response) => {
+          if (!response.ok) {
+            this.waitThenCallback(callback);
+            throw Error(response.statusText);
+          }
+          return response.json();
+        })
+        .then((data: {
+          status: 'ok' | 'fail',
+          message?: string,
+          userRating?: number,
+          aveRating?: number,
+          numRatings?: number,
+          numHighRatings: number,
+        }) => {
+          if (data.status === 'ok') {
+            link.numHighRatings = data.numHighRatings;
+            link.userRating = data.userRating;
+          }
+          this.waitThenCallback(callback);
+        })
+        .catch(() => {
+          this.waitThenCallback(callback);
+        });
+    });
+  }
+
   renderLinks() {
     const links = [];
-    this.props.links.forEach((link, index) => {
+    this.links.forEach((link, index) => {
       links.push(<tr key={index}>
-        <td>{link.link}</td>
+        <td>{link.url}</td>
         <td>{link.description}</td>
         <td>3</td>
         <td>4</td>
