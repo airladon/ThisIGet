@@ -172,7 +172,7 @@ flask db upgrade
 
 echo
 echo "${bold}${cyan}==== Loading Lessons =====${reset} "
-python ./tools/update_lessons_db.py
+./updatedb.sh
 
 echo
 echo "${bold}${cyan}==== Prepopulating =====${reset} "
