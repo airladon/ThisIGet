@@ -14,12 +14,11 @@ import LessonDescription from '../Lesson/lessonDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
 import Rating from './rating';
-import { getCookie } from '../tools/misc';
+import { getCookie, login } from '../tools/misc';
 import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
 import SinglePageLessonComponent from './singlePageLesson';
 import LinksLessonComponent from './linksLesson';
-import { login } from '../tools/misc';
 
 type Props = {
   lesson: Object;

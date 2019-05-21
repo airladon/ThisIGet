@@ -6,7 +6,9 @@
 
 .lesson__links_table__title_row {
   font-size: 0.8em;
-  color: color('white', 'dark');
+  color: color('white', 'darkest');
+  border-bottom: 1px solid color('white', 'light');
+  border-top: 1px solid color('white', 'light');
 }
 
 .lesson__links_table__link {
@@ -33,9 +35,15 @@
 .lesson__links_table__your_rating {
   width: 8em;
   text-align: center;
+  padding-bottom: 1em;
+  padding-top: 1em;
 }
 
 .lesson__links_table__total_rating {
   width: 6em;
   text-align: center;
+}
+
+.lesson__links_table__disabled {
+  color: color('grey', 'light');
 }

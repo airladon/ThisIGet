@@ -3,6 +3,7 @@
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Rating from './rating';
+import { login } from '../tools/misc';
 // import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
 // import img from '../../tile.png';
@@ -171,32 +172,59 @@ export default class LinksTable extends React.Component
   renderLinks() {
     const links = [];
     this.links.forEach((link, index) => {
-      console.log(this.state.ratings[index].userRating)
-      links.push(<tr key={index}>
-        <td className="lesson__links_table__description">{link.description}</td>
-        <td className="lesson__links_table__link">{link.url}</td>
-        <td className="lesson__links_table__your_rating"><Rating
+      let rating = <div className="lesson__links_table__disabled">{'-'}</div>;
+      if (this.props.isLoggedIn) {
+        rating = <Rating
           topic={this.topic}
           rating={this.state.ratings[index].userRating || 0}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
           index={index}
-        /></td>
-        <td className="lesson__links_table__total_rating">{this.state.ratings[index].numHighRatings || '-'}</td>
+        />;
+      }
+      let numHighRatings = <div className="lesson__links_table__disabled">
+        {'-'}
+      </div>;
+      if (this.state.ratings[index].numHighRatings) {
+        numHighRatings = this.state.ratings[index].numHighRatings;
+      }
+      const description = <a
+          className=""
+          href={link.url}
+          rel='noreferrer noopener'
+          target="_blank"
+        >
+        {link.description}
+      </a>;
+      links.push(<tr key={index}>
+        <td className="lesson__links_table__description">{description}</td>
+        <td className="lesson__links_table__link">{link.url}</td>
+        <td className="lesson__links_table__your_rating">{rating}</td>
+        <td className="lesson__links_table__total_rating">{numHighRatings}</td>
       </tr>);
     });
     return links;
   }
 
+  yourRatingTitle() {
+    let title = <div>
+      <span className="rating__login" onClick={login}>{'Login'}</span>
+      {' for your rating'}
+    </div>;
+    if (this.props.isLoggedIn) {
+      title = 'Your\nRating';
+    }
+    return title;
+  }
+
   render() {
     // const props = Object.assign({}, this.props);
-
     return <table className="lesson__links_table">
       <tbody>
         <tr className="lesson__links_table__title_row">
         <td className="lesson__links_table__description_title lesson__links_table__description">Description</td>
           <td className="lesson__links_table__link lesson__links_table__link_title">Link</td>
-          <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{'Your\nRating'}</td>
+          <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
           <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
