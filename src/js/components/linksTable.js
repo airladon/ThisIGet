@@ -25,6 +25,7 @@ type TypeLink = {
   description: string;
   numHighRatings: ?number;
   userRating: ?number;
+  userRatingIsHigh: boolean;
 };
 
 type Props = {
@@ -60,6 +61,7 @@ export default class LinksTable extends React.Component
         description: link.author || link.publisher || '',
         numHighRatings: null,
         userRating: null,
+        userRatingIsHigh: false,
       });
     });
     /* eslint-disable prefer-destructuring */
@@ -130,6 +132,7 @@ export default class LinksTable extends React.Component
             /* eslint-disable no-param-reassign */
             link.numHighRatings = data.numHighRatings;
             link.userRating = data.userRating;
+            link.userRatingIsHigh = data.userRating > 3 ? true : false;
             /* eslint-enable */
           }
           this.waitThenCallback(callback);
@@ -154,6 +157,26 @@ export default class LinksTable extends React.Component
     this.links[index].userRating = rating;
     const endpoint = `/ratelink/${this.lessonUID}/${this.topic}/${this.versionUID}/${this.links[index].hash}/${rating}`;
 
+    let updateState = false;
+    if (this.links[index].userRatingIsHigh && rating < 4) {
+      if (this.links[index].numHighRatings != null) {
+        this.links[index].numHighRatings -= 1;
+      }
+      this.links[index].userRatingIsHigh = false;
+      updateState = true;
+    }
+    if (this.links[index].userRatingIsHigh === false && rating > 3) {
+      if (this.links[index].numHighRatings != null) {
+        this.links[index].numHighRatings += 1;
+      } else {
+        this.links[index].numHighRatings = 1;
+      }
+      this.links[index].userRatingIsHigh = true;
+      updateState = true;
+    }
+    if (updateState) {
+      this.setState({ ratings: this.fillRatings() });
+    }
     fetchPolyfill(endpoint, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
