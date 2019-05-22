@@ -1,12 +1,13 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import DropDownButtonBase from './dropDownButtonBase';
 
-const { round } = Fig.tools.math;
+// const { round } = Fig.tools.math;
 
 export type TypeTopicButtonListItem = {
-  label: string;
+  label: string | React.Element<'div'>;
+  userRating?: number;
   rating?: number;
   numReviews?: number;
   numHighRatings?: number;
@@ -14,6 +15,7 @@ export type TypeTopicButtonListItem = {
   link?: Function | string;
   active?: boolean;
   separator?: boolean;
+  type?: 'presentation' | 'singlePage' | 'generic' | 'video';
 };
 
 type Props = {
@@ -32,20 +34,27 @@ export default class TopicButton extends React.Component <Props> {
       return listItem.label;
     }
     let numReviews = listItem.numReviews || 0;
-    let rating = listItem.rating || 0;
+    // let rating = listItem.rating || 0;
     let numHighRatings = listItem.numHighRatings || 0;
+    let userRating = '';
     if (numReviews > 0) {
       // rating = '\u2605'.repeat(Math.round(listItem.rating || 0));
       // if (rating === '') {
       //   rating = '-';
       // }
-      rating = (rating).toLocaleString('en');
+      // rating = (rating).toLocaleString('en');
       numReviews = `${(numReviews).toLocaleString('en')}`;
-      numHighRatings = `${round(parseInt(numHighRatings, 10) / parseInt(numReviews, 10) * 100, 0)}%`;
+      // numHighRatings = `${round(parseInt(numHighRatings, 10)
+      // / parseInt(numReviews, 10) * 100, 0)}%`;
+    }
+    if (listItem.userRating != null && listItem.userRating > 0) {
+      for (let i = 0; i < listItem.userRating; i += 1) {
+        userRating = `${userRating}\u2605`;
+      }
     }
     if (numReviews === 0) {
       numReviews = '';
-      rating = '';
+      // rating = '';
       numHighRatings = '';
       // highRatingsSubText = '';
     }
@@ -57,11 +66,23 @@ export default class TopicButton extends React.Component <Props> {
     if (listItem.description != null) {
       ({ description } = listItem);
     }
+    let typeClass = 'topic_button__type_icon_generic';
+    const { type } = listItem;
+    if (type === 'presentation') {
+      typeClass = 'topic_button__type_icon_presentation';
+    } else if (type === 'singlePage') {
+      typeClass = 'topic_button__type_icon_singlePage';
+    }
+
     return <table className="topic_button__listItem">
       <tbody>
       <tr>
+        <td className="topic_button__type">
+          <div className={typeClass}>
+          </div>
+        </td>
         <td className="topic_button__label">
-          <div className="topic_button__label_title">
+          <div className="topic_button__label_text">
             {label}
           </div>
           <div className="topic_button__label_description">
@@ -70,17 +91,12 @@ export default class TopicButton extends React.Component <Props> {
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
-            {rating}
+            {userRating}
           </div>
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
             {numHighRatings}
-          </div>
-        </td>
-        <td className="topic_button__rating">
-          <div className="topic_button__rating_value">
-            {numReviews}
           </div>
         </td>
       </tr>
@@ -93,33 +109,28 @@ export default class TopicButton extends React.Component <Props> {
     return <table className="topic_button__listItem topic_button_listItem_title">
       <tbody>
       <tr>
-        <td className="topic_button__label">
+        <td className="topic_button__label" colSpan="2">
           <div className="topic_button__label_title">
             Version
           </div>
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_num_reviews">
-            Ave
+            Your
           </div>
           <div className="topic_button__rating_num_reviews">
             Rating
           </div>
         </td>
         <td className="topic_button__rating">
-          <div className="topic_button__rating_value">
-            {'\u2605\u2605\u2605\u2605'}
+          <div className="topic_button__rating_num_reviews">
+            {'Total'}
           </div>
           <div className="topic_button__rating_num_reviews">
-            {'or more'}
-          </div>
-        </td>
-        <td className="topic_button__rating">
-          <div className="topic_button__rating_num_reviews">
-            Num
-          </div>
-          <div className="topic_button__rating_num_reviews">
-            Ratings
+            {
+            //  '\u2605\u2605\u2605\u2605'
+            'Ratings ≥4'
+            }
           </div>
         </td>
       </tr>
@@ -130,15 +141,15 @@ export default class TopicButton extends React.Component <Props> {
   render() {
     const props = Object.assign({}, this.props);
     const listItems = [];
-    let addTitle = false;
-    props.list.forEach((listElement) => {
-      if (listElement.numReviews != null && listElement.numReviews > 0) {
-        addTitle = true;
-      }
-    });
-    if (addTitle) {
-      listItems.push({ label: this.renderTitle() });
-    }
+    // let addTitle = true;
+    // props.list.forEach((listElement) => {
+    //   if (listElement.numReviews != null && listElement.numReviews > 0) {
+    //     addTitle = true;
+    //   }
+    // });
+    // if (addTitle) {
+    listItems.push({ label: this.renderTitle() });
+    // }
     props.list.forEach((listElement) => {
       listItems.push({
         label: this.renderListLabel(listElement),
@@ -154,6 +165,7 @@ export default class TopicButton extends React.Component <Props> {
       xAlign={props.xAlign}
       list={listItems}
       selected={props.selected}
+      classes='topic_button'
     />;
   }
 }

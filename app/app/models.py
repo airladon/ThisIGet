@@ -144,7 +144,7 @@ class Lessons(db.Model):
     topics = db.relationship('Topics', backref='lesson', lazy='dynamic')
 
     def __repr__(self):
-        return '<Lessons {}>'.format(self.title)
+        return '<Lesson {}/{}>'.format(self.path, self.uid)
 
 
 class Topics(db.Model):
@@ -157,7 +157,8 @@ class Topics(db.Model):
     # ratings = db.relationship('AllRatings', backref='topic', lazy='dynamic')
 
     def __repr__(self):
-        return '<Topics {}>'.format(self.name)
+        return '<Topic: {}/{}/{}>'.format(
+            self.lesson.path, self.lesson.uid, self.name)
 
 
 class Versions(db.Model):
@@ -178,8 +179,32 @@ class Versions(db.Model):
     # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
 
     def __repr__(self):
-        return '<Versions {}>'.format(self.title)
+        return '<Version: {}/{}({})/{}({})/{}({})>'.format(
+            self.topic.lesson.path,
+            self.topic.lesson.uid, self.topic.lesson.id,
+            self.topic.name, self.topic.id,
+            self.uid, self.id)
 
+
+class Links(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    url = db.Column(db.String(512), index=True)
+    author = db.Column(db.String(128), index=True)
+    publisher = db.Column(db.String(128), index=True)
+    pageType = db.Column(db.String(128), index=True)
+    url_hash = db.Column(db.String(32))
+
+    def __repr__(self):
+        return '<Link: {}>'.format(self.url)
+
+
+class LinkVersions(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    version_id = db.Column(db.Integer, db.ForeignKey('versions.id'))
+    link_id = db.Column(db.Integer, db.ForeignKey('links.id'))
+
+    def __repr__(self):
+        return '<Link Version: {}/{}>'.format(self.version, self.link.url)
 
 # class Versions(db.Model):
 #     id = db.Column(db.Integer, primary_key=True)
@@ -221,6 +246,18 @@ class Ratings(db.Model):
             self.user.username, self.rating)
 
 
+class LinkRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    link_version_id = db.Column(db.Integer, db.ForeignKey('link_versions.id'))
+    rating = db.Column(db.Integer, index=True)
+
+    def __repr__(self):
+        return '<Rating {} {} {}>'.format(
+            self.link_versions.url,
+            self.user.username, self.rating)
+
+
 class AllRatings(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
@@ -233,6 +270,19 @@ class AllRatings(db.Model):
     def __repr__(self):
         return '<Rating {} {} {} {}>'.format(
             self.version.topic.lesson, self.version.topic, self.version,
+            self.user.username, self.rating)
+
+
+class AllLinkRatings(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
+    link_version_id = db.Column(db.Integer, db.ForeignKey('link_versions.id'))
+    rating = db.Column(db.Integer, index=True)
+    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
+
+    def __repr__(self):
+        return '<Rating {} {} {} {}>'.format(
+            self.timestamp, self.link_versions.url,
             self.user.username, self.rating)
 
 

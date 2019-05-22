@@ -14,10 +14,11 @@ import LessonDescription from '../Lesson/lessonDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
 import Rating from './rating';
-import { getCookie } from '../tools/misc';
+import { getCookie, login } from '../tools/misc';
 import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
 import SinglePageLessonComponent from './singlePageLesson';
+import LinksLessonComponent from './linksLesson';
 
 type Props = {
   lesson: Object;
@@ -49,6 +50,7 @@ type State = {
         aveRating: number,
         numRatings: number,
         numHighRatings: number,
+        userRating: number,
       },
     }
   },
@@ -121,6 +123,7 @@ export default class LessonComponent extends React.Component
             aveRating: version.aveRating,
             numRatings: version.numRatings,
             numHighRatings: version.numHighRatings,
+            userRating: version.userRating,
           };
         });
       });
@@ -239,6 +242,9 @@ export default class LessonComponent extends React.Component
           }
           const { description } = version;
           const { fullLesson } = version;
+          const { type } = version;
+          const rating = this.state.ratings[topicName][versionUID];
+          let { userRating } = rating;
 
           if (!(topicName in topics)) {
             topics[topicName] = {};
@@ -248,18 +254,19 @@ export default class LessonComponent extends React.Component
           if (this.versionUID === versionUID
             && this.topic === topicName) {
             active = true;
+            ({ userRating } = this.state);
           }
-
-          const rating = this.state.ratings[topicName][versionUID];
           topics[topicName][versionUID] = {
             label,
             link,
+            userRating,
             rating: rating.aveRating,
             numReviews: rating.numRatings,
             numHighRatings: rating.numHighRatings,
             description,
             active,
             fullLesson,
+            type,
           };
         });
       });
@@ -320,9 +327,21 @@ export default class LessonComponent extends React.Component
           }
         });
         this.key += 1;
-        if (partialLessonCount > 0 && name !== 'quiz') {
+        if (partialLessonCount > 0 && name === 'explanation') {
           listItems.splice(fullLessonCount, 0, {
-            label: 'Lesson Portion',
+            label: <div className="topic_button__portion_separator">
+              <div className="topic_button__portion_separator_label">
+                {'Portion of Lesson'}
+              </div>
+            </div>,
+            separator: true,
+          });
+          listItems.splice(0, 0, {
+            label: <div className="topic_button__portion_separator">
+              <div className="topic_button__portion_separator_label">
+                {'Full Lesson'}
+              </div>
+            </div>,
             separator: true,
           });
         }
@@ -376,9 +395,28 @@ export default class LessonComponent extends React.Component
         lesson={this.lesson}
       />;
     }
+    if (this.lesson.type === 'links') {
+      return <LinksLessonComponent
+        lesson={this.lesson}
+        isLoggedIn={this.props.isLoggedIn}
+      />;
+    }
     return <SimpleLessonComponent
       lesson={this.lesson}
     />;
+  }
+
+  ratingLabel() {
+    const topicName = this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
+    if (this.props.isLoggedIn) {
+      if (this.lesson.type === 'links') {
+        return 'Are these links helpful?';
+      }
+      return `Is this ${topicName} helpful?`;
+    }
+    return <div>
+      <span className="rating__login" onClick={login}>Login</span> to rate {topicName}:
+    </div>;
   }
 
   render() {
@@ -399,6 +437,7 @@ export default class LessonComponent extends React.Component
           rating={this.state.userRating}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
+          label={this.ratingLabel()}
         />
       </div>
       {this.renderLesson()}

@@ -191,6 +191,7 @@ export default class LessonDescription {
           .then((data: {
             status: 'ok' | 'fail',
             message?: string,
+            userRating?: number,
             aveRating?: number,
             numRatings?: number,
             numHighRatings: number,
@@ -199,6 +200,7 @@ export default class LessonDescription {
               version.aveRating = data.aveRating;
               version.numRatings = data.numRatings;
               version.numHighRatings = data.numHighRatings;
+              version.userRating = data.userRating;
             }
             this.waitThenCallback(callback);
           })

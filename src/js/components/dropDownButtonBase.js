@@ -16,6 +16,7 @@ type Props = {
     separator?: boolean,
     }>;
   selected?: boolean;
+  classes?: string;
 };
 
 export default class DropDownButtonBase extends React.Component
@@ -113,6 +114,9 @@ export default class DropDownButtonBase extends React.Component
     let buttonClasses = 'dropdown_button_container';
     if (props.selected != null && props.selected === true) {
       buttonClasses = `${buttonClasses} dropdown_button_selected`;
+    }
+    if (props.classes) {
+      buttonClasses = `${buttonClasses} ${props.classes}`;
     }
 
     this.id = props.id || generateUniqueId('id__dropdown_button');

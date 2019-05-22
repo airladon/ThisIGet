@@ -4,8 +4,8 @@
 var details = {
   uid: 'pythagorus_proof',
   topic: 'explanation',
-  title: 'Pythagorean Theorem Derivation',
-  description: '',
+  title: 'Derivation',
+  description: 'Pythagorean Theorem Only',
   fullLesson: false,
   type: 'singlePage',
 };

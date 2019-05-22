@@ -19,7 +19,7 @@ from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
-from app.models import Users
+from app.models import Users, Links, LinkVersions, LinkRatings, AllLinkRatings
 from app.models import Ratings, AllRatings
 from app.models import Lessons, Versions, Topics
 # from functools import reduce
@@ -346,26 +346,59 @@ def isInt(s):
         return False
 
 
+def getVersion(lesson_uid, topic_name, version_uid):
+    # lesson = Lessons.query.filter_by(uid=lesson_uid).first()
+    # if lesson is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'lesson does not exist'})
+    # topic = Topics.query.filter_by(
+    #     lesson=lesson, name=topic_name).first()
+    # if topic is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'topic does not exist'})
+    # version = Versions.query.filter_by(
+    #     topic_id=topic.id, uid=version_uid).first()
+    # if version is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'version does not exist'})
+    version = db.session.query(Versions).join(Topics).join(Lessons).filter(
+        Lessons.uid == lesson_uid,
+        Topics.name == topic_name,
+        Versions.uid == version_uid).first()
+    if version is None:
+        return 'lesson/topic/version does not exist'
+        # return jsonify(
+        #     {'status': 'fail', 'message': 'lesson/topic/version exist'})
+    return version
+
+
+def getLinkVersion(version_id, url_hash):
+    link_version = db.session.query(LinkVersions).join(Links).filter(
+        Links.url_hash == url_hash,
+        Versions.id == version_id).first()
+    # link = Links.query.filter_by(url_hash=url_hash)
+    # if link is None:
+    #     return jsonify(
+    #         {'status': 'fail', 'message': 'link does not exist'})
+
+    # link_version = LinkVersions.query.filter_by(
+    #     version_id=version_uid, link_id=link.id)
+    if link_version is None:
+        return 'link/version does not exist'
+        # return jsonify(
+        #     {'status': 'fail', 'message': 'link/version does not exist'})
+    return link_version
+
+
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic_name, version_uid, rating_value):
-    print(lesson_uid, topic_name, version_uid, rating_value)
+    # print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'
     if current_user.is_authenticated:
-        lesson = Lessons.query.filter_by(uid=lesson_uid).first()
-        if lesson is None:
-            return jsonify(
-                {'status': 'fail', 'message': 'lesson does not exist'})
-        topic = Topics.query.filter_by(
-            lesson=lesson, name=topic_name).first()
-        if topic is None:
-            return jsonify(
-                {'status': 'fail', 'message': 'topic does not exist'})
-        version = Versions.query.filter_by(
-            topic_id=topic.id, uid=version_uid).first()
-        if version is None:
-            return jsonify(
-                {'status': 'fail', 'message': 'version does not exist'})
+        version = getVersion(lesson_uid, topic_name, version_uid)
+        if isinstance(version, str):
+            return jsonify({'status': 'fail', 'message': version})
 
         user_rating = Ratings.query.filter_by(
             version=version, user=current_user).first()
@@ -373,12 +406,57 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
             user_rating = Ratings(user=current_user, version=version)
             db.session.add(user_rating)
         if rating_value not in ['1', '2', '3', '4', '5']:
+            return jsonify({'status': 'fail', 'message': 'invalid rating'})
+        if user_rating.rating != rating_value:
+            user_rating.rating = rating_value
+
+        generic_rating = AllRatings(user=current_user, version=version)
+        generic_rating.timestamp = datetime.datetime.now()
+        generic_rating.rating = rating_value
+
+        page = request.args.get('page')
+        pages = request.args.get('pages')
+        if page is not None and pages is not None \
+           and isInt(page) and isInt(pages) \
+           and int(page) < int(pages):
+            generic_rating.page = page
+            generic_rating.pages = pages
+
+        db.session.add(generic_rating)
+        db.session.commit()
+        status = 'done'
+    return jsonify({'status': status})
+
+
+@check_confirmed
+@app.route('/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')  # noqa
+def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
+    # print(lesson_uid, topic_name, version_uid, rating_value)
+    status = 'not logged in'
+    if current_user.is_authenticated:
+        version = getVersion(lesson_uid, topic_name, version_uid)
+        if isinstance(version, str):
+            return jsonify({'status': 'fail', 'message': version})
+
+        link_version = getLinkVersion(version.id, url_hash)
+        if isinstance(link_version, str):
+            return jsonify({'status': 'fail', 'message': link_version})
+
+        user_rating = LinkRatings.query.filter_by(
+            link_version_id=link_version.id, user_id=current_user.id).first()
+        if user_rating is None:
+            user_rating = LinkRatings(
+                user_id=current_user.id, link_version_id=link_version.id)
+            db.session.add(user_rating)
+
+        if rating_value not in ['1', '2', '3', '4', '5']:
             return jsonify(
                 {'status': 'fail', 'message': 'invalid rating'})
         if user_rating.rating != rating_value:
             user_rating.rating = rating_value
 
-        generic_rating = AllRatings(user=current_user, version=version)
+        generic_rating = AllLinkRatings(
+            user_id=current_user.id, link_version_id=link_version.id)
         generic_rating.timestamp = datetime.datetime.now()
         generic_rating.rating = rating_value
 
@@ -404,17 +482,9 @@ def get_rating(lesson_uid, topic_name, version_uid):
     num_high_ratings = 0
     user_rating_value = 'not logged in'
 
-    lesson = Lessons.query.filter_by(uid=lesson_uid).first()
-    if lesson is None:
-        return jsonify({'status': 'fail', 'message': 'lesson does not exist'})
-    topic = Topics.query.filter_by(
-        lesson=lesson, name=topic_name).first()
-    if topic is None:
-        return jsonify({'status': 'fail', 'message': 'topic does not exist'})
-    version = Versions.query.filter_by(
-        topic_id=topic.id, uid=version_uid).first()
-    if version is None:
-        return jsonify({'status': 'fail', 'message': 'version does not exist'})
+    version = getVersion(lesson_uid, topic_name, version_uid)
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
 
     ratings = Ratings.query.filter_by(version=version).all()
     if ratings is None:
@@ -433,6 +503,53 @@ def get_rating(lesson_uid, topic_name, version_uid):
     if current_user.is_authenticated:
         user_rating = Ratings.query.filter_by(
             user=current_user, version=version).first()
+        if user_rating is None:
+            user_rating_value = 'not rated'
+        else:
+            user_rating_value = user_rating.rating
+    return jsonify({
+        'status': 'ok',
+        'message': '',
+        'userRating': user_rating_value,
+        'numRatings': num_ratings,
+        'aveRating': ave_rating,
+        'numHighRatings': num_high_ratings})
+
+
+@check_confirmed
+@app.route('/linkrating/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>')
+def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
+    num_ratings = 0
+    ave_rating = 0
+    num_high_ratings = 0
+    user_rating_value = 'not logged in'
+
+    version = getVersion(lesson_uid, topic_name, version_uid)
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
+
+    link_version = getLinkVersion(version.id, url_hash)
+    if isinstance(version, str):
+        return jsonify({'status': 'fail', 'message': version})
+
+    ratings = LinkRatings.query.filter_by(
+        link_version_id=link_version.id).all()
+    if ratings is None:
+        ratings = []
+    num_ratings = len(ratings)
+    sum_ratings = 0
+    num_high_ratings = 0
+    for r in ratings:
+        sum_ratings += r.rating
+        if r.rating >= 4:
+            num_high_ratings += 1
+    ave_rating = 0
+    if num_ratings > 0:
+        ave_rating = round(sum_ratings / num_ratings, 1)
+
+    if current_user.is_authenticated:
+        user_rating = LinkRatings.query.filter_by(
+            user_id=current_user.id, link_version_id=link_version.id).first()
         if user_rating is None:
             user_rating_value = 'not rated'
         else:

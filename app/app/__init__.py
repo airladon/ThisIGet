@@ -10,6 +10,7 @@ import os
 app = Flask(__name__)
 app.config.from_object(Config)
 SELF = "'self'"
+
 if not os.environ.get('LOCAL_PRODUCTION') \
    or os.environ.get('LOCAL_PRODUCTION') != 'DISABLE_SECURITY':
     talisman = Talisman(
