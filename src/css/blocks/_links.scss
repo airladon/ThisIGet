@@ -87,6 +87,7 @@
   background-repeat: no-repeat;
   background-position: center;
   min-width: 4em;
+  display: block;
 }
 
 .lesson__links_table__icon_presentation {
@@ -112,7 +113,7 @@
 }
 
 .lesson__links_table__disclaimer_email:hover {
-  color: color('blue', 'lighter');
+  color: color('blue', 'dark');
   text-decoration: none;
 }
 

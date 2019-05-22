@@ -255,8 +255,13 @@ export default class LinksTable extends React.Component
       }
       links.push(<tr key={index}>
         <td className="lesson__links_table__type">
-          <div className={typeClass}>
-          </div>
+          <a
+            className={typeClass}
+            href={link.url}
+            rel='noreferrer noopener'
+            target="_blank"
+          >
+          </a>
         </td>
         <td className="lesson__links_table__title">{title}</td>
         {description}
@@ -270,7 +275,7 @@ export default class LinksTable extends React.Component
   yourRatingTitle() {
     let title = <div>
       <span className="rating__login" onClick={login}>{'Login'}</span>
-      {' for your rating'}
+      {' to rate links'}
     </div>;
     if (this.props.isLoggedIn) {
       title = 'Your\nRating';
