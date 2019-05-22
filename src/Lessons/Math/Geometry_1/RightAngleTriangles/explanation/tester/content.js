@@ -17,11 +17,18 @@ class Content extends SimpleLessonContent {
 
   setContent() {
     window.lessonFunctions = {
-      tester: () => { console.log('asdf'); },
+      tester: () => {
+        const element = document.getElementById('testerqr');
+        if (element != null) {
+          element.classList.toggle('testerqr_hide')
+        }
+      },
     };
     this.sections = [
       <div key={0} className="simple_lesson__container">
       <div className="markdown" dangerouslySetInnerHTML={ { __html: content } }/>
+        <div id="testerqr" className="testerqr testerqr_hide">
+        </div>
         <div>
           hello
         </div>
