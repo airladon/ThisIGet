@@ -24,6 +24,13 @@ var details = {
       hash: 'c5f008a4c8193905f1a6b4ffaff9fb00',
       publisher: 'Math Planet',
       type: 'generic',
+      description: 'Theorem and examples.',
+    },
+    {
+      url: 'https://www.khanacademy.org/math/basic-geo/basic-geometry-pythagorean-theorem/geo-pythagorean-theorem/v/the-pythagorean-theorem',
+      publisher: 'Khan Academy',
+      type: 'video',
+      description: 'Introduction with examples',
     },
   ],
 };

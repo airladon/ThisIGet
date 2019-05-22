@@ -80,7 +80,7 @@
   height: 20px;
   background-repeat: no-repeat;
   background-position: center;
-  width: 4em;
+  min-width: 4em;
 }
 
 .lesson__links_table__icon_presentation {
@@ -90,7 +90,7 @@
 .lesson__links_table__icon_generic,
 .lesson__links_table__icon_single_page {
   background-image: $lesson-singlePage;
-  width: 3em;
+  min-width: 3em;
 }
 
 .lesson__links_table__icon_video {
