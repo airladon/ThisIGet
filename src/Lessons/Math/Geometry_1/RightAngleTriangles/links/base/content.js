@@ -22,7 +22,7 @@ class Content extends SimpleLessonContent {
           {'The web sites at these links are not administered by This I Get, and so we can\'t control their availability, accuracy or actions taken when you visit.'}
         </p>
         <p>
-          {'If you visit a link, then you can rate the link for your own future reference, and for others that haven\'t yet visited it. If the link is broken (maybe it has changed) or the content has changed and is no longer appropriate, then please let us know at '}
+          {'If you visit a link, then you can rate the link for your own future reference, and for others that haven\'t yet visited it. If the link is broken or the content has changed and is no longer appropriate, then please let us know at '}
           <a
             href="mailto:feedback@thisiget.com?Subject=Feedback"
             className="lesson__links_table__disclaimer_email"
