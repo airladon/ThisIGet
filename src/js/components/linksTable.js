@@ -220,7 +220,7 @@ export default class LinksTable extends React.Component
         rating = <Rating
           topic={this.topic}
           rating={userRatingValue}
-          ratingCallback={this.setUserRating.bind(this)}
+          ratingCallback={(r, i) => { this.setUserRating(r, i); }}
           isLoggedIn={this.props.isLoggedIn}
           index={index}
         />;
