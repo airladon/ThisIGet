@@ -106,6 +106,9 @@ function updateDetailsAndVersions() {
             if (link.type != null) {
               outStr = `${outStr}\n      type: '${link.type}',`;
             }
+            if (link.description != null) {
+              outStr = `${outStr}\n      description: '${link.description}',`;
+            }
             outStr = `${outStr}\n    },`;
           });
         }

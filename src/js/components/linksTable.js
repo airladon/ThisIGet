@@ -64,7 +64,7 @@ export default class LinksTable extends React.Component
         title: link.author || link.publisher || '',
         description: link.description || '',
         numHighRatings: null,
-        userRating: null,
+        userRating: 0,
         userRatingIsHigh: false,
       });
     });
@@ -145,7 +145,7 @@ export default class LinksTable extends React.Component
           if (data.status === 'ok') {
             /* eslint-disable no-param-reassign */
             link.numHighRatings = data.numHighRatings;
-            link.userRating = data.userRating;
+            link.userRating = data.userRating || 0;
             link.userRatingIsHigh = userRatingIsHigh;
             /* eslint-enable */
           }
@@ -213,9 +213,13 @@ export default class LinksTable extends React.Component
     this.links.forEach((link, index) => {
       let rating = <div className="lesson__links_table__disabled">{'-'}</div>;
       if (this.props.isLoggedIn) {
+        let userRatingValue = this.state.ratings[index].userRating;
+        if (typeof userRatingValue !== 'number') {
+          userRatingValue = 0;
+        }
         rating = <Rating
           topic={this.topic}
-          rating={this.state.ratings[index].userRating || 0}
+          rating={userRatingValue}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}
           index={index}

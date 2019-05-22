@@ -429,8 +429,7 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
 
 
 @check_confirmed
-@app.route(
-    '/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')
+@app.route('/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')  # noqa
 def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     # print(lesson_uid, topic_name, version_uid, rating_value)
     status = 'not logged in'

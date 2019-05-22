@@ -12,16 +12,17 @@ var details = {
       publisher: 'Wikipedia',
       type: 'generic',
       description: 'Right Angle Triangles.',
-      // description: 'Complete coverage of Right Angle Triangle',
     },
     {
       url: 'https://en.wikipedia.org/wiki/Pythagorean_theorem',
+      hash: '695bf4125198718b2f47983f3d051038',
       publisher: 'Wikipedia',
       type: 'generic',
       description: 'Pythagorean Theorm.',
     },
     {
       url: 'http://jwilson.coe.uga.edu/EMT668/EMT668.Student.Folders/HeadAngela/essay1/Pythagorean.html',
+      hash: '4c24044beeca857cddbd5f4fde37d78f',
       author: 'Angie Head',
       type: 'generic',
       description: 'Several different theorem proofs.',
@@ -42,6 +43,7 @@ var details = {
     },
     {
       url: 'https://www.khanacademy.org/math/basic-geo/basic-geometry-pythagorean-theorem/geo-pythagorean-theorem/v/the-pythagorean-theorem',
+      hash: 'ed1f250866b93b59c5a7c669a2ca6ae7',
       publisher: 'Khan Academy',
       type: 'video',
       description: 'Introduction with examples.',
