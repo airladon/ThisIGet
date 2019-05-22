@@ -68,8 +68,8 @@ If we used hundreds or thousands of triangles the difference between these prope
 
 $$\color{b}{Area_{circle}}\color{black}=\textstyle{\frac{1}{2}}\color{r}r\color{g}2\pi r$$
 
-Which we can simply to:
+Which we can simpilfy to:
 
-$$\color{b}\bbox[20px,border:1px solid red] {Area=\pi r^2}$$
+$$\color{b}\bbox[20px,border:1px solid red]{Area=\pi r^2}$$
 
 ![](./07_Circle.png)

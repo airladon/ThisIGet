@@ -407,14 +407,15 @@ export default class LessonComponent extends React.Component
   }
 
   ratingLabel() {
+    const topicName = this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
     if (this.props.isLoggedIn) {
       if (this.lesson.type === 'links') {
-        return 'Are this links helpful?';
+        return 'Are these links helpful?';
       }
-      return `Is this ${this.topic} helpful?`;
+      return `Is this ${topicName} helpful?`;
     }
     return <div>
-      <span className="rating__login" onClick={login}>Login</span> to rate {this.topic}:
+      <span className="rating__login" onClick={login}>Login</span> to rate {topicName}:
     </div>;
   }
 
