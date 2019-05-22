@@ -3,9 +3,8 @@
 async function linkparser(callback, source, map, meta) {
   const lines = source.split('\n').map(l => l.trim());
   const outLines = [];
+  let counter = Math.floor(Math.random() * 1000000000);
   lines.forEach((line) => {
-    // const splits = line.split('[[');
-    // splits.forEach((split) => {
     const links = line.split(/(\[\[[^\]]*\]\]\(\([^)]*\)\))/g);
     const newLine = [];
     links.forEach((link, index) => {
@@ -19,50 +18,22 @@ async function linkparser(callback, source, map, meta) {
       if (parametersToUse == null) {
         parametersToUse = '';
       }
-      console.log(label);
-      console.log(parameters);
-      newLine.push(`<html><a href="javascript:window.lessonFunctions.${method}(${parametersToUse});" style="color:${color};">${label}</a></html>`);
+      // console.log(label);
+      // console.log(parameters);
+      const id = `id__lesson__simple_qr__link_${counter}`;
+      counter += 1;
+      newLine.push(`<html><a href="javascript:window.lessonFunctions.${method}('${id}',${parametersToUse});" style="color:${color};" id="${id}">${label}</a></html>`);
     });
-    // const newLine = links.join();
     outLines.push(newLine.join(''));
   });
-  console.log(outLines)
-  // for ([i, line] of lines.entries()) {
-  //   const split = line.split('$$');
-  //   if (split.length === 1) {
-  //     outLines.push(line);
-  //     continue;
-  //   }
-  //   const inlineStart = '';
-  //   const inlineEnd = '';
-  //   for ([index, text] of split.entries()) {
-  //     if (index % 2 === 0) {
-  //       continue;
-  //     }
-  //     await mjAPI.typeset({
-  //       math: text,
-  //       format: 'TeX', // or "inline-TeX", "MathML"
-  //       svg: true,      // or svg:true, or html:true
-  //       // equationNumbers: 'AMS',
-  //     }).then((data) => {
-  //       if (data.errors) {
-  //         split[index] = `Data Errors ${data.errors}`;
-  //       } else {
-  //         split[index] = `${inlineStart}${data.svg}${inlineEnd}`;
-  //       }
-  //     }).catch((err) => {
-  //       split[index] = 'Error ${err}';
-  //     });
-  //   };
-  //   const combined = split.join('');
-  //   outLines.push(combined)
-  // };
+  // console.log(outLines);
   callback(null, outLines.join('\n'), map, meta);
 }
 
 // eslint-disable-next-line func-names
 module.exports = function (source, map, meta) {
   let callback = (a, b) => {
+    // eslint-disable-next-line no-console
     console.log(b);
   };
   if (this.async != null) {
