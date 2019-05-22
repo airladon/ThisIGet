@@ -57,6 +57,12 @@
   vertical-align: middle;
 }
 
+.lesson__links_table__your_rating .rating__stars_empty {
+  background-image: $star-empty-777777;
+  background-size: cover;
+  width: 100%;
+  height: 100%;
+}
 // .lesson__links_table__your_rating .rating__label {
 //   margin-right: 0;
 // }
@@ -112,36 +118,62 @@
 
 @media (max-width: 500px) {
   .lesson__links_table__description {
-    visibility: hidden;
-    overflow: hidden;
-    padding-left: 0;
-    padding-right: 0;
-    font-size: 0;
-    width: 0;
+    // visibility: hidden;
+    // overflow: hidden;
+    // padding-left: 0;
+    // padding-right: 0;
+    // font-size: 0;
+    // width: 0;
     // word-break: normal;
+    // display: none;
+    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
   }
 
   .lesson__links_table__description_title {
-    padding-left: 0;
-    visibility: hidden;
-    overflow: hidden;
-    font-size: 0;
+    // padding-left: 0;
+    // visibility: hidden;
+    // overflow: hidden;
+    // font-size: 0;
+    // display: none;
+    // width: 0;
+    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
   }
 
   .lesson__links_table__icon_generic,
   .lesson__links_table__icon_single_page,
   .lesson__links_table__icon_video,
   .lesson__links_table__icon {
+    // width: 0;
+    // display: none;
+    display: none;
     width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
   }
 
   .lesson__links_table__type {
-    font-size: 0;
+    // font-size: 0;
+    // display: none;
+    display: none;
+    width: 0;
+    height: 0;
+    opacity: 0;
+    visibility: collapse;
   }
 
   .lesson__links_table__type_title {
-    font-size: 0;
-    width: 0;
+    // font-size: 0;
+    // width: 0;
+    // display: none;
   }
 
   .lesson__links_table__total_rating {
@@ -149,7 +181,7 @@
     text-align: center;
   }
 
-  .lesson__links_table {
-    width: 100%;
-  }
+  // .lesson__links_table {
+  //   width: 100%;
+  // }
 }
