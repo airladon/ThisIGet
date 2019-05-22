@@ -18,10 +18,15 @@ class Content extends SimpleLessonContent {
   setContent() {
     this.sections = [
       <div key="0" className="lesson__links_table__disclaimer">
-        <p>
+        <p style={{ marginBottom: '3em' }}>
           {'The web sites at these links are not administered by This I Get, and we don\'t control their availability, accuracy or actions taken when you visit.'}
         </p>
         <p>
+        </p>
+      </div>,
+      { links: version.details.links },
+      <div key="1" className="lesson__links_table__disclaimer">
+        <p style={{ marginTop: '3em' }}>
           {'If you visit a link, then you can rate the link for your own future reference, and for others that haven\'t yet visited it. If the link is broken or the content has changed and is no longer appropriate, then please let us know at '}
           <a
             href="mailto:feedback@thisiget.com?Subject=Feedback"
@@ -31,10 +36,7 @@ class Content extends SimpleLessonContent {
           </a>
           {'.'}
         </p>
-        <p>
-        </p>
       </div>,
-      { links: version.details.links },
     ];
   }
 }
