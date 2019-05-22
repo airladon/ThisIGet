@@ -25,7 +25,7 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps
