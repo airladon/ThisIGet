@@ -26,7 +26,7 @@ export default class SimpleLessonComponent extends React.Component
 
   render() {
     return <div id={this.lesson.content.htmlId}>
-      {this.lesson.content.sections[0]}
+      {this.lesson.content.sections}
     </div>;
   }
 }

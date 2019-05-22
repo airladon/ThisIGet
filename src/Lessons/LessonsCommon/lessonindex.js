@@ -1002,6 +1002,12 @@ export default function getLessonIndex() {
             description: 'Pythagorean Theorem Only',
             fullLesson: false,
           },
+          tester: {
+            type: 'singlePage',
+            title: 'Derivation',
+            description: 'tester',
+            fullLesson: false,
+          },
         },
         links: {
           base: {
