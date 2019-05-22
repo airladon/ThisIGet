@@ -275,7 +275,7 @@ export default class LinksTable extends React.Component
   yourRatingTitle() {
     let title = <div>
       <span className="rating__login" onClick={login}>{'Login'}</span>
-      {' to rate links'}
+      {' to rate'}
     </div>;
     if (this.props.isLoggedIn) {
       title = 'Your\nRating';

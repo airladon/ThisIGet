@@ -12,25 +12,25 @@
   },
   {
     "url": "https://en.wikipedia.org/wiki/Pythagorean_theorem",
+    "hash": "695bf4125198718b2f47983f3d051038",
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Pythagorean Theorm.",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base",
-    "hash": "695bf4125198718b2f47983f3d051038"
+    "versionUID": "base"
   },
   {
     "url": "http://jwilson.coe.uga.edu/EMT668/EMT668.Student.Folders/HeadAngela/essay1/Pythagorean.html",
+    "hash": "4c24044beeca857cddbd5f4fde37d78f",
     "author": "Angie Head",
     "type": "generic",
     "description": "Several different theorem proofs.",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base",
-    "hash": "4c24044beeca857cddbd5f4fde37d78f"
+    "versionUID": "base"
   },
   {
     "url": "https://www.mathsisfun.com/right_angle_triangle.html",
@@ -56,13 +56,13 @@
   },
   {
     "url": "https://www.khanacademy.org/math/basic-geo/basic-geometry-pythagorean-theorem/geo-pythagorean-theorem/v/the-pythagorean-theorem",
+    "hash": "ed1f250866b93b59c5a7c669a2ca6ae7",
     "publisher": "Khan Academy",
     "type": "video",
     "description": "Introduction with examples.",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
-    "versionUID": "base",
-    "hash": "ed1f250866b93b59c5a7c669a2ca6ae7"
+    "versionUID": "base"
   }
 ]
