@@ -21,7 +21,7 @@ if app == 'local':
         print(f'unset {key}')
 else:
     output = subprocess.run(
-        ["heroku", "config", "--app=thisiget-dev"], capture_output=True)
+        ["heroku", "config", f"--app={app_names[app]}"], capture_output=True)
     if output.returncode == 0:
         results = output.stdout.decode("utf-8").split('\n')
         for result in results:

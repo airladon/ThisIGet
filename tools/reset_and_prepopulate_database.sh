@@ -106,7 +106,7 @@ then
   elif [ $REMOTE_AES != $AES_KEY ];
   then
     echo
-    echo "${red}Remote and local AES_KEY are differen. They need to be the same.${reset}"
+    echo "${red}Remote and local AES_KEY are different. They need to be the same.${reset}"
     FAIL=1
   fi
   if [ -z $PEPPER ];
