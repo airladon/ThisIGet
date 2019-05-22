@@ -3635,6 +3635,8 @@ function () {
       }
     }
 
+    debugger;
+
     if (this.gestureCanvas == null) {
       this.gestureCanvas = this.htmlCanvas;
     }
@@ -14879,7 +14881,7 @@ function (_DiagramElementCollec) {
     _this.updatePointsCallback = null;
 
     if (optionsToUse.position != null) {
-      _this.transform.updateTranslation(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(optionsToUse.position));
+      _this.transform.updateTranslation(_this.position);
     }
 
     _this.position = _this.getPosition();
@@ -16721,7 +16723,6 @@ function (_DrawingObject) {
     key: "transformHtml",
     value: function transformHtml(transformMatrix) {
       if (this.show) {
-        // this.element.style.visibility = 'visible';
         var glLocation = this.location.transformBy(transformMatrix);
         var pixelLocation = this.glToPixelSpace(glLocation);
         var w = this.element.clientWidth;
@@ -16750,8 +16751,7 @@ function (_DrawingObject) {
       } else {
         this.element.style.position = 'absolute';
         this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px'; // this.element.style.visibility = 'hidden';
-        // console.trace()
+        this.element.style.top = '-10000px'; // console.trace()
       }
     }
   }, {
@@ -24430,11 +24430,6 @@ function () {
   }
 
   _createClass(Line, [{
-    key: "_dup",
-    value: function _dup() {
-      return new Line(this.p1, this.p2);
-    }
-  }, {
     key: "getPoint",
     value: function getPoint() {
       var index = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
@@ -26198,7 +26193,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, clickWord, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickId, clickW */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26214,6 +26209,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centerH", function() { return centerH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "centerVH", function() { return centerVH; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "toHTML", function() { return toHTML; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickWord", function() { return clickWord; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "itemSelector", function() { return itemSelector; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "unit", function() { return unit; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "applyModifiers", function() { return applyModifiers; });
@@ -26221,6 +26217,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "setHTML", function() { return setHTML; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickId", function() { return clickId; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
@@ -26299,10 +26296,6 @@ function style() {
 
     if (options.right != null) {
       marginRight = "margin-right:".concat(options.right, "%;");
-    }
-
-    if (options.centerV) {
-      marginTop = 'margin-top:0;';
     }
 
     if (options.top != null) {
@@ -26470,51 +26463,34 @@ function addId() {
   };
 }
 
-function click(actionMethod, bind) {
-  var colorOrOptions = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+function clickW(textToUse, actionMethod, bind) {
+  var classesOrColor = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
+  var interactive = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : true;
+  var id = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
   var classStr = 'action_word';
-  var colorToUse = null;
-  var defaultOptions = {
-    color: null,
-    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
-    interactive: true,
-    classes: '',
-    text: null
-  };
-  var options = defaultOptions;
-
-  if (Array.isArray(colorOrOptions)) {
-    colorToUse = colorOrOptions;
-  } else if (colorOrOptions != null) {
-    options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
-  }
-
-  var _options = options,
-      interactive = _options.interactive,
-      color = _options.color,
-      id = _options.id,
-      classes = _options.classes,
-      text = _options.text;
-
-  if (color != null) {
-    colorToUse = color;
-  }
 
   if (interactive) {
     classStr = "".concat(classStr, " interactive_word");
   }
 
-  if (classes !== '') {
-    classStr = "".concat(classStr, " ").concat(classes);
+  if (typeof classesOrColor === 'string') {
+    classStr = "".concat(classesOrColor, " ").concat(classStr);
+  }
+
+  var color = null;
+
+  if (Array.isArray(classesOrColor)) {
+    color = classesOrColor;
   }
 
   var idToUse = function idToUse() {
     return id;
-  };
+  }; // const id = `lesson__id_${textToUse}`;
+
 
   return {
-    replacementText: function replacementText(textIn) {
-      return toHTML(text || textIn, idToUse(), classStr, colorToUse);
+    replacementText: function replacementText() {
+      return toHTML(textToUse, idToUse(), classStr, color);
     },
     id: idToUse,
     actionMethod: actionMethod,
@@ -26522,12 +26498,86 @@ function click(actionMethod, bind) {
   };
 }
 
-function clickW(textToUse, actionMethod, bind) {
-  var color = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : null;
-  return click(actionMethod, bind, {
-    color: color,
-    text: textToUse
-  });
+function clickWord(textToUse, id, actionMethod, bind) {
+  var classesOrColor = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : null;
+  var interactive = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : true;
+  var classStr = 'action_word';
+
+  if (interactive) {
+    classStr = "".concat(classStr, " interactive_word");
+  }
+
+  if (typeof classesOrColor === 'string') {
+    classStr = "".concat(classesOrColor, " ").concat(classStr);
+  }
+
+  var color = null;
+
+  if (Array.isArray(classesOrColor)) {
+    color = classesOrColor;
+  }
+
+  var idToUse = function idToUse() {
+    return id;
+  }; // const id = `lesson__id_${textToUse}`;
+
+
+  return {
+    replacementText: function replacementText() {
+      return toHTML(textToUse, idToUse(), classStr, color);
+    },
+    id: idToUse,
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
+function click(actionMethod, bind) {
+  var classesOrColor = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : null;
+  var interactive = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : true;
+  var id = arguments.length > 4 && arguments[4] !== undefined ? arguments[4] : "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])());
+  var classStr = 'action_word';
+
+  if (interactive) {
+    classStr = "".concat(classStr, " interactive_word");
+  }
+
+  if (typeof classesOrColor === 'string') {
+    classStr = "".concat(classesOrColor, " ").concat(classStr);
+  }
+
+  var color = null;
+
+  if (Array.isArray(classesOrColor)) {
+    color = classesOrColor;
+  }
+
+  var idToUse = function idToUse() {
+    return id;
+  };
+
+  return {
+    replacementText: function replacementText(text) {
+      return toHTML(text, idToUse(), classStr, color);
+    },
+    id: idToUse,
+    actionMethod: actionMethod,
+    bind: bind
+  };
+}
+
+function clickId() {
+  var _id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+
+  var actionMethod = arguments.length > 1 ? arguments[1] : undefined;
+  var bind = arguments.length > 2 ? arguments[2] : undefined;
+  return {
+    id: function id() {
+      return _id;
+    },
+    actionMethod: actionMethod,
+    bind: bind
+  };
 }
 
 function actionWord(text) {

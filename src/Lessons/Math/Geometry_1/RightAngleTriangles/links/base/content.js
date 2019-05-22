@@ -13,6 +13,14 @@ class Content extends SimpleLessonContent {
     this.title = details.details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
+
+    this.loadQRs([
+      // 'ImportantAngles/base',
+      'Triangles',
+      // 'SideAngleRelationship',
+      // 'AreaTriangle',
+      // 'AdjacentAngles',
+    ]);
   }
 
   setContent() {

@@ -49,6 +49,18 @@ export default class LinksLessonComponent extends React.Component
   render() {
     return <div id={this.lesson.content.htmlId} className="simple_lesson__container">
       {this.renderSections()}
+      <div id="single_page_lesson__qr__overlay" className="lesson__qr__overlay">
+        <div id="lesson__qr__container">
+          <div id="id_qr_diagram" className="diagram__container lesson__diagram">
+            <canvas id="id_qr_diagram__text" className='diagram__text'>
+            </canvas>
+            <canvas id="id_qr_diagram__gl" className='diagram__gl'>
+            </canvas>
+            <div id="id_diagram__html" className='diagram__html'>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>;
   }
 

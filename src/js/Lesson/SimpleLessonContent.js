@@ -4,7 +4,7 @@ import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {
-  Diagram, Transform,
+  Diagram, Transform, Rect,
 } = Fig;
 
 
@@ -45,7 +45,7 @@ class SimpleLessonContent {
     if (this.qrDiagram == null) {
       this.qrDiagram = new Diagram({
         htmlId: 'id_qr_diagram',
-        limits: this.diagram.limits,
+        limits: new Rect(-3, -2, 6, 4),
       });
     }
     this.qrDiagram.updateFontSize = false;
