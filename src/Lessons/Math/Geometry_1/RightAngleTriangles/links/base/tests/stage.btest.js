@@ -21,6 +21,8 @@ describe(`${lessonUID} - ${versionUID}`, () => {
     const image = await page.screenshot();
     expect(image).toMatchImageSnapshot({
       customSnapshotIdentifier: 'All',
+      failureThresholdType: 'percent',
+      failureThreshold: 0.002,
     });
   });
 });
