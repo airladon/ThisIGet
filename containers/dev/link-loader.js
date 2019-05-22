@@ -7,16 +7,26 @@ async function linkparser(callback, source, map, meta) {
     // const splits = line.split('[[');
     // splits.forEach((split) => {
     const links = line.split(/(\[\[[^\]]*\]\]\(\([^)]*\)\))/g);
+    const newLine = [];
     links.forEach((link, index) => {
       if (index % 2 === 0) {
+        newLine.push(link);
         return;
       }
       const label = link.slice(2).replace(/\]\].*/, '');
-      const parameters = link.replace(/^.*\(\(/, '').slice(0, -2);
-      console.log(label)
-      console.log(parameters)
+      const [method, parameters, color] = link.replace(/^.*\(\(/, '').slice(0, -2).split(',');
+      let parametersToUse = parameters;
+      if (parametersToUse == null) {
+        parametersToUse = '';
+      }
+      console.log(label);
+      console.log(parameters);
+      newLine.push(`<html><a href="javascript:window.lessonFunctions.${method}(${parametersToUse});" style="color:${color};">${label}</a></html>`);
     });
+    // const newLine = links.join();
+    outLines.push(newLine.join(''));
   });
+  console.log(outLines)
   // for ([i, line] of lines.entries()) {
   //   const split = line.split('$$');
   //   if (split.length === 1) {
