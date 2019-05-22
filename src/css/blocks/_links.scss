@@ -109,11 +109,11 @@
 }
 
 .lesson__links_table__disclaimer_email {
-  color: color('blue');
+  color: color('blue', 'dark');
 }
 
 .lesson__links_table__disclaimer_email:hover {
-  color: color('blue', 'dark');
+  color: color('blue', 'darker');
   text-decoration: none;
 }
 
