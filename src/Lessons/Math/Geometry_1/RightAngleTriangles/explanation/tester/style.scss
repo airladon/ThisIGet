@@ -57,7 +57,7 @@
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  color: color('white', 'dark');
+  color: color('white', 'darker');
   font-size: 1.3em;
   padding-right: 1em;
   padding-left: 1em;
@@ -65,13 +65,14 @@
 
 .lesson__static_qr__title_close {
   display: table-cell;
-  color: color('white', 'dark');
+  color: color('white', 'light');
   width: 2em;
-  border: 1px solid color('white', 'dark');
+  border: 1px solid color('white', 'lighter');
   height: 2em;
   text-align: center;
   vertical-align: middle;
   border-radius: 1em;
+  font-weight: 100;
 }
 
 .lesson__static_qr__title_close:hover {
@@ -81,4 +82,17 @@
 
 .lesson__static_qr__pop_up_content {
   padding: 0.8em;
+}
+
+.lesson__static_qr__link_container {
+  text-align: center;
+}
+
+.lesson__static_qr__link_link {
+  font-size: 0.8em;
+  color: color('white', 'darker');
+}
+
+.lesson__static_qr__link_link:hover {
+  text-decoration: none;
 }

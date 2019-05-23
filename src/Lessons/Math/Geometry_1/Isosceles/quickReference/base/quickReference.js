@@ -145,10 +145,12 @@ const content = <div>
 const Footer = <StaticQR
   content={content}
   title={'This is a Title'}
+  link="Math/Geometry_1/Isosceles/summary/base"
 />;
 const Footer2 = <StaticQR
   content="Hello World From Static QR"
   title="title2"
+  link="Math/Geometry_1/Isosceles/summary/base"
 />;
 
 attachQuickReference(lessonUID, versionUID, {
