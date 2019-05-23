@@ -98,8 +98,20 @@ export default class SimpleLessonComponent extends React.Component
     };
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  close() {
+    const element = document.getElementById('id_lesson__static_qr__popup');
+    if (element != null) {
+      element.classList.add('lesson__static_qr__pop_up__hide');
+    }
+  }
+
   render() {
-    return <div id={this.lesson.content.htmlId} className="simple_lesson__container">
+    return <div
+      id={this.lesson.content.htmlId}
+      className="simple_lesson__container"
+      onClick={this.close.bind(this)}
+    >
       {this.lesson.content.sections}
       <div id="lesson__static_qrs">
         {this.state.qr}
