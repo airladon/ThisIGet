@@ -143,7 +143,7 @@ hello world
         </div>;
 
 const Footer2 = <div id="testerqr" className="testerqr testerqr_hide testerqr2">
-hello world
+hello world how are you, fine I hope, I guess we shall see hello world how are you, fine I hope, I guess we shall see
         </div>;
 
 attachQuickReference(lessonUID, versionUID, {

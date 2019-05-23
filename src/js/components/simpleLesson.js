@@ -9,7 +9,33 @@ type Props = {
 
 type State = {
   qr: React.Element<'div'>;
+};
+
+// const maxWidth = 600;
+// const maxHeight = 400;
+
+/* eslint-disable no-param-reassign */
+function alignLeft(element, linkRect, containerRect) {
+  const windowWidth = window.innerWidth;
+  if (windowWidth < containerRect.width) {
+    element.style.left = '0px';
+    return;
+  }
+  const linkLeft = linkRect.left - containerRect.left;
+  element.style.left = '0';
+  const newRect = element.getBoundingClientRect();
+  const proposedLeft = linkLeft + linkRect.width / 2 - newRect.width / 2;
+  const overFlow = containerRect.width - (proposedLeft + newRect.width);
+  if (proposedLeft < 0) {
+    element.style.left = '0px';
+  } else if (overFlow > 0) {
+    element.style.left = `${proposedLeft}px`;
+  } else {
+    element.style.left = '';
+    element.style.right = '0px';
+  }
 }
+/* eslint-enable no-param-reassign */
 
 export default class SimpleLessonComponent extends React.Component
                                     <Props, State> {
@@ -35,6 +61,19 @@ export default class SimpleLessonComponent extends React.Component
         const element = document.getElementById('testerqr');
         if (element != null) {
           element.classList.toggle('testerqr_hide');
+          const container = document.getElementById('lesson__content');
+          const link = document.getElementById(id);
+          if (container != null && link != null) {
+            const containerRect = container.getBoundingClientRect();
+            const linkRect = link.getBoundingClientRect();
+            alignLeft(element, linkRect, containerRect);
+            // const left = linkRect.left - containerRect.left;
+            const top = linkRect.top - containerRect.top + linkRect.height;
+            // element.style.left = `${left}px`;
+            element.style.top = `${top}px`;
+            // const qrRect = element.getBoundingClientRect();
+            // console.log(qrRect.width)
+          }
         } else {
           console.log('no element');
         }
