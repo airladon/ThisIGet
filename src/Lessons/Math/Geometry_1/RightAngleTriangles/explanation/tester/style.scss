@@ -37,10 +37,48 @@
   max-width: 600px;
   position: absolute;
   // width: 100px;
-  height: 100px;
-  background-color: red;
+  // height: 100px;
+  background-color: color('white');
+  padding: 0.5em;
+  border: 1px solid color('white', 'lightest');
+  border-radius: 0.4em;
 }
 
 .lesson__static_qr__pop_up__hide {
   display: none;
+}
+
+.lesson__static_qr__title {
+  display: table;
+  width: 100%;
+}
+
+.lesson__static_qr__title_text {
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  color: color('white', 'dark');
+  font-size: 1.3em;
+  padding-right: 1em;
+  padding-left: 1em;
+}
+
+.lesson__static_qr__title_close {
+  display: table-cell;
+  color: color('white', 'dark');
+  width: 2em;
+  border: 1px solid color('white', 'dark');
+  height: 2em;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 1em;
+}
+
+.lesson__static_qr__title_close:hover {
+  background-color: color('white', 'lightest');
+  cursor: pointer;
+}
+
+.lesson__static_qr__pop_up_content {
+  padding: 0.8em;
 }

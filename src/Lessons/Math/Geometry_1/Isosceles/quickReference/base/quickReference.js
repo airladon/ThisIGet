@@ -139,18 +139,17 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 }
 
-// const Footer = <div id="testerqr" className="testerqr testerqr_hide">
-// hello world
-//         </div>;
-
-// const Footer2 = <div id="testerqr" className="testerqr testerqr_hide testerqr2">
-// hello world how are you, fine I hope, I guess we shall see hello world how are you, fine I hope, I guess we shall see
-//         </div>;
 const content = <div>
   Hellow worldD.
 </div>;
-const Footer = <StaticQR content={content}/>;
-const Footer2 = <StaticQR content="Hello World From Static QR"/>;
+const Footer = <StaticQR
+  content={content}
+  title={'This is a Title'}
+/>;
+const Footer2 = <StaticQR
+  content="Hello World From Static QR"
+  title="title2"
+/>;
 
 attachQuickReference(lessonUID, versionUID, {
   Main: QRMain,
