@@ -32,3 +32,15 @@
 .testerqr_hide {
   display: none;
 }
+
+.lesson__static_qr__pop_up {
+  max-width: 600px;
+  position: absolute;
+  // width: 100px;
+  height: 100px;
+  background-color: red;
+}
+
+.lesson__static_qr__pop_up__hide {
+  display: none;
+}

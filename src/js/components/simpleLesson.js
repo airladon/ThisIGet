@@ -2,13 +2,14 @@
 
 import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
+import StaticQR from './staticQR';
 
 type Props = {
   lesson: SimpleLesson;
 };
 
 type State = {
-  qr: React.Element<'div'>;
+  qr: React.Element<'div'> | React.Element<typeof StaticQR>,
 };
 
 // const maxWidth = 600;
@@ -69,7 +70,7 @@ export default class SimpleLessonComponent extends React.Component
     super(props);
     this.lesson = props.lesson;
     this.key = 0;
-    this.state = { qr: <div id="testerqr"></div> };
+    this.state = { qr: <StaticQR content="loading"/> };
   }
 
   componentDidMount() {
@@ -81,9 +82,9 @@ export default class SimpleLessonComponent extends React.Component
         // console.log(id, parameters);
         // console.log(window.quickReference[parameters])
         this.setState({ qr: window.quickReference[parameters] });
-        const element = document.getElementById('testerqr');
+        const element = document.getElementById('id_lesson__static_qr__popup');
         if (element != null) {
-          element.classList.toggle('testerqr_hide');
+          element.classList.toggle('lesson__static_qr__pop_up__hide');
           const container = document.getElementById('lesson__content');
           const link = document.getElementById(id);
           if (container != null && link != null) {
@@ -91,15 +92,7 @@ export default class SimpleLessonComponent extends React.Component
             const linkRect = link.getBoundingClientRect();
             alignLeft(element, linkRect, containerRect);
             alignTop(element, linkRect, containerRect);
-            // const left = linkRect.left - containerRect.left;
-            // const top = linkRect.top - containerRect.top + linkRect.height;
-            // element.style.left = `${left}px`;
-            // element.style.top = `${top}px`;
-            // const qrRect = element.getBoundingClientRect();
-            // console.log(qrRect.width)
           }
-        } else {
-          console.log('no element');
         }
       },
     };

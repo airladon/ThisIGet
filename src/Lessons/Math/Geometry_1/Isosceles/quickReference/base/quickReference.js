@@ -2,6 +2,7 @@
 import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference, attachStaticQuickReference } from '../../../../../../js/tools/misc';
+import StaticQR from '../../../../../../js/components/staticQR';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
@@ -138,13 +139,18 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 }
 
-const Footer = <div id="testerqr" className="testerqr testerqr_hide">
-hello world
-        </div>;
+// const Footer = <div id="testerqr" className="testerqr testerqr_hide">
+// hello world
+//         </div>;
 
-const Footer2 = <div id="testerqr" className="testerqr testerqr_hide testerqr2">
-hello world how are you, fine I hope, I guess we shall see hello world how are you, fine I hope, I guess we shall see
-        </div>;
+// const Footer2 = <div id="testerqr" className="testerqr testerqr_hide testerqr2">
+// hello world how are you, fine I hope, I guess we shall see hello world how are you, fine I hope, I guess we shall see
+//         </div>;
+const content = <div>
+  Hellow worldD.
+</div>;
+const Footer = <StaticQR content={content}/>;
+const Footer2 = <StaticQR content="Hello World From Static QR"/>;
 
 attachQuickReference(lessonUID, versionUID, {
   Main: QRMain,
