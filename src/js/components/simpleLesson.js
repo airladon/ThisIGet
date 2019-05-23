@@ -35,6 +35,29 @@ function alignLeft(element, linkRect, containerRect) {
     element.style.right = '0px';
   }
 }
+
+function alignTop(element, linkRect, containerRect) {
+  const windowHeight = window.innerheight;
+  if (windowHeight < containerRect.height) {
+    element.style.top = '10px';
+    return;
+  }
+  const linkTop = linkRect.top - containerRect.top;
+  element.style.top = '0';
+  // const newRect = element.getBoundingClientRect();
+  const proposedTop = linkTop + linkRect.height;
+  element.style.top = `${proposedTop}px`;
+  // const proposedBottom = linkTop;
+  // const overFlow = windowHeight.height - (proposedTop + newRect.height);
+  // if (proposedLeft < 0) {
+  //   element.style.left = '0px';
+  // } else if (overFlow > 0) {
+  //   element.style.left = `${proposedLeft}px`;
+  // } else {
+  //   element.style.left = '';
+  //   element.style.right = '0px';
+  // }
+}
 /* eslint-enable no-param-reassign */
 
 export default class SimpleLessonComponent extends React.Component
@@ -67,10 +90,11 @@ export default class SimpleLessonComponent extends React.Component
             const containerRect = container.getBoundingClientRect();
             const linkRect = link.getBoundingClientRect();
             alignLeft(element, linkRect, containerRect);
+            alignTop(element, linkRect, containerRect);
             // const left = linkRect.left - containerRect.left;
-            const top = linkRect.top - containerRect.top + linkRect.height;
+            // const top = linkRect.top - containerRect.top + linkRect.height;
             // element.style.left = `${left}px`;
-            element.style.top = `${top}px`;
+            // element.style.top = `${top}px`;
             // const qrRect = element.getBoundingClientRect();
             // console.log(qrRect.width)
           }
