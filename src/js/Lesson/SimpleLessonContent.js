@@ -44,7 +44,6 @@ class SimpleLessonContent {
     // const defaultPath = defaultPathIn
     //   .replace(/^\//, '').replace(/\/$/, '')
     //   .split('/');
-
     qrs.forEach((qr) => {
       const splitQR = qr.replace(/^\//, '').replace(/\/$/, '').split('/');
       // if (splitQR.length < 2) {
@@ -63,11 +62,12 @@ class SimpleLessonContent {
       // if (splitQR.length > 3) {
       //   subject = splitQR.slice(-4, -3)[0];
       // }
-      const jsFile = `/static/dist/Lessons/${qr}/quickReference.js`;
-      const cssFile = `/static/dist/Lessons/${qr}/quickReference.css`;
+      const jsFile = `/static/dist/Lessons/${subject}/${learningPath}/${lessonUID}/quickReference/${versionUID}/quickReference.js`;
+      const cssFile = `/static/dist/Lessons/${subject}/${learningPath}/${lessonUID}/quickReference/${versionUID}/quickReference.css`;
       loadRemoteCSS(`${qr}CSS`, cssFile, () => {
         loadRemote(`${qr}Script`, jsFile, () => {
           Object.keys(window.quickReference[lessonUID][versionUID]).forEach((qrid) => {
+            console.log(`loaded ${lessonUID} ${versionUID}`)
             // const element = this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`][`_${qrid}`];
             // const { isShown } = element;
             // const qr = new window.quickReference[uid][versionUID][qrid](this.qrDiagram);

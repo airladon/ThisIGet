@@ -180,8 +180,36 @@ function attachQuickReference(
   window.quickReference[lessonUID][versionUID] = qrs;
 }
 
+function attachStaticQuickReference(
+  subject: string,
+  learningPath: string,
+  lessonUID: string,
+  versionUID: string,
+  qrs: {
+    [name: string]: Object,
+  },
+) {
+  // if (window.quickReference == null) {
+  //   window.quickReference = {};
+  // }
+  // if (window.quickReference[subject] == null) {
+  //   window.quickReference[subject] = {};
+  // }
+  // if (window.quickReference[subject][learningPath] == null) {
+  //   window.quickReference[subject][learningPath] = {};
+  // }
+  // if (window.quickReference[subject][learningPath][lessonUID] == null) {
+  //   window.quickReference[subject][learningPath][lessonUID] = {};
+  // }
+  // window.quickReference[subject][learningPath][lessonUID][versionUID] = qrs;
+  Object.keys(qrs).forEach((name) => {
+    window.quickReference[`${subject}/${learningPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
+  });
+  // window.quickReference[`${subject}/${learningPath}/${lessonUID}/${versionUID}`] = qrs;
+}
+
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie, activator, attachQuickReference,
+  createCookie, activator, attachQuickReference, attachStaticQuickReference,
 };
 
