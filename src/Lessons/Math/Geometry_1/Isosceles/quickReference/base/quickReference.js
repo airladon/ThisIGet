@@ -139,6 +139,11 @@ export class QRSplitLine extends PopupBoxCollection {
 }
 
 const Footer = <div id="testerqr" className="testerqr testerqr_hide">
+hello world
+        </div>;
+
+const Footer2 = <div id="testerqr" className="testerqr testerqr_hide testerqr2">
+hello world
         </div>;
 
 attachQuickReference(lessonUID, versionUID, {
@@ -148,4 +153,5 @@ attachQuickReference(lessonUID, versionUID, {
 
 attachStaticQuickReference('Math', 'Geometry_1', lessonUID, versionUID, {
   simpleTest: Footer,
+  simpleTest2: Footer2,
 });

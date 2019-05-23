@@ -6,6 +6,7 @@
   margin-right: 20px;
   background-color: color('white', 'lightest');
   color: color('grey', 'darkest');
+  position: relative;
 }
 
 .simple_lesson__container img {
@@ -17,6 +18,14 @@
   width: 100px;
   height: 100px;
   background-color: red;
+  left: 50%;
+  margin-left: -50px;
+  top: 50%;
+  margin-top: -50px;
+}
+
+.testerqr2 {
+  background-color: blue;
 }
 
 .testerqr_hide {

@@ -29,8 +29,8 @@ export default class SimpleLessonComponent extends React.Component
     this.lesson.initialize();
     window.lessonFunctions = {
       tester: (id, parameters) => {
-        console.log(id, parameters);
-        console.log(window.quickReference[parameters])
+        // console.log(id, parameters);
+        // console.log(window.quickReference[parameters])
         this.setState({ qr: window.quickReference[parameters] });
         const element = document.getElementById('testerqr');
         if (element != null) {
@@ -43,7 +43,7 @@ export default class SimpleLessonComponent extends React.Component
   }
 
   render() {
-    return <div id={this.lesson.content.htmlId}>
+    return <div id={this.lesson.content.htmlId} className="simple_lesson__container">
       {this.lesson.content.sections}
       <div id="lesson__static_qrs">
         {this.state.qr}
