@@ -1,12 +1,14 @@
 ## Tester
 
 This is a test
-
+<!-- 
 [I'm an inline-style link](javascript:window.lessonFunctions.tester();)
-
+ -->
 [[hypotenuse]]((tester,'Math/Geometry_1/Isosceles/base/simpleTest',#f44))
 
-This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test [[hypotenuse]]((tester,'Math/Geometry_1/Isosceles/base/simpleTest2',#44f))
+This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
+
+[[hypotenuse]]((tester,'Math/Geometry_1/RightAngleTriangles/static/simpleTest2',#44f))
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 

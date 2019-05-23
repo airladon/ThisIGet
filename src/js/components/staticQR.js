@@ -44,7 +44,9 @@ export default class StaticQR extends React.Component
           X
         </div>
       </div>
-      {this.renderContent()}
+      <div className="lesson__static_qr__pop_up_content_container">
+        {this.renderContent()}
+      </div>
       <div className="lesson__static_qr__link_container">
         <a className="lesson__static_qr__link_link"
           href={`${window.location.origin}/Lessons/${this.props.link}`}

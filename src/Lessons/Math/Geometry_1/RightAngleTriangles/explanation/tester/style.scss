@@ -36,7 +36,7 @@
 .lesson__static_qr__pop_up {
   max-width: 600px;
   max-height: 400px;
-  overflow-y: scroll;
+  // overflow-y: scroll;
   position: absolute;
   // width: 100px;
   // height: 100px;
@@ -53,6 +53,7 @@
 .lesson__static_qr__title {
   display: table;
   width: 100%;
+  padding-bottom: 0.5em;
 }
 
 .lesson__static_qr__title_text {
@@ -82,12 +83,19 @@
   cursor: pointer;
 }
 
+.lesson__static_qr__pop_up_content_container {
+  overflow-y: scroll;
+  max-height: calc(400px - 6em);
+  background-color: color('white', 'lightest');
+}
+
 .lesson__static_qr__pop_up_content {
   padding: 0.8em;
 }
 
 .lesson__static_qr__link_container {
   text-align: center;
+  padding-top: 0.5em;
 }
 
 .lesson__static_qr__link_link {

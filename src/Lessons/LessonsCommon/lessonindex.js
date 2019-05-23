@@ -1026,11 +1026,23 @@ export default function getLessonIndex() {
               'Area',
             ],
           },
+          static: {
+            type: 'presentation',
+            references: [
+              'Main',
+            ],
+          },
         },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          static: {
+            type: 'presentation',
+            title: 'static',
             description: '',
             fullLesson: false,
           },

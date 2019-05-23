@@ -17,6 +17,7 @@ class Content extends SimpleLessonContent {
 
   setContent() {
     this.loadStaticQRs(['Math/Geometry_1/Isosceles/base']);
+    this.loadStaticQRs(['Math/Geometry_1/RightAngleTriangles/static']);
 
     this.sections = [
       <div key={0}>
