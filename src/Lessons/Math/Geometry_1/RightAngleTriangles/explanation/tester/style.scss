@@ -35,6 +35,8 @@
 
 .lesson__static_qr__pop_up {
   max-width: 600px;
+  max-height: 400px;
+  overflow-y: scroll;
   position: absolute;
   // width: 100px;
   // height: 100px;

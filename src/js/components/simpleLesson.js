@@ -12,9 +12,6 @@ type State = {
   qr: React.Element<'div'> | React.Element<typeof StaticQR>,
 };
 
-// const maxWidth = 600;
-// const maxHeight = 400;
-
 /* eslint-disable no-param-reassign */
 function alignLeft(element, linkRect, containerRect) {
   const windowWidth = window.innerWidth;
@@ -70,17 +67,13 @@ export default class SimpleLessonComponent extends React.Component
     super(props);
     this.lesson = props.lesson;
     this.key = 0;
-    this.state = { qr: <StaticQR content="loading"/> };
+    this.state = { qr: <StaticQR content="Loading Reference" link="" title=""/> };
   }
 
   componentDidMount() {
-    // Instantiate diagram now that the canvas elements have been
-    // created.
     this.lesson.initialize();
     window.lessonFunctions = {
       tester: (id, parameters) => {
-        // console.log(id, parameters);
-        // console.log(window.quickReference[parameters])
         this.setState({ qr: window.quickReference[parameters] });
         const element = document.getElementById('id_lesson__static_qr__popup');
         if (element != null) {
