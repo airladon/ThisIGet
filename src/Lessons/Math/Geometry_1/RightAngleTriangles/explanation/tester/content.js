@@ -20,7 +20,7 @@ class Content extends SimpleLessonContent {
       tester: () => {
         const element = document.getElementById('testerqr');
         if (element != null) {
-          element.classList.toggle('testerqr_hide')
+          element.classList.toggle('testerqr_hide');
         }
       },
     };

@@ -39,6 +39,55 @@ class SimpleLessonContent {
   setContent() {
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  loadStaticQRs(qrs: Array<string>) {
+    // const defaultPath = defaultPathIn
+    //   .replace(/^\//, '').replace(/\/$/, '')
+    //   .split('/');
+
+    qrs.forEach((qr) => {
+      const splitQR = qr.replace(/^\//, '').replace(/\/$/, '').split('/');
+      // if (splitQR.length < 2) {
+      //   return;
+      // }
+      const versionUID = splitQR.slice(-1)[0];
+      const topic = 'quickReference';
+      const lessonUID = splitQR.slice(-2, -1)[0];
+      const learningPath = splitQR.slice(-3, -2)[0];
+      const subject = splitQR.slice(-4, -3)[0];
+      // let subject = defaultPath[0];
+      // let learningPath = defaultPath[1];
+      // if (splitQR.length > 2) {
+      //   learningPath = splitQR.slice(-3, -2)[0];
+      // }
+      // if (splitQR.length > 3) {
+      //   subject = splitQR.slice(-4, -3)[0];
+      // }
+      const jsFile = `/static/dist/Lessons/${qr}/quickReference.js`;
+      const cssFile = `/static/dist/Lessons/${qr}/quickReference.css`;
+      loadRemoteCSS(`${qr}CSS`, cssFile, () => {
+        loadRemote(`${qr}Script`, jsFile, () => {
+          Object.keys(window.quickReference[lessonUID][versionUID]).forEach((qrid) => {
+            // const element = this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`][`_${qrid}`];
+            // const { isShown } = element;
+            // const qr = new window.quickReference[uid][versionUID][qrid](this.qrDiagram);
+            // // console.log(qr)
+            // qr.prepareToHideAll = this.prepareToHideQR.bind(this);
+            // qr.prepareToShow = this.prepareToShowQR.bind(this);
+            // this.qrDiagram.elements._qr[`_${uid}`][`_${versionUID}`].add(qrid, qr);
+            // if (isShown) {
+            //   qr.show();
+            //   qr.showAll();
+            //   element.hideAll();
+            // } else {
+            //   qr.hideAll();
+            // }
+          });
+        });
+      });
+    });
+  }
+
   loadQRs(
     qrs: Array<string>,
   ) {

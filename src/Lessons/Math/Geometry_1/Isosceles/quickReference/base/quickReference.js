@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -136,7 +137,17 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 }
 
+export default class Footer extends React.Component
+                                    <> {
+  // eslint-disable-next-line class-methods-use-this
+  render() {
+    return <div id="testerqr" className="testerqr testerqr_hide">
+        </div>;
+  }
+}
+
 attachQuickReference(lessonUID, versionUID, {
-  Main: QRMain,
-  SplitLine: QRSplitLine,
+  // Main: QRMain,
+  // SplitLine: QRSplitLine,
+  simpleTest: Footer,
 });

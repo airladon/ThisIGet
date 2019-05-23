@@ -1,5 +1,7 @@
 // https://webpack.js.org/api/loaders/
 
+// This loader looks for [[label]]((method,parameter,color)) strings
+// and replaces them with <a> links
 async function linkparser(callback, source, map, meta) {
   const lines = source.split('\n').map(l => l.trim());
   const outLines = [];
