@@ -181,16 +181,18 @@ function attachQuickReference(
 }
 
 function attachStaticQuickReference(
-  subject: string,
-  learningPath: string,
+  lessonPath: string,
   lessonUID: string,
   versionUID: string,
   qrs: {
     [name: string]: Object,
   },
 ) {
+  if (window.quickReference == null) {
+    window.quickReference = {};
+  }
   Object.keys(qrs).forEach((name) => {
-    window.quickReference[`${subject}/${learningPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
+    window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
   });
 }
 

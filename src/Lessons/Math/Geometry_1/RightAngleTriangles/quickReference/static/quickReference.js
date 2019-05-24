@@ -9,8 +9,7 @@ import test1 from './test1.md';
 import test2 from './test2.md';
 
 attachStaticQuickReference(
-  'Math',
-  'Geometry_1',
+  details.path,
   details.uid,
   version.uid,
   {

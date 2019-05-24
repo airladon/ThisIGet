@@ -1,8 +1,6 @@
 // @flow
-import * as React from 'react';
 import Fig from 'figureone';
-import { attachQuickReference, attachStaticQuickReference } from '../../../../../../js/tools/misc';
-import StaticQR from '../../../../../../js/components/staticQR';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
@@ -139,26 +137,7 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 }
 
-const content = <div>
-  Hellow worldD.
-</div>;
-const Footer = <StaticQR
-  content={content}
-  title={'This is a Title'}
-  link="Math/Geometry_1/Isosceles/summary/base"
-/>;
-const Footer2 = <StaticQR
-  content="Hello World From Static QR"
-  title="title2"
-  link="Math/Geometry_1/Isosceles/summary/base"
-/>;
-
 attachQuickReference(lessonUID, versionUID, {
   Main: QRMain,
   SplitLine: QRSplitLine,
-});
-
-attachStaticQuickReference('Math', 'Geometry_1', lessonUID, versionUID, {
-  simpleTest: Footer,
-  simpleTest2: Footer2,
 });
