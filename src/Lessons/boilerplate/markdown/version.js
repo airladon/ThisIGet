@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'markdown',
   topic: 'boilerplate',
   title: 'Markdown_Lesson',
@@ -10,4 +10,4 @@ var details = {
   type: 'generic',
 };
 
-module.exports = details;
+module.exports = version;

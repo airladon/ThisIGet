@@ -1,13 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Isosceles Triangle',
   dependencies: [
     'CongruentTriangles',
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
   uid: 'Isosceles',
 };
 
-module.exports = details;
+module.exports = lessonDetails;

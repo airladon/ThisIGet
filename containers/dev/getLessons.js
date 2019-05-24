@@ -38,7 +38,7 @@ function updateDetailsAndVersions() {
       let outStr = '// @flow';
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
-      outStr = `${outStr}\nvar details = {`;
+      outStr = `${outStr}\nvar lessonDetails = {`;
       outStr = `${outStr}\n  title: '${details.title}',`;
       outStr = `${outStr}\n  dependencies: [`;
       if (details.dependencies.length > 0) {
@@ -48,10 +48,11 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n  ],`;
       outStr = `${outStr}\n  enabled: ${details.enabled || 'false'},`;
+      outStr = `${outStr}\n  path: '${lessonPath.split('/').slice(2, -1).join('/')}',`;
       outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      outStr = `${outStr}\nmodule.exports = details;`;
+      outStr = `${outStr}\nmodule.exports = lessonDetails;`;
       outStr = `${outStr}\n`;
       fs.writeFileSync(detailsPath, outStr, (err) => {
         if (err) {
@@ -73,7 +74,7 @@ function updateDetailsAndVersions() {
       let outStr = '// @flow';
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
-      outStr = `${outStr}\nvar details = {`;
+      outStr = `${outStr}\nvar version = {`;
       outStr = `${outStr}\n  uid: '${versionUID}',`;
       outStr = `${outStr}\n  topic: '${topic}',`;
       if (topic === 'quickReference') {
@@ -119,7 +120,7 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      outStr = `${outStr}\nmodule.exports = details;`;
+      outStr = `${outStr}\nmodule.exports = version;`;
       outStr = `${outStr}\n`;
       fs.writeFileSync(versionFile, outStr, (err) => {
         if (err) {

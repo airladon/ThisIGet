@@ -1,13 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Cotangent',
   dependencies: [
     'Pythagoras',
   ],
   enabled: false,
+  path: 'Math/Trigonometry_1',
   uid: 'Cotangent',
 };
 
-module.exports = details;
+module.exports = lessonDetails;

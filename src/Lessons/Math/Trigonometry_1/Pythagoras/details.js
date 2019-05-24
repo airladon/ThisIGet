@@ -1,13 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Pythagorean Identity',
   dependencies: [
     'Tangent',
   ],
   enabled: false,
+  path: 'Math/Trigonometry_1',
   uid: 'Pythagoras',
 };
 
-module.exports = details;
+module.exports = lessonDetails;

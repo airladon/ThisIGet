@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'singlePage',
   topic: 'explanation',
   title: 'Initial - Single Page',
@@ -10,4 +10,4 @@ var details = {
   type: 'singlePage',
 };
 
-module.exports = details;
+module.exports = version;

@@ -1,13 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Area of a Circle',
   dependencies: [
     'AreaTriangle',
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
   uid: 'AreaCircle',
 };
 
-module.exports = details;
+module.exports = lessonDetails;

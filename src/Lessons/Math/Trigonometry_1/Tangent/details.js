@@ -1,13 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Tangent',
   dependencies: [
     'Chord',
   ],
   enabled: false,
+  path: 'Math/Trigonometry_1',
   uid: 'Tangent',
 };
 
-module.exports = details;
+module.exports = lessonDetails;
