@@ -6,27 +6,23 @@ import details from '../../details';
 import version from './version';
 import './style.scss';
 import test1 from './test1.md';
+import test2 from './test2.md';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
-
-const content = <div>
-  Hellow worldD.
-</div>;
-
-const Footer = <StaticQR
-  content={content}
-  title={'This is a Title'}
-  link="Math/Geometry_1/Isosceles/summary/base"
-/>;
-
-const Footer2 = <StaticQR
-  content={test1}
-  title="title2"
-  link="Math/Geometry_1/Isosceles/summary/base"
-/>;
-
-attachStaticQuickReference('Math', 'Geometry_1', lessonUID, versionUID, {
-  simpleTest: Footer,
-  simpleTest2: Footer2,
-});
+attachStaticQuickReference(
+  'Math',
+  'Geometry_1',
+  details.details.uid,
+  version.details.uid,
+  {
+    simpleTest: <StaticQR
+      title={'This is a Title'}
+      content={test2}
+      link="Math/Geometry_1/Isosceles/summary/base"
+    />,
+    simpleTest2: <StaticQR
+      title="title2"
+      content={test1}
+      link="Math/Geometry_1/Isosceles/summary/base"
+    />,
+  },
+);

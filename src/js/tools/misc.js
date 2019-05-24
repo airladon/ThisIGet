@@ -189,23 +189,9 @@ function attachStaticQuickReference(
     [name: string]: Object,
   },
 ) {
-  // if (window.quickReference == null) {
-  //   window.quickReference = {};
-  // }
-  // if (window.quickReference[subject] == null) {
-  //   window.quickReference[subject] = {};
-  // }
-  // if (window.quickReference[subject][learningPath] == null) {
-  //   window.quickReference[subject][learningPath] = {};
-  // }
-  // if (window.quickReference[subject][learningPath][lessonUID] == null) {
-  //   window.quickReference[subject][learningPath][lessonUID] = {};
-  // }
-  // window.quickReference[subject][learningPath][lessonUID][versionUID] = qrs;
   Object.keys(qrs).forEach((name) => {
     window.quickReference[`${subject}/${learningPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
   });
-  // window.quickReference[`${subject}/${learningPath}/${lessonUID}/${versionUID}`] = qrs;
 }
 
 export {
