@@ -10,6 +10,4 @@ var details = {
   uid: 'CongruentTriangles',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

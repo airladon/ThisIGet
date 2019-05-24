@@ -10,6 +10,4 @@ var details = {
   uid: 'RightAngleTriangles',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

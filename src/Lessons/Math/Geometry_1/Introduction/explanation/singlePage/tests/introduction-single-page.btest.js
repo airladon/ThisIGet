@@ -11,7 +11,7 @@ expect.extend({ toMatchImageSnapshot });
 //   return new Promise(resolve => setTimeout(resolve, ms));
 // }
 
-describe(`${details.details.uid} - ${version.details.uid}`, () => {
+describe(`${details.uid} - ${version.uid}`, () => {
   test('Top of page', async () => {
     const anglesPath =
       `${sitePath}/Lessons/Math/Geometry_1/Introduction/explanation/singlePage`;

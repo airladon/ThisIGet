@@ -15,6 +15,4 @@ var details = {
   ],
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

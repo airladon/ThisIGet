@@ -10,6 +10,4 @@ var details = {
   uid: 'Chord',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

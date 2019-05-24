@@ -9,6 +9,4 @@ var details = {
   uid: 'Introduction',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

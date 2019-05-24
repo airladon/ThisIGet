@@ -10,6 +10,4 @@ var details = {
   uid: 'Cosine',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

@@ -10,6 +10,4 @@ var details = {
   type: 'singlePage',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

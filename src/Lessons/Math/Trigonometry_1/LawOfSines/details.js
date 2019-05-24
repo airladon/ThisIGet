@@ -10,6 +10,4 @@ var details = {
   uid: 'LawOfSines',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

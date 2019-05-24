@@ -11,6 +11,4 @@ var details = {
   uid: 'RectanglesAndSquares',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

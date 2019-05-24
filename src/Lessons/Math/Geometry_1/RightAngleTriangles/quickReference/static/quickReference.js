@@ -11,8 +11,8 @@ import test2 from './test2.md';
 attachStaticQuickReference(
   'Math',
   'Geometry_1',
-  details.details.uid,
-  version.details.uid,
+  details.uid,
+  version.uid,
   {
     simpleTest: <StaticQR
       title={'This is a Title'}

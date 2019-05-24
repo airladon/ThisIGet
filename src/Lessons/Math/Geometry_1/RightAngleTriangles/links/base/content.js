@@ -10,7 +10,7 @@ import version from './version';
 
 class Content extends SimpleLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -24,7 +24,7 @@ class Content extends SimpleLessonContent {
         <p>
         </p>
       </div>,
-      { links: version.details.links },
+      { links: version.links },
       <div key="1" className="lesson__links_table__disclaimer">
         <p style={{ marginTop: '3em' }}>
           {'If you visit a link, then you can rate the link for your own future reference, and for others that haven\'t yet visited it. If the link is broken or the content has changed and is no longer appropriate, then please let us know at '}

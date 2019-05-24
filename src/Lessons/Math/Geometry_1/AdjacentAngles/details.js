@@ -10,6 +10,4 @@ var details = {
   uid: 'AdjacentAngles',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

@@ -10,6 +10,4 @@ var details = {
   uid: 'SideAngleRelationship',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

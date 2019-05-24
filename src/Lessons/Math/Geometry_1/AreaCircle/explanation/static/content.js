@@ -10,7 +10,7 @@ import content from './content.md';
 
 class Content extends SimpleLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }

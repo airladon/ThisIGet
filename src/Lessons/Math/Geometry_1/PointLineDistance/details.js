@@ -10,6 +10,4 @@ var details = {
   uid: 'PointLineDistance',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

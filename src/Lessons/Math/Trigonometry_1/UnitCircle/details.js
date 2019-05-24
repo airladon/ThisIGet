@@ -9,6 +9,4 @@ var details = {
   uid: 'UnitCircle',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

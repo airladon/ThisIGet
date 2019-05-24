@@ -10,6 +10,4 @@ var details = {
   uid: 'ParallelLines',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

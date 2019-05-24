@@ -10,6 +10,4 @@ var details = {
   uid: 'SideSideSide',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

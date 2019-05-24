@@ -26,11 +26,11 @@ export default function getLessonIndex() {
       // $FlowFixMe
       const details = require(detailsPathRelativeToThisFile);
       /* eslint-enable */
-      ({ title } = details.details);
-      ({ dependencies } = details.details);
-      // ({ uid } = details.details);
-      ({ enabled } = details.details);
-      // ({ qr } = details.details);
+      ({ title } = details);
+      ({ dependencies } = details);
+      // ({ uid } = details);
+      ({ enabled } = details);
+      // ({ qr } = details);
       if (enabled != null && enabled === false) {
         enabled = false;
       } else {
@@ -77,20 +77,20 @@ export default function getLessonIndex() {
             // $FlowFixMe
             const version = require(versionPathRelativeToThisFile);
             /* eslint-enable */
-            if (version.details.title != null) {
-              versionTitle = version.details.title;
+            if (version.title != null) {
+              versionTitle = version.title;
             }
-            if (version.details.description != null) {
-              versionDescription = version.details.description;
+            if (version.description != null) {
+              versionDescription = version.description;
             }
-            if (version.details.fullLesson != null) {
-              ({ fullLesson } = version.details);
+            if (version.fullLesson != null) {
+              ({ fullLesson } = version);
             }
-            if (version.details.type != null) {
-              ({ type } = version.details);
+            if (version.type != null) {
+              ({ type } = version);
             }
-            if (version.details.references != null) {
-              ({ references } = version.details);
+            if (version.references != null) {
+              ({ references } = version);
             }
           }
 

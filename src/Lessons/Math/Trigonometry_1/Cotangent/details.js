@@ -10,6 +10,4 @@ var details = {
   uid: 'Cotangent',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

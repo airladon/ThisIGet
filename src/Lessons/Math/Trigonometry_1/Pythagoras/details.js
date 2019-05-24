@@ -10,6 +10,4 @@ var details = {
   uid: 'Pythagoras',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

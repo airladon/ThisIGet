@@ -10,6 +10,4 @@ var details = {
   uid: 'AreaCircle',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

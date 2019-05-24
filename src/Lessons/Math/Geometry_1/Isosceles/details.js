@@ -10,6 +10,4 @@ var details = {
   uid: 'Isosceles',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

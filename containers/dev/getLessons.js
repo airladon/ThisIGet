@@ -39,21 +39,19 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
       outStr = `${outStr}\nvar details = {`;
-      outStr = `${outStr}\n  title: '${details.details.title}',`;
+      outStr = `${outStr}\n  title: '${details.title}',`;
       outStr = `${outStr}\n  dependencies: [`;
-      if (details.details.dependencies.length > 0) {
-        details.details.dependencies.forEach((dependency) => {
+      if (details.dependencies.length > 0) {
+        details.dependencies.forEach((dependency) => {
           outStr = `${outStr}\n    '${dependency}',`;
         });
       }
       outStr = `${outStr}\n  ],`;
-      outStr = `${outStr}\n  enabled: ${details.details.enabled || 'false'},`;
+      outStr = `${outStr}\n  enabled: ${details.enabled || 'false'},`;
       outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      outStr = `${outStr}\nmodule.exports = {`;
-      outStr = `${outStr}\n  details,`;
-      outStr = `${outStr}\n};`;
+      outStr = `${outStr}\nmodule.exports = details;`;
       outStr = `${outStr}\n`;
       fs.writeFileSync(detailsPath, outStr, (err) => {
         if (err) {
@@ -79,19 +77,19 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  uid: '${versionUID}',`;
       outStr = `${outStr}\n  topic: '${topic}',`;
       if (topic === 'quickReference') {
-        outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
+        outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
         outStr = `${outStr}\n  references: [`;
-        if (version.details.references.length > 0) {
-          version.details.references.forEach((reference) => {
+        if (version.references.length > 0) {
+          version.references.forEach((reference) => {
             outStr = `${outStr}\n    '${reference}',`;
           });
         }
         outStr = `${outStr}\n  ],`;
       } else if (topic === 'links') {
-        outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
+        outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
         outStr = `${outStr}\n  links: [`;
-        if (version.details.links.length > 0) {
-          version.details.links.forEach((link) => {
+        if (version.links.length > 0) {
+          version.links.forEach((link) => {
             outStr = `${outStr}\n    {`;
             if (link.url != null) {
               outStr = `${outStr}\n      url: '${link.url}',`;
@@ -114,16 +112,14 @@ function updateDetailsAndVersions() {
         }
         outStr = `${outStr}\n  ],`;
       } else {
-        outStr = `${outStr}\n  title: '${version.details.title || ''}',`;
-        outStr = `${outStr}\n  description: '${version.details.description || ''}',`;
-        outStr = `${outStr}\n  fullLesson: ${version.details.fullLesson || 'false'},`;
-        outStr = `${outStr}\n  type: '${version.details.type || 'generic'}',`;
+        outStr = `${outStr}\n  title: '${version.title || ''}',`;
+        outStr = `${outStr}\n  description: '${version.description || ''}',`;
+        outStr = `${outStr}\n  fullLesson: ${version.fullLesson || 'false'},`;
+        outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
       }
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      outStr = `${outStr}\nmodule.exports = {`;
-      outStr = `${outStr}\n  details,`;
-      outStr = `${outStr}\n};`;
+      outStr = `${outStr}\nmodule.exports = details;`;
       outStr = `${outStr}\n`;
       fs.writeFileSync(versionFile, outStr, (err) => {
         if (err) {

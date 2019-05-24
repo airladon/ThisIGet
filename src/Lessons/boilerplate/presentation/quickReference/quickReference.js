@@ -37,7 +37,7 @@ export default class QRMain extends PopupBoxCollection {
     this.setTitle('');
     this.setDescription([
     ], modifiers);
-    this.setLink(details.details.uid);
+    this.setLink(details.uid);
   }
 
   show() {
@@ -55,10 +55,10 @@ function attachQuickReference1() {
   if (window.quickReference == null) {
     window.quickReference = {};
   }
-  if (window.quickReference[details.details.uid] == null) {
-    window.quickReference[details.details.uid] = {};
+  if (window.quickReference[details.uid] == null) {
+    window.quickReference[details.uid] = {};
   }
-  window.quickReference[details.details.uid][version.details.uid] = {
+  window.quickReference[details.uid][version.uid] = {
     Main: QRMain,
   };
 }

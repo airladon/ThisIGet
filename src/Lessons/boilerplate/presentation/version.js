@@ -10,6 +10,4 @@ var details = {
   type: 'generic',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

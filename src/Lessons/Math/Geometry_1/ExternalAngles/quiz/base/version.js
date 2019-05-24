@@ -10,6 +10,4 @@ var details = {
   type: 'presentation',
 };
 
-module.exports = {
-  details,
-};
+module.exports = details;

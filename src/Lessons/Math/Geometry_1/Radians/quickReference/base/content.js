@@ -13,11 +13,11 @@ const path = window.location.pathname.split('/');
 const [lessonUID] = path.slice(-3, -2);
 const [versionUID] = path.slice(-1);
 
-const qrids = version.details.references;
+const qrids = version.references;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
