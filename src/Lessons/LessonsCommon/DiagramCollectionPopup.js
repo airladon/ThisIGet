@@ -83,7 +83,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     close.classList.add('lesson__popup_box__close');
     close.id = 'id_lesson__popup_box__close';
     close.innerHTML = 'X';
-    close.onclick = this.hideAll.bind(this);
+    close.onclick = this.destroy.bind(this);
     closeContainer.appendChild(close);
     titleElement.appendChild(closeContainer);
 
@@ -262,12 +262,18 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       overlay = document.getElementById('single_page_lesson__qr__overlay');
     }
     if (overlay == null) {
+      lessonType = 'simple';
+      overlay = document.getElementById('simple_lesson__qr__overlay');
+    }
+    if (overlay == null) {
       return;
     }
 
     // set size of font and window
     if (lessonType === 'singlePage') {
       this.setSinglePageSize();
+    } else if (lessonType === 'simple') {
+      this.setSimplePageSize();
     } else {
       this.setPresentationPageSize();
     }
@@ -352,8 +358,18 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     }
   }
 
+  setSimplePageSize() {
+    const lessonContent = document.getElementById('lesson__content');
+    if (lessonContent == null) {
+      return;
+    }
+    const qrWidth = Math.min(600, lessonContent.clientWidth);
+    const qrHeight = qrWidth * 2 / 3;
+    this.setRootElement(qrWidth, qrHeight);
+  }
+
   setPresentationPageSize() {
-    const overlay = document.getElementById('id_diagram__html');
+    const overlay = document.getElementById('lesson__content_diagram');
     const lessonContent = document.getElementById('lesson__content');
     if (overlay == null || lessonContent == null) {
       return;
@@ -426,6 +442,16 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.prepareToHideAll();
     super.hideAll();
     this.diagram.animateNextFrame();
+  }
+
+  destroy() {
+    this.prepareToHideAll();
+    this.diagram.setElementsToCollection(new DiagramElementCollection());
+    this.diagram.animateNextFrame();
+    const element = document.getElementById(`id_lesson__popup_box__${this.id}`);
+    if (element != null) {
+      element.remove();
+    }
   }
 }
 

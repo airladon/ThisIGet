@@ -4,7 +4,7 @@ This is a test
 <!-- 
 [I'm an inline-style link](javascript:window.lessonFunctions.tester();)
  -->
-[[hypotenuse]]((qr,'Math/Geometry_1/Isosceles/base/simpleTest',#f44))
+[[hypotenuse]]((showQR,'Math/Geometry_1/Isosceles/base/Main',#f44))
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 

@@ -88,6 +88,20 @@ export default class SimpleLessonComponent extends React.Component
           }
         }
       },
+      showQR: (id, parameters) => {
+        const path = parameters.split('/').slice(0, -1).join('/');
+        const qrid = parameters.split('/').slice(-1)[0];
+        this.lesson.content.showQR(path, qrid);
+        const element = document.getElementById('lesson__qr__container');
+        const container = document.getElementById('lesson__content');
+        const link = document.getElementById(id);
+        if (container != null && link != null) {
+          const containerRect = container.getBoundingClientRect();
+          const linkRect = link.getBoundingClientRect();
+          alignLeft(element, linkRect, containerRect);
+          alignTop(element, linkRect, containerRect);
+        }
+      },
     };
   }
 
@@ -97,6 +111,11 @@ export default class SimpleLessonComponent extends React.Component
     if (element != null) {
       element.classList.add('lesson__static_qr__pop_up__hide');
     }
+    // if (this.lesson.content.qrDiagram != null) {
+    //   if (this.lesson.content.qrDiagram.elements != null) {
+    //     this.lesson.content.qrDiagram.elements.hideAll();
+    //   }
+    // }
   }
 
   render() {
@@ -108,6 +127,18 @@ export default class SimpleLessonComponent extends React.Component
       {this.lesson.content.sections}
       <div id="lesson__static_qrs">
         {this.state.qr}
+      </div>
+      <div id="simple_lesson__qr__overlay" className="lesson__qr__overlay">
+        <div id="lesson__qr__container">
+          <div id="id_qr_diagram" className="diagram__container lesson__diagram">
+            <canvas id="id_qr_diagram__text" className='diagram__text'>
+            </canvas>
+            <canvas id="id_qr_diagram__gl" className='diagram__gl'>
+            </canvas>
+            <div id="id_diagram__html" className='diagram__html'>
+            </div>
+          </div>
+        </div>
       </div>
     </div>;
   }
