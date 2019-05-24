@@ -4,11 +4,11 @@ This is a test
 <!-- 
 [I'm an inline-style link](javascript:window.lessonFunctions.tester();)
  -->
-[[hypotenuse]]((showQR,'Math/Geometry_1/Isosceles/base/Main',#f44))
+dsasdf test This is a test This is a test This idsasdf test This is a test This is a test This is a  [[hypotenuse]]((showQR,'Math/Geometry_1/Isosceles/base/Main',#f44))
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 
-[[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/static/simpleTest2',#44f))
+dsasdf test This is a test This is a test This idsasdf test This is a test This is a test This i[[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/static/simpleTest2',#44f))
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 

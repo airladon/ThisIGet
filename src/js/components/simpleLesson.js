@@ -13,7 +13,7 @@ type State = {
 };
 
 /* eslint-disable no-param-reassign */
-function alignLeft(element, linkRect, containerRect) {
+function alignLeft(element, linkRect, containerRect, forceLeftDefine = false) {
   const windowWidth = window.innerWidth;
   if (windowWidth < containerRect.width) {
     element.style.left = '0px';
@@ -24,10 +24,15 @@ function alignLeft(element, linkRect, containerRect) {
   const newRect = element.getBoundingClientRect();
   const proposedLeft = linkLeft + linkRect.width / 2 - newRect.width / 2;
   const overFlow = containerRect.width - (proposedLeft + newRect.width);
+  element.style.float = '';
   if (proposedLeft < 0) {
     element.style.left = '0px';
   } else if (overFlow > 0) {
     element.style.left = `${proposedLeft}px`;
+  } else if (forceLeftDefine) {
+    // element.style.left = `${containerRect.right - newRect.width}px`;
+    element.style.left = '';
+    element.style.float = 'right';
   } else {
     element.style.left = '';
     element.style.right = '0px';
@@ -98,7 +103,7 @@ export default class SimpleLessonComponent extends React.Component
         if (container != null && link != null) {
           const containerRect = container.getBoundingClientRect();
           const linkRect = link.getBoundingClientRect();
-          alignLeft(element, linkRect, containerRect);
+          alignLeft(element, linkRect, containerRect, true);
           alignTop(element, linkRect, containerRect);
         }
       },
