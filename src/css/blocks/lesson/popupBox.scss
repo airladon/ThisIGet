@@ -1,5 +1,6 @@
 :root {
-  --lesson__popup_font_size: var(--lesson__diagram-font-size);
+  // --lesson__popup_font_size: var(--lesson__diagram-font-size);
+  --lesson__popup_font_size: calc(var(--lesson__qr_width) / 35 * 1.2);
 }
 
 .lesson__popup_box {
