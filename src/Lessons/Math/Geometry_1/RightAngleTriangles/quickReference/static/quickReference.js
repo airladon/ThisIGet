@@ -17,12 +17,12 @@ attachStaticQuickReference(
     simpleTest: <StaticQR
       title={'This is a Title'}
       content={test2}
-      link="Math/Geometry_1/Isosceles/summary/base"
+      link={`${details.path}/${details.uid}/explanation/base?page=4`}
     />,
     simpleTest2: <StaticQR
       title="title2"
       content={test1}
-      link="Math/Geometry_1/Isosceles/summary/base"
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
     />,
   },
 );

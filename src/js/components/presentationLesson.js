@@ -129,7 +129,7 @@ export default class PresentationLessonComponent extends React.Component
       numPages: this.lesson.content.sections.length,
     });
 
-    if (this.firstPage != null) {
+    if (this.firstPage != null && this.firstPage < this.lesson.content.sections.length) {
       this.lesson.goToSection(this.firstPage);
     } else {
       this.lesson.goToSection(0);
