@@ -5,6 +5,7 @@ import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
 import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
+import PresentationQR from './presentationQR';
 
 
 type Props = {
@@ -347,7 +348,8 @@ export default class PresentationLessonComponent extends React.Component
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              {
+              <PresentationQR id="presentation_lesson__qr__overlay"/>
+              { /*
               <div id="presentation_lesson__qr__overlay" className="lesson__qr__overlay">
                 <div id="lesson__qr__container">
                   <div id="id_qr_diagram" className="diagram__container lesson__diagram">
@@ -360,7 +362,7 @@ export default class PresentationLessonComponent extends React.Component
                   </div>
                 </div>
               </div>
-              }
+              */ }
         </div>
       </div>
     </div>;

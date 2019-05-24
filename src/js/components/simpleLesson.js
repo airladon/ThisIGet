@@ -3,6 +3,7 @@
 import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
 import StaticQR from './staticQR';
+import PresentationQR from './presentationQR';
 
 type Props = {
   lesson: SimpleLesson;
@@ -24,6 +25,7 @@ function alignLeft(element, linkRect, containerRect, forceLeftDefine = false) {
   const newRect = element.getBoundingClientRect();
   const proposedLeft = linkLeft + linkRect.width / 2 - newRect.width / 2;
   const overFlow = containerRect.width - (proposedLeft + newRect.width);
+  // console.log(newRect.width)
   element.style.float = '';
   if (proposedLeft < 0) {
     element.style.left = '0px';
@@ -85,7 +87,7 @@ export default class SimpleLessonComponent extends React.Component
           element.classList.toggle('lesson__static_qr__pop_up__hide');
           const container = document.getElementById('lesson__content');
           const link = document.getElementById(id);
-          if (container != null && link != null) {
+          if (container != null && link != null && element != null) {
             const containerRect = container.getBoundingClientRect();
             const linkRect = link.getBoundingClientRect();
             alignLeft(element, linkRect, containerRect);
@@ -100,7 +102,7 @@ export default class SimpleLessonComponent extends React.Component
         const element = document.getElementById('lesson__qr__container');
         const container = document.getElementById('lesson__content');
         const link = document.getElementById(id);
-        if (container != null && link != null) {
+        if (container != null && link != null && element != null) {
           const containerRect = container.getBoundingClientRect();
           const linkRect = link.getBoundingClientRect();
           alignLeft(element, linkRect, containerRect, true);
@@ -133,18 +135,7 @@ export default class SimpleLessonComponent extends React.Component
       <div id="lesson__static_qrs">
         {this.state.qr}
       </div>
-      <div id="simple_lesson__qr__overlay" className="lesson__qr__overlay">
-        <div id="lesson__qr__container">
-          <div id="id_qr_diagram" className="diagram__container lesson__diagram">
-            <canvas id="id_qr_diagram__text" className='diagram__text'>
-            </canvas>
-            <canvas id="id_qr_diagram__gl" className='diagram__gl'>
-            </canvas>
-            <div id="id_diagram__html" className='diagram__html'>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PresentationQR id="simple_lesson__qr__overlay"/>
     </div>;
   }
 }
