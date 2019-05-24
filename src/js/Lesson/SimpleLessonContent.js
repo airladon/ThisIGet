@@ -79,6 +79,11 @@ class SimpleLessonContent {
     qrPath: string,
     qrid: string,
   ) {
+    const qr = document.getElementById('id_lesson__pres_qr__popup');
+    console.log(qr)
+    if (qr != null) {
+      qr.classList.remove('lesson__static_qr__pop_up__hide');
+    }
     if (this.qrDiagram == null) {
       this.qrDiagram = new Diagram({
         htmlId: 'id_qr_diagram',

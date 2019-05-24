@@ -28,9 +28,13 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   internalResize: boolean;
 
   setTitle(title: string, modifiers: Object = {}) {
+    console.log('asdf')
     const modifiedText = html.applyModifiers(title, modifiers);
-    this.titleElement.innerHTML = modifiedText;
-    html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+    const elem = document.getElementById('id_lesson__static_qr__title_text');
+    if (elem != null) {
+      elem.innerHTML = modifiedText;
+      html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+    }
     this.modifiers = modifiers;
   }
 
@@ -43,11 +47,15 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         text += `<p>${paragraph}</p>`;
       });
     }
-    let modifiedText = html.applyModifiers(text, modifiers);
-    modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
-    this.descriptionElement.innerHTML = modifiedText;
+    const elem = document.getElementById('id_lesson__qr_description');
+    if (elem != null) {
+      let modifiedText = html.applyModifiers(text, modifiers);
+      modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
+      elem.innerHTML = modifiedText;
+
     // console.log(modifiers)
-    html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+      html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+    }
     this.modifiers = modifiers;
   }
 
@@ -165,7 +173,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       // this.diagram.equation = this.diagram.equationLow;
       // this.diagram.objects = this.diagram.objectsLow;
     }
-    this.add('box', this.makeBox(id));
+    // this.add('box', this.makeBox(id));
     this.interactiveButtonMethod = null;
   }
 
@@ -427,7 +435,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   show() {
     super.show();
-    this._box.show();
+    // this._box.show();
   }
 
   // eslint-disable-next-line class-methods-use-this

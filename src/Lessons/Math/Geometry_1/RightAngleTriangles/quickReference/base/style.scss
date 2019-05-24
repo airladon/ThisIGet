@@ -9,3 +9,31 @@ $colors: (
 body {
   @include color_vars($colors);
 }
+
+.lesson__static_qr__pop_up {
+  font-size: initial;
+  top: 20%;
+  left: 20%;
+  z-index: 10;
+}
+
+.lesson__static_qr__pop_up_content {
+  width: 550px;
+  height: 330px;
+}
+
+#id_presentation_lesson__qr__overlay {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: auto;
+  font-size: initial;
+  z-index: 1;
+}
+
+#id_qr_diagram {
+  width: 100%;
+  height: 100%;
+}

@@ -48,15 +48,18 @@ export class QRMain extends PopupBoxCollection {
       ),
     };
     this.setTitle('Right Angle Triangle');
+    // this.setDescription([
+    //   'Test',
+    // ], modifiers);
     this.setDescription([
       'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
       'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
     ], modifiers);
-    this.setLink(lessonUID);
+    // this.setLink(lessonUID);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    // this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -64,7 +67,7 @@ export class QRMain extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    // this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }

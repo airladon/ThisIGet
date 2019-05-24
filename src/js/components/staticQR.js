@@ -6,10 +6,13 @@ type Props={
   content: string | React.Element<'div'>;
   title: string;
   link: string;
+  id?: string;
 };
 
 export default class StaticQR extends React.Component
                                     <Props> {
+  id: string;
+
   renderContent() {
     if (typeof this.props.content === 'string') {
       return <div
@@ -25,19 +28,24 @@ export default class StaticQR extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
-    const element = document.getElementById('id_lesson__static_qr__popup');
+    const element = document.getElementById(this.id);
     if (element != null) {
       element.classList.add('lesson__static_qr__pop_up__hide');
     }
   }
 
   render() {
+    let { id } = this.props;
+    if (id == null) {
+      id = 'id_lesson__static_qr__popup';
+    }
+    this.id = id;
     return <div
-      id="id_lesson__static_qr__popup"
+      id={id}
       className="lesson__static_qr__pop_up lesson__static_qr__pop_up__hide"
       >
       <div className="lesson__static_qr__title">
-        <div className="lesson__static_qr__title_text">
+        <div className="lesson__static_qr__title_text" id="id_lesson__static_qr__title_text">
           {this.props.title}
         </div>
         <div className="lesson__static_qr__title_close" onClick={this.close.bind(this)}>
