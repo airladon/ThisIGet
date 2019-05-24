@@ -73,7 +73,7 @@ export default class SimpleLessonComponent extends React.Component
   componentDidMount() {
     this.lesson.initialize();
     window.lessonFunctions = {
-      tester: (id, parameters) => {
+      qr: (id, parameters) => {
         this.setState({ qr: window.quickReference[parameters] });
         const element = document.getElementById('id_lesson__static_qr__popup');
         if (element != null) {

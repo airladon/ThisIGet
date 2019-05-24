@@ -20,7 +20,7 @@ class Content extends SimpleLessonContent {
   }
 
   setContent() {
-    this.loadStaticQRs([
+    this.loadQRs([
       'Math/Geometry_1/Isosceles/base',
       'Math/Geometry_1/RightAngleTriangles/static',
     ]);
