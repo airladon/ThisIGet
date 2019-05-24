@@ -39,7 +39,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new CommonCollection(this.diagram, layout);
     this.loadQRs([
-      'Circle',
+      'Math/Geometry_1/Circle/base',
     ]);
   }
 
@@ -416,7 +416,7 @@ class Content extends PresentationLessonContent {
         'We |know| the |circumference| of a circle is |_2pi| |radius_lengths|.',
       ],
       modifiers: {
-        know: this.bindShowQR('Circle', 'Circumference', colors.diagram.action),
+        know: this.bindShowQR('Math/Geometry_1/Circle/base', 'Circumference', colors.diagram.action),
         _2pi: highlightWord('2π', colors.angles),
         circumference: click(diag.pulseArc, [diag], colors.arc),
         radius_lengths: click(diag.pulseRadius, [diag], colors.lines),
@@ -528,7 +528,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         _6_radius_lengths: click(diag.pulseRadianLines, [diag], colors.radianLines),
         circumference: click(diag.pushLine, [diag, Math.PI * 1.999, 1, 1, null], colors.arc),
-        _2pi: this.bindShowQR('Circle/base', 'Pi', {
+        _2pi: this.bindShowQR('Math/Geometry_1/Circle/base', 'Pi', {
           color: colors.angles,
           text: '2π',
           id: 'id_2pi',

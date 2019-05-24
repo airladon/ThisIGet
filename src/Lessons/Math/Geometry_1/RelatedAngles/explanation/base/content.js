@@ -33,8 +33,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'AdjacentAngles/base',
-      'ParallelLines/base',
+      'Math/Geometry_1/AdjacentAngles/base',
+      'Math/Geometry_1/ParallelLines/base',
     ]);
   }
 
@@ -91,7 +91,7 @@ class Content extends PresentationLessonContent {
         'First consider angles |a| and |b|. These form around a |straight_line|, and therefore are |supplementary| angles, adding up to 180º.',
       ],
       modifiers: {
-        supplementary: this.bindShowQR('AdjacentAngles/base', 'Supplementary', colors.diagram.action),
+        supplementary: this.bindShowQR('Math/Geometry_1/AdjacentAngles/base', 'Supplementary', colors.diagram.action),
         a: highlight(colors.angle1),
         b: highlight(colors.angle2),
         straight_line: click(opp.pulseLine1, [opp], colors.lines),
@@ -141,7 +141,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         a: highlight(colors.angle1),
         d: highlight(colors.angle4),
-        supplementary: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
+        supplementary: this.bindShowQR('Math/Geometry_1/AdjacentAngles/base', 'Supplementary', colors.diagram.action),
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
@@ -460,7 +460,7 @@ class Content extends PresentationLessonContent {
       ]),
       modifiers: {
         original: click(three.pulseShaddow, [three], colors.disabled),
-        parallel: this.bindShowQR('ParallelLines/base', 'Main'),
+        parallel: this.bindShowQR('Math/Geometry_1/ParallelLines/base', 'Main'),
         Moving: click(three.randomTranslateLine, [three, null], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -566,7 +566,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         two_lines: click(three.pulseParallel, [three], colors.lines),
-        parallel: this.bindShowQR('ParallelLines/base', 'Main'),
+        parallel: this.bindShowQR('Math/Geometry_1/ParallelLines/base', 'Main'),
         third_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -891,7 +891,7 @@ class Content extends PresentationLessonContent {
         'We also know that |supplementary| angles add up to |_180|.',
       ],
       modifiers: {
-        supplementary: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.angle3),
+        supplementary: this.bindShowQR('Math/Geometry_1/AdjacentAngles/base', 'Supplementary', colors.angle3),
         _180: clickW('180º', three.interiorPulseSupplementary, [three, null], colors.angle3),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -1003,7 +1003,7 @@ class Content extends PresentationLessonContent {
         'If you forget, you can always figure them out, just using |supplementary_angles|!',
       ]),
       modifiers: {
-        supplementary_angles: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
+        supplementary_angles: this.bindShowQR('Math/Geometry_1/AdjacentAngles/base', 'Supplementary', colors.diagram.action),
       },
     });
   }

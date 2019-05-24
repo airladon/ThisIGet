@@ -33,7 +33,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'ImportantAngles',
+      'Math/Geometry_1/ImportantAngles/base',
     ]);
   }
 
@@ -127,7 +127,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
           colors.diagram.action,
         ),
-        right_angle: this.bindShowQR('ImportantAngles', 'Right', colors.angleC),
+        right_angle: this.bindShowQR('Math/Geometry_1/ImportantAngles/base', 'Right', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],
@@ -158,7 +158,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI, Math.PI], 0, 1.5, null],
           colors.diagram.action,
         ),
-        straight_angle: this.bindShowQR('ImportantAngles', 'Straight', colors.angleC),
+        straight_angle: this.bindShowQR('Math/Geometry_1/ImportantAngles/base', 'Straight', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],
@@ -189,7 +189,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
           colors.diagram.action,
         ),
-        full_angle: this.bindShowQR('ImportantAngles', 'Full', colors.angleC),
+        full_angle: this.bindShowQR('Math/Geometry_1/ImportantAngles/base', 'Full', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],

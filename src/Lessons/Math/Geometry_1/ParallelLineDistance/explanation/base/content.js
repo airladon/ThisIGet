@@ -34,9 +34,9 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'PointLineDistance',
-      'RectanglesAndSquares',
-      'RelatedAngles',
+      'Math/Geometry_1/PointLineDistance/base',
+      'Math/Geometry_1/RectanglesAndSquares/base',
+      'Math/Geometry_1/RelatedAngles/base',
     ]);
   }
 
@@ -72,7 +72,7 @@ class Content extends PresentationLessonContent {
         'Similar to the distance between a |point_and_a_line|, the distance between two parallel lines is the |smallest distance| between them.',
       ],
       modifiers: {
-        point_and_a_line: this.bindShowQR('PointLineDistance/base', 'Main'),
+        point_and_a_line: this.bindShowQR('Math/Geometry_1/PointLineDistance/base', 'Main'),
         perpendicular_line: this.bindNext(colors.points),
       },
       show: [topLine, bottomLine],
@@ -104,13 +104,13 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       show: [topLine, bottomLine, point],
       modifiers: {
-        point_and_a_line: this.bindShowQR('PointLineDistance/base', 'Main'),
+        point_and_a_line: this.bindShowQR('Math/Geometry_1/PointLineDistance/base', 'Main'),
         perpendicular_line: this.bindNext(colors.points),
       },
     });
     this.addSection(common, content, {
       modifiers: {
-        point_and_a_line: this.bindShowQR('PointLineDistance/base', 'Main'),
+        point_and_a_line: this.bindShowQR('Math/Geometry_1/PointLineDistance/base', 'Main'),
         perpendicular_line: click(coll.pulseLeft, [coll, null], colors.points),
       },
       show: [topLine, bottomLine, point, leftLine, bottomLeftAngle],
@@ -125,14 +125,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       show: [topLine, bottomLine, point, leftLine, bottomLeftAngle],
       modifiers: {
-        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior'),
+        interior_angles: this.bindShowQR('Math/Geometry_1/RelatedAngles/base', 'Interior'),
         perpendicular: this.bindNext(colors.angles),
         parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.lines),
       },
     });
     this.addSection(common, content, {
       modifiers: {
-        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior'),
+        interior_angles: this.bindShowQR('Math/Geometry_1/RelatedAngles/base', 'Interior'),
         perpendicular: click(coll.pulseTopLeftAngle, [coll, null], colors.angles),
         parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.lines),
       },
@@ -222,7 +222,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         four_sided_shape: click(coll.pulseRectangle, [coll, null], colors.rectangle),
-        rectangle: this.bindShowQR('RectanglesAndSquares', 'Rectangle'),
+        rectangle: this.bindShowQR('Math/Geometry_1/RectanglesAndSquares/base', 'Rectangle'),
       },
     });
 
