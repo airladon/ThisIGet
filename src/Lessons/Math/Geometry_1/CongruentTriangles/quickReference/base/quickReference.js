@@ -366,7 +366,7 @@ export class QRSss extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   CongruentTriangles: QRCongruentTriangles,
   Aaa: QRAaa,
   Sas: QRSas,

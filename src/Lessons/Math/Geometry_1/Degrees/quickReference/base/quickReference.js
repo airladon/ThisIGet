@@ -68,7 +68,7 @@ export default class QRDegrees extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRDegrees,
 });
 

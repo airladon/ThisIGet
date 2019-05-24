@@ -314,7 +314,7 @@ export class QRFull extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Acute: QRAcute,
   Obtuse: QRObtuse,
   Reflex: QRReflex,

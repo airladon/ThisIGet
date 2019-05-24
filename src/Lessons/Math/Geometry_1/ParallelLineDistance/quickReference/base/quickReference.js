@@ -65,6 +65,6 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRParallelLineDistance,
 });

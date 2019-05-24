@@ -216,7 +216,7 @@ export class QRPi extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Diameter: QRDiameter,
   Radius: QRRadius,
   Circumference: QRCircumference,

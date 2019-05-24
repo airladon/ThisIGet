@@ -287,7 +287,7 @@ export class QRInterior extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Opposite: QROpposite,
   Corresponding: QRCorresponding,
   Alternate: QRAlternate,

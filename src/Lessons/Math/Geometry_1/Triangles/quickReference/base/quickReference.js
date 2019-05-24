@@ -56,6 +56,6 @@ export default class QRTriangle extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRTriangle,
 });

@@ -137,7 +137,7 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRMain,
   SplitLine: QRSplitLine,
 });

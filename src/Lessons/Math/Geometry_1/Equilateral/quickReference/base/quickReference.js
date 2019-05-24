@@ -62,6 +62,6 @@ export default class QREquilateral extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QREquilateral,
 });

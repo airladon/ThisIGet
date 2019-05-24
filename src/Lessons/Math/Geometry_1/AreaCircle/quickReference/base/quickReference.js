@@ -59,6 +59,6 @@ export default class QRCircleArea extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRCircleArea,
 });

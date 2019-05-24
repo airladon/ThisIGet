@@ -167,7 +167,7 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRMain,
   Pythagorus: QRPythagorus,
   Area: QRRightAngleTriangleArea,

@@ -135,7 +135,7 @@ export class QRSquare extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Area: QRArea,
   Rectangle: QRRectangle,
   Square: QRSquare,

@@ -66,6 +66,6 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRSideAngleRelationship,
 });

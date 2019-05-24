@@ -82,6 +82,6 @@ export default class QRPointLineDistance extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRPointLineDistance,
 });

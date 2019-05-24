@@ -167,7 +167,7 @@ export class QRExplementary extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Complementary: QRComplementary,
   Supplementary: QRSupplementary,
   Explementary: QRExplementary,

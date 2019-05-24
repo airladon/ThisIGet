@@ -38,6 +38,6 @@ export default class QRAbstraction extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Abstraction: QRAbstraction,
 });

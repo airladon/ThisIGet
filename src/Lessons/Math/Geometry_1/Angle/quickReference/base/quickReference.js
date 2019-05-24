@@ -67,6 +67,6 @@ export default class QRAngle extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRAngle,
 });

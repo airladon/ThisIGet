@@ -53,6 +53,6 @@ export default class QRQuadrangle extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRQuadrangle,
 });

@@ -77,6 +77,6 @@ export default class QRBoilerplate extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRBoilerplate,
 });

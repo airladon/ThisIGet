@@ -25,7 +25,7 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.loadQRs([
-      `${lessonUID}/${versionUID}`,
+      `${details.path}/${lessonUID}/${versionUID}`,
     ]);
   }
 
@@ -42,7 +42,7 @@ class Content extends PresentationLessonContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = this.bindShowQR(`${lessonUID}/${versionUID}`, qrid);
+          out[qrid] = this.bindShowQR(`${details.path}/${lessonUID}/${versionUID}`, qrid);
         });
         return out;
       },
