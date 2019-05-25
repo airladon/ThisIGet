@@ -3568,6 +3568,7 @@ function () {
   // layout: Object;
   // oldScrollY: number;
   // used for drawing debug only
+  // updateFontSize: string;
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -3575,14 +3576,16 @@ function () {
       htmlId: 'id_figureone_canvases',
       limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
-      fontScale: 1
+      fontScale: 1 // updateFontSize: '',
+
     };
     this.scrolled = false; // this.oldScrollY = 0;
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
-        limits = optionsToUse.limits; // this.layout = layout;
+        limits = optionsToUse.limits;
+    this.htmlId = htmlId; // this.layout = layout;
 
     if (typeof htmlId === 'string') {
       var container = document.getElementById(htmlId);
@@ -3665,9 +3668,9 @@ function () {
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
-    }
+    } // this.updateFontSize = optionsToUse.updateFontSize;
 
-    this.updateFontSize = true;
+
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
@@ -3745,13 +3748,38 @@ function () {
   }, {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
-      if (this.updateFontSize) {
-        var style = window.getComputedStyle(document.documentElement);
+      // if (this.updateFontSize) {
+      //   const style = window.getComputedStyle(document.documentElement);
+      //   if (style) {
+      //     this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
+      //   }
+      // }
+      var containerRect = this.container.getBoundingClientRect();
+      var size = containerRect.width / 35; // if (containerRect.width < 700) {
+      //   size = containerRect.width / 35 * (0.84 + 0.15 * (100 - 200) / 500);
+      // }
+      // console.log(this.htmlId)
+      // var fontSize = 12;
 
-        if (style) {
-          this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
+      var test = document.getElementById("".concat(this.htmlId, "_measure"));
+
+      if (test != null) {
+        test.style.fontSize = "".concat(size, "px"); // var height = (test.clientHeight + 1) + "px";
+
+        var width = test.clientWidth + 1;
+        var ratio = width / containerRect.width; // console.log(width, containerRect.width, ratio)
+
+        if (containerRect.width < 500) {
+          size = Math.floor(0.84 / ratio * size * 10000) / 10000;
+        } else {
+          size = Math.floor(0.85 / ratio * size * 10000) / 10000;
         }
-      }
+      } // // var height = (test.clientHeight + 1) + "px";
+      // const newRatio = (test.clientWidth + 1) / containerRect.width;
+      // console.log(oldRatio, newRatio)
+
+
+      this.htmlCanvas.style.fontSize = "".concat(size, "px");
     }
   }, {
     key: "destroy",

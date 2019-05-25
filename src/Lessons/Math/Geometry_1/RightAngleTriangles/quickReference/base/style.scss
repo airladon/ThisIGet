@@ -38,6 +38,7 @@ body {
 #id_qr_diagram {
   width: 100%;
   height: 100%;
+  color: color('diagram', 'text-base');
 }
 
 .lesson__static_qr__pop_up {
@@ -62,4 +63,22 @@ body {
   overflow-y: scroll;
   max-height: calc(500px + 6em);
   background-color: color('white', 'lightest');
+}
+
+.diagram__text_measure {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+}
+
+.lesson__qr_description_container {
+  padding: 1em;
+  display: table;
+}
+
+.lesson__qr_description_text {
+  display: table-cell;
+  vertical-align: middle;
 }

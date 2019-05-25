@@ -28,7 +28,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   internalResize: boolean;
 
   setTitle(title: string, modifiers: Object = {}) {
-    console.log('asdf')
     const modifiedText = html.applyModifiers(title, modifiers);
     const elem = document.getElementById('id_lesson__static_qr__title_text');
     if (elem != null) {
@@ -53,7 +52,6 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
       modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
       elem.innerHTML = modifiedText;
 
-    // console.log(modifiers)
       html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
     }
     this.modifiers = modifiers;

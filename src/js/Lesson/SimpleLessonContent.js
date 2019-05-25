@@ -80,7 +80,6 @@ class SimpleLessonContent {
     qrid: string,
   ) {
     const qr = document.getElementById('id_lesson__pres_qr__popup');
-    console.log(qr)
     if (qr != null) {
       qr.classList.remove('lesson__static_qr__pop_up__hide');
     }
@@ -89,6 +88,7 @@ class SimpleLessonContent {
         htmlId: 'id_qr_diagram',
         // limits: this.diagram.limits,
         limits: new Rect(-3, -2, 6, 4),
+        updateFontSize: true,
       });
     }
     this.qrDiagram.updateFontSize = false;

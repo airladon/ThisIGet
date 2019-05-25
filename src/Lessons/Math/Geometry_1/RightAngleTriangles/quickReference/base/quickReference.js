@@ -59,7 +59,7 @@ export class QRMain extends PopupBoxCollection {
   }
 
   show() {
-    // this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -67,7 +67,7 @@ export class QRMain extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
-    // this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }

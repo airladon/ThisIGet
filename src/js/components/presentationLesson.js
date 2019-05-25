@@ -342,6 +342,9 @@ export default class PresentationLessonComponent extends React.Component
                 </canvas>
                 <div id="id_diagram__html" className='diagram__html'>
                   {this.renderContent(this.state.htmlText)}
+                  <div className="diagram__text_measure" id={`${this.lesson.content.diagramHtmlId}_measure`}>
+                    {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+                  </div>
                 </div>
               </div>
               {this.addGoToButton()}
