@@ -57,97 +57,97 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.modifiers = modifiers;
   }
 
-  makeBox(
-    id: string,
-    title: string = '',
-    description: string = '',
-    modifiers: Object = {},
-  ) {
-    this.id = id;
-    this.title = title;
-    this.description = description;
-    this.modifiers = modifiers;
+  // makeBox(
+  //   id: string,
+  //   title: string = '',
+  //   description: string = '',
+  //   modifiers: Object = {},
+  // ) {
+  //   this.id = id;
+  //   this.title = title;
+  //   this.description = description;
+  //   this.modifiers = modifiers;
 
-    const container = document.createElement('div');
-    this.container = container;
+  //   const container = document.createElement('div');
+  //   this.container = container;
 
-    const titleElement = document.createElement('div');
-    titleElement.classList.add('lesson__popup_box__title');
-    container.appendChild(titleElement);
+  //   const titleElement = document.createElement('div');
+  //   titleElement.classList.add('lesson__popup_box__title');
+  //   container.appendChild(titleElement);
 
-    const infoSymbolContainer = document.createElement('div');
-    infoSymbolContainer.classList.add('lesson__popup_box__title_i_container');
-    const infoSymbol = document.createElement('div');
-    infoSymbol.classList.add('lesson__popup_box__title_i');
-    infoSymbol.innerHTML = 'i';
-    infoSymbolContainer.appendChild(infoSymbol);
-    titleElement.appendChild(infoSymbolContainer);
+  //   const infoSymbolContainer = document.createElement('div');
+  //   infoSymbolContainer.classList.add('lesson__popup_box__title_i_container');
+  //   const infoSymbol = document.createElement('div');
+  //   infoSymbol.classList.add('lesson__popup_box__title_i');
+  //   infoSymbol.innerHTML = 'i';
+  //   infoSymbolContainer.appendChild(infoSymbol);
+  //   titleElement.appendChild(infoSymbolContainer);
 
-    const closeContainer = document.createElement('div');
-    closeContainer.classList.add('lesson__popup_box__close_container');
-    const close = document.createElement('div');
-    close.classList.add('lesson__popup_box__close');
-    close.id = 'id_lesson__popup_box__close';
-    close.innerHTML = 'X';
-    close.onclick = this.destroy.bind(this);
-    closeContainer.appendChild(close);
-    titleElement.appendChild(closeContainer);
+  //   const closeContainer = document.createElement('div');
+  //   closeContainer.classList.add('lesson__popup_box__close_container');
+  //   const close = document.createElement('div');
+  //   close.classList.add('lesson__popup_box__close');
+  //   close.id = 'id_lesson__popup_box__close';
+  //   close.innerHTML = 'X';
+  //   close.onclick = this.destroy.bind(this);
+  //   closeContainer.appendChild(close);
+  //   titleElement.appendChild(closeContainer);
 
-    const titleContainer = document.createElement('div');
-    titleContainer.classList.add('lesson__popup_box__title_text_container');
-    const titleText = document.createElement('div');
-    titleText.classList.add('lesson__popup_box__title_text');
-    this.titleElement = titleText;
-    this.setTitle(title);
-    titleContainer.appendChild(titleText);
-    titleElement.appendChild(titleContainer);
+  //   const titleContainer = document.createElement('div');
+  //   titleContainer.classList.add('lesson__popup_box__title_text_container');
+  //   const titleText = document.createElement('div');
+  //   titleText.classList.add('lesson__popup_box__title_text');
+  //   this.titleElement = titleText;
+  //   this.setTitle(title);
+  //   titleContainer.appendChild(titleText);
+  //   titleElement.appendChild(titleContainer);
 
-    const content = document.createElement('div');
-    content.classList.add('lesson__popup_box__content');
-    container.appendChild(content);
+  //   const content = document.createElement('div');
+  //   content.classList.add('lesson__popup_box__content');
+  //   container.appendChild(content);
 
-    const spaceForDiagram = document.createElement('div');
-    spaceForDiagram.classList.add('lesson__popup_box__diagram');
-    spaceForDiagram.id = (`id_lesson__popup_box__diagram__${id}`);
-    this.spaceForDiagramElement = spaceForDiagram;
-    content.appendChild(spaceForDiagram);
+  //   const spaceForDiagram = document.createElement('div');
+  //   spaceForDiagram.classList.add('lesson__popup_box__diagram');
+  //   spaceForDiagram.id = (`id_lesson__popup_box__diagram__${id}`);
+  //   this.spaceForDiagramElement = spaceForDiagram;
+  //   content.appendChild(spaceForDiagram);
 
-    const textContainer = document.createElement('div');
-    textContainer.classList.add('lesson__popup_box__text_container');
-    textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
+  //   const textContainer = document.createElement('div');
+  //   textContainer.classList.add('lesson__popup_box__text_container');
+  //   textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
 
-    const centeringTextContainer = document.createElement('div');
-    centeringTextContainer.classList.add('lesson__popup_box__centering_text_container');
-    centeringTextContainer.id = `id_lesson__popup_box__centering_text_container__${this.id}`;
-    textContainer.appendChild(centeringTextContainer);
-    // const textSubContainer = document.createElement('div');
-    // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
-    // textContainer.appendChild(textSubContainer);
-    content.appendChild(textContainer);
-    const descriptionElement = document.createElement('div');
-    descriptionElement.classList.add('lesson__popup_box__text');
-    descriptionElement.id = `id_lesson__popup_box__text__${id}`;
-    this.descriptionElement = descriptionElement;
-    this.setDescription(description);
-    centeringTextContainer.appendChild(descriptionElement);
+  //   const centeringTextContainer = document.createElement('div');
+  //   centeringTextContainer.classList.add('lesson__popup_box__centering_text_container');
+  //   centeringTextContainer.id = `id_lesson__popup_box__centering_text_container__${this.id}`;
+  //   textContainer.appendChild(centeringTextContainer);
+  //   // const textSubContainer = document.createElement('div');
+  //   // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
+  //   // textContainer.appendChild(textSubContainer);
+  //   content.appendChild(textContainer);
+  //   const descriptionElement = document.createElement('div');
+  //   descriptionElement.classList.add('lesson__popup_box__text');
+  //   descriptionElement.id = `id_lesson__popup_box__text__${id}`;
+  //   this.descriptionElement = descriptionElement;
+  //   this.setDescription(description);
+  //   centeringTextContainer.appendChild(descriptionElement);
 
-    const linkElement = document.createElement('div');
-    linkElement.classList.add('lesson__popup_box__link');
-    this.linkElement = linkElement;
-    container.appendChild(linkElement);
+  //   const linkElement = document.createElement('div');
+  //   linkElement.classList.add('lesson__popup_box__link');
+  //   this.linkElement = linkElement;
+  //   container.appendChild(linkElement);
 
 
-    const element = this.diagram.shapes.htmlElement(
-      container,
-      `id_lesson__popup_box__${this.id}`,
-      'lesson__popup_box',
-      new Point(0, 0),
-      'middle',
-      'center',
-    );
-    return element;
-    // diagram.htmlCanvas.appendChild(container);
-  }
+  //   const element = this.diagram.shapes.htmlElement(
+  //     container,
+  //     `id_lesson__popup_box__${this.id}`,
+  //     'lesson__popup_box',
+  //     new Point(0, 0),
+  //     'middle',
+  //     'center',
+  //   );
+  //   return element;
+  //   // diagram.htmlCanvas.appendChild(container);
+  // }
 
   constructor(
     diagram: Object,
@@ -229,7 +229,11 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     element: DiagramElementCollection | DiagramElementPrimative,
     lensWindow: Rect,
   ) {
-    const diagramContainer = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    const diagramContainer = document.getElementById('id_lesson__qr_diagram_container');
+    // console.log(diagramContainer)
+    // console.log(this.diagram.spaceTransforms)
+    element.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    
     if (diagramContainer != null) {
       // eslint-disable-next-line no-param-reassign
       element.tieToHTML = {
@@ -244,124 +248,154 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   // size is width for 'left' or 'right', an height for 'up' or 'down'
   // For auto, size is 0.5
+  // eslint-disable-next-line class-methods-use-this
   setDiagramSpace(
     optionsIn: {
       location?: 'left' | 'right' | 'top' | 'bottom',
-      xSize?: number,
-      ySize?: number,
+      size?: number,
     },
   ) {
     const defaultOptions = {
       location: 'top',
-      xSize: 0.5,
-      ySize: 0.5,
+      size: 0.5,
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
+    const { location, size } = options;
+    const diagramContainer = document.getElementById('id_lesson__qr_diagram_container');
+    const textContainer = document.getElementById('id_lesson__qr_description_container');
 
-    // let overlayAR = 1;
-    let overlay = document.getElementById('presentation_lesson__qr__overlay');
-
-    // deterimine the lesson type
-    let lessonType = 'presentation';
-    if (overlay == null) {
-      lessonType = 'singlePage';
-      overlay = document.getElementById('single_page_lesson__qr__overlay');
-    }
-    if (overlay == null) {
-      lessonType = 'simple';
-      overlay = document.getElementById('simple_lesson__qr__overlay');
-    }
-    if (overlay == null) {
+    if (textContainer == null || diagramContainer == null) {
       return;
     }
-
-    // set size of font and window
-    if (lessonType === 'singlePage') {
-      this.setSinglePageSize();
-    } else if (lessonType === 'simple') {
-      this.setSimplePageSize();
-    } else {
-      this.setPresentationPageSize();
+    if (location === 'left') {
+      textContainer.style.float = 'right';
+      textContainer.style.height = '100%';
+      textContainer.style.width = `${Math.floor((1 - size) * 100)}%`;
+      diagramContainer.style.width = `${Math.floor(size * 100)}%`;
+      diagramContainer.style.height = '100%';
+      diagramContainer.style.float = '';
+    } else if (location === 'right') {
+      textContainer.style.float = '';
+      textContainer.style.height = '100%';
+      textContainer.style.width = `${Math.floor((1 - size) * 100)}%`;
+      diagramContainer.style.width = `${Math.floor(size * 100)}%`;
+      diagramContainer.style.height = '100%';
+      diagramContainer.style.float = 'right';
+    } else if (location === 'top') {
+      textContainer.style.float = '';
+      textContainer.style.height = `${Math.floor((1 - size) * 100)}%`;
+      textContainer.style.width = '100%';
+      diagramContainer.style.height = `${Math.floor(size * 100)}%`;
+      diagramContainer.style.width = '100%';
+      diagramContainer.style.float = '';
     }
-    // this.diagram.webglLow.resize();
-    // this.diagram.draw2DLow.resize();
-    // this.diagram.setSpaceTransforms();
-    // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
-    // this.internalResize = true;
-    // console.log('1')
-    // console.trace()
-    this.tieToHTML.updateOnResize = false;
-    this.diagram.resize(true);
-    this.tieToHTML.updateOnResize = true;
-    // console.log('2')
-    // this.internalResize = false;
-    // this.diagram.setFirstTransform();
 
-    // Overlay aspect ratio
-    // overlayAR = overlay.clientWidth / overlay.clientHeight;
+    // const options = joinObjects({}, defaultOptions, optionsIn);
 
-    // determine the location to use
-    const locationToUse = options.location;
-    // if (options.location === 'auto') {
-    //   if (
-    //     overlay.clientWidth > 600
-    //     || overlayAR > 1
-    //     || lessonType === 'presentation'
-    //   ) {
-    //     locationToUse = 'left';
-    //   } else {
-    //     locationToUse = 'top';
+    // // let overlayAR = 1;
+    // let overlay = document.getElementById('presentation_lesson__qr__overlay');
+
+    // // deterimine the lesson type
+    // let lessonType = 'presentation';
+    // if (overlay == null) {
+    //   lessonType = 'singlePage';
+    //   overlay = document.getElementById('single_page_lesson__qr__overlay');
+    // }
+    // if (overlay == null) {
+    //   lessonType = 'simple';
+    //   overlay = document.getElementById('simple_lesson__qr__overlay');
+    // }
+    // if (overlay == null) {
+    //   return;
+    // }
+
+    // // set size of font and window
+    // if (lessonType === 'singlePage') {
+    //   this.setSinglePageSize();
+    // } else if (lessonType === 'simple') {
+    //   this.setSimplePageSize();
+    // } else {
+    //   this.setPresentationPageSize();
+    // }
+    // // this.diagram.webglLow.resize();
+    // // this.diagram.draw2DLow.resize();
+    // // this.diagram.setSpaceTransforms();
+    // // this.diagram.elements.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
+    // // this.internalResize = true;
+    // // console.log('1')
+    // // console.trace()
+    // this.tieToHTML.updateOnResize = false;
+    // this.diagram.resize(true);
+    // this.tieToHTML.updateOnResize = true;
+    // // console.log('2')
+    // // this.internalResize = false;
+    // // this.diagram.setFirstTransform();
+
+    // // Overlay aspect ratio
+    // // overlayAR = overlay.clientWidth / overlay.clientHeight;
+
+    // // determine the location to use
+    // const locationToUse = options.location;
+    // // if (options.location === 'auto') {
+    // //   if (
+    // //     overlay.clientWidth > 600
+    // //     || overlayAR > 1
+    // //     || lessonType === 'presentation'
+    // //   ) {
+    // //     locationToUse = 'left';
+    // //   } else {
+    // //     locationToUse = 'top';
+    // //   }
+    // // }
+
+    // // determine diagram size to use
+    // let xSizeD;
+    // let ySizeD;
+    // let xSizeT;
+    // let ySizeT;
+    // if (locationToUse === 'top' || locationToUse === 'bottom') {
+    //   xSizeD = 1;
+    //   ySizeD = options.ySize;
+    //   xSizeT = 1;
+    //   ySizeT = 1 - options.ySize;
+    //   this.spaceForDiagramElement.style.float = 'none';
+    // } else {
+    //   xSizeD = options.xSize;
+    //   ySizeD = 1;
+    //   xSizeT = 1 - options.xSize;
+    //   ySizeT = 1;
+    //   this.spaceForDiagramElement.style.float = locationToUse;
+    // }
+
+    // // Arrange diagram and text content accordinly
+    // const textElement = document.getElementById(`id_lesson__popup_box__text_container__${this.id}`);
+    // const diagramElement = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
+    // if (textElement != null && diagramElement != null) {
+    //   const parent = textElement.parentElement;
+    //   if (parent != null) {
+    //     parent.removeChild(textElement);
+    //     parent.removeChild(diagramElement);
+    //     if (locationToUse === 'bottom') {
+    //       parent.appendChild(textElement);
+    //       parent.appendChild(diagramElement);
+    //     } else {
+    //       parent.appendChild(diagramElement);
+    //       parent.appendChild(textElement);
+    //     }
     //   }
     // }
 
-    // determine diagram size to use
-    let xSizeD;
-    let ySizeD;
-    let xSizeT;
-    let ySizeT;
-    if (locationToUse === 'top' || locationToUse === 'bottom') {
-      xSizeD = 1;
-      ySizeD = options.ySize;
-      xSizeT = 1;
-      ySizeT = 1 - options.ySize;
-      this.spaceForDiagramElement.style.float = 'none';
-    } else {
-      xSizeD = options.xSize;
-      ySizeD = 1;
-      xSizeT = 1 - options.xSize;
-      ySizeT = 1;
-      this.spaceForDiagramElement.style.float = locationToUse;
-    }
-
-    // Arrange diagram and text content accordinly
-    const textElement = document.getElementById(`id_lesson__popup_box__text_container__${this.id}`);
-    const diagramElement = document.getElementById(`id_lesson__popup_box__diagram__${this.id}`);
-    if (textElement != null && diagramElement != null) {
-      const parent = textElement.parentElement;
-      if (parent != null) {
-        parent.removeChild(textElement);
-        parent.removeChild(diagramElement);
-        if (locationToUse === 'bottom') {
-          parent.appendChild(textElement);
-          parent.appendChild(diagramElement);
-        } else {
-          parent.appendChild(diagramElement);
-          parent.appendChild(textElement);
-        }
-      }
-    }
-
-    // set size of diagram and text element
-    if (textElement != null && diagramElement != null) {
-      diagramElement.style.width
-        = `calc(var(--lesson__qr_width) * ${xSizeD})`;
-      diagramElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeD * 0.75})`;
-      textElement.style.width
-        = `calc(var(--lesson__qr_width) * ${xSizeT})`;
-      textElement.style.height
-        = `calc(var(--lesson__qr_height) * ${ySizeT * 0.75})`;
-    }
+    // // set size of diagram and text element
+    // if (textElement != null && diagramElement != null) {
+    //   diagramElement.style.width
+    //     = `calc(var(--lesson__qr_width) * ${xSizeD})`;
+    //   diagramElement.style.height
+    //     = `calc(var(--lesson__qr_height) * ${ySizeD * 0.75})`;
+    //   textElement.style.width
+    //     = `calc(var(--lesson__qr_width) * ${xSizeT})`;
+    //   textElement.style.height
+    //     = `calc(var(--lesson__qr_height) * ${ySizeT * 0.75})`;
+    // }
   }
 
   setSimplePageSize() {
@@ -460,28 +494,3 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     }
   }
 }
-
-//   setPosition(
-//     xOrPoint: Point | number,
-//     yOrReference: 'center' | 'topLeft' | number = 'center',
-//     reference: 'center' | 'topLeft' = 'center',
-//   ) {
-//     let point = xOrPoint;
-//     let ref = yOrReference;
-//     if (typeof xOrPoint === 'number' && typeof yOrReference === 'number') {
-//       point = new Point(xOrPoint, yOrReference);
-//       ref = reference;
-//     }
-//     if (point instanceof Point) {
-//       const cssSpace = point
-//         .transformBy(this.diagram.diagramToCSSPercentSpaceTransform.matrix());
-//       this.container.style.left = `${cssSpace.x * 100}%`;
-//       this.container.style.top = `${cssSpace.y * 100}%`;
-//       if (ref === 'topLeft') {
-//         this.container.style.transform = 'none';
-//       }
-//       if (ref === 'center') {
-//         this.container.style.transform = 'translate(-50%, -50%)';
-//       }
-//     }
-//   }

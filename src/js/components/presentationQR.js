@@ -16,7 +16,9 @@ export default class PresentationQR extends React.Component
           <canvas id="id_qr_diagram__gl" className='diagram__gl'>
           </canvas>
           <div id="id_diagram__html" className='diagram__html'>
-            <div className="lesson__qr_description_container">
+            <div id="id_lesson__qr_diagram_container">
+            </div>
+            <div id="id_lesson__qr_description_container" className="lesson__qr_description_container">
               <div className="lesson__qr_description_text" id="id_lesson__qr_description">
               </div>
             </div>
