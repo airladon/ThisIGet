@@ -57,6 +57,7 @@ export default class StaticQR extends React.Component
       </div>
       <div className="lesson__static_qr__link_container">
         <a className="lesson__static_qr__link_link"
+          id="id_lesson__static_qr__link_link"
           href={`${window.location.origin}/Lessons/${this.props.link}`}
           rel='noreferrer noopener'
           target="_blank"

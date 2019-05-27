@@ -57,6 +57,16 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.modifiers = modifiers;
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setLink(link: string = '') {
+    const a = document.getElementById('id_lesson__static_qr__link_link');
+    if (a != null) {
+      console.log(link)
+      a.href = `${window.location.origin}/Lessons/${link}`;
+      console.log(a.href)
+    }
+  }
+
   // makeBox(
   //   id: string,
   //   title: string = '',
@@ -175,36 +185,26 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.interactiveButtonMethod = null;
   }
 
-  // eslint-disable-next-line class-methods-use-this
-  getLinkFromString(linkOrLessonID: string, versionId: string) {
-    if (linkOrLessonID.startsWith('/')) {
-      return linkOrLessonID;
-    }
-    const index = getLessonIndex();
-    let link = '';
-    const lesson = index[linkOrLessonID];
-    if (lesson != null) {
-      let topic = Object.keys(lesson.topics)[0];
-      if (lesson.topics.summary != null) {
-        topic = 'summary';
-      } else if (lesson.topics.summary !== 'explanation') {
-        topic = 'explanation';
-      }
-      link = `${lesson.path}/${lesson.uid}/${topic}/${versionId}`;
-    }
-    return link;
-  }
+  // // eslint-disable-next-line class-methods-use-this
+  // getLinkFromString(linkOrLessonID: string, versionId: string) {
+  //   if (linkOrLessonID.startsWith('/')) {
+  //     return linkOrLessonID;
+  //   }
+  //   const index = getLessonIndex();
+  //   let link = '';
+  //   const lesson = index[linkOrLessonID];
+  //   if (lesson != null) {
+  //     let topic = Object.keys(lesson.topics)[0];
+  //     if (lesson.topics.summary != null) {
+  //       topic = 'summary';
+  //     } else if (lesson.topics.summary !== 'explanation') {
+  //       topic = 'explanation';
+  //     }
+  //     link = `${lesson.path}/${lesson.uid}/${topic}/${versionId}`;
+  //   }
+  //   return link;
+  // }
 
-  setLink(linkOrLessonID: string, explanationId: string = '') {
-    const a = document.createElement('a');
-    a.classList.add('interactive_word');
-    const link = this.getLinkFromString(linkOrLessonID, explanationId);
-    if (link) {
-      a.href = link;
-      a.innerHTML = 'Go to lesson to see why';
-      this.linkElement.appendChild(a);
-    }
-  }
 
   // resize(diagramHTMLElement: ?HTMLElement = null) {
   //   super.resize(diagramHTMLElement);

@@ -39,7 +39,7 @@ export default class PresentationQR extends React.Component
       id="id_lesson__pres_qr__popup"
       content={this.renderContent()}
       title="Hello"
-      link="Math/Geometry_1/Lessons/Circle/explanation/base"
+      link=""
     />;
   }
 }

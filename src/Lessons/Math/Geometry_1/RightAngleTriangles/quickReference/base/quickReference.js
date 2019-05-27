@@ -55,11 +55,11 @@ export class QRMain extends PopupBoxCollection {
       'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
       'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
     ], modifiers);
-    // this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/summary/base?page=3`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', size: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
