@@ -78,13 +78,28 @@ body {
   display: table;
 }
 
-.lesson__qr_description_text {
-  display: table-cell;
-  vertical-align: middle;
-}
+// .lesson__qr_description_text {
+//   display: table-cell;
+//   vertical-align: middle;
+// }
 
 #id_lesson__qr_diagram_container {
   display: inline-block;
   width: 50%;
   height: 50%;
+}
+
+.lesson__qr_description_table_cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr_description_relative {
+  position: relative;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+.lesson__qr_description_text {
+  // position: absolute;
 }

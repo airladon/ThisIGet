@@ -19,7 +19,11 @@ export default class PresentationQR extends React.Component
             <div id="id_lesson__qr_diagram_container">
             </div>
             <div id="id_lesson__qr_description_container" className="lesson__qr_description_container">
-              <div className="lesson__qr_description_text" id="id_lesson__qr_description">
+              <div className="lesson__qr_description_table_cell">
+                <div className="lesson__qr_description_relative">
+                  <div className="lesson__qr_description_text" id="id_lesson__qr_description">
+                  </div>
+                </div>
               </div>
             </div>
             <div className="diagram__text_measure" id={`${this.props.id}_measure`}>
