@@ -2,7 +2,6 @@
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
-// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
@@ -24,15 +23,7 @@ export class QRMain extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -48,18 +39,14 @@ export class QRMain extends PopupBoxCollection {
       ),
     };
     this.setTitle('Right Angle Triangle');
-    // this.setDescription([
-    //   'Test',
-    // ], modifiers);
     this.setDescription([
       'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
       'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
     ], modifiers);
-    this.setLink(`${details.path}/${details.uid}/summary/base?page=3`);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -67,6 +54,7 @@ export class QRMain extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.5, 4, 3));
     this.diagram.animateNextFrame();
   }
@@ -79,15 +67,7 @@ export class QRPythagorus extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -107,11 +87,10 @@ export class QRPythagorus extends PopupBoxCollection {
       'The |Pythagorean_Theorem| relates the |side lengths| of a |right angle triangle|.',
       'For any right angle triangle, the |square| of the |hypotenuse| length is equal to the |sum of the squares| of the remaining |two_side| lengths.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=35`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -119,6 +98,7 @@ export class QRPythagorus extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }

@@ -96,9 +96,11 @@ class SimpleLessonContent {
     // const [uid, versionUid] = combinedUid.split('/');
     const collection = new window.quickReference[`${qrPath}/${qrid}`](this.qrDiagram);
     if (collection != null) {
+      this.qrDiagram.elements.hideAll();
       this.qrDiagram.setElementsToCollection(collection);
       this.qrDiagram.elements.show();
       this.qrDiagram.elements.prepareToHideAll = this.prepareToHideQR.bind(this);
+      this.qrDiagram.animateNextFrame();
     }
   }
 }

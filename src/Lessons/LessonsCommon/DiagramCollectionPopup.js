@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import CommonDiagramCollection from './DiagramCollection';
-import getLessonIndex from './lessonindex';
+// import getLessonIndex from './lessonindex';
 
 const {
   Transform, DiagramElementPrimative, Rect,
@@ -61,103 +61,9 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setLink(link: string = '') {
     const a = document.getElementById('id_lesson__static_qr__link_link');
     if (a != null) {
-      console.log(link)
       a.href = `${window.location.origin}/Lessons/${link}`;
-      console.log(a.href)
     }
   }
-
-  // makeBox(
-  //   id: string,
-  //   title: string = '',
-  //   description: string = '',
-  //   modifiers: Object = {},
-  // ) {
-  //   this.id = id;
-  //   this.title = title;
-  //   this.description = description;
-  //   this.modifiers = modifiers;
-
-  //   const container = document.createElement('div');
-  //   this.container = container;
-
-  //   const titleElement = document.createElement('div');
-  //   titleElement.classList.add('lesson__popup_box__title');
-  //   container.appendChild(titleElement);
-
-  //   const infoSymbolContainer = document.createElement('div');
-  //   infoSymbolContainer.classList.add('lesson__popup_box__title_i_container');
-  //   const infoSymbol = document.createElement('div');
-  //   infoSymbol.classList.add('lesson__popup_box__title_i');
-  //   infoSymbol.innerHTML = 'i';
-  //   infoSymbolContainer.appendChild(infoSymbol);
-  //   titleElement.appendChild(infoSymbolContainer);
-
-  //   const closeContainer = document.createElement('div');
-  //   closeContainer.classList.add('lesson__popup_box__close_container');
-  //   const close = document.createElement('div');
-  //   close.classList.add('lesson__popup_box__close');
-  //   close.id = 'id_lesson__popup_box__close';
-  //   close.innerHTML = 'X';
-  //   close.onclick = this.destroy.bind(this);
-  //   closeContainer.appendChild(close);
-  //   titleElement.appendChild(closeContainer);
-
-  //   const titleContainer = document.createElement('div');
-  //   titleContainer.classList.add('lesson__popup_box__title_text_container');
-  //   const titleText = document.createElement('div');
-  //   titleText.classList.add('lesson__popup_box__title_text');
-  //   this.titleElement = titleText;
-  //   this.setTitle(title);
-  //   titleContainer.appendChild(titleText);
-  //   titleElement.appendChild(titleContainer);
-
-  //   const content = document.createElement('div');
-  //   content.classList.add('lesson__popup_box__content');
-  //   container.appendChild(content);
-
-  //   const spaceForDiagram = document.createElement('div');
-  //   spaceForDiagram.classList.add('lesson__popup_box__diagram');
-  //   spaceForDiagram.id = (`id_lesson__popup_box__diagram__${id}`);
-  //   this.spaceForDiagramElement = spaceForDiagram;
-  //   content.appendChild(spaceForDiagram);
-
-  //   const textContainer = document.createElement('div');
-  //   textContainer.classList.add('lesson__popup_box__text_container');
-  //   textContainer.id = `id_lesson__popup_box__text_container__${this.id}`;
-
-  //   const centeringTextContainer = document.createElement('div');
-  //   centeringTextContainer.classList.add('lesson__popup_box__centering_text_container');
-  //   centeringTextContainer.id = `id_lesson__popup_box__centering_text_container__${this.id}`;
-  //   textContainer.appendChild(centeringTextContainer);
-  //   // const textSubContainer = document.createElement('div');
-  //   // textSubContainer.classList.add('lesson__popup_box__text_sub_container');
-  //   // textContainer.appendChild(textSubContainer);
-  //   content.appendChild(textContainer);
-  //   const descriptionElement = document.createElement('div');
-  //   descriptionElement.classList.add('lesson__popup_box__text');
-  //   descriptionElement.id = `id_lesson__popup_box__text__${id}`;
-  //   this.descriptionElement = descriptionElement;
-  //   this.setDescription(description);
-  //   centeringTextContainer.appendChild(descriptionElement);
-
-  //   const linkElement = document.createElement('div');
-  //   linkElement.classList.add('lesson__popup_box__link');
-  //   this.linkElement = linkElement;
-  //   container.appendChild(linkElement);
-
-
-  //   const element = this.diagram.shapes.htmlElement(
-  //     container,
-  //     `id_lesson__popup_box__${this.id}`,
-  //     'lesson__popup_box',
-  //     new Point(0, 0),
-  //     'middle',
-  //     'center',
-  //   );
-  //   return element;
-  //   // diagram.htmlCanvas.appendChild(container);
-  // }
 
   constructor(
     diagram: Object,
@@ -168,64 +74,20 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     id: string = generateUniqueId(),
   ) {
     super(diagram, layout, transform);
-    // this.internalResize = false;
     if (Collection) {
-      // this.diagram.shapes = this.diagram.shapesHigh;
-      // this.diagram.equation = this.diagram.equationHigh;
-      // this.diagram.objects = this.diagram.objectsHigh;
       this.add(collectionName, new Collection(
         diagram, layout,
         new Transform(id).scale(1, 1).rotate(0).translate(0, 0),
       ));
-      // this.diagram.shapes = this.diagram.shapesLow;
-      // this.diagram.equation = this.diagram.equationLow;
-      // this.diagram.objects = this.diagram.objectsLow;
     }
-    // this.add('box', this.makeBox(id));
     this.interactiveButtonMethod = null;
   }
-
-  // // eslint-disable-next-line class-methods-use-this
-  // getLinkFromString(linkOrLessonID: string, versionId: string) {
-  //   if (linkOrLessonID.startsWith('/')) {
-  //     return linkOrLessonID;
-  //   }
-  //   const index = getLessonIndex();
-  //   let link = '';
-  //   const lesson = index[linkOrLessonID];
-  //   if (lesson != null) {
-  //     let topic = Object.keys(lesson.topics)[0];
-  //     if (lesson.topics.summary != null) {
-  //       topic = 'summary';
-  //     } else if (lesson.topics.summary !== 'explanation') {
-  //       topic = 'explanation';
-  //     }
-  //     link = `${lesson.path}/${lesson.uid}/${topic}/${versionId}`;
-  //   }
-  //   return link;
-  // }
-
-
-  // resize(diagramHTMLElement: ?HTMLElement = null) {
-  //   super.resize(diagramHTMLElement);
-  //   if (this.internalResize === true) {
-  //     return;
-  //   }
-  //   if (this.isShown) {
-  //     this.hideAll();
-  //   } else {
-  //     super.hideAll();
-  //   }
-  //   this.diagram.animateNextFrame();
-  // }
 
   transformToQRWindow(
     element: DiagramElementCollection | DiagramElementPrimative,
     lensWindow: Rect,
   ) {
     const diagramContainer = document.getElementById('id_lesson__qr_diagram_container');
-    // console.log(diagramContainer)
-    // console.log(this.diagram.spaceTransforms)
     element.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
 
     if (diagramContainer != null) {
