@@ -97,6 +97,7 @@ class SimpleLessonContent {
     const collection = new window.quickReference[`${qrPath}/${qrid}`](this.qrDiagram);
     if (collection != null) {
       this.qrDiagram.elements.hideAll();
+      this.qrDiagram.resize();
       this.qrDiagram.clearContext();
       this.qrDiagram.setElementsToCollection(collection);
       this.qrDiagram.elements.show();

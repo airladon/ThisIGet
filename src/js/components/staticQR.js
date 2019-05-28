@@ -34,6 +34,14 @@ export default class StaticQR extends React.Component
     }
   }
 
+  componentDidMount() {
+    window.addEventListener('resize', this.close.bind(this));
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('resize', this.close.bind(this));
+  }
+
   render() {
     let { id } = this.props;
     if (id == null) {
