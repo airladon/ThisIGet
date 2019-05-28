@@ -99,7 +99,7 @@ export default class SimpleLessonComponent extends React.Component
         const path = parameters.split('/').slice(0, -1).join('/');
         const qrid = parameters.split('/').slice(-1)[0];
         this.lesson.content.showQR(path, qrid);
-        const element = document.getElementById('lesson__qr__container');
+        const element = document.getElementById('id_lesson__pres_qr__popup');
         const container = document.getElementById('lesson__content');
         const link = document.getElementById(id);
         if (container != null && link != null && element != null) {
@@ -135,7 +135,7 @@ export default class SimpleLessonComponent extends React.Component
       <div id="lesson__static_qrs">
         {this.state.qr}
       </div>
-      <PresentationQR id="simple_lesson__qr__overlay"/>
+      <PresentationQR id="id_presentation_lesson__qr__overlay"/>
     </div>;
   }
 }

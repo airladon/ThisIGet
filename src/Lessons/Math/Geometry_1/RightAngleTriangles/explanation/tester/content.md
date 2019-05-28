@@ -4,7 +4,7 @@ This is a test
 <!-- 
 [I'm an inline-style link](javascript:window.lessonFunctions.tester();)
  -->
-dsasdf test This is a test This is a test This idsasdf test This is a test This is a test This is a  [[hypotenuse]]((showQR,'Math/Geometry_1/Isosceles/base/Main',#f44))
+dsasdf test This is a test This is a test This idsasdf test This is a test This is a test This is a  [[hypotenuse]]((showQR,'Math/Geometry_1/RightAngleTriangles/base/Main',#f44))
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 
