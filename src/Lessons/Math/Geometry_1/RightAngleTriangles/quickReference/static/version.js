@@ -6,7 +6,8 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
-    'Main',
+    'simpleTest',
+    'simpleTest2',
   ],
 };
 

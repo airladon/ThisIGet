@@ -1,12 +1,14 @@
 // @flow
-
+import Fig from 'figureone';
 import * as React from 'react';
 import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
 import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
 import PresentationQR from './presentationQR';
+import StaticQR from './staticQR';
 
+const { Rect } = Fig;
 
 type Props = {
   lesson: PresentationLesson;
@@ -21,8 +23,44 @@ type State = {
     link?: Function | string;
     active?: boolean;
   }>;
+  qr: React.Element<'div'> | React.Element<typeof StaticQR>,
 };
 
+/* eslint-disable no-param-reassign */
+function align(
+  elementId: string,
+  containerId: string,
+) {
+  const element = document.getElementById(elementId);
+  const container = document.getElementById(containerId);
+  if (element == null || container == null) {
+    return;
+  }
+  element.classList.remove('lesson__static_qr__pop_up__hide');
+  const containerRect = container.getBoundingClientRect();
+  const windowWidth = window.innerWidth;
+  if (windowWidth < containerRect.width) {
+    element.style.left = '0px';
+    return;
+  }
+
+  // Align Left
+  element.style.left = '0px';
+  const newRect = element.getBoundingClientRect();
+  const proposedLeft = containerRect.width / 2 - newRect.width / 2;
+  element.style.left = `${proposedLeft}px`;
+
+  // Align Top
+  const windowHeight = window.innerheight;
+  if (windowHeight < containerRect.height) {
+    element.style.top = '0px';
+    return;
+  }
+  element.style.top = '0';
+  const proposedTop = containerRect.height / 2 - newRect.height / 2;
+  element.style.top = `${proposedTop}px`;
+}
+/* eslint-enable no-param-reassign */
 
 export default class PresentationLessonComponent extends React.Component
                                     <Props, State> {
@@ -47,6 +85,7 @@ export default class PresentationLessonComponent extends React.Component
       numPages: 0,
       page: 0,
       listOfSections: [],
+      qr: <StaticQR content="Loading Reference" link="" title=""/>,
     };
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
@@ -124,6 +163,18 @@ export default class PresentationLessonComponent extends React.Component
     // Instantiate diagram now that the canvas elements have been
     // created.
     this.lesson.initialize();
+    window.lessonFunctions = {
+      qr: (id, parameters) => {
+        this.setState({ qr: window.quickReference[parameters] });
+        align('id_lesson__static_qr__popup', 'lesson__content_diagram');
+      },
+      showQR: (id, parameters) => {
+        const path = parameters.split('/').slice(0, -1).join('/');
+        const qrid = parameters.split('/').slice(-1)[0];
+        this.lesson.content.showQR(path, qrid);
+        align('id_lesson__pres_qr__popup', 'lesson__content_diagram');
+      },
+    };
     this.lesson.content.diagram.resize();
     this.setState({
       listOfSections: this.addListOfSections(),
@@ -351,6 +402,9 @@ export default class PresentationLessonComponent extends React.Component
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
+              <div id="lesson__static_qrs">
+                {this.state.qr}
+              </div>
               <PresentationQR id="id_presentation_lesson__qr__overlay"/>
         </div>
       </div>
