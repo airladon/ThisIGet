@@ -98,7 +98,6 @@ export class QRPythagorus extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
-    // this.diagram.elements.hideAll(); 
     this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
@@ -112,16 +111,7 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
-
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
@@ -133,11 +123,10 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     this.setDescription([
       'The area of a |right angle triangle| is half the product of the |perpendicular_sides|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=6`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -146,6 +135,7 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     coll._tri._side20.hide();
     coll._eqn.showForm('area');
     coll.setScenarios('qr');
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
