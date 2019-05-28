@@ -3748,36 +3748,21 @@ function () {
   }, {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
-      // if (this.updateFontSize) {
-      //   const style = window.getComputedStyle(document.documentElement);
-      //   if (style) {
-      //     this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
-      //   }
-      // }
       var containerRect = this.container.getBoundingClientRect();
-      var size = containerRect.width / 35; // if (containerRect.width < 700) {
-      //   size = containerRect.width / 35 * (0.84 + 0.15 * (100 - 200) / 500);
-      // }
-      // console.log(this.htmlId)
-      // var fontSize = 12;
-
+      var size = containerRect.width / 35;
       var test = document.getElementById("".concat(this.htmlId, "_measure"));
 
       if (test != null) {
-        test.style.fontSize = "".concat(size, "px"); // var height = (test.clientHeight + 1) + "px";
-
+        test.style.fontSize = "".concat(size, "px");
         var width = test.clientWidth + 1;
-        var ratio = width / containerRect.width; // console.log(width, containerRect.width, ratio)
+        var ratio = width / containerRect.width;
 
         if (containerRect.width < 500) {
           size = Math.floor(0.84 / ratio * size * 10000) / 10000;
         } else {
           size = Math.floor(0.85 / ratio * size * 10000) / 10000;
         }
-      } // // var height = (test.clientHeight + 1) + "px";
-      // const newRatio = (test.clientWidth + 1) / containerRect.width;
-      // console.log(oldRatio, newRatio)
-
+      }
 
       this.htmlCanvas.style.fontSize = "".concat(size, "px");
     }

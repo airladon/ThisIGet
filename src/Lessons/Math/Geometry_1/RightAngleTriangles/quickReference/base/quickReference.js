@@ -98,6 +98,7 @@ export class QRPythagorus extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
+    // this.diagram.elements.hideAll(); 
     this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
