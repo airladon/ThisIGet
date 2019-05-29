@@ -69,6 +69,10 @@
   height: 100%;
 }
 
+.lesson__qr__content p:last-child {
+  margin-bottom: 0;
+}
+
 #id_lesson__qr__content_pres .lesson__qr__content {
   padding: 0;
 }

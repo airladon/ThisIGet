@@ -16,7 +16,7 @@ export default class QuickReferencePopup extends React.Component
   renderContent() {
     if (typeof this.props.content === 'string') {
       return <div
-        className="lesson__qr__pcontent"
+        className="lesson__qr__content"
         dangerouslySetInnerHTML={ { __html: this.props.content } }>
       </div>;
     }
