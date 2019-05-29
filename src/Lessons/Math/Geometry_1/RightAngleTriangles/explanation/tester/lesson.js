@@ -23,6 +23,7 @@ class Content extends SimpleLessonContent {
     this.loadQRs([
       'Math/Geometry_1/RightAngleTriangles/base',
       'Math/Geometry_1/RightAngleTriangles/static',
+      'Math/Geometry_1/AdjacentAngles/base',
     ]);
 
     this.sections = [

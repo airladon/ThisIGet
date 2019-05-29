@@ -12,6 +12,13 @@ dsasdf test This is a test This is a test This idsasdf test This is a test This 
 
 dsasdf test This is a test This is a test This idsasdf test This is a test This is a test This i[[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/static/simpleTest',#44f))
 
+[[comp]]((qr,'Math/Geometry_1/AdjacentAngles/base/Complementary',#44f))
+
+[[supp]]((qr,'Math/Geometry_1/AdjacentAngles/base/Supplementary',#44f))
+
+[[expl]]((qr,'Math/Geometry_1/AdjacentAngles/base/Explementary',#44f))
+
+
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
 
 This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test This is a test 
