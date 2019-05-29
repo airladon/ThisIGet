@@ -4,6 +4,8 @@ import QuickReferencePopup from './quickReferencePopup';
 
 type Props = {
   id: string;
+  // title: string;
+  // link: string;
 };
 
 export default class PresentationQR extends React.Component
@@ -35,11 +37,12 @@ export default class PresentationQR extends React.Component
   }
 
   render() {
+    const title = <div id="id_lesson__qr__title_text__pres"></div>;
     return <QuickReferencePopup
       id="id_lesson__qr__content_pres"
       content={this.renderContent()}
-      title=""
-      link=""
+      title={title}
+      link={''}
     />;
   }
 }

@@ -4,7 +4,7 @@ import * as React from 'react';
 
 type Props={
   content: string | React.Element<'div'>;
-  title: string;
+  title: string | React.Element<'div'>;
   link: string;
   id: string;
 };

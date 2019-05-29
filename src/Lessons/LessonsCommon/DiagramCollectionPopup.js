@@ -30,7 +30,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
 
-    const elem = document.getElementById('id_lesson__qr__title_text');
+    const elem = document.getElementById('id_lesson__qr__title_text__pres');
     if (elem != null) {
       elem.innerHTML = modifiedText;
       html.setOnClicks(modifiers, 'lesson__popup_box__action_word');

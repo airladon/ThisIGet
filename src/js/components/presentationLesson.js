@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
@@ -9,7 +9,7 @@ import PresentationQR from './presentationQR';
 import StaticQR from './staticQR';
 import '../../css/presentationLesson.scss';
 
-const { DiagramElementCollection } = Fig;
+// const { DiagramElementCollection } = Fig;
 
 type Props = {
   lesson: PresentationLesson;
@@ -25,6 +25,10 @@ type State = {
     active?: boolean;
   }>;
   qr: React.Element<'div'> | React.Element<typeof StaticQR>,
+  presQR: {
+    title: string;
+    link: string;
+  },
 };
 
 /* eslint-disable no-param-reassign */
@@ -36,13 +40,6 @@ function align(
     return;
   }
   element.classList.remove('lesson__hide');
-  // element.style.left = '0';
-  // element.style.right = '0';
-  // element.style.top = '0';
-  // element.style.bottom = '0';
-  // element.style.margin = 'auto';
-  // element.style.width = 'fit-content';
-  // element.style.height = 'fit-content';
 }
 /* eslint-enable no-param-reassign */
 
@@ -70,6 +67,10 @@ export default class PresentationLessonComponent extends React.Component
       page: 0,
       listOfSections: [],
       qr: <StaticQR content="Loading Reference" link="" title=""/>,
+      presQR: {
+        title: '',
+        link: '',
+      },
     };
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
@@ -414,11 +415,7 @@ export default class PresentationLessonComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
-
-                  
-                      {this.state.qr}
-                  
-
+                {this.state.qr}
                 <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
               </div>
               {this.addGoToButton()}
