@@ -31,18 +31,6 @@ type State = {
   },
 };
 
-/* eslint-disable no-param-reassign */
-function align(
-  elementId: string,
-) {
-  const element = document.getElementById(elementId);
-  if (element == null) {
-    return;
-  }
-  element.classList.remove('lesson__hide');
-}
-/* eslint-enable no-param-reassign */
-
 export default class PresentationLessonComponent extends React.Component
                                     <Props, State> {
   lesson: PresentationLesson;
@@ -165,17 +153,31 @@ export default class PresentationLessonComponent extends React.Component
   }
 
   showStaticQR(id: string, parameters: string) {
+    const presQR = document.getElementById('id_lesson__qr__content_pres');
+    if (presQR != null) {
+      presQR.classList.add('lesson__hide');
+    }
     this.setState({ qr: window.quickReference[parameters] });
     this.setCSSVariables('id_lesson__qr__content_static');
-    align('id_lesson__qr__content_static');
+    const element = document.getElementById('id_lesson__qr__content_static');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
   }
 
   showPresQR(id: string, parameters: string) {
+    const staticQR = document.getElementById('id_lesson__qr__content_static');
+    if (staticQR != null) {
+      staticQR.classList.add('lesson__hide');
+    }
     this.setCSSVariables('id_lesson__qr__content_pres');
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    align('id_lesson__qr__content_pres');
+    const element = document.getElementById('id_lesson__qr__content_pres');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
   }
 
   componentDidMount() {
