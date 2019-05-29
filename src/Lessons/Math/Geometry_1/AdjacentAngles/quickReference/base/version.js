@@ -6,6 +6,9 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
+    'ComplementaryPres',
+    'SupplementaryPres',
+    'ExplementaryPres',
     'Complementary',
     'Supplementary',
     'Explementary',

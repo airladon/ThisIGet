@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -7,6 +8,10 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import complementary from './complementary.md';
+import supplementary from './supplementary.md';
+import explementary from './explementary.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -154,7 +159,22 @@ export class QRExplementary extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, lessonUID, versionUID, {
-  Complementary: QRComplementary,
-  Supplementary: QRSupplementary,
-  Explementary: QRExplementary,
+  ComplementaryPres: QRComplementary,
+  SupplementaryPres: QRSupplementary,
+  ExplementaryPres: QRExplementary,
+  Complementary: <StaticQR
+      title={'Complementary Angles'}
+      content={complementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
+  Supplementary: <StaticQR
+      title={'Supplementary Angles'}
+      content={supplementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
+  Explementary: <StaticQR
+      title={'Explementary Angles'}
+      content={explementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
 });
