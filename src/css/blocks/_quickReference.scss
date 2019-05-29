@@ -173,3 +173,13 @@
   max-width: var(--lesson__qr__content_width);
   max-height: var(--lesson__qr__content_height);
 }
+
+#lesson__content_diagram #id_lesson__qr__content_static {
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  width: fit-content;
+  height: fit-content;
+}

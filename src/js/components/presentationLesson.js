@@ -30,40 +30,19 @@ type State = {
 /* eslint-disable no-param-reassign */
 function align(
   elementId: string,
-  containerId: string,
 ) {
   const element = document.getElementById(elementId);
-  const container = document.getElementById(containerId);
-  if (element == null || container == null) {
+  if (element == null) {
     return;
   }
   element.classList.remove('lesson__hide');
-  const containerRect = container.getBoundingClientRect();
-  const windowWidth = window.innerWidth;
-  if (windowWidth < containerRect.width) {
-    element.style.left = '0';
-    return;
-  }
-
-  // Align Left
   // element.style.left = '0';
-  // element.style.top = '0';
   // element.style.right = '0';
+  // element.style.top = '0';
   // element.style.bottom = '0';
   // element.style.margin = 'auto';
-  const newRect = element.getBoundingClientRect();
-  const proposedLeft = containerRect.width / 2 - newRect.width / 2;
-  element.style.left = `${proposedLeft}px`;
-
-  // Align Top
-  // const windowHeight = window.innerheight;
-  // if (windowHeight < containerRect.height) {
-  //   element.style.top = '0';
-  //   return;
-  // }
-  // element.style.top = '0';
-  const proposedTop = containerRect.height / 2 - newRect.height / 2;
-  element.style.top = `${proposedTop}px`;
+  element.style.width = 'fit-content';
+  element.style.height = 'fit-content';
 }
 /* eslint-enable no-param-reassign */
 
