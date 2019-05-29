@@ -41,8 +41,8 @@ function align(
   // element.style.top = '0';
   // element.style.bottom = '0';
   // element.style.margin = 'auto';
-  element.style.width = 'fit-content';
-  element.style.height = 'fit-content';
+  // element.style.width = 'fit-content';
+  // element.style.height = 'fit-content';
 }
 /* eslint-enable no-param-reassign */
 
@@ -141,32 +141,40 @@ export default class PresentationLessonComponent extends React.Component
     }
   }
 
-  showStaticQR(id: string, parameters: string) {
+  // eslint-disable-next-line class-methods-use-this
+  setCSSVariables(elementId: string) {
     const container = document.getElementById('lesson__content_diagram');
     if (container != null) {
       const containerRect = container.getBoundingClientRect();
       const width = Math.min(containerRect.width * 0.7, 600);
-      document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
-      // const height = width / 1.5;
-      document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+      const doc = document.documentElement;
+      if (doc != null) {
+        doc.style.setProperty('--lesson__qr__content_width', `${width}px`);
+        doc.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+      }
     }
+
+    const diagramHTML = document.getElementById('id_diagram__html');
+    const element = document.getElementById(elementId);
+    if (diagramHTML != null && element != null) {
+      const diagramFontSize = parseFloat(diagramHTML.style.fontSize);
+      const bodyFontSize = parseFloat(window.getComputedStyle(document.body).fontSize);
+      element.style.fontSize = `${Math.min(diagramFontSize, bodyFontSize)}px`;
+    }
+  }
+
+  showStaticQR(id: string, parameters: string) {
     this.setState({ qr: window.quickReference[parameters] });
-    align('id_lesson__qr__content_static', 'lesson__content_diagram');
+    this.setCSSVariables('id_lesson__qr__content_static');
+    align('id_lesson__qr__content_static');
   }
 
   showPresQR(id: string, parameters: string) {
-    const container = document.getElementById('lesson__content_diagram');
-    if (container != null) {
-      const containerRect = container.getBoundingClientRect();
-      const width = Math.min(containerRect.width * 0.7, 600);
-      document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
-      // const height = width / 1.5;
-      document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
-    }
+    this.setCSSVariables('id_lesson__qr__content_pres');
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    align('id_lesson__qr__content_pres', 'lesson__content_diagram');
+    align('id_lesson__qr__content_pres');
   }
 
   componentDidMount() {
@@ -406,7 +414,11 @@ export default class PresentationLessonComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
-                {this.state.qr}
+
+                  
+                      {this.state.qr}
+                  
+
                 <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
               </div>
               {this.addGoToButton()}
