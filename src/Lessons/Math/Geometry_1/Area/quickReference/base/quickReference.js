@@ -12,10 +12,9 @@ const lessonUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
-// const {
-//   click,
-//   highlight,
-// } = Fig.tools.html;
+const {
+  centerH
+} = Fig.tools.html;
 
 export class QRArea extends PopupBoxCollection {
   _collection: CommonCollection;
