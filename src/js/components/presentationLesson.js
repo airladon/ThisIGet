@@ -39,14 +39,14 @@ function align(
   }
   element.classList.remove('lesson__hide');
   const containerRect = container.getBoundingClientRect();
-  const windowWidth = window.innerWidth;
-  if (windowWidth < containerRect.width) {
-    element.style.left = '0px';
-    return;
-  }
+  // const windowWidth = window.innerWidth;
+  // if (windowWidth < containerRect.width) {
+  //   element.style.left = '0';
+  //   return;
+  // }
 
   // Align Left
-  element.style.left = '0px';
+  element.style.left = '0';
   const newRect = element.getBoundingClientRect();
   const proposedLeft = containerRect.width / 2 - newRect.width / 2;
   element.style.left = `${proposedLeft}px`;
@@ -54,7 +54,7 @@ function align(
   // Align Top
   const windowHeight = window.innerheight;
   if (windowHeight < containerRect.height) {
-    element.style.top = '0px';
+    element.style.top = '0';
     return;
   }
   element.style.top = '0';
@@ -163,19 +163,27 @@ export default class PresentationLessonComponent extends React.Component
     window.addEventListener('resize', this.resize.bind(this));
     // Instantiate diagram now that the canvas elements have been
     // created.
-    this.lesson.initialize();
     window.lessonFunctions = {
       qr: (id, parameters) => {
         this.setState({ qr: window.quickReference[parameters] });
         align('id_lesson__qr__content_static', 'lesson__content_diagram');
       },
       showQR: (id, parameters) => {
+        const container = document.getElementById('lesson__content_diagram');
+        if (container != null) {
+          const containerRect = container.getBoundingClientRect();
+          const width = Math.min(containerRect.width * 0.7, 600);
+          document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
+          // const height = width / 1.5;
+          document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+        }
         const path = parameters.split('/').slice(0, -1).join('/');
         const qrid = parameters.split('/').slice(-1)[0];
         this.lesson.content.showQR(path, qrid);
         align('id_lesson__qr__content_pres', 'lesson__content_diagram');
       },
     };
+    this.lesson.initialize();
     this.lesson.content.diagram.resize();
     this.setState({
       listOfSections: this.addListOfSections(),
@@ -398,13 +406,13 @@ export default class PresentationLessonComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
+                {this.state.qr}
+                <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
               </div>
               {this.addGoToButton()}
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              {this.state.qr}
-              <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
         </div>
       </div>
     </div>;

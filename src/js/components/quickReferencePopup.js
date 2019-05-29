@@ -45,7 +45,7 @@ export default class QuickReferencePopup extends React.Component
   render() {
     return <div
       id={this.props.id}
-      className="lesson__qr__pop_up lesson__hide"
+      className="lesson__qr lesson__hide"
       >
       <div className="lesson__qr__title">
         <div

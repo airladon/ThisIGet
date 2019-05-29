@@ -1,4 +1,4 @@
-.lesson__qr__pop_up {
+.lesson__qr {
   // 600px content
   // 1em padding left/right
   max-width: calc(600px + 1em);
@@ -73,6 +73,10 @@
   margin-bottom: 0;
 }
 
+#id_lesson__qr__content_pres {
+  pointer-events: auto;
+}
+
 #id_lesson__qr__content_pres .lesson__qr__content {
   padding: 0;
 }
@@ -118,6 +122,39 @@
   // max-height: 100%;
   margin-left: auto;
   margin-right: auto;
+}
+
+#id_qr_diagram {
+  width: 100%;
+  height: 100%;
+  color: color('diagram', 'text-base');
+}
+
+.lesson__qr_description_container {
+  padding: 1em;
+  display: table;
+}
+
+#id_lesson__qr_diagram_container {
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+}
+
+.lesson__qr_description_table_cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr_description_relative {
+  position: relative;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+.lesson__qr_description_text {
+  // position: absolute;
+  text-align: left;
 }
 
 // ///////////////////////////////////////

@@ -74,42 +74,34 @@ export class QRRight extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      right_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
-      angle_mark: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
-      _90: highlightWord('90º', layout.colors.qrImportantAngles_angle),
+      right_angle: click(coll.pulseAngle, [coll], this.layout.colors.qrImportantAngles_angle),
+      angle_mark: click(coll.pulseAngle, [coll], this.layout.colors.qrImportantAngles_angle),
+      _90: highlightWord('90º', this.layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Right Angle');
     this.setDescription([
-      centerH([
-        'A |right_angle| is an angle of |_90|. Two lines that form a right angle are called |perpendicular| lines. The |angle_mark| is often shown as a square instead of an arc.',
-      ]),
+      'A |right_angle| is an angle of |_90|. Two lines that form a right angle are called |perpendicular| lines. The |angle_mark| is often shown as a square instead of an arc.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6 });
     super.show();
     const collection = this._collection;
-    collection.show();
+    // collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
+    fig.hideAll();
     fig._line1.showAll();
     fig._line2.showAll();
     fig._angle.showAll();
     fig._line1.setRotation(Math.PI / 2);
-    this.transformToQRWindow(collection, new Rect(-0.6, 0.2, 2, 1.6));
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
+    this.transformToQRWindow(collection, new Rect(-0.6, 0.4, 2, 1.4));
     this.diagram.animateNextFrame();
   }
 }

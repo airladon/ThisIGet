@@ -64,7 +64,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         angles: click(coll.pulseRightAngle, [coll], colors.rightAngle),
-        right_angle: this.bindShowQR('Math/Geometry_1/ImportantAngles/base', 'Right'),
+        right_angle: this.qr('Math/Geometry_1/ImportantAngles/base/Right'),
       },
     });
 
