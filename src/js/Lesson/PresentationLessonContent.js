@@ -951,7 +951,7 @@ class PresentationLessonContent extends SimpleLessonContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `lesson__qr_action_word ${options.classes}`;
     }
-    return click(window.lessonFunctions.showQR, [window.lessonFunctions, '', link], options);
+    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', link], options);
   }
 
   addStar() {

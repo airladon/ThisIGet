@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import * as React from 'react';
 import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
@@ -9,7 +9,7 @@ import PresentationQR from './presentationQR';
 import StaticQR from './staticQR';
 import '../../css/presentationLesson.scss';
 
-// const { Rect } = Fig;
+const { DiagramElementCollection } = Fig;
 
 type Props = {
   lesson: PresentationLesson;
@@ -39,25 +39,29 @@ function align(
   }
   element.classList.remove('lesson__hide');
   const containerRect = container.getBoundingClientRect();
-  // const windowWidth = window.innerWidth;
-  // if (windowWidth < containerRect.width) {
-  //   element.style.left = '0';
-  //   return;
-  // }
+  const windowWidth = window.innerWidth;
+  if (windowWidth < containerRect.width) {
+    element.style.left = '0';
+    return;
+  }
 
   // Align Left
-  element.style.left = '0';
+  // element.style.left = '0';
+  // element.style.top = '0';
+  // element.style.right = '0';
+  // element.style.bottom = '0';
+  // element.style.margin = 'auto';
   const newRect = element.getBoundingClientRect();
   const proposedLeft = containerRect.width / 2 - newRect.width / 2;
   element.style.left = `${proposedLeft}px`;
 
   // Align Top
-  const windowHeight = window.innerheight;
-  if (windowHeight < containerRect.height) {
-    element.style.top = '0';
-    return;
-  }
-  element.style.top = '0';
+  // const windowHeight = window.innerheight;
+  // if (windowHeight < containerRect.height) {
+  //   element.style.top = '0';
+  //   return;
+  // }
+  // element.style.top = '0';
   const proposedTop = containerRect.height / 2 - newRect.height / 2;
   element.style.top = `${proposedTop}px`;
 }
@@ -158,6 +162,34 @@ export default class PresentationLessonComponent extends React.Component
     }
   }
 
+  showStaticQR(id: string, parameters: string) {
+    const container = document.getElementById('lesson__content_diagram');
+    if (container != null) {
+      const containerRect = container.getBoundingClientRect();
+      const width = Math.min(containerRect.width * 0.7, 600);
+      document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
+      // const height = width / 1.5;
+      document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+    }
+    this.setState({ qr: window.quickReference[parameters] });
+    align('id_lesson__qr__content_static', 'lesson__content_diagram');
+  }
+
+  showPresQR(id: string, parameters: string) {
+    const container = document.getElementById('lesson__content_diagram');
+    if (container != null) {
+      const containerRect = container.getBoundingClientRect();
+      const width = Math.min(containerRect.width * 0.7, 600);
+      document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
+      // const height = width / 1.5;
+      document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+    }
+    const path = parameters.split('/').slice(0, -1).join('/');
+    const qrid = parameters.split('/').slice(-1)[0];
+    this.lesson.content.showQR(path, qrid);
+    align('id_lesson__qr__content_pres', 'lesson__content_diagram');
+  }
+
   componentDidMount() {
     this.resize();
     window.addEventListener('resize', this.resize.bind(this));
@@ -165,22 +197,11 @@ export default class PresentationLessonComponent extends React.Component
     // created.
     window.lessonFunctions = {
       qr: (id, parameters) => {
-        this.setState({ qr: window.quickReference[parameters] });
-        align('id_lesson__qr__content_static', 'lesson__content_diagram');
-      },
-      showQR: (id, parameters) => {
-        const container = document.getElementById('lesson__content_diagram');
-        if (container != null) {
-          const containerRect = container.getBoundingClientRect();
-          const width = Math.min(containerRect.width * 0.7, 600);
-          document.documentElement.style.setProperty('--lesson__qr__content_width', `${width}px`);
-          // const height = width / 1.5;
-          document.documentElement.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+        if (React.isValidElement(window.quickReference[parameters])) {
+          this.showStaticQR(id, parameters);
+        } else {
+          this.showPresQR(id, parameters);
         }
-        const path = parameters.split('/').slice(0, -1).join('/');
-        const qrid = parameters.split('/').slice(-1)[0];
-        this.lesson.content.showQR(path, qrid);
-        align('id_lesson__qr__content_pres', 'lesson__content_diagram');
       },
     };
     this.lesson.initialize();

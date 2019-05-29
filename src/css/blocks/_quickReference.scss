@@ -16,6 +16,10 @@
   border-radius: 0.4em;
 }
 
+.lesson__qr img {
+  max-width: 100%;
+  max-height: 100%;
+}
 // ///////////////////////////////////////
 // Title
 // ///////////////////////////////////////
@@ -162,4 +166,10 @@
 // ///////////////////////////////////////
 #id_lesson__qr__content_static {
   margin-right: 20px;
+  pointer-events: auto;
+}
+
+#lesson__content_diagram .lesson__qr__content_container {
+  max-width: var(--lesson__qr__content_width);
+  max-height: var(--lesson__qr__content_height);
 }
