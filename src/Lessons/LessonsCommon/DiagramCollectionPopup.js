@@ -60,7 +60,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   // eslint-disable-next-line class-methods-use-this
   setLink(link: string = '') {
-    const a = document.getElementById('id_lesson__qr__link_link');
+    const a = document.getElementById('id_lesson__qr__link_link__pres');
     if (a != null) {
       a.href = `${window.location.origin}/Lessons/${link}`;
     }

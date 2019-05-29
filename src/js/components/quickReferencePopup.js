@@ -5,7 +5,7 @@ import * as React from 'react';
 type Props={
   content: string | React.Element<'div'>;
   title: string | React.Element<'div'>;
-  link: string;
+  link: string | React.Element<'div'>;
   id: string;
 };
 
@@ -43,6 +43,23 @@ export default class QuickReferencePopup extends React.Component
   }
 
   render() {
+    let link = '';
+    if (typeof this.props.link === 'string') {
+      link = <a
+        className="lesson__qr__link_link"
+        id="id_lesson__qr__link_link"
+        href={`${window.location.origin}/Lessons/${this.props.link}`}
+        rel='noreferrer noopener'
+        target="_blank"
+      >
+        Go to lesson to see why
+      </a>;
+    }
+
+    if (React.isValidElement(this.props.link)) {
+      ({ link } = this.props);
+    }
+
     return <div
       id={this.props.id}
       className="lesson__qr lesson__hide"
@@ -65,15 +82,7 @@ export default class QuickReferencePopup extends React.Component
         {this.renderContent()}
       </div>
       <div className="lesson__qr__link_container">
-        <a
-          className="lesson__qr__link_link"
-          id="id_lesson__qr__link_link"
-          href={`${window.location.origin}/Lessons/${this.props.link}`}
-          rel='noreferrer noopener'
-          target="_blank"
-        >
-          Go to lesson to see why
-        </a>
+        {link}
       </div>
     </div>;
   }
