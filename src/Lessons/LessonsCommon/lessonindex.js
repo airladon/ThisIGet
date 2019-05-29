@@ -1029,7 +1029,8 @@ export default function getLessonIndex() {
           static: {
             type: 'presentation',
             references: [
-              'Main',
+              'simpleTest',
+              'simpleTest2',
             ],
           },
         },

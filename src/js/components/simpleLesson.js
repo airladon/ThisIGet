@@ -4,6 +4,7 @@ import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
 import StaticQR from './staticQR';
 import PresentationQR from './presentationQR';
+import '../../css/simpleLesson.scss';
 
 type Props = {
   lesson: SimpleLesson;
@@ -17,7 +18,7 @@ type State = {
 function alignLeft(element, linkRect, containerRect, forceLeftDefine = false) {
   const windowWidth = window.innerWidth;
   if (windowWidth < containerRect.width) {
-    element.style.left = '0px';
+    element.style.left = '20px';
     return;
   }
   const linkLeft = linkRect.left - containerRect.left;
@@ -27,9 +28,9 @@ function alignLeft(element, linkRect, containerRect, forceLeftDefine = false) {
   const overFlow = containerRect.width - (proposedLeft + newRect.width);
   // console.log(newRect.width)
   element.style.float = '';
-  if (proposedLeft < 0) {
-    element.style.left = '0px';
-  } else if (overFlow > 0) {
+  if (proposedLeft <= 20) {
+    element.style.left = '20px';
+  } else if (overFlow > 20) {
     element.style.left = `${proposedLeft}px`;
   } else if (forceLeftDefine) {
     // element.style.left = `${containerRect.right - newRect.width}px`;
@@ -37,7 +38,7 @@ function alignLeft(element, linkRect, containerRect, forceLeftDefine = false) {
     element.style.float = 'right';
   } else {
     element.style.left = '';
-    element.style.right = '0px';
+    element.style.right = '20px';
   }
 }
 
@@ -49,19 +50,8 @@ function alignTop(element, linkRect, containerRect) {
   }
   const linkTop = linkRect.top - containerRect.top;
   element.style.top = '0';
-  // const newRect = element.getBoundingClientRect();
   const proposedTop = linkTop + linkRect.height;
   element.style.top = `${proposedTop}px`;
-  // const proposedBottom = linkTop;
-  // const overFlow = windowHeight.height - (proposedTop + newRect.height);
-  // if (proposedLeft < 0) {
-  //   element.style.left = '0px';
-  // } else if (overFlow > 0) {
-  //   element.style.left = `${proposedLeft}px`;
-  // } else {
-  //   element.style.left = '';
-  //   element.style.right = '0px';
-  // }
 }
 /* eslint-enable no-param-reassign */
 
@@ -82,9 +72,13 @@ export default class SimpleLessonComponent extends React.Component
     window.lessonFunctions = {
       qr: (id, parameters) => {
         this.setState({ qr: window.quickReference[parameters] });
-        const element = document.getElementById('id_lesson__static_qr__popup');
+        const presQR = document.getElementById('id_lesson__qr__content_pres');
+        if (presQR != null) {
+          presQR.classList.add('lesson__hide');
+        }
+        const element = document.getElementById('id_lesson__qr__content_static');
         if (element != null) {
-          element.classList.toggle('lesson__static_qr__pop_up__hide');
+          element.classList.toggle('lesson__hide');
           const container = document.getElementById('lesson__content');
           const link = document.getElementById(id);
           if (container != null && link != null && element != null) {
@@ -96,11 +90,23 @@ export default class SimpleLessonComponent extends React.Component
         }
       },
       showQR: (id, parameters) => {
+        const container = document.getElementById('lesson__content');
+        if (container != null) {
+          const containerRect = container.getBoundingClientRect();
+          const width = Math.min(containerRect.width - 40, 600);
+          document.documentElement.style.setProperty('--lesson__qr__content_width', `calc(${width}px - 1em)`);
+          // const height = width / 1.5;
+          document.documentElement.style.setProperty('--lesson__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
+        }
+        const staticQR = document.getElementById('id_lesson__qr__content_static');
+        if (staticQR != null) {
+          staticQR.classList.add('lesson__hide');
+        }
         const path = parameters.split('/').slice(0, -1).join('/');
         const qrid = parameters.split('/').slice(-1)[0];
         this.lesson.content.showQR(path, qrid);
-        const element = document.getElementById('id_lesson__pres_qr__popup');
-        const container = document.getElementById('lesson__content');
+        const element = document.getElementById('id_lesson__qr__content_pres');
+
         const link = document.getElementById(id);
         if (container != null && link != null && element != null) {
           const containerRect = container.getBoundingClientRect();
@@ -114,28 +120,25 @@ export default class SimpleLessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
-    const element = document.getElementById('id_lesson__static_qr__popup');
+    let element = document.getElementById('id_lesson__qr__content_static');
     if (element != null) {
-      element.classList.add('lesson__static_qr__pop_up__hide');
+      element.classList.add('lesson__hide');
     }
-    // if (this.lesson.content.qrDiagram != null) {
-    //   if (this.lesson.content.qrDiagram.elements != null) {
-    //     this.lesson.content.qrDiagram.elements.hideAll();
-    //   }
-    // }
+    element = document.getElementById('id_lesson__qr__content_pres');
+    if (element != null) {
+      element.classList.add('lesson__hide');
+    }
   }
 
   render() {
     return <div
       id={this.lesson.content.htmlId}
       className="simple_lesson__container"
-      onClick={this.close.bind(this)}
+      // onClick={this.close.bind(this)}
     >
       {this.lesson.content.sections}
-      <div id="lesson__static_qrs">
-        {this.state.qr}
-      </div>
-      <PresentationQR id="id_presentation_lesson__qr__overlay"/>
+      {this.state.qr}
+      <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
     </div>;
   }
 }

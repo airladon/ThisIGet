@@ -1,10 +1,12 @@
 // @flow
 import Fig from 'figureone';
-import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
+// import getLessonIndex from '../../Lessons/LessonsCommon/lessonindex';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {
-  Diagram, Transform, Rect,
+  Diagram,
+  // Transform,
+  Rect,
 } = Fig;
 
 
@@ -79,9 +81,9 @@ class SimpleLessonContent {
     qrPath: string,
     qrid: string,
   ) {
-    const qr = document.getElementById('id_lesson__pres_qr__popup');
+    const qr = document.getElementById('id_lesson__qr__content_pres');
     if (qr != null) {
-      qr.classList.remove('lesson__static_qr__pop_up__hide');
+      qr.classList.remove('lesson__hide');
     }
     if (this.qrDiagram == null) {
       this.qrDiagram = new Diagram({

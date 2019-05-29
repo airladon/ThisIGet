@@ -22,18 +22,18 @@ body {
 //   height: 300px;
 // }
 
-#id_presentation_lesson__qr__overlay {
-  position: relative;
-  pointer-events: auto;
-  font-size: initial;
-  z-index: 1;
-  width: 75vw;
-  max-width: 600px;
-  height: calc(75vw / 1.5);
-  max-height: 400px;
-  margin-left: auto;
-  margin-right: auto;
-}
+// #id_presentation_lesson__qr__overlay {
+//   position: relative;
+//   pointer-events: auto;
+//   font-size: initial;
+//   z-index: 1;
+//   width: 75vw;
+//   // max-width: 600px;
+//   height: calc(75vw / 1.5);
+//   // max-height: 400px;
+//   margin-left: auto;
+//   margin-right: auto;
+// }
 
 #id_qr_diagram {
   width: 100%;
@@ -55,7 +55,7 @@ body {
   left: 0%;
 }
 
-#id_lesson__pres_qr__popup .lesson__static_qr__pop_up_content {
+#id_lesson__qr__popup_pres .lesson__static_qr__pop_up_content {
   padding: 0;
 }
 

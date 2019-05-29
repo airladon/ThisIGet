@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import StaticQR from './staticQR';
+import QuickReferencePopup from './quickReferencePopup';
 
 type Props = {
   id: string;
@@ -35,10 +35,10 @@ export default class PresentationQR extends React.Component
   }
 
   render() {
-    return <StaticQR
-      id="id_lesson__pres_qr__popup"
+    return <QuickReferencePopup
+      id="id_lesson__qr__content_pres"
       content={this.renderContent()}
-      title="Hello"
+      title=""
       link=""
     />;
   }

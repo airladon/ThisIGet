@@ -29,7 +29,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
-    const elem = document.getElementById('id_lesson__static_qr__title_text');
+
+    const elem = document.getElementById('id_lesson__qr__title_text');
     if (elem != null) {
       elem.innerHTML = modifiedText;
       html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
@@ -59,7 +60,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   // eslint-disable-next-line class-methods-use-this
   setLink(link: string = '') {
-    const a = document.getElementById('id_lesson__static_qr__link_link');
+    const a = document.getElementById('id_lesson__qr__link_link');
     if (a != null) {
       a.href = `${window.location.origin}/Lessons/${link}`;
     }

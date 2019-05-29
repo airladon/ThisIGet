@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
@@ -7,8 +7,9 @@ import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
 import PresentationQR from './presentationQR';
 import StaticQR from './staticQR';
+import '../../css/presentationLesson.scss';
 
-const { Rect } = Fig;
+// const { Rect } = Fig;
 
 type Props = {
   lesson: PresentationLesson;
@@ -36,7 +37,7 @@ function align(
   if (element == null || container == null) {
     return;
   }
-  element.classList.remove('lesson__static_qr__pop_up__hide');
+  element.classList.remove('lesson__hide');
   const containerRect = container.getBoundingClientRect();
   const windowWidth = window.innerWidth;
   if (windowWidth < containerRect.width) {
@@ -166,13 +167,13 @@ export default class PresentationLessonComponent extends React.Component
     window.lessonFunctions = {
       qr: (id, parameters) => {
         this.setState({ qr: window.quickReference[parameters] });
-        align('id_lesson__static_qr__popup', 'lesson__content_diagram');
+        align('id_lesson__qr__content_static', 'lesson__content_diagram');
       },
       showQR: (id, parameters) => {
         const path = parameters.split('/').slice(0, -1).join('/');
         const qrid = parameters.split('/').slice(-1)[0];
         this.lesson.content.showQR(path, qrid);
-        align('id_lesson__pres_qr__popup', 'lesson__content_diagram');
+        align('id_lesson__qr__content_pres', 'lesson__content_diagram');
       },
     };
     this.lesson.content.diagram.resize();
@@ -402,10 +403,8 @@ export default class PresentationLessonComponent extends React.Component
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              <div id="lesson__static_qrs">
-                {this.state.qr}
-              </div>
-              <PresentationQR id="id_presentation_lesson__qr__overlay"/>
+              {this.state.qr}
+              <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
         </div>
       </div>
     </div>;

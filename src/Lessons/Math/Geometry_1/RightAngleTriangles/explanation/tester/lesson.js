@@ -10,7 +10,7 @@ import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import markdownContent from './content.md';
-import './style.scss';
+// import './style.scss';
 
 class Content extends SimpleLessonContent {
   setTitle() {

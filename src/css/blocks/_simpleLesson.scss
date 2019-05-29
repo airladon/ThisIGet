@@ -11,27 +11,30 @@
   max-width: 100%;
 }
 
-#simple_lesson__qr__overlay {
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  pointer-events: auto;
-}
+// #simple_lesson__qr__overlay {
+//   z-index: -1;
+//   position: absolute;
+//   width: 100%;
+//   height: 100%;
+//   top: 0;
+//   left: 0;
+//   pointer-events: auto;
+// }
 
-#simple_lesson__qr__overlay #lesson__qr__container {
-  position: relative;
-  width: var(--lesson__qr_width);
-  height: var(--lesson__qr_height);
-  top: calc(50% - var(--lesson__qr_height) / 2);
-  pointer-events: none;
-  display: inline-block;
-  // margin-left: auto;
-  // margin-right: auto;
-}
+// #simple_lesson__qr__overlay #lesson__qr__container {
+//   position: relative;
+//   width: var(--lesson__qr_width);
+//   height: var(--lesson__qr_height);
+//   top: calc(50% - var(--lesson__qr_height) / 2);
+//   pointer-events: none;
+//   display: inline-block;
+// }
 
-#simple_lesson__qr__overlay .diagram__html {
-  pointer-events: auto;
-}
+// #simple_lesson__qr__overlay .diagram__html {
+//   pointer-events: auto;
+// }
+
+// .lesson__presentation_qr__container {
+//   max-width: 300px;
+//   max-height: 200px;
+// }

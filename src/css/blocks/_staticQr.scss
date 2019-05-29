@@ -1,75 +1,75 @@
-.lesson__static_qr__pop_up {
-  max-width: 600px;
-  max-height: 450px;
-  font-size: initial;
-  z-index: 10;
-  // overflow-y: scroll;
-  position: absolute;
-  // width: 100px;
-  // height: 100px;
-  background-color: color('white');
-  padding: 0.5em;
-  border: 1px solid color('white', 'lightest');
-  border-radius: 0.4em;
-}
+// .lesson__static_qr__pop_up {
+//   max-width: 600px;
+//   max-height: 450px;
+//   font-size: initial;
+//   z-index: 10;
+//   // overflow-y: scroll;
+//   position: absolute;
+//   // width: 100px;
+//   // height: 100px;
+//   background-color: color('white');
+//   padding: 0.5em;
+//   border: 1px solid color('white', 'lightest');
+//   border-radius: 0.4em;
+// }
 
-.lesson__static_qr__pop_up__hide {
-  display: none;
-}
+// .lesson__static_qr__pop_up__hide {
+//   display: none;
+// }
 
-.lesson__static_qr__title {
-  display: table;
-  width: 100%;
-  padding-bottom: 0.5em;
-}
+// .lesson__static_qr__title {
+//   display: table;
+//   width: 100%;
+//   padding-bottom: 0.5em;
+// }
 
-.lesson__static_qr__title_text {
-  display: table-cell;
-  text-align: center;
-  vertical-align: middle;
-  color: color('white', 'darker');
-  font-size: 1em;
-  padding-right: 1em;
-  padding-left: 1em;
-}
+// .lesson__static_qr__title_text {
+//   display: table-cell;
+//   text-align: center;
+//   vertical-align: middle;
+//   color: color('white', 'darker');
+//   font-size: 1em;
+//   padding-right: 1em;
+//   padding-left: 1em;
+// }
 
-.lesson__static_qr__title_close {
-  display: table-cell;
-  color: color('white', 'light');
-  width: 2em;
-  border: 1px solid color('white', 'lighter');
-  height: 2em;
-  text-align: center;
-  vertical-align: middle;
-  border-radius: 1em;
-  font-weight: 100;
-}
+// .lesson__static_qr__title_close {
+//   display: table-cell;
+//   color: color('white', 'light');
+//   width: 2em;
+//   border: 1px solid color('white', 'lighter');
+//   height: 2em;
+//   text-align: center;
+//   vertical-align: middle;
+//   border-radius: 1em;
+//   font-weight: 100;
+// }
 
-.lesson__static_qr__title_close:hover {
-  background-color: color('white', 'lightest');
-  cursor: pointer;
-}
+// .lesson__static_qr__title_close:hover {
+//   background-color: color('white', 'lightest');
+//   cursor: pointer;
+// }
 
-.lesson__static_qr__pop_up_content_container {
-  overflow-y: scroll;
-  max-height: calc(400px - 6em);
-  background-color: color('white', 'lightest');
-}
+// .lesson__static_qr__pop_up_content_container {
+//   overflow-y: scroll;
+//   max-height: calc(400px - 6em);
+//   background-color: color('white', 'lightest');
+// }
 
-.lesson__static_qr__pop_up_content {
-  padding: 0.8em;
-}
+// .lesson__static_qr__pop_up_content {
+//   padding: 0.8em;
+// }
 
-.lesson__static_qr__link_container {
-  text-align: center;
-  padding-top: 0.5em;
-}
+// .lesson__static_qr__link_container {
+//   text-align: center;
+//   padding-top: 0.5em;
+// }
 
-.lesson__static_qr__link_link {
-  font-size: 0.8em;
-  color: color('white', 'darker');
-}
+// .lesson__static_qr__link_link {
+//   font-size: 0.8em;
+//   color: color('white', 'darker');
+// }
 
-.lesson__static_qr__link_link:hover {
-  text-decoration: none;
-}
+// .lesson__static_qr__link_link:hover {
+//   text-decoration: none;
+// }

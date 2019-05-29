@@ -130,6 +130,10 @@ $height_limited_landscape_aspect_ratio: "408/200";
   }
 }
 
+.lesson__hide {
+  display: none;
+}
+
 .lesson__widescreen_backdrop {
   font-size: var(--lesson__diagram-font-size);
   // background-color: color('diagram', 'background');

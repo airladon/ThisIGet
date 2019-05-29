@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom';
 // import { LessonContent } from '../../Lesson/LessonContent';
 import ViewLesson from '../../components/viewLesson';
 import withLoginManager from '../../components/view';
+import '../../../css/style.scss';
 
 function renderLesson(
   lesson: Object,

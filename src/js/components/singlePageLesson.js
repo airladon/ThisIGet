@@ -2,6 +2,7 @@
 import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
+import '../../css/singlePageLesson.scss';
 
 type Props = {
   lesson: SimpleLesson;
