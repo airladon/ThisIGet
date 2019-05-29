@@ -1,7 +1,6 @@
 :root {
   --lesson__qr__content_width: calc(100vw - 80px - 1em);
   --lesson__qr__content_height: calc((100vw - 80px - 1em) / 1.5);
-  // --lesson__qr__font_size: initial;
 }
 
 .lesson__qr {
@@ -26,10 +25,6 @@
   max-width: 100%;
   max-height: 100%;
 }
-
-// #lesson__content_diagram .lesson__qr {
-//   font-size: var(--lesson__qr__font_size);
-// }
 
 // ///////////////////////////////////////
 // Title
@@ -127,9 +122,7 @@
   font-size: initial;
   z-index: 1;
   width: var(--lesson__qr__content_width);
-  // max-width: 100%;
   height: var(--lesson__qr__content_height);
-  // max-height: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -163,7 +156,6 @@
 }
 
 .lesson__qr_description_text {
-  // position: absolute;
   text-align: left;
 }
 
@@ -185,8 +177,6 @@
 #lesson__content_diagram .lesson__qr__content_container {
   max-width: var(--lesson__qr__content_width);
   max-height: var(--lesson__qr__content_height);
-  // width: var(--lesson__qr__content_width);
-  // height: var(--lesson__qr__content_height);
 }
 
 #lesson__content_diagram #id_lesson__qr__content_static {

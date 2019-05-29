@@ -79,7 +79,7 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStep({ eqn: rectEqn, from: 'rect', to: 'rect' }, common, {
       setContent: 'These two triangles share the same side lengths, and are therefore |equal|.',
       modifiers: {
-        equal: this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Sss'),
+        equal: this.qr('Math/Geometry_1/CongruentTriangles/base/Sss'),
       },
     });
 

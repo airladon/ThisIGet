@@ -82,7 +82,7 @@ class Content extends PresentationLessonContent {
         style({ top: 48, size: 0.6 }, 'Each line is the same length (radius) and each angle at the circle center the same size (equal split), so using |Side-Angle-Side| shows the resulting triangles are congruent.'),
       ],
       modifiers: {
-        'Side-Angle-Side': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Sas'),
+        'Side-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
       },
     };
     this.addSection(common, content, {

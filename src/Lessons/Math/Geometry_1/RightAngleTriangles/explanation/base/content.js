@@ -78,7 +78,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         remaining_angles: click(coll.pulseNonRightAngles, [coll], colors.angles),
         right_angle: click(coll.pulseRightAngle, [coll], colors.rightAngle),
-        total_angle: this.bindShowQR('Math/Geometry_1/Triangles/base', 'Main'),
+        total_angle: this.qr('Math/Geometry_1/Triangles/base/Main'),
       },
       show: [
         main._tri._line, main._tri._angle1,
@@ -95,7 +95,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
-        related: this.bindShowQR('Math/Geometry_1/SideAngleRelationship/base', 'Main'),
+        related: this.qr('Math/Geometry_1/SideAngleRelationship/base/Main'),
         largest_angle: click(coll.pulseRightAngle, [coll], colors.opposite),
       },
       show: [
@@ -109,7 +109,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
-        sides_and_angles: this.bindShowQR('Math/Geometry_1/SideAngleRelationship/base', 'Main'),
+        sides_and_angles: this.qr('Math/Geometry_1/SideAngleRelationship/base/Main'),
       },
       show: [
         main._tri._line, main._tri._angle1, main._opposite,
@@ -140,7 +140,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         base_side: click(coll.pulseBase, [coll], colors.sides),
         height: click(coll.pulseHeight, [coll], colors.sides),
-        triangle_area: this.bindShowQR('Math/Geometry_1/AreaTriangle/base', 'Main'),
+        triangle_area: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),
         vertex: click(coll.pulseVertex, [coll], colors.vertex),
       },
       show: [
@@ -360,7 +360,7 @@ class Content extends PresentationLessonContent {
         b: highlight(colors.angles),
         _a: highlight(colors.angles),
         _b: highlight(colors.angles),
-        supplementary: this.bindShowQR('Math/Geometry_1/AdjacentAngles/base', 'Supplementary'),
+        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/Supplementary'),
         point: click(coll.pulseVertices, [coll], colors.vertex),
       },
       show: [pyth],

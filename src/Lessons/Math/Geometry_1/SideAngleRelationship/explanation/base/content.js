@@ -131,7 +131,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, content, {
       modifiers: {
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
         triangle: click(this.next, [this], colors.isosceles),
       },
       show: [
@@ -141,7 +141,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, content, {
       modifiers: {
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
         triangle: click(coll.pulseIsoscelesTriangle, [coll, null], colors.isosceles),
       },
       transitionFromPrev: (done) => {
@@ -439,7 +439,7 @@ class Content extends PresentationLessonContent {
         _a: click(coll.pulseAngleA, [coll], colors.angles),
         _b: click(coll.pulseAngleB, [coll], colors.angles),
         condition: click(coll.pulseEqn0, [coll], colors.diagram.action),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
       },
     };
     this.addSection(common, content, {

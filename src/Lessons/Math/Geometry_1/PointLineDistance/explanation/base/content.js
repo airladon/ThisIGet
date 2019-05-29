@@ -247,7 +247,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         right_angle: click(coll.pulseRightAngle, [coll], colors.distance),
         hypotenuse: click(coll.pulseHypotLabel, [coll, null], colors.distance),
-        right_angle_triangle: this.bindShowQR('Math/Geometry_1/RightAngleTriangles/base', 'Main'),
+        right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/Main'),
       },
       show: [
         fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
@@ -307,7 +307,7 @@ class Content extends PresentationLessonContent {
         'A triangle |cannot| be made with two angles of 90º, as the total angle would be larger than 180º.',
       ]),
       modifiers: {
-        triangle: this.bindShowQR('Math/Geometry_1/Triangles/base', 'Main'),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/Main'),
       },
     });
 

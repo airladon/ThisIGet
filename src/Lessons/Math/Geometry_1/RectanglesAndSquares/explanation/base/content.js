@@ -278,7 +278,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        alternate: this.bindShowQR('Math/Geometry_1/RelatedAngles/base', 'Alternate'),
+        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
         alternate_intersection_angles: this.bindNext(colors.angles),
       },
       show: [
@@ -289,7 +289,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        alternate: this.bindShowQR('Math/Geometry_1/RelatedAngles/base', 'Alternate'),
+        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
         alternate_intersection_angles: click(
           coll.pulseAlternateAngles, [coll, null], colors.angles,
         ),
@@ -333,7 +333,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: 'Therefore, using |Angle-Angle-Side| the congruency test, we can see the two |triangles| are |congruent|.',
       modifiers: {
-        'Angle-Angle-Side': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Aas'),
+        'Angle-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
         triangles: click(coll.toggleTriangles, [coll], colors.sides),
       },
       setEnterState: () => {

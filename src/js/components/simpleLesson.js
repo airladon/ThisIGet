@@ -72,19 +72,7 @@ export default class SimpleLessonComponent extends React.Component
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
-    // const element = document.getElementById('id_lesson__qr__content_static');
     align('id_lesson__qr__content_static', 'lesson__content', id);
-    // if (element != null) {
-    //   element.classList.toggle('lesson__hide');
-    //   const container = document.getElementById('lesson__content');
-    //   const link = document.getElementById(id);
-    //   if (container != null && link != null && element != null) {
-    //     const containerRect = container.getBoundingClientRect();
-    //     const linkRect = link.getBoundingClientRect();
-    //     alignLeft(element, linkRect, containerRect);
-    //     alignTop(element, linkRect, containerRect);
-    //   }
-    // }
   }
 
   showPresQR(id: string, parameters: string) {

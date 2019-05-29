@@ -460,7 +460,7 @@ class Content extends PresentationLessonContent {
       ]),
       modifiers: {
         original: click(three.pulseShaddow, [three], colors.disabled),
-        parallel: this.bindShowQR('Math/Geometry_1/ParallelLines/base', 'Main'),
+        parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         Moving: click(three.randomTranslateLine, [three, null], colors.lines),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
@@ -566,7 +566,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         two_lines: click(three.pulseParallel, [three], colors.lines),
-        parallel: this.bindShowQR('Math/Geometry_1/ParallelLines/base', 'Main'),
+        parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         third_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
       },
       show: [three._fig._line1, three._fig._line3, three._fig._line2],
