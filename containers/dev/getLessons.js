@@ -31,10 +31,15 @@ function updateDetailsAndVersions() {
   console.log('Updating details and versions...');
   const lessons = pathTools.getAllLessons('./src/Lessons');
   lessons.forEach((lessonPath) => {
-    const detailsPath = `./${lessonPath}/details.js`;
-    if (fs.existsSync(detailsPath)) {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      const details = require(detailsPath);
+    const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
+    const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
+    const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
+
+    // const detailsPath = `./${lessonPath}/details.js`;
+    if (fs.existsSync(detailsPathRelativeToCWD)) {
+      /* eslint-disable global-require, import/no-dynamic-require */
+      // $FlowFixMe
+      const details = require(detailsPathRelativeToThisFile);
       let outStr = '// @flow';
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
@@ -54,7 +59,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n`;
       outStr = `${outStr}\nmodule.exports = lessonDetails;`;
       outStr = `${outStr}\n`;
-      fs.writeFileSync(detailsPath, outStr, (err) => {
+      fs.writeFileSync(detailsPathRelativeToCWD, outStr, (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.log(err);
@@ -65,12 +70,20 @@ function updateDetailsAndVersions() {
 
   const versions = pathTools.getAllVersions('./src/Lessons');
   versions.forEach((versionPath) => {
-    const versionFile = `./${versionPath}/version.js`;
+    const versionPathAbsolute
+              = `${process.cwd()}/${versionPath}/version.js`;
+    const versionPathRelativeToCWD
+      = path.relative(process.cwd(), versionPathAbsolute);
+    const versionPathRelativeToThisFile
+      = `./${path.relative(__dirname, versionPathAbsolute)}`;
+
+    // const versionFile = `./${versionPath}/version.js`;
     const topic = versionPath.split('/').slice(-2, -1)[0];
     const versionUID = versionPath.split('/').slice(-1)[0];
-    if (fs.existsSync(versionFile)) {
-      // eslint-disable-next-line global-require, import/no-dynamic-require
-      const version = require(versionFile);
+    if (fs.existsSync(versionPathRelativeToCWD)) {
+      /* eslint-disable global-require, import/no-dynamic-require */
+      // $FlowFixMe
+      const version = require(versionPathRelativeToThisFile);
       let outStr = '// @flow';
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
@@ -79,13 +92,22 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  topic: '${topic}',`;
       if (topic === 'quickReference') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
-        outStr = `${outStr}\n  references: [`;
-        if (version.references.length > 0) {
-          version.references.forEach((reference) => {
-            outStr = `${outStr}\n    '${reference}',`;
-          });
+        const quickReferenceFile = `./${versionPath}/quickReference.js`;
+        if (fs.existsSync(quickReferenceFile)) {
+          const content = fs.readFileSync(quickReferenceFile, 'utf8');
+          const split = content.split('\nattachQuickReference(').slice(-1)[0];
+          const lines = split.split('\n');
+          const qrs = lines.filter(l => l.match(':'))
+            .map(l => l.replace(/:.*/, ''))
+            .map(l => l.replace(/^ */, ''));
+          outStr = `${outStr}\n  references: [`;
+          if (qrs.length > 0) {
+            qrs.forEach((qr) => {
+              outStr = `${outStr}\n    '${qr}',`;
+            });
+          }
+          outStr = `${outStr}\n  ],`;
         }
-        outStr = `${outStr}\n  ],`;
       } else if (topic === 'links') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
         outStr = `${outStr}\n  links: [`;
@@ -122,7 +144,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n`;
       outStr = `${outStr}\nmodule.exports = version;`;
       outStr = `${outStr}\n`;
-      fs.writeFileSync(versionFile, outStr, (err) => {
+      fs.writeFileSync(versionPathRelativeToCWD, outStr, (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.log(err);

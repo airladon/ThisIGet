@@ -7,10 +7,10 @@ var version = {
   type: 'presentation',
   references: [
     'Acute',
-    'Right',
     'Obtuse',
-    'Straight',
     'Reflex',
+    'Right',
+    'Straight',
     'Full',
   ],
 };

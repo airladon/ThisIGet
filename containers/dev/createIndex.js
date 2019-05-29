@@ -4,8 +4,7 @@ const pathTools = require('./pathTools.js');
 
 function createLessonIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllLessons(lessonsPath);
-  let outStr =
-`import LessonDescription from '../../js/Lesson/lessonDescription';
+  let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {`;
@@ -57,60 +56,61 @@ export default function getLessonIndex() {
 
       Object.keys(topics).forEach((topicName) => {
         const topicVersions = topics[topicName];
-        outStr = `${outStr}\n        ${topicName}: {`;
-        topicVersions.forEach((v) => {
-          const [versionUid, versionPath] = v;
-          let versionTitle = '';
-          let versionDescription = '';
-          let fullLesson = false;
-          let type = 'generic';
-          let references = [];
-          const versionPathAbsolute
-            = `${process.cwd()}/${versionPath}/version.js`;
-          const versionPathRelativeToCWD
-            = path.relative(process.cwd(), versionPathAbsolute);
-          const versionPathRelativeToThisFile
-            = `./${path.relative(__dirname, versionPathAbsolute)}`;
+        if (topicName !== 'quickReference') {
+          outStr = `${outStr}\n        ${topicName}: {`;
+          topicVersions.forEach((v) => {
+            const [versionUid, versionPath] = v;
+            let versionTitle = '';
+            let versionDescription = '';
+            let fullLesson = false;
+            let type = 'generic';
+            // let references = [];
+            const versionPathAbsolute
+              = `${process.cwd()}/${versionPath}/version.js`;
+            const versionPathRelativeToCWD
+              = path.relative(process.cwd(), versionPathAbsolute);
+            const versionPathRelativeToThisFile
+              = `./${path.relative(__dirname, versionPathAbsolute)}`;
 
-          if (fs.existsSync(versionPathRelativeToCWD)) {
-            /* eslint-disable global-require, import/no-dynamic-require */
-            // $FlowFixMe
-            const version = require(versionPathRelativeToThisFile);
-            /* eslint-enable */
-            if (version.title != null) {
-              versionTitle = version.title;
+            if (fs.existsSync(versionPathRelativeToCWD)) {
+              /* eslint-disable global-require, import/no-dynamic-require */
+              // $FlowFixMe
+              const version = require(versionPathRelativeToThisFile);
+              /* eslint-enable */
+              if (version.title != null) {
+                versionTitle = version.title;
+              }
+              if (version.description != null) {
+                versionDescription = version.description;
+              }
+              if (version.fullLesson != null) {
+                ({ fullLesson } = version);
+              }
+              if (version.type != null) {
+                ({ type } = version);
+              }
+              // if (version.references != null) {
+              //   ({ references } = version);
+              // }
             }
-            if (version.description != null) {
-              versionDescription = version.description;
-            }
-            if (version.fullLesson != null) {
-              ({ fullLesson } = version);
-            }
-            if (version.type != null) {
-              ({ type } = version);
-            }
-            if (version.references != null) {
-              ({ references } = version);
-            }
-          }
 
-          outStr = `${outStr}\n          ${versionUid}: {`;
-          outStr = `${outStr}\n            type: '${type}',`;
-          if (topicName === 'quickReference') {
-            outStr = `${outStr}\n            references: [`;
-            references.forEach((reference) => {
-              outStr = `${outStr}\n              '${reference}',`;
-            });
-            outStr = `${outStr}\n            ],`;
-          } else {
-            outStr = `${outStr}\n            title: '${versionTitle}',`;
-            outStr = `${outStr}\n            description: '${versionDescription}',`;
-            outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
-          }
-          outStr = `${outStr}\n          },`;
-        });
-        outStr = `${outStr}\n        },`;
-
+            outStr = `${outStr}\n          ${versionUid}: {`;
+            outStr = `${outStr}\n            type: '${type}',`;
+            if (topicName === 'quickReference') {
+              // outStr = `${outStr}\n            references: [`;
+              // references.forEach((reference) => {
+              //   outStr = `${outStr}\n              '${reference}',`;
+              // });
+              // outStr = `${outStr}\n            ],`;
+            } else {
+              outStr = `${outStr}\n            title: '${versionTitle}',`;
+              outStr = `${outStr}\n            description: '${versionDescription}',`;
+              outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
+            }
+            outStr = `${outStr}\n          },`;
+          });
+          outStr = `${outStr}\n        },`;
+        }
         if (topicName === 'quickReference' && buildMode === 'development') {
           outStr = `${outStr}\n        dev: {`;
           topicVersions.forEach((v) => {

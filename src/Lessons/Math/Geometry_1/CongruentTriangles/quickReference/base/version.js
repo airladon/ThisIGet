@@ -6,13 +6,13 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
-    'Asa',
-    'Sss',
-    'Sas',
-    'Aas',
-    'Aaa',
-    'Ssa',
     'CongruentTriangles',
+    'Aaa',
+    'Sas',
+    'Ssa',
+    'Asa',
+    'Aas',
+    'Sss',
   ],
 };
 

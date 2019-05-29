@@ -7,8 +7,8 @@ var version = {
   type: 'presentation',
   references: [
     'Area',
-    'Square',
     'Rectangle',
+    'Square',
   ],
 };
 

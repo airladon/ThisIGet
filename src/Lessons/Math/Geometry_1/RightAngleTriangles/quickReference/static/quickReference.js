@@ -1,6 +1,6 @@
 // @flow
 import * as React from 'react';
-import { attachStaticQuickReference } from '../../../../../../js/tools/misc';
+import { attachQuickReference } from '../../../../../../js/tools/misc';
 import StaticQR from '../../../../../../js/components/staticQR';
 import details from '../../details';
 import version from './version';
@@ -8,7 +8,7 @@ import './style.scss';
 import test1 from './test1.md';
 import test2 from './test2.md';
 
-attachStaticQuickReference(
+attachQuickReference(
   details.path,
   details.uid,
   version.uid,

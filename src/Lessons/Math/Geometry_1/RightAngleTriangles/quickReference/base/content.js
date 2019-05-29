@@ -35,7 +35,7 @@ class Content extends PresentationLessonContent {
       setContent: () => {
         let out = '<p>Quick Reference Popups</p><p></p>';
         qrids.forEach((qrid) => {
-          out += `<p>|${qrid}|</p>`;
+          out += `<p>|${qrid.split('/').slice(-1)[0]}|</p>`;
         });
         return out;
       },

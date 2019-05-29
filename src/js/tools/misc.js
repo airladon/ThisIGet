@@ -187,24 +187,24 @@ function attachQuickReference(
   });
 }
 
-function attachStaticQuickReference(
-  lessonPath: string,
-  lessonUID: string,
-  versionUID: string,
-  qrs: {
-    [name: string]: Object,
-  },
-) {
-  if (window.quickReference == null) {
-    window.quickReference = {};
-  }
-  Object.keys(qrs).forEach((name) => {
-    window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
-  });
-}
+// function attachStaticQuickReference(
+//   lessonPath: string,
+//   lessonUID: string,
+//   versionUID: string,
+//   qrs: {
+//     [name: string]: Object,
+//   },
+// ) {
+//   if (window.quickReference == null) {
+//     window.quickReference = {};
+//   }
+//   Object.keys(qrs).forEach((name) => {
+//     window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
+//   });
+// }
 
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie, activator, attachQuickReference, attachStaticQuickReference,
+  createCookie, activator, attachQuickReference,
 };
 

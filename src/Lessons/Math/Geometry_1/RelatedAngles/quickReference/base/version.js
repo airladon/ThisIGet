@@ -7,8 +7,8 @@ var version = {
   type: 'presentation',
   references: [
     'Opposite',
-    'Alternate',
     'Corresponding',
+    'Alternate',
     'Interior',
   ],
 };
