@@ -109,9 +109,9 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        right: { position: [1.2, 0] },
-        qr: { position: [2.7, 0.5], scale: 1.2 },
-        summary: { position: [1.2, -0.2] },
+        // right: { position: [1.2, 0] },
+        qr: { position: [-0, -0.9], scale: 1 },
+        // summary: { position: [1.2, -0.2] },
       },
     },
   };
