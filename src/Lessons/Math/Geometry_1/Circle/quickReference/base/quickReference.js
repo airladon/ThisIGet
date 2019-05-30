@@ -43,7 +43,7 @@ export class QRDiameter extends PopupBoxCollection {
       'A circle\'s |__diameter__| is any line that extends the width of the circle while crossing through the |__center__|.',
       'The |__diameter___| is twice the |__radius__| and can be multiplied by |π| to get the |__circumference__| length.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -91,7 +91,7 @@ export class QRRadius extends PopupBoxCollection {
       'A circle\'s |__radius__| is any line that extends from the circle |__center__| to the |__edge__|.',
       'The |__radius___| is half the |__diameter__| and can be multiplied by |2π| to get the |__circumference__| length.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -135,7 +135,7 @@ export class QRCircumference extends PopupBoxCollection {
       'A circle\'s |__circumference__| or |perimeter| is the outside edge of the circle.',
       'The |__circumference___| has a ratio with the |__diameter__| of |π|, and ratio with the |__radius__| of |2π|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -169,7 +169,7 @@ export class QRCircle extends PopupBoxCollection {
     this.setDescription([
       'A circle is a shape whose |__outside_edge__| is a constant distance from its |__center__|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -202,7 +202,7 @@ export class QRPi extends PopupBoxCollection {
       'The symbol |π|, pronounced |pi|, represents an irrational number that is approximately |3.1415926535|.',
       'In other words, if you multiply the diameter by π, then you get the length of the circumference.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

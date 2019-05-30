@@ -49,7 +49,7 @@ export class QRMain extends PopupBoxCollection {
       'An |isosceles triangle| has |two_equal_sides| and |two_equal_angles|. The equal angles are the angles |opposite| to the equal sides.',
       'If a triangle has |_two_equal_sides| or |_two_equal_angles|, then it is an |isosceles triangle|.',
     ]), modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -100,7 +100,7 @@ export class QRSplitLine extends PopupBoxCollection {
     this.setDescription(style({ scale: 1 }, [
       'For an isosceles triangle, the |line| drawn from the angle between the |equal_sides| to the |midpoint| of the side between the |equal_angles| intersects the side at a |right_angle|, and splits the triangle into two equal halves.',
     ]), modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

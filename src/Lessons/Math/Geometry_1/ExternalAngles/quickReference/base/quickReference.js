@@ -58,7 +58,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
     };
     this.setTitle('External or Exterior Angle');
     this.setDescription('The |external_angle|, or |exterior_angle| of a triangle is the angle between a |side| and its adjacent side |extended_outwards|, and is |equal| to the |sum_of_the_opposite_angles|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

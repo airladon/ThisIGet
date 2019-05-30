@@ -37,7 +37,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
     const modifiers = {};
     this.setTitle('');
     this.setDescription('Lines are |parallel| if they have the |same rotation| and |do not touch|. Therefore, the lines cannot be on top of each other, and if extended to an infinite length, would never cross. Small arrows are sometimes used to mark lines as parallel.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

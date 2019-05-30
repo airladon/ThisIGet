@@ -44,7 +44,7 @@ export default class QRDegrees extends PopupBoxCollection {
       style({ size: 0.9 }, 'A full rotation can be split into |360| |equal_portions|, called |degrees|.'),
       style({ size: 0.9 }, 'An angle can be |measured| by counting the number of degrees within it.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

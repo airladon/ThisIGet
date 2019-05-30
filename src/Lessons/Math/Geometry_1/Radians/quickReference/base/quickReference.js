@@ -47,7 +47,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
       'A |radian| is the |angle| where the |arc_length| equals the |radius|.',
       'There are |2π| radians in a circle.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

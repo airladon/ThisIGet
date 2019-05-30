@@ -51,7 +51,7 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
     this.setDescription([
       'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

@@ -42,7 +42,7 @@ export class QRRectangle extends PopupBoxCollection {
     };
     this.setTitle('Rectangle');
     this.setDescription('A |rectangle| is a quadrangle with |all_angles_equal_to_90|. A rectangle\'s |opposite| sides are |parallel| and |equal| in length.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -90,7 +90,7 @@ export class QRSquare extends PopupBoxCollection {
     };
     this.setTitle('Square');
     this.setDescription('A |square| is a rectangle with |all sides equal|. All the angles in a square are |_90| and its opposite sides are |parallel|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

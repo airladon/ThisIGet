@@ -44,7 +44,7 @@ export class QRAcute extends PopupBoxCollection {
     this.setDescription([
       centerH('An |acute_angle| is any angle |less_than_90|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -131,7 +131,7 @@ export class QRObtuse extends PopupBoxCollection {
     this.setDescription([
       centerH('An |obtuse_angle| is any angle |between_90_and_180|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -181,7 +181,7 @@ export class QRStraight extends PopupBoxCollection {
         'A |straight_angle| is an angle of |_180|.',
       ]),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   makeStraightAngle() {
@@ -231,7 +231,7 @@ export class QRReflex extends PopupBoxCollection {
     this.setDescription([
       centerH('An |reflex_angle| is any angle |between_180_and_360|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -281,7 +281,7 @@ export class QRFull extends PopupBoxCollection {
         'A |full_angle| is an angle of |_360|.',
       ]),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   makeFullAngle() {

@@ -37,13 +37,14 @@ export default class QRArea extends PopupBoxCollection {
     const modifiers = {};
     this.setTitle('Area of a Triangle');
     this.setDescription('The area of a triangle is equal to |half its base times its height|. The base can be any side, and the |height| is equal to the |perpendicular line between the line on which the base sits and the top| point.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     // collection.show();
     // const area1 = collection._area1;
     const eqn = collection._eqn;
@@ -54,7 +55,7 @@ export default class QRArea extends PopupBoxCollection {
     height2.showAll();
     collection.setScenarios('qr');
     eqn.showForm('10');
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(collection, new Rect(-3, -1.1, 6, 2.4));
     this.diagram.animateNextFrame();
   }
 }

@@ -29,7 +29,7 @@ export default class QRAbstraction extends PopupBoxCollection {
       'Making something more |simple| makes it easier to analyze. Making something more |general| means the analysis can be applied to other situations.',
       'Making something more simple and general, is similar to drawing out the essence of that thing. Accordingly, the word |abstract| comes from the Latin word |abstractus| which means "drawn away".',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

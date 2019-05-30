@@ -49,7 +49,7 @@ export default class QREquilateral extends PopupBoxCollection {
       'An |equilateral| triangle has |three_equal_sides| and |three_equal_angles|.',
       '|Any| triangle with three equal |sides| |or| three equal |angles| will be an equilateral triangle.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

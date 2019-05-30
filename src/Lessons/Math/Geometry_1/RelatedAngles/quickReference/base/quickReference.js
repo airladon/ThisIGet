@@ -45,7 +45,7 @@ export class QROpposite extends PopupBoxCollection {
       'When two lines intersect, four angles are created.',
       '|Opposite_angles| at the intersection are |equal|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -111,7 +111,7 @@ export class QRCorresponding extends PopupBoxCollection {
       'When the two lines are |parallel|, |corresponding_angles_are_always_equal|.',
       'If corresponding angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -183,7 +183,7 @@ export class QRAlternate extends PopupBoxCollection {
       'When the two lines are |parallel|, the |alternate_angles_are_always_equal|.',
       'If alternate angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
@@ -255,7 +255,7 @@ export class QRInterior extends PopupBoxCollection {
       'When the two lines are |parallel|, the |interior_angles_always_add_to_180º|.',
       'If interior angles are |add to 180º|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {

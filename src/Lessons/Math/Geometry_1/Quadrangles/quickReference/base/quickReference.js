@@ -37,7 +37,7 @@ export default class QRQuadrangle extends PopupBoxCollection {
     const modifiers = {};
     this.setTitle('Quadrangles');
     this.setDescription('A |quadrangle|, or |quadrilateral| is a shape with |four sides| and |four angles|. A quadrangle\'s angles will always add to |360º|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
