@@ -56,13 +56,13 @@ export default class QRBoilerplate extends PopupBoxCollection {
         colors.qrExternalAngles_externalSide,
       ),
     };
-    this.setTitle('External or Exterior Angle');
+    this.setTitle('External Angle');
     this.setDescription('The |external_angle|, or |exterior_angle| of a triangle is the angle between a |side| and its adjacent side |extended_outwards|, and is |equal| to the |sum_of_the_opposite_angles|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -72,7 +72,7 @@ export default class QRBoilerplate extends PopupBoxCollection {
       fig._externalLine, fig._externalAngle,
       fig._adjacent,
     ]);
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1, 3.5, 2.2));
     this.diagram.animateNextFrame();
   }
 }

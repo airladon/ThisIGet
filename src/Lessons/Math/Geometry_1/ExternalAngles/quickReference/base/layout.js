@@ -88,7 +88,7 @@ export default function lessonLayout() {
     method: 'angle',
     options: {
       label: {
-        text: 'e',
+        text: 'a + b',
         radius: 0.4,
         scale: 0.9,
       },
