@@ -12,6 +12,7 @@ var version = {
     'Area',
     'Pythagorus',
     'Definition',
+    'Hypotenuse',
   ],
 };
 

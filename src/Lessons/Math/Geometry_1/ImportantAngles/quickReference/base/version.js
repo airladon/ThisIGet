@@ -12,6 +12,7 @@ var version = {
     'Right',
     'Straight',
     'Full',
+    'Perpendicular',
   ],
 };
 

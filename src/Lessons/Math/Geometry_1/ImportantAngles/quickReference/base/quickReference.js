@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -7,6 +8,8 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import perpendicular from './perpendicular.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -319,5 +322,10 @@ attachQuickReference(details.path, lessonUID, versionUID, {
   Right: QRRight,
   Straight: QRStraight,
   Full: QRFull,
+  Perpendicular: <StaticQR
+    title="Perpendicular Lines"
+    content={perpendicular}
+    link={`${details.path}/${details.uid}/explanation/base?page=2`}
+  />,
 });
 

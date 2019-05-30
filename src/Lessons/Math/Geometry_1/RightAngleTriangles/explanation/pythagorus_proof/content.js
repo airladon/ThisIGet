@@ -18,6 +18,7 @@ class Content extends SimpleLessonContent {
       'Math/Geometry_1/AdjacentAngles/base/',
       'Math/Geometry_1/Area/base/',
       'Math/Geometry_1/RightAngleTriangles/base/',
+      'Math/Geometry_1/ImportantAngles/base/',
     ]);
   }
 

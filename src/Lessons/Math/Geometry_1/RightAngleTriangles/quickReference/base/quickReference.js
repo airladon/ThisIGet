@@ -11,6 +11,7 @@ import version from './version';
 import area from './area.md';
 import right from './right.md';
 import pythagorus from './pythagorus.md';
+import hypotenuse from './hypotenuse.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -163,6 +164,11 @@ attachQuickReference(details.path, lessonUID, versionUID, {
   Definition: <StaticQR
       title="Right Angle Triangle"
       content={right}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Hypotenuse: <StaticQR
+      title="Hypotenuse"
+      content={hypotenuse}
       link={`${details.path}/${details.uid}/summary/base?page=3`}
   />,
 });
