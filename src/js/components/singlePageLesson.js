@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
-import '../../css/singlePageLesson.scss';
+// import '../../css/singlePageLesson.scss';
 import StaticQR from './staticQR';
 import PresentationQR from './presentationQR';
 

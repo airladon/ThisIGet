@@ -4,7 +4,7 @@ import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
 import StaticQR from './staticQR';
 import PresentationQR from './presentationQR';
-import '../../css/simpleLesson.scss';
+// import '../../css/simpleLesson.scss';
 
 type Props = {
   lesson: SimpleLesson;
