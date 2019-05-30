@@ -41,14 +41,14 @@ export default class QRQuadrangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
     collection._quad1.showAll();
     collection._quad2.showAll();
     collection._quad3.showAll();
-    this.transformToQRWindow(collection, new Rect(-2.5, -1, 5, 2));
+    this.transformToQRWindow(collection, new Rect(-2.5, -0.5, 5, 1.8));
     this.diagram.animateNextFrame();
   }
 }

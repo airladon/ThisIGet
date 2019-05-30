@@ -70,14 +70,14 @@ export default class QRPointLineDistance extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.5, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const coll = this._collection;
     const fig = coll._fig;
     fig.setScenario('low');
     collection.showAll();
-    this.transformToQRWindow(collection, new Rect(-2, -1.3, 4, 2));
+    this.transformToQRWindow(collection, new Rect(-2, -1.1, 4, 2));
     this.diagram.animateNextFrame();
   }
 }
