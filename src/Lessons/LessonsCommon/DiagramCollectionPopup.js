@@ -62,6 +62,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setLink(link: string = '') {
     const a = document.getElementById('id_lesson__qr__link_link__pres');
     if (a != null) {
+      // $FlowFixMe
       a.href = `${window.location.origin}/Lessons/${link}`;
     }
   }
