@@ -47,9 +47,10 @@ export class QRDiameter extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._center.show();
     circle._line.show();
     circle._diameter.showAll();
@@ -58,7 +59,7 @@ export class QRDiameter extends PopupBoxCollection {
     this._collection._eqnDiameterRadius.setScenario('qr');
     this._collection._eqnDiameterCircumference.showForm('base');
     this._collection._eqnDiameterCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.5, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -95,9 +96,10 @@ export class QRRadius extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._center.show();
     circle._line.show();
     circle._radius.showAll();
@@ -106,7 +108,7 @@ export class QRRadius extends PopupBoxCollection {
     this._collection._eqnRadiusDiameter.setScenario('qr');
     this._collection._eqnRadiusCircumference.showForm('base');
     this._collection._eqnRadiusCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -139,15 +141,16 @@ export class QRCircumference extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._line.show();
     this._collection._eqnCircumferenceRadius.showForm('base');
     this._collection._eqnCircumferenceRadius.setScenario('qr');
     this._collection._eqnCircumferenceDiameter.showForm('base');
     this._collection._eqnCircumferenceDiameter.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -173,9 +176,10 @@ export class QRCircle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._line.show();
     circle._center.show();
     this.transformToQRWindow(this._collection, new Rect(-1.25, -1.25, 2.5, 2.5));
@@ -206,9 +210,10 @@ export class QRPi extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.4 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._diameter.showAll();
     circle._line.show();
     // circle._center.show();
