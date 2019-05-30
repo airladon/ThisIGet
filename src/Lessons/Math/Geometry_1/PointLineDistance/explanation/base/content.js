@@ -307,7 +307,7 @@ class Content extends PresentationLessonContent {
         'A triangle |cannot| be made with two angles of 90º, as the total angle would be larger than 180º.',
       ]),
       modifiers: {
-        triangle: this.qr('Math/Geometry_1/Triangles/base/Main'),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       },
     });
 

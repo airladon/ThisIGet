@@ -78,7 +78,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         remaining_angles: click(coll.pulseNonRightAngles, [coll], colors.angles),
         right_angle: click(coll.pulseRightAngle, [coll], colors.rightAngle),
-        total_angle: this.qr('Math/Geometry_1/Triangles/base/Main'),
+        total_angle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       },
       show: [
         main._tri._line, main._tri._angle1,
@@ -360,7 +360,7 @@ class Content extends PresentationLessonContent {
         b: highlight(colors.angles),
         _a: highlight(colors.angles),
         _b: highlight(colors.angles),
-        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/Supplementary'),
+        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres'),
         point: click(coll.pulseVertices, [coll], colors.vertex),
       },
       show: [pyth],

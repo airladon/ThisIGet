@@ -6,9 +6,12 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
-    'Main',
-    'Pythagorus',
+    'DefinitionPres',
+    'PythagorusPres',
+    'AreaPres',
     'Area',
+    'Pythagorus',
+    'Definition',
   ],
 };
 

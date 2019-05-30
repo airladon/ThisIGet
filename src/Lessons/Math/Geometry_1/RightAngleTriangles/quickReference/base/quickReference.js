@@ -1,11 +1,16 @@
 // @flow
+import React from 'react';
 import Fig from 'figureone';
+import StaticQR from '../../../../../../js/components/staticQR';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import area from './area.md';
+import right from './right.md';
+import pythagorus from './pythagorus.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -142,7 +147,22 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, lessonUID, versionUID, {
-  Main: QRMain,
-  Pythagorus: QRPythagorus,
-  Area: QRRightAngleTriangleArea,
+  DefinitionPres: QRMain,
+  PythagorusPres: QRPythagorus,
+  AreaPres: QRRightAngleTriangleArea,
+  Area: <StaticQR
+      title="Right Angle Triangle Area"
+      content={area}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Pythagorus: <StaticQR
+      title="Pythagorean Theorem"
+      content={pythagorus}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Definition: <StaticQR
+      title="Right Angle Triangle"
+      content={right}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
 });

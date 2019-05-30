@@ -118,7 +118,7 @@ class Content extends PresentationLessonContent {
         _180: highlightWord('180º', colors.angles),
         _60: highlightWord('60º', colors.angles),
         third_of_180: highlightWord('third of 180º', colors.angles),
-        triangle: this.qr('Math/Geometry_1/Triangles/base/Main'),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       },
       show: [tri],
     };

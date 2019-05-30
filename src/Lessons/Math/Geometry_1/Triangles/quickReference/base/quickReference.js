@@ -1,5 +1,7 @@
 // @flow
+import React from 'react';
 import Fig from 'figureone';
+import StaticQR from '../../../../../../js/components/staticQR';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
@@ -7,6 +9,7 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import triangle from './triangle.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -35,7 +38,7 @@ export default class QRTriangle extends PopupBoxCollection {
     this.hasTouchableElements = true;
 
     const modifiers = {};
-    this.setTitle('');
+    this.setTitle('Triangle');
     this.setDescription('A |triangle| is a shape that has |three sides| and |three angles|. All the angles within a triangle add up to |180º|.', modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
@@ -57,5 +60,10 @@ export default class QRTriangle extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, lessonUID, versionUID, {
-  Main: QRTriangle,
+  AngleSumPres: QRTriangle,
+  AngleSum: <StaticQR
+    title="Triangle"
+    content={triangle}
+    link={`${details.path}/${details.uid}/summary/base?page=1`}
+  />,
 });

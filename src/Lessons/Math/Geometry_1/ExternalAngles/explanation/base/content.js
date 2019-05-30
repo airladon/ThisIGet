@@ -121,7 +121,7 @@ class Content extends PresentationLessonContent {
         'As a triangle\'s |internal_angles| add up to 180º, we can put |c| in terms of |a| and |b|.',
       ],
       modifiers: {
-        internal_angles: this.qr('Math/Geometry_1/Triangles/base/Main'),
+        internal_angles: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
         c: highlight(colors.angles),
         a: highlight(colors.angles),
         b: highlight(colors.angles),
@@ -158,7 +158,7 @@ class Content extends PresentationLessonContent {
         'Now |c| and |_e| are |supplementary| angles, so we can calculate |e|.',
       ],
       modifiers: {
-        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/Supplementary'),
+        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres'),
         c: highlight(colors.angles),
         _e: highlight(colors.externalAngle),
         e: highlight(colors.externalAngle),
