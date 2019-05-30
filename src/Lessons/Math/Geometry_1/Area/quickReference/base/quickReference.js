@@ -13,7 +13,7 @@ const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
-  centerH
+  centerH,
 } = Fig.tools.html;
 
 export class QRArea extends PopupBoxCollection {
@@ -36,20 +36,30 @@ export class QRArea extends PopupBoxCollection {
     const modifiers = {};
     this.setTitle('Area');
     this.setDescription('|Area| is the |amount of space| a shape takes up and is measured in |squared length| units, such as |square meters| normally written as |m<sup>2</sup>|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const shapes = collection._shapes;
     const unit = collection._unitShape;
     collection.show([
       shapes._circle, shapes._triangle, shapes._square, unit._grid,
     ]);
-    this.transformToQRWindow(collection, new Rect(-2.8, -1.2, 5.6, 2.1));
+    collection._areaSquare.showAll();
+    collection._areaSquare.showForm('0');
+    collection._areaSquare.setScenario('qr');
+    collection._areaCircle.showAll();
+    collection._areaCircle.showForm('0');
+    collection._areaCircle.setScenario('qr');
+    collection._areaTriangle.showAll();
+    collection._areaTriangle.showForm('0');
+    collection._areaTriangle.setScenario('qr');
+    this.transformToQRWindow(collection, new Rect(-2.8, -1.1, 5.6, 2.1));
     this.diagram.animateNextFrame();
   }
 }
@@ -73,14 +83,15 @@ export class QRRectangle extends PopupBoxCollection {
 
     const modifiers = {};
     this.setTitle('Rectangle');
-    this.setDescription('The |area of a rectangle| is equal to its |width| multiplied by its |height|.', modifiers);
-    this.setLink(lessonUID);
+    this.setDescription(centerH('The |area of a rectangle| is equal to its |width| multiplied by its |height|.'), modifiers);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.8, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     // collection.show();
     const rect = collection._rectangle;
     const eqn = collection._eqn;
@@ -89,7 +100,7 @@ export class QRRectangle extends PopupBoxCollection {
     ]);
     eqn.showForm('summaryRect');
     collection.setScenarios('summary');
-    this.transformToQRWindow(collection, new Rect(-2.8, -1.3, 5.6, 2.6));
+    this.transformToQRWindow(collection, new Rect(-2.8, -1.1, 5.6, 2.6));
     this.diagram.animateNextFrame();
   }
 }
@@ -114,13 +125,14 @@ export class QRSquare extends PopupBoxCollection {
     const modifiers = {};
     this.setTitle('Square');
     this.setDescription('The |area of a square| is equal to its |side length squared|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     // collection.show();
     const square = collection._square;
     const eqn = collection._eqn;

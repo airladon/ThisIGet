@@ -280,25 +280,32 @@ export default function lessonLayout() {
     },
   };
 
-  // const nav = {
-  //   name: 'nav',
-  //   method: 'addNavigator',
-  //   options: {
-  //     equation: eqn,
-  //     navType: 'description',
-  //     alignH: 'left',
-  //   },
-  //   mods: {
-  //     scenarios: {
-  //       top: { position: [0, 0.9] },
-  //       square: { position: [0, 0.8] },
-  //       nav: { position: [-2.74, 1.6] },
-  //       summary: { position: [0, 0] },
-  //       qr: { position: [0, -1.5] },
-  //     },
-  //     isTouchable: false,
-  //   },
-  // };
+  const areaEqn = (name, value, x) => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      scale: 0.9,
+      elements: {
+        _Area: { text: 'Area', color: colors.qrArea_sides },
+        equals: '  =  ',
+        value: { text: value },
+        m: { text: 'm', color: colors.qrArea_sides },
+        _2: { text: '2', color: colors.qrArea_sides },
+      },
+      forms: {
+        '0': ['_Area', 'equals', 'value', ' ', { sup: ['m', '_2'] }],
+      },
+      defaultFormAlignment: {
+        alignH: 'center',
+      },
+    },
+    mods: {
+      scenarios: {
+        qr: { position: [x, -1.3] },
+      },
+    },
+  });
 
   layout.addElements = [
     // examples,
@@ -308,6 +315,9 @@ export default function lessonLayout() {
     rectangle,
     eqn,
     square,
+    areaEqn('areaSquare', '25', 0),
+    areaEqn('areaCircle', '19.3', -1.8),
+    areaEqn('areaTriangle', '14.3', 1.8),
   ];
   return layout;
 }
