@@ -33,7 +33,7 @@ export default class QRAbstraction extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0, xSize: 0 });
+    this.setDiagramSpace({ location: 'top', size: 0 });
     super.show();
   }
 }
