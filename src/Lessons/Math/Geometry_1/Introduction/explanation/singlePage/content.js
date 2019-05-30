@@ -91,7 +91,7 @@ class Content extends SinglePageLessonContent {
       _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       // _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
-      _test: this.qr('Math/Geometry_1/Triangles/base/AngleSum'),
+      _test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
     };
     this.content = [
       '# Shapes',

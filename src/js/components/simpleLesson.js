@@ -97,7 +97,6 @@ export default class SimpleLessonComponent extends React.Component
   }
 
   componentDidMount() {
-    this.lesson.initialize();
     window.lessonFunctions = {
       qr: (id, parameters) => {
         if (React.isValidElement(window.quickReference[parameters])) {
@@ -107,6 +106,7 @@ export default class SimpleLessonComponent extends React.Component
         }
       },
     };
+    this.lesson.initialize();
   }
 
   // eslint-disable-next-line class-methods-use-this

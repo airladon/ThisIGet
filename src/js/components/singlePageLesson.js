@@ -97,11 +97,11 @@ export default class SinglePageLessonComponent extends React.Component
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
-    align('id_lesson__qr__content_static', 'lesson__content', id);
+    align('id_lesson__qr__content_static', 'id_single_page_lesson__text_container', id);
   }
 
   showPresQR(id: string, parameters: string) {
-    const container = document.getElementById('lesson__content');
+    const container = document.getElementById('id_single_page_lesson__text_container');
     if (container != null) {
       const containerRect = container.getBoundingClientRect();
       const width = Math.min(containerRect.width - 40, 600);
@@ -118,7 +118,7 @@ export default class SinglePageLessonComponent extends React.Component
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    align('id_lesson__qr__content_pres', 'lesson__content', id);
+    align('id_lesson__qr__content_pres', 'id_single_page_lesson__text_container', id);
   }
 
   // shouldComponentUpdate() {
@@ -301,14 +301,21 @@ export default class SinglePageLessonComponent extends React.Component
       }
     });
     return <div
-      className="single_page_lesson__text_container"
-      dangerouslySetInnerHTML={ { __html: output } }>
+        id="id_single_page_lesson__text_container"
+        className="single_page_lesson__text_container"
+      >
+        <div 
+          className="single_page_lesson__text_container_text"
+          dangerouslySetInnerHTML={ { __html: output } }
+        />
+        {this.state.qr}
+        <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
     </div>;
   }
 
   render() {
     return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
-    <canvas id="hidden_offscreen"></canvas>
+      <canvas id="hidden_offscreen"></canvas>
       <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
         <canvas id="id_diagram__text__low" className='diagram__text'>
         </canvas>
@@ -318,21 +325,6 @@ export default class SinglePageLessonComponent extends React.Component
         </div>
       </div>
       {this.renderContent()}
-      {this.state.qr}
-      <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
-      { /*
-      <div id="single_page_lesson__qr__overlay" className="lesson__qr__overlay">
-        <div id="lesson__qr__container">
-          <div id="id_qr_diagram" className="diagram__container lesson__diagram">
-            <canvas id="id_qr_diagram__text" className='diagram__text'>
-            </canvas>
-            <canvas id="id_qr_diagram__gl" className='diagram__gl'>
-            </canvas>
-            <div id="id_diagram__html" className='diagram__html'>
-            </div>
-          </div>
-        </div>
-      </div> */}
     </div>;
   }
 }

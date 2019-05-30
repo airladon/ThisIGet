@@ -62,6 +62,7 @@ class SinglePageLessonContent extends SimpleLessonContent {
     const defaultOptions = {
       color: [1, 0, 0, 1],
       classes: '',
+      id: generateUniqueId(),
     };
     let options = defaultOptions;
     if (Array.isArray(colorOrOptions)) {
@@ -70,7 +71,7 @@ class SinglePageLessonContent extends SimpleLessonContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `lesson__qr_action_word ${options.classes}`;
     }
-    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', link], options);
+    return click(window.lessonFunctions.qr, [window.lessonFunctions, options.id, link], options);
   }
 
   // eslint-disable-next-line class-methods-use-this

@@ -73,14 +73,18 @@
 }
 
 .single_page_lesson__text_container {
-  position: static;
+  position: relative;
   background-color: color('white', 'lightest');
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-.single_page_lesson__container .lesson__diagram {
+.single_page_lesson__text_container_text {
+  position: static;
+}
+
+.single_page_lesson__container #lesson__content_diagram {
   max-width: none;
   max-height: none;
   background-color: transparent;
