@@ -46,9 +46,10 @@ export class QRRectangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const rect = coll._rect;
     rect._left.showAll();
@@ -62,7 +63,7 @@ export class QRRectangle extends PopupBoxCollection {
     coll.setScenarios('center');
     coll.setRectLabels('ABAB');
     coll.resetColors();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -94,16 +95,17 @@ export class QRSquare extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const square = coll._square;
     square.showAll();
     coll.setScenarios('center');
     coll.setRectLabels('ABAB');
     coll.resetColors();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -0.9, 4, 2));
     this.diagram.animateNextFrame();
   }
 }

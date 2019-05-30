@@ -41,7 +41,7 @@ export default class QRTriangle extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -51,7 +51,7 @@ export default class QRTriangle extends PopupBoxCollection {
     total._angleC.showAll();
     total._angleB.showAll();
     total._angleA.showAll();
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -0.9, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }

@@ -49,7 +49,7 @@ export class QROpposite extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -115,7 +115,7 @@ export class QRCorresponding extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -187,7 +187,7 @@ export class QRAlternate extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -259,7 +259,7 @@ export class QRInterior extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();

@@ -50,7 +50,7 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.55, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const fig = collection._fig;
@@ -61,7 +61,7 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
     ]);
     fig.setScenarios('qr');
     fig._tri.updateLabels();
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1.1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
