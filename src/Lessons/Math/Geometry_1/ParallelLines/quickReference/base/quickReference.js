@@ -41,9 +41,10 @@ export default class QRBoilerplate extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     const markings = coll._markings;
     markings._l1.showAll();
     markings._l2.showAll();

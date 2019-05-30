@@ -32,7 +32,7 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -55,12 +55,12 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
 
     coll.showAll();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -1.1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
