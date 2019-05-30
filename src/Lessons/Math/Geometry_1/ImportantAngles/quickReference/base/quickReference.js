@@ -48,9 +48,10 @@ export class QRAcute extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -62,7 +63,7 @@ export class QRAcute extends PopupBoxCollection {
     fig._acute.showAll();
     fig._line1.move.maxTransform.updateRotation(Math.PI / 2 * 0.98);
     fig._line1.move.minTransform.updateRotation(0);
-    this.transformToQRWindow(collection, new Rect(-0.6, 0.2, 2, 1.6));
+    this.transformToQRWindow(collection, new Rect(-0.6, 0.5, 2, 1.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -93,6 +94,7 @@ export class QRRight extends PopupBoxCollection {
     super.show();
     const collection = this._collection;
     // collection.show();
+    collection.hideAll();
     const fig = collection._fig;
     fig.setScenario('qr');
     fig.hideAll();
@@ -101,7 +103,7 @@ export class QRRight extends PopupBoxCollection {
     fig._angle.showAll();
     fig._line1.setRotation(Math.PI / 2);
     this.setDiagramSpace({ location: 'top', size: 0.6 });
-    this.transformToQRWindow(collection, new Rect(-0.6, 0.4, 2, 1.4));
+    this.transformToQRWindow(collection, new Rect(-0.6, 0.3, 2, 1.6));
     this.diagram.animateNextFrame();
   }
 }
@@ -135,9 +137,10 @@ export class QRObtuse extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', xSize: 0, ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -149,7 +152,7 @@ export class QRObtuse extends PopupBoxCollection {
     fig._obtuse.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI / 2 * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 0.98);
-    this.transformToQRWindow(collection, new Rect(-1.2, -0.2, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.2, 0.6, 2.5, 1.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -169,7 +172,7 @@ export class QRStraight extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
       straight_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
@@ -190,9 +193,10 @@ export class QRStraight extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -201,7 +205,7 @@ export class QRStraight extends PopupBoxCollection {
     fig._angle.showAll();
     fig._angle.autoRightAngle = false;
     fig._line1.setRotation(Math.PI);
-    this.transformToQRWindow(collection, new Rect(-1.5, -0.2, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.5, 0.5, 3, 1.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -235,9 +239,10 @@ export class QRReflex extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', xSize: 0, ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -249,7 +254,7 @@ export class QRReflex extends PopupBoxCollection {
     fig._reflex.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 1.98);
-    this.transformToQRWindow(collection, new Rect(-1.2, -1, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.5, -0.5, 3, 1.7));
     this.diagram.animateNextFrame();
   }
 }
@@ -269,7 +274,7 @@ export class QRFull extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
       full_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
@@ -290,9 +295,10 @@ export class QRFull extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -301,7 +307,7 @@ export class QRFull extends PopupBoxCollection {
     fig._angle.showAll();
     fig._angle.autoRightAngle = false;
     fig._line1.setRotation(Math.PI * 1.999);
-    this.transformToQRWindow(collection, new Rect(-1.2, -0.6, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.2, 0, 3, 1.7));
     this.diagram.animateNextFrame();
   }
 }
