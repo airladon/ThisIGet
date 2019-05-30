@@ -50,7 +50,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -63,7 +63,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     congruent._tri2.isMovable = true;
     congruent._tri2.touchInBoundingRect = true;
     congruent._tri2.move.type = 'rotation';
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -1.1, 3.6, 2.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -97,7 +97,7 @@ export class QRAaa extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.65, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.55 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -111,7 +111,7 @@ export class QRAaa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri1.setScenario('qrLeftAaa');
     congruent._tri2.setScenario('qrRightAaa');
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-3.2, -1, 6, 2.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -147,7 +147,7 @@ export class QRSas extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -161,7 +161,7 @@ export class QRSas extends PopupBoxCollection {
     congruent._tri2._side01.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -196,7 +196,7 @@ export class QRSsa extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -210,7 +210,7 @@ export class QRSsa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -247,7 +247,7 @@ export class QRAsa extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -261,7 +261,7 @@ export class QRAsa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._side01.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -297,7 +297,7 @@ export class QRAas extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -311,7 +311,7 @@ export class QRAas extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._side12.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -347,7 +347,7 @@ export class QRSss extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -361,7 +361,7 @@ export class QRSss extends PopupBoxCollection {
     congruent._tri2._angle0.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle2.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.8, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
