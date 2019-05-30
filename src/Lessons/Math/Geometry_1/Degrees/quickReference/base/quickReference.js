@@ -48,7 +48,7 @@ export default class QRDegrees extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.5, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const collection = this._collection;
     const circle = collection._circle;
@@ -63,7 +63,7 @@ export default class QRDegrees extends PopupBoxCollection {
     collection.setAngleMarks();
     circle._angleText.setScenario('qr');
     collection.updateAngle();
-    this.transformToQRWindow(collection, new Rect(-2, -1, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.7, -1, 3.2, 2.2));
     this.diagram.animateNextFrame();
   }
 }
