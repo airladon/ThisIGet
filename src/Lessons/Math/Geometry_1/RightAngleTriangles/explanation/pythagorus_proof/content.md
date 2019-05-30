@@ -4,7 +4,7 @@ Start with a **Right Angled Triangle** that has side lengths $$\definecolor{less
 
 ![](./Triangle.png)
 
-As a triangle's angles add to 180º, and one angle is $$\color{lessonGreen}{90^\circ}$$, then the remaining angles must be $$\color{lessonGreen}{180^\circ-90^\circ = 90^\circ}$$.
+As a triangle's angles [[add]]((qr,'Math/Geometry_1/Triangles/base/Main',#16E7CF)) to 180º, and one angle is $$\color{lessonGreen}{90^\circ}$$, then the remaining angles must be $$\color{lessonGreen}{180^\circ-90^\circ = 90^\circ}$$.
 
 Therefore $$\color{lessonGreen}{a} + \color{lessonGreen}{b} = 90^\circ$$.
 

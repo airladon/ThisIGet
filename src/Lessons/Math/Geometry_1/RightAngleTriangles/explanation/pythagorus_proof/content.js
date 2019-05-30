@@ -13,6 +13,9 @@ class Content extends SimpleLessonContent {
     this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
+    this.loadQRs([
+      'Math/Geometry_1/Triangles/base',
+    ]);
   }
 
   setContent() {
