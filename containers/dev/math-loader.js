@@ -1,6 +1,10 @@
 //https://webpack.js.org/api/loaders/
 
 async function mathparser(callback, source, map, meta) {
+  if (source.match('$$') == null) {
+    callback(null, source, map, meta);
+    return;
+  }
   const mjAPI = require("mathjax-node");
   mjAPI.config({
     MathJax: {
