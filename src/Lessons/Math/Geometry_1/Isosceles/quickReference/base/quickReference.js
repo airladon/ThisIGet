@@ -53,9 +53,10 @@ export class QRMain extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const tri = coll._triangle;
     tri._line.show();
@@ -96,7 +97,7 @@ export class QRSplitLine extends PopupBoxCollection {
       equal_sides: click(coll.pulseLeftRightEqualSides, [coll, null], colors.sides),
       equal_angles: click(coll.pulseLeftRightEqualAngles, [coll], colors.angles),
     };
-    this.setTitle('Isosceles Triangle');
+    this.setTitle('Split Isosceles Triangle');
     this.setDescription(style({ scale: 1 }, [
       'For an isosceles triangle, the |line| drawn from the angle between the |equal_sides| to the |midpoint| of the side between the |equal_angles| intersects the side at a |right_angle|, and splits the triangle into two equal halves.',
     ]), modifiers);
@@ -104,9 +105,10 @@ export class QRSplitLine extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const left = coll._left;
     const right = coll._right;
@@ -125,7 +127,7 @@ export class QRSplitLine extends PopupBoxCollection {
     right._sideEqual.showAll();
     right._angleBase._curve.show();
     correction.showAll();
-    correction.setColor(this.layout.colors.diagram.qr.background);
+    // correction.setColor(this.layout.colors.diagram.background);
     split._line.show();
     coll.setScenarios('summary');
     right._angleBase.autoRightAngle = true;
