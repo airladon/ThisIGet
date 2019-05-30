@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -7,6 +8,10 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import areaMd from './area.md';
+import rectangleMd from './rectangle.md';
+import squareMd from './square.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -147,7 +152,22 @@ export class QRSquare extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, lessonUID, versionUID, {
-  Area: QRArea,
-  Rectangle: QRRectangle,
-  Square: QRSquare,
+  AreaPres: QRArea,
+  RectanglePres: QRRectangle,
+  SquarePres: QRSquare,
+  Area: <StaticQR
+    title={'Area'}
+    content={areaMd}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
+  Rectangle: <StaticQR
+    title={'Rectangle'}
+    content={rectangleMd}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
+  Square: <StaticQR
+    title={'Square'}
+    content={squareMd}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
 });

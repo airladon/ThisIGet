@@ -6,6 +6,9 @@ var version = {
   topic: 'quickReference',
   type: 'presentation',
   references: [
+    'AreaPres',
+    'RectanglePres',
+    'SquarePres',
     'Area',
     'Rectangle',
     'Square',
