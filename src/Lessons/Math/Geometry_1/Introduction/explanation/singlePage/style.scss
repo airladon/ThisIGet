@@ -48,10 +48,22 @@ body {
   z-index: 1;
 }
 
-.id_diagram__gl__offscreen {
+.diagram__gl__offscreen {
   position: absolute;
   top: -10000px;
   left: -10000px;
+  // top: 0;
+  // left: 0;
+  width: 500px;
+  height: 500px;
+}
+
+.diagram__text__offscreen {
+  position: absolute;
+  top: -10000px;
+  left: -10000px;
+  // top: 0;
+  // left: 0;
   width: 500px;
   height: 500px;
 }

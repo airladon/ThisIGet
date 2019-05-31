@@ -321,9 +321,12 @@ export default class SinglePageLessonComponent extends React.Component
 
   render() {
     return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
+      {this.renderContent()}
       <canvas id="hidden_offscreen"></canvas>
       <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
         <canvas id="id_diagram__gl__offscreen" className="diagram__gl__offscreen">
+        </canvas>
+        <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">
         </canvas>
         <canvas id="id_diagram__text__low" className='diagram__text'>
         </canvas>
@@ -332,7 +335,7 @@ export default class SinglePageLessonComponent extends React.Component
         <div id="id_diagram__html" className='diagram__html'>
         </div>
       </div>
-      {this.renderContent()}
+      
     </div>;
   }
 }

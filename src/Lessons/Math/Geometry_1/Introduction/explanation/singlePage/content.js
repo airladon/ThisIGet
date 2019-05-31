@@ -110,16 +110,16 @@ class Content extends SinglePageLessonContent {
 
       'For example, a |wheel| is a physical thing. It is made of different materials, has mass, size, location and smell. A wheel can be abstracted into a |shape| by focusing just on its outline, and removing a lot of the details of how it is made.',
 
-      makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2)),
+      makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2), 500),
       // makeFig('id_figure1', [], 'fit', new Rect(-2, -1, 4, 2)),
 
       'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be identified, and |_relationships| between the properties found.',
 
-      makeFig('id_figure2', diag._fig2, 'fit', new Rect(-2, -1.3, 4, 2.6)),
+      makeFig('id_figure2', diag._fig2, 'fit', new Rect(-1.3, -1.3, 2.6, 2.6), 300),
 
       'The properties and relationships can then be applied to |_all_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 
-      makeFig('id_figure3', diag._fig3, 'fit', new Rect(-2.5, -1.5, 5, 3)),
+      makeFig('id_figure3', diag._fig3, 'fit', new Rect(-2.5, -1.5, 5, 3), 500),
 
       `<div class="container">
         <div class="inner">
@@ -130,7 +130,7 @@ class Content extends SinglePageLessonContent {
 
       'For instance, over |2000| years ago, the understanding of shapes allowed people to calculate the |size of our planet| to within 15% of the actual value.',
 
-      makeFig('id_figure4', diag._fig4, 'fit', new Rect(-1, -1, 2, 2)),
+      makeFig('id_figure4', diag._fig4, 'fit', new Rect(-1, -1, 2, 2), 400),
 
       'The mathematics of shapes also helps us understand phenonmena we can\'t see like |sound|, |gravity|, |electricty|, |radio waves| and |magnetism|. It is the basis for, and used to develop most engineering and science disciplines.',
 
