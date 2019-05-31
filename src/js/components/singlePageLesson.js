@@ -290,20 +290,24 @@ export default class SinglePageLessonComponent extends React.Component
   renderContent() {
     let output = '';
     this.state.content.forEach((element) => {
-      if (typeof element === 'string' && element.charAt(0) === '<') {
-        output += element.slice();
-        // output.push(<div key={this.key}
-        //   dangerouslySetInnerHTML={ {
-        //     __html: element.slice(0, element.length - 1),
-        //   } }>
-        //   </div>);
-      } else if (typeof element === 'string') {
+      // if (typeof element === 'string' && element.charAt(0) === '<') {
+      //   output += element.slice();
+      //   // output.push(<div key={this.key}
+      //   //   dangerouslySetInnerHTML={ {
+      //   //     __html: element.slice(0, element.length - 1),
+      //   //   } }>
+      //   //   </div>);
+      // } else if (typeof element === 'string') {
+      //   output += applyMDModifiers(element, this.lesson.content.modifiers);
+      //   // output.push(<div key={this.key}
+      //   //   dangerouslySetInnerHTML={ {
+      //   //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
+      //   //   } }>
+      //   // </div>);
+      // }
+
+      if (typeof element === 'string') {
         output += applyMDModifiers(element, this.lesson.content.modifiers);
-        // output.push(<div key={this.key}
-        //   dangerouslySetInnerHTML={ {
-        //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
-        //   } }>
-        // </div>);
       }
     });
     return <div
@@ -335,7 +339,6 @@ export default class SinglePageLessonComponent extends React.Component
         <div id="id_diagram__html" className='diagram__html'>
         </div>
       </div>
-      
     </div>;
   }
 }

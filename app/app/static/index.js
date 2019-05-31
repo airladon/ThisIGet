@@ -26662,10 +26662,12 @@ function modifyText(text, key, mod) {
   var expression = new RegExp("\\|".concat(key, "\\|"), 'gi');
   var replacement = '';
 
-  if (typeof mod.replacementText === 'string') {
+  if (typeof mod === 'string') {
+    replacement = mod;
+  } else if (typeof mod.replacementText === 'string') {
     replacement = mod.replacementText;
   } else {
-    replacement = mod.replacementText(key).replacementText; // console.log(replacement)
+    replacement = mod.replacementText(key).replacementText;
   }
 
   outText = text.replace(expression, replacement);
@@ -26727,11 +26729,9 @@ function applyModifiers(text, modifiers) {
   var monochrome = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var outText = text;
   Object.keys(modifiers).forEach(function (key) {
-    var mod = modifiers[key];
+    var mod = modifiers[key]; // if (mod.replacementText != null) {
 
-    if (mod.replacementText != null) {
-      outText = modifyText(outText, key, mod);
-    }
+    outText = modifyText(outText, key, mod); // }
   });
   var r = RegExp(/\|([^|]*)\|/, 'gi');
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
@@ -26755,7 +26755,7 @@ function setOnClicks(modifiers) {
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
 
-    if ('actionMethod' in mod) {
+    if (typeof mod !== 'string' && 'actionMethod' in mod) {
       onClickId(mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd);
     }
   });
