@@ -3686,6 +3686,7 @@ function () {
     this.waitForFrames = 0;
     this.scrollingFast = false;
     this.scrollTimeoutId = null;
+    this.drawTimeoutId = null;
     this.oldScroll = window.pageYOffset;
     this.drawAnimationFrames = 0;
   }
@@ -3932,8 +3933,10 @@ function () {
 
 
       this.drawQueued = true; // this.fromWhere = 'RenderToCanvas';
+      // console.log('drawing')
 
-      this.draw(-1); // const { ctx } = new DrawContext2D(htmlCanvas);
+      this.draw(-1); // console.log('done');
+      // const { ctx } = new DrawContext2D(htmlCanvas);
 
       var getDimensions = function getDimensions(c) {
         return {
@@ -3960,6 +3963,7 @@ function () {
       //   text.width / 2 - textWidthOfCanvas / 2,
       //   text.height / 2 - textHeightOfCanvas / 2,
       // );
+      // console.log(gl.clientWidth, canvas.clientWidth, this.webglLow.gl.canvas.clientWidth, this.webglLow.gl.canvas.width, this.webglLow.gl.canvas.offsetWidth)
 
       var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
 
@@ -3967,7 +3971,7 @@ function () {
         w.src = this.webglLow.gl.canvas.toDataURL('image/png', 0.5); // w.src = offscreenCanvas.toDataURL();
 
         w.style.visibility = 'visible';
-        w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")");
+        w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")"); // w.style.transform = `scale(1,${gl.clientHeight / canvas.clientHeight})`;
       }
 
       var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d"));
@@ -3975,7 +3979,7 @@ function () {
       if (d instanceof HTMLImageElement) {
         d.src = this.draw2DLow.canvas.toDataURL('image/png', 0.5);
         d.style.visibility = 'visible';
-        d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")");
+        d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")"); // d.style.transform = `scale(1,${text.clientHeight / canvas.clientHeight})`;
       }
 
       this.clearContext();
@@ -4008,7 +4012,9 @@ function () {
       //   console.log('unrender')
       //   this.elements.unrenderAll();
       // }
-      this.webglLow.resize(); // this.webglHigh.resize();
+      // console.log('before webgl')
+      this.webglLow.resize(); // console.log('after webgl')
+      // this.webglHigh.resize();
 
       this.draw2DLow.resize(); // this.draw2DHigh.resize();
 
@@ -4029,7 +4035,8 @@ function () {
 
       if (this.oldWidth !== this.canvasLow.clientWidth) {
         // this.unrenderAll();
-        this.renderAllElementsToTiedCanvases(true);
+        // console.log('updating width')
+        // this.renderAllElementsToTiedCanvases(true);
         this.oldWidth = this.canvasLow.clientWidth;
       }
 
@@ -4380,8 +4387,9 @@ function () {
       }
 
       this.drawQueued = false;
-      this.clearContext();
-      this.elements.draw(this.spaceTransforms.diagramToGL, now);
+      this.clearContext(); // console.log('really drawing')
+
+      this.elements.draw(this.spaceTransforms.diagramToGL, now); // console.log('really done')
 
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -4391,6 +4399,20 @@ function () {
         this.drawAnimationFrames -= 1;
         this.animateNextFrame(true, 'queued frames');
       }
+
+      if (this.drawTimeoutId) {
+        clearTimeout(this.drawTimeoutId);
+        this.drawTimeoutId = null;
+      }
+
+      this.drawTimeoutId = setTimeout(this.renderToImages.bind(this), 100);
+    }
+  }, {
+    key: "renderToImages",
+    value: function renderToImages() {
+      this.drawTimeoutId = null;
+      this.renderAllElementsToTiedCanvases();
+      this.centerDrawingLens();
     }
   }, {
     key: "centerDrawingLens",
@@ -23468,7 +23490,8 @@ function () {
       // device pixels.
 
       var displayWidth = Math.floor(this.gl.canvas.clientWidth * realToCSSPixels);
-      var displayHeight = Math.floor(this.gl.canvas.clientHeight * realToCSSPixels); // Check if the canvas is not the same size.
+      var displayHeight = Math.floor(this.gl.canvas.clientHeight * realToCSSPixels); // console.log('in webgl', displayWidth)
+      // Check if the canvas is not the same size.
 
       if (this.gl.canvas.width !== displayWidth || this.gl.canvas.height !== displayHeight) {
         // Make the canvas the same size

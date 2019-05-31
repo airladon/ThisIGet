@@ -106,7 +106,7 @@ function makeFig(
       element.tieToHTML.window = limits;
     }
   });
-  return `<div id="${id}" class="single_page_lesson__figure"><img  class="single_page_lesson__figure_image" id="${id}_webgl"></img><img class="single_page_lesson__figure_image" id="${id}_2d"></img></div>`;
+  return `<div id="${id}" class="single_page_lesson__figure_container"><div class="single_page_lesson__figure"><img  class="single_page_lesson__figure_image" id="${id}_webgl"></img><img class="single_page_lesson__figure_image" id="${id}_2d"></img></div></div>`;
 }
 
 export { SinglePageLessonContent, makeFig };

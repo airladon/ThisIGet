@@ -132,6 +132,11 @@ export default class SinglePageLessonComponent extends React.Component
   //   // Instantiate diagram now that the canvas elements have been
   //   // created.
   // }
+  // resizer() {
+  //   console.log('resiser')
+  //   // this.lesson.content.diagram.renderAllElementsToTiedCanvases(true);
+  //   // console.log(this.lesson.content.diagram.webglLow)
+  // }
 
   componentDidMount() {
     window.lessonFunctions = {
@@ -151,6 +156,7 @@ export default class SinglePageLessonComponent extends React.Component
       content: this.lesson.content.sections[0],
     });
     this.lesson.content.diagram.enableScrolling();
+    // window.addEventListener('resize', this.resizer.bind(this));
     // window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
@@ -304,7 +310,7 @@ export default class SinglePageLessonComponent extends React.Component
         id="id_single_page_lesson__text_container"
         className="single_page_lesson__text_container"
       >
-        <div 
+        <div
           className="single_page_lesson__text_container_text"
           dangerouslySetInnerHTML={ { __html: output } }
         />

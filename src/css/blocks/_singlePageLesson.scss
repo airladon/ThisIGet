@@ -90,9 +90,19 @@
   background-color: transparent;
 }
 
-.single_page_lesson__figure {
+.single_page_lesson__figure_container {
   position: relative;
   overflow: hidden;
+  height: auto;
+  max-width: 100%;
+}
+
+.single_page_lesson__figure {
+  // position: relative;
+  // overflow: hidden;
+  height: 0;
+  width: 100%;
+  padding-top: 50%;
 }
 
 .single_page_lesson__figure_image {

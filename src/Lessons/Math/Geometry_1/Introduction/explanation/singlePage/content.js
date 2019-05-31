@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-// import * as React from 'react';
+import * as React from 'react';
 import {
   SinglePageLessonContent, makeFig,
 } from '../../../../../../js/Lesson/SinglePageLessonContent';
@@ -53,6 +53,10 @@ class Content extends SinglePageLessonContent {
     ]);
   }
 
+  redrawer() {
+    this.diagram.renderAllElementsToTiedCanvases(true);
+  }
+
   // Array of strings, html or jsx
   // eslint-disable-next-line class-methods-use-this
   setContent() {
@@ -92,10 +96,11 @@ class Content extends SinglePageLessonContent {
       // _relationships: click(diag.pulseEquation, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
       _test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      test2: click(this.redrawer, [this]),
     };
     this.content = [
       '# Shapes',
-      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us. |_test|',
+      '|Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us. |_test|  |test2|',
 
       'Mathematics describes something like an object, path or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios.',
 
@@ -115,6 +120,11 @@ class Content extends SinglePageLessonContent {
       'The properties and relationships can then be applied to |_all_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 
       makeFig('id_figure3', diag._fig3, 'fit', new Rect(-2.5, -1.5, 5, 3)),
+
+      `<div class="container">
+        <div class="inner">
+        </div>
+      </div>`,
 
       'Whether the object is as small as an atom, or as large as a star, if the shape is the same, then the relationship between properties of that shape will apply. This is very powerful, as it means we can understand objects that we could never actually measure as they are too large, too small, or not close enough.',
 
