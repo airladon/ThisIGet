@@ -3598,19 +3598,15 @@ function () {
           var child = children[i];
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl')) {
-            // if (child.id === 'id_diagram__gl__low') {
-            this.canvasLow = child; // }
-            // if (child.id === 'id_diagram__gl__high') {
-            //   this.canvasHigh = child;
-            // }
+            this.canvasLow = child;
+          }
+
+          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl__offscreen')) {
+            this.canvasOffscreen = child;
           }
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text')) {
-            // if (child.id === 'id_diagram__text__low') {
-            this.textCanvasLow = child; // }
-            // if (child.id === 'id_diagram__text__high') {
-            //   this.textCanvasHigh = child;
-            // }
+            this.textCanvasLow = child;
           }
 
           if (child.classList.contains('diagram__html')) {
@@ -3619,12 +3615,13 @@ function () {
         }
 
         this.backgroundColor = backgroundColor;
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor); // const webglHigh = new WebGLInstance(
-        //   this.canvasHigh,
-        //   this.backgroundColor,
-        // );
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
+        this.webglLow = webglLow;
 
-        this.webglLow = webglLow; // this.webglHigh = webglHigh;
+        if (this.canvasOffscreen) {
+          var webglOffscreen = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasOffscreen, this.backgroundColor);
+          this.webglOffscreen = webglOffscreen;
+        }
 
         this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow); // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
       }
@@ -3717,7 +3714,12 @@ function () {
   }, {
     key: "getShapes",
     value: function getShapes() {
-      var webgl = this.webglLow;
+      var webgl = [this.webglLow];
+
+      if (this.webglOffscreen) {
+        webgl.push(this.webglOffscreen);
+      }
+
       var draw2D = this.draw2DLow; // if (high) {
       //   webgl = this.webglHigh;
       //   draw2D = this.draw2DHigh;
@@ -15490,7 +15492,13 @@ function () {
   htmlCanvas, limits, spaceTransforms, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
-    this.webgl = webgl;
+    if (Array.isArray(webgl)) {
+      this.webgl = webgl;
+    } else {
+      this.webgl = [webgl];
+    } // this.webgl = webgl;
+
+
     this.draw2D = draw2D;
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
@@ -18449,7 +18457,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertextFan);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertextFan).call(this, webgl));
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
     _this.points = [];
     points.forEach(function (p) {
       _this.points.push(p.x);
@@ -19367,9 +19375,9 @@ function (_VertexObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
 
     if (triangles) {
-      _this.glPrimative = webgl.gl.TRIANGLES;
+      _this.glPrimative = webgl[0].gl.TRIANGLES;
     } else {
-      _this.glPrimative = webgl.gl.TRIANGLE_STRIP;
+      _this.glPrimative = webgl[0].gl.TRIANGLE_STRIP;
     } // Check potential errors in constructor input
 
 
@@ -19555,7 +19563,7 @@ function (_VertexObject) {
       _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
     }
 
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN; // Check potential errors in constructor input
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = numSidesToDraw;
@@ -19703,7 +19711,7 @@ function (_VertexObject) {
 
     // setup webgl stuff
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygonLine).call(this, webgl));
-    _this.glPrimative = webgl.gl.LINES; // Check potential errors in constructor input
+    _this.glPrimative = webgl[0].gl.LINES; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = Math.floor(numSidesToDraw);
@@ -20191,7 +20199,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexText);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'text'));
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
     var defaultTextOptions = {
       text: 'DEFAULT_TEXT',
       size: '20px',
