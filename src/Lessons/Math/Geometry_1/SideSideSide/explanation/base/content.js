@@ -57,11 +57,11 @@ class Content extends PresentationLessonContent {
         'If triangles share the same angles only, then they cannot be determined to be congruent (|Angle-Angle-Angle|).',
       ]),
       modifiers: {
-        'Angle-Side-Angle': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Asa', colors.diagram.action),
-        'Angle-Angle-Side': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Aas', colors.diagram.action),
-        'Side-Angle-Side': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Sas', colors.diagram.action),
-        'Side-Side-Angle': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Ssa', colors.diagram.action),
-        'Angle-Angle-Angle': this.bindShowQR('Math/Geometry_1/CongruentTriangles/base', 'Aaa', colors.diagram.action),
+        'Angle-Side-Angle': this.qr('Math/Geometry_1/CongruentTriangles/base/Asa', colors.diagram.action),
+        'Angle-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Aas', colors.diagram.action),
+        'Side-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Sas', colors.diagram.action),
+        'Side-Side-Angle': this.qr('Math/Geometry_1/CongruentTriangles/base/Ssa', colors.diagram.action),
+        'Angle-Angle-Angle': this.qr('Math/Geometry_1/CongruentTriangles/base/Aaa', colors.diagram.action),
       },
     });
     this.addSection({
@@ -251,13 +251,13 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         left: click(this.next, [this], colors.sides),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
     });
     this.addSection(common, {
       modifiers: {
         left: click(coll.pulseLeftIsosceles, [coll, null], colors.sides),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
       setEnterState: () => {
         coll.colorLeftIsosceles();
@@ -286,7 +286,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         two_angles: click(this.next, [this], colors.angles),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
       show: [
         coll._left, coll._base._line, coll._right,
@@ -297,7 +297,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         two_angles: click(coll.pulseLeftIsoscelesAngles, [coll, null], colors.angles),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
       show: [
         coll._left, coll._base._line, coll._right,
@@ -333,7 +333,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         right: click(this.next, [this], colors.sides),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
       setEnterState: () => {
         coll.colorLeftIsosceles();
@@ -342,7 +342,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       modifiers: {
         right: click(coll.pulseRightIsosceles, [coll, null], colors.sides),
-        isosceles: this.bindShowQR('Math/Geometry_1/Isosceles/base', 'Main', colors.sides),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.sides),
       },
       setEnterState: () => {
         coll.colorRightIsosceles();
@@ -461,8 +461,8 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the |same|.',
       modifiers: {
-        'Side-Angle-Side': this.bindShowQR(
-          'CongruentTriangles/base', 'Sas', colors.diagram.action,
+        'Side-Angle-Side': this.qr(
+          'CongruentTriangles/base/Sas', colors.diagram.action,
         ),
         top: click(coll.pulseTopTriangle, [coll], colors.sides),
         bottom: click(coll.pulseBottomTriangle, [coll], colors.sides),

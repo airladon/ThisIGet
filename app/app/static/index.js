@@ -3868,6 +3868,11 @@ function () {
       var _this = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (this.canvasOffscreen == null) {
+        return;
+      }
+
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
         var element = _this.elements.elements[name];
@@ -3922,11 +3927,12 @@ function () {
         this.draw2DOffscreen.resize();
       }
 
-      elementToRender.updateHTMLElementTie(this.canvasOffscreen);
+      elementToRender.updateHTMLElementTie(this.canvasOffscreen); // Need to reset position as updateHTMLElementTie doesn't set correct
+      // position as it uses a diagram pixels space transform that is only
+      // relavant to the first gl canvas.
+
       var scale = elementToRender.getScale();
-      elementToRender.setPosition(0 - scale.x * (elementToRender.tieToHTML.window.left + elementToRender.tieToHTML.window.width / 2), 0 - scale.y * (elementToRender.tieToHTML.window.bottom + elementToRender.tieToHTML.window.height / 2)); // console.log(elementToRender.getScale(), elementToRender.getPosition())
-      // elementToRender.setPosition(0, 0);
-      // elementToRender.updateHTMLElementTieScale(this.canvasLow);
+      elementToRender.setPosition(0 - scale.x * (elementToRender.tieToHTML.window.left + elementToRender.tieToHTML.window.width / 2), 0 - scale.y * (elementToRender.tieToHTML.window.bottom + elementToRender.tieToHTML.window.height / 2)); // elementToRender.setPosition(0, 0);
       // Stop animations and render
 
       elementToRender.isRenderedAsImage = false;
@@ -11165,11 +11171,11 @@ function (_DiagramElementCollec) {
       this.add('line', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](axis, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"](), this.props.color, this.diagramLimits));
       var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](this.props.titleFontFamily, 'normal', this.props.titleFontSize, this.props.titleFontWeight, 'center', 'middle', this.props.titleFontColor);
       var titleText = [new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0).transformBy(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).matrix()), this.props.title, font)];
-      var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D, titleText);
+      var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D[0], titleText);
       this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
 
-      this.addTickLabels('major', this.drawContext2D, majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
-      this.addTickLabels('minor', this.drawContext2D, minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
+      this.addTickLabels('major', this.drawContext2D[0], majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
+      this.addTickLabels('minor', this.drawContext2D[0], minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
     }
   }, {
     key: "toClip",
@@ -18815,9 +18821,11 @@ function (_DrawingObject) {
             texture.buffer = _this2.gl.map(function () {
               return null;
             });
-          }
+          } // $FlowFixMe
 
-          texture.buffer[glIndex] = gl.createBuffer();
+
+          texture.buffer[glIndex] = gl.createBuffer(); // $FlowFixMe
+
           gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
           gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texture.points), gl.STATIC_DRAW);
 
@@ -18897,7 +18905,8 @@ function (_DrawingObject) {
           }
 
           if (texture.buffer != null) {
-            gl.deleteBuffer(texture.buffer[glIndex]);
+            gl.deleteBuffer(texture.buffer[glIndex]); // $FlowFixMe
+
             texture.buffer[glIndex] = null;
           } // texture.glTexture = null;
 
@@ -19074,7 +19083,8 @@ function (_DrawingObject) {
 
         var texOffset = 0; // start at the beginning of the buffer
 
-        gl.enableVertexAttribArray(locations.a_texcoord);
+        gl.enableVertexAttribArray(locations.a_texcoord); // $FlowFixMe
+
         gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
         gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
       }
@@ -20410,9 +20420,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -20465,7 +20474,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import GlobalAnimation from './webgl/GlobalAnimation';
-
+// import DrawContext2D from './DrawContext2D';
 
 
  // eslint-disable-next-line import/no-cycle
@@ -20606,7 +20615,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -20616,7 +20625,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
       },
       position: function position() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -20626,7 +20635,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -20636,7 +20645,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -20646,7 +20655,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -20656,7 +20665,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
@@ -20666,7 +20675,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -20688,7 +20697,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -20710,7 +20719,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -20718,7 +20727,7 @@ function () {
           optionsIn[_key10] = arguments[_key10];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
       scenario: function scenario() {
@@ -20747,7 +20756,7 @@ function () {
           options.delta = delta;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       scenarios: function scenarios() {
@@ -20767,7 +20776,7 @@ function () {
         elements.forEach(function (element) {
           steps.push(element.anim.scenario(simpleOptions));
         });
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ParallelAnimationStep"](simpleOptions, {
           steps: steps
         });
       }
@@ -20817,7 +20826,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -21923,14 +21932,12 @@ function (_DiagramElement) {
       }
 
       return false;
-    }
-  }, {
-    key: "updateContext",
-    value: function updateContext(context) {
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
-        this.drawingObject.drawContext2D = context;
-      }
-    }
+    } // updateContext(context: DrawContext2D) {
+    //   if (this.drawingObject instanceof TextObject) {
+    //     this.drawingObject.drawContext2D = context;
+    //   }
+    // }
+
   }, {
     key: "_dup",
     value: function _dup() {
@@ -22938,15 +22945,13 @@ function (_DiagramElement2) {
       if (movable) {
         this.hasTouchableElements = true; // this.isMovable = true;
       }
-    }
-  }, {
-    key: "updateContext",
-    value: function updateContext(context) {
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.updateContext(context);
-      }
-    }
+    } // updateContext(context: DrawContext2D) {
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     element.updateContext(context);
+    //   }
+    // }
+
   }, {
     key: "setupWebGLBuffers",
     value: function setupWebGLBuffers(newWebgl) {

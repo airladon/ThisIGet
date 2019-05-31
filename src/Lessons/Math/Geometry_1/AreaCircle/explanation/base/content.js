@@ -117,14 +117,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
-        area: this.bindShowQR('Math/Geometry_1/AreaTriangle/base', 'Main', colors.areaTriLabel),
+        area: this.qr('Math/Geometry_1/AreaTriangle/base/Main', colors.areaTriLabel),
       },
       show: [lightCircle, poly._lines, poly._border, poly._height, poly._base],
     });
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
-        area: this.bindShowQR('Math/Geometry_1/AreaTriangle/base', 'Main', colors.areaTriLabel),
+        area: this.qr('Math/Geometry_1/AreaTriangle/base/Main', colors.areaTriLabel),
       },
       show: [
         lightCircle, poly._lines, poly._border, poly._height, poly._base,
@@ -309,7 +309,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         border: click(coll.pulseMostBorder, [coll], colors.border),
         circumference: click(coll.pulseCircumference, [coll], colors.disabledLabel),
-        _2pir: this.bindShowQR('Math/Geometry_1/Circle/base', 'Circumference', {
+        _2pir: this.qr('Math/Geometry_1/Circle/base/Circumference', {
           text: '2πr',
           color: colors.diagram.action,
         }),

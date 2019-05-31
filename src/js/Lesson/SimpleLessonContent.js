@@ -93,9 +93,8 @@ class SimpleLessonContent {
         updateFontSize: true,
       });
     }
-    this.qrDiagram.updateFontSize = false;
+    // this.qrDiagram.updateFontSize = false;
     this.prepareToShowQR();
-    console.log('asdf')
     // const [uid, versionUid] = combinedUid.split('/');
     const collection = new window.quickReference[`${qrPath}/${qrid}`](this.qrDiagram);
     if (collection != null) {

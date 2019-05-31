@@ -62,7 +62,7 @@ class SinglePageLessonContent extends SimpleLessonContent {
   ) {
     const defaultOptions = {
       color: [1, 0, 0, 1],
-      classes: '',
+      classes: 'lesson__qr_action_word',
       id: generateUniqueId(),
     };
     let options = defaultOptions;
