@@ -328,9 +328,9 @@ export default class SinglePageLessonComponent extends React.Component
         </canvas>
         <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">
         </canvas>
-        <canvas id="id_diagram__text__low" className='diagram__text'>
-        </canvas>
         <canvas id="id_diagram__gl__low" className='diagram__gl'>
+        </canvas>
+        <canvas id="id_diagram__text__low" className='diagram__text'>
         </canvas>
         <div id="id_diagram__html" className='diagram__html'>
         </div>
