@@ -76,8 +76,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
     },
     viewPort: {
       width: 600,
-      height: 400,
-      scrollTo: 180,
+      height: 320,
+      scrollTo: 200,
     },
     pages: {},
     prePath: '',
