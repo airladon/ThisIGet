@@ -1,6 +1,5 @@
 // @flow
 import Fig from 'figureone';
-import * as React from 'react';
 import {
   SinglePageLessonContent, makeFig,
 } from '../../../../../../js/Lesson/SinglePageLessonContent';
@@ -68,9 +67,6 @@ class Content extends SinglePageLessonContent {
     // Set figure one initial conditions
     diag._fig1._wheel.setScenario('centerLeft');
     diag._fig1._circle.setScenario('centerRight');
-    // diag._fig1._wheel.isMovable = true;
-    // diag._fig1._wheel.isTouchable = true;
-    // diag._fig1._wheel.move.type = 'rotation';
     diag._fig1._activator.onClick = diag.appearCircleAndMoveWheel.bind(diag);
 
     // Figure 2
@@ -97,7 +93,7 @@ class Content extends SinglePageLessonContent {
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
       test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       test2: click(this.redrawer, [this]),
-      figure1: makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1, 4, 2), 500),
+      figure1: makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1.1, 4, 2.2), 500),
     };
     this.content = [
       '# Shapes',
@@ -106,7 +102,7 @@ class Content extends SinglePageLessonContent {
 
       'A shape can then be |_analyzed|. |_Properties| or characteristics of the shape can be identified, and |_relationships| between the properties found.',
 
-      makeFig('id_figure2', diag._fig2, 'fit', new Rect(-1.3, -1.3, 2.6, 2.6), 300),
+      makeFig('id_figure2', diag._fig2, 'fit', new Rect(-2, -1.3, 3.2, 2.8), 400),
 
       'The properties and relationships can then be applied to |_all_other| objects, phenomenon or paths that have that same shape, no matter their size, material, location or smell.',
 

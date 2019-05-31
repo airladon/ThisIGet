@@ -3883,6 +3883,8 @@ function () {
 
       if (needClear) {
         this.drawQueued = true;
+        this.clearContext();
+        this.draw2DLow.ctx.clearRect(0, 0, this.textCanvasLow.width, this.textCanvasLow.height);
         this.draw(-1); // this.animateNextFrame(true, 'clear frame');
         // this.draw(-1);
         // this.clickearContext();
@@ -3921,7 +3923,10 @@ function () {
       }
 
       elementToRender.updateHTMLElementTie(this.canvasOffscreen);
-      elementToRender.setPosition(0, 0); // elementToRender.updateHTMLElementTieScale(this.canvasLow);
+      var scale = elementToRender.getScale();
+      elementToRender.setPosition(0 - scale.x * (elementToRender.tieToHTML.window.left + elementToRender.tieToHTML.window.width / 2), 0 - scale.y * (elementToRender.tieToHTML.window.bottom + elementToRender.tieToHTML.window.height / 2)); // console.log(elementToRender.getScale(), elementToRender.getPosition())
+      // elementToRender.setPosition(0, 0);
+      // elementToRender.updateHTMLElementTieScale(this.canvasLow);
       // Stop animations and render
 
       elementToRender.isRenderedAsImage = false;
