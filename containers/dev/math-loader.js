@@ -1,6 +1,8 @@
 //https://webpack.js.org/api/loaders/
 
 async function mathparser(callback, source, map, meta) {
+  // callback(null, source, map, meta);
+  // return;
   if (source.match('$$') == null) {
     callback(null, source, map, meta);
     return;
@@ -12,7 +14,7 @@ async function mathparser(callback, source, map, meta) {
       // traditional MathJax configuration
     },
   });
-  mjAPI.start();
+  // mjAPI.start();
   const lines = source.split('\n').map((l) => l.trim());
   const outLines = [];
   for ([i, line] of lines.entries()) {

@@ -4398,22 +4398,24 @@ function () {
       if (this.drawAnimationFrames > 0) {
         this.drawAnimationFrames -= 1;
         this.animateNextFrame(true, 'queued frames');
-      }
+      } // if (this.drawTimeoutId) {
+      //   clearTimeout(this.drawTimeoutId);
+      //   this.drawTimeoutId = null;
+      // }
+      // this.drawTimeoutId = setTimeout(this.renderToImages.bind(this), 100);
 
-      if (this.drawTimeoutId) {
-        clearTimeout(this.drawTimeoutId);
-        this.drawTimeoutId = null;
-      }
+    } // renderToImages() {
+    //   console.log('visibility1')
+    //   this.drawTimeoutId = null;
+    //   if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+    //     this.webglLow.gl.canvas.style.top = '-10000px';
+    //     this.waitForFrames = 1;
+    //   }
+    //   this.renderAllElementsToTiedCanvases();
+    //   this.centerDrawingLens();
+    //   this.webglLow.gl.canvas.style.visibility = 'visible';
+    // }
 
-      this.drawTimeoutId = setTimeout(this.renderToImages.bind(this), 100);
-    }
-  }, {
-    key: "renderToImages",
-    value: function renderToImages() {
-      this.drawTimeoutId = null;
-      this.renderAllElementsToTiedCanvases();
-      this.centerDrawingLens();
-    }
   }, {
     key: "centerDrawingLens",
     value: function centerDrawingLens() {
@@ -10525,7 +10527,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexBracket);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexBracket).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
     _this.numLines = numLines;
     _this.mainHeight = 1;
 
@@ -10641,7 +10643,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexIntegral);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexIntegral).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP; // let mul = 0.5;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP; // let mul = 0.5;
     // if (lineHeight === 1) {
     //   mul = 1;
     // }
@@ -18203,7 +18205,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexArrow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexArrow).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_FAN;
+    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
     _this.height = height;
     var arrowHeight = height - legHeight;
     var points = [];
@@ -18317,7 +18319,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexDashedLine);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexDashedLine).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLES;
+    _this.glPrimative = _this.gl[0].TRIANGLES;
     _this.dashCumLength = [];
     _this.maxLength = maxLength;
     var cx = 0;
@@ -18518,7 +18520,7 @@ function (_VertexObject) {
     var cx = 0;
     var cy = 0 - width / 2.0;
     var points = [];
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy + width));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx + length, cy));
@@ -18600,7 +18602,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexLines);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexLines).call(this, webgl));
-    _this.glPrimative = _this.gl.LINES;
+    _this.glPrimative = _this.gl[0].LINES;
     _this.points = [];
     linePairs.forEach(function (line) {
       var _line = _slicedToArray(line, 2),
@@ -18707,45 +18709,62 @@ function (_DrawingObject) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexObject).call(this));
     _this.numPoints = 0;
-    _this.gl = webgl.gl;
-    _this.webgl = webgl;
-    _this.glPrimative = webgl.gl.TRIANGLES;
+    var webglArray;
+
+    if (Array.isArray(webgl)) {
+      webglArray = webgl;
+    } else {
+      webglArray = [webgl];
+    }
+
+    _this.gl = webglArray.map(function (w) {
+      return w.gl;
+    });
+    _this.webgl = webglArray;
+    _this.glPrimative = webglArray[0].gl.TRIANGLES;
     _this.points = [];
-    _this.z = 0; // this.textureLocation = '';
+    _this.z = 0;
+    _this.buffer = webglArray.map(function () {
+      return null;
+    }); // this.textureLocation = '';
     // this.texturePoints = [];
 
     _this.texture = null;
-    _this.programIndex = webgl.getProgram(vertexShader, fragmentShader);
+    _this.programIndex = webglArray.map(function (w) {
+      return w.getProgram(vertexShader, fragmentShader);
+    });
     _this.type = 'vertexPrimative';
     return _this;
   }
 
   _createClass(VertexObject, [{
     key: "addTextureToBuffer",
-    value: function addTextureToBuffer(glTexture, image) // image data
+    value: function addTextureToBuffer(glIndex, glTexture, image) // image data
     {
       function isPowerOf2(value) {
         // eslint-disable-next-line no-bitwise
         return (value & value - 1) === 0;
       }
 
+      var gl = this.gl[glIndex];
+      var webgl = this.webgl[glIndex];
       var texture = this.texture;
 
       if (texture != null) {
-        var index = this.webgl.textures[texture.id].index;
-        this.gl.activeTexture(this.gl.TEXTURE0 + index);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
-        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
+        var index = webgl.textures[texture.id].index;
+        gl.activeTexture(gl.TEXTURE0 + index);
+        gl.bindTexture(gl.TEXTURE_2D, glTexture);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
 
         if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
           // Yes, it's a power of 2. Generate mips.
-          this.gl.generateMipmap(this.gl.TEXTURE_2D);
+          gl.generateMipmap(gl.TEXTURE_2D);
         } else {
           // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         }
       }
     }
@@ -18755,78 +18774,94 @@ function (_DrawingObject) {
       var _this2 = this;
 
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      this.state = 'loaded';
 
-      if (numPoints === 0) {
-        this.numPoints = this.points.length / 2.0;
-      } else {
-        this.numPoints = numPoints;
-      } // if (this.texture && this.texture.points == null) {
-      //   this.texture.points = [];
-      //   this.createTextureMap();
-      // }
+      var _loop = function _loop(glIndex) {
+        var gl = _this2.gl[glIndex];
+        var webgl = _this2.webgl[glIndex]; // const texture = this.texture[glIndex];
+        // const buffer = this.buffer[glIndex];
 
+        _this2.state = 'loaded';
 
-      var texture = this.texture;
-
-      if (texture != null) {
-        if (texture.points == null) {
-          texture.points = [];
-        }
-
-        if (texture.points.length === 0) {
-          this.createTextureMap();
-        }
-
-        texture.buffer = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texture.points), this.gl.STATIC_DRAW);
-
-        if (!(texture.id in this.webgl.textures) || texture.id in this.webgl.textures && this.webgl.textures[texture.id].glTexture == null) {
-          var glTexture = this.gl.createTexture();
-          this.webgl.addTexture(texture.id, glTexture, texture.type);
-          this.gl.activeTexture(this.gl.TEXTURE0 + this.webgl.textures[texture.id].index);
-          this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
-          var src = texture.src;
-
-          if (src) {
-            // Fill the texture with a 1x1 blue pixel.
-            this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
-            var image = new Image();
-            image.src = src;
-            this.state = 'loading';
-            this.webgl.textures[texture.id].state = 'loading';
-            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
-            image.addEventListener('load', function () {
-              // Now that the image has loaded make copy it to the texture.
-              texture.data = image;
-
-              _this2.addTextureToBuffer(glTexture, texture.data); // if (this.onLoad != null) {
+        if (numPoints === 0) {
+          _this2.numPoints = _this2.points.length / 2.0;
+        } else {
+          _this2.numPoints = numPoints;
+        } // if (this.texture && this.texture.points == null) {
+        //   this.texture.points = [];
+        //   this.createTextureMap();
+        // }
 
 
-              _this2.webgl.onLoad(texture.id); // this.onLoad();
-              // }
+        var texture = _this2.texture;
 
+        if (texture != null) {
+          if (texture.points == null) {
+            texture.points = [];
+          }
 
-              _this2.state = 'loaded';
-              _this2.webgl.textures[texture.id].state = 'loaded';
+          if (texture.points.length === 0) {
+            _this2.createTextureMap();
+          }
+
+          if (texture.buffer == null) {
+            texture.buffer = _this2.gl.map(function () {
+              return null;
             });
-          } else if (texture.data != null) {
-            this.addTextureToBuffer(glTexture, texture.data);
           }
-        } else if (texture.id in this.webgl.textures) {
-          if (this.webgl.textures[texture.id].state === 'loading') {
-            this.state = 'loading';
-            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
-          } else {
-            this.state = 'loaded';
+
+          texture.buffer[glIndex] = gl.createBuffer();
+          gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texture.points), gl.STATIC_DRAW);
+
+          if (!(texture.id in webgl.textures) || texture.id in webgl.textures && webgl.textures[texture.id].glTexture == null) {
+            var glTexture = gl.createTexture();
+            webgl.addTexture(texture.id, glTexture, texture.type);
+            gl.activeTexture(gl.TEXTURE0 + webgl.textures[texture.id].index);
+            gl.bindTexture(gl.TEXTURE_2D, glTexture);
+            var src = texture.src;
+
+            if (src) {
+              // Fill the texture with a 1x1 blue pixel.
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
+              var image = new Image();
+              image.src = src;
+              _this2.state = 'loading';
+              webgl.textures[texture.id].state = 'loading';
+              webgl.textures[texture.id].onLoad.push(_this2.executeOnLoad.bind(_this2));
+              image.addEventListener('load', function () {
+                // Now that the image has loaded make copy it to the texture.
+                texture.data = image;
+
+                _this2.addTextureToBuffer(glIndex, glTexture, texture.data); // if (this.onLoad != null) {
+
+
+                webgl.onLoad(texture.id); // this.onLoad();
+                // }
+
+                _this2.state = 'loaded';
+                webgl.textures[texture.id].state = 'loaded';
+              });
+            } else if (texture.data != null) {
+              _this2.addTextureToBuffer(glIndex, glTexture, texture.data);
+            }
+          } else if (texture.id in webgl.textures) {
+            if (webgl.textures[texture.id].state === 'loading') {
+              _this2.state = 'loading';
+              webgl.textures[texture.id].onLoad.push(_this2.executeOnLoad.bind(_this2));
+            } else {
+              _this2.state = 'loaded';
+            }
           }
         }
-      }
 
-      this.buffer = this.gl.createBuffer();
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
-      this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.points), this.gl.STATIC_DRAW);
+        _this2.buffer[glIndex] = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, _this2.buffer[glIndex]);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_this2.points), gl.STATIC_DRAW);
+      };
+
+      for (var glIndex = 0; glIndex < this.webgl.length; glIndex += 1) {
+        _loop(glIndex);
+      }
     }
   }, {
     key: "executeOnLoad",
@@ -18839,24 +18874,31 @@ function (_DrawingObject) {
     key: "resetBuffer",
     value: function resetBuffer() {
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var texture = this.texture;
 
-      if (texture) {
-        // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
-        // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-        if (this.webgl.textures[texture.id].glTexture != null) {
-          this.gl.deleteTexture(this.webgl.textures[texture.id].glTexture);
-          this.webgl.textures[texture.id].glTexture = null;
-        }
+      for (var glIndex = 0; glIndex < this.webgl.length; glIndex += 1) {
+        var gl = this.gl[glIndex];
+        var webgl = this.webgl[glIndex];
+        var texture = this.texture;
 
-        this.gl.deleteBuffer(texture.buffer); // texture.glTexture = null;
+        if (texture) {
+          // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+          // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+          if (webgl.textures[texture.id].glTexture != null) {
+            gl.deleteTexture(webgl.textures[texture.id].glTexture);
+            webgl.textures[texture.id].glTexture = null;
+          }
 
-        texture.buffer = null;
-      } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+          if (texture.buffer != null) {
+            gl.deleteBuffer(texture.buffer[glIndex]);
+            texture.buffer[glIndex] = null;
+          } // texture.glTexture = null;
+
+        } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
 
-      this.gl.deleteBuffer(this.buffer);
-      this.setupBuffer(numPoints);
+        gl.deleteBuffer(this.buffer[glIndex]);
+        this.setupBuffer(numPoints);
+      }
     } // eslint-disable-next-line no-unused-vars
 
   }, {
@@ -18959,21 +19001,25 @@ function (_DrawingObject) {
     }
   }, {
     key: "draw",
-    value: function draw(translation, rotation, scale, count, color) {
-      var webGLInstance = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : this.webgl;
+    value: function draw(translation, rotation, scale, count, color) // webGLInstance: WebGLInstance = this.webgl,
+    {
+      var glIndex = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
       var transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["identity"]();
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["translate"](transformation, translation.x, translation.y);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["rotate"](transformation, rotation);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["scale"](transformation, scale.x, scale.y);
-      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count, webGLInstance);
+      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count, glIndex);
     }
   }, {
     key: "drawWithTransformMatrix",
-    value: function drawWithTransformMatrix(transformMatrix, color, count) {
-      var webglInstance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.webgl;
+    value: function drawWithTransformMatrix(transformMatrix, color, count) // webglInstance: WebGLInstance = this.webgl,
+    {
+      var glIndex = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : 0;
+      var gl = this.gl[glIndex];
+      var webglInstance = this.webgl[glIndex];
       var size = 2; // 2 components per iteration
 
-      var type = this.gl.FLOAT; // the data is 32bit floats
+      var type = gl.FLOAT; // the data is 32bit floats
 
       var normalize = false; // don't normalize the data
       // 0 = move forward size * sizeof(type) each iteration to get
@@ -18982,28 +19028,28 @@ function (_DrawingObject) {
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
 
-      var locations = webglInstance.useProgram(this.programIndex);
+      var locations = webglInstance.useProgram(this.programIndex[glIndex]);
 
       if (this.texture && webglInstance.textures[this.texture.id].type === 'canvasText') {
         // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
         // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       } else {
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       } // Turn on the attribute
 
 
-      this.gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
+      gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer[glIndex]); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 
-      this.gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
-      this.gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
+      gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
+      gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
 
-      this.gl.uniform1f(locations.u_z, this.z);
-      this.gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
+      gl.uniform1f(locations.u_z, this.z);
+      gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
 
       var texture = this.texture;
 
@@ -19012,7 +19058,7 @@ function (_DrawingObject) {
         // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         var texSize = 2; // 2 components per iteration
 
-        var texType = this.gl.FLOAT; // the data is 32bit floats
+        var texType = gl.FLOAT; // the data is 32bit floats
 
         var texNormalize = false; // don't normalize the data
 
@@ -19021,24 +19067,24 @@ function (_DrawingObject) {
 
         var texOffset = 0; // start at the beginning of the buffer
 
-        this.gl.enableVertexAttribArray(locations.a_texcoord);
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
-        this.gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
+        gl.enableVertexAttribArray(locations.a_texcoord);
+        gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
+        gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
       }
 
       if (texture) {
-        this.gl.uniform1i(locations.u_use_texture, 1);
+        gl.uniform1i(locations.u_use_texture, 1);
         var index = webglInstance.textures[texture.id].index; // console.log(texture.id, index, webglInstance.textures)
 
-        this.gl.uniform1i(locations.u_texture, index);
+        gl.uniform1i(locations.u_texture, index);
       } else {
-        this.gl.uniform1i(locations.u_use_texture, 0);
+        gl.uniform1i(locations.u_use_texture, 0);
       }
 
-      this.gl.drawArrays(this.glPrimative, offset, count);
+      gl.drawArrays(this.glPrimative, offset, count);
 
       if (texture) {
-        this.gl.disableVertexAttribArray(locations.a_texcoord);
+        gl.disableVertexAttribArray(locations.a_texcoord);
       }
     }
   }, {
@@ -19972,7 +20018,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexRectangleFilled);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexRectangleFilled).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_FAN;
+    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
     var points = [];
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
 
@@ -22095,35 +22141,28 @@ function (_DiagramElement) {
       }
 
       return false;
-    }
-  }, {
-    key: "setupWebGLBuffers",
-    value: function setupWebGLBuffers(newWebgl) {
-      var drawingObject = this.drawingObject;
+    } // setupWebGLBuffers(newWebgl: WebGLInstance) {
+    //   const { drawingObject } = this;
+    //   if (drawingObject instanceof VertexObject) {
+    //     const oldWebgl = drawingObject.webgl;
+    //     drawingObject.webgl = newWebgl;
+    //     drawingObject.gl = newWebgl.gl;
+    //     drawingObject.setupBuffer();
+    //     drawingObject.webgl = oldWebgl;
+    //     drawingObject.gl = oldWebgl.gl;
+    //   }
+    // }
+    // changeWebGLInstance(newWebgl: WebGLInstance) {
+    //   let oldWebgl;
+    //   const { drawingObject } = this;
+    //   if (drawingObject instanceof VertexObject) {
+    //     oldWebgl = drawingObject.webgl;
+    //     drawingObject.webgl = newWebgl;
+    //     drawingObject.gl = newWebgl.gl;
+    //   }
+    //   return oldWebgl;
+    // }
 
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        var oldWebgl = drawingObject.webgl;
-        drawingObject.webgl = newWebgl;
-        drawingObject.gl = newWebgl.gl;
-        drawingObject.setupBuffer();
-        drawingObject.webgl = oldWebgl;
-        drawingObject.gl = oldWebgl.gl;
-      }
-    }
-  }, {
-    key: "changeWebGLInstance",
-    value: function changeWebGLInstance(newWebgl) {
-      var oldWebgl;
-      var drawingObject = this.drawingObject;
-
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        oldWebgl = drawingObject.webgl;
-        drawingObject.webgl = newWebgl;
-        drawingObject.gl = newWebgl.gl;
-      }
-
-      return oldWebgl;
-    }
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
