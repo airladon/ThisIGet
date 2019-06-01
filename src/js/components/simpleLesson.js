@@ -58,12 +58,14 @@ export default class SimpleLessonComponent extends React.Component
                                     <Props, State> {
   lesson: SimpleLesson;
   key: number;
+  afterUpdate: ?() => void;
 
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
     this.key = 0;
     this.state = { qr: <StaticQR content="Loading Reference" link="" title=""/> };
+    this.afterUpdate = null;
   }
 
   showStaticQR(id: string, parameters: string) {
@@ -73,6 +75,15 @@ export default class SimpleLessonComponent extends React.Component
       presQR.classList.add('lesson__hide');
     }
     align('id_lesson__qr__content_static', 'lesson__content', id);
+    // this.afterUpdate = () => {
+    //   align('id_lesson__qr__content_static', 'lesson__content', id);
+    // };
+    this.afterUpdate = () => {
+      const element = document.getElementById('id_lesson__qr__content_static');
+      if (element) {
+        element.classList.remove('lesson__hide');
+      }
+    };
   }
 
   showPresQR(id: string, parameters: string) {
@@ -96,9 +107,16 @@ export default class SimpleLessonComponent extends React.Component
     align('id_lesson__qr__content_pres', 'lesson__content', id);
   }
 
+  componentDidUpdate() {
+    if (this.afterUpdate != null) {
+      this.afterUpdate();
+    }
+  }
+
   componentDidMount() {
     window.lessonFunctions = {
       qr: (id, parameters) => {
+        console.log(parameters)
         if (React.isValidElement(window.quickReference[parameters])) {
           this.showStaticQR(id, parameters);
         } else {
@@ -122,13 +140,16 @@ export default class SimpleLessonComponent extends React.Component
   }
 
   render() {
+    console.log('update')
     return <div
       id={this.lesson.content.htmlId}
       className="simple_lesson__container"
       // onClick={this.close.bind(this)}
     >
       {this.lesson.content.sections}
-      {this.state.qr}
+      <div id="id_lesson__qr__content_static__overlay">
+        {this.state.qr}
+      </div>
       <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
     </div>;
   }
