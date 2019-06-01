@@ -83,6 +83,7 @@ export default class SimpleLessonComponent extends React.Component
       if (element) {
         element.classList.remove('lesson__hide');
       }
+      align('id_lesson__qr__content_static', 'lesson__content', id);
     };
   }
 
@@ -110,6 +111,7 @@ export default class SimpleLessonComponent extends React.Component
   componentDidUpdate() {
     if (this.afterUpdate != null) {
       this.afterUpdate();
+      this.afterUpdate = null;
     }
   }
 
