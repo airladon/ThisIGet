@@ -166,7 +166,7 @@
 // ///////////////////////////////////////
 // Presentation QR specific
 // ///////////////////////////////////////
-#lesson__content_diagram .lesson__qr {
+#lesson__content_diagram .lesson__qr__container {
   background-color: color('black', 'dark');
   padding: 0.5em;
   border: 1px solid color('black', 'light');
@@ -228,7 +228,7 @@
   text-align: left;
 }
 
-#lesson__content_diagram #id_lesson__qr__content_pres {
+#lesson__content_diagram #id_lesson__qr__pres_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
@@ -248,7 +248,7 @@
   max-height: var(--lesson__qr__content_height);
 }
 
-#lesson__content_diagram #id_lesson__qr__content_static {
+#lesson__content_diagram #id_lesson__qr__static_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;

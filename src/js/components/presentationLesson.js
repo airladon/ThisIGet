@@ -153,31 +153,33 @@ export default class PresentationLessonComponent extends React.Component
   }
 
   showStaticQR(id: string, parameters: string) {
-    const presQR = document.getElementById('id_lesson__qr__content_pres');
+    const presQR = document.getElementById('id_lesson__qr__pres_container');
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
     this.setState({ qr: window.quickReference[parameters] });
-    this.setCSSVariables('id_lesson__qr__content_static');
-    const element = document.getElementById('id_lesson__qr__content_static');
+    this.setCSSVariables('id_lesson__qr__static_container');
+    const element = document.getElementById('id_lesson__qr__static_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
   }
 
   showPresQR(id: string, parameters: string) {
-    const staticQR = document.getElementById('id_lesson__qr__content_static');
+    const staticQR = document.getElementById('id_lesson__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
     }
-    this.setCSSVariables('id_lesson__qr__content_pres');
+    this.setCSSVariables('id_lesson__qr__pres_container');
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    const element = document.getElementById('id_lesson__qr__content_pres');
+    const element = document.getElementById('id_lesson__qr__pres_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
+    this.lesson.content.qrDiagram.resize();
+    this.lesson.content.qrDiagram.animateNextFrame();
   }
 
   componentDidMount() {
@@ -417,8 +419,12 @@ export default class PresentationLessonComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
-                {this.state.qr}
-                <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+                <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+                  {this.state.qr}
+                </div>
+                <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+                  <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+                </div>
               </div>
               {this.addGoToButton()}
               {this.addNextButton()}
