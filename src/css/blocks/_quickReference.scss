@@ -49,6 +49,23 @@
   padding-left: 1em;
 }
 
+@media screen and (max-width: 600px) {
+  .lesson__qr__title_text {
+    font-size: 1em;
+  }
+}
+
+.lesson__qr__title_close__container {
+  display: table;
+  height: 100%;
+  float: right;
+}
+
+.lesson__qr__title_close__cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .lesson__qr__title_close {
   display: table-cell;
   color: color('grey', 'dark');

@@ -71,11 +71,15 @@ export default class QuickReferencePopup extends React.Component
         >
           {this.props.title}
         </div>
-        <div
-          className="lesson__qr__title_close"
-          onClick={this.close.bind(this)}
-        >
-          X
+        <div className="lesson__qr__title_close__container">
+          <div className="lesson__qr__title_close__cell">
+            <div
+              className="lesson__qr__title_close"
+              onClick={this.close.bind(this)}
+            >
+              X
+            </div>
+          </div>
         </div>
       </div>
       <div className="lesson__qr__content_container">
