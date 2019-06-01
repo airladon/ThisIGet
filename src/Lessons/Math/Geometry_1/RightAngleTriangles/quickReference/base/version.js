@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quickReference',
-  type: 'presentation',
+  type: 'singlePage',
   references: [
     'DefinitionPres',
     'PythagorusPres',

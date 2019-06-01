@@ -840,6 +840,12 @@ export default function getLessonIndex() {
             description: '',
             fullLesson: false,
           },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
         },
         quiz: {
           base: {

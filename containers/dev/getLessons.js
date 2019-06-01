@@ -107,6 +107,8 @@ function updateDetailsAndVersions() {
             });
           }
           outStr = `${outStr}\n  ],`;
+        } else {
+          outStr = `${outStr}\n  references: [],`;
         }
       } else if (topic === 'links') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;

@@ -5,11 +5,10 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import imgLink from '../../tile.png';
 import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import version from './version';
+import version from '../base/version';
 
 const path = window.location.pathname.split('/');
 const [lessonUID] = path.slice(-3, -2);
-const [versionUID] = path.slice(-1);
 
 const qrids = version.references;
 
@@ -20,7 +19,7 @@ class Content extends SimpleLessonContent {
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
-      `${details.path}/${lessonUID}/${versionUID}`,
+      `${details.path}/${lessonUID}/${'base'}`,
     ]);
   }
 
@@ -31,11 +30,14 @@ class Content extends SimpleLessonContent {
         <div
           id={`link_${index}`}
           className="lesson__qr_action_word"
-          onClick={window.lessonFunctions.qr.bind(window.lessonFunctions, `main_title`, `${details.path}/${lessonUID}/${versionUID}/${qrid}`)}>
+          onClick={window.lessonFunctions.qr.bind(
+            window.lessonFunctions,
+            'main_title',
+            `${details.path}/${lessonUID}/${'base'}/${qrid}`,
+          )}>
         {qrid}</div>
       </div>);
     });
-    out.push('<div></div>')
     out.push(<div key={1000} style={{
       width: '80%',
       height: '500px',
