@@ -41,12 +41,12 @@
 
 .lesson__qr__title_text {
   display: table-cell;
-  text-align: center;
+  text-align: left;
   vertical-align: middle;
   color: color('grey', 'dark');
   font-size: 1.2em;
   padding-right: 1em;
-  padding-left: 1em;
+  padding-left: 0.4em;
 }
 
 @media screen and (max-width: 600px) {
