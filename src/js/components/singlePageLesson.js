@@ -79,6 +79,7 @@ export default class SinglePageLessonComponent extends React.Component
   lesson: SimpleLesson;
   key: number;
   contentChange: boolean;
+  afterUpdate: ?() => void;
 
   constructor(props: Props) {
     super(props);
@@ -89,15 +90,19 @@ export default class SinglePageLessonComponent extends React.Component
       content: [],
       qr: <StaticQR content="Loading Reference" link="" title=""/>,
     };
+    this.afterUpdate = null;
   }
 
   showStaticQR(id: string, parameters: string) {
     this.setState({ qr: window.quickReference[parameters] });
-    const presQR = document.getElementById('id_lesson__qr__content_pres');
+    const presQR = document.getElementById('id_lesson__qr__pres_container');
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
-    align('id_lesson__qr__content_static', 'id_single_page_lesson__text_container', id);
+    align('id_lesson__qr__static_container', 'id_single_page_lesson__text_container', id);
+    this.afterUpdate = () => {
+      align('id_lesson__qr__static_container', 'lesson__content', id);
+    };
   }
 
   showPresQR(id: string, parameters: string) {
@@ -111,14 +116,16 @@ export default class SinglePageLessonComponent extends React.Component
         doc.style.setProperty('--lesson__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
       }
     }
-    const staticQR = document.getElementById('id_lesson__qr__content_static');
+    const staticQR = document.getElementById('id_lesson__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    align('id_lesson__qr__content_pres', 'id_single_page_lesson__text_container', id);
+    align('id_lesson__qr__pres_container', 'id_single_page_lesson__text_container', id);
+    this.lesson.content.qrDiagram.resize();
+    this.lesson.content.qrDiagram.animateNextFrame();
   }
 
   // shouldComponentUpdate() {
@@ -182,6 +189,10 @@ export default class SinglePageLessonComponent extends React.Component
   }
 
   componentDidUpdate() {
+    if (this.afterUpdate != null) {
+      this.afterUpdate();
+      this.afterUpdate = null;
+    }
     setOnClicks(this.lesson.content.modifiers);
     const d = this.lesson.content.diagram;
 
@@ -318,8 +329,12 @@ export default class SinglePageLessonComponent extends React.Component
           className="single_page_lesson__text_container_text"
           dangerouslySetInnerHTML={ { __html: output } }
         />
-        {this.state.qr}
-        <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+        <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+                  {this.state.qr}
+        </div>
+        <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+          <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+        </div>
     </div>;
   }
 

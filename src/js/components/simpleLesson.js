@@ -76,10 +76,10 @@ export default class SimpleLessonComponent extends React.Component
     }
     align('id_lesson__qr__static_container', 'lesson__content', id);
     this.afterUpdate = () => {
-      const element = document.getElementById('id_lesson__qr__static_container');
-      if (element) {
-        element.classList.remove('lesson__hide');
-      }
+      // const element = document.getElementById('id_lesson__qr__static_container');
+      // if (element) {
+      //   element.classList.remove('lesson__hide');
+      // }
       align('id_lesson__qr__static_container', 'lesson__content', id);
     };
   }

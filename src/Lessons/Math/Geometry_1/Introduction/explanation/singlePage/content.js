@@ -53,10 +53,6 @@ class Content extends SinglePageLessonContent {
     ]);
   }
 
-  redrawer() {
-    this.diagram.renderAllElementsToTiedCanvases(true);
-  }
-
   // Array of strings, html or jsx
   // eslint-disable-next-line class-methods-use-this
   setContent() {
@@ -92,7 +88,7 @@ class Content extends SinglePageLessonContent {
       _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
       test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-      test2: click(this.redrawer, [this]),
+      test2: this.qr('Math/Geometry_1/Triangles/base/AngleSum'),
       figure1: makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1.1, 4, 2.2), 500),
     };
     this.content = [
