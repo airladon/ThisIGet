@@ -19,6 +19,7 @@ export default class StaticQR extends React.Component
       content={this.props.content}
       title={this.props.title}
       link={this.props.link}
+      closeId="id_lesson__qr__static_container"
     />;
   }
 }

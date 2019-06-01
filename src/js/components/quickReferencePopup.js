@@ -7,6 +7,7 @@ type Props={
   title: string | React.Element<'div'>;
   link: string | React.Element<'a'>;
   id: string;
+  closeId: string;
 };
 
 export default class QuickReferencePopup extends React.Component
@@ -28,7 +29,7 @@ export default class QuickReferencePopup extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
-    const element = document.getElementById(this.props.id);
+    const element = document.getElementById(this.props.closeId);
     if (element != null) {
       element.classList.add('lesson__hide');
     }
@@ -62,7 +63,7 @@ export default class QuickReferencePopup extends React.Component
 
     return <div
       id={this.props.id}
-      className="lesson__qr lesson__hide"
+      className="lesson__qr"
       >
       <div className="lesson__qr__title">
         <div

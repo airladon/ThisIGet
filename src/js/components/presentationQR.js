@@ -52,6 +52,7 @@ export default class PresentationQR extends React.Component
       content={this.renderContent()}
       title={title}
       link={link}
+      closeId="id_lesson__qr__pres_container"
     />;
   }
 }

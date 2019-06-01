@@ -70,20 +70,20 @@ export default class SimpleLessonComponent extends React.Component
 
   showStaticQR(id: string, parameters: string) {
     this.setState({ qr: window.quickReference[parameters] });
-    const presQR = document.getElementById('id_lesson__qr__content_pres');
+    const presQR = document.getElementById('id_lesson__qr__pres_container');
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
-    align('id_lesson__qr__content_static', 'lesson__content', id);
+    align('id_lesson__qr__static_container', 'lesson__content', id);
     // this.afterUpdate = () => {
-    //   align('id_lesson__qr__content_static', 'lesson__content', id);
+    //   align('id_lesson__qr__static_container', 'lesson__content', id);
     // };
     this.afterUpdate = () => {
-      const element = document.getElementById('id_lesson__qr__content_static');
+      const element = document.getElementById('id_lesson__qr__static_container');
       if (element) {
         element.classList.remove('lesson__hide');
       }
-      align('id_lesson__qr__content_static', 'lesson__content', id);
+      align('id_lesson__qr__static_container', 'lesson__content', id);
     };
   }
 
@@ -98,14 +98,16 @@ export default class SimpleLessonComponent extends React.Component
         doc.style.setProperty('--lesson__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
       }
     }
-    const staticQR = document.getElementById('id_lesson__qr__content_static');
+    const staticQR = document.getElementById('id_lesson__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.lesson.content.showQR(path, qrid);
-    align('id_lesson__qr__content_pres', 'lesson__content', id);
+    align('id_lesson__qr__pres_container', 'lesson__content', id);
+    this.lesson.content.qrDiagram.resize();
+    this.lesson.content.qrDiagram.animateNextFrame();
   }
 
   componentDidUpdate() {
@@ -118,7 +120,6 @@ export default class SimpleLessonComponent extends React.Component
   componentDidMount() {
     window.lessonFunctions = {
       qr: (id, parameters) => {
-        console.log(parameters)
         if (React.isValidElement(window.quickReference[parameters])) {
           this.showStaticQR(id, parameters);
         } else {
@@ -131,28 +132,29 @@ export default class SimpleLessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
-    let element = document.getElementById('id_lesson__qr__content_static');
+    let element = document.getElementById('id_lesson__qr__static_container');
     if (element != null) {
       element.classList.add('lesson__hide');
     }
-    element = document.getElementById('id_lesson__qr__content_pres');
+    element = document.getElementById('id_lesson__qr__pres_container');
     if (element != null) {
       element.classList.add('lesson__hide');
     }
   }
 
   render() {
-    console.log('update')
     return <div
       id={this.lesson.content.htmlId}
       className="simple_lesson__container"
       // onClick={this.close.bind(this)}
     >
       {this.lesson.content.sections}
-      <div id="id_lesson__qr__content_static__overlay">
+      <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
         {this.state.qr}
       </div>
-      <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+      <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+        <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+      </div>
     </div>;
   }
 }
