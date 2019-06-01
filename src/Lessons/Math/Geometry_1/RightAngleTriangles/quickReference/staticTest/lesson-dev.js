@@ -5,7 +5,7 @@ import SimpleLesson from '../../../../../../js/Lesson/SimpleLesson';
 import Content from './content';
 import '../../../../../../css/style.scss';
 import '../../../../../../css/simpleLesson.scss';
-import './style.scss';
+// import './style.scss';
 
 const lesson = new SimpleLesson(new Content());
 renderLesson(lesson);

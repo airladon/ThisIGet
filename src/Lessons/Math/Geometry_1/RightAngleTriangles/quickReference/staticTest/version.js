@@ -4,7 +4,7 @@
 var version = {
   uid: 'staticTest',
   topic: 'quickReference',
-  type: 'presentation',
+  type: 'singlePage',
   references: [],
 };
 

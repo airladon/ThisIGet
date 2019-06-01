@@ -834,12 +834,6 @@ export default function getLessonIndex() {
             description: '',
             fullLesson: false,
           },
-          static: {
-            type: 'presentation',
-            title: 'static',
-            description: '',
-            fullLesson: false,
-          },
           staticTest: {
             type: 'presentation',
             title: 'staticTest',
