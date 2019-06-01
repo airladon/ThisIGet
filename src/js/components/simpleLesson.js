@@ -21,7 +21,7 @@ function align(elementId: string, containerId: string, linkId: string) {
   if (element == null || container == null || link == null) {
     return;
   }
-  element.classList.remove('lesson__hide');
+  // element.classList.remove('lesson__hide');
   const containerRect = container.getBoundingClientRect();
   const linkRect = link.getBoundingClientRect();
   const windowWidth = window.innerWidth;
@@ -74,12 +74,12 @@ export default class SimpleLessonComponent extends React.Component
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
+    const element = document.getElementById('id_lesson__qr__static_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
     align('id_lesson__qr__static_container', 'lesson__content', id);
     this.afterUpdate = () => {
-      // const element = document.getElementById('id_lesson__qr__static_container');
-      // if (element) {
-      //   element.classList.remove('lesson__hide');
-      // }
       align('id_lesson__qr__static_container', 'lesson__content', id);
     };
   }
@@ -98,6 +98,10 @@ export default class SimpleLessonComponent extends React.Component
     const staticQR = document.getElementById('id_lesson__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
+    }
+    const element = document.getElementById('id_lesson__qr__pres_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
