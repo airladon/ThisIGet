@@ -32,7 +32,7 @@ class Content extends SimpleLessonContent {
           className="lesson__qr_action_word"
           onClick={window.lessonFunctions.qr.bind(
             window.lessonFunctions,
-            'main_title',
+            `link_${index}`,
             `${details.path}/${lessonUID}/${'base'}/${qrid}`,
           )}>
         {qrid}</div>
@@ -40,7 +40,7 @@ class Content extends SimpleLessonContent {
     });
     out.push(<div key={1000} style={{
       width: '80%',
-      height: '500px',
+      height: '1000px',
     }}/>);
     this.sections = out;
   }

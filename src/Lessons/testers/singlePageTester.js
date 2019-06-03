@@ -30,7 +30,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   let scenariosToUse = scenarios;
   const defaultOptions = {
     prePath: '',
-    threshold: 0.0001,
+    threshold: 0.00001,
   };
   let optionsToUse = defaultOptions;
   if ('prePath' in optionsOrScenario || 'threshold' in optionsOrScenario) {
@@ -60,6 +60,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     test.each(allTests)(
       '%i %i, scroll: %i, QRs: %p, Threshold: %f',
       async (width, height, scrollTo, includeQRs, threshold) => {
+        jest.setTimeout(120000);
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
         await page.setViewport({ width, height });
