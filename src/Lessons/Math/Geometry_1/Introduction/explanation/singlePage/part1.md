@@ -1,6 +1,6 @@
 |Mathematics is a powerful tool|. We use to |understand| and |predict| the world around us.
 
-|test|  |test2|
+<!-- |test|  |test2| -->
 
 
 Mathematics describes something like an object, path or phenomenon in a more |simple|, and more |general| way. Describing something more |simply|, makes it easier to study and understand. Describing something more |generally|, means the understanding can be reapplied to other scenarios.

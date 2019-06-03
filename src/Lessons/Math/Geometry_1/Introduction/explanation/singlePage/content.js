@@ -44,13 +44,13 @@ class Content extends SinglePageLessonContent {
       layout,
       new Transform('circles').scale(1, 1).translate(0, 0),
     ));
-    this.loadQRs([
-      'Math/Geometry_1/Triangles/base',
-      'Math/Geometry_1/AdjacentAngles/base/',
-      'Math/Geometry_1/Area/base/',
-      'Math/Geometry_1/RightAngleTriangles/base/',
-      'Math/Geometry_1/ImportantAngles/base/',
-    ]);
+    // this.loadQRs([
+    //   'Math/Geometry_1/Triangles/base',
+    //   'Math/Geometry_1/AdjacentAngles/base/',
+    //   'Math/Geometry_1/Area/base/',
+    //   'Math/Geometry_1/RightAngleTriangles/base/',
+    //   'Math/Geometry_1/ImportantAngles/base/',
+    // ]);
   }
 
   // Array of strings, html or jsx
@@ -87,8 +87,8 @@ class Content extends SinglePageLessonContent {
       _analyzed: click(diag.growDimensions, [diag, dim2, 4, null], colors.dimensions),
       _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
       _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
-      test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
-      test2: this.qr('Math/Geometry_1/Triangles/base/AngleSum'),
+      // test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
+      // test2: this.qr('Math/Geometry_1/Triangles/base/AngleSum'),
       figure1: makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1.1, 4, 2.2), 500),
     };
     this.content = [
