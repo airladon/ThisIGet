@@ -17,7 +17,7 @@ class Content extends SimpleLessonContent {
 
   setContent() {
     this.sections = [
-      <div key={0} className="simple_lesson__container">
+      <div key={0}>
       <div className="markdown" dangerouslySetInnerHTML={ { __html: content } }/>
       </div>,
     ];
