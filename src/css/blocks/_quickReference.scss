@@ -48,6 +48,13 @@
   border: 1px solid color('white', 'light');
   border-radius: 0.4em;
   margin-right: 1em;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
 }
 
 // .id_lesson__qr__static_container {
