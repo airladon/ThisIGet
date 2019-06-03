@@ -519,12 +519,6 @@ export default function getLessonIndex() {
             description: 'Presentation form - interactive.',
             fullLesson: true,
           },
-          simple: {
-            type: 'singlePage',
-            title: 'Simple',
-            description: 'Not interactive.',
-            fullLesson: true,
-          },
           singlePage: {
             type: 'singlePage',
             title: 'Initial - Single Page',
