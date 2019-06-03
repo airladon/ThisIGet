@@ -8,6 +8,7 @@ type Props={
   link: string | React.Element<'a'>;
   id: string;
   closeId: string;
+  onClose?: () => void;
 };
 
 export default class QuickReferencePopup extends React.Component
@@ -29,6 +30,9 @@ export default class QuickReferencePopup extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
+    if (this.props.onClose != null) {
+      this.props.onClose();
+    }
     const element = document.getElementById(this.props.closeId);
     if (element != null) {
       element.classList.add('lesson__hide');

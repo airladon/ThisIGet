@@ -4,6 +4,7 @@ import QuickReferencePopup from './quickReferencePopup';
 
 type Props = {
   id: string;
+  onClose?: () => void;
   // title: string;
   // link: string;
 };
@@ -53,6 +54,7 @@ export default class PresentationQR extends React.Component
       title={title}
       link={link}
       closeId="id_lesson__qr__pres_container"
+      onClose={this.props.onClose}
     />;
   }
 }

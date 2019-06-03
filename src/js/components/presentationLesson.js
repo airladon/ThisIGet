@@ -423,7 +423,10 @@ export default class PresentationLessonComponent extends React.Component
                   {this.state.qr}
                 </div>
                 <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
-                  <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+                  <PresentationQR
+                    id="id_lesson__qr__content_pres__overlay"
+                    onClose={this.lesson.content.prepareToHideQR.bind(this.lesson.content)}
+                  />
                 </div>
               </div>
               {this.addGoToButton()}

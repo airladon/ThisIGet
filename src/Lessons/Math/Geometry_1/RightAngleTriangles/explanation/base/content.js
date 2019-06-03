@@ -39,7 +39,6 @@ class Content extends PresentationLessonContent {
       'Math/Geometry_1/SideAngleRelationship/base',
       'Math/Geometry_1/AreaTriangle/base',
       'Math/Geometry_1/AdjacentAngles/base',
-      'Math/Geometry_1/RightAngleTriangles/static',
     ]);
   }
 
@@ -61,13 +60,11 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Right Angle Triangle',
       setContent: [
-        'A |right angle triangle|, or |right triangle|, is a triangle where one of the |angles| is a |right_angle| and |static| and |static2|.',
+        'A |right angle triangle|, or |right triangle|, is a triangle where one of the |angles| is a |right_angle|.',
       ],
       modifiers: {
         angles: click(coll.pulseRightAngle, [coll], colors.rightAngle),
         right_angle: this.qr('Math/Geometry_1/ImportantAngles/base/Right'),
-        static: this.qr('Math/Geometry_1/RightAngleTriangles/static/simpleTest2'),
-        static2: this.qr('Math/Geometry_1/RightAngleTriangles/static/simpleTest'),
       },
     });
 

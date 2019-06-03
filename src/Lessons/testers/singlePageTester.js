@@ -81,7 +81,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await link.click();
             // eslint-disable-next-line no-await-in-loop
-            await sleep(200);
+            await sleep(100);
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);
@@ -112,7 +112,6 @@ export default function tester(optionsOrScenario, ...scenarios) {
                 break;
               }
             }
-
           }
         }
       },
