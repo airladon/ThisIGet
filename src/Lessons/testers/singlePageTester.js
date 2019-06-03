@@ -10,15 +10,30 @@ function sleep(ms) {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+// tester(
+//   {
+//     prePath: 'dev'
+//     thresholds: 0.0001,
+//   },
+//   {
+//    width: 300, height: 600, scrollTo: 290,
+//    includeQRs: true, threshold: 0.001,
+//   },
+//   {
+//    width: 300, height: 600, scrollTo: 290,
+//   },
+// );
+
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const versionPath = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
   const defaultOptions = {
     prePath: '',
+    threshold: 0.0001,
   };
   let optionsToUse = defaultOptions;
-  if ('prePath' in optionsOrScenario) {
+  if ('prePath' in optionsOrScenario || 'threshold' in optionsOrScenario) {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   } else {
     scenariosToUse = [optionsOrScenario, ...scenarios];
@@ -31,13 +46,20 @@ export default function tester(optionsOrScenario, ...scenarios) {
     if (includeQRs == null) {
       includeQRs = false;
     }
-    allTests.push([scenario.width, scenario.height, scenario.scrollTo, includeQRs]);
+    let scenarioThreshold = scenario.theshold;
+    if (scenarioThreshold == null) {
+      scenarioThreshold = optionsToUse.threshold;
+    }
+    allTests.push([
+      scenario.width, scenario.height, scenario.scrollTo,
+      includeQRs, scenarioThreshold,
+    ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      '%i %i, scroll: %i, QRs: %b',
-      async (width, height, scrollTo, includeQRs) => {
+      '%i %i, scroll: %i, QRs: %p, Threshold: %f',
+      async (width, height, scrollTo, includeQRs, threshold) => {
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
         await page.setViewport({ width, height });
@@ -57,12 +79,13 @@ export default function tester(optionsOrScenario, ...scenarios) {
           for (const link of qrLinks) {
             // eslint-disable-next-line no-await-in-loop
             await link.click();
+            // eslint-disable-next-line no-await-in-loop
             await sleep(200);
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);
             });
-            // const linconsole.log(await link.boundingBox())
+            // eslint-disable-next-line no-await-in-loop
             const linkBox = await link.boundingBox();
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
@@ -71,8 +94,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
-              // failureThreshold: gotoThreshold,             // 480 pixels
-              // failureThresholdType: 'percent',
+              failureThreshold: threshold,             // 480 pixels
+              failureThresholdType: 'percent',
               customSnapshotIdentifier: `${width}-${height}-${scrollTo}-QR-${index}`,
             });
             index += 1;
