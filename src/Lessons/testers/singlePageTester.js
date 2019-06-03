@@ -6,6 +6,10 @@ import joinObjects from './tools';
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const versionPath = fullPath.split('/').slice(4, -1).join('/');
@@ -53,10 +57,17 @@ export default function tester(optionsOrScenario, ...scenarios) {
           for (const link of qrLinks) {
             // eslint-disable-next-line no-await-in-loop
             await link.click();
+            await sleep(200);
             // eslint-disable-next-line no-await-in-loop
-            // await page.evaluate((y) => {
-            //   window.scrollTo(0, y);
-            // }, scrollTo);
+            await page.evaluate(() => {
+              window.scrollTo(0, 0);
+            });
+            // const linconsole.log(await link.boundingBox())
+            const linkBox = await link.boundingBox();
+            // eslint-disable-next-line no-await-in-loop
+            await page.evaluate((y) => {
+              window.scrollTo(0, y);
+            }, linkBox.y);
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
@@ -69,12 +80,15 @@ export default function tester(optionsOrScenario, ...scenarios) {
             const closeButtons = await page.$$('.lesson__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
+              // eslint-disable-next-line no-await-in-loop
               const box = await closeButton.boundingBox();
               if (box != null && box.x > 0) {
+                // eslint-disable-next-line no-await-in-loop
                 await closeButton.click();
                 break;
               }
             }
+
           }
         }
       },
