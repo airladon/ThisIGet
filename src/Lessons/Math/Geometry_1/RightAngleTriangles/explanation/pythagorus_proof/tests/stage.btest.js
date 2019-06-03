@@ -4,15 +4,15 @@ import tester from '../../../../../../testers/singlePageTester';
 
 tester(
   {
-    width: 300, height: 2500, scrollTo: 290,
+    width: 300, height: 2500, scrollTo: 280,
   },
   {
-    width: 300, height: 600, scrollTo: 290, includeQRs: true,
+    width: 300, height: 600, scrollTo: 280, includeQRs: true,
   },
-  {
-    width: 700, height: 3000, scrollTo: 200,
-  },
-  {
-    width: 700, height: 600, scrollTo: 200, includeQRs: true,
-  },
+  // {
+  //   width: 700, height: 3000, scrollTo: 200,
+  // },
+  // {
+  //   width: 700, height: 600, scrollTo: 200, includeQRs: true,
+  // },
 );
