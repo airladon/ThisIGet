@@ -462,7 +462,7 @@ class Content extends PresentationLessonContent {
       setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the |same|.',
       modifiers: {
         'Side-Angle-Side': this.qr(
-          'CongruentTriangles/base/Sas', colors.diagram.action,
+          'Math/Geometry_1/CongruentTriangles/base/Sas', colors.diagram.action,
         ),
         top: click(coll.pulseTopTriangle, [coll], colors.sides),
         bottom: click(coll.pulseBottomTriangle, [coll], colors.sides),

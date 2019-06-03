@@ -5,6 +5,7 @@ import tester from '../../../../../../testers/presentationLessonTester';
 tester(
   {
     pages: {
+      28: { threshold: { next: 0.0001, prev: 0.0001 } },
       32: { threshold: { next: 0.0001, prev: 0.0001 } },
       33: { threshold: { next: 0.0001, prev: 0.0001 } },
       34: { threshold: { next: 0.0001, prev: 0.005 } },

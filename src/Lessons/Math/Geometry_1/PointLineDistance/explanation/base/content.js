@@ -247,7 +247,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         right_angle: click(coll.pulseRightAngle, [coll], colors.distance),
         hypotenuse: click(coll.pulseHypotLabel, [coll, null], colors.distance),
-        right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/Main'),
+        right_angle_triangle: this.qr('Math/Geometry_1/RightAngleTriangles/base/Definition'),
       },
       show: [
         fig._point, fig._line, fig._perpendicular, fig._rightAngle, fig._hypot,
