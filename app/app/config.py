@@ -20,4 +20,4 @@ class Config(object):
     MAIL_PASSWORD = os.environ.get('MAIL_PASSWORD') or ''
     MAIL_SENDER = os.environ.get('MAIL_SENDER') or ''
 
-    UPLOAD_FOLDER = '/opp/app/app/app/static/dist/'
+    UPLOAD_FOLDER = 'static/shapes'

@@ -27,6 +27,8 @@ from werkzeug.urls import url_parse
 from app.tools import format_email
 import pdb
 import os
+import time
+
 
 # project/decorators.py
 from functools import wraps
@@ -569,8 +571,12 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
 
 @app.route('/sketch', methods=['POST'])
 def saveSquareSketch():
-    # print('asdf')
-    # file = request.files['sketch']
-    # pdb.set_trace()
-    file = request.files['square']
-    file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'square.jpeg'))
+    for shape in request.files.keys():
+        file = request.files[shape]
+        basedir = os.path.abspath(os.path.dirname(__file__))
+        file.save(os.path.join(basedir,
+                  app.config['UPLOAD_FOLDER'],
+                  f'{shape}_{time.time()}.png'))
+    return jsonify({'status': 'ok'})
+
+    # file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'square.jpeg'))

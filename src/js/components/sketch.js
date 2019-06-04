@@ -28,6 +28,9 @@ export default class Sketch extends React.Component
       canvas.addEventListener('mousedown', this.startDrawing.bind(this));
       canvas.addEventListener('mousemove', this.draw.bind(this));
       canvas.addEventListener('mouseup', this.stopDrawing.bind(this));
+      canvas.addEventListener('touchstart', this.touchStart.bind(this));
+      canvas.addEventListener('touchmove', this.touchMove.bind(this));
+      canvas.addEventListener('touchend', this.stopDrawing.bind(this));
     }
   }
 
@@ -39,7 +42,24 @@ export default class Sketch extends React.Component
     ];
   }
 
-  startDrawing(event: MouseEvent) {
+  touchStart(event: TouchEvent) {
+    const touch = event.touches[0];
+    this.startDrawing(touch);
+    // if (disableEvent) {
+    event.preventDefault();
+    // }
+  }
+
+  touchMove(event: TouchEvent) {
+    const touch = event.touches[0];
+    this.draw(touch);
+    // if (disableEvent) {
+    event.preventDefault();
+    // }
+  }
+
+
+  startDrawing(event: MouseEvent | Touch) {
     this.lastPoint = this.clientToCanvas(event.clientX, event.clientY);
     this.isDrawing = true;
     this.ctx.beginPath();
@@ -53,7 +73,7 @@ export default class Sketch extends React.Component
     this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
   }
 
-  draw(event: MouseEvent) {
+  draw(event: MouseEvent | Touch) {
     if (this.isDrawing) {
       const point = this.clientToCanvas(event.clientX, event.clientY);
       this.ctx.moveTo(this.lastPoint[0], this.lastPoint[1]);
@@ -71,20 +91,20 @@ export default class Sketch extends React.Component
     for (let i = 0; i < byteString.length; i += 1) {
       ia[i] = byteString.charCodeAt(i);
     }
-    return new Blob([ab], { type: 'image/jpeg' });
+    return new Blob([ab], { type: 'image/png' });
   }
 
-  upload() {
-    const image = this.canvas.toDataURL("image/png");
+  upload(shapeName: string) {
+    const image = this.canvas.toDataURL('image/png');
     const blob = this.dataURItoBlob(image);
 
     let req = new XMLHttpRequest();
     let formData = new FormData();
 
-    formData.append('square', blob);
+    formData.append(shapeName, blob);
     req.open('POST', '/sketch');
     req.send(formData);
-
+    this.clear();
     // var xhr = new XMLHttpRequest();
     // xhr.open("POST", 'localhost:5003//sketch, true);
     // xhr.setRequestHeader('Content-Type', 'application/json');
@@ -100,18 +120,43 @@ export default class Sketch extends React.Component
       paddingTop: '100px',
       backgroundColor: 'white',
     }}>
-      <canvas id="id_sketch__canvas" className="sketch__canvas" style={{
-        width: '500px',
-        height: '500px',
-        backgroundColor: '#EEE',
-      }}/>
-      <div className="sketch__control_container">
-      <Button label="square" onClick={this.upload.bind(this)}/>
-      <Button label="clear" onClick={this.clear.bind(this)}/>
+      <div className="canvasContainer" style={{
+        // height: 'auto',
+        // width: '100%',
+        width: '400px',
+        height: '400px',
+        marginLeft: 'auto',
+        marginRight: 'auto',
+        // maxWidth: '500px',
+        // maxHeight: '500px',
+      }}>
+        <canvas id="id_sketch__canvas" className="sketch__canvas" style={{
+          width: '100%',
+          height: '100%',
+          // height: '0',
+          // paddingTop: '100%',
+          backgroundColor: '#EEE',
+          // width: '400px',
+          // height: '400px',
+        }}/>
       </div>
-      <form encType="multipart/form-data" action="/upload/image" method="post">
-          <input id="image-file" type="file" />
-      </form>
+      <div className="sketch__control_container" style={{
+        textAlign: 'center',
+        marginTop: '10px',
+      }}>
+      <Button label="square" onClick={this.upload.bind(this, 'square')}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      <Button label="rectangle" onClick={this.upload.bind(this, 'rectangle')}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      <Button label="isosceles" onClick={this.upload.bind(this, 'isosceles')}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      <Button label="equilateral" onClick={this.upload.bind(this, 'equilateral')}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      <Button label="right" onClick={this.upload.bind(this, 'right')}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      <Button label="clear" onClick={this.clear.bind(this)}
+        style={{ padding: '10px', marginLeft: '10px', marginBottom: '20px' }}/>
+      </div>
     </div>;
   }
 }
