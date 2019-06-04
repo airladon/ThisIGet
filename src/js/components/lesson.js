@@ -19,6 +19,7 @@ import PresentationLessonComponent from './presentationLesson';
 import SimpleLessonComponent from './simpleLesson';
 import SinglePageLessonComponent from './singlePageLesson';
 import LinksLessonComponent from './linksLesson';
+import Sketch from './sketch';
 
 type Props = {
   lesson: Object;
@@ -448,6 +449,7 @@ export default class LessonComponent extends React.Component
           ref={(lessonNavigator) => { this.lessonNavigator = lessonNavigator; }}
         />
       <div className='lesson__white_spacer'/>
+      <Sketch/>
     </div>;
   }
 }
