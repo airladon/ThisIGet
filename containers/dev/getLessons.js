@@ -23,6 +23,10 @@ function entryPoints(buildMode) {
   return points;
 }
 
+function escape(text) {
+  console.log(text)
+  return text.replace(/'/, '\\\'');
+}
 
 // This method goes through all the details and versions files and updates
 // them with current lesson, topic, version
@@ -121,16 +125,16 @@ function updateDetailsAndVersions() {
               outStr = `${outStr}\n      hash: '${crypto.createHash('md5').update(link.url).digest('hex')}',`;
             }
             if (link.publisher != null) {
-              outStr = `${outStr}\n      publisher: '${link.publisher}',`;
+              outStr = `${outStr}\n      publisher: '${escape(link.publisher)}',`;
             }
             if (link.author != null) {
-              outStr = `${outStr}\n      author: '${link.author}',`;
+              outStr = `${outStr}\n      author: '${escape(link.author)}',`;
             }
             if (link.type != null) {
               outStr = `${outStr}\n      type: '${link.type}',`;
             }
             if (link.description != null) {
-              outStr = `${outStr}\n      description: '${link.description}',`;
+              outStr = `${outStr}\n      description: '${escape(link.description)}',`;
             }
             outStr = `${outStr}\n    },`;
           });

@@ -430,6 +430,14 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: '',
+            description: '',
+            fullLesson: false,
+          },
+        },
         dev: {
           base: {
             type: 'presentation',
