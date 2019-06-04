@@ -1,0 +1,7 @@
+.lesson__widescreen_backdrop {
+  font-size: var(--lesson__diagram-font-size);
+  // background-color: color('diagram', 'background');
+  background-color: color('presentation', 'background');
+  padding-top: var(--pres__vpadding);
+  padding-bottom: var(--pres__vpadding);
+}
