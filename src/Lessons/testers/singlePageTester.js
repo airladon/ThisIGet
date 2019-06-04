@@ -16,11 +16,17 @@ function sleep(ms) {
 //     thresholds: 0.0001,
 //   },
 //   {
-//    width: 300, height: 600, scrollTo: 290,
-//    includeQRs: true, threshold: 0.001,
+//    width: 300,
+//    height: 600,
+//    includeQRs: true,
+//    threshold: 0.001,
 //   },
 //   {
-//    width: 300, height: 600, scrollTo: 290,
+//    width: 300,
+//    height: 'full',
+//   },
+//   {
+//    width: 300,
 //   },
 // );
 
@@ -41,35 +47,45 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const { prePath } = optionsToUse;
 
   const allTests = [];
-  scenariosToUse.forEach((scenario) => {
-    let { includeQRs } = scenario;
-    if (includeQRs == null) {
-      includeQRs = false;
-    }
-    let scenarioThreshold = scenario.theshold;
-    if (scenarioThreshold == null) {
-      scenarioThreshold = optionsToUse.threshold;
-    }
+  scenariosToUse.forEach((scenarioIn) => {
+    const defaultScenario = {
+      threshold: optionsToUse.threshold,
+      height: 'full',
+      includeQRs: false,
+    };
+    const scenario = joinObjects({}, defaultScenario, scenarioIn);
     allTests.push([
-      scenario.width, scenario.height, scenario.scrollTo,
-      includeQRs, scenarioThreshold,
+      scenario.width, scenario.height, scenario.includeQRs, scenario.threshold,
     ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      '%i %i, scroll: %i, QRs: %p, Threshold: %f',
-      async (width, height, scrollTo, includeQRs, threshold) => {
+      'width: %i height: %p, QRs: %p, Threshold: %f',
+      async (width, height, includeQRs, threshold) => {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
-        await page.setViewport({ width, height });
+        await page.evaluate(() => {
+          window.scrollTo(0, 0);
+        });
+        if (height === 'full') {
+          await page.setViewport({ width, height: 1000 });
+          const lessonContainerTemp = await page.$('#lesson__content');
+          const lessonBoxTemp = await lessonContainerTemp.boundingBox();
+          await page.setViewport({ width, height: Math.floor(lessonBoxTemp.height) });
+        } else {
+          await page.setViewport({ width, height });
+        }
+        const lessonContainer = await page.$('#lesson__content');
+        const lessonBox = await lessonContainer.boundingBox();
+        console.log(lessonBox)
         await page.evaluate((y) => {
           window.scrollTo(0, y);
-        }, scrollTo);
+        }, Math.floor(lessonBox.y));
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
-          customSnapshotIdentifier: `${width}-${height}-${scrollTo}`,
+          customSnapshotIdentifier: `${width}-${height}`,
         });
         if (includeQRs) {
           // Find all links on page that go to QR popups
@@ -97,7 +113,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,             // 480 pixels
               failureThresholdType: 'percent',
-              customSnapshotIdentifier: `${width}-${height}-${scrollTo}-QR-${index}`,
+              customSnapshotIdentifier: `${width}-${height}-QR-${index}`,
             });
             index += 1;
             // eslint-disable-next-line no-await-in-loop
