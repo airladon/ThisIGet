@@ -79,7 +79,6 @@ export default function tester(optionsOrScenario, ...scenarios) {
         }
         const lessonContainer = await page.$('#lesson__content');
         const lessonBox = await lessonContainer.boundingBox();
-        console.log(lessonBox)
         await page.evaluate((y) => {
           window.scrollTo(0, y);
         }, Math.floor(lessonBox.y));
