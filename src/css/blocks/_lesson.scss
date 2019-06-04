@@ -131,29 +131,29 @@ $title_bar_space_low: 90px;
   display: none;
 }
 
-.lesson__widescreen_backdrop {
-  font-size: var(--lesson__diagram-font-size);
-  // background-color: color('diagram', 'background');
-  background-color: color('presentation', 'background');
-  padding-top: var(--pres__vpadding);
-  padding-bottom: var(--pres__vpadding);
-}
+// .lesson__widescreen_backdrop {
+//   font-size: var(--lesson__diagram-font-size);
+//   // background-color: color('diagram', 'background');
+//   background-color: color('presentation', 'background');
+//   padding-top: var(--pres__vpadding);
+//   padding-bottom: var(--pres__vpadding);
+// }
 
-.lesson__container {
-  position: relative;
-  margin-left: auto;
-  margin-right: auto;
-  width: var(--pres__container_width);
-  height: var(--pres__container_height);
-  margin-bottom: 0;
-}
+// .lesson__container {
+//   position: relative;
+//   margin-left: auto;
+//   margin-right: auto;
+//   width: var(--pres__container_width);
+//   height: var(--pres__container_height);
+//   margin-bottom: 0;
+// }
 
-.lesson__diagram {
-  width: var(--pres__content_width);
-  height: var(--pres__content_height);
-  background-color: color('diagram', 'background');
-  // border-radius: calc(var(--pres__unit) * 0.8);
-}
+// .lesson__diagram {
+//   width: var(--pres__content_width);
+//   height: var(--pres__content_height);
+//   background-color: color('diagram', 'background');
+//   // border-radius: calc(var(--pres__unit) * 0.8);
+// }
 
 // .lesson_tester {
 //   font-size: calc(var(--pres__unit) * 0.8);
@@ -576,10 +576,10 @@ $title_bar_space_low: 90px;
 // @import './lesson/presentation/gotoButton';
 // @import './lesson/presentation/interactiveItemButton';
 // @import './lesson/presentation/infoBox';
-@import './lesson/selector';
-@import './lesson/definition';
-@import './lesson/quizCheck';
+// @import './lesson/selector';
+// @import './lesson/definition';
+// @import './lesson/quizCheck';
 @import './lesson/popupBox';
-@import './lesson/star';
+// @import './lesson/star';
 @import './lesson/pathTile';
-@import './lesson/equationNavigator';
+// @import './lesson/equationNavigator';
