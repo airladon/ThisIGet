@@ -25,10 +25,14 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-# import pdb
+import pdb
+import os
 
 # project/decorators.py
 from functools import wraps
+
+# UPLOAD_FOLDER = '/static'
+# ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'])
 
 
 def check_confirmed(func):
@@ -561,3 +565,12 @@ def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
         'numRatings': num_ratings,
         'aveRating': ave_rating,
         'numHighRatings': num_high_ratings})
+
+
+@app.route('/sketch', methods=['POST'])
+def saveSquareSketch():
+    # print('asdf')
+    # file = request.files['sketch']
+    # pdb.set_trace()
+    file = request.files['square']
+    file.save(os.path.join(app.config['UPLOAD_FOLDER'], 'square.jpeg'))

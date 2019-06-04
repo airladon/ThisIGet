@@ -64,6 +64,36 @@ export default class Sketch extends React.Component
   }
 
   // eslint-disable-next-line class-methods-use-this
+  dataURItoBlob(dataURI) {
+    const byteString = atob(dataURI.split(',')[1]);
+    const ab = new ArrayBuffer(byteString.length);
+    const ia = new Uint8Array(ab);
+    for (let i = 0; i < byteString.length; i += 1) {
+      ia[i] = byteString.charCodeAt(i);
+    }
+    return new Blob([ab], { type: 'image/jpeg' });
+  }
+
+  upload() {
+    const image = this.canvas.toDataURL("image/png");
+    const blob = this.dataURItoBlob(image);
+
+    let req = new XMLHttpRequest();
+    let formData = new FormData();
+
+    formData.append('square', blob);
+    req.open('POST', '/sketch');
+    req.send(formData);
+
+    // var xhr = new XMLHttpRequest();
+    // xhr.open("POST", 'localhost:5003//sketch, true);
+    // xhr.setRequestHeader('Content-Type', 'application/json');
+    // xhr.send(JSON.stringify({
+    //     value: value
+    // }));
+  }
+
+  // eslint-disable-next-line class-methods-use-this
   render() {
     return <div className="sketch__container" style={{
       padding: '10px',
@@ -76,10 +106,12 @@ export default class Sketch extends React.Component
         backgroundColor: '#EEE',
       }}/>
       <div className="sketch__control_container">
-      <Button label="square incomplete labels"/>
-      <Button label="square complete labels"/>
+      <Button label="square" onClick={this.upload.bind(this)}/>
       <Button label="clear" onClick={this.clear.bind(this)}/>
       </div>
+      <form encType="multipart/form-data" action="/upload/image" method="post">
+          <input id="image-file" type="file" />
+      </form>
     </div>;
   }
 }
