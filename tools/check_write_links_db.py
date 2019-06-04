@@ -84,6 +84,7 @@ for key, value in index.items():            # noqa
     lesson = Lessons.query.filter_by(uid=value['uid']).first()
     if lesson is None:
         lesson = Lessons(uid=value['uid'])
+        print(f'Create Lesson: {value["uid"]}')
         db.session.add(lesson)
 
     if check(show, write, lesson, 'title', value, 'title'):
@@ -107,6 +108,7 @@ for key, value in index.items():            # noqa
         topic = Topics.query.filter_by(
             lesson_id=lesson.id, name=topic_name).first()
         if topic is None:
+            print(f'Create Topic: {lesson.path}/{lesson.uid} => {topic_name}')
             topic = Topics(lesson_id=lesson.id, name=topic_name)
             db.session.add(topic)
         # Update or Create Versions
@@ -114,6 +116,9 @@ for key, value in index.items():            # noqa
             version = db.session.query(Versions).filter_by(
                 topic_id=topic.id, uid=version_name).first()
             if version is None:
+                print(f'Create Version: '
+                      f'{lesson.path}/{lesson.uid}/{topic_name} '
+                      f'=> {version_name}')
                 version = Versions(topic_id=topic.id, uid=version_name)
                 db.session.add(version)
             version = db.session.query(Versions).filter_by(

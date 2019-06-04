@@ -1,5 +1,82 @@
 [
   {
+    "url": "https://www.khanacademy.org/math/basic-geo/basic-geometry-shapes/triangle-angles/v/triangle-angle-example-1",
+    "hash": "22ff376720992f7a8ff9b6e11da89b0c",
+    "publisher": "Khan Academy",
+    "type": "video",
+    "description": "Triangle exterior angle example.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=EZ6dOlRQDBo",
+    "hash": "920cfd472cffb801d6d2465721280619",
+    "publisher": "Don't Memorise",
+    "type": "video",
+    "description": "Exterior angle in terms of interior angles.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathopenref.com/triangleextangle.html",
+    "hash": "c48741166bb3520d29b3d6838f0d537d",
+    "publisher": "Math Open Reference",
+    "type": "generic",
+    "description": "Interactive diagram of exterior angles.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/geometry/triangle-exterior-angle-theorem.html",
+    "hash": "446ae4c3258b2f73686e8e6defc605e4",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Explanation and Examples.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://mathbitsnotebook.com/Geometry/SegmentsAnglesTriangles/SATExteriorAngle.html",
+    "hash": "98e199e4a3b63e8ba49c2728c0cfc4e0",
+    "publisher": "MathBits Notebook",
+    "type": "generic",
+    "description": "Proof and Explanation.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Exterior_angle_theorem",
+    "hash": "d3f8640eb4fe285f2337f1f759375112",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "Exterior Angle Theorem and some context.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.varsitytutors.com/hotmath/hotmath_help/topics/exterior-angle-theorem",
+    "hash": "bf0576d37369ac846ef6bc7c53d5a25f",
+    "publisher": "Varsity Tutors",
+    "type": "generic",
+    "description": "Theorem.",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ExternalAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://en.wikipedia.org/wiki/Right_triangle",
     "hash": "0d0bf3df02ca4f1cae21e8ee0fc2f2c5",
     "publisher": "Wikipedia",
@@ -62,6 +139,17 @@
     "description": "Introduction with examples.",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "",
+    "hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "publisher": "",
+    "type": "generic",
+    "description": "",
+    "lessonPath": "/Lessons",
+    "lessonUID": "boilerplate",
     "topic": "links",
     "versionUID": "base"
   }
