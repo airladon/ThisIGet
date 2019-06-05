@@ -6,6 +6,6 @@ tester(
   {
     prePath: '/dev',
   },
-  { width: 300 },
-  { width: 700 },
+  { width: 300, height: 600, includeQRs: true },
+  { width: 700, height: 600, includeQRs: true },
 );

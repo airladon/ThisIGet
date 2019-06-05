@@ -131,6 +131,10 @@ $title_bar_space_low: 90px;
   display: none;
 }
 
+.lesson__diagram {
+  background-color: color('diagram', 'background');
+}
+
 // .lesson__widescreen_backdrop {
 //   font-size: var(--lesson__diagram-font-size);
 //   // background-color: color('diagram', 'background');

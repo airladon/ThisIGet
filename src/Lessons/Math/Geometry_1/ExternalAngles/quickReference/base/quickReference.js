@@ -1,5 +1,6 @@
 // @flow
 import Fig from 'figureone';
+import React from 'react';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
@@ -7,6 +8,8 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import external from './external.md';
 
 const lessonUID = details.uid;
 const versionUID = version.uid;
@@ -17,7 +20,7 @@ const {
 //   highlight,
 } = Fig.tools.html;
 
-export default class QRBoilerplate extends PopupBoxCollection {
+export default class QRExternal extends PopupBoxCollection {
   _collection: CommonCollection;
 
   constructor(
@@ -78,5 +81,10 @@ export default class QRBoilerplate extends PopupBoxCollection {
 }
 
 attachQuickReference(details.path, lessonUID, versionUID, {
-  Main: QRBoilerplate,
+  ExternalPres: QRExternal,
+  External: <StaticQR
+    title="External Angle"
+    content={external}
+    link={`${details.path}/${details.uid}/explanation/base?page=1`}
+  />,
 });

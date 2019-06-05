@@ -11,12 +11,17 @@
 
 .simple_lesson__container img {
   max-width: 100%;
+  margin-left: 50%;
+  transform: translate(-50%);
 }
 
 .simple_lesson__container svg {
   max-width: 100%;
 }
 
+.lesson__qr img {
+  margin-left: 0;
+}
 // #simple_lesson__qr__overlay {
 //   z-index: -1;
 //   position: absolute;
