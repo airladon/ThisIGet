@@ -15,6 +15,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -42,6 +56,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -67,6 +95,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -110,6 +152,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -143,6 +199,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -180,6 +250,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -213,6 +297,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -250,6 +348,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -275,6 +387,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         summary: {
@@ -318,6 +444,20 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -353,6 +493,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -386,6 +540,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
       },
       dependencies: [
       ],
@@ -402,6 +570,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -439,6 +621,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -464,6 +660,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -501,6 +711,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -526,6 +750,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -563,6 +801,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -598,6 +850,20 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -624,6 +890,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -675,6 +955,20 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -708,6 +1002,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -808,6 +1116,20 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {

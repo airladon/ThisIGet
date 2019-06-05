@@ -234,7 +234,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         n: click(coll.pulseAngleN, [coll], colors.isosceles),
-        external_angle: this.qr('Math/Geometry_1/ExternalAngles/base/Main', colors.isosceles),
+        external_angle: this.qr('Math/Geometry_1/ExternalAngles/base/ExternalPres', colors.isosceles),
         lower_triangle: click(coll.toggleLowerTriangle, [coll], colors.sides),
       },
     };
