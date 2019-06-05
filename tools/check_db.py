@@ -1,38 +1,18 @@
 import pathlib
-import re
 import json
 import sys
 import subprocess
 from check_row import check_row
+from index_loader import index_loader
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-
+import pdb
 
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
         return check_row(show, write, row, key, valueDict[valueKey])
     return False
-
-
-def index_loader(file):
-    f = open(file.as_posix())
-    details_str = f.read()
-    start = re.search(r'\n  const *lessonIndex *= *', details_str)
-    stop = re.search(r'\n  };\n', details_str)
-    details_str = details_str[start.span()[1]:stop.span()[0] + 4]
-    modified_str = re.sub(r"new LessonDescription\(", '', details_str)
-    modified_str = re.sub(r"} *\) *,", '},', modified_str)
-    modified_str = re.sub("'", '"', modified_str)
-    modified_str = re.sub(r"([^' ]*):", r'"\1":', modified_str)
-    modified_str = re.sub("\n", "", modified_str)
-    modified_str = re.sub(
-        "([^'])false([^'])", r'\1"False"\2', modified_str)
-    modified_str = re.sub("([^'])true([^'])", r'\1"True"\2', modified_str)
-    modified_str = re.sub(", *} *$", "}", modified_str)
-    modified_str = re.sub(", *}", "}", modified_str)
-    modified_str = re.sub(", *]", "]", modified_str)
-    return json.loads(modified_str)
 
 
 def toBool(str):
@@ -69,7 +49,7 @@ if index.returncode != 0:
 index = index_loader(
     pathlib.Path('./src/Lessons/LessonsCommon/lessonindex.js'))
 
-# print('Checking lesson index in database\n')
+
 # Process Index
 for key, value in index.items():            # noqa
     # Update or create category row
@@ -108,7 +88,9 @@ for key, value in index.items():            # noqa
         topic = Topics.query.filter_by(
             lesson_id=lesson.id, name=topic_name).first()
         if topic is None:
-            print(f'Create Topic: {lesson.path}/{lesson.uid} => {topic_name}')
+            if show:
+                print(f'Create Topic: {lesson.path}/{lesson.uid}'
+                      f' => {topic_name}')
             topic = Topics(lesson_id=lesson.id, name=topic_name)
             db.session.add(topic)
         # Update or Create Versions
@@ -116,9 +98,10 @@ for key, value in index.items():            # noqa
             version = db.session.query(Versions).filter_by(
                 topic_id=topic.id, uid=version_name).first()
             if version is None:
-                print(f'Create Version: '
-                      f'{lesson.path}/{lesson.uid}/{topic_name} '
-                      f'=> {version_name}')
+                if show:
+                    print(f'Create Version: '
+                          f'{lesson.path}/{lesson.uid}/{topic_name} '
+                          f'=> {version_name}')
                 version = Versions(topic_id=topic.id, uid=version_name)
                 db.session.add(version)
             version = db.session.query(Versions).filter_by(
