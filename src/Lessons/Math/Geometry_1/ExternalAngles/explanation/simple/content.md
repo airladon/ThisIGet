@@ -30,3 +30,4 @@ So the external angle of a triangle is equal to the sum of the two opposite inte
 A triangle can have up to **six** exterior angles:
 
 ![](./all.png)
+
