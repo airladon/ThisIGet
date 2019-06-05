@@ -240,7 +240,7 @@ export default class LessonComponent extends React.Component
           if (topicName === 'dev') {
             link = `/dev${lessonDescription.path}/${lessonDescription.uid}/quickReference/${versionUID}`;
           }
-          const { description } = version;
+          // const { description } = version;
           const { fullLesson } = version;
           const { type } = version;
           const rating = this.state.ratings[topicName][versionUID];
@@ -263,7 +263,7 @@ export default class LessonComponent extends React.Component
             rating: rating.aveRating,
             numReviews: rating.numRatings,
             numHighRatings: rating.numHighRatings,
-            description,
+            description: '',
             active,
             fullLesson,
             type,
@@ -315,8 +315,8 @@ export default class LessonComponent extends React.Component
         vUIDs = vUIDs.sort((aKey, bKey) => {
           const a = topic[aKey];
           const b = topic[bKey];
-          if (a.onPath === true && b.onPath === false) { return -1; }
-          if (a.onPath === false && b.onPath === true) { return 1; }
+          if (a.fullLesson === true && b.fullLesson === false) { return -1; }
+          if (a.fullLesson === false && b.fullLesson === true) { return 1; }
           return 0;
         });
         const listItems = [];

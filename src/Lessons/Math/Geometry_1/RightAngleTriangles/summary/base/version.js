@@ -4,8 +4,8 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
-  description: '',
+  title: 'Summary',
+  description: 'Summary of right angle triangle properties.',
   fullLesson: true,
   type: 'presentation',
 };
