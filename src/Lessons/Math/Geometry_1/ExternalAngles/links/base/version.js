@@ -46,7 +46,7 @@ var version = {
       hash: 'd3f8640eb4fe285f2337f1f759375112',
       publisher: 'Wikipedia',
       type: 'generic',
-      description: 'Exterior Angle Theorem and some context.',
+      description: 'Exterior Angle Theorem (Euclid and HSEAT).',
     },
     {
       url: 'https://www.varsitytutors.com/hotmath/hotmath_help/topics/exterior-angle-theorem',
