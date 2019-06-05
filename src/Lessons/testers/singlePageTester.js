@@ -84,6 +84,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
         }, Math.floor(lessonBox.y));
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
+          failureThreshold: threshold,             // 480 pixels
+          failureThresholdType: 'percent',
           customSnapshotIdentifier: `${width}-${height}`,
         });
         if (includeQRs) {
@@ -96,7 +98,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await link.click();
             // eslint-disable-next-line no-await-in-loop
-            await sleep(100);
+            await page.mouse.move(0, 0);
+            // eslint-disable-next-line no-await-in-loop
+            await sleep(500);
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);

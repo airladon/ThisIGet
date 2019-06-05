@@ -183,7 +183,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await link.click();
             // eslint-disable-next-line no-await-in-loop
-            await sleep(100);
+            await page.mouse.move(0, 0);
+            // eslint-disable-next-line no-await-in-loop
+            await sleep(500);
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
