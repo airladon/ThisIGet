@@ -4,7 +4,7 @@ Consider a triangle with one of its sides extended beyond the corner.
 
 ![](./fig.png)
 
-An $$\definecolor{b}{RGB}{0,162,255}\definecolor{b}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{150,150,150}\color{g}external\ angle$$ (also called $$\color{g}exterior\ angle$$) is the angle formed between the extended side and the adjacent side in the triangle.
+An $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{150,150,150}\color{g}external\ angle$$ (also called $$\color{g}exterior\ angle$$) is the angle formed between the extended side and the adjacent side in the triangle.
 
 
 
