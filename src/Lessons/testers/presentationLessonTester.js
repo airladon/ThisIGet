@@ -80,8 +80,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
     },
     viewPort: {
       width: 600,
-      height: 320,
-      scrollTo: 200,
+      // height: 320,
+      // scrollTo: 200,
     },
     pages: {},
     prePath: '',
@@ -125,15 +125,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const fullpath =
           `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
         await page.goto(fullpath);
-
+        await page.evaluate(() => {
+          window.scrollTo(0, 0);
+        });
         await page.setViewport({
           width: options.viewPort.width,
-          height: options.viewPort.height,
+          height: options.viewPort.width / 2,
+        });
+        const lessonContainer = await page.$('#lesson__content');
+        const lessonBox = await lessonContainer.boundingBox();
+        const scrollTo = Math.floor(lessonBox.y);
+        await page.setViewport({
+          width: options.viewPort.width,
+          height: Math.floor(lessonBox.height),
         });
 
         await page.evaluate((y) => {
           window.scrollTo(0, y);
-        }, options.viewPort.scrollTo);
+        }, scrollTo);
 
         let currentPage = fromPage;
         const next = 'lesson__button-next';
@@ -178,7 +187,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
-            }, options.viewPort.scrollTo);
+            }, scrollTo);
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
@@ -202,7 +211,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
-            }, options.viewPort.scrollTo);
+            }, scrollTo);
           }
 
           while (currentPage.toString() !== targetPage.toString()) {

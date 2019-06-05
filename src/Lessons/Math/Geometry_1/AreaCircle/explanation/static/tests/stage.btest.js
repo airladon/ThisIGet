@@ -3,16 +3,8 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/singlePageTester';
 
 tester(
-  {
-    width: 300, height: 4520, scrollTo: 240,
-  },
-  {
-    width: 300, height: 600, scrollTo: 240, includeQRs: true,
-  },
-  {
-    width: 700, height: 4470, scrollTo: 200,
-  },
-  {
-    width: 700, height: 600, scrollTo: 200, includeQRs: true,
-  },
+  { width: 300 },
+  { width: 300, height: 450, includeQRs: true },
+  { width: 700 },
+  { width: 700, height: 450, includeQRs: true },
 );
