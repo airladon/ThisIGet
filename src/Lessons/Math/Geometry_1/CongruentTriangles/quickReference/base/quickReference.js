@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -46,11 +46,11 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     this.setTitle('Congruent Triangles');
     this.setDescription(['Triangles are congruent when they have the same corresponding |side_lengths| and |angles|. Shapes remain congruent even if they are |rotated| or |flipped|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6, xSize: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -63,7 +63,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     congruent._tri2.isMovable = true;
     congruent._tri2.touchInBoundingRect = true;
     congruent._tri2.move.type = 'rotation';
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -1.1, 3.6, 2.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -90,14 +90,14 @@ export class QRAaa extends PopupBoxCollection {
       different_side_lengths: highlight(colors.qrCongruent_sides),
       three_angles: highlight(colors.qrCongruent_angles),
     };
-    this.setTitle('Angle Angle Angle Triangle Congruency Test');
+    this.setTitle('AAA Congruency');
     this.setDescription(['Triangles with the same |three_angles| can have |different_side_lengths|. Therefore knowing two triangles have the same three angles is |not sufficient to determine if they are congruent|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.65, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.55 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -111,7 +111,7 @@ export class QRAaa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri1.setScenario('qrLeftAaa');
     congruent._tri2.setScenario('qrRightAaa');
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-3.2, -1, 6, 2.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -139,15 +139,15 @@ export class QRSas extends PopupBoxCollection {
       two_sides_of_the_same_length: highlight(colors.qrCongruent_sides),
       three_angles: highlight(colors.qrCongruent_angles),
     };
-    this.setTitle('Side Angle Side Triangle Congruency Test');
+    this.setTitle('SAS Congruency');
     this.setDescription([
       'If two triangles share |two_sides_of_the_same_length|, and the |angle_between| those two sides is also the same on both triangles, then the triangles |are congruent|. This case is often called the |Side Angle Side| case.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -161,7 +161,7 @@ export class QRSas extends PopupBoxCollection {
     congruent._tri2._side01.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -188,15 +188,15 @@ export class QRSsa extends PopupBoxCollection {
     const modifiers = {
       angle_a: highlightWord('angle (a)', colors.qrCongruent_angles),
     };
-    this.setTitle('Side Side Angle Triangle Congruency Test');
+    this.setTitle('SSA Congruency');
     this.setDescription([
       'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|. This case is often called the |Side Side Angle| case.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -210,7 +210,7 @@ export class QRSsa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -238,16 +238,16 @@ export class QRAsa extends PopupBoxCollection {
       two_angles: highlight(colors.qrCongruent_angles),
       side_between: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('Angle Side Angle Triangle Congruency Test');
+    this.setTitle('ASA Congruency');
     this.setDescription([
       'If two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
       'This case is often called the |Angle Side Angle| case.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -261,7 +261,7 @@ export class QRAsa extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._side01.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -289,15 +289,15 @@ export class QRAas extends PopupBoxCollection {
       two_angles: highlight(colors.qrCongruent_angles),
       side_not_between: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('Angle Angle Side Triangle Congruency Test');
+    this.setTitle('AAS Congruency');
     this.setDescription([
       'If two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|. This case is often called the |Angle Angle Side| case.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -311,7 +311,7 @@ export class QRAas extends PopupBoxCollection {
     congruent._tri2._side20.hide();
     congruent._tri2._side12.hide();
     congruent._tri2._angle0.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.95, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
@@ -339,15 +339,15 @@ export class QRSss extends PopupBoxCollection {
     const modifiers = {
       side_lengths: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('Side Side Side Triangle Congruency Test');
+    this.setTitle('SSS Congruency');
     this.setDescription([
       'If two triangles share the same |side_lengths|, then they will be |congruent|. This case is often called the |Side Side Side| case.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const congruent = collection._congruentTriangles;
@@ -361,12 +361,12 @@ export class QRSss extends PopupBoxCollection {
     congruent._tri2._angle0.hide();
     congruent._tri2._angle1.hide();
     congruent._tri2._angle2.hide();
-    this.transformToQRWindow(collection, new Rect(-2, -1.5, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.8, -0.8, 3.6, 1.9));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   CongruentTriangles: QRCongruentTriangles,
   Aaa: QRAaa,
   Sas: QRSas,

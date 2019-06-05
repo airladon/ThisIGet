@@ -226,13 +226,15 @@ module.exports = (env) => {
           use: [
             'html-loader',
             // 'markdown-loader',
-            
             {
               loader: path.resolve('/opt/app/math-loader.js'),
             },
             {
               loader: 'markdown-loader',
-            }
+            },
+            {
+              loader: path.resolve('/opt/app/link-loader.js'),
+            },
           ],
         },
         {

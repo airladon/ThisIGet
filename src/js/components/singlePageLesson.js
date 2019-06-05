@@ -2,6 +2,9 @@
 import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLesson from '../Lesson/SimpleLesson';
+// import '../../css/singlePageLesson.scss';
+import StaticQR from './staticQR';
+import PresentationQR from './presentationQR';
 
 type Props = {
   lesson: SimpleLesson;
@@ -9,7 +12,48 @@ type Props = {
 
 type State = {
   content: Array<string | React.Element<'div'>>,
+  qr: React.Element<'div'> | React.Element<typeof StaticQR>,
 };
+
+function align(elementId: string, containerId: string, linkId: string) {
+  const element = document.getElementById(elementId);
+  const container = document.getElementById(containerId);
+  const link = document.getElementById(linkId);
+  if (element == null || container == null || link == null) {
+    return;
+  }
+  // element.classList.remove('lesson__hide');
+  const containerRect = container.getBoundingClientRect();
+  const linkRect = link.getBoundingClientRect();
+  const windowWidth = window.innerWidth;
+  if (windowWidth < containerRect.width) {
+    element.style.left = '20px';
+    return;
+  }
+  const linkLeft = linkRect.left - containerRect.left;
+  element.style.left = '0';
+  const newRect = element.getBoundingClientRect();
+  const proposedLeft = linkLeft + linkRect.width / 2 - newRect.width / 2;
+  const overFlow = containerRect.width - (proposedLeft + newRect.width);
+  element.style.float = '';
+  if (proposedLeft <= 20) {
+    element.style.left = '20px';
+  } else if (overFlow > 20) {
+    element.style.left = `${proposedLeft}px`;
+  } else {
+    element.style.left = '';
+    element.style.right = '20px';
+  }
+  const windowHeight = window.innerheight;
+  if (windowHeight < containerRect.height) {
+    element.style.top = '10px';
+    return;
+  }
+  const linkTop = linkRect.top - containerRect.top;
+  element.style.top = '0';
+  const proposedTop = linkTop + linkRect.height;
+  element.style.top = `${proposedTop}px`;
+}
 
 // let updates = 0;
 
@@ -35,6 +79,7 @@ export default class SinglePageLessonComponent extends React.Component
   lesson: SimpleLesson;
   key: number;
   contentChange: boolean;
+  afterUpdate: ?() => void;
 
   constructor(props: Props) {
     super(props);
@@ -43,7 +88,53 @@ export default class SinglePageLessonComponent extends React.Component
     this.contentChange = false;
     this.state = {
       content: [],
+      qr: <StaticQR content="Loading Reference" link="" title=""/>,
     };
+    this.afterUpdate = null;
+  }
+
+  showStaticQR(id: string, parameters: string) {
+    this.setState({ qr: window.quickReference[parameters] });
+    const presQR = document.getElementById('id_lesson__qr__pres_container');
+    if (presQR != null) {
+      presQR.classList.add('lesson__hide');
+    }
+    const element = document.getElementById('id_lesson__qr__static_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
+
+    align('id_lesson__qr__static_container', 'id_single_page_lesson__text_container', id);
+    this.afterUpdate = () => {
+      align('id_lesson__qr__static_container', 'lesson__content', id);
+    };
+  }
+
+  showPresQR(id: string, parameters: string) {
+    const container = document.getElementById('id_single_page_lesson__text_container');
+    if (container != null) {
+      const containerRect = container.getBoundingClientRect();
+      const width = Math.min(containerRect.width - 40, 600);
+      const doc = document.documentElement;
+      if (doc != null) {
+        doc.style.setProperty('--lesson__qr__content_width', `calc(${width}px - 1em)`);
+        doc.style.setProperty('--lesson__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
+      }
+    }
+    const staticQR = document.getElementById('id_lesson__qr__static_container');
+    if (staticQR != null) {
+      staticQR.classList.add('lesson__hide');
+    }
+    const element = document.getElementById('id_lesson__qr__pres_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
+    const path = parameters.split('/').slice(0, -1).join('/');
+    const qrid = parameters.split('/').slice(-1)[0];
+    this.lesson.content.showQR(path, qrid);
+    align('id_lesson__qr__pres_container', 'id_single_page_lesson__text_container', id);
+    this.lesson.content.qrDiagram.resize();
+    this.lesson.content.qrDiagram.animateNextFrame();
   }
 
   // shouldComponentUpdate() {
@@ -57,8 +148,22 @@ export default class SinglePageLessonComponent extends React.Component
   //   // Instantiate diagram now that the canvas elements have been
   //   // created.
   // }
+  // resizer() {
+  //   console.log('resiser')
+  //   // this.lesson.content.diagram.renderAllElementsToTiedCanvases(true);
+  //   // console.log(this.lesson.content.diagram.webglLow)
+  // }
 
   componentDidMount() {
+    window.lessonFunctions = {
+      qr: (id, parameters) => {
+        if (React.isValidElement(window.quickReference[parameters])) {
+          this.showStaticQR(id, parameters);
+        } else {
+          this.showPresQR(id, parameters);
+        }
+      },
+    };
     this.lesson.initialize();
     // this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
     // this.lesson.content.diagram.resize();
@@ -67,6 +172,7 @@ export default class SinglePageLessonComponent extends React.Component
       content: this.lesson.content.sections[0],
     });
     this.lesson.content.diagram.enableScrolling();
+    // window.addEventListener('resize', this.resizer.bind(this));
     // window.addEventListener('scroll', this.handleScroll.bind(this));
   }
 
@@ -79,7 +185,23 @@ export default class SinglePageLessonComponent extends React.Component
   //   this.lesson.content.diagram.animateNextFrame();
   // }
 
+  // eslint-disable-next-line class-methods-use-this
+  close() {
+    let element = document.getElementById('id_lesson__qr__content_static');
+    if (element != null) {
+      element.classList.add('lesson__hide');
+    }
+    element = document.getElementById('id_lesson__qr__content_pres');
+    if (element != null) {
+      element.classList.add('lesson__hide');
+    }
+  }
+
   componentDidUpdate() {
+    if (this.afterUpdate != null) {
+      this.afterUpdate();
+      this.afterUpdate = null;
+    }
     setOnClicks(this.lesson.content.modifiers);
     const d = this.lesson.content.diagram;
 
@@ -188,50 +310,57 @@ export default class SinglePageLessonComponent extends React.Component
   renderContent() {
     let output = '';
     this.state.content.forEach((element) => {
-      if (typeof element === 'string' && element.charAt(0) === '<') {
-        output += element.slice();
-        // output.push(<div key={this.key}
-        //   dangerouslySetInnerHTML={ {
-        //     __html: element.slice(0, element.length - 1),
-        //   } }>
-        //   </div>);
-      } else if (typeof element === 'string') {
+      // if (typeof element === 'string' && element.charAt(0) === '<') {
+      //   output += element.slice();
+      //   // output.push(<div key={this.key}
+      //   //   dangerouslySetInnerHTML={ {
+      //   //     __html: element.slice(0, element.length - 1),
+      //   //   } }>
+      //   //   </div>);
+      // } else if (typeof element === 'string') {
+      //   output += applyMDModifiers(element, this.lesson.content.modifiers);
+      //   // output.push(<div key={this.key}
+      //   //   dangerouslySetInnerHTML={ {
+      //   //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
+      //   //   } }>
+      //   // </div>);
+      // }
+
+      if (typeof element === 'string') {
         output += applyMDModifiers(element, this.lesson.content.modifiers);
-        // output.push(<div key={this.key}
-        //   dangerouslySetInnerHTML={ {
-        //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
-        //   } }>
-        // </div>);
       }
     });
     return <div
-      className="single_page_lesson__text_container"
-      dangerouslySetInnerHTML={ { __html: output } }>
+        id="id_single_page_lesson__text_container"
+        className="single_page_lesson__text_container"
+      >
+        <div
+          className="single_page_lesson__text_container_text"
+          dangerouslySetInnerHTML={ { __html: output } }
+        />
+        <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+                  {this.state.qr}
+        </div>
+        <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+          <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+        </div>
     </div>;
   }
 
   render() {
     return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
-    <canvas id="hidden_offscreen"></canvas>
+      {this.renderContent()}
+      <canvas id="hidden_offscreen"></canvas>
       <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
-        <canvas id="id_diagram__text__low" className='diagram__text'>
+        <canvas id="id_diagram__gl__offscreen" className="diagram__gl__offscreen">
+        </canvas>
+        <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">
         </canvas>
         <canvas id="id_diagram__gl__low" className='diagram__gl'>
         </canvas>
+        <canvas id="id_diagram__text__low" className='diagram__text'>
+        </canvas>
         <div id="id_diagram__html" className='diagram__html'>
-        </div>
-      </div>
-      {this.renderContent()}
-      <div id="single_page_lesson__qr__overlay" className="lesson__qr__overlay">
-        <div id="lesson__qr__container">
-          <div id="id_qr_diagram" className="diagram__container lesson__diagram">
-            <canvas id="id_qr_diagram__text" className='diagram__text'>
-            </canvas>
-            <canvas id="id_qr_diagram__gl" className='diagram__gl'>
-            </canvas>
-            <div id="id_diagram__html" className='diagram__html'>
-            </div>
-          </div>
         </div>
       </div>
     </div>;

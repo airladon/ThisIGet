@@ -1,15 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Parallel Line Distance',
   dependencies: [
     'PointLineDistance',
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
   uid: 'ParallelLineDistance',
 };
 
-module.exports = {
-  details,
-};
+module.exports = lessonDetails;

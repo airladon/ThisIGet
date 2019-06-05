@@ -8,6 +8,10 @@ const fs = require('fs');
 const sitePath = process.env.TIG_ADDRESS || 'http://host.docker.internal:5003';
 expect.extend({ toMatchImageSnapshot });
 
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 function contentSectionCount(contentPath) {
   // let fileName = testPath.split('/').slice(0, -1).join('/');
   // fileName = `${fileName}/${topicName}/content.js`;
@@ -76,8 +80,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
     },
     viewPort: {
       width: 600,
-      height: 400,
-      scrollTo: 180,
+      // height: 320,
+      // scrollTo: 200,
     },
     pages: {},
     prePath: '',
@@ -117,20 +121,28 @@ export default function tester(optionsOrScenario, ...scenarios) {
     test.each(allTests)(
       'From: %i, to: %s',
       async (fromPage, toPages, options) => {
-        jest.setTimeout(120000);
-
+        jest.setTimeout(180000);
         const fullpath =
           `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
         await page.goto(fullpath);
-
+        await page.evaluate(() => {
+          window.scrollTo(0, 0);
+        });
         await page.setViewport({
           width: options.viewPort.width,
-          height: options.viewPort.height,
+          height: options.viewPort.width / 2,
+        });
+        const lessonContainer = await page.$('#lesson__content');
+        const lessonBox = await lessonContainer.boundingBox();
+        const scrollTo = Math.floor(lessonBox.y);
+        await page.setViewport({
+          width: options.viewPort.width,
+          height: Math.floor(lessonBox.height),
         });
 
         await page.evaluate((y) => {
           window.scrollTo(0, y);
-        }, options.viewPort.scrollTo);
+        }, scrollTo);
 
         let currentPage = fromPage;
         const next = 'lesson__button-next';
@@ -164,13 +176,20 @@ export default function tester(optionsOrScenario, ...scenarios) {
           const qrLinks = await page.$$('.lesson__qr_action_word');
           let index = 0;
           // eslint-disable-next-line no-restricted-syntax
-          for (const link of qrLinks) {
+          for (const originalLink of qrLinks) {
+            // Need to reget element incase a react redraw has happened
+            const id = await (await originalLink.getProperty('id')).jsonValue();
+            const link = await page.$(`#${id}`);
             // eslint-disable-next-line no-await-in-loop
             await link.click();
             // eslint-disable-next-line no-await-in-loop
+            await page.mouse.move(0, 0);
+            // eslint-disable-next-line no-await-in-loop
+            await sleep(500);
+            // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
-            }, options.viewPort.scrollTo);
+            }, scrollTo);
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
@@ -180,10 +199,13 @@ export default function tester(optionsOrScenario, ...scenarios) {
             });
             index += 1;
             // eslint-disable-next-line no-await-in-loop
-            const closeButtons = await page.$$('.lesson__popup_box__close');
+            const closeButtons = await page.$$('.lesson__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
-              if ((await closeButton.boundingBox()).x > 0) {
+              // eslint-disable-next-line no-await-in-loop
+              const box = await closeButton.boundingBox();
+              if (box != null && box.x > 0) {
+                // eslint-disable-next-line no-await-in-loop
                 await closeButton.click();
                 break;
               }
@@ -191,7 +213,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
-            }, options.viewPort.scrollTo);
+            }, scrollTo);
           }
 
           while (currentPage.toString() !== targetPage.toString()) {

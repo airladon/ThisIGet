@@ -23,7 +23,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -32,7 +32,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'AdjacentAngles/base', 'RelatedAngles/base',
+      'Math/Geometry_1/AdjacentAngles/base',
+      'Math/Geometry_1/RelatedAngles/base',
     ]);
   }
 
@@ -128,8 +129,8 @@ class Content extends PresentationLessonContent {
         'To find the |relationship| between a triangle\'s |angles|, we can use  |supplementary_angles| and |alternate_angles|.',
       ]),
       modifiers: {
-        supplementary_angles: this.bindShowQR('AdjacentAngles/base', 'Supplementary', colors.diagram.action),
-        alternate_angles: this.bindShowQR('RelatedAngles/base', 'Alternate', colors.diagram.action),
+        supplementary_angles: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres', colors.diagram.action),
+        alternate_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.diagram.action),
       },
     });
 
@@ -251,7 +252,7 @@ class Content extends PresentationLessonContent {
         'When a line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.',
       ]),
       modifiers: {
-        alternate_angles: this.bindShowQR('RelatedAngles', 'Alternate', colors.angle1),
+        alternate_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.angle1),
         a: highlight(colors.angle1),
       },
       show: [
@@ -306,7 +307,7 @@ class Content extends PresentationLessonContent {
         'We can similarly identify the |alternate_angle| of |b|.',
       ]),
       modifiers: {
-        alternate_angle: this.bindShowQR('RelatedAngles', 'Alternate', colors.angle2),
+        alternate_angle: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.angle2),
         b: highlight(colors.angle2),
       },
       show: [
@@ -340,7 +341,7 @@ class Content extends PresentationLessonContent {
         'Around the triangle\'s top point, |a|, |b| and |c| form a straight angle and are therefore |supplementary_angles|.',
       ]),
       modifiers: {
-        supplementary_angles: this.bindShowQR('AdjacentAngles', 'Supplementary', colors.diagram.action),
+        supplementary_angles: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres', colors.diagram.action),
         a: highlight(colors.angle1),
         b: highlight(colors.angle2),
         c: highlight(colors.angle3),

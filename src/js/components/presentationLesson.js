@@ -1,11 +1,15 @@
 // @flow
-
+// import Fig from 'figureone';
 import * as React from 'react';
 import PresentationLesson from '../Lesson/PresentationLesson';
 import Button from './button';
 import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
+import PresentationQR from './presentationQR';
+import StaticQR from './staticQR';
+// import '../../css/presentationLesson.scss';
 
+// const { DiagramElementCollection } = Fig;
 
 type Props = {
   lesson: PresentationLesson;
@@ -20,8 +24,12 @@ type State = {
     link?: Function | string;
     active?: boolean;
   }>;
+  qr: React.Element<'div'> | React.Element<typeof StaticQR>,
+  presQR: {
+    title: string;
+    link: string;
+  },
 };
-
 
 export default class PresentationLessonComponent extends React.Component
                                     <Props, State> {
@@ -46,6 +54,11 @@ export default class PresentationLessonComponent extends React.Component
       numPages: 0,
       page: 0,
       listOfSections: [],
+      qr: <StaticQR content="Loading Reference" link="" title=""/>,
+      presQR: {
+        title: '',
+        link: '',
+      },
     };
     this.key = 0;
     this.lesson.refresh = this.refreshText.bind(this);
@@ -117,11 +130,72 @@ export default class PresentationLessonComponent extends React.Component
     }
   }
 
+  // eslint-disable-next-line class-methods-use-this
+  setCSSVariables(elementId: string) {
+    const container = document.getElementById('lesson__content_diagram');
+    if (container != null) {
+      const containerRect = container.getBoundingClientRect();
+      const width = Math.min(containerRect.width * 0.7, 600);
+      const doc = document.documentElement;
+      if (doc != null) {
+        doc.style.setProperty('--lesson__qr__content_width', `${width}px`);
+        doc.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+      }
+    }
+
+    const diagramHTML = document.getElementById('id_diagram__html');
+    const element = document.getElementById(elementId);
+    if (diagramHTML != null && element != null) {
+      const diagramFontSize = parseFloat(diagramHTML.style.fontSize);
+      const bodyFontSize = parseFloat(window.getComputedStyle(document.body).fontSize);
+      element.style.fontSize = `${Math.min(diagramFontSize, bodyFontSize)}px`;
+    }
+  }
+
+  showStaticQR(id: string, parameters: string) {
+    const presQR = document.getElementById('id_lesson__qr__pres_container');
+    if (presQR != null) {
+      presQR.classList.add('lesson__hide');
+    }
+    this.setState({ qr: window.quickReference[parameters] });
+    this.setCSSVariables('id_lesson__qr__static_container');
+    const element = document.getElementById('id_lesson__qr__static_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
+  }
+
+  showPresQR(id: string, parameters: string) {
+    const staticQR = document.getElementById('id_lesson__qr__static_container');
+    if (staticQR != null) {
+      staticQR.classList.add('lesson__hide');
+    }
+    this.setCSSVariables('id_lesson__qr__pres_container');
+    const path = parameters.split('/').slice(0, -1).join('/');
+    const qrid = parameters.split('/').slice(-1)[0];
+    this.lesson.content.showQR(path, qrid);
+    const element = document.getElementById('id_lesson__qr__pres_container');
+    if (element != null) {
+      element.classList.remove('lesson__hide');
+    }
+    this.lesson.content.qrDiagram.resize();
+    this.lesson.content.qrDiagram.animateNextFrame();
+  }
+
   componentDidMount() {
     this.resize();
     window.addEventListener('resize', this.resize.bind(this));
     // Instantiate diagram now that the canvas elements have been
     // created.
+    window.lessonFunctions = {
+      qr: (id, parameters) => {
+        if (React.isValidElement(window.quickReference[parameters])) {
+          this.showStaticQR(id, parameters);
+        } else {
+          this.showPresQR(id, parameters);
+        }
+      },
+    };
     this.lesson.initialize();
     this.lesson.content.diagram.resize();
     this.setState({
@@ -129,7 +203,7 @@ export default class PresentationLessonComponent extends React.Component
       numPages: this.lesson.content.sections.length,
     });
 
-    if (this.firstPage != null) {
+    if (this.firstPage != null && this.firstPage < this.lesson.content.sections.length) {
       this.lesson.goToSection(this.firstPage);
     } else {
       this.lesson.goToSection(0);
@@ -341,26 +415,24 @@ export default class PresentationLessonComponent extends React.Component
                 </canvas>
                 <div id="id_diagram__html" className='diagram__html'>
                   {this.renderContent(this.state.htmlText)}
+                  <div className="diagram__text_measure" id={`${this.lesson.content.diagramHtmlId}_measure`}>
+                    {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
+                  </div>
+                </div>
+                <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+                  {this.state.qr}
+                </div>
+                <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+                  <PresentationQR
+                    id="id_lesson__qr__content_pres__overlay"
+                    onClose={this.lesson.content.prepareToHideQR.bind(this.lesson.content)}
+                  />
                 </div>
               </div>
               {this.addGoToButton()}
               {this.addNextButton()}
               {this.addInfoButton()}
               {this.addInteractiveElementButton()}
-              {
-              <div id="presentation_lesson__qr__overlay" className="lesson__qr__overlay">
-                <div id="lesson__qr__container">
-                  <div id="id_qr_diagram" className="diagram__container lesson__diagram">
-                    <canvas id="id_qr_diagram__text" className='diagram__text'>
-                    </canvas>
-                    <canvas id="id_qr_diagram__gl" className='diagram__gl'>
-                    </canvas>
-                    <div id="id_diagram__html" className='diagram__html'>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              }
         </div>
       </div>
     </div>;

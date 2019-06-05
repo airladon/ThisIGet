@@ -1,17 +1,19 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'base',
   topic: 'quickReference',
-  type: 'presentation',
+  type: 'singlePage',
   references: [
-    'Main',
-    'Pythagorus',
+    'DefinitionPres',
+    'PythagorusPres',
+    'AreaPres',
     'Area',
+    'Pythagorus',
+    'Definition',
+    'Hypotenuse',
   ],
 };
 
-module.exports = {
-  details,
-};
+module.exports = version;

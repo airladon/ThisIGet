@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -66,22 +66,22 @@ export default class QRPointLineDistance extends PopupBoxCollection {
     };
     this.setTitle('Point Line Distance');
     this.setDescription('The distance between a |point| and a |line| is the |shortest distance|. When the |point_| is closest to a |line_end|, then the distance is between the |point_and_line_end|. When the |point__| is |not closest| to a line end, then the shortest distance is the |perpendicular_line| between |point___| and |line_|. ', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.5, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const coll = this._collection;
     const fig = coll._fig;
     fig.setScenario('low');
     collection.showAll();
-    this.transformToQRWindow(collection, new Rect(-2, -1.3, 4, 2));
+    this.transformToQRWindow(collection, new Rect(-2, -1.1, 4, 2));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRPointLineDistance,
 });

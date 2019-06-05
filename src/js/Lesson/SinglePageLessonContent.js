@@ -3,12 +3,16 @@ import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from './SimpleLessonContent';
 
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
+
+const { click } = Fig.tools.html;
+
 const {
   Rect, DiagramElement,
 } = Fig;
-const {
-  generateUniqueId,
-} = Fig.tools.misc;
+// const {
+//   generateUniqueId,
+// } = Fig.tools.misc;
 
 class SinglePageLessonContent extends SimpleLessonContent {
   // $FlowFixMe
@@ -44,39 +48,49 @@ class SinglePageLessonContent extends SimpleLessonContent {
   setDiagram(diagramHtmlId: string) {
   }
 
-  // setTitle() {
-  //   this.title = '';
-  // }
-
-  // // eslint-disable-next-line class-methods-use-this, no-unused-vars
-  // setContent() {
-  // }
+  // eslint-disable-next-line class-methods-use-this
+  qr(
+    link: string,
+    colorOrOptions: Array<number> | {
+      color?: ?Array<number>,
+      interactive?: boolean,
+      id?: string,
+      classes?: string,
+      text?: ?string,
+    } = {},
+    // color: Array<number> = this.diagram.layout.colors.diagram.action,
+  ) {
+    const defaultOptions = {
+      color: [1, 0, 0, 1],
+      classes: 'lesson__qr_action_word',
+      id: generateUniqueId(),
+    };
+    let options = defaultOptions;
+    if (Array.isArray(colorOrOptions)) {
+      options.color = colorOrOptions;
+    } else {
+      options = joinObjects({}, defaultOptions, colorOrOptions);
+      options.classes = `lesson__qr_action_word ${options.classes}`;
+    }
+    return click(window.lessonFunctions.qr, [window.lessonFunctions, options.id, link], options);
+  }
 
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
-    // console.log('preparing to show QR')
-    const overlay = document.getElementById('single_page_lesson__qr__overlay');
-    if (overlay != null) {
-      overlay.style.zIndex = '10';
-    }
-    // console.log()
   }
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
-    // this.qrDiagram.container.style.zIndex = '-1';
-    const overlay = document.getElementById('single_page_lesson__qr__overlay');
-    if (overlay != null) {
-      overlay.style.zIndex = '-1';
-    }
   }
 }
+
 
 function makeFig(
   id: string = `id_figure__${generateUniqueId()}`,
   elements: DiagramElement | Array<DiagramElement>,
   scale: string = 'fit',
   limits: Rect | null = null,
+  width: number = 300,
 ) {
   let elementsToUse;
   if (Array.isArray(elements)) {
@@ -94,7 +108,11 @@ function makeFig(
       element.tieToHTML.window = limits;
     }
   });
-  return `<div id="${id}" class="single_page_lesson__figure"><img  class="single_page_lesson__figure_image" id="${id}_webgl"></img><img class="single_page_lesson__figure_image" id="${id}_2d"></img></div>`;
+  let aspectRatio = 1;
+  if (limits != null) {
+    aspectRatio = limits.height / limits.width;
+  }
+  return `<div id="${id}" class="single_page_lesson__figure_container" style="width:${width}px"><div class="single_page_lesson__figure" style="padding-top:${aspectRatio * 100}%"><img  class="single_page_lesson__figure_image" id="${id}_webgl"></img><img class="single_page_lesson__figure_image" id="${id}_2d"></img></div></div>`;
 }
 
 export { SinglePageLessonContent, makeFig };

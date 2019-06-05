@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'presentation',
   topic: 'boilerplate',
   title: 'Version_title_here',
@@ -10,6 +10,4 @@ var details = {
   type: 'generic',
 };
 
-module.exports = {
-  details,
-};
+module.exports = version;

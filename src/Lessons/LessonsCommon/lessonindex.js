@@ -15,20 +15,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Complementary',
-              'Supplementary',
-              'Explementary',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -60,18 +56,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -103,20 +97,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Area',
-              'Square',
-              'Rectangle',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -162,18 +152,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -213,18 +201,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -264,22 +250,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Diameter',
-              'Radius',
-              'Circumference',
-              'Circle',
-              'Pi',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -319,24 +299,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Asa',
-              'Sss',
-              'Sas',
-              'Aas',
-              'Aaa',
-              'Ssa',
-              'CongruentTriangles',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -376,18 +348,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -419,18 +389,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -462,18 +430,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -513,23 +479,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Acute',
-              'Right',
-              'Obtuse',
-              'Straight',
-              'Reflex',
-              'Full',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -560,12 +519,6 @@ export default function getLessonIndex() {
             description: 'Presentation form - interactive.',
             fullLesson: true,
           },
-          simple: {
-            type: 'singlePage',
-            title: 'Simple',
-            description: 'Not interactive.',
-            fullLesson: true,
-          },
           singlePage: {
             type: 'singlePage',
             title: 'Initial - Single Page',
@@ -573,18 +526,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Abstraction',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -607,19 +558,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-              'SplitLine',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -659,18 +607,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -702,18 +648,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -753,18 +697,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -796,18 +738,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -847,18 +787,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -898,19 +836,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Rectangle',
-              'Square',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -943,21 +878,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Opposite',
-              'Alternate',
-              'Corresponding',
-              'Interior',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -1011,20 +941,16 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-              'Pythagorus',
-              'Area',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -1064,18 +990,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },
@@ -1180,18 +1104,16 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        quickReference: {
-          base: {
-            type: 'presentation',
-            references: [
-              'Main',
-            ],
-          },
-        },
         dev: {
           base: {
             type: 'presentation',
             title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
             description: '',
             fullLesson: false,
           },

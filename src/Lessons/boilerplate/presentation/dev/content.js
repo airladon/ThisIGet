@@ -12,13 +12,13 @@ import '../common/style.scss';
 const { click } = Fig.tools.html;
 const layout = lessonLayout();
 
-const { uid } = details.details;
-const vid = version.details.uid;
-const qrids = version.details.qr;
+const { uid } = details;
+const vid = version.uid;
+const qrids = version.qr;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }

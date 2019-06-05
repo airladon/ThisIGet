@@ -1,3 +1,14 @@
+@import './style.scss';
+
+// #single-page-lesson #lesson__content_diagram {
+//   position: absolute;
+//   width: 100%;
+//   height: 150%;
+//   left: 0;
+//   top: 0;
+//   margin-left: 0;
+// }
+
 .single_page_lesson__container {
   // padding: 20px;
   // margin-left: 20px;
@@ -64,22 +75,38 @@
 }
 
 .single_page_lesson__text_container {
-  position: static;
+  position: relative;
   background-color: color('white', 'lightest');
   padding: 20px;
   margin-left: 20px;
   margin-right: 20px;
 }
 
-.single_page_lesson__container .lesson__diagram {
+.single_page_lesson__text_container_text {
+  position: static;
+}
+
+.single_page_lesson__container #lesson__content_diagram {
   max-width: none;
   max-height: none;
   background-color: transparent;
 }
 
-.single_page_lesson__figure {
+.single_page_lesson__figure_container {
   position: relative;
   overflow: hidden;
+  height: auto;
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.single_page_lesson__figure {
+  // position: relative;
+  // overflow: hidden;
+  height: 0;
+  width: 100%;
+  padding-top: 50%;
 }
 
 .single_page_lesson__figure_image {
@@ -129,16 +156,3 @@
   width: 100%;
   height: 100%;
 }
-
-// #single_page_lesson__qr__overlay .lesson__popup_box__text {
-//   // font-size: calc(var(--lesson__diagram-font-size) * 0.7);
-//   font-size: var(--lesson__popup_font_size);
-// }
-
-// #single_page_lesson__qr__overlay .lesson__popup_box__title_text {
-//   font-size: var(--lesson__popup_font_size);
-// }
-
-// #single_page_lesson__qr__overlay .lesson__popup_box__link {
-//   font-size: var(--lesson__popup_font_size);
-// }

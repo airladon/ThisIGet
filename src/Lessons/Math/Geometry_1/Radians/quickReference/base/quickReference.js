@@ -9,8 +9,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -47,13 +47,14 @@ export default class QRBoilerplate extends PopupBoxCollection {
       'A |radian| is the |angle| where the |arc_length| equals the |radius|.',
       'There are |2π| radians in a circle.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const circle = collection._circle;
     circle._line1.showAll();
@@ -73,6 +74,6 @@ export default class QRBoilerplate extends PopupBoxCollection {
 }
 
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRBoilerplate,
 });

@@ -24,7 +24,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -177,6 +177,7 @@ class Content extends PresentationLessonContent {
       show: [right],
     });
     this.addSection({
+      title: 'Perpendicular Lines',
       setContent: [
         'When two lines are at right angles to each other, they are often given the special name |perpendicular| lines.',
         `${new Definition('Perpendicular', 'Latin', ['perpendicularis', 'MEANING', '', 'vertical, as a plumb line']).html({ color: colors.diagram.highlight, id: 'id_acute_def' })}`,

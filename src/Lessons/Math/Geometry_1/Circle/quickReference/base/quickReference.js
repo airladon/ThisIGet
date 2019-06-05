@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -43,13 +43,14 @@ export class QRDiameter extends PopupBoxCollection {
       'A circle\'s |__diameter__| is any line that extends the width of the circle while crossing through the |__center__|.',
       'The |__diameter___| is twice the |__radius__| and can be multiplied by |π| to get the |__circumference__| length.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._center.show();
     circle._line.show();
     circle._diameter.showAll();
@@ -58,7 +59,7 @@ export class QRDiameter extends PopupBoxCollection {
     this._collection._eqnDiameterRadius.setScenario('qr');
     this._collection._eqnDiameterCircumference.showForm('base');
     this._collection._eqnDiameterCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.5, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -91,13 +92,14 @@ export class QRRadius extends PopupBoxCollection {
       'A circle\'s |__radius__| is any line that extends from the circle |__center__| to the |__edge__|.',
       'The |__radius___| is half the |__diameter__| and can be multiplied by |2π| to get the |__circumference__| length.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._center.show();
     circle._line.show();
     circle._radius.showAll();
@@ -106,7 +108,7 @@ export class QRRadius extends PopupBoxCollection {
     this._collection._eqnRadiusDiameter.setScenario('qr');
     this._collection._eqnRadiusCircumference.showForm('base');
     this._collection._eqnRadiusCircumference.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -135,19 +137,20 @@ export class QRCircumference extends PopupBoxCollection {
       'A circle\'s |__circumference__| or |perimeter| is the outside edge of the circle.',
       'The |__circumference___| has a ratio with the |__diameter__| of |π|, and ratio with the |__radius__| of |2π|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._line.show();
     this._collection._eqnCircumferenceRadius.showForm('base');
     this._collection._eqnCircumferenceRadius.setScenario('qr');
     this._collection._eqnCircumferenceDiameter.showForm('base');
     this._collection._eqnCircumferenceDiameter.setScenario('qr');
-    this.transformToQRWindow(this._collection, new Rect(-1.25, -1.9, 2.5, 3));
+    this.transformToQRWindow(this._collection, new Rect(-1.4, -2.1, 2.5, 3.4));
   }
 }
 
@@ -169,13 +172,14 @@ export class QRCircle extends PopupBoxCollection {
     this.setDescription([
       'A circle is a shape whose |__outside_edge__| is a constant distance from its |__center__|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._line.show();
     circle._center.show();
     this.transformToQRWindow(this._collection, new Rect(-1.25, -1.25, 2.5, 2.5));
@@ -202,13 +206,14 @@ export class QRPi extends PopupBoxCollection {
       'The symbol |π|, pronounced |pi|, represents an irrational number that is approximately |3.1415926535|.',
       'In other words, if you multiply the diameter by π, then you get the length of the circumference.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.4 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const circle = this._collection._circle;
+    this._collection.hideAll();
     circle._diameter.showAll();
     circle._line.show();
     // circle._center.show();
@@ -216,7 +221,7 @@ export class QRPi extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Diameter: QRDiameter,
   Radius: QRRadius,
   Circumference: QRCircumference,

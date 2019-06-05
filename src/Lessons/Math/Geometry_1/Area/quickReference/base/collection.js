@@ -71,6 +71,10 @@ export default class QRCollection extends CommonDiagramCollection {
     _labelB2: DiagramElementPrimative;
   } & DiagramElementCollection;
 
+  _areaSquare: Equation;
+  _areaCircle: Equation;
+  _areaTriangle: Equation;
+
   _eqn: Equation;
 
   constructor(

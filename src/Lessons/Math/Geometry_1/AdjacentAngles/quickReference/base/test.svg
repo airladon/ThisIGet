@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <pattern id="pattern-0" x="0" y="0" width="25" height="25" patternUnits="userSpaceOnUse" viewBox="0 0 100 100">
+      <rect x="0" y="0" width="50" height="100" style="fill: black;"/>
+    </pattern>
+  </defs>
+  <polyline style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); stroke-width: 4px; fill-opacity: 0;" points="394.818 377.147 79.484 377.147 79.484 59.962"/>
+  <line style="stroke: rgb(0, 0, 0); stroke-width: 4px;" x1="79.408" y1="376.121" x2="340.505" y2="196.761"/>
+  <path d="M 751.401 337.575 L 733.383 393.028 L 675.077 393.028 L 657.059 337.575 L 704.23 303.304 Z M 658.235 337.957 L 675.803 392.028 L 732.657 392.028 L 750.225 337.957 L 704.23 304.54 Z" style="fill: none;" transform="matrix(0.998073, -0.062044, 0.062044, 0.998073, -522.061791, -150.828802)"/>
+  <path d="M 751.401 337.575 L 733.383 393.028 L 675.077 393.028 L 657.059 337.575 L 704.23 303.304 Z M 658.235 337.957 L 675.803 392.028 L 732.657 392.028 L 750.225 337.957 L 704.23 304.54 Z" style="fill: none;" transform="matrix(0.998073, -0.062044, 0.062044, 0.998073, -522.061791, -150.828802)"/>
+  <path d="M 751.401 337.575 L 733.383 393.028 L 675.077 393.028 L 657.059 337.575 L 704.23 303.304 Z M 658.235 337.957 L 675.803 392.028 L 732.657 392.028 L 750.225 337.957 L 704.23 304.54 Z" style="fill: none;" transform="matrix(0.998073, -0.062044, 0.062044, 0.998073, -522.061791, -150.828802)"/>
+  <path style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0); fill-opacity: 0;" d="M 79.04 281.687 C 132.236 281.687 175.263 324.993 174.918 378.188"/>
+  <text style="fill: rgb(251, 3, 3); font-size: 24px; stroke: rgb(218, 85, 85); stroke-opacity: 0; white-space: pre;" x="174.271" y="435.693">a + b = 90º</text>
+</svg>

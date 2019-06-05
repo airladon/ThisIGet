@@ -25,7 +25,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -34,8 +34,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Triangles',
-      'AdjacentAngles',
+      'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/AdjacentAngles/base',
     ]);
   }
 
@@ -121,7 +121,7 @@ class Content extends PresentationLessonContent {
         'As a triangle\'s |internal_angles| add up to 180º, we can put |c| in terms of |a| and |b|.',
       ],
       modifiers: {
-        internal_angles: this.bindShowQR('Triangles/base', 'Main'),
+        internal_angles: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
         c: highlight(colors.angles),
         a: highlight(colors.angles),
         b: highlight(colors.angles),
@@ -158,7 +158,7 @@ class Content extends PresentationLessonContent {
         'Now |c| and |_e| are |supplementary| angles, so we can calculate |e|.',
       ],
       modifiers: {
-        supplementary: this.bindShowQR('AdjacentAngles/base', 'Supplementary'),
+        supplementary: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres'),
         c: highlight(colors.angles),
         _e: highlight(colors.externalAngle),
         e: highlight(colors.externalAngle),

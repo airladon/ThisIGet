@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -37,13 +37,14 @@ export default class QRCircleArea extends PopupBoxCollection {
     const modifiers = { radius: highlight(layout.colors.radius) };
     this.setTitle('Circle Area');
     this.setDescription('|Circle area| is the product of |π| and the |radius| squared.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.7 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     const fig = coll._fig;
     const polyMost = fig._polyMost;
     const circle = fig._circle;
@@ -54,11 +55,11 @@ export default class QRCircleArea extends PopupBoxCollection {
     eqn.showForm('14');
     polyMost._radius.setScenario('circle');
     polyMost._radius.updateLabel(polyMost._radius.getRotation() + polyMost.getRotation());
-    this.transformToQRWindow(coll, new Rect(-1.6, -1.4, 3.2, 2.4));
+    this.transformToQRWindow(coll, new Rect(-1.6, -1.1, 3.2, 2.2));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRCircleArea,
 });

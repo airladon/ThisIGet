@@ -13,11 +13,11 @@ const path = window.location.pathname.split('/');
 const [lessonUID] = path.slice(-3, -2);
 const [versionUID] = path.slice(-1);
 
-const qrids = version.details.references;
+const qrids = version.references;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -25,7 +25,7 @@ class Content extends PresentationLessonContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.loadQRs([
-      `${lessonUID}/${versionUID}`,
+      `${details.path}/${lessonUID}/${versionUID}`,
     ]);
   }
 
@@ -42,7 +42,7 @@ class Content extends PresentationLessonContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = this.bindShowQR(lessonUID, qrid);
+          out[qrid] = this.qr(`${details.path}/${lessonUID}/${versionUID}/${qrid}`);
         });
         return out;
       },

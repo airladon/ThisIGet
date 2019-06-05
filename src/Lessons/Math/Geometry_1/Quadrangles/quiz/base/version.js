@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'base',
   topic: 'quiz',
   title: 'Base',
@@ -10,6 +10,4 @@ var details = {
   type: 'presentation',
 };
 
-module.exports = {
-  details,
-};
+module.exports = version;

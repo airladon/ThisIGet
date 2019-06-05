@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -32,7 +32,7 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -51,20 +51,20 @@ export default class QRParallelLineDistance extends PopupBoxCollection {
     this.setDescription([
       'The distance between |parallel_lines| is the length of a |line_perpendicular| to both lines, and is |constant| everywhere along the lines.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
 
     coll.showAll();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -1.1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRParallelLineDistance,
 });

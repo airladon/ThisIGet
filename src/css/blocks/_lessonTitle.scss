@@ -26,6 +26,8 @@ $title-width: 350px;
 .lesson__title_container {
   padding-top: 1em;
   padding-bottom: 1em;
+  padding-left: 1em;
+  padding-right: 1em;
   width: 100%;
   // position: absolute;
   // left: calc(50% - #{$title-width} / 2);
@@ -52,7 +54,8 @@ $title-width: 350px;
 }
 
 .lesson__title_img_container {
-  display: tabel-cell;
+  display: table-cell;
+  vertical-align: middle;
 }
 
 .lesson__title_image {
@@ -64,22 +67,25 @@ $title-width: 350px;
 .lesson__title_text_container {
   display: table-cell;
   height: 100%;
+  vertical-align: middle;
 }
 
 .lesson__title_text {
   display: table-cell;
-  vertical-align: middle;
   font-size: 26px;
   font-weight: 200;
   padding-left: 10px;
   color: color('grey', 'base');
+  text-align: left;
+}
+
+@media screen and (max-width: 400px) {
+  .lesson__title_text {
+    font-size: 20px;
+  }
 }
 
 @media screen and (min-width: $tablet) {
-  // .lesson__title_container {
-  //   top: calc(var(--lesson__title_space) / 2 - #{$title-height} / 2);
-  // }
-
   .lesson__title_text {
     font-size: 30px;
   }

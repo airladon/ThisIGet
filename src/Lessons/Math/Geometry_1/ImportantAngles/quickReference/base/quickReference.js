@@ -1,4 +1,5 @@
 // @flow
+import React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -7,9 +8,11 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import perpendicular from './perpendicular.md';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -44,13 +47,14 @@ export class QRAcute extends PopupBoxCollection {
     this.setDescription([
       centerH('An |acute_angle| is any angle |less_than_90|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -62,7 +66,7 @@ export class QRAcute extends PopupBoxCollection {
     fig._acute.showAll();
     fig._line1.move.maxTransform.updateRotation(Math.PI / 2 * 0.98);
     fig._line1.move.minTransform.updateRotation(0);
-    this.transformToQRWindow(collection, new Rect(-0.6, 0.2, 2, 1.6));
+    this.transformToQRWindow(collection, new Rect(-0.6, 0.5, 2, 1.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -74,42 +78,35 @@ export class QRRight extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
-      right_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
-      angle_mark: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
-      _90: highlightWord('90º', layout.colors.qrImportantAngles_angle),
+      right_angle: click(coll.pulseAngle, [coll], this.layout.colors.qrImportantAngles_angle),
+      angle_mark: click(coll.pulseAngle, [coll], this.layout.colors.qrImportantAngles_angle),
+      _90: highlightWord('90º', this.layout.colors.qrImportantAngles_angle),
     };
     this.setTitle('Right Angle');
     this.setDescription([
-      centerH([
-        'A |right_angle| is an angle of |_90|. Two lines that form a right angle are called |perpendicular| lines. The |angle_mark| is often shown as a square instead of an arc.',
-      ]),
+      'A |right_angle| is an angle of |_90|. Two lines that form a right angle are called |perpendicular| lines. The |angle_mark| is often shown as a square instead of an arc.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.6 });
     super.show();
     const collection = this._collection;
-    collection.show();
+    // collection.show();
+    collection.hideAll();
     const fig = collection._fig;
     fig.setScenario('qr');
+    fig.hideAll();
     fig._line1.showAll();
     fig._line2.showAll();
     fig._angle.showAll();
     fig._line1.setRotation(Math.PI / 2);
-    this.transformToQRWindow(collection, new Rect(-0.6, 0.2, 2, 1.6));
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
+    this.transformToQRWindow(collection, new Rect(-0.6, 0.3, 2, 1.6));
     this.diagram.animateNextFrame();
   }
 }
@@ -139,13 +136,14 @@ export class QRObtuse extends PopupBoxCollection {
     this.setDescription([
       centerH('An |obtuse_angle| is any angle |between_90_and_180|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', xSize: 0, ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -157,7 +155,7 @@ export class QRObtuse extends PopupBoxCollection {
     fig._obtuse.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI / 2 * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 0.98);
-    this.transformToQRWindow(collection, new Rect(-1.2, -0.2, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.2, 0.6, 2.5, 1.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -177,7 +175,7 @@ export class QRStraight extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
       straight_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
@@ -189,7 +187,7 @@ export class QRStraight extends PopupBoxCollection {
         'A |straight_angle| is an angle of |_180|.',
       ]),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   makeStraightAngle() {
@@ -198,9 +196,10 @@ export class QRStraight extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -209,7 +208,7 @@ export class QRStraight extends PopupBoxCollection {
     fig._angle.showAll();
     fig._angle.autoRightAngle = false;
     fig._line1.setRotation(Math.PI);
-    this.transformToQRWindow(collection, new Rect(-1.5, -0.2, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.5, 0.5, 3, 1.2));
     this.diagram.animateNextFrame();
   }
 }
@@ -239,13 +238,14 @@ export class QRReflex extends PopupBoxCollection {
     this.setDescription([
       centerH('An |reflex_angle| is any angle |between_180_and_360|.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', xSize: 0, ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -257,7 +257,7 @@ export class QRReflex extends PopupBoxCollection {
     fig._reflex.showAll();
     fig._line1.move.minTransform.updateRotation(Math.PI * 1.02);
     fig._line1.move.maxTransform.updateRotation(Math.PI * 1.98);
-    this.transformToQRWindow(collection, new Rect(-1.2, -1, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.5, -0.5, 3, 1.7));
     this.diagram.animateNextFrame();
   }
 }
@@ -277,7 +277,7 @@ export class QRFull extends PopupBoxCollection {
       'collection',
       CommonCollection,
     );
-    this.hasTouchableElements = true;
+    // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
       full_angle: click(coll.pulseAngle, [coll], layout.colors.qrImportantAngles_angle),
@@ -289,7 +289,7 @@ export class QRFull extends PopupBoxCollection {
         'A |full_angle| is an angle of |_360|.',
       ]),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   makeFullAngle() {
@@ -298,9 +298,10 @@ export class QRFull extends PopupBoxCollection {
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
+    collection.hideAll();
     collection.show();
     const fig = collection._fig;
     fig.setScenario('qr');
@@ -309,17 +310,22 @@ export class QRFull extends PopupBoxCollection {
     fig._angle.showAll();
     fig._angle.autoRightAngle = false;
     fig._line1.setRotation(Math.PI * 1.999);
-    this.transformToQRWindow(collection, new Rect(-1.2, -0.6, 3, 2));
+    this.transformToQRWindow(collection, new Rect(-1.2, 0, 3, 1.7));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Acute: QRAcute,
   Obtuse: QRObtuse,
   Reflex: QRReflex,
   Right: QRRight,
   Straight: QRStraight,
   Full: QRFull,
+  Perpendicular: <StaticQR
+    title="Perpendicular Lines"
+    content={perpendicular}
+    link={`${details.path}/${details.uid}/explanation/base?page=2`}
+  />,
 });
 

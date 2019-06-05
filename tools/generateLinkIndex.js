@@ -17,8 +17,8 @@ function createIndexList() {
     if (fs.existsSync(versionFile)) {
       // eslint-disable-next-line global-require, import/no-dynamic-require
       const version = require(`${versionFile}`);
-      if (version.details.links != null) {
-        version.details.links.forEach((link) => {
+      if (version.links != null) {
+        version.links.forEach((link) => {
           /* eslint-disable no-param-reassign */
           link.lessonPath = `/${lessonPath}`;
           link.lessonUID = lessonUID;
@@ -28,8 +28,8 @@ function createIndexList() {
           /* eslint-enable */
         });
       }
-      if (version.details.links != null) {
-        links = [...links, ...version.details.links];
+      if (version.links != null) {
+        links = [...links, ...version.links];
       }
     }
   });

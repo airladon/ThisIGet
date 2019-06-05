@@ -55,7 +55,7 @@ export default class LinksLessonComponent extends React.Component
   // render() {
   //   return <div id={this.lesson.content.htmlId}>
   //     <div key={0} className="simple_lesson__container">
-  //       <LinksTable links={version.details.links} />
+  //       <LinksTable links={version.links} />
   //     </div>,
   //     {this.lesson.content.sections[0]}
   //   </div>;

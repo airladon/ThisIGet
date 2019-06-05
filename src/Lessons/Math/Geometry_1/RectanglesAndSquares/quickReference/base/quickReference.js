@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -42,13 +42,14 @@ export class QRRectangle extends PopupBoxCollection {
     };
     this.setTitle('Rectangle');
     this.setDescription('A |rectangle| is a quadrangle with |all_angles_equal_to_90|. A rectangle\'s |opposite| sides are |parallel| and |equal| in length.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const rect = coll._rect;
     rect._left.showAll();
@@ -62,7 +63,7 @@ export class QRRectangle extends PopupBoxCollection {
     coll.setScenarios('center');
     coll.setRectLabels('ABAB');
     coll.resetColors();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -90,25 +91,26 @@ export class QRSquare extends PopupBoxCollection {
     };
     this.setTitle('Square');
     this.setDescription('A |square| is a rectangle with |all sides equal|. All the angles in a square are |_90| and its opposite sides are |parallel|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const coll = this._collection;
+    coll.hideAll();
     coll.show();
     const square = coll._square;
     square.showAll();
     coll.setScenarios('center');
     coll.setRectLabels('ABAB');
     coll.resetColors();
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(coll, new Rect(-2, -0.9, 4, 2));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Rectangle: QRRectangle,
   Square: QRSquare,
 });

@@ -1,4 +1,5 @@
 // @flow
+import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
@@ -7,13 +8,18 @@ import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPo
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import StaticQR from '../../../../../../js/components/staticQR';
+import complementary from './complementary.md';
+import supplementary from './supplementary.md';
+import explementary from './explementary.md';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
   click,
+  centerH,
 //   highlight,
 } = Fig.tools.html;
 
@@ -24,16 +30,7 @@ export class QRComplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
-
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
     const coll = this._collection;
     const modifiers = {
       Complementary_angles: click(
@@ -44,15 +41,14 @@ export class QRComplementary extends PopupBoxCollection {
     };
     this.setTitle('Complementary Angles');
     this.setDescription('|Complementary_angles| add up to a |right angle|, which is |90º|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     const fig = this._collection._fig;
-    coll.show();
+    coll.hideAll();
     fig.showAll();
     fig._angleC.hide();
     fig.setScenario('qr');
@@ -60,9 +56,13 @@ export class QRComplementary extends PopupBoxCollection {
     coll._eqns._complementary.showForm('c');
     coll._eqns._complementary.setFormSeries('1');
     fig._line3.move.element = null;
+    fig._line3.setMovable(false);
+    fig._line1.setMovable(false);
+    fig._line2.makeTouchable();
     fig._line3.setRotation(Math.PI / 2);
     fig._line2.setRotation(Math.PI / 6);
-    this.transformToQRWindow(coll, new Rect(-0.6, -0.8, 2, 2.4));
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
+    this.transformToQRWindow(coll, new Rect(-0.4, -0.8, 2, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -74,14 +74,7 @@ export class QRSupplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
 
     const coll = this._collection;
@@ -93,26 +86,29 @@ export class QRSupplementary extends PopupBoxCollection {
       ),
     };
     this.setTitle('Supplementary Angles');
-    this.setDescription('|Supplementary_angles| add up to a |straight angle|, which is |180º|.', modifiers);
-    this.setLink(lessonUID);
+    this.setDescription(centerH('|Supplementary_angles| add up to a |straight angle|, which is |180º|.'), modifiers);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     const fig = this._collection._fig;
-    coll.show();
+    coll.hideAll();
     fig.showAll();
     fig._angleC.hide();
     fig.setScenario('qr');
     coll._eqns._supplementary.setScenario('qr');
     coll._eqns._supplementary.showForm('c');
     coll._eqns._supplementary.setFormSeries('1');
+    fig._line3.setMovable(false);
+    fig._line1.setMovable(false);
+    fig._line2.makeTouchable();
     fig._line3.move.element = null;
     fig._line3.setRotation(Math.PI);
     fig._line2.setRotation(Math.PI / 3);
-    this.transformToQRWindow(coll, new Rect(-1.5, -1, 3, 2.4));
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
+    this.transformToQRWindow(coll, new Rect(-1.5, -0.6, 3, 2.4));
     this.diagram.animateNextFrame();
   }
 }
@@ -124,15 +120,7 @@ export class QRExplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const modifiers = {
@@ -144,15 +132,15 @@ export class QRExplementary extends PopupBoxCollection {
     };
     this.setTitle('Explementary Angles');
     this.setDescription('|Explementary_angles| add up to a |full angle|, which is |360º|.', modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const coll = this._collection;
     const fig = this._collection._fig;
-    coll.show();
+    coll.hideAll();
     fig.showAll();
     fig._angleC.hide();
     fig.setScenario('qr');
@@ -160,6 +148,9 @@ export class QRExplementary extends PopupBoxCollection {
     coll._eqns._explementary.showForm('c');
     coll._eqns._explementary.setFormSeries('1');
     fig._line3.move.element = null;
+    fig._line3.setMovable(false);
+    fig._line1.setMovable(false);
+    fig._line2.makeTouchable();
     fig._line3.setRotation(Math.PI * 1.999);
     fig._line2.setRotation(Math.PI / 3 * 2);
     this.transformToQRWindow(coll, new Rect(-1.5, -1.2, 3, 2.4));
@@ -167,8 +158,23 @@ export class QRExplementary extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
-  Complementary: QRComplementary,
-  Supplementary: QRSupplementary,
-  Explementary: QRExplementary,
+attachQuickReference(details.path, lessonUID, versionUID, {
+  ComplementaryPres: QRComplementary,
+  SupplementaryPres: QRSupplementary,
+  ExplementaryPres: QRExplementary,
+  Complementary: <StaticQR
+      title={'Complementary Angles'}
+      content={complementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
+  Supplementary: <StaticQR
+      title={'Supplementary Angles'}
+      content={supplementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
+  Explementary: <StaticQR
+      title={'Explementary Angles'}
+      content={explementary}
+      link={`${details.path}/${details.uid}/explanation/base?page=1`}
+    />,
 });

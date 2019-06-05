@@ -5,7 +5,7 @@ import tester from '../../../../../../testers/presentationLessonTester';
 tester(
   {
     pages: {
-      1: { threshold: 0.005 },
+      1: { threshold: 0.006 },
     },
   },
   1,

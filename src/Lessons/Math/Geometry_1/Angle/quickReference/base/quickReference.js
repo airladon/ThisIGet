@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -39,18 +39,18 @@ export default class QRAngle extends PopupBoxCollection {
     const modifiers = {
       smaller: click(diag.rotateLine, [diag, 'small'], colors.qrAngles_lessSharp),
       larger: click(diag.rotateLine, [diag, 'large'], colors.qrAngles_moreSharp),
-      Angle: click(diag.pulseFill, [diag], colors.qrAngles_angles),
+      angle: click(diag.pulseFill, [diag], colors.qrAngles_angles),
       lines: click(diag.pulseLines, [diag], colors.qrAngles_lines),
     };
     this.setTitle('Angle');
     this.setDescription([
-      '|Angle| is the corner formed by two |lines|. A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
+      'An |angle| is the corner formed by two |lines|. A |larger| angle is a |less sharp| corner, and a |smaller| angle is a |more sharp| corner.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.6 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -62,11 +62,11 @@ export default class QRAngle extends PopupBoxCollection {
     angle._line1.move.maxTransform.updateRotation(Math.PI * 0.95);
     angle._line1.move.minTransform.updateRotation(Math.PI * 0.05);
     angle._line1.makeTouchable();
-    this.transformToQRWindow(collection, new Rect(-2, -0.8, 4, 2));
+    this.transformToQRWindow(collection, new Rect(-2, -0.6, 4, 2));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRAngle,
 });

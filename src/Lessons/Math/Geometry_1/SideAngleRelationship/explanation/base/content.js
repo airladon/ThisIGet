@@ -25,7 +25,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -34,8 +34,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Isosceles',
-      'ExternalAngles',
+      'Math/Geometry_1/Isosceles/base',
+      'Math/Geometry_1/ExternalAngles/base',
     ]);
   }
 
@@ -131,7 +131,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, content, {
       modifiers: {
-        isosceles: this.bindShowQR('Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
         triangle: click(this.next, [this], colors.isosceles),
       },
       show: [
@@ -141,7 +141,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, content, {
       modifiers: {
-        isosceles: this.bindShowQR('Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
         triangle: click(coll.pulseIsoscelesTriangle, [coll, null], colors.isosceles),
       },
       transitionFromPrev: (done) => {
@@ -234,7 +234,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         n: click(coll.pulseAngleN, [coll], colors.isosceles),
-        external_angle: this.bindShowQR('ExternalAngles/base', 'Main', colors.isosceles),
+        external_angle: this.qr('Math/Geometry_1/ExternalAngles/base/Main', colors.isosceles),
         lower_triangle: click(coll.toggleLowerTriangle, [coll], colors.sides),
       },
     };
@@ -257,7 +257,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         n: click(coll.pulseAngleN, [coll], colors.isosceles),
         m: click(coll.pulseAngleM, [coll], colors.isosceles),
-        isosceles: this.bindShowQR('Isosceles/base', 'Main', colors.isosceles),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main', colors.isosceles),
         lower_triangle: click(coll.toggleLowerTriangle, [coll], colors.sides),
       },
     };
@@ -439,7 +439,7 @@ class Content extends PresentationLessonContent {
         _a: click(coll.pulseAngleA, [coll], colors.angles),
         _b: click(coll.pulseAngleB, [coll], colors.angles),
         condition: click(coll.pulseEqn0, [coll], colors.diagram.action),
-        isosceles: this.bindShowQR('Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
       },
     };
     this.addSection(common, content, {

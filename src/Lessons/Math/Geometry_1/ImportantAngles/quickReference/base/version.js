@@ -1,20 +1,19 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'base',
   topic: 'quickReference',
   type: 'presentation',
   references: [
     'Acute',
-    'Right',
     'Obtuse',
-    'Straight',
     'Reflex',
+    'Right',
+    'Straight',
     'Full',
+    'Perpendicular',
   ],
 };
 
-module.exports = {
-  details,
-};
+module.exports = version;

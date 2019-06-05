@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var version = {
   uid: 'static',
   topic: 'explanation',
   title: 'Area of Circle',
@@ -10,6 +10,4 @@ var details = {
   type: 'singlePage',
 };
 
-module.exports = {
-  details,
-};
+module.exports = version;

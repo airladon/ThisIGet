@@ -9,8 +9,8 @@ import CommonCollectionThreeLines from './collectionThreeLines';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -45,11 +45,11 @@ export class QROpposite extends PopupBoxCollection {
       'When two lines intersect, four angles are created.',
       '|Opposite_angles| at the intersection are |equal|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -111,11 +111,11 @@ export class QRCorresponding extends PopupBoxCollection {
       'When the two lines are |parallel|, |corresponding_angles_are_always_equal|.',
       'If corresponding angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -183,11 +183,11 @@ export class QRAlternate extends PopupBoxCollection {
       'When the two lines are |parallel|, the |alternate_angles_are_always_equal|.',
       'If alternate angles are |equal|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -255,11 +255,11 @@ export class QRInterior extends PopupBoxCollection {
       'When the two lines are |parallel|, the |interior_angles_always_add_to_180º|.',
       'If interior angles are |add to 180º|, then the |two_lines_are_always_parallel|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', xSize: 0.45 });
+    this.setDiagramSpace({ location: 'left', size: 0.45 });
     super.show();
     const collection = this._collection;
     collection.show();
@@ -287,7 +287,7 @@ export class QRInterior extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Opposite: QROpposite,
   Corresponding: QRCorresponding,
   Alternate: QRAlternate,

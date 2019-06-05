@@ -24,7 +24,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -33,9 +33,9 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'AreaTriangle/base',
-      'CongruentTriangles/base',
-      'Circle/base',
+      'Math/Geometry_1/AreaTriangle/base',
+      'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/Circle/base',
     ]);
   }
 
@@ -82,7 +82,7 @@ class Content extends PresentationLessonContent {
         style({ top: 48, size: 0.6 }, 'Each line is the same length (radius) and each angle at the circle center the same size (equal split), so using |Side-Angle-Side| shows the resulting triangles are congruent.'),
       ],
       modifiers: {
-        'Side-Angle-Side': this.bindShowQR('CongruentTriangles/base', 'Sas'),
+        'Side-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Sas'),
       },
     };
     this.addSection(common, content, {
@@ -117,14 +117,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
-        area: this.bindShowQR('AreaTriangle/base', 'Main', colors.areaTriLabel),
+        area: this.qr('Math/Geometry_1/AreaTriangle/base/Main', colors.areaTriLabel),
       },
       show: [lightCircle, poly._lines, poly._border, poly._height, poly._base],
     });
     this.addSection(common, content, {
       modifiers: {
         each: click(coll.toggleTri, [coll, null], colors.diagram.action),
-        area: this.bindShowQR('AreaTriangle/base', 'Main', colors.areaTriLabel),
+        area: this.qr('Math/Geometry_1/AreaTriangle/base/Main', colors.areaTriLabel),
       },
       show: [
         lightCircle, poly._lines, poly._border, poly._height, poly._base,
@@ -309,7 +309,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         border: click(coll.pulseMostBorder, [coll], colors.border),
         circumference: click(coll.pulseCircumference, [coll], colors.disabledLabel),
-        _2pir: this.bindShowQR('Circle/base', 'Circumference', {
+        _2pir: this.qr('Math/Geometry_1/Circle/base/Circumference', {
           text: '2πr',
           color: colors.diagram.action,
         }),

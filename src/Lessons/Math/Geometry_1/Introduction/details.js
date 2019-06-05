@@ -1,14 +1,13 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Why Study Shapes?',
   dependencies: [
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
   uid: 'Introduction',
 };
 
-module.exports = {
-  details,
-};
+module.exports = lessonDetails;

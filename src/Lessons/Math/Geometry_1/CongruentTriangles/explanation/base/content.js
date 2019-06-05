@@ -24,7 +24,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -33,7 +33,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Triangles/base',
+      'Math/Geometry_1/Triangles/base',
     ]);
   }
 
@@ -917,14 +917,14 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        triangle: this.bindShowQR('Triangles/base', 'Main', colors.sides),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres', colors.sides),
         calculate: click(this.next, [this], colors.angles),
       },
       show: [aas._angle1, aas._angle3, aas._side],
     });
     this.addSection(common, {
       modifiers: {
-        triangle: this.bindShowQR('Triangles/base', 'Main', colors.sides),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres', colors.sides),
         calculate: click(aas.pulseAngle2, [aas], colors.angles),
       },
       show: [aas],

@@ -7,8 +7,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -44,11 +44,11 @@ export default class QRDegrees extends PopupBoxCollection {
       style({ size: 0.9 }, 'A full rotation can be split into |360| |equal_portions|, called |degrees|.'),
       style({ size: 0.9 }, 'An angle can be |measured| by counting the number of degrees within it.'),
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.5, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     super.show();
     const collection = this._collection;
     const circle = collection._circle;
@@ -63,12 +63,12 @@ export default class QRDegrees extends PopupBoxCollection {
     collection.setAngleMarks();
     circle._angleText.setScenario('qr');
     collection.updateAngle();
-    this.transformToQRWindow(collection, new Rect(-2, -1, 4, 2.2));
+    this.transformToQRWindow(collection, new Rect(-1.7, -1, 3.2, 2.2));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRDegrees,
 });
 

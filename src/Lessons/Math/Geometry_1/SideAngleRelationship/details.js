@@ -1,15 +1,14 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var details = {
+var lessonDetails = {
   title: 'Side Angle Relationships',
   dependencies: [
     'Isosceles',
   ],
   enabled: true,
+  path: 'Math/Geometry_1',
   uid: 'SideAngleRelationship',
 };
 
-module.exports = {
-  details,
-};
+module.exports = lessonDetails;

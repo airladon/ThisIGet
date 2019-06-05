@@ -903,9 +903,34 @@ class PresentationLessonContent extends SimpleLessonContent {
     return click(this.next, [this], color);
   }
 
-  bindShowQR(
-    uid: string,
-    qrid: string,
+  // bindShowQR(
+  //   uid: string,
+  //   qrid: string,
+  //   colorOrOptions: Array<number> | {
+  //     color?: ?Array<number>,
+  //     interactive?: boolean,
+  //     id?: string,
+  //     classes?: string,
+  //     text?: ?string,
+  //   } = {},
+  //   // color: Array<number> = this.diagram.layout.colors.diagram.action,
+  // ) {
+  //   const defaultOptions = {
+  //     color: this.diagram.layout.colors.diagram.action,
+  //     classes: '',
+  //   };
+  //   let options = defaultOptions;
+  //   if (Array.isArray(colorOrOptions)) {
+  //     options.color = colorOrOptions;
+  //   } else {
+  //     options = joinObjects({}, defaultOptions, colorOrOptions);
+  //     options.classes = `lesson__qr_action_word ${options.classes}`;
+  //   }
+  //   return click(this.showQR, [this, uid, qrid], options);
+  // }
+
+  qr(
+    link: string,
     colorOrOptions: Array<number> | {
       color?: ?Array<number>,
       interactive?: boolean,
@@ -917,7 +942,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   ) {
     const defaultOptions = {
       color: this.diagram.layout.colors.diagram.action,
-      classes: '',
+      classes: 'lesson__qr_action_word',
     };
     let options = defaultOptions;
     if (Array.isArray(colorOrOptions)) {
@@ -926,7 +951,7 @@ class PresentationLessonContent extends SimpleLessonContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `lesson__qr_action_word ${options.classes}`;
     }
-    return click(this.showQR, [this, uid, qrid], options);
+    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', link], options);
   }
 
   addStar() {

@@ -1,15 +1,20 @@
 // @flow
+import React from 'react';
 import Fig from 'figureone';
+import StaticQR from '../../../../../../js/components/staticQR';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
-// import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
+import area from './area.md';
+import right from './right.md';
+import pythagorus from './pythagorus.md';
+import hypotenuse from './hypotenuse.md';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -24,15 +29,7 @@ export class QRMain extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -52,11 +49,10 @@ export class QRMain extends PopupBoxCollection {
       'A |right angle triangle|, is a triangle that has a |right_angle|. The |longest_side| is opposite the right angle, and is called the |hypotenuse|.',
       'The square of the hypotenuse\'s length is |equal| to the sum of the square of the other two sides.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -64,7 +60,8 @@ export class QRMain extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
-    this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
+    this.transformToQRWindow(coll, new Rect(-2, -1.5, 4, 3));
     this.diagram.animateNextFrame();
   }
 }
@@ -76,15 +73,7 @@ export class QRPythagorus extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -104,11 +93,10 @@ export class QRPythagorus extends PopupBoxCollection {
       'The |Pythagorean_Theorem| relates the |side lengths| of a |right angle triangle|.',
       'For any right angle triangle, the |square| of the |hypotenuse| length is equal to the |sum of the squares| of the remaining |two_side| lengths.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=35`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -116,6 +104,7 @@ export class QRPythagorus extends PopupBoxCollection {
     coll._tri._angle2.hide();
     coll._eqn.showForm('0');
     coll.setScenarios('qr');
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
@@ -128,16 +117,7 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
-    super(
-      diagram,
-      layout,
-      transform,
-      'collection',
-      CommonCollection,
-    );
-    this.hasTouchableElements = true;
-
+    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
@@ -149,11 +129,10 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     this.setDescription([
       'The area of a |right angle triangle| is half the product of the |perpendicular_sides|.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=6`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
     super.show();
     const coll = this._collection;
     coll._tri.showAll();
@@ -162,13 +141,34 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
     coll._tri._side20.hide();
     coll._eqn.showForm('area');
     coll.setScenarios('qr');
+    this.setDiagramSpace({ location: 'left', size: 0.5 });
     this.transformToQRWindow(coll, new Rect(-2, -1.4, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
-  Main: QRMain,
-  Pythagorus: QRPythagorus,
-  Area: QRRightAngleTriangleArea,
+attachQuickReference(details.path, lessonUID, versionUID, {
+  DefinitionPres: QRMain,
+  PythagorusPres: QRPythagorus,
+  AreaPres: QRRightAngleTriangleArea,
+  Area: <StaticQR
+      title="Right Angle Triangle Area"
+      content={area}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Pythagorus: <StaticQR
+      title="Pythagorean Theorem"
+      content={pythagorus}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Definition: <StaticQR
+      title="Right Angle Triangle"
+      content={right}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
+  Hypotenuse: <StaticQR
+      title="Hypotenuse"
+      content={hypotenuse}
+      link={`${details.path}/${details.uid}/summary/base?page=3`}
+  />,
 });

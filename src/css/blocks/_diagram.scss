@@ -64,6 +64,15 @@
   top: 0;
 }
 
+.diagram__text_measure {
+  position: absolute;
+  visibility: hidden;
+  height: auto;
+  width: auto;
+  white-space: nowrap;
+  bottom: 0;
+}
+
 // #id_diagram__text__high {
 //   pointer-events: none;
 //   z-index: 2;

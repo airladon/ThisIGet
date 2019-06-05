@@ -53,6 +53,7 @@ export default function lessonLayout() {
       label: {
         radius: radius / 4,
         autoHide: 0.2,
+        scale: 1,
       },
     },
   };
@@ -208,7 +209,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        qr: { position: new Point(2.9, -0.7), scale: 1.3 },
+        qr: { position: new Point(2.4, -0.7), scale: 1.3 },
       },
     },
   });

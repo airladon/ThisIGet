@@ -3,6 +3,7 @@
 import renderLesson from '../../../../../../js/views/lesson/lesson';
 import PresentationLesson from '../../../../../../js/Lesson/PresentationLesson';
 import Content from './content';
+import '../../../../../../css/presentationLesson.scss';
 import './style.scss';
 import details from '../../details';
 import version from '../version';

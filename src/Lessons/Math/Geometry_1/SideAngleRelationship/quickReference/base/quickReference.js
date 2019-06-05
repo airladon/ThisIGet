@@ -8,8 +8,8 @@ import QRCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -46,11 +46,11 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
     this.setDescription([
       '|Angles_opposite_longer_sides| will always be |larger| than |angles_opposite_shorter_sides| in the same triangle. Similarly, |sides_opposite_larger_angles| will always be |longer| than |sides_opposite_smaller_angles| in the same triangle.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'top', ySize: 0.55, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.5 });
     super.show();
     const collection = this._collection;
     const fig = collection._fig;
@@ -61,11 +61,11 @@ export default class QRSideAngleRelationship extends PopupBoxCollection {
     ]);
     fig.setScenarios('qr');
     fig._tri.updateLabels();
-    this.transformToQRWindow(collection, new Rect(-2, -1.4, 4, 2.4));
+    this.transformToQRWindow(collection, new Rect(-2, -1.1, 4, 2.4));
     this.diagram.animateNextFrame();
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QRSideAngleRelationship,
 });

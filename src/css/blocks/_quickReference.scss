@@ -1,0 +1,264 @@
+:root {
+  --lesson__qr__content_width: calc(100vw - 80px - 1em);
+  --lesson__qr__content_height: calc((100vw - 80px - 1em) / 1.5);
+}
+
+.lesson__qr {
+  width: 100%;
+  height: 100%;
+  // // 600px content
+  // // 1em padding left/right
+  // max-width: calc(600px + 1em);
+  // // 400px content
+  // // 2.5em title + padding
+  // // 2.5em link + padding
+  // // 1em padding top/bottom
+  // max-height: calc(400px + 6em);
+  // font-size: initial;
+  // z-index: 10;
+  // position: absolute;
+  // background-color: color('white');
+  // padding: 0.5em;
+  // border: 1px solid color('white', 'light');
+  // border-radius: 0.4em;
+}
+
+.lesson__qr img {
+  max-width: 100%;
+  max-height: 100%;
+  transform: translate(-50%, 0%);
+  left: 50%;
+  position: relative;
+}
+
+.lesson__qr__container {
+  // 600px content
+  // 1em padding left/right
+  max-width: calc(600px + 1em);
+  // 400px content
+  // 2.5em title + padding
+  // 2.5em link + padding
+  // 1em padding top/bottom
+  max-height: calc(400px + 6em);
+  font-size: initial;
+  z-index: 10;
+  position: absolute;
+  background-color: color('white');
+  padding: 0.5em;
+  border: 1px solid color('white', 'light');
+  border-radius: 0.4em;
+  margin-right: 1em;
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+}
+
+// .id_lesson__qr__static_container {
+//   position: absolute;
+//   margin-right: 20px;
+// }
+
+// .id_lesson__qr__pres_container {
+//   position: absolute;
+//   // margin-right: 20px;
+// }
+
+// ///////////////////////////////////////
+// Title
+// ///////////////////////////////////////
+.lesson__qr__title {
+  display: table;
+  width: 100%;
+  padding-bottom: 0.5em;
+  height: 2em;
+}
+
+.lesson__qr__title_text {
+  display: table-cell;
+  text-align: left;
+  vertical-align: middle;
+  color: color('grey', 'dark');
+  font-size: 1.2em;
+  padding-right: 1em;
+  padding-left: 0.4em;
+}
+
+@media screen and (max-width: 600px) {
+  .lesson__qr__title_text {
+    font-size: 1em;
+  }
+}
+
+.lesson__qr__title_close__container {
+  display: table;
+  height: 100%;
+  float: right;
+}
+
+.lesson__qr__title_close__cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr__title_close {
+  display: table-cell;
+  color: color('grey', 'dark');
+  width: 2em;
+  border: 1px solid color('white', 'light');
+  height: 2em;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 1em;
+  font-weight: 100;
+}
+
+.lesson__qr__title_close:hover {
+  background-color: color('white', 'lightest');
+  cursor: pointer;
+}
+
+// ///////////////////////////////////////
+// Content
+// ///////////////////////////////////////
+.lesson__qr__content_container {
+  overflow-y: scroll;
+  max-height: 400px;
+  max-width: 600px;
+  background-color: color('white', 'lightest');
+}
+
+.lesson__qr__content {
+  padding: 0.8em;
+  width: 100%;
+  height: 100%;
+}
+
+.lesson__qr__content p:last-child {
+  margin-bottom: 0;
+}
+
+#id_lesson__qr__content_pres {
+  pointer-events: auto;
+}
+
+#id_lesson__qr__content_pres .lesson__qr__content {
+  padding: 0;
+}
+
+#id_lesson__qr__content_pres .lesson__qr__content_container {
+  overflow-y: hidden;
+}
+
+// ///////////////////////////////////////
+// Link
+// ///////////////////////////////////////
+.lesson__qr__link_container {
+  text-align: center;
+  padding-top: 0.5em;
+  height: 2em;
+}
+
+.lesson__qr__link_link {
+  font-size: 0.8em;
+  color: color('white', 'darker');
+}
+
+.lesson__qr__link_link:hover {
+  text-decoration: none;
+}
+
+// ///////////////////////////////////////
+// Presentation QR specific
+// ///////////////////////////////////////
+#lesson__content_diagram .lesson__qr__container {
+  background-color: color('black', 'dark');
+  padding: 0.5em;
+  border: 1px solid color('black', 'light');
+}
+
+#lesson__content_diagram .lesson__qr__title_text {
+  color: color('white', 'dark');
+}
+
+#lesson__content_diagram .lesson__qr__title_close {
+  color: color('white', 'dark');
+  border: 1px solid color('white', 'dark');
+}
+
+#lesson__content_diagram .lesson__qr__title_close:hover {
+  background-color: color('black', 'light');
+}
+
+#id_lesson__qr__content_pres__overlay {
+  position: relative;
+  pointer-events: auto;
+  font-size: initial;
+  z-index: 1;
+  width: var(--lesson__qr__content_width);
+  height: var(--lesson__qr__content_height);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#id_qr_diagram {
+  width: 100%;
+  height: 100%;
+  color: color('diagram', 'text-base');
+}
+
+.lesson__qr_description_container {
+  padding: 1em;
+  display: table;
+}
+
+#id_lesson__qr_diagram_container {
+  display: inline-block;
+  width: 50%;
+  height: 50%;
+}
+
+.lesson__qr_description_table_cell {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__qr_description_relative {
+  position: relative;
+  overflow-y: scroll;
+  max-height: 100%;
+}
+
+.lesson__qr_description_text {
+  text-align: left;
+}
+
+#lesson__content_diagram #id_lesson__qr__pres_container {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  margin: 0;
+}
+
+// ///////////////////////////////////////
+// Static QR specific
+// ///////////////////////////////////////
+#id_lesson__qr__content_static {
+  // margin-right: 20px;
+  pointer-events: auto;
+}
+
+#lesson__content_diagram .lesson__qr__content_container {
+  max-width: var(--lesson__qr__content_width);
+  max-height: var(--lesson__qr__content_height);
+}
+
+#lesson__content_diagram #id_lesson__qr__static_container {
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  margin: 0;
+}

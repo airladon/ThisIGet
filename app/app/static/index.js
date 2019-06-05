@@ -3568,6 +3568,7 @@ function () {
   // layout: Object;
   // oldScrollY: number;
   // used for drawing debug only
+  // updateFontSize: string;
   function Diagram(options) {
     _classCallCheck(this, Diagram);
 
@@ -3575,14 +3576,16 @@ function () {
       htmlId: 'id_figureone_canvases',
       limits: new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Rect"](-1, -1, 2, 2),
       backgroundColor: [1, 1, 1, 1],
-      fontScale: 1
+      fontScale: 1 // updateFontSize: '',
+
     };
     this.scrolled = false; // this.oldScrollY = 0;
 
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_2__["joinObjects"])({}, defaultOptions, options);
     var htmlId = optionsToUse.htmlId,
         backgroundColor = optionsToUse.backgroundColor,
-        limits = optionsToUse.limits; // this.layout = layout;
+        limits = optionsToUse.limits;
+    this.htmlId = htmlId; // this.layout = layout;
 
     if (typeof htmlId === 'string') {
       var container = document.getElementById(htmlId);
@@ -3595,19 +3598,19 @@ function () {
           var child = children[i];
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl')) {
-            // if (child.id === 'id_diagram__gl__low') {
-            this.canvasLow = child; // }
-            // if (child.id === 'id_diagram__gl__high') {
-            //   this.canvasHigh = child;
-            // }
+            this.canvasLow = child;
+          }
+
+          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__gl__offscreen')) {
+            this.canvasOffscreen = child;
           }
 
           if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text')) {
-            // if (child.id === 'id_diagram__text__low') {
-            this.textCanvasLow = child; // }
-            // if (child.id === 'id_diagram__text__high') {
-            //   this.textCanvasHigh = child;
-            // }
+            this.textCanvasLow = child;
+          }
+
+          if (child instanceof HTMLCanvasElement && child.classList.contains('diagram__text__offscreen')) {
+            this.textCanvasOffscreen = child;
           }
 
           if (child.classList.contains('diagram__html')) {
@@ -3616,14 +3619,21 @@ function () {
         }
 
         this.backgroundColor = backgroundColor;
-        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor); // const webglHigh = new WebGLInstance(
-        //   this.canvasHigh,
-        //   this.backgroundColor,
-        // );
+        var webglLow = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasLow, this.backgroundColor);
+        this.webglLow = webglLow;
 
-        this.webglLow = webglLow; // this.webglHigh = webglHigh;
+        if (this.canvasOffscreen) {
+          var webglOffscreen = new _webgl_webgl__WEBPACK_IMPORTED_MODULE_0__["default"](this.canvasOffscreen, this.backgroundColor);
+          this.webglOffscreen = webglOffscreen;
+        }
 
-        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow); // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
+        this.draw2DLow = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasLow);
+
+        if (this.textCanvasOffscreen) {
+          var draw2DOffscreen = new _DrawContext2D__WEBPACK_IMPORTED_MODULE_6__["default"](this.textCanvasOffscreen);
+          this.draw2DOffscreen = draw2DOffscreen;
+        } // this.draw2DHigh = new DrawContext2D(this.textCanvasHigh);
+
       }
     }
 
@@ -3665,9 +3675,9 @@ function () {
 
     if (this.elements.name === '') {
       this.elements.name = 'diagramRoot';
-    }
+    } // this.updateFontSize = optionsToUse.updateFontSize;
 
-    this.updateFontSize = true;
+
     window.addEventListener('resize', this.resize.bind(this));
     this.sizeHtmlText();
     this.initialize();
@@ -3683,6 +3693,7 @@ function () {
     this.waitForFrames = 0;
     this.scrollingFast = false;
     this.scrollTimeoutId = null;
+    this.drawTimeoutId = null;
     this.oldScroll = window.pageYOffset;
     this.drawAnimationFrames = 0;
   }
@@ -3713,11 +3724,21 @@ function () {
   }, {
     key: "getShapes",
     value: function getShapes() {
-      var webgl = this.webglLow;
-      var draw2D = this.draw2DLow; // if (high) {
+      var webgl = [this.webglLow];
+
+      if (this.webglOffscreen) {
+        webgl.push(this.webglOffscreen);
+      }
+
+      var draw2D = [this.draw2DLow];
+
+      if (this.draw2DOffscreen) {
+        draw2D.push(this.draw2DOffscreen);
+      } // if (high) {
       //   webgl = this.webglHigh;
       //   draw2D = this.draw2DHigh;
       // }
+
 
       return new _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_7__["default"](webgl, draw2D, // this.draw2DFigures,
       this.htmlCanvas, this.limits, this.spaceTransforms, this.animateNextFrame.bind(this, true, 'getShapes'));
@@ -3745,13 +3766,23 @@ function () {
   }, {
     key: "sizeHtmlText",
     value: function sizeHtmlText() {
-      if (this.updateFontSize) {
-        var style = window.getComputedStyle(document.documentElement);
+      var containerRect = this.container.getBoundingClientRect();
+      var size = containerRect.width / 35;
+      var test = document.getElementById("".concat(this.htmlId, "_measure"));
 
-        if (style) {
-          this.htmlCanvas.style.fontSize = style.getPropertyValue('--lesson__diagram-font-size');
+      if (test != null) {
+        test.style.fontSize = "".concat(size, "px");
+        var width = test.clientWidth + 1;
+        var ratio = width / containerRect.width;
+
+        if (containerRect.width < 500) {
+          size = Math.floor(0.84 / ratio * size * 10000) / 10000;
+        } else {
+          size = Math.floor(0.85 / ratio * size * 10000) / 10000;
         }
       }
+
+      this.htmlCanvas.style.fontSize = "".concat(size, "px");
     }
   }, {
     key: "destroy",
@@ -3837,6 +3868,11 @@ function () {
       var _this = this;
 
       var force = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      if (this.canvasOffscreen == null) {
+        return;
+      }
+
       var needClear = false;
       Object.keys(this.elements.elements).forEach(function (name) {
         var element = _this.elements.elements[name];
@@ -3852,7 +3888,11 @@ function () {
 
       if (needClear) {
         this.drawQueued = true;
-        this.draw(-1);
+        this.clearContext();
+        this.draw2DLow.ctx.clearRect(0, 0, this.textCanvasLow.width, this.textCanvasLow.height);
+        this.draw(-1); // this.animateNextFrame(true, 'clear frame');
+        // this.draw(-1);
+        // this.clickearContext();
       }
     }
   }, {
@@ -3876,19 +3916,33 @@ function () {
 
       var oldPosition = elementToRender.getPosition();
       var oldScale = elementToRender.getScale();
-      elementToRender.setPosition(0, 0); // elementToRender.updateHTMLElementTieScale(this.canvasLow);
+      var htmlCanvas = document.getElementById(elementToRender.tieToHTML.element);
+
+      if (htmlCanvas instanceof HTMLElement) {
+        this.canvasOffscreen.style.width = "".concat(htmlCanvas.clientWidth, "px");
+        this.canvasOffscreen.style.height = "".concat(htmlCanvas.clientHeight, "px");
+        this.textCanvasOffscreen.style.width = "".concat(htmlCanvas.clientWidth, "px");
+        this.textCanvasOffscreen.style.height = "".concat(htmlCanvas.clientHeight, "px");
+        this.webglOffscreen.resize();
+        this.draw2DOffscreen.resize();
+      }
+
+      elementToRender.updateHTMLElementTie(this.canvasOffscreen); // Need to reset position as updateHTMLElementTie doesn't set correct
+      // position as it uses a diagram pixels space transform that is only
+      // relavant to the first gl canvas.
+
+      var scale = elementToRender.getScale();
+      elementToRender.setPosition(0 - scale.x * (elementToRender.tieToHTML.window.left + elementToRender.tieToHTML.window.width / 2), 0 - scale.y * (elementToRender.tieToHTML.window.bottom + elementToRender.tieToHTML.window.height / 2)); // elementToRender.setPosition(0, 0);
       // Stop animations and render
 
       elementToRender.isRenderedAsImage = false;
       elementToRender.stop(true, true);
       this.renderToCanvas(elementToRender.tieToHTML.element);
-      elementToRender.isRenderedAsImage = true; // reset position
+      elementToRender.isRenderedAsImage = true; // elementToRender.setRenderedOnNextDraw();
+      // reset position
 
       elementToRender.setPosition(oldPosition);
-      elementToRender.setScale(oldScale); // this.draw(-1);
-      // this.fromWhere = 'reset Position';
-      // elementToRender.hide();
-      // show all elements that were shown previously (except element that was just rendered)
+      elementToRender.setScale(oldScale); // show all elements that were shown previously (except element that was just rendered)
 
       Object.keys(this.elements.elements).forEach(function (name) {
         var element = _this2.elements.elements[name];
@@ -3913,59 +3967,25 @@ function () {
 
       if (!(htmlCanvas instanceof HTMLElement)) {
         return;
-      } // if (!(htmlCanvas instanceof HTMLImageElement)) {
-      //   return;
-      // }
+      }
 
-
-      this.drawQueued = true; // this.fromWhere = 'RenderToCanvas';
-
-      this.draw(-1); // const { ctx } = new DrawContext2D(htmlCanvas);
-
-      var getDimensions = function getDimensions(c) {
-        return {
-          // width: c.width,
-          // height: c.height,
-          clientWidth: c.clientWidth,
-          clientHeight: c.clientHeight
-        };
-      };
-
-      var canvas = getDimensions(htmlCanvas);
-      var gl = getDimensions(this.webglLow.gl.canvas);
-      var text = getDimensions(this.draw2DLow.canvas); // const glWidthOfCanvas = canvas.clientWidth / gl.clientWidth * gl.width;
-      // const glHeightOfCanvas = canvas.clientHeight / gl.clientHeight * gl.height;
-      // const glStartOfCanavas = new Point(
-      //   gl.width / 2 - glWidthOfCanvas / 2,
-      //   gl.height / 2 - glHeightOfCanvas / 2,
-      // );
-      // const textWidthOfCanvas = canvas.clientWidth / text.clientWidth
-      //                           * text.width;
-      // const textHeightOfCanvas = canvas.clientHeight / text.clientHeight
-      //                            * text.height;
-      // const textStartOfCanvas = new Point(
-      //   text.width / 2 - textWidthOfCanvas / 2,
-      //   text.height / 2 - textHeightOfCanvas / 2,
-      // );
-
+      this.drawQueued = true;
+      this.draw(-1, 1);
       var w = document.getElementById("".concat(htmlCanvasElementOrId, "_webgl"));
 
       if (w instanceof HTMLImageElement) {
-        w.src = this.webglLow.gl.canvas.toDataURL('image/png', 0.5); // w.src = offscreenCanvas.toDataURL();
-
-        w.style.visibility = 'visible';
-        w.style.transform = "scale(".concat(gl.clientWidth / canvas.clientWidth, ",").concat(gl.clientHeight / canvas.clientHeight, ")");
+        w.src = this.webglOffscreen.gl.canvas.toDataURL('image/png', 0.5);
+        w.style.display = 'block';
       }
 
       var d = document.getElementById("".concat(htmlCanvasElementOrId, "_2d"));
 
       if (d instanceof HTMLImageElement) {
-        d.src = this.draw2DLow.canvas.toDataURL('image/png', 0.5);
-        d.style.visibility = 'visible';
-        d.style.transform = "scale(".concat(text.clientWidth / canvas.clientWidth, ",").concat(text.clientHeight / canvas.clientHeight, ")");
+        d.src = this.draw2DOffscreen.canvas.toDataURL('image/png', 0.5);
+        d.style.display = 'block';
       }
 
-      this.clearContext();
+      this.clearContext(1);
     }
   }, {
     key: "unrenderAll",
@@ -3981,24 +4001,8 @@ function () {
     key: "resize",
     value: function resize() {
       var skipHTMLTie = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-      // console.log('resize', fromWgere, event)
-      // if (this.elements != null) {
-      //   this.elements.updateLimits(this.limits, this.spaceTransforms);
-      // }
-      // if (this.count == null) {
-      //   this.count = 0;
-      // } else {
-      //   this.count += 1
-      // }
-      // console.log('resize')
-      // if (this.count > 2) {
-      //   console.log('unrender')
-      //   this.elements.unrenderAll();
-      // }
-      this.webglLow.resize(); // this.webglHigh.resize();
-
-      this.draw2DLow.resize(); // this.draw2DHigh.resize();
-
+      this.webglLow.resize();
+      this.draw2DLow.resize();
       this.setSpaceTransforms();
 
       if (this.elements != null) {
@@ -4016,7 +4020,8 @@ function () {
 
       if (this.oldWidth !== this.canvasLow.clientWidth) {
         // this.unrenderAll();
-        this.renderAllElementsToTiedCanvases(true);
+        // console.log('updating width')
+        this.renderAllElementsToTiedCanvases();
         this.oldWidth = this.canvasLow.clientWidth;
       }
 
@@ -4298,11 +4303,19 @@ function () {
   }, {
     key: "clearContext",
     value: function clearContext() {
-      this.webglLow.gl.clearColor(0, 0, 0, 0);
-      this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT); // this.webglHigh.gl.clearColor(0, 0, 0, 0);
+      var canvasIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
+      if (canvasIndex === 0) {
+        this.webglLow.gl.clearColor(0, 0, 0, 0);
+        this.webglLow.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
+      } else {
+        this.webglOffscreen.gl.clearColor(0, 0, 0, 0);
+        this.webglOffscreen.gl.clear(this.webglLow.gl.COLOR_BUFFER_BIT);
+      } // this.webglHigh.gl.clearColor(0, 0, 0, 0);
       // this.webglHigh.gl.clear(this.webglHigh.gl.COLOR_BUFFER_BIT);
 
-      this.elements.clear();
+
+      this.elements.clear(canvasIndex);
     } // scroll() {
     //   if (this.scrollingFast === false) {
     //     this.webglLow.gl.canvas.style.top = '-10000px';
@@ -4326,6 +4339,7 @@ function () {
   }, {
     key: "draw",
     value: function draw(nowIn) {
+      var canvasIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var now = nowIn;
 
       if (nowIn === -1) {
@@ -4339,16 +4353,14 @@ function () {
         this.scrolled = false;
 
         if (Math.abs(window.pageYOffset - this.oldScroll) > this.webglLow.gl.canvas.clientHeight / 4) {
-          if (this.webglLow.gl.canvas.style.top !== '-10000px') {
-            this.webglLow.gl.canvas.style.top = '-10000px';
-            this.waitForFrames = 1;
-          }
-
-          if (this.waitForFrames > 0) {
-            this.waitForFrames -= 1;
-          } else {
-            this.renderAllElementsToTiedCanvases();
-          }
+          // if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+          //   this.webglLow.gl.canvas.style.top = '-10000px';
+          //   this.waitForFrames = 1;
+          // }
+          // if (this.waitForFrames > 0) {
+          //   this.waitForFrames -= 1;
+          // } else {
+          this.renderAllElementsToTiedCanvases(); // }
 
           this.scrollingFast = true;
 
@@ -4367,8 +4379,9 @@ function () {
       }
 
       this.drawQueued = false;
-      this.clearContext();
-      this.elements.draw(this.spaceTransforms.diagramToGL, now);
+      this.clearContext(canvasIndex); // console.log('really drawing')
+
+      this.elements.draw(this.spaceTransforms.diagramToGL, now, canvasIndex); // console.log('really done')
 
       if (this.elements.isMoving()) {
         this.animateNextFrame(true, 'is moving');
@@ -4377,8 +4390,24 @@ function () {
       if (this.drawAnimationFrames > 0) {
         this.drawAnimationFrames -= 1;
         this.animateNextFrame(true, 'queued frames');
-      }
-    }
+      } // if (this.drawTimeoutId) {
+      //   clearTimeout(this.drawTimeoutId);
+      //   this.drawTimeoutId = null;
+      // }
+      // this.drawTimeoutId = setTimeout(this.renderToImages.bind(this), 100);
+
+    } // renderToImages() {
+    //   // console.log('visibility1')
+    //   this.drawTimeoutId = null;
+    //   // if (this.webglLow.gl.canvas.style.top !== '-10000px') {
+    //   //   this.webglLow.gl.canvas.style.top = '-10000px';
+    //   //   this.waitForFrames = 1;
+    //   // }
+    //   this.renderAllElementsToTiedCanvases();
+    //   // this.centerDrawingLens();
+    //   // this.webglLow.gl.canvas.style.visibility = 'visible';
+    // }
+
   }, {
     key: "centerDrawingLens",
     value: function centerDrawingLens() {
@@ -10490,7 +10519,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexBracket);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexBracket).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
     _this.numLines = numLines;
     _this.mainHeight = 1;
 
@@ -10606,7 +10635,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexIntegral);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexIntegral).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP; // let mul = 0.5;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP; // let mul = 0.5;
     // if (lineHeight === 1) {
     //   mul = 1;
     // }
@@ -11142,11 +11171,11 @@ function (_DiagramElementCollec) {
       this.add('line', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](axis, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"](), this.props.color, this.diagramLimits));
       var font = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramFont"](this.props.titleFontFamily, 'normal', this.props.titleFontSize, this.props.titleFontWeight, 'center', 'middle', this.props.titleFontColor);
       var titleText = [new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["DiagramText"](new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](0, 0).transformBy(new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).matrix()), this.props.title, font)];
-      var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D, titleText);
+      var title = new _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"](this.drawContext2D[0], titleText);
       this.add('title', new _Element__WEBPACK_IMPORTED_MODULE_0__["DiagramElementPrimative"](title, new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Transform"]().rotate(this.props.rotation).translate(this.props.titleOffset.x, this.props.titleOffset.y), [0.5, 0.5, 0.5, 1], this.diagramLimits)); // Labels
 
-      this.addTickLabels('major', this.drawContext2D, majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
-      this.addTickLabels('minor', this.drawContext2D, minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
+      this.addTickLabels('major', this.drawContext2D[0], majorTicks, this.props.generateMajorLabels.bind(this.props), this.diagramLimits, this.props.majorTicks.labelOffset);
+      this.addTickLabels('minor', this.drawContext2D[0], minorTicks, this.props.generateMinorLabels.bind(this.props), this.diagramLimits, this.props.minorTicks.labelOffset);
     }
   }, {
     key: "toClip",
@@ -15453,8 +15482,19 @@ function () {
   htmlCanvas, limits, spaceTransforms, animateNextFrame) {
     _classCallCheck(this, DiagramPrimatives);
 
-    this.webgl = webgl;
-    this.draw2D = draw2D;
+    if (Array.isArray(webgl)) {
+      this.webgl = webgl;
+    } else {
+      this.webgl = [webgl];
+    } // this.webgl = webgl;
+
+
+    if (Array.isArray(draw2D)) {
+      this.draw2D = draw2D;
+    } else {
+      this.draw2D = [draw2D];
+    }
+
     this.htmlCanvas = htmlCanvas;
     this.limits = limits;
     this.animateNextFrame = animateNextFrame;
@@ -16488,7 +16528,7 @@ function () {
 
   }, {
     key: "drawWithTransformMatrix",
-    value: function drawWithTransformMatrix(transformMatrix, color, numPoints) {}
+    value: function drawWithTransformMatrix(transformMatrix, color, canvasIndex, numPoints) {}
     /* eslint-enable */
 
   }, {
@@ -16921,7 +16961,13 @@ function (_DrawingObject) {
     _classCallCheck(this, TextObject);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(TextObject).call(this));
-    _this.drawContext2D = drawContext2D;
+
+    if (Array.isArray(drawContext2D)) {
+      _this.drawContext2D = drawContext2D;
+    } else {
+      _this.drawContext2D = [drawContext2D];
+    }
+
     _this.text = text;
     _this.scalingFactor = 1;
     _this.lastDraw = [];
@@ -17045,7 +17091,9 @@ function (_DrawingObject) {
       var _this2 = this;
 
       var color = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : [1, 1, 1, 1];
-      var ctx = this.drawContext2D.ctx; // Arbitrary scaling factor used to ensure font size is >> 1 pixel
+      var contextIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      var drawContext2D = this.drawContext2D[contextIndex];
+      var ctx = this.drawContext2D[contextIndex].ctx; // Arbitrary scaling factor used to ensure font size is >> 1 pixel
       // const scalingFactor = this.drawContext2D.canvas.offsetHeight /
       //                       (this.diagramLimits.height / 1000);
 
@@ -17058,11 +17106,11 @@ function (_DrawingObject) {
       // When zoomed: 1 pixel = 1 GL unit.
       // Zoom in so limits betcome 0 to 2:
 
-      var sx = this.drawContext2D.canvas.offsetWidth / 2 / scalingFactor;
-      var sy = this.drawContext2D.canvas.offsetHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
+      var sx = drawContext2D.canvas.offsetWidth / 2 / scalingFactor;
+      var sy = drawContext2D.canvas.offsetHeight / 2 / scalingFactor; // Translate so limits become -1 to 1
 
-      var tx = this.drawContext2D.canvas.offsetWidth / 2;
-      var ty = this.drawContext2D.canvas.offsetHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
+      var tx = drawContext2D.canvas.offsetWidth / 2;
+      var ty = drawContext2D.canvas.offsetHeight / 2; // Modify the incoming transformMatrix to be compatible with zoomed
       // pixel space
       //   - Scale by the scaling factor
       //   - Flip the y translation
@@ -17132,10 +17180,11 @@ function (_DrawingObject) {
   }, {
     key: "clear",
     value: function clear() {
+      var contextIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
       var lastDraw = this.lastDraw;
 
       if (lastDraw.length > 0) {
-        var ctx = this.drawContext2D.ctx;
+        var ctx = this.drawContext2D[contextIndex].ctx;
         var t = this.lastDrawTransform;
         ctx.save();
         ctx.transform(t[0], t[3], t[1], t[4], t[2], t[5]);
@@ -17267,12 +17316,13 @@ function (_DrawingObject) {
   }, {
     key: "getBoundaryOfText",
     value: function getBoundaryOfText(text) {
+      var contextIndex = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
       var boundary = [];
       var scalingFactor = this.scalingFactor; // Measure the text
 
-      text.font.set(this.drawContext2D.ctx, scalingFactor); // const textMetrics = this.drawContext2D.ctx.measureText(text.text);
+      text.font.set(this.drawContext2D[contextIndex].ctx, scalingFactor); // const textMetrics = this.drawContext2D.ctx.measureText(text.text);
 
-      var textMetrics = this.measureText(this.drawContext2D.ctx, text); // Create a box around the text
+      var textMetrics = this.measureText(this.drawContext2D[contextIndex].ctx, text); // Create a box around the text
 
       var location = text.location;
       var box = [new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-textMetrics.actualBoundingBoxLeft / scalingFactor, textMetrics.fontBoundingBoxAscent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](textMetrics.actualBoundingBoxRight / scalingFactor, textMetrics.fontBoundingBoxAscent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](textMetrics.actualBoundingBoxRight / scalingFactor, -textMetrics.fontBoundingBoxDescent / scalingFactor).add(location), new _tools_g2__WEBPACK_IMPORTED_MODULE_1__["Point"](-textMetrics.actualBoundingBoxLeft / scalingFactor, -textMetrics.fontBoundingBoxDescent / scalingFactor).add(location)];
@@ -17285,6 +17335,7 @@ function (_DrawingObject) {
   }, {
     key: "getGLBoundaryOfText",
     value: function getGLBoundaryOfText(text, lastDrawTransformMatrix) {
+      var contextIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
       var glBoundary = []; // const { scalingFactor } = this;
       // // Measure the text
       // text.font.set(this.drawContext2D.ctx, scalingFactor);
@@ -17311,7 +17362,7 @@ function (_DrawingObject) {
       //   ).add(location),
       // ];
 
-      var box = this.getBoundaryOfText(text);
+      var box = this.getBoundaryOfText(text, contextIndex);
       box.forEach(function (p) {
         glBoundary.push(p.transformBy(lastDrawTransformMatrix));
       });
@@ -18168,7 +18219,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexArrow);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexArrow).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_FAN;
+    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
     _this.height = height;
     var arrowHeight = height - legHeight;
     var points = [];
@@ -18282,7 +18333,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexDashedLine);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexDashedLine).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLES;
+    _this.glPrimative = _this.gl[0].TRIANGLES;
     _this.dashCumLength = [];
     _this.maxLength = maxLength;
     var cx = 0;
@@ -18412,7 +18463,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertextFan);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertextFan).call(this, webgl));
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
     _this.points = [];
     points.forEach(function (p) {
       _this.points.push(p.x);
@@ -18483,7 +18534,7 @@ function (_VertexObject) {
     var cx = 0;
     var cy = 0 - width / 2.0;
     var points = [];
-    _this.glPrimative = _this.gl.TRIANGLE_STRIP;
+    _this.glPrimative = _this.gl[0].TRIANGLE_STRIP;
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx, cy + width));
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](cx + length, cy));
@@ -18565,7 +18616,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexLines);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexLines).call(this, webgl));
-    _this.glPrimative = _this.gl.LINES;
+    _this.glPrimative = _this.gl[0].LINES;
     _this.points = [];
     linePairs.forEach(function (line) {
       var _line = _slicedToArray(line, 2),
@@ -18672,45 +18723,62 @@ function (_DrawingObject) {
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexObject).call(this));
     _this.numPoints = 0;
-    _this.gl = webgl.gl;
-    _this.webgl = webgl;
-    _this.glPrimative = webgl.gl.TRIANGLES;
+    var webglArray;
+
+    if (Array.isArray(webgl)) {
+      webglArray = webgl;
+    } else {
+      webglArray = [webgl];
+    }
+
+    _this.gl = webglArray.map(function (w) {
+      return w.gl;
+    });
+    _this.webgl = webglArray;
+    _this.glPrimative = webglArray[0].gl.TRIANGLES;
     _this.points = [];
-    _this.z = 0; // this.textureLocation = '';
+    _this.z = 0;
+    _this.buffer = webglArray.map(function () {
+      return null;
+    }); // this.textureLocation = '';
     // this.texturePoints = [];
 
     _this.texture = null;
-    _this.programIndex = webgl.getProgram(vertexShader, fragmentShader);
+    _this.programIndex = webglArray.map(function (w) {
+      return w.getProgram(vertexShader, fragmentShader);
+    });
     _this.type = 'vertexPrimative';
     return _this;
   }
 
   _createClass(VertexObject, [{
     key: "addTextureToBuffer",
-    value: function addTextureToBuffer(glTexture, image) // image data
+    value: function addTextureToBuffer(glIndex, glTexture, image) // image data
     {
       function isPowerOf2(value) {
         // eslint-disable-next-line no-bitwise
         return (value & value - 1) === 0;
       }
 
+      var gl = this.gl[glIndex];
+      var webgl = this.webgl[glIndex];
       var texture = this.texture;
 
       if (texture != null) {
-        var index = this.webgl.textures[texture.id].index;
-        this.gl.activeTexture(this.gl.TEXTURE0 + index);
-        this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
-        this.gl.pixelStorei(this.gl.UNPACK_FLIP_Y_WEBGL, 1);
-        this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, this.gl.RGBA, this.gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
+        var index = webgl.textures[texture.id].index;
+        gl.activeTexture(gl.TEXTURE0 + index);
+        gl.bindTexture(gl.TEXTURE_2D, glTexture);
+        gl.pixelStorei(gl.UNPACK_FLIP_Y_WEBGL, 1);
+        gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, image); // Check if the image is a power of 2 in both dimensions.
 
         if (isPowerOf2(image.width) && isPowerOf2(image.height)) {
           // Yes, it's a power of 2. Generate mips.
-          this.gl.generateMipmap(this.gl.TEXTURE_2D);
+          gl.generateMipmap(gl.TEXTURE_2D);
         } else {
           // No, it's not a power of 2. Turn off mips and set wrapping to clamp to edge
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_S, this.gl.CLAMP_TO_EDGE);
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_WRAP_T, this.gl.CLAMP_TO_EDGE);
-          this.gl.texParameteri(this.gl.TEXTURE_2D, this.gl.TEXTURE_MIN_FILTER, this.gl.LINEAR);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_S, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_WRAP_T, gl.CLAMP_TO_EDGE);
+          gl.texParameteri(gl.TEXTURE_2D, gl.TEXTURE_MIN_FILTER, gl.LINEAR);
         }
       }
     }
@@ -18720,78 +18788,96 @@ function (_DrawingObject) {
       var _this2 = this;
 
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      this.state = 'loaded';
 
-      if (numPoints === 0) {
-        this.numPoints = this.points.length / 2.0;
-      } else {
-        this.numPoints = numPoints;
-      } // if (this.texture && this.texture.points == null) {
-      //   this.texture.points = [];
-      //   this.createTextureMap();
-      // }
+      var _loop = function _loop(glIndex) {
+        var gl = _this2.gl[glIndex];
+        var webgl = _this2.webgl[glIndex]; // const texture = this.texture[glIndex];
+        // const buffer = this.buffer[glIndex];
 
+        _this2.state = 'loaded';
 
-      var texture = this.texture;
-
-      if (texture != null) {
-        if (texture.points == null) {
-          texture.points = [];
-        }
-
-        if (texture.points.length === 0) {
-          this.createTextureMap();
-        }
-
-        texture.buffer = this.gl.createBuffer();
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
-        this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(texture.points), this.gl.STATIC_DRAW);
-
-        if (!(texture.id in this.webgl.textures) || texture.id in this.webgl.textures && this.webgl.textures[texture.id].glTexture == null) {
-          var glTexture = this.gl.createTexture();
-          this.webgl.addTexture(texture.id, glTexture, texture.type);
-          this.gl.activeTexture(this.gl.TEXTURE0 + this.webgl.textures[texture.id].index);
-          this.gl.bindTexture(this.gl.TEXTURE_2D, glTexture);
-          var src = texture.src;
-
-          if (src) {
-            // Fill the texture with a 1x1 blue pixel.
-            this.gl.texImage2D(this.gl.TEXTURE_2D, 0, this.gl.RGBA, 1, 1, 0, this.gl.RGBA, this.gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
-            var image = new Image();
-            image.src = src;
-            this.state = 'loading';
-            this.webgl.textures[texture.id].state = 'loading';
-            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
-            image.addEventListener('load', function () {
-              // Now that the image has loaded make copy it to the texture.
-              texture.data = image;
-
-              _this2.addTextureToBuffer(glTexture, texture.data); // if (this.onLoad != null) {
+        if (numPoints === 0) {
+          _this2.numPoints = _this2.points.length / 2.0;
+        } else {
+          _this2.numPoints = numPoints;
+        } // if (this.texture && this.texture.points == null) {
+        //   this.texture.points = [];
+        //   this.createTextureMap();
+        // }
 
 
-              _this2.webgl.onLoad(texture.id); // this.onLoad();
-              // }
+        var texture = _this2.texture;
 
+        if (texture != null) {
+          if (texture.points == null) {
+            texture.points = [];
+          }
 
-              _this2.state = 'loaded';
-              _this2.webgl.textures[texture.id].state = 'loaded';
+          if (texture.points.length === 0) {
+            _this2.createTextureMap();
+          }
+
+          if (texture.buffer == null) {
+            texture.buffer = _this2.gl.map(function () {
+              return null;
             });
-          } else if (texture.data != null) {
-            this.addTextureToBuffer(glTexture, texture.data);
-          }
-        } else if (texture.id in this.webgl.textures) {
-          if (this.webgl.textures[texture.id].state === 'loading') {
-            this.state = 'loading';
-            this.webgl.textures[texture.id].onLoad.push(this.executeOnLoad.bind(this));
-          } else {
-            this.state = 'loaded';
+          } // $FlowFixMe
+
+
+          texture.buffer[glIndex] = gl.createBuffer(); // $FlowFixMe
+
+          gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
+          gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(texture.points), gl.STATIC_DRAW);
+
+          if (!(texture.id in webgl.textures) || texture.id in webgl.textures && webgl.textures[texture.id].glTexture == null) {
+            var glTexture = gl.createTexture();
+            webgl.addTexture(texture.id, glTexture, texture.type);
+            gl.activeTexture(gl.TEXTURE0 + webgl.textures[texture.id].index);
+            gl.bindTexture(gl.TEXTURE_2D, glTexture);
+            var src = texture.src;
+
+            if (src) {
+              // Fill the texture with a 1x1 blue pixel.
+              gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, 1, 1, 0, gl.RGBA, gl.UNSIGNED_BYTE, new Uint8Array([0, 0, 255, 100]));
+              var image = new Image();
+              image.src = src;
+              _this2.state = 'loading';
+              webgl.textures[texture.id].state = 'loading';
+              webgl.textures[texture.id].onLoad.push(_this2.executeOnLoad.bind(_this2));
+              image.addEventListener('load', function () {
+                // Now that the image has loaded make copy it to the texture.
+                texture.data = image;
+
+                _this2.addTextureToBuffer(glIndex, glTexture, texture.data); // if (this.onLoad != null) {
+
+
+                webgl.onLoad(texture.id); // this.onLoad();
+                // }
+
+                _this2.state = 'loaded';
+                webgl.textures[texture.id].state = 'loaded';
+              });
+            } else if (texture.data != null) {
+              _this2.addTextureToBuffer(glIndex, glTexture, texture.data);
+            }
+          } else if (texture.id in webgl.textures) {
+            if (webgl.textures[texture.id].state === 'loading') {
+              _this2.state = 'loading';
+              webgl.textures[texture.id].onLoad.push(_this2.executeOnLoad.bind(_this2));
+            } else {
+              _this2.state = 'loaded';
+            }
           }
         }
-      }
 
-      this.buffer = this.gl.createBuffer();
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer);
-      this.gl.bufferData(this.gl.ARRAY_BUFFER, new Float32Array(this.points), this.gl.STATIC_DRAW);
+        _this2.buffer[glIndex] = gl.createBuffer();
+        gl.bindBuffer(gl.ARRAY_BUFFER, _this2.buffer[glIndex]);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(_this2.points), gl.STATIC_DRAW);
+      };
+
+      for (var glIndex = 0; glIndex < this.webgl.length; glIndex += 1) {
+        _loop(glIndex);
+      }
     }
   }, {
     key: "executeOnLoad",
@@ -18804,24 +18890,32 @@ function (_DrawingObject) {
     key: "resetBuffer",
     value: function resetBuffer() {
       var numPoints = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
-      var texture = this.texture;
 
-      if (texture) {
-        // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
-        // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
-        if (this.webgl.textures[texture.id].glTexture != null) {
-          this.gl.deleteTexture(this.webgl.textures[texture.id].glTexture);
-          this.webgl.textures[texture.id].glTexture = null;
-        }
+      for (var glIndex = 0; glIndex < this.webgl.length; glIndex += 1) {
+        var gl = this.gl[glIndex];
+        var webgl = this.webgl[glIndex];
+        var texture = this.texture;
 
-        this.gl.deleteBuffer(texture.buffer); // texture.glTexture = null;
+        if (texture) {
+          // this.gl.activeTexture(this.gl.TEXTURE0 + texture.index);
+          // this.gl.bindTexture(this.gl.TEXTURE_2D, null);
+          if (webgl.textures[texture.id].glTexture != null) {
+            gl.deleteTexture(webgl.textures[texture.id].glTexture);
+            webgl.textures[texture.id].glTexture = null;
+          }
 
-        texture.buffer = null;
-      } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
+          if (texture.buffer != null) {
+            gl.deleteBuffer(texture.buffer[glIndex]); // $FlowFixMe
+
+            texture.buffer[glIndex] = null;
+          } // texture.glTexture = null;
+
+        } // this.gl.bindBuffer(this.gl.ARRAY_BUFFER, null);
 
 
-      this.gl.deleteBuffer(this.buffer);
-      this.setupBuffer(numPoints);
+        gl.deleteBuffer(this.buffer[glIndex]);
+        this.setupBuffer(numPoints);
+      }
     } // eslint-disable-next-line no-unused-vars
 
   }, {
@@ -18924,21 +19018,24 @@ function (_DrawingObject) {
     }
   }, {
     key: "draw",
-    value: function draw(translation, rotation, scale, count, color) {
-      var webGLInstance = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : this.webgl;
+    value: function draw(translation, rotation, scale, count, color) // webGLInstance: WebGLInstance = this.webgl,
+    {
+      var glIndex = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : 0;
       var transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["identity"]();
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["translate"](transformation, translation.x, translation.y);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["rotate"](transformation, rotation);
       transformation = _tools_m2__WEBPACK_IMPORTED_MODULE_0__["scale"](transformation, scale.x, scale.y);
-      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, count, webGLInstance);
+      this.drawWithTransformMatrix(_tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformation), color, glIndex, count);
     }
   }, {
     key: "drawWithTransformMatrix",
-    value: function drawWithTransformMatrix(transformMatrix, color, count) {
-      var webglInstance = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : this.webgl;
+    value: function drawWithTransformMatrix(transformMatrix, color, glIndex, count) // webglInstance: WebGLInstance = this.webgl,
+    {
+      var gl = this.gl[glIndex];
+      var webglInstance = this.webgl[glIndex];
       var size = 2; // 2 components per iteration
 
-      var type = this.gl.FLOAT; // the data is 32bit floats
+      var type = gl.FLOAT; // the data is 32bit floats
 
       var normalize = false; // don't normalize the data
       // 0 = move forward size * sizeof(type) each iteration to get
@@ -18947,28 +19044,28 @@ function (_DrawingObject) {
       var stride = 0;
       var offset = 0; // start at the beginning of the buffer
 
-      var locations = webglInstance.useProgram(this.programIndex);
+      var locations = webglInstance.useProgram(this.programIndex[glIndex]);
 
       if (this.texture && webglInstance.textures[this.texture.id].type === 'canvasText') {
         // this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, true);
         // this.gl.blendFunc(this.gl.ONE, this.gl.ONE_MINUS_SRC_ALPHA);
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       } else {
-        this.gl.pixelStorei(this.gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
-        this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+        gl.pixelStorei(gl.UNPACK_PREMULTIPLY_ALPHA_WEBGL, 0);
+        gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
       } // Turn on the attribute
 
 
-      this.gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
+      gl.enableVertexAttribArray(locations.a_position); // Bind it to ARRAY_BUFFER (think of it as ARRAY_BUFFER = positionBuffer)
 
-      this.gl.bindBuffer(this.gl.ARRAY_BUFFER, this.buffer); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
+      gl.bindBuffer(gl.ARRAY_BUFFER, this.buffer[glIndex]); // Tell the attribute how to get data out of positionBuffer (ARRAY_BUFFER)
 
-      this.gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
-      this.gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
+      gl.vertexAttribPointer(locations.a_position, size, type, normalize, stride, offset);
+      gl.uniformMatrix3fv(locations.u_matrix, false, _tools_m2__WEBPACK_IMPORTED_MODULE_0__["t"](transformMatrix)); // Translate
 
-      this.gl.uniform1f(locations.u_z, this.z);
-      this.gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
+      gl.uniform1f(locations.u_z, this.z);
+      gl.uniform4f(locations.u_color, color[0], color[1], color[2], color[3]); // Translate
 
       var texture = this.texture;
 
@@ -18977,7 +19074,7 @@ function (_DrawingObject) {
         // Tell the position attribute how to get data out of positionBuffer (ARRAY_BUFFER)
         var texSize = 2; // 2 components per iteration
 
-        var texType = this.gl.FLOAT; // the data is 32bit floats
+        var texType = gl.FLOAT; // the data is 32bit floats
 
         var texNormalize = false; // don't normalize the data
 
@@ -18986,24 +19083,25 @@ function (_DrawingObject) {
 
         var texOffset = 0; // start at the beginning of the buffer
 
-        this.gl.enableVertexAttribArray(locations.a_texcoord);
-        this.gl.bindBuffer(this.gl.ARRAY_BUFFER, texture.buffer);
-        this.gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
+        gl.enableVertexAttribArray(locations.a_texcoord); // $FlowFixMe
+
+        gl.bindBuffer(gl.ARRAY_BUFFER, texture.buffer[glIndex]);
+        gl.vertexAttribPointer(locations.a_texcoord, texSize, texType, texNormalize, texStride, texOffset);
       }
 
       if (texture) {
-        this.gl.uniform1i(locations.u_use_texture, 1);
+        gl.uniform1i(locations.u_use_texture, 1);
         var index = webglInstance.textures[texture.id].index; // console.log(texture.id, index, webglInstance.textures)
 
-        this.gl.uniform1i(locations.u_texture, index);
+        gl.uniform1i(locations.u_texture, index);
       } else {
-        this.gl.uniform1i(locations.u_use_texture, 0);
+        gl.uniform1i(locations.u_use_texture, 0);
       }
 
-      this.gl.drawArrays(this.glPrimative, offset, count);
+      gl.drawArrays(this.glPrimative, offset, count);
 
       if (texture) {
-        this.gl.disableVertexAttribArray(locations.a_texcoord);
+        gl.disableVertexAttribArray(locations.a_texcoord);
       }
     }
   }, {
@@ -19286,9 +19384,9 @@ function (_VertexObject) {
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygon).call(this, webgl));
 
     if (triangles) {
-      _this.glPrimative = webgl.gl.TRIANGLES;
+      _this.glPrimative = webgl[0].gl.TRIANGLES;
     } else {
-      _this.glPrimative = webgl.gl.TRIANGLE_STRIP;
+      _this.glPrimative = webgl[0].gl.TRIANGLE_STRIP;
     } // Check potential errors in constructor input
 
 
@@ -19474,7 +19572,7 @@ function (_VertexObject) {
       _this = _possibleConstructorReturn(this, _getPrototypeOf(PolygonFilled).call(this, webgl));
     }
 
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN; // Check potential errors in constructor input
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = numSidesToDraw;
@@ -19622,7 +19720,7 @@ function (_VertexObject) {
 
     // setup webgl stuff
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexPolygonLine).call(this, webgl));
-    _this.glPrimative = webgl.gl.LINES; // Check potential errors in constructor input
+    _this.glPrimative = webgl[0].gl.LINES; // Check potential errors in constructor input
 
     var sides = numSides;
     var sidesToDraw = Math.floor(numSidesToDraw);
@@ -19937,7 +20035,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexRectangleFilled);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexRectangleFilled).call(this, webgl));
-    _this.glPrimative = _this.gl.TRIANGLE_FAN;
+    _this.glPrimative = _this.gl[0].TRIANGLE_FAN;
     var points = [];
     points.push(new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0));
 
@@ -20110,7 +20208,7 @@ function (_VertexObject) {
     _classCallCheck(this, VertexText);
 
     _this = _possibleConstructorReturn(this, _getPrototypeOf(VertexText).call(this, webgl, 'withTexture', 'text'));
-    _this.glPrimative = webgl.gl.TRIANGLE_FAN;
+    _this.glPrimative = webgl[0].gl.TRIANGLE_FAN;
     var defaultTextOptions = {
       text: 'DEFAULT_TEXT',
       size: '20px',
@@ -20322,9 +20420,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./DrawingObjects/TextObject/TextObject */ "./src/js/diagram/DrawingObjects/TextObject/TextObject.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../tools/tools */ "./src/js/tools/tools.js");
 /* harmony import */ var _tools_color__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../tools/color */ "./src/js/tools/color.js");
-/* harmony import */ var _DrawContext2D__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./DrawContext2D */ "./src/js/diagram/DrawContext2D.js");
-/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
-/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
+/* harmony import */ var _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Animation/Animation */ "./src/js/diagram/Animation/Animation.js");
+/* harmony import */ var _webgl_webgl__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./webgl/webgl */ "./src/js/diagram/webgl/webgl.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
@@ -20377,7 +20474,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 
 
  // import GlobalAnimation from './webgl/GlobalAnimation';
-
+// import DrawContext2D from './DrawContext2D';
 
 
  // eslint-disable-next-line import/no-cycle
@@ -20518,7 +20615,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["RotationAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["RotationAnimationStep"](options);
       },
       scale: function scale() {
         for (var _len2 = arguments.length, optionsIn = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
@@ -20528,7 +20625,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ScaleAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ScaleAnimationStep"](options);
       },
       position: function position() {
         for (var _len3 = arguments.length, optionsIn = new Array(_len3), _key3 = 0; _key3 < _len3; _key3++) {
@@ -20538,7 +20635,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PositionAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PositionAnimationStep"](options);
       },
       color: function color() {
         for (var _len4 = arguments.length, optionsIn = new Array(_len4), _key4 = 0; _key4 < _len4; _key4++) {
@@ -20548,7 +20645,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ColorAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ColorAnimationStep"](options);
       },
       opacity: function opacity() {
         for (var _len5 = arguments.length, optionsIn = new Array(_len5), _key5 = 0; _key5 < _len5; _key5++) {
@@ -20558,7 +20655,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           elements: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["OpacityAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["OpacityAnimationStep"](options);
       },
       transform: function transform() {
         for (var _len6 = arguments.length, optionsIn = new Array(_len6), _key6 = 0; _key6 < _len6; _key6++) {
@@ -20568,7 +20665,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: _this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
       },
       pulse: function pulse() {
         for (var _len7 = arguments.length, optionsIn = new Array(_len7), _key7 = 0; _key7 < _len7; _key7++) {
@@ -20578,7 +20675,7 @@ function () {
         var options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, {
           element: this
         }].concat(optionsIn));
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["PulseAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["PulseAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveIn: function dissolveIn() {
@@ -20600,7 +20697,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveInAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveInAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       dissolveOut: function dissolveOut() {
@@ -20622,7 +20719,7 @@ function () {
           options = _tools_tools__WEBPACK_IMPORTED_MODULE_7__["joinObjects"].apply(void 0, [{}, defaultOptions, timeOrOptionsIn].concat(args));
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["DissolveOutAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["DissolveOutAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       builder: function builder() {
@@ -20630,7 +20727,7 @@ function () {
           optionsIn[_key10] = arguments[_key10];
         }
 
-        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationBuilder"], [_this].concat(optionsIn));
+        return _construct(_Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationBuilder"], [_this].concat(optionsIn));
       },
       // eslint-disable-next-line max-len
       scenario: function scenario() {
@@ -20659,7 +20756,7 @@ function () {
           options.delta = delta;
         }
 
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["TransformAnimationStep"](options);
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["TransformAnimationStep"](options);
       },
       // eslint-disable-next-line max-len
       scenarios: function scenarios() {
@@ -20679,7 +20776,7 @@ function () {
         elements.forEach(function (element) {
           steps.push(element.anim.scenario(simpleOptions));
         });
-        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["ParallelAnimationStep"](simpleOptions, {
+        return new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["ParallelAnimationStep"](simpleOptions, {
           steps: steps
         });
       }
@@ -20729,7 +20826,7 @@ function () {
       }
     };
     this.interactiveLocation = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0);
-    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_10__["AnimationManager"](this);
+    this.animations = new _Animation_Animation__WEBPACK_IMPORTED_MODULE_9__["AnimationManager"](this);
     this.tieToHTML = {
       element: null,
       scale: 'fit',
@@ -20738,6 +20835,7 @@ function () {
     };
     this.isRenderedAsImage = false;
     this.unrenderNextDraw = false;
+    this.renderedOnNextDraw = false;
   }
 
   _createClass(DiagramElement, [{
@@ -21694,15 +21792,22 @@ function () {
         var w = document.getElementById("".concat(elementId, "_webgl"));
 
         if (w != null) {
-          w.style.visibility = 'hidden';
+          // w.style.visibility = 'hidden';
+          w.style.display = 'none';
         }
 
         var d = document.getElementById("".concat(elementId, "_2d"));
 
         if (d != null) {
-          d.style.visibility = 'hidden';
+          // d.style.visibility = 'hidden';
+          d.style.display = 'none';
         }
       }
+    }
+  }, {
+    key: "setRenderedOnNextDraw",
+    value: function setRenderedOnNextDraw() {
+      this.renderedOnNextDraw = true;
     }
   }, {
     key: "unrender",
@@ -21827,14 +21932,12 @@ function (_DiagramElement) {
       }
 
       return false;
-    }
-  }, {
-    key: "updateContext",
-    value: function updateContext(context) {
-      if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
-        this.drawingObject.drawContext2D = context;
-      }
-    }
+    } // updateContext(context: DrawContext2D) {
+    //   if (this.drawingObject instanceof TextObject) {
+    //     this.drawingObject.drawContext2D = context;
+    //   }
+    // }
+
   }, {
     key: "_dup",
     value: function _dup() {
@@ -21861,8 +21964,10 @@ function (_DiagramElement) {
   }, {
     key: "clear",
     value: function clear() {
+      var canvasIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
       if (this.drawingObject instanceof _DrawingObjects_TextObject_TextObject__WEBPACK_IMPORTED_MODULE_6__["TextObject"]) {
-        this.drawingObject.clear();
+        this.drawingObject.clear(canvasIndex);
       }
     }
   }, {
@@ -21977,6 +22082,7 @@ function (_DiagramElement) {
 
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
       if (this.isShown) {
         if (this.isRenderedAsImage === true) {
@@ -22022,12 +22128,17 @@ function (_DiagramElement) {
 
         var colorToUse = [].concat(_toConsumableArray(this.color.slice(0, 3)), [this.color[3] * this.opacity]);
         pulseTransforms.forEach(function (t) {
-          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, pointCount);
+          _this4.drawingObject.drawWithTransformMatrix(t.matrix(), colorToUse, canvasIndex, pointCount);
         });
 
         if (this.unrenderNextDraw) {
           this.clearRender();
           this.unrenderNextDraw = false;
+        }
+
+        if (this.renderedOnNextDraw) {
+          this.isRenderedAsImage = true;
+          this.renderedOnNextDraw = false;
         }
       }
     }
@@ -22060,35 +22171,28 @@ function (_DiagramElement) {
       }
 
       return false;
-    }
-  }, {
-    key: "setupWebGLBuffers",
-    value: function setupWebGLBuffers(newWebgl) {
-      var drawingObject = this.drawingObject;
+    } // setupWebGLBuffers(newWebgl: WebGLInstance) {
+    //   const { drawingObject } = this;
+    //   if (drawingObject instanceof VertexObject) {
+    //     const oldWebgl = drawingObject.webgl;
+    //     drawingObject.webgl = newWebgl;
+    //     drawingObject.gl = newWebgl.gl;
+    //     drawingObject.setupBuffer();
+    //     drawingObject.webgl = oldWebgl;
+    //     drawingObject.gl = oldWebgl.gl;
+    //   }
+    // }
+    // changeWebGLInstance(newWebgl: WebGLInstance) {
+    //   let oldWebgl;
+    //   const { drawingObject } = this;
+    //   if (drawingObject instanceof VertexObject) {
+    //     oldWebgl = drawingObject.webgl;
+    //     drawingObject.webgl = newWebgl;
+    //     drawingObject.gl = newWebgl.gl;
+    //   }
+    //   return oldWebgl;
+    // }
 
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        var oldWebgl = drawingObject.webgl;
-        drawingObject.webgl = newWebgl;
-        drawingObject.gl = newWebgl.gl;
-        drawingObject.setupBuffer();
-        drawingObject.webgl = oldWebgl;
-        drawingObject.gl = oldWebgl.gl;
-      }
-    }
-  }, {
-    key: "changeWebGLInstance",
-    value: function changeWebGLInstance(newWebgl) {
-      var oldWebgl;
-      var drawingObject = this.drawingObject;
-
-      if (drawingObject instanceof _DrawingObjects_VertexObject_VertexObject__WEBPACK_IMPORTED_MODULE_5__["default"]) {
-        oldWebgl = drawingObject.webgl;
-        drawingObject.webgl = newWebgl;
-        drawingObject.gl = newWebgl.gl;
-      }
-
-      return oldWebgl;
-    }
   }, {
     key: "getGLBoundaries",
     value: function getGLBoundaries() {
@@ -22260,6 +22364,7 @@ function (_DiagramElement2) {
     value: function draw() {
       var parentTransform = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]();
       var now = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 0;
+      var canvasIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
 
       if (this.isShown) {
         if (this.isRenderedAsImage === true) {
@@ -22288,13 +22393,18 @@ function (_DiagramElement2) {
 
         for (var k = 0; k < pulseTransforms.length; k += 1) {
           for (var i = 0, j = this.drawOrder.length; i < j; i += 1) {
-            this.elements[this.drawOrder[i]].draw(pulseTransforms[k], now);
+            this.elements[this.drawOrder[i]].draw(pulseTransforms[k], now, canvasIndex);
           }
         }
 
         if (this.unrenderNextDraw) {
           this.clearRender();
           this.unrenderNextDraw = false;
+        }
+
+        if (this.renderedOnNextDraw) {
+          this.isRenderedAsImage = true;
+          this.renderedOnNextDraw = false;
         }
       }
     }
@@ -22436,9 +22546,11 @@ function (_DiagramElement2) {
   }, {
     key: "clear",
     value: function clear() {
+      var canvasIndex = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
-        element.clear();
+        element.clear(canvasIndex);
       }
     }
   }, {
@@ -22833,15 +22945,13 @@ function (_DiagramElement2) {
       if (movable) {
         this.hasTouchableElements = true; // this.isMovable = true;
       }
-    }
-  }, {
-    key: "updateContext",
-    value: function updateContext(context) {
-      for (var i = 0; i < this.drawOrder.length; i += 1) {
-        var element = this.elements[this.drawOrder[i]];
-        element.updateContext(context);
-      }
-    }
+    } // updateContext(context: DrawContext2D) {
+    //   for (let i = 0; i < this.drawOrder.length; i += 1) {
+    //     const element = this.elements[this.drawOrder[i]];
+    //     element.updateContext(context);
+    //   }
+    // }
+
   }, {
     key: "setupWebGLBuffers",
     value: function setupWebGLBuffers(newWebgl) {
@@ -23455,7 +23565,8 @@ function () {
       // device pixels.
 
       var displayWidth = Math.floor(this.gl.canvas.clientWidth * realToCSSPixels);
-      var displayHeight = Math.floor(this.gl.canvas.clientHeight * realToCSSPixels); // Check if the canvas is not the same size.
+      var displayHeight = Math.floor(this.gl.canvas.clientHeight * realToCSSPixels); // console.log('in webgl', displayWidth)
+      // Check if the canvas is not the same size.
 
       if (this.gl.canvas.width !== displayWidth || this.gl.canvas.height !== displayHeight) {
         // Make the canvas the same size
@@ -26561,10 +26672,12 @@ function modifyText(text, key, mod) {
   var expression = new RegExp("\\|".concat(key, "\\|"), 'gi');
   var replacement = '';
 
-  if (typeof mod.replacementText === 'string') {
+  if (typeof mod === 'string') {
+    replacement = mod;
+  } else if (typeof mod.replacementText === 'string') {
     replacement = mod.replacementText;
   } else {
-    replacement = mod.replacementText(key).replacementText; // console.log(replacement)
+    replacement = mod.replacementText(key).replacementText;
   }
 
   outText = text.replace(expression, replacement);
@@ -26626,11 +26739,9 @@ function applyModifiers(text, modifiers) {
   var monochrome = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : false;
   var outText = text;
   Object.keys(modifiers).forEach(function (key) {
-    var mod = modifiers[key];
+    var mod = modifiers[key]; // if (mod.replacementText != null) {
 
-    if (mod.replacementText != null) {
-      outText = modifyText(outText, key, mod);
-    }
+    outText = modifyText(outText, key, mod); // }
   });
   var r = RegExp(/\|([^|]*)\|/, 'gi');
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
@@ -26654,7 +26765,7 @@ function setOnClicks(modifiers) {
   Object.keys(modifiers).forEach(function (key) {
     var mod = modifiers[key];
 
-    if ('actionMethod' in mod) {
+    if (typeof mod !== 'string' && 'actionMethod' in mod) {
       onClickId(mod.id(key), mod.actionMethod, mod.bind, additionalClassesToAdd);
     }
   });

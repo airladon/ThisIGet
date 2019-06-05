@@ -24,7 +24,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -33,8 +33,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Isosceles/base',
-      'Triangles/base',
+      'Math/Geometry_1/Isosceles/base',
+      'Math/Geometry_1/Triangles/base',
     ]);
   }
 
@@ -59,7 +59,7 @@ class Content extends PresentationLessonContent {
         'As |any| two sides are equal, an |equilateral| triangle is a special case of an |isosceles| triangle.',
       ],
       modifiers: {
-        isosceles: this.bindShowQR('Isosceles/base', 'Main'),
+        isosceles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
         any: click(coll.toggleIsoscelesSides, [coll], colors.highlight),
       },
       show: [tri],
@@ -118,7 +118,7 @@ class Content extends PresentationLessonContent {
         _180: highlightWord('180º', colors.angles),
         _60: highlightWord('60º', colors.angles),
         third_of_180: highlightWord('third of 180º', colors.angles),
-        triangle: this.bindShowQR('Triangles/base', 'Main'),
+        triangle: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       },
       show: [tri],
     };

@@ -25,7 +25,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -55,6 +55,7 @@ class Content extends PresentationLessonContent {
           height: 18,
           // borderDebug: true,
           classes: 'lesson__equation_border',
+          id: 'id_lesson_content__equation_box',
         }),
       ]),
       modifiers: {
@@ -75,6 +76,10 @@ class Content extends PresentationLessonContent {
         diag.updateAngle();
         diag._equation.showForm('arc');
         circle._angleText.setScenario('summary');
+        const element = document.getElementById('id_lesson_content__equation_box');
+        if (element) {
+          diag._equation.updateHTMLElementTie(element);
+        }
       },
     });
     this.addSection({

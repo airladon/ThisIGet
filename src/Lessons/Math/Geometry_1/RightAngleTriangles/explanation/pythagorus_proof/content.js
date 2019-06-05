@@ -10,14 +10,21 @@ import content from './content.md';
 
 class Content extends SimpleLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
+    this.loadQRs([
+      'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/AdjacentAngles/base/',
+      'Math/Geometry_1/Area/base/',
+      'Math/Geometry_1/RightAngleTriangles/base/',
+      'Math/Geometry_1/ImportantAngles/base/',
+    ]);
   }
 
   setContent() {
     this.sections = [
-      <div key={0} className="simple_lesson__container">
+      <div key={0}>
       <div className="markdown" dangerouslySetInnerHTML={ { __html: content } }/>
       </div>,
     ];

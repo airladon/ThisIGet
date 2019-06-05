@@ -24,7 +24,7 @@ const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
-    this.title = details.details.title;
+    this.title = details.title;
     this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
@@ -33,8 +33,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'RelatedAngles/base',
-      'CongruentTriangles/base',
+      'Math/Geometry_1/RelatedAngles/base',
+      'Math/Geometry_1/CongruentTriangles/base',
     ]);
   }
 
@@ -136,7 +136,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         line: click(coll.pulseBottom, [coll], colors.sides),
         two_lines: click(coll.pulseLeftRight, [coll], colors.sides),
-        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -145,7 +145,7 @@ class Content extends PresentationLessonContent {
         'We also know that the |interior_angles| of two |parallel lines| intersected by a third line will always add to |180º|.',
       ],
       modifiers: {
-        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -154,7 +154,7 @@ class Content extends PresentationLessonContent {
         'The reverse of this is: if the |interior_angles| of two lines intersected by a third line |add to 180º|, then the lines |must be parallel|.',
       ],
       modifiers: {
-        interior_angles: this.bindShowQR('RelatedAngles/base', 'Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -278,7 +278,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        alternate: this.bindShowQR('RelatedAngles/base', 'Alternate'),
+        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
         alternate_intersection_angles: this.bindNext(colors.angles),
       },
       show: [
@@ -289,7 +289,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        alternate: this.bindShowQR('RelatedAngles/base', 'Alternate'),
+        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
         alternate_intersection_angles: click(
           coll.pulseAlternateAngles, [coll, null], colors.angles,
         ),
@@ -333,7 +333,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: 'Therefore, using |Angle-Angle-Side| the congruency test, we can see the two |triangles| are |congruent|.',
       modifiers: {
-        'Angle-Angle-Side': this.bindShowQR('CongruentTriangles/base', 'Aas'),
+        'Angle-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
         triangles: click(coll.toggleTriangles, [coll], colors.sides),
       },
       setEnterState: () => {

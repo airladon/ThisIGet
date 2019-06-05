@@ -8,8 +8,8 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.details.uid;
-const versionUID = version.details.uid;
+const lessonUID = details.uid;
+const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
 const {
@@ -39,21 +39,21 @@ export default class QREquilateral extends PopupBoxCollection {
     const { colors } = this.layout;
 
     const modifiers = {
-      three_equal_sides: click(coll.pulseSides, [coll], colors.sides),
-      three_equal_angles: click(coll.pulseAngles, [coll, null], colors.angles),
-      sides: highlight(colors.sides),
-      angles: highlight(colors.angles),
+      three_equal_sides: click(coll.pulseSides, [coll], colors.qrEquilateral_sides),
+      three_equal_angles: click(coll.pulseAngles, [coll, null], colors.qrEquilateral_angles),
+      sides: highlight(colors.qrEquilateral_sides),
+      angles: highlight(colors.qrEquilateral_sides),
     };
-    this.setTitle('');
+    this.setTitle('Equilateral Triangle');
     this.setDescription([
       'An |equilateral| triangle has |three_equal_sides| and |three_equal_angles|.',
-      '|Any| triangle with three equal |sides| |or| three equal |angles| will be an equilateral triangle.',
+      '|Any| triangle with three equal |sides| or three equal |angles| will be an equilateral triangle.',
     ], modifiers);
-    this.setLink(lessonUID);
+    this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
   }
 
   show() {
-    this.setDiagramSpace({ location: 'left', ySize: 0.7, xSize: 0.5 });
+    this.setDiagramSpace({ location: 'left', size: 0.6 });
     super.show();
     const collection = this._collection;
     collection._triangle.showAll();
@@ -62,6 +62,6 @@ export default class QREquilateral extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(lessonUID, versionUID, {
+attachQuickReference(details.path, lessonUID, versionUID, {
   Main: QREquilateral,
 });
