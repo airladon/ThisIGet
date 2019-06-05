@@ -429,6 +429,12 @@ export default function getLessonIndex() {
             description: '',
             fullLesson: true,
           },
+          simple: {
+            type: 'singlePage',
+            title: 'Derivation',
+            description: '',
+            fullLesson: true,
+          },
         },
         links: {
           base: {
