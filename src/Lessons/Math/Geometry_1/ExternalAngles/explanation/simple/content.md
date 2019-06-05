@@ -17,7 +17,7 @@ Angles $$\color{gr}c$$ and $$\color{g}d$$ are [[supplementary]]((qr,'Math/Geomet
 $$\color{gr}c\color{black}+\color{g}d\color{black}=180^\circ$$
 
 
-As both equation equal 180º, then they can be combined:
+As both equations equal 180º, then they can be combined:
 
 $$\color{r}a\color{black}+\color{r}b\color{black}+\color{gr}c\color{black}=\color{gr}c\color{black}+\color{g}d$$
 
