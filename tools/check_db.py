@@ -138,7 +138,7 @@ links = []
 with open('./tools/link_index.json') as f:
     links = json.load(f)
 
-for link in links:
+for link in links:  # noqa
     db_link = Links.query.filter_by(url=link['url']).first()
     if db_link is None:
         if show:

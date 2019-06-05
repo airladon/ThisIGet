@@ -24,7 +24,6 @@ function entryPoints(buildMode) {
 }
 
 function escape(text) {
-  console.log(text)
   return text.replace(/'/, '\\\'');
 }
 
@@ -116,6 +115,8 @@ function updateDetailsAndVersions() {
         }
       } else if (topic === 'links') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
+        outStr = `${outStr}\n  title: '${version.title || ''}',`;
+        outStr = `${outStr}\n  description: '${version.description || ''}',`;
         outStr = `${outStr}\n  links: [`;
         if (version.links.length > 0) {
           version.links.forEach((link) => {

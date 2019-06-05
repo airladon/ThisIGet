@@ -439,8 +439,8 @@ export default function getLessonIndex() {
         links: {
           base: {
             type: 'generic',
-            title: '',
-            description: '',
+            title: 'External',
+            description: 'External',
             fullLesson: false,
           },
         },
@@ -950,8 +950,8 @@ export default function getLessonIndex() {
         links: {
           base: {
             type: 'generic',
-            title: 'Links to Right Angle Triangle information.',
-            description: '',
+            title: 'External',
+            description: 'External',
             fullLesson: false,
           },
         },
@@ -972,7 +972,7 @@ export default function getLessonIndex() {
         quiz: {
           base: {
             type: 'presentation',
-            title: 'Unknown Angle Quiz',
+            title: 'Find the Unknown Angle',
             description: 'Find the unknown angle in a right angle triangle.',
             fullLesson: true,
           },

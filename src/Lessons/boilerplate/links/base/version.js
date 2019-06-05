@@ -5,6 +5,8 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
+  title: 'undefined',
+  description: 'undefined',
   links: [
     {
       url: '',

@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Unknown Angle Quiz',
+  title: 'Find the Unknown Angle',
   description: 'Find the unknown angle in a right angle triangle.',
   fullLesson: true,
   type: 'presentation',
