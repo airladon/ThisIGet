@@ -286,12 +286,13 @@ export default class PresentationLessonComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addPrevButton() {
-    return <Button label="" id="lesson__button-previous" className=" lesson__np_button lesson__button-prev-enabled"/>;
+    return <Button label="" id="lesson__button-previous" className=" lesson__np_button lesson__button-prev-enabled"
+    aria-label="Previous slide"/>;
   }
 
   // eslint-disable-next-line class-methods-use-this
   addNextButton() {
-    return <Button label="" id="lesson__button-next" className=" lesson__np_button lesson__button-next-enabled"/>;
+    return <Button label="" id="lesson__button-next" className=" lesson__np_button lesson__button-next-enabled" aria-label="Next slide"/>;
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -405,6 +406,7 @@ export default class PresentationLessonComponent extends React.Component
 
   render() {
     return <div>
+      <main>
       <div className="lesson__widescreen_backdrop" id={this.lesson.content.htmlId}>
         <div id="lesson__container_name" className="lesson__container">
               {this.addPrevButton()}
@@ -435,6 +437,7 @@ export default class PresentationLessonComponent extends React.Component
               {this.addInteractiveElementButton()}
         </div>
       </div>
+      </main>
     </div>;
   }
 }

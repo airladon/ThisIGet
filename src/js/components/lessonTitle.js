@@ -48,7 +48,8 @@ export default class LessonTitle extends React.Component
     return <div className='lesson__title_container'>
       <div className='lesson__title_centering_container'>
         <div className='lesson__title_img_container'>
-          <img src={imgLink} className="lesson__title_image" />
+          <img src={imgLink} className="lesson__title_image"
+            alt="Icon for lesson title"/>
         </div>
         <div className='lesson__title_text_container'>
           <div className='lesson__title_text'>

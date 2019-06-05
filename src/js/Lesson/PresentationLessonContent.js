@@ -959,6 +959,7 @@ class PresentationLessonContent extends SimpleLessonContent {
     img.setAttribute('src', '/static/star.png');
     img.id = 'id_lesson__star';
     img.classList.add('lesson__info_star');
+    img.alt = 'active item';
 
     this.diagram.htmlCanvas.appendChild(img);
   }
