@@ -52,7 +52,6 @@ index = index_loader(
 
 # Process Index
 for key, value in index.items():            # noqa
-    print(key)
     # Update or create category row
     category_name = value['path'].split('/')[3]
     # pdb.set_trace()

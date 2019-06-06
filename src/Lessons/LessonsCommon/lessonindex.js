@@ -12,23 +12,9 @@ export default function getLessonIndex() {
             type: 'presentation',
             title: 'Full Explanation',
             description: 'Explanation of complementary, supplementary, and explementary angles.',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Complementary, supplementary and explementary angles explanation',
+            htmlDescription: 'What are complementary angles, supplementary angles and explementary angles',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -36,8 +22,8 @@ export default function getLessonIndex() {
             type: 'presentation',
             title: 'Complementary, Supplementary and Explementary Angles.',
             description: 'Summary of complementary, supplementary and explementary Angles.',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Complementary, supplementary and explementary angles summary',
+            htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
             fullLesson: true,
           },
         },
@@ -55,34 +41,20 @@ export default function getLessonIndex() {
         explanation: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Full Explanation',
             description: 'Introduction to Angles.',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Introduction to Angles',
+            htmlDescription: 'Introduction to the concept of angle',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
           base: {
             type: 'presentation',
             title: 'Base',
-            description: 'Introduction to Angles.',
-            htmlTitle: '',
-            htmlDescription: '',
+            description: 'Summary of Angles introduction',
+            htmlTitle: 'Summary of Angles introduction',
+            htmlDescription: 'Definition of an angle and where the name comes from',
             fullLesson: true,
           },
         },
@@ -100,34 +72,20 @@ export default function getLessonIndex() {
         explanation: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Full Explanation',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Introduction to area, rectangle area and square area',
+            htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Create an area',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Quiz: Create a rectangle or square with area',
+            htmlDescription: 'Create a rectangle or square that has some defined area on this dynamic page',
             fullLesson: true,
           },
         },
@@ -136,8 +94,8 @@ export default function getLessonIndex() {
             type: 'presentation',
             title: 'Base',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Summary of area, rectangle area and square area.',
+            htmlDescription: 'Summary of area concept, and equations for rectangle area and square area',
             fullLesson: true,
           },
         },
@@ -155,33 +113,19 @@ export default function getLessonIndex() {
         explanation: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Presentation Explanation',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Intuitive derivation of circle area',
+            htmlDescription: 'Find the equation for circle area using triangles',
             fullLesson: true,
           },
           static: {
             type: 'singlePage',
-            title: 'Area of Circle',
+            title: 'Single Page Explanation',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Intuitive derivation of circle area in a single page',
+            htmlDescription: 'Using triangles, find the equation to area of a circle',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -189,8 +133,8 @@ export default function getLessonIndex() {
             type: 'presentation',
             title: 'Base',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Quiz: Calculate the circle property',
+            htmlDescription: 'Calculate circle property from either the radius, diameter, area or circumference',
             fullLesson: true,
           },
         },
@@ -199,8 +143,8 @@ export default function getLessonIndex() {
             type: 'presentation',
             title: 'Base',
             description: '',
-            htmlTitle: '',
-            htmlDescription: '',
+            htmlTitle: 'Summary of Circle Area',
+            htmlDescription: 'Area of a circle equation',
             fullLesson: true,
           },
         },
@@ -223,20 +167,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -280,20 +210,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -333,20 +249,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -390,20 +292,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -433,20 +321,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -498,20 +372,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -553,20 +413,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -606,20 +452,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
       },
       dependencies: [
       ],
@@ -638,20 +470,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -695,20 +513,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -738,20 +542,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -795,20 +585,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -838,20 +614,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -895,20 +657,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -950,20 +698,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -994,20 +728,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1053,9 +773,9 @@ export default function getLessonIndex() {
           pythagorus_proof: {
             type: 'singlePage',
             title: 'Derivation of Pythagorean Theorem',
-            description: 'Derivation using area of four right angle triangles.',
-            htmlTitle: '',
-            htmlDescription: '',
+            description: 'Derivation using area of four right angle triangles',
+            htmlTitle: 'Pythagorean Theorem Derivation',
+            htmlDescription: 'Derivation using area of four right angle triangles',
             fullLesson: false,
           },
         },
@@ -1066,20 +786,6 @@ export default function getLessonIndex() {
             description: 'External links to sources of information for Right Angle Triangles',
             htmlTitle: '',
             htmlDescription: '',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -1099,7 +805,7 @@ export default function getLessonIndex() {
             title: 'Properties',
             description: '',
             htmlTitle: 'Right Angle Triangle Summary',
-            htmlDescription: 'Right angle triangle definition including hypotenuse, area and pythagorean theorem',
+            htmlDescription: 'Right angle triangle definition including hypotenuse, area and pythagorean theorem.',
             fullLesson: true,
           },
         },
@@ -1122,20 +828,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1250,20 +942,6 @@ export default function getLessonIndex() {
             htmlTitle: '',
             htmlDescription: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
