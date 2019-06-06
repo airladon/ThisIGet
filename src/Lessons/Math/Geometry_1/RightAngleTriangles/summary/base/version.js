@@ -4,8 +4,9 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Summary',
-  description: 'Summary of right angle triangle properties.',
+  title: 'Properties',
+  htmlTitle: 'Right Angle Triangle Summary',
+  htmlDescription: 'Right angle triangle definition including hypotenuse, area and pythagorean theorem',
   fullLesson: true,
   type: 'presentation',
 };

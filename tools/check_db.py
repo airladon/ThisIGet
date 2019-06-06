@@ -113,6 +113,13 @@ for key, value in index.items():            # noqa
                      'description', version_object, 'description'):
                 version.description = version_object['description']
 
+            if check(show, write, version, 'htmlTitle', version_object, 'htmlTitle'):
+                    version.htmlTitle = version_object['htmlTitle']
+
+            if check(show, write, version,
+                     'htmlDescription', version_object, 'htmlDescription'):
+                version.htmlDescription = version_object['htmlDescription']
+
             if 'fullLesson' in version_object:
                 if check_row(show, write, version, 'fullLesson',
                              toBool(version_object['fullLesson'])):

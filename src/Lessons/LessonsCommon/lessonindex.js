@@ -10,30 +10,16 @@ export default function getLessonIndex() {
         explanation: {
           base: {
             type: 'presentation',
-            title: 'Base',
-            description: '',
+            title: 'Full Explanation',
+            description: 'Explanation of complementary, supplementary, and explementary angles.',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
           base: {
             type: 'presentation',
-            title: 'Base',
-            description: '',
+            title: 'Complementary, Supplementary and Explementary Angles.',
+            description: 'Summary of complementary, supplementary and explementary Angles.',
             fullLesson: true,
           },
         },
@@ -54,20 +40,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: 'Introduction to Angles.',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -95,20 +67,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -152,20 +110,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -199,20 +143,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -250,20 +180,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -297,20 +213,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -348,20 +250,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -387,20 +275,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -440,21 +314,7 @@ export default function getLessonIndex() {
           base: {
             type: 'generic',
             title: 'External',
-            description: 'External',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
+            description: 'External links to sources of information for Right Angle Triangles',
             fullLesson: false,
           },
         },
@@ -493,20 +353,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -540,20 +386,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
       },
       dependencies: [
       ],
@@ -570,20 +402,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -621,20 +439,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -660,20 +464,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -711,20 +501,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -750,20 +526,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -801,20 +563,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -850,20 +598,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -890,20 +624,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -951,21 +671,7 @@ export default function getLessonIndex() {
           base: {
             type: 'generic',
             title: 'External',
-            description: 'External',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
+            description: 'External links to sources of information for Right Angle Triangles',
             fullLesson: false,
           },
         },
@@ -980,8 +686,8 @@ export default function getLessonIndex() {
         summary: {
           base: {
             type: 'presentation',
-            title: 'Summary',
-            description: 'Summary of right angle triangle properties.',
+            title: 'Properties',
+            description: '',
             fullLesson: true,
           },
         },
@@ -1002,20 +708,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1116,20 +808,6 @@ export default function getLessonIndex() {
             title: 'Base',
             description: '',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
