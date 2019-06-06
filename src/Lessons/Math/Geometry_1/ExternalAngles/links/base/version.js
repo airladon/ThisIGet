@@ -7,6 +7,8 @@ var version = {
   type: 'generic',
   title: 'External',
   description: 'External links to sources of information for Right Angle Triangles',
+  htmlTitle: '',
+  htmlDescription: '',
   links: [
     {
       url: 'https://www.khanacademy.org/math/basic-geo/basic-geometry-shapes/triangle-angles/v/triangle-angle-example-1',

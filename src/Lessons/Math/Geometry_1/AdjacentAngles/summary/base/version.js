@@ -6,6 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Complementary, Supplementary and Explementary Angles.',
   description: 'Summary of complementary, supplementary and explementary Angles.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

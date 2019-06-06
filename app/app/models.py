@@ -177,8 +177,8 @@ class Versions(db.Model):
     all_ratings = db.relationship(
         'AllRatings', backref='version', lazy='dynamic')
     # ratings = db.relationship('Topics', backref='version', lazy='dynamic')
-    htmlTitle = db.Column(db.String(128), index=True, unique=True)
-    htmlDescription = db.Column(db.String(256), index=True, unique=True)
+    htmlTitle = db.Column(db.String(128), index=True)
+    htmlDescription = db.Column(db.String(256), index=True)
 
     def __repr__(self):
         return '<Version: {}/{}({})/{}({})/{}({})>'.format(

@@ -6,6 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Find the Unknown Angle',
   description: 'Find the unknown angle in a right angle triangle.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

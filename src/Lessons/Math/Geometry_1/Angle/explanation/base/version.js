@@ -6,6 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Base',
   description: 'Introduction to Angles.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

@@ -6,6 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Area of Circle',
   description: '',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'singlePage',
 };

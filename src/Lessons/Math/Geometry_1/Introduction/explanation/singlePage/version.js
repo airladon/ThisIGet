@@ -6,6 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Initial - Single Page',
   description: 'Single page form - interactive.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'singlePage',
 };

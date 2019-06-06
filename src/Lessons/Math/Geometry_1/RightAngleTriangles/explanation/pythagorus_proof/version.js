@@ -6,6 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Derivation of Pythagorean Theorem',
   description: 'Derivation using area of four right angle triangles.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: false,
   type: 'singlePage',
 };

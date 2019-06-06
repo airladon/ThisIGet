@@ -6,6 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

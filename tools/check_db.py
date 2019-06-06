@@ -52,8 +52,10 @@ index = index_loader(
 
 # Process Index
 for key, value in index.items():            # noqa
+    print(key)
     # Update or create category row
     category_name = value['path'].split('/')[3]
+    # pdb.set_trace()
     category = Categories.query.filter_by(category=category_name).first()
     if category is None:
         category_path = '/'.join(value['path'].split('/')[0:3])
@@ -127,8 +129,6 @@ for key, value in index.items():            # noqa
                         version_object['fullLesson'])
             if check(show, write, version, 'pageType', version_object, 'type'):
                 version.pageType = version_object['type']
-            # if write:
-            #     db.session.commit()
 
 # #######################################################################
 # Links

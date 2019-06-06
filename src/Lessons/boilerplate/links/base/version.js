@@ -7,6 +7,8 @@ var version = {
   type: 'generic',
   title: 'undefined',
   description: 'undefined',
+  htmlTitle: '',
+  htmlDescription: '',
   links: [
     {
       url: '',
