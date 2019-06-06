@@ -4,7 +4,7 @@ services:
   flaskapp:
     build: .
     env_file:
-      - ../env.txt
+      - ../containers/env.txt
     # volumes:
     #  - .:/opt/services/flaskapp/src
     networks:
