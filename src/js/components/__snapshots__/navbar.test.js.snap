@@ -11,6 +11,7 @@ exports[`Navbar Make "About" item active 1`] = `
         href="/"
       >
         <img
+          alt="navbar home icon"
           className="navbar-icon"
           src="/static/icon-lg.png"
         />
@@ -42,6 +43,7 @@ exports[`Navbar Make "Introduction" item active 1`] = `
         href="/"
       >
         <img
+          alt="navbar home icon"
           className="navbar-icon"
           src="/static/icon-lg.png"
         />
@@ -73,6 +75,7 @@ exports[`Navbar No props 1`] = `
         href="/"
       >
         <img
+          alt="navbar home icon"
           className="navbar-icon"
           src="/static/icon-lg.png"
         />
