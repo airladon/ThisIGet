@@ -95,7 +95,7 @@ def get_lesson(path):
     js = f'{path}/lesson.js'
     *p, lesson_uid, topic_name, version_uid = path.split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
-    title = version.htmlTitle
+    title = f'{version.htmlTitle} - TIG'
     if version.htmlTitle == '':
         title = (f'{version.topic.lesson.title} '
                  f'{version.topic.name.capitalize()}: '

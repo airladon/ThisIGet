@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz: Calculate the circle property',
+  htmlDescription: 'Calculate circle property from either the radius, diameter, area or circumference',
   fullLesson: true,
   type: 'presentation',
 };

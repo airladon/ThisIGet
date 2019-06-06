@@ -6,8 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Summary of area, rectangle area and square area.',
+  htmlDescription: 'Summary of area concept, and equations for rectangle area and square area',
   fullLesson: true,
   type: 'presentation',
 };

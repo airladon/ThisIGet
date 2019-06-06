@@ -5,9 +5,9 @@ var version = {
   uid: 'base',
   topic: 'summary',
   title: 'Base',
-  description: 'Introduction to Angles.',
-  htmlTitle: '',
-  htmlDescription: '',
+  description: 'Summary of Angles introduction',
+  htmlTitle: 'Summary of Angles introduction',
+  htmlDescription: 'Definition of an angle and where the name comes from',
   fullLesson: true,
   type: 'presentation',
 };

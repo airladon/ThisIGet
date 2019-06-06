@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Intuitive derivation of circle area',
+  htmlDescription: 'Find the equation for circle area using triangles',
   fullLesson: true,
   type: 'presentation',
 };
