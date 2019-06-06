@@ -213,6 +213,7 @@
   // margin-top: var(--navigator__tile_padding_vertical);
   margin-right: var(--navigator__tile_img_text_space);
   float: left;
+  object-fit: contain;
 }
 
 .navigator__lesson_tile_path_container {

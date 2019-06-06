@@ -22,7 +22,7 @@ def index_loader(file):
     modified_str = re.sub(r"new LessonDescription\(", '', details_str)
     modified_str = re.sub(r"} *\) *,", '},', modified_str)
     modified_str = re.sub("'", '"', modified_str)
-    modified_str = re.sub(r"([^' ]*):", r'"\1":', modified_str)
+    modified_str = re.sub(r"\n *([^' ]*):", r'"\1":', modified_str)
     modified_str = re.sub("\n", "", modified_str)
     modified_str = re.sub(
         "([^'])false([^'])", r'\1"False"\2', modified_str)

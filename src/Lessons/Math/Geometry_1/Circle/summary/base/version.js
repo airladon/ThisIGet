@@ -6,6 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Initial',
   description: 'Presentation form - interactive.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

@@ -62,6 +62,8 @@ export default function getLessonIndex() {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
             let versionDescription = '';
+            let versionHtmlTitle = '';
+            let versionHtmlDescription = '';
             let fullLesson = false;
             let type = 'generic';
             // let references = [];
@@ -82,6 +84,12 @@ export default function getLessonIndex() {
               }
               if (version.description != null) {
                 versionDescription = version.description;
+              }
+              if (version.htmlTitle != null) {
+                versionHtmlTitle = version.htmlTitle;
+              }
+              if (version.htmlDescription != null) {
+                versionHtmlDescription = version.htmlDescription;
               }
               if (version.fullLesson != null) {
                 ({ fullLesson } = version);
@@ -105,6 +113,8 @@ export default function getLessonIndex() {
             } else {
               outStr = `${outStr}\n            title: '${versionTitle}',`;
               outStr = `${outStr}\n            description: '${versionDescription}',`;
+              outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle}',`;
+              outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription}',`;
               outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
             }
             outStr = `${outStr}\n          },`;

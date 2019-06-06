@@ -6,6 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Derivation',
   description: '',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'singlePage',
 };

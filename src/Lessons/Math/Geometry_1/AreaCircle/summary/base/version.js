@@ -6,6 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
+  htmlTitle: 'Summary of Circle Area',
+  htmlDescription: 'Area of a circle equation',
   fullLesson: true,
   type: 'presentation',
 };

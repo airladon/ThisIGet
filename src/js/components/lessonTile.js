@@ -53,7 +53,7 @@ export default class LessonTile extends React.Component
       imgLink = `${'/static/dist'}${props.imgLink}`;
     }
     const content = <div className={classText}>
-        <img src={imgLink} className="navigator__lesson_tile_image" />
+        <img src={imgLink} className="navigator__lesson_tile_image" alt={`Icon for ${label}`}/>
         <div className="navigator__lesson_tile_title_container">
           <div className="navigator__lesson_tile_title">
             {label}

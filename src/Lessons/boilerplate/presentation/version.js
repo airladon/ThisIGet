@@ -6,6 +6,8 @@ var version = {
   topic: 'boilerplate',
   title: 'Version_title_here',
   description: 'Explanation_of_version_here.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: false,
   type: 'generic',
 };

@@ -4,8 +4,10 @@
 var version = {
   uid: 'static',
   topic: 'explanation',
-  title: 'Area of Circle',
+  title: 'Single Page Explanation',
   description: '',
+  htmlTitle: 'Intuitive derivation of circle area in a single page',
+  htmlDescription: 'Using triangles, find the equation to area of a circle',
   fullLesson: true,
   type: 'singlePage',
 };

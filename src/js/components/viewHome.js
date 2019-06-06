@@ -15,11 +15,13 @@ export default class ViewHome extends React.Component<Props> {
     delete props.active;
     return <div>
       <HomeBanner/>
+      <main>
       <div className='lesson__white_spacer'/>
       <LessonNavigator learningPath={'Geometry_1'}/>
       <div className='lesson__white_spacer'/>
       <LessonNavigator learningPath={'Trigonometry_1'}/>
       <div className='lesson__white_spacer'/>
+      </main>
     </div>;
   }
 }

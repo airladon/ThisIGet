@@ -4,8 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
-  description: '',
+  title: 'Complementary, Supplementary and Explementary Angles.',
+  description: 'Summary of complementary, supplementary and explementary Angles.',
+  htmlTitle: 'Complementary, supplementary and explementary angles summary',
+  htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
   fullLesson: true,
   type: 'presentation',
 };

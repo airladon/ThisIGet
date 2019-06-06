@@ -24,7 +24,6 @@ function entryPoints(buildMode) {
 }
 
 function escape(text) {
-  console.log(text)
   return text.replace(/'/, '\\\'');
 }
 
@@ -116,6 +115,10 @@ function updateDetailsAndVersions() {
         }
       } else if (topic === 'links') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
+        outStr = `${outStr}\n  title: '${version.title || ''}',`;
+        outStr = `${outStr}\n  description: '${version.description || ''}',`;
+        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle || ''}',`;
+        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription || ''}',`;
         outStr = `${outStr}\n  links: [`;
         if (version.links.length > 0) {
           version.links.forEach((link) => {
@@ -143,6 +146,8 @@ function updateDetailsAndVersions() {
       } else {
         outStr = `${outStr}\n  title: '${version.title || ''}',`;
         outStr = `${outStr}\n  description: '${version.description || ''}',`;
+        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle || ''}',`;
+        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription || ''}',`;
         outStr = `${outStr}\n  fullLesson: ${version.fullLesson || 'false'},`;
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
       }

@@ -6,6 +6,8 @@ var version = {
   topic: 'boilerplate',
   title: 'Markdown_Lesson',
   description: 'Markdown generated.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: false,
   type: 'generic',
 };

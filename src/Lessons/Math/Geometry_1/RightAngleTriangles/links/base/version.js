@@ -5,6 +5,10 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
+  title: 'External',
+  description: 'External links to sources of information for Right Angle Triangles',
+  htmlTitle: '',
+  htmlDescription: '',
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Right_triangle',

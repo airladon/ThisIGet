@@ -4,8 +4,10 @@
 var version = {
   uid: 'pythagorus_proof',
   topic: 'explanation',
-  title: 'Derivation',
-  description: 'Pythagorean Theorem Only',
+  title: 'Derivation of Pythagorean Theorem',
+  description: 'Derivation using area of four right angle triangles',
+  htmlTitle: 'Pythagorean Theorem Derivation',
+  htmlDescription: 'Derivation using area of four right angle triangles',
   fullLesson: false,
   type: 'singlePage',
 };

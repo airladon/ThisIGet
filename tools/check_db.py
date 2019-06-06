@@ -54,6 +54,7 @@ index = index_loader(
 for key, value in index.items():            # noqa
     # Update or create category row
     category_name = value['path'].split('/')[3]
+    # pdb.set_trace()
     category = Categories.query.filter_by(category=category_name).first()
     if category is None:
         category_path = '/'.join(value['path'].split('/')[0:3])
@@ -113,6 +114,13 @@ for key, value in index.items():            # noqa
                      'description', version_object, 'description'):
                 version.description = version_object['description']
 
+            if check(show, write, version, 'htmlTitle', version_object, 'htmlTitle'):
+                    version.htmlTitle = version_object['htmlTitle']
+
+            if check(show, write, version,
+                     'htmlDescription', version_object, 'htmlDescription'):
+                version.htmlDescription = version_object['htmlDescription']
+
             if 'fullLesson' in version_object:
                 if check_row(show, write, version, 'fullLesson',
                              toBool(version_object['fullLesson'])):
@@ -120,8 +128,6 @@ for key, value in index.items():            # noqa
                         version_object['fullLesson'])
             if check(show, write, version, 'pageType', version_object, 'type'):
                 version.pageType = version_object['type']
-            # if write:
-            #     db.session.commit()
 
 # #######################################################################
 # Links
@@ -138,7 +144,7 @@ links = []
 with open('./tools/link_index.json') as f:
     links = json.load(f)
 
-for link in links:
+for link in links:  # noqa
     db_link = Links.query.filter_by(url=link['url']).first()
     if db_link is None:
         if show:

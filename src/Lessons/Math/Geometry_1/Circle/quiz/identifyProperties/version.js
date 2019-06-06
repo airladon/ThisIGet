@@ -6,6 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Identify Properties',
   description: 'Identify the properties of a circle.',
+  htmlTitle: '',
+  htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
 };

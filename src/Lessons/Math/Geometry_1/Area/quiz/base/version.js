@@ -4,8 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Create an area',
   description: '',
+  htmlTitle: 'Quiz: Create a rectangle or square with area',
+  htmlDescription: 'Create a rectangle or square that has some defined area on this dynamic page',
   fullLesson: true,
   type: 'presentation',
 };
