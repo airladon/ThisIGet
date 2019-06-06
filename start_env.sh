@@ -14,12 +14,12 @@ PROJECT_PATH=`pwd`
 FAIL=0
 
 stop_dev_server() {
-  SERVER_RUNNING=`docker ps --format {{.Names}} \
+  SERVER_RUNNING=`sudo docker ps --format {{.Names}} \
                 | grep devenv-dev-server`
   if [ $SERVER_RUNNING ];
     then
     echo Dev server container is running - stopping...
-    docker stop devenv-dev-server
+    sudo docker stop devenv-dev-server
   fi
 }
 
@@ -110,7 +110,7 @@ then
   cp containers/$DOCKERFILE Dockerfile
 
   GUNICORN_PORT=4000
-  docker build -t devenv-$1 .
+  sudo docker build -t devenv-$1 .
   rm Dockerfile
 fi
 
@@ -119,7 +119,7 @@ echo
 echo "${bold}${cyan}================= Starting container ===================${reset}"
 if [ $1 = 'prod' ];
 then
-  docker run -it --rm \
+  sudo docker run -it --rm \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
@@ -127,7 +127,7 @@ then
     devenv-$1
 elif [ $1 = 'pupp' ];
 then
-  docker run -it --rm \
+  sudo docker run -it --rm \
     --name devenv-$1 \
     -p $HOST_PORT:$CONTAINER_PORT \
     --env PORT=$CONTAINER_PORT \
@@ -140,7 +140,7 @@ then
 else
   # docker volume create browser-tests
   # docker run 
-  docker run -it --rm \
+  sudo docker run -it --rm \
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
     -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
