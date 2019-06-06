@@ -2,7 +2,7 @@
 version: '3'
 services:
   flaskapp:
-    build: .
+    build: ../containers/Dockerfile_prod
     env_file:
       - ../containers/env.txt
     # volumes:
@@ -20,8 +20,8 @@ services:
     depends_on: 
       - flaskapp
 networks:
-  db_nw:
-    driver: bridge
+  # db_nw:
+  #   driver: bridge
   web_nw:
     driver: bridge
 # volumes:
