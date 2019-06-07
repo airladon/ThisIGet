@@ -4,7 +4,7 @@ services:
   flaskapp:
     build: 
       context: .
-      dockerfile: ../containers/Dockerfile_prod
+      dockerfile: ./Dockerfile_prod
     env_file:
       - ../containers/env.txt
     # volumes:
