@@ -27,8 +27,8 @@ services:
     depends_on: 
       - flaskapp
 networks:
-  - web_nw
-    # driver: bridge
+  web_nw:
+    driver: bridge
   # db_nw:
   #   driver: bridge
 # volumes:
