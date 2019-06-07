@@ -2,7 +2,9 @@
 version: '3'
 services:
   flaskapp:
-    build: ../containers/Dockerfile_prod
+    build: 
+      context: .
+      dockerfile: ../containers/Dockerfile_prod
     env_file:
       - ../containers/env.txt
     # volumes:
