@@ -4,9 +4,9 @@ services:
   flaskapp:
     build: 
       context: .
-      dockerfile: ./Dockerfile_prod
+      dockerfile: ./Dockerfile_do
     env_file:
-      - ../containers/env.txt
+      - ./containers/env.txt
     # volumes:
     #  - .:/opt/services/flaskapp/src
     networks:
