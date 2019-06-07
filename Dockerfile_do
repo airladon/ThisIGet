@@ -10,14 +10,14 @@ FROM python:3.7.3-slim
 WORKDIR /opt/app
 
 
-ADD ../requirements.txt .
+ADD requirements.txt .
 RUN pip install --no-cache-dir -q -r requirements.txt
 
 
-ADD ../containers/prod/Procfile .
-ADD ../containers/prod/runtime.txt .
-ADD ../containers/prod/wsgi.py .
-ADD ../app/. .
+ADD containers/prod/Procfile .
+ADD containers/prod/runtime.txt .
+ADD containers/prod/wsgi.py .
+ADD app/. .
 # RUN rm -rf /opt/app/app/static/src
 
 
