@@ -52,7 +52,9 @@ def home():
     res.set_cookie('page', '0')
     return res
 
-
+@app.route('/sitemap.xml')
+def sitemap():
+    return app.send_static_file('sitemap.xml')
 # @app.route('/introduction')
 # def introduction():
 #     return render_template('introduction.html')
