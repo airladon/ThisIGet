@@ -59,7 +59,7 @@ def sitemap():
 
 
 @app.route('/BingSiteAuth.xml')
-def sitemap():
+def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')
 # @app.route('/introduction')
 # def introduction():
