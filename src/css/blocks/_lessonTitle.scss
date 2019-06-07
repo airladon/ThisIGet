@@ -70,7 +70,7 @@ $title-width: 350px;
   vertical-align: middle;
 }
 
-.lesson__title_text {
+.lesson__title_text h1 {
   display: table-cell;
   font-size: 26px;
   font-weight: 200;
@@ -80,13 +80,13 @@ $title-width: 350px;
 }
 
 @media screen and (max-width: 400px) {
-  .lesson__title_text {
+  .lesson__title_text h1 {
     font-size: 20px;
   }
 }
 
 @media screen and (min-width: $tablet) {
-  .lesson__title_text {
+  .lesson__title_text h1 {
     font-size: 30px;
   }
 }

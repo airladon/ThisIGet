@@ -53,7 +53,9 @@ export default class LessonTitle extends React.Component
         </div>
         <div className='lesson__title_text_container'>
           <div className='lesson__title_text'>
-            {label}
+            <h1>
+              {label}
+            </h1>
           </div>
         </div>
       </div>
