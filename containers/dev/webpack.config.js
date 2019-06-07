@@ -8,7 +8,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getLessons.js');
 const createLessonIndex = require('./createIndex.js');
-const createSiteMap = require('./createSiteMap.js');
+const createSiteMap = require('./createSitemap.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
