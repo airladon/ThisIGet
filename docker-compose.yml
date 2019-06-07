@@ -7,7 +7,7 @@ services:
       dockerfile: ./Dockerfile_do
     command: gunicorn --bind 0.0.0.0:5000 wsgi
     ports:
-      - "80:5000"
+      - "8080:5000"
     # env_file:
     #   - ./containers/env.txt
     # volumes:
@@ -21,7 +21,7 @@ services:
   nginx:
     image: "nginx:1.16.0"
     ports:
-      - "8080:80"
+      - "80:8080"
     volumes:
       - ./nginx_config.conf:/etc/nginx/conf.d/default.conf
     networks:
