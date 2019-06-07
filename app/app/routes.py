@@ -53,6 +53,14 @@ def home():
     return res
 
 
+@app.route('/sitemap.xml')
+def sitemap():
+    return app.send_static_file('sitemap.xml')
+
+
+@app.route('/BingSiteAuth.xml')
+def bingsitemap():
+    return app.send_static_file('BingSiteAuth.xml')
 # @app.route('/introduction')
 # def introduction():
 #     return render_template('introduction.html')
