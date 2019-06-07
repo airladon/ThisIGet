@@ -1,10 +1,12 @@
 
-version: '3'
+version: '3.7'
 services:
   flaskapp:
     build: 
       context: .
       dockerfile: ./Dockerfile_do
+    ports:
+      - "8080:5000"
     # env_file:
     #   - ./containers/env.txt
     # volumes:
