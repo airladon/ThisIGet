@@ -28,5 +28,6 @@ RUN chown myuser app
 RUN chown myuser app/app.db
 RUN chmod 666 app/app.db
 USER myuser
-
-CMD gunicorn --bind 0.0.0.0:5000 wsgi
+EXPOSE 5000
+# CMD gunicorn --bind 0.0.0.0:5000 wsgi
+CMD gunicorn --bind 0.0.0.0:5000
