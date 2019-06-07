@@ -5,12 +5,12 @@ services:
     build: 
       context: .
       dockerfile: ./Dockerfile_do
-    env_file:
-      - ./containers/env.txt
+    # env_file:
+    #   - ./containers/env.txt
     # volumes:
     #  - .:/opt/services/flaskapp/src
-    networks:
-      - web_nw
+    # networks:
+    #   - web_nw
     # ports:
     #   - 8080:5000
   # nginx:
@@ -23,9 +23,9 @@ services:
   #     - web_nw
   #   depends_on: 
   #     - flaskapp
-networks:
-  web_nw:
-    driver: bridge
+# networks:
+#   - web_nw
+    # driver: bridge
   # db_nw:
   #   driver: bridge
 # volumes:
