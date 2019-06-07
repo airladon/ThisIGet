@@ -10,7 +10,9 @@ services:
     # volumes:
     #  - .:/opt/services/flaskapp/src
     networks:
-      - web_nw
+      web_nw:
+        aliases:
+          - flask-app
     ports:
       - 8080:5000
   nginx:
