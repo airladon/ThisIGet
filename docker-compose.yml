@@ -11,8 +11,8 @@ services:
     #  - .:/opt/services/flaskapp/src
     networks:
       - web_nw
-    ports:
-      - 8080:5000
+    # ports:
+    #   - 8080:5000
   # nginx:
   #   image: "nginx:1.16.0"
   #   ports:
