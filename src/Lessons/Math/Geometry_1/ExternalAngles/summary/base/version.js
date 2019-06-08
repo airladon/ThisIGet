@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Base',
+  title: 'External angle summary',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Summary of triangle external angle (or exterior angle)',
+  htmlDescription: 'Interactive diagram showing and describing the external angle of a triangle',
   fullLesson: true,
   type: 'presentation',
 };

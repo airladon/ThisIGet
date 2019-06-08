@@ -6,8 +6,8 @@ var version = {
   topic: 'links',
   type: 'generic',
   title: 'External',
-  description: 'External links to sources of information for Right Angle Triangles',
-  htmlTitle: '',
+  description: 'External links to sources of information for External Angles of Triangles',
+  htmlTitle: 'External links describing triangle external angles (or exterior angles)',
   htmlDescription: '',
   links: [
     {

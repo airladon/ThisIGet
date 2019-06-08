@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - find the external angle of a triangle',
+  htmlDescription: 'Find the external angle (also called exterior angle) in a triangle quiz',
   fullLesson: true,
   type: 'presentation',
 };
