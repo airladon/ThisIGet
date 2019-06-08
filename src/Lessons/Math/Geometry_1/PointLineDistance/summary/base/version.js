@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Summary of point line distance property',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Quadrangles (quadrilaterals) summary',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

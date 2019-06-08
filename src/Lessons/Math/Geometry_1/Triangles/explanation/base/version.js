@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to triangles and their properties',
+  htmlDescription: 'Proof that triangle total angle equals 180º',
   fullLesson: true,
   type: 'presentation',
 };

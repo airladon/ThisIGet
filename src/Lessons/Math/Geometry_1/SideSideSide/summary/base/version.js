@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Congruent triangles by SSS Summary',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

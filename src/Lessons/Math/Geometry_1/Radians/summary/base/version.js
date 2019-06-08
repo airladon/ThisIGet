@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Summary of what radians are and their relationship to radius and arc length',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

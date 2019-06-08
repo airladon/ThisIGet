@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to radians and why we use them',
+  htmlDescription: 'Radians and their relationship with arc length and radius',
   fullLesson: true,
   type: 'presentation',
 };

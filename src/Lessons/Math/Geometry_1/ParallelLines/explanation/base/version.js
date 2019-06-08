@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Interactive introduction to parallel lines',
+  htmlDescription: 'See what parallel lines are, and when lines are parallel',
   fullLesson: true,
   type: 'presentation',
 };

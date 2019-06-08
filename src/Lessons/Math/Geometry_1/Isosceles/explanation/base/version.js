@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Isosceles triangles and proof',
+  htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
   fullLesson: true,
   type: 'presentation',
 };

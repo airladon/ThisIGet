@@ -6,7 +6,7 @@ var version = {
   topic: 'explanation',
   title: 'Full explanation',
   description: 'Properties of right angle triangles, and the Pythagorean theorem.',
-  htmlTitle: 'Right Angle Triangle Introduction and Explanation',
+  htmlTitle: 'Right angle triangle introduction and pythagoean theorem proof',
   htmlDescription: 'Right angle triangle introduction, hypotenuse, area and pythagorean theorem derivation.',
   fullLesson: true,
   type: 'presentation',

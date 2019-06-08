@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz: Find the arc or angle that matches the target',
+  htmlDescription: 'Interactive quiz where you can change the diagram to find the target angle or arc length',
   fullLesson: true,
   type: 'presentation',
 };

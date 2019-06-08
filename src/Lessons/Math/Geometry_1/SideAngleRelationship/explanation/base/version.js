@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to relationship between triangle side length and angle',
+  htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
   fullLesson: true,
   type: 'presentation',
 };

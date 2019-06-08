@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to the distance between parallel lines',
+  htmlDescription: 'Investigate the property of distance between parallel lines',
   fullLesson: true,
   type: 'presentation',
 };

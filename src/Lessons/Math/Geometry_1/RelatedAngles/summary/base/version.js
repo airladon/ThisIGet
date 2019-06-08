@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
+  htmlDescription: 'Dynamic quiz where no two questions are the same',
   fullLesson: true,
   type: 'presentation',
 };

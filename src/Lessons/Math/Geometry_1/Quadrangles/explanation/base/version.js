@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to quadrangles and quadrilaterals',
+  htmlDescription: 'Quadrangles, quadrilaterals and their properties',
   fullLesson: true,
   type: 'presentation',
 };
