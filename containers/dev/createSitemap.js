@@ -19,7 +19,7 @@ function getFiles(pathDir) {
         return;
       }
       times.push(stat.mtime)
-      console.log(name, stat.mtime)
+      // console.log(name, stat.mtime)
     }
   });
   return times.sort((a,b) => {
@@ -54,16 +54,16 @@ function createSiteMap(lessonsPath, staticPath) {
       if (topic === 'quickReference') {
         return
       }
-      console.log(versionPath)
+      // console.log(versionPath)
       const d = getFiles(versionPath)
-      console.log(d)
-      console.log('')
+      // console.log(d)
+      // console.log('')
       const vPath = versionPath.replace(/^.*\/Lessons\//, '')
       const url = `https://www.thisiget.com/Lessons/${vPath}/`
       // console.log(url)
       outStr = `${outStr}\n  <url>`;
       outStr = `${outStr}\n    <loc>${url}</loc>`;
-      outStr = `${outStr}\n    <lastmod>${d}</lastmod>`;
+      outStr = `${outStr}\n    <lastmod>${(new Date(d)).toISOString()}</lastmod>`;
       outStr = `${outStr}\n  </url>`;
     })
   });
