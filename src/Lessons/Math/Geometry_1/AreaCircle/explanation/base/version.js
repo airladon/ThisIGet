@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Presentation Explanation',
+  title: 'Full explanation',
   description: '',
   htmlTitle: 'Intuitive derivation of circle area',
   htmlDescription: 'Find the equation for circle area using triangles',

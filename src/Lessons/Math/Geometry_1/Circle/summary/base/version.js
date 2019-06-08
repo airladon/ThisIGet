@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'summary',
-  title: 'Initial',
+  title: 'Circle Properties',
   description: 'Presentation form - interactive.',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Properties of a circle summary',
+  htmlDescription: 'Diameter, circumference, radius and center point, and the relationships between them',
   fullLesson: true,
   type: 'presentation',
 };
