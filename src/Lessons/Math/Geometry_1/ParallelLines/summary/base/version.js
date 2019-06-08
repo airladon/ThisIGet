@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Introduction to parallel lines summary',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',
