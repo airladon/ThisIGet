@@ -1,7 +1,10 @@
 const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
-const simpleGit = require('simple-git')
+// const simpleGit = require('simple-git')
+// const { exec } = require('child_process');
+const util = require('util');
+const exec = util.promisify(require('child_process').exec);
 
 
 async function getFileTime(file) {
@@ -60,47 +63,8 @@ function getFiles(pathDir) {
 async function createSiteMap(lessonsPath, staticPath) {
   // console.log(simpleGit().log(['-1', '--pretty="format:%ci"', 'src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js']))
   let d;
-  // await simpleGit().log([
-  //   '-1',
-  //   '--pretty="format:%ci"',
-  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js'
-  // ], (err, result) => {
-  //   // console.log(result)}
-  //   d = result;
-  // }
-  // )
-  // await simpleGit().log([
-  //   '-1',
-  //   '--pretty="format:%ci"',
-  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js'
-  //   --quiet
-  // ]).exec((err, result) => {
-  //   // console.log(result)}
-  //   d = result;
-  // }
-  // )
-  // console.log(d)
-  await simpleGit().raw([
-    'log',
-    '--quiet',
-    '-1',
-    '--pretty="format:%ci"',
-    './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js',
-  ], (err, result) => {
-    // console.log(new Date(result))
-    d = result
-  });
-  // await simpleGit().raw([
-  //   'log',
-  //   '-1',
-  //   '--pretty="format:%ci"',
-  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js',
-  // ]).exec((result) => {
-  //   console.log(result)
-  //   d = result
-  // });
-  // console.log(d)
-  console.log(d)
+  const { stdout, stderr } = await exec('git log -1 --pretty="format:%ci" ./src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js')
+  console.log(new Date(stdout))
 
   const lessons = pathTools.getAllLessons(lessonsPath);
   let outStr = `<?xml version="1.0" encoding="UTF-8"?>
