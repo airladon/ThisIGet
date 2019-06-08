@@ -9,6 +9,9 @@ const exec = util.promisify(require('child_process').exec);
 
 async function getFileTime(file) {
   let time;
+  const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ${file}`)
+  // console.log(new Date(stdout))
+  time = stdout;
   // let time1 = await simpleGit().raw([
   //   'log',
   //   '-1',
@@ -27,13 +30,13 @@ async function getFileTime(file) {
   //   time = result
   // )
   // console.log()
-  time = 1
+  // time = 1
 
   // console.log(time1)
   return time;
 }
 
-function getFiles(pathDir) {
+async function getFiles(pathDir) {
   const times = [];
   fs.readdirSync(pathDir).forEach(async (name) => {
     const filePath = path.join(pathDir, name);
@@ -49,7 +52,7 @@ function getFiles(pathDir) {
         return;
       }
       // console.log()
-      const d = getFileTime(`./${filePath}`);
+      // const d = getFileTime(`./${filePath}`);
       // console.log(d)
       times.push(stat.mtime)
       // console.log(name, stat.mtime)
@@ -60,11 +63,13 @@ function getFiles(pathDir) {
     })[0];
 }
 
-async function createSiteMap(lessonsPath, staticPath) {
+function createSiteMap(lessonsPath, staticPath) {
   // console.log(simpleGit().log(['-1', '--pretty="format:%ci"', 'src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js']))
   let d;
-  const { stdout, stderr } = await exec('git log -1 --pretty="format:%ci" ./src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js')
-  console.log(new Date(stdout))
+  // d = await getFileTime('./src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js')
+  // console.log(d)
+  // const { stdout, stderr } = await exec('git log -1 --pretty="format:%ci" ./src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js')
+  // console.log(new Date(stdout))
 
   const lessons = pathTools.getAllLessons(lessonsPath);
   let outStr = `<?xml version="1.0" encoding="UTF-8"?>
@@ -87,18 +92,20 @@ async function createSiteMap(lessonsPath, staticPath) {
       }
     }
     const versions = pathTools.getAllVersions(lessonPath);
-    versions.forEach((versionPath) => {
+    versions.forEach(async (versionPath) => {
       const topic = versionPath.split('/').slice(-2, -1)[0];
       if (topic === 'quickReference') {
         return
       }
-      // console.log(versionPath)
-      const d = getFiles(versionPath)
-      // console.log(d)
-      // console.log('')
+      try {
+        d = await getFiles(versionPath);
+      } catch (err) {
+        console.log(err)
+      }
+      console.log(d)
+
       const vPath = versionPath.replace(/^.*\/Lessons\//, '')
       const url = `https://www.thisiget.com/Lessons/${vPath}/`
-      // console.log(url)
       outStr = `${outStr}\n  <url>`;
       outStr = `${outStr}\n    <loc>${url}</loc>`;
       outStr = `${outStr}\n    <lastmod>${(new Date(d)).toISOString()}</lastmod>`;
