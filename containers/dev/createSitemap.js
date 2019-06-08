@@ -8,10 +8,13 @@ const exec = util.promisify(require('child_process').exec);
 
 
 async function getFileTime(file) {
-  let time;
-  const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ${file}`)
-  // console.log(new Date(stdout))
-  time = stdout;
+  let time = 1;
+  try {
+    const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ${file}`)
+    time = stdout;
+  } catch (err) {
+    console.log(err)
+  }
   // let time1 = await simpleGit().raw([
   //   'log',
   //   '-1',
@@ -52,7 +55,17 @@ async function getFiles(pathDir) {
         return;
       }
       // console.log()
-      // const d = getFileTime(`./${filePath}`);
+      let n;
+      try {
+        // const d = await getFileTime(`./${filePath}`);
+        const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ./${filePath}`);
+        n = stdout
+
+      } catch (err) {
+        console.log(err);
+      }
+      console.log(n)
+
       // console.log(d)
       times.push(stat.mtime)
       // console.log(name, stat.mtime)
