@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full Explanation',
+  title: 'Full explanation',
   description: 'Properties of right angle triangles, and the Pythagorean theorem.',
   htmlTitle: 'Right Angle Triangle Introduction and Explanation',
   htmlDescription: 'Right angle triangle introduction, hypotenuse, area and pythagorean theorem derivation.',

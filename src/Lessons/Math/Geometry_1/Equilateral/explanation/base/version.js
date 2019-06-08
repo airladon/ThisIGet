@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Equilateral triangle derivation from an isosceles triangle',
+  htmlDescription: 'Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles',
   fullLesson: true,
   type: 'presentation',
 };

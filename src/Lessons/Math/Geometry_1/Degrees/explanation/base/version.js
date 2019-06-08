@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Explanation on why we use degrees as a measure of angle',
+  htmlDescription: 'How angle is measured, why use degrees and common angles in degrees',
   fullLesson: true,
   type: 'presentation',
 };

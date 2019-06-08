@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full Explanation',
+  title: 'Full explanation',
   description: 'Presentation form - interactive.',
   htmlTitle: 'Introduction to circles, their history and properties',
   htmlDescription: 'Introduction to circle, diameter, radius, circumference, center point. Relationships between radius, diameter and circumference.',

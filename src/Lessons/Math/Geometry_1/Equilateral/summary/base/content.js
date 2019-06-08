@@ -44,7 +44,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         three_equal_sides: click(coll.pulseSides, [coll], colors.sides),
-        three_equal_angles: click(coll.pulseAngles, [coll], colors.angles),
+        three_equal_angles: click(coll.pulseAngles, [coll, null], colors.angles),
         sides: highlight(colors.sides),
         angles: highlight(colors.angles),
       },

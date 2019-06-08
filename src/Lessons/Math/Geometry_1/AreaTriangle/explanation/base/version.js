@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Full Explanation',
+  title: 'Full explanation',
   description: '',
   htmlTitle: 'Triangle Area derivation and proof',
   htmlDescription: 'Explanation on why area of a triangle is what it is',
