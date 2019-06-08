@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Make triangle with target area',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - Create a triangle with a given area',
+  htmlDescription: 'Drag the corners of a triangle to change its height and base to get the target area',
   fullLesson: true,
   type: 'presentation',
 };

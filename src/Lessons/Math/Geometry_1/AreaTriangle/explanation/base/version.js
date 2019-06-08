@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full Explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Triangle Area derivation and proof',
+  htmlDescription: 'Explanation on why area of a triangle is what it is',
   fullLesson: true,
   type: 'presentation',
 };

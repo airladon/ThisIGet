@@ -6,8 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Area of a triangle',
+  htmlDescription: 'Summary of triangle area',
   fullLesson: true,
   type: 'presentation',
 };
