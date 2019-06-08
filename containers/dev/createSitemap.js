@@ -1,11 +1,38 @@
 const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
+const simpleGit = require('simple-git')
 
+
+async function getFileTime(file) {
+  let time;
+  // let time1 = await simpleGit().raw([
+  //   'log',
+  //   '-1',
+  //   '--pretty="format:%ci"',
+  //   file,
+  // ], (err, result) => {
+  //   // console.log(file, new Date(result))
+  //   time = new Date(result)
+  // })
+  // let time1 = await simpleGit().log([
+  //   '-1',
+  //   '--pretty="format:%ci"',
+  //   file
+  // ], (err, result) => {
+  //   console.log(result)}
+  //   time = result
+  // )
+  // console.log()
+  time = 1
+
+  // console.log(time1)
+  return time;
+}
 
 function getFiles(pathDir) {
   const times = [];
-  fs.readdirSync(pathDir).forEach((name) => {
+  fs.readdirSync(pathDir).forEach(async (name) => {
     const filePath = path.join(pathDir, name);
     const stat = fs.statSync(filePath);
     if (stat.isFile()) {
@@ -18,6 +45,9 @@ function getFiles(pathDir) {
       ) {
         return;
       }
+      // console.log()
+      const d = getFileTime(`./${filePath}`);
+      // console.log(d)
       times.push(stat.mtime)
       // console.log(name, stat.mtime)
     }
@@ -27,7 +57,51 @@ function getFiles(pathDir) {
     })[0];
 }
 
-function createSiteMap(lessonsPath, staticPath) {
+async function createSiteMap(lessonsPath, staticPath) {
+  // console.log(simpleGit().log(['-1', '--pretty="format:%ci"', 'src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js']))
+  let d;
+  // await simpleGit().log([
+  //   '-1',
+  //   '--pretty="format:%ci"',
+  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js'
+  // ], (err, result) => {
+  //   // console.log(result)}
+  //   d = result;
+  // }
+  // )
+  // await simpleGit().log([
+  //   '-1',
+  //   '--pretty="format:%ci"',
+  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js'
+  //   --quiet
+  // ]).exec((err, result) => {
+  //   // console.log(result)}
+  //   d = result;
+  // }
+  // )
+  // console.log(d)
+  await simpleGit().raw([
+    'log',
+    '--quiet',
+    '-1',
+    '--pretty="format:%ci"',
+    './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js',
+  ], (err, result) => {
+    // console.log(new Date(result))
+    d = result
+  });
+  // await simpleGit().raw([
+  //   'log',
+  //   '-1',
+  //   '--pretty="format:%ci"',
+  //   './src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js',
+  // ]).exec((result) => {
+  //   console.log(result)
+  //   d = result
+  // });
+  // console.log(d)
+  console.log(d)
+
   const lessons = pathTools.getAllLessons(lessonsPath);
   let outStr = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
