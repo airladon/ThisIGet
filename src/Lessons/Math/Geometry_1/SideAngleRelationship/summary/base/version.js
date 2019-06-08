@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Summary of relationship between side and angle in a triangle',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Proof for Side Side Side triangle congruency',
+  htmlDescription: 'Proof for SSS or side-side-side congruent triangles',
   fullLesson: true,
   type: 'presentation',
 };

@@ -5,9 +5,9 @@ var version = {
   uid: 'base',
   topic: 'quiz',
   title: 'Find the Unknown Angle',
-  description: 'Find the unknown angle in a right angle triangle.',
-  htmlTitle: '',
-  htmlDescription: '',
+  description: '',
+  htmlTitle: 'Quiz - Find the unknown angle, side or area in a right angle triangle.',
+  htmlDescription: 'Dynamic quiz where no two questions are the same',
   fullLesson: true,
   type: 'presentation',
 };
