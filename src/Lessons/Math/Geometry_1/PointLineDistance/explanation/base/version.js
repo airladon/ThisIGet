@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to distance between a point and line',
+  htmlDescription: 'Properties of distance between point and a line',
   fullLesson: true,
   type: 'presentation',
 };
