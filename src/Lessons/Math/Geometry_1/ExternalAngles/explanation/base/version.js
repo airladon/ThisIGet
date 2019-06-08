@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'External angles (also called exterior angles) in a triangle explanation through presentation',
+  htmlDescription: 'Proof of external angles in a triangle equalling sum of opposite internal angles',
   fullLesson: true,
   type: 'presentation',
 };
