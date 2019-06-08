@@ -6,7 +6,7 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Summary of rectangle and square properties',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Base',
+  title: 'Full explanation',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to rectangles and squares and derivation of their properties',
+  htmlDescription: 'Proof showing why a rectangles opposite sides are equal and parallel',
   fullLesson: true,
   type: 'presentation',
 };
