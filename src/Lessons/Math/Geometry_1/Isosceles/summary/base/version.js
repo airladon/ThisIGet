@@ -6,8 +6,8 @@ var version = {
   topic: 'summary',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Summary of Isosceles triangle and its properties',
+  htmlDescription: 'Isosceles triangle, side and angle equality, split line properties',
   fullLesson: true,
   type: 'presentation',
 };

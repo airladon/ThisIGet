@@ -6,8 +6,8 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Quiz - Find the missing side or angle of an isosceles triangle',
+  htmlDescription: 'Given a set of sides and angles, find the missing one',
   fullLesson: true,
   type: 'presentation',
 };
