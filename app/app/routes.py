@@ -103,11 +103,11 @@ def get_lesson(path):
     js = f'{path}/lesson.js'
     *p, lesson_uid, topic_name, version_uid = path.split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
-    title = f'{version.htmlTitle} - TIG'
+    title = f'{version.htmlTitle} - This I Get'
     if version.htmlTitle == '':
         title = (f'{version.topic.lesson.title} '
                  f'{version.topic.name.capitalize()}: '
-                 f'{version.title} - TIG')
+                 f'{version.title} - This I Get')
     description = f'{version.htmlDescription}'
     print(description)
     lesson_page = request.args.get('page')
