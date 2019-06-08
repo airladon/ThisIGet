@@ -6,7 +6,7 @@ var version = {
   topic: 'quiz',
   title: 'Base',
   description: '',
-  htmlTitle: '',
+  htmlTitle: 'Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full',
   htmlDescription: '',
   fullLesson: true,
   type: 'presentation',

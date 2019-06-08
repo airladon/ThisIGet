@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Initial',
   description: 'Presentation form - interactive.',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Introduction to why we should study shapes',
+  htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
   fullLesson: true,
   type: 'presentation',
 };

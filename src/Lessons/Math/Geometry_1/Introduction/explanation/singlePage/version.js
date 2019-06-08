@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Initial - Single Page',
   description: 'Single page form - interactive.',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Interactive introduction to shapes',
+  htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
   fullLesson: true,
   type: 'singlePage',
 };
