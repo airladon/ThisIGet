@@ -51,19 +51,19 @@ for version in versions:
 
 
 def writeURL(f, link, last_mod, changeFreq):
-    f.writeline('  <url>')
-    f.writeline(f'   <loc>{link}/</loc>')
-    f.writeline(f'   <lastmod>{last_mod}</lastmod>')
-    f.writeline(f'   <changefreq>{changeFreq}</changefreq>')
-    f.writeline('  </url>`;')
+    f.write('  <url>\n')
+    f.write(f'   <loc>{link}/</loc>\n')
+    f.write(f'   <lastmod>{last_mod}</lastmod>\n')
+    f.write(f'   <changefreq>{changeFreq}</changefreq>\n')
+    f.write('  </url>\n`;')
 
 with open(os.path.join(os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w') as f:
-    f.writeline('<?xml version="1.0" encoding="UTF-8"?>')
-    f.writeline('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
+    f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
     writeURL(f, 'https://www.thisiget.com', '2019-06-10', 'weekly')
 
     for page in pages:
         writeURL(f, page[0], page[1], 'weekly')
 
-    f.writeline('</urlset>')
+    f.write('</urlset>\n')
 
