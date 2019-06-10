@@ -3,13 +3,12 @@ from datetime import timezone
 from datetime import datetime
 import os
 import re
-import pdb
 import requests
 from lxml import etree
 
 
+# #############################################################################
 # Get current sitemap
-
 local_sitemap = os.path.join(
     os.getcwd(), 'app', 'app', 'static', 'sitemap.xml')
 remote_sitemap = 'https://www.thisiget.com/sitemap.xml'
@@ -28,8 +27,8 @@ for sitemap in root:
     children = sitemap.getchildren()
     existing_sitemap[children[0].text] = children[1].text
 
-# print(existing_sitemap)
 
+# #############################################################################
 # Get all lesson versions
 versions = []
 for root, dirs, files in os.walk("./src/Lessons"):
@@ -53,6 +52,7 @@ def get_last_edit(file):
     return None
 
 
+# #############################################################################
 # Get the latest git changed date of all versions
 pages = [['https://www.thisiget.com/', '2019-06-10', 'weekly']]
 for version in versions:
@@ -79,7 +79,8 @@ for version in versions:
     pages.append([
         f'https://www.thisiget.com/{lesson}/', most_recent, 'weekly'])
 
-# Show all added and removed pages in sitemap
+# #############################################################################
+# Show all added, removed and updated pages in sitemap
 existing_urls = set(existing_sitemap.keys())
 current_urls = set([page[0] for page in pages])
 added_urls = current_urls.difference(existing_urls)
@@ -115,15 +116,9 @@ for page in pages:
         print(f'Updating last modified time: {url}   '
               f'{existing_sitemap[url]} => {page[1]}')
 
-exit()
-# Check all created pages in sitemap against existing pages in sitemap and
-# compare dates
-for page in pages:
-    url = page[0]
-    time = page[1]
-    # if url not in sitemap
 
-
+# #############################################################################
+# Write new sitemap
 def writeURL(f, link, last_mod, changeFreq):
     f.write('  <url>\n')
     f.write(f'    <loc>{link}</loc>\n')
