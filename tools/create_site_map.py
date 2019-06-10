@@ -133,6 +133,6 @@ with open(local_sitemap, 'w') as f:
     # writeURL(f, 'https://www.thisiget.com/', '2019-06-10', 'weekly')
 
     for page in pages:
-        writeURL(f, page[0], page[1], page[3])
+        writeURL(f, page[0], page[1], page[2])
 
     f.write('</urlset>\n')
