@@ -7,41 +7,46 @@ const util = require('util');
 const exec = util.promisify(require('child_process').exec);
 
 
-async function getFileTime(file) {
-  let time = 1;
-  try {
-    const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ${file}`)
-    time = stdout;
-  } catch (err) {
-    console.log(err)
-  }
-  // let time1 = await simpleGit().raw([
-  //   'log',
-  //   '-1',
-  //   '--pretty="format:%ci"',
-  //   file,
-  // ], (err, result) => {
-  //   // console.log(file, new Date(result))
-  //   time = new Date(result)
-  // })
-  // let time1 = await simpleGit().log([
-  //   '-1',
-  //   '--pretty="format:%ci"',
-  //   file
-  // ], (err, result) => {
-  //   console.log(result)}
-  //   time = result
-  // )
-  // console.log()
-  // time = 1
+// async function getFileTime(file) {
+//   let time = 1;
+//   try {
+//     const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ${file}`)
+//     time = stdout;
+//   } catch (err) {
+//     console.log(err)
+//   }
+//   // let time1 = await simpleGit().raw([
+//   //   'log',
+//   //   '-1',
+//   //   '--pretty="format:%ci"',
+//   //   file,
+//   // ], (err, result) => {
+//   //   // console.log(file, new Date(result))
+//   //   time = new Date(result)
+//   // })
+//   // let time1 = await simpleGit().log([
+//   //   '-1',
+//   //   '--pretty="format:%ci"',
+//   //   file
+//   // ], (err, result) => {
+//   //   console.log(result)}
+//   //   time = result
+//   // )
+//   // console.log()
+//   // time = 1
 
-  // console.log(time1)
-  return time;
-}
+//   // console.log(time1)
+//   return time;
+// }
 
 async function getFiles(pathDir) {
-  const times = [];
-  fs.readdirSync(pathDir).forEach(async (name) => {
+  let times = [];
+  const files = [];
+  const dirs = fs.readdirSync(pathDir);
+  for (let p = 0; p < dirs.length; p += 1) {
+    const name = dirs[p]
+  // }
+  // fs.readdirSync(pathDir).forEach(async (name) => {
     const filePath = path.join(pathDir, name);
     const stat = fs.statSync(filePath);
     if (stat.isFile()) {
@@ -55,28 +60,41 @@ async function getFiles(pathDir) {
         return;
       }
       // console.log()
-      let n;
-      try {
-        // const d = await getFileTime(`./${filePath}`);
-        const { stdout, stderr } = await exec(`git log -1 --pretty="format:%ci" ./${filePath}`);
-        n = stdout
-
-      } catch (err) {
-        console.log(err);
-      }
-      console.log(n)
+      files.push(filePath)
+      // console.log(stdout)
 
       // console.log(d)
       times.push(stat.mtime)
       // console.log(name, stat.mtime)
     }
-  });
+  };
+
+  // const promises = [];
+  // for (let i = 0; i < files; i += 1) {
+  //   // files.forEach(async (file) => {
+  //   promises.push(exec(`git log -1 --pretty="format:%ci" ./${file}`));
+  // // })  
+  // }
+  
+  // let results = []
+  // try {
+  //   results = await Promise.all(promises);
+  //   times = results.map((r) => r.stdout)
+  // } catch (err) {
+  //   console.log(err.message)
+  // }
+  // console.log('asdfasdf')
+  // console.log(times)
+  // // console.
+  // // return (await Promise.all(promises)).sort((a, b) => {
+  // //   return new Date(b) - new Date(a);
+  // // })[0]
   return times.sort((a,b) => {
     return new Date(b) - new Date(a);
     })[0];
 }
 
-function createSiteMap(lessonsPath, staticPath) {
+async function createSiteMap(lessonsPath, staticPath) {
   // console.log(simpleGit().log(['-1', '--pretty="format:%ci"', 'src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js']))
   let d;
   // d = await getFileTime('./src/Lessons/Math/Geometry_1/AreaCircle/explanation/base/content.js')
@@ -92,7 +110,9 @@ function createSiteMap(lessonsPath, staticPath) {
     <lastmod>2019-06-07</lastmod>
   </url>`;
 
-  lessons.forEach((lessonPath) => {
+  for (let l = 0; l < lessons.length; l += 1) {
+    const lessonPath = lessons[l];
+  // lessons.forEach(async (lessonPath) => {
     const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
@@ -105,7 +125,9 @@ function createSiteMap(lessonsPath, staticPath) {
       }
     }
     const versions = pathTools.getAllVersions(lessonPath);
-    versions.forEach(async (versionPath) => {
+    for (let v = 0; v < versions.length; v += 1) {
+      versionPath = versions[v];
+    // versions.forEach((versionPath) => {
       const topic = versionPath.split('/').slice(-2, -1)[0];
       if (topic === 'quickReference') {
         return
@@ -115,16 +137,21 @@ function createSiteMap(lessonsPath, staticPath) {
       } catch (err) {
         console.log(err)
       }
-      console.log(d)
+      // console.log(d)
 
       const vPath = versionPath.replace(/^.*\/Lessons\//, '')
       const url = `https://www.thisiget.com/Lessons/${vPath}/`
       outStr = `${outStr}\n  <url>`;
       outStr = `${outStr}\n    <loc>${url}</loc>`;
-      outStr = `${outStr}\n    <lastmod>${(new Date(d)).toISOString()}</lastmod>`;
+      try {
+        outStr = `${outStr}\n    <lastmod>${(new Date(d)).toISOString()}</lastmod>`;
+      } catch (err) {
+        console.log(err, d)
+        console.log(d)
+      }
       outStr = `${outStr}\n  </url>`;
-    })
-  });
+    }
+  };
   outStr = `${outStr}\n</urlset>`
   fs.writeFile(`${staticPath}/sitemap.xml`, outStr, (err) => {
     if (err) {
