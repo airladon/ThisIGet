@@ -1,11 +1,37 @@
 import subprocess
-import datetime
+from datetime import timezone
+from datetime import datetime
 import os
 import re
-# import pdb
+import pdb
+import requests
+from lxml import etree
 
 
-versions = [];
+# Get current sitemap
+
+local_sitemap = os.path.join(
+    os.getcwd(), 'app', 'app', 'static', 'sitemap.xml')
+remote_sitemap = 'https://www.thisiget.com/sitemap.xml'
+
+existing_sitemap_content = ''
+r = requests.get(remote_sitemap)
+if r.status_code == 200:
+    existing_sitemap_content = r.content
+else:
+    with open(local_sitemap, 'r') as f:
+        existing_sitemap_content = f.read().encode('UTF-8')
+
+existing_sitemap = {}
+root = etree.fromstring(existing_sitemap_content)
+for sitemap in root:
+    children = sitemap.getchildren()
+    existing_sitemap[children[0].text] = children[1].text
+
+# print(existing_sitemap)
+
+# Get all lesson versions
+versions = []
 for root, dirs, files in os.walk("./src/Lessons"):
     for file in files:
         if ('quickReference' in root):
@@ -23,11 +49,12 @@ def get_last_edit(file):
     if output.returncode == 0:
         results = output.stdout.decode("utf-8").strip().replace(
             "format:", "").replace('"', '')
-        return datetime.datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
+        return datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
     return None
 
 
-pages = []
+# Get the latest git changed date of all versions
+pages = [['https://www.thisiget.com/', '2019-06-10', 'weekly']]
 for version in versions:
     files = os.listdir(version)
     valid_files = []
@@ -39,7 +66,7 @@ for version in versions:
            or file == 'lesson.js' \
            or file == '.DS_Store' \
            or os.path.isdir(os.path.join(version, file)):
-            continue;
+            continue
 
         valid_files.append(file)
         valid_dates.append(get_last_edit(os.path.join(version, file)))
@@ -49,24 +76,68 @@ for version in versions:
 
     most_recent = (sorted(valid_dates))[-1].strftime("%Y-%m-%dT%H:%M:%S%z")
     lesson = re.sub(r".*\/src\/", '', version)
-    pages.append([f'https://www.thisiget.com/{lesson}', most_recent])
+    pages.append([
+        f'https://www.thisiget.com/{lesson}/', most_recent, 'weekly'])
+
+# Show all added and removed pages in sitemap
+existing_urls = set(existing_sitemap.keys())
+current_urls = set([page[0] for page in pages])
+added_urls = current_urls.difference(existing_urls)
+removed_urls = existing_urls.difference(current_urls)
+
+if len(added_urls) > 0:
+    for url in added_urls:
+        print(f'Adding page: {url}')
+    print()
+
+if len(removed_urls) > 0:
+    for url in removed_urls:
+        print(f'Removing page: {url}')
+    print()
+
+
+def to_time(time_str):
+    if len(time_str) == 10:
+        return datetime.strptime(
+            time_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+    return datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S%z')
+
+
+# Show all pages with updated time
+for page in pages:
+    url = page[0]
+    if url not in existing_urls:
+        continue
+
+    current_time = to_time(page[1])
+    existing_time = to_time(existing_sitemap[url])
+    if current_time > existing_time:
+        print(f'Updating last modified time: {url}   '
+              f'{existing_sitemap[url]} => {page[1]}')
+
+exit()
+# Check all created pages in sitemap against existing pages in sitemap and
+# compare dates
+for page in pages:
+    url = page[0]
+    time = page[1]
+    # if url not in sitemap
 
 
 def writeURL(f, link, last_mod, changeFreq):
     f.write('  <url>\n')
-    f.write(f'   <loc>{link}/</loc>\n')
-    f.write(f'   <lastmod>{last_mod}</lastmod>\n')
-    f.write(f'   <changefreq>{changeFreq}</changefreq>\n')
-    f.write('  </url>\n`;')
+    f.write(f'    <loc>{link}</loc>\n')
+    f.write(f'    <lastmod>{last_mod}</lastmod>\n')
+    f.write(f'    <changefreq>{changeFreq}</changefreq>\n')
+    f.write('  </url>\n')
 
 
-with open(os.path.join(
-        os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w') as f:
+with open(local_sitemap, 'w') as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
-    writeURL(f, 'https://www.thisiget.com', '2019-06-10', 'weekly')
+    # writeURL(f, 'https://www.thisiget.com/', '2019-06-10', 'weekly')
 
     for page in pages:
-        writeURL(f, page[0], page[1], 'weekly')
+        writeURL(f, page[0], page[1], page[3])
 
     f.write('</urlset>\n')
