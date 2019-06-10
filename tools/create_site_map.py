@@ -15,6 +15,7 @@ for root, dirs, files in os.walk("./src/Lessons"):
         if file == 'version.js':
             versions.append(root)
 
+
 def get_last_edit(file):
     output = subprocess.run(
         ["git", "log", "-1", '--pretty="format:%ci"', file],
@@ -25,7 +26,8 @@ def get_last_edit(file):
         return datetime.datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
     return None
 
-pages = [];
+
+pages = []
 for version in versions:
     files = os.listdir(version)
     valid_files = []
@@ -57,7 +59,9 @@ def writeURL(f, link, last_mod, changeFreq):
     f.write(f'   <changefreq>{changeFreq}</changefreq>\n')
     f.write('  </url>\n`;')
 
-with open(os.path.join(os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w') as f:
+
+with open(os.path.join(
+        os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w') as f:
     f.write('<?xml version="1.0" encoding="UTF-8"?>\n')
     f.write('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n')
     writeURL(f, 'https://www.thisiget.com', '2019-06-10', 'weekly')
@@ -66,4 +70,3 @@ with open(os.path.join(os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w')
         writeURL(f, page[0], page[1], 'weekly')
 
     f.write('</urlset>\n')
-
