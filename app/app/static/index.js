@@ -26232,7 +26232,13 @@ function getDefinedCSSVariables(idOrElement, propertyNames) {
 
     if (style) {
       propertyNames.forEach(function (propertyName) {
-        var value = style.getPropertyValue(propertyName).trim();
+        var value = style.getPropertyValue(propertyName);
+
+        if (value == null) {
+          return;
+        }
+
+        value = value.trim();
         var fValue = parseFloat(value);
         var valueToAdd = value;
 
@@ -26277,21 +26283,25 @@ function getCSSVariables(idOrElement) {
         var propertyName = style[i];
 
         if (prefix === '' || propertyName.startsWith(prefix)) {
-          var value = style.getPropertyValue(propertyName).trim();
-          var fValue = parseFloat(value);
-          var valueToAdd = value;
+          var value = style.getPropertyValue(propertyName);
 
-          if (!Number.isNaN(fValue)) {
-            valueToAdd = fValue;
-          }
+          if (value != null) {
+            value = value.trim();
+            var fValue = parseFloat(value);
+            var valueToAdd = value;
 
-          if (makeFlat) {
-            var shortName = toCamelCase(propertyName, prefix);
-            variables[shortName] = valueToAdd;
-          } else {
-            var rePrefix = new RegExp(prefix, 'g');
-            var noPrefix = propertyName.replace(rePrefix, '');
-            Object(_tools__WEBPACK_IMPORTED_MODULE_0__["addToObject"])(variables, noPrefix, valueToAdd, '-');
+            if (!Number.isNaN(fValue)) {
+              valueToAdd = fValue;
+            }
+
+            if (makeFlat) {
+              var shortName = toCamelCase(propertyName, prefix);
+              variables[shortName] = valueToAdd;
+            } else {
+              var rePrefix = new RegExp(prefix, 'g');
+              var noPrefix = propertyName.replace(rePrefix, '');
+              Object(_tools__WEBPACK_IMPORTED_MODULE_0__["addToObject"])(variables, noPrefix, valueToAdd, '-');
+            }
           }
         }
       }
