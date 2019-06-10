@@ -1,7 +1,10 @@
 import subprocess
 import datetime
 import os
-import pdb
+import re
+# import pdb
+
+
 versions = [];
 for root, dirs, files in os.walk("./src/Lessons"):
     for file in files:
@@ -22,6 +25,7 @@ def get_last_edit(file):
         return datetime.datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
     return None
 
+pages = [];
 for version in versions:
     files = os.listdir(version)
     valid_files = []
@@ -42,4 +46,24 @@ for version in versions:
         continue
 
     most_recent = (sorted(valid_dates))[-1].strftime("%Y-%m-%dT%H:%M:%S%z")
-    print(os.path.join(version, file), most_recent)
+    lesson = re.sub(r".*\/src\/", '', version)
+    pages.append([f'https://www.thisiget.com/{lesson}', most_recent])
+
+
+def writeURL(f, link, last_mod, changeFreq):
+    f.writeline('  <url>')
+    f.writeline(f'   <loc>{link}/</loc>')
+    f.writeline(f'   <lastmod>{last_mod}</lastmod>')
+    f.writeline(f'   <changefreq>{changeFreq}</changefreq>')
+    f.writeline('  </url>`;')
+
+with open(os.path.join(os.getcwd(), 'app', 'app', 'static', 'sitemap.xml'), 'w') as f:
+    f.writeline('<?xml version="1.0" encoding="UTF-8"?>')
+    f.writeline('<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">')
+    writeURL(f, 'https://www.thisiget.com', '2019-06-10', 'weekly')
+
+    for page in pages:
+        writeURL(f, page[0], page[1], 'weekly')
+
+    f.writeline('</urlset>')
+
