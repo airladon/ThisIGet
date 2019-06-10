@@ -8,7 +8,6 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getLessons.js');
 const createLessonIndex = require('./createIndex.js');
-const createSiteMap = require('./createSitemap.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
@@ -61,8 +60,6 @@ module.exports = (env) => {
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
   createLessonIndex(e.name, './src/Lessons');
-  console.log('Create Site Map');
-  createSiteMap('./src/Lessons', './app/app/static')
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
