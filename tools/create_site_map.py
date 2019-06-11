@@ -11,7 +11,7 @@ from lxml import etree
 # Get current sitemap
 local_sitemap = os.path.join(
     os.getcwd(), 'app', 'app', 'static', 'sitemap.xml')
-remote_sitemap = 'https://www.thisiget.com/sitemap.xml1'
+remote_sitemap = 'https://www.thisiget.com/sitemap.xml'
 
 existing_sitemap_content = ''
 r = requests.get(remote_sitemap)
@@ -54,8 +54,7 @@ def get_last_edit(file):
         results = output.stdout.decode("utf-8").strip().replace(
             "format:", "").replace('"', '')
         dt = datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
-        print(file, dt.isoformat())
-        return (dt - dt.utcoffset()).replace(tzinfo=None)
+        return (dt - dt.utcoffset()).replace(tzinfo=timezone.utc)
     return None
 
 
@@ -94,7 +93,7 @@ def to_time(time_str):
     if len(time_str) == 10:
         return datetime.strptime(
             time_str, '%Y-%m-%d')
-    return datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S')
+    return datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S%z')
 
 
 if existing_sitemap_content:
