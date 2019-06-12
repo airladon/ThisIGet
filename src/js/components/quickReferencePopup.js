@@ -72,7 +72,7 @@ export default class QuickReferencePopup extends React.Component
       <div className="lesson__qr__title">
         <div
           className="lesson__qr__title_text"
-          id="id_lesson__qr__title_text"
+          // id="id_lesson__qr__title_text"
         >
           {this.props.title}
         </div>
