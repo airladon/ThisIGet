@@ -3,7 +3,7 @@ import os
 
 
 # color = (101, 0, 0)
-color = '#f00'
+color = ['#666', '#fff']
 input_path = './assets/originals'
 output_path = './assets/converted'
 
@@ -52,4 +52,9 @@ for root, dirs, files in os.walk(input_path):
         if os.path.splitext(file)[1] != '.svg':
             continue
 
-        convert_file(os.path.join(root, file), color, output_path)
+        if type(color) == list:
+            for c in color:
+                convert_file(os.path.join(root, file), c, output_path)
+        else:
+            convert_file(os.path.join(root, file), color, output_path)
+
