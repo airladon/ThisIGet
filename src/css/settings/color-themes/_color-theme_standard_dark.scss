@@ -103,7 +103,8 @@ $_color_theme-standard-dark: (
     'button-highlight': (color: 'grey',   shade: 'darker'),
   ),
   'site': (
-    'primary':          (color: 'blue',   shade: 'base'),
+    'primary':          (color: 'primary', shade: 'base'),
+    'primaryDark':      (color: 'primaryDark', shade: 'base'),
     'warning':          (color: 'red',    shade: 'base'),
     'secondary':        (color: 'blue',   shade: 'light'),
     'text':             (color: 'grey',   shade: 'darker'),

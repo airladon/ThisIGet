@@ -10,7 +10,8 @@
 // }
 
 .single_page_lesson__container .highlight_word {
-  color: #0067D6;
+  // color: #0067D6;
+  color: color('site', 'primaryDark');
   // font-style: italic;
 }
 

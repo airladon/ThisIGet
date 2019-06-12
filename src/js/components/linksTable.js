@@ -232,7 +232,7 @@ export default class LinksTable extends React.Component
         ({ numHighRatings } = this.state.ratings[index]);
       }
       const title = <a
-          className=""
+          className="lesson__links_table__title_text"
           href={link.url}
           rel='noreferrer noopener'
           target="_blank"

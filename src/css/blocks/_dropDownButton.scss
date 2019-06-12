@@ -19,12 +19,13 @@ $button_size: 0.4em;
 
 .dropdown_button_selected {
   // background: color('site', 'safe', 'base');
-  background-color: #007bff;
+  background-color: color('site', 'primary');
   color: white;
 }
 
 .dropdown_button_selected:hover {
-  background: color('site', 'safe', 'light');
+  // background: color('site', 'safe', 'light');
+  background-color: color('site', 'primary', 'light');
 }
 
 .dropdown_button_label_container {
@@ -131,26 +132,28 @@ $button_size: 0.4em;
 
 .dropdown_button_list_item_active {
   color: color('white', 'base');
-  background: color('site', 'safe', 'base');
+  // background: color('site', 'safe', 'base');
+  background: color('site', 'primary');
 }
 
 .dropdown_button_list_item_active:hover {
-  background: color('site', 'safe', 'base');
+  // background: color('site', 'safe', 'base');
+  background: color('site', 'primary');
 }
 
 .dropdown_button_list_item_disabled {
-  color: color('grey', 'lighter');
+  color: color('black', 'lighter');
   background-color: white;
 }
 
 .dropdown_button_list_item_disabled:hover {
-  color: color('grey', 'lighter');
+  color: color('black', 'lighter');
   background-color: white;
   cursor: default;
 }
 
 .dropdown_button_list_item_separator {
-  color: color('grey', 'base');
+  color: color('black', 'lighter');
   background-color: color('white', 'lightest');
   font-size: 0.75em;
   padding-top: 0.75em;
@@ -160,7 +163,7 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item_separator:hover {
-  color: color('grey', 'base');
+  color: color('black', 'lighter');
   background-color: color('white', 'lightest');
   cursor: default;
 }

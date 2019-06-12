@@ -8,7 +8,7 @@
 
 .lesson__links_table__title_row {
   font-size: 0.9em;
-  color: color('white', 'darkest');
+  color: color('black', 'lighter');
   border-bottom: 1px solid color('white', 'light');
   border-top: 1px solid color('white', 'light');
 }
@@ -28,18 +28,22 @@
   // text-align: center;
   padding-left: 2em;
   padding-right: 2em;
-  color: color('black', 'lightest');
+  color: color('black', 'lighter');
   font-size: 0.9em;
 }
 
 .lesson__links_table__description_title {
   padding-left: 2em;
   font-size: 1em;
-  color: color('white', 'darkest');
+  color: color('black', 'lighter');
 }
 
 .lesson__links_table__title {
   // width: 10em;
+}
+
+.lesson__links_table__title_text {
+  color: color('site', 'primaryDark');
 }
 
 .lesson__links_table__title_title {
@@ -70,11 +74,11 @@
 .lesson__links_table__total_rating {
   width: 6em;
   text-align: center;
-  color: color('black', 'lightest');
+  color: color('black', 'lighter');
 }
 
 .lesson__links_table__total_rating_title {
-  color: color('white', 'darkest');
+  color: color('black', 'lighter');
 }
 
 .lesson__links_table__disabled {
@@ -109,11 +113,12 @@
 }
 
 .lesson__links_table__disclaimer_email {
-  color: color('blue', 'dark');
+  color: color('site', 'primaryDark');
 }
 
 .lesson__links_table__disclaimer_email:hover {
-  color: color('blue', 'darker');
+  // color: color('blue', 'darker');
+  color: color('site', 'primaryDark', 'dark');
   text-decoration: none;
 }
 
