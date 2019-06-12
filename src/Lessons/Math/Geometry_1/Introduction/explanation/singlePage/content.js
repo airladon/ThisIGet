@@ -83,10 +83,10 @@ class Content extends SinglePageLessonContent {
 
     this.modifiers = {
       shape: click(diag.appearCircleAndMoveWheel, [diag], colors.circle),
-      _Properties: click(diag.pulseProperties, [diag, dim2], colors.dimensions),
-      _analyzed: click(diag.growDimensions, [diag, dim2, 4, null], colors.dimensions),
-      _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensions),
-      _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensions),
+      _Properties: click(diag.pulseProperties, [diag, dim2], colors.dimensionsDark),
+      _analyzed: click(diag.growDimensions, [diag, dim2, 4, null], colors.dimensionsDark),
+      _relationships: click(diag.makeEqnFromProperties, [diag, dim2], colors.dimensionsDark),
+      _all_other: click(diag.toggleProperties, [diag, dim3], colors.dimensionsDark),
       // test: this.qr('Math/Geometry_1/Triangles/base/AngleSumPres'),
       // test2: this.qr('Math/Geometry_1/Triangles/base/AngleSum'),
       figure1: makeFig('id_figure1', diag._fig1, 'fit', new Rect(-2, -1.1, 4, 2.2), 500),

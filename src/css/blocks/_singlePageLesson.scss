@@ -9,6 +9,11 @@
 //   margin-left: 0;
 // }
 
+.single_page_lesson__container .highlight_word {
+  color: #0067D6;
+  // font-style: italic;
+}
+
 .single_page_lesson__container {
   // padding: 20px;
   // margin-left: 20px;
@@ -70,9 +75,9 @@
   // touch-action: auto;
 }
 
-.single_page_lesson__container .highlight_word {
-  color: color('diagram', 'text-keyword', 'dark');
-}
+// .single_page_lesson__container .highlight_word {
+//   color: color('diagram', 'text-keyword', 'dark');
+// }
 
 .single_page_lesson__text_container {
   position: relative;

@@ -115,7 +115,8 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_item {
-  color: color('grey', 'base');
+  // color: color('grey', 'base');
+  color: color('black', 'lighter');
   background-color: white;
   white-space: nowrap;
   position: relative;
