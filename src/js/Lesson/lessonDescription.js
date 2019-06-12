@@ -113,7 +113,7 @@ export default class LessonDescription {
     this.dependencies = lesson.dependencies;
     this.location = new Point(0, 0);
     this.id = id;
-    this.imgLink = `${this.path}/${this.uid}/tile.png`;
+    this.imgLink = `${this.path}/${this.uid}/tile.svg`;
     if (id === '') {
       this.id = `id_lesson__navigator_tile_${lesson.uid}`;
     }

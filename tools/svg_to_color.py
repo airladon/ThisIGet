@@ -4,8 +4,9 @@ import os
 
 # color = (101, 0, 0)
 color = ['#666', '#fff']
-input_path = './assets/originals'
-output_path = './assets/converted'
+input_path = './src/Lessons'
+output_path = None  # './assets/converted'
+filter_name = 'tile.svg'
 
 
 def convert_file(file_path, color, output_path=None):
@@ -50,6 +51,9 @@ for root, dirs, files in os.walk(input_path):
             continue
         # print(file, os.path.splitext(file))
         if os.path.splitext(file)[1] != '.svg':
+            continue
+
+        if filter_name and filter_name != file:
             continue
 
         if type(color) == list:
