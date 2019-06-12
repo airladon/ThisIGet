@@ -115,115 +115,6 @@ export default class LessonNavigator extends React.Component
     this.getLessonTilesBounds();
   }
 
-  // showNavigator() {
-  //   // console.log("showing")
-  //   this.enableTransitions();
-  //   this.showAllTiles();
-  //   this.zoomOutSelected();
-  //   const nav2 = document.getElementById('id_navigator__container');
-
-  //   if (nav2) {
-  //     nav2.style.height = '60vh';
-  //   }
-  //   const nav = document.getElementById('id_navigator__scroll_container');
-  //   if (nav) {
-  //     nav.style.overflow = 'scroll';
-  //   }
-  // }
-
-  // // eslint-disable-next-line class-methods-use-this
-  // enableTransition(id: string, enable: boolean = false) {
-  //   const element = document.getElementById(id);
-  //   if (element) {
-  //     if (enable) {
-  //       element.style.transition = 'all 1.0s ease';
-  //     } else {
-  //       element.style.transition = 'none';
-  //     }
-  //   }
-  // }
-
-  // disableTransitions() {
-  //   this.enableTransition('id_lesson__title_navigator_container', false);
-  //   this.enableTransition('id_navigator__container', false);
-  //   this.enableTransition('id_navigator__scroll_container', false);
-  //   // this.enableTransition('navigator__lesson_tile', false);
-  // }
-
-  // enableTransitions() {
-  //   // this.enableTransition('id_lesson__title_navigator_container', true);
-  //   this.enableTransition('id_navigator__container', true);
-  //   // this.enableTransition('id_navigator__scroll_container', true);
-  //   // this.enableTransition('navigator__lesson_tile', true);
-  // }
-
-  // selectTitle() {
-  //   this.hideAllTilesButSelected();
-  //   this.zoomInSelected();
-
-  //   const nav2 = document.getElementById('id_navigator__container');
-  //   if (nav2) {
-  //     nav2.style.height = '90px';
-  //   }
-  // }
-
-  // showSelectedImediately() {
-  //   this.disableTransitions();
-  //   // this.hideAllTilesButSelected();
-  //   this.selectTitle();
-  //   // this.enableTransitions();
-  //   // setTimeout(this.enableTransitions.bind(this), 100);
-  // }
-
-  // hideAllTilesButSelected() {
-  //   this.lessonArray.forEach((lesson) => {
-  //     const elem = document.getElementById(lesson.id);
-  //     if (elem) {
-  //       if (lesson.id !== this.selectedLesson.id) {
-  //         elem.style.opacity = '0';
-  //       }
-  //       elem.style.pointerEvents = 'none';
-  //     }
-  //   });
-  //   const nav = document.getElementById('id_navigator__scroll_container');
-  //   if (nav) {
-  //     nav.style.overflow = 'hidden';
-  //   }
-  // }
-
-  // zoomOutSelected() {
-  //   const nav = document.getElementById('id_navigator__scroll_container');
-  //   if (nav) {
-  //     const { x, y } = this.selectedLesson.location;
-  //     // nav.style.transform = 'scale(1, 1)';
-  //     nav.scrollLeft = x - nav.clientWidth / 2 + 1.39 * this.tileWidth / 2;
-  //     nav.scrollTop = y - nav.clientHeight / 2 + 1.39 * this.tileHeight / 2.7;
-  //   }
-  // }
-
-  // zoomInSelected() {
-  //   const nav = document.getElementById('id_navigator__scroll_container');
-  //   const lessonsContainer =
-  //     document.getElementById('id_navigator__lessons_positions_container');
-
-  //   if (nav && lessonsContainer) {
-  //     const { x, y } = this.selectedLesson.location;
-  //     nav.scrollLeft = x - nav.clientWidth / 2 + 1 * this.tileWidth / 2
-  //                      + parseInt(lessonsContainer.style.left, 10);
-  //     nav.scrollTop = y + parseInt(lessonsContainer.style.top, 10);
-  //   }
-  // }
-
-  // showAllTiles() {
-  //   this.lessonArray.forEach((lesson) => {
-  //     const elem = document.getElementById(lesson.id);
-  //     if (elem && lesson.id !== this.selectedLesson.id) {
-  //       elem.style.opacity = '1';
-  //       elem.style.pointerEvents = 'auto';
-  //     }
-  //   });
-  // }
-
   createLessonJsx(lesson: LessonDescription) {
     this.key += 1;
     let state = '';
@@ -239,6 +130,7 @@ export default class LessonNavigator extends React.Component
               id={lesson.id}
               link={`${lesson.path}/${lesson.uid}/explanation/base`}
               imgLink={lesson.imgLink}
+              imgLinkSelected={lesson.imgLinkSelected}
               key={this.key}
               label={lesson.title}
               state={state}

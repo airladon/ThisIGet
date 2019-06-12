@@ -7,7 +7,7 @@ import {
 // import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile.svg';
+// import imgLinkGrey from '../../tile.svg';
 import details from '../../details';
 import CommonCollection from './diagramCollectionCommon';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -26,7 +26,7 @@ class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
     // this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+    // this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {
