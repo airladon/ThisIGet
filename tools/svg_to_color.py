@@ -1,7 +1,17 @@
 import re
+import os
 
 
-def convert_file(file_name, color):
+# color = (101, 0, 0)
+color = '#f00'
+input_path = './assets/originals'
+output_path = './assets/converted'
+
+
+def convert_file(file_path, color, output_path=None):
+    file_root, file_name = os.path.split(file_path)
+    if output_path is None:
+        output_path = file_root
     color_hex = '#000'
     if type(color) == str:
         if color[0] == '#':
@@ -14,17 +24,32 @@ def convert_file(file_name, color):
         color_hex = '#%02x%02x%02x' % color
 
     svg = ''
-    with open(file_name, "r") as f:
+    with open(file_path, "r") as f:
         svg = f.read()
 
     new_svg = re.sub(r'rgb\([^\)]*\)',
-                     f'rgb({color[0]},{color[1]},{color[2]})', svg)
+                     f'rgb({int(color_hex[1:3], 16)}, '
+                     f'{int(color_hex[3:5], 16)}, '
+                     f'{int(color_hex[5:], 16)}) ', svg)
 
-    with open(f'{file_name[:-4]}_{color_hex[1:]}.svg', 'w') as f:
+    output_file = os.path.join(
+        output_path, f'{file_name[:-4]}_{color_hex[1:]}')
+
+    with open(f'{output_file}.svg', 'w') as f:
         f.write(new_svg)
 
 
-file_name = './assets/icons/presentation.svg'
-color = (255, 255, 255)
+if os.path.isfile(input_path):
+    convert_file(input_path, color, output_path)
+    exit()
 
-convert_file(file_name, color)
+# Otherwise, its a directory
+for root, dirs, files in os.walk(input_path):
+    for file in files:
+        if os.path.isdir(file):
+            continue
+        # print(file, os.path.splitext(file))
+        if os.path.splitext(file)[1] != '.svg':
+            continue
+
+        convert_file(os.path.join(root, file), color, output_path)
