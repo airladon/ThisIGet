@@ -6,17 +6,20 @@ $button_size: 0.4em;
   height: 100%;
   display: table;
   border-radius: $radius;
-  background-color: color('lesson', 'title-background');
-  border: 1px solid color('white', 'lighter');
-  color: #929292;
+  // background-color: color('lesson', 'title-background');
+  background-color: color('white', 'lighter');
+  // border: 1px solid color('white', 'lighter');
+  // color: #929292;
+  color: color('black', 'lighter');
 }
 
 .dropdown_button_container:hover {
-  background-color: color('white', 'lightest');
+  background-color: color('white', 'light');
 }
 
 .dropdown_button_selected {
-  background: color('site', 'safe', 'base');
+  // background: color('site', 'safe', 'base');
+  background-color: #007bff;
   color: white;
 }
 

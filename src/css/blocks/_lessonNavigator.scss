@@ -106,11 +106,15 @@
 }
 
 .navigator__lesson_tile_selected {
-  background-color: color('site', 'safe');
+  // background-color: color('site', 'safe', 'darker');
+  background-color: #007bff;
+  color: white;
+  pointer-events: none;
 }
 
 .navigator__lesson_tile_selected:hover {
-  background: color('site', 'safe', 'dark');
+  background: color('site', 'safe', 'darker');
+  pointer-events: none;
 }
 
 .navigator__lesson_tile_containter_title:hover {
