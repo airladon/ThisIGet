@@ -133,16 +133,6 @@ module.exports = (env) => {
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
       },
-      // {
-      //   from: '/opt/app/src/Lessons/*/*/*/tile_ffffff.svg',
-      //   to: '/opt/app/app/app/static/dist/[1][name].[ext]',
-      //   test: /\/opt\/app\/src\/(.*)tile_ffffff\.svg$/,
-      // },
-      // {
-      //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
-      //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
-      //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
-      // },
     ],
     // { debug: 'debug' },
   );
