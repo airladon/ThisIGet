@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <line style="stroke: rgb(170, 170, 170) ; stroke-width: 18px;" x1="30" y1="420" x2="470" y2="420"/>
+  <line style="stroke-width: 9px; stroke: rgb(170, 170, 170) ;" x1="220" y1="100" x2="220" y2="420"/>
+  <rect x="220" y="327.602" width="88.398" height="88.398" style="stroke: rgb(170, 170, 170) ; stroke-width: 9px; fill: none;"/>
+  <line style="stroke: rgb(170, 170, 170) ; stroke-width: 18px;" x1="30" y1="100" x2="470" y2="100"/>
+  <rect x="220" y="104.602" width="88.398" height="88.398" style="stroke: rgb(170, 170, 170) ; stroke-width: 9px; fill: none;"/>
+</svg>

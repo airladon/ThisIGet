@@ -102,13 +102,16 @@
   // background-color: color('site', 'disabled', 'lighter');
   // background-color: color('white', 'lighter');
   background-color: white;
-  border: 1px solid #888;
+  border: 1px solid #ddd;
+  color: #757575;
   padding-left: calc(var(--navigator__tile_padding_horizontal) - 2px);
+  font-size: calc(var(--navigator__tile_font_size) * 0.8);
 }
 
 .navigator__lesson_tile_disabled:hover {
   // background-color: color('site', 'disabled', 'lighter');
-  background-color: color('white', 'lighter');
+  // background-color: color('white', 'lighter');
+  background-color: white;
 }
 
 .navigator__lesson_tile_selected {

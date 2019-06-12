@@ -43,6 +43,7 @@ export default class LessonDescription {
   path: string;
   imgLink: string;
   imgLinkSelected: string;
+  imgLinkDisabled: string;
   location: Point;
   id: string;
   uid: string;
@@ -116,6 +117,7 @@ export default class LessonDescription {
     this.id = id;
     this.imgLink = `${this.path}/${this.uid}/tile.svg`;
     this.imgLinkSelected = `${this.path}/${this.uid}/tile_ffffff.svg`;
+    this.imgLinkDisabled = `${this.path}/${this.uid}/tile_aaaaaa.svg`;
     if (id === '') {
       this.id = `id_lesson__navigator_tile_${lesson.uid}`;
     }

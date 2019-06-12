@@ -123,16 +123,19 @@ export default class LessonNavigator extends React.Component
       state = 'selected';
       this.selectedLesson = lesson;
     }
+    let { title } = lesson;
     if (lesson.enabled === false) {
       state = 'disabled';
+      title = `Comming Soon:\n${title}`;
     }
     return <LessonTile
               id={lesson.id}
               link={`${lesson.path}/${lesson.uid}/explanation/base`}
               imgLink={lesson.imgLink}
               imgLinkSelected={lesson.imgLinkSelected}
+              imgLinkDisabled={lesson.imgLinkDisabled}
               key={this.key}
-              label={lesson.title}
+              label={title}
               state={state}
               left={`${x}px`}
               top={`${y}px`}
