@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-  <path d="M 252.205 47.505 L 463.444 413.25 L 40.966 413.25 L 252.205 47.505 Z" style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 18px;" bx:shape="triangle 40.966 47.505 422.478 365.745 0.5 0 1@0618b912"/>
-  <path d="M 254.885 175.09 L 354.108 346.888 L 155.662 346.888 L 254.885 175.09 Z" style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 18px;" bx:shape="triangle 155.662 175.09 198.446 171.798 0.5 0 1@f5d0de41"/>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <rect x="83.698" y="60.244" width="330.884" height="330.884" style="fill: none; stroke-width: 18px; stroke: rgb(170, 170, 170) ; stroke-linejoin: round;" transform="matrix(0.707107, -0.707107, 0.707107, 0.707107, -83.886818, 267.758942)"/>
+  <path d="M 165.77 299.736 C 146.629 299.736 130.047 288.779 121.955 272.795 L 166.335 272.795 L 166.335 228.581 L 121.921 228.581 C 130.001 212.561 146.603 201.573 165.77 201.573 C 186.527 201.573 204.275 214.458 211.45 232.667 L 379.666 232.667 L 379.666 269.469 L 211.116 269.469 C 203.734 287.239 186.211 299.736 165.77 299.736 Z" style="fill: rgb(170, 170, 170) ;" transform="matrix(-0.702244, 0.711936, -0.711936, -0.702244, 605.361769, 248.126173)"/>
 </svg>

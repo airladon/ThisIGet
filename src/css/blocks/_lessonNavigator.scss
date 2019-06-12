@@ -105,7 +105,7 @@
   border: 1px solid #ddd;
   color: #757575;
   padding-left: calc(var(--navigator__tile_padding_horizontal) - 2px);
-  font-size: calc(var(--navigator__tile_font_size) * 0.8);
+  // font-size: calc(var(--navigator__tile_font_size) * 0.8);
 }
 
 .navigator__lesson_tile_disabled:hover {

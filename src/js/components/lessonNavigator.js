@@ -126,7 +126,7 @@ export default class LessonNavigator extends React.Component
     let { title } = lesson;
     if (lesson.enabled === false) {
       state = 'disabled';
-      title = `Comming Soon:\n${title}`;
+      title = `${title}`;
     }
     return <LessonTile
               id={lesson.id}
