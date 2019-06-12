@@ -163,7 +163,7 @@ export default class DropDownButtonBase extends React.Component
       }
     });
 
-    return <div className={buttonClasses}
+    return <div className={buttonClasses} tabIndex={0} role="button"
       id={`${this.id}`}>
       <div className="dropdown_button_label_container"
            id={`${this.id}_label`}>
