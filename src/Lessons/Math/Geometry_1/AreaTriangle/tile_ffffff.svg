@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path d="M 250 50 L 450 450 L 50 450 L 250 50 Z" style="stroke: rgb(255, 255, 255) ; stroke-width: 18px; fill: none;" bx:shape="triangle 50 50 400 400 0.5 0 1@afbfe7e1"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="130" y1="290" x2="130" y2="450"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="210" y1="130" x2="210" y2="450"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="370" y1="290" x2="370" y2="450"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="90.232" y1="370" x2="410.567" y2="370"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="130" y1="290" x2="370" y2="290"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="290" y1="130" x2="290" y2="450"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="170.664" y1="210" x2="332.042" y2="210"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="210" y1="130" x2="290" y2="130"/>
+</svg>
