@@ -3,7 +3,8 @@ import os
 
 
 # color = (101, 0, 0)
-color = ['#666', '#fff']
+# color = ['#666', '#fff']
+color = ['#fff']
 input_path = './src/Lessons'
 output_path = None  # './assets/converted'
 filter_name = 'tile.svg'

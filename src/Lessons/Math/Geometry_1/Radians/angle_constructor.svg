@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <polyline style="fill: none; stroke: rgb(102, 102, 102); stroke-width: 18px;" points="481.675 469.48 34.981 469.48 259.1 82.301"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="35.85155460618384" y1="469.29406488587426" x2="473.7250166818329" y2="469.29406488587426"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="35.85155487060547" y1="469.2940673828125" x2="35.8515548706055" y2="45.16641197431845"/>
+  <circle style="fill: none; stroke: rgb(186, 218, 85);" cx="35.468" cy="469.408" r="446.988"/>
+  <line style="stroke: rgb(0, 0, 0);" x1="-75.799" y1="275.909" x2="370.804" y2="275.909" transform="matrix(0.5, -0.866025, 0.866025, 0.5, -165.192951, 265.695357)"/>
+  <polyline style="fill: rgb(216, 216, 216); stroke: rgb(0, 0, 0);" points="443.974 191.749"/>
+  <path style="fill: none; stroke: rgb(102, 102, 102); stroke-width: 38.124px;" transform="matrix(0.472144, 0, 0, 0.472144, -17.941454, -16.997168)" d="M 425.5 490.112 A 622.529 622.529 0 0 1 737.195 1031.058 L 114.668 1029.488 Z" bx:shape="pie 114.668 1029.488 0 622.529 29.954 90.145 1@384f251d"/>
+</svg>
