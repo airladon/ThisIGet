@@ -25,6 +25,12 @@ export default class CommonCollectionObjects extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this.objectIndex = 0;
     this._activator.onClick = this.objectToCircle.bind(this);
+    // this._activator.onClick = () => {
+    //   this.objectToCircle();
+    //   console.log('activated');
+    // }
+    // console.log('asdf')
+    this._activator.makeTouchable();
   }
 
   objectToCircle() {

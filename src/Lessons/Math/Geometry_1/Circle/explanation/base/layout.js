@@ -89,7 +89,12 @@ export default function lessonLayout() {
   layout.circleRing = makeCircle('circleRing', 'right');
 
   layout.addObjectsElements = [
-    activator({ width: 6, height: 2, position: new Point(0, -0.4) }),
+    activator({
+      width: 6,
+      height: 2,
+      position: new Point(0, -0.4),
+      interactiveLocation: new Point(-0.15, -0.35),
+    }),
     layout.moon,
     layout.wheel,
     layout.ball,
@@ -659,6 +664,7 @@ export default function lessonLayout() {
       height: radius * 3,
       position: new Point(0, 0),
       color: [0, 1, 0, 0],
+      interactiveLocation: new Point(0, 0.2),
     }),
     layout.grid,
     layout.circ,

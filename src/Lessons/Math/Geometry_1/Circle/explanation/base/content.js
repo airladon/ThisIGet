@@ -88,6 +88,9 @@ class Content extends PresentationLessonContent {
         objects._moon, objects._wheel, objects._ring, objects._ball,
         objects._circle, objects._activator,
       ],
+      // setSteadyState: () => {
+      //   console.log(this)
+      // }
     });
     this.addSection(common, {
       setContent: centerV([
