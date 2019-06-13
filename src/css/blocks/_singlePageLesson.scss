@@ -21,7 +21,11 @@
   // margin-right: 20px;
   // background-color: color('white', 'lightest');
   color: color('grey', 'darkest');
-  background-color: color('lesson', 'title-background');
+  // color: white;
+  // background-color: color('lesson', 'title-background');
+  background-color: color('white', 'lightest');
+  border-top: 1px solid #aaaa;
+  border-bottom: 1px solid #aaaa;
   // position: relative;
 }
 
