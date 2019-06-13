@@ -109,13 +109,15 @@
 }
 
 #id__lesson__goto_button_label {
-  color: color('presentation', 'text');
+  // color: color('presentation', 'text');
+  color: color('black', 'lighter');
   border-radius: 0.6em;
-  border: solid 1px color('presentation', 'hover');
+  // border: solid 1px color('presentation', 'hover');
+  border: solid 1px color('white', 'light');
 }
 
 #id__lesson__goto_button_label:hover {
-  color: color('presentation', 'hover');
+  color: color('white', 'darkest');
   border: solid 1px color('presentation', 'hover');
 }
 
