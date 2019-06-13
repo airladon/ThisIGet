@@ -423,7 +423,7 @@ export default class LessonComponent extends React.Component
     // console.log(`${window.location.pathname}/tile.svg`)
     let path = window.location.pathname.split('/').slice(0, -2);
     if (path[1] === 'dev') {
-      path = ["", ...window.location.pathname.split('/').slice(2, -2)];
+      path = ['', ...window.location.pathname.split('/').slice(2, -2)];
     }
     const imgLink = `/static/dist${path.join('/')}/tile.svg`;
     return <div>
