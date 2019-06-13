@@ -9102,6 +9102,7 @@ function () {
         includeInSize = optionsOrContent.includeInSize;
       }
 
+      console.log(includeInSize);
       var contentSpaceToUse = 0.03;
 
       if (contentSpace != null) {

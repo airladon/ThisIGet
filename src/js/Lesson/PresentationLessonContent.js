@@ -1021,11 +1021,11 @@ class PresentationLessonContent extends SimpleLessonContent {
         if (userSections.transitionFromPrev != null) {
           callback = userSections.transitionFromPrev.bind(userSections, done);
         }
+        eqn.showForm(fromForm);
         if (fromForm === toForm) {
           callback();
           return;
         }
-        eqn.showForm(fromForm);
         eqn.goToForm({
           name: toForm,
           duration,

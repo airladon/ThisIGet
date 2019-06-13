@@ -252,6 +252,7 @@ export default function lessonLayout() {
       content,
       comment: commentText,
       symbol,
+      includeInSize: false,
     },
   });
   const half = { frac: ['_1', '_2', 'v', 0.6] };
@@ -299,10 +300,19 @@ export default function lessonLayout() {
       forms: {
         '0': [AreaTri, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b'],
         '1': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b', '_mul', ' ', 'sides'],
-        '2': [
-          AreaAll, 'equals', half, ' ', 'h', ' ', 'mul',
-          top(['b', ' ', '_mul', 'sides'], 'border', 'brace'),
-        ],
+        '2': {
+          content: [
+            AreaAll, 'equals', half, ' ', 'h', ' ', 'mul',
+            top(['b', ' ', '_mul', 'sides'], 'border', 'brace'),
+          ],
+          // duration: 0,
+          // // fromPrev: {
+          //   duration: null,
+          //   // translation: {
+          //   //   b: ['curved', 'up', 1],
+          //   // },
+          // // },
+        },
         '3': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
         '4': [AreaCirc, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
         '5': [
