@@ -53,11 +53,13 @@
 }
 
 .lesson__button-next-enabled {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
+  border-left: var(--pres__nav_button_width) solid color('black', 'lightest');
 }
 
 .lesson__button-next-enabled:hover {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  border-left: var(--pres__nav_button_width) solid color('black', 'light');
 }
 
 .lesson__button-next-disabled {
@@ -70,11 +72,13 @@
 }
 
 .lesson__button-prev-enabled {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
+  border-right: var(--pres__nav_button_width) solid color('black', 'lightest');
 }
 
 .lesson__button-prev-enabled:hover {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  border-right: var(--pres__nav_button_width) solid color('black', 'light');
 }
 
 .lesson__button-prev-disabled {

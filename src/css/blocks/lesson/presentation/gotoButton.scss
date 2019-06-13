@@ -117,8 +117,10 @@
 }
 
 #id__lesson__goto_button_label:hover {
-  color: color('white', 'darkest');
-  border: solid 1px color('presentation', 'hover');
+  // color: color('white', 'darkest');
+  // color: color('presentation', 'hover');
+  // border: solid 1px color('presentation', 'hover');
+  background-color: color('white', 'lighter');
 }
 
 #id__lesson__goto_button_label .dropdown_button_arrow {
