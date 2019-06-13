@@ -18,14 +18,19 @@ r = requests.get(remote_sitemap)
 if r.status_code == 200:
     existing_sitemap_content = r.content
 else:
-    with open(local_sitemap, 'r') as f:
-        existing_sitemap_content = f.read().encode('UTF-8')
+    try:
+        with open(local_sitemap, 'r') as f:
+            existing_sitemap_content = f.read().encode('UTF-8')
+    except:
+        print('No existing sitemap')
+        existing_sitemap_content = None
 
-existing_sitemap = {}
-root = etree.fromstring(existing_sitemap_content)
-for sitemap in root:
-    children = sitemap.getchildren()
-    existing_sitemap[children[0].text] = children[1].text
+if existing_sitemap_content:
+    existing_sitemap = {}
+    root = etree.fromstring(existing_sitemap_content)
+    for sitemap in root:
+        children = sitemap.getchildren()
+        existing_sitemap[children[0].text] = children[1].text
 
 
 # #############################################################################
@@ -48,7 +53,8 @@ def get_last_edit(file):
     if output.returncode == 0:
         results = output.stdout.decode("utf-8").strip().replace(
             "format:", "").replace('"', '')
-        return datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
+        dt = datetime.strptime(results, '%Y-%m-%d %H:%M:%S %z')
+        return (dt - dt.utcoffset()).replace(tzinfo=timezone.utc)
     return None
 
 
@@ -74,47 +80,49 @@ for version in versions:
     if len(valid_files) == 0:
         continue
 
-    most_recent = (sorted(valid_dates))[-1].strftime("%Y-%m-%dT%H:%M:%S%z")
+    # most_recent = (sorted(valid_dates))[-1].strftime("%Y-%m-%dT%H:%M:%S")
+    most_recent = (sorted(valid_dates))[-1].isoformat()
     lesson = re.sub(r".*\/src\/", '', version)
     pages.append([
         f'https://www.thisiget.com/{lesson}/', most_recent, 'weekly'])
 
+
 # #############################################################################
 # Show all added, removed and updated pages in sitemap
-existing_urls = set(existing_sitemap.keys())
-current_urls = set([page[0] for page in pages])
-added_urls = current_urls.difference(existing_urls)
-removed_urls = existing_urls.difference(current_urls)
-
-if len(added_urls) > 0:
-    for url in added_urls:
-        print(f'Adding page: {url}')
-    print()
-
-if len(removed_urls) > 0:
-    for url in removed_urls:
-        print(f'Removing page: {url}')
-    print()
-
-
 def to_time(time_str):
     if len(time_str) == 10:
         return datetime.strptime(
-            time_str, '%Y-%m-%d').replace(tzinfo=timezone.utc)
+            time_str, '%Y-%m-%d')
     return datetime.strptime(time_str, '%Y-%m-%dT%H:%M:%S%z')
 
 
-# Show all pages with updated time
-for page in pages:
-    url = page[0]
-    if url not in existing_urls:
-        continue
+if existing_sitemap_content:
+    existing_urls = set(existing_sitemap.keys())
+    current_urls = set([page[0] for page in pages])
+    added_urls = current_urls.difference(existing_urls)
+    removed_urls = existing_urls.difference(current_urls)
 
-    current_time = to_time(page[1])
-    existing_time = to_time(existing_sitemap[url])
-    if current_time > existing_time:
-        print(f'Updating last modified time: {url}   '
-              f'{existing_sitemap[url]} => {page[1]}')
+    if len(added_urls) > 0:
+        for url in added_urls:
+            print(f'Adding page: {url}')
+        print()
+
+    if len(removed_urls) > 0:
+        for url in removed_urls:
+            print(f'Removing page: {url}')
+        print()
+
+    # Show all pages with updated time
+    for page in pages:
+        url = page[0]
+        if url not in existing_urls:
+            continue
+
+        current_time = to_time(page[1])
+        existing_time = to_time(existing_sitemap[url])
+        if current_time > existing_time:
+            print(f'Updating last modified time: {url}   '
+                  f'{existing_sitemap[url]} => {page[1]}')
 
 
 # #############################################################################
