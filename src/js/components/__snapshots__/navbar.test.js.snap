@@ -6,16 +6,7 @@ exports[`Navbar Make "About" item active 1`] = `
     <div
       className="navbar-container"
     >
-      <a
-        className="navbar-icon-container"
-        href="/"
-      >
-        <img
-          alt="navbar home icon"
-          className="navbar-icon"
-          src="/static/icon-lg.png"
-        />
-      </a>
+      
       <div
         className="navbar-text navbar-right login_button"
       >
@@ -38,16 +29,7 @@ exports[`Navbar Make "Introduction" item active 1`] = `
     <div
       className="navbar-container"
     >
-      <a
-        className="navbar-icon-container"
-        href="/"
-      >
-        <img
-          alt="navbar home icon"
-          className="navbar-icon"
-          src="/static/icon-lg.png"
-        />
-      </a>
+      
       <div
         className="navbar-text navbar-right login_button"
       >
@@ -70,16 +52,7 @@ exports[`Navbar No props 1`] = `
     <div
       className="navbar-container"
     >
-      <a
-        className="navbar-icon-container"
-        href="/"
-      >
-        <img
-          alt="navbar home icon"
-          className="navbar-icon"
-          src="/static/icon-lg.png"
-        />
-      </a>
+      
       <div
         className="navbar-text navbar-right login_button"
       >
