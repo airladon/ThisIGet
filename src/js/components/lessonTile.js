@@ -50,7 +50,7 @@ export default class LessonTile extends React.Component
     }
     if (props.state === 'disabled') {
       classText = `${classText} navigator__lesson_tile_disabled`;
-      if (props.imgLinkSelected != null) {
+      if (props.imgLinkDisabled != null) {
         imgLink = `${'/static/dist'}${props.imgLinkDisabled}`;
       }
     }
