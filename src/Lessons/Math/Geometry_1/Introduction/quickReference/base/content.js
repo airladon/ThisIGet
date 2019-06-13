@@ -3,8 +3,8 @@ import { PresentationLessonContent } from '../../../../../../js/Lesson/Presentat
 import lessonLayout from './layout';
 import details from '../../details';
 import version from './version';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile.png';
+// import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const layout = lessonLayout();
@@ -18,8 +18,8 @@ const qrids = version.references;
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+    // this.iconLink = imgLink;
+    // this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {
