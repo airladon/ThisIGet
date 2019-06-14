@@ -324,36 +324,6 @@ export default class LinksTable extends React.Component
         </td>
         </tr>);
       key += 1;
-      // links.push(<tr key={key} className="lesson__links_table__small_screen">
-      //   <td>
-      //     <a
-      //       className={typeClass}
-      //       href={link.url}
-      //       rel='noreferrer noopener'
-      //       target="_blank"
-      //     >
-      //     </a>
-      //   </td>
-      // </tr>);
-      // key += 1;
-
-      // links.push(<tr key={key} className="lesson__links_table__small_screen">
-      //   <td>
-      //     {title}
-      //   </td>
-      // </tr>);
-      // key += 1;
-
-      // links.push(<tr
-      //   key={key}
-      //   className="lesson__links_table__small_screen"
-      // >
-      //   <td>
-      //     <div className="lesson__links_table__your_rating__small_screen__title">{'rating:'}</div>
-      //     {rating}
-      //   </td>
-      // </tr>);
-      // key += 1;
     });
     return links;
   }

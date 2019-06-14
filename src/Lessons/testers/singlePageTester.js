@@ -39,7 +39,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     threshold: 0.00001,
   };
   let optionsToUse = defaultOptions;
-  if ('prePath' in optionsOrScenario 
+  if ('prePath' in optionsOrScenario
     || ('threshold' in optionsOrScenario && !('width' in optionsOrScenario))) {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   } else {
