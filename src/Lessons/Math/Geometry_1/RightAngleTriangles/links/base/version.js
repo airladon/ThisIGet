@@ -7,8 +7,8 @@ var version = {
   type: 'generic',
   title: 'External',
   description: 'External links to sources of information for Right Angle Triangles',
-  htmlTitle: '',
-  htmlDescription: '',
+  htmlTitle: 'Links for Right Angle Triangles',
+  htmlDescription: 'External explanations of right angle triangles',
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Right_triangle',
