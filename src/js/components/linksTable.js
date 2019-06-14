@@ -210,21 +210,22 @@ export default class LinksTable extends React.Component
 
   renderLinks() {
     const links = [];
+    let key = 0;
     this.links.forEach((link, index) => {
-      let rating = <div className="lesson__links_table__disabled">{'-'}</div>;
-      if (this.props.isLoggedIn) {
-        let userRatingValue = this.state.ratings[index].userRating;
-        if (typeof userRatingValue !== 'number') {
-          userRatingValue = 0;
-        }
-        rating = <Rating
-          topic={this.topic}
-          rating={userRatingValue}
-          ratingCallback={(r, i) => { this.setUserRating(r, i); }}
-          isLoggedIn={this.props.isLoggedIn}
-          index={index}
-        />;
+      // let rating = <div className="lesson__links_table__disabled">{'-'}</div>;
+      // if (this.props.isLoggedIn) {
+      let userRatingValue = this.state.ratings[index].userRating;
+      if (typeof userRatingValue !== 'number') {
+        userRatingValue = 0;
       }
+      const rating = <Rating
+        topic={this.topic}
+        rating={userRatingValue}
+        ratingCallback={(r, i) => { this.setUserRating(r, i); }}
+        isLoggedIn={this.props.isLoggedIn}
+        index={index}
+      />;
+      // }
       let numHighRatings = <div className="lesson__links_table__disabled">
         {'-'}
       </div>;
@@ -253,13 +254,14 @@ export default class LinksTable extends React.Component
       if (this.hasDescription) {
         description = <td className="lesson__links_table__description">{link.description}</td>;
       }
-      links.push(<tr key={index}>
+      links.push(<tr key={key} className="lesson__links_table__large_screen">
         <td className="lesson__links_table__type">
           <a
             className={typeClass}
             href={link.url}
             rel='noreferrer noopener'
             target="_blank"
+            aria-label={link.title}
           >
           </a>
         </td>
@@ -268,14 +270,72 @@ export default class LinksTable extends React.Component
         <td className="lesson__links_table__your_rating">{rating}</td>
         <td className="lesson__links_table__total_rating">{numHighRatings}</td>
       </tr>);
+      key += 1;
+
+      // if (!this.props.isLoggedIn) {
+      //   rating = <span className="rating__login" onClick={login}>{'Login'}</span>
+      // }
+      links.push(<tr key={key} className="lesson__links_table__small_screen">
+        <td className="lesson__links_table__small_screen__content">
+          <table><tbody>
+            <tr>
+              <td>
+                <div className="lesson__links_table__small_screen__type_container">
+                  <div className="lesson__links_table__small_screen__type">
+                    <a
+                      className={typeClass}
+                      href={link.url}
+                      rel='noreferrer noopener'
+                      target="_blank"
+                      aria-label={link.title}
+                    >
+                    </a>
+                  </div>
+                </div>
+                <div className="lesson__links_table__small_screen__link_container">
+                  <div className="lesson__links_table__small_screen__link">
+                    {title}
+                  </div>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              {description}
+            </tr>
+            <tr>
+              <td className="lesson__links_table__total_rating">
+                <div className="lesson__links_table__small_screen__title">
+                    {'Total Ratings ≥4:'}
+                </div>
+                <div className="lesson__links_table__small_screen__value">
+                  {numHighRatings}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div className="lesson__links_table__small_screen__title">
+                  {this.yourRatingTitle(true)}
+                </div>
+                {rating}
+              </td>
+            </tr>
+          </tbody></table>
+        </td>
+        </tr>);
+      key += 1;
     });
     return links;
   }
 
-  yourRatingTitle() {
+  yourRatingTitle(useColon: boolean = false) {
+    let colon = '';
+    if (useColon) {
+      colon = ':';
+    }
     let title = <div>
       <span className="rating__login" onClick={login}>{'Login'}</span>
-      {' to rate'}
+      {` to rate${colon}`}
     </div>;
     if (this.props.isLoggedIn) {
       title = 'Your\nRating';
@@ -291,7 +351,7 @@ export default class LinksTable extends React.Component
     // const props = Object.assign({}, this.props);
     return <table className="lesson__links_table">
       <tbody>
-        <tr className="lesson__links_table__title_row">
+        <tr className="lesson__links_table__title_row lesson__links_table__large_screen">
         <td className="lesson__links_table__type_title lesson__links_table__type"></td>
         <td className="lesson__links_table__title_title lesson__links_table__title">Link</td>
         {description}

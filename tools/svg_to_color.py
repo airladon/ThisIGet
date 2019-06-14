@@ -3,11 +3,15 @@ import os
 
 
 # color = (101, 0, 0)
-# color = ['#666', '#fff']
-color = ['#fff', '#aaa']
-input_path = './src/Lessons'
-output_path = None  # './assets/converted'
-filter_name = 'tile.svg'
+# color = ['#fff', '#aaa']
+# input_path = './src/Lessons'
+# output_path = None
+# filter_name = 'tile.svg'
+
+color = ['#666', '#fff']
+input_path = './assets/originals'
+output_path = './assets/converted'
+filter_name = None
 
 
 def convert_file(file_path, color, output_path=None):
@@ -62,4 +66,3 @@ for root, dirs, files in os.walk(input_path):
                 convert_file(os.path.join(root, file), c, output_path)
         else:
             convert_file(os.path.join(root, file), color, output_path)
-
