@@ -281,26 +281,68 @@ export default class LinksTable extends React.Component
           >
           </a>
         </td>
-      </tr>);
-      key += 1;
-
-      links.push(<tr key={key} className="lesson__links_table__small_screen">
-        <td>
-          {title}
+        <td className="lesson__links_table__small_screen__content">
+          <table><tbody>
+            <tr>
+              <td>
+                {title}
+              </td>
+            </tr>
+            <tr>
+              {description}
+            </tr>
+            <tr>
+              <td className="lesson__links_table__total_rating">
+                <div className="lesson__links_table__small_screen__title">
+                    {'Total Ratings ≥4:'}
+                </div>
+                <div className="lesson__links_table__small_screen__value">
+                  {numHighRatings}
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div className="lesson__links_table__small_screen__title">
+                  {'Your Rating:'}
+                </div>
+                {rating}
+              </td>
+            </tr>
+          </tbody></table>
         </td>
-      </tr>);
+        </tr>);
       key += 1;
+      // links.push(<tr key={key} className="lesson__links_table__small_screen">
+      //   <td>
+      //     <a
+      //       className={typeClass}
+      //       href={link.url}
+      //       rel='noreferrer noopener'
+      //       target="_blank"
+      //     >
+      //     </a>
+      //   </td>
+      // </tr>);
+      // key += 1;
 
-      links.push(<tr
-        key={key}
-        className="lesson__links_table__small_screen"
-      >
-        <td>
-          <div className="lesson__links_table__your_rating__small_screen__title">{'rating:'}</div>
-          {rating}
-        </td>
-      </tr>);
-      key += 1;
+      // links.push(<tr key={key} className="lesson__links_table__small_screen">
+      //   <td>
+      //     {title}
+      //   </td>
+      // </tr>);
+      // key += 1;
+
+      // links.push(<tr
+      //   key={key}
+      //   className="lesson__links_table__small_screen"
+      // >
+      //   <td>
+      //     <div className="lesson__links_table__your_rating__small_screen__title">{'rating:'}</div>
+      //     {rating}
+      //   </td>
+      // </tr>);
+      // key += 1;
     });
     return links;
   }
