@@ -466,11 +466,11 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
     // this._circle.stop(true, false);
     this.straighten(0);
     this.straightening = false;
-    this.diameterLinesAppear();
-    this.straightenCircumference(2, done);
+    this.diameterLinesAppear(done);
+    this.straightenCircumference(2);
   }
 
-  diameterLinesAppear() {
+  diameterLinesAppear(done: ?() => void = null) {
     const lines = this._diameterLines;
     // this._circle._diameter.animations.new()
     //   .position({ target: new Point(-1, -1), duration: 1 })
@@ -482,6 +482,7 @@ export default class CommonCollectionCircle extends CommonDiagramCollection {
       // .dissolveIn({ element: lines._line0, duration: 0.5 })
       .dissolveIn({ element: lines._line1, duration: 0.5 })
       .dissolveIn({ element: lines._line2, duration: 0.5 })
+      .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
   }
