@@ -111,8 +111,9 @@ $button_size: 0.4em;
 }
 
 .dropdown_button_list_hide {
-  left: -10000px;
-  top: -10000px;
+  // left: -10000px;
+  // top: -10000px;
+  display: none;
 }
 
 .dropdown_button_list_item {

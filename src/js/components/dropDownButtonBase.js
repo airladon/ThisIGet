@@ -98,6 +98,11 @@ export default class DropDownButtonBase extends React.Component
       this.itemList = itemList;
       button.addEventListener('mousedown', this.toggle.bind(this));
       body.addEventListener('mousedown', this.offButtonEvent.bind(this), true);
+      button.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+          this.toggle();
+        }
+      });
     }
     window.addEventListener('resize', this.close.bind(this));
   }
@@ -147,7 +152,16 @@ export default class DropDownButtonBase extends React.Component
             linkRedirect();
           }
         };
-        item = <div onClick={closeThenRedirect}>
+        const keyboardCloseThenRedirect = (event) => {
+          if (event.keyCode === 13 || event.keyCode === 32) {
+            closeThenRedirect();
+          }
+        };
+        item = <div onClick={closeThenRedirect}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={keyboardCloseThenRedirect}
+                    >
           {listItem.label}
           </div>;
       } else {
