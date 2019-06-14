@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <circle style="fill: rgb(255, 255, 255) ;" cx="250" cy="250" r="250"/>
+  <circle style="fill: none; stroke-width: 6px; stroke: rgb(255, 255, 255) ;" cx="202" cy="-212" r="590"/>
+  <circle style="stroke-width: 6px; stroke: rgb(255, 255, 255) ; fill: rgba(216, 216, 216, 0);" cx="-35" cy="-28" r="590"/>
+  <circle style="fill: none; stroke-width: 6px; stroke: rgb(255, 255, 255) ;" cx="69" cy="-134" r="590"/>
+  <circle style="fill: none; stroke-width: 6px; stroke: rgb(255, 255, 255) ;" cx="-219.149" cy="-624.724" r="580" transform="matrix(1, 0, 0, 1, 421.149454, 412.724418)"/>
+  <circle style="fill: none; stroke-width: 6px; stroke: rgb(255, 255, 255) ;" cx="-450.507" cy="-414.205" r="580" transform="matrix(1, 0, 0, 1, 519.506997, 280.205413)"/>
+  <circle style="stroke-width: 6px; stroke: rgb(255, 255, 255) ; fill: rgba(216, 216, 216, 0);" cx="-422.058" cy="-469.293" r="580" transform="matrix(1, 0, 0, 1, 387.058289, 441.293175)"/>
+</svg>
