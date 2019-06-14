@@ -33,7 +33,7 @@ export default class DropDownButtonBase extends React.Component
     this.id = '';
   }
 
-  offButtonEvent(event: MouseEvent | TouchEvent) {
+  offButtonEvent(event: MouseEvent | TouchEvent | KeyboardEvent) {
     if (event.target instanceof HTMLElement) {
       const parent = event.target.parentElement;
       if (parent instanceof HTMLElement) {
@@ -103,6 +103,11 @@ export default class DropDownButtonBase extends React.Component
           this.toggle();
         }
       });
+      body.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+          this.offButtonEvent(event);
+        }
+      }, true);
     }
     window.addEventListener('resize', this.close.bind(this));
   }
