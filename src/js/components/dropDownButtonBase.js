@@ -55,12 +55,15 @@ export default class DropDownButtonBase extends React.Component
   }
 
   toggle() {
-    const rect = this.buttonElement.getBoundingClientRect();
-    const listRect = this.itemList.getBoundingClientRect();
-    // $FlowFixMe
-    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-    let left = 0;
     if (this.itemList.classList.contains('dropdown_button_list_hide')) {
+      this.itemList.style.visibility = 'hidden';
+      // this.itemList.style.top = '-10000px';
+      this.itemList.classList.remove('dropdown_button_list_hide');
+      const rect = this.buttonElement.getBoundingClientRect();
+      const listRect = this.itemList.getBoundingClientRect();
+      // $FlowFixMe
+      const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+      let left = 0;
       if (this.direction === 'down') {
         this.itemList.style.top = `${rect.height}px`;
       } else {
@@ -78,7 +81,7 @@ export default class DropDownButtonBase extends React.Component
         left -= delta + 5;
       }
       this.itemList.style.left = `${left}px`;
-      this.itemList.classList.remove('dropdown_button_list_hide');
+      this.itemList.style.visibility = 'visible';
     } else {
       this.itemList.style.left = '';
       this.itemList.style.top = '';
@@ -103,11 +106,9 @@ export default class DropDownButtonBase extends React.Component
           this.toggle();
         }
       });
-      body.addEventListener('keydown', (event: KeyboardEvent) => {
-        if (event.keyCode === 13 || event.keyCode === 32) {
-          this.offButtonEvent(event);
-        }
-      }, true);
+      // button.addEventListener('focusout', () => {
+      //   this.close();
+      // });
     }
     window.addEventListener('resize', this.close.bind(this));
   }

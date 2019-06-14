@@ -6,3 +6,9 @@ body {
   // font-family: Helvetica Neue, Arial, sans-serif;
   // box-sizing: border-box;
 }
+
+button:focus,
+a:focus,
+div:focus {
+  outline: 3px solid #FF644E;
+}
