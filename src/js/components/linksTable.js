@@ -272,20 +272,26 @@ export default class LinksTable extends React.Component
       key += 1;
 
       links.push(<tr key={key} className="lesson__links_table__small_screen">
-        <td>
-          <a
-            className={typeClass}
-            href={link.url}
-            rel='noreferrer noopener'
-            target="_blank"
-          >
-          </a>
-        </td>
         <td className="lesson__links_table__small_screen__content">
           <table><tbody>
             <tr>
               <td>
-                {title}
+                <div className="lesson__links_table__small_screen__type_container">
+                  <div className="lesson__links_table__small_screen__type">
+                    <a
+                      className={typeClass}
+                      href={link.url}
+                      rel='noreferrer noopener'
+                      target="_blank"
+                    >
+                    </a>
+                  </div>
+                </div>
+                <div className="lesson__links_table__small_screen__link_container">
+                  <div className="lesson__links_table__small_screen__link">
+                    {title}
+                  </div>
+                </div>
               </td>
             </tr>
             <tr>
