@@ -261,6 +261,7 @@ export default class LinksTable extends React.Component
             href={link.url}
             rel='noreferrer noopener'
             target="_blank"
+            aria-label={link.title}
           >
           </a>
         </td>
@@ -283,6 +284,7 @@ export default class LinksTable extends React.Component
                       href={link.url}
                       rel='noreferrer noopener'
                       target="_blank"
+                      aria-label={link.title}
                     >
                     </a>
                   </div>
