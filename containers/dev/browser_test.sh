@@ -59,7 +59,7 @@ then
         dev) TIG_ADDRESS='https://thisiget-dev.herokuapp.com';;
         test) TIG_ADDRESS='https://thisiget-test.herokuapp.com';;
         beta) TIG_ADDRESS='https://thisiget-beta.herokuapp.com';;
-        prod) TIG_ADDRESS='https://www.thisiget.com';;
+        prod) TIG_ADDRESS='https://thisiget.herokuapp.com';;
         *) TIG_ADDRESS=$1;;
     esac
 fi
