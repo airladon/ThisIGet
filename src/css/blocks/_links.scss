@@ -87,7 +87,7 @@
 
 .lesson__links_table__icon {
   background-size: contain;
-  height: 20px;
+  height: 30px;
   background-repeat: no-repeat;
   background-position: center;
   min-width: 4em;
@@ -110,6 +110,8 @@
 
 .lesson__links_table__disclaimer {
   font-size: 1em;
+  padding-top: 1em;
+  margin-bottom: 3em;
 }
 
 .lesson__links_table__disclaimer_email {
@@ -168,7 +170,11 @@
   display: inline-block;
 }
 
-@media (max-width: 1200px) {
+.lesson__links_table__feedback {
+  margin-top: 2em;
+}
+
+@media (max-width: 800px) {
   .lesson__links_table {
     width: calc(100%);
   }
