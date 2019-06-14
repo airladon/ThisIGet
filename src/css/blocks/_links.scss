@@ -122,7 +122,29 @@
   text-decoration: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 400px) {
+  .lesson__links_table td {
+    display: block;
+  }
+
+  .lesson__links_table td:nth-child(2) {
+    display: inline-block;
+  }
+
+  .lesson__links_table td:nth-child(3) {
+    display: inline-block;
+  }
+
+  .lesson__links_table tr {
+    border-bottom: 1px solid #aaa;
+  }
+
+  .lesson__links_table__title_row {
+    display: none;
+  }
+}
+
+@media (max-width: 700px) {
   .lesson__links_table__description {
     // visibility: hidden;
     // overflow: hidden;
