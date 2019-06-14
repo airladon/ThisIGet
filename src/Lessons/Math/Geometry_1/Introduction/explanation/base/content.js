@@ -6,8 +6,8 @@ import {
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile_ffffff.svg';
+import imgLinkGrey from '../../tile.svg';
 import details from '../../details';
 import DiagramCollection from './collection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -25,7 +25,7 @@ const { colors } = layout;
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
+    // this.iconLink = imgLink;
     this.iconLinkGrey = imgLinkGrey;
   }
 

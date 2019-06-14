@@ -90,6 +90,7 @@ function makeFig(
   elements: DiagramElement | Array<DiagramElement>,
   scale: string = 'fit',
   limits: Rect | null = null,
+  accessibilityText: string = '',
   width: number = 300,
 ) {
   let elementsToUse;
@@ -112,7 +113,7 @@ function makeFig(
   if (limits != null) {
     aspectRatio = limits.height / limits.width;
   }
-  return `<div id="${id}" class="single_page_lesson__figure_container" style="width:${width}px"><div class="single_page_lesson__figure" style="padding-top:${aspectRatio * 100}%"><img  class="single_page_lesson__figure_image" id="${id}_webgl"></img><img class="single_page_lesson__figure_image" id="${id}_2d"></img></div></div>`;
+  return `<div id="${id}" class="single_page_lesson__figure_container" style="width:${width}px"><div class="single_page_lesson__figure" style="padding-top:${aspectRatio * 100}%"><img  class="single_page_lesson__figure_image" id="${id}_webgl" alt="${accessibilityText}"></img><img class="single_page_lesson__figure_image" id="${id}_2d" alt=""></img></div></div>`;
 }
 
 export { SinglePageLessonContent, makeFig };

@@ -16,6 +16,7 @@ const { joinObjects, duplicateFromTo } = Fig.tools.misc;
 const cssColorNames = [
   'circle',
   'dimensions',
+  'dimensionsDark',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */

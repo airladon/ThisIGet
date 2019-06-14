@@ -420,10 +420,19 @@ export default class LessonComponent extends React.Component
   }
 
   render() {
+    // console.log(`${window.location.pathname}/tile.svg`)
+    let path = window.location.pathname.split('/').slice(0, -2);
+    if (path[1] === 'dev') {
+      path = ['', ...window.location.pathname.split('/').slice(2, -2)];
+    }
+    const imgLink = `/static/dist${path.join('/')}/tile.svg`;
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <LessonTitle
-          imgLink={`${this.lesson.content.iconLinkGrey}`}
+          // imgLink={`${this.lesson.content.iconLinkGrey}`}
+          imgLink={imgLink}
+          // imgLink={`${window.location.pathname}/tile.svg`}
+          // imgLink={`${this.lesson.lessonDetails.imgLink}`}
           key='1'
           label={this.lesson.content.title}
           />

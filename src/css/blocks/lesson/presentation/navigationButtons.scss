@@ -5,6 +5,7 @@
   border: 0;
   padding: 0;
   background-color: color('presentation', 'background');
+  // background-color: color('presentation', 'background');
   top: calc(100% - var(--pres__nav_button_height));
   width: 0;
   height: 0;
@@ -53,35 +54,43 @@
 }
 
 .lesson__button-next-enabled {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'button');
+  border-left: var(--pres__nav_button_width) solid color('black', 'lightest');
 }
 
 .lesson__button-next-enabled:hover {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  border-left: var(--pres__nav_button_width) solid color('black', 'light');
 }
 
 .lesson__button-next-disabled {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  border-left: var(--pres__nav_button_width) solid color('white', 'lighter');
   pointer-events: none;
 }
 
 .lesson__button-next-disabled:hover {
-  border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  // border-left: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  border-left: var(--pres__nav_button_width) solid color('white', 'lighter');
 }
 
 .lesson__button-prev-enabled {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'button');
+  border-right: var(--pres__nav_button_width) solid color('black', 'lightest');
 }
 
 .lesson__button-prev-enabled:hover {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'hover');
+  border-right: var(--pres__nav_button_width) solid color('black', 'light');
 }
 
 .lesson__button-prev-disabled {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  border-right: var(--pres__nav_button_width) solid color('white', 'lighter');
   pointer-events: none;
 }
 
 .lesson__button-prev-disabled:hover {
-  border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  // border-right: var(--pres__nav_button_width) solid color('presentation', 'disabled');
+  border-right: var(--pres__nav_button_width) solid color('white', 'lighter');
 }

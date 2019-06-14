@@ -1,6 +1,7 @@
 .rating__container {
   text-align: center;
-  color: color('grey', 'base');
+  // color: color('grey', 'base');
+  color: color('black', 'lighter');
   font-weight: 100;
   padding-bottom: 12px;
   font-size: 0.9em;
@@ -25,8 +26,8 @@
   display: table-cell;
   vertical-align: middle;
   text-align: center;
-  width: 1.3em;
-  height: 1em;
+  width: 1.5em;
+  height: 1.2em;
   position: relative;
   padding-left: 0.15em;
   padding-right: 0.15em;
@@ -59,7 +60,8 @@
 }
 
 .rating__login {
-  color: color('site', 'primary');
+  // color: color('site', 'primary');
+  color: color('site', 'primaryDark');
 }
 
 .rating__login:hover {

@@ -26,6 +26,7 @@ type State = {
 
 const withLoginManager = function loginManager(
   WrappedComponent: React.ComponentType<WrappedComponentProps>,
+  includeHome: boolean = true,
 ) {
   return class ViewBase extends React.Component<Props, State> {
     constructor(props: Props) {
@@ -100,6 +101,7 @@ const withLoginManager = function loginManager(
               active='Single Page Lesson'
               isLoggedIn={this.state.isLoggedIn}
               username={this.state.username}
+              includeHome={includeHome}
             />
           <NavbarSpacer/>
           <WrappedComponent

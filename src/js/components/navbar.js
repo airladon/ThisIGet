@@ -10,6 +10,7 @@ type Props = {
   active?: string;
   isLoggedIn: boolean;
   username: string;
+  includeHome: boolean;
 };
 
 // type State = {
@@ -158,6 +159,18 @@ export default class Navbar extends React.Component
       </div>;
   }
 
+  renderHomeButton() {
+    if (this.props.includeHome) {
+      return <a className="navbar-icon-container"
+         href="/">
+        <img className="navbar-icon"
+             src="/static/logo20.svg"
+             alt="navbar home icon"/>
+      </a>;
+    }
+    return '';
+  }
+
   render() {
     const props = Object.assign({}, this.props);
     delete props.active;
@@ -165,12 +178,7 @@ export default class Navbar extends React.Component
     const body =
     <div>
       <div className="navbar-container">
-        <a className="navbar-icon-container"
-           href="/">
-          <img className="navbar-icon"
-               src="/static/icon-lg.png"
-               alt="navbar home icon"/>
-        </a>
+        {this.renderHomeButton()}
         {this.getLoginButton()}
         { /*
         <div className="navbar-text navbar-right login_button">

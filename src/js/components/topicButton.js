@@ -91,12 +91,12 @@ export default class TopicButton extends React.Component <Props> {
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
-            {userRating}
+            {userRating || '-'}
           </div>
         </td>
         <td className="topic_button__rating">
           <div className="topic_button__rating_value">
-            {numHighRatings}
+            {numHighRatings || '-'}
           </div>
         </td>
       </tr>

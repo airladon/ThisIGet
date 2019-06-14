@@ -126,6 +126,7 @@ function activator(
     position: new Point(0, 0),
     width: 1,
     height: 1,
+    interactiveLocation: new Point(0, 0),
   };
   let options = joinObjects({}, defaultOptions);
   if (typeof width === 'number') {
@@ -157,9 +158,12 @@ function activator(
     options: {
       points,
       color: options.color,
+      close: true,
     },
     mods: {
       isTouchable: true,
+      touchInBoundingRect: true,
+      interactiveLocation: options.interactiveLocation,
     },
   };
 }

@@ -123,11 +123,16 @@ module.exports = (env) => {
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)topic\.png$/,
       },
-      // {
-      //   from: '/opt/app/src/Lessons/Math/Geometry_1/topic.png',
-      //   to: '/opt/app/app/app/static/dist/Lessons/Math/Geometry_1/topic.png',
-      //   // test: /\/opt\/app\/src\/(.*)topic\.png$/,
-      // },
+      {
+        from: '/opt/app/src/Lessons/*/*/*/*',
+        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+      },
+      {
+        from: '/opt/app/src/Lessons/*/*/*/*/*',
+        to: '/opt/app/app/app/static/dist/[1][name].[ext]',
+        test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+      },
     ],
     // { debug: 'debug' },
   );
@@ -237,8 +242,12 @@ module.exports = (env) => {
             },
           ],
         },
+        // {
+        //   test: /\.(svg)$/,
+        //   use: ['html-loader'],
+        // },
         {
-          test: /\.(png|jpg|gif)$/,
+          test: /\.(png|jpg|gif|svg)$/,
           use: [
             {
               loader: 'file-loader',

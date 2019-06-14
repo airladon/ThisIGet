@@ -19,6 +19,7 @@
   position: relative;
   background: white;
   z-index: 0;
+  border: 1px solid color('white', 'lighter');
 }
 
 // @media screen and (min-width: 600px) {
@@ -64,20 +65,21 @@
 }
 
 .navigator__lesson_tile_containter {
-  background: color('site', 'primary', 'light');
+  background: color('white', 'lighter');
+  // background: color('site', 'primary', 'lightest');
   padding-top: var(--navigator__tile_padding_vertical);
   padding-bottom: var(--navigator__tile_padding_vertical);
   padding-left: var(--navigator__tile_padding_horizontal);
   padding-right: var(--navigator__tile_padding_horizontal);
   border-radius: var(--navigator__tile_border_radius);
-  color: white;
+  color: color('black', 'lighter');
   width: 100%;
-  border-bottom: solid 1px #555;
+  // border-bottom: solid 1px #aaa;
   height: 100%;
 }
 
 .navigator__lesson_tile_containter:hover {
-  background: color('site', 'primary', 'base');
+  background: color('white', 'light');
 }
 
 .navigator__lesson_tile_containter_title {
@@ -97,19 +99,31 @@
 }
 
 .navigator__lesson_tile_disabled {
-  background-color: color('site', 'disabled', 'lighter');
+  // background-color: color('site', 'disabled', 'lighter');
+  // background-color: color('white', 'lighter');
+  background-color: white;
+  border: 1px solid #ddd;
+  color: #757575;
+  padding-left: calc(var(--navigator__tile_padding_horizontal) - 2px);
+  // font-size: calc(var(--navigator__tile_font_size) * 0.8);
 }
 
 .navigator__lesson_tile_disabled:hover {
-  background-color: color('site', 'disabled', 'lighter');
+  // background-color: color('site', 'disabled', 'lighter');
+  // background-color: color('white', 'lighter');
+  background-color: white;
 }
 
 .navigator__lesson_tile_selected {
-  background-color: color('site', 'safe');
+  // background-color: color('site', 'safe', 'darker');
+  background-color: color('site', 'primary');
+  color: white;
+  pointer-events: none;
 }
 
 .navigator__lesson_tile_selected:hover {
-  background: color('site', 'safe', 'dark');
+  background: color('site', 'safe', 'darker');
+  pointer-events: none;
 }
 
 .navigator__lesson_tile_containter_title:hover {
@@ -131,9 +145,9 @@
   max-width: 300px;
   height: calc(var(--navigator__tile_height) - 10px);
   background: #777;
-  -webkit-box-shadow: 0 5px 7px #000;
-  -moz-box-shadow: 0 5px 7px #000;
-  box-shadow: 0 5px 7px #000;
+  -webkit-box-shadow: 0 5px 7px #fff;
+  -moz-box-shadow: 0 5px 7px #fff;
+  box-shadow: 0 5px 7px #fff;
   -webkit-transform: rotate(-3deg);
   -moz-transform: rotate(-3deg);
   -o-transform: rotate(-3deg);
@@ -182,29 +196,29 @@
   // z-index: 1;
 }
 
-.navigator__container_with_shadow::before {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  top: 0;
-  left: 2%;
-  width: 96%;
-  height: 50px;
-  border-radius: 125px / 12px;
-  box-shadow: 0 0 8px #AAA;
-}
+// .navigator__container_with_shadow::before {
+//   position: absolute;
+//   content: "";
+//   z-index: -1;
+//   top: 0;
+//   left: 2%;
+//   width: 96%;
+//   height: 50px;
+//   border-radius: 125px / 12px;
+//   box-shadow: 0 0 8px #fff;
+// }
 
-.navigator__container_with_shadow::after {
-  position: absolute;
-  content: "";
-  z-index: -1;
-  bottom: 0;
-  left: 2%;
-  width: 96%;
-  height: 50px;
-  border-radius: 125px / 12px;
-  box-shadow: 0 5px 8px #555;
-}
+// .navigator__container_with_shadow::after {
+//   position: absolute;
+//   content: "";
+//   z-index: -1;
+//   bottom: 0;
+//   left: 2%;
+//   width: 96%;
+//   height: 50px;
+//   border-radius: 125px / 12px;
+//   box-shadow: 0 5px 8px #fff;
+// }
 
 .navigator__lesson_tile_image {
   height: var(--navigator__tile_img_width);
@@ -214,6 +228,7 @@
   margin-right: var(--navigator__tile_img_text_space);
   float: left;
   object-fit: contain;
+  font-size: 5px;
 }
 
 .navigator__lesson_tile_path_container {
@@ -241,7 +256,8 @@
 .navigator__topic_title {
   display: table;
   background-color: white;
-  color: color('grey', 'light');
+  // color: color('grey', 'light');
+  color: color('black', 'lighter');
   // text-align: center;
   font-weight: 200;
   font-size: calc(var(--navigator__tile_font_size) * 2);
@@ -259,7 +275,8 @@
   padding-left: 20px;
   background-color: white;
   font-weight: 100;
-  color: color('grey', 'lighter');
+  // color: color('grey', 'lighter');
+  color: color('black', 'lighter');
 }
 
 @media screen and (min-width: 600px) {

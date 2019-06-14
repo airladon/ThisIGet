@@ -10,6 +10,8 @@ $base_colors: (
   'grey':                          #929292,
   'white':                         #FFF,
   'black':                         #000,
+  'primary':                       #0070EB,
+  'primaryDark':                   #0067D6,
 );
 
 $_color-palette_standard: fill_palette($base_colors);

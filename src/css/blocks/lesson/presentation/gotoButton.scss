@@ -8,7 +8,7 @@
   top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
   height: var(--pres__button_height);
   font-size: calc(var(--pres__button_height) * 0.28);
-  background-color: color('presentation', 'background');
+  // background-color: color('presentation', 'background');
   // border-radius: 0.6em;
   // border: solid 1px;
   font-weight: 200;
@@ -39,8 +39,8 @@
 
 #id__lesson__goto_button {
   background-color: color('presentation', 'background');
-  border: 0;
-  border-radius: 0;
+  // border: 0;
+  // border-radius: 0;
   color: color('presentation', 'button');
   font-size: calc(var(--pres__unit) * 0.8);
   -webkit-user-select: none; /* Safari */
@@ -109,14 +109,19 @@
 }
 
 #id__lesson__goto_button_label {
-  color: color('presentation', 'text');
-  border-radius: 0.6em;
-  border: solid 1px color('presentation', 'hover');
+  // color: color('presentation', 'text');
+  color: color('black', 'lighter');
+  border-radius: 0.4em;
+  // border: solid 1px color('presentation', 'hover');
+  border: solid 1px color('white', 'darker');
+  // background-color: color('white', 'lighter');
 }
 
 #id__lesson__goto_button_label:hover {
-  color: color('presentation', 'hover');
-  border: solid 1px color('presentation', 'hover');
+  // color: color('white', 'darkest');
+  // color: color('presentation', 'hover');
+  // border: solid 1px color('presentation', 'hover');
+  background-color: color('white', 'light');
 }
 
 #id__lesson__goto_button_label .dropdown_button_arrow {

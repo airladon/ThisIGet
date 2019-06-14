@@ -11,6 +11,8 @@ type Props = {
   top?: ?string,
   link: ?string,
   imgLink: ?string,
+  imgLinkSelected: ?string,
+  imgLinkDisabled: ?string,
   state: '' | 'disabled' | 'selected',
   title: ?boolean,
 };
@@ -42,16 +44,23 @@ export default class LessonTile extends React.Component
     if (isTitle) {
       classText = 'navigator__lesson_tile_containter navigator__lesson_tile_containter_title';
     }
-    if (props.state === 'disabled') {
-      classText = `${classText} navigator__lesson_tile_disabled`;
-    }
-    if (props.state === 'selected') {
-      classText = `${classText} navigator__lesson_tile_selected`;
-    }
     let imgLink = '/static/defaultTile.png';
     if (props.imgLink != null) {
       imgLink = `${'/static/dist'}${props.imgLink}`;
     }
+    if (props.state === 'disabled') {
+      classText = `${classText} navigator__lesson_tile_disabled`;
+      if (props.imgLinkDisabled != null) {
+        imgLink = `${'/static/dist'}${props.imgLinkDisabled}`;
+      }
+    }
+    if (props.state === 'selected') {
+      classText = `${classText} navigator__lesson_tile_selected`;
+      if (props.imgLinkSelected != null) {
+        imgLink = `${'/static/dist'}${props.imgLinkSelected}`;
+      }
+    }
+
     const content = <div className={classText}>
         <img src={imgLink} className="navigator__lesson_tile_image" alt={`Icon for ${label}`}/>
         <div className="navigator__lesson_tile_title_container">

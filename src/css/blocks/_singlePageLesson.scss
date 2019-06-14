@@ -9,14 +9,43 @@
 //   margin-left: 0;
 // }
 
+.single_page_lesson__container .highlight_word {
+  // color: #0067D6;
+  color: color('site', 'primaryDark');
+  // font-style: italic;
+}
+
 .single_page_lesson__container {
   // padding: 20px;
   // margin-left: 20px;
   // margin-right: 20px;
   // background-color: color('white', 'lightest');
   color: color('grey', 'darkest');
-  background-color: color('lesson', 'title-background');
+  // color: white;
+  // background-color: color('lesson', 'title-background');
+  background-color: color('white', 'lightest');
+  border-top: 1px solid #aaaa;
+  border-bottom: 1px solid #aaaa;
   // position: relative;
+  max-width: 1100px;
+}
+
+@media screen and (min-width: 700px) {
+  .single_page_lesson__container {
+    border-left: 1px solid color('white', 'light');
+    border-right: 1px solid color('white', 'light');
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  .single_page_lesson__container {
+    border-left: 1px solid color('white', 'light');
+    border-right: 1px solid color('white', 'light');
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 // .single_page_lesson__container .lesson__diagram {
@@ -70,9 +99,9 @@
   // touch-action: auto;
 }
 
-.single_page_lesson__container .highlight_word {
-  color: color('diagram', 'text-keyword', 'dark');
-}
+// .single_page_lesson__container .highlight_word {
+//   color: color('diagram', 'text-keyword', 'dark');
+// }
 
 .single_page_lesson__text_container {
   position: relative;

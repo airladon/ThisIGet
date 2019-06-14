@@ -6,8 +6,8 @@ import {
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from './layout';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+import imgLink from '../../tile_ffffff.svg';
+import imgLinkGrey from '../../tile.svg';
 import details from '../../details';
 import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -88,6 +88,9 @@ class Content extends PresentationLessonContent {
         objects._moon, objects._wheel, objects._ring, objects._ball,
         objects._circle, objects._activator,
       ],
+      // setSteadyState: () => {
+      //   console.log(this)
+      // }
     });
     this.addSection(common, {
       setContent: centerV([
