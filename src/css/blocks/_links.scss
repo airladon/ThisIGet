@@ -122,24 +122,59 @@
   text-decoration: none;
 }
 
+// .lesson__links_table__your_rating__small_screen {
+//   display: none;
+// }
+
+// .lesson__links_table__your_rating__small_screen .rating__container {
+//   display: inline-block;
+// }
+
+.lesson__links_table__small_screen {
+  display: none;
+}
+
+.lesson__links_table__your_rating__small_screen__title {
+  display: inline-block;
+}
+
+.lesson__links_table__small_screen .rating__container {
+  display: inline-block;
+}
+
 @media (max-width: 400px) {
-  .lesson__links_table td {
-    display: block;
+  // .lesson__links_table td {
+  //   display: block;
+  // }
+
+  // .lesson__links_table td:nth-child(2) {
+  //   display: inline-block;
+  // }
+
+  // .lesson__links_table td:nth-child(3) {
+  //   display: inline-block;
+  // }
+
+  // .lesson__links_table tr {
+  //   border-top: 1px solid #aaa;
+  // }
+
+  // .lesson__links_table__title_row {
+  //   display: none;
+  // }
+
+  // .lesson__links_table__your_rating__small_screen {
+  //   display: initial;
+  // }
+
+  // .lesson__links_table__your_rating {
+  //   display: none;
+  // }
+  .lesson__links_table__small_screen {
+    display: table-row;
   }
 
-  .lesson__links_table td:nth-child(2) {
-    display: inline-block;
-  }
-
-  .lesson__links_table td:nth-child(3) {
-    display: inline-block;
-  }
-
-  .lesson__links_table tr {
-    border-bottom: 1px solid #aaa;
-  }
-
-  .lesson__links_table__title_row {
+  .lesson__links_table__large_screen {
     display: none;
   }
 }
@@ -175,18 +210,18 @@
     visibility: collapse;
   }
 
-  .lesson__links_table__icon_generic,
-  .lesson__links_table__icon_single_page,
-  .lesson__links_table__icon_video,
-  .lesson__links_table__icon {
-    // width: 0;
-    // display: none;
-    display: none;
-    width: 0;
-    height: 0;
-    opacity: 0;
-    visibility: collapse;
-  }
+  // .lesson__links_table__icon_generic,
+  // .lesson__links_table__icon_single_page,
+  // .lesson__links_table__icon_video,
+  // .lesson__links_table__icon {
+  //   // width: 0;
+  //   // display: none;
+  //   display: none;
+  //   width: 0;
+  //   height: 0;
+  //   opacity: 0;
+  //   visibility: collapse;
+  // }
 
   .lesson__links_table__type {
     // font-size: 0;
