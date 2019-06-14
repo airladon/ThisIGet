@@ -7,8 +7,8 @@ var version = {
   type: 'generic',
   title: 'External',
   description: 'External links to sources of information for External Angles of Triangles',
-  htmlTitle: 'External links describing triangle external angles (or exterior angles)',
-  htmlDescription: '',
+  htmlTitle: 'Links for external angles of a triangle',
+  htmlDescription: 'Links with explanations, examples and proofs for external angles of a triangle',
   links: [
     {
       url: 'https://www.khanacademy.org/math/basic-geo/basic-geometry-shapes/triangle-angles/v/triangle-angle-example-1',
