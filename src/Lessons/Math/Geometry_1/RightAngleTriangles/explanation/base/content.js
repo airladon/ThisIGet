@@ -578,7 +578,7 @@ class Content extends PresentationLessonContent {
       title: 'Uses',
       setContent: style({ centerV: true }, [
         'Right angle triangles are |everywhere|.',
-        'Often more complicated shapes can be simplified into right angle triangles, making them easier to analyze them.',
+        'Often more complicated shapes can be simplified into right angle triangles, making them easier to analyze.',
         'Right angle triangles form the basis of |trigonometry| - a field of mathematics that studies triangles and is the basis of many science and engineering disciplines.',
       ]),
     };
