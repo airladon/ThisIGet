@@ -252,6 +252,7 @@ export default function lessonLayout() {
       content,
       comment: commentText,
       symbol,
+      includeInSize: false,
     },
   });
   const half = { frac: ['_1', '_2', 'v', 0.6] };
@@ -298,10 +299,10 @@ export default function lessonLayout() {
       },
       forms: {
         '0': [AreaTri, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b'],
-        '1': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b', '_mul', ' ', 'sides'],
+        '1': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', ' ', 'b', ' ', '_mul', ' ', 'sides'],
         '2': [
-          AreaAll, 'equals', half, ' ', 'h', ' ', 'mul',
-          top(['b', ' ', '_mul', 'sides'], 'border', 'brace'),
+          AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', ' ',
+          top(['b', ' ', '_mul', ' ', 'sides'], 'border', 'brace'),
         ],
         '3': [AreaAll, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
         '4': [AreaCirc, 'equals', half, ' ', 'h', ' ', 'mul', 'border'],
@@ -309,7 +310,10 @@ export default function lessonLayout() {
           AreaCirc, 'equals', half,
           top([' ', 'h', ' '], [' ', 'r', ' '], 'sBrace'),
           'mul', 'border'],
-        '6': [AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul', 'border'],
+        '6': {
+          content: [AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul', 'border'],
+          translation: { r: ['linear'] },
+        },
         '7': [
           AreaCirc, 'equals', half, ' ', 'r', ' ', 'mul',
           top('border', ['__2', ' ', 'pi', ' ', '_r'], 'brace'),
@@ -322,9 +326,7 @@ export default function lessonLayout() {
             AreaCirc, 'equals', half, ' ', 'mul', '__2', ' ',
             'pi', ' ', '_r', ' ', 'r',
           ],
-          translation: {
-            r: ['curved', 'up', 0.8],
-          },
+          translation: { r: ['curved', 'up', 0.8] },
         },
         '10': [
           AreaCirc, 'equals',
@@ -333,7 +335,10 @@ export default function lessonLayout() {
           { strike: ['__2', '_x'] }, ' ',
           'pi', ' ', '_r', ' ', 'r',
         ],
-        '11': [AreaCirc, 'equals', 'pi', ' ', '_r', ' ', 'r'],
+        '11': {
+          content:  [AreaCirc, 'equals', 'pi', ' ', '_r', ' ', 'r'],
+          translation: { r: ['linear'] },
+        },
         '12': [
           AreaCirc, 'equals', 'pi', ' ',
           top(['_r', ' ', 'r'], r2, 'sBrace'),
