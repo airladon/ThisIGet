@@ -1,3 +1,0 @@
-const remoteTest = {
-  hello: 'there',
-};

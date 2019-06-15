@@ -956,7 +956,7 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   addStar() {
     const img = document.createElement('img');
-    img.setAttribute('src', '/static/star.png');
+    img.setAttribute('src', '/static/assets/star.png');
     img.id = 'id_lesson__star';
     img.classList.add('lesson__info_star');
     img.alt = 'active item';
