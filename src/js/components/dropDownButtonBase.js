@@ -33,7 +33,7 @@ export default class DropDownButtonBase extends React.Component
     this.id = '';
   }
 
-  offButtonEvent(event: MouseEvent | TouchEvent) {
+  offButtonEvent(event: MouseEvent | TouchEvent | KeyboardEvent) {
     if (event.target instanceof HTMLElement) {
       const parent = event.target.parentElement;
       if (parent instanceof HTMLElement) {
@@ -55,12 +55,15 @@ export default class DropDownButtonBase extends React.Component
   }
 
   toggle() {
-    const rect = this.buttonElement.getBoundingClientRect();
-    const listRect = this.itemList.getBoundingClientRect();
-    // $FlowFixMe
-    const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
-    let left = 0;
     if (this.itemList.classList.contains('dropdown_button_list_hide')) {
+      this.itemList.style.visibility = 'hidden';
+      // this.itemList.style.top = '-10000px';
+      this.itemList.classList.remove('dropdown_button_list_hide');
+      const rect = this.buttonElement.getBoundingClientRect();
+      const listRect = this.itemList.getBoundingClientRect();
+      // $FlowFixMe
+      const windowWidth = (window.innerWidth || document.documentElement.clientWidth);
+      let left = 0;
       if (this.direction === 'down') {
         this.itemList.style.top = `${rect.height}px`;
       } else {
@@ -78,7 +81,7 @@ export default class DropDownButtonBase extends React.Component
         left -= delta + 5;
       }
       this.itemList.style.left = `${left}px`;
-      this.itemList.classList.remove('dropdown_button_list_hide');
+      this.itemList.style.visibility = 'visible';
     } else {
       this.itemList.style.left = '';
       this.itemList.style.top = '';
@@ -98,6 +101,14 @@ export default class DropDownButtonBase extends React.Component
       this.itemList = itemList;
       button.addEventListener('mousedown', this.toggle.bind(this));
       body.addEventListener('mousedown', this.offButtonEvent.bind(this), true);
+      button.addEventListener('keydown', (event: KeyboardEvent) => {
+        if (event.keyCode === 13 || event.keyCode === 32) {
+          this.toggle();
+        }
+      });
+      // button.addEventListener('focusout', () => {
+      //   this.close();
+      // });
     }
     window.addEventListener('resize', this.close.bind(this));
   }
@@ -147,7 +158,17 @@ export default class DropDownButtonBase extends React.Component
             linkRedirect();
           }
         };
-        item = <div onClick={closeThenRedirect}>
+        const keyboardCloseThenRedirect = (event) => {
+          if (event.keyCode === 13 || event.keyCode === 32) {
+            closeThenRedirect();
+          }
+        };
+        item = <div onClick={closeThenRedirect}
+                    tabIndex={0}
+                    role="button"
+                    onKeyDown={keyboardCloseThenRedirect}
+                    className="dropdown_button_list_item_link"
+                    >
           {listItem.label}
           </div>;
       } else {
