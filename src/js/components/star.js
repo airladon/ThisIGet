@@ -39,10 +39,18 @@ export default class Star extends React.Component
 
   render() {
     let link = <div></div>;
+    const keydown = (event: KeyboardEvent) => {
+      if (event.keyCode === 13 || event.keyCode === 32) {
+        this.setRating();
+      }
+    };
     if (this.props.isLoggedIn) {
       link = <div
         className="rating__stars_link rating__stars_star_active"
         onClick={this.setRating.bind(this)}
+        tabIndex={0}
+        role="button"
+        onKeyDown={keydown}
       />;
     }
 

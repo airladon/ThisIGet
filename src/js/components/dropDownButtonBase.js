@@ -167,6 +167,7 @@ export default class DropDownButtonBase extends React.Component
                     tabIndex={0}
                     role="button"
                     onKeyDown={keyboardCloseThenRedirect}
+                    className="dropdown_button_list_item_link"
                     >
           {listItem.label}
           </div>;

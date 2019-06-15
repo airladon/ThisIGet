@@ -138,6 +138,10 @@ $button_size: 0.4em;
   background: color('site', 'primary');
 }
 
+// .dropdown_button_list_item_active .dropdown_button_list_item_link:focus {
+//   outline: 3px solid white;
+// }
+
 .dropdown_button_list_item_active:hover {
   // background: color('site', 'safe', 'base');
   background: color('site', 'primary');
