@@ -164,7 +164,7 @@ export default class Navbar extends React.Component
       return <a className="navbar-icon-container"
          href="/">
         <img className="navbar-icon"
-             src="/static/logo20.svg"
+             src="/static/assets/logo20.svg"
              alt="navbar home icon"/>
       </a>;
     }

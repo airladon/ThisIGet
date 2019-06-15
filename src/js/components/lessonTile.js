@@ -44,7 +44,7 @@ export default class LessonTile extends React.Component
     if (isTitle) {
       classText = 'navigator__lesson_tile_containter navigator__lesson_tile_containter_title';
     }
-    let imgLink = '/static/defaultTile.png';
+    let imgLink = '/static/assets/defaultTile.png';
     if (props.imgLink != null) {
       imgLink = `${'/static/dist'}${props.imgLink}`;
     }

@@ -32,7 +32,7 @@ export default class LessonTitle extends React.Component
     // if (props.state === 'selected') {
     //   classText = `${classText} navigator__lesson_tile_selected`;
     // }
-    let imgLink = '/static/defaultTile.png';
+    let imgLink = '/static/assets/defaultTile.png';
     if (props.imgLink != null) {
       imgLink = `${props.imgLink}`;
     }
