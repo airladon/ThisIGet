@@ -113,8 +113,6 @@ def is_logged_in():
 @app.route('/Lessons/', defaults={'path': ''})
 @app.route('/Lessons/<path:path>')
 def get_lesson(path):
-    print(lessons)
-    print('asdf')
     lesson_path = f'static/dist/Lessons/{path}'.strip('/')
     # if lesson_path not in lessons:
 
@@ -163,11 +161,23 @@ def get_lesson(path):
 @app.route('/dev/Lessons/', defaults={'path': ''})
 @app.route('/dev/Lessons/<path:path>')
 def get_lesson_dev(path):
-    path = f'/static/dist/Lessons/{path}'
-    css = f'{path}/lesson-dev.css'
-    js = f'{path}/lesson-dev.js'
+    # path = f'/static/dist/Lessons/{path}'
+    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
+    js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson-dev.js"]}'
+    css = \
+        f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson-dev.css"]}'
+
+    # css = f'{path}/lesson-dev.css'
+    # js = f'{path}/lesson-dev.js'
     lesson_page = request.args.get('page')
-    res = make_response(render_template('lesson.html', css=css, js=js))
+    res = make_response(render_template(
+        'lesson.html',
+        css=css,
+        js=js,
+        tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
+        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+    ))
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
