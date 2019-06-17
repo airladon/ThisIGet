@@ -43,7 +43,7 @@ def send_confirm_account_email(user):
         return
     token = user.get_account_confirmation_token()
     email = user.get_email()
-    print(email)
+    # print(email)
     send_email('ThisIGet Account Email Confirmation',
                sender=app.config['MAIL_SENDER'],
                recipients=[email],
