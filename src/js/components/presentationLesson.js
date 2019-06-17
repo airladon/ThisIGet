@@ -86,7 +86,7 @@ export default class PresentationLessonComponent extends React.Component
     if (htmlText !== this.state.htmlText || page !== this.state.page) {
       this.componentUpdateCallback = callback;
       this.setState({ htmlText, page });
-      createCookie('page', `${page + 1}`, 30, window.location.pathname);
+      createCookie('page', `${page + 1}`, 30, window.location.pathname.replace(/\/$/, ''));
     } else if (callback) {
       callback();
     }

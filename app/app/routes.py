@@ -101,7 +101,7 @@ def get_lesson(path):
     path = f'/static/dist/Lessons/{path}'
     css = f'{path}/lesson.css'
     js = f'{path}/lesson.js'
-    *p, lesson_uid, topic_name, version_uid = path.split('/')
+    *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
     title = f'{version.htmlTitle} - This I Get'
     if version.htmlTitle == '':
@@ -109,7 +109,7 @@ def get_lesson(path):
                  f'{version.topic.name.capitalize()}: '
                  f'{version.title} - This I Get')
     description = f'{version.htmlDescription}'
-    print(description)
+    # print(description)
     lesson_page = request.args.get('page')
     res = make_response(render_template(
         'lesson.html', css=css, js=js,

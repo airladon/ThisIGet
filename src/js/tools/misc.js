@@ -104,7 +104,7 @@ function logInOut(isLoggedIn: boolean) {
   if (isLoggedIn === false) {
     logText = '/login';
   }
-  const next = `?next=${window.location.pathname}`;
+  const next = `?next=${window.location.pathname.replace(/\/$/, '')}`;
   window.location = `${logText}${next}`;
 }
 function login() {
