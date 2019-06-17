@@ -43,10 +43,23 @@ def check_confirmed(func):
     return decorated_function
 
 
+def get_full_path(root, file):
+    return f'/{root}/{lessons[root][file]}'
+
+
 @app.route('/')
 def home():
     print(lessons)
-    res = make_response(render_template('home.html'))
+    print(f"/{'static/dist'}/{lessons['static/dist']['main.js']}")
+    # print(get_full_path('static/dist', 'main.css'))
+    res = make_response(render_template(
+        'home.html',
+        main_css=f"/{'static/dist'}/{lessons['static/dist']['main.css']}",
+        main_js=f"/{'static/dist'}/{lessons['static/dist']['main.js']}",
+        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+        tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
+        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+    ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
     else:
@@ -102,7 +115,7 @@ def is_logged_in():
 def get_lesson(path):
     print(lessons)
     print('asdf')
-    lesson_path = f'Lessons/{path}'.strip('/')
+    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
     # if lesson_path not in lessons:
 
     # print(lesson_path)
@@ -125,8 +138,14 @@ def get_lesson(path):
     # print(description)
     lesson_page = request.args.get('page')
     res = make_response(render_template(
-        'lesson.html', css=css, js=js,
-        title=title, description=description))
+        'lesson.html',
+        css=css,
+        js=js,
+        tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
+        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+        title=title,
+        description=description))
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(

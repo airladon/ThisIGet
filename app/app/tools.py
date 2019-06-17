@@ -157,7 +157,7 @@ def getLessons():
             #     continue
             file_without_hash = re.sub(r'-....................\.', '.', file)
             # if file[0:6] == ('lesson') or file[0:10] == ('lesson-dev'):
-            path = root.replace('./app/app/static/dist/', '')
+            path = root.replace('./app/app/', '')
 
             if path not in file_list:
                 file_list[path] = {}
