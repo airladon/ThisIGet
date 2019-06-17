@@ -152,11 +152,7 @@ def getLessons():
                 continue
             if file == '.DS_Store':
                 continue
-            # ext = file.split('.')[-1]
-            # if ext != 'css' and ext != 'js':
-            #     continue
             file_without_hash = re.sub(r'-....................\.', '.', file)
-            # if file[0:6] == ('lesson') or file[0:10] == ('lesson-dev'):
             path = root.replace('./app/app/', '')
 
             if path not in file_list:
