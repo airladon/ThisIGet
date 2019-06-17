@@ -49,7 +49,7 @@ def get_full_path(root, file):
 
 @app.route('/')
 def home():
-    print(lessons)
+    # print(lessons)
     # print(get_full_path('static/dist', 'main.css'))
     vendors_js = ''
     if 'vendors.js' in lessons['static/dist']:
