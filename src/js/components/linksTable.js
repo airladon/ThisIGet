@@ -54,7 +54,7 @@ export default class LinksTable extends React.Component
 
   constructor(props: Props) {
     super(props);
-    const path = window.location.pathname.split('/');
+    const path = window.location.pathname.replace(/\/$/, '').split('/');
     this.links = [];
     props.links.forEach((link) => {
       this.links.push({
