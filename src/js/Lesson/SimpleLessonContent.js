@@ -45,7 +45,6 @@ class SimpleLessonContent {
   // eslint-disable-next-line class-methods-use-this
   loadQR(qr: string, path: string) {
     const link = `/qr/${path}`;
-    console.log(link)
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -55,10 +54,8 @@ class SimpleLessonContent {
       })
       .then((data) => {
         if (data.status === 'ok') {
-          console.log(data)
           const jsFile = `/static/dist/${path}/${data.js}`;
           const cssFile = `/static/dist/${path}/${data.css}`;
-          console.log(jsFile)
           loadRemoteCSS(`${qr}CSS`, cssFile, () => {
             loadRemote(`${qr}Script`, jsFile, () => {
             });
@@ -77,12 +74,6 @@ class SimpleLessonContent {
       const versionUID = splitQR.slice(-1)[0];
       const lessonUID = splitQR.slice(-2, -1)[0];
       const path = splitQR.slice(0, -2).join('/');
-      // const jsFile = `/static/dist/Lessons/${path}/${lessonUID}/quickReference/${versionUID}/quickReference.js`;
-      // const cssFile = `/static/dist/Lessons/${path}/${lessonUID}/quickReference/${versionUID}/quickReference.css`;
-      // loadRemoteCSS(`${qr}CSS`, cssFile, () => {
-      //   loadRemote(`${qr}Script`, jsFile, () => {
-      //   });
-      // });
       this.loadQR(qr, `Lessons/${path}/${lessonUID}/quickReference/${versionUID}`);
     });
   }

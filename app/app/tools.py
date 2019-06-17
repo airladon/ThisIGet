@@ -163,10 +163,8 @@ def getLessons():
                 file_list[path] = {}
             file_list[path][file_without_hash] = file
 
-            # md5_str = md5(full_file_path)
-            # file_list[full_file_path.replace('./app/app/static', '')] = md5_str
-
     return file_list
+
 # key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
 # len(encrypt('1', key_str))
 # len(encrypt('12', key_str))

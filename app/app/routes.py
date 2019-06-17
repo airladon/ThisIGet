@@ -56,7 +56,10 @@ def home():
         main_js=f"/{'static/dist'}/{lessons['static/dist']['main.js']}",
         vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+        common_lessons_js=(
+            f"/{'static/dist'}/"
+            f"{lessons['static/dist']['commonlessons.js']}"
+        ),
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
@@ -138,7 +141,10 @@ def get_lesson(path):
         css=css,
         js=js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+        common_lessons_js=(
+            f"/{'static/dist'}/"
+            f"{lessons['static/dist']['commonlessons.js']}"
+        ),
         vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
         title=title,
         description=description))
@@ -186,7 +192,10 @@ def get_lesson_dev(path):
         css=css,
         js=js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=f"/{'static/dist'}/{lessons['static/dist']['commonlessons.js']}",
+        common_lessons_js=(
+            f"/{'static/dist'}/"
+            f"{lessons['static/dist']['commonlessons.js']}"
+        ),
         vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
     ))
     if lesson_page:
