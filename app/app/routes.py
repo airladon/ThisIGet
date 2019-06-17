@@ -49,12 +49,16 @@ def get_full_path(root, file):
 
 @app.route('/')
 def home():
+    print(lessons)
     # print(get_full_path('static/dist', 'main.css'))
+    vendors_js = ''
+    if 'vendors.js' in lessons['static/dist']:
+        vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
     res = make_response(render_template(
         'home.html',
         main_css=f"/{'static/dist'}/{lessons['static/dist']['main.css']}",
         main_js=f"/{'static/dist'}/{lessons['static/dist']['main.js']}",
-        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+        vendors_js=vendors_js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
         common_lessons_js=(
             f"/{'static/dist'}/"
@@ -136,6 +140,9 @@ def get_lesson(path):
     description = f'{version.htmlDescription}'
     # print(description)
     lesson_page = request.args.get('page')
+    vendors_js = ''
+    if 'vendors.js' in lessons['static/dist']:
+        vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
     res = make_response(render_template(
         'lesson.html',
         css=css,
@@ -145,7 +152,7 @@ def get_lesson(path):
             f"/{'static/dist'}/"
             f"{lessons['static/dist']['commonlessons.js']}"
         ),
-        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+        vendors_js=vendors_js,
         title=title,
         description=description))
     if lesson_page:
@@ -187,6 +194,9 @@ def get_lesson_dev(path):
     # css = f'{path}/lesson-dev.css'
     # js = f'{path}/lesson-dev.js'
     lesson_page = request.args.get('page')
+    vendors_js = ''
+    if 'vendors.js' in lessons['static/dist']:
+        vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
     res = make_response(render_template(
         'lesson.html',
         css=css,
@@ -196,7 +206,7 @@ def get_lesson_dev(path):
             f"/{'static/dist'}/"
             f"{lessons['static/dist']['commonlessons.js']}"
         ),
-        vendors_js=f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}",
+        vendors_js=vendors_js,
     ))
     if lesson_page:
         res = make_response(redirect(request.path))
