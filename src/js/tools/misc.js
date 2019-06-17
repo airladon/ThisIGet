@@ -12,6 +12,7 @@ const classify = (key: string, value: string) => {
   return `${withKey.split(' -').join(joinStr)}`;
 };
 
+
 function loadRemote(
   scriptId: string,
   url: string,

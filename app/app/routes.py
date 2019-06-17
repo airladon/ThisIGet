@@ -25,7 +25,7 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
-import re
+# import re
 # import pdb
 
 # project/decorators.py
@@ -49,8 +49,6 @@ def get_full_path(root, file):
 
 @app.route('/')
 def home():
-    print(lessons)
-    print(f"/{'static/dist'}/{lessons['static/dist']['main.js']}")
     # print(get_full_path('static/dist', 'main.css'))
     res = make_response(render_template(
         'home.html',
@@ -156,6 +154,19 @@ def get_lesson(path):
     else:
         res.set_cookie('username', '')
     return res
+
+
+@app.route('/qr/Lessons/', defaults={'path': ''})
+@app.route('/qr/Lessons/<path:path>')
+def get_qr_file_location(path):
+    qr_path = f'static/dist/Lessons/{path}'.strip('/')
+    js = lessons[qr_path]["quickReference.js"]
+    css = lessons[qr_path]["quickReference.css"]
+    return jsonify({
+        'status': 'ok',
+        'js': js,
+        'css': css,
+    })
 
 
 @app.route('/dev/Lessons/', defaults={'path': ''})
