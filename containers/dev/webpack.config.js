@@ -107,7 +107,8 @@ module.exports = (env) => {
   const extract = new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: '[name].css',
+    // filename: '[name].css',
+    filename: '[name].[contenthash].css',
     chunkFilename: '[id].css',
   });
   // const extract = new ExtractTextPlugin({
@@ -177,7 +178,7 @@ module.exports = (env) => {
     entry: entryPoints.entryPoints(e.name),
     output: {
       path: buildPath,
-      filename: '[name].js',
+      filename: '[name]-[chunkhash].js',
     },
 
     // Delete from here after fixing diagram integration

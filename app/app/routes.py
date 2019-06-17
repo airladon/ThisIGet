@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db
+from app import app, db, lessons
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -25,6 +25,7 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
+import re
 # import pdb
 
 # project/decorators.py
@@ -44,6 +45,7 @@ def check_confirmed(func):
 
 @app.route('/')
 def home():
+    print(lessons)
     res = make_response(render_template('home.html'))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
@@ -98,9 +100,20 @@ def is_logged_in():
 @app.route('/Lessons/', defaults={'path': ''})
 @app.route('/Lessons/<path:path>')
 def get_lesson(path):
-    path = f'/static/dist/Lessons/{path}'
-    css = f'{path}/lesson.css'
-    js = f'{path}/lesson.js'
+    print(lessons)
+    print('asdf')
+    lesson_path = f'Lessons/{path}'.strip('/')
+    # if lesson_path not in lessons:
+
+    # print(lesson_path)
+    # print(lessons[lesson_path])
+
+    # path = f'/static/dist/Lessons/{path}'
+    # css = f'{path}/lesson.css'
+    # js = f'{path}/lesson.js'
+    js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.js"]}'
+    css = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.css"]}'
+
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
     title = f'{version.htmlTitle} - This I Get'
