@@ -160,13 +160,13 @@ def get_lesson_dev(path):
 
 @app.route('/favicon.ico')
 def icon():
-    return app.send_static_file('favicon.ico')
+    return app.send_static_file('assets/favicon.ico')
 
 
 @app.route('/apple-touch-icon-precomposed.png')
 @app.route('/apple-touch-icon.png')
 def apple_touch_icon():
-    return app.send_static_file('icon.png')
+    return app.send_static_file('assets/icon.png')
 
 
 @app.route('/lessons/chapter1')

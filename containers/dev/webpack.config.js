@@ -65,7 +65,6 @@ module.exports = (env) => {
   setFilesForBuild.setBaseHTML(e.shortName);
 
   console.log(`Building for ${e.name}`); // eslint-disable-line no-console
-
   let uglify = '';
 
   if (e.uglify) {
@@ -122,16 +121,19 @@ module.exports = (env) => {
         from: '/opt/app/src/Lessons/*/*/topic.png',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)topic\.png$/,
+        ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*',
+        from: '/opt/app/src/Lessons/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+        ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*/*',
+        from: '/opt/app/src/Lessons/*/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
+        ignore: ['*boilerplate*'],
       },
     ],
     // { debug: 'debug' },
