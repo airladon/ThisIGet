@@ -56,8 +56,9 @@ class SimpleLessonContent {
       .then((data) => {
         if (data.status === 'ok') {
           console.log(data)
-          const jsFile = `${path}/${data.js}`;
-          const cssFile = `${path}/${data.css}`;
+          const jsFile = `/static/dist/${path}/${data.js}`;
+          const cssFile = `/static/dist/${path}/${data.css}`;
+          console.log(jsFile)
           loadRemoteCSS(`${qr}CSS`, cssFile, () => {
             loadRemote(`${qr}Script`, jsFile, () => {
             });
