@@ -82,7 +82,7 @@ export default class LessonComponent extends React.Component
   constructor(props: Props) {
     super(props);
     this.lesson = props.lesson;
-    const path = window.location.pathname.split('/');
+    const path = window.location.pathname.replace(/\/$/, '').split('/');
     // const lessonUID = path.slice(-3, -2)[0];
     // const topic = path.slice(-2, -1)[0];
     // const versionUID = path.slice(-1)[0];
@@ -421,9 +421,9 @@ export default class LessonComponent extends React.Component
 
   render() {
     // console.log(`${window.location.pathname}/tile.svg`)
-    let path = window.location.pathname.split('/').slice(0, -2);
+    let path = window.location.pathname.replace(/\/$/, '').split('/').slice(0, -2);
     if (path[1] === 'dev') {
-      path = ['', ...window.location.pathname.split('/').slice(2, -2)];
+      path = ['', ...window.location.pathname.replace(/\/$/, '').split('/').slice(2, -2)];
     }
     const imgLink = `/static/dist${path.join('/')}/tile.svg`;
     return <div>
