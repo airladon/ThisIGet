@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Derivation of Pythagorean Theorem',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Derivation of Similar Triangles',
+  description: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+  htmlTitle: 'Similar Triangles Proof',
+  htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
   fullLesson: true,
   type: 'singlePage',
 };
