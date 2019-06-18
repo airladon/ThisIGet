@@ -66,5 +66,61 @@ Therefore as both $$\color{grey}(1)$$ and $$\color{grey}(2)$$ equal the same rat
 
 $$\color{b}\frac{m}{n}=\frac{M}{N}$$
 
-In other words, the ratio of the small triangle side n to its corresponding side N on the large triangle, is the same as the ratio of the small triangle side m to its corresponding side M on the larger triangle.
+In other words, the ratio of the small triangle side $$\color{b}n$$ to its corresponding side $$\color{b}N$$ on the large triangle, is the same as the ratio of the small triangle side $$\color{b}m$$ to its corresponding side $$\color{b}M$$ on the larger triangle.
+
+Now, we arbitrarily selected the top angle as the angle to align the small and large triangles. Had we selected the bottom left, then we could do the same exercise and find the ratio of the corresponding left sides and corresponding bottom sides of the triangles is also the same.
+
+Thus the ratio of all corresponding side pairs are the same, and so we can see **if triangles share the same angles, then their corresponding sides have the same proportion, and they are therefore similar triangles**.
+
+
+### Proportional Triangles are Similar - Proof
+
+Now what happens if we know two triangles have corresponding sides that are proportional. Are their corresponding angles equal, and therefore are they similar?
+
+We start with two triangles whose corresponding sides are in proportion.
+
+![](./StartProportionalTriangles.png)
+
+This means each ratio of corresponding sides is the same:
+
+$$\color{b}\frac{M}{m}=\frac{R}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{m}=\frac{N}{n}\ \ \ \ \ \ \ \ \ \ \frac{R}{r}=\frac{N}{n}$$
+
+Rearranging each of these, we can see it also means the ratio of adjacent sides of one triangle is equal to the ratio of the corresponding adjacent sides of the other.
+
+$$\color{b}\frac{M}{R}=\frac{m}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{N}=\frac{m}{n}\ \ \ \ \ \ \ \ \ \ \frac{R}{N}=\frac{r}{n}$$
+
+Now, do such triangles have equal corresponding angles? We can look at this by drawing a third triangle that shares a side with side $$\color{b}A$$, and has the angles $$\color{b}b$$ and $$\color{b}c$$ from the larger triangle.
+
+![](./NewTriangle.png)
+
+Now as both the new triangle, and large triangle have two angles defined, and a triangles angles [[add]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) to 180º, then their third angle must be the same.
+
+![](./CalcAngleA.png)
+
+This means the large triangle and the new triangle are similar:
+
+
+$$\color{b}\frac{M}{R}=\frac{p}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{N}=\frac{p}{q}\ \ \ \ \ \ \ \ \ \ \frac{R}{N}=\frac{r}{q}$$
+
+But we started with:
+
+$$\color{b}\frac{M}{R}=\frac{m}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{N}=\frac{m}{n}$$
+
+Therefore:
+
+$$\color{b}m=p\ \ \ \ \ \ \ \ \ \ n=q$$
+
+![](ProportionalCongruent.png)
+
+Now, the two small triangles share three side lengths, meaning they are congruent, and therefore have the same angles.
+
+And so **two triangles whose corresponding sides are in proportion have equal angles and are therefore similar**.
+
+![](ProportionalFinal.png)
+
+### Summary
+
+**Any two triangles that have the same angles**, will also have propotional corresponding sides, and therefore be **similar triangles**.
+
+**Any two triangles that have propotional corresponding sides**, will also have the same corresponding angles and therefore be **similar triangles**.
 

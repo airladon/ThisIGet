@@ -17,6 +17,7 @@ class Content extends SimpleLessonContent {
       'Math/Geometry_1/RelatedAngles/base',
       'Math/Geometry_1/ParallelLineDistance/base',
       'Math/Geometry_1/AreaTriangle/base',
+      'Math/Geometry_1/Triangles/base',
     ]);
   }
 
