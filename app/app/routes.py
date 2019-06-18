@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db
+from app import app, db, lessons
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -25,6 +25,7 @@ from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
+# import re
 # import pdb
 
 # project/decorators.py
@@ -42,9 +43,37 @@ def check_confirmed(func):
     return decorated_function
 
 
+def get_full_path(root, file):
+    return f'/{root}/{lessons[root][file]}'
+
+
 @app.route('/')
 def home():
-    res = make_response(render_template('home.html'))
+    # The checks for keys in lessons is for pytest in deployment pipeline.
+    # In deployment pipeline on travis, the statis/dist directory doesn't
+    # exist.
+    vendors_js = ''
+    main_css = ''
+    main_js = ''
+    tools_js = ''
+    common_lessons_js = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        if 'vendors.js' in dist:
+            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        if 'commonlessons.js' in dist:
+            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        if 'main.css' in dist:
+            main_css = f"/{'static/dist'}/{dist['main.css']}"
+        if 'main.js' in dist:
+            main_js = f"/{'static/dist'}/{dist['main.js']}"
+        if 'tools.js' in dist:
+            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+    res = make_response(render_template(
+        'home.html',
+        main_css=main_css, main_js=main_js, vendors_js=vendors_js,
+        tools_js=tools_js, common_lessons_js=common_lessons_js,
+    ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
     else:
@@ -95,12 +124,17 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
-@app.route('/Lessons/', defaults={'path': ''})
+@app.route('/Lessons/', defaults={'path': ''})  # noqa
 @app.route('/Lessons/<path:path>')
 def get_lesson(path):
-    path = f'/static/dist/Lessons/{path}'
-    css = f'{path}/lesson.css'
-    js = f'{path}/lesson.js'
+    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
+    js = ''
+    css = ''
+    if (lesson_path in lessons):
+        js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.js"]}'
+        css = f'/static/dist/Lessons/{path}/' \
+              f'{lessons[lesson_path]["lesson.css"]}'
+
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
     title = f'{version.htmlTitle} - This I Get'
@@ -109,10 +143,24 @@ def get_lesson(path):
                  f'{version.topic.name.capitalize()}: '
                  f'{version.title} - This I Get')
     description = f'{version.htmlDescription}'
-    # print(description)
     lesson_page = request.args.get('page')
+
+    vendors_js = ''
+    tools_js = ''
+    common_lessons_js = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        if 'vendors.js' in dist:
+            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        if 'commonlessons.js' in dist:
+            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        if 'tools.js' in dist:
+            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+
     res = make_response(render_template(
-        'lesson.html', css=css, js=js,
+        'lesson.html',
+        css=css, js=js, tools_js=tools_js,
+        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
         title=title, description=description))
     if lesson_page:
         res = make_response(redirect(request.path))
@@ -128,14 +176,56 @@ def get_lesson(path):
     return res
 
 
+@app.route('/qr/Lessons/', defaults={'path': ''})
+@app.route('/qr/Lessons/<path:path>')
+def get_qr_file_location(path):
+    qr_path = f'static/dist/Lessons/{path}'.strip('/')
+    js = ''
+    css = ''
+    if (qr_path in lessons):
+        # js = f'/static/dist/Lessons/{path}/' \
+        #      f'{lessons[qr_path]["quickReference.js"]}'
+        # css = f'/static/dist/Lessons/{path}/' \
+        #       f'{lessons[qr_path]["quickReference.css"]}'
+        js = lessons[qr_path]["quickReference.js"]
+        css = lessons[qr_path]["quickReference.css"]
+    return jsonify({
+        'status': 'ok',
+        'js': js,
+        'css': css,
+    })
+
+
 @app.route('/dev/Lessons/', defaults={'path': ''})
 @app.route('/dev/Lessons/<path:path>')
 def get_lesson_dev(path):
-    path = f'/static/dist/Lessons/{path}'
-    css = f'{path}/lesson-dev.css'
-    js = f'{path}/lesson-dev.js'
+    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
+    js = ''
+    css = ''
+    if (lesson_path in lessons):
+        js = f'/static/dist/Lessons/{path}/' \
+             f'{lessons[lesson_path]["lesson-dev.js"]}'
+        css = f'/static/dist/Lessons/{path}/' \
+              f'{lessons[lesson_path]["lesson-dev.css"]}'
     lesson_page = request.args.get('page')
-    res = make_response(render_template('lesson.html', css=css, js=js))
+
+    vendors_js = ''
+    tools_js = ''
+    common_lessons_js = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        if 'vendors.js' in dist:
+            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        if 'commonlessons.js' in dist:
+            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        if 'tools.js' in dist:
+            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+
+    res = make_response(render_template(
+        'lesson.html',
+        css=css, js=js, tools_js=tools_js,
+        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
+    ))
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
@@ -189,8 +279,16 @@ def loginuser():
 def login(username=''):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/input.css'
-    js = '/static/dist/input.js'
+    js = ''
+    css = ''
+    if 'static/dist' in lessons:
+        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+    # print(css)
+    # css = '/static/dist/input.css'
+    # js = '/static/dist/input.js'
     form = LoginForm()
     if username:
         # user = Users.query.filter_by(username=username).first()
@@ -232,8 +330,15 @@ def login(username=''):
 def create():
     if current_user.is_authenticated:
         return redirect(url_for('home'))
-    css = '/static/dist/input.css'
-    js = '/static/dist/input.js'
+    js = ''
+    css = ''
+    if 'static/dist' in lessons:
+        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # css = '/static/dist/input.css'
+    # js = '/static/dist/input.js'
+    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users(username=form.username.data)
@@ -251,8 +356,15 @@ def create():
 def confirm_account_message(username):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    css = '/static/dist/input.css'
-    js = '/static/dist/input.js'
+    # css = '/static/dist/input.css'
+    # js = '/static/dist/input.js'
+    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+    js = ''
+    css = ''
+    if 'static/dist' in lessons:
+        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(username=username).first()
     if user is None:
@@ -304,8 +416,15 @@ def confirm_account(token):
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password_request():
-    css = '/static/dist/input.css'
-    js = '/static/dist/input.js'
+    # css = '/static/dist/input.css'
+    # js = '/static/dist/input.js'
+    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+    js = ''
+    css = ''
+    if 'static/dist' in lessons:
+        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
@@ -325,8 +444,15 @@ def reset_password_request():
 
 @app.route('/resetPassword/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    css = '/static/dist/input.css'
-    js = '/static/dist/input.js'
+    # css = '/static/dist/input.css'
+    # js = '/static/dist/input.js'
+    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+    js = ''
+    css = ''
+    if 'static/dist' in lessons:
+        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)

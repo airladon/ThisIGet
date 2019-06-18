@@ -5,6 +5,7 @@ import bcrypt
 import os
 from Crypto.Random import get_random_bytes
 import binascii
+import re
 
 
 def bytes_to_b64_str(bytes_to_convert):
@@ -141,6 +142,24 @@ def format_email(email):
     domain = split_email[1].lower()
     user = split_email[0]
     return f'{user}@{domain}'
+
+
+def getLessons():
+    file_list = {}
+    for root, dirs, files in os.walk('./app/app/static'):
+        for file in files:
+            if os.path.isdir(file):
+                continue
+            if file == '.DS_Store':
+                continue
+            file_without_hash = re.sub(r'-....................\.', '.', file)
+            path = root.replace('./app/app/', '')
+
+            if path not in file_list:
+                file_list[path] = {}
+            file_list[path][file_without_hash] = file
+
+    return file_list
 
 # key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
 # len(encrypt('1', key_str))

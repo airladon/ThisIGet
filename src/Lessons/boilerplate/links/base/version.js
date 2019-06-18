@@ -8,7 +8,7 @@ var version = {
   title: 'undefined',
   description: 'undefined',
   htmlTitle: '',
-  htmlDescription: '',
+  htmlDescription: 'a',
   links: [
     {
       url: '',

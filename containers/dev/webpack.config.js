@@ -9,6 +9,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getLessons.js');
 const createLessonIndex = require('./createIndex.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
+// const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
 
@@ -21,6 +22,9 @@ const envConfig = {
     devtool: false,
     uglifySourceMap: false,
     reactDevMode: false,
+    outputFilename: '[name]-[chunkhash].js',
+    imageFileName: '[path][name].[ext]',
+    cssFileName: '[name]-[contenthash].css',
   },
   stage: {
     name: 'stage',
@@ -30,6 +34,9 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: true,
     reactDevMode: false,
+    outputFilename: '[name]-[chunkhash].js',
+    imageFileName: '[path][name].[ext]',
+    cssFileName: '[name]-[contenthash].css',
   },
   dev: {
     name: 'development',
@@ -39,6 +46,9 @@ const envConfig = {
     devtool: 'source-map',
     uglifySourceMap: false,
     reactDevMode: true,
+    outputFilename: '[name].js',
+    imageFileName: '[path][name].[ext]',
+    cssFileName: '[name].css',
   },
 };
 
@@ -107,7 +117,8 @@ module.exports = (env) => {
   const extract = new MiniCssExtractPlugin({
     // Options similar to the same options in webpackOptions.output
     // both options are optional
-    filename: '[name].css',
+    // filename: '[name].css',
+    filename: e.cssFileName,
     chunkFilename: '[id].css',
   });
   // const extract = new ExtractTextPlugin({
@@ -150,6 +161,9 @@ module.exports = (env) => {
       canPrint: true,
     });
   }
+
+  // const flaskReloader = new FlaskReloaderPlugin({});
+
   // Make the plugin array filtering out those plugins that are null
   const pluginArray = [
     uglify,
@@ -157,7 +171,9 @@ module.exports = (env) => {
     extract,
     copy,
     clean,
-    cssMini].filter(elem => elem !== '');
+    cssMini,
+    // flaskReloader,
+  ].filter(elem => elem !== '');
 
   let externals = {};
   if (e.shortName === 'prod' || e.shortName === 'stage') {
@@ -177,7 +193,7 @@ module.exports = (env) => {
     entry: entryPoints.entryPoints(e.name),
     output: {
       path: buildPath,
-      filename: '[name].js',
+      filename: e.outputFilename,
     },
 
     // Delete from here after fixing diagram integration
@@ -254,7 +270,7 @@ module.exports = (env) => {
             {
               loader: 'file-loader',
               options: {
-                name: '[path][name].[ext]',
+                name: e.imageFileName,
                 publicPath: '/static/dist/',
                 context: '/opt/app/src',
               },

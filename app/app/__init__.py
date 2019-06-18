@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_talisman import Talisman
+from app.tools import getLessons
 import os
 
 app = Flask(__name__)
@@ -43,5 +44,6 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
+lessons = getLessons()
 
 from app import routes, models  # noqa

@@ -29,17 +29,17 @@ with open('./app/app/static/hashes.json', 'w') as outfile:
     json.dump(file_list, outfile)
 
 
-# r = requests.get('https://www.thisiget.com/static/hashes.json')
+r = requests.get('https://www.thisiget.com/static/hashes.json')
 
-# if r.status_code != 200:
-#     print('hashes do not exist at www.thisiget.com')
-#     exit()
+if r.status_code != 200:
+    print('hashes do not exist at www.thisiget.com')
+    exit()
 
-# cdn_hashes = json.loads(r.content)
+cdn_hashes = json.loads(r.content)
 
-# for file in file_list.keys():
-#     if file not in cdn_hashes:
-#         continue
+for file in file_list.keys():
+    if file not in cdn_hashes:
+        continue
 
-#     if file_list[file] != cdn_hashes[file]:
-#         print(file.replace(''))
+    if file_list[file] != cdn_hashes[file]:
+        print(file)
