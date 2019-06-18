@@ -54,16 +54,15 @@ def home():
     vendors_js = ''
     if 'vendors.js' in lessons['static/dist']:
         vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
+    common_lessons_js = f"/{'static/dist'}/" \
+                        f"{lessons['static/dist']['commonlessons.js']}"
     res = make_response(render_template(
         'home.html',
         main_css=f"/{'static/dist'}/{lessons['static/dist']['main.css']}",
         main_js=f"/{'static/dist'}/{lessons['static/dist']['main.js']}",
         vendors_js=vendors_js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=(
-            f"/{'static/dist'}/"
-            f"{lessons['static/dist']['commonlessons.js']}"
-        ),
+        common_lessons_js=common_lessons_js,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
@@ -127,6 +126,8 @@ def get_lesson(path):
     # path = f'/static/dist/Lessons/{path}'
     # css = f'{path}/lesson.css'
     # js = f'{path}/lesson.js'
+    print('asdf')
+    print(path)
     js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.js"]}'
     css = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.css"]}'
 
@@ -143,15 +144,14 @@ def get_lesson(path):
     vendors_js = ''
     if 'vendors.js' in lessons['static/dist']:
         vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
+    common_lessons_js = f"/{'static/dist'}/" \
+                        f"{lessons['static/dist']['commonlessons.js']}"
     res = make_response(render_template(
         'lesson.html',
         css=css,
         js=js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=(
-            f"/{'static/dist'}/"
-            f"{lessons['static/dist']['commonlessons.js']}"
-        ),
+        common_lessons_js=common_lessons_js,
         vendors_js=vendors_js,
         title=title,
         description=description))
@@ -197,15 +197,14 @@ def get_lesson_dev(path):
     vendors_js = ''
     if 'vendors.js' in lessons['static/dist']:
         vendors_js = f"/{'static/dist'}/{lessons['static/dist']['vendors.js']}"
+    common_lessons_js = f"/{'static/dist'}/" \
+                        f"{lessons['static/dist']['commonlessons.js']}"
     res = make_response(render_template(
         'lesson.html',
         css=css,
         js=js,
         tools_js=f"/{'static/dist'}/{lessons['static/dist']['tools.js']}",
-        common_lessons_js=(
-            f"/{'static/dist'}/"
-            f"{lessons['static/dist']['commonlessons.js']}"
-        ),
+        common_lessons_js=common_lessons_js,
         vendors_js=vendors_js,
     ))
     if lesson_page:
