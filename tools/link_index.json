@@ -143,11 +143,11 @@
     "versionUID": "base"
   },
   {
-    "url": "",
-    "hash": "d41d8cd98f00b204e9800998ecf8427e",
-    "publisher": "",
+    "url": "https://sites.google.com/site/ncertstdx/similar-triangles-theorems",
+    "hash": "11d70ead6e3138cd4b774ecfe9422867",
+    "publisher": "NCERT X Mathematics",
     "type": "generic",
-    "description": "",
+    "description": "Proofs for why proporitional triangles are similar, and why equiangular triangles are similar",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "SimilarTriangles",
     "topic": "links",

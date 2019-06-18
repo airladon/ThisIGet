@@ -12,7 +12,7 @@ var version = {
   links: [
     {
       url: 'https://sites.google.com/site/ncertstdx/similar-triangles-theorems',
-      hash: '',
+      hash: '11d70ead6e3138cd4b774ecfe9422867',
       publisher: 'NCERT X Mathematics',
       type: 'generic',
       description: 'Proofs for why proporitional triangles are similar, and why equiangular triangles are similar',
