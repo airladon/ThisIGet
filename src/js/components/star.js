@@ -51,6 +51,7 @@ export default class Star extends React.Component
         tabIndex={0}
         role="button"
         onKeyDown={keydown}
+        aria-label={`Rate as ${this.props.index} star`}
       />;
     }
 
