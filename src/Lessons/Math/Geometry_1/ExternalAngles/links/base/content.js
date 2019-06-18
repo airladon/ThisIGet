@@ -2,16 +2,16 @@
 // import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile.png';
+// import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import version from './version';
 
 class Content extends SimpleLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+//    this.iconLink = imgLink;
+//    this.iconLinkGrey = imgLinkGrey;
   }
 
   setContent() {

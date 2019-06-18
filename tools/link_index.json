@@ -141,5 +141,16 @@
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
+  },
+  {
+    "url": "",
+    "hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "publisher": "",
+    "type": "generic",
+    "description": "",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "SimilarTriangles",
+    "topic": "links",
+    "versionUID": "base"
   }
 ]

@@ -4,12 +4,12 @@
 var version = {
   uid: 'markdown',
   topic: 'boilerplate',
-  title: 'Markdown_Lesson',
-  description: 'Markdown generated.',
-  htmlTitle: '',
-  htmlDescription: '',
-  fullLesson: false,
-  type: 'generic',
+  title: 'Derivation of Pythagorean Theorem',
+  description: 'Derivation using area of four right angle triangles',
+  htmlTitle: 'Pythagorean Theorem Derivation',
+  htmlDescription: 'Derivation using area of four right angle triangles',
+  fullLesson: true,
+  type: 'singlePage',
 };
 
 module.exports = version;

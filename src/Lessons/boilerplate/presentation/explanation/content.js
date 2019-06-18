@@ -6,8 +6,8 @@ import {
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
 import lessonLayout from '../common/layout';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile.png';
+// import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
@@ -26,8 +26,8 @@ const layout = lessonLayout();
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+//    this.iconLink = imgLink;
+//    this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {

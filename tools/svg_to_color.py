@@ -3,15 +3,15 @@ import os
 
 
 # color = (101, 0, 0)
-# color = ['#fff', '#aaa']
-# input_path = './src/Lessons'
-# output_path = None
-# filter_name = 'tile.svg'
+color = ['#fff', '#aaa']
+input_path = './src/Lessons'
+output_path = None
+filter_name = 'tile.svg'
 
-color = ['#666', '#fff']
-input_path = './assets/originals'
-output_path = './assets/converted'
-filter_name = None
+# color = ['#666', '#fff']
+# input_path = './assets/originals'
+# output_path = './assets/converted'
+# filter_name = None
 
 
 def convert_file(file_path, color, output_path=None):

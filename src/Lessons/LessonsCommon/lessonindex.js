@@ -887,6 +887,37 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    SimilarTriangles: new LessonDescription({
+      title: 'Similar Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SimilarTriangles',
+      topics: {
+        explanation: {
+          base: {
+            type: 'singlePage',
+            title: 'Derivation of Pythagorean Theorem',
+            description: 'Derivation using area of four right angle triangles',
+            htmlTitle: 'Pythagorean Theorem Derivation',
+            htmlDescription: 'Derivation using area of four right angle triangles',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for <TOPIC>',
+            htmlTitle: '<TOPIC> Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about <TOPIC>',
+            fullLesson: false,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLineDistance',
+      ],
+      enabled: true,
+    }),
     CalculatingPi: new LessonDescription({
       title: 'Calculating Pi',
       path: '/Lessons/Math/Geometry_1/ToDo',
@@ -905,27 +936,6 @@ export default function getLessonIndex() {
       },
       dependencies: [
         'RightAngleTriangles',
-      ],
-      enabled: false,
-    }),
-    SimilarTriangles: new LessonDescription({
-      title: 'Similar Triangles',
-      path: '/Lessons/Math/Geometry_1/ToDo',
-      uid: 'SimilarTriangles',
-      topics: {
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: '',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'ParallelLineDistance',
       ],
       enabled: false,
     }),
