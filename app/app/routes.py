@@ -49,8 +49,9 @@ def get_full_path(root, file):
 
 @app.route('/')
 def home():
-    # print(lessons)
-    # print(get_full_path('static/dist', 'main.css'))
+    # The checks for keys in lessons is for pytest in deployment pipeline.
+    # In deployment pipeline on travis, the statis/dist directory doesn't
+    # exist.
     vendors_js = ''
     main_css = ''
     main_js = ''
@@ -182,12 +183,12 @@ def get_qr_file_location(path):
     js = ''
     css = ''
     if (qr_path in lessons):
-        js = f'/static/dist/Lessons/{path}/' \
-             f'{lessons[qr_path]["lesson-dev.js"]}'
-        css = f'/static/dist/Lessons/{path}/' \
-              f'{lessons[qr_path]["lesson-dev.css"]}'
-    # js = lessons[qr_path]["quickReference.js"]
-    # css = lessons[qr_path]["quickReference.css"]
+        # js = f'/static/dist/Lessons/{path}/' \
+        #      f'{lessons[qr_path]["quickReference.js"]}'
+        # css = f'/static/dist/Lessons/{path}/' \
+        #       f'{lessons[qr_path]["quickReference.css"]}'
+        js = lessons[qr_path]["quickReference.js"]
+        css = lessons[qr_path]["quickReference.css"]
     return jsonify({
         'status': 'ok',
         'js': js,
