@@ -780,6 +780,35 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    ParallelSplitOfTriangle: new LessonDescription({
+      title: 'Parallel Split of Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ParallelSplitOfTriangle',
+      topics: {
+        explanation: {
+          static: {
+            type: 'singlePage',
+            title: 'Full Proof',
+            description: 'Proof showing the resulting triangle has proportional sides',
+            htmlTitle: 'Similar Triangles Proof',
+            htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+            fullLesson: true,
+          },
+          staticBrief: {
+            type: 'singlePage',
+            title: 'Succinct Proof',
+            description: 'Proof showing the resulting triangle has proportional sides',
+            htmlTitle: 'Triangle split with parallel line - succint proof',
+            htmlDescription: 'Shows how the resulting triangle has proportional sides to the original triangle',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLineDistance',
+      ],
+      enabled: true,
+    }),
     PointLineDistance: new LessonDescription({
       title: 'Point to Line Distance',
       path: '/Lessons/Math/Geometry_1',
