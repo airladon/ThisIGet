@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Similar Triangles',
   dependencies: [
-    'ParallelLineDistance',
+    'ParallelSplitOfTriangle',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

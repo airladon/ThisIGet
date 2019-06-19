@@ -1265,7 +1265,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'ParallelLineDistance',
+        'ParallelSplitOfTriangle',
       ],
       enabled: true,
     }),

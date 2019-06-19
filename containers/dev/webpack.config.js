@@ -9,7 +9,7 @@ const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getLessons.js');
 const createLessonIndex = require('./createIndex.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
-// const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
+const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
 
 const buildPath = path.resolve(__dirname, 'app', 'app', 'static', 'dist');
 
@@ -162,7 +162,7 @@ module.exports = (env) => {
     });
   }
 
-  // const flaskReloader = new FlaskReloaderPlugin({});
+  const flaskReloader = new FlaskReloaderPlugin({});
 
   // Make the plugin array filtering out those plugins that are null
   const pluginArray = [
@@ -172,7 +172,7 @@ module.exports = (env) => {
     copy,
     clean,
     cssMini,
-    // flaskReloader,
+    flaskReloader,
   ].filter(elem => elem !== '');
 
   let externals = {};

@@ -1,17 +1,20 @@
-
+const { exec } = require('child_process');
 
 class FlaskReloaderPlugin {
+  // eslint-disable-next-line class-methods-use-this
   apply(compiler) {
-    compiler.hooks.afterEmit.tap('Hello World Plugin', (
+    compiler.hooks.afterEmit.tap('Restarting Flask', (
     ) => {
-      console.log('Hello World!');
+      // eslint-disable-next-line no-console
+      console.log('Restarting Flask');
+      exec('touch ./app/app/my_app.py', (err) => {
+        if (err) {
+          // eslint-disable-next-line no-console
+          console.log('Error restarting flask');
+        }
+      });
     });
   }
-  // apply(compiler) {
-  //   compiler.hooks.watchClose.tap('Flask Reloader Plugin', () => {
-  //     console.log('Should be reloading flask');
-  //   });
-  // }
 }
 
 module.exports = FlaskReloaderPlugin;
