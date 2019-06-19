@@ -112,7 +112,7 @@ $$\color{b}m=p\ \ \ \ \ \ \ \ \ \ n=q$$
 
 ![](ProportionalCongruent.png)
 
-Now, the two small triangles share three side lengths, meaning they are congruent, and therefore have the same angles.
+Now, the two small triangles share three side lengths, meaning they are [[congruent]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sss',#00756F)), and therefore have the same angles.
 
 And so **two triangles whose corresponding sides are in proportion have equal angles and are therefore similar**.
 
