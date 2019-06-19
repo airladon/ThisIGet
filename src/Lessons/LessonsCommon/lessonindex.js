@@ -794,13 +794,19 @@ export default function getLessonIndex() {
             htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
             fullLesson: true,
           },
-          staticBrief: {
-            type: 'singlePage',
-            title: 'Succinct Proof',
-            description: 'Proof showing the resulting triangle has proportional sides',
-            htmlTitle: 'Triangle split with parallel line - succint proof',
-            htmlDescription: 'Shows how the resulting triangle has proportional sides to the original triangle',
-            fullLesson: true,
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
       },
