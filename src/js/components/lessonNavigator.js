@@ -128,9 +128,45 @@ export default class LessonNavigator extends React.Component
       state = 'disabled';
       title = `${title}`;
     }
+
+    let linkToUse = '';
+    const topicsOrder = ['explanation', 'summary', 'examples', 'links'];
+    const versionsOrder = ['base', 'static'];
+    const getVersion = (topic) => {
+      const versions = lesson.topics[topic];
+      for (let i = 0; i < versionsOrder.length; i += 1) {
+        const version = versionsOrder[i];
+        if (version in versions) {
+          linkToUse = `${lesson.path}/${lesson.uid}/${topic}/${version}`;
+          return;
+        }
+      }
+      if (linkToUse === '' && Object.keys(versions).length > 0) {
+        linkToUse = `${lesson.path}/${lesson.uid}/${topic}/${Object.keys(versions)[0]}`;
+      }
+    };
+
+    for (let t = 0; t < topicsOrder.length; t += 1) {
+      const topic = topicsOrder[t];
+      if (topic in lesson.topics) {
+        getVersion(topic);
+        if (linkToUse !== '') {
+          break;
+        }
+      }
+    }
+
+    if (linkToUse === '' && Object.keys(lesson.topics).length > 0) {
+      getVersion(Object.keys(lesson.topics)[0]);
+    }
+
+    if (linkToUse === '') {
+      state = 'disabled';
+    }
+
     return <LessonTile
               id={lesson.id}
-              link={`${lesson.path}/${lesson.uid}/explanation/base`}
+              link={linkToUse}
               imgLink={lesson.imgLink}
               imgLinkSelected={lesson.imgLinkSelected}
               imgLinkDisabled={lesson.imgLinkDisabled}
