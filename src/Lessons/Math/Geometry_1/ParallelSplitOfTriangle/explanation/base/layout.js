@@ -158,16 +158,6 @@ export default function lessonLayout() {
     },
   });
 
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // ////////////////////////////////////////////////////////////
-  // const elements = {
-
-  // }
   const fig = {
     name: 'fig',
     method: 'collection',
@@ -191,8 +181,97 @@ export default function lessonLayout() {
       },
     },
   };
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  const elements = {
+    Area: { color: colors.sides },
+    _Area: { text: 'Area', color: colors.sides },
+    __Area: { text: 'Area', color: colors.sides },
+    ___Area: { text: 'Area', color: colors.sides },
+    total: { color: colors.sides },
+    _1: { text: '1', color: colors.sides },
+    _2: { text: '2', color: colors.sides },
+    _3: { text: '3', color: colors.sides },
+    plus: ' + ',
+    _plus: ' + ',
+    __plus: ' + ',
+    equals: ' = ',
+  };
+
+  const sub = (content, s) => ({ sub: [content, ['  ', s]] });
+
+  const eqn = (name, y, defaultFormSeries) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        fixTo: 'equals',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      scale: 0.8,
+      elements,
+      forms: {
+        '0': {
+          content: [
+            sub('Area', 'total'), 'equals', sub('_Area', '_1'),
+            '_plus', sub('__Area', '_2'),
+            '__plus', sub('___Area', '_3'),
+          ],
+          description: 'Area of original triangle:',
+        },
+      },
+      formSeries: {
+        '1': ['0'],
+        // '2': ['1', '1a', '1b', '1c', '2'],
+        // '3': ['2', '2a', '3'],
+      },
+      defaultFormSeries,
+      formRestart: {
+        pulse: {
+          duration: 1,
+          scale: 1.1,
+        },
+      },
+      // formRestartPosition: [1.8, formStart],
+      // formRestartAnimation: 'pulse',
+    },
+    mods: {
+      scenarios: {
+        default: { position: [1.2, y], scale: 1 },
+        top: { position: [1.5, -0.2], scale: 1.3 },
+        summary: { position: [1.5, -0.2], scale: 1.3 },
+      },
+    },
+  });
+
+  const nav = (name, y, interactive, defaultFormSeries = null) => ({
+    name,
+    method: 'addNavigator',
+    options: {
+      navType: 'description',
+      equation: eqn(`${name}Eqn`, y, defaultFormSeries),
+      interactive,
+      alignV: 'middle',
+      alignH: 'left',
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0.3, y + 0.3] },
+      },
+    },
+  });
+
   layout.addElements = [
     fig,
+    nav('0', 0.8, false),
   ];
   return layout;
 }

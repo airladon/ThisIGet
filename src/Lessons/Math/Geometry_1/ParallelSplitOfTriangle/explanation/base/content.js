@@ -170,13 +170,13 @@ class Content extends PresentationLessonContent {
       transitionFromPrev: (done) => { coll.pulseAreaLabels(done); },
     });
 
-    common = {
+    let content = {
       setContent: [
         'Now lets add back all the information we have about this split triangle, so we can |analyze| it.',
       ],
     };
 
-    this.addSection(centerFig, common, {
+    this.addSection(centerFig, content, {
       show: [
         fig._tri, fig._split, fig._area1, fig._area2, fig._area3,
         fig._construction,
@@ -184,7 +184,7 @@ class Content extends PresentationLessonContent {
       hide: [fig._tri._side01, fig._tri._side12, fig._tri._side20],
     });
 
-    this.addSection(centerFig, common, {
+    this.addSection(centerFig, content, {
       show: [
         fig._tri, fig._split, fig._area1, fig._area2, fig._area3,
         fig._construction,
@@ -193,7 +193,7 @@ class Content extends PresentationLessonContent {
       hide: [fig._tri._side01, fig._tri._side12, fig._tri._side20],
     });
 
-    this.addSection(centerFig, common, {
+    this.addSection(centerFig, content, {
       show: [
         fig._tri, fig._split, fig._area1, fig._area2, fig._area3,
         fig._construction, fig._splitTri,
@@ -202,16 +202,20 @@ class Content extends PresentationLessonContent {
       hide: [fig._tri._side01, fig._tri._side12, fig._tri._side20],
     });
 
-    this.addSection(centerFig, common, {
+    this.addSection(centerFig, content, {
       show: [fig],
       hide: [fig._tri._side01, fig._tri._side12],
     });
 
-    const showFig = {
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        fig.setScenario('left');
+      },
       show: [fig],
       hide: [fig._tri._side01, fig._tri._side12],
     };
-    this.addSection(showFig, common, {
+    this.addSection(common, content, {
       transitionFromPrev: (done) => {
         fig.setScenario('center');
         fig.animations.new()
@@ -223,6 +227,11 @@ class Content extends PresentationLessonContent {
         fig.setScenario('left');
       },
     });
+
+    content = {
+      setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles.',
+    };
+    this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
   }
 }
 
