@@ -4,7 +4,7 @@
 var version = {
   uid: 'static',
   topic: 'explanation',
-  title: 'Derivation of Similar Triangles',
+  title: 'Descriptive',
   description: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
   htmlTitle: 'Similar Triangles Proof',
   htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
