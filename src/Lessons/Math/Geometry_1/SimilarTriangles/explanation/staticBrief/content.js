@@ -19,6 +19,7 @@ class Content extends SimpleLessonContent {
       'Math/Geometry_1/AreaTriangle/base',
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/CongruentTriangles/base',
+      'Math/Geometry_1/ParallelSplitOfTriangle/base',
     ]);
   }
 

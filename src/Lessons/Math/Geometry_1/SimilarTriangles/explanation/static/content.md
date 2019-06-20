@@ -42,7 +42,7 @@ Rearranging each of these, we can see it also means the ratio of adjacent sides 
 
 $$\color{b}\frac{M}{R}=\frac{m}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{N}=\frac{m}{n}\ \ \ \ \ \ \ \ \ \ \frac{R}{N}=\frac{r}{n}$$
 
-Now, do such triangles have equal corresponding angles? We can look at this by drawing a third triangle that shares a side with side $$\color{b}A$$, and has the angles $$\color{b}b$$ and $$\color{b}c$$ from the larger triangle.
+Now, do such triangles have equal corresponding angles? We can look at this by drawing a third triangle that shares a side with side $$\color{b}r$$, and has the angles $$\color{b}b$$ and $$\color{b}c$$ from the larger triangle.
 
 ![](./NewTriangle.png)
 
@@ -50,7 +50,7 @@ Now as both the new triangle, and large triangle have two angles defined, and a 
 
 ![](./CalcAngleA.png)
 
-This means the large triangle and the new triangle are similar:
+We have seen above that when two triangles share the same angles, then they are similar triangles. Therefore their sides have the same proportion:
 
 
 $$\color{b}\frac{M}{R}=\frac{p}{r}\ \ \ \ \ \ \ \ \ \ \frac{M}{N}=\frac{p}{q}\ \ \ \ \ \ \ \ \ \ \frac{R}{N}=\frac{r}{q}$$
