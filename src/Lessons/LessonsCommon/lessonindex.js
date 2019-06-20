@@ -916,10 +916,18 @@ export default function getLessonIndex() {
         explanation: {
           equilangularIsSimilarProof: {
             type: 'singlePage',
-            title: 'Equilangular Triangles are Similar',
+            title: 'Equilangular Triangles are Similar Proof',
             description: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
             htmlTitle: 'Equilangular Triangles are Similar Proof',
             htmlDescription: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
+            fullLesson: false,
+          },
+          equilangularProofBrief: {
+            type: 'singlePage',
+            title: 'Equilangular Triangles are Similar - Proof Succinct',
+            description: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
+            htmlTitle: 'Triangles with equal angles are similar proof',
+            htmlDescription: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
             fullLesson: false,
           },
           static: {
