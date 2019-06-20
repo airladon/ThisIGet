@@ -786,6 +786,14 @@ export default function getLessonIndex() {
       uid: 'ParallelSplitOfTriangle',
       topics: {
         explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Descriptive',
+            description: '',
+            htmlTitle: 'Splitting a triangle with a parallel line',
+            htmlDescription: 'Proof that splitting a triangle with a parallel line results in a similar triangle',
+            fullLesson: true,
+          },
           static: {
             type: 'singlePage',
             title: 'Full Proof',

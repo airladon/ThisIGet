@@ -5,8 +5,9 @@ var version = {
   uid: 'base',
   topic: 'quickReference',
   type: 'presentation',
-  // These are auto generated
   references: [
+    'MainPres',
+    '// Main',
   ],
 };
 

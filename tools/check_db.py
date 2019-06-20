@@ -162,6 +162,7 @@ for link in links:  # noqa
 
     lesson = Lessons.query.filter_by(
         uid=link['lessonUID'], path=link['lessonPath']).first()
+
     topic = Topics.query.filter_by(
         lesson_id=lesson.id, name=link['topic']).first()
     version = Versions.query.filter_by(
