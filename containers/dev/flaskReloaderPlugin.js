@@ -7,7 +7,7 @@ class FlaskReloaderPlugin {
     ) => {
       // eslint-disable-next-line no-console
       console.log('Restarting Flask');
-      exec('touch ./app/app/my_app.py', (err) => {
+      exec('touch ./app/my_app.py', (err) => {
         if (err) {
           // eslint-disable-next-line no-console
           console.log('Error restarting flask');
