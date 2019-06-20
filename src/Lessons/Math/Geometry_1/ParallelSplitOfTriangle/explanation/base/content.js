@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
 
     this.addSection({
+      show: [fig],
     });
   }
 }
