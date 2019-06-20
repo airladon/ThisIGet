@@ -1,8 +1,8 @@
 ## Similar Triangles
 
-Similar shapes are those that have the same shape but are a different size.
+**Similar** shapes are those that have the same shape but are a different size.
 
-Similar triangles are triangles that have the same angles, and whose corresponding sides are proportional.
+**Similar** triangles have the same corresponding angles and their corresponding sides are the same proportion.
 
 ### Equiangular Triangles are Similar - Proof
 
