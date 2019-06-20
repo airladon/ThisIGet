@@ -6,38 +6,41 @@ Similar triangles are triangles that have the same angles, and whose correspondi
 
 ### Equiangular Triangles are Similar - Proof
 
-Consider two triangles with **equal angles** overlaid on each other (left). We then label the points, and add in some construction lines (right).
+Consider two triangles with **equal angles** overlaid on each other.
 
 ![](SimilarOverlay.png)
 
-As $$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/RelatedAngles/base/Corresponding',#00756F)):
+$$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/RelatedAngles/base/Corresponding',#00756F)), therefore $$\color{b}BC \parallel DE$$.
 
-$$\color{b}BC \parallel DE$$
+When a triangle is [[split with a parallel line]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)), the smaller triangle's sides will all be scaled by the same proportion.
 
-When a triangle is [[split with a parallel line]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)), the smaller triangle's sides will all be scaled by the same proportion, and so $$\triangle ABC$$ is proportional to $$\triangle ADE$$.
+Therefore $$\triangle ABC$$ and $$\triangle ADE$$ are **similar**.
 
-**Therefore if triangles share the same angles, then their corresponding sides have the same proportion, and they are similar triangles**.
+
+*Triangles with the same corresponding angles will have corresponding sides of equal proportion, and will therefore be similar.*
 
 
 ### Proportional Triangles are Similar - Proof
 
-If instead you start with two triangles whose **corresponding sides have equal proportion**, then you can show all angles must be equal.
+Start with two triangles whose **corresponding sides have equal proportion**.
 
-Start by drawing the two proportional triangles $$\triangle ABC$$ and $$\triangle DEF$$, and then drawing an additional triangle along $$DF$$ with the angles $$\angle BAC$$ and $$\angle ACB$$:
+Start by drawing the two proportional triangles $$\triangle ABC$$ and $$\triangle DEF$$, and then draw an additional triangle along $$DF$$ with the angles $$\angle BAC=\angle GDF$$ and $$\angle ACB=\angle DFG$$:
 
 ![](ProportionalToAngles.png)
 
-As the angles in a triangle [[add]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) to 180º, we know that:
+Angles in a triangle [[add]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) to 180º, so two triangles with the same two angles will have the same third angle: $$\color{b}\angle ABC = \angle DGF$$
 
-$$\color{b}\angle ABC = \angle DGF$$
+Therefore all the corresponding angles of $$\triangle ABC$$ and $$\triangle DFG$$ are equal.
 
-Therefore all the corresponding angles of $$\triangle ABC$$ and $$\triangle DFG$$ are equal, and therefore they are similar. Therefore the sides are proportional:
+From above, two triangles with the same corresponding angles are similar.
 
-$$\color{b} \frac{AB}{DG} = \frac{AC}{DF} \ \ \ \ \ \ \ \ \color{grey}(1)$$
+Therefore:
+
+$$\color{b} \frac{DG}{AB} = \frac{DF}{AC} \ \ \ \ \ \ \ \ \color{grey}(1)$$
 
 We started with:
 
-$$\color{b} \frac{AB}{\color{r}{DE}\color{b}} = \frac{AC}{DF} \ \ \ \ \ \ \ \ \color{grey}(2)$$
+$$\color{b} \frac{\color{r}{DE}\color{b}}{AB} = \frac{DF}{AC} \ \ \ \ \ \ \ \ \color{grey}(2)$$
 
 Combining $$\color{grey}(1)$$ and $$\color{grey}(2)$$:
 
