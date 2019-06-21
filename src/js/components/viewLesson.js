@@ -38,8 +38,8 @@ export default class ViewLesson extends React.Component
   // }
 
   render() {
-    const props = Object.assign({}, this.props);
-    delete props.active;
+    // const props = Object.assign({}, this.props);
+    // delete props.active;
     return <LessonComponent
         lesson={this.props.lesson}
         // lessonUID={this.props.lessonUID}
