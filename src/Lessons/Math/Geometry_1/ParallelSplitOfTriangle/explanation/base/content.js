@@ -232,6 +232,36 @@ class Content extends PresentationLessonContent {
       setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles.',
     };
     this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      {
+        nav: coll._1, form: '0', toForm: '1', moveFrom: coll._0Eqn,
+      },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      {
+        nav: coll._1, form: '1', toForm: '1a',
+      },
+    ], common, content);
+
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      {
+        nav: coll._2, form: '1a', toForm: '2', moveFrom: coll._1Eqn,
+      },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2', toForm: '2a' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2a', toForm: '2b' },
+    ], common, content);
   }
 }
 
