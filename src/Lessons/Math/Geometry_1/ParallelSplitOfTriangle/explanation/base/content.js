@@ -262,6 +262,46 @@ class Content extends PresentationLessonContent {
       { nav: coll._1, form: '1a' },
       { nav: coll._2, form: '2a', toForm: '2b' },
     ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2b', toForm: '2c' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2c', toForm: '2d' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2d', toForm: '2e' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2e', toForm: '2f' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2f', toForm: '2g' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2g', toForm: '2h' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2h', toForm: '2i' },
+    ], common, content);
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2i', toForm: '2j' },
+    ], common, content);
   }
 }
 
