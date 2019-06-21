@@ -22,14 +22,14 @@ export default class Button extends React.Component
       {label}
     </Tag>;
 
-  //   if (props.href != null) {
-  //     return <a href={props.href} className={className}>
-  //       {label}
-  //     </a>;
-  //   }
+    //   if (props.href != null) {
+    //     return <a href={props.href} className={className}>
+    //       {label}
+    //     </a>;
+    //   }
 
-  //   return <button className={className}>
-  //     {label}
-  //   </button>;
+    //   return <button className={className}>
+    //     {label}
+    //   </button>;
   }
 }
