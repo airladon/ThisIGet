@@ -206,6 +206,10 @@ export default function lessonLayout() {
     _2_2: { text: '2' },
     _1_3: { text: '1' },
     _2_3: { text: '2' },
+    _2_4: { text: '2' },
+    _2_5: { text: '2' },
+    _2_6: { text: '2' },
+    _2_7: { text: '2' },
     v_0: { symbol: 'vinculum' },
     v_1: { symbol: 'vinculum' },
     v_2: { symbol: 'vinculum' },
@@ -218,7 +222,12 @@ export default function lessonLayout() {
     B1: { text: 'B', color: colors.sides },
     B2: { text: 'B', color: colors.sides },
     B3: { text: 'B', color: colors.sides },
+    r0: { text: 'r' },
+    r1: { text: 'r' },
+    r2: { text: 'r' },
+    r3: { text: 'r' },
     // Nm1: { text: '(N - n)', color: colors.sides },
+    M0: { text: 'M', color: colors.sides },
     N0: { text: 'N', color: colors.sides },
     N1: { text: 'N', color: colors.sides },
     N2: { text: 'N', color: colors.sides },
@@ -230,10 +239,13 @@ export default function lessonLayout() {
     n3: { text: 'n', color: colors.highlight },
     n4: { text: 'n', color: colors.highlight },
     n5: { text: 'n', color: colors.highlight },
+    m: { text: 'm', color: colors.highlight },
     min0: ' - ',
     min1: ' - ',
     min2: ' - ',
     min3: ' - ',
+    mul0: ' \u00D7 ',
+    mul1: ' \u00D7 ',
     plus0: ' + ',
     plus1: ' + ',
     plus2: ' + ',
@@ -241,6 +253,9 @@ export default function lessonLayout() {
     plus4: ' + ',
     plus5: ' + ',
     equals: ' = ',
+    equals1: ' = ',
+    equals2: ' = ',
+    equals3: ' = ',
     brace0: {
       symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
     },
@@ -269,6 +284,9 @@ export default function lessonLayout() {
     'x1': { symbol: 'xStrike', color: colors.description },
     'x2': { symbol: 'xStrike', color: colors.description },
     'x3': { symbol: 'xStrike', color: colors.description },
+
+    arrow: { text: '     =>     ' },
+    comma: { text: ',      ' },
   };
 
   const bot = (content, commentText, symbol = '') => ({
@@ -288,9 +306,8 @@ export default function lessonLayout() {
   const h3 = half('_1_3', '_2_3', 'v_3');
 
   const strike = (content, x) => ({ strike: [content, x] });
-
   const sub = (content, s) => ({ sub: [content, ['  ', s]] });
-
+  const sup = (content, s) => ({ sup: [content, ['  ', s]] });
   const brac = (content, lb, rb) => ({ brac: [content, lb, rb] });
 
   const eqn = (name, y, defaultFormSeries) => ({
@@ -487,10 +504,253 @@ export default function lessonLayout() {
           ],
           description: 'Simplify:',
         },
+        '2k': {
+          content: [
+            bot(
+              ['B0', 'n0'],
+              ['mul0', { frac: ['_1_1', ['B1', 'N1'], 'v_0'] }],
+              '',
+            ),
+            'equals',
+            bot(
+              ['b2', 'N4'],
+              ['mul1', { frac: ['_1_0', ['B2', 'N2'], 'v_1'] }],
+              '',
+            ),
+          ],
+          description: 'Simplify:',
+        },
+        '2l': {
+          content: [
+            bot(
+              [strike('B0', 'x0'), 'n0'],
+              ['mul0', { frac: ['_1_1', [strike('B1', 'x1'), 'N1'], 'v_0'] }],
+              '',
+            ),
+            'equals',
+            bot(
+              ['b2', strike('N4', 'x2')],
+              ['mul1', { frac: ['_1_0', ['B2', strike('N2', 'x3')], 'v_1'] }],
+              '',
+            ),
+          ],
+          description: 'Simplify:',
+        },
+        '2m': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+          ],
+          description: 'After Simplification:',
+        },
+        '3': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+            'equals1',
+            'r0',
+          ],
+          description: 'Call these ratios r',
+        },
+        '3a': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+            'equals1',
+            'r0',
+            'arrow',
+            { frac: ['b0', 'B0', 'v_2'] },
+            'equals2',
+            'r1',
+          ],
+          description: 'Rearrange for b',
+        },
+        '3b': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+            'equals1',
+            'r0',
+            'arrow',
+            bot(
+              { frac: ['b0', 'B0', 'v_2'] },
+              ['mul0', 'B1'],
+            ),
+            'equals2',
+            bot('r1', ['mul1', 'B3']),
+          ],
+          description: 'Rearrange for b',
+        },
+        '3c': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+            'equals1',
+            'r0',
+            'arrow',
+            bot(
+              { frac: ['b0', strike('B0', 'x0'), 'v_2'] },
+              ['mul0', strike('B1', 'x1')],
+            ),
+            'equals2',
+            bot('r1', ['mul1', 'B3']),
+          ],
+          description: 'Rearrange for b',
+        },
+        '3d': {
+          content: [
+            { frac: ['n0', 'N1', 'v_0'] },
+            'equals',
+            { frac: ['b2', 'B2', 'v_1'] },
+            'equals1',
+            'r0',
+            'arrow',
+            'b0',
+            'equals2',
+            'r1', 'B3',
+          ],
+          description: 'Rearrange for b',
+        },
+        '3e': {
+          content: [
+            'b0',
+            'equals2',
+            'r1', 'B3',
+          ],
+          description: 'Rearrange for b',
+        },
+        '3f': {
+          content: [
+            'b0',
+            'equals2',
+            'r1', 'B3',
+            'comma',
+            'n0',
+            'equals1',
+            'r2', 'N0',
+          ],
+          description: 'n can be determined from same procedure:',
+        },
+        '4': {
+          content: [
+            'b0',
+            'equals2',
+            'r1', 'B3',
+            'comma',
+            'n0',
+            'equals1',
+            'r2', 'N0',
+          ],
+          description: 'Knowing:',
+        },
+        '5': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            sup('n0', '_2_1'),
+            'plus0',
+            sup('b0', '_2_2'),
+          ],
+          description: 'Pythagorean theorem on top triangle:',
+        },
+        '6': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            bot(
+              sup('n0', '_2_1'),
+              [sup('r0', '_2_3'), sup('N0', '_2_4')],
+              'brace0',
+            ),
+            'plus0',
+            bot(
+              sup('b0', '_2_2'),
+              [sup('r1', '_2_5'), sup('B0', '_2_6')],
+              'brace1',
+            ),
+          ],
+          description: 'Substitute in ratios of N and B:',
+        },
+        '6a': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            sup('r0', '_2_3'), sup('N0', '_2_4'),
+            'plus0',
+            sup('r1', '_2_5'), sup('B0', '_2_6'),
+          ],
+          description: 'Substitute in ratios of N and B:',
+        },
+        '6b': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            bot(
+              [
+                sup('r0', '_2_3'), sup('N0', '_2_4'),
+                'plus0',
+                sup('r1', '_2_5'), sup('B0', '_2_6'),
+              ],
+              [
+                sup('r3', '_2_7'),
+                brac(
+                  [sup('N1', '_2_1'), 'plus1', sup('B1', '_2_2')],
+                  'lb1', 'rb1',
+                ),
+              ],
+              'brace4',
+            ),
+          ],
+          description: 'Rearrange for r:',
+        },
+        '6c': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            sup('r3', '_2_7'),
+            brac(
+              [sup('N1', '_2_1'), 'plus1', sup('B1', '_2_2')],
+              'lb1', 'rb1',
+            ),
+          ],
+          description: 'Rearrange for r:',
+        },
+        '6d': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            sup('r3', '_2_7'),
+            bot(
+              brac(
+                [sup('N1', '_2_1'), 'plus1', sup('B1', '_2_2')],
+                'lb1', 'rb1',
+              ),
+              sup('M0', '_2_3'),
+              'brace4',
+            ),
+          ],
+          description: 'Using Pythagorean theorem for M:',
+        },
+        '6e': {
+          content: [
+            sup('m', '_2_0'),
+            'equals',
+            sup('r3', '_2_7'),
+            sup('M0', '_2_3'),
+          ],
+          description: 'Using Pythagorean theorem for M:',
+        },
       },
       formSeries: {
         '1': ['0', '1', '1a'],
-        '2': ['1a', '2', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h'],
+        '2': ['1a', '2', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '2k', '2l', '2m'],
+        '3': ['2m', '3', '3a', '3b', '3c', '3d', '3e', '3f'],
+        '6': ['5', '6', '6a', '6b', '6c', '6d', '6e'],
         // '2': ['1', '1a', '1b', '1c', '2'],
         // '3': ['2', '2a', '3'],
       },
@@ -534,7 +794,11 @@ export default function lessonLayout() {
     fig,
     nav('0', 0.8, false),
     nav('1', 0, false, '1'),
-    nav('2', -0.8, false, '1'),
+    nav('2', -0.8, false, '2'),
+    nav('3', -1.6, false, '3'),
+    nav('4', 0.8, false),
+    nav('5', 0, false, '5'),
+    nav('6', -0.8, false, '6'),
   ];
   return layout;
 }

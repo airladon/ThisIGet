@@ -232,76 +232,166 @@ class Content extends PresentationLessonContent {
       setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles.',
     };
     this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   {
+    //     nav: coll._1, form: '0', toForm: '1', moveFrom: coll._0Eqn,
+    //   },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   {
+    //     nav: coll._1, form: '1', toForm: '1a',
+    //   },
+    // ], common, content);
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       {
-        nav: coll._1, form: '0', toForm: '1', moveFrom: coll._0Eqn,
-      },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      {
-        nav: coll._1, form: '1', toForm: '1a',
+        nav: coll._1, form: '1a',
       },
     ], common, content);
 
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
-      {
-        nav: coll._2, form: '1a', toForm: '2', moveFrom: coll._1Eqn,
+      { nav: coll._2, form: '2m' },
+    ], common, content);
+
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2m' },
+      { nav: coll._3, form: '3f' },
+    ], common, content);
+
+    content = {
+      setContent: 'This means both |n_| and |b_| are the same proportion of their corresponding sides |N| and |B|.',
+      modifiers: {
+        N: highlight(colors.sides),
+        n_: highlight(colors.highlight),
+        B: highlight(colors.sides),
+        b_: highlight(colors.highlight),
       },
-    ], common, content);
+    };
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2', toForm: '2a' },
+      { nav: coll._2, form: '2m' },
+      { nav: coll._3, form: '3f' },
     ], common, content);
+
+    content = {
+      setContent: 'We can then use this, and the Pythagorean theorem, to find the relationship with |m|.',
+      modifiers: {
+        m: highlight(colors.highlight),
+      },
+    };
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2a', toForm: '2b' },
+      { nav: coll._2, form: '2m' },
+      { nav: coll._3, form: '3f' },
     ], common, content);
+
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._4Eqn.showForm('4');
+        coll._4Eqn.setPositionToElement(coll._3Eqn);
+        const target = coll._0Eqn.getPosition();
+        coll._4Eqn.animations.new()
+          .position({ target, duration: 2 })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        coll._4.showForm('4');
+        coll._4.setPositionToElement(coll._0);
+        coll._4Eqn.setPositionToElement(coll._0Eqn);
+      },
+    });
+
     this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2b', toForm: '2c' },
+      { nav: coll._4, form: '4' },
+      { nav: coll._5, form: '5' },
     ], common, content);
+
     this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2c', toForm: '2d' },
+      { nav: coll._4, form: '4' },
+      { nav: coll._5, form: '5' },
+      { nav: coll._6, form: '5' },
     ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2d', toForm: '2e' },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2e', toForm: '2f' },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2f', toForm: '2g' },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2g', toForm: '2h' },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2h', toForm: '2i' },
-    ], common, content);
-    this.addSectionEqnStory([
-      { nav: coll._0, form: '0' },
-      { nav: coll._1, form: '1a' },
-      { nav: coll._2, form: '2i', toForm: '2j' },
-    ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   {
+    //     nav: coll._2, form: '1a', toForm: '2', moveFrom: coll._1Eqn,
+    //   },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2', toForm: '2a' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2a', toForm: '2b' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2b', toForm: '2c' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2c', toForm: '2d' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2d', toForm: '2e' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2e', toForm: '2f' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2f', toForm: '2g' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2g', toForm: '2h' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2h', toForm: '2i' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2i', toForm: '2j' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2j', toForm: '2k' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2k', toForm: '2l' },
+    // ], common, content);
+    // this.addSectionEqnStory([
+    //   { nav: coll._0, form: '0' },
+    //   { nav: coll._1, form: '1a' },
+    //   { nav: coll._2, form: '2l', toForm: '2m' },
+    // ], common, content);
   }
 }
 
