@@ -15,8 +15,16 @@ const { Rect, Point, DiagramFont } = Fig;
 // ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function baseLayout() {
-  const colors = Fig.tools.color.getCSSColors();
+export default function baseLayout(cssColorNames: Array<string> = []) {
+  const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  if (colors.diagram == null) {
+    colors.diagram = { text: { base: [1, 1, 1, 1] } };
+  } else if (colors.diagram.text == null) {
+    colors.diagram.text = { base: [1, 1, 1, 1] };
+  } else if (colors.diagram.text.base == null) {
+    colors.diagram.text.base = [1, 1, 1, 1];
+  }
+
   let textColor = [1, 1, 1, 1];
   if (colors.diagram.text != null) {
     textColor = colors.diagram.text.base;
