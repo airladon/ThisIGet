@@ -28,7 +28,8 @@ export default class InputFormField extends React.Component<Props, State> {
   }
 
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     return <div className="input_form__field"><label>
       <span className="login_label_text">{props.label}</span>
       <input

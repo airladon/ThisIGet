@@ -20,15 +20,18 @@ type Props = {
 
 export default class DropDownButton extends React.Component <Props> {
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     const listItems = [];
-    props.list.forEach((listElement) => {
-      listItems.push({
-        label: listElement.label,
-        link: listElement.link,
-        active: listElement.active,
+    if (props.list != null) {
+      props.list.forEach((listElement) => {
+        listItems.push({
+          label: listElement.label,
+          link: listElement.link,
+          active: listElement.active,
+        });
       });
-    });
+    }
     return <DropDownButtonBase
       label={props.label}
       id={props.id}

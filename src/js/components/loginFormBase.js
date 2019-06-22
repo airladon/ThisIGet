@@ -69,7 +69,8 @@ export default class LoginFormBase extends React.Component<Props, State> {
   }
 
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     return (
       <div className="login_form">
         <div className="login_centering_cell">

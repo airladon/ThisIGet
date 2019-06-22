@@ -20,7 +20,8 @@ export default class LessonTilePath extends React.Component
   }
 
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     const label = props.label || '';
     const id = props.id || '';
 

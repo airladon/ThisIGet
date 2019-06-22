@@ -20,7 +20,7 @@ type Props = {
 export default class LessonTile extends React.Component
                                     <Props> {
   render() {
-    const props = Object.assign({}, this.props);
+    const { props } = this;
     let isTitle = false;
     if (props.title != null) {
       isTitle = props.title;
