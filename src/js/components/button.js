@@ -16,10 +16,20 @@ export default class Button extends React.Component
     const Tag = props.href ? 'a' : 'button';
     const label = props.label || props.children || '';
     const className = classify('btn', props.className || '');
-    delete props.label;
+    // delete props.label;
 
     return <Tag {...props} className={className}>
       {label}
     </Tag>;
+
+    //   if (props.href != null) {
+    //     return <a href={props.href} className={className}>
+    //       {label}
+    //     </a>;
+    //   }
+
+    //   return <button className={className}>
+    //     {label}
+    //   </button>;
   }
 }

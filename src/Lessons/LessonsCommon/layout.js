@@ -15,8 +15,21 @@ const { Rect, Point, DiagramFont } = Fig;
 // ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function baseLayout() {
-  const colors = Fig.tools.color.getCSSColors();
+export default function baseLayout(cssColorNames: Array<string> = []) {
+  const colors = Fig.tools.color.getCSSColors(cssColorNames);
+  if (colors.diagram == null) {
+    colors.diagram = { text: { base: [1, 1, 1, 1] } };
+  } else if (colors.diagram.text == null) {
+    colors.diagram.text = { base: [1, 1, 1, 1] };
+  } else if (colors.diagram.text.base == null) {
+    colors.diagram.text.base = [1, 1, 1, 1];
+  }
+
+  let textColor = [1, 1, 1, 1];
+  if (colors.diagram.text != null) {
+    textColor = colors.diagram.text.base;
+  }
+
   const layout = {
     limits: new Rect(-3, -2, 6, 4),
     linewidth: 0.03,
@@ -25,7 +38,6 @@ export default function baseLayout() {
     selector: {
       y: 1.7,
     },
-
     quiz: {
       check: new Point( 2.4, -1.7),
       input: new Point(2.4, -1.3),
@@ -46,7 +58,7 @@ export default function baseLayout() {
       '400',
       'center',
       'middle',
-      colors.diagram.text.base,
+      textColor,
     ),
 
     colors,

@@ -3,6 +3,7 @@
 exports[`Button Button class is defined, but not used 1`] = `
 <button
   className="btn"
+  label="hello"
 >
   hello
 </button>
@@ -11,6 +12,7 @@ exports[`Button Button class is defined, but not used 1`] = `
 exports[`Button Button class used without btn 1`] = `
 <button
   className="btn btn-test-class"
+  label="hello"
 >
   hello
 </button>
@@ -27,6 +29,7 @@ exports[`Button Children are used to label button 1`] = `
 exports[`Button Label is used to name button 1`] = `
 <button
   className="btn"
+  label="hello"
 >
   hello
 </button>
@@ -35,6 +38,7 @@ exports[`Button Label is used to name button 1`] = `
 exports[`Button Label is used when label and children defined 1`] = `
 <button
   className="btn"
+  label="button label"
 >
   button label
 </button>
@@ -52,6 +56,7 @@ exports[`Button href is used 1`] = `
 <a
   className="btn"
   href="/#"
+  label="hello"
 >
   hello
 </a>

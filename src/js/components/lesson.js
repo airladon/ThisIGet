@@ -291,9 +291,9 @@ export default class LessonComponent extends React.Component
       if (topics[name] != null && name !== 'quickReference') {
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
-        const fullLessonCount = Object.values(topic).filter(ver => ver.fullLesson).length;
+        const fullLessonCount = Object.keys(topic).filter(ver => topic[ver].fullLesson).length;
         // $FlowFixMe - onPath is there and boolean
-        const partialLessonCount = Object.values(topic).filter(ver => !ver.fullLesson).length;
+        const partialLessonCount = Object.keys(topic).filter(ver => !topic[ver].fullLesson).length;
         let selected = false;
         if (this.topic === name) {
           selected = true;
