@@ -9,7 +9,8 @@ type Props = {
 
 export default class LoginTitle extends React.Component<Props> {
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     return (
       <div>
       <div className="login_title_spacer"/>
