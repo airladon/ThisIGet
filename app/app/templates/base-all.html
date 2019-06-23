@@ -9,8 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script src="https://cdn.polyfill.io/v2/polyfill.js"></script>
     <!-- <script>
-      (function(undefined) {}).call('object' === typeof window && window || 'object' === typeof self && self || 'object' === typeof global && global || {});
-    </script> -->
+      console.log('asdfasdfasd1412312312f')
+      if (Array.prototype.slice == null && Array.prototype.webkitSlice != null) {
+        console.log('asdfasdfasdf')
+  Array.prototype.slice = Array.prototype.webkitSlice;
+}
+</script> -->
     {% block head %}{% endblock %}
 
     <link rel="stylesheet" href="/static/vendors/bootstrap-reboot.min.css">
