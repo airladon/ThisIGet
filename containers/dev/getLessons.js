@@ -5,8 +5,10 @@ const pathTools = require(path.join(__dirname, 'pathTools.js'));
 
 function entryPoints(buildMode) {
   const points = {
-    main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
+    // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
+    main: ['whatwg-fetch', './src/js/main.js'],
     input: './src/js/views/input/input',
+    polyfill: './src/js/polyfills.js',
   };
 
   const lessons = pathTools.getAllPaths(

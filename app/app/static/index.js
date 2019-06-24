@@ -23639,8 +23639,8 @@ function () {
       this.gl.clearColor(0, 0, 0, 0);
       this.gl.clear(this.gl.COLOR_BUFFER_BIT);
       this.gl.disable(this.gl.DEPTH_TEST);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
+      this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      this.gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
       // window.addEventListener('resize', autoResize.bind(this, event));
     }
   }
