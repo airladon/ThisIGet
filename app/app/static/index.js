@@ -23606,10 +23606,12 @@ function () {
 
     var gl = canvas.getContext('webgl', {
       antialias: true
-    }); // if (gl == null) {
-    // $FlowFixMe
+    });
 
-    gl = glMock; // }
+    if (gl == null) {
+      // $FlowFixMe
+      gl = glMock;
+    }
 
     this.programs = [];
     this.lastUsedProgram = null;
@@ -26840,17 +26842,17 @@ function applyModifiers(text, modifiers) {
 
     outText = modifyText(outText, key, mod); // }
   });
-  var r = RegExp(/\|([^|]*)\|/, 'gi');
+  var r = RegExp(/\|([^|]*)\|/gi);
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
 
   if (monochrome) {
-    var c = RegExp(/style="color:rgba\([^)]*\);"/, 'gi');
+    var c = RegExp(/style="color:rgba\([^)]*\);"/gi);
     outText = outText.replace(c, '');
-    var h = RegExp(/highlight_word/, 'gi');
+    var h = RegExp(/highlight_word/gi);
     outText = outText.replace(h, '');
-    var i = RegExp(/interactive_word/, 'gi');
+    var i = RegExp(/interactive_word/gi);
     outText = outText.replace(i, '');
-    var id = RegExp(/id="[^"]*"/, 'gi');
+    var id = RegExp(/id="[^"]*"/gi);
     outText = outText.replace(id, '');
   }
 
