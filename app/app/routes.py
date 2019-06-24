@@ -57,6 +57,7 @@ def home():
     main_js = ''
     tools_js = ''
     common_lessons_js = ''
+    polyfill_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         if 'vendors.js' in dist:
@@ -151,6 +152,7 @@ def get_lesson(path):
     vendors_js = ''
     tools_js = ''
     common_lessons_js = ''
+    polyfill_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         if 'vendors.js' in dist:
