@@ -84,7 +84,7 @@ for version in versions:
     most_recent = (sorted(valid_dates))[-1].isoformat()
     lesson = re.sub(r".*\/src\/", '', version)
     pages.append([
-        f'https://www.thisiget.com/{lesson}/', most_recent, 'weekly'])
+        f'https://www.thisiget.com/{lesson}', most_recent, 'weekly'])
 
 
 # #############################################################################
