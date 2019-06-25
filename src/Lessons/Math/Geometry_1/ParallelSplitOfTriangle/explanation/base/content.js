@@ -42,6 +42,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
+    const fig2 = coll._fig2;
 
     this.addSection({
       title: 'Right Angle Triangle Split',
@@ -354,10 +355,10 @@ class Content extends PresentationLessonContent {
       ],
     };
 
-    this.addSectionEqnStory([
-      { eqn: coll._4Eqn, form: '4' },
-      { eqn: coll._7Eqn, form: '7c' },
-    ], common, content);
+    // this.addSectionEqnStory([
+    //   { eqn: coll._4Eqn, form: '4' },
+    //   { eqn: coll._7Eqn, form: '7c' },
+    // ], common, content);
 
     this.addSection(common, content, {
       transitionFromPrev: (done) => {
@@ -405,9 +406,31 @@ class Content extends PresentationLessonContent {
       title: 'Arbitrary Triangle Split',
       setContent: centerV([
         'We now can apply this learning to |any triangle|.',
+        '|Any triangle| can be split into a sum or difference of |right angle triangles|.',
+        'We can then apply our learnings on each right angle triangle.',
       ]),
     });
 
+    this.addSection({
+      setContent: 'Consider a triangle that has been split with a line parallel to its base.',
+      show: [
+        fig2._tri,
+        fig2._hSplit,
+      ],
+    });
+
+    this.addSection({
+      setContent: 'We want to find the relationship between the side lengths of the |original_triangle|, and the |split_triangle|.',
+      modifiers: {
+        original_triangle: click(coll.toggleOriginalTriangle, [coll], colors.sides),
+        split_triangle: click(coll.toggleSplitTriangle, [coll], colors.highlight),
+      },
+      show: [
+        fig2._tri, fig2._hSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+      ],
+    });
 
     // this.addSectionEqnStory([
     //   { nav: coll._0, form: '0' },

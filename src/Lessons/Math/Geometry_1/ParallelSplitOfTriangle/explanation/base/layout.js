@@ -14,6 +14,7 @@ const cssColorNames = [
   'sides',
   'highlight',
   'grey',
+  'darkGrey',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -180,6 +181,202 @@ export default function lessonLayout() {
         center: { position: [0.5, -0.3] },
       },
     },
+  };
+
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+
+  const anyTriPoints = [
+    new Point(-1, -1),
+    new Point(0.8, 1),
+    new Point(1.5, -1),
+  ];
+
+  const vSplitPoint = new Point(0.8, -1);
+
+  const anyTriSplit = [
+    new Point(-0.37, -0.3),
+    new Point(1.255, -0.3),
+  ];
+
+  const hSplitPoint = new Point(0.8, -0.3);
+
+  const aTri = {
+    name: 'tri',
+    method: 'polyLine',
+    options: {
+      points: anyTriPoints,
+      color: colors.sides,
+      close: true,
+      width: 0.02,
+    },
+  };
+
+  const aGreyTri = {
+    name: 'greyTri',
+    method: 'polyLine',
+    options: {
+      points: anyTriPoints,
+      color: colors.darkGrey,
+      close: true,
+      width: 0.02,
+    },
+  };
+
+  const vSplit = {
+    name: 'vSplit',
+    method: 'line',
+    options: {
+      dashStyle: {
+        style: [0.06, 0.04],
+      },
+      width: 0.01,
+      color: colors.sides,
+      p1: anyTriPoints[1],
+      p2: [anyTriPoints[1].x, anyTriPoints[0].y],
+    },
+  };
+
+  const hSplit = {
+    name: 'hSplit',
+    method: 'line',
+    options: {
+      width: 0.02,
+      color: colors.sides,
+      p1: anyTriSplit[0],
+      p2: anyTriSplit[1],
+    },
+  };
+
+  const topTri = {
+    name: 'topTri',
+    method: 'polyLine',
+    options: {
+      points: [
+        anyTriSplit[0],
+        anyTriPoints[1],
+        anyTriSplit[1],
+      ],
+      side: [
+        side('m'),
+        side('n'),
+        side('b'),
+      ],
+      color: colors.highlight,
+      close: true,
+      width: 0.02,
+    },
+  };
+
+  const topLeftTri = {
+    name: 'topLeftTri',
+    method: 'polyLine',
+    options: {
+      points: [
+        anyTriSplit[0],
+        anyTriPoints[1],
+        hSplitPoint,
+      ],
+      color: colors.highlight,
+      close: true,
+      width: 0.02,
+      side: [
+        side('rM'),
+        side(''),
+        side('rB1'),
+      ],
+    },
+  };
+
+  const topRightTri = {
+    name: 'topRightTri',
+    method: 'polyLine',
+    options: {
+      points: [
+        hSplitPoint,
+        anyTriPoints[1],
+        anyTriSplit[1],
+      ],
+      color: colors.highlight,
+      close: true,
+      width: 0.02,
+      side: [
+        side(''),
+        side('rN'),
+        side('rB2'),
+      ],
+    },
+  };
+
+  const leftTri = {
+    name: 'greyLeft',
+    method: 'polyLine',
+    options: {
+      points: [
+        anyTriPoints[1],
+        anyTriPoints[0],
+        vSplitPoint,
+      ],
+      color: colors.sides,
+      width: 0.02,
+      close: true,
+    },
+  };
+
+  const rightTri = {
+    name: 'greyLeft',
+    method: 'polyLine',
+    options: {
+      points: [
+        vSplitPoint,
+        anyTriPoints[1],
+        anyTriPoints[2],
+      ],
+      color: colors.sides,
+      width: 0.02,
+      close: true,
+    },
+  };
+
+  const simpleLabel = (name, text, p, color = colors.sides) => ({
+    name,
+    method: 'text',
+    options: {
+      text,
+      position: p,
+      size: 0.13,
+      color,
+    },
+  });
+
+  const fig2 = {
+    name: 'fig2',
+    method: 'collection',
+    addElements: [
+      aTri,
+      aGreyTri,
+      vSplit,
+      hSplit,
+      leftTri,
+      rightTri,
+      topTri,
+      rightAngle('rightAngle', anyTriPoints[1], vSplitPoint, anyTriPoints[0]),
+      rightAngle('splitRightAngle', anyTriPoints[1], hSplitPoint, anyTriSplit[0]),
+      label('M', anyTriPoints[0], anyTriPoints[1]),
+      label('N', anyTriPoints[1], anyTriPoints[2]),
+      label('B', anyTriPoints[2], anyTriPoints[0]),
+      label('H', anyTriPoints[2].add(1, 0), anyTriPoints[1].add(1.7, 0)),
+      simpleLabel('B1', 'B1', new Point(-0.1, -1.15)),
+      simpleLabel('B2', 'B2', new Point(1.1, -1.15)),
+      simpleLabel('rH', 'rH', new Point(0.65, 0.2), colors.highlight),
+      topLeftTri,
+      topRightTri,
+    ],
   };
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
@@ -835,6 +1032,7 @@ export default function lessonLayout() {
     nav('5', 0, false, '5'),
     nav('6', -0.8, false, '6'),
     nav('7', -1.6, false, '7'),
+    fig2,
   ];
   return layout;
 }

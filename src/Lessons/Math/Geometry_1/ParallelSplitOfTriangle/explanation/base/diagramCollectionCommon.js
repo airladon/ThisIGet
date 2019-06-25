@@ -67,4 +67,26 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig._area3.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
+
+  toggleOriginalTriangle() {
+    if (this._fig2._labelM.isShown) {
+      this._fig2._labelM.hide();
+      this._fig2._labelN.hide();
+      this._fig2._labelB.hide();
+    } else {
+      this._fig2._labelM.showAll();
+      this._fig2._labelN.showAll();
+      this._fig2._labelB.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  toggleSplitTriangle() {
+    if (this._fig2._topTri.isShown) {
+      this._fig2._topTri.hide();
+    } else {
+      this._fig2._topTri.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
 }
