@@ -667,11 +667,31 @@ class Content extends PresentationLessonContent {
         fig2._topRightTri._side20, fig2._topLeftTri._side20,
       ],
       setSteadyState: () => {
-        coll._BEqn.showForm('0');
-        coll._BEqn.setScenario('top');
+        coll._fig2Eqn.showForm('1');
+        coll._fig2Eqn.setScenario('top');
       },
     });
 
+    content = {
+      setContent: 'And so we have:',
+    };
+
+    this.addSection(content, {
+      show: [
+        fig2._tri, fig2._labelN, fig2._labelM, fig2._labelB,
+        fig2._topTri,
+      ],
+      setSteadyState: () => {
+        coll._fig2Eqn.showForm('2');
+        coll._fig2Eqn.setScenario('topLeft');
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So we have seen if |any| triangle is |split with a line parallel to one of its  sides|, then the new split triangle\'s sides are all in |equal proportion| to their corresponding sides of the original triangle.',
+      ]),
+    });
     // this.addSectionEqnStory([
     //   { nav: coll._0, form: '0' },
     //   { nav: coll._1, form: '1a' },
