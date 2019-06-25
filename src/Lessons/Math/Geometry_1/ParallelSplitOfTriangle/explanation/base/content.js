@@ -13,7 +13,7 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // style,
+  style,
   click,
   // clickW,
   highlight,
@@ -318,8 +318,89 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStory([
       { nav: coll._4, form: '4' },
       { nav: coll._5, form: '5' },
-      { nav: coll._6, form: '5' },
+      { nav: coll._6, form: '6c' },
     ], common, content);
+
+    this.addSectionEqnStory([
+      { nav: coll._4, form: '4' },
+      { nav: coll._5, form: '5' },
+      { nav: coll._6, form: '6c' },
+      { nav: coll._7, form: '7c' },
+    ], common, content);
+
+    content = {
+      setContent: style({ top: 0 }, 'And so we have the |relationships| between each side of the split triangle and the corresponding side of the original triangle.'),
+    };
+
+    this.addSectionEqnStory([
+      { nav: coll._4, form: '4' },
+      { nav: coll._5, form: '5' },
+      { nav: coll._6, form: '6c' },
+      { nav: coll._7, form: '7c' },
+    ], common, content);
+
+    common = {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        fig.setScenario('left');
+      },
+      show: [fig],
+      hide: [
+        fig._tri._side01, fig._tri._side12, fig._split,
+        fig._area1, fig._area2, fig._area3,
+        fig._construction,
+        fig._rightAngle, fig._splitRightAngle,
+      ],
+    };
+
+    this.addSectionEqnStory([
+      { eqn: coll._4Eqn, form: '4' },
+      { eqn: coll._7Eqn, form: '7c' },
+    ], common, content);
+
+    this.addSection(common, content, {
+      transitionFromPrev: (done) => {
+        coll._4Eqn.showForm('4');
+        coll._7Eqn.showForm('7c');
+        coll._7Eqn.animations.new()
+          .scenario({ target: 'midRight', duration: 2 })
+          .whenFinished(done)
+          .start();
+        coll._4Eqn.animations.new()
+          .scenario({ target: 'midLeft', duration: 2 })
+          .start();
+      },
+      setSteadyState: () => {
+        coll._4Eqn.showForm('4Comma');
+        coll._4Eqn.setScenario('midLeft');
+        // coll._4Eqn.setPositionToElement(coll._0);
+        // const target = coll._4Eqn.getPosition().add(0, -0.5);
+        coll._7Eqn.showForm('7c');
+        coll._7Eqn.setScenario('midRight');
+        // coll._7Eqn.setPosition(0, 0);
+      },
+    });
+
+    content = {
+      setContent: style({ top: 0 }, 'Each side of the smaller triangle has been reduced by the |same amount| (r) from the corresponding side on the original triangle.'),
+    };
+
+    this.addSection(common, content, {
+      setSteadyState: () => {
+        coll._4Eqn.showForm('4Comma');
+        coll._4Eqn.setScenario('midLeft');
+        coll._7Eqn.showForm('7c');
+        coll._7Eqn.setScenario('midRight');
+      },
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'If a right angle triangle is |split with a line parallel to one of its perpendicular sides|, then the new split triangle\'s sides are all in |equal proportion| to their corresponding sides of the original triangle.',
+      ]),
+    });
+
+
     // this.addSectionEqnStory([
     //   { nav: coll._0, form: '0' },
     //   { nav: coll._1, form: '1a' },

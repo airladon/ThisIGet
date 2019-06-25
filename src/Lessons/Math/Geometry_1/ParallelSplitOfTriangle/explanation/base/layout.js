@@ -287,6 +287,7 @@ export default function lessonLayout() {
 
     arrow: { text: '     =>     ' },
     comma: { text: ',      ' },
+    comma2: { text: ',' },
   };
 
   const bot = (content, commentText, symbol = '') => ({
@@ -648,6 +649,19 @@ export default function lessonLayout() {
           ],
           description: 'Knowing:',
         },
+        '4Comma': {
+          content: [
+            'b0',
+            'equals2',
+            'r1', 'B3',
+            'comma',
+            'n0',
+            'equals1',
+            'r2', 'N0',
+            'comma2',
+          ],
+          description: 'Knowing:',
+        },
         '5': {
           content: [
             sup('m', '_2_0'),
@@ -720,7 +734,7 @@ export default function lessonLayout() {
           ],
           description: 'Rearrange for r:',
         },
-        '6d': {
+        '7': {
           content: [
             sup('m', '_2_0'),
             'equals',
@@ -736,7 +750,7 @@ export default function lessonLayout() {
           ],
           description: 'Using Pythagorean theorem for M:',
         },
-        '6e': {
+        '7a': {
           content: [
             sup('m', '_2_0'),
             'equals',
@@ -745,12 +759,31 @@ export default function lessonLayout() {
           ],
           description: 'Using Pythagorean theorem for M:',
         },
+        '7b': {
+          content: [
+            sup('m', strike('_2_0', 'x0')),
+            'equals',
+            sup('r3', strike('_2_7', 'x1')),
+            sup('M0', strike('_2_3', 'x2')),
+          ],
+          description: 'Taking the square root of both sides:',
+        },
+        '7c': {
+          content: [
+            'm',
+            'equals',
+            'r3',
+            'M0',
+          ],
+          description: 'Simplifies to:',
+        },
       },
       formSeries: {
         '1': ['0', '1', '1a'],
         '2': ['1a', '2', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '2k', '2l', '2m'],
         '3': ['2m', '3', '3a', '3b', '3c', '3d', '3e', '3f'],
-        '6': ['5', '6', '6a', '6b', '6c', '6d', '6e'],
+        '6': ['5', '6', '6a', '6b', '6c'],
+        '7': ['6c', '7', '7a', '7b', '7c'],
         // '2': ['1', '1a', '1b', '1c', '2'],
         // '3': ['2', '2a', '3'],
       },
@@ -769,6 +802,8 @@ export default function lessonLayout() {
         default: { position: [0.8, y], scale: 1 },
         top: { position: [1.5, -0.2], scale: 1.3 },
         summary: { position: [1.5, -0.2], scale: 1.3 },
+        midLeft: { position: [0.5, -0.2] },
+        midRight: { position: [2.1, -0.2] },
       },
     },
   });
@@ -799,6 +834,7 @@ export default function lessonLayout() {
     nav('4', 0.8, false),
     nav('5', 0, false, '5'),
     nav('6', -0.8, false, '6'),
+    nav('7', -1.6, false, '7'),
   ];
   return layout;
 }
