@@ -139,7 +139,8 @@ export default class TopicButton extends React.Component <Props> {
   }
 
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     const listItems = [];
     // let addTitle = true;
     // props.list.forEach((listElement) => {
@@ -150,14 +151,16 @@ export default class TopicButton extends React.Component <Props> {
     // if (addTitle) {
     listItems.push({ label: this.renderTitle() });
     // }
-    props.list.forEach((listElement) => {
-      listItems.push({
-        label: this.renderListLabel(listElement),
-        link: listElement.link,
-        active: listElement.active,
-        separator: listElement.separator == null ? false : listElement.separator,
+    if (props.list != null) {
+      props.list.forEach((listElement) => {
+        listItems.push({
+          label: this.renderListLabel(listElement),
+          link: listElement.link,
+          active: listElement.active,
+          separator: listElement.separator == null ? false : listElement.separator,
+        });
       });
-    });
+    }
     return <DropDownButtonBase
       label={props.label}
       id={props.id}

@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
 import './style.scss';
 
@@ -17,8 +17,8 @@ const cssColorNames = [
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
 export default function lessonLayout() {
-  const layout: Object = baseLayout();
-  layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
+  const layout: Object = baseLayout(cssColorNames);
+  // layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
   layout.position = [0, -0.1];
   const width = 0.02;

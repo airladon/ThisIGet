@@ -10,7 +10,8 @@ type Props = {
 
 export default class InputFormSubmit extends React.Component<Props> {
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     return <div>
       <div className="input_form__submit_container">
         <div className="input_form__submit_container_small">

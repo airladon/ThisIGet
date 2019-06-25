@@ -7,10 +7,19 @@
     <meta name="description" content="{% block description %}{% endblock %}"/>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    
-    <link rel="stylesheet" href="/static/vendors/bootstrap-reboot.min.css">
+    <!-- <script src="https://cdn.polyfill.io/v2/polyfill.js"></script> -->
+    <script type="text/javascript" src={{ polyfill_js }}></script>
+    <!-- <script>
+      console.log('asdfasdfasd1412312312f')
+      if (Array.prototype.slice == null && Array.prototype.webkitSlice != null) {
+        console.log('asdfasdfasdf')
+  Array.prototype.slice = Array.prototype.webkitSlice;
+}
+</script> -->
     {% block head %}{% endblock %}
 
+    <link rel="stylesheet" href="/static/vendors/bootstrap-reboot.min.css">
+    {% block vendors %}{% endblock %}
     {% block libraries %}{% endblock %}
     
     <!-- <script type="text/javascript" async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML" async></script> -->
@@ -21,7 +30,6 @@
     <div id="logged_in" style="font-size:0">{{ current_user.name }}</div>
   {% endif %} -->
   {% block content %}{% endblock %}
-  {% block vendors %}{% endblock %}
 
 <script type="text/javascript" src={{ tools_js }}></script>
 <script type="text/javascript" src={{ common_lessons_js }}></script>

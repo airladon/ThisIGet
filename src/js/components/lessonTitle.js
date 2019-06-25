@@ -12,14 +12,14 @@ type Props = {
 export default class LessonTitle extends React.Component
                                     <Props> {
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
     // let isTitle = false;
     // if (props.title != null) {
     //   isTitle = props.title;
     // }
 
     // const Tag = props.href ? 'a' : 'button';
-    const label = props.label || '';
+    const label = this.props.label || '';
 
     // const link = props.link || '/';
     // let classText = 'lesson__title_container';
@@ -33,8 +33,8 @@ export default class LessonTitle extends React.Component
     //   classText = `${classText} navigator__lesson_tile_selected`;
     // }
     let imgLink = '/static/assets/defaultTile.png';
-    if (props.imgLink != null) {
-      imgLink = `${props.imgLink}`;
+    if (this.props.imgLink != null) {
+      imgLink = `${this.props.imgLink}`;
     }
     // const content = <div className={classText}>
     //     <img src={imgLink} className="navigator__lesson_tile_image" />

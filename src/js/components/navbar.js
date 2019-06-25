@@ -172,8 +172,8 @@ export default class Navbar extends React.Component
   }
 
   render() {
-    const props = Object.assign({}, this.props);
-    delete props.active;
+    // const props = Object.assign({}, this.props);
+    // delete props.active;
 
     const body =
     <div>

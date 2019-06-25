@@ -114,7 +114,8 @@ export default class DropDownButtonBase extends React.Component
   }
 
   render() {
-    const props = Object.assign({}, this.props);
+    // const props = Object.assign({}, this.props);
+    const { props } = this;
     const label = props.label || '';
     this.xAlign = props.xAlign || 'left';
     this.direction = props.direction || 'down';
@@ -132,58 +133,59 @@ export default class DropDownButtonBase extends React.Component
 
     this.id = props.id || generateUniqueId('id__dropdown_button');
     const listContent = [];
-    props.list.forEach((listItem, index) => {
-      let classes = '';
-      if (listItem.active) {
-        classes = `${classes} dropdown_button_list_item_active`;
-      }
-      if (listItem.separator) {
-        classes = `${classes} dropdown_button_list_item_separator`;
-      }
-      if (listItem.link == null) {
-        classes = `${classes} dropdown_button_list_item_disabled`;
-      }
-
-      let item;
-      if (listItem.link != null) {
-        let linkRedirect = listItem.link;
-        if (typeof listItem.link === 'string') {
-          linkRedirect = () => {
-            window.location = listItem.link;
-          };
+    if (props.list != null) {
+      props.list.forEach((listItem, index) => {
+        let classes = '';
+        if (listItem.active) {
+          classes = `${classes} dropdown_button_list_item_active`;
         }
-        const closeThenRedirect = () => {
-          this.close();
-          if (linkRedirect != null && typeof linkRedirect === 'function') {
-            linkRedirect();
-          }
-        };
-        const keyboardCloseThenRedirect = (event) => {
-          if (event.keyCode === 13 || event.keyCode === 32) {
-            closeThenRedirect();
-          }
-        };
-        item = <div onClick={closeThenRedirect}
-                    tabIndex={0}
-                    role="button"
-                    onKeyDown={keyboardCloseThenRedirect}
-                    className="dropdown_button_list_item_link"
-                    >
-          {listItem.label}
-          </div>;
-      } else {
-        item = <div>{listItem.label}</div>;
-      }
-      if (item != null) {
-        listContent.push(
-          <div className={`dropdown_button_list_item${classes}`}
-               key={index}>
-            {item}
-          </div>,
-        );
-      }
-    });
+        if (listItem.separator) {
+          classes = `${classes} dropdown_button_list_item_separator`;
+        }
+        if (listItem.link == null) {
+          classes = `${classes} dropdown_button_list_item_disabled`;
+        }
 
+        let item;
+        if (listItem.link != null) {
+          let linkRedirect = listItem.link;
+          if (typeof listItem.link === 'string') {
+            linkRedirect = () => {
+              window.location = listItem.link;
+            };
+          }
+          const closeThenRedirect = () => {
+            this.close();
+            if (linkRedirect != null && typeof linkRedirect === 'function') {
+              linkRedirect();
+            }
+          };
+          const keyboardCloseThenRedirect = (event) => {
+            if (event.keyCode === 13 || event.keyCode === 32) {
+              closeThenRedirect();
+            }
+          };
+          item = <div onClick={closeThenRedirect}
+                      tabIndex={0}
+                      role="button"
+                      onKeyDown={keyboardCloseThenRedirect}
+                      className="dropdown_button_list_item_link"
+                      >
+            {listItem.label}
+            </div>;
+        } else {
+          item = <div>{listItem.label}</div>;
+        }
+        if (item != null) {
+          listContent.push(
+            <div className={`dropdown_button_list_item${classes}`}
+                 key={index}>
+              {item}
+            </div>,
+          );
+        }
+      });
+    }
     return <div className={buttonClasses} tabIndex={0} role="button"
       id={`${this.id}`}>
       <div className="dropdown_button_label_container"

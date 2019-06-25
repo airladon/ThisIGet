@@ -27,7 +27,9 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 SELF,
                 'https://unpkg.com/',
                 'https://cdnjs.cloudflare.com',
+                'https://cdn.polyfill.io/v2/',
                 "'unsafe-inline'",          # this needs to be removed later
+                "'unsafe-eval'",    # this needs to be removed as well
             ],
             'font-src': [
                 SELF,

@@ -57,6 +57,7 @@ def home():
     main_js = ''
     tools_js = ''
     common_lessons_js = ''
+    polyfill_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         if 'vendors.js' in dist:
@@ -69,10 +70,13 @@ def home():
             main_js = f"/{'static/dist'}/{dist['main.js']}"
         if 'tools.js' in dist:
             tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+        if 'polyfill.js' in dist:
+            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
     res = make_response(render_template(
         'home.html',
         main_css=main_css, main_js=main_js, vendors_js=vendors_js,
         tools_js=tools_js, common_lessons_js=common_lessons_js,
+        polyfill_js=polyfill_js,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
@@ -148,6 +152,7 @@ def get_lesson(path):
     vendors_js = ''
     tools_js = ''
     common_lessons_js = ''
+    polyfill_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         if 'vendors.js' in dist:
@@ -156,10 +161,12 @@ def get_lesson(path):
             common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
         if 'tools.js' in dist:
             tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+        if 'polyfill.js' in dist:
+            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
 
     res = make_response(render_template(
         'lesson.html',
-        css=css, js=js, tools_js=tools_js,
+        css=css, js=js, tools_js=tools_js, polyfill_js=polyfill_js,
         common_lessons_js=common_lessons_js, vendors_js=vendors_js,
         title=title, description=description))
     if lesson_page:

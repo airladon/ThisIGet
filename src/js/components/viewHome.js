@@ -10,9 +10,10 @@ type Props = {
 };
 
 export default class ViewHome extends React.Component<Props> {
+  // eslint-disable-next-line class-methods-use-this
   render() {
-    const props = Object.assign({}, this.props);
-    delete props.active;
+    // const props = Object.assign({}, this.props);
+    // delete props.active;
     return <div>
       <HomeBanner/>
       <main>

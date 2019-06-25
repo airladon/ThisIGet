@@ -16987,7 +16987,7 @@ function (_DrawingObject) {
       }
 
       if (minSize < 1) {
-        var power = -Math.log10(minSize) + 2;
+        var power = -Math.log(minSize) / Math.LN10 + 2;
         _this.scalingFactor = Math.pow(10, power);
       }
     }
@@ -22712,13 +22712,15 @@ function (_DiagramElement2) {
     }
   }, {
     key: "setColor",
-    value: function setColor(color) {
+    value: function setColor() {
+      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.setColor(color);
       }
 
-      this.color = color.slice();
+      this.color = color.slice(); // this.color = [color[0], color[1], color[2], color[3]];
     }
   }, {
     key: "setOpacity",
@@ -23352,6 +23354,86 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+var glMock = {
+  TRIANGLES: 1,
+  TRIANGLE_STRIP: 2,
+  TRIANGLE_FAN: 3,
+  LINES: 4,
+  LINK_STATUS: 1,
+  VERTEX_SHADER: 1,
+  COMPILE_STATUS: 1,
+  FRAGMENT_SHADER: 1,
+  SRC_ALPHA: 1,
+  ONE_MINUS_SRC_ALPHA: 1,
+  BLEND: 1,
+  COLOR_BUFFER_BIT: 1,
+  TEXTURE_2D: 1,
+  RGBA: 1,
+  UNSIGNED_BYTE: 1,
+  TEXTURE_WRAP_S: 1,
+  CLAMP_TO_EDGE: 1,
+  TEXTURE_WRAP_T: 1,
+  TEXTURE_MIN_FILTER: 1,
+  LINEAR: 1,
+  ARRAY_BUFFER: 1,
+  STATIC_DRAW: 1,
+  FLOAT: 1,
+  UNPACK_PREMULTIPLY_ALPHA_WEBGL: 1,
+  createBuffer: function createBuffer() {},
+  bindBuffer: function bindBuffer() {},
+  bufferData: function bufferData() {},
+  enableVertexAttribArray: function enableVertexAttribArray() {},
+  vertexAttribPointer: function vertexAttribPointer() {},
+  disableVertexAttribArray: function disableVertexAttribArray() {},
+  uniformMatrix3fv: function uniformMatrix3fv() {},
+  uniform4f: function uniform4f() {},
+  uniform1f: function uniform1f() {},
+  uniform1i: function uniform1i() {},
+  texParameteri: function texParameteri() {},
+  drawArrays: function drawArrays() {},
+  clearColor: function clearColor() {},
+  clear: function clear() {},
+  createTexture: function createTexture() {},
+  activeTexture: function activeTexture() {},
+  bindTexture: function bindTexture() {},
+  pixelStorei: function pixelStorei() {},
+  texImage2D: function texImage2D() {},
+  blendFunc: function blendFunc() {},
+  attachShader: function attachShader() {},
+  linkProgram: function linkProgram() {},
+  getProgramParameter: function getProgramParameter() {},
+  createProgram: function createProgram() {},
+  deleteProgram: function deleteProgram() {},
+  createShader: function createShader() {},
+  shaderSource: function shaderSource() {},
+  compileShader: function compileShader() {},
+  getShaderParameter: function getShaderParameter() {},
+  getAttribLocation: function getAttribLocation() {},
+  getUniformLocation: function getUniformLocation() {},
+  enable: function enable() {},
+  map: function map() {},
+  getExtension: function getExtension() {
+    return {
+      loseContext: function loseContext() {}
+    };
+  },
+  disable: function disable() {},
+  deleteShader: function deleteShader() {},
+  useProgram: function useProgram() {},
+  viewport: function viewport() {},
+  canvas: {
+    toDataURL: function toDataURL() {
+      return '';
+    },
+    width: 100,
+    clientHeight: 100,
+    height: 100,
+    style: {
+      top: 0,
+      visibility: 'visible'
+    }
+  }
+};
 
 function createProgram(gl, vertexShader, fragmentShader) {
   var program = gl.createProgram();
@@ -23525,11 +23607,18 @@ function () {
     var gl = canvas.getContext('webgl', {
       antialias: true
     });
+
+    if (gl == null) {
+      // $FlowFixMe
+      gl = glMock;
+    }
+
     this.programs = [];
     this.lastUsedProgram = null;
     this.textures = {};
 
-    if (gl instanceof WebGLRenderingContext) {
+    if (gl != null) {
+      // $FlowFixMe
       this.gl = gl; // this.program = createProgramFromScripts(
       //   this.gl,
       //   vertexSource,
@@ -23550,8 +23639,8 @@ function () {
       this.gl.clearColor(0, 0, 0, 0);
       this.gl.clear(this.gl.COLOR_BUFFER_BIT);
       this.gl.disable(this.gl.DEPTH_TEST);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
+      this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      this.gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
       // window.addEventListener('resize', autoResize.bind(this, event));
     }
   }
@@ -26753,17 +26842,17 @@ function applyModifiers(text, modifiers) {
 
     outText = modifyText(outText, key, mod); // }
   });
-  var r = RegExp(/\|([^|]*)\|/, 'gi');
+  var r = RegExp(/\|([^|]*)\|/gi);
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
 
   if (monochrome) {
-    var c = RegExp(/style="color:rgba\([^)]*\);"/, 'gi');
+    var c = RegExp(/style="color:rgba\([^)]*\);"/gi);
     outText = outText.replace(c, '');
-    var h = RegExp(/highlight_word/, 'gi');
+    var h = RegExp(/highlight_word/gi);
     outText = outText.replace(h, '');
-    var i = RegExp(/interactive_word/, 'gi');
+    var i = RegExp(/interactive_word/gi);
     outText = outText.replace(i, '');
-    var id = RegExp(/id="[^"]*"/, 'gi');
+    var id = RegExp(/id="[^"]*"/gi);
     outText = outText.replace(id, '');
   }
 
@@ -26912,11 +27001,33 @@ __webpack_require__.r(__webpack_exports__);
 var roundNum = function roundNum(value) {
   var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
   var multiplier = Math.pow(10, precision);
-  var result = Math.round(value * multiplier) / multiplier;
+  var result = Math.round(value * multiplier) / multiplier; // if (Object.is(result, -0)) {
+  // if (result === -0) {
+  //   result = 0;
+  // }
 
-  if (Object.is(result, -0)) {
+  var objectIsPolyfill = function objectIsPolyfill(x, y) {
+    if (x === y) {
+      // 0 === -0, but they are not identical
+      return x !== 0 || 1 / x === 1 / y;
+    } // NaN !== NaN, but they are identical.
+    // NaNs are the only non-reflexive value, i.e., if x !== x,
+    // then x is a NaN.
+    // isNaN is broken: it converts its argument to number, so
+    // isNaN("foo") => true
+    // eslint-disable-next-line no-self-compare
+
+
+    return x !== x && y !== y;
+  };
+
+  if (objectIsPolyfill(result, -0)) {
     result = 0;
-  }
+  } // if (result === -0) {
+  //   // 0 === -0, but they are not identical
+  //   return result !== 0 || 1 / x === 1 / y;
+  // }
+
 
   return result;
 };
