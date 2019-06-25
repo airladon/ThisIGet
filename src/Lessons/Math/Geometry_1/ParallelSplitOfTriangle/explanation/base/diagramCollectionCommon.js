@@ -20,12 +20,26 @@ export default class CommonCollection extends CommonDiagramCollection {
     _split: DiagramObjectLine;
     _splitRightAngle: DiagramObjectAngle;
     _splitTri: DiagramObjectPolyLine;
-    _labelM: DiagramElementPrimative;
-    _labelN: DiagramElementPrimative;
+    _labelM: DiagramObjectLine;
+    _labelN: DiagramObjectLine;
     _area1: DiagramElementPrimative;
     _area2: DiagramElementPrimative;
     _area3: DiagramElementPrimative;
     _construction: DiagramObjectLine;
+  } & DiagramElementCollection;
+
+  _fig2: {
+    _tri: DiagramObjectPolyLine;
+    _topTri: DiagramObjectPolyLine;
+    _hSplit: DiagramObjectLine;
+    _vSplit: DiagramObjectLine;
+    _rightAngle: DiagramObjectAngle;
+    _splitRightAngle: DiagramObjectAngle;
+    _labelM: DiagramObjectLine;
+    _labelN: DiagramObjectLine;
+    _labelB: DiagramObjectLine;
+    _B1: DiagramElementPrimative;
+    _B2: DiagramElementPrimative;
   } & DiagramElementCollection;
 
 
@@ -68,6 +82,25 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
+  growFig2Split(done: ?() => void = null) {
+    this._fig2._hSplit.grow(0, 1.5, true, done);
+    this.diagram.animateNextFrame();
+  }
+
+  growFig2VSplit(done: ?() => void = null) {
+    this._fig2._vSplit.stop(false, false);
+    this._fig2._rightAngle.hide();
+    this._fig2._splitRightAngle.hide();
+    this._fig2._vSplit.grow(0.05, 1.5, true, () => {
+      this._fig2._rightAngle.showAll();
+      this._fig2._splitRightAngle.showAll();
+      if (done != null) {
+        done();
+      }
+    });
+    this.diagram.animateNextFrame();
+  }
+
   toggleOriginalTriangle() {
     if (this._fig2._labelM.isShown) {
       this._fig2._labelM.hide();
@@ -87,6 +120,21 @@ export default class CommonCollection extends CommonDiagramCollection {
     } else {
       this._fig2._topTri.showAll();
     }
+    this.diagram.animateNextFrame();
+  }
+
+  pulseB1(done: ?() => void = null) {
+    this._fig2._B1.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseB2(done: ?() => void = null) {
+    this._fig2._B2.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseB(done: ?() => void = null) {
+    this._fig2._labelB._label.pulseScaleNow(1, 2, 0, done);
     this.diagram.animateNextFrame();
   }
 }

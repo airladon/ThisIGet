@@ -411,12 +411,34 @@ class Content extends PresentationLessonContent {
       ]),
     });
 
-    this.addSection({
-      setContent: 'Consider a triangle that has been split with a line parallel to its base.',
-      show: [
-        fig2._tri,
-        fig2._hSplit,
-      ],
+    content = {
+      setContent: 'Consider an arbitrary triangle, and then |split| it with a line parallel to its base.',
+    };
+    this.addSection(content, {
+      modifiers: { split: this.bindNext(colors.sides) },
+      show: [fig2._tri],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        split: click(coll.growFig2Split, [coll, null], colors.sides),
+      },
+      show: [fig2._tri, fig2._hSplit],
+      transitionFromPrev: (done) => {
+        coll.growFig2Split(done);
+      },
+    });
+
+    content = {
+      setContent: 'We want to find the relationship between the side lengths of the |original_triangle|, and the |split_triangle|.',
+    };
+
+    this.addSection(content, {
+      modifiers: {
+        original_triangle: highlight(colors.sides),
+        split_triangle: highlight(colors.highlight),
+      },
+      show: [fig2._tri, fig2._hSplit],
     });
 
     this.addSection({
@@ -429,6 +451,70 @@ class Content extends PresentationLessonContent {
         fig2._tri, fig2._hSplit,
         fig2._topTri,
         fig2._labelM, fig2._labelB, fig2._labelN,
+      ],
+    });
+
+    content = {
+      setContent: 'The triangles can be vertically |split| into two right angle triangles.',
+    };
+    this.addSection(content, {
+      modifiers: { split: this.bindNext(colors.sides) },
+      show: [
+        fig2._tri, fig2._hSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+      ],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        split: click(coll.growFig2VSplit, [coll, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.growFig2VSplit(done);
+      },
+      show: [
+        fig2._tri, fig2._hSplit, fig2._vSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+        fig2._rightAngle,
+      ],
+    });
+
+    content = {
+      setContent: 'The |base| is then the sum of the two bases |B1| and |B2|.',
+    };
+
+    this.addSection(content, {
+      modifiers: {
+        B1: this.bindNext(colors.sides),
+        B2: this.bindNext(colors.sides),
+        base: click(coll.pulseB, [coll, null], colors.sides),
+      },
+      show: [
+        fig2._tri, fig2._hSplit, fig2._vSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+        fig2._rightAngle,
+      ],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        base: click(coll.pulseB, [coll, null], colors.sides),
+        B1: click(coll.pulseB1, [coll, null], colors.sides),
+        B2: click(coll.pulseB2, [coll, null], colors.sides),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseB1(done);
+        coll.pulseB2(null);
+      },
+      show: [
+        fig2._tri, fig2._hSplit, fig2._vSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+        fig2._rightAngle,
+        fig2._B1, fig2._B2,
       ],
     });
 

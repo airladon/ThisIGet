@@ -233,7 +233,7 @@ export default function lessonLayout() {
     method: 'line',
     options: {
       dashStyle: {
-        style: [0.06, 0.04],
+        style: [0.03, 0.01],
       },
       width: 0.01,
       color: colors.sides,
