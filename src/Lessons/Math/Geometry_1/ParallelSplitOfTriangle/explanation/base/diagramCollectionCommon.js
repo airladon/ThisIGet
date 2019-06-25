@@ -37,9 +37,28 @@ export default class CommonCollection extends CommonDiagramCollection {
     _splitRightAngle: DiagramObjectAngle;
     _labelM: DiagramObjectLine;
     _labelN: DiagramObjectLine;
-    _labelB: DiagramObjectLine;
+    _labelB: {
+      _label: DiagramElementPrimative;
+    } & DiagramObjectLine;
     _B1: DiagramElementPrimative;
     _B2: DiagramElementPrimative;
+    _rH: DiagramElementPrimative;
+    _topLeftTri: {
+      _side01: {
+        _label: DiagramElementPrimative;
+      } & DiagramObjectLine;
+      _side20: {
+        _label: DiagramElementPrimative;
+      } & DiagramObjectLine;
+    } & DiagramObjectPolyLine;
+    _topRightTri: {
+      _side12: {
+        _label: DiagramElementPrimative;
+      } & DiagramObjectLine;
+      _side20: {
+        _label: DiagramElementPrimative;
+      } & DiagramObjectLine;
+    } & DiagramObjectPolyLine;
   } & DiagramElementCollection;
 
 
@@ -135,6 +154,20 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseB(done: ?() => void = null) {
     this._fig2._labelB._label.pulseScaleNow(1, 2, 0, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTopLeft(done: ?() => void = null) {
+    this._fig2._topLeftTri._side01._label.pulseScaleNow(1, 2);
+    this._fig2._topLeftTri._side20._label.pulseScaleNow(1, 2, 0, done);
+    this._fig2._rH.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTopRight(done: ?() => void = null) {
+    this._fig2._topRightTri._side12._label.pulseScaleNow(1, 2);
+    this._fig2._topRightTri._side20._label.pulseScaleNow(1, 2, 0, done);
+    this._fig2._rH.pulseScaleNow(1, 2);
     this.diagram.animateNextFrame();
   }
 }

@@ -253,6 +253,17 @@ export default function lessonLayout() {
     },
   };
 
+  const greyHSplit = {
+    name: 'greyHSplit',
+    method: 'line',
+    options: {
+      width: 0.02,
+      color: colors.darkGrey,
+      p1: anyTriSplit[0],
+      p2: anyTriSplit[1],
+    },
+  };
+
   const topTri = {
     name: 'topTri',
     method: 'polyLine',
@@ -314,7 +325,7 @@ export default function lessonLayout() {
   };
 
   const leftTri = {
-    name: 'greyLeft',
+    name: 'leftTri',
     method: 'polyLine',
     options: {
       points: [
@@ -329,7 +340,7 @@ export default function lessonLayout() {
   };
 
   const rightTri = {
-    name: 'greyLeft',
+    name: 'rightTri',
     method: 'polyLine',
     options: {
       points: [
@@ -360,6 +371,7 @@ export default function lessonLayout() {
     addElements: [
       aTri,
       aGreyTri,
+      greyHSplit,
       vSplit,
       hSplit,
       leftTri,
@@ -377,7 +389,11 @@ export default function lessonLayout() {
       topLeftTri,
       topRightTri,
     ],
+    options: {
+      position: [0, -0.2],
+    },
   };
+
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
@@ -1022,6 +1038,69 @@ export default function lessonLayout() {
     },
   });
 
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+
+  const elementsFig2 = {
+    B: { text: 'B', color: colors.sides },
+    B1: { text: 'B1', color: colors.sides },
+    B1_1: { text: 'B1', color: colors.highlight },
+    B1_2: { text: 'B1', color: colors.highlight },
+    B2: { text: 'B1', color: colors.sides },
+    B2_1: { text: 'B2', color: colors.highlight },
+    B2_2: { text: 'B2', color: colors.highlight },
+    plus_0: '  +  ',
+    plus_1: '  +  ',
+    equals: '  =  ',
+    r_0: { text: 'r', color: colors.highlight },
+    r_1: { text: 'r', color: colors.highlight },
+    r_2: { text: 'r', color: colors.highlight },
+    r_3: { text: 'r', color: colors.highlight },
+    brace0: {
+      symbol: 'brace', side: 'bottom', numLines: 2, color: colors.grey,
+    },
+    lb1: { symbol: 'bracket', side: 'left', numLines: 1 },
+    rb1: { symbol: 'bracket', side: 'right', numLines: 1 },
+  };
+
+  const eqnFig2 = name => ({
+    name,
+    method: 'addEquation',
+    options: {
+      color: colors.diagram.text.base,
+      defaultFormAlignment: {
+        fixTo: 'equals',
+        alignH: 'center',
+        alignV: 'baseline',
+      },
+      scale: 0.8,
+      elements: elementsFig2,
+      forms: {
+        '0': ['B', 'equals', 'B1', 'plus_0', 'B2'],
+        '1': [
+          'r_0', 'B1', 'plus', 'r_1', 'B2', 'equals',
+          'r_3', { brac: [['B1_1', 'B2_1'], 'lb', 'rb'] },
+        ],
+      },
+      formRestart: {
+        pulse: {
+          duration: 1,
+          scale: 1.1,
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        top: { position: [1.5, -0.2], scale: 1.3 },
+      },
+    },
+  });
+
   layout.addElements = [
     fig,
     nav('0', 0.8, false),
@@ -1033,6 +1112,8 @@ export default function lessonLayout() {
     nav('6', -0.8, false, '6'),
     nav('7', -1.6, false, '7'),
     fig2,
+    eqnFig2('BEqn'),
+    eqnFig2('rBEqn'),
   ];
   return layout;
 }

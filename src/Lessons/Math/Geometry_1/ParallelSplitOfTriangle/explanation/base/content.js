@@ -17,6 +17,7 @@ const {
   click,
   // clickW,
   highlight,
+  highlightWord,
   centerV,
 } = Fig.tools.html;
 
@@ -477,7 +478,7 @@ class Content extends PresentationLessonContent {
         fig2._tri, fig2._hSplit, fig2._vSplit,
         fig2._topTri,
         fig2._labelM, fig2._labelB, fig2._labelN,
-        fig2._rightAngle,
+        fig2._rightAngle, fig2._splitRightAngle,
       ],
     });
 
@@ -495,7 +496,7 @@ class Content extends PresentationLessonContent {
         fig2._tri, fig2._hSplit, fig2._vSplit,
         fig2._topTri,
         fig2._labelM, fig2._labelB, fig2._labelN,
-        fig2._rightAngle,
+        fig2._rightAngle, fig2._splitRightAngle,
       ],
     });
 
@@ -513,9 +514,162 @@ class Content extends PresentationLessonContent {
         fig2._tri, fig2._hSplit, fig2._vSplit,
         fig2._topTri,
         fig2._labelM, fig2._labelB, fig2._labelN,
-        fig2._rightAngle,
+        fig2._rightAngle, fig2._splitRightAngle,
         fig2._B1, fig2._B2,
       ],
+    });
+
+    // content = {
+    //   setContent: 'The |base| is then the sum of the two bases |B1| and |B2|.',
+    // };
+
+    // this.addSection(content, {
+    //   modifiers: {
+    //     B1: this.bindNext(colors.sides),
+    //     B2: this.bindNext(colors.sides),
+    //     base: click(coll.pulseB, [coll, null], colors.sides),
+    //   },
+    //   show: [
+    //     fig2._tri, fig2._hSplit, fig2._vSplit,
+    //     fig2._topTri,
+    //     fig2._labelM, fig2._labelB, fig2._labelN,
+    //     fig2._rightAngle, fig2._splitRightAngle,
+    //   ],
+    // });
+
+    // this.addSection(content, {
+    //   modifiers: {
+    //     base: click(coll.pulseB, [coll, null], colors.sides),
+    //     B1: click(coll.pulseB1, [coll, null], colors.sides),
+    //     B2: click(coll.pulseB2, [coll, null], colors.sides),
+    //   },
+    //   transitionFromPrev: (done) => {
+    //     coll.pulseB1(done);
+    //     coll.pulseB2(null);
+    //   },
+    //   show: [
+    //     fig2._tri, fig2._hSplit, fig2._vSplit,
+    //     fig2._topTri,
+    //     fig2._labelM, fig2._labelB, fig2._labelN,
+    //     fig2._rightAngle, fig2._splitRightAngle,
+    //     fig2._B1, fig2._B2,
+    //   ],
+    // });
+
+    content = {
+      setContent: 'Now consider just the left triangles with total height |H|.',
+    };
+
+    this.addSection(content, {
+      show: [
+        fig2._tri, fig2._hSplit, fig2._vSplit,
+        fig2._topTri,
+        fig2._labelM, fig2._labelB, fig2._labelN,
+        fig2._rightAngle, fig2._splitRightAngle,
+        fig2._B1, fig2._B2,
+      ],
+    });
+
+    this.addSection(content, {
+      show: [
+        fig2._greyTri, fig2._labelM, fig2._greyHSplit, fig2._B1,
+        fig2._leftTri, fig2._topLeftTri._line, fig2._labelH,
+      ],
+    });
+
+    content = {
+      setContent: 'We know from earlier that the top triangle\'s |sides| will all be reduced by the |same ratio|.',
+    };
+
+    this.addSection(content, {
+      modifiers: { sides: this.bindNext(colors.highlight) },
+      show: [
+        fig2._greyTri, fig2._labelM, fig2._greyHSplit, fig2._B1,
+        fig2._leftTri, fig2._topLeftTri._line, fig2._labelH,
+      ],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        sides: click(coll.pulseTopLeft, [coll, null], colors.highlight),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseTopLeft(done);
+      },
+      show: [
+        fig2._greyTri, fig2._labelM, fig2._greyHSplit, fig2._B1,
+        fig2._leftTri, fig2._topLeftTri, fig2._labelH,
+        fig2._rH,
+      ],
+    });
+
+    content = {
+      setContent: 'Similarly, for the right triangles, the |sides| will be reduced by the same ratio.',
+    };
+
+    this.addSection(content, {
+      modifiers: { sides: this.bindNext(colors.highlight) },
+      show: [
+        fig2._greyTri, fig2._labelM, fig2._greyHSplit, fig2._B1,
+        fig2._leftTri, fig2._topLeftTri, fig2._labelH,
+        fig2._rH,
+      ],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        sides: click(coll.pulseTopRight, [coll, null], colors.highlight),
+      },
+      transitionFromPrev: (done) => {
+        coll.pulseTopRight(done);
+      },
+      show: [
+        fig2._greyTri, fig2._labelN, fig2._greyHSplit, fig2._B2,
+        fig2._rightTri, fig2._topRightTri, fig2._labelH,
+        fig2._rH,
+      ],
+    });
+
+    content = {
+      setContent: 'Let\'s now consider the original triangles.',
+    };
+
+    this.addSection(content, {
+      show: [
+        fig2._greyTri, fig2._labelN, fig2._greyHSplit, fig2._B2,
+        fig2._rightTri, fig2._topRightTri, fig2._labelH,
+        fig2._rH,
+      ],
+    });
+
+    this.addSection(content, {
+      show: [
+        fig2._tri, fig2._labelN, fig2._labelM, fig2._labelB,
+        fig2._B1, fig2._B2,
+        fig2._topTri._line,
+        fig2._vSplit,
+        fig2._topRightTri._side12, fig2._topLeftTri._side01,
+        fig2._topRightTri._side20, fig2._topLeftTri._side20,
+      ],
+    });
+
+    content = {
+      setContent: 'Note that:',
+    };
+
+    this.addSection(content, {
+      show: [
+        fig2._tri, fig2._labelN, fig2._labelM, fig2._labelB,
+        fig2._B1, fig2._B2,
+        fig2._topTri._line,
+        fig2._vSplit,
+        fig2._topRightTri._side12, fig2._topLeftTri._side01,
+        fig2._topRightTri._side20, fig2._topLeftTri._side20,
+      ],
+      setSteadyState: () => {
+        coll._BEqn.showForm('0');
+        coll._BEqn.setScenario('top');
+      },
     });
 
     // this.addSectionEqnStory([
