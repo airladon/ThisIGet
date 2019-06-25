@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
 
     this.addSection({
+      title: 'Right Angle Triangle Split',
       setContent: centerV([
         'We will examine what happens when we |split a triangle with a line parallel to one of its sides|.',
         'To do this, we start with the simple case of a right angle triangle, and extend the result.',
@@ -397,6 +398,13 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: centerV([
         'If a right angle triangle is |split with a line parallel to one of its perpendicular sides|, then the new split triangle\'s sides are all in |equal proportion| to their corresponding sides of the original triangle.',
+      ]),
+    });
+
+    this.addSection({
+      title: 'Arbitrary Triangle Split',
+      setContent: centerV([
+        'We now can apply this learning to |any triangle|.',
       ]),
     });
 
