@@ -36,6 +36,8 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/RelatedAngles/base',
+      'Math/Geometry_1/AreaTriangle/base',
+      'Math/Geometry_1/RightAngleTriangles/base',
     ]);
   }
 
@@ -78,9 +80,9 @@ class Content extends PresentationLessonContent {
 
     this.addSection(centerFig, common, {
       modifiers: {
-        draw_a_line: click(coll.pulseSplit, [coll, null], colors.sides),
+        draw_a_line: click(coll.drawSplit, [coll, null], colors.sides),
       },
-      transitionFromPrev: (done) => { coll.pulseSplit(done); },
+      transitionFromPrev: (done) => { coll.drawSplit(done); },
       show: [fig._tri, fig._rightAngle, fig._split],
     });
 
@@ -232,8 +234,11 @@ class Content extends PresentationLessonContent {
     });
 
     content = {
-      setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles.',
+      setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles:',
     };
+    this.addSection(common, content, {
+      setSteadyState: () => { fig.setScenario('left') },
+    });
     this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
     // this.addSectionEqnStory([
     //   { nav: coll._0, form: '0' },
@@ -247,19 +252,43 @@ class Content extends PresentationLessonContent {
     //     nav: coll._1, form: '1', toForm: '1a',
     //   },
     // ], common, content);
+
+    content = {
+      setContent: 'The |areas| can be calculated from the base and heights of each triangle:',
+      modifiers: {
+        areas: this.qr('Math/Geometry_1/AreaTriangle/base/Main'),
+      },
+    };
+    this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
-      {
-        nav: coll._1, form: '1a',
-      },
+      { nav: coll._1, form: '1a' },
     ], common, content);
 
+    content = {
+      setContent: 'This can be simplified down to a more simple expression:',
+    };
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+    ], common, content);
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
       { nav: coll._2, form: '2m' },
     ], common, content);
 
+    content = {
+      setContent: 'We will call this ratio |r| and then determine |n| from the same procedure:',
+      modifiers: {
+        n: highlight(colors.highlight),
+      },
+    };
+    this.addSectionEqnStory([
+      { nav: coll._0, form: '0' },
+      { nav: coll._1, form: '1a' },
+      { nav: coll._2, form: '2m' },
+    ], common, content);
     this.addSectionEqnStory([
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
@@ -313,16 +342,45 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    content = {
+      setContent: 'Using the |Pythagorean_theorem|, we know the relationship between |m|, |n| and |b|:',
+      modifiers: {
+        m: highlight(colors.highlight),
+        n: highlight(colors.highlight),
+        b: highlight(colors.highlight),
+        Pythagorean_theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
+      },
+    };
+    this.addSectionEqnStory([
+      { nav: coll._4, form: '4' },
+    ], common, content);
     this.addSectionEqnStory([
       { nav: coll._4, form: '4' },
       { nav: coll._5, form: '5' },
     ], common, content);
 
+    content = {
+      setContent: 'Substitute in our |initial_knowledge| and rearrange for |r|:',
+      modifiers: {
+        initial_knowledge: click(coll.pulseEqn4, [coll], colors.highlight),
+      },
+    };
+    this.addSectionEqnStory([
+      { nav: coll._4, form: '4' },
+      { nav: coll._5, form: '5' },
+    ], common, content);
     this.addSectionEqnStory([
       { nav: coll._4, form: '4' },
       { nav: coll._5, form: '5' },
       { nav: coll._6, form: '6c' },
     ], common, content);
+
+    content = {
+      setContent: 'We can substitute in the |Pythagorean| equivalent of |M| and then simplify:',
+      modifiers: {
+        Pythagorean_theorem: this.qr('Math/Geometry_1/RightAngleTriangles/base/PythagorusPres'),
+      },
+    };
 
     this.addSectionEqnStory([
       { nav: coll._4, form: '4' },
@@ -404,11 +462,9 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Arbitrary Triangle Split',
+      title: 'Any Triangle',
       setContent: centerV([
-        'We now can apply this learning to |any triangle|.',
-        '|Any triangle| can be split into a sum or difference of |right angle triangles|.',
-        'We can then apply our learnings on each right angle triangle.',
+        'We now can apply this learning to |any triangle| as |any triangle| can be split into a sum or difference of |right angle triangles|.',
       ]),
     });
 

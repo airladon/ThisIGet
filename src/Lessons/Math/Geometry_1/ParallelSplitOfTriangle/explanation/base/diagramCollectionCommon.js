@@ -78,8 +78,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     // this.hasTouchableElements = true;
   }
 
-  pulseSplit(done: ?() => void = null) {
-    this._fig._split.pulseWidth({ done });
+  // pulseSplit(done: ?() => void = null) {
+  //   this._fig._split.pulseWidth({ done });
+  //   this.diagram.animateNextFrame();
+  // }
+
+  drawSplit(done: ?() => void = null) {
+    this._fig._split.grow(0, 1.5, true, done);
     this.diagram.animateNextFrame();
   }
 
@@ -168,6 +173,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig2._topRightTri._side12._label.pulseScaleNow(1, 2);
     this._fig2._topRightTri._side20._label.pulseScaleNow(1, 2, 0, done);
     this._fig2._rH.pulseScaleNow(1, 2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseEqn4() {
+    this._4Eqn.pulseScaleNow(1, 1.3);
     this.diagram.animateNextFrame();
   }
 }
