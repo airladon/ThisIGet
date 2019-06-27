@@ -223,16 +223,16 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
 
-  // const line = (name, p1, p2, color = colors.sides) => ({
-  //   name,
-  //   method: 'line',
-  //   options: {
-  //     p1,
-  //     p2,
-  //     width: 0.02,
-  //     color,
-  //   },
-  // });
+  const line = (name, p1, p2, color = colors.sides) => ({
+    name,
+    method: 'line',
+    options: {
+      p1,
+      p2,
+      width: 0.02,
+      color,
+    },
+  });
 
   // const triangle = (name, p1, p2, p3, color = colors.highlight) => ({
   //   name,
@@ -245,51 +245,49 @@ export default function lessonLayout() {
   //   },
   // });
 
-  // const parallelSplitLine = {
-  //   name: 'split',
-  //   method: 'line',
-  //   options: {
-  //     dashStyle: {
-  //       style: [0.03, 0.02],
-  //     },
-  //     width: 0.01,
-  //     color: colors.sides,
-  //     p1: [-2, -0.3],
-  //     p2: [2, -0.3],
-  //   },
-  // };
+  const parallelSplitLine = {
+    name: 'split',
+    method: 'line',
+    options: {
+      dashStyle: {
+        style: [0.03, 0.02],
+      },
+      width: 0.01,
+      color: colors.highlight,
+      p1: [-2, -0.3],
+      p2: [2, -0.3],
+    },
+  };
 
   
 
-  // const t1 = [[-1.4, 1], [-1.4, -1], [-1.8, -1]];
-  // const t2 = [[0.5, 1], [0.5, -1], [-1, -1]];
-  // const t3 = [[1.7, -1], [1.2, -1], [1.2, 1]];
-  // const fig3 = {
-  //   name: 'fig3',
-  //   method: 'collection',
-  //   addElements: [
-  //     parallelSplitLine,
-  //     arrow('topArrow', [0.9, -1]),
-  //     arrow('bottomArrow', [0.9, 1]),
-  //     line('topLine', [-2, 1], [2, 1]),
-  //     line('bottomLine', [-2, -1], [2, -1]),
-  //     line('line1', t1[2], t1[0]),
-  //     line('line2', t2[2], t2[0]),
-  //     line('line3', t3[0], t3[2]),
-  //     line('height1', t1[0], t1[1], colors.highlight),
-  //     line('height2', t2[0], t2[1], colors.highlight),
-  //     line('height3', t3[1], t3[2], colors.highlight),
-  //     triangle('tri1', t1[0], t1[1], t1[2]),
-  //     triangle('tri2', t2[0], t2[1], t2[2]),
-  //     triangle('tri3', t3[0], t3[1], t3[2]),
-  //     rightAngle('right1', t1[0], t1[1], t1[2], colors.highlight),
-  //     rightAngle('right2', t2[0], t2[1], t2[2], colors.highlight),
-  //     rightAngle('right3', t3[0], t3[1], t3[2], colors.highlight),
-  //   ],
-  //   options: {
-  //     position: [0, -0.2],
-  //   },
-  // };
+  const t1 = new Line(new Point(-1.8, -1), new Point(-1.4, 1));
+  const t2 = new Line(new Point(-1, -1), new Point(0.5, 1));
+  const t3 = new Line(new Point(1.7, -1), new Point(1.2, 1));
+  const fig2 = {
+    name: 'fig2',
+    method: 'collection',
+    addElements: [
+      parallelSplitLine,
+      arrow('topArrow', [0.9, -1]),
+      arrow('bottomArrow', [0.9, 1]),
+      arrow('splitArrow', [0.9, -0.3], colors.highlight),
+      line('topLine', [-2, 1], [2, 1]),
+      line('bottomLine', [-2, -1], [2, -1]),
+      line('line1', t1.p1, t1.p2),
+      line('line2', t2.p1, t2.p2),
+      line('line3', t3.p1, t3.p2),
+      label('b', t1.pointAtPercent(0.37), t1.p2, -0.1, colors.highlight),
+      label('n', t2.pointAtPercent(0.4), t2.pointAtPercent(1.01), -0.1, colors.highlight),
+      label('m', t3.pointAtPercent(0.35), t3.pointAtPercent(0.98), -0.1, colors.highlight),
+      label1('B', t1.p1, t1.p2, 0.15),
+      label1('N', t2.p1, t2.p2, 0.15),
+      label1('M', t3.p1, t3.p2, 0.15),
+    ],
+    options: {
+      position: [0, -0.6],
+    },
+  };
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
@@ -331,6 +329,7 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [1.2, -0.2], scale: 1 },
+        top: { position: [-0.6, 0.8], scale: 1 },
       },
     },
   };
@@ -962,6 +961,7 @@ export default function lessonLayout() {
     // nav('6', -0.8, false, '6'),
     // nav('7', -1.6, false, '7'),
     fig,
+    fig2,
     eqn,
     // eqnFig2('fig2Eqn'),
     // fig3,

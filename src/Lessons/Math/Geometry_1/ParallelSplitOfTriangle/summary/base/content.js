@@ -38,6 +38,7 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const fig = coll._fig;
+    const fig2 = coll._fig2;
 
     this.addSection({
       title: 'Triangle Split',
@@ -54,16 +55,32 @@ class Content extends PresentationLessonContent {
       // setEnterState: () => {
       //   coll.setScenarios('default');
       // },
-      show: [
-        fig._tri, fig._labelN, fig._labelM, fig._labelB,
-        // fig._topTri,
-        fig._labelm, fig._labeln, fig._labelb,
-        fig._split,
-        fig._topArrow, fig._bottomArrow,
-        // coll._eqn,
-      ],
+      show: [fig],
       setSteadyState: () => {
         coll.setScenarios('default');
+        coll._eqn.showForm('0');
+      }
+    });
+
+    this.addSection({
+      title: 'Parallel Split',
+      setContent: style({ }, [
+        'Any |lines| between |parallel_lines| will be split in |equal_proportion| by a |third_parallel_line|.',
+      ]),
+      modifiers: {
+        lines: click(coll.pulseLines, [coll], colors.sides),
+        parallel_lines: click(coll.pulseFig2ParallelLines, [coll], colors.sides),
+        third_parallel_line: click(coll.pulseFig2Split, [coll], colors.highlight),
+        // smaller_triangle: click(coll.pulseSmallerTriangle, [coll], colors.highlight),
+        equal_proportion: click(coll.pulseEqn, [coll], colors.sides),
+        // original_triangle: click(coll.pulseTriangle, [coll], colors.sides),
+      },
+      // setEnterState: () => {
+      //   coll.setScenarios('default');
+      // },
+      show: [fig2],
+      setSteadyState: () => {
+        coll._eqn.setScenario('top');
         coll._eqn.showForm('0');
       }
     });

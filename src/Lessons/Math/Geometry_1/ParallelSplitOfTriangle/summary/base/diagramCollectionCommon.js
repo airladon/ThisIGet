@@ -83,4 +83,22 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._eqn.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();
   }
+
+  pulseLines() {
+    this._fig2._line1.pulseWidth({ line: 6 });
+    this._fig2._line2.pulseWidth({ line: 6 });
+    this._fig2._line3.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseFig2ParallelLines() {
+    this._fig2._topLine.pulseWidth({ line: 6 });
+    this._fig2._bottomLine.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
+
+  pulseFig2Split() {
+    this._fig2._split.pulseWidth({ line: 6 });
+    this.diagram.animateNextFrame();
+  }
 }
