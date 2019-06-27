@@ -43,7 +43,7 @@ export default function lessonLayout() {
   });
 
   const w = 0.05;
-  const arrow = (name, p) => ({
+  const arrow = (name, p, color = colors.sides) => ({
     name,
     method: 'collection',
     addElements: [
@@ -51,14 +51,14 @@ export default function lessonLayout() {
         name: '1',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color: colors.sides,
+          p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color,
         },
       },
       {
         name: '2',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color: colors.sides,
+          p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color,
         },
       },
     ],
@@ -86,6 +86,24 @@ export default function lessonLayout() {
         style: [(new Line(p1, p2)).distance / 2 - 0.05 - 0.2, 0.4],
       },
       width: 0.005,
+    },
+  });
+
+  const label1 = (text, p1, p2, offset = 0.4, color = colors.sides) => ({
+    name: `label${text}`,
+    method: 'line',
+    options: {
+      p1,
+      p2,
+      offset,
+      label: {
+        text,
+        // offset: 0.05,
+        location: 'outside',
+        color: color,
+      },
+      color: colors.grey,
+      showLine: false,
     },
   });
 
@@ -178,21 +196,21 @@ export default function lessonLayout() {
       split,
       topTri,
       // arrow('topArrow', [splitPoints[1][0] - 0.5, splitPoints[1][1]]),
-      arrow('topArrow', [splitPoints[1].x - 0.5, splitPoints[1].y]),
+      arrow('topArrow', [splitPoints[1].x - 0.5, splitPoints[1].y], colors.highlight),
       arrow('bottomArrow', [splitPoints[1].x - 0.5, points[2].y]),
       label('M', points[0], points[1]),
       label('N', points[1], points[2]),
-      label('B', points[2], points[0], 0.25),
+      label1('B', points[2], points[0], 0.25),
       label('m', splitPoints[0], points[1], 0.1, colors.highlight),
       label('n', points[1], splitPoints[1], 0.1, colors.highlight),
-      label('b', splitPoints[1], splitPoints[0], 0.1, colors.highlight),
+      label1('b', splitPoints[1], splitPoints[0], 0.1, colors.highlight),
     ],
     // options: {
     //   position: [0, -0.2],
     // },
     mods: {
       scenarios: {
-        default: { position: [-1.2 + 0.7, -0.3] },
+        default: { position: [-1.2 + 0.7, -0.4] },
       },
     },
   };

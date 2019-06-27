@@ -9,23 +9,28 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
-  // Equation,
+  Equation,
   Transform,
 } = Fig;
+
+type TypeLabeledLine = {
+  _label: DiagramElementPrimative;
+} & DiagramObjectLine;
 
 export default class CommonCollection extends CommonDiagramCollection {
   _fig: {
     _tri: DiagramObjectPolyLine;
     _topTri: DiagramObjectPolyLine;
     _split: DiagramObjectLine;
-    _labelM: DiagramObjectLine;
-    _labelN: DiagramObjectLine;
-    _labelB: DiagramObjectLine;
-    _labelm: DiagramObjectLine;
-    _labeln: DiagramObjectLine;
-    _labelb: DiagramObjectLine;
+    _labelM: TypeLabeledLine;
+    _labelN: TypeLabeledLine;
+    _labelB: TypeLabeledLine;
+    _labelm: TypeLabeledLine;
+    _labeln: TypeLabeledLine;
+    _labelb: TypeLabeledLine;
   } & DiagramElementCollection;
 
+  _eqn: Equation;
   // _fig3: {
   //   _topLine: DiagramObjectLine;
   //   _bottomLine: DiagramObjectLine;
