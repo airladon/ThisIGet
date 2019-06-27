@@ -52,9 +52,6 @@ class Content extends PresentationLessonContent {
         same_proportion: click(coll.pulseEqn, [coll], colors.sides),
         original_triangle: click(coll.pulseTriangle, [coll], colors.sides),
       },
-      // setEnterState: () => {
-      //   coll.setScenarios('default');
-      // },
       show: [fig],
       setSteadyState: () => {
         coll.setScenarios('default');
@@ -71,13 +68,8 @@ class Content extends PresentationLessonContent {
         lines: click(coll.pulseLines, [coll], colors.sides),
         parallel_lines: click(coll.pulseFig2ParallelLines, [coll], colors.sides),
         third_parallel_line: click(coll.pulseFig2Split, [coll], colors.highlight),
-        // smaller_triangle: click(coll.pulseSmallerTriangle, [coll], colors.highlight),
         equal_proportion: click(coll.pulseEqn, [coll], colors.sides),
-        // original_triangle: click(coll.pulseTriangle, [coll], colors.sides),
       },
-      // setEnterState: () => {
-      //   coll.setScenarios('default');
-      // },
       show: [fig2],
       setSteadyState: () => {
         coll._eqn.setScenario('top');
