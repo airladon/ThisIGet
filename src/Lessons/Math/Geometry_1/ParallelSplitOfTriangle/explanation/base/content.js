@@ -278,7 +278,7 @@ class Content extends PresentationLessonContent {
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
       { nav: coll._2, form: '2m' },
-    ], common, content, { setSteadyState: () => { console.log(coll) }});
+    ], common, content);
 
     content = {
       setContent: 'We will call this ratio |r| and then determine |n| from the same procedure:',

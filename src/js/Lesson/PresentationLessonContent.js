@@ -447,7 +447,7 @@ class Section {
       });
     } else {
       // Get all action words
-      const elements = document.getElementsByClassName('interactive_word');
+      let elements = document.getElementsByClassName('interactive_word');
       for (let i = 0; i < elements.length; i += 1) {
         const element = elements[i];
         if (element.id != null) {
@@ -463,6 +463,28 @@ class Section {
         }
       }
 
+      elements = document.getElementsByClassName('interactive_top_right');
+      for (let i = 0; i < elements.length; i += 1) {
+        const element = elements[i];
+        const style = window.getComputedStyle(element)
+        // const style = {visibility: '', display: ''}
+        if (style.visibility !== 'hidden'
+          && style.display !== 'none'
+        ) {
+          if (element.id != null && element.id !== '') {
+            this.interactiveElementList.push({
+              element: element.id,
+              location: 'topRightText',
+            });
+          } else {
+            this.interactiveElementList.push({
+              element,
+              location: 'topRightText',
+            });
+          }
+        }
+      }
+
       // Get all movable diagram elements
       const diagramElements = this.diagram.elements.getAllPossiblyInteractiveElements();
       // console.log(this.diagram.elements)
@@ -474,6 +496,8 @@ class Section {
         });
       });
     }
+
+    console.log(this.interactiveElementList)
 
     // Overwrite or add single elements
     if ('interactiveElements' in this) {

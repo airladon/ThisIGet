@@ -13095,6 +13095,7 @@ nav) {
         if (next) {
           next.classList.remove('lesson__eqn_nav__next_form');
           next.classList.remove('lesson__eqn_nav__reset');
+          next.classList.remove('interactive_top_right');
         }
       }
     }
@@ -13255,7 +13256,8 @@ function makeTypeOneButton(nextMethod) // options: TypeNavTypeOptions,  // can b
   currentGroup.classList.add('lesson__eqn_nav__1button__currentRow');
   next.classList.add('lesson__eqn_nav__1button__button');
   description.classList.add('lesson__eqn_nav__1line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description'); // const defaultOptions = {
+  description.classList.add('lesson__eqn_nav__description');
+  next.classList.add('interactive_top_right'); // const defaultOptions = {
   //   icons: true,
   // };
   // const optionsToUse = joinObjects({}, defaultOptions, options);
@@ -16734,6 +16736,7 @@ function (_DrawingObject) {
       _this.element = element;
     }
 
+    _this.id = id;
     _this.location = location;
     _this.alignV = alignV;
     _this.alignH = alignH;
@@ -16866,10 +16869,14 @@ function (_DrawingObject) {
         this.element.style.position = 'absolute';
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
+        this.element.style.visibility = 'visible';
+        this.element.classList.remove('diagram__hidden');
       } else {
         this.element.style.position = 'absolute';
         this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px'; // this.element.style.visibility = 'hidden';
+        this.element.style.top = '-10000px';
+        this.element.classList.add('diagram__hidden');
+        this.element.style.visibility = 'hidden'; // this.element.style.visibility = 'hidden';
         // console.trace()
       }
     }
