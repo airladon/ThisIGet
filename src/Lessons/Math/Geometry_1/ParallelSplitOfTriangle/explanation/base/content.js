@@ -17,7 +17,7 @@ const {
   click,
   // clickW,
   highlight,
-  highlightWord,
+  // highlightWord,
   centerV,
 } = Fig.tools.html;
 
@@ -53,7 +53,7 @@ class Content extends PresentationLessonContent {
       title: 'Right Angle Triangle Split',
       setContent: centerV([
         'We will examine what happens when we |split a triangle with a line parallel to one of its sides|.',
-        'To do this, we start with the simple case of a right angle triangle, and extend the result.',
+        'To do this, we start with the simple case of a |right angle triangle|, and then extend the result.',
       ]),
     });
 
@@ -278,7 +278,7 @@ class Content extends PresentationLessonContent {
       { nav: coll._0, form: '0' },
       { nav: coll._1, form: '1a' },
       { nav: coll._2, form: '2m' },
-    ], common, content);
+    ], common, content, { setSteadyState: () => { console.log(coll) }});
 
     content = {
       setContent: 'We will call this ratio |r| and then determine |n| from the same procedure:',

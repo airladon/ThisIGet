@@ -13088,6 +13088,15 @@ nav) {
     } else {
       disableTouch(nav.next);
       disableTouch(nav.nextDescription);
+
+      if (nav.navType === '1Button') {
+        var next = nav.next;
+
+        if (next) {
+          next.classList.remove('lesson__eqn_nav__next_form');
+          next.classList.remove('lesson__eqn_nav__reset');
+        }
+      }
     }
 
     var nextIndex = index + 1;
@@ -13097,8 +13106,28 @@ nav) {
         // eslint-disable-next-line no-param-reassign
         nav.nextDescription.innerHTML = 'RESTART from begining';
       }
+
+      if (nav.navType === '1Button' && nav.eqn.eqn.currentFormSeries.length > 1) {
+        var _next = nav.next;
+
+        if (_next) {
+          _next.classList.add('lesson__eqn_nav__reset');
+
+          _next.classList.remove('lesson__eqn_nav__next_form');
+        }
+      }
     } else {
       updateDescription(nav.eqn, currentForm.subForm, nav.nextDescription, nextIndex, false, nextPrefix);
+
+      if (nav.navType === '1Button' && nav.eqn.eqn.currentFormSeries.length > 1) {
+        var _next2 = nav.next;
+
+        if (_next2) {
+          _next2.classList.add('lesson__eqn_nav__next_form');
+
+          _next2.classList.remove('lesson__eqn_nav__reset');
+        }
+      }
     }
 
     updateDescription(nav.eqn, currentForm.subForm, nav.description, index, true); // nav.eqn.updateDescription(currentForm);
@@ -13208,6 +13237,38 @@ function makeTypeDescriptionOnly(nextMethod) {
   return {
     table: table,
     currentGroup: currentGroup,
+    description: description
+  };
+} // Nav1Button
+
+
+function makeTypeOneButton(nextMethod) // options: TypeNavTypeOptions,  // can be: 'twoLines'
+{
+  var table = document.createElement('table');
+  var currentGroup = document.createElement('tr');
+  var next = document.createElement('td');
+  var description = document.createElement('td');
+  currentGroup.appendChild(next);
+  currentGroup.appendChild(description);
+  table.appendChild(currentGroup);
+  table.classList.add('lesson__eqn_nav__table');
+  currentGroup.classList.add('lesson__eqn_nav__1button__currentRow');
+  next.classList.add('lesson__eqn_nav__1button__button');
+  description.classList.add('lesson__eqn_nav__1line__currentRow__description');
+  description.classList.add('lesson__eqn_nav__description'); // const defaultOptions = {
+  //   icons: true,
+  // };
+  // const optionsToUse = joinObjects({}, defaultOptions, options);
+
+  next.onclick = nextMethod;
+  description.onclick = nextMethod; // if (optionsToUse.icons) {
+
+  next.classList.add('lesson__eqn_nav__next_form'); // }
+
+  return {
+    table: table,
+    currentGroup: currentGroup,
+    next: next,
     description: description
   };
 } // Nav1Line
@@ -13335,6 +13396,18 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   };
 }
 
+// A Navigator is a DiagramElementCollection that is a html table that has
+// the possible html elements of:
+//   next: a next form button
+//   prev: a prev form button
+//   refresh: a button that shows animation to current form again
+//   description: description of current form
+//   nextDescription: description of next form
+//   prevDescription: description of prev form
+//   nextGroup: a html parent that holds nextDescription and nextButton
+//   prevGroup: a html parent that holds prevDescription and prevButton
+//
+// Equation navigators 
 var EqnNavigator =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
@@ -13377,6 +13450,7 @@ function (_DiagramElementCollec) {
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
+    _this.options = optionsToUse;
 
     if (optionsToUse.equation != null) {
       // this.eqn = optionsToUse.equation;
@@ -13400,6 +13474,11 @@ function (_DiagramElementCollec) {
 
     if (_this.navType === '1Line') {
       navigatorHTMLElement = makeType1Line(_this.clickPrev.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickRefresh.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))), optionsToUse.navTypeOptions);
+    }
+
+    if (_this.navType === '1Button') {
+      navigatorHTMLElement = makeTypeOneButton(_this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))) // optionsToUse.navTypeOptions,
+      );
     }
 
     if (_this.navType === '2Line') {

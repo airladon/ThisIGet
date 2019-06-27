@@ -621,9 +621,9 @@ export default function lessonLayout() {
 
   const eqn = (name, y, defaultFormSeries) => ({
     name,
-    method: 'addNavigator',
+    method: 'addEquation',
     options: {
-      navType: 'description',
+      // navType: '1Button',
       color: colors.diagram.text.base,
       defaultFormAlignment: {
         fixTo: 'equals',
@@ -1087,6 +1087,7 @@ export default function lessonLayout() {
         },
       },
       formSeries: {
+        '0': ['0'],
         '1': ['0', '1', '1a'],
         '2': ['1a', '2', '2a', '2b', '2c', '2d', '2e', '2f', '2g', '2h', '2i', '2j', '2k', '2l', '2m'],
         '3': ['2m', '3', '3a', '3b', '3c', '3d', '3e', '3f'],
@@ -1120,7 +1121,10 @@ export default function lessonLayout() {
     name,
     method: 'addNavigator',
     options: {
-      navType: 'description',
+      navType: '1Button',
+      // navTypeOptions: {
+      //   useTwoLines: true,
+      // },
       equation: eqn(`${name}Eqn`, y, defaultFormSeries),
       interactive,
       alignV: 'middle',
@@ -1213,7 +1217,7 @@ export default function lessonLayout() {
 
   layout.addElements = [
     fig,
-    nav('0', 0.8, false),
+    nav('0', 0.8, false, '0'),
     nav('1', 0, false, '1'),
     nav('2', -0.8, false, '2'),
     nav('3', -1.6, false, '3'),
