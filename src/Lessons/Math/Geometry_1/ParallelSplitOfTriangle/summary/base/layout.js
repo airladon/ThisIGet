@@ -152,30 +152,30 @@ export default function lessonLayout() {
     },
   };
 
-  const topTri = {
-    name: 'topTri',
-    method: 'polyLine',
-    options: {
-      points: [
-        splitPoints[0],
-        points[1],
-        splitPoints[1],
-      ],
-      // side: [
-      //   side('m'),
-      //   side('n'),
-      //   side('b'),
-      // ],
-      color: colors.highlight,
-      close: true,
-      width: 0.02,
-    },
-    mods: {
-      scenarios: {
-        default: { scale: 0.98 },
-      }
-    }
-  };
+  // const topTri = {
+  //   name: 'topTri',
+  //   method: 'polyLine',
+  //   options: {
+  //     points: [
+  //       splitPoints[0],
+  //       points[1],
+  //       splitPoints[1],
+  //     ],
+  //     // side: [
+  //     //   side('m'),
+  //     //   side('n'),
+  //     //   side('b'),
+  //     // ],
+  //     color: colors.highlight,
+  //     close: true,
+  //     width: 0.02,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       default: { scale: 0.98 },
+  //     }
+  //   }
+  // };
 
   const simpleLabel = (name, text, p, color = colors.sides) => ({
     name,
@@ -194,7 +194,7 @@ export default function lessonLayout() {
     addElements: [
       aTri,
       split,
-      topTri,
+      // topTri,
       // arrow('topArrow', [splitPoints[1][0] - 0.5, splitPoints[1][1]]),
       arrow('topArrow', [splitPoints[1].x - 0.5, splitPoints[1].y], colors.highlight),
       arrow('bottomArrow', [splitPoints[1].x - 0.5, points[2].y]),
