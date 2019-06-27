@@ -38,6 +38,7 @@ class Content extends PresentationLessonContent {
       'Math/Geometry_1/RelatedAngles/base',
       'Math/Geometry_1/AreaTriangle/base',
       'Math/Geometry_1/RightAngleTriangles/base',
+      'Math/Geometry_1/ParallelLineDistance/base',
     ]);
   }
 
@@ -46,6 +47,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const fig = coll._fig;
     const fig2 = coll._fig2;
+    const fig3 = coll._fig3;
 
     this.addSection({
       title: 'Right Angle Triangle Split',
@@ -748,78 +750,148 @@ class Content extends PresentationLessonContent {
         'So we have seen if |any| triangle is |split with a line parallel to one of its  sides|, then the new split triangle\'s sides are all in |equal proportion| to their corresponding sides of the original triangle.',
       ]),
     });
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   {
-    //     nav: coll._2, form: '1a', toForm: '2', moveFrom: coll._1Eqn,
-    //   },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2', toForm: '2a' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2a', toForm: '2b' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2b', toForm: '2c' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2c', toForm: '2d' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2d', toForm: '2e' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2e', toForm: '2f' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2f', toForm: '2g' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2g', toForm: '2h' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2h', toForm: '2i' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2i', toForm: '2j' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2j', toForm: '2k' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2k', toForm: '2l' },
-    // ], common, content);
-    // this.addSectionEqnStory([
-    //   { nav: coll._0, form: '0' },
-    //   { nav: coll._1, form: '1a' },
-    //   { nav: coll._2, form: '2l', toForm: '2m' },
-    // ], common, content);
+
+    this.addSection({
+      title: 'Lines between Parallel Lines',
+      setContent: centerV([
+        'The right angle triangle can also be extended to the case of |split lines between parallel lines|.',
+      ]),
+    });
+
+    content = {
+      setContent: 'Start with two |parallel_lines| and then |draw_lines| between them.',
+    };
+
+    this.addSection(content, {
+      modifiers: {
+        parallel_lines: click(coll.pulseParallel, [coll], colors.sides),
+        draw_lines: this.bindNext(colors.sides),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+      ],
+    });
+
+    this.addSection(content, {
+      modifiers: {
+        parallel_lines: click(coll.pulseParallel, [coll], colors.sides),
+        draw_lines: click(coll.drawLines, [coll, null], colors.sides),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3,
+      ],
+      transitionFromPrev: (done) => {
+        coll.drawLines(done);
+      },
+    });
+
+    content = {
+      setContent: 'Now, a |third_parallel_line| splits all the lines.',
+    };
+    this.addSection(content, {
+      modifiers: {
+        third_parallel_line: this.bindNext(colors.sides),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3,
+      ],
+    });
+    this.addSection(content, {
+      modifiers: {
+        third_parallel_line: click(coll.drawParallelSplit, [coll, null], colors.sides),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+      ],
+      transitionFromPrev: (done) => {
+        coll.drawParallelSplit(done);
+      },
+    });
+
+    content = {
+      setContent: 'Are all the lines, split in the |same proportion|?',
+    };
+
+    this.addSection(content, {
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+      ],
+    });
+
+    content = {
+      setContent: 'Each of these lines can be the |hypotenuse| of a |right_angle_triangle|.',
+    };
+
+    this.addSection(content, {
+      modifiers: {
+        right_angle_triangle: this.bindNext(colors.highlight),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+      ],
+    });
+    this.addSection(content, {
+      modifiers: {
+        right_angle_triangle: click(
+          coll.pulseParallelTris,
+          [coll, null],
+          colors.highlight,
+        ),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+        fig3._tri1, fig3._tri2, fig3._tri3,
+        fig3._right1, fig3._right2, fig3._right3,
+      ],
+      transitionFromPrev: (done) => {
+        coll.pulseParallelTris(done);
+      },
+    });
+
+    content = {
+      setContent: 'The |parallel_line_distance| is the |height| of the triangles.',
+    };
+    this.addSection(content, {
+      modifiers: {
+        parallel_line_distance: this.qr('Math/Geometry_1/ParallelLineDistance/base/Main'),
+        height: click(coll.pulseHeights, [coll], colors.highlight),
+      },
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+        fig3._tri1, fig3._tri2, fig3._tri3,
+        fig3._right1, fig3._right2, fig3._right3,
+        fig3._height1, fig3._height2, fig3._height3,
+      ],
+    });
+
+    content = {
+      setContent: style({ top: 0 }, 'As all the |heights| are split in the same proportion, then all the right angle triangles are also split in the |same propotion|.'),
+      modifiers: {
+        heights: click(coll.pulseHeights, [coll], colors.highlight),
+      },
+    };
+    this.addSection(content, {
+      show: [
+        fig3._topLine, fig3._bottomLine, fig3._topArrow, fig3._bottomArrow,
+        fig3._line1, fig3._line2, fig3._line3, fig3._split,
+        fig3._tri1, fig3._tri2, fig3._tri3,
+        fig3._right1, fig3._right2, fig3._right3,
+        fig3._height1, fig3._height2, fig3._height3,
+      ],
+    });
+
+    this.addSection({
+      setContent: centerV([
+        'So, |all lines between parallel lines will be split with the same proportion| if a third parallel line is introduced between the initial parallel lines.',
+      ]),
+    });
   }
 }
 

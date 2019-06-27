@@ -61,6 +61,23 @@ export default class CommonCollection extends CommonDiagramCollection {
     } & DiagramObjectPolyLine;
   } & DiagramElementCollection;
 
+  _fig3: {
+    _topLine: DiagramObjectLine;
+    _bottomLine: DiagramObjectLine;
+    _line1: DiagramObjectLine;
+    _line2: DiagramObjectLine;
+    _line3: DiagramObjectLine;
+    _split: DiagramObjectLine;
+    _tri1: DiagramObjectPolyLine;
+    _tri2: DiagramObjectPolyLine;
+    _tri3: DiagramObjectPolyLine;
+    _right1: DiagramObjectAngle;
+    _right2: DiagramObjectAngle;
+    _right3: DiagramObjectAngle;
+    _height1: DiagramObjectLine;
+    _height2: DiagramObjectLine;
+    _height3: DiagramObjectLine;
+  } & DiagramElementCollection
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -178,6 +195,41 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   pulseEqn4() {
     this._4Eqn.pulseScaleNow(1, 1.3);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseParallel() {
+    this._fig3._topLine.pulseWidth();
+    this._fig3._bottomLine.pulseWidth();
+    this.diagram.animateNextFrame();
+  }
+
+  drawLines(done: ?() => void = null) {
+    this._fig3._line1.grow(0, 1.5, true, done);
+    this._fig3._line2.grow(0, 1.5);
+    this._fig3._line3.grow(0, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  drawParallelSplit(done: ?() => void = null) {
+    this._fig3._split.grow(0.05, 1.5, true, done);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseParallelTris(done: ?() => void = null) {
+    this._fig3._tri1.pulseScaleNow(1, 1.1, 0, done);
+    this._fig3._tri2.pulseScaleNow(1, 1.1);
+    this._fig3._tri3.pulseScaleNow(1, 1.1);
+    // this._fig3._right1.pulseScaleNow(1, 1.1);
+    // this._fig3._right2.pulseScaleNow(1, 1.1);
+    // this._fig3._right3.pulseScaleNow(1, 1.1);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseHeights() {
+    this._fig3._height1.pulseWidth();
+    this._fig3._height2.pulseWidth();
+    this._fig3._height3.pulseWidth();
     this.diagram.animateNextFrame();
   }
 }

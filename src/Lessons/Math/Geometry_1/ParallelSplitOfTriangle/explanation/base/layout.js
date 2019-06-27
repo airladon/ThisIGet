@@ -401,6 +401,101 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
+
+  const line = (name, p1, p2, color = colors.sides) => ({
+    name,
+    method: 'line',
+    options: {
+      p1,
+      p2,
+      width: 0.02,
+      color,
+    },
+  });
+
+  const triangle = (name, p1, p2, p3, color = colors.highlight) => ({
+    name,
+    method: 'polyLine',
+    options: {
+      points: [p1, p2, p3],
+      close: true,
+      width: 0.02,
+      color,
+    },
+  });
+
+  const parallelSplitLine = {
+    name: 'split',
+    method: 'line',
+    options: {
+      dashStyle: {
+        style: [0.03, 0.02],
+      },
+      width: 0.01,
+      color: colors.sides,
+      p1: [-2, -0.3],
+      p2: [2, -0.3],
+    },
+  };
+
+  const w = 0.05;
+  const arrow = (name, p) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      {
+        name: '1',
+        method: 'line',
+        options: {
+          p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color: colors.sides,
+        },
+      },
+      {
+        name: '2',
+        method: 'line',
+        options: {
+          p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color: colors.sides,
+        },
+      },
+    ],
+  });
+
+  const t1 = [[-1.4, 1], [-1.4, -1], [-1.8, -1]];
+  const t2 = [[0.5, 1], [0.5, -1], [-1, -1]];
+  const t3 = [[1.7, -1], [1.2, -1], [1.2, 1]];
+  const fig3 = {
+    name: 'fig3',
+    method: 'collection',
+    addElements: [
+      parallelSplitLine,
+      arrow('topArrow', [0.9, -1]),
+      arrow('bottomArrow', [0.9, 1]),
+      line('topLine', [-2, 1], [2, 1]),
+      line('bottomLine', [-2, -1], [2, -1]),
+      line('line1', t1[2], t1[0]),
+      line('line2', t2[2], t2[0]),
+      line('line3', t3[0], t3[2]),
+      line('height1', t1[0], t1[1], colors.highlight),
+      line('height2', t2[0], t2[1], colors.highlight),
+      line('height3', t3[1], t3[2], colors.highlight),
+      triangle('tri1', t1[0], t1[1], t1[2]),
+      triangle('tri2', t2[0], t2[1], t2[2]),
+      triangle('tri3', t3[0], t3[1], t3[2]),
+      rightAngle('right1', t1[0], t1[1], t1[2], colors.highlight),
+      rightAngle('right2', t2[0], t2[1], t2[2], colors.highlight),
+      rightAngle('right3', t3[0], t3[1], t3[2], colors.highlight),
+    ],
+    options: {
+      position: [0, -0.2],
+    },
+  };
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
+  // ////////////////////////////////////////////////////////////
   const elements = {
     Area0: { text: 'Area', color: colors.sides },
     Area1: { text: 'Area', color: colors.sides },
@@ -1128,6 +1223,7 @@ export default function lessonLayout() {
     nav('7', -1.6, false, '7'),
     fig2,
     eqnFig2('fig2Eqn'),
+    fig3,
   ];
   return layout;
 }
