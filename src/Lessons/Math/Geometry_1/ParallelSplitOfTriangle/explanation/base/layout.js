@@ -392,6 +392,11 @@ export default function lessonLayout() {
     options: {
       position: [0, -0.2],
     },
+    mods: {
+      scenarios: {
+        left: { position: [-1.2, -0.3] },
+      },
+    },
   };
 
   // ////////////////////////////////////////////////////////////

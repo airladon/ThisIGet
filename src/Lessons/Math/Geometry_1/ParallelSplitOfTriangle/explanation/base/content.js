@@ -359,7 +359,12 @@ class Content extends PresentationLessonContent {
     this.addSectionEqnStory([
       { nav: coll._4, form: '4' },
       { nav: coll._5, form: '5' },
-    ], common, content);
+    ], common, content, {
+      setEnterState: () => {
+        coll.setScenarios('default');
+        fig.setScenario('left');
+      },
+    });
 
     content = {
       setContent: 'Substitute in our |initial_knowledge| and rearrange for |r|:',
