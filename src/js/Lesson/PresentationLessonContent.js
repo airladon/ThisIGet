@@ -466,7 +466,7 @@ class Section {
       elements = document.getElementsByClassName('interactive_top_right');
       for (let i = 0; i < elements.length; i += 1) {
         const element = elements[i];
-        const style = window.getComputedStyle(element)
+        const style = window.getComputedStyle(element);
         // const style = {visibility: '', display: ''}
         if (style.visibility !== 'hidden'
           && style.display !== 'none'
@@ -496,8 +496,6 @@ class Section {
         });
       });
     }
-
-    console.log(this.interactiveElementList)
 
     // Overwrite or add single elements
     if ('interactiveElements' in this) {

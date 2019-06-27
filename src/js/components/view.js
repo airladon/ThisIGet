@@ -37,7 +37,7 @@ const withLoginManager = function loginManager(
       };
     }
 
-    componentDidMount() {
+    componentWillMount() {
       const handleVisibilityChange = () => {
         this.checkIsLoggedInFromCookie();
       };

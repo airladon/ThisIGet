@@ -13085,6 +13085,10 @@ nav) {
     if (nav.eqn.eqn.currentFormSeries.length > 1) {
       enableTouch(nav.next);
       enableTouch(nav.nextDescription);
+
+      if (nav.navType === '1Button') {
+        enableTouch(nav.description);
+      }
     } else {
       disableTouch(nav.next);
       disableTouch(nav.nextDescription);
