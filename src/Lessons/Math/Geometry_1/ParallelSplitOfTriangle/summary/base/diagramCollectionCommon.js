@@ -31,23 +31,20 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramElementCollection;
 
   _eqn: Equation;
-  // _fig3: {
-  //   _topLine: DiagramObjectLine;
-  //   _bottomLine: DiagramObjectLine;
-  //   _line1: DiagramObjectLine;
-  //   _line2: DiagramObjectLine;
-  //   _line3: DiagramObjectLine;
-  //   _split: DiagramObjectLine;
-  //   _tri1: DiagramObjectPolyLine;
-  //   _tri2: DiagramObjectPolyLine;
-  //   _tri3: DiagramObjectPolyLine;
-  //   _right1: DiagramObjectAngle;
-  //   _right2: DiagramObjectAngle;
-  //   _right3: DiagramObjectAngle;
-  //   _height1: DiagramObjectLine;
-  //   _height2: DiagramObjectLine;
-  //   _height3: DiagramObjectLine;
-  // } & DiagramElementCollection
+  _fig2: {
+    _topLine: DiagramObjectLine;
+    _bottomLine: DiagramObjectLine;
+    _line1: DiagramObjectLine;
+    _line2: DiagramObjectLine;
+    _line3: DiagramObjectLine;
+    _split: DiagramObjectLine;
+    _labelM: TypeLabeledLine;
+    _labelN: TypeLabeledLine;
+    _labelB: TypeLabeledLine;
+    _labelm: TypeLabeledLine;
+    _labeln: TypeLabeledLine;
+    _labelb: TypeLabeledLine;
+  } & DiagramElementCollection
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -58,8 +55,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.setPosition(this.layout.position);
     this.diagram.addElements(this, this.layout.addElements);
     this.hasTouchableElements = true;
-    // this._1Eqn.eqn.formRestart = { pulse: { element: this._0Eqn, duration: 1, scale: 1.1 } };
-    // this._2Eqn.eqn.formRestart = { pulse: { element: this._1Eqn, duration: 1, scale: 1.1 } };
   }
 
   pulseSplit() {
