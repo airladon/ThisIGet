@@ -40,14 +40,14 @@ export default function lessonLayout() {
         name: '1',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] - w], p2: p, width: 0.01, color,
+          p1: [p[0] - w, p[1] - w], p2: p, width: 0.02, color,
         },
       },
       {
         name: '2',
         method: 'line',
         options: {
-          p1: [p[0] - w, p[1] + w], p2: p, width: 0.01, color,
+          p1: [p[0] - w, p[1] + w], p2: p, width: 0.02, color,
         },
       },
     ],
@@ -64,6 +64,7 @@ export default function lessonLayout() {
         text,
         // offset: 0.05,
         location: 'outside',
+        scale: 1,
         color,
       },
       arrows: {
@@ -74,7 +75,7 @@ export default function lessonLayout() {
       dashStyle: {
         style: [(new Line(p1, p2)).distance / 2 - 0.05 - 0.2, 0.4],
       },
-      width: 0.005,
+      width: 0.008,
     },
   });
 
@@ -90,6 +91,7 @@ export default function lessonLayout() {
         // offset: 0.05,
         location: 'outside',
         color,
+        scale: 1,
       },
       color: colors.qrParallelSplitOfTriangleGrey,
       showLine: false,
@@ -158,14 +160,14 @@ export default function lessonLayout() {
     addElements: [
       aTri,
       split,
-      arrow('topArrow', [splitPoints[1].x - 0.5, splitPoints[1].y], colors.highlight),
+      arrow('topArrow', [splitPoints[1].x - 0.5, splitPoints[1].y], colors.qrParallelSplitOfTriangleHighlight),
       arrow('bottomArrow', [splitPoints[1].x - 0.5, points[2].y]),
       label('M', points[0], points[1]),
       label('N', points[1], points[2]),
       label1('B', points[2], points[0], 0.25),
-      label('m', splitPoints[0], points[1], 0.1, colors.highlight),
-      label('n', points[1], splitPoints[1], 0.1, colors.highlight),
-      label1('b', splitPoints[1], splitPoints[0], 0.1, colors.highlight),
+      label('m', splitPoints[0], points[1], 0.15, colors.qrParallelSplitOfTriangleHighlight),
+      label('n', points[1], splitPoints[1], 0.15, colors.qrParallelSplitOfTriangleHighlight),
+      label1('b', splitPoints[1], splitPoints[0], 0.15, colors.qrParallelSplitOfTriangleHighlight),
     ],
     mods: {
       scenarios: {
@@ -201,7 +203,7 @@ export default function lessonLayout() {
         style: [0.03, 0.02],
       },
       width: 0.01,
-      color: colors.highlight,
+      color: colors.qrParallelSplitOfTriangleHighlight,
       p1: [-2, -0.3],
       p2: [2, -0.3],
     },
@@ -217,18 +219,18 @@ export default function lessonLayout() {
       parallelSplitLine,
       arrow('topArrow', [0.9, -1]),
       arrow('bottomArrow', [0.9, 1]),
-      arrow('splitArrow', [0.9, -0.3], colors.highlight),
+      arrow('splitArrow', [0.9, -0.3], colors.qrParallelSplitOfTriangleHighlight),
       line('topLine', [-2, 1], [2, 1]),
       line('bottomLine', [-2, -1], [2, -1]),
       line('line1', t1.p1, t1.p2),
       line('line2', t2.p1, t2.p2),
       line('line3', t3.p1, t3.p2),
-      label('b', t1.pointAtPercent(0.37), t1.p2, -0.1, colors.highlight),
-      label('n', t2.pointAtPercent(0.4), t2.pointAtPercent(1.01), -0.1, colors.highlight),
-      label('m', t3.pointAtPercent(0.35), t3.pointAtPercent(0.98), -0.1, colors.highlight),
-      label1('B', t1.p1, t1.p2, 0.15),
-      label1('N', t2.p1, t2.p2, 0.15),
-      label1('M', t3.p1, t3.p2, 0.15),
+      label('b', t1.pointAtPercent(0.38), t1.p2, -0.2, colors.qrParallelSplitOfTriangleHighlight),
+      label('n', t2.pointAtPercent(0.43), t2.pointAtPercent(1.05), -0.2, colors.qrParallelSplitOfTriangleHighlight),
+      label('m', t3.pointAtPercent(0.36), t3.pointAtPercent(0.95), -0.2, colors.qrParallelSplitOfTriangleHighlight),
+      label1('B', t1.p1, t1.p2, 0.2),
+      label1('N', t2.p1, t2.p2, 0.2),
+      label1('M', t3.p1, t3.p2, 0.2),
     ],
     options: {
       position: [0, -0.6],
@@ -242,9 +244,9 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
   const elements = {
-    b: { text: 'b', color: colors.highlight },
-    m: { text: 'm', color: colors.highlight },
-    n: { text: 'n', color: colors.highlight },
+    b: { text: 'b', color: colors.qrParallelSplitOfTriangleHighlight },
+    m: { text: 'm', color: colors.qrParallelSplitOfTriangleHighlight },
+    n: { text: 'n', color: colors.qrParallelSplitOfTriangleHighlight },
     B: { text: 'B', color: colors.qrParallelSplitOfTriangleSides },
     M: { text: 'M', color: colors.qrParallelSplitOfTriangleSides },
     N: { text: 'N', color: colors.qrParallelSplitOfTriangleSides },
@@ -261,7 +263,7 @@ export default function lessonLayout() {
     options: {
       elements,
       color: colors.diagram.text.base,
-      scale: 0.9,
+      scale: 1.2,
       forms: {
         '0': [
           { frac: ['b', 'B', 'v0'] },
@@ -274,8 +276,8 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        default: { position: [1.2, -0.2], scale: 1 },
-        top: { position: [-0.6, 0.8], scale: 1 },
+        default: { position: [1.5, -0.2], scale: 1 },
+        top: { position: [-0.6, -2.2], scale: 1 },
       },
     },
   };
