@@ -3,8 +3,8 @@ import Fig from 'figureone';
 import {
   SinglePageLessonContent, makeFig,
 } from '../../../../../../js/Lesson/SinglePageLessonContent';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile.png';
+// import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import lessonLayout from './layout';
 import Collection from './collection';
@@ -28,8 +28,8 @@ const { colors } = layout;
 class Content extends SinglePageLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {

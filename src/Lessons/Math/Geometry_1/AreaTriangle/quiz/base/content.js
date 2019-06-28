@@ -5,8 +5,8 @@ import {
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import lessonLayout from './layout';
-import imgLink from '../../tile.png';
-import imgLinkGrey from '../../tile-grey.png';
+// import imgLink from '../../tile.png';
+// import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
@@ -24,8 +24,8 @@ const layout = lessonLayout();
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-    this.iconLink = imgLink;
-    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {

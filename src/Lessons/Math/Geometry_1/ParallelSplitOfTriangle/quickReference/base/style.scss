@@ -1,0 +1,11 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrParallelSplitOfTriangleSides:             color('blue', 'base'),
+  qrParallelSplitOfTriangleHighlight:         color('red'),
+  qrParallelSplitOfTriangleGrey:              color('grey', 'base'),
+);
+
+body {
+  @include color_vars($colors);
+}

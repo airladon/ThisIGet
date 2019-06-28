@@ -8,7 +8,7 @@ const callback = (a, b, c, d) => {
 }
 
 const c = async () => {
-  const a = 'hello $$e = mc^2$$ there';
+  const a = 'hello $$e = mc^2$$ $$so$$ there';
   await mathloader(callback, a)
 };
 

@@ -339,13 +339,15 @@ class PresentationLesson extends SimpleLesson {
     // section.setOnClicks();
     section.setSteadyState(this.state);
     this.firstPageShown = false;
-    section.setInfoButton();
-    this.updateInteractiveItems();
     this.inTransition = false;
     const { diagram } = this;
     if (diagram) {
       diagram.inTransition = false;
+      // diagram.setFirstTransform();
     }
+    section.setInfoButton();
+    // console.log('updateInteractiveItems')
+    this.updateInteractiveItems();
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.renderDiagrams();

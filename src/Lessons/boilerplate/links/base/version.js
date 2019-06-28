@@ -5,10 +5,10 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
-  title: 'undefined',
-  description: 'undefined',
-  htmlTitle: '',
-  htmlDescription: 'a',
+  title: 'External',
+  description: 'External links to sources of information for <TOPIC>',
+  htmlTitle: '<TOPIC> Links',
+  htmlDescription: 'Explanations, proofs, examples and questions about <TOPIC>',
   links: [
     {
       url: '',

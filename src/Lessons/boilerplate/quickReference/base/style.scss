@@ -1,0 +1,13 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  // qrExternalAngles_sides:             color('blue'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+// .diagram__text {
+//   z-index: 0;
+// }

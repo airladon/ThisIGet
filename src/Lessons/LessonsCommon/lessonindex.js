@@ -17,20 +17,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -62,20 +48,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -105,20 +77,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to area, rectangle area and square area',
             htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -170,20 +128,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -223,20 +167,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Triangle Area derivation and proof',
             htmlDescription: 'Explanation on why area of a triangle is what it is',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -280,20 +210,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -333,20 +249,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Congruent triangles and how to determine congruency',
             htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruency tests',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -390,20 +292,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -433,20 +321,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Equilateral triangle derivation from an isosceles triangle',
             htmlDescription: 'Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -498,20 +372,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -553,20 +413,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -606,20 +452,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
       },
       dependencies: [
       ],
@@ -638,20 +470,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Isosceles triangles and proof',
             htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -695,20 +513,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -740,20 +544,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -780,6 +570,55 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    ParallelSplitOfTriangle: new LessonDescription({
+      title: 'Parallel Split of Triangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'ParallelSplitOfTriangle',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Descriptive',
+            description: '',
+            htmlTitle: 'Splitting a triangle with a parallel line',
+            htmlDescription: 'Proof that splitting a triangle with a parallel line results in a similar triangle',
+            fullLesson: true,
+          },
+          static: {
+            type: 'singlePage',
+            title: 'Full Proof',
+            description: 'Proof showing the resulting triangle has proportional sides',
+            htmlTitle: 'Similar Triangles Proof',
+            htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for Parallel Split of a Triangle',
+            htmlTitle: 'Links: Parallel split of a triangle',
+            htmlDescription: 'External links looking at triangle proportionality and parallel splits of a triangle.',
+            fullLesson: false,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'External angle summary',
+            description: '',
+            htmlTitle: 'Splitting a triangle with a parallel line',
+            htmlDescription: 'Summary showing splitting a triangle with a parallel line results in a similar triangle',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLineDistance',
+      ],
+      enabled: true,
+    }),
     PointLineDistance: new LessonDescription({
       title: 'Point to Line Distance',
       path: '/Lessons/Math/Geometry_1',
@@ -793,20 +632,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to distance between a point and line',
             htmlDescription: 'Properties of distance between point and a line',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -838,20 +663,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to quadrangles and quadrilaterals',
             htmlDescription: 'Quadrangles, quadrilaterals and their properties',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -895,20 +706,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -950,20 +747,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -994,20 +777,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
             htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1069,20 +838,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1122,20 +877,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to relationship between triangle side length and angle',
             htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1195,6 +936,61 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
+    SimilarTriangles: new LessonDescription({
+      title: 'Similar Triangles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'SimilarTriangles',
+      topics: {
+        explanation: {
+          equilangularIsSimilarProof: {
+            type: 'singlePage',
+            title: 'Equilangular Triangles are Similar - Proof 2',
+            description: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
+            htmlTitle: 'Equilangular Triangles are Similar Proof',
+            htmlDescription: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
+            fullLesson: false,
+          },
+          equilangularProofBrief: {
+            type: 'singlePage',
+            title: 'Equilangular Triangles are Similar - Proof 2 (Brief)',
+            description: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
+            htmlTitle: 'Triangles with equal angles are similar proof',
+            htmlDescription: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
+            fullLesson: false,
+          },
+          static: {
+            type: 'singlePage',
+            title: 'Descriptive',
+            description: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+            htmlTitle: 'Similar Triangles Proof',
+            htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+            fullLesson: true,
+          },
+          staticBrief: {
+            type: 'singlePage',
+            title: 'In Brief',
+            description: 'Succinct proofs showing why equiangular triangles, and proportional triangles are similar',
+            htmlTitle: 'Similar Triangles Proof',
+            htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External Links',
+            description: 'External links to sources of information for Similar Triangles',
+            htmlTitle: 'Similar Triangles Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about Similar Triangles>',
+            fullLesson: false,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelSplitOfTriangle',
+      ],
+      enabled: false,
+    }),
     CalculatingPi: new LessonDescription({
       title: 'Calculating Pi',
       path: '/Lessons/Math/Geometry_1/ToDo',
@@ -1216,27 +1012,6 @@ export default function getLessonIndex() {
       ],
       enabled: false,
     }),
-    SimilarTriangles: new LessonDescription({
-      title: 'Similar Triangles',
-      path: '/Lessons/Math/Geometry_1/ToDo',
-      uid: 'SimilarTriangles',
-      topics: {
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: '',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'ParallelLineDistance',
-      ],
-      enabled: false,
-    }),
     Triangles: new LessonDescription({
       title: 'Triangles',
       path: '/Lessons/Math/Geometry_1',
@@ -1250,20 +1025,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to triangles and their properties',
             htmlDescription: 'Proof that triangle total angle equals 180º',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {

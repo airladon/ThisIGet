@@ -1,9 +1,0 @@
-@import '../../../../../../css/color';
-
-$colors: (
-  // lines:                       color('blue'),
-);
-
-body {
-  @include color_vars($colors);
-}

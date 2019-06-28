@@ -1,8 +1,8 @@
-// const entryPoints = require('./getLessons.js');
+const entryPoints = require('./getLessons.js');
 
 // // entryPoints.makeLessonIndex('dev');
-// entryPoints.updateDetailsAndVersions();
+entryPoints.updateDetailsAndVersions();
 
-const createLessonIndex = require('./createIndex.js');
+// const createLessonIndex = require('./createIndex.js');
 
-createLessonIndex('stage', './src/Lessons');
+// createLessonIndex('stage', './src/Lessons');
