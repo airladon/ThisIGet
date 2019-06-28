@@ -154,12 +154,12 @@ $height_limited_landscape_aspect_ratio: "408/200";
   background-color: color('presentation', 'background');
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
-  // border-top: 1px solid color('white', 'light');
-  // border-bottom: 1px solid color('white', 'light');
-  max-width: 1400px;
-  border: 1px solid color('white', 'light');
-  margin-left: auto;
-  margin-right: auto;
+  border-top: 1px solid color('white', 'light');
+  border-bottom: 1px solid color('white', 'light');
+  // max-width: 1400px;
+  // border: 1px solid color('white', 'light');
+  // margin-left: auto;
+  // margin-right: auto;
 }
 
 .lesson__container {
