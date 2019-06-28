@@ -23,13 +23,13 @@ export default function lessonLayout() {
   layout.colors = Fig.tools.color.getCSSColors(cssColorNames);
   const { colors } = layout;
 
-  const side = text => ({
-    label: {
-      text,
-      offset: 0.05,
-      location: 'outside',
-    },
-  });
+  // const side = text => ({
+  //   label: {
+  //     text,
+  //     offset: 0.05,
+  //     location: 'outside',
+  //   },
+  // });
 
   const w = 0.05;
   const arrow = (name, p, color = colors.sides) => ({
@@ -64,7 +64,7 @@ export default function lessonLayout() {
         text,
         // offset: 0.05,
         location: 'outside',
-        color: color,
+        color,
       },
       arrows: {
         width: 0.05,
@@ -89,7 +89,7 @@ export default function lessonLayout() {
         text,
         // offset: 0.05,
         location: 'outside',
-        color: color,
+        color,
       },
       color: colors.grey,
       showLine: false,
@@ -120,7 +120,7 @@ export default function lessonLayout() {
     name: 'tri',
     method: 'polyLine',
     options: {
-      points: points,
+      points,
       color: colors.sides,
       close: true,
       width: 0.02,
@@ -137,20 +137,20 @@ export default function lessonLayout() {
       p2: splitPoints[1],
       dashStyle: {
         style: [0.03, 0.02],
-      }
+      },
     },
   };
 
-  const simpleLabel = (name, text, p, color = colors.sides) => ({
-    name,
-    method: 'text',
-    options: {
-      text,
-      position: p,
-      size: 0.13,
-      color,
-    },
-  });
+  // const simpleLabel = (name, text, p, color = colors.sides) => ({
+  //   name,
+  //   method: 'text',
+  //   options: {
+  //     text,
+  //     position: p,
+  //     size: 0.13,
+  //     color,
+  //   },
+  // });
 
   const fig = {
     name: 'fig',
@@ -206,8 +206,6 @@ export default function lessonLayout() {
       p2: [2, -0.3],
     },
   };
-
-  
 
   const t1 = new Line(new Point(-1.8, -1), new Point(-1.4, 1));
   const t2 = new Line(new Point(-1, -1), new Point(0.5, 1));
@@ -267,9 +265,9 @@ export default function lessonLayout() {
       forms: {
         '0': [
           { frac: ['b', 'B', 'v0'] },
-           '   ', 'equals0', '   ',
+          '   ', 'equals0', '   ',
           { frac: ['n', 'N', 'v1'] },
-           '   ', 'equals1', '   ',
+          '   ', 'equals1', '   ',
           { frac: ['m', 'M', 'v2'] },
         ],
       },

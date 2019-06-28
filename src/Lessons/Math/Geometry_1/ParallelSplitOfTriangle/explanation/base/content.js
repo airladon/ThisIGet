@@ -27,8 +27,8 @@ const { colors } = layout;
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-//    this.iconLink = imgLink;
-//    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {
@@ -239,7 +239,7 @@ class Content extends PresentationLessonContent {
       setContent: 'The area of the original triangle is equal to the sum of the three smaller triangles:',
     };
     this.addSection(common, content, {
-      setSteadyState: () => { fig.setScenario('left') },
+      setSteadyState: () => { fig.setScenario('left'); },
     });
     this.addSectionEqnStory([{ nav: coll._0, form: '0' }], common, content);
     // this.addSectionEqnStory([

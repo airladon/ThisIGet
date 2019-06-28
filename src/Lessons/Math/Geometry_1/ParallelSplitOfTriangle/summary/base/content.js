@@ -25,8 +25,8 @@ const { colors } = layout;
 class Content extends PresentationLessonContent {
   setTitle() {
     this.title = details.title;
-//    this.iconLink = imgLink;
-//    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
   }
 
   setDiagram(htmlId: string = '') {
@@ -56,7 +56,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll.setScenarios('default');
         coll._eqn.showForm('0');
-      }
+      },
     });
 
     this.addSection({
@@ -74,7 +74,7 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         coll._eqn.setScenario('top');
         coll._eqn.showForm('0');
-      }
+      },
     });
   }
 }

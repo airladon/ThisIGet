@@ -11,8 +11,8 @@ import content from './content.md';
 class Content extends SimpleLessonContent {
   setTitle() {
     this.title = details.title;
-//    this.iconLink = imgLink;
-//    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
       // 'Math/Geometry_1/Triangles/base',
     ]);

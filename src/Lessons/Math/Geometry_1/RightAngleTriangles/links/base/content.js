@@ -11,8 +11,8 @@ import version from './version';
 class Content extends SimpleLessonContent {
   setTitle() {
     this.title = details.title;
-//    this.iconLink = imgLink;
-//    this.iconLinkGrey = imgLinkGrey;
+    //  this.iconLink = imgLink;
+    //  this.iconLinkGrey = imgLinkGrey;
   }
 
   setContent() {

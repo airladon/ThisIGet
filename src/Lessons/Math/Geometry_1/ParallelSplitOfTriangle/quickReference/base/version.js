@@ -6,6 +6,8 @@ var version = {
   topic: 'quickReference',
   type: 'singlePage',
   references: [
+    'TrianglePres',
+    'LinesPres',
     'Triangle',
     'Lines',
   ],
