@@ -77,6 +77,50 @@
     "versionUID": "base"
   },
   {
+    "url": "https://en.wikipedia.org/wiki/Intercept_theorem",
+    "hash": "7e97eb0b63db85f2f93d98674bc6d560",
+    "author": "Intercept Theorem",
+    "type": "generic",
+    "description": "Proof for intercept theorem which is more general proportionality theorem",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ParallelSplitOfTriangle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://sites.google.com/site/ncertstdx/similar-triangles-theorems",
+    "hash": "11d70ead6e3138cd4b774ecfe9422867",
+    "publisher": "NCERT X Mathematics",
+    "type": "generic",
+    "description": "Proofs for why proportional triangles are similar, and why equiangular triangles are similar",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ParallelSplitOfTriangle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "http://www.malinc.se/math/geometry/similartrianglesen.php",
+    "hash": "a3b9b446b25e753f5d806fe120435e85",
+    "author": "Malin Christersson",
+    "type": "generic",
+    "description": "Triangle Proportionality Theorem and Similar Triangles",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ParallelSplitOfTriangle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://mathbitsnotebook.com/Geometry/Similarity/SMSplitter.html",
+    "hash": "36ee83061172b3a471d90db4d5cfcfa0",
+    "publisher": "Math Bits Notebook",
+    "type": "generic",
+    "description": "Side Splitter Theorem and Converse",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "ParallelSplitOfTriangle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://en.wikipedia.org/wiki/Right_triangle",
     "hash": "0d0bf3df02ca4f1cae21e8ee0fc2f2c5",
     "publisher": "Wikipedia",
