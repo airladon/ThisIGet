@@ -1311,7 +1311,7 @@ export default function getLessonIndex() {
       dependencies: [
         'ParallelSplitOfTriangle',
       ],
-      enabled: true,
+      enabled: false,
     }),
     CalculatingPi: new LessonDescription({
       title: 'Calculating Pi',
