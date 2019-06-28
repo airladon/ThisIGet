@@ -67,6 +67,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
+        await sleep(500);
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
@@ -78,6 +79,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         } else {
           await page.setViewport({ width, height });
         }
+
         const lessonContainer = await page.$('#lesson__content');
         const lessonBox = await lessonContainer.boundingBox();
         await page.evaluate((y) => {
