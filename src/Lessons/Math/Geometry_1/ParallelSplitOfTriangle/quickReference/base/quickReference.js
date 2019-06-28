@@ -34,11 +34,11 @@ export class QRTriangle extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      triangle: click(coll.pulseTriangle, [coll], colors.sides),
-      parallel: click(coll.pulseSplit, [coll], colors.highlight),
+      triangle: click(coll.pulseTriangle, [coll], colors.qrParallelSplitOfTriangleSides),
+      parallel: click(coll.pulseSplit, [coll], colors.qrParallelSplitOfTriangleHighlight),
       smaller_triangle: click(coll.pulseSmallerTriangle, [coll], colors.highlight),
-      same_proportion: click(coll.pulseEqn, [coll], colors.sides),
-      original_triangle: click(coll.pulseTriangle, [coll], colors.sides),
+      same_proportion: click(coll.pulseEqn, [coll], colors.qrParallelSplitOfTriangleSides),
+      original_triangle: click(coll.pulseTriangle, [coll], colors.qrParallelSplitOfTriangleSides),
     };
     this.setTitle('Parallel Split of a Triangle');
     this.setDescription([
@@ -50,10 +50,12 @@ export class QRTriangle extends PopupBoxCollection {
   show() {
     super.show();
     const coll = this._collection;
+    coll.hideAll();
+    // console.log(coll)
     coll._fig.showAll();
     coll._eqn.showForm('0');
     coll._eqn.setScenario('default');
-    this.setDiagramSpace({ location: 'left', size: 0.5 });
+    this.setDiagramSpace({ location: 'top', size: 0.7 });
     this.transformToQRWindow(coll, new Rect(-2, -1.5, 4, 3));
     this.diagram.animateNextFrame();
   }
@@ -71,10 +73,10 @@ export class QRLines extends PopupBoxCollection {
     const coll = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      lines: click(coll.pulseLines, [coll], colors.sides),
-      parallel_lines: click(coll.pulseFig2ParallelLines, [coll], colors.sides),
-      third_parallel_line: click(coll.pulseFig2Split, [coll], colors.highlight),
-      equal_proportion: click(coll.pulseEqn, [coll], colors.sides),
+      lines: click(coll.pulseLines, [coll], colors.qrParallelSplitOfTriangleSides),
+      parallel_lines: click(coll.pulseFig2ParallelLines, [coll], colors.qrParallelSplitOfTriangleSides),
+      third_parallel_line: click(coll.pulseFig2Split, [coll], colors.qrParallelSplitOfTriangleHighlight),
+      equal_proportion: click(coll.pulseEqn, [coll], colors.qrParallelSplitOfTriangleSides),
     };
     this.setTitle('Right Angle Triangle');
     this.setDescription([

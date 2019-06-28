@@ -53,7 +53,7 @@ export default function lessonLayout() {
     ],
   });
 
-  const label = (text, p1, p2, offset = 0.4, color = colors.sides) => ({
+  const label = (text, p1, p2, offset = 0.4, color = colors.qrParallelSplitOfTriangleSides) => ({
     name: `label${text}`,
     method: 'line',
     options: {
@@ -78,7 +78,7 @@ export default function lessonLayout() {
     },
   });
 
-  const label1 = (text, p1, p2, offset = 0.4, color = colors.sides) => ({
+  const label1 = (text, p1, p2, offset = 0.4, color = colors.qrParallelSplitOfTriangleSides) => ({
     name: `label${text}`,
     method: 'line',
     options: {
@@ -121,7 +121,7 @@ export default function lessonLayout() {
     method: 'polyLine',
     options: {
       points,
-      color: colors.sides,
+      color: colors.qrParallelSplitOfTriangleSides,
       close: true,
       width: 0.02,
     },
@@ -141,7 +141,7 @@ export default function lessonLayout() {
     },
   };
 
-  // const simpleLabel = (name, text, p, color = colors.sides) => ({
+  // const simpleLabel = (name, text, p, color = colors.qrParallelSplitOfTriangleSides) => ({
   //   name,
   //   method: 'text',
   //   options: {
@@ -182,7 +182,7 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   // ////////////////////////////////////////////////////////////
 
-  const line = (name, p1, p2, color = colors.sides) => ({
+  const line = (name, p1, p2, color = colors.qrParallelSplitOfTriangleSides) => ({
     name,
     method: 'line',
     options: {
@@ -245,9 +245,9 @@ export default function lessonLayout() {
     b: { text: 'b', color: colors.highlight },
     m: { text: 'm', color: colors.highlight },
     n: { text: 'n', color: colors.highlight },
-    B: { text: 'B', color: colors.sides },
-    M: { text: 'M', color: colors.sides },
-    N: { text: 'N', color: colors.sides },
+    B: { text: 'B', color: colors.qrParallelSplitOfTriangleSides },
+    M: { text: 'M', color: colors.qrParallelSplitOfTriangleSides },
+    N: { text: 'N', color: colors.qrParallelSplitOfTriangleSides },
     equals0: ' = ',
     equals1: ' = ',
     v0: { symbol: 'vinculum' },
