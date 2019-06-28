@@ -9,7 +9,7 @@ const {
   DiagramObjectLine,
   DiagramElementCollection,
   DiagramObjectPolyLine,
-  // Equation,
+  Equation,
   Transform,
 } = Fig;
 
@@ -77,7 +77,17 @@ export default class CommonCollection extends CommonDiagramCollection {
     _height1: DiagramObjectLine;
     _height2: DiagramObjectLine;
     _height3: DiagramObjectLine;
-  } & DiagramElementCollection
+  } & DiagramElementCollection;
+
+
+  _0Eqn: Equation;
+  _1Eqn: Equation;
+  _2Eqn: Equation;
+  _3Eqn: Equation;
+  _4Eqn: Equation;
+  _5Eqn: Equation;
+  _6Eqn: Equation;
+  _7Eqn: Equation;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -90,9 +100,9 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this._1Eqn.eqn.formRestart = { pulse: { element: this._0Eqn, duration: 1, scale: 1.1 } };
     this._2Eqn.eqn.formRestart = { pulse: { element: this._1Eqn, duration: 1, scale: 1.1 } };
-    // this._2Eqn.eqn.formRestart = { pulse: { element: this._1Eqn, duration: 1, scale: 1.1 } };
-    // this._3Eqn.eqn.formRestart = { pulse: { element: this._2Eqn, duration: 1, scale: 1.1 } };
-    // this.hasTouchableElements = true;
+    this._3Eqn.eqn.formRestart = { pulse: { element: this._2Eqn, duration: 1, scale: 1.1 } };
+    this._6Eqn.eqn.formRestart = { pulse: { element: this._5Eqn, duration: 1, scale: 1.1 } };
+    this._7Eqn.eqn.formRestart = { pulse: { element: this._6Eqn, duration: 1, scale: 1.1 } };
   }
 
   // pulseSplit(done: ?() => void = null) {
@@ -220,9 +230,6 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._fig3._tri1.pulseScaleNow(1, 1.1, 0, done);
     this._fig3._tri2.pulseScaleNow(1, 1.1);
     this._fig3._tri3.pulseScaleNow(1, 1.1);
-    // this._fig3._right1.pulseScaleNow(1, 1.1);
-    // this._fig3._right2.pulseScaleNow(1, 1.1);
-    // this._fig3._right3.pulseScaleNow(1, 1.1);
     this.diagram.animateNextFrame();
   }
 
