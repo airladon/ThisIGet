@@ -1099,8 +1099,10 @@ class PresentationLessonContent extends SimpleLessonContent {
       opacity: 0.6,
     };
     const userSections = Object.assign({}, ...sectionObjects);
+    const setFirstTransform = () => { this.diagram.setFirstTransform(); };
     const eqnSection = {
       transitionFromPrev: (done) => {
+        setFirstTransform();
         let callback = done;
         if (userSections.transitionFromPrev != null) {
           callback = userSections.transitionFromPrev.bind(userSections, done);
