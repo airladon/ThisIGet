@@ -363,7 +363,6 @@ class Content extends PresentationLessonContent {
       setEnterState: () => {
         coll.setScenarios('default');
         fig.setScenario('left');
-        console.log('hello1')
       },
     });
 

@@ -22118,8 +22118,9 @@ function (_DiagramElement) {
       _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-        this.drawingObject.show = true; // console.log(this.lastDrawTransform.matrix())
-        // this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
+        this.drawingObject.show = true; // console.log(this.name, this.lastDrawTransform.matrix())
+
+        this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     } // showAll() {
     //   this.show();
