@@ -6,7 +6,7 @@ var lessonDetails = {
   dependencies: [
     'ParallelSplitOfTriangle',
   ],
-  enabled: false,
+  enabled: true,
   path: 'Math/Geometry_1',
   uid: 'SimilarTriangles',
 };
