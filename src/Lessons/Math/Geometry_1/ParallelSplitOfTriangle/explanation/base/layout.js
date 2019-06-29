@@ -1129,6 +1129,7 @@ export default function lessonLayout() {
     method: 'addNavigator',
     options: {
       navType: '1Button',
+      // navType: 'equationOnly',
       // navTypeOptions: {
       //   useTwoLines: true,
       // },

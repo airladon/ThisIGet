@@ -7102,9 +7102,10 @@ function (_DiagramElementCollec) {
       var form = this.getCurrentForm();
 
       if (form != null) {
-        form.showHide(0, 0, null, animationStop);
-        this.show();
         form.setPositions();
+        form.showHide(0, 0, null, animationStop);
+        this.show(); // form.setPositions();
+
         form.applyElementMods(); // this.updateDescription();
       }
     }
@@ -13413,7 +13414,7 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
 //   nextGroup: a html parent that holds nextDescription and nextButton
 //   prevGroup: a html parent that holds prevDescription and prevButton
 //
-// Equation navigators 
+// Equation navigators
 var EqnNavigator =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
@@ -16873,13 +16874,12 @@ function (_DrawingObject) {
         this.element.style.position = 'absolute';
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
-        this.element.style.visibility = 'visible';
-        this.element.classList.remove('diagram__hidden');
+        this.element.style.visibility = 'visible'; // this.element.classList.remove('diagram__hidden');
       } else {
         this.element.style.position = 'absolute';
         this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px';
-        this.element.classList.add('diagram__hidden');
+        this.element.style.top = '-10000px'; // this.element.classList.add('diagram__hidden');
+
         this.element.style.visibility = 'hidden'; // this.element.style.visibility = 'hidden';
         // console.trace()
       }
@@ -22118,8 +22118,8 @@ function (_DiagramElement) {
       _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-        this.drawingObject.show = true;
-        this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
+        this.drawingObject.show = true; // console.log(this.lastDrawTransform.matrix())
+        // this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     } // showAll() {
     //   this.show();
