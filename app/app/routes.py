@@ -37,8 +37,8 @@ def check_confirmed(func):
     def decorated_function(*args, **kwargs):
         if current_user.confirmed is False:
             flash('Please confirm your account!', 'warning')
-            return redirect(url_for('confirm_account_message', username=current_user.username))
-            # return redirect(f'confirmAccountEmailSent/{current_user.username}')
+            return redirect(url_for(
+                'confirm_account_message', username=current_user.username))
         return func(*args, **kwargs)
 
     return decorated_function
@@ -360,7 +360,7 @@ def create():
         send_confirm_account_email(user)
         # return redirect(f'confirmAccountEmailSent/{user.username}')
         return redirect(url_for(
-                'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.username))
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
@@ -386,7 +386,7 @@ def confirm_account_message(username):
         send_confirm_account_email(user)
         # redirect(f'confirmAccountEmailSent/{user.username}')
         return redirect(url_for(
-                'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.username))
     flash('''You need to confirm your email address before your
         account becomes active.''', 'before')
     flash(f''''An email has been sent to {user.get_email()}.
@@ -415,7 +415,7 @@ def confirm_account(token):
         send_confirm_account_email(user)
         # return redirect(f'confirmAccountEmailSent/{user.username}')
         return redirect(url_for(
-                'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.username))
     if user.confirmed:
         flash(
             'Account has already been confirmed. You can now log in.',
