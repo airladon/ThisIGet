@@ -57,9 +57,15 @@ class Users(UserMixin, db.Model):
     signed_up_on = db.Column(db.DateTime)
     confirmed = db.Column(db.Boolean, default=False)
     confirmed_on = db.Column(db.DateTime)
-    ratings = db.relationship('Ratings', backref='user', lazy='dynamic')
-    all_ratings = db.relationship('AllRatings', backref='user', lazy='dynamic')
+    ratings = db.relationship(
+        'Ratings', cascade="all,delete", backref='user', lazy='dynamic')
+    all_ratings = db.relationship(
+        'AllRatings', cascade="all,delete", backref='user', lazy='dynamic')
     last_login = db.Column(db.DateTime)
+    link_ratings = db.relationship(
+        'LinkRatings', cascade="all,delete", backref='user', lazy='dynamic')
+    all_link_ratings = db.relationship(
+        'AllLinkRatings', cascade="all,delete", backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
