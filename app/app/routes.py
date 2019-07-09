@@ -37,7 +37,8 @@ def check_confirmed(func):
     def decorated_function(*args, **kwargs):
         if current_user.confirmed is False:
             flash('Please confirm your account!', 'warning')
-            return redirect(f'confirmAccountEmailSent/{current_user.username}')
+            return redirect(url_for('confirm_account_message', username=current_user.username))
+            # return redirect(f'confirmAccountEmailSent/{current_user.username}')
         return func(*args, **kwargs)
 
     return decorated_function
@@ -328,7 +329,9 @@ def login(username=''):
             next_page = next_page
             return redirect(next_page)
         else:
-            return redirect(f'confirmAccountEmailSent/{user.username}')
+            # return redirect(f'confirmAccountEmailSent/{user.username}')
+            return redirect(url_for(
+                'confirm_account_message', username=user.username))
     return render_template(
         'login.html', form=form, css=css, js=js)
 
@@ -355,7 +358,9 @@ def create():
         db.session.add(user)
         db.session.commit()
         send_confirm_account_email(user)
-        return redirect(f'confirmAccountEmailSent/{user.username}')
+        # return redirect(f'confirmAccountEmailSent/{user.username}')
+        return redirect(url_for(
+                'confirm_account_message', username=user.username))
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
@@ -379,7 +384,9 @@ def confirm_account_message(username):
         return redirect(url_for('create'))
     if form.validate_on_submit():
         send_confirm_account_email(user)
-        redirect(f'confirmAccountEmailSent/{user.username}')
+        # redirect(f'confirmAccountEmailSent/{user.username}')
+        return redirect(url_for(
+                'confirm_account_message', username=user.username))
     flash('''You need to confirm your email address before your
         account becomes active.''', 'before')
     flash(f''''An email has been sent to {user.get_email()}.
@@ -406,13 +413,15 @@ def confirm_account(token):
             has been sent.''', 'after')
         flash('Just now, another email has been sent.', 'after')
         send_confirm_account_email(user)
-        return redirect(f'confirmAccountEmailSent/{user.username}')
+        # return redirect(f'confirmAccountEmailSent/{user.username}')
+        return redirect(url_for(
+                'confirm_account_message', username=user.username))
     if user.confirmed:
         flash(
             'Account has already been confirmed. You can now log in.',
             'before'
         )
-        return redirect(f'login/{user.username}')
+        return redirect(url_for('login', username=user.username))
     user.confirmed = True
     user.confirmed_on = datetime.datetime.now()
     db.session.commit()
@@ -471,7 +480,7 @@ def reset_password(token):
         db.session.commit()
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')
-        return redirect(f'login/{user.username}')
+        return redirect(url_for('login', username=user.username))
     return render_template('resetPassword.html', form=form, css=css, js=js)
 
 
