@@ -25,7 +25,7 @@ $path_tile_height: 35px;
   min-width: $path_tile_height;
   width: 110px;
   height: $path_tile_height;
-  border-radius: 1em;
+  border-radius: 0.6em;
   font-size: calc(#{$path_tile_height} * 0.35);
   display: inline-block;
   margin-right: 5px;
@@ -39,6 +39,14 @@ $path_tile_height: 35px;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
+
+.lesson__path_tile .dropdown_button_container {
+  border: solid 1px color('white', 'darker');
+}
+
+.lesson__path_tile .dropdown_button_selected {
+  border: 0;
 }
 
 .lesson__path_tile_right {
