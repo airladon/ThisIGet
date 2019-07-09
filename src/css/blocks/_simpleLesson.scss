@@ -50,6 +50,12 @@
 
 h3 {
   margin-top: 2.5em;
+  font-weight: 200;
+  font-size: 1.5em;
+}
+
+h3:first-of-type {
+  margin-top: 1em;
 }
 
 // #simple_lesson__qr__overlay {

@@ -114,6 +114,10 @@
   margin-bottom: 3em;
 }
 
+.lesson__links_table__disclaimer:last-of-type {
+  margin-bottom: 0;
+}
+
 .lesson__links_table__disclaimer_email {
   color: color('site', 'primaryDark');
 }
