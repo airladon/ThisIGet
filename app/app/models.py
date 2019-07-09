@@ -60,6 +60,8 @@ class Users(UserMixin, db.Model):
     ratings = db.relationship('Ratings', backref='user', lazy='dynamic')
     all_ratings = db.relationship('AllRatings', backref='user', lazy='dynamic')
     last_login = db.Column(db.DateTime)
+    link_ratings = db.relationship('LinkRatings', backref='user', lazy='dynamic')
+    all_link_ratings = db.relationship('AllLinkRatings', backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)

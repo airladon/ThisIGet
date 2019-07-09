@@ -418,7 +418,7 @@ def confirm_account(token):
     db.session.commit()
     flash('Thankyou for confirming your email', 'before')
     flash('You can now login to your account.', 'before')
-    return redirect(f'login/{user.username}')
+    return redirect(url_for('login', username=user.username))
 
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
