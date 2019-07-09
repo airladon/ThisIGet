@@ -158,7 +158,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   font-size: var(--lesson__diagram-font-size);
   // background-color: color('diagram', 'background');
   // background-color: color('presentation', 'background');
-  background-color: color('white', 'base');
+  background-color: color('presentation', 'background');
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
   border-top: 1px solid color('white', 'light');
@@ -167,6 +167,24 @@ $height_limited_landscape_aspect_ratio: "408/200";
   // border: 1px solid color('white', 'light');
   // margin-left: auto;
   // margin-right: auto;
+}
+
+@media screen and (min-width: 1452px) and (max-aspect-ratio: $height_limited_landscape_aspect_ratio) {
+  .lesson__widescreen_backdrop {
+    max-width: 1450px;
+    border: 1px solid color('white', 'light');
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+@media screen and (min-width: 1452px) and (min-aspect-ratio: $height_limited_landscape_aspect_ratio) {
+  .lesson__widescreen_backdrop {
+    max-width: calc(var(--pres__container_width) + 50px);
+    border: 1px solid color('white', 'light');
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 
 .lesson__container {
