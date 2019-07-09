@@ -67,7 +67,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
-        await sleep(500);
+        await sleep(1000);
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
@@ -103,7 +103,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // eslint-disable-next-line no-await-in-loop
             await page.mouse.move(0, 0);
             // eslint-disable-next-line no-await-in-loop
-            await sleep(500);
+            await sleep(1000);
             // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);

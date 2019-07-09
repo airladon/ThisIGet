@@ -209,6 +209,9 @@ module.exports = (env) => {
       },
 
     },
+    watchOptions: {
+      ignored: /.*__image_snapshots__.*png/,
+    },
     // Delete to here
     externals,
     module: {
