@@ -104,4 +104,8 @@ then
     exit 1
 fi
 
+title "Updating final build"
+rm -rf build/*
+cp -r app build/app
+
 # CURRENT_PRODUCTION_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
