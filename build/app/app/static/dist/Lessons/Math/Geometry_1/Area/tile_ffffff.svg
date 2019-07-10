@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <rect x="50" y="90" width="400" height="320" style="fill: none; stroke: rgb(255, 255, 255) ; stroke-width: 18px;"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="130" y1="90" x2="130" y2="410"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="210" y1="90" x2="210" y2="410"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="370" y1="90" x2="370" y2="410"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="50" y1="330" x2="450" y2="330"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="50" y1="250" x2="450" y2="250"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="290" y1="90" x2="290" y2="410"/>
+  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 5px;" x1="50" y1="170" x2="450" y2="170"/>
+</svg>
