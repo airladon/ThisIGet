@@ -39,14 +39,16 @@
   // 2.5em title + padding
   // 2.5em link + padding
   // 1em padding top/bottom
+  box-shadow: 0 0 20px color('white', 'darkest');
   max-height: calc(400px + 6em);
   font-size: initial;
   z-index: 10;
   position: absolute;
-  background-color: color('white');
+  // background-color: color('white');
+  background-color: color('site', 'background');
   padding: 0.5em;
-  border: 1px solid color('white', 'light');
-  border-radius: 0.4em;
+  // border: 1px solid color('white', 'dark');
+  border-radius: 0.2em;
   margin-right: 1em;
   -webkit-touch-callout: none; /* iOS Safari */
   -webkit-user-select: none; /* Safari */
@@ -81,10 +83,12 @@
   display: table-cell;
   text-align: left;
   vertical-align: middle;
-  color: color('grey', 'dark');
+  // color: color('grey', 'dark');
   font-size: 1.2em;
   padding-right: 1em;
   padding-left: 0.4em;
+  font-weight: 200;
+  color: color('black', 'lighter');
 }
 
 @media screen and (max-width: 600px) {
@@ -108,7 +112,8 @@
   display: table-cell;
   color: color('grey', 'dark');
   width: 2em;
-  border: 1px solid color('white', 'light');
+  // border: 1px solid color('white', 'light');
+  border: solid 1px color('white', 'darker');
   height: 2em;
   text-align: center;
   vertical-align: middle;
@@ -128,7 +133,8 @@
   overflow-y: scroll;
   max-height: 400px;
   max-width: 600px;
-  background-color: color('white', 'lightest');
+  background-color: color('white', 'base');
+  border: 1px solid color('white', 'lighter');
 }
 
 .lesson__qr__content {
@@ -164,11 +170,13 @@
 
 .lesson__qr__link_link {
   font-size: 0.8em;
-  color: color('white', 'darker');
+  color: color('black', 'lighter');
+  text-decoration: underline;
 }
 
 .lesson__qr__link_link:hover {
-  text-decoration: none;
+  // text-decoration: none;
+  text-decoration: underline;
 }
 
 // ///////////////////////////////////////
@@ -178,6 +186,7 @@
   background-color: color('black', 'dark');
   padding: 0.5em;
   border: 1px solid color('black', 'light');
+  box-shadow: 0 0 3em color('black', 'dark');
 }
 
 #lesson__content_diagram .lesson__qr__title_text {
@@ -191,6 +200,14 @@
 
 #lesson__content_diagram .lesson__qr__title_close:hover {
   background-color: color('black', 'light');
+}
+
+#id_lesson__qr__pres_container .lesson__qr__content_container {
+  border: 0;
+}
+
+#lesson__content_diagram .lesson__qr__link_link {
+  color: color('white', 'dark');
 }
 
 #id_lesson__qr__content_pres__overlay {

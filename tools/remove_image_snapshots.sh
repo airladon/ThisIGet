@@ -1,0 +1,1 @@
+find -E ./src/Lessons -regex '.*__image_snapshots__.*png' -delete

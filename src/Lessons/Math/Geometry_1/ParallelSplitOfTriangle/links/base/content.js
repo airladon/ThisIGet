@@ -19,7 +19,7 @@ class Content extends SimpleLessonContent {
     this.sections = [
       <div key="0" className="lesson__links_table__disclaimer">
         <p style={{ marginBottom: '3em' }}>
-          {'The web sites at these links are not administered by This I Get. We don\'t control their availability, accuracy or actions taken when you visit.'}
+          {'These websites are not administered by This I Get. We don\'t control their availability, accuracy or policies.'}
         </p>
         <p>
         </p>

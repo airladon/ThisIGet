@@ -124,7 +124,12 @@ export default function tester(optionsOrScenario, ...scenarios) {
         jest.setTimeout(180000);
         const fullpath =
           `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
-        await page.goto(fullpath);
+        try {
+          await page.goto(fullpath);
+        } catch {
+          await page.goto(fullpath);
+        }
+        await sleep(200);
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
@@ -143,6 +148,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         await page.evaluate((y) => {
           window.scrollTo(0, y);
         }, scrollTo);
+        await sleep(200);
 
         let currentPage = fromPage;
         const next = 'lesson__button-next';

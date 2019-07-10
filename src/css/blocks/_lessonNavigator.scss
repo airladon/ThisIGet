@@ -192,7 +192,7 @@
 
 .navigator__container_with_shadow {
   position: relative;
-  background-color: white;
+  // background-color: color('site', 'background');
   // z-index: 1;
 }
 
@@ -237,7 +237,7 @@
 }
 
 .navigator__topic_title_container {
-  background-color: white;
+  // background-color: color('site', 'background');
   padding-left: 15px;
   padding-bottom: 15px;
   padding-top: 5px;
@@ -255,7 +255,7 @@
 
 .navigator__topic_title {
   display: table;
-  background-color: white;
+  // background-color: color('site', 'background');
   // color: color('grey', 'light');
   color: color('black', 'lighter');
   // text-align: center;
@@ -271,9 +271,9 @@
 
 .navigator__topic_title_subtext {
   font-size: 12px;
-  background: white;
+  // background: color('site', 'background');
   padding-left: 20px;
-  background-color: white;
+  // background-color: color('site', 'background');
   font-weight: 100;
   // color: color('grey', 'lighter');
   color: color('black', 'lighter');

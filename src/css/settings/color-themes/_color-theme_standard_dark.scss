@@ -86,7 +86,7 @@ $_color_theme-standard-dark: (
     'qr-text':        (color: 'grey',    shade: 'light'),
   ),
   'presentation': (
-    'background':       (color: 'white',  shade: 'lightest'),
+    'background':       (color: 'white',  shade: 'base'),
     'button':           (color: 'white',  shade: 'darkest'),
     'disabled':         (color: 'white',  shade: 'lighter'),
     'hover':            (color: 'grey',  shade: 'lighter'),
@@ -96,7 +96,7 @@ $_color_theme-standard-dark: (
   'lesson': (
     'background':       (color: 'grey',   shade: 'dark'),
     'text-title':       (color: 'blue',   shade: 'dark'),
-    'title-background': (color: 'white',  shade: 'base'),
+    'title-background': (color: 'offWhite',  shade: 'base'),
     'text':             (color: 'grey',   shade: 'lighter'),
     'navigation':       (color: 'grey',   shade: 'base'),
     'button':           (color: 'grey',   shade: 'base'),
@@ -108,7 +108,7 @@ $_color_theme-standard-dark: (
     'warning':          (color: 'red',    shade: 'base'),
     'secondary':        (color: 'blue',   shade: 'light'),
     'text':             (color: 'grey',   shade: 'darker'),
-    'background':       (color: 'white',  shade: 'base'),
+    'background':       (color: 'offWhite',  shade: 'base'),
     'disabled':         (color: 'grey',   shade: 'base'),
     'safe':             (color: 'green',  shade: 'base'),
     'menus':            (color: 'grey',   shade: 'darker'),

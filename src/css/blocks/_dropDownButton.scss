@@ -7,7 +7,7 @@ $button_size: 0.4em;
   display: table;
   border-radius: $radius;
   // background-color: color('lesson', 'title-background');
-  background-color: color('white', 'lighter');
+  // background-color: color('white', 'lighter');
   // border: 1px solid color('white', 'lighter');
   // color: #929292;
   color: color('black', 'lighter');
@@ -20,6 +20,7 @@ $button_size: 0.4em;
 .dropdown_button_selected {
   // background: color('site', 'safe', 'base');
   background-color: color('site', 'primary');
+  // border: 0;
   color: white;
 }
 
