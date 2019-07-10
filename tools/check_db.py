@@ -7,7 +7,8 @@ from index_loader import index_loader
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-import pdb
+# import pdb
+
 
 def check(show, write, row, key, valueDict, valueKey):
     if (valueKey in valueDict):
