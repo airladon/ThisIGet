@@ -77,9 +77,9 @@ def home():
             figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         if 'polyfill.js' in dist:
             polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-    print(dist)
-    print(static)
-    print(figure_one_js)
+    # print(dist)
+    # print(static)
+    # print(figure_one_js)
     res = make_response(render_template(
         'home.html',
         main_css=main_css, main_js=main_js, vendors_js=vendors_js,
