@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
-  <path d="M 36.418 69.65 L 293.288 47.904 L 293.536 47.883 L 293.703 48.069 L 349.116 109.979 L 349.586 110.504 L 348.935 110.774 L 56.141 232.318 L 55.757 231.394 L 347.9 110.12 L 293.124 48.921 L 36.502 70.646 Z" style="fill: none;"/>
-  <polygon style="fill: rgb(170, 170, 170) ; stroke: rgb(170, 170, 170) ;" points="62.465 253.722"/>
-  <polygon style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 18px;" points="58.382 229.188 411.224 65.714 251.907 11.332 36.892 69.785" transform="matrix(0.976513, 0.215459, -0.215459, 0.976513, 31.173571, -45.450747)"/>
-  <polygon style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 18px;" points="297.277 473.513 372.348 188.259 470.969 471.138 381.102 427.093" transform="matrix(0.999808, 0.019573, -0.019573, 0.999808, 6.550021, -7.455055)"/>
-  <rect x="36.418" y="239.229" width="210.45" height="241.372" style="stroke: rgb(170, 170, 170) ; stroke-width: 18px; fill: none;"/>
-</svg>

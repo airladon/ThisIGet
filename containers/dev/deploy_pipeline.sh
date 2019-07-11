@@ -104,15 +104,20 @@ then
     exit 1
 fi
 
-title "Updating final build"
-rm -rf build/*
-cp -r app build/app
-cp containers/prod/Procfile build/
-cp containers/prod/runtime.txt build/
-cp containers/prod/wsgi.py build/
-cp requirements.txt build/
-CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
-echo $CURRENT_VERSION > build/heroku_version.txt
-check_status
+title "Creating site map"
+python ./create_site_map.py
+
+title "Creatin hashes"
+python ./create_site_hashes.py
+# title "Updating final build"
+# rm -rf build/*
+# cp -r app build/app
+# cp containers/prod/Procfile build/
+# cp containers/prod/runtime.txt build/
+# cp containers/prod/wsgi.py build/
+# cp requirements.txt build/
+# CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
+# echo $CURRENT_VERSION > build/heroku_version.txt
+# check_status
 
 # CURRENT_PRODUCTION_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`

@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-  <line style="stroke: rgb(102, 102, 102); stroke-width: 18px;" x1="30" y1="400" x2="470" y2="400"/>
-  <line style="stroke: rgb(102, 102, 102); stroke-width: 18px;" x1="30" y1="100" x2="470" y2="100"/>
-  <line style="stroke: rgb(102, 102, 102); stroke-width: 18px;" x1="100" y1="480" x2="400" y2="20"/>
-  <path style="fill: none; stroke: rgb(102, 102, 102); stroke-width: 38.124px;" transform="matrix(0.432313, 0, 0, 0.432313, -31.598124, 37.045975)" d="M 567.905 621.478 A 263.655 263.655 0 0 1 685.091 839.616 L 421.438 840.707 Z" bx:shape="pie 421.438 840.707 0 263.655 33.747 89.763 1@755e49cc"/>
-  <path style="fill: none; stroke: rgb(102, 102, 102); stroke-width: 38.124px;" transform="matrix(-0.432313, 0, 0, -0.432313, 531.608521, 463.448608)" d="M 567.905 621.478 A 263.655 263.655 0 0 1 685.091 839.616 L 421.438 840.707 Z" bx:shape="pie 421.438 840.707 0 263.655 33.747 89.763 1@755e49cc"/>
-</svg>

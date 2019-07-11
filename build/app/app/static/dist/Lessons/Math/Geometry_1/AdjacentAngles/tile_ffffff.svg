@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
-  <polyline style="fill: none; stroke: rgb(255, 255, 255) ; stroke-width: 18px;" points="481.675 437.48 34.981 437.48 259.1 50.301"/>
-  <polyline style="fill: rgb(255, 255, 255) ; stroke: rgb(255, 255, 255) ;" points="443.974 159.749"/>
-  <path style="fill: none; stroke: rgb(255, 255, 255) ; stroke-width: 38.124px;" transform="matrix(0.472144, 0, 0, 0.472144, -17.941454, -48.997169)" d="M 425.5 490.112 A 622.529 622.529 0 0 1 737.197 1030.078 L 114.668 1029.488 Z" bx:shape="pie 114.668 1029.488 0 622.529 29.954 90.054 1@f0e80647"/>
-  <line style="stroke: rgb(255, 255, 255) ; stroke-width: 18px;" x1="41.667" y1="432.449" x2="440.974" y2="250.047"/>
-</svg>
