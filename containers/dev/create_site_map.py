@@ -21,7 +21,7 @@ else:
     try:
         with open(local_sitemap, 'r') as f:
             existing_sitemap_content = f.read().encode('UTF-8')
-    except:
+    except:  # noqa
         print('No existing sitemap')
         existing_sitemap_content = None
 
@@ -85,6 +85,7 @@ for version in versions:
     lesson = re.sub(r".*\/src\/", '', version)
     pages.append([
         f'https://www.thisiget.com/{lesson}', most_recent, 'weekly'])
+
 
 # #############################################################################
 # Show all added, removed and updated pages in sitemap

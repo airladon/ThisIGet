@@ -3,7 +3,7 @@
 #
 # If only a lesson is modified, then only that lesson will be tested.
 # If something more generic has been modified, then all lessons will be tested.
-import subprocess
+# import subprocess
 from pathlib import Path
 import requests
 
