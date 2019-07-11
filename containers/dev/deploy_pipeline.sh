@@ -106,9 +106,12 @@ fi
 
 title "Creating site map"
 python ./create_site_map.py
+check_status
 
-title "Creatin hashes"
+title "Creating hashes"
 python ./create_site_hashes.py
+check_status
+
 # title "Updating final build"
 # rm -rf build/*
 # cp -r app build/app
