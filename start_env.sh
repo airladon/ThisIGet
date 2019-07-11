@@ -143,6 +143,8 @@ else
   docker run -it --rm \
     -v $PROJECT_PATH/containers:/opt/app/containers \
     -v $PROJECT_PATH/containers/dev/browser_test.sh:/opt/app/browser_test.sh \
+    -v $PROJECT_PATH/containers/dev/browser_test_diff_master.py:/opt/app/browser_test_diff_master.py \
+    -v $PROJECT_PATH/.git:/opt/app/.git \
     -v $PROJECT_PATH/containers/dev/ratings_test.sh:/opt/app/ratings_test.sh \
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
@@ -150,6 +152,8 @@ else
     -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
     -v $PROJECT_PATH/containers/dev/getLessons.test.js:/opt/app/getLessons.test.js \
     -v $PROJECT_PATH/containers/dev/createIndex.js:/opt/app/createIndex.js \
+    -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
+    -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \
     -v $PROJECT_PATH/containers/dev/pathTools.js:/opt/app/pathTools.js \
     -v $PROJECT_PATH/containers/dev/jest.config.js:/opt/app/jest.config.js \
     -v $PROJECT_PATH/containers/dev/jest.index.config.js:/opt/app/jest.index.config.js \
@@ -172,6 +176,7 @@ else
     -v $PROJECT_PATH/.flowconfig:/opt/app/.flowconfig \
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
+    -v $PROJECT_PATH/build:/opt/app/build \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \

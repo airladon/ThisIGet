@@ -27,10 +27,10 @@ title() {
     echo "${bold}${cyan}=================== $1 ===================${reset}"
 }
 
-# # From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
-# # where Travis errors out if too much information goes on stdout and some
-# # npm package is blocking stdout.
-# python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
+# From https://github.com/travis-ci/travis-ci/issues/4704 to fix an issue 
+# where Travis errors out if too much information goes on stdout and some
+# npm package is blocking stdout.
+python -c 'import os,sys,fcntl; flags = fcntl.fcntl(sys.stdout, fcntl.F_GETFL); fcntl.fcntl(sys.stdout, fcntl.F_SETFL, flags&~os.O_NONBLOCK);'
 
 
 ###########################################################################
@@ -103,5 +103,21 @@ then
     fi
     exit 1
 fi
+
+title "Creating site map"
+python ./create_site_map.py
+
+title "Creatin hashes"
+python ./create_site_hashes.py
+# title "Updating final build"
+# rm -rf build/*
+# cp -r app build/app
+# cp containers/prod/Procfile build/
+# cp containers/prod/runtime.txt build/
+# cp containers/prod/wsgi.py build/
+# cp requirements.txt build/
+# CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
+# echo $CURRENT_VERSION > build/heroku_version.txt
+# check_status
 
 # CURRENT_PRODUCTION_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`

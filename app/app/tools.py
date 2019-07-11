@@ -152,7 +152,8 @@ def getLessons():
                 continue
             if file == '.DS_Store':
                 continue
-            file_without_hash = re.sub(r'-....................\.', '.', file)
+            file_without_hash = \
+                re.sub(r'-....................[^\.]*\.', '.', file)
             path = root.replace('./app/app/', '')
 
             if path not in file_list:
