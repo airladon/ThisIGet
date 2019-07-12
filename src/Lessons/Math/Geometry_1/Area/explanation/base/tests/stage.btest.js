@@ -11,5 +11,5 @@ tester(
     },
   },
   'goto',
-  'nextPrev',
+  // 'nextPrev',
 );
