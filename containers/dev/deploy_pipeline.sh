@@ -57,7 +57,7 @@ check_status
 title "Browser Tests: thisiget-test"
 JEST_OPTIONS=`python browser_test_diff_master.py`
 echo Testing: $JEST_OPTIONS
-./browser_test.sh $JEST_OPTIONS
+./browser_test.sh test $JEST_OPTIONS
 check_status
 
 ###########################################################################
