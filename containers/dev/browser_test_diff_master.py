@@ -30,7 +30,10 @@ for path in diff:
     # These files are will not trigger browser tests
     if parent.startswith('tools') \
        or parent.startswith('containers') \
-       or parent == '.':
+       or parent == '.' \
+       or path == 'app/app/static/hashes.json' \
+       or path == 'tests/flask/app_test.db' \
+       or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
     if parent.startswith('src/Lessons/') and \
@@ -41,15 +44,8 @@ for path in diff:
         jest_string += '.*stage'
         paths.add(jest_string)
     else:
+        print(f'All: {path}')
         test_all = True
-
-
-# if test_all:
-#     print('stage.btest.js')
-#     exit(1)
-
-# print(' '.join(paths))
-
 
 # Next get all files in the static folder and check if they exist in
 current = {}
@@ -63,8 +59,26 @@ existing = json.loads(r.content)
 
 for file_name in current.keys():
     md5 = current[file_name]
+    if file_name == '/sitemap.xml' \
+       or file_name == '/hashes.json':
+        continue
+    if not file_name.startswith('/dist/Lessons'):
+        test_all = True
+        continue
     if file_name not in existing or existing[file_name] != md5:
-        print(file_name)
+        p = Path(file_name.replace('/dist/', 'src/'))
+        parent = str(p.parent)
+        jest_string = parent
+        if len(parent.split('/')) > max_depth + 1:
+            jest_string = '/'.join(parent.split('/')[1:max_depth - 1])
+        jest_string += '.*stage'
+        paths.add(jest_string)
+
+if test_all:
+    print('stage.btest.js')
+    exit(1)
+
+print(' '.join(paths))
 
 # def exists(path):
 #     r = requests.head(path)
