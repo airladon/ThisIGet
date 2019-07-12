@@ -107,19 +107,6 @@ def hashes():
 @app.route('/BingSiteAuth.xml')
 def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')
-# @app.route('/introduction')
-# def introduction():
-#     return render_template('introduction.html')
-
-
-# @app.route('/single')
-# def single_page_lesson():
-#     return render_template('singlepagelesson.html')
-
-
-# @app.route('/multi')
-# def multi_page_lesson():
-#     return render_template('multipagelesson.html')
 
 
 # @app.route('/about')

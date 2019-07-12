@@ -19,5 +19,5 @@ tester(
     },
   },
   'goto',
-  // 'nextPrev',
+  'nextPrev',
 );
