@@ -99,6 +99,11 @@ def sitemap():
     return app.send_static_file('sitemap.xml')
 
 
+@app.route('/hashes')
+def hashes():
+    return app.send_static_file('hashes.json')
+
+
 @app.route('/BingSiteAuth.xml')
 def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')

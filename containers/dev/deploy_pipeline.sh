@@ -38,6 +38,9 @@ title "Run Lint Checks, Tests and Build App"
 ./build.sh prod
 check_status
 
+title "Creating hashes"
+python ./create_site_hashes.py
+
 ###########################################################################
 title "Deploy to thisiget-test"
 ./build.sh deploy test skip-tests skip-build
@@ -52,7 +55,9 @@ title "Ratings Test: thisiget-test"
 check_status
 
 title "Browser Tests: thisiget-test"
-./browser_test.sh test stage.btest.js
+JEST_OPTIONS=`python browser_test_diff_master.py`
+echo Testing: $JEST_OPTIONS
+./browser_test.sh test $JEST_OPTIONS
 check_status
 
 ###########################################################################
@@ -106,18 +111,5 @@ fi
 
 title "Creating site map"
 python ./create_site_map.py
+check_status
 
-title "Creatin hashes"
-python ./create_site_hashes.py
-# title "Updating final build"
-# rm -rf build/*
-# cp -r app build/app
-# cp containers/prod/Procfile build/
-# cp containers/prod/runtime.txt build/
-# cp containers/prod/wsgi.py build/
-# cp requirements.txt build/
-# CURRENT_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
-# echo $CURRENT_VERSION > build/heroku_version.txt
-# check_status
-
-# CURRENT_PRODUCTION_VERSION=`heroku releases -a thisiget | sed -n '1p' | sed 's/^.*: //'`
