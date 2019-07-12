@@ -17,20 +17,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -62,20 +48,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -105,20 +77,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to area, rectangle area and square area',
             htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -170,20 +128,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -223,20 +167,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Triangle Area derivation and proof',
             htmlDescription: 'Explanation on why area of a triangle is what it is',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -300,20 +230,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           identifyProperties: {
             type: 'presentation',
@@ -353,20 +269,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Congruent triangles and how to determine congruency',
             htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruency tests',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -410,20 +312,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -453,20 +341,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Equilateral triangle derivation from an isosceles triangle',
             htmlDescription: 'Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -518,20 +392,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -573,20 +433,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -626,20 +472,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
       },
       dependencies: [
       ],
@@ -658,20 +490,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Isosceles triangles and proof',
             htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -715,20 +533,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -758,20 +562,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Interactive introduction to parallel lines',
             htmlDescription: 'See what parallel lines are, and when lines are parallel',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -833,20 +623,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -878,20 +654,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -921,20 +683,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to quadrangles and quadrilaterals',
             htmlDescription: 'Quadrangles, quadrilaterals and their properties',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -978,20 +726,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1033,20 +767,6 @@ export default function getLessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -1077,20 +797,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
             htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1152,20 +858,6 @@ export default function getLessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1205,20 +897,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to relationship between triangle side length and angle',
             htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1367,20 +1045,6 @@ export default function getLessonIndex() {
             htmlTitle: 'Introduction to triangles and their properties',
             htmlDescription: 'Proof that triangle total angle equals 180º',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
