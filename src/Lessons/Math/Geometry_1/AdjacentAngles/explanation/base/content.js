@@ -59,7 +59,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Adjacent Angles',
       setContent: [
-        '|Adjacent_angles| are angles that share an adjacent vertex and edge.',
+        '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
       ],
       modifiers: {
         Adjacent_angles: click(
