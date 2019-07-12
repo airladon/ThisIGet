@@ -44,7 +44,7 @@ for path in diff:
         jest_string += '.*stage'
         paths.add(jest_string)
     else:
-        print(f'All: {path}')
+        # print(f'All: {path}')
         test_all = True
 
 # Next get all files in the static folder and check if they exist in
