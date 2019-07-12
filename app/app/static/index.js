@@ -7102,9 +7102,10 @@ function (_DiagramElementCollec) {
       var form = this.getCurrentForm();
 
       if (form != null) {
-        form.showHide(0, 0, null, animationStop);
-        this.show();
         form.setPositions();
+        form.showHide(0, 0, null, animationStop);
+        this.show(); // form.setPositions();
+
         form.applyElementMods(); // this.updateDescription();
       }
     }
@@ -13413,7 +13414,7 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
 //   nextGroup: a html parent that holds nextDescription and nextButton
 //   prevGroup: a html parent that holds prevDescription and prevButton
 //
-// Equation navigators 
+// Equation navigators
 var EqnNavigator =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
@@ -16322,7 +16323,6 @@ function () {
         fontSize: 0.13,
         showGrid: true,
         color: [1, 1, 1, 0],
-        gridColor: [1, 1, 1, 0],
         location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](),
         decimalPlaces: 1,
         lineWidth: 0.01
@@ -16333,6 +16333,15 @@ function () {
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.fontColor == null) {
+        options.fontColor = options.color.slice();
+      }
+
+      if (options.gridColor == null) {
+        options.gridColor = options.color.slice();
+      }
+
       var width = options.width,
           lineWidth = options.lineWidth,
           limits = options.limits,
@@ -16346,7 +16355,8 @@ function () {
           stepY = options.stepY,
           location = options.location,
           showGrid = options.showGrid,
-          gridColor = options.gridColor;
+          gridColor = options.gridColor,
+          fontColor = options.fontColor;
       var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       xProps.minorTicks.mode = 'off';
       xProps.minorGrid.mode = 'off';
@@ -16365,6 +16375,7 @@ function () {
       xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
+      xProps.majorTicks.color = color.slice();
       xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
@@ -16378,7 +16389,7 @@ function () {
       xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
       xProps.majorTicks.labelsHAlign = 'center';
       xProps.majorTicks.labelsVAlign = 'top';
-      xProps.majorTicks.fontColor = color.slice();
+      xProps.majorTicks.fontColor = fontColor.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
       var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
@@ -16401,6 +16412,7 @@ function () {
       yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
+      yProps.majorTicks.color = color.slice();
       yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
@@ -16873,13 +16885,12 @@ function (_DrawingObject) {
         this.element.style.position = 'absolute';
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
-        this.element.style.visibility = 'visible';
-        this.element.classList.remove('diagram__hidden');
+        this.element.style.visibility = 'visible'; // this.element.classList.remove('diagram__hidden');
       } else {
         this.element.style.position = 'absolute';
         this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px';
-        this.element.classList.add('diagram__hidden');
+        this.element.style.top = '-10000px'; // this.element.classList.add('diagram__hidden');
+
         this.element.style.visibility = 'hidden'; // this.element.style.visibility = 'hidden';
         // console.trace()
       }
@@ -22118,7 +22129,15 @@ function (_DiagramElement) {
       _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-        this.drawingObject.show = true;
+        this.drawingObject.show = true; // This line is a challenge.
+        // It will show a html element immediately before the next draw frame
+        // meaning the draw matrix will be old.
+        // If this line is removed, it causes a blanking between lesson pages
+        // for html elements that are always on screen
+        // Therefore, should use diagram.setFirstTransform before using this,
+        // or in the future remove this line, and the line in hide(), and
+        // somehow do the hide in the draw call
+
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     } // showAll() {

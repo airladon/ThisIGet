@@ -55,12 +55,12 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Circle',
+      title: 'Properties',
       setContent: [
         'A circle\'s |properties| include the |circumference|, |radius|, |diameter| and |center|.',
-        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html({ classes: 'lesson__definition_highest', wordColor: colors.center })}`,
-        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html({ classes: 'lesson__definition_higher', wordColor: colors.radius })}`,
-        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html({ classes: 'lesson__definition_high', wordColor: colors.diameter })}`,
+        `${new Definition('Center', 'Latin', ['centrum', 'middle']).html({ classes: 'lesson__definition_highest', color: colors.center })}`,
+        `${new Definition('Radius', 'Latin', ['radius', 'spoke of a chariot wheel']).html({ classes: 'lesson__definition_higher', color: colors.radius })}`,
+        `${new Definition('Diameter', 'Greek', ['diametros', '', 'dia', 'across', 'metros', 'measure']).html({ classes: 'lesson__definition_high', color: colors.diameter })}`,
         `${new Definition('Circumference', 'Latin', ['circumferentia', '', 'circum', 'around', 'ferre', 'carry']).html(colors.circle)}`,
       ],
       modifiers: {
@@ -80,7 +80,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Circle',
+      title: 'Property Relationships',
       setContent: [
         'The |circumference|, |radius|, |diameter| are related and can be calculated from each other.',
       ],

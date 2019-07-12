@@ -129,6 +129,19 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection(common, {
+      setContent: [
+        'In other words, a |circle| is a shape whose |edge| is a constant distance from its |center|.',
+      ],
+      modifiers: {
+        edge: click(circ.pulseCircle, [circ], colors.circle),
+        center: click(circ.pulseCenter, [circ], colors.center),
+      },
+      show: [circle._line, circle._center],
+      setSteadyState: () => {
+        circ._circle.setScenario('centerHigh');
+      },
+    });
+    this.addSection(common, {
       setContent: centerV([
         'We\'ve now identified a shape, named it and know how to create it.',
         'Next we need to be able to describe it, by identifying some of its |properties|.',
@@ -406,7 +419,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: [
-        'Thousands of years ago, it was realized that the |circumference| is a little over |three| times the |diameter|.',
+        'If the |circumference| is straightened out, you can see it is a little over |three| times the |diameter|.',
       ],
       modifiers: {
         diameter: click(circ.pulseDiameter, [circ], colors.diameter),
@@ -564,7 +577,7 @@ class Content extends PresentationLessonContent {
         'Drag circle |center| to move',
         'Drag |radius| to rotate it',
         'Drag |diameter| to rotate it',
-        'Press on |Circumference| text to straigten',
+        'Press on |Circumference| text to straighten',
         'Press on other measurements text to hightlight',
       ],
     });

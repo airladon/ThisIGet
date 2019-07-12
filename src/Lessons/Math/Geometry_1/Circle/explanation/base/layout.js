@@ -18,6 +18,7 @@ const cssColorNames = [
   'diameter',
   'center',
   'grid',
+  'gridText',
   'circleFill',
   'property',
 ];
@@ -158,7 +159,7 @@ export default function lessonLayout() {
       interactiveLocation: new Point(radius * 0.8, 0),
       scenarios: {
         diameterLines: {
-          position: new Point(-Math.PI * radius + radius, -radius * 1.1),
+          position: new Point(-Math.PI * radius + radius * 0.98, -radius * 1.1),
           scale: new Point(0.98, 1),
           rotation: 0,
         },
@@ -199,7 +200,7 @@ export default function lessonLayout() {
       stepY: 1,
       fontSize: 0.1,
       showGrid: true,
-      color: colors.grid,
+      color: colors.gridText,
       gridColor: colors.grid,
       location: new Point(-2.2, -1.2),
       decimalPlaces: 0,
@@ -331,7 +332,7 @@ export default function lessonLayout() {
       width,
       color: colors.diameter,
       // vertexSpaceStart: 'start',
-      position: new Point(index * radius * 2, 0.2),
+      position: new Point(index * radius * 2 - radius * 0.02, 0.2),
     },
   });
   layout.diameterLines = {
