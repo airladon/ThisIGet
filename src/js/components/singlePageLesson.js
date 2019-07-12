@@ -64,10 +64,12 @@ const { applyModifiers, setOnClicks } = Fig.tools.html;
 const applyMDModifiers = (inputText: string, modifiers: Object) => {
   let outputText = '';
 
-  if (inputText.trim().startsWith('##')) {
-    outputText = `<div class="single_page_lesson__header2">${inputText.slice(2)}</div>`;
+  if (inputText.trim().startsWith('###')) {
+    outputText = `<h3>${inputText.slice(3)}</h3>`;
+  } else if (inputText.trim().startsWith('##')) {
+    outputText = `<h2>${inputText.slice(2)}</h2>`;
   } else if (inputText.trim().startsWith('#')) {
-    outputText = `<div class="single_page_lesson__header1">${inputText.slice(1)}</div>`;
+    outputText = `<h1>${inputText.slice(1)}</h1>`;
   } else {
     outputText = `<p class="single_page_lesson__text">${applyModifiers(inputText, modifiers)}</p>`;
   }

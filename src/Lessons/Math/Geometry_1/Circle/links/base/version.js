@@ -33,14 +33,14 @@ var version = {
     },
     {
       url: 'http://www.coolmath.com/reference/circles-geometry',
-      hash: 'd41d8cd98f00b204e9800998ecf8427e',
+      hash: '1d604d52ed6ba608aa866912308c6350',
       publisher: 'Cool Math',
       type: 'generic',
       description: 'Definition of circle properties',
     },
     {
       url: 'https://www.youtube.com/watch?v=3af1pL-tUJk',
-      hash: 'd41d8cd98f00b204e9800998ecf8427e',
+      hash: 'b4d9f28a2e64a0f3aedc4528b1bc4f0c',
       publisher: 'Socratica',
       type: 'video',
       description: 'Introduction to circle and its properties',
