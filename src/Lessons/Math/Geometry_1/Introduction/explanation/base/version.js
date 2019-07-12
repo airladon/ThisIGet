@@ -4,9 +4,9 @@
 var version = {
   uid: 'base',
   topic: 'explanation',
-  title: 'Initial',
-  description: 'Presentation form - interactive.',
-  htmlTitle: 'Introduction to why we should study shapes',
+  title: 'Descriptive',
+  description: 'Motivation to studying shapes.',
+  htmlTitle: 'Why Study Shapes?',
   htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
   fullLesson: true,
   type: 'presentation',

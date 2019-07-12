@@ -33,6 +33,10 @@ for path in diff:
        or parent == '.' \
        or path == 'app/app/static/hashes.json' \
        or path == 'tests/flask/app_test.db' \
+       or path == 'app/app/templates/base.html' \
+       or path == 'app/app/templates/base-dev.html' \
+       or path == 'app/app/templates/base-stage.html' \
+       or path == 'src/Lessons/LessonsCommon/lessonIndex.js' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
