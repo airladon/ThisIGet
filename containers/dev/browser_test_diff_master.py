@@ -44,7 +44,7 @@ for path in diff:
         jest_string += '.*stage'
         paths.add(jest_string)
     else:
-        # print(f'All: {path}')
+        print(f'All: {path}')
         test_all = True
 
 # Next get all files in the static folder and check if they exist in
@@ -62,10 +62,11 @@ for file_name in current.keys():
     if file_name == '/sitemap.xml' \
        or file_name == '/hashes.json':
         continue
-    if not file_name.startswith('/dist/Lessons'):
-        test_all = True
-        continue
     if file_name not in existing or existing[file_name] != md5:
+        if not file_name.startswith('/dist/Lessons'):
+            test_all = True
+            print(f'All: {file_name}')
+            continue
         p = Path(file_name.replace('/dist/', 'src/'))
         parent = str(p.parent)
         jest_string = parent
