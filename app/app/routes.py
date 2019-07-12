@@ -100,7 +100,7 @@ def sitemap():
 
 
 @app.route('/hashes')
-def sitemap():
+def hashes():
     return app.send_static_file('hashes.json')
 
 

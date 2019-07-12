@@ -7,40 +7,41 @@ import subprocess
 from pathlib import Path
 import requests
 import json
+# import pdb
 
-# master_sha = subprocess.run(
-#     ['git', 'rev-parse', 'master'],
-#     stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
-# current_sha = subprocess.run(
-#     ['git', 'rev-parse', 'HEAD'],
-#     stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
+master_sha = subprocess.run(
+    ['git', 'rev-parse', 'master'],
+    stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
+current_sha = subprocess.run(
+    ['git', 'rev-parse', 'HEAD'],
+    stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
 
-# diff = subprocess.run(
-#     ['git', 'diff', '--name-only', master_sha, current_sha],
-#     stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split('\n')
+diff = subprocess.run(
+    ['git', 'diff', '--name-only', master_sha, current_sha],
+    stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split('\n')
 
-# paths = set()
-# test_all = False
-# max_depth = 7
+paths = set()
+test_all = False
+max_depth = 7
 
-# for path in diff:
-#     p = Path(path)
-#     parent = str(p.parent)
-#     # These files are will not trigger browser tests
-#     if parent.startswith('tools') \
-#        or parent.startswith('containers') \
-#        or parent == '.':
-#         continue
-#     # These files will trigger browser tests
-#     if parent.startswith('src/Lessons/') and \
-#        not parent.startswith('src/Lessons/LessonsCommon'):
-#         jest_string = parent
-#         if len(parent.split('/')) > max_depth:
-#             jest_string = '/'.join(parent.split('/')[0:max_depth - 1])
-#         jest_string += '.*stage'
-#         paths.add(jest_string)
-#     else:
-#         test_all = True
+for path in diff:
+    p = Path(path)
+    parent = str(p.parent)
+    # These files are will not trigger browser tests
+    if parent.startswith('tools') \
+       or parent.startswith('containers') \
+       or parent == '.':
+        continue
+    # These files will trigger browser tests
+    if parent.startswith('src/Lessons/') and \
+       not parent.startswith('src/Lessons/LessonsCommon'):
+        jest_string = parent
+        if len(parent.split('/')) > max_depth:
+            jest_string = '/'.join(parent.split('/')[0:max_depth - 1])
+        jest_string += '.*stage'
+        paths.add(jest_string)
+    else:
+        test_all = True
 
 
 # if test_all:
@@ -62,7 +63,6 @@ existing = json.loads(r.content)
 
 for file_name in current.keys():
     md5 = current[file_name]
-    # print(file_name, md5)
     if file_name not in existing or existing[file_name] != md5:
         print(file_name)
 
@@ -84,6 +84,3 @@ for file_name in current.keys():
 #         exit(1)
 # # print(files)
 # print(len(files))
-
-
-# # print(exists('https://www.thisiget.com/static/dist/commonlessons-33392871d6124e834595.js'))

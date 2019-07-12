@@ -176,7 +176,6 @@ else
     -v $PROJECT_PATH/.flowconfig:/opt/app/.flowconfig \
     -v $PROJECT_PATH/.stylelintignore:/opt/app/.stylelintignore \
     -v $PROJECT_PATH/.stylelintrc:/opt/app/.stylelintrc \
-    -v $PROJECT_PATH/build:/opt/app/build \
     -v /var/run/docker.sock:/var/run/docker.sock \
     --env-file=$PROJECT_PATH/containers/env.txt \
     -e HOST_PATH=$PROJECT_PATH \
