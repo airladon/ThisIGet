@@ -5,7 +5,8 @@ $colors: (
   radius:               color('blue'),
   diameter:             color('green'),
   center:               color('yellow'),
-  grid:                 color('grey', 'dark'),
+  grid:                 color('black', 'light'),
+  gridText:             color('black', 'lightest'),
   circleFill:           color('black', 'dark'),
   property:             color('red'),
 );

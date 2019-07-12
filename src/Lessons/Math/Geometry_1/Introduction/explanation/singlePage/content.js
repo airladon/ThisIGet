@@ -99,7 +99,7 @@ class Content extends SinglePageLessonContent {
       ),
     };
     this.content = [
-      '# Shapes',
+      '## Shapes',
 
       part1,
 

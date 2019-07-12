@@ -1,5 +1,60 @@
 [
   {
+    "url": "https://en.wikipedia.org/wiki/Circle",
+    "hash": "5c262e9f4ce3eb5193990a43bb0fd074",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "Comprehensive definition, history, properties and context",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/geometry/circle.html",
+    "hash": "df06f5158ff4724c2105704acbb1e97a",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Introduction to circles, radius, diameter and circumference",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/area-circumference-circle/a/radius-diameter-circumference",
+    "hash": "11f95d1c1654d3f0fbb2dc3ac6e1edb2",
+    "publisher": "Kahn Academy",
+    "type": "generic",
+    "description": "Introduction to circles, radius, diameter and circumference with examples",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "http://www.coolmath.com/reference/circles-geometry",
+    "hash": "1d604d52ed6ba608aa866912308c6350",
+    "publisher": "Cool Math",
+    "type": "generic",
+    "description": "Definition of circle properties",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.youtube.com/watch?v=3af1pL-tUJk",
+    "hash": "b4d9f28a2e64a0f3aedc4528b1bc4f0c",
+    "publisher": "Socratica",
+    "type": "video",
+    "description": "Introduction to circle and its properties",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://www.khanacademy.org/math/basic-geo/basic-geometry-shapes/triangle-angles/v/triangle-angle-example-1",
     "hash": "22ff376720992f7a8ff9b6e11da89b0c",
     "publisher": "Khan Academy",
