@@ -41,7 +41,7 @@ for path in diff:
         jest_string = parent
         if len(parent.split('/')) > max_depth:
             jest_string = '/'.join(parent.split('/')[0:max_depth - 1])
-        jest_string += '.*stage'
+        jest_string += '.*full'
         paths.add(jest_string)
     else:
         print(f'All: {path}')
@@ -72,7 +72,7 @@ for file_name in current.keys():
         jest_string = parent
         if len(parent.split('/')) > max_depth + 1:
             jest_string = '/'.join(parent.split('/')[1:max_depth - 1])
-        jest_string += '.*stage'
+        jest_string += '.*full'
         paths.add(jest_string)
 
 if test_all:
