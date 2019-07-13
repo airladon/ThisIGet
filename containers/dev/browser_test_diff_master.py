@@ -37,7 +37,7 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/Lessons/LessonsCommon/lessonIndex.js' \
+       or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
@@ -73,6 +73,7 @@ for file_name in current.keys():
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/Lessons'):
             test_all = True
+            # print(file_name, file_name not in existing)
             # print(f'All: {file_name}')
             continue
         p = Path(file_name.replace('/dist/', 'src/'))
