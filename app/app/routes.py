@@ -116,11 +116,30 @@ def lessonDetails(lesson_uid):
         Lessons.uid == lesson_uid).all()
     if versions is None or len(versions) == 0:
         return jsonify({'error': f'{lesson_uid} does not exist'})
-    topics = set([v.topic.name for v in versions])
+
+    details = {}
     for version in versions:
-        print(version.topic.lesson.uid, version.topic.name, version.uid)
-    print(topics)
-    return jsonify({'lesson': lesson_uid})
+        topic = version.topic.name
+        if topic == 'quickReference':
+            continue
+        if topic not in details:
+            details[topic] = {}
+        details[topic][version.uid] = {
+            'title': version.title,
+            'fullLesson': version.fullLesson,
+            'type': version.pageType,
+        }
+        if current_user.is_authenticated:
+            user_rating = Ratings.query.filter_by(
+                user=current_user, version=version).first()
+            if user_rating is not None:
+                details[topic][version.uid]['user'] = user_rating.rating
+        ratings = Ratings.query.filter(
+            Ratings.version == version, Ratings.rating >= 4).all()
+        if ratings is not None:
+            details[topic][version.uid]['ratings'] = len(ratings)
+
+    return jsonify(details)
 
 # @app.route('/about')
 # def about():
