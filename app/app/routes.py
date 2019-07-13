@@ -21,7 +21,7 @@ import datetime
 from app.tools import hash_str_with_pepper
 from app.models import Users, Links, LinkVersions, LinkRatings, AllLinkRatings
 from app.models import Ratings, AllRatings
-from app.models import Lessons, Versions, Topics
+from app.models import Lessons, Versions, Topics, Categories
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
@@ -110,8 +110,7 @@ def bingsitemap():
 
 
 @app.route('/lessonDetails/<lesson_uid>')
-def lessonDetails(lesson_uid):
-    print(lesson_uid)
+def lesson_details(lesson_uid): 
     versions = db.session.query(Versions).join(Topics).join(Lessons).filter(
         Lessons.uid == lesson_uid).all()
     if versions is None or len(versions) == 0:
@@ -138,17 +137,28 @@ def lessonDetails(lesson_uid):
             Ratings.version == version, Ratings.rating >= 4).all()
         if ratings is not None:
             details[topic][version.uid]['ratings'] = len(ratings)
-
     return jsonify(details)
 
-# @app.route('/about')
-# def about():
-#     return render_template('about.html')
 
-# @app.route('/Lessons/', defaults={'path': ''})
-# @app.route('/Lessons/<path:path>')
-# def catch_all(path):
-#     return 'You want path: %s' % path
+@app.route('/learningPath/<category>')
+def learning_path(category):
+    lessons = db.session.query(Lessons).join(Categories).filter(
+        Categories.category == category).all()
+    if lessons is None or len(lessons) == 0:
+        return jsonify({'error': f'{category} does not exist'})
+    lessons_dict = {}
+    for lesson in lessons:
+        # lessons_dict[lesson.uid] = {
+        #     'title': lesson.title,
+        #     'dependencies': lesson.dependencies.split(','),
+        #     'enabled': lesson.enabled,
+        # }
+        lessons_dict[lesson.uid] = [
+            lesson.title,
+            lesson.enabled,
+            lesson.dependencies.split(','),
+        ]
+    return jsonify(lessons_dict)
 
 
 @app.route('/isloggedin')
