@@ -109,6 +109,19 @@ def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')
 
 
+@app.route('/lessonDetails/<lesson_uid>')
+def lessonDetails(lesson_uid):
+    print(lesson_uid)
+    versions = db.session.query(Versions).join(Topics).join(Lessons).filter(
+        Lessons.uid == lesson_uid).all()
+    if versions is None or len(versions) == 0:
+        return jsonify({'error': f'{lesson_uid} does not exist'})
+    topics = set([v.topic.name for v in versions])
+    for version in versions:
+        print(version.topic.lesson.uid, version.topic.name, version.uid)
+    print(topics)
+    return jsonify({'lesson': lesson_uid})
+
 # @app.route('/about')
 # def about():
 #     return render_template('about.html')
