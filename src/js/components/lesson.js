@@ -453,7 +453,7 @@ export default class LessonComponent extends React.Component
       <div className='lesson__white_spacer'/>
       <LessonNavigator
           selected={this.lesson.content.title}
-          learningPath={'Geometry_1'}
+          learningPath={'Math/Geometry_1'}
           ref={(lessonNavigator) => { this.lessonNavigator = lessonNavigator; }}
         />
       <div className='lesson__white_spacer'/>

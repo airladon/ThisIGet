@@ -1,10 +1,12 @@
 // @flow
 import * as React from 'react';
+import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Fig from 'figureone';
 // import '../../css/style.scss';
 import LessonTile from './lessonTile';
 import LessonDescription from '../Lesson/lessonDescription';
 import makeLessonTree from '../Lesson/lessonTree';
+
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
@@ -14,10 +16,13 @@ type Props = {
   selected?: ?string;
 };
 
-export default class LessonNavigator extends React.Component
-                                    <Props> {
-  selected: string;
+type State = {
   lessonIndex: Array<Array<LessonDescription>>;
+};
+
+export default class LessonNavigator extends React.Component
+                                    <Props, State> {
+  selected: string;
   lessonTrees: Object;
   key: number;
   selectedLesson: LessonDescription;
@@ -34,12 +39,13 @@ export default class LessonNavigator extends React.Component
 
   constructor(props: Props) {
     super(props);
-    this.lessonTrees = makeLessonTree();
-    this.lessonIndex = this.lessonTrees[props.learningPath].tree;
-    this.learningPathPath = this.lessonTrees[props.learningPath].path;
-    this.learningPathName = this.lessonTrees[props.learningPath].name;
+    // this.lessonTrees = makeLessonTree();
+    // this.lessonIndex = this.lessonTrees[props.learningPath].tree;
+    this.learningPathPath = props.learningPath;
+    this.learningPathName = props.learningPath.split('/')[1].replace('_', ' ');
     this.getVariables();
-    this.layoutLessonTiles();
+    this.state = { lessonIndex: [] };
+    // this.layoutLessonTiles();
     this.key = 0;
     this.selected = props.selected || '';
     this.asTitle = false;
@@ -47,6 +53,7 @@ export default class LessonNavigator extends React.Component
       this.asTitle = true;
     }
     this.learningPath = props.learningPath;
+    this.getLearningPath(props.learningPath.split('/')[1]);
   }
 
   getVariables() {
@@ -69,7 +76,28 @@ export default class LessonNavigator extends React.Component
     }
   }
 
-  layoutLessonTiles() {
+  getLearningPath(learningPathUid: string) {
+    const link = `/learningPath/${learningPathUid}`;
+    fetchPolyfill(link, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data) => {
+        if (data.error == null) {
+          // console.log(data)
+          const lessonIndex = makeLessonTree(data);
+          console.log(lessonIndex)
+          this.layoutLessonTiles(lessonIndex);
+          this.setState({ lessonIndex });
+        }
+      })
+      .catch(() => {});
+  }
+
+  layoutLessonTiles(lessonIndex: Array<Array<LessonDescription>>) {
     this.lessonArray = [];
     // const y = this.tileHeight * 2 + vSpace * 2;
     const width = this.tileWidth;
@@ -79,7 +107,7 @@ export default class LessonNavigator extends React.Component
     let x = hSpace;
     this.lessonArray = [];
     let maxParallel = 1;
-    this.lessonIndex.forEach((lesson) => {
+    lessonIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         if (lesson.length > maxParallel) {
           maxParallel = lesson.length;
@@ -90,7 +118,7 @@ export default class LessonNavigator extends React.Component
                     + (maxParallel - 1) * vSpace
                     + vSpace * 2) / 2;
 
-    this.lessonIndex.forEach((lesson) => {
+    lessonIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         const len = lesson.length;
         const totalHeight = len * height + (len - 1) * vSpace;
@@ -181,7 +209,7 @@ export default class LessonNavigator extends React.Component
 
   lessons() {
     const lessons = [];
-    this.lessonIndex.forEach((lesson) => {
+    this.state.lessonIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         lesson.forEach((parallelLesson) => {
           lessons.push(this.createLessonJsx(parallelLesson));
@@ -193,10 +221,12 @@ export default class LessonNavigator extends React.Component
     return lessons;
   }
 
-  componentDidMount() {
-    this.centerLessons();
-    // window.addEventListener('resize', this.centerLessons.bind(this));
-    this.scrollToSelected();
+  componentDidUpdate() {
+    if (this.state.lessonIndex.length > 0) {
+      this.centerLessons();
+      // window.addEventListener('resize', this.centerLessons.bind(this));
+      this.scrollToSelected();
+    }
   }
 
   scrollToSelected() {
@@ -283,7 +313,7 @@ export default class LessonNavigator extends React.Component
                 {'Learning path'}
         </div>
         <div className="navigator__topic_title_container">
-          <img src={`/static/dist/${this.learningPathPath}/topic.png`}
+          <img src={`/static/dist/Lessons/${this.learningPathPath}/topic.png`}
                className="navigator__topic_title_img"
                alt={`Icon for ${this.learningPathName}`}/>
           <div className='navigator__topic_title'>

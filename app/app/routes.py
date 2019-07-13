@@ -153,10 +153,13 @@ def learning_path(category):
         #     'dependencies': lesson.dependencies.split(','),
         #     'enabled': lesson.enabled,
         # }
+        topics = db.session.query(Topics).join(Lessons).filter(
+            Lessons.uid == lesson.uid).all()
         lessons_dict[lesson.uid] = [
             lesson.title,
             lesson.enabled,
             lesson.dependencies.split(','),
+            [t.name for t in topics],
         ]
     return jsonify(lessons_dict)
 
