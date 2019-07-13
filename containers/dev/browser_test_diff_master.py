@@ -9,6 +9,7 @@ import requests
 import json
 # import pdb
 
+# first check git logs for changed files
 master_sha = subprocess.run(
     ['git', 'rev-parse', 'master'],
     stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
@@ -36,7 +37,7 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/Lessons/LessonsCommon/lessonIndex.js' \
+       or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
@@ -48,10 +49,13 @@ for path in diff:
         jest_string += '.*full'
         paths.add(jest_string)
     else:
-        print(f'All: {path}')
+        # print(f'All: {path}')
         test_all = True
 
 # Next get all files in the static folder and check if they exist in
+# the released version of the app
+# Skip over commonlessons as the lessonindex will change it, and if
+# anything else was changed it will be caught in the git checks
 current = {}
 subprocess.run(['python', 'create_site_hashes.py'])
 with open('./app/app/static/hashes.json', 'r') as current_file:
@@ -60,16 +64,17 @@ with open('./app/app/static/hashes.json', 'r') as current_file:
 r = requests.get('https://www.thisiget.com/static/hashes.json')
 existing = json.loads(r.content)
 
-
 for file_name in current.keys():
     md5 = current[file_name]
     if file_name == '/sitemap.xml' \
-       or file_name == '/hashes.json':
+       or file_name == '/hashes.json' \
+       or file_name.startswith('/dist/commonlessons'):
         continue
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/Lessons'):
             test_all = True
-            print(f'All: {file_name}')
+            # print(file_name, file_name not in existing)
+            # print(f'All: {file_name}')
             continue
         p = Path(file_name.replace('/dist/', 'src/'))
         parent = str(p.parent)
