@@ -48,7 +48,7 @@ def get_full_path(root, file):
     return f'/{root}/{lessons[root][file]}'
 
 
-@app.route('/')
+@app.route('/') # noqa
 def home():
     # The checks for keys in lessons is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
