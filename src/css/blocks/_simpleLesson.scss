@@ -65,9 +65,18 @@ h3:first-of-type {
 // }
 
 .lesson__multiple_choice input {
-  margin-top: 1em;
+  // margin-top: 1em;
   margin-right: 1em;
-  margin-left: 1em;
+  margin-left: 0.5em;
+  -ms-transform: translateY(-0.1em);
+  -webkit-transform: translateY(-0.1em);
+  transform: translateY(-0.1em);
+  // vertical-align: middle;
+}
+
+.lesson__quiz_selection {
+  display: table;
+  margin-top: 1em;
 }
 
 .lesson__quiz__submit {
@@ -75,16 +84,22 @@ h3:first-of-type {
   margin-top: 1em;
 }
 
+.lesson__quiz__radio_button {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .lesson__quiz__submit_button {
   display: table-cell;
   vertical-align: middle;
 }
 
+.lesson__quiz__radio_mark,
 .lesson__quiz__submit_mark {
   display: table-cell;
   vertical-align: middle;
-  width: 4em;
-  height: 2em;
+  width: 1.5em;
+  height: 1.5em;
   background-repeat: no-repeat;
   background-position: center;
 }

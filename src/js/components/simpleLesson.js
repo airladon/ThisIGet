@@ -68,6 +68,26 @@ const getRadioButtonSelected = (button) => {
   return null;
 };
 
+const checkRatioButton = (button) => {
+  if (button.parentElement == null || button.parentElement.parentElement == null) {
+    return;
+  }
+  const inputs = button.parentElement.parentElement.querySelectorAll('input');
+  for (let i = 0; i < inputs.length; i += 1) {
+    const input = inputs[i];
+    const submitMark = input.parentElement.parentElement.querySelector('.lesson__quiz__radio_mark');
+    submitMark.classList.remove('lesson__quiz__result_correct');
+    submitMark.classList.remove('lesson__quiz__result_incorrect');
+    if (input.checked === true) {
+      if (input.value === 'correct') {
+        submitMark.classList.add('lesson__quiz__result_correct');
+      } else {
+        submitMark.classList.add('lesson__quiz__result_incorrect');
+      }
+    }
+  }
+};
+
 export default class SimpleLessonComponent extends React.Component
                                     <Props, State> {
   lesson: SimpleLesson;
@@ -136,22 +156,23 @@ export default class SimpleLessonComponent extends React.Component
     for (let i = 0; i < elements.length; i += 1) {
       const element = elements[i];
       element.onclick = () => {
-        const result = getRadioButtonSelected(element);
-        if (element.parentElement == null
-          || element.parentElement == null) {
-          return;
-        }
-        const mark = element.parentElement.querySelector('.lesson__quiz__submit_mark');
-        if (mark == null) {
-          return;
-        }
-        if (result === 'correct') {
-          mark.classList.remove('lesson__quiz__result_incorrect');
-          mark.classList.add('lesson__quiz__result_correct');
-        } else {
-          mark.classList.remove('lesson__quiz__result_correct');
-          mark.classList.add('lesson__quiz__result_incorrect');
-        }
+        checkRatioButton(element);
+        // const result = getRadioButtonSelected(element);
+        // if (element.parentElement == null
+        //   || element.parentElement == null) {
+        //   return;
+        // }
+        // const mark = element.parentElement.querySelector('.lesson__quiz__submit_mark');
+        // if (mark == null) {
+        //   return;
+        // }
+        // if (result === 'correct') {
+        //   mark.classList.remove('lesson__quiz__result_incorrect');
+        //   mark.classList.add('lesson__quiz__result_correct');
+        // } else {
+        //   mark.classList.remove('lesson__quiz__result_correct');
+        //   mark.classList.add('lesson__quiz__result_incorrect');
+        // }
       };
     }
   }
