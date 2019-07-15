@@ -4,11 +4,11 @@
 
 $$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{RGB}{238,34,12}\color{b}A=B^C$$
 
-<!-- <quiz>
-  x this answer
-  * that answer
-  x this answer
-</quiz> -->
+<quiz multichoice>
+  - this answer
+  + that answer
+  - this answer
+</quiz>
 <html>
 <div class="lesson__multiple_choice">
   <div class="lesson__quiz_selection">
