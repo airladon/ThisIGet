@@ -48,8 +48,7 @@ if index.returncode != 0:
 
 # Load index file
 index = index_loader(
-    pathlib.Path('./src/Lessons/LessonsCommon/lessonindex.js'))
-
+    pathlib.Path('./src/Lessons/index.js'))
 
 # Process Index
 for key, value in index.items():            # noqa
@@ -89,6 +88,7 @@ for key, value in index.items():            # noqa
 
         topic = Topics.query.filter_by(
             lesson_id=lesson.id, name=topic_name).first()
+
         if topic is None:
             if show:
                 print(f'Create Topic: {lesson.path}/{lesson.uid}'
@@ -166,6 +166,7 @@ for link in links:  # noqa
 
     topic = Topics.query.filter_by(
         lesson_id=lesson.id, name=link['topic']).first()
+    # print(lesson.id, topic, topic)
     version = Versions.query.filter_by(
         topic_id=topic.id, uid=link['versionUID']).first()
     db_link_version = LinkVersions.query.filter_by(
