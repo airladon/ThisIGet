@@ -16,7 +16,7 @@ def check(show, write, row, key, valueDict, valueKey):
 def index_loader(file):
     f = open(file.as_posix())
     details_str = f.read()
-    start = re.search(r'\n  const *lessonIndex *= *', details_str)
+    start = re.search(r'\n  return ', details_str)
     stop = re.search(r'\n  };\n', details_str)
     details_str = details_str[start.span()[1]:stop.span()[0] + 4]
     modified_str = re.sub(r"new LessonDescription\(", '', details_str)

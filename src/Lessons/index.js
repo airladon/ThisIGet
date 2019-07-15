@@ -310,6 +310,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for Degrees',
+            htmlTitle: 'Measuring angles in degrees links',
+            htmlDescription: 'Explanations, and examples about measuring angles in degrees',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',

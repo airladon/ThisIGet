@@ -55,6 +55,28 @@
     "versionUID": "base"
   },
   {
+    "url": "https://en.wikipedia.org/wiki/Degree_(angle)",
+    "hash": "c73e128e478447d3e1756186d0e4a2d8",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "Definition and history of degrees",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Degrees",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/geometry/degrees.html",
+    "hash": "364a2f140f251932a83dfc29bed8d6bf",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Introduction and examples of measuring angles in degrees",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Degrees",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://www.khanacademy.org/math/basic-geo/basic-geometry-shapes/triangle-angles/v/triangle-angle-example-1",
     "hash": "22ff376720992f7a8ff9b6e11da89b0c",
     "publisher": "Khan Academy",
