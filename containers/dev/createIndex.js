@@ -4,10 +4,9 @@ const pathTools = require('./pathTools.js');
 
 function createLessonIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllLessons(lessonsPath);
-  let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
-
-export default function getLessonIndex() {
-  const lessonIndex = {`;
+  // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
+  let outStr = `export default function lessonIndex() {
+  return {`;
   lessons.forEach((lessonPath) => {
     const splitLessonPath = lessonPath.split('/');
     const parentPath = splitLessonPath.slice(1, -1).join('/');
@@ -37,7 +36,8 @@ export default function getLessonIndex() {
       }
     }
     if (title !== '') {
-      outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
+      // outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
+      outStr = `${outStr}\n    ${uid}: {`;
       outStr = `${outStr}\n      title: '${title}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
@@ -145,13 +145,15 @@ export default function getLessonIndex() {
       }
       outStr = `${outStr}\n      ],`;
       outStr = `${outStr}\n      enabled: ${enabled},`;
-      outStr = `${outStr}\n    }),`;
+      // outStr = `${outStr}\n    }),`;
+      outStr = `${outStr}\n    },`;
     }
   });
   outStr = `${outStr}\n  };`;
-  outStr = `${outStr}\n  return lessonIndex;\n}\n`;
+  // outStr = `${outStr}\n  return lessonIndex;\n}\n`;
+  outStr = `${outStr}\n}\n`;
   if (outStr !== '') {
-    fs.writeFile(`${lessonsPath}/LessonsCommon/lessonindex.js`, outStr, (err) => {
+    fs.writeFile(`${lessonsPath}/index.js`, outStr, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(err);

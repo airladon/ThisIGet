@@ -5,6 +5,7 @@ import Fig from 'figureone';
 import LessonTile from './lessonTile';
 import LessonDescription from '../Lesson/lessonDescription';
 import makeLessonTree from '../Lesson/lessonTree';
+// import LI from '../../Lessons/lessonIndex';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
@@ -34,6 +35,7 @@ export default class LessonNavigator extends React.Component
 
   constructor(props: Props) {
     super(props);
+    // console.log(LI)
     this.lessonTrees = makeLessonTree();
     this.lessonIndex = this.lessonTrees[props.learningPath].tree;
     this.learningPathPath = this.lessonTrees[props.learningPath].path;

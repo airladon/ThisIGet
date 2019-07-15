@@ -9,6 +9,7 @@ function entryPoints(buildMode) {
     main: ['whatwg-fetch', './src/js/main.js'],
     input: './src/js/views/input/input',
     polyfill: './src/js/polyfills.js',
+    // lessonIndex: './src/Lessons/lessonIndex.js',
   };
 
   const lessons = pathTools.getAllPaths(
