@@ -38,6 +38,7 @@ for path in diff:
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
        or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
+       or path == 'src/Lessons/index.js' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
@@ -49,7 +50,7 @@ for path in diff:
         jest_string += '.*full'
         paths.add(jest_string)
     else:
-        # print(f'All: {path}')
+        print(f'All: {path}')
         test_all = True
 
 # Next get all files in the static folder and check if they exist in
@@ -68,13 +69,20 @@ for file_name in current.keys():
     md5 = current[file_name]
     if file_name == '/sitemap.xml' \
        or file_name == '/hashes.json' \
+       or file_name.startswith('/dist/lessonIndex') \
+       or file_name.startswith('/dist/tools') \
+       or file_name.startswith('/dist/main') \
+       or file_name.startswith('/dist/polyfill') \
+       or file_name.startswith('/dist/vendors') \
+       or file_name.startswith('/dist/input') \
+       or file_name.startswith('/dist/Lessons') \
        or file_name.startswith('/dist/commonlessons'):
         continue
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/Lessons'):
             test_all = True
             # print(file_name, file_name not in existing)
-            # print(f'All: {file_name}')
+            print(f'All: {file_name}')
             continue
         p = Path(file_name.replace('/dist/', 'src/'))
         parent = str(p.parent)
