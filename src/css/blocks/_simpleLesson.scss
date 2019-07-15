@@ -58,6 +58,45 @@ h3:first-of-type {
   margin-top: 1em;
 }
 
+// ///////////////////////////////////////////////////////
+// QUIZ
+// ///////////////////////////////////////////////////////
+// .lesson__multiple_choice {
+// }
+
+.lesson__multiple_choice input {
+  margin-top: 1em;
+  margin-right: 1em;
+  margin-left: 1em;
+}
+
+.lesson__quiz__submit {
+  display: table;
+  margin-top: 1em;
+}
+
+.lesson__quiz__submit_button {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__quiz__submit_mark {
+  display: table-cell;
+  vertical-align: middle;
+  width: 4em;
+  height: 2em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.lesson__quiz__result_correct {
+  background-image: $correct;
+}
+
+.lesson__quiz__result_incorrect {
+  background-image: $incorrect;
+}
+
 // #simple_lesson__qr__overlay {
 //   z-index: -1;
 //   position: absolute;

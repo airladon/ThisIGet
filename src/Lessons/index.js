@@ -229,6 +229,14 @@ export default function lessonIndex() {
           },
         },
         quiz: {
+          calcProperties: {
+            type: 'singlePage',
+            title: 'Calculate properties of a circle',
+            description: 'Derivation using area of four right angle triangles',
+            htmlTitle: 'Pythagorean Theorem Derivation',
+            htmlDescription: 'Derivation using area of four right angle triangles',
+            fullLesson: true,
+          },
           identifyProperties: {
             type: 'presentation',
             title: 'Identify Properties',
