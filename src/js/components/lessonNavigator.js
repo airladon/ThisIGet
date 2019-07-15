@@ -160,10 +160,13 @@ export default class LessonNavigator extends React.Component
     let linkToUse = '';
     const topicsOrder = ['explanation', 'summary', 'examples', 'links'];
     const versionsOrder = ['base', 'static'];
+    console.log(lesson.topics)
     const getVersion = (topic) => {
+      console.log(topic)
       const versions = lesson.topics[topic];
       for (let i = 0; i < versionsOrder.length; i += 1) {
         const version = versionsOrder[i];
+        console.log(version, versions)
         if (version in versions) {
           linkToUse = `${lesson.path}/${lesson.uid}/${topic}/${version}`;
           return;
@@ -185,7 +188,7 @@ export default class LessonNavigator extends React.Component
     }
 
     if (linkToUse === '' && Object.keys(lesson.topics).length > 0) {
-      getVersion(Object.keys(lesson.topics)[0]);
+      getVersion(lesson.topics[0]);
     }
 
     if (linkToUse === '') {

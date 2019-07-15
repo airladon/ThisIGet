@@ -173,18 +173,73 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
+def get_default_topic(lesson_uid):
+    topics_order = ['summary', 'explanation', 'examples', 'links', 'quiz']
+    topic = None
+    topics_db = db.session.query(Topics.name).join(Lessons) \
+        .filter(Lessons.uid == lesson_uid).all()
+    topics = set([t.name for t in topics_db if t.name != 'quickReference'])
+    for t in topics_order:
+        if t in topics:
+            topic = t
+            break
+    if topic is None:
+        topic = topics.pop()
+    return topic
+
+
+def get_default_version(lesson_uid, topic):
+    version_order = ['base', 'static']
+    versions_db = db.session.query(Versions.uid).join(Topics).join(Lessons) \
+        .filter(Lessons.uid == lesson_uid, Topics.name == topic).all()
+    versions = set([v.uid for v in versions_db])
+    version = None
+    for v in version_order:
+        if v in versions:
+            version = v
+            break
+    if version is None:
+        version = versions.pop()
+    return version
+
+
+def get_default_lesson(path):
+    subject, category, lesson_uid, *rest = path.strip('/').split('/')
+    print(rest)
+    topic = None
+    if len(rest) > 0:
+        topic = rest[0]
+    else:
+        topic = get_default_topic(lesson_uid)
+    print(topic)
+    if topic is None:
+        return None
+    version = get_default_version(lesson_uid, topic)
+    if version is None:
+        return '/'
+    return f'{subject}/{category}/{lesson_uid}/{topic}/{version}'
+
+
 @app.route('/Lessons/', defaults={'path': ''})  # noqa
 @app.route('/Lessons/<path:path>')
 def get_lesson(path):
     lesson_path = f'static/dist/Lessons/{path}'.strip('/')
     js = ''
     css = ''
-    if (lesson_path in lessons):
-        js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.js"]}'
-        css = f'/static/dist/Lessons/{path}/' \
+    if (lesson_path not in lessons \
+       or 'lesson.js' not in lessons[lesson_path]) \
+       and len(path.split('/')) < 6:
+        default_path = get_default_lesson(path)
+        print('here', default_path)
+        return redirect(f'/Lessons/{default_path}')
+
+    print(lesson_path)
+    if (lesson_path in lessons and 'lesson.js' in lessons[lesson_path]):
+        js = f'/{lesson_path}/{lessons[lesson_path]["lesson.js"]}'
+        css = f'/{lesson_path}/' \
               f'{lessons[lesson_path]["lesson.css"]}'
 
-    *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
+    *p, lesson_uid, topic_name, version_uid = lesson_path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
     title = f'{version.htmlTitle} - This I Get'
     if version.htmlTitle == '':
