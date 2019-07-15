@@ -33,8 +33,7 @@ $$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{R
     </div>
   </div>
   <div class="lesson__quiz__submit">
-    <!-- <div class="lesson__quiz__submit_mark"></div> -->
-    <button class="lesson__quiz__submit_button">Submit</button>
+    <button class="lesson__quiz__submit_button">Check</button>
   </div>
 </div>
 </html>

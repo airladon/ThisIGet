@@ -92,6 +92,19 @@ h3:first-of-type {
 .lesson__quiz__submit_button {
   display: table-cell;
   vertical-align: middle;
+  background: none;
+  border: solid 1px color('white', 'darker');
+  font-weight: 200;
+  font-size: 1em;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 0.4em;
+  color: color('black', 'lighter');
+}
+
+.lesson__quiz__submit_button:hover {
+  background-color: color('white', 'lighter');
 }
 
 .lesson__quiz__radio_mark,
