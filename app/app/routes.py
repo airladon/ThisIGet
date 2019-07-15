@@ -48,7 +48,7 @@ def get_full_path(root, file):
     return f'/{root}/{lessons[root][file]}'
 
 
-@app.route('/')
+@app.route('/') # noqa
 def home():
     # The checks for keys in lessons is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
@@ -60,6 +60,7 @@ def home():
     common_lessons_js = ''
     figure_one_js = ''
     polyfill_js = ''
+    lesson_index_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         static = lessons['static']
@@ -77,6 +78,8 @@ def home():
             figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         if 'polyfill.js' in dist:
             polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
+        if 'lessonIndex.js' in dist:
+            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
     # print(dist)
     # print(static)
     # print(figure_one_js)
@@ -85,6 +88,7 @@ def home():
         main_css=main_css, main_js=main_js, vendors_js=vendors_js,
         tools_js=tools_js, common_lessons_js=common_lessons_js,
         figure_one_js=figure_one_js, polyfill_js=polyfill_js,
+        lesson_index_js=lesson_index_js,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.username)
@@ -154,6 +158,7 @@ def get_lesson(path):
     common_lessons_js = ''
     figure_one_js = ''
     polyfill_js = ''
+    lesson_index_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         static = lessons['static']
@@ -167,12 +172,14 @@ def get_lesson(path):
             figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         if 'polyfill.js' in dist:
             polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
+        if 'lessonIndex.js' in dist:
+            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
 
     res = make_response(render_template(
         'lesson.html',
         css=css, js=js, tools_js=tools_js, polyfill_js=polyfill_js,
         common_lessons_js=common_lessons_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js,
+        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
         title=title, description=description))
     if lesson_page:
         res = make_response(redirect(request.path))
@@ -225,6 +232,7 @@ def get_lesson_dev(path):
     tools_js = ''
     figure_one_js = ''
     common_lessons_js = ''
+    lesson_index_js = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         static = lessons['static']
@@ -236,12 +244,14 @@ def get_lesson_dev(path):
             tools_js = f"/{'static/dist'}/{dist['tools.js']}"
         if 'figureone.min.js' in static:
             figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
+        if 'lessonIndex.js' in dist:
+            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
 
     res = make_response(render_template(
         'lesson.html',
         css=css, js=js, tools_js=tools_js,
         common_lessons_js=common_lessons_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js,
+        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
     ))
     if lesson_page:
         res = make_response(redirect(request.path))
