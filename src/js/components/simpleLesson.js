@@ -102,6 +102,7 @@ const checkEntry = (button) => {
   const answer = answerElement.innerHTML.trim().toLowerCase();
   const classes = answerElement.className.split(' ');
   let correct = false;
+  console.log(answerElement.decimals)
   if (answer === entryInput.value) {
     correct = true;
   }

@@ -16,7 +16,7 @@ $$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{R
   - 5.4
 </quiz>
 
-<!-- <q1uiz entry type="integer/number/string" id="">5.4</q1uiz> -->
+<!-- <q1uiz entry type="integer/number/string/2" id="">5.4</q1uiz> -->
 
 Answer:
 <html>
@@ -31,7 +31,7 @@ Answer:
     <div class="lesson__quiz__entry_submit">
       <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
     </div>
-    <div class="lesson__quiz__answer">
+    <div class="lesson__quiz__answer lesson__quiz__answer__type_2" value="hello">
       5.4
     </div>
   </div>
