@@ -99,7 +99,16 @@ function parseQuiz(source) {
 
 function convertID(str) {
   const contents = str.trim().replace(/^\$\|/, '').replace(/\|\$$/, '');
-  const out = `<span id="id_lesson__variable_${contents}" class="lesson__variable">${contents}</span>`;
+  let tag = 'span';
+  if (contents.split(' ').length > 1) {
+    [tag] = contents.split(' ');
+  }
+  const id = contents.split(' ').slice(-1)[0];
+
+  let out = `<${tag} id="id_lesson__variable_${id}" class="lesson__variable">${id}</${tag}>`;
+  if (str.charAt(0) === ' ') {
+    out = ` ${out}`;
+  }
   return out;
 }
 
@@ -121,8 +130,8 @@ function parseIDs(source) {
 // and replaces them with <a> links
 async function quizparser(callback, source, map, meta) {
   let out = source;
-  out = parseIDs(out);
   out = parseQuiz(out);
+  out = parseIDs(out);
   callback(null, out, map, meta);
 }
 

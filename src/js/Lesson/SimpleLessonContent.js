@@ -20,8 +20,8 @@ class SimpleLessonContent {
   key: number;
   qrDiagram: Object;
   diagram: Object;
-  setVariables: { [name: string]: () => string | number }
-  variables: { [name: string]: string | number }
+  setVariables: () => {[name: string]: string | number };
+  variables: { [name: string]: string | number };
 
   constructor(htmlId: string = 'lesson__content') {
     this.htmlId = htmlId;

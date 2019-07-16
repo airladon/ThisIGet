@@ -16,9 +16,10 @@ const c = async () => {
    - there
   </quiz>
   so here it is
-  $|asdf|$
+  hello $|asdf|$
+  $|a testDiv|$
   <quiz entryInteger id="fasdf">4</quiz>
-  <quiz entryInteger>3</quiz>
+  <quiz entryInteger>$|3|$</quiz>
   `;
   await linkLoader(a);
 };

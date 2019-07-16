@@ -106,6 +106,9 @@ const checkEntry = (button) => {
     return;
   }
   let answer = answerElement.innerHTML.trim().toLowerCase();
+  if (answerElement.children.length > 0) {
+    answer = answerElement.children[0].innerHTML.trim().toLowerCase();
+  }
   const classes = answerElement.className.split(' ');
   let type = 'string';
   for (let i = 0; i < classes.length; i += 1) {
@@ -224,15 +227,16 @@ export default class SimpleLessonComponent extends React.Component
       if (element == null) {
         return;
       }
-      element.innerHTML = this.lesson.content.variables[variableName];
+      element.innerHTML = `${this.lesson.content.variables[variableName]}`;
     });
   }
 
   setVariables() {
-    Object.keys(this.lesson.content.setVariables).forEach((variableName) => {
-      this.lesson.content.variables[variableName] =
-        this.lesson.content.setVariables[variableName]();
-    });
+    // Object.keys(this.lesson.content.setVariables).forEach((variableName) => {
+    //   this.lesson.content.variables[variableName] =
+    //     this.lesson.content.setVariables[variableName]();
+    // });
+    this.lesson.content.variables = this.lesson.content.setVariables();
   }
 
   componentDidUpdate() {

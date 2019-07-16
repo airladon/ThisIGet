@@ -1,5 +1,5 @@
 // @flow
-// import Fig from 'figureone';
+import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent';
 // import imgLink from '../../tile.png';
@@ -7,6 +7,8 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import details from '../../details';
 // $FlowFixMe
 import content from './content.md';
+
+const { round } = Fig.tools.math;
 
 class Content extends SimpleLessonContent {
   setTitle() {
@@ -25,8 +27,12 @@ class Content extends SimpleLessonContent {
       </div>,
     ];
 
-    this.setVariables = {
-      q1: () => Math.random(),
+    this.setVariables = () => {
+      const variables = {};
+      variables.a = round(Math.random(), 2);
+      variables.b = round(Math.random(), 2);
+      variables.c = round(variables.a + variables.b, 2);
+      return variables;
     };
   }
 }

@@ -25,9 +25,11 @@
 
 <quiz entryNumber>2.31</quiz>
 
-<quiz entry2>2.11</quiz>
+What is $|a|$ + $|b|$?
 
-$|q1|$
+<quiz entry2>$|c|$</quiz>
+
+
 
 <quiz entry>hello world</quiz>
 <!-- <q1uiz entry type="integer/number/string/2" id="">5.4</q1uiz> -->
