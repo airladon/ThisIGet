@@ -128,9 +128,13 @@ h3:first-of-type {
 // QUIZ Entry
 // ///////////////////////////////////////////////////////
 .lesson__quiz_entry {
-  display: table;
   margin-top: 1em;
+  display: table;
 }
+
+// .lesson__quiz_entry_container {
+//   display: table;
+// }
 
 .lesson__quiz_entry_label {
   display: table-cell;
@@ -140,20 +144,20 @@ h3:first-of-type {
 .lesson__quiz_entry_input {
   display: table-cell;
   vertical-align: middle;
-  padding-left: 1em;
-  padding-right: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.8em;
 }
 
 .lesson__quiz_entry_input input {
-  border: 1px solid color('black', 'darker');
-  padding: 0.1em;
+  border: 1px solid color('black', 'dark');
+  padding: 0.15em;
   width: 4em;
   text-align: right;
   padding-right: 0.2em;
 }
 
 .lesson__quiz__entry_submit {
-  margin-top: 0.5em;
+  // margin-top: 0.5em;
 }
 
 .lesson__quiz__answer {

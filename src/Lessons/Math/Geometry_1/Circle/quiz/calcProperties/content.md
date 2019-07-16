@@ -24,21 +24,18 @@
 
 ### Question 3:
 
-If a circle has diameter 4.2, what is its radius?
+If a circle has diameter 4.2, what is its radius? 
 
 <html>
   <div class="lesson__quiz_entry">
-    <!-- <div class="lesson__quiz_entry_label">
-      Answer:
-    </div> -->
-    <div class="lesson__quiz_entry_input">
-      <input type="text">
-    </div>
-    <div class="lesson__quiz__mark"></div>
-    <div class="lesson__quiz__entry_submit">
-      <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
-    </div>
-    <div class="lesson__quiz__answer lesson__quiz__answer__type_number" value="hello">
+      <div class="lesson__quiz__mark"></div>
+      <div class="lesson__quiz_entry_input">
+        <input type="text">
+      </div>
+      <div class="lesson__quiz__entry_submit">
+        <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
+      </div>
+    <div class="lesson__quiz__answer lesson__quiz__answer__type_number">
       2.11
     </div>
   </div>
