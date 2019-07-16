@@ -168,6 +168,7 @@ export default class SimpleLessonComponent extends React.Component
   lesson: SimpleLesson;
   key: number;
   afterUpdate: ?() => void;
+  firstUpdate: boolean;
 
   constructor(props: Props) {
     super(props);
@@ -175,6 +176,7 @@ export default class SimpleLessonComponent extends React.Component
     this.key = 0;
     this.state = { qr: <StaticQR content="Loading Reference" link="" title=""/> };
     this.afterUpdate = null;
+    this.firstUpdate = true;
   }
 
   showStaticQR(id: string, parameters: string) {
@@ -244,7 +246,10 @@ export default class SimpleLessonComponent extends React.Component
       this.afterUpdate();
       this.afterUpdate = null;
     }
-    this.showVariables();
+    if (this.firstUpdate) {
+      this.showVariables();
+      this.firstUpdate = false;
+    }
     const multichoiceButtons =
       document.getElementsByClassName('lesson__quiz__multichoice_submit_button');
     for (let i = 0; i < multichoiceButtons.length; i += 1) {

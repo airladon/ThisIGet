@@ -7,7 +7,7 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import details from '../../details';
 // $FlowFixMe
 import content from './content.md';
-import { multichoice, shuffle, selection } from '../../../../../../js/tools/misc';
+import { multichoice, shuffle } from '../../../../../../js/tools/misc';
 
 const { round, rand } = Fig.tools.math;
 
