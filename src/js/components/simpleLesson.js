@@ -75,14 +75,19 @@ const checkRatioButton = (button) => {
   const inputs = button.parentElement.parentElement.querySelectorAll('input');
   for (let i = 0; i < inputs.length; i += 1) {
     const input = inputs[i];
+    // $FlowFixMe
     const submitMark = input.parentElement.parentElement.querySelector('.lesson__quiz__radio_mark');
-    submitMark.classList.remove('lesson__quiz__result_correct');
-    submitMark.classList.remove('lesson__quiz__result_incorrect');
-    if (input.checked === true) {
-      if (input.value === 'correct') {
-        submitMark.classList.add('lesson__quiz__result_correct');
-      } else {
-        submitMark.classList.add('lesson__quiz__result_incorrect');
+    if (submitMark != null) {
+      submitMark.classList.remove('lesson__quiz__result_correct');
+      submitMark.classList.remove('lesson__quiz__result_incorrect');
+      // $FlowFixMe
+      if (input.checked === true) {
+        // $FlowFixMe
+        if (input.value === 'correct') {
+          submitMark.classList.add('lesson__quiz__result_correct');
+        } else {
+          submitMark.classList.add('lesson__quiz__result_incorrect');
+        }
       }
     }
   }
