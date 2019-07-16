@@ -244,6 +244,7 @@ export default class SimpleLessonComponent extends React.Component
       this.afterUpdate();
       this.afterUpdate = null;
     }
+    this.showVariables();
     const multichoiceButtons =
       document.getElementsByClassName('lesson__quiz__multichoice_submit_button');
     for (let i = 0; i < multichoiceButtons.length; i += 1) {
@@ -260,7 +261,6 @@ export default class SimpleLessonComponent extends React.Component
         checkEntry(element);
       };
     }
-    this.showVariables();
   }
 
   componentDidMount() {

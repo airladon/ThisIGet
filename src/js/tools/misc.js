@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 
 const { Point } = Fig;
-const { joinObjects } = Fig.tools.misc;
+const { joinObjects, generateUniqueId } = Fig.tools.misc;
 
 const classify = (key: string, value: string) => {
   const nonEmpty = value || key;
@@ -192,6 +192,35 @@ function attachQuickReference(
   });
 }
 
+function multichoice(
+  lines: Array<string>,
+  name: string = generateUniqueId(),
+  options: string = ''
+) {
+  let out = `
+<html>
+<div class="lesson__multiple_choice" ${options}>`;
+  lines.forEach((line) => {
+    const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
+    const html = `
+  <div class="lesson__quiz_selection">
+    <div class="lesson__quiz__radio_mark"></div>
+    <div class="lesson__quiz__radio_button">
+      <input type="radio" name="${name}" value="${value}">
+      ${line.slice(1).trim()}
+    </div>
+  </div>`;
+    out = `${out}${html}`;
+  });
+  out = `${out}
+  <div class="lesson__quiz__submit">
+    <button class="lesson__quiz__submit_button lesson__quiz__multichoice_submit_button">Check</button>
+  </div>
+</div>
+</html>
+`;
+  return out;
+}
 // function attachStaticQuickReference(
 //   lessonPath: string,
 //   lessonUID: string,
@@ -210,6 +239,6 @@ function attachQuickReference(
 
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie, activator, attachQuickReference,
+  createCookie, activator, attachQuickReference, multichoice,
 };
 

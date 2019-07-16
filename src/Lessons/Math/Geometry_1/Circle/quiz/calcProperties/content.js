@@ -7,8 +7,9 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import details from '../../details';
 // $FlowFixMe
 import content from './content.md';
+import { multichoice } from '../../../../../../js/tools/misc';
 
-const { round } = Fig.tools.math;
+const { round, rand } = Fig.tools.math;
 
 class Content extends SimpleLessonContent {
   setTitle() {
@@ -29,9 +30,27 @@ class Content extends SimpleLessonContent {
 
     this.setVariables = () => {
       const variables = {};
-      variables.a = round(Math.random(), 2);
-      variables.b = round(Math.random(), 2);
-      variables.c = round(variables.a + variables.b, 2);
+      variables.q1C = round(rand(1, 20), 1);
+      variables.q1R = round(variables.q1C / 2 / Math.PI, 2);
+
+      variables.q2R = round(rand(0.1, 20), 1);
+      variables.q2C = round(variables.q2R * Math.PI * 2, 2);
+
+      variables.q3C = round(rand(1, 20), 1);
+      variables.q3D = round(variables.q3C / Math.PI, 2);
+
+      variables.q4D = round(rand(1, 20), 1);
+      variables.q4R = round(variables.q4D / 2, 2);
+
+      variables.q6D = round(rand(1, 20), 1);
+      const answers = [
+        `- ${round(variables.q6D * 2, 2)}`,
+        `- ${round(variables.q6D / 2, 2)}`,
+        `- ${round(variables.q6D * Math.PI * 2, 2)}`,
+        `+ ${round(variables.q6D * Math.PI, 2)}`,
+      ];
+      variables.q6m = multichoice(answers, 'q6');
+
       return variables;
     };
   }
