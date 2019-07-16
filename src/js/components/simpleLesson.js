@@ -54,19 +54,19 @@ function align(elementId: string, containerId: string, linkId: string) {
   element.style.top = `${proposedTop}px`;
 }
 
-const getRadioButtonSelected = (button) => {
-  if (button.parentElement == null || button.parentElement.parentElement == null) {
-    return null;
-  }
-  const inputs = button.parentElement.parentElement.querySelectorAll('input');
-  for (let i = 0; i < inputs.length; i += 1) {
-    const input = inputs[i];
-    if (input.checked === true) {
-      return input.value;
-    }
-  }
-  return null;
-};
+// const getRadioButtonSelected = (button) => {
+//   if (button.parentElement == null || button.parentElement.parentElement == null) {
+//     return null;
+//   }
+//   const inputs = button.parentElement.parentElement.querySelectorAll('input');
+//   for (let i = 0; i < inputs.length; i += 1) {
+//     const input = inputs[i];
+//     if (input.checked === true) {
+//       return input.value;
+//     }
+//   }
+//   return null;
+// };
 
 const checkRatioButton = (button) => {
   if (button.parentElement == null || button.parentElement.parentElement == null) {
@@ -86,6 +86,31 @@ const checkRatioButton = (button) => {
       }
     }
   }
+};
+
+const checkEntry = (button) => {
+  if (button.parentElement == null || button.parentElement.parentElement == null) {
+    return;
+  }
+  const parent = button.parentElement.parentElement;
+  const entryInput = parent.querySelector('input');
+  const answerElement = parent.querySelector('.lesson__quiz__answer');
+  const submitMark = parent.querySelector('.lesson__quiz__mark');
+  if (answerElement == null || entryInput == null || submitMark == null) {
+    return;
+  }
+  const answer = answerElement.innerHTML.trim().toLowerCase();
+  const classes = answerElement.className.split(' ');
+  let correct = false;
+  if (answer === entryInput.value) {
+    correct = true;
+  }
+  if (correct) {
+    submitMark.classList.add('lesson__quiz__result_correct');
+  } else {
+    submitMark.classList.add('lesson__quiz__result_incorrect');
+  }
+  console.log(entryInput, answer.innerHTML);
 };
 
 export default class SimpleLessonComponent extends React.Component
@@ -151,28 +176,20 @@ export default class SimpleLessonComponent extends React.Component
       this.afterUpdate();
       this.afterUpdate = null;
     }
-    const elements =
-      document.getElementsByClassName('lesson__quiz__submit_button');
-    for (let i = 0; i < elements.length; i += 1) {
-      const element = elements[i];
+    const multichoiceButtons =
+      document.getElementsByClassName('lesson__quiz__multichoice_submit_button');
+    for (let i = 0; i < multichoiceButtons.length; i += 1) {
+      const element = multichoiceButtons[i];
       element.onclick = () => {
         checkRatioButton(element);
-        // const result = getRadioButtonSelected(element);
-        // if (element.parentElement == null
-        //   || element.parentElement == null) {
-        //   return;
-        // }
-        // const mark = element.parentElement.querySelector('.lesson__quiz__submit_mark');
-        // if (mark == null) {
-        //   return;
-        // }
-        // if (result === 'correct') {
-        //   mark.classList.remove('lesson__quiz__result_incorrect');
-        //   mark.classList.add('lesson__quiz__result_correct');
-        // } else {
-        //   mark.classList.remove('lesson__quiz__result_correct');
-        //   mark.classList.add('lesson__quiz__result_incorrect');
-        // }
+      };
+    }
+    const entryButtons =
+      document.getElementsByClassName('lesson__quiz__entry_submit_button');
+    for (let i = 0; i < entryButtons.length; i += 1) {
+      const element = entryButtons[i];
+      element.onclick = () => {
+        checkEntry(element);
       };
     }
   }

@@ -19,7 +19,7 @@ function convertMultiChoice(str, name) {
   });
   out = `${out}
   <div class="lesson__quiz__submit">
-    <button class="lesson__quiz__submit_button">Check</button>
+    <button class="lesson__quiz__submit_button lesson__quiz__multichoice_submit_button">Check</button>
   </div>
 </div>
 </html>

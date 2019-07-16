@@ -59,10 +59,8 @@ h3:first-of-type {
 }
 
 // ///////////////////////////////////////////////////////
-// QUIZ
+// QUIZ Multiple Choice
 // ///////////////////////////////////////////////////////
-// .lesson__multiple_choice {
-// }
 
 .lesson__multiple_choice input {
   // margin-top: 1em;
@@ -107,6 +105,7 @@ h3:first-of-type {
   background-color: color('white', 'lighter');
 }
 
+.lesson__quiz__mark,
 .lesson__quiz__radio_mark,
 .lesson__quiz__submit_mark {
   display: table-cell;
@@ -125,6 +124,41 @@ h3:first-of-type {
   background-image: $incorrect;
 }
 
+// ///////////////////////////////////////////////////////
+// QUIZ Entry
+// ///////////////////////////////////////////////////////
+.lesson__quiz_entry {
+  display: table;
+  margin-top: 1em;
+}
+
+.lesson__quiz_entry_label {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__quiz_entry_input {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+.lesson__quiz_entry_input input {
+  border: 1px solid color('black', 'darker');
+  padding: 0.1em;
+  width: 4em;
+  text-align: right;
+  padding-right: 0.2em;
+}
+
+.lesson__quiz__entry_submit {
+  margin-top: 0;
+}
+
+.lesson__quiz__answer {
+  display: none;
+}
 // #simple_lesson__qr__overlay {
 //   z-index: -1;
 //   position: absolute;
