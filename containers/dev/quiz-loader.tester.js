@@ -16,12 +16,7 @@ const c = async () => {
    - there
   </quiz>
   so here it is
-  <quiz multichoice>
-  - Hello
-  + World
-   - there
-  </quiz>
-  asdf
+  $|asdf|$
   <quiz entryInteger id="fasdf">4</quiz>
   <quiz entryInteger>3</quiz>
   `;

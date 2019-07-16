@@ -24,6 +24,10 @@ class Content extends SimpleLessonContent {
       <div className="markdown" dangerouslySetInnerHTML={ { __html: content } }/>
       </div>,
     ];
+
+    this.setVariables = {
+      q1: () => Math.random(),
+    };
   }
 }
 

@@ -27,6 +27,8 @@
 
 <quiz entry2>2.11</quiz>
 
+$|q1|$
+
 <quiz entry>hello world</quiz>
 <!-- <q1uiz entry type="integer/number/string/2" id="">5.4</q1uiz> -->
 

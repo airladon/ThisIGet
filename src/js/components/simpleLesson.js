@@ -217,6 +217,23 @@ export default class SimpleLessonComponent extends React.Component
     this.lesson.content.qrDiagram.animateNextFrame();
   }
 
+  showVariables() {
+    Object.keys(this.lesson.content.variables).forEach((variableName) => {
+      const element =
+        document.getElementById(`id_lesson__variable_${variableName}`);
+      if (element == null) {
+        return;
+      }
+      element.innerHTML = this.lesson.content.variables[variableName];
+    });
+  }
+
+  setVariables() {
+    Object.keys(this.lesson.content.setVariables).forEach((variableName) => {
+      this.lesson.content.variables[variableName] =
+        this.lesson.content.setVariables[variableName]();
+    });
+  }
 
   componentDidUpdate() {
     if (this.afterUpdate != null) {
@@ -239,6 +256,7 @@ export default class SimpleLessonComponent extends React.Component
         checkEntry(element);
       };
     }
+    this.showVariables();
   }
 
   componentDidMount() {
@@ -251,8 +269,10 @@ export default class SimpleLessonComponent extends React.Component
         }
       },
     };
+
     this.lesson.initialize();
     // console.log(elements);
+    this.setVariables();
   }
 
   // eslint-disable-next-line class-methods-use-this

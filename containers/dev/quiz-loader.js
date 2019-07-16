@@ -82,9 +82,7 @@ function convertQuiz(str, nameIndex) {
   return '';
 }
 
-// This loader looks for [[label]]((method,parameter,color)) strings
-// and replaces them with <a> links
-async function quizparser(callback, source, map, meta) {
+function parseQuiz(source) {
   const re = /<quiz([\s\S]*?)<\/quiz>/;
   let out = source;
   let match = re.exec(out);
@@ -96,6 +94,35 @@ async function quizparser(callback, source, map, meta) {
     match = re.exec(out);
     nameIndex += 1;
   }
+  return out;
+}
+
+function convertID(str) {
+  const contents = str.trim().replace(/^\$\|/, '').replace(/\|\$$/, '');
+  const out = `<span id="id_lesson__variable_${contents}" class="lesson__variable">${contents}</span>`;
+  return out;
+}
+
+function parseIDs(source) {
+  const re = /([^\\]\$\||^{{)((?!\|\$).)*\|\$/;
+  let out = source;
+  let match = re.exec(out);
+  while (match != null) {
+    const { index } = match;
+    const [str] = match;
+    out = `${out.substring(0, index)}${convertID(str)}${out.substring(index + str.length)}`;
+    match = re.exec(out);
+    // nameIndex += 1;
+  }
+  return out;
+}
+
+// This loader looks for [[label]]((method,parameter,color)) strings
+// and replaces them with <a> links
+async function quizparser(callback, source, map, meta) {
+  let out = source;
+  out = parseIDs(out);
+  out = parseQuiz(out);
   callback(null, out, map, meta);
 }
 
