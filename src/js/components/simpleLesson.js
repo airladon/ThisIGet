@@ -115,19 +115,29 @@ const checkEntry = (button) => {
     }
   }
 
+  let correct = false;
   // $FlowFixMe
   let { value } = entryInput;
   if (type === 'string') {
     value = value.trim().toLowerCase();
     answer = answer.trim().toLowerCase();
+    if (value.toLowerCase() === answer.toLowerCase()) {
+      correct = true;
+    }
   }
   if (type === 'integer') {
     value = parseInt(value, 10);
     answer = parseInt(answer, 10);
+    if (Math.round((answer - value) * 1e8) / 1e8 === 0) {
+      correct = true;
+    }
   }
   if (type === 'number') {
     value = parseFloat(value);
     answer = parseFloat(answer);
+    if (Math.round((answer - value) * 1e8) / 1e8 === 0) {
+      correct = true;
+    }
   }
 
   const decimals = parseInt(type, 10);
@@ -136,13 +146,11 @@ const checkEntry = (button) => {
     answer = parseFloat(answer);
     value = Math.round(value * 10 ** decimals) / 10 ** decimals;
     answer = Math.round(answer * 10 ** decimals) / 10 ** decimals;
+    if (Math.round((answer - value) * 10 ** (decimals + 1)) / 10 ** (decimals + 1) === 0) {
+      correct = true;
+    }
   }
 
-  let correct = false;
-
-  if (answer === value) {
-    correct = true;
-  }
   submitMark.classList.remove('lesson__quiz__result_correct');
   submitMark.classList.remove('lesson__quiz__result_incorrect');
   if (correct) {
