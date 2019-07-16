@@ -19,13 +19,21 @@
   - $$\frac{y^2 - \sqrt{4 - a^2}}{x + a}$$
 </quiz>
 
+<quiz entryInteger>2</quiz>
 
+<quiz entryInteger>2.2</quiz>
+
+<quiz entryNumber>2.21</quiz>
+
+<quiz entry2>2.11</quiz>
+
+<quiz entry>hello world</quiz>
 <!-- <q1uiz entry type="integer/number/string/2" id="">5.4</q1uiz> -->
 
 ### Question 3:
 
 If a circle has diameter 4.2, what is its radius? 
-
+<!-- 
 <html>
   <div class="lesson__quiz_entry">
       <div class="lesson__quiz__mark"></div>
@@ -39,7 +47,7 @@ If a circle has diameter 4.2, what is its radius?
       2.11
     </div>
   </div>
-</html>
+</html> -->
 <!-- <html>
 <div class="lesson__multiple_choice">
   <div class="lesson__quiz_selection">

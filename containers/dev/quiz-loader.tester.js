@@ -21,6 +21,8 @@ const c = async () => {
   + World
    - there
   </quiz>
+  asdf
+  <quiz entryInteger>4</quiz>
   `;
   await linkLoader(a);
 };

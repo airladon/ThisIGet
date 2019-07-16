@@ -27,12 +27,49 @@ function convertMultiChoice(str, name) {
   return out;
 }
 
+function convertEntry(contents, entryType, options) {
+  let answerType = 'lesson__quiz__answer__type_string';
+  console.log(entryType)
+  if (entryType === 'string') {
+    answerType = 'lesson__quiz__answer__type_string';
+  } else if (entryType === 'integer') {
+    answerType = 'lesson__quiz__answer__type_integer';
+  } else if (entryType === 'number') {
+    answerType = 'lesson__quiz__answer__type_number';
+  } else {
+    const decimals = parseInt(entryType, 10);
+    if (!Number.isNaN(decimals)) {
+      answerType = `$lesson__quiz__answer__type_${decimals}`;
+    }
+  }
+
+  return `<html>
+  <div class="lesson__quiz_entry" ${options}>
+      <div class="lesson__quiz__mark"></div>
+      <div class="lesson__quiz_entry_input">
+        <input type="text">
+      </div>
+      <div class="lesson__quiz__entry_submit">
+        <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
+      </div>
+    <div class="lesson__quiz__answer ${answerType}">
+      2.11
+    </div>
+  </div>
+</html>`;
+}
+
 function convertQuiz(str, nameIndex) {
-  const match = /<quiz(.*)>/.exec(str);
+  const match = /<quiz *([^ >]*)/.exec(str);
   const type = match[1].trim().toLowerCase();
   const contents = /<quiz[^>]*>([\s\S]*)<\/quiz>/.exec(str)[1];
   if (type === 'multichoice') {
     return convertMultiChoice(contents, `${nameIndex}`);
+  }
+  if (type.startsWith('entry')) {
+    const entryType = /<quiz *entry([^ >]*)/.exec(str)[1].toLowerCase();
+    const options = /<quiz *entry[^ ]* *([^>]*)>/.exec(str)[1];
+    return convertEntry(contents, entryType, options);
   }
   return '';
 }
