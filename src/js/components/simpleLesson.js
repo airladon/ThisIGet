@@ -88,6 +88,11 @@ const checkRatioButton = (button) => {
   }
 };
 
+// Use classes:
+//   lesson__quiz__answer__type_<number> - for round to number decimals
+//   lesson__quiz__answer__type_string - for trimmed string
+//   lesson__quiz__answer__type_integer - for integer
+//   lesson__quiz__answer__type_number - for number/float/scientific
 const checkEntry = (button) => {
   if (button.parentElement == null || button.parentElement.parentElement == null) {
     return;
@@ -99,19 +104,51 @@ const checkEntry = (button) => {
   if (answerElement == null || entryInput == null || submitMark == null) {
     return;
   }
-  const answer = answerElement.innerHTML.trim().toLowerCase();
+  let answer = answerElement.innerHTML.trim().toLowerCase();
   const classes = answerElement.className.split(' ');
+  let type = 'string';
+  for (let i = 0; i < classes.length; i += 1) {
+    const c = classes[i];
+    if (c.startsWith('lesson__quiz__answer__type_')) {
+      type = c.replace('lesson__quiz__answer__type_', '');
+    }
+  }
+
+  // $FlowFixMe
+  let { value } = entryInput;
+  if (type === 'string') {
+    value = value.trim().toLowerCase();
+    answer = answer.trim().toLowerCase();
+  }
+  if (type === 'integer') {
+    value = parseInt(value, 10);
+    answer = parseInt(answer, 10);
+  }
+  if (type === 'number') {
+    value = parseFloat(value);
+    answer = parseFloat(answer);
+  }
+
+  const decimals = parseInt(type, 10);
+  if (!Number.isNaN(decimals)) {
+    value = parseFloat(value);
+    answer = parseFloat(answer);
+    value = Math.round(value * 10 ** decimals) / 10 ** decimals;
+    answer = Math.round(answer * 10 ** decimals) / 10 ** decimals;
+  }
+
   let correct = false;
-  console.log(answerElement.decimals)
-  if (answer === entryInput.value) {
+
+  if (answer === value) {
     correct = true;
   }
+  submitMark.classList.remove('lesson__quiz__result_correct');
+  submitMark.classList.remove('lesson__quiz__result_incorrect');
   if (correct) {
     submitMark.classList.add('lesson__quiz__result_correct');
   } else {
     submitMark.classList.add('lesson__quiz__result_incorrect');
   }
-  console.log(entryInput, answer.innerHTML);
 };
 
 export default class SimpleLessonComponent extends React.Component

@@ -1,38 +1,45 @@
 ## Pythagorean Theorem
 
-### Example Equation:
-
-$$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{RGB}{238,34,12}\color{b}A=B^C$$
+### Question 1:
 
 <quiz multichoice>
-  - 1.2
-  + 3.2
-  - 5.4
+  - Great
+  - Average
+  + Poor
+  - Bad
 </quiz>
+
+
+### Question 2
 
 <quiz multichoice>
   + 1.2
   - 3.2
-  - 5.4
+  - $$\textstyle{\frac{1}{2}}$$
+  - $$\frac{y^2 - \sqrt{4 - a^2}}{x + a}$$
 </quiz>
+
 
 <!-- <q1uiz entry type="integer/number/string/2" id="">5.4</q1uiz> -->
 
-Answer:
+### Question 3:
+
+If a circle has diameter 4.2, what is its radius?
+
 <html>
   <div class="lesson__quiz_entry">
     <!-- <div class="lesson__quiz_entry_label">
       Answer:
     </div> -->
-    <div class="lesson__quiz__mark"></div>
     <div class="lesson__quiz_entry_input">
       <input type="text">
     </div>
+    <div class="lesson__quiz__mark"></div>
     <div class="lesson__quiz__entry_submit">
       <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
     </div>
-    <div class="lesson__quiz__answer lesson__quiz__answer__type_2" value="hello">
-      5.4
+    <div class="lesson__quiz__answer lesson__quiz__answer__type_number" value="hello">
+      2.11
     </div>
   </div>
 </html>
