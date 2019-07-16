@@ -7,7 +7,7 @@ import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent
 import details from '../../details';
 // $FlowFixMe
 import content from './content.md';
-import { multichoice, shuffle } from '../../../../../../js/tools/misc';
+import { multichoice, shuffle, selection } from '../../../../../../js/tools/misc';
 
 const { round, rand } = Fig.tools.math;
 
@@ -43,12 +43,18 @@ class Content extends SimpleLessonContent {
       variables.q4R = round(variables.q4D / 2, 2);
 
       variables.q6D = round(rand(1, 20), 1);
-      const answers = shuffle([
-        `- ${round(variables.q6D * 2, 2)}`,
-        `- ${round(variables.q6D / 2, 2)}`,
-        `- ${round(variables.q6D * Math.PI * 2, 2)}`,
+      const answers = shuffle(
         `+ ${round(variables.q6D * Math.PI, 2)}`,
-      ]);
+        [
+          `- ${round(variables.q6D * 2, 2)}`,
+          `- ${round(variables.q6D / 2, 2)}`,
+          `- ${round(variables.q6D * Math.PI / 2, 2)}`,
+          `- ${round(variables.q6D * Math.PI + 0.1, 2)}`,
+          `- ${round(variables.q6D * Math.PI - rand(0.5, 1), 2)}`,
+          `- ${round(variables.q6D * Math.PI + rand(0.5, 2), 2)}`,
+        ],
+        4,
+      );
       variables.q6m = multichoice(answers, 'q6');
 
       return variables;

@@ -196,7 +196,7 @@ function attachQuickReference(
 function multichoice(
   lines: Array<string>,
   name: string = generateUniqueId(),
-  options: string = ''
+  options: string = '',
 ) {
   let out = `
 <html>
@@ -223,11 +223,37 @@ function multichoice(
   return out;
 }
 
-function shuffle(input: Array<Object>) {
-  const out = [];
-  while (input.length > 0) {
-    out.push(removeRandElement(input));
+// function shuffle(input: Array<Object>) {
+//   const out = [];
+//   while (input.length > 0) {
+//     out.push(removeRandElement(input));
+//   }
+//   console.log(out)
+//   return out;
+// }
+
+function shuffle(
+  mustHaveItems: Array<string> | string,
+  canHaveItems: Array<string> = [],
+  numToSelectIn: ?number = null,
+) {
+  let mustHave = mustHaveItems;
+  if (!Array.isArray(mustHaveItems)) {
+    mustHave = [mustHaveItems];
   }
+  let numToSelect = mustHave.length;
+  if (numToSelectIn != null) {
+    numToSelect = numToSelectIn;
+  }
+  const downSelected = [...mustHave];
+  while (downSelected.length < numToSelect) {
+    downSelected.push(removeRandElement(canHaveItems));
+  }
+  const out = [];
+  while (downSelected.length > 0) {
+    out.push(removeRandElement(downSelected));
+  }
+  console.log(out)
   return out;
 }
 
