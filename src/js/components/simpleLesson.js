@@ -54,20 +54,12 @@ function align(elementId: string, containerId: string, linkId: string) {
   element.style.top = `${proposedTop}px`;
 }
 
-// const getRadioButtonSelected = (button) => {
-//   if (button.parentElement == null || button.parentElement.parentElement == null) {
-//     return null;
-//   }
-//   const inputs = button.parentElement.parentElement.querySelectorAll('input');
-//   for (let i = 0; i < inputs.length; i += 1) {
-//     const input = inputs[i];
-//     if (input.checked === true) {
-//       return input.value;
-//     }
-//   }
-//   return null;
-// };
-
+// Can also use html options like id="ID_TO_USE":
+//   <quiz multichoice id="ID_TO_USE">
+//     - option 1
+//     + option 2
+//     - option 1
+//   </quiz>
 const checkRatioButton = (button) => {
   if (button.parentElement == null || button.parentElement.parentElement == null) {
     return;
@@ -94,10 +86,14 @@ const checkRatioButton = (button) => {
 };
 
 // Use classes:
-//   lesson__quiz__answer__type_<number> - for round to number decimals
-//   lesson__quiz__answer__type_string - for trimmed string
-//   lesson__quiz__answer__type_integer - for integer
-//   lesson__quiz__answer__type_number - for number/float/scientific
+//   entryNumber - for number/float/scientific
+//   entry<number> - for round to number decimals
+//     e.g. entry2 - for 2 decimal places
+//   entryString - for trimmed string
+//   entry - defaults to string
+//
+// Can also use html options like id="ID_TO_USE":
+//   <quiz entry2 id="ID_TO_USE">2.11</quiz>
 const checkEntry = (button) => {
   if (button.parentElement == null || button.parentElement.parentElement == null) {
     return;

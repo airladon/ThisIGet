@@ -10,7 +10,7 @@ const linkLoader = require('./quiz-loader.js');
 const c = async () => {
   const a = `
   This is a test
-  <quiz multichoice>
+  <quiz multichoice id="asdf">
   - Hello
   + World
    - there
@@ -22,7 +22,8 @@ const c = async () => {
    - there
   </quiz>
   asdf
-  <quiz entryInteger>4</quiz>
+  <quiz entryInteger id="fasdf">4</quiz>
+  <quiz entryInteger>3</quiz>
   `;
   await linkLoader(a);
 };

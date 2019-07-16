@@ -23,7 +23,7 @@
 
 <quiz entryInteger>2.2</quiz>
 
-<quiz entryNumber>2.21</quiz>
+<quiz entryNumber>2.31</quiz>
 
 <quiz entry2>2.11</quiz>
 

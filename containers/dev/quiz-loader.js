@@ -1,10 +1,10 @@
 // https://webpack.js.org/api/loaders/
 
-function convertMultiChoice(str, name) {
+function convertMultiChoice(str, name, options) {
   const lines = str.trim().split('\n').map(l => l.trim());
   let out = `
 <html>
-<div class="lesson__multiple_choice">`;
+<div class="lesson__multiple_choice" ${options}>`;
   lines.forEach((line) => {
     const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
     const html = `
@@ -29,7 +29,6 @@ function convertMultiChoice(str, name) {
 
 function convertEntry(contents, entryType, options) {
   let answerType = 'lesson__quiz__answer__type_string';
-  console.log(entryType)
   if (entryType === 'string') {
     answerType = 'lesson__quiz__answer__type_string';
   } else if (entryType === 'integer') {
@@ -39,7 +38,7 @@ function convertEntry(contents, entryType, options) {
   } else {
     const decimals = parseInt(entryType, 10);
     if (!Number.isNaN(decimals)) {
-      answerType = `$lesson__quiz__answer__type_${decimals}`;
+      answerType = `lesson__quiz__answer__type_${decimals}`;
     }
   }
 
@@ -53,7 +52,7 @@ function convertEntry(contents, entryType, options) {
         <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
       </div>
     <div class="lesson__quiz__answer ${answerType}">
-      2.11
+      ${contents}
     </div>
   </div>
 </html>`;
@@ -64,7 +63,8 @@ function convertQuiz(str, nameIndex) {
   const type = match[1].trim().toLowerCase();
   const contents = /<quiz[^>]*>([\s\S]*)<\/quiz>/.exec(str)[1];
   if (type === 'multichoice') {
-    return convertMultiChoice(contents, `${nameIndex}`);
+    const options = /<quiz *multichoice *([^>]*)>/.exec(str)[1];
+    return convertMultiChoice(contents, `${nameIndex}`, options || '');
   }
   if (type.startsWith('entry')) {
     const entryType = /<quiz *entry([^ >]*)/.exec(str)[1].toLowerCase();
