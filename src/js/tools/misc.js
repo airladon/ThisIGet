@@ -3,6 +3,7 @@ import Fig from 'figureone';
 
 const { Point } = Fig;
 const { joinObjects, generateUniqueId } = Fig.tools.misc;
+const { removeRandElement } = Fig.tools.math;
 
 const classify = (key: string, value: string) => {
   const nonEmpty = value || key;
@@ -221,6 +222,15 @@ function multichoice(
 `;
   return out;
 }
+
+function shuffle(input: Array<Object>) {
+  const out = [];
+  while (input.length > 0) {
+    out.push(removeRandElement(input));
+  }
+  return out;
+}
+
 // function attachStaticQuickReference(
 //   lessonPath: string,
 //   lessonUID: string,
@@ -239,6 +249,6 @@ function multichoice(
 
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
-  createCookie, activator, attachQuickReference, multichoice,
+  createCookie, activator, attachQuickReference, multichoice, shuffle,
 };
 
