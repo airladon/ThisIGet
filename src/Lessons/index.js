@@ -328,6 +328,16 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'General Questions about Degrees',
+            description: 'Answer general questions about measuring angle and degrees',
+            htmlTitle: 'Quiz - Measuring angles and degrees',
+            htmlDescription: 'Answer general questions about measuring angle and degrees',
+            fullLesson: true,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
