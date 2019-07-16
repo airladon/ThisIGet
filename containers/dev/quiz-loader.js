@@ -35,18 +35,18 @@ function convertEntry(contents, entryType, options) {
     answerType = 'lesson__quiz__answer__type_string';
   } else if (entryType === 'integer') {
     answerType = 'lesson__quiz__answer__type_integer';
-    filter = 'function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode<48||charCode>57)){return false;}return true;}';
+    filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode<48||charCode>57)){return false;}return true;}(event)';
     inputType = 'number';
   } else if (entryType === 'number') {
     answerType = 'lesson__quiz__answer__type_number';
-    filter = 'function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}';
+    filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}(event)';
     inputType = 'number';
   } else {
     const decimals = parseInt(entryType, 10);
     if (!Number.isNaN(decimals)) {
       answerType = `lesson__quiz__answer__type_${decimals}`;
     }
-    filter = 'function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}';
+    filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}(event)';
     inputType = 'number';
   }
 

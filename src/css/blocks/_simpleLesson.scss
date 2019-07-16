@@ -156,6 +156,12 @@ h3:first-of-type {
   padding-right: 0.2em;
 }
 
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
 .lesson__quiz__entry_submit {
   // margin-top: 0.5em;
 }
