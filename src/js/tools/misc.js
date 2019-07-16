@@ -223,15 +223,6 @@ function multichoice(
   return out;
 }
 
-// function shuffle(input: Array<Object>) {
-//   const out = [];
-//   while (input.length > 0) {
-//     out.push(removeRandElement(input));
-//   }
-//   console.log(out)
-//   return out;
-// }
-
 function shuffle(
   mustHaveItems: Array<string> | string,
   canHaveItems: Array<string> = [],
@@ -253,25 +244,8 @@ function shuffle(
   while (downSelected.length > 0) {
     out.push(removeRandElement(downSelected));
   }
-  console.log(out)
   return out;
 }
-
-// function attachStaticQuickReference(
-//   lessonPath: string,
-//   lessonUID: string,
-//   versionUID: string,
-//   qrs: {
-//     [name: string]: Object,
-//   },
-// ) {
-//   if (window.quickReference == null) {
-//     window.quickReference = {};
-//   }
-//   Object.keys(qrs).forEach((name) => {
-//     window.quickReference[`${lessonPath}/${lessonUID}/${versionUID}/${name}`] = qrs[name];
-//   });
-// }
 
 export {
   classify, loadRemote, loadRemoteCSS, getCookie, login, logout, logInOut,
