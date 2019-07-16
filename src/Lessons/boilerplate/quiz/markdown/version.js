@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'calcProperties',
+  uid: 'markdown',
   topic: 'quiz',
   title: 'Calculate Properties',
   description: 'Calculate properties of a circle from other properties',
