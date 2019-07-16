@@ -31,7 +31,7 @@ class SimpleLessonContent {
     this.setTitle();
     this.key = 0;
     this.variables = {};
-    this.setVariables = {};
+    this.setVariables = () => ({});
   }
 
   initialize() {

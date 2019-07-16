@@ -4,10 +4,10 @@
 var version = {
   uid: 'calcProperties',
   topic: 'quiz',
-  title: 'Calculate properties of a circle',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Calculate Properties',
+  description: 'Calculate properties of a circle from other properties',
+  htmlTitle: 'Calculate circle properties',
+  htmlDescription: 'Calculate properties of a circle from other properties',
   fullLesson: true,
   type: 'singlePage',
 };

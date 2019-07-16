@@ -39,23 +39,23 @@ class Content extends SimpleLessonContent {
       variables.q3C = round(rand(1, 20), 1);
       variables.q3D = round(variables.q3C / Math.PI, 2);
 
-      variables.q4D = round(rand(1, 20), 1);
-      variables.q4R = round(variables.q4D / 2, 2);
+      variables.q5D = round(rand(1, 20), 1);
+      variables.q5R = round(variables.q4D / 2, 2);
 
-      variables.q6D = round(rand(1, 20), 1);
+      variables.q4D = round(rand(1, 20), 1);
       const answers = shuffle(
-        `+ ${round(variables.q6D * Math.PI, 2)}`,
+        `+ ${round(variables.q4D * Math.PI, 2)}`,
         [
-          `- ${round(variables.q6D * 2, 2)}`,
-          `- ${round(variables.q6D / 2, 2)}`,
-          `- ${round(variables.q6D * Math.PI / 2, 2)}`,
-          `- ${round(variables.q6D * Math.PI + 0.1, 2)}`,
-          `- ${round(variables.q6D * Math.PI - rand(0.5, 1), 2)}`,
-          `- ${round(variables.q6D * Math.PI + rand(0.5, 2), 2)}`,
+          `- ${round(variables.q4D * 2, 2)}`,
+          `- ${round(variables.q4D / 2, 2)}`,
+          `- ${round(variables.q4D * Math.PI / 2, 2)}`,
+          `- ${round(variables.q4D * Math.PI + 0.1, 2)}`,
+          `- ${round(variables.q4D * Math.PI - rand(0.5, 1), 2)}`,
+          `- ${round(variables.q4D * Math.PI + rand(0.5, 2), 2)}`,
         ],
         4,
       );
-      variables.q6m = multichoice(answers, 'q6');
+      variables.q4m = multichoice(answers, 'q4');
 
       return variables;
     };
