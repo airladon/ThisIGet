@@ -20,6 +20,8 @@ class SimpleLessonContent {
   key: number;
   qrDiagram: Object;
   diagram: Object;
+  setVariables: () => {[name: string]: string | number };
+  variables: { [name: string]: string | number };
 
   constructor(htmlId: string = 'lesson__content') {
     this.htmlId = htmlId;
@@ -28,6 +30,8 @@ class SimpleLessonContent {
     this.iconLinkGrey = '/';
     this.setTitle();
     this.key = 0;
+    this.variables = {};
+    this.setVariables = () => ({});
   }
 
   initialize() {

@@ -58,6 +58,117 @@ h3:first-of-type {
   margin-top: 1em;
 }
 
+// ///////////////////////////////////////////////////////
+// QUIZ Multiple Choice
+// ///////////////////////////////////////////////////////
+
+.lesson__multiple_choice input {
+  // margin-top: 1em;
+  margin-right: 0.6em;
+  margin-left: 0.5em;
+  -ms-transform: translateY(-0.1em);
+  -webkit-transform: translateY(-0.1em);
+  transform: translateY(-0.1em);
+  // vertical-align: middle;
+}
+
+.lesson__quiz_selection {
+  display: table;
+  margin-top: 1em;
+}
+
+.lesson__quiz__submit {
+  display: table;
+  margin-top: 1em;
+}
+
+.lesson__quiz__radio_button {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__quiz__submit_button {
+  display: table-cell;
+  vertical-align: middle;
+  background: none;
+  border: solid 1px color('white', 'darker');
+  font-weight: 200;
+  font-size: 1em;
+  padding: 0.3em;
+  padding-left: 1em;
+  padding-right: 1em;
+  border-radius: 0.4em;
+  color: color('black', 'lighter');
+}
+
+.lesson__quiz__submit_button:hover {
+  background-color: color('white', 'lighter');
+}
+
+.lesson__quiz__mark,
+.lesson__quiz__radio_mark,
+.lesson__quiz__submit_mark {
+  display: table-cell;
+  vertical-align: middle;
+  width: 1.5em;
+  height: 1.5em;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.lesson__quiz__result_correct {
+  background-image: $correct;
+}
+
+.lesson__quiz__result_incorrect {
+  background-image: $incorrect;
+}
+
+// ///////////////////////////////////////////////////////
+// QUIZ Entry
+// ///////////////////////////////////////////////////////
+.lesson__quiz_entry {
+  margin-top: 1em;
+  display: table;
+}
+
+// .lesson__quiz_entry_container {
+//   display: table;
+// }
+
+.lesson__quiz_entry_label {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.lesson__quiz_entry_input {
+  display: table-cell;
+  vertical-align: middle;
+  padding-left: 0.5em;
+  padding-right: 0.8em;
+}
+
+.lesson__quiz_entry_input input {
+  border: 1px solid color('black', 'lightest');
+  padding: 0.15em;
+  width: 4em;
+  text-align: right;
+  padding-right: 0.2em;
+}
+
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.lesson__quiz__entry_submit {
+  // margin-top: 0.5em;
+}
+
+.lesson__quiz__answer {
+  display: none;
+}
 // #simple_lesson__qr__overlay {
 //   z-index: -1;
 //   position: absolute;

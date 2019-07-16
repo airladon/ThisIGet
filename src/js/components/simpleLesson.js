@@ -54,11 +54,121 @@ function align(elementId: string, containerId: string, linkId: string) {
   element.style.top = `${proposedTop}px`;
 }
 
+// Can also use html options like id="ID_TO_USE":
+//   <quiz multichoice id="ID_TO_USE">
+//     - option 1
+//     + option 2
+//     - option 1
+//   </quiz>
+const checkRatioButton = (button) => {
+  if (button.parentElement == null || button.parentElement.parentElement == null) {
+    return;
+  }
+  const inputs = button.parentElement.parentElement.querySelectorAll('input');
+  for (let i = 0; i < inputs.length; i += 1) {
+    const input = inputs[i];
+    // $FlowFixMe
+    const submitMark = input.parentElement.parentElement.querySelector('.lesson__quiz__radio_mark');
+    if (submitMark != null) {
+      submitMark.classList.remove('lesson__quiz__result_correct');
+      submitMark.classList.remove('lesson__quiz__result_incorrect');
+      // $FlowFixMe
+      if (input.checked === true) {
+        // $FlowFixMe
+        if (input.value === 'correct') {
+          submitMark.classList.add('lesson__quiz__result_correct');
+        } else {
+          submitMark.classList.add('lesson__quiz__result_incorrect');
+        }
+      }
+    }
+  }
+};
+
+// Use classes:
+//   entryNumber - for number/float/scientific
+//   entry<number> - for round to number decimals
+//     e.g. entry2 - for 2 decimal places
+//   entryString - for trimmed string
+//   entry - defaults to string
+//
+// Can also use html options like id="ID_TO_USE":
+//   <quiz entry2 id="ID_TO_USE">2.11</quiz>
+const checkEntry = (button) => {
+  if (button.parentElement == null || button.parentElement.parentElement == null) {
+    return;
+  }
+  const parent = button.parentElement.parentElement;
+  const entryInput = parent.querySelector('input');
+  const answerElement = parent.querySelector('.lesson__quiz__answer');
+  const submitMark = parent.querySelector('.lesson__quiz__mark');
+  if (answerElement == null || entryInput == null || submitMark == null) {
+    return;
+  }
+  let answer = answerElement.innerHTML.trim().toLowerCase();
+  if (answerElement.children.length > 0) {
+    answer = answerElement.children[0].innerHTML.trim().toLowerCase();
+  }
+  const classes = answerElement.className.split(' ');
+  let type = 'string';
+  for (let i = 0; i < classes.length; i += 1) {
+    const c = classes[i];
+    if (c.startsWith('lesson__quiz__answer__type_')) {
+      type = c.replace('lesson__quiz__answer__type_', '');
+    }
+  }
+
+  let correct = false;
+  // $FlowFixMe
+  let { value } = entryInput;
+  if (type === 'string') {
+    value = value.trim().toLowerCase();
+    answer = answer.trim().toLowerCase();
+    if (value.toLowerCase() === answer.toLowerCase()) {
+      correct = true;
+    }
+  }
+  if (type === 'integer') {
+    value = parseInt(value, 10);
+    answer = parseInt(answer, 10);
+    if (Math.round((answer - value) * 1e8) / 1e8 === 0) {
+      correct = true;
+    }
+  }
+  if (type === 'number') {
+    value = parseFloat(value);
+    answer = parseFloat(answer);
+    if (Math.round((answer - value) * 1e8) / 1e8 === 0) {
+      correct = true;
+    }
+  }
+
+  const decimals = parseInt(type, 10);
+  if (!Number.isNaN(decimals)) {
+    value = parseFloat(value);
+    answer = parseFloat(answer);
+    value = Math.round(value * 10 ** decimals) / 10 ** decimals;
+    answer = Math.round(answer * 10 ** decimals) / 10 ** decimals;
+    if (Math.round((answer - value) * 10 ** (decimals + 1)) / 10 ** (decimals + 1) === 0) {
+      correct = true;
+    }
+  }
+
+  submitMark.classList.remove('lesson__quiz__result_correct');
+  submitMark.classList.remove('lesson__quiz__result_incorrect');
+  if (correct) {
+    submitMark.classList.add('lesson__quiz__result_correct');
+  } else {
+    submitMark.classList.add('lesson__quiz__result_incorrect');
+  }
+};
+
 export default class SimpleLessonComponent extends React.Component
                                     <Props, State> {
   lesson: SimpleLesson;
   key: number;
   afterUpdate: ?() => void;
+  firstUpdate: boolean;
 
   constructor(props: Props) {
     super(props);
@@ -66,6 +176,7 @@ export default class SimpleLessonComponent extends React.Component
     this.key = 0;
     this.state = { qr: <StaticQR content="Loading Reference" link="" title=""/> };
     this.afterUpdate = null;
+    this.firstUpdate = true;
   }
 
   showStaticQR(id: string, parameters: string) {
@@ -111,10 +222,49 @@ export default class SimpleLessonComponent extends React.Component
     this.lesson.content.qrDiagram.animateNextFrame();
   }
 
+  showVariables() {
+    Object.keys(this.lesson.content.variables).forEach((variableName) => {
+      const element =
+        document.getElementById(`id_lesson__variable_${variableName}`);
+      if (element == null) {
+        return;
+      }
+      element.innerHTML = `${this.lesson.content.variables[variableName]}`;
+    });
+  }
+
+  setVariables() {
+    // Object.keys(this.lesson.content.setVariables).forEach((variableName) => {
+    //   this.lesson.content.variables[variableName] =
+    //     this.lesson.content.setVariables[variableName]();
+    // });
+    this.lesson.content.variables = this.lesson.content.setVariables();
+  }
+
   componentDidUpdate() {
     if (this.afterUpdate != null) {
       this.afterUpdate();
       this.afterUpdate = null;
+    }
+    if (this.firstUpdate) {
+      this.showVariables();
+      this.firstUpdate = false;
+    }
+    const multichoiceButtons =
+      document.getElementsByClassName('lesson__quiz__multichoice_submit_button');
+    for (let i = 0; i < multichoiceButtons.length; i += 1) {
+      const element = multichoiceButtons[i];
+      element.onclick = () => {
+        checkRatioButton(element);
+      };
+    }
+    const entryButtons =
+      document.getElementsByClassName('lesson__quiz__entry_submit_button');
+    for (let i = 0; i < entryButtons.length; i += 1) {
+      const element = entryButtons[i];
+      element.onclick = () => {
+        checkEntry(element);
+      };
     }
   }
 
@@ -128,7 +278,10 @@ export default class SimpleLessonComponent extends React.Component
         }
       },
     };
+
     this.lesson.initialize();
+    // console.log(elements);
+    this.setVariables();
   }
 
   // eslint-disable-next-line class-methods-use-this

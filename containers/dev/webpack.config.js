@@ -261,6 +261,9 @@ module.exports = (env) => {
             {
               loader: path.resolve('/opt/app/link-loader.js'),
             },
+            {
+              loader: path.resolve('/opt/app/quiz-loader.js'),
+            },
           ],
         },
         // {
