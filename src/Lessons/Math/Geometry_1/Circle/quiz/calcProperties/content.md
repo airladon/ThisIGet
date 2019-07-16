@@ -5,11 +5,17 @@
 $$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{RGB}{238,34,12}\color{b}A=B^C$$
 
 <quiz multichoice>
-  - this answer
-  + that answer
-  - this answer
+  - 1.2
+  + 3.2
+  - 5.4
 </quiz>
-<html>
+
+<quiz multichoice>
+  + 1.2
+  - 3.2
+  - 5.4
+</quiz>
+<!-- <html>
 <div class="lesson__multiple_choice">
   <div class="lesson__quiz_selection">
     <div class="lesson__quiz__radio_mark"></div>
@@ -36,7 +42,7 @@ $$\definecolor{b}{RGB}{0,162,255}\definecolor{g}{RGB}{29,177,0}\definecolor{g}{R
     <button class="lesson__quiz__submit_button">Check</button>
   </div>
 </div>
-</html>
+</html> -->
 
 ### Example Image
 ![](./test-image.png)
