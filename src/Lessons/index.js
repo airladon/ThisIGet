@@ -15,6 +15,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External Links to Adjacent Angles',
+            description: 'External links to sources of information for Adjacent Angles>',
+            htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'singlePage',

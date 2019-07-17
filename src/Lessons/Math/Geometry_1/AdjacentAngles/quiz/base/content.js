@@ -14,10 +14,10 @@ import {
 
 const {
   round,
-  rand,
+  // rand,
   randElement,
   randInt,
-//   removeRandElement,
+  removeRandElement,
 } = Fig.tools.math;
 
 class Content extends SimpleLessonContent {
@@ -39,7 +39,10 @@ class Content extends SimpleLessonContent {
 
     this.setVariables = () => {
       const variables = {};
-      const options = ['complementary', 'explementary', 'supplementary', 'other'];
+      const options = [
+        'complementary', 'explementary', 'supplementary',
+        'other', 'other',
+      ];
 
       const angleType = randElement(options);
       const numAngles = randInt(2, 4);
@@ -49,7 +52,7 @@ class Content extends SimpleLessonContent {
       } else if (angleType === 'supplementary') {
         totalAngle = 180;
       } else if (angleType === 'other') {
-        while (totalAngle !== 90 && totalAngle !== 180 && totalAngle !== 360) {
+        while (totalAngle === 90 || totalAngle === 180 || totalAngle === 360) {
           totalAngle = randInt(10, 350);
         }
       }
@@ -72,20 +75,43 @@ class Content extends SimpleLessonContent {
         expText, suppText, compText,
       ]);
       answers.push(otherText);
-      variables.q1_multichoice(answers, 'q1');
-      // variables.q4D = round(rand(1, 20), 1);
-      // const answers = shuffle(
-      //   `+ ${round(variables.q4D * Math.PI, 2)}`,
-      //   [
-      //     `- ${round(variables.q4D * 2, 2)}`,
-      //     `- ${round(variables.q4D / 2, 2)}`,
-      //     `- ${round(variables.q4D * Math.PI - rand(0.5, 1), 2)}`,
-      //     `- ${round(variables.q4D * Math.PI + rand(0.5, 2), 2)}`,
-      //   ],
-      //   4,
-      // );
-      // variables.q4m = multichoice(answers, 'q4');
+      variables.q1_multichoice = multichoice(answers, 'q1');
 
+      const yes = () => ['+ Yes', '- No'];
+      const no = () => ['- Yes', '+ No'];
+
+      const q2Options = [
+        ['AOB and BOC supplementary', yes()],
+        ['AOB and BOC complementary', no()],
+        ['AOB and BOC explementary', no()],
+        ['BOC, COD, and DOE supplementary', yes()],
+        ['BOC, COD, and DOA supplementary', no()],
+        ['BOC, COD, and DOA explementary', yes()],
+        ['COD and AOB supplementary', no()],
+        ['COD and AOB explementary', no()],
+        ['COD and AOB complementary', no()],
+        ['COD, DOE, and EOA supplementary', yes()],
+        ['COD, DOE, and EOA complementary', no()],
+        ['COD, DOE, and EOA explementary', no()],
+        ['COD and DOE complementary', yes()],
+        ['COD and DOE explementary', no()],
+        ['COD and DOE supplementary', no()],
+      ];
+
+      const q2Answer = removeRandElement(q2Options);
+      // eslint-disable-next-line prefer-destructuring
+      variables.q2_angles = q2Answer[0];
+      variables.q2_multichoice = multichoice(q2Answer[1], 'q2');
+
+      const q3Answer = removeRandElement(q2Options);
+      // eslint-disable-next-line prefer-destructuring
+      variables.q3_angles = q3Answer[0];
+      variables.q3_multichoice = multichoice(q3Answer[1], 'q3');
+
+      const q4Answer = removeRandElement(q2Options);
+      // eslint-disable-next-line prefer-destructuring
+      variables.q4_angles = q4Answer[0];
+      variables.q4_multichoice = multichoice(q4Answer[1], 'q4');
       return variables;
     };
   }

@@ -1,4 +1,4 @@
-## Quiz
+## Quiz - Calculate Properties using Radians
 
 * Round answers to **two decimal places**
 * Refresh the page to get new questions
