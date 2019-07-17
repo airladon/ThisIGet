@@ -33,7 +33,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/AdjacentAngles/base',
-      'Math/Geometry_1/RelatedAngles/base',
+      'Math/Geometry_1/IntersectionAngles/base',
     ]);
   }
 
@@ -130,7 +130,7 @@ class Content extends PresentationLessonContent {
       ]),
       modifiers: {
         supplementary_angles: this.qr('Math/Geometry_1/AdjacentAngles/base/SupplementaryPres', colors.diagram.action),
-        alternate_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.diagram.action),
+        alternate_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Alternate', colors.diagram.action),
       },
     });
 
@@ -252,7 +252,7 @@ class Content extends PresentationLessonContent {
         'When a line intersects two parallel lines, the |alternate_angles| are equal, so we can identify the alternate angle of |a|.',
       ]),
       modifiers: {
-        alternate_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.angle1),
+        alternate_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Alternate', colors.angle1),
         a: highlight(colors.angle1),
       },
       show: [
@@ -307,7 +307,7 @@ class Content extends PresentationLessonContent {
         'We can similarly identify the |alternate_angle| of |b|.',
       ]),
       modifiers: {
-        alternate_angle: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate', colors.angle2),
+        alternate_angle: this.qr('Math/Geometry_1/IntersectionAngles/base/Alternate', colors.angle2),
         b: highlight(colors.angle2),
       },
       show: [

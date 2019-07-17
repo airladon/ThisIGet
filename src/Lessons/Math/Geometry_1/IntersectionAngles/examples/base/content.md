@@ -1,4 +1,4 @@
-## Calculation using Related Angles
+## Calculation using Intersection Angles
 
 ### Example 1:
 

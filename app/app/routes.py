@@ -145,12 +145,16 @@ def get_lesson(path):
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
-    title = f'{version.htmlTitle} - This I Get'
-    if version.htmlTitle == '':
-        title = (f'{version.topic.lesson.title} '
-                 f'{version.topic.name.capitalize()}: '
-                 f'{version.title} - This I Get')
-    description = f'{version.htmlDescription}'
+    title = ''
+    description = ''
+    if version != 'lesson/topic/version does not exist':
+        title = f'{version.htmlTitle} - This I Get'
+        if version.htmlTitle == '':
+            title = (f'{version.topic.lesson.title} '
+                     f'{version.topic.name.capitalize()}: '
+                     f'{version.title} - This I Get')
+        description = f'{version.htmlDescription}'
+
     lesson_page = request.args.get('page')
 
     vendors_js = ''

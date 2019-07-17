@@ -303,7 +303,7 @@
     "type": "generic",
     "description": "General description of angles including opposite angles",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },
@@ -314,7 +314,7 @@
     "type": "generic",
     "description": "Opposite angles definition and interactive diagram",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },
@@ -325,7 +325,7 @@
     "type": "generic",
     "description": "Corresponding, Alternate and Interior angles definition and examples",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },
@@ -336,7 +336,7 @@
     "type": "generic",
     "description": "Angles of a traversal description including parallel lines",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },
@@ -347,7 +347,7 @@
     "type": "generic",
     "description": "Angles, parallel lines and transversals",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },
@@ -358,7 +358,7 @@
     "type": "generic",
     "description": "Corresponding angles definition and interactive diagram",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "RelatedAngles",
+    "lessonUID": "IntersectionAngles",
     "topic": "links",
     "versionUID": "base"
   },

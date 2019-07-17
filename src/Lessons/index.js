@@ -659,6 +659,89 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
+    IntersectionAngles: {
+      title: 'Intersection Angles',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'IntersectionAngles',
+      topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of related angles',
+            description: 'Examples of calculating opposite, corresponding, alternate and interior angles',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles calculation examples',
+            htmlDescription: 'Examples of finding angles in different geometries using the concepts of opposite, corresponding, alternate, interior and supplementary angles',
+            fullLesson: true,
+          },
+        },
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
+            htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
+            htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Simple geometries',
+            description: '',
+            htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
+            htmlDescription: 'Dynamic quiz where no two questions are the same',
+            fullLesson: true,
+          },
+          complex: {
+            type: 'singlePage',
+            title: 'More complex geometries',
+            description: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
+            htmlTitle: 'Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles',
+            htmlDescription: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
+            htmlDescription: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLines',
+      ],
+      enabled: true,
+    },
     Introduction: {
       title: 'Why Study Shapes?',
       path: '/Lessons/Math/Geometry_1',
@@ -1148,89 +1231,6 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    RelatedAngles: {
-      title: 'Related Angles',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'RelatedAngles',
-      topics: {
-        examples: {
-          base: {
-            type: 'singlePage',
-            title: 'Examples of related angles',
-            description: 'Examples of calculating opposite, corresponding, alternate and interior angles',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles calculation examples',
-            htmlDescription: 'Examples of finding angles in different geometries using the concepts of opposite, corresponding, alternate, interior and supplementary angles',
-            fullLesson: true,
-          },
-        },
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: '',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
-            htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
-            fullLesson: true,
-          },
-        },
-        links: {
-          base: {
-            type: 'generic',
-            title: 'External',
-            description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
-            htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
-        quiz: {
-          base: {
-            type: 'presentation',
-            title: 'Simple geometries',
-            description: '',
-            htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
-            htmlDescription: 'Dynamic quiz where no two questions are the same',
-            fullLesson: true,
-          },
-          complex: {
-            type: 'singlePage',
-            title: 'More complex geometries',
-            description: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
-            htmlTitle: 'Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles',
-            htmlDescription: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
-            fullLesson: true,
-          },
-        },
-        summary: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'ParallelLines',
-      ],
-      enabled: true,
-    },
     RightAngleTriangles: {
       title: 'Right Angle Triangles',
       path: '/Lessons/Math/Geometry_1',
@@ -1517,7 +1517,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'RelatedAngles',
+        'IntersectionAngles',
       ],
       enabled: true,
     },

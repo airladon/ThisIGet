@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Triangles',
   dependencies: [
-    'RelatedAngles',
+    'IntersectionAngles',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

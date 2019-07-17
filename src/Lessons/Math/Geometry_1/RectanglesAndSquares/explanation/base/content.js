@@ -33,7 +33,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Math/Geometry_1/RelatedAngles/base',
+      'Math/Geometry_1/IntersectionAngles/base',
       'Math/Geometry_1/CongruentTriangles/base',
     ]);
   }
@@ -136,7 +136,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         line: click(coll.pulseBottom, [coll], colors.sides),
         two_lines: click(coll.pulseLeftRight, [coll], colors.sides),
-        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -145,7 +145,7 @@ class Content extends PresentationLessonContent {
         'We also know that the |interior_angles| of two |parallel lines| intersected by a third line will always add to |180º|.',
       ],
       modifiers: {
-        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -154,7 +154,7 @@ class Content extends PresentationLessonContent {
         'The reverse of this is: if the |interior_angles| of two lines intersected by a third line |add to 180º|, then the lines |must be parallel|.',
       ],
       modifiers: {
-        interior_angles: this.qr('Math/Geometry_1/RelatedAngles/base/Interior', colors.diagram.action),
+        interior_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Interior', colors.diagram.action),
       },
     });
 
@@ -278,7 +278,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       modifiers: {
-        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
+        alternate: this.qr('Math/Geometry_1/IntersectionAngles/base/Alternate'),
         alternate_intersection_angles: this.bindNext(colors.angles),
       },
       show: [
@@ -289,7 +289,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        alternate: this.qr('Math/Geometry_1/RelatedAngles/base/Alternate'),
+        alternate: this.qr('Math/Geometry_1/IntersectionAngles/base/Alternate'),
         alternate_intersection_angles: click(
           coll.pulseAlternateAngles, [coll, null], colors.angles,
         ),
