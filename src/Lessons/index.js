@@ -15,6 +15,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'Identify Angles',
+            description: 'Identify which angles are complementary, supplementary and explementary',
+            htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
+            htmlDescription: 'Identify which angles are complementary, supplementary and explementary',
+            fullLesson: true,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
