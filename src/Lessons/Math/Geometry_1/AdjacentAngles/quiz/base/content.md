@@ -1,4 +1,4 @@
-## Quiz - Identify the Adjacent Angles
+## Quiz
 
 <!-- * Round answers to **two decimal places** -->
 * Refresh the page to get new questions
@@ -28,6 +28,35 @@ $|div q3_multichoice|$
 
 ### Question 4:
 
-Using the figure from Question 2, are angles $|q4_angles|$?
+If angles A, B, and C are complementary, and angle A and B are $|q4_A|$º and $|q4_B|$º respectively, what is the value of C in degrees?
 
-$|div q4_multichoice|$
+<quiz entryInteger>$|q4_C|$</quiz>
+
+### Question 5:
+
+If angles A, B, and C are supplementary, and angle A and B are $|q5_A|$º and $|q5_B|$º respectively, what is the value of C in degrees?
+
+<quiz entryInteger>$|q5_C|$</quiz>
+
+### Question 6:
+
+If angles A, B, and C are explementary, and angle A and B are $|q6_A|$º and $|q6_B|$º respectively, what is the value of C in degrees?
+
+<quiz entryInteger>$|q6_C|$</quiz>
+
+### Question 7:
+
+![](supplementary.png)
+
+If angles a and b are $|q7_A|$º and $|q7_B|$º respectively, what is the value of c in degrees?
+
+<quiz entryInteger>$|q7_C|$</quiz>
+
+### Question 8:
+
+![](complementary.png)
+
+If angles a and b are $|q8_A|$º and $|q8_B|$º respectively, what is the value of c in degrees?
+
+<quiz entryInteger>$|q8_C|$</quiz>
+

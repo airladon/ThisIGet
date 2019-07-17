@@ -108,10 +108,26 @@ class Content extends SimpleLessonContent {
       variables.q3_angles = q3Answer[0];
       variables.q3_multichoice = multichoice(q3Answer[1], 'q3');
 
-      const q4Answer = removeRandElement(q2Options);
-      // eslint-disable-next-line prefer-destructuring
-      variables.q4_angles = q4Answer[0];
-      variables.q4_multichoice = multichoice(q4Answer[1], 'q4');
+      variables.q4_A = randInt(1, 80);
+      variables.q4_B = randInt((90 - variables.q4_A) * 0.8);
+      variables.q4_C = 90 - variables.q4_A - variables.q4_B;
+
+      variables.q5_A = randInt(1, 140);
+      variables.q5_B = randInt((180 - variables.q5_A) * 0.8);
+      variables.q5_C = 180 - variables.q5_A - variables.q5_B;
+
+      variables.q6_A = randInt(1, 300);
+      variables.q6_B = randInt((360 - variables.q6_A) * 0.8);
+      variables.q6_C = 360 - variables.q6_A - variables.q6_B;
+
+      variables.q7_A = randInt(50, 70);
+      variables.q7_B = randInt(80, 110);
+      variables.q7_C = 180 - variables.q7_A - variables.q7_B;
+
+      variables.q8_A = randInt(20, 40);
+      variables.q8_B = randInt(20, 40);
+      variables.q8_C = 90 - variables.q8_A - variables.q8_B;
+
       return variables;
     };
   }
