@@ -39,6 +39,7 @@ for path in diff:
        or path == 'app/app/templates/base-stage.html' \
        or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
        or path == 'src/Lessons/index.js' \
+       or path.startswith == 'src/Lessons/boilerplate' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests

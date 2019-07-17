@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Identify Angles',
-  description: 'Identify which angles are complementary, supplementary and explementary',
+  title: 'Complementary, Supplementary and Explementary Angles',
+  description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
   htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
-  htmlDescription: 'Identify which angles are complementary, supplementary and explementary',
+  htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
   fullLesson: true,
   type: 'singlePage',
 };

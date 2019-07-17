@@ -67,9 +67,9 @@ class Content extends SimpleLessonContent {
 
       variables.q1_angles = anglesText;
       variables.q1_angle_num = numAngles;
-      const expText = angleType === 'explementary' ? '+ explementary' : '- explementary';
-      const suppText = angleType === 'supplementary' ? '+ supplementary' : '- supplementary';
-      const compText = angleType === 'complementary' ? '+ complementary' : '- complementary';
+      const expText = angleType === 'explementary' ? '+ explementary' : '- Explementary';
+      const suppText = angleType === 'supplementary' ? '+ supplementary' : '- Supplementary';
+      const compText = angleType === 'complementary' ? '+ complementary' : '- Complementary';
       const otherText = angleType === 'other' ? '+ None of the above' : '- None of the above';
       const answers = shuffle([
         expText, suppText, compText,
@@ -81,21 +81,20 @@ class Content extends SimpleLessonContent {
       const no = () => ['- Yes', '+ No'];
 
       const q2Options = [
-        ['AOB and BOC supplementary', yes()],
-        ['AOB and BOC complementary', no()],
-        ['AOB and BOC explementary', no()],
-        ['BOC, COD, and DOE supplementary', yes()],
-        ['BOC, COD, and DOA supplementary', no()],
-        ['BOC, COD, and DOA explementary', yes()],
-        ['COD and AOB supplementary', no()],
-        ['COD and AOB explementary', no()],
-        ['COD and AOB complementary', no()],
-        ['COD, DOE, and EOA supplementary', yes()],
-        ['COD, DOE, and EOA complementary', no()],
-        ['COD, DOE, and EOA explementary', no()],
-        ['COD and DOE complementary', yes()],
-        ['COD and DOE explementary', no()],
-        ['COD and DOE supplementary', no()],
+        ['a and b supplementary', yes()],
+        ['a and b complementary', no()],
+        ['a and b explementary', no()],
+        ['b, c, and d supplementary', yes()],
+        ['b, c, and d complementary', no()],
+        ['d, e and f supplementary', no()],
+        ['c, d and e explementary', no()],
+        ['a, b and c complementary', no()],
+        ['c and d complementary', yes()],
+        ['e and f complementary', yes()],
+        ['d and e complementary', no()],
+        ['e, f, and a supplementary', yes()],
+        ['e, f, and a explementary', no()],
+        ['a, b, c, d, e and f explementary', yes()],
       ];
 
       const q2Answer = removeRandElement(q2Options);
@@ -108,10 +107,28 @@ class Content extends SimpleLessonContent {
       variables.q3_angles = q3Answer[0];
       variables.q3_multichoice = multichoice(q3Answer[1], 'q3');
 
-      const q4Answer = removeRandElement(q2Options);
-      // eslint-disable-next-line prefer-destructuring
-      variables.q4_angles = q4Answer[0];
-      variables.q4_multichoice = multichoice(q4Answer[1], 'q4');
+      variables.q4_A = randInt(1, 80);
+      variables.q4_B = randInt((90 - variables.q4_A) * 0.8);
+      variables.q4_C = 90 - variables.q4_A - variables.q4_B;
+
+      variables.q5_A = randInt(1, 140);
+      variables.q5_B = randInt((180 - variables.q5_A) * 0.8);
+      variables.q5_C = 180 - variables.q5_A - variables.q5_B;
+
+      variables.q6_A = randInt(1, 300);
+      variables.q6_B = randInt((360 - variables.q6_A) * 0.8);
+      variables.q6_C = 360 - variables.q6_A - variables.q6_B;
+
+      variables.q7_A = randInt(50, 70);
+      variables.q7_B = randInt(80, 110);
+      variables.q7_C = 180 - variables.q7_A - variables.q7_B;
+
+      variables.q8_A = randInt(20, 40);
+      variables.q8_B = randInt(20, 40);
+      variables.q8_C = 90 - variables.q8_A - variables.q8_B;
+
+      variables.q9_a = randInt(120, 95);
+      variables.q9_b = variables.q9_a;
       return variables;
     };
   }

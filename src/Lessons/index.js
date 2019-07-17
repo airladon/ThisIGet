@@ -5,6 +5,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'AdjacentAngles',
       topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Example problems with complementary, supplementary and explementary angles',
+            description: '',
+            htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
+            htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -28,10 +38,10 @@ export default function lessonIndex() {
         quiz: {
           base: {
             type: 'singlePage',
-            title: 'Identify Angles',
-            description: 'Identify which angles are complementary, supplementary and explementary',
+            title: 'Complementary, Supplementary and Explementary Angles',
+            description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
             htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
-            htmlDescription: 'Identify which angles are complementary, supplementary and explementary',
+            htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
             fullLesson: true,
           },
         },
