@@ -1,0 +1,15 @@
+// @flow
+
+// eslint-disable-next-line no-var
+var version = {
+  uid: 'markdown',
+  topic: 'quiz',
+  title: 'Calculate Properties',
+  description: 'Calculate properties of a circle from other properties',
+  htmlTitle: 'Calculate circle properties',
+  htmlDescription: 'Calculate properties of a circle from other properties',
+  fullLesson: true,
+  type: 'singlePage',
+};
+
+module.exports = version;

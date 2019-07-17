@@ -328,6 +328,16 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'General Questions about Degrees',
+            description: 'Answer general questions about measuring angle and degrees',
+            htmlTitle: 'Quiz - Measuring angles and degrees',
+            htmlDescription: 'Answer general questions about measuring angle and degrees',
+            fullLesson: true,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -765,10 +775,18 @@ export default function lessonIndex() {
         quiz: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Change Circle to Match',
             description: '',
             htmlTitle: 'Quiz: Find the arc or angle that matches the target',
             htmlDescription: 'Interactive quiz where you can change the diagram to find the target angle or arc length',
+            fullLesson: true,
+          },
+          calc: {
+            type: 'singlePage',
+            title: 'Calculate Properties with Radians',
+            description: 'Calculate properties of a circle from other properties using radians',
+            htmlTitle: 'Calculate circle properties using radians',
+            htmlDescription: 'Calculate properties of a circle from other properties using radians',
             fullLesson: true,
           },
         },
