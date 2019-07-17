@@ -60,3 +60,10 @@ If angles a and b are $|q8_A|$º and $|q8_B|$º respectively, what is the value 
 
 <quiz entryInteger>$|q8_C|$</quiz>
 
+### Question 9:
+
+![](opposite.png)
+
+If angle a is $|q9_a|$º, what is angle b?
+
+<quiz entryInteger>$|q9_b|$</quiz>
