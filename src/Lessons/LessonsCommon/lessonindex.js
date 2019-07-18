@@ -2,10 +2,10 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {
-    CombinationAngles: new LessonDescription({
+    AngleGroupings: new LessonDescription({
       title: 'Adjacent Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'CombinationAngles',
+      uid: 'AngleGroupings',
       topics: {
         explanation: {
           base: {
@@ -796,7 +796,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'CombinationAngles',
+        'AngleGroupings',
       ],
       enabled: true,
     }),

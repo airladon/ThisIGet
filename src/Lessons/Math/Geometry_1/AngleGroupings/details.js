@@ -2,13 +2,13 @@
 
 // eslint-disable-next-line no-var
 var lessonDetails = {
-  title: 'Combination Angles',
+  title: 'Angle Groupings',
   dependencies: [
     'AngleNames',
   ],
   enabled: true,
   path: 'Math/Geometry_1',
-  uid: 'CombinationAngles',
+  uid: 'AngleGroupings',
 };
 
 module.exports = lessonDetails;

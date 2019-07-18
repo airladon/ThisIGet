@@ -45,6 +45,81 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
+    AngleGroupings: {
+      title: 'Angle Groupings',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AngleGroupings',
+      topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Example problems with complementary, supplementary and explementary angles',
+            description: '',
+            htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
+            htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
+            fullLesson: true,
+          },
+        },
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: 'Explanation of complementary, supplementary, and explementary angles.',
+            htmlTitle: 'Complementary, supplementary and explementary angles explanation',
+            htmlDescription: 'What are complementary angles, supplementary angles and explementary angles',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External Links to Angle Groupings',
+            description: 'External links to sources of information for Angle Groupings>',
+            htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'Complementary, Supplementary and Explementary Angles',
+            description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
+            htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
+            htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Complementary, Supplementary and Explementary Angles.',
+            description: 'Summary of complementary, supplementary and explementary Angles.',
+            htmlTitle: 'Complementary, supplementary and explementary angles summary',
+            htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'AngleNames',
+      ],
+      enabled: true,
+    },
     AngleNames: {
       title: 'Angle Names',
       path: '/Lessons/Math/Geometry_1',
@@ -343,81 +418,6 @@ export default function lessonIndex() {
       },
       dependencies: [
         'Introduction',
-      ],
-      enabled: true,
-    },
-    CombinationAngles: {
-      title: 'Combination Angles',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'CombinationAngles',
-      topics: {
-        examples: {
-          base: {
-            type: 'singlePage',
-            title: 'Example problems with complementary, supplementary and explementary angles',
-            description: '',
-            htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
-            htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
-            fullLesson: true,
-          },
-        },
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: 'Explanation of complementary, supplementary, and explementary angles.',
-            htmlTitle: 'Complementary, supplementary and explementary angles explanation',
-            htmlDescription: 'What are complementary angles, supplementary angles and explementary angles',
-            fullLesson: true,
-          },
-        },
-        links: {
-          base: {
-            type: 'generic',
-            title: 'External Links to Combination Angles',
-            description: 'External links to sources of information for Combination Angles>',
-            htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
-            htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
-        quiz: {
-          base: {
-            type: 'singlePage',
-            title: 'Complementary, Supplementary and Explementary Angles',
-            description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
-            htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
-            htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
-            fullLesson: true,
-          },
-        },
-        summary: {
-          base: {
-            type: 'presentation',
-            title: 'Complementary, Supplementary and Explementary Angles.',
-            description: 'Summary of complementary, supplementary and explementary Angles.',
-            htmlTitle: 'Complementary, supplementary and explementary angles summary',
-            htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'AngleNames',
       ],
       enabled: true,
     },
@@ -935,7 +935,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'CombinationAngles',
+        'AngleGroupings',
       ],
       enabled: true,
     },

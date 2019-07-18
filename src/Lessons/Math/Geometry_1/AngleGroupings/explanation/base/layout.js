@@ -1,7 +1,6 @@
 // @flow
 import Fig from 'figureone';
 import baseLayout from '../../../../../LessonsCommon/layout';
-import './style.scss';
 
 const {
   Point,
@@ -12,10 +11,10 @@ const {
 const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'qrCombinationAngles_lines',
-  'qrCombinationAngles_angleA',
-  'qrCombinationAngles_angleB',
-  'qrCombinationAngles_angleC',
+  'lines',
+  'angleA',
+  'angleB',
+  'angleC',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -31,7 +30,7 @@ export default function lessonLayout() {
     options: {
       length: radius,
       width,
-      color: colors.qrCombinationAngles_lines,
+      color: colors.lines,
       move: {
         type: 'rotation',
         middleLengthPercent: 0,
@@ -53,8 +52,18 @@ export default function lessonLayout() {
       label: {
         radius: radius / 4,
         autoHide: 0.2,
-        scale: 1,
       },
+    },
+  };
+
+  layout.vertex = {
+    name: 'vertex',
+    method: 'polygon',
+    options: {
+      fill: true,
+      sides: 30,
+      radius: 0.01,
+      color: colors.lines,
     },
   };
 
@@ -63,11 +72,11 @@ export default function lessonLayout() {
   layout.line3 = joinObjects({}, line, { name: 'line3' });
   layout.angleA = joinObjects({}, angle, {
     name: 'angleA',
-    options: { label: { text: 'a' }, color: colors.qrCombinationAngles_angleA },
+    options: { label: { text: 'a' }, color: colors.angleA },
   });
   layout.angleB = joinObjects({}, angle, {
     name: 'angleB',
-    options: { label: { text: 'b' }, color: colors.qrCombinationAngles_angleB },
+    options: { label: { text: 'b' }, color: colors.angleB },
   });
   layout.angleC = joinObjects({}, angle, {
     name: 'angleC',
@@ -81,7 +90,7 @@ export default function lessonLayout() {
         radius: radius * 0.7,
         autoHide: 0.1,
       },
-      color: colors.qrCombinationAngles_angleC,
+      color: colors.angleC,
     },
   });
 
@@ -89,6 +98,7 @@ export default function lessonLayout() {
     name: 'fig',
     method: 'collection',
     addElements: [
+      layout.vertex,
       layout.angleA,
       layout.angleB,
       layout.line1,
@@ -123,12 +133,14 @@ export default function lessonLayout() {
       color: colors.diagram.text.base,
       scale: 1,
       elements: {
-        a: { text: 'a', color: colors.qrCombinationAngles_angleA, mods: mods('down', 0.4) },
-        b: { text: 'b', color: colors.qrCombinationAngles_angleB, mods: mods('down', 0.8) },
-        c: { text: 'c', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.7) },
-        _180: { text: '180º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
-        _90: { text: '90º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
-        _360: { text: '360º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
+        a: { text: 'a', color: colors.angleA, mods: mods('down', 0.4) },
+        b: { text: 'b', color: colors.angleB, mods: mods('down', 0.8) },
+        c: { text: 'c', color: colors.angleC, mods: mods('up', 0.7) },
+        _180: { text: '180º', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _90: { text: '90º', color: colors.angleC, mods: mods('up', 0.5 ) },
+        // v: { symbol: 'vinculum', color: colors.angleC, mods: mods('up', 0.5 ) },
+        // _2: { text: '2', color: colors.angleC, mods: mods('up', 0.5 ) },
+        _360: { text: '360º', color: colors.angleC, mods: mods('up', 0.5 ) },
         equals: '  =  ',
         plus: '  +  ',
         minus: '  -  ',
@@ -140,7 +152,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        centerTop: { position: new Point(0, 1.3), scale: 1 },
+        centerTop: { position: new Point(0, 1.1), scale: 1 },
         summary: { position: new Point(-1.6, -0.4), scale: 1.2 },
         qr: { position: new Point(0, -1.3) },
       },
@@ -207,7 +219,7 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        qr: { position: new Point(2.4, -0.7), scale: 1.3 },
+        qr: { position: new Point(2.9, -0.7), scale: 1.3 },
       },
     },
   });

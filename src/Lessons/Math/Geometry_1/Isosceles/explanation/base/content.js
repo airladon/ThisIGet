@@ -35,7 +35,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/CongruentTriangles/base',
-      'Math/Geometry_1/CombinationAngles/base',
+      'Math/Geometry_1/AngleGroupings/base',
       'Math/Geometry_1/Triangles/base',
     ]);
   }
@@ -342,7 +342,7 @@ class Content extends PresentationLessonContent {
       modifiers: {
         c: click(coll.pulseLeftRightBaseAngles, [coll], colors.angles),
         _c: highlight(colors.angles),
-        supplementary: this.qr('Math/Geometry_1/CombinationAngles/base/Supplementary', colors.angles),
+        supplementary: this.qr('Math/Geometry_1/AngleGroupings/base/Supplementary', colors.angles),
         right_angle: click(coll.pulseRightAngle, [coll], colors.angles),
       },
       setLeaveState: () => {

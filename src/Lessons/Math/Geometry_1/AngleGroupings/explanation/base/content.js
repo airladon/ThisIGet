@@ -57,9 +57,17 @@ class Content extends PresentationLessonContent {
     };
 
     this.addSection(common, {
-      title: 'Combination Angles',
+      title: 'Introduction',
+      setContent: centerV([
+        '|Multiple angles| can sometimes be classified into |common categories| or |groups|.',
+        '|Itdentifying such groupings| can make analysing a problem easier as it often allows |calculation of unknown angles| within the group.',
+      ]),
+    });
+
+    this.addSection(common, {
+      title: 'Adjacent Angles',
       setContent: [
-        '|Adjacent_angles| are any angles that share an adjacent vertex and edge.',
+        '|Adjacent_angles| are any number of angles that share an adjacent |vertex| and |edge|.',
       ],
       modifiers: {
         Adjacent_angles: click(
@@ -67,8 +75,10 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI / 4, Math.PI * 1.8], 0, 1.5, null],
           colors.diagram.action,
         ),
+        vertex: click(coll.pulseVertex, [coll], colors.lines),
+        edge: click(coll.pulseLine2, [coll], colors.lines),
       },
-      show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB],
+      show: [fig._line1, fig._line2, fig._line3, fig._angleA, fig._angleB, fig._vertex],
       transitionFromAny: (done) => {
         fig.setScenario('center');
         coll.hasTouchableElements = false;
@@ -82,7 +92,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'The sum of |adjacent_angles| is the |larger_angle|. If you know any two angles, the third can be |calculated|.',
+        'The sum of |adjacent_angles| is the |larger_angle|. In this case, if you know any of the two angles, the third can be |calculated|.',
       ]),
       modifiers: {
         adjacent_angles: click(
@@ -110,17 +120,12 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
-      setContent: centerV([
-        'This lesson examines adjacent angles that make up |common larger angles|. ',
-        'Even though the adjacent angle\'s names are different for each case, the concept is always the same: |adjacent angles add up to the larger angle|.',
-      ]),
-    });
-
-    this.addSection(common, {
       title: 'Complementary Angles',
-      setContent: style({ top: 0 }, [
-        '|Complementary_angles| add up to a |right_angle|, which is |90º|.',
-      ]),
+      setContent: [
+        style({ top: 0 }, [
+          '|Complementary_angles| are |any number| of angles that add up to a |right_angle|, which is |90º|. They can be, but do not need to be adjacent.',
+        ]),
+      ],
       modifiers: {
         Complementary_angles: click(
           coll.goToRandomAngle,
@@ -150,7 +155,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Supplementary Angles',
       setContent: style({ top: 0 }, [
-        '|Supplementary_angles| add up to a |straight_angle|, which is |180º|.',
+        '|Supplementary_angles| are |any number| of angles that add up to a |straight_angle|, which is |180º|. They can be, but do not need to be adjacent.',
       ]),
       modifiers: {
         Supplementary_angles: click(
@@ -179,9 +184,37 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'Adjacent |supplementary_angles| appear when a |line| is intersected along its |length| and |not its end|.',
+      ]),
+      modifiers: {
+        supplementary_angles: click(
+          coll.goToRandomAngle,
+          [coll, [Math.PI, Math.PI], 0, 1.5, null],
+          colors.diagram.action,
+        ),
+        // another: click(coll.pulseLine2, [coll], colors.lines),
+        line: click(coll.pulseStraightLine, [coll], colors.lines),
+      },
+      show: [fig],
+      hide: [fig._angleC],
+      transitionFromAny: (done) => {
+        fig.setScenario('center');
+        coll.hasTouchableElements = false;
+        fig._line3.move.element = null;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 2, done);
+      },
+      setSteadyState: () => {
+        coll.hasTouchableElements = true;
+        fig._line3.move.element = fig;
+        coll.goToAngles(Math.PI / 3, Math.PI, 0, 0);
+      },
+    });
+
+    this.addSection(common, {
       title: 'Explementary Angles',
       setContent: style({ top: 0 }, [
-        '|Explementary_angles| add up to a |full_angle|, which is |360º|.',
+        '|Explementary_angles| are |any number| of angles that add up to a |full_angle|, which is |360º|.',
       ]),
       modifiers: {
         Explementary_angles: click(
@@ -226,7 +259,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection({
       setContent: style({ centerV: true }, [
-        'Common adjacent angle names are usually used to |describe| angles in different, and sometimes simpler ways.',
+        'Often these grouping names are usually used to |describe| angles in different, and sometimes simpler ways.',
         'For example, rather than saying:',
         style(indentStyle, '" angles a and b |add up to 90º| "'),
         'you could say:',

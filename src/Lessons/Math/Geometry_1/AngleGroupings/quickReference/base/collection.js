@@ -105,14 +105,14 @@ export default class CommonCollection extends CommonDiagramCollection {
     if (r3 > Math.PI * 2) {
       r3 = Math.PI * 2;
     }
-    if (r2 > r3 - 0.3) {
-      r2 = r3 - 0.3;
+    if (r2 > r3) {
+      r2 = r3;
     }
-    if (r2 < 0 + 0.3) {
-      r2 = 0 + 0.3;
+    if (r2 < 0) {
+      r2 = 0;
     }
-    if (r3 < 0 + 0.6) {
-      r3 = 0 + 0.6;
+    if (r3 < 0) {
+      r3 = 0;
     }
     if (r1 > Math.PI * 2) {
       r1 -= Math.PI * 2;
@@ -215,7 +215,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseCombinationAngles() {
+  pulseAngleGroupings() {
     this._fig._angleA.pulseScaleNow(1, 1.2);
     this._fig._angleB.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();

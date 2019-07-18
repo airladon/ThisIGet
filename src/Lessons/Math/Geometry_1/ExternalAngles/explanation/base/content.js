@@ -35,7 +35,7 @@ class Content extends PresentationLessonContent {
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
       'Math/Geometry_1/Triangles/base',
-      'Math/Geometry_1/CombinationAngles/base',
+      'Math/Geometry_1/AngleGroupings/base',
     ]);
   }
 
@@ -158,7 +158,7 @@ class Content extends PresentationLessonContent {
         'Now |c| and |_e| are |supplementary| angles, so we can calculate |e|.',
       ],
       modifiers: {
-        supplementary: this.qr('Math/Geometry_1/CombinationAngles/base/SupplementaryPres'),
+        supplementary: this.qr('Math/Geometry_1/AngleGroupings/base/SupplementaryPres'),
         c: highlight(colors.angles),
         _e: highlight(colors.externalAngle),
         e: highlight(colors.externalAngle),

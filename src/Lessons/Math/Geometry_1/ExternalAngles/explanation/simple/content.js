@@ -15,7 +15,7 @@ class Content extends SimpleLessonContent {
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
       'Math/Geometry_1/Triangles/base',
-      'Math/Geometry_1/CombinationAngles/base/',
+      'Math/Geometry_1/AngleGroupings/base/',
     ]);
   }
 

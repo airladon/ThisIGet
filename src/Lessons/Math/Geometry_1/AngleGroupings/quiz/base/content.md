@@ -5,7 +5,7 @@
 
 ### Question 1:
 
-What would $|q1_angle_num|$ adjacent angles of $|q1_angles|$ be called?
+What would $|q1_angle_num|$ angles of $|q1_angles|$ be called?
 
 $|div q1_multichoice|$
 

@@ -37,9 +37,9 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
 
     this.addSection({
-      title: 'Combination Angles',
+      title: 'Adjacent Angles',
       setContent: style({ left: 5, right: 56, top: 15 }, [
-        '|Adjacent_angles| share a vertex and edge, and sum to give the |larger_angle|.',
+        '|Adjacent_angles| share a |vertex| and |edge|, and sum to give the |larger_angle|.',
       ]),
       modifiers: {
         Adjacent_angles: click(
@@ -48,6 +48,8 @@ class Content extends PresentationLessonContent {
           colors.diagram.action,
         ),
         larger_angle: click(coll.toggleAngleC, [coll], colors.angleC),
+        vertex: click(coll.pulseVertex, [coll], colors.lines),
+        edge: click(coll.pulseLine2, [coll], colors.lines),
         // calculated: click(coll.stepEqn, [coll], colors.diagram.action),
       },
       show: [fig],
