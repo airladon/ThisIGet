@@ -80,9 +80,7 @@ def home():
             polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
         if 'lessonIndex.js' in dist:
             lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-    # print(dist)
-    # print(static)
-    # print(figure_one_js)
+
     res = make_response(render_template(
         'home.html',
         main_css=main_css, main_js=main_js, vendors_js=vendors_js,

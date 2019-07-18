@@ -46,7 +46,7 @@ class Content extends SinglePageLessonContent {
     ));
     // this.loadQRs([
     //   'Math/Geometry_1/Triangles/base',
-    //   'Math/Geometry_1/AdjacentAngles/base/',
+    //   'Math/Geometry_1/CombinationAngles/base/',
     //   'Math/Geometry_1/Area/base/',
     //   'Math/Geometry_1/RightAngleTriangles/base/',
     //   'Math/Geometry_1/ImportantAngles/base/',

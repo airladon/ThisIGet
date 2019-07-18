@@ -1,60 +1,5 @@
 [
   {
-    "url": "https://en.wikipedia.org/wiki/Angle",
-    "hash": "d720a66dd6f73e404fc0188dfdfde0e4",
-    "publisher": "Wikipedia",
-    "type": "generic",
-    "description": "Description of Angle including definitions of Complementary, Supplementary and Explementary",
-    "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AdjacentAngles",
-    "topic": "links",
-    "versionUID": "base"
-  },
-  {
-    "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-angle/vert-comp-supp-angles/a/complementary-and-supplementary-angles-review",
-    "hash": "ac07d147529aa3996d0e9faaef60f9db",
-    "publisher": "Khan Academy",
-    "type": "generic",
-    "description": "Complementary and Supplementary Angles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AdjacentAngles",
-    "topic": "links",
-    "versionUID": "base"
-  },
-  {
-    "url": "https://www.mathsisfun.com/geometry/adjacent-angles.html",
-    "hash": "54c1b72a41ff87b948538e5524da4c55",
-    "publisher": "Math is Fun",
-    "type": "generic",
-    "description": "Adjacent Angles Description",
-    "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AdjacentAngles",
-    "topic": "links",
-    "versionUID": "base"
-  },
-  {
-    "url": "https://study.com/academy/lesson/what-are-adjacent-angles-definition-examples.html",
-    "hash": "d9c8481d1900e82066aa0e646a4b7079",
-    "publisher": "Study.com",
-    "type": "generic",
-    "description": "Adjacent Angles Description",
-    "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AdjacentAngles",
-    "topic": "links",
-    "versionUID": "base"
-  },
-  {
-    "url": "http://www.softschools.com/math/geometry/topics/supplementary_and_complementary_angles/",
-    "hash": "e9bb5b0c7615850218791e59373c5b48",
-    "publisher": "SoftSchools.com",
-    "type": "generic",
-    "description": "Complementary and Supplementary Angles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AdjacentAngles",
-    "topic": "links",
-    "versionUID": "base"
-  },
-  {
     "url": "https://en.wikipedia.org/wiki/Circle",
     "hash": "5c262e9f4ce3eb5193990a43bb0fd074",
     "publisher": "Wikipedia",
@@ -106,6 +51,61 @@
     "description": "Introduction to circle and its properties",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "Circle",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Angle",
+    "hash": "d720a66dd6f73e404fc0188dfdfde0e4",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "Description of Angle including definitions of Complementary, Supplementary and Explementary",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CombinationAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.khanacademy.org/math/basic-geo/basic-geo-angle/vert-comp-supp-angles/a/complementary-and-supplementary-angles-review",
+    "hash": "ac07d147529aa3996d0e9faaef60f9db",
+    "publisher": "Khan Academy",
+    "type": "generic",
+    "description": "Complementary and Supplementary Angles",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CombinationAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/geometry/adjacent-angles.html",
+    "hash": "54c1b72a41ff87b948538e5524da4c55",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Adjacent Angles Description",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CombinationAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://study.com/academy/lesson/what-are-adjacent-angles-definition-examples.html",
+    "hash": "d9c8481d1900e82066aa0e646a4b7079",
+    "publisher": "Study.com",
+    "type": "generic",
+    "description": "Adjacent Angles Description",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CombinationAngles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "http://www.softschools.com/math/geometry/topics/supplementary_and_complementary_angles/",
+    "hash": "e9bb5b0c7615850218791e59373c5b48",
+    "publisher": "SoftSchools.com",
+    "type": "generic",
+    "description": "Complementary and Supplementary Angles",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CombinationAngles",
     "topic": "links",
     "versionUID": "base"
   },

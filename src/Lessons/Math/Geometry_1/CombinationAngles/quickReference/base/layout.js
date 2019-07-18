@@ -12,10 +12,10 @@ const {
 const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'qrAdjacentAngles_lines',
-  'qrAdjacentAngles_angleA',
-  'qrAdjacentAngles_angleB',
-  'qrAdjacentAngles_angleC',
+  'qrCombinationAngles_lines',
+  'qrCombinationAngles_angleA',
+  'qrCombinationAngles_angleB',
+  'qrCombinationAngles_angleC',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -31,7 +31,7 @@ export default function lessonLayout() {
     options: {
       length: radius,
       width,
-      color: colors.qrAdjacentAngles_lines,
+      color: colors.qrCombinationAngles_lines,
       move: {
         type: 'rotation',
         middleLengthPercent: 0,
@@ -63,11 +63,11 @@ export default function lessonLayout() {
   layout.line3 = joinObjects({}, line, { name: 'line3' });
   layout.angleA = joinObjects({}, angle, {
     name: 'angleA',
-    options: { label: { text: 'a' }, color: colors.qrAdjacentAngles_angleA },
+    options: { label: { text: 'a' }, color: colors.qrCombinationAngles_angleA },
   });
   layout.angleB = joinObjects({}, angle, {
     name: 'angleB',
-    options: { label: { text: 'b' }, color: colors.qrAdjacentAngles_angleB },
+    options: { label: { text: 'b' }, color: colors.qrCombinationAngles_angleB },
   });
   layout.angleC = joinObjects({}, angle, {
     name: 'angleC',
@@ -81,7 +81,7 @@ export default function lessonLayout() {
         radius: radius * 0.7,
         autoHide: 0.1,
       },
-      color: colors.qrAdjacentAngles_angleC,
+      color: colors.qrCombinationAngles_angleC,
     },
   });
 
@@ -123,14 +123,12 @@ export default function lessonLayout() {
       color: colors.diagram.text.base,
       scale: 1,
       elements: {
-        a: { text: 'a', color: colors.qrAdjacentAngles_angleA, mods: mods('down', 0.4) },
-        b: { text: 'b', color: colors.qrAdjacentAngles_angleB, mods: mods('down', 0.8) },
-        c: { text: 'c', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.7) },
-        _180: { text: '180º', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.5 ) },
-        _90: { text: '90º', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.5 ) },
-        // v: { symbol: 'vinculum', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.5 ) },
-        // _2: { text: '2', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.5 ) },
-        _360: { text: '360º', color: colors.qrAdjacentAngles_angleC, mods: mods('up', 0.5 ) },
+        a: { text: 'a', color: colors.qrCombinationAngles_angleA, mods: mods('down', 0.4) },
+        b: { text: 'b', color: colors.qrCombinationAngles_angleB, mods: mods('down', 0.8) },
+        c: { text: 'c', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.7) },
+        _180: { text: '180º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
+        _90: { text: '90º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
+        _360: { text: '360º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
         equals: '  =  ',
         plus: '  +  ',
         minus: '  -  ',
