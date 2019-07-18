@@ -4,10 +4,10 @@
 var version = {
   uid: 'base',
   topic: 'examples',
-  title: 'Derivation of Pythagorean Theorem',
-  description: 'Derivation using area of four right angle triangles',
-  htmlTitle: 'Pythagorean Theorem Derivation',
-  htmlDescription: 'Derivation using area of four right angle triangles',
+  title: 'Triangle Angles',
+  description: 'Example calculations of angles in a triangle',
+  htmlTitle: 'Example calculations of angles in a triangle',
+  htmlDescription: 'Calculating angles in various geometries using sum of angles in a triangle',
   fullLesson: true,
   type: 'singlePage',
 };

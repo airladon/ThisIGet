@@ -1,4 +1,4 @@
-## Triangles
+## Calculations of a Triangle's Angles
 
 ### Example 1:
 
