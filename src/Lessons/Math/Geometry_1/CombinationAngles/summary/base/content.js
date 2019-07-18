@@ -37,7 +37,7 @@ class Content extends PresentationLessonContent {
     const fig = coll._fig;
 
     this.addSection({
-      title: 'Adjacent Angles',
+      title: 'Combination Angles',
       setContent: style({ left: 5, right: 56, top: 15 }, [
         '|Adjacent_angles| share a vertex and edge, and sum to give the |larger_angle|.',
       ]),

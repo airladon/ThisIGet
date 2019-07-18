@@ -1,0 +1,16 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrCombinationAngles_lines:              color('blue'),
+  qrCombinationAngles_angleA:             color('red'),
+  qrCombinationAngles_angleB:             color('green'),
+  qrCombinationAngles_angleC:             color('yellow'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+// .diagram__text {
+//   z-index: 0;
+// }

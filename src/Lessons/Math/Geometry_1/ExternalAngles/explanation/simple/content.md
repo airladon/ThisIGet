@@ -11,7 +11,7 @@ We know the sum of the angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/b
 
 $$\color{r}a\color{black}+\color{r}b\color{black}+\color{gr}c\color{black}=180^\circ$$
 
-Angles $$\color{gr}c$$ and $$\color{g}d$$ are [[supplementary]]((qr,'Math/Geometry_1/AdjacentAngles/base/Supplementary',#00A89D)), and also add to 180º:
+Angles $$\color{gr}c$$ and $$\color{g}d$$ are [[supplementary]]((qr,'Math/Geometry_1/CombinationAngles/base/Supplementary',#00A89D)), and also add to 180º:
 
 $$\color{gr}c\color{black}+\color{g}d\color{black}=180^\circ$$
 

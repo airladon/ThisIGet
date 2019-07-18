@@ -5,8 +5,8 @@ var version = {
   uid: 'base',
   topic: 'links',
   type: 'generic',
-  title: 'External Links to Adjacent Angles',
-  description: 'External links to sources of information for Adjacent Angles>',
+  title: 'External Links to Combination Angles',
+  description: 'External links to sources of information for Combination Angles>',
   htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
   htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
   links: [

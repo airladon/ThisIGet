@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Parallel Lines',
   dependencies: [
-    'AdjacentAngles',
+    'CombinationAngles',
   ],
   enabled: true,
   path: 'Math/Geometry_1',
