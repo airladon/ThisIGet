@@ -167,7 +167,9 @@ export class QRAlternate extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      Alternate_angles: click(three.toggleAlternate, [three], colors.qrAnglesAtIntersections_angle1),
+      Alternate_angles: click(
+        three.toggleAlternate, [three], colors.qrAnglesAtIntersections_angle1,
+      ),
       intersecting_line: click(
         three.pulseIntersecting, [three],
         colors.qrAnglesAtIntersections_intersectingLine,
