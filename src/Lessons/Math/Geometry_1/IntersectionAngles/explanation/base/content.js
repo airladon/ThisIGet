@@ -44,7 +44,7 @@ class Content extends PresentationLessonContent {
     const three = diag._threeLines;
 
     this.addSection({
-      title: 'Related Angles',
+      title: 'Intersection Angles',
       setContent: style({ centerV: true }, [
         '|Related angles| are angles that can be used to calculate each other.',
         'This lesson will look at related angles in two common scenarios:',

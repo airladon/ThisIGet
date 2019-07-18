@@ -4,7 +4,7 @@ Consider two triangles with **equal angles** overlaid on each other (left). We t
 
 ![](SimilarOverlay.png)
 
-As $$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/RelatedAngles/base/Corresponding',#00756F)):
+As $$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/IntersectionAngles/base/Corresponding',#00756F)):
 
 $$\color{b}BC \parallel DE$$
 

@@ -38,7 +38,7 @@ export class QROpposite extends PopupBoxCollection {
     const opp = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      Opposite_angles: click(opp.toggleOpposite, [opp], colors.qrRelatedAngles_angle1),
+      Opposite_angles: click(opp.toggleOpposite, [opp], colors.qrIntersectionAngles_angle1),
     };
     this.setTitle('Opposite Angles');
     this.setDescription([
@@ -55,10 +55,10 @@ export class QROpposite extends PopupBoxCollection {
     collection.show();
     const opp = this._collection;
     const { colors } = this.layout;
-    opp.setAngle(1, colors.qrRelatedAngles_angle1, 'a');
-    opp.setAngle(2, colors.qrRelatedAngles_angle1, 'b');
-    opp.setAngle(3, colors.qrRelatedAngles_angle1, 'a');
-    opp.setAngle(4, colors.qrRelatedAngles_angle1, 'b');
+    opp.setAngle(1, colors.qrIntersectionAngles_angle1, 'a');
+    opp.setAngle(2, colors.qrIntersectionAngles_angle1, 'b');
+    opp.setAngle(3, colors.qrIntersectionAngles_angle1, 'a');
+    opp.setAngle(4, colors.qrIntersectionAngles_angle1, 'b');
     opp.hideAll();
     opp._fig.setScenarios('qr');
     opp._fig._line1.showAll();
@@ -94,16 +94,16 @@ export class QRCorresponding extends PopupBoxCollection {
     const { colors } = this.layout;
     const modifiers = {
       Corresponding_angles: click(
-        three.toggleCorresponding, [three], colors.qrRelatedAngles_angle1,
+        three.toggleCorresponding, [three], colors.qrIntersectionAngles_angle1,
       ),
-      parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
+      parallel: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
+      two_lines: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
       intersecting: click(
         three.pulseIntersecting, [three],
-        colors.qrRelatedAngles_intersectingLine,
+        colors.qrIntersectionAngles_intersectingLine,
       ),
-      corresponding_angles_are_always_equal: highlight(colors.qrRelatedAngles_angle3),
-      two_lines_are_always_parallel: highlight(colors.qrRelatedAngles_angle3),
+      corresponding_angles_are_always_equal: highlight(colors.qrIntersectionAngles_angle3),
+      two_lines_are_always_parallel: highlight(colors.qrIntersectionAngles_angle3),
     };
     this.setTitle('Corresponding Angles');
     this.setDescription([
@@ -122,14 +122,14 @@ export class QRCorresponding extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     three.setScenarios('qr');
-    three.setAngle('A1', colors.qrRelatedAngles_angle1, 'a');
-    three.setAngle('A2', colors.qrRelatedAngles_angle1, 'a');
-    three.setAngle('B1', colors.qrRelatedAngles_angle1, 'b');
-    three.setAngle('B2', colors.qrRelatedAngles_angle1, 'b');
-    three.setAngle('C1', colors.qrRelatedAngles_angle1, 'c');
-    three.setAngle('C2', colors.qrRelatedAngles_angle1, 'c');
-    three.setAngle('D1', colors.qrRelatedAngles_angle1, 'd');
-    three.setAngle('D2', colors.qrRelatedAngles_angle1, 'd');
+    three.setAngle('A1', colors.qrIntersectionAngles_angle1, 'a');
+    three.setAngle('A2', colors.qrIntersectionAngles_angle1, 'a');
+    three.setAngle('B1', colors.qrIntersectionAngles_angle1, 'b');
+    three.setAngle('B2', colors.qrIntersectionAngles_angle1, 'b');
+    three.setAngle('C1', colors.qrIntersectionAngles_angle1, 'c');
+    three.setAngle('C2', colors.qrIntersectionAngles_angle1, 'c');
+    three.setAngle('D1', colors.qrIntersectionAngles_angle1, 'd');
+    three.setAngle('D2', colors.qrIntersectionAngles_angle1, 'd');
     three.hideAll();
 
     three._fig._angleA1.showAll();
@@ -167,15 +167,15 @@ export class QRAlternate extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      Alternate_angles: click(three.toggleAlternate, [three], colors.qrRelatedAngles_angle1),
+      Alternate_angles: click(three.toggleAlternate, [three], colors.qrIntersectionAngles_angle1),
       intersecting_line: click(
         three.pulseIntersecting, [three],
-        colors.qrRelatedAngles_intersectingLine,
+        colors.qrIntersectionAngles_intersectingLine,
       ),
-      two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      alternate_angles_are_always_equal: highlight(colors.qrRelatedAngles_angle3),
-      two_lines_are_always_parallel: highlight(colors.qrRelatedAngles_angle3),
+      two_lines: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
+      parallel: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
+      alternate_angles_are_always_equal: highlight(colors.qrIntersectionAngles_angle3),
+      two_lines_are_always_parallel: highlight(colors.qrIntersectionAngles_angle3),
     };
     this.setTitle('Alternate Angles');
     this.setDescription([
@@ -194,14 +194,14 @@ export class QRAlternate extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     three.setScenarios('qr');
-    three.setAngle('A1', colors.qrRelatedAngles_angle1, 'c');
-    three.setAngle('A2', colors.qrRelatedAngles_angle1, 'a');
-    three.setAngle('B1', colors.qrRelatedAngles_angle1, 'd');
-    three.setAngle('B2', colors.qrRelatedAngles_angle1, 'b');
-    three.setAngle('C1', colors.qrRelatedAngles_angle1, 'a');
-    three.setAngle('C2', colors.qrRelatedAngles_angle1, 'c');
-    three.setAngle('D1', colors.qrRelatedAngles_angle1, 'b');
-    three.setAngle('D2', colors.qrRelatedAngles_angle1, 'd');
+    three.setAngle('A1', colors.qrIntersectionAngles_angle1, 'c');
+    three.setAngle('A2', colors.qrIntersectionAngles_angle1, 'a');
+    three.setAngle('B1', colors.qrIntersectionAngles_angle1, 'd');
+    three.setAngle('B2', colors.qrIntersectionAngles_angle1, 'b');
+    three.setAngle('C1', colors.qrIntersectionAngles_angle1, 'a');
+    three.setAngle('C2', colors.qrIntersectionAngles_angle1, 'c');
+    three.setAngle('D1', colors.qrIntersectionAngles_angle1, 'b');
+    three.setAngle('D2', colors.qrIntersectionAngles_angle1, 'd');
     three.hideAll();
 
     three._fig._angleC1.showAll();
@@ -239,15 +239,15 @@ export class QRInterior extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     const modifiers = {
-      Interior_angles: click(three.toggleInterior, [three], colors.qrRelatedAngles_angle1),
+      Interior_angles: click(three.toggleInterior, [three], colors.qrIntersectionAngles_angle1),
       intersecting: click(
         three.pulseIntersecting, [three],
-        colors.qrRelatedAngles_intersectingLine,
+        colors.qrIntersectionAngles_intersectingLine,
       ),
-      two_lines: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      parallel: click(three.pulseParallel, [three], colors.qrRelatedAngles_lines),
-      interior_angles_always_add_to_180º: highlight(colors.qrRelatedAngles_angle3),
-      two_lines_are_always_parallel: highlight(colors.qrRelatedAngles_angle3),
+      two_lines: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
+      parallel: click(three.pulseParallel, [three], colors.qrIntersectionAngles_lines),
+      interior_angles_always_add_to_180º: highlight(colors.qrIntersectionAngles_angle3),
+      two_lines_are_always_parallel: highlight(colors.qrIntersectionAngles_angle3),
     };
     this.setTitle('Interior Angles');
     this.setDescription([
@@ -266,10 +266,10 @@ export class QRInterior extends PopupBoxCollection {
     const three = this._collection;
     const { colors } = this.layout;
     three.setScenarios('qr');
-    three.setAngle('A2', colors.qrRelatedAngles_angle1, '180º – a');
-    three.setAngle('B2', colors.qrRelatedAngles_angle1, '180º – b');
-    three.setAngle('C1', colors.qrRelatedAngles_angle1, 'b');
-    three.setAngle('D1', colors.qrRelatedAngles_angle1, 'a');
+    three.setAngle('A2', colors.qrIntersectionAngles_angle1, '180º – a');
+    three.setAngle('B2', colors.qrIntersectionAngles_angle1, '180º – b');
+    three.setAngle('C1', colors.qrIntersectionAngles_angle1, 'b');
+    three.setAngle('D1', colors.qrIntersectionAngles_angle1, 'a');
     three.hideAll();
 
     three._fig._angleA2.showAll();

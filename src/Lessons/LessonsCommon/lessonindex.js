@@ -1084,10 +1084,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    RelatedAngles: new LessonDescription({
+    IntersectionAngles: new LessonDescription({
       title: 'Related Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'RelatedAngles',
+      uid: 'IntersectionAngles',
       topics: {
         explanation: {
           base: {
@@ -1425,7 +1425,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'RelatedAngles',
+        'IntersectionAngles',
       ],
       enabled: true,
     }),
