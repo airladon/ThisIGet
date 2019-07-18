@@ -60,7 +60,7 @@ class Content extends PresentationLessonContent {
       title: 'Introduction',
       setContent: centerV([
         '|Multiple angles| can sometimes be classified into |common categories| or |groups|.',
-        '|Itdentifying such groupings| can make analysing a problem easier as it often allows |calculation of unknown angles| within the group.',
+        '|Identifying such groups| can make analysing a problem easier as it often allows |calculation of unknown angles| within the group.',
       ]),
     });
 
@@ -259,7 +259,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection({
       setContent: style({ centerV: true }, [
-        'Often these grouping names are usually used to |describe| angles in different, and sometimes simpler ways.',
+        'Often these group names are usually used to |describe| angles in different, and sometimes simpler ways.',
         'For example, rather than saying:',
         style(indentStyle, '" angles a and b |add up to 90º| "'),
         'you could say:',
