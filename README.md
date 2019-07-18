@@ -685,3 +685,10 @@ ALTER TABLE new_user RENAME TO user
 ### Removing rows in database
 DELETE from users where id>0;
 
+### Change uid/name/path of lesson
+
+A lesson uid comes from its path and is used in many places including QRs.
+
+* Rename lesson folder to new UID
+* Find all instances of old UID in source code and update to new UID
+* ./updatedb.sh lesson_uid_old=RelatedAngles lesson_uid_new=IntersectionAngles show write
