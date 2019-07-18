@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'quiz',
-  title: 'Base',
+  title: 'Simple geometries',
   description: '',
   htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
   htmlDescription: 'Dynamic quiz where no two questions are the same',
