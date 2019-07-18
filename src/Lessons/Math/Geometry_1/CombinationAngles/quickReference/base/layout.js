@@ -128,8 +128,6 @@ export default function lessonLayout() {
         c: { text: 'c', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.7) },
         _180: { text: '180º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
         _90: { text: '90º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
-        // v: { symbol: 'vinculum', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
-        // _2: { text: '2', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
         _360: { text: '360º', color: colors.qrCombinationAngles_angleC, mods: mods('up', 0.5 ) },
         equals: '  =  ',
         plus: '  +  ',
