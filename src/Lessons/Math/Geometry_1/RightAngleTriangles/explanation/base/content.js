@@ -34,11 +34,11 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Math/Geometry_1/AngleNames/base',
+      'Math/Geometry_1/AngleTypes/base',
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/SideAngleRelationship/base',
       'Math/Geometry_1/AreaTriangle/base',
-      'Math/Geometry_1/CombinationAngles/base',
+      'Math/Geometry_1/AngleGroups/base',
     ]);
   }
 
@@ -64,7 +64,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         angles: click(coll.pulseRightAngle, [coll], colors.rightAngle),
-        right_angle: this.qr('Math/Geometry_1/AngleNames/base/Right'),
+        right_angle: this.qr('Math/Geometry_1/AngleTypes/base/Right'),
       },
     });
 
@@ -357,7 +357,7 @@ class Content extends PresentationLessonContent {
         b: highlight(colors.angles),
         _a: highlight(colors.angles),
         _b: highlight(colors.angles),
-        supplementary: this.qr('Math/Geometry_1/CombinationAngles/base/SupplementaryPres'),
+        supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
         point: click(coll.pulseVertices, [coll], colors.vertex),
       },
       show: [pyth],

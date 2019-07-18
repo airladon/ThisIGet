@@ -45,10 +45,85 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    AngleNames: {
-      title: 'Angle Names',
+    AngleGroups: {
+      title: 'Angle Groups',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'AngleNames',
+      uid: 'AngleGroups',
+      topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Example problems with complementary, supplementary and explementary angles',
+            description: '',
+            htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
+            htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
+            fullLesson: true,
+          },
+        },
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: 'Explanation of complementary, supplementary, and explementary angles.',
+            htmlTitle: 'Complementary, supplementary and explementary angles explanation',
+            htmlDescription: 'What are complementary angles, supplementary angles and explementary angles',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External Links to Angle Groups',
+            description: 'External links to sources of information for Angle Groups>',
+            htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'Complementary, Supplementary and Explementary Angles',
+            description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
+            htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
+            htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Complementary, Supplementary and Explementary Angles.',
+            description: 'Summary of complementary, supplementary and explementary Angles.',
+            htmlTitle: 'Complementary, supplementary and explementary angles summary',
+            htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'AngleTypes',
+      ],
+      enabled: true,
+    },
+    AngleTypes: {
+      title: 'Angle Types',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AngleTypes',
       topics: {
         explanation: {
           base: {
@@ -87,6 +162,89 @@ export default function lessonIndex() {
       },
       dependencies: [
         'Degrees',
+      ],
+      enabled: true,
+    },
+    AnglesAtIntersections: {
+      title: 'Angles at Intersections',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AnglesAtIntersections',
+      topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of related angles',
+            description: 'Examples of calculating opposite, corresponding, alternate and interior angles',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles calculation examples',
+            htmlDescription: 'Examples of finding angles in different geometries using the concepts of opposite, corresponding, alternate, interior and supplementary angles',
+            fullLesson: true,
+          },
+        },
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
+            htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
+            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
+            htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Simple geometries',
+            description: '',
+            htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
+            htmlDescription: 'Dynamic quiz where no two questions are the same',
+            fullLesson: true,
+          },
+          complex: {
+            type: 'singlePage',
+            title: 'More complex geometries',
+            description: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
+            htmlTitle: 'Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles',
+            htmlDescription: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
+            htmlDescription: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'ParallelLines',
       ],
       enabled: true,
     },
@@ -346,81 +504,6 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    CombinationAngles: {
-      title: 'Combination Angles',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'CombinationAngles',
-      topics: {
-        examples: {
-          base: {
-            type: 'singlePage',
-            title: 'Example problems with complementary, supplementary and explementary angles',
-            description: '',
-            htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
-            htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
-            fullLesson: true,
-          },
-        },
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: 'Explanation of complementary, supplementary, and explementary angles.',
-            htmlTitle: 'Complementary, supplementary and explementary angles explanation',
-            htmlDescription: 'What are complementary angles, supplementary angles and explementary angles',
-            fullLesson: true,
-          },
-        },
-        links: {
-          base: {
-            type: 'generic',
-            title: 'External Links to Combination Angles',
-            description: 'External links to sources of information for Combination Angles>',
-            htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
-            htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
-        quiz: {
-          base: {
-            type: 'singlePage',
-            title: 'Complementary, Supplementary and Explementary Angles',
-            description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
-            htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
-            htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
-            fullLesson: true,
-          },
-        },
-        summary: {
-          base: {
-            type: 'presentation',
-            title: 'Complementary, Supplementary and Explementary Angles.',
-            description: 'Summary of complementary, supplementary and explementary Angles.',
-            htmlTitle: 'Complementary, supplementary and explementary angles summary',
-            htmlDescription: 'Summary of complementary angles, supplementary angles and explementary angles',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'AngleNames',
-      ],
-      enabled: true,
-    },
     CongruentTriangles: {
       title: 'Congruent Triangles',
       path: '/Lessons/Math/Geometry_1',
@@ -659,89 +742,6 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    IntersectionAngles: {
-      title: 'Intersection Angles',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'IntersectionAngles',
-      topics: {
-        examples: {
-          base: {
-            type: 'singlePage',
-            title: 'Examples of related angles',
-            description: 'Examples of calculating opposite, corresponding, alternate and interior angles',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles calculation examples',
-            htmlDescription: 'Examples of finding angles in different geometries using the concepts of opposite, corresponding, alternate, interior and supplementary angles',
-            fullLesson: true,
-          },
-        },
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: '',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
-            htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
-            fullLesson: true,
-          },
-        },
-        links: {
-          base: {
-            type: 'generic',
-            title: 'External',
-            description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
-            htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
-            htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
-        quiz: {
-          base: {
-            type: 'presentation',
-            title: 'Simple geometries',
-            description: '',
-            htmlTitle: 'Quiz - Find the unknown angle in a system of opposite, corresponding, alternate and interior angles',
-            htmlDescription: 'Dynamic quiz where no two questions are the same',
-            fullLesson: true,
-          },
-          complex: {
-            type: 'singlePage',
-            title: 'More complex geometries',
-            description: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
-            htmlTitle: 'Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles',
-            htmlDescription: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
-            fullLesson: true,
-          },
-        },
-        summary: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'ParallelLines',
-      ],
-      enabled: true,
-    },
     Introduction: {
       title: 'Why Study Shapes?',
       path: '/Lessons/Math/Geometry_1',
@@ -935,7 +935,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'CombinationAngles',
+        'AngleGroups',
       ],
       enabled: true,
     },
@@ -1517,7 +1517,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'IntersectionAngles',
+        'AnglesAtIntersections',
       ],
       enabled: true,
     },

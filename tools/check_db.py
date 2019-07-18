@@ -40,29 +40,29 @@ print()
 print(f'Using database: ${db.engine.url}\n')
 show = False
 write = False
-lesson_uid_old = ''
-lesson_uid_new = ''
+uids = []
 for arg in sys.argv:
     if (arg == 'show'):
         show = True
     if (arg == 'write'):
         write = True
-    if (arg.startswith('lesson_uid_old=')):
-        lesson_uid_old = f'{arg[len("lessonuid_old=") + 1:]}'
-    if (arg.startswith('lesson_uid_new=')):
-        lesson_uid_new = f'{arg[len("lessonuid_new=") + 1:]}'
+    if (arg.startswith('change_lesson_uid')):
+        uids = arg.split('=')[1].split(',')
 
-if len(lesson_uid_old) > 0 and len(lesson_uid_new) > 0:
-    lesson = Lessons.query.filter_by(uid=lesson_uid_old).first()
-    if lesson:
-        lesson.uid = lesson_uid_new
-    else:
-        print(f'No lesson with uid {lesson_uid_old} found')
-        exit()
-    if show:
-        print(f'Change lesson uid {lesson_uid_old} to {lesson_uid_new}')
-    if write:
-        db.session.commit()
+if len(uids) > 0:
+    for uid_pair in uids:
+        [old_uid, new_uid] = uid_pair.split(':')
+        lesson = Lessons.query.filter_by(uid=old_uid).first()
+        if lesson:
+            lesson.uid = new_uid
+        else:
+            print(f'No lesson with uid {old_uid} found')
+            exit()
+        if show:
+            print(f'Change lesson uid {old_uid} to {new_uid}')
+        if write:
+            db.session.commit()
+
 
 # #######################################################################
 # Lesson Index

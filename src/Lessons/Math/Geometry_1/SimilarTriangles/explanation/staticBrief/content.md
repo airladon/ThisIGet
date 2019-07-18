@@ -11,7 +11,7 @@ Consider two triangles with **equal angles** overlaid on each other.
 
 ![](SimilarOverlay.png)
 
-$$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/IntersectionAngles/base/Corresponding',#00756F)), therefore $$\color{b}BC \parallel DE$$.
+$$\angle DBC$$ and $$\angle ADE$$ are [[equal corresponding angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)), therefore $$\color{b}BC \parallel DE$$.
 
 When a triangle is [[split with a parallel line]]((qr,'Math/Geometry_1/ParallelSplitOfTriangle/base/Triangle',#00756F)), the smaller triangle's sides will all be scaled by the same proportion.
 

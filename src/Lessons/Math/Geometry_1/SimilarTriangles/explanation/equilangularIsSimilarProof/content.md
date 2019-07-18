@@ -16,7 +16,7 @@ We can prove this by overlaying one triangle on the other.
 
 ![](./OverlayTriangles.png)
 
-The first observation we can make is the two $$\color{b}b$$ angles are **equal** and [[corresponding angles]]((qr,'Math/Geometry_1/IntersectionAngles/base/Corresponding',#00756F)). This means the two horizontal lines are **parallel**.
+The first observation we can make is the two $$\color{b}b$$ angles are **equal** and [[corresponding angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Corresponding',#00756F)). This means the two horizontal lines are **parallel**.
 
 ![](./CorrespondingAngles.png)
 

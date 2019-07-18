@@ -12,7 +12,7 @@ Rotate a copy of the triangle so the sides $$\color{lessonBlue}A$$ and $$\color{
 
 ![](./TwoTriangles.png)
 
-As $$\color{lessonBlue}A$$ and $$\color{lessonBlue}B$$ are a straight line, angles $$\color{lessonGreen}{a}$$, $$\color{lessonGreen}{b}$$ and $$\color{lessonGreen}{e}$$ are [[supplementary]]((qr,'Math/Geometry_1/CombinationAngles/base/Supplementary',#00756F)).
+As $$\color{lessonBlue}A$$ and $$\color{lessonBlue}B$$ are a straight line, angles $$\color{lessonGreen}{a}$$, $$\color{lessonGreen}{b}$$ and $$\color{lessonGreen}{e}$$ are [[supplementary]]((qr,'Math/Geometry_1/AngleGroups/base/Supplementary',#00756F)).
 
 We know $$\color{lessonGreen}{a} + \color{lessonGreen}{b} = 90^\circ$$ and $$\color{lessonGreen}{a} + \color{lessonGreen}{b} + \color{lessonGreen}{e} = 180^\circ$$, so therefore $$\color{lessonGreen}{e}=90^\circ$$.
 
@@ -38,6 +38,6 @@ Subtract $$\color{lessonBlue}2AB$$ from both sides:
 
 $$\color{lessonBlue} \bbox[20px,border:1px solid red]{A^2 + B^2 = C^2}$$
 
-And so for a right angle triangle the sum of the squares of the [[perpendicular]]((qr,'Math/Geometry_1/AngleNames/base/Perpendicular',#00756F)) sides is equal to the square of the [[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Hypotenuse',#00756F)). This can also be visulaized as squares made from the edges of the right angle triangle:
+And so for a right angle triangle the sum of the squares of the [[perpendicular]]((qr,'Math/Geometry_1/AngleTypes/base/Perpendicular',#00756F)) sides is equal to the square of the [[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Hypotenuse',#00756F)). This can also be visulaized as squares made from the edges of the right angle triangle:
 
 ![](./Squares.png)

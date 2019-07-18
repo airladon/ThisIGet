@@ -2,10 +2,10 @@ import LessonDescription from '../../js/Lesson/lessonDescription';
 
 export default function getLessonIndex() {
   const lessonIndex = {
-    CombinationAngles: new LessonDescription({
+    AngleGroups: new LessonDescription({
       title: 'Adjacent Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'CombinationAngles',
+      uid: 'AngleGroups',
       topics: {
         explanation: {
           base: {
@@ -43,7 +43,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'AngleNames',
+        'AngleTypes',
       ],
       enabled: true,
     }),
@@ -558,10 +558,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    AngleNames: new LessonDescription({
+    AngleTypes: new LessonDescription({
       title: 'Important Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'AngleNames',
+      uid: 'AngleTypes',
       topics: {
         explanation: {
           base: {
@@ -796,7 +796,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'CombinationAngles',
+        'AngleGroups',
       ],
       enabled: true,
     }),
@@ -1084,10 +1084,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    IntersectionAngles: new LessonDescription({
+    AnglesAtIntersections: new LessonDescription({
       title: 'Related Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'IntersectionAngles',
+      uid: 'AnglesAtIntersections',
       topics: {
         explanation: {
           base: {
@@ -1425,7 +1425,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'IntersectionAngles',
+        'AnglesAtIntersections',
       ],
       enabled: true,
     }),
