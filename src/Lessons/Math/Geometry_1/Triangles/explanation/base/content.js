@@ -34,6 +34,10 @@ class Content extends PresentationLessonContent {
     this.loadQRs([
       'Math/Geometry_1/AngleGroups/base',
       'Math/Geometry_1/AnglesAtIntersections/base',
+      'Math/Geometry_1/AngleTypes/base',
+      'Math/Geometry_1/Equilateral/base',
+      'Math/Geometry_1/Isosceles/base',
+      'Math/Geometry_1/RightAngleTriangles/base',
     ]);
   }
 
@@ -43,6 +47,7 @@ class Content extends PresentationLessonContent {
     const examples = coll._examples;
     const custom = coll._customTriangle;
     const total = coll._totalAngle;
+    const type = coll._triangleType;
 
     this.addSection({
       title: 'Triangle',
@@ -441,6 +446,132 @@ class Content extends PresentationLessonContent {
         '|All triangles| have this relationship between angles.',
         'This means if you know any two angles, you can always |calculate| the third!',
       ]),
+    });
+
+    this.addSection({
+      title: 'Triangle Types',
+      setContent: style({ centerV: true }, [
+        'Triangles are |categorized| depending on their |side lengths| and |angles|.',
+        'Knowing what category a triangle is in, or the |triangle type|, can sometimes simplify a problem as known relationships with that specific triangle type can be used to find unknown properties.',
+        'Using triangle type names can also more efficiently |communicate| the properties of a triangle, so it is important to remember them.',
+      ]),
+    });
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Lets first look at triangle types defined by their |angles|.',
+      ]),
+    });
+
+    common = {
+      show: [type],
+      hide: [type._side01, type._side12, type._side20],
+    };
+    this.addSection(common, {
+      setContent: [
+        'If all angles are |acute| or less than 90º, then the triangle is called an |Acute Triangle|.',
+      ],
+      modifiers: {
+        acute: this.qr('Math/Geometry_1/AngleTypes/base/Acute', colors.diagram.action),
+      },
+      setSteadyState: () => {
+        coll.goToType('acute', 0);
+      },
+    });
+    this.addSection(common, {
+      setContent: [
+        'If one angle is a |right_angle| or 90º, then the triangle is called a |Right Angle Triangle|.',
+      ],
+      modifiers: {
+        right_angle: this.qr('Math/Geometry_1/AngleTypes/base/Right', colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll.goToType('right', 1, done);
+      },
+      setSteadyState: () => {
+        coll.goToType('right', 0);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'If one angle is a |obtuse| or greater than 90º, then the triangle is called a |Obtuse Triangle|.',
+      ],
+      modifiers: {
+        obtuse: this.qr('Math/Geometry_1/AngleTypes/base/Obtuse', colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        coll.goToType('obtuse', 1, done);
+      },
+      setSteadyState: () => {
+        coll.goToType('obtuse', 0);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'As a triangle\'s angles add to 180º, then if one angle is a 90º,  the |sum| of the |other two angles| must also be |90º|.',
+        'This means the other two angles |must be less than 90º|.',
+        'In other words, there can only ever be |one angle| in a triangle that is |equal to or greater than 90º|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Next we can look at triangle types defined by their |side lengths|.',
+      ]),
+    });
+
+    common = {
+      show: [type],
+      hide: [type._angle0, type._angle1, type._angle2],
+    };
+
+    this.addSection(common, {
+      setContent: [
+        'If all sides are the same length, then the triangle is called an |Equilateral Triangle|.',
+        `${new Definition('Equilateral', 'Latin', ['aequilateralis', '', 'aequi', 'equal', 'lateralis', 'side']).html()}`,
+      ],
+      setSteadyState: () => {
+        coll.goToType('equilateral', 0);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'If two sides are the same length, then the triangle is called an |Isosceles Triangle|.',
+        `${new Definition('Isosceles', 'Greek', ['isoskeles', '', 'isos', 'equal', 'skelos', 'leg']).html()}`,
+      ],
+      transitionFromPrev: (done) => {
+        coll.goToType('isosceles', 1, done);
+      },
+      setSteadyState: () => {
+        coll.goToType('isosceles', 0);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'If all side lengths are different, then the triangle is called an |Scalene Triangle|.',
+        `${new Definition('Scalene', 'Greek', ['skalēnos', 'unequal']).html()}`,
+      ],
+      transitionFromPrev: (done) => {
+        coll.goToType('scalene', 1, done);
+      },
+      setSteadyState: () => {
+        coll.goToType('scalene', 0);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        '|Future lessons| in this learning path examine |equilateral_triangles|, |isosceles_triangles| and |right_angle_triangles| in more detail.',
+        'These triangles all have special |properties| and as such are used in many places to help |simplfy problems|.',
+      ]),
+      modifiers: {
+        equilateral_triangles: this.qr('Math/Geometry_1/Equilateral/base/Main'),
+        isosceles_triangles: this.qr('Math/Geometry_1/Isosceles/base/Main'),
+        right_angle_triangles: this.qr('Math/Geometry_1/RightAngleTriangles/base/DefinitionPres'),
+      },
     });
   }
 }

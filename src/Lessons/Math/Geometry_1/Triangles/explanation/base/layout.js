@@ -294,10 +294,71 @@ export default function lessonLayout() {
     ],
   };
 
+  // ////////////////////////////////////////////////////////
+  //   Triangle Types
+  // ////////////////////////////////////////////////////////
+  layout.triangleTypes = {
+    name: 'triangleType',
+    method: 'polyLine',
+    options: {
+      points: layout.defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      pad: {
+        color: colors.diagram.background,
+        radius: 0.2,
+        sides: 30,
+        fill: true,
+        isMovable: true,
+        touchRadius: 0.4,
+        boundary: [-2.5, -1.7, 5, 3],
+      },
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.3,
+          width: layout.width,
+        },
+        label: {
+          radius: 0.31,
+        },
+        autoRightAngle: true,
+      },
+      side: {
+        label: {
+          // text: '',
+          offset: 0.1,
+        },
+      },
+    },
+    mods: {
+      scenarios: {
+        left: { position: [1, 0.3], scale: 0.8 },
+      },
+    },
+  };
+
+  layout.typeDefinition = {
+    name: 'definition',
+    method: 'textHTML',
+    options: {
+      // size: 0.15,
+      // color: colors.diagram.text.base,
+      id: 'triangle_type_definition',
+      text: 'test',
+      alignV: 'top',
+      alignH: 'center',
+      position: [1.3, -0.8],
+    },
+  };
+
   layout.addElements = [
+    layout.typeDefinition,
     triangleExamples,
     layout.customTriangle,
     layout.totalAngle,
+    layout.triangleTypes,
   ];
   return layout;
 }
