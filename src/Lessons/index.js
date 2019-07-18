@@ -1471,6 +1471,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'Triangles',
       topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Derivation of Pythagorean Theorem',
+            description: 'Derivation using area of four right angle triangles',
+            htmlTitle: 'Pythagorean Theorem Derivation',
+            htmlDescription: 'Derivation using area of four right angle triangles',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
