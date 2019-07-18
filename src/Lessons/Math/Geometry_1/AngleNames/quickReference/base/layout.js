@@ -12,9 +12,9 @@ const {
 // const { joinObjects } = Fig.tools.misc;
 
 const cssColorNames = [
-  'qrImportantAngles_lines',
-  'qrImportantAngles_angle',
-  'qrImportantAngles_fill',
+  'qrAngleNames_lines',
+  'qrAngleNames_angle',
+  'qrAngleNames_fill',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -32,7 +32,7 @@ export default function lessonLayout() {
     options: {
       length: radius,
       width,
-      color: colors.qrImportantAngles_lines,
+      color: colors.qrAngleNames_lines,
       move: {
         type: 'rotation',
         middleLengthPercent: 0,
@@ -52,7 +52,7 @@ export default function lessonLayout() {
     options: {
       length: radius,
       width,
-      color: colors.qrImportantAngles_lines,
+      color: colors.qrAngleNames_lines,
     },
   };
 
@@ -67,7 +67,7 @@ export default function lessonLayout() {
       },
       autoRightAngle: true,
       rightAngleRange: 0.01,
-      color: colors.qrImportantAngles_angle,
+      color: colors.qrAngleNames_angle,
     },
   };
 
@@ -79,7 +79,7 @@ export default function lessonLayout() {
       fill: true,
       sides: 200,
       sidesToDraw: 50,
-      color: colors.qrImportantAngles_fill,
+      color: colors.qrAngleNames_fill,
     },
   };
 
@@ -92,7 +92,7 @@ export default function lessonLayout() {
       sides: 200,
       sidesToDraw: 50,
       rotation: Math.PI / 2,
-      color: colors.qrImportantAngles_fill,
+      color: colors.qrAngleNames_fill,
     },
   };
 
@@ -105,7 +105,7 @@ export default function lessonLayout() {
       sides: 200,
       sidesToDraw: 100,
       rotation: Math.PI,
-      color: colors.qrImportantAngles_fill,
+      color: colors.qrAngleNames_fill,
     },
   };
 

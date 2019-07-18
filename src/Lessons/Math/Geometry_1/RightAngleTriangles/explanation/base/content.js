@@ -34,7 +34,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Math/Geometry_1/ImportantAngles/base',
+      'Math/Geometry_1/AngleNames/base',
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/SideAngleRelationship/base',
       'Math/Geometry_1/AreaTriangle/base',
@@ -64,7 +64,7 @@ class Content extends PresentationLessonContent {
       ],
       modifiers: {
         angles: click(coll.pulseRightAngle, [coll], colors.rightAngle),
-        right_angle: this.qr('Math/Geometry_1/ImportantAngles/base/Right'),
+        right_angle: this.qr('Math/Geometry_1/AngleNames/base/Right'),
       },
     });
 

@@ -15,6 +15,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -31,6 +45,51 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
+    AngleNames: {
+      title: 'Angle Names',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AngleNames',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
+            htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
+            fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full',
+            htmlDescription: '',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Degrees',
+      ],
+      enabled: true,
+    },
     Area: {
       title: 'Area and Rectangles',
       path: '/Lessons/Math/Geometry_1',
@@ -44,6 +103,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to area, rectangle area and square area',
             htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -95,6 +168,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -134,6 +221,20 @@ export default function lessonIndex() {
             htmlTitle: 'Triangle Area derivation and proof',
             htmlDescription: 'Explanation on why area of a triangle is what it is',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -194,6 +295,20 @@ export default function lessonIndex() {
             description: 'External links to information on circles',
             htmlTitle: 'Circles, circle properties and relationships links',
             htmlDescription: 'Explanations, proofs, examples and questions about Circles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -266,6 +381,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'singlePage',
@@ -288,7 +417,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'ImportantAngles',
+        'AngleNames',
       ],
       enabled: true,
     },
@@ -305,6 +434,20 @@ export default function lessonIndex() {
             htmlTitle: 'Congruent triangles and how to determine congruency',
             htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruency tests',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -358,6 +501,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'singlePage',
@@ -397,6 +554,20 @@ export default function lessonIndex() {
             htmlTitle: 'Equilateral triangle derivation from an isosceles triangle',
             htmlDescription: 'Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         summary: {
@@ -448,6 +619,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -471,37 +656,6 @@ export default function lessonIndex() {
       },
       dependencies: [
         'Triangles',
-      ],
-      enabled: true,
-    },
-    ImportantAngles: {
-      title: 'Important Angles',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'ImportantAngles',
-      topics: {
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: '',
-            htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
-            htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
-            fullLesson: true,
-          },
-        },
-        quiz: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: 'Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'Degrees',
       ],
       enabled: true,
     },
@@ -537,6 +691,20 @@ export default function lessonIndex() {
             description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
             htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
             htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -597,6 +765,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
       },
       dependencies: [
       ],
@@ -615,6 +797,20 @@ export default function lessonIndex() {
             htmlTitle: 'Isosceles triangles and proof',
             htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -658,6 +854,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -687,6 +897,20 @@ export default function lessonIndex() {
             htmlTitle: 'Interactive introduction to parallel lines',
             htmlDescription: 'See what parallel lines are, and when lines are parallel',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -748,6 +972,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -779,6 +1017,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -808,6 +1060,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to quadrangles and quadrilaterals',
             htmlDescription: 'Quadrangles, quadrilaterals and their properties',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -871,6 +1137,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -918,6 +1198,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to rectangles and squares and derivation of their properties',
             htmlDescription: 'Proof showing why a rectangles opposite sides are equal and parallel',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         summary: {
@@ -970,6 +1264,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1009,6 +1317,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to relationship between triangle side length and angle',
             htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -1157,6 +1479,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to triangles and their properties',
             htmlDescription: 'Proof that triangle total angle equals 180º',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {

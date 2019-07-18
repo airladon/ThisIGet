@@ -18,7 +18,7 @@ class Content extends SimpleLessonContent {
       'Math/Geometry_1/CombinationAngles/base/',
       'Math/Geometry_1/Area/base/',
       'Math/Geometry_1/RightAngleTriangles/base/',
-      'Math/Geometry_1/ImportantAngles/base/',
+      'Math/Geometry_1/AngleNames/base/',
     ]);
   }
 

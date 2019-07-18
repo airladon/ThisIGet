@@ -43,7 +43,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'ImportantAngles',
+        'AngleNames',
       ],
       enabled: true,
     }),
@@ -558,10 +558,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    ImportantAngles: new LessonDescription({
+    AngleNames: new LessonDescription({
       title: 'Important Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'ImportantAngles',
+      uid: 'AngleNames',
       topics: {
         explanation: {
           base: {

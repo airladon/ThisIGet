@@ -1,0 +1,11 @@
+@import '../../../../../../css/color';
+
+$colors: (
+  qrAngleNames_lines:             color('blue'),
+  qrAngleNames_angle:             color('green'),
+  qrAngleNames_fill:              color('green', 'darkest'),
+);
+
+body {
+  @include color_vars($colors);
+}
