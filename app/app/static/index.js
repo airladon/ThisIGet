@@ -15239,6 +15239,7 @@ function (_DiagramElementCollec) {
   }, {
     key: "updatePoints",
     value: function updatePoints(newPointsIn) {
+      var skipCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var newPoints = newPointsIn.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       });
@@ -15345,7 +15346,7 @@ function (_DiagramElementCollec) {
 
       this.points = newPoints;
 
-      if (this.updatePointsCallback != null) {
+      if (this.updatePointsCallback != null && !skipCallback) {
         this.updatePointsCallback();
       }
     }
@@ -15385,13 +15386,14 @@ function (_DiagramElementCollec) {
   }, {
     key: "reversePoints",
     value: function reversePoints() {
+      var skipCallback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var newPoints = [];
 
       for (var i = 0; i < this.points.length; i += 1) {
         newPoints.push(this.points[this.points.length - 1 - i]);
       }
 
-      this.updatePoints(newPoints);
+      this.updatePoints(newPoints, skipCallback);
     }
   }, {
     key: "setPositionWithoutMoving",
