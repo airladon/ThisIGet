@@ -35,7 +35,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Math/Geometry_1/IntersectionAngles/base',
+      'Math/Geometry_1/AnglesAtIntersections/base',
       'Math/Geometry_1/AreaTriangle/base',
       'Math/Geometry_1/RightAngleTriangles/base',
       'Math/Geometry_1/ParallelLineDistance/base',
@@ -95,7 +95,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(centerFig, common, {
       modifiers: {
-        corresponding_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Corresponding'),
+        corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
         right_angles: this.bindNext(colors.sides),
       },
       show: [fig._tri, fig._rightAngle, fig._split],
@@ -103,7 +103,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(centerFig, common, {
       modifiers: {
-        corresponding_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Corresponding'),
+        corresponding_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
         right_angles: click(coll.pulseRightAngles, [coll, null], colors.sides),
       },
       show: [fig._tri, fig._rightAngle, fig._split, fig._splitRightAngle],

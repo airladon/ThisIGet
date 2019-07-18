@@ -149,6 +149,15 @@ export default class CommonCollection extends CommonDiagramCollection {
       return;
     }
 
+    if (fig.getRotation() === rotation
+      && line2.getRotation() === a
+      && line3.getRotation() === b) {
+      if (callback != null) {
+        callback();
+      }
+      return;
+    }
+
     fig.stop(true, false);
     fig.animations.new()
       .rotation({ target: rotation, duration, direction: 2 })

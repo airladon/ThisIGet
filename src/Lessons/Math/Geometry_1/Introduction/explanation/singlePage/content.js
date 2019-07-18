@@ -49,7 +49,7 @@ class Content extends SinglePageLessonContent {
     //   'Math/Geometry_1/AngleGroups/base/',
     //   'Math/Geometry_1/Area/base/',
     //   'Math/Geometry_1/RightAngleTriangles/base/',
-    //   'Math/Geometry_1/AngleNames/base/',
+    //   'Math/Geometry_1/AngleTypes/base/',
     // ]);
   }
 

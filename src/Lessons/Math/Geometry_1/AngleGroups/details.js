@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Angle Groups',
   dependencies: [
-    'AngleNames',
+    'AngleTypes',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

@@ -693,4 +693,4 @@ A lesson uid comes from its path and is used in many places including QRs.
 * Find all instances of old UID in source code and update to new UID
 * Change title in details to new title if needed
 * Find all instances of old title in code and change to new title if needed
-* ./updatedb.sh lesson_uid_old=RelatedAngles lesson_uid_new=IntersectionAngles show write
+* ./updatedb.sh lesson_uid_old=RelatedAngles lesson_uid_new=AnglesAtIntersections show write

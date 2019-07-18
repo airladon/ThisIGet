@@ -36,7 +36,7 @@ class Content extends PresentationLessonContent {
     this.loadQRs([
       'Math/Geometry_1/PointLineDistance/base',
       'Math/Geometry_1/RectanglesAndSquares/base',
-      'Math/Geometry_1/IntersectionAngles/base',
+      'Math/Geometry_1/AnglesAtIntersections/base',
     ]);
   }
 
@@ -125,14 +125,14 @@ class Content extends PresentationLessonContent {
     this.addSection(common, content, {
       show: [topLine, bottomLine, point, leftLine, bottomLeftAngle],
       modifiers: {
-        interior_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Interior'),
+        interior_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Interior'),
         perpendicular: this.bindNext(colors.angles),
         parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.lines),
       },
     });
     this.addSection(common, content, {
       modifiers: {
-        interior_angles: this.qr('Math/Geometry_1/IntersectionAngles/base/Interior'),
+        interior_angles: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Interior'),
         perpendicular: click(coll.pulseTopLeftAngle, [coll, null], colors.angles),
         parallel_lines: click(coll.pulseParallelLines, [coll, null], colors.lines),
       },

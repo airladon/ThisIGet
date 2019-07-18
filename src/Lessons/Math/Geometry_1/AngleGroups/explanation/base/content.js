@@ -33,7 +33,7 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      'Math/Geometry_1/AngleNames/base',
+      'Math/Geometry_1/AngleTypes/base',
     ]);
   }
 
@@ -132,7 +132,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI / 2, Math.PI / 2], 0, 1.5, null],
           colors.diagram.action,
         ),
-        right_angle: this.qr('Math/Geometry_1/AngleNames/base/Right', colors.angleC),
+        right_angle: this.qr('Math/Geometry_1/AngleTypes/base/Right', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],
@@ -163,7 +163,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI, Math.PI], 0, 1.5, null],
           colors.diagram.action,
         ),
-        straight_angle: this.qr('Math/Geometry_1/AngleNames/base/Straight', colors.angleC),
+        straight_angle: this.qr('Math/Geometry_1/AngleTypes/base/Straight', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],
@@ -185,7 +185,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'Adjacent |supplementary_angles| appear when a |line| is intersected along its |length| and |not its end|.',
+        'Adjacent |supplementary_angles| appear when a |line| is |intersected| along its |length| and |not its end|.',
       ]),
       modifiers: {
         supplementary_angles: click(
@@ -193,6 +193,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI, Math.PI], 0, 1.5, null],
           colors.diagram.action,
         ),
+        intersected: click(coll.pulseVertex, [coll], colors.lines),
         // another: click(coll.pulseLine2, [coll], colors.lines),
         line: click(coll.pulseStraightLine, [coll], colors.lines),
       },
@@ -222,7 +223,7 @@ class Content extends PresentationLessonContent {
           [coll, [Math.PI * 1.999, Math.PI * 1.999], 0, 1.5, null],
           colors.diagram.action,
         ),
-        full_angle: this.qr('Math/Geometry_1/AngleNames/base/Full', colors.angleC),
+        full_angle: this.qr('Math/Geometry_1/AngleTypes/base/Full', colors.angleC),
       },
       show: [fig],
       hide: [fig._angleC],

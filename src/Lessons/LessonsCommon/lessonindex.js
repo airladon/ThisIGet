@@ -43,7 +43,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'AngleNames',
+        'AngleTypes',
       ],
       enabled: true,
     }),
@@ -558,10 +558,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    AngleNames: new LessonDescription({
+    AngleTypes: new LessonDescription({
       title: 'Important Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'AngleNames',
+      uid: 'AngleTypes',
       topics: {
         explanation: {
           base: {
@@ -1084,10 +1084,10 @@ export default function getLessonIndex() {
       ],
       enabled: true,
     }),
-    IntersectionAngles: new LessonDescription({
+    AnglesAtIntersections: new LessonDescription({
       title: 'Related Angles',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'IntersectionAngles',
+      uid: 'AnglesAtIntersections',
       topics: {
         explanation: {
           base: {
@@ -1425,7 +1425,7 @@ export default function getLessonIndex() {
         },
       },
       dependencies: [
-        'IntersectionAngles',
+        'AnglesAtIntersections',
       ],
       enabled: true,
     }),
