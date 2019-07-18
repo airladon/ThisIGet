@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Combination Angles',
   dependencies: [
-    'ImportantAngles',
+    'AngleNames',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

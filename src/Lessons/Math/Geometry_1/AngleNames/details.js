@@ -2,13 +2,13 @@
 
 // eslint-disable-next-line no-var
 var lessonDetails = {
-  title: 'Important Angles',
+  title: 'Angle Names',
   dependencies: [
     'Degrees',
   ],
   enabled: true,
   path: 'Math/Geometry_1',
-  uid: 'ImportantAngles',
+  uid: 'AngleNames',
 };
 
 module.exports = lessonDetails;

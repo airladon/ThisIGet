@@ -45,7 +45,7 @@ class Content extends PresentationLessonContent {
 
     const container = (id, text) => `<div id="${id}"" class="lesson__important_angles__text">${text}</div>`;
     this.addSection({
-      title: 'Important Angles',
+      title: 'Angle Names',
       setContent: [
         `<table class="lesson__important_angles_table">
           <tr>

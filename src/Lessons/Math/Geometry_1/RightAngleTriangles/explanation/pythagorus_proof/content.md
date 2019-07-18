@@ -38,6 +38,6 @@ Subtract $$\color{lessonBlue}2AB$$ from both sides:
 
 $$\color{lessonBlue} \bbox[20px,border:1px solid red]{A^2 + B^2 = C^2}$$
 
-And so for a right angle triangle the sum of the squares of the [[perpendicular]]((qr,'Math/Geometry_1/ImportantAngles/base/Perpendicular',#00756F)) sides is equal to the square of the [[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Hypotenuse',#00756F)). This can also be visulaized as squares made from the edges of the right angle triangle:
+And so for a right angle triangle the sum of the squares of the [[perpendicular]]((qr,'Math/Geometry_1/AngleNames/base/Perpendicular',#00756F)) sides is equal to the square of the [[hypotenuse]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Hypotenuse',#00756F)). This can also be visulaized as squares made from the edges of the right angle triangle:
 
 ![](./Squares.png)
