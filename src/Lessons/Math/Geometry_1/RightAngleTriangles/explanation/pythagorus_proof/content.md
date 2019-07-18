@@ -12,7 +12,7 @@ Rotate a copy of the triangle so the sides $$\color{lessonBlue}A$$ and $$\color{
 
 ![](./TwoTriangles.png)
 
-As $$\color{lessonBlue}A$$ and $$\color{lessonBlue}B$$ are a straight line, angles $$\color{lessonGreen}{a}$$, $$\color{lessonGreen}{b}$$ and $$\color{lessonGreen}{e}$$ are [[supplementary]]((qr,'Math/Geometry_1/AngleGroupings/base/Supplementary',#00756F)).
+As $$\color{lessonBlue}A$$ and $$\color{lessonBlue}B$$ are a straight line, angles $$\color{lessonGreen}{a}$$, $$\color{lessonGreen}{b}$$ and $$\color{lessonGreen}{e}$$ are [[supplementary]]((qr,'Math/Geometry_1/AngleGroups/base/Supplementary',#00756F)).
 
 We know $$\color{lessonGreen}{a} + \color{lessonGreen}{b} = 90^\circ$$ and $$\color{lessonGreen}{a} + \color{lessonGreen}{b} + \color{lessonGreen}{e} = 180^\circ$$, so therefore $$\color{lessonGreen}{e}=90^\circ$$.
 

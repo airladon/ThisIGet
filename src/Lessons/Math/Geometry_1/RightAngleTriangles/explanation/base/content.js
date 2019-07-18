@@ -38,7 +38,7 @@ class Content extends PresentationLessonContent {
       'Math/Geometry_1/Triangles/base',
       'Math/Geometry_1/SideAngleRelationship/base',
       'Math/Geometry_1/AreaTriangle/base',
-      'Math/Geometry_1/AngleGroupings/base',
+      'Math/Geometry_1/AngleGroups/base',
     ]);
   }
 
@@ -357,7 +357,7 @@ class Content extends PresentationLessonContent {
         b: highlight(colors.angles),
         _a: highlight(colors.angles),
         _b: highlight(colors.angles),
-        supplementary: this.qr('Math/Geometry_1/AngleGroupings/base/SupplementaryPres'),
+        supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
         point: click(coll.pulseVertices, [coll], colors.vertex),
       },
       show: [pyth],

@@ -215,7 +215,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  pulseAngleGroupings() {
+  pulseAngleGroups() {
     this._fig._angleA.pulseScaleNow(1, 1.2);
     this._fig._angleB.pulseScaleNow(1, 1.2);
     this.diagram.animateNextFrame();

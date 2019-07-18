@@ -45,10 +45,10 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    AngleGroupings: {
-      title: 'Angle Groupings',
+    AngleGroups: {
+      title: 'Angle Groups',
       path: '/Lessons/Math/Geometry_1',
-      uid: 'AngleGroupings',
+      uid: 'AngleGroups',
       topics: {
         examples: {
           base: {
@@ -73,8 +73,8 @@ export default function lessonIndex() {
         links: {
           base: {
             type: 'generic',
-            title: 'External Links to Angle Groupings',
-            description: 'External links to sources of information for Angle Groupings>',
+            title: 'External Links to Angle Groups',
+            description: 'External links to sources of information for Angle Groups>',
             htmlTitle: 'Adjacent Angles, Complementary Angles, Supplementary Angles and Explementary Angles Links',
             htmlDescription: 'Explanations, proofs, examples and questions about adjacent angles',
             fullLesson: false,
@@ -935,7 +935,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'AngleGroupings',
+        'AngleGroups',
       ],
       enabled: true,
     },

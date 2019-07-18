@@ -6,7 +6,7 @@
     "type": "generic",
     "description": "Description of Angle including definitions of Complementary, Supplementary and Explementary",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AngleGroupings",
+    "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
   },
@@ -17,7 +17,7 @@
     "type": "generic",
     "description": "Complementary and Supplementary Angles",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AngleGroupings",
+    "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
   },
@@ -28,7 +28,7 @@
     "type": "generic",
     "description": "Adjacent Angles Description",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AngleGroupings",
+    "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
   },
@@ -39,7 +39,7 @@
     "type": "generic",
     "description": "Adjacent Angles Description",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AngleGroupings",
+    "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
   },
@@ -50,7 +50,7 @@
     "type": "generic",
     "description": "Complementary and Supplementary Angles",
     "lessonPath": "/Lessons/Math/Geometry_1",
-    "lessonUID": "AngleGroupings",
+    "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
   },
