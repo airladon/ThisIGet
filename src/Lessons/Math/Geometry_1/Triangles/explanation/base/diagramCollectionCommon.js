@@ -288,6 +288,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     type: 'acute' | 'right' | 'obtuse' | 'equilateral' | 'isosceles' | 'scalene',
     duration: number = 1,
     callback: ?() => void = null,
+    pulseIfSame: boolean = false,
   ) {
     let points = [];
     if (type === 'acute') {
@@ -357,7 +358,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     this._triangleType._pad2.scenarios.next = { position: points[2] };
 
     if (this.isInPosition()) {
-      this._triangleType.pulseScaleNow(1, 1.2);
+      if (pulseIfSame) {
+        this._triangleType.pulseScaleNow(1, 1.2, 0, callback);
+      } else if (callback != null) {
+          callback();
+      }
     } else {
       this._triangleType.stop(true, 'noComplete');
       this._triangleType.animations.new()

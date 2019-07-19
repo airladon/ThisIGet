@@ -71,12 +71,12 @@ class Content extends PresentationLessonContent {
       modifiers: {
         angles: highlight(colors.angles),
         sides: highlight(colors.sides),
-        Acute_Triangle: click(coll.goToType, [coll, 'acute', 1, null], colors.angles),
-        Right_Angle_Triangle: click(coll.goToType, [coll, 'right', 1, null], colors.angles),
-        Obtuse_Triangle: click(coll.goToType, [coll, 'obtuse', 1, null], colors.angles),
-        Equilateral_Triangle: click(coll.goToType, [coll, 'equilateral', 1, null], colors.lines),
-        Isosceles_Triangle: click(coll.goToType, [coll, 'isosceles', 1, null], colors.lines),
-        Scalene_Triangle: click(coll.goToType, [coll, 'scalene', 1, null], colors.lines),
+        Acute_Triangle: click(coll.goToType, [coll, 'acute', 1, null, true], colors.angles),
+        Right_Angle_Triangle: click(coll.goToType, [coll, 'right', 1, null, true], colors.angles),
+        Obtuse_Triangle: click(coll.goToType, [coll, 'obtuse', 1, null, true], colors.angles),
+        Equilateral_Triangle: click(coll.goToType, [coll, 'equilateral', 1, null, true], colors.lines),
+        Isosceles_Triangle: click(coll.goToType, [coll, 'isosceles', 1, null, true], colors.lines),
+        Scalene_Triangle: click(coll.goToType, [coll, 'scalene', 1, null, true], colors.lines),
       },
       show: [
         type, def,
