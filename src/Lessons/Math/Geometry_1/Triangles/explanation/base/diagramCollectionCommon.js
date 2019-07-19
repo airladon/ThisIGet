@@ -361,7 +361,7 @@ export default class CommonCollection extends CommonDiagramCollection {
       if (pulseIfSame) {
         this._triangleType.pulseScaleNow(1, 1.2, 0, callback);
       } else if (callback != null) {
-          callback();
+        callback();
       }
     } else {
       this._triangleType.stop(true, 'noComplete');
