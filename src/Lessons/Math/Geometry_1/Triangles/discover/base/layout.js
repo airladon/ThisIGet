@@ -15,6 +15,7 @@ const cssColorNames = [
   'lines',
   'angles',
   'pads',
+  'parallel',
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
@@ -101,7 +102,19 @@ export default function lessonLayout() {
     },
   };
 
+  layout.parallelLine = {
+    name: 'line',
+    method: 'line',
+    options: {
+      p1: [-2, layout.defaultTri[2][1] + 0.02],
+      p2: [2, layout.defaultTri[2][1] + 0.02],
+      color: colors.parallel,
+      width: 0.015,
+    },
+  };
+
   layout.addElements = [
+    layout.parallelLine,
     layout.triangle,
     layout.total,
     layout.fixed,

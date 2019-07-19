@@ -133,33 +133,20 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: [
-        'Now, can you prove this?',
-        hint({ top: 88, label: 'Hint 1' }, 'Draw a line parallel to the base through the top point'),
+        'Can you |prove| the angles of a triangle |always| add to 180º?',
+        hint({ top: 88, label: 'Hint 1' }, 'Draw a |line| parallel to the base through the top point'),
         hint({ top: 93, label: 'Hint 2' }, 'Use alternate and supplementary angle relationships'),
         note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in Explanation'),
       ],
+      modifiers: {
+        line: click(coll.toggleParallelLine, [coll], colors.parallel),
+      },
       setSteadyState: () => {
         coll.updateTri = false;
-        // tri.hideSides();
         tri.hide();
         fixed.showAll();
       },
     });
-    // let content = {
-    //   setContent: [
-    //     'Such a shape has |three_angles|.',
-    //   ],
-    // };
-    // this.addSection(common, content, {
-    //   modifiers: {
-    //     shape: click(coll.goToTri, [coll, 'random', null, false], colors.lines),
-    //   },
-    //   show: [tri],
-    // });
-    // this.addSection(common, {
-      
-    //   show: [tri, tri._angle0, tri._angle1, tri._angle2],
-    // });
   }
 }
 

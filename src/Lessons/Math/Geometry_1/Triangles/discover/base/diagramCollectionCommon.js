@@ -43,6 +43,7 @@ export default class CommonCollection extends CommonDiagramCollection {
   } & DiagramObjectPolyLine;
 
   _total: DiagramElementPrimative;
+  _line: DiagramObjectLine;
 
   updateTri: boolean;
   updateSides: boolean;
@@ -383,16 +384,19 @@ export default class CommonCollection extends CommonDiagramCollection {
   }
 
   pulseSides() {
-    // if (!this.triangle._angle0.isShown) {
-    //   this.goToTri('random', 1, () => {
-    //     this.pulseSides();
-    //   });
-    //   return;
-    // }                                                     // $FlowFixMe
+    // $FlowFixMe
     this.triangle._side01._label.pulseScaleNow(1, 1.5);    // $FlowFixMe
     this.triangle._side12._label.pulseScaleNow(1, 1.5);   // $FlowFixMe
     this.triangle._side20._label.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
 
+  toggleParallelLine() {
+    if (this._line.isShown) {
+      this._line.hide();
+    } else {
+      this._line.showAll();
+    }
+    this.diagram.animateNextFrame();
+  }
 }
