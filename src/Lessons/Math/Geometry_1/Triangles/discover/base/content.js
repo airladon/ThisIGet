@@ -16,6 +16,7 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 const {
   // style,
   click,
+  link,
   // clickW,
   // highlight,
   // centerV,
@@ -35,7 +36,8 @@ class Content extends PresentationLessonContent {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.diagram.elements = new DiagramCollection(this.diagram);
     this.loadQRs([
-      // 'Math/Geometry_1/Triangles/base',
+      'Math/Geometry_1/AngleGroups/base',
+      'Math/Geometry_1/AnglesAtIntersections/base',
     ]);
   }
 
@@ -135,15 +137,19 @@ class Content extends PresentationLessonContent {
       setContent: [
         'Can you |prove| the angles of a triangle |always| add to 180º?',
         hint({ top: 88, label: 'Hint 1' }, 'Draw a |line| parallel to the base through the top point'),
-        hint({ top: 93, label: 'Hint 2' }, 'Use alternate and supplementary angle relationships'),
-        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in Explanation'),
+        hint({ top: 93, label: 'Hint 2' }, 'Use |alternate| and |supplementary| angle relationships'),
+        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in |explanation|'),
       ],
       modifiers: {
         line: click(coll.toggleParallelLine, [coll], colors.parallel),
+        alternate: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
+        supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
+        // explanation: link(`${window.location.origin}/Lessons/Math/Geometry_1/Triangles/explanation/base`),
+        explanation: this.link('Math/Geometry_1/Triangles/explanation/base'),
       },
       setSteadyState: () => {
         coll.updateTri = false;
-        tri.hide();
+        tri.hideAll();
         fixed.showAll();
       },
     });

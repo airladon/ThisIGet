@@ -77,7 +77,7 @@ function note(
       if (options.label != null) {
         ({ label } = options);
       }
-      label = `<div class="pres_lesson__note__label pres_lesson__hint_label action_word interactive_word" id=${generateUniqueId()}>${label}</div>`;
+      label = `<div class="pres_lesson__note__label pres_lesson__hint_label action_word action_word_enabled interactive_word" id=${generateUniqueId()}>${label}</div>`;
       content = `${label}<div class="pres_lesson__hint__content pres_lesson__hint__content__hidden">${content}</div>`;
     } else if (options.label != null) {
       ({ label } = options);

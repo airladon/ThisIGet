@@ -26552,7 +26552,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW, link */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26576,6 +26576,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "link", function() { return link; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 
@@ -26785,6 +26786,55 @@ function highlight() {
   };
 }
 
+function link(linkStr) {
+  var colorOrOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var classStr = 'action_word interactive_word';
+  var colorToUse = null;
+  var defaultOptions = {
+    color: null,
+    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    interactive: true,
+    classes: '',
+    text: null
+  };
+  var options = defaultOptions;
+
+  if (Array.isArray(colorOrOptions)) {
+    colorToUse = colorOrOptions;
+  } else if (colorOrOptions != null) {
+    options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
+  }
+
+  var _options = options,
+      color = _options.color,
+      id = _options.id,
+      classes = _options.classes,
+      text = _options.text;
+
+  if (color != null) {
+    colorToUse = color;
+  }
+
+  if (classes !== '') {
+    classStr = "".concat(classStr, " ").concat(classes);
+  }
+
+  var idToUse = function idToUse() {
+    return id;
+  };
+
+  return {
+    replacementText: function replacementText(textIn) {
+      var idStr = id ? " id=\"".concat(id, "\"") : '';
+      var colorStr = colorToUse ? " style=\"color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(colorToUse), ";\"") : '';
+      return {
+        replacementText: "<a href=".concat(linkStr).concat(idStr, "class=\"").concat(classStr, "\"").concat(colorStr, ">").concat((text || textIn).trim(), "</a>")
+      };
+    },
+    id: idToUse
+  };
+}
+
 function highlightWord(text) {
   var classesOrColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var classStr = 'highlight_word';
@@ -26843,12 +26893,12 @@ function click(actionMethod, bind) {
     options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
   }
 
-  var _options = options,
-      interactive = _options.interactive,
-      color = _options.color,
-      id = _options.id,
-      classes = _options.classes,
-      text = _options.text;
+  var _options2 = options,
+      interactive = _options2.interactive,
+      color = _options2.color,
+      id = _options2.id,
+      classes = _options2.classes,
+      text = _options2.text;
 
   if (color != null) {
     colorToUse = color;

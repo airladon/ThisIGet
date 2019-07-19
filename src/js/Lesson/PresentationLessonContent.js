@@ -16,7 +16,7 @@ const {
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
-const { setOnClicks, applyModifiers, click } = Fig.tools.html;
+const { setOnClicks, applyModifiers, click, link } = Fig.tools.html;
 
 function initializeItemSelector(
   methodToExecute: Function,
@@ -952,7 +952,7 @@ class PresentationLessonContent extends SimpleLessonContent {
   // }
 
   qr(
-    link: string,
+    linkIn: string,
     colorOrOptions: Array<number> | {
       color?: ?Array<number>,
       interactive?: boolean,
@@ -973,7 +973,12 @@ class PresentationLessonContent extends SimpleLessonContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `lesson__qr_action_word ${options.classes}`;
     }
-    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', link], options);
+    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', linkIn], options);
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  link(address: string, options: Object = {}) {
+    return link(`${window.location.origin}/Lessons/${address.replace(/^\//, '').replace(/\/$/, '')}`, options);
   }
 
   addStar() {
