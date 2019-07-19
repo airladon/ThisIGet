@@ -15926,7 +15926,13 @@ function () {
           position = options.position,
           alignV = options.alignV,
           alignH = options.alignH;
-      return this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+      var element = this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+
+      if (options.color != null) {
+        element.setColor(options.color);
+      }
+
+      return element;
     }
   }, {
     key: "lines",
@@ -26320,7 +26326,7 @@ baseColors.forEach(function (color) {
     paletteColorNames.push("--palette-".concat(color, "-").concat(shade));
   });
 });
-var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-qr-background'];
+var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-text-note', '--diagram-qr-background'];
 function getCSSColors() {
   var customColorNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var colors = {};

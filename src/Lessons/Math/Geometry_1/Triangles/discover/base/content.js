@@ -5,7 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 import Definition from '../../../../../LessonsCommon/tools/definition';
-import { hint, footnote } from '../../../../../LessonsCommon/tools/note';
+import { hint, note } from '../../../../../LessonsCommon/tools/note';
 import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -21,147 +21,8 @@ const {
   // centerV,
 } = Fig.tools.html;
 
-// const { colorArrayToRGBA } = Fig.tools.color;
-
-// const { generateUniqueId, joinObjects } = Fig.tools.misc;
-
 const layout = lessonLayout();
 const { colors } = layout;
-
-// function footnote(
-//   options: string | {
-//     top?: number | string,
-//     left?: number | string,
-//     right?: number | string,
-//     size?: number | string,
-//     color?: Array<number>,
-//     className?: string,
-//     id?: string,
-//     label?: string,
-//     hint?: boolean,
-//   } = '',
-//   contentIn: string = '',
-// ) {
-//   let content = '';
-//   // let text = '';
-//   let marginLeft = '';
-//   let marginRight = '';
-//   let top = '';
-//   let fontSize = '';
-//   let color = '';
-//   let id = '';
-//   let classNames = 'pres_lesson__footnote';
-//   let label = '';
-//   // let hint = false;
-
-//   if (typeof options === 'string') {
-//     content = options;
-//   } else {
-//     content = contentIn;
-//     if (options.top != null) {
-//       top = `top:${options.top}%;`;
-//     }
-//     if (options.left != null) {
-//       marginLeft = `margin-left:${options.left}%;`;
-//     }
-//     if (options.right != null) {
-//       marginRight = `margin-right:${options.right}%;`;
-//     }
-//     if (options.size != null) {
-//       fontSize = `font-size:${options.size}em;`;
-//     }
-//     if (options.color != null) {
-//       color = `color:${colorArrayToRGBA(options.color)};`;
-//     }
-//     if (options.className != null) {
-//       classNames = `${classNames} ${options.className}`;
-//     }
-//     if (options.id != null) {
-//       id = ` id="${options.id}"`;
-//     }
-//     if (options.hint != null && options.hint === true) {
-//       label = 'Hint: ';
-//       // hint = true;
-//       if (options.label != null) {
-//         ({ label } = options);
-//       }
-//       label = `<div class="pres_lesson__footnote__label pres_lesson__hint_label action_word interactive_word" id=${generateUniqueId()}>${label}</div>`;
-//       content = `${label}<div class="pres_lesson__hint__content pres_lesson__hint__content__hidden">${content}</div>`;
-//     } else if (options.label != null) {
-//       ({ label } = options);
-//       if (label.length > 0) {
-//         label = `<div class="pres_lesson__footnote__label">${label}</div>`;
-//       }
-//       content = `${label}<div class="pres_lesson__footnote__content">${content}</div>`;
-//     }
-//   }
-
-//   const inlineStyle = ` style="${top}${marginLeft}${marginRight}${fontSize}${color}"`;
-//   return `<div class="${classNames}"${id}${inlineStyle}>${content}</div>`;
-// }
-
-// function hint(
-//   options: string | number | {
-//     top?: number | string,
-//     left?: number | string,
-//     right?: number | string,
-//     size?: number | string,
-//     color?: Array<number>,
-//     className?: string,
-//     id?: string,
-//     label?: string,
-//   } = '',
-//   contentIn: string = '',
-// ) {
-//   if (typeof options === 'string') {
-//     return footnote({ hint: true, label: 'Hint' }, options);
-//   }
-
-//   if (typeof options === 'number') {
-//     return footnote({ hint: true, label: `Hint ${options}` }, contentIn);
-//   }
-
-//   return footnote(joinObjects(options, { hint: true, label: 'Hint:' }), contentIn);
-// }
-// function hint(
-//   options: string | Array<string> | {
-//     top?: number | string,
-//     className?: string,
-//     id?: string,
-//     label?: string,
-//   } = '',
-//   textIn?: string | Array<string>,
-// ) {
-//   let text = '';
-//   let top = '90';
-//   let classNames = 'pres_lesson__footnote';
-//   let id = '';
-//   let label = '';
-//   if (Array.isArray(options) || typeof options === 'string') {
-//     text = style({}, options);
-//   } else {
-//     if (options.top != null) {
-//       top = `${options.top}`;
-//     }
-//     if (options.className != null) {
-//       classNames = `${classNames} ${options.className}`;
-//     }
-//     if (options.id != null) {
-//       id = ` id="${options.id}"`;
-//     }
-//     if (options.label != null) {
-//       label = `<span class="pres_lesson__footnote__label">${options.label}</span> `;
-//     }
-//     if (textIn != null) {
-//       if (typeof textIn === 'string') {
-//         text = style({}, `${label}${textIn}`);
-//       } else {
-//         text = style({}, [label, ...textIn]);
-//       }
-//     }
-//   }
-//   return `<div style="top:${top}%" class="${classNames}"${id}>${text}</div>`;
-// }
 
 class Content extends PresentationLessonContent {
   setTitle() {
@@ -182,44 +43,54 @@ class Content extends PresentationLessonContent {
     const diag = this.diagram.elements;
     const coll = diag._collection;
     const tri = coll._triangle;
+    const total = coll._total;
 
     let common = {
       transitionFromAny: (done) => {
-        coll.goToTri('default', 1, done);
-      },
-      setSteadyState: () => {
         tri.hideAngles();
         tri.hideSides();
-        coll.enableUpdate = false;
+        coll.updateTri = false;
+        const complete = () => {
+          tri.showAngles();
+          tri.showSides();
+          coll.updateTri = true;
+          coll.updatePoints();
+          done();
+        };
+        coll.goToTri('default', 1, complete);
       },
+      setEnterState: () => {
+        coll.updateTotal = false;
+        coll.updateSides = false;
+        coll.updateTri = false;
+      },
+      show: [tri],
     };
     this.addSection(common, {
       setContent: [
         'You can create a |shape| with |three| connected |straight lines|.',
-        footnote({ top: 85, label: 'Hint 1', hint: true }, 'You can change the shape by dragging its corners |test|.'),
-        hint(2, 'You can change the shape by dragging its corners.'),
+        note({ label: 'Note:' }, 'You can change the shape by dragging its corners.'),
       ],
       modifiers: {
         shape: click(coll.goToTri, [coll, 'random', 1, null, false], colors.lines),
         test: click(coll.goToTri, [coll, 'random', 1, null, false], colors.lines),
       },
-      show: [tri._line, tri._pad0, tri._pad1, tri._pad2],
       setSteadyState: () => {
-        coll.enableUpdate = false;
+        tri.hideAngles();
+        tri.hideSides();
       },
     });
     this.addSection(common, {
       setContent: [
-        'This has three |angles| and |side_lengths|.',
+        'This shape has three |angles| and |side_lengths|.',
       ],
       modifiers: {
-        shape: click(coll.goToTri, [coll, 'random', 1, null, false], colors.lines),
         angles: click(coll.pulseAngles, [coll], colors.angles),
         side_lengths: click(coll.pulseSides, [coll], colors.lines),
       },
-      show: [tri],
       setSteadyState: () => {
-        coll.enableUpdate = true;
+        coll.updateTri = true;
+        coll.updateSides = true;
       },
     });
     this.addSection(common, {
@@ -227,15 +98,35 @@ class Content extends PresentationLessonContent {
         'The common name for this shape is |Triangle|.',
         `${new Definition('Triangle', 'Latin', ['triangulus', '', 'tri', 'three', 'angulus', 'corner, angle']).html()}`,
       ],
-      modifiers: {
-        shape: click(coll.goToTri, [coll, 'random', 1, null, false], colors.lines),
-        angles: click(coll.pulseAngles, [coll], colors.angles),
-        side_lengths: click(coll.pulseSides, [coll], colors.lines),
+      setSteadyState: () => {
+        tri.hideSides();
+        tri.hideAngles();
       },
-      setEnterState: () => {
-        coll.enableUpdate = false;
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Looking at just the |angles|, can you find a |relationship| that the angles seem to obey? Is there a |pattern|?',
+        hint({ top: 88, label: 'Hint 1' }, 'For each triangle, write down all the angles - do you see a pattern?'),
+        hint({ top: 93, label: 'Hint 2' }, 'Look at the |sum| of the angles'),
+        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer on next page'),
+      ],
+      setSteadyState: () => {
+        coll.updateTri = true;
+        tri.hideSides();
       },
-      show: [tri._line, tri._pad0, tri._pad1, tri._pad2],
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'All angles in a triangle always add to |180º|.',
+      ],
+      show: [tri, coll._total],
+      setSteadyState: () => {
+        coll.updateTri = true;
+        coll.updateTotal = true;
+        tri.hideSides();
+      },
     });
     // let content = {
     //   setContent: [

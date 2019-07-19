@@ -42,7 +42,11 @@ export default class CommonCollection extends CommonDiagramCollection {
     _side20: DiagramObjectLine;
   } & DiagramObjectPolyLine;
 
-  enableUpdate: boolean;
+  _total: DiagramElementPrimative;
+
+  updateTri: boolean;
+  updateSides: boolean;
+  updateTotal: boolean;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -55,12 +59,13 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.triangle = this._triangle;
     this.triangle.updatePointsCallback = this.updatePoints.bind(this);
     this.triangle._pad0.makeTouchable();
+    this.updateTri = true;
     // this.hasTouchableElements = true;
   }
 
   updatePoints() {
     // First put angles inside triangle if outside
-    if (this.enableUpdate) {
+    if (this.updateTri) {
       if (this.triangle._angle0.label == null) {
         return;
       }
@@ -169,52 +174,91 @@ export default class CommonCollection extends CommonDiagramCollection {
         // const s01 = side01;
         // const s12 = side12;
         // const s20 = side20;
-        if (a0 === 60 && a1 === 60 && a2 === 60) {
-          this.triangle._side01.setLabelToRealLength();
-          this.triangle._side12.setLabel(`${s01.toFixed(2)}`);
-          this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
-        } else if (a0 === a1) {
-          this.triangle._side12.setLabelToRealLength();
-          this.triangle._side20.setLabel(`${s12.toFixed(2)}`);
-          if (s01 === s12) {
-            if (side01 - Math.floor(side01) > 0.5) {
-              this.triangle._side01.setLabel(`${(s12 - 0.01).toFixed(2)}`);
+        if (this.updateSides) {
+          if (a0 === 60 && a1 === 60 && a2 === 60) {
+            this.triangle._side01.setLabelToRealLength();
+            this.triangle._side12.setLabel(`${s01.toFixed(2)}`);
+            this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
+          } else if (a0 === a1) {
+            this.triangle._side12.setLabelToRealLength();
+            this.triangle._side20.setLabel(`${s12.toFixed(2)}`);
+            if (s01 === s12) {
+              if (side01 - Math.floor(side01) > 0.5) {
+                this.triangle._side01.setLabel(`${(s12 - 0.01).toFixed(2)}`);
+              } else {
+                this.triangle._side01.setLabel(`${(s12 + 0.01).toFixed(2)}`);
+              }
             } else {
-              this.triangle._side01.setLabel(`${(s12 + 0.01).toFixed(2)}`);
+              this.triangle._side01.setLabelToRealLength();
+            }
+          } else if (a0 === a2) {
+            this.triangle._side12.setLabelToRealLength();
+            this.triangle._side01.setLabel(`${s12.toFixed(2)}`);
+            if (s20 === s12) {
+              if (side20 - Math.floor(side20) > 0.5) {
+                this.triangle._side20.setLabel(`${(s12 - 0.01).toFixed(2)}`);
+              } else {
+                this.triangle._side20.setLabel(`${(s12 + 0.01).toFixed(2)}`);
+              }
+            } else {
+              this.triangle._side20.setLabelToRealLength();
+            }
+          } else if (a1 === a2) {
+            this.triangle._side01.setLabelToRealLength();
+            this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
+            if (s12 === s01) {
+              if (side12 - Math.floor(side12) > 0.5) {
+                this.triangle._side12.setLabel(`${(s01 - 0.01).toFixed(2)}`);
+              } else {
+                this.triangle._side12.setLabel(`${(s01 + 0.01).toFixed(2)}`);
+              }
+            } else {
+              this.triangle._side12.setLabelToRealLength();
             }
           } else {
             this.triangle._side01.setLabelToRealLength();
-          }
-        } else if (a0 === a2) {
-          this.triangle._side12.setLabelToRealLength();
-          this.triangle._side01.setLabel(`${s12.toFixed(2)}`);
-          if (s20 === s12) {
-            if (side20 - Math.floor(side20) > 0.5) {
-              this.triangle._side20.setLabel(`${(s12 - 0.01).toFixed(2)}`);
-            } else {
-              this.triangle._side20.setLabel(`${(s12 + 0.01).toFixed(2)}`);
-            }
-          } else {
+            this.triangle._side12.setLabelToRealLength();
             this.triangle._side20.setLabelToRealLength();
           }
-        } else if (a1 === a2) {
-          this.triangle._side01.setLabelToRealLength();
-          this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
-          if (s12 === s01) {
-            if (side12 - Math.floor(side12) > 0.5) {
-              this.triangle._side12.setLabel(`${(s01 - 0.01).toFixed(2)}`);
-            } else {
-              this.triangle._side12.setLabel(`${(s01 + 0.01).toFixed(2)}`);
-            }
-          } else {
-            this.triangle._side12.setLabelToRealLength();
-          }
-        } else {
-          this.triangle._side01.setLabelToRealLength();
-          this.triangle._side12.setLabelToRealLength();
-          this.triangle._side20.setLabelToRealLength();
         }
       }
+    }
+
+    if (this.updateTotal) {
+      let a0 = round(this.triangle._angle0.getAngle('deg'), 0);
+      let a1 = round(this.triangle._angle1.getAngle('deg'), 0);
+      let a2 = round(this.triangle._angle2.getAngle('deg'), 0);
+      if (this.triangle._angle0.isShown) {
+        // $FlowFixMe
+        a0 = parseInt(this.triangle._angle0.label.getText(), 10);
+        // $FlowFixMe
+        a1 = parseInt(this.triangle._angle1.label.getText(), 10);
+        // $FlowFixMe
+        a2 = parseInt(this.triangle._angle2.label.getText(), 10);
+      } else {
+        if (a0 < 0) {
+          a0 += 360;
+        }
+        if (a1 < 0) {
+          a1 += 360;
+        }
+        if (a2 < 0) {
+          a2 += 360;
+        }
+        const diff = a0 + a1 + a2 - 180;
+        // console.log(diff, a0, a1, a2)
+        if (a0 > 5 && a0 < 175) {
+          a0 -= diff;
+        } else if (a1 > 5 && a1 < 175) {
+          a1 -= diff;
+        } else {
+          a2 -= diff;
+        }
+      }
+      const a0Text = a0 < 100 ? ` ${a0}` : `${a0}`;
+      const a1Text = a1 < 100 ? ` ${a1}` : `${a1}`;
+      const a2Text = a2 < 100 ? ` ${a2}` : `${a2}`;
+      this._total.drawingObject.setText(`Total Angle = ${a0Text}º + ${a1Text}º + ${a2Text}º = ${180}º`);
     }
   }
 
@@ -350,4 +394,5 @@ export default class CommonCollection extends CommonDiagramCollection {
     this.triangle._side20._label.pulseScaleNow(1, 1.5);
     this.diagram.animateNextFrame();
   }
+
 }

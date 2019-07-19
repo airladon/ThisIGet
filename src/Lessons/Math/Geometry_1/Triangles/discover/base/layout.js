@@ -65,8 +65,22 @@ export default function lessonLayout() {
     },
   };
 
+  layout.total = {
+    name: 'total',
+    method: 'text',
+    options: {
+      position: [-1.2, -1.7],
+      // alignH: 'left',
+      hAlign: 'left',
+      size: 0.17,
+      color: colors.angles,
+      text: 'Total Angle = ',
+    },
+  };
+
   layout.addElements = [
     layout.triangle,
+    layout.total,
   ];
   return layout;
 }

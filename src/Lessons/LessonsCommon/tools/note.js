@@ -5,17 +5,20 @@ const { colorArrayToRGBA } = Fig.tools.color;
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
-function footnote(
+function note(
   options: string | {
     top?: number | string,
     left?: number | string,
     right?: number | string,
+    marginLeft?: number | string,
+    marginRight?: number | string,
     size?: number | string,
     color?: Array<number>,
     className?: string,
     id?: string,
     label?: string,
     hint?: boolean,
+    hAlign?: 'left' | 'center' | 'right',
   } = '',
   contentIn: string = '',
 ) {
@@ -23,12 +26,15 @@ function footnote(
   // let text = '';
   let marginLeft = '';
   let marginRight = '';
+  let left = '';
+  let right = '';
   let top = '';
   let fontSize = '';
   let color = '';
   let id = '';
-  let classNames = 'pres_lesson__footnote';
+  let classNames = 'pres_lesson__note';
   let label = '';
+  let hAlign = '';
   // let hint = false;
 
   if (typeof options === 'string') {
@@ -38,11 +44,17 @@ function footnote(
     if (options.top != null) {
       top = `top:${options.top}%;`;
     }
+    if (options.marginLeft != null) {
+      marginLeft = `margin-left:${options.marginLeft}%;`;
+    }
+    if (options.marginRight != null) {
+      marginRight = `margin-right:${options.marginRight}%;`;
+    }
     if (options.left != null) {
-      marginLeft = `margin-left:${options.left}%;`;
+      left = `left:${options.left}%;`;
     }
     if (options.right != null) {
-      marginRight = `margin-right:${options.right}%;`;
+      right = `right:${options.right}%;`;
     }
     if (options.size != null) {
       fontSize = `font-size:${options.size}em;`;
@@ -56,24 +68,27 @@ function footnote(
     if (options.id != null) {
       id = ` id="${options.id}"`;
     }
+    if (options.hAlign != null) {
+      hAlign = `text-align:${options.hAlign};`;
+    }
     if (options.hint != null && options.hint === true) {
       label = 'Hint: ';
       // hint = true;
       if (options.label != null) {
         ({ label } = options);
       }
-      label = `<div class="pres_lesson__footnote__label pres_lesson__hint_label action_word interactive_word" id=${generateUniqueId()}>${label}</div>`;
+      label = `<div class="pres_lesson__note__label pres_lesson__hint_label action_word interactive_word" id=${generateUniqueId()}>${label}</div>`;
       content = `${label}<div class="pres_lesson__hint__content pres_lesson__hint__content__hidden">${content}</div>`;
     } else if (options.label != null) {
       ({ label } = options);
       if (label.length > 0) {
-        label = `<div class="pres_lesson__footnote__label">${label}</div>`;
+        label = `<div class="pres_lesson__note__label">${label}</div>`;
       }
-      content = `${label}<div class="pres_lesson__footnote__content">${content}</div>`;
+      content = `${label}<div class="pres_lesson__note__content">${content}</div>`;
     }
   }
 
-  const inlineStyle = ` style="${top}${marginLeft}${marginRight}${fontSize}${color}"`;
+  const inlineStyle = ` style="${top}${marginLeft}${marginRight}${fontSize}${color}${hAlign}${left}${right}"`;
   return `<div class="${classNames}"${id}${inlineStyle}>${content}</div>`;
 }
 
@@ -87,18 +102,19 @@ function hint(
     className?: string,
     id?: string,
     label?: string,
+    hAlign?: 'left' | 'center' | 'right',
   } = '',
   contentIn: string = '',
 ) {
   if (typeof options === 'string') {
-    return footnote({ hint: true, label: 'Hint' }, options);
+    return note({ hint: true, label: 'Hint' }, options);
   }
 
   if (typeof options === 'number') {
-    return footnote({ hint: true, label: `Hint ${options}` }, contentIn);
+    return note({ hint: true, label: `Hint ${options}` }, contentIn);
   }
 
-  return footnote(joinObjects(options, { hint: true, label: 'Hint:' }), contentIn);
+  return note(joinObjects({ hint: true, label: 'Hint:' }, options), contentIn);
 }
 
-export { hint, footnote };
+export { hint, note };
