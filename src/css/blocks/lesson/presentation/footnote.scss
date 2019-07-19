@@ -10,15 +10,27 @@
   margin-right: var(--pres__text_margin);
 }
 
-.pres_lesson__footnote__hint_label,
+.pres_lesson__hint_label,
 .pres_lesson__footnote__label {
   display: inline-block;
   color: color('grey', 'light');
   margin-right: 0.6em;
 }
 
+.pres_lesson__hint_label {
+  color: color('green', 'base');
+}
+
 .pres_lesson__footnote__content {
   display: inline-block;
+}
+
+.pres_lesson__hint__content {
+  display: inline-block;
+}
+
+.pres_lesson__hint__content__hidden {
+  display: none;
 }
 
 // .pres_lesson__footnote p:first-child {

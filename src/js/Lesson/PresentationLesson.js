@@ -82,6 +82,7 @@ class PresentationLesson extends SimpleLesson {
   refresh: (string, number, ?() => void) => void;
   goToSectionIndex: number;
   firstPageShown: boolean;
+  elementStates: Object;
   // type: string;
 
   constructor(content: Object) {
@@ -99,6 +100,7 @@ class PresentationLesson extends SimpleLesson {
     this.transitionCancelled = false;
     this.goToSectionIndex = 0;
     this.type = 'presentation';
+    this.elementStates = {};
   }
 
   getContentHtml(): string {
@@ -329,6 +331,69 @@ class PresentationLesson extends SimpleLesson {
     section.setOnClicks();
     if (section.refresh != null) {
       section.refresh();
+    }
+    this.setHintOnClicks();
+  }
+
+
+  setHintOnClicks() {
+    if (this.elementStates.hints == null) {
+      this.elementStates.hints = {};
+    }
+    const oldStates = this.elementStates.hints;
+    this.elementStates.hints = {};
+    const hints = document.getElementsByClassName('pres_lesson__hint_label');
+    for (let i = 0; i < hints.length; i += 1) {
+      const hint = hints[i];
+      const parent = hint.parentElement;
+      if (parent == null) {
+        return;
+      }
+      const content = parent.querySelector('.pres_lesson__hint__content');
+      if (content == null) {
+        return;
+      }
+      if (hint.id in oldStates) {
+        const hidden = oldStates[hint.id];
+        if (!hidden) {
+          content.classList.remove('pres_lesson__hint__content__hidden');
+          this.setInteractiveWords(content, true);
+        } else {
+          this.setInteractiveWords(content, false);
+        }
+        this.elementStates.hints[hint.id] = hidden;
+      } else {
+        this.elementStates.hints[hint.id] = true;
+        this.setInteractiveWords(content, false);
+      }
+
+      hint.onclick = () => {
+        const hidden = content.classList.contains('pres_lesson__hint__content__hidden');
+        this.elementStates.hints[hint.id] = !hidden;
+        if (hidden) {
+          content.classList.remove('pres_lesson__hint__content__hidden');
+          this.setInteractiveWords(content, true);
+        } else {
+          content.classList.add('pres_lesson__hint__content__hidden');
+          this.setInteractiveWords(content, false);
+        }
+      };
+    }
+  }
+
+  setInteractiveWords(parentElement: HTMLElement, show: boolean) {
+    const elements = parentElement.querySelectorAll('.interactive_word');
+    for (let i = 0; i < elements.length; i += 1) {
+      this.setInteractiveWord(elements[i], show);
+    }
+  }
+
+  // eslint-disable-next-line class-methods-use-this
+  setInteractiveWord(element: HTMLElement, show: boolean) {
+    if (show) {
+      element.classList.remove('not_interactive_word');
+    } else {
+      element.classList.add('not_interactive_word');
     }
   }
 

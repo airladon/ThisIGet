@@ -22,62 +22,10 @@ const {
 
 const { colorArrayToRGBA } = Fig.tools.color;
 
+const { generateUniqueId, joinObjects } = Fig.tools.misc;
+
 const layout = lessonLayout();
 const { colors } = layout;
-
-// const footnote = () => {
-
-// }
-function footnoteold(
-  options: string | Array<string> | {
-    top?: number | string,
-    className?: string,
-    id?: string,
-    label?: string,
-    hint?: boolean,
-  } = '',
-  textIn?: string | Array<string>,
-) {
-  let text = '';
-  let top = '90';
-  let classNames = 'pres_lesson__footnote';
-  let id = '';
-  let label = '';
-  if (Array.isArray(options) || typeof options === 'string') {
-    text = style({}, options);
-  } else {
-    if (options.top != null) {
-      top = `${options.top}`;
-    }
-    if (options.className != null) {
-      classNames = `${classNames} ${options.className}`;
-    }
-    if (options.id != null) {
-      id = ` id="${options.id}"`;
-    }
-    if (options.label != null) {
-      label = `<span class="pres_lesson__footnote__label">${options.label}</span> `;
-    }
-    if (options.hint) {
-      let labelToUse = 'Hint:';
-      if (options.label != null) {
-        labelToUse = options.label;
-      }
-      label = `<span class="pres_lesson__footnote__hint_label action_word">${labelToUse}</span> `;
-    }
-    if (textIn != null) {
-      if (typeof textIn === 'string') {
-        text = style({}, `${label}${textIn}`);
-      } else {
-        text = style({}, [label, ...textIn]);
-      }
-    }
-    // if (options.hint) {
-    //   text = `<div class="press_lesson__footnote__hint>${text}</div>`;
-    // }
-  }
-  return `<div style="top:${top}%" class="${classNames}"${id}>${text}</div>`;
-}
 
 function footnote(
   options: string | {
@@ -136,8 +84,8 @@ function footnote(
       if (options.label != null) {
         ({ label } = options);
       }
-      label = `<div class="pres_lesson__footnote__hint_label">${label}</div>`;
-      content = `${label}<div class="pres_lesson__footnote__content">${content}</div>`;
+      label = `<div class="pres_lesson__footnote__label pres_lesson__hint_label action_word interactive_word" id=${generateUniqueId()}>${label}</div>`;
+      content = `${label}<div class="pres_lesson__hint__content pres_lesson__hint__content__hidden">${content}</div>`;
     } else if (options.label != null) {
       ({ label } = options);
       if (label.length > 0) {
@@ -151,6 +99,29 @@ function footnote(
   return `<div class="${classNames}"${id}${inlineStyle}>${content}</div>`;
 }
 
+function hint(
+  options: string | number | {
+    top?: number | string,
+    left?: number | string,
+    right?: number | string,
+    size?: number | string,
+    color?: Array<number>,
+    className?: string,
+    id?: string,
+    label?: string,
+  } = '',
+  contentIn: string = '',
+) {
+  if (typeof options === 'string') {
+    return footnote({ hint: true, label: 'Hint' }, options);
+  }
+
+  if (typeof options === 'number') {
+    return footnote({ hint: true, label: `Hint ${options}` }, contentIn);
+  }
+
+  return footnote(joinObjects(options, { hint: true, label: 'Hint:' }), contentIn);
+}
 // function hint(
 //   options: string | Array<string> | {
 //     top?: number | string,
@@ -224,8 +195,8 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       setContent: [
         'You can create a |shape| with |three| connected |straight lines|.',
-        footnote({ top: 85, label: 'Hint: ', hint: true }, 'You can change the shape by dragging its corners |test|.'),
-        footnote({ label: 'Note:' }, 'You can change the shape by dragging its corners.'),
+        footnote({ top: 85, label: 'Hint 1', hint: true }, 'You can change the shape by dragging its corners |test|.'),
+        hint(2, 'You can change the shape by dragging its corners.'),
       ],
       modifiers: {
         shape: click(coll.goToTri, [coll, 'random', 1, null, false], colors.lines),
