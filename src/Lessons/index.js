@@ -1471,6 +1471,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'Triangles',
       topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Triangle Angles',
+            description: 'Example calculations of angles in a triangle',
+            htmlTitle: 'Example calculations of angles in a triangle',
+            htmlDescription: 'Calculating angles in various geometries using sum of angles in a triangle',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -1479,6 +1489,16 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to triangles and their properties',
             htmlDescription: 'Proof that triangle total angle equals 180º',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for Triangles>',
+            htmlTitle: 'Triangles Links',
+            htmlDescription: 'Explanations, proofs, examples and questions about Triangles',
+            fullLesson: false,
           },
         },
         dev: {
@@ -1498,10 +1518,18 @@ export default function lessonIndex() {
         quiz: {
           base: {
             type: 'presentation',
-            title: 'Base',
+            title: 'Total Angle',
             description: '',
             htmlTitle: 'Quiz - Find the unknown angle in the triangle',
             htmlDescription: 'Dynamic quiz where no two questions are the same',
+            fullLesson: true,
+          },
+          types: {
+            type: 'presentation',
+            title: 'Triangle Types',
+            description: '',
+            htmlTitle: 'Quiz - Create a triangle of given type',
+            htmlDescription: 'Create an acute triangle, right angle triangle, obtuse triangle, equilateral triangle, isosceles triangle or scalene triangle',
             fullLesson: true,
           },
         },
