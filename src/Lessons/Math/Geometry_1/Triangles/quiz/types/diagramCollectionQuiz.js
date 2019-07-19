@@ -295,17 +295,30 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   // }
 
   classify() {
-    const angle0 = round(this.triangle._angle0.getAngle('deg'), 0);
-    const angle1 = round(this.triangle._angle1.getAngle('deg'), 0);
-    const angle2 = round(this.triangle._angle2.getAngle('deg'), 0);
-    const side01 = round(this.triangle._side01.getLength(), 1);
-    const side12 = round(this.triangle._side12.getLength(), 1);
-    const side20 = round(this.triangle._side20.getLength(), 1);
+    const angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
+    const angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
+    const angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
+    const side01 = this.triangle._side01.label.getText();
+    const side12 = this.triangle._side12.label.getText();
+    const side20 = this.triangle._side20.label.getText();
 
-    if (angle0 === 60 && angle1 === 60 && angle2 === 60) {
+    if (side01 === side12 && side01 === side20 && side12 === side20) {
       return 'equilateral';
     }
 
+    if (side01 === side12 || side01 === side20 || side12 === side20) {
+      return 'isosceles';
+    }
+
+    if (angle0 === 90 || angle1 === 90 || angle2 === 90) {
+      return 'right';
+    }
+
+    if (angle0 > 90 || angle1 > 90 || angle2 > 90) {
+      return 'obtuse';
+    }
+
+    return 'acute';
     // if (angle1 === angle2 || angle1 == angle3 || angle2 === angle3)
   }
 
