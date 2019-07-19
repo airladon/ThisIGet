@@ -44,6 +44,7 @@ class Content extends PresentationLessonContent {
     const coll = diag._collection;
     const tri = coll._triangle;
     const total = coll._total;
+    const fixed = coll._fixed;
 
     let common = {
       transitionFromAny: (done) => {
@@ -121,11 +122,27 @@ class Content extends PresentationLessonContent {
       setContent: [
         'All angles in a triangle always add to |180º|.',
       ],
-      show: [tri, coll._total],
+      show: [tri, total],
       setSteadyState: () => {
         coll.updateTri = true;
         coll.updateTotal = true;
+        coll.updatePoints();
         tri.hideSides();
+      },
+    });
+
+    this.addSection(common, {
+      setContent: [
+        'Now, can you prove this?',
+        hint({ top: 88, label: 'Hint 1' }, 'Draw a line parallel to the base through the top point'),
+        hint({ top: 93, label: 'Hint 2' }, 'Use alternate and supplementary angle relationships'),
+        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in Explanation'),
+      ],
+      setSteadyState: () => {
+        coll.updateTri = false;
+        // tri.hideSides();
+        tri.hide();
+        fixed.showAll();
       },
     });
     // let content = {

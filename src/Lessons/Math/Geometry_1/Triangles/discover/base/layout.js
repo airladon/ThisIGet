@@ -65,6 +65,29 @@ export default function lessonLayout() {
     },
   };
 
+  layout.fixed = {
+    name: 'fixed',
+    method: 'polyLine',
+    options: {
+      points: layout.defaultTri,
+      close: true,
+      color: colors.lines,
+      width: layout.width,
+      angle: {
+        color: colors.angles,
+        curve: {
+          radius: 0.3,
+          width: layout.width,
+        },
+        label: {
+          text: ['b', 'a', 'c'],
+          radius: 0.31,
+          scale: 1,
+        },
+      },
+    },
+  };
+
   layout.total = {
     name: 'total',
     method: 'text',
@@ -81,6 +104,7 @@ export default function lessonLayout() {
   layout.addElements = [
     layout.triangle,
     layout.total,
+    layout.fixed,
   ];
   return layout;
 }

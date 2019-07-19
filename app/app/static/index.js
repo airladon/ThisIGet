@@ -14818,8 +14818,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
 /* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
 /* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -14844,6 +14842,8 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 
 
 
@@ -14867,8 +14867,29 @@ function makeArray(possibleArray, count) {
   }
 
   var outArray = [];
+  var labels = [];
 
-  for (var _i = 0; _i < count; _i += 1) {
+  if (_typeof(possibleArray) === 'object' && possibleArray != null) {
+    if (possibleArray.label != null && possibleArray.label.text != null && Array.isArray(possibleArray.label.text)) {
+      labels = possibleArray.label.text.slice(); // const obj = possibleArray;
+
+      for (var _i = 0; _i < count; _i += 1) {
+        // $FlowFixMe
+        var obj = {
+          label: {
+            text: labels[_i % labels.length]
+          }
+        }; // console.log(labels, labels[i % labels.length]);
+
+        outArray.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, possibleArray, obj));
+      } // $FlowFixMe
+
+
+      return outArray;
+    }
+  }
+
+  for (var _i2 = 0; _i2 < count; _i2 += 1) {
     outArray.push(possibleArray);
   }
 
@@ -15148,25 +15169,25 @@ function (_DiagramElementCollec) {
 
       var sideArray = makeArray(side, _pCount2);
 
-      for (var _i2 = 0; _i2 < _pCount2; _i2 += 1) {
-        var _j = _i2 + 1;
+      for (var _i3 = 0; _i3 < _pCount2; _i3 += 1) {
+        var _j = _i3 + 1;
 
-        if (_i2 === _pCount2 - 1 && optionsToUse.close) {
+        if (_i3 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        var _name = "side".concat(_i2).concat(_j);
+        var _name = "side".concat(_i3).concat(_j);
 
         var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: _this.points[_i2],
+          p1: _this.points[_i3],
           p2: _this.points[_j]
-        }, sideArray[_i2]);
+        }, sideArray[_i3]);
 
         if (_this.reverse) {
           sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
             p1: _this.points[_j],
-            p2: _this.points[_i2]
-          }, sideArray[_i2]);
+            p2: _this.points[_i3]
+          }, sideArray[_i3]);
         }
 
         var sideLine = _this.objects.line(sideOptions);
@@ -15275,22 +15296,22 @@ function (_DiagramElementCollec) {
           pCount += 1;
         }
 
-        for (var _i3 = 0; _i3 < pCount; _i3 += 1) {
-          var j = _i3 + 1;
+        for (var _i4 = 0; _i4 < pCount; _i4 += 1) {
+          var j = _i4 + 1;
 
-          if (_i3 === pCount - 1 && this.close) {
+          if (_i4 === pCount - 1 && this.close) {
             j = 0;
           }
 
-          var _name2 = "side".concat(_i3).concat(j);
+          var _name2 = "side".concat(_i4).concat(j);
 
           if (this.elements[_name2] != null) {
             var wasHidden = !this.elements[_name2].isShown;
 
             if (this.reverse) {
-              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i3]);
+              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i4]);
             } else {
-              this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+              this.elements[_name2].setEndPoints(newPoints[_i4], newPoints[j]);
             }
 
             if (wasHidden) {
@@ -15313,20 +15334,20 @@ function (_DiagramElementCollec) {
           firstIndex = 1;
         }
 
-        for (var _i4 = firstIndex; _i4 < pCount + firstIndex; _i4 += 1) {
-          var _j2 = _i4 + 1;
+        for (var _i5 = firstIndex; _i5 < pCount + firstIndex; _i5 += 1) {
+          var _j2 = _i5 + 1;
 
-          var k = _i4 - 1;
+          var k = _i5 - 1;
 
-          if (_i4 === pCount - 1 && this.close) {
+          if (_i5 === pCount - 1 && this.close) {
             _j2 = 0;
           }
 
-          if (_i4 === 0 && this.close) {
+          if (_i5 === 0 && this.close) {
             k = pCount - 1;
           }
 
-          var _name3 = "angle".concat(_i4);
+          var _name3 = "angle".concat(_i5);
 
           if (this.elements[_name3] != null) {
             var _wasHidden = !this.elements[_name3].isShown;
@@ -15339,7 +15360,7 @@ function (_DiagramElementCollec) {
 
             this.elements[_name3].setAngle({
               p1: newPoints[k],
-              p2: newPoints[_i4],
+              p2: newPoints[_i5],
               p3: newPoints[_j2]
             });
 
