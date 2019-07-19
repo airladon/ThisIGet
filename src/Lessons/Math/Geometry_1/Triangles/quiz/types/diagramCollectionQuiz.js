@@ -271,7 +271,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     }
     this.lastAnswer = this.answer;
 
-    this._question.drawingObject.setText(`Drag the corners to create a ${this.answer} triangle :`);
+    let phrase = `an ${this.answer}`;
+    if (this.answer === 'right' || this.answer === 'scalene') {
+      phrase = `a ${this.answer}`;
+    }
+    this._question.drawingObject.setText(`Drag the corners to create ${phrase} triangle :`);
 
     this.updatePoints();
     this.diagram.animateNextFrame();
@@ -284,11 +288,15 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   classify() {
+    // $FlowFixMe
     const angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
+    // $FlowFixMe
     const angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
+    // $FlowFixMe
     const angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
-    const side01 = this.triangle._side01.label.getText();
-    const side12 = this.triangle._side12.label.getText();
+    // $FlowFixMe
+    const side01 = this.triangle._side01.label.getText(); // $FlowFixMe
+    const side12 = this.triangle._side12.label.getText(); // $FlowFixMe
     const side20 = this.triangle._side20.label.getText();
 
     const classification = [];

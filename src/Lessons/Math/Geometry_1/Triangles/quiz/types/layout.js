@@ -101,7 +101,7 @@ export default function lessonLayout() {
         fill: true,
         isMovable: true,
         touchRadius: 0.4,
-        boundary: [-2.9, -1.6, 5.8, 3],
+        boundary: [-2.8, -1.5, 5.6, 2.8],
       },
       // angle: {
       //   color: colors.angles,
