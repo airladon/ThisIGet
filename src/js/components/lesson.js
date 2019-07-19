@@ -279,7 +279,7 @@ export default class LessonComponent extends React.Component
     const output = [];
     const topics = this.getTopics();
     const topicNames = [
-      'summary', 'examples', 'explanation', 'implications', 'history',
+      'discover', 'summary', 'examples', 'explanation', 'implications', 'history',
       'references', 'quiz',
     ];
     Object.keys(topics).forEach((topicName) => {

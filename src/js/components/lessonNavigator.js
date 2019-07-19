@@ -132,7 +132,7 @@ export default class LessonNavigator extends React.Component
     }
 
     let linkToUse = '';
-    const topicsOrder = ['explanation', 'summary', 'examples', 'links'];
+    const topicsOrder = ['explanation', 'summary', 'examples', 'discover', 'links'];
     const versionsOrder = ['base', 'static'];
     const getVersion = (topic) => {
       const versions = lesson.topics[topic];
