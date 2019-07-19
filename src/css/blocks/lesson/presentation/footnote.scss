@@ -3,15 +3,33 @@
   top: 90%;
   // margin-left: calc(var(--pres__text_margin) * 1);
   // margin-right: calc(var(--pres__text_margin) * 1);
-  width: calc(100% - 2 * var(--pres__text_margin));
+  width: calc(100% - 4 * var(--pres__text_margin));
   font-size: 0.8em;
   color: color('diagram', 'text-base');
+  margin-left: var(--pres__text_margin);
+  margin-right: var(--pres__text_margin);
 }
 
-.pres_lesson__footnote p:first-child {
-  margin-top: 0;
-}
-
+.pres_lesson__footnote__hint_label,
 .pres_lesson__footnote__label {
-  color: color('grey', 'base');
+  display: inline-block;
+  color: color('grey', 'light');
+  margin-right: 0.6em;
 }
+
+.pres_lesson__footnote__content {
+  display: inline-block;
+}
+
+// .pres_lesson__footnote p:first-child {
+//   margin-top: 0;
+// }
+
+// .pres_lesson__footnote__label {
+//   color: color('grey', 'base');
+// }
+
+// .press_lesson__footnote__hint {
+//   display: inline-block;
+//   visibility: hidden;
+// }
