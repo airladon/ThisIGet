@@ -80,12 +80,48 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       }
       if (
         angle0 > 160 || angle1 > 160 || angle2 > 160
-        || angle0 < 10 || angle1 < 10 || angle2 < 10
+        || angle0 < 15 || angle1 < 15 || angle2 < 15
         || side01 < 0.6 || side12 < 0.6 || side20 < 0.6
       ) {
         this.triangle.hideAngles();
       } else {
         this.triangle.showAngles();
+      }
+
+      if (this.triangle._angle0.isShown) {
+        const tot = round(angle0, 0) + round(angle1, 0) + round(angle2, 0);
+        const diff = 180 - tot;
+        // If the angles are > 180, then find the closet angle
+        // to rounding up and round it up
+        const options = [angle0, angle1, angle2];
+        const remainders = options.map(a => a - Math.floor(a));
+        const angles = [this.triangle._angle0, this.triangle._angle1, this.triangle._angle2];
+
+        let indexToChange = -1;
+        let newValue = 0;
+        if (diff > 0) {
+          indexToChange = remainders.reduce(
+            (iMax, x, i, arr) => (x > arr[iMax] ? i : iMax),
+            0,
+          );
+          newValue = Math.ceil(this.triangle[`_angle${indexToChange}`].getAngle('deg'));
+        } else if (diff < 0) {
+          indexToChange = remainders.reduce(
+            (iMin, x, i, arr) => (x < arr[iMin] ? i : iMin),
+            1,
+          );
+          newValue = Math.floor(this.triangle[`_angle${indexToChange}`].getAngle('deg'));
+        }
+        [0, 1, 2].forEach((index) => {
+          if (index !== indexToChange) {
+            if (angles[index].label != null) {
+              angles[index].label.showRealAngle = true;
+            }
+          } else if (angles[index].label != null) {
+            angles[index].label.showRealAngle = false;
+            angles[index].label.setText(`${newValue}º`);
+          }
+        });
       }
     }
   }

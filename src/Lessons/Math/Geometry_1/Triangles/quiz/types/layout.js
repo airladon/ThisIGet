@@ -95,8 +95,8 @@ export default function lessonLayout() {
       color: colors.lines,
       width: layout.width,
       pad: {
-        color: colors.pads,
-        radius: 0.2,
+        color: [1, 1, 1, 0.01],
+        radius: 0.3,
         sides: 30,
         fill: true,
         isMovable: true,
@@ -131,7 +131,7 @@ export default function lessonLayout() {
         label: {
           radius: 0.31,
         },
-        autoRightAngle: true,
+        autoRightAngle: false,
       },
       side: {
         label: {
