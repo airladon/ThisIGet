@@ -137,6 +137,7 @@ export default function lessonLayout() {
         label: {
           // text: '',
           offset: 0.1,
+          precision: 2,
         },
       },
     },

@@ -88,11 +88,14 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         this.triangle.showAngles();
       }
 
+      // Make angles consistent with 180º
       if (this.triangle._angle0.isShown) {
         const tot = round(angle0, 0) + round(angle1, 0) + round(angle2, 0);
         const diff = 180 - tot;
         // If the angles are > 180, then find the closet angle
         // to rounding up and round it up
+        // If the angles are < 180 then find the closes angle
+        // to round down and round it down
         const options = [angle0, angle1, angle2];
         const remainders = options.map(a => a - Math.floor(a));
         const angles = [this.triangle._angle0, this.triangle._angle1, this.triangle._angle2];
@@ -122,6 +125,62 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
             angles[index].label.setText(`${newValue}º`);
           }
         });
+
+        // Make sides consistent with equilateral or isosceles
+        const a0 = round(angle0, 0);
+        const a1 = round(angle1, 0);
+        const a2 = round(angle2, 0);
+        const s01 = round(side01, 2);
+        const s12 = round(side12, 2);
+        const s20 = round(side20, 2);
+        if (a0 === 60 && a1 === 60 && a2 === 60) {
+          this.triangle._side01.setLabelToRealLength();
+          this.triangle._side12.setLabel(`${s01.toFixed(2)}`);
+          this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
+        } else if (a0 === a1) {
+          this.triangle._side12.setLabelToRealLength();
+          this.triangle._side20.setLabel(`${s12.toFixed(2)}`);
+          if (s01 === s12) {
+            if (side01 - Math.floor(side01) > 0.5) {
+              this.triangle._side01.setLabel(`${(s12 - 0.01).toFixed(2)}`);
+            } else {
+              this.triangle._side01.setLabel(`${(s12 + 0.01).toFixed(2)}`);
+            }
+          } else {
+            this.triangle._side01.setLabelToRealLength();
+          }
+        } else if (a0 === a2) {
+          this.triangle._side12.setLabelToRealLength();
+          this.triangle._side01.setLabel(`${s12.toFixed(2)}`);
+          if (s20 === s12) {
+            if (side20 - Math.floor(side20) > 0.5) {
+              this.triangle._side20.setLabel(`${(s12 - 0.01).toFixed(2)}`);
+            } else {
+              this.triangle._side20.setLabel(`${(s12 + 0.01).toFixed(2)}`);
+            }
+          } else {
+            this.triangle._side20.setLabelToRealLength();
+          }
+        } else if (a1 === a2) {
+          this.triangle._side01.setLabelToRealLength();
+          this.triangle._side20.setLabel(`${s01.toFixed(2)}`);
+          if (s12 === s01) {
+            if (side12 - Math.floor(side12) > 0.5) {
+              this.triangle._side12.setLabel(`${(s01 - 0.01).toFixed(2)}`);
+            } else {
+              this.triangle._side12.setLabel(`${(s01 + 0.01).toFixed(2)}`);
+            }
+          } else {
+            this.triangle._side12.setLabelToRealLength();
+          }
+        } else {
+          this.triangle._side01.setLabelToRealLength();
+          this.triangle._side12.setLabelToRealLength();
+          this.triangle._side20.setLabelToRealLength();
+        }
+        //  else if (a0 === a1) || a0 === a2 || a1 === a2) {
+
+        // }
       }
     }
   }
@@ -193,7 +252,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     super.afterTransitionToNewProblem();
     this.transitioning = false;
     this.triangle.showAll();
-    this.updatePoints();
     this.triangle._pad0.setMovable();
 
     const options = ['acute', 'right angle', 'obtuse', 'equilateral', 'isosceles', 'scalene'];
@@ -205,6 +263,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
     this._question.drawingObject.setText(`Drag the corners to create a ${this.answer} triangle :`);
 
+    this.updatePoints();
+    this.diagram.animateNextFrame();
 
     // this.triangle.hide();
     // this.fixedTriangle.updatePoints(this.triangle.points.map(p => p._dup()));
@@ -234,11 +294,26 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   //   this.diagram.animateNextFrame();
   // }
 
-  // findAnswer() {
-  //   this._input.disable();
-  //   if (this._input.getValue() === this.answer.toString()) {
-  //     return 'correct';
-  //   }
-  //   return 'incorrect';
-  // }
+  classify() {
+    const angle0 = round(this.triangle._angle0.getAngle('deg'), 0);
+    const angle1 = round(this.triangle._angle1.getAngle('deg'), 0);
+    const angle2 = round(this.triangle._angle2.getAngle('deg'), 0);
+    const side01 = round(this.triangle._side01.getLength(), 1);
+    const side12 = round(this.triangle._side12.getLength(), 1);
+    const side20 = round(this.triangle._side20.getLength(), 1);
+
+    if (angle0 === 60 && angle1 === 60 && angle2 === 60) {
+      return 'equilateral';
+    }
+
+    // if (angle1 === angle2 || angle1 == angle3 || angle2 === angle3)
+  }
+
+  findAnswer() {
+    this._input.disable();
+    if (this._input.getValue() === this.answer.toString()) {
+      return 'correct';
+    }
+    return 'incorrect';
+  }
 }
