@@ -10,12 +10,12 @@ import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollect
 const {
   Transform, DiagramElementPrimative, DiagramObjectPolyLine,
   DiagramObjectAngle, DiagramObjectLine,
-  Line,
+  // Line,
 } = Fig;
 
 const { removeRandElement, round, rand } = Fig.tools.math;
 
-const { minAngleDiff } = Fig.tools.g2;
+// const { minAngleDiff } = Fig.tools.g2;
 
 export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollection) {
   diagram: CommonLessonDiagram;
@@ -49,7 +49,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       diagram,
       layout,
       'q1',
-      {},
+      {
+        equilateral: {
+          answer: 'Almost!',
+          details: 'You made an equilateral triangle - which is a special case of an isosceles triangle. For this exercise, make a triangle with just two sides the same length.',
+        },
+      },
       transform,
     );
     this.addQuestion();
@@ -68,16 +73,47 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   updatePoints() {
     // First put angles inside triangle if outside
     if (!this.transitioning) {
-      const angle0 = this.triangle._angle0.getAngle('deg');
-      const angle1 = this.triangle._angle1.getAngle('deg');
-      const angle2 = this.triangle._angle2.getAngle('deg');
-      const side01 = this.triangle._side01.getLength();
-      const side12 = this.triangle._side12.getLength();
-      const side20 = this.triangle._side20.getLength();
+      if (this.triangle._angle0.label == null) {
+        return;
+      }
 
+      //Maybe make all these actual angles again
+      // $FlowFixMe
+      let angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
+      // $FlowFixMe
+      let angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
+      // $FlowFixMe
+      let angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
+      // $FlowFixMe
+      const side01 = parseFloat(this.triangle._side01.label.getText());
+      // $FlowFixMe
+      const side12 = parseFloat(this.triangle._side12.label.getText());
+      // $FlowFixMe
+      const side20 = parseFloat(this.triangle._side20.label.getText());
+      
+      // if (angle0 > 180 || angle1 > 180 || angle2 > 180)
+      console.log('before', angle0, angle1, angle2, this.triangle._angle0.getAngle('deg'), this.triangle._angle1.getAngle('deg'), this.triangle._angle2.getAngle('deg'))
       if (angle0 > 90 && angle1 > 90 && angle2 > 90) {
         this.triangle.reverse = !this.triangle.reverse;
+        this.triangle.updatePoints(this.triangle.points, false);
+        // $FlowFixMe
+        angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
+        // $FlowFixMe
+        angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
+        // $FlowFixMe
+        angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
+      } else {
+        if (angle0 > 180) {
+          angle0 = 360 - angle0;
+        }
+        if (angle1 > 180) {
+          angle1 = 360 - angle1;
+        }
+        if (angle2 > 180) {
+          angle2 = 360 - angle2;
+        }
       }
+      // console.log('after', angle0, angle1, angle2)
       if (
         angle0 > 160 || angle1 > 160 || angle2 > 160
         || angle0 < 15 || angle1 < 15 || angle2 < 15
@@ -127,12 +163,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         });
 
         // Make sides consistent with equilateral or isosceles
-        const a0 = round(angle0, 0);
-        const a1 = round(angle1, 0);
-        const a2 = round(angle2, 0);
-        const s01 = round(side01, 2);
-        const s12 = round(side12, 2);
-        const s20 = round(side20, 2);
+        const a0 = angle0;
+        const a1 = angle1;
+        const a2 = angle2;
+        const s01 = side01;
+        const s12 = side12;
+        const s20 = side20;
         if (a0 === 60 && a1 === 60 && a2 === 60) {
           this.triangle._side01.setLabelToRealLength();
           this.triangle._side12.setLabel(`${s01.toFixed(2)}`);
@@ -178,9 +214,6 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
           this.triangle._side12.setLabelToRealLength();
           this.triangle._side20.setLabelToRealLength();
         }
-        //  else if (a0 === a1) || a0 === a2 || a1 === a2) {
-
-        // }
       }
     }
   }
@@ -205,45 +238,10 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     });
   }
 
-  // updateAngles() {
-  //   const triangle = this._main._totalAngle._fixedTriangle;
-  //   const [p1, p2, p3] = triangle.points;
-  //   const side12 = new Line(p1, p2);
-  //   const side23 = new Line(p2, p3);
-  //   const diff = minAngleDiff(side12.angle(), side23.angle());
-  //   let direction = 0;
-  //   if (diff < 0) {
-  //     direction = 1;
-  //   }
-  //   const angleA = this._main._totalAngle._angleA;
-  //   const angleB = this._main._totalAngle._angleB;
-  //   const angleC = this._main._totalAngle._angleC;
-  //   if (direction === 0) {
-  //     angleA.setAngle({ p1: p3, p2: p1, p3: p2 });
-  //     angleB.setAngle({ p1, p2, p3 });
-  //     angleC.setAngle({ p1: p2, p2: p3, p3: p1 });
-  //   } else {
-  //     angleA.setAngle({ p1: p2, p2: p1, p3 });
-  //     angleB.setAngle({ p1: p3, p2, p3: p1 });
-  //     angleC.setAngle({ p1, p2: p3, p3: p2 });
-  //   }
-  // }
-
-  // tryAgain() {
-  //   super.tryAgain();
-  //   this._input.enable();
-  //   this._input.setValue('');
-  // }
-
   setupNewProblem() {
     this.randomTriangle();
-    // this.triangle.updatePoints(this.fixedTriangle.points.map(p => p._dup()));
     this.triangle.hideAll();
     this.triangle._line.show();
-    // this.fixedTriangle.hide();
-    // this._main._totalAngle._angleA.hide();
-    // this._main._totalAngle._angleB.hide();
-    // this._main._totalAngle._angleC.hide();
     this.transitioning = true;
     this.transitionToNewProblem({ target: 'next', duration: 1 });
   }
@@ -254,7 +252,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this.triangle.showAll();
     this.triangle._pad0.setMovable();
 
-    const options = ['acute', 'right angle', 'obtuse', 'equilateral', 'isosceles', 'scalene'];
+    const options = ['acute', 'right', 'obtuse', 'equilateral', 'isosceles', 'scalene'];
     this.answer = removeRandElement(options);
     if (this.answer === this.lastAnswer) {
       this.answer = removeRandElement(options);
@@ -265,34 +263,13 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
 
     this.updatePoints();
     this.diagram.animateNextFrame();
-
-    // this.triangle.hide();
-    // this.fixedTriangle.updatePoints(this.triangle.points.map(p => p._dup()));
-    // this.updateAngles();
-    // this.fixedTriangle.show();
-    // this.fixedTriangle._line.show();
-    // const angles = ['A', 'B', 'C'];
-    // const unknown = removeRandElement(angles);
-    // let sumAngles = 0;
-    // angles.forEach((angle) => {
-    //   const element = this._main._totalAngle[`_angle${angle}`];
-    //   const roundedAngle = round(element.angle * 180 / Math.PI, 0);
-    //   sumAngles += roundedAngle;
-    //   element.label.setText(`${roundedAngle}º`);
-    //   element.setColor(this.layout.colors.angle1);
-    // });
-    // this._main._totalAngle[`_angle${unknown}`].label.setText('?');
-    // this._main._totalAngle[`_angle${unknown}`].setColor(this.layout.colors.angle2);
-    // this.answer = 180 - sumAngles;
-    // this._main._totalAngle._angleA.showAll();
-    // this._main._totalAngle._angleB.showAll();
-    // this._main._totalAngle._angleC.showAll();
   }
 
-  // showAnswer() {
-  //   super.showAnswer();
-  //   this.diagram.animateNextFrame();
-  // }
+  showAnswer() {
+    super.showAnswer();
+    this.goToType(this.answer, 1);
+    this.diagram.animateNextFrame();
+  }
 
   classify() {
     const angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
@@ -302,31 +279,150 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     const side12 = this.triangle._side12.label.getText();
     const side20 = this.triangle._side20.label.getText();
 
+    const classification = [];
     if (side01 === side12 && side01 === side20 && side12 === side20) {
-      return 'equilateral';
+      classification.push('equilateral');
     }
 
     if (side01 === side12 || side01 === side20 || side12 === side20) {
-      return 'isosceles';
+      classification.push('isosceles');
     }
 
     if (angle0 === 90 || angle1 === 90 || angle2 === 90) {
-      return 'right';
+      classification.push('right');
     }
 
     if (angle0 > 90 || angle1 > 90 || angle2 > 90) {
-      return 'obtuse';
+      classification.push('obtuse');
     }
 
-    return 'acute';
+    if (angle0 < 90 && angle1 < 90 && angle2 < 90) {
+      classification.push('acute');
+    }
+
+    if (side01 !== side12 && side01 !== side20 && side12 !== side20) {
+      classification.push('scalene');
+    }
+    return classification;
     // if (angle1 === angle2 || angle1 == angle3 || angle2 === angle3)
   }
 
   findAnswer() {
-    this._input.disable();
-    if (this._input.getValue() === this.answer.toString()) {
-      return 'correct';
+    const tri = this.classify();
+    // console.log(tri, this.answer, tri.indexOf(this.answer) > -1)
+    if (this.answer === 'equilateral') {
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
     }
+
+    if (this.answer === 'isosceles') {
+      if (tri.indexOf('equilateral') > -1) {
+        return 'equilateral';
+      }
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
+    }
+
+    if (this.answer === 'right') {
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
+    }
+
+    if (this.answer === 'acute') {
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
+    }
+
+    if (this.answer === 'obtuse') {
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
+    }
+
+    if (this.answer === 'scalene') {
+      if (tri.indexOf(this.answer) > -1) {
+        return 'correct';
+      }
+      return 'incorrect';
+    }
+
     return 'incorrect';
+  }
+
+  goToType(
+    type: 'acute' | 'right' | 'obtuse' | 'equilateral' | 'isosceles' | 'scalene',
+    duration: number = 1,
+    callback: ?() => void = null,
+  ) {
+    let points = [];
+    if (type === 'acute') {
+      points = [
+        [-1, -1],
+        [0.5, 1],
+        [1.5, -1],
+      ];
+      this.triangle.hideSides();
+      this.triangle.showAngles();
+    } else if (type === 'right') {
+      points = [
+        [-1, -1],
+        [1.3, 0.8],
+        [1.3, -1],
+      ];
+      this.triangle.hideSides();
+      this.triangle.showAngles();
+    } else if (type === 'obtuse') {
+      points = [
+        [-1.5, -1],
+        [0.5, 0.4],
+        [2, -1],
+      ];
+      this.triangle.hideSides();
+      this.triangle.showAngles();
+    } else if (type === 'equilateral') {
+      points = [
+        [-1, -1],
+        [0, 0.73],
+        [1, -1],
+      ];
+      this.triangle.showSides();
+      this.triangle.hideAngles();
+    } else if (type === 'isosceles') {
+      points = [
+        [-0.7, -1],
+        [0, 1.1],
+        [0.7, -1],
+      ];
+      this.triangle.showSides();
+      this.triangle.hideAngles();
+    } else if (type === 'scalene') {
+      points = [
+        [-1.5, -1],
+        [1, 0.7],
+        [2, -1],
+      ];
+      this.triangle.showSides();
+      this.triangle.hideAngles();
+    }
+
+    this.triangle._pad0.scenarios.next = { position: points[0] };
+    this.triangle._pad1.scenarios.next = { position: points[1] };
+    this.triangle._pad2.scenarios.next = { position: points[2] };
+
+    this.triangle.stop(true, 'noComplete');
+    this.triangle.animations.new()
+      .scenarios({ target: 'next', duration })
+      .whenFinished(callback)
+      .start();
+    this.diagram.animateNextFrame();
   }
 }

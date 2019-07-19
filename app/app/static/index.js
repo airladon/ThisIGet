@@ -12820,7 +12820,13 @@ function (_DiagramElementCollec) {
             var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle, label.precision).toFixed(label.precision);
 
             if (label.units === 'degrees') {
-              angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision).toFixed(label.precision);
+              var a = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision);
+
+              if (a === 360) {
+                a = 0;
+              }
+
+              angleText = a.toFixed(label.precision);
               angleText = "".concat(angleText, "\xBA");
             }
 
