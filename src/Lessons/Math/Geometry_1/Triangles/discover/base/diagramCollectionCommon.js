@@ -237,4 +237,117 @@ export default class CommonCollection extends CommonDiagramCollection {
       };
     });
   }
+
+  isInPosition() {
+    const pad0 = this.triangle._pad0.getPosition();
+    const pad1 = this.triangle._pad1.getPosition();
+    const pad2 = this.triangle._pad2.getPosition();
+    const next0 = this.triangle._pad0.scenarios.next.position;
+    const next1 = this.triangle._pad1.scenarios.next.position;
+    const next2 = this.triangle._pad2.scenarios.next.position;
+
+    // $FlowFixMe
+    if (pad0.x !== next0[0] || pad0.y !== next0[1]) {
+      return false;
+    }
+    // $FlowFixMe
+    if (pad1.x !== next1[0] || pad1.y !== next1[1]) {
+      return false;
+    }
+    // $FlowFixMe
+    if (pad2.x !== next2[0] || pad2.y !== next2[1]) {
+      return false;
+    }
+    return true;
+  }
+
+  goToTri(
+    type: 'acute' | 'right' | 'obtuse' | 'equilateral' | 'isosceles' | 'scalene' | 'random' | 'default',
+    duration: number = 1,
+    callback: ?() => void = null,
+    pulseIfSame: boolean = false,
+  ) {
+    let points = [];
+    if (type === 'acute') {
+      points = [[-1, -1], [0.5, 1], [1.5, -1]];
+      // this.triangle.hideSides();
+      // this.triangle.showAngles();
+    } else if (type === 'right') {
+      points = [[-1, -1], [1.3, 0.8], [1.3, -1]];
+      // this.triangle.hideSides();
+      // this.triangle.showAngles();
+    } else if (type === 'obtuse') {
+      points = [[-1.5, -1], [0.5, 0.4], [2, -1]];
+      // this.triangle.hideSides();
+      // this.triangle.showAngles();
+    } else if (type === 'equilateral') {
+      points = [[-1, -1], [0, 0.73], [1, -1]];
+      // this.triangle.showSides();
+      // this.triangle.hideAngles();
+    } else if (type === 'isosceles') {
+      points = [[-0.7, -1], [0, 1.1], [0.7, -1]];
+      // this.triangle.showSides();
+      // this.triangle.hideAngles();
+    } else if (type === 'scalene') {
+      points = [[-1.5, -1], [1, 0.7], [2, -1]];
+      // this.triangle.showSides();
+      // this.triangle.hideAngles();
+    } else if (type === 'default') {
+      points = this.layout.defaultTri;
+    }
+
+    this.triangle._pad0.scenarios.next = { position: points[0] };
+    this.triangle._pad1.scenarios.next = { position: points[1] };
+    this.triangle._pad2.scenarios.next = { position: points[2] };
+
+    if (type === 'random') {
+      this.randomTriangle();
+    }
+
+    if (this.isInPosition()) {
+      if (pulseIfSame) {
+        this.triangle.pulseScaleNow(1, 1.2, 0, callback);
+      } else if (callback != null) {
+        callback();
+      }
+    } else {
+      this.triangle.stop(true, 'noComplete');
+      this.triangle.animations.new()
+        .scenarios({ target: 'next', duration })
+        .whenFinished(callback)
+        .start();
+    }
+    this.diagram.animateNextFrame();
+  }
+
+  pulseTri() {
+    this.triangle.pulseScaleNow(1, 1.2);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseAngles() {
+    if (!this.triangle._angle0.isShown) {
+      this.goToTri('random', 1, () => {
+        this.pulseAngles();
+      });
+      return;
+    }
+    this.triangle._angle0.pulseScaleNow(1, 1.5);
+    this.triangle._angle1.pulseScaleNow(1, 1.5);
+    this.triangle._angle2.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
+
+  pulseSides() {
+    // if (!this.triangle._angle0.isShown) {
+    //   this.goToTri('random', 1, () => {
+    //     this.pulseSides();
+    //   });
+    //   return;
+    // }                                                     // $FlowFixMe
+    this.triangle._side01._label.pulseScaleNow(1, 1.5);    // $FlowFixMe
+    this.triangle._side12._label.pulseScaleNow(1, 1.5);   // $FlowFixMe
+    this.triangle._side20._label.pulseScaleNow(1, 1.5);
+    this.diagram.animateNextFrame();
+  }
 }
