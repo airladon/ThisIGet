@@ -76,33 +76,31 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
       if (this.triangle._angle0.label == null) {
         return;
       }
+      // $FlowFixMe
+      let angle0 = round(this.triangle._angle0.getAngle('deg'), 0);
+      // $FlowFixMe
+      let angle1 = round(this.triangle._angle1.getAngle('deg'), 0);
+      // $FlowFixMe
+      let angle2 = round(this.triangle._angle2.getAngle('deg'), 0);
+      // $FlowFixMe
+      const side01 = round(this.triangle._side01.getLength(), 2);
+      // $FlowFixMe
+      const side12 = round(this.triangle._side12.getLength(), 2);
+      // $FlowFixMe
+      const side20 = round(this.triangle._side20.getLength(), 2);
 
-      //Maybe make all these actual angles again
-      // $FlowFixMe
-      let angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
-      // $FlowFixMe
-      let angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
-      // $FlowFixMe
-      let angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
-      // $FlowFixMe
-      const side01 = parseFloat(this.triangle._side01.label.getText());
-      // $FlowFixMe
-      const side12 = parseFloat(this.triangle._side12.label.getText());
-      // $FlowFixMe
-      const side20 = parseFloat(this.triangle._side20.label.getText());
-      
-      // if (angle0 > 180 || angle1 > 180 || angle2 > 180)
-      console.log('before', angle0, angle1, angle2, this.triangle._angle0.getAngle('deg'), this.triangle._angle1.getAngle('deg'), this.triangle._angle2.getAngle('deg'))
+      // Reverse the points if the angles are on the outside
       if (angle0 > 90 && angle1 > 90 && angle2 > 90) {
         this.triangle.reverse = !this.triangle.reverse;
         this.triangle.updatePoints(this.triangle.points, false);
         // $FlowFixMe
-        angle0 = parseInt(this.triangle._angle0.label.getText(), 10);
+        angle0 = round(this.triangle._angle0.getAngle('deg'), 0);
         // $FlowFixMe
-        angle1 = parseInt(this.triangle._angle1.label.getText(), 10);
+        angle1 = round(this.triangle._angle1.getAngle('deg'), 0);
         // $FlowFixMe
-        angle2 = parseInt(this.triangle._angle2.label.getText(), 10);
+        angle2 = round(this.triangle._angle2.getAngle('deg'), 0);
       } else {
+        // This is a weird case at the 0/360 transition
         if (angle0 > 180) {
           angle0 = 360 - angle0;
         }
@@ -113,7 +111,8 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
           angle2 = 360 - angle2;
         }
       }
-      // console.log('after', angle0, angle1, angle2)
+
+      // Hide the angles if the triangle is thin or small enough
       if (
         angle0 > 160 || angle1 > 160 || angle2 > 160
         || angle0 < 15 || angle1 < 15 || angle2 < 15
@@ -124,8 +123,21 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         this.triangle.showAngles();
       }
 
-      // Make angles consistent with 180º
+      // $FlowFixMe
+      const a0 = parseInt(this.triangle._angle0.label.getText(), 10);
+      // $FlowFixMe
+      const a1 = parseInt(this.triangle._angle1.label.getText(), 10);
+      // $FlowFixMe
+      const a2 = parseInt(this.triangle._angle2.label.getText(), 10);
+      // $FlowFixMe
+      const s01 = parseFloat(this.triangle._side01.label.getText());
+      // $FlowFixMe
+      const s12 = parseFloat(this.triangle._side12.label.getText());
+      // $FlowFixMe
+      const s20 = parseFloat(this.triangle._side20.label.getText());
+
       if (this.triangle._angle0.isShown) {
+        // Make angles consistent with 180º
         const tot = round(angle0, 0) + round(angle1, 0) + round(angle2, 0);
         const diff = 180 - tot;
         // If the angles are > 180, then find the closet angle
@@ -163,12 +175,12 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         });
 
         // Make sides consistent with equilateral or isosceles
-        const a0 = angle0;
-        const a1 = angle1;
-        const a2 = angle2;
-        const s01 = side01;
-        const s12 = side12;
-        const s20 = side20;
+        // const a0 = angle0;
+        // const a1 = angle1;
+        // const a2 = angle2;
+        // const s01 = side01;
+        // const s12 = side12;
+        // const s20 = side20;
         if (a0 === 60 && a1 === 60 && a2 === 60) {
           this.triangle._side01.setLabelToRealLength();
           this.triangle._side12.setLabel(`${s01.toFixed(2)}`);
