@@ -77,13 +77,15 @@ for file_name in current.keys():
        or file_name.startswith('/dist/vendors') \
        or file_name.startswith('/dist/input') \
        or file_name.startswith('/dist/Lessons') \
+       or file_name.startswith('/index.js') \
+       or file_name.startswith('/index.js.map') \
        or file_name.startswith('/dist/commonlessons'):
         continue
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/Lessons'):
             test_all = True
             # print(file_name, file_name not in existing)
-            print(f'All: {file_name}')
+            # print(f'All: {file_name}')
             continue
         p = Path(file_name.replace('/dist/', 'src/'))
         parent = str(p.parent)
@@ -94,7 +96,7 @@ for file_name in current.keys():
         paths.add(jest_string)
 
 if test_all:
-    # print('stage.btest.js')
+    print('stage.btest.js')
     exit(1)
 
 print(' '.join(paths))
