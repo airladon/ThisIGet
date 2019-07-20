@@ -64,6 +64,12 @@ export default function lessonLayout() {
         },
       },
     },
+    mods: {
+      scenarios: {
+        right: { position: [1.5, 0], scale: 0.7 },
+        default: { position: [0, 0], scale: 1 },
+      },
+    },
   };
 
   layout.fixed = {

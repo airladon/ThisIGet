@@ -26795,7 +26795,8 @@ function link(linkStr) {
     id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
     interactive: true,
     classes: '',
-    text: null
+    text: null,
+    newTab: true
   };
   var options = defaultOptions;
 
@@ -26819,6 +26820,8 @@ function link(linkStr) {
     classStr = "".concat(classStr, " ").concat(classes);
   }
 
+  var target = options.newTab ? ' target="_blank"' : '';
+
   var idToUse = function idToUse() {
     return id;
   };
@@ -26828,7 +26831,7 @@ function link(linkStr) {
       var idStr = id ? " id=\"".concat(id, "\"") : '';
       var colorStr = colorToUse ? " style=\"color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(colorToUse), ";\"") : '';
       return {
-        replacementText: "<a href=".concat(linkStr).concat(idStr, "class=\"").concat(classStr, "\"").concat(colorStr, ">").concat((text || textIn).trim(), "</a>")
+        replacementText: "<a href=".concat(linkStr).concat(idStr, "class=\"").concat(classStr, "\"").concat(colorStr, " rel=\"noreferrer noopener\"").concat(target, ">").concat((text || textIn).trim(), "</a>")
       };
     },
     id: idToUse
