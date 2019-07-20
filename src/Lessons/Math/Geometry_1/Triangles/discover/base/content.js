@@ -14,9 +14,9 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
-  // style,
+  style,
   click,
-  link,
+  // link,
   // clickW,
   // highlight,
   // centerV,
@@ -48,7 +48,7 @@ class Content extends PresentationLessonContent {
     const total = coll._total;
     const fixed = coll._fixed;
 
-    let common = {
+    const common = {
       transitionFromAny: (done) => {
         tri.hideAngles();
         tri.hideSides();
@@ -70,6 +70,7 @@ class Content extends PresentationLessonContent {
       show: [tri],
     };
     this.addSection(common, {
+      title: 'Triangle',
       setContent: [
         'You can create a |shape| with |three| connected |straight lines|.',
         note({ label: 'Note:' }, 'You can change the shape by dragging its corners.'),
@@ -108,6 +109,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
+      title: 'Angle Relationships',
       setContent: [
         'Looking at just the |angles|, can you find a |relationship| that the angles seem to obey? Is there a |pattern|?',
         hint({ top: 88, label: 'Hint 1' }, 'For each triangle, write down all the angles - do you see a pattern?'),
@@ -138,20 +140,44 @@ class Content extends PresentationLessonContent {
         'Can you |prove| the angles of a triangle |always| add to 180º?',
         hint({ top: 88, label: 'Hint 1' }, 'Draw a |line| parallel to the base through the top point'),
         hint({ top: 93, label: 'Hint 2' }, 'Use |alternate| and |supplementary| angle relationships'),
-        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in |explanation|'),
+        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer in |Explanation|'),
       ],
       modifiers: {
         line: click(coll.toggleParallelLine, [coll], colors.parallel),
         alternate: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Alternate'),
         supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
-        // explanation: link(`${window.location.origin}/Lessons/Math/Geometry_1/Triangles/explanation/base`),
-        explanation: this.link('Math/Geometry_1/Triangles/explanation/base'),
+        Explanation: this.link('Math/Geometry_1/Triangles/explanation/base'),
       },
       setSteadyState: () => {
         coll.updateTri = false;
         tri.hideAll();
         fixed.showAll();
       },
+    });
+
+    this.addSection({
+      title: 'Triangle Types',
+      setContent: style({ centerV: true }, [
+        'Triangles are |categorized| depending on their |side lengths| and |angles|.',
+        'Knowing what category a triangle is in, or the |triangle type|, can sometimes simplify a problem as known relationships with that specific triangle type can be used to find unknown properties.',
+        'Using triangle type names can also more efficiently |communicate| the properties of a triangle, so it is important to remember them.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Can you find the name of triangles that have the properties:',
+        style({
+          list: 'unordered', left: 15, top: 10, line: 2,
+        }, [
+          'All angles less than 90º',
+          'One angle equal to 90º',
+          'One angle greater than 90º',
+          'All side lengths the same',
+          'Two side lengths the same',
+          'No side lengths the same',
+        ]),
+      ],
     });
   }
 }
