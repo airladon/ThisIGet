@@ -166,9 +166,9 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: [
-        'Can you find the name of triangles that have the properties:',
+        'Can you |research| the name of triangles that have the |properties|:',
         style({
-          list: 'unordered', left: 15, top: 10, line: 2,
+          list: 'unordered', left: 10, top: 10, line: 2,
         }, [
           'All angles less than 90º',
           'One angle equal to 90º',
@@ -177,6 +177,7 @@ class Content extends PresentationLessonContent {
           'Two side lengths the same',
           'No side lengths the same',
         ]),
+        note({ top: 93, right: 0, color: colors.diagram.text.note }, 'Answer on Next Page'),
       ],
     });
   }
