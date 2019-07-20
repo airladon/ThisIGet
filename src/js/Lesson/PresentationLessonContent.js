@@ -16,7 +16,9 @@ const {
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
-const { setOnClicks, applyModifiers, click, link } = Fig.tools.html;
+const {
+  setOnClicks, applyModifiers, click, link,
+} = Fig.tools.html;
 
 function initializeItemSelector(
   methodToExecute: Function,
