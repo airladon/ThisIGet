@@ -167,6 +167,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
           // eslint-disable-next-line no-await-in-loop
           await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
 
+          // Open all hints on a page
+          let hints = await page.$$('.pres_lesson__hint_label');
+          for (const hint of hints) {
+            const id = await (await hint.getProperty('id')).jsonValue();
+            const hintText = await page.$(`#${id}`);
+            await hintText.click();
+          }
+
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot();
@@ -261,6 +269,15 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
             const comingFrom = navigation === next ? 'next' : 'prev';
             const threshold = getThreshold(currentPage, options, comingFrom);
+
+            // Open all hints on a page
+            hints = await page.$$('.pres_lesson__hint_label');
+            for (const hint of hints) {
+              const id = await (await hint.getProperty('id')).jsonValue();
+              const hintText = await page.$(`#${id}`);
+              await hintText.click();
+            }
+
             // Take screenshot
             // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
@@ -269,6 +286,13 @@ export default function tester(optionsOrScenario, ...scenarios) {
               failureThresholdType: 'percent',
               customSnapshotIdentifier: `page ${currentPage}`,
             });
+
+            // Close all hints on a page
+            for (const hint of hints) {
+              const id = await (await hint.getProperty('id')).jsonValue();
+              const hintText = await page.$(`#${id}`);
+              await hintText.click();
+            }
           }
         }
       },
