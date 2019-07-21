@@ -12,6 +12,8 @@ const {
 
 const { minAngleDiff } = Fig.tools.g2;
 
+const { rand, round } = Fig.tools.math;
+
 export default class CommonCollectionOpposite extends CommonDiagramCollection {
   _fig: {
     _line1: DiagramObjectLine;
@@ -48,7 +50,7 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     const r2 = line2.getRotation();
     const minAngle = minAngleDiff(r2, r1);
     this._fig.stop(true, 'noComplete');
-    if (Math.abs(minAngle) < 0.3) {
+    if (Math.abs(minAngle) < 0.3 || Math.abs(minAngle) > 2.8) {
       line2.animations.new()
         .rotation({ target: 1, duration: 0.5 })
         .whenFinished(done)
@@ -62,10 +64,14 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
     this.diagram.animateNextFrame();
   }
 
-  setAngle(angleId: number, color: Array<number>, text: string) {
+  setAngle(angleId: number, color: Array<number>, text: ?string) {
     const angle = this._fig[`_angle${angleId}`];
     angle.setColor(color);
-    angle.label.setText(text);
+    if (text == null) {
+      angle.setLabelToRealAngle();
+    } else {
+      angle.setLabel(text);
+    }
   }
 
   showAngles(angles: Array<DiagramObjectAngle> | DiagramObjectAngle) {
@@ -170,5 +176,35 @@ export default class CommonCollectionOpposite extends CommonDiagramCollection {
         });
       }
     }
+
+    if (angle1.label != null && angle1.label.showRealAngle) {
+      let a1 = parseInt(angle1.label.getText(), 10);
+      let a2 = 180 - a1;
+      if (angle1.getAngle() < 0.2) {
+        a1 = angle1.getAngle('deg');
+        a2 = round(180 - a1, 0);
+      }
+      const a3 = a1;
+      const a4 = a2;
+      angle2.setLabel(`${a2}º`);
+      angle3.setLabel(`${a3}º`);
+      angle4.setLabel(`${a4}º`);
+    }
+  }
+
+  goToRandom() {
+    const line1 = this._fig._line1;
+    const line2 = this._fig._line2;
+    const r1 = line1.getRotation();
+    const nextR1 = r1 + rand(0.5, 1, true);
+    const nextR2 = nextR1 + rand(0.3, 2, true);
+    this._fig.stop(true, 'noComplete');
+    line1.animations.new()
+      .rotation({ target: nextR1, duration: 0.8 })
+      .start();
+    line2.animations.new()
+      .rotation({ target: nextR2, duration: 0.8 })
+      .start();
+    this.diagram.animateNextFrame();
   }
 }

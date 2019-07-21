@@ -128,6 +128,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'AnglesAtIntersections',
       topics: {
+        discover: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the relationships between opposite angles, corresponding angles, alternate angles and interior angles',
+            htmlDescription: 'Using parallel lines and supplementary angles, all these relationships can be proven',
+            fullLesson: true,
+          },
+        },
         examples: {
           base: {
             type: 'singlePage',
