@@ -10,7 +10,11 @@ The angle $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\defin
 
 <hint>[Hint 2]Angles $$\color{gr}c$$ and $$\color{g}d$$ are [[supplementary]]((qr,'Math/Geometry_1/AngleGroups/base/Supplementary',#00A89D))</hint>
 
-<hint>[Answer] See this lesson's [Explanation](/Lessons/Math/Geometry_1/ExternalAngles/explanation/base)</hint>
+<hintLow>[Answer]
+
+$$\bbox[20px,border:1px solid red]{\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
+
+See this lesson's [Explanation](/Lessons/Math/Geometry_1/ExternalAngles/explanation/base) for the proof</hintLow>
 
 How many external angles does a triangle have?
 

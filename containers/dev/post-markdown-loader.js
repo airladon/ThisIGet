@@ -37,7 +37,7 @@ function parseLowHints(source) {
   while (match != null) {
     const { index } = match;
     const [str, content] = match;
-    const m = content.match(/\[([^\]]*)\](.*)/);
+    const m = content.match(/\[([^\]]*)\]([\s\S]*)/);
     let hint = '';
     let label = 'Hint';
     if (m != null) {
