@@ -408,6 +408,19 @@ class Content extends PresentationLessonContent {
 
       },
     });
+
+    this.addSection({
+      title: 'Conculsion',
+      setContent: style({ centerV: true }, [
+        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding|, |alternate| and |interior| angles can be used to find all angles in the system.',
+        'However, you don\'t necessarily need to remember these relationships to use them.',
+        'If you forget, you can always figure them out using just |supplementary_angles| and the fact that |parallel_lines| are the same angle!',
+      ]),
+      modifiers: {
+        supplementary_angles: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres', colors.diagram.action),
+        parallel_lines: this.qr('Math/Geometry_1/ParallelLines/base/Main', colors.diagram.action),
+      },
+    });
   }
 }
 

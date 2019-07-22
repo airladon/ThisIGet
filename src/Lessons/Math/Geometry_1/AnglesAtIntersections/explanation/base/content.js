@@ -386,10 +386,11 @@ class Content extends PresentationLessonContent {
         three.setAngle('C2', colors.angle3, 'g');
         three.setAngle('D1', colors.angle4, 'd');
         three.setAngle('D2', colors.angle4, 'h');
-        done();
-        // if (this.comingFrom === 'goto') {
-        //   three.newPageRotation(0, 1, done);
-        // }
+        if (this.comingFrom === 'next') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
       },
       setSteadyState: () => {
         three._fig._angleA1.showAll();
@@ -1008,7 +1009,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Conculsion',
       setContent: style({ centerV: true }, [
-        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding| and |alternate| and |interior| angles can be used to find all angles in the system.',
+        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding|, |alternate| and |interior| angles can be used to find all angles in the system.',
         'However, you don\'t necessarily need to remember these relationships to use them.',
         'If you forget, you can always figure them out using just |supplementary_angles| and the fact that |parallel_lines| are the same angle!',
       ]),
