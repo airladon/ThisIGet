@@ -38,7 +38,7 @@ function createLessonIndex(buildMode, lessonsPath) {
     if (title !== '') {
       // outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
       outStr = `${outStr}\n    ${uid}: {`;
-      outStr = `${outStr}\n      title: '${title}',`;
+      outStr = `${outStr}\n      title: '${title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      topics: {`;
@@ -112,9 +112,9 @@ function createLessonIndex(buildMode, lessonsPath) {
               // outStr = `${outStr}\n            ],`;
             } else {
               outStr = `${outStr}\n            title: '${versionTitle}',`;
-              outStr = `${outStr}\n            description: '${versionDescription}',`;
-              outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle}',`;
-              outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription}',`;
+              outStr = `${outStr}\n            description: '${versionDescription.replace(/'/, '\\\'')}',`;
+              outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle.replace(/'/, '\\\'')}',`;
+              outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription.replace(/'/, '\\\'')}',`;
               outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
             }
             outStr = `${outStr}\n          },`;
