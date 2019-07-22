@@ -198,7 +198,7 @@ class Content extends PresentationLessonContent {
     };
     this.addSection(common, {
       setContent: style({}, [
-        'If you |move| around the lines, you might see some |patterns|, where some angles seem to always |equal| to other angles.',
+        'If you |move| around the lines, you might see some angle pairs always seem to be |equal|.',
       ]),
       modifiers: {
         line: click(three.pulseIntersecting, [three], colors.intersectingLine),
@@ -209,7 +209,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'We want to |prove| these relationships, but to do so, it is first useful to know what different |angle pairs| are commonly called.',
+        'We want to |prove| this is always the case, therefore it is first useful to know the common names of different |angle pairs|.',
       ]),
     });
 
@@ -251,13 +251,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that |corresponding_angles| are equal when the lines being intersected are parallel?',
+        'Can you |prove| that |corresponding_angles| are |equal| when the lines being intersected are |parallel_|?',
         hint({ top: 93 }, '|Parallel| lines have the same angle'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
+        parallel_: click(three.pulseParallel, [three], colors.lines),
         Parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=12'),
       },
@@ -265,14 +265,14 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that the |intersected_lines| are parallel if the |corresponding_angles| are equal?',
-        hint({ top: 93 }, '|Parallel| lines have the same angle'),
+        'Conversely, can you |prove| that the |intersected_lines| are |parallel| if the |corresponding_angles| are |equal|?',
+        hint({ top: 93 }, '|Parallel_| lines have the same angle'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         intersected_lines: click(three.pulseParallel, [three], colors.lines),
-        Parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
+        Parallel_: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=12'),
       },
     });
@@ -318,13 +318,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that |alternate_angles| are equal when the |lines| being intersected are parallel?',
-        hint({ top: 93 }, 'Use |opposite| angles and |corresponding| angles'),
+        'Can you |prove| that |alternate_angles| are |equal| when the  intersected lines are |parallel|?',
+        hint({ top: 93 }, 'Use |corresponding| angles and |opposite| angles'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
       modifiers: {
         alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
-        lines: click(three.pulseParallel, [three], colors.lines),
+        parallel: click(three.pulseParallel, [three], colors.lines),
         opposite: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Opposite'),
         corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
         Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=19'),
@@ -334,7 +334,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that the |intersected_lines| are |parallel| if the |alternate_angles| are equal?',
+        'Conversely, can you |prove| that the |intersected_lines| are |parallel| if the |alternate_angles| are equal?',
         hint({ top: 93 }, 'Use |opposite| angles to show |corresponding| angles are equal'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
@@ -379,13 +379,13 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that |interior_angles| always sum to 180º when the |lines| being intersected are parallel?',
+        'Can you |prove| that |interior_angles| always |sum to 180º| when the intersected lines are |parallel|?',
         hint({ top: 93 }, 'Start with |corresponding| angles and then find the |supplementary| angle'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
       modifiers: {
         interior_angles: click(three.toggleInterior, [three], colors.angle1),
-        lines: click(three.pulseParallel, [three], colors.lines),
+        parallel: click(three.pulseParallel, [three], colors.lines),
         supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
         corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
         Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=26'),
@@ -395,7 +395,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'Can you |prove| that the |intersected_lines| are |parallel| if the |interior_angles| add to 180º?',
+        'Conversely, can you |prove| that the |intersected_lines| are |parallel| if the |interior_angles| |add to 180º|?',
         hint({ top: 93 }, 'Use |supplementary| angles to show |corresponding| angles are equal'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
