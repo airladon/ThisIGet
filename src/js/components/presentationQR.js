@@ -43,8 +43,8 @@ export default class PresentationQR extends React.Component
         className="lesson__qr__link_link"
         id="id_lesson__qr__link_link__pres"
         href={''}
-        rel='noreferrer noopener'
-        target="_blank"
+        // rel='noreferrer noopener'
+        // target="_blank"
       >
         Go to lesson to see why
     </a>;
