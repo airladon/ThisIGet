@@ -79,6 +79,9 @@ export default function lessonLayout() {
   });
   layout.oppositeLine2 = joinObjects({}, layout.line, {
     name: 'line2',
+    options: {
+      angle: 1,
+    },
     mods: {
       scenarios: {
         center: { rotation: 1 },
@@ -163,6 +166,9 @@ export default function lessonLayout() {
   // ////////////////////////////////////////////////////////////
   layout._3LinesLine1 = joinObjects({}, layout.line, {
     name: 'line1',
+    options: {
+      position: [0, 0.6],
+    },
     mods: {
       interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {
@@ -175,6 +181,9 @@ export default function lessonLayout() {
   });
   layout._3LinesLine2 = joinObjects({}, layout.line, {
     name: 'line2',
+    options: {
+      position: [0, -0.6],
+    },
     mods: {
       interactiveLocation: new Point(layout.length / 2 * 0.9, 0),
       scenarios: {

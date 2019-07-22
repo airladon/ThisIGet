@@ -324,15 +324,26 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
 
   toggleInterior() {
     if (this._fig._angleC1.isShown && this._fig._angleD1.isShown) {
-      this.showAngles([this._fig._angleC1, this._fig._angleB2]);
-    } else if (this._fig._angleC1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleA2]);
     } else if (this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+    } else if (this._fig._angleC1.isShown) {
       this.showAngles([
         this._fig._angleC1, this._fig._angleB2,
         this._fig._angleD1, this._fig._angleA2,
       ]);
     }
+
+    // if (this._fig._angleC1.isShown && this._fig._angleD1.isShown) {
+    //   this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+    // } else if (this._fig._angleC1.isShown) {
+    //   this.showAngles([this._fig._angleD1, this._fig._angleA2]);
+    // } else if (this._fig._angleD1.isShown) {
+    //   this.showAngles([
+    //     this._fig._angleC1, this._fig._angleB2,
+    //     this._fig._angleD1, this._fig._angleA2,
+    //   ]);
+    // }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
   }
