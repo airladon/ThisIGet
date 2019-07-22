@@ -27173,7 +27173,7 @@ function inverse(m) {
 /*!******************************!*\
   !*** ./src/js/tools/math.js ***!
   \******************************/
-/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D */
+/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -27195,6 +27195,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeRandElement", function() { return removeRandElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randElements", function() { return randElements; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rand2D", function() { return rand2D; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randSign", function() { return randSign; });
 var roundNum = function roundNum(value) {
   var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
   var multiplier = Math.pow(10, precision);
@@ -27495,26 +27496,46 @@ function range(start, stop) {
   return out;
 }
 
+function randSign() {
+  return Math.random() > 0.5 ? 1 : -1;
+}
+
 function randInt(minOrMax) {
   var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var plusOrMinus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var r = 0;
 
   if (max != null) {
     var min = minOrMax;
-    return Math.floor(Math.random() * Math.floor(max - min) + Math.floor(min));
+    r = Math.floor(Math.random() * Math.floor(max - min) + Math.floor(min));
+  } else {
+    r = Math.floor(Math.random() * Math.floor(minOrMax));
   }
 
-  return Math.floor(Math.random() * Math.floor(minOrMax));
+  if (plusOrMinus) {
+    r *= randSign();
+  }
+
+  return r;
 }
 
 function rand(minOrMax) {
   var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var plusOrMinus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var r = 0;
 
   if (max != null) {
     var min = minOrMax;
-    return Math.random() * (max - min) + min;
+    r = Math.random() * (max - min) + min;
+  } else {
+    r = Math.random() * minOrMax;
   }
 
-  return Math.random() * minOrMax;
+  if (plusOrMinus) {
+    r *= randSign();
+  }
+
+  return r;
 }
 
 function randElement(inputArray) {

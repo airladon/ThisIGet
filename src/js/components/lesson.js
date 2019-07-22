@@ -279,8 +279,7 @@ export default class LessonComponent extends React.Component
     const output = [];
     const topics = this.getTopics();
     const topicNames = [
-      'discover', 'summary', 'examples', 'explanation', 'implications', 'history',
-      'references', 'quiz',
+      'discover', 'explanation', 'summary', 'examples', 'implications', 'history', 'quiz', 'links',
     ];
     Object.keys(topics).forEach((topicName) => {
       if (topicNames.indexOf(topicName) === -1) {

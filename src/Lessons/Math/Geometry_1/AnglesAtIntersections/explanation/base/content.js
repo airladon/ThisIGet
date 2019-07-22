@@ -70,7 +70,7 @@ class Content extends PresentationLessonContent {
         four_angles: click(opp.toggleAngles, [opp], colors.angle1),
       },
       setEnterState: () => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.angle2, 'b');
         opp.setAngle(3, colors.angle3, 'c');
@@ -98,7 +98,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.angle2, 'b');
         opp.newPageRotation(done);
@@ -120,7 +120,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.angle2, 'b = 180º - a');
         opp._eqn.showForm('b');
@@ -145,7 +145,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.disabled, 'b = 180º - a');
         opp.setAngle(4, colors.angle4, 'd');
@@ -169,7 +169,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.disabled, 'b = 180º - a');
         opp.setAngle(4, colors.angle4, 'd = 180º - a');
@@ -195,7 +195,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.disabled, 'a');
         opp.setAngle(2, colors.angle2, 'b = 180º - a');
         opp.setAngle(4, colors.angle4, 'd = 180º - a');
@@ -221,7 +221,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.disabled, 'a');
         opp.setAngle(2, colors.disabled, 'b = 180º - a');
         opp.setAngle(3, colors.angle3, 'c = a');
@@ -249,7 +249,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.angle2, 'b');
         opp.setAngle(3, colors.angle1, 'a');
@@ -277,7 +277,7 @@ class Content extends PresentationLessonContent {
       },
       show: [opp._fig._line1, opp._fig._line2],
       transitionFromAny: (done) => {
-        opp.setScenarios('center');
+        opp._fig.setScenario('center');
         opp.setAngle(1, colors.angle1, 'a');
         opp.setAngle(2, colors.angle2, 'b');
         opp.setAngle(3, colors.angle1, 'a');
@@ -346,16 +346,20 @@ class Content extends PresentationLessonContent {
       },
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
-        three.setScenarios('center');
+        three._fig.setScenario('center');
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle2, 'e');
-        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('A2', colors.angle1, 'e');
+        three.setAngle('B1', colors.angle2, 'b');
         three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle2, 'g');
-        three.setAngle('D1', colors.angle1, 'd');
-        three.setAngle('D2', colors.angle2, 'h');
-        three.newPageRotation(0, 1, done);
+        three.setAngle('C1', colors.angle3, 'c');
+        three.setAngle('C2', colors.angle3, 'g');
+        three.setAngle('D1', colors.angle4, 'd');
+        three.setAngle('D2', colors.angle4, 'h');
+        if (this.comingFrom === 'prev') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
       },
       setSteadyState: () => {
         three._fig._angleA1.showAll();
@@ -373,16 +377,20 @@ class Content extends PresentationLessonContent {
       },
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
       transitionFromAny: (done) => {
-        three.setScenarios('center');
+        three._fig.setScenario('center');
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle2, 'e');
-        three.setAngle('B1', colors.angle1, 'b');
+        three.setAngle('A2', colors.angle1, 'e');
+        three.setAngle('B1', colors.angle2, 'b');
         three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle2, 'g');
-        three.setAngle('D1', colors.angle1, 'd');
-        three.setAngle('D2', colors.angle2, 'h');
-        three.newPageRotation(0, 1, done);
+        three.setAngle('C1', colors.angle3, 'c');
+        three.setAngle('C2', colors.angle3, 'g');
+        three.setAngle('D1', colors.angle4, 'd');
+        three.setAngle('D2', colors.angle4, 'h');
+        if (this.comingFrom === 'next') {
+          three.newPageRotation(0, 1, done);
+        } else {
+          done();
+        }
       },
       setSteadyState: () => {
         three._fig._angleA1.showAll();
@@ -574,8 +582,8 @@ class Content extends PresentationLessonContent {
         if (this.comingFrom === 'goto') {
           three.setScenarios('center');
           done();
-        } else if (this.comingFrom === 'prev') {
-          three.newPageRotation(0, 1, done);
+        // } else if (this.comingFrom === 'prev') {
+        //   three.newPageRotation(0, 1, done);
         } else {
           done();
         }
@@ -583,12 +591,12 @@ class Content extends PresentationLessonContent {
       setSteadyState: () => {
         three.setAngle('A1', colors.angle1, 'a');
         three.setAngle('A2', colors.angle1, 'a');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle1, 'b');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle1, 'c');
-        three.setAngle('D1', colors.angle1, 'd');
-        three.setAngle('D2', colors.angle1, 'd');
+        three.setAngle('B1', colors.angle2, 'b');
+        three.setAngle('B2', colors.angle2, 'b');
+        three.setAngle('C1', colors.angle3, 'c');
+        three.setAngle('C2', colors.angle3, 'c');
+        three.setAngle('D1', colors.angle4, 'd');
+        three.setAngle('D2', colors.angle4, 'd');
         three._fig._angleA1.showAll();
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
@@ -647,7 +655,8 @@ class Content extends PresentationLessonContent {
           three.setScenarios('center');
           done();
         } else {
-          three.newPageRotation(0, 1, done);
+          // three.newPageRotation(0, 1, done);
+          done();
         }
       },
       setSteadyState: () => {
@@ -750,7 +759,8 @@ class Content extends PresentationLessonContent {
           three.setScenarios('center');
           done();
         } else {
-          three.newPageRotation(0, 1, done);
+          // three.newPageRotation(0, 1, done);
+          done();
         }
       },
       setSteadyState: () => {
@@ -782,7 +792,8 @@ class Content extends PresentationLessonContent {
           three.setScenarios('center');
           done();
         } else {
-          three.newPageRotation(0, 1, done);
+          // three.newPageRotation(0, 1, done);
+          done();
         }
       },
       setSteadyState: () => {
@@ -825,9 +836,9 @@ class Content extends PresentationLessonContent {
         }
       },
       setSteadyState: () => {
-        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('A2', colors.angle1, 'e');
         three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C1', colors.angle2, 'c');
         three.setAngle('D1', colors.angle1, 'd');
         three._fig._angleD1.showAll();
         three._fig._angleA2.showAll();
@@ -850,9 +861,9 @@ class Content extends PresentationLessonContent {
         done();
       },
       setSteadyState: () => {
-        three.setAngle('A2', colors.angle2, 'e');
+        three.setAngle('A2', colors.angle1, 'e');
         three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle1, 'c');
+        three.setAngle('C1', colors.angle2, 'c');
         three.setAngle('D1', colors.angle1, 'd');
         three._fig._angleD1.showAll();
         three._fig._angleA2.showAll();
@@ -998,12 +1009,13 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Conculsion',
       setContent: style({ centerV: true }, [
-        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding| and |alternate| and |interior| angles can be used to find all angles in the system.',
+        'When two lines intersect, or one line intersects a pair of parallel lines, the knowledge of |opposite|, |corresponding|, |alternate| and |interior| angles can be used to find all angles in the system.',
         'However, you don\'t necessarily need to remember these relationships to use them.',
-        'If you forget, you can always figure them out, just using |supplementary_angles|!',
+        'If you forget, you can always figure them out using just |supplementary_angles| and the fact that |parallel_lines| are the same angle!',
       ]),
       modifiers: {
         supplementary_angles: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres', colors.diagram.action),
+        parallel_lines: this.qr('Math/Geometry_1/ParallelLines/base/Main', colors.diagram.action),
       },
     });
   }

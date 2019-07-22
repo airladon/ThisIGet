@@ -141,13 +141,39 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.updateAngle(this._fig._angleC2, intersectT2, r);
     this.updateAngle(this._fig._angleD1, intersectT1, r);
     this.updateAngle(this._fig._angleD2, intersectT2, r);
+
+    const angleA1 = this._fig._angleA1;
+    const angleB1 = this._fig._angleB1;
+    const angleC1 = this._fig._angleC1;
+    const angleD1 = this._fig._angleD1;
+    const angleA2 = this._fig._angleA2;
+    const angleB2 = this._fig._angleB2;
+    const angleC2 = this._fig._angleC2;
+    const angleD2 = this._fig._angleD2;
+
+    if (angleA1.label != null && angleA1.label.showRealAngle) {
+      const a1 = parseInt(angleA1.label.getText(), 10);
+      const b1 = 180 - a1;
+      angleB1.setLabel(`${b1}º`);
+      angleC1.setLabel(`${a1}º`);
+      angleD1.setLabel(`${b1}º`);
+      angleA2.setLabel(`${a1}º`);
+      angleB2.setLabel(`${b1}º`);
+      angleC2.setLabel(`${a1}º`);
+      angleD2.setLabel(`${b1}º`);
+    }
   }
 
   setAngle(angleId: string, color: Array<number>, text: string) {
     const angle = this._fig[`_angle${angleId}`];
     const { isShown } = angle;
     angle.setColor(color);
-    angle.label.setText(text);
+    // angle.label.setText(text);
+    if (text == null) {
+      angle.setLabelToRealAngle();
+    } else {
+      angle.setLabel(text);
+    }
     if (!isShown) {
       angle.hide();
     }
@@ -199,6 +225,25 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
     this.diagram.animateNextFrame();
   }
 
+  toggleAnglesOnOff() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles([]);
+    } else {
+      this.showAngles([
+        this._fig._angleA1,
+        this._fig._angleB1,
+        this._fig._angleC1,
+        this._fig._angleD1,
+        this._fig._angleA2,
+        this._fig._angleB2,
+        this._fig._angleC2,
+        this._fig._angleD2,
+      ]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
   toggle4Angles() {
     if (this._fig._angleA1.isShown) {
       this.showAngles(this._fig._angleB1);
@@ -214,39 +259,91 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
   }
 
   toggleCorresponding() {
-    if (this._fig._angleA1.isShown) {
+    if (this._fig._angleA1.isShown && this._fig._angleB1.isShown) {
+      this.showAngles([this._fig._angleA1, this._fig._angleA2]);
+    } else if (this._fig._angleA1.isShown) {
       this.showAngles([this._fig._angleB1, this._fig._angleB2]);
     } else if (this._fig._angleB1.isShown) {
       this.showAngles([this._fig._angleC1, this._fig._angleC2]);
     } else if (this._fig._angleC1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleD2]);
     } else if (this._fig._angleD1.isShown) {
-      this.showAngles([this._fig._angleA1, this._fig._angleA2]);
+      this.showAngles([
+        this._fig._angleA1, this._fig._angleA2,
+        this._fig._angleB1, this._fig._angleB2,
+        this._fig._angleC1, this._fig._angleC2,
+        this._fig._angleD1, this._fig._angleD2,
+      ]);
     }
+
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
   }
 
   toggleAlternate() {
-    if (this._fig._angleA1.isShown) {
+    if (this._fig._angleA1.isShown && this._fig._angleB1.isShown) {
+      this.showAngles([this._fig._angleA1, this._fig._angleC2]);
+    } else if (this._fig._angleA1.isShown) {
       this.showAngles([this._fig._angleB1, this._fig._angleD2]);
     } else if (this._fig._angleB1.isShown) {
       this.showAngles([this._fig._angleC1, this._fig._angleA2]);
     } else if (this._fig._angleC1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleB2]);
     } else if (this._fig._angleD1.isShown) {
+      this.showAngles([
+        this._fig._angleA1, this._fig._angleA2,
+        this._fig._angleB1, this._fig._angleB2,
+        this._fig._angleC1, this._fig._angleC2,
+        this._fig._angleD1, this._fig._angleD2,
+      ]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleInsideAlternate() {
+    if (this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleA2]);
+    } else {
+      this.showAngles([this._fig._angleD1, this._fig._angleB2]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleOutsideAlternate() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles([this._fig._angleB1, this._fig._angleD2]);
+    } else {
       this.showAngles([this._fig._angleA1, this._fig._angleC2]);
     }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
   }
 
+
   toggleInterior() {
-    if (this._fig._angleC1.isShown) {
+    if (this._fig._angleC1.isShown && this._fig._angleD1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleA2]);
     } else if (this._fig._angleD1.isShown) {
       this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+    } else if (this._fig._angleC1.isShown) {
+      this.showAngles([
+        this._fig._angleC1, this._fig._angleB2,
+        this._fig._angleD1, this._fig._angleA2,
+      ]);
     }
+
+    // if (this._fig._angleC1.isShown && this._fig._angleD1.isShown) {
+    //   this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+    // } else if (this._fig._angleC1.isShown) {
+    //   this.showAngles([this._fig._angleD1, this._fig._angleA2]);
+    // } else if (this._fig._angleD1.isShown) {
+    //   this.showAngles([
+    //     this._fig._angleC1, this._fig._angleB2,
+    //     this._fig._angleD1, this._fig._angleA2,
+    //   ]);
+    // }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
   }
@@ -313,6 +410,23 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
   shaddowLine1() {
     const p = this._fig._line1.getPosition();
     this._fig._line2.setPosition(p);
+    this.diagram.animateNextFrame();
+  }
+
+  goToRandom() {
+    // const r = rand(0, Math.PI);
+    let angle = rand(Math.PI / 3.7, Math.PI / 2);
+    if (this._fig._line3.getRotation() < Math.PI / 2) {
+      angle += Math.PI / 2 - Math.PI / 3.7;
+    }
+    // const angle = rand(Math.PI / 3.7, Math.PI - Math.PI / 3.7);
+    this._fig.stop(true, 'noComplete');
+    // this._fig.animations.new()
+    //   .rotation({ target: r, duration: 0.8 })
+    //   .start();
+    this._fig._line3.animations.new()
+      .rotation({ target: angle, duration: 0.8 })
+      .start();
     this.diagram.animateNextFrame();
   }
 }
