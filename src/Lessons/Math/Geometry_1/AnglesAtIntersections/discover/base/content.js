@@ -33,6 +33,7 @@ class Content extends PresentationLessonContent {
     this.loadQRs([
       'Math/Geometry_1/AngleGroups/base',
       'Math/Geometry_1/ParallelLines/base',
+      'Math/Geometry_1/AnglesAtIntersections/base',
     ]);
   }
 
@@ -163,19 +164,11 @@ class Content extends PresentationLessonContent {
         three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
-        // three._fig._angleA1.showAll();
-        // three._fig._angleB1.showAll();
-        // three._fig._angleC1.showAll();
-        // three._fig._angleD1.showAll();
-        // three._fig._angleA2.showAll();
-        // three._fig._angleB2.showAll();
-        // three._fig._angleC2.showAll();
-        // three._fig._angleD2.showAll();
         three.updateIntersectingLineAngle();
       },
     });
 
-    const common = {
+    let common = {
       setEnterState: () => {
         three.setScenarios('center');
         three.setAngle('A1', colors.angle1, null);
@@ -216,21 +209,15 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'We want to |prove| these relationships, but to do so, it is first useful to know different |angle pairs| are commonly called.',
+        'We want to |prove| these relationships, but to do so, it is first useful to know what different |angle pairs| are commonly called.',
       ]),
     });
 
-    this.addSection({
-      title: 'Corresponding Angles',
-      setContent: style({}, [
-        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
-      ]),
-      modifiers: {
-        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
-        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
-      },
+    common = {
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      // setEnterState: () => {
+      //   three.setScenarios('center');
+      // },
       transitionFromAny: (done) => {
         three.setScenarios('center');
         three.showAngles([three._fig._angleA1, three._fig._angleA2]);
@@ -249,136 +236,176 @@ class Content extends PresentationLessonContent {
         three._fig._angleA2.showAll();
         three.updateIntersectingLineAngle();
       },
-    });
-
-    this.addSection({
+    };
+    this.addSection(common, {
       title: 'Corresponding Angles',
       setContent: style({}, [
-        'Can you |prove| the relationship between two |corresponding_angles|?',
-        hint({ top: 93 }, 'Remember the |two_lines| being intersected are |parallel|'),
+        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
+      ]),
+      modifiers: {
+        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        two_lines: click(three.pulseParallel, [three], colors.lines),
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that |corresponding_angles| are equal when the lines being intersected are parallel?',
+        hint({ top: 93 }, '|Parallel| lines have the same angle'),
         note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
       ]),
       modifiers: {
         corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
         two_lines: click(three.pulseParallel, [three], colors.lines),
-        parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
+        Parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
         Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=12'),
       },
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that the |intersected_lines| are parallel if the |corresponding_angles| are equal?',
+        hint({ top: 93 }, '|Parallel| lines have the same angle'),
+        note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
+      ]),
+      modifiers: {
+        corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
+        intersected_lines: click(three.pulseParallel, [three], colors.lines),
+        Parallel: this.qr('Math/Geometry_1/ParallelLines/base/Main'),
+        Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=12'),
+      },
+    });
+
+
+    common = {
       show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      // setEnterState: () => {
+      //   three.setScenarios('center');
+      // },
       transitionFromAny: (done) => {
         three.setScenarios('center');
-        three.showAngles([three._fig._angleA1, three._fig._angleA2]);
+        three.showAngles([three._fig._angleA1, three._fig._angleC2]);
         three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle1, 'e');
-        three.setAngle('B1', colors.angle2, 'b');
-        three.setAngle('B2', colors.angle2, 'f');
-        three.setAngle('C1', colors.angle3, 'c');
-        three.setAngle('C2', colors.angle3, 'g');
-        three.setAngle('D1', colors.angle4, 'd');
-        three.setAngle('D2', colors.angle4, 'h');
+        three.setAngle('A2', colors.angle2, 'c');
+        three.setAngle('B1', colors.angle4, 'b');
+        three.setAngle('B2', colors.angle3, 'd');
+        three.setAngle('C1', colors.angle2, 'c');
+        three.setAngle('C2', colors.angle1, 'a');
+        three.setAngle('D1', colors.angle3, 'd');
+        three.setAngle('D2', colors.angle4, 'b');
         three.newPageRotation(0, 1, done);
       },
       setSteadyState: () => {
         three._fig._angleA1.showAll();
-        three._fig._angleA2.showAll();
+        three._fig._angleC2.showAll();
         three.updateIntersectingLineAngle();
       },
-    });
-
-    this.addSection({
-      title: 'Corresponding Angles',
-      setContent: style({
-        left: 5, right: 55, centerV: true, size: 0.9,
-      }, [
-        '|Corresponding_angles| are the angles in the same relative position at the intersection of |two_lines| and an |intersecting_line|.',
-        'When the two lines are |parallel|, corresponding angles are always |equal|.',
-        'Similarly, if corresponding angles are |equal|, then the two lines are always |parallel_|.',
-      ]),
-      modifiers: {
-        Corresponding_angles: click(three.toggleCorresponding, [three], colors.angle1),
-        parallel: click(three.pulseParallel, [three], colors.lines),
-        parallel_: click(three.pulseParallel, [three], colors.lines),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
-        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
-      },
-      setEnterState: () => {
-        three.setScenarios('summary');
-        three.setAngle('A1', colors.angle1, 'a');
-        three.setAngle('A2', colors.angle1, 'a');
-        three.setAngle('B1', colors.angle1, 'b');
-        three.setAngle('B2', colors.angle1, 'b');
-        three.setAngle('C1', colors.angle1, 'c');
-        three.setAngle('C2', colors.angle1, 'c');
-        three.setAngle('D1', colors.angle1, 'd');
-        three.setAngle('D2', colors.angle1, 'd');
-      },
-      show: [three._fig._line1, three._fig._line3, three._fig._line2],
-      setSteadyState: () => {
-        three._fig._angleA1.showAll();
-        three._fig._angleA2.showAll();
-        three.updateIntersectingLineAngle();
-      },
-    });
-
-    this.addSection({
+    };
+    this.addSection(common, {
       title: 'Alternate Angles',
-      setContent: style({
-        left: 5, right: 55, size: 0.9, centerV: true,
-      }, [
-        '|Alternate_angles| are the pair of inside angles, or pair of outside angles that are on |opposite| sides of the |intersecting_line| that crosses |two_lines|.',
-        'When the two lines are |parallel|, the alternate angles are always |equal|.',
-        'Similarly, if alternate angles are |equal|, then the two lines are always |parallel_|.',
+      setContent: style({}, [
+        '|Alternate_angles| are the pair of |inside| angles, or pair of |outside| angles that are on |opposite| sides of the |intersecting_line|.',
       ]),
       modifiers: {
         Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
         intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
-        parallel: click(three.pulseParallel, [three], colors.lines),
-        parallel_: click(three.pulseParallel, [three], colors.lines),
-      },
-      show: [three._fig._line1, three._fig._line3, three._fig._line2],
-      setSteadyState: () => {
-        three.setScenarios('summary');
-        three.setAngle('A1', colors.angle1, 'c');
-        three.setAngle('A2', colors.angle1, 'a');
-        three.setAngle('B1', colors.angle1, 'd');
-        three.setAngle('B2', colors.angle1, 'b');
-        three.setAngle('C1', colors.angle1, 'a');
-        three.setAngle('C2', colors.angle1, 'c');
-        three.setAngle('D1', colors.angle1, 'b');
-        three.setAngle('D2', colors.angle1, 'd');
-        three._fig._angleC1.showAll();
-        three._fig._angleA2.showAll();
-        three.updateIntersectingLineAngle();
+        // two_lines: click(three.pulseParallel, [three], colors.lines),
+        inside: click(three.toggleInsideAlternate, [three], colors.lines),
+        outside: click(three.toggleOutsideAlternate, [three], colors.lines),
       },
     });
 
-    this.addSection({
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that |alternate_angles| are equal when the |lines| being intersected are parallel?',
+        hint({ top: 93 }, 'Use |opposite| angles and |corresponding| angles'),
+        note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
+      ]),
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        lines: click(three.pulseParallel, [three], colors.lines),
+        opposite: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Opposite'),
+        corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=19'),
+
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that the |intersected_lines| are |parallel| if the |alternate_angles| are equal?',
+        hint({ top: 93 }, 'Use |opposite| angles to show |corresponding| angles are equal'),
+        note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
+      ]),
+      modifiers: {
+        alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
+        intersected_lines: click(three.pulseParallel, [three], colors.lines),
+        opposite: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Opposite'),
+        corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=19'),
+
+      },
+    });
+
+    common = {
+      show: [three._fig._line1, three._fig._line2, three._fig._line3],
+      transitionFromAny: (done) => {
+        three.setScenarios('center');
+        three.showAngles([three._fig._angleC1, three._fig._angleB2]);
+        three.setAngle('A2', colors.angle2, 'd');
+        three.setAngle('B2', colors.angle1, 'b');
+        three.setAngle('C1', colors.angle1, 'a');
+        three.setAngle('D1', colors.angle2, 'c');
+        three.newPageRotation(0, 1, done);
+      },
+      setSteadyState: () => {
+        three._fig._angleC1.showAll();
+        three._fig._angleB2.showAll();
+        three.updateIntersectingLineAngle();
+      },
+    };
+    this.addSection(common, {
       title: 'Interior Angles',
-      setContent: style({
-        left: 5, right: 55, size: 0.9, centerV: true,
-      }, [
-        '|Interior_angles| are the inside angles on the same side of the |intersecting| line that crosses |two_lines|.',
-        'When the two lines are |parallel|, the interior angles always add to |180º|.',
-        'Similarly, if interior angles are |add to 180º|, then the two lines are always |parallel_|.',
+      setContent: style({}, [
+        '|Interior_angles| are the inside angles on the same side of the |intersecting| line.',
       ]),
       modifiers: {
         Interior_angles: click(three.toggleInterior, [three], colors.angle1),
-        intersecting: click(three.pulseIntersecting, [three], colors.intersectingLine),
-        two_lines: click(three.pulseParallel, [three], colors.lines),
-        parallel: click(three.pulseParallel, [three], colors.lines),
-        parallel_: click(three.pulseParallel, [three], colors.lines),
+        intersecting_line: click(three.pulseIntersecting, [three], colors.intersectingLine),
+        // two_lines: click(three.pulseParallel, [three], colors.lines),
       },
-      show: [three._fig._line1, three._fig._line3, three._fig._line2],
-      setSteadyState: () => {
-        three.setScenarios('summary');
-        three.setAngle('A2', colors.angle1, '180º – a');
-        three.setAngle('B2', colors.angle1, '180º – b');
-        three.setAngle('C1', colors.angle1, 'b');
-        three.setAngle('D1', colors.angle1, 'a');
-        three._fig._angleA2.showAll();
-        three._fig._angleD1.showAll();
-        three.updateIntersectingLineAngle();
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that |interior_angles| always sum to 180º when the |lines| being intersected are parallel?',
+        hint({ top: 93 }, 'Start with |corresponding| angles and then find the |supplementary| angle'),
+        note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
+      ]),
+      modifiers: {
+        interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        lines: click(three.pulseParallel, [three], colors.lines),
+        supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
+        corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=26'),
+
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({}, [
+        'Can you |prove| that the |intersected_lines| are |parallel| if the |interior_angles| add to 180º?',
+        hint({ top: 93 }, 'Use |supplementary| angles to show |corresponding| angles are equal'),
+        note({ color: colors.diagram.text.note, top: 93, right: 0 }, 'Answer in |Explanation|'),
+      ]),
+      modifiers: {
+        interior_angles: click(three.toggleInterior, [three], colors.angle1),
+        intersected_lines: click(three.pulseParallel, [three], colors.lines),
+        supplementary: this.qr('Math/Geometry_1/AngleGroups/base/SupplementaryPres'),
+        corresponding: this.qr('Math/Geometry_1/AnglesAtIntersections/base/Corresponding'),
+        Explanation: this.link('/Math/Geometry_1/AnglesAtIntersections/explanation/base?page=26'),
+
       },
     });
   }

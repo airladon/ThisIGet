@@ -259,7 +259,7 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
   }
 
   toggleCorresponding() {
-    if (this._fig._angleA1.isShown && this._fig._angleB1.isShown ) {
+    if (this._fig._angleA1.isShown && this._fig._angleB1.isShown) {
       this.showAngles([this._fig._angleA1, this._fig._angleA2]);
     } else if (this._fig._angleA1.isShown) {
       this.showAngles([this._fig._angleB1, this._fig._angleB2]);
@@ -281,24 +281,57 @@ export default class CommonCollectionThreeLines extends CommonDiagramCollection 
   }
 
   toggleAlternate() {
-    if (this._fig._angleA1.isShown) {
+    if (this._fig._angleA1.isShown && this._fig._angleB1.isShown) {
+      this.showAngles([this._fig._angleA1, this._fig._angleC2]);
+    } else if (this._fig._angleA1.isShown) {
       this.showAngles([this._fig._angleB1, this._fig._angleD2]);
     } else if (this._fig._angleB1.isShown) {
       this.showAngles([this._fig._angleC1, this._fig._angleA2]);
     } else if (this._fig._angleC1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleB2]);
     } else if (this._fig._angleD1.isShown) {
+      this.showAngles([
+        this._fig._angleA1, this._fig._angleA2,
+        this._fig._angleB1, this._fig._angleB2,
+        this._fig._angleC1, this._fig._angleC2,
+        this._fig._angleD1, this._fig._angleD2,
+      ]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleInsideAlternate() {
+    if (this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleA2]);
+    } else {
+      this.showAngles([this._fig._angleD1, this._fig._angleB2]);
+    }
+    this.updateIntersectingLineAngle();
+    this.diagram.animateNextFrame();
+  }
+
+  toggleOutsideAlternate() {
+    if (this._fig._angleA1.isShown) {
+      this.showAngles([this._fig._angleB1, this._fig._angleD2]);
+    } else {
       this.showAngles([this._fig._angleA1, this._fig._angleC2]);
     }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
   }
 
+
   toggleInterior() {
-    if (this._fig._angleC1.isShown) {
+    if (this._fig._angleC1.isShown && this._fig._angleD1.isShown) {
+      this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+    } else if (this._fig._angleC1.isShown) {
       this.showAngles([this._fig._angleD1, this._fig._angleA2]);
     } else if (this._fig._angleD1.isShown) {
-      this.showAngles([this._fig._angleC1, this._fig._angleB2]);
+      this.showAngles([
+        this._fig._angleC1, this._fig._angleB2,
+        this._fig._angleD1, this._fig._angleA2,
+      ]);
     }
     this.updateIntersectingLineAngle();
     this.diagram.animateNextFrame();
