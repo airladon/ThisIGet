@@ -11,3 +11,26 @@
 // .simple_lesson__container img {
 //   max-width: 100%;
 // }
+
+// .lesson__hint {
+
+// }
+
+.lesson__hint_label {
+  display: inline-block;
+  margin-right: 0.5em;
+  color: green;
+  font-weight: 800;
+}
+
+.lesson__hint_label:hover {
+  cursor: pointer;
+}
+
+.lesson__hint_contents {
+  display: inline-block;
+}
+
+.lesson__hint_hidden {
+  display: none;
+}

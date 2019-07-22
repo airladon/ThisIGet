@@ -85,6 +85,17 @@ const checkRatioButton = (button) => {
   }
 };
 
+const toggleHint = (hint) => {
+  if (hint.parentElement == null) {
+    return;
+  }
+  const hintContent = hint.parentElement.querySelector('.lesson__hint_contents');
+  if (hintContent == null) {
+    return;
+  }
+  hintContent.classList.toggle('lesson__hint_hidden');
+};
+
 // Use classes:
 //   entryNumber - for number/float/scientific
 //   entry<number> - for round to number decimals
@@ -264,6 +275,14 @@ export default class SimpleLessonComponent extends React.Component
       const element = entryButtons[i];
       element.onclick = () => {
         checkEntry(element);
+      };
+    }
+
+    const hints = document.getElementsByClassName('lesson__hint_label');
+    for (let i = 0; i < hints.length; i += 1) {
+      const hint = hints[i];
+      hint.onclick = () => {
+        toggleHint(hint);
       };
     }
   }

@@ -50,7 +50,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
       outStr = `${outStr}\nvar lessonDetails = {`;
-      outStr = `${outStr}\n  title: '${details.title}',`;
+      outStr = `${outStr}\n  title: '${details.title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n  dependencies: [`;
       if (details.dependencies.length > 0) {
         details.dependencies.forEach((dependency) => {
@@ -118,10 +118,10 @@ function updateDetailsAndVersions() {
         }
       } else if (topic === 'links') {
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
-        outStr = `${outStr}\n  title: '${version.title || ''}',`;
-        outStr = `${outStr}\n  description: '${version.description || ''}',`;
-        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle || ''}',`;
-        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription || ''}',`;
+        outStr = `${outStr}\n  title: '${version.title.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  description: '${version.description.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription.replace(/'/, '\\\'') || ''}',`;
         outStr = `${outStr}\n  links: [`;
         if (version.links.length > 0) {
           version.links.forEach((link) => {
@@ -147,10 +147,10 @@ function updateDetailsAndVersions() {
         }
         outStr = `${outStr}\n  ],`;
       } else {
-        outStr = `${outStr}\n  title: '${version.title || ''}',`;
-        outStr = `${outStr}\n  description: '${version.description || ''}',`;
-        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle || ''}',`;
-        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription || ''}',`;
+        outStr = `${outStr}\n  title: '${version.title.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  description: '${version.description.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle.replace(/'/, '\\\'') || ''}',`;
+        outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription.replace(/'/, '\\\'') || ''}',`;
         outStr = `${outStr}\n  fullLesson: ${version.fullLesson || 'false'},`;
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
       }
