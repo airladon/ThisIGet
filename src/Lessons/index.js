@@ -694,6 +694,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'External angle calculations',
+            description: '',
+            htmlTitle: 'External angle calculation examples',
+            htmlDescription: 'Examples of geometries where calculating the external angle of a triangle is needed',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
