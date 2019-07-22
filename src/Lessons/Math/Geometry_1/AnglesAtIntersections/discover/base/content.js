@@ -209,7 +209,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({}, [
-        'We want to |prove| this is always the case, therefore it is first useful to know the common names of different |angle pairs|.',
+        'We want to |prove| this is always the case. To do so, it is first useful to know the specific |angle pairs| that are |commonly| considered together.',
       ]),
     });
 
@@ -305,7 +305,7 @@ class Content extends PresentationLessonContent {
     this.addSection(common, {
       title: 'Alternate Angles',
       setContent: style({}, [
-        '|Alternate_angles| are the pair of |inside| angles, or pair of |outside| angles that are on |opposite| sides of the |intersecting_line|.',
+        '|Alternate_angles| are the pair of |outside| angles, or pair of |inside| angles that are on |opposite| sides of the |intersecting_line|.',
       ]),
       modifiers: {
         Alternate_angles: click(three.toggleAlternate, [three], colors.angle1),
