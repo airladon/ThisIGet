@@ -256,6 +256,9 @@ module.exports = (env) => {
               loader: path.resolve('/opt/app/math-loader.js'),
             },
             {
+              loader: path.resolve('/opt/app/post-markdown-loader.js'),
+            },
+            {
               loader: 'markdown-loader',
             },
             {

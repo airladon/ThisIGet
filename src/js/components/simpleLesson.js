@@ -86,10 +86,14 @@ const checkRatioButton = (button) => {
 };
 
 const toggleHint = (hint) => {
-  if (hint.parentElement == null) {
+  const parent = hint.parentElement;
+  if (parent == null) {
     return;
   }
-  const hintContent = hint.parentElement.querySelector('.lesson__hint_contents');
+  let hintContent = parent.querySelector('.lesson__hint_contents');
+  if (hintContent == null) {
+    hintContent = parent.querySelector('.lesson__hint_contents_low');
+  }
   if (hintContent == null) {
     return;
   }
@@ -281,6 +285,14 @@ export default class SimpleLessonComponent extends React.Component
     const hints = document.getElementsByClassName('lesson__hint_label');
     for (let i = 0; i < hints.length; i += 1) {
       const hint = hints[i];
+      hint.onclick = () => {
+        toggleHint(hint);
+      };
+    }
+
+    const lowHints = document.getElementsByClassName('lesson__hint_label_low');
+    for (let i = 0; i < lowHints.length; i += 1) {
+      const hint = lowHints[i];
       hint.onclick = () => {
         toggleHint(hint);
       };
