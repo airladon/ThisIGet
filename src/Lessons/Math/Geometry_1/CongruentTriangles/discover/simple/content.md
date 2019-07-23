@@ -60,7 +60,7 @@ What about if you know two properties? What are the different combinations of pr
 * two angles
 * one side and one angle
 
-</hintLow>
+</hintLow><div></div>
 
 Are any of these combinations suffient to determine if two triangles are congruent?
 
@@ -91,3 +91,31 @@ Knowing just a **side-side** combination is not enough:
 In this example, triangles ABD or ACD both have sides of value 1 and 1.2. In fact, the side of value 1 can be anywhere on the circle around D, forming many different triangles.
 
 </hintLow>
+
+### Three Properties
+
+What about if you know three properties? What are the different combinations of properties you might know? One combination is three sides, what are the others?
+
+<hintLow>[Answer] There are six combinations. Combinations are typlically denoted **property-property-property** where order is how they appear in the triangle.
+
+For example, if you have two angles and a side, it could either be **side-side-angle** or **side-angle-side**. The **side-angle-side** combination would consist of an angle between two sides like:
+
+![](side-angle-side.png)
+
+whereas **side-side-angle** would be an angle adjacent to just one of the sides:
+
+![](side-side-angle.png)
+
+The six combinations are:
+
+* side-side-side
+* angle-angle-angle
+* side-side-angle
+* side-angle-side
+* angle-angle-side
+* angle-side-angle
+
+</hintLow><div></div>
+
+Are any of these combinations suffient to determine if two triangles are congruent?
+

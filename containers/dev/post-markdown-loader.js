@@ -15,8 +15,7 @@ function parseHints(source) {
     } else {
       hint = content;
     }
-    const replacement = `
-  <div class="lesson__hint">
+    const replacement = `<div class="lesson__hint">
     <div class="lesson__hint_label">
       ${label} 
     </div>
@@ -45,8 +44,7 @@ function parseLowHints(source) {
     } else {
       hint = content;
     }
-    const replacement = `
-  <div class="lesson__hint">
+    const replacement = `<div class="lesson__hint_low">
     <div class="lesson__hint_label_low">
       ${label} 
     </div>
