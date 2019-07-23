@@ -1,4 +1,4 @@
-/* eslint-disable import/no-extraneous-dependencies */
+/* eslint-disable import/no-extraneous-dependencies, no-await-in-loop, no-restricted-syntax */
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import joinObjects from './tools';
@@ -68,9 +68,22 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
         await sleep(1000);
+
+        // Open all hints on a page
+        let hints = await page.$$('.lesson__hint_label');
+        for (const hint of hints) {
+          await hint.click();
+        }
+
+        hints = await page.$$('.lesson__hint_label_low');
+        for (const hint of hints) {
+          await hint.click();
+        }
+
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
+
         if (height === 'full') {
           await page.setViewport({ width, height: 1000 });
           const lessonContainerTemp = await page.$('#lesson__content');
@@ -85,6 +98,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         await page.evaluate((y) => {
           window.scrollTo(0, y);
         }, Math.floor(lessonBox.y));
+
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
           failureThreshold: threshold,             // 480 pixels

@@ -12,7 +12,10 @@ The angle $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\defin
 
 <hintLow>[Answer]
 
-$$\bbox[20px,border:1px solid red]{\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
+<!-- $$\bbox[20px,border:1px solid red]{\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
+ -->
+
+$${\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
 
 See this lesson's [Explanation](/Lessons/Math/Geometry_1/ExternalAngles/explanation/base) for the proof</hintLow>
 
