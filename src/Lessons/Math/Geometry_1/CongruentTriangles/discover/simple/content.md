@@ -1,24 +1,29 @@
-## External Angles of a Triangle
+### Congruent Triangles
 
-Consider a triangle with one of its sides extended beyond the corner.
+In mathematics, if **two shapes are the same size and shape**, then they are said to be **congruent**.
 
-![](./fig.png)
+The word **congruent** comes from _Latin_, where it means _"agreeing, meeting together"_.
 
-The angle $$\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,34,12}\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{100,100,100}\color{g}d$$ is an **external angle** (also called exterior angle). Can you find the relationship between angles $$\color{r}a$$, $$\color{r}b$$ and $$\color{g}d$$?
+For two triangles to be **congruent**, the corresponding **side lengths** and **angles** of each triangle must be the same as the other.
 
-<hint>[Hint 1]The sum of angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00A89D)) is 180º</hint>
+![](congruent.png)
 
-<hint>[Hint 2]Angles $$\color{gr}c$$ and $$\color{g}d$$ are [[supplementary]]((qr,'Math/Geometry_1/AngleGroups/base/Supplementary',#00A89D))</hint>
+Flipped and rotated triangles can still have the same corresponding sides and angles and therefore be congruent.
 
-<hintLow>[Answer]
+### Congruency Tests
 
-<!-- $$\bbox[20px,border:1px solid red]{\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
- -->
+The easy way to determine if two triangles are congruent is to measure all their sides and angles.
 
-$${\color{r}a\color{black}+\color{r}b\color{black}\color{black}=\color{g}d}$$
+But is there a faster way? What is the number of sides and/or angles you need to know to determine if two triangles are congruent?
 
-See this lesson's [Explanation](/Lessons/Math/Geometry_1/ExternalAngles/explanation/base) for the proof</hintLow>
+#### 1 Property
 
-How many external angles does a triangle have?
+If you just know a single side or angle, is that enough to know whether two triangles are congruent?
 
-<hintLow>[Answer]A triangle has **six** external angles: ![](./all.png)</hintLow>
+<hintLow>
+
+Another way to ask this is: if you fix one side (or angle), how many different triangles can you make?
+
+If the answer is just one, then you know if two triangles have one side that is the same length then they will be congruent.
+
+</hintLow>
