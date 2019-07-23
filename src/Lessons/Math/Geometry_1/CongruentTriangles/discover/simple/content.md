@@ -65,3 +65,29 @@ What about if you know two properties? What are the different combinations of pr
 Are any of these combinations suffient to determine if two triangles are congruent?
 
 <hintLow>Try drawing a side and an angle - can more than one triangle be built? ![](side-angle.png)</hintLow>
+
+<hintLow>Try drawing two angles - can more than one triangle be built? What if you change their separation? ![](angle-angle.png)</hintLow>
+
+<hint>When drawing two sides, remember the angle between them can be any angle</hint>
+
+<hintLow>[Answer] Many triangles can be made if you start with just **two properties**. Therefore, two properties are not sufficient to tell whether two triangles are congruent.
+
+Knowing just a **side-angle** combination is not enough:
+
+![](side-angle-tri.png)
+
+In this example, triangles ACD and ABD both share the same side and angle.
+
+Knowing just an **angle-angle** combination is not enough:
+
+![](angle-angle-tri.png)
+
+In this example, triangles ACD and ABE both share a 60º and 45º angle but are different sizes.
+
+Knowing just a **side-side** combination is not enough:
+
+![](side-side-tri.png)
+
+In this example, triangles ABD or ACD both have sides of value 1 and 1.2. In fact, the side of value 1 can be anywhere on the circle around D, forming many different triangles.
+
+</hintLow>
