@@ -1,4 +1,4 @@
-## Congruent Triangles
+## Congruent Shapes and Triangles
 
 In mathematics, if **two shapes are the same size and shape**, then they are said to be **congruent**.
 

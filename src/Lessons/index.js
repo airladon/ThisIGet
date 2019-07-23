@@ -529,6 +529,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of finding and using Congruent Triangles',
+            description: '',
+            htmlTitle: 'Examples on how to find and use congruent triangles',
+            htmlDescription: 'Examples showing how to identify congruent triangles, and then how to use the triangles to find unknown properties',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
