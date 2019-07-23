@@ -24,7 +24,7 @@ $$\color{r}a \color{black} = 45^\circ + 50^\circ = \bbox[10px,border:1px solid g
 
 #### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
 
-![](ex3.png)
+![](example3.png)
 
 There are several ways to calculate this. The way we will use is to see that angle $$\color{r}a$$ is an external angle of a triangle and the two internal opposite angles are 125º and the [[supplementary]]((qr,'Math/Geometry_1/AngleGroups/base/Supplementary',#00756F)) angle of 150º. Therefore:
 
