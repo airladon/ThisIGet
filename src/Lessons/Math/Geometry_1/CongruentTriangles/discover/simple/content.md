@@ -12,9 +12,11 @@ Flipped and rotated triangles can still have the same corresponding sides and an
 
 ## Congruency Tests
 
-The easy way to determine if two triangles are congruent is to measure all their sides and angles.
+The easy way to determine if two triangles are congruent is to measure all six sides and angles.
 
 But is there a faster way? What is the number of sides and/or angles you need to know to determine if two triangles are congruent?
+
+If the answer is less than six, then when you determine two triangles are congruent and you don't know all their properties, you may be able to infer one triangles unknown properties from the others known properties. 
 
 ### One Property
 
@@ -119,7 +121,10 @@ The six combinations are:
 
 Are any of these combinations suffient to determine if two triangles are congruent?
 
-<hint>Start with **side-angle-side** or **angle-side-angle**.
+<hint>**Some** of the three property cases will only produce one triangle and therefore be a sufficient test of congruency.
+</hint>
+
+<hint>Start with **side-angle-side** or **angle-side-angle**. Draw out the fixed properties, then see how many different triangles you can make from them.
 </hint>
 
 <hintLow>For **side-angle-side**, how many triangles can be constructed once you start with:
@@ -130,7 +135,37 @@ Are any of these combinations suffient to determine if two triangles are congrue
 ![](angle-side-angle.png)
 </hintLow>
 
+<hint>You might not be able to prove the **side-side-side** case yet, as it can be useful to know about [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles first. If you already know about isosceles triangles, then you can use them to simply the **side-side-side** case to **side-angle-side**</hint>
+
 <hint>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **angle-side-angle** case.
 </hint>
 
+<hint>Be careful with the **side-side-angle** case can only sometimes be a sufficient test of congruency. Can you figure out when?</hint>
 
+<hint>For **angle-angle-angle**, think about shrinking or zooming out from the triangle. As it gets smaller, do the angles change?</hint>
+
+<hintLow>[Answer]
+  The cases that can only make one triangle, and are therefore sufficient to determine if two triangles are congruent are:
+
+* side-side-side
+* angle-side-angle
+* side-angle-side
+* angle-angle-side
+
+The **side-side-angle** case is only sufficient if the side opposite to the known angle is longer than or equal to the side adjacent to the angle.
+
+The **angle-angle-angle** can produce many different sized triangles and is therefore insufficient.
+
+This lessons [Explanation](/Lessons/Math/Geometry_1/CongruentTriangles/explanation/base) explains why each case is either possible or not.
+</hintLow>
+
+### More than three properties
+
+What about if you know four or five properties? Are any of these combinations sufficeint to determine congruency?
+
+<hint>Do four and five combinations of properties have already known three property combinations?</hint>
+
+<hintLow>[Answer]
+All combinations of four or five properties have within them either three sides, or 
+one side and two angles. As **side-side-side**, **angle-angle-side** and **angle-side-angle** are all sufficient tests of congruency, then all combinations of four or five properties will also be sufficient tests of congruency.
+</hintLow>
