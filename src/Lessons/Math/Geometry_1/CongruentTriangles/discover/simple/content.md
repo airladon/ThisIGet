@@ -28,6 +28,10 @@ If the answer is just one, then you know if two triangles have one side that is 
 
 </hintLow>
 
+<hint>Try drawing a side - how can you build more than one triangle off that side?</hint>
+
+<hint>Try drawing an angle - how can you build more than one triangle off that angle?</hint>
+
 <hintLow>[Answer]
 
 If you start with just a single side, you can make more than one triangle. For example:
@@ -46,5 +50,18 @@ In fact, any number of triangles can be formed from either a single side or sing
 
 </hintLow>
 
+### Two Properties
 
+What about if you know two properties? What are the different combinations of properties you might know? One combination is two sides, what are the others?
 
+<hintLow>[Answer] The combinations are 
+
+* two sides
+* two angles
+* one side and one angle
+
+</hintLow>
+
+Are any of these combinations suffient to determine if two triangles are congruent?
+
+<hintLow>Try drawing a side and an angle - can more than one triangle be built? ![](side-angle.png)</hintLow>
