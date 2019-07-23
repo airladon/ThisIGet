@@ -2,7 +2,7 @@
 
 ### Example 1:
 
-#### Are these two triangles congrunet?
+#### Are these two triangles congruent?
 
 ![](ex1.png)
 
@@ -13,7 +13,7 @@ $$\bbox[10px,border:1px solid gray]{Yes}$$
 
 ### Example 2:
 
-#### Are these two triangles congrunet?
+#### Are these two triangles congruent?
 
 ![](ex2.png)
 
@@ -23,31 +23,31 @@ $$\bbox[10px,border:1px solid gray]{Not\ \ enough\ \ information}$$
 
 ### Example 3:
 
-#### Are these two triangles congrunet?
+#### Are these two triangles congruent?
 
 ![](ex3.png)
 
-Both triangles have the same corresponding **side-angle-side** combination. Even though they are mirror images of each other (flipped), they will have all the same corresponding angles and sides and so they are congruent.
+Both triangles have the same corresponding **SAS** combination. Even though they are mirror images of each other (flipped), they will have all the same corresponding angles and sides and so they are congruent.
 
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 
 ### Example 4:
 
-#### Are these two triangles congrunet?
+#### Are these two triangles congruent?
 
 ![](ex4.png)
 
-Both triangles have the same corresponding **angle-side-angle** combination. Therefore they are congruent.
+Both triangles have the same corresponding **ASA** combination. Therefore they are congruent.
 
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 
 ### Example 5:
 
-#### Are these two triangles congrunet?
+#### Are these two triangles congruent?
 
 ![](ex5.png)
 
-As presented, the triangles have two different sets of properties. The left has **angle-side-angle** while the one on the right is **angle-angle-side**.
+As presented, the triangles have two different sets of properties. The left has **ASA** while the one on the right is **AAS**.
 
 However, we also know the sum of angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) is 180º. Therefore, we can calculate the unknown angle in both triangles, and we will have four known properties in each triangle.
 
@@ -55,7 +55,7 @@ The unknown angle is the same for both triangles:
 
 $$180^\circ - 75^\circ - 30^\circ = 75^\circ$$
 
-We now have the same **angle-side-angle** property combination in both triangles and they are therefore congruent. (Note, we also have the same **angle-angle-side** combination in both triangles).
+We now have the same **ASA** property combination in both triangles and they are therefore congruent. (Note, we also have the same **AAS** combination in both triangles).
 
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 

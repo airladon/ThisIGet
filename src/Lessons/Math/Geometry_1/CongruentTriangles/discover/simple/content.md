@@ -8,7 +8,7 @@ For two triangles to be **congruent**, the corresponding **side lengths** and **
 
 ![](congruent.png)
 
-Flipped and rotated triangles can still have the same corresponding sides and angles and therefore be congruent.
+Flipped and rotated triangles still have the same corresponding sides and angles and therefore be congruent.
 
 ## Congruence Tests
 
@@ -16,7 +16,7 @@ The easy way to determine if two triangles are congruent is to measure all six s
 
 But is there a faster way? What is the number of sides and/or angles you need to know to determine if two triangles are congruent?
 
-If the answer is less than six, then when you determine two triangles are congruent and you don't know all their properties, you may be able to infer one triangles unknown properties from the others known properties. 
+If the answer is less than six, then when you determine two triangles are congruent and you don't know all their properties, you may be able to infer one triangle's unknown properties from the other's known properties. 
 
 ### One Property
 
@@ -40,7 +40,7 @@ If you start with just a single side, you can make more than one triangle. For e
 
 ![](1side.png)
 
-If you know one side (in this case of value 1), then triangles ABC and ABD can be built off that side.
+If you know one side (in this case of value 1), then triangles ABD and ACD can be built off that side.
 
 If you start with just a single angle, you can also make more than one triangle.
 
@@ -54,7 +54,7 @@ In fact, any number of triangles can be formed from either a single side or sing
 
 ### Two Properties
 
-What about if you know two properties? What are the different combinations of properties you might know? One combination is two sides, what are the others?
+What about if you know two properties? Firstly, what are the different combinations of properties? One combination is two sides, what are the others?
 
 <hintLow>[Answer] The combinations are 
 
@@ -68,7 +68,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 
 <hintLow>Try drawing a side and an angle - can more than one triangle be built? ![](side-angle.png)</hintLow>
 
-<hintLow>Try drawing two angles - can more than one triangle be built? What if you change their separation? ![](angle-angle.png)</hintLow>
+<hintLow>Try drawing two angles - can more than one triangle be built? What if you change the separation of the angles? ![](angle-angle.png)</hintLow>
 
 <hint>When drawing two sides, remember the angle between them can be any angle</hint>
 
@@ -78,7 +78,7 @@ Knowing just a **side-angle** combination is not enough:
 
 ![](side-angle-tri.png)
 
-In this example, triangles ACD and ABD both share the same side and angle.
+In this example, triangles ABD and ACD both share the same side and angle.
 
 Knowing just an **angle-angle** combination is not enough:
 
@@ -96,26 +96,28 @@ In this example, triangles ABD or ACD both have sides of value 1 and 1.2. In fac
 
 ### Three Properties
 
-What about if you know three properties? What are the different combinations of properties you might know? One combination is three sides, what are the others?
+What about if you know three properties? Firstly, what are the different combinations of properties? One combination is three sides, what are the others?
 
-<hintLow>[Answer] There are six combinations. Combinations are typlically denoted **property-property-property** where order is how they appear in the triangle.
+<hintLow>[Answer] There are six combinations. Combinations are typlically denoted **property-property-property** or **PPP** where order is how they appear in the triangle.
 
-For example, if you have two angles and a side, it could either be **side-side-angle** or **side-angle-side**. The **side-angle-side** combination would consist of an angle between two sides like:
+For example, if you have two angles and a side, it could either be **side-side-angle** (**SSA**) or **side-angle-side** (**SAS**). The **SAS** combination would consist of an angle between two sides like:
 
 ![](side-angle-side.png)
 
-whereas **side-side-angle** would be an angle adjacent to just one of the sides:
+whereas **SSA** would be an angle adjacent to just one of the sides:
 
 ![](side-side-angle.png)
 
 The six combinations are:
 
-* side-side-side
-* angle-angle-angle
-* side-side-angle
-* side-angle-side
-* angle-angle-side
-* angle-side-angle
+* side-side-side (SSS)
+* angle-angle-angle (AAA)
+* side-side-angle (SSA)
+* side-angle-side (SAS)
+* angle-angle-side (AAS)
+* angle-side-angle (AAA)
+
+Note that **angle-side-side** is the same as **side-side-angle** as in both an angle is adjacent to only one side. Similarly **angle-angle-side** is the same as **side-angle-angle**.
 
 </hintLow><div></div>
 
@@ -124,48 +126,50 @@ Are any of these combinations suffient to determine if two triangles are congrue
 <hint>**Some** of the three property cases will only produce one triangle and therefore be a sufficient test of congruence.
 </hint>
 
-<hint>Start with **side-angle-side** or **angle-side-angle**. Draw out the fixed properties, then see how many different triangles you can make from them.
+<hint>Start with **SAS** or **ASA**. Draw out the fixed properties, then see how many different triangles you can make from them.
 </hint>
 
-<hintLow>For **side-angle-side**, how many triangles can be constructed once you start with:
+<hintLow>For **SAS**, how many triangles can be constructed once you start with:
 ![](side-angle-side.png)
 </hintLow>
 
-<hintLow>For **angle-side-angle**, how many triangles can be constructed once you start with:
+<hintLow>For **ASA**, how many triangles can be constructed once you start with:
 ![](angle-side-angle.png)
 </hintLow>
 
-<hint>You might not be able to prove the **side-side-side** case yet, as it can be useful to know about [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles first. If you already know about isosceles triangles, then you can use them to simply the **side-side-side** case to **side-angle-side**</hint>
+<hint>The **SSS** case can either be proven from **SAS**, **ASA** or a combination of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later lesson in learning path) and **SAS**.</hint>
 
-<hint>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **angle-side-angle** case.
+<hint>For **AAS**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **ASA** case.
 </hint>
 
-<hint>Be careful with the **side-side-angle** case can only sometimes be a sufficient test of congruence. Can you figure out when?</hint>
+<hint>Be careful with the **SSA** case as it can only **sometimes** be a sufficient test of congruence. Can you figure out when?</hint>
 
-<hint>For **angle-angle-angle**, think about shrinking or zooming out from the triangle. As it gets smaller, do the angles change?</hint>
+<hint>For **AAA**, think about shrinking or zooming out from the triangle. As it gets smaller, do the angles change?</hint>
 
 <hintLow>[Answer]
   The cases that can only make one triangle, and are therefore sufficient to determine if two triangles are congruent are:
 
-* side-side-side
-* angle-side-angle
-* side-angle-side
-* angle-angle-side
+* SSS
+* ASA
+* SAS
+* AAS
 
-The **side-side-angle** case is only sufficient if the side opposite to the known angle is longer than or equal to the side adjacent to the angle.
+The **SSA** case is only sufficient if the side opposite to the known angle is longer than or equal to the side adjacent to the angle.
 
-The **angle-angle-angle** can produce many different sized triangles and is therefore insufficient.
+The **AAA** can produce many different sized triangles and is therefore insufficient.
 
-This lessons [Explanation](/Lessons/Math/Geometry_1/CongruentTriangles/explanation/base) explains why each case is either possible or not.
+This lesson's [Explanation](/Lessons/Math/Geometry_1/CongruentTriangles/explanation/base) explains how each case is possible or not.
+
+The **SSS** case is shown using isosceles trianglese [here](/Lessons/Math/Geometry_1/SideSideSide/explanation/base).
 </hintLow>
 
 ### More than three properties
 
 What about if you know four or five properties? Are any of these combinations sufficeint to determine congruence?
 
-<hint>Do four and five combinations of properties have already known three property combinations?</hint>
+<hint>Do four and five combinations of properties have the known three property combinations?</hint>
 
 <hintLow>[Answer]
 All combinations of four or five properties have within them either three sides, or 
-one side and two angles. As **side-side-side**, **angle-angle-side** and **angle-side-angle** are all sufficient tests of congruence, then all combinations of four or five properties will also be sufficient tests of congruence.
+one side and two angles. As **SSS**, **AAS** and **ASA** are all sufficient tests of congruence, then all combinations of four or five properties will also be sufficient tests of congruence.
 </hintLow>

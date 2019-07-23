@@ -176,6 +176,50 @@
     "versionUID": "base"
   },
   {
+    "url": "https://www.mathsisfun.com/geometry/triangles-congruent.html",
+    "hash": "2a8c9775deab1b5021d8b6e8ac5d81ec",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Description of congruent triangles with quiz",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/geometry/triangles-congruent-finding.html",
+    "hash": "fdb8189040b7a8486ab89f5c9c2023da",
+    "publisher": "Math is fun",
+    "type": "generic",
+    "description": "How to find if triangles are congruent",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://en.wikipedia.org/wiki/Congruence_(geometry)",
+    "hash": "f774614b44d7fae207240742dddfc543",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "Congruence (geometry) including triangles and tests",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://mathbitsnotebook.com/Geometry/CongruentTriangles/CTtriangleMethods.html",
+    "hash": "f76e7884894044f1cf8874334964c356",
+    "publisher": "MathBitsNotebook",
+    "type": "generic",
+    "description": "Methods of Proving Triangles Congruent",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://en.wikipedia.org/wiki/Degree_(angle)",
     "hash": "c73e128e478447d3e1756186d0e4a2d8",
     "publisher": "Wikipedia",
