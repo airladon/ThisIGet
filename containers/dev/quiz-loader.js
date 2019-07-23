@@ -97,6 +97,53 @@ function parseQuiz(source) {
   return out;
 }
 
+// function parseHints(source) {
+//   const re = /<hint>([\s\S]*?)<\/hint>/;
+//   let out = source;
+//   let match = re.exec(out);
+//   while (match != null) {
+//     const { index } = match;
+//     const [str, content] = match;
+//     const m = content.match(/\[([^\]]*)\](.*)/);
+//     let hint = '';
+//     let label = 'Hint';
+//     if (m != null) {
+//       [, label, hint] = m;
+//     } else {
+//       hint = content;
+//     }
+//     const replacement = `
+//   <div class="lesson__hint">
+//     <div class="lesson__hint_label">
+//       ${label} 
+//     </div>
+//     <div class="lesson__hint_contents lesson__hint_hidden">
+//       ${hint}
+//     </div>
+//   </div>`;
+//     out = `${out.substring(0, index)}${replacement}${out.substring(index + str.length)}`;
+//     match = re.exec(out);
+//   }
+//   return out;
+// }
+
+// function parseLinks(source) {
+//   const re = /\[([^[][^\]]*)\]\(([^)]*)\)/;
+//   let out = source;
+//   let match = re.exec(out);
+//   while (match != null) {
+//     const { index } = match;
+//     const [str, label, link] = match;
+//     const replacement = `
+//   <a class="lesson__link" href=${link} rel="noreferrer noopener" target="_blank">
+//     ${label}
+//   </a>`;
+//     out = `${out.substring(0, index)}${replacement}${out.substring(index + str.length)}`;
+//     match = re.exec(out);
+//   }
+//   return out;
+// }
+
 function convertID(str) {
   const contents = str.trim().replace(/^\$\|/, '').replace(/\|\$$/, '');
   let tag = 'span';
@@ -130,6 +177,8 @@ function parseIDs(source) {
 // and replaces them with <a> links
 async function quizparser(callback, source, map, meta) {
   let out = source;
+  // out = parseHints(out);
+  // out = parseLinks(out);
   out = parseQuiz(out);
   out = parseIDs(out);
   callback(null, out, map, meta);

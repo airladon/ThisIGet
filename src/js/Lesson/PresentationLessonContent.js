@@ -980,7 +980,7 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   link(address: string, options: Object = {}) {
-    return link(`${window.location.origin}/Lessons/${address.replace(/^\//, '').replace(/\/$/, '')}`, options);
+    return link(`${window.location.origin}/Lessons/${address.replace(/^\//, '').replace(/\/$/, '')}`, joinObjects({}, { newTab: false }, options));
   }
 
   addStar() {

@@ -235,8 +235,8 @@ export default class LinksTable extends React.Component
       const title = <a
           className="lesson__links_table__title_text"
           href={link.url}
-          rel='noreferrer noopener'
-          target="_blank"
+          // rel='noreferrer noopener'
+          // target="_blank"
         >
         {link.title}
       </a>;

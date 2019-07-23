@@ -165,6 +165,7 @@ else
     -v $PROJECT_PATH/containers/dev/math-loader.js:/opt/app/math-loader.js \
     -v $PROJECT_PATH/containers/dev/quiz-loader.js:/opt/app/quiz-loader.js \
     -v $PROJECT_PATH/containers/dev/link-loader.js:/opt/app/link-loader.js \
+    -v $PROJECT_PATH/containers/dev/post-markdown-loader.js:/opt/app/post-markdown-loader.js \
     -v $PROJECT_PATH/tests:/opt/app/tests \
     -v $PROJECT_PATH/app:/opt/app/app \
     -v $PROJECT_PATH/src:/opt/app/src \
