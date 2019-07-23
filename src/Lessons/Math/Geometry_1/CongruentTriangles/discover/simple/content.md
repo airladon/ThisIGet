@@ -130,7 +130,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 ![](angle-side-angle.png)
 </hintLow>
 
-<hintLow>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,Math/Geometry_1/Triangles/base/TotalAnglePres)) to get to the **angle-side-angle** case.
-</hintLow>
+<hint>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **angle-side-angle** case.
+</hint>
 
 
