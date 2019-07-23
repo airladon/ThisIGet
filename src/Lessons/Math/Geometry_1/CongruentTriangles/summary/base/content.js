@@ -68,10 +68,10 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         `<p class="lesson__font_0p9">
-          There are also some combinations of |three properties| that can show congruency.
+          There are also some combinations of |three properties| that can show congruence.
         </p>
         <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40" style="margin-top: 3%">
-        <b>CAN</b> guarantee congruency.
+        <b>CAN</b> guarantee congruence.
         </div>
           <ul class="lesson__congruent_angles_summary__list">
             <li>|SAS|</li>
@@ -80,13 +80,13 @@ class Content extends PresentationLessonContent {
             <li>|AAS|</li>
           </ul>
         <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40">
-        Can <b>SOMETIMES</b> guarantee congruency.
+        Can <b>SOMETIMES</b> guarantee congruence.
         </div>
           <ul class="lesson__congruent_angles_summary__list">
             <li>|SSA|</li>
           </ul>
         <div class="lesson__congruent_angles_summary__sub_title lesson__diagram_text_p_width_40">
-        <b>CANNOT</b> guarantee congruency.
+        <b>CANNOT</b> guarantee congruence.
         </div>
           <ul class="lesson__congruent_angles_summary__list">
             <li>|AAA|</li>

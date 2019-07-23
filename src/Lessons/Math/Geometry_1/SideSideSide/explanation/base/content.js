@@ -51,7 +51,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection({
       setContent: style({ centerV: true, size: 0.9 }, [
-        'For instance, if two triangles share the same |two angles|, and |one relatively positioned side|, then they are |congruent|. These cases are called the |Angle-Side-Angle| and |Angle-Angle-Side| congruency tests.',
+        'For instance, if two triangles share the same |two angles|, and |one relatively positioned side|, then they are |congruent|. These cases are called the |Angle-Side-Angle| and |Angle-Angle-Side| congruence tests.',
         'If the triangles share the same angle and adjacent two sides (|Side-Angle-Side|), they are also congruent.',
         'If triangles share the same angle, adjacent side and opposite side (|Side-Side-Angle|) they are congruent only when the adjacent side is shorter than or equal to the opposite side.',
         'If triangles share the same angles only, then they cannot be determined to be congruent (|Angle-Angle-Angle|).',
@@ -65,7 +65,7 @@ class Content extends PresentationLessonContent {
       },
     });
     this.addSection({
-      title: 'Side-Side-Side Congruency',
+      title: 'Side-Side-Side Congruence',
       setContent: style({}, [
         'The remaining combination of properties is when you only know |three side lengths|. How many triangles can be made?',
       ]),
@@ -459,7 +459,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: 'Finally, we can use the |Side-Angle-Side| congruency test to see the |top| and |bottom| triangles are the |same|.',
+      setContent: 'Finally, we can use the |Side-Angle-Side| congruence test to see the |top| and |bottom| triangles are the |same|.',
       modifiers: {
         'Side-Angle-Side': this.qr(
           'Math/Geometry_1/CongruentTriangles/base/Sas', colors.diagram.action,

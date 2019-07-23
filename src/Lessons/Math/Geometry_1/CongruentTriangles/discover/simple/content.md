@@ -10,7 +10,7 @@ For two triangles to be **congruent**, the corresponding **side lengths** and **
 
 Flipped and rotated triangles can still have the same corresponding sides and angles and therefore be congruent.
 
-## Congruency Tests
+## Congruence Tests
 
 The easy way to determine if two triangles are congruent is to measure all six sides and angles.
 
@@ -121,7 +121,7 @@ The six combinations are:
 
 Are any of these combinations suffient to determine if two triangles are congruent?
 
-<hint>**Some** of the three property cases will only produce one triangle and therefore be a sufficient test of congruency.
+<hint>**Some** of the three property cases will only produce one triangle and therefore be a sufficient test of congruence.
 </hint>
 
 <hint>Start with **side-angle-side** or **angle-side-angle**. Draw out the fixed properties, then see how many different triangles you can make from them.
@@ -140,7 +140,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 <hint>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **angle-side-angle** case.
 </hint>
 
-<hint>Be careful with the **side-side-angle** case can only sometimes be a sufficient test of congruency. Can you figure out when?</hint>
+<hint>Be careful with the **side-side-angle** case can only sometimes be a sufficient test of congruence. Can you figure out when?</hint>
 
 <hint>For **angle-angle-angle**, think about shrinking or zooming out from the triangle. As it gets smaller, do the angles change?</hint>
 
@@ -161,11 +161,11 @@ This lessons [Explanation](/Lessons/Math/Geometry_1/CongruentTriangles/explanati
 
 ### More than three properties
 
-What about if you know four or five properties? Are any of these combinations sufficeint to determine congruency?
+What about if you know four or five properties? Are any of these combinations sufficeint to determine congruence?
 
 <hint>Do four and five combinations of properties have already known three property combinations?</hint>
 
 <hintLow>[Answer]
 All combinations of four or five properties have within them either three sides, or 
-one side and two angles. As **side-side-side**, **angle-angle-side** and **angle-side-angle** are all sufficient tests of congruency, then all combinations of four or five properties will also be sufficient tests of congruency.
+one side and two angles. As **side-side-side**, **angle-angle-side** and **angle-side-angle** are all sufficient tests of congruence, then all combinations of four or five properties will also be sufficient tests of congruence.
 </hintLow>

@@ -1410,7 +1410,7 @@ export default function lessonIndex() {
       enabled: true,
     },
     SideSideSide: {
-      title: 'Side-Side-Side Congruency',
+      title: 'Side-Side-Side Congruence',
       path: '/Lessons/Math/Geometry_1',
       uid: 'SideSideSide',
       topics: {

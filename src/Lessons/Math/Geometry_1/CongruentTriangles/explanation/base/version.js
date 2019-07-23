@@ -6,8 +6,8 @@ var version = {
   topic: 'explanation',
   title: 'Full explanation',
   description: '',
-  htmlTitle: 'Congruent triangles and how to determine congruency',
-  htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruency tests',
+  htmlTitle: 'Congruent triangles and how to determine congruence',
+  htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
   fullLesson: true,
   type: 'presentation',
 };

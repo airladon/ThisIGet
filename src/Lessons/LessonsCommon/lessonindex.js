@@ -1268,7 +1268,7 @@ export default function getLessonIndex() {
       enabled: true,
     }),
     SideSideSide: new LessonDescription({
-      title: 'Side-Side-Side Congruency',
+      title: 'Side-Side-Side Congruence',
       path: '/Lessons/Math/Geometry_1',
       uid: 'SideSideSide',
       topics: {

@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var lessonDetails = {
-  title: 'Side-Side-Side Congruency',
+  title: 'Side-Side-Side Congruence',
   dependencies: [
     'Isosceles',
   ],

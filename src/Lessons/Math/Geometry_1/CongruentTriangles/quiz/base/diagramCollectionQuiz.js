@@ -48,11 +48,11 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
         },
         ssa: {
           answer: 'Incorrect',
-          details: 'Side-Side-Angle does not guarantee congruency if the angle\'s opposite side is longer than the adjacent side.',
+          details: 'Side-Side-Angle does not guarantee congruence if the angle\'s opposite side is longer than the adjacent side.',
         },
         aaa: {
           answer: 'Incorrect',
-          details: 'Angle-Angle-Angle does not guarantee congruency as triangles with the same angles can be different sizes.',
+          details: 'Angle-Angle-Angle does not guarantee congruence as triangles with the same angles can be different sizes.',
         },
         // sas: {
         //   answer: 'Incorrect',

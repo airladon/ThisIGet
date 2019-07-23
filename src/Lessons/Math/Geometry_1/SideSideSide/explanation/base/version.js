@@ -6,7 +6,7 @@ var version = {
   topic: 'explanation',
   title: 'Full explanation',
   description: '',
-  htmlTitle: 'Proof for Side Side Side triangle congruency',
+  htmlTitle: 'Proof for Side Side Side triangle congruence',
   htmlDescription: 'Proof for SSS or side-side-side congruent triangles',
   fullLesson: true,
   type: 'presentation',

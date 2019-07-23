@@ -157,7 +157,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'In many cases you only need |3 properties| to determine congruency. For the cases where 3 is insufficient, 4 will always work.',
+        'In many cases you only need |3 properties| to determine congruence. For the cases where 3 is insufficient, 4 will always work.',
         'Therefore, we will examine all the different combinations of three properties, and see which ones can be used to determine two triangles sharing those properties are congruent.',
       ]),
     });
@@ -991,7 +991,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Side Side',
       setContent: style({ centerV: true, size: 0.9 }, [
-        'We have now seen whether we can determine congruency from |most| combinations of |three properties| including:',
+        'We have now seen whether we can determine congruence from |most| combinations of |three properties| including:',
         style({ left: 3, list: 'unordered', size: 0.9 }, [
           'All angles - |Angle-Angle-Angle|',
           'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',

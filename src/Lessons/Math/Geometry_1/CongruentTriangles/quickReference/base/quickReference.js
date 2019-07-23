@@ -90,7 +90,7 @@ export class QRAaa extends PopupBoxCollection {
       different_side_lengths: highlight(colors.qrCongruent_sides),
       three_angles: highlight(colors.qrCongruent_angles),
     };
-    this.setTitle('AAA Congruency');
+    this.setTitle('AAA Congruence');
     this.setDescription(['Triangles with the same |three_angles| can have |different_side_lengths|. Therefore knowing two triangles have the same three angles is |not sufficient to determine if they are congruent|.',
     ], modifiers);
     this.setLink(`${details.path}/${details.uid}/explanation/base?page=1`);
@@ -139,7 +139,7 @@ export class QRSas extends PopupBoxCollection {
       two_sides_of_the_same_length: highlight(colors.qrCongruent_sides),
       three_angles: highlight(colors.qrCongruent_angles),
     };
-    this.setTitle('SAS Congruency');
+    this.setTitle('SAS Congruence');
     this.setDescription([
       'If two triangles share |two_sides_of_the_same_length|, and the |angle_between| those two sides is also the same on both triangles, then the triangles |are congruent|. This case is often called the |Side Angle Side| case.',
     ], modifiers);
@@ -188,7 +188,7 @@ export class QRSsa extends PopupBoxCollection {
     const modifiers = {
       angle_a: highlightWord('angle (a)', colors.qrCongruent_angles),
     };
-    this.setTitle('SSA Congruency');
+    this.setTitle('SSA Congruence');
     this.setDescription([
       'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|. This case is often called the |Side Side Angle| case.',
     ], modifiers);
@@ -238,7 +238,7 @@ export class QRAsa extends PopupBoxCollection {
       two_angles: highlight(colors.qrCongruent_angles),
       side_between: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('ASA Congruency');
+    this.setTitle('ASA Congruence');
     this.setDescription([
       'If two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
       'This case is often called the |Angle Side Angle| case.',
@@ -289,7 +289,7 @@ export class QRAas extends PopupBoxCollection {
       two_angles: highlight(colors.qrCongruent_angles),
       side_not_between: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('AAS Congruency');
+    this.setTitle('AAS Congruence');
     this.setDescription([
       'If two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|. This case is often called the |Angle Angle Side| case.',
     ], modifiers);
@@ -339,7 +339,7 @@ export class QRSss extends PopupBoxCollection {
     const modifiers = {
       side_lengths: highlight(colors.qrCongruent_sides),
     };
-    this.setTitle('SSS Congruency');
+    this.setTitle('SSS Congruence');
     this.setDescription([
       'If two triangles share the same |side_lengths|, then they will be |congruent|. This case is often called the |Side Side Side| case.',
     ], modifiers);
