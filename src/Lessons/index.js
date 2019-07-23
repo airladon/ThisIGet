@@ -519,6 +519,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'CongruentTriangles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the relationship between the external and internal angles of a triangle',
+            htmlDescription: 'Using knowledge of total angle in a triangle, and supplementary angles you can find the relationship between a triangle\'s external angle and its two opposite internal angles',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
