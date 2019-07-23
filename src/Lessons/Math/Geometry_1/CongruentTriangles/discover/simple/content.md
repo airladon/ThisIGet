@@ -119,3 +119,18 @@ The six combinations are:
 
 Are any of these combinations suffient to determine if two triangles are congruent?
 
+<hint>Start with **side-angle-side** or **angle-side-angle**.
+</hint>
+
+<hintLow>For **side-angle-side**, how many triangles can be constructed once you start with:
+![](side-angle-side.png)
+</hintLow>
+
+<hintLow>For **angle-side-angle**, how many triangles can be constructed once you start with:
+![](angle-side-angle.png)
+</hintLow>
+
+<hintLow>For **angle-angle-side**, use the total angle of a [[triangle]]((qr,Math/Geometry_1/Triangles/base/TotalAnglePres)) to get to the **angle-side-angle** case.
+</hintLow>
+
+
