@@ -11,7 +11,7 @@ Similarly **quadrilateral** comes from the latin words _quattuor_ and _latus, la
 
 ## Total Internal Angle
 
-Similar to how a [[triangle's]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) angles always sum to 180º, a quadrangle's angles also always add to the same angle.
+Similar to how a [[triangle's]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) angles always sum to 180º, a quadrangle's angles also always add to the same angle.
 
 Can you prove what that angle is?
 
