@@ -849,6 +849,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'Isosceles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover why an isosceles triangles can have two equal sides and angles',
+            htmlDescription: 'Figure out why any triangle that has two equal sides also has two equal angles, and why any triangle with two equal angles has two equal sides',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Isosceles Triangles',
+            description: '',
+            htmlTitle: 'Examples of using isosceles triangles',
+            htmlDescription: 'Examples showing how how to use the properties of an isosceles triangle to solve different problems',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -857,6 +877,16 @@ export default function lessonIndex() {
             htmlTitle: 'Isosceles triangles and proof',
             htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to isosceles triangles',
+            htmlTitle: 'Isosceles triangles links',
+            htmlDescription: 'External sources of information about isosceles triangles',
+            fullLesson: false,
           },
         },
         dev: {
