@@ -1142,6 +1142,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for quadrangles and quadrilaterals',
+            htmlTitle: 'Links for quadrangles and quadrilaterals',
+            htmlDescription: 'Links with explanations, examples and proofs quadrangles and quadrilaterals',
+            fullLesson: false,
+          },
+        },
         dev: {
           base: {
             type: 'presentation',

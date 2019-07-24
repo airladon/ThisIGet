@@ -363,6 +363,39 @@
     "versionUID": "base"
   },
   {
+    "url": "https://en.wikipedia.org/wiki/Quadrilateral",
+    "hash": "fc2ac8d683e530099f0874a7fadf9d70",
+    "publisher": "Wikipedia",
+    "type": "generic",
+    "description": "General information about Quadrilaterals",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Quadrangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathsisfun.com/quadrilaterals.html",
+    "hash": "1728c3c5b2dfa4e71813c1b73ea6fdb3",
+    "publisher": "Math is Fun",
+    "type": "generic",
+    "description": "Quadrilateral definition, properties and types",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Quadrangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.splashmath.com/math-vocabulary/geometry/quadrilateral",
+    "hash": "08a8ba5c30a740c86a64ed216e1e726c",
+    "publisher": "Splash Math",
+    "type": "generic",
+    "description": "Quadrilateral definition",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Quadrangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://www.mathsisfun.com/geometry/radians.html",
     "hash": "9b086edae77c2b906f10c75b68f24c31",
     "publisher": "Math is Fun",
