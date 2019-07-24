@@ -331,7 +331,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: 'Therefore, using |Angle-Angle-Side| the congruence test, we can see the two |triangles| are |congruent|.',
+      setContent: 'Therefore, using |Angle-Angle-Side| congruence test, we can see the two |triangles| are |congruent|.',
       modifiers: {
         'Angle-Angle-Side': this.qr('Math/Geometry_1/CongruentTriangles/base/Aas'),
         triangles: click(coll.toggleTriangles, [coll], colors.sides),
