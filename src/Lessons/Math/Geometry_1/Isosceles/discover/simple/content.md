@@ -35,7 +35,7 @@ Each triangle has the same side-angle-side (A-b-L) combination, and so using [[S
 
 If the triangles are congruent, then all their angles must be equal, and thus the angles opposite the equal sides must be equal.
 
-**All isosceles triangles have two equal sides and two equal angles opposite the equal sides.**
+**Therefore all isosceles triangles have two equal sides and two equal angles opposite the equal sides.**
 
 A more descriptive explanation of this can be found in this lesson's [Explanation](/Lessons/Math/Geometry_1/Isosceles/explanation/base?page=4)
 
@@ -53,12 +53,12 @@ Each triangle has the same angle-angle-side (c-b-L) combination, and so using [[
 
 If the triangles are congruent, then all their sides must be equal, and thus the sides opposite the equal angles must be equal.
 
-**All triangles that have two equal angles are isosceles triangles and have two equal sides.**
+**Therefore all triangles that have two equal angles are isosceles triangles and have two equal sides.**
 
 A more descriptive explanation of this can be found in this lesson's [Explanation](/Lessons/Math/Geometry_1/Isosceles/explanation/base?page=24)
 </hintLow>
 
-If you know a triangle is an isosceles, and you know which sides are the same, how many angles do you need to know to calculate all three?
+If you know a triangle is an isosceles triangle, and you know which sides are the same, how many angles do you need to know to calculate all three?
 
 <hintLow>[Answer]You only need to know one angle to calculate all three.
 
@@ -66,7 +66,7 @@ If you know a triangle is an isosceles, and you know which sides are the same, h
 
 As all angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) add to 180 and as two angles are the same, then we have:
 
-$$180º = c + c + a$$
+$$180^\circ = c + c + a$$
 
 Therefore:
 
