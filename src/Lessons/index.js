@@ -407,14 +407,44 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'CongruentTriangles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover congruent triangles and how you can test if two triangles are the same',
+            htmlDescription: 'Given the definition of congruent, you can work out the tests to tell if two triangles are congruent',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of finding and using Congruent Triangles',
+            description: '',
+            htmlTitle: 'Examples on how to find and use congruent triangles',
+            htmlDescription: 'Examples showing how to identify congruent triangles, and then how to use the triangles to find unknown properties',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
             title: 'Full explanation',
             description: '',
-            htmlTitle: 'Congruent triangles and how to determine congruency',
-            htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruency tests',
+            htmlTitle: 'Congruent triangles and how to determine congruence',
+            htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for congruent triangles',
+            htmlTitle: 'Congruent triangles links',
+            htmlDescription: 'Various external links covering definition and examples congruent triangles and how to test for them',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -830,6 +860,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'Quadrangles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the total internal angle of a quadrangle',
+            htmlDescription: 'Figure out the total internal angle of a quadrangle or quadrilateral yourself',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Quadrangle internal angle calculations',
+            description: '',
+            htmlTitle: 'Quadrangle or Quadrilateral interal angle calculation examples',
+            htmlDescription: 'Examples of geometries where calculating the total internal angle of a quadrangle is needed',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -838,6 +888,16 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to quadrangles and quadrilaterals',
             htmlDescription: 'Quadrangles, quadrilaterals and their properties',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for quadrangles and quadrilaterals',
+            htmlTitle: 'Links for quadrangles and quadrilaterals',
+            htmlDescription: 'Links with explanations, examples and proofs quadrangles and quadrilaterals',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -1068,7 +1128,7 @@ export default function lessonIndex() {
       enabled: true,
     },
     SideSideSide: {
-      title: 'Side-Side-Side Congruency',
+      title: 'Side-Side-Side Congruence',
       path: '/Lessons/Math/Geometry_1',
       uid: 'SideSideSide',
       topics: {
@@ -1077,7 +1137,7 @@ export default function lessonIndex() {
             type: 'presentation',
             title: 'Full explanation',
             description: '',
-            htmlTitle: 'Proof for Side Side Side triangle congruency',
+            htmlTitle: 'Proof for Side Side Side triangle congruence',
             htmlDescription: 'Proof for SSS or side-side-side congruent triangles',
             fullLesson: true,
           },

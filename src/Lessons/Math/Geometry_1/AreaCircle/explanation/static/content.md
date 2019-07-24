@@ -16,7 +16,7 @@ Six equal triangles can be formed from the 6 pieces.
 
 These triangles **approximate** a circle. The area of the appoximation is **less** than the area of a circle, but it is a start.
 
-Each triangle is formed from the same angle ($$\definecolor{g}{RGB}{29,177,0}\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,4,12}\definecolor{v}{RGB}{239,95,167}\color{v}60^\circ$$) near the circle center, surrounded by the same side lengths ($$\color{b}r$$). Using the **Side-Angle-Side** congruency test, we know therefore that these triangles are all equal.
+Each triangle is formed from the same angle ($$\definecolor{g}{RGB}{29,177,0}\definecolor{b}{RGB}{0,162,255}\definecolor{r}{RGB}{238,4,12}\definecolor{v}{RGB}{239,95,167}\color{v}60^\circ$$) near the circle center, surrounded by the same side lengths ($$\color{b}r$$). Using the **Side-Angle-Side** congruence test, we know therefore that these triangles are all equal.
 
 ![](./03a_Triangles.png)
 
