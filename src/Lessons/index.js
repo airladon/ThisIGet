@@ -1310,6 +1310,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to introductions to rectangles and squares',
+            htmlTitle: 'Rectangle and square introduction links',
+            htmlDescription: 'External links covering an introduction to rectangles and squares',
+            fullLesson: false,
+          },
+        },
         dev: {
           base: {
             type: 'presentation',
