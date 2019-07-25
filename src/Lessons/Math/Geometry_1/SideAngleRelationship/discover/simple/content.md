@@ -13,5 +13,8 @@ Here are several triangles:
 <hintLow>[Answer]
 The side opposite the largest angle is always longest, while the side opposite the smallest angle is always the shortest.
 </hintLow>
+
+Can you prove this?
+
 <!-- This can be seen in more detail in this lesson's [Explanation](/Lessons/Math/Geometry_1/Equilateral/explanation/base?page=1)
  -->
