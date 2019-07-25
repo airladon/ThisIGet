@@ -1614,6 +1614,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of SSS congruent triangles',
+            description: '',
+            htmlTitle: 'SSS triangle congruence examples',
+            htmlDescription: 'Use SSS triangle congruence to solve different geometries',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',

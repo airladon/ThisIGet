@@ -59,19 +59,5 @@ We now have the same **ASA** property combination in both triangles and they are
 
 $$\bbox[10px,border:1px solid gray]{Yes}$$
 
-### Example 6:
 
-#### What is the size of angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ in degrees?
-
-![](ex6.png)
-
-Even though one of the triangles sides (the middle diagonal) doesn't have a length, both triangles share it as a side.
-
-Therefore, we know both triangles share all the same side lengths and are congruent. As they are congruent, we know that the corresponding angles must also be the same.
-
-In the top triangle, angle $$\definecolor{r}{RGB}{238,34,12}\color{r}a$$ is opposite the side with length 3. On the bottom triangle, the side with length 3 is opposite the angle 25º.
-
-Therefore:
-
-$$\color{r}a \color{black} = \bbox[10px,border:1px solid gray]{25^\circ}$$
 
