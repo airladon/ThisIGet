@@ -263,6 +263,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'Area',
       topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of area',
+            description: '',
+            htmlTitle: 'Area examples',
+            htmlDescription: 'Calculation examples of areas for different shapes',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -271,6 +281,16 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to area, rectangle area and square area',
             htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to Area',
+            htmlTitle: 'Introduction to Area Links',
+            htmlDescription: 'External links covering an introduction to area, and areas of rectangles and squares',
+            fullLesson: false,
           },
         },
         dev: {
