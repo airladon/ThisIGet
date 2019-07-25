@@ -7,7 +7,7 @@ var version = {
   title: 'Rectangle calculation examples',
   description: '',
   htmlTitle: 'Examples of using rectangle properties',
-  htmlDescription: 'Examples showing how how to use the properties of a rectangle to examine geometries',
+  htmlDescription: 'Examples showing how to use the properties of a rectangle to examine geometries',
   fullLesson: true,
   type: 'singlePage',
 };
