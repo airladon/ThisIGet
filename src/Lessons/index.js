@@ -569,6 +569,16 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        quiz: {
+          base: {
+            type: 'singlePage',
+            title: 'Equilateral Quiz',
+            description: '',
+            htmlTitle: 'Equilateral triangles quiz',
+            htmlDescription: 'Solve problems with equilateral triangles',
+            fullLesson: true,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
