@@ -1,5 +1,5 @@
 // @flow
-import Fig from 'figureone';
+// import Fig from 'figureone';
 import * as React from 'react';
 import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent';
 // import imgLink from '../../tile.png';
