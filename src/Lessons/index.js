@@ -1191,6 +1191,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'SideAngleRelationship',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover why longer sides are opposite larger angles in a triangle',
+            htmlDescription: 'Figure out why the length of a triangle\'s side depends on the size of the oppostite angle',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
