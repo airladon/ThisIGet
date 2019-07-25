@@ -16,5 +16,13 @@ The side opposite the largest angle is always longest, while the side opposite t
 
 Can you prove this?
 
+<hintLow>Start with a triangle where one side is clearly longer than the other and mark the opposite angles
+![](start.png)
+</hintLow>
+
+<hintLow>Draw an isosceles triangle along sides A and B such that the equal sides equal A
+![](isosceles.png)
+</hintLow>
+
 <!-- This can be seen in more detail in this lesson's [Explanation](/Lessons/Math/Geometry_1/Equilateral/explanation/base?page=1)
  -->
