@@ -1366,7 +1366,7 @@ export default function lessonIndex() {
             title: 'Rectangle calculation examples',
             description: '',
             htmlTitle: 'Examples of using rectangle properties',
-            htmlDescription: 'Examples showing how how to use the properties of a rectangle to examine geometries',
+            htmlDescription: 'Examples showing how to use the properties of a rectangle to examine geometries',
             fullLesson: true,
           },
         },
@@ -1509,6 +1509,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of triangle side angle relationships',
+            description: '',
+            htmlTitle: 'Triangle side angle relationship examples',
+            htmlDescription: 'Use the relationships between a triangles side and angle to solve different geometries',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -1517,6 +1527,16 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to relationship between triangle side length and angle',
             htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to triangle side angle relationships',
+            htmlTitle: 'Triangle side angle relationship links',
+            htmlDescription: 'External links covering the relationship between the size of angles and length of sides in a triangle',
+            fullLesson: false,
           },
         },
         dev: {
