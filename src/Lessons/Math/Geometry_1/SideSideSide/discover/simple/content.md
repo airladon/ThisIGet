@@ -1,32 +1,49 @@
 ## Side Side Side Triangle Congruence
 
+If two triangles have the same side lengths, do they also have the same angles and are therefore congruent? Why?
 
+![](intro.png)
 
-<!-- A special type of [[quadrangle]]((qr,'Math/Geometry_1/Quadrangles/base/Main',#00756F)) is one where all the angles are **90º**. This shape is called a **rectangle**.
+<hint>If only one triangle can be formed from the initial constraints (in this case three side lengths) then any two triangles with the same side lengths will be the same triangle (congruent)</hint>
 
-![](rectangle.png)
+<hintLow>Start with a fixed side, then draw all possible locations a second fixed length side could go.
 
-The word **rectangle** comes from the latin words _rectus_ which is _"right"_ and _angulus_ which is _"angle, corner"_.
+In this case, we draw a side with length A. Then a circle with radius B represents all the locations a second side with length B could go.
 
+![](twosides.png)
 
-## Side Relationships
+Now do the same for the second side.
+</hintLow>
 
-A rectangle's opposite sides are parallel and equal. Can you prove this?
+<hintLow>
 
-<hint>First prove they are parallel</hint>
+![](threesides.png)
 
-<hint>To show they are parallel, use [[interior]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Interior',#00756F)) angles</hint>
+What locations can B and C go to form triangles?
 
-<hint>You can use the [[AAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Aas',#00756F)) congruence test to show opposite sides are equal</hint>
+</hintLow><div></div>
 
-<hintLow>[Answer]This lesson's [Explanation](/Lessons/Math/Geometry_1/RectanglesAndSquares/explanation/base) shows the proof that opposite sides are parallel and equal</hintLow>
+<hintLow>
 
+Two triangles are possible:
 
-## Square
+![](twotris.png)
 
-A special type of rectangle is one where **all sides are equal**. This shape is called a **square**.
+Are they congruent?
 
-![](square.png)
+</hintLow>
 
-The word **square** comes from the old French word _esquare_ which itself comes from the Latin word _quadra_, both of which mean _"square"_.
- -->
+<hint>Make two isosceles triangles</hint>
+
+<hint>Solve the angles</hint>
+
+<hint>Use [[SAS]]((qr,'Math/Geometry_1/CongruentTriangles/base/Sas',#00A89D)) test for congruence</hint>
+
+<hintLow>[Answer]
+
+Only one triangle can be made from three fixed side lengths.
+
+Therefore, if two triangles share the same side lengths they will have the same angles and be congruent.
+
+This lesson's [Explanation](/Lessons/Math/Geometry_1/SideSideSide/explanation/base?page=3) details why three side lengths form just one triangle.
+</hintLow>
