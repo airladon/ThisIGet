@@ -354,7 +354,7 @@ export default function lessonLayout() {
           width: 3,
           color: colors.construction,
           sides: 200,
-          radius: r,
+          radius: leftLen,
           linePrimitives: true,
         },
       },
@@ -375,7 +375,7 @@ export default function lessonLayout() {
         options: {
           color: [1, 1, 1, 0.001],
           sides: 50,
-          radius: r * 1.2,
+          radius: leftLen * 1.2,
           fill: true,
         },
         mods: {
@@ -384,31 +384,55 @@ export default function lessonLayout() {
             minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
             maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
           },
-        },
-      },
-      {
-        name: 'move',
-        method: 'polygon',
-        options: {
-          color: [1, 0, 0, 0.001],
-          sides: 50,
-          radius: 0.2,
-          fill: true,
-        },
-        mods: {
-          move: {
-            type: 'translate',
+          scenarios: {
+            center: { position: [0, 0], rotation: 0, scale: r / leftLen },
           },
         },
       },
+      // {
+      //   name: 'move',
+      //   method: 'polygon',
+      //   options: {
+      //     color: [1, 0, 0, 0.001],
+      //     sides: 50,
+      //     radius: 0.2,
+      //     fill: true,
+      //   },
+      //   mods: {
+      //     move: {
+      //       type: 'translate',
+      //     },
+      //   },
+      // },
     ],
     mods: {
       scenarios: {
         center: { position: defPos, rotation: 0, scale: 1 },
       },
+      // move: {
+      //   minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
+      //   maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
+      // },
+    },
+  });
+
+  const movePad = (name, defPos) => ({
+    name,
+    method: 'polygon',
+    options: {
+      color: [1, 0, 0, 0.001],
+      sides: 50,
+      radius: 0.2,
+      fill: true,
+    },
+    mods: {
       move: {
+        type: 'translate',
         minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
         maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
+      },
+      scenarios: {
+        center: { position: defPos, rotation: 0, scale: 1 },
       },
     },
   });
@@ -488,6 +512,8 @@ export default function lessonLayout() {
     // moveLeft,
     moveCirc('circ1', leftLen, [-hypotenuse / 2, 0]),
     moveCirc('circ2', rightLen, [hypotenuse / 2, 0]),
+    movePad('pad1', [-hypotenuse / 2, 0]),
+    movePad('pad2', [hypotenuse / 2, 0]),
   ];
 
   // /////////////////////////////////////////////////////////////////

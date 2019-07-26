@@ -348,7 +348,7 @@ class Content extends PresentationLessonContent {
       setContent: 'Are these the same triangles or different?',
       show: [
         // sss._anyCircleLeft, sss._scaleLeft, sss._moveLeft,
-        sss._circ1, sss._circ2
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
       ],
       setSteadyState: () => {
         sss.setScenarios('center');
@@ -358,6 +358,7 @@ class Content extends PresentationLessonContent {
         // sss._rightBottom._line.showAll();
         // sss.setScenarios('default');
         sss.hasTouchableElements = true;
+        console.log(sss)
       },
     });
 

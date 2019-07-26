@@ -55,18 +55,25 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     //   this._anyCircleLeft.setPosition(p);
     // };
     this._circ1._scale.setMovable(true);
-    this._circ1._move.setMovable(true);
+    // this._circ1._move.setMovable(true);
+    this._pad1.setMovable(true);
     this._circ1._scale.setTransformCallback = () => {
       this._circ1._line.setScale(this._circ1._scale.getScale());
     };
-    this._circ1._move.move.element = this._circ1;
+    // this._circ1._move.move.element = this._circ1;
+    this._pad1.setTransformCallback = () => {
+      this._circ1.setPositionToElement(this._pad1);
+    };
 
     this._circ2._scale.setMovable(true);
-    this._circ2._move.setMovable(true);
+    this._pad2.setMovable(true);
     this._circ2._scale.setTransformCallback = () => {
       this._circ2._line.setScale(this._circ2._scale.getScale());
     };
-    this._circ2._move.move.element = this._circ2;
+    // this._pad2.move.element = this._circ2;
+    this._pad2.setTransformCallback = () => {
+      this._circ2.setPositionToElement(this._pad2);
+    };
   }
 
   createConstructionLines(
