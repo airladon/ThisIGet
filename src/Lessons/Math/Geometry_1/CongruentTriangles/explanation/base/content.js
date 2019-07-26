@@ -46,6 +46,7 @@ class Content extends PresentationLessonContent {
     const asa = diag._asa;
     const aas = diag._aas;
     const ssa = diag._ssa;
+    const sss = diag._sss;
     // const sss = diag._sss;
 
     this.addSection({
@@ -223,6 +224,126 @@ class Content extends PresentationLessonContent {
         one_angle: highlight(colors.angles),
       },
     });
+
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    this.addSection({
+      title: 'Side Side Side',
+      setContent: style({}, [
+        'What about if we have three fixed side lengths. How many triangles can be made?',
+      ]),
+      show: [sss._left, sss._base, sss._right],
+      setSteadyState: () => {
+        sss.setScenarios('initial');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    let common = {
+      setContent: [
+        'We can start by connecting the two shortest sides to the longest side.',
+      ],
+    };
+    this.addSection(common, {
+      show: [sss._left, sss._base, sss._right],
+      setSteadyState: () => {
+        sss.setScenarios('initial');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+    this.addSection(common, {
+      show: [sss._left, sss._base, sss._right],
+      transitionFromPrev: (done) => {
+        sss.animations.cancelAll();
+        sss.animations.new()
+          .scenarios({
+            target: 'center',
+            duration: 1,
+            afterFrame: () => { sss.updateLabels(); },
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    common = {
+      setContent: 'We can then |rotate| the two end sides to see where they meet to form a triangle.',
+    };
+    this.addSection(common, {
+      modifiers: {
+        rotate: click(this.next, [this], colors.diagram.action),
+      },
+      show: [sss._left._line, sss._base._line, sss._right._line],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.hasTouchableElements = false;
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        rotate: click(sss.createConstructionLines, [sss, null], colors.diagram.action),
+      },
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      transitionFromPrev: (done) => {
+        sss.createConstructionLines(done);
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, 'The two |intersect| points of the circles, are the two side rotations where triangles can be formed.'),
+      modifiers: {
+        intersect: click(sss.toggleIntersects, [sss, null, null], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        sss.toggleIntersects('top', done);
+      },
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('top');
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection({
+      setContent: 'Are these the same triangles or different?',
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss._leftBottom._line.showAll();
+        sss._rightBottom._line.showAll();
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+      },
+    });
+
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */
@@ -317,7 +438,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    let common = {
+    common = {
       setContent: [
         'Next, we can connect the |second side| to be |adjacent_to_the_angle|.',
       ],
