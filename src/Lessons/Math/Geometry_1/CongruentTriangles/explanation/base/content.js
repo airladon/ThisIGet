@@ -344,6 +344,23 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    this.addSection({
+      setContent: 'Are these the same triangles or different?',
+      show: [
+        // sss._anyCircleLeft, sss._scaleLeft, sss._moveLeft,
+        sss._circ1, sss._circ2
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        // sss._scalePadLeft.setMovable(true);
+        // sss._scalePadLeft.opacity = 0.4;
+        // sss._leftBottom._line.showAll();
+        // sss._rightBottom._line.showAll();
+        // sss.setScenarios('default');
+        sss.hasTouchableElements = true;
+      },
+    });
+
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */

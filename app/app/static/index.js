@@ -16035,7 +16035,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
         position: null,
         center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        trianglePrimitives: false
+        trianglePrimitives: false,
+        linePrimitives: false
       };
 
       for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
@@ -16069,7 +16070,9 @@ function () {
 
       var element;
 
-      if (options.fill) {
+      if (options.linePrimitives) {
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
+      } else if (options.fill) {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);

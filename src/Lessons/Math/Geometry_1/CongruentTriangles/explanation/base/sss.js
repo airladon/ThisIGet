@@ -44,6 +44,29 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this.hasTouchableElements = true;
     this._left.makeTouchable();
     this._right.makeTouchable();
+    // this._scaleLeft.setMovable(true);
+    // this._scaleLeft.setTransformCallback = () => {
+    //   this._anyCircleLeft.setScale(this._scaleLeft.getScale());
+    // };
+    // this._moveLeft.setMovable(true);
+    // this._moveLeft.setTransformCallback = () => {
+    //   const p = this._moveLeft.getPosition();
+    //   this._scaleLeft.transform.updateTranslation(p);
+    //   this._anyCircleLeft.setPosition(p);
+    // };
+    this._circ1._scale.setMovable(true);
+    this._circ1._move.setMovable(true);
+    this._circ1._scale.setTransformCallback = () => {
+      this._circ1._line.setScale(this._circ1._scale.getScale());
+    };
+    this._circ1._move.move.element = this._circ1;
+
+    this._circ2._scale.setMovable(true);
+    this._circ2._move.setMovable(true);
+    this._circ2._scale.setTransformCallback = () => {
+      this._circ2._line.setScale(this._circ2._scale.getScale());
+    };
+    this._circ2._move.move.element = this._circ2;
   }
 
   createConstructionLines(
@@ -70,6 +93,9 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
       .whenFinished(callback)
       .start();
     this.diagram.animateNextFrame();
+    // };
+    // this._anyCircleLeft.setMovable(true);
+    // this._anyCircleLeft.makeTouchable();
   }
 
   toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {

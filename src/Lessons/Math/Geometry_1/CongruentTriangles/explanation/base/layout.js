@@ -4,7 +4,7 @@ import baseLayout from '../../../../../LessonsCommon/layout';
 
 const {
   Point,
-  // Transform,
+  Transform,
   // Line,
 } = Fig;
 
@@ -343,14 +343,151 @@ export default function lessonLayout() {
   //   ],
   // };
 
+  const moveCirc = (name, r, defPos) => ({
+    name,
+    method: 'collection',
+    addElements: [
+      {
+        name: 'line',
+        method: 'polygon',
+        options: {
+          width: 3,
+          color: colors.construction,
+          sides: 200,
+          radius: r,
+          linePrimitives: true,
+        },
+      },
+      {
+        name: 'center',
+        method: 'polygon',
+        options: {
+          width: 3,
+          color: colors.construction,
+          sides: 20,
+          radius: 0.07,
+          fill: true,
+        },
+      },
+      {
+        name: 'scale',
+        method: 'polygon',
+        options: {
+          color: [1, 1, 1, 0.001],
+          sides: 50,
+          radius: r * 1.2,
+          fill: true,
+        },
+        mods: {
+          move: {
+            type: 'scale',
+            minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
+            maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
+          },
+        },
+      },
+      {
+        name: 'move',
+        method: 'polygon',
+        options: {
+          color: [1, 0, 0, 0.001],
+          sides: 50,
+          radius: 0.2,
+          fill: true,
+        },
+        mods: {
+          move: {
+            type: 'translate',
+          },
+        },
+      },
+    ],
+    mods: {
+      scenarios: {
+        center: { position: defPos, rotation: 0, scale: 1 },
+      },
+      move: {
+        minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
+        maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
+      },
+    },
+  });
+
+  // const anyCircleLeft = {
+  //   name: 'anyCircleLeft',
+  //   method: 'polygon',
+  //   options: {
+  //     width: 3,
+  //     color: colors.construction,
+  //     sides: 200,
+  //     radius: leftLen,
+  //     linePrimitives: true,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
+  //     },
+  //     move: {
+  //       type: 'scale',
+  //     },
+  //   },
+  // };
+
+  // const scaleLeft = {
+  //   name: 'scaleLeft',
+  //   method: 'polygon',
+  //   options: {
+  //     color: [1, 1, 1, 0.2],
+  //     sides: 50,
+  //     radius: leftLen * 1.2,
+  //     fill: true,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
+  //     },
+  //     move: {
+  //       type: 'scale',
+  //       maxTransform: new Transform().scale(1, 1).rotate(0).translate(1000, 1000),
+  //       minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-1000, -1000),
+  //     },
+  //   },
+  // };
+
+  // const moveLeft = {
+  //   name: 'moveLeft',
+  //   method: 'polygon',
+  //   options: {
+  //     color: [1, 0, 0, 0.2],
+  //     sides: 50,
+  //     radius: 0.2,
+  //     fill: true,
+  //   },
+  //   mods: {
+  //     scenarios: {
+  //       center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: 1 },
+  //     },
+  //     move: {
+  //       type: 'translate',
+  //       maxTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
+  //       minTransform: new Transform().scale(0.3, 0.3).rotate(0).translate(-2, 0),
+  //     },
+  //   },
+  // };
+
   layout.addElementsSSS = [
     rightCircle,
     leftCircle,
+    // anyCircleLeft,
     left,
     right,
     base,
     leftBottom,
     rightBottom,
+    // scaleLeft,
+    // moveLeft,
+    moveCirc('circ1', leftLen, [-hypotenuse / 2, 0]),
+    moveCirc('circ2', rightLen, [hypotenuse / 2, 0]),
   ];
 
   // /////////////////////////////////////////////////////////////////
