@@ -349,6 +349,7 @@ class Content extends PresentationLessonContent {
       show: [
         // sss._anyCircleLeft, sss._scaleLeft, sss._moveLeft,
         sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
       ],
       setSteadyState: () => {
         sss.setScenarios('center');

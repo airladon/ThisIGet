@@ -33,6 +33,21 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   _angleBottom: { _label: DiagramElementCollection } & DiagramObjectAngle;
   location: 'top' | 'bottom';
 
+  _circ1: {
+    _scale: DiagramElementPrimative;
+    _line: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  _circ2: {
+    _scale: DiagramElementPrimative;
+    _line: DiagramElementPrimative;
+  } & DiagramElementCollection;
+
+  _pad1: DiagramElementPrimative;
+  _pad2: DiagramElementPrimative;
+  _rad1: DiagramObjectLine;
+  _rad2: DiagramObjectLine;
+
   constructor(
     diagram: CommonLessonDiagram,
     layout: Object,
@@ -59,20 +74,26 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this._pad1.setMovable(true);
     this._circ1._scale.setTransformCallback = () => {
       this._circ1._line.setScale(this._circ1._scale.getScale());
+      this._rad1.setLength(this._circ1._scale.getScale().x * this.layout.defaultLen);
     };
     // this._circ1._move.move.element = this._circ1;
     this._pad1.setTransformCallback = () => {
       this._circ1.setPositionToElement(this._pad1);
+      this._rad1.setPositionToElement(this._pad1);
+      this._baseLine.setEndPoints(this._pad1.getPosition(), this._pad2.getPosition());
     };
 
     this._circ2._scale.setMovable(true);
     this._pad2.setMovable(true);
     this._circ2._scale.setTransformCallback = () => {
       this._circ2._line.setScale(this._circ2._scale.getScale());
+      this._rad2.setLength(this._circ2._scale.getScale().x * this.layout.defaultLen);
     };
     // this._pad2.move.element = this._circ2;
     this._pad2.setTransformCallback = () => {
       this._circ2.setPositionToElement(this._pad2);
+      this._rad2.setPositionToElement(this._pad2);
+      this._baseLine.setEndPoints(this._pad1.getPosition(), this._pad2.getPosition());
     };
   }
 

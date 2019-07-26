@@ -200,6 +200,7 @@ export default function lessonLayout() {
   const hypotenuse = 1.7;
   const leftLen = hypotenuse * Math.sin(Math.PI / 3);
   const rightLen = hypotenuse * Math.sin(Math.PI / 6);
+  layout.defaultLen = leftLen;
   // const height = leftLen * Math.sin(Math.PI / 6);
   const base = joinObjects({}, sssLineBase, {
     name: 'base',
@@ -389,30 +390,11 @@ export default function lessonLayout() {
           },
         },
       },
-      // {
-      //   name: 'move',
-      //   method: 'polygon',
-      //   options: {
-      //     color: [1, 0, 0, 0.001],
-      //     sides: 50,
-      //     radius: 0.2,
-      //     fill: true,
-      //   },
-      //   mods: {
-      //     move: {
-      //       type: 'translate',
-      //     },
-      //   },
-      // },
     ],
     mods: {
       scenarios: {
         center: { position: defPos, rotation: 0, scale: 1 },
       },
-      // move: {
-      //   minTransform: new Transform().scale(1, 1).rotate(0).translate(-2, 0),
-      //   maxTransform: new Transform().scale(1, 1).rotate(0).translate(2, 0),
-      // },
     },
   });
 
@@ -435,6 +417,24 @@ export default function lessonLayout() {
         center: { position: defPos, rotation: 0, scale: 1 },
       },
     },
+  });
+
+  const moveRadius = (name, defPos, defRot) => joinObjects({}, sssLineBase, {
+    name,
+    options: {
+      length: leftLen,
+      move: {
+        type: 'rotation',
+      },
+      largerTouchBorder: 30,
+    },
+    scenarios: {
+      center: { position: defPos, rotation: defRot, scale: 1 },
+    },
+  });
+
+  const baseLine = joinObjects({}, sssLineBase, {
+    name: 'baseLine',
   });
 
   // const anyCircleLeft = {
@@ -512,8 +512,11 @@ export default function lessonLayout() {
     // moveLeft,
     moveCirc('circ1', leftLen, [-hypotenuse / 2, 0]),
     moveCirc('circ2', rightLen, [hypotenuse / 2, 0]),
+    moveRadius('rad1', [-hypotenuse / 2, 0], 2),
+    moveRadius('rad2', [hypotenuse / 2, 0], 1),
     movePad('pad1', [-hypotenuse / 2, 0]),
     movePad('pad2', [hypotenuse / 2, 0]),
+    baseLine,
   ];
 
   // /////////////////////////////////////////////////////////////////
