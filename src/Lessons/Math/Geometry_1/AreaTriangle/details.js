@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Area of a Triangle',
   dependencies: [
-    'Area',
+    'AreaRectangle',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

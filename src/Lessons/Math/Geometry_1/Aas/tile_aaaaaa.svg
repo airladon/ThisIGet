@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:bx="https://boxy-svg.com">
+  <path d="M 151.321 216.49 L 271.97 425.46 L 30.672 425.46 L 151.321 216.49 Z" style="stroke: rgb(170, 170, 170) ; stroke-width: 18px; fill: none;" bx:shape="triangle 30.672 216.49 241.298 208.97 0.5 0 1@75aaf62d"/>
+  <path d="M 348.25 70.016 L 468.899 278.986 L 227.601 278.986 L 348.25 70.016 Z" style="stroke: rgb(170, 170, 170) ; stroke-width: 18px; fill: none;" bx:shape="triangle 227.601 70.016 241.298 208.97 0.5 0 1@361abe93"/>
+  <path style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 25.6402px;" transform="matrix(0.546018, 0, 0, 0.546018, -48.044857, -141.424454)" d="M 207.066 925.64 A 133.688 133.688 0 0 1 272.963 1040.165 L 139.277 1040.867 Z" bx:shape="pie 139.277 1040.867 0 133.688 30.469 89.699 1@f2471fbf"/>
+  <path style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 25.6402px;" transform="matrix(0.546018, 0, 0, 0.546018, 150.230484, -287.926117)" d="M 207.066 925.64 A 133.688 133.688 0 0 1 272.963 1040.165 L 139.277 1040.867 Z" bx:shape="pie 139.277 1040.867 0 133.688 30.469 89.699 1@f2471fbf"/>
+  <path style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 25.6402px;" transform="matrix(0.273009, 0.472865, 0.472865, -0.273009, -379.657501, 434.376831)" d="M 207.066 925.64 A 133.688 133.688 0 0 1 272.963 1040.165 L 139.277 1040.867 Z" bx:shape="pie 139.277 1040.867 0 133.688 30.469 89.699 1@f2471fbf"/>
+  <line style="stroke: rgb(170, 170, 170) ; stroke-width: 15px;" x1="151.684" y1="451.931" x2="151.684" y2="399.168"/>
+  <line style="stroke: rgb(170, 170, 170) ; stroke-width: 15px;" x1="348.644" y1="305.101" x2="348.644" y2="252.338"/>
+  <path style="fill: none; stroke: rgb(170, 170, 170) ; stroke-width: 25.6402px;" transform="matrix(0.273009, 0.472865, 0.472865, -0.273009, -181.214508, 290.322845)" d="M 207.066 925.64 A 133.688 133.688 0 0 1 272.963 1040.165 L 139.277 1040.867 Z" bx:shape="pie 139.277 1040.867 0 133.688 30.469 89.699 1@f2471fbf"/>
+</svg>

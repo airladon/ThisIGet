@@ -4,7 +4,7 @@
 var lessonDetails = {
   title: 'Isosceles Triangle',
   dependencies: [
-    'CongruentTriangles',
+    'Sas',
   ],
   enabled: true,
   path: 'Math/Geometry_1',

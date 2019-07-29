@@ -2,7 +2,7 @@
 
 // eslint-disable-next-line no-var
 var lessonDetails = {
-  title: 'Area and Rectangles',
+  title: 'Area',
   dependencies: [
     'RectanglesAndSquares',
   ],

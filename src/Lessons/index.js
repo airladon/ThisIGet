@@ -1,5 +1,26 @@
 export default function lessonIndex() {
   return {
+    Aas: {
+      title: 'AAS Congruence',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Aas',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Congruent triangles and how to determine congruence',
+            htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Asa',
+      ],
+      enabled: true,
+    },
     Angle: {
       title: 'Angles',
       path: '/Lessons/Math/Geometry_1',
@@ -13,20 +34,6 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to Angles',
             htmlDescription: 'Introduction to the concept of angle',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -80,20 +87,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'singlePage',
@@ -133,20 +126,6 @@ export default function lessonIndex() {
             htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
             htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -210,20 +189,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -259,7 +224,7 @@ export default function lessonIndex() {
       enabled: true,
     },
     Area: {
-      title: 'Area and Rectangles',
+      title: 'Area',
       path: '/Lessons/Math/Geometry_1',
       uid: 'Area',
       topics: {
@@ -290,20 +255,6 @@ export default function lessonIndex() {
             description: 'External links to Area',
             htmlTitle: 'Introduction to Area Links',
             htmlDescription: 'External links covering an introduction to area, and areas of rectangles and squares',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -356,20 +307,6 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -396,6 +333,68 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
+    AreaRectangle: {
+      title: 'Area of a Rectangle',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'AreaRectangle',
+      topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of area',
+            description: '',
+            htmlTitle: 'Area examples',
+            htmlDescription: 'Calculation examples of areas for different shapes',
+            fullLesson: true,
+          },
+        },
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Introduction to area, rectangle area and square area',
+            htmlDescription: 'Concept of area, why they it is measured in squares and why areas of rectangles and squares are what they are',
+            fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to Area',
+            htmlTitle: 'Introduction to Area Links',
+            htmlDescription: 'External links covering an introduction to area, and areas of rectangles and squares',
+            fullLesson: false,
+          },
+        },
+        quiz: {
+          base: {
+            type: 'presentation',
+            title: 'Create an area',
+            description: '',
+            htmlTitle: 'Quiz: Create a rectangle or square with area',
+            htmlDescription: 'Create a rectangle or square that has some defined area on this dynamic page',
+            fullLesson: true,
+          },
+        },
+        summary: {
+          base: {
+            type: 'presentation',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Summary of area, rectangle area and square area.',
+            htmlDescription: 'Summary of area concept, and equations for rectangle area and square area',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'Area',
+        'RectanglesAndSquares',
+      ],
+      enabled: true,
+    },
     AreaTriangle: {
       title: 'Area of a Triangle',
       path: '/Lessons/Math/Geometry_1',
@@ -409,20 +408,6 @@ export default function lessonIndex() {
             htmlTitle: 'Triangle Area derivation and proof',
             htmlDescription: 'Explanation on why area of a triangle is what it is',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -447,7 +432,28 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'Area',
+        'AreaRectangle',
+      ],
+      enabled: true,
+    },
+    Asa: {
+      title: 'ASA Congruence',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Asa',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Congruent triangles and how to determine congruence',
+            htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'SideSideSide',
       ],
       enabled: true,
     },
@@ -483,20 +489,6 @@ export default function lessonIndex() {
             description: 'External links to information on circles',
             htmlTitle: 'Circles, circle properties and relationships links',
             htmlDescription: 'Explanations, proofs, examples and questions about Circles',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -579,20 +571,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -641,20 +619,6 @@ export default function lessonIndex() {
             description: 'External links to sources of information for Degrees',
             htmlTitle: 'Measuring angles in degrees links',
             htmlDescription: 'Explanations, and examples about measuring angles in degrees',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -726,20 +690,6 @@ export default function lessonIndex() {
             description: 'External links to equilateral triangles',
             htmlTitle: 'Equilateral triangles links',
             htmlDescription: 'External sources of information about equilateral triangles',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -822,20 +772,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -883,20 +819,6 @@ export default function lessonIndex() {
             htmlTitle: 'Why Study Shapes?',
             htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
       },
@@ -949,20 +871,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -985,7 +893,7 @@ export default function lessonIndex() {
         },
       },
       dependencies: [
-        'CongruentTriangles',
+        'Sas',
       ],
       enabled: true,
     },
@@ -1002,20 +910,6 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to the distance between parallel lines',
             htmlDescription: 'Investigate the property of distance between parallel lines',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -1047,20 +941,6 @@ export default function lessonIndex() {
             htmlTitle: 'Interactive introduction to parallel lines',
             htmlDescription: 'See what parallel lines are, and when lines are parallel',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         quiz: {
@@ -1122,20 +1002,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -1165,20 +1031,6 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to distance between a point and line',
             htmlDescription: 'Properties of distance between point and a line',
             fullLesson: true,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
           },
         },
         summary: {
@@ -1242,20 +1094,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1314,20 +1152,6 @@ export default function lessonIndex() {
             description: 'External links to information on radians',
             htmlTitle: 'Links introducing radians',
             htmlDescription: 'Explanations, proofs, examples and questions about radians',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -1410,20 +1234,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         summary: {
           base: {
             type: 'presentation',
@@ -1437,7 +1247,7 @@ export default function lessonIndex() {
       },
       dependencies: [
         'Quadrangles',
-        'CongruentTriangles',
+        'Aas',
       ],
       enabled: true,
     },
@@ -1474,20 +1284,6 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
-            fullLesson: false,
-          },
-        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1511,6 +1307,27 @@ export default function lessonIndex() {
       },
       dependencies: [
         'AreaTriangle',
+      ],
+      enabled: true,
+    },
+    Sas: {
+      title: 'SAS Congruence',
+      path: '/Lessons/Math/Geometry_1',
+      uid: 'Sas',
+      topics: {
+        explanation: {
+          base: {
+            type: 'presentation',
+            title: 'Full explanation',
+            description: '',
+            htmlTitle: 'Congruent triangles and how to determine congruence',
+            htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
+            fullLesson: true,
+          },
+        },
+      },
+      dependencies: [
+        'CongruentTriangles',
       ],
       enabled: true,
     },
@@ -1556,20 +1373,6 @@ export default function lessonIndex() {
             description: 'External links to triangle side angle relationships',
             htmlTitle: 'Triangle side angle relationship links',
             htmlDescription: 'External links covering the relationship between the size of angles and length of sides in a triangle',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },
@@ -1632,6 +1435,16 @@ export default function lessonIndex() {
             htmlTitle: 'Proof for Side Side Side triangle congruence',
             htmlDescription: 'Proof for SSS or side-side-side congruent triangles',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information SSS triangle congruence',
+            htmlTitle: 'Side-side-side triangle congruence links',
+            htmlDescription: 'Links with explanations, examples and proofs side-side-side (SSS) triangle congruence',
+            fullLesson: false,
           },
         },
         summary: {
@@ -1768,20 +1581,6 @@ export default function lessonIndex() {
             description: 'External links to sources of information for Triangles>',
             htmlTitle: 'Triangles Links',
             htmlDescription: 'Explanations, proofs, examples and questions about Triangles',
-            fullLesson: false,
-          },
-        },
-        dev: {
-          base: {
-            type: 'presentation',
-            title: 'base',
-            description: '',
-            fullLesson: false,
-          },
-          staticTest: {
-            type: 'presentation',
-            title: 'staticTest',
-            description: '',
             fullLesson: false,
           },
         },

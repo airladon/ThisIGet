@@ -5,7 +5,7 @@ var lessonDetails = {
   title: 'Rectangles and Squares',
   dependencies: [
     'Quadrangles',
-    'CongruentTriangles',
+    'Aas',
   ],
   enabled: true,
   path: 'Math/Geometry_1',
