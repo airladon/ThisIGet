@@ -7,12 +7,13 @@ const {
   DiagramElementPrimative,
   DiagramObjectAngle,
   // DiagramElementCollection,
+  DiagramObjectPolyLine,
   Transform,
   DiagramObjectLine,
   DiagramElementCollection,
 } = Fig;
 
-// const { round, rand } = Fig.tools.math;
+const { rand, randSign, randElement } = Fig.tools.math;
 
 // const { minAngleDiff } = Fig.tools.g2;
 
@@ -47,6 +48,9 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   _pad2: DiagramElementPrimative;
   _rad1: DiagramObjectLine;
   _rad2: DiagramObjectLine;
+  _baseLine: DiagramObjectLine;
+  _flipTri: DiagramObjectPolyLine;
+  _fixedTri: DiagramObjectPolyLine;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -126,11 +130,97 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     // this._anyCircleLeft.makeTouchable();
   }
 
+  goToSamePosition() {
+    let position = rand(0, 1);
+    if (this._pad1.getPosition().x > 0) {
+      position *= -1;
+    }
+    // this._pad1.stop(true, 'noComplete');
+    // this._pad2.stop(true, 'noComplete');
+    // this._circ1.stop(true, 'noComplete');
+    // this._circ2.stop(true, 'noComplete');
+    // this._pad1.animations.new()
+    //   .position({ target: [position, 0], duration: 0.8 })
+    //   .start();
+    // this._pad2.animations.new()
+    //   .position({ target: [position, 0], duration: 0.8 })
+    //   .start();
+    // const s1 = rand(0.3, 1);
+    // const s2 = rand(0.3, 1);
+    // this._circ1._scale.animations.new()
+    //   .scale({ target: [s1, s1], duration: 0.8 })
+    //   .start();
+    // this._circ2._scale.animations.new()
+    //   .scale({ target: [s2, s2], duration: 0.8 })
+    //   .start();
+    this.goToPositionAndScale(position, position, rand(0.3, 1), rand(0.3, 1));
+  }
+
+  goToPositionAndScale(p1: number, p2: number, s1: number, s2: number) {
+    this._pad1.stop(true, 'noComplete');
+    this._pad2.stop(true, 'noComplete');
+    this._circ1.stop(true, 'noComplete');
+    this._circ2.stop(true, 'noComplete');
+    this._pad1.animations.new()
+      .position({ target: [p1, 0], duration: 0.8 })
+      .start();
+    this._pad2.animations.new()
+      .position({ target: [p2, 0], duration: 0.8 })
+      .start();
+    this._circ1._scale.animations.new()
+      .scale({ target: [s1, s1], duration: 0.8 })
+      .start();
+    this._circ2._scale.animations.new()
+      .scale({ target: [s2, s2], duration: 0.8 })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  goToNoOverlap() {
+    const scenario = 'within';
+    let s1;
+    let s2;
+    let p1;
+    let p2;
+    const len = s => s * this.layout.defaultLen;
+
+    if (scenario === 'separate') {
+      s1 = rand(0.3, 0.8);
+      s2 = rand(0.3, 0.8);
+      p1 = rand(0.5, 1, true);
+      if (p1 > 0) {
+        p2 = p1 - (len(s1) + len(s2) + rand(0.05, 0.5));
+      } else {
+        p2 = p1 + (len(s1) + len(s2) + rand(0.05, 0.5));
+      }
+    } else {
+      s1 = rand(0.3, 1);
+      if (s1 < 0.6) {
+        s2 = rand(s1 + 0.1, 1);
+      } else {
+        s2 = rand(0.3, s1 - 0.1);
+      }
+      p1 = rand(0, 1, true);
+      p2 = rand(0.1, Math.abs(len(s2) - len(s1)) * 0.8, true) + p1;
+    }
+    this.goToPositionAndScale(p1, p2, s1, s2);
+  }
+
   toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {
     let target = 'top';
-    if (this.location === 'top') {
+
+    const left = this._left.getRotation();
+    const right = this._right.getRotation();
+    if (this.animations.state === 'idle') {
+      if (left > 0 && left < Math.PI && right > Math.PI / 2 && right < Math.PI / 2 * 3) {
+        target = 'bottom';
+      } else {
+        target = 'top';
+      }
+    } else if (this.location === 'top') {
       target = 'bottom';
     }
+
     if (goTo != null) {
       target = goTo;
     }
@@ -153,30 +243,35 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     if (this._base.isShown) {
       this._base.updateLabel();
     }
-    // if (this._leftBottom.isShown) {
-    //   this._leftBottom.updateLabel();
-    // }
-    // if (this._rightBottom.isShown) {
-    //   this._rightBottom.updateLabel();
-    // }
-    // if (this._angleBottomLeft.isShown) {
-    //   this._angleBottomLeft.updateLabel();
-    // }
-    // if (this._angleTopLeft.isShown) {
-    //   this._angleTopLeft.updateLabel();
-    // }
-    // if (this._angleBottomRight.isShown) {
-    //   this._angleBottomRight.updateLabel();
-    // }
-    // if (this._angleTopRight.isShown) {
-    //   this._angleTopRight.updateLabel();
-    // }
-    // if (this._angleTop.isShown) {
-    //   this._angleTop.updateLabel();
-    // }
-    // if (this._angleBottom.isShown) {
-    //   this._angleBottom.updateLabel();
-    // }
+    this.diagram.animateNextFrame();
+  }
+
+  flipTriangle(duration: number) {
+    const flipTri = this._flipTri;
+    flipTri.setScale(1, -1);
+    flipTri.animations.new()
+      .scale({ target: [1, 1], duration })
+      .start();
+    this.diagram.animateNextFrame();
+  }
+
+  flipAll(duration: number) {
+    this._flipTri.setScale(1, 1);
+    this._flipTri.animations.new()
+      .scale({ target: [-1, 1], duration })
+      .start();
+    this._fixedTri.setScale(1, 1);
+    this._fixedTri.animations.new()
+      .scale({ target: [-1, 1], duration })
+      .start();
+    this._leftCircle.setScenario('center');
+    this._leftCircle.animations.new()
+      .scenario({ target: 'flip', duration })
+      .start();
+    this._rightCircle.setScenario('center');
+    this._rightCircle.animations.new()
+      .scenario({ target: 'flip', duration })
+      .start();
     this.diagram.animateNextFrame();
   }
 

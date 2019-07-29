@@ -1634,6 +1634,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information SSS triangle congruence',
+            htmlTitle: 'Side-side-side triangle congruence links',
+            htmlDescription: 'Links with explanations, examples and proofs side-side-side (SSS) triangle congruence',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',

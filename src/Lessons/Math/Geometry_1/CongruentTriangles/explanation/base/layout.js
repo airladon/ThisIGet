@@ -201,6 +201,7 @@ export default function lessonLayout() {
   const leftLen = hypotenuse * Math.sin(Math.PI / 3);
   const rightLen = hypotenuse * Math.sin(Math.PI / 6);
   layout.defaultLen = leftLen;
+  layout.hypotenuse = hypotenuse;
   // const height = leftLen * Math.sin(Math.PI / 6);
   const base = joinObjects({}, sssLineBase, {
     name: 'base',
@@ -286,7 +287,8 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: [-hypotenuse / 2, 0], rotation: 0 },
+        center: { position: [-hypotenuse / 2, 0], rotation: 0, scale: [1, 1] },
+        flip: { position: [hypotenuse / 2, 0], rotation: 0, scale: [-1, 1] },
       },
     },
   };
@@ -301,7 +303,8 @@ export default function lessonLayout() {
     },
     mods: {
       scenarios: {
-        center: { position: [hypotenuse / 2, 0], rotation: 0 },
+        center: { position: [hypotenuse / 2, 0], rotation: 0, scale: [1, 1] },
+        flip: { position: [-hypotenuse / 2, 0], rotation: 0, scale: [-1, 1] },
       },
     },
   };
@@ -330,6 +333,30 @@ export default function lessonLayout() {
     mods: {
       scenarios: {
         default: { position: [hypotenuse / 2, 0], rotation: Math.PI + Math.PI / 3 },
+      },
+    },
+  });
+
+  const tri = (name, scale) => ({
+    name,
+    method: 'polyLine',
+    options: {
+      close: true,
+      points: [
+        [-hypotenuse / 2, scale * layout.width / 5],
+        [hypotenuse / 2,  scale * layout.width / 5],
+        [
+          -hypotenuse / 2 + leftLen * Math.cos(Math.PI / 6),
+          scale * leftLen * Math.sin(Math.PI / 6),
+        ],
+      ],
+      width: layout.width,
+      color: colors.sides,
+      borderToPoint: 'always',
+    },
+    mods: {
+      scenarios: {
+        default: { position: [0, 0], scale: [1, 1] },
       },
     },
   });
@@ -428,8 +455,10 @@ export default function lessonLayout() {
       },
       largerTouchBorder: 30,
     },
-    scenarios: {
-      center: { position: defPos, rotation: defRot, scale: 1 },
+    mods: {
+      scenarios: {
+        center: { position: defPos, rotation: defRot, scale: 1 },
+      },
     },
   });
 
@@ -517,6 +546,8 @@ export default function lessonLayout() {
     movePad('pad1', [-hypotenuse / 2, 0]),
     movePad('pad2', [hypotenuse / 2, 0]),
     baseLine,
+    tri('flipTri', -1),
+    tri('fixedTri', 1),
   ];
 
   // /////////////////////////////////////////////////////////////////

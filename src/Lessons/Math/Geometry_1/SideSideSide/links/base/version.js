@@ -12,21 +12,21 @@ var version = {
   links: [
     {
       url: '',
-      hash: '',
+      hash: 'd41d8cd98f00b204e9800998ecf8427e',
       publisher: '',
       type: 'generic',
       description: '',
     },
     {
       url: 'https://www.mathopenref.com/congruentsss.html',
-      hash: '',
+      hash: '56e15bb123f7f266b4fa800469587b5c',
       publisher: 'Math Open Reference',
       type: 'generic',
       description: 'Introduction to Side-Side-Side congruence',
     },
     {
       url: '',
-      hash: '',
+      hash: 'd41d8cd98f00b204e9800998ecf8427e',
       publisher: '',
       type: 'generic',
       description: '',

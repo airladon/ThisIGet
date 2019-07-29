@@ -13,6 +13,7 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
+  centerV,
   click,
   style,
   highlight,
@@ -214,18 +215,6 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection({
-      setContent: style({ centerV: true }, [
-        'The next two cases are combinations of |two_sides| and |one_angle|.',
-        'When you know one angle and two sides, the two sides can either be adjacent to the angle, or one can be adjacent while the other is opposite.',
-      ]),
-      modifiers: {
-        two_sides: highlight(colors.sides),
-        one_angle: highlight(colors.angles),
-      },
-    });
-
-
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */
@@ -237,7 +226,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Side Side',
       setContent: style({}, [
-        'What about if we have three fixed side lengths. How many triangles can be made?',
+        'What about if we fix |three side lengths|. How many triangles can be made?',
       ]),
       show: [sss._left, sss._base, sss._right],
       setSteadyState: () => {
@@ -249,7 +238,7 @@ class Content extends PresentationLessonContent {
 
     let common = {
       setContent: [
-        'We can start by connecting the two shortest sides to the longest side.',
+        'We can start by fixing one side in position then connecting the other sides to it.',
       ],
     };
     this.addSection(common, {
@@ -281,11 +270,11 @@ class Content extends PresentationLessonContent {
     });
 
     common = {
-      setContent: 'We can then |rotate| the two end sides to see where they meet to form a triangle.',
+      setContent: 'We can show all possible rotations of these sides by tracing the |circles| they form.',
     };
     this.addSection(common, {
       modifiers: {
-        rotate: click(this.next, [this], colors.diagram.action),
+        circles: click(this.next, [this], colors.diagram.action),
       },
       show: [sss._left._line, sss._base._line, sss._right._line],
       setSteadyState: () => {
@@ -295,7 +284,7 @@ class Content extends PresentationLessonContent {
     });
     this.addSection(common, {
       modifiers: {
-        rotate: click(sss.createConstructionLines, [sss, null], colors.diagram.action),
+        circles: click(sss.createConstructionLines, [sss, null], colors.diagram.action),
       },
       show: [
         sss._left._line, sss._base._line, sss._right._line,
@@ -311,7 +300,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection(common, {
-      setContent: style({ top: 0 }, 'The two |intersect| points of the circles, are the two side rotations where triangles can be formed.'),
+      setContent: style({ top: 0 }, 'The two |intersect| points of the circles, are the side rotations where triangles can be formed.'),
       modifiers: {
         intersect: click(sss.toggleIntersects, [sss, null, null], colors.diagram.action),
       },
@@ -330,7 +319,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: 'Are these the same triangles or different?',
+      setContent: 'Now, are these triangles the |same| or |different|?',
       show: [
         sss._left._line, sss._base._line, sss._right._line,
         sss._leftCircle, sss._rightCircle,
@@ -345,7 +334,190 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: 'Are these the same triangles or different?',
+      setContent: style({ top: 0 }, 'We know that if we |flip| the top triangle about the horizontal side, we get a |congruent| triangle below.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        flip: click(sss.flipTriangle, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'We also know there is only |one circle intersection| point below the horizontal side, and thus only one lower triangle |possible|.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._flipTri,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        // sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'Therefore the flipped triangle is the |same| as the triangle at the circle intersection below the horizontal.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Does this hold for |any| three side lengths?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'We have seen making a triangle from three fixed side lengths is the same as making a triangle from |two overlapping circles|.',
+        'One side of the triangle is the distance between the circle centers.',
+        'The other two sides join at one of the circle intersection points.',
+        'So, a more general question might be, can you find any configuration of separated circles that has |more than two, opposite, intersection points|?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        '|Experiment| by changing the circle\'s sizes and positions.',
+      ]),
+      show: [
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
+      ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'next') {
+          const rad1 = sss._rad1.getRotation();
+          const rad2 = sss._rad2.getRotation();
+          const scale1 = sss._circ1._scale.getScale();
+          const scale2 = sss._circ2._scale.getScale();
+          const pad1 = sss._pad1.transform._dup();
+          const pad2 = sss._pad2.transform._dup();
+          sss.setScenarios('center');
+          sss._rad1.setRotation(rad1);
+          sss._rad2.setRotation(rad2);
+          sss._circ1._scale.setScale(scale1);
+          sss._circ2._scale.setScale(scale2);
+          sss._pad1.setTransform(pad1);
+          sss._pad2.setTransform(pad2);
+        } else {
+          sss.setScenarios('center');
+        }
+        done();
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        // 'You might see that triangles can |only| be made if the circles are |separate| and |intersect|. When they do intersect, there are only two points.',
+        'Triangles cannot be made if the circles are at the |same_position|, or if they |do_not_intersect|. If they do intersect, then only two intersect points exist.',
+      ]),
+      show: [
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
+      ],
+      modifiers: {
+        same_position: click(sss.goToSamePosition, [sss], colors.diagram.action),
+        do_not_intersect: click(sss.goToNoOverlap, [sss], colors.diagram.action),
+      },
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'prev') {
+          const rad1 = sss._rad1.getRotation();
+          const rad2 = sss._rad2.getRotation();
+          const pad1 = sss._pad1.transform._dup();
+          const pad2 = sss._pad2.transform._dup();
+          const scale1 = sss._circ1._scale.getScale();
+          const scale2 = sss._circ2._scale.getScale();
+          sss.setScenarios('center');
+          sss._rad1.setRotation(rad1);
+          sss._rad2.setRotation(rad2);
+          sss._circ1._scale.setScale(scale1);
+          sss._circ2._scale.setScale(scale2);
+          sss._pad1.setTransform(pad1);
+          sss._pad2.setTransform(pad2);
+        } else {
+          sss.setScenarios('center');
+        }
+        done();
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+      },
+    });
+    // this.addSection({
+    //   setContent: style({ top: 0 }, 'Only |one| triangle can be made from these three side lengths, and thus it is '),
+    //   show: [
+    //     sss._leftCircle, sss._rightCircle,
+    //     sss._fixedTri, sss._flipTri,
+    //   ],
+    //   setSteadyState: () => {
+    //     sss.setScenarios('center');
+    //     sss.setScenarios('default');
+    //     sss.hasTouchableElements = false;
+    //     sss._flipTri.setScale(1, 1);
+    //   },
+    // });
+
+    // this.addSection({
+    //   setContent: style({ top: 0 }, 'If these triangles are flipped around the |vertical|, it shows the case of'),
+    //   show: [
+    //     sss._leftCircle, sss._rightCircle,
+    //     sss._fixedTri, sss._flipTri,
+    //   ],
+    //   modifiers: {
+    //     vertical: click(sss.flipAll, [sss, 1], colors.sides),
+    //   },
+    //   setSteadyState: () => {
+    //     sss.setScenarios('center');
+    //     sss.setScenarios('default');
+    //     sss.hasTouchableElements = false;
+    //     sss._flipTri.setScale(1, 1);
+    //   },
+    //   setLeaveState: () => {
+    //     sss._fixedTri.setScale(1, 1);
+    //     sss._flipTri.setScale(1, 1);
+    //     sss._leftCircle.setScale(1, 1);
+    //     sss._rightCircle.setScale(1, 1);
+    //   }
+    // });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'More generally, a triangle is formed by two overlapping circles with separate center points.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        flip: click(sss.flipTriangle, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'Move the circles, and change their size - are there any cases where there are not two intersection points?'),
       show: [
         // sss._anyCircleLeft, sss._scaleLeft, sss._moveLeft,
         sss._circ1, sss._circ2, sss._pad1, sss._pad2,
@@ -359,7 +531,6 @@ class Content extends PresentationLessonContent {
         // sss._rightBottom._line.showAll();
         // sss.setScenarios('default');
         sss.hasTouchableElements = true;
-        console.log(sss)
       },
     });
 
@@ -371,6 +542,18 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     /* ********************************************************************* */
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'The next two cases are combinations of |two_sides| and |one_angle|.',
+        'When you know one angle and two sides, the two sides can either be adjacent to the angle, or one can be adjacent while the other is opposite.',
+      ]),
+      modifiers: {
+        two_sides: highlight(colors.sides),
+        one_angle: highlight(colors.angles),
+      },
+    });
+
     this.addSection({
       title: 'Side Angle Side',
       setContent: [
