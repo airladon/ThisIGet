@@ -12098,9 +12098,10 @@ function (_EquationLabel) {
     var showRealAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
     var units = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'degrees';
     var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : -1;
-    var orientation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'horizontal';
-    var scale = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 0.7;
+    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+    var autoHideMax = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+    var orientation = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 'horizontal';
+    var scale = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 0.7;
 
     _classCallCheck(this, AngleLabel);
 
@@ -12116,6 +12117,7 @@ function (_EquationLabel) {
     _this.orientation = orientation;
     _this.precision = precision;
     _this.autoHide = autoHide;
+    _this.autoHideMax = autoHideMax;
     return _this;
   }
 
@@ -12402,7 +12404,8 @@ function (_DiagramElementCollec) {
         units: 'degrees',
         precision: 0,
         orientation: 'horizontal',
-        autoHide: -1,
+        autoHide: null,
+        autoHideMax: null,
         scale: 0.7,
         color: this.color
       };
@@ -12418,7 +12421,7 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.scale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.autoHideMax, optionsToUse.orientation, optionsToUse.scale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn);
@@ -12434,7 +12437,9 @@ function (_DiagramElementCollec) {
         sides: 50,
         radius: 0.5,
         num: 1,
-        step: 0
+        step: 0,
+        autoHideMin: null,
+        autoHideMax: null
       };
       var optionsToUse = Object.assign({}, defaultCurveOptions, curveOptions);
 
@@ -12672,7 +12677,21 @@ function (_DiagramElementCollec) {
           _curveRight = this._curveRight;
 
       if (_curve != null && curve != null) {
-        if (this.autoRightAngle && this.angle >= Math.PI / 2 - this.rightAngleRange / 2 && this.angle <= Math.PI / 2 + this.rightAngleRange / 2) {
+        if (curve.autoHideMin != null && this.angle < curve.autoHideMin || curve.autoHideMax != null && this.angle > curve.autoHideMax) {
+          if (_curveRight != null) {
+            _curveRight.hide();
+          }
+
+          _curve.hide();
+
+          if (_arrow1 != null) {
+            _arrow1.hide();
+          }
+
+          if (_arrow2 != null) {
+            _arrow2.hide();
+          }
+        } else if (this.autoRightAngle && this.angle >= Math.PI / 2 - this.rightAngleRange / 2 && this.angle <= Math.PI / 2 + this.rightAngleRange / 2) {
           if (_curveRight != null) {
             _curveRight.showAll();
           }
@@ -12811,7 +12830,7 @@ function (_DiagramElementCollec) {
           label = this.label;
 
       if (_label && label) {
-        if (label.autoHide > this.angle) {
+        if (label.autoHide != null && label.autoHide > this.angle || label.autoHideMax != null && this.angle > label.autoHideMax) {
           _label.hide();
         } else {
           _label.show();
@@ -14814,10 +14833,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramObjectPolyLine; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
-/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -14843,6 +14863,7 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
 
 
 
@@ -14937,8 +14958,21 @@ function (_DiagramElementCollec) {
       borderToPoint: 'never',
       width: 0.01,
       reverse: false,
-      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0)
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0),
+      makeValid: null
     };
+
+    if (options.makeValid != null && options.makeValid.shape != null && options.makeValid.shape === 'triangle') {
+      defaultOptions.makeValid = {
+        shape: 'triangle',
+        hide: {
+          minAngle: null,
+          maxAngle: null,
+          minSide: null
+        }
+      };
+    }
+
     var defaultSideOptions = {
       showLine: false,
       offset: 0,
@@ -15028,6 +15062,7 @@ function (_DiagramElementCollec) {
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
     _this.reverse = optionsToUse.reverse;
+    _this.makeValid = optionsToUse.makeValid;
     _this.points = optionsToUse.points.map(function (p) {
       return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
     }); // Add Pads
@@ -15373,6 +15408,10 @@ function (_DiagramElementCollec) {
 
       this.points = newPoints;
 
+      if (this.makeValid != null && this.makeValid.shape === 'triangle' && !skipCallback) {
+        this.makeValidTriangle();
+      }
+
       if (this.updatePointsCallback != null && !skipCallback) {
         this.updatePointsCallback();
       }
@@ -15519,10 +15558,200 @@ function (_DiagramElementCollec) {
       this.updateAngleLabels(rotationOffset);
       this.updateSideLabels(rotationOffset);
     }
+  }, {
+    key: "makeValidTriangle",
+    value: function makeValidTriangle() {
+      // $FlowFixMe
+      var angle0 = this._angle0; // $FlowFixMe
+
+      var angle1 = this._angle1; // $FlowFixMe
+
+      var angle2 = this._angle2; // $FlowFixMe
+
+      var side01 = this._side01; // $FlowFixMe
+
+      var side12 = this._side12; // $FlowFixMe
+
+      var side20 = this._side20;
+      var anglePrecision = angle0.label.precision;
+      var sidePrecision = side01.label.precision; // $FlowFixMe
+
+      var clipAngle0 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle0.getAngle(), '0to360') * 180 / Math.PI;
+      var clipAngle1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle1.getAngle(), '0to360') * 180 / Math.PI;
+      var clipAngle2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle2.getAngle(), '0to360') * 180 / Math.PI;
+      var a0 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle0, anglePrecision);
+      var a1 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle1, anglePrecision);
+      var a2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle2, anglePrecision);
+      var s01 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side01.getLength(), sidePrecision);
+      var s12 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side12.getLength(), sidePrecision);
+      var s20 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side20.getLength(), sidePrecision); // Reverse the points if the angles are on the outside
+
+      if (a0 > 90 && a1 > 90 && a2 > 90) {
+        this.reverse = !this.reverse;
+        this.updatePoints(this.points, false);
+        a0 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle0.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+        a1 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle1.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+        a2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle2.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+      } // else {
+      // This is a weird case at the 0/360 transition
+
+
+      if (a0 > 180) {
+        a0 = 360 - angle0;
+      }
+
+      if (a1 > 180) {
+        a1 = 360 - angle1;
+      }
+
+      if (a2 > 180) {
+        a2 = 360 - angle2;
+      } // Hide the angles if the triangle is thin or small enough
+      // if (
+      //   (angle0.label.autoHide > -1 && a0 > angle0.label.autoHide)
+      //   || (angle0.label.autoHideMax != null && angle0.label.autoHideMax < a0)
+      //   || (angle1.label.autoHide > -1 && a1 > angle1.label.autoHide)
+      //   || (angle1.label.autoHideMax != null && angle1.label.autoHideMax < a1)
+      //   || (angle2.label.autoHide > -1 && a2 > angle2.label.autoHide)
+      //   || (angle2.label.autoHideMax != null && angle2.label.autoHideMax < a2)
+      //   || s01 < 0.6 || s12 < 0.6 || s20 < 0.6
+      // ) {
+      // if (angle0.isShown) {
+      // Make angles consistent with 180º
+
+
+      var tot = a0 + a1 + a2;
+      var diff = tot - 180; // If the angles are > 180, then find the closet angle
+      // to rounding down and reduce it by diff
+      // If the angles are < 180 then find the closes angle
+      // to round down and round it down
+
+      var remainders = [Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle0, anglePrecision + 1), Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle1, anglePrecision + 1), Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle2, anglePrecision + 1)].map(function (a) {
+        return a - Math.floor(a * Math.pow(10, anglePrecision)) / Math.pow(10, anglePrecision);
+      });
+      var angles = [a0, a1, a2];
+      var indexToChange = 0;
+
+      if (tot > 180) {
+        indexToChange = remainders.reduce(function (iMax, x, i, arr) {
+          return x > arr[iMax] ? i : iMax;
+        }, 0);
+      } else if (tot < 180) {
+        indexToChange = remainders.reduce(function (iMin, x, i, arr) {
+          return x < arr[iMin] ? i : iMin;
+        }, 1);
+      }
+
+      angles[indexToChange] -= diff;
+      a0 = angles[0];
+      a1 = angles[1];
+      a2 = angles[2];
+      angle0.setLabel("".concat(a0.toFixed(anglePrecision), "\xBA"));
+      angle1.setLabel("".concat(a1.toFixed(anglePrecision), "\xBA"));
+      angle2.setLabel("".concat(a2.toFixed(anglePrecision), "\xBA"));
+
+      if (this.makeValid != null) {
+        var minSide = this.makeValid.hide.minSide;
+        var _this$makeValid$hide = this.makeValid.hide,
+            minAngle = _this$makeValid$hide.minAngle,
+            maxAngle = _this$makeValid$hide.maxAngle;
+        var hideAngles = false;
+
+        if (minAngle != null) {
+          minAngle *= 180 / Math.PI;
+
+          if (a0 < minAngle || a1 < minAngle || a2 < minAngle) {
+            hideAngles = true;
+          }
+        }
+
+        if (maxAngle != null) {
+          maxAngle *= 180 / Math.PI;
+
+          if (a0 > maxAngle || a1 > maxAngle || a2 > maxAngle) {
+            hideAngles = true;
+          }
+        }
+
+        if (minSide != null && (s01 < minSide || s12 < minSide || s20 < minSide)) {
+          hideAngles = true;
+        }
+
+        if (hideAngles) {
+          this.hideAngles();
+        } else {
+          this.showAngles();
+        }
+      } // Make sides consistent with equilateral or isosceles
+
+
+      if ((side01.isShown || side12.isShown || side20.isShown) && a0 > 0 && a0 < 180 && a1 > 0 && a1 < 180 && a2 > 0 && a2 < 180) {
+        s12 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a0 * Math.PI / 180), sidePrecision);
+        s20 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a1 * Math.PI / 180), sidePrecision);
+        var leastSigStep = 1 / Math.pow(10, sidePrecision); // If Equilateral, make all sides equal
+
+        if (a0 === 60 && a1 === 60 && a2 === 60) {
+          s12 = s01;
+          s20 = s01; // If Isosceles possibility 1:
+        } else if (a0 === a1) {
+          s20 = s12;
+
+          if (s01 === s12) {
+            var moreAccurate = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side01.getLength(), sidePrecision + 1);
+
+            if (moreAccurate < s01) {
+              s01 -= leastSigStep;
+            } else {
+              s01 += leastSigStep;
+            }
+          } // If Isosceles possibility 2:
+
+        } else if (a0 === a2) {
+          s01 = s12;
+
+          if (s20 === s12) {
+            var _moreAccurate = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side20.getLength(), sidePrecision + 1);
+
+            if (_moreAccurate < s20) {
+              s20 -= leastSigStep;
+            } else {
+              s20 += leastSigStep;
+            }
+          } // If Isosceles possibility 3:
+
+        } else if (a1 === a2) {
+          s20 = s01;
+
+          if (s12 === s01) {
+            var _moreAccurate2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side12.getLength(), sidePrecision + 1);
+
+            if (_moreAccurate2 < s12) {
+              s12 -= leastSigStep;
+            } else {
+              s12 += leastSigStep;
+            }
+          } // If these are not equilateral, or isosceles, then all sides must be different length
+
+        }
+      } // if (s01 === Infinity) {
+      //   s01 = round(side01.getLength(), sidePrecision);
+      // }
+      // if (s12 === Infinity) {
+      //   s12 = round(side12.getLength(), sidePrecision);
+      // }
+      // if (s20 === Infinity) {
+      //   s20 = round(side20.getLength(), sidePrecision);
+      // }
+
+
+      side01.setLabel("".concat(s01.toFixed(sidePrecision)));
+      side12.setLabel("".concat(s12.toFixed(sidePrecision)));
+      side20.setLabel("".concat(s20.toFixed(sidePrecision))); // }
+    }
   }]);
 
   return DiagramObjectPolyLine;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]);
 
 
 

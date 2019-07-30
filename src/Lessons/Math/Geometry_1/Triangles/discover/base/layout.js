@@ -37,6 +37,15 @@ export default function lessonLayout() {
       close: true,
       color: colors.lines,
       width: layout.width,
+      // makeConsistent: 'triangle',
+      makeValid: {
+        shape: 'triangle',
+        hide: {
+          minAngle: 15 * Math.PI / 180,
+          maxAngle: 150 * Math.PI / 180,
+          minSide: 0.8,
+        },
+      },
       pad: {
         color: [1, 1, 1, 0.01],
         radius: 0.3,
@@ -51,9 +60,14 @@ export default function lessonLayout() {
         curve: {
           radius: 0.3,
           width: layout.width,
+          // autoHideMin: Math.PI / 10,
+          // autoHideMax: Math.PI * 0.9,
         },
         label: {
           radius: 0.31,
+          precision: 0,
+          // autoHide: Math.PI / 10,
+          // autoHideMax: Math.PI * 0.9,
         },
         autoRightAngle: false,
       },
