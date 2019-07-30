@@ -62,27 +62,16 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this.setPosition(this.layout.sssPosition);
     this.diagram.addElements(this, this.layout.addElementsSSS);
     this.hasTouchableElements = true;
-    this._left.makeTouchable();
-    this._right.makeTouchable();
-    // this._scaleLeft.setMovable(true);
-    // this._scaleLeft.setTransformCallback = () => {
-    //   this._anyCircleLeft.setScale(this._scaleLeft.getScale());
-    // };
-    // this._moveLeft.setMovable(true);
-    // this._moveLeft.setTransformCallback = () => {
-    //   const p = this._moveLeft.getPosition();
-    //   this._scaleLeft.transform.updateTranslation(p);
-    //   this._anyCircleLeft.setPosition(p);
-    // };
+    // this._left.makeTouchable();
+    // this._right.makeTouchable();
+
     this._circ1._scale.setMovable(true);
-    // this._circ1._move.setMovable(true);
     this._pad1.setMovable(true);
     this._circ1._scale.setTransformCallback = () => {
       this._circ1._line.setScale(this._circ1._scale.getScale());
       this._rad1.setLength(this._circ1._scale.getScale().x * this.layout.defaultLen);
       this._rad1.interactiveLocation = new Point(this._rad1.length * 0.8, 0);
     };
-    // this._circ1._move.move.element = this._circ1;
     this._pad1.setTransformCallback = () => {
       this._circ1.setPositionToElement(this._pad1);
       this._rad1.setPositionToElement(this._pad1);
@@ -96,7 +85,6 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
       this._rad2.setLength(this._circ2._scale.getScale().x * this.layout.defaultLen);
       this._rad2.interactiveLocation = new Point(this._rad2.length * 0.8, 0);
     };
-    // this._pad2.move.element = this._circ2;
     this._pad2.setTransformCallback = () => {
       this._circ2.setPositionToElement(this._pad2);
       this._rad2.setPositionToElement(this._pad2);
@@ -104,58 +92,40 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     };
   }
 
-  createConstructionLines(
-    callback: ?() => void = null,
-  ) {
-    const leftRot = this._left.getRotation();
-    const rightRot = this._right.getRotation();
-    this._leftCircle.setRotation(leftRot);
-    this._rightCircle.setRotation(rightRot);
-    this._leftCircle.angleToDraw = 0;
-    this._rightCircle.angleToDraw = 0;
-    const createLeftCircle = (percent) => {
-      this._leftCircle.angleToDraw = percent * Math.PI * 2;
-      this._left.setRotation(percent * Math.PI * 2 + leftRot);
-    };
-    const createRightCircle = (percent) => {
-      this._rightCircle.angleToDraw = percent * Math.PI * 2;
-      this._right.setRotation(percent * Math.PI * 2 + rightRot);
-    };
-    this.animations.cancelAll();
-    this.animations.new()
-      .custom({ callback: createLeftCircle.bind(this), duration: 1 })
-      .custom({ callback: createRightCircle.bind(this), duration: 1 })
-      .whenFinished(callback)
-      .start();
-    this.diagram.animateNextFrame();
-    // };
-    // this._anyCircleLeft.setMovable(true);
-    // this._anyCircleLeft.makeTouchable();
-  }
+  // createConstructionLines(
+  //   callback: ?() => void = null,
+  // ) {
+  //   const leftRot = this._left.getRotation();
+  //   const rightRot = this._right.getRotation();
+  //   this._leftCircle.setRotation(leftRot);
+  //   this._rightCircle.setRotation(rightRot);
+  //   this._leftCircle.angleToDraw = 0;
+  //   this._rightCircle.angleToDraw = 0;
+  //   const createLeftCircle = (percent) => {
+  //     this._leftCircle.angleToDraw = percent * Math.PI * 2;
+  //     this._left.setRotation(percent * Math.PI * 2 + leftRot);
+  //   };
+  //   const createRightCircle = (percent) => {
+  //     this._rightCircle.angleToDraw = percent * Math.PI * 2;
+  //     this._right.setRotation(percent * Math.PI * 2 + rightRot);
+  //   };
+  //   this.animations.cancelAll();
+  //   this.animations.new()
+  //     .custom({ callback: createLeftCircle.bind(this), duration: 1 })
+  //     .custom({ callback: createRightCircle.bind(this), duration: 1 })
+  //     .whenFinished(callback)
+  //     .start();
+  //   this.diagram.animateNextFrame();
+  //   // };
+  //   // this._anyCircleLeft.setMovable(true);
+  //   // this._anyCircleLeft.makeTouchable();
+  // }
 
   goToSamePosition(done: ?() => void = null) {
     let position = rand(0, 1);
     if (this._pad1.getPosition().x > 0) {
       position *= -1;
     }
-    // this._pad1.stop(true, 'noComplete');
-    // this._pad2.stop(true, 'noComplete');
-    // this._circ1.stop(true, 'noComplete');
-    // this._circ2.stop(true, 'noComplete');
-    // this._pad1.animations.new()
-    //   .position({ target: [position, 0], duration: 0.8 })
-    //   .start();
-    // this._pad2.animations.new()
-    //   .position({ target: [position, 0], duration: 0.8 })
-    //   .start();
-    // const s1 = rand(0.3, 1);
-    // const s2 = rand(0.3, 1);
-    // this._circ1._scale.animations.new()
-    //   .scale({ target: [s1, s1], duration: 0.8 })
-    //   .start();
-    // this._circ2._scale.animations.new()
-    //   .scale({ target: [s2, s2], duration: 0.8 })
-    //   .start();
     this.goToPositionAndScale(
       position, position, rand(0.3, 1), rand(0.3, 1), done,
     );
@@ -302,186 +272,186 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this.goToPositionAndScale(p1, p2, s1, s2, done, 0.8, angle1, angle2);
   }
 
-  toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {
-    let target = 'top';
+  // toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {
+  //   let target = 'top';
 
-    const left = this._left.getRotation();
-    const right = this._right.getRotation();
-    if (this.animations.state === 'idle') {
-      if (left > 0 && left < Math.PI && right > Math.PI / 2 && right < Math.PI / 2 * 3) {
-        target = 'bottom';
-      } else {
-        target = 'top';
-      }
-    } else if (this.location === 'top') {
-      target = 'bottom';
-    }
+  //   const left = this._left.getRotation();
+  //   const right = this._right.getRotation();
+  //   if (this.animations.state === 'idle') {
+  //     if (left > 0 && left < Math.PI && right > Math.PI / 2 && right < Math.PI / 2 * 3) {
+  //       target = 'bottom';
+  //     } else {
+  //       target = 'top';
+  //     }
+  //   } else if (this.location === 'top') {
+  //     target = 'bottom';
+  //   }
 
-    if (goTo != null) {
-      target = goTo;
-    }
-    this.location = target;
-    this.animations.cancelAll();
-    this.animations.new()
-      .scenarios({ target, duration: 0.5 })
-      .whenFinished(done)
-      .start();
-    this.diagram.animateNextFrame();
-  }
-
-  updateLabels() {
-    if (this._left.isShown) {
-      this._left.updateLabel();
-    }
-    if (this._right.isShown) {
-      this._right.updateLabel();
-    }
-    if (this._base.isShown) {
-      this._base.updateLabel();
-    }
-    this.diagram.animateNextFrame();
-  }
-
-  flipTriangle(duration: number) {
-    const flipTri = this._flipTri;
-    flipTri.setScale(1, -1);
-    flipTri.animations.new()
-      .scale({ target: [1, 1], duration })
-      .start();
-    this.diagram.animateNextFrame();
-  }
-
-  flipAll(duration: number) {
-    let s = -1;
-    let scenario = 'flip';
-    let currentScenario = 'center';
-    if (this._fixedTri.getScale().x < 1) {
-      s = 1;
-      scenario = 'center';
-      currentScenario = 'flip';
-    }
-    this._flipTri.setScale(s * -1, 1);
-    this._flipTri.animations.new()
-      .scale({ target: [s, 1], duration })
-      .start();
-    this._fixedTri.setScale(s * -1, 1);
-    this._fixedTri.animations.new()
-      .scale({ target: [s, 1], duration })
-      .start();
-    this._leftCircle.setScenario(currentScenario);
-    this._leftCircle.animations.new()
-      .scenario({ target: scenario, duration })
-      .start();
-    this._rightCircle.setScenario(currentScenario);
-    this._rightCircle.animations.new()
-      .scenario({ target: scenario, duration })
-      .start();
-    this.diagram.animateNextFrame();
-  }
-
-  // pulseLeftLabels() {
-  //   this._left.showAll();
-  //   this._leftBottom.showAll();
-  //   this._left._label.pulseScaleNow(1, 2);
-  //   this._leftBottom._label.pulseScaleNow(1, 2);
+  //   if (goTo != null) {
+  //     target = goTo;
+  //   }
+  //   this.location = target;
+  //   this.animations.cancelAll();
+  //   this.animations.new()
+  //     .scenarios({ target, duration: 0.5 })
+  //     .whenFinished(done)
+  //     .start();
   //   this.diagram.animateNextFrame();
   // }
 
-  // pulseRightLabels() {
-  //   this._right.showAll();
-  //   this._rightBottom.showAll();
-  //   this._right._label.pulseScaleNow(1, 2);
-  //   this._rightBottom._label.pulseScaleNow(1, 2);
+  // updateLabels() {
+  //   if (this._left.isShown) {
+  //     this._left.updateLabel();
+  //   }
+  //   if (this._right.isShown) {
+  //     this._right.updateLabel();
+  //   }
+  //   if (this._base.isShown) {
+  //     this._base.updateLabel();
+  //   }
   //   this.diagram.animateNextFrame();
   // }
 
-  colorCircles(color: Array<number>) {
-    this._leftCircle.setColor(color);
-    this._rightCircle.setColor(color);
-    this.diagram.animateNextFrame();
-  }
+  // flipTriangle(duration: number) {
+  //   const flipTri = this._flipTri;
+  //   flipTri.setScale(1, -1);
+  //   flipTri.animations.new()
+  //     .scale({ target: [1, 1], duration })
+  //     .start();
+  //   this.diagram.animateNextFrame();
+  // }
 
-  setDefaultColors() {
-    this._left.setColor(this.layout.colors.sides);
-    this._right.setColor(this.layout.colors.sides);
-    this._leftBottom.setColor(this.layout.colors.sides);
-    this._rightBottom.setColor(this.layout.colors.sides);
-    this._constructionLine.setColor(this.layout.colors.sides);
-    this._base.setColor(this.layout.colors.sides);
-    this._angleTopLeft.setColor(this.layout.colors.angles);
-    this._angleBottomLeft.setColor(this.layout.colors.angles);
-    this._angleTopRight.setColor(this.layout.colors.angles);
-    this._angleBottomRight.setColor(this.layout.colors.angles);
-    this.diagram.animateNextFrame();
-  }
+  // flipAll(duration: number) {
+  //   let s = -1;
+  //   let scenario = 'flip';
+  //   let currentScenario = 'center';
+  //   if (this._fixedTri.getScale().x < 1) {
+  //     s = 1;
+  //     scenario = 'center';
+  //     currentScenario = 'flip';
+  //   }
+  //   this._flipTri.setScale(s * -1, 1);
+  //   this._flipTri.animations.new()
+  //     .scale({ target: [s, 1], duration })
+  //     .start();
+  //   this._fixedTri.setScale(s * -1, 1);
+  //   this._fixedTri.animations.new()
+  //     .scale({ target: [s, 1], duration })
+  //     .start();
+  //   this._leftCircle.setScenario(currentScenario);
+  //   this._leftCircle.animations.new()
+  //     .scenario({ target: scenario, duration })
+  //     .start();
+  //   this._rightCircle.setScenario(currentScenario);
+  //   this._rightCircle.animations.new()
+  //     .scenario({ target: scenario, duration })
+  //     .start();
+  //   this.diagram.animateNextFrame();
+  // }
 
-  colorRightIsosceles() {
-    this.setDefaultColors();
-    this._left.setColor(this.layout.colors.disabled);
-    this._leftBottom.setColor(this.layout.colors.disabled);
-    this._base.setColor(this.layout.colors.disabled);
-    this._angleTopLeft.setColor(this.layout.colors.disabled);
-    this._angleBottomLeft.setColor(this.layout.colors.disabled);
-    this.diagram.animateNextFrame();
-  }
+  // // pulseLeftLabels() {
+  // //   this._left.showAll();
+  // //   this._leftBottom.showAll();
+  // //   this._left._label.pulseScaleNow(1, 2);
+  // //   this._leftBottom._label.pulseScaleNow(1, 2);
+  // //   this.diagram.animateNextFrame();
+  // // }
 
-  colorLeftIsosceles() {
-    this.setDefaultColors();
-    this._right.setColor(this.layout.colors.disabled);
-    this._rightBottom.setColor(this.layout.colors.disabled);
-    this._base.setColor(this.layout.colors.disabled);
-    this._angleTopRight.setColor(this.layout.colors.disabled);
-    this._angleBottomRight.setColor(this.layout.colors.disabled);
-    this.diagram.animateNextFrame();
-  }
+  // // pulseRightLabels() {
+  // //   this._right.showAll();
+  // //   this._rightBottom.showAll();
+  // //   this._right._label.pulseScaleNow(1, 2);
+  // //   this._rightBottom._label.pulseScaleNow(1, 2);
+  // //   this.diagram.animateNextFrame();
+  // // }
 
-  colorTopBottomTriangles() {
-    this.setDefaultColors();
-    this._constructionLine.setColor(this.layout.colors.disabled);
-    this.diagram.animateNextFrame();
-  }
+  // colorCircles(color: Array<number>) {
+  //   this._leftCircle.setColor(color);
+  //   this._rightCircle.setColor(color);
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseLeftIsosceles(done: ?() => void = null) {
-    this.colorLeftIsosceles();
-    this._left.pulseWidth();
-    this._leftBottom.pulseWidth();
-    this._constructionLine.pulseWidth({ done });
-    this.diagram.animateNextFrame();
-  }
+  // setDefaultColors() {
+  //   this._left.setColor(this.layout.colors.sides);
+  //   this._right.setColor(this.layout.colors.sides);
+  //   this._leftBottom.setColor(this.layout.colors.sides);
+  //   this._rightBottom.setColor(this.layout.colors.sides);
+  //   this._constructionLine.setColor(this.layout.colors.sides);
+  //   this._base.setColor(this.layout.colors.sides);
+  //   this._angleTopLeft.setColor(this.layout.colors.angles);
+  //   this._angleBottomLeft.setColor(this.layout.colors.angles);
+  //   this._angleTopRight.setColor(this.layout.colors.angles);
+  //   this._angleBottomRight.setColor(this.layout.colors.angles);
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseRightIsosceles(done: ?() => void = null) {
-    this.colorRightIsosceles();
-    this._right.pulseWidth();
-    this._rightBottom.pulseWidth();
-    this._constructionLine.pulseWidth({ done });
-    this.diagram.animateNextFrame();
-  }
+  // colorRightIsosceles() {
+  //   this.setDefaultColors();
+  //   this._left.setColor(this.layout.colors.disabled);
+  //   this._leftBottom.setColor(this.layout.colors.disabled);
+  //   this._base.setColor(this.layout.colors.disabled);
+  //   this._angleTopLeft.setColor(this.layout.colors.disabled);
+  //   this._angleBottomLeft.setColor(this.layout.colors.disabled);
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseLeftIsoscelesAngles(done: ?() => void = null) {
-    this.colorLeftIsosceles();
-    this._angleTopLeft.pulseScaleNow(1, 1.3);
-    this._angleBottomLeft.pulseScaleNow(1, 1.3, 0, done);
-    this.diagram.animateNextFrame();
-  }
+  // colorLeftIsosceles() {
+  //   this.setDefaultColors();
+  //   this._right.setColor(this.layout.colors.disabled);
+  //   this._rightBottom.setColor(this.layout.colors.disabled);
+  //   this._base.setColor(this.layout.colors.disabled);
+  //   this._angleTopRight.setColor(this.layout.colors.disabled);
+  //   this._angleBottomRight.setColor(this.layout.colors.disabled);
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseRightIsoscelesAngles(done: ?() => void = null) {
-    this.colorRightIsosceles();
-    this._angleTopRight.pulseScaleNow(1, 1.3);
-    this._angleBottomRight.pulseScaleNow(1, 1.3, 0, done);
-    this.diagram.animateNextFrame();
-  }
+  // colorTopBottomTriangles() {
+  //   this.setDefaultColors();
+  //   this._constructionLine.setColor(this.layout.colors.disabled);
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseTopTriangle() {
-    this._left.pulseWidth();
-    this._right.pulseWidth();
-    this._base.pulseWidth();
-    this.diagram.animateNextFrame();
-  }
+  // pulseLeftIsosceles(done: ?() => void = null) {
+  //   this.colorLeftIsosceles();
+  //   this._left.pulseWidth();
+  //   this._leftBottom.pulseWidth();
+  //   this._constructionLine.pulseWidth({ done });
+  //   this.diagram.animateNextFrame();
+  // }
 
-  pulseBottomTriangle() {
-    this._leftBottom.pulseWidth();
-    this._rightBottom.pulseWidth();
-    this._base.pulseWidth();
-    this.diagram.animateNextFrame();
-  }
+  // pulseRightIsosceles(done: ?() => void = null) {
+  //   this.colorRightIsosceles();
+  //   this._right.pulseWidth();
+  //   this._rightBottom.pulseWidth();
+  //   this._constructionLine.pulseWidth({ done });
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // pulseLeftIsoscelesAngles(done: ?() => void = null) {
+  //   this.colorLeftIsosceles();
+  //   this._angleTopLeft.pulseScaleNow(1, 1.3);
+  //   this._angleBottomLeft.pulseScaleNow(1, 1.3, 0, done);
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // pulseRightIsoscelesAngles(done: ?() => void = null) {
+  //   this.colorRightIsosceles();
+  //   this._angleTopRight.pulseScaleNow(1, 1.3);
+  //   this._angleBottomRight.pulseScaleNow(1, 1.3, 0, done);
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // pulseTopTriangle() {
+  //   this._left.pulseWidth();
+  //   this._right.pulseWidth();
+  //   this._base.pulseWidth();
+  //   this.diagram.animateNextFrame();
+  // }
+
+  // pulseBottomTriangle() {
+  //   this._leftBottom.pulseWidth();
+  //   this._rightBottom.pulseWidth();
+  //   this._base.pulseWidth();
+  //   this.diagram.animateNextFrame();
+  // }
 }

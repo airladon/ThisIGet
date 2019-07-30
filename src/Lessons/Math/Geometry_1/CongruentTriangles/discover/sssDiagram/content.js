@@ -55,24 +55,23 @@ class Content extends PresentationLessonContent {
     this.addSection({
       title: 'Side Side Side',
       setContent: style({ centerV: true }, [
-        'If you are given three fixed side lengths, how many triangles can you make? Are they the same?',
-        'Use this diagram on the next page to experiment with changing the side lengths, and then seeing how many triangles are possible.',
+        'If you have two triangles with the same side lengths, are they |congruent| (the same)?',
+        'In other words, if you have three fixed side lengths, |how many different triangles| can you make?',
       ]),
     });
 
     this.addSection({
-      setContent: style({ top: 0 }, [
-        '|Experiment| by changing the circle\'s sizes and positions.',
+      setContent: style({ centerV: true }, [
+        '|Experiment| with the diagram on the next page.',
+        'Change the size and separation of the circles, and rotate the left and right sides to form explore.',
       ]),
+    });
+
+    this.addSection({
       show: [
         sss._circ1, sss._circ2, sss._pad1, sss._pad2,
         sss._rad1, sss._rad2, sss._baseLine,
       ],
-      // interactiveElements: [
-      //   // { element: sss._pad1, location: 'center' },
-      //   // { element: sss._pad2, location: 'center' },
-      //   { element: sss._circ1._scale, location: [-1, -1] },
-      // ],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'next') {
           sss.animations.new()
@@ -84,6 +83,11 @@ class Content extends PresentationLessonContent {
         sss.setScenarios('center');
         done();
       },
+      setInfo: [
+        'Change the length of the horizontal side by dragging the circle center points',
+        'Change the length of the left and right sides by dragging the circle edges',
+        'Change the rotation of the left and right sides by dragging the sides themselves',
+      ],
       setSteadyState: () => {
         // sss._circ1._scale.interactiveLocation = new Point(0, layout.defaultLen);
         // sss._circ2._scale.interactiveLocation = new Point(0, layout.defaultLen);

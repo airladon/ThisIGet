@@ -327,7 +327,9 @@ export default class LessonComponent extends React.Component
           }
         });
         this.key += 1;
-        if (partialLessonCount > 0 && name === 'explanation') {
+        if (partialLessonCount > 0
+          && (name === 'explanation' || name === 'discover' || name === 'summary')
+        ) {
           listItems.splice(fullLessonCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
