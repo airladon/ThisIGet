@@ -347,6 +347,9 @@ class Content extends PresentationLessonContent {
         sss.setScenarios('default');
         sss.hasTouchableElements = false;
       },
+      setLeaveState: () => {
+        sss._flipTri.setScale(1, 1);
+      },
     });
 
     this.addSection({
@@ -364,7 +367,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: style({ top: 0 }, 'Therefore the flipped triangle is the |same| as the triangle at the circle intersection below the horizontal.'),
+      setContent: style({ top: 0 }, 'As |only one triangle| is possible below the line, it must therefore be the |flipped triangle|.'),
       show: [
         sss._leftCircle, sss._rightCircle,
         sss._fixedTri, sss._flipTri,
@@ -378,7 +381,64 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
+      setContent: style({ top: 0 }, 'Similarly, if these triangles are flipped around the |vertical|, then it would be as if we switched the positions of the two rotating sides.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        vertical: click(sss.flipAll, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        const flip = sss._fixedTri.getScale().x;
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        if (flip !== 1 && this.comingFrom === 'next') {
+          sss.flipAll(0);
+        }
+      },
+      setLeaveState: () => {
+        if (this.goingTo !== 'next') {
+          sss._fixedTri.setScale(1, 1);
+          sss._flipTri.setScale(1, 1);
+          sss._leftCircle.setScale(1, 1);
+          sss._rightCircle.setScale(1, 1);
+        }
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'So no matter which |end| we connect the sides to, we have the same congruent triangle.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        end: click(sss.flipAll, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        const flip = sss._fixedTri.getScale().x;
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        if (flip !== 1 && this.comingFrom === 'prev') {
+          sss.flipAll(0);
+        }
+      },
+      setLeaveState: () => {
+        if (this.goingTo !== 'prev') {
+          sss._fixedTri.setScale(1, 1);
+          sss._flipTri.setScale(1, 1);
+          sss._leftCircle.setScale(1, 1);
+          sss._rightCircle.setScale(1, 1);
+        }
+      },
+    });
+
+    this.addSection({
       setContent: style({ centerV: true }, [
+        'And so for this case, the three side lengths can only create |one triangle|.',
         'Does this hold for |any| three side lengths?',
       ]),
     });
@@ -427,7 +487,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ top: 0 }, [
-        'Triangles |cannot be formed| if the circles are at the |same_position|, or if they |do_not_intersect|. When they |do_intersect|, only |two| intersect points exist.',
+        'Triangles |cannot be formed| if the circles are at the |same_position|, or if they |do_not_intersect|. When they |do_intersect|, only |two| intersect points ever exist.',
       ]),
       show: [
         sss._circ1, sss._circ2, sss._pad1, sss._pad2,
@@ -477,28 +537,7 @@ class Content extends PresentationLessonContent {
     //   },
     // });
 
-    // this.addSection({
-    //   setContent: style({ top: 0 }, 'If these triangles are flipped around the |vertical|, it shows the case of'),
-    //   show: [
-    //     sss._leftCircle, sss._rightCircle,
-    //     sss._fixedTri, sss._flipTri,
-    //   ],
-    //   modifiers: {
-    //     vertical: click(sss.flipAll, [sss, 1], colors.sides),
-    //   },
-    //   setSteadyState: () => {
-    //     sss.setScenarios('center');
-    //     sss.setScenarios('default');
-    //     sss.hasTouchableElements = false;
-    //     sss._flipTri.setScale(1, 1);
-    //   },
-    //   setLeaveState: () => {
-    //     sss._fixedTri.setScale(1, 1);
-    //     sss._flipTri.setScale(1, 1);
-    //     sss._leftCircle.setScale(1, 1);
-    //     sss._rightCircle.setScale(1, 1);
-    //   }
-    // });
+    
 
     this.addSection({
       setContent: style({ top: 0 }, 'More generally, a triangle is formed by two overlapping circles with separate center points.'),

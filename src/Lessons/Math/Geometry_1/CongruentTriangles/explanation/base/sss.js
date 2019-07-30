@@ -314,21 +314,29 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
   }
 
   flipAll(duration: number) {
-    this._flipTri.setScale(1, 1);
+    let s = -1;
+    let scenario = 'flip';
+    let currentScenario = 'center';
+    if (this._fixedTri.getScale().x < 1) {
+      s = 1;
+      scenario = 'center';
+      currentScenario = 'flip';
+    }
+    this._flipTri.setScale(s * -1, 1);
     this._flipTri.animations.new()
-      .scale({ target: [-1, 1], duration })
+      .scale({ target: [s, 1], duration })
       .start();
-    this._fixedTri.setScale(1, 1);
+    this._fixedTri.setScale(s * -1, 1);
     this._fixedTri.animations.new()
-      .scale({ target: [-1, 1], duration })
+      .scale({ target: [s, 1], duration })
       .start();
-    this._leftCircle.setScenario('center');
+    this._leftCircle.setScenario(currentScenario);
     this._leftCircle.animations.new()
-      .scenario({ target: 'flip', duration })
+      .scenario({ target: scenario, duration })
       .start();
-    this._rightCircle.setScenario('center');
+    this._rightCircle.setScenario(currentScenario);
     this._rightCircle.animations.new()
-      .scenario({ target: 'flip', duration })
+      .scenario({ target: scenario, duration })
       .start();
     this.diagram.animateNextFrame();
   }
