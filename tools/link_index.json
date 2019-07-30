@@ -704,6 +704,39 @@
     "versionUID": "base"
   },
   {
+    "url": "",
+    "hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "publisher": "",
+    "type": "generic",
+    "description": "",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "SideSideSide",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://www.mathopenref.com/congruentsss.html",
+    "hash": "56e15bb123f7f266b4fa800469587b5c",
+    "publisher": "Math Open Reference",
+    "type": "generic",
+    "description": "Introduction to Side-Side-Side congruence",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "SideSideSide",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "",
+    "hash": "d41d8cd98f00b204e9800998ecf8427e",
+    "publisher": "",
+    "type": "generic",
+    "description": "",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "SideSideSide",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://sites.google.com/site/ncertstdx/similar-triangles-theorems",
     "hash": "11d70ead6e3138cd4b774ecfe9422867",
     "publisher": "NCERT X Mathematics",

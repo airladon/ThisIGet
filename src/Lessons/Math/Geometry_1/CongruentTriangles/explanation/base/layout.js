@@ -415,6 +415,7 @@ export default function lessonLayout() {
           scenarios: {
             center: { position: [0, 0], rotation: 0, scale: r / leftLen },
           },
+          interactiveLocation: [0, leftLen],
         },
       },
     ],
@@ -459,6 +460,7 @@ export default function lessonLayout() {
       scenarios: {
         center: { position: defPos, rotation: defRot, scale: 1 },
       },
+      interactiveLocation: [leftLen * 0.8, 0],
     },
   });
 
