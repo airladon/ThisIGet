@@ -5,6 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
+import { note } from '../../../../../LessonsCommon/tools/note';
 import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -48,6 +49,7 @@ class Content extends PresentationLessonContent {
     const aas = diag._aas;
     const ssa = diag._ssa;
     const sss = diag._sss;
+    const oneProp = diag._oneProp;
     // const sss = diag._sss;
 
     this.addSection({
@@ -138,7 +140,68 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'So |how| can you figure out if two triangles are congruent?',
-        'One way is to measure all the angles and sides and see if they are equal.',
+        'What is the |minimum| number of properties you need confirm two triangles are congruent?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'We will test this by seeing how many |different triangles| we can make from different property configurations.',
+        'If we can only make |one triangle|, or all the triangles we can make are the same, then we will know that the property configuration is |sufficient to determine congruence|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Lets start with a single property. Either a |side| or an |angle|.',
+      ]),
+    });
+
+    this.addSection({
+      title: 'One Property',
+      setContent: [
+        'If we know just a |single_side_length|, how many triangles can be formed?',
+        note({ label: 'Note:' }, 'Move the |top_point| of the triangle to change the triangle'),
+      ],
+      modifiers: {
+        single_side_length: click(oneProp.pulseSide, [oneProp], oneProp.colors.highlight),
+        top_point: click(oneProp.pulsePad, [oneProp], oneProp.colors.pads),
+      },
+      show: [oneProp._sideTri],
+    });
+
+    this.addSection({
+      setContent: [
+        '|Many| triangles can be formed. Therefore if two triangles share a single side length that is |not enough information| to know they are |congruent|.',
+      ],
+      modifiers: {
+        Many: click(oneProp.randomSide, [oneProp], colors.diagram.action),
+      },
+      show: [oneProp._sideTri],
+    });
+
+    this.addSection({
+      setContent: [
+        'Similarly, if we know just |one_angle|, |many| triangles can be formed.',
+      ],
+      modifiers: {
+        one_angle: click(oneProp.pulseAngle, [oneProp], oneProp.colors.highlight),
+        many: click(oneProp.randomAngle, [oneProp], colors.diagram.action),
+      },
+      show: [oneProp._angleTri],
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'Therefore |one property is insufficient| to determine congruency.',
+        'How about |two properties|?',
+        'The two property |combinations| are:',
+        style({ list: 'unordered' }, [
+          'Side-Side',
+          'Angle-Angle',
+          'Adjacent Side-Angle',
+          'Opposite Side-Angle',
+        ]),
       ]),
     });
 

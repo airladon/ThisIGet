@@ -21608,6 +21608,12 @@ function () {
       this.stopPulsing(cancelled);
     }
   }, {
+    key: "cancel",
+    value: function cancel() {
+      var forceSetToEndOfPlan = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      this.stop(true, forceSetToEndOfPlan);
+    }
+  }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
       var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;

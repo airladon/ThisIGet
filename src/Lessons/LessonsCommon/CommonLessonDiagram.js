@@ -14,7 +14,23 @@ export type TypeCommonLessonDiagram = {
 } & Diagram;
 
 export default class CommonLessonDiagram extends Diagram {
-  layout: Object;
+  layout: {
+    limits?: Rect,
+    colors?: {
+      diagram?: {
+        background?: Array<number>,
+      }
+    },
+    [string]: Object,
+  };
+
+  colors: {
+    diagram?: {
+      background?: Array<number>,
+    },
+    [string]: Object,
+  };
+
   lesson: Object;
   // $FlowFixMe
   elements: CommonDiagramCollection;
@@ -39,5 +55,6 @@ export default class CommonLessonDiagram extends Diagram {
     const optionsToUse = joinObjects({}, defaultOptions, diagramOptions);
     super(optionsToUse);
     this.layout = layout;
+    this.colors = this.layout.colors || {};
   }
 }
