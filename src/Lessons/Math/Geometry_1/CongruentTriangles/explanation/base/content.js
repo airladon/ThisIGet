@@ -446,8 +446,8 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'We have seen making a triangle from three fixed side lengths is the same as making a triangle from |two overlapping circles|.',
-        'One side of the triangle is the distance between the circle centers.',
-        'The other two sides join at one of the circle intersection points.',
+        'One side of the triangle is the distance between the |circle centers|.',
+        'The other two sides join at one of the circle |intersection| points.',
         'So, a more general question might be, can you find any configuration of separated circles that has |more than two, opposite, intersection points|?',
       ]),
     });
@@ -462,22 +462,26 @@ class Content extends PresentationLessonContent {
       ],
       transitionFromAny: (done) => {
         if (this.comingFrom === 'next') {
-          const rad1 = sss._rad1.getRotation();
-          const rad2 = sss._rad2.getRotation();
-          const scale1 = sss._circ1._scale.getScale();
-          const scale2 = sss._circ2._scale.getScale();
-          const pad1 = sss._pad1.transform._dup();
-          const pad2 = sss._pad2.transform._dup();
-          sss.setScenarios('center');
-          sss._rad1.setRotation(rad1);
-          sss._rad2.setRotation(rad2);
-          sss._circ1._scale.setScale(scale1);
-          sss._circ2._scale.setScale(scale2);
-          sss._pad1.setTransform(pad1);
-          sss._pad2.setTransform(pad2);
-        } else {
-          sss.setScenarios('center');
+          // const rad1 = sss._rad1.getRotation();
+          // const rad2 = sss._rad2.getRotation();
+          // const scale1 = sss._circ1._scale.getScale();
+          // const scale2 = sss._circ2._scale.getScale();
+          // const pad1 = sss._pad1.transform._dup();
+          // const pad2 = sss._pad2.transform._dup();
+          // sss.setScenarios('center');
+          // sss._rad1.setRotation(rad1);
+          // sss._rad2.setRotation(rad2);
+          // sss._circ1._scale.setScale(scale1);
+          // sss._circ2._scale.setScale(scale2);
+          // sss._pad1.setTransform(pad1);
+          // sss._pad2.setTransform(pad2);
+          sss.animations.new()
+            .scenarios({ target: 'center', duration: 0.8 })
+            .whenFinished(done)
+            .start();
+          return;
         }
+        sss.setScenarios('center');
         done();
       },
       setSteadyState: () => {
@@ -485,93 +489,95 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    this.addSection({
+    common = {
+      show: [
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
+      ],
+      modifiers: {
+        same_position: click(sss.goToSamePosition, [sss, null], colors.diagram.action),
+        do_not_intersect: click(sss.goToNoOverlap, [sss, null], colors.diagram.action),
+        do_intersect: click(sss.goToOverlap, [sss, null], colors.diagram.action),
+        two: click(sss.goToOverlapIntersect, [sss, null], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+      },
+    };
+
+    this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'Triangles |cannot be formed| if the circles are at the |same_position|, or if they |do_not_intersect|. When they |do_intersect|, only |two| intersect points ever exist.',
+        'If the circles are at the |same_position|, then a triangle cannot be formed as one of the side lengths is zero',
       ]),
-      show: [
-        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
-        sss._rad1, sss._rad2, sss._baseLine,
-      ],
-      modifiers: {
-        same_position: click(sss.goToSamePosition, [sss], colors.diagram.action),
-        do_not_intersect: click(sss.goToNoOverlap, [sss], colors.diagram.action),
-        do_intersect: click(sss.goToOverlap, [sss], colors.diagram.action),
-        two: click(sss.goToOverlapIntersect, [sss], colors.diagram.action),
-      },
       transitionFromAny: (done) => {
-        if (this.comingFrom === 'prev') {
-          const rad1 = sss._rad1.getRotation();
-          const rad2 = sss._rad2.getRotation();
-          const pad1 = sss._pad1.transform._dup();
-          const pad2 = sss._pad2.transform._dup();
-          const scale1 = sss._circ1._scale.getScale();
-          const scale2 = sss._circ2._scale.getScale();
+        if (this.comingFrom === 'goto') {
           sss.setScenarios('center');
-          sss._rad1.setRotation(rad1);
-          sss._rad2.setRotation(rad2);
-          sss._circ1._scale.setScale(scale1);
-          sss._circ2._scale.setScale(scale2);
-          sss._pad1.setTransform(pad1);
-          sss._pad2.setTransform(pad2);
-        } else {
-          sss.setScenarios('center');
+          sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done, 0);
+          done();
+          return;
         }
-        done();
-      },
-      setSteadyState: () => {
-        sss.hasTouchableElements = true;
+        sss.goToPositionAndScale(0, 0, 0.7, 0.6, done);
       },
     });
-    // this.addSection({
-    //   setContent: style({ top: 0 }, 'Only |one| triangle can be made from these three side lengths, and thus it is '),
-    //   show: [
-    //     sss._leftCircle, sss._rightCircle,
-    //     sss._fixedTri, sss._flipTri,
-    //   ],
-    //   setSteadyState: () => {
-    //     sss.setScenarios('center');
-    //     sss.setScenarios('default');
-    //     sss.hasTouchableElements = false;
-    //     sss._flipTri.setScale(1, 1);
-    //   },
-    // });
 
-    
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'If the circles |do_not_intersect|, then no triangles can be formed as the side lengths never meet at their ends.',
+      ]),
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          sss.setScenarios('center');
+          sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done, 0);
+          done();
+          return;
+        }
+        sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'In the situations the circles |do_intersect|, there are only ever |two| intersect points which we have seen makes the same triangle.',
+      ]),
+      transitionFromAny: (done) => {
+        const [angle1, angle2] = sss.getIntersectAngles(-0.5, 0.5, 0.7, 0.6);
+        if (this.comingFrom === 'goto') {
+          sss.setScenarios('center');
+          sss.goToPositionAndScale(-0.5, 0.5, 0.7, 0.6, done, 0, angle1, angle2);
+          done();
+          return;
+        }
+        // sss.goToOverlap(done);
+        sss.goToPositionAndScale(-0.5, 0.5, 0.7, 0.6, done, 0.8, angle1, angle2);
+      },
+    });
 
     this.addSection({
-      setContent: style({ top: 0 }, 'More generally, a triangle is formed by two overlapping circles with separate center points.'),
-      show: [
-        sss._leftCircle, sss._rightCircle,
-        sss._fixedTri, sss._flipTri,
+      setContent: style({ centerV: true }, [
+        'And so if we fix |any| three side lengths that |can| create a triangle, we will only be able to create |one triangle|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore if two triangles share |three sides of the same length|, then they |are congruent|.',
+        'This case is often called the |Side Side Side| case.',
       ],
       modifiers: {
-        flip: click(sss.flipTriangle, [sss, 1], colors.sides),
+        angle_between: highlight(colors.angles),
       },
-      setSteadyState: () => {
-        sss.setScenarios('center');
-        sss.setScenarios('default');
-        sss.hasTouchableElements = false;
-        sss._flipTri.setScale(1, 1);
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
       },
-    });
-
-    this.addSection({
-      setContent: style({ top: 0 }, 'Move the circles, and change their size - are there any cases where there are not two intersection points?'),
-      show: [
-        // sss._anyCircleLeft, sss._scaleLeft, sss._moveLeft,
-        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
-        sss._rad1, sss._rad2, sss._baseLine,
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle0, congruent._tri1._angle1,
+        congruent._tri2._angle0, congruent._tri2._angle1,
+        congruent._tri1._angle2, congruent._tri2._angle2,
       ],
-      setSteadyState: () => {
-        sss.setScenarios('center');
-        // sss._scalePadLeft.setMovable(true);
-        // sss._scalePadLeft.opacity = 0.4;
-        // sss._leftBottom._line.showAll();
-        // sss._rightBottom._line.showAll();
-        // sss.setScenarios('default');
-        sss.hasTouchableElements = true;
-      },
+      // setSteadyState: () => {
+      // },
     });
 
     /* ********************************************************************* */

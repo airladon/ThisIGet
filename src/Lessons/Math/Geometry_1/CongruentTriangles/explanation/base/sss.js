@@ -130,7 +130,7 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     // this._anyCircleLeft.makeTouchable();
   }
 
-  goToSamePosition() {
+  goToSamePosition(done: ?() => void = null) {
     let position = rand(0, 1);
     if (this._pad1.getPosition().x > 0) {
       position *= -1;
@@ -153,7 +153,9 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     // this._circ2._scale.animations.new()
     //   .scale({ target: [s2, s2], duration: 0.8 })
     //   .start();
-    this.goToPositionAndScale(position, position, rand(0.3, 1), rand(0.3, 1));
+    this.goToPositionAndScale(
+      position, position, rand(0.3, 1), rand(0.3, 1), done,
+    );
   }
 
   goToPositionAndScale(
@@ -161,6 +163,8 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     p2: number,
     s1: number,
     s2: number,
+    done: ?() => void = null,
+    duration: ?number = 1,
     angle1: number = this._rad1.getRotation(),
     angle2: number = this._rad2.getRotation(),
   ) {
@@ -170,27 +174,28 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this._circ2.stop(true, 'noComplete');
 
     this._pad1.animations.new()
-      .position({ target: [p1, 0], duration: 0.8 })
+      .position({ target: [p1, 0], duration })
       .start();
     this._pad2.animations.new()
-      .position({ target: [p2, 0], duration: 0.8 })
+      .position({ target: [p2, 0], duration })
       .start();
     this._circ1._scale.animations.new()
-      .scale({ target: [s1, s1], duration: 0.8 })
+      .scale({ target: [s1, s1], duration })
       .start();
     this._circ2._scale.animations.new()
-      .scale({ target: [s2, s2], duration: 0.8 })
+      .scale({ target: [s2, s2], duration })
       .start();
     this._rad1.animations.new()
-      .rotation({ target: angle1, duration: 0.8 })
+      .rotation({ target: angle1, duration })
       .start();
     this._rad2.animations.new()
-      .rotation({ target: angle2, duration: 0.8 })
+      .rotation({ target: angle2, duration })
+      .whenFinished(done)
       .start();
     this.diagram.animateNextFrame();
   }
 
-  goToNoOverlap() {
+  goToNoOverlap(done: ?() => void = null) {
     const scenario = randElement(['separate', 'within']);
     let s1;
     let s2;
@@ -217,34 +222,64 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
       p1 = rand(0, 1, true);
       p2 = rand(0.1, Math.abs(len(s2) - len(s1)) * 0.8, true) + p1;
     }
-    this.goToPositionAndScale(p1, p2, s1, s2);
+    this.goToPositionAndScale(p1, p2, s1, s2, done);
   }
 
-  goToOverlapIntersect() {
-    const p1 = this._pad1.getPosition().x;
-    const p2 = this._pad2.getPosition().x;
-    const s1 = this._circ1._scale.getScale().x;
-    const s2 = this._circ2._scale.getScale().x;
+
+  getIntersectAngles(
+    p1: number = this._pad1.getPosition().x,
+    p2: number = this._pad2.getPosition().x,
+    s1: number = this._circ1._scale.getScale().x,
+    s2: number = this._circ2._scale.getScale().x,
+  ) {
+    // const p1 = ;
+    // const p2 = ;
+    // const s1 = this._circ1._scale.getScale().x;
+    // const s2 = this._circ2._scale.getScale().x;
     const len = s => s * this.layout.defaultLen;
     const r2 = len(s2);
     const r1 = len(s1);
     const x = (r2 ** 2 - r1 ** 2 - p2 ** 2 + p1 ** 2) / (2 * p1 - 2 * p2);
-    let y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
+    const y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
+    const topAngle1 = Math.atan2(y, x - p1);
+    const topAngle2 = Math.atan2(y, x - p2);
+    const bottomAngle1 = Math.atan2(-y, x - p1);
+    const bottomAngle2 = Math.atan2(-y, x - p2);
+    return [topAngle1, topAngle2, bottomAngle1, bottomAngle2];
+  }
+
+
+  goToOverlapIntersect(done: ?() => void = null) {
+    // const len = s => s * this.layout.defaultLen;
+    // const r2 = len(s2);
+    // const r1 = len(s1);
+    // const x = (r2 ** 2 - r1 ** 2 - p2 ** 2 + p1 ** 2) / (2 * p1 - 2 * p2);
+    // let y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
+    const [top1, top2, bottom1, bottom2] = this.getIntersectAngles();
+    // const [x, y]
+    let angle1 = top1;
+    let angle2 = top2;
     this._rad1.updateLineGeometry();
     this._rad2.updateLineGeometry();
     if (this._rad1.line.p2.y > 0 && this._rad2.line.p2.y > 0) {
-      y *= -1;
+      // y *= -1;
+      angle1 = bottom1;
+      angle2 = bottom2;
     }
-    const angle1 = Math.atan2(y, x - p1);
-    const angle2 = Math.atan2(y, x - p2);
+    // const angle1 = Math.atan2(y, x - p1);
+    // const angle2 = Math.atan2(y, x - p2);
     if (!Number.isNaN(angle1) && !Number.isNaN(angle2)) {
-      this.goToPositionAndScale(p1, p2, s1, s2, angle1, angle2);
+      const p1 = this._pad1.getPosition().x;
+      const p2 = this._pad2.getPosition().x;
+      const s1 = this._circ1._scale.getScale().x;
+      const s2 = this._circ2._scale.getScale().x;
+      this.goToPositionAndScale(p1, p2, s1, s2, done, 0.8, angle1, angle2);
     } else {
-      this.goToOverlap();
+      this.goToOverlap(done);
     }
   }
 
-  goToOverlap() {
+  goToOverlap(done: ?() => void = null) {
     const p1 = rand(0.4, 1, true);
     const s1 = rand(0.3, 1);
     const s2 = rand(0.3, 1);
@@ -261,7 +296,7 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     const y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
     const angle1 = Math.atan2(y, x - p1);
     const angle2 = Math.atan2(y, x - p2);
-    this.goToPositionAndScale(p1, p2, s1, s2, angle1, angle2);
+    this.goToPositionAndScale(p1, p2, s1, s2, done, 0.8, angle1, angle2);
   }
 
   toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {
