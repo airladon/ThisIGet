@@ -592,7 +592,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: style({ centerV: true }, [
         'The next two cases are combinations of |two_sides| and |one_angle|.',
-        'When you know one angle and two sides, the two sides can either be adjacent to the angle, or one can be adjacent while the other is opposite.',
+        'When you know one angle and two sides, the two sides can either be |adjacent| to the angle, or one can be |adjacent| while the other is |opposite|.',
       ]),
       modifiers: {
         two_sides: highlight(colors.sides),
@@ -1358,37 +1358,25 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Side Side Side',
+      title: 'Three Property Summary',
       setContent: style({ centerV: true, size: 0.9 }, [
-        'We have now seen whether we can determine congruence from |most| combinations of |three properties| including:',
+        'We have now seen whether we can determine congruence from all combinations of |three properties| including:',
         style({ left: 3, list: 'unordered', size: 0.9 }, [
-          'All angles - |Angle-Angle-Angle|',
-          'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',
-          'Two angles and a side - |Angle-Side-Angle| and |Angle-Angle-Side|',
+          'All angles - |Angle-Angle-Angle| (AAA)',
+          'All sides - |Side-Side-Side| (SSS)',
+          'Two sides and an angle - |Side-Angle-Side| (SAS) and |Side-Side-Angle| (SSA)',
+          'Two angles and a side - |Angle-Side-Angle| (ASA) and |Angle-Angle-Side| (AAS)',
         ]),
-        'The remaining combination is |all sides| (|Side-Side-Side|).',
-        'In fact, knowing three sides of two triangles |is| enough to determine they are congruent, but to show this we first need to look at |Isosceles Triangles|.',
+        '|AAA| is |not| enough information to determine congruence.',
+        '|SSA| is |only| enough if the |side opposite the angle is equal to or longer than the side adjacent| to the angle',
+        '|SSS|, |SAS|, |ASA|, |AAS| are all |sufficent| to determine congruence.',
       ]),
     });
-
     this.addSection({
-      setContent: [
-        'If two triangles share the same |side_lengths|, then they will be |congruent|.',
-        'This case is often called the |Side Side Side| case.',
-      ],
-      modifiers: {
-        side_lengths: highlight(colors.sides),
-      },
-      setEnterState: () => {
-        congruent._tri1.setScenario('lowLeft');
-        congruent._tri2.setScenario('rightLeft');
-      },
-      show: [congruent],
-      hide: [
-        congruent._tri1._angle1, congruent._tri2._angle1,
-        congruent._tri1._angle2, congruent._tri2._angle2,
-        congruent._tri1._angle0, congruent._tri2._angle0,
-      ],
+      title: 'Four or More Properties',
+      setContent: style({ centerV: true, size: 0.9 }, [
+        'All combinations of |four| or |five| properties have within them either |three sides|, or |one side and two angles|. As |SSS|, |AAS| and |ASA| are all sufficient tests of congruence, then |all| combinations of four or five properties will also be |sufficient| tests of congruence.',
+      ]),
     });
   }
 }
