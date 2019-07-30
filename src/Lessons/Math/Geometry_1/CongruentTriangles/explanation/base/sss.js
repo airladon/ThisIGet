@@ -156,11 +156,19 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this.goToPositionAndScale(position, position, rand(0.3, 1), rand(0.3, 1));
   }
 
-  goToPositionAndScale(p1: number, p2: number, s1: number, s2: number) {
+  goToPositionAndScale(
+    p1: number,
+    p2: number,
+    s1: number,
+    s2: number,
+    angle1: number = this._rad1.getRotation(),
+    angle2: number = this._rad2.getRotation(),
+  ) {
     this._pad1.stop(true, 'noComplete');
     this._pad2.stop(true, 'noComplete');
     this._circ1.stop(true, 'noComplete');
     this._circ2.stop(true, 'noComplete');
+
     this._pad1.animations.new()
       .position({ target: [p1, 0], duration: 0.8 })
       .start();
@@ -173,11 +181,17 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
     this._circ2._scale.animations.new()
       .scale({ target: [s2, s2], duration: 0.8 })
       .start();
+    this._rad1.animations.new()
+      .rotation({ target: angle1, duration: 0.8 })
+      .start();
+    this._rad2.animations.new()
+      .rotation({ target: angle2, duration: 0.8 })
+      .start();
     this.diagram.animateNextFrame();
   }
 
   goToNoOverlap() {
-    const scenario = 'within';
+    const scenario = randElement(['separate', 'within']);
     let s1;
     let s2;
     let p1;
@@ -204,6 +218,50 @@ export default class CommonCollectionSSS extends CommonDiagramCollection {
       p2 = rand(0.1, Math.abs(len(s2) - len(s1)) * 0.8, true) + p1;
     }
     this.goToPositionAndScale(p1, p2, s1, s2);
+  }
+
+  goToOverlapIntersect() {
+    const p1 = this._pad1.getPosition().x;
+    const p2 = this._pad2.getPosition().x;
+    const s1 = this._circ1._scale.getScale().x;
+    const s2 = this._circ2._scale.getScale().x;
+    const len = s => s * this.layout.defaultLen;
+    const r2 = len(s2);
+    const r1 = len(s1);
+    const x = (r2 ** 2 - r1 ** 2 - p2 ** 2 + p1 ** 2) / (2 * p1 - 2 * p2);
+    let y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
+    this._rad1.updateLineGeometry();
+    this._rad2.updateLineGeometry();
+    if (this._rad1.line.p2.y > 0 && this._rad2.line.p2.y > 0) {
+      y *= -1;
+    }
+    const angle1 = Math.atan2(y, x - p1);
+    const angle2 = Math.atan2(y, x - p2);
+    if (!Number.isNaN(angle1) && !Number.isNaN(angle2)) {
+      this.goToPositionAndScale(p1, p2, s1, s2, angle1, angle2);
+    } else {
+      this.goToOverlap();
+    }
+  }
+
+  goToOverlap() {
+    const p1 = rand(0.4, 1, true);
+    const s1 = rand(0.3, 1);
+    const s2 = rand(0.3, 1);
+    const len = s => s * this.layout.defaultLen;
+    let p2;
+    if (p1 > 0) {
+      p2 = p1 - (len(s1) + len(s2) - rand(0.05, Math.min(len(s1), len(s2)) * 2 * 0.8));
+    } else {
+      p2 = p1 + (len(s1) + len(s2) - rand(0.05, Math.min(len(s1), len(s2)) * 2 * 0.8));
+    }
+    const r2 = len(s2);
+    const r1 = len(s1);
+    const x = (r2 ** 2 - r1 ** 2 - p2 ** 2 + p1 ** 2) / (2 * p1 - 2 * p2);
+    const y = Math.sqrt(r1 ** 2 - (x - p1) ** 2);
+    const angle1 = Math.atan2(y, x - p1);
+    const angle2 = Math.atan2(y, x - p2);
+    this.goToPositionAndScale(p1, p2, s1, s2, angle1, angle2);
   }
 
   toggleIntersects(goTo: ?'top' | 'bottom', done: ?() => void = null) {

@@ -427,8 +427,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ top: 0 }, [
-        // 'You might see that triangles can |only| be made if the circles are |separate| and |intersect|. When they do intersect, there are only two points.',
-        'Triangles cannot be made if the circles are at the |same_position|, or if they |do_not_intersect|. If they do intersect, then only two intersect points exist.',
+        'Triangles |cannot be formed| if the circles are at the |same_position|, or if they |do_not_intersect|. When they |do_intersect|, only |two| intersect points exist.',
       ]),
       show: [
         sss._circ1, sss._circ2, sss._pad1, sss._pad2,
@@ -437,6 +436,8 @@ class Content extends PresentationLessonContent {
       modifiers: {
         same_position: click(sss.goToSamePosition, [sss], colors.diagram.action),
         do_not_intersect: click(sss.goToNoOverlap, [sss], colors.diagram.action),
+        do_intersect: click(sss.goToOverlap, [sss], colors.diagram.action),
+        two: click(sss.goToOverlapIntersect, [sss], colors.diagram.action),
       },
       transitionFromAny: (done) => {
         if (this.comingFrom === 'prev') {
