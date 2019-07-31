@@ -109,6 +109,14 @@ export default function lessonLayout() {
       ],
       color: colors.sides,
       width: layout.width,
+      makeValid: {
+        shape: 'triangle',
+        hide: {
+          minAngle: 15 * Math.PI / 180,
+          maxAngle: 150 * Math.PI / 180,
+          minSide: 0.8,
+        },
+      },
       close: true,
       angle: [
         onePropAngle(0.3, 0.3),

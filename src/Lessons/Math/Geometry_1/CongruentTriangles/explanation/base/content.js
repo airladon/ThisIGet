@@ -50,6 +50,7 @@ class Content extends PresentationLessonContent {
     const ssa = diag._ssa;
     const sss = diag._sss;
     const oneProp = diag._oneProp;
+    const twoProp = diag._twoProp;
     // const sss = diag._sss;
 
     this.addSection({
@@ -157,6 +158,15 @@ class Content extends PresentationLessonContent {
       ]),
     });
 
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+
     this.addSection({
       title: 'One Property',
       setContent: [
@@ -191,7 +201,16 @@ class Content extends PresentationLessonContent {
       show: [oneProp._angleTri],
     });
 
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
     this.addSection({
+      title: 'Two Properties',
       setContent: style({ centerV: true }, [
         'Therefore |one property is insufficient| to determine congruency.',
         'How about |two properties|?',
@@ -203,6 +222,22 @@ class Content extends PresentationLessonContent {
           'Opposite Side-Angle',
         ]),
       ]),
+    });
+
+    this.addSection({
+      setContent: 'Try the different combinations and see if multiple triangles can be made for each.',
+      show: [twoProp._tri],
+    });
+
+    this.addSection({
+      setContent: '|Side_Side|, |Angle_Angle|, |Adjacent_Side_Angle| and |Opposite_Side_Angle| all can form |many| triangles.',
+      modifiers: {
+        Side_Side: click(twoProp.sideSide, [twoProp], { text: 'Side-Side', color: colors.diagram.action }),
+        Angle_Angle: click(twoProp.angleAngle, [twoProp], { text: 'Angle-Angle', color: colors.diagram.action }),
+        Adjacent_Side_Angle: click(twoProp.adjacentAngleSide, [twoProp], { text: 'Adjacent Side-Angle', color: colors.diagram.action }),
+        Opposite_Side_Angle: click(twoProp.oppositeAngleSide, [twoProp], { text: 'Opposite Side-Angle', color: colors.diagram.action }),
+      },
+      show: [twoProp._tri],
     });
 
     this.addSection({

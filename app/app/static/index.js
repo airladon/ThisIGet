@@ -12784,6 +12784,49 @@ function (_DiagramElementCollec) {
       }
     }
   }, {
+    key: "checkLabelForRightAngle",
+    value: function checkLabelForRightAngle() {
+      if (this.autoRightAngle === false) {
+        return;
+      }
+
+      var label = this.label;
+      var setRight = false;
+
+      if (label != null) {
+        var angle = parseFloat(label.getText());
+
+        if (angle === 90) {
+          setRight = true;
+        }
+      }
+
+      if (setRight === false) {
+        return;
+      }
+
+      var _curveRight = this._curveRight,
+          _curve = this._curve,
+          _arrow1 = this._arrow1,
+          _arrow2 = this._arrow2;
+
+      if (_curveRight != null) {
+        _curveRight.showAll();
+      }
+
+      if (_curve != null) {
+        _curve.hide();
+      }
+
+      if (_arrow1 != null) {
+        _arrow1.hide();
+      }
+
+      if (_arrow2 != null) {
+        _arrow2.hide();
+      }
+    }
+  }, {
     key: "getAngle",
     value: function getAngle() {
       var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
@@ -15649,6 +15692,9 @@ function (_DiagramElementCollec) {
       angle0.setLabel("".concat(a0.toFixed(anglePrecision), "\xBA"));
       angle1.setLabel("".concat(a1.toFixed(anglePrecision), "\xBA"));
       angle2.setLabel("".concat(a2.toFixed(anglePrecision), "\xBA"));
+      angle0.checkLabelForRightAngle();
+      angle1.checkLabelForRightAngle();
+      angle2.checkLabelForRightAngle();
 
       if (this.makeValid != null) {
         var minSide = this.makeValid.hide.minSide;
@@ -15679,15 +15725,19 @@ function (_DiagramElementCollec) {
 
         if (hideAngles) {
           this.hideAngles();
-        } else {
-          this.showAngles();
         }
       } // Make sides consistent with equilateral or isosceles
 
 
       if ((side01.isShown || side12.isShown || side20.isShown) && a0 > 0 && a0 < 180 && a1 > 0 && a1 < 180 && a2 > 0 && a2 < 180) {
-        s12 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a0 * Math.PI / 180), sidePrecision);
-        s20 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a1 * Math.PI / 180), sidePrecision);
+        // s12 = round(
+        //   s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a0 * Math.PI / 180),
+        //   sidePrecision,
+        // );
+        // s20 = round(
+        //   s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a1 * Math.PI / 180),
+        //   sidePrecision,
+        // );
         var leastSigStep = 1 / Math.pow(10, sidePrecision); // If Equilateral, make all sides equal
 
         if (a0 === 60 && a1 === 60 && a2 === 60) {

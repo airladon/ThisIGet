@@ -11,6 +11,7 @@ import CommonCollectionASA from './asa';
 import CommonCollectionSSA from './ssa';
 import CommonCollectionSSS from './sss';
 import CommonCollectionOneProp from './oneProperty';
+import CommonCollectionTwoProp from './twoProperties';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
@@ -39,6 +40,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     this.add('sss', new CommonCollectionSSS(diagram, this.layout));
     // this.add('oneProp', new CommonCollectionOneProp(diagram, this.layout));
     this.add('oneProp', new CommonCollectionOneProp(diagram));
+    this.add('twoProp', new CommonCollectionTwoProp(diagram));
     // this.add('sss', new CommonCollectionSSS(diagram, this.layout));
     this.hasTouchableElements = true;
   }
