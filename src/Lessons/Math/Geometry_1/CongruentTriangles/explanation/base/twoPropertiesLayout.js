@@ -98,12 +98,12 @@ export default function lessonLayout() {
         autoRightAngle: true,
       },
       pad: {
-        color: [1, 1, 1, 0.01],
-        radius: 0.3,
+        color: colors.pads,
+        radius: 0.07,
+        touchRadius: 0.8,
         sides: 30,
         fill: true,
         isMovable: true,
-        touchRadius: 0.4,
         boundary: [-2.8, -1.9, 5.6, 3.2],
       },
       side: {

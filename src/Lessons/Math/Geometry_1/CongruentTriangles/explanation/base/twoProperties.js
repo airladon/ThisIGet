@@ -78,6 +78,10 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri.cancel('noComplete');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
+      .whenFinished(() => {
+        this._tri._side12._label.pulseScaleNow(1, 2);
+        this._tri._side20._label.pulseScaleNow(1, 2);
+      })
       .start();
     this.diagram.animateNextFrame();
   }
@@ -107,6 +111,10 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri.cancel('noComplete');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
+      .whenFinished(() => {
+        this._tri._angle1._label.pulseScaleNow(1, 2);
+        this._tri._angle2._label.pulseScaleNow(1, 2);
+      })
       .start();
     this.diagram.animateNextFrame();
   }
@@ -117,7 +125,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     let side = rand(0.5, 1);
     const angle = Math.PI / 4;
     if (this.lastAuto === 'adjacentAngleSide') {
-      if (this.lastValue < 2) {
+      if (this.lastValue < 2.2) {
         side += this.lastValue;
       } else {
         side = this.lastValue - side;
@@ -134,6 +142,10 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri.cancel('noComplete');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
+      .whenFinished(() => {
+        this._tri._side12._label.pulseScaleNow(1, 2);
+        this._tri._angle2._label.pulseScaleNow(1, 2);
+      })
       .start();
     this.diagram.animateNextFrame();
   }
@@ -167,6 +179,10 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
     this._tri.cancel('noComplete');
     this._tri.animations.new()
       .scenarios({ target: 'next', duration: 0.8 })
+      .whenFinished(() => {
+        this._tri._side12._label.pulseScaleNow(1, 2);
+        this._tri._angle0._label.pulseScaleNow(1, 2);
+      })
       .start();
     this.diagram.animateNextFrame();
   }

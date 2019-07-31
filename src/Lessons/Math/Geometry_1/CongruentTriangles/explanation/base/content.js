@@ -135,6 +135,7 @@ class Content extends PresentationLessonContent {
       setContent: style({ centerV: true }, [
         'Showing two triangles are congruent can be beneficial in calculating a geometric problem.',
         'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the known lengths and angles of the other triangle.',
+        'This is |tremendously useful| to find properties and relationships of many common shapes and geometries, such as isosceles triangles and rectangles.',
       ]),
     });
 
@@ -181,9 +182,9 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: [
+      setContent: style({ top: 0 }, [
         '|Many| triangles can be formed. Therefore if two triangles share a single side length that is |not enough information| to know they are |congruent|.',
-      ],
+      ]),
       modifiers: {
         Many: click(oneProp.randomSide, [oneProp], colors.diagram.action),
       },
@@ -191,9 +192,9 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: [
-        'Similarly, if we know just |one_angle|, |many| triangles can be formed.',
-      ],
+      setContent: style({ top: 0 }, [
+        'Similarly, if we know just |one_angle|, |many| triangles can be formed and that is |not enough information| to know two triangles are |congruent|.',
+      ]),
       modifiers: {
         one_angle: click(oneProp.pulseAngle, [oneProp], oneProp.colors.highlight),
         many: click(oneProp.randomAngle, [oneProp], colors.diagram.action),
@@ -225,12 +226,12 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      setContent: 'Try the different combinations and see if multiple triangles can be made for each.',
+      setContent: 'Try making the |different combinations| and see if multiple triangles can be made for each.',
       show: [twoProp._tri],
     });
 
     this.addSection({
-      setContent: '|Side_Side|, |Angle_Angle|, |Adjacent_Side_Angle| and |Opposite_Side_Angle| all can form |many| triangles.',
+      setContent: style({ top: 0 }, 'You might see that |Side_Side|, |Angle_Angle|, |Adjacent_Side_Angle| and |Opposite_Side_Angle| can all form |many| triangles.'),
       modifiers: {
         Side_Side: click(twoProp.sideSide, [twoProp], { text: 'Side-Side', color: colors.diagram.action }),
         Angle_Angle: click(twoProp.angleAngle, [twoProp], { text: 'Angle-Angle', color: colors.diagram.action }),
@@ -242,23 +243,8 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'But this means the advantage of knowing triangles are congruent is reduced as you already know the angles and lengths of both triangles.',
-        'In addition, |sometimes all properties cannot be measured or known|, so such a comparison is not practical.',
-        'Therefore, it\'s important to explore how many side lengths and angles of a triangle really need to be known to guarantee two triangles are congruent.',
-      ]),
-    });
-
-    this.addSection({
-      setContent: style({ centerV: true }, [
-        'One way to do this is to take a set of known properties, then figure out how many triangles can be created from them.',
-        'If |more than one size and shape of triangle| can be created, then the selected properties are |not enough| to guarantee two triangles that share those properties are congruent.',
-      ]),
-    });
-
-    this.addSection({
-      setContent: style({ centerV: true }, [
-        'In many cases you only need |3 properties| to determine congruence. For the cases where 3 is insufficient, 4 will always work.',
-        'Therefore, we will examine all the different combinations of three properties, and see which ones can be used to determine two triangles sharing those properties are congruent.',
+        'Therefore if two triangles share the same |two corresponding properties|, it is |not enough information| to know if they are |congruent|.',
+        'Therefore, we will now look at combinations of |three properties|, some of which |do allow| you to determine triangle congruence.',
       ]),
     });
 
@@ -272,7 +258,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
-      title: 'Angle Angle Angle',
+      title: 'AAA',
       setContent: [
         'First consider when only the |three_angles| are known. Do triangles of different sizes exist that have the same angles, or can only one triangle size be formed from these constraints?',
       ],
@@ -322,7 +308,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Side Side Side',
+      title: 'SSS',
       setContent: style({}, [
         'What about if we fix |three side lengths|. How many triangles can be made?',
       ]),
@@ -635,7 +621,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection(common, {
       setContent: style({ top: 0 }, [
-        'In the situations the circles |do_intersect|, there are only ever |two| intersect points which we have seen makes the same triangle.',
+        'In the situations the circles |do_intersect|, there are only ever |two| intersect points which we have seen makes the |same triangle|.',
       ]),
       transitionFromAny: (done) => {
         const [angle1, angle2] = sss.getIntersectAngles(-0.5, 0.5, 0.7, 0.6);
@@ -652,14 +638,14 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'And so if we fix |any| three side lengths that |can| create a triangle, we will only be able to create |one triangle|.',
+        'And so any set of |three side lengths| will only create |one unique triangle|.',
       ]),
     });
 
     this.addSection({
       setContent: [
         'Therefore if two triangles share |three sides of the same length|, then they |are congruent|.',
-        'This case is often called the |Side Side Side| case.',
+        'This case is often called the |Side Side Side| or |SSS| case.',
       ],
       modifiers: {
         angle_between: highlight(colors.angles),
@@ -699,7 +685,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Side Angle Side',
+      title: 'SAS',
       setContent: [
         'First consider the case where the |two_sides_are_adjacent| to the |angle|. Can more than one triangle be made?',
       ],
@@ -971,7 +957,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share |two sides of the same length|, and the |angle_between| those two sides is also the same on both triangles, then they |are congruent|.',
-        'This case is often called the |Side Angle Side| case.',
+        'This case is often called the |Side Angle Side| or |SAS| case.',
       ],
       modifiers: {
         angle_between: highlight(colors.angles),
@@ -1012,7 +998,7 @@ class Content extends PresentationLessonContent {
       },
     };
     this.addSection(common, {
-      title: 'Side Side Angle',
+      title: 'SSA',
       setContent: [
         'Next we consider the case where an |angle|, its |adjacent_side| and its |opposite_side| are known.',
       ],
@@ -1189,7 +1175,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({}, [
-        'This case is often referred to as the |Side Side Angle| case.',
+        'This case is often referred to as the |Side Side Angle|, or |SSA| case.',
         'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|.',
       ]),
       modifiers: {
@@ -1229,7 +1215,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Angle Side Angle',
+      title: 'ASA',
       setContent: [
         'We will start where |one_side| and its |two_adjacent_angles| are known. Can only one triangle be formed from this configuration?',
       ],
@@ -1338,7 +1324,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
-        'This case is often called the |Angle Side Angle| case.',
+        'This case is often called the |Angle Side Angle| or |ASA| case.',
       ],
       modifiers: {
         two_angles: highlight(colors.angles),
@@ -1365,7 +1351,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Angle Angle Side',
+      title: 'AAS',
       setContent: [
         'The next case is when a |side| and its |adjacent_angle| and |opposite_angle| are known.',
       ],
@@ -1418,7 +1404,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|.',
-        'This case is often called the |Angle Angle Side| case.',
+        'This case is often called the |Angle Angle Side| or |AAS| case.',
       ],
       modifiers: {
         two_angles: highlight(colors.angles),
@@ -1471,7 +1457,7 @@ class Content extends PresentationLessonContent {
       ]),
     });
     this.addSection({
-      title: 'Four or More Properties',
+      title: 'Four or Five Properties',
       setContent: style({ centerV: true, size: 0.9 }, [
         'All combinations of |four| or |five| properties have within them either |three sides|, or |one side and two angles|. As |SSS|, |AAS| and |ASA| are all sufficient tests of congruence, then |all| combinations of four or five properties will also be |sufficient| tests of congruence.',
       ]),
