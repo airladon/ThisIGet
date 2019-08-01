@@ -14,7 +14,7 @@ class Content extends SimpleLessonContent {
     //  this.iconLink = imgLink;
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
-      // 'Math/Geometry_1/Quadrangles/base',
+      'Math/Geometry_1/AngleGroups/base',
       'Math/Geometry_1/RectanglesAndSquares/base/',
       'Math/Geometry_1/Triangles/base/',
     ]);
