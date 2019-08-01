@@ -52,6 +52,13 @@ var version = {
       type: 'generic',
       description: 'SSS proofs',
     },
+    {
+      url: 'http://ceemrr.com/Geometry1/Triangles1/Triangles16.html',
+      hash: '',
+      publisher: 'ceemrr.com',
+      type: 'generic',
+      description: 'Euclid\'s SAS proof',
+    },
   ],
 };
 
