@@ -37,7 +37,7 @@ var version = {
       publisher: 'Cut The Knot',
       type: 'generic',
       description: 'What is Area? An elementary introduction',
-    }
+    },
   ],
 };
 
