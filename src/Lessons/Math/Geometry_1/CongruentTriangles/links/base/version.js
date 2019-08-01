@@ -40,14 +40,14 @@ var version = {
     },
     {
       url: 'https://mathcs.clarku.edu/~djoyce/java/elements/bookI/propI4.html',
-      hash: '',
+      hash: 'a4fcd2dc7107c44aa6ccb6c114474e8d',
       author: 'David Joyce',
       type: 'generic',
       description: 'Euclid\'s method for proving ASA, with commentry',
     },
     {
       url: 'http://cut-the-knot.org/pythagoras/SSS.shtml',
-      hash: '',
+      hash: '3637356355d9e36605011a1f877014db',
       publisher: 'Cut The Knot',
       type: 'generic',
       description: 'SSS proofs',

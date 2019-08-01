@@ -57,7 +57,7 @@ $$\bbox[10px,border:1px solid gray]{Yes}$$
 <hintLow>[Answer]
 As presented, the triangles have two different sets of properties. The left has **ASA** while the one on the right is **AAS**.
 
-However, we also know the sum of angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) is 180º. Therefore, we can calculate the unknown angle in both triangles, and we will have four known properties in each triangle.
+However, we also know the sum of angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) is 180º. Therefore, we can calculate the unknown angle in both triangles, and we will have four known properties in each triangle.
 
 The unknown angle is the same for both triangles:
 

@@ -149,7 +149,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 
 <hint>The **SSS** case can either be intuited directly, or using a combination of **SAS** and the property of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later lesson in learning path) that says any triangle with two equal sides will have two equal angles opposite those sides. In fact, you can use **SAS** to show this property is true.</hint>
 
-<hint>For **AAS**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **ASA** case.
+<hint>For **AAS**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) to get to the **ASA** case.
 </hint>
 
 <hint>Be careful with the **SSA** case as it can only **sometimes** be a sufficient test of congruence. Can you figure out when?</hint>

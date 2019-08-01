@@ -596,7 +596,7 @@ class Content extends PresentationLessonContent {
       transitionFromAny: (done) => {
         if (this.comingFrom === 'goto') {
           sss.setScenarios('center');
-          sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done, 0);
+          sss.goToPositionAndScale(0, 0, 0.7, 0.6, null, 0);
           done();
           return;
         }
