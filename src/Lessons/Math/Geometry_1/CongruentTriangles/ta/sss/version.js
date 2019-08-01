@@ -2,9 +2,9 @@
 
 // eslint-disable-next-line no-var
 var version = {
-  uid: 'sssDiagram',
-  topic: 'discover',
-  title: 'Interactive diagram for SSS',
+  uid: 'sss',
+  topic: 'ta',
+  title: 'SSS',
   description: '',
   htmlTitle: 'Are triangles the same (congruent) if you have just three side lengths?',
   htmlDescription: 'Change side lengths and form triangles to see what is possible',

@@ -60,7 +60,8 @@ What about if you know two properties? Firstly, what are the different combinati
 
 * two sides
 * two angles
-* one side and one angle
+* angle adjacent to side
+* angle opposite side
 
 </hintLow><div></div>
 
