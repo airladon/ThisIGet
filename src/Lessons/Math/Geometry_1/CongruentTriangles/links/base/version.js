@@ -43,7 +43,7 @@ var version = {
       hash: 'a4fcd2dc7107c44aa6ccb6c114474e8d',
       author: 'David Joyce',
       type: 'generic',
-      description: 'Euclid\'s method for proving ASA, with commentry',
+      description: 'Euclid\'s method for proving SAS, with commentry',
     },
     {
       url: 'http://cut-the-knot.org/pythagoras/SSS.shtml',
@@ -57,7 +57,7 @@ var version = {
       hash: '',
       publisher: 'ceemrr.com',
       type: 'generic',
-      description: 'Euclid\'s SAS proof',
+      description: 'Euclid\'s ASA proof',
     },
   ],
 };
