@@ -31,6 +31,13 @@ var version = {
       type: 'generic',
       description: 'Introduction to Area',
     },
+    {
+      url: 'https://www.cut-the-knot.org/blue/PolygonalAreas.shtml',
+      hash: '',
+      publisher: 'Cut The Knot',
+      type: 'generic',
+      description: 'What is Area? An elementary introduction',
+    }
   ],
 };
 

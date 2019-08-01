@@ -38,6 +38,20 @@ var version = {
       type: 'generic',
       description: 'Methods of Proving Triangles Congruent',
     },
+    {
+      url: 'https://mathcs.clarku.edu/~djoyce/java/elements/bookI/propI4.html',
+      hash: '',
+      author: 'David Joyce',
+      type: 'generic',
+      description: 'Euclid\'s method for proving ASA, with commentry',
+    },
+    {
+      url: 'http://cut-the-knot.org/pythagoras/SSS.shtml',
+      hash: '',
+      publisher: 'Cut The Knot',
+      type: 'generic',
+      description: 'SSS proofs',
+    },
   ],
 };
 

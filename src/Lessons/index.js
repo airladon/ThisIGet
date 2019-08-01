@@ -1303,67 +1303,6 @@ export default function lessonIndex() {
       ],
       enabled: true,
     },
-    SideSideSide: {
-      title: 'Side-Side-Side Congruence',
-      path: '/Lessons/Math/Geometry_1',
-      uid: 'SideSideSide',
-      topics: {
-        discover: {
-          simple: {
-            type: 'singlePage',
-            title: 'Base',
-            description: '',
-            htmlTitle: 'Self discover SSS triangle congruence',
-            htmlDescription: 'Discover why two triangles that have the same side lengths also have the same angles',
-            fullLesson: true,
-          },
-        },
-        examples: {
-          base: {
-            type: 'singlePage',
-            title: 'Examples of SSS congruent triangles',
-            description: '',
-            htmlTitle: 'SSS triangle congruence examples',
-            htmlDescription: 'Use SSS triangle congruence to solve different geometries',
-            fullLesson: true,
-          },
-        },
-        explanation: {
-          base: {
-            type: 'presentation',
-            title: 'Full explanation',
-            description: '',
-            htmlTitle: 'Proof for Side Side Side triangle congruence',
-            htmlDescription: 'Proof for SSS or side-side-side congruent triangles',
-            fullLesson: true,
-          },
-        },
-        links: {
-          base: {
-            type: 'generic',
-            title: 'External',
-            description: 'External links to sources of information SSS triangle congruence',
-            htmlTitle: 'Side-side-side triangle congruence links',
-            htmlDescription: 'Links with explanations, examples and proofs side-side-side (SSS) triangle congruence',
-            fullLesson: false,
-          },
-        },
-        summary: {
-          base: {
-            type: 'presentation',
-            title: 'Base',
-            description: '',
-            htmlTitle: 'Congruent triangles by SSS Summary',
-            htmlDescription: '',
-            fullLesson: true,
-          },
-        },
-      },
-      dependencies: [
-        'Isosceles',
-      ],
-      enabled: true,
-    },
     SimilarTriangles: {
       title: 'Similar Triangles',
       path: '/Lessons/Math/Geometry_1',
