@@ -60,26 +60,35 @@ What about if you know two properties? Firstly, what are the different combinati
 
 * two sides
 * two angles
-* angle adjacent to side
-* angle opposite side
+* adjacent side angle
+* opposite side angle
 
 </hintLow><div></div>
 
 Are any of these combinations suffient to determine if two triangles are congruent?
 
-<hintLow>Try drawing a side and an angle - can more than one triangle be built? ![](side-angle.png)</hintLow>
+<hintLow>Try drawing an adjacent side and an angle - can more than one triangle be built? ![](side-angle.png)</hintLow>
 
 <hintLow>Try drawing two angles - can more than one triangle be built? What if you change the separation of the angles? ![](angle-angle.png)</hintLow>
 
 <hint>When drawing two sides, remember the angle between them can be any angle</hint>
 
+<hint>Try out making different triangles with the same side and opposite angle [here](/Lessons/Math/Geometry_1/CongruentTriangles/ta/tri)</hint>
+
 <hintLow>[Answer] Many triangles can be made if you start with just **two properties**. Therefore, two properties are not sufficient to tell whether two triangles are congruent.
 
-Knowing just a **side-angle** combination is not enough:
+Knowing just an **adjacent side-angle** combination is not enough:
 
 ![](side-angle-tri.png)
 
 In this example, triangles ABD and ACD both share the same side and angle.
+
+
+Knowing just an **opposite side-angle** combination is not enough:
+
+![](side-angle-opposite.png)
+
+In this example, both triangles have a right angle opposite a shared side.
 
 Knowing just an **angle-angle** combination is not enough:
 
@@ -138,7 +147,7 @@ Are any of these combinations suffient to determine if two triangles are congrue
 ![](angle-side-angle.png)
 </hintLow>
 
-<hint>The **SSS** case can either be proven from **SAS**, **ASA** or a combination of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later lesson in learning path) and **SAS**.</hint>
+<hint>The **SSS** case can either be intuited directly, or using a combination of **SAS** and the property of [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangles (later lesson in learning path) that says any triangle with two equal sides will have two equal angles opposite those sides. In fact, you can use **SAS** to show this property is true.</hint>
 
 <hint>For **AAS**, use the total angle of a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) to get to the **ASA** case.
 </hint>
@@ -161,7 +170,6 @@ The **AAA** can produce many different sized triangles and is therefore insuffic
 
 This lesson's [Explanation](/Lessons/Math/Geometry_1/CongruentTriangles/explanation/base) explains how each case is possible or not.
 
-The **SSS** case is shown using isosceles trianglese [here](/Lessons/Math/Geometry_1/SideSideSide/explanation/base).
 </hintLow>
 
 ### More than three properties
