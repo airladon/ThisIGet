@@ -81,7 +81,7 @@ Angles $$\angle a$$ and $$\angle c$$ combine to give the original angle of the t
 
 By SAS these triangles are **congruent**.
 
-Thus, any two triangle with the same side lengths will be **congruent**.
+Thus, any two triangles with the same side lengths will be **congruent**.
 
 ### ASA - Angle Side Angle Congruence
 
@@ -97,7 +97,7 @@ As $$AB \neq DE$$, we can draw a point $$G$$ on $$DE$$ such that $$DG = AB$$. No
 
 As $$DG = AB$$, $$\angle BAC = \angle GDF$$ and $$AC = DF$$, then from SAS triangle $$\triangle DGF$$ is congruent with $$\triangle ABC$$.
 
-Therefore $$BC = FG$$ and $$\angle ACB = \angle DFG$$.
+Therefore $$BC = GF$$ and $$\angle ACB = \angle DFG$$.
 
 If point $$G$$ is not at the same position as $$E$$, then $$DFG \neq DFE$$.
 
@@ -107,7 +107,7 @@ We now have an inconsistency:
 * $$ACB = DFG\ \ $$ (found)
 * $$DFG \neq DFE\ \ $$ (found)
 
-So, our initial assumption that the triangles are not congruent is wrong, and in fact they are.
+The only way we can make this work is if point $$G$$ **is** at the same position as $$E$$, which means the triangles are **congruent**.
 
 Therefore any two triangles that share the same Angle-Side-Angle combination will be **congruent**.
 
@@ -123,8 +123,3 @@ This now gives us the ASA case.
 
 Therefore, any two triangles that share the same Angle-Angle-Side combinatino will be **congruent**.
 
-### SSA - Side Side Angle Congruence
-
-
-<!-- However, we also know the sum of angles in a [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSumPres',#00756F)) is 180º. Therefore, we can calculate the unknown angle in both triangles, and we will have four known properties in each triangle.
- -->
