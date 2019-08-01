@@ -13,7 +13,7 @@ const {
   // Line,
 } = Fig;
 
-const { removeRandElement, round, rand } = Fig.tools.math;
+const { removeRandElement, rand } = Fig.tools.math;
 
 // const { minAngleDiff } = Fig.tools.g2;
 

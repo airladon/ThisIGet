@@ -14,16 +14,16 @@ import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagra
 
 const {
   // centerV,
-  click,
+  // click,
   style,
   // highlight,
   // highlightWord,
 } = Fig.tools.html;
 
-const { Point } = Fig;
+// const { Point } = Fig;
 
 const layout = lessonLayout();
-const { colors } = layout;
+// const { colors } = layout;
 
 class Content extends PresentationLessonContent {
   setTitle() {
