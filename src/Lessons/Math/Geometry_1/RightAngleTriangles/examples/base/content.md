@@ -29,9 +29,55 @@ $$\color{r}a\color{black} = 7.93$$
 
 Therefore, the area is:
 
-$$Area = \textstyle{\frac{1}{2}}\7.93\times 9 =  \bbox[10px,border:1px solid gray]{35.71}$$
+$$Area = \textstyle{\frac{1}{2}}\times 7.93 \times 9 =  \bbox[10px,border:1px solid gray]{35.71}$$
 
 </hintLow>
+
+
+### Example 3:
+
+#### What is length of the diagonal $$\color{r}a$$ of the square?
+
+![](ex3.png)
+
+<hintLow>[Answer]
+
+The diagonal and two adjacent sides of the square make a right angle triangle.
+
+Therefore, using the Pythagorean Theorem, we can calculate the diagonal:
+
+$$\color{r}a\color{black} = \sqrt{(1 + 1)} = \bbox[10px,border:1px solid gray]{1.41}$$
+
+</hintLow>
+
+### Example 4:
+
+#### What is the area of an equilateral triangle of side $$\color{r}a$$?
+
+![](ex4.png)
+
+<hintLow>[Answer]
+
+An equilateral triangle is a special form of an [[isosceles]]((qr,'Math/Geometry_1/Isosceles/base/Main',#00756F)) triangle.
+
+When you [[split]]((qr,'Math/Geometry_1/Isosceles/base/SplitLine',#00756F)) an isosceles triangle into two equal halves, the split line forms a right angle with the base.
+
+Therefore we have: 
+
+![](ex4a.png)
+
+The height of the triangle can be calculated using the Pythagorean Theorem:
+
+$$height = \sqrt{\color{r}a\color{black}^2 - \left(\textstyle{\frac{1}{2}}\color{r}a\color{black}\right)^2}$$
+
+$$height = \sqrt{\textstyle{\frac{3}{4}}\color{r}a\color{black}^2} = \textstyle{\frac{\sqrt{3}}{2}}\color{r}a\color{black}$$
+
+The area of the equilateral triangle is then:
+
+$$Area = \textstyle{\frac{1}{2}} \color{r}a\color{black} \times \textstyle{\frac{\sqrt{3}}{2}}\color{r}a\color{black} = \bbox[10px,border:1px solid gray]{\textstyle{\frac{\sqrt{3}}{4}} \color{r}a\color{black}^2}$$
+
+</hintLow>
+
 <!-- 
 ![](ex1.png)
 
