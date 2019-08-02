@@ -54,7 +54,7 @@ var version = {
     },
     {
       url: 'http://ceemrr.com/Geometry1/Triangles1/Triangles16.html',
-      hash: '3637356355d9e36605011a1f877014db',
+      hash: '96741ca2859a48bb8e0f52fc5bea7f4f',
       publisher: 'ceemrr.com',
       type: 'generic',
       description: 'Euclid\'s SAS proof',
