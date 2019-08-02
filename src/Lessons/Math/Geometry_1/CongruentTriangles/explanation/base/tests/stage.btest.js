@@ -12,6 +12,7 @@ tester(
       35: { threshold: { next: 0.0001, prev: 0.005 } },
       36: { threshold: { next: 0.0001, prev: 0.0001 } },
       37: { threshold: { next: 0.0002, prev: 0.0002 } },
+      38: { threshold: { next: 0.0005, prev: 0.0005 } },
       39: { threshold: { next: 0.0001, prev: 0.0001 } },
       47: { threshold: { next: 0.0001, prev: 0.0001 } },
       52: { threshold: { next: 0.0001, prev: 0.0001 } },

@@ -38,6 +38,27 @@ var version = {
       type: 'generic',
       description: 'Methods of Proving Triangles Congruent',
     },
+    {
+      url: 'https://mathcs.clarku.edu/~djoyce/java/elements/bookI/propI4.html',
+      hash: 'a4fcd2dc7107c44aa6ccb6c114474e8d',
+      author: 'David Joyce',
+      type: 'generic',
+      description: 'Euclid\'s method for proving SAS, with commentry',
+    },
+    {
+      url: 'http://cut-the-knot.org/pythagoras/SSS.shtml',
+      hash: '3637356355d9e36605011a1f877014db',
+      publisher: 'Cut The Knot',
+      type: 'generic',
+      description: 'SSS proofs',
+    },
+    {
+      url: 'http://ceemrr.com/Geometry1/Triangles1/Triangles16.html',
+      hash: '',
+      publisher: 'ceemrr.com',
+      type: 'generic',
+      description: 'Euclid\'s ASA proof',
+    },
   ],
 };
 

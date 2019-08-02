@@ -5,6 +5,7 @@ import {
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
 // import Definition from '../../../../../LessonsCommon/tools/definition';
+import { note } from '../../../../../LessonsCommon/tools/note';
 import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
@@ -13,6 +14,7 @@ import DiagramCollection from './diagramCollection';
 import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
 
 const {
+  // centerV,
   click,
   style,
   highlight,
@@ -46,6 +48,9 @@ class Content extends PresentationLessonContent {
     const asa = diag._asa;
     const aas = diag._aas;
     const ssa = diag._ssa;
+    const sss = diag._sss;
+    const oneProp = diag._oneProp;
+    const twoProp = diag._twoProp;
     // const sss = diag._sss;
 
     this.addSection({
@@ -130,35 +135,116 @@ class Content extends PresentationLessonContent {
       setContent: style({ centerV: true }, [
         'Showing two triangles are congruent can be beneficial in calculating a geometric problem.',
         'When |two triangles are known to be congruent|, unknown angles and lengths of one triangle, can be |inferred| from the known lengths and angles of the other triangle.',
+        'This is |tremendously useful| to find properties and relationships of many common shapes and geometries, such as isosceles triangles and rectangles.',
       ]),
     });
 
     this.addSection({
       setContent: style({ centerV: true }, [
         'So |how| can you figure out if two triangles are congruent?',
-        'One way is to measure all the angles and sides and see if they are equal.',
+        'What is the |minimum| number of properties you need confirm two triangles are congruent?',
       ]),
     });
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'But this means the advantage of knowing triangles are congruent is reduced as you already know the angles and lengths of both triangles.',
-        'In addition, |sometimes all properties cannot be measured or known|, so such a comparison is not practical.',
-        'Therefore, it\'s important to explore how many side lengths and angles of a triangle really need to be known to guarantee two triangles are congruent.',
+        'We will test this by seeing how many |different triangles| we can make from different property configurations.',
+        'If we can only make |one triangle|, or all the triangles we can make are the same, then we will know that the property configuration is |sufficient to determine congruence|.',
       ]),
     });
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'One way to do this is to take a set of known properties, then figure out how many triangles can be created from them.',
-        'If |more than one size and shape of triangle| can be created, then the selected properties are |not enough| to guarantee two triangles that share those properties are congruent.',
+        'Lets start with a single property. Either a |side| or an |angle|.',
       ]),
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+
+    this.addSection({
+      title: 'One Property',
+      setContent: [
+        'If we know just a |single_side_length|, how many triangles can be formed?',
+        note({ label: 'Note:' }, 'Move the |top_point| of the triangle to change the triangle'),
+      ],
+      modifiers: {
+        single_side_length: click(oneProp.pulseSide, [oneProp], oneProp.colors.highlight),
+        top_point: click(oneProp.pulsePad, [oneProp], oneProp.colors.pads),
+      },
+      show: [oneProp._sideTri],
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        '|Many| triangles can be formed. Therefore if two triangles share a single side length that is |not enough information| to know they are |congruent|.',
+      ]),
+      modifiers: {
+        Many: click(oneProp.randomSide, [oneProp], colors.diagram.action),
+      },
+      show: [oneProp._sideTri],
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        'Similarly, if we know just |one_angle|, |many| triangles can be formed and that is |not enough information| to know two triangles are |congruent|.',
+      ]),
+      modifiers: {
+        one_angle: click(oneProp.pulseAngle, [oneProp], oneProp.colors.highlight),
+        many: click(oneProp.randomAngle, [oneProp], colors.diagram.action),
+      },
+      show: [oneProp._angleTri],
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    this.addSection({
+      title: 'Two Properties',
+      setContent: style({ centerV: true }, [
+        'Therefore |one property is insufficient| to determine congruency.',
+        'How about |two properties|?',
+        'The two property |combinations| are:',
+        style({ list: 'unordered' }, [
+          'Side-Side',
+          'Angle-Angle',
+          'Adjacent Side-Angle',
+          'Opposite Side-Angle',
+        ]),
+      ]),
+    });
+
+    this.addSection({
+      setContent: 'Try making the |different combinations| and see if multiple triangles can be made for each.',
+      show: [twoProp._tri],
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'You might see that |Side_Side|, |Angle_Angle|, |Adjacent_Side_Angle| and |Opposite_Side_Angle| can all form |many| triangles.'),
+      modifiers: {
+        Side_Side: click(twoProp.sideSide, [twoProp], { text: 'Side-Side', color: colors.diagram.action }),
+        Angle_Angle: click(twoProp.angleAngle, [twoProp], { text: 'Angle-Angle', color: colors.diagram.action }),
+        Adjacent_Side_Angle: click(twoProp.adjacentAngleSide, [twoProp], { text: 'Adjacent Side-Angle', color: colors.diagram.action }),
+        Opposite_Side_Angle: click(twoProp.oppositeAngleSide, [twoProp], { text: 'Opposite Side-Angle', color: colors.diagram.action }),
+      },
+      show: [twoProp._tri],
     });
 
     this.addSection({
       setContent: style({ centerV: true }, [
-        'In many cases you only need |3 properties| to determine congruence. For the cases where 3 is insufficient, 4 will always work.',
-        'Therefore, we will examine all the different combinations of three properties, and see which ones can be used to determine two triangles sharing those properties are congruent.',
+        'Therefore if two triangles share the same |two corresponding properties|, it is |not enough information| to know if they are |congruent|.',
+        'Therefore, we will now look at combinations of |three properties|, some of which |do allow| you to determine triangle congruence.',
       ]),
     });
 
@@ -172,7 +258,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
 
     this.addSection({
-      title: 'Angle Angle Angle',
+      title: 'AAA',
       setContent: [
         'First consider when only the |three_angles| are known. Do triangles of different sizes exist that have the same angles, or can only one triangle size be formed from these constraints?',
       ],
@@ -213,26 +299,393 @@ class Content extends PresentationLessonContent {
       },
     });
 
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    this.addSection({
+      title: 'SSS',
+      setContent: style({}, [
+        'What about if we fix |three side lengths|. How many triangles can be made?',
+      ]),
+      show: [sss._left, sss._base, sss._right],
+      setSteadyState: () => {
+        sss.setScenarios('initial');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    let common = {
+      setContent: [
+        'We can start by fixing one side in position then connecting the other sides to it.',
+      ],
+    };
+    this.addSection(common, {
+      show: [sss._left, sss._base, sss._right],
+      setSteadyState: () => {
+        sss.setScenarios('initial');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+    this.addSection(common, {
+      show: [sss._left, sss._base, sss._right],
+      transitionFromPrev: (done) => {
+        sss.animations.cancelAll();
+        sss.animations.new()
+          .scenarios({
+            target: 'center',
+            duration: 1,
+            afterFrame: () => { sss.updateLabels(); },
+          })
+          .whenFinished(done)
+          .start();
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.updateLabels();
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    common = {
+      setContent: 'We can show all possible rotations of these sides by tracing the |circles| they form.',
+    };
+    this.addSection(common, {
+      modifiers: {
+        circles: click(this.next, [this], colors.diagram.action),
+      },
+      show: [sss._left._line, sss._base._line, sss._right._line],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.hasTouchableElements = false;
+      },
+    });
+    this.addSection(common, {
+      modifiers: {
+        circles: click(sss.createConstructionLines, [sss, null], colors.diagram.action),
+      },
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      transitionFromPrev: (done) => {
+        sss.createConstructionLines(done);
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, 'The two |intersect| points of the circles, are the side rotations where triangles can be formed.'),
+      modifiers: {
+        intersect: click(sss.toggleIntersects, [sss, null, null], colors.diagram.action),
+      },
+      transitionFromPrev: (done) => {
+        sss.toggleIntersects('top', done);
+      },
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('top');
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    this.addSection({
+      setContent: 'Now, are these triangles the |same| or |different|?',
+      show: [
+        sss._left._line, sss._base._line, sss._right._line,
+        sss._leftCircle, sss._rightCircle,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss._leftBottom._line.showAll();
+        sss._rightBottom._line.showAll();
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'We know that if we |flip| the top triangle about the horizontal side, we get a |congruent| triangle below.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        flip: click(sss.flipTriangle, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+      },
+      setLeaveState: () => {
+        sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'We also know there is only |one circle intersection| point below the horizontal side, and thus only one lower triangle |possible|.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._flipTri,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        // sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'As |only one triangle| is possible below the line, it must therefore be the |flipped triangle|.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      setSteadyState: () => {
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        sss._flipTri.setScale(1, 1);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'Similarly, if these triangles are flipped around the |vertical|, then it would be as if we switched the positions of the two rotating sides.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        vertical: click(sss.flipAll, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        const flip = sss._fixedTri.getScale().x;
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        if (flip !== 1 && this.comingFrom === 'next') {
+          sss.flipAll(0);
+        }
+      },
+      setLeaveState: () => {
+        if (this.goingTo !== 'next') {
+          sss._fixedTri.setScale(1, 1);
+          sss._flipTri.setScale(1, 1);
+          sss._leftCircle.setScale(1, 1);
+          sss._rightCircle.setScale(1, 1);
+        }
+      },
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, 'So no matter which |end| we connect the sides to, we have the same congruent triangle.'),
+      show: [
+        sss._leftCircle, sss._rightCircle,
+        sss._fixedTri, sss._flipTri,
+      ],
+      modifiers: {
+        end: click(sss.flipAll, [sss, 1], colors.sides),
+      },
+      setSteadyState: () => {
+        const flip = sss._fixedTri.getScale().x;
+        sss.setScenarios('center');
+        sss.setScenarios('default');
+        sss.hasTouchableElements = false;
+        if (flip !== 1 && this.comingFrom === 'prev') {
+          sss.flipAll(0);
+        }
+      },
+      setLeaveState: () => {
+        if (this.goingTo !== 'prev') {
+          sss._fixedTri.setScale(1, 1);
+          sss._flipTri.setScale(1, 1);
+          sss._leftCircle.setScale(1, 1);
+          sss._rightCircle.setScale(1, 1);
+        }
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'And so for this case, the three side lengths can only create |one triangle|.',
+        'Does this hold for |any| three side lengths?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'We have seen making a triangle from three fixed side lengths is the same as making a triangle from |two overlapping circles|.',
+        'One side of the triangle is the distance between the |circle centers|.',
+        'The other two sides join at one of the circle |intersection| points.',
+        'So, a more general question might be, can you find any configuration of separated circles that has |more than two, opposite, intersection points|?',
+      ]),
+    });
+
+    this.addSection({
+      setContent: style({ top: 0 }, [
+        '|Experiment| by changing the circle\'s sizes and positions.',
+      ]),
+      show: [
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
+      ],
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'next') {
+          // const rad1 = sss._rad1.getRotation();
+          // const rad2 = sss._rad2.getRotation();
+          // const scale1 = sss._circ1._scale.getScale();
+          // const scale2 = sss._circ2._scale.getScale();
+          // const pad1 = sss._pad1.transform._dup();
+          // const pad2 = sss._pad2.transform._dup();
+          // sss.setScenarios('center');
+          // sss._rad1.setRotation(rad1);
+          // sss._rad2.setRotation(rad2);
+          // sss._circ1._scale.setScale(scale1);
+          // sss._circ2._scale.setScale(scale2);
+          // sss._pad1.setTransform(pad1);
+          // sss._pad2.setTransform(pad2);
+          sss.animations.new()
+            .scenarios({ target: 'center', duration: 0.8 })
+            .whenFinished(done)
+            .start();
+          return;
+        }
+        sss.setScenarios('center');
+        done();
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+      },
+    });
+
+    common = {
+      show: [
+        sss._circ1, sss._circ2, sss._pad1, sss._pad2,
+        sss._rad1, sss._rad2, sss._baseLine,
+      ],
+      modifiers: {
+        same_position: click(sss.goToSamePosition, [sss, null], colors.diagram.action),
+        do_not_intersect: click(sss.goToNoOverlap, [sss, null], colors.diagram.action),
+        do_intersect: click(sss.goToOverlap, [sss, null], colors.diagram.action),
+        two: click(sss.goToOverlapIntersect, [sss, null], colors.diagram.action),
+      },
+      setSteadyState: () => {
+        sss.hasTouchableElements = true;
+      },
+    };
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'If the circles are at the |same_position|, then a triangle cannot be formed as one of the side lengths is zero',
+      ]),
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          sss.setScenarios('center');
+          sss.goToPositionAndScale(0, 0, 0.7, 0.6, null, 0);
+          done();
+          return;
+        }
+        sss.goToPositionAndScale(0, 0, 0.7, 0.6, done);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'If the circles |do_not_intersect|, then no triangles can be formed as the side lengths never meet at their ends.',
+      ]),
+      transitionFromAny: (done) => {
+        if (this.comingFrom === 'goto') {
+          sss.setScenarios('center');
+          sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done, 0);
+          done();
+          return;
+        }
+        sss.goToPositionAndScale(-1, 1, 0.7, 0.6, done);
+      },
+    });
+
+    this.addSection(common, {
+      setContent: style({ top: 0 }, [
+        'In the situations the circles |do_intersect|, there are only ever |two| intersect points which we have seen makes the |same triangle|.',
+      ]),
+      transitionFromAny: (done) => {
+        const [angle1, angle2] = sss.getIntersectAngles(-0.5, 0.5, 0.7, 0.6);
+        if (this.comingFrom === 'goto') {
+          sss.setScenarios('center');
+          sss.goToPositionAndScale(-0.5, 0.5, 0.7, 0.6, done, 0, angle1, angle2);
+          done();
+          return;
+        }
+        // sss.goToOverlap(done);
+        sss.goToPositionAndScale(-0.5, 0.5, 0.7, 0.6, done, 0.8, angle1, angle2);
+      },
+    });
+
+    this.addSection({
+      setContent: style({ centerV: true }, [
+        'And so any set of |three side lengths| will only create |one unique triangle|.',
+      ]),
+    });
+
+    this.addSection({
+      setContent: [
+        'Therefore if two triangles share |three sides of the same length|, then they |are congruent|.',
+        'This case is often called the |Side Side Side| or |SSS| case.',
+      ],
+      modifiers: {
+        angle_between: highlight(colors.angles),
+      },
+      setEnterState: () => {
+        congruent._tri1.setScenario('lowLeft');
+        congruent._tri2.setScenario('rightLeft');
+      },
+      show: [congruent],
+      hide: [
+        congruent._tri1._angle0, congruent._tri1._angle1,
+        congruent._tri2._angle0, congruent._tri2._angle1,
+        congruent._tri1._angle2, congruent._tri2._angle2,
+      ],
+      // setSteadyState: () => {
+      // },
+    });
+
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+    /* ********************************************************************* */
+
     this.addSection({
       setContent: style({ centerV: true }, [
         'The next two cases are combinations of |two_sides| and |one_angle|.',
-        'When you know one angle and two sides, the two sides can either be adjacent to the angle, or one can be adjacent while the other is opposite.',
+        'When you know one angle and two sides, the two sides can either be |adjacent| to the angle, or one can be |adjacent| while the other is |opposite|.',
       ]),
       modifiers: {
         two_sides: highlight(colors.sides),
         one_angle: highlight(colors.angles),
       },
     });
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
-    /* ********************************************************************* */
+
     this.addSection({
-      title: 'Side Angle Side',
+      title: 'SAS',
       setContent: [
         'First consider the case where the |two_sides_are_adjacent| to the |angle|. Can more than one triangle be made?',
       ],
@@ -317,7 +770,7 @@ class Content extends PresentationLessonContent {
       },
     });
 
-    let common = {
+    common = {
       setContent: [
         'Next, we can connect the |second side| to be |adjacent_to_the_angle|.',
       ],
@@ -504,7 +957,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share |two sides of the same length|, and the |angle_between| those two sides is also the same on both triangles, then they |are congruent|.',
-        'This case is often called the |Side Angle Side| case.',
+        'This case is often called the |Side Angle Side| or |SAS| case.',
       ],
       modifiers: {
         angle_between: highlight(colors.angles),
@@ -545,7 +998,7 @@ class Content extends PresentationLessonContent {
       },
     };
     this.addSection(common, {
-      title: 'Side Side Angle',
+      title: 'SSA',
       setContent: [
         'Next we consider the case where an |angle|, its |adjacent_side| and its |opposite_side| are known.',
       ],
@@ -722,7 +1175,7 @@ class Content extends PresentationLessonContent {
 
     this.addSection({
       setContent: style({}, [
-        'This case is often referred to as the |Side Side Angle| case.',
+        'This case is often referred to as the |Side Side Angle|, or |SSA| case.',
         'If two triangles have the same |angle_a|, |adjacent side (B)|, and |opposite side (A)|, then we can only be sure they are |congruent| if the |opposite side is longer or equal to the adjacent side|, or |A ≥ B|.',
       ]),
       modifiers: {
@@ -762,7 +1215,7 @@ class Content extends PresentationLessonContent {
     });
 
     this.addSection({
-      title: 'Angle Side Angle',
+      title: 'ASA',
       setContent: [
         'We will start where |one_side| and its |two_adjacent_angles| are known. Can only one triangle be formed from this configuration?',
       ],
@@ -871,7 +1324,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share the same |two_angles| and |side_between| them, then they will be |congruent|.',
-        'This case is often called the |Angle Side Angle| case.',
+        'This case is often called the |Angle Side Angle| or |ASA| case.',
       ],
       modifiers: {
         two_angles: highlight(colors.angles),
@@ -898,7 +1351,7 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Angle Angle Side',
+      title: 'AAS',
       setContent: [
         'The next case is when a |side| and its |adjacent_angle| and |opposite_angle| are known.',
       ],
@@ -951,7 +1404,7 @@ class Content extends PresentationLessonContent {
     this.addSection({
       setContent: [
         'Therefore if two triangles share the same |two_angles| and relatively positioned |side_not_between| them, then they will be |congruent|.',
-        'This case is often called the |Angle Angle Side| case.',
+        'This case is often called the |Angle Angle Side| or |AAS| case.',
       ],
       modifiers: {
         two_angles: highlight(colors.angles),
@@ -989,37 +1442,25 @@ class Content extends PresentationLessonContent {
     /* ********************************************************************* */
     /* ********************************************************************* */
     this.addSection({
-      title: 'Side Side Side',
+      title: 'Three Property Summary',
       setContent: style({ centerV: true, size: 0.9 }, [
-        'We have now seen whether we can determine congruence from |most| combinations of |three properties| including:',
+        'We have now seen whether we can determine congruence from all combinations of |three properties| including:',
         style({ left: 3, list: 'unordered', size: 0.9 }, [
-          'All angles - |Angle-Angle-Angle|',
-          'Two sides and an angle - |Side-Angle-Side| and |Side-Side-Angle|',
-          'Two angles and a side - |Angle-Side-Angle| and |Angle-Angle-Side|',
+          'All angles - |Angle-Angle-Angle| (AAA)',
+          'All sides - |Side-Side-Side| (SSS)',
+          'Two sides and an angle - |Side-Angle-Side| (SAS) and |Side-Side-Angle| (SSA)',
+          'Two angles and a side - |Angle-Side-Angle| (ASA) and |Angle-Angle-Side| (AAS)',
         ]),
-        'The remaining combination is |all sides| (|Side-Side-Side|).',
-        'In fact, knowing three sides of two triangles |is| enough to determine they are congruent, but to show this we first need to look at |Isosceles Triangles|.',
+        '|AAA| is |not| enough information to determine congruence.',
+        '|SSA| is |only| enough if the |side opposite the angle is equal to or longer than the side adjacent| to the angle',
+        '|SSS|, |SAS|, |ASA|, |AAS| are all |sufficent| to determine congruence.',
       ]),
     });
-
     this.addSection({
-      setContent: [
-        'If two triangles share the same |side_lengths|, then they will be |congruent|.',
-        'This case is often called the |Side Side Side| case.',
-      ],
-      modifiers: {
-        side_lengths: highlight(colors.sides),
-      },
-      setEnterState: () => {
-        congruent._tri1.setScenario('lowLeft');
-        congruent._tri2.setScenario('rightLeft');
-      },
-      show: [congruent],
-      hide: [
-        congruent._tri1._angle1, congruent._tri2._angle1,
-        congruent._tri1._angle2, congruent._tri2._angle2,
-        congruent._tri1._angle0, congruent._tri2._angle0,
-      ],
+      title: 'Four or Five Properties',
+      setContent: style({ centerV: true, size: 0.9 }, [
+        'All combinations of |four| or |five| properties have within them either |three sides|, or |one side and two angles|. As |SSS|, |AAS| and |ASA| are all sufficient tests of congruence, then |all| combinations of four or five properties will also be |sufficient| tests of congruence.',
+      ]),
     });
   }
 }

@@ -279,7 +279,7 @@ export default class LessonComponent extends React.Component
     const output = [];
     const topics = this.getTopics();
     const topicNames = [
-      'discover', 'explanation', 'summary', 'examples', 'implications', 'history', 'quiz', 'links',
+      'discover', 'explanation', 'summary', 'examples', 'implications', 'history', 'quiz', 'ta', 'links',
     ];
     Object.keys(topics).forEach((topicName) => {
       if (topicNames.indexOf(topicName) === -1) {
@@ -327,7 +327,9 @@ export default class LessonComponent extends React.Component
           }
         });
         this.key += 1;
-        if (partialLessonCount > 0 && name === 'explanation') {
+        if (partialLessonCount > 0
+          && (name === 'explanation' || name === 'discover' || name === 'summary')
+        ) {
           listItems.splice(fullLessonCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
@@ -345,6 +347,10 @@ export default class LessonComponent extends React.Component
             separator: true,
           });
         }
+        let nameLabel = name.charAt(0).toUpperCase() + name.slice(1);
+        if (name === 'ta') {
+          nameLabel = 'TA';
+        }
         if (listItems.length === 1) {
           let singleItemClass = 'dropdown_button_container';
           if (selected) {
@@ -355,7 +361,7 @@ export default class LessonComponent extends React.Component
               <div className={singleItemClass}>
                 <a href={listItems[0].link || '/'}
                   className = "topic_button__single_item_label">
-                  {name.charAt(0).toUpperCase() + name.slice(1)}
+                  {nameLabel}
                 </a>
               </div>
             </div>,
@@ -365,7 +371,7 @@ export default class LessonComponent extends React.Component
             <div className="lesson__path_tile" key={this.key}>
               <TopicButton
                 id={`id__lesson__topic_button_${name}`}
-                label={name.charAt(0).toUpperCase() + name.slice(1)}
+                label={nameLabel}
                 direction="down"
                 xAlign="left"
                 selected={selected}

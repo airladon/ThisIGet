@@ -9,6 +9,9 @@ import CommonCollectionSAS from './sas';
 import CommonCollectionAAS from './aas';
 import CommonCollectionASA from './asa';
 import CommonCollectionSSA from './ssa';
+import CommonCollectionSSS from './sss';
+import CommonCollectionOneProp from './oneProperty';
+import CommonCollectionTwoProp from './twoProperties';
 import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
 
 const { Transform } = Fig;
@@ -18,6 +21,8 @@ export default class DiagramCollection extends CommonDiagramCollection {
   _aaa: CommonCollectionAAA;
   _aas: CommonCollectionAAS;
   _sas: CommonCollectionSAS;
+  _sss: CommonCollectionSAS;
+  _oneProp: CommonCollectionOneProp;
 
   constructor(
     diagram: CommonLessonDiagram,
@@ -32,6 +37,10 @@ export default class DiagramCollection extends CommonDiagramCollection {
     this.add('asa', new CommonCollectionASA(diagram, this.layout));
     this.add('aas', new CommonCollectionAAS(diagram, this.layout));
     this.add('ssa', new CommonCollectionSSA(diagram, this.layout));
+    this.add('sss', new CommonCollectionSSS(diagram, this.layout));
+    // this.add('oneProp', new CommonCollectionOneProp(diagram, this.layout));
+    this.add('oneProp', new CommonCollectionOneProp(diagram));
+    this.add('twoProp', new CommonCollectionTwoProp(diagram));
     // this.add('sss', new CommonCollectionSSS(diagram, this.layout));
     this.hasTouchableElements = true;
   }

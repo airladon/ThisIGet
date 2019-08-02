@@ -154,6 +154,17 @@
     "versionUID": "base"
   },
   {
+    "url": "https://www.cut-the-knot.org/blue/PolygonalAreas.shtml",
+    "hash": "1a31a40f8c050d4042ca9578feee132d",
+    "publisher": "Cut The Knot",
+    "type": "generic",
+    "description": "What is Area? An elementary introduction",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "Area",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://en.wikipedia.org/wiki/Circle",
     "hash": "5c262e9f4ce3eb5193990a43bb0fd074",
     "publisher": "Wikipedia",
@@ -247,6 +258,28 @@
     "publisher": "MathBitsNotebook",
     "type": "generic",
     "description": "Methods of Proving Triangles Congruent",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "https://mathcs.clarku.edu/~djoyce/java/elements/bookI/propI4.html",
+    "hash": "a4fcd2dc7107c44aa6ccb6c114474e8d",
+    "author": "David Joyce",
+    "type": "generic",
+    "description": "Euclid's method for proving ASA, with commentry",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "CongruentTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
+    "url": "http://cut-the-knot.org/pythagoras/SSS.shtml",
+    "hash": "3637356355d9e36605011a1f877014db",
+    "publisher": "Cut The Knot",
+    "type": "generic",
+    "description": "SSS proofs",
     "lessonPath": "/Lessons/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
