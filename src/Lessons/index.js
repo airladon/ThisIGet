@@ -317,6 +317,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'AreaTriangle',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover what the area of a triangle is',
+            htmlDescription: 'Figure out why the area of a triangle depends just on its base and height',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of ',
+            description: '',
+            htmlTitle: 'Triangle area examples',
+            htmlDescription: 'Calculation examples using area of a triangle',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -325,6 +345,16 @@ export default function lessonIndex() {
             htmlTitle: 'Triangle Area derivation and proof',
             htmlDescription: 'Explanation on why area of a triangle is what it is',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for <TOPIC>',
+            htmlTitle: 'Triangle area links',
+            htmlDescription: 'Links to explanations, proofs, examples and questions about triangle area',
+            fullLesson: false,
           },
         },
         quiz: {
