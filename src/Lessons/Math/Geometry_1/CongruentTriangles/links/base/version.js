@@ -54,7 +54,7 @@ var version = {
     },
     {
       url: 'http://ceemrr.com/Geometry1/Triangles1/Triangles16.html',
-      hash: '',
+      hash: '96741ca2859a48bb8e0f52fc5bea7f4f',
       publisher: 'ceemrr.com',
       type: 'generic',
       description: 'Euclid\'s ASA proof',
