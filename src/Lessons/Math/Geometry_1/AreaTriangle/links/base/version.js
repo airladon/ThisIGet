@@ -15,14 +15,14 @@ var version = {
       hash: 'aa814e8a4209251233373d238fe8c516',
       publisher: 'Math Open Reference',
       type: 'generic',
-      description: 'Triangle area definition plus addition ways for calculation',
+      description: 'Triangle area definition plus additional ways for calculation',
     },
     {
       url: 'https://www.khanacademy.org/math/basic-geo/basic-geo-area-and-perimeter/area-triangle/a/area-of-triangle',
       hash: 'aaf7f426ad74e84a16667309f53578be',
       publisher: 'Khan Academy',
       type: 'generic',
-      description: 'Definition plus practive problems',
+      description: 'Definition plus practice problems',
     },
     {
       url: 'https://www.basic-mathematics.com/proof-of-the-area-of-a-triangle.html',
