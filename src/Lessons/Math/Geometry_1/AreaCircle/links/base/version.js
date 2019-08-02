@@ -12,28 +12,28 @@ var version = {
   links: [
     {
       url: 'https://en.wikipedia.org/wiki/Area_of_a_circle',
-      hash: '',
+      hash: '11db8b8d4ab6ec8c891da9bd1bfef287',
       publisher: 'Wikipedia',
       type: 'generic',
       description: 'Definition and proofs',
     },
     {
       url: 'https://www.mathopenref.com/circlearea.html',
-      hash: '',
+      hash: '81dee20e6b6ab1a8d56fe730c0ff5c26',
       publisher: 'Math Open Reference',
       type: 'generic',
       description: 'Introduction to circle area',
     },
     {
       url: 'https://www.mathsisfun.com/geometry/circle-area.html',
-      hash: '',
+      hash: '3cf61055eac3c34d690ccd844f891bd1',
       publisher: 'Math is Fun',
       type: 'generic',
       description: 'Introduction to circle area',
     },
     {
       url: 'https://www.youtube.com/watch?v=YokKp3pwVFc',
-      hash: '',
+      hash: '1a239619d4c9ec45ec65cd6d7965ba50',
       publisher: 'mathematicsonline',
       type: 'video',
       description: 'Visual proof for area of a circle',
