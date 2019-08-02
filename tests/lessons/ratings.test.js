@@ -54,7 +54,7 @@ Object.keys(index).forEach((lessonName) => {
 describe('Lesson ratings', () => {
   test.each(allTests)(
     '%s/%s/%s', async (uid, topic, version) => {
-      jest.setTimeout(60000);
+      jest.setTimeout(120000);
       let testNumber = 0;
       let result = { status: '' };
       while (result.status !== 'ok' && testNumber < retest) {
