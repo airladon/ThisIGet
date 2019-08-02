@@ -7,7 +7,7 @@
 
 <!-- ![](ex1.png)
 
-<hintDown>[Answer]
+<hintLow>[Answer]
 [[triangle]]((qr,'Math/Geometry_1/Triangles/base/AngleSum',#00756F)) 
-</hintDown>
+</hintLow>
  -->
