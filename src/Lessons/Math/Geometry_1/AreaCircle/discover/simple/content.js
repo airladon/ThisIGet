@@ -15,7 +15,8 @@ class Content extends SimpleLessonContent {
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
       // 'Math/Geometry_1/Isosceles/base',
-      // 'Math/Geometry_1/ExternalAngles/base',
+      'Math/Geometry_1/Area/base',
+      'Math/Geometry_1/AreaTriangle/base',
       // 'Math/Geometry_1/CongruentTriangles/base/',
     ]);
   }

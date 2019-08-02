@@ -63,3 +63,18 @@ $$Area = \pi \times 5 ^ 2 - \pi \times 2.5^2 = \bbox[10px,border:1px solid gray]
 
 </hintLow>
 
+### Example 5:
+
+##### How many square millimeters are in a square meter?
+
+<hintLow>[Answer]
+
+There are 1000 millimeters (mm) in 1 meter (m).
+
+Therefore if we have a square of side length 1m, you could also say its side length is 1000mm.
+
+$$Area = 1000\ mm \times 1000\ mm = \bbox[10px,border:1px solid gray]{1,000,000\ mm^2}$$
+
+So there are one million square millimeters in a square meter.
+
+</hintLow>
