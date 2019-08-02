@@ -1532,6 +1532,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'RightAngleTriangles',
       topics: {
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of Right Angle Triangle calculations',
+            description: '',
+            htmlTitle: 'Right Angle Triangle example calculations',
+            htmlDescription: 'Examples showing how to use the properties of right angle triangles to solve various problems',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
