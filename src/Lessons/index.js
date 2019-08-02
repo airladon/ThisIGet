@@ -1532,6 +1532,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'RightAngleTriangles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the properties of a right angle triangle',
+            htmlDescription: 'Figure out why the hypotenuse is the longest side and find the pythagoean theorem',
+            fullLesson: true,
+          },
+        },
         examples: {
           base: {
             type: 'singlePage',
