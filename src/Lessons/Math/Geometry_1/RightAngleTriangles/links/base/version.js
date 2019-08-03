@@ -52,6 +52,13 @@ var version = {
       type: 'video',
       description: 'Introduction with examples.',
     },
+    {
+      url: 'https://www.cut-the-knot.org/pythagoras/index.shtml',
+      hash: '',
+      publisher: 'Cut The Knot',
+      type: 'generic',
+      description: '118 approaches to proving the theorem',
+    },
   ],
 };
 
