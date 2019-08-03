@@ -1090,6 +1090,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of ',
+            description: '',
+            htmlTitle: 'Parallel line distance examples',
+            htmlDescription: 'Examples of problems where know the properties of parallel line distance is useful',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
