@@ -15,6 +15,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -66,6 +80,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'singlePage',
@@ -105,6 +133,20 @@ export default function lessonIndex() {
             htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
             htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -165,6 +207,20 @@ export default function lessonIndex() {
             description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
             htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
             htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -237,6 +293,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -268,6 +338,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'AreaCircle',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover what the area of a circle is',
+            htmlDescription: 'Figure out why the area of a circle is what it is',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of Circle Area',
+            description: '',
+            htmlTitle: 'Circle area examples',
+            htmlDescription: 'Examples of calculations involving circle area',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -284,6 +374,30 @@ export default function lessonIndex() {
             htmlTitle: 'Intuitive derivation of circle area in a single page',
             htmlDescription: 'Using triangles, find the equation to area of a circle',
             fullLesson: true,
+          },
+        },
+        links: {
+          base: {
+            type: 'generic',
+            title: 'External',
+            description: 'External links to sources of information for Circle Area',
+            htmlTitle: 'Circle Area Links',
+            htmlDescription: 'Links for circle area explanations, proofs and examples',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -357,6 +471,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -415,6 +543,20 @@ export default function lessonIndex() {
             description: 'External links to information on circles',
             htmlTitle: 'Circles, circle properties and relationships links',
             htmlDescription: 'Explanations, proofs, examples and questions about Circles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -505,6 +647,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -571,6 +727,20 @@ export default function lessonIndex() {
             description: 'External links to sources of information for Degrees',
             htmlTitle: 'Measuring angles in degrees links',
             htmlDescription: 'Explanations, and examples about measuring angles in degrees',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -642,6 +812,20 @@ export default function lessonIndex() {
             description: 'External links to equilateral triangles',
             htmlTitle: 'Equilateral triangles links',
             htmlDescription: 'External sources of information about equilateral triangles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -724,6 +908,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -771,6 +969,20 @@ export default function lessonIndex() {
             htmlTitle: 'Why Study Shapes?',
             htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
       },
@@ -823,6 +1035,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -864,6 +1090,20 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -893,6 +1133,20 @@ export default function lessonIndex() {
             htmlTitle: 'Interactive introduction to parallel lines',
             htmlDescription: 'See what parallel lines are, and when lines are parallel',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         quiz: {
@@ -954,6 +1208,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -983,6 +1251,20 @@ export default function lessonIndex() {
             htmlTitle: 'Introduction to distance between a point and line',
             htmlDescription: 'Properties of distance between point and a line',
             fullLesson: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
           },
         },
         summary: {
@@ -1046,6 +1328,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1104,6 +1400,20 @@ export default function lessonIndex() {
             description: 'External links to information on radians',
             htmlTitle: 'Links introducing radians',
             htmlDescription: 'Explanations, proofs, examples and questions about radians',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -1186,6 +1496,20 @@ export default function lessonIndex() {
             fullLesson: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullLesson: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -1208,6 +1532,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'RightAngleTriangles',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the properties of a right angle triangle',
+            htmlDescription: 'Figure out why the hypotenuse is the longest side and find the pythagoean theorem',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of Right Angle Triangle calculations',
+            description: '',
+            htmlTitle: 'Right Angle Triangle example calculations',
+            htmlDescription: 'Examples showing how to use the properties of right angle triangles to solve various problems',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
@@ -1233,6 +1577,20 @@ export default function lessonIndex() {
             description: 'External links to sources of information for Right Angle Triangles',
             htmlTitle: 'Links for Right Angle Triangles',
             htmlDescription: 'External explanations of right angle triangles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -1304,6 +1662,20 @@ export default function lessonIndex() {
             description: 'External links to triangle side angle relationships',
             htmlTitle: 'Triangle side angle relationship links',
             htmlDescription: 'External links covering the relationship between the size of angles and length of sides in a triangle',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
@@ -1451,6 +1823,20 @@ export default function lessonIndex() {
             description: 'External links to sources of information for Triangles>',
             htmlTitle: 'Triangles Links',
             htmlDescription: 'Explanations, proofs, examples and questions about Triangles',
+            fullLesson: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullLesson: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullLesson: false,
           },
         },
