@@ -6,6 +6,12 @@ import getLessonIndex from '../../src/Lessons/lessonIndex';
 const fs = require('fs');
 const fetch = require('node-fetch');
 
+const retest = 3;
+
+const sleep = (milliseconds) => {
+  return new Promise(resolve => setTimeout(resolve, milliseconds))
+}
+
 const getData = async (url) => {
   try {
     const response = await fetch(url);
@@ -48,8 +54,18 @@ Object.keys(index).forEach((lessonName) => {
 describe('Lesson ratings', () => {
   test.each(allTests)(
     '%s/%s/%s', async (uid, topic, version) => {
-      jest.setTimeout(60000);
-      const result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
+      jest.setTimeout(120000);
+      let testNumber = 0;
+      let result = { status: '' };
+      while (result.status !== 'ok' && testNumber < retest) {
+        // eslint-disable-next-line no-await-in-loop
+        result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
+        testNumber += 1;
+        if (result.status !== 'ok') {
+          // eslint-disable-next-line no-await-in-loop
+          await sleep(1000);
+        }
+      }
       expect(result.status).toBe('ok');
     },
   );
