@@ -55,12 +55,13 @@ Here are two different ways to make squares with congruent right angle triangles
 ![](squares.png)
 </hintLow>
 
-<hint>[Hint 3] Choose a diagram from the last hint and label all the sides of the triangles - keeping labels the same if the sides are the same length. Then calculate the area of the square formed by the hypotenuse of the right angle triangle.
+<hintLow>[Hint 3] Choose a diagram from the last hint and label all the sides of the triangles - keeping labels the same if the sides are the same length. Then calculate the area of the square formed by the hypotenuse of the right angle triangle.
 
 For example, here is one of the configurations labelled:
 
 ![](labeled.png)
-</hint>
+
+</hintLow>
 
 <hintLow>[Answer]
 
