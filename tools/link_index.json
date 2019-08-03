@@ -781,6 +781,17 @@
     "versionUID": "base"
   },
   {
+    "url": "https://www.cut-the-knot.org/pythagoras/index.shtml",
+    "hash": "26147f55ba7e3685f8a951260a6d1ee8",
+    "publisher": "Cut The Knot",
+    "type": "generic",
+    "description": "118 approaches to proving the theorem",
+    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonUID": "RightAngleTriangles",
+    "topic": "links",
+    "versionUID": "base"
+  },
+  {
     "url": "https://www.mathopenref.com/trianglesideangle.html",
     "hash": "f87f511c686fc764ba6af919b806d9f8",
     "publisher": "Math Open Reference",
