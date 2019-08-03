@@ -1243,6 +1243,16 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'PointLineDistance',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the angle of the distance between a point and line',
+            htmlDescription: 'Figure out why the shortest distance between a point and a line is perpendicular to the line',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',
