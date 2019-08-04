@@ -14,9 +14,9 @@ class Content extends SimpleLessonContent {
     //  this.iconLink = imgLink;
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
-      'Math/Geometry_1/PointLineDistance/base',
-      'Math/Geometry_1/AnglesAtIntersections/base',
-      'Math/Geometry_1/RectanglesAndSquares/base/',
+      'Math/Geometry_1/AreaTriangle/base',
+      // 'Math/Geometry_1/AnglesAtIntersections/base',
+      'Math/Geometry_1/RightAngleTriangles/base/',
     ]);
   }
 

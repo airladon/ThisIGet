@@ -10,6 +10,7 @@ Can you show the sides of the smaller triangle are all in the same proportion to
 
 $$\frac{\color{r}A\color{b}D}{\color{r}AB} = \frac{\color{r}A\color{b}E}{\color{r}AC} = \frac{\color{b}DE}{\color{r}BC}$$
 
+<hint>[Hint 1]Split the triangle up into more triangles, and use [[triangle area]]((qr,'Math/Geometry_1/AreaTriangle/base/Main',#00756F)) and the [[Pythagorean theorem]]((qr,'Math/Geometry_1/RightAngleTriangles/base/Pythagorus',#00756F)) to find relationships between the sides</hint>
 
 <!-- The [[distance]]((qr,'Math/Geometry_1/PointLineDistance/base/Main',#00756F)) between a point and a line is the shorter of:
 
