@@ -1200,6 +1200,26 @@ export default function lessonIndex() {
       path: '/Lessons/Math/Geometry_1',
       uid: 'ParallelSplitOfTriangle',
       topics: {
+        discover: {
+          simple: {
+            type: 'singlePage',
+            title: 'Base',
+            description: '',
+            htmlTitle: 'Self discover the properties of a triangle split with a parallel line',
+            htmlDescription: 'Figure out why a triangle split with a parallel line will create a proportional triangle',
+            fullLesson: true,
+          },
+        },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of triangles split with parallel lines',
+            description: '',
+            htmlTitle: 'Triangles split with parallel lines calculation examples',
+            htmlDescription: 'Examples of triangle calculations where a triangle is split with a parallel line',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',

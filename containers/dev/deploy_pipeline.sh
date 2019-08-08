@@ -41,6 +41,10 @@ check_status
 title "Creating hashes"
 python ./create_site_hashes.py
 
+title "Creating site map"
+python ./create_site_map.py
+check_status
+
 ###########################################################################
 title "Deploy to thisiget-test"
 ./build.sh deploy test skip-tests skip-build
@@ -113,8 +117,4 @@ then
     fi
     exit 1
 fi
-
-title "Creating site map"
-python ./create_site_map.py
-check_status
 

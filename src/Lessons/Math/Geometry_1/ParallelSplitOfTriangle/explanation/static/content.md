@@ -67,7 +67,17 @@ $$rB_1 + rB_2 = r(B_1 + B_2) = rB$$
 
 And so all sides of the new triangle have been reduced by the same ratio from their original corresponding sides.
 
-The same process can be done with a triangle that is formed with the difference of two right angle triangles, and so we find **if any triangle is split with a line parallel to one of its sides, then the new split triangle's sides are all in equal proportion to their corresponding sides of the original triangle**.
+The same process can be done with a triangle that is formed with the difference of two right angle triangles.
+
+<!-- ![](difference1.png) -->
+
+![](difference2.png)
+
+Here the base of the smaller triangle is:
+
+$$r\left(B + B_1\right) - rB_1 = rB$$
+
+So we find **if any triangle is split with a line parallel to one of its sides, then the new split triangle's sides are all in equal proportion to their corresponding sides of the original triangle**.
 
 
 ### Lines between Parallel Lines
