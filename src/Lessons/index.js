@@ -1210,6 +1210,16 @@ export default function lessonIndex() {
             fullLesson: true,
           },
         },
+        examples: {
+          base: {
+            type: 'singlePage',
+            title: 'Examples of triangles split with parallel lines',
+            description: '',
+            htmlTitle: 'Triangles split with parallel lines calculation examples',
+            htmlDescription: 'Examples of triangle calculations where a triangle is split with a parallel line',
+            fullLesson: true,
+          },
+        },
         explanation: {
           base: {
             type: 'presentation',

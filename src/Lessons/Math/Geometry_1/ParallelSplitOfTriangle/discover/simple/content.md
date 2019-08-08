@@ -2,7 +2,7 @@
 
 ### Right Angle Triangle
 
-Take a right angle triangle $$\definecolor{gr}{RGB}{100,100,100}\definecolor{r}{RGB}{238,34,12}\color{r}ABC$$ and draw a line $$\definecolor{b}{RGB}{0,118,186}\color{b}DE$$ parallel to one of its sides:
+Take a right angle triangle $$\definecolor{g}{RGB}{29,177,0}\definecolor{gr}{RGB}{100,100,100}\definecolor{r}{RGB}{238,34,12}\color{r}ABC$$ and draw a line $$\definecolor{b}{RGB}{0,118,186}\color{b}DE$$ parallel to one of its sides such that it splits the triangle:
 
 ![](right.png)
 
@@ -34,7 +34,7 @@ Substituting in $$\color{b}E\color{r}C \color{black}= \color{r}AC \color{black}-
 
 $$\frac{\color{r}A\color{b}E}{\color{r}AC}=\frac{\color{b}DE}{\color{r}BC}\color{black}\ \ \ \ \ \ \ \color{gr}(1)$$
 
-Now, the Pythagorean theroem allows us to get expressions for $$\color{r}AB$$ and $$\color{r}A\color{b}E$$:
+Now, the Pythagorean theroem allows us to get expressions for $$\color{r}AB$$ and $$\color{r}A\color{b}D$$:
 
 $$\color{r}AB^{\color{black}2} \color{black}= \color{r}BC^{\color{black}2} \color{black}+ \color{r}AC^{\color{black}2}\ \ \ \ \ \ \ \color{gr}(2)$$
 
@@ -42,61 +42,102 @@ $$\color{r}A\color{b}D^{\color{black}2} \color{black}= \color{b}DE^{\color{black
 
 We know from $$\color{gr}(1)$$ that:
 
-$$\color{b}DE \color{black}= \color{r}BC\frac{A\color{b}E}{\color{r}AC}\ \ \ \ \ \ \ \color{gr}(4)$$
+$$\color{b}DE \color{black}= \color{r}BC\color{black}\frac{\color{r}A\color{b}E}{\color{r}AC}\ \ \ \ \ \ \ \color{gr}(4)$$
 
-$$\color{r}A\color{b}E \color{black}= \color{r}AC\frac{\color{b}DE}{\color{r}BC}= \color{r}AC\frac{A\color{b}E}{\color{r}AC}\ \ \ \ \ \ \ \color{gr}(5)$$
+$$\color{r}A\color{b}E \color{black}= \color{r}AC\color{black}\frac{\color{b}DE}{\color{r}BC}\color{black}= \color{r}AC\color{black}\frac{\color{r}A\color{b}E}{\color{r}AC}\ \ \ \ \ \ \ \color{gr}(5)$$
 
 Substituting $$(\color{gr}4)$$ and $$(\color{gr}5)$$ into $$(\color{gr}3)$$ then gives:
 
 
 $$\color{r}A\color{b}D^{\color{black}2} \color{black}= \color{r}BC^{\color{black}2}\color{black}\frac{\color{r}A\color{b}E^{\color{black}2}}{\color{r}AC^{\color{black}2}} \color{black}+ \color{r}AC^{\color{black}2}\color{black}\frac{\color{r}A\color{b}E^{\color{black}2}}{\color{r}AC^{\color{black}2}} \color{black}= \frac{\color{r}A\color{b}E^{\color{black}2}}{\color{r}AC^2}\color{black}\left(\color{r}BC^{\color{black}2} \color{black}+ \color{r}AC^{\color{black}2}\color{black}\right)$$
 
-Which we can then divide by $$\color{gr}(3)$$ to get:
+Which we can then divide by $$\color{gr}(2)$$ to get:
 
 
 $$\frac{\color{r}A\color{b}D}{\color{r}AB} \color{black}= \frac{\color{r}A\color{b}E}{\color{r}AC}$$
 
 And so all sides of the smaller triangle have the same proportion to the larger triangle.
 
+This is described in more detail (with all equation steps) in this lesson's [Explanation](/Lessons/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=1).
+
 </hintLow>
 
-<!-- The [[distance]]((qr,'Math/Geometry_1/PointLineDistance/base/Main',#00756F)) between a point and a line is the shorter of:
 
-* the distance between the point and the line's end
-* the distance of a line drawn between the point and the line that is perpendicular to the line
+### Any Triangle
 
-Given this, what properties can you find about the distance between parallel lines?
+Can you use the learnings from the right angle triangle to show the same relationship holds for any triangle?
 
-![](problemstatement.png)
+![](any.png)
 
-<hint>[Hint 1]First think about the distance between a point on one line and the other line</hint>
+$$\frac{\color{r}A\color{b}D}{\color{r}AB} = \frac{\color{r}A\color{b}E}{\color{r}AC} = \frac{\color{b}DE}{\color{r}BC}$$
 
-<hint>[Hint 2]Is the line representing the shortest distance between lines also perpendicular?</hint>
-
-<hint>[Hint 3]Does the distance between parallel lines change? Why?</hint>
-
-<hint>[Hint 4]The concept of [[interior angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Interior',#00756F)) and properties of a [[rectangle]]((qr,'Math/Geometry_1/RectanglesAndSquares/base/Rectangle',#00756F)) can be helpful to show how distance changes between parallel lines</hint>
+<hint>Split the triangle into two right angle triangles</hint>
 
 <hintLow>[Answer]
-If we select a random point along one of the lines, we know the [[distance]]((qr,'Math/Geometry_1/PointLineDistance/base/Main',#00756F)) line between it and the second line will be perpendicular to the second line.
 
-![](point.png)
+Split the triangle into two right angle triangles:
 
-We can use [[interior angles]]((qr,'Math/Geometry_1/AnglesAtIntersections/base/Interior',#00756F)) and the properties of a [[rectangle]]((qr,'Math/Geometry_1/RectanglesAndSquares/base/Rectangle',#00756F)) to realize that the distance line is also perpendicular to the first line.
+![](anyanswer.png)
 
-![](interior.png)
+For right angle triangles we proved the smaller triangle is always proportional to the larger. Also, as both triangles share the same side $$\color{r}A\color{g}G$$ we get:
 
-If we select a second random point on the first line and draw a second distance line we get:
+$$\frac{\color{r}A\color{b}D}{\color{r}AB} \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}$$
 
-![](rect.png)
+$$\frac{\color{r}A\color{b}E}{\color{r}AC} \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}$$
 
-The four lines create a shape that has four right angles, and is therefore a rectangle. [[Rectangles]]((qr,'Math/Geometry_1/RectanglesAndSquares/base/Rectangle',#00756F)) have the property that opposite sides are parallel and **equal**. Therefore, the distance lines are equal in length.
+So then:
 
-We could do this same exersise for any point along the first line, so all distance lines must be the **same length**.
+$$\frac{\color{r}A\color{b}D}{\color{r}AB} \color{black}= \frac{\color{r}A\color{b}E}{\color{r}AC}$$
 
-Thus, the distance between parallel lines is the **length of a perpendicular line between them**, and is **constant** anywhere along the lines.
+Then for the base:
 
-A more interactive version of this can be found in this lesson's [Explanation](/Lessons/Math/Geometry_1/ParallelLineDistance/explanation/base?page=1).
+$$\frac{\color{b}D\color{g}F}{\color{r}B\color{g}G} \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}\ \ \ \ \ \ \ \color{gr}(6)$$
+
+$$\frac{\color{g}F\color{b}E}{\color{g}G\color{r}C} \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}\ \ \ \ \ \ \ \color{gr}(7)$$
+
+We also know:
+
+$$\color{b}DE \color{black}= \color{b}D\color{g}F \color{black}+ \color{g}F\color{b}E\ \ \ \ \ \ \ \color{gr}(8)$$
+
+Substituting $$\color{gr}(6)$$ and $$\color{gr}(7)$$ into $$\color{gr}(8)$$:
+
+$$\color{b}DE \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}\color{black}\left(\color{r}B\color{g}G \color{black}+ \color{g}G\color{r}C\color{black}\right)$$
+
+As $$\color{r}B\color{g}G \color{black}+ \color{g}G\color{r}C \color{black}= \color{r}BC$$ then we have:
+
+$$\color{b}DE \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G}\color{r}BC$$
+
+$$\frac{\color{b}DE}{\color{r}BC} \color{black}= \frac{\color{r}A\color{g}F}{\color{r}A\color{g}G} = \frac{\color{r}A\color{b}D}{\color{r}AB} = \frac{\color{r}A\color{b}E}{\color{r}AC}$$
+
+This is described in more detail (with all equation steps) [Explanation](/Lessons/Math/Geometry_1/ParallelSplitOfTriangle/explanation/base?page=37).
+
+The case where a triangle is formed by the difference of right angle triangles is discussed in the single page version of the [Explanation](/Lessons/Math/Geometry_1/ParallelSplitOfTriangle/explanation/static).
 
 </hintLow>
- -->
+
+
+### Lines between Parallel Lines
+
+Consider the case where there are lines between two parallel lines. If a third parallel line is introduced that splits the lines, can you show that all lines are split in proportion?
+
+![](parallel.png)
+
+$$\frac{\color{r}A\color{b}E}{\color{r}AB} \color{black}= \frac{\color{r}C\color{b}F}{\color{r}CD}$$
+
+<hint>Once again, the right angle triangle relationship above can be used</hint>
+
+<hintLow>[Answer]
+
+Each line between the parallel lines can be considered the hypotenuse of a right angle triangle:
+
+![](parallelanswer.png)
+
+As the [[distance]]((qr,'Math/Geometry_1/ParallelLineDistance/base/Main',#00756F)) between parallel lines is the constant perpendicular line between them, then all triangles share the same side length.
+
+$$\color{r}A\color{g}G \color{black}= \color{r}C\color{g}H$$
+
+The third parallel line is also a constant distance, and thus splits $$\color{r}A\color{g}G$$ and $$\color{r}C\color{g}H$$ in the same proportion.
+
+As both triangles have a side split in the same proportion, then all sides must be split in the same proportion and therefore $$\color{r}AB$$ and $$\color{r}CD$$ are split in the same proportion.
+
+</hintLow>
