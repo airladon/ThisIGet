@@ -50,7 +50,8 @@ from app.tools import hash_str_with_pepper, format_email
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(32), index=True, unique=True)
+    username = db.Column(db.String(472), index=True, unique=True)
+    username_hash = db.Column(db.String(31))
     email = db.Column(db.String(472))
     email_hash = db.Column(db.String(31))
     password = db.Column(db.String(124))
@@ -77,6 +78,13 @@ class Users(UserMixin, db.Model):
 
     def get_email(self):
         return decrypt(self.email)
+
+    def set_username(self, username):
+        self.username = encrypt(username, min_length_for_padding=320)
+        self.username_hash = hash_str_with_pepper(username)
+
+    def get_username(self):
+        return decrypt(self.username)
 
     def set_password(self, password):
         self.password = encrypt(hash_str(password))

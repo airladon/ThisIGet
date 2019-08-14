@@ -4,13 +4,15 @@ sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Users, Ratings, Lessons, Topics, Versions  # noqa
 from app.models import AllRatings  # noqa
+from app.tools import hash_str_with_pepper  # noqa
 
 
 def addUser(username, email, password):
     user = Users.query.filter_by(username=username).first()
     if user is None:
         print(f'Adding {username}')
-        user = Users(username=username)
+        user = Users()
+        user.set_username(username)
         user.set_email(email)
         user.set_password(password)
         user.signed_up_on = datetime.datetime.now()
@@ -33,7 +35,7 @@ def addRating(lesson_uid, topic_name, version_uid, rating_value, username):
         topic_id=topic.id, uid=version_uid).first()
     if version is None:
         return
-    user = Users.query.filter_by(username=username).first()
+    user = Users.query.filter_by(username_hash=hash_str_with_pepper(username)).first()
     if user is None:
         return
     rating = Ratings.query.filter_by(user=user, version=version).first()

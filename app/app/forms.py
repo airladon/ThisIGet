@@ -36,7 +36,9 @@ class CreateAccountForm(FlaskForm):
     def validate_username(self, username):
         if len(username.data) > 32:
             raise ValidationError('Username max length is 32 characters')
-        user = Users.query.filter_by(username=username.data).first()
+        user = Users.query.filter_by(
+            username_hash=hash_str_with_pepper(username.data)).first()
+        # user = Users.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Username already exists.')
 

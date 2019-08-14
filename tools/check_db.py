@@ -18,7 +18,6 @@ from index_loader import index_loader
 sys.path.insert(0, './app/')
 from app import app  # noqa
 from app.models import db, Versions, Lessons, Categories, Topics, Links, LinkVersions  # noqa
-# import pdb
 
 
 def check(show, write, row, key, valueDict, valueKey):
@@ -98,8 +97,10 @@ for key, value in index.items():            # noqa
 
     if check(show, write, lesson, 'title', value, 'title'):
         lesson.title = value['title']
+
     if check(show, write, lesson, 'path', value, 'path'):
         lesson.path = value['path']
+
     if 'enabled' in value:
         if check_row(show, write, lesson, 'enabled', toBool(value['enabled'])):
             lesson.enabled = toBool(value['enabled'])
@@ -192,11 +193,24 @@ for link in links:  # noqa
     lesson = Lessons.query.filter_by(
         uid=link['lessonUID'], path=link['lessonPath']).first()
 
+    if lesson is None:
+        print(f"Cannot find lesson {link['lessonUID']} at {link['lessonPath']} to add link to")
+        # pdb.set_trace()
+        continue
+
     topic = Topics.query.filter_by(
         lesson_id=lesson.id, name=link['topic']).first()
+    if topic is None:
+        print(f"Cannot find topic {link['topic']} to add link to")
+        continue
+
     # print(lesson.id, topic, topic)
     version = Versions.query.filter_by(
         topic_id=topic.id, uid=link['versionUID']).first()
+    if version is None:
+        print(f"Cannot find version {link['versionUID']} to add link to")
+        continue
+
     db_link_version = LinkVersions.query.filter_by(
         version_id=version.id, link_id=db_link.id).first()
     if db_link_version is None:

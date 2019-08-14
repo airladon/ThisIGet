@@ -38,7 +38,8 @@ def check_confirmed(func):
         if current_user.confirmed is False:
             flash('Please confirm your account!', 'warning')
             return redirect(url_for(
-                'confirm_account_message', username=current_user.username))
+                'confirm_account_message',
+                username=current_user.get_username()))
         return func(*args, **kwargs)
 
     return decorated_function
@@ -89,7 +90,7 @@ def home():
         lesson_index_js=lesson_index_js,
     ))
     if current_user.is_authenticated:
-        res.set_cookie('username', current_user.username)
+        res.set_cookie('username', current_user.get_username())
     else:
         res.set_cookie('username', '')
     res.set_cookie('page', '0')
@@ -125,7 +126,7 @@ def bingsitemap():
 def is_logged_in():
     result = ""
     if current_user.is_authenticated:
-        result = current_user.username
+        result = current_user.get_username()
     # print('This is error output', file=sys.stderr)
     return jsonify({'username': result})
 
@@ -191,7 +192,7 @@ def get_lesson(path):
         return res
 
     if current_user.is_authenticated:
-        res.set_cookie('username', current_user.username)
+        res.set_cookie('username', current_user.get_username())
     else:
         res.set_cookie('username', '')
     return res
@@ -263,7 +264,7 @@ def get_lesson_dev(path):
         return res
 
     if current_user.is_authenticated:
-        res.set_cookie('username', current_user.username)
+        res.set_cookie('username', current_user.get_username())
     else:
         res.set_cookie('username', '')
     return res
@@ -296,7 +297,8 @@ def chapter1():
 @app.route('/loginuser', methods=['POST'])
 def loginuser():
     form = LoginForm()
-    user = Users.query.filter_by(username=form.username.data).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(form.username.data)).first()
     if user is None or not user.check_password(form.password.data):
         return redirect('/login')
     login_user(user, True)
@@ -325,7 +327,8 @@ def login(username=''):
         form.username_or_email.data = username
     if form.validate_on_submit():
         user = Users.query.filter(
-            Users.username.ilike(form.username_or_email.data)).first()
+            Users.username_hash.ilike(
+                hash_str_with_pepper(form.username_or_email.data))).first()
         # pdb.set_trace()
         if user is None:
             formatted_email = format_email(form.username_or_email.data)
@@ -339,7 +342,7 @@ def login(username=''):
             login_user(user, True)
             user.last_login = datetime.datetime.now()
             db.session.commit()
-            # session['username'] = user.username
+            # session['username'] = user.get_username()
             # return redirect(url_for('home'))
             # lesson_page = request.args.get('page')
             # if lesson_page is None:
@@ -350,9 +353,9 @@ def login(username=''):
             next_page = next_page
             return redirect(next_page)
         else:
-            # return redirect(f'confirmAccountEmailSent/{user.username}')
+            # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
             return redirect(url_for(
-                'confirm_account_message', username=user.username))
+                'confirm_account_message', username=user.get_username()))
     return render_template(
         'login.html', form=form, css=css, js=js)
 
@@ -372,16 +375,17 @@ def create():
     # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
-        user = Users(username=form.username.data)
+        user = Users()
+        user.set_username(form.username.data)
         user.set_email(form.email.data)
         user.set_password(form.password.data)
         user.signed_up_on = datetime.datetime.now()
         db.session.add(user)
         db.session.commit()
         send_confirm_account_email(user)
-        # return redirect(f'confirmAccountEmailSent/{user.username}')
+        # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
-            'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.get_username()))
     return render_template('createAccount.html', form=form, css=css, js=js)
 
 
@@ -399,15 +403,16 @@ def confirm_account_message(username):
         js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
     form = ConfirmAccountMessageForm()
-    user = Users.query.filter_by(username=username).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
     if user is None:
         flash('User does not exist', 'error')
         return redirect(url_for('create'))
     if form.validate_on_submit():
         send_confirm_account_email(user)
-        # redirect(f'confirmAccountEmailSent/{user.username}')
+        # redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
-            'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.get_username()))
     flash('''You need to confirm your email address before your
         account becomes active.''', 'before')
     flash(f''''An email has been sent to {user.get_email()}.
@@ -434,21 +439,21 @@ def confirm_account(token):
             has been sent.''', 'after')
         flash('Just now, another email has been sent.', 'after')
         send_confirm_account_email(user)
-        # return redirect(f'confirmAccountEmailSent/{user.username}')
+        # return redirect(f'confirmAccountEmailSent/{user.get_username()}')
         return redirect(url_for(
-            'confirm_account_message', username=user.username))
+            'confirm_account_message', username=user.get_username()))
     if user.confirmed:
         flash(
             'Account has already been confirmed. You can now log in.',
             'before'
         )
-        return redirect(url_for('login', username=user.username))
+        return redirect(url_for('login', username=user.get_username()))
     user.confirmed = True
     user.confirmed_on = datetime.datetime.now()
     db.session.commit()
     flash('Thankyou for confirming your email', 'before')
     flash('You can now login to your account.', 'before')
-    return redirect(url_for('login', username=user.username))
+    return redirect(url_for('login', username=user.get_username()))
 
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
@@ -501,7 +506,7 @@ def reset_password(token):
         db.session.commit()
         flash('Your password has been reset.', 'after')
         flash('You can now login with your new password.', 'after')
-        return redirect(url_for('login', username=user.username))
+        return redirect(url_for('login', username=user.get_username()))
     return render_template('resetPassword.html', form=form, css=css, js=js)
 
 
