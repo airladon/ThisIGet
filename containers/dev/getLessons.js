@@ -9,6 +9,7 @@ function entryPoints(buildMode) {
     main: ['whatwg-fetch', './src/js/main.js'],
     input: './src/js/views/input/input',
     about: './src/js/about.js',
+    privacy: './src/js/privacy.js',
     polyfill: './src/js/polyfills.js',
     // lessonIndex: './src/Lessons/lessonIndex.js',
   };

@@ -48,25 +48,6 @@ def make_response_with_files(*args, **kwargs):
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
         static = lessons['static']
-        # if 'vendors.js' in dist:
-        #     vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-        # if 'commonlessons.js' in dist:
-        #     common_lessons_js = \
-        #         f"/{'static/dist'}/{dist['commonlessons.js']}"
-        # if 'main.css' in dist:
-        #     main_css = f"/{'static/dist'}/{dist['main.css']}"
-        # if 'main.js' in dist:
-        #     main_js = f"/{'static/dist'}/{dist['main.js']}"
-        # if 'tools.js' in dist:
-        #     tools_js = f"/{'static/dist'}/{dist['tools.js']}"
-        # if 'figureone.min.js' in static:
-        #     figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
-        # if 'polyfill.js' in dist:
-        #     polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        # if 'lessonIndex.js' in dist:
-        #     lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-        # if 'about_js' in dist:
-        #     about_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
         vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
         common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
         main_css = f"/{'static/dist'}/{dist['main.css']}"
@@ -135,10 +116,24 @@ def bingsitemap():
 @app.route('/about')
 def about():
     res = make_response_with_files('about.html')
-    if current_user.is_authenticated:
-        res.set_cookie('username', current_user.get_username())
-    else:
-        res.set_cookie('username', '')
+    # if current_user.is_authenticated:
+    #     res.set_cookie('username', current_user.get_username())
+    # else:
+    #     res.set_cookie('username', '')
+    res.set_cookie('page', '0')
+    return res
+
+
+@app.route('/privacy')
+def privacy():
+    privacy_js = ''
+    privacy_css = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        privacy_js = f"/{'static/dist'}/{dist['privacy.js']}"
+        privacy_css = f"/{'static/dist'}/{dist['privacy.css']}"
+    res = make_response_with_files(
+        'policy.html', policy_js=privacy_js, policy_css=privacy_css)
     res.set_cookie('page', '0')
     return res
 
