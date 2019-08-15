@@ -75,7 +75,8 @@ def make_response_with_files(*args, **kwargs):
         figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
         lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-        about_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        about_js = f"/{'static/dist'}/{dist['about.js']}"
+        about_css = f"/{'static/dist'}/{dist['about.css']}"
 
     res = make_response(render_template(
         *args, **kwargs,
@@ -83,6 +84,7 @@ def make_response_with_files(*args, **kwargs):
         common_lessons_js=common_lessons_js, vendors_js=vendors_js,
         figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
+        about_css=about_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())

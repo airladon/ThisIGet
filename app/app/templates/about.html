@@ -1,10 +1,10 @@
 {% extends "base.html" %}
 {% block head %}
-  <link rel="stylesheet" type="text/css" href="/static/dist/about.css">
+  <link rel="stylesheet" type="text/css" href={{ about_css }}>
 {% endblock %}
 {% block content %}
     <div id="about"></div>
 {% endblock %}
 {% block tail %}
-  <script type="text/javascript" src="/static/dist/about.js"></script>
+  <script type="text/javascript" src={{ about_js }}></script>
 {% endblock %}
