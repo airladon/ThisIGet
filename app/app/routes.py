@@ -112,9 +112,42 @@ def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')
 
 
-# @app.route('/about')
-# def about():
-#     return render_template('about.html')
+@app.route('/about')
+def about():
+    polyfill_js = ''
+    common_lessons_js = ''
+    tools_js = ''
+    lesson_index_js = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        # static = lessons['static']
+        print(dist)
+        if 'polyfill.js' in dist:
+            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
+        if 'commonlessons.js' in dist:
+            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        if 'tools.js' in dist:
+            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+        if 'lessonIndex.js' in dist:
+            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        if 'vendors.js' in dist:
+            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+    print(polyfill_js)
+    res = make_response(render_template(
+        'about.html',
+        polyfill_js=polyfill_js, common_lessons_js=common_lessons_js,
+        tools_js=tools_js, lesson_index_js=lesson_index_js,
+        vendors_js=vendors_js))
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.get_username())
+    else:
+        res.set_cookie('username', '')
+    res.set_cookie('page', '0')
+    return res
+    # return render_template(
+    #     'about.html',
+    #     polyfill_js=polyfill_js, common_lessons_js=common_lessons_js,
+    #     tools_js=tools_js)
 
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
