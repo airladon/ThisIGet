@@ -2,6 +2,7 @@ import pytest  # noqa: F401
 import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users  # noqa E402
+from app.tools import hash_str_with_pepper  # noqa E402
 
 new_user = 'new_test_user_01'
 new_user2 = 'new_test_user_02'
@@ -23,7 +24,9 @@ def create_account(
 
 
 def remove_account(client, username=new_user):
-    user = Users.query.filter_by(username=username).first()
+    # user = Users.query.filter_by(username=username).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
     if user is not None:
         db.session.delete(user)
         db.session.commit()
@@ -32,12 +35,14 @@ def remove_account(client, username=new_user):
 def test_create_new_user(client):
     username = new_user
     remove_account(client, username=username)
-    user = Users.query.filter_by(username='new_test_user_01').first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('new_test_user_01')).first()
     assert user is None
 
     res = create_account(
         client, username='new_test_user_01', follow_redirects=False)
-    user = Users.query.filter_by(username=username).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
     assert user is not None
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
@@ -96,5 +101,6 @@ def test_create_account_pass(
         follow_redirects=False)
     assert res.headers['Location'] == \
         f'https://localhost/confirmAccountEmailSent/{username}'
-    user = Users.query.filter_by(username=username).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username)).first()
     assert user.confirmed is False

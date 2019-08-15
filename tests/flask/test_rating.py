@@ -4,6 +4,7 @@ import sys
 sys.path.insert(0, './app/')
 from app.models import db, Users, Ratings, LinkRatings # noqa E402
 from app.models import AllRatings, AllLinkRatings # noqa E402
+from app.tools import hash_str_with_pepper  # noqa E402
 
 lesson1 = 'Introduction/explanation/base'
 lesson2 = 'Circle/explanation/base'
@@ -36,7 +37,9 @@ def run_around_tests(client):
 
 def test_set_rating(client):
     # Initially there should be no ratings for this user
-    user = Users.query.filter_by(username='test_User_01').first()
+    # user = Users.query.filter_by(username='test_User_01').first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_User_01')).first()
     assert user.ratings.all() == []
     user_id = user.id
 
@@ -62,7 +65,9 @@ def test_set_rating(client):
 
 def test_set_link_rating(client):
     # Initially there should be no ratings for this user
-    user = Users.query.filter_by(username='test_User_01').first()
+    # user = Users.query.filter_by(username='test_User_01').first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_User_01')).first()
     assert user.ratings.all() == []
     user_id = user.id
 

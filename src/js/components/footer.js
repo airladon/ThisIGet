@@ -51,6 +51,15 @@ export default class Footer extends React.Component
             Contact
       </a>
       </div>
+
+      <div className="footer__item">
+      <a
+            href="/contribute"
+            className="footer__item__label"
+            >
+            Contribute Content
+      </a>
+      </div>
     </div>;
   }
 }

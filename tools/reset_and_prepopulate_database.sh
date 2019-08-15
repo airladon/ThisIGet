@@ -99,6 +99,7 @@ then
   REMOTE_PEPPER=`echo $RESULT | sed -n 's/.*PEPPER: \([^ ]*\).*/\1/p'`
   REMOTE_AES=`echo $RESULT | sed -n 's/.*AES_KEY: \([^ ]*\).*/\1/p'`
   FAIL=0
+  
   if [ -z $AES_KEY ];
   then
     echo

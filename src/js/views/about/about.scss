@@ -48,3 +48,13 @@ h1 {
   font-weight: 100;
   font-size: 2em;
 }
+
+h2 {
+  margin-top: 1em;
+  font-size: 1.2em;
+  font-weight: 500;
+}
+
+h2:first-of-type {
+  margin-top: 0.5em;
+}

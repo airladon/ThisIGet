@@ -44,6 +44,7 @@ def test_correct_login_after_redirect(client):
     # assert client.get('/login').status_code == 200
     res = login(client)
     assert res.status_code == 200
+    print(res.headers['Set-Cookie'])
     assert 'username=test_User_01' in res.headers['Set-Cookie']
     assert 'Path=/' in res.headers['Set-Cookie']
     assert 'id="home"' in str(res.data)

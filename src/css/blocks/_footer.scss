@@ -12,6 +12,16 @@
   text-align: center;
   color: color('white', 'light');
   margin-bottom: 1.5em;
+  font-weight: 200;
+}
+
+.footer__terms_of_use__link {
+  color: color('white', 'light');
+  font-weight: 600;
+}
+
+.footer__terms_of_use__link:hover {
+  color: color('white', 'lightest');
 }
 
 .footer__item {
@@ -29,14 +39,6 @@
 }
 
 .footer__item__label:hover {
-  color: color('white', 'lightest');
-}
-
-.footer__terms_of_use__link {
-  color: color('white', 'light');
-}
-
-.footer__terms_of_use__link:hover {
   color: color('white', 'lightest');
 }
 

@@ -32,6 +32,65 @@ from app.tools import format_email
 from functools import wraps
 
 
+def make_response_with_files(*args, **kwargs):
+    vendors_js = ''
+    main_css = ''
+    main_js = ''
+    tools_js = ''
+    common_lessons_js = ''
+    figure_one_js = ''
+    polyfill_js = ''
+    lesson_index_js = ''
+    about_js = ''
+    # The checks for keys in lessons is for pytest in deployment pipeline.
+    # In deployment pipeline on travis, the statis/dist directory doesn't
+    # exist.
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        static = lessons['static']
+        # if 'vendors.js' in dist:
+        #     vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        # if 'commonlessons.js' in dist:
+        #     common_lessons_js = \
+        #         f"/{'static/dist'}/{dist['commonlessons.js']}"
+        # if 'main.css' in dist:
+        #     main_css = f"/{'static/dist'}/{dist['main.css']}"
+        # if 'main.js' in dist:
+        #     main_js = f"/{'static/dist'}/{dist['main.js']}"
+        # if 'tools.js' in dist:
+        #     tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+        # if 'figureone.min.js' in static:
+        #     figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
+        # if 'polyfill.js' in dist:
+        #     polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
+        # if 'lessonIndex.js' in dist:
+        #     lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        # if 'about_js' in dist:
+        #     about_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        main_css = f"/{'static/dist'}/{dist['main.css']}"
+        main_js = f"/{'static/dist'}/{dist['main.js']}"
+        tools_js = f"/{'static/dist'}/{dist['tools.js']}"
+        figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
+        polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
+        lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        about_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+
+    res = make_response(render_template(
+        *args, **kwargs,
+        tools_js=tools_js, polyfill_js=polyfill_js,
+        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
+        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
+        about_js=about_js, main_css=main_css, main_js=main_js,
+    ))
+    if current_user.is_authenticated:
+        res.set_cookie('username', current_user.get_username())
+    else:
+        res.set_cookie('username', '')
+    return res
+
+
 def check_confirmed(func):
     @wraps(func)
     def decorated_function(*args, **kwargs):
@@ -51,48 +110,7 @@ def get_full_path(root, file):
 
 @app.route('/') # noqa
 def home():
-    # The checks for keys in lessons is for pytest in deployment pipeline.
-    # In deployment pipeline on travis, the statis/dist directory doesn't
-    # exist.
-    vendors_js = ''
-    main_css = ''
-    main_js = ''
-    tools_js = ''
-    common_lessons_js = ''
-    figure_one_js = ''
-    polyfill_js = ''
-    lesson_index_js = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        static = lessons['static']
-        if 'vendors.js' in dist:
-            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-        if 'commonlessons.js' in dist:
-            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
-        if 'main.css' in dist:
-            main_css = f"/{'static/dist'}/{dist['main.css']}"
-        if 'main.js' in dist:
-            main_js = f"/{'static/dist'}/{dist['main.js']}"
-        if 'tools.js' in dist:
-            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
-        if 'figureone.min.js' in static:
-            figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
-        if 'polyfill.js' in dist:
-            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        if 'lessonIndex.js' in dist:
-            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-
-    res = make_response(render_template(
-        'home.html',
-        main_css=main_css, main_js=main_js, vendors_js=vendors_js,
-        tools_js=tools_js, common_lessons_js=common_lessons_js,
-        figure_one_js=figure_one_js, polyfill_js=polyfill_js,
-        lesson_index_js=lesson_index_js,
-    ))
-    if current_user.is_authenticated:
-        res.set_cookie('username', current_user.get_username())
-    else:
-        res.set_cookie('username', '')
+    res = make_response_with_files('home.html')
     res.set_cookie('page', '0')
     return res
 
@@ -114,40 +132,13 @@ def bingsitemap():
 
 @app.route('/about')
 def about():
-    polyfill_js = ''
-    common_lessons_js = ''
-    tools_js = ''
-    lesson_index_js = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        # static = lessons['static']
-        print(dist)
-        if 'polyfill.js' in dist:
-            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        if 'commonlessons.js' in dist:
-            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
-        if 'tools.js' in dist:
-            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
-        if 'lessonIndex.js' in dist:
-            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-        if 'vendors.js' in dist:
-            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-    print(polyfill_js)
-    res = make_response(render_template(
-        'about.html',
-        polyfill_js=polyfill_js, common_lessons_js=common_lessons_js,
-        tools_js=tools_js, lesson_index_js=lesson_index_js,
-        vendors_js=vendors_js))
+    res = make_response_with_files('about.html')
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
     else:
         res.set_cookie('username', '')
     res.set_cookie('page', '0')
     return res
-    # return render_template(
-    #     'about.html',
-    #     polyfill_js=polyfill_js, common_lessons_js=common_lessons_js,
-    #     tools_js=tools_js)
 
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
@@ -189,46 +180,20 @@ def get_lesson(path):
 
     lesson_page = request.args.get('page')
 
-    vendors_js = ''
-    tools_js = ''
-    common_lessons_js = ''
-    figure_one_js = ''
-    polyfill_js = ''
-    lesson_index_js = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        static = lessons['static']
-        if 'vendors.js' in dist:
-            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-        if 'commonlessons.js' in dist:
-            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
-        if 'tools.js' in dist:
-            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
-        if 'figureone.min.js' in static:
-            figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
-        if 'polyfill.js' in dist:
-            polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        if 'lessonIndex.js' in dist:
-            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-
-    res = make_response(render_template(
-        'lesson.html',
-        css=css, js=js, tools_js=tools_js, polyfill_js=polyfill_js,
-        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
-        title=title, description=description))
+    res = make_response_with_files(
+        'lesson.html', css=css, js=js, title=title, description=description)
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=lesson_page,
             path=request.path, max_age=30 * 60)
         return res
-
-    if current_user.is_authenticated:
-        res.set_cookie('username', current_user.get_username())
-    else:
-        res.set_cookie('username', '')
     return res
+    # if current_user.is_authenticated:
+    #     res.set_cookie('username', current_user.get_username())
+    # else:
+    #     res.set_cookie('username', '')
+    # return res
 
 
 @app.route('/qr/Lessons/', defaults={'path': ''})
@@ -238,10 +203,6 @@ def get_qr_file_location(path):
     js = ''
     css = ''
     if (qr_path in lessons):
-        # js = f'/static/dist/Lessons/{path}/' \
-        #      f'{lessons[qr_path]["quickReference.js"]}'
-        # css = f'/static/dist/Lessons/{path}/' \
-        #       f'{lessons[qr_path]["quickReference.css"]}'
         js = lessons[qr_path]["quickReference.js"]
         css = lessons[qr_path]["quickReference.css"]
     return jsonify({
@@ -264,43 +225,15 @@ def get_lesson_dev(path):
               f'{lessons[lesson_path]["lesson-dev.css"]}'
     lesson_page = request.args.get('page')
 
-    vendors_js = ''
-    tools_js = ''
-    figure_one_js = ''
-    common_lessons_js = ''
-    lesson_index_js = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        static = lessons['static']
-        if 'vendors.js' in dist:
-            vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-        if 'commonlessons.js' in dist:
-            common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
-        if 'tools.js' in dist:
-            tools_js = f"/{'static/dist'}/{dist['tools.js']}"
-        if 'figureone.min.js' in static:
-            figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
-        if 'lessonIndex.js' in dist:
-            lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
-
-    res = make_response(render_template(
-        'lesson.html',
-        css=css, js=js, tools_js=tools_js,
-        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
-    ))
+    res = make_response_with_files('lesson.html', css=css, js=js)
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
             key='page', value=lesson_page,
             path=request.path, max_age=30 * 60)
         return res
-
-    if current_user.is_authenticated:
-        res.set_cookie('username', current_user.get_username())
-    else:
-        res.set_cookie('username', '')
     return res
+
 
 # @app.route('/Lessons/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
@@ -361,7 +294,7 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username_hash.ilike(
-                hash_str_with_pepper(form.username_or_email.data))).first()
+                hash_str_with_pepper(form.username_or_email.data.lower()))).first()
         # pdb.set_trace()
         if user is None:
             formatted_email = format_email(form.username_or_email.data)
@@ -491,10 +424,6 @@ def confirm_account(token):
 
 @app.route('/resetPasswordRequest', methods=['GET', 'POST'])
 def reset_password_request():
-    # css = '/static/dist/input.css'
-    # js = '/static/dist/input.js'
-    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     js = ''
     css = ''
     if 'static/dist' in lessons:
@@ -519,10 +448,6 @@ def reset_password_request():
 
 @app.route('/resetPassword/<token>', methods=['GET', 'POST'])
 def reset_password(token):
-    # css = '/static/dist/input.css'
-    # js = '/static/dist/input.js'
-    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     js = ''
     css = ''
     if 'static/dist' in lessons:

@@ -13,16 +13,41 @@ from app import app
 from app.tools import encrypt, decrypt, hash_str, check_hash
 from app.tools import hash_str_with_pepper, format_email
 
+# Database entries have three tiers of security
+#   1. Plain Text
+#       - Entries that cannot be used to identify someone
+#       - Entries that might be valudes and might need to be queried en masse
+#       - Example: Time stamps, rating values
+#
+#   2. Encrypted with Nonce and Peppered Hash
+#       - Original characters need to be accessible
+#       - Needs to be unique, and thus compared at a population level when an
+#         account is created
+#       - Pepper is used instead of a salt so a new possible entry can be
+#         hashed in the same way as all other hashes in the database column
+#         and thus compared
+#       - Example: Email, username
+#
+#   3. Hashed with unique salt and encrypted
+#       - Original characters to not need to be accessible
+#       - Encryption means attacker needs access to database and server
+#         managing database to get encryption keys
+#       - Example: Password
+#
 # Encryption is AES 256 using EAX mode which allows for stream encoding.
 # Stream encoding means encoded output length will be proportional to plain
 # text length. Therefore, for encrypting emails, pad emails to hide their
 # length.
 #
-# Encryption uses a nonce (once only number) so when checking if an email
-# exists in a database, cannot encrypt the email to check and compare it to
-# existing encrypted emails - as all have different nonce values.
+# Encryption uses a nonce (once only number) so when checking if a value
+# exists in a database, the value cannot be encrypted and compared to existing
+# encrypted values - as all have different nonces.
 #
-# Therefore, email hash (for quick lookup) and encrypted email is used.
+# Therefore, for values that need to be stored with encryption, and compared
+# over a population the value must be stored in two ways:
+#  1. Encrypted with nonce
+#  2. Hashed with pepper
+#
 #
 # Size of Encrypted Email storage in database:
 #   - Emails may have 64 + 1 + 255 characters = 320 characters
@@ -36,7 +61,20 @@ from app.tools import hash_str_with_pepper, format_email
 #     - Therefore total is 472 b64 chars
 #   - This is then stored in the database as utf-8, which will be a full 472
 #     bytes
-
+#
+# Size of Encrypted username storage in database:
+#   - Usernames may have 32 characters
+#   - Therefore, emails are padded to 32 characters
+#   - Encrypted bytes includes encryped username (32 bytes) + tag (16 bytes)
+#     + nonce (16 bytes) = 64 bytes
+#   - Encoding in Base64: 64 * 8 bits / 6 bits = 85.333 b64 characters
+#     - 64 bytes = 512 bits
+#     - 85 b64 chars = 510 bits, so need 86 b64 chars to cover 64 bytes.
+#     - But then it won't split evenly into 8 bits, so need another 2 b64 chars
+#     - Therefore total is 88 b64 chars
+#   - This is then stored in the database as utf-8, which will be a full 88
+#     bytes
+#
 # Size of password:
 #   - Password hash is 60 bytes + tag (16) + nonce (16) = 92 bytes = 736 bits
 #   - 124 b64 chars = 744 bits = 93 bytes
@@ -50,7 +88,7 @@ from app.tools import hash_str_with_pepper, format_email
 
 class Users(UserMixin, db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(472), index=True, unique=True)
+    username = db.Column(db.String(88), index=True, unique=True)
     username_hash = db.Column(db.String(31))
     email = db.Column(db.String(472))
     email_hash = db.Column(db.String(31))
@@ -80,8 +118,8 @@ class Users(UserMixin, db.Model):
         return decrypt(self.email)
 
     def set_username(self, username):
-        self.username = encrypt(username, min_length_for_padding=320)
-        self.username_hash = hash_str_with_pepper(username)
+        self.username = encrypt(username, min_length_for_padding=32)
+        self.username_hash = hash_str_with_pepper(username.lower())
 
     def get_username(self):
         return decrypt(self.username)
