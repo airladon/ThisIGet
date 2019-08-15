@@ -39,7 +39,7 @@ def test_set_rating(client):
     # Initially there should be no ratings for this user
     # user = Users.query.filter_by(username='test_User_01').first()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper('test_User_01')).first()
+        username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
     assert user.ratings.all() == []
     user_id = user.id
 
@@ -67,7 +67,7 @@ def test_set_link_rating(client):
     # Initially there should be no ratings for this user
     # user = Users.query.filter_by(username='test_User_01').first()
     user = Users.query.filter_by(
-        username_hash=hash_str_with_pepper('test_User_01')).first()
+        username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
     assert user.ratings.all() == []
     user_id = user.id
 
