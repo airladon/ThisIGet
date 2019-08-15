@@ -294,7 +294,8 @@ def login(username=''):
     if form.validate_on_submit():
         user = Users.query.filter(
             Users.username_hash.ilike(
-                hash_str_with_pepper(form.username_or_email.data.lower()))).first()
+                hash_str_with_pepper(
+                    form.username_or_email.data.lower()))).first()
         # pdb.set_trace()
         if user is None:
             formatted_email = format_email(form.username_or_email.data)
