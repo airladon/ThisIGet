@@ -1,8 +1,8 @@
 """empty message
 
-Revision ID: 429a68310eed
+Revision ID: 8ece25d48f3d
 Revises: 
-Create Date: 2019-05-21 17:46:56.383384
+Create Date: 2019-08-15 14:40:20.537057
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '429a68310eed'
+revision = '8ece25d48f3d'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -40,7 +40,8 @@ def upgrade():
     op.create_index(op.f('ix_links_url'), 'links', ['url'], unique=False)
     op.create_table('users',
     sa.Column('id', sa.Integer(), nullable=False),
-    sa.Column('username', sa.String(length=32), nullable=True),
+    sa.Column('username', sa.String(length=88), nullable=True),
+    sa.Column('username_hash', sa.String(length=31), nullable=True),
     sa.Column('email', sa.String(length=472), nullable=True),
     sa.Column('email_hash', sa.String(length=31), nullable=True),
     sa.Column('password', sa.String(length=124), nullable=True),
@@ -82,11 +83,15 @@ def upgrade():
     sa.Column('description', sa.String(length=256), nullable=True),
     sa.Column('fullLesson', sa.Boolean(), nullable=True),
     sa.Column('pageType', sa.String(length=128), nullable=True),
+    sa.Column('htmlTitle', sa.String(length=128), nullable=True),
+    sa.Column('htmlDescription', sa.String(length=256), nullable=True),
     sa.ForeignKeyConstraint(['topic_id'], ['topics.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_versions_description'), 'versions', ['description'], unique=False)
     op.create_index(op.f('ix_versions_fullLesson'), 'versions', ['fullLesson'], unique=False)
+    op.create_index(op.f('ix_versions_htmlDescription'), 'versions', ['htmlDescription'], unique=False)
+    op.create_index(op.f('ix_versions_htmlTitle'), 'versions', ['htmlTitle'], unique=False)
     op.create_index(op.f('ix_versions_pageType'), 'versions', ['pageType'], unique=False)
     op.create_index(op.f('ix_versions_title'), 'versions', ['title'], unique=False)
     op.create_index(op.f('ix_versions_uid'), 'versions', ['uid'], unique=False)
@@ -171,6 +176,8 @@ def downgrade():
     op.drop_index(op.f('ix_versions_uid'), table_name='versions')
     op.drop_index(op.f('ix_versions_title'), table_name='versions')
     op.drop_index(op.f('ix_versions_pageType'), table_name='versions')
+    op.drop_index(op.f('ix_versions_htmlTitle'), table_name='versions')
+    op.drop_index(op.f('ix_versions_htmlDescription'), table_name='versions')
     op.drop_index(op.f('ix_versions_fullLesson'), table_name='versions')
     op.drop_index(op.f('ix_versions_description'), table_name='versions')
     op.drop_table('versions')

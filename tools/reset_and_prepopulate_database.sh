@@ -129,22 +129,7 @@ then
   echo "${green}Ok${reset}"
 fi
 
-if [ $INITIALIZE_FLASK_DB == 1 ];
-then
-  echo
-  echo "${bold}${cyan}==== Removing Migrations =====${reset} "
-  rm -rf migrations
-  echo done
-
-  echo
-  echo "${bold}${cyan}==== Flask db init =====${reset} "
-  flask db init
-
-  echo
-  echo "${bold}${cyan}==== Flask db migrate =====${reset} "
-  flask db migrate
-fi
-
+# Reset or remove database
 if [ -z $DATABASE_URL ];
 then
   echo
@@ -167,14 +152,34 @@ then
   heroku pg:reset -a $APP_OR_DB_NAME
 fi
 
+# Initialize flask if requred
+if [ $INITIALIZE_FLASK_DB == 1 ];
+then
+  echo
+  echo "${bold}${cyan}==== Removing Migrations =====${reset} "
+  rm -rf migrations
+  echo done
+
+  echo
+  echo "${bold}${cyan}==== Flask db init =====${reset} "
+  flask db init
+
+  echo
+  echo "${bold}${cyan}==== Flask db migrate =====${reset} "
+  flask db migrate
+fi
+
+# Upgrade db
 echo
 echo "${bold}${cyan}==== Flask db upgrade =====${reset} "
 flask db upgrade
 
+# Fill tables
 echo
 echo "${bold}${cyan}==== Loading Lessons =====${reset} "
 ./updatedb.sh show write
 
+# Add users and ratings
 echo
 echo "${bold}${cyan}==== Prepopulating =====${reset} "
 python ./tools/prepopulate.py

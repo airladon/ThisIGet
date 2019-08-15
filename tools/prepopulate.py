@@ -35,7 +35,8 @@ def addRating(lesson_uid, topic_name, version_uid, rating_value, username):
         topic_id=topic.id, uid=version_uid).first()
     if version is None:
         return
-    user = Users.query.filter_by(username_hash=hash_str_with_pepper(username)).first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper(username.lower())).first()
     if user is None:
         return
     rating = Ratings.query.filter_by(user=user, version=version).first()
