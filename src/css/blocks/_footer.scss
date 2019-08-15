@@ -1,25 +1,47 @@
 .footer__container {
-  height: 200px;
+  // height: 200px;
   width: 100%;
   background-color: color('site', 'menus');
   display: table;
-}
-
-.footer_contact {
-  display: table-cell;
-  width: 100%;
-  height: 100%;
-  vertical-align: middle;
+  padding: 2em;
   text-align: center;
-  color: #BBB;
-  font-size: 12px;
 }
 
-.footer_email {
-  color: color('white', 'lighter');
+.footer__terms_of_use {
+  font-size: 0.8em;
+  text-align: center;
+  color: color('white', 'light');
+  margin-bottom: 1.5em;
 }
 
-.footer_email:hover {
+.footer__item {
+  font-size: 0.8em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.footer__item:hover {
   color: color('white', 'lightest');
-  text-decoration: none;
+}
+
+.footer__item__label {
+  color: color('white', 'light');
+}
+
+.footer__item__label:hover {
+  color: color('white', 'lightest');
+}
+
+.footer__terms_of_use__link {
+  color: color('white', 'light');
+}
+
+.footer__terms_of_use__link:hover {
+  color: color('white', 'lightest');
+}
+
+@media screen and (min-width: 500px) {
+  .footer__item {
+    display: inline-block;
+  }
 }
