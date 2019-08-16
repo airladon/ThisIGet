@@ -50,8 +50,8 @@ def make_response_with_files(*args, **kwargs):
         static = lessons['static']
         vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
         common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
-        main_css = f"/{'static/dist'}/{dist['main.css']}"
-        main_js = f"/{'static/dist'}/{dist['main.js']}"
+        main_css = f"/{'static/dist'}/{dist['home.css']}"
+        main_js = f"/{'static/dist'}/{dist['home.js']}"
         tools_js = f"/{'static/dist'}/{dist['tools.js']}"
         figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
@@ -128,9 +128,11 @@ def information_response(name):
     information_js = ''
     information_css = ''
     if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        information_js = f"/{'static/dist'}/{dist[f'{name}.js']}"
-        information_css = f"/{'static/dist'}/{dist[f'{name}.css']}"
+        info = lessons['static/dist']
+        information_js = \
+            f"/{'static/dist'}/{info[f'{name}.js']}"
+        information_css = \
+            f"/{'static/dist'}/{info[f'{name}.css']}"
     res = make_response_with_files(
         'information.html', information_js=information_js,
         information_css=information_css)

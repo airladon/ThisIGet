@@ -21,4 +21,4 @@ const aboutPage = () => {
   }
 };
 
-export default aboutPage;
+aboutPage();

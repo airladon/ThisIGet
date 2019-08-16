@@ -6,14 +6,14 @@ const pathTools = require(path.join(__dirname, 'pathTools.js'));
 function entryPoints(buildMode) {
   const points = {
     // main: ['whatwg-fetch', '@babel/polyfill', './src/js/main.js'],
-    main: ['whatwg-fetch', './src/js/main.js'],
+    home: ['whatwg-fetch', './src/js/views/home/home.js'],
     input: './src/js/views/input/input',
-    about: './src/js/about.js',
-    contact: './src/js/contact.js',
-    privacy: './src/js/privacy.js',
-    terms: './src/js/terms.js',
-    disclaimer: './src/js/disclaimer.js',
-    contribute: './src/js/contribute.js',
+    about: './src/js/views/about/about.js',
+    contact: './src/js/views/information/contact.js',
+    privacy: './src/js/views/information/privacy.js',
+    terms: './src/js/views/information/terms.js',
+    disclaimer: './src/js/views/information/disclaimer.js',
+    contribute: './src/js/views/information/contribute.js',
     polyfill: './src/js/polyfills.js',
     // lessonIndex: './src/Lessons/lessonIndex.js',
   };
