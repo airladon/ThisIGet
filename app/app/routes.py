@@ -151,6 +151,35 @@ def terms():
     res.set_cookie('page', '0')
     return res
 
+
+@app.route('/disclaimer')
+def disclaimer():
+    disclaimer_js = ''
+    disclaimer_css = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        disclaimer_js = f"/{'static/dist'}/{dist['disclaimer.js']}"
+        disclaimer_css = f"/{'static/dist'}/{dist['disclaimer.css']}"
+    res = make_response_with_files(
+        'policy.html', policy_js=disclaimer_js, policy_css=disclaimer_css)
+    res.set_cookie('page', '0')
+    return res
+
+
+@app.route('/contribute')
+def contribute():
+    contribute_js = ''
+    contribute_css = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        contribute_js = f"/{'static/dist'}/{dist['contribute.js']}"
+        contribute_css = f"/{'static/dist'}/{dist['contribute.css']}"
+    res = make_response_with_files(
+        'policy.html', policy_js=contribute_js, policy_css=contribute_css)
+    res.set_cookie('page', '0')
+    return res
+
+
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
 # def catch_all(path):

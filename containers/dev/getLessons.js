@@ -11,6 +11,8 @@ function entryPoints(buildMode) {
     about: './src/js/about.js',
     privacy: './src/js/privacy.js',
     terms: './src/js/terms.js',
+    disclaimer: './src/js/disclaimer.js',
+    contribute: './src/js/contribute.js',
     polyfill: './src/js/polyfills.js',
     // lessonIndex: './src/Lessons/lessonIndex.js',
   };
