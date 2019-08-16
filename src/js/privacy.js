@@ -1,4 +1,4 @@
 // @flow
-import privacyPage from './views/policy/privacy';
+import privacyPage from './views/information/privacy';
 
 privacyPage();

@@ -3,17 +3,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './privacy.scss';
-import ViewPolicy from '../../components/viewPolicy';
+import ViewInformation from '../../components/viewInformation';
 import withLoginManager from '../../components/view';
 
 const policyPage = (content: string) => {
-  const id: HTMLElement | null = document.getElementById('policy');
+  const id: HTMLElement | null = document.getElementById('information');
 
-  const PolicyView = withLoginManager(ViewPolicy);
+  const InformationView = withLoginManager(ViewInformation);
   if (id instanceof HTMLElement) {
     ReactDOM.render(
       <div>
-         <PolicyView content={content}/>
+         <InformationView content={content}/>
        </div>,
       id,
     );

@@ -1,9 +1,9 @@
 // @flow
 
-import policyPage from './policy';
+import page from './information';
 import './privacy.scss';
 import content from './privacy.md';
 
 export default () => {
-  policyPage(content);
+  page(content);
 };

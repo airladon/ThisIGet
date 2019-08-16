@@ -1,9 +1,9 @@
 // @flow
 
-import policyPage from './policy';
+import page from './information';
 import './contribute.scss';
 import content from './contribute.md';
 
 export default () => {
-  policyPage(content);
+  page(content);
 };

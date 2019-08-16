@@ -124,60 +124,43 @@ def about():
     return res
 
 
-@app.route('/privacy')
-def privacy():
-    privacy_js = ''
-    privacy_css = ''
+def information_response(name):
+    information_js = ''
+    information_css = ''
     if 'static/dist' in lessons:
         dist = lessons['static/dist']
-        privacy_js = f"/{'static/dist'}/{dist['privacy.js']}"
-        privacy_css = f"/{'static/dist'}/{dist['privacy.css']}"
+        information_js = f"/{'static/dist'}/{dist[f'{name}.js']}"
+        information_css = f"/{'static/dist'}/{dist[f'{name}.css']}"
     res = make_response_with_files(
-        'policy.html', policy_js=privacy_js, policy_css=privacy_css)
+        'information.html', information_js=information_js,
+        information_css=information_css)
     res.set_cookie('page', '0')
     return res
+
+
+@app.route('/privacy')
+def privacy():
+    return information_response('privacy')
 
 
 @app.route('/terms')
 def terms():
-    terms_js = ''
-    terms_css = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        terms_js = f"/{'static/dist'}/{dist['terms.js']}"
-        terms_css = f"/{'static/dist'}/{dist['terms.css']}"
-    res = make_response_with_files(
-        'policy.html', policy_js=terms_js, policy_css=terms_css)
-    res.set_cookie('page', '0')
-    return res
+    return information_response('terms')
 
 
 @app.route('/disclaimer')
 def disclaimer():
-    disclaimer_js = ''
-    disclaimer_css = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        disclaimer_js = f"/{'static/dist'}/{dist['disclaimer.js']}"
-        disclaimer_css = f"/{'static/dist'}/{dist['disclaimer.css']}"
-    res = make_response_with_files(
-        'policy.html', policy_js=disclaimer_js, policy_css=disclaimer_css)
-    res.set_cookie('page', '0')
-    return res
+    return information_response('disclaimer')
 
 
 @app.route('/contribute')
 def contribute():
-    contribute_js = ''
-    contribute_css = ''
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        contribute_js = f"/{'static/dist'}/{dist['contribute.js']}"
-        contribute_css = f"/{'static/dist'}/{dist['contribute.css']}"
-    res = make_response_with_files(
-        'policy.html', policy_js=contribute_js, policy_css=contribute_css)
-    res.set_cookie('page', '0')
-    return res
+    return information_response('contribute')
+
+
+@app.route('/contact')
+def contact():
+    return information_response('contact')
 
 
 # @app.route('/Lessons/', defaults={'path': ''})

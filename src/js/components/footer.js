@@ -9,56 +9,28 @@ export default class Footer extends React.Component
         By using this site, you agree to the <a href="/terms" className="footer__terms_of_use__link">Terms of Use</a> and <a href="/privacy" className="footer__terms_of_use__link">Privacy Policy</a>.
       </div>
       <div className="footer__item">
-      <a
-            href="/about"
-            className="footer__item__label"
-            >
-            About
-      </a>
+        <a href="/about" className="footer__item__label">
+          About
+        </a>
+      </div>
+      <div className="footer__item">
+        <a href="/terms" className="footer__item__label">Terms of Use</a>
       </div>
 
       <div className="footer__item">
-      <a
-            href="/terms"
-            className="footer__item__label"
-            >
-            Terms of Use
-      </a>
+        <a href="/privacy" className="footer__item__label">Privacy Policy</a>
       </div>
 
       <div className="footer__item">
-      <a
-            href="/privacy"
-            className="footer__item__label"
-            >
-            Privacy Policy
-      </a>
-      </div>
-
-      <div className="footer__item">
-      <a
-            href="/disclaimer"
-            className="footer__item__label"
-            >
-            Disclaimer
-      </a>
+        <a href="/disclaimer" className="footer__item__label">Disclaimer</a>
       </div>
       <div className="footer__item">
-      <a
-            href="mailto:feedback@thisiget.com?Subject=Feedback"
-            className="footer__item__label"
-            >
-            Contact
-      </a>
+        <a href="/contact" className="footer__item__label">Contact</a>
       </div>
-
       <div className="footer__item">
-      <a
-            href="/contribute"
-            className="footer__item__label"
-            >
-            Contribute Content
-      </a>
+        <a href="/contribute" className="footer__item__label">
+          Contribute Content
+        </a>
       </div>
     </div>;
   }

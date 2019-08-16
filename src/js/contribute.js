@@ -1,4 +1,4 @@
 // @flow
-import page from './views/policy/contribute';
+import page from './views/information/contribute';
 
 page();

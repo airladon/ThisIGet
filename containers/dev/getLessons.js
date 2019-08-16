@@ -9,6 +9,7 @@ function entryPoints(buildMode) {
     main: ['whatwg-fetch', './src/js/main.js'],
     input: './src/js/views/input/input',
     about: './src/js/about.js',
+    contact: './src/js/contact.js',
     privacy: './src/js/privacy.js',
     terms: './src/js/terms.js',
     disclaimer: './src/js/disclaimer.js',

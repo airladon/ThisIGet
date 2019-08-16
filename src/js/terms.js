@@ -1,4 +1,4 @@
 // @flow
-import termsPage from './views/policy/terms';
+import termsPage from './views/information/terms';
 
 termsPage();

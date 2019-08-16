@@ -20,7 +20,7 @@ export default class ViewPolicy extends React.Component<Props> {
     return <div>
       <main>
       <div className='lesson__white_spacer'/>
-      <div className='policy_text_container'>
+      <div className='information_text_container'>
         <div className="markdown" dangerouslySetInnerHTML={ { __html: this.props.content } }/>
       </div>
       <div className='lesson__white_spacer'/>

@@ -1,4 +1,4 @@
 // @flow
-import page from './views/policy/disclaimer';
+import page from './views/information/disclaimer';
 
 page();

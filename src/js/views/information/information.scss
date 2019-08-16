@@ -1,6 +1,6 @@
 @import '../../../css/style';
 
-.policy_text_container {
+.information_text_container {
   // padding: 1em;
   // margin-left: 1em;
   // margin-right: 1em;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 700px) {
-  .policy_text_container {
+  .information_text_container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: 1em;
@@ -26,7 +26,7 @@
 }
 
 @media screen and (min-width: 1100px) {
-  .policy_text_container {
+  .information_text_container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: auto;

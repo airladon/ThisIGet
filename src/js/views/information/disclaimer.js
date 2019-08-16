@@ -1,9 +1,9 @@
 // @flow
 
-import policyPage from './policy';
+import page from './information';
 import './disclaimer.scss';
 import content from './disclaimer.md';
 
 export default () => {
-  policyPage(content);
+  page(content);
 };
