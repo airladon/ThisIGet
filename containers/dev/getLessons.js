@@ -10,6 +10,7 @@ function entryPoints(buildMode) {
     input: './src/js/views/input/input',
     about: './src/js/about.js',
     privacy: './src/js/privacy.js',
+    terms: './src/js/terms.js',
     polyfill: './src/js/polyfills.js',
     // lessonIndex: './src/Lessons/lessonIndex.js',
   };

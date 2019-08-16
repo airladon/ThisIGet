@@ -137,6 +137,20 @@ def privacy():
     res.set_cookie('page', '0')
     return res
 
+
+@app.route('/terms')
+def terms():
+    terms_js = ''
+    terms_css = ''
+    if 'static/dist' in lessons:
+        dist = lessons['static/dist']
+        terms_js = f"/{'static/dist'}/{dist['terms.js']}"
+        terms_css = f"/{'static/dist'}/{dist['terms.css']}"
+    res = make_response_with_files(
+        'policy.html', policy_js=terms_js, policy_css=terms_css)
+    res.set_cookie('page', '0')
+    return res
+
 # @app.route('/Lessons/', defaults={'path': ''})
 # @app.route('/Lessons/<path:path>')
 # def catch_all(path):
