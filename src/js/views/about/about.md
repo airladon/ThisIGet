@@ -1,6 +1,6 @@
 # Goal
 
-Make learning as inclusive as possible.
+Be as inclusive as possible.
 
 # Learning
 There are many ways to learn.
