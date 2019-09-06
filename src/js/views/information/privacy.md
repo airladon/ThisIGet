@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This privacy policy discloses the privacy practices for www.thisiget.com. This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
+This privacy policy discloses the privacy practices for www.thisiget.com (this website). This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
  
 The topics in this policy are:
 * [Summary](#summary)
@@ -16,37 +16,29 @@ The topics in this policy are:
 
 ## Summary <a name="summary"></a>
 
-There are two types of users for this website
+You can access all content on this website anonymously, sharing only the default information provided by your browser. This information includes browser type and version, IP address and sometimes the type of device the browser is on. It is used by the website to understand and optimize website use and performance, but not to identify you.
 
-* Registered users - users who have created an account with www.thisiget.com and are logged in
-* Anonymous users - users without an account, or, who have an account but are not logged in
 
-All users (registered and anonymous) can access all learning content on this website. When using the website, data provided by the browser such as browser type and version, IP address and sometimes the type of device the browser is on is collected by the website to understand and optimize website use and performance.
+If you want to rate content, then an account needs to be created, and you need to be logged into the account. To create an account, you need to provide a valid username, email address and password. This information is used to manage your account, and ensures only you can access your content ratings. You can provide any valid username, email address and password, and thus remain anonymous.
 
-If a user wants to rate content, then an account needs to be created, and the user needs to be logged into the account (registered user). A registered user needs to provide a unique username, a password and a valid email address. When logged into an account, data such as login time, content ratings and rating times are collected. This data is collected for
+When you have an account, and are logged in, additional information including when you created the account, when you last logged in, and content rating information is stored. This information is used for account management, helping the website understand how many active users there are for performance optimization, allowing you to see your ratings of content in the future, and provding statistcal summaries of content to all users.
 
-* Future reference to the user - they can see what they have liked and what they haven’t
-* Anonymous aggregation for rating summaries shown to all users
-* As analytics to understand how many active users there are for website optimization and performance
-
-Usernames, email addresses and passwords are never stored directly. Instead, they are stored with a combination of encryption and hashing (a one-way process that converts characters like a password into a unique set of different characters from which the password cannot be extracted). For more information on how data is stored securely, see [security]().
+You information is never sold to third parties, and would only be shared to comply with the law.
 
 ## What data is collected? <a name="whatdataiscollected"></a>
 
-This section details the data that is collected by the website.
-
 ### Log Data
 
-Like many website operators, we collect information that your browser sends whenever you visit the website. This Log Data may includes information such as
+Like many website operators, information that your browser sends whenever you visit the website is automatically collected. This Log Data may include information such as
 
 * your computer's Internet Protocol ("IP") address
 * browser type
 * browser version
 * the pages of the website that you visit
 * the time and date of your visit
-* the time spent on those pages and other statistics.
+* the time spent on those pages and other statistics
 
-This data is used for fixing problems with the website, or determining which pages are visited more frequently for website optimization.
+This data is used for site maintenance and optimization such as fixing problems with the website, or determining which pages are visited more frequently.
 
 If you create an account, this data is not linked to your account and remains anonymous.
 
@@ -66,30 +58,16 @@ If you have an account, and you are logged in, then account usage data is collec
   * The rating value and time for any rating you submit
 
 
-## How is data collected? <a name="howisdatacollected"></a>
-
-### Log Data
-
-This data is automatically provided by your browser when you visit the website.
-
-### Account Data
-
-This data is directly provided by you if you choose to create an account
-
-### Account Usage Data
-
-Account creation and login times are automatically collected whenever you choose to create and login to your account.
-
-Content ratings are directly provided by you when you choose to rate content, and the time of the rating is automatically collected.
-
-
 ## How is data used? <a name="howisdataused"></a>
 
-No data collected by the website is shared with third parties unless legally required to do so.
+No personal data collected by the website is sold to or shared with third parties unless legally required to do so.
+
+The aggregate number of users or users with accounts may be shared publically for the purpose of marketing this website.
+
 
 ### Log Data
 
-Log Data is used for website management and optimization. For example fixing problems with the website, ensuring content is compatible with browsers, and understanding traffic patterns to optimize content delivery
+Log Data is used for website management and optimization. For example fixing problems with the website, ensuring content is compatible with browsers, and understanding traffic patterns to optimize content delivery.
 
 ### Account Data
 
@@ -99,13 +77,19 @@ This data is used for account management, such as resetting your password and is
 
 Sign-up and login times are used for understanding number of active users on the website, to help optimize performance and content.
 
-Rating data is stored so you can retrieve it later to review which content you preferred, and also collated with all other user's ratings to make rating summaries for the website content.
+Rating data is stored so you can retrieve it later to review which content you preferred, and also collated with all other user's ratings to make statistical rating summaries for the website content.
 
 Ratings summaries can be seen by all users, but are anonymous and no users can see what you have rated.
 
 ## How is data stored? <a name="howisdatastored"></a>
 
-Data is stored in servers in the United States of America. Server access is restricted, with only the website administrator having access.
+Data is stored in servers in the United States of America.
+
+All data that is transmitted between your browser and this website's servers is encrypted (SSL), and all data you provide that is potentially identifiable is obfuscated and/or encrypted.
+
+While this website strives for industry standard security practices, no security system is perfect. Therefore it is recommended when you do provide information such as your username, password and email address when creating an account, you choose a username that is not linked to your identity, a password that is randomly generated and managed by a password management system, and an email address that is not linked to your identity and is secured with a robust password and two-factor authentication.
+
+This website will never send you an email asking for your password, or any personal information, and if you see any such thing then you should contact us at privacy@thisiget.com.
 
 ### Log Data
 
@@ -113,7 +97,7 @@ Log data is stored as plain text logs on the website server.
 
 ### Account Data
 
-Passwords you enter are never stored. Instead, they are converted to a unique set of characters (called a "hash") that can be used to verify in the future the correct password is entered, but cannot be used to determine the original password. The hash is additionally secured through encryption and other security processes detailed in the [data security policy]().
+Passwords you enter are never stored directly. Instead, they are converted to a unique set of characters (called a "hash") that can be used in the future to verify the correct password is entered, but cannot be used to determine the original password. The hash is additionally secured through encryption and other security processes detailed in the [data security policy]().
 
 Usernames and Email Addresses are stored in two forms:
 
@@ -127,7 +111,7 @@ Rating, login and signup data is stored in plain text in a database on the datab
 
 ## Marketing <a name="marketing"></a>
 
-We will not send you marketing emails.
+This site will not send you marketing emails.
 
 ## What are your data protection rights? <a name="whatareyourdataprotectionrights"></a>
 
