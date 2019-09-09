@@ -73,11 +73,18 @@ h3 {
 .information_text_container blockquote {
   padding: 1em;
   // border: 1px solid color('white', 'light');
-  margin-left: 2em;
-  margin-right: 2em;
+  // margin-left: 2em;
+  // margin-right: 2em;
   background-color: color('white', 'lightest');
   font-style: normal;
   font-size: 1em;
+}
+
+@media screen and (min-width: 700px) {
+  .information_text_container blockquote {
+    margin-left: 2em;
+    margin-right: 2em;
+  }
 }
 
 .information_text_container blockquote h3 {
@@ -88,4 +95,8 @@ h3 {
 
 .information_text_container blockquote h3:first-of-type {
   margin-top: 0;
+}
+
+.information_text_container blockquote li {
+  margin-bottom: 0.7em;
 }

@@ -58,7 +58,7 @@ In the short term, having multiple forms, versions and external links describing
 In the longer term as more content is rated, users may be able to get a more personalized and efficient experience by having content that is more likely to resonate with them presented first.
 
 
-## Site Terminology
+## Details and Terminology
 
 Some terms used to describe and highlight various parts of this website are below.
 

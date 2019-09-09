@@ -1,6 +1,6 @@
 # Copyright
 
-The intent at www.thisiget.com is to make all academic content free to use, while protecting the remainder of the website with copyright to ensure users can be confident they are visiting www.thisiget.com and not a website not a third party website.
+The intent of www.thisiget.com is to make all academic content free to use, while protecting the remainder of the website with copyright to ensure users can be confident they are visiting www.thisiget.com and not a third party website.
 
 ## Academic Content
 
@@ -22,9 +22,14 @@ A human-readable summary of (and not a substitute for) the license is:
 >
 >* **Attribution** — You must give appropriate credit, provide a link to the license, and indicate if changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use.
 >* **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the same license as the original.
+>* **No additional restrictions** — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
 >
->No additional restrictions — You may not apply legal terms or technological measures that legally restrict others from doing anything the license permits.
-
+>### Notices:
+>
+>You do not have to comply with the license for elements of the material in the public domain or where your use is permitted by an applicable exception or limitation.
+>
+>No warranties are given. The license may not give you all of the permissions necessary for your intended use. For example, other rights such as publicity, privacy, or moral rights may limit how you use the material.
+>
 
 ## Other Site Content
 
