@@ -66,6 +66,26 @@ h3 {
 //   margin-top: 0.5em;
 // }
 
-blockquote {
-  font-style: italic;
+// blockquote {
+//   font-style: italic;
+// }
+
+.information_text_container blockquote {
+  padding: 1em;
+  // border: 1px solid color('white', 'light');
+  margin-left: 2em;
+  margin-right: 2em;
+  background-color: color('white', 'lightest');
+  font-style: normal;
+  font-size: 1em;
+}
+
+.information_text_container blockquote h3 {
+  margin-top: 1em;
+  font-weight: 100;
+  font-size: 1.4em;
+}
+
+.information_text_container blockquote h3:first-of-type {
+  margin-top: 0;
 }

@@ -114,17 +114,6 @@ def bingsitemap():
     return app.send_static_file('BingSiteAuth.xml')
 
 
-@app.route('/about')
-def about():
-    res = make_response_with_files('about.html')
-    # if current_user.is_authenticated:
-    #     res.set_cookie('username', current_user.get_username())
-    # else:
-    #     res.set_cookie('username', '')
-    res.set_cookie('page', '0')
-    return res
-
-
 def information_response(name):
     information_js = ''
     information_css = ''
@@ -139,6 +128,16 @@ def information_response(name):
         information_css=information_css)
     res.set_cookie('page', '0')
     return res
+
+
+@app.route('/about')
+def about():
+    return information_response('about')
+
+
+@app.route('/copyright')
+def copyright():
+    return information_response('copyright')
 
 
 @app.route('/privacy')

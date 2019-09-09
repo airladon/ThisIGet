@@ -2,7 +2,7 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './privacy.scss';
+// import './privacy.scss';
 import ViewInformation from '../../components/viewInformation';
 import withLoginManager from '../../components/view';
 
