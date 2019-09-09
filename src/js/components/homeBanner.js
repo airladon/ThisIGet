@@ -1,7 +1,10 @@
+// @flow
 import * as React from 'react';
 
+type Props = {};
+
 export default class HomeBanner extends React.Component
-                                    <> {
+                                    <Props> {
   // eslint-disable-next-line class-methods-use-this
   render() {
     return <div className="home__banner">

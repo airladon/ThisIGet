@@ -1,8 +1,10 @@
-# Goal
+# About This I Get
+
+## Goal
 
 Be as inclusive as possible.
 
-# Learning
+## Learning
 There are many ways to learn.
 
 People’s individual experiences, knowledge, language, context and personality mean some ways work better for some people and other ways work better for others.
@@ -37,7 +39,7 @@ So there are many ways to learn, and no one place or person can do everything fo
 In the end, learning is successful if you get what you need out of it.
 
 
-# Our Contribution
+## Contribution - This I Get
 
 There has never before been more resources and opportunities available for someone who wants to learn.
 
@@ -55,19 +57,26 @@ In the short term, having multiple forms, versions and external links describing
 
 In the longer term as more content is rated, users may be able to get a more personalized and efficient experience by having content that is more likely to resonate with them presented first.
 
-# Terminology
 
-## Topic
+## Site Terminology
+
+Some terms used to describe and highlight various parts of this website are below.
+
+### Topic
 A “Topic” is the site’s fundamental unit, and is a relatively contained piece of content. A topic’s required knowledge and desired learnings should be clearly defined.
 
 An example of a topic might be “Isosceles Triangle”. This topic would require knowledge of triangles, and then present the definition and properties of an isosceles triangle.
 
-## Learning Path:
+### Learning Path:
 A learning path is a set of topics that follow each other based on dependence.
 
 At the start of the path (the first topic) a set of knowledge is assumed. But after that point, each topic covers all knowledge that future topics in the path will require.
 
-## Form:
+A picture of a learning path is below. The path consists of many tiles, each of which is a **Topic**. Topics are ordered by dependency from left to right.
+
+![](./learning-path.jpg)
+
+### Form:
 The content of each topic can be presented in one of several forms. The most common forms are:
 
 * Discover - a problem statement is given with progressively more hints to allow the user to discover the content
@@ -79,7 +88,7 @@ The content of each topic can be presented in one of several forms. The most com
 * TA - Interactive diagrams that might be useful in a teaching environment
 * Links - A selection of external links that also address the same content in different ways or from different perspectives
 
-## Versions:
+### Versions:
 Each form might have several versions - describing the topic’s content in the same form, but in a different way. Some ways that might differentiate versions are:
 
 * precise versus intuitive
@@ -88,7 +97,7 @@ Each form might have several versions - describing the topic’s content in the 
 * one way of presenting the content versus another (descriptive vs concise)
 * different proofs of the same concept
 
-## Rating:
+### Rating:
 Each version of content or link can be rated by a user between 1 and 5. The user can use their own judgement when rating content, but one way might be:
 * 5 - The content really clicks with the user from start to finish
 * 4 - The content is well done, but there a few areas that weren’t clear

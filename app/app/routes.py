@@ -95,6 +95,7 @@ def get_full_path(root, file):
 def home():
     res = make_response_with_files('home.html')
     res.set_cookie('page', '0')
+    print(f"{request.remote_addr} {request.headers.get('User-Agent')}")
     return res
 
 

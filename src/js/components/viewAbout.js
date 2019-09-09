@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import LoginTitle from './loginTitle';
+// import LoginTitle from './loginTitle';
 // import LessonNavigator from './lessonNavigator';
 // import HomeBanner from './homeBanner';
 
@@ -21,8 +21,8 @@ export default class ViewAbout extends React.Component<Props> {
       <main>
       <div className='lesson__white_spacer'/>
       <div className='policy_text_container'>
-        <LoginTitle title=''/>
-        <div className='lesson__white_spacer'/>
+        { /* <LoginTitle title=''/> */ }
+        { /* <div className='lesson__white_spacer'/> */ }
         <div className="markdown" dangerouslySetInnerHTML={ { __html: this.props.content } }/>
       </div>
       <div className='lesson__white_spacer'/>
