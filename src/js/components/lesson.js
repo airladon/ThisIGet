@@ -333,7 +333,7 @@ export default class LessonComponent extends React.Component
           listItems.splice(fullLessonCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
-                {'Portion of Lesson'}
+                {'Portion of Topic'}
               </div>
             </div>,
             separator: true,
@@ -341,7 +341,7 @@ export default class LessonComponent extends React.Component
           listItems.splice(0, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
-                {'Full Lesson'}
+                {'Full Topic'}
               </div>
             </div>,
             separator: true,

@@ -100,3 +100,13 @@ h3 {
 .information_text_container blockquote li {
   margin-bottom: 0.7em;
 }
+
+.information_text_container img {
+  max-width: 100%;
+  margin-left: 50%;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  transform: translate(-50%);
+  // box-shadow: 0 10px 10px rgba(0, 0, 0, 0.3);
+}
+
