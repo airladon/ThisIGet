@@ -2,10 +2,19 @@
 import * as React from 'react';
 import FooterInformation from './footerInformation';
 
-type Props = {};
+type Props = {
+  includeHome?: boolean;
+};
 
 export default class Footer extends React.Component
                                     <Props> {
+  includeHome() {
+    if (this.props.includeHome != null && this.props.includeHome === false) {
+      return '';
+    }
+    return <FooterInformation label="Home" endPoint=""/>;
+  }
+
   /* eslint-disable max-len */
   // eslint-disable-next-line class-methods-use-this
   render() {
@@ -15,6 +24,7 @@ export default class Footer extends React.Component
       <FooterInformation label="Privacy" endPoint="privacy"/>
       <FooterInformation label="Copyright" endPoint="copyright"/>
       <FooterInformation label="Contact" endPoint="contact"/>
+      {this.includeHome()}
     </div>;
   }
 }
