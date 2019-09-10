@@ -13,6 +13,7 @@ function entryPoints(buildMode) {
     privacy: './src/js/views/information/privacy.js',
     terms: './src/js/views/information/terms.js',
     copyright: './src/js/views/information/copyright.js',
+    introduction: './src/js/views/information/introduction.js',
     disclaimer: './src/js/views/information/disclaimer.js',
     contribute: './src/js/views/information/contribute.js',
     polyfill: './src/js/polyfills.js',

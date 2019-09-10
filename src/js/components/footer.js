@@ -11,6 +11,7 @@ export default class Footer extends React.Component
   render() {
     return <div className="footer__container">
       <FooterInformation label="About" endPoint="about"/>
+      <FooterInformation label="Introduction" endPoint="introduction"/>
       <FooterInformation label="Privacy" endPoint="privacy"/>
       <FooterInformation label="Copyright" endPoint="copyright"/>
       <FooterInformation label="Contact" endPoint="contact"/>

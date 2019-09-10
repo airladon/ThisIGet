@@ -160,6 +160,11 @@ def contribute():
     return information_response('contribute')
 
 
+@app.route('/introduction')
+def introduction():
+    return information_response('introduction')
+
+
 @app.route('/contact')
 def contact():
     return information_response('contact')
