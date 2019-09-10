@@ -49,36 +49,16 @@ As a teacher, how do you decide how to teach? What assumptions do you make about
 
 So instead of selecting a particular approach, this site tries to embrace many of the diverse possibilities. It does this through:
 
-* Having multiple forms and versions of the same content
-* Allowing users to rate which forms and versions of content work best for them
+* Having multiple approaches and versions of the same content
+* Allowing users to rate which approaches and versions of content work best for them
 * Embracing external content and allowing users to rate it
 
-In the short term, having multiple forms, versions and external links describing the same content in different ways will hopefully be a useful resource. Rating the content might be valuable to a learner so if they review it again, they know what they connected with best.
+In the short term, having multiple approaches, versions and external links describing the same content in different ways will hopefully be a useful resource. Rating the content might be valuable to a learner so if they review it again, they know what they connected with best.
 
 In the longer term as more content is rated, users may be able to get a more personalized and efficient experience by having content that is more likely to resonate with them presented first.
 
 
 ## More Information
-
-<!-- <div class="information__more">
-<div class="information__more__label"><a href="/introduction">Introduction</a></div>
-<div class="information__more__description">introduction to the the site including the various types of content, and how to navigate and interact
-</div></div>
-
-<div class="information__more">
-<div class="information__more__label"><a href="/privacy">Privacy</a></div>
-<div class="information__more__description">the privacy policy of <a href="https://www.thisiget.com">www.thisiget.com</a>
-</div></div>
-
-<div class="information__more">
-<div class="information__more__label"><a href="/copyright">Copyright</a></div>
-<div class="information__more__description">licensing and copyright information for the site and content
-</div></div>
-
-<div class="information__more">
-<div class="information__more__label"><a href="/contact">Contact</a></div>
-<div class="information__more__description"><a href="https://www.thisiget.com">www.thisiget.com</a>
-</div></div> -->
 
 [Introduction](/introduction) - Introduction to the the site and how to use it.
 
