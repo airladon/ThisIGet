@@ -79,7 +79,7 @@ for file_name in current.keys():
        or file_name.startswith('/dist/content') \
        or file_name.startswith('/index.js') \
        or file_name.startswith('/index.js.map') \
-       or file_name.startswith('/dist/commonlessons'):
+       or file_name.startswith('/dist/commoncontent'):
         continue
     if file_name not in existing or existing[file_name] != md5:
         if not file_name.startswith('/dist/content'):

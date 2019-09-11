@@ -310,13 +310,13 @@ module.exports = (env) => {
             test: /js\/(diagram|Lesson|tools|components)/,
             name: 'tools',
           },
-          commonlessons: {
+          commoncontent: {
             minSize: 10,
             minChunks: 2,
             priority: 0,
             reuseExistingChunk: true,
             test: /content\/common/,
-            name: 'commonlessons',
+            name: 'commoncontent',
           },
           lessonindex: {
             minSize: 10,

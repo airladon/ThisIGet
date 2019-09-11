@@ -37,7 +37,7 @@ def make_response_with_files(*args, **kwargs):
     main_css = ''
     main_js = ''
     tools_js = ''
-    common_lessons_js = ''
+    common_content_js = ''
     figure_one_js = ''
     polyfill_js = ''
     lesson_index_js = ''
@@ -53,7 +53,7 @@ def make_response_with_files(*args, **kwargs):
             if key.endswith('js'):
                 print(key)
 
-        common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
+        common_content_js = f"/{'static/dist'}/{dist['commoncontent.js']}"
         main_css = f"/{'static/dist'}/{dist['home.css']}"
         main_js = f"/{'static/dist'}/{dist['home.js']}"
         tools_js = f"/{'static/dist'}/{dist['tools.js']}"
@@ -66,7 +66,7 @@ def make_response_with_files(*args, **kwargs):
     res = make_response(render_template(
         *args, **kwargs,
         tools_js=tools_js, polyfill_js=polyfill_js,
-        common_lessons_js=common_lessons_js, vendors_js=vendors_js,
+        common_content_js=common_content_js, vendors_js=vendors_js,
         figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
         about_css=about_css,
