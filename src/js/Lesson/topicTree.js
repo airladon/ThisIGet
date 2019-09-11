@@ -1,5 +1,4 @@
 // @flow
-// import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
 import type { TypeTopicDescription } from './topicDescription';
 // first array of arrays: all uids with no dependencies
