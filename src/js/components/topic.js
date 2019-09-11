@@ -372,7 +372,7 @@ export default class TopicComponent extends React.Component
     }
     if (this.version.type === 'links') {
       return <LinksFormatComponent
-        lesson={this.version}
+        version={this.version}
         isLoggedIn={this.props.isLoggedIn}
       />;
     }

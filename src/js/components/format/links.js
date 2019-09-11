@@ -5,30 +5,30 @@ import SimpleFormat from '../../Lesson/SimpleFormat';
 import LinksTable from './linksTable';
 
 type Props = {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
   isLoggedIn: boolean;
 };
 
 export default class LinksFormatComponent extends React.Component
                                     <Props> {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
   key: number;
 
   constructor(props: Props) {
     super(props);
-    this.lesson = props.lesson;
+    this.version = props.version;
     this.key = 0;
   }
 
   componentDidMount() {
     // Instantiate diagram now that the canvas elements have been
     // created.
-    this.lesson.initialize();
+    this.version.initialize();
   }
 
   renderSections() {
     const sections = [];
-    this.lesson.content.sections.forEach((section, index) => {
+    this.version.content.sections.forEach((section, index) => {
       if (section.links != null) {
         sections.push(
           <div key={index}>
@@ -47,7 +47,7 @@ export default class LinksFormatComponent extends React.Component
   }
 
   render() {
-    return <div id={this.lesson.content.htmlId} className="simple_lesson__container">
+    return <div id={this.version.content.htmlId} className="simple_lesson__container">
       {this.renderSections()}
     </div>;
   }

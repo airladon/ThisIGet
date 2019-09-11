@@ -44,9 +44,9 @@ type State = {
 
 export default class LinksTable extends React.Component
                                     <Props, State> {
-  lessonUID: string;
+  topicUID: string;
+  approachUID: string;
   versionUID: string;
-  topic: string;
   callbackCount: number;
   numLinks: number;
   links: Array<TypeLink>;
@@ -75,11 +75,11 @@ export default class LinksTable extends React.Component
       }
     });
     /* eslint-disable prefer-destructuring */
-    this.lessonUID = path.slice(-3, -2)[0];
+    this.topicUID = path.slice(-3, -2)[0];
+    this.approachUID = path.slice(-2, -1)[0];
     this.versionUID = path.slice(-1)[0];
-    this.topic = path.slice(-2, -1)[0];
     // /* eslint-enable */
-    // this.topicDescription = getTopicDescription(this.lessonUID);
+    // this.topicDescription = getTopicDescription(this.topicUID);
     this.state = {
       ratings: this.fillRatings(),
     };
@@ -121,7 +121,7 @@ export default class LinksTable extends React.Component
     this.callbackCount = 0;
     this.numLinks = 0;
     this.links.forEach((link) => {
-      const endpoint = `/linkrating/${this.lessonUID}/${this.topic}/${this.versionUID}/${link.hash}`;
+      const endpoint = `/linkrating/${this.topicUID}/${this.approachUID}/${this.versionUID}/${link.hash}`;
       fetchPolyfill(endpoint, { credentials: 'same-origin' })
         .then((response) => {
           if (!response.ok) {
@@ -169,7 +169,7 @@ export default class LinksTable extends React.Component
     }
     // const page = parseInt(getCookie('page'), 10) - 1 || 0;
     this.links[index].userRating = rating;
-    const endpoint = `/ratelink/${this.lessonUID}/${this.topic}/${this.versionUID}/${this.links[index].hash}/${rating}`;
+    const endpoint = `/ratelink/${this.topicUID}/${this.approachUID}/${this.versionUID}/${this.links[index].hash}/${rating}`;
 
     let updateState = false;
     if (this.links[index].userRatingIsHigh && rating < 4) {
@@ -219,7 +219,7 @@ export default class LinksTable extends React.Component
         userRatingValue = 0;
       }
       const rating = <Rating
-        topic={this.topic}
+        topic={this.approachUID}
         rating={userRatingValue}
         ratingCallback={(r, i) => { this.setUserRating(r, i); }}
         isLoggedIn={this.props.isLoggedIn}
