@@ -28,7 +28,7 @@ function renderLesson(
   //   references?: Array<string>,
   // },
 ) {
-  const lessonId: HTMLElement | null = document.getElementById('single-page-lesson');
+  const lessonId: HTMLElement | null = document.getElementById('single-page-content');
   const LessonView = withLoginManager(ViewLesson);
 
   if (lessonId instanceof HTMLElement) {

@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
 
-function createLessonIndex(buildMode, lessonsPath) {
+function createContentIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllContent(lessonsPath);
   // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
   let outStr = `export default function contentIndex() {
@@ -162,4 +162,4 @@ function createLessonIndex(buildMode, lessonsPath) {
   }
 }
 
-module.exports = createLessonIndex;
+module.exports = createContentIndex;

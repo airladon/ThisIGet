@@ -1,5 +1,5 @@
 // console.log(__dirname)
 // console.log(__dirname.replace(/thisiget\/.*/, 'thisiget'));
-const createLessonIndex = require('../containers/dev/createIndex.js');
+const createContentIndex = require('../containers/dev/createIndex.js');
 
-createLessonIndex('stage', './src/content');
+createContentIndex('stage', './src/content');
