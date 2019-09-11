@@ -7102,9 +7102,10 @@ function (_DiagramElementCollec) {
       var form = this.getCurrentForm();
 
       if (form != null) {
-        form.showHide(0, 0, null, animationStop);
-        this.show();
         form.setPositions();
+        form.showHide(0, 0, null, animationStop);
+        this.show(); // form.setPositions();
+
         form.applyElementMods(); // this.updateDescription();
       }
     }
@@ -12097,9 +12098,10 @@ function (_EquationLabel) {
     var showRealAngle = arguments.length > 5 && arguments[5] !== undefined ? arguments[5] : false;
     var units = arguments.length > 6 && arguments[6] !== undefined ? arguments[6] : 'degrees';
     var precision = arguments.length > 7 && arguments[7] !== undefined ? arguments[7] : 0;
-    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : -1;
-    var orientation = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : 'horizontal';
-    var scale = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 0.7;
+    var autoHide = arguments.length > 8 && arguments[8] !== undefined ? arguments[8] : null;
+    var autoHideMax = arguments.length > 9 && arguments[9] !== undefined ? arguments[9] : null;
+    var orientation = arguments.length > 10 && arguments[10] !== undefined ? arguments[10] : 'horizontal';
+    var scale = arguments.length > 11 && arguments[11] !== undefined ? arguments[11] : 0.7;
 
     _classCallCheck(this, AngleLabel);
 
@@ -12115,6 +12117,7 @@ function (_EquationLabel) {
     _this.orientation = orientation;
     _this.precision = precision;
     _this.autoHide = autoHide;
+    _this.autoHideMax = autoHideMax;
     return _this;
   }
 
@@ -12401,7 +12404,8 @@ function (_DiagramElementCollec) {
         units: 'degrees',
         precision: 0,
         orientation: 'horizontal',
-        autoHide: -1,
+        autoHide: null,
+        autoHideMax: null,
         scale: 0.7,
         color: this.color
       };
@@ -12417,7 +12421,7 @@ function (_DiagramElementCollec) {
         optionsToUse.showRealAngle = true;
       }
 
-      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.orientation, optionsToUse.scale);
+      this.label = new AngleLabel(this.equation, optionsToUse.text, optionsToUse.color, optionsToUse.radius, optionsToUse.curvePosition, optionsToUse.showRealAngle, optionsToUse.units, optionsToUse.precision, optionsToUse.autoHide, optionsToUse.autoHideMax, optionsToUse.orientation, optionsToUse.scale);
 
       if (this.label != null) {
         this.add('label', this.label.eqn);
@@ -12433,7 +12437,9 @@ function (_DiagramElementCollec) {
         sides: 50,
         radius: 0.5,
         num: 1,
-        step: 0
+        step: 0,
+        autoHideMin: null,
+        autoHideMax: null
       };
       var optionsToUse = Object.assign({}, defaultCurveOptions, curveOptions);
 
@@ -12671,7 +12677,21 @@ function (_DiagramElementCollec) {
           _curveRight = this._curveRight;
 
       if (_curve != null && curve != null) {
-        if (this.autoRightAngle && this.angle >= Math.PI / 2 - this.rightAngleRange / 2 && this.angle <= Math.PI / 2 + this.rightAngleRange / 2) {
+        if (curve.autoHideMin != null && this.angle < curve.autoHideMin || curve.autoHideMax != null && this.angle > curve.autoHideMax) {
+          if (_curveRight != null) {
+            _curveRight.hide();
+          }
+
+          _curve.hide();
+
+          if (_arrow1 != null) {
+            _arrow1.hide();
+          }
+
+          if (_arrow2 != null) {
+            _arrow2.hide();
+          }
+        } else if (this.autoRightAngle && this.angle >= Math.PI / 2 - this.rightAngleRange / 2 && this.angle <= Math.PI / 2 + this.rightAngleRange / 2) {
           if (_curveRight != null) {
             _curveRight.showAll();
           }
@@ -12764,6 +12784,49 @@ function (_DiagramElementCollec) {
       }
     }
   }, {
+    key: "checkLabelForRightAngle",
+    value: function checkLabelForRightAngle() {
+      if (this.autoRightAngle === false) {
+        return;
+      }
+
+      var label = this.label;
+      var setRight = false;
+
+      if (label != null) {
+        var angle = parseFloat(label.getText());
+
+        if (angle === 90) {
+          setRight = true;
+        }
+      }
+
+      if (setRight === false) {
+        return;
+      }
+
+      var _curveRight = this._curveRight,
+          _curve = this._curve,
+          _arrow1 = this._arrow1,
+          _arrow2 = this._arrow2;
+
+      if (_curveRight != null) {
+        _curveRight.showAll();
+      }
+
+      if (_curve != null) {
+        _curve.hide();
+      }
+
+      if (_arrow1 != null) {
+        _arrow1.hide();
+      }
+
+      if (_arrow2 != null) {
+        _arrow2.hide();
+      }
+    }
+  }, {
     key: "getAngle",
     value: function getAngle() {
       var units = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 'rad';
@@ -12810,7 +12873,7 @@ function (_DiagramElementCollec) {
           label = this.label;
 
       if (_label && label) {
-        if (label.autoHide > this.angle) {
+        if (label.autoHide != null && label.autoHide > this.angle || label.autoHideMax != null && this.angle > label.autoHideMax) {
           _label.hide();
         } else {
           _label.show();
@@ -12819,7 +12882,13 @@ function (_DiagramElementCollec) {
             var angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle, label.precision).toFixed(label.precision);
 
             if (label.units === 'degrees') {
-              angleText = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision).toFixed(label.precision);
+              var a = Object(_tools_math__WEBPACK_IMPORTED_MODULE_1__["roundNum"])(this.angle * 180 / Math.PI, label.precision);
+
+              if (a === 360) {
+                a = 0;
+              }
+
+              angleText = a.toFixed(label.precision);
               angleText = "".concat(angleText, "\xBA");
             }
 
@@ -13044,13 +13113,13 @@ function updateDescription(eqn, subForm, descriptionElement, index) {
 
 function enableTouch(element) {
   if (element) {
-    element.classList.remove('lesson__eqn_nav__not_touchable');
+    element.classList.remove('figureone__eqn_nav__not_touchable');
   }
 }
 
 function disableTouch(element) {
   if (element) {
-    element.classList.add('lesson__eqn_nav__not_touchable');
+    element.classList.add('figureone__eqn_nav__not_touchable');
   }
 }
 
@@ -13085,9 +13154,23 @@ nav) {
     if (nav.eqn.eqn.currentFormSeries.length > 1) {
       enableTouch(nav.next);
       enableTouch(nav.nextDescription);
+
+      if (nav.navType === '1Button') {
+        enableTouch(nav.description);
+      }
     } else {
       disableTouch(nav.next);
       disableTouch(nav.nextDescription);
+
+      if (nav.navType === '1Button') {
+        var next = nav.next;
+
+        if (next) {
+          next.classList.remove('figureone__eqn_nav__next_form');
+          next.classList.remove('figureone__eqn_nav__reset');
+          next.classList.remove('interactive_top_right');
+        }
+      }
     }
 
     var nextIndex = index + 1;
@@ -13097,8 +13180,28 @@ nav) {
         // eslint-disable-next-line no-param-reassign
         nav.nextDescription.innerHTML = 'RESTART from begining';
       }
+
+      if (nav.navType === '1Button' && nav.eqn.eqn.currentFormSeries.length > 1) {
+        var _next = nav.next;
+
+        if (_next) {
+          _next.classList.add('figureone__eqn_nav__reset');
+
+          _next.classList.remove('figureone__eqn_nav__next_form');
+        }
+      }
     } else {
       updateDescription(nav.eqn, currentForm.subForm, nav.nextDescription, nextIndex, false, nextPrefix);
+
+      if (nav.navType === '1Button' && nav.eqn.eqn.currentFormSeries.length > 1) {
+        var _next2 = nav.next;
+
+        if (_next2) {
+          _next2.classList.add('figureone__eqn_nav__next_form');
+
+          _next2.classList.remove('figureone__eqn_nav__reset');
+        }
+      }
     }
 
     updateDescription(nav.eqn, currentForm.subForm, nav.description, index, true); // nav.eqn.updateDescription(currentForm);
@@ -13146,17 +13249,17 @@ function makeType3Line(prevMethod, refreshMethod, nextMethod, options) {
   table.appendChild(prevGroup);
   table.appendChild(currentGroup);
   table.appendChild(nextGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  prevGroup.classList.add('lesson__eqn_nav__3line__prevRow');
-  currentGroup.classList.add('lesson__eqn_nav__3line__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__3line__nextRow');
-  prev.classList.add('lesson__eqn_nav__3line__prevRow__button');
-  refresh.classList.add('lesson__eqn_nav__3line__currentRow__button');
-  next.classList.add('lesson__eqn_nav__3line__nextRow__button');
-  prevDescription.classList.add('lesson__eqn_nav__3line__prevRow__description');
-  description.classList.add('lesson__eqn_nav__3line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__3line__nextRow__description');
+  table.classList.add('figureone__eqn_nav__table');
+  prevGroup.classList.add('figureone__eqn_nav__3line__prevRow');
+  currentGroup.classList.add('figureone__eqn_nav__3line__currentRow');
+  nextGroup.classList.add('figureone__eqn_nav__3line__nextRow');
+  prev.classList.add('figureone__eqn_nav__3line__prevRow__button');
+  refresh.classList.add('figureone__eqn_nav__3line__currentRow__button');
+  next.classList.add('figureone__eqn_nav__3line__nextRow__button');
+  prevDescription.classList.add('figureone__eqn_nav__3line__prevRow__description');
+  description.classList.add('figureone__eqn_nav__3line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
+  nextDescription.classList.add('figureone__eqn_nav__3line__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13168,9 +13271,9 @@ function makeType3Line(prevMethod, refreshMethod, nextMethod, options) {
   // lines
 
   if (optionsToUse.forceTwoLines) {
-    prevGroup.classList.add('lesson__eqn_nav__3line__prev_twoLines');
-    currentGroup.classList.add('lesson__eqn_nav__3line__current_twoLines');
-    nextGroup.classList.add('lesson__eqn_nav__3line__next_twoLines');
+    prevGroup.classList.add('figureone__eqn_nav__3line__prev_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__3line__current_twoLines');
+    nextGroup.classList.add('figureone__eqn_nav__3line__next_twoLines');
   }
 
   prevGroup.onclick = prevMethod;
@@ -13200,14 +13303,47 @@ function makeTypeDescriptionOnly(nextMethod) {
   var description = document.createElement('td');
   currentGroup.appendChild(description);
   table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__description_only__currentRow');
-  description.classList.add('lesson__eqn_nav__description_only__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__description_only__currentRow');
+  description.classList.add('figureone__eqn_nav__description_only__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
   currentGroup.onclick = nextMethod;
   return {
     table: table,
     currentGroup: currentGroup,
+    description: description
+  };
+} // Nav1Button
+
+
+function makeTypeOneButton(nextMethod) // options: TypeNavTypeOptions,  // can be: 'twoLines'
+{
+  var table = document.createElement('table');
+  var currentGroup = document.createElement('tr');
+  var next = document.createElement('td');
+  var description = document.createElement('td');
+  currentGroup.appendChild(next);
+  currentGroup.appendChild(description);
+  table.appendChild(currentGroup);
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__1button__currentRow');
+  next.classList.add('figureone__eqn_nav__1button__button');
+  description.classList.add('figureone__eqn_nav__1line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
+  next.classList.add('interactive_top_right'); // const defaultOptions = {
+  //   icons: true,
+  // };
+  // const optionsToUse = joinObjects({}, defaultOptions, options);
+
+  next.onclick = nextMethod;
+  description.onclick = nextMethod; // if (optionsToUse.icons) {
+
+  next.classList.add('figureone__eqn_nav__next_form'); // }
+
+  return {
+    table: table,
+    currentGroup: currentGroup,
+    next: next,
     description: description
   };
 } // Nav1Line
@@ -13224,12 +13360,12 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
   currentGroup.appendChild(description);
   currentGroup.appendChild(next);
   table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__1line__currentRow');
-  prev.classList.add('lesson__eqn_nav__1line__prev__button');
-  next.classList.add('lesson__eqn_nav__1line__next__button');
-  description.classList.add('lesson__eqn_nav__1line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__1line__currentRow');
+  prev.classList.add('figureone__eqn_nav__1line__prev__button');
+  next.classList.add('figureone__eqn_nav__1line__next__button');
+  description.classList.add('figureone__eqn_nav__1line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13238,7 +13374,7 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
   // lines
 
   if (optionsToUse.forceTwoLines) {
-    currentGroup.classList.add('lesson__eqn_nav__1line__current_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__1line__current_twoLines');
   }
 
   prev.onclick = prevMethod;
@@ -13247,10 +13383,10 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
 
   if (optionsToUse.arrows) {
     var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
+    nextArrow.classList.add('figureone__eqn_nav__arrow_right');
     next.appendChild(nextArrow);
     var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
+    prevArrow.classList.add('figureone__eqn_nav__arrow_left');
     prev.appendChild(prevArrow);
   } else {
     next.innerHTML = 'Next';
@@ -13288,14 +13424,14 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   row.appendChild(descriptionRows);
   row.appendChild(next);
   table.appendChild(row);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__2lines__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__2lines__nextRow');
-  prev.classList.add('lesson__eqn_nav__2lines__prev__button');
-  next.classList.add('lesson__eqn_nav__2lines__next__button');
-  description.classList.add('lesson__eqn_nav__2lines__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__2lines__nextRow__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__2lines__currentRow');
+  nextGroup.classList.add('figureone__eqn_nav__2lines__nextRow');
+  prev.classList.add('figureone__eqn_nav__2lines__prev__button');
+  next.classList.add('figureone__eqn_nav__2lines__next__button');
+  description.classList.add('figureone__eqn_nav__2lines__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
+  nextDescription.classList.add('figureone__eqn_nav__2lines__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13304,7 +13440,7 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   // lines
 
   if (optionsToUse.forceTwoLines > -1) {
-    currentGroup.classList.add('lesson__eqn_nav__2lines__current_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__2lines__current_twoLines');
   }
 
   prev.onclick = prevMethod;
@@ -13314,10 +13450,10 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
 
   if (optionsToUse.arrows) {
     var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
+    nextArrow.classList.add('figureone__eqn_nav__arrow_right');
     next.appendChild(nextArrow);
     var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
+    prevArrow.classList.add('figureone__eqn_nav__arrow_left');
     prev.appendChild(prevArrow);
   } else {
     next.innerHTML = 'Next';
@@ -13335,6 +13471,18 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   };
 }
 
+// A Navigator is a DiagramElementCollection that is a html table that has
+// the possible html elements of:
+//   next: a next form button
+//   prev: a prev form button
+//   refresh: a button that shows animation to current form again
+//   description: description of current form
+//   nextDescription: description of next form
+//   prevDescription: description of prev form
+//   nextGroup: a html parent that holds nextDescription and nextButton
+//   prevGroup: a html parent that holds prevDescription and prevButton
+//
+// Equation navigators
 var EqnNavigator =
 /*#__PURE__*/
 function (_DiagramElementCollec) {
@@ -13377,6 +13525,7 @@ function (_DiagramElementCollec) {
       id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
+    _this.options = optionsToUse;
 
     if (optionsToUse.equation != null) {
       // this.eqn = optionsToUse.equation;
@@ -13400,6 +13549,11 @@ function (_DiagramElementCollec) {
 
     if (_this.navType === '1Line') {
       navigatorHTMLElement = makeType1Line(_this.clickPrev.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickRefresh.bind(_assertThisInitialized(_assertThisInitialized(_this))), _this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))), optionsToUse.navTypeOptions);
+    }
+
+    if (_this.navType === '1Button') {
+      navigatorHTMLElement = makeTypeOneButton(_this.clickNext.bind(_assertThisInitialized(_assertThisInitialized(_this))) // optionsToUse.navTypeOptions,
+      );
     }
 
     if (_this.navType === '2Line') {
@@ -14722,12 +14876,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "default", function() { return DiagramObjectPolyLine; });
 /* harmony import */ var _tools_g2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../tools/g2 */ "./src/js/tools/g2.js");
 /* harmony import */ var _tools_tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../tools/tools */ "./src/js/tools/tools.js");
-/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
-/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
-/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
-/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
-function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
+/* harmony import */ var _tools_math__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../tools/math */ "./src/js/tools/math.js");
+/* harmony import */ var _Element__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../Element */ "./src/js/diagram/Element.js");
+/* harmony import */ var _DiagramPrimatives_DiagramPrimatives__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../DiagramPrimatives/DiagramPrimatives */ "./src/js/diagram/DiagramPrimatives/DiagramPrimatives.js");
+/* harmony import */ var _DiagramObjects__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./DiagramObjects */ "./src/js/diagram/DiagramObjects/DiagramObjects.js");
+/* harmony import */ var _DiagramEquation_DiagramEquation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DiagramEquation/DiagramEquation */ "./src/js/diagram/DiagramEquation/DiagramEquation.js");
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
 
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
@@ -14752,6 +14905,9 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 function _setPrototypeOf(o, p) { _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) { o.__proto__ = p; return o; }; return _setPrototypeOf(o, p); }
 
+function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
 
 
 
@@ -14775,8 +14931,29 @@ function makeArray(possibleArray, count) {
   }
 
   var outArray = [];
+  var labels = [];
 
-  for (var _i = 0; _i < count; _i += 1) {
+  if (_typeof(possibleArray) === 'object' && possibleArray != null) {
+    if (possibleArray.label != null && possibleArray.label.text != null && Array.isArray(possibleArray.label.text)) {
+      labels = possibleArray.label.text.slice(); // const obj = possibleArray;
+
+      for (var _i = 0; _i < count; _i += 1) {
+        // $FlowFixMe
+        var obj = {
+          label: {
+            text: labels[_i % labels.length]
+          }
+        }; // console.log(labels, labels[i % labels.length]);
+
+        outArray.push(Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, possibleArray, obj));
+      } // $FlowFixMe
+
+
+      return outArray;
+    }
+  }
+
+  for (var _i2 = 0; _i2 < count; _i2 += 1) {
     outArray.push(possibleArray);
   }
 
@@ -14824,8 +15001,21 @@ function (_DiagramElementCollec) {
       borderToPoint: 'never',
       width: 0.01,
       reverse: false,
-      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0)
+      transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('PolyLine').scale(1, 1).rotate(0).translate(0, 0),
+      makeValid: null
     };
+
+    if (options.makeValid != null && options.makeValid.shape != null && options.makeValid.shape === 'triangle') {
+      defaultOptions.makeValid = {
+        shape: 'triangle',
+        hide: {
+          minAngle: null,
+          maxAngle: null,
+          minSide: null
+        }
+      };
+    }
+
     var defaultSideOptions = {
       showLine: false,
       offset: 0,
@@ -14915,6 +15105,7 @@ function (_DiagramElementCollec) {
     _this.close = optionsToUse.close;
     _this.options = optionsToUse;
     _this.reverse = optionsToUse.reverse;
+    _this.makeValid = optionsToUse.makeValid;
     _this.points = optionsToUse.points.map(function (p) {
       return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
     }); // Add Pads
@@ -15056,25 +15247,25 @@ function (_DiagramElementCollec) {
 
       var sideArray = makeArray(side, _pCount2);
 
-      for (var _i2 = 0; _i2 < _pCount2; _i2 += 1) {
-        var _j = _i2 + 1;
+      for (var _i3 = 0; _i3 < _pCount2; _i3 += 1) {
+        var _j = _i3 + 1;
 
-        if (_i2 === _pCount2 - 1 && optionsToUse.close) {
+        if (_i3 === _pCount2 - 1 && optionsToUse.close) {
           _j = 0;
         }
 
-        var _name = "side".concat(_i2).concat(_j);
+        var _name = "side".concat(_i3).concat(_j);
 
         var sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
-          p1: _this.points[_i2],
+          p1: _this.points[_i3],
           p2: _this.points[_j]
-        }, sideArray[_i2]);
+        }, sideArray[_i3]);
 
         if (_this.reverse) {
           sideOptions = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])({}, {
             p1: _this.points[_j],
-            p2: _this.points[_i2]
-          }, sideArray[_i2]);
+            p2: _this.points[_i3]
+          }, sideArray[_i3]);
         }
 
         var sideLine = _this.objects.line(sideOptions);
@@ -15153,6 +15344,7 @@ function (_DiagramElementCollec) {
   }, {
     key: "updatePoints",
     value: function updatePoints(newPointsIn) {
+      var skipCallback = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
       var newPoints = newPointsIn.map(function (p) {
         return Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(p);
       });
@@ -15182,22 +15374,22 @@ function (_DiagramElementCollec) {
           pCount += 1;
         }
 
-        for (var _i3 = 0; _i3 < pCount; _i3 += 1) {
-          var j = _i3 + 1;
+        for (var _i4 = 0; _i4 < pCount; _i4 += 1) {
+          var j = _i4 + 1;
 
-          if (_i3 === pCount - 1 && this.close) {
+          if (_i4 === pCount - 1 && this.close) {
             j = 0;
           }
 
-          var _name2 = "side".concat(_i3).concat(j);
+          var _name2 = "side".concat(_i4).concat(j);
 
           if (this.elements[_name2] != null) {
             var wasHidden = !this.elements[_name2].isShown;
 
             if (this.reverse) {
-              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i3]);
+              this.elements[_name2].setEndPoints(newPoints[j], newPoints[_i4]);
             } else {
-              this.elements[_name2].setEndPoints(newPoints[_i3], newPoints[j]);
+              this.elements[_name2].setEndPoints(newPoints[_i4], newPoints[j]);
             }
 
             if (wasHidden) {
@@ -15220,20 +15412,20 @@ function (_DiagramElementCollec) {
           firstIndex = 1;
         }
 
-        for (var _i4 = firstIndex; _i4 < pCount + firstIndex; _i4 += 1) {
-          var _j2 = _i4 + 1;
+        for (var _i5 = firstIndex; _i5 < pCount + firstIndex; _i5 += 1) {
+          var _j2 = _i5 + 1;
 
-          var k = _i4 - 1;
+          var k = _i5 - 1;
 
-          if (_i4 === pCount - 1 && this.close) {
+          if (_i5 === pCount - 1 && this.close) {
             _j2 = 0;
           }
 
-          if (_i4 === 0 && this.close) {
+          if (_i5 === 0 && this.close) {
             k = pCount - 1;
           }
 
-          var _name3 = "angle".concat(_i4);
+          var _name3 = "angle".concat(_i5);
 
           if (this.elements[_name3] != null) {
             var _wasHidden = !this.elements[_name3].isShown;
@@ -15246,7 +15438,7 @@ function (_DiagramElementCollec) {
 
             this.elements[_name3].setAngle({
               p1: newPoints[k],
-              p2: newPoints[_i4],
+              p2: newPoints[_i5],
               p3: newPoints[_j2]
             });
 
@@ -15259,7 +15451,11 @@ function (_DiagramElementCollec) {
 
       this.points = newPoints;
 
-      if (this.updatePointsCallback != null) {
+      if (this.makeValid != null && this.makeValid.shape === 'triangle' && !skipCallback) {
+        this.makeValidTriangle();
+      }
+
+      if (this.updatePointsCallback != null && !skipCallback) {
         this.updatePointsCallback();
       }
     }
@@ -15299,13 +15495,14 @@ function (_DiagramElementCollec) {
   }, {
     key: "reversePoints",
     value: function reversePoints() {
+      var skipCallback = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : true;
       var newPoints = [];
 
       for (var i = 0; i < this.points.length; i += 1) {
         newPoints.push(this.points[this.points.length - 1 - i]);
       }
 
-      this.updatePoints(newPoints);
+      this.updatePoints(newPoints, skipCallback);
     }
   }, {
     key: "setPositionWithoutMoving",
@@ -15404,10 +15601,207 @@ function (_DiagramElementCollec) {
       this.updateAngleLabels(rotationOffset);
       this.updateSideLabels(rotationOffset);
     }
+  }, {
+    key: "makeValidTriangle",
+    value: function makeValidTriangle() {
+      // $FlowFixMe
+      var angle0 = this._angle0; // $FlowFixMe
+
+      var angle1 = this._angle1; // $FlowFixMe
+
+      var angle2 = this._angle2; // $FlowFixMe
+
+      var side01 = this._side01; // $FlowFixMe
+
+      var side12 = this._side12; // $FlowFixMe
+
+      var side20 = this._side20;
+      var anglePrecision = angle0.label.precision;
+      var sidePrecision = side01.label.precision; // $FlowFixMe
+
+      var clipAngle0 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle0.getAngle(), '0to360') * 180 / Math.PI;
+      var clipAngle1 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle1.getAngle(), '0to360') * 180 / Math.PI;
+      var clipAngle2 = Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle2.getAngle(), '0to360') * 180 / Math.PI;
+      var a0 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle0, anglePrecision);
+      var a1 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle1, anglePrecision);
+      var a2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle2, anglePrecision);
+      var s01 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side01.getLength(), sidePrecision);
+      var s12 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side12.getLength(), sidePrecision);
+      var s20 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side20.getLength(), sidePrecision); // Reverse the points if the angles are on the outside
+
+      if (a0 > 90 && a1 > 90 && a2 > 90) {
+        this.reverse = !this.reverse;
+        this.updatePoints(this.points, false);
+        a0 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle0.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+        a1 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle1.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+        a2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["clipAngle"])(angle2.getAngle(), '0to360') * 180 / Math.PI, anglePrecision);
+      } // else {
+      // This is a weird case at the 0/360 transition
+
+
+      if (a0 > 180) {
+        a0 = 360 - angle0;
+      }
+
+      if (a1 > 180) {
+        a1 = 360 - angle1;
+      }
+
+      if (a2 > 180) {
+        a2 = 360 - angle2;
+      } // Hide the angles if the triangle is thin or small enough
+      // if (
+      //   (angle0.label.autoHide > -1 && a0 > angle0.label.autoHide)
+      //   || (angle0.label.autoHideMax != null && angle0.label.autoHideMax < a0)
+      //   || (angle1.label.autoHide > -1 && a1 > angle1.label.autoHide)
+      //   || (angle1.label.autoHideMax != null && angle1.label.autoHideMax < a1)
+      //   || (angle2.label.autoHide > -1 && a2 > angle2.label.autoHide)
+      //   || (angle2.label.autoHideMax != null && angle2.label.autoHideMax < a2)
+      //   || s01 < 0.6 || s12 < 0.6 || s20 < 0.6
+      // ) {
+      // if (angle0.isShown) {
+      // Make angles consistent with 180º
+
+
+      var tot = a0 + a1 + a2;
+      var diff = tot - 180; // If the angles are > 180, then find the closet angle
+      // to rounding down and reduce it by diff
+      // If the angles are < 180 then find the closes angle
+      // to round down and round it down
+
+      var remainders = [Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle0, anglePrecision + 1), Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle1, anglePrecision + 1), Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(clipAngle2, anglePrecision + 1)].map(function (a) {
+        return a - Math.floor(a * Math.pow(10, anglePrecision)) / Math.pow(10, anglePrecision);
+      });
+      var angles = [a0, a1, a2];
+      var indexToChange = 0;
+
+      if (tot > 180) {
+        indexToChange = remainders.reduce(function (iMax, x, i, arr) {
+          return x > arr[iMax] ? i : iMax;
+        }, 0);
+      } else if (tot < 180) {
+        indexToChange = remainders.reduce(function (iMin, x, i, arr) {
+          return x < arr[iMin] ? i : iMin;
+        }, 1);
+      }
+
+      angles[indexToChange] -= diff;
+      a0 = angles[0];
+      a1 = angles[1];
+      a2 = angles[2];
+      angle0.setLabel("".concat(a0.toFixed(anglePrecision), "\xBA"));
+      angle1.setLabel("".concat(a1.toFixed(anglePrecision), "\xBA"));
+      angle2.setLabel("".concat(a2.toFixed(anglePrecision), "\xBA"));
+      angle0.checkLabelForRightAngle();
+      angle1.checkLabelForRightAngle();
+      angle2.checkLabelForRightAngle();
+
+      if (this.makeValid != null) {
+        var minSide = this.makeValid.hide.minSide;
+        var _this$makeValid$hide = this.makeValid.hide,
+            minAngle = _this$makeValid$hide.minAngle,
+            maxAngle = _this$makeValid$hide.maxAngle;
+        var hideAngles = false;
+
+        if (minAngle != null) {
+          minAngle *= 180 / Math.PI;
+
+          if (a0 < minAngle || a1 < minAngle || a2 < minAngle) {
+            hideAngles = true;
+          }
+        }
+
+        if (maxAngle != null) {
+          maxAngle *= 180 / Math.PI;
+
+          if (a0 > maxAngle || a1 > maxAngle || a2 > maxAngle) {
+            hideAngles = true;
+          }
+        }
+
+        if (minSide != null && (s01 < minSide || s12 < minSide || s20 < minSide)) {
+          hideAngles = true;
+        }
+
+        if (hideAngles) {
+          this.hideAngles();
+        }
+      } // Make sides consistent with equilateral or isosceles
+
+
+      if ((side01.isShown || side12.isShown || side20.isShown) && a0 > 0 && a0 < 180 && a1 > 0 && a1 < 180 && a2 > 0 && a2 < 180) {
+        // s12 = round(
+        //   s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a0 * Math.PI / 180),
+        //   sidePrecision,
+        // );
+        // s20 = round(
+        //   s01 / Math.sin(a2 * Math.PI / 180) * Math.sin(a1 * Math.PI / 180),
+        //   sidePrecision,
+        // );
+        var leastSigStep = 1 / Math.pow(10, sidePrecision); // If Equilateral, make all sides equal
+
+        if (a0 === 60 && a1 === 60 && a2 === 60) {
+          s12 = s01;
+          s20 = s01; // If Isosceles possibility 1:
+        } else if (a0 === a1) {
+          s20 = s12;
+
+          if (s01 === s12) {
+            var moreAccurate = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side01.getLength(), sidePrecision + 1);
+
+            if (moreAccurate < s01) {
+              s01 -= leastSigStep;
+            } else {
+              s01 += leastSigStep;
+            }
+          } // If Isosceles possibility 2:
+
+        } else if (a0 === a2) {
+          s01 = s12;
+
+          if (s20 === s12) {
+            var _moreAccurate = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side20.getLength(), sidePrecision + 1);
+
+            if (_moreAccurate < s20) {
+              s20 -= leastSigStep;
+            } else {
+              s20 += leastSigStep;
+            }
+          } // If Isosceles possibility 3:
+
+        } else if (a1 === a2) {
+          s20 = s01;
+
+          if (s12 === s01) {
+            var _moreAccurate2 = Object(_tools_math__WEBPACK_IMPORTED_MODULE_2__["round"])(side12.getLength(), sidePrecision + 1);
+
+            if (_moreAccurate2 < s12) {
+              s12 -= leastSigStep;
+            } else {
+              s12 += leastSigStep;
+            }
+          } // If these are not equilateral, or isosceles, then all sides must be different length
+
+        }
+      } // if (s01 === Infinity) {
+      //   s01 = round(side01.getLength(), sidePrecision);
+      // }
+      // if (s12 === Infinity) {
+      //   s12 = round(side12.getLength(), sidePrecision);
+      // }
+      // if (s20 === Infinity) {
+      //   s20 = round(side20.getLength(), sidePrecision);
+      // }
+
+
+      side01.setLabel("".concat(s01.toFixed(sidePrecision)));
+      side12.setLabel("".concat(s12.toFixed(sidePrecision)));
+      side20.setLabel("".concat(s20.toFixed(sidePrecision))); // }
+    }
   }]);
 
   return DiagramObjectPolyLine;
-}(_Element__WEBPACK_IMPORTED_MODULE_2__["DiagramElementCollection"]);
+}(_Element__WEBPACK_IMPORTED_MODULE_3__["DiagramElementCollection"]);
 
 
 
@@ -15832,7 +16226,13 @@ function () {
           position = options.position,
           alignV = options.alignV,
           alignH = options.alignH;
-      return this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+      var element = this.htmlElement(inside, id, classes, Object(_tools_g2__WEBPACK_IMPORTED_MODULE_0__["getPoint"])(position), alignV, alignH);
+
+      if (options.color != null) {
+        element.setColor(options.color);
+      }
+
+      return element;
     }
   }, {
     key: "lines",
@@ -15914,7 +16314,8 @@ function () {
         transform: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]('polygon').standard(),
         position: null,
         center: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, 0),
-        trianglePrimitives: false
+        trianglePrimitives: false,
+        linePrimitives: false
       };
 
       for (var _len8 = arguments.length, optionsIn = new Array(_len8), _key8 = 0; _key8 < _len8; _key8++) {
@@ -15948,7 +16349,9 @@ function () {
 
       var element;
 
-      if (options.fill) {
+      if (options.linePrimitives) {
+        element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonLine"])(this.webgl, options.sides, options.radius, options.rotation, direction, options.sidesToDraw, options.width, options.color, options.transform, this.limits);
+      } else if (options.fill) {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["PolygonFilled"])(this.webgl, options.sides, options.radius, options.rotation, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.textureLocation, options.textureCoords, options.onLoad);
       } else {
         element = Object(_DiagramElements_Polygon__WEBPACK_IMPORTED_MODULE_10__["Polygon"])(this.webgl, options.sides, options.radius, options.width, options.rotation, direction, options.sidesToDraw, options.center, options.color, options.transform, this.limits, options.trianglePrimitives);
@@ -16237,7 +16640,6 @@ function () {
         fontSize: 0.13,
         showGrid: true,
         color: [1, 1, 1, 0],
-        gridColor: [1, 1, 1, 0],
         location: new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"](),
         decimalPlaces: 1,
         lineWidth: 0.01
@@ -16248,6 +16650,15 @@ function () {
       }
 
       var options = _tools_tools__WEBPACK_IMPORTED_MODULE_6__["joinObjects"].apply(void 0, [{}, defaultOptions].concat(optionsIn));
+
+      if (options.fontColor == null) {
+        options.fontColor = options.color.slice();
+      }
+
+      if (options.gridColor == null) {
+        options.gridColor = options.color.slice();
+      }
+
       var width = options.width,
           lineWidth = options.lineWidth,
           limits = options.limits,
@@ -16261,7 +16672,8 @@ function () {
           stepY = options.stepY,
           location = options.location,
           showGrid = options.showGrid,
-          gridColor = options.gridColor;
+          gridColor = options.gridColor,
+          fontColor = options.fontColor;
       var xProps = new _DiagramElements_Plot_AxisProperties__WEBPACK_IMPORTED_MODULE_17__["AxisProperties"]('x', 0);
       xProps.minorTicks.mode = 'off';
       xProps.minorGrid.mode = 'off';
@@ -16280,6 +16692,7 @@ function () {
       xProps.majorTicks.offset = -xProps.majorTicks.length / 2;
       xProps.majorTicks.width = lineWidth * 2;
       xProps.majorTicks.labelMode = 'off';
+      xProps.majorTicks.color = color.slice();
       xProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](xProps.limits.min, xProps.limits.max, stepX).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
@@ -16293,7 +16706,7 @@ function () {
       xProps.majorTicks.labelOffset = new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Point"](0, xProps.majorTicks.offset - fontSize * 0.1);
       xProps.majorTicks.labelsHAlign = 'center';
       xProps.majorTicks.labelsVAlign = 'top';
-      xProps.majorTicks.fontColor = color.slice();
+      xProps.majorTicks.fontColor = fontColor.slice();
       xProps.majorTicks.fontSize = fontSize;
       xProps.majorTicks.fontWeight = '400';
       var xAxis = new _DiagramElements_Plot_Axis__WEBPACK_IMPORTED_MODULE_18__["default"](this.webgl, this.draw2D, xProps, new _tools_g2__WEBPACK_IMPORTED_MODULE_0__["Transform"]().scale(1, 1).rotate(0).translate(0, xAxisLocation - limits.bottom * height / 2), this.limits);
@@ -16316,6 +16729,7 @@ function () {
       yProps.majorTicks.offset = -yProps.majorTicks.length / 2;
       yProps.majorTicks.width = xProps.majorTicks.width;
       yProps.majorTicks.labelMode = 'off';
+      yProps.majorTicks.color = color.slice();
       yProps.majorTicks.labels = _tools_math__WEBPACK_IMPORTED_MODULE_5__["range"](yProps.limits.min, yProps.limits.max, stepY).map(function (v) {
         return v.toFixed(decimalPlaces);
       }).map(function (v) {
@@ -16655,6 +17069,7 @@ function (_DrawingObject) {
       _this.element = element;
     }
 
+    _this.id = id;
     _this.location = location;
     _this.alignV = alignV;
     _this.alignH = alignH;
@@ -16787,10 +17202,13 @@ function (_DrawingObject) {
         this.element.style.position = 'absolute';
         this.element.style.left = "".concat(x, "px");
         this.element.style.top = "".concat(y, "px");
+        this.element.style.visibility = 'visible'; // this.element.classList.remove('diagram__hidden');
       } else {
         this.element.style.position = 'absolute';
         this.element.style.left = '-10000px';
-        this.element.style.top = '-10000px'; // this.element.style.visibility = 'hidden';
+        this.element.style.top = '-10000px'; // this.element.classList.add('diagram__hidden');
+
+        this.element.style.visibility = 'hidden'; // this.element.style.visibility = 'hidden';
         // console.trace()
       }
     }
@@ -16987,7 +17405,7 @@ function (_DrawingObject) {
       }
 
       if (minSize < 1) {
-        var power = -Math.log10(minSize) + 2;
+        var power = -Math.log(minSize) / Math.LN10 + 2;
         _this.scalingFactor = Math.pow(10, power);
       }
     }
@@ -21469,6 +21887,12 @@ function () {
       this.stopPulsing(cancelled);
     }
   }, {
+    key: "cancel",
+    value: function cancel() {
+      var forceSetToEndOfPlan = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      this.stop(true, forceSetToEndOfPlan);
+    }
+  }, {
     key: "updateLimits",
     value: function updateLimits(limits) {
       var transforms = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : this.diagramTransforms;
@@ -22028,7 +22452,15 @@ function (_DiagramElement) {
       _get(_getPrototypeOf(DiagramElementPrimative.prototype), "show", this).call(this);
 
       if (this.drawingObject instanceof _DrawingObjects_HTMLObject_HTMLObject__WEBPACK_IMPORTED_MODULE_3__["default"]) {
-        this.drawingObject.show = true;
+        this.drawingObject.show = true; // This line is a challenge.
+        // It will show a html element immediately before the next draw frame
+        // meaning the draw matrix will be old.
+        // If this line is removed, it causes a blanking between lesson pages
+        // for html elements that are always on screen
+        // Therefore, should use diagram.setFirstTransform before using this,
+        // or in the future remove this line, and the line in hide(), and
+        // somehow do the hide in the draw call
+
         this.drawingObject.transformHtml(this.lastDrawTransform.matrix());
       }
     } // showAll() {
@@ -22712,13 +23144,15 @@ function (_DiagramElement2) {
     }
   }, {
     key: "setColor",
-    value: function setColor(color) {
+    value: function setColor() {
+      var color = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [0, 0, 0, 1];
+
       for (var i = 0; i < this.drawOrder.length; i += 1) {
         var element = this.elements[this.drawOrder[i]];
         element.setColor(color);
       }
 
-      this.color = color.slice();
+      this.color = color.slice(); // this.color = [color[0], color[1], color[2], color[3]];
     }
   }, {
     key: "setOpacity",
@@ -23352,6 +23786,86 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
 
+var glMock = {
+  TRIANGLES: 1,
+  TRIANGLE_STRIP: 2,
+  TRIANGLE_FAN: 3,
+  LINES: 4,
+  LINK_STATUS: 1,
+  VERTEX_SHADER: 1,
+  COMPILE_STATUS: 1,
+  FRAGMENT_SHADER: 1,
+  SRC_ALPHA: 1,
+  ONE_MINUS_SRC_ALPHA: 1,
+  BLEND: 1,
+  COLOR_BUFFER_BIT: 1,
+  TEXTURE_2D: 1,
+  RGBA: 1,
+  UNSIGNED_BYTE: 1,
+  TEXTURE_WRAP_S: 1,
+  CLAMP_TO_EDGE: 1,
+  TEXTURE_WRAP_T: 1,
+  TEXTURE_MIN_FILTER: 1,
+  LINEAR: 1,
+  ARRAY_BUFFER: 1,
+  STATIC_DRAW: 1,
+  FLOAT: 1,
+  UNPACK_PREMULTIPLY_ALPHA_WEBGL: 1,
+  createBuffer: function createBuffer() {},
+  bindBuffer: function bindBuffer() {},
+  bufferData: function bufferData() {},
+  enableVertexAttribArray: function enableVertexAttribArray() {},
+  vertexAttribPointer: function vertexAttribPointer() {},
+  disableVertexAttribArray: function disableVertexAttribArray() {},
+  uniformMatrix3fv: function uniformMatrix3fv() {},
+  uniform4f: function uniform4f() {},
+  uniform1f: function uniform1f() {},
+  uniform1i: function uniform1i() {},
+  texParameteri: function texParameteri() {},
+  drawArrays: function drawArrays() {},
+  clearColor: function clearColor() {},
+  clear: function clear() {},
+  createTexture: function createTexture() {},
+  activeTexture: function activeTexture() {},
+  bindTexture: function bindTexture() {},
+  pixelStorei: function pixelStorei() {},
+  texImage2D: function texImage2D() {},
+  blendFunc: function blendFunc() {},
+  attachShader: function attachShader() {},
+  linkProgram: function linkProgram() {},
+  getProgramParameter: function getProgramParameter() {},
+  createProgram: function createProgram() {},
+  deleteProgram: function deleteProgram() {},
+  createShader: function createShader() {},
+  shaderSource: function shaderSource() {},
+  compileShader: function compileShader() {},
+  getShaderParameter: function getShaderParameter() {},
+  getAttribLocation: function getAttribLocation() {},
+  getUniformLocation: function getUniformLocation() {},
+  enable: function enable() {},
+  map: function map() {},
+  getExtension: function getExtension() {
+    return {
+      loseContext: function loseContext() {}
+    };
+  },
+  disable: function disable() {},
+  deleteShader: function deleteShader() {},
+  useProgram: function useProgram() {},
+  viewport: function viewport() {},
+  canvas: {
+    toDataURL: function toDataURL() {
+      return '';
+    },
+    width: 100,
+    clientHeight: 100,
+    height: 100,
+    style: {
+      top: 0,
+      visibility: 'visible'
+    }
+  }
+};
 
 function createProgram(gl, vertexShader, fragmentShader) {
   var program = gl.createProgram();
@@ -23525,11 +24039,18 @@ function () {
     var gl = canvas.getContext('webgl', {
       antialias: true
     });
+
+    if (gl == null) {
+      // $FlowFixMe
+      gl = glMock;
+    }
+
     this.programs = [];
     this.lastUsedProgram = null;
     this.textures = {};
 
-    if (gl instanceof WebGLRenderingContext) {
+    if (gl != null) {
+      // $FlowFixMe
       this.gl = gl; // this.program = createProgramFromScripts(
       //   this.gl,
       //   vertexSource,
@@ -23550,8 +24071,8 @@ function () {
       this.gl.clearColor(0, 0, 0, 0);
       this.gl.clear(this.gl.COLOR_BUFFER_BIT);
       this.gl.disable(this.gl.DEPTH_TEST);
-      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
-      gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
+      this.gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA);
+      this.gl.enable(gl.BLEND); // this.gl.useProgram(this.program);
       // window.addEventListener('resize', autoResize.bind(this, event));
     }
   }
@@ -26114,7 +26635,7 @@ baseColors.forEach(function (color) {
     paletteColorNames.push("--palette-".concat(color, "-").concat(shade));
   });
 });
-var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-qr-background'];
+var diagramColorNames = ['--diagram-background', '--diagram-primary', '--diagram-warning', '--diagram-safe', '--diagram-passive', '--diagram-construction1', '--diagram-construction2', '--diagram-construction3', '--diagram-construction4', '--diagram-construction5', '--diagram-construction6', '--diagram-construction7', '--diagram-construction8', '--diagram-construction9', '--diagram-disabled', '--diagram-disabledDark', '--diagram-disabledDarker', '--diagram-disabledDarkest', '--diagram-push', '--diagram-action', '--diagram-text-base', '--diagram-text-warning', '--diagram-text-plot', '--diagram-text-keyword', '--diagram-text-keyword2', '--diagram-text-latin', '--diagram-text-greek', '--diagram-text-english', '--diagram-text-note', '--diagram-qr-background'];
 function getCSSColors() {
   var customColorNames = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [];
   var colors = {};
@@ -26232,7 +26753,13 @@ function getDefinedCSSVariables(idOrElement, propertyNames) {
 
     if (style) {
       propertyNames.forEach(function (propertyName) {
-        var value = style.getPropertyValue(propertyName).trim();
+        var value = style.getPropertyValue(propertyName);
+
+        if (value == null) {
+          return;
+        }
+
+        value = value.trim();
         var fValue = parseFloat(value);
         var valueToAdd = value;
 
@@ -26277,21 +26804,25 @@ function getCSSVariables(idOrElement) {
         var propertyName = style[i];
 
         if (prefix === '' || propertyName.startsWith(prefix)) {
-          var value = style.getPropertyValue(propertyName).trim();
-          var fValue = parseFloat(value);
-          var valueToAdd = value;
+          var value = style.getPropertyValue(propertyName);
 
-          if (!Number.isNaN(fValue)) {
-            valueToAdd = fValue;
-          }
+          if (value != null) {
+            value = value.trim();
+            var fValue = parseFloat(value);
+            var valueToAdd = value;
 
-          if (makeFlat) {
-            var shortName = toCamelCase(propertyName, prefix);
-            variables[shortName] = valueToAdd;
-          } else {
-            var rePrefix = new RegExp(prefix, 'g');
-            var noPrefix = propertyName.replace(rePrefix, '');
-            Object(_tools__WEBPACK_IMPORTED_MODULE_0__["addToObject"])(variables, noPrefix, valueToAdd, '-');
+            if (!Number.isNaN(fValue)) {
+              valueToAdd = fValue;
+            }
+
+            if (makeFlat) {
+              var shortName = toCamelCase(propertyName, prefix);
+              variables[shortName] = valueToAdd;
+            } else {
+              var rePrefix = new RegExp(prefix, 'g');
+              var noPrefix = propertyName.replace(rePrefix, '');
+              Object(_tools__WEBPACK_IMPORTED_MODULE_0__["addToObject"])(variables, noPrefix, valueToAdd, '-');
+            }
           }
         }
       }
@@ -26309,7 +26840,7 @@ function getCSSVariables(idOrElement) {
 /*!***************************************!*\
   !*** ./src/js/tools/htmlGenerator.js ***!
   \***************************************/
-/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW */
+/*! exports provided: actionWord, click, highlight, addClass, addId, onClickId, highlightWord, centerV, centerH, centerVH, toHTML, itemSelector, unit, applyModifiers, setOnClicks, setHTML, withClass, style, clickW, link */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26333,6 +26864,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "withClass", function() { return withClass; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "style", function() { return style; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "clickW", function() { return clickW; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "link", function() { return link; });
 /* harmony import */ var _color__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./color */ "./src/js/tools/color.js");
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 
@@ -26542,6 +27074,58 @@ function highlight() {
   };
 }
 
+function link(linkStr) {
+  var colorOrOptions = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var classStr = 'action_word interactive_word';
+  var colorToUse = null;
+  var defaultOptions = {
+    color: null,
+    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    interactive: true,
+    classes: '',
+    text: null,
+    newTab: true
+  };
+  var options = defaultOptions;
+
+  if (Array.isArray(colorOrOptions)) {
+    colorToUse = colorOrOptions;
+  } else if (colorOrOptions != null) {
+    options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
+  }
+
+  var _options = options,
+      color = _options.color,
+      id = _options.id,
+      classes = _options.classes,
+      text = _options.text;
+
+  if (color != null) {
+    colorToUse = color;
+  }
+
+  if (classes !== '') {
+    classStr = "".concat(classStr, " ").concat(classes);
+  }
+
+  var target = options.newTab ? ' target="_blank"' : '';
+
+  var idToUse = function idToUse() {
+    return id;
+  };
+
+  return {
+    replacementText: function replacementText(textIn) {
+      var idStr = id ? " id=\"".concat(id, "\"") : '';
+      var colorStr = colorToUse ? " style=\"color:".concat(Object(_color__WEBPACK_IMPORTED_MODULE_0__["colorArrayToRGBA"])(colorToUse), ";\"") : '';
+      return {
+        replacementText: "<a href=".concat(linkStr).concat(idStr, "class=\"").concat(classStr, "\"").concat(colorStr, " rel=\"noreferrer noopener\"").concat(target, ">").concat((text || textIn).trim(), "</a>")
+      };
+    },
+    id: idToUse
+  };
+}
+
 function highlightWord(text) {
   var classesOrColor = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var classStr = 'highlight_word';
@@ -26600,12 +27184,12 @@ function click(actionMethod, bind) {
     options = Object(_tools__WEBPACK_IMPORTED_MODULE_1__["joinObjects"])(defaultOptions, colorOrOptions);
   }
 
-  var _options = options,
-      interactive = _options.interactive,
-      color = _options.color,
-      id = _options.id,
-      classes = _options.classes,
-      text = _options.text;
+  var _options2 = options,
+      interactive = _options2.interactive,
+      color = _options2.color,
+      id = _options2.id,
+      classes = _options2.classes,
+      text = _options2.text;
 
   if (color != null) {
     colorToUse = color;
@@ -26743,17 +27327,17 @@ function applyModifiers(text, modifiers) {
 
     outText = modifyText(outText, key, mod); // }
   });
-  var r = RegExp(/\|([^|]*)\|/, 'gi');
+  var r = RegExp(/\|([^|]*)\|/gi);
   outText = outText.replace(r, "<span class=\"".concat(highlightClass, "\">$1</span>"));
 
   if (monochrome) {
-    var c = RegExp(/style="color:rgba\([^)]*\);"/, 'gi');
+    var c = RegExp(/style="color:rgba\([^)]*\);"/gi);
     outText = outText.replace(c, '');
-    var h = RegExp(/highlight_word/, 'gi');
+    var h = RegExp(/highlight_word/gi);
     outText = outText.replace(h, '');
-    var i = RegExp(/interactive_word/, 'gi');
+    var i = RegExp(/interactive_word/gi);
     outText = outText.replace(i, '');
-    var id = RegExp(/id="[^"]*"/, 'gi');
+    var id = RegExp(/id="[^"]*"/gi);
     outText = outText.replace(id, '');
   }
 
@@ -26877,7 +27461,7 @@ function inverse(m) {
 /*!******************************!*\
   !*** ./src/js/tools/math.js ***!
   \******************************/
-/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D */
+/*! exports provided: round, roundNum, decelerate, easeinout, easeout, easein, sinusoid, linear, clipMag, clipValue, range, randInt, rand, randElement, removeRandElement, randElements, rand2D, randSign */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -26899,14 +27483,37 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "removeRandElement", function() { return removeRandElement; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randElements", function() { return randElements; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "rand2D", function() { return rand2D; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "randSign", function() { return randSign; });
 var roundNum = function roundNum(value) {
   var precision = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 5;
   var multiplier = Math.pow(10, precision);
-  var result = Math.round(value * multiplier) / multiplier;
+  var result = Math.round(value * multiplier) / multiplier; // if (Object.is(result, -0)) {
+  // if (result === -0) {
+  //   result = 0;
+  // }
 
-  if (Object.is(result, -0)) {
+  var objectIsPolyfill = function objectIsPolyfill(x, y) {
+    if (x === y) {
+      // 0 === -0, but they are not identical
+      return x !== 0 || 1 / x === 1 / y;
+    } // NaN !== NaN, but they are identical.
+    // NaNs are the only non-reflexive value, i.e., if x !== x,
+    // then x is a NaN.
+    // isNaN is broken: it converts its argument to number, so
+    // isNaN("foo") => true
+    // eslint-disable-next-line no-self-compare
+
+
+    return x !== x && y !== y;
+  };
+
+  if (objectIsPolyfill(result, -0)) {
     result = 0;
-  }
+  } // if (result === -0) {
+  //   // 0 === -0, but they are not identical
+  //   return result !== 0 || 1 / x === 1 / y;
+  // }
+
 
   return result;
 };
@@ -27177,26 +27784,46 @@ function range(start, stop) {
   return out;
 }
 
+function randSign() {
+  return Math.random() > 0.5 ? 1 : -1;
+}
+
 function randInt(minOrMax) {
   var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var plusOrMinus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var r = 0;
 
   if (max != null) {
     var min = minOrMax;
-    return Math.floor(Math.random() * Math.floor(max - min) + Math.floor(min));
+    r = Math.floor(Math.random() * Math.floor(max - min) + Math.floor(min));
+  } else {
+    r = Math.floor(Math.random() * Math.floor(minOrMax));
   }
 
-  return Math.floor(Math.random() * Math.floor(minOrMax));
+  if (plusOrMinus) {
+    r *= randSign();
+  }
+
+  return r;
 }
 
 function rand(minOrMax) {
   var max = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : null;
+  var plusOrMinus = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+  var r = 0;
 
   if (max != null) {
     var min = minOrMax;
-    return Math.random() * (max - min) + min;
+    r = Math.random() * (max - min) + min;
+  } else {
+    r = Math.random() * minOrMax;
   }
 
-  return Math.random() * minOrMax;
+  if (plusOrMinus) {
+    r *= randSign();
+  }
+
+  return r;
 }
 
 function randElement(inputArray) {
