@@ -1,4 +1,4 @@
-import index from './index';
+import index from './contentIndexObj';
 import LessonDescription from '../js/Lesson/lessonDescription';
 
 export default function getContentIndex() {

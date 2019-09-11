@@ -37,8 +37,7 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/content/common/lessonindex.js' \
-       or path == 'src/content/index.js' \
+       or path == 'src/content/contentIndexObj.js' \
        or path.startswith == 'src/content/boilerplate' \
        or path == 'app/app/app.db':
         continue
@@ -77,8 +76,8 @@ for file_name in current.keys():
        or file_name.startswith('/dist/vendors') \
        or file_name.startswith('/dist/input') \
        or file_name.startswith('/dist/content') \
-       or file_name.startswith('/index.js') \
-       or file_name.startswith('/index.js.map') \
+       or file_name.startswith('/contentIndexObj.js') \
+       or file_name.startswith('/contentIndexObj.js.map') \
        or file_name.startswith('/dist/commoncontent'):
         continue
     if file_name not in existing or existing[file_name] != md5:

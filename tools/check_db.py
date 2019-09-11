@@ -75,7 +75,7 @@ if index.returncode != 0:
 
 # Load index file
 index = index_loader(
-    pathlib.Path('./src/content/index.js'))
+    pathlib.Path('./src/content/contentIndexObj.js'))
 
 # Process Index
 for key, value in index.items():            # noqa

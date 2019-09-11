@@ -153,7 +153,7 @@ function createLessonIndex(buildMode, lessonsPath) {
   // outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   outStr = `${outStr}\n}\n`;
   if (outStr !== '') {
-    fs.writeFile(`${lessonsPath}/index.js`, outStr, (err) => {
+    fs.writeFile(`${lessonsPath}/contentIndexObj.js`, outStr, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(err);
