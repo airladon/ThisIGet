@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Fig from 'figureone';
 // import '../../css/style.scss';
-import LessonTile from './lessonTile';
+import TopicTile from './topicTile';
 import TopicDescription from '../Lesson/topicDescription';
 import makeTopicTree from '../Lesson/topicTree';
 // import LI from '../../content/contentIndex';
@@ -15,7 +15,7 @@ type Props = {
   selected?: ?string;
 };
 
-export default class LessonNavigator extends React.Component
+export default class LearningPathNavigator extends React.Component
                                     <Props> {
   selected: string;
   contentIndex: Array<Array<TopicDescription>>;
@@ -166,7 +166,7 @@ export default class LessonNavigator extends React.Component
       state = 'disabled';
     }
 
-    return <LessonTile
+    return <TopicTile
               id={topic.id}
               link={linkToUse}
               imgLink={topic.imgLink}

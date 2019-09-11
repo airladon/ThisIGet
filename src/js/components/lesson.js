@@ -6,9 +6,9 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 // import Lesson from '../Lesson/Lesson';
 
 // import Button from './button';
-import LessonNavigator from './lessonNavigator';
+import LearningPathNavigator from './learningPathNavigator';
 // import LessonTilePath from './lessonPathTile';
-import LessonTitle from './lessonTitle';
+import TopicTitle from './topicTitle';
 // import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
 import TopicDescription from '../Lesson/topicDescription';
@@ -71,7 +71,7 @@ export default class LessonComponent extends React.Component
   // diagrams: Object;
   componentUpdateCallback: ?() => void;
   centerLessonFlag: boolean;
-  lessonNavigator: ?LessonNavigator;
+  learningPathNavigator: ?LearningPathNavigator;
   showNavigator: boolean;
   topicDescription: null | TopicDescription;
   versionDetails: Object;
@@ -436,7 +436,7 @@ export default class LessonComponent extends React.Component
     const imgLink = `/static/dist${path.join('/')}/tile.svg`;
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
-        <LessonTitle
+        <TopicTitle
           // imgLink={`${this.lesson.content.iconLinkGrey}`}
           imgLink={imgLink}
           // imgLink={`${window.location.pathname}/tile.svg`}
@@ -459,10 +459,10 @@ export default class LessonComponent extends React.Component
       </div>
       {this.renderLesson()}
       <div className='lesson__white_spacer'/>
-      <LessonNavigator
+      <LearningPathNavigator
           selected={this.lesson.content.title}
           learningPath={'Geometry_1'}
-          ref={(lessonNavigator) => { this.lessonNavigator = lessonNavigator; }}
+          ref={(learningPathNavigator) => { this.learningPathNavigator = learningPathNavigator; }}
         />
       <div className='lesson__white_spacer'/>
     </div>;

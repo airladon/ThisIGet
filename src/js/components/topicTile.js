@@ -17,7 +17,7 @@ type Props = {
   title: ?boolean,
 };
 
-export default class LessonTile extends React.Component
+export default class TopicTile extends React.Component
                                     <Props> {
   render() {
     const { props } = this;

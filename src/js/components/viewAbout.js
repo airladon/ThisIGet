@@ -2,7 +2,7 @@
 
 import * as React from 'react';
 // import LoginTitle from './loginTitle';
-// import LessonNavigator from './lessonNavigator';
+// import LearningPathNavigator from './learningPathNavigator';
 // import HomeBanner from './homeBanner';
 
 
