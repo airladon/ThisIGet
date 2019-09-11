@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - find the ',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

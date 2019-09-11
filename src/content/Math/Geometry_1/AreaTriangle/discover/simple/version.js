@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover what the area of a triangle is',
   htmlDescription: 'Figure out why the area of a triangle depends just on its base and height',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

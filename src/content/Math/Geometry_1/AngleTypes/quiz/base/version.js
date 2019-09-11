@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - set the angle to be either acute, right, obtuse, straight, reflex or full',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

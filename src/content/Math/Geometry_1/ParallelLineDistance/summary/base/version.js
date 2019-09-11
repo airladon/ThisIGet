@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of parallel line distance property',
   htmlDescription: 'Parallel line distance is the length of the perpendicular line between them',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

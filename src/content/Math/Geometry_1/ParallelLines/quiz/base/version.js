@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Move lines to be parallel and find parallel lines',
   htmlDescription: 'Interactive quiz to make lines parallel, and find parallel lines in a selection of lines',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

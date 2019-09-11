@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover the total internal angle of a quadrangle',
   htmlDescription: 'Figure out the total internal angle of a quadrangle or quadrilateral yourself',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover why an isosceles triangles can have two equal sides and angles',
   htmlDescription: 'Figure out why any triangle that has two equal sides also has two equal angles, and why any triangle with two equal angles has two equal sides',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

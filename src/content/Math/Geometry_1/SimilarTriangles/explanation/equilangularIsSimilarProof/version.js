@@ -8,7 +8,7 @@ var version = {
   description: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
   htmlTitle: 'Equilangular Triangles are Similar Proof',
   htmlDescription: 'Proof showing why equiangular triangles are proportional triangles and therefore similar',
-  fullLesson: false,
+  fullContent: false,
   type: 'singlePage',
 };
 

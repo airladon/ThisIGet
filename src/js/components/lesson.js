@@ -11,7 +11,7 @@ import LessonNavigator from './lessonNavigator';
 import LessonTitle from './lessonTitle';
 // import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
-import LessonDescription from '../Lesson/lessonDescription';
+import ContentDescription from '../Lesson/contentDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
 import Rating from './rating';
@@ -37,7 +37,7 @@ type Props = {
   //   topic: string,
   //   title: string,
   //   description: string,
-  //   fullLesson: boolean,
+  //   fullContent: boolean,
   //   type: 'presentation' | 'singlePage' | 'generic',
   // },
   isLoggedIn: boolean;
@@ -57,7 +57,7 @@ type State = {
   },
 };
 
-function getLessonDescription(uid: string) {
+function getContentDescription(uid: string) {
   const lessons = getContentIndex();
   return lessons[uid];
 }
@@ -73,7 +73,7 @@ export default class LessonComponent extends React.Component
   centerLessonFlag: boolean;
   lessonNavigator: ?LessonNavigator;
   showNavigator: boolean;
-  lessonDescription: null | LessonDescription;
+  contentDescription: null | ContentDescription;
   versionDetails: Object;
   topic: string;
   firstPage: number;
@@ -93,7 +93,7 @@ export default class LessonComponent extends React.Component
     this.versionUID = path.slice(-1)[0];
     this.topic = path.slice(-2, -1)[0];
     /* eslint-enable */
-    this.lessonDescription = getLessonDescription(this.lessonUID);
+    this.contentDescription = getContentDescription(this.lessonUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -104,17 +104,17 @@ export default class LessonComponent extends React.Component
     this.key = 0;
     this.showNavigator = false;
     this.getRating(this.topic);
-    if (this.lessonDescription != null) {
-      this.lessonDescription.getRatings(this.gotRatings.bind(this));
+    if (this.contentDescription != null) {
+      this.contentDescription.getRatings(this.gotRatings.bind(this));
     }
   }
 
   fillRatings() {
-    const { lessonDescription } = this;
-    if (lessonDescription != null) {
+    const { contentDescription } = this;
+    if (contentDescription != null) {
       const ratings = {};
-      Object.keys(lessonDescription.topics).forEach((topicName) => {
-        const topic = lessonDescription.topics[topicName];
+      Object.keys(contentDescription.topics).forEach((topicName) => {
+        const topic = contentDescription.topics[topicName];
         if (!(topicName in ratings)) {
           ratings[topicName] = {};
         }
@@ -211,10 +211,10 @@ export default class LessonComponent extends React.Component
   }
 
   calcTitleHeight() {
-    const { lessonDescription } = this;
+    const { contentDescription } = this;
     let count = 0;
-    if (lessonDescription != null) {
-      // count = lessonDescription.paths.length;
+    if (contentDescription != null) {
+      // count = contentDescription.paths.length;
       count = 9;
     }
     if (count === 1) {
@@ -230,19 +230,19 @@ export default class LessonComponent extends React.Component
     const topics = {};
     // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
 
-    const { lessonDescription } = this;
-    if (lessonDescription != null) {
+    const { contentDescription } = this;
+    if (contentDescription != null) {
       Object.keys(this.state.ratings).forEach((topicName) => {
         const topic = this.state.ratings[topicName];
         Object.keys(topic).forEach((versionUID) => {
-          const version = lessonDescription.topics[topicName][versionUID];
+          const version = contentDescription.topics[topicName][versionUID];
           const label = version.title;
-          let link = `${lessonDescription.path}/${lessonDescription.uid}/${topicName}/${versionUID}`;
+          let link = `${contentDescription.path}/${contentDescription.uid}/${topicName}/${versionUID}`;
           if (topicName === 'dev') {
-            link = `/dev${lessonDescription.path}/${lessonDescription.uid}/quickReference/${versionUID}`;
+            link = `/dev${contentDescription.path}/${contentDescription.uid}/quickReference/${versionUID}`;
           }
           // const { description } = version;
-          const { fullLesson } = version;
+          const { fullContent } = version;
           const { type } = version;
           const rating = this.state.ratings[topicName][versionUID];
           let { userRating } = rating;
@@ -266,7 +266,7 @@ export default class LessonComponent extends React.Component
             numHighRatings: rating.numHighRatings,
             description: '',
             active,
-            fullLesson,
+            fullContent,
             type,
           };
         });
@@ -291,9 +291,9 @@ export default class LessonComponent extends React.Component
       if (topics[name] != null && name !== 'quickReference') {
         const topic = topics[name];
         // $FlowFixMe - onPath is there and boolean
-        const fullLessonCount = Object.keys(topic).filter(ver => topic[ver].fullLesson).length;
+        const fullContentCount = Object.keys(topic).filter(ver => topic[ver].fullContent).length;
         // $FlowFixMe - onPath is there and boolean
-        const partialLessonCount = Object.keys(topic).filter(ver => !topic[ver].fullLesson).length;
+        const partialLessonCount = Object.keys(topic).filter(ver => !topic[ver].fullContent).length;
         let selected = false;
         if (this.topic === name) {
           selected = true;
@@ -315,8 +315,8 @@ export default class LessonComponent extends React.Component
         vUIDs = vUIDs.sort((aKey, bKey) => {
           const a = topic[aKey];
           const b = topic[bKey];
-          if (a.fullLesson === true && b.fullLesson === false) { return -1; }
-          if (a.fullLesson === false && b.fullLesson === true) { return 1; }
+          if (a.fullContent === true && b.fullContent === false) { return -1; }
+          if (a.fullContent === false && b.fullContent === true) { return 1; }
           return 0;
         });
         const listItems = [];
@@ -330,7 +330,7 @@ export default class LessonComponent extends React.Component
         if (partialLessonCount > 0
           && (name === 'explanation' || name === 'discover' || name === 'summary')
         ) {
-          listItems.splice(fullLessonCount, 0, {
+          listItems.splice(fullContentCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
                 {'Portion of Topic'}

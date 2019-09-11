@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Interactive introduction to parallel lines',
   htmlDescription: 'See what parallel lines are, and when lines are parallel',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

@@ -4,7 +4,7 @@ const pathTools = require('./pathTools.js');
 
 function createContentIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllContent(lessonsPath);
-  // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
+  // let outStr = `import ContentDescription from '../../js/Lesson/contentDescription';
   let outStr = `export default function contentIndex() {
   return {`;
   lessons.forEach((lessonPath) => {
@@ -36,7 +36,7 @@ function createContentIndex(buildMode, lessonsPath) {
       }
     }
     if (title !== '') {
-      // outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
+      // outStr = `${outStr}\n    ${uid}: new ContentDescription({`;
       outStr = `${outStr}\n    ${uid}: {`;
       outStr = `${outStr}\n      title: '${title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;
@@ -64,7 +64,7 @@ function createContentIndex(buildMode, lessonsPath) {
             let versionDescription = '';
             let versionHtmlTitle = '';
             let versionHtmlDescription = '';
-            let fullLesson = false;
+            let fullContent = false;
             let type = 'generic';
             // let references = [];
             const versionPathAbsolute
@@ -91,8 +91,8 @@ function createContentIndex(buildMode, lessonsPath) {
               if (version.htmlDescription != null) {
                 versionHtmlDescription = version.htmlDescription;
               }
-              if (version.fullLesson != null) {
-                ({ fullLesson } = version);
+              if (version.fullContent != null) {
+                ({ fullContent } = version);
               }
               if (version.type != null) {
                 ({ type } = version);
@@ -115,7 +115,7 @@ function createContentIndex(buildMode, lessonsPath) {
               outStr = `${outStr}\n            description: '${versionDescription.replace(/'/, '\\\'')}',`;
               outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle.replace(/'/, '\\\'')}',`;
               outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription.replace(/'/, '\\\'')}',`;
-              outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
+              outStr = `${outStr}\n            fullContent: ${fullContent.toString()},`;
             }
             outStr = `${outStr}\n          },`;
           });
@@ -129,7 +129,7 @@ function createContentIndex(buildMode, lessonsPath) {
             outStr = `${outStr}\n            type: 'presentation',`;
             outStr = `${outStr}\n            title: '${versionUid}',`;
             outStr = `${outStr}\n            description: '',`;
-            outStr = `${outStr}\n            fullLesson: false,`;
+            outStr = `${outStr}\n            fullContent: false,`;
             outStr = `${outStr}\n          },`;
           });
           outStr = `${outStr}\n        },`;

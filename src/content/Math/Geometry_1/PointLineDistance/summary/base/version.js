@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of point line distance property',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

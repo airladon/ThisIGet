@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Determine if two triangles are congruent',
   htmlDescription: 'Given three properties of two triangles, can you determine if they are congruent?',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

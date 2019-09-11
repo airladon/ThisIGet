@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to the distance between parallel lines',
   htmlDescription: 'Investigate the property of distance between parallel lines',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

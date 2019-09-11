@@ -8,7 +8,7 @@ var version = {
   description: 'Motivation to studying shapes.',
   htmlTitle: 'Why Study Shapes?',
   htmlDescription: 'Introduction to shapes, naming, history and why we should study them',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

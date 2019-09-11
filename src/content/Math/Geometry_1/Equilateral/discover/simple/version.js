@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover why an equilateral trianglehas equal angles',
   htmlDescription: 'Figure out why any equilateral triangle also have three equal angles',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

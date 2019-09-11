@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Circle area examples',
   htmlDescription: 'Examples of calculations involving circle area',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

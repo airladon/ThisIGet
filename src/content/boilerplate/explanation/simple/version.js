@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: '',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

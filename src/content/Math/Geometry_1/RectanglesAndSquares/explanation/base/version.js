@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to rectangles and squares and derivation of their properties',
   htmlDescription: 'Proof showing why a rectangles opposite sides are equal and parallel',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

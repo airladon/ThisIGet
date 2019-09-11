@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover the properties of a triangle split with a parallel line',
   htmlDescription: 'Figure out why a triangle split with a parallel line will create a proportional triangle',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of what radians are and their relationship to radius and arc length',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

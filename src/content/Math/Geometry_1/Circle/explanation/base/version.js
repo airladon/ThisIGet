@@ -8,7 +8,7 @@ var version = {
   description: 'Presentation form - interactive.',
   htmlTitle: 'Introduction to circles, their history and properties',
   htmlDescription: 'Introduction to circle, diameter, radius, circumference, center point. Relationships between radius, diameter and circumference.',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

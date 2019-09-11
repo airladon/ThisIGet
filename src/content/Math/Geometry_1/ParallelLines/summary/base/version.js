@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to parallel lines summary',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

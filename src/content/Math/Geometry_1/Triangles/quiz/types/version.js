@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Create a triangle of given type',
   htmlDescription: 'Create an acute triangle, right angle triangle, obtuse triangle, equilateral triangle, isosceles triangle or scalene triangle',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

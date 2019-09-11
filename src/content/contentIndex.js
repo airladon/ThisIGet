@@ -1,10 +1,10 @@
 import index from './contentIndexObj';
-import LessonDescription from '../js/Lesson/lessonDescription';
+import ContentDescription from '../js/Lesson/contentDescription';
 
 export default function getContentIndex() {
   const li = index();
   Object.keys(li).forEach((lessonUid) => {
-    li[lessonUid] = new LessonDescription(li[lessonUid]);
+    li[lessonUid] = new ContentDescription(li[lessonUid]);
   });
   return li;
 }

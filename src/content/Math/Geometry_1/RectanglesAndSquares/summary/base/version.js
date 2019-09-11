@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of rectangle and square properties',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

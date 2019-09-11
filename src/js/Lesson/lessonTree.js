@@ -1,12 +1,12 @@
 // @flow
 // import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
-import type { TypeLessonDescription } from './lessonDescription';
+import type { TypeContentDescription } from './contentDescription';
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list
 
 function splitIndexIntoLearningPaths(
-  contentIndex: { [uid: string]: TypeLessonDescription },
+  contentIndex: { [uid: string]: TypeContentDescription },
   pathDepth: number = 3,
 ) {
   const learningPaths = {};

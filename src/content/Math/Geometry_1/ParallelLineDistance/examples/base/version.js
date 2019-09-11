@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Parallel line distance examples',
   htmlDescription: 'Examples of problems where know the properties of parallel line distance is useful',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

@@ -23,7 +23,7 @@ function renderLesson(
   //   topic: string,
   //   title?: string,
   //   description?: string,
-  //   fullLesson?: boolean,
+  //   fullContent?: boolean,
   //   type: 'presentation' | 'singlePage' | 'generic',
   //   references?: Array<string>,
   // },

@@ -163,7 +163,7 @@ function updateDetailsAndVersions() {
         outStr = `${outStr}\n  description: '${version.description.replace(/'/, '\\\'') || ''}',`;
         outStr = `${outStr}\n  htmlTitle: '${version.htmlTitle.replace(/'/, '\\\'') || ''}',`;
         outStr = `${outStr}\n  htmlDescription: '${version.htmlDescription.replace(/'/, '\\\'') || ''}',`;
-        outStr = `${outStr}\n  fullLesson: ${version.fullLesson || 'false'},`;
+        outStr = `${outStr}\n  fullContent: ${version.fullContent || 'false'},`;
         outStr = `${outStr}\n  type: '${version.type || 'generic'}',`;
       }
       outStr = `${outStr}\n};`;

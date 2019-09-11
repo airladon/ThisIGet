@@ -8,7 +8,7 @@ var version = {
   description: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
   htmlTitle: 'Triangles with equal angles are similar proof',
   htmlDescription: 'Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar',
-  fullLesson: false,
+  fullContent: false,
   type: 'singlePage',
 };
 

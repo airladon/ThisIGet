@@ -8,7 +8,7 @@ var version = {
   description: 'Calculate properties of a circle from other properties using radians',
   htmlTitle: 'Calculate circle properties using radians',
   htmlDescription: 'Calculate properties of a circle from other properties using radians',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

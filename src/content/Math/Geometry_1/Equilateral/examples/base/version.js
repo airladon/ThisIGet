@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Examples of using equilateral triangles',
   htmlDescription: 'Examples showing how how to use the properties of an equilateral triangle to solve different problems',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

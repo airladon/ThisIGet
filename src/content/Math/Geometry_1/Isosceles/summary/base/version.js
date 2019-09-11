@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of Isosceles triangle and its properties',
   htmlDescription: 'Isosceles triangle, side and angle equality, split line properties',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

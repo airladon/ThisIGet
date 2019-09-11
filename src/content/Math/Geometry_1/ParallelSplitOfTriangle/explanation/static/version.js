@@ -8,7 +8,7 @@ var version = {
   description: 'Proof showing the resulting triangle has proportional sides',
   htmlTitle: 'Similar Triangles Proof',
   htmlDescription: 'Proofs showing why equiangular triangles, and proportional triangles are similar',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

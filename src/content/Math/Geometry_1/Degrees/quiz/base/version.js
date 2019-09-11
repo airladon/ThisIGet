@@ -8,7 +8,7 @@ var version = {
   description: 'Answer general questions about measuring angle and degrees',
   htmlTitle: 'Quiz - Measuring angles and degrees',
   htmlDescription: 'Answer general questions about measuring angle and degrees',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

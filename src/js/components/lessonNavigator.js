@@ -3,7 +3,7 @@ import * as React from 'react';
 import Fig from 'figureone';
 // import '../../css/style.scss';
 import LessonTile from './lessonTile';
-import LessonDescription from '../Lesson/lessonDescription';
+import ContentDescription from '../Lesson/contentDescription';
 import makeLessonTree from '../Lesson/lessonTree';
 // import LI from '../../content/contentIndex';
 
@@ -18,11 +18,11 @@ type Props = {
 export default class LessonNavigator extends React.Component
                                     <Props> {
   selected: string;
-  contentIndex: Array<Array<LessonDescription>>;
+  contentIndex: Array<Array<ContentDescription>>;
   lessonTrees: Object;
   key: number;
-  selectedLesson: LessonDescription;
-  lessonArray: Array<LessonDescription>;
+  selectedLesson: ContentDescription;
+  lessonArray: Array<ContentDescription>;
   asTitle: boolean
   lessonTilesBounds: Rect;
   tileWidth: number;
@@ -117,7 +117,7 @@ export default class LessonNavigator extends React.Component
     this.getLessonTilesBounds();
   }
 
-  createLessonJsx(lesson: LessonDescription) {
+  createLessonJsx(lesson: ContentDescription) {
     this.key += 1;
     let state = '';
     const { x, y } = lesson.location;

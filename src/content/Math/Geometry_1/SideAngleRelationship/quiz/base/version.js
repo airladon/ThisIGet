@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Find the largest or smallest side or angle',
   htmlDescription: 'Dynamic quiz where no two questions are the same',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

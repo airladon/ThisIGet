@@ -4,7 +4,7 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 const { Point } = Fig;
 
-export type TypeLessonDescription = {
+export type TypeContentDescription = {
   title: string;
   path: string;
   imgLink: string;
@@ -38,7 +38,7 @@ export type TypeLessonDescription = {
   getRatings: (Function) => {};
 };
 
-export default class LessonDescription {
+export default class ContentDescription {
   title: string;
   path: string;
   imgLink: string;
@@ -53,7 +53,7 @@ export default class LessonDescription {
       title: string,
       description: string,
       uid: string,
-      fullLesson: boolean,
+      fullContent: boolean,
       type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
       aveRating: number;
       numRatings: number;
@@ -61,28 +61,7 @@ export default class LessonDescription {
     }>
   };
 
-  // versions: {[vuid: string]: {
-  //   title: string;
-  //   description: string;
-  //   onPath: boolean;
-  //   topics: Array<string>;
-  //   qr: Array<string>;
-  //   path: string,
-  // }};
-
   topics: Object;
-  // topics: {
-  //   [versionName: string]: {
-  //     title: string;
-  //     description: string;
-  //     onPath: boolean;
-  //     qr: Array<string>;
-  //     path: string;
-  //     aveRating: number;
-  //     numRatings: number;
-  //     numHighRatings: number;
-  //   };
-  // };
 
   numVersions: number;
   callbackCount: number;
@@ -91,7 +70,7 @@ export default class LessonDescription {
   qr: Array<string>;
 
   constructor(
-    lesson: {
+    content: {
       title: string,
       path: string,
       uid: string,
@@ -100,7 +79,7 @@ export default class LessonDescription {
           title: string,
           description: string,
           uid: string,
-          fullLesson: boolean,
+          fullContent: boolean,
           type: 'presentation' | 'singlePage' | 'video' | 'audio',
         }>
       },
@@ -109,63 +88,20 @@ export default class LessonDescription {
     },
     id: string = '',
   ) {
-    this.title = lesson.title;
-    this.path = lesson.path;
-    this.uid = lesson.uid;
-    this.dependencies = lesson.dependencies;
+    this.title = content.title;
+    this.path = content.path;
+    this.uid = content.uid;
+    this.dependencies = content.dependencies;
     this.location = new Point(0, 0);
     this.id = id;
     this.imgLink = `${this.path}/${this.uid}/tile.svg`;
     this.imgLinkSelected = `${this.path}/${this.uid}/tile_ffffff.svg`;
     this.imgLinkDisabled = `${this.path}/${this.uid}/tile_aaaaaa.svg`;
     if (id === '') {
-      this.id = `id_lesson__navigator_tile_${lesson.uid}`;
+      this.id = `id_content__navigator_tile_${content.uid}`;
     }
-    // this.topics = {};
-    // Object.keys(lesson.topics).forEach((topic) => {
-    //   this.topics[topic] = lesson.topics[topic];
-    // });
-    this.topics = lesson.topics;
-
-    // this.versions = {};       // Deprecate
-    // Object.keys(lesson.versions).forEach((key) => {
-    //   const version = lesson.versions[key];
-    //   const {
-    //     title, description, onPath, topics, qr, path,
-    //   } = version;
-    //   this.versions[key] = {
-    //     title, description, onPath, topics, qr, path,
-    //   };
-    // });
-    this.enabled = lesson.enabled;
-
-    // this.topics = {};
-    // this.numVersions = 0;
-    // this.callbackCount = 0;
-    // Object.keys(lesson.versions).forEach((versionName) => {
-    //   const version = lesson.versions[versionName];
-    //   const {
-    //     title, description, onPath, topics, qr, path,
-    //   } = version;
-    //   topics.forEach((topicName) => {
-    //     const v = {
-    //       title,
-    //       description,
-    //       onPath,
-    //       qr,
-    //       path,
-    //       aveRating: 0,
-    //       numRatings: 0,
-    //       numHighRatings: 0,
-    //     };
-
-    //     if (this.topics[topicName] == null) {   // $FlowFixMe
-    //       this.topics[topicName] = {};
-    //     }
-    //     this.topics[topicName][versionName] = v;
-    //     this.numVersions += 1;
-    //   });
-    // });
+    this.topics = content.topics;
+    this.enabled = content.enabled;
   }
 
   waitThenCallback(callback: Function) {

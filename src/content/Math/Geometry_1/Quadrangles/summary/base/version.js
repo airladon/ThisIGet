@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quadrangles (quadrilaterals) summary',
   htmlDescription: '',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

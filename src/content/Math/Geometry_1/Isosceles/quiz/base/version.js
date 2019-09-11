@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Find the missing side or angle of an isosceles triangle',
   htmlDescription: 'Given a set of sides and angles, find the missing one',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

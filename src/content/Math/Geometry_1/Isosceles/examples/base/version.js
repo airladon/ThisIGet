@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Examples of using isosceles triangles',
   htmlDescription: 'Examples showing how how to use the properties of an isosceles triangle to solve different problems',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

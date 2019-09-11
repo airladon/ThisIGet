@@ -8,7 +8,7 @@ var version = {
   description: 'Derivation using area of four right angle triangles',
   htmlTitle: 'Pythagorean Theorem Derivation',
   htmlDescription: 'Derivation using area of four right angle triangles',
-  fullLesson: false,
+  fullContent: false,
   type: 'singlePage',
 };
 

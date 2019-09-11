@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Area of a triangle',
   htmlDescription: 'Summary of triangle area',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 

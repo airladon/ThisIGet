@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Triangle side angle relationship examples',
   htmlDescription: 'Use the relationships between a triangles side and angle to solve different geometries',
-  fullLesson: true,
+  fullContent: true,
   type: 'singlePage',
 };
 

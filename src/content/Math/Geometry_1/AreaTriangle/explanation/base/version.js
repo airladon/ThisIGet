@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Triangle Area derivation and proof',
   htmlDescription: 'Explanation on why area of a triangle is what it is',
-  fullLesson: true,
+  fullContent: true,
   type: 'presentation',
 };
 
