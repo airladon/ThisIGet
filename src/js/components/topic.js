@@ -46,7 +46,6 @@ export default class TopicComponent extends React.Component
   state: State;
   // diagrams: Object;
   componentUpdateCallback: ?() => void;
-  centerLessonFlag: boolean;
   learningPathNavigator: ?LearningPathNavigator;
   showNavigator: boolean;
   topicDescription: null | TopicDescription;
@@ -362,7 +361,7 @@ export default class TopicComponent extends React.Component
   renderTopic() {
     if (this.version.type === 'presentation') {
       return <PresentationFormatComponent
-        lesson={this.version}
+        version={this.version}
       />;
     }
     if (this.version.type === 'singlePage') {

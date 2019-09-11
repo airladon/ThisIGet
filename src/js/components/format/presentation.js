@@ -12,7 +12,7 @@ import StaticQR from '../staticQR';
 // const { DiagramElementCollection } = Fig;
 
 type Props = {
-  lesson: PresentationFormat;
+  version: PresentationFormat;
 };
 
 type State = {
@@ -33,11 +33,11 @@ type State = {
 
 export default class PresentationFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: PresentationFormat;
+  version: PresentationFormat;
   key: number;
   state: State;
   componentUpdateCallback: ?() => void;
-  centerLessonFlag: boolean;
+  centerContentFlag: boolean;
   topic: string;
   firstPage: number;
   // refreshCallback: ?() => void;
@@ -48,7 +48,7 @@ export default class PresentationFormatComponent extends React.Component
     if (this.firstPage === -1) {
       this.firstPage = 0;
     }
-    this.lesson = props.lesson;
+    this.version = props.version;
     this.state = {
       htmlText: '',
       numPages: 0,
@@ -61,9 +61,9 @@ export default class PresentationFormatComponent extends React.Component
       },
     };
     this.key = 0;
-    this.lesson.refresh = this.refreshText.bind(this);
+    this.version.refresh = this.refreshText.bind(this);
     this.componentUpdateCallback = null;
-    this.centerLessonFlag = false;
+    this.centerContentFlag = false;
     // this.refreshCallback = null;
   }
 
@@ -73,12 +73,12 @@ export default class PresentationFormatComponent extends React.Component
       this.componentUpdateCallback = null;
       callback();
     } else {
-      this.lesson.setOnclicks();
+      this.version.setOnclicks();
     }
     // if (this.refreshCallback != null) {
     //   this.refreshCallback();
     // }
-    this.lesson.content.diagram.updateHTMLElementTie();
+    this.version.content.diagram.updateHTMLElementTie();
   }
 
   refreshText(htmlText: string, page: number, callback: ?() => void = null) {
@@ -92,8 +92,8 @@ export default class PresentationFormatComponent extends React.Component
     }
     const nextButton = document.getElementById('lesson__button-next');
     if (nextButton) {
-      if (this.lesson.currentSectionIndex ===
-        this.lesson.content.sections.length - 1) {
+      if (this.version.currentSectionIndex ===
+        this.version.content.sections.length - 1) {
         nextButton.classList.add('lesson__button-next-disabled');
       } else {
         nextButton.classList.remove('lesson__button-next-disabled');
@@ -101,7 +101,7 @@ export default class PresentationFormatComponent extends React.Component
     }
     const prevButton = document.getElementById('lesson__button-previous');
     if (prevButton) {
-      if (this.lesson.currentSectionIndex === 0) {
+      if (this.version.currentSectionIndex === 0) {
         prevButton.classList.add('lesson__button-prev-disabled');
       } else {
         prevButton.classList.remove('lesson__button-prev-disabled');
@@ -110,11 +110,11 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   goToNext() {
-    this.lesson.nextSection();
+    this.version.nextSection();
   }
 
   goToPrevious() {
-    this.lesson.prevSection();
+    this.version.prevSection();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -173,13 +173,13 @@ export default class PresentationFormatComponent extends React.Component
     this.setCSSVariables('id_lesson__qr__pres_container');
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
-    this.lesson.content.showQR(path, qrid);
+    this.version.content.showQR(path, qrid);
     const element = document.getElementById('id_lesson__qr__pres_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
-    this.lesson.content.qrDiagram.resize();
-    this.lesson.content.qrDiagram.animateNextFrame();
+    this.version.content.qrDiagram.resize();
+    this.version.content.qrDiagram.animateNextFrame();
   }
 
   componentDidMount() {
@@ -196,17 +196,17 @@ export default class PresentationFormatComponent extends React.Component
         }
       },
     };
-    this.lesson.initialize();
-    this.lesson.content.diagram.resize();
+    this.version.initialize();
+    this.version.content.diagram.resize();
     this.setState({
       listOfSections: this.addListOfSections(),
-      numPages: this.lesson.content.sections.length,
+      numPages: this.version.content.sections.length,
     });
 
-    if (this.firstPage != null && this.firstPage < this.lesson.content.sections.length) {
-      this.lesson.goToSection(this.firstPage);
+    if (this.firstPage != null && this.firstPage < this.version.content.sections.length) {
+      this.version.goToSection(this.firstPage);
     } else {
-      this.lesson.goToSection(0);
+      this.version.goToSection(0);
     }
 
     const nextButton = document.getElementById('lesson__button-next');
@@ -220,16 +220,16 @@ export default class PresentationFormatComponent extends React.Component
 
     const infoButton = document.getElementById('id_lesson__info_button');
     if (infoButton instanceof HTMLElement) {
-      infoButton.onclick = this.lesson.content.toggleInfo.bind(this.lesson.content);
+      infoButton.onclick = this.version.content.toggleInfo.bind(this.version.content);
     }
 
-    // window.addEventListener('resize', this.centerLesson.bind(this));
+    // window.addEventListener('resize', this.centerContent.bind(this));
     // window.addEventListener('orientationchange', this.orientationChange.bind(this));
 
     // uncomment this if the lesson should be centered on going to it
     // this.orientationChange();
-    // this.centerLessonFlag = !this.centerLessonFlag;
-    // this.centerLesson();
+    // this.centerContentFlag = !this.centerContentFlag;
+    // this.centerContent();
   }
 
   orientationChange() {
@@ -237,26 +237,26 @@ export default class PresentationFormatComponent extends React.Component
     if (doc) {
       // if currently in portrait, then want to center.
       if (doc.clientHeight > doc.clientWidth) {
-        this.centerLessonFlag = true;
+        this.centerContentFlag = true;
       }
     }
   }
 
-  centerLesson() {
+  centerContent() {
     // console.log("Asdf1");
-    if (this.centerLessonFlag) {
-      const lesson = document.getElementById('lesson__container_name');
-      if (lesson) {
-        const y = this.centerLessonPosition(lesson);
+    if (this.centerContentFlag) {
+      const contentContainer = document.getElementById('lesson__container_name');
+      if (contentContainer) {
+        const y = this.centerContentPosition(contentContainer);
         // setTimeout(function center() { window.scroll(0, a); }, 500);
         setTimeout(() => window.scroll(0, y), 500);
       }
     }
-    this.centerLessonFlag = false;
+    this.centerContentFlag = false;
   }
 
   // eslint-disable-next-line class-methods-use-this
-  centerLessonPosition(element: HTMLElement) {
+  centerContentPosition(element: HTMLElement) {
     const doc = document.documentElement;
     if (element != null && doc != null) {
       const r = element.getBoundingClientRect();
@@ -272,7 +272,7 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   componentWillUnmount() {
-    window.removeEventListener('orientationchange', this.centerLesson.bind(this));
+    window.removeEventListener('orientationchange', this.centerContent.bind(this));
   }
 
   renderContent(content: string) {
@@ -315,7 +315,7 @@ export default class PresentationFormatComponent extends React.Component
         <div
           id="id_lesson__interactive_element_button"
           className="lesson__interactive_element_button lesson__interactive_element_button__hide"
-          onClick={this.lesson.highlightNextInteractiveItem.bind(this.lesson)}
+          onClick={this.version.highlightNextInteractiveItem.bind(this.version)}
           />
       </div>;
   }
@@ -346,7 +346,7 @@ export default class PresentationFormatComponent extends React.Component
   belongsTo(index: number) {
     let i = index;
     while (i > 0) {
-      const { title } = this.lesson.content.sections[i];
+      const { title } = this.version.content.sections[i];
       if (title) {
         break;
       }
@@ -356,7 +356,7 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   clickList(index: number) {
-    this.lesson.goToSection(index);
+    this.version.goToSection(index);
   }
 
   updateGoToButtonListHighlight() {
@@ -365,8 +365,8 @@ export default class PresentationFormatComponent extends React.Component
       const activeItems = button.getElementsByClassName('dropdown_button_list_item_active');
       [].forEach.call(activeItems, item => item.classList.remove('dropdown_button_list_item_active'));
       const listItems = document.getElementById('id__lesson__goto_button_list');
-      const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
-      const titleIndeces = this.lesson.content.sections.map((section, index) => {
+      const activeSection = this.belongsTo(this.version.currentSectionIndex);
+      const titleIndeces = this.version.content.sections.map((section, index) => {
         if (section.title) {
           return index;
         }
@@ -385,8 +385,8 @@ export default class PresentationFormatComponent extends React.Component
 
   addListOfSections() {
     const output = [];
-    const activeSection = this.belongsTo(this.lesson.currentSectionIndex);
-    this.lesson.content.sections.forEach((section, index) => {
+    const activeSection = this.belongsTo(this.version.currentSectionIndex);
+    this.version.content.sections.forEach((section, index) => {
       if (section.title) {
         let isActive = false;
         if (index === activeSection) {
@@ -407,17 +407,17 @@ export default class PresentationFormatComponent extends React.Component
   render() {
     return <div>
       <main>
-      <div className="lesson__widescreen_backdrop" id={this.lesson.content.htmlId}>
+      <div className="lesson__widescreen_backdrop" id={this.version.content.htmlId}>
         <div id="lesson__container_name" className="lesson__container">
               {this.addPrevButton()}
-              <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram">
+              <div id={this.version.content.diagramHtmlId} className="diagram__container lesson__diagram">
                 <canvas id="id_diagram__gl__low" className='diagram__gl'>
                 </canvas>
                 <canvas id="id_diagram__text__low" className='diagram__text'>
                 </canvas>
                 <div id="id_diagram__html" className='diagram__html'>
                   {this.renderContent(this.state.htmlText)}
-                  <div className="diagram__text_measure" id={`${this.lesson.content.diagramHtmlId}_measure`}>
+                  <div className="diagram__text_measure" id={`${this.version.content.diagramHtmlId}_measure`}>
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
@@ -427,7 +427,7 @@ export default class PresentationFormatComponent extends React.Component
                 <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
                   <PresentationQR
                     id="id_lesson__qr__content_pres__overlay"
-                    onClose={this.lesson.content.prepareToHideQR.bind(this.lesson.content)}
+                    onClose={this.version.content.prepareToHideQR.bind(this.version.content)}
                   />
                 </div>
               </div>
