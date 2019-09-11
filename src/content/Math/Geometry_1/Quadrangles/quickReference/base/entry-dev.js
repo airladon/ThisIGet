@@ -6,7 +6,6 @@ import Content from './content';
 import '../../../../../../css/presentationFormat.scss';
 import './style.scss';
 
-const lesson = new PresentationFormat(new Content());
-
-renderTopic(lesson);
+const version = new PresentationFormat(new Content());
+renderTopic(version);
 

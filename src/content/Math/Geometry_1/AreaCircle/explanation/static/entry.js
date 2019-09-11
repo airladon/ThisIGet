@@ -7,5 +7,5 @@ import '../../../../../../css/simpleLesson.scss';
 import './style.scss';
 
 
-const lesson = new SimpleFormat(new Content());
-renderTopic(lesson);
+const version = new SimpleFormat(new Content());
+renderTopic(version);
