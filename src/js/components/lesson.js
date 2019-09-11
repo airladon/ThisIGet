@@ -18,7 +18,7 @@ import Rating from './rating';
 import { getCookie, login } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './simpleLesson';
-import SinglePageFormatComponent from './singlePageLesson';
+import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 
 type Props = {

@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SimpleFormat from '../Lesson/SimpleFormat';
+import SimpleFormat from '../../Lesson/SimpleFormat';
 // import '../../css/singlePageLesson.scss';
-import StaticQR from './staticQR';
-import PresentationQR from './presentationQR';
+import StaticQR from '../staticQR';
+import PresentationQR from '../presentationQR';
 
 type Props = {
   lesson: SimpleFormat;
