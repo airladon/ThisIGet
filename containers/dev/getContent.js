@@ -20,19 +20,19 @@ function entryPoints(buildMode) {
     topicIndex: './src/content/topicIndex.js',
   };
 
-  const lessons = pathTools.getAllPaths(
+  const topics = pathTools.getAllPaths(
     './src/content',
     ['entry.js', 'quickReference.js'],
     ['entry-dev.js'],
     buildMode,
   );
-  lessons.forEach((lesson) => {
-    const p = lesson.path.replace(/src\/content\//, '');
-    const name = lesson.name.slice(0, -3);
+  topics.forEach((topic) => {
+    const p = topic.path.replace(/src\/content\//, '');
+    const name = topic.name.slice(0, -3);
     if (name.slice(0, 5) === 'entry') {
-      points[`content/${p}/content${name.slice(5)}`] = `./${lesson.path}/${lesson.name}`;
+      points[`content/${p}/content${name.slice(5)}`] = `./${topic.path}/${topic.name}`;
     } else {
-      points[`content/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
+      points[`content/${p}/${name}`] = `./${topic.path}/${topic.name}`;
     }
   });
   return points;
@@ -43,13 +43,13 @@ function escape(text) {
 }
 
 // This method goes through all the details and versions files and updates
-// them with current lesson, topic, version
+// them with current topic, approach, version
 function updateDetailsAndVersions() {
   // eslint-disable-next-line no-console
   console.log('Updating details and versions...');
-  const lessons = pathTools.getAllContent('./src/content');
-  lessons.forEach((lessonPath) => {
-    const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
+  const topics = pathTools.getAllTopics('./src/content');
+  topics.forEach((topicPath) => {
+    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
@@ -71,8 +71,8 @@ function updateDetailsAndVersions() {
       }
       outStr = `${outStr}\n  ],`;
       outStr = `${outStr}\n  enabled: ${details.enabled || 'false'},`;
-      outStr = `${outStr}\n  path: '${lessonPath.split('/').slice(2, -1).join('/')}',`;
-      outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
+      outStr = `${outStr}\n  path: '${topicPath.split('/').slice(2, -1).join('/')}',`;
+      outStr = `${outStr}\n  uid: '${topicPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
       outStr = `${outStr}\nmodule.exports = topicDetails;`;
@@ -181,5 +181,5 @@ function updateDetailsAndVersions() {
 }
 
 module.exports = {
-  entryPoints, updateDetailsAndVersions, // makeLessonIndex, getAllContent, updateDetailsAndVersions,
+  entryPoints, updateDetailsAndVersions,
 };

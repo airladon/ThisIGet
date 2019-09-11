@@ -2,17 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
 
-function createContentIndex(buildMode, lessonsPath) {
-  const lessons = pathTools.getAllContent(lessonsPath);
+function createTopicIndex(buildMode, topicsPath) {
+  const topics = pathTools.getAllTopics(topicsPath);
   // let outStr = `import TopicDescription from '../../js/Lesson/topicDescription';
   let outStr = `export default function topicIndex() {
   return {`;
-  lessons.forEach((lessonPath) => {
-    const splitLessonPath = lessonPath.split('/');
+  topics.forEach((topicPath) => {
+    const splitLessonPath = topicPath.split('/');
     const parentPath = splitLessonPath.slice(1, -1).join('/');
     const uid = splitLessonPath.slice(-1)[0];
 
-    const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
+    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
@@ -42,7 +42,7 @@ function createContentIndex(buildMode, lessonsPath) {
       outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
       outStr = `${outStr}\n      approaches: {`;
-      const versions = pathTools.getAllVersions(lessonPath);
+      const versions = pathTools.getAllVersions(topicPath);
       const contentTypes = {};
       versions.forEach((versionPath) => {
         const splitPath = versionPath.split('/');
@@ -150,10 +150,9 @@ function createContentIndex(buildMode, lessonsPath) {
     }
   });
   outStr = `${outStr}\n  };`;
-  // outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   outStr = `${outStr}\n}\n`;
   if (outStr !== '') {
-    fs.writeFile(`${lessonsPath}/topicIndexObj.js`, outStr, (err) => {
+    fs.writeFile(`${topicsPath}/topicIndexObj.js`, outStr, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(err);
@@ -162,4 +161,4 @@ function createContentIndex(buildMode, lessonsPath) {
   }
 }
 
-module.exports = createContentIndex;
+module.exports = createTopicIndex;

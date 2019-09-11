@@ -7,7 +7,7 @@ const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-u
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 const entryPoints = require('./getContent.js');
-const createContentIndex = require('./createIndex.js');
+const createTopicIndex = require('./createIndex.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
 
@@ -69,7 +69,7 @@ module.exports = (env) => {
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
-  createContentIndex(e.name, './src/content');
+  createTopicIndex(e.name, './src/content');
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
