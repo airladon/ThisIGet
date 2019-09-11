@@ -1,12 +1,12 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import PresentationFormat from '../Lesson/PresentationFormat';
-import Button from './button';
-import DropDownButton from './dropDownButton';
-import { getCookie, createCookie } from '../tools/misc';
-import PresentationQR from './presentationQR';
-import StaticQR from './staticQR';
+import PresentationFormat from '../../Lesson/PresentationFormat';
+import Button from '../button';
+import DropDownButton from '../dropDownButton';
+import { getCookie, createCookie } from '../../tools/misc';
+import PresentationQR from '../presentationQR';
+import StaticQR from '../staticQR';
 // import '../../css/presentationFormat.scss';
 
 // const { DiagramElementCollection } = Fig;

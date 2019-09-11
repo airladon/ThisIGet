@@ -2,8 +2,8 @@
 
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-import Rating from './rating';
-import { login } from '../tools/misc';
+import Rating from '../rating';
+import { login } from '../../tools/misc';
 // import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
 // import img from '../../tile.png';

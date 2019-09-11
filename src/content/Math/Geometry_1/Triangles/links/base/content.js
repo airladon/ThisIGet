@@ -5,7 +5,7 @@ import SimpleFormatContent from '../../../../../../js/Lesson/SimpleFormatContent
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-// import LinksTable from '../../../../../../js/components/linksTable';
+
 import version from './version';
 
 class Content extends SimpleFormatContent {

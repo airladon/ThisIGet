@@ -16,10 +16,10 @@ import TopicDescription from '../Lesson/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie, login } from '../tools/misc';
-import PresentationFormatComponent from './presentationFormat';
+import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './simpleLesson';
 import SinglePageFormatComponent from './singlePageLesson';
-import LinksFormatComponent from './linksFormat';
+import LinksFormatComponent from './format/links';
 
 type Props = {
   lesson: Object;
