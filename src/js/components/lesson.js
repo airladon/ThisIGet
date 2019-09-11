@@ -11,7 +11,7 @@ import LessonNavigator from './lessonNavigator';
 import LessonTitle from './lessonTitle';
 // import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
-import ContentDescription from '../Lesson/contentDescription';
+import TopicDescription from '../Lesson/topicDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
 import Rating from './rating';
@@ -57,7 +57,7 @@ type State = {
   },
 };
 
-function getContentDescription(uid: string) {
+function getTopicDescription(uid: string) {
   const lessons = getContentIndex();
   return lessons[uid];
 }
@@ -73,7 +73,7 @@ export default class LessonComponent extends React.Component
   centerLessonFlag: boolean;
   lessonNavigator: ?LessonNavigator;
   showNavigator: boolean;
-  contentDescription: null | ContentDescription;
+  topicDescription: null | TopicDescription;
   versionDetails: Object;
   topic: string;
   firstPage: number;
@@ -93,7 +93,7 @@ export default class LessonComponent extends React.Component
     this.versionUID = path.slice(-1)[0];
     this.topic = path.slice(-2, -1)[0];
     /* eslint-enable */
-    this.contentDescription = getContentDescription(this.lessonUID);
+    this.topicDescription = getTopicDescription(this.lessonUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -104,17 +104,17 @@ export default class LessonComponent extends React.Component
     this.key = 0;
     this.showNavigator = false;
     this.getRating(this.topic);
-    if (this.contentDescription != null) {
-      this.contentDescription.getRatings(this.gotRatings.bind(this));
+    if (this.topicDescription != null) {
+      this.topicDescription.getRatings(this.gotRatings.bind(this));
     }
   }
 
   fillRatings() {
-    const { contentDescription } = this;
-    if (contentDescription != null) {
+    const { topicDescription } = this;
+    if (topicDescription != null) {
       const ratings = {};
-      Object.keys(contentDescription.topics).forEach((topicName) => {
-        const topic = contentDescription.topics[topicName];
+      Object.keys(topicDescription.topics).forEach((topicName) => {
+        const topic = topicDescription.topics[topicName];
         if (!(topicName in ratings)) {
           ratings[topicName] = {};
         }
@@ -211,10 +211,10 @@ export default class LessonComponent extends React.Component
   }
 
   calcTitleHeight() {
-    const { contentDescription } = this;
+    const { topicDescription } = this;
     let count = 0;
-    if (contentDescription != null) {
-      // count = contentDescription.paths.length;
+    if (topicDescription != null) {
+      // count = topicDescription.paths.length;
       count = 9;
     }
     if (count === 1) {
@@ -230,16 +230,16 @@ export default class LessonComponent extends React.Component
     const topics = {};
     // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
 
-    const { contentDescription } = this;
-    if (contentDescription != null) {
+    const { topicDescription } = this;
+    if (topicDescription != null) {
       Object.keys(this.state.ratings).forEach((topicName) => {
         const topic = this.state.ratings[topicName];
         Object.keys(topic).forEach((versionUID) => {
-          const version = contentDescription.topics[topicName][versionUID];
+          const version = topicDescription.topics[topicName][versionUID];
           const label = version.title;
-          let link = `${contentDescription.path}/${contentDescription.uid}/${topicName}/${versionUID}`;
+          let link = `${topicDescription.path}/${topicDescription.uid}/${topicName}/${versionUID}`;
           if (topicName === 'dev') {
-            link = `/dev${contentDescription.path}/${contentDescription.uid}/quickReference/${versionUID}`;
+            link = `/dev${topicDescription.path}/${topicDescription.uid}/quickReference/${versionUID}`;
           }
           // const { description } = version;
           const { fullContent } = version;

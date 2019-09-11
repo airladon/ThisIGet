@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import type { TypeParsablePoint } from 'figureone';
-// import ContentDescription from './contentDescription';
+// import TopicDescription from './topicDescription';
 // import getContentIndex from '../../content/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
 import SimpleLessonContent from './SimpleLessonContent';

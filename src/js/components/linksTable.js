@@ -79,7 +79,7 @@ export default class LinksTable extends React.Component
     this.versionUID = path.slice(-1)[0];
     this.topic = path.slice(-2, -1)[0];
     // /* eslint-enable */
-    // this.contentDescription = getContentDescription(this.lessonUID);
+    // this.topicDescription = getTopicDescription(this.lessonUID);
     this.state = {
       ratings: this.fillRatings(),
     };
@@ -90,8 +90,8 @@ export default class LinksTable extends React.Component
     // this.showNavigator = false;
     // this.getRating(this.topic);
     this.getLinkRatings(this.gotLinkRatings.bind(this));
-    // if (this.contentDescription != null) {
-    //   this.contentDescription.getRatings(this.gotRatings.bind(this));
+    // if (this.topicDescription != null) {
+    //   this.topicDescription.getRatings(this.gotRatings.bind(this));
     // }
   }
 

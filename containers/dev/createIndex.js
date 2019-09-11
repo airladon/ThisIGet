@@ -4,7 +4,7 @@ const pathTools = require('./pathTools.js');
 
 function createContentIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllContent(lessonsPath);
-  // let outStr = `import ContentDescription from '../../js/Lesson/contentDescription';
+  // let outStr = `import TopicDescription from '../../js/Lesson/topicDescription';
   let outStr = `export default function contentIndex() {
   return {`;
   lessons.forEach((lessonPath) => {
@@ -36,7 +36,7 @@ function createContentIndex(buildMode, lessonsPath) {
       }
     }
     if (title !== '') {
-      // outStr = `${outStr}\n    ${uid}: new ContentDescription({`;
+      // outStr = `${outStr}\n    ${uid}: new TopicDescription({`;
       outStr = `${outStr}\n    ${uid}: {`;
       outStr = `${outStr}\n      title: '${title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;

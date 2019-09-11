@@ -3,8 +3,8 @@ import * as React from 'react';
 import Fig from 'figureone';
 // import '../../css/style.scss';
 import LessonTile from './lessonTile';
-import ContentDescription from '../Lesson/contentDescription';
-import makeLessonTree from '../Lesson/lessonTree';
+import TopicDescription from '../Lesson/topicDescription';
+import makeTopicTree from '../Lesson/topicTree';
 // import LI from '../../content/contentIndex';
 
 const { Point, Rect } = Fig;
@@ -18,11 +18,11 @@ type Props = {
 export default class LessonNavigator extends React.Component
                                     <Props> {
   selected: string;
-  contentIndex: Array<Array<ContentDescription>>;
-  lessonTrees: Object;
+  contentIndex: Array<Array<TopicDescription>>;
+  topicTrees: Object;
   key: number;
-  selectedLesson: ContentDescription;
-  lessonArray: Array<ContentDescription>;
+  selectedLesson: TopicDescription;
+  lessonArray: Array<TopicDescription>;
   asTitle: boolean
   lessonTilesBounds: Rect;
   tileWidth: number;
@@ -36,10 +36,10 @@ export default class LessonNavigator extends React.Component
   constructor(props: Props) {
     super(props);
     // console.log(LI)
-    this.lessonTrees = makeLessonTree();
-    this.contentIndex = this.lessonTrees[props.learningPath].tree;
-    this.learningPathPath = this.lessonTrees[props.learningPath].path;
-    this.learningPathName = this.lessonTrees[props.learningPath].name;
+    this.topicTrees = makeTopicTree();
+    this.contentIndex = this.topicTrees[props.learningPath].tree;
+    this.learningPathPath = this.topicTrees[props.learningPath].path;
+    this.learningPathName = this.topicTrees[props.learningPath].name;
     this.getVariables();
     this.layoutLessonTiles();
     this.key = 0;
@@ -117,7 +117,7 @@ export default class LessonNavigator extends React.Component
     this.getLessonTilesBounds();
   }
 
-  createLessonJsx(lesson: ContentDescription) {
+  createLessonJsx(lesson: TopicDescription) {
     this.key += 1;
     let state = '';
     const { x, y } = lesson.location;

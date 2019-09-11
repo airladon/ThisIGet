@@ -4,7 +4,7 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 
 const { Point } = Fig;
 
-export type TypeContentDescription = {
+export type TypeTopicDescription = {
   title: string;
   path: string;
   imgLink: string;
@@ -38,7 +38,7 @@ export type TypeContentDescription = {
   getRatings: (Function) => {};
 };
 
-export default class ContentDescription {
+export default class TopicDescription {
   title: string;
   path: string;
   imgLink: string;
@@ -70,7 +70,7 @@ export default class ContentDescription {
   qr: Array<string>;
 
   constructor(
-    content: {
+    topic: {
       title: string,
       path: string,
       uid: string,
@@ -88,20 +88,20 @@ export default class ContentDescription {
     },
     id: string = '',
   ) {
-    this.title = content.title;
-    this.path = content.path;
-    this.uid = content.uid;
-    this.dependencies = content.dependencies;
+    this.title = topic.title;
+    this.path = topic.path;
+    this.uid = topic.uid;
+    this.dependencies = topic.dependencies;
     this.location = new Point(0, 0);
     this.id = id;
     this.imgLink = `${this.path}/${this.uid}/tile.svg`;
     this.imgLinkSelected = `${this.path}/${this.uid}/tile_ffffff.svg`;
     this.imgLinkDisabled = `${this.path}/${this.uid}/tile_aaaaaa.svg`;
     if (id === '') {
-      this.id = `id_content__navigator_tile_${content.uid}`;
+      this.id = `id_content__navigator_tile_${topic.uid}`;
     }
-    this.topics = content.topics;
-    this.enabled = content.enabled;
+    this.topics = topic.topics;
+    this.enabled = topic.enabled;
   }
 
   waitThenCallback(callback: Function) {

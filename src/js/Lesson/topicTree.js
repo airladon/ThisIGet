@@ -1,50 +1,50 @@
 // @flow
 // import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
-import type { TypeContentDescription } from './contentDescription';
+import type { TypeTopicDescription } from './topicDescription';
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list
 
 function splitIndexIntoLearningPaths(
-  contentIndex: { [uid: string]: TypeContentDescription },
+  contentIndex: { [uid: string]: TypeTopicDescription },
   pathDepth: number = 3,
 ) {
   const learningPaths = {};
   Object.keys(contentIndex).forEach((key) => {
-    const lesson = contentIndex[key];
-    const fullPath = lesson.path.split('/');
+    const content = contentIndex[key];
+    const fullPath = content.path.split('/');
     const name = fullPath[pathDepth];
     const path = fullPath.slice(0, pathDepth + 1).join('/');
     if (!(name in learningPaths)) {
       learningPaths[name] = {
         path,
-        lessons: [],
+        topics: [],
         name: name.replace(/_/, ' '),
       };
     }
-    learningPaths[name].lessons.push(lesson);
+    learningPaths[name].topics.push(content);
   });
   return learningPaths;
 }
 
-export default function makeLessonTree() {
+export default function makeTopicTree() {
   const contentIndex = getContentIndex();
-  const lessonLearningPaths = splitIndexIntoLearningPaths(contentIndex);
-  const lessonTrees = {};
-  Object.keys(lessonLearningPaths).forEach((learningPath) => {
-    const { lessons } = lessonLearningPaths[learningPath];
-    const lessonTree = [];
+  const learningPaths = splitIndexIntoLearningPaths(contentIndex);
+  const topicTrees = {};
+  Object.keys(learningPaths).forEach((learningPath) => {
+    const { topics } = learningPaths[learningPath];
+    const topicTree = [];
     const remainingUIDs = {};
     let existingUIDs = {};
     const allUIDs = [];
-    lessons.forEach((lesson) => {
+    topics.forEach((lesson) => {
       remainingUIDs[lesson.uid] = lesson;
       allUIDs.push(lesson.uid);
     });
     let index = 0;
-    const max = lessons.length;
+    const max = topics.length;
     while (Object.keys(remainingUIDs).length > 0 && index < max) {
-      const lessonTreeNode = [];
+      const topicTreeNode = [];
       const newExisting = {};
       // eslint-disable-next-line no-loop-func
       Object.keys(remainingUIDs).forEach((uid) => {
@@ -57,19 +57,19 @@ export default function makeLessonTree() {
         });
         if (canAddToExisting) {
           newExisting[uid] = uid;
-          lessonTreeNode.push(lesson);
+          topicTreeNode.push(lesson);
           delete remainingUIDs[uid];
         }
       });
       existingUIDs = Object.assign(newExisting, existingUIDs);
-      lessonTree.push(lessonTreeNode);
+      topicTree.push(topicTreeNode);
       index += 1;
     }
-    lessonTrees[learningPath] = {
-      tree: lessonTree,
-      name: lessonLearningPaths[learningPath].name,
-      path: lessonLearningPaths[learningPath].path,
+    topicTrees[learningPath] = {
+      tree: topicTree,
+      name: learningPaths[learningPath].name,
+      path: learningPaths[learningPath].path,
     };
   });
-  return lessonTrees;
+  return topicTrees;
 }
