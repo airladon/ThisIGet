@@ -3,7 +3,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import { LessonContent } from '../../Lesson/LessonContent';
-import ViewTopic from '../../components/viewLesson';
+import ViewTopic from '../../components/viewTopic';
 import withLoginManager from '../../components/view';
 // import '../../../css/style.scss';
 
@@ -34,7 +34,7 @@ function renderTopic(
   if (topicId instanceof HTMLElement) {
     ReactDOM.render(
       <ViewTopicWithLoginState
-        topic={version}
+        version={version}
         // lessonUID={lessonUID}
         // topicName={topicName}
         // versionUID={versionUID}

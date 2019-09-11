@@ -15,7 +15,7 @@ import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 
 type Props = {
-  topic: Object;
+  version: Object;
   isLoggedIn: boolean;
 };
 
@@ -40,7 +40,7 @@ function getTopicDescription(uid: string) {
 
 export default class TopicComponent extends React.Component
                                     <Props, State> {
-  topic: Object;
+  version: Object;
   lessonDetails: Object;
   key: number;
   state: State;
@@ -58,12 +58,8 @@ export default class TopicComponent extends React.Component
 
   constructor(props: Props) {
     super(props);
-    this.topic = props.topic;
+    this.version = props.version;
     const path = window.location.pathname.replace(/\/$/, '').split('/');
-    // const lessonUID = path.slice(-3, -2)[0];
-    // const topic = path.slice(-2, -1)[0];
-    // const versionUID = path.slice(-1)[0];
-    // this.topicDetails = props.topicDetails;
     /* eslint-disable prefer-destructuring */
     this.topicUID = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
@@ -74,9 +70,6 @@ export default class TopicComponent extends React.Component
       userRating: 0,
       ratings: this.fillRatings(),
     };
-    // this.versionDetails = props.versionDetails;
-    // const [topic] = window.location.pathname.split('/').slice(-2, -1);
-    // this.topic = topic;
     this.key = 0;
     this.showNavigator = false;
     this.getRating(this.approachUID);
@@ -114,8 +107,6 @@ export default class TopicComponent extends React.Component
   }
 
   getRating(approachUID: string) {
-    // const lessonUid = this.topicDetails.details.uid;
-    // const versionUid = this.versionDetails.details.uid;
     const link = `/rating/${this.topicUID}/${approachUID}/${this.versionUID}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
@@ -150,7 +141,7 @@ export default class TopicComponent extends React.Component
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
 
-    const link = `/rate/${this.topicUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.topic.content.sections.length}`;
+    const link = `/rate/${this.topicUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.version.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -180,7 +171,7 @@ export default class TopicComponent extends React.Component
       <img src={'/static/'} className="navigator__lesson_tile_image" />
       <div className="lesson__title_tile_containter lesson__title_tile_shadow">
         <div className="lesson__title_tile_title">
-          {this.topic.content.title}
+          {this.version.content.title}
         </div>
       </div>
     </div>;
@@ -369,31 +360,31 @@ export default class TopicComponent extends React.Component
   }
 
   renderTopic() {
-    if (this.topic.type === 'presentation') {
+    if (this.version.type === 'presentation') {
       return <PresentationFormatComponent
-        lesson={this.topic}
+        lesson={this.version}
       />;
     }
-    if (this.topic.type === 'singlePage') {
+    if (this.version.type === 'singlePage') {
       return <SinglePageFormatComponent
-        lesson={this.topic}
+        lesson={this.version}
       />;
     }
-    if (this.topic.type === 'links') {
+    if (this.version.type === 'links') {
       return <LinksFormatComponent
-        lesson={this.topic}
+        lesson={this.version}
         isLoggedIn={this.props.isLoggedIn}
       />;
     }
     return <SimpleFormatComponent
-      lesson={this.topic}
+      lesson={this.version}
     />;
   }
 
   ratingLabel() {
     const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
-      if (this.topic.type === 'links') {
+      if (this.version.type === 'links') {
         return 'Are these links helpful?';
       }
       return `Is this ${approachName} helpful?`;
@@ -418,7 +409,7 @@ export default class TopicComponent extends React.Component
           // imgLink={`${window.location.pathname}/tile.svg`}
           // imgLink={`${this.topic.lessonDetails.imgLink}`}
           key='1'
-          label={this.topic.content.title}
+          label={this.version.content.title}
           />
         <div className="lesson__path_container">
           <div className="lesson__path_mid_tiles">
@@ -436,7 +427,7 @@ export default class TopicComponent extends React.Component
       {this.renderTopic()}
       <div className='lesson__white_spacer'/>
       <LearningPathNavigator
-          selected={this.topic.content.title}
+          selected={this.version.content.title}
           learningPath={'Geometry_1'}
           ref={(learningPathNavigator) => { this.learningPathNavigator = learningPathNavigator; }}
         />
