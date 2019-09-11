@@ -17,7 +17,7 @@ import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie, login } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
-import SimpleFormatComponent from './simpleLesson';
+import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 
@@ -392,7 +392,7 @@ export default class LessonComponent extends React.Component
     return this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
   }
 
-  renderLesson() {
+  renderTopic() {
     if (this.lesson.type === 'presentation') {
       return <PresentationFormatComponent
         lesson={this.lesson}
@@ -457,7 +457,7 @@ export default class LessonComponent extends React.Component
           label={this.ratingLabel()}
         />
       </div>
-      {this.renderLesson()}
+      {this.renderTopic()}
       <div className='lesson__white_spacer'/>
       <LearningPathNavigator
           selected={this.lesson.content.title}

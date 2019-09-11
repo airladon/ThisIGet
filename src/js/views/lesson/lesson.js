@@ -7,7 +7,7 @@ import ViewLesson from '../../components/viewLesson';
 import withLoginManager from '../../components/view';
 // import '../../../css/style.scss';
 
-function renderLesson(
+function renderTopic(
   lesson: Object,
   // lessonUID: string,
   // topicName: string,
@@ -46,4 +46,4 @@ function renderLesson(
   }
 }
 
-export default renderLesson;
+export default renderTopic;

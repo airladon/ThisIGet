@@ -1,9 +1,9 @@
 // @flow
 
 import * as React from 'react';
-import SimpleFormat from '../Lesson/SimpleFormat';
-import StaticQR from './staticQR';
-import PresentationQR from './presentationQR';
+import SimpleFormat from '../../Lesson/SimpleFormat';
+import StaticQR from '../staticQR';
+import PresentationQR from '../presentationQR';
 // import '../../css/simpleLesson.scss';
 
 type Props = {
