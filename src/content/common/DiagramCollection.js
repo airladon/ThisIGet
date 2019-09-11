@@ -61,8 +61,8 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
     list.add('deg', 'degrees');
     list.add('rad', 'radians');
     const selectorClicked = (selectedUnits: 'deg' | 'rad') => {
-      const degSpans = document.getElementsByClassName('lesson__unit_deg');
-      const radSpans = document.getElementsByClassName('lesson__unit_rad');
+      const degSpans = document.getElementsByClassName('figureone__unit_deg');
+      const radSpans = document.getElementsByClassName('figureone__unit_rad');
       if (selectedUnits === 'rad') {
         [].forEach.call(degSpans, degSpan => degSpan.classList.add('lesson__unit_hide'));
         [].forEach.call(radSpans, radSpan => radSpan.classList.remove('lesson__unit_hide'));

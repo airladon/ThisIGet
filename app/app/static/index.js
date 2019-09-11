@@ -26678,24 +26678,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
- // export default function getCSSVariables(
-//   id: string,
-//   varNames: Array<string>,
-//   prefix: string = '',
-// ): Object {
-//   const elem = document.getElementById('lesson__container_name');
-//   const output = {};
-//   if (elem) {
-//     const style = window.getComputedStyle(elem);
-//     if (style) {
-//       varNames.forEach((varName) => {
-//         const fullName = prefix + varName;
-//         output[varName] = parseFloat(style.getPropertyValue(fullName));
-//       });
-//     }
-//   }
-//   return output;
-// }
+
 
 function searchObject(obj, path, text) {
   var results = [];
@@ -27022,7 +27005,7 @@ function itemSelector() {
 }
 
 var unit = function unit(deg, rad) {
-  return "<span class=\"lesson__unit_deg\">".concat(deg, "</span><span class=\"lesson__unit_rad\">").concat(rad, "</span>\n  ");
+  return "<span class=\"figureone__unit_deg\">".concat(deg, "</span><span class=\"figureone__unit_rad\">").concat(rad, "</span>\n  ");
 };
 
 function toHTML() {
@@ -27080,7 +27063,7 @@ function link(linkStr) {
   var colorToUse = null;
   var defaultOptions = {
     color: null,
-    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    id: "figureone__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
     interactive: true,
     classes: '',
     text: null,
@@ -27171,7 +27154,7 @@ function click(actionMethod, bind) {
   var colorToUse = null;
   var defaultOptions = {
     color: null,
-    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    id: "figureone__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
     interactive: true,
     classes: '',
     text: null

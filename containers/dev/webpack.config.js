@@ -326,9 +326,6 @@ module.exports = (env) => {
             test: /content\/topicIndex.js/,
             name: 'topicIndex',
           },
-          // lessonIndex: {
-
-          // }
           commoncss: {
             minSize: 10,
             minChunks: 2,
