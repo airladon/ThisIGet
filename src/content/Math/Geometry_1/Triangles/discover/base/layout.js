@@ -19,7 +19,7 @@ const cssColorNames = [
 ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function lessonLayout() {
+export default function diagramLayout() {
   const layout: Object = baseLayout(cssColorNames);
   const { colors } = layout;
   layout.width = 0.03;

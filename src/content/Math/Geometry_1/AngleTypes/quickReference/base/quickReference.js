@@ -2,7 +2,7 @@
 import React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
@@ -29,7 +29,7 @@ export class QRAcute extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -78,7 +78,7 @@ export class QRRight extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
     // this.hasTouchableElements = true;
     const coll = this._collection;
     const modifiers = {
@@ -118,7 +118,7 @@ export class QRObtuse extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -167,7 +167,7 @@ export class QRStraight extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -220,7 +220,7 @@ export class QRReflex extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -269,7 +269,7 @@ export class QRFull extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,

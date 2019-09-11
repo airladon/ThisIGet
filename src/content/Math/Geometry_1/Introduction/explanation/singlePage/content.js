@@ -6,7 +6,7 @@ import {
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import Collection from './collection';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import part1 from './part1.md';
@@ -22,7 +22,7 @@ const {
   // highlight,
 } = Fig.tools.html;
 
-const layout = lessonLayout();
+const layout = diagramLayout();
 const { colors } = layout;
 
 class Content extends SinglePageFormatContent {

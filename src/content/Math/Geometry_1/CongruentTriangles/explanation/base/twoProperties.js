@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
-import lessonLayout from './twoPropertiesLayout';
+import diagramLayout from './twoPropertiesLayout';
 
 const {
   DiagramElementPrimative,
@@ -45,7 +45,7 @@ export default class CommonCollectionTwoProp extends CommonDiagramCollection {
 
   constructor(
     diagram: CommonLessonDiagram,
-    layout: Object = lessonLayout(),
+    layout: Object = diagramLayout(),
     transform: Transform = new Transform('Common').rotate(0).translate(0, 0),
   ) {
     super(diagram, layout, transform);

@@ -3,7 +3,7 @@ import React from 'react';
 import Fig from 'figureone';
 import StaticQR from '../../../../../../js/components/staticQR';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
@@ -29,7 +29,7 @@ export class QRTriangle extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;
@@ -84,7 +84,7 @@ export class QRLines extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;

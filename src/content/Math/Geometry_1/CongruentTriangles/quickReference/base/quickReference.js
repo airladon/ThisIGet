@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
@@ -25,7 +25,7 @@ export class QRCongruentTriangles extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -75,7 +75,7 @@ export class QRAaa extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -123,7 +123,7 @@ export class QRSas extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -173,7 +173,7 @@ export class QRSsa extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -222,7 +222,7 @@ export class QRAsa extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -273,7 +273,7 @@ export class QRAas extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -324,7 +324,7 @@ export class QRSss extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,

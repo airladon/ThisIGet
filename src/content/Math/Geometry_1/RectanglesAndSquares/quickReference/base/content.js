@@ -1,13 +1,13 @@
 // @flow
 import { PresentationFormatContent } from '../../../../../../js/Lesson/PresentationFormatContent';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import details from '../../details';
 import version from './version';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 
-const layout = lessonLayout();
+const layout = diagramLayout();
 
 const path = window.location.pathname.split('/');
 const [lessonUID] = path.slice(-3, -2);

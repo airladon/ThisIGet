@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
@@ -23,7 +23,7 @@ export default class QRDegrees extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     const diag = this._collection;
     const { colors } = this.layout;

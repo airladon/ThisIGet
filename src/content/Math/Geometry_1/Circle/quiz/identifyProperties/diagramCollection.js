@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // eslint-disable-next-line import/no-cycle
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
@@ -15,7 +15,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform);
     this.add('quiz', new QuizCollection(diagram, this.layout));
   }

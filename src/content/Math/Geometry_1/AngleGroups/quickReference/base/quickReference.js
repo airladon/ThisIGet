@@ -2,7 +2,7 @@
 import * as React from 'react';
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
@@ -30,7 +30,7 @@ export class QRComplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
     const coll = this._collection;
     const modifiers = {
       Complementary_angles: click(
@@ -74,7 +74,7 @@ export class QRSupplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
 
     const coll = this._collection;
@@ -120,7 +120,7 @@ export class QRExplementary extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const modifiers = {

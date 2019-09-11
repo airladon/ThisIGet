@@ -4,7 +4,7 @@ import {
   PresentationFormatContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationFormatContent';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -15,7 +15,7 @@ const {
   highlight,
 } = Fig.tools.html;
 
-const layout = lessonLayout();
+const layout = diagramLayout();
 const { colors } = layout;
 
 class Content extends PresentationFormatContent {

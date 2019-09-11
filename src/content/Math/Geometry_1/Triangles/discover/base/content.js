@@ -6,7 +6,7 @@ import {
 } from '../../../../../../js/Lesson/PresentationFormatContent';
 import Definition from '../../../../../common/tools/definition';
 import { hint, note } from '../../../../../common/tools/note';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -22,7 +22,7 @@ const {
   // centerV,
 } = Fig.tools.html;
 
-const layout = lessonLayout();
+const layout = diagramLayout();
 const { colors } = layout;
 
 class Content extends PresentationFormatContent {

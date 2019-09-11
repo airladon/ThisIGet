@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollectionOpposite from './collectionOpposite';
@@ -25,7 +25,7 @@ export class QROpposite extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -80,7 +80,7 @@ export class QRCorresponding extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -154,7 +154,7 @@ export class QRAlternate extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,
@@ -228,7 +228,7 @@ export class QRInterior extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,

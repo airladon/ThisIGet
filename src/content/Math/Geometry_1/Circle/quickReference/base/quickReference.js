@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
@@ -24,7 +24,7 @@ export class QRDiameter extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
@@ -70,7 +70,7 @@ export class QRRadius extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
@@ -119,7 +119,7 @@ export class QRCircumference extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
@@ -161,7 +161,7 @@ export class QRCircle extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {
@@ -193,7 +193,7 @@ export class QRPi extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform, 'collection', CommonCollection);
     this.hasTouchableElements = true;
     const modifiers = {

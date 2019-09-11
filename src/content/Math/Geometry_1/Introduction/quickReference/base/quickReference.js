@@ -1,6 +1,6 @@
 // @flow
 // import Fig from 'figureone';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
@@ -14,7 +14,7 @@ export default class QRAbstraction extends PopupBoxCollection {
   constructor(
     diagram: Object,
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(
       diagram,
       layout,

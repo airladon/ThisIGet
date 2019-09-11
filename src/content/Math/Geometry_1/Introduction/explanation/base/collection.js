@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import textureMap from '../../../../../common/images/textureMaps/circles.png';
 
 const {
@@ -38,7 +38,7 @@ export default class CommonCollection extends CommonDiagramCollection {
     diagram: CommonLessonDiagram,
     transform: Transform = new Transform('Circle').rotate(0).translate(0, 0),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform);
     this.setPosition(this.layout.position);
     this.propertiesPosition = 0;

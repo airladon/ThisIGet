@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import React from 'react';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
 import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
@@ -27,7 +27,7 @@ export default class QRMainPres extends PopupBoxCollection {
     diagram: Object,
     transform: Transform = new Transform().scale(1, 1).translate(0, 0),
   ) {
-    super(diagram, lessonLayout(), transform, 'collection', CommonCollection);
+    super(diagram, diagramLayout(), transform, 'collection', CommonCollection);
 
     const coll = this._collection;
     const { colors } = this.layout;

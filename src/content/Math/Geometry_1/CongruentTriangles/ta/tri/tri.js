@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonDiagramCollection from '../../../../../common/DiagramCollection';
-// import lessonLayout from './layout';
+// import diagramLayout from './layout';
 
 const {
   DiagramElementPrimative,

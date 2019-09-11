@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 
-import lessonLayout from './layout';
+import diagramLayout from './layout';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonCollectionObjects from './diagramCollectionCommon';
 import CommonCollectionCircle from './dcCircle';
@@ -16,7 +16,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform);
 
     // this.diagram.addElements(this, this.layout.addObjectsElements);

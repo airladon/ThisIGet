@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 
-import lessonLayout from '../../explanation/base/layout';
+import diagramLayout from '../../explanation/base/layout';
 import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonCollectionOpposite from '../../explanation/base/diagramCollectionCommonOpposite';
 import CommonCollectionThreeLines from '../../explanation/base/diagramCollectionCommonThreeLines';
@@ -17,7 +17,7 @@ export default class DiagramCollection extends CommonDiagramCollection {
     diagram: CommonLessonDiagram,
     transform: Transform = new Transform(),
   ) {
-    const layout = lessonLayout();
+    const layout = diagramLayout();
     super(diagram, layout, transform);
 
     this.add('opposite', new CommonCollectionOpposite(diagram, this.layout));

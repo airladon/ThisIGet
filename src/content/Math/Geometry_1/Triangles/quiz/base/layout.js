@@ -10,7 +10,7 @@ import commonLessonLayout from '../../explanation/base/layout';
 // ];
 
 /* eslint-disable key-spacing, comma-spacing, no-multi-spaces, space-in-parens */
-export default function lessonLayout() {
+export default function diagramLayout() {
   const layout: Object = commonLessonLayout();
   layout.angleA.options.label.scale = 0.8;
   layout.angleB.options.label.scale = 0.8;
