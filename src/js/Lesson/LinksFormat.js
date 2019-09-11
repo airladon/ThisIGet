@@ -7,11 +7,11 @@ import SimpleFormat from './SimpleFormat';
 
 // const { Diagram } = Fig;
 
-class LinksLesson extends SimpleFormat {
+class LinksFormat extends SimpleFormat {
   constructor(content: Object) {
     super(content);
     this.type = 'links';
   }
 }
 
-export default LinksLesson;
+export default LinksFormat;

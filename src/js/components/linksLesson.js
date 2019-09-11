@@ -9,7 +9,7 @@ type Props = {
   isLoggedIn: boolean;
 };
 
-export default class LinksLessonComponent extends React.Component
+export default class LinksFormatComponent extends React.Component
                                     <Props> {
   lesson: SimpleFormat;
   key: number;

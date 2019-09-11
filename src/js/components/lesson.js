@@ -19,7 +19,7 @@ import { getCookie, login } from '../tools/misc';
 import PresentationFormatComponent from './presentationLesson';
 import SimpleFormatComponent from './simpleLesson';
 import SinglePageFormatComponent from './singlePageLesson';
-import LinksLessonComponent from './linksLesson';
+import LinksFormatComponent from './linksLesson';
 
 type Props = {
   lesson: Object;
@@ -404,7 +404,7 @@ export default class LessonComponent extends React.Component
       />;
     }
     if (this.lesson.type === 'links') {
-      return <LinksLessonComponent
+      return <LinksFormatComponent
         lesson={this.lesson}
         isLoggedIn={this.props.isLoggedIn}
       />;
