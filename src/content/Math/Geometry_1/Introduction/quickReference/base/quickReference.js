@@ -7,7 +7,7 @@ import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 export default class QRAbstraction extends PopupBoxCollection {
@@ -38,6 +38,6 @@ export default class QRAbstraction extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   Abstraction: QRAbstraction,
 });

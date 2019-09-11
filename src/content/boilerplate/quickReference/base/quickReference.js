@@ -11,7 +11,7 @@ import version from './version';
 import StaticQR from '../../../../../../js/components/staticQR';
 // import external from './external.md';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -47,7 +47,7 @@ export default class QRMainPres extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   MainPres: QRMainPres,
   // Main: <StaticQR
   //   title=""

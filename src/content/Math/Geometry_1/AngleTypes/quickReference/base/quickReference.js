@@ -11,7 +11,7 @@ import version from './version';
 import StaticQR from '../../../../../../js/components/staticQR';
 import perpendicular from './perpendicular.md';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -315,7 +315,7 @@ export class QRFull extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   Acute: QRAcute,
   Obtuse: QRObtuse,
   Reflex: QRReflex,

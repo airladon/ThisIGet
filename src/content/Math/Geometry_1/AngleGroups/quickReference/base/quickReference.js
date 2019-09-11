@@ -13,7 +13,7 @@ import complementary from './complementary.md';
 import supplementary from './supplementary.md';
 import explementary from './explementary.md';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -158,7 +158,7 @@ export class QRExplementary extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   ComplementaryPres: QRComplementary,
   SupplementaryPres: QRSupplementary,
   ExplementaryPres: QRExplementary,

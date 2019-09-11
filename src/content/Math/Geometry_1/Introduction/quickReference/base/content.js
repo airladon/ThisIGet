@@ -10,7 +10,7 @@ import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 const layout = diagramLayout();
 
 const path = window.location.pathname.split('/');
-const [lessonUID] = path.slice(-3, -2);
+const [topicUID] = path.slice(-3, -2);
 const [versionUID] = path.slice(-1);
 
 const qrids = version.references;
@@ -25,7 +25,7 @@ class Content extends PresentationFormatContent {
   setDiagram(htmlId: string = '') {
     this.diagram = new CommonLessonDiagram({ htmlId }, layout);
     this.loadQRs([
-      `${details.path}/${lessonUID}/${versionUID}`,
+      `${details.path}/${topicUID}/${versionUID}`,
     ]);
   }
 
@@ -42,7 +42,7 @@ class Content extends PresentationFormatContent {
       modifiers: () => {
         const out = {};
         qrids.forEach((qrid) => {
-          out[qrid] = this.qr(`${details.path}/${lessonUID}/${versionUID}/${qrid}`);
+          out[qrid] = this.qr(`${details.path}/${topicUID}/${versionUID}/${qrid}`);
         });
         return out;
       },

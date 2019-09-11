@@ -9,7 +9,7 @@ import CommonCollectionThreeLines from './collectionThreeLines';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -289,7 +289,7 @@ export class QRInterior extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   Opposite: QROpposite,
   Corresponding: QRCorresponding,
   Alternate: QRAlternate,

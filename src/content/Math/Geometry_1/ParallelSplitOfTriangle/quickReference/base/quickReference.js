@@ -12,7 +12,7 @@ import triangle from './triangle.md';
 import lines from './lines.md';
 import './style.scss';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -130,7 +130,7 @@ export class QRLines extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   TrianglePres: QRTriangle,
   LinesPres: QRLines,
   Triangle: <StaticQR

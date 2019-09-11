@@ -8,7 +8,7 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -221,7 +221,7 @@ export class QRPi extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   Diameter: QRDiameter,
   Radius: QRRadius,
   Circumference: QRCircumference,

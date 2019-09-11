@@ -14,7 +14,7 @@ const versionToTest = 'base';
 // ////////////////////////////////////////////////////////////
 
 const path = window.location.pathname.split('/');
-const [lessonUID] = path.slice(-3, -2);
+const [topicUID] = path.slice(-3, -2);
 const qrids = version.references;
 
 class Content extends SimpleFormatContent {
@@ -23,7 +23,7 @@ class Content extends SimpleFormatContent {
     //  this.iconLink = imgLink;
     //  this.iconLinkGrey = imgLinkGrey;
     this.loadQRs([
-      `${details.path}/${lessonUID}/${versionToTest}`,
+      `${details.path}/${topicUID}/${versionToTest}`,
     ]);
   }
 
@@ -37,7 +37,7 @@ class Content extends SimpleFormatContent {
           onClick={window.lessonFunctions.qr.bind(
             window.lessonFunctions,
             `link_${index}`,
-            `${details.path}/${lessonUID}/${versionToTest}/${qrid}`,
+            `${details.path}/${topicUID}/${versionToTest}/${qrid}`,
           )}>
         {qrid}</div>
       </div>);

@@ -13,7 +13,7 @@ import right from './right.md';
 import pythagorus from './pythagorus.md';
 import hypotenuse from './hypotenuse.md';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -147,7 +147,7 @@ export class QRRightAngleTriangleArea extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   DefinitionPres: QRMain,
   PythagorusPres: QRPythagorus,
   AreaPres: QRRightAngleTriangleArea,

@@ -13,7 +13,7 @@ import areaMd from './area.md';
 import rectangleMd from './rectangle.md';
 import squareMd from './square.md';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -151,7 +151,7 @@ export class QRSquare extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   AreaPres: QRArea,
   RectanglePres: QRRectangle,
   SquarePres: QRSquare,

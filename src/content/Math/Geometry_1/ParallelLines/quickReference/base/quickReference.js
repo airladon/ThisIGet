@@ -8,7 +8,7 @@ import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';
 
-const lessonUID = details.uid;
+const topicUID = details.uid;
 const versionUID = version.uid;
 
 const { Transform, Rect } = Fig;
@@ -55,6 +55,6 @@ export default class QRBoilerplate extends PopupBoxCollection {
   }
 }
 
-attachQuickReference(details.path, lessonUID, versionUID, {
+attachQuickReference(details.path, topicUID, versionUID, {
   Main: QRBoilerplate,
 });
