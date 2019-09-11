@@ -9,8 +9,8 @@ import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import LessonNavigator from './lessonNavigator';
 // import LessonTilePath from './lessonPathTile';
 import LessonTitle from './lessonTitle';
-// import getLessonIndex from '../../content/common/lessonindex';
-import getLessonIndex from '../../content/lessonIndex';
+// import getContentIndex from '../../content/common/lessonindex';
+import getContentIndex from '../../content/contentIndex';
 import LessonDescription from '../Lesson/lessonDescription';
 // import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
@@ -58,7 +58,7 @@ type State = {
 };
 
 function getLessonDescription(uid: string) {
-  const lessons = getLessonIndex();
+  const lessons = getContentIndex();
   return lessons[uid];
 }
 

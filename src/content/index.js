@@ -1,4 +1,4 @@
-export default function lessonIndex() {
+export default function contentIndex() {
   return {
     Angle: {
       title: 'Angles',

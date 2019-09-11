@@ -5,7 +5,7 @@ import Fig from 'figureone';
 import LessonTile from './lessonTile';
 import LessonDescription from '../Lesson/lessonDescription';
 import makeLessonTree from '../Lesson/lessonTree';
-// import LI from '../../content/lessonIndex';
+// import LI from '../../content/contentIndex';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
@@ -18,7 +18,7 @@ type Props = {
 export default class LessonNavigator extends React.Component
                                     <Props> {
   selected: string;
-  lessonIndex: Array<Array<LessonDescription>>;
+  contentIndex: Array<Array<LessonDescription>>;
   lessonTrees: Object;
   key: number;
   selectedLesson: LessonDescription;
@@ -37,7 +37,7 @@ export default class LessonNavigator extends React.Component
     super(props);
     // console.log(LI)
     this.lessonTrees = makeLessonTree();
-    this.lessonIndex = this.lessonTrees[props.learningPath].tree;
+    this.contentIndex = this.lessonTrees[props.learningPath].tree;
     this.learningPathPath = this.lessonTrees[props.learningPath].path;
     this.learningPathName = this.lessonTrees[props.learningPath].name;
     this.getVariables();
@@ -81,7 +81,7 @@ export default class LessonNavigator extends React.Component
     let x = hSpace;
     this.lessonArray = [];
     let maxParallel = 1;
-    this.lessonIndex.forEach((lesson) => {
+    this.contentIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         if (lesson.length > maxParallel) {
           maxParallel = lesson.length;
@@ -92,7 +92,7 @@ export default class LessonNavigator extends React.Component
                     + (maxParallel - 1) * vSpace
                     + vSpace * 2) / 2;
 
-    this.lessonIndex.forEach((lesson) => {
+    this.contentIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         const len = lesson.length;
         const totalHeight = len * height + (len - 1) * vSpace;
@@ -183,7 +183,7 @@ export default class LessonNavigator extends React.Component
 
   lessons() {
     const lessons = [];
-    this.lessonIndex.forEach((lesson) => {
+    this.contentIndex.forEach((lesson) => {
       if (Array.isArray(lesson)) {
         lesson.forEach((parallelLesson) => {
           lessons.push(this.createLessonJsx(parallelLesson));

@@ -70,7 +70,7 @@ for file_name in current.keys():
     md5 = current[file_name]
     if file_name == '/sitemap.xml' \
        or file_name == '/hashes.json' \
-       or file_name.startswith('/dist/lessonIndex') \
+       or file_name.startswith('/dist/contentIndex') \
        or file_name.startswith('/dist/tools') \
        or file_name.startswith('/dist/main') \
        or file_name.startswith('/dist/polyfill') \

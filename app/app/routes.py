@@ -40,7 +40,7 @@ def make_response_with_files(*args, **kwargs):
     common_content_js = ''
     figure_one_js = ''
     polyfill_js = ''
-    lesson_index_js = ''
+    content_index_js = ''
     about_js = ''
     # The checks for keys in lessons is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
@@ -59,7 +59,7 @@ def make_response_with_files(*args, **kwargs):
         tools_js = f"/{'static/dist'}/{dist['tools.js']}"
         figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        lesson_index_js = f"/{'static/dist'}/{dist['lessonIndex.js']}"
+        content_index_js = f"/{'static/dist'}/{dist['contentIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
 
@@ -67,7 +67,7 @@ def make_response_with_files(*args, **kwargs):
         *args, **kwargs,
         tools_js=tools_js, polyfill_js=polyfill_js,
         common_content_js=common_content_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, lesson_index_js=lesson_index_js,
+        figure_one_js=figure_one_js, content_index_js=content_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
         about_css=about_css,
     ))
@@ -289,9 +289,9 @@ def apple_touch_icon():
     return app.send_static_file('assets/icon.png')
 
 
-@app.route('/lessons/chapter1')
-def chapter1():
-    return "Chapter 1 Content"
+# @app.route('/lessons/chapter1')
+# def chapter1():
+#     return "Chapter 1 Content"
 
 
 @app.route('/loginuser', methods=['POST'])
@@ -315,11 +315,6 @@ def login(username=''):
     if 'static/dist' in lessons:
         js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-    # print(css)
-    # css = '/static/dist/input.css'
-    # js = '/static/dist/input.js'
     form = LoginForm()
     if username:
         # user = Users.query.filter_by(username=username).first()
@@ -343,11 +338,6 @@ def login(username=''):
             login_user(user, True)
             user.last_login = datetime.datetime.now()
             db.session.commit()
-            # session['username'] = user.get_username()
-            # return redirect(url_for('home'))
-            # lesson_page = request.args.get('page')
-            # if lesson_page is None:
-            #     lesson_page = '0'
             next_page = request.args.get('next')
             if not next_page or url_parse(next_page).netloc != '':
                 next_page = url_for('home')
@@ -370,10 +360,6 @@ def create():
     if 'static/dist' in lessons:
         js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
         css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # css = '/static/dist/input.css'
-    # js = '/static/dist/input.js'
-    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users()
@@ -394,10 +380,6 @@ def create():
 def confirm_account_message(username):
     if (current_user.is_authenticated):
         return redirect(url_for('home'))
-    # css = '/static/dist/input.css'
-    # js = '/static/dist/input.js'
-    # css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
-    # js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
     js = ''
     css = ''
     if 'static/dist' in lessons:

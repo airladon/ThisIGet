@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-// import getLessonIndex from '../../src/content/common/lessonindex';
-import getLessonIndex from '../../src/content/lessonIndex';
+// import getContentIndex from '../../src/content/common/lessonindex';
+import getContentIndex from '../../src/content/contentIndex';
 
 const fs = require('fs');
 const fetch = require('node-fetch');
@@ -9,8 +9,8 @@ const fetch = require('node-fetch');
 const retest = 3;
 
 const sleep = (milliseconds) => {
-  return new Promise(resolve => setTimeout(resolve, milliseconds))
-}
+  return new Promise(resolve => setTimeout(resolve, milliseconds));
+};
 
 const getData = async (url) => {
   try {
@@ -30,7 +30,7 @@ function getAddress() {
 const sitePath = getAddress();
 
 const allTests = [];
-const index = getLessonIndex();
+const index = getContentIndex();
 Object.keys(index).forEach((lessonName) => {
   const lesson = index[lessonName];
   const { uid } = lesson;

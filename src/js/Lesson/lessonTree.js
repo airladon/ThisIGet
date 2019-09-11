@@ -1,17 +1,17 @@
 // @flow
-// import getLessonIndex from '../../content/common/lessonindex';
-import getLessonIndex from '../../content/lessonIndex';
+// import getContentIndex from '../../content/common/lessonindex';
+import getContentIndex from '../../content/contentIndex';
 import type { TypeLessonDescription } from './lessonDescription';
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list
 
 function splitIndexIntoLearningPaths(
-  lessonIndex: { [uid: string]: TypeLessonDescription },
+  contentIndex: { [uid: string]: TypeLessonDescription },
   pathDepth: number = 3,
 ) {
   const learningPaths = {};
-  Object.keys(lessonIndex).forEach((key) => {
-    const lesson = lessonIndex[key];
+  Object.keys(contentIndex).forEach((key) => {
+    const lesson = contentIndex[key];
     const fullPath = lesson.path.split('/');
     const name = fullPath[pathDepth];
     const path = fullPath.slice(0, pathDepth + 1).join('/');
@@ -28,8 +28,8 @@ function splitIndexIntoLearningPaths(
 }
 
 export default function makeLessonTree() {
-  const lessonIndex = getLessonIndex();
-  const lessonLearningPaths = splitIndexIntoLearningPaths(lessonIndex);
+  const contentIndex = getContentIndex();
+  const lessonLearningPaths = splitIndexIntoLearningPaths(contentIndex);
   const lessonTrees = {};
   Object.keys(lessonLearningPaths).forEach((learningPath) => {
     const { lessons } = lessonLearningPaths[learningPath];

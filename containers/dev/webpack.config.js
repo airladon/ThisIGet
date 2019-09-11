@@ -318,13 +318,13 @@ module.exports = (env) => {
             test: /content\/common/,
             name: 'commoncontent',
           },
-          lessonindex: {
+          contentindex: {
             minSize: 10,
             minChunks: 1,
             priority: 0,
             reuseExistingChunk: true,
-            test: /content\/index.js/,
-            name: 'lessonIndex',
+            test: /content\/contentindex.js/,
+            name: 'contentIndex',
           },
           // lessonIndex: {
 

@@ -5,7 +5,7 @@ const pathTools = require('./pathTools.js');
 function createLessonIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllContent(lessonsPath);
   // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
-  let outStr = `export default function lessonIndex() {
+  let outStr = `export default function contentIndex() {
   return {`;
   lessons.forEach((lessonPath) => {
     const splitLessonPath = lessonPath.split('/');
