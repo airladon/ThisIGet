@@ -26,7 +26,7 @@ function initializeItemSelector(
   index: number = 0,
 ) {
   const elem = document
-    .getElementById(`id__lesson_item_selector_${index}`);
+    .getElementById(`id__figureone_item_selector_${index}`);
   if (elem != null) {
     if (elem.children.length > 0) {
       for (let i = 0; i < elem.children.length; i += 1) {

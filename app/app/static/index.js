@@ -13522,7 +13522,7 @@ function (_DiagramElementCollec) {
       alignH: 'center',
       alignV: 'middle',
       interactive: true,
-      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
+      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_figureone__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
     _this.options = optionsToUse;
@@ -23350,7 +23350,7 @@ function (_DiagramElement2) {
   }, {
     key: "goToStep",
     value: function goToStep(step) {
-      var elem = document.getElementById('id__lesson_item_selector_0');
+      var elem = document.getElementById('id__figureone_item_selector_0');
       var elems = [];
 
       if (elem != null) {
@@ -23363,9 +23363,9 @@ function (_DiagramElement2) {
 
       elems.forEach(function (e, index) {
         if (index === step) {
-          e.classList.add('lesson__item_selector_selected');
+          e.classList.add('figureone__item_selector_selected');
         } else {
-          e.classList.remove('lesson__item_selector_selected');
+          e.classList.remove('figureone__item_selector_selected');
         }
       });
     }
@@ -27013,9 +27013,9 @@ function itemSelector() {
   var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [''];
   var classes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var selectorIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var outStr = "<ul id=\"id__lesson_item_selector_".concat(selectorIndex, "\" \n                    class=").concat(classes, ">");
+  var outStr = "<ul id=\"id__figureone_item_selector_".concat(selectorIndex, "\" \n                    class=").concat(classes, ">");
   items.forEach(function (item, index) {
-    outStr += "<li id=\"id__lesson_item_selector_".concat(index, "\">").concat(item, "</li>");
+    outStr += "<li id=\"id__figureone_item_selector_".concat(index, "\">").concat(item, "</li>");
   });
   outStr += '</ul>';
   return outStr;
