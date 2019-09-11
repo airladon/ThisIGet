@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 
 import lessonLayout from './layout';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonCollection from './diagramCollectionCommon';
 import CommonCollectionAAA from './aaa';
 import CommonCollectionSAS from './sas';
@@ -12,7 +12,7 @@ import CommonCollectionSSA from './ssa';
 import CommonCollectionSSS from './sss';
 import CommonCollectionOneProp from './oneProperty';
 import CommonCollectionTwoProp from './twoProperties';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const { Transform } = Fig;
 

@@ -315,7 +315,7 @@ module.exports = (env) => {
             minChunks: 2,
             priority: 0,
             reuseExistingChunk: true,
-            test: /content\/LessonsCommon/,
+            test: /content\/common/,
             name: 'commonlessons',
           },
           lessonindex: {

@@ -4,13 +4,13 @@ import {
   PresentationLessonContent,
   // interactiveItem,
 } from '../../../../../../js/Lesson/PresentationLessonContent';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
+// import Definition from '../../../../../common/tools/definition';
 import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
 import DiagramCollection from './diagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 
 const {
   click,

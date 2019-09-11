@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import baseLayout from '../../../../../LessonsCommon/layout';
-import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
+import baseLayout from '../../../../../common/layout';
+import textureMap from '../../../../../common/images/textureMaps/circles.png';
 
 const {
   Point,

@@ -3,7 +3,7 @@ import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
-import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollectionOpposite from './collectionOpposite';
 import CommonCollectionThreeLines from './collectionThreeLines';
 import details from '../../details';

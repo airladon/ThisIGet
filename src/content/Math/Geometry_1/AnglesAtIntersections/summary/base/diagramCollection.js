@@ -2,10 +2,10 @@
 import Fig from 'figureone';
 
 import lessonLayout from '../../explanation/base/layout';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonCollectionOpposite from '../../explanation/base/diagramCollectionCommonOpposite';
 import CommonCollectionThreeLines from '../../explanation/base/diagramCollectionCommonThreeLines';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const { Transform } = Fig;
 

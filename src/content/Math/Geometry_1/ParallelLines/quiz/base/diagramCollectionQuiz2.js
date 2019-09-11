@@ -1,10 +1,10 @@
 // @flow
 import Fig from 'figureone';
 // eslint-disable-next-line import/no-cycle
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonQuizMixin from '../../../../../LessonsCommon/DiagramCollectionQuiz';
-import type { TypeMessages } from '../../../../../LessonsCommon/DiagramCollectionQuiz';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonQuizMixin from '../../../../../common/DiagramCollectionQuiz';
+import type { TypeMessages } from '../../../../../common/DiagramCollectionQuiz';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 import {
   randomizeParallelLine, checkValuesForParallel, checkElementsForParallel,

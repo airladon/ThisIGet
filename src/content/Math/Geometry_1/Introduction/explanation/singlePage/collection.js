@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-// import textureMap from '../../../../../LessonsCommon/images/textureMaps/circles.png';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
+// import textureMap from '../../../../../common/images/textureMaps/circles.png';
 
 const {
   DiagramElementPrimative,

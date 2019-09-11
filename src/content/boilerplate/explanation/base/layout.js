@@ -1,6 +1,6 @@
 // @flow
 import Fig from 'figureone';
-import baseLayout from '../../../../../LessonsCommon/layout';
+import baseLayout from '../../../../../common/layout';
 
 // const {
 //   // Point,

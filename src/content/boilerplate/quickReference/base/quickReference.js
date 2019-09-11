@@ -4,7 +4,7 @@ import React from 'react';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
-import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import CommonCollection from './collection';
 import details from '../../details';
 import version from './version';

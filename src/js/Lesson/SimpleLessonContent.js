@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-// import getLessonIndex from '../../content/LessonsCommon/lessonindex';
+// import getLessonIndex from '../../content/common/lessonindex';
 import { loadRemote, loadRemoteCSS } from '../tools/misc';
 
 const {

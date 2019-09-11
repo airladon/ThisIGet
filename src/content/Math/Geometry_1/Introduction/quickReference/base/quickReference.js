@@ -3,7 +3,7 @@
 import lessonLayout from './layout';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 // import * as html from '../../../../../../js/tools/htmlGenerator';
-import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 import details from '../../details';
 import version from './version';
 

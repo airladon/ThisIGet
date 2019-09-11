@@ -7,10 +7,10 @@ import lessonLayout from './layout';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import DiagramCollection from './diagramCollection';
-// import Definition from '../../../../../LessonsCommon/tools/definition';
-import { hint, note } from '../../../../../LessonsCommon/tools/note';
+// import Definition from '../../../../../common/tools/definition';
+import { hint, note } from '../../../../../common/tools/note';
 
 const {
   click,

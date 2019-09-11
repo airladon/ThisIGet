@@ -5,7 +5,7 @@ import details from '../../details';
 import version from './version';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 
 const layout = lessonLayout();
 

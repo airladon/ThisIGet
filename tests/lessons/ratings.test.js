@@ -1,6 +1,6 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-// import getLessonIndex from '../../src/content/LessonsCommon/lessonindex';
+// import getLessonIndex from '../../src/content/common/lessonindex';
 import getLessonIndex from '../../src/content/lessonIndex';
 
 const fs = require('fs');

@@ -5,7 +5,7 @@ import type { TypeParsablePoint } from 'figureone';
 // import getLessonIndex from '../../content/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
 import SimpleLessonContent from './SimpleLessonContent';
-// import PopupBoxCollection from '../../content/LessonsCommon/DiagramCollectionPopup';
+// import PopupBoxCollection from '../../content/common/DiagramCollectionPopup';
 
 const {
   Diagram, HTMLObject, Point,

@@ -2,7 +2,7 @@
 import Fig from 'figureone';
 import { attachQuickReference } from '../../../../../../js/tools/misc';
 import lessonLayout from './layout';
-import PopupBoxCollection from '../../../../../LessonsCommon/DiagramCollectionPopup';
+import PopupBoxCollection from '../../../../../common/DiagramCollectionPopup';
 
 import CommonCollection from './collection';
 import details from '../../details';

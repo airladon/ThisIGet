@@ -8,7 +8,7 @@ import {
 import details from '../../details';
 import lessonLayout from './layout';
 import Collection from './collection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import part1 from './part1.md';
 
 const {

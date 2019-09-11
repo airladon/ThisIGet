@@ -2,9 +2,9 @@
 import Fig from 'figureone';
 
 import lessonLayout from '../../explanation/base/layout';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 import CommonCollection from '../../explanation/base/diagramCollectionCommon';
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
 
 const {
   Transform, DiagramElementPrimative, DiagramElementCollection,

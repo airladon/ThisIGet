@@ -2,8 +2,8 @@
 import Fig from 'figureone';
 import lessonLayout from './layout';
 // eslint-disable-next-line import/no-cycle
-import CommonDiagramCollection from '../../../../../LessonsCommon/DiagramCollection';
-import CommonLessonDiagram from '../../../../../LessonsCommon/CommonLessonDiagram';
+import CommonDiagramCollection from '../../../../../common/DiagramCollection';
+import CommonLessonDiagram from '../../../../../common/CommonLessonDiagram';
 // eslint-disable-next-line import/no-cycle
 import QuizCollection from './diagramCollectionQuiz';
 
