@@ -376,7 +376,7 @@ export default class TopicComponent extends React.Component
       />;
     }
     return <SimpleFormatComponent
-      lesson={this.version}
+      version={this.version}
     />;
   }
 

@@ -7,7 +7,7 @@ import PresentationQR from '../presentationQR';
 // import '../../css/simpleLesson.scss';
 
 type Props = {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
 };
 
 type State = {
@@ -180,14 +180,14 @@ const checkEntry = (button) => {
 
 export default class SimpleFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
   key: number;
   afterUpdate: ?() => void;
   firstUpdate: boolean;
 
   constructor(props: Props) {
     super(props);
-    this.lesson = props.lesson;
+    this.version = props.version;
     this.key = 0;
     this.state = { qr: <StaticQR content="Loading Reference" link="" title=""/> };
     this.afterUpdate = null;
@@ -231,29 +231,29 @@ export default class SimpleFormatComponent extends React.Component
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
-    this.lesson.content.showQR(path, qrid);
+    this.version.content.showQR(path, qrid);
     align('id_lesson__qr__pres_container', 'lesson__content', id);
-    this.lesson.content.qrDiagram.resize();
-    this.lesson.content.qrDiagram.animateNextFrame();
+    this.version.content.qrDiagram.resize();
+    this.version.content.qrDiagram.animateNextFrame();
   }
 
   showVariables() {
-    Object.keys(this.lesson.content.variables).forEach((variableName) => {
+    Object.keys(this.version.content.variables).forEach((variableName) => {
       const element =
         document.getElementById(`id_lesson__variable_${variableName}`);
       if (element == null) {
         return;
       }
-      element.innerHTML = `${this.lesson.content.variables[variableName]}`;
+      element.innerHTML = `${this.version.content.variables[variableName]}`;
     });
   }
 
   setVariables() {
-    // Object.keys(this.lesson.content.setVariables).forEach((variableName) => {
-    //   this.lesson.content.variables[variableName] =
-    //     this.lesson.content.setVariables[variableName]();
+    // Object.keys(this.version.content.setVariables).forEach((variableName) => {
+    //   this.version.content.variables[variableName] =
+    //     this.version.content.setVariables[variableName]();
     // });
-    this.lesson.content.variables = this.lesson.content.setVariables();
+    this.version.content.variables = this.version.content.setVariables();
   }
 
   componentDidUpdate() {
@@ -310,7 +310,7 @@ export default class SimpleFormatComponent extends React.Component
       },
     };
 
-    this.lesson.initialize();
+    this.version.initialize();
     // console.log(elements);
     this.setVariables();
   }
@@ -329,11 +329,11 @@ export default class SimpleFormatComponent extends React.Component
 
   render() {
     return <div
-      id={this.lesson.content.htmlId}
+      id={this.version.content.htmlId}
       className="simple_lesson__container"
       // onClick={this.close.bind(this)}
     >
-      {this.lesson.content.sections}
+      {this.version.content.sections}
       <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
         {this.state.qr}
       </div>
