@@ -7,7 +7,7 @@ import StaticQR from '../staticQR';
 import PresentationQR from '../presentationQR';
 
 type Props = {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
 };
 
 type State = {
@@ -78,14 +78,14 @@ const applyMDModifiers = (inputText: string, modifiers: Object) => {
 
 export default class SinglePageFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: SimpleFormat;
+  version: SimpleFormat;
   key: number;
   contentChange: boolean;
   afterUpdate: ?() => void;
 
   constructor(props: Props) {
     super(props);
-    this.lesson = props.lesson;
+    this.version = props.version;
     this.key = 10;
     this.contentChange = false;
     this.state = {
@@ -133,10 +133,10 @@ export default class SinglePageFormatComponent extends React.Component
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
-    this.lesson.content.showQR(path, qrid);
+    this.version.content.showQR(path, qrid);
     align('id_lesson__qr__pres_container', 'id_single_page_lesson__text_container', id);
-    this.lesson.content.qrDiagram.resize();
-    this.lesson.content.qrDiagram.animateNextFrame();
+    this.version.content.qrDiagram.resize();
+    this.version.content.qrDiagram.animateNextFrame();
   }
 
   // shouldComponentUpdate() {
@@ -152,8 +152,8 @@ export default class SinglePageFormatComponent extends React.Component
   // }
   // resizer() {
   //   console.log('resiser')
-  //   // this.lesson.content.diagram.renderAllElementsToTiedCanvases(true);
-  //   // console.log(this.lesson.content.diagram.webglLow)
+  //   // this.version.content.diagram.renderAllElementsToTiedCanvases(true);
+  //   // console.log(this.version.content.diagram.webglLow)
   // }
 
   componentDidMount() {
@@ -166,14 +166,14 @@ export default class SinglePageFormatComponent extends React.Component
         }
       },
     };
-    this.lesson.initialize();
-    // this.lesson.content.setDiagram(this.lesson.content.diagramHtmlId);
-    // this.lesson.content.diagram.resize();
+    this.version.initialize();
+    // this.version.content.setDiagram(this.version.content.diagramHtmlId);
+    // this.version.content.diagram.resize();
     this.contentChange = true;
     this.setState({
-      content: this.lesson.content.sections[0],
+      content: this.version.content.sections[0],
     });
-    this.lesson.content.diagram.enableScrolling();
+    this.version.content.diagram.enableScrolling();
     // window.addEventListener('resize', this.resizer.bind(this));
     // window.addEventListener('scroll', this.handleScroll.bind(this));
   }
@@ -183,8 +183,8 @@ export default class SinglePageFormatComponent extends React.Component
   // }
 
   // handleScroll() {
-  //   this.lesson.content.diagram.updateHTMLElementTie();
-  //   this.lesson.content.diagram.animateNextFrame();
+  //   this.version.content.diagram.updateHTMLElementTie();
+  //   this.version.content.diagram.animateNextFrame();
   // }
 
   // eslint-disable-next-line class-methods-use-this
@@ -204,11 +204,11 @@ export default class SinglePageFormatComponent extends React.Component
       this.afterUpdate();
       this.afterUpdate = null;
     }
-    setOnClicks(this.lesson.content.modifiers);
-    const d = this.lesson.content.diagram;
+    setOnClicks(this.version.content.modifiers);
+    const d = this.version.content.diagram;
 
     if (this.contentChange) {
-      this.lesson.content.diagram.resize();
+      this.version.content.diagram.resize();
       d.renderAllElementsToTiedCanvases();
       const loadingElements = d.elements.getLoadingElements();
       for (let i = 0; i < loadingElements.length; i += 1) {
@@ -217,20 +217,20 @@ export default class SinglePageFormatComponent extends React.Component
           element.drawingObject.onLoad = () => {
             element.unrender();
             d.renderAllElementsToTiedCanvases();
-            this.lesson.content.diagram.setFirstTransform();
+            this.version.content.diagram.setFirstTransform();
           };
         }
       }
       this.contentChange = false;
-      // this.lesson.content.diagram.resize();
+      // this.version.content.diagram.resize();
     }
-    // console.log(this.lesson.content.diagram.elements)
+    // console.log(this.version.content.diagram.elements)
     // console.log('1')
-    this.lesson.content.diagram.setFirstTransform();
-    this.lesson.content.diagram.updateHTMLElementTie();
+    this.version.content.diagram.setFirstTransform();
+    this.version.content.diagram.updateHTMLElementTie();
     // console.log('2')
     d.animateNextFrame();
-    // this.lesson.content.diagram.updateHTMLElementTie();
+    // this.version.content.diagram.updateHTMLElementTie();
 
     // d.renderElementToTiedCanvas('fig1');
     // d.renderElementToTiedCanvas('fig2');
@@ -278,34 +278,34 @@ export default class SinglePageFormatComponent extends React.Component
     // const draw2D2 = new DrawContext2D(canvas2)
     // console.log(draw2D2)
 
-    // const dim2 = this.lesson.content.diagram.elements._fig2._dimensions;
-    // const d = this.lesson.content.diagram.elements._fig2._dimensions._d;
-    // const c = this.lesson.content.diagram.elements._fig2._dimensions._c;
+    // const dim2 = this.version.content.diagram.elements._fig2._dimensions;
+    // const d = this.version.content.diagram.elements._fig2._dimensions._d;
+    // const c = this.version.content.diagram.elements._fig2._dimensions._c;
     // dim2.updateContext(draw2D);
     // d.setScale(10, -80)
     // c.setScale(10, 80)
 
 
-    // const dim4 = this.lesson.content.diagram.elements._fig4._dimensions;
-    // const d4 = this.lesson.content.diagram.elements._fig4._dimensions._d;
-    // const c4 = this.lesson.content.diagram.elements._fig4._dimensions._c;
+    // const dim4 = this.version.content.diagram.elements._fig4._dimensions;
+    // const d4 = this.version.content.diagram.elements._fig4._dimensions._d;
+    // const c4 = this.version.content.diagram.elements._fig4._dimensions._c;
     // dim4.updateContext(draw2D);
     // d4.setScale(10, -80)
     // c4.setScale(10, 80)
-    // console.log(this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm())
-    // this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
+    // console.log(this.version.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm())
+    // this.version.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
     //   1,
     //   'left',
     //   'baseline',
     // );
-    // this.lesson.content.diagram.elements.resize();
-    // this.lesson.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
+    // this.version.content.diagram.elements.resize();
+    // this.version.content.diagram.elements._fig3._dimensions._eqn.getCurrentForm().arrange(
     //   1,
     //   'left',
     //   'baseline',
     // );
-    // console.log(this.lesson.content.diagram.elements._fig3._dimensions._eqn)
-    // this.lesson.content.diagram.elements._fig3._dimensions._eqn.showForm('0');
+    // console.log(this.version.content.diagram.elements._fig3._dimensions._eqn)
+    // this.version.content.diagram.elements._fig3._dimensions._eqn.showForm('0');
   }
 
 
@@ -320,16 +320,16 @@ export default class SinglePageFormatComponent extends React.Component
       //   //   } }>
       //   //   </div>);
       // } else if (typeof element === 'string') {
-      //   output += applyMDModifiers(element, this.lesson.content.modifiers);
+      //   output += applyMDModifiers(element, this.version.content.modifiers);
       //   // output.push(<div key={this.key}
       //   //   dangerouslySetInnerHTML={ {
-      //   //     __html: applyMDModifiers(element, this.lesson.content.modifiers),
+      //   //     __html: applyMDModifiers(element, this.version.content.modifiers),
       //   //   } }>
       //   // </div>);
       // }
 
       if (typeof element === 'string') {
-        output += applyMDModifiers(element, this.lesson.content.modifiers);
+        output += applyMDModifiers(element, this.version.content.modifiers);
       }
     });
     return <div
@@ -350,10 +350,10 @@ export default class SinglePageFormatComponent extends React.Component
   }
 
   render() {
-    return <div id={this.lesson.content.htmlId} className="single_page_lesson__container">
+    return <div id={this.version.content.htmlId} className="single_page_lesson__container">
       {this.renderContent()}
       <canvas id="hidden_offscreen"></canvas>
-      <div id={this.lesson.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
+      <div id={this.version.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
         <canvas id="id_diagram__gl__offscreen" className="diagram__gl__offscreen">
         </canvas>
         <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">

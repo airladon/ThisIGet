@@ -366,7 +366,7 @@ export default class TopicComponent extends React.Component
     }
     if (this.version.type === 'singlePage') {
       return <SinglePageFormatComponent
-        lesson={this.version}
+        version={this.version}
       />;
     }
     if (this.version.type === 'links') {
