@@ -5,7 +5,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Description of Angle including definitions of Complementary, Supplementary and Explementary",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
@@ -16,7 +16,7 @@
     "publisher": "Khan Academy",
     "type": "generic",
     "description": "Complementary and Supplementary Angles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
@@ -27,7 +27,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Adjacent Angles Description",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
@@ -38,7 +38,7 @@
     "publisher": "Study.com",
     "type": "generic",
     "description": "Adjacent Angles Description",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
@@ -49,7 +49,7 @@
     "publisher": "SoftSchools.com",
     "type": "generic",
     "description": "Complementary and Supplementary Angles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AngleGroups",
     "topic": "links",
     "versionUID": "base"
@@ -60,7 +60,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "General description of angles including opposite angles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -71,7 +71,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Opposite angles definition and interactive diagram",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -82,7 +82,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Corresponding, Alternate and Interior angles definition and examples",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -93,7 +93,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Angles of a traversal description including parallel lines",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -104,7 +104,7 @@
     "publisher": "Math Planet",
     "type": "generic",
     "description": "Angles, parallel lines and transversals",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -115,7 +115,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Corresponding angles definition and interactive diagram",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AnglesAtIntersections",
     "topic": "links",
     "versionUID": "base"
@@ -126,7 +126,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive information about area",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Area",
     "topic": "links",
     "versionUID": "base"
@@ -137,7 +137,7 @@
     "publisher": "Khan Academy",
     "type": "video",
     "description": "Introduction to Area",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Area",
     "topic": "links",
     "versionUID": "base"
@@ -148,7 +148,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to Area",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Area",
     "topic": "links",
     "versionUID": "base"
@@ -159,7 +159,7 @@
     "publisher": "Cut The Knot",
     "type": "generic",
     "description": "What is Area? An elementary introduction",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Area",
     "topic": "links",
     "versionUID": "base"
@@ -170,7 +170,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Definition and proofs",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaCircle",
     "topic": "links",
     "versionUID": "base"
@@ -181,7 +181,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Introduction to circle area",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaCircle",
     "topic": "links",
     "versionUID": "base"
@@ -192,7 +192,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to circle area",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaCircle",
     "topic": "links",
     "versionUID": "base"
@@ -203,7 +203,7 @@
     "publisher": "mathematicsonline",
     "type": "video",
     "description": "Visual proof for area of a circle",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaCircle",
     "topic": "links",
     "versionUID": "base"
@@ -214,7 +214,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Triangle area definition plus additional ways for calculation",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -225,7 +225,7 @@
     "publisher": "Khan Academy",
     "type": "generic",
     "description": "Definition plus practice problems",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -236,7 +236,7 @@
     "publisher": "Basic-Mathematics.com",
     "type": "generic",
     "description": "Triangle area proof",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "AreaTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -247,7 +247,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive definition, history, properties and context",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Circle",
     "topic": "links",
     "versionUID": "base"
@@ -258,7 +258,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to circles, radius, diameter and circumference",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Circle",
     "topic": "links",
     "versionUID": "base"
@@ -269,7 +269,7 @@
     "publisher": "Kahn Academy",
     "type": "generic",
     "description": "Introduction to circles, radius, diameter and circumference with examples",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Circle",
     "topic": "links",
     "versionUID": "base"
@@ -280,7 +280,7 @@
     "publisher": "Cool Math",
     "type": "generic",
     "description": "Definition of circle properties",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Circle",
     "topic": "links",
     "versionUID": "base"
@@ -291,7 +291,7 @@
     "publisher": "Socratica",
     "type": "video",
     "description": "Introduction to circle and its properties",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Circle",
     "topic": "links",
     "versionUID": "base"
@@ -302,7 +302,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Description of congruent triangles with quiz",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -313,7 +313,7 @@
     "publisher": "Math is fun",
     "type": "generic",
     "description": "How to find if triangles are congruent",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -324,7 +324,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Congruence (geometry) including triangles and tests",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -335,7 +335,7 @@
     "publisher": "MathBitsNotebook",
     "type": "generic",
     "description": "Methods of Proving Triangles Congruent",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -346,7 +346,7 @@
     "author": "David Joyce",
     "type": "generic",
     "description": "Euclid's method for proving SAS, with commentry",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -357,7 +357,7 @@
     "publisher": "Cut The Knot",
     "type": "generic",
     "description": "SSS proofs",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -368,7 +368,7 @@
     "publisher": "ceemrr.com",
     "type": "generic",
     "description": "Euclid's ASA proof",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "CongruentTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -379,7 +379,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Definition and history of degrees",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Degrees",
     "topic": "links",
     "versionUID": "base"
@@ -390,7 +390,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction and examples of measuring angles in degrees",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Degrees",
     "topic": "links",
     "versionUID": "base"
@@ -401,7 +401,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive description of equilateral triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Equilateral",
     "topic": "links",
     "versionUID": "base"
@@ -412,7 +412,7 @@
     "publisher": "Splash Math",
     "type": "generic",
     "description": "Introduction to equilateral triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Equilateral",
     "topic": "links",
     "versionUID": "base"
@@ -423,7 +423,7 @@
     "publisher": "Khan Academy",
     "type": "video",
     "description": "Proof of why angles in an equilateral triangle are equal",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Equilateral",
     "topic": "links",
     "versionUID": "base"
@@ -434,7 +434,7 @@
     "publisher": "Khan Academy",
     "type": "video",
     "description": "Triangle exterior angle example.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -445,7 +445,7 @@
     "publisher": "Don't Memorise",
     "type": "video",
     "description": "Exterior angle in terms of interior angles.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -456,7 +456,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Interactive diagram of exterior angles.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -467,7 +467,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Explanation and Examples.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -478,7 +478,7 @@
     "publisher": "MathBits Notebook",
     "type": "generic",
     "description": "Proof and Explanation.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -489,7 +489,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Exterior Angle Theorem (Euclid and HSEAT).",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -500,7 +500,7 @@
     "publisher": "Varsity Tutors",
     "type": "generic",
     "description": "Theorem.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ExternalAngles",
     "topic": "links",
     "versionUID": "base"
@@ -511,7 +511,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive information on Isosceles triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Isosceles",
     "topic": "links",
     "versionUID": "base"
@@ -522,7 +522,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to Isosceles triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Isosceles",
     "topic": "links",
     "versionUID": "base"
@@ -533,7 +533,7 @@
     "publisher": "Splash Math",
     "type": "generic",
     "description": "Isosceles Triangles definition and examples",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Isosceles",
     "topic": "links",
     "versionUID": "base"
@@ -544,7 +544,7 @@
     "publisher": "Magoosh Math",
     "type": "generic",
     "description": "Isosceles triangles and their properties",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Isosceles",
     "topic": "links",
     "versionUID": "base"
@@ -555,7 +555,7 @@
     "author": "Intercept Theorem",
     "type": "generic",
     "description": "Proof for intercept theorem which is more general proportionality theorem",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ParallelSplitOfTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -566,7 +566,7 @@
     "publisher": "NCERT X Mathematics",
     "type": "generic",
     "description": "Proofs for why proportional triangles are similar, and why equiangular triangles are similar",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ParallelSplitOfTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -577,7 +577,7 @@
     "author": "Malin Christersson",
     "type": "generic",
     "description": "Triangle Proportionality Theorem and Similar Triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ParallelSplitOfTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -588,7 +588,7 @@
     "publisher": "Math Bits Notebook",
     "type": "generic",
     "description": "Side Splitter Theorem and Converse",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "ParallelSplitOfTriangle",
     "topic": "links",
     "versionUID": "base"
@@ -599,7 +599,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "General information about Quadrilaterals",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Quadrangles",
     "topic": "links",
     "versionUID": "base"
@@ -610,7 +610,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Quadrilateral definition, properties and types",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Quadrangles",
     "topic": "links",
     "versionUID": "base"
@@ -621,7 +621,7 @@
     "publisher": "Splash Math",
     "type": "generic",
     "description": "Quadrilateral definition",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Quadrangles",
     "topic": "links",
     "versionUID": "base"
@@ -632,7 +632,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to radians",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Radians",
     "topic": "links",
     "versionUID": "base"
@@ -643,7 +643,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive definition, history, uses and context",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Radians",
     "topic": "links",
     "versionUID": "base"
@@ -654,7 +654,7 @@
     "publisher": "Wolfram",
     "type": "generic",
     "description": "Simple definition",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Radians",
     "topic": "links",
     "versionUID": "base"
@@ -665,7 +665,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Introduction to radians",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Radians",
     "topic": "links",
     "versionUID": "base"
@@ -676,7 +676,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive description of rectangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RectanglesAndSquares",
     "topic": "links",
     "versionUID": "base"
@@ -687,7 +687,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Comprehensive description of rectangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RectanglesAndSquares",
     "topic": "links",
     "versionUID": "base"
@@ -698,7 +698,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Introduction to rectangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RectanglesAndSquares",
     "topic": "links",
     "versionUID": "base"
@@ -709,7 +709,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Introduction to rectangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RectanglesAndSquares",
     "topic": "links",
     "versionUID": "base"
@@ -720,7 +720,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Right Angle Triangles.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -731,7 +731,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Pythagorean Theorm.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -742,7 +742,7 @@
     "author": "Angie Head",
     "type": "generic",
     "description": "Several different theorem proofs.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -753,7 +753,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Theorem definition.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -764,7 +764,7 @@
     "publisher": "Math Planet",
     "type": "generic",
     "description": "Theorem definition and examples.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -775,7 +775,7 @@
     "publisher": "Khan Academy",
     "type": "video",
     "description": "Introduction with examples.",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -786,7 +786,7 @@
     "publisher": "Cut The Knot",
     "type": "generic",
     "description": "118 approaches to proving the theorem",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "RightAngleTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -797,7 +797,7 @@
     "publisher": "Math Open Reference",
     "type": "generic",
     "description": "Relationship of sides to interior angles in a triangle",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "SideAngleRelationship",
     "topic": "links",
     "versionUID": "base"
@@ -808,7 +808,7 @@
     "publisher": "Learn Alberta",
     "type": "generic",
     "description": "Introduction to side angle relatipnship",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "SideAngleRelationship",
     "topic": "links",
     "versionUID": "base"
@@ -819,7 +819,7 @@
     "publisher": "Proofs from the Book",
     "type": "generic",
     "description": "Proof showing size of angle relates to length of opposite side",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "SideAngleRelationship",
     "topic": "links",
     "versionUID": "base"
@@ -830,7 +830,7 @@
     "publisher": "Proofs from the Book",
     "type": "generic",
     "description": "Proof showing length of side relates to size of opposite angle",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "SideAngleRelationship",
     "topic": "links",
     "versionUID": "base"
@@ -841,7 +841,7 @@
     "publisher": "NCERT X Mathematics",
     "type": "generic",
     "description": "Proofs for why proporitional triangles are similar, and why equiangular triangles are similar",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "SimilarTriangles",
     "topic": "links",
     "versionUID": "base"
@@ -852,7 +852,7 @@
     "publisher": "Splash Math",
     "type": "generic",
     "description": "Introduction to Triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Triangles",
     "topic": "links",
     "versionUID": "base"
@@ -863,7 +863,7 @@
     "publisher": "Math Planet",
     "type": "generic",
     "description": "Introduction to Triangles",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Triangles",
     "topic": "links",
     "versionUID": "base"
@@ -874,7 +874,7 @@
     "publisher": "Wikipedia",
     "type": "generic",
     "description": "Detailed description including definition, properties and history",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Triangles",
     "topic": "links",
     "versionUID": "base"
@@ -885,7 +885,7 @@
     "publisher": "Math is Fun",
     "type": "generic",
     "description": "Definition, triangle types and interactive diagrams",
-    "lessonPath": "/Lessons/Math/Geometry_1",
+    "lessonPath": "/content/Math/Geometry_1",
     "lessonUID": "Triangles",
     "topic": "links",
     "versionUID": "base"

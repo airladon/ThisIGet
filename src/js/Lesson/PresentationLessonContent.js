@@ -2,10 +2,10 @@
 import Fig from 'figureone';
 import type { TypeParsablePoint } from 'figureone';
 // import LessonDescription from './lessonDescription';
-// import getLessonIndex from '../../Lessons/index';
+// import getLessonIndex from '../../content/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
 import SimpleLessonContent from './SimpleLessonContent';
-// import PopupBoxCollection from '../../Lessons/LessonsCommon/DiagramCollectionPopup';
+// import PopupBoxCollection from '../../content/LessonsCommon/DiagramCollectionPopup';
 
 const {
   Diagram, HTMLObject, Point,
@@ -980,7 +980,7 @@ class PresentationLessonContent extends SimpleLessonContent {
 
   // eslint-disable-next-line class-methods-use-this
   link(address: string, options: Object = {}) {
-    return link(`${window.location.origin}/Lessons/${address.replace(/^\//, '').replace(/\/$/, '')}`, joinObjects({}, { newTab: false }, options));
+    return link(`${window.location.origin}/content/${address.replace(/^\//, '').replace(/\/$/, '')}`, joinObjects({}, { newTab: false }, options));
   }
 
   addStar() {

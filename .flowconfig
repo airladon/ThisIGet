@@ -10,7 +10,7 @@ module.name_mapper.extension='scss' -> 'empty/object'
 module.name_mapper.extension='md' -> 'empty/object'
 
 [ignore]
-<PROJECT_ROOT>/src/Lessons/boilerplate/.*
+<PROJECT_ROOT>/src/content/boilerplate/.*
 <PROJECT_ROOT>/env/.*
 <PROJECT_ROOT>/migrations/.*
 <PROJECT_ROOT>/containers/.*

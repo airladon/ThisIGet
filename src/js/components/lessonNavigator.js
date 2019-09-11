@@ -5,7 +5,7 @@ import Fig from 'figureone';
 import LessonTile from './lessonTile';
 import LessonDescription from '../Lesson/lessonDescription';
 import makeLessonTree from '../Lesson/lessonTree';
-// import LI from '../../Lessons/lessonIndex';
+// import LI from '../../content/lessonIndex';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;

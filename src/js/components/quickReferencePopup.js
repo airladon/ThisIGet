@@ -53,7 +53,7 @@ export default class QuickReferencePopup extends React.Component
       link = <a
         className="lesson__qr__link_link"
         id="id_lesson__qr__link_link"
-        href={`${window.location.origin}/Lessons/${this.props.link}`}
+        href={`${window.location.origin}/content/${this.props.link}`}
         // rel='noreferrer noopener'
         // target="_blank"
       >

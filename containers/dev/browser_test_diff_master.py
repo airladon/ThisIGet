@@ -37,14 +37,14 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
-       or path == 'src/Lessons/index.js' \
-       or path.startswith == 'src/Lessons/boilerplate' \
+       or path == 'src/content/LessonsCommon/lessonindex.js' \
+       or path == 'src/content/index.js' \
+       or path.startswith == 'src/content/boilerplate' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
-    if parent.startswith('src/Lessons/') and \
-       not parent.startswith('src/Lessons/LessonsCommon'):
+    if parent.startswith('src/content/') and \
+       not parent.startswith('src/content/LessonsCommon'):
         jest_string = parent
         if len(parent.split('/')) > max_depth:
             jest_string = '/'.join(parent.split('/')[0:max_depth - 1])

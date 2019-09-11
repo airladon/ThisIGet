@@ -5,7 +5,7 @@ const pathTools = require('../containers/dev/pathTools.js');
 
 function createIndexList() {
   const projectPath = __dirname.split('/').slice(0, -1).join('/');
-  const lessonsPath = `${projectPath}/src/Lessons`;
+  const lessonsPath = `${projectPath}/src/content`;
   const versions = pathTools.getAllVersions(lessonsPath);
   let links = [];
   versions.forEach((versionPath) => {

@@ -86,7 +86,7 @@ def test_login(client, username, password, location):
 
 
 def test_login_page_forwarding(client):
-    path = '/Lessons/Math/Geometry_1/Circle/base/explanation'
+    path = '/content/Math/Geometry_1/Circle/base/explanation'
     res = login(client, follow_redirects=False, next_page=path)
     assert res.headers['Location'] == f'https://localhost{path}'
     logout(client)

@@ -49,6 +49,10 @@ def make_response_with_files(*args, **kwargs):
         dist = lessons['static/dist']
         static = lessons['static']
         vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
+        for key, value in dist.items():
+            if key.endswith('js'):
+                print(key)
+
         common_lessons_js = f"/{'static/dist'}/{dist['commonlessons.js']}"
         main_css = f"/{'static/dist'}/{dist['home.css']}"
         main_js = f"/{'static/dist'}/{dist['home.js']}"
@@ -170,8 +174,8 @@ def contact():
     return information_response('contact')
 
 
-# @app.route('/Lessons/', defaults={'path': ''})
-# @app.route('/Lessons/<path:path>')
+# @app.route('/content/', defaults={'path': ''})
+# @app.route('/content/<path:path>')
 # def catch_all(path):
 #     return 'You want path: %s' % path
 
@@ -185,15 +189,15 @@ def is_logged_in():
     return jsonify({'username': result})
 
 
-@app.route('/Lessons/', defaults={'path': ''})  # noqa
-@app.route('/Lessons/<path:path>')
+@app.route('/content/', defaults={'path': ''})  # noqa
+@app.route('/content/<path:path>')
 def get_lesson(path):
-    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
+    lesson_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
     if (lesson_path in lessons):
-        js = f'/static/dist/Lessons/{path}/{lessons[lesson_path]["lesson.js"]}'
-        css = f'/static/dist/Lessons/{path}/' \
+        js = f'/static/dist/content/{path}/{lessons[lesson_path]["lesson.js"]}'
+        css = f'/static/dist/content/{path}/' \
               f'{lessons[lesson_path]["lesson.css"]}'
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
@@ -226,10 +230,10 @@ def get_lesson(path):
     # return res
 
 
-@app.route('/qr/Lessons/', defaults={'path': ''})
-@app.route('/qr/Lessons/<path:path>')
+@app.route('/qr/content/', defaults={'path': ''})
+@app.route('/qr/content/<path:path>')
 def get_qr_file_location(path):
-    qr_path = f'static/dist/Lessons/{path}'.strip('/')
+    qr_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
     if (qr_path in lessons):
@@ -242,16 +246,16 @@ def get_qr_file_location(path):
     })
 
 
-@app.route('/dev/Lessons/', defaults={'path': ''})
-@app.route('/dev/Lessons/<path:path>')
+@app.route('/dev/content/', defaults={'path': ''})
+@app.route('/dev/content/<path:path>')
 def get_lesson_dev(path):
-    lesson_path = f'static/dist/Lessons/{path}'.strip('/')
+    lesson_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
     if (lesson_path in lessons):
-        js = f'/static/dist/Lessons/{path}/' \
+        js = f'/static/dist/content/{path}/' \
              f'{lessons[lesson_path]["lesson-dev.js"]}'
-        css = f'/static/dist/Lessons/{path}/' \
+        css = f'/static/dist/content/{path}/' \
               f'{lessons[lesson_path]["lesson-dev.css"]}'
     lesson_page = request.args.get('page')
 
@@ -265,10 +269,10 @@ def get_lesson_dev(path):
     return res
 
 
-# @app.route('/Lessons/<subject>/<lesson_id>')
+# @app.route('/content/<subject>/<lesson_id>')
 # def get_lesson(subject, lesson_id):
 #     print(lesson_id)
-#     path = f'/static/dist/Lessons/{subject}/{lesson_id}'
+#     path = f'/static/dist/content/{subject}/{lesson_id}'
 #     css = f'{path}/lesson.css'
 #     js = f'{path}/lesson.js'
 #     return render_template('lesson.html', css=css, js=js)

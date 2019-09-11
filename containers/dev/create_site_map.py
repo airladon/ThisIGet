@@ -36,7 +36,7 @@ if existing_sitemap_content:
 # #############################################################################
 # Get all lesson versions
 versions = []
-for root, dirs, files in os.walk("./src/Lessons"):
+for root, dirs, files in os.walk("./src/content"):
     for file in files:
         if ('quickReference' in root):
             continue

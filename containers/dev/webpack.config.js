@@ -69,7 +69,7 @@ module.exports = (env) => {
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
-  createLessonIndex(e.name, './src/Lessons');
+  createLessonIndex(e.name, './src/content');
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
@@ -129,19 +129,19 @@ module.exports = (env) => {
   const copy = new CopyWebpackPlugin(
     [
       {
-        from: '/opt/app/src/Lessons/*/*/topic.png',
+        from: '/opt/app/src/content/*/*/topic.png',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)topic\.png$/,
         ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*.svg',
+        from: '/opt/app/src/content/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
         ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*/*.svg',
+        from: '/opt/app/src/content/*/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
         ignore: ['*boilerplate*'],
@@ -315,7 +315,7 @@ module.exports = (env) => {
             minChunks: 2,
             priority: 0,
             reuseExistingChunk: true,
-            test: /Lessons\/LessonsCommon/,
+            test: /content\/LessonsCommon/,
             name: 'commonlessons',
           },
           lessonindex: {
@@ -323,7 +323,7 @@ module.exports = (env) => {
             minChunks: 1,
             priority: 0,
             reuseExistingChunk: true,
-            test: /Lessons\/index.js/,
+            test: /content\/index.js/,
             name: 'lessonIndex',
           },
           // lessonIndex: {

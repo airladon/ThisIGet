@@ -5,4 +5,4 @@ entryPoints.updateDetailsAndVersions();
 
 // const createLessonIndex = require('./createIndex.js');
 
-// createLessonIndex('stage', './src/Lessons');
+// createLessonIndex('stage', './src/content');

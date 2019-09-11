@@ -17,19 +17,19 @@ function entryPoints(buildMode) {
     disclaimer: './src/js/views/information/disclaimer.js',
     contribute: './src/js/views/information/contribute.js',
     polyfill: './src/js/polyfills.js',
-    // lessonIndex: './src/Lessons/lessonIndex.js',
+    lessonIndex: './src/content/lessonIndex.js',
   };
 
   const lessons = pathTools.getAllPaths(
-    './src/Lessons',
+    './src/content',
     ['lesson.js', 'quickReference.js'],
     ['lesson-dev.js'],
     buildMode,
   );
   lessons.forEach((lesson) => {
-    const p = lesson.path.replace(/src\/Lessons\//, '');
+    const p = lesson.path.replace(/src\/content\//, '');
     const name = lesson.name.slice(0, -3);
-    points[`Lessons/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
+    points[`content/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
   });
   return points;
 }
@@ -43,7 +43,7 @@ function escape(text) {
 function updateDetailsAndVersions() {
   // eslint-disable-next-line no-console
   console.log('Updating details and versions...');
-  const lessons = pathTools.getAllLessons('./src/Lessons');
+  const lessons = pathTools.getAllLessons('./src/content');
   lessons.forEach((lessonPath) => {
     const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
@@ -82,7 +82,7 @@ function updateDetailsAndVersions() {
     }
   });
 
-  const versions = pathTools.getAllVersions('./src/Lessons');
+  const versions = pathTools.getAllVersions('./src/content');
   versions.forEach((versionPath) => {
     const versionPathAbsolute
               = `${process.cwd()}/${versionPath}/version.js`;
