@@ -43,7 +43,7 @@ function escape(text) {
 function updateDetailsAndVersions() {
   // eslint-disable-next-line no-console
   console.log('Updating details and versions...');
-  const lessons = pathTools.getAllLessons('./src/content');
+  const lessons = pathTools.getAllContent('./src/content');
   lessons.forEach((lessonPath) => {
     const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
@@ -177,5 +177,5 @@ function updateDetailsAndVersions() {
 }
 
 module.exports = {
-  entryPoints, updateDetailsAndVersions, // makeLessonIndex, getAllLessons, updateDetailsAndVersions,
+  entryPoints, updateDetailsAndVersions, // makeLessonIndex, getAllContent, updateDetailsAndVersions,
 };

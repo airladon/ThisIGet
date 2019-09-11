@@ -76,13 +76,13 @@ for file_name in current.keys():
        or file_name.startswith('/dist/polyfill') \
        or file_name.startswith('/dist/vendors') \
        or file_name.startswith('/dist/input') \
-       or file_name.startswith('/dist/Lessons') \
+       or file_name.startswith('/dist/content') \
        or file_name.startswith('/index.js') \
        or file_name.startswith('/index.js.map') \
        or file_name.startswith('/dist/commonlessons'):
         continue
     if file_name not in existing or existing[file_name] != md5:
-        if not file_name.startswith('/dist/Lessons'):
+        if not file_name.startswith('/dist/content'):
             test_all = True
             # print(file_name, file_name not in existing)
             # print(f'All: {file_name}')

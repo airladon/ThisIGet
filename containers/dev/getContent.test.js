@@ -1,4 +1,4 @@
-const entryPoints = require('./getLessons.js');
+const entryPoints = require('./getContent.js');
 
 // // entryPoints.makeLessonIndex('dev');
 entryPoints.updateDetailsAndVersions();

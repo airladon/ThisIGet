@@ -196,8 +196,8 @@ export default class LessonNavigator extends React.Component
   }
 
   componentDidMount() {
-    this.centerLessons();
-    // window.addEventListener('resize', this.centerLessons.bind(this));
+    this.centerTopics();
+    // window.addEventListener('resize', this.centerTopics.bind(this));
     this.scrollToSelected();
   }
 
@@ -228,7 +228,7 @@ export default class LessonNavigator extends React.Component
   }
 
   // eslint-disable-next-line class-methods-use-this
-  centerLessons() {
+  centerTopics() {
     const navigatorContainer = document
       .getElementById(`id_navigator__container_${this.learningPath}`);
     const lessonsContainer =

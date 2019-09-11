@@ -78,7 +78,7 @@ class SimpleLessonContent {
       const versionUID = splitQR.slice(-1)[0];
       const lessonUID = splitQR.slice(-2, -1)[0];
       const path = splitQR.slice(0, -2).join('/');
-      this.loadQR(qr, `Lessons/${path}/${lessonUID}/quickReference/${versionUID}`);
+      this.loadQR(qr, `content/${path}/${lessonUID}/quickReference/${versionUID}`);
     });
   }
 

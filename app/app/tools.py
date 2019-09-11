@@ -144,7 +144,7 @@ def format_email(email):
     return f'{user}@{domain}'
 
 
-def getLessons():
+def getContent():
     file_list = {}
     for root, dirs, files in os.walk('./app/app/static'):
         for file in files:

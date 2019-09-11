@@ -3,7 +3,7 @@ const path = require('path');
 const pathTools = require('./pathTools.js');
 
 function createLessonIndex(buildMode, lessonsPath) {
-  const lessons = pathTools.getAllLessons(lessonsPath);
+  const lessons = pathTools.getAllContent(lessonsPath);
   // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
   let outStr = `export default function lessonIndex() {
   return {`;

@@ -149,8 +149,8 @@ else
     -v $PROJECT_PATH/containers/dev/build.sh:/opt/app/build.sh \
     -v $PROJECT_PATH/containers/dev/deploy_pipeline.sh:/opt/app/deploy_pipeline.sh \
     -v $PROJECT_PATH/containers/dev/dev-server.sh:/opt/app/dev-server.sh \
-    -v $PROJECT_PATH/containers/dev/getLessons.js:/opt/app/getLessons.js \
-    -v $PROJECT_PATH/containers/dev/getLessons.test.js:/opt/app/getLessons.test.js \
+    -v $PROJECT_PATH/containers/dev/getContent.js:/opt/app/getContent.js \
+    -v $PROJECT_PATH/containers/dev/getContent.test.js:/opt/app/getContent.test.js \
     -v $PROJECT_PATH/containers/dev/createIndex.js:/opt/app/createIndex.js \
     -v $PROJECT_PATH/containers/dev/create_site_map.py:/opt/app/create_site_map.py \
     -v $PROJECT_PATH/containers/dev/create_site_hashes.py:/opt/app/create_site_hashes.py \

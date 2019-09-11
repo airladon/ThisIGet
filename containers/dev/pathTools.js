@@ -40,7 +40,7 @@ function getAllPaths(
   return lessons;
 }
 
-function getAllLessons(lessonsPath) {
+function getAllContent(lessonsPath) {
   const lessons = [];
   walkSync(lessonsPath, 'details.js', (lessonPath) => {
     if (!lessonPath.includes('boilerplate')) {
@@ -59,5 +59,5 @@ function getAllVersions(versionsPath) {
 }
 
 module.exports = {
-  walkSync, getAllLessons, getAllVersions, getAllPaths,
+  walkSync, getAllContent, getAllVersions, getAllPaths,
 };
