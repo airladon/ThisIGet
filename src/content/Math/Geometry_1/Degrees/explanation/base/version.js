@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Explanation on why we use degrees as a measure of angle',
   htmlDescription: 'How angle is measured, why use degrees and common angles in degrees',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

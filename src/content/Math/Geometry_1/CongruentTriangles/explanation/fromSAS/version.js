@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Prove SSS, ASA and AAS from SAS',
   htmlDescription: 'Proofs for SSS, ASA and AAS triangle congruence from SAS',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

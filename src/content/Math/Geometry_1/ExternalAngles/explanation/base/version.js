@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'External angles (also called exterior angles) in a triangle explanation through presentation',
   htmlDescription: 'Proof of external angles in a triangle equalling sum of opposite internal angles',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

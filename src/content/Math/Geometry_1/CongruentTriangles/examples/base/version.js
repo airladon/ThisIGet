@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Examples on how to find and use congruent triangles',
   htmlDescription: 'Examples showing how to identify congruent triangles, and then how to use the triangles to find unknown properties',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

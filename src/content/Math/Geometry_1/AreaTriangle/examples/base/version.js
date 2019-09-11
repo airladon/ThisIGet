@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Triangle area examples',
   htmlDescription: 'Calculation examples using area of a triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

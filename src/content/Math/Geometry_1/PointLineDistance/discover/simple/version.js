@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover the angle of the distance between a point and line',
   htmlDescription: 'Figure out why the shortest distance between a point and a line is perpendicular to the line',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

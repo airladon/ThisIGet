@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of Circle Area',
   htmlDescription: 'Area of a circle equation',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

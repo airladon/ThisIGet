@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of using degrees to measure angle',
   htmlDescription: 'History of word, interactive diagram to see different angles in degrees',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

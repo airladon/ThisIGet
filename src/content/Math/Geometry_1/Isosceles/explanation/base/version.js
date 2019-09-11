@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Isosceles triangles and proof',
   htmlDescription: 'Proof for if two sides are equal why two angles are equal and vise versa',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

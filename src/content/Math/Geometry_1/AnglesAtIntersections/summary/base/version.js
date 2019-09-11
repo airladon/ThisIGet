@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of opposite, corresponding, adjacent and interior angles',
   htmlDescription: '',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

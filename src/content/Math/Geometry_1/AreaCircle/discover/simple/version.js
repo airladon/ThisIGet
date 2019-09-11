@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover what the area of a circle is',
   htmlDescription: 'Figure out why the area of a circle is what it is',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

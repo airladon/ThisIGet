@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover why ...',
   htmlDescription: 'Figure out why ...',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

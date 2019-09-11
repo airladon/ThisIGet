@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles',
   htmlDescription: 'Introduction to opposite, corresponding, alternate and interior angles and their proofs',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

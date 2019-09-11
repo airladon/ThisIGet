@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
   htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

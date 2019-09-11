@@ -8,7 +8,7 @@ var version = {
   description: 'Interactive triangle',
   htmlTitle: 'Interactive triangle to explore congruence possibilities',
   htmlDescription: 'Make different triangles to determine which set of properties is required to know if triangles are congruent',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

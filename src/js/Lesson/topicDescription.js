@@ -27,7 +27,7 @@ export type TypeTopicDescription = {
         title: string,
         description: string,
         uid: string,
-        fullContent: boolean,
+        fullTopic: boolean,
         type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
         aveRating: number;
         numRatings: number;
@@ -58,7 +58,7 @@ export default class TopicDescription {
         title: string,
         description: string,
         uid: string,
-        fullContent: boolean,
+        fullTopic: boolean,
         type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
         aveRating: number;
         numRatings: number;
@@ -87,7 +87,7 @@ export default class TopicDescription {
             title: string,
             description: string,
             uid: string,
-            fullContent: boolean,
+            fullTopic: boolean,
             type: 'presentation' | 'singlePage' | 'video' | 'audio',
           },
         },

@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz: Calculate the circle property',
   htmlDescription: 'Calculate circle property from either the radius, diameter, area or circumference',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

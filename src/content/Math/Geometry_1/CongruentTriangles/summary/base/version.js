@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of congruent triangles and SAS, SSA, ASA, AAS, SSS, AAA',
   htmlDescription: 'Facts only summary of congruent triangles and congruent triangle tests',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

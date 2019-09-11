@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Are triangles the same (congruent) if you have just three side lengths?',
   htmlDescription: 'Change side lengths and form triangles to see what is possible',
-  fullContent: false,
+  fullTopic: false,
   type: 'presentation',
 };
 

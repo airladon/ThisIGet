@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to quadrangles and quadrilaterals',
   htmlDescription: 'Quadrangles, quadrilaterals and their properties',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

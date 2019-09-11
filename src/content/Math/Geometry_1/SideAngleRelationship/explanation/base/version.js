@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to relationship between triangle side length and angle',
   htmlDescription: 'Proof of why larger angles are opposite longer sides in a triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

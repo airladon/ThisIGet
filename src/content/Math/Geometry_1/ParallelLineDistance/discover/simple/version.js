@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover the properties of distance between parallel lines',
   htmlDescription: 'Figure out why the shortest distance between parallel lines is perpendicular and constant',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

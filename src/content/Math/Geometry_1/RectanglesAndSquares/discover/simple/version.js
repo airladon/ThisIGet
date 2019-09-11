@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Self discover why a rectangles opposite sides are equal and parallel',
   htmlDescription: 'Figure out why a rectangle has opposite sides that are equal and parallel',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

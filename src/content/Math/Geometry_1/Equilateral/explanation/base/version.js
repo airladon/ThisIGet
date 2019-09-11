@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Equilateral triangle derivation from an isosceles triangle',
   htmlDescription: 'Use isosceles triangles to show the properties of an equilateral triangle, and the relationship of its angles',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

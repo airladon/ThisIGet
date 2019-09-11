@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Splitting a triangle with a parallel line',
   htmlDescription: 'Summary showing splitting a triangle with a parallel line results in a similar triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

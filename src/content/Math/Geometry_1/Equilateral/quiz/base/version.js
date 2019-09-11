@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Equilateral triangles quiz',
   htmlDescription: 'Solve problems with equilateral triangles',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

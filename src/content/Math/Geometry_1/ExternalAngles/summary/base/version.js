@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of triangle external angle (or exterior angle)',
   htmlDescription: 'Interactive diagram showing and describing the external angle of a triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

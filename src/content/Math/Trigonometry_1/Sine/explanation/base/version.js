@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: '',
   htmlDescription: '',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

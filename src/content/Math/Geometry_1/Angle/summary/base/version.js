@@ -8,7 +8,7 @@ var version = {
   description: 'Summary of Angles introduction',
   htmlTitle: 'Summary of Angles introduction',
   htmlDescription: 'Definition of an angle and where the name comes from',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

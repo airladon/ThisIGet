@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Equilateral triangle summary',
   htmlDescription: 'Interactive diagram showing properties of an equilateral triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

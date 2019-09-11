@@ -8,7 +8,7 @@ var version = {
   description: 'Questions to identify and calculate complementary, supplementary and explementary angles',
   htmlTitle: 'Complementary, Supplementary and Explementary angles quiz',
   htmlDescription: 'Identify and calculate angles that are complementary, supplementary and explementary',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

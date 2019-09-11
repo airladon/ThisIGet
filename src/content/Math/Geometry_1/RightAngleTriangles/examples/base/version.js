@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Right Angle Triangle example calculations',
   htmlDescription: 'Examples showing how to use the properties of right angle triangles to solve various problems',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

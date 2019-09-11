@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to distance between a point and line',
   htmlDescription: 'Properties of distance between point and a line',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

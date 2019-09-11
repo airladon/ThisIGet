@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of triangles and their properties',
   htmlDescription: '',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

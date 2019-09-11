@@ -8,7 +8,7 @@ var version = {
   description: 'Example calculations of angles in a triangle',
   htmlTitle: 'Example calculations of angles in a triangle',
   htmlDescription: 'Calculating angles in various geometries using sum of angles in a triangle',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

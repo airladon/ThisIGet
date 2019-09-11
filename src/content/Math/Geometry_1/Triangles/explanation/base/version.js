@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Introduction to triangles and their properties',
   htmlDescription: 'Proof that triangle total angle equals 180º',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Example problems with complementary angles, supplementary angles and explementary angles',
   htmlDescription: 'Identify and calculate complementary, supplementary and explementary angles',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

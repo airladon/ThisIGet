@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz: Create a rectangle or square with area',
   htmlDescription: 'Create a rectangle or square that has some defined area on this dynamic page',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

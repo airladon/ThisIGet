@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'External angle calculation examples',
   htmlDescription: 'Examples of geometries where calculating the external angle of a triangle is needed',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 

@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Congruent triangles and how to determine congruence',
   htmlDescription: 'Introduction to congruent triangles and intuitive reasoning behind the SAS, SSA, ASA, AAS, SSS, AAA congruence tests',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

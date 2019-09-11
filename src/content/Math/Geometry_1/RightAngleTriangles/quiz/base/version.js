@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Quiz - Find the unknown angle, side or area in a right angle triangle.',
   htmlDescription: 'Dynamic quiz where no two questions are the same',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

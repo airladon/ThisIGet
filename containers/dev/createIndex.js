@@ -64,7 +64,7 @@ function createContentIndex(buildMode, lessonsPath) {
             let versionDescription = '';
             let versionHtmlTitle = '';
             let versionHtmlDescription = '';
-            let fullContent = false;
+            let fullTopic = false;
             let type = 'generic';
             // let references = [];
             const versionPathAbsolute
@@ -91,8 +91,8 @@ function createContentIndex(buildMode, lessonsPath) {
               if (version.htmlDescription != null) {
                 versionHtmlDescription = version.htmlDescription;
               }
-              if (version.fullContent != null) {
-                ({ fullContent } = version);
+              if (version.fullTopic != null) {
+                ({ fullTopic } = version);
               }
               if (version.type != null) {
                 ({ type } = version);
@@ -115,7 +115,7 @@ function createContentIndex(buildMode, lessonsPath) {
               outStr = `${outStr}\n            description: '${versionDescription.replace(/'/, '\\\'')}',`;
               outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle.replace(/'/, '\\\'')}',`;
               outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription.replace(/'/, '\\\'')}',`;
-              outStr = `${outStr}\n            fullContent: ${fullContent.toString()},`;
+              outStr = `${outStr}\n            fullTopic: ${fullTopic.toString()},`;
             }
             outStr = `${outStr}\n          },`;
           });
@@ -129,7 +129,7 @@ function createContentIndex(buildMode, lessonsPath) {
             outStr = `${outStr}\n            type: 'presentation',`;
             outStr = `${outStr}\n            title: '${versionUid}',`;
             outStr = `${outStr}\n            description: '',`;
-            outStr = `${outStr}\n            fullContent: false,`;
+            outStr = `${outStr}\n            fullTopic: false,`;
             outStr = `${outStr}\n          },`;
           });
           outStr = `${outStr}\n        },`;

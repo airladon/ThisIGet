@@ -8,7 +8,7 @@ var version = {
   description: 'Introduction to Angles.',
   htmlTitle: 'Introduction to Angles',
   htmlDescription: 'Introduction to the concept of angle',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

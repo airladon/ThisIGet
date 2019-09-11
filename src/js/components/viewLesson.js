@@ -21,7 +21,7 @@ type Props = {
   //   topic: string,
   //   title: string,
   //   description: string,
-  //   fullContent: boolean,
+  //   fullTopic: boolean,
   //   type: 'presentation' | 'singlePage' | 'generic',
   // },
   isLoggedIn: boolean,

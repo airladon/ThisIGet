@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Intuitive derivation of circle area',
   htmlDescription: 'Find the equation for circle area using triangles',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

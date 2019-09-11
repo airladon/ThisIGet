@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Summary of relationship between side and angle in a triangle',
   htmlDescription: '',
-  fullContent: true,
+  fullTopic: true,
   type: 'presentation',
 };
 

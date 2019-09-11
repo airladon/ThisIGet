@@ -37,7 +37,7 @@ type Props = {
   //   topic: string,
   //   title: string,
   //   description: string,
-  //   fullContent: boolean,
+  //   fullTopic: boolean,
   //   type: 'presentation' | 'singlePage' | 'generic',
   // },
   isLoggedIn: boolean;
@@ -242,7 +242,7 @@ export default class LessonComponent extends React.Component
             link = `/dev${topicDescription.path}/${topicDescription.uid}/quickReference/${versionUID}`;
           }
           // const { description } = version;
-          const { fullContent } = version;
+          const { fullTopic } = version;
           const { type } = version;
           const rating = this.state.ratings[approachUID][versionUID];
           let { userRating } = rating;
@@ -266,7 +266,7 @@ export default class LessonComponent extends React.Component
             numHighRatings: rating.numHighRatings,
             description: '',
             active,
-            fullContent,
+            fullTopic,
             type,
           };
         });
@@ -291,11 +291,11 @@ export default class LessonComponent extends React.Component
       if (approaches[approachUID] != null && approachUID !== 'quickReference') {
         const approach = approaches[approachUID];
         // $FlowFixMe - onPath is there and boolean
-        const fullContentCount = Object.keys(approach)
-          .filter(ver => approach[ver].fullContent).length;
+        const fullTopicCount = Object.keys(approach)
+          .filter(ver => approach[ver].fullTopic).length;
         // $FlowFixMe - onPath is there and boolean
         const partialLessonCount = Object.keys(approach)
-          .filter(ver => !approach[ver].fullContent).length;
+          .filter(ver => !approach[ver].fullTopic).length;
         let selected = false;
         if (this.approachUID === approachUID) {
           selected = true;
@@ -317,8 +317,8 @@ export default class LessonComponent extends React.Component
         vUIDs = vUIDs.sort((aKey, bKey) => {
           const a = approach[aKey];
           const b = approach[bKey];
-          if (a.fullContent === true && b.fullContent === false) { return -1; }
-          if (a.fullContent === false && b.fullContent === true) { return 1; }
+          if (a.fullTopic === true && b.fullTopic === false) { return -1; }
+          if (a.fullTopic === false && b.fullTopic === true) { return 1; }
           return 0;
         });
         const listItems = [];
@@ -332,7 +332,7 @@ export default class LessonComponent extends React.Component
         if (partialLessonCount > 0
           && (approachUID === 'explanation' || approachUID === 'discover' || approachUID === 'summary')
         ) {
-          listItems.splice(fullContentCount, 0, {
+          listItems.splice(fullTopicCount, 0, {
             label: <div className="topic_button__portion_separator">
               <div className="topic_button__portion_separator_label">
                 {'Portion of Topic'}

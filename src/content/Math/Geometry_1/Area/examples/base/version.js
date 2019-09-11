@@ -8,7 +8,7 @@ var version = {
   description: '',
   htmlTitle: 'Area examples',
   htmlDescription: 'Calculation examples of areas for different shapes',
-  fullContent: true,
+  fullTopic: true,
   type: 'singlePage',
 };
 
