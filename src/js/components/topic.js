@@ -4,7 +4,7 @@ import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import LearningPathNavigator from './learningPathNavigator';
 import TopicTitle from './topicTitle';
-import getContentIndex from '../../content/contentIndex';
+import getTopicIndez from '../../content/topicIndex';
 import TopicDescription from '../Lesson/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
@@ -34,7 +34,7 @@ type State = {
 };
 
 function getTopicDescription(uid: string) {
-  const lessons = getContentIndex();
+  const lessons = getTopicIndez();
   return lessons[uid];
 }
 

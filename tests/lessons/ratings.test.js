@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
-// import getContentIndex from '../../src/content/common/lessonindex';
-import getContentIndex from '../../src/content/contentIndex';
+// import getTopicIndez from '../../src/content/common/lessonindex';
+import getTopicIndez from '../../src/content/topicIndex';
 
 const fs = require('fs');
 const fetch = require('node-fetch');
@@ -30,7 +30,7 @@ function getAddress() {
 const sitePath = getAddress();
 
 const allTests = [];
-const index = getContentIndex();
+const index = getTopicIndez();
 Object.keys(index).forEach((lessonName) => {
   const lesson = index[lessonName];
   const { uid } = lesson;

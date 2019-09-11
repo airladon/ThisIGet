@@ -37,7 +37,7 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/content/contentIndexObj.js' \
+       or path == 'src/content/topicIndexObj.js' \
        or path.startswith == 'src/content/boilerplate' \
        or path == 'app/app/app.db':
         continue
@@ -69,15 +69,15 @@ for file_name in current.keys():
     md5 = current[file_name]
     if file_name == '/sitemap.xml' \
        or file_name == '/hashes.json' \
-       or file_name.startswith('/dist/contentIndex') \
+       or file_name.startswith('/dist/topicIndex') \
        or file_name.startswith('/dist/tools') \
        or file_name.startswith('/dist/main') \
        or file_name.startswith('/dist/polyfill') \
        or file_name.startswith('/dist/vendors') \
        or file_name.startswith('/dist/input') \
        or file_name.startswith('/dist/content') \
-       or file_name.startswith('/contentIndexObj.js') \
-       or file_name.startswith('/contentIndexObj.js.map') \
+       or file_name.startswith('/topicIndexObj.js') \
+       or file_name.startswith('/topicIndexObj.js.map') \
        or file_name.startswith('/dist/commoncontent'):
         continue
     if file_name not in existing or existing[file_name] != md5:

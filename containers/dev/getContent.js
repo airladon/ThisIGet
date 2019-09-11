@@ -17,7 +17,7 @@ function entryPoints(buildMode) {
     disclaimer: './src/js/views/information/disclaimer.js',
     contribute: './src/js/views/information/contribute.js',
     polyfill: './src/js/polyfills.js',
-    contentIndex: './src/content/contentIndex.js',
+    topicIndex: './src/content/topicIndex.js',
   };
 
   const lessons = pathTools.getAllPaths(

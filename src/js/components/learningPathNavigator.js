@@ -5,7 +5,6 @@ import Fig from 'figureone';
 import TopicTile from './topicTile';
 import TopicDescription from '../Lesson/topicDescription';
 import makeTopicTree from '../Lesson/topicTree';
-// import LI from '../../content/contentIndex';
 
 const { Point, Rect } = Fig;
 const { getDefinedCSSVariables } = Fig.tools.css;
@@ -18,7 +17,7 @@ type Props = {
 export default class LearningPathNavigator extends React.Component
                                     <Props> {
   selected: string;
-  contentIndex: Array<Array<TopicDescription>>;
+  topicIndex: Array<Array<TopicDescription>>;
   topicTrees: Object;
   key: number;
   selectedTopic: TopicDescription;
@@ -37,7 +36,7 @@ export default class LearningPathNavigator extends React.Component
     super(props);
     // console.log(LI)
     this.topicTrees = makeTopicTree();
-    this.contentIndex = this.topicTrees[props.learningPath].tree;
+    this.topicIndex = this.topicTrees[props.learningPath].tree;
     this.learningPathPath = this.topicTrees[props.learningPath].path;
     this.learningPathName = this.topicTrees[props.learningPath].name;
     this.getVariables();
@@ -81,7 +80,7 @@ export default class LearningPathNavigator extends React.Component
     let x = hSpace;
     this.topicArray = [];
     let maxParallel = 1;
-    this.contentIndex.forEach((topic) => {
+    this.topicIndex.forEach((topic) => {
       if (Array.isArray(topic)) {
         if (topic.length > maxParallel) {
           maxParallel = topic.length;
@@ -92,7 +91,7 @@ export default class LearningPathNavigator extends React.Component
                     + (maxParallel - 1) * vSpace
                     + vSpace * 2) / 2;
 
-    this.contentIndex.forEach((topic) => {
+    this.topicIndex.forEach((topic) => {
       if (Array.isArray(topic)) {
         const len = topic.length;
         const totalHeight = len * height + (len - 1) * vSpace;
@@ -183,7 +182,7 @@ export default class LearningPathNavigator extends React.Component
 
   topics() {
     const topics = [];
-    this.contentIndex.forEach((topic) => {
+    this.topicIndex.forEach((topic) => {
       if (Array.isArray(topic)) {
         topic.forEach((parallelTopic) => {
           topics.push(this.createLessonJsx(parallelTopic));

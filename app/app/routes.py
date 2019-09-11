@@ -40,7 +40,7 @@ def make_response_with_files(*args, **kwargs):
     common_content_js = ''
     figure_one_js = ''
     polyfill_js = ''
-    content_index_js = ''
+    topic_index_js = ''
     about_js = ''
     # The checks for keys in lessons is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
@@ -55,7 +55,7 @@ def make_response_with_files(*args, **kwargs):
         tools_js = f"/{'static/dist'}/{dist['tools.js']}"
         figure_one_js = f"/{'static'}/{static['figureone.min.js']}"
         polyfill_js = f"/{'static/dist'}/{dist['polyfill.js']}"
-        content_index_js = f"/{'static/dist'}/{dist['contentIndex.js']}"
+        topic_index_js = f"/{'static/dist'}/{dist['topicIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
 
@@ -63,7 +63,7 @@ def make_response_with_files(*args, **kwargs):
         *args, **kwargs,
         tools_js=tools_js, polyfill_js=polyfill_js,
         common_content_js=common_content_js, vendors_js=vendors_js,
-        figure_one_js=figure_one_js, content_index_js=content_index_js,
+        figure_one_js=figure_one_js, topic_index_js=topic_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
         about_css=about_css,
     ))

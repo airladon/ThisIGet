@@ -5,7 +5,7 @@ const pathTools = require('./pathTools.js');
 function createContentIndex(buildMode, lessonsPath) {
   const lessons = pathTools.getAllContent(lessonsPath);
   // let outStr = `import TopicDescription from '../../js/Lesson/topicDescription';
-  let outStr = `export default function contentIndex() {
+  let outStr = `export default function topicIndex() {
   return {`;
   lessons.forEach((lessonPath) => {
     const splitLessonPath = lessonPath.split('/');
@@ -153,7 +153,7 @@ function createContentIndex(buildMode, lessonsPath) {
   // outStr = `${outStr}\n  return lessonIndex;\n}\n`;
   outStr = `${outStr}\n}\n`;
   if (outStr !== '') {
-    fs.writeFile(`${lessonsPath}/contentIndexObj.js`, outStr, (err) => {
+    fs.writeFile(`${lessonsPath}/topicIndexObj.js`, outStr, (err) => {
       if (err) {
         // eslint-disable-next-line no-console
         console.log(err);

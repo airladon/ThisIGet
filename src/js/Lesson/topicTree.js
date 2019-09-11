@@ -1,17 +1,17 @@
 // @flow
-import getContentIndex from '../../content/contentIndex';
+import getTopicIndez from '../../content/topicIndex';
 import type { TypeTopicDescription } from './topicDescription';
 // first array of arrays: all uids with no dependencies
 // second array of arrays: all uids with dependencies alreay in the done list
 
 function splitIndexIntoLearningPaths(
-  contentIndex: { [uid: string]: TypeTopicDescription },
+  topicIndex: { [uid: string]: TypeTopicDescription },
   pathDepth: number = 3,
 ) {
   const learningPaths = {};
-  Object.keys(contentIndex).forEach((key) => {
-    const content = contentIndex[key];
-    const fullPath = content.path.split('/');
+  Object.keys(topicIndex).forEach((topicUID) => {
+    const topic = topicIndex[topicUID];
+    const fullPath = topic.path.split('/');
     const name = fullPath[pathDepth];
     const path = fullPath.slice(0, pathDepth + 1).join('/');
     if (!(name in learningPaths)) {
@@ -21,14 +21,14 @@ function splitIndexIntoLearningPaths(
         name: name.replace(/_/, ' '),
       };
     }
-    learningPaths[name].topics.push(content);
+    learningPaths[name].topics.push(topic);
   });
   return learningPaths;
 }
 
 export default function makeTopicTree() {
-  const contentIndex = getContentIndex();
-  const learningPaths = splitIndexIntoLearningPaths(contentIndex);
+  const topicIndex = getTopicIndez();
+  const learningPaths = splitIndexIntoLearningPaths(topicIndex);
   const topicTrees = {};
   Object.keys(learningPaths).forEach((learningPath) => {
     const { topics } = learningPaths[learningPath];

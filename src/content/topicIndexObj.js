@@ -1,4 +1,4 @@
-export default function contentIndex() {
+export default function topicIndex() {
   return {
     Angle: {
       title: 'Angles',
