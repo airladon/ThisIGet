@@ -54,7 +54,7 @@
   background-color: white;
 }
 
-.navigator__lesson_tile {
+.navigator__topic_tile {
   position: absolute;
   left: 0;
   top: 0;
@@ -64,7 +64,7 @@
   z-index: 0;
 }
 
-.navigator__lesson_tile_containter {
+.navigator__topic_tile_containter {
   background: color('white', 'lighter');
   // background: color('site', 'primary', 'lightest');
   padding-top: var(--navigator__tile_padding_vertical);
@@ -78,27 +78,27 @@
   height: 100%;
 }
 
-.navigator__lesson_tile_containter:hover {
+.navigator__topic_tile_containter:hover {
   background: color('white', 'light');
 }
 
-.navigator__lesson_tile_containter_title {
+.navigator__topic_tile_containter_title {
   border: none;
 }
 
-.navigator__lesson_tile_title_container {
+.navigator__topic_tile_title_container {
   display: table;
   height: 100%;
   float: left;
   width: calc(var(--navigator__tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) - var(--navigator__tile_img_width));
 }
 
-.navigator__lesson_tile_title {
+.navigator__topic_tile_title {
   display: table-cell;
   vertical-align: middle;
 }
 
-.navigator__lesson_tile_disabled {
+.navigator__topic_tile_disabled {
   // background-color: color('site', 'disabled', 'lighter');
   // background-color: color('white', 'lighter');
   background-color: white;
@@ -108,25 +108,25 @@
   // font-size: calc(var(--navigator__tile_font_size) * 0.8);
 }
 
-.navigator__lesson_tile_disabled:hover {
+.navigator__topic_tile_disabled:hover {
   // background-color: color('site', 'disabled', 'lighter');
   // background-color: color('white', 'lighter');
   background-color: white;
 }
 
-.navigator__lesson_tile_selected {
+.navigator__topic_tile_selected {
   // background-color: color('site', 'safe', 'darker');
   background-color: color('site', 'primary');
   color: white;
   pointer-events: none;
 }
 
-.navigator__lesson_tile_selected:hover {
+.navigator__topic_tile_selected:hover {
   background: color('site', 'safe', 'darker');
   pointer-events: none;
 }
 
-.navigator__lesson_tile_containter_title:hover {
+.navigator__topic_tile_containter_title:hover {
   background: color('site', 'safe', 'dark');
 }
 
@@ -220,7 +220,7 @@
 //   box-shadow: 0 5px 8px #fff;
 // }
 
-.navigator__lesson_tile_image {
+.navigator__topic_tile_image {
   height: var(--navigator__tile_img_width);
   width: var(--navigator__tile_img_width);
   left: 0;
@@ -231,7 +231,7 @@
   font-size: 5px;
 }
 
-.navigator__lesson_tile_path_container {
+.navigator__topic_tile_path_container {
   display: table;
   height: 100%;
 }

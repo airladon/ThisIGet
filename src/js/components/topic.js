@@ -160,16 +160,16 @@ export default class TopicComponent extends React.Component
 
   renderTitle(title: string) {
     this.key += 1;
-    return <div className='lesson__title' key={this.key}>
+    return <div className='topic__title' key={this.key}>
         {title}
       </div>;
   }
 
   titleAsTile() {
-    return <div id="id_lesson__title_tile" className="lesson__title_tile">
-      <img src={'/static/'} className="navigator__lesson_tile_image" />
-      <div className="lesson__title_tile_containter lesson__title_tile_shadow">
-        <div className="lesson__title_tile_title">
+    return <div id="id_topic__title_tile" className="topic__title_tile">
+      <img src={'/static/'} className="navigator__topic_tile_image" />
+      <div className="topic__title_tile_containter topic__title_tile_shadow">
+        <div className="topic__title_tile_title">
           {this.version.content.title}
         </div>
       </div>
@@ -184,10 +184,10 @@ export default class TopicComponent extends React.Component
       count = 9;
     }
     if (count === 1) {
-      return ' lesson__title_bar_force_low';
+      return ' topic__title_bar_force_low';
     }
     if (count > 8) {
-      return ' lesson__title_bar_force_high';
+      return ' topic__title_bar_force_high';
     }
     return '';
   }
@@ -325,7 +325,7 @@ export default class TopicComponent extends React.Component
             singleItemClass = `${singleItemClass} dropdown_button_selected`;
           }
           output.push(
-            <div className="lesson__path_tile" key={this.key}>
+            <div className="topic__approach_tile" key={this.key}>
               <div className={singleItemClass}>
                 <a href={listItems[0].link || '/'}
                   className = "topic_button__single_item_label">
@@ -336,7 +336,7 @@ export default class TopicComponent extends React.Component
           );
         } else {
           output.push(
-            <div className="lesson__path_tile" key={this.key}>
+            <div className="topic__approach_tile" key={this.key}>
               <TopicButton
                 id={`id__lesson__topic_button_${approachUID}`}
                 label={nameLabel}
@@ -401,7 +401,7 @@ export default class TopicComponent extends React.Component
     }
     const imgLink = `/static/dist${path.join('/')}/tile.svg`;
     return <div>
-      <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
+      <div className={`topic__title_bar${this.calcTitleHeight()}`}>
         <TopicTitle
           // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
@@ -410,8 +410,8 @@ export default class TopicComponent extends React.Component
           key='1'
           label={this.version.content.title}
           />
-        <div className="lesson__path_container">
-          <div className="lesson__path_mid_tiles">
+        <div className="topic__approach_container">
+          <div className="topic__approach_mid_tiles">
             {this.addTopics()}
           </div>
         </div>
@@ -424,13 +424,13 @@ export default class TopicComponent extends React.Component
         />
       </div>
       {this.renderTopic()}
-      <div className='lesson__white_spacer'/>
+      <div className='vertical_blank_space'/>
       <LearningPathNavigator
           selected={this.version.content.title}
           learningPath={'Geometry_1'}
           ref={(learningPathNavigator) => { this.learningPathNavigator = learningPathNavigator; }}
         />
-      <div className='lesson__white_spacer'/>
+      <div className='vertical_blank_space'/>
     </div>;
   }
 }

@@ -19,14 +19,14 @@ export default class ViewAbout extends React.Component<Props> {
     // delete props.active;
     return <div>
       <main>
-      <div className='lesson__white_spacer'/>
+      <div className='vertical_blank_space'/>
       <div className='policy_text_container'>
         { /* <LoginTitle title=''/> */ }
-        { /* <div className='lesson__white_spacer'/> */ }
+        { /* <div className='vertical_blank_space'/> */ }
         <div className="markdown" dangerouslySetInnerHTML={ { __html: this.props.content } }/>
       </div>
-      <div className='lesson__white_spacer'/>
-      <div className='lesson__white_spacer'/>
+      <div className='vertical_blank_space'/>
+      <div className='vertical_blank_space'/>
       </main>
     </div>;
   }

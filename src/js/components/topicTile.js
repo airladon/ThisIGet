@@ -40,31 +40,31 @@ export default class TopicTile extends React.Component
     }
 
     const link = props.link || '/';
-    let classText = 'navigator__lesson_tile_containter navigator__lesson_shadow';
+    let classText = 'navigator__topic_tile_containter navigator__lesson_shadow';
     if (isTitle) {
-      classText = 'navigator__lesson_tile_containter navigator__lesson_tile_containter_title';
+      classText = 'navigator__topic_tile_containter navigator__topic_tile_containter_title';
     }
     let imgLink = '/static/assets/defaultTile.png';
     if (props.imgLink != null) {
       imgLink = `${'/static/dist'}${props.imgLink}`;
     }
     if (props.state === 'disabled') {
-      classText = `${classText} navigator__lesson_tile_disabled`;
+      classText = `${classText} navigator__topic_tile_disabled`;
       if (props.imgLinkDisabled != null) {
         imgLink = `${'/static/dist'}${props.imgLinkDisabled}`;
       }
     }
     if (props.state === 'selected') {
-      classText = `${classText} navigator__lesson_tile_selected`;
+      classText = `${classText} navigator__topic_tile_selected`;
       if (props.imgLinkSelected != null) {
         imgLink = `${'/static/dist'}${props.imgLinkSelected}`;
       }
     }
 
     const content = <div className={classText}>
-        <img src={imgLink} className="navigator__lesson_tile_image" alt={`Icon for ${label}`}/>
-        <div className="navigator__lesson_tile_title_container">
-          <div className="navigator__lesson_tile_title">
+        <img src={imgLink} className="navigator__topic_tile_image" alt={`Icon for ${label}`}/>
+        <div className="navigator__topic_tile_title_container">
+          <div className="navigator__topic_tile_title">
             {label}
           </div>
         </div>
@@ -74,7 +74,7 @@ export default class TopicTile extends React.Component
       return <div
         id={id}
         style={style}
-        className="navigator__lesson_tile">
+        className="navigator__topic_tile">
         {content}
     </div>;
     }
@@ -82,7 +82,7 @@ export default class TopicTile extends React.Component
         href={link}
         id={id}
         style={style}
-        className="navigator__lesson_tile">
+        className="navigator__topic_tile">
       {content}
     </a>;
   }
