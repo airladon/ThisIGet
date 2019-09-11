@@ -6,5 +6,5 @@ import Content from './content';
 import '../../../../../../css/simpleLesson.scss';
 
 
-const lesson = new LinksFormat(new Content());
-renderTopic(lesson);
+const version = new LinksFormat(new Content());
+renderTopic(version);

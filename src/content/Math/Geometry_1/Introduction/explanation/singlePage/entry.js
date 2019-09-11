@@ -7,6 +7,5 @@ import '../../../../../../css/singlePageFormat.scss';
 import './style.scss';
 
 
-const lesson = new SinglePageFormat(new Content());
-
-renderTopic(lesson);
+const version = new SinglePageFormat(new Content());
+renderTopic(version);
