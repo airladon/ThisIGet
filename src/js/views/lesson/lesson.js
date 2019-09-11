@@ -3,12 +3,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 // import { LessonContent } from '../../Lesson/LessonContent';
-import ViewLesson from '../../components/viewLesson';
+import ViewTopic from '../../components/viewLesson';
 import withLoginManager from '../../components/view';
 // import '../../../css/style.scss';
 
 function renderTopic(
-  lesson: Object,
+  version: Object,
   // lessonUID: string,
   // topicName: string,
   // versionUID: string,
@@ -28,20 +28,20 @@ function renderTopic(
   //   references?: Array<string>,
   // },
 ) {
-  const lessonId: HTMLElement | null = document.getElementById('single-page-content');
-  const LessonView = withLoginManager(ViewLesson);
+  const topicId: HTMLElement | null = document.getElementById('single-page-content');
+  const ViewTopicWithLoginState = withLoginManager(ViewTopic);
 
-  if (lessonId instanceof HTMLElement) {
+  if (topicId instanceof HTMLElement) {
     ReactDOM.render(
-      <LessonView
-        lesson={lesson}
+      <ViewTopicWithLoginState
+        topic={version}
         // lessonUID={lessonUID}
         // topicName={topicName}
         // versionUID={versionUID}
         // lessonDetails={lessonDetails}
         // versionDetails={versionDetails}
       />,
-      lessonId,
+      topicId,
     );
   }
 }

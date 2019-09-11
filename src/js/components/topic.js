@@ -2,17 +2,10 @@
 
 import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-// import '../../css/style.scss';
-// import Lesson from '../Lesson/Lesson';
-
-// import Button from './button';
 import LearningPathNavigator from './learningPathNavigator';
-// import LessonTilePath from './lessonPathTile';
 import TopicTitle from './topicTitle';
-// import getContentIndex from '../../content/common/lessonindex';
 import getContentIndex from '../../content/contentIndex';
 import TopicDescription from '../Lesson/topicDescription';
-// import DropDownButton from './dropDownButton';
 import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie, login } from '../tools/misc';
@@ -22,24 +15,7 @@ import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
 
 type Props = {
-  lesson: Object;
-  // lessonUID: string,
-  // topicName: string,
-  // versionUID: string,
-  // lessonDetails: {
-  //   uid: string,
-  //   title: string,
-  //   dependencies: Array<string>,
-  //   enabled?: boolean,
-  // },
-  // versionDetails: {
-  //   uid: string,
-  //   topic: string,
-  //   title: string,
-  //   description: string,
-  //   fullTopic: boolean,
-  //   type: 'presentation' | 'singlePage' | 'generic',
-  // },
+  topic: Object;
   isLoggedIn: boolean;
 };
 
@@ -62,9 +38,9 @@ function getTopicDescription(uid: string) {
   return lessons[uid];
 }
 
-export default class LessonComponent extends React.Component
+export default class TopicComponent extends React.Component
                                     <Props, State> {
-  lesson: Object;
+  topic: Object;
   lessonDetails: Object;
   key: number;
   state: State;
@@ -77,23 +53,23 @@ export default class LessonComponent extends React.Component
   versionDetails: Object;
   approachUID: string;
   firstPage: number;
-  lessonUID: string;
+  topicUID: string;
   versionUID: string;
 
   constructor(props: Props) {
     super(props);
-    this.lesson = props.lesson;
+    this.topic = props.topic;
     const path = window.location.pathname.replace(/\/$/, '').split('/');
     // const lessonUID = path.slice(-3, -2)[0];
     // const topic = path.slice(-2, -1)[0];
     // const versionUID = path.slice(-1)[0];
-    // this.lessonDetails = props.lessonDetails;
+    // this.topicDetails = props.topicDetails;
     /* eslint-disable prefer-destructuring */
-    this.lessonUID = path.slice(-3, -2)[0];
+    this.topicUID = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
     this.versionUID = path.slice(-1)[0];
     /* eslint-enable */
-    this.topicDescription = getTopicDescription(this.lessonUID);
+    this.topicDescription = getTopicDescription(this.topicUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -138,9 +114,9 @@ export default class LessonComponent extends React.Component
   }
 
   getRating(approachUID: string) {
-    // const lessonUid = this.lessonDetails.details.uid;
+    // const lessonUid = this.topicDetails.details.uid;
     // const versionUid = this.versionDetails.details.uid;
-    const link = `/rating/${this.lessonUID}/${approachUID}/${this.versionUID}`;
+    const link = `/rating/${this.topicUID}/${approachUID}/${this.versionUID}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -174,7 +150,7 @@ export default class LessonComponent extends React.Component
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
 
-    const link = `/rate/${this.lessonUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
+    const link = `/rate/${this.topicUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.topic.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -204,7 +180,7 @@ export default class LessonComponent extends React.Component
       <img src={'/static/'} className="navigator__lesson_tile_image" />
       <div className="lesson__title_tile_containter lesson__title_tile_shadow">
         <div className="lesson__title_tile_title">
-          {this.lesson.content.title}
+          {this.topic.content.title}
         </div>
       </div>
     </div>;
@@ -393,31 +369,31 @@ export default class LessonComponent extends React.Component
   }
 
   renderTopic() {
-    if (this.lesson.type === 'presentation') {
+    if (this.topic.type === 'presentation') {
       return <PresentationFormatComponent
-        lesson={this.lesson}
+        lesson={this.topic}
       />;
     }
-    if (this.lesson.type === 'singlePage') {
+    if (this.topic.type === 'singlePage') {
       return <SinglePageFormatComponent
-        lesson={this.lesson}
+        lesson={this.topic}
       />;
     }
-    if (this.lesson.type === 'links') {
+    if (this.topic.type === 'links') {
       return <LinksFormatComponent
-        lesson={this.lesson}
+        lesson={this.topic}
         isLoggedIn={this.props.isLoggedIn}
       />;
     }
     return <SimpleFormatComponent
-      lesson={this.lesson}
+      lesson={this.topic}
     />;
   }
 
   ratingLabel() {
     const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
-      if (this.lesson.type === 'links') {
+      if (this.topic.type === 'links') {
         return 'Are these links helpful?';
       }
       return `Is this ${approachName} helpful?`;
@@ -437,12 +413,12 @@ export default class LessonComponent extends React.Component
     return <div>
       <div className={`lesson__title_bar${this.calcTitleHeight()}`}>
         <TopicTitle
-          // imgLink={`${this.lesson.content.iconLinkGrey}`}
+          // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
           // imgLink={`${window.location.pathname}/tile.svg`}
-          // imgLink={`${this.lesson.lessonDetails.imgLink}`}
+          // imgLink={`${this.topic.lessonDetails.imgLink}`}
           key='1'
-          label={this.lesson.content.title}
+          label={this.topic.content.title}
           />
         <div className="lesson__path_container">
           <div className="lesson__path_mid_tiles">
@@ -460,7 +436,7 @@ export default class LessonComponent extends React.Component
       {this.renderTopic()}
       <div className='lesson__white_spacer'/>
       <LearningPathNavigator
-          selected={this.lesson.content.title}
+          selected={this.topic.content.title}
           learningPath={'Geometry_1'}
           ref={(learningPathNavigator) => { this.learningPathNavigator = learningPathNavigator; }}
         />
