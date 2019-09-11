@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Parallel Split of Triangle',
   dependencies: [
     'ParallelLineDistance',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'ParallelSplitOfTriangle',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

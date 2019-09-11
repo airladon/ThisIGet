@@ -61,7 +61,7 @@ function updateDetailsAndVersions() {
       let outStr = '// @flow';
       outStr = `${outStr}\n`;
       outStr = `${outStr}\n// eslint-disable-next-line no-var`;
-      outStr = `${outStr}\nvar lessonDetails = {`;
+      outStr = `${outStr}\nvar topicDetails = {`;
       outStr = `${outStr}\n  title: '${details.title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n  dependencies: [`;
       if (details.dependencies.length > 0) {
@@ -75,7 +75,7 @@ function updateDetailsAndVersions() {
       outStr = `${outStr}\n  uid: '${lessonPath.split('/').slice(-1)[0]}',`;
       outStr = `${outStr}\n};`;
       outStr = `${outStr}\n`;
-      outStr = `${outStr}\nmodule.exports = lessonDetails;`;
+      outStr = `${outStr}\nmodule.exports = topicDetails;`;
       outStr = `${outStr}\n`;
       fs.writeFileSync(detailsPathRelativeToCWD, outStr, (err) => {
         if (err) {

@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Pythagorean Identity',
   dependencies: [
     'Tangent',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'Pythagoras',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

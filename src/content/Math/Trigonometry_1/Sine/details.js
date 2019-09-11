@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Sine',
   dependencies: [
     'UnitCircle',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'Sine',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

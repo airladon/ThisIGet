@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Point to Line Distance',
   dependencies: [
     'RightAngleTriangles',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'PointLineDistance',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

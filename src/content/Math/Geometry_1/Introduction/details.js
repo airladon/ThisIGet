@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Why Study Shapes?',
   dependencies: [
   ],
@@ -10,4 +10,4 @@ var lessonDetails = {
   uid: 'Introduction',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

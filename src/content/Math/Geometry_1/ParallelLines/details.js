@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Parallel Lines',
   dependencies: [
     'AngleGroups',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'ParallelLines',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;

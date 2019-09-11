@@ -1,7 +1,7 @@
 // @flow
 
 // eslint-disable-next-line no-var
-var lessonDetails = {
+var topicDetails = {
   title: 'Side Angle Relationships',
   dependencies: [
     'Isosceles',
@@ -11,4 +11,4 @@ var lessonDetails = {
   uid: 'SideAngleRelationship',
 };
 
-module.exports = lessonDetails;
+module.exports = topicDetails;
