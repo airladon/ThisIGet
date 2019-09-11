@@ -46,8 +46,8 @@ type Props = {
 type State = {
   userRating: number;
   ratings: {
-    [topicName: string]: {
-      [versionName: string]: {
+    [approachUID: string]: {
+      [versionUID: string]: {
         aveRating: number,
         numRatings: number,
         numHighRatings: number,
@@ -75,7 +75,7 @@ export default class LessonComponent extends React.Component
   showNavigator: boolean;
   topicDescription: null | TopicDescription;
   versionDetails: Object;
-  topic: string;
+  approachUID: string;
   firstPage: number;
   lessonUID: string;
   versionUID: string;
@@ -90,8 +90,8 @@ export default class LessonComponent extends React.Component
     // this.lessonDetails = props.lessonDetails;
     /* eslint-disable prefer-destructuring */
     this.lessonUID = path.slice(-3, -2)[0];
+    this.approachUID = path.slice(-2, -1)[0];
     this.versionUID = path.slice(-1)[0];
-    this.topic = path.slice(-2, -1)[0];
     /* eslint-enable */
     this.topicDescription = getTopicDescription(this.lessonUID);
     this.state = {
@@ -103,7 +103,7 @@ export default class LessonComponent extends React.Component
     // this.topic = topic;
     this.key = 0;
     this.showNavigator = false;
-    this.getRating(this.topic);
+    this.getRating(this.approachUID);
     if (this.topicDescription != null) {
       this.topicDescription.getRatings(this.gotRatings.bind(this));
     }
@@ -113,14 +113,14 @@ export default class LessonComponent extends React.Component
     const { topicDescription } = this;
     if (topicDescription != null) {
       const ratings = {};
-      Object.keys(topicDescription.topics).forEach((topicName) => {
-        const topic = topicDescription.topics[topicName];
-        if (!(topicName in ratings)) {
-          ratings[topicName] = {};
+      Object.keys(topicDescription.approaches).forEach((approachUID) => {
+        const versions = topicDescription.approaches[approachUID];
+        if (!(approachUID in ratings)) {
+          ratings[approachUID] = {};
         }
-        Object.keys(topic).forEach((versionUID) => {
-          const version = topic[versionUID];
-          ratings[topicName][versionUID] = {
+        Object.keys(versions).forEach((versionUID) => {
+          const version = versions[versionUID];
+          ratings[approachUID][versionUID] = {
             aveRating: version.aveRating,
             numRatings: version.numRatings,
             numHighRatings: version.numHighRatings,
@@ -137,10 +137,10 @@ export default class LessonComponent extends React.Component
     this.setState({ ratings: this.fillRatings() });
   }
 
-  getRating(topic: string) {
+  getRating(approachUID: string) {
     // const lessonUid = this.lessonDetails.details.uid;
     // const versionUid = this.versionDetails.details.uid;
-    const link = `/rating/${this.lessonUID}/${topic}/${this.versionUID}`;
+    const link = `/rating/${this.lessonUID}/${approachUID}/${this.versionUID}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -174,7 +174,7 @@ export default class LessonComponent extends React.Component
     }
     const page = parseInt(getCookie('page'), 10) - 1 || 0;
 
-    const link = `/rate/${this.lessonUID}/${this.topic}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
+    const link = `/rate/${this.lessonUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.lesson.content.sections.length}`;
     fetchPolyfill(link, { credentials: 'same-origin' })
       .then((response) => {
         if (!response.ok) {
@@ -226,38 +226,38 @@ export default class LessonComponent extends React.Component
     return '';
   }
 
-  getTopics() {
-    const topics = {};
+  getApproaches() {
+    const approaches = {};
     // const [currentTopic, currentVersion] = window.location.href.split('/').slice(-2);
 
     const { topicDescription } = this;
     if (topicDescription != null) {
-      Object.keys(this.state.ratings).forEach((topicName) => {
-        const topic = this.state.ratings[topicName];
-        Object.keys(topic).forEach((versionUID) => {
-          const version = topicDescription.topics[topicName][versionUID];
+      Object.keys(this.state.ratings).forEach((approachUID) => {
+        const approach = this.state.ratings[approachUID];
+        Object.keys(approach).forEach((versionUID) => {
+          const version = topicDescription.approaches[approachUID][versionUID];
           const label = version.title;
-          let link = `${topicDescription.path}/${topicDescription.uid}/${topicName}/${versionUID}`;
-          if (topicName === 'dev') {
+          let link = `${topicDescription.path}/${topicDescription.uid}/${approachUID}/${versionUID}`;
+          if (approachUID === 'dev') {
             link = `/dev${topicDescription.path}/${topicDescription.uid}/quickReference/${versionUID}`;
           }
           // const { description } = version;
           const { fullContent } = version;
           const { type } = version;
-          const rating = this.state.ratings[topicName][versionUID];
+          const rating = this.state.ratings[approachUID][versionUID];
           let { userRating } = rating;
 
-          if (!(topicName in topics)) {
-            topics[topicName] = {};
+          if (!(approachUID in approaches)) {
+            approaches[approachUID] = {};
           }
           let active = false;
           // console.log(currentExplanation, version, topic)
           if (this.versionUID === versionUID
-            && this.topic === topicName) {
+            && this.approachUID === approachUID) {
             active = true;
             ({ userRating } = this.state);
           }
-          topics[topicName][versionUID] = {
+          approaches[approachUID][versionUID] = {
             label,
             link,
             userRating,
@@ -272,36 +272,38 @@ export default class LessonComponent extends React.Component
         });
       });
     }
-    return topics;
+    return approaches;
   }
 
   addTopics() {
     const output = [];
-    const topics = this.getTopics();
-    const topicNames = [
+    const approaches = this.getApproaches();
+    const approachUIDs = [
       'discover', 'explanation', 'summary', 'examples', 'implications', 'history', 'quiz', 'ta', 'links',
     ];
-    Object.keys(topics).forEach((topicName) => {
-      if (topicNames.indexOf(topicName) === -1) {
-        topicNames.push(topicName);
+    Object.keys(approaches).forEach((approachUID) => {
+      if (approachUIDs.indexOf(approachUID) === -1) {
+        approachUIDs.push(approachUID);
       }
     });
     // const currentTopic = window.location.href.split('/').slice(-2, -1)[0];
-    topicNames.forEach((name) => {
-      if (topics[name] != null && name !== 'quickReference') {
-        const topic = topics[name];
+    approachUIDs.forEach((approachUID) => {
+      if (approaches[approachUID] != null && approachUID !== 'quickReference') {
+        const approach = approaches[approachUID];
         // $FlowFixMe - onPath is there and boolean
-        const fullContentCount = Object.keys(topic).filter(ver => topic[ver].fullContent).length;
+        const fullContentCount = Object.keys(approach)
+          .filter(ver => approach[ver].fullContent).length;
         // $FlowFixMe - onPath is there and boolean
-        const partialLessonCount = Object.keys(topic).filter(ver => !topic[ver].fullContent).length;
+        const partialLessonCount = Object.keys(approach)
+          .filter(ver => !approach[ver].fullContent).length;
         let selected = false;
-        if (this.topic === name) {
+        if (this.approachUID === approachUID) {
           selected = true;
         }
-        let vUIDs = Object.keys(topic);
+        let vUIDs = Object.keys(approach);
         vUIDs = vUIDs.sort((aKey, bKey) => {
-          const a = topic[aKey];
-          const b = topic[bKey];
+          const a = approach[aKey];
+          const b = approach[bKey];
           if (a.rating < b.rating) { return 1; }
           if (a.rating > b.rating) { return -1; }
           if (a.numReviews < b.numReviews) { return 1; }
@@ -313,22 +315,22 @@ export default class LessonComponent extends React.Component
           return 0;
         });
         vUIDs = vUIDs.sort((aKey, bKey) => {
-          const a = topic[aKey];
-          const b = topic[bKey];
+          const a = approach[aKey];
+          const b = approach[bKey];
           if (a.fullContent === true && b.fullContent === false) { return -1; }
           if (a.fullContent === false && b.fullContent === true) { return 1; }
           return 0;
         });
         const listItems = [];
         vUIDs.forEach((vUID) => {
-          listItems.push(topic[vUID]);
-          if (name === 'quickReference') {
+          listItems.push(approach[vUID]);
+          if (approachUID === 'quickReference') {
             listItems.slice(-1)[0].label = vUID;
           }
         });
         this.key += 1;
         if (partialLessonCount > 0
-          && (name === 'explanation' || name === 'discover' || name === 'summary')
+          && (approachUID === 'explanation' || approachUID === 'discover' || approachUID === 'summary')
         ) {
           listItems.splice(fullContentCount, 0, {
             label: <div className="topic_button__portion_separator">
@@ -347,8 +349,8 @@ export default class LessonComponent extends React.Component
             separator: true,
           });
         }
-        let nameLabel = name.charAt(0).toUpperCase() + name.slice(1);
-        if (name === 'ta') {
+        let nameLabel = approachUID.charAt(0).toUpperCase() + approachUID.slice(1);
+        if (approachUID === 'ta') {
           nameLabel = 'TA';
         }
         if (listItems.length === 1) {
@@ -370,7 +372,7 @@ export default class LessonComponent extends React.Component
           output.push(
             <div className="lesson__path_tile" key={this.key}>
               <TopicButton
-                id={`id__lesson__topic_button_${name}`}
+                id={`id__lesson__topic_button_${approachUID}`}
                 label={nameLabel}
                 direction="down"
                 xAlign="left"
@@ -387,7 +389,7 @@ export default class LessonComponent extends React.Component
   // eslint-disable-next-line class-methods-use-this
   getTopic() {
     // const topicName = window.location.href.split('/').slice(-2, -1)[0];
-    return this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
+    return this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
   }
 
   renderLesson() {
@@ -413,15 +415,15 @@ export default class LessonComponent extends React.Component
   }
 
   ratingLabel() {
-    const topicName = this.topic.charAt(0).toUpperCase() + this.topic.slice(1);
+    const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
       if (this.lesson.type === 'links') {
         return 'Are these links helpful?';
       }
-      return `Is this ${topicName} helpful?`;
+      return `Is this ${approachName} helpful?`;
     }
     return <div>
-      <span className="rating__login" onClick={login}>Login</span> to rate {topicName}:
+      <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
     </div>;
   }
 
@@ -448,7 +450,7 @@ export default class LessonComponent extends React.Component
           </div>
         </div>
         <Rating
-          topic={this.topic}
+          topic={this.approachUID}
           rating={this.state.userRating}
           ratingCallback={this.setUserRating.bind(this)}
           isLoggedIn={this.props.isLoggedIn}

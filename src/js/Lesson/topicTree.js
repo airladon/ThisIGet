@@ -37,9 +37,9 @@ export default function makeTopicTree() {
     const remainingUIDs = {};
     let existingUIDs = {};
     const allUIDs = [];
-    topics.forEach((lesson) => {
-      remainingUIDs[lesson.uid] = lesson;
-      allUIDs.push(lesson.uid);
+    topics.forEach((topic) => {
+      remainingUIDs[topic.uid] = topic;
+      allUIDs.push(topic.uid);
     });
     let index = 0;
     const max = topics.length;
@@ -48,16 +48,16 @@ export default function makeTopicTree() {
       const newExisting = {};
       // eslint-disable-next-line no-loop-func
       Object.keys(remainingUIDs).forEach((uid) => {
-        const lesson = remainingUIDs[uid];
+        const topic = remainingUIDs[uid];
         let canAddToExisting = true;
-        lesson.dependencies.forEach((dependency) => {
+        topic.dependencies.forEach((dependency) => {
           if (!(dependency in existingUIDs) && (allUIDs.indexOf(dependency) > -1)) {
             canAddToExisting = false;
           }
         });
         if (canAddToExisting) {
           newExisting[uid] = uid;
-          topicTreeNode.push(lesson);
+          topicTreeNode.push(topic);
           delete remainingUIDs[uid];
         }
       });

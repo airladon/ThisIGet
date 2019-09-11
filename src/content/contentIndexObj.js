@@ -4,7 +4,7 @@ export default function contentIndex() {
       title: 'Angles',
       path: '/content/Math/Geometry_1',
       uid: 'Angle',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -49,7 +49,7 @@ export default function contentIndex() {
       title: 'Angle Groups',
       path: '/content/Math/Geometry_1',
       uid: 'AngleGroups',
-      topics: {
+      approaches: {
         examples: {
           base: {
             type: 'singlePage',
@@ -124,7 +124,7 @@ export default function contentIndex() {
       title: 'Angle Types',
       path: '/content/Math/Geometry_1',
       uid: 'AngleTypes',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -169,7 +169,7 @@ export default function contentIndex() {
       title: 'Angles at Intersections',
       path: '/content/Math/Geometry_1',
       uid: 'AnglesAtIntersections',
-      topics: {
+      approaches: {
         discover: {
           base: {
             type: 'presentation',
@@ -262,7 +262,7 @@ export default function contentIndex() {
       title: 'Area and Rectangles',
       path: '/content/Math/Geometry_1',
       uid: 'Area',
-      topics: {
+      approaches: {
         examples: {
           base: {
             type: 'singlePage',
@@ -337,7 +337,7 @@ export default function contentIndex() {
       title: 'Area of a Circle',
       path: '/content/Math/Geometry_1',
       uid: 'AreaCircle',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -430,7 +430,7 @@ export default function contentIndex() {
       title: 'Area of a Triangle',
       path: '/content/Math/Geometry_1',
       uid: 'AreaTriangle',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -515,7 +515,7 @@ export default function contentIndex() {
       title: 'Circles',
       path: '/content/Math/Geometry_1',
       uid: 'Circle',
-      topics: {
+      approaches: {
         examples: {
           static: {
             type: 'singlePage',
@@ -598,7 +598,7 @@ export default function contentIndex() {
       title: 'Congruent Triangles',
       path: '/content/Math/Geometry_1',
       uid: 'CongruentTriangles',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -709,7 +709,7 @@ export default function contentIndex() {
       title: 'Degrees',
       path: '/content/Math/Geometry_1',
       uid: 'Degrees',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -774,7 +774,7 @@ export default function contentIndex() {
       title: 'Equilateral Triangle',
       path: '/content/Math/Geometry_1',
       uid: 'Equilateral',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -859,7 +859,7 @@ export default function contentIndex() {
       title: 'External Angle of a Triangle',
       path: '/content/Math/Geometry_1',
       uid: 'ExternalAngles',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -952,7 +952,7 @@ export default function contentIndex() {
       title: 'Why Study Shapes?',
       path: '/content/Math/Geometry_1',
       uid: 'Introduction',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -994,7 +994,7 @@ export default function contentIndex() {
       title: 'Isosceles Triangle',
       path: '/content/Math/Geometry_1',
       uid: 'Isosceles',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1079,7 +1079,7 @@ export default function contentIndex() {
       title: 'Parallel Line Distance',
       path: '/content/Math/Geometry_1',
       uid: 'ParallelLineDistance',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1144,7 +1144,7 @@ export default function contentIndex() {
       title: 'Parallel Lines',
       path: '/content/Math/Geometry_1',
       uid: 'ParallelLines',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -1199,7 +1199,7 @@ export default function contentIndex() {
       title: 'Parallel Split of Triangle',
       path: '/content/Math/Geometry_1',
       uid: 'ParallelSplitOfTriangle',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1282,7 +1282,7 @@ export default function contentIndex() {
       title: 'Point to Line Distance',
       path: '/content/Math/Geometry_1',
       uid: 'PointLineDistance',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1337,7 +1337,7 @@ export default function contentIndex() {
       title: 'Quadrangles',
       path: '/content/Math/Geometry_1',
       uid: 'Quadrangles',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1422,7 +1422,7 @@ export default function contentIndex() {
       title: 'Radians',
       path: '/content/Math/Geometry_1',
       uid: 'Radians',
-      topics: {
+      approaches: {
         examples: {
           static: {
             type: 'singlePage',
@@ -1505,7 +1505,7 @@ export default function contentIndex() {
       title: 'Rectangles and Squares',
       path: '/content/Math/Geometry_1',
       uid: 'RectanglesAndSquares',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1581,7 +1581,7 @@ export default function contentIndex() {
       title: 'Right Angle Triangles',
       path: '/content/Math/Geometry_1',
       uid: 'RightAngleTriangles',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1674,7 +1674,7 @@ export default function contentIndex() {
       title: 'Side Angle Relationships',
       path: '/content/Math/Geometry_1',
       uid: 'SideAngleRelationship',
-      topics: {
+      approaches: {
         discover: {
           simple: {
             type: 'singlePage',
@@ -1759,7 +1759,7 @@ export default function contentIndex() {
       title: 'Similar Triangles',
       path: '/content/Math/Geometry_1',
       uid: 'SimilarTriangles',
-      topics: {
+      approaches: {
         explanation: {
           equilangularIsSimilarProof: {
             type: 'singlePage',
@@ -1814,7 +1814,7 @@ export default function contentIndex() {
       title: 'Calculating Pi',
       path: '/content/Math/Geometry_1/ToDo',
       uid: 'CalculatingPi',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -1835,7 +1835,7 @@ export default function contentIndex() {
       title: 'Triangles',
       path: '/content/Math/Geometry_1',
       uid: 'Triangles',
-      topics: {
+      approaches: {
         discover: {
           base: {
             type: 'presentation',
@@ -1928,7 +1928,7 @@ export default function contentIndex() {
       title: 'Chord',
       path: '/content/Math/Trigonometry_1',
       uid: 'Chord',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -1949,7 +1949,7 @@ export default function contentIndex() {
       title: 'Cosecant',
       path: '/content/Math/Trigonometry_1',
       uid: 'Cosecant',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -1970,7 +1970,7 @@ export default function contentIndex() {
       title: 'Cosine',
       path: '/content/Math/Trigonometry_1',
       uid: 'Cosine',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -1991,7 +1991,7 @@ export default function contentIndex() {
       title: 'Cotangent',
       path: '/content/Math/Trigonometry_1',
       uid: 'Cotangent',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2012,7 +2012,7 @@ export default function contentIndex() {
       title: 'Law of Cosines',
       path: '/content/Math/Trigonometry_1',
       uid: 'LawOfCosines',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2033,7 +2033,7 @@ export default function contentIndex() {
       title: 'Law of Sines',
       path: '/content/Math/Trigonometry_1',
       uid: 'LawOfSines',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2054,7 +2054,7 @@ export default function contentIndex() {
       title: 'Pythagorean Identity',
       path: '/content/Math/Trigonometry_1',
       uid: 'Pythagoras',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2075,7 +2075,7 @@ export default function contentIndex() {
       title: 'Secant',
       path: '/content/Math/Trigonometry_1',
       uid: 'Secant',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2096,7 +2096,7 @@ export default function contentIndex() {
       title: 'Sine',
       path: '/content/Math/Trigonometry_1',
       uid: 'Sine',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2117,7 +2117,7 @@ export default function contentIndex() {
       title: 'Tangent',
       path: '/content/Math/Trigonometry_1',
       uid: 'Tangent',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',
@@ -2138,7 +2138,7 @@ export default function contentIndex() {
       title: 'Unit Circle',
       path: '/content/Math/Trigonometry_1',
       uid: 'UnitCircle',
-      topics: {
+      approaches: {
         explanation: {
           base: {
             type: 'presentation',

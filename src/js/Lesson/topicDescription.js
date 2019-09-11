@@ -14,24 +14,27 @@ export type TypeTopicDescription = {
   dependencies: Array<string>;
   enabled: boolean;
   qr: Array<string>;
-  versions: {[vuid: string]: {
-    title: string;
-    description: string;
-    onPath: boolean;
-    topics: Array<string>;
-    qr: Array<string>;
-  }};
-  topics: {
-    [versionName: string]: {
-      title: string;
-      description: string;
-      onPath: boolean;
-      qr: Array<string>;
-      path: string,
-      aveRating: number;
-      numRatings: number;
-      numHighRatings: number;
-    };
+  // versions: {[vuid: string]: {
+  //   title: string;
+  //   description: string;
+  //   onPath: boolean;
+  //   topics: Array<string>;
+  //   qr: Array<string>;
+  // }};
+  approaches: {
+    [approachUID: string]: {
+      [versionUID: string]: {
+        title: string,
+        description: string,
+        uid: string,
+        fullContent: boolean,
+        type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
+        aveRating: number;
+        numRatings: number;
+        numHighRatings: number;
+        userRating: number;
+      },
+    },
   };
   numVersions: number;
   callbackCount: number;
@@ -48,20 +51,24 @@ export default class TopicDescription {
   id: string;
   uid: string;
   dependencies: Array<string>;
-  topics: {
-    [topicName: string]: Array<{
-      title: string,
-      description: string,
-      uid: string,
-      fullContent: boolean,
-      type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
-      aveRating: number;
-      numRatings: number;
-      numHighRatings: number;
-    }>
+  // Each approach has an array of versions
+  approaches: {
+    [approachUID: string]: {
+      [versionUID: string]: {
+        title: string,
+        description: string,
+        uid: string,
+        fullContent: boolean,
+        type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
+        aveRating: number;
+        numRatings: number;
+        numHighRatings: number;
+        userRating: number;
+      },
+    },
   };
 
-  topics: Object;
+  // topics: Object;
 
   numVersions: number;
   callbackCount: number;
@@ -74,14 +81,16 @@ export default class TopicDescription {
       title: string,
       path: string,
       uid: string,
-      topics: {
-        [topicName: string]: Array<{
-          title: string,
-          description: string,
-          uid: string,
-          fullContent: boolean,
-          type: 'presentation' | 'singlePage' | 'video' | 'audio',
-        }>
+      approaches: {
+        [approachUID: string]: {
+          [versionUID: string]: {
+            title: string,
+            description: string,
+            uid: string,
+            fullContent: boolean,
+            type: 'presentation' | 'singlePage' | 'video' | 'audio',
+          },
+        },
       },
       dependencies: Array<string>,
       enabled: boolean;
@@ -100,7 +109,8 @@ export default class TopicDescription {
     if (id === '') {
       this.id = `id_content__navigator_tile_${topic.uid}`;
     }
-    this.topics = topic.topics;
+    // $FlowFixMe
+    this.approaches = topic.approaches;
     this.enabled = topic.enabled;
   }
 
@@ -114,12 +124,12 @@ export default class TopicDescription {
   getRatings(callback: Function) {
     this.callbackCount = 0;
     this.numVersions = 0;
-    Object.keys(this.topics).forEach((topicName) => {
-      const topic = this.topics[topicName];
+    Object.keys(this.approaches).forEach((approachUID) => {
+      const topic = this.approaches[approachUID];
       this.numVersions += Object.keys(topic).length;
       Object.keys(topic).forEach((versionUID) => {
         const version = topic[versionUID];
-        const link = `/rating/${this.uid}/${topicName}/${versionUID}`;
+        const link = `/rating/${this.uid}/${approachUID}/${versionUID}`;
         fetchPolyfill(link, { credentials: 'same-origin' })
           .then((response) => {
             if (!response.ok) {

@@ -21,10 +21,10 @@ export default class LessonNavigator extends React.Component
   contentIndex: Array<Array<TopicDescription>>;
   topicTrees: Object;
   key: number;
-  selectedLesson: TopicDescription;
-  lessonArray: Array<TopicDescription>;
+  selectedTopic: TopicDescription;
+  topicArray: Array<TopicDescription>;
   asTitle: boolean
-  lessonTilesBounds: Rect;
+  topicTilesBounds: Rect;
   tileWidth: number;
   tileHeight: number;
   tileVSpace: number;
@@ -41,7 +41,7 @@ export default class LessonNavigator extends React.Component
     this.learningPathPath = this.topicTrees[props.learningPath].path;
     this.learningPathName = this.topicTrees[props.learningPath].name;
     this.getVariables();
-    this.layoutLessonTiles();
+    this.layoutTopicTiles();
     this.key = 0;
     this.selected = props.selected || '';
     this.asTitle = false;
@@ -71,20 +71,20 @@ export default class LessonNavigator extends React.Component
     }
   }
 
-  layoutLessonTiles() {
-    this.lessonArray = [];
+  layoutTopicTiles() {
+    this.topicArray = [];
     // const y = this.tileHeight * 2 + vSpace * 2;
     const width = this.tileWidth;
     const height = this.tileHeight;
     const vSpace = this.tileVSpace;
     const hSpace = this.tileHSpace;
     let x = hSpace;
-    this.lessonArray = [];
+    this.topicArray = [];
     let maxParallel = 1;
-    this.contentIndex.forEach((lesson) => {
-      if (Array.isArray(lesson)) {
-        if (lesson.length > maxParallel) {
-          maxParallel = lesson.length;
+    this.contentIndex.forEach((topic) => {
+      if (Array.isArray(topic)) {
+        if (topic.length > maxParallel) {
+          maxParallel = topic.length;
         }
       }
     });
@@ -92,24 +92,24 @@ export default class LessonNavigator extends React.Component
                     + (maxParallel - 1) * vSpace
                     + vSpace * 2) / 2;
 
-    this.contentIndex.forEach((lesson) => {
-      if (Array.isArray(lesson)) {
-        const len = lesson.length;
+    this.contentIndex.forEach((topic) => {
+      if (Array.isArray(topic)) {
+        const len = topic.length;
         const totalHeight = len * height + (len - 1) * vSpace;
         let yStart = yMiddle - totalHeight / 2 + height / 2;
         if (yStart < yMiddle - 2 * height - 2 * vSpace) {
           yStart = yMiddle - 2 * height - 2 * vSpace;
         }
-        lesson.forEach((parallelLesson, index) => {
+        topic.forEach((parallelTopic, index) => {
           const yLocation = yStart + index * (height + vSpace);
           // eslint-disable-next-line no-param-reassign
-          parallelLesson.location = new Point(x, yLocation - this.tileHeight / 2);
-          this.lessonArray.push(parallelLesson);
+          parallelTopic.location = new Point(x, yLocation - this.tileHeight / 2);
+          this.topicArray.push(parallelTopic);
         });
       } else {
         // eslint-disable-next-line no-param-reassign
-        lesson.location = new Point(x, yMiddle - this.tileHeight / 2);
-        this.lessonArray.push(lesson);
+        topic.location = new Point(x, yMiddle - this.tileHeight / 2);
+        this.topicArray.push(topic);
       }
       x += width + hSpace;
     });
@@ -117,49 +117,49 @@ export default class LessonNavigator extends React.Component
     this.getLessonTilesBounds();
   }
 
-  createLessonJsx(lesson: TopicDescription) {
+  createLessonJsx(topic: TopicDescription) {
     this.key += 1;
     let state = '';
-    const { x, y } = lesson.location;
-    if (lesson.title === this.selected) {
+    const { x, y } = topic.location;
+    if (topic.title === this.selected) {
       state = 'selected';
-      this.selectedLesson = lesson;
+      this.selectedTopic = topic;
     }
-    let { title } = lesson;
-    if (lesson.enabled === false) {
+    let { title } = topic;
+    if (topic.enabled === false) {
       state = 'disabled';
       title = `${title}`;
     }
 
     let linkToUse = '';
-    const topicsOrder = ['explanation', 'summary', 'examples', 'discover', 'links'];
+    const approachesOrder = ['explanation', 'summary', 'examples', 'discover', 'links'];
     const versionsOrder = ['base', 'static'];
-    const getVersion = (topic) => {
-      const versions = lesson.topics[topic];
+    const getVersion = (approachUID) => {
+      const versions = topic.approaches[approachUID];
       for (let i = 0; i < versionsOrder.length; i += 1) {
-        const version = versionsOrder[i];
-        if (version in versions) {
-          linkToUse = `${lesson.path}/${lesson.uid}/${topic}/${version}`;
+        const versionUID = versionsOrder[i];
+        if (versionUID in versions) {
+          linkToUse = `${topic.path}/${topic.uid}/${approachUID}/${versionUID}`;
           return;
         }
       }
       if (linkToUse === '' && Object.keys(versions).length > 0) {
-        linkToUse = `${lesson.path}/${lesson.uid}/${topic}/${Object.keys(versions)[0]}`;
+        linkToUse = `${topic.path}/${topic.uid}/${approachUID}/${Object.keys(versions)[0]}`;
       }
     };
 
-    for (let t = 0; t < topicsOrder.length; t += 1) {
-      const topic = topicsOrder[t];
-      if (topic in lesson.topics) {
-        getVersion(topic);
+    for (let t = 0; t < approachesOrder.length; t += 1) {
+      const approach = approachesOrder[t];
+      if (approach in topic.approaches) {
+        getVersion(approach);
         if (linkToUse !== '') {
           break;
         }
       }
     }
 
-    if (linkToUse === '' && Object.keys(lesson.topics).length > 0) {
-      getVersion(Object.keys(lesson.topics)[0]);
+    if (linkToUse === '' && Object.keys(topic.approaches).length > 0) {
+      getVersion(Object.keys(topic.approaches)[0]);
     }
 
     if (linkToUse === '') {
@@ -167,11 +167,11 @@ export default class LessonNavigator extends React.Component
     }
 
     return <LessonTile
-              id={lesson.id}
+              id={topic.id}
               link={linkToUse}
-              imgLink={lesson.imgLink}
-              imgLinkSelected={lesson.imgLinkSelected}
-              imgLinkDisabled={lesson.imgLinkDisabled}
+              imgLink={topic.imgLink}
+              imgLinkSelected={topic.imgLinkSelected}
+              imgLinkDisabled={topic.imgLinkDisabled}
               key={this.key}
               label={title}
               state={state}
@@ -181,18 +181,18 @@ export default class LessonNavigator extends React.Component
             />;
   }
 
-  lessons() {
-    const lessons = [];
-    this.contentIndex.forEach((lesson) => {
-      if (Array.isArray(lesson)) {
-        lesson.forEach((parallelLesson) => {
-          lessons.push(this.createLessonJsx(parallelLesson));
+  topics() {
+    const topics = [];
+    this.contentIndex.forEach((topic) => {
+      if (Array.isArray(topic)) {
+        topic.forEach((parallelTopic) => {
+          topics.push(this.createLessonJsx(parallelTopic));
         });
       } else {
-        lessons.push(this.createLessonJsx(lesson));
+        topics.push(this.createLessonJsx(topic));
       }
     });
-    return lessons;
+    return topics;
   }
 
   componentDidMount() {
@@ -212,16 +212,16 @@ export default class LessonNavigator extends React.Component
         this.tileWidth,
         navRect.width / 2 - this.tileWidth / 2,
       );
-      const yMargin = (navRect.height - this.lessonTilesBounds.height) / 2;
+      const yMargin = (navRect.height - this.topicTilesBounds.height) / 2;
       if (this.selected !== '') {
-        navScroll.scrollLeft = this.selectedLesson.location.x + xMargin
+        navScroll.scrollLeft = this.selectedTopic.location.x + xMargin
                                - navScroll.clientWidth / 2 + this.tileWidth / 2;
-        navScroll.scrollTop = this.selectedLesson.location.y + yMargin
+        navScroll.scrollTop = this.selectedTopic.location.y + yMargin
                                - navScroll.clientHeight / 2 + this.tileHeight / 2;
       } else {
-        navScroll.scrollLeft = this.lessonArray[0].location.x + xMargin
+        navScroll.scrollLeft = this.topicArray[0].location.x + xMargin
                                - navScroll.clientWidth / 2 + this.tileWidth / 2;
-        navScroll.scrollTop = this.lessonArray[0].location.y + yMargin
+        navScroll.scrollTop = this.topicArray[0].location.y + yMargin
                                - navScroll.clientHeight / 2 + this.tileHeight / 2;
       }
     }
@@ -231,17 +231,17 @@ export default class LessonNavigator extends React.Component
   centerTopics() {
     const navigatorContainer = document
       .getElementById(`id_navigator__container_${this.learningPath}`);
-    const lessonsContainer =
+    const topicsContainer =
       document.getElementById(`id_navigator__lessons_positions_container_${this.learningPath}`);
-    if (lessonsContainer != null && navigatorContainer != null) {
+    if (topicsContainer != null && navigatorContainer != null) {
       const navRect = navigatorContainer.getBoundingClientRect();
       const navHeight = navRect.height;
       // const xMargin = navRect.width / 2 - this.tileWidth / 2;
       const xMargin = Math.min(this.tileWidth, navRect.width / 2 - this.tileWidth / 2);
-      lessonsContainer.style.left = `${xMargin}px`;
-      lessonsContainer.style.top = `${(navHeight - this.lessonTilesBounds.height) / 2}px`;
-      lessonsContainer.style.width = `${this.lessonTilesBounds.width + xMargin}px`;
-      lessonsContainer.style.height = `${this.lessonTilesBounds.height}px`;
+      topicsContainer.style.left = `${xMargin}px`;
+      topicsContainer.style.top = `${(navHeight - this.topicTilesBounds.height) / 2}px`;
+      topicsContainer.style.width = `${this.topicTilesBounds.width + xMargin}px`;
+      topicsContainer.style.height = `${this.topicTilesBounds.height}px`;
     }
   }
 
@@ -251,22 +251,22 @@ export default class LessonNavigator extends React.Component
     let yMin = 0;
     let xMin = 0;
     let firstElement = true;
-    this.lessonArray.forEach((lesson) => {
+    this.topicArray.forEach((topic) => {
       if (firstElement) {
-        xMin = lesson.location.x;
-        xMax = lesson.location.x + this.tileWidth;
-        yMin = lesson.location.y;
-        yMax = lesson.location.y + this.tileHeight;
+        xMin = topic.location.x;
+        xMax = topic.location.x + this.tileWidth;
+        yMin = topic.location.y;
+        yMax = topic.location.y + this.tileHeight;
         firstElement = false;
       } else {
-        if (lesson.location.x + this.tileWidth > xMax) {
-          xMax = lesson.location.x + this.tileWidth;
+        if (topic.location.x + this.tileWidth > xMax) {
+          xMax = topic.location.x + this.tileWidth;
         }
-        if (lesson.location.y + this.tileHeight > yMax) {
-          yMax = lesson.location.y + this.tileHeight;
+        if (topic.location.y + this.tileHeight > yMax) {
+          yMax = topic.location.y + this.tileHeight;
         }
-        if (lesson.location.y < yMin) {
-          yMin = lesson.location.y;
+        if (topic.location.y < yMin) {
+          yMin = topic.location.y;
         }
       }
     });
@@ -274,7 +274,7 @@ export default class LessonNavigator extends React.Component
     yMax += this.tileVSpace;
     xMin -= this.tileHSpace;
     xMax += this.tileHSpace;
-    this.lessonTilesBounds = new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
+    this.topicTilesBounds = new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -299,7 +299,7 @@ export default class LessonNavigator extends React.Component
         <div className="navigator__right_side" />
         <div id={`id_navigator__scroll_container_${this.learningPath}`} className="navigator__scroll_container">
           <div id={`id_navigator__lessons_positions_container_${this.learningPath}`} className="navigator__lessons_positions_container">
-              {this.lessons()}
+              {this.topics()}
           </div>
         </div>
       </div>

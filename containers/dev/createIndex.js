@@ -41,23 +41,23 @@ function createContentIndex(buildMode, lessonsPath) {
       outStr = `${outStr}\n      title: '${title.replace(/'/, '\\\'')}',`;
       outStr = `${outStr}\n      path: '/${parentPath}',`;
       outStr = `${outStr}\n      uid: '${uid}',`;
-      outStr = `${outStr}\n      topics: {`;
+      outStr = `${outStr}\n      approaches: {`;
       const versions = pathTools.getAllVersions(lessonPath);
-      const topics = {};
+      const contentTypes = {};
       versions.forEach((versionPath) => {
         const splitPath = versionPath.split('/');
-        const topicName = splitPath.slice(-2, -1)[0];
+        const contentTypeName = splitPath.slice(-2, -1)[0];
         const versionUid = splitPath.slice(-1)[0];
-        if (topics[topicName] == null) {
-          topics[topicName] = [];
+        if (contentTypes[contentTypeName] == null) {
+          contentTypes[contentTypeName] = [];
         }
-        topics[topicName].push([versionUid, versionPath]);
+        contentTypes[contentTypeName].push([versionUid, versionPath]);
       });
 
-      Object.keys(topics).forEach((topicName) => {
-        const topicVersions = topics[topicName];
-        if (topicName !== 'quickReference') {
-          outStr = `${outStr}\n        ${topicName}: {`;
+      Object.keys(contentTypes).forEach((contentTypeName) => {
+        const topicVersions = contentTypes[contentTypeName];
+        if (contentTypeName !== 'quickReference') {
+          outStr = `${outStr}\n        ${contentTypeName}: {`;
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
@@ -104,7 +104,7 @@ function createContentIndex(buildMode, lessonsPath) {
 
             outStr = `${outStr}\n          ${versionUid}: {`;
             outStr = `${outStr}\n            type: '${type}',`;
-            if (topicName === 'quickReference') {
+            if (contentTypeName === 'quickReference') {
               // outStr = `${outStr}\n            references: [`;
               // references.forEach((reference) => {
               //   outStr = `${outStr}\n              '${reference}',`;
@@ -121,7 +121,7 @@ function createContentIndex(buildMode, lessonsPath) {
           });
           outStr = `${outStr}\n        },`;
         }
-        if (topicName === 'quickReference' && buildMode === 'development') {
+        if (contentTypeName === 'quickReference' && buildMode === 'development') {
           outStr = `${outStr}\n        dev: {`;
           topicVersions.forEach((v) => {
             const [versionUid] = v;
