@@ -69,7 +69,7 @@ for version in versions:
         if file.endswith('scss') \
            or file.endswith('css') \
            or file == 'version.js' \
-           or file == 'lesson.js' \
+           or file == 'entry.js' \
            or file == '.DS_Store' \
            or os.path.isdir(os.path.join(version, file)):
             continue

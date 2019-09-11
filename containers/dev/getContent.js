@@ -22,8 +22,8 @@ function entryPoints(buildMode) {
 
   const lessons = pathTools.getAllPaths(
     './src/content',
-    ['lesson.js', 'quickReference.js'],
-    ['lesson-dev.js'],
+    ['entry.js', 'quickReference.js'],
+    ['entry-dev.js'],
     buildMode,
   );
   lessons.forEach((lesson) => {

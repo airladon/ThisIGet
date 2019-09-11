@@ -196,9 +196,9 @@ def get_lesson(path):
     js = ''
     css = ''
     if (lesson_path in lessons):
-        js = f'/static/dist/content/{path}/{lessons[lesson_path]["lesson.js"]}'
+        js = f'/static/dist/content/{path}/{lessons[lesson_path]["entry.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["lesson.css"]}'
+              f'{lessons[lesson_path]["entry.css"]}'
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
@@ -215,7 +215,7 @@ def get_lesson(path):
     lesson_page = request.args.get('page')
 
     res = make_response_with_files(
-        'lesson.html', css=css, js=js, title=title, description=description)
+        'content.html', css=css, js=js, title=title, description=description)
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
@@ -254,12 +254,12 @@ def get_lesson_dev(path):
     css = ''
     if (lesson_path in lessons):
         js = f'/static/dist/content/{path}/' \
-             f'{lessons[lesson_path]["lesson-dev.js"]}'
+             f'{lessons[lesson_path]["entry-dev.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["lesson-dev.css"]}'
+              f'{lessons[lesson_path]["entry-dev.css"]}'
     lesson_page = request.args.get('page')
 
-    res = make_response_with_files('lesson.html', css=css, js=js)
+    res = make_response_with_files('content.html', css=css, js=js)
     if lesson_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
