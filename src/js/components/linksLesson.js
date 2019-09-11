@@ -1,17 +1,17 @@
 // @flow
 
 import * as React from 'react';
-import SimpleLesson from '../Lesson/SimpleLesson';
+import SimpleFormat from '../Lesson/SimpleFormat';
 import LinksTable from './linksTable';
 
 type Props = {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
   isLoggedIn: boolean;
 };
 
 export default class LinksLessonComponent extends React.Component
                                     <Props> {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
   key: number;
 
   constructor(props: Props) {

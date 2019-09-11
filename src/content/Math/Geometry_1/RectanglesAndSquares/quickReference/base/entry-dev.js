@@ -1,12 +1,12 @@
 // // @flow
 
 import renderLesson from '../../../../../../js/views/lesson/lesson';
-import PresentationLesson from '../../../../../../js/Lesson/PresentationLesson';
+import PresentationFormat from '../../../../../../js/Lesson/PresentationFormat';
 import Content from './content';
 import '../../../../../../css/presentationLesson.scss';
 import './style.scss';
 
-const lesson = new PresentationLesson(new Content());
+const lesson = new PresentationFormat(new Content());
 
 renderLesson(lesson);
 

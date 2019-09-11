@@ -1,5 +1,5 @@
 // @flow
-import { PresentationLessonContent } from '../../../../../../js/Lesson/PresentationLessonContent';
+import { PresentationFormatContent } from '../../../../../../js/Lesson/PresentationFormatContent';
 import lessonLayout from './layout';
 import details from '../../details';
 import version from './version';
@@ -15,7 +15,7 @@ const [versionUID] = path.slice(-1);
 
 const qrids = version.references;
 
-class Content extends PresentationLessonContent {
+class Content extends PresentationFormatContent {
   setTitle() {
     this.title = details.title;
     // this.iconLink = imgLink;

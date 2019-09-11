@@ -1,13 +1,13 @@
 // @flow
-import SimpleLesson from './SimpleLesson';
+import SimpleFormat from './SimpleFormat';
 // import Fig from 'figureone';
-// import SimpleLessonContent from './SimpleLessonContent';
-// import { PresentationLessonContent } from './PresentationLessonContent';
+// import SimpleFormatContent from './SimpleFormatContent';
+// import { PresentationFormatContent } from './PresentationFormatContent';
 // import Diagram from '../diagram/Diagram';
 
 // const { Diagram } = Fig;
 
-class LinksLesson extends SimpleLesson {
+class LinksLesson extends SimpleFormat {
   constructor(content: Object) {
     super(content);
     this.type = 'links';

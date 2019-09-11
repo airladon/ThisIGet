@@ -1,10 +1,10 @@
 // // @flow
 
 import renderLesson from '../../../../../../js/views/lesson/lesson';
-import SimpleLesson from '../../../../../../js/Lesson/SimpleLesson';
+import SimpleFormat from '../../../../../../js/Lesson/SimpleFormat';
 import Content from './content';
 import '../../../../../../css/simpleLesson.scss';
 // import './style.scss';
 
-const lesson = new SimpleLesson(new Content());
+const lesson = new SimpleFormat(new Content());
 renderLesson(lesson);

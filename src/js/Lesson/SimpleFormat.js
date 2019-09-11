@@ -1,12 +1,12 @@
 // @flow
 // import Fig from 'figureone';
-// import SimpleLessonContent from './SimpleLessonContent';
-// import { PresentationLessonContent } from './PresentationLessonContent';
+// import SimpleFormatContent from './SimpleFormatContent';
+// import { PresentationFormatContent } from './PresentationFormatContent';
 // import Diagram from '../diagram/Diagram';
 
 // const { Diagram } = Fig;
 
-class SimpleLesson {
+class SimpleFormat {
   content: Object;
   type: 'simple' | 'singlePage' | 'presentation' | 'links';
 
@@ -20,4 +20,4 @@ class SimpleLesson {
   }
 }
 
-export default SimpleLesson;
+export default SimpleFormat;

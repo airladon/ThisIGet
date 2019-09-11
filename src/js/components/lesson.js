@@ -16,9 +16,9 @@ import TopicDescription from '../Lesson/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
 import { getCookie, login } from '../tools/misc';
-import PresentationLessonComponent from './presentationLesson';
-import SimpleLessonComponent from './simpleLesson';
-import SinglePageLessonComponent from './singlePageLesson';
+import PresentationFormatComponent from './presentationLesson';
+import SimpleFormatComponent from './simpleLesson';
+import SinglePageFormatComponent from './singlePageLesson';
 import LinksLessonComponent from './linksLesson';
 
 type Props = {
@@ -394,12 +394,12 @@ export default class LessonComponent extends React.Component
 
   renderLesson() {
     if (this.lesson.type === 'presentation') {
-      return <PresentationLessonComponent
+      return <PresentationFormatComponent
         lesson={this.lesson}
       />;
     }
     if (this.lesson.type === 'singlePage') {
-      return <SinglePageLessonComponent
+      return <SinglePageFormatComponent
         lesson={this.lesson}
       />;
     }
@@ -409,7 +409,7 @@ export default class LessonComponent extends React.Component
         isLoggedIn={this.props.isLoggedIn}
       />;
     }
-    return <SimpleLessonComponent
+    return <SimpleFormatComponent
       lesson={this.lesson}
     />;
   }

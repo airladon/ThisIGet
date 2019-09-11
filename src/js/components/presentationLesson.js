@@ -1,7 +1,7 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import PresentationLesson from '../Lesson/PresentationLesson';
+import PresentationFormat from '../Lesson/PresentationFormat';
 import Button from './button';
 import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
@@ -12,7 +12,7 @@ import StaticQR from './staticQR';
 // const { DiagramElementCollection } = Fig;
 
 type Props = {
-  lesson: PresentationLesson;
+  lesson: PresentationFormat;
 };
 
 type State = {
@@ -31,9 +31,9 @@ type State = {
   },
 };
 
-export default class PresentationLessonComponent extends React.Component
+export default class PresentationFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: PresentationLesson;
+  lesson: PresentationFormat;
   key: number;
   state: State;
   componentUpdateCallback: ?() => void;

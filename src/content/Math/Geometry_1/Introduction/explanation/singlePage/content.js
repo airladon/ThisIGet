@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 import {
-  SinglePageLessonContent, makeFig,
-} from '../../../../../../js/Lesson/SinglePageLessonContent';
+  SinglePageFormatContent, makeFig,
+} from '../../../../../../js/Lesson/SinglePageFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -25,7 +25,7 @@ const {
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends SinglePageLessonContent {
+class Content extends SinglePageFormatContent {
   setTitle() {
     this.title = details.title;
     //  this.iconLink = imgLink;

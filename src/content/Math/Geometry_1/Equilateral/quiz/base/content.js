@@ -1,7 +1,7 @@
 // @flow
 // import Fig from 'figureone';
 import * as React from 'react';
-import SimpleLessonContent from '../../../../../../js/Lesson/SimpleLessonContent';
+import SimpleFormatContent from '../../../../../../js/Lesson/SimpleFormatContent';
 // import imgLink from '../../tile.png';
 // import imgLinkGrey from '../../tile-grey.png';
 import details from '../../details';
@@ -19,7 +19,7 @@ import content from './content.md';
 //   removeRandElement,
 // } = Fig.tools.math;
 
-class Content extends SimpleLessonContent {
+class Content extends SimpleFormatContent {
   setTitle() {
     this.title = details.title;
     // this.iconLink = imgLink;

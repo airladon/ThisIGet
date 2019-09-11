@@ -1,9 +1,9 @@
 // @flow
 import Fig from 'figureone';
 import {
-  PresentationLessonContent,
+  PresentationFormatContent,
   // interactiveItem,
-} from '../../../../../../js/Lesson/PresentationLessonContent';
+} from '../../../../../../js/Lesson/PresentationFormatContent';
 // import Definition from '../../../../../common/tools/definition';
 import lessonLayout from './layout';
 // import imgLink from '../../tile_ffffff.svg';
@@ -27,7 +27,7 @@ const {
 const layout = lessonLayout();
 const { colors } = layout;
 
-class Content extends PresentationLessonContent {
+class Content extends PresentationFormatContent {
   setTitle() {
     this.title = details.title;
     // this.iconLink = imgLink;

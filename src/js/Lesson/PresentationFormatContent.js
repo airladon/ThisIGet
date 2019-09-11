@@ -4,7 +4,7 @@ import type { TypeParsablePoint } from 'figureone';
 // import TopicDescription from './topicDescription';
 // import getContentIndex from '../../content/index';
 // import { loadRemote, loadRemoteCSS } from '../tools/misc';
-import SimpleLessonContent from './SimpleLessonContent';
+import SimpleFormatContent from './SimpleFormatContent';
 // import PopupBoxCollection from '../../content/common/DiagramCollectionPopup';
 
 const {
@@ -622,7 +622,7 @@ const whichAnimationEvent = () => {
   return '';
 };
 
-class PresentationLessonContent extends SimpleLessonContent {
+class PresentationFormatContent extends SimpleFormatContent {
   title: string;
   sections: Array<Section>;
   // diagram: Object;
@@ -1376,6 +1376,6 @@ function makeFig(
 }
 
 export {
-  Section, PresentationLessonContent, diagramCanvas, initializeItemSelector,
+  Section, PresentationFormatContent, diagramCanvas, initializeItemSelector,
   applyModifiers, interactiveItem, infoList, makeFig,
 };

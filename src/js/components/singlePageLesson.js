@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SimpleLesson from '../Lesson/SimpleLesson';
+import SimpleFormat from '../Lesson/SimpleFormat';
 // import '../../css/singlePageLesson.scss';
 import StaticQR from './staticQR';
 import PresentationQR from './presentationQR';
 
 type Props = {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
 };
 
 type State = {
@@ -76,9 +76,9 @@ const applyMDModifiers = (inputText: string, modifiers: Object) => {
   return outputText;
 };
 
-export default class SinglePageLessonComponent extends React.Component
+export default class SinglePageFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
   key: number;
   contentChange: boolean;
   afterUpdate: ?() => void;

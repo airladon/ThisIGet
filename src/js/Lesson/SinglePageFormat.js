@@ -1,13 +1,13 @@
 // @flow
 import Fig from 'figureone';
-import SimpleLesson from './SimpleLesson';
-import { SinglePageLessonContent } from './SinglePageLessonContent';
-// import { PresentationLessonContent } from './PresentationLessonContent';
+import SimpleFormat from './SimpleFormat';
+import { SinglePageFormatContent } from './SinglePageFormatContent';
+// import { PresentationFormatContent } from './PresentationFormatContent';
 
 const { Diagram } = Fig;
 
-class SinglePageLesson extends SimpleLesson {
-  content: SinglePageLessonContent;
+class SinglePageFormat extends SimpleFormat {
+  content: SinglePageFormatContent;
   diagram: Diagram | null;
 
   constructor(content: Object) {
@@ -40,4 +40,4 @@ class SinglePageLesson extends SimpleLesson {
   }
 }
 
-export default SinglePageLesson;
+export default SinglePageFormat;

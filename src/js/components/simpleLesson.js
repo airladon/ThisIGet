@@ -1,13 +1,13 @@
 // @flow
 
 import * as React from 'react';
-import SimpleLesson from '../Lesson/SimpleLesson';
+import SimpleFormat from '../Lesson/SimpleFormat';
 import StaticQR from './staticQR';
 import PresentationQR from './presentationQR';
 // import '../../css/simpleLesson.scss';
 
 type Props = {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
 };
 
 type State = {
@@ -178,9 +178,9 @@ const checkEntry = (button) => {
   }
 };
 
-export default class SimpleLessonComponent extends React.Component
+export default class SimpleFormatComponent extends React.Component
                                     <Props, State> {
-  lesson: SimpleLesson;
+  lesson: SimpleFormat;
   key: number;
   afterUpdate: ?() => void;
   firstUpdate: boolean;

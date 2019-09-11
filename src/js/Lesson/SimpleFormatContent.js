@@ -11,7 +11,7 @@ const {
 } = Fig;
 
 
-class SimpleLessonContent {
+class SimpleFormatContent {
   title: string;
   sections: Array<Object>;
   iconLink: string;
@@ -133,4 +133,4 @@ class SimpleLessonContent {
   }
 }
 
-export default SimpleLessonContent;
+export default SimpleFormatContent;

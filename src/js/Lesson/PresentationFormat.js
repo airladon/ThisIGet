@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
-import { PresentationLessonContent } from './PresentationLessonContent';
-import SimpleLesson from './SimpleLesson';
+import { PresentationFormatContent } from './PresentationFormatContent';
+import SimpleFormat from './SimpleFormat';
 // import Diagram from '../diagram/Diagram';
 
 const { Diagram } = Fig;
@@ -68,8 +68,8 @@ function hideInteractiveHighlightButton() {
 //  Then ratings will be received asynchronously causing another react
 //  component state update, meaning the onclicks need to be set again.
 
-class PresentationLesson extends SimpleLesson {
-  content: PresentationLessonContent;
+class PresentationFormat extends SimpleFormat {
+  content: PresentationFormatContent;
 
   currentSectionIndex: number;
   diagram: Diagram | null;
@@ -495,4 +495,4 @@ class PresentationLesson extends SimpleLesson {
   }
 }
 
-export default PresentationLesson;
+export default PresentationFormat;

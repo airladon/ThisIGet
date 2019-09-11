@@ -1,7 +1,7 @@
 // @flow
 import Fig from 'figureone';
 import * as React from 'react';
-import SimpleLessonContent from './SimpleLessonContent';
+import SimpleFormatContent from './SimpleFormatContent';
 
 const { generateUniqueId, joinObjects } = Fig.tools.misc;
 
@@ -14,7 +14,7 @@ const {
 //   generateUniqueId,
 // } = Fig.tools.misc;
 
-class SinglePageLessonContent extends SimpleLessonContent {
+class SinglePageFormatContent extends SimpleFormatContent {
   // $FlowFixMe
   sections: Array<Array<string | React.Element<'div'>>>;
   diagram: Object;
@@ -116,4 +116,4 @@ function makeFig(
   return `<div id="${id}" class="single_page_lesson__figure_container" style="width:${width}px"><div class="single_page_lesson__figure" style="padding-top:${aspectRatio * 100}%"><img  class="single_page_lesson__figure_image" id="${id}_webgl" alt="${accessibilityText}"></img><img class="single_page_lesson__figure_image" id="${id}_2d" alt=""></img></div></div>`;
 }
 
-export { SinglePageLessonContent, makeFig };
+export { SinglePageFormatContent, makeFig };
