@@ -29,7 +29,11 @@ function entryPoints(buildMode) {
   lessons.forEach((lesson) => {
     const p = lesson.path.replace(/src\/content\//, '');
     const name = lesson.name.slice(0, -3);
-    points[`content/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
+    if (name.slice(0, 5) === 'entry') {
+      points[`content/${p}/content${name.slice(5)}`] = `./${lesson.path}/${lesson.name}`;
+    } else {
+      points[`content/${p}/${name}`] = `./${lesson.path}/${lesson.name}`;
+    }
   });
   return points;
 }

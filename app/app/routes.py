@@ -196,9 +196,9 @@ def get_lesson(path):
     js = ''
     css = ''
     if (lesson_path in lessons):
-        js = f'/static/dist/content/{path}/{lessons[lesson_path]["entry.js"]}'
+        js = f'/static/dist/content/{path}/{lessons[lesson_path]["content.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["entry.css"]}'
+              f'{lessons[lesson_path]["content.css"]}'
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
     version = getVersion(lesson_uid, topic_name, version_uid)
@@ -254,9 +254,9 @@ def get_lesson_dev(path):
     css = ''
     if (lesson_path in lessons):
         js = f'/static/dist/content/{path}/' \
-             f'{lessons[lesson_path]["entry-dev.js"]}'
+             f'{lessons[lesson_path]["content-dev.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["entry-dev.css"]}'
+              f'{lessons[lesson_path]["content-dev.css"]}'
     lesson_page = request.args.get('page')
 
     res = make_response_with_files('content.html', css=css, js=js)
