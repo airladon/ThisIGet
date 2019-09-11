@@ -140,10 +140,10 @@ export default class TopicDescription {
           })
           .then((data: {
             status: 'ok' | 'fail',
-            message?: string,
-            userRating?: number,
-            aveRating?: number,
-            numRatings?: number,
+            message: string,
+            userRating: number,
+            aveRating: number,
+            numRatings: number,
             numHighRatings: number,
           }) => {
             if (data.status === 'ok') {
