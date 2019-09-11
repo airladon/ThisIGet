@@ -49,10 +49,6 @@ def make_response_with_files(*args, **kwargs):
         dist = lessons['static/dist']
         static = lessons['static']
         vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
-        for key, value in dist.items():
-            if key.endswith('js'):
-                print(key)
-
         common_content_js = f"/{'static/dist'}/{dist['commoncontent.js']}"
         main_css = f"/{'static/dist'}/{dist['home.css']}"
         main_js = f"/{'static/dist'}/{dist['home.js']}"

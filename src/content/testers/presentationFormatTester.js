@@ -165,7 +165,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           }
 
           // eslint-disable-next-line no-await-in-loop
-          await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
+          await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
           // Open all hints on a page
           let hints = await page.$$('.pres_lesson__hint_label');
@@ -255,7 +255,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             }
 
             // eslint-disable-next-line no-await-in-loop
-            await page.waitForFunction('window.presentationLessonTransitionStatus === "steady"');
+            await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
             // Get current page
             // eslint-disable-next-line no-await-in-loop

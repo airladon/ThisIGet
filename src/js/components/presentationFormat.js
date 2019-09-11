@@ -7,7 +7,7 @@ import DropDownButton from './dropDownButton';
 import { getCookie, createCookie } from '../tools/misc';
 import PresentationQR from './presentationQR';
 import StaticQR from './staticQR';
-// import '../../css/presentationLesson.scss';
+// import '../../css/presentationFormat.scss';
 
 // const { DiagramElementCollection } = Fig;
 

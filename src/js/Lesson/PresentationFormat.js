@@ -94,7 +94,7 @@ class PresentationFormat extends SimpleFormat {
     this.firstPageShown = true;
     this.state = {};
     this.inTransition = false;
-    window.presentationLessonTransitionStatus = 'noSteady';
+    window.presentationFormatTransitionStatus = 'noSteady';
     this.refresh = function () {}; // eslint-disable-line func-names
     this.comingFrom = '';
     this.transitionCancelled = false;
@@ -112,7 +112,7 @@ class PresentationFormat extends SimpleFormat {
 
   nextSection() {
     const { diagram } = this;
-    window.presentationLessonTransitionStatus = 'notSteady';
+    window.presentationFormatTransitionStatus = 'notSteady';
     if (this.currentSectionIndex < this.content.sections.length - 1 && diagram) {
       // If in transition, then cancel the transition.
       if (this.inTransition) {
@@ -142,7 +142,7 @@ class PresentationFormat extends SimpleFormat {
 
   prevSection() {
     const { diagram } = this;
-    window.presentationLessonTransitionStatus = 'notSteady';
+    window.presentationFormatTransitionStatus = 'notSteady';
     if (this.currentSectionIndex > 0 && diagram) {
       if (this.inTransition) {
         const { comingFrom } = this;
@@ -174,7 +174,7 @@ class PresentationFormat extends SimpleFormat {
   }
 
   goToSection(sectionId: number | string) {
-    window.presentationLessonTransitionStatus = 'notSteady';
+    window.presentationFormatTransitionStatus = 'notSteady';
     // console.log('goToSection')
     let sectionIndex = 0;
     if (typeof sectionId === 'number') {
@@ -416,7 +416,7 @@ class PresentationFormat extends SimpleFormat {
     this.comingFrom = '';
     this.transitionCancelled = false;
     this.renderDiagrams();
-    window.presentationLessonTransitionStatus = 'steady';
+    window.presentationFormatTransitionStatus = 'steady';
   }
 
   updateInteractiveItems() {
