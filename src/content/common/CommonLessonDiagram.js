@@ -31,7 +31,7 @@ export default class CommonLessonDiagram extends Diagram {
     [string]: Object,
   };
 
-  lesson: Object;
+  version: Object;
   // $FlowFixMe
   elements: CommonDiagramCollection;
 
