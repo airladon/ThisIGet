@@ -245,48 +245,48 @@ const CommonQuizMixin = superclass => class extends superclass {
     incorrectBox: boolean = true,
   ) {
     const container = document.createElement('div');
-    container.classList.add('lesson__quiz__answer_container');
+    container.classList.add('approach__quiz__answer_container');
     if (incorrectBox) {
-      container.classList.add('lesson__quiz__answer_incorrect');
+      container.classList.add('approach__quiz__answer_incorrect');
     } else {
-      container.classList.add('lesson__quiz__answer_correct');
+      container.classList.add('approach__quiz__answer_correct');
     }
 
     const answer = document.createElement('div');
-    answer.classList.add('lesson__quiz__answer_text');
+    answer.classList.add('approach__quiz__answer_text');
     answer.innerHTML = answerText;
     container.appendChild(answer);
 
     if (detailsText) {
       const details = document.createElement('div');
-      details.classList.add('lesson__quiz__answer_details_text');
+      details.classList.add('approach__quiz__answer_details_text');
       details.innerHTML = detailsText;
       container.appendChild(details);
     }
 
     const nextSteps = document.createElement('div');
-    nextSteps.classList.add('lesson__quiz__next_steps');
+    nextSteps.classList.add('approach__quiz__next_steps');
     container.appendChild(nextSteps);
 
     if (incorrectBox) {
       const tryAgain = document.createElement('div');
-      tryAgain.classList.add('lesson__quiz__button');
-      tryAgain.classList.add('lesson__quiz__button_fixed_size');
+      tryAgain.classList.add('approach__quiz__button');
+      tryAgain.classList.add('approach__quiz__button_fixed_size');
       tryAgain.innerHTML = 'Try Again';
       tryAgain.onclick = this.tryAgain.bind(this);
       nextSteps.appendChild(tryAgain);
 
       const showAnswer = document.createElement('div');
-      showAnswer.classList.add('lesson__quiz__button');
-      showAnswer.classList.add('lesson__quiz__button_fixed_size');
+      showAnswer.classList.add('approach__quiz__button');
+      showAnswer.classList.add('approach__quiz__button_fixed_size');
       showAnswer.innerHTML = 'Show Answer';
       showAnswer.onclick = this.showAnswer.bind(this);
       nextSteps.appendChild(showAnswer);
     }
 
     const newProblem = document.createElement('div');
-    newProblem.classList.add('lesson__quiz__button');
-    newProblem.classList.add('lesson__quiz__button_fixed_size');
+    newProblem.classList.add('approach__quiz__button');
+    newProblem.classList.add('approach__quiz__button_fixed_size');
     newProblem.innerHTML = 'Try New Problem';
     newProblem.onclick = this.newProblem.bind(this);
     nextSteps.appendChild(newProblem);
@@ -318,7 +318,7 @@ const CommonQuizMixin = superclass => class extends superclass {
 
   makeButton(id: string, label: string, callback: Function, position: Point) {
     const button = document.createElement('div');
-    button.classList.add('lesson__quiz__button');
+    button.classList.add('approach__quiz__button');
     button.innerHTML = label;
     button.onclick = callback;
     const html = this.diagram.shapes.htmlElement(
@@ -333,11 +333,11 @@ const CommonQuizMixin = superclass => class extends superclass {
 
     html.disable = () => {
       html.isInteractive = false;
-      button.classList.add('lesson__quiz__button_disabled');
+      button.classList.add('approach__quiz__button_disabled');
     };
     html.enable = () => {
       html.isInteractive = true;
-      button.classList.remove('lesson__quiz__button_disabled');
+      button.classList.remove('approach__quiz__button_disabled');
     };
     return html;
   }
@@ -392,11 +392,11 @@ const CommonQuizMixin = superclass => class extends superclass {
     decimalPlaces: number = 0,
   ) {
     const container = document.createElement('div');
-    container.classList.add('lesson__quiz_input_container');
+    container.classList.add('approach__quiz_input_container');
     // const form = document.createElement('form');
     // container.appendChild(form);
     const input = document.createElement('input');
-    input.classList.add('lesson__quiz_input');
+    input.classList.add('approach__quiz_input');
     input.setAttribute('type', 'text');
     input.setAttribute('placeholder', placeholder);
     input.onkeypress = (event) => {
@@ -457,22 +457,22 @@ const CommonQuizMixin = superclass => class extends superclass {
     html.disable = () => {
       input.disabled = true;
       html.isInteractive = false;
-      input.classList.add('lesson__quiz_input_disabled');
+      input.classList.add('approach__quiz_input_disabled');
     };
     html.enable = () => {
       input.disabled = false;
       html.isInteractive = true;
-      input.classList.remove('lesson__quiz_input_disabled');
+      input.classList.remove('approach__quiz_input_disabled');
     };
     return html;
   }
 
   // eslint-disable-next-line class-methods-use-this
   selectMultipleChoice(id: string, index: number = -1) {
-    const indexStr = 'id_lesson__quiz_multiple_choice_box_';
-    const answerSelected = 'lesson__quiz_multiple_choice_box_answer__selected';
-    const circleSelected = 'lesson__quiz_multiple_choice_box_circle__selected';
-    const elementSelected = 'lesson__quiz_multiple_choice_box__selected';
+    const indexStr = 'id_approach__quiz_multiple_choice_box_';
+    const answerSelected = 'approach__quiz_multiple_choice_box_answer__selected';
+    const circleSelected = 'approach__quiz_multiple_choice_box_circle__selected';
+    const elementSelected = 'approach__quiz_multiple_choice_box__selected';
 
     const selected = document.getElementsByClassName(elementSelected);
     const selectedLength = selected.length;
@@ -498,10 +498,10 @@ const CommonQuizMixin = superclass => class extends superclass {
 
   // eslint-disable-next-line class-methods-use-this
   getMultipleChoiceSelection(id: string) {
-    const elementSelected = 'lesson__quiz_multiple_choice_box__selected';
+    const elementSelected = 'approach__quiz_multiple_choice_box__selected';
     const selected = document.getElementsByClassName(elementSelected);
     for (let i = 0; i < selected.length; i += 1) {
-      const idIndex = selected[i].id.replace('id_lesson__quiz_multiple_choice_box_circle__', '');
+      const idIndex = selected[i].id.replace('id_approach__quiz_multiple_choice_box_circle__', '');
       const idString = idIndex.replace(/_[0-9]*$/, '');
       if (idString === id) {
         return parseInt(idIndex.replace(`${idString}_`, ''), 10);
@@ -516,21 +516,21 @@ const CommonQuizMixin = superclass => class extends superclass {
     answers: Array<string>,
   ) {
     const table = document.createElement('table');
-    table.classList.add('lesson__quiz_multiple_choice_box_table');
+    table.classList.add('approach__quiz_multiple_choice_box_table');
     answers.forEach((answer, index) => {
       const row = document.createElement('tr');
-      row.classList.add('lesson__quiz_multiple_choice_box_row');
+      row.classList.add('approach__quiz_multiple_choice_box_row');
       row.onclick = this.selectMultipleChoice.bind(this, id, index);
       const col1 = document.createElement('td');
-      col1.classList.add('lesson__quiz_multiple_choice_box_col1');
+      col1.classList.add('approach__quiz_multiple_choice_box_col1');
       const col2 = document.createElement('td');
-      col2.classList.add('lesson__quiz_multiple_choice_box_col2');
+      col2.classList.add('approach__quiz_multiple_choice_box_col2');
       const circle = document.createElement('div');
-      circle.classList.add('lesson__quiz_multiple_choice_box_circle');
-      circle.id = `id_lesson__quiz_multiple_choice_box_circle__${id}_${index}`;
+      circle.classList.add('approach__quiz_multiple_choice_box_circle');
+      circle.id = `id_approach__quiz_multiple_choice_box_circle__${id}_${index}`;
       const answerText = document.createElement('div');
-      answerText.classList.add('lesson__quiz_multiple_choice_box_answer');
-      answerText.id = `id_lesson__quiz_multiple_choice_box_answer__${id}_${index}`;
+      answerText.classList.add('approach__quiz_multiple_choice_box_answer');
+      answerText.id = `id_approach__quiz_multiple_choice_box_answer__${id}_${index}`;
       answerText.innerHTML = answer;
       row.appendChild(col1);
       row.appendChild(col2);
@@ -548,7 +548,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     );
     html.enable = (doEnable: boolean = true) => {
       const { element } = html.drawingObject;
-      const classStr = 'lesson__quiz_multiple_choice_box_answer__disable';
+      const classStr = 'approach__quiz_multiple_choice_box_answer__disable';
       if (doEnable) {
         element.classList.remove(classStr);
       } else {

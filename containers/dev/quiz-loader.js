@@ -8,9 +8,9 @@ function convertMultiChoice(str, name, options) {
   lines.forEach((line) => {
     const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
     const html = `
-  <div class="lesson__quiz_selection">
-    <div class="lesson__quiz__radio_mark"></div>
-    <div class="lesson__quiz__radio_button">
+  <div class="approach__quiz_selection">
+    <div class="approach__quiz__radio_mark"></div>
+    <div class="approach__quiz__radio_button">
       <input type="radio" name="${name}" value="${value}">
       ${line.slice(1).trim()}
     </div>
@@ -18,8 +18,8 @@ function convertMultiChoice(str, name, options) {
     out = `${out}${html}`;
   });
   out = `${out}
-  <div class="lesson__quiz__submit">
-    <button class="lesson__quiz__submit_button lesson__quiz__multichoice_submit_button">Check</button>
+  <div class="approach__quiz__submit">
+    <button class="approach__quiz__submit_button approach__quiz__multichoice_submit_button">Check</button>
   </div>
 </div>
 </html>
@@ -28,38 +28,38 @@ function convertMultiChoice(str, name, options) {
 }
 
 function convertEntry(contents, entryType, options) {
-  let answerType = 'lesson__quiz__answer__type_string';
+  let answerType = 'approach__quiz__answer__type_string';
   let filter = 'function() {return true;}';
   let inputType = 'text';
   if (entryType === 'string' || entryType === '') {
-    answerType = 'lesson__quiz__answer__type_string';
+    answerType = 'approach__quiz__answer__type_string';
   } else if (entryType === 'integer') {
-    answerType = 'lesson__quiz__answer__type_integer';
+    answerType = 'approach__quiz__answer__type_integer';
     filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode<48||charCode>57)){return false;}return true;}(event)';
     inputType = 'number';
   } else if (entryType === 'number') {
-    answerType = 'lesson__quiz__answer__type_number';
+    answerType = 'approach__quiz__answer__type_number';
     filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}(event)';
     inputType = 'number';
   } else {
     const decimals = parseInt(entryType, 10);
     if (!Number.isNaN(decimals)) {
-      answerType = `lesson__quiz__answer__type_${decimals}`;
+      answerType = `approach__quiz__answer__type_${decimals}`;
     }
     filter = 'return function isNumberKey(evt){var charCode=(evt.which)?evt.which:event.keyCode;if(charCode>31&&(charCode!=46&&(charCode<48||charCode>57))){return false;}return true;}(event)';
     inputType = 'number';
   }
 
   return `<html>
-  <div class="lesson__quiz_entry" ${options}>
-      <div class="lesson__quiz__mark"></div>
-      <div class="lesson__quiz_entry_input">
+  <div class="approach__quiz_entry" ${options}>
+      <div class="approach__quiz__mark"></div>
+      <div class="approach__quiz_entry_input">
         <input type="${inputType}" onkeypress="${filter}">
       </div>
-      <div class="lesson__quiz__entry_submit">
-        <button class="lesson__quiz__submit_button lesson__quiz__entry_submit_button">Check</button>
+      <div class="approach__quiz__entry_submit">
+        <button class="approach__quiz__submit_button approach__quiz__entry_submit_button">Check</button>
       </div>
-    <div class="lesson__quiz__answer ${answerType}">
+    <div class="approach__quiz__answer ${answerType}">
       ${contents}
     </div>
   </div>

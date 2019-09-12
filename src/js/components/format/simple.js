@@ -68,17 +68,17 @@ const checkRatioButton = (button) => {
   for (let i = 0; i < inputs.length; i += 1) {
     const input = inputs[i];
     // $FlowFixMe
-    const submitMark = input.parentElement.parentElement.querySelector('.lesson__quiz__radio_mark');
+    const submitMark = input.parentElement.parentElement.querySelector('.approach__quiz__radio_mark');
     if (submitMark != null) {
-      submitMark.classList.remove('lesson__quiz__result_correct');
-      submitMark.classList.remove('lesson__quiz__result_incorrect');
+      submitMark.classList.remove('approach__quiz__result_correct');
+      submitMark.classList.remove('approach__quiz__result_incorrect');
       // $FlowFixMe
       if (input.checked === true) {
         // $FlowFixMe
         if (input.value === 'correct') {
-          submitMark.classList.add('lesson__quiz__result_correct');
+          submitMark.classList.add('approach__quiz__result_correct');
         } else {
-          submitMark.classList.add('lesson__quiz__result_incorrect');
+          submitMark.classList.add('approach__quiz__result_incorrect');
         }
       }
     }
@@ -115,8 +115,8 @@ const checkEntry = (button) => {
   }
   const parent = button.parentElement.parentElement;
   const entryInput = parent.querySelector('input');
-  const answerElement = parent.querySelector('.lesson__quiz__answer');
-  const submitMark = parent.querySelector('.lesson__quiz__mark');
+  const answerElement = parent.querySelector('.approach__quiz__answer');
+  const submitMark = parent.querySelector('.approach__quiz__mark');
   if (answerElement == null || entryInput == null || submitMark == null) {
     return;
   }
@@ -128,8 +128,8 @@ const checkEntry = (button) => {
   let type = 'string';
   for (let i = 0; i < classes.length; i += 1) {
     const c = classes[i];
-    if (c.startsWith('lesson__quiz__answer__type_')) {
-      type = c.replace('lesson__quiz__answer__type_', '');
+    if (c.startsWith('approach__quiz__answer__type_')) {
+      type = c.replace('approach__quiz__answer__type_', '');
     }
   }
 
@@ -169,12 +169,12 @@ const checkEntry = (button) => {
     }
   }
 
-  submitMark.classList.remove('lesson__quiz__result_correct');
-  submitMark.classList.remove('lesson__quiz__result_incorrect');
+  submitMark.classList.remove('approach__quiz__result_correct');
+  submitMark.classList.remove('approach__quiz__result_incorrect');
   if (correct) {
-    submitMark.classList.add('lesson__quiz__result_correct');
+    submitMark.classList.add('approach__quiz__result_correct');
   } else {
-    submitMark.classList.add('lesson__quiz__result_incorrect');
+    submitMark.classList.add('approach__quiz__result_incorrect');
   }
 };
 
@@ -266,7 +266,7 @@ export default class SimpleFormatComponent extends React.Component
       this.firstUpdate = false;
     }
     const multichoiceButtons =
-      document.getElementsByClassName('lesson__quiz__multichoice_submit_button');
+      document.getElementsByClassName('approach__quiz__multichoice_submit_button');
     for (let i = 0; i < multichoiceButtons.length; i += 1) {
       const element = multichoiceButtons[i];
       element.onclick = () => {
@@ -274,7 +274,7 @@ export default class SimpleFormatComponent extends React.Component
       };
     }
     const entryButtons =
-      document.getElementsByClassName('lesson__quiz__entry_submit_button');
+      document.getElementsByClassName('approach__quiz__entry_submit_button');
     for (let i = 0; i < entryButtons.length; i += 1) {
       const element = entryButtons[i];
       element.onclick = () => {

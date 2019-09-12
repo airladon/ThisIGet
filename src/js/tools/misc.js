@@ -204,9 +204,9 @@ function multichoice(
   lines.forEach((line) => {
     const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
     const html = `
-  <div class="lesson__quiz_selection">
-    <div class="lesson__quiz__radio_mark"></div>
-    <div class="lesson__quiz__radio_button">
+  <div class="approach__quiz_selection">
+    <div class="approach__quiz__radio_mark"></div>
+    <div class="approach__quiz__radio_button">
       <input type="radio" name="${name}" value="${value}">
       ${line.slice(1).trim()}
     </div>
@@ -214,8 +214,8 @@ function multichoice(
     out = `${out}${html}`;
   });
   out = `${out}
-  <div class="lesson__quiz__submit">
-    <button class="lesson__quiz__submit_button lesson__quiz__multichoice_submit_button">Check</button>
+  <div class="approach__quiz__submit">
+    <button class="approach__quiz__submit_button approach__quiz__multichoice_submit_button">Check</button>
   </div>
 </div>
 </html>
