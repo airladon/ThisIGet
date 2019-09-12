@@ -35,7 +35,6 @@ type State = {
 
 function getTopicDescription(uid: string) {
   const topicIndex = getTopicIndex();
-  console.log(topicIndex)
   return topicIndex[uid];
 }
 
@@ -73,7 +72,7 @@ export default class TopicComponent extends React.Component
     };
     this.key = 0;
     this.showNavigator = false;
-    this.getRating(this.approachUID);
+    // this.getRating(this.approachUID);
     if (this.topicDescription != null) {
       this.topicDescription.getRatings(this.gotRatings.bind(this));
     }
@@ -90,12 +89,14 @@ export default class TopicComponent extends React.Component
         }
         Object.keys(versions).forEach((versionUID) => {
           const version = versions[versionUID];
-          ratings[approachUID][versionUID] = {
-            aveRating: version.aveRating,
-            numRatings: version.numRatings,
-            numHighRatings: version.numHighRatings,
-            userRating: version.userRating,
-          };
+          if (version.rating != null) {
+            ratings[approachUID][versionUID] = {
+              aveRating: version.rating.ave,
+              numRatings: version.rating.num,
+              numHighRatings: version.rating.high,
+              userRating: version.rating.user,
+            };
+          }
         });
       });
       return ratings;
@@ -104,31 +105,42 @@ export default class TopicComponent extends React.Component
   }
 
   gotRatings() {
-    this.setState({ ratings: this.fillRatings() });
+    const ratings = this.fillRatings();
+    let userRating = 0;
+    if (ratings[this.approachUID] != null) {
+      const approach = ratings[this.approachUID];
+      if (approach[this.versionUID] != null) {
+        const rating = approach[this.versionUID].userRating;
+        if (typeof rating === 'number') {
+          userRating = rating;
+        }
+      }
+    }
+    this.setState({ ratings, userRating });
   }
 
-  getRating(approachUID: string) {
-    const link = `/rating/${this.topicUID}/${approachUID}/${this.versionUID}`;
-    fetchPolyfill(link, { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status === 'ok') {
-          if (data.userRating
-            && data.userRating !== 'not rated'
-            && data.userRating !== 'not logged in'
-          ) {
-            // this.setUserRating(data.userRating);
-            this.setState({ userRating: data.userRating });
-          }
-        }
-      })
-      .catch(() => {});
-  }
+  // getRating(approachUID: string) {
+  //   const link = `/rating/${this.topicUID}/${approachUID}/${this.versionUID}`;
+  //   fetchPolyfill(link, { credentials: 'same-origin' })
+  //     .then((response) => {
+  //       if (!response.ok) {
+  //         throw Error(response.statusText);
+  //       }
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       if (data.status === 'ok') {
+  //         if (data.userRating
+  //           && data.userRating !== 'not rated'
+  //           && data.userRating !== 'not logged in'
+  //         ) {
+  //           // this.setUserRating(data.userRating);
+  //           this.setState({ userRating: data.userRating });
+  //         }
+  //       }
+  //     })
+  //     .catch(() => {});
+  // }
 
   setUserRating(rating: number) {
     const { cookie } = document;

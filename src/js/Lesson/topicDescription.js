@@ -29,10 +29,12 @@ export type TypeTopicDescription = {
         uid: string,
         fullTopic: boolean,
         type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
-        aveRating: number;
-        numRatings: number;
-        numHighRatings: number;
-        userRating: number;
+        rating: {
+          ave: number,
+          num: number,
+          high: number,
+          user: number | string,
+        }
       },
     },
   };
@@ -60,10 +62,12 @@ export default class TopicDescription {
         uid: string,
         fullTopic: boolean,
         type: 'presentation' | 'singlePage' | 'video' | 'audio' | 'generic',
-        aveRating: number;
-        numRatings: number;
-        numHighRatings: number;
-        userRating: number;
+        rating: {
+          ave: number,
+          num: number,
+          high: number,
+          user: number | string,
+        }
       },
     },
   };
@@ -124,45 +128,93 @@ export default class TopicDescription {
   // getRatings(callback: Function) {
   //   ratings = getTopicRatings(path)
   // }
-
-  getRatings(callback: Function) {
-    this.callbackCount = 0;
-    this.numVersions = 0;
-    Object.keys(this.approaches).forEach((approachUID) => {
-      const topic = this.approaches[approachUID];
-      this.numVersions += Object.keys(topic).length;
-      Object.keys(topic).forEach((versionUID) => {
-        const version = topic[versionUID];
-        const link = `/rating/${this.uid}/${approachUID}/${versionUID}`;
-        fetchPolyfill(link, { credentials: 'same-origin' })
-          .then((response) => {
-            if (!response.ok) {
-              this.waitThenCallback(callback);
-              throw Error(response.statusText);
+  getRatings(callback: () => void) {
+    const topicPath = this.path.replace('/content/', '');
+    const endPoint = `/topicRatings/${topicPath}/${this.uid}`;
+    fetchPolyfill(endPoint, { credentials: 'same-origin' })
+      .then((response) => {
+        if (!response.ok) {
+          throw Error(response.statusText);
+        }
+        return response.json();
+      })
+      .then((data: {
+        status: 'ok',
+        ratings: {
+          [approachUID: string]: {
+            [versionUID: string]: {
+              ave: number,
+              high: number,
+              num: number,
+              user: number | string,
             }
-            return response.json();
-          })
-          .then((data: {
-            status: 'ok' | 'fail',
-            message: string,
-            userRating: number,
-            aveRating: number,
-            numRatings: number,
-            numHighRatings: number,
-          }) => {
-            if (data.status === 'ok') {
-              version.aveRating = data.aveRating;
-              version.numRatings = data.numRatings;
-              version.numHighRatings = data.numHighRatings;
-              version.userRating = data.userRating;
-            }
-            this.waitThenCallback(callback);
-          })
-          .catch(() => {
-            this.waitThenCallback(callback);
-          });
+          }
+        }
+      } | {
+        status: 'fail',
+        message: string
+      }) => {
+        if (data.status === 'ok') {
+          if (data.ratings != null) {
+            const { ratings } = data;
+            Object.keys(ratings).forEach((approachUID) => {
+              const approach = ratings[approachUID];
+              Object.keys(approach).forEach((versionUID) => {
+                const rating = approach[versionUID];
+                if (this.approaches[approachUID]
+                  && this.approaches[approachUID][versionUID]
+                ) {
+                  this.approaches[approachUID][versionUID].rating = rating;
+                }
+              });
+            });
+          }
+        }
+        callback();
+      })
+      .catch(() => {
+        callback();
       });
-    });
   }
+
+  // getRatings(callback: Function) {
+  //   this.callbackCount = 0;
+  //   this.numVersions = 0;
+  //   Object.keys(this.approaches).forEach((approachUID) => {
+  //     const topic = this.approaches[approachUID];
+  //     this.numVersions += Object.keys(topic).length;
+  //     Object.keys(topic).forEach((versionUID) => {
+  //       const version = topic[versionUID];
+  //       const link = `/rating/${this.uid}/${approachUID}/${versionUID}`;
+  //       fetchPolyfill(link, { credentials: 'same-origin' })
+  //         .then((response) => {
+  //           if (!response.ok) {
+  //             this.waitThenCallback(callback);
+  //             throw Error(response.statusText);
+  //           }
+  //           return response.json();
+  //         })
+  //         .then((data: {
+  //           status: 'ok' | 'fail',
+  //           message: string,
+  //           userRating: number,
+  //           aveRating: number,
+  //           numRatings: number,
+  //           numHighRatings: number,
+  //         }) => {
+  //           if (data.status === 'ok') {
+  //             version.aveRating = data.aveRating;
+  //             version.numRatings = data.numRatings;
+  //             version.numHighRatings = data.numHighRatings;
+  //             version.userRating = data.userRating;
+  //           }
+  //           this.waitThenCallback(callback);
+  //         })
+  //         .catch(() => {
+  //           this.waitThenCallback(callback);
+  //         });
+  //     });
+  //   });
+  // }
 }
 
