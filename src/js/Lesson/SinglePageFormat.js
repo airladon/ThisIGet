@@ -36,7 +36,7 @@ class SinglePageFormat extends SimpleFormat {
     this.closeDiagram();
     super.initialize();
     this.diagram = this.content.diagram;
-    this.diagram.lesson = this;
+    this.diagram.version = this;
   }
 }
 

@@ -655,8 +655,8 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   initialize() {
     this.setDiagram(this.diagramHtmlId);
-    this.next = () => { this.diagram.lesson.nextSection(); };
-    this.prev = () => { this.diagram.lesson.nextSection(); };
+    this.next = () => { this.diagram.version.nextSection(); };
+    this.prev = () => { this.diagram.version.nextSection(); };
     this.setElementContent();
     this.addSections();
     this.addInfoBox();
@@ -725,13 +725,13 @@ class PresentationFormatContent extends SimpleFormatContent {
     }
     const next = document.getElementById('topic__button-next');
     if (next
-      && this.diagram.lesson.currentSectionIndex
-        < this.diagram.lesson.content.sections.length - 1
+      && this.diagram.version.currentSectionIndex
+        < this.diagram.version.content.sections.length - 1
     ) {
       next.classList.remove('topic__button-next-disabled');
     }
     const prev = document.getElementById('topic__button-previous');
-    if (prev && this.diagram.lesson.currentSectionIndex > 0) {
+    if (prev && this.diagram.version.currentSectionIndex > 0) {
       prev.classList.remove('topic__button-prev-disabled');
     }
     const gotoButton =

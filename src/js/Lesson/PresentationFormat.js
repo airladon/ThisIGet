@@ -478,7 +478,7 @@ class PresentationFormat extends SimpleFormat {
     this.diagram = this.content.diagram;
 
     // this.overlayDiagram = this.content.overlayDiagram;
-    this.diagram.lesson = this;
+    this.diagram.version = this;
   }
 
   // eslint-disable-next-line class-methods-use-this

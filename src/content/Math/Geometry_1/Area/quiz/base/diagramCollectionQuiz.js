@@ -211,7 +211,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._top.setColor(this.layout.colors.sidesDisabled);
     this._bottom.setColor(this.layout.colors.sidesDisabled);
     this.diagram.animateNextFrame();
-    this.diagram.lesson.enableInteractiveItems();
+    this.diagram.version.enableInteractiveItems();
   }
 
   findAnswer() {

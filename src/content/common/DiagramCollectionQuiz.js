@@ -47,7 +47,7 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._input.setValue('');
     }
     this.diagram.animateNextFrame();
-    this.diagram.lesson.enableInteractiveItems();
+    this.diagram.version.enableInteractiveItems();
   }
 
   // eslint-disable-next-line class-methods-use-this
@@ -77,7 +77,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     this.hasTouchableElements = true;
     this.answerIndex = -1;
     this.setupNewProblem();
-    this.diagram.lesson.updateInteractiveItems();
+    this.diagram.version.updateInteractiveItems();
     this.diagram.animateNextFrame();
   }
 
@@ -119,7 +119,7 @@ const CommonQuizMixin = superclass => class extends superclass {
       this._choice.enable();
       this.selectMultipleChoice(this._choice.id, -1);
     }
-    this.diagram.lesson.enableInteractiveItems();
+    this.diagram.version.enableInteractiveItems();
   }
 
   showCheck() {
@@ -136,7 +136,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     if (this._choice != null) {
       this._choice.disable();
     }
-    this.diagram.lesson.disableInteractiveItems();
+    this.diagram.version.disableInteractiveItems();
     this.hasTouchableElements = false;
     const answer = this.findAnswer();
     if (answer === 'correct') {
