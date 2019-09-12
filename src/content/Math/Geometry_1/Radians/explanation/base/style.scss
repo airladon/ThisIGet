@@ -48,7 +48,7 @@ body {
   // border-bottom-right-radius: 1em;
 }
 
-.lesson__common_angles_table tr:first-child {
+.topic__common_angles_table tr:first-child {
   width: 50%;
   text-align: center;
   background-color: color('black', 'dark');
@@ -58,22 +58,22 @@ body {
   // border-top-right-radius: 1em;
 }
 
-.lesson__common_angles_table td {
+.topic__common_angles_table td {
   height: 2em;
 }
 
-.lesson__common_angles_table td:first-child {
+.topic__common_angles_table td:first-child {
   width: 50%;
   text-align: center;
   // border-top-left-radius: 1em;
 }
 
-.lesson__common_angles_table td:nth-child(2) {
+.topic__common_angles_table td:nth-child(2) {
   text-align: center;
   width: 50%;
 }
 
-.lesson__common_angles_table tr:last-child td {
+.topic__common_angles_table tr:last-child td {
   padding-bottom: 0.5em;
 }
 

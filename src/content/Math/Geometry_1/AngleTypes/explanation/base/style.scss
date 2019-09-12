@@ -16,7 +16,7 @@ body {
   z-index: 0;
 }
 
-.lesson__important_angles_table {
+.topic__important_angles_table {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
@@ -27,28 +27,28 @@ body {
   // color: map-get($colors, 'angle');
 }
 
-.lesson__important_angles_table td {
+.topic__important_angles_table td {
   padding-top: 1%;
   padding-bottom: 1%;
 }
 
-.lesson__important_angles_table td:first-child {
+.topic__important_angles_table td:first-child {
   padding-left: 2%;
 }
 
-.lesson__important_angles_table td:last-child {
+.topic__important_angles_table td:last-child {
   padding-right: 3%;
 }
 
-.lesson__important_angles_table__not_selected {
+.topic__important_angles_table__not_selected {
   color: map-get($colors, 'axes');
 }
 
-.lesson__important_angles_table__selected {
+.topic__important_angles_table__selected {
   color: map-get($colors, 'angle');
 }
 
-.lesson__important_angles__text {
+.topic__important_angles__text {
   // position: absolute;
   // top: 0;
   // left: 0;
@@ -56,7 +56,7 @@ body {
   height: 80%;
 }
 
-.lesson__important_angles__text_hide {
+.topic__important_angles__text_hide {
   overflow: hidden;
   height: 0;
   width: 0;

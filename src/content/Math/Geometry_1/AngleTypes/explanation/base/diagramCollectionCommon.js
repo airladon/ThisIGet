@@ -86,9 +86,9 @@ export default class CommonCollection extends CommonDiagramCollection {
 
   getClass(angle: string) {
     if (this.currentAngle === angle) {
-      return 'lesson__important_angles_table__not_selected lesson__important_angles_table__selected';
+      return 'topic__important_angles_table__not_selected topic__important_angles_table__selected';
     }
-    return 'lesson__important_angles_table__not_selected';
+    return 'topic__important_angles_table__not_selected';
   }
 
   updateTable(force: boolean = false) {
@@ -109,13 +109,13 @@ export default class CommonCollection extends CommonDiagramCollection {
         const def = document.getElementById(`${id}_def`);
         if (angle === this.currentAngle) {
           if (element != null) {
-            element.classList.add('lesson__important_angles_table__selected');
+            element.classList.add('topic__important_angles_table__selected');
           }
           if (text != null) {
-            text.classList.remove('lesson__important_angles__text_hide');
+            text.classList.remove('topic__important_angles__text_hide');
           }
           if (def != null) {
-            def.classList.remove('lesson__important_angles__text_hide');
+            def.classList.remove('topic__important_angles__text_hide');
           }
           interactiveItems.forEach((interactiveItem) => {
             const item = document.getElementById(interactiveItem);
@@ -125,13 +125,13 @@ export default class CommonCollection extends CommonDiagramCollection {
           });
         } else {
           if (element != null) {
-            element.classList.remove('lesson__important_angles_table__selected');
+            element.classList.remove('topic__important_angles_table__selected');
           }
           if (text != null) {
-            text.classList.add('lesson__important_angles__text_hide');
+            text.classList.add('topic__important_angles__text_hide');
           }
           if (def != null) {
-            def.classList.add('lesson__important_angles__text_hide');
+            def.classList.add('topic__important_angles__text_hide');
           }
           interactiveItems.forEach((interactiveItem) => {
             const item = document.getElementById(interactiveItem);

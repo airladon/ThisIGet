@@ -43,11 +43,11 @@ class Content extends PresentationFormatContent {
     const fig = coll._fig;
     const right = coll._right;
 
-    const container = (id, text) => `<div id="${id}"" class="lesson__important_angles__text">${text}</div>`;
+    const container = (id, text) => `<div id="${id}"" class="topic__important_angles__text">${text}</div>`;
     this.addSection({
       title: 'Angle Types',
       setContent: [
-        `<table class="lesson__important_angles_table">
+        `<table class="topic__important_angles_table">
           <tr>
             <td>|Acute|</td>
             <td>|Right|</td>

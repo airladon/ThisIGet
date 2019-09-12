@@ -71,7 +71,7 @@ const applyMDModifiers = (inputText: string, modifiers: Object) => {
   } else if (inputText.trim().startsWith('#')) {
     outputText = `<h1>${inputText.slice(1)}</h1>`;
   } else {
-    outputText = `<p class="single_page_lesson__text">${applyModifiers(inputText, modifiers)}</p>`;
+    outputText = `<p class="single_page_topic__text">${applyModifiers(inputText, modifiers)}</p>`;
   }
   return outputText;
 };
@@ -106,14 +106,14 @@ export default class SinglePageFormatComponent extends React.Component
       element.classList.remove('lesson__hide');
     }
 
-    align('id_topic__qr__static_container', 'id_single_page_lesson__text_container', id);
+    align('id_topic__qr__static_container', 'id_single_page_topic__text_container', id);
     this.afterUpdate = () => {
       align('id_topic__qr__static_container', 'topic__content', id);
     };
   }
 
   showPresQR(id: string, parameters: string) {
-    const container = document.getElementById('id_single_page_lesson__text_container');
+    const container = document.getElementById('id_single_page_topic__text_container');
     if (container != null) {
       const containerRect = container.getBoundingClientRect();
       const width = Math.min(containerRect.width - 40, 600);
@@ -134,7 +134,7 @@ export default class SinglePageFormatComponent extends React.Component
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.version.content.showQR(path, qrid);
-    align('id_topic__qr__pres_container', 'id_single_page_lesson__text_container', id);
+    align('id_topic__qr__pres_container', 'id_single_page_topic__text_container', id);
     this.version.content.qrDiagram.resize();
     this.version.content.qrDiagram.animateNextFrame();
   }
@@ -333,11 +333,11 @@ export default class SinglePageFormatComponent extends React.Component
       }
     });
     return <div
-        id="id_single_page_lesson__text_container"
-        className="single_page_lesson__text_container"
+        id="id_single_page_topic__text_container"
+        className="single_page_topic__text_container"
       >
         <div
-          className="single_page_lesson__text_container_text"
+          className="single_page_topic__text_container_text"
           dangerouslySetInnerHTML={ { __html: output } }
         />
         <div id="id_topic__qr__static_container" className="topic__qr__container lesson__hide">
@@ -350,7 +350,7 @@ export default class SinglePageFormatComponent extends React.Component
   }
 
   render() {
-    return <div id={this.version.content.htmlId} className="single_page_lesson__container">
+    return <div id={this.version.content.htmlId} className="single_page_topic__container">
       {this.renderContent()}
       <canvas id="hidden_offscreen"></canvas>
       <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram single_page_topic__diagram_container">
