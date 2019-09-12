@@ -1,7 +1,7 @@
 /* eslint-disable import/no-extraneous-dependencies */
 import 'babel-polyfill';
 // import getTopicIndez from '../../src/content/common/lessonindex';
-import getTopicIndez from '../../src/content/topicIndex';
+import getTopicIndex from '../../src/content/topicIndex';
 
 const fs = require('fs');
 const fetch = require('node-fetch');
@@ -30,14 +30,14 @@ function getAddress() {
 const sitePath = getAddress();
 
 const allTests = [];
-const index = getTopicIndez();
-Object.keys(index).forEach((lessonName) => {
-  const lesson = index[lessonName];
-  const { uid } = lesson;
-  Object.keys(lesson.topics).forEach((topic) => {
-    Object.keys(lesson.topics[topic]).forEach((version) => {
+const topics = getTopicIndex();
+Object.keys(topics).forEach((topicUID) => {
+  const topic = topics[topicUID];
+  // const { uid } = topic;
+  Object.keys(topic.approaches).forEach((approachUID) => {
+    Object.keys(topic.approaches[approachUID]).forEach((versionUID) => {
       if (topic !== 'dev' && topic !== 'quickReference') {
-        allTests.push([uid, topic, version]);
+        allTests.push([topicUID, approachUID, versionUID]);
       }
     });
   });

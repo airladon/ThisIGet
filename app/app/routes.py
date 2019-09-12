@@ -192,7 +192,8 @@ def get_lesson(path):
     js = ''
     css = ''
     if (lesson_path in lessons):
-        js = f'/static/dist/content/{path}/{lessons[lesson_path]["content.js"]}'
+        js = f'/static/dist/content/' \
+             f'{path}/{lessons[lesson_path]["content.js"]}'
         css = f'/static/dist/content/{path}/' \
               f'{lessons[lesson_path]["content.css"]}'
 
