@@ -342,21 +342,21 @@ class PresentationFormat extends SimpleFormat {
     }
     const oldStates = this.elementStates.hints;
     this.elementStates.hints = {};
-    const hints = document.getElementsByClassName('pres_lesson__hint_label');
+    const hints = document.getElementsByClassName('presentation__hint_label');
     for (let i = 0; i < hints.length; i += 1) {
       const hint = hints[i];
       const parent = hint.parentElement;
       if (parent == null) {
         return;
       }
-      const content = parent.querySelector('.pres_lesson__hint__content');
+      const content = parent.querySelector('.presentation__hint__content');
       if (content == null) {
         return;
       }
       if (hint.id in oldStates) {
         const hidden = oldStates[hint.id];
         if (!hidden) {
-          content.classList.remove('pres_lesson__hint__content__hidden');
+          content.classList.remove('presentation__hint__content__hidden');
           this.setInteractiveWords(content, true);
         } else {
           this.setInteractiveWords(content, false);
@@ -368,13 +368,13 @@ class PresentationFormat extends SimpleFormat {
       }
 
       hint.onclick = () => {
-        const hidden = content.classList.contains('pres_lesson__hint__content__hidden');
+        const hidden = content.classList.contains('presentation__hint__content__hidden');
         this.elementStates.hints[hint.id] = !hidden;
         if (hidden) {
-          content.classList.remove('pres_lesson__hint__content__hidden');
+          content.classList.remove('presentation__hint__content__hidden');
           this.setInteractiveWords(content, true);
         } else {
-          content.classList.add('pres_lesson__hint__content__hidden');
+          content.classList.add('presentation__hint__content__hidden');
           this.setInteractiveWords(content, false);
         }
       };

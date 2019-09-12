@@ -113,11 +113,11 @@ function parseQuiz(source) {
 //       hint = content;
 //     }
 //     const replacement = `
-//   <div class="lesson__hint">
-//     <div class="lesson__hint_label">
+//   <div class="simple__hint">
+//     <div class="simple__hint_label">
 //       ${label} 
 //     </div>
-//     <div class="lesson__hint_contents lesson__hint_hidden">
+//     <div class="simple__hint_contents simple__hint_hidden">
 //       ${hint}
 //     </div>
 //   </div>`;

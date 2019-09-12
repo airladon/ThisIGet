@@ -70,12 +70,12 @@ export default function tester(optionsOrScenario, ...scenarios) {
         await sleep(1000);
 
         // Open all hints on a page
-        let hints = await page.$$('.lesson__hint_label');
+        let hints = await page.$$('.simple__hint_label');
         for (const hint of hints) {
           await hint.click();
         }
 
-        hints = await page.$$('.lesson__hint_label_low');
+        hints = await page.$$('.simple__hint_label_low');
         for (const hint of hints) {
           await hint.click();
         }

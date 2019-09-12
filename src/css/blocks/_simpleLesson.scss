@@ -173,39 +173,39 @@ input[type=number]::-webkit-outer-spin-button {
 // ///////////////////////////////////////////////////////
 // Hints
 // ///////////////////////////////////////////////////////
-// .lesson__hint {
+// .simple__hint {
 //   padding-bottom: 1em;
 // }
 
-.lesson__hint_label_low,
-.lesson__hint_label {
+.simple__hint_label_low,
+.simple__hint_label {
   display: inline-block;
   margin-right: 0.5em;
   color: green;
   font-weight: 800;
 }
 
-.lesson__hint_label_low {
+.simple__hint_label_low {
   display: block;
 }
 
-.lesson__hint_label_low,
-.lesson__hint_label:hover {
+.simple__hint_label_low,
+.simple__hint_label:hover {
   cursor: pointer;
 }
 
-.lesson__hint_contents {
+.simple__hint_contents {
   display: inline-block;
   border: 1px solid color('white', 'light');
   padding: 0.3em;
 }
 
-.lesson__hint_contents_low {
+.simple__hint_contents_low {
   display: block;
   border: 1px solid color('white', 'light');
   padding: 0.3em;
 }
 
-.lesson__hint_hidden {
+.simple__hint_hidden {
   display: none;
 }

@@ -1,4 +1,4 @@
-.pres_lesson__note {
+.presentation__note {
   position: absolute;
   top: 90%;
   // margin-left: calc(var(--pres__text_margin) * 1);
@@ -10,34 +10,34 @@
   margin-right: var(--pres__text_margin);
 }
 
-.pres_lesson__hint_label,
-.pres_lesson__note__label {
+.presentation__hint_label,
+.presentation__note__label {
   display: inline-block;
   color: color('grey', 'light');
   margin-right: 0.6em;
 }
 
-.pres_lesson__hint_label {
+.presentation__hint_label {
   color: color('green', 'base');
 }
 
-.pres_lesson__note__content {
+.presentation__note__content {
   display: inline-block;
 }
 
-.pres_lesson__hint__content {
+.presentation__hint__content {
   display: inline-block;
 }
 
-.pres_lesson__hint__content__hidden {
+.presentation__hint__content__hidden {
   display: none;
 }
 
-// .pres_lesson__note p:first-child {
+// .presentation__note p:first-child {
 //   margin-top: 0;
 // }
 
-// .pres_lesson__note__label {
+// .presentation__note__label {
 //   color: color('grey', 'base');
 // }
 

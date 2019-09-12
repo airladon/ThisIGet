@@ -90,14 +90,14 @@ const toggleHint = (hint) => {
   if (parent == null) {
     return;
   }
-  let hintContent = parent.querySelector('.lesson__hint_contents');
+  let hintContent = parent.querySelector('.simple__hint_contents');
   if (hintContent == null) {
-    hintContent = parent.querySelector('.lesson__hint_contents_low');
+    hintContent = parent.querySelector('.simple__hint_contents_low');
   }
   if (hintContent == null) {
     return;
   }
-  hintContent.classList.toggle('lesson__hint_hidden');
+  hintContent.classList.toggle('simple__hint_hidden');
 };
 
 // Use classes:
@@ -282,7 +282,7 @@ export default class SimpleFormatComponent extends React.Component
       };
     }
 
-    const hints = document.getElementsByClassName('lesson__hint_label');
+    const hints = document.getElementsByClassName('simple__hint_label');
     for (let i = 0; i < hints.length; i += 1) {
       const hint = hints[i];
       hint.onclick = () => {
@@ -290,7 +290,7 @@ export default class SimpleFormatComponent extends React.Component
       };
     }
 
-    const lowHints = document.getElementsByClassName('lesson__hint_label_low');
+    const lowHints = document.getElementsByClassName('simple__hint_label_low');
     for (let i = 0; i < lowHints.length; i += 1) {
       const hint = lowHints[i];
       hint.onclick = () => {

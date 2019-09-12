@@ -168,7 +168,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
           // Open all hints on a page
-          let hints = await page.$$('.pres_lesson__hint_label');
+          let hints = await page.$$('.presentation__hint_label');
           for (const hint of hints) {
             const id = await (await hint.getProperty('id')).jsonValue();
             const hintText = await page.$(`#${id}`);
@@ -271,7 +271,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             const threshold = getThreshold(currentPage, options, comingFrom);
 
             // Open all hints on a page
-            hints = await page.$$('.pres_lesson__hint_label');
+            hints = await page.$$('.presentation__hint_label');
             for (const hint of hints) {
               const id = await (await hint.getProperty('id')).jsonValue();
               const hintText = await page.$(`#${id}`);

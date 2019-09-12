@@ -32,7 +32,7 @@ function note(
   let fontSize = '';
   let color = '';
   let id = '';
-  let classNames = 'pres_lesson__note';
+  let classNames = 'presentation__note';
   let label = '';
   let hAlign = '';
   // let hint = false;
@@ -77,14 +77,14 @@ function note(
       if (options.label != null) {
         ({ label } = options);
       }
-      label = `<div class="pres_lesson__note__label pres_lesson__hint_label action_word action_word_enabled interactive_word" id=${generateUniqueId()}>${label}</div>`;
-      content = `${label}<div class="pres_lesson__hint__content pres_lesson__hint__content__hidden">${content}</div>`;
+      label = `<div class="presentation__note__label presentation__hint_label action_word action_word_enabled interactive_word" id=${generateUniqueId()}>${label}</div>`;
+      content = `${label}<div class="presentation__hint__content presentation__hint__content__hidden">${content}</div>`;
     } else if (options.label != null) {
       ({ label } = options);
       if (label.length > 0) {
-        label = `<div class="pres_lesson__note__label">${label}</div>`;
+        label = `<div class="presentation__note__label">${label}</div>`;
       }
-      content = `${label}<div class="pres_lesson__note__content">${content}</div>`;
+      content = `${label}<div class="presentation__note__content">${content}</div>`;
     }
   }
 
