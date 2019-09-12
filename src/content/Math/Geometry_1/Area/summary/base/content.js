@@ -48,7 +48,7 @@ class Content extends PresentationFormatContent {
       title: 'Area',
       setContent: style({ top: 0 }, [
         '|Area| is the |amount of space| a shape takes up and is measured in |squared length| units, such as |square meters| normally written as |m<sup>2</sup>|.',
-        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html({ classes: 'lesson__definition_high' })}`,
+        `${new Definition('Area', 'Mid 16<sup>th</sup> century', ['area', 'space allocated for a specific purpose'], 'Latin', ['area', 'vacant piece of level ground']).html({ classes: 'diagram__definition_high' })}`,
       ]),
       show: [
         shapes._circle, shapes._triangle, shapes._square, unit._grid,

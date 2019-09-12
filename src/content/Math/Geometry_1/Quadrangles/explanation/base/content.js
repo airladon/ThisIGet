@@ -45,7 +45,7 @@ class Content extends PresentationFormatContent {
       title: 'Quadrangles',
       setContent: [
         'A |quadrangle| is a shape with |four sides| and |four angles|. This shape is also sometimes called a |quadrilateral|.',
-        `${new Definition('Quadrangle', 'Latin', ['quattuor', 'four', 'angulus', 'angle, corner']).html({ classes: 'lesson__definition_high', color: colors.sides })}`,
+        `${new Definition('Quadrangle', 'Latin', ['quattuor', 'four', 'angulus', 'angle, corner']).html({ classes: 'diagram__definition_high', color: colors.sides })}`,
         `${new Definition('Quadrilateral', 'Latin', ['quattuor', 'four', 'latus, later', 'side']).html(colors.sides)}`,
       ],
       show: [coll._quad1, coll._quad2, coll._quad3],

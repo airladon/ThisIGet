@@ -118,12 +118,12 @@ export default class Definition {
     }
     const { id, classes } = options;
     let outStr = '';
-    outStr += `<div id="${id}" class="lesson__definition_container ${classes}">`;
+    outStr += `<div id="${id}" class="diagram__definition_container ${classes}">`;
     let style = '';
     if (options.color) {
       style = ` style="color:${(options.color)}"`;
     }
-    outStr += `<span class="lesson__definition_word ${options.wordClass}"${style}>`;
+    outStr += `<span class="diagram__definition_word ${options.wordClass}"${style}>`;
     outStr += this.word;
     outStr += '</span>';
     this.from.forEach((fromLanguage) => {
@@ -132,7 +132,7 @@ export default class Definition {
       outStr += ` - from <span class="${''}">${fromLanguage.language}</span> `;
       fromLanguage.roots.forEach((root, index) => {
         if (root instanceof Root) {
-          outStr += `<span class="lesson__definition_root ${lang}">`;
+          outStr += `<span class="diagram__definition_root ${lang}">`;
           outStr += `${root.root}`;
           outStr += '</span>';
           // outStr += '';
@@ -140,7 +140,7 @@ export default class Definition {
             if (root.root) {
               outStr += ': ';
             }
-            outStr += `<span class="lesson__definition_meaning">${root.meaning}</span>`;
+            outStr += `<span class="diagram__definition_meaning">${root.meaning}</span>`;
           }
           if (
             fromLanguage.roots.length > index + 1
@@ -159,12 +159,12 @@ export default class Definition {
 
   element(id: string) {
     const container = document.createElement('div');
-    container.classList.add('lesson__definition_container');
+    container.classList.add('diagram__definition_container');
     container.id = id;
 
     const word = document.createElement('span');
     word.innerHTML = this.word;
-    word.classList.add('lesson__definition_word');
+    word.classList.add('diagram__definition_word');
     container.appendChild(word);
 
     this.from.forEach((fromLanguage) => {
@@ -178,11 +178,11 @@ export default class Definition {
         if (rootWord.root != null && typeof rootWord.root === 'string') {
           rootElement.innerHTML = rootWord.root;
         }
-        rootElement.classList.add('lesson__definition_root');
+        rootElement.classList.add('diagram__definition_root');
         container.appendChild(rootElement);
 
         const meaningElement = document.createElement('span');
-        meaningElement.classList.add('lesson__definition_meaning');
+        meaningElement.classList.add('diagram__definition_meaning');
         if (rootWord.meaning != null && typeof rootWord.meaning === 'string') {
           let meaningString = `"${rootWord.meaning}"`;
           if (roots.length > index + 1) {

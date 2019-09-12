@@ -249,8 +249,8 @@ class Content extends PresentationFormatContent {
         'The words |complementary|, |supplementary| and |explementary| all have a similar definition - |to fill up or complete|.',
         'In this case they fill up or complete a |right|, |straight| and |full| angle.',
         'Its not clear there is a particular reason |why| each word is assosiated with its angle, but it is the norm.',
-        `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_higher' })}`,
-        `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'lesson__definition_high' })}`,
+        `${new Definition('Complementary', 'Latin', ['complere', 'MEANING', '', 'fill up, complete']).html({ classes: 'diagram__definition_higher' })}`,
+        `${new Definition('Supplementary', 'Latin', ['supplere', 'MEANING', '', 'fill up, complete']).html({ classes: 'diagram__definition_high' })}`,
         `${new Definition('Explementary', 'Latin', [' explementum', 'MEANING', '', 'fill up']).html()}`,
       ]),
     });
