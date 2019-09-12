@@ -130,12 +130,12 @@
   background: color('site', 'safe', 'dark');
 }
 
-.navigator__lesson_shadow {
+.navigator__topic_shadow {
   position: relative;
 }
 
-.navigator__lesson_shadow::before,
-.navigator__lesson_shadow::after {
+.navigator__topic_shadow::before,
+.navigator__topic_shadow::after {
   z-index: -1;
   position: absolute;
   content: "";
@@ -156,7 +156,7 @@
   border-radius: 10px;
 }
 
-.navigator__lesson_shadow::after {
+.navigator__topic_shadow::after {
   -webkit-transform: rotate(3deg);
   -moz-transform: rotate(3deg);
   -o-transform: rotate(3deg);
@@ -174,7 +174,7 @@
 //   width: 2px;
 // }
 
-// #id_navigator__lessons_positions_container {
+// #id_navigator__topics_positions_container {
 //   position: absolute;
 //   left: 0;
 //   top: 0;
@@ -182,7 +182,7 @@
 //   height: 0;
 // }
 
-.navigator__lessons_positions_container {
+.navigator__topics_positions_container {
   position: absolute;
   left: 0;
   top: 0;

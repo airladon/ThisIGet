@@ -638,7 +638,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   prev: () => void;
   // questions
 
-  constructor(htmlId: string = 'lesson__content') {
+  constructor(htmlId: string = 'topic__content') {
     super(htmlId);
     this.diagramHtmlId = `${htmlId}_diagram`;
     // this.qrDiagram = null;
@@ -948,7 +948,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   //     options.color = colorOrOptions;
   //   } else {
   //     options = joinObjects({}, defaultOptions, colorOrOptions);
-  //     options.classes = `lesson__qr_action_word ${options.classes}`;
+  //     options.classes = `topic__qr_action_word ${options.classes}`;
   //   }
   //   return click(this.showQR, [this, uid, qrid], options);
   // }
@@ -966,14 +966,14 @@ class PresentationFormatContent extends SimpleFormatContent {
   ) {
     const defaultOptions = {
       color: this.diagram.layout.colors.diagram.action,
-      classes: 'lesson__qr_action_word',
+      classes: 'topic__qr_action_word',
     };
     let options = defaultOptions;
     if (Array.isArray(colorOrOptions)) {
       options.color = colorOrOptions;
     } else {
       options = joinObjects({}, defaultOptions, colorOrOptions);
-      options.classes = `lesson__qr_action_word ${options.classes}`;
+      options.classes = `topic__qr_action_word ${options.classes}`;
     }
     return click(window.lessonFunctions.qr, [window.lessonFunctions, '', linkIn], options);
   }

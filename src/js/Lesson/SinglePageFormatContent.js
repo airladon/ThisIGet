@@ -22,7 +22,7 @@ class SinglePageFormatContent extends SimpleFormatContent {
   content: Array<string | React.Element<'div'>>
   modifiers: Object;
 
-  constructor(htmlId: string = 'lesson__content') {
+  constructor(htmlId: string = 'topic__content') {
     super(htmlId);
     this.diagramHtmlId = `${htmlId}_diagram`;
     this.content = [];
@@ -62,7 +62,7 @@ class SinglePageFormatContent extends SimpleFormatContent {
   ) {
     const defaultOptions = {
       color: [1, 0, 0, 1],
-      classes: 'lesson__qr_action_word',
+      classes: 'topic__qr_action_word',
       id: generateUniqueId(),
     };
     let options = defaultOptions;
@@ -70,7 +70,7 @@ class SinglePageFormatContent extends SimpleFormatContent {
       options.color = colorOrOptions;
     } else {
       options = joinObjects({}, defaultOptions, colorOrOptions);
-      options.classes = `lesson__qr_action_word ${options.classes}`;
+      options.classes = `topic__qr_action_word ${options.classes}`;
     }
     return click(window.lessonFunctions.qr, [window.lessonFunctions, options.id, link], options);
   }

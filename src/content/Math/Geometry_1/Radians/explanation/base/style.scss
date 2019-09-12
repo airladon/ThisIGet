@@ -20,21 +20,6 @@ body {
   z-index: 0;
 }
 
-// .in_lesson__fraction_table {
-//   text-align: center;
-//   color: color('diagram', 'text-base');
-//   font-size: calc(var(--lesson__diagram-font-size) * 0.8);
-//   table-layout: fixed;
-//   width: calc(var(--lesson__diagram-font-size) * 8);
-//   margin-left: calc(var(--lesson__diagram-font-size) * 1);
-//   margin-top: calc(var(--lesson__diagram-font-size) * 3.5);
-// }
-// .lesson__table {
-//   margin-left: calc(var(--lesson__text-margin) * 8);
-//   background-color: color('black', 'darker');
-//   color: color('grey', 'light');
-// }
-
 .radian_equation {
   color: map-get($colors, 'radianLines');
   display: table !important;
@@ -62,10 +47,6 @@ body {
   // border-bottom-left-radius: 1em;
   // border-bottom-right-radius: 1em;
 }
-
-// .lesson__common_angles_table tr {
-//   height: calc(var(--lesson__diagram-font-size) * 3.5);
-// }
 
 .lesson__common_angles_table tr:first-child {
   width: 50%;
@@ -130,28 +111,3 @@ body {
   margin-top: 3%;
   margin-bottom: 5%
 }
-// #fig123 {
-//   width: 50%;
-//   height: 20%;
-//   left: 5%;
-// }
-
-// .lesson__common_angles_table td:nth-child(3) {
-//   text-align: center;
-//   width: 17%;
-// }
-
-// .lesson__common_angles_table td:last-child {
-//   padding-left: 0;
-//   margin-left: 0;
-// }
-
-// .lesson__common_angles_table tr td:first-child {
-//   font-size: calc(var(--lesson__diagram-font-size) * 0.7);
-// }
-
-// .lesson__common_angles_table tr:first-child td {
-//   height: calc(var(--lesson__diagram-font-size) * 0.3);
-//   padding: 0;
-//   margin: 0;
-// }

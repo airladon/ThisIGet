@@ -137,7 +137,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           width: options.viewPort.width,
           height: options.viewPort.width / 2,
         });
-        const lessonContainer = await page.$('#lesson__content');
+        const lessonContainer = await page.$('#topic__content');
         const lessonBox = await lessonContainer.boundingBox();
         const scrollTo = Math.floor(lessonBox.y);
         await page.setViewport({
@@ -187,7 +187,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
           // Find all links on page that go to QR popups
           // eslint-disable-next-line no-await-in-loop, no-loop-func
-          const qrLinks = await page.$$('.lesson__qr_action_word');
+          const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
           // eslint-disable-next-line no-restricted-syntax
           for (const originalLink of qrLinks) {

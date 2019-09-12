@@ -37,7 +37,7 @@ class Content extends SinglePageFormatContent {
       htmlId,
       vertexShader: 'withTexture',
       fragmentShader: 'withTexture',
-      gestureCanvas: 'lesson__content',
+      gestureCanvas: 'topic__content',
     }, layout);
     this.diagram.setElementsToCollection(new Collection(
       this.diagram,

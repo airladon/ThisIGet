@@ -182,23 +182,23 @@
 // ///////////////////////////////////////
 // Presentation QR specific
 // ///////////////////////////////////////
-#lesson__content_diagram .lesson__qr__container {
+#topic__content_diagram .lesson__qr__container {
   background-color: color('black', 'dark');
   padding: 0.5em;
   border: 1px solid color('black', 'light');
   box-shadow: 0 0 3em color('black', 'dark');
 }
 
-#lesson__content_diagram .lesson__qr__title_text {
+#topic__content_diagram .lesson__qr__title_text {
   color: color('white', 'dark');
 }
 
-#lesson__content_diagram .lesson__qr__title_close {
+#topic__content_diagram .lesson__qr__title_close {
   color: color('white', 'dark');
   border: 1px solid color('white', 'dark');
 }
 
-#lesson__content_diagram .lesson__qr__title_close:hover {
+#topic__content_diagram .lesson__qr__title_close:hover {
   background-color: color('black', 'light');
 }
 
@@ -206,7 +206,7 @@
   border: 0;
 }
 
-#lesson__content_diagram .lesson__qr__link_link {
+#topic__content_diagram .lesson__qr__link_link {
   color: color('white', 'dark');
 }
 
@@ -253,7 +253,7 @@
   text-align: left;
 }
 
-#lesson__content_diagram #id_lesson__qr__pres_container {
+#topic__content_diagram #id_lesson__qr__pres_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
@@ -268,12 +268,12 @@
   pointer-events: auto;
 }
 
-#lesson__content_diagram .lesson__qr__content_container {
+#topic__content_diagram .lesson__qr__content_container {
   max-width: var(--lesson__qr__content_width);
   max-height: var(--lesson__qr__content_height);
 }
 
-#lesson__content_diagram #id_lesson__qr__static_container {
+#topic__content_diagram #id_lesson__qr__static_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;

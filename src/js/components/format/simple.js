@@ -204,14 +204,14 @@ export default class SimpleFormatComponent extends React.Component
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
-    align('id_lesson__qr__static_container', 'lesson__content', id);
+    align('id_lesson__qr__static_container', 'topic__content', id);
     this.afterUpdate = () => {
-      align('id_lesson__qr__static_container', 'lesson__content', id);
+      align('id_lesson__qr__static_container', 'topic__content', id);
     };
   }
 
   showPresQR(id: string, parameters: string) {
-    const container = document.getElementById('lesson__content');
+    const container = document.getElementById('topic__content');
     if (container != null) {
       const containerRect = container.getBoundingClientRect();
       const width = Math.min(containerRect.width - 40, 600);
@@ -232,7 +232,7 @@ export default class SimpleFormatComponent extends React.Component
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.version.content.showQR(path, qrid);
-    align('id_lesson__qr__pres_container', 'lesson__content', id);
+    align('id_lesson__qr__pres_container', 'topic__content', id);
     this.version.content.qrDiagram.resize();
     this.version.content.qrDiagram.animateNextFrame();
   }

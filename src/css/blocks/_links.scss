@@ -1,4 +1,4 @@
-.lesson__links_table {
+.approach__links_table {
   table-layout: fixed;
   // width: 100%;
   margin-left: auto;
@@ -6,23 +6,23 @@
   font-size: 1em;
 }
 
-.lesson__links_table__title_row {
+.approach__links_table__title_row {
   font-size: 0.9em;
   color: color('black', 'lighter');
   border-bottom: 1px solid color('white', 'light');
   border-top: 1px solid color('white', 'light');
 }
 
-.lesson__links_table__type {
+.approach__links_table__type {
   text-align: center;
 }
 
-.lesson__links_table__type_title {
+.approach__links_table__type_title {
   text-align: center;
   font-size: 1em;
 }
 
-.lesson__links_table__description {
+.approach__links_table__description {
   // font-size: 0.6em;
   // word-break: break-all;
   // text-align: center;
@@ -32,60 +32,60 @@
   font-size: 0.9em;
 }
 
-.lesson__links_table__description_title {
+.approach__links_table__description_title {
   padding-left: 2em;
   font-size: 1em;
   color: color('black', 'lighter');
 }
 
-.lesson__links_table__title {
+.approach__links_table__title {
   // width: 10em;
 }
 
-.lesson__links_table__title_text {
+.approach__links_table__title_text {
   color: color('site', 'primaryDark');
 }
 
-.lesson__links_table__title_title {
+.approach__links_table__title_title {
   text-align: left;
 }
 
-.lesson__links_table__your_rating {
+.approach__links_table__your_rating {
   width: 8em;
   text-align: center;
   padding-bottom: 1em;
   padding-top: 1em;
 }
 
-.lesson__links_table__your_rating .rating__stars {
+.approach__links_table__your_rating .rating__stars {
   vertical-align: middle;
 }
 
-.lesson__links_table__your_rating .rating__stars_empty {
+.approach__links_table__your_rating .rating__stars_empty {
   background-image: $star-empty;
   background-size: cover;
   width: 100%;
   height: 100%;
 }
-// .lesson__links_table__your_rating .rating__label {
+// .approach__links_table__your_rating .rating__label {
 //   margin-right: 0;
 // }
 
-.lesson__links_table__total_rating {
+.approach__links_table__total_rating {
   width: 6em;
   text-align: center;
   color: color('black', 'lighter');
 }
 
-.lesson__links_table__total_rating_title {
+.approach__links_table__total_rating_title {
   color: color('black', 'lighter');
 }
 
-.lesson__links_table__disabled {
+.approach__links_table__disabled {
   color: color('grey', 'light');
 }
 
-.lesson__links_table__icon {
+.approach__links_table__icon {
   background-size: contain;
   height: 30px;
   background-repeat: no-repeat;
@@ -94,120 +94,120 @@
   display: block;
 }
 
-.lesson__links_table__icon_presentation {
+.approach__links_table__icon_presentation {
   background-image: $lesson-presentation;
 }
 
-.lesson__links_table__icon_generic,
-.lesson__links_table__icon_single_page {
+.approach__links_table__icon_generic,
+.approach__links_table__icon_single_page {
   background-image: $lesson-singlePage;
   min-width: 3em;
 }
 
-.lesson__links_table__icon_video {
+.approach__links_table__icon_video {
   background-image: $lesson-video;
 }
 
-.lesson__links_table__disclaimer {
+.approach__links_table__disclaimer {
   font-size: 1em;
   padding-top: 1em;
   margin-bottom: 3em;
 }
 
-.lesson__links_table__disclaimer:last-of-type {
+.approach__links_table__disclaimer:last-of-type {
   margin-bottom: 0;
 }
 
-.lesson__links_table__disclaimer_email {
+.approach__links_table__disclaimer_email {
   color: color('site', 'primaryDark');
 }
 
-.lesson__links_table__disclaimer_email:hover {
+.approach__links_table__disclaimer_email:hover {
   // color: color('blue', 'darker');
   color: color('site', 'primaryDark', 'dark');
   text-decoration: none;
 }
 
-.lesson__links_table__small_screen {
+.approach__links_table__small_screen {
   display: none;
   border-bottom: 1px solid #aaa;
   border-top: 1px solid #aaa;
 }
 
-.lesson__links_table__small_screen__title {
+.approach__links_table__small_screen__title {
   display: inline-block;
   float: left;
   font-size: 0.9em;
   color: color('black', 'lighter');
 }
 
-.lesson__links_table__small_screen__value {
+.approach__links_table__small_screen__value {
   display: inline-block;
   float: right;
   margin-right: 0.5em;
 }
 
-// .lesson__links_table__small_screen td:first-child {
+// .approach__links_table__small_screen td:first-child {
 //   padding-top: 1em;
 // }
 
-// .lesson__links_table__small_screen td:last-child {
+// .approach__links_table__small_screen td:last-child {
 //   padding-bottom: 1em;
 // }
 
-.lesson__links_table__small_screen__content {
+.approach__links_table__small_screen__content {
   padding-top: 1em;
   padding-bottom: 1em;
 }
 
-.lesson__links_table__small_screen__link_container {
+.approach__links_table__small_screen__link_container {
   display: inline-block;
 }
 
-.lesson__links_table__small_screen__link {
+.approach__links_table__small_screen__link {
   display: table-cell;
   vertical-align: middle;
   padding-bottom: 0.2em;
 }
 
-.lesson__links_table__small_screen__type_container {
+.approach__links_table__small_screen__type_container {
   display: inline-block;
 }
 
-.lesson__links_table__feedback {
+.approach__links_table__feedback {
   margin-top: 2em;
 }
 
 @media (max-width: 800px) {
-  .lesson__links_table {
+  .approach__links_table {
     width: calc(100%);
   }
 
-  .lesson__links_table__small_screen {
+  .approach__links_table__small_screen {
     display: table-row;
   }
 
-  .lesson__links_table__small_screen td:nth-child(1) {
+  .approach__links_table__small_screen td:nth-child(1) {
     // width: 40px;
     width: 100%;
   }
 
-  // .lesson__links_table__small_screen td:nth-child(2) {
+  // .approach__links_table__small_screen td:nth-child(2) {
   //   width: 100%;
   // }
 
-  .lesson__links_table__small_screen table {
+  .approach__links_table__small_screen table {
     width: 100%;
   }
 
-  .lesson__links_table__large_screen {
+  .approach__links_table__large_screen {
     display: none;
   }
 
-  .lesson__links_table__icon_generic,
-  .lesson__links_table__icon_single_page,
-  .lesson__links_table__icon_presentation,
-  .lesson__links_table__icon {
+  .approach__links_table__icon_generic,
+  .approach__links_table__icon_single_page,
+  .approach__links_table__icon_presentation,
+  .approach__links_table__icon {
     width: 30px;
     height: 30px;
     margin: 0;
@@ -216,19 +216,19 @@
     display: inline-block;
   }
 
-  .lesson__links_table__small_screen .rating__container {
+  .approach__links_table__small_screen .rating__container {
     display: inline-block;
     float: right;
     padding: 0;
   }
 
-  .lesson__links_table__description {
+  .approach__links_table__description {
     padding: 0;
     padding-bottom: 0.5em;
     padding-top: 0.5em;
   }
 
-  // .lesson__links_table__small_screen .rating__login {
+  // .approach__links_table__small_screen .rating__login {
   //   float: right;
   // }
 }

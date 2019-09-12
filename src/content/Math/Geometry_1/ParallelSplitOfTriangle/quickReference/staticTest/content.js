@@ -33,7 +33,7 @@ class Content extends SimpleFormatContent {
       out.push(<div key={index + 1}>
         <div
           id={`link_${index}`}
-          className="lesson__qr_action_word"
+          className="topic__qr_action_word"
           onClick={window.lessonFunctions.qr.bind(
             window.lessonFunctions,
             `link_${index}`,

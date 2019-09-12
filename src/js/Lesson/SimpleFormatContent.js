@@ -23,7 +23,7 @@ class SimpleFormatContent {
   setVariables: () => {[name: string]: string | number };
   variables: { [name: string]: string | number };
 
-  constructor(htmlId: string = 'lesson__content') {
+  constructor(htmlId: string = 'topic__content') {
     this.htmlId = htmlId;
     this.sections = [];
     this.iconLink = '/';

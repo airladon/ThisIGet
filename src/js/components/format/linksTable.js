@@ -212,7 +212,7 @@ export default class LinksTable extends React.Component
     const links = [];
     let key = 0;
     this.links.forEach((link, index) => {
-      // let rating = <div className="lesson__links_table__disabled">{'-'}</div>;
+      // let rating = <div className="approach__links_table__disabled">{'-'}</div>;
       // if (this.props.isLoggedIn) {
       let userRatingValue = this.state.ratings[index].userRating;
       if (typeof userRatingValue !== 'number') {
@@ -226,36 +226,36 @@ export default class LinksTable extends React.Component
         index={index}
       />;
       // }
-      let numHighRatings = <div className="lesson__links_table__disabled">
+      let numHighRatings = <div className="approach__links_table__disabled">
         {'-'}
       </div>;
       if (this.state.ratings[index].numHighRatings) {
         ({ numHighRatings } = this.state.ratings[index]);
       }
       const title = <a
-          className="lesson__links_table__title_text"
+          className="approach__links_table__title_text"
           href={link.url}
           // rel='noreferrer noopener'
           // target="_blank"
         >
         {link.title}
       </a>;
-      let typeClass = 'lesson__links_table__icon lesson__links_table__icon_generic';
+      let typeClass = 'approach__links_table__icon approach__links_table__icon_generic';
       const { type } = link;
       if (type === 'presentation') {
-        typeClass = 'lesson__links_table__icon lesson__links_table__icon_presentation';
+        typeClass = 'approach__links_table__icon approach__links_table__icon_presentation';
       } else if (type === 'singlePage') {
-        typeClass = 'lesson__links_table__icon lesson__links_table__icon_single_page';
+        typeClass = 'approach__links_table__icon approach__links_table__icon_single_page';
       } else if (type === 'video') {
-        typeClass = 'lesson__links_table__icon lesson__links_table__icon_video';
+        typeClass = 'approach__links_table__icon approach__links_table__icon_video';
       }
 
       let description = null;
       if (this.hasDescription) {
-        description = <td className="lesson__links_table__description">{link.description}</td>;
+        description = <td className="approach__links_table__description">{link.description}</td>;
       }
-      links.push(<tr key={key} className="lesson__links_table__large_screen">
-        <td className="lesson__links_table__type">
+      links.push(<tr key={key} className="approach__links_table__large_screen">
+        <td className="approach__links_table__type">
           <a
             className={typeClass}
             href={link.url}
@@ -265,23 +265,23 @@ export default class LinksTable extends React.Component
           >
           </a>
         </td>
-        <td className="lesson__links_table__title">{title}</td>
+        <td className="approach__links_table__title">{title}</td>
         {description}
-        <td className="lesson__links_table__your_rating">{rating}</td>
-        <td className="lesson__links_table__total_rating">{numHighRatings}</td>
+        <td className="approach__links_table__your_rating">{rating}</td>
+        <td className="approach__links_table__total_rating">{numHighRatings}</td>
       </tr>);
       key += 1;
 
       // if (!this.props.isLoggedIn) {
       //   rating = <span className="rating__login" onClick={login}>{'Login'}</span>
       // }
-      links.push(<tr key={key} className="lesson__links_table__small_screen">
-        <td className="lesson__links_table__small_screen__content">
+      links.push(<tr key={key} className="approach__links_table__small_screen">
+        <td className="approach__links_table__small_screen__content">
           <table><tbody>
             <tr>
               <td>
-                <div className="lesson__links_table__small_screen__type_container">
-                  <div className="lesson__links_table__small_screen__type">
+                <div className="approach__links_table__small_screen__type_container">
+                  <div className="approach__links_table__small_screen__type">
                     <a
                       className={typeClass}
                       href={link.url}
@@ -292,8 +292,8 @@ export default class LinksTable extends React.Component
                     </a>
                   </div>
                 </div>
-                <div className="lesson__links_table__small_screen__link_container">
-                  <div className="lesson__links_table__small_screen__link">
+                <div className="approach__links_table__small_screen__link_container">
+                  <div className="approach__links_table__small_screen__link">
                     {title}
                   </div>
                 </div>
@@ -303,18 +303,18 @@ export default class LinksTable extends React.Component
               {description}
             </tr>
             <tr>
-              <td className="lesson__links_table__total_rating">
-                <div className="lesson__links_table__small_screen__title">
+              <td className="approach__links_table__total_rating">
+                <div className="approach__links_table__small_screen__title">
                     {'Total Ratings ≥4:'}
                 </div>
-                <div className="lesson__links_table__small_screen__value">
+                <div className="approach__links_table__small_screen__value">
                   {numHighRatings}
                 </div>
               </td>
             </tr>
             <tr>
               <td>
-                <div className="lesson__links_table__small_screen__title">
+                <div className="approach__links_table__small_screen__title">
                   {this.yourRatingTitle(true)}
                 </div>
                 {rating}
@@ -346,17 +346,17 @@ export default class LinksTable extends React.Component
   render() {
     let description = null;
     if (this.hasDescription) {
-      description = <td className="lesson__links_table__description lesson__links_table__description_title">Description</td>;
+      description = <td className="approach__links_table__description approach__links_table__description_title">Description</td>;
     }
     // const props = Object.assign({}, this.props);
-    return <table className="lesson__links_table">
+    return <table className="approach__links_table">
       <tbody>
-        <tr className="lesson__links_table__title_row lesson__links_table__large_screen">
-        <td className="lesson__links_table__type_title lesson__links_table__type"></td>
-        <td className="lesson__links_table__title_title lesson__links_table__title">Link</td>
+        <tr className="approach__links_table__title_row approach__links_table__large_screen">
+        <td className="approach__links_table__type_title approach__links_table__type"></td>
+        <td className="approach__links_table__title_title approach__links_table__title">Link</td>
         {description}
-        <td className="lesson__links_table__your_rating_title lesson__links_table__your_rating">{this.yourRatingTitle()}</td>
-        <td className="lesson__links_table__total_rating_title lesson__links_table__total_rating">Total Ratings ≥4</td>
+        <td className="approach__links_table__your_rating_title approach__links_table__your_rating">{this.yourRatingTitle()}</td>
+        <td className="approach__links_table__total_rating_title approach__links_table__total_rating">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
       </tbody>

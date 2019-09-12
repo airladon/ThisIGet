@@ -132,7 +132,7 @@ export default class PresentationFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   setCSSVariables(elementId: string) {
-    const container = document.getElementById('lesson__content_diagram');
+    const container = document.getElementById('topic__content_diagram');
     if (container != null) {
       const containerRect = container.getBoundingClientRect();
       const width = Math.min(containerRect.width * 0.7, 600);

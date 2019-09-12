@@ -149,7 +149,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   setSimplePageSize() {
-    const lessonContent = document.getElementById('lesson__content');
+    const lessonContent = document.getElementById('topic__content');
     if (lessonContent == null) {
       return;
     }
@@ -159,8 +159,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   setPresentationPageSize() {
-    const overlay = document.getElementById('lesson__content_diagram');
-    const lessonContent = document.getElementById('lesson__content');
+    const overlay = document.getElementById('topic__content_diagram');
+    const lessonContent = document.getElementById('topic__content');
     if (overlay == null || lessonContent == null) {
       return;
     }
@@ -178,7 +178,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   setSinglePageSize() {
     const overlay = document.getElementById('single_page_lesson__qr__overlay');
-    const lessonContent = document.getElementById('lesson__content');
+    const lessonContent = document.getElementById('topic__content');
     if (overlay == null || lessonContent == null) {
       return;
     }

@@ -108,7 +108,7 @@ export default class SinglePageFormatComponent extends React.Component
 
     align('id_lesson__qr__static_container', 'id_single_page_lesson__text_container', id);
     this.afterUpdate = () => {
-      align('id_lesson__qr__static_container', 'lesson__content', id);
+      align('id_lesson__qr__static_container', 'topic__content', id);
     };
   }
 

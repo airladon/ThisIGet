@@ -46,8 +46,8 @@ function selectorHandler(
   const selectedId = `${htmlId}__${listId}`;
   cols.forEach((col, index) => {
     if (col.id !== selectedId) {
-      col.classList.remove('lesson__selector_title_selected');
-      col.classList.add('lesson__selector_title_not_selected');
+      col.classList.remove('diagram__selector_title_selected');
+      col.classList.add('diagram__selector_title_not_selected');
 
       const subTextCol = subTextCols[index];
       if (subTextCol && type === 'vertical') {
@@ -61,8 +61,8 @@ function selectorHandler(
           .remove('lesson__horizontal_selector_table_subtext_selected');
       }
     } else {
-      col.classList.add('lesson__selector_title_selected');
-      col.classList.remove('lesson__selector_title_not_selected');
+      col.classList.add('diagram__selector_title_selected');
+      col.classList.remove('diagram__selector_title_not_selected');
 
       const subTextCol = subTextCols[index];
       if (subTextCol.innerHTML !== '' && type === 'vertical') {
@@ -91,7 +91,7 @@ function selectorHandler(
 //   separator: string = '',
 // ) {
 //   const table = document.createElement('table');
-//   table.classList.add('lesson__selector_table');
+//   table.classList.add('diagram__selector_table');
 //   const row = document.createElement('tr');
 //   const cols: Array<HTMLElement> = [];
 
@@ -101,8 +101,8 @@ function selectorHandler(
 //     col.innerHTML = selectorItem.text;
 //     col.id = `${id}__${selectorItem.id}`;
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick);
-//     col.classList.add('lesson__selector_title_not_selected');
-//     col.classList.add('lesson__selector_table_selectable');
+//     col.classList.add('diagram__selector_title_not_selected');
+//     col.classList.add('diagram__selector_table_selectable');
 //     col.classList.add('lesson__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
@@ -116,7 +116,7 @@ function selectorHandler(
 //   });
 
 //   table.appendChild(row);
-//   const selector = diagram.shapes.htmlElement(table, id, 'lesson__selector_container');
+//   const selector = diagram.shapes.htmlElement(table, id, 'diagram__selector_container');
 //   selector.setPosition(diagram.limits.left, yPosition);
 //   selectorHandler(firstSelection, id, cols, onclick);
 //   return selector;
@@ -139,15 +139,15 @@ function selectorHandler(
 //     col.innerHTML = selectorItem.text;
 //     col.id = `${id}__${selectorItem.id}`;
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick);
-//     col.classList.add('lesson__selector_title_not_selected');
-//     col.classList.add('lesson__selector_table_selectable');
+//     col.classList.add('diagram__selector_title_not_selected');
+//     col.classList.add('diagram__selector_table_selectable');
 //     col.classList.add('lesson__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
 //     table.appendChild(row);
 //   });
 
-//   const selector = diagram.shapes.htmlElement(table, id, 'lesson__selector_container');
+//   const selector = diagram.shapes.htmlElement(table, id, 'diagram__selector_container');
 //   selector.setPosition(0, 0);
 //   selectorHandler(firstSelection, id, cols, onclick);
 //   return selector;
@@ -249,8 +249,8 @@ export class HorizontalSelectorHTML extends SelectorHTML {
       this.subTextElements,
       this.type,
     );
-    titleCol.classList.add('lesson__selector_title_not_selected');
-    titleCol.classList.add('lesson__selector_table_selectable');
+    titleCol.classList.add('diagram__selector_title_not_selected');
+    titleCol.classList.add('diagram__selector_table_selectable');
     titleCol.classList.add('lesson__horiztonal_selector_table_cell');
     this.titleElements.push(titleCol);
     this.titleRow.appendChild(titleCol);
@@ -290,8 +290,8 @@ export class VerticalSelectorHTML extends SelectorHTML {
       this.subTextElements,
       this.type,
     );
-    titleCol.classList.add('lesson__selector_title_not_selected');
-    titleCol.classList.add('lesson__selector_table_selectable');
+    titleCol.classList.add('diagram__selector_title_not_selected');
+    titleCol.classList.add('diagram__selector_table_selectable');
     titleCol.classList.add('lesson__vertical_selector_table_cell');
     this.titleElements.push(titleCol);
     titleRow.appendChild(titleCol);
@@ -337,7 +337,7 @@ export function addSelectorHTML(
   const element = diagram.shapes.htmlElement(
     selector.table,
     `${uniqueString}`,
-    'lesson__selector_container',
+    'diagram__selector_container',
     new Point(0, 0),
     vAlign,
     hAlign,
@@ -364,8 +364,8 @@ export function addSelectorHTML(
 //     col.innerHTML = selectorItem.text;
 //     col.id = `${id}__${selectorItem.id}`;
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick, subTextCols);
-//     col.classList.add('lesson__selector_title_not_selected');
-//     col.classList.add('lesson__selector_table_selectable');
+//     col.classList.add('diagram__selector_title_not_selected');
+//     col.classList.add('diagram__selector_table_selectable');
 //     col.classList.add('lesson__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
@@ -375,8 +375,8 @@ export function addSelectorHTML(
 //       const colSub = document.createElement('td');
 //       colSub.innerHTML = selectorItem.subText;
 //       colSub.id = `${id}__${selectorItem.id}__subtext`;
-//       colSub.classList.add('lesson__selector_table_subtext');
-//       colSub.classList.add('lesson__selector_table_subtext__hide');
+//       colSub.classList.add('diagram__selector_table_subtext');
+//       colSub.classList.add('diagram__selector_table_subtext__hide');
 //       subTextCols.push(colSub);
 //       rowSub.appendChild(colSub);
 //       table.appendChild(rowSub);
@@ -385,7 +385,7 @@ export function addSelectorHTML(
 //     }
 //   });
 
-//   const selector = diagram.shapes.htmlElement(table, id, 'lesson__selector_container');
+//   const selector = diagram.shapes.htmlElement(table, id, 'diagram__selector_container');
 //   selector.setPosition(0, 0);
 //   selectorHandler(firstSelection, id, cols, onclick, subTextCols);
 //   return selector;

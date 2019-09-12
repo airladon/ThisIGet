@@ -1,20 +1,20 @@
-.lesson__selector_container {
+.diagram__selector_container {
   width: 100%;
 }
 
-.lesson__selector_table_selectable {
+.diagram__selector_table_selectable {
   cursor: pointer;
 }
 
-.lesson__selector_title_not_selected:hover {
+.diagram__selector_title_not_selected:hover {
   color: color('diagram', 'disabled', 'base');
 }
 
-.lesson__selector_title_selected {
+.diagram__selector_title_selected {
   color: color('diagram', 'text-base');
 }
 
-.lesson__selector_title_selected:hover {
+.diagram__selector_title_selected:hover {
   color: color('diagram', 'text-base');
 }
 

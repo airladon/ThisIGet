@@ -40,7 +40,7 @@ export default class TopicTile extends React.Component
     }
 
     const link = props.link || '/';
-    let classText = 'navigator__topic_tile_containter navigator__lesson_shadow';
+    let classText = 'navigator__topic_tile_containter navigator__topic_shadow';
     if (isTitle) {
       classText = 'navigator__topic_tile_containter navigator__topic_tile_containter_title';
     }

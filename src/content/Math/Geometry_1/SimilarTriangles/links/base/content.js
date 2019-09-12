@@ -17,7 +17,7 @@ class Content extends SimpleFormatContent {
 
   setContent() {
     this.sections = [
-      <div key="0" className="lesson__links_table__disclaimer">
+      <div key="0" className="approach__links_table__disclaimer">
         <p style={{ marginBottom: '3em' }}>
           {'These websites are not administered by This I Get. We don\'t control their availability, accuracy or policies.'}
         </p>
@@ -25,12 +25,12 @@ class Content extends SimpleFormatContent {
         </p>
       </div>,
       { links: version.links },
-      <div key="1" className="lesson__links_table__disclaimer">
+      <div key="1" className="approach__links_table__disclaimer">
         <p style={{ marginTop: '3em' }}>
           {'If you visit a link, then you can rate the link for your own future reference, and for others that haven\'t yet visited it. If the link is broken or the content has changed and is no longer appropriate, then please let us know at '}
           <a
             href="mailto:feedback@thisiget.com?Subject=Feedback"
-            className="lesson__links_table__disclaimer_email"
+            className="approach__links_table__disclaimer_email"
             >
             feedback@thisiget.com
           </a>

@@ -231,7 +231,7 @@ export default class LearningPathNavigator extends React.Component
     const navigatorContainer = document
       .getElementById(`id_navigator__container_${this.learningPath}`);
     const topicsContainer =
-      document.getElementById(`id_navigator__lessons_positions_container_${this.learningPath}`);
+      document.getElementById(`id_navigator__topics_positions_container_${this.learningPath}`);
     if (topicsContainer != null && navigatorContainer != null) {
       const navRect = navigatorContainer.getBoundingClientRect();
       const navHeight = navRect.height;
@@ -297,7 +297,7 @@ export default class LearningPathNavigator extends React.Component
         <div className="navigator__left_side" />
         <div className="navigator__right_side" />
         <div id={`id_navigator__scroll_container_${this.learningPath}`} className="navigator__scroll_container">
-          <div id={`id_navigator__lessons_positions_container_${this.learningPath}`} className="navigator__lessons_positions_container">
+          <div id={`id_navigator__topics_positions_container_${this.learningPath}`} className="navigator__topics_positions_container">
               {this.topics()}
           </div>
         </div>

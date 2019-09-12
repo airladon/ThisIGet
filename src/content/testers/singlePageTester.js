@@ -86,14 +86,14 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
         if (height === 'full') {
           await page.setViewport({ width, height: 1000 });
-          const lessonContainerTemp = await page.$('#lesson__content');
+          const lessonContainerTemp = await page.$('#topic__content');
           const lessonBoxTemp = await lessonContainerTemp.boundingBox();
           await page.setViewport({ width, height: Math.floor(lessonBoxTemp.height) });
         } else {
           await page.setViewport({ width, height });
         }
 
-        const lessonContainer = await page.$('#lesson__content');
+        const lessonContainer = await page.$('#topic__content');
         const lessonBox = await lessonContainer.boundingBox();
         await page.evaluate((y) => {
           window.scrollTo(0, y);
@@ -108,7 +108,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         if (includeQRs) {
           // Find all links on page that go to QR popups
           // eslint-disable-next-line no-await-in-loop, no-loop-func
-          const qrLinks = await page.$$('.lesson__qr_action_word');
+          const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
           // eslint-disable-next-line no-restricted-syntax
           for (const link of qrLinks) {
