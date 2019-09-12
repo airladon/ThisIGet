@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db, lessons
+from app import app, db, lessons, version_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -26,7 +26,7 @@ from app.models import Lessons, Versions, Topics
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -198,17 +198,18 @@ def get_content(path):
               f'{lessons[lesson_path]["content.css"]}'
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
-    # pdb.set_trace()
-    version = getVersion(lesson_uid, topic_name, version_uid)
+
+    end_point = f"/content/{path}"
+
     title = ''
     description = ''
-    if version != 'lesson/topic/version does not exist':
-        title = f'{version.htmlTitle} - This I Get'
-        if version.htmlTitle == '':
-            title = (f'{version.topic.lesson.title} '
-                     f'{version.topic.name.capitalize()}: '
-                     f'{version.title} - This I Get')
-        description = f'{version.htmlDescription}'
+    if end_point in version_list:
+        version = version_list[end_point]
+        if version['title'] is None:
+            title = version['default_title']
+        else:
+            title = version['title']
+        description = version['description']
 
     lesson_page = request.args.get('page')
 
