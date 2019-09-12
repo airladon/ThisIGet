@@ -64,12 +64,12 @@ export default class CommonDiagramCollection extends DiagramElementCollection {
       const degSpans = document.getElementsByClassName('figureone__unit_deg');
       const radSpans = document.getElementsByClassName('figureone__unit_rad');
       if (selectedUnits === 'rad') {
-        [].forEach.call(degSpans, degSpan => degSpan.classList.add('lesson__unit_hide'));
-        [].forEach.call(radSpans, radSpan => radSpan.classList.remove('lesson__unit_hide'));
+        [].forEach.call(degSpans, degSpan => degSpan.classList.add('topic__unit_hide'));
+        [].forEach.call(radSpans, radSpan => radSpan.classList.remove('topic__unit_hide'));
       }
       if (selectedUnits === 'deg') {
-        [].forEach.call(degSpans, degSpan => degSpan.classList.remove('lesson__unit_hide'));
-        [].forEach.call(radSpans, radSpan => radSpan.classList.add('lesson__unit_hide'));
+        [].forEach.call(degSpans, degSpan => degSpan.classList.remove('topic__unit_hide'));
+        [].forEach.call(radSpans, radSpan => radSpan.classList.add('topic__unit_hide'));
       }
       this.setUnits(selectedUnits);
     };

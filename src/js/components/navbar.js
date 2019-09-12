@@ -207,7 +207,7 @@ export default class Navbar extends React.Component
         </div>
         <div className="navbar-text navbar-left">
          <DropDownButton
-          className="navbar_lessons_dropdown"
+          className="navbar_topics_dropdown"
           label="lessons"
           direction="down"
           xAlign="left"

@@ -15,7 +15,7 @@ body {
   z-index: 0;
 }
 
-.in_lesson__fraction_table {
+.in_topic__fraction_table {
   text-align: center;
   // color: color('diagram', 'text-base');
   // font-size: calc(var(--topic__diagram-font-size) * 0.8);
@@ -34,14 +34,14 @@ body {
   font-weight: 100;
 }
 
-.in_lesson__fraction_table tr:first-child {
+.in_topic__fraction_table tr:first-child {
   text-align: center;
   background-color: color('black', 'dark');
   height: 2.5em;
   font-size: 0.8em;
 }
 
-.lesson__fraction {
+.topic__fraction {
   font-size: 1.5em;
 }
 
@@ -53,10 +53,10 @@ body {
   font-size: 0.7em;
 }
 
-.lesson__fraction_title {
+.topic__fraction_title {
   border-top-left-radius: 0.5em;
 }
 
-.lesson__angle_title {
+.topic__angle_title {
   border-top-right-radius: 0.5em;
 }

@@ -151,8 +151,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
         await sleep(200);
 
         let currentPage = fromPage;
-        const next = 'lesson__button-next';
-        const prev = 'lesson__button-previous';
+        const next = 'topic__button-next';
+        const prev = 'topic__button-previous';
         let navigation = next;
         for (let k = 0; k < toPages.length; k += 1) {
           const targetPage = toPages[k];

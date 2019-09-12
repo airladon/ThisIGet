@@ -1,5 +1,5 @@
 
-.lesson__button-goto_container {
+.topic__button-goto_container {
   position: absolute;
   color: color('presentation', 'text');
   width: calc(var(--pres__button_height) * 2);
@@ -15,29 +15,29 @@
 }
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
-  .lesson__button-goto_container {
+  .topic__button-goto_container {
     // left: calc(100% - var(--pres__nav_button_width) / 2 - var(--pres__button_height) - var(--pres__hspace));
     left: calc(var(--pres__content_width) + var(--pres__hspace) * 3 + var(--pres__nav_button_width) * 1.5 - var(--pres__button_height));
     top: calc(94% - var(--pres__button_height) / 2);
   }
 }
 
-.lesson__button-goto_container:hover {
+.topic__button-goto_container:hover {
   // background-color: color('presentation', 'hover');
   color: color('presentation', 'hover');
 }
 
-.lesson__button-goto_container-disabled {
+.topic__button-goto_container-disabled {
   pointer-events: none;
   color: color('presentation', 'disabled');
 }
 
-.lesson__button-goto_container-disabled:hover {
+.topic__button-goto_container-disabled:hover {
   pointer-events: none;
   background-color: color('presentation', 'background');
 }
 
-#id__lesson__goto_button {
+#id__topic__goto_button {
   background-color: color('presentation', 'background');
   // border: 0;
   // border-radius: 0;
@@ -50,7 +50,7 @@
                       supported by Chrome and Opera */
 }
 
-#id__lesson__goto_button:hover {
+#id__topic__goto_button:hover {
   // background-color: color('presentation', 'hover', 'light');
   // background-color: color('diagram', 'background', 'darker');
   cursor: pointer;
@@ -59,17 +59,17 @@
   // border-radius: 0;
 }
 
-.lesson__button-goto_container-disabled #id__lesson__goto_button {
+.topic__button-goto_container-disabled #id__topic__goto_button {
   color: color('presentation', 'disabled');
 }
 
-.lesson__button-goto_container .dropdown_button_label_container {
+.topic__button-goto_container .dropdown_button_label_container {
   // padding-left: 0;
   // padding-right: 0;
   padding: 0;
 }
 
-.lesson__button-goto_container .dropdown_button_label {
+.topic__button-goto_container .dropdown_button_label {
   display: block;
 }
 
@@ -79,7 +79,7 @@
   margin-right: auto;
 }
 
-#id__lesson__goto_button_list {
+#id__topic__goto_button_list {
   font-size: calc(var(--pres__unit) * 0.8);
 }
 
@@ -108,7 +108,7 @@
   text-align: center;
 }
 
-#id__lesson__goto_button_label {
+#id__topic__goto_button_label {
   // color: color('presentation', 'text');
   color: color('black', 'lighter');
   border-radius: 0.4em;
@@ -117,14 +117,14 @@
   // background-color: color('white', 'lighter');
 }
 
-#id__lesson__goto_button_label:hover {
+#id__topic__goto_button_label:hover {
   // color: color('white', 'darkest');
   // color: color('presentation', 'hover');
   // border: solid 1px color('presentation', 'hover');
   background-color: color('white', 'light');
 }
 
-#id__lesson__goto_button_label .dropdown_button_arrow {
+#id__topic__goto_button_label .dropdown_button_arrow {
   margin-left: 0;
   position: absolute;
   left: -10000%;

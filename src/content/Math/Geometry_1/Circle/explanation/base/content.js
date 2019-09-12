@@ -106,10 +106,10 @@ class Content extends PresentationFormatContent {
         'Today, our name comes from the Latin root, and it is |circle|.',
       ]),
       modifiers: {
-        Greek: highlight('lesson__greek'),
-        krikos: highlight('lesson__greek'),
-        Latin: highlight('lesson__latin'),
-        circulus: highlight('lesson__latin'),
+        Greek: highlight('topic__greek'),
+        krikos: highlight('topic__greek'),
+        Latin: highlight('topic__latin'),
+        circulus: highlight('topic__latin'),
       },
     });
     this.addSection(common, {

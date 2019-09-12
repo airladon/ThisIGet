@@ -26,7 +26,7 @@ body {
 }
 
 .table_container {
-  height: calc(var(--lesson__container-height) * 0.7);
+  height: calc(var(--topic__container-height) * 0.7);
   overflow: scroll;
 }
 
@@ -77,11 +77,11 @@ body {
   padding-bottom: 0.5em;
 }
 
-.lesson__deg_title {
+.topic__deg_title {
   border-top-left-radius: 0.5em;
 }
 
-.lesson__rad_title {
+.topic__rad_title {
   border-top-right-radius: 0.5em;
 }
 

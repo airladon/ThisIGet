@@ -52,13 +52,13 @@ function selectorHandler(
       const subTextCol = subTextCols[index];
       if (subTextCol && type === 'vertical') {
         subTextCol.classList
-          .add('lesson__vertical_selector_table_subtext__hide');
+          .add('topic__vertical_selector_table_subtext__hide');
         col.classList
-          .remove('lesson__vertical_selector_table_cell_with_subtext');
+          .remove('topic__vertical_selector_table_cell_with_subtext');
       }
       if (type === 'horizontal') {
         subTextCol.classList
-          .remove('lesson__horizontal_selector_table_subtext_selected');
+          .remove('topic__horizontal_selector_table_subtext_selected');
       }
     } else {
       col.classList.add('diagram__selector_title_selected');
@@ -67,13 +67,13 @@ function selectorHandler(
       const subTextCol = subTextCols[index];
       if (subTextCol.innerHTML !== '' && type === 'vertical') {
         subTextCol.classList
-          .remove('lesson__vertical_selector_table_subtext__hide');
+          .remove('topic__vertical_selector_table_subtext__hide');
         col.classList
-          .add('lesson__vertical_selector_table_cell_with_subtext');
+          .add('topic__vertical_selector_table_cell_with_subtext');
       }
       if (type === 'horizontal') {
         subTextCol.classList
-          .add('lesson__horizontal_selector_table_subtext_selected');
+          .add('topic__horizontal_selector_table_subtext_selected');
       }
       // }
     }
@@ -84,7 +84,7 @@ function selectorHandler(
 // export function makeSelectorHTML(
 //   selectorItems: SelectorList,
 //   firstSelection: string = selectorItems.order[0].id,
-//   id: string = 'id__lesson_selector',
+//   id: string = 'id__topic_selector',
 //   diagram: Diagram,
 //   onclick: Function,
 //   yPosition: number = diagram.limits.top - diagram.limits.height / 2,
@@ -103,7 +103,7 @@ function selectorHandler(
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick);
 //     col.classList.add('diagram__selector_title_not_selected');
 //     col.classList.add('diagram__selector_table_selectable');
-//     col.classList.add('lesson__vertical_selector_table_cell');
+//     col.classList.add('topic__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
 //     if (separator !== '' && index < numKeys - 1) {
@@ -125,12 +125,12 @@ function selectorHandler(
 // export function makeVerticalSelectorHTML(
 //   selectorItems: SelectorList,
 //   firstSelection: string = selectorItems.order[0].id,
-//   id: string = 'id__lesson_selector',
+//   id: string = 'id__topic_selector',
 //   diagram: Diagram,
 //   onclick: Function,
 // ) {
 //   const table = document.createElement('table');
-//   table.classList.add('lesson__vertical_selector_table');
+//   table.classList.add('topic__vertical_selector_table');
 //   const cols: Array<HTMLElement> = [];
 
 //   selectorItems.order.forEach((selectorItem) => {
@@ -141,7 +141,7 @@ function selectorHandler(
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick);
 //     col.classList.add('diagram__selector_title_not_selected');
 //     col.classList.add('diagram__selector_table_selectable');
-//     col.classList.add('lesson__vertical_selector_table_cell');
+//     col.classList.add('topic__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
 //     table.appendChild(row);
@@ -163,12 +163,12 @@ export class SelectorHTML {
   type: 'horizontal' | 'vertical';
 
   constructor(
-    id: string = 'id__lesson_selector',
+    id: string = 'id__topic_selector',
     onclick: (string) => void = () => {},
   ) {
     this.list = new SelectorList();
     this.table = document.createElement('table');
-    // this.table.classList.add('lesson__vertical_selector_table');
+    // this.table.classList.add('topic__vertical_selector_table');
     this.id = id;
     this.onclick = onclick;
     this.titleElements = [];
@@ -205,12 +205,12 @@ export class HorizontalSelectorHTML extends SelectorHTML {
   separator: string;
 
   constructor(
-    id: string = 'id__lesson_horizontal_selector',
+    id: string = 'id__topic_horizontal_selector',
     onclick: (string) => void = () => {},
     separator: string = '',
   ) {
     super(id, onclick);
-    this.table.classList.add('lesson__horizontal_selector_table');
+    this.table.classList.add('topic__horizontal_selector_table');
     this.titleRow = document.createElement('tr');
     this.table.appendChild(this.titleRow);
 
@@ -226,7 +226,7 @@ export class HorizontalSelectorHTML extends SelectorHTML {
       const sepTitleCol = document.createElement('td');
       sepTitleCol.innerHTML = this.separator;
       sepTitleCol.classList
-        .add('lesson__horiztonal_selector_table_separator_cell');
+        .add('topic__horiztonal_selector_table_separator_cell');
       this.titleElements.push(sepTitleCol);
       this.titleRow.appendChild(sepTitleCol);
 
@@ -251,14 +251,14 @@ export class HorizontalSelectorHTML extends SelectorHTML {
     );
     titleCol.classList.add('diagram__selector_title_not_selected');
     titleCol.classList.add('diagram__selector_table_selectable');
-    titleCol.classList.add('lesson__horiztonal_selector_table_cell');
+    titleCol.classList.add('topic__horiztonal_selector_table_cell');
     this.titleElements.push(titleCol);
     this.titleRow.appendChild(titleCol);
 
     const subTextCol = document.createElement('td');
     subTextCol.innerHTML = newItem.subText;
     subTextCol.id = `${this.id}__${newItem.id}__subtext`;
-    subTextCol.classList.add('lesson__horizontal_selector_table_subtext');
+    subTextCol.classList.add('topic__horizontal_selector_table_subtext');
     this.subTextElements.push(subTextCol);
     this.subTextRow.appendChild(subTextCol);
   }
@@ -266,11 +266,11 @@ export class HorizontalSelectorHTML extends SelectorHTML {
 
 export class VerticalSelectorHTML extends SelectorHTML {
   constructor(
-    id: string = 'id__lesson_selector',
+    id: string = 'id__topic_selector',
     onclick: (string) => void = () => {},
   ) {
     super(id, onclick);
-    this.table.classList.add('lesson__vertical_selector_table');
+    this.table.classList.add('topic__vertical_selector_table');
     this.type = 'vertical';
   }
 
@@ -292,7 +292,7 @@ export class VerticalSelectorHTML extends SelectorHTML {
     );
     titleCol.classList.add('diagram__selector_title_not_selected');
     titleCol.classList.add('diagram__selector_table_selectable');
-    titleCol.classList.add('lesson__vertical_selector_table_cell');
+    titleCol.classList.add('topic__vertical_selector_table_cell');
     this.titleElements.push(titleCol);
     titleRow.appendChild(titleCol);
     this.table.appendChild(titleRow);
@@ -301,8 +301,8 @@ export class VerticalSelectorHTML extends SelectorHTML {
     const subTextCol = document.createElement('td');
     subTextCol.innerHTML = newItem.subText;
     subTextCol.id = `${this.id}__${newItem.id}__subtext`;
-    subTextCol.classList.add('lesson__vertical_selector_table_subtext');
-    subTextCol.classList.add('lesson__vertical_selector_table_subtext__hide');
+    subTextCol.classList.add('topic__vertical_selector_table_subtext');
+    subTextCol.classList.add('topic__vertical_selector_table_subtext__hide');
     this.subTextElements.push(subTextCol);
     subTextRow.appendChild(subTextCol);
     this.table.appendChild(subTextRow);
@@ -349,12 +349,12 @@ export function addSelectorHTML(
 // export function makeExpandingVerticalSelectorHTML(
 //   selectorItems: SelectorList,
 //   firstSelection: string = selectorItems.order[0].id,
-//   id: string = 'id__lesson_selector',
+//   id: string = 'id__topic_selector',
 //   diagram: Diagram,
 //   onclick: Function,
 // ) {
 //   const table = document.createElement('table');
-//   table.classList.add('lesson__vertical_selector_table');
+//   table.classList.add('topic__vertical_selector_table');
 //   const cols: Array<HTMLElement> = [];
 //   const subTextCols: Array<?HTMLElement> = [];
 
@@ -366,7 +366,7 @@ export function addSelectorHTML(
 //     col.onclick = selectorHandler.bind(this, selectorItem.id, id, cols, onclick, subTextCols);
 //     col.classList.add('diagram__selector_title_not_selected');
 //     col.classList.add('diagram__selector_table_selectable');
-//     col.classList.add('lesson__vertical_selector_table_cell');
+//     col.classList.add('topic__vertical_selector_table_cell');
 //     cols.push(col);
 //     row.appendChild(col);
 //     table.appendChild(row);

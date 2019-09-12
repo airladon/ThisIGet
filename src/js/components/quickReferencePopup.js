@@ -35,7 +35,7 @@ export default class QuickReferencePopup extends React.Component
     }
     const element = document.getElementById(this.props.closeId);
     if (element != null) {
-      element.classList.add('lesson__hide');
+      element.classList.add('topic__hide');
     }
   }
 

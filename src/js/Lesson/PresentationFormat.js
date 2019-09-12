@@ -7,17 +7,17 @@ import SimpleFormat from './SimpleFormat';
 const { Diagram } = Fig;
 
 function hideInfoButton() {
-  const infoButton = document.getElementById('id_lesson__info_button');
+  const infoButton = document.getElementById('id_topic__info_button');
   if (infoButton instanceof HTMLElement) {
-    infoButton.classList.add('lesson__info_hide');
+    infoButton.classList.add('topic__info_hide');
   }
 }
 
 function hideInteractiveHighlightButton() {
   const interactiveHighlightButton = document
-    .getElementById('id_lesson__interactive_element_button');
+    .getElementById('id_topic__interactive_element_button');
   if (interactiveHighlightButton instanceof HTMLElement) {
-    interactiveHighlightButton.classList.add('lesson__interactive_element_button__hide');
+    interactiveHighlightButton.classList.add('topic__interactive_element_button__hide');
   }
 }
 
@@ -483,9 +483,9 @@ class PresentationFormat extends SimpleFormat {
 
   // eslint-disable-next-line class-methods-use-this
   disableInteractiveItems() {
-    const button = document.getElementById('id_lesson__interactive_element_button');
+    const button = document.getElementById('id_topic__interactive_element_button');
     if (button != null) {
-      button.classList.add('lesson__interactive_element_button__hide');
+      button.classList.add('topic__interactive_element_button__hide');
     }
   }
 

@@ -43,7 +43,7 @@ class Content extends PresentationFormatContent {
       //   'Create a triangle that has an area of |area| squares.',
       // ],
       // modifiers: {
-      //   area: toHTML('?', 'id__lessons__area_quiz1', '', colors.area),
+      //   area: toHTML('?', 'id__topics__area_quiz1', '', colors.area),
       // },
       show: [main._implications],
       hide: [main._implications._text],

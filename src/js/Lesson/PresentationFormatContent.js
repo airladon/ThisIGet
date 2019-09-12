@@ -215,24 +215,24 @@ class Section {
 
   // eslint-disable-next-line class-methods-use-this
   hideInfoButton() {
-    const infoElement = document.getElementById('id_lesson__info_button');
+    const infoElement = document.getElementById('id_topic__info_button');
     if (infoElement instanceof HTMLElement) {
-      infoElement.classList.add('lesson__info_hide');
+      infoElement.classList.add('topic__info_hide');
     }
   }
 
   setInfoButton() {
     const infoHtml = this.getInfo();
-    const infoElement = document.getElementById('id_lesson__info_button');
-    const infoBox = document.getElementById('id_lesson__info_box__text');
+    const infoElement = document.getElementById('id_topic__info_button');
+    const infoBox = document.getElementById('id_topic__info_box__text');
     if (infoElement instanceof HTMLElement) {
       if (infoHtml) {
-        infoElement.classList.remove('lesson__info_hide');
+        infoElement.classList.remove('topic__info_hide');
         if (infoBox instanceof HTMLElement) {
           infoBox.innerHTML = infoHtml;
         }
       } else {
-        infoElement.classList.add('lesson__info_hide');
+        infoElement.classList.add('topic__info_hide');
       }
     }
   }
@@ -240,14 +240,14 @@ class Section {
   setInteractiveElementsButton() {
     // const infoHtml = this.getInfo();
     const button = document
-      .getElementById('id_lesson__interactive_element_button');
-    // const infoBox = document.getElementById('id_lesson__info_box__text');
+      .getElementById('id_topic__interactive_element_button');
+    // const infoBox = document.getElementById('id_topic__info_box__text');
     if (button instanceof HTMLElement) {
       if (this.interactiveElementList.length > 0 && this.getNextInteractiveItem()) {
         this.currentInteractiveItem = -1;
-        button.classList.remove('lesson__interactive_element_button__hide');
+        button.classList.remove('topic__interactive_element_button__hide');
       } else {
-        button.classList.add('lesson__interactive_element_button__hide');
+        button.classList.add('topic__interactive_element_button__hide');
       }
     }
   }
@@ -666,27 +666,27 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   // eslint-disable-next-line class-methods-use-this
   toggleInfo(toState: ?boolean = null) {
-    const infoButton = document.getElementById('id_lesson__info_button');
-    const infoBox = document.getElementById('id_lesson__info_box');
+    const infoButton = document.getElementById('id_topic__info_button');
+    const infoBox = document.getElementById('id_topic__info_box');
     if (infoButton instanceof HTMLElement && infoBox instanceof HTMLElement) {
       if (typeof toState === 'boolean' && toState === true) {
-        infoButton.classList.add('lesson__info_button_show');
-        infoBox.classList.remove('lesson__info_hide');
+        infoButton.classList.add('topic__info_button_show');
+        infoBox.classList.remove('topic__info_hide');
       } else if (typeof toState === 'boolean' && toState === false) {
-        infoButton.classList.remove('lesson__info_button_show');
-        infoBox.classList.add('lesson__info_hide');
+        infoButton.classList.remove('topic__info_button_show');
+        infoBox.classList.add('topic__info_hide');
       } else {
-        infoButton.classList.toggle('lesson__info_button_show');
-        infoBox.classList.toggle('lesson__info_hide');
+        infoButton.classList.toggle('topic__info_button_show');
+        infoBox.classList.toggle('topic__info_hide');
       }
-      if (infoBox.classList.contains('lesson__info_hide')) {
+      if (infoBox.classList.contains('topic__info_hide')) {
         this.diagram.elements.hasTouchableElements = true;
       } else {
         this.diagram.elements.hasTouchableElements = false;
       }
     }
     // if (infoBox instanceof HTMLElement) {
-    //   infoBox.classList.toggle('lesson__info_hide');
+    //   infoBox.classList.toggle('topic__info_hide');
     // }
   }
 
@@ -697,23 +697,23 @@ class PresentationFormatContent extends SimpleFormatContent {
     if (overlay != null) {
       overlay.style.zIndex = '10';
     }
-    const next = document.getElementById('lesson__button-next');
+    const next = document.getElementById('topic__button-next');
     if (next) {
-      next.classList.add('lesson__button-next-disabled');
+      next.classList.add('topic__button-next-disabled');
     }
-    const prev = document.getElementById('lesson__button-previous');
+    const prev = document.getElementById('topic__button-previous');
     if (prev) {
-      prev.classList.add('lesson__button-prev-disabled');
+      prev.classList.add('topic__button-prev-disabled');
     }
     const gotoButton =
-      document.getElementById('id__lesson__button-goto_container');
+      document.getElementById('id__topic__button-goto_container');
     if (gotoButton) {
-      gotoButton.classList.add('lesson__button-goto_container-disabled');
+      gotoButton.classList.add('topic__button-goto_container-disabled');
     }
     const interactive =
-      document.getElementById('id_lesson__interactive_element_button');
+      document.getElementById('id_topic__interactive_element_button');
     if (interactive) {
-      interactive.classList.add('lesson__interactive_element_button__disable');
+      interactive.classList.add('topic__interactive_element_button__disable');
     }
   }
 
@@ -723,60 +723,60 @@ class PresentationFormatContent extends SimpleFormatContent {
     if (overlay != null) {
       overlay.style.zIndex = '-1';
     }
-    const next = document.getElementById('lesson__button-next');
+    const next = document.getElementById('topic__button-next');
     if (next
       && this.diagram.lesson.currentSectionIndex
         < this.diagram.lesson.content.sections.length - 1
     ) {
-      next.classList.remove('lesson__button-next-disabled');
+      next.classList.remove('topic__button-next-disabled');
     }
-    const prev = document.getElementById('lesson__button-previous');
+    const prev = document.getElementById('topic__button-previous');
     if (prev && this.diagram.lesson.currentSectionIndex > 0) {
-      prev.classList.remove('lesson__button-prev-disabled');
+      prev.classList.remove('topic__button-prev-disabled');
     }
     const gotoButton =
-      document.getElementById('id__lesson__button-goto_container');
+      document.getElementById('id__topic__button-goto_container');
     if (gotoButton) {
-      gotoButton.classList.remove('lesson__button-goto_container-disabled');
+      gotoButton.classList.remove('topic__button-goto_container-disabled');
     }
     const interactive =
-      document.getElementById('id_lesson__interactive_element_button');
+      document.getElementById('id_topic__interactive_element_button');
     if (interactive) {
-      interactive.classList.remove('lesson__interactive_element_button__disable');
+      interactive.classList.remove('topic__interactive_element_button__disable');
     }
   }
 
   // eslint-disable-next-line class-methods-use-this
   addInfoBox() {
     const container = document.createElement('div');
-    container.classList.add('lesson__info_box');
-    container.classList.add('lesson__info_hide');
-    container.id = 'id_lesson__info_box';
+    container.classList.add('topic__info_box');
+    container.classList.add('topic__info_hide');
+    container.id = 'id_topic__info_box';
 
     const title = document.createElement('div');
-    title.classList.add('lesson__info_box__title');
+    title.classList.add('topic__info_box__title');
     container.appendChild(title);
 
     const infoSymbol = document.createElement('div');
-    infoSymbol.classList.add('lesson__info_box__title_i');
+    infoSymbol.classList.add('topic__info_box__title_i');
     infoSymbol.innerHTML = 'i';
     title.appendChild(infoSymbol);
 
     const close = document.createElement('div');
-    close.classList.add('lesson__info_box__close');
-    close.id = 'id_lesson__info_box__close';
+    close.classList.add('topic__info_box__close');
+    close.id = 'id_topic__info_box__close';
     close.innerHTML = 'X';
     close.onclick = this.toggleInfo.bind(this);
     title.appendChild(close);
 
     const titleText = document.createElement('div');
-    titleText.classList.add('lesson__info_box__title_text');
+    titleText.classList.add('topic__info_box__title_text');
     titleText.innerHTML = 'What can you do on this page?';
     title.appendChild(titleText);
 
     const text = document.createElement('div');
-    text.classList.add('lesson__info_box__text');
-    text.id = ('id_lesson__info_box__text');
+    text.classList.add('topic__info_box__text');
+    text.id = ('id_topic__info_box__text');
     container.appendChild(text);
 
     this.diagram.htmlCanvas.appendChild(container);
@@ -784,9 +784,9 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   // eslint-disable-next-line class-methods-use-this
   pulseStar() {
-    const star = document.getElementById('id_lesson__star');
+    const star = document.getElementById('id_topic__star');
     if (star instanceof HTMLElement) {
-      star.classList.toggle('lesson__info_star_pulse');
+      star.classList.toggle('topic__info_star_pulse');
     }
   }
 
@@ -798,11 +798,11 @@ class PresentationFormatContent extends SimpleFormatContent {
     element: TypeInteractiveElement,
     location: TypeInteractiveElementLocation,
   ) {
-    const star = document.getElementById('id_lesson__star');
+    const star = document.getElementById('id_topic__star');
     if (star instanceof HTMLElement) {
       const animationEnd = () => {
         star.removeEventListener(this.animationEnd, animationEnd);
-        star.classList.remove('lesson__info_star_pulse');
+        star.classList.remove('topic__info_star_pulse');
         // this next line triggers a relflow, making the class removal stick
         // eslint-disable-next-line no-unused-vars
         const w = star.offsetWidth;
@@ -915,7 +915,7 @@ class PresentationFormatContent extends SimpleFormatContent {
           }
         }
       }
-      star.classList.add('lesson__info_star_pulse');
+      star.classList.add('topic__info_star_pulse');
       const rect = star.getBoundingClientRect();
       star.style.left = `${cssPosition.x - rect.width / 2}px`;
       star.style.top = `${cssPosition.y - rect.height / 2}px`;
@@ -986,8 +986,8 @@ class PresentationFormatContent extends SimpleFormatContent {
   addStar() {
     const img = document.createElement('img');
     img.setAttribute('src', '/static/assets/star.png');
-    img.id = 'id_lesson__star';
-    img.classList.add('lesson__info_star');
+    img.id = 'id_topic__star';
+    img.classList.add('topic__info_star');
     img.alt = 'active item';
 
     this.diagram.htmlCanvas.appendChild(img);

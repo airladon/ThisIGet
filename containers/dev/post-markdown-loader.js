@@ -66,7 +66,7 @@ function parseLinks(source) {
     const { index } = match;
     const [str, label, link] = match;
     const replacement = `
-  <a class="lesson__link" href=${link}">
+  <a class="topic__link" href=${link}">
     ${label}
   </a>`;
     out = `${out.substring(0, index)}${replacement}${out.substring(index + str.length)}`;

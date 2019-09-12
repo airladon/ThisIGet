@@ -200,7 +200,7 @@ function multichoice(
 ) {
   let out = `
 <html>
-<div class="lesson__multiple_choice" ${options}>`;
+<div class="topic__multiple_choice" ${options}>`;
   lines.forEach((line) => {
     const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
     const html = `

@@ -106,7 +106,7 @@ class SimpleFormatContent {
   ) {
     const qr = document.getElementById('id_topic__qr__content_pres');
     if (qr != null) {
-      qr.classList.remove('lesson__hide');
+      qr.classList.remove('topic__hide');
     }
     if (this.qrDiagram == null) {
       this.qrDiagram = new Diagram({

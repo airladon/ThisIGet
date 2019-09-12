@@ -4,7 +4,7 @@ function convertMultiChoice(str, name, options) {
   const lines = str.trim().split('\n').map(l => l.trim());
   let out = `
 <html>
-<div class="lesson__multiple_choice" ${options}>`;
+<div class="topic__multiple_choice" ${options}>`;
   lines.forEach((line) => {
     const value = line.charAt(0) === '+' ? 'correct' : 'incorrect';
     const html = `
@@ -135,7 +135,7 @@ function parseQuiz(source) {
 //     const { index } = match;
 //     const [str, label, link] = match;
 //     const replacement = `
-//   <a class="lesson__link" href=${link} rel="noreferrer noopener" target="_blank">
+//   <a class="topic__link" href=${link} rel="noreferrer noopener" target="_blank">
 //     ${label}
 //   </a>`;
 //     out = `${out.substring(0, index)}${replacement}${out.substring(index + str.length)}`;
@@ -152,7 +152,7 @@ function convertID(str) {
   }
   const id = contents.split(' ').slice(-1)[0];
 
-  let out = `<${tag} id="id_topic__variable_${id}" class="lesson__variable">${id}</${tag}>`;
+  let out = `<${tag} id="id_topic__variable_${id}" class="topic__variable">${id}</${tag}>`;
   if (str.charAt(0) === ' ') {
     out = ` ${out}`;
   }

@@ -112,7 +112,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
   }
 
   setupNewProblem() {
-    // const element = document.getElementById('id__lessons__area_quiz1');
+    // const element = document.getElementById('id__topics__area_quiz1');
     const { area, answers } = this.getAnswers();
     this.answer = area;
     this.answers = answers;

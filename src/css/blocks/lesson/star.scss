@@ -1,4 +1,4 @@
-.lesson__info_star {
+.topic__info_star {
   position: absolute;
   left: 50%;
   top: 50%;
@@ -7,7 +7,7 @@
   z-index: 3;
 }
 
-.lesson__info_star_pulse {
+.topic__info_star_pulse {
   width: calc(var(--topic__diagram-font-size) * 2);
   height: calc(var(--topic__diagram-font-size) * 2);
   opacity: 0;

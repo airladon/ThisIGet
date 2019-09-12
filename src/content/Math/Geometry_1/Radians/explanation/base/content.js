@@ -705,9 +705,9 @@ class Content extends PresentationFormatContent {
           <p>
             Some common angles in |degrees| and |radians|.
           </p>
-          <table id="id_common_angles_table" class="lesson__table topic__common_angles_table">
+          <table id="id_common_angles_table" class="topic__table topic__common_angles_table">
             <tr>
-              <td class="lesson__deg_title"><div>Degrees</div></td><td class="lesson__rad_title"><div>Radians</div></td>
+              <td class="topic__deg_title"><div>Degrees</div></td><td class="topic__rad_title"><div>Radians</div></td>
             </tr>
             <tr>
               <td>|_360|</td><td>${_2pi}</td>

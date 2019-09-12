@@ -21,7 +21,7 @@ function align(elementId: string, containerId: string, linkId: string) {
   if (element == null || container == null || link == null) {
     return;
   }
-  // element.classList.remove('lesson__hide');
+  // element.classList.remove('topic__hide');
   const containerRect = container.getBoundingClientRect();
   const linkRect = link.getBoundingClientRect();
   const windowWidth = window.innerWidth;
@@ -198,11 +198,11 @@ export default class SimpleFormatComponent extends React.Component
     this.setState({ qr: window.quickReference[parameters] });
     const presQR = document.getElementById('id_topic__qr__pres_container');
     if (presQR != null) {
-      presQR.classList.add('lesson__hide');
+      presQR.classList.add('topic__hide');
     }
     const element = document.getElementById('id_topic__qr__static_container');
     if (element != null) {
-      element.classList.remove('lesson__hide');
+      element.classList.remove('topic__hide');
     }
     align('id_topic__qr__static_container', 'topic__content', id);
     this.afterUpdate = () => {
@@ -223,11 +223,11 @@ export default class SimpleFormatComponent extends React.Component
     }
     const staticQR = document.getElementById('id_topic__qr__static_container');
     if (staticQR != null) {
-      staticQR.classList.add('lesson__hide');
+      staticQR.classList.add('topic__hide');
     }
     const element = document.getElementById('id_topic__qr__pres_container');
     if (element != null) {
-      element.classList.remove('lesson__hide');
+      element.classList.remove('topic__hide');
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
@@ -319,25 +319,25 @@ export default class SimpleFormatComponent extends React.Component
   close() {
     let element = document.getElementById('id_topic__qr__static_container');
     if (element != null) {
-      element.classList.add('lesson__hide');
+      element.classList.add('topic__hide');
     }
     element = document.getElementById('id_topic__qr__pres_container');
     if (element != null) {
-      element.classList.add('lesson__hide');
+      element.classList.add('topic__hide');
     }
   }
 
   render() {
     return <div
       id={this.version.content.htmlId}
-      className="simple_lesson__container"
+      className="simple_topic__container"
       // onClick={this.close.bind(this)}
     >
       {this.version.content.sections}
-      <div id="id_topic__qr__static_container" className="topic__qr__container lesson__hide">
+      <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
         {this.state.qr}
       </div>
-      <div id="id_topic__qr__pres_container" className="topic__qr__container lesson__hide">
+      <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
         <PresentationQR id="id_topic__qr__content_pres__overlay"/>
       </div>
     </div>;

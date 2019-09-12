@@ -12,7 +12,7 @@ type Props = {
 export default class PresentationQR extends React.Component
                                     <Props> {
   renderContent() {
-    return <div id={this.props.id} className="lesson__presentation_qr__container">
+    return <div id={this.props.id} className="topic__presentation_qr__container">
         <div id="id_qr_diagram" className="diagram__container topic__diagram">
           <canvas id="id_qr_diagram__text" className='diagram__text'>
           </canvas>

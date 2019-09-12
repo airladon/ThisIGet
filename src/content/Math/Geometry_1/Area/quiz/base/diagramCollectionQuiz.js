@@ -154,7 +154,7 @@ export default class QuizCollection extends CommonQuizMixin(CommonDiagramCollect
     this._right.setColor(this.layout.colors.sides);
     this._top.setColor(this.layout.colors.sides);
     this._bottom.setColor(this.layout.colors.sides);
-    const element = document.getElementById('id__lessons__area_quiz1');
+    const element = document.getElementById('id__topics__area_quiz1');
     const lay = this.layout;
     const maxX = lay.bounds.width / lay.minSide - 2;
     const maxY = lay.bounds.height / lay.minSide - 2;

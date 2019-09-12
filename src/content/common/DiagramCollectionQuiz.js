@@ -323,7 +323,7 @@ const CommonQuizMixin = superclass => class extends superclass {
     button.onclick = callback;
     const html = this.diagram.shapes.htmlElement(
       button,
-      `id__lesson_quiz_button_${id}`,
+      `id__topic_quiz_button_${id}`,
       '',
       position,
       'middle',

@@ -227,8 +227,8 @@ class Content extends PresentationFormatContent {
         'Our word for |corner sharpness| comes from this Latin root, and is |angle|.',
       ]),
       modifiers: {
-        Latin: highlight('lesson__latin'),
-        angulus: highlight('lesson__latin'),
+        Latin: highlight('topic__latin'),
+        angulus: highlight('topic__latin'),
       },
     });
 

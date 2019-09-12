@@ -1,6 +1,6 @@
 @import './style.scss';
 
-.simple_lesson__container {
+.simple_topic__container {
   // padding: 1em;
   // margin-left: 1em;
   // margin-right: 1em;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 700px) {
-  .simple_lesson__container {
+  .simple_topic__container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: 1em;
@@ -26,7 +26,7 @@
 }
 
 @media screen and (min-width: 1100px) {
-  .simple_lesson__container {
+  .simple_topic__container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: auto;
@@ -34,13 +34,13 @@
   }
 }
 
-.simple_lesson__container img {
+.simple_topic__container img {
   max-width: 100%;
   margin-left: 50%;
   transform: translate(-50%);
 }
 
-.simple_lesson__container svg {
+.simple_topic__container svg {
   max-width: 100%;
 }
 
@@ -62,7 +62,7 @@ h3:first-of-type {
 // QUIZ Multiple Choice
 // ///////////////////////////////////////////////////////
 
-.lesson__multiple_choice input {
+.topic__multiple_choice input {
   // margin-top: 1em;
   margin-right: 0.6em;
   margin-left: 0.5em;

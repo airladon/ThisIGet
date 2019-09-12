@@ -54,8 +54,8 @@ class Content extends PresentationFormatContent {
           width: 45,
           height: 18,
           // borderDebug: true,
-          classes: 'lesson__equation_border',
-          id: 'id_lesson_content__equation_box',
+          classes: 'topic__equation_border',
+          id: 'id_topic_content__equation_box',
         }),
       ]),
       modifiers: {
@@ -76,7 +76,7 @@ class Content extends PresentationFormatContent {
         diag.updateAngle();
         diag._equation.showForm('arc');
         circle._angleText.setScenario('summary');
-        const element = document.getElementById('id_lesson_content__equation_box');
+        const element = document.getElementById('id_topic_content__equation_box');
         if (element) {
           diag._equation.updateHTMLElementTie(element);
         }

@@ -191,9 +191,9 @@ class Content extends PresentationFormatContent {
         'So 360 degrees (360º) is the same as saying there are 360 |smaller steps| or pieces.',
       ]),
       modifiers: {
-        Latin: highlight('lesson__latin'),
-        de: highlight('lesson__latin'),
-        gradus: highlight('lesson__latin'),
+        Latin: highlight('topic__latin'),
+        de: highlight('topic__latin'),
+        gradus: highlight('topic__latin'),
       },
     });
 
@@ -217,7 +217,7 @@ class Content extends PresentationFormatContent {
       ]),
     });
 
-    const row = (portion: string, angle: number) => `<tr><td class="lesson__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
+    const row = (portion: string, angle: number) => `<tr><td class="topic__fraction">${portion}</td><td>|_${angle}deg|</td></tr>`;
 
     const rowClick = (angle: number) => click(
       diag.pushLine,
@@ -233,10 +233,10 @@ class Content extends PresentationFormatContent {
       setContent: () => [
         style({ top: 0 }, 'This means it\'s easy to work with fractions of a full rotation. Some example fractions are shown, but |many| are possible.'),
         `
-          <table class="in_lesson__fraction_table">
+          <table class="in_topic__fraction_table">
             <tr>
-              <th class="lesson__fraction_title"> Fraction </th>
-              <th class="lesson__angle_title"> Angle </th>
+              <th class="topic__fraction_title"> Fraction </th>
+              <th class="topic__angle_title"> Angle </th>
             </tr>
             ${row(String.fromCharCode(190), 270)}
             ${row(String.fromCharCode(8532), 240)}

@@ -121,8 +121,8 @@ class Content extends PresentationFormatContent {
       modifiers: {
         opposite_side: click(coll.pulseOpposite, [coll], colors.opposite),
         hypotenuse: click(coll.pulseOpposite, [coll], colors.opposite),
-        Greek: highlight('lesson__greek'),
-        hypoteinousa: highlight('lesson__greek'),
+        Greek: highlight('topic__greek'),
+        hypoteinousa: highlight('topic__greek'),
       },
       show: [
         main._tri._line, main._tri._angle1, main._opposite,

@@ -48,8 +48,8 @@ $title_bar_space_low: 90px;
   }
 }
 
-@mixin lesson_vars() {
-  @each $var, $value in $_lesson_vars {
+@mixin topic_vars() {
+  @each $var, $value in $_topic_vars {
     @if type-of($value) == "map" {
       @each $subvar, $subvalue in $value {
         @if type-of($subvalue) == "map" {
@@ -70,7 +70,7 @@ $title_bar_space_low: 90px;
   }
 }
 
-.lesson__hide {
+.topic__hide {
   display: none;
 }
 
@@ -87,7 +87,7 @@ $title_bar_space_low: 90px;
   font-weight: bold;
 }
 
-.lesson__action_word_disabled_by_popup {
+.topic__action_word_disabled_by_popup {
   pointer-events: none;
   cursor: auto;
 }
@@ -96,36 +96,36 @@ $title_bar_space_low: 90px;
   cursor: pointer;
 }
 
-.lesson__sanskrit,
-.lesson__arabic,
-.lesson__latin,
-.lesson__greek,
-.lesson__english {
+.topic__sanskrit,
+.topic__arabic,
+.topic__latin,
+.topic__greek,
+.topic__english {
   font-style: italic;
   font-family: Times New Roman, serif;
 }
 
-.lesson__sanskrit {
+.topic__sanskrit {
   color: color('diagram', 'text-sanskrit');
 }
 
-.lesson__arabic {
+.topic__arabic {
   color: color('diagram', 'text-arabic');
 }
 
-.lesson__latin {
+.topic__latin {
   color: color('diagram', 'text-latin');
 }
 
-.lesson__old_french {
+.topic__old_french {
   color: color('diagram', 'text-oldFrench');
 }
 
-.lesson__greek {
+.topic__greek {
   color: color('diagram', 'text-greek');
 }
 
-.lesson__english {
+.topic__english {
   color: color('diagram', 'text-english');
 }
 

@@ -338,7 +338,7 @@ export default class TopicComponent extends React.Component
           output.push(
             <div className="topic__approach_tile" key={this.key}>
               <TopicButton
-                id={`id__lesson__topic_button_${approachUID}`}
+                id={`id__topic__topic_button_${approachUID}`}
                 label={nameLabel}
                 direction="down"
                 xAlign="left"

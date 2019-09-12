@@ -90,21 +90,21 @@ export default class PresentationFormatComponent extends React.Component
     } else if (callback) {
       callback();
     }
-    const nextButton = document.getElementById('lesson__button-next');
+    const nextButton = document.getElementById('topic__button-next');
     if (nextButton) {
       if (this.version.currentSectionIndex ===
         this.version.content.sections.length - 1) {
-        nextButton.classList.add('lesson__button-next-disabled');
+        nextButton.classList.add('topic__button-next-disabled');
       } else {
-        nextButton.classList.remove('lesson__button-next-disabled');
+        nextButton.classList.remove('topic__button-next-disabled');
       }
     }
-    const prevButton = document.getElementById('lesson__button-previous');
+    const prevButton = document.getElementById('topic__button-previous');
     if (prevButton) {
       if (this.version.currentSectionIndex === 0) {
-        prevButton.classList.add('lesson__button-prev-disabled');
+        prevButton.classList.add('topic__button-prev-disabled');
       } else {
-        prevButton.classList.remove('lesson__button-prev-disabled');
+        prevButton.classList.remove('topic__button-prev-disabled');
       }
     }
   }
@@ -155,20 +155,20 @@ export default class PresentationFormatComponent extends React.Component
   showStaticQR(id: string, parameters: string) {
     const presQR = document.getElementById('id_topic__qr__pres_container');
     if (presQR != null) {
-      presQR.classList.add('lesson__hide');
+      presQR.classList.add('topic__hide');
     }
     this.setState({ qr: window.quickReference[parameters] });
     this.setCSSVariables('id_topic__qr__static_container');
     const element = document.getElementById('id_topic__qr__static_container');
     if (element != null) {
-      element.classList.remove('lesson__hide');
+      element.classList.remove('topic__hide');
     }
   }
 
   showPresQR(id: string, parameters: string) {
     const staticQR = document.getElementById('id_topic__qr__static_container');
     if (staticQR != null) {
-      staticQR.classList.add('lesson__hide');
+      staticQR.classList.add('topic__hide');
     }
     this.setCSSVariables('id_topic__qr__pres_container');
     const path = parameters.split('/').slice(0, -1).join('/');
@@ -176,7 +176,7 @@ export default class PresentationFormatComponent extends React.Component
     this.version.content.showQR(path, qrid);
     const element = document.getElementById('id_topic__qr__pres_container');
     if (element != null) {
-      element.classList.remove('lesson__hide');
+      element.classList.remove('topic__hide');
     }
     this.version.content.qrDiagram.resize();
     this.version.content.qrDiagram.animateNextFrame();
@@ -209,16 +209,16 @@ export default class PresentationFormatComponent extends React.Component
       this.version.goToSection(0);
     }
 
-    const nextButton = document.getElementById('lesson__button-next');
+    const nextButton = document.getElementById('topic__button-next');
     if (nextButton instanceof HTMLElement) {
       nextButton.onclick = this.goToNext.bind(this);
     }
-    const prevButton = document.getElementById('lesson__button-previous');
+    const prevButton = document.getElementById('topic__button-previous');
     if (prevButton instanceof HTMLElement) {
       prevButton.onclick = this.goToPrevious.bind(this);
     }
 
-    const infoButton = document.getElementById('id_lesson__info_button');
+    const infoButton = document.getElementById('id_topic__info_button');
     if (infoButton instanceof HTMLElement) {
       infoButton.onclick = this.version.content.toggleInfo.bind(this.version.content);
     }
@@ -245,7 +245,7 @@ export default class PresentationFormatComponent extends React.Component
   centerContent() {
     // console.log("Asdf1");
     if (this.centerContentFlag) {
-      const contentContainer = document.getElementById('lesson__container_name');
+      const contentContainer = document.getElementById('topic__container_name');
       if (contentContainer) {
         const y = this.centerContentPosition(contentContainer);
         // setTimeout(function center() { window.scroll(0, a); }, 500);
@@ -286,21 +286,21 @@ export default class PresentationFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addPrevButton() {
-    return <Button label="" id="lesson__button-previous" className=" lesson__np_button lesson__button-prev-enabled"
+    return <Button label="" id="topic__button-previous" className=" topic__np_button topic__button-prev-enabled"
     aria-label="Previous slide"/>;
   }
 
   // eslint-disable-next-line class-methods-use-this
   addNextButton() {
-    return <Button label="" id="lesson__button-next" className=" lesson__np_button lesson__button-next-enabled" aria-label="Next slide"/>;
+    return <Button label="" id="topic__button-next" className=" topic__np_button topic__button-next-enabled" aria-label="Next slide"/>;
   }
 
   // eslint-disable-next-line class-methods-use-this
   addInfoButton() {
-    return <div id="id_lesson__info_button" className="lesson__info_button lesson__info_hide">
-      <div className="lesson__info_button_label_container">
-        <div className="lesson__info_button_label">
-          <div className="lesson__info_button_label_text">
+    return <div id="id_topic__info_button" className="topic__info_button topic__info_hide">
+      <div className="topic__info_button_label_container">
+        <div className="topic__info_button_label">
+          <div className="topic__info_button_label_text">
             i
           </div>
         </div>
@@ -310,11 +310,11 @@ export default class PresentationFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   addInteractiveElementButton() {
-    return <div id="id_lesson__interactive_element_button__container"
-      className="lesson__interactive_element_button__container">
+    return <div id="id_topic__interactive_element_button__container"
+      className="topic__interactive_element_button__container">
         <div
-          id="id_lesson__interactive_element_button"
-          className="lesson__interactive_element_button lesson__interactive_element_button__hide"
+          id="id_topic__interactive_element_button"
+          className="topic__interactive_element_button topic__interactive_element_button__hide"
           onClick={this.version.highlightNextInteractiveItem.bind(this.version)}
           />
       </div>;
@@ -323,10 +323,10 @@ export default class PresentationFormatComponent extends React.Component
   addGoToButton() {
     if (this.state.listOfSections.length > 0) {
       return <div
-        className="lesson__button-goto_container"
-        id="id__lesson__button-goto_container">
+        className="topic__button-goto_container"
+        id="id__topic__button-goto_container">
         <DropDownButton
-          id="id__lesson__goto_button"
+          id="id__topic__goto_button"
           label={
             <div className="pres__goto_button_label">
               <div className="pres__goto_button_label_page">{`${this.state.page + 1} `}</div>
@@ -360,11 +360,11 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   updateGoToButtonListHighlight() {
-    const button = document.getElementById('id__lesson__button-goto_container');
+    const button = document.getElementById('id__topic__button-goto_container');
     if (button != null) {
       const activeItems = button.getElementsByClassName('dropdown_button_list_item_active');
       [].forEach.call(activeItems, item => item.classList.remove('dropdown_button_list_item_active'));
-      const listItems = document.getElementById('id__lesson__goto_button_list');
+      const listItems = document.getElementById('id__topic__goto_button_list');
       const activeSection = this.belongsTo(this.version.currentSectionIndex);
       const titleIndeces = this.version.content.sections.map((section, index) => {
         if (section.title) {
@@ -407,8 +407,8 @@ export default class PresentationFormatComponent extends React.Component
   render() {
     return <div>
       <main>
-      <div className="lesson__widescreen_backdrop" id={this.version.content.htmlId}>
-        <div id="lesson__container_name" className="lesson__container">
+      <div className="topic__widescreen_backdrop" id={this.version.content.htmlId}>
+        <div id="topic__container_name" className="topic__container">
               {this.addPrevButton()}
               <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram">
                 <canvas id="id_diagram__gl__low" className='diagram__gl'>
@@ -421,10 +421,10 @@ export default class PresentationFormatComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
-                <div id="id_topic__qr__static_container" className="topic__qr__container lesson__hide">
+                <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
                   {this.state.qr}
                 </div>
-                <div id="id_topic__qr__pres_container" className="topic__qr__container lesson__hide">
+                <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
                   <PresentationQR
                     id="id_topic__qr__content_pres__overlay"
                     onClose={this.version.content.prepareToHideQR.bind(this.version.content)}

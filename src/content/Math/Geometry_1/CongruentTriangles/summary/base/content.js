@@ -67,7 +67,7 @@ class Content extends PresentationFormatContent {
     });
     this.addSection({
       setContent: [
-        `<p class="lesson__font_0p9">
+        `<p class="topic__font_0p9">
           There are also some combinations of |three properties| that can show congruence.
         </p>
         <div class="topic__congruent_angles_summary__sub_title topic__diagram_text_p_width_40" style="margin-top: 3%">
