@@ -172,7 +172,7 @@ def getTopicIndex():
     for topic_uid, topic in index.items():
         for approach_uid, approach in topic['approaches'].items():
             for version_uid, version in approach.items():
-                path = f"{topic['path']}/{topic_uid}/" \
+                path = f"{topic_uid}/" \
                        f"{approach_uid}/{version_uid}"
                 version_list[path] = {
                     'default_title': f"{topic['title']} " \

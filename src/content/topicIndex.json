@@ -1,8 +1,6 @@
 {
   "Math/Geometry_1/Angle": {
     "title": "Angles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Angle",
     "approaches": {
       "explanation": {
         "base": {
@@ -32,8 +30,6 @@
   },
   "Math/Geometry_1/AngleGroups": {
     "title": "Angle Groups",
-    "path": "/content/Math/Geometry_1",
-    "uid": "AngleGroups",
     "approaches": {
       "examples": {
         "base": {
@@ -93,8 +89,6 @@
   },
   "Math/Geometry_1/AngleTypes": {
     "title": "Angle Types",
-    "path": "/content/Math/Geometry_1",
-    "uid": "AngleTypes",
     "approaches": {
       "explanation": {
         "base": {
@@ -124,8 +118,6 @@
   },
   "Math/Geometry_1/AnglesAtIntersections": {
     "title": "Angles at Intersections",
-    "path": "/content/Math/Geometry_1",
-    "uid": "AnglesAtIntersections",
     "approaches": {
       "discover": {
         "base": {
@@ -203,8 +195,6 @@
   },
   "Math/Geometry_1/Area": {
     "title": "Area and Rectangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Area",
     "approaches": {
       "examples": {
         "base": {
@@ -264,8 +254,6 @@
   },
   "Math/Geometry_1/AreaCircle": {
     "title": "Area of a Circle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "AreaCircle",
     "approaches": {
       "discover": {
         "simple": {
@@ -343,8 +331,6 @@
   },
   "Math/Geometry_1/AreaTriangle": {
     "title": "Area of a Triangle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "AreaTriangle",
     "approaches": {
       "discover": {
         "simple": {
@@ -414,8 +400,6 @@
   },
   "Math/Geometry_1/Circle": {
     "title": "Circles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Circle",
     "approaches": {
       "examples": {
         "static": {
@@ -483,8 +467,6 @@
   },
   "Math/Geometry_1/CongruentTriangles": {
     "title": "Congruent Triangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "CongruentTriangles",
     "approaches": {
       "discover": {
         "simple": {
@@ -580,8 +562,6 @@
   },
   "Math/Geometry_1/Degrees": {
     "title": "Degrees",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Degrees",
     "approaches": {
       "explanation": {
         "base": {
@@ -631,8 +611,6 @@
   },
   "Math/Geometry_1/Equilateral": {
     "title": "Equilateral Triangle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Equilateral",
     "approaches": {
       "discover": {
         "simple": {
@@ -702,8 +680,6 @@
   },
   "Math/Geometry_1/ExternalAngles": {
     "title": "External Angle of a Triangle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "ExternalAngles",
     "approaches": {
       "discover": {
         "simple": {
@@ -781,8 +757,6 @@
   },
   "Math/Geometry_1/Introduction": {
     "title": "Why Study Shapes?",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Introduction",
     "approaches": {
       "explanation": {
         "base": {
@@ -808,8 +782,6 @@
   },
   "Math/Geometry_1/Isosceles": {
     "title": "Isosceles Triangle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Isosceles",
     "approaches": {
       "discover": {
         "simple": {
@@ -879,8 +851,6 @@
   },
   "Math/Geometry_1/ParallelLineDistance": {
     "title": "Parallel Line Distance",
-    "path": "/content/Math/Geometry_1",
-    "uid": "ParallelLineDistance",
     "approaches": {
       "discover": {
         "simple": {
@@ -930,8 +900,6 @@
   },
   "Math/Geometry_1/ParallelLines": {
     "title": "Parallel Lines",
-    "path": "/content/Math/Geometry_1",
-    "uid": "ParallelLines",
     "approaches": {
       "explanation": {
         "base": {
@@ -971,8 +939,6 @@
   },
   "Math/Geometry_1/ParallelSplitOfTriangle": {
     "title": "Parallel Split of Triangle",
-    "path": "/content/Math/Geometry_1",
-    "uid": "ParallelSplitOfTriangle",
     "approaches": {
       "discover": {
         "simple": {
@@ -1040,8 +1006,6 @@
   },
   "Math/Geometry_1/PointLineDistance": {
     "title": "Point to Line Distance",
-    "path": "/content/Math/Geometry_1",
-    "uid": "PointLineDistance",
     "approaches": {
       "discover": {
         "simple": {
@@ -1081,8 +1045,6 @@
   },
   "Math/Geometry_1/Quadrangles": {
     "title": "Quadrangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Quadrangles",
     "approaches": {
       "discover": {
         "simple": {
@@ -1152,8 +1114,6 @@
   },
   "Math/Geometry_1/Radians": {
     "title": "Radians",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Radians",
     "approaches": {
       "examples": {
         "static": {
@@ -1221,8 +1181,6 @@
   },
   "Math/Geometry_1/RectanglesAndSquares": {
     "title": "Rectangles and Squares",
-    "path": "/content/Math/Geometry_1",
-    "uid": "RectanglesAndSquares",
     "approaches": {
       "discover": {
         "simple": {
@@ -1283,8 +1241,6 @@
   },
   "Math/Geometry_1/RightAngleTriangles": {
     "title": "Right Angle Triangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "RightAngleTriangles",
     "approaches": {
       "discover": {
         "simple": {
@@ -1362,8 +1318,6 @@
   },
   "Math/Geometry_1/SideAngleRelationship": {
     "title": "Side Angle Relationships",
-    "path": "/content/Math/Geometry_1",
-    "uid": "SideAngleRelationship",
     "approaches": {
       "discover": {
         "simple": {
@@ -1433,8 +1387,6 @@
   },
   "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "SimilarTriangles",
     "approaches": {
       "explanation": {
         "equilangularIsSimilarProof": {
@@ -1488,8 +1440,6 @@
   },
   "Math/Geometry_1/ToDo/CalculatingPi": {
     "title": "Calculating Pi",
-    "path": "/content/Math/Geometry_1/ToDo",
-    "uid": "CalculatingPi",
     "approaches": {
       "explanation": {
         "base": {
@@ -1509,8 +1459,6 @@
   },
   "Math/Geometry_1/Triangles": {
     "title": "Triangles",
-    "path": "/content/Math/Geometry_1",
-    "uid": "Triangles",
     "approaches": {
       "discover": {
         "base": {
@@ -1588,8 +1536,6 @@
   },
   "Math/Trigonometry_1/Chord": {
     "title": "Chord",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Chord",
     "approaches": {
       "explanation": {
         "base": {
@@ -1609,8 +1555,6 @@
   },
   "Math/Trigonometry_1/Cosecant": {
     "title": "Cosecant",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Cosecant",
     "approaches": {
       "explanation": {
         "base": {
@@ -1630,8 +1574,6 @@
   },
   "Math/Trigonometry_1/Cosine": {
     "title": "Cosine",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Cosine",
     "approaches": {
       "explanation": {
         "base": {
@@ -1651,8 +1593,6 @@
   },
   "Math/Trigonometry_1/Cotangent": {
     "title": "Cotangent",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Cotangent",
     "approaches": {
       "explanation": {
         "base": {
@@ -1672,8 +1612,6 @@
   },
   "Math/Trigonometry_1/LawOfCosines": {
     "title": "Law of Cosines",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "LawOfCosines",
     "approaches": {
       "explanation": {
         "base": {
@@ -1693,8 +1631,6 @@
   },
   "Math/Trigonometry_1/LawOfSines": {
     "title": "Law of Sines",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "LawOfSines",
     "approaches": {
       "explanation": {
         "base": {
@@ -1714,8 +1650,6 @@
   },
   "Math/Trigonometry_1/Pythagoras": {
     "title": "Pythagorean Identity",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Pythagoras",
     "approaches": {
       "explanation": {
         "base": {
@@ -1735,8 +1669,6 @@
   },
   "Math/Trigonometry_1/Secant": {
     "title": "Secant",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Secant",
     "approaches": {
       "explanation": {
         "base": {
@@ -1756,8 +1688,6 @@
   },
   "Math/Trigonometry_1/Sine": {
     "title": "Sine",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Sine",
     "approaches": {
       "explanation": {
         "base": {
@@ -1777,8 +1707,6 @@
   },
   "Math/Trigonometry_1/Tangent": {
     "title": "Tangent",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "Tangent",
     "approaches": {
       "explanation": {
         "base": {
@@ -1798,8 +1726,6 @@
   },
   "Math/Trigonometry_1/UnitCircle": {
     "title": "Unit Circle",
-    "path": "/content/Math/Trigonometry_1",
-    "uid": "UnitCircle",
     "approaches": {
       "explanation": {
         "base": {

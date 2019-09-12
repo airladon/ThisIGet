@@ -4,7 +4,7 @@ import * as React from 'react';
 import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import LearningPathNavigator from './learningPathNavigator';
 import TopicTitle from './topicTitle';
-import getTopicIndez from '../../content/topicIndex';
+import getTopicIndex from '../../content/topicIndex';
 import TopicDescription from '../Lesson/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
@@ -34,8 +34,9 @@ type State = {
 };
 
 function getTopicDescription(uid: string) {
-  const lessons = getTopicIndez();
-  return lessons[uid];
+  const topicIndex = getTopicIndex();
+  console.log(topicIndex)
+  return topicIndex[uid];
 }
 
 export default class TopicComponent extends React.Component
@@ -63,7 +64,9 @@ export default class TopicComponent extends React.Component
     this.approachUID = path.slice(-2, -1)[0];
     this.versionUID = path.slice(-1)[0];
     /* eslint-enable */
-    this.topicDescription = getTopicDescription(this.topicUID);
+    const topicPath = window.location.pathname.replace(/^.*\/content\//, '')
+      .split('/').slice(0, -2).join('/');
+    this.topicDescription = getTopicDescription(topicPath);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -240,7 +243,7 @@ export default class TopicComponent extends React.Component
     return approaches;
   }
 
-  addTopics() {
+  addApproaches() {
     const output = [];
     const approaches = this.getApproaches();
     const approachUIDs = [
@@ -410,7 +413,7 @@ export default class TopicComponent extends React.Component
           />
         <div className="topic__approach_container">
           <div className="topic__approach_mid_tiles">
-            {this.addTopics()}
+            {this.addApproaches()}
           </div>
         </div>
         <Rating

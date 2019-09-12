@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db, lessons, version_list
+from app import app, db, lessons, version_list, topic_index
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -199,7 +199,7 @@ def get_content(path):
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
 
-    end_point = f"/content/{path}"
+    end_point = f"{path}"
 
     title = ''
     description = ''
@@ -635,9 +635,56 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     return jsonify({'status': status})
 
 
-# @app.route('/topicRatings/<topic_path>')
-# def get_topic_ratings(topic_path):
-#     for approach_uid, approaches in topic_index[]
+@app.route('/topicRatings/', defaults={'path': ''})  # noqa
+@app.route('/topicRatings/<path:path>')
+def get_topic_ratings(path):
+    if path not in topic_index:
+        return jsonify({'status': 'fail', 'message': 'path does not exist'})
+    ratings = {}
+    approaches = topic_index[path]['approaches']
+    for approach_uid, approach in approaches.items():
+        if approach_uid not in ratings:
+            ratings[approach_uid] = {}
+        for version_uid, versions in approach.items():
+            if version_uid not in ratings[approach_uid]:
+                ratings[approach_uid][version_uid] = {}
+            ratings[approach_uid][version_uid] = {
+                'num': 10,
+                'high': 2,
+                'ave': 2.3,
+                'user': 'not logged in'
+            }
+            if current_user.is_authenticated:
+                ratings[approach_uid][version_uid]['user'] = 4
+    return jsonify({'status': 'ok', 'ratings': ratings})
+
+
+@app.route('/versionRating/<path:path>')
+def get_version_rating(path):
+    print(path)
+    print(version_list)
+    if path not in version_list:
+        return jsonify({'status': 'fail', 'message': 'path does not exist'})
+
+    rating = {}
+    rating = {
+        'num': 10,
+        'high': 2,
+        'ave': 2.3,
+        'user': 'not logged in'
+    }
+    if current_user.is_authenticated:
+        rating['user'] = 4
+    return jsonify({'status': 'ok', 'ratings': rating})
+
+
+@app.route('/rateVersion/<path:path>')
+def rate_version(path):
+    if path not in version_list:
+        return jsonify({'status': 'fail', 'message': 'path does not exist'})
+    # set rating
+    # return new stats
+    return get_version_rating(path)
 
 
 @check_confirmed

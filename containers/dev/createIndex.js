@@ -7,9 +7,9 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
   const outObj = {};
   topics.forEach((topicPath) => {
     const splitLessonPath = topicPath.split('/');
-    const parentPath = splitLessonPath.slice(1, -1).join('/');
+    // const parentPath = splitLessonPath.slice(1, -1).join('/');
     const uid = splitLessonPath.slice(-(splitLessonPath.length - 2)).join('/');
-    const topicUid = splitLessonPath.slice(-1)[0];
+    // const topicUid = splitLessonPath.slice(-1)[0];
 
     const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
