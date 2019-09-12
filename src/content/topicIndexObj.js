@@ -15,6 +15,20 @@ export default function topicIndex() {
             fullTopic: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -66,6 +80,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'singlePage',
@@ -105,6 +133,20 @@ export default function topicIndex() {
             htmlTitle: 'Right Angle, Acute Angle, Obtuse Angle, Reflex Angle, Straight Angle, Full Angle',
             htmlDescription: 'Dynamic diagram that lets you explore the different types of important angles',
             fullTopic: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
           },
         },
         quiz: {
@@ -165,6 +207,20 @@ export default function topicIndex() {
             description: 'External links to sources of information for opposite, corresponding, alternate and interior angles',
             htmlTitle: 'Opposite angles, corresponding angles, alternate angles and interior angles links',
             htmlDescription: 'Various external links covering definition and examples of opposite, corresponding, alternate and interior angles when two or three lines intersect',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -234,6 +290,20 @@ export default function topicIndex() {
             description: 'External links to Area',
             htmlTitle: 'Introduction to Area Links',
             htmlDescription: 'External links covering an introduction to area, and areas of rectangles and squares',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -316,6 +386,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -387,6 +471,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -445,6 +543,20 @@ export default function topicIndex() {
             description: 'External links to information on circles',
             htmlTitle: 'Circles, circle properties and relationships links',
             htmlDescription: 'Explanations, proofs, examples and questions about Circles',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -535,6 +647,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -601,6 +727,20 @@ export default function topicIndex() {
             description: 'External links to sources of information for Degrees',
             htmlTitle: 'Measuring angles in degrees links',
             htmlDescription: 'Explanations, and examples about measuring angles in degrees',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -672,6 +812,20 @@ export default function topicIndex() {
             description: 'External links to equilateral triangles',
             htmlTitle: 'Equilateral triangles links',
             htmlDescription: 'External sources of information about equilateral triangles',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -754,6 +908,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -803,6 +971,20 @@ export default function topicIndex() {
             fullTopic: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
       },
       dependencies: [
       ],
@@ -850,6 +1032,20 @@ export default function topicIndex() {
             description: 'External links to isosceles triangles',
             htmlTitle: 'Isosceles triangles links',
             htmlDescription: 'External sources of information about isosceles triangles',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -914,6 +1110,20 @@ export default function topicIndex() {
             fullTopic: true,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -943,6 +1153,20 @@ export default function topicIndex() {
             htmlTitle: 'Interactive introduction to parallel lines',
             htmlDescription: 'See what parallel lines are, and when lines are parallel',
             fullTopic: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
           },
         },
         quiz: {
@@ -1024,6 +1248,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -1063,6 +1301,20 @@ export default function topicIndex() {
             htmlTitle: 'Introduction to distance between a point and line',
             htmlDescription: 'Properties of distance between point and a line',
             fullTopic: true,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
           },
         },
         summary: {
@@ -1126,6 +1378,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         quiz: {
           base: {
             type: 'presentation',
@@ -1184,6 +1450,20 @@ export default function topicIndex() {
             description: 'External links to information on radians',
             htmlTitle: 'Links introducing radians',
             htmlDescription: 'Explanations, proofs, examples and questions about radians',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -1266,6 +1546,20 @@ export default function topicIndex() {
             fullTopic: false,
           },
         },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
+            fullTopic: false,
+          },
+        },
         summary: {
           base: {
             type: 'presentation',
@@ -1333,6 +1627,20 @@ export default function topicIndex() {
             description: 'External links to sources of information for Right Angle Triangles',
             htmlTitle: 'Links for Right Angle Triangles',
             htmlDescription: 'External explanations of right angle triangles',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -1404,6 +1712,20 @@ export default function topicIndex() {
             description: 'External links to triangle side angle relationships',
             htmlTitle: 'Triangle side angle relationship links',
             htmlDescription: 'External links covering the relationship between the size of angles and length of sides in a triangle',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },
@@ -1551,6 +1873,20 @@ export default function topicIndex() {
             description: 'External links to sources of information for Triangles>',
             htmlTitle: 'Triangles Links',
             htmlDescription: 'Explanations, proofs, examples and questions about Triangles',
+            fullTopic: false,
+          },
+        },
+        dev: {
+          base: {
+            type: 'presentation',
+            title: 'base',
+            description: '',
+            fullTopic: false,
+          },
+          staticTest: {
+            type: 'presentation',
+            title: 'staticTest',
+            description: '',
             fullTopic: false,
           },
         },

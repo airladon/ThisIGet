@@ -121,7 +121,7 @@
 }
 
 .topic_button__type_icon_presentation {
-  background-image: $lesson-presentation;
+  background-image: $topic-presentation;
   background-size: contain;
   height: 20px;
   background-repeat: no-repeat;
@@ -129,12 +129,12 @@
 }
 
 .dropdown_button_list_item_active .topic_button__type_icon_presentation {
-  background-image: $lesson-presentation-active;
+  background-image: $topic-presentation-active;
 }
 
 .topic_button__type_icon_generic,
 .topic_button__type_icon_singlePage {
-  background-image: $lesson-singlePage;
+  background-image: $topic-singlePage;
   background-size: contain;
   height: 20px;
   background-repeat: no-repeat;
@@ -143,11 +143,11 @@
 
 .dropdown_button_list_item_active .topic_button__type_icon_generic,
 .dropdown_button_list_item_active .topic_button__type_icon_singlePage {
-  background-image: $lesson-singlePage-active;
+  background-image: $topic-singlePage-active;
 }
 
 .topic_button__type_icon_video {
-  background-image: $lesson-video;
+  background-image: $topic-video;
   background-size: contain;
   height: 20px;
   background-repeat: no-repeat;
@@ -155,7 +155,7 @@
 }
 
 .dropdown_button_list_item_active .topic_button__type_icon_video {
-  background-image: $lesson-video-active;
+  background-image: $topic-video-active;
 }
 
 .topic_button__portion_separator {
