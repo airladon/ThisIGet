@@ -69,7 +69,7 @@ module.exports = (env) => {
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
-  createTopicIndex(e.name, './src/content');
+  createTopicIndex(e.name, './src/content', './app/app');
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);

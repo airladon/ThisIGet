@@ -2,7 +2,7 @@ const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
 
-function createTopicIndex(buildMode, topicsPath) {
+function createTopicIndex(buildMode, topicsPath, appPath) {
   const topics = pathTools.getAllTopics(topicsPath);
   const outObj = {};
   topics.forEach((topicPath) => {
@@ -125,7 +125,16 @@ function createTopicIndex(buildMode, topicsPath) {
       outObj[uid].enabled = enabled;
     }
   });
-  fs.writeFile(`${topicsPath}/topicIndex.json`, JSON.stringify(outObj, null, 2), (err) => {
+
+  const outFileName = `${topicsPath}/topicIndex.json`;
+  const appFileName = `${appPath}/topicIndex.json`;
+  fs.writeFile(outFileName, JSON.stringify(outObj, null, 2), (err) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  });
+  fs.writeFile(appFileName, JSON.stringify(outObj, null, 2), (err) => {
     if (err) {
       // eslint-disable-next-line no-console
       console.log(err);
