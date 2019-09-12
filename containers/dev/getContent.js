@@ -53,7 +53,6 @@ function updateDetailsAndVersions() {
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
-    // const detailsPath = `./${lessonPath}/details.js`;
     if (fs.existsSync(detailsPathRelativeToCWD)) {
       /* eslint-disable global-require, import/no-dynamic-require */
       // $FlowFixMe

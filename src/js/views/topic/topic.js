@@ -12,7 +12,6 @@ function renderTopic(
   // lessonUID: string,
   // topicName: string,
   // versionUID: string,
-  // lessonDetails: {
   //   uid: string,
   //   title: string,
   //   dependencies: Array<string>,
@@ -38,7 +37,6 @@ function renderTopic(
         // lessonUID={lessonUID}
         // topicName={topicName}
         // versionUID={versionUID}
-        // lessonDetails={lessonDetails}
         // versionDetails={versionDetails}
       />,
       topicId,

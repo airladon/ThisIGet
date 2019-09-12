@@ -10,7 +10,7 @@ const { joinObjects } = Fig.tools.misc;
 
 export type TypeCommonLessonDiagram = {
   layout: {};
-  lesson: Object;
+  version: Object;
 } & Diagram;
 
 export default class CommonLessonDiagram extends Diagram {

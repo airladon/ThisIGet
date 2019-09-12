@@ -137,12 +137,12 @@ export default function tester(optionsOrScenario, ...scenarios) {
           width: options.viewPort.width,
           height: options.viewPort.width / 2,
         });
-        const lessonContainer = await page.$('#topic__content');
-        const lessonBox = await lessonContainer.boundingBox();
-        const scrollTo = Math.floor(lessonBox.y);
+        const topicContainer = await page.$('#topic__content');
+        const topicBox = await topicContainer.boundingBox();
+        const scrollTo = Math.floor(topicBox.y);
         await page.setViewport({
           width: options.viewPort.width,
-          height: Math.floor(lessonBox.height),
+          height: Math.floor(topicBox.height),
         });
 
         await page.evaluate((y) => {

@@ -149,23 +149,23 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   }
 
   setSimplePageSize() {
-    const lessonContent = document.getElementById('topic__content');
-    if (lessonContent == null) {
+    const topicContent = document.getElementById('topic__content');
+    if (topicContent == null) {
       return;
     }
-    const qrWidth = Math.min(600, lessonContent.clientWidth);
+    const qrWidth = Math.min(600, topicContent.clientWidth);
     const qrHeight = qrWidth * 2 / 3;
     this.setRootElement(qrWidth, qrHeight);
   }
 
   setPresentationPageSize() {
     const overlay = document.getElementById('topic__content_diagram');
-    const lessonContent = document.getElementById('topic__content');
-    if (overlay == null || lessonContent == null) {
+    const topicContent = document.getElementById('topic__content');
+    if (overlay == null || topicContent == null) {
       return;
     }
     // const fontSize = parseFloat(window
-    //   .getComputedStyle(lessonContent, null)
+    //   .getComputedStyle(topicContent, null)
     //   .getPropertyValue('font-size'));
     // const width = overlay.clientWidth;
     const height = overlay.clientHeight;
@@ -178,12 +178,12 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
   setSinglePageSize() {
     const overlay = document.getElementById('single_page_topic__qr__overlay');
-    const lessonContent = document.getElementById('topic__content');
-    if (overlay == null || lessonContent == null) {
+    const topicContent = document.getElementById('topic__content');
+    if (overlay == null || topicContent == null) {
       return;
     }
     // const fontSize = parseFloat(window
-    //   .getComputedStyle(lessonContent, null)
+    //   .getComputedStyle(topicContent, null)
     //   .getPropertyValue('font-size'));
     const width = overlay.clientWidth;
     const height = overlay.clientHeight;

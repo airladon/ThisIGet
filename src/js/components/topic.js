@@ -41,7 +41,6 @@ function getTopicDescription(uid: string) {
 export default class TopicComponent extends React.Component
                                     <Props, State> {
   version: Object;
-  lessonDetails: Object;
   key: number;
   state: State;
   // diagrams: Object;
@@ -406,7 +405,6 @@ export default class TopicComponent extends React.Component
           // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
           // imgLink={`${window.location.pathname}/tile.svg`}
-          // imgLink={`${this.topic.lessonDetails.imgLink}`}
           key='1'
           label={this.version.content.title}
           />
