@@ -34,8 +34,8 @@ class Content extends SimpleFormatContent {
         <div
           id={`link_${index}`}
           className="topic__qr_action_word"
-          onClick={window.lessonFunctions.qr.bind(
-            window.lessonFunctions,
+          onClick={window.topicFunctions.qr.bind(
+            window.topicFunctions,
             `link_${index}`,
             `${details.path}/${topicUID}/${versionToTest}/${qrid}`,
           )}>

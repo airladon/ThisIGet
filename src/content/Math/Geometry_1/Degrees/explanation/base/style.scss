@@ -18,11 +18,11 @@ body {
 .in_lesson__fraction_table {
   text-align: center;
   // color: color('diagram', 'text-base');
-  // font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  // font-size: calc(var(--topic__diagram-font-size) * 0.8);
   table-layout: fixed;
-  width: calc(var(--lesson__diagram-font-size) * 10);
-  margin-left: calc(var(--lesson__diagram-font-size) * 1);
-  // margin-top: calc(var(--lesson__diagram-font-size) * 3);
+  width: calc(var(--topic__diagram-font-size) * 10);
+  margin-left: calc(var(--topic__diagram-font-size) * 1);
+  // margin-top: calc(var(--topic__diagram-font-size) * 3);
   border-spacing: 0;
   background-color: color('black', 'darker');
   color: color('grey', 'light');

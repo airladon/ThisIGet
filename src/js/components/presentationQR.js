@@ -13,18 +13,18 @@ export default class PresentationQR extends React.Component
                                     <Props> {
   renderContent() {
     return <div id={this.props.id} className="lesson__presentation_qr__container">
-        <div id="id_qr_diagram" className="diagram__container lesson__diagram">
+        <div id="id_qr_diagram" className="diagram__container topic__diagram">
           <canvas id="id_qr_diagram__text" className='diagram__text'>
           </canvas>
           <canvas id="id_qr_diagram__gl" className='diagram__gl'>
           </canvas>
           <div id="id_qr_diagram__html" className='diagram__html'>
-            <div id="id_lesson__qr_diagram_container">
+            <div id="id_topic__qr_diagram_container">
             </div>
-            <div id="id_lesson__qr_description_container" className="lesson__qr_description_container">
-              <div className="lesson__qr_description_table_cell">
-                <div className="lesson__qr_description_relative">
-                  <div className="lesson__qr_description_text" id="id_lesson__qr_description">
+            <div id="id_topic__qr_description_container" className="topic__qr_description_container">
+              <div className="topic__qr_description_table_cell">
+                <div className="topic__qr_description_relative">
+                  <div className="topic__qr_description_text" id="id_topic__qr_description">
                   </div>
                 </div>
               </div>
@@ -38,10 +38,10 @@ export default class PresentationQR extends React.Component
   }
 
   render() {
-    const title = <div id="id_lesson__qr__title_text__pres"></div>;
+    const title = <div id="id_topic__qr__title_text__pres"></div>;
     const link = <a
-        className="lesson__qr__link_link"
-        id="id_lesson__qr__link_link__pres"
+        className="topic__qr__link_link"
+        id="id_topic__qr__link_link__pres"
         href={''}
         // rel='noreferrer noopener'
         // target="_blank"
@@ -49,11 +49,11 @@ export default class PresentationQR extends React.Component
         Go to lesson to see why
     </a>;
     return <QuickReferencePopup
-      id="id_lesson__qr__content_pres"
+      id="id_topic__qr__content_pres"
       content={this.renderContent()}
       title={title}
       link={link}
-      closeId="id_lesson__qr__pres_container"
+      closeId="id_topic__qr__pres_container"
       onClose={this.props.onClose}
     />;
   }

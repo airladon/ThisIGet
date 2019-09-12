@@ -16,11 +16,11 @@
 }
 
 :root {
-  --figureone__eqn_nav__font_size: calc(var(--lesson__diagram-font-size) * 0.6);
+  --figureone__eqn_nav__font_size: calc(var(--topic__diagram-font-size) * 0.6);
 }
 
 .figureone__eqn_nav__table {
-  font-size: calc(var(--lesson__diagram-font-size) * 1);
+  font-size: calc(var(--topic__diagram-font-size) * 1);
   color: color('diagram', 'disabled', 'light');
 
   --figureone__eqn_nav__font_size: 1em;
@@ -116,7 +116,7 @@
 // ******************************************
 
 // .figureone__eqn_nav__description_only__table {
-//   font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+//   font-size: calc(var(--topic__diagram-font-size) * 0.6);
 //   color: color('diagram', 'disabled', 'base');
 // }
 .figureone__eqn_nav__description_only__currentRow {

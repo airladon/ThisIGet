@@ -273,9 +273,9 @@ class PresentationFormat extends SimpleFormat {
       const thisContent = section.getContent(false);
       const lastContent = lastSection.getContent(false);
       if (thisContent !== lastContent) {
-        const element = document.getElementById('id_lesson__diagram_text');
+        const element = document.getElementById('id_topic__diagram_text');
         if (element != null) {
-          element.classList.add('lesson__diagram_text_fade_in');
+          element.classList.add('topic__diagram_text_fade_in');
         }
       }
     }

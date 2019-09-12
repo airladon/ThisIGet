@@ -213,7 +213,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             });
             index += 1;
             // eslint-disable-next-line no-await-in-loop
-            const closeButtons = await page.$$('.lesson__qr__title_close');
+            const closeButtons = await page.$$('.topic__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
               // eslint-disable-next-line no-await-in-loop

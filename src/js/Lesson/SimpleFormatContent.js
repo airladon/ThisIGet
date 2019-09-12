@@ -85,7 +85,7 @@ class SimpleFormatContent {
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
     // this.qrDiagram.container.style.zIndex = '10';
-    const overlay = document.getElementById('simple_lesson__qr__overlay');
+    const overlay = document.getElementById('simple_topic__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '10';
     }
@@ -93,7 +93,7 @@ class SimpleFormatContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
-    const overlay = document.getElementById('simple_lesson__qr__overlay');
+    const overlay = document.getElementById('simple_topic__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '-1';
     }
@@ -104,7 +104,7 @@ class SimpleFormatContent {
     qrPath: string,
     qrid: string,
   ) {
-    const qr = document.getElementById('id_lesson__qr__content_pres');
+    const qr = document.getElementById('id_topic__qr__content_pres');
     if (qr != null) {
       qr.classList.remove('lesson__hide');
     }

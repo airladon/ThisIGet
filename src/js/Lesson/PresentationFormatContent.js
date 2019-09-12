@@ -693,7 +693,7 @@ class PresentationFormatContent extends SimpleFormatContent {
   // eslint-disable-next-line class-methods-use-this
   prepareToShowQR() {
     // this.qrDiagram.container.style.zIndex = '10';
-    const overlay = document.getElementById('presentation_lesson__qr__overlay');
+    const overlay = document.getElementById('presentation_topic__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '10';
     }
@@ -719,7 +719,7 @@ class PresentationFormatContent extends SimpleFormatContent {
 
   // eslint-disable-next-line class-methods-use-this
   prepareToHideQR() {
-    const overlay = document.getElementById('presentation_lesson__qr__overlay');
+    const overlay = document.getElementById('presentation_topic__qr__overlay');
     if (overlay != null) {
       overlay.style.zIndex = '-1';
     }
@@ -975,7 +975,7 @@ class PresentationFormatContent extends SimpleFormatContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `topic__qr_action_word ${options.classes}`;
     }
-    return click(window.lessonFunctions.qr, [window.lessonFunctions, '', linkIn], options);
+    return click(window.topicFunctions.qr, [window.topicFunctions, '', linkIn], options);
   }
 
   // eslint-disable-next-line class-methods-use-this

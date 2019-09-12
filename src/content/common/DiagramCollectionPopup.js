@@ -29,10 +29,10 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setTitle(title: string, modifiers: Object = {}) {
     const modifiedText = html.applyModifiers(title, modifiers);
 
-    const elem = document.getElementById('id_lesson__qr__title_text__pres');
+    const elem = document.getElementById('id_topic__qr__title_text__pres');
     if (elem != null) {
       elem.innerHTML = modifiedText;
-      html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+      html.setOnClicks(modifiers, 'topic__popup_box__action_word');
     }
     this.modifiers = modifiers;
   }
@@ -46,20 +46,20 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
         text += `<p>${paragraph}</p>`;
       });
     }
-    const elem = document.getElementById('id_lesson__qr_description');
+    const elem = document.getElementById('id_topic__qr_description');
     if (elem != null) {
       let modifiedText = html.applyModifiers(text, modifiers);
       modifiedText = modifiedText.replace(/ interactive_word/g, ' ');
       elem.innerHTML = modifiedText;
 
-      html.setOnClicks(modifiers, 'lesson__popup_box__action_word');
+      html.setOnClicks(modifiers, 'topic__popup_box__action_word');
     }
     this.modifiers = modifiers;
   }
 
   // eslint-disable-next-line class-methods-use-this
   setLink(link: string = '') {
-    const a = document.getElementById('id_lesson__qr__link_link__pres');
+    const a = document.getElementById('id_topic__qr__link_link__pres');
     if (a != null) {
       // $FlowFixMe
       a.href = `${window.location.origin}/content/${link}`;
@@ -88,7 +88,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     element: DiagramElementCollection | DiagramElementPrimative,
     lensWindow: Rect,
   ) {
-    const diagramContainer = document.getElementById('id_lesson__qr_diagram_container');
+    const diagramContainer = document.getElementById('id_topic__qr_diagram_container');
     element.updateLimits(this.diagram.limits, this.diagram.spaceTransforms);
 
     if (diagramContainer != null) {
@@ -118,8 +118,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     };
     const options = joinObjects({}, defaultOptions, optionsIn);
     const { location, size } = options;
-    const diagramContainer = document.getElementById('id_lesson__qr_diagram_container');
-    const textContainer = document.getElementById('id_lesson__qr_description_container');
+    const diagramContainer = document.getElementById('id_topic__qr_diagram_container');
+    const textContainer = document.getElementById('id_topic__qr_description_container');
 
     if (textContainer == null || diagramContainer == null) {
       return;
@@ -177,7 +177,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
 
 
   setSinglePageSize() {
-    const overlay = document.getElementById('single_page_lesson__qr__overlay');
+    const overlay = document.getElementById('single_page_topic__qr__overlay');
     const lessonContent = document.getElementById('topic__content');
     if (overlay == null || lessonContent == null) {
       return;
@@ -202,8 +202,8 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
   setRootElement(width: number, height: number) {
     const rootElement = document.documentElement;
     if (rootElement != null) {
-      rootElement.style.setProperty('--lesson__qr_height', `${height}px`);
-      rootElement.style.setProperty('--lesson__qr_width', `${width}px`);
+      rootElement.style.setProperty('--topic__qr_height', `${height}px`);
+      rootElement.style.setProperty('--topic__qr_width', `${width}px`);
     }
   }
 
@@ -238,7 +238,7 @@ export default class PopupBoxCollection extends CommonDiagramCollection {
     this.prepareToHideAll();
     this.diagram.setElementsToCollection(new DiagramElementCollection());
     this.diagram.animateNextFrame();
-    const element = document.getElementById(`id_lesson__popup_box__${this.id}`);
+    const element = document.getElementById(`id_topic__popup_box__${this.id}`);
     if (element != null) {
       element.remove();
     }

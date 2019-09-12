@@ -97,18 +97,18 @@ export default class SinglePageFormatComponent extends React.Component
 
   showStaticQR(id: string, parameters: string) {
     this.setState({ qr: window.quickReference[parameters] });
-    const presQR = document.getElementById('id_lesson__qr__pres_container');
+    const presQR = document.getElementById('id_topic__qr__pres_container');
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
-    const element = document.getElementById('id_lesson__qr__static_container');
+    const element = document.getElementById('id_topic__qr__static_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
 
-    align('id_lesson__qr__static_container', 'id_single_page_lesson__text_container', id);
+    align('id_topic__qr__static_container', 'id_single_page_lesson__text_container', id);
     this.afterUpdate = () => {
-      align('id_lesson__qr__static_container', 'topic__content', id);
+      align('id_topic__qr__static_container', 'topic__content', id);
     };
   }
 
@@ -119,22 +119,22 @@ export default class SinglePageFormatComponent extends React.Component
       const width = Math.min(containerRect.width - 40, 600);
       const doc = document.documentElement;
       if (doc != null) {
-        doc.style.setProperty('--lesson__qr__content_width', `calc(${width}px - 1em)`);
-        doc.style.setProperty('--lesson__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
+        doc.style.setProperty('--topic__qr__content_width', `calc(${width}px - 1em)`);
+        doc.style.setProperty('--topic__qr__content_height', `calc((${width}px - 1em) / 1.5)`);
       }
     }
-    const staticQR = document.getElementById('id_lesson__qr__static_container');
+    const staticQR = document.getElementById('id_topic__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
     }
-    const element = document.getElementById('id_lesson__qr__pres_container');
+    const element = document.getElementById('id_topic__qr__pres_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.version.content.showQR(path, qrid);
-    align('id_lesson__qr__pres_container', 'id_single_page_lesson__text_container', id);
+    align('id_topic__qr__pres_container', 'id_single_page_lesson__text_container', id);
     this.version.content.qrDiagram.resize();
     this.version.content.qrDiagram.animateNextFrame();
   }
@@ -157,7 +157,7 @@ export default class SinglePageFormatComponent extends React.Component
   // }
 
   componentDidMount() {
-    window.lessonFunctions = {
+    window.topicFunctions = {
       qr: (id, parameters) => {
         if (React.isValidElement(window.quickReference[parameters])) {
           this.showStaticQR(id, parameters);
@@ -189,11 +189,11 @@ export default class SinglePageFormatComponent extends React.Component
 
   // eslint-disable-next-line class-methods-use-this
   close() {
-    let element = document.getElementById('id_lesson__qr__content_static');
+    let element = document.getElementById('id_topic__qr__content_static');
     if (element != null) {
       element.classList.add('lesson__hide');
     }
-    element = document.getElementById('id_lesson__qr__content_pres');
+    element = document.getElementById('id_topic__qr__content_pres');
     if (element != null) {
       element.classList.add('lesson__hide');
     }
@@ -340,11 +340,11 @@ export default class SinglePageFormatComponent extends React.Component
           className="single_page_lesson__text_container_text"
           dangerouslySetInnerHTML={ { __html: output } }
         />
-        <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+        <div id="id_topic__qr__static_container" className="topic__qr__container lesson__hide">
                   {this.state.qr}
         </div>
-        <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
-          <PresentationQR id="id_lesson__qr__content_pres__overlay"/>
+        <div id="id_topic__qr__pres_container" className="topic__qr__container lesson__hide">
+          <PresentationQR id="id_topic__qr__content_pres__overlay"/>
         </div>
     </div>;
   }
@@ -353,7 +353,7 @@ export default class SinglePageFormatComponent extends React.Component
     return <div id={this.version.content.htmlId} className="single_page_lesson__container">
       {this.renderContent()}
       <canvas id="hidden_offscreen"></canvas>
-      <div id={this.version.content.diagramHtmlId} className="diagram__container lesson__diagram single_page_lesson__diagram_container">
+      <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram single_page_topic__diagram_container">
         <canvas id="id_diagram__gl__offscreen" className="diagram__gl__offscreen">
         </canvas>
         <canvas id="id_diagram__text__offscreen" className="diagram__text__offscreen">

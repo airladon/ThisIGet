@@ -72,7 +72,7 @@ class SinglePageFormatContent extends SimpleFormatContent {
       options = joinObjects({}, defaultOptions, colorOrOptions);
       options.classes = `topic__qr_action_word ${options.classes}`;
     }
-    return click(window.lessonFunctions.qr, [window.lessonFunctions, options.id, link], options);
+    return click(window.topicFunctions.qr, [window.topicFunctions, options.id, link], options);
   }
 
   // eslint-disable-next-line class-methods-use-this

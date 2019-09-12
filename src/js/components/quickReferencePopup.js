@@ -18,12 +18,12 @@ export default class QuickReferencePopup extends React.Component
   renderContent() {
     if (typeof this.props.content === 'string') {
       return <div
-        className="lesson__qr__content"
+        className="topic__qr__content"
         dangerouslySetInnerHTML={ { __html: this.props.content } }>
       </div>;
     }
     return <div
-      className="lesson__qr__content">
+      className="topic__qr__content">
       {this.props.content}
     </div>;
   }
@@ -51,8 +51,8 @@ export default class QuickReferencePopup extends React.Component
     let link = '';
     if (typeof this.props.link === 'string') {
       link = <a
-        className="lesson__qr__link_link"
-        id="id_lesson__qr__link_link"
+        className="topic__qr__link_link"
+        id="id_topic__qr__link_link"
         href={`${window.location.origin}/content/${this.props.link}`}
         // rel='noreferrer noopener'
         // target="_blank"
@@ -67,19 +67,19 @@ export default class QuickReferencePopup extends React.Component
 
     return <div
       id={this.props.id}
-      className="lesson__qr"
+      className="topic__qr"
       >
-      <div className="lesson__qr__title">
+      <div className="topic__qr__title">
         <div
-          className="lesson__qr__title_text"
-          // id="id_lesson__qr__title_text"
+          className="topic__qr__title_text"
+          // id="id_topic__qr__title_text"
         >
           {this.props.title}
         </div>
-        <div className="lesson__qr__title_close__container">
-          <div className="lesson__qr__title_close__cell">
+        <div className="topic__qr__title_close__container">
+          <div className="topic__qr__title_close__cell">
             <div
-              className="lesson__qr__title_close"
+              className="topic__qr__title_close"
               onClick={this.close.bind(this)}
             >
               X
@@ -87,10 +87,10 @@ export default class QuickReferencePopup extends React.Component
           </div>
         </div>
       </div>
-      <div className="lesson__qr__content_container">
+      <div className="topic__qr__content_container">
         {this.renderContent()}
       </div>
-      <div className="lesson__qr__link_container">
+      <div className="topic__qr__link_container">
         {link}
       </div>
     </div>;

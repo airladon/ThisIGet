@@ -10,13 +10,13 @@
 }
 
 .approach__quiz__answer_text {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  font-size: calc(var(--topic__diagram-font-size) * 0.8);
   color: color('white');
   margin-bottom: 0.6em;
 }
 
 .approach__quiz__answer_details_text {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.5);
+  font-size: calc(var(--topic__diagram-font-size) * 0.5);
   color: color('white');
   margin-bottom: 0.6em;
   width: 20em;
@@ -24,19 +24,19 @@
 
 .approach__quiz__next_steps {
   margin-top: 0.9em;
-  // font-size: calc(var(--lesson__diagram-font-size) * 0.6);
+  // font-size: calc(var(--topic__diagram-font-size) * 0.6);
 }
 
 .approach__quiz__button {
-  border-radius: calc(var(--lesson__diagram-font-size) * 0.35);
+  border-radius: calc(var(--topic__diagram-font-size) * 0.35);
   color: color('white', 'dark');
   text-align: center;
   cursor: pointer;
   border: 1px solid color('black', 'light');
-  padding: calc(var(--lesson__diagram-font-size) * 0.2);
-  padding-left: calc(var(--lesson__diagram-font-size) * 0.5);
-  padding-right: calc(var(--lesson__diagram-font-size) * 0.5);
-  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  padding: calc(var(--topic__diagram-font-size) * 0.2);
+  padding-left: calc(var(--topic__diagram-font-size) * 0.5);
+  padding-right: calc(var(--topic__diagram-font-size) * 0.5);
+  font-size: calc(var(--topic__diagram-font-size) * 0.7);
 }
 
 .approach__quiz__button:hover {
@@ -109,12 +109,12 @@
 .approach__quiz_input {
   border: 0;
   // margin: 0.6em;
-  padding: calc(var(--lesson__diagram-font-size) * 0.5);
-  border-radius: calc(var(--lesson__diagram-font-size) * 0.2);
+  padding: calc(var(--topic__diagram-font-size) * 0.5);
+  border-radius: calc(var(--topic__diagram-font-size) * 0.2);
   color: color('diagram', 'disabled', 'darker');
   text-align: center;
   background-color: color('white', 'base');
-  font-size: calc(var(--lesson__diagram-font-size) * 0.7);
+  font-size: calc(var(--topic__diagram-font-size) * 0.7);
   font-weight: 200;
   width: 4em;
 }
@@ -150,7 +150,7 @@
 // ******************************************************
 // Multiple choice box
 .approach__quiz_multiple_choice_box_table {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  font-size: calc(var(--topic__diagram-font-size) * 0.8);
   color: color('white', 'dark');
 }
 
@@ -167,20 +167,20 @@
 }
 
 .approach__quiz_multiple_choice_box_col1 {
-  padding: calc(var(--lesson__diagram-font-size) * 0.1);
-  padding-right: calc(var(--lesson__diagram-font-size) * 0.4);
-  padding-left: calc(var(--lesson__diagram-font-size) * 1);
+  padding: calc(var(--topic__diagram-font-size) * 0.1);
+  padding-right: calc(var(--topic__diagram-font-size) * 0.4);
+  padding-left: calc(var(--topic__diagram-font-size) * 1);
 }
 
 .approach__quiz_multiple_choice_box_col2 {
-  padding-right: calc(var(--lesson__diagram-font-size) * 1);
+  padding-right: calc(var(--topic__diagram-font-size) * 1);
 }
 
 .approach__quiz_multiple_choice_box_circle {
-  width: calc(var(--lesson__diagram-font-size) * 0.5);
-  height: calc(var(--lesson__diagram-font-size) * 0.5);
-  border-radius: calc(var(--lesson__diagram-font-size) * 0.25);
-  border: calc(var(--lesson__diagram-font-size) * 0.08) solid;
+  width: calc(var(--topic__diagram-font-size) * 0.5);
+  height: calc(var(--topic__diagram-font-size) * 0.5);
+  border-radius: calc(var(--topic__diagram-font-size) * 0.25);
+  border: calc(var(--topic__diagram-font-size) * 0.08) solid;
   // color: color('diagram', 'disabled', 'base');
 }
 

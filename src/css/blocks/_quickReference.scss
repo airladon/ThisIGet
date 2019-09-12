@@ -1,9 +1,9 @@
 :root {
-  --lesson__qr__content_width: calc(100vw - 80px - 1em);
-  --lesson__qr__content_height: calc((100vw - 80px - 1em) / 1.5);
+  --topic__qr__content_width: calc(100vw - 80px - 1em);
+  --topic__qr__content_height: calc((100vw - 80px - 1em) / 1.5);
 }
 
-.lesson__qr {
+.topic__qr {
   width: 100%;
   height: 100%;
   // // 600px content
@@ -23,7 +23,7 @@
   // border-radius: 0.4em;
 }
 
-.lesson__qr img {
+.topic__qr img {
   max-width: 100%;
   max-height: 100%;
   transform: translate(-50%, 0%);
@@ -31,7 +31,7 @@
   position: relative;
 }
 
-.lesson__qr__container {
+.topic__qr__container {
   // 600px content
   // 1em padding left/right
   max-width: calc(600px + 1em);
@@ -59,12 +59,12 @@
                       supported by Chrome and Opera */
 }
 
-// .id_lesson__qr__static_container {
+// .id_topic__qr__static_container {
 //   position: absolute;
 //   margin-right: 20px;
 // }
 
-// .id_lesson__qr__pres_container {
+// .id_topic__qr__pres_container {
 //   position: absolute;
 //   // margin-right: 20px;
 // }
@@ -72,14 +72,14 @@
 // ///////////////////////////////////////
 // Title
 // ///////////////////////////////////////
-.lesson__qr__title {
+.topic__qr__title {
   display: table;
   width: 100%;
   padding-bottom: 0.5em;
   height: 2em;
 }
 
-.lesson__qr__title_text {
+.topic__qr__title_text {
   display: table-cell;
   text-align: left;
   vertical-align: middle;
@@ -92,23 +92,23 @@
 }
 
 @media screen and (max-width: 600px) {
-  .lesson__qr__title_text {
+  .topic__qr__title_text {
     font-size: 1em;
   }
 }
 
-.lesson__qr__title_close__container {
+.topic__qr__title_close__container {
   display: table;
   height: 100%;
   float: right;
 }
 
-.lesson__qr__title_close__cell {
+.topic__qr__title_close__cell {
   display: table-cell;
   vertical-align: middle;
 }
 
-.lesson__qr__title_close {
+.topic__qr__title_close {
   display: table-cell;
   color: color('grey', 'dark');
   width: 2em;
@@ -121,7 +121,7 @@
   font-weight: 100;
 }
 
-.lesson__qr__title_close:hover {
+.topic__qr__title_close:hover {
   background-color: color('white', 'lightest');
   cursor: pointer;
 }
@@ -129,7 +129,7 @@
 // ///////////////////////////////////////
 // Content
 // ///////////////////////////////////////
-.lesson__qr__content_container {
+.topic__qr__content_container {
   overflow-y: scroll;
   max-height: 400px;
   max-width: 600px;
@@ -137,44 +137,44 @@
   border: 1px solid color('white', 'lighter');
 }
 
-.lesson__qr__content {
+.topic__qr__content {
   padding: 0.8em;
   width: 100%;
   height: 100%;
 }
 
-.lesson__qr__content p:last-child {
+.topic__qr__content p:last-child {
   margin-bottom: 0;
 }
 
-#id_lesson__qr__content_pres {
+#id_topic__qr__content_pres {
   pointer-events: auto;
 }
 
-#id_lesson__qr__content_pres .lesson__qr__content {
+#id_topic__qr__content_pres .topic__qr__content {
   padding: 0;
 }
 
-#id_lesson__qr__content_pres .lesson__qr__content_container {
+#id_topic__qr__content_pres .topic__qr__content_container {
   overflow-y: hidden;
 }
 
 // ///////////////////////////////////////
 // Link
 // ///////////////////////////////////////
-.lesson__qr__link_container {
+.topic__qr__link_container {
   text-align: center;
   padding-top: 0.5em;
   height: 2em;
 }
 
-.lesson__qr__link_link {
+.topic__qr__link_link {
   font-size: 0.8em;
   color: color('black', 'lighter');
   text-decoration: underline;
 }
 
-.lesson__qr__link_link:hover {
+.topic__qr__link_link:hover {
   // text-decoration: none;
   text-decoration: underline;
 }
@@ -182,41 +182,41 @@
 // ///////////////////////////////////////
 // Presentation QR specific
 // ///////////////////////////////////////
-#topic__content_diagram .lesson__qr__container {
+#topic__content_diagram .topic__qr__container {
   background-color: color('black', 'dark');
   padding: 0.5em;
   border: 1px solid color('black', 'light');
   box-shadow: 0 0 3em color('black', 'dark');
 }
 
-#topic__content_diagram .lesson__qr__title_text {
+#topic__content_diagram .topic__qr__title_text {
   color: color('white', 'dark');
 }
 
-#topic__content_diagram .lesson__qr__title_close {
+#topic__content_diagram .topic__qr__title_close {
   color: color('white', 'dark');
   border: 1px solid color('white', 'dark');
 }
 
-#topic__content_diagram .lesson__qr__title_close:hover {
+#topic__content_diagram .topic__qr__title_close:hover {
   background-color: color('black', 'light');
 }
 
-#id_lesson__qr__pres_container .lesson__qr__content_container {
+#id_topic__qr__pres_container .topic__qr__content_container {
   border: 0;
 }
 
-#topic__content_diagram .lesson__qr__link_link {
+#topic__content_diagram .topic__qr__link_link {
   color: color('white', 'dark');
 }
 
-#id_lesson__qr__content_pres__overlay {
+#id_topic__qr__content_pres__overlay {
   position: relative;
   pointer-events: auto;
   font-size: initial;
   z-index: 1;
-  width: var(--lesson__qr__content_width);
-  height: var(--lesson__qr__content_height);
+  width: var(--topic__qr__content_width);
+  height: var(--topic__qr__content_height);
   margin-left: auto;
   margin-right: auto;
 }
@@ -227,33 +227,33 @@
   color: color('diagram', 'text-base');
 }
 
-.lesson__qr_description_container {
+.topic__qr_description_container {
   padding: 1em;
   display: table;
 }
 
-#id_lesson__qr_diagram_container {
+#id_topic__qr_diagram_container {
   display: inline-block;
   width: 50%;
   height: 50%;
 }
 
-.lesson__qr_description_table_cell {
+.topic__qr_description_table_cell {
   display: table-cell;
   vertical-align: middle;
 }
 
-.lesson__qr_description_relative {
+.topic__qr_description_relative {
   position: relative;
   overflow-y: scroll;
   max-height: 100%;
 }
 
-.lesson__qr_description_text {
+.topic__qr_description_text {
   text-align: left;
 }
 
-#topic__content_diagram #id_lesson__qr__pres_container {
+#topic__content_diagram #id_topic__qr__pres_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;
@@ -263,17 +263,17 @@
 // ///////////////////////////////////////
 // Static QR specific
 // ///////////////////////////////////////
-#id_lesson__qr__content_static {
+#id_topic__qr__content_static {
   // margin-right: 20px;
   pointer-events: auto;
 }
 
-#topic__content_diagram .lesson__qr__content_container {
-  max-width: var(--lesson__qr__content_width);
-  max-height: var(--lesson__qr__content_height);
+#topic__content_diagram .topic__qr__content_container {
+  max-width: var(--topic__qr__content_width);
+  max-height: var(--topic__qr__content_height);
 }
 
-#topic__content_diagram #id_lesson__qr__static_container {
+#topic__content_diagram #id_topic__qr__static_container {
   transform: translate(-50%, -50%);
   left: 50%;
   top: 50%;

@@ -138,8 +138,8 @@ export default class PresentationFormatComponent extends React.Component
       const width = Math.min(containerRect.width * 0.7, 600);
       const doc = document.documentElement;
       if (doc != null) {
-        doc.style.setProperty('--lesson__qr__content_width', `${width}px`);
-        doc.style.setProperty('--lesson__qr__content_height', `calc(${width / 1.5}px)`);
+        doc.style.setProperty('--topic__qr__content_width', `${width}px`);
+        doc.style.setProperty('--topic__qr__content_height', `calc(${width / 1.5}px)`);
       }
     }
 
@@ -153,28 +153,28 @@ export default class PresentationFormatComponent extends React.Component
   }
 
   showStaticQR(id: string, parameters: string) {
-    const presQR = document.getElementById('id_lesson__qr__pres_container');
+    const presQR = document.getElementById('id_topic__qr__pres_container');
     if (presQR != null) {
       presQR.classList.add('lesson__hide');
     }
     this.setState({ qr: window.quickReference[parameters] });
-    this.setCSSVariables('id_lesson__qr__static_container');
-    const element = document.getElementById('id_lesson__qr__static_container');
+    this.setCSSVariables('id_topic__qr__static_container');
+    const element = document.getElementById('id_topic__qr__static_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
   }
 
   showPresQR(id: string, parameters: string) {
-    const staticQR = document.getElementById('id_lesson__qr__static_container');
+    const staticQR = document.getElementById('id_topic__qr__static_container');
     if (staticQR != null) {
       staticQR.classList.add('lesson__hide');
     }
-    this.setCSSVariables('id_lesson__qr__pres_container');
+    this.setCSSVariables('id_topic__qr__pres_container');
     const path = parameters.split('/').slice(0, -1).join('/');
     const qrid = parameters.split('/').slice(-1)[0];
     this.version.content.showQR(path, qrid);
-    const element = document.getElementById('id_lesson__qr__pres_container');
+    const element = document.getElementById('id_topic__qr__pres_container');
     if (element != null) {
       element.classList.remove('lesson__hide');
     }
@@ -187,7 +187,7 @@ export default class PresentationFormatComponent extends React.Component
     window.addEventListener('resize', this.resize.bind(this));
     // Instantiate diagram now that the canvas elements have been
     // created.
-    window.lessonFunctions = {
+    window.topicFunctions = {
       qr: (id, parameters) => {
         if (React.isValidElement(window.quickReference[parameters])) {
           this.showStaticQR(id, parameters);
@@ -277,7 +277,7 @@ export default class PresentationFormatComponent extends React.Component
 
   renderContent(content: string) {
     this.key += 1;
-    return <div key={this.key} className='lesson__diagram_text' id='id_lesson__diagram_text'
+    return <div key={this.key} className='topic__diagram_text' id='id_topic__diagram_text'
       dangerouslySetInnerHTML={ {
         __html: content.slice(0, content.length - 1),
       } }
@@ -410,7 +410,7 @@ export default class PresentationFormatComponent extends React.Component
       <div className="lesson__widescreen_backdrop" id={this.version.content.htmlId}>
         <div id="lesson__container_name" className="lesson__container">
               {this.addPrevButton()}
-              <div id={this.version.content.diagramHtmlId} className="diagram__container lesson__diagram">
+              <div id={this.version.content.diagramHtmlId} className="diagram__container topic__diagram">
                 <canvas id="id_diagram__gl__low" className='diagram__gl'>
                 </canvas>
                 <canvas id="id_diagram__text__low" className='diagram__text'>
@@ -421,12 +421,12 @@ export default class PresentationFormatComponent extends React.Component
                     {'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'}
                   </div>
                 </div>
-                <div id="id_lesson__qr__static_container" className="lesson__qr__container lesson__hide">
+                <div id="id_topic__qr__static_container" className="topic__qr__container lesson__hide">
                   {this.state.qr}
                 </div>
-                <div id="id_lesson__qr__pres_container" className="lesson__qr__container lesson__hide">
+                <div id="id_topic__qr__pres_container" className="topic__qr__container lesson__hide">
                   <PresentationQR
-                    id="id_lesson__qr__content_pres__overlay"
+                    id="id_topic__qr__content_pres__overlay"
                     onClose={this.version.content.prepareToHideQR.bind(this.version.content)}
                   />
                 </div>

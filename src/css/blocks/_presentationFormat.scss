@@ -57,7 +57,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   //
   --pres__button_height: calc(var(--pres__unit) * 1.8);
   //
-  --lesson__diagram-font-size: var(--pres__unit);
+  --topic__diagram-font-size: var(--pres__unit);
 }
 
 @media (min-aspect-ratio: 1/100) {
@@ -109,7 +109,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 // The magic offset to make size more consistent accross vw ranges
 @media (max-width: 700px) {
   :root {
-    --lesson__diagram-font-size: calc(var(--pres__unit) * (0.84 + 0.15 * (var(--pres__vw1) - 200)/500));
+    --topic__diagram-font-size: calc(var(--pres__unit) * (0.84 + 0.15 * (var(--pres__vw1) - 200)/500));
   }
 }
 
@@ -136,7 +136,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 .lesson__widescreen_backdrop {
-  font-size: var(--lesson__diagram-font-size);
+  font-size: var(--topic__diagram-font-size);
   background-color: color('presentation', 'background');
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
@@ -171,7 +171,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   margin-bottom: 0;
 }
 
-.lesson__diagram {
+.topic__diagram {
   width: var(--pres__content_width);
   height: var(--pres__content_height);
   background-color: color('diagram', 'background');
@@ -179,13 +179,13 @@ $height_limited_landscape_aspect_ratio: "408/200";
 }
 
 @media (min-aspect-ratio: $landscape_aspect_ratio) {
-  .lesson__diagram {
+  .topic__diagram {
     display: inline-block;
   }
 }
 
 .lesson__font_0p9 {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.9);
+  font-size: calc(var(--topic__diagram-font-size) * 0.9);
 }
 
 .lesson__table {
@@ -193,7 +193,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   color: color('diagram', 'text-base');
   margin-left: calc(var(--pres__text_margin) * 1);
   margin-right: calc(var(--pres__text_margin) * 1);
-  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+  font-size: calc(var(--topic__diagram-font-size) * 0.8);
 }
 
 .lesson__table td {
@@ -206,7 +206,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   font-size: 0;
 }
 
-.lesson__diagram_text_fade_in {
+.topic__diagram_text_fade_in {
   // opacity: 1;
   -webkit-animation: fadein 0.3s linear;
   -moz-animation: fadein 0.3s linear;
@@ -214,30 +214,30 @@ $height_limited_landscape_aspect_ratio: "408/200";
   -o-animation: fadein 0.3s linear;
 }
 
-.lesson__diagram_text {
+.topic__diagram_text {
   margin-left: var(--pres__text_margin);
   margin-right: var(--pres__text_margin);
   margin-top: var(--pres__text_margin);
   height: calc(100% - var(--pres__text_margin) * 2);
-  // This stops the lesson__diagram_text moving when the paragraph top
+  // This stops the topic__diagram_text moving when the paragraph top
   // margin moves
   overflow: hidden;
 }
 
-.lesson__diagram_text ul {
+.topic__diagram_text ul {
   margin-left: calc(var(--pres__text_margin) * 2);
   margin-right: calc(var(--pres__text_margin) * 1);
-  padding-left: calc(var(--lesson__diagram-font-size) * 0.8);
-  padding-right: calc(var(--lesson__diagram-font-size) * 0.8);
-  font-size: calc(var(--lesson__diagram-font-size) * 1);
+  padding-left: calc(var(--topic__diagram-font-size) * 0.8);
+  padding-right: calc(var(--topic__diagram-font-size) * 0.8);
+  font-size: calc(var(--topic__diagram-font-size) * 1);
   color: color('diagram', 'text-base');
 }
 
-.lesson__diagram_text_small {
-  font-size: calc(var(--lesson__diagram-font-size) * 0.8);
+.topic__diagram_text_small {
+  font-size: calc(var(--topic__diagram-font-size) * 0.8);
 }
 
-.lesson__diagram_text p {
+.topic__diagram_text p {
   color: color('diagram', 'text-base');
   margin-left: calc(var(--pres__text_margin) * 1);
   margin-right: calc(var(--pres__text_margin) * 1);
@@ -245,11 +245,11 @@ $height_limited_landscape_aspect_ratio: "408/200";
   margin-bottom: 0;
 }
 
-.lesson__diagram_text_p_top_margin_2 p {
+.topic__diagram_text_p_top_margin_2 p {
   margin-top: calc(var(--pres__text_p_space) * 2);
 }
 
-.lesson__diagram_text p:first-child {
+.topic__diagram_text p:first-child {
   margin-top: calc(var(--pres__text_margin) * 1);
 }
 
@@ -257,38 +257,38 @@ $height_limited_landscape_aspect_ratio: "408/200";
 //   margin-top: 0;
 // }
 
-.lesson__diagram_text_p_width_50 {
+.topic__diagram_text_p_width_50 {
   // width: 50%;
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.5);
 }
 
-.lesson__diagram_text_p_width_45 {
+.topic__diagram_text_p_width_45 {
   // width: 45%;
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.45);
 }
 
-.lesson__diagram_text_p_width_40 {
+.topic__diagram_text_p_width_40 {
   // width: 40%;
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.4);
 }
 
-.lesson__diagram_text_p_width_55 {
+.topic__diagram_text_p_width_55 {
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.55);
 }
 
-.lesson__diagram_text_p_width_60 {
+.topic__diagram_text_p_width_60 {
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.6);
 }
 
-.lesson__diagram_text_p_width_70 {
+.topic__diagram_text_p_width_70 {
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.7);
 }
 
-.lesson__diagram_text_p_width_80 {
+.topic__diagram_text_p_width_80 {
   width: calc((var(--pres__content_width) - var(--pres__text_margin) * 2) * 0.8);
 }
 
-.lesson__diagram_text_p_right {
+.topic__diagram_text_p_right {
   float: right;
 }
 
@@ -306,7 +306,7 @@ $height_limited_landscape_aspect_ratio: "408/200";
   100% { opacity: 1; }
 }
 
-.lesson__diagram_text_fade_out {
+.topic__diagram_text_fade_out {
   opacity: 0;
   -webkit-animation: fadeout 0.3s linear;
   -moz-animation: fadeout 0.3s linear;

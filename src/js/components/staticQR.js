@@ -15,11 +15,11 @@ export default class StaticQR extends React.Component
 
   render() {
     return <QuickReferencePopup
-      id="id_lesson__qr__content_static"
+      id="id_topic__qr__content_static"
       content={this.props.content}
       title={this.props.title}
       link={this.props.link}
-      closeId="id_lesson__qr__static_container"
+      closeId="id_topic__qr__static_container"
     />;
   }
 }
