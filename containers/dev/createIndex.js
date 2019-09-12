@@ -4,8 +4,6 @@ const pathTools = require('./pathTools.js');
 
 function createTopicIndex(buildMode, topicsPath) {
   const topics = pathTools.getAllTopics(topicsPath);
-  // let outStr = `import TopicDescription from '../../js/Lesson/topicDescription';
-  let outStr = '{';
   const outObj = {};
   topics.forEach((topicPath) => {
     const splitLessonPath = topicPath.split('/');
@@ -26,9 +24,7 @@ function createTopicIndex(buildMode, topicsPath) {
       /* eslint-enable */
       ({ title } = details);
       ({ dependencies } = details);
-      // ({ uid } = details);
       ({ enabled } = details);
-      // ({ qr } = details);
       if (enabled != null && enabled === false) {
         enabled = false;
       } else {
@@ -36,16 +32,10 @@ function createTopicIndex(buildMode, topicsPath) {
       }
     }
     if (title !== '') {
-      // outStr = `${outStr}\n    ${uid}: new TopicDescription({`;
-      outStr = `${outStr}\n  "${uid}": {`;
       outObj[uid] = {};
-      outStr = `${outStr}\n    "title": "${title.replace(/'/, '\\\'')}",`;
       outObj[uid].title = `${title.replace(/'/, '\\\'')}`;
-      outStr = `${outStr}\n    "path": "/${parentPath}",`;
       outObj[uid].path = `/${parentPath}`;
-      outStr = `${outStr}\n    "uid": "${uid}",`;
       outObj[uid].uid = `${uid}`;
-      outStr = `${outStr}\n    "approaches": {`;
       outObj[uid].approaches = {};
       const versions = pathTools.getAllVersions(topicPath);
       const contentTypes = {};
@@ -62,7 +52,6 @@ function createTopicIndex(buildMode, topicsPath) {
       Object.keys(contentTypes).forEach((contentTypeName) => {
         const topicVersions = contentTypes[contentTypeName];
         if (contentTypeName !== 'quickReference') {
-          outStr = `${outStr}\n      "${contentTypeName}": {`;
           outObj[uid].approaches[contentTypeName] = {};
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
@@ -103,98 +92,45 @@ function createTopicIndex(buildMode, topicsPath) {
               if (version.type != null) {
                 ({ type } = version);
               }
-              // if (version.references != null) {
-              //   ({ references } = version);
-              // }
             }
-            outStr = `${outStr}\n        "${versionUid}": {`;
             outObj[uid].approaches[contentTypeName][versionUid] = {};
             const versionObj = outObj[uid].approaches[contentTypeName][versionUid];
-            outStr = `${outStr}\n          "type": "${type}",`;
             versionObj.type = `${type}`;
-            if (contentTypeName === 'quickReference') {
-              // outStr = `${outStr}\n            references: [`;
-              // references.forEach((reference) => {
-              //   outStr = `${outStr}\n              '${reference}',`;
-              // });
-              // outStr = `${outStr}\n            ],`;
-            } else {
-              outStr = `${outStr}\n          "title": "${versionTitle}",`;
-              versionObj.title = `${versionTitle}`;
-              outStr = `${outStr}\n          "description": "${versionDescription.replace(/'/, '\\\'')}",`;
-              versionObj.description = `${versionDescription.replace(/'/, '\\\'')}`;
-              outStr = `${outStr}\n          "htmlTitle": "${versionHtmlTitle.replace(/'/, '\\\'')}",`;
-              versionObj.htmlTitle = `${versionHtmlTitle.replace(/'/, '\\\'')}`;
-              outStr = `${outStr}\n          "htmlDescription": "${versionHtmlDescription.replace(/'/, '\\\'')}",`;
-              versionObj.htmlDescription = `${versionHtmlDescription.replace(/'/, '\\\'')}`;
-              outStr = `${outStr}\n          "fullTopic": ${fullTopic.toString()},`;
-              versionObj.fullTopic = fullTopic;
-            }
-            outStr = `${outStr}\n        },`;
+            versionObj.title = `${versionTitle}`;
+            versionObj.description = `${versionDescription.replace(/'/, '\\\'')}`;
+            versionObj.htmlTitle = `${versionHtmlTitle.replace(/'/, '\\\'')}`;
+            versionObj.htmlDescription = `${versionHtmlDescription.replace(/'/, '\\\'')}`;
+            versionObj.fullTopic = fullTopic;
           });
-          outStr = `${outStr}\n      },`;
         }
         if (contentTypeName === 'quickReference' && buildMode === 'development') {
-          outStr = `${outStr}\n        "dev": {`;
           topicVersions.forEach((v) => {
             const [versionUid] = v;
-            outStr = `${outStr}\n        "${versionUid}": {`;
             outObj[uid].approaches[contentTypeName][versionUid] = {};
             const versionObj = outObj[uid].approaches[contentTypeName][versionUid];
-            outStr = `${outStr}\n          "type": "presentation",`;
             versionObj.type = 'presentation';
-            outStr = `${outStr}\n          "title": "${versionUid}",`;
             versionObj.title = `${versionUid}`;
-            outStr = `${outStr}\n          "description": '',`;
             versionObj.description = '';
-            outStr = `${outStr}\n          "fullTopic": false,`;
             versionObj.fullTopic = false;
-            outStr = `${outStr}\n        },`;
           });
-          outStr = `${outStr}\n      },`;
         }
       });
 
-      outStr = `${outStr}\n    },`;
-      outStr = `${outStr}\n    "dependencies": [`;
       outObj[uid].dependencies = [];
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
-          outStr = `${outStr}\n      "${dependency}",`;
           outObj[uid].dependencies.push(dependency);
         });
       }
-      outStr = `${outStr}\n    ],`;
-      outStr = `${outStr}\n    "enabled": ${enabled},`;
       outObj[uid].enabled = enabled;
-      // outStr = `${outStr}\n    }),`;
-      outStr = `${outStr}\n  },`;
     }
   });
-  outStr = `${outStr}\n};`;
-  // outStr = `${outStr}\n}\n`;
-  // outStr = `${outStr}\n\nmodule.exports = topicIndex;\n`;
-  if (outStr !== '') {
-    // fs.writeFile(`${topicsPath}/topicIndex.json`, outStr, (err) => {
-    //   if (err) {
-    //     // eslint-disable-next-line no-console
-    //     console.log(err);
-    //   }
-    // });
-    fs.writeFile(`${topicsPath}/topicIndex.json`, JSON.stringify(outObj, null, 2), (err) => {
-      if (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
-    });
-    // const absoluteIndexPath = `${process.cwd()}/${topicsPath}/topicIndexObj.js`;
-    // const relativeIndexPath = `./${path.relative(__dirname, absoluteIndexPath)}`;
-    //  eslint-disable global-require, import/no-dynamic-require 
-    // // $FlowFixMe
-    // console.log(relativeIndexPath)
-    // const topicIndex = require(relativeIndexPath);
-    // console.log(topicIndex);
-  }
+  fs.writeFile(`${topicsPath}/topicIndex.json`, JSON.stringify(outObj, null, 2), (err) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  });
 }
 
 module.exports = createTopicIndex;
