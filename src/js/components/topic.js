@@ -80,28 +80,28 @@ export default class TopicComponent extends React.Component
 
   fillRatings() {
     const { topicDescription } = this;
-    if (topicDescription != null) {
-      const ratings = {};
-      Object.keys(topicDescription.approaches).forEach((approachUID) => {
-        const versions = topicDescription.approaches[approachUID];
-        if (!(approachUID in ratings)) {
-          ratings[approachUID] = {};
-        }
-        Object.keys(versions).forEach((versionUID) => {
-          const version = versions[versionUID];
-          if (version.rating != null) {
-            ratings[approachUID][versionUID] = {
-              aveRating: version.rating.ave,
-              numRatings: version.rating.num,
-              numHighRatings: version.rating.high,
-              userRating: version.rating.user,
-            };
-          }
-        });
-      });
-      return ratings;
+    if (topicDescription == null) {
+      return {};
     }
-    return {};
+    const ratings = {};
+    Object.keys(topicDescription.approaches).forEach((approachUID) => {
+      const versions = topicDescription.approaches[approachUID];
+      if (!(approachUID in ratings)) {
+        ratings[approachUID] = {};
+      }
+      Object.keys(versions).forEach((versionUID) => {
+        const version = versions[versionUID];
+        if (version.rating != null) {
+          ratings[approachUID][versionUID] = {
+            aveRating: version.rating.ave,
+            numRatings: version.rating.num,
+            numHighRatings: version.rating.high,
+            userRating: version.rating.user,
+          };
+        }
+      });
+    });
+    return ratings;
   }
 
   gotRatings() {
@@ -118,29 +118,6 @@ export default class TopicComponent extends React.Component
     }
     this.setState({ ratings, userRating });
   }
-
-  // getRating(approachUID: string) {
-  //   const link = `/rating/${this.topicUID}/${approachUID}/${this.versionUID}`;
-  //   fetchPolyfill(link, { credentials: 'same-origin' })
-  //     .then((response) => {
-  //       if (!response.ok) {
-  //         throw Error(response.statusText);
-  //       }
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       if (data.status === 'ok') {
-  //         if (data.userRating
-  //           && data.userRating !== 'not rated'
-  //           && data.userRating !== 'not logged in'
-  //         ) {
-  //           // this.setUserRating(data.userRating);
-  //           this.setState({ userRating: data.userRating });
-  //         }
-  //       }
-  //     })
-  //     .catch(() => {});
-  // }
 
   setUserRating(rating: number) {
     const { cookie } = document;

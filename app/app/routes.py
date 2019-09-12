@@ -650,7 +650,7 @@ def get_topic_ratings(path):
                 ratings[approach_uid][version_uid] = {}
             ratings[approach_uid][version_uid] = {
                 'num': 10,
-                'high': 2,
+                'high': 3,
                 'ave': 2.3,
                 'user': 'not logged in'
             }
