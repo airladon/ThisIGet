@@ -26,7 +26,7 @@ from app.models import Lessons, Versions, Topics
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -187,7 +187,7 @@ def is_logged_in():
 
 @app.route('/content/', defaults={'path': ''})  # noqa
 @app.route('/content/<path:path>')
-def get_lesson(path):
+def get_content(path):
     lesson_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
@@ -198,6 +198,7 @@ def get_lesson(path):
               f'{lessons[lesson_path]["content.css"]}'
 
     *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
+    # pdb.set_trace()
     version = getVersion(lesson_uid, topic_name, version_uid)
     title = ''
     description = ''
