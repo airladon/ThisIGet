@@ -635,6 +635,11 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     return jsonify({'status': status})
 
 
+# @app.route('/topicRatings/<topic_path>')
+# def get_topic_ratings(topic_path):
+#     for approach_uid, approaches in topic_index[]
+
+
 @check_confirmed
 @app.route('/rating/<lesson_uid>/<topic_name>/<version_uid>')
 def get_rating(lesson_uid, topic_name, version_uid):

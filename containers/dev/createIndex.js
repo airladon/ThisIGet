@@ -8,7 +8,8 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
   topics.forEach((topicPath) => {
     const splitLessonPath = topicPath.split('/');
     const parentPath = splitLessonPath.slice(1, -1).join('/');
-    const uid = splitLessonPath.slice(-1)[0];
+    const uid = splitLessonPath.slice(-(splitLessonPath.length - 2)).join('/');
+    const topicUid = splitLessonPath.slice(-1)[0];
 
     const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
@@ -34,8 +35,8 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
     if (title !== '') {
       outObj[uid] = {};
       outObj[uid].title = `${title.replace(/'/, '\\\'')}`;
-      outObj[uid].path = `/${parentPath}`;
-      outObj[uid].uid = `${uid}`;
+      // outObj[uid].path = `/${parentPath}`;
+      // outObj[uid].uid = `${topicUid}`;
       outObj[uid].approaches = {};
       const versions = pathTools.getAllVersions(topicPath);
       const contentTypes = {};

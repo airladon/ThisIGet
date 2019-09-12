@@ -121,6 +121,10 @@ export default class TopicDescription {
     }
   }
 
+  // getRatings(callback: Function) {
+  //   ratings = getTopicRatings(path)
+  // }
+
   getRatings(callback: Function) {
     this.callbackCount = 0;
     this.numVersions = 0;

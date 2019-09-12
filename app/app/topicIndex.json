@@ -1,5 +1,5 @@
 {
-  "Angle": {
+  "Math/Geometry_1/Angle": {
     "title": "Angles",
     "path": "/content/Math/Geometry_1",
     "uid": "Angle",
@@ -30,7 +30,7 @@
     ],
     "enabled": true
   },
-  "AngleGroups": {
+  "Math/Geometry_1/AngleGroups": {
     "title": "Angle Groups",
     "path": "/content/Math/Geometry_1",
     "uid": "AngleGroups",
@@ -91,7 +91,7 @@
     ],
     "enabled": true
   },
-  "AngleTypes": {
+  "Math/Geometry_1/AngleTypes": {
     "title": "Angle Types",
     "path": "/content/Math/Geometry_1",
     "uid": "AngleTypes",
@@ -122,7 +122,7 @@
     ],
     "enabled": true
   },
-  "AnglesAtIntersections": {
+  "Math/Geometry_1/AnglesAtIntersections": {
     "title": "Angles at Intersections",
     "path": "/content/Math/Geometry_1",
     "uid": "AnglesAtIntersections",
@@ -201,7 +201,7 @@
     ],
     "enabled": true
   },
-  "Area": {
+  "Math/Geometry_1/Area": {
     "title": "Area and Rectangles",
     "path": "/content/Math/Geometry_1",
     "uid": "Area",
@@ -262,7 +262,7 @@
     ],
     "enabled": true
   },
-  "AreaCircle": {
+  "Math/Geometry_1/AreaCircle": {
     "title": "Area of a Circle",
     "path": "/content/Math/Geometry_1",
     "uid": "AreaCircle",
@@ -341,7 +341,7 @@
     ],
     "enabled": true
   },
-  "AreaTriangle": {
+  "Math/Geometry_1/AreaTriangle": {
     "title": "Area of a Triangle",
     "path": "/content/Math/Geometry_1",
     "uid": "AreaTriangle",
@@ -412,7 +412,7 @@
     ],
     "enabled": true
   },
-  "Circle": {
+  "Math/Geometry_1/Circle": {
     "title": "Circles",
     "path": "/content/Math/Geometry_1",
     "uid": "Circle",
@@ -481,7 +481,7 @@
     ],
     "enabled": true
   },
-  "CongruentTriangles": {
+  "Math/Geometry_1/CongruentTriangles": {
     "title": "Congruent Triangles",
     "path": "/content/Math/Geometry_1",
     "uid": "CongruentTriangles",
@@ -578,7 +578,7 @@
     ],
     "enabled": true
   },
-  "Degrees": {
+  "Math/Geometry_1/Degrees": {
     "title": "Degrees",
     "path": "/content/Math/Geometry_1",
     "uid": "Degrees",
@@ -629,7 +629,7 @@
     ],
     "enabled": true
   },
-  "Equilateral": {
+  "Math/Geometry_1/Equilateral": {
     "title": "Equilateral Triangle",
     "path": "/content/Math/Geometry_1",
     "uid": "Equilateral",
@@ -700,7 +700,7 @@
     ],
     "enabled": true
   },
-  "ExternalAngles": {
+  "Math/Geometry_1/ExternalAngles": {
     "title": "External Angle of a Triangle",
     "path": "/content/Math/Geometry_1",
     "uid": "ExternalAngles",
@@ -779,7 +779,7 @@
     ],
     "enabled": true
   },
-  "Introduction": {
+  "Math/Geometry_1/Introduction": {
     "title": "Why Study Shapes?",
     "path": "/content/Math/Geometry_1",
     "uid": "Introduction",
@@ -806,7 +806,7 @@
     "dependencies": [],
     "enabled": true
   },
-  "Isosceles": {
+  "Math/Geometry_1/Isosceles": {
     "title": "Isosceles Triangle",
     "path": "/content/Math/Geometry_1",
     "uid": "Isosceles",
@@ -877,7 +877,7 @@
     ],
     "enabled": true
   },
-  "ParallelLineDistance": {
+  "Math/Geometry_1/ParallelLineDistance": {
     "title": "Parallel Line Distance",
     "path": "/content/Math/Geometry_1",
     "uid": "ParallelLineDistance",
@@ -928,7 +928,7 @@
     ],
     "enabled": true
   },
-  "ParallelLines": {
+  "Math/Geometry_1/ParallelLines": {
     "title": "Parallel Lines",
     "path": "/content/Math/Geometry_1",
     "uid": "ParallelLines",
@@ -969,7 +969,7 @@
     ],
     "enabled": true
   },
-  "ParallelSplitOfTriangle": {
+  "Math/Geometry_1/ParallelSplitOfTriangle": {
     "title": "Parallel Split of Triangle",
     "path": "/content/Math/Geometry_1",
     "uid": "ParallelSplitOfTriangle",
@@ -1038,7 +1038,7 @@
     ],
     "enabled": true
   },
-  "PointLineDistance": {
+  "Math/Geometry_1/PointLineDistance": {
     "title": "Point to Line Distance",
     "path": "/content/Math/Geometry_1",
     "uid": "PointLineDistance",
@@ -1079,7 +1079,7 @@
     ],
     "enabled": true
   },
-  "Quadrangles": {
+  "Math/Geometry_1/Quadrangles": {
     "title": "Quadrangles",
     "path": "/content/Math/Geometry_1",
     "uid": "Quadrangles",
@@ -1150,7 +1150,7 @@
     ],
     "enabled": true
   },
-  "Radians": {
+  "Math/Geometry_1/Radians": {
     "title": "Radians",
     "path": "/content/Math/Geometry_1",
     "uid": "Radians",
@@ -1219,7 +1219,7 @@
     ],
     "enabled": true
   },
-  "RectanglesAndSquares": {
+  "Math/Geometry_1/RectanglesAndSquares": {
     "title": "Rectangles and Squares",
     "path": "/content/Math/Geometry_1",
     "uid": "RectanglesAndSquares",
@@ -1281,7 +1281,7 @@
     ],
     "enabled": true
   },
-  "RightAngleTriangles": {
+  "Math/Geometry_1/RightAngleTriangles": {
     "title": "Right Angle Triangles",
     "path": "/content/Math/Geometry_1",
     "uid": "RightAngleTriangles",
@@ -1360,7 +1360,7 @@
     ],
     "enabled": true
   },
-  "SideAngleRelationship": {
+  "Math/Geometry_1/SideAngleRelationship": {
     "title": "Side Angle Relationships",
     "path": "/content/Math/Geometry_1",
     "uid": "SideAngleRelationship",
@@ -1431,7 +1431,7 @@
     ],
     "enabled": true
   },
-  "SimilarTriangles": {
+  "Math/Geometry_1/SimilarTriangles": {
     "title": "Similar Triangles",
     "path": "/content/Math/Geometry_1",
     "uid": "SimilarTriangles",
@@ -1486,7 +1486,7 @@
     ],
     "enabled": false
   },
-  "CalculatingPi": {
+  "Math/Geometry_1/ToDo/CalculatingPi": {
     "title": "Calculating Pi",
     "path": "/content/Math/Geometry_1/ToDo",
     "uid": "CalculatingPi",
@@ -1507,7 +1507,7 @@
     ],
     "enabled": false
   },
-  "Triangles": {
+  "Math/Geometry_1/Triangles": {
     "title": "Triangles",
     "path": "/content/Math/Geometry_1",
     "uid": "Triangles",
@@ -1586,7 +1586,7 @@
     ],
     "enabled": true
   },
-  "Chord": {
+  "Math/Trigonometry_1/Chord": {
     "title": "Chord",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Chord",
@@ -1607,7 +1607,7 @@
     ],
     "enabled": false
   },
-  "Cosecant": {
+  "Math/Trigonometry_1/Cosecant": {
     "title": "Cosecant",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Cosecant",
@@ -1628,7 +1628,7 @@
     ],
     "enabled": false
   },
-  "Cosine": {
+  "Math/Trigonometry_1/Cosine": {
     "title": "Cosine",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Cosine",
@@ -1649,7 +1649,7 @@
     ],
     "enabled": false
   },
-  "Cotangent": {
+  "Math/Trigonometry_1/Cotangent": {
     "title": "Cotangent",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Cotangent",
@@ -1670,7 +1670,7 @@
     ],
     "enabled": false
   },
-  "LawOfCosines": {
+  "Math/Trigonometry_1/LawOfCosines": {
     "title": "Law of Cosines",
     "path": "/content/Math/Trigonometry_1",
     "uid": "LawOfCosines",
@@ -1691,7 +1691,7 @@
     ],
     "enabled": false
   },
-  "LawOfSines": {
+  "Math/Trigonometry_1/LawOfSines": {
     "title": "Law of Sines",
     "path": "/content/Math/Trigonometry_1",
     "uid": "LawOfSines",
@@ -1712,7 +1712,7 @@
     ],
     "enabled": false
   },
-  "Pythagoras": {
+  "Math/Trigonometry_1/Pythagoras": {
     "title": "Pythagorean Identity",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Pythagoras",
@@ -1733,7 +1733,7 @@
     ],
     "enabled": false
   },
-  "Secant": {
+  "Math/Trigonometry_1/Secant": {
     "title": "Secant",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Secant",
@@ -1754,7 +1754,7 @@
     ],
     "enabled": false
   },
-  "Sine": {
+  "Math/Trigonometry_1/Sine": {
     "title": "Sine",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Sine",
@@ -1775,7 +1775,7 @@
     ],
     "enabled": false
   },
-  "Tangent": {
+  "Math/Trigonometry_1/Tangent": {
     "title": "Tangent",
     "path": "/content/Math/Trigonometry_1",
     "uid": "Tangent",
@@ -1796,7 +1796,7 @@
     ],
     "enabled": false
   },
-  "UnitCircle": {
+  "Math/Trigonometry_1/UnitCircle": {
     "title": "Unit Circle",
     "path": "/content/Math/Trigonometry_1",
     "uid": "UnitCircle",
