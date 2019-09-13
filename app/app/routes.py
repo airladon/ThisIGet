@@ -507,6 +507,7 @@ def isInt(s):
         return False
 
 
+# deprecated
 def getVersion(lesson_uid, topic_name, version_uid):
     # lesson = Lessons.query.filter_by(uid=lesson_uid).first()
     # if lesson is None:
@@ -533,6 +534,7 @@ def getVersion(lesson_uid, topic_name, version_uid):
     return version
 
 
+# deprecated
 def getLinkVersion(version_id, url_hash):
     link_version = db.session.query(LinkVersions).join(Links).filter(
         Links.url_hash == url_hash,
@@ -551,6 +553,7 @@ def getLinkVersion(version_id, url_hash):
     return link_version
 
 
+# deprecated
 @check_confirmed
 @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
 def rate(lesson_uid, topic_name, version_uid, rating_value):
@@ -589,6 +592,7 @@ def rate(lesson_uid, topic_name, version_uid, rating_value):
     return jsonify({'status': status})
 
 
+# deprecated
 @check_confirmed
 @app.route('/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')  # noqa
 def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
@@ -676,17 +680,24 @@ def get_version_rating(path):
     return jsonify({'status': 'ok', 'rating': rating})
 
 
+@check_confirmed
 @app.route('/setVersionRating/<path:path>')
 def set_version_rating(path):
+    if not current_user.is_authenticated:
+        return jsonify({'status': 'fail', 'message': 'no logged in'})
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     # set rating
+    rating = request.args.get('rating')
+    if rating is None:
+        return jsonify({'status': 'fail', 'message': 'no rating'})
     # return new stats
     print(path)
-    print(request.args.get('rating'))
+    print(rating)
     return get_version_rating(path)
 
 
+# deprecated
 @check_confirmed
 @app.route('/rating/<lesson_uid>/<topic_name>/<version_uid>')
 def get_rating(lesson_uid, topic_name, version_uid):
@@ -729,6 +740,7 @@ def get_rating(lesson_uid, topic_name, version_uid):
         'numHighRatings': num_high_ratings})
 
 
+# deprecated
 @check_confirmed
 @app.route('/linkrating/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>')
 def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
