@@ -42,9 +42,9 @@ type State = {
 
 export default class LinksTable extends React.Component
                                     <Props, State> {
-  topicUID: string;
-  approachUID: string;
-  versionUID: string;
+  // topicUID: string;
+  approachName: string;
+  // versionUID: string;
   callbackCount: number;
   numLinks: number;
   links: Array<TypeLink>;
@@ -76,9 +76,9 @@ export default class LinksTable extends React.Component
       }
     });
     /* eslint-disable prefer-destructuring */
-    this.topicUID = path.slice(-3, -2)[0];
-    this.approachUID = path.slice(-2, -1)[0];
-    this.versionUID = path.slice(-1)[0];
+    // this.topicUID = path.slice(-3, -2)[0];
+    this.approachName = path.slice(-2, -1)[0];
+    // this.versionUID = path.slice(-1)[0];
     this.versionPath = path.join('/');
     // /* eslint-enable */
 
@@ -173,7 +173,7 @@ export default class LinksTable extends React.Component
         userRatingValue = 0;
       }
       const rating = <Rating
-        topic={this.approachUID}
+        topic={this.approachName}
         rating={userRatingValue}
         ratingCallback={(r, i) => { this.setUserRating(r, i); }}
         isLoggedIn={this.props.isLoggedIn}
