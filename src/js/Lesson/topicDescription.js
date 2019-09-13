@@ -1,8 +1,8 @@
 // @flow
 import Fig from 'figureone';
 // import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
-import getTopicRatings from './rating';
-import type TypeTopicRatings from './rating';
+import { getTopicRatings } from './rating';
+import type { TypeTopicRatings } from './rating';
 
 const { Point } = Fig;
 
@@ -116,19 +116,22 @@ export default class TopicDescription {
   getRatings(callback: () => void) {
     const topicPath = this.path.replace('/content/', '');
     getTopicRatings(`${topicPath}/${this.uid}`, (ratings: ?TypeTopicRatings) => {
-      if (ratings != null) {
-        Object.keys(ratings).forEach((approachUID) => {
-          const approach = ratings[approachUID];
-          Object.keys(approach).forEach((versionUID) => {
-            const rating = approach[versionUID];
-            if (this.approaches[approachUID]
-              && this.approaches[approachUID][versionUID]
-            ) {
-              this.approaches[approachUID][versionUID].rating = rating;
-            }
-          });
-        });
+      if (ratings == null) {
+        callback();
+        return;
       }
+      Object.keys(ratings).forEach((approachUID) => {
+        // $FlowFixMe
+        const approach = ratings[approachUID];
+        Object.keys(approach).forEach((versionUID) => {
+          const rating = approach[versionUID];
+          if (this.approaches[approachUID]
+            && this.approaches[approachUID][versionUID]
+          ) {
+            this.approaches[approachUID][versionUID].rating = rating;
+          }
+        });
+      });
       callback();
     });
   }

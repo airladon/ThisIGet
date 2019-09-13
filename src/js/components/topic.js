@@ -105,7 +105,9 @@ export default class TopicComponent extends React.Component
   }
 
   gotRatings() {
+    // Get ratings of all versions of topic
     const ratings = this.fillRatings();
+    // Get user rating for selected version
     let userRating = 0;
     if (ratings[this.approachUID] != null) {
       const approach = ratings[this.approachUID];

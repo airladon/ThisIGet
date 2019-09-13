@@ -635,8 +635,8 @@ def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
     return jsonify({'status': status})
 
 
-@app.route('/topicRatings/', defaults={'path': ''})  # noqa
-@app.route('/topicRatings/<path:path>')
+@app.route('/getTopicRatings/', defaults={'path': ''})  # noqa
+@app.route('/getTopicRatings/<path:path>')
 def get_topic_ratings(path):
     if path not in topic_index:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
@@ -659,10 +659,8 @@ def get_topic_ratings(path):
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
-@app.route('/versionRating/<path:path>')
+@app.route('/getVersionRating/<path:path>')
 def get_version_rating(path):
-    print(path)
-    print(version_list)
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
 
@@ -675,15 +673,17 @@ def get_version_rating(path):
     }
     if current_user.is_authenticated:
         rating['user'] = 4
-    return jsonify({'status': 'ok', 'ratings': rating})
+    return jsonify({'status': 'ok', 'rating': rating})
 
 
-@app.route('/rateVersion/<path:path>')
-def rate_version(path):
+@app.route('/setVersionRating/<path:path>')
+def set_version_rating(path):
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     # set rating
     # return new stats
+    print(path)
+    print(request.args.get('rating'))
     return get_version_rating(path)
 
 
