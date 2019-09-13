@@ -1,9 +1,10 @@
 // @flow
 
 import * as React from 'react';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import Rating from '../rating';
 import { login } from '../../tools/misc';
+import { getLinkRatings, setLinkRating } from '../../Lesson/rating';
 // import { getCookie } from '../tools/misc';
 // import '../../css/style.scss';
 // import img from '../../tile.png';
@@ -25,8 +26,8 @@ type TypeLink = {
   type: 'presentation' | 'generic' | 'video',
   description: string;
   title: string;
-  numHighRatings: ?number;
-  userRating: ?number;
+  // numHighRatings: ?number;
+  // userRating: ?number;
   userRatingIsHigh: boolean;
 };
 
@@ -36,10 +37,7 @@ type Props = {
 };
 
 type State = {
-  ratings: Array<{
-      userRating: ?number;
-      numHighRatings: ?number;
-  }>,
+  ratings: Array<Array<number>>,
 };
 
 export default class LinksTable extends React.Component
@@ -51,11 +49,13 @@ export default class LinksTable extends React.Component
   numLinks: number;
   links: Array<TypeLink>;
   hasDescription: boolean;
+  versionPath: string;
 
   constructor(props: Props) {
     super(props);
-    const path = window.location.pathname.replace(/\/$/, '').split('/');
+    const path = window.location.pathname.replace(/^.*\/content\//, '').split('/');
     this.links = [];
+    const initialRatings = [];
     props.links.forEach((link) => {
       this.links.push({
         url: link.url,
@@ -63,10 +63,11 @@ export default class LinksTable extends React.Component
         type: link.type || 'generic',
         title: link.author || link.publisher || '',
         description: link.description || '',
-        numHighRatings: null,
-        userRating: 0,
+        // numHighRatings: null,
+        // userRating: 0,
         userRatingIsHigh: false,
       });
+      initialRatings.push([0, 0, 0, 0]);
     });
     this.hasDescription = false;
     this.links.forEach((link) => {
@@ -78,36 +79,41 @@ export default class LinksTable extends React.Component
     this.topicUID = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
     this.versionUID = path.slice(-1)[0];
+    this.versionPath = path.join('/');
     // /* eslint-enable */
-    // this.topicDescription = getTopicDescription(this.topicUID);
+
     this.state = {
-      ratings: this.fillRatings(),
+      ratings: initialRatings,
     };
-    // // this.versionDetails = props.versionDetails;
-    // // const [topic] = window.location.pathname.split('/').slice(-2, -1);
-    // // this.topic = topic;
-    // this.key = 0;
-    // this.showNavigator = false;
-    // this.getRating(this.topic);
-    this.getLinkRatings(this.gotLinkRatings.bind(this));
-    // if (this.topicDescription != null) {
-    //   this.topicDescription.getRatings(this.gotRatings.bind(this));
-    // }
+    getLinkRatings(this.versionPath, this.gotLinkRatings.bind(this));
   }
 
-  fillRatings() {
-    const ratings = [];
-    this.links.forEach((link) => {
-      ratings.push({
-        userRating: link.userRating,
-        numHighRatings: link.numHighRatings,
-      });
-    });
-    return ratings;
-  }
+  // fillRatings(ratings: Array<Array<number>>) {
+  //   const stateRatings = [];
+  //   for (let i = 0; i < this.links.length; i += 1) {
+  //     const link = this.links[i];
+  //     // if (ratings.length > i) {
+  //     //   link.userRating = ratings[i][3];
+  //     //   link.numHighRatings = ratings[i][1];
+  //     // } else {
+  //     //   link.userRating = 0;
+  //     //   link.numHighRatings = 0;
+  //     // }
+  //     // if (link.userRating > 3) {
+  //     //   link.userRatingIsHigh = true;
+  //     // } else {
+  //     //   link.userRatingIsHigh = false;
+  //     // }
+  //     stateRatings.push({
+  //       userRating: link.userRating,
+  //       numHighRatings: link.numHighRatings,
+  //     });
+  //   }
+  //   return stateRatings;
+  // }
 
-  gotLinkRatings() {
-    this.setState({ ratings: this.fillRatings() });
+  gotLinkRatings(ratings: Array<Array<number>>) {
+    this.setState({ ratings });
   }
 
   waitThenCallback(callback: Function) {
@@ -117,47 +123,10 @@ export default class LinksTable extends React.Component
     }
   }
 
-  getLinkRatings(callback: Function) {
-    this.callbackCount = 0;
-    this.numLinks = 0;
-    this.links.forEach((link) => {
-      const endpoint = `/linkrating/${this.topicUID}/${this.approachUID}/${this.versionUID}/${link.hash}`;
-      fetchPolyfill(endpoint, { credentials: 'same-origin' })
-        .then((response) => {
-          if (!response.ok) {
-            this.waitThenCallback(callback);
-            throw Error(response.statusText);
-          }
-          return response.json();
-        })
-        .then((data: {
-          status: 'ok' | 'fail',
-          message?: string,
-          userRating?: number,
-          aveRating?: number,
-          numRatings?: number,
-          numHighRatings: number,
-        }) => {
-          let userRatingIsHigh = false;
-          if (data.userRating != null && data.userRating > 3) {
-            userRatingIsHigh = true;
-          }
-          if (data.status === 'ok') {
-            /* eslint-disable no-param-reassign */
-            link.numHighRatings = data.numHighRatings;
-            link.userRating = data.userRating || 0;
-            link.userRatingIsHigh = userRatingIsHigh;
-            /* eslint-enable */
-          }
-          this.waitThenCallback(callback);
-        })
-        .catch(() => {
-          this.waitThenCallback(callback);
-        });
-    });
-  }
-
   setUserRating(rating: number, index: number) {
+    const userRatingIndex = 3;
+    const highRatingIndex = 1;
+    const { ratings } = this.state;
     const { cookie } = document;
     if (cookie != null) {
       const username = cookie.match(/username=[^;]*;/);
@@ -167,54 +136,39 @@ export default class LinksTable extends React.Component
         }
       }
     }
-    // const page = parseInt(getCookie('page'), 10) - 1 || 0;
-    this.links[index].userRating = rating;
-    const endpoint = `/ratelink/${this.topicUID}/${this.approachUID}/${this.versionUID}/${this.links[index].hash}/${rating}`;
+    ratings[index][userRatingIndex] = rating;
 
-    let updateState = false;
     if (this.links[index].userRatingIsHigh && rating < 4) {
-      if (this.links[index].numHighRatings != null) {
-        this.links[index].numHighRatings -= 1;
+      if (ratings[index][highRatingIndex] != null) {
+        ratings[index][highRatingIndex] -= 1;
       }
       this.links[index].userRatingIsHigh = false;
-      updateState = true;
     }
     if (this.links[index].userRatingIsHigh === false && rating > 3) {
-      if (this.links[index].numHighRatings != null) {
-        this.links[index].numHighRatings += 1;
+      if (ratings[index][highRatingIndex] != null) {
+        ratings[index][highRatingIndex] += 1;
       } else {
-        this.links[index].numHighRatings = 1;
+        ratings[index][highRatingIndex] = 1;
       }
       this.links[index].userRatingIsHigh = true;
-      updateState = true;
     }
-    if (updateState) {
-      this.setState({ ratings: this.fillRatings() });
-    }
-    fetchPolyfill(endpoint, { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status === 'done') {
-          this.setState({ ratings: this.fillRatings() });
-        } else {
-          // console.log('failed to set rating:', data.message);
-        }
-      })
-      .catch(() => {});
+    this.setState({ ratings });
+    setLinkRating(
+      this.versionPath, this.links[index].hash, rating,
+      (finalRating: Array<number>) => {
+        ratings[index] = finalRating;
+        this.setState({ ratings });
+      },
+    );
   }
 
   renderLinks() {
     const links = [];
     let key = 0;
+    const userRatingIndex = 3;
+    const highRatingIndex = 1;
     this.links.forEach((link, index) => {
-      // let rating = <div className="approach__links_table__disabled">{'-'}</div>;
-      // if (this.props.isLoggedIn) {
-      let userRatingValue = this.state.ratings[index].userRating;
+      let userRatingValue = this.state.ratings[index][userRatingIndex];
       if (typeof userRatingValue !== 'number') {
         userRatingValue = 0;
       }
@@ -229,8 +183,8 @@ export default class LinksTable extends React.Component
       let numHighRatings = <div className="approach__links_table__disabled">
         {'-'}
       </div>;
-      if (this.state.ratings[index].numHighRatings) {
-        ({ numHighRatings } = this.state.ratings[index]);
+      if (this.state.ratings[index][highRatingIndex]) {
+        numHighRatings = this.state.ratings[index][highRatingIndex];
       }
       const title = <a
           className="approach__links_table__title_text"

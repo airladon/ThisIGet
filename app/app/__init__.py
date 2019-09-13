@@ -47,6 +47,6 @@ migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
 lessons = getContent()
-topic_index, version_list = getTopicIndex()
+topic_index, version_list, link_list = getTopicIndex()
 
 from app import routes, models  # noqa

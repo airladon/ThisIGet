@@ -157,6 +157,71 @@ function setVersionRating(
     });
 }
 
+function getLinkRatings(
+  versionPath: string,
+  callback: (Array<Array<number>>) => void,
+) {
+  const endPoint = `/getLinkRatings/${versionPath}`;
+  fetchPolyfill(endPoint, { credentials: 'same-origin' })
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((data: {
+      status: 'ok',
+      ratings: Array<Array<number>>} | {
+        status: 'fail',
+        message: string
+      }) => {
+      let ratings = [];
+      if (data.status === 'ok') {
+        if (data.ratings != null) {
+          ({ ratings } = data);
+        }
+      }
+      callback(ratings);
+    })
+    .catch(() => {
+      callback([]);
+    });
+}
+
+function setLinkRating(
+  versionPath: string,
+  hash: string,
+  rating: number,
+  callback: (Array<number>) => void,
+) {
+  const endPoint = `/setLinkRating/${versionPath}?hash=${hash}&rating=${rating}`;
+  fetchPolyfill(endPoint, { credentials: 'same-origin' })
+    .then((response) => {
+      if (!response.ok) {
+        throw Error(response.statusText);
+      }
+      return response.json();
+    })
+    .then((data: {
+      status: 'ok',
+      rating: Array<number>} | {
+        status: 'fail',
+        message: string
+      }) => {
+      let newRating = [];
+      if (data.status === 'ok') {
+        if (data.rating != null) {
+          newRating = data.rating;
+        }
+      }
+      callback(newRating);
+    })
+    .catch(() => {
+      callback([]);
+    });
+}
+
 export {
-  getTopicRatings, getVersionRating, setVersionRating,
+  getTopicRatings, getVersionRating, setVersionRating, getLinkRatings,
+  setLinkRating,
 };

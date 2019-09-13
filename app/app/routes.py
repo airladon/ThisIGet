@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db, lessons, version_list, topic_index
+from app import app, db, lessons, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -695,6 +695,33 @@ def set_version_rating(path):
     print(path)
     print(rating)
     return get_version_rating(path)
+
+
+@app.route('/getLinkRatings/<path:path>')
+def get_link_ratings(path):
+    if path not in link_list:
+        return jsonify({'status': 'fail', 'message': 'path does not exist'})
+
+    ratings = []
+    for link in link_list[path]:
+        # num, high, ave, user
+        ratings.append([4, 2, 2.3, 0])
+        if current_user.is_authenticated:
+            ratings[-1][3] = 3
+    return jsonify({'status': 'ok', 'ratings': ratings})
+
+
+@app.route('/setLinkRating/<path:path>')
+def set_link_rating(path):
+    if not current_user.is_authenticated:
+        return jsonify({'status': 'fail', 'message': 'no logged in'})
+    if path not in link_list:
+        return jsonify({'status': 'fail', 'message': 'path does not exist'})
+
+    rating = request.args.get('rating')
+    hashStr = request.args.get('hash')
+    print(rating, hashStr)
+    return jsonify({'status': 'ok', 'rating': [0, 3, 2.3, int(rating)]})
 
 
 # deprecated

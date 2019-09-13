@@ -169,6 +169,7 @@ def getTopicIndex():
     with open('./app/app/topicIndex.json', 'r') as f:
         index = json.loads(f.read())
     version_list = {}
+    link_list = {}
     for topic_uid, topic in index.items():
         for approach_uid, approach in topic['approaches'].items():
             for version_uid, version in approach.items():
@@ -181,7 +182,9 @@ def getTopicIndex():
                     'title': version['htmlTitle'],
                     'description': version['htmlDescription'],
                 }
-    return index, version_list
+                if approach_uid == 'links':
+                    link_list[path] = version['links']
+    return index, version_list, link_list
 
 # key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
 # len(encrypt('1', key_str))
