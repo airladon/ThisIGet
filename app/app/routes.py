@@ -19,14 +19,14 @@ from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
-from app.models import Users, VersionRatings, LinkRatings
+from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
 # from app.models import Ratings, AllRatings
 # from app.models import Lessons, Versions, Topics
 # from functools import reduce
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -704,8 +704,40 @@ def set_version_rating(path):
     return get_version_rating(path)
 
 
-def update_version_rating_cache(version_uid):
-    rating = VersionRatings.query.filter_by(version_uid=version_uid).all()
+def update_link_rating_cache(version_uid, link_hash):
+    rating = LinkRatings.query.filter_by(
+        version_uid=version_uid, link_hash=link_hash).all()
+    ratings = [r.rating for r in rating]
+    num = len(ratings)
+    ave = sum(ratings) / num
+    high = len(list(r for r in ratings if r > 3))
+    existing_rating = LinkRatingsCache.query.filter_by(
+        version_uid=version_uid, link_hash=link_hash).first()
+    if existing_rating:
+        existing_rating.num_ratings = num
+        existing_rating.high_ratings = high
+        existing_rating.ave_rating = ave
+    else:
+        new_rating = LinkRatingsCache(
+            version_uid=version_uid, link_hash=link_hash,
+            num_ratings=num, high_ratings=high, ave_rating=ave)
+        db.session.add(new_rating)
+    db.session.commit()
+
+
+def get_link_rating(version_uid, link_hash, user=''):
+    rating = LinkRatingsCache.query.filter_by(
+        version_uid=version_uid, link_hash=link_hash).first()
+    if rating is None:
+        return [0, 0, 0, 0]
+    user_rating = 0
+    if user:
+        existing_rating = LinkRatings.query.filter_by(
+            user=user, version_uid=version_uid,
+            link_hash=link_hash).first()
+        user_rating = existing_rating.rating
+    return [rating.num_ratings, rating.high_ratings,
+            rating.ave_rating, user_rating]
 
 
 @app.route('/getLinkRatings/<path:path>')
@@ -730,19 +762,21 @@ def set_link_rating(path):
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
 
     rating = request.args.get('rating')
-    hashStr = request.args.get('hash')
+    link_hash = request.args.get('hash')
     existing_rating = LinkRatings.query.filter_by(
-        user=current_user, version_uid=path, link_hash=hashStr).first()
+        user=current_user, version_uid=path, link_hash=link_hash).first()
     if existing_rating:
         existing_rating.rating = rating
     else:
         new_rating = LinkRatings(
             user=current_user, version_uid=path,
-            rating=rating, link_hash=hashStr)
+            rating=rating, link_hash=link_hash)
         db.session.add(new_rating)
     db.session.commit()
-    print(rating, hashStr)
-    return jsonify({'status': 'ok', 'rating': [0, 3, 2.3, int(rating)]})
+    update_link_rating_cache(path, link_hash)
+    # print(rating, link_hash)
+    cached_rating = get_link_rating(path, link_hash, current_user)
+    return jsonify({'status': 'ok', 'rating': cached_rating})
 
 
 # # deprecated

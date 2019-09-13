@@ -326,6 +326,7 @@ class LinkRatings(db.Model):
 class LinkRatingsCache(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     version_uid = db.Column(db.String(256))
+    link_hash = db.Column(db.String(32))
     num_ratings = db.Column(db.Integer, index=True)
     ave_rating = db.Column(db.Float, index=True)
     high_ratings = db.Column(db.Integer, index=True)
