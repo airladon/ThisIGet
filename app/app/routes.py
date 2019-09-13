@@ -19,7 +19,7 @@ from app.email import send_password_reset_email, send_confirm_account_email
 import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
-from app.models import Users
+from app.models import Users, VersionRatings, LinkRatings
 # from app.models import Ratings, AllRatings
 # from app.models import Lessons, Versions, Topics
 # from functools import reduce
@@ -692,9 +692,20 @@ def set_version_rating(path):
     if rating is None:
         return jsonify({'status': 'fail', 'message': 'no rating'})
     # return new stats
-    print(path)
-    print(rating)
+    existing_rating = VersionRatings.query.filter_by(
+        user=current_user, version_uid=path).first()
+    if existing_rating:
+        existing_rating.rating = rating
+    else:
+        new_rating = VersionRatings(
+            user=current_user, version_uid=path, rating=rating)
+        db.session.add(new_rating)
+    db.session.commit()
     return get_version_rating(path)
+
+
+def update_version_rating_cache(version_uid):
+    rating = VersionRatings.query.filter_by(version_uid=version_uid).all()
 
 
 @app.route('/getLinkRatings/<path:path>')
@@ -720,6 +731,16 @@ def set_link_rating(path):
 
     rating = request.args.get('rating')
     hashStr = request.args.get('hash')
+    existing_rating = LinkRatings.query.filter_by(
+        user=current_user, version_uid=path, link_hash=hashStr).first()
+    if existing_rating:
+        existing_rating.rating = rating
+    else:
+        new_rating = LinkRatings(
+            user=current_user, version_uid=path,
+            rating=rating, link_hash=hashStr)
+        db.session.add(new_rating)
+    db.session.commit()
     print(rating, hashStr)
     return jsonify({'status': 'ok', 'rating': [0, 3, 2.3, int(rating)]})
 

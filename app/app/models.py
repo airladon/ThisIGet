@@ -99,13 +99,8 @@ class Users(UserMixin, db.Model):
     last_login = db.Column(db.DateTime)
     version_ratings = db.relationship(
         'VersionRatings', cascade="all,delete", backref='user', lazy='dynamic')
-    # all_ratings = db.relationship(
-    #     'AllRatings', cascade="all,delete", backref='user', lazy='dynamic')
-    
-    # link_ratings = db.relationship(
-    #     'LinkRatings', cascade="all,delete", backref='user', lazy='dynamic')
-    # all_link_ratings = db.relationship(
-    #     'AllLinkRatings', cascade="all,delete", backref='user', lazy='dynamic')
+    link_ratings = db.relationship(
+        'LinkRatings', cascade="all,delete", backref='user', lazy='dynamic')
 
     def __repr__(self):
         return '<User {}>'.format(self.username)
