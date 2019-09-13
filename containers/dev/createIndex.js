@@ -5,6 +5,7 @@ const pathTools = require('./pathTools.js');
 function createTopicIndex(buildMode, topicsPath, appPath) {
   const topics = pathTools.getAllTopics(topicsPath);
   const outObj = {};
+  const appObj = {};
   topics.forEach((topicPath) => {
     const splitLessonPath = topicPath.split('/');
     // const parentPath = splitLessonPath.slice(1, -1).join('/');
@@ -33,11 +34,14 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
       }
     }
     if (title !== '') {
-      outObj[uid] = {};
-      outObj[uid].title = `${title.replace(/'/, '\\\'')}`;
-      // outObj[uid].path = `/${parentPath}`;
-      // outObj[uid].uid = `${topicUid}`;
-      outObj[uid].approaches = {};
+      outObj[uid] = {
+        title: `${title.replace(/'/, '\\\'')}`,
+        approaches: {},
+      };
+      appObj[uid] = {
+        title: `${title.replace(/'/, '\\\'')}`,
+        approaches: {},
+      };
       const versions = pathTools.getAllVersions(topicPath);
       const contentTypes = {};
       versions.forEach((versionPath) => {
@@ -54,6 +58,7 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
         const topicVersions = contentTypes[contentTypeName];
         if (contentTypeName !== 'quickReference') {
           outObj[uid].approaches[contentTypeName] = {};
+          appObj[uid].approaches[contentTypeName] = {};
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
@@ -62,6 +67,7 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
             let versionHtmlDescription = '';
             let fullTopic = false;
             let type = 'generic';
+            let links = '';
             // let references = [];
             const versionPathAbsolute
               = `${process.cwd()}/${versionPath}/version.js`;
@@ -93,37 +99,56 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
               if (version.type != null) {
                 ({ type } = version);
               }
+              if (version.links != null) {
+                ({ links } = version);
+              }
             }
-            outObj[uid].approaches[contentTypeName][versionUid] = {};
-            const versionObj = outObj[uid].approaches[contentTypeName][versionUid];
-            versionObj.type = `${type}`;
-            versionObj.title = `${versionTitle}`;
-            versionObj.description = `${versionDescription.replace(/'/, '\\\'')}`;
-            versionObj.htmlTitle = `${versionHtmlTitle.replace(/'/, '\\\'')}`;
-            versionObj.htmlDescription = `${versionHtmlDescription.replace(/'/, '\\\'')}`;
-            versionObj.fullTopic = fullTopic;
+            outObj[uid].approaches[contentTypeName][versionUid] = {
+              type: `${type}`,
+              title: `${versionTitle}`,
+              description: `${versionDescription.replace(/'/, '\\\'')}`,
+              fullTopic,
+            };
+            appObj[uid].approaches[contentTypeName][versionUid] = {
+              type: `${type}`,
+              title: `${versionTitle}`,
+              description: `${versionDescription.replace(/'/, '\\\'')}`,
+              htmlTitle: `${versionHtmlTitle.replace(/'/, '\\\'')}`,
+              htmlDescription: `${versionHtmlDescription.replace(/'/, '\\\'')}`,
+              fullTopic,
+              links,
+            };
           });
         }
         if (contentTypeName === 'quickReference' && buildMode === 'development') {
           topicVersions.forEach((v) => {
             const [versionUid] = v;
-            outObj[uid].approaches[contentTypeName][versionUid] = {};
-            const versionObj = outObj[uid].approaches[contentTypeName][versionUid];
-            versionObj.type = 'presentation';
-            versionObj.title = `${versionUid}`;
-            versionObj.description = '';
-            versionObj.fullTopic = false;
+            outObj[uid].approaches[contentTypeName][versionUid] = {
+              type: 'presentation',
+              title: `${versionUid}`,
+              description: '',
+              fullTopic: false,
+            };
+            appObj[uid].approaches[contentTypeName][versionUid] = {
+              type: 'presentation',
+              title: `${versionUid}`,
+              description: '',
+              fullTopic: false,
+            };
           });
         }
       });
 
       outObj[uid].dependencies = [];
+      appObj[uid].dependencies = [];
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
           outObj[uid].dependencies.push(dependency);
+          appObj[uid].dependencies.push(dependency);
         });
       }
       outObj[uid].enabled = enabled;
+      appObj[uid].enabled = enabled;
     }
   });
 
@@ -135,7 +160,7 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
       console.log(err);
     }
   });
-  fs.writeFile(appFileName, JSON.stringify(outObj, null, 2), (err) => {
+  fs.writeFile(appFileName, JSON.stringify(appObj, null, 2), (err) => {
     if (err) {
       // eslint-disable-next-line no-console
       console.log(err);

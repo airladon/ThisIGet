@@ -121,9 +121,10 @@ function getVersionRating(
 
 function setVersionRating(
   versionUID: string,
+  ratingValue: number,
   callback: (?TypeRating) => void,
 ) {
-  const endPoint = `/setVersionRating/${versionUID}`;
+  const endPoint = `/setVersionRating/${versionUID}?rating=${ratingValue}`;
   fetchPolyfill(endPoint, { credentials: 'same-origin' })
     .then((response) => {
       if (!response.ok) {
