@@ -647,7 +647,6 @@ def get_topic_ratings(path):
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     ratings = {}
     current_ratings = VersionRatingsCache.query.filter_by(topic_uid=path).all()
-    print(current_ratings)
     for rating in current_ratings:
         approach, version = rating.approach_version.split('/')
         if approach not in ratings:
@@ -664,22 +663,6 @@ def get_topic_ratings(path):
                 version_uid=f'{path}/{approach}/{version}').first()
             if user_rating is not None:
                 ratings[approach][version]['user'] = user_rating.rating
-
-    # approaches = topic_index[path]['approaches']
-    # for approach_uid, approach in approaches.items():
-    #     if approach_uid not in ratings:
-    #         ratings[approach_uid] = {}
-    #     for version_uid, versions in approach.items():
-    #         if version_uid not in ratings[approach_uid]:
-    #             ratings[approach_uid][version_uid] = {}
-    #         ratings[approach_uid][version_uid] = {
-    #             'num': 10,
-    #             'high': 3,
-    #             'ave': 2.3,
-    #             'user': 'not logged in'
-    #         }
-    #         if current_user.is_authenticated:
-    #             ratings[approach_uid][version_uid]['user'] = 4
     print(ratings)
     return jsonify({'status': 'ok', 'ratings': ratings})
 
@@ -689,7 +672,7 @@ def get_version_rating(path):
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     topic_uid = '/'.join(path.split('/')[0:-2])
-    approach_version = '/'.join(path.split('/')[-2:-1])
+    approach_version = '/'.join(path.split('/')[-2:])
     rating_stats = {
         'num_ratings': 0,
         'high_ratings': 0,
@@ -698,7 +681,11 @@ def get_version_rating(path):
     current_rating = VersionRatingsCache.query.filter_by(
         topic_uid=topic_uid, approach_version=approach_version).first()
     if current_rating:
-        rating_stats = current_rating
+        rating_stats = {
+            'num_ratings': current_rating.num_ratings,
+            'high_ratings': current_rating.high_ratings,
+            'ave_rating': current_rating.ave_rating,
+        }
     user_rating = 'not logged in'
     if current_user.is_authenticated:
         existing_rating = VersionRatings.query.filter_by(
