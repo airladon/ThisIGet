@@ -646,21 +646,41 @@ def get_topic_ratings(path):
     if path not in topic_index:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     ratings = {}
-    approaches = topic_index[path]['approaches']
-    for approach_uid, approach in approaches.items():
-        if approach_uid not in ratings:
-            ratings[approach_uid] = {}
-        for version_uid, versions in approach.items():
-            if version_uid not in ratings[approach_uid]:
-                ratings[approach_uid][version_uid] = {}
-            ratings[approach_uid][version_uid] = {
-                'num': 10,
-                'high': 3,
-                'ave': 2.3,
-                'user': 'not logged in'
-            }
-            if current_user.is_authenticated:
-                ratings[approach_uid][version_uid]['user'] = 4
+    current_ratings = VersionRatingsCache.query.filter_by(topic_uid=path).all()
+    print(current_ratings)
+    for rating in current_ratings:
+        approach, version = rating.approach_version.split('/')
+        if approach not in ratings:
+            ratings[approach] = {}
+        ratings[approach][version] = {
+            'num': rating.num_ratings,
+            'high': rating.high_ratings,
+            'ave': rating.ave_rating,
+            'user': 0,
+        }
+        if (current_user.is_authenticated):
+            user_rating = VersionRatings.query.filter_by(
+                user=current_user,
+                version_uid=f'{path}/{approach}/{version}').first()
+            if user_rating is not None:
+                ratings[approach][version]['user'] = user_rating.rating
+
+    # approaches = topic_index[path]['approaches']
+    # for approach_uid, approach in approaches.items():
+    #     if approach_uid not in ratings:
+    #         ratings[approach_uid] = {}
+    #     for version_uid, versions in approach.items():
+    #         if version_uid not in ratings[approach_uid]:
+    #             ratings[approach_uid][version_uid] = {}
+    #         ratings[approach_uid][version_uid] = {
+    #             'num': 10,
+    #             'high': 3,
+    #             'ave': 2.3,
+    #             'user': 'not logged in'
+    #         }
+    #         if current_user.is_authenticated:
+    #             ratings[approach_uid][version_uid]['user'] = 4
+    print(ratings)
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
@@ -685,11 +705,10 @@ def get_version_rating(path):
             version_uid=path, user=current_user).first()
         if existing_rating is not None:
             user_rating = existing_rating.rating
-
     rating = {
-        'num': rating_stats.num_ratings,
-        'high': rating_stats.high_ratings,
-        'ave': rating_stats.ave_rating,
+        'num': rating_stats['num_ratings'],
+        'high': rating_stats['high_ratings'],
+        'ave': rating_stats['ave_rating'],
         'user': user_rating,
     }
     return jsonify({'status': 'ok', 'rating': rating})
@@ -722,7 +741,7 @@ def set_version_rating(path):
 
 def update_version_rating_cache(version_uid):
     topic_uid = '/'.join(version_uid.split('/')[0:-2])
-    approach_version = '/'.join(version_uid.split('/')[-2:-1])
+    approach_version = '/'.join(version_uid.split('/')[-2:])
     rating = VersionRatings.query.filter_by(version_uid=version_uid).all()
     ratings = [r.rating for r in rating]
     num = len(ratings)

@@ -190,8 +190,8 @@ export default class TopicComponent extends React.Component
 
     const { topicDescription } = this;
     if (topicDescription != null) {
-      Object.keys(this.state.ratings).forEach((approachUID) => {
-        const approach = this.state.ratings[approachUID];
+      Object.keys(topicDescription.approaches).forEach((approachUID) => {
+        const approach = topicDescription.approaches[approachUID];
         Object.keys(approach).forEach((versionName) => {
           const version = topicDescription.approaches[approachUID][versionName];
           const label = version.title;
@@ -202,7 +202,17 @@ export default class TopicComponent extends React.Component
           // const { description } = version;
           const { fullTopic } = version;
           const { type } = version;
-          const rating = this.state.ratings[approachUID][versionName];
+          let rating = {
+            aveRating: 0,
+            numRatings: 0,
+            numHighRatings: 0,
+            userRating: 0,
+          };
+          if (this.state.ratings != null
+            && this.state.ratings[approachUID] != null
+            && this.state.ratings[approachUID][versionName] != null) {
+            rating = this.state.ratings[approachUID][versionName];
+          }
           let { userRating } = rating;
 
           if (!(approachUID in approaches)) {
