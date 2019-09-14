@@ -137,7 +137,6 @@ def test_set_link_rating(client):
     # Create the rating
     res = client.get(
         f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=4').get_json()
-
     assert res['status'] == 'ok'
 
     # Check the rating is 4
@@ -157,6 +156,24 @@ def test_set_link_rating(client):
     assert ratings.ave_rating == 3
     assert ratings.high_ratings == 0
 
+
+def test_link_ratings_cache(client):
+    # Initially there should be no ratings for this user
+    # user = Users.query.filter_by(
+    #     username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
+
+    client.get(
+        f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=4').get_json()
+    logout(client)
+    login(client, 'test_User_02')
+    client.get(
+        f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=2').get_json()
+
+    # Test Cache
+    ratings = VersionRatingsCache.query.first()
+    assert ratings.num_ratings == 2
+    assert ratings.ave_rating == 3
+    assert ratings.high_ratings == 1
 
 # def test_set_rating_not_logged_in(client):
 #     logout(client)
