@@ -39,25 +39,24 @@ def run_around_tests(client):
 
 def test_set_rating(client):
     # Initially there should be no ratings for this user
-    # user = Users.query.filter_by(username='test_User_01').first()
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
     assert user.version_ratings.all() == []
-    user_id = user.id
+    # user_id = user.id
 
     # Create the rating
     res = client.get(f'/setVersionRating/{topic1}?rating=4').get_json()
     assert res['status'] == 'ok'
 
     # Check the rating is 4
-    rating = VersionRatings.query.filter_by(user_id=user_id).first()
+    rating = VersionRatings.query.filter_by(user=user).first()
     assert rating.rating == 4
     # time = rating.timestamp
 
     # Overwrite the rating to 3
     res = client.get(f'/setVersionRating/{topic1}?rating=3').get_json()
     assert res['status'] == 'ok'
-    rating = VersionRatings.query.filter_by(user_id=user_id).first()
+    rating = VersionRatings.query.filter_by(user=user).first()
     assert rating.rating == 3
 
     # Test Cache
@@ -66,6 +65,27 @@ def test_set_rating(client):
     assert ratings.ave_rating == 3
     assert ratings.high_ratings == 0
 
+
+def test_ratings_cache(client):
+    # Initially there should be no ratings for this user
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
+    assert user.version_ratings.all() == []
+
+    res = client.get(f'/setVersionRating/{topic1}?rating=4').get_json()
+    assert res['status'] == 'ok'
+
+    logout(client)
+
+    login(client, 'test_User_02')
+    res = client.get(f'/setVersionRating/{topic1}?rating=2').get_json()
+    assert res['status'] == 'ok'
+
+    # Test Cache
+    ratings = VersionRatingsCache.query.first()
+    assert ratings.num_ratings == 2
+    assert ratings.ave_rating == 3
+    assert ratings.high_ratings == 1
 
 # def test_set_link_rating(client):
 #     # Initially there should be no ratings for this user
