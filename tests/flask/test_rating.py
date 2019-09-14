@@ -66,6 +66,33 @@ def test_set_rating(client):
     assert ratings.high_ratings == 0
 
 
+def test_get_rating(client):
+    res = client.get(f'/setVersionRating/{topic1}?rating=4').get_json()
+    assert res['status'] == 'ok'
+    res = client.get(f'/getVersionRating/{topic1}').get_json()
+    assert res['status'] == 'ok'
+    assert res['rating'] == {
+        'num': 1,
+        'high': 1,
+        'ave': 4,
+        'user': 4,
+    }
+
+
+def test_get_rating_logged_out(client):
+    res = client.get(f'/setVersionRating/{topic1}?rating=4').get_json()
+    assert res['status'] == 'ok'
+    logout(client)
+    res = client.get(f'/getVersionRating/{topic1}').get_json()
+    assert res['status'] == 'ok'
+    assert res['rating'] == {
+        'num': 1,
+        'high': 1,
+        'ave': 4,
+        'user': 'not logged in',
+    }
+
+
 def test_ratings_cache(client):
     # Initially there should be no ratings for this user
     user = Users.query.filter_by(
