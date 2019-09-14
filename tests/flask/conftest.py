@@ -4,8 +4,9 @@ import sys
 basedir = os.path.abspath(os.path.dirname(__file__))
 sys.path.insert(0, './app/')
 from app import app  # noqa
-from app.models import db, Users, Ratings, LinkRatings, AllLinkRatings  # noqa
-from app.models import AllRatings  # noqa
+from app.models import db, Users  # noqa
+from app.models import VersionRatings, VersionRatingsCache  # noqa
+from app.models import LinkRatings, LinkRatingsCache  # noqa
 from app.tools import hash_str_with_pepper  # noqa E402
 
 # Remember, if database changes have happened, need to copy the new
@@ -46,10 +47,10 @@ def client(request):
     #     ctx.pop()
 
     Users.query.delete()
-    Ratings.query.delete()
-    AllRatings.query.delete()
-    AllLinkRatings.query.delete()
+    VersionRatings.query.delete()
+    VersionRatingsCache.query.delete()
     LinkRatings.query.delete()
+    LinkRatingsCache.query.delete()
     create_user('test_User_01', 'test_user_01@thisiget.com')
     create_user('test_user_02')
 
@@ -66,8 +67,8 @@ def client(request):
 
     def fin():
         Users.query.delete()
-        Ratings.query.delete()
-        AllRatings.query.delete()
-        AllLinkRatings.query.delete()
+        VersionRatings.query.delete()
+        VersionRatingsCache.query.delete()
         LinkRatings.query.delete()
+        LinkRatingsCache.query.delete()
     request.addfinalizer(fin)
