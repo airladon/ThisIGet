@@ -46,7 +46,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
-lessons = getContent()
+static_files = getContent()
 topic_index, version_list, link_list = getTopicIndex()
 
 from app import routes, models  # noqa

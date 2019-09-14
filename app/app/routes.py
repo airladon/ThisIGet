@@ -11,7 +11,7 @@
 
 from flask import render_template, flash, redirect, url_for, jsonify, session
 from flask import make_response, request
-from app import app, db, lessons, version_list, topic_index, link_list
+from app import app, db, static_files, version_list, topic_index, link_list
 from app.forms import LoginForm, CreateAccountForm, ResetPasswordRequestForm
 from app.forms import ResetPasswordForm, ConfirmAccountMessageForm
 from flask_login import current_user, login_user, logout_user
@@ -27,7 +27,7 @@ from app.models import VersionRatingsCache
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -43,12 +43,12 @@ def make_response_with_files(*args, **kwargs):
     polyfill_js = ''
     topic_index_js = ''
     about_js = ''
-    # The checks for keys in lessons is for pytest in deployment pipeline.
+    # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
-    if 'static/dist' in lessons:
-        dist = lessons['static/dist']
-        static = lessons['static']
+    if 'static/dist' in static_files:
+        dist = static_files['static/dist']
+        static = static_files['static']
         vendors_js = f"/{'static/dist'}/{dist['vendors.js']}"
         common_content_js = f"/{'static/dist'}/{dist['commoncontent.js']}"
         main_css = f"/{'static/dist'}/{dist['home.css']}"
@@ -89,7 +89,7 @@ def check_confirmed(func):
 
 
 def get_full_path(root, file):
-    return f'/{root}/{lessons[root][file]}'
+    return f'/{root}/{static_files[root][file]}'
 
 
 @app.route('/') # noqa
@@ -118,8 +118,8 @@ def bingsitemap():
 def information_response(name):
     information_js = ''
     information_css = ''
-    if 'static/dist' in lessons:
-        info = lessons['static/dist']
+    if 'static/dist' in static_files:
+        info = static_files['static/dist']
         information_js = \
             f"/{'static/dist'}/{info[f'{name}.js']}"
         information_css = \
@@ -189,16 +189,16 @@ def is_logged_in():
 @app.route('/content/', defaults={'path': ''})  # noqa
 @app.route('/content/<path:path>')
 def get_content(path):
-    lesson_path = f'static/dist/content/{path}'.strip('/')
+    content_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
-    if (lesson_path in lessons):
+    if (content_path in static_files):
         js = f'/static/dist/content/' \
-             f'{path}/{lessons[lesson_path]["content.js"]}'
+             f'{path}/{static_files[content_path]["content.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["content.css"]}'
+              f'{static_files[content_path]["content.css"]}'
 
-    *p, lesson_uid, topic_name, version_uid = path.strip('/').split('/')
+    *p, content_path, topic_name, version_uid = path.strip('/').split('/')
 
     end_point = f"{path}"
 
@@ -212,14 +212,14 @@ def get_content(path):
             title = version['title']
         description = version['description']
 
-    lesson_page = request.args.get('page')
+    topic_page = request.args.get('page')
 
     res = make_response_with_files(
         'content.html', css=css, js=js, title=title, description=description)
-    if lesson_page:
+    if topic_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
-            key='page', value=lesson_page,
+            key='page', value=topic_page,
             path=request.path, max_age=30 * 60)
         return res
     return res
@@ -236,9 +236,9 @@ def get_qr_file_location(path):
     qr_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
-    if (qr_path in lessons):
-        js = lessons[qr_path]["quickReference.js"]
-        css = lessons[qr_path]["quickReference.css"]
+    if (qr_path in static_files):
+        js = static_files[qr_path]["quickReference.js"]
+        css = static_files[qr_path]["quickReference.css"]
     return jsonify({
         'status': 'ok',
         'js': js,
@@ -248,34 +248,25 @@ def get_qr_file_location(path):
 
 @app.route('/dev/content/', defaults={'path': ''})
 @app.route('/dev/content/<path:path>')
-def get_lesson_dev(path):
-    lesson_path = f'static/dist/content/{path}'.strip('/')
+def get_content_dev(path):
+    content_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
-    if (lesson_path in lessons):
+    if (content_path in static_files):
         js = f'/static/dist/content/{path}/' \
-             f'{lessons[lesson_path]["content-dev.js"]}'
+             f'{static_files[content_path]["content-dev.js"]}'
         css = f'/static/dist/content/{path}/' \
-              f'{lessons[lesson_path]["content-dev.css"]}'
-    lesson_page = request.args.get('page')
+              f'{static_files[content_path]["content-dev.css"]}'
+    topic_page = request.args.get('page')
 
     res = make_response_with_files('content.html', css=css, js=js)
-    if lesson_page:
+    if topic_page:
         res = make_response(redirect(request.path))
         res.set_cookie(
-            key='page', value=lesson_page,
+            key='page', value=topic_page,
             path=request.path, max_age=30 * 60)
         return res
     return res
-
-
-# @app.route('/content/<subject>/<lesson_id>')
-# def get_lesson(subject, lesson_id):
-#     print(lesson_id)
-#     path = f'/static/dist/content/{subject}/{lesson_id}'
-#     css = f'{path}/lesson.css'
-#     js = f'{path}/lesson.js'
-#     return render_template('lesson.html', css=css, js=js)
 
 
 @app.route('/favicon.ico')
@@ -289,7 +280,7 @@ def apple_touch_icon():
     return app.send_static_file('assets/icon.png')
 
 
-# @app.route('/lessons/chapter1')
+# @app.route('/static_files/chapter1')
 # def chapter1():
 #     return "Chapter 1 Content"
 
@@ -312,9 +303,9 @@ def login(username=''):
         return redirect(url_for('home'))
     js = ''
     css = ''
-    if 'static/dist' in lessons:
-        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    if 'static/dist' in static_files:
+        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
     form = LoginForm()
     if username:
         # user = Users.query.filter_by(username=username).first()
@@ -357,9 +348,9 @@ def create():
         return redirect(url_for('home'))
     js = ''
     css = ''
-    if 'static/dist' in lessons:
-        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    if 'static/dist' in static_files:
+        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
     form = CreateAccountForm()
     if form.validate_on_submit():
         user = Users()
@@ -382,9 +373,9 @@ def confirm_account_message(username):
         return redirect(url_for('home'))
     js = ''
     css = ''
-    if 'static/dist' in lessons:
-        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    if 'static/dist' in static_files:
+        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
     form = ConfirmAccountMessageForm()
     user = Users.query.filter_by(
         username_hash=hash_str_with_pepper(username)).first()
@@ -443,9 +434,9 @@ def confirm_account(token):
 def reset_password_request():
     js = ''
     css = ''
-    if 'static/dist' in lessons:
-        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    if 'static/dist' in static_files:
+        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     form = ResetPasswordRequestForm()
@@ -467,9 +458,9 @@ def reset_password_request():
 def reset_password(token):
     js = ''
     css = ''
-    if 'static/dist' in lessons:
-        js = f"/{'static/dist'}/{lessons['static/dist']['input.js']}"
-        css = f"/{'static/dist'}/{lessons['static/dist']['input.css']}"
+    if 'static/dist' in static_files:
+        js = f"/{'static/dist'}/{static_files['static/dist']['input.js']}"
+        css = f"/{'static/dist'}/{static_files['static/dist']['input.css']}"
     if current_user.is_authenticated:
         return redirect(url_for('home'))
     user = Users.verify_reset_password_token(token)
@@ -489,9 +480,7 @@ def reset_password(token):
 def logout():
     logout_user()
     session.pop('username', None)
-    # lesson_page = request.args.get('page')
-    # if lesson_page is None:
-    #     lesson_page = '0'
+
     next_page = request.args.get('next')
     if not next_page or url_parse(next_page).netloc != '':
         next_page = url_for('home')
@@ -506,138 +495,6 @@ def isInt(s):
         return True
     except ValueError:
         return False
-
-
-# # deprecated
-# def getVersion(lesson_uid, topic_name, version_uid):
-#     # lesson = Lessons.query.filter_by(uid=lesson_uid).first()
-#     # if lesson is None:
-#     #     return jsonify(
-#     #         {'status': 'fail', 'message': 'lesson does not exist'})
-#     # topic = Topics.query.filter_by(
-#     #     lesson=lesson, name=topic_name).first()
-#     # if topic is None:
-#     #     return jsonify(
-#     #         {'status': 'fail', 'message': 'topic does not exist'})
-#     # version = Versions.query.filter_by(
-#     #     topic_id=topic.id, uid=version_uid).first()
-#     # if version is None:
-#     #     return jsonify(
-#     #         {'status': 'fail', 'message': 'version does not exist'})
-#     version = db.session.query(Versions).join(Topics).join(Lessons).filter(
-#         Lessons.uid == lesson_uid,
-#         Topics.name == topic_name,
-#         Versions.uid == version_uid).first()
-#     if version is None:
-#         return 'lesson/topic/version does not exist'
-#         # return jsonify(
-#         #     {'status': 'fail', 'message': 'lesson/topic/version exist'})
-#     return version
-
-
-# # deprecated
-# def getLinkVersion(version_id, url_hash):
-#     link_version = db.session.query(LinkVersions).join(Links).filter(
-#         Links.url_hash == url_hash,
-#         Versions.id == version_id).first()
-#     # link = Links.query.filter_by(url_hash=url_hash)
-#     # if link is None:
-#     #     return jsonify(
-#     #         {'status': 'fail', 'message': 'link does not exist'})
-
-#     # link_version = LinkVersions.query.filter_by(
-#     #     version_id=version_uid, link_id=link.id)
-#     if link_version is None:
-#         return 'link/version does not exist'
-#         # return jsonify(
-#         #     {'status': 'fail', 'message': 'link/version does not exist'})
-#     return link_version
-
-
-# # deprecated
-# @check_confirmed
-# @app.route('/rate/<lesson_uid>/<topic_name>/<version_uid>/<rating_value>')
-# def rate(lesson_uid, topic_name, version_uid, rating_value):
-#     # print(lesson_uid, topic_name, version_uid, rating_value)
-#     status = 'not logged in'
-#     if current_user.is_authenticated:
-#         version = getVersion(lesson_uid, topic_name, version_uid)
-#         if isinstance(version, str):
-#             return jsonify({'status': 'fail', 'message': version})
-
-#         user_rating = Ratings.query.filter_by(
-#             version=version, user=current_user).first()
-#         if user_rating is None:
-#             user_rating = Ratings(user=current_user, version=version)
-#             db.session.add(user_rating)
-#         if rating_value not in ['1', '2', '3', '4', '5']:
-#             return jsonify({'status': 'fail', 'message': 'invalid rating'})
-#         if user_rating.rating != rating_value:
-#             user_rating.rating = rating_value
-
-#         generic_rating = AllRatings(user=current_user, version=version)
-#         generic_rating.timestamp = datetime.datetime.now()
-#         generic_rating.rating = rating_value
-
-#         page = request.args.get('page')
-#         pages = request.args.get('pages')
-#         if page is not None and pages is not None \
-#            and isInt(page) and isInt(pages) \
-#            and int(page) < int(pages):
-#             generic_rating.page = page
-#             generic_rating.pages = pages
-
-#         db.session.add(generic_rating)
-#         db.session.commit()
-#         status = 'done'
-#     return jsonify({'status': status})
-
-
-# # deprecated
-# @check_confirmed
-# @app.route('/ratelink/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>/<rating_value>')  # noqa
-# def rateLink(lesson_uid, topic_name, version_uid, url_hash, rating_value):
-#     # print(lesson_uid, topic_name, version_uid, rating_value)
-#     status = 'not logged in'
-#     if current_user.is_authenticated:
-#         version = getVersion(lesson_uid, topic_name, version_uid)
-#         if isinstance(version, str):
-#             return jsonify({'status': 'fail', 'message': version})
-
-#         link_version = getLinkVersion(version.id, url_hash)
-#         if isinstance(link_version, str):
-#             return jsonify({'status': 'fail', 'message': link_version})
-
-#         user_rating = LinkRatings.query.filter_by(
-#             link_version_id=link_version.id, user_id=current_user.id).first()
-#         if user_rating is None:
-#             user_rating = LinkRatings(
-#                 user_id=current_user.id, link_version_id=link_version.id)
-#             db.session.add(user_rating)
-
-#         if rating_value not in ['1', '2', '3', '4', '5']:
-#             return jsonify(
-#                 {'status': 'fail', 'message': 'invalid rating'})
-#         if user_rating.rating != rating_value:
-#             user_rating.rating = rating_value
-
-#         generic_rating = AllLinkRatings(
-#             user_id=current_user.id, link_version_id=link_version.id)
-#         generic_rating.timestamp = datetime.datetime.now()
-#         generic_rating.rating = rating_value
-
-#         page = request.args.get('page')
-#         pages = request.args.get('pages')
-#         if page is not None and pages is not None \
-#            and isInt(page) and isInt(pages) \
-#            and int(page) < int(pages):
-#             generic_rating.page = page
-#             generic_rating.pages = pages
-
-#         db.session.add(generic_rating)
-#         db.session.commit()
-#         status = 'done'
-#     return jsonify({'status': status})
 
 
 @app.route('/getTopicRatings/', defaults={'path': ''})  # noqa
@@ -663,7 +520,6 @@ def get_topic_ratings(path):
                 version_uid=f'{path}/{approach}/{version}').first()
             if user_rating is not None:
                 ratings[approach][version]['user'] = user_rating.rating
-    # print(ratings)
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
@@ -820,94 +676,3 @@ def set_link_rating(path):
     # print(rating, link_hash)
     cached_rating = get_link_rating(path, link_hash, current_user)
     return jsonify({'status': 'ok', 'rating': cached_rating})
-
-
-# # deprecated
-# @check_confirmed
-# @app.route('/rating/<lesson_uid>/<topic_name>/<version_uid>')
-# def get_rating(lesson_uid, topic_name, version_uid):
-#     num_ratings = 0
-#     ave_rating = 0
-#     num_high_ratings = 0
-#     user_rating_value = 'not logged in'
-
-#     version = getVersion(lesson_uid, topic_name, version_uid)
-#     if isinstance(version, str):
-#         return jsonify({'status': 'fail', 'message': version})
-
-#     ratings = Ratings.query.filter_by(version=version).all()
-#     if ratings is None:
-#         ratings = []
-#     num_ratings = len(ratings)
-#     sum_ratings = 0
-#     num_high_ratings = 0
-#     for r in ratings:
-#         sum_ratings += r.rating
-#         if r.rating >= 4:
-#             num_high_ratings += 1
-#     ave_rating = 0
-#     if num_ratings > 0:
-#         ave_rating = round(sum_ratings / num_ratings, 1)
-
-#     if current_user.is_authenticated:
-#         user_rating = Ratings.query.filter_by(
-#             user=current_user, version=version).first()
-#         if user_rating is None:
-#             user_rating_value = 'not rated'
-#         else:
-#             user_rating_value = user_rating.rating
-#     return jsonify({
-#         'status': 'ok',
-#         'message': '',
-#         'userRating': user_rating_value,
-#         'numRatings': num_ratings,
-#         'aveRating': ave_rating,
-#         'numHighRatings': num_high_ratings})
-
-
-# # deprecated
-# @check_confirmed
-# @app.route('/linkrating/<lesson_uid>/<topic_name>/<version_uid>/<url_hash>')
-# def get_link_rating(lesson_uid, topic_name, version_uid, url_hash):
-#     num_ratings = 0
-#     ave_rating = 0
-#     num_high_ratings = 0
-#     user_rating_value = 'not logged in'
-
-#     version = getVersion(lesson_uid, topic_name, version_uid)
-#     if isinstance(version, str):
-#         return jsonify({'status': 'fail', 'message': version})
-
-#     link_version = getLinkVersion(version.id, url_hash)
-#     if isinstance(version, str):
-#         return jsonify({'status': 'fail', 'message': version})
-
-#     ratings = LinkRatings.query.filter_by(
-#         link_version_id=link_version.id).all()
-#     if ratings is None:
-#         ratings = []
-#     num_ratings = len(ratings)
-#     sum_ratings = 0
-#     num_high_ratings = 0
-#     for r in ratings:
-#         sum_ratings += r.rating
-#         if r.rating >= 4:
-#             num_high_ratings += 1
-#     ave_rating = 0
-#     if num_ratings > 0:
-#         ave_rating = round(sum_ratings / num_ratings, 1)
-
-#     if current_user.is_authenticated:
-#         user_rating = LinkRatings.query.filter_by(
-#             user_id=current_user.id, link_version_id=link_version.id).first()
-#         if user_rating is None:
-#             user_rating_value = 'not rated'
-#         else:
-#             user_rating_value = user_rating.rating
-#     return jsonify({
-#         'status': 'ok',
-#         'message': '',
-#         'userRating': user_rating_value,
-#         'numRatings': num_ratings,
-#         'aveRating': ave_rating,
-#         'numHighRatings': num_high_ratings})
