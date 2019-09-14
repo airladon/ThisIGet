@@ -135,7 +135,7 @@ export default class TopicComponent extends React.Component
       }
     }
     // Immediately change state. State will change back if it didn't work when
-    // method returns
+    // setVersionRating returns
     this.setState({ userRating: rating });
     setVersionRating(this.versionUID, rating, (newRating) => {
       if (newRating != null && typeof newRating.user === 'number') {
@@ -146,6 +146,7 @@ export default class TopicComponent extends React.Component
           numHighRatings: newRating.high,
           userRating: newRating.user,
         };
+        // $FlowFixMe
         this.setState({ ratings, userRating: newRating.user });
       }
     });
