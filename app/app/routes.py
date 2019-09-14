@@ -725,17 +725,19 @@ def update_link_rating_cache(version_uid, link_hash):
     db.session.commit()
 
 
-def get_link_rating(version_uid, link_hash, user=''):
+def get_link_rating(version_uid, link_hash, user=None):
     rating = LinkRatingsCache.query.filter_by(
         version_uid=version_uid, link_hash=link_hash).first()
     if rating is None:
+        # num, high, ave, user
         return [0, 0, 0, 0]
     user_rating = 0
-    if user:
+    if user and user.is_authenticated:
         existing_rating = LinkRatings.query.filter_by(
             user=user, version_uid=version_uid,
             link_hash=link_hash).first()
-        user_rating = existing_rating.rating
+        if existing_rating is not None:
+            user_rating = existing_rating.rating
     return [rating.num_ratings, rating.high_ratings,
             rating.ave_rating, user_rating]
 
@@ -745,12 +747,16 @@ def get_link_ratings(path):
     if path not in link_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
 
+    # cached_ratings = LinkRatingsCache.query.filter_by(
+    #     version_uid=path).all()
+
     ratings = []
     for link in link_list[path]:
-        # num, high, ave, user
-        ratings.append([4, 2, 2.3, 0])
-        if current_user.is_authenticated:
-            ratings[-1][3] = 3
+        rating = get_link_rating(path, link['hash'], current_user)
+        print(rating)
+        ratings.append(rating)
+        # if current_user.is_authenticated:
+        #     ratings[-1][3] = 3
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
