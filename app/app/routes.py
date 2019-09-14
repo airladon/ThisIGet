@@ -96,7 +96,7 @@ def get_full_path(root, file):
 def home():
     res = make_response_with_files('home.html')
     res.set_cookie('page', '0')
-    print(f"{request.remote_addr} {request.headers.get('User-Agent')}")
+    # print(f"{request.remote_addr} {request.headers.get('User-Agent')}")
     return res
 
 
@@ -663,7 +663,7 @@ def get_topic_ratings(path):
                 version_uid=f'{path}/{approach}/{version}').first()
             if user_rating is not None:
                 ratings[approach][version]['user'] = user_rating.rating
-    print(ratings)
+    # print(ratings)
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
@@ -793,7 +793,6 @@ def get_link_ratings(path):
     ratings = []
     for link in link_list[path]:
         rating = get_link_rating(path, link['hash'], current_user)
-        print(rating)
         ratings.append(rating)
     return jsonify({'status': 'ok', 'ratings': ratings})
 

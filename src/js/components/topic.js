@@ -134,8 +134,9 @@ export default class TopicComponent extends React.Component
         }
       }
     }
-    // const page = parseInt(getCookie('page'), 10) - 1 || 0;
-
+    // Immediately change state. State will change back if it didn't work when
+    // method returns
+    this.setState({ userRating: rating });
     setVersionRating(this.versionUID, rating, (newRating) => {
       if (newRating != null && typeof newRating.user === 'number') {
         const { ratings } = this.state;
