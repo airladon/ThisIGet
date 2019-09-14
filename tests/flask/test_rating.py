@@ -2,14 +2,16 @@ import pytest  # noqa: F401
 import sys
 # import pdb
 sys.path.insert(0, './app/')
-from app.models import db, Users
-from app.models import VersionRatings, VersionRatingsCache
-from app.models import LinkRatings, LinkRatingsCache
+from app.models import db, Users  # noqa E402
+from app.models import VersionRatings, VersionRatingsCache  # noqa E402
+from app.models import LinkRatings, LinkRatingsCache  # noqa E402
 # from app.models import AllRatings, AllLinkRatings # noqa E402
 from app.tools import hash_str_with_pepper  # noqa E402
 
 topic1 = 'Math/Geometry_1/Introduction/explanation/base'
-topic2 = 'Math/Geometry_1/Circle/explanation/base'
+topic2 = 'Math/Geometry_1/Circle'
+version2a = f'{topic2}/explanation/base'
+version2b = f'{topic2}/summary/base'
 link1 = 'Math/Geometry_1/RightAngleTriangles/links/base/0d0bf3df02ca4f1cae21e8ee0fc2f2c5'
 
 
@@ -91,6 +93,15 @@ def test_get_rating_logged_out(client):
         'ave': 4,
         'user': 'not logged in',
     }
+
+
+def test_get_topic_ratings(client):
+    client.get(f'/setVersionRating/{version2a}?rating=4').get_json()
+    client.get(f'/setVersionRating/{version2b}?rating=3').get_json()
+    res = client.get(f'getTopicRatings/{topic2}').get_json()
+    assert len(res['ratings']) == 2
+    assert res['ratings']['explanation']['base']['user'] == 4
+    assert res['ratings']['summary']['base']['user'] == 3
 
 
 def test_ratings_cache(client):
