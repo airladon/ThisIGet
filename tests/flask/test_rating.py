@@ -12,7 +12,8 @@ topic1 = 'Math/Geometry_1/Introduction/explanation/base'
 topic2 = 'Math/Geometry_1/Circle'
 version2a = f'{topic2}/explanation/base'
 version2b = f'{topic2}/summary/base'
-link1 = 'Math/Geometry_1/RightAngleTriangles/links/base/0d0bf3df02ca4f1cae21e8ee0fc2f2c5'
+link_1_path = 'Math/Geometry_1/RightAngleTriangles/links/base'
+link_1_hash = '0d0bf3df02ca4f1cae21e8ee0fc2f2c5'
 
 
 def login(
@@ -125,32 +126,36 @@ def test_ratings_cache(client):
     assert ratings.ave_rating == 3
     assert ratings.high_ratings == 1
 
-# def test_set_link_rating(client):
-#     # Initially there should be no ratings for this user
-#     # user = Users.query.filter_by(username='test_User_01').first()
-#     user = Users.query.filter_by(
-#         username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
-#     assert user.ratings.all() == []
-#     user_id = user.id
 
-#     # Create the rating
-#     res = client.get(f'/ratelink/{lesson3}/4').get_json()
-#     assert res['status'] == 'done'
+def test_set_link_rating(client):
+    # Initially there should be no ratings for this user
+    # user = Users.query.filter_by(username='test_User_01').first()
+    user = Users.query.filter_by(
+        username_hash=hash_str_with_pepper('test_User_01'.lower())).first()
+    assert user.link_ratings.all() == []
 
-#     # Check the rating is 4
-#     rating = LinkRatings.query.filter_by(user_id=user_id).first()
-#     assert rating.rating == 4
-#     # time = rating.timestamp
+    # Create the rating
+    res = client.get(
+        f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=4').get_json()
 
-#     # Overwrite the rating to 3
-#     res = client.get(f'/ratelink/{lesson3}/3').get_json()
-#     assert res['status'] == 'done'
-#     rating = LinkRatings.query.filter_by(user_id=user_id).first()
-#     assert rating.rating == 3
+    assert res['status'] == 'ok'
 
-#     # Test all Link Ratings
-#     all_ratings = AllLinkRatings.query.all()
-#     assert len(all_ratings) == 2
+    # Check the rating is 4
+    rating = LinkRatings.query.filter_by(user=user).first()
+    assert rating.rating == 4
+    # time = rating.timestamp
+
+    # Overwrite the rating to 3
+    res = client.get(
+        f'/setLinkRating/{link_1_path}?hash={link_1_hash}&rating=3').get_json()
+    rating = LinkRatings.query.filter_by(user=user).first()
+    assert rating.rating == 3
+
+    # Test Cache
+    ratings = LinkRatingsCache.query.first()
+    assert ratings.num_ratings == 1
+    assert ratings.ave_rating == 3
+    assert ratings.high_ratings == 0
 
 
 # def test_set_rating_not_logged_in(client):

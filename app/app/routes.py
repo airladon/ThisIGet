@@ -27,7 +27,7 @@ from app.models import VersionRatingsCache
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -609,6 +609,8 @@ def update_link_rating_cache(version_uid, link_hash):
         version_uid=version_uid, link_hash=link_hash).all()
     ratings = [r.rating for r in rating]
     num = len(ratings)
+    # print(ratings)
+    # pdb.set_trace()
     ave = sum(ratings) / num
     high = len(list(r for r in ratings if r > 3))
     existing_rating = LinkRatingsCache.query.filter_by(
