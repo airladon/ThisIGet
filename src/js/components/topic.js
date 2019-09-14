@@ -13,6 +13,7 @@ import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
+import {setVersionRating} from '../Lesson/rating';
 
 type Props = {
   version: Object;
@@ -23,7 +24,7 @@ type State = {
   userRating: number;
   ratings: {
     [approachUID: string]: {
-      [versionUID: string]: {
+      [versionName: string]: {
         aveRating: number,
         numRatings: number,
         numHighRatings: number,
@@ -51,7 +52,8 @@ export default class TopicComponent extends React.Component
   versionDetails: Object;
   approachUID: string;
   firstPage: number;
-  topicUID: string;
+  topicName: string;
+  versionName: string;
   versionUID: string;
 
   constructor(props: Props) {
@@ -59,13 +61,14 @@ export default class TopicComponent extends React.Component
     this.version = props.version;
     const path = window.location.pathname.replace(/\/$/, '').split('/');
     /* eslint-disable prefer-destructuring */
-    this.topicUID = path.slice(-3, -2)[0];
+    this.topicName = path.slice(-3, -2)[0];
     this.approachUID = path.slice(-2, -1)[0];
-    this.versionUID = path.slice(-1)[0];
+    this.versionName = path.slice(-1)[0];
     /* eslint-enable */
-    const topicPath = window.location.pathname.replace(/^.*\/content\//, '')
+    this.versionUID = window.location.pathname.replace(/^.*\/content\//, '');
+    const topicUID = window.location.pathname.replace(/^.*\/content\//, '')
       .split('/').slice(0, -2).join('/');
-    this.topicDescription = getTopicDescription(topicPath);
+    this.topicDescription = getTopicDescription(topicUID);
     this.state = {
       userRating: 0,
       ratings: this.fillRatings(),
@@ -89,10 +92,10 @@ export default class TopicComponent extends React.Component
       if (!(approachUID in ratings)) {
         ratings[approachUID] = {};
       }
-      Object.keys(versions).forEach((versionUID) => {
-        const version = versions[versionUID];
+      Object.keys(versions).forEach((versionName) => {
+        const version = versions[versionName];
         if (version.rating != null) {
-          ratings[approachUID][versionUID] = {
+          ratings[approachUID][versionName] = {
             aveRating: version.rating.ave,
             numRatings: version.rating.num,
             numHighRatings: version.rating.high,
@@ -111,8 +114,8 @@ export default class TopicComponent extends React.Component
     let userRating = 0;
     if (ratings[this.approachUID] != null) {
       const approach = ratings[this.approachUID];
-      if (approach[this.versionUID] != null) {
-        const rating = approach[this.versionUID].userRating;
+      if (approach[this.versionName] != null) {
+        const rating = approach[this.versionName].userRating;
         if (typeof rating === 'number') {
           userRating = rating;
         }
@@ -131,24 +134,20 @@ export default class TopicComponent extends React.Component
         }
       }
     }
-    const page = parseInt(getCookie('page'), 10) - 1 || 0;
+    // const page = parseInt(getCookie('page'), 10) - 1 || 0;
 
-    const link = `/rate/${this.topicUID}/${this.approachUID}/${this.versionUID}/${rating}?page=${page + 1};pages=${this.version.content.sections.length}`;
-    fetchPolyfill(link, { credentials: 'same-origin' })
-      .then((response) => {
-        if (!response.ok) {
-          throw Error(response.statusText);
-        }
-        return response.json();
-      })
-      .then((data) => {
-        if (data.status === 'done') {
-          this.setState({ userRating: rating });
-        } else {
-          // console.log('failed to set rating:', data.message);
-        }
-      })
-      .catch(() => {});
+    setVersionRating(this.versionUID, rating, (newRating) => {
+      if (newRating != null && typeof newRating.user === 'number') {
+        const { ratings } = this.state;
+        ratings[this.approachUID][this.versionName] = {
+          aveRating: newRating.ave,
+          numRatings: newRating.num,
+          numHighRatings: newRating.high,
+          userRating: newRating.user,
+        };
+        this.setState({ ratings, userRating: newRating.user });
+      }
+    });
   }
 
   renderTitle(title: string) {
@@ -193,17 +192,17 @@ export default class TopicComponent extends React.Component
     if (topicDescription != null) {
       Object.keys(this.state.ratings).forEach((approachUID) => {
         const approach = this.state.ratings[approachUID];
-        Object.keys(approach).forEach((versionUID) => {
-          const version = topicDescription.approaches[approachUID][versionUID];
+        Object.keys(approach).forEach((versionName) => {
+          const version = topicDescription.approaches[approachUID][versionName];
           const label = version.title;
-          let link = `${topicDescription.path}/${topicDescription.uid}/${approachUID}/${versionUID}`;
+          let link = `${topicDescription.path}/${topicDescription.uid}/${approachUID}/${versionName}`;
           if (approachUID === 'dev') {
-            link = `/dev${topicDescription.path}/${topicDescription.uid}/quickReference/${versionUID}`;
+            link = `/dev${topicDescription.path}/${topicDescription.uid}/quickReference/${versionName}`;
           }
           // const { description } = version;
           const { fullTopic } = version;
           const { type } = version;
-          const rating = this.state.ratings[approachUID][versionUID];
+          const rating = this.state.ratings[approachUID][versionName];
           let { userRating } = rating;
 
           if (!(approachUID in approaches)) {
@@ -211,12 +210,12 @@ export default class TopicComponent extends React.Component
           }
           let active = false;
           // console.log(currentExplanation, version, topic)
-          if (this.versionUID === versionUID
+          if (this.versionName === versionName
             && this.approachUID === approachUID) {
             active = true;
             ({ userRating } = this.state);
           }
-          approaches[approachUID][versionUID] = {
+          approaches[approachUID][versionName] = {
             label,
             link,
             userRating,

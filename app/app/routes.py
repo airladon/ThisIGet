@@ -20,6 +20,7 @@ import datetime
 # from sqlalchemy import func
 from app.tools import hash_str_with_pepper
 from app.models import Users, VersionRatings, LinkRatings, LinkRatingsCache
+from app.models import VersionRatingsCache
 # from app.models import Ratings, AllRatings
 # from app.models import Lessons, Versions, Topics
 # from functools import reduce
@@ -667,16 +668,30 @@ def get_topic_ratings(path):
 def get_version_rating(path):
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
-
-    rating = {}
-    rating = {
-        'num': 10,
-        'high': 2,
-        'ave': 2.3,
-        'user': 'not logged in'
+    topic_uid = '/'.join(path.split('/')[0:-2])
+    approach_version = '/'.join(path.split('/')[-2:-1])
+    rating_stats = {
+        'num_ratings': 0,
+        'high_ratings': 0,
+        'ave_rating': 0,
     }
+    current_rating = VersionRatingsCache.query.filter_by(
+        topic_uid=topic_uid, approach_version=approach_version).first()
+    if current_rating:
+        rating_stats = current_rating
+    user_rating = 'not logged in'
     if current_user.is_authenticated:
-        rating['user'] = 4
+        existing_rating = VersionRatings.query.filter_by(
+            version_uid=path, user=current_user).first()
+        if existing_rating is not None:
+            user_rating = existing_rating.rating
+
+    rating = {
+        'num': rating_stats.num_ratings,
+        'high': rating_stats.high_ratings,
+        'ave': rating_stats.ave_rating,
+        'user': user_rating,
+    }
     return jsonify({'status': 'ok', 'rating': rating})
 
 
@@ -687,11 +702,10 @@ def set_version_rating(path):
         return jsonify({'status': 'fail', 'message': 'no logged in'})
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
-    # set rating
     rating = request.args.get('rating')
     if rating is None:
         return jsonify({'status': 'fail', 'message': 'no rating'})
-    # return new stats
+    # set rating
     existing_rating = VersionRatings.query.filter_by(
         user=current_user, version_uid=path).first()
     if existing_rating:
@@ -701,7 +715,31 @@ def set_version_rating(path):
             user=current_user, version_uid=path, rating=rating)
         db.session.add(new_rating)
     db.session.commit()
+    # update cache and return new rating
+    update_version_rating_cache(path)
     return get_version_rating(path)
+
+
+def update_version_rating_cache(version_uid):
+    topic_uid = '/'.join(version_uid.split('/')[0:-2])
+    approach_version = '/'.join(version_uid.split('/')[-2:-1])
+    rating = VersionRatings.query.filter_by(version_uid=version_uid).all()
+    ratings = [r.rating for r in rating]
+    num = len(ratings)
+    ave = sum(ratings) / num
+    high = len(list(r for r in ratings if r > 3))
+    existing_rating = VersionRatingsCache.query.filter_by(
+        topic_uid=topic_uid, approach_version=approach_version).first()
+    if existing_rating:
+        existing_rating.num_ratings = num
+        existing_rating.high_ratings = high
+        existing_rating.ave_rating = ave
+    else:
+        new_rating = VersionRatingsCache(
+            topic_uid=topic_uid, approach_version=approach_version,
+            num_ratings=num, high_ratings=high, ave_rating=ave)
+        db.session.add(new_rating)
+    db.session.commit()
 
 
 def update_link_rating_cache(version_uid, link_hash):
@@ -746,17 +784,11 @@ def get_link_rating(version_uid, link_hash, user=None):
 def get_link_ratings(path):
     if path not in link_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
-
-    # cached_ratings = LinkRatingsCache.query.filter_by(
-    #     version_uid=path).all()
-
     ratings = []
     for link in link_list[path]:
         rating = get_link_rating(path, link['hash'], current_user)
         print(rating)
         ratings.append(rating)
-        # if current_user.is_authenticated:
-        #     ratings[-1][3] = 3
     return jsonify({'status': 'ok', 'ratings': ratings})
 
 
