@@ -561,7 +561,7 @@ def get_version_rating(path):
 @app.route('/setVersionRating/<path:path>')
 def set_version_rating(path):
     if not current_user.is_authenticated:
-        return jsonify({'status': 'fail', 'message': 'no logged in'})
+        return jsonify({'status': 'fail', 'message': 'not logged in'})
     if path not in version_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
     rating = request.args.get('rating')
@@ -658,7 +658,7 @@ def get_link_ratings(path):
 @app.route('/setLinkRating/<path:path>')
 def set_link_rating(path):
     if not current_user.is_authenticated:
-        return jsonify({'status': 'fail', 'message': 'no logged in'})
+        return jsonify({'status': 'fail', 'message': 'not logged in'})
     if path not in link_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
 
