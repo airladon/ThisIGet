@@ -567,19 +567,23 @@ def set_version_rating(path):
     rating = request.args.get('rating')
     if rating is None:
         return jsonify({'status': 'fail', 'message': 'no rating'})
+    possible_ratings = ['0', '1', '2', '3', '4', '5']
+    if rating not in possible_ratings:
+        return jsonify({'status': 'fail', 'message': 'invalid rating'})
+    clean_path = path.strip('/')
     # set rating
     existing_rating = VersionRatings.query.filter_by(
-        user=current_user, version_uid=path).first()
+        user=current_user, version_uid=clean_path).first()
     if existing_rating:
         existing_rating.rating = rating
     else:
         new_rating = VersionRatings(
-            user=current_user, version_uid=path, rating=rating)
+            user=current_user, version_uid=clean_path, rating=rating)
         db.session.add(new_rating)
     db.session.commit()
     # update cache and return new rating
-    update_version_rating_cache(path)
-    return get_version_rating(path)
+    update_version_rating_cache(clean_path)
+    return get_version_rating(clean_path)
 
 
 def update_version_rating_cache(version_uid):
@@ -659,22 +663,29 @@ def get_link_ratings(path):
 def set_link_rating(path):
     if not current_user.is_authenticated:
         return jsonify({'status': 'fail', 'message': 'not logged in'})
-    if path not in link_list:
+    clean_path = path.strip('/')
+    if clean_path not in link_list:
         return jsonify({'status': 'fail', 'message': 'path does not exist'})
 
     rating = request.args.get('rating')
+    if rating is None:
+        return jsonify({'status': 'fail', 'message': 'no rating'})
+    possible_ratings = ['0', '1', '2', '3', '4', '5']
+    if rating not in possible_ratings:
+        return jsonify({'status': 'fail', 'message': 'invalid rating'})
+
     link_hash = request.args.get('hash')
     existing_rating = LinkRatings.query.filter_by(
-        user=current_user, version_uid=path, link_hash=link_hash).first()
+        user=current_user, version_uid=clean_path, link_hash=link_hash).first()
     if existing_rating:
         existing_rating.rating = rating
     else:
         new_rating = LinkRatings(
-            user=current_user, version_uid=path,
+            user=current_user, version_uid=clean_path,
             rating=rating, link_hash=link_hash)
         db.session.add(new_rating)
     db.session.commit()
-    update_link_rating_cache(path, link_hash)
+    update_link_rating_cache(clean_path, link_hash)
     # print(rating, link_hash)
-    cached_rating = get_link_rating(path, link_hash, current_user)
+    cached_rating = get_link_rating(clean_path, link_hash, current_user)
     return jsonify({'status': 'ok', 'rating': cached_rating})

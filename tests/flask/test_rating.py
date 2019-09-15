@@ -186,14 +186,22 @@ def test_set_link_rating_not_logged_in(client):
     assert res['message'] == 'not logged in'
 
 
-# def test_set_rating_wrong_input(client):
-#     res = client.get(f'/rate/invalid/explanation/base/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
+def test_set_rating_wrong_input(client):
+    res = client.get(f'/setVersionRating/invalid/explanation/base?&rating=3').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'path does not exist'
 
-#     res = client.get(f'/rate/Circle/invalid/base/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
+    res = client.get(f'/setVersionRating/{topic1}?rating=a').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid rating'
+
+    res = client.get(f'/setVersionRating/{topic1}?rating1=3').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'no rating'
+
+    res = client.get(f'/setVersionRating/{topic1}').get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'no rating'
 
 #     res = client.get(f'/rate/Circle/explanation/invalid/4').get_json()
 #     assert res['status'] == 'fail'
