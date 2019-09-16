@@ -187,7 +187,9 @@ def test_set_link_rating_not_logged_in(client):
 
 
 def test_set_rating_wrong_input(client):
-    res = client.get(f'/setVersionRating/invalid/explanation/base?&rating=3').get_json()
+    res = client \
+        .get(f'/setVersionRating/invalid/explanation/base?&rating=3') \
+        .get_json()
     assert res['status'] == 'fail'
     assert res['message'] == 'path does not exist'
 
@@ -203,127 +205,28 @@ def test_set_rating_wrong_input(client):
     assert res['status'] == 'fail'
     assert res['message'] == 'no rating'
 
-#     res = client.get(f'/rate/Circle/explanation/invalid/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
 
-#     res = client.get(f'/rate/{lesson1}/6)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
+def test_set_link_rating_wrong_input(client):
+    res = client \
+        .get(f'/setLinkRating/{link_1_path}a?hash={link_1_hash}&rating=4') \
+        .get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'path does not exist'
 
-#     res = client.get(f'/rate/{lesson1}/0)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
+    res = client \
+        .get(f'/setLinkRating/{link_1_path}?hash={link_1_hash}a&rating=4') \
+        .get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid link hash'
 
-#     res = client.get(f'/rate/{lesson1}/a)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
+    res = client \
+        .get(f'/setLinkRating/{link_1_path}?hash={link_1_hash}') \
+        .get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'no rating'
 
-
-# def test_set_link_rating_wrong_input(client):
-#     # 'RightAngleTriangles/links/base/0d0bf3df02ca4f1cae21e8ee0fc2f2c5'
-#     lesson = lesson3.split('/')[0]
-#     topic = lesson3.split('/')[1]
-#     version = lesson3.split('/')[2]
-#     link = lesson3.split('/')[3]
-#     res = client.get(
-#         f'/ratelink/invalid/{topic}/{version}/{link}/4'
-#     ).get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
-
-#     res = client.get(
-#         f'/ratelink/{lesson}/invalid/{version}/{link}/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
-
-#     res = client.get(
-#         f'/ratelink/{lesson}/{topic}/invalid/{link}/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'lesson/topic/version does not exist'
-
-#     res = client.get(
-#         f'/ratelink/{lesson}/{topic}/{version}/invalid/4').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'link/version does not exist'
-
-#     res = client.get(f'/ratelink/{lesson3}/6)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
-
-#     res = client.get(f'/ratelink/{lesson3}/0)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
-
-#     res = client.get(f'/ratelink/{lesson3}/a)').get_json()
-#     assert res['status'] == 'fail'
-#     assert res['message'] == 'invalid rating'
-
-
-# def test_get_rating(client):
-#     # Check default values
-#     res = client.get(f'/rating/{lesson1}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 'not rated'
-#     assert res['numRatings'] == 0
-#     assert res['aveRating'] == 0
-#     assert res['numHighRatings'] == 0
-
-#     # Create the rating
-#     res = client.get(f'/rate/{lesson1}/5').get_json()
-#     assert res['status'] == 'done'
-
-#     res = client.get(f'/rating/{lesson1}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 5
-#     assert res['numRatings'] == 1
-#     assert res['aveRating'] == 5
-#     assert res['numHighRatings'] == 1
-
-#     # Create a second rating for a different lesson
-#     logout(client)
-#     login(client, 'test_User_02')
-#     res = client.get(f'/rate/{lesson1}/3').get_json()
-#     assert res['status'] == 'done'
-
-#     res = client.get(f'/rating/{lesson1}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 3
-#     assert res['numRatings'] == 2
-#     assert res['aveRating'] == 4
-#     assert res['numHighRatings'] == 1
-
-
-# def test_get_link_rating(client):
-#     LinkRatings.query.delete()
-#     # Check default values
-#     res = client.get(f'/linkrating/{lesson3}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 'not rated'
-#     assert res['numRatings'] == 0
-#     assert res['aveRating'] == 0
-#     assert res['numHighRatings'] == 0
-
-#     # Create the rating
-#     res = client.get(f'/ratelink/{lesson3}/5').get_json()
-#     assert res['status'] == 'done'
-
-#     res = client.get(f'/linkrating/{lesson3}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 5
-#     assert res['numRatings'] == 1
-#     assert res['aveRating'] == 5
-#     assert res['numHighRatings'] == 1
-
-#     # Create a second rating for a different lesson
-#     logout(client)
-#     login(client, 'test_User_02')
-#     res = client.get(f'/ratelink/{lesson3}/3').get_json()
-#     assert res['status'] == 'done'
-
-#     res = client.get(f'/linkrating/{lesson3}').get_json()
-#     assert res['status'] == 'ok'
-#     assert res['userRating'] == 3
-#     assert res['numRatings'] == 2
-#     assert res['aveRating'] == 4
-#     assert res['numHighRatings'] == 1
+    res = client \
+        .get(f'/setLinkRating/{link_1_path}?hash={link_1_hash}a&rating=6') \
+        .get_json()
+    assert res['status'] == 'fail'
+    assert res['message'] == 'invalid rating'

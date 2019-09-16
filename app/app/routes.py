@@ -675,6 +675,11 @@ def set_link_rating(path):
         return jsonify({'status': 'fail', 'message': 'invalid rating'})
 
     link_hash = request.args.get('hash')
+    hashes = [link['hash'] for link in link_list[clean_path]]
+
+    if link_hash not in hashes:
+        return jsonify({'status': 'fail', 'message': 'invalid link hash'})
+
     existing_rating = LinkRatings.query.filter_by(
         user=current_user, version_uid=clean_path, link_hash=link_hash).first()
     if existing_rating:
