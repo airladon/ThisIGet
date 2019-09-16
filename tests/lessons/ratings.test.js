@@ -36,7 +36,7 @@ Object.keys(topics).forEach((topicUID) => {
   // const { uid } = topic;
   Object.keys(topic.approaches).forEach((approachUID) => {
     Object.keys(topic.approaches[approachUID]).forEach((versionUID) => {
-      if (topic !== 'dev' && topic !== 'quickReference') {
+      if (approachUID !== 'quickReference') {
         allTests.push([topicUID, approachUID, versionUID]);
       }
     });
@@ -59,7 +59,7 @@ describe('Lesson ratings', () => {
       let result = { status: '' };
       while (result.status !== 'ok' && testNumber < retest) {
         // eslint-disable-next-line no-await-in-loop
-        result = await getData(`${sitePath}/rating/${uid}/${topic}/${version}`);
+        result = await getData(`${sitePath}/getVersionRating/${uid}/${topic}/${version}`);
         testNumber += 1;
         if (result.status !== 'ok') {
           // eslint-disable-next-line no-await-in-loop
