@@ -47,4 +47,13 @@
             <span class="input_form__field_error_message">{{ error }}</span>
         {% endfor %}
     </div>
+    <div class="input_form__field">
+        {{ form.terms() }}
+        <div class="input_form__field_label">
+            {{ form.terms.label }}
+        </div>
+        {% for error in form.terms.errors %}
+            <span class="input_form__field_error_message">{{ error }}</span>
+        {% endfor %}
+    </div>
 {% endblock %}

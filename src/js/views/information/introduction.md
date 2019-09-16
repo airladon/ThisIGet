@@ -2,7 +2,7 @@
 
 Many sources of information (textbooks, videos, websites) will present content in one way. If the content is not clear for a user, it is up to them to search for other sources of the same information that might be more useful for them.
 
-In contrast, this site tries to present several approaches and versions of the same content to a user, including links to external sources of similar information, so they have a higher chance of succesffully learning what they were seeking. Each version of content and external link can be rated by the users, to further assist them, and others, in more efficiently learning.
+In contrast, this site tries to present several approaches and versions of the same content to a user, including links to external sources of similar information, so they have a higher chance of successfully learning what they were seeking. Each version of content and external link can be rated by the users, to further assist them, and others, in more efficiently learning.
 
 This page details the site's terminology and features as a way to introduce what the site is.
 
