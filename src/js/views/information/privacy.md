@@ -23,7 +23,7 @@ If you want to rate content, then an account needs to be created, and you need t
 
 When you have an account, and are logged in, additional information including when you created the account, when you last logged in, and content rating information is stored. This information is used for account management, helping the website understand how many active users there are for performance optimization, allowing you to see your ratings of content in the future, and provding statistcal summaries of content to all users.
 
-You information is never sold to third parties, and would only be shared to comply with the law.
+Your information is never sold to third parties, and would only be shared to comply with the law.
 
 ## What data is collected? <a name="whatdataiscollected"></a>
 
