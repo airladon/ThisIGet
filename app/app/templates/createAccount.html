@@ -47,13 +47,35 @@
             <span class="input_form__field_error_message">{{ error }}</span>
         {% endfor %}
     </div>
-    <div class="input_form__field">
-        {{ form.terms() }}
-        <div class="input_form__field_label">
-            {{ form.terms.label }}
+    <div class="input_form__spacer"></div>
+    <div class="input_form__info">
+        To create an account, you must read and agree to this This I Get's <a href="/terms">Terms and Conditions</a>, and the <a href="/privacy">Privacy Policy</a>.
+    </div>
+    <div class="input_form__spacer"></div>
+    <div class="input_form__field input_form__field__check">
+        <div class="input_form__check">
+            <div class="input_form__check_box">
+                {{ form.terms() }}
+            </div>
+            <div class="input_form__field_label input_form__check_label">
+                {{ form.terms.label }}
+            </div>
         </div>
         {% for error in form.terms.errors %}
-            <span class="input_form__field_error_message">{{ error }}</span>
+            <span class="input_form__field_error_message input_form__field_error_message__check">{{ error }}</span>
+        {% endfor %}
+    </div>
+    <div class="input_form__field input_form__field__check">
+        <div class="input_form__check">
+            <div class="input_form__check_box">
+                {{ form.privacy() }}
+            </div>
+            <div class="input_form__field_label input_form__check_label">
+                {{ form.privacy.label }}
+            </div>
+        </div>
+        {% for error in form.privacy.errors %}
+            <span class="input_form__field_error_message input_form__field_error_message__check">{{ error }}</span>
         {% endfor %}
     </div>
 {% endblock %}

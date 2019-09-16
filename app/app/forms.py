@@ -33,7 +33,14 @@ class CreateAccountForm(FlaskForm):
         'Repeat Password: ',
         validators=[DataRequired(), EqualTo('password')]
     )
-    terms = BooleanField("I Agree to the Terms and Conditions", validators=[DataRequired(message="You must agree to the Terms and Conditions to create an account"), ])
+    terms = BooleanField(
+        'I have read and agree to the <a href="/terms">Terms and Conditions</a>',
+        validators=[DataRequired(
+            message="You must agree to create an account"), ])
+    privacy = BooleanField(
+        'I have read and agree to the <a href="/privacy">Privacy Policy</a>',
+        validators=[DataRequired(
+            message="You must agree to create an account"), ])
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):
@@ -54,10 +61,6 @@ class CreateAccountForm(FlaskForm):
     def validate_password(self, password):
         if len(password.data) < 8:
             raise ValidationError('Password must be at least 8 characters')
-
-    # def validate_terms(self, result):
-    #     if not result:
-    #         raise ValidationError('Cannot create account if terms are not agreed to')
 
 
 class ResetPasswordRequestForm(FlaskForm):
