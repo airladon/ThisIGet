@@ -123,6 +123,8 @@ function createTopicIndex(buildMode, topicsPath, appPath) {
         if (contentTypeName === 'quickReference' && buildMode === 'development') {
           topicVersions.forEach((v) => {
             const [versionUid] = v;
+            outObj[uid].approaches[contentTypeName] = {};
+            appObj[uid].approaches[contentTypeName] = {};
             outObj[uid].approaches[contentTypeName][versionUid] = {
               type: 'presentation',
               title: `${versionUid}`,

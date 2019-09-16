@@ -1,19 +1,19 @@
 // @flow
 
 import * as React from 'react';
-import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
+// import { fetch as fetchPolyfill } from 'whatwg-fetch';    // Fetch polyfill
 import LearningPathNavigator from './learningPathNavigator';
 import TopicTitle from './topicTitle';
 import getTopicIndex from '../../content/topicIndex';
 import TopicDescription from '../Lesson/topicDescription';
 import TopicButton from './topicButton';
 import Rating from './rating';
-import { getCookie, login } from '../tools/misc';
+import { login } from '../tools/misc';
 import PresentationFormatComponent from './format/presentation';
 import SimpleFormatComponent from './format/simple';
 import SinglePageFormatComponent from './format/singlePage';
 import LinksFormatComponent from './format/links';
-import {setVersionRating} from '../Lesson/rating';
+import { setVersionRating } from '../Lesson/rating';
 
 type Props = {
   version: Object;

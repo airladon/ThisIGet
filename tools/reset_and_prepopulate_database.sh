@@ -40,7 +40,7 @@ fi
 INITIALIZE_FLASK_DB=0
 if [ $2 ];
 then
-  if [ $2 == 'init_flask' ];
+  if [ "$2" == 'init_flask' ];
   then
     INITIALIZE_FLASK_DB=1
   fi
@@ -48,7 +48,7 @@ fi
 
 if [ $1 ];
 then
-  if [ $1 == 'init_flask' ];
+  if [ "$1" == 'init_flask' ];
   then
     INITIALIZE_FLASK_DB=1
   else
@@ -104,7 +104,7 @@ then
   then
     echo
     echo "${red}Local AES_KEY not defined. Remote and local AES_KEY needs to be the same.${reset}"
-  elif [ $REMOTE_AES != $AES_KEY ];
+  elif [ "$REMOTE_AES" != "$AES_KEY" ];
   then
     echo
     echo "${red}Remote and local AES_KEY are different. They need to be the same.${reset}"
@@ -115,7 +115,7 @@ then
     echo
     echo "${red}Local PEPPER not defined. Remote and local PEPPER needs to be the same.${reset}"
     FAIL=1
-  elif [ $REMOTE_PEPPER != $PEPPER ];
+  elif [ "$REMOTE_PEPPER" != "$PEPPER" ];
   then
     echo
     echo "${red}Remote and local PEPPER are different. They need to be the same${reset}."
@@ -145,7 +145,7 @@ then
   psql -c "create database $DATABASE_NAME"
 fi
 
-if [ $REMOTE == 1 ];
+if [ "$REMOTE" == 1 ];
 then
   echo
   echo "${bold}${cyan}==== Resetting Database for $APP_OR_DB_NAME =====${reset} "
@@ -153,7 +153,7 @@ then
 fi
 
 # Initialize flask if requred
-if [ $INITIALIZE_FLASK_DB == 1 ];
+if [ "$INITIALIZE_FLASK_DB" == 1 ];
 then
   echo
   echo "${bold}${cyan}==== Removing Migrations =====${reset} "

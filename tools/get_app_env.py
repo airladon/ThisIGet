@@ -1,5 +1,6 @@
 import subprocess
 import sys
+from subprocess import PIPE
 
 app = sys.argv[1]
 
@@ -21,7 +22,7 @@ if app == 'local':
         print(f'unset {key}')
 else:
     output = subprocess.run(
-        ["heroku", "config", f"--app={app_names[app]}"], capture_output=True)
+        ["heroku", "config", f"--app={app_names[app]}"], stdout=PIPE, stderr=PIPE)
     if output.returncode == 0:
         results = output.stdout.decode("utf-8").split('\n')
         for result in results:

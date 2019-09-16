@@ -175,12 +175,18 @@ def getTopicIndex():
             for version_uid, version in approach.items():
                 path = f"{topic_uid}/" \
                        f"{approach_uid}/{version_uid}"
+                title = ''
+                description = ''
+                if 'htmlTitle' in version:
+                    title = version['htmlTitle']
+                if 'htmlDescription' in version:
+                    description = version['htmlDescription']
                 version_list[path] = {
-                    'default_title': f"{topic['title']} " \
-                                     f"{approach_uid.capitalize()}: " \
+                    'default_title': f"{topic['title']} "
+                                     f"{approach_uid.capitalize()}: "
                                      f"{version['title']} - This I Get",
-                    'title': version['htmlTitle'],
-                    'description': version['htmlDescription'],
+                    'title': title,
+                    'description': description,
                 }
                 if approach_uid == 'links':
                     link_list[path] = version['links']

@@ -2,4 +2,4 @@
 // console.log(__dirname.replace(/thisiget\/.*/, 'thisiget'));
 const createTopicIndex = require('../containers/dev/createIndex.js');
 
-createTopicIndex('stage', './src/content', './app/app');
+createTopicIndex('development', './src/content', './app/app');
