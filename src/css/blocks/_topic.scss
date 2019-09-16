@@ -254,5 +254,5 @@ $title_bar_space_low: 90px;
   width: calc(var(--topic__title_tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) * 2 - var(--navigator__tile_img_width) * 2);
 }
 
-@import './lesson/popupBox';
-@import './lesson/pathTile';
+@import './topic/popupBox';
+@import './topic/pathTile';
