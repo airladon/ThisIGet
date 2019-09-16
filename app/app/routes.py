@@ -27,7 +27,7 @@ from app.models import VersionRatingsCache
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-import pdb
+# import pdb
 
 # project/decorators.py
 from functools import wraps

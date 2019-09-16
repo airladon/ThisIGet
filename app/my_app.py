@@ -1,5 +1,5 @@
 from app import app  # noqa
-from app.models import db, Users # Ratings, Categories, Comment, Lessons
+from app.models import db, Users  # Ratings, Categories, Comment, Lessons
 # from app.models import Topics, Versions
 
 # from app.util import assets  # noqa
