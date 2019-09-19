@@ -13,14 +13,6 @@
           "links": ""
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -110,14 +102,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "singlePage",
@@ -158,14 +142,6 @@
           "htmlDescription": "Dynamic diagram that lets you explore the different types of important angles",
           "fullTopic": true,
           "links": ""
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -275,14 +251,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -383,14 +351,6 @@
               "description": "What is Area? An elementary introduction"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -506,14 +466,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -609,14 +561,6 @@
               "description": "Triangle area proof"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -717,14 +661,6 @@
               "description": "Introduction to circle and its properties"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -870,14 +806,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -964,14 +892,6 @@
               "description": "Introduction and examples of measuring angles in degrees"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -1069,14 +989,6 @@
               "description": "Proof of why angles in an equilateral triangle are equal"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -1213,14 +1125,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1270,14 +1174,6 @@
           "htmlDescription": "Introduction to shapes, naming, history and why we should study them",
           "fullTopic": true,
           "links": ""
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       }
     },
@@ -1360,14 +1256,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1432,14 +1320,6 @@
           "links": ""
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -1469,14 +1349,6 @@
           "htmlDescription": "See what parallel lines are, and when lines are parallel",
           "fullTopic": true,
           "links": ""
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -1592,14 +1464,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -1640,14 +1504,6 @@
           "htmlDescription": "Properties of distance between point and a line",
           "fullTopic": true,
           "links": ""
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "summary": {
@@ -1734,14 +1590,6 @@
               "description": "Quadrilateral definition"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -1835,14 +1683,6 @@
               "description": "Introduction to radians"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -1956,14 +1796,6 @@
               "description": "Introduction to rectangles"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "summary": {
@@ -2090,14 +1922,6 @@
           ]
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -2200,14 +2024,6 @@
               "description": "Proof showing length of side relates to size of opposite angle"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -2398,14 +2214,6 @@
               "description": "Definition, triangle types and interactive diagrams"
             }
           ]
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {

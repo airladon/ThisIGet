@@ -10,14 +10,6 @@
           "fullTopic": true
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -59,14 +51,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "singlePage",
@@ -98,14 +82,6 @@
           "title": "Full explanation",
           "description": "",
           "fullTopic": true
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -154,14 +130,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to sources of information for opposite, corresponding, alternate and interior angles",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -217,14 +185,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to Area",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -291,14 +251,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -356,14 +308,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -410,14 +354,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to information on circles",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -490,14 +426,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -550,14 +478,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to sources of information for Degrees",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -615,14 +535,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to equilateral triangles",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -689,14 +601,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -735,14 +639,6 @@
           "description": "Motivation to studying shapes.",
           "fullTopic": true
         }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
       }
     },
     "dependencies": [],
@@ -780,14 +676,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to isosceles triangles",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -840,14 +728,6 @@
           "fullTopic": true
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -871,14 +751,6 @@
           "title": "Full explanation",
           "description": "",
           "fullTopic": true
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "quiz": {
@@ -944,14 +816,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -983,14 +847,6 @@
           "title": "Full explanation",
           "description": "",
           "fullTopic": true
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
         }
       },
       "summary": {
@@ -1042,14 +898,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "quiz": {
         "base": {
           "type": "presentation",
@@ -1096,14 +944,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to information on radians",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -1170,14 +1010,6 @@
           "fullTopic": false
         }
       },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
-          "fullTopic": false
-        }
-      },
       "summary": {
         "base": {
           "type": "presentation",
@@ -1231,14 +1063,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to sources of information for Right Angle Triangles",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -1296,14 +1120,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to triangle side angle relationships",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
@@ -1421,14 +1237,6 @@
           "type": "generic",
           "title": "External",
           "description": "External links to sources of information for Triangles>",
-          "fullTopic": false
-        }
-      },
-      "quickReference": {
-        "staticTest": {
-          "type": "presentation",
-          "title": "staticTest",
-          "description": "",
           "fullTopic": false
         }
       },
