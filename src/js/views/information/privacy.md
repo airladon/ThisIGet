@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This privacy policy discloses the privacy practices for **This I Get LLC** the owner of this website, www.thisiget.com. This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
+This privacy policy discloses the privacy practices for this website, www.thisiget.com. This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
  
 The topics in this policy are:
 * [Summary](#summary)
@@ -19,7 +19,7 @@ The topics in this policy are:
 You can access all content on this website anonymously, sharing only the default information provided by your browser. This information includes browser type and version, IP address and sometimes the type of device the browser is on. It is used by the website to understand and optimize website use and performance, but not to identify you.
 
 
-If you want to rate content, then an account needs to be created, and you need to be logged into the account. To create an account, you need to provide a valid username, email address and password. This information is used to manage your account, and ensures only you can access your content ratings. You can provide any valid username, email address and password, and thus remain anonymous.
+If you want to rate content, then an account needs to be created, and you need to be logged into the account. To create an account, you need to provide a username, email address and password. This information is used to manage your account, and ensures only you can access your content ratings. You can provide any valid username, email address and password, and thus remain anonymous.
 
 When you have an account, and are logged in, additional information including when you created the account, when you last logged in, and content rating information is stored. This information is used for account management, helping the website understand how many active users there are for performance optimization, allowing you to see your ratings of content in the future, and provding statistcal summaries of content to all users.
 
