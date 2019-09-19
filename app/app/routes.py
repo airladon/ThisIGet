@@ -42,6 +42,7 @@ def make_response_with_files(*args, **kwargs):
     polyfill_js = ''
     topic_index_js = ''
     about_js = ''
+    about_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
