@@ -12,7 +12,7 @@ export default class HomeBanner extends React.Component
       <div className="home__banner_logo">
         <div className="home__banner_logo_text_container">
           <div className="home__banner_logo_text">
-            this i get
+            This I Get
           </div>
         </div>
       </div>
@@ -20,7 +20,7 @@ export default class HomeBanner extends React.Component
         <table>
           <tbody>
           <tr>
-            <td>Understand your way</td>
+            <td>Understand Your Way</td>
           </tr>
           </tbody>
         </table>
