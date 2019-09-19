@@ -1,11 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField
+# from wtforms import BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 # from wtforms.validators import Length
 from app.models import Users
 from app.tools import hash_str_with_pepper, format_email
 
-import pdb
+# import pdb
 
 
 class LoginForm(FlaskForm):
@@ -34,7 +35,7 @@ class CreateAccountForm(FlaskForm):
         validators=[DataRequired(), EqualTo('password')]
     )
     # terms = BooleanField(
-    #     'I have read and agree to the <a href="/terms">Terms and Conditions</a>',
+    #     'I have read and agree to the <a href="/terms">Terms and Conditions</a>',  # noqa
     #     validators=[DataRequired(
     #         message="You must agree to create an account"), ])
     # privacy = BooleanField(
