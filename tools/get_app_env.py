@@ -8,7 +8,7 @@ app_names = {
     'dev': 'thisiget-dev',
     'beta': 'thisiget-beta',
     'test': 'thisiget-test',
-    'prod': 'thisiget-prod',
+    'prod': 'thisiget',
 }
 
 print()
