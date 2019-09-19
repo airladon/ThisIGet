@@ -174,10 +174,10 @@ echo
 echo "${bold}${cyan}==== Flask db upgrade =====${reset} "
 flask db upgrade
 
-# Fill tables
-echo
-echo "${bold}${cyan}==== Loading Lessons =====${reset} "
-./updatedb.sh show write
+# # Fill tables
+# echo
+# echo "${bold}${cyan}==== Loading Lessons =====${reset} "
+# ./updatedb.sh show write
 
 # Add users and ratings
 echo
