@@ -1,6 +1,6 @@
 # Privacy Policy
 
-This privacy policy discloses the privacy practices for www.thisiget.com (this website). This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
+This privacy policy discloses the privacy practices for **This I Get LLC** the owner of this website, www.thisiget.com. This privacy policy applies solely to information collected by this website, and will explain what information is collected and why.
  
 The topics in this policy are:
 * [Summary](#summary)

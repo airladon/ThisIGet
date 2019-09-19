@@ -27,7 +27,7 @@ from app.models import VersionRatingsCache
 from werkzeug.urls import url_parse
 from app.tools import format_email
 # import re
-# import pdb
+import pdb
 
 # project/decorators.py
 from functools import wraps
@@ -92,11 +92,20 @@ def get_full_path(root, file):
     return f'/{root}/{static_files[root][file]}'
 
 
+def log_data(rquest):
+    log_data = {
+        'User-Agent': rquest.headers.get('User-Agent'),
+        'Accept-Language': rquest.headers.get('Accept-Language'),
+        'Referer': rquest.headers.get('Referer'),
+    }
+    print(f"{rquest.remote_addr} - {log_data}")
+
+
 @app.route('/') # noqa
 def home():
     res = make_response_with_files('home.html')
     res.set_cookie('page', '0')
-    # print(f"{request.remote_addr} {request.headers.get('User-Agent')}")
+    log_data(request)
     return res
 
 
@@ -189,6 +198,7 @@ def is_logged_in():
 @app.route('/content/', defaults={'path': ''})  # noqa
 @app.route('/content/<path:path>')
 def get_content(path):
+    log_data(request)
     content_path = f'static/dist/content/{path}'.strip('/')
     js = ''
     css = ''
