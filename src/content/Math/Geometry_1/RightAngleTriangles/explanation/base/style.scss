@@ -1,0 +1,53 @@
+@import '../../../geometry';
+
+$colors: (
+  areaFill:                    color('blue', 'darkest'),
+  sides:                       color('blue'),
+  rightAngle:                  color('red'),
+  opposite:                    color('red'),
+  perpendicular:               color('red'),
+  angles:                      color('green'),
+  description:                 color('grey', base),
+  vertex:                      color('yellow', 'dark'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+#id_diagram__text__low {
+  z-index: 1;
+}
+
+.figureone__eqn_nav__description {
+  font-size: calc(var(--topic__diagram-font-size) * 0.55);
+  color: map-get($colors, 'description');
+  text-align: left;
+  width: 30em;
+}
+
+// .diagram__qr__static_container {
+//   display: block;
+//    height: 100%; 
+//   /* width: 100%; */
+//   position: absolute;
+//   left: 50%;
+//   top: 50%;
+// }
+
+// .diagram__qr__static_container_cell {
+//   display: table-cell;
+//   vertical-align: middle;
+//   text-align: center;
+//   width: 100%;
+//   height: 100%;
+// }
+
+// .diagram__qr__static_container_cell2 {
+//   text-align: left;
+// }
+
+// #id_topic__qr__content_static {
+//   position: relative;
+//   transform: translate(-50%, -50%);
+// }

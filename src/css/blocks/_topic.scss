@@ -1,0 +1,258 @@
+// Content area aspect ratio
+// $diagram_ratio: 1.5;
+
+$title_bar_space_high: 120px;
+$title_bar_space_low: 90px;
+
+// Default variable values for portrait, max width aspect ratios
+// Default spacing is:
+//   Content height = 1;
+//   vspace: 0.02;
+//   button height: 0.1;
+//   top/bottom padding: 0.02;
+
+// This means the max container aspect ratio for a 3/2 content screen
+// where vw can be max is:
+// 3 / 2x where x is:
+//   1 + 0.02 + 0.02 * 2 + 0.15) = 2 * 1.21;
+// = 3 / 2.42 = 300 / 242
+// $portrait_vspace: 0.02;
+// $portrait_vpadding: 0.02;
+// $portrait_button_height: 0.15;
+
+// Default variable values for landscape, max height aspect ratios
+// content width = content height * AR
+// hspace: 0.04;
+// button width: 0.1;
+// left/right padding: 0.04;
+//
+// Therefore min aspect ratio for a 3/2 content window is:
+// 3x / 2 where x is:
+//                    1 + 0.04 * 4 + 0.1 * 2 = 1.36
+// => 4.08 / 2 = 408 / 200
+// $landscape_hspace: 0.04;
+// $landscape_hpadding: 0.04;
+// $landscape_button_width: 0.1;
+// In this scenario, the content is  1 / 1.36 the content = 73.5%
+// $landscape_content_width: 0.7353;
+
+// In between aspect ratio will be landscape orientation, but width limited
+// Same width ratios as above
+
+// $landscape_aspect_ratio: "300/242";
+// $height_limited_landscape_aspect_ratio: "408/200";
+
+@media (min-aspect-ratio: 1/100) {
+  :root {
+    --topic__title_space: #{$title_bar_space_high};
+  }
+}
+
+@mixin topic_vars() {
+  @each $var, $value in $_topic_vars {
+    @if type-of($value) == "map" {
+      @each $subvar, $subvalue in $value {
+        @if type-of($subvalue) == "map" {
+          @each $subsubvar, $subsubvalue in $subvalue {
+            --lessonvars-#{$var}-#{$subvar}-#{$subsubvar}: #{$subsubvalue};
+          }
+        }
+
+        @else {
+          --lessonvars-#{$var}-#{$subvar}: #{$subvalue};
+        }
+      }
+    }
+
+    @else {
+      --lessonvars-#{$var}: #{$value};
+    }
+  }
+}
+
+.topic__hide {
+  display: none;
+}
+
+.topic__diagram {
+  background-color: color('diagram', 'background');
+}
+
+.highlight_word {
+  color: color('diagram', 'text-keyword');
+  font-style: italic;
+}
+
+.action_word {
+  font-weight: bold;
+}
+
+.topic__action_word_disabled_by_popup {
+  pointer-events: none;
+  cursor: auto;
+}
+
+.action_word_enabled {
+  cursor: pointer;
+}
+
+.topic__sanskrit,
+.topic__arabic,
+.topic__latin,
+.topic__greek,
+.topic__english {
+  font-style: italic;
+  font-family: Times New Roman, serif;
+}
+
+.topic__sanskrit {
+  color: color('diagram', 'text-sanskrit');
+}
+
+.topic__arabic {
+  color: color('diagram', 'text-arabic');
+}
+
+.topic__latin {
+  color: color('diagram', 'text-latin');
+}
+
+.topic__old_french {
+  color: color('diagram', 'text-oldFrench');
+}
+
+.topic__greek {
+  color: color('diagram', 'text-greek');
+}
+
+.topic__english {
+  color: color('diagram', 'text-english');
+}
+
+.greek,
+.latin {
+  font-style: italic;
+  font-family: Times New Roman, serif;
+  color: color('diagram', 'text-latin');
+}
+
+.english {
+  font-style: italic;
+  color: color('diagram', 'text-english');
+}
+
+// ***************************************************************
+
+.topic__title_navigator_container {
+  position: relative;
+  width: 100%;
+}
+
+@media screen and (min-width: $mobile) {
+  :root {
+    --topic__title_tile_width: 250px;
+    --topic__title_tile_height: 56px;
+    --topic__title_tile_font_size: 15px;
+    --topic__title_tile_border_radius: 12px;
+    --topic__title_tile_top: 20px;
+  }
+}
+
+@media screen and (min-width: $tablet) {
+  :root {
+    --topic__title_tile_width: 350px;
+    --topic__title_tile_height: 56px;
+    --topic__title_tile_font_size: 20px;
+    --topic__title_tile_border_radius: 22px;
+    --topic__title_tile_top: 20px;
+    --topic__title_space: #{$title_bar_space_low};
+  }
+}
+
+.topic__title_tile {
+  position: absolute;
+  left: calc(50% - var(--topic__title_tile_width) / 2);
+  top: var(--topic__title_tile_top);
+  width: var(--topic__title_tile_width);
+  height: var(--topic__title_tile_height);
+  font-size: var(--topic__title_tile_font_size);
+  z-index: 0;
+}
+
+.topic__title_tile_containter {
+  background: color('site', 'primary');
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 30px;
+  padding-right: 20px;
+  border-radius: var(--topic__title_tile_border_radius);
+  color: white;
+  text-align: center;
+  width: 100%;
+  border-bottom: solid 1px #555;
+  height: 100%;
+  display: table;
+}
+
+.topic__title_tile_title {
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.topic__title_tile_shadow {
+  position: relative;
+}
+
+.topic__title_tile_shadow::before,
+.topic__title_tile_shadow::after {
+  z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 4px;
+  left: 0.5%;
+  width: 49.5%;
+  // max-width: 300px;
+  height: calc(var(--topic__title_tile_height) - 10px);
+  background: #777;
+  -webkit-box-shadow: 0 5px 7px #000;
+  -moz-box-shadow: 0 5px 7px #000;
+  box-shadow: 0 5px 7px #000;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+  border-radius: var(--topic__title_tile_border_radius);
+}
+
+.topic__title_tile_shadow::after {
+  -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 0.5%;
+  left: auto;
+}
+
+.vertical_blank_space {
+  width: 100%;
+  height: 40px;
+  // background-color: white;
+  z-index: -2;
+}
+
+#id_topic__title_container {
+  left: calc(50% - var(--topic__title_tile_width) / 2);
+  top: var(--topic__title_tile_top);
+  width: var(--topic__title_tile_width);
+  height: var(--topic__title_tile_height);
+  font-size: var(--topic__title_tile_font_size);
+}
+
+#id_topic__title_container .navigator__topic_tile_title_container {
+  width: calc(var(--topic__title_tile_width) - var(--navigator__tile_padding_horizontal) * 2 - var(--navigator__tile_img_text_space) * 2 - var(--navigator__tile_img_width) * 2);
+}
+
+@import './topic/popupBox';
+@import './topic/pathTile';

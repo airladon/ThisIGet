@@ -1,0 +1,62 @@
+@import '../../../geometry';
+
+$colors: (
+  lines:              color('blue'),
+  angles:             color('green'),
+  arc:                color('red'),
+  marks:              color('grey', 'dark'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}
+
+.in_topic__fraction_table {
+  text-align: center;
+  // color: color('diagram', 'text-base');
+  // font-size: calc(var(--topic__diagram-font-size) * 0.8);
+  table-layout: fixed;
+  width: calc(var(--topic__diagram-font-size) * 10);
+  margin-left: calc(var(--topic__diagram-font-size) * 1);
+  // margin-top: calc(var(--topic__diagram-font-size) * 3);
+  border-spacing: 0;
+  background-color: color('black', 'darker');
+  color: color('grey', 'light');
+  border-radius: 0.5em;
+  font-size: 0.7em;
+  position: absolute;
+  top: 25%;
+  left: 7%;
+  font-weight: 100;
+}
+
+.in_topic__fraction_table tr:first-child {
+  text-align: center;
+  background-color: color('black', 'dark');
+  height: 2.5em;
+  font-size: 0.8em;
+}
+
+.topic__fraction {
+  font-size: 1.5em;
+}
+
+// .topic__common_angles_table td:first-child {
+//   font-size: 2em;
+// }
+
+.topic__common_angles_table td:nth-child(2) {
+  font-size: 0.7em;
+}
+
+.topic__fraction_title {
+  border-top-left-radius: 0.5em;
+}
+
+.topic__angle_title {
+  border-top-right-radius: 0.5em;
+}

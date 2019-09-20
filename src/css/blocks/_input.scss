@@ -2,6 +2,19 @@ $width: 250px;
 
 // ///////////////////////////////////////////////////////
 // Form and Title
+.input_form__spacer {
+  height: 1em;
+}
+
+.input_form__info {
+  font-size: 0.8em;
+  color: grey;
+  width: $width;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: left;
+}
+
 .input_form p {
   margin-bottom: 1px;
   text-align: center;
@@ -51,7 +64,7 @@ $width: 250px;
   color: white;
   height: 100%;
   width: 100%;
-  font-size: 20px;
+  font-size: 18px;
 }
 
 .input_form__title__text {
@@ -80,6 +93,23 @@ $width: 250px;
   color: grey;
 }
 
+.input_form__check {
+  display: table;
+  table-layout: fixed;
+}
+
+.input_form__check_box {
+  display: table-cell;
+  vertical-align: middle;
+  width: 2em;
+  text-align: center;
+}
+
+.input_form__check_label {
+  display: table-cell;
+  vertical-align: middle;
+}
+
 .input_form__field_entry {
   border-radius: 5px;
   height: 2em;
@@ -94,6 +124,10 @@ $width: 250px;
   color: color('site', 'warning', 'light');
   top: 56px;
   left: 0;
+}
+
+.input_form__field_error_message__check {
+  top: 3em;
 }
 
 // ///////////////////////////////////////////////////////

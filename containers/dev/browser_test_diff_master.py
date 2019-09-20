@@ -37,14 +37,13 @@ for path in diff:
        or path == 'app/app/templates/base.html' \
        or path == 'app/app/templates/base-dev.html' \
        or path == 'app/app/templates/base-stage.html' \
-       or path == 'src/Lessons/LessonsCommon/lessonindex.js' \
-       or path == 'src/Lessons/index.js' \
-       or path.startswith == 'src/Lessons/boilerplate' \
+       or path == 'src/content/topicIndexObj.js' \
+       or path.startswith == 'src/content/boilerplate' \
        or path == 'app/app/app.db':
         continue
     # These files will trigger browser tests
-    if parent.startswith('src/Lessons/') and \
-       not parent.startswith('src/Lessons/LessonsCommon'):
+    if parent.startswith('src/content/') and \
+       not parent.startswith('src/content/common'):
         jest_string = parent
         if len(parent.split('/')) > max_depth:
             jest_string = '/'.join(parent.split('/')[0:max_depth - 1])
@@ -70,19 +69,19 @@ for file_name in current.keys():
     md5 = current[file_name]
     if file_name == '/sitemap.xml' \
        or file_name == '/hashes.json' \
-       or file_name.startswith('/dist/lessonIndex') \
+       or file_name.startswith('/dist/topicIndex') \
        or file_name.startswith('/dist/tools') \
        or file_name.startswith('/dist/main') \
        or file_name.startswith('/dist/polyfill') \
        or file_name.startswith('/dist/vendors') \
        or file_name.startswith('/dist/input') \
-       or file_name.startswith('/dist/Lessons') \
-       or file_name.startswith('/index.js') \
-       or file_name.startswith('/index.js.map') \
-       or file_name.startswith('/dist/commonlessons'):
+       or file_name.startswith('/dist/content') \
+       or file_name.startswith('/topicIndexObj.js') \
+       or file_name.startswith('/topicIndexObj.js.map') \
+       or file_name.startswith('/dist/commoncontent'):
         continue
     if file_name not in existing or existing[file_name] != md5:
-        if not file_name.startswith('/dist/Lessons'):
+        if not file_name.startswith('/dist/content'):
             test_all = True
             # print(file_name, file_name not in existing)
             # print(f'All: {file_name}')

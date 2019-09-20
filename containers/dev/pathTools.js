@@ -22,32 +22,32 @@ function walkSync(currentDirPath, fileIdentifier, callback) {
 }
 
 function getAllPaths(
-  lessonsPath,
+  topicsPath,
   prodPaths,
   devPaths,
   buildMode,
 ) {
-  const lessons = [];
+  const topics = [];
   let fileId = prodPaths;
   if (buildMode === 'development') {
     fileId = [...prodPaths, ...devPaths];
   }
-  walkSync(lessonsPath, fileId, (lessonPath, fileName) => {
-    if (!lessonPath.includes('boilerplate')) {
-      lessons.push({ path: lessonPath, name: fileName });
+  walkSync(topicsPath, fileId, (topicPath, fileName) => {
+    if (!topicPath.includes('boilerplate')) {
+      topics.push({ path: topicPath, name: fileName });
     }
   });
-  return lessons;
+  return topics;
 }
 
-function getAllLessons(lessonsPath) {
-  const lessons = [];
-  walkSync(lessonsPath, 'details.js', (lessonPath) => {
-    if (!lessonPath.includes('boilerplate')) {
-      lessons.push(lessonPath);
+function getAllTopics(topicsPath) {
+  const topics = [];
+  walkSync(topicsPath, 'details.js', (topicPath) => {
+    if (!topicPath.includes('boilerplate')) {
+      topics.push(topicPath);
     }
   });
-  return lessons;
+  return topics;
 }
 
 function getAllVersions(versionsPath) {
@@ -59,5 +59,5 @@ function getAllVersions(versionsPath) {
 }
 
 module.exports = {
-  walkSync, getAllLessons, getAllVersions, getAllPaths,
+  walkSync, getAllTopics, getAllVersions, getAllPaths,
 };

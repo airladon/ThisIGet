@@ -2,17 +2,17 @@ const fs = require('fs');
 const path = require('path');
 const pathTools = require('./pathTools.js');
 
-function createLessonIndex(buildMode, lessonsPath) {
-  const lessons = pathTools.getAllLessons(lessonsPath);
-  // let outStr = `import LessonDescription from '../../js/Lesson/lessonDescription';
-  let outStr = `export default function lessonIndex() {
-  return {`;
-  lessons.forEach((lessonPath) => {
-    const splitLessonPath = lessonPath.split('/');
-    const parentPath = splitLessonPath.slice(1, -1).join('/');
-    const uid = splitLessonPath.slice(-1)[0];
+function createTopicIndex(buildMode, topicsPath, appPath) {
+  const topics = pathTools.getAllTopics(topicsPath);
+  const outObj = {};
+  const appObj = {};
+  topics.forEach((topicPath) => {
+    const splitLessonPath = topicPath.split('/');
+    // const parentPath = splitLessonPath.slice(1, -1).join('/');
+    const uid = splitLessonPath.slice(-(splitLessonPath.length - 2)).join('/');
+    // const topicUid = splitLessonPath.slice(-1)[0];
 
-    const absoluteDetailsPath = `${process.cwd()}/${lessonPath}/details.js`;
+    const absoluteDetailsPath = `${process.cwd()}/${topicPath}/details.js`;
     const detailsPathRelativeToCWD = path.relative(process.cwd(), absoluteDetailsPath);
     const detailsPathRelativeToThisFile = `./${path.relative(__dirname, absoluteDetailsPath)}`;
 
@@ -26,9 +26,7 @@ function createLessonIndex(buildMode, lessonsPath) {
       /* eslint-enable */
       ({ title } = details);
       ({ dependencies } = details);
-      // ({ uid } = details);
       ({ enabled } = details);
-      // ({ qr } = details);
       if (enabled != null && enabled === false) {
         enabled = false;
       } else {
@@ -36,36 +34,40 @@ function createLessonIndex(buildMode, lessonsPath) {
       }
     }
     if (title !== '') {
-      // outStr = `${outStr}\n    ${uid}: new LessonDescription({`;
-      outStr = `${outStr}\n    ${uid}: {`;
-      outStr = `${outStr}\n      title: '${title.replace(/'/, '\\\'')}',`;
-      outStr = `${outStr}\n      path: '/${parentPath}',`;
-      outStr = `${outStr}\n      uid: '${uid}',`;
-      outStr = `${outStr}\n      topics: {`;
-      const versions = pathTools.getAllVersions(lessonPath);
-      const topics = {};
+      outObj[uid] = {
+        title: `${title.replace(/'/, '\\\'')}`,
+        approaches: {},
+      };
+      appObj[uid] = {
+        title: `${title.replace(/'/, '\\\'')}`,
+        approaches: {},
+      };
+      const versions = pathTools.getAllVersions(topicPath);
+      const contentTypes = {};
       versions.forEach((versionPath) => {
         const splitPath = versionPath.split('/');
-        const topicName = splitPath.slice(-2, -1)[0];
+        const contentTypeName = splitPath.slice(-2, -1)[0];
         const versionUid = splitPath.slice(-1)[0];
-        if (topics[topicName] == null) {
-          topics[topicName] = [];
+        if (contentTypes[contentTypeName] == null) {
+          contentTypes[contentTypeName] = [];
         }
-        topics[topicName].push([versionUid, versionPath]);
+        contentTypes[contentTypeName].push([versionUid, versionPath]);
       });
 
-      Object.keys(topics).forEach((topicName) => {
-        const topicVersions = topics[topicName];
-        if (topicName !== 'quickReference') {
-          outStr = `${outStr}\n        ${topicName}: {`;
+      Object.keys(contentTypes).forEach((contentTypeName) => {
+        const topicVersions = contentTypes[contentTypeName];
+        if (contentTypeName !== 'quickReference') {
+          outObj[uid].approaches[contentTypeName] = {};
+          appObj[uid].approaches[contentTypeName] = {};
           topicVersions.forEach((v) => {
             const [versionUid, versionPath] = v;
             let versionTitle = '';
             let versionDescription = '';
             let versionHtmlTitle = '';
             let versionHtmlDescription = '';
-            let fullLesson = false;
+            let fullTopic = false;
             let type = 'generic';
+            let links = '';
             // let references = [];
             const versionPathAbsolute
               = `${process.cwd()}/${versionPath}/version.js`;
@@ -91,75 +93,81 @@ function createLessonIndex(buildMode, lessonsPath) {
               if (version.htmlDescription != null) {
                 versionHtmlDescription = version.htmlDescription;
               }
-              if (version.fullLesson != null) {
-                ({ fullLesson } = version);
+              if (version.fullTopic != null) {
+                ({ fullTopic } = version);
               }
               if (version.type != null) {
                 ({ type } = version);
               }
-              // if (version.references != null) {
-              //   ({ references } = version);
-              // }
+              if (version.links != null) {
+                ({ links } = version);
+              }
             }
-
-            outStr = `${outStr}\n          ${versionUid}: {`;
-            outStr = `${outStr}\n            type: '${type}',`;
-            if (topicName === 'quickReference') {
-              // outStr = `${outStr}\n            references: [`;
-              // references.forEach((reference) => {
-              //   outStr = `${outStr}\n              '${reference}',`;
-              // });
-              // outStr = `${outStr}\n            ],`;
-            } else {
-              outStr = `${outStr}\n            title: '${versionTitle}',`;
-              outStr = `${outStr}\n            description: '${versionDescription.replace(/'/, '\\\'')}',`;
-              outStr = `${outStr}\n            htmlTitle: '${versionHtmlTitle.replace(/'/, '\\\'')}',`;
-              outStr = `${outStr}\n            htmlDescription: '${versionHtmlDescription.replace(/'/, '\\\'')}',`;
-              outStr = `${outStr}\n            fullLesson: ${fullLesson.toString()},`;
-            }
-            outStr = `${outStr}\n          },`;
+            outObj[uid].approaches[contentTypeName][versionUid] = {
+              type: `${type}`,
+              title: `${versionTitle}`,
+              description: `${versionDescription.replace(/'/, '\\\'')}`,
+              fullTopic,
+            };
+            appObj[uid].approaches[contentTypeName][versionUid] = {
+              type: `${type}`,
+              title: `${versionTitle}`,
+              description: `${versionDescription.replace(/'/, '\\\'')}`,
+              htmlTitle: `${versionHtmlTitle.replace(/'/, '\\\'')}`,
+              htmlDescription: `${versionHtmlDescription.replace(/'/, '\\\'')}`,
+              fullTopic,
+              links,
+            };
           });
-          outStr = `${outStr}\n        },`;
         }
-        if (topicName === 'quickReference' && buildMode === 'development') {
-          outStr = `${outStr}\n        dev: {`;
+        if (contentTypeName === 'quickReference' && buildMode === 'development') {
           topicVersions.forEach((v) => {
             const [versionUid] = v;
-            outStr = `${outStr}\n          ${versionUid}: {`;
-            outStr = `${outStr}\n            type: 'presentation',`;
-            outStr = `${outStr}\n            title: '${versionUid}',`;
-            outStr = `${outStr}\n            description: '',`;
-            outStr = `${outStr}\n            fullLesson: false,`;
-            outStr = `${outStr}\n          },`;
+            outObj[uid].approaches[contentTypeName] = {};
+            appObj[uid].approaches[contentTypeName] = {};
+            outObj[uid].approaches[contentTypeName][versionUid] = {
+              type: 'presentation',
+              title: `${versionUid}`,
+              description: '',
+              fullTopic: false,
+            };
+            appObj[uid].approaches[contentTypeName][versionUid] = {
+              type: 'presentation',
+              title: `${versionUid}`,
+              description: '',
+              fullTopic: false,
+            };
           });
-          outStr = `${outStr}\n        },`;
         }
       });
 
-      outStr = `${outStr}\n      },`;
-      outStr = `${outStr}\n      dependencies: [`;
+      outObj[uid].dependencies = [];
+      appObj[uid].dependencies = [];
       if (dependencies.length > 0) {
         dependencies.forEach((dependency) => {
-          outStr = `${outStr}\n        '${dependency}',`;
+          outObj[uid].dependencies.push(dependency);
+          appObj[uid].dependencies.push(dependency);
         });
       }
-      outStr = `${outStr}\n      ],`;
-      outStr = `${outStr}\n      enabled: ${enabled},`;
-      // outStr = `${outStr}\n    }),`;
-      outStr = `${outStr}\n    },`;
+      outObj[uid].enabled = enabled;
+      appObj[uid].enabled = enabled;
     }
   });
-  outStr = `${outStr}\n  };`;
-  // outStr = `${outStr}\n  return lessonIndex;\n}\n`;
-  outStr = `${outStr}\n}\n`;
-  if (outStr !== '') {
-    fs.writeFile(`${lessonsPath}/index.js`, outStr, (err) => {
-      if (err) {
-        // eslint-disable-next-line no-console
-        console.log(err);
-      }
-    });
-  }
+
+  const outFileName = `${topicsPath}/topicIndex.json`;
+  const appFileName = `${appPath}/topicIndex.json`;
+  fs.writeFile(outFileName, JSON.stringify(outObj, null, 2), (err) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  });
+  fs.writeFile(appFileName, JSON.stringify(appObj, null, 2), (err) => {
+    if (err) {
+      // eslint-disable-next-line no-console
+      console.log(err);
+    }
+  });
 }
 
-module.exports = createLessonIndex;
+module.exports = createTopicIndex;

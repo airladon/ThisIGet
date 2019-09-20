@@ -59,7 +59,7 @@ describe('Visual Regressions', () => {
 
   // test('Angles Lesson Page 1', async () => {
   //   const anglesPath =
-  //     `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
+  //     `${sitePath}/content/Math/Geometry_1/Angle/base/explanation`;
   //   await page.goto(anglesPath);
   //   await page.setViewport({ width: 600, height: 800 });
   //   const image = await page.screenshot({ path: 'anglesPage1.png' });
@@ -67,7 +67,7 @@ describe('Visual Regressions', () => {
   // });
   // test('Angles Lesson Page 6', async () => {
   //   const anglesPath =
-  //     `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
+  //     `${sitePath}/content/Math/Geometry_1/Angle/base/explanation`;
   //   await page.goto(`${anglesPath}?page=6`);
   //   await page.setViewport({ width: 600, height: 800 });
   //   const image = await page.screenshot({ path: 'anglesPage6.png' });
@@ -146,7 +146,7 @@ describe('Login Flows', () => {
   });
 });
 
-// const anglesPath = `${sitePath}/Lessons/Math/Geometry_1/Angle/base/explanation`;
+// const anglesPath = `${sitePath}/content/Math/Geometry_1/Angle/base/explanation`;
 
 // describe('Angles Lesson', () => {
 //   beforeAll(async () => {

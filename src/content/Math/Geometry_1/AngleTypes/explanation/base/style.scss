@@ -1,0 +1,63 @@
+@import '../../../geometry';
+
+$colors: (
+  lines:              color('blue'),
+  angle:             color('green'),
+  axes:              color('grey', 'dark'),
+  fill:              color('green', 'darkest'),
+  marks:             color('grey', 'darker'),
+);
+
+body {
+  @include color_vars($colors);
+}
+
+.diagram__text {
+  z-index: 0;
+}
+
+.topic__important_angles_table {
+  width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2%;
+  // background-color: color('black', 'darker');
+  text-align: center;
+  border: 1px solid color('black', 'dark');
+  // color: map-get($colors, 'angle');
+}
+
+.topic__important_angles_table td {
+  padding-top: 1%;
+  padding-bottom: 1%;
+}
+
+.topic__important_angles_table td:first-child {
+  padding-left: 2%;
+}
+
+.topic__important_angles_table td:last-child {
+  padding-right: 3%;
+}
+
+.topic__important_angles_table__not_selected {
+  color: map-get($colors, 'axes');
+}
+
+.topic__important_angles_table__selected {
+  color: map-get($colors, 'angle');
+}
+
+.topic__important_angles__text {
+  // position: absolute;
+  // top: 0;
+  // left: 0;
+  width: 100%;
+  height: 80%;
+}
+
+.topic__important_angles__text_hide {
+  overflow: hidden;
+  height: 0;
+  width: 0;
+}

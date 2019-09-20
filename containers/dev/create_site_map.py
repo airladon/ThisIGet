@@ -36,7 +36,7 @@ if existing_sitemap_content:
 # #############################################################################
 # Get all lesson versions
 versions = []
-for root, dirs, files in os.walk("./src/Lessons"):
+for root, dirs, files in os.walk("./src/content"):
     for file in files:
         if ('quickReference' in root):
             continue
@@ -69,7 +69,7 @@ for version in versions:
         if file.endswith('scss') \
            or file.endswith('css') \
            or file == 'version.js' \
-           or file == 'lesson.js' \
+           or file == 'entry.js' \
            or file == '.DS_Store' \
            or os.path.isdir(os.path.join(version, file)):
             continue

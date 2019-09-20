@@ -15,11 +15,11 @@ function parseHints(source) {
     } else {
       hint = content;
     }
-    const replacement = `<div class="lesson__hint">
-    <div class="lesson__hint_label">
+    const replacement = `<div class="simple__hint">
+    <div class="simple__hint_label">
       ${label} 
     </div>
-    <div class="lesson__hint_contents lesson__hint_hidden">
+    <div class="simple__hint_contents simple__hint_hidden">
       ${hint}
     </div>
   </div>`;
@@ -44,11 +44,11 @@ function parseLowHints(source) {
     } else {
       hint = content;
     }
-    const replacement = `<div class="lesson__hint_low">
-    <div class="lesson__hint_label_low">
+    const replacement = `<div class="simple__hint_low">
+    <div class="simple__hint_label_low">
       ${label} 
     </div>
-    <div class="lesson__hint_contents_low lesson__hint_hidden">
+    <div class="simple__hint_contents_low simple__hint_hidden">
       ${hint}
     </div>
   </div>`;
@@ -66,7 +66,7 @@ function parseLinks(source) {
     const { index } = match;
     const [str, label, link] = match;
     const replacement = `
-  <a class="lesson__link" href=${link}">
+  <a class="topic__link" href=${link}">
     ${label}
   </a>`;
     out = `${out.substring(0, index)}${replacement}${out.substring(index + str.length)}`;

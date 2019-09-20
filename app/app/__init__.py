@@ -5,7 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 from flask_mail import Mail
 from flask_talisman import Talisman
-from app.tools import getLessons
+from app.tools import getContent, getTopicIndex
 import os
 
 app = Flask(__name__)
@@ -46,6 +46,7 @@ db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)
 mail = Mail(app)
-lessons = getLessons()
+static_files = getContent()
+topic_index, version_list, link_list = getTopicIndex()
 
 from app import routes, models  # noqa

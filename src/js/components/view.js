@@ -109,7 +109,9 @@ const withLoginManager = function loginManager(
             username={this.state.username}
             isLoggedIn={this.state.isLoggedIn}
           />
-          <Footer/>
+          <Footer
+            includeHome={includeHome}
+          />
         </div>
       );
     }

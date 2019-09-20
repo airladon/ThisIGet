@@ -1,9 +1,12 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField
+# from wtforms import BooleanField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 # from wtforms.validators import Length
 from app.models import Users
 from app.tools import hash_str_with_pepper, format_email
+
+# import pdb
 
 
 class LoginForm(FlaskForm):
@@ -31,12 +34,22 @@ class CreateAccountForm(FlaskForm):
         'Repeat Password: ',
         validators=[DataRequired(), EqualTo('password')]
     )
+    # terms = BooleanField(
+    #     'I have read and agree to the <a href="/terms">Terms and Conditions</a>',  # noqa
+    #     validators=[DataRequired(
+    #         message="You must agree to create an account"), ])
+    # privacy = BooleanField(
+    #     'I have read and agree to the <a href="/privacy">Privacy Policy</a>',
+    #     validators=[DataRequired(
+    #         message="You must agree to create an account"), ])
     submit = SubmitField('Create Account')
 
     def validate_username(self, username):
         if len(username.data) > 32:
             raise ValidationError('Username max length is 32 characters')
-        user = Users.query.filter_by(username=username.data).first()
+        user = Users.query.filter_by(
+            username_hash=hash_str_with_pepper(username.data.lower())).first()
+        # user = Users.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError('Username already exists.')
 

@@ -1,0 +1,165 @@
+.topic__info_button {
+  // background-color: color('presentation', 'background');
+  background-color: #0000;
+  position: absolute;
+  left: calc(70% - var(--pres__button_height) / 2);
+  top: calc(100% - (100% - var(--pres__content_height) - var(--pres__vspace)) / 2 - var(--pres__button_height) / 2);
+  width: calc(var(--pres__button_height) * 1);
+  height: calc(var(--pres__button_height) * 1);
+  // padding: calc(var(--pres__button_height) * 0.6 * 0.05);
+  // border-color: color('diagram', 'background', 'darker');
+}
+
+// .topic__info_button button:hover {
+//   border: 1px solid;
+//   border-radius: calc(var(--pres__button_height) / 2);
+//   width: calc(var(--pres__button_height) * 1);
+//   height: calc(var(--pres__button_height) * 1);
+//   color: color('presentation', 'hover');
+// }
+
+.topic__info_button_label_container {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  display: table;
+  color: color('presentation', 'text');
+  font-size: calc(var(--pres__unit) * 0.8);
+  border: 1px solid color('presentation', 'hover');
+  border-radius: calc(var(--pres__button_height) / 2);
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+                      supported by Chrome and Opera */
+  // padding: calc(var(--topic__goto_button-font-size) * 0.25);
+}
+
+.topic__info_button_label {
+  text-align: center;
+  vertical-align: middle;
+  display: table-cell;
+}
+
+.topic__info_button_label_text {
+  // position: absolute;
+  // left: 40%;
+  // top: -2%;
+  font-family: times new roman, serif;
+  font-style: italic;
+}
+
+.topic__info_button_label_container:hover {
+  color: color('presentation', 'hover');
+  // border: 1px solid color('presentation', 'hover', 'lighter');
+  cursor: pointer;
+  // background-color: color('diagram', 'background', 'darker');
+}
+// .topic__info_button_show {
+//   // background-color: color('diagram', 'background', 'darker');
+// }
+
+// .topic__info_button_show:hover {
+//   // background-color: color('diagram', 'background', 'dark');
+// }
+
+// @media screen and (min-width: $small-tablet) {
+//   .topic__info_button {
+//     border: calc(var(--topic__goto_button-font-size) * 0.2) solid color('diagram', 'background', 'darker');
+//   }
+// }
+
+@media (min-aspect-ratio: $landscape_aspect_ratio) {
+  .topic__info_button {
+    // left: calc(100% - var(--topic__np_button-width) / 2 - calc(var(--topic__goto_button-font-size) * 1.5));
+    // left: calc(100% - var(--pres__hspace) - var(--pres__nav_button_width) / 2 - var(--pres__button_height) / 2);
+    left: calc(var(--pres__content_width) + var(--pres__hspace) * 3 + var(--pres__nav_button_width) * 1.5 - var(--pres__button_height) / 2);
+    top: calc(84% - var(--pres__button_height) / 2);
+  }
+}
+
+.topic__info_box {
+  z-index: 2;
+  position: absolute;
+  top: 96%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  background-color: rgba(255, 255, 255, 0.95);
+  color: color('diagram', 'disabled', 'darker');
+  border-radius: calc(var(--topic__diagram-font-size) * 0.4);
+  width: max-content;
+  max-width: calc(var(--pres__content_width) * 0.8);
+}
+
+.topic__info_box ul {
+  margin: 0;
+  padding-left: calc(var(--topic__diagram-font-size) * 0.5);
+}
+
+.topic__info_box__close {
+  // text-align: right;
+  padding: 0;
+  margin-right: calc(var(--topic__diagram-font-size) * 0.8);
+  // padding-top: calc(var(--topic__diagram-font-size) * 0.1);
+  margin-top: calc(var(--topic__diagram-font-size) * -0.1);
+  font-size: calc(var(--topic__diagram-font-size) * 0.9);
+  width: auto;
+  float: right;
+  font-weight: lighter;
+}
+
+.topic__info_box__close:hover {
+  color: color('diagram', 'disabled', 'darker');
+  font-weight: light;
+}
+
+.topic__info_box__title {
+  color: color('diagram', 'disabled', 'base');
+  font-size: calc(var(--topic__diagram-font-size) * 0.6);
+  text-align: center;
+  padding-top: calc(var(--topic__diagram-font-size) * 0.5);
+  padding-bottom: calc(var(--topic__diagram-font-size) * 0.5);
+  width: 100%;
+  // display: table;
+  // border-bottom: 1px solid rgba(200, 200, 200, 1);
+  // color: rgba(255, 255, 255, 1);
+}
+
+.topic__info_box__title_text {
+  display: inline-block;
+  width: auto;
+  height: calc(var(--topic__diagram-font-size) * 0.8);
+  margin-top: calc(var(--topic__diagram-font-size) * 0.2);
+}
+
+.topic__info_box__title_i {
+  display: inline-block;
+  float: left;
+  margin-left: calc(var(--topic__diagram-font-size) * 0.5);
+  // margin-right: calc(var(--topic__diagram-font-size) * 1);
+  font-size: calc(var(--topic__diagram-font-size) * 0.7);
+  width: calc(var(--topic__diagram-font-size) * 1.1);
+  height: calc(var(--topic__diagram-font-size) * 1.1);
+  border: 1px solid;
+  border-radius: calc(var(--topic__diagram-font-size) * 0.55);
+  font-family: times new roman, serif;
+  font-style: italic;
+}
+
+.topic__info_box__text {
+  padding-left: calc(var(--topic__diagram-font-size) * 1);
+  padding-right: calc(var(--topic__diagram-font-size) * 1);
+  padding-bottom: calc(var(--topic__diagram-font-size) * 0.5);
+  max-height: calc(var(--pres__content_height) * 0.4);
+  overflow: scroll;
+  font-size: calc(var(--topic__diagram-font-size) * 0.7);
+}
+
+.topic__info_hide {
+  left: -10000px;
+  top: -10000px;
+  font-size: 0;
+  border: 0;
+  height: 0;
+  width: 0;
+}

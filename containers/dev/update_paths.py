@@ -1,7 +1,7 @@
 import os
 import re
 
-lesson_path = './src/Lessons/'
+lesson_path = './src/content/'
 file_extensions = ['js', 'scss']
 path_matches = ['js', 'css']
 

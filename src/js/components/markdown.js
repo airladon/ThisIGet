@@ -9,7 +9,7 @@ export default class Markdown extends React.Component
                                     <Props> {
   render() {
     return <div
-      className="lesson__markdown"
+      className="topic__markdown"
       dangerouslySetInnerHTML={ { __html: this.props.content } }
     />;
   }

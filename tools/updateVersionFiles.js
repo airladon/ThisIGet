@@ -1,5 +1,5 @@
 // console.log(__dirname)
 // console.log(__dirname.replace(/thisiget\/.*/, 'thisiget'));
-const getLessons = require('../containers/dev/getLessons.js');
+const getContent = require('../containers/dev/getContent.js');
 
-getLessons.updateDetailsAndVersions();
+getContent.updateDetailsAndVersions();

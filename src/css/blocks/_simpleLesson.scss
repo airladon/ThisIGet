@@ -1,6 +1,6 @@
 @import './style.scss';
 
-.simple_lesson__container {
+.simple_topic__container {
   // padding: 1em;
   // margin-left: 1em;
   // margin-right: 1em;
@@ -17,7 +17,7 @@
 }
 
 @media screen and (min-width: 700px) {
-  .simple_lesson__container {
+  .simple_topic__container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: 1em;
@@ -26,7 +26,7 @@
 }
 
 @media screen and (min-width: 1100px) {
-  .simple_lesson__container {
+  .simple_topic__container {
     border-left: 1px solid color('white', 'light');
     border-right: 1px solid color('white', 'light');
     margin-left: auto;
@@ -34,17 +34,17 @@
   }
 }
 
-.simple_lesson__container img {
+.simple_topic__container img {
   max-width: 100%;
   margin-left: 50%;
   transform: translate(-50%);
 }
 
-.simple_lesson__container svg {
+.simple_topic__container svg {
   max-width: 100%;
 }
 
-.lesson__qr img {
+.topic__qr img {
   margin-left: 0;
 }
 
@@ -62,7 +62,7 @@ h3:first-of-type {
 // QUIZ Multiple Choice
 // ///////////////////////////////////////////////////////
 
-.lesson__multiple_choice input {
+.topic__multiple_choice input {
   // margin-top: 1em;
   margin-right: 0.6em;
   margin-left: 0.5em;
@@ -72,22 +72,22 @@ h3:first-of-type {
   // vertical-align: middle;
 }
 
-.lesson__quiz_selection {
+.approach__quiz_selection {
   display: table;
   margin-top: 1em;
 }
 
-.lesson__quiz__submit {
+.approach__quiz__submit {
   display: table;
   margin-top: 1em;
 }
 
-.lesson__quiz__radio_button {
+.approach__quiz__radio_button {
   display: table-cell;
   vertical-align: middle;
 }
 
-.lesson__quiz__submit_button {
+.approach__quiz__submit_button {
   display: table-cell;
   vertical-align: middle;
   background: none;
@@ -101,13 +101,13 @@ h3:first-of-type {
   color: color('black', 'lighter');
 }
 
-.lesson__quiz__submit_button:hover {
+.approach__quiz__submit_button:hover {
   background-color: color('white', 'lighter');
 }
 
-.lesson__quiz__mark,
-.lesson__quiz__radio_mark,
-.lesson__quiz__submit_mark {
+.approach__quiz__mark,
+.approach__quiz__radio_mark,
+.approach__quiz__submit_mark {
   display: table-cell;
   vertical-align: middle;
   width: 1.5em;
@@ -116,39 +116,39 @@ h3:first-of-type {
   background-position: center;
 }
 
-.lesson__quiz__result_correct {
+.approach__quiz__result_correct {
   background-image: $correct;
 }
 
-.lesson__quiz__result_incorrect {
+.approach__quiz__result_incorrect {
   background-image: $incorrect;
 }
 
 // ///////////////////////////////////////////////////////
 // QUIZ Entry
 // ///////////////////////////////////////////////////////
-.lesson__quiz_entry {
+.approach__quiz_entry {
   margin-top: 1em;
   display: table;
 }
 
-// .lesson__quiz_entry_container {
+// .approach__quiz_entry_container {
 //   display: table;
 // }
 
-.lesson__quiz_entry_label {
+.approach__quiz_entry_label {
   display: table-cell;
   vertical-align: middle;
 }
 
-.lesson__quiz_entry_input {
+.approach__quiz_entry_input {
   display: table-cell;
   vertical-align: middle;
   padding-left: 0.5em;
   padding-right: 0.8em;
 }
 
-.lesson__quiz_entry_input input {
+.approach__quiz_entry_input input {
   border: 1px solid color('black', 'lightest');
   padding: 0.15em;
   width: 4em;
@@ -162,50 +162,50 @@ input[type=number]::-webkit-outer-spin-button {
   margin: 0;
 }
 
-.lesson__quiz__entry_submit {
+.approach__quiz__entry_submit {
   // margin-top: 0.5em;
 }
 
-.lesson__quiz__answer {
+.approach__quiz__answer {
   display: none;
 }
 
 // ///////////////////////////////////////////////////////
 // Hints
 // ///////////////////////////////////////////////////////
-// .lesson__hint {
+// .simple__hint {
 //   padding-bottom: 1em;
 // }
 
-.lesson__hint_label_low,
-.lesson__hint_label {
+.simple__hint_label_low,
+.simple__hint_label {
   display: inline-block;
   margin-right: 0.5em;
   color: green;
   font-weight: 800;
 }
 
-.lesson__hint_label_low {
+.simple__hint_label_low {
   display: block;
 }
 
-.lesson__hint_label_low,
-.lesson__hint_label:hover {
+.simple__hint_label_low,
+.simple__hint_label:hover {
   cursor: pointer;
 }
 
-.lesson__hint_contents {
+.simple__hint_contents {
   display: inline-block;
   border: 1px solid color('white', 'light');
   padding: 0.3em;
 }
 
-.lesson__hint_contents_low {
+.simple__hint_contents_low {
   display: block;
   border: 1px solid color('white', 'light');
   padding: 0.3em;
 }
 
-.lesson__hint_hidden {
+.simple__hint_hidden {
   display: none;
 }

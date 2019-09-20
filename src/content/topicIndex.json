@@ -1,0 +1,1648 @@
+{
+  "Math/Geometry_1/Angle": {
+    "title": "Angles",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "Introduction to Angles.",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "Summary of Angles introduction",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Circle"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/AngleGroups": {
+    "title": "Angle Groups",
+    "approaches": {
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Example problems with complementary, supplementary and explementary angles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "Explanation of complementary, supplementary, and explementary angles.",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External Links to Angle Groups",
+          "description": "External links to sources of information for Angle Groups>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "singlePage",
+          "title": "Complementary, Supplementary and Explementary Angles",
+          "description": "Questions to identify and calculate complementary, supplementary and explementary angles",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Complementary, Supplementary and Explementary Angles.",
+          "description": "Summary of complementary, supplementary and explementary Angles.",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AngleTypes"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/AngleTypes": {
+    "title": "Angle Types",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Degrees"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/AnglesAtIntersections": {
+    "title": "Angles at Intersections",
+    "approaches": {
+      "discover": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of related angles",
+          "description": "Examples of calculating opposite, corresponding, alternate and interior angles",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for opposite, corresponding, alternate and interior angles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Simple geometries",
+          "description": "",
+          "fullTopic": true
+        },
+        "complex": {
+          "type": "singlePage",
+          "title": "More complex geometries",
+          "description": "Find angles using opposite, corresponding, alternate, interior and supplementary angles",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "ParallelLines"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Area": {
+    "title": "Area and Rectangles",
+    "approaches": {
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of area",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to Area",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Create an area",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "RectanglesAndSquares"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/AreaCircle": {
+    "title": "Area of a Circle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of Circle Area",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Single Page Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for Circle Area",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AreaTriangle"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/AreaTriangle": {
+    "title": "Area of a Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for <TOPIC>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Make triangle with target area",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Area"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Circle": {
+    "title": "Circles",
+    "approaches": {
+      "examples": {
+        "static": {
+          "type": "singlePage",
+          "title": "Circle Radius, Diameter and Circumference",
+          "description": "Examples calculations of diameter, radius and circumference",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "Presentation form - interactive.",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to information on circles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "calcProperties": {
+          "type": "singlePage",
+          "title": "Calculate Properties",
+          "description": "Calculate properties of a circle from other properties",
+          "fullTopic": true
+        },
+        "identifyProperties": {
+          "type": "presentation",
+          "title": "Identify Properties",
+          "description": "Identify the properties of a circle.",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Circle Properties",
+          "description": "Presentation form - interactive.",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Introduction"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/CongruentTriangles": {
+    "title": "Congruent Triangles",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of finding and using Congruent Triangles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        },
+        "fromSAS": {
+          "type": "singlePage",
+          "title": "Show SSS, ASA and AAS from SAS",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for congruent triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "ta": {
+        "sss": {
+          "type": "presentation",
+          "title": "SSS",
+          "description": "",
+          "fullTopic": false
+        },
+        "tri": {
+          "type": "presentation",
+          "title": "Triangle",
+          "description": "Interactive triangle",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Triangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Degrees": {
+    "title": "Degrees",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for Degrees",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "singlePage",
+          "title": "General Questions about Degrees",
+          "description": "Answer general questions about measuring angle and degrees",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Angle"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Equilateral": {
+    "title": "Equilateral Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Isosceles Triangles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to equilateral triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "singlePage",
+          "title": "Equilateral Quiz",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Isosceles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/ExternalAngles": {
+    "title": "External Angle of a Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "External angle calculations",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        },
+        "simple": {
+          "type": "singlePage",
+          "title": "Full explanation in single page",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for External Angles of Triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Triangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Introduction": {
+    "title": "Why Study Shapes?",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "Motivation to studying shapes.",
+          "fullTopic": true
+        },
+        "singlePage": {
+          "type": "singlePage",
+          "title": "Descriptive - Single Page",
+          "description": "Motivation to studying shapes.",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      }
+    },
+    "dependencies": [],
+    "enabled": true
+  },
+  "Math/Geometry_1/Isosceles": {
+    "title": "Isosceles Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Isosceles Triangles",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to isosceles triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "CongruentTriangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/ParallelLineDistance": {
+    "title": "Parallel Line Distance",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of ",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "PointLineDistance"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/ParallelLines": {
+    "title": "Parallel Lines",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AngleGroups"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/ParallelSplitOfTriangle": {
+    "title": "Parallel Split of Triangle",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of triangles split with parallel lines",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Descriptive",
+          "description": "",
+          "fullTopic": true
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Full Proof",
+          "description": "Proof showing the resulting triangle has proportional sides",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for Parallel Split of a Triangle",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "External angle summary",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "ParallelLineDistance"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/PointLineDistance": {
+    "title": "Point to Line Distance",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "RightAngleTriangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Quadrangles": {
+    "title": "Quadrangles",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Quadrangle internal angle calculations",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for quadrangles and quadrilaterals",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Triangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/Radians": {
+    "title": "Radians",
+    "approaches": {
+      "examples": {
+        "static": {
+          "type": "singlePage",
+          "title": "Example problems using Radians",
+          "description": "Use radians to calculate radius, angle and arc length",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to information on radians",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Change Circle to Match",
+          "description": "",
+          "fullTopic": true
+        },
+        "calc": {
+          "type": "singlePage",
+          "title": "Calculate Properties with Radians",
+          "description": "Calculate properties of a circle from other properties using radians",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Degrees"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/RectanglesAndSquares": {
+    "title": "Rectangles and Squares",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Rectangle calculation examples",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to introductions to rectangles and squares",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Quadrangles",
+      "CongruentTriangles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/RightAngleTriangles": {
+    "title": "Right Angle Triangles",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of Right Angle Triangle calculations",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "Properties of right angle triangles, and the Pythagorean theorem.",
+          "fullTopic": true
+        },
+        "pythagorus_proof": {
+          "type": "singlePage",
+          "title": "Derivation of Pythagorean Theorem",
+          "description": "Derivation using area of four right angle triangles",
+          "fullTopic": false
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for Right Angle Triangles",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Find the Unknown Angle",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Properties",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AreaTriangle"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/SideAngleRelationship": {
+    "title": "Side Angle Relationships",
+    "approaches": {
+      "discover": {
+        "simple": {
+          "type": "singlePage",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Examples of triangle side angle relationships",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to triangle side angle relationships",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Isosceles"
+    ],
+    "enabled": true
+  },
+  "Math/Geometry_1/SimilarTriangles": {
+    "title": "Similar Triangles",
+    "approaches": {
+      "explanation": {
+        "equilangularIsSimilarProof": {
+          "type": "singlePage",
+          "title": "Equilangular Triangles are Similar - Proof 2",
+          "description": "Proof showing why equiangular triangles are proportional triangles and therefore similar",
+          "fullTopic": false
+        },
+        "equilangularProofBrief": {
+          "type": "singlePage",
+          "title": "Equilangular Triangles are Similar - Proof 2 (Brief)",
+          "description": "Succinct proof showing why equiangular triangles, are proportional triangles and therefore similar",
+          "fullTopic": false
+        },
+        "static": {
+          "type": "singlePage",
+          "title": "Descriptive",
+          "description": "Proofs showing why equiangular triangles, and proportional triangles are similar",
+          "fullTopic": true
+        },
+        "staticBrief": {
+          "type": "singlePage",
+          "title": "In Brief",
+          "description": "Succinct proofs showing why equiangular triangles, and proportional triangles are similar",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External Links",
+          "description": "External links to sources of information for Similar Triangles",
+          "fullTopic": false
+        }
+      }
+    },
+    "dependencies": [
+      "ParallelSplitOfTriangle"
+    ],
+    "enabled": false
+  },
+  "Math/Geometry_1/ToDo/CalculatingPi": {
+    "title": "Calculating Pi",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "RightAngleTriangles"
+    ],
+    "enabled": false
+  },
+  "Math/Geometry_1/Triangles": {
+    "title": "Triangles",
+    "approaches": {
+      "discover": {
+        "base": {
+          "type": "presentation",
+          "title": "Interactive",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "examples": {
+        "base": {
+          "type": "singlePage",
+          "title": "Triangle Angles",
+          "description": "Example calculations of angles in a triangle",
+          "fullTopic": true
+        }
+      },
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Full explanation",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "links": {
+        "base": {
+          "type": "generic",
+          "title": "External",
+          "description": "External links to sources of information for Triangles>",
+          "fullTopic": false
+        }
+      },
+      "quickReference": {
+        "staticTest": {
+          "type": "presentation",
+          "title": "staticTest",
+          "description": "",
+          "fullTopic": false
+        }
+      },
+      "quiz": {
+        "base": {
+          "type": "presentation",
+          "title": "Total Angle",
+          "description": "",
+          "fullTopic": true
+        },
+        "types": {
+          "type": "presentation",
+          "title": "Triangle Types",
+          "description": "",
+          "fullTopic": true
+        }
+      },
+      "summary": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "AnglesAtIntersections"
+    ],
+    "enabled": true
+  },
+  "Math/Trigonometry_1/Chord": {
+    "title": "Chord",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Sine"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Cosecant": {
+    "title": "Cosecant",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Secant"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Cosine": {
+    "title": "Cosine",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Sine"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Cotangent": {
+    "title": "Cotangent",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Pythagoras"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/LawOfCosines": {
+    "title": "Law of Cosines",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "LawOfSines"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/LawOfSines": {
+    "title": "Law of Sines",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Pythagoras"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Pythagoras": {
+    "title": "Pythagorean Identity",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Tangent"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Secant": {
+    "title": "Secant",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Pythagoras"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Sine": {
+    "title": "Sine",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "UnitCircle"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/Tangent": {
+    "title": "Tangent",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [
+      "Chord"
+    ],
+    "enabled": false
+  },
+  "Math/Trigonometry_1/UnitCircle": {
+    "title": "Unit Circle",
+    "approaches": {
+      "explanation": {
+        "base": {
+          "type": "presentation",
+          "title": "Base",
+          "description": "",
+          "fullTopic": true
+        }
+      }
+    },
+    "dependencies": [],
+    "enabled": false
+  }
+}

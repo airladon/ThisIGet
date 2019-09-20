@@ -1,6 +1,6 @@
-# ItIGet
+# ThisIGet
 
-ItIGet web app.
+This I Get web app - www.thisiget.com.
 
 # Development Environment Setup
 

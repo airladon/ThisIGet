@@ -6,6 +6,7 @@ import os
 from Crypto.Random import get_random_bytes
 import binascii
 import re
+import json
 
 
 def bytes_to_b64_str(bytes_to_convert):
@@ -144,7 +145,7 @@ def format_email(email):
     return f'{user}@{domain}'
 
 
-def getLessons():
+def getContent():
     file_list = {}
     for root, dirs, files in os.walk('./app/app/static'):
         for file in files:
@@ -161,6 +162,35 @@ def getLessons():
             file_list[path][file_without_hash] = file
 
     return file_list
+
+
+def getTopicIndex():
+    index = {}
+    with open('./app/app/topicIndex.json', 'r') as f:
+        index = json.loads(f.read())
+    version_list = {}
+    link_list = {}
+    for topic_uid, topic in index.items():
+        for approach_uid, approach in topic['approaches'].items():
+            for version_uid, version in approach.items():
+                path = f"{topic_uid}/" \
+                       f"{approach_uid}/{version_uid}"
+                title = ''
+                description = ''
+                if 'htmlTitle' in version:
+                    title = version['htmlTitle']
+                if 'htmlDescription' in version:
+                    description = version['htmlDescription']
+                version_list[path] = {
+                    'default_title': f"{topic['title']} "
+                                     f"{approach_uid.capitalize()}: "
+                                     f"{version['title']} - This I Get",
+                    'title': title,
+                    'description': description,
+                }
+                if approach_uid == 'links':
+                    link_list[path] = version['links']
+    return index, version_list, link_list
 
 # key_str='0f21b3b2b4368d152a6976912b14f13b7fa159f2d456b71735bd220ff658c05c'
 # len(encrypt('1', key_str))

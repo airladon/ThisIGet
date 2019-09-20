@@ -13113,13 +13113,13 @@ function updateDescription(eqn, subForm, descriptionElement, index) {
 
 function enableTouch(element) {
   if (element) {
-    element.classList.remove('lesson__eqn_nav__not_touchable');
+    element.classList.remove('figureone__eqn_nav__not_touchable');
   }
 }
 
 function disableTouch(element) {
   if (element) {
-    element.classList.add('lesson__eqn_nav__not_touchable');
+    element.classList.add('figureone__eqn_nav__not_touchable');
   }
 }
 
@@ -13166,8 +13166,8 @@ nav) {
         var next = nav.next;
 
         if (next) {
-          next.classList.remove('lesson__eqn_nav__next_form');
-          next.classList.remove('lesson__eqn_nav__reset');
+          next.classList.remove('figureone__eqn_nav__next_form');
+          next.classList.remove('figureone__eqn_nav__reset');
           next.classList.remove('interactive_top_right');
         }
       }
@@ -13185,9 +13185,9 @@ nav) {
         var _next = nav.next;
 
         if (_next) {
-          _next.classList.add('lesson__eqn_nav__reset');
+          _next.classList.add('figureone__eqn_nav__reset');
 
-          _next.classList.remove('lesson__eqn_nav__next_form');
+          _next.classList.remove('figureone__eqn_nav__next_form');
         }
       }
     } else {
@@ -13197,9 +13197,9 @@ nav) {
         var _next2 = nav.next;
 
         if (_next2) {
-          _next2.classList.add('lesson__eqn_nav__next_form');
+          _next2.classList.add('figureone__eqn_nav__next_form');
 
-          _next2.classList.remove('lesson__eqn_nav__reset');
+          _next2.classList.remove('figureone__eqn_nav__reset');
         }
       }
     }
@@ -13249,17 +13249,17 @@ function makeType3Line(prevMethod, refreshMethod, nextMethod, options) {
   table.appendChild(prevGroup);
   table.appendChild(currentGroup);
   table.appendChild(nextGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  prevGroup.classList.add('lesson__eqn_nav__3line__prevRow');
-  currentGroup.classList.add('lesson__eqn_nav__3line__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__3line__nextRow');
-  prev.classList.add('lesson__eqn_nav__3line__prevRow__button');
-  refresh.classList.add('lesson__eqn_nav__3line__currentRow__button');
-  next.classList.add('lesson__eqn_nav__3line__nextRow__button');
-  prevDescription.classList.add('lesson__eqn_nav__3line__prevRow__description');
-  description.classList.add('lesson__eqn_nav__3line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__3line__nextRow__description');
+  table.classList.add('figureone__eqn_nav__table');
+  prevGroup.classList.add('figureone__eqn_nav__3line__prevRow');
+  currentGroup.classList.add('figureone__eqn_nav__3line__currentRow');
+  nextGroup.classList.add('figureone__eqn_nav__3line__nextRow');
+  prev.classList.add('figureone__eqn_nav__3line__prevRow__button');
+  refresh.classList.add('figureone__eqn_nav__3line__currentRow__button');
+  next.classList.add('figureone__eqn_nav__3line__nextRow__button');
+  prevDescription.classList.add('figureone__eqn_nav__3line__prevRow__description');
+  description.classList.add('figureone__eqn_nav__3line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
+  nextDescription.classList.add('figureone__eqn_nav__3line__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13271,9 +13271,9 @@ function makeType3Line(prevMethod, refreshMethod, nextMethod, options) {
   // lines
 
   if (optionsToUse.forceTwoLines) {
-    prevGroup.classList.add('lesson__eqn_nav__3line__prev_twoLines');
-    currentGroup.classList.add('lesson__eqn_nav__3line__current_twoLines');
-    nextGroup.classList.add('lesson__eqn_nav__3line__next_twoLines');
+    prevGroup.classList.add('figureone__eqn_nav__3line__prev_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__3line__current_twoLines');
+    nextGroup.classList.add('figureone__eqn_nav__3line__next_twoLines');
   }
 
   prevGroup.onclick = prevMethod;
@@ -13303,10 +13303,10 @@ function makeTypeDescriptionOnly(nextMethod) {
   var description = document.createElement('td');
   currentGroup.appendChild(description);
   table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__description_only__currentRow');
-  description.classList.add('lesson__eqn_nav__description_only__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__description_only__currentRow');
+  description.classList.add('figureone__eqn_nav__description_only__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
   currentGroup.onclick = nextMethod;
   return {
     table: table,
@@ -13325,11 +13325,11 @@ function makeTypeOneButton(nextMethod) // options: TypeNavTypeOptions,  // can b
   currentGroup.appendChild(next);
   currentGroup.appendChild(description);
   table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__1button__currentRow');
-  next.classList.add('lesson__eqn_nav__1button__button');
-  description.classList.add('lesson__eqn_nav__1line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__1button__currentRow');
+  next.classList.add('figureone__eqn_nav__1button__button');
+  description.classList.add('figureone__eqn_nav__1line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
   next.classList.add('interactive_top_right'); // const defaultOptions = {
   //   icons: true,
   // };
@@ -13338,7 +13338,7 @@ function makeTypeOneButton(nextMethod) // options: TypeNavTypeOptions,  // can b
   next.onclick = nextMethod;
   description.onclick = nextMethod; // if (optionsToUse.icons) {
 
-  next.classList.add('lesson__eqn_nav__next_form'); // }
+  next.classList.add('figureone__eqn_nav__next_form'); // }
 
   return {
     table: table,
@@ -13360,12 +13360,12 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
   currentGroup.appendChild(description);
   currentGroup.appendChild(next);
   table.appendChild(currentGroup);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__1line__currentRow');
-  prev.classList.add('lesson__eqn_nav__1line__prev__button');
-  next.classList.add('lesson__eqn_nav__1line__next__button');
-  description.classList.add('lesson__eqn_nav__1line__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__1line__currentRow');
+  prev.classList.add('figureone__eqn_nav__1line__prev__button');
+  next.classList.add('figureone__eqn_nav__1line__next__button');
+  description.classList.add('figureone__eqn_nav__1line__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13374,7 +13374,7 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
   // lines
 
   if (optionsToUse.forceTwoLines) {
-    currentGroup.classList.add('lesson__eqn_nav__1line__current_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__1line__current_twoLines');
   }
 
   prev.onclick = prevMethod;
@@ -13383,10 +13383,10 @@ function makeType1Line(prevMethod, refreshMethod, nextMethod, options) // can be
 
   if (optionsToUse.arrows) {
     var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
+    nextArrow.classList.add('figureone__eqn_nav__arrow_right');
     next.appendChild(nextArrow);
     var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
+    prevArrow.classList.add('figureone__eqn_nav__arrow_left');
     prev.appendChild(prevArrow);
   } else {
     next.innerHTML = 'Next';
@@ -13424,14 +13424,14 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   row.appendChild(descriptionRows);
   row.appendChild(next);
   table.appendChild(row);
-  table.classList.add('lesson__eqn_nav__table');
-  currentGroup.classList.add('lesson__eqn_nav__2lines__currentRow');
-  nextGroup.classList.add('lesson__eqn_nav__2lines__nextRow');
-  prev.classList.add('lesson__eqn_nav__2lines__prev__button');
-  next.classList.add('lesson__eqn_nav__2lines__next__button');
-  description.classList.add('lesson__eqn_nav__2lines__currentRow__description');
-  description.classList.add('lesson__eqn_nav__description');
-  nextDescription.classList.add('lesson__eqn_nav__2lines__nextRow__description');
+  table.classList.add('figureone__eqn_nav__table');
+  currentGroup.classList.add('figureone__eqn_nav__2lines__currentRow');
+  nextGroup.classList.add('figureone__eqn_nav__2lines__nextRow');
+  prev.classList.add('figureone__eqn_nav__2lines__prev__button');
+  next.classList.add('figureone__eqn_nav__2lines__next__button');
+  description.classList.add('figureone__eqn_nav__2lines__currentRow__description');
+  description.classList.add('figureone__eqn_nav__description');
+  nextDescription.classList.add('figureone__eqn_nav__2lines__nextRow__description');
   var defaultOptions = {
     forceTwoLines: false,
     arrows: false
@@ -13440,7 +13440,7 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
   // lines
 
   if (optionsToUse.forceTwoLines > -1) {
-    currentGroup.classList.add('lesson__eqn_nav__2lines__current_twoLines');
+    currentGroup.classList.add('figureone__eqn_nav__2lines__current_twoLines');
   }
 
   prev.onclick = prevMethod;
@@ -13450,10 +13450,10 @@ function makeType2Line(prevMethod, refreshMethod, nextMethod, options) {
 
   if (optionsToUse.arrows) {
     var nextArrow = document.createElement('div');
-    nextArrow.classList.add('lesson__eqn_nav__arrow_right');
+    nextArrow.classList.add('figureone__eqn_nav__arrow_right');
     next.appendChild(nextArrow);
     var prevArrow = document.createElement('div');
-    prevArrow.classList.add('lesson__eqn_nav__arrow_left');
+    prevArrow.classList.add('figureone__eqn_nav__arrow_left');
     prev.appendChild(prevArrow);
   } else {
     next.innerHTML = 'Next';
@@ -13522,7 +13522,7 @@ function (_DiagramElementCollec) {
       alignH: 'center',
       alignV: 'middle',
       interactive: true,
-      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_lesson__equation_navigator_')
+      id: Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["generateUniqueId"])('id_figureone__equation_navigator_')
     };
     var optionsToUse = Object(_tools_tools__WEBPACK_IMPORTED_MODULE_4__["joinObjects"])({}, defaultOptions, options);
     _this.options = optionsToUse;
@@ -23350,7 +23350,7 @@ function (_DiagramElement2) {
   }, {
     key: "goToStep",
     value: function goToStep(step) {
-      var elem = document.getElementById('id__lesson_item_selector_0');
+      var elem = document.getElementById('id__figureone_item_selector_0');
       var elems = [];
 
       if (elem != null) {
@@ -23363,9 +23363,9 @@ function (_DiagramElement2) {
 
       elems.forEach(function (e, index) {
         if (index === step) {
-          e.classList.add('lesson__item_selector_selected');
+          e.classList.add('figureone__item_selector_selected');
         } else {
-          e.classList.remove('lesson__item_selector_selected');
+          e.classList.remove('figureone__item_selector_selected');
         }
       });
     }
@@ -26678,24 +26678,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _tools__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./tools */ "./src/js/tools/tools.js");
 function _typeof(obj) { if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
- // export default function getCSSVariables(
-//   id: string,
-//   varNames: Array<string>,
-//   prefix: string = '',
-// ): Object {
-//   const elem = document.getElementById('lesson__container_name');
-//   const output = {};
-//   if (elem) {
-//     const style = window.getComputedStyle(elem);
-//     if (style) {
-//       varNames.forEach((varName) => {
-//         const fullName = prefix + varName;
-//         output[varName] = parseFloat(style.getPropertyValue(fullName));
-//       });
-//     }
-//   }
-//   return output;
-// }
+
 
 function searchObject(obj, path, text) {
   var results = [];
@@ -27013,16 +26996,16 @@ function itemSelector() {
   var items = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : [''];
   var classes = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
   var selectorIndex = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
-  var outStr = "<ul id=\"id__lesson_item_selector_".concat(selectorIndex, "\" \n                    class=").concat(classes, ">");
+  var outStr = "<ul id=\"id__figureone_item_selector_".concat(selectorIndex, "\" \n                    class=").concat(classes, ">");
   items.forEach(function (item, index) {
-    outStr += "<li id=\"id__lesson_item_selector_".concat(index, "\">").concat(item, "</li>");
+    outStr += "<li id=\"id__figureone_item_selector_".concat(index, "\">").concat(item, "</li>");
   });
   outStr += '</ul>';
   return outStr;
 }
 
 var unit = function unit(deg, rad) {
-  return "<span class=\"lesson__unit_deg\">".concat(deg, "</span><span class=\"lesson__unit_rad\">").concat(rad, "</span>\n  ");
+  return "<span class=\"figureone__unit_deg\">".concat(deg, "</span><span class=\"figureone__unit_rad\">").concat(rad, "</span>\n  ");
 };
 
 function toHTML() {
@@ -27080,7 +27063,7 @@ function link(linkStr) {
   var colorToUse = null;
   var defaultOptions = {
     color: null,
-    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    id: "figureone__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
     interactive: true,
     classes: '',
     text: null,
@@ -27171,7 +27154,7 @@ function click(actionMethod, bind) {
   var colorToUse = null;
   var defaultOptions = {
     color: null,
-    id: "lesson__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
+    id: "figureone__id_".concat(Object(_tools__WEBPACK_IMPORTED_MODULE_1__["generateUniqueId"])()),
     interactive: true,
     classes: '',
     text: null

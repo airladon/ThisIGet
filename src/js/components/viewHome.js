@@ -1,7 +1,7 @@
 // @flow
 
 import * as React from 'react';
-import LessonNavigator from './lessonNavigator';
+import LearningPathNavigator from './learningPathNavigator';
 import HomeBanner from './homeBanner';
 
 type Props = {
@@ -17,11 +17,11 @@ export default class ViewHome extends React.Component<Props> {
     return <div>
       <HomeBanner/>
       <main>
-      <div className='lesson__white_spacer'/>
-      <LessonNavigator learningPath={'Geometry_1'}/>
-      <div className='lesson__white_spacer'/>
-      <LessonNavigator learningPath={'Trigonometry_1'}/>
-      <div className='lesson__white_spacer'/>
+      <div className='vertical_blank_space'/>
+      <LearningPathNavigator learningPath={'Geometry_1'}/>
+      <div className='vertical_blank_space'/>
+      <LearningPathNavigator learningPath={'Trigonometry_1'}/>
+      <div className='vertical_blank_space'/>
       </main>
     </div>;
   }

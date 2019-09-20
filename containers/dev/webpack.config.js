@@ -6,8 +6,8 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin'); // eslint-disab
 const Autoprefixer = require('autoprefixer'); // eslint-disable-line import/no-unresolved, import/no-extraneous-dependencies
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const OptimizeCssAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-const entryPoints = require('./getLessons.js');
-const createLessonIndex = require('./createIndex.js');
+const entryPoints = require('./getContent.js');
+const createTopicIndex = require('./createIndex.js');
 const setFilesForBuild = require('./setFilesForBuild.js');
 const FlaskReloaderPlugin = require('./flaskReloaderPlugin');
 
@@ -69,7 +69,7 @@ module.exports = (env) => {
   entryPoints.updateDetailsAndVersions();
   // eslint-disable-next-line no-console
   console.log('Create Lesson Index');
-  createLessonIndex(e.name, './src/Lessons');
+  createTopicIndex(e.name, './src/content', './app/app');
   // eslint-disable-next-line no-console
   console.log('Set Files for Build');
   setFilesForBuild.setBaseHTML(e.shortName);
@@ -129,19 +129,19 @@ module.exports = (env) => {
   const copy = new CopyWebpackPlugin(
     [
       {
-        from: '/opt/app/src/Lessons/*/*/topic.png',
+        from: '/opt/app/src/content/*/*/topic.png',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)topic\.png$/,
         ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*.svg',
+        from: '/opt/app/src/content/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
         ignore: ['*boilerplate*'],
       },
       {
-        from: '/opt/app/src/Lessons/*/*/*/*/*.svg',
+        from: '/opt/app/src/content/*/*/*/*/*.svg',
         to: '/opt/app/app/app/static/dist/[1][name].[ext]',
         test: /\/opt\/app\/src\/(.*)tile.*\.svg$/,
         ignore: ['*boilerplate*'],
@@ -310,25 +310,22 @@ module.exports = (env) => {
             test: /js\/(diagram|Lesson|tools|components)/,
             name: 'tools',
           },
-          commonlessons: {
+          commoncontent: {
             minSize: 10,
             minChunks: 2,
             priority: 0,
             reuseExistingChunk: true,
-            test: /Lessons\/LessonsCommon/,
-            name: 'commonlessons',
+            test: /content\/common/,
+            name: 'commoncontent',
           },
-          lessonindex: {
+          topicIndex: {
             minSize: 10,
             minChunks: 1,
             priority: 0,
             reuseExistingChunk: true,
-            test: /Lessons\/index.js/,
-            name: 'lessonIndex',
+            test: /content\/topicIndex.js/,
+            name: 'topicIndex',
           },
-          // lessonIndex: {
-
-          // }
           commoncss: {
             minSize: 10,
             minChunks: 2,
