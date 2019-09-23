@@ -40,6 +40,12 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 SELF,
                 "'unsafe-inline'",
             ],
+            'style-src-elem': [
+                SELF,
+                'https://fonts.googleapis.com',
+                "'unsafe-inline'",
+            ],
+            'font-src': '*',
         },)
 
 db = SQLAlchemy(app)

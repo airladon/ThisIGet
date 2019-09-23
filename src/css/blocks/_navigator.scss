@@ -267,15 +267,15 @@
 .navigator__topic_title_text {
   display: table-cell;
   vertical-align: middle;
+  font-family: $fontfamily-heading;
+  font-weight: 300;
 }
 
 .navigator__topic_title_subtext {
   font-size: 12px;
-  // background: color('site', 'background');
   padding-left: 20px;
-  // background-color: color('site', 'background');
-  font-weight: 100;
-  // color: color('grey', 'lighter');
+  font-family: $fontfamily-heading;
+  font-weight: 400;
   color: color('black', 'lighter');
 }
 
