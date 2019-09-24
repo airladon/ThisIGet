@@ -22,11 +22,10 @@ $fullwidth: 380px;
 }
 
 .about__tiles {
-  // display: table;
-  // table-layout: fixed;
-  width: 100%;
+  width: calc(760px + 3em);
   padding: 1.5em;
-  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about__title_text {
@@ -41,6 +40,10 @@ $fullwidth: 380px;
   width: $fullwidth;
   height: calc(320px + 1em);
   padding: 1.7em;
+}
+
+.about__tiles_text_right {
+  float: right;
 }
 
 .about__tiles_text_container {
@@ -75,6 +78,7 @@ $fullwidth: 380px;
   // height: 400px;
   // width: 50%;
   width: $fullwidth;
+  text-align: center;
   // padding-top: 1.5em;
   // padding-left: 1.5em;
   // padding-right: 1.5em;
@@ -101,6 +105,7 @@ $fullwidth: 380px;
   vertical-align: middle;
   border-radius: 0.8em;
 }
+
 
 .about__tiles_tile_img {
   width: 65%;
@@ -137,4 +142,62 @@ $fullwidth: 380px;
 
 .about__logo_section {
   background-color: color('white', 'lightest');
+}
+
+@media screen and (max-width: $desktop) {
+  .about__tiles_text_right {
+    float: none;
+  }
+
+  .about__tiles_tile_container {
+    width: 130px;
+    height: 130px;
+  }
+
+  .about__tiles_tiles {
+    display: block;
+    width: 100%;
+  }
+
+  .about__tiles_text {
+    display: block;
+    width: calc(130px * 4 + 4em);
+    height: inherit;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .about__tiles_group {
+    display: inline-block;
+    height: calc(130px + 0.4em);
+  }
+
+  .about__tiles_text_title {
+    text-align: center;
+  }
+
+  .about__tiles {
+    width: inherit;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .about__tiles_group {
+    display: block;
+  }
+
+  .about__tiles_text {
+    display: block;
+    width: calc(130px * 2 + 4em);
+  }
+
+  .about__tiles {
+    padding: 0.2em;
+  }
+
+  .about__logo {
+    width: 100%;
+    // height: calc(320px + 1em);
+    // display: inline-block;
+  }
 }

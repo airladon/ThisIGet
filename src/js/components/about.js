@@ -14,8 +14,12 @@ function tile(label, fileName) {
   </div>;
 }
 
-function title(titleText, subText) {
-  return <div className="about__tiles_text">
+function title(titleText, subText, textRight = false) {
+  let classes = 'about__tiles_text';
+  if (textRight) {
+    classes = 'about__tiles_text about__tiles_text_right';
+  }
+  return <div className={classes}>
     <div className="about__tiles_text_table">
       <div className="about__tiles_text_container">
         <div className="about__tiles_text_title">
@@ -41,7 +45,7 @@ export default class About extends React.Component
       <div className="about__tiles">
         {title(
           'Learning can be approached in different ways',
-          'Different people and applications prefer different approaches',
+          'Are you trying to understand something, or just remember it? Do you want the concept shown to you, or do you want to figure it out?',
         )}
         <div className="about__tiles_tiles">
           <div className="about__tiles_group">
@@ -55,6 +59,11 @@ export default class About extends React.Component
         </div>
       </div>
       <div className="about__tiles">
+        {title(
+          'Content can be described in different ways',
+          'Do you prefer descriptive or brief content? Maybe both? Are interactive diagrams helpful or a distraction for you?',
+          true,
+        )}
         <div className="about__tiles_tiles">
           <div className="about__tiles_group">
             {tile('Detailed', 'detailed.png')}
@@ -65,12 +74,11 @@ export default class About extends React.Component
             {tile('Precise', 'precise.png')}
           </div>
         </div>
-        {title(
-          'Content can be described in different ways',
-          'Different ways resonate with different, their goals and their context',
-        )}
       </div>
       <div className="about__title">
+        {'Different ways work for different people'}
+        <br/>
+        <br/>
         {"So let's combine them"}
       </div>
       <div className="about__tiles about__logo_section">
