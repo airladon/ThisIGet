@@ -1,7 +1,13 @@
 @import '../../../css/style';
 
+$fullwidth: 380px;
+
 .about__container {
   width: 100%;
+}
+
+.about__spacer {
+  height: 2em;
 }
 
 .about__title {
@@ -30,8 +36,9 @@
 
 .about__tiles_text {
   display: inline-block;
-  width: 40%;
+  width: $fullwidth;
   height: calc(320px + 1em);
+  padding: 1.7em;
 }
 
 .about__tiles_text_container {
@@ -65,9 +72,10 @@
   display: inline-block;
   // height: 400px;
   // width: 50%;
-  padding-top: 1.5em;
-  padding-left: 1.5em;
-  padding-right: 1.5em;
+  width: $fullwidth;
+  // padding-top: 1.5em;
+  // padding-left: 1.5em;
+  // padding-right: 1.5em;
 }
 
 .about__tiles_group {

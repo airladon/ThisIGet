@@ -37,6 +37,7 @@ export default class About extends React.Component
   // eslint-disable-next-line class-methods-use-this
   render() {
     return <div className="about__container">
+      <div className="about__spacer"></div>
       <div className="about__tiles">
         {title(
           'There are different approaches to learning',
