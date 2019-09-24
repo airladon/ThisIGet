@@ -24,7 +24,7 @@
   display: inline-block;
   padding-top: 0.25rem;
   padding-left: 0;
-  margin-left: 1em;
+  margin-left: 2em;
   color: color('navbar', 'text');
   font-size: 14px;
   position: relative;
@@ -125,6 +125,12 @@
 
 .navbar_login:hover {
   cursor: pointer;
+}
+
+@media screen and (max-width: 400px) {
+  .navbar_login__loggedin_label_username {
+    display: none;
+  }
 }
 // .nav__home-icon {
 //   margin-right: 5px;

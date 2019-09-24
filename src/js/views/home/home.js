@@ -9,7 +9,7 @@ import withLoginManager from '../../components/view';
 const homePage = () => {
   const id: HTMLElement | null = document.getElementById('home');
 
-  const HomeView = withLoginManager(ViewHome, false);
+  const HomeView = withLoginManager(ViewHome, true);
   if (id instanceof HTMLElement) {
     ReactDOM.render(
       <div>

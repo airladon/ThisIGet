@@ -122,8 +122,7 @@ export default class Navbar extends React.Component
     if (this.props.isLoggedIn) {
       if (this.props.username !== '') {
         return <div>
-          Logged in as <span className="navbar_login__loggedin_label_username">{this.props.username}
-          </span>
+          <span className="navbar_login__loggedin_label_username">Logged in as</span> {this.props.username}
         </div>;
       }
       return 'Logout';
@@ -171,15 +170,16 @@ export default class Navbar extends React.Component
     return '';
   }
 
+  // eslint-disable-next-line class-methods-use-this
   renderLearningPaths() {
     return <div className="navbar-text navbar-center">
-        <div
+        <a href="/paths"
           // onClick={this.loginout.bind(this)}
           // className="navbar_login"
           // id="id_navbar_loginout"
         >
           Learning Paths
-        </div>
+        </a>
       </div>;
   }
 
