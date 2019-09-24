@@ -40,7 +40,7 @@ export default class About extends React.Component
       <div className="about__spacer"></div>
       <div className="about__tiles">
         {title(
-          'There are different approaches to learning',
+          'Learning can be approached in different ways',
           'Different people and applications prefer different approaches',
         )}
         <div className="about__tiles_tiles">
@@ -66,23 +66,25 @@ export default class About extends React.Component
           </div>
         </div>
         {title(
-          'Content can be presented in different ways',
-          'Understanding a new concept depends on the learner and their past experience',
+          'Content can be described in different ways',
+          'Different ways resonate with different, their goals and their context',
         )}
       </div>
       <div className="about__title">
         {"So let's combine them"}
       </div>
-      <div className="about__tiles_tiles">
-        <div className="about__logo">
-          <div className="about__logo_container">
-            <Logo />
+      <div className="about__tiles about__logo_section">
+          <div className="about__logo">
+            <div className="about__logo_table">
+              <div className="about__logo_container">
+                <Logo />
+              </div>
+            </div>
           </div>
-        </div>
-        {title(
-          'Different versions of the same content',
-          'Find the way that works for you, and rate it for others',
-        )}
+          {title(
+            'Different versions of the same content',
+            'Find the way that works for you, and rate it for others',
+          )}
       </div>
     </div>;
   }

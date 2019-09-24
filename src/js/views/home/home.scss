@@ -17,6 +17,8 @@ $fullwidth: 380px;
   text-align: center;
   color: color('black', 'darker');
   width: 100%;
+  padding-top: 8em;
+  padding-bottom: 8em;
 }
 
 .about__tiles {
@@ -113,12 +115,26 @@ $fullwidth: 380px;
 }
 
 .about__logo {
-  width: 200px;
-  height: 200px;
+  width: $fullwidth;
+  height: calc(320px + 1em);
   display: inline-block;
+}
+
+.about__logo_table {
+  display: table;
+  width: 100%;
+  height: 100%;
 }
 
 .about__logo_container {
   height: 100%;
+  width: 100%;
+  display: table-cell;
+  font-size: 2.5em;
+  text-align: center;
   vertical-align: middle;
+}
+
+.about__logo_section {
+  background-color: color('white', 'lightest');
 }
