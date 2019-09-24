@@ -42,57 +42,70 @@ export default class About extends React.Component
   render() {
     return <div className="about__container">
       <div className="about__spacer"></div>
-      <div className="about__tiles">
-        {title(
-          'Learning can be approached in different ways',
-          'Are you trying to understand something, or just remember it? Do you want the concept shown to you, or do you want to figure it out?',
-        )}
-        <div className="about__tiles_tiles">
-          <div className="about__tiles_group">
-            {tile('Discovery', 'discovery.png')}
-            {tile('Explanation', 'explanation.png')}
-          </div>
-          <div className="about__tiles_group">
-            {tile('Examples', 'examples.png')}
-            {tile('Practice', 'practice.png')}
-          </div>
-        </div>
-      </div>
-      <div className="about__tiles">
-        {title(
-          'Content can be described in different ways',
-          'Do you prefer descriptive or brief content? Maybe both? Are interactive diagrams helpful or a distraction for you?',
-          true,
-        )}
-        <div className="about__tiles_tiles">
-          <div className="about__tiles_group">
-            {tile('Detailed', 'detailed.png')}
-            {tile('Intuitive', 'intuitive.png')}
-          </div>
-          <div className="about__tiles_group">
-            {tile('Interactive', 'interactive.png')}
-            {tile('Precise', 'precise.png')}
-          </div>
-        </div>
-      </div>
-      <div className="about__title">
-        {'Different ways work for different people'}
-        <br/>
-        <br/>
-        {"So let's combine them"}
-      </div>
-      <div className="about__tiles about__logo_section">
-          <div className="about__logo">
-            <div className="about__logo_table">
-              <div className="about__logo_container">
-                <Logo />
-              </div>
+      <div className="about_section">
+        <div className="about__tiles">
+          {title(
+            'Learning can be approached in different ways',
+            'Are you trying to understand something, or just remember it? Do you want the concept shown to you, or do you want to figure it out?',
+          )}
+          <div className="about__tiles_tiles">
+            <div className="about__tiles_group">
+              {tile('Discovery', 'discovery.png')}
+              {tile('Explanation', 'explanation.png')}
+            </div>
+            <div className="about__tiles_group">
+              {tile('Examples', 'examples.png')}
+              {tile('Practice', 'practice.png')}
             </div>
           </div>
+        </div>
+      </div>
+      <div className="about__spacer"></div>
+      <div className="about_section">
+        <div className="about__tiles">
           {title(
-            'Different versions of the same content',
-            'Find the way that works for you, and rate it for others',
+            'Content can be described in different ways',
+            'Do you prefer descriptive or brief content? Maybe both? Are interactive diagrams helpful or a distraction for you?',
+            true,
           )}
+          <div className="about__tiles_tiles">
+            <div className="about__tiles_group">
+              {tile('Detailed', 'detailed.png')}
+              {tile('Intuitive', 'intuitive.png')}
+            </div>
+            <div className="about__tiles_group">
+              {tile('Interactive', 'interactive.png')}
+              {tile('Precise', 'precise.png')}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div className="about__spacer"></div>
+      <div className="about_section">
+        <div className="about__tiles">
+          <div className="about__title">
+            {'Different ways work for different people'}
+            <br/>
+            <br/>
+            {"So let's combine them"}
+          </div>
+        </div>
+      </div>
+      <div className="about__spacer"></div>
+      <div className="about_section">
+        <div className="about__tiles about__logo_section">
+            <div className="about__logo">
+              <div className="about__logo_table">
+                <div className="about__logo_container">
+                  <Logo />
+                </div>
+              </div>
+            </div>
+            {title(
+              'Different versions of the same content',
+              'Find the way that works for you, and rate it for others',
+            )}
+        </div>
       </div>
     </div>;
   }

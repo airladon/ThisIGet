@@ -7,7 +7,7 @@ $fullwidth: 380px;
 }
 
 .about__spacer {
-  height: 2em;
+  height: 0.5em;
 }
 
 .about__title {
@@ -17,8 +17,15 @@ $fullwidth: 380px;
   text-align: center;
   color: color('black', 'darker');
   width: 100%;
-  padding-top: 8em;
-  padding-bottom: 8em;
+  padding-top: 1em;
+  // padding-bottom: 1em;
+}
+
+.about_section {
+  width: calc(100% - 1em);
+  background-color: color('white', 'lightest');
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .about__tiles {
@@ -106,7 +113,6 @@ $fullwidth: 380px;
   border-radius: 0.8em;
 }
 
-
 .about__tiles_tile_img {
   width: 65%;
   height: 65%;
@@ -135,7 +141,7 @@ $fullwidth: 380px;
   height: 100%;
   width: 100%;
   display: table-cell;
-  font-size: 2.5em;
+  font-size: 3em;
   text-align: center;
   vertical-align: middle;
 }
@@ -145,6 +151,10 @@ $fullwidth: 380px;
 }
 
 @media screen and (max-width: $desktop) {
+  .about_section {
+    width: 100%;
+  }
+
   .about__tiles_text_right {
     float: none;
   }
@@ -179,11 +189,30 @@ $fullwidth: 380px;
   .about__tiles {
     width: inherit;
   }
+
+  .about__logo {
+    width: inherit;
+    display: block;
+    height: inherit;
+  }
+
+  .about__logo_section .about__tiles_text_text {
+    text-align: center;
+  }
+
+  .about__logo_section {
+    padding: 1.5em;
+    padding-top: 3em;
+  }
 }
 
 @media screen and (max-width: 700px) {
   .about__tiles_group {
     display: block;
+  }
+
+  .about__tiles_tiles {
+    margin-bottom: 2em;
   }
 
   .about__tiles_text {
@@ -199,5 +228,10 @@ $fullwidth: 380px;
     width: 100%;
     // height: calc(320px + 1em);
     // display: inline-block;
+  }
+
+  .about__logo_section {
+    padding: 1em;
+    padding-top: 3em;
   }
 }
