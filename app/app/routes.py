@@ -43,6 +43,8 @@ def make_response_with_files(*args, **kwargs):
     topic_index_js = ''
     about_js = ''
     about_css = ''
+    learning_paths_js = ''
+    learning_paths_css = ''
     # The checks for keys in static_files is for pytest in deployment pipeline.
     # In deployment pipeline on travis, the statis/dist directory doesn't
     # exist.
@@ -59,6 +61,8 @@ def make_response_with_files(*args, **kwargs):
         topic_index_js = f"/{'static/dist'}/{dist['topicIndex.js']}"
         about_js = f"/{'static/dist'}/{dist['about.js']}"
         about_css = f"/{'static/dist'}/{dist['about.css']}"
+        learning_paths_js = f"/{'static/dist'}/{dist['learningPaths.js']}"
+        learning_paths_css = f"/{'static/dist'}/{dist['learningPaths.css']}"
 
     res = make_response(render_template(
         *args, **kwargs,
@@ -66,7 +70,8 @@ def make_response_with_files(*args, **kwargs):
         common_content_js=common_content_js, vendors_js=vendors_js,
         figure_one_js=figure_one_js, topic_index_js=topic_index_js,
         about_js=about_js, main_css=main_css, main_js=main_js,
-        about_css=about_css,
+        about_css=about_css, learning_paths_js=learning_paths_js,
+        learning_paths_css=learning_paths_css,
     ))
     if current_user.is_authenticated:
         res.set_cookie('username', current_user.get_username())
@@ -104,6 +109,14 @@ def log_data(rquest):
 @app.route('/') # noqa
 def home():
     res = make_response_with_files('home.html')
+    res.set_cookie('page', '0')
+    log_data(request)
+    return res
+
+
+@app.route('/paths')
+def paths():
+    res = make_response_with_files('learning_paths.html')
     res.set_cookie('page', '0')
     log_data(request)
     return res

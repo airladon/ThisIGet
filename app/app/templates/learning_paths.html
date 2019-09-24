@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}This I Get - Learn the way that works for you{% endblock %}
+{% block description %}No explanation is perfect for everyone. Find the one that works best for you!{% endblock %}
+{% block head %}
+  <link rel="stylesheet" type="text/css" href={{ learning_paths_css }}>
+{% endblock %}
+{% block content %}
+    <div id="learning_paths"></div>
+{% endblock %}
+{% block tail %}
+  <script type="text/javascript" src={{ learning_paths_js }}></script>
+{% endblock %}
