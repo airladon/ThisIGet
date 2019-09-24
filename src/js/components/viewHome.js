@@ -3,6 +3,7 @@
 import * as React from 'react';
 import LearningPathNavigator from './learningPathNavigator';
 import HomeBanner from './homeBanner';
+import About from './about';
 
 type Props = {
   isLoggedIn: boolean;
@@ -17,6 +18,7 @@ export default class ViewHome extends React.Component<Props> {
     return <div>
       <HomeBanner/>
       <main>
+      <About/>
       <div className='vertical_blank_space'/>
       <LearningPathNavigator learningPath={'Geometry_1'}/>
       <div className='vertical_blank_space'/>

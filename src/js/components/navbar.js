@@ -171,6 +171,18 @@ export default class Navbar extends React.Component
     return '';
   }
 
+  renderLearningPaths() {
+    return <div className="navbar-text navbar-center">
+        <div
+          // onClick={this.loginout.bind(this)}
+          // className="navbar_login"
+          // id="id_navbar_loginout"
+        >
+          Learning Paths
+        </div>
+      </div>;
+  }
+
   render() {
     // const props = Object.assign({}, this.props);
     // delete props.active;
@@ -179,6 +191,7 @@ export default class Navbar extends React.Component
     <div>
       <div className="navbar-container">
         {this.renderHomeButton()}
+        {this.renderLearningPaths()}
         {this.getLoginButton()}
         { /*
         <div className="navbar-text navbar-right login_button">

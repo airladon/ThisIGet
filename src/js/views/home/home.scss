@@ -1,1 +1,96 @@
 @import '../../../css/style';
+
+.about__container {
+  width: 100%;
+}
+
+.about__title_top {
+  height: 300px;
+  font-family: $fontfamily-heading;
+  font-size: 20px;
+  display: table;
+  width: 100%;
+}
+
+.about__title_text {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 100%;
+}
+
+.about__tiles {
+  display: table;
+  table-layout: fixed;
+  width: 100%;
+}
+
+.about__tiles_text {
+  display: table-cell;
+  vertical-align: middle;
+  text-align: center;
+  width: 50%;
+  padding: 1.5em;
+  font-size: 1.5em
+}
+
+.about__tiles_tiles {
+  display: table-cell;
+  height: 400px;
+  width: 50%;
+  padding: 1.5em;
+}
+
+.about__tiles_tile_row{
+  // display: table-row;
+}
+
+.about__tiles_tile_col {
+  // display: table-column;
+}
+
+.about__tiles_tile_cell {
+  display: table-cell;
+  width: 160px;
+  height: 160px;
+  background-color: color('blue', 'dark');
+  background-position-x: center;
+  background-repeat: no-repeat;
+  background-position-y: 30%;
+  color: white;
+  text-align: center;
+  vertical-align: bottom;
+  padding-bottom: 10px;
+}
+
+#about__tile_precise {
+  background-image: url(/static/assets/about/precise.png);
+}
+
+#about__tile_intuitive {
+  background-image: url(/static/assets/about/intuitive.png);
+}
+
+#about__tile_detailed {
+  background-image: url(/static/assets/about/detailed.png);
+}
+
+#about__tile_interactive {
+  background-image: url(/static/assets/about/interactive.png);
+}
+
+#about__tile_practice {
+  background-image: url(/static/assets/about/practice.png);
+}
+
+#about__tile_examples {
+  background-image: url(/static/assets/about/examples.png);
+}
+
+#about__tile_explanation {
+  background-image: url(/static/assets/about/explanation.png);
+}
+
+#about__tile_discovery {
+  background-image: url(/static/assets/about/discovery.png);
+}
