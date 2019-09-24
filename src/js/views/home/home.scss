@@ -13,12 +13,21 @@ $fullwidth: 380px;
 .about__title {
   padding: 2em;
   font-family: $fontfamily-heading;
-  font-size: 1.5em;
   text-align: center;
-  color: color('black', 'darker');
   width: 100%;
   padding-top: 1em;
   // padding-bottom: 1em;
+}
+
+.about__arrow_text {
+  font-size: 1.5em;
+  color: color('black', 'darker');
+}
+
+.about__arrow_subtext {
+  font-size: 1.1em;
+  padding-top: 1em;
+  // text-align: lef;
 }
 
 .about_section {
@@ -150,6 +159,16 @@ $fullwidth: 380px;
   background-color: color('white', 'lightest');
 }
 
+.about__arrow {
+  display: block;
+  vertical-align: middle;
+  margin-left: auto;
+  margin-right: auto;
+  // width: 40%;
+  margin-top: 2em;
+  width: 260px;
+}
+
 @media screen and (max-width: $desktop) {
   .about_section {
     width: 100%;
@@ -233,5 +252,12 @@ $fullwidth: 380px;
   .about__logo_section {
     padding: 1em;
     padding-top: 3em;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .about__tiles_text {
+    display: block;
+    width: calc(110px * 2 + 4em);
   }
 }

@@ -84,10 +84,10 @@ export default class About extends React.Component
       <div className="about_section">
         <div className="about__tiles">
           <div className="about__title">
-            {'Different ways work for different people'}
-            <br/>
-            <br/>
-            {"So let's combine them"}
+            <div className="about__arrow_text">{'Different ways resonate with different people'}</div>
+            <div className="about__arrow_subtext">{'Your individual experiences, knowledge, language, context, personality and learning goals influence your preferred way to learn.'}</div>
+            <div className="about__arrow_subtext">{"If one way of learning is not sufficient for everybody, then let's make them all available."}</div>
+            <img className="about__arrow" src="/static/assets/about/arrow.png"></img>
           </div>
         </div>
       </div>
