@@ -74,10 +74,11 @@ $home-image-xl: $bark-blurred-lg;
   vertical-align: middle;
   text-align: center;
   color: white;
-  font-size: 45px;
+  font-size: 280%;
   height: 100%;
   width: 100%;
   font-family: 'Lato', sans-serif;
+  transform: translate(-1.5%, 1%);
 }
 
 @media screen and (min-width: 600px) {
