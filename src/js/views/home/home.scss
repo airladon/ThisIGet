@@ -80,18 +80,28 @@
   padding: 0.2em;
 }
 
-.about__tiles_tile_cell {
+.about__tiles_tile_container {
   display: table-cell;
   width: 160px;
   height: 160px;
   background-color: color('site', 'primary');
+  color: white;
+  text-align: center;
+  // padding-bottom: 10px;
+  vertical-align: middle;
+  border-radius: 0.8em;
+}
+
+.about__tiles_tile_img {
+  width: 65%;
+  height: 65%;
   background-position-x: center;
   background-repeat: no-repeat;
   background-position-y: 30%;
-  color: white;
-  text-align: center;
-  vertical-align: bottom;
-  padding-bottom: 10px;
+  margin-left: auto;
+  margin-right: auto;
+  background-position: center;
+  background-size: contain;
 }
 
 .about__logo {
@@ -104,35 +114,3 @@
   height: 100%;
   vertical-align: middle;
 }
-
-// #about__tile_precise {
-//   background-image: url(/static/assets/about/precise.png);
-// }
-
-// #about__tile_intuitive {
-//   background-image: url(/static/assets/about/intuitive.png);
-// }
-
-// #about__tile_detailed {
-//   background-image: url(/static/assets/about/detailed.png);
-// }
-
-// #about__tile_interactive {
-//   background-image: url(/static/assets/about/interactive.png);
-// }
-
-// #about__tile_practice {
-//   background-image: url(/static/assets/about/practice.png);
-// }
-
-// #about__tile_examples {
-//   background-image: url(/static/assets/about/examples.png);
-// }
-
-// #about__tile_explanation {
-//   background-image: url(/static/assets/about/explanation.png);
-// }
-
-// #about__tile_discovery {
-//   background-image: url(/static/assets/about/discovery.png);
-// }

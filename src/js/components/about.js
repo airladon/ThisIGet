@@ -7,8 +7,9 @@ function tile(label, fileName) {
     backgroundImage: `url(/static/assets/about/${fileName})`,
   };
   return <div className="about__tiles_tile_col">
-    <div className="about__tiles_tile_cell" style={style}>
-      {label}
+    <div className="about__tiles_tile_container">
+      <div className="about__tiles_tile_img" style={style}></div>
+      <div className="about__tiles_tile_label">{label}</div>
     </div>
   </div>;
 }
