@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import Logo from './logo';
 
 type Props = {};
 
@@ -10,11 +11,7 @@ export default class HomeBanner extends React.Component
     return <div className="home__banner">
       <div className="home__banner_logo_spacer"/>
       <div className="home__banner_logo">
-        <div className="home__banner_logo_text_container">
-          <div className="home__banner_logo_text">
-            This I Get
-          </div>
-        </div>
+          <Logo />
       </div>
       <div className="home__banner_sub_title">
         <table>

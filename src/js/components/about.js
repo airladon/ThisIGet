@@ -1,5 +1,6 @@
 // @flow
 import * as React from 'react';
+import Logo from './logo';
 
 function tile(label, fileName) {
   const style = {
@@ -12,32 +13,33 @@ function tile(label, fileName) {
   </div>;
 }
 
-function title(title, text) {
+function title(titleText, subText) {
   return <div className="about__tiles_text">
     <div className="about__tiles_text_table">
       <div className="about__tiles_text_container">
         <div className="about__tiles_text_title">
-          {title}
+          {titleText}
         </div>
         <div className="about__tiles_text_text">
-          {text}
+          {subText}
         </div>
       </div>
     </div>
   </div>;
 }
 
+type Props = {};
+
 export default class About extends React.Component
                                     <Props> {
-
   /* eslint-disable max-len */
   // eslint-disable-next-line class-methods-use-this
   render() {
     return <div className="about__container">
       <div className="about__tiles">
         {title(
-          'There are many different approaches to learning',
-          'Depending on the learner or application, different appraoches might be more efficient',
+          'There are different approaches to learning',
+          'Different people and applications prefer different approaches',
         )}
         <div className="about__tiles_tiles">
           <div className="about__tiles_group">
@@ -49,6 +51,36 @@ export default class About extends React.Component
             {tile('Practice', 'practice.png')}
           </div>
         </div>
+      </div>
+      <div className="about__tiles">
+        <div className="about__tiles_tiles">
+          <div className="about__tiles_group">
+            {tile('Detailed', 'detailed.png')}
+            {tile('Intuitive', 'intuitive.png')}
+          </div>
+          <div className="about__tiles_group">
+            {tile('Interactive', 'interactive.png')}
+            {tile('Precise', 'precise.png')}
+          </div>
+        </div>
+        {title(
+          'Content can be presented in different ways',
+          'Understanding a new concept depends on the learner and their past experience',
+        )}
+      </div>
+      <div className="about__title">
+        {"So let's combine them"}
+      </div>
+      <div className="about__tiles_tiles">
+        <div className="about__logo">
+          <div className="about__logo_container">
+            <Logo />
+          </div>
+        </div>
+        {title(
+          'Different versions of the same content',
+          'Find the way that works for you, and rate it for others',
+        )}
       </div>
     </div>;
   }

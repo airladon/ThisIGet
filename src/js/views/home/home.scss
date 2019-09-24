@@ -4,11 +4,12 @@
   width: 100%;
 }
 
-.about__title_top {
-  height: 300px;
+.about__title {
+  padding: 2em;
   font-family: $fontfamily-heading;
-  font-size: 20px;
-  display: table;
+  font-size: 1.5em;
+  text-align: center;
+  color: color('black', 'darker');
   width: 100%;
 }
 
@@ -62,9 +63,11 @@
 
 .about__tiles_tiles {
   display: inline-block;
-  height: 400px;
+  // height: 400px;
   // width: 50%;
-  padding: 1.5em;
+  padding-top: 1.5em;
+  padding-left: 1.5em;
+  padding-right: 1.5em;
 }
 
 .about__tiles_group {
@@ -81,7 +84,7 @@
   display: table-cell;
   width: 160px;
   height: 160px;
-  background-color: color('blue', 'dark');
+  background-color: color('site', 'primary');
   background-position-x: center;
   background-repeat: no-repeat;
   background-position-y: 30%;
@@ -89,6 +92,17 @@
   text-align: center;
   vertical-align: bottom;
   padding-bottom: 10px;
+}
+
+.about__logo {
+  width: 200px;
+  height: 200px;
+  display: inline-block;
+}
+
+.about__logo_container {
+  height: 100%;
+  vertical-align: middle;
 }
 
 // #about__tile_precise {
