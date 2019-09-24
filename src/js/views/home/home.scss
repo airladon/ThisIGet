@@ -19,11 +19,13 @@ $fullwidth: 380px;
   // padding-bottom: 1em;
 }
 
+.about__get_started_text,
 .about__arrow_text {
   font-size: 1.5em;
   color: color('black', 'darker');
 }
 
+.about__get_started_subtext,
 .about__arrow_subtext {
   font-size: 1.1em;
   padding-top: 1em;
@@ -169,6 +171,12 @@ $fullwidth: 380px;
   width: 260px;
 }
 
+.about__get_started {
+  background: none;
+  margin-top: 1em;
+  margin-bottom: 4em;
+}
+
 @media screen and (max-width: $desktop) {
   .about_section {
     width: 100%;
@@ -252,6 +260,11 @@ $fullwidth: 380px;
   .about__logo_section {
     padding: 1em;
     padding-top: 3em;
+  }
+
+  .about__get_started {
+    margin-top: 0;
+    margin-bottom: 0;
   }
 }
 

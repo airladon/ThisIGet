@@ -19,11 +19,11 @@ export default class ViewHome extends React.Component<Props> {
       <HomeBanner/>
       <main>
       <About/>
-      <div className='vertical_blank_space'/>
+      { /* <div className='vertical_blank_space'/> */ }
       <LearningPathNavigator learningPath={'Geometry_1'}/>
       <div className='vertical_blank_space'/>
-      <LearningPathNavigator learningPath={'Trigonometry_1'}/>
-      <div className='vertical_blank_space'/>
+      { /* <LearningPathNavigator learningPath={'Trigonometry_1'}/>
+      <div className='vertical_blank_space'/> */ }
       </main>
     </div>;
   }

@@ -9,11 +9,11 @@ import withLoginManager from '../../components/view';
 const homePage = () => {
   const id: HTMLElement | null = document.getElementById('learning_paths');
 
-  const HomeView = withLoginManager(ViewLearningPaths);
+  const View = withLoginManager(ViewLearningPaths);
   if (id instanceof HTMLElement) {
     ReactDOM.render(
       <div>
-        <HomeView/>
+        <View/>
       </div>,
       id,
     );

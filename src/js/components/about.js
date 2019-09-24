@@ -107,6 +107,21 @@ export default class About extends React.Component
             )}
         </div>
       </div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about__spacer"></div>
+      <div className="about_section about__get_started">
+        <div className="about__tiles">
+          <div className="about__title">
+            <div className="about__get_started_text">{'Get Started'}</div>
+            <div className="about__get_started_subtext">{'Navigate the learning path below and select a topic to start.'}</div>
+          </div>
+        </div>
+      </div>
     </div>;
   }
 }
