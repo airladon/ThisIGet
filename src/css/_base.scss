@@ -5,16 +5,15 @@ $fontfamily-body: 'Open Sans', sans-serif;
 body {
   background-color: color('site', 'background');
   color: color('site', 'text');
-  font-family: $fontfamily-body
+  font-family: $fontfamily-body;
 }
-
 
 h1,
 h2,
 h3,
 h4,
 h5, {
-  font-family: $fontfamily-heading
+  font-family: $fontfamily-heading;
 }
 
 // h2 {
