@@ -11,7 +11,7 @@ During its development, I started to believe that making a concept available in 
 
 As an extension, I think that if users can rate the different versions then it is even more useful. In the short term users may increase their learning efficiency by trying the more popular versions first, and in the long term they may be able to get personalized suggestions on which versions to try first based on their previous ratings and those of the population.
 
-This site is not aimed at a particular audience or age group. It is simply reference material that people may, or may not, find useful. It is a constant work in progress and I invite anyone that wants to [contribute](/contact) content to it!
+This site is not aimed at a particular audience or age group. It is simply reference material that people may, or may not, find useful. It is a constant work in progress and I invite anyone that wants to [contribute](/contact) to do so!
 
 
 ![](/static/assets/bio.png)
