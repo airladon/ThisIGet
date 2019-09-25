@@ -1,4 +1,4 @@
-# About This I Get
+# This I Get - About
 
 <!-- ## Goal
 

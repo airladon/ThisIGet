@@ -12,6 +12,7 @@ const { getDefinedCSSVariables } = Fig.tools.css;
 type Props = {
   learningPath: string;
   selected?: ?string;
+  includeSubText?: boolean;
 };
 
 export default class LearningPathNavigator extends React.Component
@@ -276,13 +277,20 @@ export default class LearningPathNavigator extends React.Component
     this.topicTilesBounds = new Rect(xMin, yMin, xMax - xMin, yMax - yMin);
   }
 
+  renderSubText() {
+    if (this.props.includeSubText == null || this.props.includeSubText) {
+      return <div className='navigator__topic_title_subtext'>
+                {'Learning path'}
+      </div>;
+    }
+    return '';
+  }
+
   // eslint-disable-next-line class-methods-use-this
   render() {
     const classStr = 'naviagator__container navigator__container_with_shadow';
     return <div>
-        <div className='navigator__topic_title_subtext'>
-                {'Learning path'}
-        </div>
+        {this.renderSubText()}
         <div className="navigator__topic_title_container">
           <img src={`/static/dist/${this.learningPathPath}/topic.png`}
                className="navigator__topic_title_img"
