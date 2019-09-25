@@ -60,13 +60,14 @@ In the short term, having multiple approaches, styles and external links describ
 
 In the longer term as more content is rated, users may be able to get a more personalized and efficient experience by having content that is more likely to resonate with them presented first.
 
+<!-- 
 ## This site
 
 Many sources of information such as textbooks, videos and websites will present content in one way particular to that source. If the content is not clear for a learner, it is up to them to search for other sources of the same information that might be more useful.
 
 In contrast, this site tries to present several versions of the same content to a learner, including links to external sources of similar information. Each version of content and external link can be rated by the learners. The hope is learners will more quickly find a version of content that works for them, allowing them to learn more efficiently.
 
-This page highlights the site's features as a way to introduce what the site is and how to use it.
+This page highlights the site's features as a way to introduce what the site is and how to use it. -->
 
 ## Typical Content
 
