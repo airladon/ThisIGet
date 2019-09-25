@@ -1,4 +1,6 @@
-# This I Get - About
+# About This I Get
+
+<html><div class=information__subtitle>Why this site was made, and who made it</div></html>
 
 <!-- ## Goal
 

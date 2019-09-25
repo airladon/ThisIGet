@@ -19,7 +19,6 @@ export default class ViewPolicy extends React.Component<Props> {
     // delete props.active;
     return <div>
       <main>
-      <div className='vertical_blank_space'/>
       <div className='information_text_container'>
         <div className="markdown" dangerouslySetInnerHTML={ { __html: this.props.content } }/>
       </div>
