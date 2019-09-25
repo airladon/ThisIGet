@@ -14,11 +14,11 @@ Want to contribute directly by creating content yourself? Awesome!
 
 ### Single Page Content
 
-Single page content can be completely written in Markdown. This is a format that looks very much like normal text, and because of its simplicity it has become a popular way of writing content throughout the web. You will not need any programming experience to contribute such content.
+Single page content (such as [this](/content/Math/Geometry_1/RightAngleTriangles/explanation/pythagorus_proof), or [this](/content/Math/Geometry_1/RightAngleTriangles/discover/simple) for example) can be completely written in [Markdown](https://daringfireball.net/projects/markdown/). This is a format that looks very much like normal text, and because of its simplicity, has become a popular way of writing content throughout the web. You will not need any programming experience to contribute such content.
 
 ### Interactive Presentation Content
 
-Interactive presentation style content does require the Javascript programming language. Therefore, it is useful to have either experince in at least some programming, even if it's in a different language. 
+Interactive presentation style content (such as [this](/content/Math/Geometry_1/Triangles/explanation/base?page=2) for example) does require the Javascript programming language. Therefore, it is useful to have some programming experinceg, even if it's in a different language. 
 
 ### Creation Process
 
@@ -26,11 +26,11 @@ To create content, it is useful to create a "test" or "development" web server t
 
 Normally, this would require significant experience with software technologies to get going, but because this project is "containerized" using Docker (a popular containerizing software), then you should need only perform a small number of easy to follow steps to get this going.
 
-Therefore I believe this should also not require any previous programming experience, and therefore someone should be able to contribute and test Single Page Content with no programming experience.
+This should not require any previous programming experience, and therefore someone should be able to contribute and test Single Page Content with no programming experience.
 
 ### Copyright
 
-Similar to Wikipedia, any content you contribute will be licensed under the Creative Commons... Licence. Though the Copyright remains with the creator, this gives others the right to reuse the content with minimal restrictions. 
+Similar to Wikipedia and the content already on this site, any content you contribute will be licensed under the <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>. Though the Copyright remains with the creator, this gives others the right to reuse the content with few restrictions. 
 
 ### Contact
 
