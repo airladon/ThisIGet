@@ -64,8 +64,8 @@ export default class About extends React.Component
       <div className="about_section">
         <div className="about__tiles">
           {title(
-            'Content can be described in different ways',
-            'Do you prefer descriptive or brief content? Maybe both? Are interactive diagrams helpful or a distraction for you?',
+            'Concepts can be described in different ways',
+            'Do you prefer detailed or brief descriptions? Maybe both? Are interactive diagrams helpful or a distraction for you?',
             true,
           )}
           <div className="about__tiles_tiles">
@@ -102,7 +102,7 @@ export default class About extends React.Component
               </div>
             </div>
             {title(
-              'Different versions of the same content',
+              'Different versions of the same concepts',
               'Find the way that works for you, and rate it for others',
             )}
         </div>
