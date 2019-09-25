@@ -76,7 +76,7 @@ $$\bbox[10px,border:1px solid gray]{90^\circ}$$
 
 ### Example 5:
 
-#### A $$\color{r}line$$ is draw between two points of a circle (also called a chord). Show that a triangle formed from this line and any point on the circle on the _same side_ of the line will have the same angle.
+#### A $$\color{r}line$$ is drawn between two points of a circle (also called a chord). Show that a triangle formed from this line and any point on the circle on the _same side_ of the line will have the same angle.
 
 ![](ex5.png)
 
