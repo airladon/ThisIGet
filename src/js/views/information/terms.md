@@ -74,19 +74,14 @@ We do our best to ensure the Content on this site is accurate and available. How
 
 * Some states or jurisdictions do not allow the types of disclaimers in this section, so they may not apply to you either in part or in full depending on the law. You may also have other rights that vary by state and jurisdiction.
 
+(To the full extent permissible by applicable law, This I Get, LLC expressly disclaims all express or implied warranties, including but not limited to,  merchantability, fitness for a particular purpose, quality, and non-infringement.)
+
+
 ## Limitation of Liability
 
 ## Indemnification
 
 ## Jurisdiction and Dispute Resolution
 
-
-* Use Service at own risk - yo
-* The Service, provided on an "as is" and "as available" basis
-* To the full extent permissible by applicable law, This I Get, LLC expressly disclaims all express or implied warranties, including but not limited to,  merchantability, fitness for a particular purpose, quality, and non-infringement.
-* Make no warranty that the Service will meet your expectations or requirements, be to your liking, be uninterrupted, accurate, error-free, safe, secure, free of viruses or other harmful components, 
-
 ## Changes To This Terms of Use
 ## Contact Information
-
-## 
