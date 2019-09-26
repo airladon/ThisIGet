@@ -39,6 +39,21 @@ function getTopicDescription(uid: string) {
   return topicIndex[uid];
 }
 
+function getVersionTitle(
+  topicUID: string,
+  approach: string,
+  versionName: string,
+) {
+  const topicIndex = getTopicIndex();
+  const version = topicIndex[topicUID].approaches[approach][versionName];
+  return { title: version.title, description: version.description };
+}
+
+function capitalize(text: string) {
+  return text.charAt(0).toUpperCase() + text.slice(1);
+}
+
+
 export default class TopicComponent extends React.Component
                                     <Props, State> {
   version: Object;
@@ -55,6 +70,8 @@ export default class TopicComponent extends React.Component
   topicName: string;
   versionName: string;
   versionUID: string;
+  versionTitle: string;
+  versionDescription: string;
 
   constructor(props: Props) {
     super(props);
@@ -79,6 +96,11 @@ export default class TopicComponent extends React.Component
     if (this.topicDescription != null) {
       this.topicDescription.getRatings(this.gotRatings.bind(this));
     }
+    const { title, description } = getVersionTitle(
+      topicUID, this.approachUID, this.versionName,
+    );
+    this.versionTitle = title;
+    this.versionDescription = description;
   }
 
   fillRatings() {
@@ -404,6 +426,7 @@ export default class TopicComponent extends React.Component
       path = ['', ...window.location.pathname.replace(/\/$/, '').split('/').slice(2, -2)];
     }
     const imgLink = `/static/dist${path.join('/')}/tile.svg`;
+
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
         <TopicTitle
@@ -417,6 +440,11 @@ export default class TopicComponent extends React.Component
           <div className="topic__approach_mid_tiles">
             {this.addApproaches()}
           </div>
+        </div>
+        <div className="topic__version_title__container">
+          <h2>
+          {`${capitalize(this.approachUID)} - ${this.versionTitle}`}
+          </h2>
         </div>
         <Rating
           topic={this.approachUID}

@@ -54,13 +54,6 @@
   margin-left: 0;
 }
 
-h2 {
-  font-weight: 300;
-  font-size: 2em;
-  text-align: center;
-  margin-top: 1em;
-}
-
 h3 {
   margin-top: 3em;
   font-weight: 300;
@@ -74,12 +67,12 @@ h3 {
 }
 
 @media screen and (max-width: 700px) {
-  h2 {
-    font-weight: 300;
-    font-size: 1.8em;
-    text-align: center;
-    margin-top: 0.5em;
-  }
+  // h2 {
+  //   font-weight: 300;
+  //   font-size: 1.2em;
+  //   text-align: center;
+  //   margin-top: 0.5em;
+  // }
 
   h3 {
     margin-top: 1.5em;
@@ -94,9 +87,9 @@ h3 {
   }
 }
 
-// h3:first-of-type {
-//   margin-top: 1em;
-// }
+h3:first-of-type {
+  margin-top: 1em;
+}
 
 .simple_topic__quiz_instructions {
   color: color('site', 'text');

@@ -4,7 +4,7 @@
 var version = {
   uid: 'complex',
   topic: 'quiz',
-  title: 'More complex geometries',
+  title: 'More Complex Geometries',
   description: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',
   htmlTitle: 'Examples using opposite angles, corresponding angles, alternate angles, interior angles and supplementary angles',
   htmlDescription: 'Find angles using opposite, corresponding, alternate, interior and supplementary angles',

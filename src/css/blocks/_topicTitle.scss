@@ -24,8 +24,8 @@ $title-width: 350px;
 // }
 
 .topic__title_container {
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: 2em;
+  padding-bottom: 1.5em;
   padding-left: 1em;
   padding-right: 1em;
   width: 100%;
@@ -70,23 +70,60 @@ $title-width: 350px;
   vertical-align: middle;
 }
 
+.topic__title_text {
+  // width: min-content;
+}
+
 .topic__title_text h1 {
   display: table-cell;
-  font-size: 26px;
+  font-size: 30px;
   font-weight: 300;
   padding-left: 10px;
-  color: color('black', 'lighter');
+  // color: color('black', 'lighter');
   text-align: left;
 }
 
+.topic__title_bar h2 {
+  font-weight: 300;
+  font-size: 1.4em;
+  text-align: center;
+  margin-top: 0.4em;
+}
+
+// @media screen and (max-width: 700px) {
+//   .topic__title_bar h2 {
+//     font-weight: 300;
+//     font-size: 1.2em;
+//     text-align: center;
+//     margin-top: 0.5em;
+//   }
+// }
+
+// .topic__title_text h1 {
+//   font-size: 30px;
+// }
+
+// @media screen and (max-width: 700px) {
+//   .topic__title_bar h1 {
+//     font-size: 26px;
+//   }
+
+//   .topic__title_bar h2 {
+//     font-size: 22px;
+//   }
+// }
+
 @media screen and (max-width: 400px) {
-  .topic__title_text h1 {
+  .topic__title_bar h1 {
     font-size: 20px;
+  }
+
+  .topic__title_bar h2 {
+    font-size: 18px;
   }
 }
 
-@media screen and (min-width: $tablet) {
-  .topic__title_text h1 {
-    font-size: 30px;
-  }
+.topic__version_title__container {
+  padding-left: 1em;
+  padding-right: 1em;
 }

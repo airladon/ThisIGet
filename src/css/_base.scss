@@ -16,6 +16,9 @@ h5, {
   font-family: $fontfamily-heading;
 }
 
+h1 {
+  color: color('grey', 'darkest');
+}
 // h2 {
 //   font-weight: 200;
 //   font-size: 1.8em;

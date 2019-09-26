@@ -1,4 +1,4 @@
-## Quiz - More Complex Geometries
+<!-- ## Quiz - More Complex Geometries -->
 
 <!-- * Round answers to **two decimal places** -->
 <html><div class="simple_topic__quiz_instructions">Refresh the page to get new questions</div></html>
