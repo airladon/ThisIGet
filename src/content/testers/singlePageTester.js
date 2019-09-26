@@ -30,6 +30,19 @@ function sleep(ms) {
 //   },
 // );
 
+async function removeRatings(page) {
+  await page.evaluate(() => {
+    (document.querySelectorAll(
+      '.rating__container, .approach__links_table__small_screen__value',
+    ) || []).forEach(
+      (el) => {
+        // eslint-disable-next-line no-param-reassign
+        el.style.visibility = 'hidden';
+      },
+    );
+  });
+}
+
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const versionPath = fullPath.split('/').slice(4, -1).join('/');
@@ -99,6 +112,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           window.scrollTo(0, y);
         }, Math.floor(lessonBox.y));
 
+        await removeRatings(page);
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
           failureThreshold: threshold,             // 480 pixels
