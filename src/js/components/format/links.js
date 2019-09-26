@@ -48,7 +48,9 @@ export default class LinksFormatComponent extends React.Component
 
   render() {
     return <div id={this.version.content.htmlId} className="simple_topic__container">
-      {this.renderSections()}
+      <div className="simple_topic__inner_container">
+        {this.renderSections()}
+      </div>
     </div>;
   }
 

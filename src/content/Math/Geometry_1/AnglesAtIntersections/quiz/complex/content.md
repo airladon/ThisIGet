@@ -1,7 +1,7 @@
-## Quiz
+## Quiz - More Complex Geometries
 
 <!-- * Round answers to **two decimal places** -->
-* Refresh the page to get new questions
+<html><div class="simple_topic__quiz_instructions">Refresh the page to get new questions</div></html>
 
 ### Question 1:
 

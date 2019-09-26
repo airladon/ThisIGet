@@ -333,12 +333,14 @@ export default class SimpleFormatComponent extends React.Component
       className="simple_topic__container"
       // onClick={this.close.bind(this)}
     >
-      {this.version.content.sections}
-      <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
-        {this.state.qr}
-      </div>
-      <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
-        <PresentationQR id="id_topic__qr__content_pres__overlay"/>
+      <div className="simple_topic__inner_container">
+        {this.version.content.sections}
+        <div id="id_topic__qr__static_container" className="topic__qr__container topic__hide">
+          {this.state.qr}
+        </div>
+        <div id="id_topic__qr__pres_container" className="topic__qr__container topic__hide">
+          <PresentationQR id="id_topic__qr__content_pres__overlay"/>
+        </div>
       </div>
     </div>;
   }
