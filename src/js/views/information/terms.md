@@ -41,6 +41,8 @@ You are free to stop using the Service at any time.
 
 This I Get reserves the right to stop or refuse Service, terminate accounts, and remove or edit Content, including Content you contribute, in its sole discretion.
 
+_If you leave, you will not revoke license to Content you contribute._
+
 
 ## Disclaimers
 
