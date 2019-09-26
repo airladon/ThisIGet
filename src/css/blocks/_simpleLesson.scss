@@ -41,9 +41,11 @@
 }
 
 .simple_topic__container img {
-  max-width: 100%;
-  margin-left: 50%;
-  transform: translate(-50%);
+  // max-width: 100%;
+  // margin-left: 50%;
+  // transform: translate(-50%);
+  display: block;
+  margin: 0 auto;
 }
 
 .simple_topic__container svg {
