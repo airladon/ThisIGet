@@ -33,5 +33,5 @@ A human-readable summary of (and not a substitute for) the license is:
 
 ## Other Site Content
 
-Unless otherwise specified, all text, images and content that is not "Academic Content" at www.thisiget.com is Copyright © 2019 **This I Get, LLC**.
+The name This I Get is trademarked and property of This I Get, LLC. Unless otherwise specified, all other text, images and content that is not "Academic Content" at www.thisiget.com is Copyright © 2019 **This I Get, LLC**.
 
