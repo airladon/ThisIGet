@@ -11,6 +11,10 @@
   background: color('white', 'base');
 }
 
+.approach__links_table__your_rating .rating__container {
+  display: table;
+}
+
 .rating__label {
   display: inline-block;
   margin-right: 10px;

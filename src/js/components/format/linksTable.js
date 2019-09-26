@@ -305,12 +305,12 @@ export default class LinksTable extends React.Component
     // const props = Object.assign({}, this.props);
     return <table className="approach__links_table">
       <tbody>
-        <tr className="approach__links_table__title_row approach__links_table__large_screen">
-        <td className="approach__links_table__type_title approach__links_table__type"></td>
-        <td className="approach__links_table__title_title approach__links_table__title">Link</td>
+        <tr className="approach__links_table__title_row approach__links_table__large_screen approach__links_table__header">
+        <td className="approach__links_table__type_title approach__links_table__type approach__links_table__header"></td>
+        <td className="approach__links_table__title_title approach__links_table__title approach__links_table__header">Link</td>
         {description}
-        <td className="approach__links_table__your_rating_title approach__links_table__your_rating">{this.yourRatingTitle()}</td>
-        <td className="approach__links_table__total_rating_title approach__links_table__total_rating">Total Ratings ≥4</td>
+        <td className="approach__links_table__your_rating_title approach__links_table__your_rating approach__links_table__header">{this.yourRatingTitle()}</td>
+        <td className="approach__links_table__total_rating_title approach__links_table__total_rating approach__links_table__header">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
       </tbody>

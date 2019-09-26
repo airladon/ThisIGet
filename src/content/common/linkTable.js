@@ -12,10 +12,6 @@ export default function linkTable(
   }>,
 ) {
   return [
-    <div key="0" className="approach__links_table__disclaimer">
-      <p>
-      </p>
-    </div>,
     { links },
     <div key="1" className="approach__links_table__disclaimer">
       <p style={{ marginTop: '3em' }}>

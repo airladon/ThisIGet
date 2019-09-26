@@ -4,14 +4,20 @@
   margin-left: auto;
   margin-right: auto;
   font-size: 1em;
-  border-bottom: 1px solid color('white', 'light');
+  // border-bottom: 1px solid color('white', 'light');
 }
 
 .approach__links_table__title_row {
   font-size: 0.9em;
   color: color('black', 'lighter');
-  border-bottom: 1px solid color('white', 'light');
-  border-top: 1px solid color('white', 'light');
+  // border-bottom: 1px solid color('white', 'light');
+  // border-top: 1px solid color('white', 'light');
+  background: color('white', 'lightest');
+}
+
+.approach__links_table__header {
+  padding-top: 1em;
+  padding-bottom: 1em;
 }
 
 .approach__links_table__type {
@@ -73,9 +79,10 @@
 // }
 
 .approach__links_table__total_rating {
-  width: 6em;
+  width: 7em;
   text-align: center;
   color: color('black', 'lighter');
+  padding-right: 1em;
 }
 
 .approach__links_table__total_rating_title {
