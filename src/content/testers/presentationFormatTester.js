@@ -150,6 +150,16 @@ export default function tester(optionsOrScenario, ...scenarios) {
         }, scrollTo);
         await sleep(200);
 
+
+        const diagram = await page.$('#topic__content_diagram');
+        const diagramBox = await diagram.boundingBox();
+        const clippingBox = {
+          x: diagramBox.x,
+          y: diagramBox.y + scrollTo,
+          width: diagramBox.width,
+          height: diagramBox.height,
+        };
+
         let currentPage = fromPage;
         const next = 'topic__button-next';
         const prev = 'topic__button-previous';
@@ -177,7 +187,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
           // Take screenshot
           // eslint-disable-next-line no-await-in-loop
-          let image = await page.screenshot();
+          let image = await page.screenshot({ clip: clippingBox });
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,             // 480 pixels
@@ -205,7 +215,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
               window.scrollTo(0, y);
             }, scrollTo);
             // eslint-disable-next-line no-await-in-loop
-            image = await page.screenshot();
+            image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: gotoThreshold,             // 480 pixels
               // failureThresholdType: 'percent',
@@ -280,7 +290,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
             // Take screenshot
             // eslint-disable-next-line no-await-in-loop
-            image = await page.screenshot();
+            image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,             // 480 pixels
               // failureThresholdType: 'percent',
