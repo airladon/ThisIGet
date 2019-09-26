@@ -37,7 +37,7 @@ export default class Navbar extends React.Component
 
   getLoginButton() {
     if (this.props.isLoggedIn) {
-      return <div className="navbar-button navbar-right navbar_login">
+      return <div className="navbar-button navbar-right navbar_login navbar_logout">
         <DropDownButton
           label={this.getLoginLabel()}
           id="id_navbar_loginout"
@@ -46,12 +46,13 @@ export default class Navbar extends React.Component
           list={[
             {
               label: `Logged in as ${this.props.username}`,
-              active: false,
+              // active: false,
+              separator: true,
             },
             {
               label: 'Logout',
               link: this.loginout.bind(this),
-              active: false,
+              // active: true,
             },
           ]}
           selected={false}

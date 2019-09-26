@@ -18,7 +18,7 @@ export default class ViewPolicy extends React.Component<Props> {
   render() {
     // const props = Object.assign({}, this.props);
     // delete props.active;
-    console.log(this.props.appendContent)
+    // console.log(this.props.appendContent)
     return <div>
       <main>
       <div className='information_text_container'>

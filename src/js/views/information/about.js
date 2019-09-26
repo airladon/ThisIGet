@@ -1,14 +1,14 @@
 // @flow
 import React from 'react';
 import ReactDOM from 'react-dom';
-import page from './information';
+// import page from './information';
 import './about.scss';
 import content from './about.md';
 // import './privacy.scss';
 import ViewInformation from '../../components/viewInformation';
 import withLoginManager from '../../components/view';
 
-page(content);
+// page(content);
 
 const packages = {
   'Front End': {

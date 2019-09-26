@@ -35,17 +35,20 @@ if not os.environ.get('LOCAL_PRODUCTION') \
                 SELF,
                 'https://cdnjs.cloudflare.com',
                 "'unsafe-inline'",          # this needs to be removed later
+                'https://fonts.googleapis.com',
+                'https://fonts.gstatic.com',
             ],
             'style-src': [
                 SELF,
                 "'unsafe-inline'",
+                "https://fonts.googleapis.com"
             ],
             'style-src-elem': [
                 SELF,
                 'https://fonts.googleapis.com',
                 "'unsafe-inline'",
             ],
-            'font-src': '*',
+            # 'font-src': '*',
         },)
 
 db = SQLAlchemy(app)

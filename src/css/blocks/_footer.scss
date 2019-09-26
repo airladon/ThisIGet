@@ -17,7 +17,8 @@
 
 .footer__terms_of_use__link {
   color: color('white', 'light');
-  font-weight: 600;
+  // font-weight: 600;
+  text-decoration-line: underline;
 }
 
 .footer__terms_of_use__link:hover {

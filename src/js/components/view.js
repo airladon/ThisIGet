@@ -37,26 +37,19 @@ const withLoginManager = function loginManager(
       };
     }
 
+
     componentWillMount() {
-      const handleVisibilityChange = () => {
-        this.checkIsLoggedInFromCookie();
-      };
-      window.addEventListener('focus', handleVisibilityChange);
+      // const handleVisibilityChange = () => {
+      //   this.checkIsLoggedInFromCookie();
+      // };
+      window.addEventListener('focus', this.checkIsLoggedInFromCookie.bind(this));
       this.checkIsLoggedInFromCookie();
     }
 
-    // function checkIsLoggedInCookie() {
-    //   const { cookie } = document;
-    //   if (cookie != null) {
-    //     // $FlowFixMe
-    //     const username = cookie.match(/username=[^;]*;/);
-    //     if (username != null) {
-    //       this.setLogin(username[0]
-    //         .split('=')[1]
-    //         .slice(0, -1));
-    //     }
-    //   }
-    // }
+    // eslint-disable-next-line class-methods-use-this
+    componentWillUnmount() {
+      window.removeEventListener('focus', this.checkIsLoggedInFromCookie.bind(this));
+    }
 
     checkIsLoggedInFromCookie() {
       const { cookie } = document;
