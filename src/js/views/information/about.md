@@ -19,12 +19,12 @@ This site is not aimed at a particular audience or age group. It is simply refer
 ## More Information
 
 [Introduction](/introduction) - Introduction to the the site and how to use it.
-<!-- 
+
 [Privacy](/privacy) - The privacy policy of www.thisiget.com.
 
 [Terms of Use](/terms) - The terms to use this site or create an account www.thisiget.com.
 
-[Copyright](/copyright) - Licensing and copyright information for the site and content. -->
+[Copyright](/copyright) - Licensing and copyright information for the site and content.
 
 [Contact](/contact) - Contact information for feedback.
 
