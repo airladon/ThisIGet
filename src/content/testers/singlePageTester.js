@@ -13,13 +13,13 @@ function sleep(ms) {
 // tester(
 //   {
 //     prePath: 'dev'
-//     thresholds: 0.0001,
+//     thresholds: 10,      // 10 pixels allowed to be different
 //   },
 //   {
 //    width: 300,
 //    height: 600,
 //    includeQRs: true,
-//    threshold: 0.001,
+//    threshold: 10,
 //   },
 //   {
 //    width: 300,
@@ -43,6 +43,7 @@ async function removeRatings(page) {
   });
 }
 
+// eslint-disable no-await-in-loop
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
   const versionPath = fullPath.split('/').slice(4, -1).join('/');
@@ -115,49 +116,37 @@ export default function tester(optionsOrScenario, ...scenarios) {
         await removeRatings(page);
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
-          failureThreshold: threshold,             // 480 pixels
-          // failureThresholdType: 'percent',
+          failureThreshold: threshold,
           customSnapshotIdentifier: `${width}-${height}`,
         });
         if (includeQRs) {
           // Find all links on page that go to QR popups
-          // eslint-disable-next-line no-await-in-loop, no-loop-func
+          // eslint-disable-next-line no-loop-func
           const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
           // eslint-disable-next-line no-restricted-syntax
           for (const link of qrLinks) {
-            // eslint-disable-next-line no-await-in-loop
             await link.click();
-            // eslint-disable-next-line no-await-in-loop
             await page.mouse.move(0, 0);
-            // eslint-disable-next-line no-await-in-loop
             await sleep(1000);
-            // eslint-disable-next-line no-await-in-loop
             await page.evaluate(() => {
               window.scrollTo(0, 0);
             });
-            // eslint-disable-next-line no-await-in-loop
             const linkBox = await link.boundingBox();
-            // eslint-disable-next-line no-await-in-loop
             await page.evaluate((y) => {
               window.scrollTo(0, y);
             }, linkBox.y);
-            // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,             // 480 pixels
-              // failureThresholdType: 'percent',
+              failureThreshold: threshold,
               customSnapshotIdentifier: `${width}-${height}-QR-${index}`,
             });
             index += 1;
-            // eslint-disable-next-line no-await-in-loop
             const closeButtons = await page.$$('.topic__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
-              // eslint-disable-next-line no-await-in-loop
               const box = await closeButton.boundingBox();
               if (box != null && box.x > 0) {
-                // eslint-disable-next-line no-await-in-loop
                 await closeButton.click();
                 break;
               }
