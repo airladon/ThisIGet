@@ -5,8 +5,8 @@ import tester from '../../../../../../testers/presentationFormatTester';
 tester(
   {
     pages: {
-      15: { threshold: { next: 0.01, prev: 0.01, goto: 0.006 } },
-      16: { threshold: { next: 0.01, prev: 0.01, goto: 0.006 } },
+      15: { threshold: { next: 1300, prev: 1300, goto: 10 } },
+      16: { threshold: { next: 1300, prev: 1300, goto: 10 } },
     },
   },
   'goto',

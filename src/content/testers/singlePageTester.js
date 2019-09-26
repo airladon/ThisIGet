@@ -102,7 +102,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         let image = await page.screenshot();
         expect(image).toMatchImageSnapshot({
           failureThreshold: threshold,             // 480 pixels
-          failureThresholdType: 'percent',
+          // failureThresholdType: 'percent',
           customSnapshotIdentifier: `${width}-${height}`,
         });
         if (includeQRs) {
@@ -132,7 +132,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,             // 480 pixels
-              failureThresholdType: 'percent',
+              // failureThresholdType: 'percent',
               customSnapshotIdentifier: `${width}-${height}-QR-${index}`,
             });
             index += 1;

@@ -28,8 +28,8 @@ function contentSectionCount(contentPath) {
 //     prePath: 'dev'
 //     thresholds: {
 //       goto: 0.00001,
-//       next: 0.0001,
-//       prev: 0.0001,
+//       next: 10,
+//       prev: 10,
 //     },
 //     viewPort: {
 //       width: 600,
@@ -181,7 +181,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,             // 480 pixels
-            failureThresholdType: 'percent',
+            // failureThresholdType: 'percent',
             customSnapshotIdentifier: `page ${currentPage}`,
           });
 
@@ -208,7 +208,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
               failureThreshold: gotoThreshold,             // 480 pixels
-              failureThresholdType: 'percent',
+              // failureThresholdType: 'percent',
               customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
             });
             index += 1;
@@ -283,7 +283,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             image = await page.screenshot();
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,             // 480 pixels
-              failureThresholdType: 'percent',
+              // failureThresholdType: 'percent',
               customSnapshotIdentifier: `page ${currentPage}`,
             });
 
