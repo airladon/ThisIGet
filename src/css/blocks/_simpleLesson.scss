@@ -11,7 +11,7 @@
   background-color: color('white', 'base');
   color: color('grey', 'darkest');
   position: relative;
-  border-top: 1px solid color('white', 'light');
+  // border-top: 1px solid color('white', 'light');
   border-bottom: 1px solid color('white', 'light');
 }
 
@@ -59,7 +59,7 @@
 h3 {
   margin-top: 3em;
   font-weight: 300;
-  font-size: 1.5em;
+  font-size: 1.3em;
   background: color('white', 'lightest');
   padding: 0.3em;
   margin-bottom: 0.5em;
@@ -95,7 +95,8 @@ h3:first-of-type {
 
 .simple_topic__quiz_instructions {
   color: color('site', 'text');
-  text-align: center;
+  // text-align: center;
+  font-size: 0.8em;
 }
 
 // ///////////////////////////////////////////////////////

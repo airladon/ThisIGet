@@ -85,9 +85,10 @@ $title-width: 350px;
 
 .topic__title_bar h2 {
   font-weight: 300;
-  font-size: 1.4em;
+  font-size: 1.6em;
   text-align: center;
   margin-top: 0.4em;
+  margin-bottom: 0;
 }
 
 // @media screen and (max-width: 700px) {
@@ -126,4 +127,7 @@ $title-width: 350px;
 .topic__version_title__container {
   padding-left: 1em;
   padding-right: 1em;
+  background-color: color('presentation', 'background');
+  border-top: 1px solid color('white', 'light');
+  padding-top: 1em;
 }

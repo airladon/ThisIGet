@@ -429,6 +429,7 @@ export default class TopicComponent extends React.Component
 
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>
+
         <TopicTitle
           // imgLink={`${this.topic.content.iconLinkGrey}`}
           imgLink={imgLink}
@@ -453,6 +454,8 @@ export default class TopicComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
           label={this.ratingLabel()}
         />
+        
+        
       </div>
       {this.renderTopic()}
       <div className='vertical_blank_space'/>

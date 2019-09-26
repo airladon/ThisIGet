@@ -137,10 +137,11 @@ $height_limited_landscape_aspect_ratio: "408/200";
 
 .topic__widescreen_backdrop {
   font-size: var(--topic__diagram-font-size);
-  background-color: color('presentation', 'background');
+  // background-color: color('presentation', 'background');
+  background-color: color('white', 'base');
   padding-top: var(--pres__vpadding);
   padding-bottom: var(--pres__vpadding);
-  border-top: 1px solid color('white', 'light');
+  // border-top: 1px solid color('white', 'light');
   border-bottom: 1px solid color('white', 'light');
 }
 
