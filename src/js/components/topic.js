@@ -445,7 +445,7 @@ export default class TopicComponent extends React.Component
     if (path[1] === 'dev') {
       path = ['', ...window.location.pathname.replace(/\/$/, '').split('/').slice(2, -2)];
     }
-    const imgLink = `/static/dist${path.join('/')}/tile.svg`;
+    const imgLink = `/static/dist${path.join('/')}/tile_1f1f1f.svg`;
 
     return <div>
       <div className={`topic__title_bar${this.calcTitleHeight()}`}>

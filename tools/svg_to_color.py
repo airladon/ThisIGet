@@ -3,7 +3,7 @@ import os
 
 
 # color = (101, 0, 0)
-color = ['#fff', '#aaa']
+color = ['#fff', '#aaa', '#1f1f1f']
 input_path = './src/content'
 output_path = None
 filter_name = 'tile.svg'
