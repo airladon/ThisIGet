@@ -19,6 +19,14 @@ function contentSectionCount(contentPath) {
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
+function writeImage(image, path) {
+  fs.writeFile(path, image, function(err) {
+    if(err) {
+      return console.log(err);
+    }
+}); 
+}
+
 // const sleep = (milliseconds) => {
 //   return new Promise(resolve => setTimeout(resolve, milliseconds))
 // }
@@ -135,19 +143,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
         });
         await page.setViewport({
           width: options.viewPort.width,
-          height: options.viewPort.width / 2,
+          height: options.viewPort.width / 2 * 10,
         });
         const topicContainer = await page.$('#topic__content');
         const topicBox = await topicContainer.boundingBox();
         const scrollTo = Math.floor(topicBox.y);
         await page.setViewport({
           width: options.viewPort.width,
-          height: Math.floor(topicBox.height),
+          height: Math.floor(topicBox.height) * 10,
         });
 
-        await page.evaluate((y) => {
-          window.scrollTo(0, y);
-        }, scrollTo);
+        // await page.evaluate((y) => {
+        //   window.scrollTo(0, y);
+        // }, scrollTo);
         await sleep(200);
 
 
@@ -155,7 +163,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const diagramBox = await diagram.boundingBox();
         const clippingBox = {
           x: diagramBox.x,
-          y: diagramBox.y + scrollTo / 2 * 2,
+          y: diagramBox.y + scrollTo,
           // y: diagramBox.y,
           width: diagramBox.width,
           height: diagramBox.height,
@@ -166,20 +174,20 @@ export default function tester(optionsOrScenario, ...scenarios) {
         // ));
         console.log(await page.evaluate(() => {
           const {top, left, bottom, right} = document.querySelector('#topic__content_diagram').getBoundingClientRect();
-          return { top, left, bottom, right }
+          return {x: left, y: top, width: right-left, height: bottom - top}
         }));
 
         console.log(await page.evaluate(() => {
           const {top, left, bottom, right} = document.querySelector('#id_diagram__gl__low').getBoundingClientRect();
-          return { top, left, bottom, right }
+          return {x: left, y: top, width: right-left, height: bottom - top}
         }));
         console.log(await page.evaluate(() => {
           const {top, left, bottom, right} = document.querySelector('#id_diagram__text__low').getBoundingClientRect();
-          return { top, left, bottom, right }
+          return {x: left, y: top, width: right-left, height: bottom - top}
         }));
         console.log(await page.evaluate(() => {
           const {top, left, bottom, right} = document.querySelector('#id_diagram__html').getBoundingClientRect();
-          return { top, left, bottom, right }
+          return {x: left, y: top, width: right-left, height: bottom - top}
         }
         ));
         // console.log(await page.evaluate(() =>
@@ -230,9 +238,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
 
           // Take screenshot
           // await sleep(2000);
+          console.log(scrollTo)
           console.log(clippingBox)
+          const testPath = module.parent.filename.split('/').slice(0, -1).join('/');
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot({ clip: clippingBox });
+          writeImage(image, `${testPath}/test_image.png`);
+          image = await page.screenshot();
+          writeImage(image, `${testPath}/test_image1.png`);
+          console.log(image.toString().length)
+          image = await page.screenshot({
+            clip: await gl.boundingBox(),
+          });
+          writeImage(image, `${testPath}/test_image2.png`);
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,             // 480 pixels

@@ -465,7 +465,20 @@ export default class TopicComponent extends React.Component
             {this.addApproaches()}
           </div>
         </div>
-       <div style={{height: '100px'}}></div>
+        <div className="topic__version_title__container">
+          <h2>
+          {`${capitalize(this.approachUID)} - ${this.versionTitle}`}
+          </h2>
+        </div>
+        {this.numHighRatings()}
+        <Rating
+          topic={this.approachUID}
+          rating={this.state.userRating}
+          ratingCallback={this.setUserRating.bind(this)}
+          isLoggedIn={this.props.isLoggedIn}
+          label={this.ratingLabel()}
+        />
+
       </div>
       {this.renderTopic()}
       <div className='vertical_blank_space'/>
