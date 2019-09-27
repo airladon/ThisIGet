@@ -112,7 +112,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     element: '#topic__content_diagram',
     pages: {},
     prePath: '',
-    fileNamePrefix: '',
+    prefix: '',
   };
   let optionsToUse = defaultOptions;
   if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
@@ -145,6 +145,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
     }
   });
 
+
+  // Tests
   describe(`${versionPath}`, () => {
     test.each(allTests)(
       'From: %i, to: %s',
@@ -202,7 +204,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,
-            customSnapshotIdentifier: `page ${currentPage}`,
+            customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
           });
 
           // Find all links on page that go to QR popups
@@ -219,7 +221,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: gotoThreshold,
-              customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
+              customSnapshotIdentifier: `${options.prefix}page ${currentPage} - QR ${index}`,
             });
             index += 1;
 
@@ -275,7 +277,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,
-              customSnapshotIdentifier: `${options.fileNamePrefix}page ${currentPage}`,
+              customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
             });
 
             // Close all hints on a page

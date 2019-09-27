@@ -2,9 +2,5 @@
 import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 
-tester(
-  // {
-  //   element: 'body',
-  // },
-  2,
-);
+tester(2);
+tester({ element: 'body', prefix: 'full ' }, 1);

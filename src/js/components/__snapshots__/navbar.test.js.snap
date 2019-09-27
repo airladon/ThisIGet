@@ -8,6 +8,15 @@ exports[`Navbar Make "About" item active 1`] = `
     >
       
       <div
+        className="navbar-text navbar-center"
+      >
+        <a
+          href="/paths"
+        >
+          Learning Paths
+        </a>
+      </div>
+      <div
         className="navbar-text navbar-right login_button"
       >
         <div
@@ -31,6 +40,15 @@ exports[`Navbar Make "Introduction" item active 1`] = `
     >
       
       <div
+        className="navbar-text navbar-center"
+      >
+        <a
+          href="/paths"
+        >
+          Learning Paths
+        </a>
+      </div>
+      <div
         className="navbar-text navbar-right login_button"
       >
         <div
@@ -53,6 +71,15 @@ exports[`Navbar No props 1`] = `
       className="navbar-container"
     >
       
+      <div
+        className="navbar-text navbar-center"
+      >
+        <a
+          href="/paths"
+        >
+          Learning Paths
+        </a>
+      </div>
       <div
         className="navbar-text navbar-right login_button"
       >
