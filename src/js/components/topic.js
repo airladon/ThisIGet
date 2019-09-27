@@ -412,10 +412,27 @@ export default class TopicComponent extends React.Component
       if (this.version.type === 'links') {
         return 'Are these links helpful?';
       }
-      return `Is this ${approachName} helpful?`;
+      // return `Your ${approachName} rating:`;
+      return 'Your rating:';
     }
     return <div>
       <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
+    </div>;
+  }
+
+  numHighRatings() {
+    let rating = '-';
+    if (this.state.ratings[this.approachUID][this.versionName] != null) {
+      rating = `${this.state.ratings[this.approachUID][this.versionName].numHighRatings}`;
+    }
+    // console.log(this.state.ratings[this.approachUID])
+    return <div className="topic__version_title__num_high">
+      <div className="topic__version_title__num_high__label">
+          Num high ratings:
+      </div>
+      <div className="topic__version_title__num_high__value">
+          {rating}
+      </div>
     </div>;
   }
 
@@ -447,6 +464,7 @@ export default class TopicComponent extends React.Component
           {`${capitalize(this.approachUID)} - ${this.versionTitle}`}
           </h2>
         </div>
+        {this.numHighRatings()}
         <Rating
           topic={this.approachUID}
           rating={this.state.userRating}
@@ -454,8 +472,6 @@ export default class TopicComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
           label={this.ratingLabel()}
         />
-        
-        
       </div>
       {this.renderTopic()}
       <div className='vertical_blank_space'/>

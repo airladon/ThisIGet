@@ -4,7 +4,7 @@
 var version = {
   uid: 'singlePage',
   topic: 'explanation',
-  title: 'Descriptive - Single Page',
+  title: 'Descriptive & Interactive',
   description: 'Motivation to studying shapes.',
   htmlTitle: 'Why Study Shapes?',
   htmlDescription: 'Introduction to shapes, naming, history and why we should study them',

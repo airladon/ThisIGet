@@ -126,11 +126,11 @@ $title-width: 350px;
 
 @media screen and (max-width: 400px) {
   .topic__title_bar h1 {
-    font-size: 20px;
+    font-size: 24px;
   }
 
   .topic__title_bar h2 {
-    font-size: 18px;
+    font-size: 22px;
   }
 }
 
@@ -140,4 +140,24 @@ $title-width: 350px;
   background-color: color('presentation', 'background');
   border-top: 1px solid color('white', 'light');
   padding-top: 1em;
+}
+
+.topic__version_title__num_high {
+  background-color: color('presentation', 'background');
+  font-size: 0.9em;
+  padding-top: 0.5em;
+  padding-bottom: 0.3em;
+}
+
+.topic__title_bar .rating__stars {
+  transform: translate(0, 0.1em);
+}
+
+.topic__version_title__num_high__label {
+  display: inline-block;
+}
+
+.topic__version_title__num_high__value {
+  display: inline-block;
+  padding-left: 1em;
 }
