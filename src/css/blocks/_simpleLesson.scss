@@ -82,11 +82,10 @@ h3 {
   }
 }
 
-@media screen and (max-width: 1100px) {
-  h3 {
-    width: calc(100vw - 0.3em);
-    transform: translate(-1.2em, 0);
-    padding-left: 1.2em;
+@media screen and (max-width: 400px) {
+  .simple_topic__container {
+    padding-left: 1em;
+    padding-right: 1em;
   }
 }
 

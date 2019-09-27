@@ -222,8 +222,8 @@ export default class LinksTable extends React.Component
         </td>
         <td className={`approach__links_table__title ${tdClass}`}>{title}</td>
         {description}
-        <td className={`approach__links_table__your_rating ${tdClass}`}>{rating}</td>
         <td className={`approach__links_table__total_rating ${tdClass}`}>{numHighRatings}</td>
+        <td className={`approach__links_table__your_rating ${tdClass}`}>{rating}</td>
       </tr>);
       key += 1;
       tdClass = 'approach__links_table__td';
@@ -260,7 +260,7 @@ export default class LinksTable extends React.Component
             <tr>
               <td className="approach__links_table__total_rating">
                 <div className="approach__links_table__small_screen__title">
-                    {'Total Ratings ≥4:'}
+                    {'Num High Ratings:'}
                 </div>
                 <div className="approach__links_table__small_screen__value">
                   {numHighRatings}
@@ -310,8 +310,8 @@ export default class LinksTable extends React.Component
         <td className="approach__links_table__type_title approach__links_table__type approach__links_table__header"></td>
         <td className="approach__links_table__title_title approach__links_table__title approach__links_table__header">Link</td>
         {description}
+        <td className="approach__links_table__total_rating_title approach__links_table__total_rating approach__links_table__header">Num High Ratings</td>
         <td className="approach__links_table__your_rating_title approach__links_table__your_rating approach__links_table__header">{this.yourRatingTitle()}</td>
-        <td className="approach__links_table__total_rating_title approach__links_table__total_rating approach__links_table__header">Total Ratings ≥4</td>
         </tr>
         {this.renderLinks()}
       </tbody>
