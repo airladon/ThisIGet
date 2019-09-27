@@ -59,7 +59,7 @@ $title-width: 350px;
 }
 
 .topic__title_image {
-  float: left;
+  // float: left;
   height: $title-height;
   width: $title-height;
 }
@@ -68,6 +68,16 @@ $title-width: 350px;
   display: table-cell;
   height: 100%;
   vertical-align: middle;
+}
+
+@media screen and (max-width: 400px) {
+  .topic__title_img_container {
+    display: inline-block;
+  }
+
+  .topic__title_text_container {
+    display: inline-block;
+  }
 }
 
 .topic__title_text {
@@ -80,7 +90,7 @@ $title-width: 350px;
   font-weight: 300;
   padding-left: 10px;
   // color: color('black', 'lighter');
-  text-align: left;
+  // text-align: left;
 }
 
 .topic__title_bar h2 {
