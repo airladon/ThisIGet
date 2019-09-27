@@ -3,7 +3,7 @@
 
 ### Example 1:
 
-#### What is the length of side$$\definecolor{r}{RGB}{238,34,12}{a}$$?
+#### What is the length of side $$\definecolor{r}{RGB}{238,34,12}{a}$$?
 
 ![](ex1.png)
 

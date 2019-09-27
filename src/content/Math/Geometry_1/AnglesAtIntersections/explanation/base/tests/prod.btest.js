@@ -3,5 +3,5 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 
 tester(
-  1,
+  2,
 );

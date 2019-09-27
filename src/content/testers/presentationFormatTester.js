@@ -74,9 +74,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
   let scenariosToUse = scenarios;
   const defaultOptions = {
     thresholds: {
-      goto: 0.00002,  // 7 pixels
-      next: 0.00002,  // 7 pixels
-      prev: 0.00002,  // 7 pixels
+      goto: 10,  // 10 pixels
+      next: 10,  // 10 pixels
+      prev: 10,  // 10 pixels
     },
     viewPort: {
       width: 600,
@@ -186,6 +186,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           }
 
           // Take screenshot
+          await sleep(2000)
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot({ clip: clippingBox });
           const gotoThreshold = getThreshold(currentPage, options, 'goto');

@@ -50,7 +50,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
   let scenariosToUse = scenarios;
   const defaultOptions = {
     prePath: '',
-    threshold: 0.00001,
+    threshold: 10,
   };
   let optionsToUse = defaultOptions;
   if ('prePath' in optionsOrScenario
