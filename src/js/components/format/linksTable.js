@@ -167,6 +167,7 @@ export default class LinksTable extends React.Component
     let key = 0;
     const userRatingIndex = 3;
     const highRatingIndex = 1;
+    let tdClass = 'approach__links_table__td approach__links_table__first_row';
     this.links.forEach((link, index) => {
       let userRatingValue = this.state.ratings[index][userRatingIndex];
       if (typeof userRatingValue !== 'number') {
@@ -206,10 +207,10 @@ export default class LinksTable extends React.Component
 
       let description = null;
       if (this.hasDescription) {
-        description = <td className="approach__links_table__description">{link.description}</td>;
+        description = <td className={`approach__links_table__description ${tdClass}`}>{link.description}</td>;
       }
       links.push(<tr key={key} className="approach__links_table__large_screen">
-        <td className="approach__links_table__type">
+        <td className={`approach__links_table__type ${tdClass}`}>
           <a
             className={typeClass}
             href={link.url}
@@ -219,13 +220,13 @@ export default class LinksTable extends React.Component
           >
           </a>
         </td>
-        <td className="approach__links_table__title">{title}</td>
+        <td className={`approach__links_table__title ${tdClass}`}>{title}</td>
         {description}
-        <td className="approach__links_table__your_rating">{rating}</td>
-        <td className="approach__links_table__total_rating">{numHighRatings}</td>
+        <td className={`approach__links_table__your_rating ${tdClass}`}>{rating}</td>
+        <td className={`approach__links_table__total_rating ${tdClass}`}>{numHighRatings}</td>
       </tr>);
       key += 1;
-
+      tdClass = 'approach__links_table__td';
       // if (!this.props.isLoggedIn) {
       //   rating = <span className="rating__login" onClick={login}>{'Login'}</span>
       // }

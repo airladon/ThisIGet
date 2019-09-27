@@ -407,7 +407,7 @@ export default class TopicComponent extends React.Component
   }
 
   ratingLabel() {
-    const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
+    // const approachName = this.approachUID.charAt(0).toUpperCase() + this.approachUID.slice(1);
     if (this.props.isLoggedIn) {
       if (this.version.type === 'links') {
         return 'Are these links helpful?';
@@ -415,8 +415,11 @@ export default class TopicComponent extends React.Component
       // return `Your ${approachName} rating:`;
       return 'Your rating:';
     }
+    // return <div>
+    //   <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
+    // </div>;
     return <div>
-      <span className="rating__login" onClick={login}>Login</span> to rate {approachName}:
+      <span className="rating__login" onClick={login}>Login</span> to rate:
     </div>;
   }
 

@@ -60,12 +60,13 @@ h3 {
   margin-top: 3em;
   font-weight: 300;
   font-size: 1.3em;
-  background: color('white', 'lightest');
+  // background: color('white', 'lightest');
   padding: 0.3em;
   margin-bottom: 0.5em;
-  width: calc(100% + 1.5em);
-  transform: translate(-0.75em, 0);
-  padding-left: 0.75em;
+  // width: calc(100% + 1.5em);
+  // transform: translate(-0.75em, 0);
+  // padding-left: 0.75em;
+  border-bottom: 1px solid color('white', 'light');
 }
 
 @media screen and (max-width: 700px) {

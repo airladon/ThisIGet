@@ -4,7 +4,7 @@
 var version = {
   uid: 'base',
   topic: 'discover',
-  title: 'Base',
+  title: 'Interactive',
   description: '',
   htmlTitle: 'Self discover the relationships between opposite angles, corresponding angles, alternate angles and interior angles',
   htmlDescription: 'Using parallel lines and supplementary angles, all these relationships can be proven',

@@ -128,7 +128,7 @@
       "discover": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -136,7 +136,7 @@
       "examples": {
         "base": {
           "type": "singlePage",
-          "title": "Examples of related angles",
+          "title": "Various Geometries",
           "description": "Examples of calculating opposite, corresponding, alternate and interior angles",
           "fullTopic": true
         }
@@ -144,7 +144,7 @@
       "explanation": {
         "base": {
           "type": "presentation",
-          "title": "Full explanation",
+          "title": "Descriptive & Interactive",
           "description": "",
           "fullTopic": true
         }
@@ -168,13 +168,13 @@
       "quiz": {
         "base": {
           "type": "presentation",
-          "title": "Simple geometries",
+          "title": "Simple Geometries",
           "description": "",
           "fullTopic": true
         },
         "complex": {
           "type": "singlePage",
-          "title": "More Complex Geometries",
+          "title": "Advanced Geometries",
           "description": "Find angles using opposite, corresponding, alternate, interior and supplementary angles",
           "fullTopic": true
         }
@@ -182,7 +182,7 @@
       "summary": {
         "base": {
           "type": "presentation",
-          "title": "Base",
+          "title": "Interactive",
           "description": "",
           "fullTopic": true
         }
