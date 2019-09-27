@@ -27,6 +27,24 @@ function writeImage(image, path) {
 }); 
 }
 
+// Open all hints on a page
+async function openHints() {
+  const hints = await page.$$('.presentation__hint_label');
+  for (const hint of hints) {
+    const id = await (await hint.getProperty('id')).jsonValue();
+    const hintText = await page.$(`#${id}`);
+    await hintText.click();
+  }
+  return hints;
+}
+
+async function closeHints(hints) {
+  for (const hint of hints) {
+    const id = await (await hint.getProperty('id')).jsonValue();
+    const hintText = await page.$(`#${id}`);
+    await hintText.click();
+  }
+}
 // const sleep = (milliseconds) => {
 //   return new Promise(resolve => setTimeout(resolve, milliseconds))
 // }
@@ -58,7 +76,7 @@ function writeImage(image, path) {
 //   [1, 10, 5, 3]                // Go from page 1 to 10, to 5, to 3
 // );
 
-// eslint-disable no-await-in-loop
+// eslint-disable no-await-in-loop no-loop-func no-restricted-syntax
 function getThreshold(page, options, comingFrom) {
   const defaultThreshold = options.thresholds[comingFrom];
   if (options.pages[page] == null) {
@@ -94,6 +112,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     element: '#topic__content_diagram',
     pages: {},
     prePath: '',
+    fileNamePrefix: '',
   };
   let optionsToUse = defaultOptions;
   if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
@@ -175,27 +194,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
           await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
           // Open all hints on a page
-          let hints = await page.$$('.presentation__hint_label');
-          for (const hint of hints) {
-            const id = await (await hint.getProperty('id')).jsonValue();
-            const hintText = await page.$(`#${id}`);
-            await hintText.click();
-          }
+          let hints = await openHints();
 
           // Take screenshot
-          // // await sleep(2000);
-          // // console.log(scrollTo)
-          // // console.log(clippingBox)
-          // const testPath = module.parent.filename.split('/').slice(0, -1).join('/');
-          // // eslint-disable-next-line no-await-in-loop
-          // let image = await page.screenshot({ clip: clippingBox });
-          // writeImage(image, `${testPath}/test_image.png`);
-          // image = await page.screenshot();
-          // writeImage(image, `${testPath}/test_image1.png`);
-          // // console.log(image.toString().length)
-          // // image = await page.screenshot({
-          // //   clip: await gl.boundingBox(),
-          // // });
           let image = await page.screenshot({ clip: clippingBox });
           // writeImage(image, `${fullPath}/test_image2.png`);
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
@@ -205,10 +206,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
           });
 
           // Find all links on page that go to QR popups
-          // eslint-disable-next-line no-await-in-loop, no-loop-func
           const qrLinks = await page.$$('.topic__qr_action_word');
           let index = 0;
-          // eslint-disable-next-line no-restricted-syntax
           for (const originalLink of qrLinks) {
             // Need to reget element incase a react redraw has happened
             const id = await (await originalLink.getProperty('id')).jsonValue();
@@ -216,9 +215,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await link.click();
             await page.mouse.move(0, 0);
             await sleep(500);
-            // await page.evaluate((y) => {
-            //   window.scrollTo(0, y);
-            // }, scrollTo);
+
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: gotoThreshold,
@@ -226,21 +223,15 @@ export default function tester(optionsOrScenario, ...scenarios) {
             });
             index += 1;
 
-            // Clost the QR window
+            // Close the QR window
             const closeButtons = await page.$$('.topic__qr__title_close');
-            // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
               const box = await closeButton.boundingBox();
               if (box != null && box.x > 0) {
-                // eslint-disable-next-line no-await-in-loop
                 await closeButton.click();
                 break;
               }
             }
-            // eslint-disable-next-line no-await-in-loop
-            // await page.evaluate((y) => {
-            //   window.scrollTo(0, y);
-            // }, scrollTo);
           }
 
           while (currentPage.toString() !== targetPage.toString()) {
@@ -263,7 +254,6 @@ export default function tester(optionsOrScenario, ...scenarios) {
               await watchDog;
             }
 
-            // eslint-disable-next-line no-await-in-loop
             await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
             // Get current page
@@ -279,26 +269,17 @@ export default function tester(optionsOrScenario, ...scenarios) {
             const threshold = getThreshold(currentPage, options, comingFrom);
 
             // Open all hints on a page
-            hints = await page.$$('.presentation__hint_label');
-            for (const hint of hints) {
-              const id = await (await hint.getProperty('id')).jsonValue();
-              const hintText = await page.$(`#${id}`);
-              await hintText.click();
-            }
+            hints = await openHints();
 
             // Take screenshot
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,
-              customSnapshotIdentifier: `page ${currentPage}`,
+              customSnapshotIdentifier: `${options.fileNamePrefix}page ${currentPage}`,
             });
 
             // Close all hints on a page
-            for (const hint of hints) {
-              const id = await (await hint.getProperty('id')).jsonValue();
-              const hintText = await page.$(`#${id}`);
-              await hintText.click();
-            }
+            await closeHints(hints);
           }
         }
       },
