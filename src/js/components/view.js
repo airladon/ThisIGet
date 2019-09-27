@@ -37,8 +37,8 @@ const withLoginManager = function loginManager(
       };
     }
 
-
-    componentWillMount() {
+    // eslint-disable-next-line camelcase
+    UNSAFE_componentWillMount() {
       // const handleVisibilityChange = () => {
       //   this.checkIsLoggedInFromCookie();
       // };

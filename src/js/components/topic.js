@@ -478,7 +478,6 @@ export default class TopicComponent extends React.Component
           isLoggedIn={this.props.isLoggedIn}
           label={this.ratingLabel()}
         />
-
       </div>
       {this.renderTopic()}
       <div className='vertical_blank_space'/>

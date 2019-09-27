@@ -33,9 +33,9 @@ function writeImage(image, path) {
 
 // tester(
 //   {
-//     prePath: 'dev'
+//     prePath: '/dev'
 //     thresholds: {
-//       goto: 0.00001,
+//       goto: 10,
 //       next: 10,
 //       prev: 10,
 //     },
@@ -44,6 +44,7 @@ function writeImage(image, path) {
 //       height: 400,
 //       scrollTo: 180,
 //     },
+//     element: '#topic__content_diagram'
 //     pages: {
 //       1: { threshold: { goto: 0.001, next: 0.01, prev: 0.01 } },
 //       2: { threshold: 0.003 },
@@ -56,6 +57,8 @@ function writeImage(image, path) {
 //   [3, 3],                      // Test page 3 only
 //   [1, 10, 5, 3]                // Go from page 1 to 10, to 5, to 3
 // );
+
+// eslint-disable no-await-in-loop
 function getThreshold(page, options, comingFrom) {
   const defaultThreshold = options.thresholds[comingFrom];
   if (options.pages[page] == null) {
@@ -76,21 +79,19 @@ function getThreshold(page, options, comingFrom) {
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  // const path = fullPath.split('/').slice(-3, -1).join('/');
   const versionPath = fullPath.split('/').slice(4, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   let scenariosToUse = scenarios;
   const defaultOptions = {
     thresholds: {
-      goto: 10,  // 10 pixels
-      next: 10,  // 10 pixels
-      prev: 10,  // 10 pixels
+      goto: 10,
+      next: 10,
+      prev: 10,
     },
     viewPort: {
       width: 600,
-      // height: 320,
-      // scrollTo: 200,
     },
+    element: '#topic__content_diagram',
     pages: {},
     prePath: '',
   };
@@ -137,79 +138,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
         } catch {
           await page.goto(fullpath);
         }
-        await sleep(200);
+        // await sleep(200);
+        await page.setViewport({
+          width: options.viewPort.width,
+          height: options.viewPort.width,
+        });
+
+        const pageHeight = await page.evaluate(() => document.body.getBoundingClientRect().height);
+
+        await page.setViewport({
+          width: options.viewPort.width,
+          height: Math.floor(pageHeight),
+        });
+
         await page.evaluate(() => {
           window.scrollTo(0, 0);
         });
-        await page.setViewport({
-          width: options.viewPort.width,
-          height: options.viewPort.width / 2 * 10,
-        });
-        const topicContainer = await page.$('#topic__content');
-        const topicBox = await topicContainer.boundingBox();
-        const scrollTo = Math.floor(topicBox.y);
-        await page.setViewport({
-          width: options.viewPort.width,
-          height: Math.floor(topicBox.height) * 10,
-        });
 
-        // await page.evaluate((y) => {
-        //   window.scrollTo(0, y);
-        // }, scrollTo);
-        await sleep(200);
-
-
-        const diagram = await page.$('#topic__content_diagram');
-        const diagramBox = await diagram.boundingBox();
-        const clippingBox = {
-          x: diagramBox.x,
-          y: diagramBox.y + scrollTo,
-          // y: diagramBox.y,
-          width: diagramBox.width,
-          height: diagramBox.height,
-        };
-
-        // console.log(await page.evaluate(() =>
-        //   window.getComputedStyle(document.querySelector('#id_diagram__gl__low')).zIndex
-        // ));
-        console.log(await page.evaluate(() => {
-          const {top, left, bottom, right} = document.querySelector('#topic__content_diagram').getBoundingClientRect();
-          return {x: left, y: top, width: right-left, height: bottom - top}
-        }));
-
-        console.log(await page.evaluate(() => {
-          const {top, left, bottom, right} = document.querySelector('#id_diagram__gl__low').getBoundingClientRect();
-          return {x: left, y: top, width: right-left, height: bottom - top}
-        }));
-        console.log(await page.evaluate(() => {
-          const {top, left, bottom, right} = document.querySelector('#id_diagram__text__low').getBoundingClientRect();
-          return {x: left, y: top, width: right-left, height: bottom - top}
-        }));
-        console.log(await page.evaluate(() => {
-          const {top, left, bottom, right} = document.querySelector('#id_diagram__html').getBoundingClientRect();
-          return {x: left, y: top, width: right-left, height: bottom - top}
-        }
-        ));
-        // console.log(await page.evaluate(() =>
-        //   document.querySelector('#id_diagram__html').getBoundingClientRect()
-        // ));
-
-        // console.log(zIndex)
-        const main = await page.$('#topic__content_diagram');
-        const mainBox = await main.boundingBox();
-        console.log(mainBox)
-
-        const gl = await page.$('#id_diagram__gl__low');
-        const glBox = await gl.boundingBox();
-        console.log(glBox)
-
-        const text = await page.$('#id_diagram__text__low');
-        const textBox = await text.boundingBox();
-        console.log(textBox)
-
-        const html = await page.$('#id_diagram__html');
-        const htmlBox = await html.boundingBox();
-        console.log(htmlBox)
+        const clippingBox = await (await page.$(options.element)).boundingBox();
 
         let currentPage = fromPage;
         const next = 'topic__button-next';
@@ -225,7 +171,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
             navigation = null;
           }
 
-          // eslint-disable-next-line no-await-in-loop
+          // Wait for page to stop animating
           await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
           // Open all hints on a page
@@ -237,24 +183,24 @@ export default function tester(optionsOrScenario, ...scenarios) {
           }
 
           // Take screenshot
-          // await sleep(2000);
-          console.log(scrollTo)
-          console.log(clippingBox)
-          const testPath = module.parent.filename.split('/').slice(0, -1).join('/');
-          // eslint-disable-next-line no-await-in-loop
+          // // await sleep(2000);
+          // // console.log(scrollTo)
+          // // console.log(clippingBox)
+          // const testPath = module.parent.filename.split('/').slice(0, -1).join('/');
+          // // eslint-disable-next-line no-await-in-loop
+          // let image = await page.screenshot({ clip: clippingBox });
+          // writeImage(image, `${testPath}/test_image.png`);
+          // image = await page.screenshot();
+          // writeImage(image, `${testPath}/test_image1.png`);
+          // // console.log(image.toString().length)
+          // // image = await page.screenshot({
+          // //   clip: await gl.boundingBox(),
+          // // });
           let image = await page.screenshot({ clip: clippingBox });
-          writeImage(image, `${testPath}/test_image.png`);
-          image = await page.screenshot();
-          writeImage(image, `${testPath}/test_image1.png`);
-          console.log(image.toString().length)
-          image = await page.screenshot({
-            clip: await gl.boundingBox(),
-          });
-          writeImage(image, `${testPath}/test_image2.png`);
+          // writeImage(image, `${fullPath}/test_image2.png`);
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
           expect(image).toMatchImageSnapshot({
-            failureThreshold: gotoThreshold,             // 480 pixels
-            // failureThresholdType: 'percent',
+            failureThreshold: gotoThreshold,
             customSnapshotIdentifier: `page ${currentPage}`,
           });
 
@@ -267,29 +213,23 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // Need to reget element incase a react redraw has happened
             const id = await (await originalLink.getProperty('id')).jsonValue();
             const link = await page.$(`#${id}`);
-            // eslint-disable-next-line no-await-in-loop
             await link.click();
-            // eslint-disable-next-line no-await-in-loop
             await page.mouse.move(0, 0);
-            // eslint-disable-next-line no-await-in-loop
             await sleep(500);
-            // eslint-disable-next-line no-await-in-loop
-            await page.evaluate((y) => {
-              window.scrollTo(0, y);
-            }, scrollTo);
-            // eslint-disable-next-line no-await-in-loop
+            // await page.evaluate((y) => {
+            //   window.scrollTo(0, y);
+            // }, scrollTo);
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
-              failureThreshold: gotoThreshold,             // 480 pixels
-              // failureThresholdType: 'percent',
+              failureThreshold: gotoThreshold,
               customSnapshotIdentifier: `page ${currentPage} - QR ${index}`,
             });
             index += 1;
-            // eslint-disable-next-line no-await-in-loop
+
+            // Clost the QR window
             const closeButtons = await page.$$('.topic__qr__title_close');
             // eslint-disable-next-line no-restricted-syntax
             for (const closeButton of closeButtons) {
-              // eslint-disable-next-line no-await-in-loop
               const box = await closeButton.boundingBox();
               if (box != null && box.x > 0) {
                 // eslint-disable-next-line no-await-in-loop
@@ -298,9 +238,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
               }
             }
             // eslint-disable-next-line no-await-in-loop
-            await page.evaluate((y) => {
-              window.scrollTo(0, y);
-            }, scrollTo);
+            // await page.evaluate((y) => {
+            //   window.scrollTo(0, y);
+            // }, scrollTo);
           }
 
           while (currentPage.toString() !== targetPage.toString()) {
@@ -316,14 +256,10 @@ export default function tester(optionsOrScenario, ...scenarios) {
                 }
                 return false;
               }, { polling: 'raf' });
-              // console.log(currentPage, targetPage)
-              // eslint-disable-next-line no-await-in-loop
+
               const hrefElement = await page.$(`#${navigation}`);
-              // eslint-disable-next-line no-await-in-loop
               await hrefElement.click();
-              // eslint-disable-next-line no-await-in-loop
               await page.mouse.click(0, 0);
-              // eslint-disable-next-line no-await-in-loop
               await watchDog;
             }
 
@@ -331,7 +267,6 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await page.waitForFunction('window.presentationFormatTransitionStatus === "steady"');
 
             // Get current page
-            // eslint-disable-next-line no-await-in-loop
             await page.cookies()
               .then(cookies => cookies.filter(c => c.name === 'page'))
               .then(cookies => cookies.filter(c => c.path.length > 1))
@@ -352,11 +287,9 @@ export default function tester(optionsOrScenario, ...scenarios) {
             }
 
             // Take screenshot
-            // eslint-disable-next-line no-await-in-loop
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,             // 480 pixels
-              // failureThresholdType: 'percent',
+              failureThreshold: threshold,
               customSnapshotIdentifier: `page ${currentPage}`,
             });
 

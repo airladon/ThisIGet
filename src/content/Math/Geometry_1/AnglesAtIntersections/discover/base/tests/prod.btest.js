@@ -3,5 +3,8 @@ import 'babel-polyfill';
 import tester from '../../../../../../testers/presentationFormatTester';
 
 tester(
-  1,
+  // {
+  //   element: 'body',
+  // },
+  2,
 );
