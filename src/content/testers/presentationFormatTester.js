@@ -155,10 +155,53 @@ export default function tester(optionsOrScenario, ...scenarios) {
         const diagramBox = await diagram.boundingBox();
         const clippingBox = {
           x: diagramBox.x,
-          y: diagramBox.y + scrollTo,
+          y: diagramBox.y + scrollTo / 2 * 2,
+          // y: diagramBox.y,
           width: diagramBox.width,
           height: diagramBox.height,
         };
+
+        // console.log(await page.evaluate(() =>
+        //   window.getComputedStyle(document.querySelector('#id_diagram__gl__low')).zIndex
+        // ));
+        console.log(await page.evaluate(() => {
+          const {top, left, bottom, right} = document.querySelector('#topic__content_diagram').getBoundingClientRect();
+          return { top, left, bottom, right }
+        }));
+
+        console.log(await page.evaluate(() => {
+          const {top, left, bottom, right} = document.querySelector('#id_diagram__gl__low').getBoundingClientRect();
+          return { top, left, bottom, right }
+        }));
+        console.log(await page.evaluate(() => {
+          const {top, left, bottom, right} = document.querySelector('#id_diagram__text__low').getBoundingClientRect();
+          return { top, left, bottom, right }
+        }));
+        console.log(await page.evaluate(() => {
+          const {top, left, bottom, right} = document.querySelector('#id_diagram__html').getBoundingClientRect();
+          return { top, left, bottom, right }
+        }
+        ));
+        // console.log(await page.evaluate(() =>
+        //   document.querySelector('#id_diagram__html').getBoundingClientRect()
+        // ));
+
+        // console.log(zIndex)
+        const main = await page.$('#topic__content_diagram');
+        const mainBox = await main.boundingBox();
+        console.log(mainBox)
+
+        const gl = await page.$('#id_diagram__gl__low');
+        const glBox = await gl.boundingBox();
+        console.log(glBox)
+
+        const text = await page.$('#id_diagram__text__low');
+        const textBox = await text.boundingBox();
+        console.log(textBox)
+
+        const html = await page.$('#id_diagram__html');
+        const htmlBox = await html.boundingBox();
+        console.log(htmlBox)
 
         let currentPage = fromPage;
         const next = 'topic__button-next';
@@ -186,7 +229,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
           }
 
           // Take screenshot
-          await sleep(2000)
+          // await sleep(2000);
+          console.log(clippingBox)
           // eslint-disable-next-line no-await-in-loop
           let image = await page.screenshot({ clip: clippingBox });
           const gotoThreshold = getThreshold(currentPage, options, 'goto');
