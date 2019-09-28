@@ -1,6 +1,7 @@
 // @flow
 import * as React from 'react';
 import Logo from './logo';
+// import DiagramContainer from './diagram';
 
 function tile(label, fileName) {
   const style = {
@@ -33,7 +34,9 @@ function title(titleText, subText, textRight = false) {
   </div>;
 }
 
-type Props = {};
+type Props = {
+  diagram: React.Element<'div'>;
+};
 
 export default class About extends React.Component
                                     <Props> {
@@ -107,6 +110,7 @@ export default class About extends React.Component
             )}
         </div>
       </div>
+      {this.props.diagram}
       <div className="about__spacer"></div>
       <div className="about_section about__get_started">
         <div className="about__tiles">
