@@ -6,22 +6,23 @@ import HomeBanner from './homeBanner';
 import About from './about';
 import DiagramContainer from './diagram';
 
-const { DiagramElementCollection, Diagram, Rect, Transform } = Fig;
+const {
+  DiagramElementCollection, Diagram, Rect, Transform
+} = Fig;
 
 type Props = {
   isLoggedIn: boolean;
   username: string;
 };
 
-function elements(htmlId) {
+function createDiagram(htmlId) {
   const diagram = new Diagram({
     htmlId,
-    backgroundColor: [0, 0, 0, 1],
+    backgroundColor: [1, 0, 0, 1],
     limits: new Rect(-3, -2, 6, 4),
     fontScale: 1,
   });
   const collection = new DiagramElementCollection(new Transform(), diagram.limits);
-  // const collection = diagram.shapes.collection();
   diagram.elements = collection;
   diagram.addElements(collection, [
     {
@@ -34,9 +35,8 @@ function elements(htmlId) {
         fill: true,
       },
       mods: {
-        // move: { boundary: new Rect(-3, -2, 6, 4) },
         move: {
-          boundary: new Rect(-3, -2, 6, 4),
+          boundary: 'diagram',
           canBeMovedAfterLoosingTouch: true,
         },
       },
@@ -50,7 +50,7 @@ function renderDiagram() {
   return <div>
     <DiagramContainer
       id="about__diagram"
-      didMount = { elements }
+      didMount = { createDiagram }
     />
   </div>;
 }
