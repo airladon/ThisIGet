@@ -14,19 +14,17 @@ function sleep(ms) {
 }
 
 function contentSectionCount(contentPath) {
-  // let fileName = testPath.split('/').slice(0, -1).join('/');
-  // fileName = `${fileName}/${topicName}/content.js`;
   const content = fs.readFileSync(contentPath, 'utf8');
   return (content.match(/\n *this\.addSection/g) || []).length;
 }
 
-function writeImage(image, path) {
-  fs.writeFile(path, image, function(err) {
-    if(err) {
-      return console.log(err);
-    }
-}); 
-}
+// function writeImage(image, path) {
+//   fs.writeFile(path, image, function(err) {
+//     if(err) {
+//       return console.log(err);
+//     }
+// });
+// }
 
 // Open all hints on a page
 async function openHints() {
@@ -46,29 +44,27 @@ async function closeHints(hints) {
     await hintText.click();
   }
 }
-// const sleep = (milliseconds) => {
-//   return new Promise(resolve => setTimeout(resolve, milliseconds))
-// }
 
 // tester(
 //   {
 //     prePath: '/dev'
 //     thresholds: {
+//       default: 10,
 //       goto: 10,
 //       next: 10,
 //       prev: 10,
+//       pages: {
+//         1: 10,
+//         2: { next: 10 },
+//         3: { next: 10, prev: 10 },
+//         4: { next: 10, prev: 10, goto: 10 },
+//       }
 //     },
 //     viewPort: {
 //       width: 600,
-//       height: 400,
-//       scrollTo: 180,
 //     },
 //     element: '#topic__content_diagram'
-//     pages: {
-//       1: { threshold: { goto: 0.001, next: 0.01, prev: 0.01 } },
-//       2: { threshold: 0.003 },
-//       3: { otherOptions: 'a' },
-//     },
+//     prefix: ''                 // Output filename prefix
 //   },
 //   'goto',
 //   'nextPrev',
@@ -77,23 +73,6 @@ async function closeHints(hints) {
 //   [1, 10, 5, 3]                // Go from page 1 to 10, to 5, to 3
 // );
 
-// eslint-disable no-await-in-loop no-loop-func no-restricted-syntax
-// function getThreshold(page, options, comingFrom) {
-//   const defaultThreshold = options.thresholds[comingFrom];
-//   if (options.pages[page] == null) {
-//     return defaultThreshold.toString();
-//   }
-//   const pageOptions = options.pages[page];
-//   if (pageOptions.threshold != null
-//     && (typeof pageOptions.threshold === 'string' || typeof pageOptions.threshold === 'number')
-//   ) {
-//     return pageOptions.threshold.toString();
-//   }
-//   if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {
-//     return pageOptions.threshold[comingFrom].toString();
-//   }
-//   return defaultThreshold.toString();
-// }
 
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];

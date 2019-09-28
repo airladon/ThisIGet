@@ -14,6 +14,7 @@ function sleep(ms) {
 //   {
 //     prePath: 'dev'
 //     thresholds: 10,      // 10 pixels allowed to be different
+//     element: '#topic__content',
 //   },
 //   {
 //    width: 300,
@@ -51,6 +52,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const defaultOptions = {
     prePath: '',
     threshold: 10,
+    element: '#topic__content',
+    prefix: '',
   };
   let optionsToUse = defaultOptions;
   if ('prePath' in optionsOrScenario
@@ -65,19 +68,22 @@ export default function tester(optionsOrScenario, ...scenarios) {
   scenariosToUse.forEach((scenarioIn) => {
     const defaultScenario = {
       threshold: optionsToUse.threshold,
-      height: 'full',
+      height: 'auto',
       includeQRs: false,
+      element: optionsToUse.element,
+      prefix: optionsToUse.prefix,
     };
     const scenario = joinObjects({}, defaultScenario, scenarioIn);
     allTests.push([
       scenario.width, scenario.height, scenario.includeQRs, scenario.threshold,
+      scenario.element, scenario.prefix,
     ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      'width: %i height: %p, QRs: %p, Threshold: %f',
-      async (width, height, includeQRs, threshold) => {
+      'width: %i height: %p, QRs: %p, Threshold: %f, element: %s, prefix: %s',
+      async (width, height, includeQRs, threshold, element, prefix) => {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${prePath}/${versionPath}`;
         await page.goto(fullpath);
@@ -98,26 +104,31 @@ export default function tester(optionsOrScenario, ...scenarios) {
           window.scrollTo(0, 0);
         });
 
-        if (height === 'full') {
+        // const contentBox = await (await page.$('#topic__content'))
+        //   .boundingBox();
+        const pageBox = await (await page.$('body'))
+          .boundingBox();
+
+        if (height === 'auto') {
           await page.setViewport({ width, height: 1000 });
-          const lessonContainerTemp = await page.$('#topic__content');
-          const lessonBoxTemp = await lessonContainerTemp.boundingBox();
-          await page.setViewport({ width, height: Math.floor(lessonBoxTemp.height) });
+          // const lessonContainerTemp = await page.$('#topic__content');
+          // const lessonBoxTemp = await lessonContainerTemp.boundingBox();
+          await page.setViewport({ width, height: Math.floor(pageBox.height) });
         } else {
           await page.setViewport({ width, height });
         }
 
-        const lessonContainer = await page.$('#topic__content');
-        const lessonBox = await lessonContainer.boundingBox();
-        await page.evaluate((y) => {
-          window.scrollTo(0, y);
-        }, Math.floor(lessonBox.y));
-
+        // const lessonContainer = await page.$('#topic__content');
+        // const lessonBox = await lessonContainer.boundingBox();
+        // await page.evaluate((y) => {
+        //   window.scrollTo(0, y);
+        // }, Math.floor(lessonBox.y));
+        let clippingBox = await (await page.$(element)).boundingBox();
         await removeRatings(page);
-        let image = await page.screenshot();
+        let image = await page.screenshot({ clip: clippingBox });
         expect(image).toMatchImageSnapshot({
           failureThreshold: threshold,
-          customSnapshotIdentifier: `${width}-${height}`,
+          customSnapshotIdentifier: `${prefix}${width}-${height}`,
         });
         if (includeQRs) {
           // Find all links on page that go to QR popups
@@ -129,17 +140,19 @@ export default function tester(optionsOrScenario, ...scenarios) {
             await link.click();
             await page.mouse.move(0, 0);
             await sleep(1000);
+            clippingBox = await (await page.$('.topic__qr__container')).boundingBox();
+
             await page.evaluate(() => {
               window.scrollTo(0, 0);
             });
-            const linkBox = await link.boundingBox();
-            await page.evaluate((y) => {
-              window.scrollTo(0, y);
-            }, linkBox.y);
-            image = await page.screenshot();
+            // const linkBox = await link.boundingBox();
+            // await page.evaluate((y) => {
+            //   window.scrollTo(0, y);
+            // }, linkBox.y);
+            image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
               failureThreshold: threshold,
-              customSnapshotIdentifier: `${width}-${height}-QR-${index}`,
+              customSnapshotIdentifier: `${prefix}${width}-${height}-QR-${index}`,
             });
             index += 1;
             const closeButtons = await page.$$('.topic__qr__title_close');
