@@ -2,6 +2,7 @@
 import 'babel-polyfill';
 import { toMatchImageSnapshot } from 'jest-image-snapshot';
 import joinObjects from './tools';
+import getThreshold from './threshold';
 
 const fs = require('fs');
 
@@ -77,22 +78,22 @@ async function closeHints(hints) {
 // );
 
 // eslint-disable no-await-in-loop no-loop-func no-restricted-syntax
-function getThreshold(page, options, comingFrom) {
-  const defaultThreshold = options.thresholds[comingFrom];
-  if (options.pages[page] == null) {
-    return defaultThreshold.toString();
-  }
-  const pageOptions = options.pages[page];
-  if (pageOptions.threshold != null
-    && (typeof pageOptions.threshold === 'string' || typeof pageOptions.threshold === 'number')
-  ) {
-    return pageOptions.threshold.toString();
-  }
-  if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {
-    return pageOptions.threshold[comingFrom].toString();
-  }
-  return defaultThreshold.toString();
-}
+// function getThreshold(page, options, comingFrom) {
+//   const defaultThreshold = options.thresholds[comingFrom];
+//   if (options.pages[page] == null) {
+//     return defaultThreshold.toString();
+//   }
+//   const pageOptions = options.pages[page];
+//   if (pageOptions.threshold != null
+//     && (typeof pageOptions.threshold === 'string' || typeof pageOptions.threshold === 'number')
+//   ) {
+//     return pageOptions.threshold.toString();
+//   }
+//   if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {
+//     return pageOptions.threshold[comingFrom].toString();
+//   }
+//   return defaultThreshold.toString();
+// }
 
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
@@ -101,16 +102,11 @@ export default function tester(optionsOrScenario, ...scenarios) {
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   let scenariosToUse = scenarios;
   const defaultOptions = {
-    thresholds: {
-      goto: 10,
-      next: 10,
-      prev: 10,
-    },
+    thresholds: 10,
     viewPort: {
       width: 600,
     },
     element: '#topic__content_diagram',
-    pages: {},
     prePath: '',
     prefix: '',
   };
@@ -201,7 +197,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
           // Take screenshot
           let image = await page.screenshot({ clip: clippingBox });
           // writeImage(image, `${fullPath}/test_image2.png`);
-          const gotoThreshold = getThreshold(currentPage, options, 'goto');
+          const gotoThreshold = getThreshold(currentPage, options.thresholds, 'goto');
           expect(image).toMatchImageSnapshot({
             failureThreshold: gotoThreshold,
             customSnapshotIdentifier: `${options.prefix}page ${currentPage}`,
@@ -268,7 +264,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
               });
 
             const comingFrom = navigation === next ? 'next' : 'prev';
-            const threshold = getThreshold(currentPage, options, comingFrom);
+            const threshold = getThreshold(currentPage, options.thresholds, comingFrom);
 
             // Open all hints on a page
             hints = await openHints();

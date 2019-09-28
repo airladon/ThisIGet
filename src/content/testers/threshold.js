@@ -1,4 +1,20 @@
 // @flow
+//
+//  {
+//    default: 10,
+//    goto: 10,
+//    next: 10,
+//    prev: 10,
+//    pages: {
+//      1: 10,
+//      2: { next: 10 },
+//      3: { next: 10, prev: 10 },
+//      4: { next: 10, prev: 10, goto: 10 },
+//    }
+//  }
+//
+//  Where lowest priority is default, with increasingly higher priority
+//  as you go down the object
 
 export default function getThreshold(
   page: number,
@@ -36,18 +52,4 @@ export default function getThreshold(
     }
   }
   return t[comingFrom];
-  // const defaultThreshold = options.thresholds[comingFrom];
-  // if (options.pages[page] == null) {
-  //   return defaultThreshold.toString();
-  // }
-  // const pageOptions = options.pages[page];
-  // if (pageOptions.threshold != null
-  //   && (typeof pageOptions.threshold === 'string' || typeof pageOptions.threshold === 'number')
-  // ) {
-  //   return pageOptions.threshold.toString();
-  // }
-  // if (pageOptions.threshold != null && pageOptions.threshold[comingFrom] != null) {
-  //   return pageOptions.threshold[comingFrom].toString();
-  // }
-  // return defaultThreshold.toString();
 }
