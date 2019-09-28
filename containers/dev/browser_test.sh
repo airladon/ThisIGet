@@ -35,7 +35,7 @@ check_status() {
 docker_run_browser_test() {
     echo "$@"
     docker run -it --rm \
-        -v $HOST_PATH/tests/browser:/home/pptruser/tests \
+        -v $HOST_PATH/tests/browser:/home/pptruser/tests/browser \
         -v $HOST_PATH/src:/home/pptruser/src \
         -v $HOST_PATH/containers/pupp/jest.config.js:/home/pptruser/jest.config.js \
         -v $HOST_PATH/containers/pupp/jest-puppeteer.config.js:/home/pptruser/jest-puppeteer.config.js \

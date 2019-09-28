@@ -15,6 +15,8 @@ function sleep(ms) {
 //     prePath: 'dev'
 //     thresholds: 10,      // 10 pixels allowed to be different
 //     element: '#topic__content',
+//     prefix: ''           // filename prefix
+//      
 //   },
 //   {
 //    width: 300,
@@ -47,45 +49,45 @@ async function removeRatings(page) {
 // eslint-disable no-await-in-loop
 export default function tester(optionsOrScenario, ...scenarios) {
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const versionPath = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   let scenariosToUse = scenarios;
   const defaultOptions = {
+    height: 'auto',
+    includeQRs: false,
     prePath: '',
     threshold: 10,
     element: '#topic__content',
     prefix: '',
+    endpoint: defEndpoint,
   };
   let optionsToUse = defaultOptions;
-  if ('prePath' in optionsOrScenario
-    || ('threshold' in optionsOrScenario && !('width' in optionsOrScenario))) {
+  if (!('width' in optionsOrScenario)) {
     optionsToUse = joinObjects({}, defaultOptions, optionsOrScenario);
   } else {
     scenariosToUse = [optionsOrScenario, ...scenarios];
   }
-  const { prePath } = optionsToUse;
-
   const allTests = [];
   scenariosToUse.forEach((scenarioIn) => {
-    const defaultScenario = {
-      threshold: optionsToUse.threshold,
-      height: 'auto',
-      includeQRs: false,
-      element: optionsToUse.element,
-      prefix: optionsToUse.prefix,
+    const scenario = joinObjects({}, optionsToUse, scenarioIn);
+    const scenarioOptions = {
+      element: scenario.element,
+      prefix: scenario.prefix,
+      endpoint: scenario.endpoint,
+      threshold: scenario.threshold,
+      prePath: scenario.prePath,
     };
-    const scenario = joinObjects({}, defaultScenario, scenarioIn);
+
     allTests.push([
-      scenario.width, scenario.height, scenario.includeQRs, scenario.threshold,
-      scenario.element, scenario.prefix,
+      scenario.width, scenario.height, scenario.includeQRs, scenario.endpoint, scenarioOptions,
     ]);
   });
 
   describe(`${fullPath}`, () => {
     test.each(allTests)(
-      'width: %i height: %p, QRs: %p, Threshold: %f, element: %s, prefix: %s',
-      async (width, height, includeQRs, threshold, element, prefix) => {
+      'width: %i height: %p, QRs: %p, endpoint: %s',
+      async (width, height, includeQRs, endpoint, options) => {
         jest.setTimeout(120000);
-        const fullpath = `${sitePath}${prePath}/${versionPath}`;
+        const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
         await page.goto(fullpath);
         await sleep(1000);
 
@@ -123,12 +125,12 @@ export default function tester(optionsOrScenario, ...scenarios) {
         // await page.evaluate((y) => {
         //   window.scrollTo(0, y);
         // }, Math.floor(lessonBox.y));
-        let clippingBox = await (await page.$(element)).boundingBox();
+        let clippingBox = await (await page.$(options.element)).boundingBox();
         await removeRatings(page);
         let image = await page.screenshot({ clip: clippingBox });
         expect(image).toMatchImageSnapshot({
-          failureThreshold: threshold,
-          customSnapshotIdentifier: `${prefix}${width}-${height}`,
+          failureThreshold: options.threshold,
+          customSnapshotIdentifier: `${options.prefix}${width}-${height}`,
         });
         if (includeQRs) {
           // Find all links on page that go to QR popups
@@ -151,8 +153,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
             // }, linkBox.y);
             image = await page.screenshot({ clip: clippingBox });
             expect(image).toMatchImageSnapshot({
-              failureThreshold: threshold,
-              customSnapshotIdentifier: `${prefix}${width}-${height}-QR-${index}`,
+              failureThreshold: options.threshold,
+              customSnapshotIdentifier: `${options.prefix}${width}-${height}-QR-${index}`,
             });
             index += 1;
             const closeButtons = await page.$$('.topic__qr__title_close');
