@@ -54,11 +54,16 @@ title "Delay for thisiget-test to restart"
 sleep 5s
 check_status
 
-title "Ratings Test: thisiget-test"
+title "Ratings Test - Ratings: thisiget-test"
 ./ratings_test.sh test
 check_status
 
-title "Browser Tests: thisiget-test"
+title "Browser Tests - General: thisiget-test"
+./browser_test.sh test browser.*btest
+
+title "Browser Tests - Extended: thisiget-test"
+./browser_test.sh test browser.*btest
+
 JEST_OPTIONS=`python browser_test_diff_master.py`
 echo Testing: $JEST_OPTIONS
 if [ -z "$JEST_OPTIONS" ];
@@ -81,6 +86,9 @@ check_status
 title "Ratings Test: thisiget-beta"
 ./ratings_test.sh beta
 check_status
+
+title "Browser Tests - General: thisiget-test"
+./browser_test.sh beta browser.*btest
 
 title "Browser Tests: thisiget-beta"
 ./browser_test.sh beta prod.btest.js

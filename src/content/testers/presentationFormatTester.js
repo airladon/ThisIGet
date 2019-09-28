@@ -65,6 +65,7 @@ async function closeHints(hints) {
 //     },
 //     element: '#topic__content_diagram'
 //     prefix: ''                 // Output filename prefix
+//     endpoint: '',
 //   },
 //   'goto',
 //   'nextPrev',
@@ -77,7 +78,7 @@ async function closeHints(hints) {
 export default function tester(optionsOrScenario, ...scenarios) {
   const allTests = [];
   const fullPath = module.parent.filename.split('/').slice(0, -1).join('/');
-  const versionPath = fullPath.split('/').slice(4, -1).join('/');
+  const defEndpoint = fullPath.split('/').slice(4, -1).join('/');
   const contentPath = `${fullPath.split('/').slice(0, -1).join('/')}/content.js`;
   let scenariosToUse = scenarios;
   const defaultOptions = {
@@ -88,6 +89,7 @@ export default function tester(optionsOrScenario, ...scenarios) {
     element: '#topic__content_diagram',
     prePath: '',
     prefix: '',
+    endpoint: defEndpoint,
   };
   let optionsToUse = defaultOptions;
   if (Array.isArray(optionsOrScenario) || typeof optionsOrScenario === 'string' || typeof optionsOrScenario === 'number') {
@@ -120,19 +122,21 @@ export default function tester(optionsOrScenario, ...scenarios) {
     }
   });
 
+  const { endpoint } = optionsToUse;
+
 
   // Tests
-  describe(`${versionPath}`, () => {
+  describe(`${endpoint}`, () => {
     test.each(allTests)(
       'From: %i, to: %s',
       async (fromPage, toPages, options) => {
         jest.setTimeout(180000);
         const fullpath =
-          `${sitePath}${prePath}/${versionPath}?page=${fromPage}`;
+          `${sitePath}${prePath}/${endpoint}?page=${fromPage}`;
         try {
-          await page.goto(fullpath);
+          await page.goto(fullpath, { waitUntil: 'networkidle0' });
         } catch {
-          await page.goto(fullpath);
+          await page.goto(fullpath, { waitUntil: 'networkidle0' });
         }
         // await sleep(200);
         await page.setViewport({

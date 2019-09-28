@@ -88,8 +88,8 @@ export default function tester(optionsOrScenario, ...scenarios) {
       async (width, height, includeQRs, endpoint, options) => {
         jest.setTimeout(120000);
         const fullpath = `${sitePath}${options.prePath}/${options.endpoint}`;
-        await page.goto(fullpath);
-        await sleep(1000);
+        await page.goto(fullpath, { waitUntil: 'networkidle0' });
+        // await sleep(1000);
 
         // Open all hints on a page
         let hints = await page.$$('.simple__hint_label');

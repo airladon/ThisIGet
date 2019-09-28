@@ -1,4 +1,5 @@
 import singlePageTester from '../../src/content/testers/singlePageTester';
+import presentationTester from '../../src/content/testers/presentationFormatTester';
 
 singlePageTester({
   width: 700,
@@ -6,6 +7,15 @@ singlePageTester({
   prefix: 'fullSinglePage-',
   endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/examples/base',
 });
+
+presentationTester(
+  {
+    endpoint: 'content/Math/Geometry_1/AnglesAtIntersections/discover/base',
+    prefix: 'fullPagePresentation-',
+    element: 'body',
+  },
+  1,
+);
 
 singlePageTester({
   width: 700,
